@@ -1,6 +1,11 @@
 from django.contrib.gis.db import models
 from django_date_extensions.fields import ApproximateDateField
 
+# tell South how to handle the custom fields 
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateField"])
+add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointField"])
+
 class Person(models.Model):
     slug            = models.SlugField(max_length=200, unique=True)
     title           = models.CharField(max_length=20)

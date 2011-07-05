@@ -50,7 +50,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE':   'django.db.backends.postgresql_psycopg2',
+        'ENGINE':   'django.contrib.gis.db.backends.postgis',
         'NAME':     config.get('MZALENDO_DB_NAME'),
         'USER':     config.get('MZALENDO_DB_USER'),
         'PASSWORD': config.get('MZALENDO_DB_PASS'),
