@@ -13,8 +13,8 @@ class Person(models.Model):
     middle_names    = models.CharField(max_length=100)
     last_name       = models.CharField(max_length=100)
     gender          = models.CharField(max_length=1, choices=(('m','Male'),('f','Female')) )
-    date_of_birth   = ApproximateDateField()
-    date_of_death   = ApproximateDateField()
+    date_of_birth   = ApproximateDateField(blank=True)
+    date_of_death   = ApproximateDateField(blank=True)
     # religion
     # tribe
 
@@ -22,8 +22,8 @@ class Organisation(models.Model):
     slug                = models.SlugField(max_length=200, unique=True)
     name                = models.CharField(max_length=200)
     organisation_type   = models.CharField(max_length=50)
-    started             = ApproximateDateField()
-    ended               = ApproximateDateField()
+    started             = ApproximateDateField(blank=True)
+    ended               = ApproximateDateField(blank=True)
 
 class Place(models.Model):
     slug            = models.SlugField(max_length=100, unique=True)
