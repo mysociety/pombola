@@ -53,7 +53,7 @@ DATABASES = {
         'ENGINE':   'django.db.backends.postgresql_psycopg2',
         'NAME':     config.get('MZALENDO_DB_NAME'),
         'USER':     config.get('MZALENDO_DB_USER'),
-        'PASSWORD': config.get('MZALENDO_DB_PASSWORD'),
+        'PASSWORD': config.get('MZALENDO_DB_PASS'),
         'HOST':     config.get('MZALENDO_DB_HOST'),
         'PORT':     config.get('MZALENDO_DB_PORT'),
     }
@@ -156,9 +156,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
+    'django.contrib.admin',
     # 'django.contrib.admindocs',
     
     'south',
