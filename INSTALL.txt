@@ -1,0 +1,36 @@
+#
+# INSTALL - instructions for getting dev environment up and running
+#
+
+# Get the code:
+git clone git@github.com:mysociety/mzalendo.git
+
+
+# pull in the git submodules (Django 1.3 takes a while)
+git submodule init
+git submodule update
+
+
+# go to the mzalendo Django project
+cd pylib/mzalendo/
+
+
+# copy config example and set values needed
+cp config_local-example.py config_local.py
+nano config_local.py
+
+
+# create the database
+createdb -T template_postgis mzalendo
+
+
+# setup the db
+./manage.py syncdb
+./manage.py migrate
+
+
+# run the dev server
+./manage.py runserver
+
+
+# Get Busy!
