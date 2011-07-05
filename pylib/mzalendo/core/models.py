@@ -32,3 +32,11 @@ class Place(models.Model):
     shape_url       = models.URLField(verify_exists=True, blank=True )
     location        = models.PointField(null=True)
     organisation    = models.ForeignKey('Organisation', null=True)
+
+class Position(models.Model):
+    person          = models.ForeignKey('Person')
+    organisation    = models.ForeignKey('Organisation')
+    title           = models.CharField(max_length=200)
+    start_date      = ApproximateDateField(blank=True)
+    end_date        = ApproximateDateField(blank=True)
+    

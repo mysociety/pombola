@@ -13,7 +13,11 @@ class PlaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
+class PositionAdmin(admin.ModelAdmin):
+    pass
+
 # Add these to the admin
 admin.site.register( models.Person,       PersonAdmin       )
 admin.site.register( models.Organisation, OrganisationAdmin )
 admin.site.register( models.Place,        PlaceAdmin        )
+admin.site.register( models.Position,     PositionAdmin        )
