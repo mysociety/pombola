@@ -6,4 +6,4 @@
 	url = git://github.com/django/django.git
 [submodule "external/django-date-extensions"]
 	path = external/django-date-extensions
-	url = https://github.com/dracos/django-date-extensions.git
+	url = git://github.com/evdb/django-date-extensions.git
