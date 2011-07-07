@@ -27,11 +27,9 @@ for path in paths:
 # put settings in config_local if you're not running in a full mysociety vhost
 try:
     from config_local import config
-    SERVE_STATIC_FILES = True
 except ImportError:
     from mysociety import config
     config.set_file( os.path.abspath( base_dir + "/conf/general") )
-    SERVE_STATIC_FILES = False
 
 if int(config.get('STAGING')):
     STAGING = True
@@ -41,6 +39,9 @@ else:
 # switch on all debug when staging
 DEBUG          = STAGING
 TEMPLATE_DEBUG = STAGING
+
+# TODO - should we delegate this to web server (issues with admin css etc)?
+SERVE_STATIC_FILES = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
