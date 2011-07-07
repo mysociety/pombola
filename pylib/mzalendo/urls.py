@@ -6,8 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'mzalendo.views.home', name='home'),
-    # url(r'^mzalendo/', include('mzalendo.foo.urls')),
+    url(r'^$', 'core.views.home', name='home'),
 
     # Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
