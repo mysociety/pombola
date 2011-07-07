@@ -1,11 +1,15 @@
-#!/usr/bin/python 
+#!/usr/bin/env python 
 
 import os, sys
 
 file_dir = os.path.abspath(os.path.realpath(os.path.dirname(__file__)))
-path = os.path.normpath(file_dir + "/../pylib")
-if path not in sys.path:
-    sys.path.insert(0, path)
+paths = [
+    os.path.normpath(file_dir + "/../pylib"),
+    os.path.normpath(file_dir + "/../pylib/mzalendo"),
+]
+for path in paths:
+    if path not in sys.path:
+        sys.path.insert(0, path)
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'mzalendo.settings'
 
