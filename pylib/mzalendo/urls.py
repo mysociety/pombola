@@ -12,3 +12,12 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
+
+# server static files if needed
+if settings.SERVE_STATIC_FILES:
+    urlpatterns += patterns('',
+        (   r'^static/(?P<path>.*)$',
+            'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT }
+        ),
+    )
