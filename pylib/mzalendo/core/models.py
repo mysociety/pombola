@@ -18,6 +18,9 @@ class Person(models.Model):
     # religion
     # tribe
     
+    def get_name(self):
+        return "%s %s" % ( self.first_name, self.last_name )
+    
     def __unicode__(self):
         return "%s %s (%s)" % ( self.first_name, self.last_name, self.slug )
 
@@ -74,7 +77,7 @@ class Position(models.Model):
     end_date        = ApproximateDateField(blank=True)
     
     def __unicode__(self):
-        return "%s (%s at %s)" % ( self.title, self.person, self.organisation )
+        return "%s (%s at %s)" % ( self.title, self.person.get_name(), self.organisation.name )
 
     class Meta:
        ordering = ["title"]      
