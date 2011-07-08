@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+
+
+    <h2>Related organisations</h2>
+
+    <ul>
+    {% for position in object.position_set.all %}
+        <li>
+            <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>:
+            {{ position.title }}
+            ( {% firstof position.start_date 'not known' %} to {% firstof position.enddate 'current' %} )
+            </li>
+    {% empty %}
+        <li>There are no related organisations</li>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}
+

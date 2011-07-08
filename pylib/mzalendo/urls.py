@@ -6,11 +6,19 @@ import settings
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
-    url(r'^$', 'core.views.home', name='home'),
+urlpatterns = patterns('core.views',
+    # Homepage
+    url(r'^$', 'home', name='home'),
 
-    # Admin
+    # objects
+    url(r'^person/(?P<slug>[-\w]+)/',       'person',       name='person'),
+    url(r'^place/(?P<slug>[-\w]+)/',        'place',        name='place'),
+    url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),
+)
+
+
+# Admin
+urlpatterns += patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

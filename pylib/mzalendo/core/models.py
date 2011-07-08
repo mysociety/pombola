@@ -18,15 +18,15 @@ class Person(models.Model):
     # religion
     # tribe
     
-    def get_name(self):
+    def name(self):
         return "%s %s" % ( self.first_name, self.last_name )
     
     def __unicode__(self):
         return "%s %s (%s)" % ( self.first_name, self.last_name, self.slug )
 
-    # @models.permalink
-    # def get_absolute_url(self):
-    #     return ( 'core.views.person', [ self.slug ] )
+    @models.permalink
+    def get_absolute_url(self):
+        return ( 'person', [ self.slug ] )
 
     class Meta:
        ordering = ["slug"]      
@@ -42,9 +42,9 @@ class Organisation(models.Model):
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.slug )
 
-    # @models.permalink
-    # def get_absolute_url(self):
-    #     return ( 'core.views.organisation', [ self.slug ] )
+    @models.permalink
+    def get_absolute_url(self):
+        return ( 'organisation', [ self.slug ] )
 
     class Meta:
        ordering = ["slug"]      
@@ -61,9 +61,9 @@ class Place(models.Model):
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.slug )
 
-    # @models.permalink
-    # def get_absolute_url(self):
-    #     return ( 'core.views.place', [ self.slug ] )
+    @models.permalink
+    def get_absolute_url(self):
+        return ( 'place', [ self.slug ] )
 
     class Meta:
        ordering = ["slug"]      
@@ -77,7 +77,7 @@ class Position(models.Model):
     end_date        = ApproximateDateField(blank=True)
     
     def __unicode__(self):
-        return "%s (%s at %s)" % ( self.title, self.person.get_name(), self.organisation.name )
+        return "%s (%s at %s)" % ( self.title, self.person.name(), self.organisation.name )
 
     class Meta:
        ordering = ["title"]      

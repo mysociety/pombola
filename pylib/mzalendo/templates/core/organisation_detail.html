@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+
+    
+    <h2>Related places</h2>
+
+    <ul>
+    {% for place in object.place_set.all %}
+        <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
+    {% empty %}
+        <li>There are no related places</li>
+    {% endfor %}
+    </ul>
+
+
+    <h2>Related people</h2>
+
+    <ul>
+    {% for position in object.position_set.all %}
+        <li>
+            <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>:
+            {{ position.title }}
+            ( {% firstof position.start_date 'not known' %} to {% firstof position.enddate 'current' %} )
+            </li>
+    {% empty %}
+        <li>There are no related people</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+

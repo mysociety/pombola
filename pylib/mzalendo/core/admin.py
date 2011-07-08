@@ -14,7 +14,7 @@ class PositionAdmin(admin.ModelAdmin):
     search_fields = ['person__first_name', 'person__last_name', 'organisation__name' ]
     
     def show_person(self, obj):
-        return create_admin_link_for( obj.person, obj.person.get_name() )
+        return create_admin_link_for( obj.person, obj.person.name() )
     show_person.allow_tags = True
     
     def show_organisation(self, obj):
@@ -32,7 +32,7 @@ class PositionInlineAdmin(admin.TabularInline):
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("first_name","last_name")}
     inlines       = [ PositionInlineAdmin ]
-    list_display  = [ 'slug', 'get_name', 'date_of_birth' ]
+    list_display  = [ 'slug', 'name', 'date_of_birth' ]
     search_fields = ['first_name', 'last_name']
 
 class PlaceAdmin(admin.ModelAdmin):
