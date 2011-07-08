@@ -11,6 +11,7 @@ def create_admin_link_for(obj, link_text):
 
 class PositionAdmin(admin.ModelAdmin):
     list_display = ('id', 'show_person', 'show_organisation', 'title', 'start_date', 'end_date')
+    search_fields = ['person__first_name', 'person__last_name', 'organisation__name']
     
     def show_person(self, obj):
         return create_admin_link_for( obj.person, obj.person.get_name() )
@@ -32,10 +33,12 @@ class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("first_name","last_name")}
     inlines = [ PositionInlineAdmin ]
     list_display = ( 'slug', 'get_name', 'date_of_birth' )
+    search_fields = ['first_name', 'last_name']
 
 class PlaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ( 'slug', 'name', 'place_type', 'organisation' )
+    search_fields = [ 'name', 'organisation__name' ]
 
     def show_organisation(self, obj):
         return create_admin_link_for(obj.organisation, obj.organisation.name)
@@ -53,7 +56,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [ PlaceInlineAdmin, PositionInlineAdmin ]
     list_display = ( 'slug', 'name', 'organisation_type', )
-
+    search_fields = ( 'name' )
 
 # Add these to the admin
 admin.site.register( models.Person,       PersonAdmin       )
