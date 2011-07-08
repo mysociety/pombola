@@ -37,11 +37,15 @@ class PersonAdmin(admin.ModelAdmin):
 
 class PlaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ( 'slug', 'name', 'place_type', 'organisation' )
+    list_display = ( 'slug', 'name', 'place_type', 'show_organisation' )
+    list_filter = ('place_type',)
     search_fields = [ 'name', 'organisation__name' ]
 
     def show_organisation(self, obj):
-        return create_admin_link_for(obj.organisation, obj.organisation.name)
+        if obj.organisation:
+            return create_admin_link_for(obj.organisation, obj.organisation.name)
+        else:
+            return '-'
     show_organisation.allow_tags = True
 
 
@@ -55,8 +59,9 @@ class PlaceInlineAdmin(admin.TabularInline):
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [ PlaceInlineAdmin, PositionInlineAdmin ]
-    list_display = ( 'slug', 'name', 'organisation_type', )
-    search_fields = ( 'name' )
+    list_display = [ 'slug', 'name', 'organisation_type', ]
+    list_filter  = [ 'organisation_type', ]
+    search_fields = [ 'name' ]
 
 # Add these to the admin
 admin.site.register( models.Person,       PersonAdmin       )
