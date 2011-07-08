@@ -8,7 +8,9 @@ def home(request):
     """Homepage"""
     return render_to_response(
         'core/home.html',
-        {},
+        {
+            'people': models.Person.objects.all(),
+        },
         context_instance=RequestContext(request)
     )
 

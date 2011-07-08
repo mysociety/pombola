@@ -5,6 +5,18 @@
 {% block content %}
     <h1>Mzalendo</h1>
 
-    <p>Nothing to see here - try the <a href="/admin">admin interface</a>...</p>
+    <h2>People</h2>
+
+    <ul>
+    {% for person in people %}
+        <li>
+            <a href="{{ person.get_absolute_url }}">{{ person.name }}</a>
+        </li>
+    {% empty %}
+        <li>There are no no people in the system yet.</li>
+    {% endfor %}
+    </ul>
+    
+
 {% endblock %}
 
