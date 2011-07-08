@@ -1,8 +1,25 @@
 from django.contrib import admin
 from mzalendo.core import models
+from django.core.urlresolvers import reverse
+
+def create_admin_link_for(obj, link_text):
+    url = reverse(
+        'admin:%s_%s_change' % ( obj._meta.app_label, obj._meta.module_name),
+        args=[obj.id]
+    )
+    return u'<a href="%s">%s</a>' % ( url, link_text )
 
 class PositionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'show_person', 'show_organisation', 'title', 'start_date', 'end_date')
+    
+    def show_person(self, obj):
+        return create_admin_link_for( obj.person, obj.person.get_name() )
+    show_person.allow_tags = True
+    
+    def show_organisation(self, obj):
+        return create_admin_link_for(obj.organisation, obj.organisation.name)
+    show_organisation.allow_tags = True
+
 
 class PositionInlineAdmin(admin.TabularInline):
     model = models.Position
@@ -14,9 +31,15 @@ class PositionInlineAdmin(admin.TabularInline):
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("first_name","last_name")}
     inlines = [ PositionInlineAdmin ]
+    list_display = ( 'slug', 'get_name', 'date_of_birth' )
 
 class PlaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    list_display = ( 'slug', 'name', 'place_type', 'organisation' )
+
+    def show_organisation(self, obj):
+        return create_admin_link_for(obj.organisation, obj.organisation.name)
+    show_organisation.allow_tags = True
 
 
 class PlaceInlineAdmin(admin.TabularInline):
@@ -29,6 +52,7 @@ class PlaceInlineAdmin(admin.TabularInline):
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [ PlaceInlineAdmin, PositionInlineAdmin ]
+    list_display = ( 'slug', 'name', 'organisation_type', )
 
 
 # Add these to the admin
