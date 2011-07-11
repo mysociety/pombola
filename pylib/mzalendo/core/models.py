@@ -77,6 +77,7 @@ class Position(models.Model):
     title           = models.CharField(max_length=200)
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date        = ApproximateDateField(blank=True, help_text=date_help_text)
+    is_ongoing      = models.BooleanField(default=False, help_text="Tick if position is still held now, untick if not held, or not known. Used to determine if end date is blank because it is not known, or because position has not ended yet.", verbose_name="Is the position still held?")
     
     def __unicode__(self):
         return "%s (%s at %s)" % ( self.title, self.person.name(), self.organisation.name )
