@@ -73,6 +73,7 @@ class Place(models.Model):
 class Position(models.Model):
     person          = models.ForeignKey('Person')
     organisation    = models.ForeignKey('Organisation')
+    place           = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for an 'MP'" )
     title           = models.CharField(max_length=200)
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date        = ApproximateDateField(blank=True, help_text=date_help_text)
