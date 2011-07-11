@@ -8,7 +8,6 @@ add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointFie
 
 class Person(models.Model):
     slug            = models.SlugField(max_length=200, unique=True)
-    title           = models.CharField(max_length=20)
     first_name      = models.CharField(max_length=100)
     middle_names    = models.CharField(max_length=100, blank=True)
     last_name       = models.CharField(max_length=100)
