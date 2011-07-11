@@ -13,7 +13,7 @@
         <li>
             <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>:
             {{ position.title }}
-            ( {% firstof position.start_date 'not known' %} to {% firstof position.enddate 'current' %} )
+            ( {{ position.display_start_date }} to {{ position.display_end_date }} )
             </li>
     {% empty %}
         <li>There are no related organisations</li>

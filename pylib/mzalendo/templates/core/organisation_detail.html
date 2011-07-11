@@ -24,7 +24,7 @@
         <li>
             <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>:
             {{ position.title }}
-            ( {% firstof position.start_date 'not known' %} to {% firstof position.enddate 'current' %} )
+            ( {{ position.display_start_date }} to {{ position.display_end_date }} )
             </li>
     {% empty %}
         <li>There are no related people</li>

@@ -1,12 +1,14 @@
+import datetime
+
 from django.contrib.gis.db import models
-from django_date_extensions.fields import ApproximateDateField
+from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 
 # tell South how to handle the custom fields 
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateField"])
 add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointField"])
 
-date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011'"
+date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
 
 class Person(models.Model):
     first_name      = models.CharField(max_length=100)
@@ -77,7 +79,30 @@ class Position(models.Model):
     title           = models.CharField(max_length=200)
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date        = ApproximateDateField(blank=True, help_text=date_help_text)
-    is_ongoing      = models.BooleanField(default=False, help_text="Tick if position is still held now, untick if not held, or not known. Used to determine if end date is blank because it is not known, or because position has not ended yet.", verbose_name="Is the position still held?")
+    
+    def display_start_date(self):
+        """Return text that represents the start date"""
+        if self.start_date:
+            return str(self.start_date)
+        return '???'
+    
+    def display_end_date(self):
+        """Return text that represents the end date"""
+        if self.end_date:
+            return str(self.end_date)
+        return '???'
+
+    def is_ongoing(self):
+        """Return True or False for whether the position is currently ongoing"""
+        if not self.end_date:
+            return True
+        elif self.end_date.future:
+            return True
+        else:
+            # turn today's date into an ApproximateDate object and cmp to that
+            now = datetime.date.today()
+            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day )
+            return now_approx <= self.end_date
     
     def __unicode__(self):
         return "%s (%s at %s)" % ( self.title, self.person.name(), self.organisation.name )
