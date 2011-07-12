@@ -7,6 +7,3 @@
 [submodule "external/django-date-extensions"]
 	path = external/django-date-extensions
 	url = git://github.com/evdb/django-date-extensions.git
-[submodule "external/pytap"]
-	path = external/pytap
-	url = git@github.com:evdb/pytap.git
