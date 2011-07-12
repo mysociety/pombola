@@ -37,8 +37,8 @@ class PersonAdmin(admin.ModelAdmin):
 
 class PlaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display  = [ 'slug', 'name', 'place_type', 'show_organisation' ]
-    list_filter   = [ 'place_type' ]
+    list_display  = [ 'slug', 'name', 'kind', 'show_organisation' ]
+    list_filter   = [ 'kind' ]
     search_fields = [ 'name', 'organisation__name' ]
 
     def show_organisation(self, obj):
@@ -53,19 +53,34 @@ class PlaceInlineAdmin(admin.TabularInline):
     model      = models.Place
     extra      = 0
     can_delete = False
-    fields     = [ 'name', 'slug', 'place_type' ]
+    fields     = [ 'name', 'slug', 'kind' ]
 
 
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines       = [ PlaceInlineAdmin, PositionInlineAdmin ]
-    list_display  = [ 'slug', 'name', 'organisation_type', ]
-    list_filter   = [ 'organisation_type', ]
+    list_display  = [ 'slug', 'name', 'kind', ]
+    list_filter   = [ 'kind', ]
+    search_fields = [ 'name' ]
+
+class OrganisationKindAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+    search_fields = [ 'name' ]
+
+class PlaceKindAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+    search_fields = [ 'name' ]
+
+class PositionTitleAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
     search_fields = [ 'name' ]
 
 
 # Add these to the admin
-admin.site.register( models.Person,       PersonAdmin       )
-admin.site.register( models.Organisation, OrganisationAdmin )
-admin.site.register( models.Place,        PlaceAdmin        )
-admin.site.register( models.Position,     PositionAdmin        )
+admin.site.register( models.Organisation,     OrganisationAdmin     )
+admin.site.register( models.OrganisationKind, OrganisationKindAdmin )
+admin.site.register( models.Person,           PersonAdmin           )
+admin.site.register( models.Place,            PlaceAdmin            )
+admin.site.register( models.PlaceKind,        PlaceKindAdmin        )
+admin.site.register( models.Position,         PositionAdmin         )
+admin.site.register( models.PositionTitle,    PositionTitleAdmin    )

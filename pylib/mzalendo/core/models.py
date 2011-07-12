@@ -38,7 +38,7 @@ class Person(models.Model):
 class OrganisationKind(models.Model):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
-    summary         = models.TextField()
+    summary         = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.name
@@ -68,7 +68,7 @@ class Organisation(models.Model):
 class PlaceKind(models.Model):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
-    summary         = models.TextField()
+    summary         = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.name
@@ -99,7 +99,7 @@ class Place(models.Model):
 class PositionTitle(models.Model):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
-    summary         = models.TextField()
+    summary         = models.TextField(blank=True)
     
     def __unicode__(self):
         return self.name

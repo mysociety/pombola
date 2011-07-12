@@ -24,7 +24,7 @@ class Migration(SchemaMigration):
         # Adding model 'OrganisationKind'
         db.create_table('core_organisationkind', (
             ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=200, db_index=True)),
-            ('summary', self.gf('django.db.models.fields.TextField')()),
+            ('summary', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=200)),
         ))
@@ -44,7 +44,7 @@ class Migration(SchemaMigration):
         # Adding model 'PlaceKind'
         db.create_table('core_placekind', (
             ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=200, db_index=True)),
-            ('summary', self.gf('django.db.models.fields.TextField')()),
+            ('summary', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=200)),
         ))
@@ -65,7 +65,7 @@ class Migration(SchemaMigration):
         # Adding model 'PositionTitle'
         db.create_table('core_positiontitle', (
             ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=200, db_index=True)),
-            ('summary', self.gf('django.db.models.fields.TextField')()),
+            ('summary', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=200)),
         ))
@@ -123,7 +123,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
-            'summary': ('django.db.models.fields.TextField', [], {})
+            'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'})
         },
         'core.person': {
             'Meta': {'object_name': 'Person'},
@@ -151,7 +151,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
-            'summary': ('django.db.models.fields.TextField', [], {})
+            'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'})
         },
         'core.position': {
             'Meta': {'object_name': 'Position'},
@@ -168,7 +168,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
-            'summary': ('django.db.models.fields.TextField', [], {})
+            'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'})
         }
     }
     
