@@ -6,6 +6,7 @@
     </head>
     <body>
 
+
         <div id="header">
             <a href="{% url home %}">Mzalendo</a>
 
@@ -17,10 +18,18 @@
 
         </div>
 
+
+        {% if settings.STAGING %}
+        <div id="staging_header">
+            This is a staging site - any data saved here <strong>may be deleted</strong>. Please use the <a href="http://mzalendo.mysociety.org/">live site</a> instead.
+        </div>
+        {% endif %}
+
         <div id="content">
             {% block content %}
             {% endblock %}
         </div>
+
 
         <div id="footer">
 
@@ -31,6 +40,7 @@
             </ul>
 
         </div>
+
 
     </body>
 </html>

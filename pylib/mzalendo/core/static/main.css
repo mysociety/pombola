@@ -63,6 +63,12 @@ p {
 strong {
   font-weight: bold; }
 
+#staging_header {
+  background-color: #faa;
+  font-size: 75%;
+  padding: 0.25em;
+  text-align: center; }
+
 #header {
   padding: 0.5em;
   background-color: #555;
