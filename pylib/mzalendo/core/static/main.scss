@@ -33,7 +33,8 @@ strong {
     
     background-color: #555;
     color: #fff;
-    a { color: inherit };
+    a       { color: inherit; text-decoration: none; };
+    a:hover { text-decoration: underline; };
 
     ul{
         float: right;
@@ -57,9 +58,8 @@ strong {
     color: #888;
     text-align: center;
 
-    a {
-        color: inherit;
-    }
+    a       { color: inherit; text-decoration: none; };
+    a:hover { text-decoration: underline; };
 
     ul{
         li {

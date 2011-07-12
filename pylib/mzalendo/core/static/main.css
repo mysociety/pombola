@@ -68,7 +68,10 @@ strong {
   background-color: #555;
   color: #fff; }
   #header a {
-    color: inherit; }
+    color: inherit;
+    text-decoration: none; }
+  #header a:hover {
+    text-decoration: underline; }
   #header ul {
     float: right; }
     #header ul li {
@@ -87,7 +90,10 @@ strong {
   color: #888;
   text-align: center; }
   #footer a {
-    color: inherit; }
+    color: inherit;
+    text-decoration: none; }
+  #footer a:hover {
+    text-decoration: underline; }
   #footer ul li {
     display: inline;
     padding: 0 0.5em; }
