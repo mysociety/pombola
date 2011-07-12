@@ -15,6 +15,15 @@ def home(request):
     )
 
 
+def person_list(request):
+    pass
+
+def place_list(request):
+    pass
+
+def organisation_list(request):
+    pass
+
 def person(request, slug):
     """"""
     return object_detail(

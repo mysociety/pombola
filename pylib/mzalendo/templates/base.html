@@ -2,11 +2,35 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %} :: Mzalendo</title>
+        <link href="{{ STATIC_URL }}main.css" media="screen" rel="stylesheet" type="text/css" /> 
     </head>
     <body>
 
-        {% block content %}
-        {% endblock %}
+        <div id="header">
+            <a href="{% url home %}">Mzalendo</a>
+
+            <ul>
+                <li><a href="{% url person_list %}">people</a></li>
+                <li><a href="{% url organisation_list %}">organisations</a></li>
+                <li><a href="{% url place_list %}">places</a></li>
+            </ul>
+
+        </div>
+
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <div id="footer">
+
+            <ul>
+                <li><a href="https://github.com/mysociety/mzalendo/issues">issues</a></li>
+                <li><a href="https://github.com/mysociety/mzalendo/wiki">wiki</a></li>
+                <li><a href="{% url admin:index %}">admin</a></li>
+            </ul>
+
+        </div>
 
     </body>
 </html>

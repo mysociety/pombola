@@ -1,0 +1,70 @@
+@import "reset";
+
+@mixin rounded-corners ( $radius ) {
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+}
+
+html {
+    font-family: Arial;
+    font-size: 16px;
+}
+
+h1 { font-size: 32px; margin-top: 24px; margin-bottom: 8px;}
+h2 { font-size: 24px; margin-top: 16px; margin-bottom: 8px;}
+h3 { font-size: 20px; margin-top: 20px; margin-bottom: 8px;}
+
+h1, h2, h3, h4 {
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+strong {
+    font-weight: bold;
+}
+
+#header {
+
+    padding: 0.5em;
+    
+    background-color: #555;
+    color: #fff;
+    a { color: inherit };
+
+    ul{
+        float: right;
+        li {
+            display: inline;
+            padding-left: 1em;
+            font-size: 75%;
+        }
+    }
+}
+
+#content {
+    padding: 1em;
+}
+
+#footer {
+    margin-top: 2em;
+    border-top: 1px dotted #bbb;
+    padding: 0.5em;
+    font-size: 75%;
+    color: #888;
+    text-align: center;
+
+    a {
+        color: inherit;
+    }
+
+    ul{
+        li {
+            display: inline;
+            padding: 0 0.5em;
+        }
+    }
+}

@@ -10,7 +10,12 @@ urlpatterns = patterns('core.views',
     # Homepage
     url(r'^$', 'home', name='home'),
 
-    # objects
+    # Lists
+    url(r'^person/all/',       'person_list',       name='person_list'),
+    url(r'^place/all/',        'place_list',        name='place_list'),
+    url(r'^organisation/all/', 'organisation_list', name='organisation_list'),
+    
+    # Objects
     url(r'^person/(?P<slug>[-\w]+)/',       'person',       name='person'),
     url(r'^place/(?P<slug>[-\w]+)/',        'place',        name='place'),
     url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),
