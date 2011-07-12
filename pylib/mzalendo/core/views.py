@@ -1,6 +1,6 @@
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
-from django.views.generic.list_detail import object_detail
+from django.views.generic.list_detail import object_detail, object_list
 
 from mzalendo.core import models
 
@@ -16,13 +16,22 @@ def home(request):
 
 
 def person_list(request):
-    pass
+    return object_list(
+        request,
+        queryset=models.Person.objects.all(),
+    )
 
 def place_list(request):
-    pass
+    return object_list(
+        request,
+        queryset=models.Place.objects.all(),
+    )
 
 def organisation_list(request):
-    pass
+    return object_list(
+        request,
+        queryset=models.Organisation.objects.all(),
+    )
 
 def person(request, slug):
     """"""

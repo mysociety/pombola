@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Organisations{% endblock %}
+
+{% block content %}
+
+    <h1>Organisations</h1>
+
+    <ul>
+    {% for object in object_list %}
+        <li>
+            <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+        </li>
+    {% empty %}
+        <li>There are no organisations in the system yet</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
