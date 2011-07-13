@@ -12,7 +12,7 @@ sys.path.append(
 
 import setup_env
 
-import json
+import simplejson
 from pprint import pprint
 from django.template.defaultfilters import slugify
 from core import models
