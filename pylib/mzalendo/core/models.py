@@ -1,6 +1,8 @@
 import datetime
 
 from django.contrib.gis.db import models
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 
 # tell South how to handle the custom fields 
@@ -9,6 +11,36 @@ add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateFi
 add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointField"])
 
 date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
+
+
+class ContactKind(models.Model):
+    name            = models.CharField(max_length=200, unique=True)
+    slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+       ordering = ["slug"]      
+
+
+class Contact(models.Model):
+
+    kind    = models.ForeignKey('ContactKind')
+    value   = models.TextField()
+    note    = models.TextField(blank=True, help_text="publicaly visible, use to clarify contact detail")
+
+    # link to other objects using the ContentType system
+    content_type   = models.ForeignKey(ContentType)
+    object_id      = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    
+    def __unicode__(self):
+        return "%s (%s for %s)" % ( self.value, self.kind, self.content_object )
+
+    class Meta:
+       ordering = ["content_type", "object_id", "kind", ]      
+
 
 class Person(models.Model):
     first_name      = models.CharField(max_length=100)
@@ -20,6 +52,9 @@ class Person(models.Model):
     date_of_death   = ApproximateDateField(blank=True, help_text=date_help_text)
     # religion
     # tribe
+
+    contacts = generic.GenericRelation(Contact)
+
     
     def name(self):
         return "%s %s" % ( self.first_name, self.last_name )
@@ -53,6 +88,9 @@ class Organisation(models.Model):
     kind    = models.ForeignKey('OrganisationKind')
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended   = ApproximateDateField(blank=True, help_text=date_help_text)
+
+    contacts = generic.GenericRelation(Contact)
+
 
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.kind )

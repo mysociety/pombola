@@ -1,6 +1,9 @@
 from django.contrib import admin
 from mzalendo.core import models
+from django.contrib.gis import db
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.generic import GenericTabularInline
+from django import forms
 
 def create_admin_link_for(obj, link_text):
     url = reverse(
@@ -8,6 +11,31 @@ def create_admin_link_for(obj, link_text):
         args=[obj.id]
     )
     return u'<a href="%s">%s</a>' % ( url, link_text )
+
+
+class ContactKindAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+    search_fields = [ 'name' ]
+
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display  = [ 'kind', 'value', 'show_foreign' ]
+    search_fields = ['value', ]
+    
+    def show_foreign(self, obj):
+        return create_admin_link_for( obj.content_object, str(obj.content_object) )
+    show_foreign.allow_tags = True
+    
+
+class ContactInlineAdmin(GenericTabularInline):
+    model      = models.Contact
+    extra      = 0
+    can_delete = False
+    fields     = [ 'kind', 'value', 'note', ]
+    formfield_overrides = {
+        db.models.TextField: {'widget': forms.Textarea(attrs={'rows':2, 'cols':40})},
+    }
+
 
 class PositionAdmin(admin.ModelAdmin):
     list_display  = [ 'id', 'show_person', 'show_organisation', 'title', 'start_date', 'end_date' ]
@@ -31,7 +59,7 @@ class PositionInlineAdmin(admin.TabularInline):
 
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("first_name","last_name")}
-    inlines       = [ PositionInlineAdmin ]
+    inlines       = [ PositionInlineAdmin, ContactInlineAdmin, ]
     list_display  = [ 'slug', 'name', 'date_of_birth' ]
     search_fields = ['first_name', 'last_name']
 
@@ -58,7 +86,7 @@ class PlaceInlineAdmin(admin.TabularInline):
 
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin ]
+    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, ]
     list_display  = [ 'slug', 'name', 'kind', ]
     list_filter   = [ 'kind', ]
     search_fields = [ 'name' ]
@@ -77,6 +105,8 @@ class PositionTitleAdmin(admin.ModelAdmin):
 
 
 # Add these to the admin
+admin.site.register( models.Contact,          ContactAdmin          )
+admin.site.register( models.ContactKind,      ContactKindAdmin      )
 admin.site.register( models.Organisation,     OrganisationAdmin     )
 admin.site.register( models.OrganisationKind, OrganisationKindAdmin )
 admin.site.register( models.Person,           PersonAdmin           )
