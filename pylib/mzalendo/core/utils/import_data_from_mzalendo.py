@@ -17,7 +17,7 @@ from pprint import pprint
 from django.template.defaultfilters import slugify
 from core import models
 
-mps = json.loads( sys.stdin.read() )
+mps = simplejson.loads( sys.stdin.read() )
 
 constituency_kind = models.PlaceKind.objects.get(slug="constituency")
 party_kind        = models.OrganisationKind.objects.get(slug="party")
