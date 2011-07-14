@@ -18,11 +18,17 @@ from pprint import pprint
 from django.template.defaultfilters import slugify
 from core import models
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 
 import name_to_first_last
 
 mp_job_title      = models.PositionTitle.objects.get(slug="mp")
 member_job_title  = models.PositionTitle.objects.get(slug="member")
+
+phone_kind   = models.ContactKind.objects.get(slug='phone')
+address_kind = models.ContactKind.objects.get(slug='address')
+email_kind   = models.ContactKind.objects.get(slug='email')
+
 objects           = simplejson.loads( sys.stdin.read() )
 
 for obj in objects:
@@ -81,4 +87,49 @@ for obj in objects:
     db_obj.gender = obj['Gender'].lower()
 
     db_obj.save()
+    
+    
+    # do the contact details
+    #  'Phone': '221291',
+    #  'PhysicalAddress': '',
+    #  'PostalAddress': '',
+    #  'Email': '',
+
+    content_type = ContentType.objects.get_for_model(db_obj)
+
+    if obj.get('Phone'):
+        models.Contact.objects.get_or_create(
+            content_type=content_type,
+            object_id=db_obj.id,
+            value=obj['Phone'],
+            kind=phone_kind
+        )
+
+    if obj.get('PhysicalAddress'):
+        models.Contact.objects.get_or_create(
+            content_type=content_type,
+            object_id=db_obj.id,
+            value=obj['PhysicalAddress'],
+            kind=address_kind,
+            note="physical address",
+        )
+
+    if obj.get('PostalAddress'):
+        models.Contact.objects.get_or_create(
+            content_type=content_type,
+            object_id=db_obj.id,
+            value=obj['Phone'],
+            kind=address_kind,
+            note="postal address",
+        )
+
+    if obj.get('Email'):
+        models.Contact.objects.get_or_create(
+            content_type=content_type,
+            object_id=db_obj.id,
+            value=obj['Email'],
+            kind=email_kind,
+        )
+
+
 
