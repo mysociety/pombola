@@ -50,6 +50,7 @@ class Person(models.Model):
     gender          = models.CharField(max_length=1, choices=(('m','Male'),('f','Female')) )
     date_of_birth   = ApproximateDateField(blank=True, help_text=date_help_text)
     date_of_death   = ApproximateDateField(blank=True, help_text=date_help_text)
+    original_id     = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to members in original mzalendo.com db')
     # religion
     # tribe
 
@@ -88,9 +89,9 @@ class Organisation(models.Model):
     kind    = models.ForeignKey('OrganisationKind')
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended   = ApproximateDateField(blank=True, help_text=date_help_text)
+    original_id = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to parties in original mzalendo.com db')
 
     contacts = generic.GenericRelation(Contact)
-
 
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.kind )
@@ -122,6 +123,7 @@ class Place(models.Model):
     shape_url    = models.URLField(verify_exists=True, blank=True )
     location     = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
+    original_id  = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to constituencies in original mzalendo.com db')
 
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.kind )
@@ -138,7 +140,8 @@ class PositionTitle(models.Model):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
-    
+    original_id     = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to data in original mzalendo.com db')
+
     def __unicode__(self):
         return self.name
     
