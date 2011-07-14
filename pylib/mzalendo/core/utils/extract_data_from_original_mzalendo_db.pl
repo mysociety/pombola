@@ -20,7 +20,7 @@ my $json = JSON->new->utf8(1)->pretty(1);
 
 # setup where to create the various json files.
 my $json_dir = '/tmp/mzalendo';
-mkpath $json_dir;
+mkdir $json_dir;
 
 # connect to the local mysql 'mzalendo' database
 my $dbh = DBI->connect( "DBI:mysql:database=mzalendo", 'root', '' )
