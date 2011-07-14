@@ -42,6 +42,23 @@ class Contact(models.Model):
        ordering = ["content_type", "object_id", "kind", ]      
 
 
+class InformationSource(models.Model):
+    source  = models.CharField(max_length=500)
+    note    = models.TextField(blank=True)
+    entered = models.BooleanField(default=False, help_text="has the information in this source been entered into this system?")
+
+    # link to other objects using the ContentType system
+    content_type   = models.ForeignKey(ContentType)
+    object_id      = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    
+    def __unicode__(self):
+        return "%s: %s" % ( self.source, self.content_object )
+
+    class Meta:
+       ordering = ["content_type", "object_id", "source", ]      
+
+
 class Person(models.Model):
     first_name      = models.CharField(max_length=100)
     middle_names    = models.CharField(max_length=100, blank=True)

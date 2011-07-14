@@ -18,9 +18,30 @@ class ContactKindAdmin(admin.ModelAdmin):
     search_fields = [ 'name' ]
 
 
+class InformationSourceAdmin(admin.ModelAdmin):
+    list_display  = [ 'source', 'show_foreign', 'entered', ]
+    list_filter   = [ 'entered', ]
+    search_fields = [ 'source', ]
+
+    def show_foreign(self, obj):
+        return create_admin_link_for( obj.content_object, str(obj.content_object) )
+    show_foreign.allow_tags = True
+
+
+class InformationSourceInlineAdmin(GenericTabularInline):
+    model      = models.InformationSource
+    extra      = 0
+    can_delete = False
+    fields     = [ 'source', 'note', 'entered', ]
+    formfield_overrides = {
+        db.models.TextField: {'widget': forms.Textarea(attrs={'rows':2, 'cols':40})},
+    }
+
+
 class ContactAdmin(admin.ModelAdmin):
     list_display  = [ 'kind', 'value', 'show_foreign' ]
     search_fields = ['value', ]
+    inlines       = [ InformationSourceInlineAdmin, ]
     
     def show_foreign(self, obj):
         return create_admin_link_for( obj.content_object, str(obj.content_object) )
@@ -40,6 +61,7 @@ class ContactInlineAdmin(GenericTabularInline):
 class PositionAdmin(admin.ModelAdmin):
     list_display  = [ 'id', 'show_person', 'show_organisation', 'title', 'start_date', 'end_date' ]
     search_fields = ['person__first_name', 'person__last_name', 'organisation__name' ]
+    inlines       = [ InformationSourceInlineAdmin, ]
     
     def show_person(self, obj):
         return create_admin_link_for( obj.person, obj.person.name() )
@@ -59,7 +81,7 @@ class PositionInlineAdmin(admin.TabularInline):
 
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("first_name","last_name")}
-    inlines       = [ PositionInlineAdmin, ContactInlineAdmin, ]
+    inlines       = [ PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ]
     list_display  = [ 'slug', 'name', 'date_of_birth' ]
     search_fields = ['first_name', 'last_name']
 
@@ -68,6 +90,7 @@ class PlaceAdmin(admin.ModelAdmin):
     list_display  = [ 'slug', 'name', 'kind', 'show_organisation' ]
     list_filter   = [ 'kind' ]
     search_fields = [ 'name', 'organisation__name' ]
+    inlines       = [ InformationSourceInlineAdmin, ]
 
     def show_organisation(self, obj):
         if obj.organisation:
@@ -86,7 +109,7 @@ class PlaceInlineAdmin(admin.TabularInline):
 
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, ]
+    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ]
     list_display  = [ 'slug', 'name', 'kind', ]
     list_filter   = [ 'kind', ]
     search_fields = [ 'name' ]
@@ -105,12 +128,13 @@ class PositionTitleAdmin(admin.ModelAdmin):
 
 
 # Add these to the admin
-admin.site.register( models.Contact,          ContactAdmin          )
-admin.site.register( models.ContactKind,      ContactKindAdmin      )
-admin.site.register( models.Organisation,     OrganisationAdmin     )
-admin.site.register( models.OrganisationKind, OrganisationKindAdmin )
-admin.site.register( models.Person,           PersonAdmin           )
-admin.site.register( models.Place,            PlaceAdmin            )
-admin.site.register( models.PlaceKind,        PlaceKindAdmin        )
-admin.site.register( models.Position,         PositionAdmin         )
-admin.site.register( models.PositionTitle,    PositionTitleAdmin    )
+admin.site.register( models.Contact,              ContactAdmin               )
+admin.site.register( models.ContactKind,          ContactKindAdmin           )
+admin.site.register( models.InformationSource,    InformationSourceAdmin     )
+admin.site.register( models.Organisation,         OrganisationAdmin          )
+admin.site.register( models.OrganisationKind,     OrganisationKindAdmin      )
+admin.site.register( models.Person,               PersonAdmin                )
+admin.site.register( models.Place,                PlaceAdmin                 )
+admin.site.register( models.PlaceKind,            PlaceKindAdmin             )
+admin.site.register( models.Position,             PositionAdmin              )
+admin.site.register( models.PositionTitle,        PositionTitleAdmin         )
