@@ -1,0 +1,13 @@
+<ul class="contacts">
+
+    {% for c in contacts %}
+        <li class="{{ c.kind.slug }}">
+            {{ c.kind.name }}:
+            {{ c.value }}
+            {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
+        </li>
+    {% empty %}
+        <li class="empty">There are no contact details</li>
+    {% endfor %}
+
+</ul>
