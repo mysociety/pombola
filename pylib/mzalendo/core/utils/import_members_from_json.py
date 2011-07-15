@@ -118,7 +118,7 @@ for obj in objects:
         models.Contact.objects.get_or_create(
             content_type=content_type,
             object_id=db_obj.id,
-            value=obj['Phone'],
+            value=obj['PostalAddress'],
             kind=address_kind,
             note="postal address",
         )
