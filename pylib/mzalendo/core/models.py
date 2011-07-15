@@ -1,4 +1,5 @@
 import datetime
+import re
 
 from django.contrib.gis.db import models
 from django.contrib.contenttypes.models import ContentType
@@ -60,6 +61,32 @@ class InformationSource(models.Model):
        ordering = ["content_type", "object_id", "source", ]      
 
 
+class PersonQuerySet(models.query.GeoQuerySet):
+    def name_matches( self, name ):
+        """fuzzy match on the name"""
+
+        m = re.match('^\s*(\w+).*?(\w+)\s*$', name)
+        
+        if not m:
+            return self.none()
+
+        (first, last) = m.groups()
+        
+        return self.filter(
+            first_name__istartswith=first,
+            last_name__istartswith=last,
+        )
+
+
+
+    def is_mp(self):
+        mp_title = PositionTitle.objects.get(slug='mp')
+        return self.filter( position__title=mp_title )
+
+class PersonManager(models.GeoManager):
+    def get_query_set(self):
+        return PersonQuerySet(self.model)
+
 class Person(models.Model):
     first_name      = models.CharField(max_length=100)
     middle_names    = models.CharField(max_length=100, blank=True)
@@ -73,7 +100,7 @@ class Person(models.Model):
     # tribe
 
     contacts = generic.GenericRelation(Contact)
-
+    objects  = PersonManager()
     
     def name(self):
         return "%s %s" % ( self.first_name, self.last_name )
