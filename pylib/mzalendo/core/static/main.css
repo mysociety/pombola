@@ -78,6 +78,8 @@ strong {
     text-decoration: none; }
   #header a:hover {
     text-decoration: underline; }
+  #header #id {
+    float: left; }
   #header ul {
     float: right; }
     #header ul li {

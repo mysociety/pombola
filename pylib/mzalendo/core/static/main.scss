@@ -47,6 +47,10 @@ strong {
     color: #fff;
     @include subtle-links;
 
+    #id {
+        float: left;
+    }
+
     ul{
         float: right;
         li {
