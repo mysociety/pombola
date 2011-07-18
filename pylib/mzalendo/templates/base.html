@@ -8,13 +8,17 @@
 
 
         <div id="header">
-            <a id="logo" href="{% url home %}">Mzalendo</a>
+            <div id="logo">
+                <a href="{% url home %}">Mzalendo</a>
+            </div>
 
             <ul>
                 <li><a href="{% url person_list %}">people</a></li>
                 <li><a href="{% url organisation_list %}">organisations</a></li>
                 <li><a href="{% url place_list %}">places</a></li>
             </ul>
+            
+            <br clear="both" />
 
         </div>
 
