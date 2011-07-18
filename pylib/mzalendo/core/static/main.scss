@@ -109,3 +109,15 @@ strong {
 ul.position {
     @include result_list();
 }
+
+ul.organisation {
+    @include result_list();
+}
+
+
+div.action_button {
+    padding: 1em;
+    margin: 0.5em;
+    border: 1px solid #bbb;
+    background-color: #eee;
+}

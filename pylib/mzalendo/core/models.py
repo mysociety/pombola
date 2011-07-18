@@ -118,6 +118,7 @@ class Person(models.Model):
 
 class OrganisationKind(models.Model):
     name            = models.CharField(max_length=200, unique=True)
+    name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
 
@@ -151,6 +152,7 @@ class Organisation(models.Model):
 
 class PlaceKind(models.Model):
     name            = models.CharField(max_length=200, unique=True)
+    name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
 

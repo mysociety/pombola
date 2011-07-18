@@ -8,31 +8,42 @@
     
     {% include "core/contact_list.html" with contacts=object.contacts.all %}
 
+    
+    {% if object.place_set.all %}
+        <h2>Related places</h2>
+    
+        <ul>
+        {% for place in object.place_set.all %}
+            <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 
-    <h2>Related places</h2>
-
-    <ul>
-    {% for place in object.place_set.all %}
-        <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
-    {% empty %}
-        <li>There are no related places</li>
-    {% endfor %}
-    </ul>
 
 
-    <h2>Related people</h2>
+    {% if positions %}
+        <h2>Related people</h2>
+    
+        <ul class="position">
+        {% for position in positions %}
+            <li>
+                <div class="thumb">
+                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
+                </div>
 
-    <ul>
-    {% for position in object.position_set.all %}
-        <li>
-            <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>:
-            {{ position.title }}
-            ( {{ position.display_start_date }} to {{ position.display_end_date }} )
+                <div class="name">
+                    <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>
+                </div>
+
+                {{ position.title.name }}
+
+                {% if object.place %}
+                    in <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>                
+                {% endif %}
             </li>
-    {% empty %}
-        <li>There are no related people</li>
-    {% endfor %}
-    </ul>
+        {% endfor %}
+        </ul>
+    {% endif %}
 
 {% endblock %}
 

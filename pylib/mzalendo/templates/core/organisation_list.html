@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Organisations{% endblock %}
+{% block title %}{% if kind %}{{ kind.name_plural }}{% endif %}{% endblock %}
 
 {% block content %}
 
-    <h1>Organisations</h1>
+    <h1>{% if kind %}{{ kind.name_plural }}{% endif %}</h1>
 
-    <ul>
+    <ul class="organisation">
     {% for object in object_list %}
         <li>
-            <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            <div class="thumb">
+                <img src="http://dummyimage.com/60x60/ddd/888.png" />
+            </div>
+
+            <div class="name">
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </div>
+            
+            {{ object.num_positions }} related positions
         </li>
     {% empty %}
         <li>There are no organisations in the system yet</li>

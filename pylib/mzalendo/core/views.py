@@ -1,6 +1,7 @@
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.views.generic.list_detail import object_detail, object_list
+from django.db.models import Count
 
 from mzalendo.core import models
 
@@ -69,8 +70,40 @@ def position(request, slug):
 
 def organisation(request, slug):
     """"""
-    return object_detail(
+
+    org = get_object_or_404(
+        models.Organisation,
+        slug=slug
+    )
+
+    return render_to_response(
+        'core/organisation_detail.html',
+        {
+            'object': org,
+            'positions': org.position_set.all().order_by('person__first_name','person__last_name'),
+        },
+        context_instance=RequestContext(request)
+    )
+
+
+def organisation_kind(request, slug):
+    """"""
+
+    org_kind = get_object_or_404(
+        models.OrganisationKind,
+        slug=slug
+    )
+    
+    orgs = (
+        org_kind
+            .organisation_set
+            .all()
+            .annotate(num_positions = Count('position'))
+            .order_by('-num_positions', 'name')
+    )
+    
+    return object_list(
         request,
-        queryset = models.Organisation.objects,
-        slug     = slug,
+        queryset = orgs,
+        extra_context = { 'kind': org_kind, },
     )

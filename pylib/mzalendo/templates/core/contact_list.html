@@ -1,3 +1,5 @@
+{% if contacts %}
+
 <ul class="contacts">
 
     {% for c in contacts %}
@@ -6,8 +8,8 @@
             {{ c.value }}
             {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
         </li>
-    {% empty %}
-        <li class="empty">There are no contact details</li>
     {% endfor %}
 
 </ul>
+
+{% endif %}
