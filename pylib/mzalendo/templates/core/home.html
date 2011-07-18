@@ -5,17 +5,11 @@
 {% block content %}
     <h1>Mzalendo</h1>
 
-    <h2>People</h2>
+    <p>This is the homepage of the pre-alpha Mzalendo 2.0</p>
 
-    <ul>
-    {% for person in people %}
-        <li>
-            <a href="{{ person.get_absolute_url }}">{{ person.name }}</a>
-        </li>
-    {% empty %}
-        <li>There are no no people in the system yet.</li>
-    {% endfor %}
-    </ul>
+    <div class="action_button">
+        <a href="{% url position 'mp' %}">Members of Parliament</a>
+    </div>
     
 
 {% endblock %}

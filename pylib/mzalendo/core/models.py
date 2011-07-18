@@ -183,6 +183,7 @@ class Place(models.Model):
 
 class PositionTitle(models.Model):
     name            = models.CharField(max_length=200, unique=True)
+    name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
     original_id     = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to data in original mzalendo.com db')

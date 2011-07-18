@@ -18,6 +18,7 @@ urlpatterns = patterns('core.views',
     # Objects
     url(r'^person/(?P<slug>[-\w]+)/',       'person',       name='person'),
     url(r'^place/(?P<slug>[-\w]+)/',        'place',        name='place'),
+    url(r'^position/(?P<slug>[-\w]+)/',     'position',     name='position'),
     url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),
 )
 

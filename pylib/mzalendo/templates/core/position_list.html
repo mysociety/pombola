@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title.name }}{% endblock %}
+
+{% block content %}
+
+    <h1>{{ title.name_plural }}</h1>
+
+    {% if title.summary %}
+        <p>{{ title.summary }}</p>
+    {% endif %}
+
+    <ul class="position">
+    {% for object in object_list %}
+        <li>
+
+            <div class="thumb">
+                <img src="http://dummyimage.com/60x60/ddd/888.png" />
+            </div>
+
+            <div class="name">
+                <a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a>
+            </div>
+
+            {% if object.place %}
+                in <a href="{{ object.place.get_absolute_url }}">{{ object.place.name }}</a>                
+            {% endif %}
+
+            for <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a>
+        </li>
+    {% empty %}
+        <li>There are none in the system yet</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+

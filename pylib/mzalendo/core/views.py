@@ -9,7 +9,6 @@ def home(request):
     return render_to_response(
         'core/home.html',
         {
-            'people': models.Person.objects.all(),
         },
         context_instance=RequestContext(request)
     )
@@ -48,6 +47,23 @@ def place(request, slug):
         request,
         queryset = models.Place.objects,
         slug     = slug,
+    )
+
+
+def position(request, slug):
+    """"""
+    
+    title = get_object_or_404(
+        models.PositionTitle,
+        slug=slug
+    )
+    
+    positions =  title.position_set.all().order_by('person__first_name', 'person__last_name')
+    
+    return object_list(
+        request,
+        queryset = positions,
+        extra_context = { 'title': title, },
     )
 
 

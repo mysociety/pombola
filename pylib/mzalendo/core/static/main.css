@@ -105,3 +105,19 @@ strong {
   #footer ul li {
     display: inline;
     padding: 0 0.5em; }
+
+ul.position li {
+  border-bottom: 1px dashed #bbb;
+  padding: 0.25em 0;
+  overflow: hidden;
+  width: 100%; }
+ul.position div.thumb {
+  height: 60px;
+  width: 60px;
+  color: #ddd;
+  border: 1px solid #bbb;
+  float: left;
+  margin-right: 1em; }
+ul.position div.name {
+  font-size: 150%;
+  font-weight: bold; }

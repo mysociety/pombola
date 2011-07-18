@@ -82,3 +82,30 @@ strong {
         }
     }
 }
+
+@mixin result_list () {
+    li {
+        border-bottom: 1px dashed #bbb;
+        padding: 0.25em 0;
+        overflow: hidden;
+    	width: 100%;
+    }
+
+    div.thumb {
+        height: 60px;
+        width:  60px;
+        color: #ddd;
+        border: 1px solid #bbb;
+        float: left;
+        margin-right: 1em;
+    }
+
+    div.name {
+        font-size: 150%;
+        font-weight: bold;
+    }
+}
+
+ul.position {
+    @include result_list();
+}
