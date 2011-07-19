@@ -59,8 +59,9 @@ class ContactInlineAdmin(GenericTabularInline):
 
 
 class PositionAdmin(admin.ModelAdmin):
-    list_display  = [ 'id', 'show_person', 'show_organisation', 'title', 'start_date', 'end_date' ]
+    list_display  = [ 'id', 'show_person', 'show_organisation', 'show_place', 'title', 'start_date', 'end_date' ]
     search_fields = ['person__first_name', 'person__last_name', 'organisation__name' ]
+    list_filter   = [ 'title__name' ]    
     inlines       = [ InformationSourceInlineAdmin, ]
     
     def show_person(self, obj):
@@ -70,6 +71,10 @@ class PositionAdmin(admin.ModelAdmin):
     def show_organisation(self, obj):
         return create_admin_link_for(obj.organisation, obj.organisation.name)
     show_organisation.allow_tags = True
+
+    def show_place(self, obj):
+        return create_admin_link_for(obj.place, obj.place.name)
+    show_place.allow_tags = True
 
 
 class PositionInlineAdmin(admin.TabularInline):
