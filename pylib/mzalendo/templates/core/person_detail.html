@@ -3,20 +3,30 @@
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
-    <h1>{{ object.name }}</h1>
 
+    <div class="person_photo">
+        <img src="http://dummyimage.com/200x200/ddd/888.png" />
+    </div>
+
+    <h1>{{ object.name }}</h1>
 
     {% include "core/contact_list.html" with contacts=object.contacts.all %}
 
 
     <h2>Related organisations</h2>
 
-    <ul>
+    <ul class="organisation">
     {% for position in object.position_set.all %}
         <li>
-            <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>:
+            
+            {% if position.is_ongoing %}<strong>{% endif %}
             {{ position.title }}
-            ( {{ position.display_start_date }} to {{ position.display_end_date }} )
+            {% if position.is_ongoing %}</strong>{% endif %}
+
+            <br />
+
+            <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>:
+            ( {{ position.display_start_date }} &rarr; {{ position.display_end_date }} )
             </li>
     {% empty %}
         <li>There are no related organisations</li>

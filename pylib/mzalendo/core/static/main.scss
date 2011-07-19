@@ -106,6 +106,14 @@ strong {
     }
 }
 
+ul.person {
+    @include result_list();
+}
+
+ul.place {
+    @include result_list();
+}
+
 ul.position {
     @include result_list();
 }
@@ -120,4 +128,9 @@ div.action_button {
     margin: 0.5em;
     border: 1px solid #bbb;
     background-color: #eee;
+}
+
+div.person_photo {
+    border: 1px solid #888;
+    float: right;
 }

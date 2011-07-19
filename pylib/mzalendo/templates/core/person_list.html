@@ -6,10 +6,23 @@
 
     <h1>People</h1>
 
-    <ul>
+    <ul class="person">
     {% for object in object_list %}
         <li>
-            <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            <div class="thumb">
+                <img src="http://dummyimage.com/60x60/ddd/888.png" />
+            </div>
+
+            <div class="name">
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </div>
+            
+            <div class="positions">
+                {% for position in object.position_set.all %}
+                <span>{{ position.title.name }}, {{ position.organisation.name }};</span>
+                {% endfor %}
+            </div>
+
         </li>
     {% empty %}
         <li>There are no people in the system yet</li>

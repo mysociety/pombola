@@ -212,13 +212,13 @@ class Position(models.Model):
         """Return text that represents the start date"""
         if self.start_date:
             return str(self.start_date)
-        return '???'
+        return '?'
     
     def display_end_date(self):
         """Return text that represents the end date"""
         if self.end_date:
             return str(self.end_date)
-        return '???'
+        return '?'
 
     def is_ongoing(self):
         """Return True or False for whether the position is currently ongoing"""

@@ -17,7 +17,9 @@
                 <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
             </div>
             
-            {{ object.num_positions }} related positions
+            {% if object.num_positions %}
+                {{ object.num_positions }} related positions
+            {% endif %}
         </li>
     {% empty %}
         <li>There are no organisations in the system yet</li>

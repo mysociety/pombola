@@ -6,10 +6,19 @@
 
     <h1>Places</h1>
 
-    <ul>
+    <ul class='place'>
     {% for object in object_list %}
         <li>
-            <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            <div class="thumb">
+                <img src="http://dummyimage.com/60x60/ddd/888.png" />
+            </div>
+        
+            <div class="name">
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </div>
+        
+            {{ object.kind.name }}
+        
         </li>
     {% empty %}
         <li>There are no places in the system yet</li>
