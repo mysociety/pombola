@@ -25,6 +25,10 @@ urlpatterns = patterns('core.views',
     url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),
 )
 
+# Comments
+urlpatterns += patterns('',
+    (r'^comments/', include('django.contrib.comments.urls')),
+)
 
 # Admin
 urlpatterns += patterns('',
