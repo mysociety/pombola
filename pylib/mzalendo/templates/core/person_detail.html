@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load comments %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -32,6 +33,12 @@
         <li>There are no related organisations</li>
     {% endfor %}
     </ul>
+
+    <h2>Comments</h2>
+
+    {% render_comment_list for object %}
+
+    {% render_comment_form for object %}
 
 
 {% endblock %}
