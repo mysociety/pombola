@@ -32,6 +32,10 @@ strong {
     font-weight: bold;
 }
 
+small {
+    font-size: 75%;
+}
+
 #staging_header {
     background-color: #faa;
     font-size: 75%;
@@ -135,7 +139,42 @@ div.person_photo {
     float: right;
 }
 
-
-#comments {
+form {
     
+    blockquote {
+        padding: 1em;
+        border: 1px solid #ddd;
+        background-color: #eee;
+    }
+    
+    label {
+        padding-left: 2px;
+        display: block;
+        font-size: 80%;
+    }
+    
+    li, p {
+        padding: 0 1em;
+    }
+    
+    ul.errorlist, p.error {
+        background-color: #fcc;
+    }
+
+}
+
+dl.comments {
+    dt, dd {
+        border: 2px solid #ccc;
+        padding: 0.25em;
+    }
+    
+    dt {
+        background-color: #ccc;
+    }
+
+    dd {
+        margin-bottom: 1em;
+    }
+
 }

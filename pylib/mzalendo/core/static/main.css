@@ -63,6 +63,9 @@ p {
 strong {
   font-weight: bold; }
 
+small {
+  font-size: 75%; }
+
 #staging_header {
   background-color: #faa;
   font-size: 75%;
@@ -179,3 +182,24 @@ div.action_button {
 div.person_photo {
   border: 1px solid #888;
   float: right; }
+
+form blockquote {
+  padding: 1em;
+  border: 1px solid #ddd;
+  background-color: #eee; }
+form label {
+  padding-left: 2px;
+  display: block;
+  font-size: 80%; }
+form li, form p {
+  padding: 0 1em; }
+form ul.errorlist, form p.error {
+  background-color: #fcc; }
+
+dl.comments dt, dl.comments dd {
+  border: 2px solid #ccc;
+  padding: 0.25em; }
+dl.comments dt {
+  background-color: #ccc; }
+dl.comments dd {
+  margin-bottom: 1em; }
