@@ -143,3 +143,25 @@ admin.site.register( models.Place,                PlaceAdmin                 )
 admin.site.register( models.PlaceKind,            PlaceKindAdmin             )
 admin.site.register( models.Position,             PositionAdmin              )
 admin.site.register( models.PositionTitle,        PositionTitleAdmin         )
+
+
+
+class LogAdmin(admin.ModelAdmin):
+    """Create an admin view of the history/log table"""
+    list_display = ('action_time','user','content_type','change_message','is_addition','is_change','is_deletion')
+    list_filter = ['action_time','user','content_type']
+    ordering = ('-action_time',)
+    readonly_fields = [ 'user','content_type','object_id','object_repr','action_flag','change_message']
+    date_hierarchy = 'action_time'
+    
+    #We don't want people changing this historical record:
+    def has_add_permission(self, request):
+        return False
+    def has_change_permission(self, request, obj=None):
+        #returning false causes table to not show up in admin page :-(
+        #I guess we have to allow changing for now
+        return True
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+admin.site.register( admin.models.LogEntry, LogAdmin )
