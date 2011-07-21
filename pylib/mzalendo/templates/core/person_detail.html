@@ -23,11 +23,15 @@
             {% if position.is_ongoing %}<strong>{% endif %}
             {{ position.title }}
             {% if position.is_ongoing %}</strong>{% endif %}
+            
+            {% if position.has_known_dates %}
+                ({{ position.display_start_date }} &rarr; {{ position.display_end_date }})
+            {% endif %}
 
             <br />
 
-            <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>:
-            ( {{ position.display_start_date }} &rarr; {{ position.display_end_date }} )
+            <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>
+                        
             </li>
     {% empty %}
         <li>There are no related organisations</li>

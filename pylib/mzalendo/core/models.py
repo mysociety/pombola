@@ -231,6 +231,10 @@ class Position(models.Model):
             now = datetime.date.today()
             now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day )
             return now_approx <= self.end_date
+
+    def has_known_dates(self):
+        """Is there at least one known (not future) date?"""
+        return (self.start_date and not self.start_date.future) or (self.end_date and not self.end_date.future)
     
     def __unicode__(self):
         return "%s (%s at %s)" % ( self.title, self.person.name(), self.organisation.name )
