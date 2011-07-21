@@ -3,15 +3,13 @@
 import os, sys
 
 file_dir = os.path.abspath(os.path.realpath(os.path.dirname(__file__)))
-paths = [
-    os.path.normpath(file_dir + "/../pylib"),
-    os.path.normpath(file_dir + "/../pylib/mzalendo"),
-]
-for path in paths:
-    if path not in sys.path:
-        sys.path.insert(0, path)
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'mzalendo.settings'
+sys.path.insert(
+    0, # insert at the very start
+    os.path.normpath(file_dir + "/../pylib/mzalendo")
+)
+
+import setup_env
 
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
