@@ -164,4 +164,9 @@ class LogAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-admin.site.register( admin.models.LogEntry, LogAdmin )
+# the line below caused issues on one server and not on others. Possibly an
+# import order issue?? The uncommented lines don't have the problem
+#
+# buggy --> admin.site.register( admin.models.LogEntry, LogAdmin )
+from django.contrib.admin.models import LogEntry
+admin.site.register( LogEntry, LogAdmin )
