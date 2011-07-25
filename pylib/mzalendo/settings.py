@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     
     'south',
+    'tasks',
     'core',
 )
 
