@@ -6,6 +6,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 
+from tasks.models import Task
+
 # tell South how to handle the custom fields 
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateField"])
@@ -39,6 +41,11 @@ class Contact(models.Model):
     
     def __unicode__(self):
         return "%s (%s for %s)" % ( self.value, self.kind, self.content_object )
+
+    def generate_tasks(self):
+        """generate tasks for ourselves, and for the foreign object"""
+        Task.call_generate_tasks_on_if_possible( self.content_object )
+        return []
 
     class Meta:
        ordering = ["content_type", "object_id", "kind", ]      
@@ -114,7 +121,19 @@ class Person(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ( 'person', [ self.slug ] )
-
+    
+    def generate_tasks(self):
+        """Generate tasks for missing contact details etc"""
+        task_slugs = []
+        
+        wanted_contact_slugs = ['phone','email','address']
+        have_contact_slugs = [ c.kind.slug for c in self.contacts.all() ]
+        for wanted in wanted_contact_slugs:
+            if wanted not in have_contact_slugs:
+                task_slugs.append( "find-missing-" + wanted )
+        
+        return task_slugs
+        
     class Meta:
        ordering = ["slug"]      
 

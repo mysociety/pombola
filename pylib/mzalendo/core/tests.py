@@ -2,8 +2,10 @@ import settings
 
 from django.utils import unittest
 from core         import models
+from tasks.models import Task
 
 from django_date_extensions.fields import ApproximateDate
+from django.contrib.contenttypes.models import ContentType
 
 class PositionTestCase(unittest.TestCase):
     def setUp(self):
@@ -83,3 +85,44 @@ class PositionTestCase(unittest.TestCase):
         self.assertEqual( pos.display_start_date(), '1st January 2000' )
         self.assertEqual( pos.display_end_date(),   '2nd January 2000' )
         self.assertFalse( pos.is_ongoing() )
+
+
+class PersonAndContactTasksTest( unittest.TestCase ):
+    def setUp(self):
+        pass    
+
+    def test_missing_contacts(self):
+        person = models.Person(
+            first_name = "Test",
+            last_name  = "Person",
+            slug       = 'test-person'
+        )
+        person.save()
+        
+        self.assertItemsEqual(
+            [ i.task_code for i in Task.objects_for(person) ],
+            ['find-missing-phone', 'find-missing-email', 'find-missing-address'],
+        )
+
+        # add a phone number and check that the tasks get updated
+        phone = models.ContactKind(
+            slug='phone', name='Phone',
+        )
+        phone.save()
+
+        contact = models.Contact(
+            content_type = ContentType.objects.get_for_model(person),
+            object_id    = person.id,
+            kind         = phone,
+            value        = '07891 234 567',
+        )
+        contact.save()
+
+        self.assertItemsEqual(
+            [ i.task_code for i in Task.objects_for(person) ],
+            ['find-missing-email', 'find-missing-address'],
+        )
+
+
+
+
