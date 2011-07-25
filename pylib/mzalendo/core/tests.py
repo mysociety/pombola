@@ -7,16 +7,42 @@ from django_date_extensions.fields import ApproximateDate
 
 class PositionTestCase(unittest.TestCase):
     def setUp(self):
-        self.organisation = models.Organisation.objects.create(name="The Org", slug="org")
         self.person       = models.Person.objects.create(first_name="Bob", last_name="Smith", slug="bob-smith")
-        self.place        = models.Place.objects.create(name="The Place", slug="place")
+
+        organisation_kind = models.OrganisationKind.objects.create(
+            name        = "Test Org",
+            name_plural = "Test Orgs",
+            slug        = "test-org",
+        )
+        self.organisation = models.Organisation.objects.create(
+            slug = "org",
+            name = "The Org",
+            kind = organisation_kind,
+        )
+
+        place_kind = models.PlaceKind.objects.create(
+            name       = "Test Place",
+            name_plural= "Test Places",
+            slug       = "test-place",
+        )
+
+        self.place = models.Place.objects.create(
+            name = "The Place",
+            slug = "place",
+            kind = place_kind,
+        )
 
     def getPos(self, **kwargs):
+        title_kind, created = models.PositionTitle.objects.get_or_create(
+            name        = 'Job Title',
+            name_plural = 'Job Titles',
+            slug        = 'job-title',
+        )
         return models.Position.objects.create(
             person       = kwargs.get('person',       self.person       ),
             organisation = kwargs.get('organisation', self.organisation ),
             place        = kwargs.get('place',        self.place        ),
-            title        = kwargs.get('title',        'Job Title'       ),
+            title        = title_kind,
         )
 
     def testDisplayDates(self):
@@ -33,13 +59,13 @@ class PositionTestCase(unittest.TestCase):
         self.assertTrue( pos )
 
         # check that by default both dates are empty
-        self.assertEqual( pos.display_start_date(), '???' )
-        self.assertEqual( pos.display_end_date(),   '???' )
+        self.assertEqual( pos.display_start_date(), '?' )
+        self.assertEqual( pos.display_end_date(),   '?' )
 
         # mark the end_date as future
         pos.end_date = future
         pos.save()
-        self.assertEqual( pos.display_start_date(), '???' )
+        self.assertEqual( pos.display_start_date(), '?' )
         self.assertEqual( pos.display_end_date(),   'future' )
         self.assertTrue( pos.is_ongoing() )
         
