@@ -5,6 +5,7 @@ Test the tasks
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from models import Task
+from pprint import pprint
 
 class TaskTest(TestCase):
 
@@ -93,4 +94,40 @@ class TaskTest(TestCase):
         # check that a task exists
         self.assertEqual( Task.objects.count(), 1 )
         self.assertEqual( Task.objects_for(deletable_object).count(), 0 )
+
+
+
+    def test_object_saving(self):
+        """
+        Check that the post-save hook works
+        """
+        
+        # test objects
+        test_object    = self.test_object
+
+        # save the test object and check that it has no effect
+        self.assertEqual( Task.objects.count(), 0 )
+        test_object.save()
+        self.assertEqual( Task.objects.count(), 0 )
+        
+        # Manually monkey patch site to have a 'generate_tasks' method
+        current_site_name = test_object.name
+        def generate_tasks(self):
+            if self.name == current_site_name:
+                return [ 'change-default-name' ]
+            return []
+        Site.generate_tasks = generate_tasks
+
+        # save the test oject again and check that a task has been created
+        test_object.save()
+        self.assertEqual( Task.objects.count(), 1 )
+        self.assertEqual( Task.objects.all()[0].task_code, 'change-default-name' )
+        
+        # change the name and check that the task gets deleted
+        test_object.name = 'not the default'
+        test_object.save()
+        self.assertEqual( Task.objects.count(), 0 )
+        
+        # tidy up the Site class
+        del Site.generate_tasks
 

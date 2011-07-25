@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db.models import signals
+from django.dispatch import receiver
+
 
 
 class Task(models.Model):
@@ -65,14 +67,21 @@ class Task(models.Model):
        ordering = ["content_type", "object_id", "task_code", ]      
 
 
+# NOTE - these two signal catchers may prove to be performance bottlenecks in
+# future. If so the check to see if there is a generate_tasks method might be
+# better replaced with something else...
 
+@receiver( signals.post_delete )
 def delete_related_tasks(sender, instance, **kwargs):
     Task.objects_for(instance).delete();
-signals.post_delete.connect( delete_related_tasks )
 
 
-# def my_callback(sender, **kwargs):
-#     print "Something saved!"
-# signals.post_save.connect( my_callback )
+@receiver( signals.post_save )
+def post_save_call_generate_tasks(sender, instance, **kwargs):
+    if hasattr( instance, 'generate_tasks' ):
+        task_code_list = instance.generate_tasks()
+        Task.update_for_object( instance, task_code_list )
+        return True
+    return False
 
 
