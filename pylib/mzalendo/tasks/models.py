@@ -2,6 +2,8 @@ from django.db import models
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.db.models import signals
+
 
 class Task(models.Model):
 
@@ -61,3 +63,16 @@ class Task(models.Model):
 
     class Meta:
        ordering = ["content_type", "object_id", "task_code", ]      
+
+
+
+def delete_related_tasks(sender, instance, **kwargs):
+    Task.objects_for(instance).delete();
+signals.post_delete.connect( delete_related_tasks )
+
+
+# def my_callback(sender, **kwargs):
+#     print "Something saved!"
+# signals.post_save.connect( my_callback )
+
+

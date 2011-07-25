@@ -66,3 +66,31 @@ class TaskTest(TestCase):
         # check that all tasks are now deleted
         self.assertEqual( Task.objects.count(), 0 )
 
+
+    def test_object_deletion(self):
+        """
+        Test that tasks are created and deleted correctly by being given an object and a list
+        """
+        
+        # test objects
+        normal_object    = self.test_object
+        deletable_object = test_object = Site(name='foo', domain='foo.com')
+        deletable_object.save()
+        
+        # check that there are none at the start
+        self.assertEqual( Task.objects.count(), 0 )
+
+        # create a couple of tasks
+        for obj in [ normal_object, deletable_object ]:
+            Task.update_for_object( obj, ['foo'] )
+
+        # check that a task exists
+        self.assertEqual( Task.objects.count(), 2 )
+        self.assertEqual( Task.objects_for(deletable_object).count(), 1 )
+
+        test_object.delete()
+        
+        # check that a task exists
+        self.assertEqual( Task.objects.count(), 1 )
+        self.assertEqual( Task.objects_for(deletable_object).count(), 0 )
+
