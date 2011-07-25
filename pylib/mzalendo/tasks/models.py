@@ -34,6 +34,14 @@ class Task(models.Model):
             content_type = ContentType.objects.get_for_model(obj),
             object_id    = obj.pk
         )
+    
+    
+    @classmethod
+    def call_generate_tasks_on(cls, obj):
+        """call generate_tasks on the given object and process the results"""
+        task_code_list = obj.generate_tasks()
+        Task.update_for_object( obj, task_code_list )
+        
 
     @classmethod
     def update_for_object(cls, obj, task_code_list):
@@ -79,8 +87,7 @@ def delete_related_tasks(sender, instance, **kwargs):
 @receiver( signals.post_save )
 def post_save_call_generate_tasks(sender, instance, **kwargs):
     if hasattr( instance, 'generate_tasks' ):
-        task_code_list = instance.generate_tasks()
-        Task.update_for_object( instance, task_code_list )
+        Task.call_generate_tasks_on( instance )
         return True
     return False
 
