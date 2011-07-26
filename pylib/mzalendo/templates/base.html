@@ -23,12 +23,7 @@
 
         </div>
 
-
-        {% if settings.STAGING %}
-        <div id="staging_header">
-            This is a staging site - any data saved here <strong>may be deleted</strong>. Please use the <a href="http://mzalendo.mysociety.org/">live site</a> instead.
-        </div>
-        {% endif %}
+        {% include 'staging_header.html' %}
 
         <div id="content">
             {% block content %}

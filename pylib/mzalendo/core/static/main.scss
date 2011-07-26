@@ -1,4 +1,5 @@
 @import "reset";
+@import "common";
 
 @mixin rounded-corners ( $radius ) {
     -moz-border-radius: $radius;
@@ -34,13 +35,6 @@ strong {
 
 small {
     font-size: 75%;
-}
-
-#staging_header {
-    background-color: #faa;
-    font-size: 75%;
-    padding: 0.25em;
-    text-align: center;
 }
 
 #header {

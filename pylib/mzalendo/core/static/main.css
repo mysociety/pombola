@@ -35,6 +35,16 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+/*
+    Styling common to both admin and frontend UI
+*/
+#staging_header {
+  background-color: #faa;
+  color: #000;
+  font-size: 12px;
+  padding: 0.25em;
+  text-align: center; }
+
 html {
   font-family: Arial;
   font-size: 16px; }
@@ -65,12 +75,6 @@ strong {
 
 small {
   font-size: 75%; }
-
-#staging_header {
-  background-color: #faa;
-  font-size: 75%;
-  padding: 0.25em;
-  text-align: center; }
 
 #header {
   padding: 0.5em;

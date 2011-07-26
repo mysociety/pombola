@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+
+{% block extrastyle %}
+    <link href="{{ STATIC_URL }}common.css" media="screen" rel="stylesheet" type="text/css" /> 
+{% endblock %}
+
+{% block title %}{{ title }} | {% trans 'Mzalendo site admin' %}{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">{% trans 'Mzalendo administration' %}</h1>
+{% endblock %}
+
+{% block nav-global %}
+    {% include 'staging_header.html' %}
+{% endblock %}
