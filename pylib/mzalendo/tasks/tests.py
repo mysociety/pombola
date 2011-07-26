@@ -131,3 +131,15 @@ class TaskTest(TestCase):
         # tidy up the Site class
         del Site.generate_tasks
 
+
+    def test_add_to_log(self):
+        """test the add_to_log function"""
+        task = Task()
+        self.assertEqual( task.log, "")
+
+        task.add_to_log("foo")
+        self.assertEqual( task.log, "foo")
+
+        task.add_to_log("bar")
+        self.assertEqual( task.log, "foo\nbar")
+

@@ -80,6 +80,16 @@ class Task(models.Model):
         pass
 
 
+    def add_to_log(self, msg):
+        """append msg to the log entry"""
+        current_log = self.log
+        if current_log:
+            self.log = current_log + "\n" + msg
+        else:
+            self.log = msg
+        return True
+
+
     class Meta:
        ordering = ["content_type", "object_id", "task_code", ]      
 
