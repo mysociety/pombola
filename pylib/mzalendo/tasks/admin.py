@@ -19,9 +19,8 @@ def create_admin_link_for(obj, link_text):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display  = [ 'task_code', 'show_foreign', 'defer_until', ]
-    list_filter   = [ 'task_code', ]
-    # search_fields = [ 'task_code', ]
+    list_display  = [ 'category', 'show_foreign', 'defer_until', ]
+    list_filter   = [ 'category', ]
 
     def show_foreign(self, obj):
         return create_admin_link_for( obj.content_object, str(obj.content_object) )
@@ -32,7 +31,7 @@ class TaskAdmin(admin.ModelAdmin):
 #     model      = models.Task
 #     extra      = 0
 #     can_delete = False
-#     fields     = [ 'task_code' ]
+#     fields     = [ 'category' ]
 
 
 # Add these to the admin

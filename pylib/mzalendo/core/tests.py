@@ -100,7 +100,7 @@ class PersonAndContactTasksTest( unittest.TestCase ):
         person.save()
         
         self.assertItemsEqual(
-            [ i.task_code for i in Task.objects_for(person) ],
+            [ i.category.slug for i in Task.objects_for(person) ],
             ['find-missing-phone', 'find-missing-email', 'find-missing-address'],
         )
 
@@ -119,7 +119,7 @@ class PersonAndContactTasksTest( unittest.TestCase ):
         contact.save()
 
         self.assertItemsEqual(
-            [ i.task_code for i in Task.objects_for(person) ],
+            [ i.category.slug for i in Task.objects_for(person) ],
             ['find-missing-email', 'find-missing-address'],
         )
 

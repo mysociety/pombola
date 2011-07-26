@@ -6,6 +6,12 @@ from django.db.models import signals
 from django.dispatch import receiver
 
 
+class TaskCategory(models.Model):
+    slug     = models.SlugField(max_length=100, unique=True)
+    priority = models.PositiveIntegerField(default=0)
+
+    class Meta:
+       ordering = ["-priority", "slug" ]      
 
 class Task(models.Model):
 
@@ -14,17 +20,25 @@ class Task(models.Model):
     object_id      = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    task_code     = models.SlugField(max_length=100)
+    category      = models.ForeignKey(TaskCategory)
 
     created       = models.DateTimeField(auto_now_add=True)
     defer_until   = models.DateTimeField(auto_now_add=True)
+    priority      = models.PositiveIntegerField() # defaulted in overloaded .save() method
     attempt_count = models.PositiveIntegerField(default=0)
     
     log  = models.TextField()
     note = models.TextField(blank=True, help_text="publicaly visible, use to clarify contact detail")
 
+
+    def clean(self):
+        """If needed get the priority from the category"""
+        if self.priority is None:
+            self.priority = self.category.priority
+
+
     def __unicode__(self):
-        return "%s for %s" % ( self.task_code, self.content_object )
+        return "%s for %s" % ( self.category.slug, self.content_object )
 
 
     @classmethod
@@ -47,13 +61,13 @@ class Task(models.Model):
     @classmethod
     def call_generate_tasks_on(cls, obj):
         """call generate_tasks on the given object and process the results"""
-        task_code_list = obj.generate_tasks()
-        cls.update_for_object( obj, task_code_list )
+        slug_list = obj.generate_tasks()
+        cls.update_for_object( obj, slug_list )
         return True
 
 
     @classmethod
-    def update_for_object(cls, obj, task_code_list):
+    def update_for_object(cls, obj, slug_list):
         """Create specified tasks for this objects, delete ones that are missing"""
 
         # get the details needed to create a generic
@@ -64,17 +78,23 @@ class Task(models.Model):
         seen_tasks = []
 
         # check that we have tasks for all codes requested
-        for task_code in task_code_list:
+        for slug in slug_list:
+
+            category, created = TaskCategory.objects.get_or_create(slug=slug)
+
             task, created = Task.objects.get_or_create(
                 content_type = content_type,
                 object_id    = object_id,
-                task_code    = task_code,
+                category     = category,
+                defaults = {
+                    'priority': category.priority,
+                },
             )
-            seen_tasks.append( task_code )
+            seen_tasks.append( slug )
 
         # go through all tasks in db and delete redundant ones
         for task in cls.objects_for(obj):
-            if task.task_code in seen_tasks: continue
+            if task.category.slug in seen_tasks: continue
             task.delete()
 
         pass
@@ -91,7 +111,8 @@ class Task(models.Model):
 
 
     class Meta:
-       ordering = ["content_type", "object_id", "task_code", ]      
+       ordering = ["content_type", "object_id", "priority", ]
+       # FIXME - add http://docs.djangoproject.com/en/dev/ref/models/options/#unique-together
 
 
 # NOTE - these two signal catchers may prove to be performance bottlenecks in

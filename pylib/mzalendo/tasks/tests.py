@@ -4,7 +4,7 @@ Test the tasks
 
 from django.test import TestCase
 from django.contrib.sites.models import Site
-from models import Task
+from models import TaskCategory, Task
 from pprint import pprint
 
 class TaskTest(TestCase):
@@ -13,14 +13,51 @@ class TaskTest(TestCase):
         # use the site object to run tests against
         self.test_object = Site.objects.all()[0]
 
+        self.high_priority_category = TaskCategory(
+            slug     = "high-priority",
+            priority = 10,
+        )
+        self.high_priority_category.save()
+
+        self.medium_priority_category = TaskCategory(
+            slug     = "medium-priority",
+            priority = 6,
+        )
+        self.medium_priority_category.save()
+
+        self.low_priority_category = TaskCategory(
+            slug     = "low-priority",
+            priority = 3,
+        )
+        self.low_priority_category.save()
+
+
+    def test_priority_default(self):
+        """Test that the priority is taken from category if needed"""
+
+        # create task with explicit priority
+        explicit_task = Task(
+            category = self.high_priority_category,
+            priority = 5,
+        )
+        explicit_task.clean()
+        self.assertEqual( explicit_task.priority, 5 )
+
+        # create task with default priority
+        defaulted_task = Task(
+            category = self.high_priority_category,
+        )
+        defaulted_task.clean()
+        self.assertEqual( defaulted_task.priority, self.high_priority_category.priority )
+
 
     def test_list_creation_and_deletion(self):
         """
         Test that tasks are created and deleted correctly by being given an object and a list
         """
 
-        initial_list  = [ 'task-code-1', 'task-code-2' ]
-        modified_list = [ 'task-code-1', 'task-code-3' ]
+        initial_list  = [ self.high_priority_category.slug, self.medium_priority_category.slug ]
+        modified_list = [ self.high_priority_category.slug, self.low_priority_category.slug ]
 
         # check that there are none at the start
         self.assertEqual( Task.objects.count(), 0 )
@@ -31,12 +68,12 @@ class TaskTest(TestCase):
             initial_list
         )
         self.assertItemsEqual(
-            [ i.task_code for i in Task.objects_for( self.test_object) ],
+            [ i.category.slug for i in Task.objects_for( self.test_object) ],
             initial_list,
         )
         
         # modify one of the tasks
-        for task in Task.objects_for( self.test_object ).filter(task_code='task-code-1'):
+        for task in Task.objects_for( self.test_object ).filter(category__slug='task-code-1'):
             task.note = "test notes"
             task.save()
     
@@ -46,12 +83,12 @@ class TaskTest(TestCase):
             modified_list
         )
         self.assertItemsEqual(
-            [ i.task_code for i in Task.objects_for( self.test_object) ],
+            [ i.category.slug for i in Task.objects_for( self.test_object) ],
             modified_list,
         )
 
         # check previously modified task unchanged
-        for task in Task.objects_for( self.test_object ).filter(task_code='task-code-1'):
+        for task in Task.objects_for( self.test_object ).filter(category__slug='task-code-1'):
             self.assertEqual( task.note, "test notes" )
     
         # run again - with empty list
@@ -60,7 +97,7 @@ class TaskTest(TestCase):
             []
         )
         self.assertItemsEqual(
-            [ i.task_code for i in Task.objects_for( self.test_object) ],
+            [ i.category.slug for i in Task.objects_for( self.test_object) ],
             [],
         )
         
@@ -96,7 +133,6 @@ class TaskTest(TestCase):
         self.assertEqual( Task.objects_for(deletable_object).count(), 0 )
 
 
-
     def test_object_saving(self):
         """
         Check that the post-save hook works
@@ -121,7 +157,7 @@ class TaskTest(TestCase):
         # save the test oject again and check that a task has been created
         test_object.save()
         self.assertEqual( Task.objects.count(), 1 )
-        self.assertEqual( Task.objects.all()[0].task_code, 'change-default-name' )
+        self.assertEqual( Task.objects.all()[0].category.slug, 'change-default-name' )
         
         # change the name and check that the task gets deleted
         test_object.name = 'not the default'
