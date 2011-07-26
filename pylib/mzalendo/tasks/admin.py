@@ -19,12 +19,16 @@ def create_admin_link_for(obj, link_text):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display  = [ 'category', 'show_foreign', 'defer_until', ]
+    list_display  = [ 'category', 'show_foreign', 'priority', 'attempt_count', 'defer_until', ]
     list_filter   = [ 'category', ]
 
     def show_foreign(self, obj):
         return create_admin_link_for( obj.content_object, str(obj.content_object) )
     show_foreign.allow_tags = True
+
+
+class TaskCategoryAdmin(admin.ModelAdmin):
+    list_display  = [ 'slug', 'priority', ]
 
 
 # class TaskInlineAdmin(GenericTabularInline):
@@ -35,4 +39,5 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 # Add these to the admin
-admin.site.register( models.Task, TaskAdmin )
+admin.site.register( models.Task,         TaskAdmin )
+admin.site.register( models.TaskCategory, TaskCategoryAdmin )

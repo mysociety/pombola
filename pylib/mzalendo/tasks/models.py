@@ -10,8 +10,15 @@ class TaskCategory(models.Model):
     slug     = models.SlugField(max_length=100, unique=True)
     priority = models.PositiveIntegerField(default=0)
 
+
+    def __unicode__(self):
+        return self.slug
+
+
     class Meta:
-       ordering = ["-priority", "slug" ]      
+       ordering = ["-priority", "slug" ]
+       verbose_name_plural = "Task categories"
+
 
 class Task(models.Model):
 
@@ -28,7 +35,7 @@ class Task(models.Model):
     attempt_count = models.PositiveIntegerField(default=0)
     
     log  = models.TextField()
-    note = models.TextField(blank=True, help_text="publicaly visible, use to clarify contact detail")
+    note = models.TextField(blank=True, help_text="publicly visible, use to clarify contact detail")
 
 
     def clean(self):
@@ -111,7 +118,7 @@ class Task(models.Model):
 
 
     class Meta:
-       ordering = ["content_type", "object_id", "priority", ]
+       ordering = ["-priority", "attempt_count", "defer_until" ]
        # FIXME - add http://docs.djangoproject.com/en/dev/ref/models/options/#unique-together
 
 

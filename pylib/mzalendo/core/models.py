@@ -31,7 +31,7 @@ class Contact(models.Model):
 
     kind    = models.ForeignKey('ContactKind')
     value   = models.TextField()
-    note    = models.TextField(blank=True, help_text="publicaly visible, use to clarify contact detail")
+    note    = models.TextField(blank=True, help_text="publicly visible, use to clarify contact detail")
     source  = models.CharField(max_length=500, blank=True, default='', help_text="where did this contact detail come from")
 
     # link to other objects using the ContentType system
