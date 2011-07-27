@@ -3,6 +3,24 @@
 {% load i18n admin_modify adminmedia %}
 {% load url from future %}
 
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="../../../../">
+      {% trans "Home" %}
+    </a>
+     &rsaquo;
+     <a href="../../../">
+       Tasks
+    </a>
+     &rsaquo;
+     <a href="../../">
+       Task list
+    </a>
+    &rsaquo;
+    {{ task.category }} for {{ task.content_object }}
+  </div>
+{% endblock %}
+
 {% block content %}
     <div id="content-main">
         
