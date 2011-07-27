@@ -133,7 +133,13 @@ class Task(models.Model):
         self.defer_until = new_defer_until
         return True
         
-
+    def defer_briefly_if_needed(self):
+        """If task's defer_until to now + 20 minutes (if needed)"""
+        new_defer_until = datetime.datetime.now() + datetime.timedelta( minutes=20 )
+        if self.defer_until < new_defer_until:
+            self.defer_until = new_defer_until
+            self.save()
+        return True
 
     class Meta:
        ordering = ["-priority", "attempt_count", "defer_until" ]

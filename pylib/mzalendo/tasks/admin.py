@@ -53,6 +53,9 @@ class TaskAdmin(admin.ModelAdmin):
         except models.Task.DoesNotExist:
             return redirect( '/admin/tasks/task/do/' )
         
+        # defer by a few minutes if needed
+        task.defer_briefly_if_needed()
+        
         # values are in days (approximates used)
         deferrals = {
             'one day':      1,
@@ -66,17 +69,23 @@ class TaskAdmin(admin.ModelAdmin):
             cmp=lambda x,y: cmp( deferrals[x], deferrals[y] )
         )
 
+        show_completed_warning = False
         if request.method == 'POST':
-
-            task.note = request.POST.get('note', '')
-
-            defer_by   = request.POST.get( 'deferral', 'one day' )
-            defer_days = deferrals.get(defer_by, 1)
-            task.defer_by_days( defer_days )
-
-            task.save()
-
-            return redirect( '/admin/tasks/task/do/' )
+            if request.POST.get('task_completed'):
+                # task is not completed - if it were we would be here
+                show_completed_warning = True
+            else:
+                task.note = request.POST.get('note', '')
+                
+                defer_by   = request.POST.get( 'deferral', 'one day' )
+                defer_days = deferrals.get(defer_by, 1)
+                task.defer_by_days( defer_days )
+                task.add_to_log("%s: task deferred %u days by %s" % (datetime.date.today(), defer_days, request.user.username) )
+                task.attempt_count = task.attempt_count + 1
+                
+                task.save()
+                
+                return redirect( '/admin/tasks/task/do/' )
         
 
 
@@ -87,6 +96,7 @@ class TaskAdmin(admin.ModelAdmin):
                 'related_tasks':    models.Task.objects_for(task.content_object),                
                 'deferral_periods': deferral_periods,
                 'object_admin_url': create_admin_url_for(task.content_object),
+                'show_completed_warning': show_completed_warning,
             },
             context_instance=RequestContext(request)
         )

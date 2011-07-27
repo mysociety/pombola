@@ -5,24 +5,54 @@
 
 {% block content %}
     <div id="content-main">
+        
+        {% if task.log %}
+        <style type="text/css" media="screen">
+            #task_log {
+                float: right;
+                border: 1px solid #bbb;
+                background-color: #eee;
+                padding: 1em;
+            }
+        </style>
+        <pre id="task_log">{{ task.log }}</pre>        
+        {% endif %}
 
         <h1>{{ task.category }} for <a href="{{ object_admin_url }}">{{ task.content_object }}</a></h1>
         
-        <h2>Due: {{ task.defer_until }}</h2>
+        <p>Please go to <a href="{{ object_admin_url }}">{{ task.content_object }}</a> and complete the <stronght>{{ task.category }}</stronght> task.</p>
+
+        <p>Task was created <strong>{{ task.created|timesince }} ago</strong>, has priority <strong>{{ task.priority }}</strong> and has been attempted <strong>{{ task.attempt_count }} times</strong>.</p>
+
+
+
+
+        {% if show_completed_warning %}
+        <div class="error">
+            This task has not been completed - please either complete it or defer it.
+        </div>
+        {% endif %}
 
         <form action="" method="post">
 
             {% csrf_token %}
 
             <p>
-                <label for="form_note">note:</label>
-                <textarea id="form_note" name='note'>{{ task.note }}</textarea>
+                <label for="form_note">Add a note for the next person to look at this task...</label><br>
+                <textarea id="form_note" name='note' rows="4" cols="40">{{ task.note }}</textarea>
             </p>
 
-            Defer this task for:
-            {% for period in deferral_periods %}
-                <input type="submit" name="deferral" value="{{ period }}" />
-            {% endfor %}
+            <p>
+                ...and then defer this task for:<br>
+                {% for period in deferral_periods %}
+                    <input type="submit" name="deferral" value="{{ period }}" />
+                {% endfor %}
+            </p>
+
+            <p>
+                ...or check that the task is done:<br>
+                <input type="submit" name="task_completed" value="Task completed, show me the next one" />
+            </p>
 
         </form>
 
@@ -31,7 +61,10 @@
         <h2>Other tasks for {{ task.content_object }}</h2>
         <ul>
             {% for t in related_tasks %}
-                <li>{{ t.category }}</li>
+                <li>
+                    <a href="../{{ t.id }}">{{ t.category }}</a>
+                    {% if t.note %}<small>({{ t.note }})</small>{% endif %}
+                </li>
             {% empty %}
                 <li>--none--</li>
             {% endfor %}
