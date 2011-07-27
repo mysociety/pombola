@@ -6,7 +6,7 @@
 {% block content %}
     <div id="content-main">
 
-        <h1>{{ task.category }} for {{ task.content_object }}</h1>
+        <h1>{{ task.category }} for <a href="{{ object_admin_url }}">{{ task.content_object }}</a></h1>
         
         <h2>Due: {{ task.defer_until }}</h2>
 

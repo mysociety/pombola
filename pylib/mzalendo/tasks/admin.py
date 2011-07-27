@@ -14,11 +14,14 @@ from django.template   import RequestContext
 import models
 from pprint import pprint
 
-def create_admin_link_for(obj, link_text):
-    url = reverse(
+def create_admin_url_for(obj):
+    return reverse(
         'admin:%s_%s_change' % ( obj._meta.app_label, obj._meta.module_name),
         args=[obj.id]
     )
+
+def create_admin_link_for(obj, link_text):
+    url = create_admin_url_for( obj )
     return u'<a href="%s">%s</a>' % ( url, link_text )
 
 
@@ -83,6 +86,7 @@ class TaskAdmin(admin.ModelAdmin):
                 'task':             task,
                 'related_tasks':    models.Task.objects_for(task.content_object),                
                 'deferral_periods': deferral_periods,
+                'object_admin_url': create_admin_url_for(task.content_object),
             },
             context_instance=RequestContext(request)
         )
