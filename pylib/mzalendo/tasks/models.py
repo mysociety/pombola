@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 from django.contrib.contenttypes.models import ContentType
@@ -34,9 +36,8 @@ class Task(models.Model):
     priority      = models.PositiveIntegerField() # defaulted in overloaded .save() method
     attempt_count = models.PositiveIntegerField(default=0)
     
-    log  = models.TextField()
-    note = models.TextField(blank=True, help_text="publicly visible, use to clarify contact detail")
-
+    log  = models.TextField(blank=True)
+    note = models.TextField(blank=True)
 
     def clean(self):
         """If needed get the priority from the category"""
@@ -54,6 +55,16 @@ class Task(models.Model):
         return cls.objects.filter(
             content_type = ContentType.objects.get_for_model(obj),
             object_id    = obj.pk
+        )
+    
+    
+    @classmethod
+    def objects_to_do(cls):
+        """Return qs for all tasks that need to be done"""
+        return (
+            cls
+            .objects
+            .filter( defer_until__lte=datetime.datetime.now() )
         )
     
     
@@ -115,6 +126,13 @@ class Task(models.Model):
         else:
             self.log = msg
         return True
+    
+    def defer_by_days(self, days):
+        """Change the defer_until to now + days"""
+        new_defer_until = datetime.datetime.now() + datetime.timedelta( days=days )
+        self.defer_until = new_defer_until
+        return True
+        
 
 
     class Meta:

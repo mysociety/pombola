@@ -1,0 +1,41 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n admin_modify adminmedia %}
+{% load url from future %}
+
+{% block content %}
+    <div id="content-main">
+
+        <h1>{{ task.category }} for {{ task.content_object }}</h1>
+        
+        <h2>Due: {{ task.defer_until }}</h2>
+
+        <form action="" method="post">
+
+            {% csrf_token %}
+
+            <p>
+                <label for="form_note">note:</label>
+                <textarea id="form_note" name='note'>{{ task.note }}</textarea>
+            </p>
+
+            Defer this task for:
+            {% for period in deferral_periods %}
+                <input type="submit" name="deferral" value="{{ period }}" />
+            {% endfor %}
+
+        </form>
+
+        <hr>
+
+        <h2>Other tasks for {{ task.content_object }}</h2>
+        <ul>
+            {% for t in related_tasks %}
+                <li>{{ t.category }}</li>
+            {% empty %}
+                <li>--none--</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endblock %}

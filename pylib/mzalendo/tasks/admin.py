@@ -1,14 +1,18 @@
+import datetime
+
+from django import forms
+from django.conf.urls.defaults import patterns
 from django.contrib import admin
-import models
+from django.utils.decorators import method_decorator
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.contenttypes.generic import GenericTabularInline
 from django.contrib.gis import db
 from django.core.urlresolvers import reverse
-from django.contrib.contenttypes.generic import GenericTabularInline
-from django import forms
+from django.shortcuts  import render_to_response, get_object_or_404, redirect
+from django.template   import RequestContext
 
-# from django.contrib.gis import db
-# from django.core.urlresolvers import reverse
-from django.contrib.contenttypes.generic import GenericTabularInline
-# from django import forms
+import models
+from pprint import pprint
 
 def create_admin_link_for(obj, link_text):
     url = reverse(
@@ -19,12 +23,84 @@ def create_admin_link_for(obj, link_text):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display  = [ 'category', 'show_foreign', 'priority', 'attempt_count', 'defer_until', ]
-    list_filter   = [ 'category', ]
-
+    list_display    = [ 'category', 'show_foreign', 'priority', 'attempt_count', 'defer_until', ]
+    list_filter     = [ 'category', ]
+    readonly_fields = [ 'category' ]
+    fields          = [ 'priority', 'note' ]
+    
     def show_foreign(self, obj):
         return create_admin_link_for( obj.content_object, str(obj.content_object) )
     show_foreign.allow_tags = True
+
+    def get_urls(self):
+        urls = super(TaskAdmin, self).get_urls()
+        my_urls = patterns('',
+            ( r'^do/$',                     self.do_next ),
+            ( r'^do/(?P<task_id>[\d+]+)/$', self.do      ),
+        )
+        return my_urls + urls
+        
+
+    @method_decorator(staff_member_required)
+    def do(self, request, task_id):
+        
+        # load the task - if not possible then redirect to do_next
+        try:
+            task = models.Task.objects.get(id=task_id)
+        except models.Task.DoesNotExist:
+            return redirect( '/admin/tasks/task/do/' )
+        
+        # values are in days (approximates used)
+        deferrals = {
+            'one day':      1,
+            'one week':     7,            
+            'one month':    30,            
+            'three months': 90,            
+            'six months':   180,            
+        }
+        deferral_periods = sorted(
+            deferrals.keys(),
+            cmp=lambda x,y: cmp( deferrals[x], deferrals[y] )
+        )
+
+        if request.method == 'POST':
+
+            task.note = request.POST.get('note', '')
+
+            defer_by   = request.POST.get( 'deferral', 'one day' )
+            defer_days = deferrals.get(defer_by, 1)
+            task.defer_by_days( defer_days )
+
+            task.save()
+
+            return redirect( '/admin/tasks/task/do/' )
+        
+
+
+        return render_to_response(
+            'admin/tasks/task/do.html',
+            {
+                'task':             task,
+                'related_tasks':    models.Task.objects_for(task.content_object),                
+                'deferral_periods': deferral_periods,
+            },
+            context_instance=RequestContext(request)
+        )
+
+    @method_decorator(staff_member_required)
+    def do_next(self, request):
+        tasks_to_do = models.Task.objects_to_do()
+
+        try:
+            task = tasks_to_do[0]
+            return redirect( '/admin/tasks/task/do/' + str(task.id) + '/' )
+        except IndexError:
+            return render_to_response(
+                'admin/tasks/task/do_next.html',
+                {},
+                context_instance=RequestContext(request)
+            )
+            
 
 
 class TaskCategoryAdmin(admin.ModelAdmin):
