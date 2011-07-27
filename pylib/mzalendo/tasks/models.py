@@ -52,12 +52,21 @@ class Task(models.Model):
     @classmethod
     def objects_for(cls, obj):
         """Return qs for all tasks for the given object"""
+
+        # not all primary keys are ints. Check that we can represent them as such
+
+        raw_id = obj.pk
+        if str(raw_id).isdigit():
+            id = int(raw_id)
+        else:
+            return cls.objects.none()
+
         return cls.objects.filter(
             content_type = ContentType.objects.get_for_model(obj),
-            object_id    = obj.pk
+            object_id    = id,
         )
-    
-    
+
+
     @classmethod
     def objects_to_do(cls):
         """Return qs for all tasks that need to be done"""
