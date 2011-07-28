@@ -11,12 +11,24 @@
         <div id="header">
             <div id="logo">
                 <a href="{% url home %}">Mzalendo</a>
+                
+                
             </div>
 
             <ul>
                 <li><a href="{% url person_list %}">people</a></li>
                 <li><a href="{% url organisation_list %}">organisations</a></li>
                 <li><a href="{% url place_list %}">places</a></li>
+
+                <li>•</li>
+                <li>
+                    {% if request.user.is_authenticated  %}
+                        {{ request.user.username }} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
+                    {% else %}
+                        <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
+                    {% endif %}
+                </li>
+                
             </ul>
             
             <br clear="both" />

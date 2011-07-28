@@ -142,6 +142,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.static",
+    "django.core.context_processors.request",    
     "django.contrib.messages.context_processors.messages",
     "mzalendo.core.context_processors.add_settings",
 )
@@ -153,14 +154,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
     'django.contrib.comments',
     'django_bcrypt',
     
     'registration_defaults',
     'registration',
     
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+
     'south',
     'tasks',
     'core',
@@ -204,3 +206,5 @@ BCRYPT_ENABLED_UNDER_TEST = False
 # Number of rounds to use for bcrypt hashing. Defaults to 12.
 BCRYPT_ROUNDS = 12
 
+# How long does the user have to activate their account?
+ACCOUNT_ACTIVATION_DAYS = 7
