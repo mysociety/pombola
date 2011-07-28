@@ -156,6 +156,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.comments',
+    'django_bcrypt',
     
     'south',
     'tasks',
@@ -188,3 +189,15 @@ LOGGING = {
         },
     }
 }
+
+# configure the bcrypt settings
+# Enables bcrypt hashing when ``User.set_password()`` is called.
+BCRYPT_ENABLED = True
+
+# Enables bcrypt hashing when running inside Django
+# TestCases. Defaults to False, to speed up user creation.
+BCRYPT_ENABLED_UNDER_TEST = False
+
+# Number of rounds to use for bcrypt hashing. Defaults to 12.
+BCRYPT_ROUNDS = 12
+
