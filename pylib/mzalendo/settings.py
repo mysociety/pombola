@@ -158,6 +158,9 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django_bcrypt',
     
+    'registration_defaults',
+    'registration',
+    
     'south',
     'tasks',
     'core',

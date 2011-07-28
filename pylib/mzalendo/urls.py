@@ -25,6 +25,11 @@ urlpatterns = patterns('core.views',
     url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),
 )
 
+# Accounts
+urlpatterns += patterns('',
+    (r'^accounts/', include('registration.backends.default.urls')),
+)
+
 # Comments
 urlpatterns += patterns('',
     (r'^comments/', include('django.contrib.comments.urls')),

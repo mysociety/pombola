@@ -10,3 +10,9 @@
 [submodule "external/django-bcrypt"]
 	path = external/django-bcrypt
 	url = https://github.com/dwaiter/django-bcrypt
+[submodule "external/django-registration-defaults"]
+	path = external/django-registration-defaults
+	url = https://github.com/yourcelf/django-registration-defaults.git
+[submodule "external/django-registration"]
+	path = external/django-registration
+	url = https://github.com/CoatedMoose/django-registration.git
