@@ -84,6 +84,9 @@ strong {
 small {
   font-size: 75%; }
 
+th, td {
+  padding: 0.25em; }
+
 #header {
   padding: 0.5em;
   background-color: #555;
@@ -205,7 +208,8 @@ form label {
   font-size: 80%; }
 form li, form p {
   padding: 0 1em; }
-form ul.errorlist, form p.error {
+
+ul.errorlist, p.error {
   background-color: #fcc; }
 
 dl.comments dt, dl.comments dd {
