@@ -1,6 +1,8 @@
 <dl class="comments">
   {% for comment in comment_list %}
     <dt id="comment_{{ comment.id }}">
+        <strong>{{ comment.title }}</strong>
+        by
         <strong>{{ comment.name }}</strong>
         <small title="{{ comment.submit_date }}">{{ comment.submit_date|timesince }} ago</small>
     </dt>

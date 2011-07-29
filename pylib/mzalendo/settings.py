@@ -154,7 +154,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.comments',
     'django_bcrypt',
     
     'registration_defaults',
@@ -164,9 +163,13 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'south',
+
+    'mz_comments',
     'tasks',
     'core',
 )
+
+COMMENTS_APP = 'mz_comments'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
