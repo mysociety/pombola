@@ -38,12 +38,7 @@
     {% endfor %}
     </ul>
 
-    <h2>Comments</h2>
-
-    {% render_comment_list for object %}
-
-    {% render_comment_form for object %}
-
+    {% include 'comments/detail_page_comments.html' %}
 
 {% endblock %}
 

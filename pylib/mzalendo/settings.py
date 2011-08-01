@@ -164,7 +164,9 @@ INSTALLED_APPS = (
 
     'south',
 
+    'django.contrib.comments',
     'mz_comments',
+
     'tasks',
     'core',
 )
