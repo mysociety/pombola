@@ -9,13 +9,13 @@
 	url = git://github.com/evdb/django-date-extensions.git
 [submodule "external/django-bcrypt"]
 	path = external/django-bcrypt
-	url = https://github.com/dwaiter/django-bcrypt
+	url = git://github.com/dwaiter/django-bcrypt.git
 [submodule "external/django-registration-defaults"]
 	path = external/django-registration-defaults
-	url = https://github.com/yourcelf/django-registration-defaults.git
+	url = git://github.com/yourcelf/django-registration-defaults.git
 [submodule "external/django-registration"]
 	path = external/django-registration
-	url = https://github.com/CoatedMoose/django-registration.git
+	url = git://github.com/CoatedMoose/django-registration.git
 [submodule "external/django-webtest"]
 	path = external/django-webtest
-	url = https://github.com/kmike/django-webtest.git
+	url = git://github.com/kmike/django-webtest.git
