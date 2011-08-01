@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django_date_extensions.fields import ApproximateDate
 from django.contrib.contenttypes.models import ContentType
 
+import pprint
+
 class CommentsCase(WebTest):
     def setUp(self):
         self.person, created = models.Person.objects.get_or_create(
@@ -28,7 +30,7 @@ class CommentsCase(WebTest):
         person = self.person
         app = self.app
         response = app.get( person.get_absolute_url() )
-        self.assertEqual(response.status_code, 200)                
+        self.assertEqual(response.status_int, 200)                
         
         # check that anon can't leave comments
         self.assertTemplateNotUsed( response, 'comments/form.html' )
@@ -36,11 +38,15 @@ class CommentsCase(WebTest):
         
         # check that there is now a comment form
         response = app.get( person.get_absolute_url(), user=self.test_user )
-        self.assertEqual(response.status_code, 200)                
         self.assertTemplateUsed( response, 'comments/form.html' )
         
         # leave a comment
-                
+        form = response.form
+        form['title']   = 'Test Title'
+        form['comment'] = 'Test comment'
+        form_response = form.submit()
+        self.assertEqual(response.context['user'].username, 'test-admin')
+
         # check that the comment is pending review
         # check it is not visible on site
         
