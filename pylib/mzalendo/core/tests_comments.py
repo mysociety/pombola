@@ -1,6 +1,6 @@
 import settings
 
-from django.test  import TestCase
+from django_webtest import WebTest
 from core         import models
 from tasks.models import Task
 from django.test.client import Client
@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django_date_extensions.fields import ApproximateDate
 from django.contrib.contenttypes.models import ContentType
 
-class CommentsCase(TestCase):
+class CommentsCase(WebTest):
     def setUp(self):
         self.person, created = models.Person.objects.get_or_create(
             first_name = 'Test',
@@ -26,21 +26,16 @@ class CommentsCase(TestCase):
     def test_leaving_comment(self):
         # go to the person and check that there are no comments
         person = self.person
-        c = Client()
-        response = c.get( person.get_absolute_url() )
+        app = self.app
+        response = app.get( person.get_absolute_url() )
         self.assertEqual(response.status_code, 200)                
         
         # check that anon can't leave comments
         self.assertTemplateNotUsed( response, 'comments/form.html' )
         self.assertContains( response, "login to leave a comment" )
         
-        # signin
-        self.assertTrue(
-            c.login( username='test-admin', password='secret')
-        )
-        
         # check that there is now a comment form
-        response = c.get( person.get_absolute_url() )
+        response = app.get( person.get_absolute_url(), user=self.test_user )
         self.assertEqual(response.status_code, 200)                
         self.assertTemplateUsed( response, 'comments/form.html' )
         
