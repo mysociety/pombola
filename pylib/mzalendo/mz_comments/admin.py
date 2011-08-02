@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.comments.admin import CommentsAdmin
 from mz_comments.models import CommentWithTitle
 
-class CommentWithTitleAdmin(admin.ModelAdmin):
+class CommentWithTitleAdmin(CommentsAdmin):
     pass
 
 # Only register the default admin if the model is the built-in comment model

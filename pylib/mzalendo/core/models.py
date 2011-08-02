@@ -5,6 +5,7 @@ from django.contrib.gis.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+from django.contrib.comments.moderation import CommentModerator, moderator
 
 from tasks.models import Task
 
@@ -14,7 +15,6 @@ add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateFi
 add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointField"])
 
 date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
-
 
 class ContactKind(models.Model):
     name            = models.CharField(max_length=200, unique=True)
@@ -257,3 +257,18 @@ class Position(models.Model):
     
     def __unicode__(self):
         return "%s (%s at %s)" % ( self.title, self.person.name(), self.organisation.name )
+
+
+
+class GenericModerator(CommentModerator):
+    email_notification = False
+
+    def moderate(self, comment, content_object, request):
+        """Always require moderation"""
+        return True
+
+# this models.py might be getting loaded several times
+# http://stackoverflow.com/questions/3277474//3343654#3343654
+if Person not in moderator._registry:
+    moderator.register(Person, GenericModerator)
+
