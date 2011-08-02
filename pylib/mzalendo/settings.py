@@ -213,3 +213,6 @@ BCRYPT_ROUNDS = 12
 
 # How long does the user have to activate their account?
 ACCOUNT_ACTIVATION_DAYS = 7
+
+# After login go to home page
+LOGIN_REDIRECT_URL = '/'
