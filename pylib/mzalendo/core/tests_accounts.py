@@ -24,6 +24,13 @@ class AccountTest(WebTest):
               .click( description='Need an account' )
         )
         
+        # TODO - allow better usernames.
+        #
+        # Django (since 1.2) has allowed more chars in usernames but the
+        # registration app has lagged behind:
+        # https://bitbucket.org/ubernostrum/django-registration/issue/80/username-regex-shouldnt-be-more
+
+
         # create an account
         form = res.form
         form['username']  = 'test_user'
