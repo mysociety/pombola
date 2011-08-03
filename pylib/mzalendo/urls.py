@@ -23,6 +23,7 @@ urlpatterns = patterns('core.views',
 
     url(r'^organisation/is/(?P<slug>[-\w]+)/', 'organisation_kind', name='organisation_kind'),
     url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),
+
 )
 
 # Accounts
@@ -33,6 +34,11 @@ urlpatterns += patterns('',
 # Comments
 urlpatterns += patterns('',
     (r'^comments/', include('django.contrib.comments.urls')),
+)
+
+# Info pages
+urlpatterns += patterns('',
+    (r'^info/', include('info.urls')),
 )
 
 # Admin

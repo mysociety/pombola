@@ -167,6 +167,7 @@ INSTALLED_APPS = (
     'mz_comments',
     'django.contrib.comments',
 
+    'info',
     'tasks',
     'core',
 )
@@ -216,3 +217,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 # After login go to home page
 LOGIN_REDIRECT_URL = '/'
+
+
+# for the info app
+INFO_CONTENT_DIRECTORY = os.path.join( base_dir, "external/wiki_content" )
