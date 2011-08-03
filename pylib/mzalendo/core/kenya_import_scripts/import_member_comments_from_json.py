@@ -18,7 +18,7 @@ from pprint import pprint
 from core.models import Person
 
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
-from django.contrib.comments.models import Comment
+from mz_comments import CommentWithTitle
 from django.contrib.sites.models import Site
 
 comments = simplejson.loads( sys.stdin.read() )
@@ -34,11 +34,10 @@ for old_comment in comments:
         print "'%s' not found in db" % old_comment['MemberID']
         continue
 
-    comment_content = (old_comment['Subject'] or '') + '\n\n' + (old_comment['Comment'] or '')
-    comment_content = re.sub( '^\s+', '', comment_content)
-    comment_content = re.sub( '\s+$', '', comment_content)
+    comment_title   = old_comment['Subject'] or ''
+    comment_content = old_comment['Comment'] or ''
 
-    comment = Comment(
+    comment = CommentWithTitle(
         content_type = ContentType.objects.get_for_model(member),
         object_pk    = member.id,
         site_id      = site.id,
@@ -46,7 +45,8 @@ for old_comment in comments:
         user_email   = old_comment['Email'],
         user_url     = old_comment['Website'],        
 
-        comment         = comment_content,
+        title           = comment_title.strip(),
+        comment         = comment_content.strip(),
         submit_date     = old_comment['Date'],
         ip_address      = old_comment['IPAddress'],
     )
