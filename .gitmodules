@@ -21,4 +21,4 @@
 	url = git://github.com/kmike/django-webtest.git
 [submodule "external/wiki_content"]
 	path = external/wiki_content
-	url = git@github.com:mysociety/mzalendo.wiki.git
+	url = git://github.com:mysociety/mzalendo.wiki.git
