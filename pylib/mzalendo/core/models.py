@@ -264,8 +264,14 @@ class GenericModerator(CommentModerator):
     email_notification = False
 
     def moderate(self, comment, content_object, request):
-        """Always require moderation"""
-        return True
+        """Require moderation unless user is in Trusted group"""
+        user = request.user
+
+        try:
+            user.groups.get(name='Trusted')
+            return False
+        except:
+            return True
 
 # this models.py might be getting loaded several times
 # http://stackoverflow.com/questions/3277474//3343654#3343654

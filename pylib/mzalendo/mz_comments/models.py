@@ -6,3 +6,6 @@ class CommentWithTitle(Comment):
     
     class Meta():
         ordering = ['-submit_date']
+        permissions = (
+            ("can_post_without_moderation", "Can post comments without moderation"),
+        )
