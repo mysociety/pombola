@@ -22,3 +22,6 @@
 [submodule "external/wiki_content"]
 	path = external/wiki_content
 	url = git://github.com/mysociety/mzalendo.wiki.git
+[submodule "external/sorl-thumbnail"]
+	path = external/sorl-thumbnail
+	url = git://github.com/sorl/sorl-thumbnail.git
