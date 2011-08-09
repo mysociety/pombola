@@ -168,6 +168,8 @@ INSTALLED_APPS = (
     'django.contrib.comments',
 
     'images',
+    'sorl.thumbnail',
+
     'info',
     'tasks',
     'core',

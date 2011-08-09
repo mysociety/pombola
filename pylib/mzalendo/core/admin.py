@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.generic import GenericTabularInline
 from django import forms
 
+from images.admin import ImageAdminInline
+
 def create_admin_link_for(obj, link_text):
     url = reverse(
         'admin:%s_%s_change' % ( obj._meta.app_label, obj._meta.module_name),
@@ -86,7 +88,7 @@ class PositionInlineAdmin(admin.TabularInline):
 
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("first_name","last_name")}
-    inlines       = [ PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ]
+    inlines       = [ PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ]
     list_display  = [ 'slug', 'name', 'date_of_birth' ]
     search_fields = ['first_name', 'last_name']
 
