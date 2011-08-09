@@ -17,7 +17,7 @@ class Image(models.Model):
     image = ImageField( upload_to="images" )
 
     # added
-    source = models.TextField()
+    source = models.CharField(max_length=400)
     # user
     
     is_primary = models.BooleanField( default=False )
