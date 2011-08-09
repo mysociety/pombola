@@ -167,6 +167,7 @@ INSTALLED_APPS = (
     'mz_comments',
     'django.contrib.comments',
 
+    'images',
     'info',
     'tasks',
     'core',
