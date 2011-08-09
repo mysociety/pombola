@@ -47,11 +47,13 @@ urlpatterns += patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 
-# server static files if needed
+# serve media_root files if needed (/static served in dev by runserver)
 if settings.SERVE_STATIC_FILES:
     urlpatterns += patterns('',
-        (   r'^static/(?P<path>.*)$',
+        (   r'^media_root/(?P<path>.*)$',
             'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT }
         ),
     )
+
+
