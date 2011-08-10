@@ -7,9 +7,6 @@
 [submodule "external/django-date-extensions"]
 	path = external/django-date-extensions
 	url = git://github.com/evdb/django-date-extensions.git
-[submodule "external/django-bcrypt"]
-	path = external/django-bcrypt
-	url = git://github.com/dwaiter/django-bcrypt.git
 [submodule "external/django-registration-defaults"]
 	path = external/django-registration-defaults
 	url = git://github.com/yourcelf/django-registration-defaults.git
