@@ -13,9 +13,6 @@
 [submodule "external/django-registration"]
 	path = external/django-registration
 	url = git://github.com/CoatedMoose/django-registration.git
-[submodule "external/django-webtest"]
-	path = external/django-webtest
-	url = git://github.com/kmike/django-webtest.git
 [submodule "external/wiki_content"]
 	path = external/wiki_content
 	url = git://github.com/mysociety/mzalendo.wiki.git
