@@ -47,4 +47,12 @@ class Image(models.Model):
             for sibling in primary_siblings:
                 sibling.is_primary = False
                 sibling.save()
-                
+
+
+class HasImageMixin():
+
+    def primary_image(self):
+        primary = self.images.filter(is_primary=True)
+        if primary.count():
+            return primary[0].image
+        return None

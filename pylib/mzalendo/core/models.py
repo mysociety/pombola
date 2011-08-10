@@ -1,5 +1,6 @@
 import datetime
 import re
+from warnings import warn
 
 from django.contrib.gis.db import models
 from django.contrib.contenttypes.models import ContentType
@@ -8,6 +9,7 @@ from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from django.contrib.comments.moderation import CommentModerator, moderator
 
 from tasks.models import Task
+from images.models import HasImageMixin, Image
 
 # tell South how to handle the custom fields 
 from south.modelsinspector import add_introspection_rules
@@ -94,7 +96,8 @@ class PersonManager(models.GeoManager):
     def get_query_set(self):
         return PersonQuerySet(self.model)
 
-class Person(models.Model):
+
+class Person(models.Model, HasImageMixin):
     first_name      = models.CharField(max_length=100)
     middle_names    = models.CharField(max_length=100, blank=True)
     last_name       = models.CharField(max_length=100)
@@ -107,6 +110,7 @@ class Person(models.Model):
     # tribe
 
     contacts = generic.GenericRelation(Contact)
+    images   = generic.GenericRelation(Image)
     objects  = PersonManager()
     
     def name(self):
