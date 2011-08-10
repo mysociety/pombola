@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% load comments %}
+{% load thumbnail %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
 
+    {% spaceless %}    
     <div class="person_photo">
-        <img src="http://dummyimage.com/200x200/ddd/888.png" />
+        {% thumbnail object.primary_image "200x200" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% empty %}
+            <img src="http://dummyimage.com/200x200/ddd/888.png" />
+        {% endthumbnail %}
     </div>
+    {% endspaceless %}
+    
 
     <h1>{{ object.name }}</h1>
 
