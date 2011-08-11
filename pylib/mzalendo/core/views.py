@@ -63,7 +63,6 @@ def position(request, slug):
         title
             .position_set
             .all()
-            .distinct('person')
             .order_by('person__first_name', 'person__last_name')
     )
     
