@@ -36,15 +36,23 @@ for obj in objects:
     try:
         person = models.Person.objects.get(original_id=member_id)
     except models.Person.DoesNotExist:
+        print "Could not find %s - ignoring" % person
         continue
 
     url = 'http://mzalendo.com/Images/%s' % image_link
 
-    print "Fetching image for '%s': '%s'" % ( person, url )
 
+    source_string = "Original Mzalendo.com website (%s)" % image_link
+
+    # check to see if this photo has already been used
+    if Image.objects.filter(source=source_string).count():
+        print "Skipping %s - image already used" % person
+        continue
+
+    print "Fetching image for '%s': '%s'" % ( person, url )
     person_image = Image(
         content_object = person,
-        source = "Original Mzalendo.com website (%s)" % image_link,
+        source = source_string,
     )
     person_image.image.save(
         name    = image_link,
