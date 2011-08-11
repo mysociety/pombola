@@ -33,7 +33,10 @@ for obj in objects:
     if not image_link:
         continue
 
-    person = models.Person.objects.get(original_id=member_id)
+    try:
+        person = models.Person.objects.get(original_id=member_id)
+    except models.Person.DoesNotExist:
+        continue
 
     url = 'http://mzalendo.com/Images/%s' % image_link
 
