@@ -1,12 +1,26 @@
+{% load switch %}
+
 {% if contacts %}
 
 <ul class="contacts">
 
     {% for c in contacts %}
         <li class="{{ c.kind.slug }}">
+
             {{ c.kind.name }}:
-            {{ c.value }}
+
+            {% switch c.kind.slug %}
+
+                {% case 'phone' %}
+                    <a href="tel:{{ c.value }}">{{ c.value }}</a>
+                    
+                {% else %}
+                    {{ c.value|urlizetrunc:50 }}
+    
+            {% endswitch %}
+
             {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
+
         </li>
     {% endfor %}
 

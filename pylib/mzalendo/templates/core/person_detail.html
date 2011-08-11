@@ -11,7 +11,7 @@
         {% thumbnail object.primary_image "200x200" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
         {% empty %}
-            <img src="http://dummyimage.com/200x200/ddd/888.png" />
+            <img src="http://dummyimage.com/200x200/ddd/888.png" height="200" width="200" />
         {% endthumbnail %}
     </div>
     {% endspaceless %}
