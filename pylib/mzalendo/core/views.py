@@ -59,7 +59,13 @@ def position(request, slug):
         slug=slug
     )
     
-    positions =  title.position_set.all().order_by('person__first_name', 'person__last_name')
+    positions =  (
+        title
+            .position_set
+            .all()
+            .distinct('person')
+            .order_by('person__first_name', 'person__last_name')
+    )
     
     return object_list(
         request,
