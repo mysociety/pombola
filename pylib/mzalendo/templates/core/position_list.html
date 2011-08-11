@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block title %}{{ title.name }}{% endblock %}
 
@@ -15,7 +16,11 @@
         <li>
 
             <div class="thumb">
-                <img src="http://dummyimage.com/60x60/ddd/888.png" />
+                {% thumbnail object.person.primary_image "60x60" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                {% empty %}
+                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
+                {% endthumbnail %}
             </div>
 
             <div class="name">
