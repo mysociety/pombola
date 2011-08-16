@@ -3,25 +3,25 @@
 {% load pagination_tags %}
 
 {% block title %}
-Comments on {{ object.name }}
+    Comments on {{ object.name }}
 {% endblock %}
 
 {% block content %}
-<h2>Comments on <a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h2>
 
+    {% get_comment_list for object as comment_list %}
+    {% autopaginate comment_list %}
+    
 
-{% get_comment_list for object as comment_list %}
-{% autopaginate comment_list 5 %}
-
-{% paginate %}
-
-{% include 'comments/list.html' %}
-
-{% paginate %}
-
-{% if request.user.is_authenticated %}
-    {% render_comment_form for object %}
-{% else %}
-    <p>Please login to leave a comment</p>
-{% endif %}
+    <h2>Comments {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ paginator.count }} on <a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h2>
+    
+        
+    {% include 'comments/list.html' %}
+    
+    {% paginate %}
+    
+    {% if request.user.is_authenticated %}
+        {% render_comment_form for object %}
+    {% else %}
+        <p>Please login to leave a comment</p>
+    {% endif %}
 {% endblock %}
