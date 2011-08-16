@@ -1,11 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 <html>
     <head>
         <title>{% block title %}{% endblock %} :: Mzalendo</title>
         <link href="{{ STATIC_URL }}main.css" media="screen" rel="stylesheet" type="text/css" /> 
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     </head>
     <body>
+
+        {% include 'staging_header.html' %}
 
 
         <div id="header">
@@ -34,8 +37,6 @@
             <br clear="both" />
 
         </div>
-
-        {% include 'staging_header.html' %}
 
         <div id="content">
             {% block content %}
