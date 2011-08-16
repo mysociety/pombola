@@ -6,18 +6,13 @@
 
 {% block content %}
 
-    {% spaceless %}    
-    <div class="person_photo">
-        {% thumbnail object.primary_image "200x200" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-        {% empty %}
-            <img src="http://dummyimage.com/200x200/ddd/888.png" height="200" width="200" />
-        {% endthumbnail %}
-    </div>
-    {% endspaceless %}
-    
-
     <h1>{{ object.name }}</h1>
+
+
+    {% thumbnail object.primary_image "200x200" as im %}
+        <img  class="person_photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+    {% endthumbnail %}
+    
 
     {% include "core/contact_list.html" with contacts=object.contacts.all %}
 

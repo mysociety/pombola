@@ -194,9 +194,8 @@ div.action_button {
   border: 1px solid #bbb;
   background-color: #eee; }
 
-div.person_photo {
-  border: 1px solid #888;
-  float: right; }
+img.person_photo {
+  border: 1px solid #888; }
 
 form blockquote {
   padding: 1em;
