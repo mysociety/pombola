@@ -231,7 +231,6 @@ div.pagination {
   div.pagination .current {
     border-color: #888;
     background-color: #ccc;
-    padding: 0.2em;
     font-weight: bold; }
   div.pagination .disabled {
     border-color: #ddd;
