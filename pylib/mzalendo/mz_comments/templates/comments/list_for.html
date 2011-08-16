@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load comments %}
+{% load pagination_tags %}
 
 {% block title %}
 Comments on {{ object.name }}
@@ -8,7 +9,15 @@ Comments on {{ object.name }}
 {% block content %}
 <h2>Comments on <a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h2>
 
-{% render_comment_list for object %}
+
+{% get_comment_list for object as comment_list %}
+{% autopaginate comment_list 5 %}
+
+{% paginate %}
+
+{% include 'comments/list.html' %}
+
+{% paginate %}
 
 {% if request.user.is_authenticated %}
     {% render_comment_form for object %}

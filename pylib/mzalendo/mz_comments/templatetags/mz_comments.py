@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 register = template.Library()
 
 @register.simple_tag
-def get_comment_list_url(object, page=1):
+def get_comment_list_url(object):
     """
     Create the url to the comments for the given object.
 
@@ -22,7 +22,6 @@ def get_comment_list_url(object, page=1):
         kwargs = {
             'slug':    object.slug,
             'module_name': object._meta.module_name,
-            'page':  page,
         }
     )
 

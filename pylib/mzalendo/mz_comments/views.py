@@ -5,7 +5,7 @@ from django.db.models import Count
 
 from django.contrib.contenttypes.models import ContentType
 
-def list_for(request, module_name, slug, page=1):
+def list_for(request, module_name, slug):
     """Display comments"""
 
     # retrieve the content_type that we need
