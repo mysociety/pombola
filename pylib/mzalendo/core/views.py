@@ -63,6 +63,7 @@ def position(request, slug):
         title
             .position_set
             .all()
+            .currently_active()
             .order_by('person__first_name', 'person__last_name')
     )
     

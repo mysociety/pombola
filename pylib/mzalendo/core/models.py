@@ -7,6 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from django.contrib.comments.moderation import CommentModerator, moderator
+from django.db.models import Q
 
 from tasks.models import Task
 from images.models import HasImageMixin, Image
@@ -87,10 +88,10 @@ class PersonQuerySet(models.query.GeoQuerySet):
         )
 
 
-
     def is_mp(self):
         mp_title = PositionTitle.objects.get(slug='mp')
         return self.filter( position__title=mp_title )
+
 
 class PersonManager(models.GeoManager):
     def get_query_set(self):
@@ -221,8 +222,26 @@ class PositionTitle(models.Model):
     
     class Meta:
        ordering = ["slug"]      
-    
-    
+
+
+class PositionQuerySet(models.query.GeoQuerySet):
+    def currently_active(self):
+        """Filter on start and end dates to limit to currently active postitions"""
+        now = datetime.date.today()
+        now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day )
+
+        return (
+            self
+              .filter( Q(start_date__lte=now_approx) | Q(start_date='') )
+              .filter( Q(  end_date__gte=now_approx) | Q(  end_date='') )
+        )
+        
+
+class PositionManager(models.GeoManager):
+    def get_query_set(self):
+        return PositionQuerySet(self.model)
+
+
 class Position(models.Model):
     person          = models.ForeignKey('Person')
     organisation    = models.ForeignKey('Organisation')
@@ -231,6 +250,8 @@ class Position(models.Model):
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date        = ApproximateDateField(blank=True, help_text=date_help_text)
     
+    objects = PositionManager()
+
     def display_start_date(self):
         """Return text that represents the start date"""
         if self.start_date:

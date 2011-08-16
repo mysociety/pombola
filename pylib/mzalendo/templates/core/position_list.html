@@ -16,23 +16,20 @@
 
     <ul class="position">
     {% for position in object_list %}
-        {% ifchanged %}
-            <li>
-    
-                <div class="thumb">
-                    {% thumbnail position.person.primary_image "60x60" crop="center" as im %}
-                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                    {% empty %}
-                        <img src="http://dummyimage.com/60x60/ddd/888.png" />
-                    {% endthumbnail %}
-                </div>
-    
-                <div class="name">
-                    <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>
-                </div>
-            </li>
-        {% endifchanged %}
-
+        <li>
+        
+            <div class="thumb">
+                {% thumbnail position.person.primary_image "60x60" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                {% empty %}
+                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
+                {% endthumbnail %}
+            </div>
+        
+            <div class="name">
+                <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>
+            </div>
+        </li>
     {% empty %}
         <li>There are none in the system yet</li>
     {% endfor %}
