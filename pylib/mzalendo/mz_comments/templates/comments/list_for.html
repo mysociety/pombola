@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load comments %}
+
+{% block title %}
+Comments on {{ object.name }}
+{% endblock %}
+
+{% block content %}
+<h2>Comments on <a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h2>
+
+{% render_comment_list for object %}
+
+{% if request.user.is_authenticated %}
+    {% render_comment_form for object %}
+{% else %}
+    <p>Please login to leave a comment</p>
+{% endif %}
+{% endblock %}

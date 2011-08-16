@@ -32,8 +32,8 @@ urlpatterns += patterns('',
 )
 
 # Comments
-urlpatterns += patterns('',
-    (r'^comments/', include('django.contrib.comments.urls')),
+urlpatterns += patterns('',    
+    (r'^comments/', include('mz_comments.urls')),
 )
 
 # Info pages
