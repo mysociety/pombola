@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load comments %}
+{% load mz_comments %}
 {% load pagination_tags %}
 
 {% block title %}
@@ -14,14 +15,16 @@
 
     <h2>Comments {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ paginator.count }} on <a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h2>
     
+
+    {% if request.user.is_authenticated %}
+        <p><a href="{% get_comment_add_url object %}">Add your own comment</a>.</p>
+    {% else %}
+        <p>Please <a href="{% url django.contrib.auth.views.login %}?next={% get_comment_add_url object %}">login to add your own comment</a>.</p>
+    {% endif %}
+    
         
     {% include 'comments/list.html' %}
     
     {% paginate %}
     
-    {% if request.user.is_authenticated %}
-        {% render_comment_form for object %}
-    {% else %}
-        <p>Please login to leave a comment</p>
-    {% endif %}
 {% endblock %}

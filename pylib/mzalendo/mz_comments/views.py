@@ -5,19 +5,35 @@ from django.db.models import Count
 
 from django.contrib.contenttypes.models import ContentType
 
+def get_object(module_name, slug):
+    # retrieve the content_type that we need
+    ct = get_object_or_404( ContentType, model=module_name )
+
+    # retrieve the object
+    obj = get_object_or_404( ct.model_class(), slug=slug )
+
+    return obj
+    
+
 def list_for(request, module_name, slug):
     """Display comments"""
 
-    # retrieve the content_type that we need
-    ct = ContentType.objects.get(model=module_name)
-
-    # retrieve the object
-    obj = ct.get_object_for_this_type( slug=slug )
-
-    # 
+    obj = get_object( module_name, slug )
 
     return render_to_response(
         'comments/list_for.html',
+        {
+            'object': obj,
+        },
+        context_instance=RequestContext(request)
+    )
+
+def add(request, module_name, slug):
+
+    obj = get_object( module_name, slug )
+
+    return render_to_response(
+        'comments/add.html',
         {
             'object': obj,
         },

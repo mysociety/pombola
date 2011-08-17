@@ -25,3 +25,20 @@ def get_comment_list_url(object):
         }
     )
 
+@register.simple_tag
+def get_comment_add_url(object):
+    """
+    Create the url to the comments for the given object.
+
+    Example::
+        {{ get_comment_list_url object }}
+    """
+
+    return reverse(
+        'mz_comments.views.add',
+        kwargs = {
+            'slug':    object.slug,
+            'module_name': object._meta.module_name,
+        }
+    )
+
