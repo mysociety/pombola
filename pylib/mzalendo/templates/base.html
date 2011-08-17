@@ -40,7 +40,13 @@
 
         <div id="footer">
 
-            <ul>
+            <ul class="nav">
+                <li><a href="{% url person_list %}">people</a></li>
+                <li><a href="{% url organisation_list %}">organisations</a></li>
+                <li><a href="{% url place_list %}">places</a></li>
+            </ul>
+
+            <ul class="utilities">
                 <li><a href="https://github.com/mysociety/mzalendo/issues">issues</a></li>
                 <li><a href="https://github.com/mysociety/mzalendo/wiki">wiki</a></li>
                 <li><a href="{% url admin:index %}">admin</a></li>

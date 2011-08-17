@@ -112,7 +112,6 @@ th, td {
   margin-top: 2em;
   border-top: 1px dotted #bbb;
   padding: 0.5em;
-  font-size: 75%;
   color: #888;
   text-align: center; }
   #footer a {
@@ -122,7 +121,9 @@ th, td {
     text-decoration: underline; }
   #footer ul li {
     display: inline;
-    padding: 0 0.5em; }
+    margin: 0 0.3em; }
+  #footer ul.utilities li {
+    font-size: 75%; }
 
 ul.person li {
   border-bottom: 1px dashed #bbb;
