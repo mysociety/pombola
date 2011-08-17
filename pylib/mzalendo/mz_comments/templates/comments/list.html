@@ -5,6 +5,8 @@
         by
         <strong>{{ comment.name }}</strong>
         <small title="{{ comment.submit_date }}">{{ comment.submit_date|timesince }} ago</small>
+        <a class="flag" href="/comments/flag/{{ comment.id }}">Report</a>
+        <br clear="both">
     </dt>
     <dd>
         <p>{{ comment.comment|linebreaksbr }}</p>

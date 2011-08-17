@@ -218,6 +218,8 @@ dl.comments dt {
   background-color: #ccc; }
 dl.comments dd {
   margin-bottom: 1em; }
+dl.comments a.flag {
+  float: right; }
 
 div.pagination {
   margin-bottom: 1em;
