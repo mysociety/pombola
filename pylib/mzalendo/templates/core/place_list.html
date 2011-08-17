@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load pagination_tags %}
+
 
 {% block title %}Places{% endblock %}
 
@@ -7,6 +9,7 @@
     <h1>Places</h1>
 
     <ul class='place'>
+    {% autopaginate object_list %}
     {% for object in object_list %}
         <li>
             <div class="thumb">
@@ -24,6 +27,8 @@
         <li>There are no places in the system yet</li>
     {% endfor %}
     </ul>
+
+    {% paginate %}
 
 {% endblock %}
 

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+{% load pagination_tags %}
 
 {% block title %}People{% endblock %}
 
@@ -8,6 +9,8 @@
     <h1>People</h1>
 
     <ul class="person">
+
+    {% autopaginate object_list %}
     {% for object in object_list %}
         <li>
             <div class="thumb">
@@ -33,6 +36,8 @@
         <li>There are no people in the system yet</li>
     {% endfor %}
     </ul>
+
+    {% paginate %}
 
 {% endblock %}
 

@@ -232,5 +232,5 @@ INFO_CONTENT_DIRECTORY = os.path.join( base_dir, "external/wiki_content" )
 # pagination related settings
 PAGINATION_DEFAULT_PAGINATION      = 10
 PAGINATION_DEFAULT_WINDOW          = 2
-PAGINATION_DEFAULT_ORPHANS         = 0
+PAGINATION_DEFAULT_ORPHANS         = 2
 PAGINATION_INVALID_PAGE_RAISES_404 = True
