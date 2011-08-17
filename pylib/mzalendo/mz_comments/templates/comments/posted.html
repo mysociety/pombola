@@ -1,8 +1,21 @@
 {% extends "comments/base.html" %}
 {% load i18n %}
+{% load mz_comments %}
 
-{% block title %}{% trans "Thanks for commenting" %}.{% endblock %}
+{% block title %}
+    {% trans "Thanks for commenting" %}.
+{% endblock %}
 
 {% block content %}
   <h1>{% trans "Thank you for your comment" %}.</h1>
+  
+  {% if comment.is_public %}
+    <p>Your comment has been posted on the site - you can see it on the <a href="{% get_comment_list_url comment.content_object %}">{{ comment.content_object.name }}</a> comments page.</p>
+  {% else %}
+    <p>Your comment is in a moderation queue and will be checked soon. Until then it will not be visible on the site.</p>
+
+    <p>Return to the <a href="{% get_comment_list_url comment.content_object %}">{{ comment.content_object.name }}</a> comments page.</p>    
+  {% endif %}
+
+
 {% endblock %}
