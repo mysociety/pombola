@@ -2,6 +2,7 @@ from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.views.generic.list_detail import object_detail, object_list
 from django.db.models import Count
+from django.db.models import Q
 
 from mzalendo.core import models
 
@@ -113,3 +114,24 @@ def organisation_kind(request, slug):
         queryset = orgs,
         extra_context = { 'kind': org_kind, },
     )
+
+def search(request):
+    """Handle the search"""
+
+    q = request.GET.get( 'q', '' )
+    
+    if q:
+        qs = models.Person.objects.filter(Q(first_name__icontains=q) | Q(last_name__icontains=q))
+    else:
+        qs = models.Person.objects.none()
+
+    return render_to_response(
+        'core/search.html',
+        {
+            'q':       q,
+            'results': qs,
+        },
+        context_instance=RequestContext(request)
+    )
+    
+

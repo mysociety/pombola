@@ -104,6 +104,10 @@ th, td {
       display: inline;
       padding-left: 1em;
       font-size: 75%; }
+  #header form {
+    display: inline; }
+    #header form input {
+      width: 6em; }
 
 #content {
   padding: 1em; }

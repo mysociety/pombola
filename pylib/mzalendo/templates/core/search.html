@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load pagination_tags %}
+
+{% block title %}
+  Search
+  {% if q %} - {{ q }}{% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+
+    <form action="{% url search %}" method="get">
+        <input type="search" id="q" name="q" placeholder="search for..." value="{{ q }}" autofocus />
+        <input type="submit" value="Find" />
+    </form>
+
+    {% if results %}
+    
+        {% autopaginate results %}
+    
+        <h1>Results {{ page_obj.start_index }} to {{ page_obj.end_index }} for "{{ q }}"</h1>
+    
+        <ul class="person">        
+            {% for object in results %}
+            <li>
+                <div class="thumb">
+                    {% thumbnail object.primary_image "60x60" crop="center" as im %}
+                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                    {% empty %}
+                        <img src="http://dummyimage.com/60x60/ddd/888.png" />
+                    {% endthumbnail %}
+                </div>
+    
+                <div class="name">
+                    <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+                </div>
+                
+                <div class="positions">
+                    {% for position in object.position_set.all %}
+                    <span>{{ position.title.name }}, {{ position.organisation.name }};</span>
+                    {% endfor %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    
+        {% paginate %}
+    
+    {% else %}
+        {% if q %}
+            <p>There were no results for "<strong>{{ q }}</strong>" - please try a different search.</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
+

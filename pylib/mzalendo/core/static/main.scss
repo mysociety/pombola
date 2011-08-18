@@ -61,6 +61,11 @@ th, td {
             font-size: 75%;
         }
     }
+    
+    form {
+        display: inline;
+        input { width: 6em; }
+    }
 }
 
 #content {
