@@ -22,3 +22,6 @@
 [submodule "external/django-haystack"]
 	path = external/django-haystack
 	url = git://github.com/toastdriven/django-haystack.git
+[submodule "external/xapian-haystack"]
+	path = external/xapian-haystack
+	url = git://github.com/notanumber/xapian-haystack.git
