@@ -2,8 +2,19 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %} :: Mzalendo</title>
-        <link href="{{ STATIC_URL }}main.css" media="screen" rel="stylesheet" type="text/css" /> 
-        <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png">
+        {% comment %}
+
+            The 'STATIC_GENERATION_NUMBER' is used to force the caches to fetch
+            new content. To update manually change the value in settings.py.
+
+            Much better will be to use the 'CachedStaticFilesStorage' when it
+            becomes available in the next version of Django.
+
+            https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/
+        
+        {% endcomment %}
+        <link href="{{ STATIC_URL }}main.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen" rel="stylesheet" type="text/css" /> 
+        <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png?{{ settings.STATIC_GENERATION_NUMBER }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     </head>
     <body>
