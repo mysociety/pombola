@@ -19,3 +19,6 @@
 [submodule "external/sorl-thumbnail"]
 	path = external/sorl-thumbnail
 	url = git://github.com/sorl/sorl-thumbnail.git
+[submodule "external/django-haystack"]
+	path = external/django-haystack
+	url = git://github.com/toastdriven/django-haystack.git
