@@ -1,7 +1,7 @@
 import datetime
 from haystack import indexes
 from haystack import site
-from core.models import Person
+from core.models import Person, Place, Organisation
 
 
 # TODO - currently I'm using the realtime search index - which is possibly a bad
@@ -19,6 +19,14 @@ from core.models import Person
 class PersonIndex(indexes.RealTimeSearchIndex):
     text = indexes.CharField(document=True, use_template=True)
 
+class PlaceIndex(indexes.RealTimeSearchIndex):
+    text = indexes.CharField(document=True, use_template=True)
+
+class OrganisationIndex(indexes.RealTimeSearchIndex):
+    text = indexes.CharField(document=True, use_template=True)
+
 
 
 site.register(Person, PersonIndex)
+site.register(Place, PlaceIndex)
+site.register(Organisation, OrganisationIndex)
