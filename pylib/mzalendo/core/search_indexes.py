@@ -1,5 +1,5 @@
 import datetime
-from haystack.indexes import *
+from haystack import indexes
 from haystack import site
 from core.models import Person
 
@@ -16,8 +16,8 @@ from core.models import Person
 #   http://docs.haystacksearch.org/dev/best_practices.html#avoid-hitting-the-database
 
 
-class PersonIndex(RealTimeSearchIndex):
-    text = CharField(document=True, use_template=True)
+class PersonIndex(indexes.RealTimeSearchIndex):
+    text = indexes.CharField(document=True, use_template=True)
 
 
 
