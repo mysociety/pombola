@@ -30,25 +30,7 @@
 
             <ul class="listing">        
             {% for result in page.object_list %}
-                <li class="person">
-                    <div class="thumb">
-                        {% thumbnail result.object.primary_image "60x60" crop="center" as im %}
-                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                        {% empty %}
-                            <img src="http://dummyimage.com/60x60/ddd/888.png" />
-                        {% endthumbnail %}
-                    </div>
-
-                    <div class="name">
-                        <a href="{{ result.object.get_absolute_url }}">{{ result.object.name }}</a>
-                    </div>
-
-                    <div class="positions">
-                        {% for position in result.object.position_set.all %}
-                        <span>{{ position.title.name }}, {{ position.organisation.name }};</span>
-                        {% endfor %}
-                    </div>
-                </li>
+                {% include 'core/generic_list_item.html' with object=result.object %}
             {% empty %}
                 <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
             {% endfor %}
