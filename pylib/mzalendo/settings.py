@@ -15,7 +15,7 @@ try:
     from config_local import config
 except ImportError:
     from mysociety import config
-    config.set_file( os.path.abspath( base_dir + "/conf/general") )
+    config.set_file( base_dir + "/conf/general" )
 
 if int(config.get('STAGING')):
     STAGING = True
@@ -175,6 +175,8 @@ INSTALLED_APPS = (
 
     'images',
     'sorl.thumbnail',
+    
+    'haystack',
 
     'info',
     'tasks',
@@ -238,3 +240,10 @@ PAGINATION_DEFAULT_PAGINATION      = 10
 PAGINATION_DEFAULT_WINDOW          = 2
 PAGINATION_DEFAULT_ORPHANS         = 2
 PAGINATION_INVALID_PAGE_RAISES_404 = True
+
+
+# haystack config - interface to Xapian search engine
+HAYSTACK_SITECONF      = 'mzalendo.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'xapian'
+HAYSTACK_XAPIAN_PATH   = os.path.abspath( base_dir + "/../mzalendo_xapian" )
+
