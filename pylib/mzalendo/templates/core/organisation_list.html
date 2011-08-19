@@ -7,10 +7,10 @@
 
     <h1>{% if kind %}{{ kind.name_plural }}{% endif %}</h1>
 
-    <ul class="organisation">
+    <ul class="listing">
     {% autopaginate object_list %}
     {% for object in object_list %}
-        <li>
+        <li class="organisation">
             <div class="thumb">
                 <img src="http://dummyimage.com/60x60/ddd/888.png" />
             </div>

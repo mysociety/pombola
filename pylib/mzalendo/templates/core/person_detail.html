@@ -19,9 +19,9 @@
 
     <h2>Related organisations</h2>
 
-    <ul class="organisation">
+    <ul class="listing">
     {% for position in object.position_set.all %}
-        <li>
+        <li class="organisation">
             
             {% if position.is_ongoing %}<strong>{% endif %}
             {{ position.title }}

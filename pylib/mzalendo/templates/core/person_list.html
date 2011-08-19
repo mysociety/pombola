@@ -8,11 +8,11 @@
 
     <h1>People</h1>
 
-    <ul class="person">
+    <ul class="listing">
 
     {% autopaginate object_list %}
     {% for object in object_list %}
-        <li>
+        <li class="person">
             <div class="thumb">
                 {% thumbnail object.primary_image "60x60" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>

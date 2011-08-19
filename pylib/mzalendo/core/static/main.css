@@ -129,67 +129,19 @@ th, td {
   #footer ul.utilities li {
     font-size: 75%; }
 
-ul.person li {
+ul.listing li {
   border-bottom: 1px dashed #bbb;
   padding: 0.25em 0;
   overflow: hidden;
   width: 100%; }
-ul.person div.thumb {
+ul.listing div.thumb {
   height: 60px;
   width: 60px;
   color: #ddd;
   border: 1px solid #bbb;
   float: left;
   margin-right: 1em; }
-ul.person div.name {
-  font-size: 150%;
-  font-weight: bold; }
-
-ul.place li {
-  border-bottom: 1px dashed #bbb;
-  padding: 0.25em 0;
-  overflow: hidden;
-  width: 100%; }
-ul.place div.thumb {
-  height: 60px;
-  width: 60px;
-  color: #ddd;
-  border: 1px solid #bbb;
-  float: left;
-  margin-right: 1em; }
-ul.place div.name {
-  font-size: 150%;
-  font-weight: bold; }
-
-ul.position li {
-  border-bottom: 1px dashed #bbb;
-  padding: 0.25em 0;
-  overflow: hidden;
-  width: 100%; }
-ul.position div.thumb {
-  height: 60px;
-  width: 60px;
-  color: #ddd;
-  border: 1px solid #bbb;
-  float: left;
-  margin-right: 1em; }
-ul.position div.name {
-  font-size: 150%;
-  font-weight: bold; }
-
-ul.organisation li {
-  border-bottom: 1px dashed #bbb;
-  padding: 0.25em 0;
-  overflow: hidden;
-  width: 100%; }
-ul.organisation div.thumb {
-  height: 60px;
-  width: 60px;
-  color: #ddd;
-  border: 1px solid #bbb;
-  float: left;
-  margin-right: 1em; }
-ul.organisation div.name {
+ul.listing div.name {
   font-size: 150%;
   font-weight: bold; }
 

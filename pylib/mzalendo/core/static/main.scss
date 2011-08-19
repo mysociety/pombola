@@ -95,7 +95,7 @@ th, td {
     }
 }
 
-@mixin result_list () {
+ul.listing {
     li {
         border-bottom: 1px dashed #bbb;
         padding: 0.25em 0;
@@ -116,22 +116,6 @@ th, td {
         font-size: 150%;
         font-weight: bold;
     }
-}
-
-ul.person {
-    @include result_list();
-}
-
-ul.place {
-    @include result_list();
-}
-
-ul.position {
-    @include result_list();
-}
-
-ul.organisation {
-    @include result_list();
 }
 
 
