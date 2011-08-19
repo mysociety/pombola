@@ -1,0 +1,21 @@
+{% load pagination_tags %}
+
+{% if object_list %}
+
+    {% autopaginate object_list %}
+
+    <h3>Entries {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ paginator.count }}.</h3>
+
+    <ul class="listing">
+    {% for object in object_list %}
+        {% include 'core/generic_list_item.html' %}
+    {% endfor %}
+    </ul>
+    
+    {% paginate %}
+    
+{% else %}
+    <p>No results were found</p>
+    
+{% endif %}
+

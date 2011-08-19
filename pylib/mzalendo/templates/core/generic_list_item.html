@@ -1,0 +1,74 @@
+        
+{% load thumbnail %}
+{% load switch %}
+
+<li class="{{ object.css_class }}">
+
+    {% switch object.css_class %}
+
+        {% case 'position' %}
+            <div class="thumb">
+                {% thumbnail object.person.primary_image "60x60" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                {% empty %}
+                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
+                {% endthumbnail %}
+            </div>
+    
+            <div class="name">
+                <a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a>
+            </div>
+
+        {% case 'person' %}
+            <div class="thumb">
+                {% thumbnail object.primary_image "60x60" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                {% empty %}
+                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
+                {% endthumbnail %}
+            </div>
+            
+            <div class="name">
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </div>
+            
+            <div class="positions">
+                {% for position in object.position_set.all %}
+                <span>{{ position.title.name }}, {{ position.organisation.name }};</span>
+                {% endfor %}
+            </div>
+            
+        {% case 'organisation' %}
+            <div class="thumb">
+                <img src="http://dummyimage.com/60x60/ddd/888.png" />
+            </div>
+
+            <div class="name">
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </div>
+            
+            {% if object.num_positions %}
+                {{ object.num_positions }} related positions
+            {% endif %}
+        
+        {% case 'place' %}
+            <div class="thumb">
+                <img src="http://dummyimage.com/60x60/ddd/888.png" />
+            </div>
+        
+            <div class="name">
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </div>
+        
+            {{ object.kind.name }}
+        
+            
+
+        {% else %}
+            <div class="name">
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </div>            
+
+    {% endswitch %}
+
+</li>

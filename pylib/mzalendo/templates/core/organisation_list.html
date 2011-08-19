@@ -5,30 +5,15 @@
 
 {% block content %}
 
-    <h1>{% if kind %}{{ kind.name_plural }}{% endif %}</h1>
+    <h1>
+        {% if kind %}
+            {{ kind.name_plural }}
+        {% else %}
+            Organisations
+        {% endif %}
+    </h1>
 
-    <ul class="listing">
-    {% autopaginate object_list %}
-    {% for object in object_list %}
-        <li class="organisation">
-            <div class="thumb">
-                <img src="http://dummyimage.com/60x60/ddd/888.png" />
-            </div>
-
-            <div class="name">
-                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
-            </div>
-            
-            {% if object.num_positions %}
-                {{ object.num_positions }} related positions
-            {% endif %}
-        </li>
-    {% empty %}
-        <li>There are no organisations in the system yet</li>
-    {% endfor %}
-    </ul>
-
-    {% paginate %}
+    {% include 'core/generic_list.html' %}
 
 {% endblock %}
 

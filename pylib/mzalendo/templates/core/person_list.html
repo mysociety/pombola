@@ -8,36 +8,7 @@
 
     <h1>People</h1>
 
-    <ul class="listing">
-
-    {% autopaginate object_list %}
-    {% for object in object_list %}
-        <li class="person">
-            <div class="thumb">
-                {% thumbnail object.primary_image "60x60" crop="center" as im %}
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                {% empty %}
-                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
-                {% endthumbnail %}
-            </div>
-
-            <div class="name">
-                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
-            </div>
-            
-            <div class="positions">
-                {% for position in object.position_set.all %}
-                <span>{{ position.title.name }}, {{ position.organisation.name }};</span>
-                {% endfor %}
-            </div>
-
-        </li>
-    {% empty %}
-        <li>There are no people in the system yet</li>
-    {% endfor %}
-    </ul>
-
-    {% paginate %}
+    {% include 'core/generic_list.html' %}
 
 {% endblock %}
 

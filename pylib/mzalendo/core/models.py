@@ -19,7 +19,17 @@ add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointFie
 
 date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
 
-class ContactKind(models.Model):
+class ModelBase(models.Model):
+
+    def css_class(self):
+        return self._meta.module_name
+
+    class Meta:
+       abstract = True      
+
+
+
+class ContactKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
 
@@ -30,7 +40,7 @@ class ContactKind(models.Model):
        ordering = ["slug"]      
 
 
-class Contact(models.Model):
+class Contact(ModelBase):
 
     kind    = models.ForeignKey('ContactKind')
     value   = models.TextField()
@@ -54,7 +64,7 @@ class Contact(models.Model):
        ordering = ["content_type", "object_id", "kind", ]      
 
 
-class InformationSource(models.Model):
+class InformationSource(ModelBase):
     source  = models.CharField(max_length=500)
     note    = models.TextField(blank=True)
     entered = models.BooleanField(default=False, help_text="has the information in this source been entered into this system?")
@@ -98,7 +108,7 @@ class PersonManager(models.GeoManager):
         return PersonQuerySet(self.model)
 
 
-class Person(models.Model, HasImageMixin):
+class Person(ModelBase, HasImageMixin):
     first_name      = models.CharField(max_length=100)
     middle_names    = models.CharField(max_length=100, blank=True)
     last_name       = models.CharField(max_length=100)
@@ -143,7 +153,7 @@ class Person(models.Model, HasImageMixin):
        ordering = ["slug"]      
 
 
-class OrganisationKind(models.Model):
+class OrganisationKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
@@ -156,7 +166,7 @@ class OrganisationKind(models.Model):
        ordering = ["slug"]      
 
 
-class Organisation(models.Model):
+class Organisation(ModelBase):
     name    = models.CharField(max_length=200)
     slug    = models.SlugField(max_length=200, unique=True, help_text="created from name")
     kind    = models.ForeignKey('OrganisationKind')
@@ -177,7 +187,7 @@ class Organisation(models.Model):
        ordering = ["slug"]      
 
 
-class PlaceKind(models.Model):
+class PlaceKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
@@ -190,7 +200,7 @@ class PlaceKind(models.Model):
        ordering = ["slug"]      
 
 
-class Place(models.Model):
+class Place(ModelBase):
     name         = models.CharField(max_length=200)
     slug         = models.SlugField(max_length=100, unique=True, help_text="created from name")
     kind         = models.ForeignKey('PlaceKind')
@@ -210,7 +220,7 @@ class Place(models.Model):
        ordering = ["slug"]      
 
 
-class PositionTitle(models.Model):
+class PositionTitle(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
@@ -242,7 +252,7 @@ class PositionManager(models.GeoManager):
         return PositionQuerySet(self.model)
 
 
-class Position(models.Model):
+class Position(ModelBase):
     person          = models.ForeignKey('Person')
     organisation    = models.ForeignKey('Organisation')
     place           = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for an 'MP'" )
