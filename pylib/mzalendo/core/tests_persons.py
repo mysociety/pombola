@@ -1,0 +1,31 @@
+import re
+
+import settings
+
+from django.core import mail
+from django_webtest import WebTest
+from core         import models
+from django.test.client import Client
+from django.contrib.auth.models import User
+
+
+class PersonTest(WebTest):
+    def setUp(self):
+        pass
+        
+    def test_naming(self):
+        
+        # create a test person
+        person = models.Person(
+            legal_name="Alfred Smith"
+        )
+        self.assertEqual( person.name(), "Alfred Smith" )
+        
+        # Add an alternative name
+        person.other_names = "Freddy Smith"
+        self.assertEqual( person.name(), "Freddy Smith" )
+
+        # Add yet another alternative name
+        person.other_names = "Fred Smith\nFreddy Smith"
+        self.assertEqual( person.name(), "Fred Smith" )
+        
