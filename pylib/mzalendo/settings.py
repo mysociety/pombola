@@ -169,6 +169,7 @@ INSTALLED_APPS = (
 
     'south',
     'pagination',
+    'ajax_select',
 
     'mz_comments',
     'django.contrib.comments',
@@ -247,3 +248,10 @@ HAYSTACK_SITECONF      = 'mzalendo.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
 HAYSTACK_XAPIAN_PATH   = os.path.abspath( base_dir + "/../mzalendo_xapian" )
 
+# Admin autocomplete
+AJAX_LOOKUP_CHANNELS = {
+    'person_name'       : dict(model='core.person',        search_field='legal_name'),
+    'organisation_name' : dict(model='core.organisation',  search_field='name'),
+    'place_name'        : dict(model='core.place',         search_field='name'),
+    'title_name'        : dict(model='core.positiontitle', search_field='name'),
+}

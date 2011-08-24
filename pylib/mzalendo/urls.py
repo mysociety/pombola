@@ -27,6 +27,8 @@ urlpatterns = patterns('core.views',
     # Haystack
     url(r'^search/', include('haystack.urls') ),
 
+    # Ajax select
+    url(r'^ajax_select/', include('ajax_select.urls')),
 )
 
 # Accounts

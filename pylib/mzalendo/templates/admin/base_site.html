@@ -3,8 +3,20 @@
 
 
 {% block extrastyle %}
-    <link href="{{ STATIC_URL }}common.css" media="screen" rel="stylesheet" type="text/css" /> 
     <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png">
+    <link href="{{ STATIC_URL }}common.css" media="screen" rel="stylesheet" type="text/css" /> 
+
+    <!-- for the admin autocomplete -->
+    <link href="{{ STATIC_URL }}jquery.autocomplete.css" media="screen" rel="stylesheet" type="text/css" /> 
+    <link href="{{ STATIC_URL }}iconic.css" media="screen" rel="stylesheet" type="text/css" /> 
+
+{% endblock %}
+
+{% block extrahead %}
+    <!-- for the admin autocomplete -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ STATIC_URL }}jquery.autocomplete.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ STATIC_URL }}ajax_select.js" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 
 {% block title %}{{ title }} | {% trans 'Mzalendo site admin' %}{% endblock %}

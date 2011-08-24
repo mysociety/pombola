@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.generic import GenericTabularInline
 from django import forms
 
+from ajax_select import make_ajax_form
+
 from images.admin import ImageAdminInline
 
 def create_admin_link_for(obj, link_text):
@@ -65,6 +67,16 @@ class PositionAdmin(admin.ModelAdmin):
     search_fields = [ 'person__legal_name', 'organisation__name' ]
     list_filter   = [ 'title__name' ]    
     inlines       = [ InformationSourceInlineAdmin, ]
+
+    form = make_ajax_form(
+        models.Position,
+        {
+            'organisation': 'organisation_name',
+            'place':        'place_name',
+            'person':       'person_name',
+            'title':        'title_name',
+        }
+    )    
     
     def show_person(self, obj):
         return create_admin_link_for( obj.person, obj.person.name() )
@@ -84,6 +96,16 @@ class PositionInlineAdmin(admin.TabularInline):
     extra      = 0
     can_delete = False
     fields     = [ 'person', 'organisation', 'place', 'title', 'start_date', 'end_date' ]
+
+    form = make_ajax_form(
+        models.Position,
+        {
+            'organisation': 'organisation_name',
+            'place':        'place_name',
+            'person':       'person_name',
+            'title':        'title_name',
+        }
+    )    
 
 
 class PersonAdmin(admin.ModelAdmin):
