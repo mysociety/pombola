@@ -20,6 +20,9 @@ add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointFie
 date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
 
 class ModelBase(models.Model):
+    
+    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
+    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
 
     def css_class(self):
         return self._meta.module_name
