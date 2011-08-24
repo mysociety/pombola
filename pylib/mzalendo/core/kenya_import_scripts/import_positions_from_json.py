@@ -49,6 +49,7 @@ for key in sorted(objects['organisations'].keys()):
     else:
         defaults['kind'] = models.OrganisationKind.objects.get(name='Unknown') 
         
+    print key
     org_lookup[ key ], created = models.Organisation.objects.get_or_create(
         slug = obj['slug'],
         defaults = defaults,
@@ -62,6 +63,7 @@ for key in sorted(objects['titles'].keys()):
         'name': key,
     }
 
+    print key
     title_lookup[ key ], created = models.PositionTitle.objects.get_or_create(
         slug = obj['slug'],
         defaults = defaults,
@@ -75,6 +77,7 @@ for key in sorted(objects['places'].keys()):
         'kind': models.PlaceKind.objects.get(name='Unknown'),
     }
 
+    print key
     title_lookup[ key ], created = models.Place.objects.get_or_create(
         slug = obj['slug'],
         defaults = defaults,
@@ -148,23 +151,23 @@ for obj in objects['positions']:
     start_date = tidy_date( obj['start'])
     end_date   = tidy_date( obj['end'])
 
-
     # continue
     
-    # Load the person
-    person = models.Person.objects.get( original_id=obj['member_id'] )
-        
+    try:
+        person = models.Person.objects.get( original_id=obj['member_id'] )
+    except models.Person.DoesNotExist:
+       print "Could not find %s" % obj['member_id']
+        continue
+    
     # create the position
-    models.Position(
+    models.Position.objects.get_or_create(
         person=       person,
         organisation= organisation,
         place=        place,
         title=        title,
         start_date=   start_date,
         end_date=     end_date,
-    ).save()
-
-
+    )
 
 # with open(json_filename, 'w') as json_file:
 #     simplejson.dump( objects, json_file, sort_keys=True, indent=4, ensure_ascii=False, )
