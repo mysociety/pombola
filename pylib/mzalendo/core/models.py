@@ -112,6 +112,7 @@ class PersonManager(models.GeoManager):
 
 
 class Person(ModelBase, HasImageMixin):
+    title           = models.CharField(max_length=100, blank=True)
     first_name      = models.CharField(max_length=100)
     middle_names    = models.CharField(max_length=100, blank=True)
     last_name       = models.CharField(max_length=100)
