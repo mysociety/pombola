@@ -13,7 +13,6 @@ class PositionTestCase(unittest.TestCase):
 
         organisation_kind = models.OrganisationKind.objects.create(
             name        = "Test Org",
-            name_plural = "Test Orgs",
             slug        = "test-org",
         )
         self.organisation = models.Organisation.objects.create(
@@ -24,7 +23,6 @@ class PositionTestCase(unittest.TestCase):
 
         place_kind = models.PlaceKind.objects.create(
             name       = "Test Place",
-            name_plural= "Test Places",
             slug       = "test-place",
         )
 
@@ -37,7 +35,6 @@ class PositionTestCase(unittest.TestCase):
     def getPos(self, **kwargs):
         title_kind, created = models.PositionTitle.objects.get_or_create(
             name        = 'Job Title',
-            name_plural = 'Job Titles',
             slug        = 'job-title',
         )
         return models.Position.objects.create(

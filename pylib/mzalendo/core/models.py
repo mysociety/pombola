@@ -155,7 +155,6 @@ class Person(ModelBase, HasImageMixin):
 
 class OrganisationKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
-    name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
 
@@ -189,7 +188,6 @@ class Organisation(ModelBase):
 
 class PlaceKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
-    name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
 
@@ -222,7 +220,6 @@ class Place(ModelBase):
 
 class PositionTitle(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
-    name_plural     = models.CharField(max_length=200)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
     original_id     = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to data in original mzalendo.com db')
@@ -254,9 +251,10 @@ class PositionManager(models.GeoManager):
 
 class Position(ModelBase):
     person          = models.ForeignKey('Person')
-    organisation    = models.ForeignKey('Organisation')
+    organisation    = models.ForeignKey('Organisation', null=True, blank=True, )
     place           = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for an 'MP'" )
-    title           = models.ForeignKey('PositionTitle')
+    title           = models.ForeignKey('PositionTitle', null=True, blank=True, )
+    note            = models.CharField(max_length=300, blank=True, default='', )
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date        = ApproximateDateField(blank=True, help_text=date_help_text)
     

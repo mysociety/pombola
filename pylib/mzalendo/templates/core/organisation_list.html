@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load pagination_tags %}
 
-{% block title %}{% if kind %}{{ kind.name_plural }}{% endif %}{% endblock %}
+{% block title %}{% if kind %}{{ kind.name }}{% endif %}{% endblock %}
 
 {% block content %}
 
     <h1>
         {% if kind %}
-            {{ kind.name_plural }}
+            {{ kind.name }}
         {% else %}
             Organisations
         {% endif %}
