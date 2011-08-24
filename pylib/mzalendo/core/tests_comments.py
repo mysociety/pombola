@@ -15,8 +15,7 @@ import mz_comments
 class CommentsCase(WebTest):
     def setUp(self):
         self.person, created = models.Person.objects.get_or_create(
-            first_name = 'Test',
-            last_name  = 'Person',
+            legal_name = 'Test Person',
             slug       = 'test-person',
         )
         

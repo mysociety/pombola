@@ -9,7 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 
 class PositionTestCase(unittest.TestCase):
     def setUp(self):
-        self.person       = models.Person.objects.create(first_name="Bob", last_name="Smith", slug="bob-smith")
+        self.person       = models.Person.objects.create(lega_name="Bob Smith", slug="bob-smith")
 
         organisation_kind = models.OrganisationKind.objects.create(
             name        = "Test Org",
@@ -90,8 +90,7 @@ class PersonAndContactTasksTest( unittest.TestCase ):
 
     def test_missing_contacts(self):
         person = models.Person(
-            first_name = "Test",
-            last_name  = "Person",
+            legal_name = "Test Person",
             slug       = 'test-person'
         )
         person.save()

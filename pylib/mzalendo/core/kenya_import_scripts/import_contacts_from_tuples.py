@@ -29,6 +29,7 @@ for row in mp_contacts.entries:
     if not (phone or email):
         continue
 
+    # code needs reworking now that the name structure of the database has changed
     matches = models.Person.objects.all().is_mp().name_matches( name )
     
     if matches.count() == 0:

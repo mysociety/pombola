@@ -65,7 +65,7 @@ def position(request, slug):
             .position_set
             .all()
             .currently_active()
-            .order_by('person__first_name', 'person__last_name')
+            .order_by('person__legal_name')
     )
     
     return object_list(
@@ -87,7 +87,7 @@ def organisation(request, slug):
         'core/organisation_detail.html',
         {
             'object': org,
-            'positions': org.position_set.all().order_by('person__first_name','person__last_name'),
+            'positions': org.position_set.all().order_by('person__legal_name'),
         },
         context_instance=RequestContext(request)
     )

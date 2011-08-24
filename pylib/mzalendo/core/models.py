@@ -85,22 +85,6 @@ class InformationSource(ModelBase):
 
 
 class PersonQuerySet(models.query.GeoQuerySet):
-    def name_matches( self, name ):
-        """fuzzy match on the name"""
-
-        m = re.match('^\s*(\w+).*?(\w+)\s*$', name)
-        
-        if not m:
-            return self.none()
-
-        (first, last) = m.groups()
-        
-        return self.filter(
-            first_name__istartswith=first,
-            last_name__istartswith=last,
-        )
-
-
     def is_mp(self):
         mp_title = PositionTitle.objects.get(slug='mp')
         return self.filter( position__title=mp_title )
@@ -113,10 +97,8 @@ class PersonManager(models.GeoManager):
 
 class Person(ModelBase, HasImageMixin):
     title           = models.CharField(max_length=100, blank=True)
-    legal_name      = models.CharField(max_length=300, blank=True, default='')
-    first_name      = models.CharField(max_length=100)
-    middle_names    = models.CharField(max_length=100, blank=True)
-    last_name       = models.CharField(max_length=100)
+    legal_name      = models.CharField(max_length=300)
+    other_names     = models.TextField(blank=True, default='', help_text="other names the person might be known by - one per line")
     slug            = models.SlugField(max_length=200, unique=True, help_text="auto-created from first name and last name")
     gender          = models.CharField(max_length=1, choices=(('m','Male'),('f','Female')) )
     date_of_birth   = ApproximateDateField(blank=True, help_text=date_help_text)
@@ -130,13 +112,10 @@ class Person(ModelBase, HasImageMixin):
     objects  = PersonManager()
     
     def name(self):
-        return "%s %s" % ( self.first_name, self.last_name )
-    
-    def full_name(self):
-        return "%s %s %s" % ( self.first_name, self.middle_names, self.last_name )
+        return self.legal_name
     
     def __unicode__(self):
-        return "%s %s (%s)" % ( self.first_name, self.last_name, self.slug )
+        return self.legal_name
 
     @models.permalink
     def get_absolute_url(self):

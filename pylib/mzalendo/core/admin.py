@@ -16,7 +16,7 @@ def create_admin_link_for(obj, link_text):
 
 
 class ContactKindAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
+    prepopulated_fields = {"slug": ["name"]}
     search_fields = [ 'name' ]
 
 
@@ -62,7 +62,7 @@ class ContactInlineAdmin(GenericTabularInline):
 
 class PositionAdmin(admin.ModelAdmin):
     list_display  = [ 'id', 'show_person', 'show_organisation', 'show_place', 'title', 'start_date', 'end_date' ]
-    search_fields = ['person__first_name', 'person__last_name', 'organisation__name' ]
+    search_fields = [ 'person__legal_name', 'organisation__name' ]
     list_filter   = [ 'title__name' ]    
     inlines       = [ InformationSourceInlineAdmin, ]
     
@@ -87,10 +87,10 @@ class PositionInlineAdmin(admin.TabularInline):
 
 
 class PersonAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("first_name","last_name")}
+    prepopulated_fields = {"slug": ["legal_name"]}
     inlines       = [ PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ]
     list_display  = [ 'slug', 'name', 'date_of_birth' ]
-    search_fields = ['first_name', 'last_name']
+    search_fields = ['legal_name']
 
 class PlaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
