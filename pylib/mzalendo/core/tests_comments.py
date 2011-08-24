@@ -34,24 +34,39 @@ class CommentsCase(WebTest):
         trusted_group = Group.objects.get(name='Trusted')
         self.trusted_user.groups.add( trusted_group )
         self.trusted_user.save()
+    
+    def get_comments(self, person, user=None):
+        return (
+            self
+              .app
+              .get( person.get_absolute_url(), user=user )
+              .click(description=r'^\d+ comments?$')
+        )
+
+    def get_comments_add(self, person, user=None):
+        return (
+            self
+              .get_comments( person, user )
+              .click( description='Add your own comment' )
+        )
 
     def test_leaving_comment(self):
         # go to the person and check that there are no comments
         person = self.person
-        person_url = person.get_absolute_url()
         app = self.app
-        response = app.get( person_url )
+        response = self.get_comments( person )
         
         # check that anon can't leave comments
         self.assertTemplateNotUsed( response, 'comments/form.html' )
-        self.assertContains( response, "login to leave a comment" )
+        self.assertContains( response, "login to add your own comment" )
         
         # check that there is now a comment form
-        response = app.get( person_url, user=self.test_user )
+        response = self.get_comments_add( person, user=self.test_user  )
+        
         self.assertTemplateUsed( response, 'comments/form.html' )
         
         # leave a comment
-        form = response.form
+        form = response.forms['comment_form']
         form['title']   = 'Test Title'
         form['comment'] = 'Test comment'
         form_response = form.submit()
@@ -69,7 +84,7 @@ class CommentsCase(WebTest):
         self.assertEqual( comment.is_removed, False )
         
         # check it is not visible on site
-        res = app.get( person_url )
+        res = self.get_comments( person )
         self.assertNotContains( res, comment.title )
                 
         # approve the comment
@@ -77,17 +92,17 @@ class CommentsCase(WebTest):
         comment.save()
         
         # check that it is shown on site
-        self.assertContains( app.get( person_url ), comment.title )
+        self.assertContains( self.get_comments( person ), comment.title )
         
         # flag the comment
         comment.is_removed = True
         comment.save()
-        self.assertNotContains( app.get( person_url ), comment.title )
+        self.assertNotContains( self.get_comments( person ), comment.title )
         
         # delete the comment
         comment.delete()
         # check that comment not shown
-        res = app.get( person_url )
+        res =  self.get_comments( person )
         self.assertNotContains( res, comment.title )
         self.assertNotContains( res, 'comment removed' )
     
@@ -97,15 +112,14 @@ class CommentsCase(WebTest):
         app = self.app
 
         person = self.person
-        person_url = person.get_absolute_url()
         trusted_user = self.trusted_user
         comment_title = "Trusted user comment"
         
         # get the person page with comment form on it
-        res = app.get( person_url, user=trusted_user )
+        res = self.get_comments_add( person, trusted_user )
 
         # leave a comment
-        form = res.form
+        form = res.forms['comment_form']
         form['title']   = comment_title
         form['comment'] = 'Test comment'
         form_response = form.submit()
@@ -120,5 +134,5 @@ class CommentsCase(WebTest):
         self.assertEqual( comment.is_removed, False )
         
         # check that it is shown on site
-        self.assertContains( app.get( person_url ), comment_title )
+        self.assertContains( self.get_comments( person ), comment_title )
         

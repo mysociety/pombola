@@ -9,7 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 
 class PositionTestCase(unittest.TestCase):
     def setUp(self):
-        self.person       = models.Person.objects.create(lega_name="Bob Smith", slug="bob-smith")
+        self.person       = models.Person.objects.create(legal_name="Bob Smith", slug="bob-smith")
 
         organisation_kind = models.OrganisationKind.objects.create(
             name        = "Test Org",

@@ -32,7 +32,7 @@ class AccountTest(WebTest):
 
 
         # create an account
-        form = res.form
+        form = res.forms[1]
         form['username']  = 'test_user'
         form['email']     = 'test@example.com'
         form['password1'] = 's3cr3t'
@@ -55,7 +55,7 @@ class AccountTest(WebTest):
 
         # check that the user con login
         res = res.click(description='login', index=1)
-        form = res.form
+        form = res.forms[1]
         form['username'] = 'test_user'
         form['password'] = 's3cr3t'
         res = form.submit().follow()

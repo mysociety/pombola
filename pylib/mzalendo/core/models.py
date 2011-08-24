@@ -98,7 +98,7 @@ class PersonManager(models.GeoManager):
 class Person(ModelBase, HasImageMixin):
     title           = models.CharField(max_length=100, blank=True)
     legal_name      = models.CharField(max_length=300)
-    other_names     = models.TextField(blank=True, default='', help_text="other names the person might be known by - one per line")
+    # other_names     = models.TextField(blank=True, default='', help_text="other names the person might be known by - one per line")
     slug            = models.SlugField(max_length=200, unique=True, help_text="auto-created from first name and last name")
     gender          = models.CharField(max_length=1, choices=(('m','Male'),('f','Female')) )
     date_of_birth   = ApproximateDateField(blank=True, help_text=date_help_text)
