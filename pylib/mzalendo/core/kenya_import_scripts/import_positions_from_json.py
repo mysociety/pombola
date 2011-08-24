@@ -22,8 +22,12 @@ from django.template.defaultfilters import slugify
 
 json_filename = '/home/evdb/mzalendo_data/political_and_business_positions.json'
 
-with open(json_filename) as json_file:
-    objects = simplejson.loads( json_file.read() )
+# python 2.6
+# with open(json_filename) as json_file:
+#     objects = simplejson.loads( json_file.read() )
+
+# python 2.5
+objects = simplejson.loads( open(json_filename).read() )
 
 org_lookup   = {}
 title_lookup = {}
