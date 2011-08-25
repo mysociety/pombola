@@ -7,15 +7,19 @@
     {% for c in contacts %}
         <li class="{{ c.kind.slug }}">
 
-            {{ c.kind.name }}:
-
             {% switch c.kind.slug %}
 
                 {% case 'phone' %}
-                    <a href="tel:{{ c.value }}">{{ c.value }}</a>
+                    {{ c.kind.name }}: <a href="tel:{{ c.value }}">{{ c.value }}</a>
+                    
+                {% case 'facebook' %}
+                    <a href="{{ c.value }}">{{ c.kind.name }}</a>
+                    
+                {% case 'twitter' %}
+                    <a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter
                     
                 {% else %}
-                    {{ c.value|urlizetrunc:50 }}
+                    {{ c.kind.name }}: {{ c.value|urlizetrunc:50 }}
     
             {% endswitch %}
 
