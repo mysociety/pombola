@@ -276,7 +276,15 @@ class Position(ModelBase):
         return (self.start_date and not self.start_date.future) or (self.end_date and not self.end_date.future)
     
     def __unicode__(self):
-        return "%s (%s at %s)" % ( self.title, self.person.name(), self.organisation.name )
+
+        title = self.title or '???'
+
+        if self.organisation:
+            organisation = self.organisation.name
+        else:
+            organisation = '???'
+
+        return "%s (%s at %s)" % ( self.person.name(), title, organisation)
 
 
 
