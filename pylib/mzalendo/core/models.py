@@ -243,7 +243,7 @@ class Position(ModelBase):
     title           = models.ForeignKey('PositionTitle', null=True, blank=True, )
     note            = models.CharField(max_length=300, blank=True, default='', )
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
-    end_date        = ApproximateDateField(blank=True, help_text=date_help_text)
+    end_date        = ApproximateDateField(blank=True, help_text=date_help_text, default="future")
     
     objects = PositionManager()
 
@@ -286,7 +286,8 @@ class Position(ModelBase):
 
         return "%s (%s at %s)" % ( self.person.name(), title, organisation)
 
-
+    class Meta:
+        ordering = ['-end_date', '-start_date']  
 
 class GenericModerator(CommentModerator):
     email_notification = False
