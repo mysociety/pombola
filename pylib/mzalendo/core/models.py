@@ -244,10 +244,17 @@ class PositionManager(models.GeoManager):
 
 
 class Position(ModelBase):
+    category_choices = (
+        ('political', 'Political'),
+        ('education', 'Education (as a learner)'),
+        ('other',     'Anything else'),
+    )
+
     person          = models.ForeignKey('Person')
     organisation    = models.ForeignKey('Organisation', null=True, blank=True, )
     place           = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for an 'MP'" )
     title           = models.ForeignKey('PositionTitle', null=True, blank=True, )
+    category        = models.CharField(max_length=20, choices=category_choices, default='other', help_text="What sort of position was this?")
     note            = models.CharField(max_length=300, blank=True, default='', )
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date        = ApproximateDateField(blank=True, help_text=date_help_text, default="future")

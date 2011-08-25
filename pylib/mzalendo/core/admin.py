@@ -95,7 +95,7 @@ class PositionInlineAdmin(admin.TabularInline):
     model      = models.Position
     extra      = 0
     can_delete = False
-    fields     = [ 'person', 'organisation', 'place', 'title', 'start_date', 'end_date' ]
+    fields     = [ 'person', 'organisation', 'place', 'title', 'category', 'start_date', 'end_date' ]
 
     form = make_ajax_form(
         models.Position,
