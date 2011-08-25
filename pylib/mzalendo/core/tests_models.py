@@ -42,6 +42,8 @@ class PositionTestCase(unittest.TestCase):
             organisation = kwargs.get('organisation', self.organisation ),
             place        = kwargs.get('place',        self.place        ),
             title        = title_kind,
+            start_date   = '',
+            end_date     = '',
         )
 
     def testDisplayDates(self):
