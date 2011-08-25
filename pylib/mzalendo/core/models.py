@@ -233,10 +233,31 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
         return (
             self
-              .filter( Q(start_date__lte=now_approx) | Q(start_date='') )
-              .filter( Q(  end_date__gte=now_approx) | Q(  end_date='') )
+              .filter( Q(start_date__lte=now_approx) )
+              .filter( Q(  end_date__gte=now_approx) )
         )
-        
+
+    def currently_inactive(self):
+        """Filter on start and end dates to limit to currently inactive postitions"""
+        now = datetime.date.today()
+        now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day )
+    
+        return (
+            self
+              .filter( Q(  end_date__lte=now_approx) )
+        )
+    
+    def political(self):
+        """Filter down to only the political category"""
+        return self.filter(category='political')
+
+    def education(self):
+        """Filter down to only the education category"""
+        return self.filter(category='education')
+
+    def other(self):
+        """Filter down to only the other category"""
+        return self.filter(category='other')
 
 class PositionManager(models.GeoManager):
     def get_query_set(self):
