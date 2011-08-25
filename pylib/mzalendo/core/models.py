@@ -117,6 +117,13 @@ class Person(ModelBase, HasImageMixin):
         else:
             return self.legal_name
     
+    def additional_names(self):
+        if self.other_names:
+            return self.other_names.split("\n")[1:]
+        else:
+            return []
+        
+    
     def __unicode__(self):
         return self.legal_name
 

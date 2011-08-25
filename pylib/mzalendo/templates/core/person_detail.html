@@ -6,13 +6,27 @@
 
 {% block content %}
 
-    <h1>{{ object.name }}</h1>
-
-
-    {% thumbnail object.primary_image "200x200" as im %}
-        <img  class="person_photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-    {% endthumbnail %}
+    <h1>{{ object.title }} {{ object.name }}</h1>
     
+    {% if object.name != object.legal_name %}
+        <p>Full name: {{ object.legal_name }}</p>
+    {% endif %}
+    
+    {% if object.additional_names %}
+        <p>Also known as:
+        {% for name in object.additional_names %}
+            {% if not forloop.first %}
+                {% if forloop.last %}or{% else %},{% endif %}
+            {% endif %}
+            <strong>{{ name }}</strong>
+        {% endfor %}</p>
+    {% endif %}
+
+    <div>
+        {% thumbnail object.primary_image "200x200" as im %}
+        <img  class="person_photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% endthumbnail %}
+    </div>    
 
     {% include "core/contact_list.html" with contacts=object.contacts.all %}
 

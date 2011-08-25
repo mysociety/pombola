@@ -20,12 +20,15 @@ class PersonTest(WebTest):
             legal_name="Alfred Smith"
         )
         self.assertEqual( person.name(), "Alfred Smith" )
+        self.assertEqual( person.additional_names(), [] )
         
         # Add an alternative name
         person.other_names = "Freddy Smith"
         self.assertEqual( person.name(), "Freddy Smith" )
+        self.assertEqual( person.additional_names(), [] )
 
         # Add yet another alternative name
         person.other_names = "Fred Smith\nFreddy Smith"
         self.assertEqual( person.name(), "Fred Smith" )
+        self.assertEqual( person.additional_names(), ['Freddy Smith'] )
         
