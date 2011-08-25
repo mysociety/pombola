@@ -282,6 +282,29 @@ class Position(ModelBase):
     
     objects = PositionManager()
 
+
+    def display_dates(self):
+        """Nice HTML for the display of dates"""
+
+        # no dates
+        if not (self.start_date or self.end_date):
+            return ''
+
+        # start but no end
+        if self.start_date and not self.end_date:
+            return "Started %s" % self.start_date
+
+        # both dates
+        if self.start_date and self.end_date:
+            if self.end_date.future:
+                return "Started %s" % ( self.start_date )
+            else:
+                return "%s to %s" % ( self.start_date, self.end_date )
+        
+        # end but no start
+        if not self.start_date and self.end_date:
+            return 'ongoing'
+
     def display_start_date(self):
         """Return text that represents the start date"""
         if self.start_date:

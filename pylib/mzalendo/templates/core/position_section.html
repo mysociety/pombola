@@ -6,19 +6,26 @@
         {{ position.title }}
         {% if position.is_ongoing %}</strong>{% endif %}
 
+        {% if position.place %}            
+            (<a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>)
+        {% endif %}
+
+        <div style="float: right">
+            {{ position.display_dates }}
+        </div>
+
         {% if position.organisation %}
-        at <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>
+            <br>
+            <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>
         {% endif %}
-        
-        {% if position.has_known_dates %}
-            ({{ position.display_start_date }} &rarr; {{ position.display_end_date }})
+                
+        {% if position.note %}
+            <br>
+            {{ position.note }}
         {% endif %}
 
-        <br />
-
-                    
-        </li>
+    </li>
 {% empty %}
-    <li>There are no related organisations</li>
+    <li>No records found.</li>
 {% endfor %}
 </ul>
