@@ -94,8 +94,8 @@ class PositionAdmin(AjaxSelectAdmin):
 
 class PositionInlineAdmin(admin.TabularInline):
     model      = models.Position
-    extra      = 0
-    can_delete = False
+    extra      = 3    # do not set to zero as the autocomplete does not work in inlines
+    can_delete = True
     fields     = [ 'person', 'organisation', 'place', 'title', 'category', 'start_date', 'end_date' ]
 
     form = make_ajax_form(
