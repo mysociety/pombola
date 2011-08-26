@@ -6,6 +6,7 @@ from django.contrib.contenttypes.generic import GenericTabularInline
 from django import forms
 
 from ajax_select import make_ajax_form
+from ajax_select.admin import AjaxSelectAdmin
 
 from images.admin import ImageAdminInline
 
@@ -62,7 +63,7 @@ class ContactInlineAdmin(GenericTabularInline):
     }
 
 
-class PositionAdmin(admin.ModelAdmin):
+class PositionAdmin(AjaxSelectAdmin):
     list_display  = [ 'id', 'show_person', 'show_organisation', 'show_place', 'title', 'start_date', 'end_date' ]
     search_fields = [ 'person__legal_name', 'organisation__name' ]
     list_filter   = [ 'title__name' ]    
