@@ -22,6 +22,12 @@
         {% endfor %}</p>
     {% endif %}
 
+    {% if object.date_of_birth %}
+        Born: {{ object.date_of_birth }} {# TODO - add age in years #}
+    {% endif %}
+
+    {# TODO - add death date too if it exists #}
+
     <div>
         {% thumbnail object.primary_image "200x200" as im %}
         <img  class="person_photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
