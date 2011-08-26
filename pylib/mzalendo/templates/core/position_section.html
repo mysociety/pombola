@@ -11,7 +11,7 @@
         {% endif %}
 
         <div style="float: right">
-            {{ position.display_dates }}
+            {{ position.display_dates|safe }}
         </div>
 
         {% if position.organisation %}

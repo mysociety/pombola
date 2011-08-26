@@ -299,7 +299,7 @@ class Position(ModelBase):
             if self.end_date.future:
                 return "Started %s" % ( self.start_date )
             else:
-                return "%s to %s" % ( self.start_date, self.end_date )
+                return "%s &rarr; %s" % ( self.start_date, self.end_date )
         
         # end but no start
         if not self.start_date and self.end_date:
