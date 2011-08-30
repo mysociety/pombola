@@ -5,7 +5,12 @@
 {% block content %}
     <h1>{{ object.name }}</h1>
 
-    
+        {% if object.summary %}
+        <div class="summary">
+            {{ object.summary|linebreaksbr }}
+        </div>
+    {% endif %}
+
     {% include "core/contact_list.html" with contacts=object.contacts.all %}
 
     

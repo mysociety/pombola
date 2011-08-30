@@ -31,7 +31,6 @@ class ModelBase(models.Model):
        abstract = True      
 
 
-
 class ContactKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
@@ -162,6 +161,7 @@ class OrganisationKind(ModelBase):
 class Organisation(ModelBase):
     name    = models.CharField(max_length=200)
     slug    = models.SlugField(max_length=200, unique=True, help_text="created from name")
+    summary = models.TextField(blank=True, default='')
     kind    = models.ForeignKey('OrganisationKind')
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended   = ApproximateDateField(blank=True, help_text=date_help_text)
@@ -224,6 +224,24 @@ class PositionTitle(ModelBase):
     @models.permalink
     def get_absolute_url(self):
         return ( 'position', [ self.slug ] )
+    
+    def primary_organisation(self):
+        """
+        If there is only one org linked to this title return it, otherwise None
+
+        This is intended as an alternative to assigning a org to each
+        position_title. Instead we can deduce it from the postions.
+        """
+
+        # TODO - this is inefficient - should do the distinct(org_id) in db
+        orgs = [ pos.organisation for pos in Position.objects.filter(title=self) ]
+        org_set = set( orgs )
+
+        if len(org_set) == 1:
+            return orgs[0]
+        else:
+            return None
+
 
     class Meta:
        ordering = ["slug"]      
