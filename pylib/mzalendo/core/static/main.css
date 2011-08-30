@@ -197,3 +197,6 @@ div.pagination {
   div.pagination .disabled {
     border-color: #ddd;
     color: #888; }
+
+div.todo {
+  opacity: 0.3; }
