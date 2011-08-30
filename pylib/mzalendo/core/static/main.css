@@ -57,6 +57,9 @@ html {
   font-family: Arial;
   font-size: 16px; }
 
+sup {
+  vertical-align: super; }
+
 h1 {
   font-size: 32px;
   margin-top: 24px;
