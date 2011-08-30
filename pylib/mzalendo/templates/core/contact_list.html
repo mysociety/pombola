@@ -2,32 +2,38 @@
 
 {% if contacts %}
 
-<ul class="contacts">
-
-    {% for c in contacts %}
-        <li class="{{ c.kind.slug }}">
-
-            {% switch c.kind.slug %}
-
-                {% case 'phone' %}
-                    {{ c.kind.name }}: <a href="tel:{{ c.value }}">{{ c.value }}</a>
-                    
-                {% case 'facebook' %}
-                    <a href="{{ c.value }}">{{ c.kind.name }}</a>
-                    
-                {% case 'twitter' %}
-                    <a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter
-                    
-                {% else %}
-                    {{ c.kind.name }}: {{ c.value|urlizetrunc:50 }}
+<div class="content_box">
     
-            {% endswitch %}
+    <h3>Contact Details</h3>
+    
+    <ul class="contacts">
+    
+        {% for c in contacts %}
+            <li class="{{ c.kind.slug }}">
+    
+                {% switch c.kind.slug %}
+    
+                    {% case 'phone' %}
+                        {{ c.kind.name }}: <a href="tel:{{ c.value }}">{{ c.value }}</a>
+                        
+                    {% case 'facebook' %}
+                        <a href="{{ c.value }}">{{ c.kind.name }}</a>
+                        
+                    {% case 'twitter' %}
+                        <a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter
+                        
+                    {% else %}
+                        {{ c.kind.name }}: {{ c.value|urlizetrunc:50 }}
+        
+                {% endswitch %}
+    
+                {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
+    
+            </li>
+        {% endfor %}
+    
+    </ul>
+</div>
 
-            {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
-
-        </li>
-    {% endfor %}
-
-</ul>
 
 {% endif %}

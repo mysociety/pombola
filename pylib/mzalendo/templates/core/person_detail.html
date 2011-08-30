@@ -37,21 +37,30 @@
     {% include "core/contact_list.html" with contacts=object.contacts.all %}
 
 
-    <h2>Current Political Positions</h2>
-    {% include 'core/position_section.html' with positions=object.position_set.all.political.currently_active %}
+    <div class="content_box">
+        <h3>Current Political Positions</h3>
+        {% include 'core/position_section.html' with positions=object.position_set.all.political.currently_active %}
+    </div>
 
-    <h2>Previous Political Positions</h2>
-    {% include 'core/position_section.html' with positions=object.position_set.all.political.currently_inactive %}
+    <div class="content_box">
+        <h3>Previous Political Positions</h3>
+        {% include 'core/position_section.html' with positions=object.position_set.all.political.currently_inactive %}
+    </div>
 
-    <h2>Job History</h2>
-    {% include 'core/position_section.html' with positions=object.position_set.all.other %}
+    <div class="content_box">
+        <h3>Job History</h3>
+        {% include 'core/position_section.html' with positions=object.position_set.all.other %}
+    </div>
 
-    <h2>Education</h2>
-    {% include 'core/position_section.html' with positions=object.position_set.all.education %}
+    <div class="content_box">
+        <h3>Education</h3>
+        {% include 'core/position_section.html' with positions=object.position_set.all.education %}
+    </div>
 
 
-
-    {% include 'comments/detail_page_comments.html' %}
+    <div class="content_box">        
+        {% include 'comments/detail_page_comments.html' %}
+    </div>
 
 {% endblock %}
 
