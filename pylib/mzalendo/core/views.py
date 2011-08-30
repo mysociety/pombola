@@ -60,18 +60,12 @@ def position(request, slug):
         slug=slug
     )
     
-    positions =  (
-        title
-            .position_set
-            .all()
-            .currently_active()
-            .order_by('person__legal_name')
-    )
-    
-    return object_list(
-        request,
-        queryset = positions,
-        extra_context = { 'title': title, },
+    return render_to_response(
+        'core/position_detail.html',
+        {
+            'object': title,
+        },
+        context_instance=RequestContext(request)
     )
 
 

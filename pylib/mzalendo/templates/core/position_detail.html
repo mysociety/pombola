@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load comments %}
+{% load thumbnail %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+
+    <h1>{{ object.title }} {{ object.name }}</h1>
+    
+    {% if object.summary %}
+        {{ object.summary|linebreaks }}
+    {% endif %}
+    
+
+    <h2>Current Position Holders</h2>
+    {% include 'core/position_section.html' with positions=object.position_set.all.currently_active top_entry='person+place' %}
+
+
+    <h2>Past Position Holders</h2>
+    {% include 'core/position_section.html' with positions=object.position_set.all.currently_inactive top_entry='person+place' %}
+
+    
+{% endblock %}
+
