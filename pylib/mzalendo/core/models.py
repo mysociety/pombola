@@ -221,6 +221,10 @@ class PositionTitle(ModelBase):
     def __unicode__(self):
         return self.name
     
+    @models.permalink
+    def get_absolute_url(self):
+        return ( 'position', [ self.slug ] )
+
     class Meta:
        ordering = ["slug"]      
 

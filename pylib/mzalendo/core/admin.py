@@ -64,8 +64,8 @@ class ContactInlineAdmin(GenericTabularInline):
 
 
 class PositionAdmin(AjaxSelectAdmin):
-    list_display  = [ 'id', 'show_person', 'show_organisation', 'show_place', 'title', 'start_date', 'end_date' ]
-    search_fields = [ 'person__legal_name', 'organisation__name' ]
+    list_display  = [ 'id', 'show_person', 'show_organisation', 'show_place', 'show_title', 'start_date', 'end_date' ]
+    search_fields = [ 'person__legal_name', 'organisation__name', 'title__name' ]
     list_filter   = [ 'title__name' ]    
     inlines       = [ InformationSourceInlineAdmin, ]
 
@@ -90,6 +90,10 @@ class PositionAdmin(AjaxSelectAdmin):
     def show_place(self, obj):
         return create_admin_link_for(obj.place, obj.place.name)
     show_place.allow_tags = True
+
+    def show_title(self, obj):
+        return create_admin_link_for(obj.title, obj.title.name)
+    show_title.allow_tags = True
 
 
 class PositionInlineAdmin(admin.TabularInline):
