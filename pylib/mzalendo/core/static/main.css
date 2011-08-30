@@ -200,3 +200,21 @@ div.pagination {
 
 div.todo {
   opacity: 0.3; }
+
+div.summary {
+  border: 1px solid #ccc;
+  border-width: 1px 0;
+  background-color: #eee;
+  padding: 1em;
+  margin-bottom: 1em;
+  font-size: 90%; }
+
+div.content_box {
+  border: 1px solid #ccc;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  padding: 1em;
+  margin-bottom: 1em; }
+  div.content_box h2, div.content_box h3, div.content_box h4 {
+    margin: 0.25em 0; }

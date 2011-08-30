@@ -9,17 +9,41 @@
     <h1>{{ object.title }} {{ object.name }}</h1>
     
     {% if object.summary %}
-        {{ object.summary|linebreaks }}
+        <div class="summary">
+            {{ object.summary|linebreaksbr }}
+        </div>
     {% endif %}
     
+    {% with org=object.primary_organisation %}
+        {% if org %}
+        <div class="content_box">
+            <h3>
+                {{ org.name }}
+                {% if org.place %}
+                    (<strong>{{ org.place }}</strong>)
+                {% endif %}
+            </h3>
+            
+            {% if org.summary %}
+                <div class="summary">
+                    {{ org.summary|linebreaksbr }}
+                </div>
+            {% endif %}
 
-    <h2>Current Position Holders</h2>
-    {% include 'core/position_section.html' with positions=object.position_set.all.currently_active top_entry='person+place' %}
+            <a href="{{ org.get_absolute_url }}">more details&hellip;</a>
+        </div>
+        {% endif %}
+    {% endwith %}
 
+    <div class="content_box">
+        <h3>Current Position Holders</h3>
+        {% include 'core/position_section.html' with positions=object.position_set.all.currently_active top_entry='person+place' %}
+    </div>
 
-    <h2>Past Position Holders</h2>
-    {% include 'core/position_section.html' with positions=object.position_set.all.currently_inactive top_entry='person+place' %}
-
+    <div class="content_box">
+        <h3>Past Position Holders</h3>
+        {% include 'core/position_section.html' with positions=object.position_set.all.currently_inactive top_entry='person+place' %}
+    </div>
     
 {% endblock %}
 

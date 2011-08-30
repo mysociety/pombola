@@ -202,3 +202,23 @@ div.todo {
     opacity: 0.3;
 }
 
+div.summary {
+    border: 1px solid #ccc;
+    border-width: 1px 0;
+    background-color: #eee;
+    padding: 1em;
+    margin-bottom: 1em;
+    font-size: 90%;
+}
+
+div.content_box {
+    border: 1px solid #ccc;
+    @include rounded-corners(10px);
+
+    padding: 1em;
+    margin-bottom: 1em;
+
+    h2, h3, h4 {
+        margin: 0.25em 0;
+    }
+}
