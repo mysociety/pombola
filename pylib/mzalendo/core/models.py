@@ -121,6 +121,10 @@ class Person(ModelBase, HasImageMixin):
             return self.other_names.split("\n")[1:]
         else:
             return []
+    
+    def is_mp(self):
+        """Return true if this person is an MP"""
+        return 'mp' in [ p.title.slug for p in self.position_set.all().currently_active() ]
         
     
     def __unicode__(self):

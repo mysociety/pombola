@@ -6,7 +6,15 @@
 
 {% block content %}
 
-    <h1>{{ object.title }} {{ object.name }}</h1>
+    <h1>
+        {{ object.title }}
+        {{ object.name }}
+
+        {% if object.is_mp %}
+            (MP)
+        {% endif %}
+        
+    </h1>
     
     {% if object.name != object.legal_name %}
         <p>Full name: {{ object.legal_name }}</p>
