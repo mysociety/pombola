@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load comments %}
 {% load thumbnail %}
+{% load switch %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -14,25 +15,42 @@
         </div>
     {% endif %}
     
-    {% with org=object.primary_organisation %}
-        {% if org %}
-        <div class="content_box">
-            <h3>
-                {{ org.name }}
-                {% if org.place %}
-                    (<strong>{{ org.place }}</strong>)
-                {% endif %}
-            </h3>
-            
-            {% if org.summary %}
-                <div class="summary">
-                    {{ org.summary|linebreaksbr }}
+    {% with orgs=object.organisations %}
+        {% switch orgs.count %}
+            {% case 1 %}
+                {% with org=orgs.0 %}
+                    <div class="content_box">
+                        <h3>
+                            {{ org.name }}
+                            {% if org.place %}
+                                (<strong>{{ org.place }}</strong>)
+                            {% endif %}
+                        </h3>
+                        
+                        {% if org.summary %}
+                            <div class="summary">
+                                {{ org.summary|linebreaksbr }}
+                            </div>
+                        {% endif %}
+                    
+                        <a href="{{ org.get_absolute_url }}">more details&hellip;</a>
+                    </div>
+                {% endwith %}
+            {% case 0 %}
+                {# pass #}
+            {% else %}
+                <div class="content_box">
+                    <h3>Related organisations</h3>
+                    <ul>
+                    {% for org in orgs %}
+                        <li>
+                            <a href="{{ org.get_absolute_url }}">{{ org.name }}</a>
+                            ({{ org.position_count }} {{ org.position_count|pluralize:"person,people" }})
+                        </li> 
+                    {% endfor %}
+                    </ul>
                 </div>
-            {% endif %}
-
-            <a href="{{ org.get_absolute_url }}">more details&hellip;</a>
-        </div>
-        {% endif %}
+        {% endswitch %}
     {% endwith %}
 
     <div class="content_box">

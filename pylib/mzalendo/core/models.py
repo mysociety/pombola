@@ -229,22 +229,26 @@ class PositionTitle(ModelBase):
     def get_absolute_url(self):
         return ( 'position', [ self.slug ] )
     
-    def primary_organisation(self):
+    def organisations(self):
         """
-        If there is only one org linked to this title return it, otherwise None
+        Return a qs of organisations, with the most frequently related first.
+
+        Each organisation is also annotated with 'position_count' which might be
+        useful.
 
         This is intended as an alternative to assigning a org to each
         position_title. Instead we can deduce it from the postions.
         """
 
-        # TODO - this is inefficient - should do the distinct(org_id) in db
-        orgs = [ pos.organisation for pos in Position.objects.filter(title=self) ]
-        org_set = set( orgs )
+        orgs = (
+            Organisation
+                .objects
+                .filter(position__title=self)
+                .annotate( position_count=models.Count('position') )
+                .order_by( '-position_count' )
+        )
 
-        if len(org_set) == 1:
-            return orgs[0]
-        else:
-            return None
+        return orgs
 
 
     class Meta:
