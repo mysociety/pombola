@@ -19,6 +19,11 @@
                 <a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a>
             </div>
 
+        {% case 'positiontitle' %}
+            <div class="name">
+                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+            </div>
+
         {% case 'person' %}
             <div class="thumb">
                 {% thumbnail object.primary_image "60x60" crop="center" as im %}
