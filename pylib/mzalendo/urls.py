@@ -24,6 +24,10 @@ urlpatterns = patterns('core.views',
     url(r'^organisation/is/(?P<slug>[-\w]+)/', 'organisation_kind', name='organisation_kind'),
     url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),
 
+    # specials
+    url(r'^parties', 'parties', name='parties'),
+
+
     # Haystack
     url(r'^search/', include('haystack.urls') ),
 

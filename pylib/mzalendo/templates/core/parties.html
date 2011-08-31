@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load pagination_tags %}
+
+{% block title %}Political Parties Represented in Parliament{% endblock %}
+
+{% block content %}
+
+    <h1>
+        Political Parties Represented in Parliament
+    </h1>
+
+    <p>These are the parties whose members are currently MPs in parliament.</p>
+
+    <p>There is also a <a href="{% url organisation_kind 'party' %}">list of all parties</a>.</p>
+
+    {% include 'core/generic_list.html' with object_list=parties %}
+
+{% endblock %}
+

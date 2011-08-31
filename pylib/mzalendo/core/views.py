@@ -89,7 +89,7 @@ def organisation(request, slug):
 
 def organisation_kind(request, slug):
     """"""
-
+    
     org_kind = get_object_or_404(
         models.OrganisationKind,
         slug=slug
@@ -108,3 +108,19 @@ def organisation_kind(request, slug):
         queryset = orgs,
         extra_context = { 'kind': org_kind, },
     )
+
+def parties(request):
+    """Show all parties that currently have MPs sitting in parliament"""
+    
+    parties = models.Organisation.objects.all().active_parties()
+    
+    return render_to_response(
+        'core/parties.html',
+        {
+            'parties': parties,
+        },
+        context_instance = RequestContext( request ),
+    )
+    
+    
+    

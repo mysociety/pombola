@@ -162,6 +162,32 @@ class OrganisationKind(ModelBase):
        ordering = ["slug"]      
 
 
+class OrganisationQuerySet(models.query.GeoQuerySet):
+    def parties(self):
+        return self.filter(kind__slug='party')
+
+    def active_parties(self):
+
+        active_mp_positions     = Position.objects.all().filter(title__slug='mp'    ).currently_active()
+        active_member_positions = Position.objects.all().filter(title__slug='member').currently_active()
+
+        current_mps     = Person.objects.all().filter(position__in=active_mp_positions    ).distinct()
+        current_members = Person.objects.all().filter(position__in=active_member_positions).distinct()
+
+        return (
+            self
+                .parties()
+                .filter( position__person__in=current_mps     )
+                .filter( position__person__in=current_members )
+                .distinct()                
+        )
+
+
+class OrganisationManager(models.GeoManager):
+    def get_query_set(self):
+        return OrganisationQuerySet(self.model)
+
+
 class Organisation(ModelBase):
     name    = models.CharField(max_length=200)
     slug    = models.SlugField(max_length=200, unique=True, help_text="created from name")
@@ -171,6 +197,7 @@ class Organisation(ModelBase):
     ended   = ApproximateDateField(blank=True, help_text=date_help_text)
     original_id = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to parties in original mzalendo.com db')
 
+    objects  = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
 
     def __unicode__(self):
