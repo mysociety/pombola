@@ -133,10 +133,12 @@ th, td {
     font-size: 75%; }
 
 ul.listing li {
-  border-bottom: 1px dashed #bbb;
-  padding: 0.25em 0;
+  border-bottom: 1px solid #eee;
+  padding: 0.25em;
   overflow: hidden;
   width: 100%; }
+ul.listing li:nth-child(odd) {
+  background-color: #eee; }
 ul.listing div.thumb {
   height: 60px;
   width: 60px;
