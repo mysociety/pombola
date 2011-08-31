@@ -16,7 +16,7 @@
 
             {% else %}
                 {% if position.is_ongoing %}<strong>{% endif %}
-                {{ position.title }}
+                    <a href="{{ position.title.get_absolute_url }}">{{ position.title }}</a>
                 {% if position.is_ongoing %}</strong>{% endif %}
                 
                 {% if position.place %}            
