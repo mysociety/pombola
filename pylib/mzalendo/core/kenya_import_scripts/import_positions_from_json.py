@@ -165,6 +165,7 @@ for obj in objects['positions']:
         end_date=     end_date,
         category=     'education',
         note=         obj['note'],
+        subtitle=     obj['subtitle'],
     )
 
 with open(json_filename, 'w') as json_file:

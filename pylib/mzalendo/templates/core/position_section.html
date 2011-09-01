@@ -19,6 +19,10 @@
                     <a href="{{ position.title.get_absolute_url }}">{{ position.title }}</a>
                 {% if position.is_ongoing %}</strong>{% endif %}
                 
+                {% if position.subtitle %}
+                    - {{ position.subtitle }}
+                {% endif %}
+                
                 {% if position.place %}            
                     (<a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>)
                 {% endif %}
