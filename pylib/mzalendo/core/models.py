@@ -378,7 +378,7 @@ class Position(ModelBase):
     def is_ongoing(self):
         """Return True or False for whether the position is currently ongoing"""
         if not self.end_date:
-            return True
+            return False
         elif self.end_date.future:
             return True
         else:
