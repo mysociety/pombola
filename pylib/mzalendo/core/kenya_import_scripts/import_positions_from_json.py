@@ -20,7 +20,7 @@ from django_date_extensions.fields import ApproximateDate
 from warnings import warn
 from django.template.defaultfilters import slugify
 
-json_filename = '/home/evdb/mzalendo_data/political_and_business_positions.json'
+json_filename = '/home/evdb/Mzalendo_Educational_Positions.json'
 
 # python 2.6
 # with open(json_filename) as json_file:
@@ -43,11 +43,7 @@ for key in sorted(objects['organisations'].keys()):
     defaults = {}
     defaults['name'] = key
 
-    if obj['kind']:
-        # print obj['kind'] 
-        defaults['kind'] = models.OrganisationKind.objects.get(name=obj['kind'])
-    else:
-        defaults['kind'] = models.OrganisationKind.objects.get(name='Unknown') 
+    defaults['kind'] = models.OrganisationKind.objects.get(name='Educational') 
         
     print key
     org_lookup[ key ], created = models.Organisation.objects.get_or_create(
@@ -90,7 +86,7 @@ for obj in objects['positions']:
     for key in obj:
         obj[key] = re.sub(r'\s+', ' ', obj[key]).strip()
 
-    if not obj['import'] == 'y':
+    if not obj['import'] == 'Y':
         continue
 
     # pprint( obj )
@@ -108,8 +104,8 @@ for obj in objects['positions']:
         organisation = None
     
     # Load the job title
-    if obj['job title']:
-        title_name = obj['job title']
+    if obj['title']:
+        title_name = obj['title']
         try:
             title = title_lookup[title_name]
         except KeyError:
@@ -150,14 +146,14 @@ for obj in objects['positions']:
     
     start_date = tidy_date( obj['start'])
     end_date   = tidy_date( obj['end'])
-
-    # continue
     
     try:
-        person = models.Person.objects.get( original_id=obj['member_id'] )
+        person = models.Person.objects.get( original_id=obj['person_id'] )
     except models.Person.DoesNotExist:
-       print "Could not find %s" % obj['member_id']
+        print "Could not find %s" % obj['person_id']
         continue
+
+    # continue
     
     # create the position
     models.Position.objects.get_or_create(
@@ -167,7 +163,9 @@ for obj in objects['positions']:
         title=        title,
         start_date=   start_date,
         end_date=     end_date,
+        category=     'education',
+        note=         obj['note'],
     )
 
-# with open(json_filename, 'w') as json_file:
-#     simplejson.dump( objects, json_file, sort_keys=True, indent=4, ensure_ascii=False, )
+with open(json_filename, 'w') as json_file:
+    simplejson.dump( objects, json_file, sort_keys=True, indent=4, ensure_ascii=False, )
