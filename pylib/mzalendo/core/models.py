@@ -7,6 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from django.contrib.comments.moderation import CommentModerator, moderator
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 
 from tasks.models import Task
@@ -26,6 +27,15 @@ class ModelBase(models.Model):
 
     def css_class(self):
         return self._meta.module_name
+
+
+    def get_admin_url(self):
+        url = reverse(
+            'admin:%s_%s_change' % ( self._meta.app_label, self._meta.module_name),
+            args=[self.id]
+        )
+        return url
+    
 
     class Meta:
        abstract = True      

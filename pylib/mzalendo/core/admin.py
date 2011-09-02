@@ -11,11 +11,7 @@ from ajax_select.admin import AjaxSelectAdmin
 from images.admin import ImageAdminInline
 
 def create_admin_link_for(obj, link_text):
-    url = reverse(
-        'admin:%s_%s_change' % ( obj._meta.app_label, obj._meta.module_name),
-        args=[obj.id]
-    )
-    return u'<a href="%s">%s</a>' % ( url, link_text )
+    return u'<a href="%s">%s</a>' % ( obj.get_admin_url(), link_text )
 
 
 class ContactKindAdmin(admin.ModelAdmin):
