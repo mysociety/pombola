@@ -6,14 +6,13 @@
 
 {% block content %}
 
+    {% if object.is_mp %}
+        <h2>Kenyan Member of Parliament (MP) Profile Page</h2>
+    {% endif %}    
+
     <h1>
         {{ object.title }}
-        {{ object.name }}
-
-        {% if object.is_mp %}
-            (MP)
-        {% endif %}
-        
+        {{ object.name }}        
     </h1>
     
     {% if object.name != object.legal_name %}
@@ -42,9 +41,6 @@
         {% endthumbnail %}
     </div>    
 
-    {% include "core/contact_list.html" with contacts=object.contacts.all %}
-
-
     <div class="content_box">
         <h3>Current Political Positions</h3>
         {% include 'core/position_section.html' with positions=object.position_set.all.political.currently_active %}
@@ -54,6 +50,8 @@
         <h3>Previous Political Positions</h3>
         {% include 'core/position_section.html' with positions=object.position_set.all.political.currently_inactive %}
     </div>
+
+    {% include "core/contact_list.html" with contacts=object.contacts.all %}
 
     <div class="content_box">
         <h3>Job History</h3>
