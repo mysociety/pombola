@@ -335,8 +335,13 @@ class Position(ModelBase):
     subtitle        = models.CharField(max_length=200, blank=True, default='')
     category        = models.CharField(max_length=20, choices=category_choices, default='other', help_text="What sort of position was this?")
     note            = models.CharField(max_length=300, blank=True, default='', )
+
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date        = ApproximateDateField(blank=True, help_text=date_help_text, default="future")
+
+    # Two hidden fields that are only used to do sorting. Filled in by code.
+    sorting_start_date      = models.CharField(editable=True, default='', max_length=10)
+    sorting_end_date        = models.CharField(editable=True, default='', max_length=10)
     
     objects = PositionManager()
 
@@ -391,6 +396,32 @@ class Position(ModelBase):
         """Is there at least one known (not future) date?"""
         return (self.start_date and not self.start_date.future) or (self.end_date and not self.end_date.future)
     
+
+    def _set_sorting_dates(self):
+        """Set the sorting dates from the actual dates (does not call save())"""
+        # value can be yyyy-mm-dd, future or None
+        start = repr( self.start_date ) if self.start_date else ''
+        end   = repr( self.end_date   ) if self.end_date   else ''
+        
+        # set the value or default to something sane
+        sorting_start_date =        start or '0000-00-00'
+        sorting_end_date   = end or start or '0000-00-00'
+        
+        # To make the sorting consistent special case some parts
+        if not end and start == 'future':
+            sorting_start_date = 'a-future' # come after 'future'
+        
+        self.sorting_start_date = sorting_start_date
+        self.sorting_end_date   = sorting_end_date
+        
+        return True
+
+
+    def save(self, *args, **kwargs):
+            self._set_sorting_dates()
+            super(Position, self).save(*args, **kwargs)
+
+
     def __unicode__(self):
 
         title = self.title or '???'
@@ -403,7 +434,7 @@ class Position(ModelBase):
         return "%s (%s at %s)" % ( self.person.name(), title, organisation)
 
     class Meta:
-        ordering = ['-end_date', '-start_date']  
+        ordering = ['-sorting_end_date', '-sorting_start_date']  
 
 class GenericModerator(CommentModerator):
     email_notification = False
