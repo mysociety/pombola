@@ -98,10 +98,11 @@ th, td {
 }
 
 ul.listing {
-    border: 1px solid #eee;
-
     li {
+        border: 1px solid #eee;
         padding: 0.25em;
+        overflow: hidden;
+    	width: 100%;
     }
     
     li:nth-child(odd) {
