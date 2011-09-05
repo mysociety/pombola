@@ -132,23 +132,22 @@ th, td {
   #footer ul.utilities li {
     font-size: 75%; }
 
-ul.listing li {
-  border-bottom: 1px solid #eee;
-  padding: 0.25em;
-  overflow: hidden;
-  width: 100%; }
-ul.listing li:nth-child(odd) {
-  background-color: #eee; }
-ul.listing div.thumb {
-  height: 60px;
-  width: 60px;
-  color: #ddd;
-  border: 1px solid #bbb;
-  float: left;
-  margin-right: 1em; }
-ul.listing div.name {
-  font-size: 150%;
-  font-weight: bold; }
+ul.listing {
+  border: 1px solid #eee; }
+  ul.listing li {
+    padding: 0.25em; }
+  ul.listing li:nth-child(odd) {
+    background-color: #eee; }
+  ul.listing div.thumb {
+    height: 60px;
+    width: 60px;
+    color: #ddd;
+    border: 1px solid #bbb;
+    float: left;
+    margin-right: 1em; }
+  ul.listing div.name {
+    font-size: 150%;
+    font-weight: bold; }
 
 div.action_button {
   padding: 1em;
