@@ -1,0 +1,30 @@
+{% load switch %}
+
+<ul class="listing">
+{% for position in positions %}
+    <li class="position">
+        
+        {% if position.is_ongoing %}<strong>{% endif %}
+            <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>
+        {% if position.is_ongoing %}</strong>{% endif %}                
+        
+        {% if position.place %}            
+            of
+            <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
+        {% endif %}
+
+
+        <div style="float: right">
+            {{ position.display_dates|safe }}
+        </div>
+
+        {% if position.organisation %}
+            at
+            <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>
+        {% endif %}
+                
+    </li>
+{% empty %}
+    <li>No records found.</li>
+{% endfor %}
+</ul>

@@ -41,7 +41,7 @@
             {% else %}
                 <div class="content_box">
                     <h3>Related organisations</h3>
-                    <ul>
+                    <ul class="listing">
                     {% for org in orgs %}
                         <li>
                             <a href="{{ org.get_absolute_url }}">{{ org.name }}</a>
@@ -55,12 +55,12 @@
 
     <div class="content_box">
         <h3>Current Position Holders</h3>
-        {% include 'core/position_section.html' with positions=object.position_set.all.currently_active top_entry='person+place' %}
+        {% include 'core/position_position_section.html' with positions=object.position_set.all.currently_active %}
     </div>
 
     <div class="content_box">
         <h3>Past Position Holders</h3>
-        {% include 'core/position_section.html' with positions=object.position_set.all.currently_inactive top_entry='person+place' %}
+        {% include 'core/position_position_section.html' with positions=object.position_set.all.currently_inactive %}
     </div>
     
 {% endblock %}
