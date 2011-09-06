@@ -120,6 +120,10 @@ class Person(ModelBase, HasImageMixin):
     images   = generic.GenericRelation(Image)
     objects  = PersonManager()
     
+    def clean(self):
+        # strip other_names and flatten multiple newlines
+        self.other_names = re.sub(r"\n+", "\n", self.other_names ).strip()
+        
     def name(self):
         if self.other_names:
             return self.other_names.split("\n")[0]
