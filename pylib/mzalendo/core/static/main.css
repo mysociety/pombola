@@ -90,6 +90,14 @@ small {
 th, td {
   padding: 0.25em; }
 
+body {
+  background-color: #ccc; }
+
+#wrapper {
+  max-width: 940px;
+  margin: 0 auto;
+  background-color: #fff; }
+
 #header {
   padding: 0.5em;
   background-color: #555;
