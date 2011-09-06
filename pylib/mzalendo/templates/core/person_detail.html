@@ -48,24 +48,24 @@
     
     <div class="content_box">
         <h3>Current Political Positions</h3>
-        {% include 'core/position_political_section.html' with positions=object.position_set.all.political.currently_active %}
+        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
     </div>
 
     <div class="content_box">
         <h3>Previous Political Positions</h3>
-        {% include 'core/position_political_section.html' with positions=object.position_set.all.political.currently_inactive %}
+        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
     </div>
 
     {% include "core/contact_list.html" with contacts=object.contacts.all %}
 
     <div class="content_box">
         <h3>Job History</h3>
-        {% include 'core/position_section.html' with positions=object.position_set.all.other %}
+        {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
     </div>
 
     <div class="content_box">
         <h3>Education</h3>
-        {% include 'core/position_section.html' with positions=object.position_set.all.education %}
+        {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
     </div>
 
 
