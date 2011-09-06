@@ -45,7 +45,7 @@
                     {% for org in orgs %}
                         <li>
                             <a href="{{ org.get_absolute_url }}">{{ org.name }}</a>
-                            ({{ org.position_count }} {{ org.position_count|pluralize:"person,people" }})
+                            ({{ org.position_count }} {{ org.position_count|pluralize:"entry,entries" }})
                         </li> 
                     {% endfor %}
                     </ul>
