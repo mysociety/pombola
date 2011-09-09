@@ -50,6 +50,11 @@ urlpatterns += patterns('',
     (r'^info/', include('info.urls')),
 )
 
+# Hansard pages
+urlpatterns += patterns('',
+    (r'^hansard/', include('hansard.urls')),
+)
+
 # Admin
 urlpatterns += patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

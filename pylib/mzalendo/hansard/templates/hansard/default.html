@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load switch %}
+
+{% block title %}
+    Hansard listings
+{% endblock %}
+
+{% block content %}
+
+    <style type="text/css" media="screen">
+        ul.hansard_chunks em {
+            font-style: italic;
+        }
+
+        ul.hansard_chunks li {
+            margin-bottom: 0.5em;
+        }
+    </style>
+
+    <ul class="hansard_chunks">
+    {% for chunk in chunks %}
+        <li class="{{ chunk.type }}">
+            {% switch chunk.type %}
+                {% case 'heading' %}
+                    <h2>{{ chunk.content }}</h2>
+                {% case 'speech' %}
+                    <strong>{{ chunk.speaker }}</strong>
+                    {{ chunk.content }}
+                {% case 'event' %}
+                    <em>{{ chunk.content }}</em>
+                {% else %}
+                    {{ chunk.content }}
+            {% endswitch %}
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
