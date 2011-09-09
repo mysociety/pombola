@@ -1,7 +1,11 @@
 import re
-
-
 from xml.sax.handler import ContentHandler
+
+# TODO
+#
+#  report page chunk starts on, not ends.
+#  check that we are not dropping any content
+
 
 class HansardXML(ContentHandler):
     def __init__(self, *args, **kwargs):
@@ -73,6 +77,10 @@ class HansardXML(ContentHandler):
             self.should_ignore = True
             if self.should_store_chunk:
                 self.store_chunk()
+    
+    def endDocument(self):
+        """docstring for endDocument"""
+        self.store_chunk()
     
 
     def flatten_content(self):
