@@ -181,6 +181,7 @@ INSTALLED_APPS = (
 
     'info',
     'tasks',
+    'hansard',
     'core',
 )
 

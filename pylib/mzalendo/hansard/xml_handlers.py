@@ -102,7 +102,7 @@ class HansardXML(ContentHandler):
             chunk['content'] = content['italic']
         elif content['plain'] and content['bold']:
             chunk['type'] = 'speech'
-            chunk['person']  = content['bold']
+            chunk['speaker']  = content['bold']
             chunk['content'] = content['plain']
         elif content['bold']:
             chunk['type'] = 'heading'

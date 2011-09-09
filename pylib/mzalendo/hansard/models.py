@@ -2,11 +2,11 @@ import datetime
 import re
 from warnings import warn
 
-from django.contrib.contenttypes import generic
-from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
+# from django.contrib.contenttypes import generic
+# from django.contrib.contenttypes.models import ContentType
+# from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import Q
+# from django.db.models import Q
 
 # Note - the name 'chunk' is deliberately bad. This code is mainly intended to
 # be a quick proof-of-concept. It should be refactored into something more
