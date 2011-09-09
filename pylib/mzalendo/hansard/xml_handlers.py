@@ -53,6 +53,9 @@ class HansardXML(ContentHandler):
         if name == 'b': self.is_bolded = True
         if name == 'i': self.is_italic = True
 
+        if name in ['b','i']:
+            self.store_chunk()
+
         # Ignore headers and footers
         if name == 'text' and int(attr.get('top', 0)) < 720:
             self.should_ignore = False
