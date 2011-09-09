@@ -28,15 +28,17 @@ class Command(LabelCommand):
         for chunk in hansard_data.content_chunks:
             pp.pprint( chunk )
             
-            db_chunk = models.Chunk(
-                type         = chunk['type'],
+            models.Chunk.objects.get_or_create(
                 date         = '2011-09-11',
                 session      = 'pm',
-                page         = chunk['page'],
                 text_counter = chunk['text_counter'],
-                speaker      = chunk.get('speaker', ''),
-                content      = chunk['content'],
-                source       = filename,
+            
+                defaults = dict(
+                    type         = chunk['type'],
+                    page         = chunk['page'],
+                    speaker      = chunk.get('speaker', ''),
+                    content      = chunk['content'],
+                    source       = filename,
+                )
             )
-            db_chunk.save()
             

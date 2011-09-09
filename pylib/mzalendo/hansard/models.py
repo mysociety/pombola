@@ -31,9 +31,8 @@ class Chunk(models.Model):
     source       = models.CharField(max_length=500)
 
     def __unicode__(self):
-        return self.content[:100]
+        return "%s: %s" % (self.type, self.content[:100])
 
     class Meta:
-        pass
-        # ordering = ["slug"]      
+        ordering = ['date', 'session', 'text_counter']      
 
