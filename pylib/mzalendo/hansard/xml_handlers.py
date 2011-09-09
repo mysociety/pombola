@@ -1,10 +1,11 @@
 import re
+import logging
+
 from xml.sax.handler import ContentHandler
 
 # TODO
 #
 #  proper debug logging
-#  check that we are not dropping any content
 
 
 class HansardXML(ContentHandler):
@@ -99,7 +100,6 @@ class HansardXML(ContentHandler):
             content[k] = tidy_content
             self.content_buffers[k] = []
         
-        print content 
         return content
 
 
@@ -113,22 +113,26 @@ class HansardXML(ContentHandler):
         self.current_text_counter = None
 
         content = self.flatten_content()
-        
-        if content['italic']:
-            chunk['type'] = 'event'
-            chunk['content'] = content['italic']
-        elif content['plain'] and content['bold']:
+
+        if content['plain'] and content['bold']:
             chunk['type'] = 'speech'
-            chunk['speaker']  = content['bold']
-            chunk['content'] = content['plain']
+            chunk['speaker']  = content.pop('bold')
+            chunk['content'] = content.pop('plain')
+        elif content['italic']:
+            chunk['type'] = 'event'
+            chunk['content'] = content.pop('italic')
         elif content['bold']:
             chunk['type'] = 'heading'
-            chunk['content'] = content['bold']
+            chunk['content'] = content.pop('bold')
         else:
             chunk['type'] = 'unknown'
-            chunk['content'] = content['plain']
+            chunk['content'] = content.pop('plain')
 
-        # chunk['all_content'] = content
+        # check that no content has been forgotten
+        for k in content.keys():
+            if not content[k]: continue
+            logging.warning("Missed content in '%s': %s" % ( k, content[k] ) )
+            chunk['content'] += content[k]
 
         if chunk['content']:
             self.content_chunks.append(chunk)
@@ -143,3 +147,4 @@ class HansardXML(ContentHandler):
         else:                buffer_name = 'plain'
         
         self.content_buffers[buffer_name].append( content )
+
