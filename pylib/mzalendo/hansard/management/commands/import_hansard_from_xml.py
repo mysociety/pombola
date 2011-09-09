@@ -21,13 +21,8 @@ class Command(LabelCommand):
         hansard_data = HansardXML()
         xml.sax.parse(filename, hansard_data)
         
-        pp = pprint.PrettyPrinter(indent=4)
-        
-        
-        
         for chunk in hansard_data.content_chunks:
-            pp.pprint( chunk )
-            
+
             models.Chunk.objects.get_or_create(
                 date         = '2011-09-11',
                 session      = 'pm',

@@ -1,15 +1,15 @@
 import re
 import logging
+logging.basicConfig()
 
 from xml.sax.handler import ContentHandler
 
-# TODO
-#
-#  proper debug logging
-
-
 class HansardXML(ContentHandler):
     def __init__(self, *args, **kwargs):
+        
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel( logging.DEBUG )
+        
 
         # counters and state indicators
         self.text_counter          = 0
@@ -36,20 +36,20 @@ class HansardXML(ContentHandler):
         """Gather all the content onto a buffer"""
         
         if self.should_ignore:
-            print "IGNORING '%s'" % content
+            self.logger.debug( "IGNORING '%s'" % content )
             return
             
         # Determine if we have started a new chunk
         if re.match( r'\s*$', content ):
-            print "set should_store_chunk = True"
+            self.logger.debug( "set should_store_chunk = True" )
             self.should_store_chunk = True
             
-        print "'%s'" % content            
+        self.logger.debug( "'%s'" % content             )
         self.append_to_buffer( content )
 
     def startElement(self, name, attr):
-        print '--- start %s ---' % name
-        # print attr.items()
+        self.logger.debug( '--- start %s ---' % name )
+        # self.logger.debug( attr.items() )
 
         # Increment the counters
         if name == 'text':
@@ -71,7 +71,7 @@ class HansardXML(ContentHandler):
 
 
     def endElement(self, name):
-        print '--- end %s ---' % name
+        self.logger.debug( '--- end %s ---' % name )
 
         # Update the state flags
         if name == 'b': self.is_bolded = False
@@ -91,7 +91,7 @@ class HansardXML(ContentHandler):
     def flatten_content(self):
         content = {}
 
-        print self.content_buffers
+        self.logger.debug( self.content_buffers )
 
         for k in self.content_buffers.keys():
             raw_content  = ''.join( self.content_buffers[k] )
@@ -131,7 +131,7 @@ class HansardXML(ContentHandler):
         # check that no content has been forgotten
         for k in content.keys():
             if not content[k]: continue
-            logging.warning("Missed content in '%s': %s" % ( k, content[k] ) )
+            self.logger.warning("Missed content in '%s': %s" % ( k, content[k] ) )
             chunk['content'] += content[k]
 
         if chunk['content']:
