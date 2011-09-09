@@ -1,3 +1,6 @@
+import re
+
+
 from xml.sax.handler import ContentHandler
 
 class HansardXML(ContentHandler):
@@ -10,20 +13,27 @@ class HansardXML(ContentHandler):
         self.is_italic     = False
         self.should_ignore = False
         
-        self.data = {}
-        self.content_buffer = ''
+        self.content_chunks = []
+        self.content_buffer = []
+
 
     def characters(self, content):
         """Gather all the content onto a buffer"""
-        if not self.should_ignore:
-            self.content_buffer += content
-            # print self.content_buffer
-        else:
-            print "IGNORING '%s'" % content            
+        
+        if self.should_ignore:
+            # print "IGNORING '%s'" % content
+            return
+            
+        print "'%s'" % content            
+        self.content_buffer.append( content )
 
+        # Determine if we have started a new chunk
+        if self.is_bolded:
+            self.store_chunk()
+        
     def startElement(self, name, attr):
         print '--- start %s ---' % name
-        print attr.items()
+        # print attr.items()
 
         # Increment the counters
         if name == 'text': self.text_counter += 1
@@ -34,9 +44,11 @@ class HansardXML(ContentHandler):
         if name == 'i': self.is_italic = True
 
         # Ignore headers and footers
-
         if name == 'text' and int(attr.get('top', 0)) > 720:
             self.should_ignore = True
+        else:
+            self.should_ignore = False
+
 
     def endElement(self, name):
         print '--- end %s ---' % name
@@ -45,6 +57,17 @@ class HansardXML(ContentHandler):
         if name == 'b': self.is_bolded = False
         if name == 'i': self.is_italic = False
 
-        # At the end of text stop ignoring
-        if name == 'text': self.should_ignore = False
+        # At the end of text start ignoring
+        if name == 'text': self.should_ignore = True
     
+
+    def store_chunk(self):
+        """Store the current chunk"""
+        content = re.sub(r'\s+',' ', ''.join(self.content_buffer) )
+        
+        chunk = {
+            'content': content
+        }
+        
+        self.content_chunks.append(chunk)
+        self.content_buffer = []
