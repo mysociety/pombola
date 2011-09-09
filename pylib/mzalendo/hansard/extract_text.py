@@ -12,6 +12,7 @@ filename = '/home/evdb/Hansard 01.09.11.xml'
 hansard_data = HansardXML()
 xml.sax.parse(filename, hansard_data)
 
+pp = pprint.PrettyPrinter(indent=4)
 
 print '------ content_chunks ------'
-pprint.pprint( hansard_data.content_chunks )
+pp.pprint( hansard_data.content_chunks )
