@@ -98,7 +98,7 @@ class HansardXML(ContentHandler):
         content = self.flatten_content()
         
         if content['italic']:
-            chunk['type'] = 'aside'
+            chunk['type'] = 'event'
             chunk['content'] = content['italic']
         elif content['plain'] and content['bold']:
             chunk['type'] = 'speech'
