@@ -3,7 +3,7 @@ from xml.sax.handler import ContentHandler
 
 # TODO
 #
-#  report page chunk starts on, not ends.
+#  proper debug logging
 #  check that we are not dropping any content
 
 
@@ -11,7 +11,8 @@ class HansardXML(ContentHandler):
     def __init__(self, *args, **kwargs):
 
         # counters and state indicators
-        self.text_counter  = 0
+        self.text_counter          = 0
+        self.current_text_counter  = 0
         self.page_counter  = 0
         self.is_bolded     = False
         self.is_italic     = False
@@ -27,7 +28,7 @@ class HansardXML(ContentHandler):
         }
 
         # put a blank chunk at the start
-        self.store_chunk()
+        # self.store_chunk()
         
 
     def characters(self, content):
@@ -50,7 +51,10 @@ class HansardXML(ContentHandler):
         # print attr.items()
 
         # Increment the counters
-        if name == 'text': self.text_counter += 1
+        if name == 'text':
+            self.text_counter += 1
+            if not self.current_text_counter: self.current_text_counter = self.text_counter
+
         if name == 'page': self.page_counter += 1
 
         # Update the state flags
@@ -103,8 +107,10 @@ class HansardXML(ContentHandler):
         """Store the current chunk"""
         chunk = {
             'page': self.page_counter,
-            'text_counter': self.text_counter,
         }
+
+        chunk['text_counter'] = self.current_text_counter or self.text_counter
+        self.current_text_counter = None
 
         content = self.flatten_content()
         
