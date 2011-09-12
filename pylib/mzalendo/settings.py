@@ -9,13 +9,9 @@ import setup_env
 base_dir = os.path.abspath( os.path.split(__file__)[0] + '/../..' )
 # print "base_dir: " + base_dir
 
-# load config locally, or from the mysociety default location.
-# put settings in config_local if you're not running in a full mysociety vhost
-try:
-    from config_local import config
-except ImportError:
-    from mysociety import config
-    config.set_file( base_dir + "/conf/general" )
+# load the mySociety config
+from mysociety import config
+config.set_file( base_dir + "/conf/general" )
 
 if int(config.get('STAGING')):
     STAGING = True
