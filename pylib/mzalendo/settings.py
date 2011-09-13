@@ -175,6 +175,7 @@ INSTALLED_APPS = (
     
     'haystack',
 
+    'helpers',
     'info',
     'tasks',
     'hansard',
@@ -252,3 +253,6 @@ AJAX_LOOKUP_CHANNELS = {
     'place_name'        : dict(model='core.place',         search_field='name'),
     'title_name'        : dict(model='core.positiontitle', search_field='name'),
 }
+
+# Mapit config
+MAPIT_URL = config.get('MAPIT_URL')

@@ -25,4 +25,6 @@ define( 'OPTION_STAGING', 1 );
 define( 'OPTION_TIME_ZONE', 'Europe/London' );
 define( 'OPTION_DJANGO_SECRET_KEY', 'abcabc');
 
+define( 'OPTION_MAPIT_URL', 'http://kenya.mapit.mysociety.org' );
+
 ?>
