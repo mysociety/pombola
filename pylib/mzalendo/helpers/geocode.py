@@ -2,6 +2,8 @@ import httplib2
 h = httplib2.Http('.cache')
 
 import urllib
+import re
+
 import settings
 
 # In Python 2.6 simplejson is json in the standard library. In 2.5 it was still 
@@ -48,9 +50,17 @@ def find(address, bounds=KENYA_BOUNDS):
             if r['address_components'][-1]['short_name'] != 'KE':
                 continue
             
+            # cleanup the name
+            name = r['formatted_address']
+            name = re.sub( r', Kenya$', '', name )
+
+            # check that we don't alreadiy have an entry for that name
+            if name in [ existing['name'] for existing in results ]:
+                continue
+
             results.append(
                 {
-                    'name': r['formatted_address'],
+                    'name': name,
                     'lat':  reduce_precision( r['geometry']['location']['lat'] ),
                     'lng':  reduce_precision( r['geometry']['location']['lng'] ),
                 }

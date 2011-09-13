@@ -19,7 +19,7 @@ class Geocode(unittest.TestCase):
                 'input': 'Nairobi',
                 'output': [
                     {
-                        'name': u'Nairobi, Kenya',
+                        'name': u'Nairobi',
                         'lat': '-1.28333',
                         'lng': '36.81667',
                     },
@@ -29,13 +29,12 @@ class Geocode(unittest.TestCase):
                 # many results - some outside Kenya (should be filtered)
                 'input': 'Kenyatta',
                 'output':  [
-                    { 'name': u'Mombasa-Malindi Rd, Malindi, Kenya', 'lat': '-3.21585', 'lng': '40.11737', },
-                    { 'name': u'Kenyatta Ave, Nanyuki, Kenya',       'lat': '0.01319',  'lng': '37.07745', },
-                    { 'name': u'C77, Nyahururu, Kenya',              'lat': '0.03608',  'lng': '36.36455', },
-                    { 'name': u'Kenyatta Ave, Naivasha, Kenya',      'lat': '-0.72551', 'lng': '36.44472', },
-                    { 'name': u'Kenyatta Ave, Nairobi, Kenya',       'lat': '-1.28487', 'lng': '36.82057', },
-                    { 'name': u'Kenyatta Rd, Nyeri, Kenya',          'lat': '-0.42570', 'lng': '36.95296', },
-                    { 'name': u'Kenyatta Ave, Nairobi, Kenya',       'lat': '-1.28784', 'lng': '36.81461', },
+                    { 'name': u'Mombasa-Malindi Rd, Malindi', 'lat': '-3.21585', 'lng': '40.11737', },
+                    { 'name': u'Kenyatta Ave, Nanyuki',       'lat': '0.01319',  'lng': '37.07745', },
+                    { 'name': u'C77, Nyahururu',              'lat': '0.03608',  'lng': '36.36455', },
+                    { 'name': u'Kenyatta Ave, Naivasha',      'lat': '-0.72551', 'lng': '36.44472', },
+                    { 'name': u'Kenyatta Ave, Nairobi',       'lat': '-1.28487', 'lng': '36.82057', },
+                    { 'name': u'Kenyatta Rd, Nyeri',          'lat': '-0.42570', 'lng': '36.95296', },
                     ],
             }
         ]
@@ -71,13 +70,3 @@ class Geocode(unittest.TestCase):
             output = geocode.coord_to_areas( lat=test['lat'], lng=test['lng'] )
             self.assertEqual( output, test['output'] )
 
-# import mapit
-# 
-# class MyFuncTestCase(unittest.TestCase):
-#     def setUp(self):
-#         pass
-# 
-#     def test_name_search(self):
-#         results = mapit.get_url( 'areas', 'Nairobi' )
-#         print results
-# 
