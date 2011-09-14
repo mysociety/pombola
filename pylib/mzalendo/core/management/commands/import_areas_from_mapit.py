@@ -15,6 +15,7 @@ class Command(NoArgsCommand):
     area_types_to_fetch = ('CTR','PRO','DIS','DIV')
 
     def handle_noargs(self, **options):
+        rerun_import = False
 
         data = geocode.get_mapit_url( 'areas', [','.join(self.area_types_to_fetch)] )
 
@@ -29,6 +30,18 @@ class Command(NoArgsCommand):
                 }
             )
             
+            # load the parent if it exists
+            if entry['parent_area']:
+                try:
+                    parent = models.Place.objects.get(mapit_id=entry['parent_area'])
+                    parent_id = parent.id
+                except models.Place.DoesNotExist:
+                    print "ERROR: parent not in local db - will rerun import to fix"
+                    rerun_import = True
+                    parent_id = None
+            else:
+                parent_id = None
+
             # get or create the place
             print "updating/adding '%s'" % ( entry['name'] )
             place = models.Place.objects.update_or_create(
@@ -37,8 +50,13 @@ class Command(NoArgsCommand):
                     'kind': kind,
                 },
                 {
-                    'slug':     slugify( entry['name'] + ' ' + entry['type_name'] ),
-                    'mapit_id': entry['id'],
+                    'slug':         slugify( entry['name'] + ' ' + entry['type_name'] ),
+                    'mapit_id':     entry['id'],
+                    'parent_place_id': parent_id,
                 }
             )
+            
+        # Recurse if we need to rerun the import
+        if rerun_import:
+            self.handle_noargs(**options)
     

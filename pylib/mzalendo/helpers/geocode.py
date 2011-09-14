@@ -118,7 +118,8 @@ def get_mapit_url( method, args ):
     data = json.loads(content)
     
     # delete the debug info straight away
-    del( data['debug_db_queries'] )    
+    if'debug_db_queries' in data:
+        del( data['debug_db_queries'] )    
 
     return data
 

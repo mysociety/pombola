@@ -14,7 +14,7 @@
     
         {# Ideally all of this would be in an external js file. For now it is the only JS on site so leaving it here #}
     
-        <div id="map_canvas" style="float: right; width:50%; min-width: 240px; height:300px"></div>
+        <div id="map_canvas" style="width:50%; min-width: 240px; height:300px"></div>
         
         <script type="text/javascript"
             src="http://maps.googleapis.com/maps/api/js?sensor=false">
@@ -46,8 +46,22 @@
         
         </script>
     {% endif %}
+    
 
-    <br clear="both" />
+    {% if object.child_places.count %}        
+        <h3>Areas within {{ object.name }}</h3>
+        
+        <ul class="listing">
+        {% for child in object.child_places.all %}
+            <li>
+                <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+            </li>
+        {% empty %}
+            <li>No child places</li>
+        {% endfor %}
+        </ul>            
+    {% endif %}
+
 
 {% endblock %}
 
