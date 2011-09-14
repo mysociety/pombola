@@ -10,5 +10,44 @@
     {% endif %}
 
 
+    {% if object.mapit_id %}
+    
+        {# Ideally all of this would be in an external js file. For now it is the only JS on site so leaving it here #}
+    
+        <div id="map_canvas" style="float: right; width:50%; min-width: 240px; height:300px"></div>
+        
+        <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?sensor=false">
+        </script>
+        
+        <script type="text/javascript">
+          function initialize() {
+            var latlng = new google.maps.LatLng(-0.023559, 37.906193);
+        
+            var myOptions = {
+              zoom: 6,
+              center: latlng,
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              disableDefaultUI: true
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),
+                myOptions);
+        
+            var kml = new google.maps.KmlLayer(
+                '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001',
+                {
+                    map: map,
+                    clickable: false
+                }
+            );
+          }
+        
+          initialize();
+        
+        </script>
+    {% endif %}
+
+    <br clear="both" />
+
 {% endblock %}
 
