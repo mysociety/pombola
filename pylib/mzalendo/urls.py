@@ -17,9 +17,10 @@ urlpatterns = patterns('core.views',
     
     # Objects
     url(r'^person/(?P<slug>[-\w]+)/',       'person',       name='person'),
-    url(r'^place/(?P<slug>[-\w]+)/',        'place',        name='place'),
     url(r'^position/(?P<slug>[-\w]+)/',     'position',     name='position'),
 
+    url(r'^place/is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'),
+    url(r'^place/(?P<slug>[-\w]+)/',    'place',      name='place'),
 
     url(r'^organisation/is/(?P<slug>[-\w]+)/', 'organisation_kind', name='organisation_kind'),
     url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),

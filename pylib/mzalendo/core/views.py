@@ -51,6 +51,20 @@ def place(request, slug):
         slug     = slug,
     )
 
+def place_kind(request, slug):
+    """"""
+    print slug
+    place_kind = get_object_or_404(
+        models.PlaceKind,
+        slug=slug
+    )
+
+    return object_list(
+        request,
+        queryset = place_kind.place_set.all(),
+        extra_context = { 'kind': place_kind, },
+    )
+
 
 def position(request, slug):
     """"""
