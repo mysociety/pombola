@@ -49,18 +49,28 @@
     
 
     {% if object.child_places.count %}        
-        <h3>Areas within {{ object.name }}</h3>
-        
-        <ul class="listing">
-        {% for child in object.child_places.all %}
-            <li>
-                <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
-            </li>
-        {% empty %}
-            <li>No child places</li>
-        {% endfor %}
-        </ul>            
+        <div class="content_box">
+            <h3>Areas within {{ object.name }}</h3>
+            
+            <ul class="listing">
+            {% for child in object.child_places.all %}
+                <li>
+                    <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+                </li>
+            {% empty %}
+                <li>No child places</li>
+            {% endfor %}
+            </ul>            
+        </div>
     {% endif %}
+
+
+    <div class="content_box todo">
+        <h3>Data on this place</h3>
+
+        <p>For example population, demographics, CDF reports etc etc.</p>
+
+    </div>
 
 
 {% endblock %}
