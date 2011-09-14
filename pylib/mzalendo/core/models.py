@@ -287,6 +287,7 @@ class Place(ModelBase):
     location     = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
     original_id  = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to constituencies in original mzalendo.com db')
+    mapit_id     = models.PositiveIntegerField(blank=True, null=True)
 
     objects = ManagerBase()
 

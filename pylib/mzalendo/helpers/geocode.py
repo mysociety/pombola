@@ -88,11 +88,14 @@ def coord_to_areas( lat, lng ):
     return_data = {}
 
     for key, value in data.items():
-        if key == 'debug_db_queries': continue
         if value['type'] not in wanted_area_codes: continue
 
         return_data[ value['type'] ] = {
-            'name': value['name'],
+            'name': # Given unique look-up attributes, and extra data attributes,
+            # either updates the entry referred to if it exists, or
+            # creates it if it doesn't.
+            # Returns string describing what has happened.
+            value['name'],
             'mapit_id': value['id'],
         }
 
@@ -113,6 +116,10 @@ def get_mapit_url( method, args ):
 
     response, content = h.request( mapit_url )
     data = json.loads(content)
+    
+    # delete the debug info straight away
+    del( data['debug_db_queries'] )    
+
     return data
 
     
