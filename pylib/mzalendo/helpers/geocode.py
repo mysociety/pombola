@@ -1,10 +1,11 @@
-import httplib2
-h = httplib2.Http('.cache')
 
 import urllib
 import re
 
-import settings
+from django.conf import settings
+
+import httplib2
+h = httplib2.Http( settings.HTTPLIB2_CACHE_DIR )
 
 # In Python 2.6 simplejson is json in the standard library. In 2.5 it was still 
 # simplejson. Cope with either.

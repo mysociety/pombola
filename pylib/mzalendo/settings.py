@@ -256,3 +256,6 @@ AJAX_LOOKUP_CHANNELS = {
 
 # Mapit config
 MAPIT_URL = config.get('MAPIT_URL')
+
+# misc settings
+HTTPLIB2_CACHE_DIR = os.path.abspath( base_dir + '/httplib2_cache' )
