@@ -2,14 +2,17 @@ import datetime
 import re
 from warnings import warn
 
-from django.contrib.gis.db import models
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
-from django.contrib.comments.moderation import CommentModerator, moderator
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
+
 from django.db.models import Q
 
+from django.contrib.comments.moderation import CommentModerator, moderator
+from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.gis.db import models
+
+from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from tasks.models import Task
 from images.models import HasImageMixin, Image
 
@@ -19,6 +22,8 @@ add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateFi
 add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointField"])
 
 date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
+
+
 
 class ModelBase(models.Model):
     
@@ -41,9 +46,38 @@ class ModelBase(models.Model):
        abstract = True      
 
 
+class ManagerBase(models.GeoManager):
+    def update_or_create(self, filter_attrs, attrs):
+        """Given unique look-up attributes, and extra data attributes, either
+        updates the entry referred to if it exists, or creates it if it doesn't.
+        
+        Returns the object updated or created, having saved the changes.
+        """
+        try:
+            obj = self.get(**filter_attrs)
+            changed = False
+            for k, v in attrs.items():
+                if obj.__dict__[k] != v:
+                    changed = True
+                    obj.__dict__[k] = v
+            if changed:
+                obj.save()
+        except ObjectDoesNotExist:
+            attrs.update(filter_attrs)
+            obj = self.create(**attrs)
+            obj.save()
+        
+        return obj
+
+    
+
+
+
 class ContactKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
+
+    objects = ManagerBase()
 
     def __unicode__(self):
         return self.name
@@ -64,6 +98,8 @@ class Contact(ModelBase):
     object_id      = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     
+    objects = ManagerBase()
+
     def __unicode__(self):
         return "%s (%s for %s)" % ( self.value, self.kind, self.content_object )
 
@@ -86,6 +122,8 @@ class InformationSource(ModelBase):
     object_id      = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     
+    objects = ManagerBase()
+
     def __unicode__(self):
         return "%s: %s" % ( self.source, self.content_object )
 
@@ -99,7 +137,7 @@ class PersonQuerySet(models.query.GeoQuerySet):
         return self.filter( position__title=mp_title )
 
 
-class PersonManager(models.GeoManager):
+class PersonManager(ManagerBase):
     def get_query_set(self):
         return PersonQuerySet(self.model)
 
@@ -169,6 +207,8 @@ class OrganisationKind(ModelBase):
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
 
+    objects = ManagerBase()
+
     def __unicode__(self):
         return self.name
 
@@ -197,7 +237,7 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
         )
 
 
-class OrganisationManager(models.GeoManager):
+class OrganisationManager(ManagerBase):
     def get_query_set(self):
         return OrganisationQuerySet(self.model)
 
@@ -230,6 +270,8 @@ class PlaceKind(ModelBase):
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
 
+    objects = ManagerBase()
+
     def __unicode__(self):
         return self.name
 
@@ -245,6 +287,8 @@ class Place(ModelBase):
     location     = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
     original_id  = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to constituencies in original mzalendo.com db')
+
+    objects = ManagerBase()
 
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.kind )
@@ -262,6 +306,8 @@ class PositionTitle(ModelBase):
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
     original_id     = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to data in original mzalendo.com db')
+
+    objects = ManagerBase()
 
     def __unicode__(self):
         return self.name
@@ -330,7 +376,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter down to only the other category"""
         return self.filter(category='other')
 
-class PositionManager(models.GeoManager):
+class PositionManager(ManagerBase):
     def get_query_set(self):
         return PositionQuerySet(self.model)
 
