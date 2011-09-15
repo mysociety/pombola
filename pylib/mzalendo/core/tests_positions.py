@@ -4,6 +4,7 @@ import random
 import settings
 
 from django.core import mail
+from django.core import exceptions
 from django_webtest import WebTest
 from core         import models
 from django.test.client import Client
@@ -19,6 +20,19 @@ class PositionTest(WebTest):
             slug       = 'test-person',
         )
         self.person.save()
+        
+        self.organisation_kind = models.OrganisationKind(
+            name = 'Foo',
+            slug = 'foo',
+        )
+        self.organisation_kind.save()
+
+        self.organisation = models.Organisation(
+            name = 'Test Org',
+            slug = 'test-org',
+            kind = self.organisation_kind,
+        )
+        self.organisation.save()
         
     def test_unicode(self):
         """Check that missing attributes don't crash"""
@@ -103,5 +117,25 @@ class PositionTest(WebTest):
         self.maxDiff = None
         self.assertEqual( position_expected_order, position_actual_order )
 
+    def test_have_at_least_one_attribute(self):
+        """
+        Positions must have a person, and at least one more attribute.
+        Otherwise they don't mean anything
+        """
+        
+        pos = models.Position(
+            person = self.person,            
+        )
 
+        # call this manually so that the validation does not get all confused
+        # about it
+        pos._set_sorting_dates()
+
+        with self.assertRaises(exceptions.ValidationError):
+            pos.full_clean()
+        
+        # If this does not blow up then it is OK
+        pos.organisation = self.organisation
+        pos.full_clean()
+        
 

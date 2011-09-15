@@ -2,7 +2,7 @@ import datetime
 import re
 from warnings import warn
 
-from django.core.exceptions import ObjectDoesNotExist
+from django.core import exceptions
 from django.core.urlresolvers import reverse
 
 from django.db.models import Q
@@ -62,7 +62,7 @@ class ManagerBase(models.GeoManager):
                     obj.__dict__[k] = v
             if changed:
                 obj.save()
-        except ObjectDoesNotExist:
+        except exceptions.ObjectDoesNotExist:
             attrs.update(filter_attrs)
             obj = self.create(**attrs)
             obj.save()
@@ -407,6 +407,9 @@ class Position(ModelBase):
     
     objects = PositionManager()
 
+    def clean(self):
+        if not (self.organisation or self.title or self.place):
+            raise exceptions.ValidationError('Must have at least one of organisation, title or place.')
 
     def display_dates(self):
         """Nice HTML for the display of dates"""
@@ -478,11 +481,9 @@ class Position(ModelBase):
         
         return True
 
-
     def save(self, *args, **kwargs):
-            self._set_sorting_dates()
-            super(Position, self).save(*args, **kwargs)
-
+        self._set_sorting_dates()
+        super(Position, self).save(*args, **kwargs)
 
     def __unicode__(self):
 
