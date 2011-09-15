@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.views.generic.simple import direct_to_template
 
 import settings
 
@@ -60,6 +61,11 @@ urlpatterns += patterns('',
 urlpatterns += patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+)
+
+# serve some pages directly from templates
+urlpatterns += patterns('',
+    url(r'^privacy/$', direct_to_template, {'template': 'privacy.html'}, name='privacy'),
 )
 
 # serve media_root files if needed (/static served in dev by runserver)

@@ -62,13 +62,16 @@
             </ul>
 
             <ul class="utilities">
+                <li><a href="{% url privacy %}">privacy</a></li>
+            </ul>
+            
+            <ul class="utilities">
                 <li><a href="https://github.com/mysociety/mzalendo/issues">issues</a></li>
                 <li><a href="https://github.com/mysociety/mzalendo/wiki">wiki</a></li>
                 <li><a href="{% url admin:index %}">admin</a></li>
                 {% if object %}
                     <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
                 {% endif %}
-
             </ul>
 
         </div>
