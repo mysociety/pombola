@@ -2,3 +2,4 @@ python-docutils
 python-bcrypt
 python-markdown
 python-xapian
+python-yaml

@@ -11,7 +11,7 @@ base_dir = os.path.abspath( os.path.split(__file__)[0] + '/../..' )
 
 # load the mySociety config
 from mysociety import config
-config.set_file( base_dir + "/conf/general" )
+config.set_file( base_dir + "/conf/general.yml" )
 
 if int(config.get('STAGING')):
     STAGING = True
