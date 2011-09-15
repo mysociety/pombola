@@ -1,30 +1,21 @@
-<?php
-/*
- * general-example:
- * Example values for the "general" config file.
- *
- * Configuration parameters, in PHP syntax. Configuration parameters are set
- * using the PHP define('OPTION_...', '...') function. Both perl and PHP code
- * parse this properly, so you can use comments and conditionals and whatnot,
- * but unless essential it's better to keep it simple....
- *
- * Copy this file to one called "general" in the same directory.  Or
- * have multiple config files and use a symlink to change between them.
- * 
- * Copyright (c) 2010 UK Citizens Online Democracy. All rights reserved.
- * 
- */
+# general-example:
+# Example values for the "general" config file.
+#
+# Configuration parameters, in YAML syntax.
+#
+# Copy this file to one called "general.yml" in the same directory.  Or
+# have multiple config files and use a symlink to change between them.
+# 
+# Copyright (c) 2011 UK Citizens Online Democracy. All rights reserved.
 
-define( 'OPTION_MZALENDO_DB_HOST', 'localhost' );
-define( 'OPTION_MZALENDO_DB_PORT', '5432' );
-define( 'OPTION_MZALENDO_DB_USER', '' );
-define( 'OPTION_MZALENDO_DB_NAME', '' );
-define( 'OPTION_MZALENDO_DB_PASS', '' );
-        
-define( 'OPTION_STAGING', 1 );
-define( 'OPTION_TIME_ZONE', 'Europe/London' );
-define( 'OPTION_DJANGO_SECRET_KEY', 'abcabc');
+MZALENDO_DB_HOST: 'localhost'
+MZALENDO_DB_PORT: '5432'
+MZALENDO_DB_USER: ''
+MZALENDO_DB_NAME: ''
+MZALENDO_DB_PASS: ''
 
-define( 'OPTION_MAPIT_URL', 'http://kenya.mapit.mysociety.org' );
+STAGING: '1'
+TIME_ZONE: 'Europe/London'
+DJANGO_SECRET_KEY: 'abcabc'
 
-?>
+MAPIT_URL: 'http://kenya.mapit.mysociety.org'
