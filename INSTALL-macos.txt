@@ -1,0 +1,76 @@
+#
+# INSTALL - instructions for getting dev environment up and running on
+# MacOS 10.7 (Lion)
+#
+
+# Install the GitHub GUI http://mac.github.com/
+
+# Download the code:
+* Go to https://github.com/mysociety/mzalendo
+* Click the 'Clone in Mac' button
+* In the GitHub app accept the cloning and wait for it to finish (may take a while as it pulls in lots of other stuff)
+
+# The rest of these instructions are done on the commandline - use an app like
+# 'Terminal' or 'iTerm'.
+
+
+# You need xapian - the search engine. Install using 'brew' (or fink, or macports)
+sudo brew install xapian --python
+
+# remember to add 'export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH' to your
+# ~/.bash_profile so that the xapian bindings get found.
+
+
+sudo brew install bcrypt
+
+
+# install some needed python modules
+sudo easy_install pyyaml psycopg2 xapian-haystack south py-bcrypt markdown django-markdown pyyaml
+
+
+
+# You'll need Postgres (and postgis) installed. 
+
+
+# create the database - assuming here that you're calling it 'mzalendo'
+createdb -T template_postgis mzalendo
+
+
+# go to the mzalendo Django project
+cd your/path/to/mzalendo
+
+
+# copy config example and set values needed ('mate' is the text editor
+# TextMate, substitute your own if needed)
+cp conf/general-example.yml conf/general.yml
+mate conf/general.yml
+
+
+# change to the django project
+cd pylib/mzalendo
+
+
+# try running the manage command - should return a list of possible subcommands.
+# If there are errors please fix them and let us know what was needed.
+./manage.py
+
+
+
+# setup the db
+./manage.py syncdb
+./manage.py migrate
+
+
+# run the dev server
+./manage.py runserver
+
+
+# Get Busy!
+
+
+
+###### NOTES ########
+
+Currently the GitHub app does not appear to update the submodules so this needs
+to be done by hand. Run 'git submodule update' to do it.
+
