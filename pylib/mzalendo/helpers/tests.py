@@ -1,6 +1,7 @@
 import unittest
 import geocode
 import pprint
+import os
 
 class Geocode(unittest.TestCase):
     def setUp(self):
@@ -27,6 +28,7 @@ class Geocode(unittest.TestCase):
             },
             {
                 # many results - some outside Kenya (should be filtered)
+                'all_tests_only': True, # fickle test as it changes
                 'input': 'Kenyatta',
                 'output':  [
                     { 'name': u'Mombasa-Malindi Rd, Malindi', 'lat': '-3.21585', 'lng': '40.11737', },
@@ -40,6 +42,7 @@ class Geocode(unittest.TestCase):
         ]
 
         for test in tests:
+            if test.get('all_tests_only') and not os.environ.get('ALL_TESTS'): continue
             output = geocode.find( test['input'])
             self.assertEqual( output, test['output'] )
 
