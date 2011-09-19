@@ -308,6 +308,7 @@ class PositionTitle(ModelBase):
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary         = models.TextField(blank=True)
     original_id     = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to data in original mzalendo.com db')
+    requires_place  = models.BooleanField(default=False, help_text="Does this job title require a place to complete the position?")
 
     objects = ManagerBase()
 
@@ -410,6 +411,10 @@ class Position(ModelBase):
     def clean(self):
         if not (self.organisation or self.title or self.place):
             raise exceptions.ValidationError('Must have at least one of organisation, title or place.')
+
+        if self.title and self.title.requires_place and not self.place:
+            raise exceptions.ValidationError( "The job title '%s' requires a place to be set" % self.title.name )
+            
 
     def display_dates(self):
         """Nice HTML for the display of dates"""

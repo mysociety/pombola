@@ -139,3 +139,30 @@ class PositionTest(WebTest):
         pos.full_clean()
         
 
+    def test_place_is_required(self):
+        """
+        Some job titles (like an MP) are meaningless if there is no place
+        associated with them.
+        """
+
+        title = models.PositionTitle(
+            name = 'Test title',
+            slug = 'test-title',
+        )
+
+        # create position with no place
+        position = models.Position(
+            person = self.person,
+            title  = title,
+        )
+        position._set_sorting_dates()        
+        position.full_clean()
+        
+        # Change the title to require a place
+        title.requires_place = True
+        with self.assertRaises(exceptions.ValidationError):
+            position.full_clean()
+
+        # give the pos a place and check that it now validates
+        position.place = models.Place( name='Test Place', slug='test-place')
+        position.full_clean()
