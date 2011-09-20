@@ -29,7 +29,7 @@
 
     <h2>possible matches</h2>
 
-    <div id="map_canvas" style="width:50%; min-width: 240px; height:300px"></div>
+    <div id="map_canvas" style="width:50%; min-width: 240px; height:400px"></div>
         
     <ul>
         {% for result in results %}
@@ -43,8 +43,8 @@
         <script type="text/javascript" charset="utf-8">
             add_marker_to_map(
                 {
-                    lat:  "{{ result.lat }}",
-                    lng:  "{{ result.lng }}",
+                    lat:  {{ result.lat }},
+                    lng:  {{ result.lng }},
                     name: "{{ result.name }}",
                     url:  "{% url location_search %}?loc={{ result.lat }},{{ result.lng }}"
                 }
