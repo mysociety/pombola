@@ -25,6 +25,12 @@
 
 </div>
 
+{% if loc and not results %}
+
+    <p>There were no matches for '<strong>{{ loc }}</strong>' - please try another search.</p>
+
+{% endif %}
+
 {% if areas %}
 
     <h2>Matching areas</h2>
@@ -40,7 +46,7 @@
 
 {% if results %}
 
-    <h2>possible matches</h2>
+    <h2>Possible Matches</h2>
 
     <div id="map_canvas" style="width:50%; min-width: 240px; height:400px"></div>
         
