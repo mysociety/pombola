@@ -5,6 +5,7 @@ from django.db.models import Count
 from django.db.models import Q
 
 from mzalendo.core import models
+from mzalendo.helpers import geocode
 
 def home(request):
     """Homepage"""
@@ -139,10 +140,15 @@ def parties(request):
 
 def location_search(request):
     
+    loc = request.GET.get('loc', '')
+
+    results = geocode.find(loc) if loc else []
+    
     return render_to_response(
         'core/location_search.html',
         {
-            # 'parties': parties,
+            'loc': loc,
+            'results': results,
         },
         context_instance = RequestContext( request ),        
     )
