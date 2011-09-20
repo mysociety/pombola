@@ -30,8 +30,10 @@ urlpatterns = patterns('core.views',
     url(r'^parties', 'parties', name='parties'),
 
 
-    # Haystack
+    # Haystack and other searches
     url(r'^search/', include('haystack.urls') ),
+    url(r'^location/', 'location_search', name="location_search"),
+    
 
     # Ajax select
     url(r'^ajax_select/', include('ajax_select.urls')),

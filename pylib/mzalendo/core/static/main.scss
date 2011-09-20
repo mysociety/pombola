@@ -236,3 +236,19 @@ div.content_box {
         margin: 0 0 0.25em 0;
     }
 }
+
+ul.search_hints {
+    font-size: 80%;
+    color: green;
+
+    li {
+        display: inline;
+        padding: 0 0.5em;
+    
+        a {
+            color: inherit;
+        }
+    }
+}
+
+

@@ -135,6 +135,16 @@ def parties(request):
         },
         context_instance = RequestContext( request ),
     )
+
+
+def location_search(request):
     
-    
-    
+    return render_to_response(
+        'core/location_search.html',
+        {
+            # 'parties': parties,
+        },
+        context_instance = RequestContext( request ),        
+    )
+
+

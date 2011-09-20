@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Location Search{% endblock %}
+
+{% block content %}
+
+{# TODO - add autolocate magic here #}
+{# TODO - map showing locations found #}
+{# TODO - search using the map as a drilldown #}
+
+
+<h2>Location Search</h2>
+
+<div class="content_box">
+    <form method="post" action="{% url location_search %}">
+        <input type="search" name="loc" placeholder="location name" />
+        <input type="submit" value="search" />
+    </form>
+
+    <ul class="search_hints">
+        <li><a href="{% url location_search %}?loc=Nairobi">Nairobi</a></li>
+        <li><a href="{% url location_search %}?loc=Mombasa">Mombasa</a></li>
+        <li><a href="{% url location_search %}?loc=0.515,35.266">0.515, 35.266</a> (co-ordinates for Eldoret)</li>        
+    </ul>
+
+</div>
+
+<h2>possible matches</h2>
+
+
+
+{% endblock %}
+
