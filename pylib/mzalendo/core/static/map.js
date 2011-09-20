@@ -1,5 +1,6 @@
 var map = undefined;
 var kml_urls_to_add = [];
+var markers_to_add = [];
 
 function initialize() {
     initialize_map();
@@ -7,7 +8,7 @@ function initialize() {
 
 function initialize_map() {
 
-    map_element = document.getElementById("map_canvas")
+    var map_element = document.getElementById("map_canvas")
     if (!map_element) return false;
 
     var latlng = new google.maps.LatLng(-0.023559, 37.906193);
@@ -32,8 +33,35 @@ function initialize_map() {
         );
     }
 
+    while ( args = markers_to_add.shift() ) {
+
+        var marker_opts = {
+            position: new google.maps.LatLng(args.lat, args.lng ) ,
+            title: args.name,
+            map: map,
+        };
+
+        var marker = new google.maps.Marker( marker_opts );
+
+        if ( args.url ) {
+            
+            var url = args.url;
+            
+            google.maps.event.addListener(
+                marker,
+                'click',
+                function() {
+                    window.location.replace( url );
+                }
+            );
+        }
+    }
 }
 
 function add_kml_to_map( kml_url ) {    
     kml_urls_to_add.push( kml_url );
+}
+
+function add_marker_to_map( args ) {
+    markers_to_add.push(args);
 }
