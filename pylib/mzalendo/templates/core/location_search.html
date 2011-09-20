@@ -25,6 +25,19 @@
 
 </div>
 
+{% if areas %}
+
+    <h2>Matching areas</h2>
+
+    <ul class="listing">
+    {% for object in areas %}
+        {% include 'core/generic_list_item.html' %}
+    {% endfor %}
+    </ul>
+    
+
+{% endif %}
+
 {% if results %}
 
     <h2>possible matches</h2>
