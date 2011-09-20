@@ -1,6 +1,7 @@
 
 import urllib
 import re
+import pprint
 
 from django.conf import settings
 
@@ -36,39 +37,35 @@ def find(address, bounds=KENYA_BOUNDS):
     json_content = json.loads(content)
 
     try:
-        # Let's assume for the moment that the first location in the
-        # list is the best one.
         raw_results = json_content['results']
+    except KeyError:
+        raw_results = []
+
+    results = []
+    
+    # pprint.pprint( raw_results )
+    
+    for r in raw_results:
         
-        # import pprint
-        # pprint.pprint( raw_results )
+        # If result not in Kenya skip it
+        if r['address_components'][-1]['short_name'] != 'KE':
+            continue
         
-        results = []
-
-        for r in raw_results:
-            
-            # If result not in Kenya skip it
-            if r['address_components'][-1]['short_name'] != 'KE':
-                continue
-            
-            # cleanup the name
-            name = r['formatted_address']
-            name = re.sub( r', Kenya$', '', name )
-
-            # check that we don't alreadiy have an entry for that name
-            if name in [ existing['name'] for existing in results ]:
-                continue
-
-            results.append(
-                {
-                    'name': name,
-                    'lat':  reduce_precision( r['geometry']['location']['lat'] ),
-                    'lng':  reduce_precision( r['geometry']['location']['lng'] ),
-                }
-            )
-        # results = result[0]['geometry']['location']
-    except IndexError:
-        results = []
+        # cleanup the name
+        name = r['formatted_address']
+        name = re.sub( r', Kenya$', '', name )
+    
+        # check that we don't alreadiy have an entry for that name
+        if name in [ existing['name'] for existing in results ]:
+            continue
+    
+        results.append(
+            {
+                'name': name,
+                'lat':  reduce_precision( r['geometry']['location']['lat'] ),
+                'lng':  reduce_precision( r['geometry']['location']['lng'] ),
+            }
+        )
 
     return results
 
