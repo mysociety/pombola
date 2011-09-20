@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_with_maps.html' %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -16,35 +16,10 @@
     
         <div id="map_canvas" style="width:50%; min-width: 240px; height:300px"></div>
         
-        <script type="text/javascript"
-            src="http://maps.googleapis.com/maps/api/js?sensor=false">
+        <script type="text/javascript" charset="utf-8">
+            add_kml_to_map( '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001' );            
         </script>
-        
-        <script type="text/javascript">
-          function initialize() {
-            var latlng = new google.maps.LatLng(-0.023559, 37.906193);
-        
-            var myOptions = {
-              zoom: 6,
-              center: latlng,
-              mapTypeId: google.maps.MapTypeId.ROADMAP,
-              disableDefaultUI: true
-            };
-            var map = new google.maps.Map(document.getElementById("map_canvas"),
-                myOptions);
-        
-            var kml = new google.maps.KmlLayer(
-                '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001',
-                {
-                    map: map,
-                    clickable: false
-                }
-            );
-          }
-        
-          initialize();
-        
-        </script>
+
     {% endif %}
     
 

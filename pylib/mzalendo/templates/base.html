@@ -32,9 +32,18 @@
 
         </script>
         {% endif %}
+        
+        {% block map_related_headers %}
+        <script type="text/javascript">
+          function initialize() {
+            /* no-op */
+            return true;
+          }
+        </script>
+        {% endblock %}
 
     </head>
-    <body>
+    <body onload="initialize()">
         <div id="wrapper">
 
         {% include 'staging_header.html' %}
