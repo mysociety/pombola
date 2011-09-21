@@ -57,6 +57,7 @@ class Geocode(unittest.TestCase):
             'output': {
                 u'PRO': {'mapit_id': 4820, 'name': u'Rift Valley'},
                 u'DIV': {'mapit_id': 5049, 'name': u'Rumuruti'},
+                u'DIS': {'mapit_id': 4855, 'name': u'Laikipia'},
             },
         },
         {
