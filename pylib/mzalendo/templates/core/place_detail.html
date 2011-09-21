@@ -12,13 +12,15 @@
 
     {% if object.mapit_id %}
     
-        {# Ideally all of this would be in an external js file. For now it is the only JS on site so leaving it here #}
+        <div class="content_box">
     
-        <div id="map_canvas" style="width:50%; min-width: 240px; height:300px"></div>
-        
-        <script type="text/javascript" charset="utf-8">
-            add_kml_to_map( '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001' );            
-        </script>
+            <div id="map_canvas" style="width:50%; min-width: 240px; height:300px"></div>
+            
+            <script type="text/javascript" charset="utf-8">
+                add_kml_to_map( '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001' );            
+            </script>
+
+        </div>
 
     {% endif %}
     
