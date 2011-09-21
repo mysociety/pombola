@@ -258,5 +258,5 @@ AJAX_LOOKUP_CHANNELS = {
 MAPIT_URL = config.get('MAPIT_URL')
 
 # misc settings
-HTTPLIB2_CACHE_DIR = os.path.abspath( base_dir + '/httplib2_cache' )
+HTTPLIB2_CACHE_DIR = os.path.abspath( base_dir + '/../httplib2_cache' )
 GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
