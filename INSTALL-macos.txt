@@ -3,6 +3,16 @@
 # MacOS 10.7 (Lion)
 #
 
+# Where to install:
+#
+# Apart from the git folder you will download below many other folders get
+# created with dynamic data in them. These folders are all created in the
+# directory that the git repo is in. I suggest that you create a folder called
+# 'mzalendo_root' and put the git repo in that. Then all other folders will
+# also be in the mzalendo_root folder and won't clutter up your machine.
+
+
+
 # Install the GitHub GUI http://mac.github.com/
 
 # Download the code:
@@ -25,7 +35,7 @@ sudo brew install bcrypt
 
 
 # install some needed python modules
-sudo easy_install pyyaml psycopg2 xapian-haystack south py-bcrypt markdown django-markdown pyyaml
+sudo easy_install pyyaml psycopg2 xapian-haystack south py-bcrypt markdown django-markdown pyyaml httplib2
 
 
 
@@ -55,14 +65,17 @@ cd pylib/mzalendo
 ./manage.py
 
 
+# get all the data organized (worth running after pulling fresh changes)
+./post_git_pull_dev_commands.bash 
 
-# setup the db
-./manage.py syncdb
-./manage.py migrate
 
 
 # run the dev server
 ./manage.py runserver
+
+
+# get some test data - please contact mySociety to arrange acces to the
+# MzalendoTestData dropbox folder.
 
 
 # Get Busy!
@@ -73,4 +86,3 @@ cd pylib/mzalendo
 
 Currently the GitHub app does not appear to update the submodules so this needs
 to be done by hand. Run 'git submodule update' to do it.
-
