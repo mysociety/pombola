@@ -61,6 +61,7 @@ function initialize_map() {
     
     // Add all the kml
     while ( kml_url = kml_urls_to_add.shift() ) {
+        map.setOptions({ maxZoom: 16 }); // allow zooming on kml
         new google.maps.KmlLayer(
             kml_url,
             {
