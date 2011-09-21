@@ -292,6 +292,14 @@ class Place(ModelBase):
 
     objects = ManagerBase()
 
+    def parent_places(self):
+        """Return a list of parents, with top parent first."""
+        if not self.parent_place:
+            return []
+        parents = self.parent_place.parent_places()
+        parents.append( self.parent_place )
+        return parents
+
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.kind )
 

@@ -251,4 +251,12 @@ ul.search_hints {
     }
 }
 
+ul.location_breadcrumb {
+    li {
+        display: inline;
+    }
 
+    li + li::before {
+        content: " → ";
+    }
+}

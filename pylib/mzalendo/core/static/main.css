@@ -237,3 +237,8 @@ ul.search_hints {
     padding: 0 0.5em; }
     ul.search_hints li a {
       color: inherit; }
+
+ul.location_breadcrumb li {
+  display: inline; }
+ul.location_breadcrumb li + li::before {
+  content: " → "; }

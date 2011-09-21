@@ -3,12 +3,24 @@
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
+
+    
+    {% if object.parent_place %}
+        <ul class="location_breadcrumb">
+        {% for parent in object.parent_places %}
+            <li><a href="{% url place slug=parent.slug %}">{{ parent.name }}</a></li>
+        {% endfor %}
+            <li>{{ object.name }}</li>
+        </ul>
+    {% endif %}
+    
+    
+
     <h1>{{ object.name }}</h1>
 
     {% if object.organisation %}
     <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
     {% endif %}
-
 
     {% if object.mapit_id %}
     
