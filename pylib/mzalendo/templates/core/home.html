@@ -26,15 +26,19 @@
 
     <p>Note - greyed out boxes are not finished yet</p>
 
-    <div class="todo homepage_chunk">
+    <div class="homepage_chunk">
         Search for a location or your representative:<br>
         
-        <input type="search" value="" placeholder="Where...">
-        <input type="submit" value="Search">
+        <form action="{% url location_search %}">
+            <input type="search" name="loc" value="" placeholder="Where...">
+            <input type="submit" value="Search">
+        </form>
         <br>
 
-        <input type="search" value="" placeholder="Person or Party...">
-        <input type="submit" value="Search">
+        <form action="{% url haystack_search %}">
+            <input type="search" name="q" value="" placeholder="Person or Party...">
+            <input type="submit" value="Search">
+        </form>
 
     </div>
 
