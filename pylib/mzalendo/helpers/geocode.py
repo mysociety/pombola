@@ -80,7 +80,7 @@ def coord_to_areas( lat, lng ):
     data = get_mapit_url( 'point', [ 4326, '%s,%s'%(lng,lat) ] )
     
     # Filter it down to the areas that we want
-    wanted_area_codes = set( ['PRO','DIV'] )
+    wanted_area_codes = set( ['PRO','DIV','DIS'] )
 
     return_data = {}
 
