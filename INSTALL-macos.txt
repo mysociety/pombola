@@ -31,8 +31,9 @@ sudo brew install xapian --python
 # ~/.bash_profile so that the xapian bindings get found.
 
 
+# some more bits that are needed
 sudo brew install bcrypt
-
+sudo brew install libjpeg
 
 # install some needed python modules
 sudo easy_install pyyaml psycopg2 xapian-haystack south py-bcrypt markdown django-markdown pyyaml httplib2 PIL
@@ -76,6 +77,9 @@ cd pylib/mzalendo
 
 # get some test data - please contact mySociety to arrange acces to the
 # MzalendoTestData dropbox folder.
+
+
+# log in to the admin and change the setting in 'sites' to your machine
 
 
 # Get Busy!
