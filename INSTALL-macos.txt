@@ -35,7 +35,7 @@ sudo brew install bcrypt
 
 
 # install some needed python modules
-sudo easy_install pyyaml psycopg2 xapian-haystack south py-bcrypt markdown django-markdown pyyaml httplib2
+sudo easy_install pyyaml psycopg2 xapian-haystack south py-bcrypt markdown django-markdown pyyaml httplib2 PIL
 
 
 
