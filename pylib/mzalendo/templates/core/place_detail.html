@@ -54,6 +54,23 @@
     {% endif %}
 
 
+    {% with mp_pos=object.current_mp_position %}
+        {% if mp_pos %}
+            <div class="content_box">
+                <h3>{{ mp_pos.person.name }}</h3>
+        
+                <p>
+                    <a href="{{mp_pos.person.get_absolute_url }}">{{ mp_pos.person.name }}</a>
+                    has been the MP for {{ object.name }}
+                    {% if mp_pos.start_date %}
+                        since {{ mp_pos.start_date }}
+                    {% endif %}
+                </p>
+        
+            </div>
+        {% endif %}
+    {% endwith %}
+
     <div class="content_box todo">
         <h3>Data on this place</h3>
 

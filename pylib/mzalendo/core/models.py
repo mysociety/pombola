@@ -302,6 +302,14 @@ class Place(ModelBase):
 
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.kind )
+    
+    def current_mp_position(self):
+        """Return the current MP position, or None"""
+        qs = self.position_set.filter(title__slug='mp').currently_active()
+        try:
+            return qs[0]
+        except IndexError:
+            return None
 
     @models.permalink
     def get_absolute_url(self):
