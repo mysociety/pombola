@@ -61,9 +61,9 @@
         
                 <p>
                     <a href="{{mp_pos.person.get_absolute_url }}">{{ mp_pos.person.name }}</a>
-                    has been the MP for {{ object.name }}
+                    is the MP for {{ object.name }}
                     {% if mp_pos.start_date %}
-                        since {{ mp_pos.start_date }}
+                        (started {{ mp_pos.start_date }})
                     {% endif %}
                 </p>
         
