@@ -3,41 +3,15 @@ from django.views.generic.simple import direct_to_template
 
 import settings
 
-# Uncomment the next two lines to enable the admin:
+
+# Admin section
 from django.contrib import admin
 admin.autodiscover()
-
-urlpatterns = patterns('core.views',
-    # Homepage
-    url(r'^$', 'home', name='home'),
-
-    # Lists
-    url(r'^person/all/',       'person_list',       name='person_list'),
-    url(r'^place/all/',        'place_list',        name='place_list'),
-    url(r'^organisation/all/', 'organisation_list', name='organisation_list'),
-    
-    # Objects
-    url(r'^person/(?P<slug>[-\w]+)/',       'person',       name='person'),
-    url(r'^position/(?P<slug>[-\w]+)/',     'position',     name='position'),
-
-    url(r'^place/is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'),
-    url(r'^place/(?P<slug>[-\w]+)/',    'place',      name='place'),
-
-    url(r'^organisation/is/(?P<slug>[-\w]+)/', 'organisation_kind', name='organisation_kind'),
-    url(r'^organisation/(?P<slug>[-\w]+)/', 'organisation', name='organisation'),
-
-    # specials
-    url(r'^parties', 'parties', name='parties'),
-
-
-    # Haystack and other searches
-    url(r'^search/', include('haystack.urls') ),
-    url(r'^location/', 'location_search', name="location_search"),
-    
-
-    # Ajax select
-    url(r'^ajax_select/', include('ajax_select.urls')),
+urlpatterns = patterns('',
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
+
 
 # Accounts
 urlpatterns += patterns('',
@@ -59,12 +33,6 @@ urlpatterns += patterns('',
     (r'^hansard/', include('hansard.urls')),
 )
 
-# Admin
-urlpatterns += patterns('',
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-)
-
 # serve some pages directly from templates
 urlpatterns += patterns('',
     url(r'^privacy/$', direct_to_template, {'template': 'privacy.html'}, name='privacy'),
@@ -79,4 +47,7 @@ if settings.SERVE_STATIC_FILES:
         ),
     )
 
-
+# Everything else goes to core
+urlpatterns += patterns('',
+    (r'^', include('core.urls')),
+)
