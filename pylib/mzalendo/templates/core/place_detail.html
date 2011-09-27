@@ -71,6 +71,14 @@
         {% endif %}
     {% endwith %}
 
+    {% if object.project_set.count %}
+    <div class="content_box">
+        <h3>CDF Projects</h3>
+
+        <p>There are <strong>{{ object.project_set.count }}</strong> CDF projects - view the <a href="{% url project_in_place slug=object.slug %}">full list</a>.</p>
+    </div>
+    {% endif %}
+
     <div class="content_box todo">
         <h3>Data on this place</h3>
 

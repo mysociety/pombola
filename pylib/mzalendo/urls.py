@@ -33,6 +33,11 @@ urlpatterns += patterns('',
     (r'^hansard/', include('hansard.urls')),
 )
 
+# Project pages
+urlpatterns += patterns('',
+    (r'^projects/', include('projects.urls')),
+)
+
 # serve some pages directly from templates
 urlpatterns += patterns('',
     url(r'^privacy/$', direct_to_template, {'template': 'privacy.html'}, name='privacy'),
