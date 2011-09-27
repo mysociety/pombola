@@ -179,7 +179,7 @@ INSTALLED_APPS = (
     'info',
     'tasks',
     'hansard',
-    'cdf_data',
+    'projects',
     'core',
 )
 

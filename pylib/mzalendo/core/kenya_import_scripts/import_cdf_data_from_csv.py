@@ -17,8 +17,10 @@ import pprint
 import re
 import warnings
 
-from cdf_data.models import Project
+from projects.models import Project
 from core.models import Place
+
+import django.core.exceptions
 from django.contrib.gis.geos import Point
 
 def main():
@@ -59,12 +61,12 @@ class ProjectImporter(object):
         self.reader = csv.DictReader( csv_file )        
         
         for row in self.reader:
-            try:
-                self.import_row( row )
-            except Exception as inst:
-                print( "Issue %s on csv line %u: %s" % ( repr(inst), self.reader.line_num, inst ))
-            
-            # break
+            # try:
+            self.import_row( row )
+            # except Exception as inst:
+            #     print( "Issue %s on csv line %u: %s" % ( repr(inst), self.reader.line_num, inst ))
+            # 
+            # # break
         
         if len( self.not_found_constituencies ):
             print "The following constituencies could not be found"
@@ -136,7 +138,8 @@ class ProjectImporter(object):
         # Update all fields and save
         is_changed = False
         for key, value in data.items():
-            if getattr(project, key) != value:
+            db_val = getattr(project, key) if hasattr(project, key) else None
+            if db_val != value:
                 setattr(project, key, value)
                 is_changed = True
         if is_changed: project.save()

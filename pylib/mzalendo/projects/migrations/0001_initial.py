@@ -9,13 +9,13 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding model 'Project'
-        db.create_table('cdf_data_project', (
+        db.create_table('projects_project', (
             ('sector', self.gf('django.db.models.fields.CharField')(max_length=400)),
             ('status', self.gf('django.db.models.fields.CharField')(max_length=400)),
-            ('updated', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2011, 9, 26, 15, 53, 52, 888546), auto_now=True, blank=True)),
+            ('updated', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2011, 9, 27, 10, 57, 26, 57463), auto_now=True, blank=True)),
             ('project_name', self.gf('django.db.models.fields.CharField')(max_length=400)),
             ('location_name', self.gf('django.db.models.fields.CharField')(max_length=400)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2011, 9, 26, 15, 53, 52, 888507), auto_now_add=True, blank=True)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2011, 9, 27, 10, 57, 26, 56035), auto_now_add=True, blank=True)),
             ('estimated_cost', self.gf('django.db.models.fields.FloatField')()),
             ('cdf_index', self.gf('django.db.models.fields.IntegerField')(unique=True)),
             ('expected_output', self.gf('django.db.models.fields.CharField')(max_length=400)),
@@ -29,22 +29,95 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('mtfe_sector', self.gf('django.db.models.fields.CharField')(max_length=400)),
         ))
-        db.send_create_signal('cdf_data', ['Project'])
+        db.send_create_signal('projects', ['Project'])
     
     
     def backwards(self, orm):
         
         # Deleting model 'Project'
-        db.delete_table('cdf_data_project')
+        db.delete_table('projects_project')
     
     
     models = {
-        'cdf_data.project': {
+        'contenttypes.contenttype': {
+            'Meta': {'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
+            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
+        'core.contact': {
+            'Meta': {'object_name': 'Contact'},
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37650)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.ContactKind']"}),
+            'note': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
+            'source': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '500', 'blank': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37784)', 'auto_now': 'True', 'blank': 'True'}),
+            'value': ('django.db.models.fields.TextField', [], {})
+        },
+        'core.contactkind': {
+            'Meta': {'object_name': 'ContactKind'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37650)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37784)', 'auto_now': 'True', 'blank': 'True'})
+        },
+        'core.organisation': {
+            'Meta': {'object_name': 'Organisation'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37650)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'ended': ('django_date_extensions.fields.ApproximateDateField', [], {'max_length': '10', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.OrganisationKind']"}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'original_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
+            'started': ('django_date_extensions.fields.ApproximateDateField', [], {'max_length': '10', 'blank': 'True'}),
+            'summary': ('django.db.models.fields.TextField', [], {'default': "''", 'blank': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37784)', 'auto_now': 'True', 'blank': 'True'})
+        },
+        'core.organisationkind': {
+            'Meta': {'object_name': 'OrganisationKind'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37650)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
+            'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37784)', 'auto_now': 'True', 'blank': 'True'})
+        },
+        'core.place': {
+            'Meta': {'object_name': 'Place'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37650)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.PlaceKind']"}),
+            'location': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
+            'mapit_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'organisation': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Organisation']", 'null': 'True', 'blank': 'True'}),
+            'original_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'parent_place': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'child_places'", 'null': 'True', 'to': "orm['core.Place']"}),
+            'shape_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '100', 'db_index': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37784)', 'auto_now': 'True', 'blank': 'True'})
+        },
+        'core.placekind': {
+            'Meta': {'object_name': 'PlaceKind'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37650)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
+            'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 37784)', 'auto_now': 'True', 'blank': 'True'})
+        },
+        'projects.project': {
             'Meta': {'object_name': 'Project'},
             'activity_to_be_done': ('django.db.models.fields.CharField', [], {'max_length': '400'}),
             'cdf_index': ('django.db.models.fields.IntegerField', [], {'unique': 'True'}),
             'constituency': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Place']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 888507)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 56035)', 'auto_now_add': 'True', 'blank': 'True'}),
             'econ1': ('django.db.models.fields.CharField', [], {'max_length': '400'}),
             'econ2': ('django.db.models.fields.CharField', [], {'max_length': '400'}),
             'estimated_cost': ('django.db.models.fields.FloatField', [], {}),
@@ -58,81 +131,8 @@ class Migration(SchemaMigration):
             'sector': ('django.db.models.fields.CharField', [], {'max_length': '400'}),
             'status': ('django.db.models.fields.CharField', [], {'max_length': '400'}),
             'total_cost': ('django.db.models.fields.FloatField', [], {}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 888546)', 'auto_now': 'True', 'blank': 'True'})
-        },
-        'contenttypes.contenttype': {
-            'Meta': {'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        'core.contact': {
-            'Meta': {'object_name': 'Contact'},
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868845)', 'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.ContactKind']"}),
-            'note': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'source': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '500', 'blank': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868915)', 'auto_now': 'True', 'blank': 'True'}),
-            'value': ('django.db.models.fields.TextField', [], {})
-        },
-        'core.contactkind': {
-            'Meta': {'object_name': 'ContactKind'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868845)', 'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868915)', 'auto_now': 'True', 'blank': 'True'})
-        },
-        'core.organisation': {
-            'Meta': {'object_name': 'Organisation'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868845)', 'auto_now_add': 'True', 'blank': 'True'}),
-            'ended': ('django_date_extensions.fields.ApproximateDateField', [], {'max_length': '10', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.OrganisationKind']"}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'original_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
-            'started': ('django_date_extensions.fields.ApproximateDateField', [], {'max_length': '10', 'blank': 'True'}),
-            'summary': ('django.db.models.fields.TextField', [], {'default': "''", 'blank': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868915)', 'auto_now': 'True', 'blank': 'True'})
-        },
-        'core.organisationkind': {
-            'Meta': {'object_name': 'OrganisationKind'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868845)', 'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
-            'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868915)', 'auto_now': 'True', 'blank': 'True'})
-        },
-        'core.place': {
-            'Meta': {'object_name': 'Place'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868845)', 'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.PlaceKind']"}),
-            'location': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
-            'mapit_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'organisation': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Organisation']", 'null': 'True', 'blank': 'True'}),
-            'original_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'parent_place': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'child_places'", 'null': 'True', 'to': "orm['core.Place']"}),
-            'shape_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '100', 'db_index': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868915)', 'auto_now': 'True', 'blank': 'True'})
-        },
-        'core.placekind': {
-            'Meta': {'object_name': 'PlaceKind'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868845)', 'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
-            'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 26, 15, 53, 52, 868915)', 'auto_now': 'True', 'blank': 'True'})
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 9, 27, 10, 57, 26, 57463)', 'auto_now': 'True', 'blank': 'True'})
         }
     }
     
-    complete_apps = ['cdf_data']
+    complete_apps = ['projects']
