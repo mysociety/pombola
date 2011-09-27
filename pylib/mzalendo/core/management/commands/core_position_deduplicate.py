@@ -29,8 +29,7 @@ class Command(BaseCommand):
 
 
         # get all positions ordered such that duplicates are sequential
-        position_qs = models.Position.objects.all().order_by( *self.fields_to_compare ).filter(person__id=189)
-        
+        position_qs = models.Position.objects.all().order_by( *self.fields_to_compare )    
         previous = None
         
         for current in position_qs:
