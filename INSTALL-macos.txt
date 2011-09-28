@@ -27,6 +27,8 @@
 # You need xapian - the search engine. Install using 'brew' (or fink, or macports)
 sudo brew install xapian --python
 
+# more details can be found here: http://www.epicserve.com/blog/2010/oct/16/installing-xapian-osx-python-bindings/
+
 # remember to add 'export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH' to your
 # ~/.bash_profile so that the xapian bindings get found.
 
@@ -40,8 +42,9 @@ sudo easy_install pyyaml psycopg2 xapian-haystack south py-bcrypt markdown djang
 
 
 
-# You'll need Postgres (and postgis) installed. 
-
+# You'll need Postgres (and postgis) installed.
+# If needed you should create a postgis template:
+#   http://postgis.refractions.net/docs/ch02.html#id2619431
 
 # create the database - assuming here that you're calling it 'mzalendo'
 createdb -T template_postgis mzalendo
