@@ -37,6 +37,10 @@ class DataCategory(models.Model):
             # ('counter',    'Counter'), # not used 
         ),
     )
+    
+    class Meta():
+        ordering = ( 'name', )
+        verbose_name_plural = 'data categories'
 
 
 class Data(models.Model):
@@ -66,3 +70,4 @@ class Data(models.Model):
     class Meta():
         ordering = ( '-date', 'category', 'place' )
         unique_together = ( 'place', 'category', 'date' )
+        verbose_name_plural = 'data'
