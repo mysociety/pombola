@@ -1,0 +1,19 @@
+# TROUBLSHOOTING
+
+If something goes wrong please check the following for help. If problem not
+listed please add it after fixing.
+
+## Web requests block
+
+If searches check that the external requests to Google or MaPit are not hanging.
+
+
+## Location searches return old/bad data
+
+Try deleting the cached search in 'httplib2_cache'
+
+
+## ./manage.py migrate will not run correctly
+
+Check that the database has PostGIS added to it
+

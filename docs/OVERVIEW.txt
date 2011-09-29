@@ -1,0 +1,41 @@
+# Overview
+
+This site is based on the Django framework. The main functionality is in an app
+called 'core' and other apps provide support to that. All the custom code can be
+found in 'pylib/mzalendo'.
+
+Other code and projects are currently made available by having them be git
+submodules or copies of code in 'external/'. The appropriate bits of these are
+then symlinked into 'pylib/'. Please do not modify the code in these, instead
+modify the upstream repositories and update the submodule.
+
+Configuration is done by editing the values in 'pylib/mzalendo/settings.py'.
+Values which change between installations (eg dev and production) are set in the
+file 'conf/general.yml' (use the 'conf/general.yml-example' to get started).
+There is also a sample Apache2 config in 'conf/httpd.conf-example' which might
+be helpful.
+
+When installing the system note that many additional files and directories will
+be created alongside the top level git repo checkout. These include the
+'media_root' for uploaded images, and the 'mzalendo_xapian' for the search
+index.
+
+All data is stored in the database, but some is copied into the search engine
+implemented using Haystack for full text searching.
+
+Location searches are carried out using Google's geolocate tools, with calls
+being made to their API. These are cached after the first request.
+
+Boundary data is taken from a MaPit service (a separate install), this is used
+to find the constituency for a point and also to serve the KML boundaries used
+on the Google maps.
+
+
+# DEPENDENCIES
+
+## External requests that may block:
+
+  * Google location API
+  * MaPit API
+
+Other dependencies are listed in 'conf/packages' (debian packages).
