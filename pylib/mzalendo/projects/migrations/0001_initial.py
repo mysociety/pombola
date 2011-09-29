@@ -6,6 +6,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
     
+    depends_on = (
+        ("core", "0024_auto__add_field_positiontitle_requires_place"),
+    )
+
     def forwards(self, orm):
         
         # Adding model 'Project'
