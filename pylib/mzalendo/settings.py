@@ -180,6 +180,7 @@ INSTALLED_APPS = (
     'tasks',
     'hansard',
     'projects',
+    'place_data',
     'core',
 )
 
