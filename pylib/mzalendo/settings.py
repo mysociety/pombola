@@ -112,6 +112,16 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = config.get('DJANGO_SECRET_KEY')
 
+
+# Always use the TemporaryFileUploadHandler as it allows us to access the
+# uploaded file on disk more easily. Currently used by the CSV upload in
+# place_data admin.
+FILE_UPLOAD_HANDLERS = (
+    # "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+)
+
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
