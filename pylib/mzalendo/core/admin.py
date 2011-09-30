@@ -64,6 +64,7 @@ class PositionAdmin(AjaxSelectAdmin):
     search_fields = [ 'person__legal_name', 'organisation__name', 'title__name' ]
     list_filter   = [ 'title__name' ]    
     inlines       = [ InformationSourceInlineAdmin, ]
+    readonly_fields = ['sorting_start_date','sorting_end_date']
 
     form = make_ajax_form(
         models.Position,
