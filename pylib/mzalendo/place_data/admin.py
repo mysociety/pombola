@@ -12,6 +12,12 @@ class DataAdminCSVUploadForm(forms.Form):
     csv_file = forms.FileField(
         label = 'CSV file',
     )
+    save = forms.ChoiceField(
+        choices = (
+            ( 'no',  "Do not save, I'm just checking that the CSV is correct."),
+            ( 'yes', "Yes - save. I've checked the CSV and there were no errors."),
+        ),
+    )
 
 class DataAdmin(admin.ModelAdmin):
 
@@ -27,7 +33,8 @@ class DataAdmin(admin.ModelAdmin):
             # handler needs to be the default
             csv_file_path = request.FILES['csv_file'].temporary_file_path()
             csv_file = open( csv_file_path )
-            results = models.Data.process_csv( csv_file )
+            save = form.cleaned_data['save'] == 'yes'
+            results = models.Data.process_csv( csv_file, save=save )
         else:
             results = None    
             
@@ -35,6 +42,7 @@ class DataAdmin(admin.ModelAdmin):
             'admin/place_data/data/upload_csv.html',
             {
                 'form': form,
+                'results': results,
             },
             context_instance=RequestContext(
                 request,

@@ -10,7 +10,108 @@
 
 <div id="content-main">
 
+    <style type="text/css" media="screen">
+        div.entries div { padding: 1em; }
+        div.entries div.create { background-color: #bfb; }
+        div.entries div.update { background-color: #bbf; }
+        div.entries div.error  { background-color: #fbb; }
+    </style>
+
     <h1>Upload Data CSV file</h1>
+
+    <form action="" method="post" enctype="multipart/form-data" style="border: 1px solid #333; padding: 1em;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+    
+    {% if results.file_error %}
+        <div class="error">{{ results.file_error }}</div>
+    {% endif %}
+    
+    {% if results.error_count %}
+        <div class="error">Found {{ results.error_count }} error(s) in the entries below.</div>        
+    {% endif %}
+
+    {% if results.entries %}
+        <div class="entries">
+        {% for entry in results.entries %}
+            <hr />
+            <div class="{% if entry.error %}error{% else %}{{ entry.action }}{% endif %}">
+
+                <strong>Line {{ entry.line_number }}: {{ entry.action }}</strong>
+
+                {% if entry.error %}
+                    <span class="error">{{ entry.error }}</span>
+                {% endif %}
+
+                {% if entry.obj %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>New value</th>
+                            <th>Old value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>place</th>
+                            <td>{{ entry.obj.place }}</td>
+                            <td>{{entry.original.place }}</td>
+                        </tr>
+                        <tr>
+                            <th>category</th>
+                            <td>{{entry.obj.category }}</td>
+                            <td>{{entry.original.category }}</td>
+                        </tr>
+                        <tr>
+                            <th>date</th>
+                            <td>{{entry.obj.date }}</td>
+                            <td>{{entry.original.date }}</td>
+                        </tr>
+                        <tr>
+                            <th>value</th>
+                            <td>{{entry.obj.value }}</td>
+                            <td>{{entry.original.value }}</td>
+                        </tr>
+                        <tr>
+                            <th>general_remark</th>
+                            <td>{{entry.obj.general_remark }}</td>
+                            <td>{{entry.original.general_remark }}</td>
+                        </tr>
+                        <tr>
+                            <th>comparative_remark</th>
+                            <td>{{entry.obj.comparative_remark }}</td>
+                            <td>{{entry.original.comparative_remark }}</td>
+                        </tr>
+                        <tr>
+                            <th>equivalent_remark</th>
+                            <td>{{entry.obj.equivalent_remark }}</td>
+                            <td>{{entry.original.equivalent_remark }}</td>
+                        </tr>
+                        <tr>
+                            <th>source_url</th>
+                            <td>{{entry.obj.source_url }}</td>
+                            <td>{{entry.original.source_url }}</td>
+                        </tr>
+                        <tr>
+                            <th>source_name</th>
+                            <td>{{entry.obj.source_name }}</td>
+                            <td>{{entry.original.source_name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+            <hr />
+        </div>
+    {% endif %}
+
+    <h2>Documentation</h2>
 
     <p>This page lets you update or create data entries by uploading a correctly
     formatted CSV file.</p>
@@ -83,12 +184,6 @@
             </table>
         </div>
     </div>
-
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit" />
-    </form>
 
 </div>
 
