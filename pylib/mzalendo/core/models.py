@@ -133,8 +133,7 @@ class InformationSource(ModelBase):
 
 class PersonQuerySet(models.query.GeoQuerySet):
     def is_mp(self):
-        mp_title = PositionTitle.objects.get(slug='mp')
-        return self.filter( position__title=mp_title )
+        return self.filter( position__title__slug='mp' )
 
 
 class PersonManager(ManagerBase):
@@ -175,8 +174,11 @@ class Person(ModelBase, HasImageMixin):
             return []
     
     def is_mp(self):
-        """Return true if this person is an MP"""
-        return 'mp' in [ p.title.slug for p in self.position_set.all().currently_active() if p.title ]
+        """Return the mp position if this person is an MP, else None"""
+        try:
+            return self.position_set.all().currently_active().filter(title__slug='mp')[0]
+        except IndexError:
+            return None
         
     
     def __unicode__(self):
