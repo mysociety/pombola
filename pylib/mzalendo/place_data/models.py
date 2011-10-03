@@ -41,6 +41,10 @@ class DataCategory(models.Model):
         ),
     )
     
+    def __unicode__(self):
+        return self.name
+    
+    
     class Meta():
         ordering = ( 'name', )
         verbose_name_plural = 'data categories'
@@ -69,6 +73,9 @@ class Data(models.Model):
     # Every data point should have an external source. 
     source_url  = models.URLField()  
     source_name = models.CharField( max_length=200 )
+
+    def __unicode__(self):
+        return '%s for %s (%s)' % (self.category, self.place, self.date)
 
     @classmethod
     def process_csv(cls, csv_file, save=False):
