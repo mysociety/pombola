@@ -53,7 +53,7 @@
 
         {% for data in constituency.data_set.all %}
             <p>
-                {{ data.category.name }}: {{ data.value }} ({{ data.general_remark }})
+                {{ data.category.name }}: {{ data.pretty_value }} ({{ data.general_remark }})
             </p>
         {% endfor %}
 

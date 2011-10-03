@@ -77,6 +77,20 @@ class Data(models.Model):
     def __unicode__(self):
         return '%s for %s (%s)' % (self.category, self.place, self.date)
 
+    def pretty_value(self):
+        """Format the value in the correct way for the category type"""
+        category_type = self.category.value_type
+
+        if category_type == 'percentage':
+            return "%.1f%%" % self.value
+        if category_type == 'gauge':
+            return "%.1f" % self.value
+        if category_type == 'monetary':
+            # TODO - put the primary currency into config
+            return "KSH %.0f" % self.value
+        else:            
+            return self.value
+
     @classmethod
     def process_csv(cls, csv_file, save=False):
         """
