@@ -79,13 +79,28 @@
     </div>
     {% endif %}
 
-    <div class="content_box todo">
-        <h3>Data on this place</h3>
 
-        <p>For example population, demographics, CDF reports etc etc.</p>
+    {% if object.data_set.count %}
+    <div class="content_box ">
+        <h3>Metrics</h3>
+
+        {% for data in object.data_set.all %}
+        
+            {# roughly formatted for now - improve once there is real data to look at #}
+
+            <h4>{{ data.category.name }}</h4>
+            <small>{{ data.category.synopsis }}</small>
+            
+            <p>
+                {{ data.general_remark }}<br>
+                {{ data.comparative_remark }}<br>
+                {% if data.equivalent_remark %}{{ data.equivalent_remark }}{% endif %}<br>
+                <a href="{{ data.source_url}}">{{ data.source_name }}</a>
+            </p>
+        {% endfor %}
 
     </div>
-
+    {% endif %}
 
 {% endblock %}
 
