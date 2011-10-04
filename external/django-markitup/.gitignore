@@ -1,0 +1,9 @@
+dist/*
+django_markitup.egg-info/*
+build/*
+*.pyc
+HGREV
+.project
+.pydevproject
+.tox/
+Django-*.egg
