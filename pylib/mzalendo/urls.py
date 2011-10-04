@@ -43,6 +43,11 @@ urlpatterns += patterns('',
     url(r'^privacy/$', direct_to_template, {'template': 'privacy.html'}, name='privacy'),
 )
 
+# ajax preview of the markdown
+urlpatterns += patterns('',
+    url(r'^markitup/', include('markitup.urls'))
+)
+
 # serve media_root files if needed (/static served in dev by runserver)
 if settings.SERVE_STATIC_FILES:
     urlpatterns += patterns('',

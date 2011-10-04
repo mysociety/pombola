@@ -176,6 +176,7 @@ INSTALLED_APPS = (
     'south',
     'pagination',
     'ajax_select',
+    'markitup',
 
     'mz_comments',
     'django.contrib.comments',
@@ -272,3 +273,8 @@ MAPIT_URL = config.get('MAPIT_URL')
 # misc settings
 HTTPLIB2_CACHE_DIR = os.path.abspath( base_dir + '/../httplib2_cache' )
 GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
+
+
+# Markitup settings
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
+MARKITUP_SET = 'markitup/sets/markdown'

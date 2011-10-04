@@ -12,6 +12,8 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 
+from markitup.fields import MarkupField
+
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from tasks.models import Task
 from images.models import HasImageMixin, Image
@@ -207,7 +209,7 @@ class Person(ModelBase, HasImageMixin):
 class OrganisationKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
-    summary         = models.TextField(blank=True)
+    summary         = MarkupField(blank=True, default='')
 
     objects = ManagerBase()
 
@@ -247,7 +249,7 @@ class OrganisationManager(ManagerBase):
 class Organisation(ModelBase):
     name    = models.CharField(max_length=200)
     slug    = models.SlugField(max_length=200, unique=True, help_text="created from name")
-    summary = models.TextField(blank=True, default='')
+    summary = MarkupField(blank=True, default='')
     kind    = models.ForeignKey('OrganisationKind')
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended   = ApproximateDateField(blank=True, help_text=date_help_text)
@@ -270,7 +272,7 @@ class Organisation(ModelBase):
 class PlaceKind(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
-    summary         = models.TextField(blank=True)
+    summary         = MarkupField(blank=True, default='')
 
     objects = ManagerBase()
 
@@ -324,7 +326,7 @@ class Place(ModelBase):
 class PositionTitle(ModelBase):
     name            = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True, help_text="created from name")
-    summary         = models.TextField(blank=True)
+    summary         = MarkupField(blank=True, default='')
     original_id     = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to data in original mzalendo.com db')
     requires_place  = models.BooleanField(default=False, help_text="Does this job title require a place to complete the position?")
 
