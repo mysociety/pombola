@@ -44,6 +44,10 @@ class Markup(SafeData):
     # allows display via templates to work without safe filter
     def __unicode__(self):
         return mark_safe(self.rendered)
+    
+    # Return length of rendered string so that bool tests work as expected
+    def __len__(self):
+        return len(self.rendered)
 
 class MarkupDescriptor(object):
     def __init__(self, field):

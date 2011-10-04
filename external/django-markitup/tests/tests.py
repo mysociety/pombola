@@ -25,20 +25,31 @@ def test_filter(text, **kwargs):
 
 
 
+
+
+
 class MarkupFieldTests(TestCase):
     def setUp(self):
         self.post = Post.objects.create(title='example post',
                                         body='replace this text')
 
+        self.empty_post = Post.objects.create(title='empty post',
+                                        body='')
 
     def testUnicodeRender(self):
         self.assertEquals(unicode(self.post.body),
                           u'replacement text')
 
+    def testLength(self):
+        self.assertEquals( len(self.post.body      ), 16 )
+        self.assertEquals( len(self.empty_post.body), 0  )
+
+    def testTruth(self):
+        self.assertTrue(  self.post.body       )
+        self.assertFalse( self.empty_post.body )
 
     def testRaw(self):
         self.assertEquals(self.post.body.raw, 'replace this text')
-
 
     def testRendered(self):
         self.assertEquals(self.post.body.rendered,
