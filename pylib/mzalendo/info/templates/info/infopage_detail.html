@@ -3,9 +3,11 @@
 
 
 {% block title %}
-    {{ title }}
+    {{ object.title }}
 {% endblock %}
 
 {% block content %}
-    {{ html_content|safe }}
+    <h1>{{ object.title }}</h1>
+
+    {{ object.content }}
 {% endblock %}
