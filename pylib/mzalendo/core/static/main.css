@@ -53,6 +53,9 @@ div.error {
   padding: 0.5em;
   margin: 1em 0; }
 
+pre {
+  font-family: monospace; }
+
 html {
   font-family: Arial;
   font-size: 16px; }
@@ -242,3 +245,23 @@ ul.location_breadcrumb li {
   display: inline; }
 ul.location_breadcrumb li + li::before {
   content: " → "; }
+
+div.project_detail {
+  /*    clear: both;*/ }
+  div.project_detail dl {
+    /*        border: 1px solid #ccc;*/
+    padding: 0.5em;
+    font-size: 90%;
+    /*        float: left;*/
+    /*        width: 50%;*/ }
+    div.project_detail dl dt {
+      float: left;
+      clear: left;
+      width: 6em;
+      text-align: right;
+      font-weight: bold; }
+    div.project_detail dl dt:after {
+      content: ":"; }
+    div.project_detail dl dd {
+      margin: 0 0 0 6.5em;
+      padding: 0 0 0.5em 0; }

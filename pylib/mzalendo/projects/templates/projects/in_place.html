@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load switch %}
+{% load humanize %}
 
 {% block title %}
     Projects in {{ place.name }}
@@ -7,20 +8,62 @@
 
 {% block content %}
 
-    <p>Note: this page is mostly a placeholder. We need to decide how this information is best presented.</p>
-
     <h1>Projects in <a href="{{ place.get_absolute_url }}">{{ place.name }}</a></h1>
     
-    <ul class="listing">
-        {% for p in projects.all %}
-            <li>
-                <strong>{{ p.project_name }}</strong> - {{ p.status }}<br>
-                {{ p.remarks }}<br>
-                estimated: {{ p.estimated_cost }}, total so far: {{ p.total_cost }}
-            </li>
-        {% empty %}
-            <li>No projects found.</li>
-        {% endfor %}
-    </ul>
+
+    {% for p in projects.all %}
+        <div class="project_detail">
+
+            {% comment %}
+            
+            ### Available fields
+
+            created                         {{ p.created             }}
+            updated                         {{ p.updated             }}
+            cdf_index                       {{ p.cdf_index           }}
+            constituency                    {{ p.constituency        }}
+            project_name                    {{ p.project_name        }}
+            location_name                   {{ p.location_name       }}
+            sector                          {{ p.sector              }}
+            mtfe_sector                     {{ p.mtfe_sector         }}
+            econ1                           {{ p.econ1               }}
+            econ2                           {{ p.econ2               }}
+            activity_to_be_done             {{ p.activity_to_be_done }}
+            expected_output                 {{ p.expected_output     }}
+            status                          {{ p.status              }}
+            remarks                         {{ p.remarks             }}
+            estimated_cost                  {{ p.estimated_cost      }}
+            total_cost                      {{ p.total_cost          }}
+            location                        {{ p.location            }}
+            
+            {% endcomment %}
+
+            <h3>{{ p.project_name }}</h3>
+            
+            <dl>
+                <dt>status</dt>
+                    <dd>{{ p.status }}</dd>                
+                
+                <dt>location</dt>
+                    <dd>{{ p.location_name }}</dd>
+                <dt>action</dt>
+                    <dd>{{ p.activity_to_be_done }}</dd>
+                <dt>outcome</dt>
+                    <dd>{{ p.expected_output }}</dd>
+            
+                {% if p.remarks %}
+                <dt>remarks</dt>
+                    <dd>{{ p.remarks }}</dd>
+                {% endif %}
+                
+                <dt>total cost</dt>
+                    <dd>Ksh {{ p.total_cost|floatformat:0|intcomma }}</dd>
+                <dt>estimate</dt>
+                    <dd>Ksh {{ p.estimated_cost|floatformat:0|intcomma }}</dd>                
+            </dl>
+        </div>
+    {% empty %}
+        <h3>No projects found.</h3>
+    {% endfor %}
 
 {% endblock %}
