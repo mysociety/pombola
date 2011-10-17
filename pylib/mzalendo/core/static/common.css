@@ -15,3 +15,6 @@ div.error {
   font-size: 125%;
   padding: 0.5em;
   margin: 1em 0; }
+
+pre {
+  font-family: monospace; }
