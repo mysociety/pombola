@@ -32,4 +32,11 @@ class Project(models.Model):
 
     location = models.PointField()
         
-
+    class Meta():
+        # NOTE - the templates rely on this default ordering. Really we should
+        # use a custom manager and query_set and 'use_for_related_fields = True'
+        # but currently Django is broken:
+        # https://code.djangoproject.com/ticket/14891
+        # The other work-around of creating a method on the place to access the
+        # correct manager for the projects is likely to cause confusion.
+        ordering = ['-total_cost'] # <--- DO NOT CHANGE
