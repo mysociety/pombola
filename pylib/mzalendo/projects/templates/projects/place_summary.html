@@ -14,6 +14,8 @@
             <strong>{{ p.project_name }}</strong>:
             Ksh {{ p.total_cost|floatformat|intcomma }}
             spent on {{ p.activity_to_be_done }}.
+
+            (<a href="{% url projects.views.in_place slug=object.slug %}#project-{{ p.cdf_index }}">more</a>)
             <br>
         {% endfor %}
 
