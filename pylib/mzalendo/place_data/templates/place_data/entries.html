@@ -1,0 +1,44 @@
+{# object is the place #}
+
+{% if object.data_set.count %}
+<div class="content_box">
+    <h3>Metrics</h3>
+
+    {% for data in object.data_set.all %}
+    
+    <div class="place_data_entry">
+
+        <h4>{{ data.category.name }}</h4>
+        
+        <dl>
+
+            <dt>Summary</dt>
+            <dd>
+                {{ data.category.synopsis }}
+                {# FIXME - add 'more' link here for fuller explanation #}
+            </dd>
+    
+            <dt>Value</dt>
+            <dd>{{ data.pretty_value }}</dd>
+
+            <dt>General</dt>
+            <dd>{{ data.general_remark }}</dd>
+    
+            <dt>Comparative</dt>
+            <dd>{{ data.comparative_remark }}</dd>
+
+            {% if data.equivalent_remark %}
+                <dt>Equivalent</dt>
+                <dd>{{ data.equivalent_remark }}</dd>
+            {% endif %}
+
+            <dt>source</dt>
+            <dd><a href="{{ data.source_url}}">{{ data.source_name }}</a></dd>
+
+        </dl>        
+
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}

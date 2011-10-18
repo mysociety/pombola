@@ -5,6 +5,7 @@ import csv
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.contrib.humanize.templatetags.humanize import intcomma
 
 from core.models import Place
 
@@ -87,7 +88,8 @@ class Data(models.Model):
             return "%.1f" % self.value
         if category_type == 'monetary':
             # TODO - put the primary currency into config
-            return "KSH %.0f" % self.value
+            amount = int( self.value )
+            return "Ksh " + intcomma(amount)
         else:            
             return self.value
 

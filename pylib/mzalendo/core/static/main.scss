@@ -262,35 +262,39 @@ ul.location_breadcrumb {
 }
 
 
-
-
-div.project_detail {
-    $project_details_term_width: 6em;
-/*    clear: both;*/
+@mixin compact_dl ( $term_width ) {
+    padding: 0.5em;
+    font-size: 90%;
     
+    dt {
+        float: left;
+        clear: left;
+        width: $term_width;
+        text-align: right;
+        font-weight: bold;
+    }
+
+    dt:after {
+        content: ":";
+    }
+
+    dd {
+        margin: 0 0 0 $term_width + 0.5em;
+        padding: 0 0 0.5em 0;
+    }
+   
+}
+
+
+div.project_detail {    
     dl {
-/*        border: 1px solid #ccc;*/
-        padding: 0.5em;
-        font-size: 90%;
-/*        float: left;*/
-/*        width: 50%;*/
-        
-        dt {
-            float: left;
-            clear: left;
-            width: $project_details_term_width;
-            text-align: right;
-            font-weight: bold;
-        }
-    
-        dt:after {
-            content: ":";
-        }
-    
-        dd {
-            margin: 0 0 0 $project_details_term_width + 0.5em;
-            padding: 0 0 0.5em 0;
-        }
-       
+        @include compact_dl(6em);
+    }
+}
+
+
+div.place_data_entry {
+    dl {
+        @include compact_dl(6em);
     }
 }
