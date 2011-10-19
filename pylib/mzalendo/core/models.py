@@ -12,6 +12,8 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 
+from haystack.query import SearchQuerySet
+
 from markitup.fields import MarkupField
 
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
@@ -141,7 +143,25 @@ class PersonQuerySet(models.query.GeoQuerySet):
 class PersonManager(ManagerBase):
     def get_query_set(self):
         return PersonQuerySet(self.model)
+    
+    def loose_match_name(self, name):
+        """Search for a loose match on a name. May not be too reliable"""
 
+        # Try matching all the bits
+        results = SearchQuerySet().filter_and( content=name ).models( self.model )
+
+        # if that fails try matching all the bits in any order
+        if not len( results ):
+            results = SearchQuerySet().models(Person)
+            for bit in re.split(r'\s+', name):
+                results = results.filter_and( content=bit )
+
+        # If we have exactly one result return that
+        if len( results ) == 1:
+            return results[0].object
+        else:
+            return None
+        
 
 class Person(ModelBase, HasImageMixin):
     title           = models.CharField(max_length=100, blank=True)
