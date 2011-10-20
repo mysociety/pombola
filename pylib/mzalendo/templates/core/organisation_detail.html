@@ -6,8 +6,8 @@
     <h1>{{ object.name }}</h1>
 
         {% if object.summary %}
-        <div class="summary">
-            {{ object.summary|linebreaksbr }}
+        <div class="summary markdown">
+            {{ object.summary }}
         </div>
     {% endif %}
 

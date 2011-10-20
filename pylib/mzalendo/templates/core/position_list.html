@@ -7,7 +7,7 @@
     <h1>{{ title.name }}</h1>
 
     {% if title.summary %}
-        <p>{{ title.summary }}</p>
+        <div class="markdown">{{ title.summary }}</div>
     {% endif %}
 
     {% include 'core/generic_list.html' %}
