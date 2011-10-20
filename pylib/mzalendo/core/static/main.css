@@ -275,3 +275,13 @@ div.place_data_entry dl {
   div.place_data_entry dl dd {
     margin: 0 0 0 6.5em;
     padding: 0 0 0.5em 0; }
+
+/* For markdown snippets we need to restore the HTML to something roughly standard */
+div.markdown {
+  margin-bottom: 1em; }
+  div.markdown ul, div.markdown ol {
+    margin-left: 2em; }
+  div.markdown ul li {
+    list-style-type: disc; }
+  div.markdown ol li {
+    list-style-type: decimal; }

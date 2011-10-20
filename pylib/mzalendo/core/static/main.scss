@@ -298,3 +298,16 @@ div.place_data_entry {
         @include compact_dl(6em);
     }
 }
+
+
+/* For markdown snippets we need to restore the HTML to something roughly standard */
+div.markdown{
+    ul, ol { margin-left: 2em; }
+
+    ul li { list-style-type: disc; }
+    ol li { list-style-type: decimal; }
+    
+    margin-bottom: 1em;
+}
+
+
