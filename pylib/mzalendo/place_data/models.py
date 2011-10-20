@@ -9,15 +9,16 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 
 from core.models import Place
 
+from markitup.fields import MarkupField
 
 class DataCategory(models.Model):
     created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
     updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
 
-    slug        = models.SlugField( unique=True )
     name        = models.CharField( max_length=200, unique=True )
+    slug        = models.SlugField( unique=True )
     synopsis    = models.CharField( max_length=200 )
-    description = models.TextField()
+    description = MarkupField()
     
     value_type  = models.CharField(
         max_length = 20,
@@ -67,9 +68,28 @@ class Data(models.Model):
 
     value    = models.FloatField() 
 
-    general_remark      = models.CharField( max_length= 400 )              # An unacceptable amount of money is missing or unaccounted for in this constituency. 
-    comparative_remark  = models.CharField( max_length= 400 )              # This is an above average performance
-    equivalent_remark   = models.CharField( max_length= 400, blank=True )  # Enough money is going missing to pay for 123 teachers
+    general_remark      = MarkupField(
+        help_text = "Describe the results",
+    ) 
+
+    comparative_remark  = models.CharField(
+        max_length=20,
+        blank=True,
+        choices=(
+            # prefix to make them order correctly
+            ('a_much_better', 'much better than average'),
+            ('b_better',      'better than average'),
+            ('c_average',     'average'),
+            ('d_worse',       'worse than average'),
+            ('e_much_worse',  'much worse than average'),
+        ),
+    )
+
+    equivalent_remark   = MarkupField(
+        max_length = 400,
+        blank      = True,
+        help_text  = 'Please **bold** the relevant part - eg "Enough money is going missing to pay for **123 teachers**"'
+    )  
     
     # Every data point should have an external source. 
     source_url  = models.URLField()  

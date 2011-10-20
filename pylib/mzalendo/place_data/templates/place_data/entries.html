@@ -1,41 +1,40 @@
+{% load switch %}
+
 {# object is the place #}
 
 {% if object.data_set.count %}
 <div class="content_box">
-    <h3>Metrics</h3>
-
     {% for data in object.data_set.all %}
     
     <div class="place_data_entry">
 
-        <h4>{{ data.category.name }}</h4>
+        <h3>{{ data.category.name }}: {{ data.pretty_value }}</h3>
         
-        <dl>
+        {# TODO - we should link to more details on the category #}
+        {# data.category.synopsis #}
 
-            <dt>Summary</dt>
-            <dd>
-                {{ data.category.synopsis }}
-                {# FIXME - add 'more' link here for fuller explanation #}
-            </dd>
-    
-            <dt>Value</dt>
-            <dd>{{ data.pretty_value }}</dd>
+        <div class="markdown">{{ data.general_remark }}</div>
 
-            <dt>General</dt>
-            <dd>{{ data.general_remark }}</dd>
-    
-            <dt>Comparative</dt>
-            <dd>{{ data.comparative_remark }}</dd>
+        {% if data.comparative_remark %}
+        <p>
+        {% switch data.comparative_remark %}
+            {% case 'a_much_better' %} This is a  <strong>much better than average</strong> performance.
+            {% case 'b_better'      %} This is a  <strong>better than average</strong>      performance.
+            {% case 'c_average'     %} This is an <strong>average</strong>                  performance.
+            {% case 'd_worse'       %} This is a  <strong>worse than average</strong>       performance.
+            {% case 'e_much_worse'  %} This is a  <strong>much worse than average</strong>  performance.
+        {% endswitch %}
+        </p>
+        {% endif %}
 
-            {% if data.equivalent_remark %}
-                <dt>Equivalent</dt>
-                <dd>{{ data.equivalent_remark }}</dd>
-            {% endif %}
+        {% if data.equivalent_remark %}
+        <div class="markdown">{{ data.equivalent_remark }}</div>
+        {% endif %}
 
-            <dt>source</dt>
-            <dd><a href="{{ data.source_url}}">{{ data.source_name }}</a></dd>
-
-        </dl>        
+        <div>
+            <strong>source:</strong>
+            <a href="{{ data.source_url}}">{{ data.source_name }}</a>
+        </div>
 
     </div>
     {% endfor %}

@@ -6,7 +6,7 @@ from django.template   import RequestContext
 from place_data import models
 
 class DataCategoryAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ["name"] }
 
 class DataAdminCSVUploadForm(forms.Form):
     csv_file = forms.FileField(
