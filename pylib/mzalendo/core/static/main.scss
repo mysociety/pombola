@@ -306,6 +306,12 @@ div.markdown{
 
     ul li { list-style-type: disc; }
     ol li { list-style-type: decimal; }
+
+    blockquote {
+	    padding-left: 1em;
+	}
+    blockquote p:before { content: '“'; }
+    blockquote p:after  { content: '”'; }
     
     margin-bottom: 1em;
 }

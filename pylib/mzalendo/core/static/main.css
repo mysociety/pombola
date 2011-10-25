@@ -285,3 +285,9 @@ div.markdown {
     list-style-type: disc; }
   div.markdown ol li {
     list-style-type: decimal; }
+  div.markdown blockquote {
+    padding-left: 1em; }
+  div.markdown blockquote p:before {
+    content: '“'; }
+  div.markdown blockquote p:after {
+    content: '”'; }
