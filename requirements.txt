@@ -25,8 +25,8 @@ sorl-thumbnail
 django-ajax-selects
 django-markitup
 
-django-haystack
 xapian-haystack
+django-haystack
 
 WebTest
 django-webtest

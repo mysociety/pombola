@@ -8,8 +8,10 @@ cd `dirname $0`/..
 
 # create/update the virtual environment
 pip install \
-    -E ../mzalendo-virtualenv \
-    -r requirements.txt
+    --enable-site-packages \
+    --environment ../mzalendo-virtualenv \
+    --requirement requirements.txt \
+    --quiet
 
 # use the virtualenv just created/updated
 source ../mzalendo-virtualenv/bin/activate
