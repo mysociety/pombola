@@ -43,7 +43,7 @@ class DataTest(TestCase):
             date               = '2011/09/30',
             value              = 42, 
             general_remark     = 'test general_remark',
-            comparative_remark = 'test comparative_remark',
+            comparative_remark = 'c_average',
             equivalent_remark  = 'test equivalent_remark',
             source_url         = 'http://example.com/',
             source_name        = 'Source',            
