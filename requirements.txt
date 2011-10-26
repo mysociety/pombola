@@ -19,3 +19,8 @@ django-bcrypt
 -e hg+https://bitbucket.org/ubernostrum/django-registration@fad7080fe769#egg=django-registration
 django-registration-defaults
 
+### Mzalendo dependencies
+-e git://github.com/evdb/django-date-extensions.git#egg=django-date-extensions
+sorl-thumbnail
+django-haystack
+xapian-haystack

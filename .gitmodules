@@ -1,27 +1,3 @@
 [submodule "commonlib"]
 	path = commonlib
 	url = git://git.mysociety.org/commonlib
-[submodule "external/django-1.3"]
-	path = external/django-1.3
-	url = git://github.com/django/django.git
-[submodule "external/django-date-extensions"]
-	path = external/django-date-extensions
-	url = git://github.com/evdb/django-date-extensions.git
-[submodule "external/django-registration-defaults"]
-	path = external/django-registration-defaults
-	url = git://github.com/yourcelf/django-registration-defaults.git
-[submodule "external/django-registration"]
-	path = external/django-registration
-	url = git://github.com/CoatedMoose/django-registration.git
-[submodule "external/wiki_content"]
-	path = external/wiki_content
-	url = git://github.com/mysociety/mzalendo.wiki.git
-[submodule "external/sorl-thumbnail"]
-	path = external/sorl-thumbnail
-	url = git://github.com/sorl/sorl-thumbnail.git
-[submodule "external/django-haystack"]
-	path = external/django-haystack
-	url = git://github.com/toastdriven/django-haystack.git
-[submodule "external/xapian-haystack"]
-	path = external/xapian-haystack
-	url = git://github.com/notanumber/xapian-haystack.git
