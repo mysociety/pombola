@@ -20,7 +20,13 @@ django-bcrypt
 django-registration-defaults
 
 ### Mzalendo dependencies
--e git://github.com/evdb/django-date-extensions.git#egg=django-date-extensions
 sorl-thumbnail
+-e git://github.com/evdb/django-date-extensions.git#egg=django-date-extensions
+django-ajax-selects
+django-markitup
+
 django-haystack
 xapian-haystack
+
+WebTest
+django-webtest
