@@ -20,7 +20,7 @@ source ../mzalendo-virtualenv/bin/activate
 find . -name '*.pyc' -delete
 
 # go to the project directory for local config
-cd pylib/mzalendo
+cd mzalendo
 
 # get the database up to speed
 ./manage.py syncdb

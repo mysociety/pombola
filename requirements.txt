@@ -28,5 +28,5 @@ django-markitup
 xapian-haystack
 django-haystack
 
-WebTest
+WebTest>=1.3.2
 django-webtest
