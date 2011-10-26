@@ -6,7 +6,7 @@ import logging
 import setup_env
 
 # Work out where we are to set up the paths correctly and load config
-base_dir = os.path.abspath( os.path.split(__file__)[0] + '/../..' )
+base_dir = os.path.abspath( os.path.split(__file__)[0] + '/..' )
 # print "base_dir: " + base_dir
 
 # load the mySociety config
@@ -144,7 +144,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join( base_dir, "pylib/mzalendo/templates" ),
+    os.path.join( base_dir, "mzalendo/templates" ),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

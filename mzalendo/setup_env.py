@@ -8,13 +8,12 @@ import os
 import sys
 
 # Work out where we are to set up the paths correctly and load config
-base_dir = os.path.abspath( os.path.split(__file__)[0] + '/../..' )
+base_dir = os.path.abspath( os.path.split(__file__)[0] + '/..' )
 
 # specify the paths we want to add
 paths = (
     os.path.normpath( base_dir + "/commonlib/pylib"),
-    os.path.normpath( base_dir + "/pylib"),
-    os.path.normpath( base_dir + "/pylib/mzalendo"),
+    os.path.normpath( base_dir + "/mzalendo"),
 )
 
 # remove the paths if they are already there (so we don't repeat)
