@@ -179,8 +179,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'markitup',
 
-    'mz_comments',
-    'django.contrib.comments',
+    'comments2',
 
     'images',
     'sorl.thumbnail',
@@ -195,8 +194,6 @@ INSTALLED_APPS = (
     'place_data',
     'core',
 )
-
-COMMENTS_APP = 'mz_comments'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
