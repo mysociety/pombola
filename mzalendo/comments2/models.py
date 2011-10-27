@@ -98,7 +98,9 @@ class Comment(models.Model):
         if self.submit_date is None:
             self.submit_date = datetime.datetime.now()
             
-        ### add moderation smarts here    
+        # If we have a user and they are trusted then approve the comment
+        if self.user and self.user.has_perm('comments2.can_post_without_moderation'):
+            self.status = 'approved'
         
         super(Comment, self).save(*args, **kwargs)
 

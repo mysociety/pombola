@@ -7,8 +7,8 @@
             "permissions": [
                 [
                     "can_post_without_moderation", 
-                    "mz_comments", 
-                    "commentwithtitle"
+                    "comments2", 
+                    "comment"
                 ]
             ]
         }
