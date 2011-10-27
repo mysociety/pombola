@@ -6,7 +6,7 @@ file_dir = os.path.abspath(os.path.realpath(os.path.dirname(__file__)))
 
 sys.path.insert(
     0, # insert at the very start
-    os.path.normpath(file_dir + "/../pylib/mzalendo")
+    os.path.normpath(file_dir + "/../mzalendo")
 )
 
 import setup_env

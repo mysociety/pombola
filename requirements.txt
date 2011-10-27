@@ -1,0 +1,32 @@
+# List all Python package requirements this project has.
+#
+# more details: http://www.pip-installer.org/en/latest/requirements.html
+
+### General useful bits
+py-bcrypt
+PyYAML
+psycopg2
+
+### Django related
+django==1.3.1
+django-pagination
+South
+django-bcrypt
+
+### Django related registration
+# The registration app is a little out of date - get it from the repo direct....
+# django-registration
+-e hg+https://bitbucket.org/ubernostrum/django-registration@fad7080fe769#egg=django-registration
+django-registration-defaults
+
+### Mzalendo dependencies
+sorl-thumbnail
+-e git://github.com/evdb/django-date-extensions.git#egg=django-date-extensions
+django-ajax-selects
+django-markitup
+
+xapian-haystack
+django-haystack
+
+WebTest>=1.3.2
+django-webtest
