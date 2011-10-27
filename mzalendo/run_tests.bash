@@ -4,7 +4,7 @@
 set -e
 
 # run our tests
-./manage.py test core images mz_comments info tasks helpers place_data
+./manage.py test core images comments2 info tasks helpers place_data
 
 # This is a very ugly solution to running all the tests just for our own code.
 # running './manage.py test' will cause all the django etc tests to run as well
