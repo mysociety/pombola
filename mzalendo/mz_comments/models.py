@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.comments.models import Comment
+from django.contrib import comments
 
-class CommentWithTitle(Comment):
+class CommentWithTitle(comments.models.Comment):
     title = models.CharField(max_length=300)
     
     class Meta():
@@ -9,3 +9,7 @@ class CommentWithTitle(Comment):
         permissions = (
             ("can_post_without_moderation", "Can post comments without moderation"),
         )
+
+class CommentFlag(comments.models.CommentFlag):
+    pass
+

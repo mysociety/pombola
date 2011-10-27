@@ -1,8 +1,7 @@
 from django.contrib import admin
 
 from django.contrib.comments.admin import CommentsAdmin
-from django.contrib.comments.models import CommentFlag
-from mz_comments.models import CommentWithTitle
+from mz_comments.models import CommentWithTitle, CommentFlag
 
 class CommentWithTitleAdmin(CommentsAdmin):
     pass
