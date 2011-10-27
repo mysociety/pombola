@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 
 from django.db.models import Q
 
-from django.contrib.comments.moderation import CommentModerator, moderator
+# from django.contrib.comments.moderation import CommentModerator, moderator
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
@@ -544,21 +544,21 @@ class Position(ModelBase):
     class Meta:
         ordering = ['-sorting_end_date', '-sorting_start_date']  
 
-class GenericModerator(CommentModerator):
-    email_notification = False
-
-    def moderate(self, comment, content_object, request):
-        """Require moderation unless user is in Trusted group"""
-        user = request.user
-
-        try:
-            user.groups.get(name='Trusted')
-            return False
-        except:
-            return True
-
-# this models.py might be getting loaded several times
-# http://stackoverflow.com/questions/3277474//3343654#3343654
-if Person not in moderator._registry:
-    moderator.register(Person, GenericModerator)
-
+# class GenericModerator(CommentModerator):
+#     email_notification = False
+# 
+#     def moderate(self, comment, content_object, request):
+#         """Require moderation unless user is in Trusted group"""
+#         user = request.user
+# 
+#         try:
+#             user.groups.get(name='Trusted')
+#             return False
+#         except:
+#             return True
+# 
+# # this models.py might be getting loaded several times
+# # http://stackoverflow.com/questions/3277474//3343654#3343654
+# if Person not in moderator._registry:
+#     moderator.register(Person, GenericModerator)
+# 
