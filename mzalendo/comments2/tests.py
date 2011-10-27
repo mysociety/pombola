@@ -5,6 +5,7 @@ from django.test.client import Client
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.contrib.sites.models import Site
+from django.db import IntegrityError
 
 import pprint
 from comments2.models import Comment
@@ -54,6 +55,18 @@ class CommentsCase(WebTest):
         self.assertEqual( create_test_get_status( self.test_user ),    'unmoderated' )
         self.assertEqual( create_test_get_status( self.trusted_user ), 'approved'    )
     
+
+    def test_user_is_required(self):
+        """check that the user is required"""
+        def create_no_user_comment():
+            comment = Comment(
+                content_object  = self.test_object,
+                title   = 'Foo',
+                comment = 'Foo content',
+            )
+            comment.save()
+    
+        self.assertRaises( IntegrityError, create_no_user_comment )
 
 
 
