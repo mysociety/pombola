@@ -9,19 +9,19 @@ class CommentAdmin(admin.ModelAdmin):
            {'fields': ('content_type', 'object_pk')}
         ),
         (_('Content'),
-           {'fields': ('user', 'user_name', 'user_email', 'user_url', 'title', 'comment')}
+           {'fields': ('user', 'title', 'comment')}
         ),
         (_('Metadata'),
            {'fields': ('submit_date', 'ip_address', 'status')}
         ),
      )
 
-    list_display = ('name', 'content_type', 'object_pk', 'submit_date', 'title', 'status')
+    list_display = ('content_type', 'object_pk', 'submit_date', 'title', 'status')
     list_filter = ('submit_date', 'status')
     date_hierarchy = 'submit_date'
     ordering = ('-submit_date',)
     raw_id_fields = ('user',)
-    search_fields = ('comment', 'user__username', 'user_name', 'user_email', 'user_url', 'ip_address')
+    search_fields = ('comment', 'user__username', 'ip_address')
     # actions = ["flag_comments", "approve_comments", "remove_comments"]
 
     # def get_actions(self, request):
