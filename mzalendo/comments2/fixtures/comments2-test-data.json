@@ -1,0 +1,47 @@
+[
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "test-user", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-10-28 04:42:10", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$c0c73$16e00d1ac9f1ce2d9be450993d36415ee1f685bb", 
+            "email": "test-user@example.com", 
+            "date_joined": "2011-10-28 04:42:10"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "trusted-user", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-10-28 04:42:10", 
+            "groups": [], 
+            "user_permissions": [
+                22
+            ], 
+            "password": "sha1$ade55$f20d31fb680763e95b989550032b95942836c226", 
+            "email": "trusted-user@example.com", 
+            "date_joined": "2011-10-28 04:42:10"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "comments2.rockstar", 
+        "fields": {
+            "name": "Slash"
+        }
+    }
+]

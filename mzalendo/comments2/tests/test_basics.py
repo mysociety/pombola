@@ -12,29 +12,27 @@ from comments2.models import Comment
 from comments2.tests.models import RockStar
 
 class CommentsCase(WebTest):
+    urls = 'comments2.urls'
+    fixtures = ['comments2-test-data.json']
+    
     def setUp(self):
+    
+        self.test_object  = RockStar.objects.get(name='Slash')
+        self.test_user    = User.objects.get(username = 'test-user')
+        self.trusted_user = User.objects.get(username = 'trusted-user')
 
-        # use the sites as the test object as we can be sure that there is one
-        self.test_object, created = RockStar.objects.get_or_create(
-            name   = 'Slash',
-        )
+        # check that the trusted user has the correct permissions - don't trust
+        # that the permission id listed in the fixture won't change
+        self.assertFalse( self.test_user.has_perm('comments2.can_post_without_moderation') )
+        self.assertTrue( self.trusted_user.has_perm('comments2.can_post_without_moderation') )
 
-        # create a normal user
-        self.test_user = User.objects.create_user(
-            username = 'test-user',
-            email    = 'test-user@example.com',
-            password = 'secret',
-        )
-
-        # create a user we trust - has the 'can_post_without_moderation' permission
-        self.trusted_user = User.objects.create_user(
-            username = 'trusted-user',
-            email    = 'trusted-user@example.com',
-            password = 'secret',
-        )
-        can_post_without_moderation = Permission.objects.get(codename='can_post_without_moderation')
-        self.trusted_user.user_permissions.add( can_post_without_moderation )
-
+        # Useful to spit out the database setup
+        # from django.core.management import call_command
+        # call_command(
+        #     'dumpdata',
+        #     'auth.User', 'comments2.RockStar',
+        #     indent=4, natural=True
+        # )
 
     def test_sanity(self):
         self.assertEqual( 2+2, 4 )
