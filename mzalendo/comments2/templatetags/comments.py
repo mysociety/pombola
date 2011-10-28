@@ -121,56 +121,56 @@ class CommentCountNode(BaseCommentNode):
     def get_context_value_from_queryset(self, context, qs):
         return qs.count()
 
-class CommentFormNode(BaseCommentNode):
-    """Insert a form for the comment model into the context."""
-
-    def get_form(self, context):
-        ctype, object_pk = self.get_target_ctype_pk(context)
-        if object_pk:
-            return CommentForm(ctype.get_object_for_this_type(pk=object_pk))
-        else:
-            return None
-
-    def render(self, context):
-        context[self.as_varname] = self.get_form(context)
-        return ''
-
-class RenderCommentFormNode(CommentFormNode):
-    """Render the comment form directly"""
-
-    #@classmethod
-    def handle_token(cls, parser, token):
-        """Class method to parse render_comment_form and return a Node."""
-        tokens = token.contents.split()
-        if tokens[1] != 'for':
-            raise template.TemplateSyntaxError("Second argument in %r tag must be 'for'" % tokens[0])
-
-        # {% render_comment_form for obj %}
-        if len(tokens) == 3:
-            return cls(object_expr=parser.compile_filter(tokens[2]))
-
-        # {% render_comment_form for app.models pk %}
-        elif len(tokens) == 4:
-            return cls(
-                ctype = BaseCommentNode.lookup_content_type(tokens[2], tokens[0]),
-                object_pk_expr = parser.compile_filter(tokens[3])
-            )
-    handle_token = classmethod(handle_token)
-
-    def render(self, context):
-        ctype, object_pk = self.get_target_ctype_pk(context)
-        if object_pk:
-            template_search_list = [
-                "comments/%s/%s/form.html" % (ctype.app_label, ctype.model),
-                "comments/%s/form.html" % ctype.app_label,
-                "comments/form.html"
-            ]
-            context.push()
-            formstr = render_to_string(template_search_list, {"form" : self.get_form(context)}, context)
-            context.pop()
-            return formstr
-        else:
-            return ''
+# class CommentFormNode(BaseCommentNode):
+#     """Insert a form for the comment model into the context."""
+# 
+#     def get_form(self, context):
+#         ctype, object_pk = self.get_target_ctype_pk(context)
+#         if object_pk:
+#             return CommentForm(ctype.get_object_for_this_type(pk=object_pk))
+#         else:
+#             return None
+# 
+#     def render(self, context):
+#         context[self.as_varname] = self.get_form(context)
+#         return ''
+# 
+# class RenderCommentFormNode(CommentFormNode):
+#     """Render the comment form directly"""
+# 
+#     #@classmethod
+#     def handle_token(cls, parser, token):
+#         """Class method to parse render_comment_form and return a Node."""
+#         tokens = token.contents.split()
+#         if tokens[1] != 'for':
+#             raise template.TemplateSyntaxError("Second argument in %r tag must be 'for'" % tokens[0])
+# 
+#         # {% render_comment_form for obj %}
+#         if len(tokens) == 3:
+#             return cls(object_expr=parser.compile_filter(tokens[2]))
+# 
+#         # {% render_comment_form for app.models pk %}
+#         elif len(tokens) == 4:
+#             return cls(
+#                 ctype = BaseCommentNode.lookup_content_type(tokens[2], tokens[0]),
+#                 object_pk_expr = parser.compile_filter(tokens[3])
+#             )
+#     handle_token = classmethod(handle_token)
+# 
+#     def render(self, context):
+#         ctype, object_pk = self.get_target_ctype_pk(context)
+#         if object_pk:
+#             template_search_list = [
+#                 "comments/%s/%s/form.html" % (ctype.app_label, ctype.model),
+#                 "comments/%s/form.html" % ctype.app_label,
+#                 "comments/form.html"
+#             ]
+#             context.push()
+#             formstr = render_to_string(template_search_list, {"form" : self.get_form(context)}, context)
+#             context.pop()
+#             return formstr
+#         else:
+#             return ''
 
 class RenderCommentListNode(CommentListNode):
     """Render the comment list directly"""
@@ -277,41 +277,41 @@ def render_comment_list(parser, token):
     """
     return RenderCommentListNode.handle_token(parser, token)
 
-#@register.tag
-def get_comment_form(parser, token):
-    """
-    Get a (new) form object to post a new comment.
+# #@register.tag
+# def get_comment_form(parser, token):
+#     """
+#     Get a (new) form object to post a new comment.
+# 
+#     Syntax::
+# 
+#         {% get_comment_form for [object] as [varname] %}
+#         {% get_comment_form for [app].[model] [object_id] as [varname] %}
+#     """
+#     return CommentFormNode.handle_token(parser, token)
 
-    Syntax::
+# #@register.tag
+# def render_comment_form(parser, token):
+#     """
+#     Render the comment form (as returned by ``{% render_comment_form %}``) through
+#     the ``comments/form.html`` template.
+# 
+#     Syntax::
+# 
+#         {% render_comment_form for [object] %}
+#         {% render_comment_form for [app].[model] [object_id] %}
+#     """
+#     return RenderCommentFormNode.handle_token(parser, token)
 
-        {% get_comment_form for [object] as [varname] %}
-        {% get_comment_form for [app].[model] [object_id] as [varname] %}
-    """
-    return CommentFormNode.handle_token(parser, token)
-
-#@register.tag
-def render_comment_form(parser, token):
-    """
-    Render the comment form (as returned by ``{% render_comment_form %}``) through
-    the ``comments/form.html`` template.
-
-    Syntax::
-
-        {% render_comment_form for [object] %}
-        {% render_comment_form for [app].[model] [object_id] %}
-    """
-    return RenderCommentFormNode.handle_token(parser, token)
-
-#@register.simple_tag
-def comment_form_target():
-    """
-    Get the target URL for the comment form.
-
-    Example::
-
-        <form action="{% comment_form_target %}" method="post">
-    """
-    return reverse("comments2.views.post_comment")
+# #@register.simple_tag
+# def comment_form_target():
+#     """
+#     Get the target URL for the comment form.
+# 
+#     Example::
+# 
+#         <form action="{% comment_form_target %}" method="post">
+#     """
+#     return reverse("comments2.views.post_comment")
 
 #@register.simple_tag
 def get_comment_permalink(comment, anchor_pattern=None):
@@ -364,8 +364,8 @@ def get_comment_add_url(object):
 
 register.tag(get_comment_count)
 register.tag(get_comment_list)
-register.tag(get_comment_form)
-register.tag(render_comment_form)
-register.simple_tag(comment_form_target)
+# register.tag(get_comment_form)
+# register.tag(render_comment_form)
+# register.simple_tag(comment_form_target)
 register.simple_tag(get_comment_permalink)
 register.tag(render_comment_list)

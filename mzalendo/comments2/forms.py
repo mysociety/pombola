@@ -19,8 +19,6 @@ class CommentForm(forms.Form):
     """
     Handles the security aspects (anti-spoofing) for comment forms.
     """
-    content_type  = forms.CharField(widget=forms.HiddenInput)
-    object_pk     = forms.CharField(widget=forms.HiddenInput)
     timestamp     = forms.IntegerField(widget=forms.HiddenInput)
     title         = forms.CharField(max_length=300)
     comment       = forms.CharField(
@@ -33,6 +31,7 @@ class CommentForm(forms.Form):
         self.target_object = target_object
         if initial is None:
             initial = {}
+        initial['timestamp'] = int(time.time())
         super(CommentForm, self).__init__(data=data, initial=initial)
 
     def clean_timestamp(self):
@@ -55,7 +54,7 @@ class CommentForm(forms.Form):
             raise ValueError("get_comment_object may only be called on valid forms")
 
         new = Comment(**self.get_comment_create_data())
-        new = self.check_for_duplicate_comment(new)
+        # new = self.check_for_duplicate_comment(new)
 
         return new
 
@@ -68,6 +67,7 @@ class CommentForm(forms.Form):
         return dict(
             content_type = ContentType.objects.get_for_model(self.target_object),
             object_pk    = force_unicode(self.target_object._get_pk_val()),
+            title        = self.cleaned_data["title"],
             comment      = self.cleaned_data["comment"],
             submit_date  = datetime.datetime.now(),
         )

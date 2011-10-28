@@ -75,7 +75,7 @@ class Comment(models.Model):
         )
         
     def __unicode__(self):
-        return "%s: %s..." % (self.name, self.comment[:50])
+        return "%s: %s..." % (self.user, self.comment[:50])
 
     def get_content_object_url(self):
         """
