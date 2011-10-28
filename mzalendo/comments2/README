@@ -1,0 +1,24 @@
+This is a heavily tweaked copy of the django.contrib.comments app.
+
+A copy was made for the following reasons:
+
+    * we want comments to have titles.
+
+    * we don't want anonymous comments - so we would actively ignore several of
+      the existing fields.
+
+    * we _do_ want anonymous flagging of comments. Changing the CommentFlag
+      model was hard, and replacing it with one from another app led to links in
+      the admin breaking.
+
+    * there were big chunks of admin missing (eg moderating comments)
+
+    * some of the design was obviously supporting old installations (eg
+      is_public and is_removed bools)
+
+     * we may want to comment on things that are not in our database, so the
+       contenttypes framework could not be used for that.
+
+     * we wanted to autoapprove some comments. Using the bundled moderation
+       system was overly complicated (action-at-a-distance).
+
