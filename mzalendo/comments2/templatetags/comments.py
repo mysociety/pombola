@@ -7,7 +7,8 @@ from django.core.urlresolvers import reverse
 
 register = template.Library()
 
-import comments2
+from comments2.forms import CommentForm
+from comments2.models import Comment
 
 register = template.Library()
 class BaseCommentNode(template.Node):
@@ -62,7 +63,7 @@ class BaseCommentNode(template.Node):
     def __init__(self, ctype=None, object_pk_expr=None, object_expr=None, as_varname=None, comment=None):
         if ctype is None and object_expr is None:
             raise template.TemplateSyntaxError("Comment nodes must be given either a literal object or a ctype and object pk.")
-        self.comment_model = comments2.models.Comment
+        self.comment_model = Comment
         self.as_varname = as_varname
         self.ctype = ctype
         self.object_pk_expr = object_pk_expr
@@ -126,7 +127,7 @@ class CommentFormNode(BaseCommentNode):
     def get_form(self, context):
         ctype, object_pk = self.get_target_ctype_pk(context)
         if object_pk:
-            return comments2.get_form()(ctype.get_object_for_this_type(pk=object_pk))
+            return CommentForm(ctype.get_object_for_this_type(pk=object_pk))
         else:
             return None
 
@@ -160,9 +161,9 @@ class RenderCommentFormNode(CommentFormNode):
         ctype, object_pk = self.get_target_ctype_pk(context)
         if object_pk:
             template_search_list = [
-                "comments2/%s/%s/form.html" % (ctype.app_label, ctype.model),
-                "comments2/%s/form.html" % ctype.app_label,
-                "comments2/form.html"
+                "comments/%s/%s/form.html" % (ctype.app_label, ctype.model),
+                "comments/%s/form.html" % ctype.app_label,
+                "comments/form.html"
             ]
             context.push()
             formstr = render_to_string(template_search_list, {"form" : self.get_form(context)}, context)
@@ -197,9 +198,9 @@ class RenderCommentListNode(CommentListNode):
         ctype, object_pk = self.get_target_ctype_pk(context)
         if object_pk:
             template_search_list = [
-                "comments2/%s/%s/list.html" % (ctype.app_label, ctype.model),
-                "comments2/%s/list.html" % ctype.app_label,
-                "comments2/list.html"
+                "comments/%s/%s/list.html" % (ctype.app_label, ctype.model),
+                "comments/%s/list.html" % ctype.app_label,
+                "comments/list.html"
             ]
             qs = self.get_query_set(context)
             context.push()
@@ -262,7 +263,7 @@ def get_comment_list(parser, token):
 def render_comment_list(parser, token):
     """
     Render the comment list (as returned by ``{% get_comment_list %}``)
-    through the ``comments2/list.html`` template
+    through the ``comments/list.html`` template
 
     Syntax::
 
@@ -292,7 +293,7 @@ def get_comment_form(parser, token):
 def render_comment_form(parser, token):
     """
     Render the comment form (as returned by ``{% render_comment_form %}``) through
-    the ``comments2/form.html`` template.
+    the ``comments/form.html`` template.
 
     Syntax::
 
@@ -310,7 +311,7 @@ def comment_form_target():
 
         <form action="{% comment_form_target %}" method="post">
     """
-    return comments2.get_form_target()
+    return reverse("comments2.views.post_comment")
 
 #@register.simple_tag
 def get_comment_permalink(comment, anchor_pattern=None):
