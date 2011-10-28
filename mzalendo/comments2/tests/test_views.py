@@ -95,29 +95,26 @@ class CommentsViews(WebTest):
         res =  self.get_comments( test_object )
         self.assertNotContains( res, comment.title )
 
-    # def test_trusted_users(self):
-    #     """Test that users in the 'trusted' group have their comments posted at once"""
-    #     pass
-        # app = self.app
+    def test_trusted_users(self):
+        """Test that users in the 'trusted' group have their comments posted at once"""
+        test_object = self.test_object
+        trusted_user = self.trusted_user
+        comment_title = "Trusted user comment"
+        
+        # get the test_object page with comment form on it
+        res = self.get_comments_add( test_object, trusted_user )
     
-    #     test_object = self.test_object
-    #     trusted_user = self.trusted_user
-    #     comment_title = "Trusted user comment"
-    #     
-    #     # get the test_object page with comment form on it
-    #     res = self.get_comments_add( test_object, trusted_user )
-    # 
-        # # leave a comment
-        # form = res.forms['comment_form']
-        # form['title']   = comment_title
-        # form['comment'] = 'Test comment'
-        # form_response = form.submit()
-        #     
-        # # check that the comment is correct and public
-        # comment = Comment.objects.get(title=comment_title)
-        # self.assertEqual( comment.title, comment_title )
-        # self.assertEqual( comment.status, 'approved' )
-        # 
-        # # check that it is shown on site
-        # self.assertContains( self.get_comments( test_object ), comment_title )
+        # leave a comment
+        form = res.forms['add_comment']
+        form['title']   = comment_title
+        form['comment'] = 'Test comment'
+        form_response = form.submit()
+            
+        # check that the comment is correct and public
+        comment = Comment.objects.get(title=comment_title)
+        self.assertEqual( comment.title, comment_title )
+        self.assertEqual( comment.status, 'approved' )
+        
+        # check that it is shown on site
+        self.assertContains( self.get_comments( test_object ), comment_title )
         

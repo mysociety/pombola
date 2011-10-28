@@ -3,7 +3,6 @@ import textwrap
 
 from django import http
 from django.conf import settings
-from django.contrib import comments
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core import urlresolvers
