@@ -16,9 +16,9 @@ A copy was made for the following reasons:
     * some of the design was obviously supporting old installations (eg
       is_public and is_removed bools)
 
-     * we may want to comment on things that are not in our database, so the
-       contenttypes framework could not be used for that.
+    * we may want to comment on things that are not in our database, so the
+      contenttypes framework could not be used for that.
 
-     * we wanted to autoapprove some comments. Using the bundled moderation
-       system was overly complicated (action-at-a-distance).
+    * we wanted to autoapprove some comments. Using the bundled moderation
+      system was overly complicated (action-at-a-distance).
 
