@@ -1,23 +1,22 @@
-import settings
+from django.conf import settings
 
 from django_webtest import WebTest
 from django.test.client import Client
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
-from django.contrib.sites.models import Site
 from django.db import IntegrityError
 
 import pprint
-from comments2.models import Comment
 
+from comments2.models import Comment
+from comments2.tests.models import RockStar
 
 class CommentsCase(WebTest):
     def setUp(self):
 
         # use the sites as the test object as we can be sure that there is one
-        self.test_object, created = Site.objects.get_or_create(
-            domain = 'example.com',
-            name   = 'example.com',
+        self.test_object, created = RockStar.objects.get_or_create(
+            name   = 'Slash',
         )
 
         # create a normal user
@@ -40,6 +39,7 @@ class CommentsCase(WebTest):
     def test_sanity(self):
         self.assertEqual( 2+2, 4 )
         
+        
     def test_automoderate(self):
         """check that the can_post_without_moderation perm is respected"""
         def create_test_get_status(user):
@@ -61,6 +61,7 @@ class CommentsCase(WebTest):
         def create_no_user_comment():
             comment = Comment(
                 content_object  = self.test_object,
+                # user  <-- deliberately missing
                 title   = 'Foo',
                 comment = 'Foo content',
             )
