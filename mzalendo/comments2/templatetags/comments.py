@@ -2,11 +2,14 @@ from django import template
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.contrib import comments
 from django.utils.encoding import smart_unicode
+from django.core.urlresolvers import reverse
 
 register = template.Library()
 
+import comments2
+
+register = template.Library()
 class BaseCommentNode(template.Node):
     """
     Base helper class (abstract) for handling the get_comment_* template tags.
@@ -59,7 +62,7 @@ class BaseCommentNode(template.Node):
     def __init__(self, ctype=None, object_pk_expr=None, object_expr=None, as_varname=None, comment=None):
         if ctype is None and object_expr is None:
             raise template.TemplateSyntaxError("Comment nodes must be given either a literal object or a ctype and object pk.")
-        self.comment_model = comments.get_model()
+        self.comment_model = comments2.models.Comment
         self.as_varname = as_varname
         self.ctype = ctype
         self.object_pk_expr = object_pk_expr
@@ -79,7 +82,6 @@ class BaseCommentNode(template.Node):
         qs = self.comment_model.objects.filter(
             content_type = ctype,
             object_pk    = smart_unicode(object_pk),
-            site__pk     = settings.SITE_ID,
         )
 
         # The is_public and is_removed fields are implementation details of the
@@ -124,7 +126,7 @@ class CommentFormNode(BaseCommentNode):
     def get_form(self, context):
         ctype, object_pk = self.get_target_ctype_pk(context)
         if object_pk:
-            return comments.get_form()(ctype.get_object_for_this_type(pk=object_pk))
+            return comments2.get_form()(ctype.get_object_for_this_type(pk=object_pk))
         else:
             return None
 
@@ -158,9 +160,9 @@ class RenderCommentFormNode(CommentFormNode):
         ctype, object_pk = self.get_target_ctype_pk(context)
         if object_pk:
             template_search_list = [
-                "comments/%s/%s/form.html" % (ctype.app_label, ctype.model),
-                "comments/%s/form.html" % ctype.app_label,
-                "comments/form.html"
+                "comments2/%s/%s/form.html" % (ctype.app_label, ctype.model),
+                "comments2/%s/form.html" % ctype.app_label,
+                "comments2/form.html"
             ]
             context.push()
             formstr = render_to_string(template_search_list, {"form" : self.get_form(context)}, context)
@@ -195,9 +197,9 @@ class RenderCommentListNode(CommentListNode):
         ctype, object_pk = self.get_target_ctype_pk(context)
         if object_pk:
             template_search_list = [
-                "comments/%s/%s/list.html" % (ctype.app_label, ctype.model),
-                "comments/%s/list.html" % ctype.app_label,
-                "comments/list.html"
+                "comments2/%s/%s/list.html" % (ctype.app_label, ctype.model),
+                "comments2/%s/list.html" % ctype.app_label,
+                "comments2/list.html"
             ]
             qs = self.get_query_set(context)
             context.push()
@@ -260,7 +262,7 @@ def get_comment_list(parser, token):
 def render_comment_list(parser, token):
     """
     Render the comment list (as returned by ``{% get_comment_list %}``)
-    through the ``comments/list.html`` template
+    through the ``comments2/list.html`` template
 
     Syntax::
 
@@ -290,7 +292,7 @@ def get_comment_form(parser, token):
 def render_comment_form(parser, token):
     """
     Render the comment form (as returned by ``{% render_comment_form %}``) through
-    the ``comments/form.html`` template.
+    the ``comments2/form.html`` template.
 
     Syntax::
 
@@ -308,7 +310,7 @@ def comment_form_target():
 
         <form action="{% comment_form_target %}" method="post">
     """
-    return comments.get_form_target()
+    return comments2.get_form_target()
 
 #@register.simple_tag
 def get_comment_permalink(comment, anchor_pattern=None):
@@ -323,6 +325,41 @@ def get_comment_permalink(comment, anchor_pattern=None):
     if anchor_pattern:
         return comment.get_absolute_url(anchor_pattern)
     return comment.get_absolute_url()
+
+
+@register.simple_tag
+def get_comment_list_url(object):
+    """
+    Create the url to the comments for the given object.
+
+    Example::
+        {{ get_comment_list_url object }}
+    """
+
+    return reverse(
+        'comments2.views.list_for',
+        kwargs = {
+            'slug':    object.slug,
+            'module_name': object._meta.module_name,
+        }
+    )
+
+@register.simple_tag
+def get_comment_add_url(object):
+    """
+    Create the url to the comments for the given object.
+
+    Example::
+        {{ get_comment_list_url object }}
+    """
+
+    return reverse(
+        'comments2.views.add',
+        kwargs = {
+            'slug':    object.slug,
+            'module_name': object._meta.module_name,
+        }
+    )
 
 register.tag(get_comment_count)
 register.tag(get_comment_list)
