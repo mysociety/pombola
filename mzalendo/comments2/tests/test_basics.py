@@ -16,23 +16,19 @@ class CommentsBasics(WebTest):
     fixtures = ['comments2-test-data.json']
     
     def setUp(self):
-    
         self.test_object  = RockStar.objects.get(name='Slash')
         self.test_user    = User.objects.get(username = 'test-user')
         self.trusted_user = User.objects.get(username = 'trusted-user')
 
-        # check that the trusted user has the correct permissions - don't trust
-        # that the permission id listed in the fixture won't change
-        self.assertFalse( self.test_user.has_perm('comments2.can_post_without_moderation') )
-        self.assertTrue( self.trusted_user.has_perm('comments2.can_post_without_moderation') )
-
+    def tearDown(self):
         # Useful to spit out the database setup
         # from django.core.management import call_command
         # call_command(
         #     'dumpdata',
-        #     'auth.User', 'comments2.RockStar',
-        #     indent=4, natural=True
+        #     'auth.User', 'comments2',
+        #     indent=4, use_natural_keys=True
         # )
+        pass
 
     def test_sanity(self):
         self.assertEqual( 2+2, 4 )
@@ -52,7 +48,7 @@ class CommentsBasics(WebTest):
             
         self.assertEqual( create_test_get_status( self.test_user ),    'unmoderated' )
         self.assertEqual( create_test_get_status( self.trusted_user ), 'approved'    )
-    
+
 
     def test_user_is_required(self):
         """check that the user is required"""

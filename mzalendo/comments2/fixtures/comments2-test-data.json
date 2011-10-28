@@ -30,7 +30,11 @@
             "last_login": "2011-10-28 04:42:10", 
             "groups": [], 
             "user_permissions": [
-                22
+                [
+                    "can_post_without_moderation", 
+                    "comments2", 
+                    "comment"
+                ]
             ], 
             "password": "sha1$ade55$f20d31fb680763e95b989550032b95942836c226", 
             "email": "trusted-user@example.com", 
@@ -42,6 +46,57 @@
         "model": "comments2.rockstar", 
         "fields": {
             "name": "Slash"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "comments2.comment", 
+        "fields": {
+            "comment": "Unmoderated comment", 
+            "status": "unmoderated", 
+            "title": "Unmoderated", 
+            "submit_date": "2011-10-28 05:29:20", 
+            "object_pk": "1", 
+            "user": 1, 
+            "content_type": [
+                "comments2", 
+                "rockstar"
+            ], 
+            "ip_address": null
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "comments2.comment", 
+        "fields": {
+            "comment": "Approved comment", 
+            "status": "approved", 
+            "title": "Approved", 
+            "submit_date": "2011-10-28 05:29:20", 
+            "object_pk": "1", 
+            "user": 1, 
+            "content_type": [
+                "comments2", 
+                "rockstar"
+            ], 
+            "ip_address": null
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "comments2.comment", 
+        "fields": {
+            "comment": "Rejected comment", 
+            "status": "rejected", 
+            "title": "Rejected", 
+            "submit_date": "2011-10-28 05:29:20", 
+            "object_pk": "1", 
+            "user": 1, 
+            "content_type": [
+                "comments2", 
+                "rockstar"
+            ], 
+            "ip_address": null
         }
     }
 ]
