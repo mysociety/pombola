@@ -19,7 +19,7 @@
 
     {% else %}
 
-        <form method="post" action="{% get_comment_add_url object %}">
+        <form method="post" action="{% get_comment_add_url object %}" id="add_comment">
             {% csrf_token %}
             
             <table>

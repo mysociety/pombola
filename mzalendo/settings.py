@@ -271,3 +271,8 @@ GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
 # Markitup settings
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
 MARKITUP_SET = 'markitup/sets/markdown'
+
+
+# There are some models that are just for testing, so they are not included in
+# the South migrations.
+SOUTH_TESTS_MIGRATE = False

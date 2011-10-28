@@ -8,11 +8,10 @@ from django.db import IntegrityError
 
 import pprint
 
-from comments2.models import Comment
+from comments2.models import Comment, CommentFlag
 from comments2.tests.models import RockStar
 
 class CommentsViews(WebTest):
-    urls = 'comments2.urls'
     fixtures = ['comments2-test-data.json']
     
     def setUp(self):
@@ -34,82 +33,73 @@ class CommentsViews(WebTest):
         #     indent=4, natural=True
         # )
 
-    # def get_comments(self, test_object, user=None):
-    #     return (
-    #         self
-    #           .app
-    #           .get( test_object.get_absolute_url(), user=user )
-    #           .click(description=r'^\d+ comments?$')
-    #     )
-    # 
-    # def get_comments_add(self, test_object, user=None):
-    #     return (
-    #         self
-    #           .get_comments( test_object, user )
-    #           .click( description='Add your own comment' )
-    #     )
-    # 
-    # def test_leaving_comment(self):
-    #     # go to the test_object and check that there are no comments
-    #     test_object = self.test_object
-    #     app = self.app
-    #     response = self.get_comments( test_object )
-    #     
-    #     # check that anon can't leave comments
-    #     self.assertTemplateNotUsed( response, 'comments/form.html' )
-    #     self.assertContains( response, "login to add your own comment" )
-    #     
-    #     # check that there is now a comment form
-    #     response = self.get_comments_add( test_object, user=self.test_user  )
-    #     
-    #     self.assertTemplateUsed( response, 'comments/form.html' )
-    #     
-    #     # leave a comment
-    #     form = response.forms['comment_form']
-    #     form['title']   = 'Test Title'
-    #     form['comment'] = 'Test comment'
-    #     form_response = form.submit()
-    #     self.assertEqual(response.context['user'].username, 'test-user')
-    # 
-    #     # check that the comment is correct and pending review
-    #     comment = mz_comments.models.CommentWithTitle.objects.filter(
-    #         content_type = ContentTypeManager().get_for_model(self.test_object),
-    #         object_pk    = self.test_object.id,
-    #     )[0]
-    #     self.assertEqual( comment.title, 'Test Title' )
-    #     self.assertEqual( comment.comment, 'Test comment' )
-    #     self.assertEqual( comment.name, 'test-user' )
-    #     self.assertEqual( comment.is_public, False )
-    #     self.assertEqual( comment.is_removed, False )
-    #     
-    #     # check it is not visible on site
-    #     res = self.get_comments( test_object )
-    #     self.assertNotContains( res, comment.title )
-    #             
-    #     # approve the comment
-    #     comment.is_public = True
-    #     comment.save()
-    #     
-    #     # check that it is shown on site
-    #     self.assertContains( self.get_comments( test_object ), comment.title )
-    #     
-    #     # flag the comment
-    #     comment.is_removed = True
-    #     comment.save()
-    #     self.assertNotContains( self.get_comments( test_object ), comment.title )
-    #     
-    #     # delete the comment
-    #     comment.delete()
-    #     # check that comment not shown
-    #     res =  self.get_comments( test_object )
-    #     self.assertNotContains( res, comment.title )
-    #     self.assertNotContains( res, 'comment removed' )
-    # 
+    def get_comments(self, test_object, user=None):
+        url = "/comments/for/%s/%s/" % ( test_object._meta.module_name, test_object.slug )
+        return self.app.get( url, user=user )
+    
+    def get_comments_add(self, test_object, user=None):
+        url = "/comments/for/%s/%s/add/" % ( test_object._meta.module_name, test_object.slug )
+        return self.app.get( url, user=user )
+    
+    def test_leaving_comment(self):
+        # go to the test_object and check that there are no comments
+        test_object = self.test_object
+        app = self.app
+        
+        # check that anon can't leave comments
+        response = self.get_comments( test_object )
+        self.assertContains( response, 'login to add your own comment' )
+        response = self.get_comments_add( test_object )
+        self.assertEqual( response.status, '302 FOUND' )
+        
+        # check that logged in users can
+        response = self.get_comments( test_object, user=self.test_user )
+        self.assertContains( response, 'Add your own comment' )
+        response = self.get_comments_add( test_object, user=self.test_user )
+        self.assertEqual( response.status, '200 OK' )
+        
+        # check that our comment is not in the system
+        self.assertEqual( Comment.objects.filter(title="Test123").count(), 0 )
+        
+        # Fill in the comment form
+        form = response.forms['add_comment']
+        form['title']   = 'Test123'
+        form['comment'] = 'Test comment'
+        form_response = form.submit()
+        self.assertEqual(response.context['user'].username, 'test-user')
+        
+        # check that our comment is in the system
+        self.assertEqual( Comment.objects.filter(title="Test123").count(), 1 )
+        comment = Comment.objects.get(title="Test123")
+        self.assertEqual(comment.status, 'unmoderated')
+        
+        # check comment is not visible on site
+        res = self.get_comments( test_object )
+        self.assertNotContains( res, comment.title )
+                
+        # approve the comment
+        comment.status = 'approved'
+        comment.save()
+        
+        # check that it is shown on site
+        self.assertContains( self.get_comments( test_object ), comment.title )
+        
+        # reject the comment
+        comment.status = 'rejected'
+        comment.save()
+        self.assertNotContains( self.get_comments( test_object ), comment.title )
+        
+        # delete the comment
+        comment.delete()
+        # check that comment not shown
+        res =  self.get_comments( test_object )
+        self.assertNotContains( res, comment.title )
+
     # def test_trusted_users(self):
     #     """Test that users in the 'trusted' group have their comments posted at once"""
-    # 
-    #     app = self.app
-    # 
+    #     pass
+        # app = self.app
+    
     #     test_object = self.test_object
     #     trusted_user = self.trusted_user
     #     comment_title = "Trusted user comment"
@@ -117,21 +107,17 @@ class CommentsViews(WebTest):
     #     # get the test_object page with comment form on it
     #     res = self.get_comments_add( test_object, trusted_user )
     # 
-    #     # leave a comment
-    #     form = res.forms['comment_form']
-    #     form['title']   = comment_title
-    #     form['comment'] = 'Test comment'
-    #     form_response = form.submit()
-    # 
-    #     # check that the comment is correct and public
-    #     comment = mz_comments.models.CommentWithTitle.objects.filter(
-    #         content_type = ContentTypeManager().get_for_model(self.test_object),
-    #         object_pk    = self.test_object.id,
-    #     )[0]
-    #     self.assertEqual( comment.title, comment_title )
-    #     self.assertEqual( comment.is_public, True )
-    #     self.assertEqual( comment.is_removed, False )
-    #     
-    #     # check that it is shown on site
-    #     self.assertContains( self.get_comments( test_object ), comment_title )
-    #     
+        # # leave a comment
+        # form = res.forms['comment_form']
+        # form['title']   = comment_title
+        # form['comment'] = 'Test comment'
+        # form_response = form.submit()
+        #     
+        # # check that the comment is correct and public
+        # comment = Comment.objects.get(title=comment_title)
+        # self.assertEqual( comment.title, comment_title )
+        # self.assertEqual( comment.status, 'approved' )
+        # 
+        # # check that it is shown on site
+        # self.assertContains( self.get_comments( test_object ), comment_title )
+        

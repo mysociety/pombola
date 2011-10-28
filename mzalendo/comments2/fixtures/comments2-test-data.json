@@ -43,7 +43,8 @@
     },
     {
         "fields": {
-            "name": "Slash"
+            "name": "Slash",
+            "slug": "slash"
         },
         "model": "comments2.rockstar",
         "pk": 1

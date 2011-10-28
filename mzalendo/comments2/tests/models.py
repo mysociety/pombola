@@ -9,6 +9,7 @@ class RockStar(models.Model):
     """
 
     name = models.CharField(max_length=30)
+    slug = models.SlugField(unique=True)
 
     class Meta:
         app_label = 'comments2'

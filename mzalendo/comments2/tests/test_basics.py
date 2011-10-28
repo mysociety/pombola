@@ -12,7 +12,6 @@ from comments2.models import Comment
 from comments2.tests.models import RockStar
 
 class CommentsBasics(WebTest):
-    urls = 'comments2.urls'
     fixtures = ['comments2-test-data.json']
     
     def setUp(self):
