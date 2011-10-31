@@ -1,33 +1,13 @@
 from django.conf import settings
-
-from django_webtest import WebTest
-from django.test.client import Client
-from django.contrib.auth.models import User, Permission
-from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.db import IntegrityError
 
 import pprint
 
 from comments2.models import Comment
 from comments2.tests.models import RockStar
+from comments2.tests.test_base import CommentsTestBase
 
-class CommentsBasics(WebTest):
-    fixtures = ['comments2-test-data.json']
-    
-    def setUp(self):
-        self.test_object  = RockStar.objects.get(name='Slash')
-        self.test_user    = User.objects.get(username = 'test-user')
-        self.trusted_user = User.objects.get(username = 'trusted-user')
-
-    def tearDown(self):
-        # Useful to spit out the database setup
-        # from django.core.management import call_command
-        # call_command(
-        #     'dumpdata',
-        #     'auth.User', 'comments2',
-        #     indent=4, use_natural_keys=True
-        # )
-        pass
+class CommentsBasics(CommentsTestBase):
 
     def test_sanity(self):
         self.assertEqual( 2+2, 4 )
