@@ -5,18 +5,15 @@ from django.utils.translation import ugettext_lazy as _, ungettext
 
 class CommentAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None,
-           {'fields': ('content_type', 'object_pk')}
-        ),
         (_('Content'),
            {'fields': ('user', 'title', 'comment')}
         ),
         (_('Metadata'),
-           {'fields': ('submit_date', 'ip_address', 'status')}
+           {'fields': ('content_type', 'object_pk', 'submit_date', 'ip_address', 'status')}
         ),
      )
 
-    list_display = ('content_type', 'object_pk', 'submit_date', 'title', 'status')
+    list_display = ('content_object', 'submit_date', 'title', 'status')
     list_filter = ('submit_date', 'status')
     date_hierarchy = 'submit_date'
     ordering = ('-submit_date',)
