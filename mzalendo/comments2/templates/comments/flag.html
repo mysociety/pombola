@@ -4,12 +4,19 @@
 {% block title %}{% trans "Flag this comment" %}{% endblock %}
 
 {% block content %}
+
 <h1>{% trans "Really flag this comment?" %}</h1>
-  <blockquote>{{ comment|linebreaks }}</blockquote>
-  <form action="." method="post">{% csrf_token %}
-    {% if next %}<div><input type="hidden" name="next" value="{{ next }}" id="next" /></div>{% endif %}
-    <p class="submit">
-    <input type="submit" name="submit" value="{% trans "Flag" %}" /> or <a href="{{ comment.get_absolute_url }}">cancel</a>
-    </p>
+
+  <blockquote>
+      <strong>{{ comment.title }}</strong><br><br>
+      {{ comment.comment|linebreaks }}
+  </blockquote>
+
+  <form action="." method="post" id="flag_form">
+      {% csrf_token %}
+      <p class="submit">
+          <input type="submit" name="submit" value="Really flag {{ comment.title }}" /> or <a href="{{ comment.get_absolute_url }}">cancel</a>
+      </p>
   </form>
+
 {% endblock %}

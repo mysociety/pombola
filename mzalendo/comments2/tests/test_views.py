@@ -93,3 +93,44 @@ class CommentsViews(CommentsTestBase):
         # check that it is shown on site
         self.assertContains( self.get_comments( test_object ), comment_title )
         
+    def test_flagging_comments(self):
+        """Test that comments can be flagged"""
+        comment = Comment.objects.get(title="Approved")
+        flag_url = '/comments/flag/' + str(comment.id) + '/'
+        app = self.app
+        
+        def flag_count(): return comment.flags.count()
+        def clear_flags(): return comment.flags.all().delete()
+
+        self.assertEqual( flag_count(), 0 )
+        
+        # test that a get request shows form and does not flag comment
+        res = app.get( flag_url )
+        self.assertEqual( flag_count(), 0 )
+
+        # submit the form and check for flag
+        form = res.forms['flag_form']
+        form_res = form.submit()
+        self.assertEqual( flag_count(), 1 )
+        clear_flags()
+
+        # test anon user can flag (multiple times per comment)
+        res = app.get( flag_url )
+        form = res.forms['flag_form']
+        form_res = form.submit()
+        self.assertEqual( flag_count(), 1 )
+        form_res = form.submit()
+        self.assertEqual( flag_count(), 2 )
+        clear_flags()
+        
+        # test that user can flag once per comment (duplicates dropped)
+        res = app.get( flag_url, user=self.test_user )
+        form = res.forms['flag_form']
+        form_res = form.submit()
+        self.assertEqual( flag_count(), 1 )
+        form_res = form.submit()
+        self.assertEqual( flag_count(), 1 )
+        clear_flags()
+
+
+
