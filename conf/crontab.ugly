@@ -1,0 +1,20 @@
+# crontab.ugly:
+# Timed tasks for Mzalendo. Template file.
+#
+# Copyright (c) 2007 UK Citizens Online Democracy. All rights reserved.
+# http://www.mysociety.org/
+
+
+# Set the virtualenv and add it to the path so that the correct python is used -
+# requires that scripts start with '#!/usr/bin/env python'
+VIRTUAL_ENV="/data/vhost/!!(*= $vhost *)!!/mzalendo-virtualenv"
+PATH=/data/vhost/!!(*= $vhost *)!!/mzalendo/bin/:$VIRTUAL_ENV/bin:/usr/local/bin:/usr/bin:/bin
+
+# Set this PYTHONPATH so that the scripts can just 'import mzalendo.setup_env'
+# and have everything work.
+PYTHONPATH=/data/vhost/!!(*= $vhost *)!!/mzalendo
+
+MAILTO=cron-!!(*= $site *)!!@mysociety.org
+
+0 7 * * * !!(*= $user *)!! check_for_comments_needing_attention.py
+

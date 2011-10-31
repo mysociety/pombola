@@ -17,6 +17,12 @@ class CommentManager(models.Manager):
         """
         return self.get_query_set().filter(status='unmoderated')
 
+    def flagged(self):
+        """
+        QuerySet for all comments approved with flags.
+        """
+        return self.get_query_set().filter(status='approved', flag_count__gt=0).order_by('-flag_count')
+
     def for_model(self, model):
         """
         QuerySet for all comments for a particular model (either an instance or
@@ -91,11 +97,13 @@ class Comment(models.Model):
         if self.submit_date is None:
             self.submit_date = datetime.datetime.now()
             
-        # Let other code check that the user is set
-        if self.user_id:
-            # If user is trusted then approve the comment            
-            if self.user.has_perm('comments2.can_post_without_moderation'):
-                self.status = 'approved'
+        # checks if this is an insert
+        if not self.id:
+            # Let other code check that the user is set (on insert only)
+            if self.user_id:
+                # If user is trusted then approve the comment            
+                if self.user.has_perm('comments2.can_post_without_moderation'):
+                    self.status = 'approved'
         
         super(Comment, self).save(*args, **kwargs)
 

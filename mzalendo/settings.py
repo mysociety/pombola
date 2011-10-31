@@ -29,7 +29,9 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-MANAGERS = ADMINS
+MANAGERS = (
+    (config.get('MANAGERS_NAME'), config.get('MANAGERS_EMAIL')),
+)
 
 DATABASES = {
     'default': {
