@@ -98,8 +98,8 @@ class Comment(models.Model):
         
         super(Comment, self).save(*args, **kwargs)
 
-    def get_absolute_url(self, anchor_pattern="#c%(id)s"):
-        return self.get_content_object_url() + (anchor_pattern % self.__dict__)
+    # def get_absolute_url(self, anchor_pattern="#c%(id)s"):
+    #     return self.get_content_object_url() + (anchor_pattern % self.__dict__)
 
     def get_as_text(self):
         """
