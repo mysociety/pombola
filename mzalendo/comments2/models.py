@@ -50,6 +50,7 @@ class Comment(models.Model):
     # Metadata about the comment
     submit_date = models.DateTimeField(_('date/time submitted'), default=None)
     ip_address  = models.IPAddressField(_('IP address'), blank=True, null=True)
+    flag_count  = models.IntegerField(default=0)
 
     # state of this comment
     status = models.CharField(
@@ -101,6 +102,12 @@ class Comment(models.Model):
     # def get_absolute_url(self, anchor_pattern="#c%(id)s"):
     #     return self.get_content_object_url() + (anchor_pattern % self.__dict__)
 
+    def approve(self):
+        """Mark this comment as 'Approved' and clear any flags on it"""
+        self.status = 'approved'
+        self.flag_count = 0
+        self.save()
+        
     def get_as_text(self):
         """
         Return this comment as plain text.  Useful for emails.
@@ -122,7 +129,7 @@ class CommentFlag(models.Model):
     and decides it is ok the flags should be deleted from the database. If the
     comment is then flagged again the moderator should reconsider it. If
     comments keep getting flagged and those flags should be ignored then we'll
-    need to add somethin to deal with that.
+    need to add something to deal with that.
     """
 
     user      = models.ForeignKey(User, blank=True, null=True, verbose_name=_('user'), related_name="comment_flags")
@@ -143,3 +150,7 @@ class CommentFlag(models.Model):
         if self.flag_date is None:
             self.flag_date = datetime.datetime.now()
         super(CommentFlag, self).save(*args, **kwargs)
+
+        # update the comment flag_count
+        self.comment.flag_count = models.F('flag_count') + 1
+        self.comment.save()

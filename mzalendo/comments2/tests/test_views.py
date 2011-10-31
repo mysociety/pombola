@@ -99,37 +99,51 @@ class CommentsViews(CommentsTestBase):
         flag_url = '/comments/flag/' + str(comment.id) + '/'
         app = self.app
         
-        def flag_count(): return comment.flags.count()
-        def clear_flags(): return comment.flags.all().delete()
+        def raw_flag_count():
+            return comment.flags.count()
+        def comment_flag_count():
+            return Comment.objects.get(id=comment.id).flag_count
+        def clear_flags():
+            comment.flags.all().delete()
+            comment.raw_flag_count = 0
+            comment.save()
 
-        self.assertEqual( flag_count(), 0 )
+        self.assertEqual( raw_flag_count(), 0 )
         
         # test that a get request shows form and does not flag comment
         res = app.get( flag_url )
-        self.assertEqual( flag_count(), 0 )
+        self.assertEqual( raw_flag_count(), 0 )
 
         # submit the form and check for flag
         form = res.forms['flag_form']
         form_res = form.submit()
-        self.assertEqual( flag_count(), 1 )
+        self.assertEqual( raw_flag_count(), 1 )
+        self.assertEqual( comment_flag_count(), 1 )
         clear_flags()
 
         # test anon user can flag (multiple times per comment)
         res = app.get( flag_url )
         form = res.forms['flag_form']
         form_res = form.submit()
-        self.assertEqual( flag_count(), 1 )
+        self.assertEqual( raw_flag_count(), 1 )
         form_res = form.submit()
-        self.assertEqual( flag_count(), 2 )
+        self.assertEqual( raw_flag_count(), 2 )
+        self.assertEqual( comment_flag_count(), 2 )
         clear_flags()
         
         # test that user can flag once per comment (duplicates dropped)
         res = app.get( flag_url, user=self.test_user )
         form = res.forms['flag_form']
         form_res = form.submit()
-        self.assertEqual( flag_count(), 1 )
+        self.assertEqual( raw_flag_count(), 1 )
         form_res = form.submit()
-        self.assertEqual( flag_count(), 1 )
+        self.assertEqual( raw_flag_count(), 1 )
+        self.assertEqual( comment_flag_count(), 1 )
+
+        # test that approving the comment removes the flags.
+        comment.approve()
+        self.assertEqual( raw_flag_count(), 1 )
+        self.assertEqual( comment_flag_count(), 0 )
         clear_flags()
 
 

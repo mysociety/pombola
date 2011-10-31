@@ -13,7 +13,7 @@ class CommentAdmin(admin.ModelAdmin):
         ),
      )
 
-    list_display = ('content_object', 'submit_date', 'title', 'status')
+    list_display = ('content_object', 'submit_date', 'title', 'status', 'flag_count')
     list_filter = ('submit_date', 'status')
     date_hierarchy = 'submit_date'
     ordering = ('-submit_date',)
@@ -34,7 +34,7 @@ class CommentAdmin(admin.ModelAdmin):
         return actions
     
     def approve_comments(self, request, queryset):
-        queryset.update(status="approved")
+        for comment in queryset: comment.approve()
         self.message_user(request, "Approved the comments")
     approve_comments.short_description = _("Approve selected comments")
     

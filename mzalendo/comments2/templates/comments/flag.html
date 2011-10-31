@@ -5,18 +5,23 @@
 
 {% block content %}
 
-<h1>{% trans "Really flag this comment?" %}</h1>
+{% if flag %}
+    <h1>Comment has been flagged</h1>
+    
+{% else %}
+    <h1>{% trans "Really flag this comment?" %}</h1>
 
-  <blockquote>
-      <strong>{{ comment.title }}</strong><br><br>
-      {{ comment.comment|linebreaks }}
-  </blockquote>
+    <blockquote>
+        <strong>{{ comment.title }}</strong><br><br>
+        {{ comment.comment|linebreaks }}
+    </blockquote>
 
-  <form action="." method="post" id="flag_form">
-      {% csrf_token %}
-      <p class="submit">
-          <input type="submit" name="submit" value="Really flag {{ comment.title }}" /> or <a href="{{ comment.get_absolute_url }}">cancel</a>
-      </p>
-  </form>
+    <form action="." method="post" id="flag_form">
+        {% csrf_token %}
+        <p class="submit">
+            <input type="submit" name="submit" value="Really flag {{ comment.title }}" /> ?</a>
+        </p>
+    </form>
+{% endif %}
 
 {% endblock %}
