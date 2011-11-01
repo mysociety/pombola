@@ -288,7 +288,7 @@ ul.location_breadcrumb {
 
 div.project_detail {    
     dl {
-        @include compact_dl(6em);
+        @include compact_dl(12em);
     }
 }
 

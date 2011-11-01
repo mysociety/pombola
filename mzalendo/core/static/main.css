@@ -252,13 +252,13 @@ div.project_detail dl {
   div.project_detail dl dt {
     float: left;
     clear: left;
-    width: 6em;
+    width: 12em;
     text-align: right;
     font-weight: bold; }
   div.project_detail dl dt:after {
     content: ":"; }
   div.project_detail dl dd {
-    margin: 0 0 0 6.5em;
+    margin: 0 0 0 12.5em;
     padding: 0 0 0.5em 0; }
 
 div.place_data_entry dl {

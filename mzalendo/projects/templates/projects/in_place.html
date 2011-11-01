@@ -41,20 +41,15 @@
             <h3>{{ p.project_name }}</h3>
             
             <dl>
-                <dt>status</dt>
-                    <dd>{{ p.status }}</dd>                
-                
                 <dt>location</dt>
                     <dd>{{ p.location_name }}</dd>
                 <dt>action</dt>
                     <dd>{{ p.activity_to_be_done }}</dd>
-                <dt>outcome</dt>
+                <dt>output</dt>
                     <dd>{{ p.expected_output }}</dd>
             
-                {% if p.remarks %}
-                <dt>remarks</dt>
-                    <dd>{{ p.remarks }}</dd>
-                {% endif %}
+                <dt>implementation status</dt>
+                    <dd>{% firstof p.status p.remarks 'not known' %}</dd>
                 
                 <dt>total cost</dt>
                     <dd>Ksh {{ p.total_cost|floatformat:0|intcomma }}</dd>
