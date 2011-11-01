@@ -29,7 +29,9 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-MANAGERS = ADMINS
+MANAGERS = (
+    (config.get('MANAGERS_NAME'), config.get('MANAGERS_EMAIL')),
+)
 
 DATABASES = {
     'default': {
@@ -179,8 +181,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'markitup',
 
-    'mz_comments',
-    'django.contrib.comments',
+    'comments2',
 
     'images',
     'sorl.thumbnail',
@@ -195,8 +196,6 @@ INSTALLED_APPS = (
     'place_data',
     'core',
 )
-
-COMMENTS_APP = 'mz_comments'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -274,3 +273,8 @@ GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
 # Markitup settings
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
 MARKITUP_SET = 'markitup/sets/markdown'
+
+
+# There are some models that are just for testing, so they are not included in
+# the South migrations.
+SOUTH_TESTS_MIGRATE = False

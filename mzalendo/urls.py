@@ -20,7 +20,7 @@ urlpatterns += patterns('',
 
 # Comments
 urlpatterns += patterns('',    
-    (r'^comments/', include('mz_comments.urls')),
+    (r'^comments/', include('comments2.urls')),
 )
 
 # Info pages
