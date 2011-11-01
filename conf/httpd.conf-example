@@ -16,7 +16,6 @@
 # </Location>
 
 Alias /media_root /data/vhost/example.mzalendo.mysociety.org/media_root
-Alias /media /var/lib/python-support/python2.5/django/contrib/admin/media
 Alias /static /data/vhost/example.mzalendo.mysociety.org/docs/static
 Alias /robots.txt /data/vhost/example.mzalendo.mysociety.org/docs/robots.txt
 Alias /favicon.ico /data/vhost/example.mzalendo.mysociety.org/docs/favicon.ico
