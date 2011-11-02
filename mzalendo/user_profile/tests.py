@@ -1,16 +1,41 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
+from django.contrib.auth.models import User
 from django.test import TestCase
 
+from models import UserProfile
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class ProfileTest(TestCase):
+
+    def setUp(self):
+        pass
+
+    def test_profile_created_when_user_is(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Test the post_save signal creates a profile for all users.
         """
-        self.assertEqual(1 + 1, 2)
+        
+        user = User(
+            username = "test-user",
+            password = '',
+        )
+        user.save()
+        
+        self.assertTrue( user.get_profile() )
+        
+        
+        # delete the user_profile and check that the method we call from the migration
+        # will create the profiles too. We can't test the migration directly here as th
+        # emigrations are not run to set up the database for the tests. 
+        user.get_profile().delete()
+        user = User.objects.get(id=user.id) # profile is cached
+
+        try:
+            user.get_profile()
+            self.assertFalse(1) # fail if we get here
+        except UserProfile.DoesNotExist:
+            self.assertTrue(1) # profile does not exist
+
+        UserProfile.objects.create_missing()
+        
+        user = User.objects.get(id=user.id) # profile is cached
+        self.assertTrue( user.get_profile() )
+        

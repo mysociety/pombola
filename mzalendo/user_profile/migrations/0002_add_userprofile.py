@@ -15,6 +15,7 @@ class Migration(SchemaMigration):
         
         # Adding model 'UserProfile'
         db.create_table('user_profile_userprofile', (
+            ('mobile', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
             ('twitter', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
             ('is_profile_public', self.gf('django.db.models.fields.NullBooleanField')(null=True, blank=True)),
             ('facebook', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
@@ -24,7 +25,7 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('user_profile', ['UserProfile'])
     
-    
+        
     def backwards(self, orm):
         
         # Deleting model 'UserProfile'
