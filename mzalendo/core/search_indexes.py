@@ -1,7 +1,7 @@
 import datetime
 from haystack import indexes
 from haystack import site
-from core import models
+from mzalendo.core import models
 
 
 # TODO - currently I'm using the realtime search index - which is possibly a bad
