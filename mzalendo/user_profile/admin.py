@@ -7,4 +7,15 @@ class UserProfileAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
     search_fields = ('user',)
 
-admin.site.register(UserProfile, UserProfileAdmin)
+
+# We want to put the user profile with the users and groups in the 'auth'
+# section of the admin. Do this by creating a proxy and then fiddling with its
+# app_label. Also need to give it a new verbose_name.
+class UserProfileProxy(UserProfile):
+    class Meta():
+        proxy = True
+        app_label='auth'
+        verbose_name = "user profile"
+
+# Register the proxy
+admin.site.register(UserProfileProxy, UserProfileAdmin)
