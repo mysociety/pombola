@@ -13,7 +13,7 @@ class CommentAdmin(admin.ModelAdmin):
         ),
      )
 
-    list_display = ('content_object', 'submit_date', 'title', 'status', 'flag_count')
+    list_display = ('content_object', 'user', 'submit_date', 'title', 'status', 'flag_count')
     list_filter = ('submit_date', 'status')
     date_hierarchy = 'submit_date'
     ordering = ('-submit_date',)
