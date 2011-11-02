@@ -1,7 +1,7 @@
 # Apache configuration.
 #
 # Copyright (c) 20010 UK Citizens Online Democracy. All rights reserved.
-# Email: duncan@mysociety.org; WWW: http://www.mysociety.org
+# WWW: http://www.mysociety.org
 
 # This kind of thing would be needed if we wanted a password.
 
@@ -15,12 +15,26 @@
 #     Satisfy any
 # </Location>
 
-Alias /media_root /data/vhost/example.mzalendo.mysociety.org/media_root
-Alias /static /data/vhost/example.mzalendo.mysociety.org/docs/static
+# Allow any access to the static content as that is where the error documents are
+<Location /static>
+    Satisfy Any
+    Allow from all
+</Location>
+
+ErrorDocument 401 /static/errors/401.html
+
+Alias /static /data/vhost/example.mzalendo.mysociety.org/collected_static
 Alias /robots.txt /data/vhost/example.mzalendo.mysociety.org/docs/robots.txt
 Alias /favicon.ico /data/vhost/example.mzalendo.mysociety.org/docs/favicon.ico
 
-WSGIDaemonProcess example.mzalendo.mysociety.org user=exampleuser group=examplegroup processes=5 threads=1 display-name=example.mzalendo.mysociety.org
+WSGIDaemonProcess example.mzalendo.mysociety.org \
+    user=exampleuser \
+    group=examplegroup \
+    processes=5 \
+    threads=1 \
+    display-name=example.mzalendo.mysociety.org \
+    python-path=/data/vhost/example.mzalendo.mysociety.org/mzalendo-virtualenv/lib/python2.6/site-packages
+    
 WSGIProcessGroup example.mzalendo.mysociety.org
 
 WSGIScriptAlias / /data/vhost/example.mzalendo.mysociety.org/mzalendo/wsgi/django.wsgi
