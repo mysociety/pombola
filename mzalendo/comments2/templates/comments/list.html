@@ -3,7 +3,7 @@
     <dt id="comment_{{ comment.id }}">
         <strong>{{ comment.title }}</strong>
         by
-        <strong>{{ comment.name }}</strong>
+        <strong>{{ comment.user.get_full_name }}</strong>
         <small title="{{ comment.submit_date }}">{{ comment.submit_date|timesince }} ago</small>
         <a class="flag" href="/comments/flag/{{ comment.id }}">Report</a>
         <br clear="both">
