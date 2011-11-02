@@ -6,6 +6,11 @@ from django.db import models
 
 class Migration(SchemaMigration):
     
+    # depend on the latest core, so that we know the place table exists.
+    depends_on = (
+        ("core", "0027_auto__add_field_person__summary_rendered__add_field_person_summary"),
+    )
+
     def forwards(self, orm):
         
         # Adding model 'UserProfile'

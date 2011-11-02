@@ -13,7 +13,7 @@ class UserProfile(models.Model):
 
     # other web presence
     facebook = models.CharField(max_length=30, blank=True)
-    twitter = models.CharField(max_length=30, blank=True)
+    twitter  = models.CharField(max_length=30, blank=True)
 
     # location
     constituency = models.ForeignKey(
