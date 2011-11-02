@@ -173,6 +173,7 @@ class Person(ModelBase, HasImageMixin):
     original_id     = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to members in original mzalendo.com db')
     # religion
     # tribe
+    summary         = MarkupField(blank=True, default='')
 
     contacts = generic.GenericRelation(Contact)
     images   = generic.GenericRelation(Image)

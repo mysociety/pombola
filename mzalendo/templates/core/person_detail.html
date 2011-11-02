@@ -46,6 +46,13 @@
     
     </div>
     
+    {% if object.summary %}
+        <div class="summary markdown">
+            {{ object.summary }}
+        </div>
+    {% endif %}
+    
+    
     {% with constituency=object.is_mp.place %}
     {% if constituency and constituency.data_set.count %}
     <div class="content_box">

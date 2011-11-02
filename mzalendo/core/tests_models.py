@@ -122,5 +122,21 @@ class PersonAndContactTasksTest( unittest.TestCase ):
         )
 
 
+class SummaryTest( unittest.TestCase ):
+    def setUp(self):
+        pass
+            
+    def test_empty_summary_is_false(self):
+        person, created = models.Person.objects.get_or_create(
+            legal_name = "Test Person",
+            slug       = 'test-person'
+        )
+        person.summary = '**bold**'
+        person.save()
 
+        print person.summary.rendered
 
+        # An empty markitup field should be false and have no length so that in
+        # the templates its truthiness is correct.
+        self.assertFalse( person.summary._rendered )
+        self.assertEqual( len(person.summary), 0 )
