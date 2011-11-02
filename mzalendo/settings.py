@@ -194,6 +194,7 @@ INSTALLED_APPS = (
     'hansard',
     'projects',
     'place_data',
+    'user_profile',
     'core',
 )
 
@@ -223,6 +224,9 @@ LOGGING = {
         },
     }
 }
+
+# User profile related
+AUTH_PROFILE_MODULE = 'user_profile.UserProfile'
 
 # configure the bcrypt settings
 # Enables bcrypt hashing when ``User.set_password()`` is called.
@@ -278,3 +282,6 @@ MARKITUP_SET = 'markitup/sets/markdown'
 # There are some models that are just for testing, so they are not included in
 # the South migrations.
 SOUTH_TESTS_MIGRATE = False
+
+
+
