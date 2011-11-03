@@ -26,3 +26,9 @@ GOOGLE_ANALYTICS_ACCOUNT: ''
 # Managers - might be worth having this set to a group email address
 MANAGERS_NAME: 'Mzalendo Managers'
 MANAGERS_EMAIL: 'managers@example.com'
+
+# Social app configs - can be left blank and the option will not be provided
+TWITTER_CONSUMER_KEY: ''
+TWITTER_CONSUMER_SECRET: ''
+FACEBOOK_APP_ID: ''
+FACEBOOK_API_SECRET: ''

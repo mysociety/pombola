@@ -57,6 +57,11 @@ if settings.SERVE_STATIC_FILES:
         ),
     )
 
+# social auth
+urlpatterns += patterns('',
+    url(r'^social/', include('social_auth.urls')),
+)
+
 # Everything else goes to core
 urlpatterns += patterns('',
     (r'^', include('core.urls')),

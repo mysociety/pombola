@@ -157,7 +157,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.request",    
     "django.contrib.messages.context_processors.messages",
-    "mzalendo.core.context_processors.add_settings",
+    "social_auth.context_processors.social_auth_by_type_backends",
+    "mzalendo.core.context_processors.add_settings",    
 )
 
 INSTALLED_APPS = (
@@ -180,6 +181,7 @@ INSTALLED_APPS = (
     'pagination',
     'ajax_select',
     'markitup',
+    'social_auth',
 
     'comments2',
 
@@ -227,6 +229,41 @@ LOGGING = {
 
 # User profile related
 AUTH_PROFILE_MODULE = 'user_profile.UserProfile'
+
+# Social auth related
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# This is empty by default and will be progressively filled if the required
+# details are available in the external config
+SOCIAL_AUTH_ENABLED_BACKENDS = []
+
+TWITTER_CONSUMER_KEY         = config.get('TWITTER_CONSUMER_KEY')
+TWITTER_CONSUMER_SECRET      = config.get('TWITTER_CONSUMER_SECRET')
+if TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET:
+    SOCIAL_AUTH_ENABLED_BACKENDS.append('twitter')
+
+FACEBOOK_APP_ID              = config.get('FACEBOOK_APP_ID')
+FACEBOOK_API_SECRET          = config.get('FACEBOOK_API_SECRET')
+if FACEBOOK_APP_ID and FACEBOOK_API_SECRET:
+    SOCIAL_AUTH_ENABLED_BACKENDS.append('facebook')
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+
+# setting this to true means that we should only use providers who we trust to
+# have confrmed the email address.
+SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
+
+# This is in an odd place, but at least we know it will get loaded if it is here
+# try:
+#     import south
+#     from south.modelsinspector import add_introspection_rules
+#     add_introspection_rules([], ["^social_auth\.fields\.JSONField"])
+# except:
+#     pass
 
 # configure the bcrypt settings
 # Enables bcrypt hashing when ``User.set_password()`` is called.
