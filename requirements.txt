@@ -32,3 +32,8 @@ django-haystack
 
 WebTest>=1.3.2
 django-webtest
+
+# Social logins (Twitter/Facebook)
+python-openid
+oauth2
+django-social-auth

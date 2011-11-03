@@ -12,3 +12,4 @@ python-bcrypt
 python-markdown
 python-xapian
 python-yaml
+python-openid
