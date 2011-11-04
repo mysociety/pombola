@@ -61,6 +61,7 @@
                     {% else %}
                         <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
                         <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
+                        <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">fb</a>
                     {% endif %}
                 </li>                 
                 <li>
