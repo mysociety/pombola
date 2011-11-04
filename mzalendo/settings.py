@@ -254,8 +254,13 @@ if FACEBOOK_APP_ID and FACEBOOK_API_SECRET:
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 
 # setting this to true means that we should only use providers who we trust to
-# have confrmed the email address.
+# have confirmed the email address.
 SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
+
+# social test related
+TEST_TWITTER_USERNAME = config.get('TEST_TWITTER_USERNAME', None)
+TEST_TWITTER_PASSWORD = config.get('TEST_TWITTER_PASSWORD', None)
+
 
 # This is in an odd place, but at least we know it will get loaded if it is here
 # try:

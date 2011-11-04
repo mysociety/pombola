@@ -60,6 +60,7 @@
                         {{ request.user.username }} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
                     {% else %}
                         <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
+                        <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
                     {% endif %}
                 </li>                 
                 <li>
