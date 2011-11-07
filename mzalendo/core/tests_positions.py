@@ -1,7 +1,7 @@
 import re
 import random
 
-import settings
+from django.conf import settings
 
 from django.core import mail
 from django.core import exceptions
