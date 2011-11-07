@@ -334,4 +334,6 @@ MARKITUP_SET = 'markitup/sets/markdown'
 SOUTH_TESTS_MIGRATE = False
 
 
-
+# Settings for the selenium tests
+TEST_RUNNER   = 'django_selenium.selenium_runner.SeleniumTestRunner'
+SELENIUM_PATH = config.get( 'SELENIUM_PATH', None )

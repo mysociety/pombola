@@ -36,3 +36,6 @@ FACEBOOK_API_SECRET: ''
 # Social app testing - leaving these blank will skip the tests
 TEST_TWITTER_USERNAME: ''
 TEST_TWITTER_PASSWORD: ''
+
+# Where is the selenium server? (If empty then selenium tests can't run)
+SELENIUM_PATH: ''
