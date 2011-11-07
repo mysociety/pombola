@@ -22,7 +22,7 @@ django-registration-defaults
 ### Mzalendo dependencies
 sorl-thumbnail
 -e git://github.com/evdb/django-date-extensions.git#egg=django-date-extensions
-django-ajax-selects
+django-ajax-selects>=1.2.1
 
 ### Use a fork of django-markitup so that we get correct truthiness
 -e hg+https://bitbucket.org/evdb/django-markitup/@fe49ef12c614#egg=django-markitup

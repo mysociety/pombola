@@ -1,6 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.views.generic.simple import direct_to_template
-from ajax_select import urls as ajax_select_urls
 
 
 from django.conf import settings
@@ -9,6 +8,7 @@ from django.conf import settings
 # Admin section
 from django.contrib import admin
 admin.autodiscover()
+from ajax_select import urls as ajax_select_urls
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/lookups/', include(ajax_select_urls)),

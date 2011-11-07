@@ -5,18 +5,24 @@
 {% block extrastyle %}
     <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png">
     <link href="{{ STATIC_URL }}common.css" media="screen" rel="stylesheet" type="text/css" /> 
-
-    <!-- for the admin autocomplete -->
-    <link href="{{ STATIC_URL }}jquery.autocomplete.css" media="screen" rel="stylesheet" type="text/css" /> 
-    <link href="{{ STATIC_URL }}iconic.css" media="screen" rel="stylesheet" type="text/css" /> 
-
 {% endblock %}
 
-{% block extrahead %}
+{% block blockbots %}
+    <meta name="robots" content="NONE,NOARCHIVE" />
+
+    {% comment %}
+        This is in the 'blockbots' block rather than the 'extrahead' block as it
+        must be loaded after the django admin jquery so that there is no
+        confusion about the jqueries that are on the page. Trying to use a
+        super.block in 'extrahead' did not work.
+    {% endcomment %}
+
     <!-- for the admin autocomplete -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="{{ STATIC_URL }}jquery.autocomplete.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="{{ STATIC_URL }}ajax_select.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />
+    <script src="{{ STATIC_URL }}js/ajax_select.js" type="text/javascript" charset="utf-8"></script>
+    <link href="{{ STATIC_URL }}css/ajax_select.css" media="screen" rel="stylesheet" type="text/css" /> 
+
 
     <script type="text/javascript" charset="utf-8">
         /*
