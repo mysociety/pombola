@@ -1,8 +1,8 @@
 from django.core.urlresolvers import reverse
-from django_selenium.testcases import SeleniumTestCase
+from mzalendo.testing.selenium import MzalendoSeleniumTestCase
 from django.core.management import call_command 
 
-class MyTestCase(SeleniumTestCase):
+class MyTestCase(MzalendoSeleniumTestCase):
     
 
     def test_home(self):

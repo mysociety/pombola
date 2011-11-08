@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils import unittest
 
-from django_selenium.testcases import SeleniumTestCase
+from mzalendo.testing.selenium import MzalendoSeleniumTestCase
 from selenium.common.exceptions import NoSuchElementException
 
 from user_profile.models import UserProfile
@@ -26,8 +26,7 @@ def can_test_twitter_skip_message():
         return "Do not have twitter login details, add TEST_TWITTER_USERNAME, TEST_TWITTER_PASSWORD and TEST_TWITTER_APP_NAME to your settings"
 
 @unittest.skipUnless( can_test_twitter, can_test_twitter_skip_message() )
-class TwitterTestCase(SeleniumTestCase):
-
+class TwitterTestCase(MzalendoSeleniumTestCase):
 
     # Reference pages for selenium commands:
     #   driver:   http://selenium.googlecode.com/svn/trunk/docs/api/py/webdriver_remote/selenium.webdriver.remote.webdriver.html
