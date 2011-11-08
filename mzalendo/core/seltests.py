@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from mzalendo.testing.selenium import MzalendoSeleniumTestCase
 from django.core.management import call_command 
 
-class MyTestCase(MzalendoSeleniumTestCase):
+class CoreTestCase(MzalendoSeleniumTestCase):
     
 
     def test_home(self):
@@ -25,3 +25,10 @@ class MyTestCase(MzalendoSeleniumTestCase):
         """Test that the static files are being served"""
         self.open_url('/hash/bang/bosh')
         self.assertTrue( 'Page Not Found - 404' in self.text)
+
+    def test_user_not_logged_in(self):
+        """Test that the static files are being served"""
+        self.open_url('/')
+
+        self.assertEqual( self.get_current_user_id(), None )
+        self.assertEqual( self.get_current_user(), None )

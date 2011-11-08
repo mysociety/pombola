@@ -103,6 +103,13 @@
                 {% endif %}
             </ul>
 
+            {% if settings.STAGING %}
+            <ul class="utilities">
+                <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+            </ul>
+            {% endif %}
+
+
         </div>
 
 
