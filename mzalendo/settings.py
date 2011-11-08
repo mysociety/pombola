@@ -23,7 +23,7 @@ DEBUG          = STAGING
 TEMPLATE_DEBUG = STAGING
 
 # TODO - should we delegate this to web server (issues with admin css etc)?
-SERVE_STATIC_FILES = True
+SERVE_STATIC_FILES = STAGING
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
