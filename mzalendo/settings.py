@@ -251,10 +251,6 @@ FACEBOOK_API_SECRET          = config.get('FACEBOOK_API_SECRET')
 if FACEBOOK_APP_ID and FACEBOOK_API_SECRET:
     SOCIAL_AUTH_ENABLED_BACKENDS.append('facebook')
 
-# setting this to true means that we should only use providers who we trust to
-# have confirmed the email address.
-SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
-
 # Don't change the details here when they change on the authenticating site.
 # This is because Facebook makes a hash of things (wrong capitals, drops middle
 # names) and we don't want changes a user has made being overridden each time
@@ -262,12 +258,23 @@ SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
 #
 # FIXME - if set true then the details are not set, even on the first time we
 # see them. Ideally we'd set them the first time, but then never update them.
-#
-# SOCIAL_AUTH_CHANGE_SIGNAL_ONLY = True
+
+SOCIAL_AUTH_CHANGE_SIGNAL_ONLY = True
+SOCIAL_AUTH_PIPELINE = (
+    'social_auth.backends.pipeline.social.social_auth_user',
+    'social_auth.backends.pipeline.associate.associate_by_email',
+    'social_auth.backends.pipeline.user.get_username',
+    'social_auth.backends.pipeline.user.create_user',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.social.load_extra_data',
+    # 'social_auth.backends.pipeline.user.update_user_details',
+    'user_profile.pipeline.update_user_details',
+)
 
 # social test related
 TEST_TWITTER_USERNAME = config.get('TEST_TWITTER_USERNAME', None)
 TEST_TWITTER_PASSWORD = config.get('TEST_TWITTER_PASSWORD', None)
+TEST_TWITTER_REAL_NAME = config.get('TEST_TWITTER_REAL_NAME', None)
 
 
 # This is in an odd place, but at least we know it will get loaded if it is here

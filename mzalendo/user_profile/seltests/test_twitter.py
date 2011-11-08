@@ -14,11 +14,11 @@ from user_profile.models import UserProfile
 
 # gather the twitter details. Do this here so that the values can be used in the
 # skip decorators.
-twitter_username = settings.TEST_TWITTER_USERNAME
-twitter_password = settings.TEST_TWITTER_PASSWORD
-twitter_app_name = settings.TEST_TWITTER_APP_NAME
+twitter_username  = settings.TEST_TWITTER_USERNAME
+twitter_password  = settings.TEST_TWITTER_PASSWORD
+twitter_real_name = settings.TEST_TWITTER_REAL_NAME
 twitter_app_enabled = 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS
-can_test_twitter = twitter_app_enabled and twitter_username and twitter_password and twitter_app_name
+can_test_twitter = twitter_app_enabled and twitter_username and twitter_password and twitter_real_name
 def can_test_twitter_skip_message():
     if not twitter_app_enabled:
         return "Twitter auth not configured, add TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET to your settings"
@@ -114,6 +114,15 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
         # check that we are now logged in
         self.assertTrue( '(logout)' in self.find_element_by_id('header').text )
 
+        # check that the user created has the correct name
+        user = self.get_current_user()
+        self.assertEqual( user.get_full_name(), twitter_real_name )
+
+        # change the user's name
+        user.first_name = "Firstly"
+        user.last_name = "Lastly"
+        user.save()
+
         # now logout of Mzalendo
         driver.find_element_by_link_text("logout").click()
         self.assertTrue( '/accounts/logout/' in driver.current_url )
@@ -122,5 +131,9 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
         # log back in using twitter - should not need to approve anything
         driver.find_element_by_link_text("twitter").click()
         self.assertTrue( '(logout)' in driver.find_element_by_id('header').text )
+        
+        # check that the name has not been updated
+        user = self.get_current_user()
+        self.assertEqual( user.get_full_name(), "Firstly Lastly" )
         
 
