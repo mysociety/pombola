@@ -9,6 +9,7 @@ cd `dirname $0`/..
 # create the virtual environment, install/update required packages
 virtualenv ../mzalendo-virtualenv
 source ../mzalendo-virtualenv/bin/activate
+pip install Mercurial
 pip install -r requirements.txt
 
 # use the virtualenv just created/updated
