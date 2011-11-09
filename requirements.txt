@@ -5,6 +5,7 @@
 ### General useful bits
 py-bcrypt
 PyYAML
+Mercurial
 
 ### Database drivers
 # Note - there is a Django bug with psycopg2==2.4.2 that means that the tests
