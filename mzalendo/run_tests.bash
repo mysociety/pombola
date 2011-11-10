@@ -12,3 +12,8 @@ set -e
 # mzalendo settings being used.
 #
 # It would be much nicer to have a better way to run the tests.
+
+
+# to generate the core/test_data.json fixture use:
+#
+# ./manage.py dumpdata --natural --indent 4 core auth.user > core/fixtures/test_data.json
