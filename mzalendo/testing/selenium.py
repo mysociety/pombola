@@ -40,6 +40,20 @@ class MzalendoSeleniumTestCase(SeleniumTestCase):
             return User.objects.get( id=user_id )
         
         return None
+    
+
+    def assert_user_logged_in(self):
+        self.assertTrue( self.get_current_user_id() )
+
+
+    def assert_user_logged_out(self):
+        self.assertFalse( self.get_current_user_id() )
+
+
+    def logout(self):
+        self.driver.find_element_by_link_text("logout").click()
+        self.assertTrue( '/accounts/logout/' in self.driver.current_url )
+        self.assert_user_logged_out()
 
 
 # gather the twitter details. Do this here so that the values can be used in the
@@ -80,7 +94,7 @@ class TwitterSeleniumTestCase(MzalendoSeleniumTestCase):
         self.twitter_real_name = twitter_real_name
         
 
-    def self.click_twitter_login_link(self):
+    def twitter_click_login_link_on_mzalendo_site(self):
         """Click the twitter login link on the mz site"""
         return self.driver.find_element_by_link_text("twitter").click()
         
@@ -118,7 +132,6 @@ class TwitterSeleniumTestCase(MzalendoSeleniumTestCase):
                     print "Please complete the twitter captcha and submit the form"
                     sleep(2)
 
-        self.assertEquals( driver.current_url, "http://twitter.com/")
         self.assertTrue(twitter_username in self.find_element_by_id('screen-name').text)
 
 

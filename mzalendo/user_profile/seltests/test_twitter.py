@@ -12,7 +12,7 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         self.open_url('/')
 
         # Go to twitter and cancel the login
-        self.click_twitter_login_link()
+        self.twitter_click_login_link_on_mzalendo_site()
         driver.find_element_by_link_text("Cancel, and return to app").click()
         
         # Check that the text is helpful
@@ -22,14 +22,15 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         )
 
         # go to Twitter and confirm the log in
-        self.click_twitter_login_link()
+        self.twitter_click_login_link_on_mzalendo_site()
         driver.find_element_by_id("allow").click()
 
         # check that we are now logged in
-        self.assertTrue( '(logout)' in self.find_element_by_id('header').text )
+        self.assert_user_logged_in()
 
         # check that the user created has the correct name
         user = self.get_current_user()
+        self.assertTrue( user )
         self.assertEqual( user.get_full_name(), self.twitter_real_name )
 
         # change the user's name
@@ -38,14 +39,13 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         user.save()
 
         # now logout of Mzalendo
-        driver.find_element_by_link_text("logout").click()
-        self.assertTrue( '/accounts/logout/' in driver.current_url )
-        self.assertTrue( 'logged out' in driver.find_element_by_id('content').text )
+        self.logout()
 
         # log back in using twitter - should not need to approve anything
-        self.click_twitter_login_link()
-        self.assertTrue( '(logout)' in driver.find_element_by_id('header').text )
+        self.twitter_click_login_link_on_mzalendo_site()
+        self.assert_user_logged_in()
         
         # check that the name has not been updated
         user = self.get_current_user()
+        self.assertTrue( user )
         self.assertEqual( user.get_full_name(), "Firstly Lastly" )
