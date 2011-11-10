@@ -17,7 +17,6 @@ class CommentTestCase(MzalendoSeleniumTestCase):
         random_string = str( random.randint(100000, 999999) )
 
         # Go to the test person
-        print self.testserver_port
         self.open_url('/')
         self.open_url('/person/joseph-bloggs')
 
