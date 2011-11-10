@@ -1,1 +1,1 @@
-from test_twitter import *
+from test_twitter import TwitterTestCase

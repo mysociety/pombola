@@ -1,91 +1,6 @@
-import urllib
-from time import sleep
+from mzalendo.testing import TwitterSeleniumTestCase
 
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-from django.test import TestCase
-from django.utils import unittest
-
-from mzalendo.testing.selenium import MzalendoSeleniumTestCase
-from selenium.common.exceptions import NoSuchElementException
-
-from user_profile.models import UserProfile
-
-# gather the twitter details. Do this here so that the values can be used in the
-# skip decorators.
-twitter_username  = settings.TEST_TWITTER_USERNAME
-twitter_password  = settings.TEST_TWITTER_PASSWORD
-twitter_real_name = settings.TEST_TWITTER_REAL_NAME
-twitter_app_enabled = 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS
-can_test_twitter = twitter_app_enabled and twitter_username and twitter_password and twitter_real_name
-def can_test_twitter_skip_message():
-    if not twitter_app_enabled:
-        return "Twitter auth not configured, add TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET to your settings"
-    else:
-        return "Do not have twitter login details, add TEST_TWITTER_USERNAME, TEST_TWITTER_PASSWORD and TEST_TWITTER_APP_NAME to your settings"
-
-@unittest.skipUnless( can_test_twitter, can_test_twitter_skip_message() )
-class TwitterTestCase(MzalendoSeleniumTestCase):
-
-    # Reference pages for selenium commands:
-    #   driver:   http://selenium.googlecode.com/svn/trunk/docs/api/py/webdriver_remote/selenium.webdriver.remote.webdriver.html
-    #   elements: http://selenium.googlecode.com/svn/trunk/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html
-
-    def setUp(self):
-        super(TwitterTestCase, self).setUp()
-
-        # don't wait too long for things
-        self.driver.implicitly_wait(5)
-
-
-    def twitter_get_username_field(self):
-        return self.driver.find_element_by_css_selector("form.signin.js-signin > fieldset.textbox > label.username.js-username > input[name=\"session[username_or_email]\"]")
-
-
-    def twitter_get_password_field(self):
-        return self.driver.find_element_by_css_selector("form.signin.js-signin > fieldset.textbox > label.password > input[name=\"session[password]\"]")
-
-        
-    def twitter_enter_username_and_password(self, submit=True):
-        self.twitter_get_username_field().clear()
-        self.twitter_get_username_field().send_keys(twitter_username)
-        self.twitter_get_password_field().clear()
-        self.twitter_get_password_field().send_keys(twitter_password)
-        if submit:
-            self.twitter_get_username_field().submit()
-
-
-    def twitter_login(self):
-        driver = self.driver
-        driver.get("https://twitter.com/#!/login/")
-
-        # Perhaps we are already logged in?
-        if not self.is_text_present(twitter_username):
-
-            self.twitter_enter_username_and_password()
-            
-            if 'captcha' in driver.current_url:
-                self.twitter_enter_username_and_password(submit=False)
-                
-                while 'captcha' in driver.current_url:
-                    print "Please complete the twitter captcha and submit the form"
-                    sleep(2)
-
-        self.assertEquals( driver.current_url, "http://twitter.com/")
-        self.assertTrue(twitter_username in self.find_element_by_id('screen-name').text)
-
-
-    def twitter_revoke_access_to_test_app(self):
-        driver = self.driver
-        driver.get("http://twitter.com/settings/applications")
-        
-        try:
-            # Possibly bad assumption - there will be only one app to revoke
-            driver.find_element_by_link_text("Revoke Access").click()
-            sleep(2)
-        except NoSuchElementException:
-            pass
+class TwitterTestCase(TwitterSeleniumTestCase):
 
 
     def test_create_account_via_twitter(self):
@@ -115,7 +30,7 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
 
         # check that the user created has the correct name
         user = self.get_current_user()
-        self.assertEqual( user.get_full_name(), twitter_real_name )
+        self.assertEqual( user.get_full_name(), self.twitter_real_name )
 
         # change the user's name
         user.first_name = "Firstly"
