@@ -12,7 +12,7 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         self.open_url('/')
 
         # Go to twitter and cancel the login
-        driver.find_element_by_link_text("twitter").click()
+        self.click_twitter_login_link()
         driver.find_element_by_link_text("Cancel, and return to app").click()
         
         # Check that the text is helpful
@@ -22,7 +22,7 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         )
 
         # go to Twitter and confirm the log in
-        driver.find_element_by_link_text("twitter").click()
+        self.click_twitter_login_link()
         driver.find_element_by_id("allow").click()
 
         # check that we are now logged in
@@ -43,7 +43,7 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         self.assertTrue( 'logged out' in driver.find_element_by_id('content').text )
 
         # log back in using twitter - should not need to approve anything
-        driver.find_element_by_link_text("twitter").click()
+        self.click_twitter_login_link()
         self.assertTrue( '(logout)' in driver.find_element_by_id('header').text )
         
         # check that the name has not been updated

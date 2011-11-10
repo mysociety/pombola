@@ -40,7 +40,7 @@ class MzalendoSeleniumTestCase(SeleniumTestCase):
             return User.objects.get( id=user_id )
         
         return None
-    
+
 
 # gather the twitter details. Do this here so that the values can be used in the
 # skip decorators.
@@ -78,6 +78,11 @@ class TwitterSeleniumTestCase(MzalendoSeleniumTestCase):
         self.twitter_username  = twitter_username
         self.twitter_password  = twitter_password
         self.twitter_real_name = twitter_real_name
+        
+
+    def self.click_twitter_login_link(self):
+        """Click the twitter login link on the mz site"""
+        return self.driver.find_element_by_link_text("twitter").click()
         
 
     def twitter_get_username_field(self):
