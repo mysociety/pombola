@@ -9,30 +9,18 @@
 
     <h1>Leave a comment on <a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h1>
 
-    {% if comment %}
-
-        <p>Your comment has been added - thank you.</p>
+    <form method="post" action="{% get_comment_add_url object %}" id="add_comment">
+        {% csrf_token %}
         
-        {% if comment.status != 'approved' %}
-            <p>A moderator will need to approve your comment before it is shown publicly on the site.</p>
-        {% endif %}
-
-    {% else %}
-
-        <form method="post" action="{% get_comment_add_url object %}" id="add_comment">
-            {% csrf_token %}
-            
-            <table>
-                {{ form.as_table }}
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>
-                        <input type="submit" value="Add comment">
-                    </td>
-                </tr>
-            </table>
-        </form>
-        
-    {% endif %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="Add comment">
+                </td>
+            </tr>
+        </table>
+    </form>
 
 {% endblock %}

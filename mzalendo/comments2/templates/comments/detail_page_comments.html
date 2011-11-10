@@ -5,4 +5,4 @@
 
 {% get_comment_count for object as comment_count %}
 
-There are <a href="{% get_comment_list_url object %}">{{ comment_count }} comments</a> for {{ object.name }}.
+There are <a id="view_comments_link" href="{% get_comment_list_url object %}">{{ comment_count }} comments</a> for {{ object.name }}.

@@ -64,10 +64,10 @@ def add(request, module_name, slug):
             comment.user = request.user
             comment.save()
             
+            return redirect( comment )
+            
     else:
         form = CommentForm(obj)
-    
-    
 
     return render_to_response(
         'comments/add.html',
@@ -100,6 +100,33 @@ def flag(request, comment_id):
         {
             'comment': comment,
             'flag': flag,
+        },
+        context_instance=RequestContext(request)
+    )
+
+
+def view(request, comment_id):
+    """
+    Show one comment - even if it is not approved yet.
+
+    This view is used so that people can tweet their comments. If the comment is
+    approved, on not yet moderated show it. If it has been rejected don't show
+    it. If it does not exist 404.
+
+    FUTURE: Once the smarts are in place the template should actually redirect
+    us to the object's page and then scroll us to the comment for approved
+    comments.
+    """
+
+    comment = get_object_or_404( Comment, id=comment_id )
+
+    comment_rejected = comment.status == 'rejected'
+            
+    return render_to_response(
+        'comments/view.html',
+        {
+            'comment': comment,
+            'comment_rejected': comment_rejected,
         },
         context_instance=RequestContext(request)
     )

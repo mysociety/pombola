@@ -1,0 +1,55 @@
+{% extends "comments/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {{ comment.title }}
+{% endblock %}
+
+{% block content %}
+
+    {% if comment_rejected %}
+        <h1>Comment has been removed</h1>
+    
+        <p>The comment you are looking for has been removed.</p>
+        
+    {% else %}
+
+        {% if comment.status != 'approved' %}
+            <p>This comment has not been approved yet. You can see it here and share it with others, but it won't be findable on the site until a moderator approves it.</p>
+        {% endif %}
+    
+        <h1>Comment on <a href="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.name }}</a></h1>
+    
+        <strong>{{ comment.title }}</strong>
+        by
+        <strong>{% firstof comment.user.get_full_name comment.user.username %}</strong>
+        
+        <small title="{{ comment.submit_date }}">{{ comment.submit_date|timesince }} ago</small>
+        
+        <br><br>
+            
+        <blockquote>
+            {{ comment.comment|linebreaks }}
+        </blockquote>
+
+
+        <p>
+            <a class="flag" href="/comments/flag/{{ comment.id }}/">report</a>
+            <a class="permalink" href="{{ comment.get_absolute_url }}">permalink</a>
+        </p>
+
+        <p>
+            Share this comment with others:
+            <a                
+                href="https://twitter.com/share"
+                class="twitter-share-button"
+                data-text="Good comment on {{ comment.content_object.name }}: {{ comment.title }}"
+                data-count="none"
+            >Tweet your comment</a>
+        </p>
+
+        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+    {% endif %}
+    
+{% endblock %}

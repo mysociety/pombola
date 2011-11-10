@@ -107,8 +107,9 @@ class Comment(models.Model):
         
         super(Comment, self).save(*args, **kwargs)
 
-    # def get_absolute_url(self, anchor_pattern="#c%(id)s"):
-    #     return self.get_content_object_url() + (anchor_pattern % self.__dict__)
+    @models.permalink
+    def get_absolute_url(self):
+        return ( 'comments-view', [ self.id ] )
 
     def approve(self):
         """Mark this comment as 'Approved' and clear any flags on it"""

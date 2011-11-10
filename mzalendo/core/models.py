@@ -18,6 +18,7 @@ from markitup.fields import MarkupField
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from tasks.models import Task
 from images.models import HasImageMixin, Image
+from comments2.models import Comment
 
 # tell South how to handle the custom fields 
 from south.modelsinspector import add_introspection_rules
@@ -178,6 +179,8 @@ class Person(ModelBase, HasImageMixin):
     contacts = generic.GenericRelation(Contact)
     images   = generic.GenericRelation(Image)
     objects  = PersonManager()
+
+    comments = generic.GenericRelation(Comment)
     
     def clean(self):
         # strip other_names and flatten multiple newlines
