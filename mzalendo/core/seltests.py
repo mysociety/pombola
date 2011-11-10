@@ -22,12 +22,13 @@ class CoreTestCase(MzalendoSeleniumTestCase):
 
 
     def test_404(self):
-        """Test that the static files are being served"""
+        """Test that proper 404 page is being shown"""
         self.open_url('/hash/bang/bosh')
         self.assertTrue( 'Page Not Found - 404' in self.text)
 
+
     def test_user_not_logged_in(self):
-        """Test that the static files are being served"""
+        """Test that by default user is not logged in"""
         self.open_url('/')
 
         self.assertEqual( self.get_current_user_id(), None )
