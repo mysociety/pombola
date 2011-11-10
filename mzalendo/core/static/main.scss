@@ -183,8 +183,9 @@ dl.comments {
         margin-bottom: 1em;
     }
 
-    a.flag {
+    a.flag, a.permalink {
         float: right;
+        padding-left: 1em;
     }
 }
 

@@ -57,9 +57,11 @@
             <ul>
                 <li>
                     {% if request.user.is_authenticated  %}
-                        {{ request.user.username }} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
+                        {% firstof request.user.get_full_name request.user.username %} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
                     {% else %}
                         <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
+                        <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
+                        <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">fb</a>
                     {% endif %}
                 </li>                 
                 <li>
@@ -100,6 +102,13 @@
                     <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
                 {% endif %}
             </ul>
+
+            {% if settings.STAGING %}
+            <ul class="utilities">
+                <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+            </ul>
+            {% endif %}
+
 
         </div>
 

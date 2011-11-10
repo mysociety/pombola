@@ -6,12 +6,11 @@ set -e
 # check that we are in the expected directory
 cd `dirname $0`/..
 
-# create/update the virtual environment
-pip install \
-    --enable-site-packages \
-    --environment ../mzalendo-virtualenv \
-    --requirement requirements.txt \
-    --quiet
+# create the virtual environment, install/update required packages
+virtualenv ../mzalendo-virtualenv
+source ../mzalendo-virtualenv/bin/activate
+pip install Mercurial
+pip install -r requirements.txt
 
 # use the virtualenv just created/updated
 source ../mzalendo-virtualenv/bin/activate
@@ -23,8 +22,8 @@ find . -name '*.pyc' -delete
 cd mzalendo
 
 # get the database up to speed
-./manage.py syncdb
-./manage.py migrate
+./manage.py syncdb --noinput
+./manage.py migrate --noinput
 
 # gather all the static files in one place
 ./manage.py collectstatic --noinput

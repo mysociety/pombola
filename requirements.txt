@@ -5,7 +5,12 @@
 ### General useful bits
 py-bcrypt
 PyYAML
-psycopg2
+Mercurial
+
+### Database drivers
+# Note - there is a Django bug with psycopg2==2.4.2 that means that the tests
+# can't be run. https://code.djangoproject.com/ticket/16250
+psycopg2!=2.4.2
 
 ### Django related
 django==1.3.1
@@ -32,3 +37,12 @@ django-haystack
 
 WebTest>=1.3.2
 django-webtest
+
+# Social logins (Twitter/Facebook)
+python-openid
+oauth2
+django-social-auth
+-e git://github.com/nathforge/django-mechanize.git#egg=django-mechanize
+selenium
+django-selenium
+

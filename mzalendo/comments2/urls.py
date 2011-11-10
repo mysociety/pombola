@@ -6,6 +6,8 @@ urlpatterns = patterns( 'comments2.views',
 
     url(r'^flag/(?P<comment_id>\d+)/', 'flag' ),
 
+    url(r'^view/(?P<comment_id>\d+)/', 'view', name='comments-view' ),
+
     # url(r'^post/$',          'post_comment',       name='comments-post-comment'),
     # url(r'^posted/$',        'comment_done',       name='comments-comment-done'),
     # url(r'^flag/(\d+)/$',    'moderation.flag',             name='comments-flag'),

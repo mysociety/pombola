@@ -66,7 +66,7 @@ class CommentForm(forms.Form):
         """
         return dict(
             content_type = ContentType.objects.get_for_model(self.target_object),
-            object_pk    = force_unicode(self.target_object._get_pk_val()),
+            object_id    = force_unicode(self.target_object._get_pk_val()),
             title        = self.cleaned_data["title"],
             comment      = self.cleaned_data["comment"],
             submit_date  = datetime.datetime.now(),
@@ -81,7 +81,7 @@ class CommentForm(forms.Form):
     #         self.target_object._state.db
     #     ).filter(
     #         content_type = new.content_type,
-    #         object_pk = new.object_pk,
+    #         object_id = new.object_id,
     #         user_name = new.user_name,
     #         user_email = new.user_email,
     #         user_url = new.user_url,

@@ -9,7 +9,7 @@ class CommentAdmin(admin.ModelAdmin):
            {'fields': ('user', 'title', 'comment')}
         ),
         (_('Metadata'),
-           {'fields': ('content_type', 'object_pk', 'submit_date', 'ip_address', 'status', 'flag_count')}
+           {'fields': ('content_type', 'object_id', 'submit_date', 'ip_address', 'status', 'flag_count')}
         ),
      )
 

@@ -3,9 +3,10 @@
     <dt id="comment_{{ comment.id }}">
         <strong>{{ comment.title }}</strong>
         by
-        <strong>{{ comment.user.get_full_name }}</strong>
+        <strong>{% firstof comment.user.get_full_name comment.user.username %}</strong>
         <small title="{{ comment.submit_date }}">{{ comment.submit_date|timesince }} ago</small>
-        <a class="flag" href="/comments/flag/{{ comment.id }}">Report</a>
+        <a class="flag" href="/comments/flag/{{ comment.id }}/">report</a>
+        <a class="permalink" href="{{ comment.get_absolute_url }}">permalink</a>
         <br clear="both">
     </dt>
     <dd>

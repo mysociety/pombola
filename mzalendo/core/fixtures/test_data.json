@@ -1,0 +1,142 @@
+[
+    {
+        "pk": 7, 
+        "model": "core.contactkind", 
+        "fields": {
+            "updated": "2011-11-10 11:02:01", 
+            "name": "Address", 
+            "slug": "address", 
+            "created": "2011-11-10 11:02:01"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "core.contactkind", 
+        "fields": {
+            "updated": "2011-11-10 11:01:46", 
+            "name": "Email", 
+            "slug": "email", 
+            "created": "2011-11-10 11:01:46"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "core.contactkind", 
+        "fields": {
+            "updated": "2011-11-10 11:01:58", 
+            "name": "Facebook", 
+            "slug": "facebook", 
+            "created": "2011-11-10 11:01:58"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "core.contactkind", 
+        "fields": {
+            "updated": "2011-11-10 11:01:39", 
+            "name": "Fax", 
+            "slug": "fax", 
+            "created": "2011-11-10 11:01:39"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "core.contactkind", 
+        "fields": {
+            "updated": "2011-11-10 11:01:43", 
+            "name": "Mobile", 
+            "slug": "mobile", 
+            "created": "2011-11-10 11:01:43"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "core.contactkind", 
+        "fields": {
+            "updated": "2011-11-10 11:01:35", 
+            "name": "Telephone", 
+            "slug": "telephone", 
+            "created": "2011-11-10 11:01:35"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "core.contactkind", 
+        "fields": {
+            "updated": "2011-11-10 11:01:54", 
+            "name": "Twitter", 
+            "slug": "twitter", 
+            "created": "2011-11-10 11:01:54"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "core.contact", 
+        "fields": {
+            "updated": "2011-11-10 11:04:35", 
+            "created": "2011-11-10 11:04:35", 
+            "kind": 4, 
+            "value": "jjbloggs@hotmail.com", 
+            "note": "", 
+            "source": "", 
+            "object_id": 1, 
+            "content_type": [
+                "core", 
+                "person"
+            ]
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "core.contact", 
+        "fields": {
+            "updated": "2011-11-10 11:04:35", 
+            "created": "2011-11-10 11:04:35", 
+            "kind": 3, 
+            "value": "+44 7901 234 567", 
+            "note": "", 
+            "source": "", 
+            "object_id": 1, 
+            "content_type": [
+                "core", 
+                "person"
+            ]
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "core.person", 
+        "fields": {
+            "legal_name": "Joseph Jeremiah Bloggs", 
+            "updated": "2011-11-10 11:04:34", 
+            "title": "Prof", 
+            "gender": "m", 
+            "created": "2011-11-10 11:04:34", 
+            "other_names": "Joe Bloggs\r\nJJ Bloggs", 
+            "date_of_death": null, 
+            "summary": "", 
+            "date_of_birth": "1968-01-15", 
+            "original_id": null, 
+            "_summary_rendered": "", 
+            "slug": "joseph-bloggs"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "superuser", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2011-11-10 11:01:23", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "bc$$2a$12$N9v8jqzj..UDnVC83ke9y.n4FMWroT5q7GeB38i7NhwOlYXm5IK/W", 
+            "email": "superuser@example.com", 
+            "date_joined": "2011-11-10 11:01:13"
+        }
+    }
+]

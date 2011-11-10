@@ -57,7 +57,7 @@
                 "rockstar"
             ],
             "ip_address": null,
-            "object_pk": "1",
+            "object_id": "1",
             "status": "unmoderated",
             "submit_date": "2011-10-28 05:29:20",
             "title": "Unmoderated",
@@ -74,7 +74,7 @@
                 "rockstar"
             ],
             "ip_address": null,
-            "object_pk": "1",
+            "object_id": "1",
             "status": "approved",
             "submit_date": "2011-10-28 05:29:20",
             "title": "Approved",
@@ -91,7 +91,7 @@
                 "rockstar"
             ],
             "ip_address": null,
-            "object_pk": "1",
+            "object_id": "1",
             "status": "rejected",
             "submit_date": "2011-10-28 05:29:20",
             "title": "Rejected",

@@ -1,8 +1,8 @@
-from django.conf.urls.defaults import patterns, include, url
-from django.views.generic.simple import direct_to_template
-
-
 from django.conf import settings
+from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic.simple import direct_to_template
 
 
 # Admin section
@@ -51,14 +51,18 @@ urlpatterns += patterns('',
     url(r'^markitup/', include('markitup.urls'))
 )
 
-# serve media_root files if needed (/static served in dev by runserver)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# needed for the selenium tests.
 if settings.SERVE_STATIC_FILES:
     urlpatterns += patterns('',
-        (   r'^media_root/(?P<path>.*)$',
-            'django.views.static.serve',
-            {'document_root': settings.MEDIA_ROOT }
-        ),
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     )
+
+# social auth
+urlpatterns += patterns('',
+    url(r'^social/', include('social_auth.urls')),
+)
 
 # Everything else goes to core
 urlpatterns += patterns('',

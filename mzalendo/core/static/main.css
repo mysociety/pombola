@@ -191,8 +191,9 @@ dl.comments dt {
   background-color: #ccc; }
 dl.comments dd {
   margin-bottom: 1em; }
-dl.comments a.flag {
-  float: right; }
+dl.comments a.flag, dl.comments a.permalink {
+  float: right;
+  padding-left: 1em; }
 
 div.pagination {
   margin-bottom: 1em;

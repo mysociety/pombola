@@ -40,7 +40,7 @@ class BaseCommentNode(template.Node):
                 raise template.TemplateSyntaxError("Fourth argument in %r must be 'as'" % tokens[0])
             return cls(
                 ctype = BaseCommentNode.lookup_content_type(tokens[2], tokens[0]),
-                object_pk_expr = parser.compile_filter(tokens[3]),
+                object_id_expr = parser.compile_filter(tokens[3]),
                 as_varname = tokens[5]
             )
 
@@ -60,13 +60,13 @@ class BaseCommentNode(template.Node):
             raise template.TemplateSyntaxError("%r tag has non-existant content-type: '%s.%s'" % (tagname, app, model))
     lookup_content_type = staticmethod(lookup_content_type)
 
-    def __init__(self, ctype=None, object_pk_expr=None, object_expr=None, as_varname=None, comment=None):
+    def __init__(self, ctype=None, object_id_expr=None, object_expr=None, as_varname=None, comment=None):
         if ctype is None and object_expr is None:
             raise template.TemplateSyntaxError("Comment nodes must be given either a literal object or a ctype and object pk.")
         self.comment_model = Comment
         self.as_varname = as_varname
         self.ctype = ctype
-        self.object_pk_expr = object_pk_expr
+        self.object_id_expr = object_id_expr
         self.object_expr = object_expr
         self.comment = comment
 
@@ -76,13 +76,13 @@ class BaseCommentNode(template.Node):
         return ''
 
     def get_query_set(self, context):
-        ctype, object_pk = self.get_target_ctype_pk(context)
-        if not object_pk:
+        ctype, object_id = self.get_target_ctype_pk(context)
+        if not object_id:
             return self.comment_model.objects.none()
 
         qs = self.comment_model.objects.filter(
             content_type = ctype,
-            object_pk    = smart_unicode(object_pk),
+            object_id    = smart_unicode(object_id),
         )
 
         # We only want approved comments
@@ -98,7 +98,7 @@ class BaseCommentNode(template.Node):
                 return None, None
             return ContentType.objects.get_for_model(obj), obj.pk
         else:
-            return self.ctype, self.object_pk_expr.resolve(context, ignore_failures=True)
+            return self.ctype, self.object_id_expr.resolve(context, ignore_failures=True)
 
     def get_context_value_from_queryset(self, context, qs):
         """Subclasses should override this."""
@@ -118,9 +118,9 @@ class CommentCountNode(BaseCommentNode):
 #     """Insert a form for the comment model into the context."""
 # 
 #     def get_form(self, context):
-#         ctype, object_pk = self.get_target_ctype_pk(context)
-#         if object_pk:
-#             return CommentForm(ctype.get_object_for_this_type(pk=object_pk))
+#         ctype, object_id = self.get_target_ctype_pk(context)
+#         if object_id:
+#             return CommentForm(ctype.get_object_for_this_type(pk=object_id))
 #         else:
 #             return None
 # 
@@ -146,13 +146,13 @@ class CommentCountNode(BaseCommentNode):
 #         elif len(tokens) == 4:
 #             return cls(
 #                 ctype = BaseCommentNode.lookup_content_type(tokens[2], tokens[0]),
-#                 object_pk_expr = parser.compile_filter(tokens[3])
+#                 object_id_expr = parser.compile_filter(tokens[3])
 #             )
 #     handle_token = classmethod(handle_token)
 # 
 #     def render(self, context):
-#         ctype, object_pk = self.get_target_ctype_pk(context)
-#         if object_pk:
+#         ctype, object_id = self.get_target_ctype_pk(context)
+#         if object_id:
 #             template_search_list = [
 #                 "comments/%s/%s/form.html" % (ctype.app_label, ctype.model),
 #                 "comments/%s/form.html" % ctype.app_label,
@@ -183,13 +183,13 @@ class RenderCommentListNode(CommentListNode):
         elif len(tokens) == 4:
             return cls(
                 ctype = BaseCommentNode.lookup_content_type(tokens[2], tokens[0]),
-                object_pk_expr = parser.compile_filter(tokens[3])
+                object_id_expr = parser.compile_filter(tokens[3])
             )
     handle_token = classmethod(handle_token)
 
     def render(self, context):
-        ctype, object_pk = self.get_target_ctype_pk(context)
-        if object_pk:
+        ctype, object_id = self.get_target_ctype_pk(context)
+        if object_id:
             template_search_list = [
                 "comments/%s/%s/list.html" % (ctype.app_label, ctype.model),
                 "comments/%s/list.html" % ctype.app_label,
