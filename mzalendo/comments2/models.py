@@ -31,7 +31,7 @@ class CommentManager(models.Manager):
         ct = ContentType.objects.get_for_model(model)
         qs = self.get_query_set().filter(content_type=ct)
         if isinstance(model, models.Model):
-            qs = qs.filter(object_pk=force_unicode(model._get_pk_val()))
+            qs = qs.filter(object_id=force_unicode(model._get_pk_val()))
         return qs
 
 COMMENT_MAX_LENGTH = getattr(settings,'COMMENT_MAX_LENGTH',3000)
@@ -45,8 +45,8 @@ class Comment(models.Model):
     content_type   = models.ForeignKey(ContentType,
             verbose_name=_('content type'),
             related_name="content_type_set_for_%(class)s")
-    object_pk      = models.TextField(_('object ID'))
-    content_object = generic.GenericForeignKey(ct_field="content_type", fk_field="object_pk")
+    object_id      = models.IntegerField(_('object ID'))
+    content_object = generic.GenericForeignKey(ct_field="content_type", fk_field="object_id")
 
     user = models.ForeignKey(User, verbose_name=_('user'), related_name="%(class)s_comments")
 
@@ -90,7 +90,7 @@ class Comment(models.Model):
         """
         return urlresolvers.reverse(
             "comments-url-redirect",
-            args=(self.content_type_id, self.object_pk)
+            args=(self.content_type_id, self.object_id)
         )
 
     def save(self, *args, **kwargs):

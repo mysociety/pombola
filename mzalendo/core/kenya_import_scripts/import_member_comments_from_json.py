@@ -72,7 +72,7 @@ for old_comment in comments:
 
     comment = Comment(
         content_type = ContentType.objects.get_for_model(member),
-        object_pk    = member.id,
+        object_id    = member.id,
         user         = user,
 
         status       = 'approved',
