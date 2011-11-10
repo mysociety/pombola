@@ -22,8 +22,8 @@ find . -name '*.pyc' -delete
 cd mzalendo
 
 # get the database up to speed
-./manage.py syncdb
-./manage.py migrate
+./manage.py syncdb --noinput
+./manage.py migrate --noinput
 
 # gather all the static files in one place
 ./manage.py collectstatic --noinput
