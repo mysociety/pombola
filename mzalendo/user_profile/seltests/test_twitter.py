@@ -97,10 +97,18 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
         
         self.open_url('/')
 
-        # click on the login using twitter link
+        # Go to twitter and cancel the login
         driver.find_element_by_link_text("twitter").click()
+        driver.find_element_by_link_text("Cancel, and return to app").click()
+        
+        # Check that the text is helpful
+        self.assertTrue( '/accounts/login/' in driver.current_url )
+        self.assertTrue(
+            'You tried to login using a website like Twitter' in self.page_source
+        )
 
-        # on twitter site just confirm the log in
+        # go to Twitter and confirm the log in
+        driver.find_element_by_link_text("twitter").click()
         driver.find_element_by_id("allow").click()
 
         # check that we are now logged in
@@ -127,25 +135,3 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
         # check that the name has not been updated
         user = self.get_current_user()
         self.assertEqual( user.get_full_name(), "Firstly Lastly" )
-        
-
-    def test_twitter_authentication_cancelled(self):
-        """When a user cancels a login check that they go to a page with some
-        text that explains what happened."""
-
-        driver = self.driver
-
-        self.login_to_twitter()
-        self.revoke_access_to_test_app()        
-        
-        # Try to log in with twitter and then abort
-        self.open_url("/")
-        driver.find_element_by_link_text("twitter").click()
-        driver.find_element_by_link_text("Cancel, and return to app").click()
-        
-        # Check that the tex is helpful
-        self.assertTrue( '/accounts/login/' in driver.current_url )
-        self.assertTrue(
-            'You tried to login using a website like Twitter' in self.page_source
-        )
-        
