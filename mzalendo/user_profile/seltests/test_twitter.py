@@ -79,22 +79,14 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
 
     def revoke_access_to_test_app(self):
         driver = self.driver
-        driver.get("http://twitter.com/")
-        driver.find_element_by_id("session").click()
-        driver.find_element_by_link_text("Settings").click()
-
+        driver.get("http://twitter.com/settings/applications")
         
         try:
-            driver.find_element_by_id("connections_tab").click()
+            # Possibly bad assumption - there will be only one app to revoke
+            driver.find_element_by_link_text("Revoke Access").click()
+            sleep(2)
         except NoSuchElementException:
-            # User has no applications, so no tab shown. All done.
-            return True
-
-        # Possibly bad assumption - there will be only one app to revoke
-        driver.find_element_by_link_text("Revoke Access").click()
-
-        # wait for the text to change
-        sleep(2)
+            pass
 
 
     def test_create_account_via_twitter(self):
@@ -137,3 +129,23 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
         self.assertEqual( user.get_full_name(), "Firstly Lastly" )
         
 
+    def test_twitter_authentication_cancelled(self):
+        """When a user cancels a login check that they go to a page with some
+        text that explains what happened."""
+
+        driver = self.driver
+
+        self.login_to_twitter()
+        self.revoke_access_to_test_app()        
+        
+        # Try to log in with twitter and then abort
+        self.open_url("/")
+        driver.find_element_by_link_text("twitter").click()
+        driver.find_element_by_link_text("Cancel, and return to app").click()
+        
+        # Check that the tex is helpful
+        self.assertTrue( '/accounts/login/' in driver.current_url )
+        self.assertTrue(
+            'You tried to login using a website like Twitter' in self.page_source
+        )
+        

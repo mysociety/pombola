@@ -251,14 +251,6 @@ FACEBOOK_API_SECRET          = config.get('FACEBOOK_API_SECRET')
 if FACEBOOK_APP_ID and FACEBOOK_API_SECRET:
     SOCIAL_AUTH_ENABLED_BACKENDS.append('facebook')
 
-# Don't change the details here when they change on the authenticating site.
-# This is because Facebook makes a hash of things (wrong capitals, drops middle
-# names) and we don't want changes a user has made being overridden each time
-# they log in.
-#
-# FIXME - if set true then the details are not set, even on the first time we
-# see them. Ideally we'd set them the first time, but then never update them.
-
 SOCIAL_AUTH_CHANGE_SIGNAL_ONLY = True
 SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.social_auth_user',
@@ -270,6 +262,10 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social_auth.backends.pipeline.user.update_user_details',
     'user_profile.pipeline.update_user_details',
 )
+
+# Appears to have no effect - see https://github.com/omab/django-social-auth/issues/175
+# Using a workaround of passing a parameter to the login url instead.
+# SOCIAL_AUTH_ERROR_KEY = 'social_errors'
 
 # social test related
 TEST_TWITTER_USERNAME = config.get('TEST_TWITTER_USERNAME', None)
@@ -301,6 +297,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 # After login go to home page
 LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
 
 
 # pagination related settings

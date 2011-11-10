@@ -6,6 +6,21 @@
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 
+
+{% if request.GET.social_error %}
+
+    <div class="error">
+        <h2>Something went wrong</h2>
+
+        <p>
+            You tried to login using a website like Twitter or Facebook, but
+            something went wrong. Perhaps you cancelled or there was some other
+            issue. Please try again, or use the form below.
+        </p>
+    </div>
+
+{% endif %}
+
 <form method="post" action="{% url django.contrib.auth.views.login %}">
     
     {% csrf_token %}
