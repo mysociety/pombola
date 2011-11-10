@@ -32,7 +32,6 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
     #   driver:   http://selenium.googlecode.com/svn/trunk/docs/api/py/webdriver_remote/selenium.webdriver.remote.webdriver.html
     #   elements: http://selenium.googlecode.com/svn/trunk/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html
 
-
     def setUp(self):
         super(TwitterTestCase, self).setUp()
 
@@ -40,34 +39,34 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
         self.driver.implicitly_wait(5)
 
 
-    def get_twitter_username_field(self):
+    def twitter_get_username_field(self):
         return self.driver.find_element_by_css_selector("form.signin.js-signin > fieldset.textbox > label.username.js-username > input[name=\"session[username_or_email]\"]")
 
 
-    def get_twitter_password_field(self):
+    def twitter_get_password_field(self):
         return self.driver.find_element_by_css_selector("form.signin.js-signin > fieldset.textbox > label.password > input[name=\"session[password]\"]")
 
         
-    def enter_username_and_password(self, submit=True):
-        self.get_twitter_username_field().clear()
-        self.get_twitter_username_field().send_keys(twitter_username)
-        self.get_twitter_password_field().clear()
-        self.get_twitter_password_field().send_keys(twitter_password)
+    def twitter_enter_username_and_password(self, submit=True):
+        self.twitter_get_username_field().clear()
+        self.twitter_get_username_field().send_keys(twitter_username)
+        self.twitter_get_password_field().clear()
+        self.twitter_get_password_field().send_keys(twitter_password)
         if submit:
-            self.get_twitter_username_field().submit()
+            self.twitter_get_username_field().submit()
 
 
-    def login_to_twitter(self):
+    def twitter_login(self):
         driver = self.driver
         driver.get("https://twitter.com/#!/login/")
 
         # Perhaps we are already logged in?
         if not self.is_text_present(twitter_username):
 
-            self.enter_username_and_password()
+            self.twitter_enter_username_and_password()
             
             if 'captcha' in driver.current_url:
-                self.enter_username_and_password(submit=False)
+                self.twitter_enter_username_and_password(submit=False)
                 
                 while 'captcha' in driver.current_url:
                     print "Please complete the twitter captcha and submit the form"
@@ -77,7 +76,7 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
         self.assertTrue(twitter_username in self.find_element_by_id('screen-name').text)
 
 
-    def revoke_access_to_test_app(self):
+    def twitter_revoke_access_to_test_app(self):
         driver = self.driver
         driver.get("http://twitter.com/settings/applications")
         
@@ -92,8 +91,8 @@ class TwitterTestCase(MzalendoSeleniumTestCase):
     def test_create_account_via_twitter(self):
         driver = self.driver
 
-        self.login_to_twitter()
-        self.revoke_access_to_test_app()
+        self.twitter_login()
+        self.twitter_revoke_access_to_test_app()
         
         self.open_url('/')
 
