@@ -34,5 +34,7 @@ class Chunk(models.Model):
         return "%s: %s" % (self.type, self.content[:100])
 
     class Meta:
-        ordering = ['date', 'session', 'text_counter']      
+        ordering = ['date', 'session', 'text_counter']
+        app_label = 'hansard'
+        
 
