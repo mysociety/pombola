@@ -1,0 +1,13 @@
+{% if settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+
+    <h2>Login using social media</h2>
+
+    {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+
+        <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}"><img src="{{ STATIC_URL }}social/sign-in-with-twitter-l.png" alt="login using Twitter" /></a>
+    {% endif %}
+    {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+        <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}"><img src="{{ STATIC_URL }}social/signin_facebook.png" alt="login using Facebook" /></a>
+    {% endif %}
+
+{% endif %}

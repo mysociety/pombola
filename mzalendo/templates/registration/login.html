@@ -21,6 +21,10 @@
 
 {% endif %}
 
+{% include 'social_login_buttons.html' %}
+
+<h2>Login using username and password</h2>
+
 <form method="post" action="{% url django.contrib.auth.views.login %}">
     
     {% csrf_token %}
