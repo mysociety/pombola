@@ -60,8 +60,12 @@
                         {% firstof request.user.get_full_name request.user.username %} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
                     {% else %}
                         <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
-                        <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
-                        <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">fb</a>
+                        {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+                            <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
+                        {% endif %}
+                        {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+                            <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">fb</a>
+                        {% endif %}
                     {% endif %}
                 </li>                 
                 <li>
