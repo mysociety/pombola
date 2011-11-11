@@ -23,7 +23,7 @@ cd mzalendo
 
 # get the database up to speed
 ./manage.py syncdb --noinput
-./manage.py migrate --noinput
+./manage.py migrate
 
 # gather all the static files in one place
 ./manage.py collectstatic --noinput
