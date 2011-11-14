@@ -14,7 +14,7 @@ class Source(models.Model):
 
     class Meta:
         app_label = 'hansard'
-        ordering = [ 'date', 'name' ]
+        ordering = [ '-date', 'name' ]
 
     def __unicode__(self):
         return self.name
