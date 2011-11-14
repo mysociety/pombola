@@ -53,3 +53,16 @@ class HansardTest(TestCase):
         source.url = source.url + 'xxx'        
         self.assertEqual( source.file(), None )
         self.assertFalse( os.path.exists( source.cache_file_path() ))
+
+
+    def test_requires_processing(self):
+        
+        # There should just be one source that needs processing
+        self.assertEqual( Source.objects.all().requires_processing().count(), 1 )
+
+        # give the source a last_processed time
+        self.source.last_processed = datetime.date.today()
+        self.source.save()
+
+        # none should match now
+        self.assertEqual( Source.objects.all().requires_processing().count(), 0 )

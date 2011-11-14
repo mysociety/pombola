@@ -14,6 +14,16 @@ except AttributeError:
     raise ImproperlyConfigured("Could not find HANSARD_CACHE setting - please set it")
 
 
+class SourceQuerySet(models.query.QuerySet):
+    def requires_processing(self):
+        return self.filter( last_processed=None )
+
+
+class SourceManager(models.Manager):
+    def get_query_set(self):
+        return SourceQuerySet(self.model)
+
+
 class Source(models.Model):
     """
     Sources of the hansard transcripts
@@ -26,13 +36,16 @@ class Source(models.Model):
     url            = models.URLField()
     last_processed = models.DateField(blank=True, null=True)
 
+    objects = SourceManager()
+
     class Meta:
         app_label = 'hansard'
         ordering = [ '-date', 'name' ]
 
     def __unicode__(self):
         return self.name
-        
+
+
     def delete(self):
         """After deleting from db, delete the cached file too"""
         cache_file_path = self.cache_file_path()
