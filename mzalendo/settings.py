@@ -227,6 +227,10 @@ LOGGING = {
     }
 }
 
+# Configure the Hansard app
+HANSARD_CACHE = os.path.join( base_dir, "hansard_cache" )
+
+
 # User profile related
 AUTH_PROFILE_MODULE = 'user_profile.UserProfile'
 
@@ -343,3 +347,5 @@ SOUTH_TESTS_MIGRATE = False
 # Settings for the selenium tests
 TEST_RUNNER   = 'django_selenium.selenium_runner.SeleniumTestRunner'
 SELENIUM_PATH = config.get( 'SELENIUM_PATH', None )
+
+
