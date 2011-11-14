@@ -42,7 +42,6 @@ class HansardTest(TestCase):
         
         # delete the object - check cache file gone to
         source.delete()
-        time.sleep(2) # let things get synced
         self.assertFalse( os.path.exists( cache_file_path ))
         
         # check that the object is gone
