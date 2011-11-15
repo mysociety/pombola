@@ -11,16 +11,21 @@ import models
 
 
 class SourceAdmin(admin.ModelAdmin):
-    pass
     list_display  = [ 'name', 'date', 'last_processed' ]
     list_filter = ('date', 'last_processed')
     date_hierarchy = 'date'
     
 
+class SittingAdmin(admin.ModelAdmin):
+    list_display  = [ 'start_date', 'start_time', 'end_date', 'end_time', 'source' ]
+    list_filter = ['start_date']
+    date_hierarchy = 'start_date'
+    
+
 class ChunkAdmin(admin.ModelAdmin):
-    pass
     list_display  = [ 'date', 'session', 'type', '__unicode__' ]
     
 
-admin.site.register( models.Source, SourceAdmin )
-admin.site.register( models.Chunk, ChunkAdmin )
+admin.site.register( models.Source,  SourceAdmin )
+admin.site.register( models.Sitting, SittingAdmin )
+admin.site.register( models.Chunk,   ChunkAdmin )

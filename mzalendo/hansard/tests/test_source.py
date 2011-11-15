@@ -5,7 +5,7 @@ import time
 from django.test import TestCase
 from hansard.models import Source
 
-class HansardTest(TestCase):
+class HansardSourceTest(TestCase):
 
     def setUp(self):
         """Create a test source (easier than fixture for now)"""
