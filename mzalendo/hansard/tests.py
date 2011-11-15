@@ -8,6 +8,7 @@ from hansard.models import Source
 class HansardTest(TestCase):
 
     def setUp(self):
+        """Create a test source (easier than fixture for now)"""
         source = Source(
             name = 'Test Source',
             url  = 'http://www.mysociety.org/robots.txt',
@@ -18,6 +19,8 @@ class HansardTest(TestCase):
 
 
     def test_source_file(self):
+        """Check that source file is retrieved and cached correctly"""
+
         source = self.source
         
         self.assertEqual( source.name, 'Test Source')
@@ -49,6 +52,7 @@ class HansardTest(TestCase):
 
 
     def test_source_file_404(self):
+        """Check that urls that 404 are handled correctly"""
         source = self.source
         source.url = source.url + 'xxx'        
         self.assertEqual( source.file(), None )
@@ -56,6 +60,7 @@ class HansardTest(TestCase):
 
 
     def test_requires_processing(self):
+        """Check requires_processing qs works"""
         
         # There should just be one source that needs processing
         self.assertEqual( Source.objects.all().requires_processing().count(), 1 )
