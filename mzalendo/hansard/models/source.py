@@ -1,9 +1,14 @@
 import os
 import httplib2
+import xml.sax
+import tempfile
+import subprocess
 
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+
+from hansard.xml_handlers import HansardXML
 
 # check that the cache is setup and the directory exists
 try:
@@ -102,3 +107,21 @@ class Source(models.Model):
         return cache_file_path
 
 
+    def convert_pdf_to_data(self, pdf_file=None):
+        """Given a PDF parse it and return a datastructure representing it"""
+
+        if not pdf_file: pdf_file = self.file
+                
+        pdftohtml = subprocess.Popen(
+            [ 'pdftohtml', '-xml', '-stdout', pdf_file.name ],
+            shell = False,
+            stdout = subprocess.PIPE,
+        )
+                
+        ( pdf_as_xml, ignore ) = pdftohtml.communicate()
+
+        print "len of pdftohtml :" + str( len(pdf_as_xml) )
+
+        hansard_data = xml.sax.parseString( pdf_as_xml, HansardXML() )
+        
+        return hansard_data
