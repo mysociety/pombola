@@ -217,7 +217,8 @@ class Source(models.Model):
         
         # now go through and create some meaningful chunks from what we see
         meaningful_content = []
-        last_speaker = ''
+        last_speaker_name  = ''
+        last_speaker_title = ''
 
         while len(merged_contents):
 
@@ -226,7 +227,6 @@ class Source(models.Model):
 
             print '----------------------------------------'
             print line
-            print next_line
             
 
             # if the content is italic then it is a scene
@@ -243,29 +243,46 @@ class Source(models.Model):
                     'type': 'heading',
                     'text': line['text_content'],
                 })
-                last_speaker = ''
+                last_speaker_name  = ''
+                last_speaker_title = ''
                 continue
                 
             # It is a speech if we have a speaker and it is not formatted
-            if line['tag_name'] == None and last_speaker:
+            if line['tag_name'] == None and last_speaker_name:
+
+                # do some quick smarts to see if we can extract a name from the start of the speech.
+                speech = line['text_content']
+                
+                matches = re.match( r'\(([^\)]+)\):(.*)', speech )
+                if matches:
+                    last_speaker_title = last_speaker_name
+                    last_speaker_name = matches.group(1)
+                    speech = matches.group(2)
+
                 meaningful_content.append({
+                    'speaker_name':  last_speaker_name,
+                    'speaker_title': last_speaker_title,
+                    'text': speech,
                     'type': 'speech',
-                    'speaker': last_speaker,
-                    'text': line['text_content'],
                 })
+                
+                print meaningful_content[-1]
+                
                 continue
 
             # If it is a bold line and the next line is 'None' and is no
             # br_count away then we have the start of a speech.
             if line['tag_name'] == 'b' and next_line['tag_name'] == None and next_line['br_count'] == 0:
-                last_speaker = line['text_content']
+                last_speaker_name = line['text_content'].strip(':')
+                last_speaker_title = ''
                 continue
 
             meaningful_content.append({
                 'type': 'other',
                 'text': line['text_content'],
             })
-            last_speaker = ''
+            last_speaker_name  = ''
+            last_speaker_title = ''
 
             
 
