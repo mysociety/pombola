@@ -1,14 +1,16 @@
-import os
 import httplib2
-import xml.sax
-import tempfile
+import os
+import re
 import subprocess
+import tempfile
 
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 from hansard.xml_handlers import HansardXML
+
+from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, NavigableString, Tag
 
 # check that the cache is setup and the directory exists
 try:
@@ -136,10 +138,140 @@ class Source(models.Model):
     @classmethod
     def convert_html_to_data(cls, html):
 
-        hansard_data = {}
+        # Clean out all the &nbsp; now. pdftohtml puts them to preserve the lines
+        html = re.sub( r'&nbsp;', ' ', html )
 
-        # print "len of pdftohtml :" + str( len(pdf_as_xml) )
-        # 
-        # hansard_data = xml.sax.parseString( pdf_as_xml, HansardXML() )
+        # create a soup out of the html
+        soup = BeautifulSoup(
+            html,
+            convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+        )
+
+        contents = soup.body.contents
+        br_count = 0
+
+        filtered_contents = []
         
+        while len(contents):
+            line = contents.pop(0)
+
+            # get the tag name if there is one
+            tag_name = line.name if type(line) == Tag else None
+
+            # count <br> tags - we use two or more in succession to decide that
+            # we've moved on to a new bit of text
+            if tag_name == 'br':
+                br_count += 1
+                continue
+
+            # skip empty lines
+            if tag_name == None:
+                text_content = str(line)
+            else:
+                text_content = line.text
+            
+            if re.match( r'\s*$', text_content ):
+                continue
+            
+            
+            # check for something that looks like the page number - when found
+            # delete it and the two lines that follow
+            if tag_name == 'b' and re.match( r'\d+\s{10,}', line.text ):
+                print "skipping page number line: " + line.text
+                while len(contents):
+                    item = contents.pop(0)
+                    if type(item) == Tag and item.name == 'hr': break
+                continue
+
+
+            # if br_count > 0:
+            #     print 'br_count: ' + str(br_count)
+            # print type( line )
+            # # if type(line) == Tag: print line.name
+            # print "%s: >>>%s<<<" % (tag_name, text_content)
+            # print '------------------------------------------------------'
+            
+            filtered_contents.append(dict(
+                tag_name     = tag_name,
+                text_content = text_content.strip(),
+                br_count     = br_count,
+            ))
+
+            br_count = 0
+                    
+        # go through all the filtered_content and using the br_count determine
+        # when lines should be merged
+        merged_contents = []
+        
+        for line in filtered_contents:
+
+            # print line            
+            br_count = line['br_count']
+            
+            # Join lines that have the same tag_name and are not too far apart
+            if br_count <= 1  and len(merged_contents) and line['tag_name'] == merged_contents[-1]['tag_name']:
+                new_content = ' '.join( [ merged_contents[-1]['text_content'], line['text_content'] ] )
+                merged_contents[-1]['text_content'] = new_content
+            else:
+                merged_contents.append( line )
+        
+        # now go through and create some meaningful chunks from what we see
+        meaningful_content = []
+        last_speaker = ''
+
+        while len(merged_contents):
+
+            line = merged_contents.pop(0)
+            next_line = merged_contents[0] if len(merged_contents) else None
+
+            print '----------------------------------------'
+            print line
+            print next_line
+            
+
+            # if the content is italic then it is a scene
+            if line['tag_name'] == 'i':
+                meaningful_content.append({
+                    'type': 'scene',
+                    'text': line['text_content'],
+                })
+                continue
+            
+            # if the content is all caps then it is a heading
+            if line['text_content'] == line['text_content'].upper():
+                meaningful_content.append({
+                    'type': 'heading',
+                    'text': line['text_content'],
+                })
+                last_speaker = ''
+                continue
+                
+            # It is a speech if we have a speaker and it is not formatted
+            if line['tag_name'] == None and last_speaker:
+                meaningful_content.append({
+                    'type': 'speech',
+                    'speaker': last_speaker,
+                    'text': line['text_content'],
+                })
+                continue
+
+            # If it is a bold line and the next line is 'None' and is no
+            # br_count away then we have the start of a speech.
+            if line['tag_name'] == 'b' and next_line['tag_name'] == None and next_line['br_count'] == 0:
+                last_speaker = line['text_content']
+                continue
+
+            meaningful_content.append({
+                'type': 'other',
+                'text': line['text_content'],
+            })
+            last_speaker = ''
+
+            
+
+
+        hansard_data = {
+            'transcript': meaningful_content,
+        }
+
         return hansard_data

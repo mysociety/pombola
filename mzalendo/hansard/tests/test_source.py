@@ -102,8 +102,9 @@ class HansardSourceParsingTest(TestCase):
         data = Source.convert_html_to_data( html=html )
                 
         # Whilst developing the code this proved useful
-        tmp = tempfile.NamedTemporaryFile( delete=False, suffix=".json" )
-        tmp.write( json.dumps( data ) )
+        # tmp = tempfile.NamedTemporaryFile( delete=False, suffix=".json" )
+        tmp = open( '/tmp/mzalend_hansard_parse.json', 'w')
+        tmp.write( json.dumps( data, sort_keys=True, indent=4 ) )
         tmp.close()        
         subprocess.call(['open', tmp.name ])
                 
