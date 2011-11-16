@@ -132,7 +132,7 @@ class Source(models.Model):
         if wanted_version not in pdftohtml_version:
             raise Exception( "Bad pdftohtml version - got '%s' but want '%s'" % (pdftohtml_version, wanted_version) )
 
-        return run_pdftohtml( [ cmd, '-stdout', '-noframes', pdf_file.name ] )
+        return run_pdftohtml( [ cmd, '-stdout', '-noframes', '-enc', 'UTF-8', pdf_file.name ] )
 
 
     @classmethod
@@ -166,7 +166,7 @@ class Source(models.Model):
 
             # skip empty lines
             if tag_name == None:
-                text_content = str(line)
+                text_content = unicode(line)
             else:
                 text_content = line.text
             
@@ -191,9 +191,13 @@ class Source(models.Model):
             # print "%s: >>>%s<<<" % (tag_name, text_content)
             # print '------------------------------------------------------'
             
+
+            text_content = text_content.strip()
+            text_content = re.sub( r'\s+', ' ', text_content )
+            
             filtered_contents.append(dict(
                 tag_name     = tag_name,
-                text_content = text_content.strip(),
+                text_content = text_content,
                 br_count     = br_count,
             ))
 
@@ -284,10 +288,10 @@ class Source(models.Model):
             last_speaker_name  = ''
             last_speaker_title = ''
 
-            
-
-
         hansard_data = {
+            'meta': {
+                'FIXME': "Need to code this up",
+            },
             'transcript': meaningful_content,
         }
 

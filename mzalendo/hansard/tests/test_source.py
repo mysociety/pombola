@@ -110,6 +110,9 @@ class HansardSourceParsingTest(TestCase):
                 
         expected = json.loads( open( self.expected_data_json, 'r'  ).read() )
         
-        self.assertEqual( data, expected )
+        self.assertEqual( data['transcript'], expected['transcript'] )
+
+        # FIXME
+        self.assertEqual( data['meta'], expected['meta'] )
         
         
