@@ -105,23 +105,41 @@ class Source(models.Model):
         # create the path to the file
         cache_file_path = os.path.join(cache_dir, id_str)
         return cache_file_path
+    
+    
+    @classmethod
+    def covert_pdf_to_html(cls, pdf_file):
+        """Given a PDF parse it and return the HTML string representing it"""
+
+        pdftohtml_cmd = 'pdftohtml'
+
+        def run_pdftohtml( args ):
+            pdftohtml = subprocess.Popen(
+                args,
+                shell = False,
+                stdout = subprocess.PIPE,
+            )
+
+            ( output, ignore ) = pdftohtml.communicate()
+            return output
+
+        # get the version number of pdftohtml and check that it is acceptable - see
+        # 'hansard/notes.txt' for issues with the output from different versions.
+        pdftohtml_version = run_pdftohtml( [ cmd, '-version', pdf_file.name ] )
+        wanted_version = 'pdftohtml version 0.12.4'
+        if wanted_version not in pdftohtml_version:
+            raise Exception( "Bad pdftohtml version - got '%s' but want '%s'" % (pdftohtml_version, wanted_version) )
+
+        return run_pdftohtml( [ cmd, '-stdout', '-noframes', pdf_file.name ] )
 
 
-    def convert_pdf_to_data(self, pdf_file=None):
-        """Given a PDF parse it and return a datastructure representing it"""
+    @classmethod
+    def convert_html_to_data(cls, html):
 
-        if not pdf_file: pdf_file = self.file
-                
-        pdftohtml = subprocess.Popen(
-            [ 'pdftohtml', '-xml', '-stdout', pdf_file.name ],
-            shell = False,
-            stdout = subprocess.PIPE,
-        )
-                
-        ( pdf_as_xml, ignore ) = pdftohtml.communicate()
+        hansard_data = {}
 
-        print "len of pdftohtml :" + str( len(pdf_as_xml) )
-
-        hansard_data = xml.sax.parseString( pdf_as_xml, HansardXML() )
+        # print "len of pdftohtml :" + str( len(pdf_as_xml) )
+        # 
+        # hansard_data = xml.sax.parseString( pdf_as_xml, HansardXML() )
         
         return hansard_data

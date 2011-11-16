@@ -4,7 +4,14 @@ logging.basicConfig()
 
 from xml.sax.handler import ContentHandler
 
+
+
+
+
 class HansardXML(ContentHandler):
+
+    feature_external_pes = False
+
     def __init__(self, *args, **kwargs):
         
         self.logger = logging.getLogger(__name__)

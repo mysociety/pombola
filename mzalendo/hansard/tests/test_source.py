@@ -6,6 +6,8 @@ import tempfile
 import subprocess
 
 from django.test import TestCase
+from django.utils import unittest
+
 from hansard.models import Source
 
 class HansardSourceTest(TestCase):
@@ -81,25 +83,23 @@ class HansardSourceParsingTest(TestCase):
 
     local_dir          = os.path.abspath( os.path.dirname( __file__ ) )
     sample_pdf         = os.path.join( local_dir, '2011-09-01-sample.pdf'  )
+    sample_html        = os.path.join( local_dir, '2011-09-01-sample.html' )
     expected_data_json = os.path.join( local_dir, '2011-09-01-sample.json' )
 
 
-    def setUp(self):
-        """Create a test source (easier than fixture for now)"""
-        source = Source(
-            name = 'Test Sample Source',
-            url  = 'http://www.example.com/foo/bar',
-            date = datetime.date( 2011, 9, 1 ),
-        )
-        source.save()
-        self.source = source
+    @unittest.skip( "Tests not written yet" )
+    def test_converting_pdf_to_html(self):
+        # FIXME - write these tests on a machine that supports the conversion
+        pass
 
 
-    def test_converting_pdf_to_data(self):
+    def test_converting_html_to_data(self):
         """test the convert_pdf_to_data function"""
         
-        pdf_file = open( self.sample_pdf, 'r' )
-        data = self.source.convert_pdf_to_data( pdf_file=pdf_file )
+        html_file = open( self.sample_html, 'r')
+        html = html_file.read()
+
+        data = Source.convert_html_to_data( html=html )
                 
         # Whilst developing the code this proved useful
         tmp = tempfile.NamedTemporaryFile( delete=False, suffix=".json" )
@@ -108,7 +108,7 @@ class HansardSourceParsingTest(TestCase):
         subprocess.call(['open', tmp.name ])
                 
         expected = json.loads( open( self.expected_data_json, 'r'  ).read() )
-
+        
         self.assertEqual( data, expected )
         
         
