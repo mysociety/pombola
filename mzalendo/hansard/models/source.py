@@ -213,7 +213,11 @@ class Source(models.Model):
             br_count = line['br_count']
             
             # Join lines that have the same tag_name and are not too far apart
-            if br_count <= 1  and len(merged_contents) and line['tag_name'] == merged_contents[-1]['tag_name']:
+            if (
+                    br_count <= 1
+                and len(merged_contents)
+                and line['tag_name'] == merged_contents[-1]['tag_name']
+            ):
                 new_content = ' '.join( [ merged_contents[-1]['text_content'], line['text_content'] ] )
                 merged_contents[-1]['text_content'] = new_content
             else:
@@ -229,8 +233,8 @@ class Source(models.Model):
             line = merged_contents.pop(0)
             next_line = merged_contents[0] if len(merged_contents) else None
 
-            print '----------------------------------------'
-            print line
+            # print '----------------------------------------'
+            # print line
             
 
             # if the content is italic then it is a scene
@@ -254,7 +258,8 @@ class Source(models.Model):
             # It is a speech if we have a speaker and it is not formatted
             if line['tag_name'] == None and last_speaker_name:
 
-                # do some quick smarts to see if we can extract a name from the start of the speech.
+                # do some quick smarts to see if we can extract a name from the
+                # start of the speech.
                 speech = line['text_content']
                 
                 matches = re.match( r'\(([^\)]+)\):(.*)', speech )
@@ -270,13 +275,17 @@ class Source(models.Model):
                     'type': 'speech',
                 })
                 
-                print meaningful_content[-1]
+                # print meaningful_content[-1]
                 
                 continue
 
             # If it is a bold line and the next line is 'None' and is no
             # br_count away then we have the start of a speech.
-            if line['tag_name'] == 'b' and next_line['tag_name'] == None and next_line['br_count'] == 0:
+            if (
+                    line['tag_name']      == 'b'
+                and next_line['tag_name'] == None
+                and next_line['br_count'] == 0
+            ):
                 last_speaker_name = line['text_content'].strip(':')
                 last_speaker_title = ''
                 continue
