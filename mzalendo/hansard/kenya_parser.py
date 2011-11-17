@@ -3,12 +3,14 @@ import os
 import re
 import subprocess
 import tempfile
+import datetime
 
 from django.db import models
 from django.conf import settings
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, NavigableString, Tag
 
+from hansard.models import Source, Sitting, Entry
 
 # EXCEPTIONS
 class KenyaParserCouldNotParseTimeString(Exception):
@@ -304,11 +306,39 @@ class KenyaParser():
         
 
 
+    @classmethod
+    def create_entries_from_data_and_source( cls, data, source ):
+        """Create the needed sitting and entries"""
 
+        sitting = Sitting(
+            source     = source,
+            start_date = source.date,
+            start_time = data['meta']['start_time'],
+            end_date   = source.date,
+            end_time   = data['meta']['end_time'],
+        )
+        sitting.save()
+        
+        counter = 0
 
+        for line in data['transcript']:
 
+            counter += 1
 
+            entry = Entry(
+                sitting       = sitting,
+                page_number   = line['page_number'],
+                text_counter  = counter,
+                speaker_name  = line.get('speaker_name',  ''),
+                speaker_title = line.get('speaker_title', ''),
+                content       = line['text'],
+            )
+            entry.save()
 
+        source.last_processed = datetime.datetime.now()
+        source.save()
+        
+        return None
 
 
 
