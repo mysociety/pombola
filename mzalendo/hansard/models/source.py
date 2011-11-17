@@ -339,10 +339,69 @@ class Source(models.Model):
             last_speaker_title = ''
 
         hansard_data = {
-            'meta': {
-                'FIXME': "Need to code this up",
-            },
+            'meta': cls.extract_meta_from_transcript( meaningful_content ),
             'transcript': meaningful_content,
         }
 
         return hansard_data
+
+
+
+    @classmethod
+    def extract_meta_from_transcript(cls, transcript):
+        reg = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
+
+        results = {}
+
+        for line in transcript:
+            text = line.get('text', '')
+            
+            match = reg.match(text)
+            if not match: continue
+
+            groups = match.groupdict()
+
+            hhmm = cls.parse_time_string( groups['time'] )
+                        
+            if groups['action'] == 'met':
+                results['start_time'] = hhmm
+            else:
+                results['end_time'] = hhmm
+            
+        return results
+
+
+    @classmethod
+    def parse_time_string(cls, time_string):
+        """Given a string input return HH:MM:SS format string, or None if it can't be done"""
+
+        # A quick google did not reveal a generic time parsing library, although
+        # there must be one.
+
+        time_regex = re.compile( r'(\d+)\.(\d+) (a|p)')
+        match = time_regex.match(time_string)
+        
+        if not match: return None
+        
+        hour, minute, am_or_pm = match.groups()
+
+        hour   = int(hour)
+        minute = int(minute)
+        
+
+        if am_or_pm == 'p' and hour < 12:
+            hour += 12 
+
+        return '%02u:%02u:00' % (hour,minute)
+        
+
+
+
+
+
+
+
+
+
+
+

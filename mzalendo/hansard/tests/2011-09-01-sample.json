@@ -1,10 +1,7 @@
 {
    "meta" : {
-      "end_date" : "2011-09-01",
       "end_time" : "18:30:00",
-      "start_date" : "2011-09-01",
-      "start_time" : "14:30:00",
-      "venue" : "NATIONAL ASSEMBLY"
+      "start_time" : "14:30:00"
    },
    "transcript" : [
       {

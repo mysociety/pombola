@@ -86,13 +86,6 @@ class HansardSourceParsingTest(TestCase):
     sample_html        = os.path.join( local_dir, '2011-09-01-sample.html' )
     expected_data_json = os.path.join( local_dir, '2011-09-01-sample.json' )
 
-
-    @unittest.skip( "Tests not written yet" )
-    def test_converting_pdf_to_html(self):
-        # FIXME - write these tests on a machine that supports the conversion
-        pass
-
-
     
     def test_converting_pdf_to_html(self):
         """Test that the pdf becomes the html that we expect"""
@@ -126,4 +119,16 @@ class HansardSourceParsingTest(TestCase):
         # FIXME
         self.assertEqual( data['meta'], expected['meta'] )
         
+    def test_parse_time_string(self):
         
+        time_tests = {
+            '1.00 p.m.':  '13:00:00',
+            '1.00 a.m.':  '01:00:00',
+            '12.00 p.m.': '12:00:00', # am and pm make no sense at noon or midnight - but define what we want to happen
+            '12.30 p.m.': '12:30:00',
+            'foo.bar':      None,
+        }
+        
+        for string, output in time_tests.items():
+            self.assertEqual( Source.parse_time_string( string ), output )
+
