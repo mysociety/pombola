@@ -21,6 +21,17 @@ except AttributeError:
     raise ImproperlyConfigured("Could not find HANSARD_CACHE setting - please set it")
 
 
+# EXCEPTIONS
+
+class SourceUrlCouldNotBeRetrieved(Exception):
+    pass
+
+class SourceCouldNotParseTimeString(Exception):
+    pass
+
+
+
+
 class SourceQuerySet(models.query.QuerySet):
     def requires_processing(self):
         return self.filter( last_processed=None )
@@ -67,7 +78,10 @@ class Source(models.Model):
         Return as a file object the resource that the url is pointing to.
         
         Should check the local cache first, and fetch and store if it is not
-        found there. Returns none if URL could not be retrieved.
+        found there.
+        
+        Raises a SourceUrlCouldNotBeRetrieved exception if URL could not be
+        retrieved.
         """
         cache_file_path = self.cache_file_path()
         
@@ -82,7 +96,8 @@ class Source(models.Model):
         response, content = h.request(self.url)
 
         # Crude handling of response - is there an is_success method?
-        if response.status != 200: return None
+        if response.status != 200:
+            raise SourceUrlCouldNotBeRetrieved("status code: %s, url: %s" % (response.status, self.url) )
 
         with open(cache_file_path, "w") as new_cache_file:
             new_cache_file.write(content)        
@@ -373,7 +388,7 @@ class Source(models.Model):
 
     @classmethod
     def parse_time_string(cls, time_string):
-        """Given a string input return HH:MM:SS format string, or None if it can't be done"""
+        """Given a string input return HH:MM:SS format string, or raises SourceCouldNotParseTimeString if it can't be done"""
 
         # A quick google did not reveal a generic time parsing library, although
         # there must be one.
@@ -381,7 +396,8 @@ class Source(models.Model):
         time_regex = re.compile( r'(\d+)\.(\d+) (a|p)')
         match = time_regex.match(time_string)
         
-        if not match: return None
+        if not match:
+            raise SourceCouldNotParseTimeString( "bad time string: '%s'" % time_string )
         
         hour, minute, am_or_pm = match.groups()
 

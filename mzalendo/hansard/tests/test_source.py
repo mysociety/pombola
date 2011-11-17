@@ -8,7 +8,7 @@ import subprocess
 from django.test import TestCase
 from django.utils import unittest
 
-from hansard.models import Source
+from hansard.models import Source, SourceUrlCouldNotBeRetrieved, SourceCouldNotParseTimeString
 
 class HansardSourceTest(TestCase):
 
@@ -60,7 +60,11 @@ class HansardSourceTest(TestCase):
         """Check that urls that 404 are handled correctly"""
         source = self.source
         source.url = source.url + 'xxx'        
-        self.assertEqual( source.file(), None )
+        self.assertRaises(
+            SourceUrlCouldNotBeRetrieved,
+            Source.file,
+            source
+        )
         self.assertFalse( os.path.exists( source.cache_file_path() ))
 
 
@@ -126,9 +130,15 @@ class HansardSourceParsingTest(TestCase):
             '1.00 a.m.':  '01:00:00',
             '12.00 p.m.': '12:00:00', # am and pm make no sense at noon or midnight - but define what we want to happen
             '12.30 p.m.': '12:30:00',
-            'foo.bar':      None,
         }
         
         for string, output in time_tests.items():
             self.assertEqual( Source.parse_time_string( string ), output )
+
+        self.assertRaises(
+            SourceCouldNotParseTimeString,
+            Source.parse_time_string,
+            'foo.bar'
+        )
+
 
