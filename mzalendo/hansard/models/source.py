@@ -8,8 +8,6 @@ from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-from hansard.xml_handlers import HansardXML
-
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, NavigableString, Tag
 
 # check that the cache is setup and the directory exists
