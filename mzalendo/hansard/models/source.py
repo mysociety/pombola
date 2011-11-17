@@ -178,7 +178,10 @@ class Source(models.Model):
         )
 
         contents = soup.body.contents
-        br_count = 0
+
+        # counters to use in the loops below
+        br_count    = 0
+        page_number = 1
 
         filtered_contents = []
         
@@ -206,13 +209,16 @@ class Source(models.Model):
             
             # check for something that looks like the page number - when found
             # delete it and the two lines that follow
-            if tag_name == 'b' and re.match( r'\d+\s{10,}', line.text ):
-                print "skipping page number line: " + line.text
-                while len(contents):
-                    item = contents.pop(0)
-                    if type(item) == Tag and item.name == 'hr': break
-                continue
-
+            if tag_name == 'b':
+                page_number_match = re.match( r'(\d+)\s{10,}', line.text )
+                if page_number_match:
+                    # up the page number - the match is the page that we are leaving
+                    page_number = int(page_number_match.group(0)) + 1
+                    # skip on to the next page
+                    while len(contents):
+                        item = contents.pop(0)
+                        if type(item) == Tag and item.name == 'hr': break
+                    continue
 
             # if br_count > 0:
             #     print 'br_count: ' + str(br_count)
@@ -229,6 +235,7 @@ class Source(models.Model):
                 tag_name     = tag_name,
                 text_content = text_content,
                 br_count     = br_count,
+                page_number  = page_number,
             ))
 
             br_count = 0
@@ -272,6 +279,7 @@ class Source(models.Model):
                 meaningful_content.append({
                     'type': 'scene',
                     'text': line['text_content'],
+                    'page_number': line['page_number'],
                 })
                 continue
             
@@ -280,6 +288,7 @@ class Source(models.Model):
                 meaningful_content.append({
                     'type': 'heading',
                     'text': line['text_content'],
+                    'page_number': line['page_number'],
                 })
                 last_speaker_name  = ''
                 last_speaker_title = ''
@@ -303,6 +312,7 @@ class Source(models.Model):
                     'speaker_title': last_speaker_title,
                     'text': speech,
                     'type': 'speech',
+                    'page_number': line['page_number'],
                 })
                 
                 # print meaningful_content[-1]
@@ -323,6 +333,7 @@ class Source(models.Model):
             meaningful_content.append({
                 'type': 'other',
                 'text': line['text_content'],
+                'page_number': line['page_number'],
             })
             last_speaker_name  = ''
             last_speaker_title = ''
