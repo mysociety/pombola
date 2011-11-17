@@ -7,6 +7,7 @@ import datetime
 
 from django.db import models
 from django.conf import settings
+from django.db import transaction
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, NavigableString, Tag
 
@@ -319,26 +320,29 @@ class KenyaParser():
             end_time   = data['meta'].get('end_time', None),
         )
         sitting.save()
-        
-        counter = 0
 
-        for line in data['transcript']:
-
-            counter += 1
-
-            entry = Entry(
-                sitting       = sitting,
-                type          = line['type'],
-                page_number   = line['page_number'],
-                text_counter  = counter,
-                speaker_name  = line.get('speaker_name',  ''),
-                speaker_title = line.get('speaker_title', ''),
-                content       = line['text'],
-            )
-            entry.save()
-
-        source.last_processed = datetime.datetime.now()
+        source.last_processing_attempt = datetime.datetime.now()
         source.save()
+        
+        with transaction.commit_on_success():
+            counter = 0
+            for line in data['transcript']:
+                
+                counter += 1
+                
+                entry = Entry(
+                    sitting       = sitting,
+                    type          = line['type'],
+                    page_number   = line['page_number'],
+                    text_counter  = counter,
+                    speaker_name  = line.get('speaker_name',  ''),
+                    speaker_title = line.get('speaker_title', ''),
+                    content       = line['text'],
+                )
+                entry.save()
+
+            source.last_processing_success = datetime.datetime.now()
+            source.save()
         
         return None
 

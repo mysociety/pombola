@@ -32,7 +32,7 @@ class SourceCouldNotParseTimeString(Exception):
 
 class SourceQuerySet(models.query.QuerySet):
     def requires_processing(self):
-        return self.filter( last_processed=None )
+        return self.filter( last_processing_attempt=None )
 
 
 class SourceManager(models.Manager):
@@ -50,7 +50,9 @@ class Source(models.Model):
     name           = models.CharField(max_length=200, unique=True)
     date           = models.DateField()
     url            = models.URLField()
-    last_processed = models.DateTimeField(blank=True, null=True)
+
+    last_processing_attempt = models.DateTimeField(blank=True, null=True)
+    last_processing_success = models.DateTimeField(blank=True, null=True)
 
     objects = SourceManager()
 

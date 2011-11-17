@@ -11,8 +11,8 @@ import models
 
 
 class SourceAdmin(admin.ModelAdmin):
-    list_display  = [ 'name', 'date', 'last_processed' ]
-    list_filter = ('date', 'last_processed')
+    list_display  = [ 'name', 'date', 'last_processing_success', 'last_processing_attempt' ]
+    list_filter = ('date', 'last_processing_success')
     date_hierarchy = 'date'
     
 

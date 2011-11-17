@@ -6,7 +6,8 @@
             "date": "2008-07-24", 
             "url": "http://www.parliament.go.ke/index.php?option=com_docman&task=doc_download&gid=807&Itemid=", 
             "name": "Hansard 24.07.08", 
-            "last_processed": null
+            "last_processing_success": null,
+            "last_processing_attempt": null
         }
     }, 
     {
@@ -16,7 +17,8 @@
             "date": "2008-07-23", 
             "url": "http://www.parliament.go.ke/index.php?option=com_docman&task=doc_download&gid=805&Itemid=", 
             "name": "Hansard 23.07.08A", 
-            "last_processed": null
+            "last_processing_success": null,
+            "last_processing_attempt": null
         }
     }, 
     {
@@ -26,7 +28,8 @@
             "date": "2008-07-23", 
             "url": "http://www.parliament.go.ke/index.php?option=com_docman&task=doc_download&gid=806&Itemid=", 
             "name": "Hansard 23.07.08P", 
-            "last_processed": null
+            "last_processing_success": null,
+            "last_processing_attempt": null
         }
     }, 
     {

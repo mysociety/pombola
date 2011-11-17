@@ -74,12 +74,24 @@ class HansardSourceTest(TestCase):
         # There should just be one source that needs processing
         self.assertEqual( Source.objects.all().requires_processing().count(), 1 )
 
-        # give the source a last_processed time
-        self.source.last_processed = datetime.date.today()
+
+        # Check that a source that we have attempted to process, but not successfully is not tried again
+        self.source.last_processing_attempt = datetime.datetime.now()
+        self.source.last_processing_success = None
         self.source.save()
 
         # none should match now
         self.assertEqual( Source.objects.all().requires_processing().count(), 0 )
+
+
+        # give the source a last_processing_success time
+        self.source.last_processing_attempt = datetime.datetime.now()
+        self.source.last_processing_success = datetime.datetime.now()
+        self.source.save()
+
+        # none should match now
+        self.assertEqual( Source.objects.all().requires_processing().count(), 0 )
+
 
 
 

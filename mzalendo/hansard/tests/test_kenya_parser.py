@@ -91,7 +91,7 @@ class KenyaParserTest(TestCase):
         
         # check source now marked as processed
         source = Source.objects.get(id=source.id) # reload from db
-        self.assertEqual( source.last_processed.date(), datetime.date.today() )
+        self.assertEqual( source.last_processing_success.date(), datetime.date.today() )
         
         # check sitting created
         sitting_qs = Sitting.objects.filter(source=source)
