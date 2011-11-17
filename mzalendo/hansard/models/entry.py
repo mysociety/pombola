@@ -39,5 +39,6 @@ class Entry(models.Model):
     class Meta:
         ordering = ['-sitting', 'text_counter']
         app_label = 'hansard'
+        verbose_name_plural = 'entries'
         
 
