@@ -93,6 +93,17 @@ class HansardSourceParsingTest(TestCase):
         pass
 
 
+    
+    def test_converting_pdf_to_html(self):
+        """Test that the pdf becomes the html that we expect"""
+        pdf_file = open( self.sample_pdf, 'r' )
+        html = Source.convert_pdf_to_html( pdf_file )
+
+        expected_html = open( self.sample_html, 'r' ).read()
+        
+        self.assertEqual( html, expected_html )
+
+
     def test_converting_html_to_data(self):
         """test the convert_pdf_to_data function"""
         

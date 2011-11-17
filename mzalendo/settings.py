@@ -229,7 +229,7 @@ LOGGING = {
 
 # Configure the Hansard app
 HANSARD_CACHE = os.path.join( base_dir, "hansard_cache" )
-
+HANSARD_PDF_TO_HTML_HOST = config.get('HANSARD_PDF_TO_HTML_HOST')
 
 # User profile related
 AUTH_PROFILE_MODULE = 'user_profile.UserProfile'

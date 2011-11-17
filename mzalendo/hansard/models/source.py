@@ -96,6 +96,7 @@ class Source(models.Model):
         id_str= "%05u" % self.id
 
         # do some simple partitioning
+        # FIXME - put in something to prevent the test suite overwriting non-test files.
         aaa = id_str[-1]
         bbb = id_str[-2]
         cache_dir = os.path.join(HANSARD_CACHE, aaa, bbb)
@@ -110,8 +111,20 @@ class Source(models.Model):
     
     
     @classmethod
-    def covert_pdf_to_html(cls, pdf_file):
+    def convert_pdf_to_html(cls, pdf_file):
         """Given a PDF parse it and return the HTML string representing it"""
+
+        remote_host = settings.HANSARD_PDF_TO_HTML_HOST
+        
+        if remote_host:
+            return cls.convert_pdf_to_html_remote_machine(pdf_file, remote_host)
+        else:
+            return cls.convert_pdf_to_html_local_machine( pdf_file )
+
+
+    @classmethod
+    def convert_pdf_to_html_local_machine(cls, pdf_file):
+        """Use local pdftohtml binary to convert the pdf to html"""
 
         pdftohtml_cmd = 'pdftohtml'
 
@@ -127,12 +140,29 @@ class Source(models.Model):
 
         # get the version number of pdftohtml and check that it is acceptable - see
         # 'hansard/notes.txt' for issues with the output from different versions.
-        pdftohtml_version = run_pdftohtml( [ cmd, '-version', pdf_file.name ] )
+        pdftohtml_version = run_pdftohtml( [ pdftohtml_cmd, '-version', pdf_file.name ] )
         wanted_version = 'pdftohtml version 0.12.4'
         if wanted_version not in pdftohtml_version:
             raise Exception( "Bad pdftohtml version - got '%s' but want '%s'" % (pdftohtml_version, wanted_version) )
 
-        return run_pdftohtml( [ cmd, '-stdout', '-noframes', '-enc', 'UTF-8', pdf_file.name ] )
+        return run_pdftohtml( [ pdftohtml_cmd, '-stdout', '-noframes', '-enc', 'UTF-8', pdf_file.name ] )
+
+
+    @classmethod
+    def convert_pdf_to_html_remote_machine(cls, pdf_file, remote):
+        """Convert pdf on a remote machine"""
+        
+        bin_dir               = os.path.abspath( os.path.dirname( __file__ ) + '/../bin' )
+        remote_convert_script = os.path.join( bin_dir, 'convert_pdf_to_html_on_remote_machine.bash'  )
+
+        remote_pdftohtml = subprocess.Popen(
+            [ remote_convert_script, remote, pdf_file.name ],
+            shell = False,
+            stdout = subprocess.PIPE,
+        )
+
+        ( output, ignore ) = remote_pdftohtml.communicate()
+        return output
 
 
     @classmethod
