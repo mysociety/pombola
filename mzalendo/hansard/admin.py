@@ -22,10 +22,10 @@ class SittingAdmin(admin.ModelAdmin):
     date_hierarchy = 'start_date'
     
 
-class ChunkAdmin(admin.ModelAdmin):
-    list_display  = [ 'date', 'session', 'type', '__unicode__' ]
+class EntryAdmin(admin.ModelAdmin):
+    list_display  = [ 'sitting', 'type', 'speaker_name', '__unicode__' ]
     
 
 admin.site.register( models.Source,  SourceAdmin )
 admin.site.register( models.Sitting, SittingAdmin )
-admin.site.register( models.Chunk,   ChunkAdmin )
+admin.site.register( models.Entry,   EntryAdmin )

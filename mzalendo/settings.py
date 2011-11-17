@@ -228,7 +228,7 @@ LOGGING = {
 }
 
 # Configure the Hansard app
-HANSARD_CACHE = os.path.join( base_dir, "hansard_cache" )
+HANSARD_CACHE = os.path.join( base_dir, "../hansard_cache" )
 KENYA_PARSER_PDF_TO_HTML_HOST = config.get('KENYA_PARSER_PDF_TO_HTML_HOST')
 
 # User profile related

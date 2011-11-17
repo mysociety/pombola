@@ -232,6 +232,7 @@ class KenyaParser():
             # br_count away then we have the start of a speech.
             if (
                     line['tag_name']      == 'b'
+                and next_line
                 and next_line['tag_name'] == None
                 and next_line['br_count'] == 0
             ):
@@ -313,9 +314,9 @@ class KenyaParser():
         sitting = Sitting(
             source     = source,
             start_date = source.date,
-            start_time = data['meta']['start_time'],
+            start_time = data['meta'].get('start_time', None),
             end_date   = source.date,
-            end_time   = data['meta']['end_time'],
+            end_time   = data['meta'].get('end_time', None),
         )
         sitting.save()
         
@@ -327,6 +328,7 @@ class KenyaParser():
 
             entry = Entry(
                 sitting       = sitting,
+                type          = line['type'],
                 page_number   = line['page_number'],
                 text_counter  = counter,
                 speaker_name  = line.get('speaker_name',  ''),

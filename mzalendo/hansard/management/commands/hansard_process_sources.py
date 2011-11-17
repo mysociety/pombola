@@ -1,6 +1,6 @@
 from django.core.management.base import NoArgsCommand
 
-from hansard import models
+from hansard.models import Source
 from hansard.kenya_parser import KenyaParser
 
 class Command(NoArgsCommand):
