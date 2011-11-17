@@ -8,7 +8,7 @@ import subprocess
 from django.test import TestCase
 from django.utils import unittest
 
-from hansard.models import Source, SourceUrlCouldNotBeRetrieved, SourceCouldNotParseTimeString
+from hansard.models import Source, SourceUrlCouldNotBeRetrieved
 
 class HansardSourceTest(TestCase):
 
@@ -81,64 +81,5 @@ class HansardSourceTest(TestCase):
         # none should match now
         self.assertEqual( Source.objects.all().requires_processing().count(), 0 )
 
-
-
-class HansardSourceParsingTest(TestCase):
-
-    local_dir          = os.path.abspath( os.path.dirname( __file__ ) )
-    sample_pdf         = os.path.join( local_dir, '2011-09-01-sample.pdf'  )
-    sample_html        = os.path.join( local_dir, '2011-09-01-sample.html' )
-    expected_data_json = os.path.join( local_dir, '2011-09-01-sample.json' )
-
-    
-    def test_converting_pdf_to_html(self):
-        """Test that the pdf becomes the html that we expect"""
-        pdf_file = open( self.sample_pdf, 'r' )
-        html = Source.convert_pdf_to_html( pdf_file )
-
-        expected_html = open( self.sample_html, 'r' ).read()
-        
-        self.assertEqual( html, expected_html )
-
-
-    def test_converting_html_to_data(self):
-        """test the convert_pdf_to_data function"""
-        
-        html_file = open( self.sample_html, 'r')
-        html = html_file.read()
-
-        data = Source.convert_html_to_data( html=html )
-                
-        # Whilst developing the code this proved useful (on a mac at least)
-        # tmp = tempfile.NamedTemporaryFile( delete=False, suffix=".json" )
-        # tmp = open( '/tmp/mzalend_hansard_parse.json', 'w')
-        # tmp.write( json.dumps( data, sort_keys=True, indent=4 ) )
-        # tmp.close()        
-        # subprocess.call(['open', tmp.name ])
-                
-        expected = json.loads( open( self.expected_data_json, 'r'  ).read() )
-        
-        self.assertEqual( data['transcript'], expected['transcript'] )
-
-        # FIXME
-        self.assertEqual( data['meta'], expected['meta'] )
-        
-    def test_parse_time_string(self):
-        
-        time_tests = {
-            '1.00 p.m.':  '13:00:00',
-            '1.00 a.m.':  '01:00:00',
-            '12.00 p.m.': '12:00:00', # am and pm make no sense at noon or midnight - but define what we want to happen
-            '12.30 p.m.': '12:30:00',
-        }
-        
-        for string, output in time_tests.items():
-            self.assertEqual( Source.parse_time_string( string ), output )
-
-        self.assertRaises(
-            SourceCouldNotParseTimeString,
-            Source.parse_time_string,
-            'foo.bar'
-        )
 
 

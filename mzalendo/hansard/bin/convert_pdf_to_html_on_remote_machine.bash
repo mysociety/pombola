@@ -10,7 +10,7 @@ set -e
 # convert and then spits back the HTML over stdout
 
 # To use this script instead of doing the conversion on the local machine put a
-# value in the HANSARD_PDF_TO_HTML_HOST setting.
+# value in the KENYA_PARSER_PDF_TO_HTML_HOST setting.
 
 REMOTE=$1
 FILE=$2
