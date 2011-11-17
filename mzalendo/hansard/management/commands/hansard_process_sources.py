@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.management.base import NoArgsCommand
 
 from hansard.models import Source
@@ -11,6 +13,9 @@ class Command(NoArgsCommand):
 
         for source in Source.objects.all().requires_processing():
             print "Looking at %s" % source
+
+            source.last_processing_attempt = datetime.datetime.now()
+            source.save()
 
             pdf = source.file()
             html = KenyaParser.convert_pdf_to_html( pdf )

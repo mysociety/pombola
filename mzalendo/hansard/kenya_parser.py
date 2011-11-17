@@ -321,9 +321,6 @@ class KenyaParser():
         )
         sitting.save()
 
-        source.last_processing_attempt = datetime.datetime.now()
-        source.save()
-        
         with transaction.commit_on_success():
             counter = 0
             for line in data['transcript']:
