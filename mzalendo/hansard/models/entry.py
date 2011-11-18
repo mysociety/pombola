@@ -37,7 +37,7 @@ class Entry(models.Model):
         return "%s: %s" % (self.type, self.content[:100])
     
     class Meta:
-        ordering = ['-sitting', 'text_counter']
+        ordering = ['sitting', 'text_counter']
         app_label = 'hansard'
         verbose_name_plural = 'entries'
         

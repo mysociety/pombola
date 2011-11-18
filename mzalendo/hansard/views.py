@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from hansard.models import Sitting
 
 # import models
@@ -51,6 +51,11 @@ class IndexView(TemplateView):
         context['sittings'] = Sitting.objects.all()[0:10]
 
         return context
+
+
+class SittingView(DetailView):
+    model = Sitting
+
 
 # class BaseView ( View ):
 #     pass
