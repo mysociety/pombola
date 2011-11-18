@@ -16,6 +16,10 @@ class SourceAdmin(admin.ModelAdmin):
     date_hierarchy = 'date'
     
 
+class VenueAdmin(admin.ModelAdmin):
+    list_display  = [ 'slug', 'name' ]
+
+
 class SittingAdmin(admin.ModelAdmin):
     list_display  = [ 'start_date', 'start_time', 'end_date', 'end_time', 'source' ]
     list_filter = ['start_date']
@@ -27,5 +31,6 @@ class EntryAdmin(admin.ModelAdmin):
     
 
 admin.site.register( models.Source,  SourceAdmin )
+admin.site.register( models.Venue,   VenueAdmin )
 admin.site.register( models.Sitting, SittingAdmin )
 admin.site.register( models.Entry,   EntryAdmin )
