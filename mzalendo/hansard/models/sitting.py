@@ -2,14 +2,13 @@ import datetime
 import re
 
 from django.db import models
-from hansard.models import Source
+from hansard.models import Source, Venue
 
 class Sitting(models.Model):
 
     source = models.ForeignKey(Source)
+    venue  = models.ForeignKey(Venue)
     
-    # chamber/house <- future field if we need to track more than one
-
     start_date = models.DateField()
     start_time = models.TimeField( blank=True, null=True )
     end_date   = models.DateField( blank=True, null=True )
@@ -51,10 +50,10 @@ class Sitting(models.Model):
         # strip off trailing :00 seconds from times
         ret = re.sub( r':00(\s|$)', r'\1', ret )
                 
-        return ret
+        return self.venue.name + ' ' + ret
 
     class Meta:
-        # ordering = ['date', 'session', 'text_counter']
+        ordering = ['start_date']
         app_label = 'hansard'
         
 

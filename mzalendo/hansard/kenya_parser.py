@@ -11,7 +11,7 @@ from django.db import transaction
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, NavigableString, Tag
 
-from hansard.models import Source, Sitting, Entry
+from hansard.models import Source, Sitting, Entry, Venue
 
 # EXCEPTIONS
 class KenyaParserCouldNotParseTimeString(Exception):
@@ -262,7 +262,21 @@ class KenyaParser():
     def extract_meta_from_transcript(cls, transcript):
         reg = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
 
-        results = {}
+        # FIXME - should not hardcode this - but for Kenya it there is
+        # currently only one venue and it is not clear how others would be
+        # indentified
+
+        # Make sure it exists
+        venue, created = Venue.objects.get_or_create(
+            slug = 'national_assembly',
+            defaults = dict(
+                name = 'National Assembly'
+            )
+        )
+
+        results = {
+            'venue': venue.slug,
+        }
 
         for line in transcript:
             text = line.get('text', '')
@@ -312,14 +326,18 @@ class KenyaParser():
     def create_entries_from_data_and_source( cls, data, source ):
         """Create the needed sitting and entries"""
 
+        venue = Venue.objects.get( slug=data['meta']['venue'] )
+
         sitting = Sitting(
             source     = source,
+            venue      = venue,
             start_date = source.date,
             start_time = data['meta'].get('start_time', None),
             end_date   = source.date,
             end_time   = data['meta'].get('end_time', None),
         )
         sitting.save()
+        
 
         with transaction.commit_on_success():
             counter = 0

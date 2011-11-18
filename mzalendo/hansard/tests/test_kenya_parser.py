@@ -9,7 +9,7 @@ from django.test import TestCase
 from django.utils import unittest
 
 from hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
-from hansard.models import Source, Sitting, Entry
+from hansard.models import Source, Sitting, Entry, Venue
 
 
 class KenyaParserTest(TestCase):
@@ -19,6 +19,13 @@ class KenyaParserTest(TestCase):
     sample_html        = os.path.join( local_dir, '2011-09-01-sample.html' )
     expected_data_json = os.path.join( local_dir, '2011-09-01-sample.json' )
 
+    def setUp(self):
+        # create the venue
+        Venue(
+            slug = 'national_assembly',
+            name = 'National Assembly',
+        ).save()
+    
     
     def test_converting_pdf_to_html(self):
         """Test that the pdf becomes the html that we expect"""
@@ -105,7 +112,7 @@ class KenyaParserTest(TestCase):
         self.assertEqual( sitting.end_time,   datetime.time( 18, 30, 00 ) )
         
         # check correct venue set
-        print "FIXME - add venue"
+        self.assertEqual( sitting.venue.slug, 'national_assembly' )
         
         # check entries created and that we have the right number
         entries = sitting.entry_set
