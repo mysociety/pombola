@@ -48,7 +48,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
 
-        context['sittings'] = Sitting.objects.all()[0:10]
+        context['sittings'] = Sitting.objects.all() # FIXME - put a limit on here [0:10]
 
         return context
 
