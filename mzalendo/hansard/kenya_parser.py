@@ -50,7 +50,7 @@ class KenyaParser():
 
         # get the version number of pdftohtml and check that it is acceptable - see
         # 'hansard/notes.txt' for issues with the output from different versions.
-        pdftohtml_version = run_pdftohtml( [ pdftohtml_cmd, '-version', pdf_file.name ] )
+        pdftohtml_version = run_pdftohtml( [ pdftohtml_cmd, '-v' ] )
         wanted_version = 'pdftohtml version 0.12.4'
         if wanted_version not in pdftohtml_version:
             raise Exception( "Bad pdftohtml version - got '%s' but want '%s'" % (pdftohtml_version, wanted_version) )
