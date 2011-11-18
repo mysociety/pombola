@@ -46,4 +46,4 @@ django-social-auth
 selenium
 django-selenium
 
-BeautifulSoup
+BeautifulSoup>=3.2.0
