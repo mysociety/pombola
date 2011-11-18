@@ -1,7 +1,6 @@
-from django.conf.urls.defaults import patterns, include, url, handler404
-
-import views
+from django.conf.urls.defaults import patterns, include, url
+from hansard.views import IndexView
 
 urlpatterns = patterns('',
-    url(r'^$', views.default),
+    url( r'^$', IndexView.as_view() ),
 )

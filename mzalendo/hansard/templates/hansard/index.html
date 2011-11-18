@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load switch %}
+
+{% block title %}
+    Hansard
+{% endblock %}
+
+{% block content %}
+
+    <h1>Hansard</h1>
+
+    <h2>Most recent transcripts</h2>
+
+    <ul>
+        
+        {% for sitting in sittings %}
+        <li>{{ sitting }}</li>
+        {% empty %}
+        <li>There are no transcripts</li>
+        {% endfor %}
+        
+        
+    </ul>
+
+{% endblock %}

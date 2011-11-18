@@ -53,7 +53,7 @@ class Sitting(models.Model):
         return self.venue.name + ' ' + ret
 
     class Meta:
-        ordering = ['start_date']
+        ordering = ['-start_date']
         app_label = 'hansard'
         
 
