@@ -38,24 +38,25 @@ class KenyaParser():
 
         pdftohtml_cmd = 'pdftohtml'
 
-        def run_pdftohtml( args ):
-            pdftohtml = subprocess.Popen(
-                args,
-                shell = False,
-                stdout = subprocess.PIPE,
-            )
-
-            ( output, ignore ) = pdftohtml.communicate()
-            return output
-
         # get the version number of pdftohtml and check that it is acceptable - see
         # 'hansard/notes.txt' for issues with the output from different versions.
-        pdftohtml_version = run_pdftohtml( [ pdftohtml_cmd, '-v' ] )
+        # Version output is sent to stderr
+        ( ignore_me, version_error ) = subprocess.Popen(
+            [ pdftohtml_cmd, '-v' ],
+            shell = False,
+            stderr = subprocess.PIPE,
+        ).communicate()
         wanted_version = 'pdftohtml version 0.12.4'
-        if wanted_version not in pdftohtml_version:
-            raise Exception( "Bad pdftohtml version - got '%s' but want '%s'" % (pdftohtml_version, wanted_version) )
+        if wanted_version not in version_error:
+            raise Exception( "Bad pdftohtml version - got '%s' but want '%s'" % (version_error, wanted_version) )
 
-        return run_pdftohtml( [ pdftohtml_cmd, '-stdout', '-noframes', '-enc', 'UTF-8', pdf_file.name ] )
+        ( convert_output, ignore_me ) = subprocess.Popen(
+            [ pdftohtml_cmd, '-stdout', '-noframes', '-enc', 'UTF-8', pdf_file.name ],
+            shell = False,
+            stdout = subprocess.PIPE,
+        ).communicate()
+
+        return convert_output
 
 
     @classmethod
