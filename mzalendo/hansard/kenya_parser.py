@@ -161,12 +161,24 @@ class KenyaParser():
             br_count = line['br_count']
             
             # Join lines that have the same tag_name and are not too far apart
-            if (
+            same_tag_name_test = (
                     br_count <= 1
                 and len(merged_contents)
                 and line['tag_name'] == merged_contents[-1]['tag_name']
-            ):
+            )
+
+            # Italic text in the current unstyled text
+            inline_italic_test = (
+                    br_count == 0
+                and len(merged_contents)
+                and line['tag_name'] == 'i'
+                and merged_contents[-1]['tag_name'] == None
+            )
+            
+            # Merge lines tha meet one of the above tests
+            if ( same_tag_name_test or inline_italic_test ):
                 new_content = ' '.join( [ merged_contents[-1]['text_content'], line['text_content'] ] )
+                new_content = re.sub( r'\s+,', ',', new_content )
                 merged_contents[-1]['text_content'] = new_content
             else:
                 merged_contents.append( line )

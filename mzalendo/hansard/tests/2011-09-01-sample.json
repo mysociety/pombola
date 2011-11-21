@@ -319,6 +319,18 @@
       },
       {
          "page_number" : 3,
+         "text" : "[Some test items for the parser]",
+         "type" : "scene"
+      },
+      {
+         "page_number" : 3,
+         "speaker_name" : "Prof. Kaloki",
+         "speaker_title" : "The Temporary Deputy Speaker",
+         "text" : " I’d like to say some words in Latin, like ipso facto, and status quo blah blah.",
+         "type" : "speech"
+      },
+      {
+         "page_number" : 3,
          "text" : "MINISTERIAL STATEMENTS",
          "type" : "heading"
       },
