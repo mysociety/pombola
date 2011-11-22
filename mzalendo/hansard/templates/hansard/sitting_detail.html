@@ -7,24 +7,6 @@
 
 {% block content %}
 
-    <style type="text/css" media="screen">
-        ul.hansard_entries em {
-            font-style: italic;
-        }
-
-        ul.hansard_entries li {
-            margin-bottom: 0.5em;
-        }
-
-        ul.hansard_entries li.scene {
-            margin-left: 2em;
-        }
-
-        ul.hansard_entries li.speech p {
-            margin-left: 1em;
-        }
-    </style>
-
     <ul class="hansard_entries">
     {% for entry in sitting.entry_set.all %}
         <li class="{{ entry.type }}">

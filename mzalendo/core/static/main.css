@@ -292,3 +292,12 @@ div.markdown {
     content: '“'; }
   div.markdown blockquote p:after {
     content: '”'; }
+
+ul.hansard_entries em {
+  font-style: italic; }
+ul.hansard_entries li {
+  margin-bottom: 0.5em; }
+ul.hansard_entries li.scene {
+  margin-left: 2em; }
+ul.hansard_entries li.speech p {
+  margin-left: 1em; }
