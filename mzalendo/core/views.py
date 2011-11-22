@@ -170,8 +170,9 @@ def autocomplete(request):
     term = request.GET.get('term','')
     response_data = []
 
-    if len(term) >= 2:
-        sqs = SearchQuerySet().autocomplete(name_auto=term)
+    if len(term):
+        # using the autocomplete builtin didn't do partial matching.
+        sqs = SearchQuerySet().filter(name_auto__startswith=term)
         for result in sqs.all()[0:10]:
             response_data.append({
             	'url':   result.object.get_absolute_url(),
