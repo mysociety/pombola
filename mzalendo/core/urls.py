@@ -26,6 +26,7 @@ urlpatterns = patterns('core.views',
     # Haystack and other searches
     url(r'^search/', include('haystack.urls') ),
     url(r'^location/', 'location_search', name="location_search"),
+    url(r'^autocomplete', 'autocomplete', name="autocomplete"),
     
 
     # Ajax select

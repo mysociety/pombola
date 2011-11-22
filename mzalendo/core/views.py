@@ -1,11 +1,15 @@
-from django.shortcuts  import render_to_response, get_object_or_404, redirect
-from django.template   import RequestContext
-from django.views.generic.list_detail import object_detail, object_list
 from django.db.models import Count
 from django.db.models import Q
+from django.http import HttpResponse
+from django.shortcuts  import render_to_response, get_object_or_404, redirect
+from django.template   import RequestContext
+from django.utils import simplejson
+from django.views.generic.list_detail import object_detail, object_list
 
 from mzalendo.core import models
 from mzalendo.helpers import geocode
+
+from haystack.query import SearchQuerySet
 
 def home(request):
     """Homepage"""
@@ -161,4 +165,21 @@ def location_search(request):
         context_instance = RequestContext( request ),        
     )
 
+def autocomplete(request):
+    
+    term = request.GET.get('term','')
+    response_data = []
 
+    if len(term) >= 2:
+        sqs = SearchQuerySet().autocomplete(name_auto=term)
+        for result in sqs.all()[0:10]:
+            response_data.append({
+            	'url':   result.object.get_absolute_url(),
+            	'label': result.object.name(),
+            })
+    
+    return HttpResponse(
+        simplejson.dumps(response_data),
+        mimetype='application/json'
+    )
+    

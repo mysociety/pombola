@@ -17,6 +17,11 @@
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png?{{ settings.STATIC_GENERATION_NUMBER }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+        <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" /> 
+        
+
         {% if settings.GOOGLE_ANALYTICS_ACCOUNT %}
         <script type="text/javascript">
 
@@ -69,8 +74,25 @@
                     {% endif %}
                 </li>                 
                 <li>
+
+                    <script type="text/javascript" charset="utf-8">
+                        $(
+                            function() {
+                                $('#main_search_box').autocomplete({
+                                    source: "{% url autocomplete %}",
+                                    minLength: 2,
+                                    select: function( event, ui ) {
+                                    	if ( ui.item ) {
+                                            window.location = ui.item.url;
+                                    	}
+                                    }
+                                })
+                            }
+                        )
+                    </script>
+
                     <form action="{% url haystack_search %}" method="get">
-                        <input type="search" name="q" placeholder="search&hellip;" />
+                        <input id="main_search_box" type="search" name="q" placeholder="search&hellip;" />
                     </form>
                 </li>                 
             </ul>
