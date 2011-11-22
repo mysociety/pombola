@@ -116,6 +116,6 @@ class KenyaParserTest(TestCase):
         
         # check entries created and that we have the right number
         entries = sitting.entry_set
-        self.assertEqual( entries.count(), 63 )
+        self.assertEqual( entries.count(), 64 )
         
 

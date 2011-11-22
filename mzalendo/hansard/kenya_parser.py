@@ -223,12 +223,17 @@ class KenyaParser():
                 # do some quick smarts to see if we can extract a name from the
                 # start of the speech.
                 speech = line['text_content']
-                
+
                 matches = re.match( r'\(([^\)]+)\):(.*)', speech )
                 if matches:
                     last_speaker_title = last_speaker_name
                     last_speaker_name = matches.group(1)
                     speech = matches.group(2)
+                else:
+                    # strip leading colons that may have been missed when the
+                    # name was extracted (usually the colon was outside the
+                    # bold tags around the name)
+                    speech = re.sub( r'^:\s*', '', speech)
 
                 meaningful_content.append({
                     'speaker_name':  last_speaker_name,

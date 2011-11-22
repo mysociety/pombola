@@ -269,21 +269,21 @@
          "page_number" : 3,
          "speaker_name" : "Mr. Speaker",
          "speaker_title" : "",
-         "text" : ": Order, Member for North Imenti! Come to your question quickly.",
+         "text" : "Order, Member for North Imenti! Come to your question quickly.",
          "type" : "speech"
       },
       {
          "page_number" : 3,
          "speaker_name" : "Mr. Ruteere",
          "speaker_title" : "",
-         "text" : ": Mr. Speaker, Sir, my question is: Where the schools have put up three buildings, that is the dormitory, dining hall and a laboratory, is there not a shortfall when we do not have adequate classrooms or equipment for those classrooms?",
+         "text" : "Mr. Speaker, Sir, my question is: Where the schools have put up three buildings, that is the dormitory, dining hall and a laboratory, is there not a shortfall when we do not have adequate classrooms or equipment for those classrooms?",
          "type" : "speech"
       },
       {
          "page_number" : 3,
          "speaker_name" : "Mr. Kinyanjui",
          "speaker_title" : "",
-         "text" : ": Mr. Speaker, Sir, the guidelines … compete nationally.",
+         "text" : "Mr. Speaker, Sir, the guidelines … compete nationally.",
          "type" : "speech"
       },
       {
@@ -314,7 +314,7 @@
          "page_number" : 3,
          "speaker_name" : "Mr. Mwatela",
          "speaker_title" : "",
-         "text" : ": Indeed, the Member is right, that this matter should end up in the litigation in court.",
+         "text" : "Indeed, the Member is right, that this matter should end up in the litigation in court.",
          "type" : "speech"
       },
       {
@@ -326,7 +326,14 @@
          "page_number" : 3,
          "speaker_name" : "Prof. Kaloki",
          "speaker_title" : "The Temporary Deputy Speaker",
-         "text" : " I’d like to say some words in Latin, like ipso facto, and status quo blah blah.",
+         "text" : " I’d like to say some words in latin, like ipso facto, and status quo blah blah.",
+         "type" : "speech"
+      },
+      {
+         "page_number" : 3,
+         "speaker_name" : "Mr. Mwatela",
+         "speaker_title" : "",
+         "text" : "This line has a colon which is separate from the name of the speaker.",
          "type" : "speech"
       },
       {
