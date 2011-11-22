@@ -9,6 +9,12 @@
 
     <ul class="hansard_entries">
     {% for entry in sitting.entry_set.all %}
+
+        {% ifchanged %}
+            {# TODO - this is a resource hog as it leads to un-needed SQL queries for each entry #}
+            <li class="page_number">Page {{ entry.page_number }} of <a href="{{ entry.sitting.source.url }}">{{ entry.sitting.source }}</a></li>
+        {% endifchanged %}
+
         <li class="{{ entry.type }}">
             {% switch entry.type %}
                 {% case 'heading' %}

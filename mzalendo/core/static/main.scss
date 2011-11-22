@@ -334,4 +334,10 @@ ul.hansard_entries {
     li.speech p {
         margin-left: 1em;
     }
+
+    li.page_number {
+        text-align: right;
+        background: #eee;
+        padding: 0.2em;
+    }
 }
