@@ -17,7 +17,7 @@ class AutocompleteTest(unittest.TestCase):
         # create a load of test people in the database
         names = [
             'Adam Ant',
-            'Bob Smith',
+            'Bobby Smith',
             'Fred Jones',
             'Joe Bloggs',
             'Joe Smith',
@@ -39,9 +39,11 @@ class AutocompleteTest(unittest.TestCase):
             # input : expected names in response
 
             # test full first and partial last
-            'bob':       [ 'Bob Smith', ],
-            'bob sm':    [ 'Bob Smith', ],
-            'bob smith': [ 'Bob Smith', ],
+            'bob':         [ 'Bobby Smith', ],
+            'bob sm':      [ 'Bobby Smith', ],
+            'bobby sm':    [ 'Bobby Smith', ],
+            'bob smith':   [ 'Bobby Smith', ],
+            'bobby smith': [ 'Bobby Smith', ],
 
             # full names
             'joe':   [ 'Joe Bloggs', 'Joe Smith' ],
@@ -49,7 +51,7 @@ class AutocompleteTest(unittest.TestCase):
 
             # partial names
             'jo': [ 'Fred Jones', 'Joe Bloggs', 'Joe Smith', 'Josepth Smyth' ],
-            'sm': [ 'Bob Smith', 'Joe Smith', 'Josepth Smyth', ],            
+            'sm': [ 'Bobby Smith', 'Joe Smith', 'Josepth Smyth', ],            
 
             # no matches
             'foo': [],
