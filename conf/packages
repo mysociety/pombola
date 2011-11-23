@@ -23,7 +23,8 @@ python-virtualenv
 
 # Various micelaneous tools - needed for the python libraries to be built.
 bcrypt
-sudo brew install libjpeg
+
+# libjpeg - needed on non-debian. On debian installed as a requirement for others so no need to list seperately
 
 
 
