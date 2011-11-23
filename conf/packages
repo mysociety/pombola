@@ -1,12 +1,42 @@
-# needed to build the virtualenv
+
+# Debian packages that we need.
+
+# On non-debian systems you'll need to build these using the appropriate tools
+# (eg on Mac consider using Homebrew: http://mxcl.github.com/homebrew/).
+
+
+# Database - we use postgres with the postgis addons
+postgresql
+postgis
+
+
+# Search Index - Xapian http://xapian.org/
+libxapian22
+
+
+# Python - the language that the site is written in, and additional tools needed
+# to build the virtualenv - may already be included with your python install
 python-dev
 python-pip
 python-virtualenv
 
+
+# Various micelaneous tools - needed for the python libraries to be built.
+bcrypt
+sudo brew install libjpeg
+
+
+
+
+############################################################
+# The following can be installed by Python's pip into the virtual environment.
+# If you are not on Debian let pip do the installing for you.
+
 # Some dependencies in requirements.txt are listed as repos, so we need the
-# various repo management tools to fetch them
+# various repo management tools to fetch them.
 mercurial
 
+# May as well use the Debian maintained versions.
 python-docutils
 python-bcrypt
 python-markdown
