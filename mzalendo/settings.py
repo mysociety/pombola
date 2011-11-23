@@ -1,6 +1,7 @@
 # Django settings for mzalendo project.
 
 import os
+import shutil
 import sys
 import logging
 import setup_env
@@ -19,21 +20,23 @@ import setup_env
 # TODO - replace this with something much more robust
 IN_TEST_MODE = sys.argv[1:2] == ['test']
 
-# Print out a little warning - adds clutter to the test output but better than
-# letting a site go live and not notice that the test mode has been detected by
-# mistake
-if IN_TEST_MODE:
-    print "Running in test mode!"
-
 # Work out where we are to set up the paths correctly and load config
 base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..' ) )
 root_dir = os.path.abspath( os.path.join( base_dir, '..' ) )
 
+# print "base_dir: " + base_dir
+# print "root_dir: " + root_dir
+
+# Change the root dir in testing, and delete it to ensure that we have a clean
+# slate. Also rint out a little warning - adds clutter to the test output but
+# better than letting a site go live and not notice that the test mode has been
+# detected by mistake
 if IN_TEST_MODE:
     root_dir += '/testing'
-
-print "base_dir: " + base_dir
-print "root_dir: " + root_dir
+    if os.path.exists( root_dir ):
+        shutil.rmtree( root_dir )
+    print "Running in test mode! (testing root_dir is '%s')" % root_dir
+    
 
 # load the mySociety config
 from mysociety import config
