@@ -5,7 +5,7 @@ import shutil
 import sys
 import logging
 import setup_env
-
+import yaml
 
 # We need to work out if we are in test mode so that the various directories can
 # be changed so that the tests do not clobber the dev environment (eg media
@@ -39,8 +39,8 @@ if IN_TEST_MODE:
     
 
 # load the mySociety config
-from mysociety import config
-config.set_file( base_dir + "/conf/general.yml" )
+config_file = os.path.join( base_dir, 'conf', 'general.yml' )
+config = yaml.load( open(config_file, 'r') )
 
 if int(config.get('STAGING')):
     STAGING = True
