@@ -1,3 +1,5 @@
+import re
+
 from django.db.models import Count
 from django.db.models import Q
 from django.http import HttpResponse
@@ -165,20 +167,38 @@ def location_search(request):
         context_instance = RequestContext( request ),        
     )
 
+
 def autocomplete(request):
+    """Return autocomple JSON results"""
     
-    term = request.GET.get('term','')
+    term = request.GET.get('term','').strip()
     response_data = []
 
     if len(term):
-        # using the autocomplete builtin didn't do partial matching.
-        sqs = SearchQuerySet().filter(name_auto__startswith=term)
+
+        # Does not work - probably because the FLAG_PARTIAL is not set on Xapian
+        # (trying to set it in settings.py as documented appears to have no effect)
+        # sqs = SearchQuerySet().autocomplete(name_auto=term)
+
+        # Split the search term up into little bits
+        terms = re.split(r'\s+', term)
+
+        # Build up a query based on the bits
+        sqs = SearchQuerySet()        
+        for bit in terms:
+            # print "Adding '%s' to the '%s' query" % (bit,term)
+            sqs = sqs.filter_and(
+                name_auto__startswith = sqs.query.clean( bit )
+            )
+
+        # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
             response_data.append({
             	'url':   result.object.get_absolute_url(),
             	'label': result.object.name(),
             })
     
+    # send back the results as JSON
     return HttpResponse(
         simplejson.dumps(response_data),
         mimetype='application/json'
