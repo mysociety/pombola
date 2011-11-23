@@ -12,7 +12,6 @@ base_dir = os.path.abspath( os.path.split(__file__)[0] + '/..' )
 
 # specify the paths we want to add
 paths = (
-    os.path.normpath( base_dir + "/commonlib/pylib"),
     os.path.normpath( base_dir ),
     os.path.normpath( base_dir + "/mzalendo"),
 )
