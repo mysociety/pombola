@@ -1,11 +1,12 @@
-# TROUBLSHOOTING
+# TROUBLESHOOTING
 
 If something goes wrong please check the following for help. If problem not
 listed please add it after fixing.
 
 ## Web requests block
 
-If searches check that the external requests to Google or MaPit are not hanging.
+If location searches black then check that the external requests to Google or
+MaPit are not hanging.
 
 
 ## Location searches return old/bad data

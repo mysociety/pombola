@@ -1,17 +1,46 @@
 # Django settings for mzalendo project.
 
 import os
+import shutil
 import sys
 import logging
 import setup_env
+import yaml
+
+# We need to work out if we are in test mode so that the various directories can
+# be changed so that the tests do not clobber the dev environment (eg media
+# files, xapian search index, cached hansard downloads).
+
+# Tried various suggestions but most did not work. Eg detecting the 'outbox'
+# attribute on django.core.mail does not work as it is created after settings.py
+# is read.
+
+# This is absolutely horrid code - assumes that you only ever run tests via
+# './manage.py test'. It does work though...
+# TODO - replace this with something much more robust
+IN_TEST_MODE = sys.argv[1:2] == ['test']
 
 # Work out where we are to set up the paths correctly and load config
-base_dir = os.path.abspath( os.path.split(__file__)[0] + '/..' )
+base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..' ) )
+root_dir = os.path.abspath( os.path.join( base_dir, '..' ) )
+
 # print "base_dir: " + base_dir
+# print "root_dir: " + root_dir
+
+# Change the root dir in testing, and delete it to ensure that we have a clean
+# slate. Also rint out a little warning - adds clutter to the test output but
+# better than letting a site go live and not notice that the test mode has been
+# detected by mistake
+if IN_TEST_MODE:
+    root_dir += '/testing'
+    if os.path.exists( root_dir ):
+        shutil.rmtree( root_dir )
+    print "Running in test mode! (testing root_dir is '%s')" % root_dir
+    
 
 # load the mySociety config
-from mysociety import config
-config.set_file( base_dir + "/conf/general.yml" )
+config_file = os.path.join( base_dir, 'conf', 'general.yml' )
+config = yaml.load( open(config_file, 'r') )
 
 if int(config.get('STAGING')):
     STAGING = True
@@ -69,7 +98,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.normpath( os.path.join( base_dir, "../media_root/") )
+MEDIA_ROOT = os.path.normpath( os.path.join( root_dir, "media_root/") )
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -80,7 +109,7 @@ MEDIA_URL = '/media_root/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.normpath( os.path.join( base_dir, "../collected_static/") )
+STATIC_ROOT = os.path.normpath( os.path.join( root_dir, "collected_static/") )
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -314,7 +343,7 @@ PAGINATION_INVALID_PAGE_RAISES_404 = True
 # haystack config - interface to Xapian search engine
 HAYSTACK_SITECONF      = 'mzalendo.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
-HAYSTACK_XAPIAN_PATH   = os.path.abspath( base_dir + "/../mzalendo_xapian" )
+HAYSTACK_XAPIAN_PATH   = os.path.join( root_dir, "mzalendo_xapian" )
 
 # Admin autocomplete
 AJAX_LOOKUP_CHANNELS = {
@@ -330,7 +359,7 @@ AJAX_SELECT_INLINES   = None # we add the js and css ourselves in the header
 MAPIT_URL = config.get('MAPIT_URL')
 
 # misc settings
-HTTPLIB2_CACHE_DIR = os.path.abspath( base_dir + '/../httplib2_cache' )
+HTTPLIB2_CACHE_DIR = os.path.join( root_dir, 'httplib2_cache' )
 GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
 
 

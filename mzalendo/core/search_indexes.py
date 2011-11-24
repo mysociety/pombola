@@ -18,6 +18,7 @@ from mzalendo.core import models
 
 class PersonIndex(indexes.RealTimeSearchIndex):
     text = indexes.CharField(document=True, use_template=True)
+    name_auto = indexes.EdgeNgramField(model_attr='name')
 
 class PlaceIndex(indexes.RealTimeSearchIndex):
     text = indexes.CharField(document=True, use_template=True)
