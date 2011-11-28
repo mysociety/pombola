@@ -21,40 +21,17 @@
         
         {% endcomment %}
 
-        <!-- <link rel="stylesheet" type="text/css" href="/assets/css/basic.css" media="screen, handheld" />
-        <link rel="stylesheet" type="text/css" href="/assets/css/mobile.css" media="only screen and (min-width: 320px) and (max-width: 640px)" />
-        <link rel="stylesheet" type="text/css" href="/assets/css/desktop.css" media="only screen and (min-width: 640px)" /> -->
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/basic.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen, handheld" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mobile.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="only screen and (min-width: 320px) and (max-width: 640px)" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="only screen and (min-width: 640px)" />
 
         <!--[if lt IE 9]>
-            <link rel="stylesheet" type="text/css" href="/assets/css/desktop.css" />
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
         <![endif]-->
 
-        <!-- <script src="/assets/js/libs/modernizr.custom.js"></script> -->
-        <link href="{{ STATIC_URL }}css/main.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen" rel="stylesheet" type="text/css" />
-        <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png?{{ settings.STATIC_GENERATION_NUMBER }}">
-        
+        <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+        <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png?{{ settings.STATIC_GENERATION_NUMBER }}">
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-        <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" /> 
-        
-        <script src="{{ STATIC_URL }}js/main.js?{{ settings.STATIC_GENERATION_NUMBER }}" type="text/javascript" charset="utf-8"></script>
-
-        {% if settings.GOOGLE_ANALYTICS_ACCOUNT %}
-        <script type="text/javascript">
-
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}']);
-          _gaq.push(['_trackPageview']);
-
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-
-        </script>
-        {% endif %}
         
         {% block map_related_headers %}
         <script type="text/javascript">
@@ -64,83 +41,145 @@
           }
         </script>
         {% endblock %}
-
     </head>
     <body onload="initialize()">
-        <div id="wrapper">
+        <!-- {% include 'staging_header.html' %} -->
 
-        {% include 'staging_header.html' %}
-
-
-        <div id="header">
-            <div id="logo">
-                <a href="{% url home %}">Mzalendo</a> <sup><small>βeta</small></sup>
-            </div>
-
-            <ul>
-                <li>
-                    {% if request.user.is_authenticated  %}
+        <header id="site-header">
+            <div class="wrapper">
+                <a href="{% url home %}" id="logo">Mzalendo</a>
+                <menu style="display:none">
+                {% if request.user.is_authenticated  %}
                         {% firstof request.user.get_full_name request.user.username %} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
-                    {% else %}
-                        <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
-                        {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                            <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
-                        {% endif %}
-                        {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                            <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">fb</a>
-                        {% endif %}
+                {% else %}
+                    <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
+                    {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+                        <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
                     {% endif %}
-                </li>                 
-                <li>
+                    {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+                        <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">fb</a>
+                    {% endif %}
+                {% endif %}
+                </menu>
+                <form action="{% url haystack_search %}" method="get" id="search">
+                    <input id="main_search_box" type="text" name="q" placeholder="search&hellip;" />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </header>
 
-                    <form action="{% url haystack_search %}" method="get">
-                        <input id="main_search_box" type="search" name="q" placeholder="search&hellip;" />
-                    </form>
-                </li>                 
-            </ul>
-            
-            <br clear="both" />
-
+        <div id="main-menu">
+            <nav class="wrapper">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Find your MP</a></li>
+                    <li><a href="#">Constituencies</a></li>
+                    <li><a href="#">Democracy FAQs</a></li>
+                    <li><a href="#">Lest we forget</a></li>
+                    <li><a href="#">Hansard</a></li>
+                    <li><a href="#">Blogs</a></li>
+                    <li><a href="#">2012 Elections</a></li>
+                </ul>
+            </nav>
         </div>
 
-        <div id="content">
+        <div id="breadcrumb">
+            <nav class="wrapper">
+                <ul>
+                    <li><a href="/">Home</a> &raquo;</li>
+                    <li><a href="/">Find your MP</a> &raquo;</li>
+                    <li class="page-title">MP Profile</li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="page" class="wrapper">
             {% block content %}
             {% endblock %}
         </div>
 
+        <footer id="site-footer">
+            <div class="wrapper">
+                <p>By MySociety</p>
+            </div>
 
-        <div id="footer">
+            <div id="footer" style="display:none;">
+                <ul class="nav">
+                    <li><a href="{% url person_list %}">people</a></li>
+                    <li><a href="{% url organisation_list %}">organisations</a></li>
+                    <li><a href="{% url place_list %}">places</a></li>
+                </ul>
 
-            <ul class="nav">
-                <li><a href="{% url person_list %}">people</a></li>
-                <li><a href="{% url organisation_list %}">organisations</a></li>
-                <li><a href="{% url place_list %}">places</a></li>
-            </ul>
+                <ul class="utilities">
+                    <li><a href="{% url privacy %}">privacy</a></li>
+                    <li><a href="http://eepurl.com/gPMJL">Subscribe to our newsletter</a></li>
+                </ul>
+                
+                <ul class="utilities">
+                    <li><a href="https://github.com/mysociety/mzalendo/issues">issues</a></li>
+                    <li><a href="https://github.com/mysociety/mzalendo/wiki">wiki</a></li>
+                    <li><a href="{% url admin:index %}">admin</a></li>
+                    {% if object %}
+                        <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
+                    {% endif %}
+                </ul>
 
-            <ul class="utilities">
-                <li><a href="{% url privacy %}">privacy</a></li>
-                <li><a href="http://eepurl.com/gPMJL">Subscribe to our newsletter</a></li>
-            </ul>
-            
-            <ul class="utilities">
-                <li><a href="https://github.com/mysociety/mzalendo/issues">issues</a></li>
-                <li><a href="https://github.com/mysociety/mzalendo/wiki">wiki</a></li>
-                <li><a href="{% url admin:index %}">admin</a></li>
-                {% if object %}
-                    <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
+                {% if settings.STAGING %}
+                <ul class="utilities">
+                    <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+                </ul>
                 {% endif %}
-            </ul>
+            </div>
+        </footer>
+        <script type="text/javascript">
+            /*
+             * Test for mobile / desktop and load appropriate libs/scripts
+             */
+            // this is not yet ideal... it reacts a bit slow if the cdn fails
+            Modernizr.load([
+                {
+                    test : Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)'),
+                    yep : ['{{ STATIC_URL }}js/libs/zepto-0.8.min.js?{{ settings.STATIC_GENERATION_NUMBER }}', '{{ STATIC_URL }}js/mobile-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}'],
+                    nope : '//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js',
+                    complete: function () {
+                        // only run this if mq failed - e.g. desktop or no mq support (IE)
+                        if(Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)') === false) {
+                            // test for jquery
+                            if ( !window.jQuery ) {
+                                // not downloaded from CDN, so get local
+                                Modernizr.load([
+                                    {
+                                        load : '{{ STATIC_URL }}js/libs/jquery-1.7.0.min.js?{{ settings.STATIC_GENERATION_NUMBER }}',
+                                        complete : function () {
+                                            // once local has been fetched, check for jQuery object again and load functions if there
+                                            if ( window.jQuery ) {
+                                                Modernizr.load('{{ STATIC_URL }}js/desktop-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}');
+                                            }
+                                        }
+                                    }
+                                ]);
+                            }else{
+                                // if jQuery object is there, load in the functions
+                                Modernizr.load('{{ STATIC_URL }}js/desktop-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}');
+                            }
+                        }
+                    }
+                }
+                
+                // load jquery ui stuff here for desktop
+                // <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript" charset="utf-8"><//script>
+                // <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" /> 
+            ]);
+        </script>
 
-            {% if settings.STAGING %}
-            <ul class="utilities">
-                <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
-            </ul>
-            {% endif %}
-
-
-        </div>
-
-
-        </div>
+        {% if settings.GOOGLE_ANALYTICS_ACCOUNT %}
+        <!-- mathiasbynens.be/notes/async-analytics-snippet -->
+        <script type="text/javascript">
+            var _gaq=[["_setAccount","{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}"],["_trackPageview"]];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+            g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+            s.parentNode.insertBefore(g,s)}(document,"script"));
+        </script>
+        {% endif %}
     </body>
 </html>

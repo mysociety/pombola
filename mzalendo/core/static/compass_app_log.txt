@@ -32,3 +32,11 @@ Load paths:
 2011-11-28 15:35:38 overwrite css/main.css 
 2011-11-28 15:35:44 overwrite css/main.css 
 2011-11-28 15:35:53 overwrite css/main.css 
+2011-11-28 15:45:23    create css/basic.css 
+2011-11-28 15:45:23    create css/desktop.css 
+2011-11-28 15:45:23    create css/mobile.css 
+2011-11-28 15:47:09 overwrite css/basic.css 
+2011-11-28 15:47:13 identical css/basic.css 
+2011-11-28 15:48:29 overwrite css/desktop.css 
+2011-11-28 15:48:31 identical css/desktop.css 
+2011-11-28 16:26:36 overwrite css/mobile.css 
