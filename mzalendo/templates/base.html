@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>{% block title %}{% endblock %} :: Mzalendo</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0;">
+        <meta http-equiv="cleartype" content="on">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
         {% comment %}
 
             The 'STATIC_GENERATION_NUMBER' is used to force the caches to fetch
@@ -13,15 +20,25 @@
             https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/
         
         {% endcomment %}
-        <link href="{{ STATIC_URL }}main.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen" rel="stylesheet" type="text/css" /> 
+
+        <!-- <link rel="stylesheet" type="text/css" href="/assets/css/basic.css" media="screen, handheld" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/mobile.css" media="only screen and (min-width: 320px) and (max-width: 640px)" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/desktop.css" media="only screen and (min-width: 640px)" /> -->
+
+        <!--[if lt IE 9]>
+            <link rel="stylesheet" type="text/css" href="/assets/css/desktop.css" />
+        <![endif]-->
+
+        <!-- <script src="/assets/js/libs/modernizr.custom.js"></script> -->
+        <link href="{{ STATIC_URL }}css/main.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen" rel="stylesheet" type="text/css" />
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png?{{ settings.STATIC_GENERATION_NUMBER }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+        
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
         <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" /> 
         
-        <script src="{{ STATIC_URL }}main.js?{{ settings.STATIC_GENERATION_NUMBER }}" type="text/javascript" charset="utf-8"></script>
+        <script src="{{ STATIC_URL }}js/main.js?{{ settings.STATIC_GENERATION_NUMBER }}" type="text/javascript" charset="utf-8"></script>
 
         {% if settings.GOOGLE_ANALYTICS_ACCOUNT %}
         <script type="text/javascript">

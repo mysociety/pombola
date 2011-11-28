@@ -6,7 +6,8 @@
   color: #000;
   font-size: 12px;
   padding: 0.25em;
-  text-align: center; }
+  text-align: center;
+}
 
 div.error {
   border: 2px solid #f00;
@@ -14,7 +15,9 @@ div.error {
   text-align: center;
   font-size: 125%;
   padding: 0.5em;
-  margin: 1em 0; }
+  margin: 1em 0;
+}
 
 pre {
-  font-family: monospace; }
+  font-family: monospace;
+}

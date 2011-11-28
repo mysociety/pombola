@@ -1,0 +1,34 @@
+2011-11-28 15:33:43 identical css/ie.css 
+2011-11-28 15:33:43     error sass/main.scss (Line 1: File to import not found or unreadable: reset.
+Load paths:
+  /Users/imac1/Sites/MySociety/mzalendo/mzalendo_root/mzalendo/core/static/sass
+  /Applications/compass.app/Contents/Resources/ruby/compass_0.11/compass-0.11.5/frameworks/blueprint/stylesheets
+  /Applications/compass.app/Contents/Resources/ruby/compass_0.11/compass-0.11.5/frameworks/compass/stylesheets
+  /Applications/compass.app/Contents/Resources/ruby/compass_extensions/compass-960-plugin-f4bfe8555a7d2cae09bc/stylesheets
+  /Applications/compass.app/Contents/Resources/ruby/compass_0.11/html5-boilerplate-1.0.0/stylesheets
+  Compass::SpriteImporter)
+2011-11-28 15:33:43 overwrite css/main.css 
+2011-11-28 15:33:43 identical css/print.css 
+2011-11-28 15:33:43 identical css/screen.css 
+2011-11-28 15:33:49 identical css/ie.css 
+2011-11-28 15:33:49     error sass/main.scss (Line 2: File to import not found or unreadable: common.
+Load paths:
+  /Users/imac1/Sites/MySociety/mzalendo/mzalendo_root/mzalendo/core/static/sass
+  /Applications/compass.app/Contents/Resources/ruby/compass_0.11/compass-0.11.5/frameworks/blueprint/stylesheets
+  /Applications/compass.app/Contents/Resources/ruby/compass_0.11/compass-0.11.5/frameworks/compass/stylesheets
+  /Applications/compass.app/Contents/Resources/ruby/compass_extensions/compass-960-plugin-f4bfe8555a7d2cae09bc/stylesheets
+  /Applications/compass.app/Contents/Resources/ruby/compass_0.11/html5-boilerplate-1.0.0/stylesheets
+  Compass::SpriteImporter)
+2011-11-28 15:33:49 overwrite css/main.css 
+2011-11-28 15:33:49 identical css/print.css 
+2011-11-28 15:33:49 overwrite css/reset.css 
+2011-11-28 15:33:49 identical css/screen.css 
+2011-11-28 15:35:26 overwrite css/common.css 
+2011-11-28 15:35:26 identical css/ie.css 
+2011-11-28 15:35:26 overwrite css/main.css 
+2011-11-28 15:35:26 identical css/print.css 
+2011-11-28 15:35:26 identical css/reset.css 
+2011-11-28 15:35:26 identical css/screen.css 
+2011-11-28 15:35:38 overwrite css/main.css 
+2011-11-28 15:35:44 overwrite css/main.css 
+2011-11-28 15:35:53 overwrite css/main.css 
