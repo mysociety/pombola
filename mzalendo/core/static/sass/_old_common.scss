@@ -1,0 +1,24 @@
+/*
+    Styling common to both admin and frontend UI
+*/
+
+#staging_header {
+    background-color: #faa;
+    color: #000;
+    font-size: 12px;
+    padding: 0.25em;
+    text-align: center;
+}
+
+div.error {
+    border: 2px solid #f00;
+    background-color: #fcc;
+    text-align: center;
+    font-size: 125%;
+    padding: 0.5em;
+    margin: 1em 0;
+}
+
+pre {
+    font-family: monospace;
+}
