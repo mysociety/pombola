@@ -103,8 +103,19 @@ josh [at] supercooldesign.co.uk
   background: -ms-linear-gradient(#000000, #555555);
   background: linear-gradient(#000000, #555555);
 }
+#main-menu nav {
+  text-align: center;
+}
 #main-menu nav ul {
-  overflow: hidden;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  width: auto;
+}
+#main-menu nav ul {
+  *display: inline;
 }
 #main-menu nav ul li {
   display: inline;
@@ -120,6 +131,7 @@ josh [at] supercooldesign.co.uk
   border-bottom: 0;
   font-size: 16px;
   font-weight: normal;
+  padding: 10px 16px;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
   background: -webkit-linear-gradient(#000000, #555555);
   background: -moz-linear-gradient(#000000, #555555);

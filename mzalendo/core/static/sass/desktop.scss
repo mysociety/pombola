@@ -89,8 +89,11 @@ josh [at] supercooldesign.co.uk
   background:$colour5;
   @include background(linear-gradient($colour5, $colour4/1.4));
   nav {
+    text-align:center;
     ul {
-      overflow:hidden;
+      @include inline-block;
+      // overflow:hidden;
+      width:auto;
       li {
         display:inline;
         float:left;
@@ -107,6 +110,7 @@ josh [at] supercooldesign.co.uk
             size:16px;
             weight:normal;
           }
+          padding:10px 16px;
           @include background(linear-gradient($colour5, $colour4/1.4));
           &:hover {
             @include background(linear-gradient($colour4/1.4, $colour5));
