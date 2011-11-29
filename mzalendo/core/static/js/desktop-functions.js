@@ -1,3 +1,4 @@
+// load all other jquery related resources
 Modernizr.load(['//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js','//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css']);
 
 // tabs
@@ -32,6 +33,16 @@ function hideShow(elem, trig) {
 
 
 $(function(){
+  /*
+   * auto complete
+   */
+  $('#main_search_box').autocomplete({
+    source: "/autocomplete",
+    minLength: 2,
+    select: function(event, ui) {
+      if (ui.item) return window.location = ui.item.url;
+    }
+  });
   /*
    * simple tabs
    */

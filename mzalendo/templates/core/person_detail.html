@@ -6,11 +6,12 @@
 
 {% block content %}
     <div class="title-space">
-        <h1>{{ object.title }}</h1>
+        <h1>{{ object.title }} {{ object.name }}</h1>
+
         {% if object.is_mp %}
             <p>Kenyan Member of Parliament (MP) Profile Page</p>
         {% endif %}
-        <p>{{ object.name }}</p>
+        
         {% if object.name != object.legal_name %}
             <p>Full name: {{ object.legal_name }}</p>
         {% endif %}
@@ -126,32 +127,8 @@
         </div>
         <!-- /SAMPLE -->
 
-        <!-- SAMPLE -->
-        <h3>Contact Details</h3>
-        <div class="vcard">
-            {% include "core/contact_list.html" with contacts=object.contacts.all %}
-            <span class="label">Tel</span>
-            <div class="tel">+1-234-567-8910</div>
-
-            <span class="label">Email</span>
-            <a class="email" href="mailto:peter.munya@yahoo.com">peter.munya@yahoo.com</a>
-
-            <span class="label">Post</span>
-            <div class="adr">
-                <div class="street-address">P.O. Box 59052</div>
-                <span class="locality">Some city</span>
-                <span class="region">Nairobi</span>
-                <span class="postal-code">94301</span>
-                <span class="country-name">Kenya</span>
-            </div>
-
-            <span class="label">Links</span>
-            <div class="links">
-                <a class="url" href="http://facebook.com">Facebook</a>
-                <a class="url" href="http://twitter.com">Twitter</a>
-            </div>
-        </div>
-        <!-- /SAMPLE -->
+        
+        {% include "core/contact_list.html" with contacts=object.contacts.all %}
     </div>
 
     <div class="large-container">

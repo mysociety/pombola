@@ -100,13 +100,9 @@ h1, h2, h3, h4 {
   color: black;
 }
 
-p, .vcard {
+p {
   font-size: 14px;
   line-height: 20px;
-}
-p .adr, .vcard .adr {
-  line-height: 15px;
-  padding-top: 4px;
 }
 
 a {
@@ -114,6 +110,14 @@ a {
 }
 a:hover {
   color: #87c43c;
+}
+
+.vcard li.address p {
+  line-height: 15px;
+  padding-top: 4px;
+}
+.vcard a {
+  text-decoration: none;
 }
 
 h1 {
@@ -693,9 +697,18 @@ dl dd {
   background-color: white;
 }
 #page .profile-info .vcard {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
   overflow: hidden;
 }
-#page .profile-info .vcard .label {
+#page .profile-info .vcard li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#page .profile-info .vcard li .label {
   text-transform: uppercase;
   color: gray;
   font-size: 11px;
@@ -704,31 +717,8 @@ dl dd {
   width: 50px;
   margin-left: 10px;
 }
-#page .profile-info .vcard .tel,
-#page .profile-info .vcard .email,
-#page .profile-info .vcard .adr,
-#page .profile-info .vcard .links {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  clear: right;
-  float: left;
-  margin-bottom: 10px;
-  font-size: 12px;
-}
-#page .profile-info .vcard .tel,
-#page .profile-info .vcard .email,
-#page .profile-info .vcard .adr,
-#page .profile-info .vcard .links {
-  *display: inline;
-}
-#page .profile-info .vcard .adr span {
-  display: block;
-}
-#page .profile-info .vcard .url {
-  display: block;
+#page .profile-info .vcard li p {
+  padding-left: 80px;
 }
 #page .large-container p {
   margin-left: 10px;

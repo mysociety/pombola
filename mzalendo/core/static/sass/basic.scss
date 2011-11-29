@@ -53,18 +53,23 @@ p, h1, h2, h3 {
 h1, h2, h3, h4 {
   color:$colour5;
 }
-p, .vcard {
+p {
   font-size:14px;
   line-height:20px;
-  .adr {
-    line-height:15px;
-    padding-top:4px;
-  }
 }
 a {
   color:$colour1;
   &:hover {
     color:$colour2;
+  }
+}
+.vcard {
+  li.address p {
+    line-height:15px;
+    padding-top:4px;
+  }
+  a {
+    text-decoration:none;
   }
 }
 h1 {
@@ -410,31 +415,21 @@ dl {
       }
     }
     .vcard {
+      @include list-reset-soft;
       overflow:hidden;
-      .label {
-        text-transform:uppercase;
-        color:$colour8;
-        font-size:11px;
-        float:left;
-        clear:left;
-        width:50px;
-        margin-left:10px;
-      }
-      .tel,
-      .email,
-      .adr,
-      .links {
-        @include inline-block;
-        clear:right;
-        float:left;
-        margin-bottom:10px;
-        font-size:12px;
-      }
-      .adr span {
-        display:block;
-      }
-      .url {
-        display:block;    
+      li {
+        .label {
+          text-transform:uppercase;
+          color:$colour8;
+          font-size:11px;
+          float:left;
+          clear:left;
+          width:50px;
+          margin-left:10px;
+        }
+        p {
+          padding-left:80px;
+        }
       }
     }
   }

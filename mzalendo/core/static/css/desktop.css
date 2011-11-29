@@ -317,7 +317,7 @@ josh [at] supercooldesign.co.uk
 #page .profile-info .constituency-party ul li a:hover {
   background: #d40000;
 }
-#page .profile-info .vcard .label {
+#page .profile-info .vcard li .label {
   margin: 0;
 }
 #page .large-container {
