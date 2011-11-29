@@ -104,6 +104,10 @@ p, .vcard {
   font-size: 14px;
   line-height: 20px;
 }
+p .adr, .vcard .adr {
+  line-height: 15px;
+  padding-top: 4px;
+}
 
 a {
   color: #009245;
@@ -577,6 +581,7 @@ dl dd {
 }
 #page .profile-pic img {
   width: 100px;
+  height: auto;
 }
 #page .small-container h3.scorecard-overall {
   display: block;
@@ -677,10 +682,11 @@ dl dd {
   border-top: 2px solid white;
 }
 #page .profile-info .constituency-party ul li a {
+  font-size: 13px;
   display: block;
   background: #f6f6f6 url(../images/chevron-right.png) right center no-repeat;
   color: black;
-  padding: 10px;
+  padding: 0 10px;
   text-decoration: none;
 }
 #page .profile-info .constituency-party ul li a:hover {

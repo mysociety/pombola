@@ -284,7 +284,7 @@ josh [at] supercooldesign.co.uk
   font-size: 13px;
 }
 #page .profile-info {
-  height: 200px;
+  min-height: 200px;
   width: 210px;
   position: absolute;
   top: 210px;

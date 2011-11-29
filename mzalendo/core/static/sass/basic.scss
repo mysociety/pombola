@@ -56,6 +56,10 @@ h1, h2, h3, h4 {
 p, .vcard {
   font-size:14px;
   line-height:20px;
+  .adr {
+    line-height:15px;
+    padding-top:4px;
+  }
 }
 a {
   color:$colour1;
@@ -309,6 +313,7 @@ dl {
     width:100px;
     img {
       width:100px;
+      height:auto;
     }
   }
   .small-container {
@@ -391,10 +396,11 @@ dl {
         li {
           border-top:2px solid $colour6;
           a {
+            font-size:13px;
             display:block;
             background:$colour9 url(../images/chevron-right.png) right center no-repeat;
             color:$colour5;
-            padding:10px;
+            padding:0 10px;
             text-decoration:none;
             &:hover {
               background-color:$colour6;
