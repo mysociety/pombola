@@ -485,58 +485,61 @@ dl {
         display:none;
       }
     }
-    ul.comments {
-      @include list-reset-soft;
-      li {
-        @include inline-block;
-        position:relative;
-        background:$colour9;
-        padding:10px;
-        margin-bottom:5px;
-        img {
-          width:60px;
-          height:60px;
-          border:5px solid $colour7;
-          float:left;
-          margin:0 20px 10px 0;
-        }
-        section {
-          float:left;
-          max-width:590px;
-          p {
-            margin-left:0;
-            margin-right:0;
-            &.meta {
-              font: {
-                style:italic;
-                size:13px;
-              }
+    ul.comments li section {
+      max-width:590px;
+    }
+  }
+  ul.comments {
+    @include list-reset-soft;
+    li {
+      @include inline-block;
+      position:relative;
+      background:$colour9;
+      padding:10px;
+      margin-bottom:5px;
+      img {
+        width:60px;
+        height:60px;
+        border:5px solid $colour7;
+        float:left;
+        margin:0 20px 10px 0;
+      }
+      section {
+        float:left;
+        max-width:850px;
+        p {
+          margin-left:0;
+          margin-right:0;
+          &.meta {
+            font: {
+              style:italic;
+              size:13px;
             }
           }
-          h4 {
-            font-weight:bold;
-          }
-          a.read-more {
-            @include button-reset-text;
-            float:right;
-          }
-          ul {
-            @include list-reset-copy;
-            &.tools {
-              @include list-reset;
-              position:absolute;
-              right:10px;
-              top:10px;
-              li {
-                margin-left:5px;
-                a {
-                  @include button-reset-text;
-                  &.like {
-                    @include button-text-green;
-                  }
-                  &.report {
-                    @include button-text-red;
-                  }
+        }
+        h4 {
+          font-weight:bold;
+        }
+        a.read-more {
+          @include button-reset-text;
+          float:right;
+        }
+        ul {
+          @include list-reset-copy;
+          &.tools {
+            @include list-reset;
+            position:absolute;
+            right:10px;
+            top:10px;
+            li {
+              margin-left:5px;
+              a {
+                @include button-reset-text;
+                &.like {
+                  @include button-text-green;
+                }
+                &.report {
+                  @include button-text-red;
                 }
               }
             }

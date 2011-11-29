@@ -100,7 +100,6 @@ $(function(){
     $("#tab-nav ul li[rel='"+hash+"']").addClass('active');
   });
 
-
   /*
    * scorecard
    */

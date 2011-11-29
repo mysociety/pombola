@@ -423,10 +423,10 @@ josh [at] supercooldesign.co.uk
   position: relative;
   top: -1px;
 }
-#page .large-container #comments {
+#page #comments {
   display: block;
 }
-#page .large-container #comments .big-btn-text-green {
+#page #comments .big-btn-text-green {
   float: right;
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -434,10 +434,10 @@ josh [at] supercooldesign.co.uk
   vertical-align: middle;
   *vertical-align: auto;
 }
-#page .large-container #comments .big-btn-text-green {
+#page #comments .big-btn-text-green {
   *display: inline;
 }
-#page .large-container #comments h3 {
+#page #comments h3 {
   clear: both;
 }
 #page .social-and-tools {

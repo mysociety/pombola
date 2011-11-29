@@ -364,15 +364,15 @@ josh [at] supercooldesign.co.uk
       position:relative;
       top:-1px;
     }
-    #comments {
-      display:block;
-      .big-btn-text-green {
-        float:right;
-        @include inline-block;
-      }
-      h3 {
-        clear:both;
-      }
+  }
+  #comments {
+    display:block;
+    .big-btn-text-green {
+      float:right;
+      @include inline-block;
+    }
+    h3 {
+      clear:both;
     }
   }
   .social-and-tools {

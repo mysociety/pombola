@@ -768,18 +768,21 @@ dl dd {
 #page .large-container #comments .big-btn-text-green {
   display: none;
 }
-#page .large-container ul.comments {
+#page .large-container ul.comments li section {
+  max-width: 590px;
+}
+#page ul.comments {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-#page .large-container ul.comments li {
+#page ul.comments li {
   list-style-type: none;
   padding: 0;
   margin: 0;
   border: 0;
 }
-#page .large-container ul.comments li {
+#page ul.comments li {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -790,32 +793,32 @@ dl dd {
   padding: 10px;
   margin-bottom: 5px;
 }
-#page .large-container ul.comments li {
+#page ul.comments li {
   *display: inline;
 }
-#page .large-container ul.comments li img {
+#page ul.comments li img {
   width: 60px;
   height: 60px;
   border: 5px solid #e6e6e6;
   float: left;
   margin: 0 20px 10px 0;
 }
-#page .large-container ul.comments li section {
+#page ul.comments li section {
   float: left;
-  max-width: 590px;
+  max-width: 850px;
 }
-#page .large-container ul.comments li section p {
+#page ul.comments li section p {
   margin-left: 0;
   margin-right: 0;
 }
-#page .large-container ul.comments li section p.meta {
+#page ul.comments li section p.meta {
   font-style: italic;
   font-size: 13px;
 }
-#page .large-container ul.comments li section h4 {
+#page ul.comments li section h4 {
   font-weight: bold;
 }
-#page .large-container ul.comments li section a.read-more {
+#page ul.comments li section a.read-more {
   cursor: pointer;
   background: gray;
   color: white;
@@ -832,15 +835,15 @@ dl dd {
   border-radius: 2px;
   float: right;
 }
-#page .large-container ul.comments li section a.read-more:hover {
+#page ul.comments li section a.read-more:hover {
   background: #a0a0a0;
   color: white;
 }
-#page .large-container ul.comments li section ul {
+#page ul.comments li section ul {
   padding-left: 30px;
   margin-bottom: 20px;
 }
-#page .large-container ul.comments li section ul li {
+#page ul.comments li section ul li {
   font-size: 14px;
   line-height: 20px;
   list-style: disc;
@@ -848,7 +851,7 @@ dl dd {
   background: none;
   padding: 0;
 }
-#page .large-container ul.comments li section ul.tools {
+#page ul.comments li section ul.tools {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -856,7 +859,7 @@ dl dd {
   right: 10px;
   top: 10px;
 }
-#page .large-container ul.comments li section ul.tools li {
+#page ul.comments li section ul.tools li {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -864,14 +867,14 @@ dl dd {
   float: left;
   display: inline;
 }
-#page .large-container ul.comments li section ul.tools li a {
+#page ul.comments li section ul.tools li a {
   float: left;
   display: block;
 }
-#page .large-container ul.comments li section ul.tools li {
+#page ul.comments li section ul.tools li {
   margin-left: 5px;
 }
-#page .large-container ul.comments li section ul.tools li a {
+#page ul.comments li section ul.tools li a {
   cursor: pointer;
   background: gray;
   color: white;
@@ -887,11 +890,11 @@ dl dd {
   -khtml-border-radius: 2px;
   border-radius: 2px;
 }
-#page .large-container ul.comments li section ul.tools li a:hover {
+#page ul.comments li section ul.tools li a:hover {
   background: #a0a0a0;
   color: white;
 }
-#page .large-container ul.comments li section ul.tools li a.like {
+#page ul.comments li section ul.tools li a.like {
   cursor: pointer;
   background: gray;
   color: white;
@@ -908,14 +911,14 @@ dl dd {
   border-radius: 2px;
   background: #87c43c;
 }
-#page .large-container ul.comments li section ul.tools li a.like:hover {
+#page ul.comments li section ul.tools li a.like:hover {
   background: #a0a0a0;
   color: white;
 }
-#page .large-container ul.comments li section ul.tools li a.like:hover {
+#page ul.comments li section ul.tools li a.like:hover {
   background: #96d942;
 }
-#page .large-container ul.comments li section ul.tools li a.report {
+#page ul.comments li section ul.tools li a.report {
   cursor: pointer;
   background: gray;
   color: white;
@@ -932,11 +935,11 @@ dl dd {
   border-radius: 2px;
   background: #d40000;
 }
-#page .large-container ul.comments li section ul.tools li a.report:hover {
+#page ul.comments li section ul.tools li a.report:hover {
   background: #a0a0a0;
   color: white;
 }
-#page .large-container ul.comments li section ul.tools li a.report:hover {
+#page ul.comments li section ul.tools li a.report:hover {
   background: red;
 }
 #page .social-and-tools .fb-like,
