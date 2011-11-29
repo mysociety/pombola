@@ -321,9 +321,16 @@ div.error {
   border-top:4px solid $colour1;
   padding:10px;
   background:$colour7;
+  overflow:hidden;
   p {
     font-style:italic;
     color:$colour4;
+  }
+  ul {
+    @include list-reset-soft;
+    float:left;
+    width:200px;
+    margin-right:30px;
   }
 }
 

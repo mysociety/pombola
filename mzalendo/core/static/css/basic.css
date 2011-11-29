@@ -587,10 +587,25 @@ div.error {
   border-top: 4px solid #009245;
   padding: 10px;
   background: #e6e6e6;
+  overflow: hidden;
 }
 #site-footer p {
   font-style: italic;
   color: #777777;
+}
+#site-footer ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  float: left;
+  width: 200px;
+  margin-right: 30px;
+}
+#site-footer ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 #page {
