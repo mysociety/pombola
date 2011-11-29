@@ -1,3 +1,5 @@
+Modernizr.load(['//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js','//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css']);
+
 // tabs
 function simpleTabs(elem)
 {
@@ -30,6 +32,7 @@ function hideShow(elem, trig) {
 
 
 $(function(){
+  alert('woo');
   /*
    * simple tabs
    */

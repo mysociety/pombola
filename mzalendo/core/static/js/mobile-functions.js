@@ -1,4 +1,3 @@
-
 // Mobile boilerplate helper function (https://github.com/h5bp/mobile-boilerplate/blob/master/js/mylibs/helper.js)
 // Hide URL Bar for iOS and Android by Scott Jehl
 // https://gist.github.com/1183357
@@ -53,8 +52,7 @@ $(function(){
    */
   // add appropriate stuff to head
   // <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
-  document.write('<meta name="HandheldFriendly" content="True">');
-  document.write('<meta name="MobileOptimized" content="320">');
+  $('head').append('<meta name="HandheldFriendly" content="True">').append('<meta name="MobileOptimized" content="320">');
   
   $('.social-and-tools').append('<ul><li><a href="/" class="m-fb">Share page via Facebook</a></li><li><a href="/" class="m-twitter">Share page via Twitter</a></li></ul>');
 

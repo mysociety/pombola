@@ -21,16 +21,16 @@
         
         {% endcomment %}
 
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/basic.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen, handheld" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mobile.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="only screen and (min-width: 320px) and (max-width: 640px)" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="only screen and (min-width: 640px)" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/basic.css" media="screen, handheld" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mobile.css" media="only screen and (min-width: 320px) and (max-width: 640px)" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css" media="only screen and (min-width: 640px)" />
 
         <!--[if lt IE 9]>
-            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css" />
         <![endif]-->
 
-        <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
-        <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png?{{ settings.STATIC_GENERATION_NUMBER }}">
+        <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
+        <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
 
         
         {% block map_related_headers %}
@@ -139,7 +139,7 @@
             Modernizr.load([
                 {
                     test : Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)'),
-                    yep : ['{{ STATIC_URL }}js/libs/zepto-0.8.min.js?{{ settings.STATIC_GENERATION_NUMBER }}', '{{ STATIC_URL }}js/mobile-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}'],
+                    yep : ['{{ STATIC_URL }}js/libs/zepto-0.8.min.js', '{{ STATIC_URL }}js/mobile-functions.js'],
                     nope : '//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js',
                     complete: function () {
                         // only run this if mq failed - e.g. desktop or no mq support (IE)
@@ -149,26 +149,22 @@
                                 // not downloaded from CDN, so get local
                                 Modernizr.load([
                                     {
-                                        load : '{{ STATIC_URL }}js/libs/jquery-1.7.0.min.js?{{ settings.STATIC_GENERATION_NUMBER }}',
+                                        load : '{{ STATIC_URL }}js/libs/jquery-1.7.0.min.js',
                                         complete : function () {
                                             // once local has been fetched, check for jQuery object again and load functions if there
                                             if ( window.jQuery ) {
-                                                Modernizr.load('{{ STATIC_URL }}js/desktop-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}');
+                                                Modernizr.load('{{ STATIC_URL }}js/desktop-functions.js');
                                             }
                                         }
                                     }
                                 ]);
                             }else{
                                 // if jQuery object is there, load in the functions
-                                Modernizr.load('{{ STATIC_URL }}js/desktop-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}');
+                                Modernizr.load('{{ STATIC_URL }}js/desktop-functions.js');
                             }
                         }
                     }
                 }
-                
-                // load jquery ui stuff here for desktop
-                // <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript" charset="utf-8"><//script>
-                // <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" /> 
             ]);
         </script>
 
