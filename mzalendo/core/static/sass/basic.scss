@@ -161,7 +161,10 @@ dl {
       width:147px;
       background:url(../images/m-logo.png) 0 center no-repeat;
     }
-    menu {
+    menu#site-user-tools {
+      display:none; // SORT THIS
+    }
+    menu#m-top-tools {
       float:right;
       button {
         @include button-reset;

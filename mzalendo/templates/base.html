@@ -48,18 +48,20 @@
         <header id="site-header">
             <div class="wrapper">
                 <a href="{% url home %}" id="logo">Mzalendo</a>
-                <menu style="display:none">
-                {% if request.user.is_authenticated  %}
-                        {% firstof request.user.get_full_name request.user.username %} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
-                {% else %}
-                    <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
-                    {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                        <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
+                <menu id="site-user-tools">
+                    <ul>
+                    {% if request.user.is_authenticated  %}
+                            <li>{% firstof request.user.get_full_name request.user.username %} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)</li>
+                    {% else %}
+                        <li><a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a></li>
+                        {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+                            <li><a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a></li>
+                        {% endif %}
+                        {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
+                            <li><a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">facebook</a></li>
+                        {% endif %}
                     {% endif %}
-                    {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                        <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">fb</a>
-                    {% endif %}
-                {% endif %}
+                    </ul>
                 </menu>
                 <form action="{% url haystack_search %}" method="get" id="search">
                     <input id="main_search_box" type="text" name="q" placeholder="search&hellip;" />

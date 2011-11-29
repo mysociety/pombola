@@ -400,10 +400,13 @@ dl dd {
   width: 147px;
   background: url(../images/m-logo.png) 0 center no-repeat;
 }
-#site-header .wrapper menu {
+#site-header .wrapper menu#site-user-tools {
+  display: none;
+}
+#site-header .wrapper menu#m-top-tools {
   float: right;
 }
-#site-header .wrapper menu button {
+#site-header .wrapper menu#m-top-tools button {
   cursor: pointer;
   display: block;
   border: none;
@@ -421,7 +424,7 @@ dl dd {
   display: inline;
   border-left: 1px solid white;
 }
-#site-header .wrapper menu button.m-icon-nav {
+#site-header .wrapper menu#m-top-tools button.m-icon-nav {
   text-indent: 0;
   text-transform: uppercase;
   height: 42px;
@@ -429,16 +432,16 @@ dl dd {
   padding: 0 15px 0 10px;
   background: url(../images/m-menu-nub.png) right center no-repeat;
 }
-#site-header .wrapper menu button.m-icon-nav.active {
+#site-header .wrapper menu#m-top-tools button.m-icon-nav.active {
   background: url(../images/m-menu-nub-r.png) right center no-repeat;
 }
-#site-header .wrapper menu button.icon-search {
+#site-header .wrapper menu#m-top-tools button.icon-search {
   height: 42px;
   width: 42px;
   margin-left: 10px;
   background: url(../images/search-icon.png) center no-repeat;
 }
-#site-header .wrapper menu button.icon-search.active {
+#site-header .wrapper menu#m-top-tools button.icon-search.active {
   background: url(../images/close.png) center no-repeat;
 }
 #site-header .wrapper #search {

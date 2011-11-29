@@ -32,7 +32,6 @@ function hideShow(elem, trig) {
 
 
 $(function(){
-  alert('woo');
   /*
    * simple tabs
    */

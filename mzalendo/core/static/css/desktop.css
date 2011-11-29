@@ -37,6 +37,35 @@ josh [at] supercooldesign.co.uk
   position: relative;
   overflow: visible;
 }
+#site-header .wrapper menu#site-user-tools {
+  display: block;
+  position: absolute;
+  right: 200px;
+  top: 15px;
+}
+#site-header .wrapper menu#site-user-tools ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li {
+  color: #fff;
+  margin-left: 10px;
+  float: left;
+}
+#site-header .wrapper menu#site-user-tools ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+#site-header .wrapper menu#site-user-tools ul li a:hover {
+  text-decoration: underline;
+}
 #site-header .wrapper #logo {
   position: absolute;
   left: 0;

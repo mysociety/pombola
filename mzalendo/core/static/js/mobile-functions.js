@@ -61,7 +61,7 @@ $(function(){
    */
   // prep
   $('#main-menu, #search').hide();
-  $('#search').before('<menu><button class="nav-trigger m-icon-nav">menu</button><button class="search-trigger icon-search">search</button></menu>');
+  $('#search').before('<menu id="m-top-tools"><button class="nav-trigger m-icon-nav">menu</button><button class="search-trigger icon-search">search</button></menu>');
 
   // nav
   $('.nav-trigger').live('click', function(){
