@@ -43,7 +43,7 @@
         {% endblock %}
     </head>
     <body onload="initialize()">
-        <!-- {% include 'staging_header.html' %} -->
+        {% include 'staging_header.html' %}
 
         <header id="site-header">
             <div class="wrapper">
@@ -156,14 +156,14 @@
                                         complete : function () {
                                             // once local has been fetched, check for jQuery object again and load static libs and functions if there
                                             if ( window.jQuery ) {
-                                                Modernizr.load(['{{ STATIC_URL }}js/jquery.autocomplete.min.js', '{{ STATIC_URL }}js/desktop-functions.js']);
+                                                Modernizr.load(['{{ STATIC_URL }}js/libs/jquery.autocomplete.min.js', '{{ STATIC_URL }}js/desktop-functions.js']);
                                             }
                                         }
                                     }
                                 ]);
                             }else{
                                 // if jQuery object is there, load in the rest of the static libs and functions
-                                Modernizr.load(['{{ STATIC_URL }}js/jquery.autocomplete.min.js', '{{ STATIC_URL }}js/desktop-functions.js']);
+                                Modernizr.load(['{{ STATIC_URL }}js/libs/jquery.autocomplete.min.js', '{{ STATIC_URL }}js/desktop-functions.js']);
                             }
                         }
                     }
