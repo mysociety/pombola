@@ -5,7 +5,7 @@
 
 <h2 class="tab-nav" rel="#comments"><a href="{% get_comment_list_url object %}">Comments ({{ comment_count }})</a></h2>
 
-to be got via ajax
+this link - {% get_comment_list_url object %} - to be got via ajax, so we don't load it by default on the mobile view
 
-{% include 'comments/list.html' %}
+<!-- {% include 'comments/list.html' %} -->
 <!-- There are <a id="view_comments_link" href="{% get_comment_list_url object %}">{{ comment_count }} comments</a> for {{ object.name }}. -->
