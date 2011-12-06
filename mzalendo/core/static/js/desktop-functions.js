@@ -1,18 +1,35 @@
 // load all other jquery related resources
 Modernizr.load(['//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js','//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css']);
 
-// tabs
-function simpleTabs(elem)
-{
-  var tc = elem.attr('rel');
-  if(!$(tc).hasClass('open'))
-  {
-    //hide/show tab content
-    $('#tab-nav ul li.active').removeClass('active');
-    $(elem).addClass('active');
-    $('.tab.open').removeClass('open').hide();
-    $(tc).addClass('open').show();
+// Show a tab and hide the others. Load content from remote source if needed.
+function activateSimpleTab( $heading_element ) {
+    
+  // Check that we have something to work with
+  if ( ! $heading_element.size() ) return false
+
+  var tab_content_id = $heading_element.attr('rel');
+  var $tab_content = $(tab_content_id);
+
+  // If this tab is already open don't open it again
+  if ( $tab_content.hasClass('open') )
+    return true;
+
+  // hide any currently active tabs
+  $('#tab-nav ul li.active').removeClass('active');
+  $('.tab.open').removeClass('open');
+  $('.tab').not('.open').hide();
+  
+  // Show and activate the new tab
+  $heading_element.addClass('active');
+  $tab_content.addClass('open').show();
+
+  // load content using ajax if the div has an href
+  // TODO: use a cleaner way to specify this - probably best to have a global object and tell it that certain tabs have special opening behaviour
+  var content_url = $tab_content.attr('href')
+  if ( content_url ) {
+      $tab_content.load(content_url)
   }
+  
 }
 
 //generic re-usable hide or show with class states
@@ -60,17 +77,10 @@ $(function(){
 
   if(window.location.hash != '')
   {
-    //strip out default active states
-    $('#tab-nav ul li.active').removeClass('active');
-
-    //get hash from url
+    // get hash from url and activate it
     var hash = window.location.hash;
-    $('#tab-nav ul').find("li[rel='"+hash+"']").addClass('active');
-
-    //make the hashed tab active and hide all others
-    var simpleTabActive = $('#tab-nav ul li.active').attr('rel');
-    $(simpleTabActive).addClass('open');
-    $('.tab').not('.open').hide();
+    $heading_element = $('li[rel='+hash+']');
+    activateSimpleTab($heading_element);
   }
   else
   {
@@ -89,14 +99,14 @@ $(function(){
   $("#tab-nav ul li a").click(function(e){
     e.preventDefault();
     window.location.hash = $(this).parent('li').attr('rel');
-    simpleTabs($(this).parent('li'));
+    activateSimpleTab($(this).parent('li'));
   });
 
   $(".tab-static-link").click(function(e){
     var hash = $(this).attr('rel');
     window.location.hash = hash;
     e.preventDefault();
-    simpleTabs($(this));
+    activateSimpleTab($(this));
     $("#tab-nav ul li[rel='"+hash+"']").addClass('active');
   });
 

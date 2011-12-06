@@ -46,6 +46,23 @@ def list_for(request, module_name, slug):
         },
         context_instance=RequestContext(request)
     )
+    
+
+def list_for_tab(request, module_name, slug):
+    """Display comments, but just the contents for the tab"""
+
+    obj = get_object( module_name, slug )
+
+    comment_list = obj.comments.all()[0:5]
+
+    return render_to_response(
+        'comments/list_for_tab.html',
+        {
+            'comment_list': comment_list,
+        },
+        context_instance=RequestContext(request)
+    )
+    
 
 
 
