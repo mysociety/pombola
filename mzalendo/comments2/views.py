@@ -58,6 +58,7 @@ def list_for_tab(request, module_name, slug):
     return render_to_response(
         'comments/list_for_tab.html',
         {
+            'object': obj,            
             'comment_list': comment_list,
         },
         context_instance=RequestContext(request)
