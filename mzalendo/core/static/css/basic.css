@@ -1017,3 +1017,25 @@ pre {
   background: #e6e6e6;
   padding: 10px;
 }
+
+ul.hansard_entries em {
+  font-style: italic;
+}
+ul.hansard_entries strong {
+  font-weight: bold;
+}
+ul.hansard_entries li {
+  margin-bottom: 0.5em;
+  list-style: none;
+}
+ul.hansard_entries li.scene {
+  margin-left: 2em;
+}
+ul.hansard_entries li.speech p {
+  margin-left: 1em;
+}
+ul.hansard_entries li.page_number {
+  text-align: right;
+  background: #eee;
+  padding: 0.2em;
+}
