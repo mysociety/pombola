@@ -111,9 +111,11 @@
         <div class="constituency-party">
             <h3>Constituency</h3>
             <ul>
-                <li><a href="/">Othaya constituency</a></li>
-                <!-- <li><a href="/">Kenyan constituency</a></li>
-                <li><a href="/">Borrowers constituency</a></li> -->
+                {% for constituency in object.constituencies %}
+                    <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
+                {% empty %}
+                    <li>Not an MP for any constituencies</li>
+                {% endfor %}
             </ul>
 
             <h3>Party / Parties</h3>
