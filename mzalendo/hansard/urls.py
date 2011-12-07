@@ -1,7 +1,10 @@
-from django.conf.urls.defaults import patterns, include, url, handler404
+from django.conf.urls.defaults import patterns, include, url
+from hansard.views import IndexView, SittingView
 
-import views
+urlpatterns = patterns('hansard.views',
+    url( r'^$', IndexView.as_view() ),
 
-urlpatterns = patterns('',
-    url(r'^$', views.default),
+    # not the final URL structure - but something to start work with
+    url( r'^sitting/(?P<pk>\d+)/', SittingView.as_view(), name="sitting_view" )
+
 )

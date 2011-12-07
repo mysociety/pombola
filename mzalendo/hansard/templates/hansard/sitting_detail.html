@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load switch %}
+
+{% block title %}
+    {{ object.name }}
+{% endblock %}
+
+{% block content %}
+
+    {# Capture the source name and url to variables so that we don't need to look it up each time in the ifchanged block below #}
+    {% with source_name=sitting.source.name source_url=sitting.source.url %}
+
+    <ul class="hansard_entries">
+    {% for entry in sitting.entry_set.all %}
+
+        {% ifchanged %}
+            <li class="page_number">Page {{ entry.page_number }} of <a href="{{ source_url }}">{{ source_name }}</a></li>
+        {% endifchanged %}
+
+        <li class="{{ entry.type }}">
+            {% switch entry.type %}
+                {% case 'heading' %}
+                    <h2>{{ entry.content }}</h2>
+                {% case 'speech' %}
+                    
+                    <strong>{{ entry.speaker_name }}</strong>
+                    {% if entry.speaker_title %}({{ entry.speaker_title }}){% endif %}                    
+                    <br>
+
+                    <p>{{ entry.content|linebreaksbr }}</p>
+
+                {% case 'scene' %}
+                    <em>{{ entry.content }}</em>
+                {% else %}
+                    {{ entry.content }}
+            {% endswitch %}
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% endwith %}
+
+{% endblock %}

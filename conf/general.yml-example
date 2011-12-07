@@ -27,6 +27,10 @@ GOOGLE_ANALYTICS_ACCOUNT: ''
 MANAGERS_NAME: 'Mzalendo Managers'
 MANAGERS_EMAIL: 'managers@example.com'
 
+# If the local version of pdftohtml is wrong (ie != 0.12.4) - blank means do it
+# locally
+KENYA_PARSER_PDF_TO_HTML_HOST: ''
+
 # Social app configs - can be left blank and the option will not be provided
 TWITTER_CONSUMER_KEY: ''
 TWITTER_CONSUMER_SECRET: ''

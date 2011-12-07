@@ -10,9 +10,27 @@ import models
 #     return u'<a href="%s">%s</a>' % ( obj.get_admin_url(), link_text )
 
 
-class ChunkAdmin(admin.ModelAdmin):
-    pass
-    list_display  = [ 'date', 'session', 'type', '__unicode__' ]
+class SourceAdmin(admin.ModelAdmin):
+    list_display  = [ 'name', 'date', 'last_processing_success', 'last_processing_attempt' ]
+    list_filter = ('date', 'last_processing_success')
+    date_hierarchy = 'date'
     
 
-admin.site.register( models.Chunk, ChunkAdmin )
+class VenueAdmin(admin.ModelAdmin):
+    list_display  = [ 'slug', 'name' ]
+
+
+class SittingAdmin(admin.ModelAdmin):
+    list_display  = [ 'start_date', 'start_time', 'end_date', 'end_time', 'source' ]
+    list_filter = ['start_date']
+    date_hierarchy = 'start_date'
+    
+
+class EntryAdmin(admin.ModelAdmin):
+    list_display  = [ 'sitting', 'type', 'speaker_name', '__unicode__' ]
+    
+
+admin.site.register( models.Source,  SourceAdmin )
+admin.site.register( models.Venue,   VenueAdmin )
+admin.site.register( models.Sitting, SittingAdmin )
+admin.site.register( models.Entry,   EntryAdmin )
