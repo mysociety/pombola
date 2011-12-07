@@ -317,4 +317,27 @@ div.markdown{
     margin-bottom: 1em;
 }
 
+ul.hansard_entries {
+    
+    em {
+        font-style: italic;
+    }
+    
+    li {
+        margin-bottom: 0.5em;
+    }
+    
+    li.scene {
+        margin-left: 2em;
+    }
+    
+    li.speech p {
+        margin-left: 1em;
+    }
 
+    li.page_number {
+        text-align: right;
+        background: #eee;
+        padding: 0.2em;
+    }
+}
