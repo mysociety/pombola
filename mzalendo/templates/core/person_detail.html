@@ -118,11 +118,11 @@
 
             <h3>Party / Parties</h3>
             <ul>
-                <li><a href="/">Orange Democratic Movement</a></li>
-                <!-- <li><a href="/">Some other party</a></li>
-                <li><a href="/">The house party</a></li>
-                <li><a href="/">Rowing club</a></li>
-                <li><a href="/">A big rave in town</a></li> -->
+                {% for party in object.parties %}
+                    <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+                {% empty %}
+                    <li>Not a member of any parties</li>
+                {% endfor %}
             </ul>
         </div>
         <!-- /SAMPLE -->

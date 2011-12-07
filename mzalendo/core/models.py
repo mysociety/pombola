@@ -204,7 +204,13 @@ class Person(ModelBase, HasImageMixin):
             return self.position_set.all().currently_active().filter(title__slug='mp')[0]
         except IndexError:
             return None
-        
+
+
+    def parties(self):
+        """Return list of parties that this person is currently a member of"""
+        party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
+        parties = [ x.organisation for x in party_memberships ]
+        return parties
     
     def __unicode__(self):
         return self.legal_name
