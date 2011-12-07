@@ -31,6 +31,14 @@ Boundary data is taken from a MaPit service (a separate install), this is used
 to find the constituency for a point and also to serve the KML boundaries used
 on the Google maps.
 
+# GIT BRANCHES
+
+We use a modified version of the model outlined here: http://nvie.com/posts/a-successful-git-branching-model/
+
+Instead of using 'master' as the branch that holds the latest stable release we
+have a specific branch called 'production'. We then use our master branch as the
+'develop' branch.
+
 # DEPENDENCIES
 
 ## External requests that may block:
