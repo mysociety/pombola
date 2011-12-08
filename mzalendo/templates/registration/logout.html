@@ -1,0 +1,14 @@
+{% extends "registration/registration_base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block menu_login_options %}
+    {% with post_login_url='/' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+
+<h2>Successfully logged out!</h2>
+
+{% endblock %}
