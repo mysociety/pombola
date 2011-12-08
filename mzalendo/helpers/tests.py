@@ -21,8 +21,8 @@ class Geocode(unittest.TestCase):
                 'output': [
                     {
                         'name': u'Nairobi',
-                        'lat': '-1.28333',
-                        'lng': '36.81667',
+                        'lat': '-1.29207',
+                        'lng': '36.82195',
                     },
                 ],
             },
