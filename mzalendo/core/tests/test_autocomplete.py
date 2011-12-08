@@ -5,6 +5,7 @@ from django.test.client import Client
 from django.utils import unittest
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
+from django.core.management import call_command
 
 from core.models import Person
         
@@ -29,7 +30,12 @@ class AutocompleteTest(unittest.TestCase):
                 legal_name = name,
                 gender     = 'm',
             ).save()
-        
+
+        # Haystack indexes are not touched when fixtures are dumped. Run this
+        # so that other changes cannot affect these tests. Have added a note to
+        # a HayStack issue regarding this:
+        #   https://github.com/toastdriven/django-haystack/issues/226
+        call_command('rebuild_index', interactive=False)
         
 
     def test_autocomplete_requests(self):
