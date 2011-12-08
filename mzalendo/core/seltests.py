@@ -1,6 +1,5 @@
 from django.core.urlresolvers import reverse
 from mzalendo.testing.selenium import MzalendoSeleniumTestCase
-from django.core.management import call_command 
 
 class CoreTestCase(MzalendoSeleniumTestCase):
     
@@ -13,9 +12,6 @@ class CoreTestCase(MzalendoSeleniumTestCase):
 
     def test_static(self):
         """Test that the static files are being served"""
-
-        # run the collectstatic command - so that all the static files can be served.
-        call_command('collectstatic', interactive=False) 
 
         self.open_url('/static/static_test.txt')
         self.assertTrue( 'static serving works!' in self.page_source )

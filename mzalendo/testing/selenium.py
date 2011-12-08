@@ -5,6 +5,7 @@ from time import sleep
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.management import call_command 
 from django.core.urlresolvers import reverse
 from django.utils import unittest
 
@@ -21,6 +22,9 @@ class MzalendoSeleniumTestCase(SeleniumTestCase):
 
     def setUp(self):
         super(MzalendoSeleniumTestCase, self).setUp()
+
+        # run the collectstatic command - so that all the static files can be served.
+        call_command('collectstatic', interactive=False) 
 
         # don't wait too long for things
         self.driver.implicitly_wait(5)
