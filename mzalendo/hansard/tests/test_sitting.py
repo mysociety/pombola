@@ -8,7 +8,7 @@ from hansard.models import Source, Sitting, Venue
 
 class HansardSittingTest(TestCase):
 
-    fixtures = ['test_data']
+    fixtures = ['hansard_test_data']
 
     def setUp(self):
         # grab a source from the test_data
