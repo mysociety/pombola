@@ -67,10 +67,10 @@
                     {% else %}
                         <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}">login</a>
                         {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                            <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}">twitter</a>
+                            <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}?next={{request.path}}">twitter</a>
                         {% endif %}
                         {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                            <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}">fb</a>
+                            <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}?next={{request.path}}">fb</a>
                         {% endif %}
                     {% endif %}
                 </li>                 
