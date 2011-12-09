@@ -1,3 +1,5 @@
+import re
+
 from django.db import models
 
 from core.models import Person
@@ -41,4 +43,39 @@ class Entry(models.Model):
         app_label = 'hansard'
         verbose_name_plural = 'entries'
         
+    @classmethod
+    def assign_speakers(cls):
+        """Go through all entries and assign speakers"""
+        
+        entries = cls.objects.filter(
+            speaker__isnull= True,
+            type           = 'speech',
+        ).exclude(
+            speaker_name   = '',
+        )
+
+        for entry in entries:
+            print '----------------'
+
+            name = entry.speaker_name
+            print name
+            
+            # drop the prefix
+            name = re.sub( r'^\w+\.\s', '', name )
+            print name
+            
+            
+            person_search = Person.objects.filter(legal_name__icontains=name)
+
+            if person_search.count() == 1:
+                print "Found match: " + person_search[0].name()
+                entry.speaker = person_search[0]
+                entry.save()
+            elif person_search.count() > 1:
+                print "Found more than one match:"
+                for p in person_search:
+                    print "\t" + p.name()
+            else:
+                print "Found no matches"
+
 
