@@ -65,6 +65,18 @@ class MzalendoSeleniumTestCase(SeleniumTestCase):
         self.assert_user_logged_in()
 
 
+    def login_to_admin(self, username, password='secret'):
+        """Login to the admin interface"""
+
+        self.driver.open_url("/admin/")
+        
+        self.driver.find_element_by_id("id_username").clear()
+        self.driver.find_element_by_id("id_username").send_keys(username)
+        self.driver.find_element_by_id("id_password").clear()
+        self.driver.find_element_by_id("id_password").send_keys(password)
+        self.driver.find_element_by_css_selector("input[type=\"submit\"]").click()
+
+
     def logout(self):
         self.driver.find_element_by_link_text("logout").click()
         self.assertTrue( '/accounts/logout/' in self.driver.current_url )

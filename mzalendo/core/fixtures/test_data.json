@@ -1,5 +1,33 @@
 [
     {
+       "fields" : {
+          "_summary_rendered" : "",
+          "created" : "2011-12-09 10:47:35",
+          "name" : "Political",
+          "slug" : "political",
+          "summary" : "",
+          "updated" : "2011-12-09 10:47:35"
+       },
+       "model" : "core.organisationkind",
+       "pk" : 1
+    },
+    {
+       "fields" : {
+          "_summary_rendered" : "",
+          "created" : "2011-12-09 10:47:57",
+          "ended" : null,
+          "kind" : 1,
+          "name" : "Parliament",
+          "original_id" : null,
+          "slug" : "parliament",
+          "started" : null,
+          "summary" : "",
+          "updated" : "2011-12-09 10:47:57"
+       },
+       "model" : "core.organisation",
+       "pk" : 1
+    },
+    {
         "pk": 7, 
         "model": "core.contactkind", 
         "fields": {
