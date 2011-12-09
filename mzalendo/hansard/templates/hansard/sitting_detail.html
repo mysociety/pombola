@@ -23,7 +23,12 @@
                     <h2>{{ entry.content }}</h2>
                 {% case 'speech' %}
                     
-                    <strong>{{ entry.speaker_name }}</strong>
+                    {% if entry.speaker %}
+                        <strong><a href="{{ entry.speaker.get_absolute_url }}">{{ entry.speaker.name }}</a></strong>
+                    {% else %}
+                        <strong>{{ entry.speaker_name }}</strong>
+                    {% endif %}
+
                     {% if entry.speaker_title %}({{ entry.speaker_title }}){% endif %}                    
                     <br>
 
