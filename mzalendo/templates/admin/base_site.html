@@ -18,8 +18,24 @@
     {% endcomment %}
 
     <!-- for the admin autocomplete -->
-    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />
+
+    <!-- Use the admin jquery, if available, or load one off Google's CDN. Same for jQuery UI -->
+    <script type="text/javascript">//<![CDATA[
+    if (typeof jQuery == 'undefined') {
+    	try { // use django admins 
+    		jQuery=django.jQuery;
+    	} catch(err) {
+    		document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"><\/script>');
+    	}
+    }
+    if(!jQuery || (typeof jQuery.ui == 'undefined')) {
+    	document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"><\/script>');
+    	document.write('<link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />');
+    }
+    //]]>
+    </script>
+
+
     <script src="{{ STATIC_URL }}js/ajax_select.js" type="text/javascript" charset="utf-8"></script>
     <link href="{{ STATIC_URL }}css/ajax_select.css" media="screen" rel="stylesheet" type="text/css" /> 
 
@@ -40,15 +56,15 @@
 
         */
 
-        $( function () {
-            setTimeout(
-                function () {
-                    $("a:contains('Add another Position')")
-                        .replaceWith( 'To create more positions save the page and then come back to fill in the additional rows');
-                },
-                2000
-            )
-        })
+        // $( function () {
+        //     setTimeout(
+        //         function () {
+        //             $("a:contains('Add another Position')")
+        //                 .replaceWith( 'To create more positions save the page and then come back to fill in the additional rows');
+        //         },
+        //         2000
+        //     )
+        // })
     </script>
 
 {% endblock %}
