@@ -3,7 +3,7 @@ import re
 from django.db import models
 
 from core.models import Person
-from hansard.models import Sitting
+from hansard.models import Sitting, Alias
 
 class Entry(models.Model):
     """Model for representing an entry in Hansard - speeches, headings etc"""
@@ -48,34 +48,46 @@ class Entry(models.Model):
         """Go through all entries and assign speakers"""
         
         entries = cls.objects.filter(
-            speaker__isnull= True,
-            type           = 'speech',
+            speaker__isnull = True,
+            type            = 'speech',
         ).exclude(
-            speaker_name   = '',
+            speaker_name = '',
         )
 
         for entry in entries:
-            print '----------------'
+            # print '--------- ' + entry.speaker_name + ' ---------'
 
-            name = entry.speaker_name
-            print name
-            
-            # drop the prefix
-            name = re.sub( r'^\w+\.\s', '', name )
-            print name
-            
-            
-            person_search = Person.objects.filter(legal_name__icontains=name)
+            speakers = entry.possible_matching_speakers()
 
-            if person_search.count() == 1:
-                print "Found match: " + person_search[0].name()
-                entry.speaker = person_search[0]
+            if len(speakers) == 1:
+                speaker = speakers[0]
+                entry.speaker = speaker
                 entry.save()
-            elif person_search.count() > 1:
-                print "Found more than one match:"
-                for p in person_search:
-                    print "\t" + p.name()
-            else:
-                print "Found no matches"
 
+
+    def possible_matching_speakers(self):
+        """Return array of person objects that might be the speaker"""
+
+        name = self.speaker_name
+        
+        # First check for a matching alias
+        # try:
+        try:
+            alias = Alias.objects.get( alias=name )
+            return [ alias.person ]
+        except Alias.DoesNotExist:
+            pass
+
+        # drop the prefix
+        name = re.sub( r'^\w+\.\s', '', name )
+        
+        person_search = (
+            Person
+            .objects
+            .all()
+            .is_mp()
+            .filter(legal_name__icontains=name)
+        )
+
+        return person_search.all()[0:]
 

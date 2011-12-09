@@ -1,6 +1,9 @@
 from django.contrib import admin
 import models
 
+from ajax_select import make_ajax_form
+from ajax_select.admin import AjaxSelectAdmin
+
 # from django.contrib.gis import db
 # from django.core.urlresolvers import reverse
 # from django.contrib.contenttypes.generic import GenericTabularInline
@@ -30,7 +33,17 @@ class EntryAdmin(admin.ModelAdmin):
     list_display  = [ 'sitting', 'type', 'speaker_name', '__unicode__' ]
     
 
+class AliasAdmin(admin.ModelAdmin):
+    form = make_ajax_form(
+        models.Alias,
+        {
+            'person':       'person_name',
+        }
+    )    
+
+
 admin.site.register( models.Source,  SourceAdmin )
 admin.site.register( models.Venue,   VenueAdmin )
 admin.site.register( models.Sitting, SittingAdmin )
 admin.site.register( models.Entry,   EntryAdmin )
+admin.site.register( models.Alias,   AliasAdmin )
