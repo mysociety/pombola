@@ -34,6 +34,12 @@ class PositionTest(WebTest):
         )
         self.organisation.save()
         
+        self.title = models.PositionTitle.objects.create(
+            name = 'Test title',
+            slug = 'test-title',
+        )
+
+
     def test_unicode(self):
         """Check that missing attributes don't crash"""
         
@@ -145,24 +151,23 @@ class PositionTest(WebTest):
         associated with them.
         """
 
-        title = models.PositionTitle(
-            name = 'Test title',
-            slug = 'test-title',
-        )
-
         # create position with no place
         position = models.Position(
             person = self.person,
-            title  = title,
+            title  = self.title,
         )
         position._set_sorting_dates()        
         position.full_clean()
         
         # Change the title to require a place
-        title.requires_place = True
+        self.title.requires_place = True
         with self.assertRaises(exceptions.ValidationError):
             position.full_clean()
 
         # give the pos a place and check that it now validates
         position.place = models.Place( name='Test Place', slug='test-place')
         position.full_clean()
+
+        # put it back
+        self.title.requires_place = False
+        
