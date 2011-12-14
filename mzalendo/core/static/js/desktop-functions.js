@@ -23,9 +23,9 @@ function activateSimpleTab( $heading_element ) {
   $heading_element.addClass('active');
   $tab_content.addClass('open').show();
 
-  // load content using ajax if the div has an href
+  // load content using ajax if the div has an data-comment-source-url
   // TODO: use a cleaner way to specify this - probably best to have a global object and tell it that certain tabs have special opening behaviour
-  var content_url = $tab_content.attr('href')
+  var content_url = $tab_content.attr('data-comment-source-url')
   if ( content_url ) {
       $tab_content.load(content_url)
   }
