@@ -53,11 +53,21 @@ class Entry(models.Model):
         ).exclude(
             speaker_name = '',
         )
+        
+        # create an in memory cache of speaker names and the sitting dates, to
+        # avoid hitting the db as badly with all the repeated requests
+        cache = {}
 
         for entry in entries:
             # print '--------- ' + entry.speaker_name + ' ---------'
 
-            speakers = entry.possible_matching_speakers()
+            cache_key = "%s-%s" % (entry.sitting.start_date, entry.speaker_name)
+
+            if cache_key in cache:
+                speakers = cache[cache_key]
+            else:
+                speakers = entry.possible_matching_speakers()
+                cache[cache_key] = speakers
 
             if len(speakers) == 1:
                 speaker = speakers[0]
