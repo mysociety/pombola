@@ -389,27 +389,35 @@ class PositionTitle(ModelBase):
 
 
 class PositionQuerySet(models.query.GeoQuerySet):
-    def currently_active(self):
+    def currently_active( self, when=None ):
         """Filter on start and end dates to limit to currently active postitions"""
-        now = datetime.date.today()
-        now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day )
 
-        return (
+        if when == None: when = datetime.date.today()
+        now_approx = ApproximateDate( year=when.year, month=when.month, day=when.day )
+
+        qs = (
             self
-              .filter( Q(start_date__lte=now_approx) )
-              .filter( Q(  end_date__gte=now_approx) )
+                .filter( start_date__lte = now_approx )
+                .filter( Q( end_date__gte = now_approx ) | Q( end_date = '' ) )
         )
 
-    def currently_inactive(self):
+        return qs
+
+
+    def currently_inactive( self, when=None ):
         """Filter on start and end dates to limit to currently inactive postitions"""
-        now = datetime.date.today()
-        now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day )
     
-        return (
-            self
-              .filter( Q(  end_date__lte=now_approx) )
-        )
+        if when == None: when = datetime.date.today()
+        now_approx = ApproximateDate( year=when.year, month=when.month, day=when.day )
     
+        start_criteria = Q( start_date__gt = now_approx )
+        end_criteria   = Q( end_date__lt   = now_approx ) & ~Q(end_date = '')
+        
+        qs = self.filter( start_criteria | end_criteria )
+
+        return qs
+    
+
     def political(self):
         """Filter down to only the political category"""
         return self.filter(category='political')

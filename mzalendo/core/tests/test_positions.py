@@ -1,5 +1,6 @@
 import re
 import random
+import datetime
 
 from django.conf import settings
 
@@ -170,4 +171,144 @@ class PositionTest(WebTest):
 
         # put it back
         self.title.requires_place = False
+            
+
+    def test_currently_active(self):
+        """Test that the currently active filter warks"""
+
+        now          = datetime.datetime.now()
+        earlier      = now - datetime.timedelta( days = 7   )
+        much_earlier = now - datetime.timedelta( days = 365 )
+        later        = now + datetime.timedelta( days = 7   )
+        much_later   = now + datetime.timedelta( days = 365 )
+        pos_qs = models.Position.objects.all()        
+
+        # check that there are no positions
+        self.assertEqual(
+            models.Position.objects.all().currently_active().count(), 0
+        )
+
+        # create position which is currently active
+        position = models.Position.objects.create(
+            person     = self.person,
+            title      = self.title,
+            start_date = ApproximateDate( year=earlier.year, month=earlier.month, day=earlier.day ),
+            end_date   = ApproximateDate( year=later.year,   month=later.month,   day=later.day   ),
+        )
+                
+        # check that we match by default
+        self.assertEqual( pos_qs.currently_active().count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive().count(), 0 )
+
+        # check valid date ranges
+        self.assertEqual( pos_qs.currently_active( earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( now     ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( later   ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( now     ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( later   ).count(), 0 )
+
+        # check that much earlier or much later don't match
+        self.assertEqual( pos_qs.currently_active( much_earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_active( much_later   ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( much_earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( much_later   ).count(), 1 )
         
+
+        # check future dates
+        position.start_date = ApproximateDate( year=earlier.year, month=earlier.month, day=earlier.day )
+        position.end_date = ApproximateDate(future=True)
+        position.save()
+
+        # check that we match by default
+        self.assertEqual( pos_qs.currently_active().count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive().count(), 0 )
+
+        # check valid date ranges
+        self.assertEqual( pos_qs.currently_active( earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( now     ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( later   ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( now     ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( later   ).count(), 0 )
+
+        # check that much earlier or much later don't match
+        self.assertEqual( pos_qs.currently_active( much_earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_active( much_later   ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( much_earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( much_later   ).count(), 0 )
+
+
+        # check absent end dates
+        position.start_date = ApproximateDate( year=earlier.year, month=earlier.month, day=earlier.day )
+        position.end_date = None
+        position.save()
+
+        # check that we match by default
+        self.assertEqual( pos_qs.currently_active().count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive().count(), 0 )
+
+        # check valid date ranges
+        self.assertEqual( pos_qs.currently_active( earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( now     ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( later   ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( now     ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( later   ).count(), 0 )
+
+        # check that much earlier or much later don't match
+        self.assertEqual( pos_qs.currently_active( much_earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_active( much_later   ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( much_earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( much_later   ).count(), 0 )
+
+
+
+        # check absent start and end dates
+        position.start_date = None
+        position.end_date = None
+        position.save()
+
+        # check that we match by default
+        self.assertEqual( pos_qs.currently_active().count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive().count(), 0 )
+
+        # check valid date ranges
+        self.assertEqual( pos_qs.currently_active( earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( now     ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( later   ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( now     ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( later   ).count(), 0 )
+
+        # check that much earlier or much later don't match
+        self.assertEqual( pos_qs.currently_active( much_earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_active( much_later   ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( much_earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( much_later   ).count(), 0 )
+
+
+
+        # check future start dates
+        position.start_date = ApproximateDate(future=1)
+        position.end_date = None
+        position.save()
+
+        # check that we match by default
+        self.assertEqual( pos_qs.currently_active().count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive().count(), 1 )
+
+        # check valid date ranges
+        self.assertEqual( pos_qs.currently_active( earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_active( now     ).count(), 0 )
+        self.assertEqual( pos_qs.currently_active( later   ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( now     ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( later   ).count(), 1 )
+
+        # check that much earlier or much later don't match
+        self.assertEqual( pos_qs.currently_active( much_earlier ).count(), 0 )
+        self.assertEqual( pos_qs.currently_active( much_later   ).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive( much_earlier ).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive( much_later   ).count(), 1 )
+
