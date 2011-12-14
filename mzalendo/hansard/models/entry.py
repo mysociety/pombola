@@ -85,7 +85,7 @@ class Entry(models.Model):
             Person
             .objects
             .all()
-            .is_mp()
+            .is_mp( when=self.sitting.start_date )
             .filter(legal_name__icontains=name)
         )
 
