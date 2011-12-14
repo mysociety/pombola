@@ -1,0 +1,41 @@
+/* -------------------------------------------------------------- 
+
+MOBILE CSS
+mzalendo.com
+
+AUTHOR: Josh Angell, Supercool
+josh [at] supercooldesign.co.uk
+
+  1. RESET / CORE
+  2. BASIC LAYOUT
+  3. BASIC TYPOGRAPHY, LINKS AND IMAGES
+  4. MENU
+  5. SHARED ELEMENTS
+  6. BLOG
+  7. WORK
+  8. INFO
+  9. FORMS
+  10. SYSTEM MESSAGES
+  11. MEDIA QUERIES
+
+-------------------------------------------------------------- */
+
+
+@import "core";
+
+// add extra mobile specific stuff in here, like background re-sizes and higher-res images
+
+#site-header {
+  @include background(linear-gradient($colour1/0.75, $colour1));
+  .wrapper #search button {
+    @include border-radius(5px);
+  }
+}
+
+
+#main-menu nav ul li a {
+  @include background(linear-gradient($colour4/1.4, $colour5));
+  &:hover {
+    @include background(linear-gradient($colour5, $colour4/1.4));
+  }
+}

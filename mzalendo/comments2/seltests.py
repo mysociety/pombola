@@ -18,11 +18,10 @@ class CommentTestCase(MzalendoSeleniumTestCase):
 
         # Go to the test person
         self.open_url('/')
-        self.open_url('/person/joseph-bloggs')
+        self.open_url('/person/joseph-bloggs#comments')
 
         # Go to the comments, and then login to add one
-        driver.find_element_by_id("view_comments_link").click()
-        driver.find_element_by_link_text("login to add your own comment").click()
+        driver.find_element_by_link_text("add your own").click()
 
         self.login('superuser')
 

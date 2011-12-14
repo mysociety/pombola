@@ -23,13 +23,13 @@ class CommentsViews(CommentsTestBase):
         
         # check that anon can't leave comments
         response = self.get_comments( test_object )
-        self.assertContains( response, 'login to add your own comment' )
+        self.assertContains( response, 'Login to add your own comment' )
         response = self.get_comments_add( test_object )
         self.assertEqual( response.status, '302 FOUND' )
         
         # check that logged in users can
         response = self.get_comments( test_object, user=self.test_user )
-        self.assertContains( response, 'Add your own comment' )
+        self.assertContains( response, 'Post Comment' )
         response = self.get_comments_add( test_object, user=self.test_user )
         self.assertEqual( response.status, '200 OK' )
         

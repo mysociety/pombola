@@ -5,27 +5,17 @@
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
+    <div class="title-space">
+        <h1>{{ object.title }} {{ object.name }}</h1>
 
-    <div class="content_box">
-        <div style="float: right">
-            {% thumbnail object.primary_image "200x200" as im %}
-            <img  class="person_photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% endthumbnail %}
-        </div>    
-        
         {% if object.is_mp %}
-            <h2>Kenyan Member of Parliament (MP) Profile Page</h2>
-        {% endif %}    
-    
-        <h1>
-            {{ object.title }}
-            {{ object.name }}        
-        </h1>
+            <p>Kenyan Member of Parliament (MP) Profile Page</p>
+        {% endif %}
         
         {% if object.name != object.legal_name %}
             <p>Full name: {{ object.legal_name }}</p>
         {% endif %}
-        
+
         {% if object.additional_names %}
             <p>Also known as:
             {% for name in object.additional_names %}
@@ -37,64 +27,160 @@
         {% endif %}
     
         {% if object.date_of_birth %}
-            Born: {{ object.date_of_birth }} {# TODO - add age in years #}
+            <p>Born: {{ object.date_of_birth }} {# TODO - add age in years #}</p>
         {% endif %}
     
         {# TODO - add death date too if it exists #}
-    
-        <br clear="both">
-    
     </div>
     
-    {% if object.summary %}
-        <div class="summary markdown">
-            {{ object.summary }}
+    <div class="profile-pic">
+        {% thumbnail object.primary_image "200x200" as im %}
+        <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% endthumbnail %}
+    </div>
+
+    <div class="small-container">
+        <!--
+        {% with constituency=object.is_mp.place %}
+        {% if constituency and constituency.data_set.count %}
+        <div class="content_box">
+            <h3>Performance data for {{ constituency.name }}</h3>
+
+            {% for data in constituency.data_set.all %}
+                <p>
+                    {{ data.category.name }}: {{ data.pretty_value }} ({{ data.general_remark }})
+                </p>
+            {% endfor %}
+
+            <p>More details: <a href="{% url place constituency.slug %}">{{ constituency.name }}</a></p>
         </div>
-    {% endif %}
-    
-    
-    {% with constituency=object.is_mp.place %}
-    {% if constituency and constituency.data_set.count %}
-    <div class="content_box">
-        <h3>Performance data for {{ constituency.name }}</h3>
+        {% endif %}
+        {% endwith %}
+        -->
+        <h2>Scorecard</h2>
+        <!-- /SAMPLE -->
+        <h3 class="scorecard-overall">Overall Rating <span class="score-overall-average">Average</span></h3>
+        <ul class="scorecard">
+            <li>
+                <article>
+                    <header>
+                        <h4>Ease of Contact</h4>
+                        <p class="score-good">This MP is very easy to contact</p>
+                    </header>
+                </article>
+            </li>
 
-        {% for data in constituency.data_set.all %}
-            <p>
-                {{ data.category.name }}: {{ data.pretty_value }} ({{ data.general_remark }})
-            </p>
-        {% endfor %}
+            <li>
+                <article>
+                    <header>
+                        <h4>CFD Performance</h4>
+                        <p class="score-bad">An unacceptable amount of money is missing or unaccounted for in this constituency.</p>
+                        <span class="shout">Enough money is going missing to pay for 250 teachers.</span>
+                    </header>
+                </article>
+            </li>
 
-        <p>More details: <a href="{% url place constituency.slug %}">{{ constituency.name }}</p>
+            <!-- <li>
+                <article>
+                    <header>
+                        <h4>Education Performance</h4>
+                        <p class="score-average">The improvement in education performance in this constituency is about average.</p>
+                    </header>
+
+                    <div class="details">
+                        <p>This copy described how Education performance is collected and analysed. This copy described how Education performance is collected and analysed.</p>
+                        <p>This copy described how Education performance is collected and analysed. This copy described how Education performance is collected and analysed. This copy described how Education performance is collected and analysed. This copy described how Education performance is collected and analysed.</p>
+                    </div>
+                </article>
+            </li>
+
+            <li>
+                <article>
+                    <header>
+                        <h4>Education Performance</h4>
+                        <p class="score-average">The improvement in education performance in this constituency is about average.</p>
+                    </header>
+                </article>
+            </li> -->
+        </ul>
+        <!-- /SAMPLE -->
     </div>
-    {% endif %}
-    {% endwith %}
-    
-    <div class="content_box">
-        <h3>Current Political Positions</h3>
-        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
+
+    <div class="profile-info">
+        <!-- SAMPLE -->
+        <div class="constituency-party">
+            <h3>Constituency</h3>
+            <ul>
+                {% for constituency in object.constituencies %}
+                    <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
+                {% empty %}
+                    <li>Not an MP for any constituencies</li>
+                {% endfor %}
+            </ul>
+
+            <h3>Party / Parties</h3>
+            <ul>
+                {% for party in object.parties %}
+                    <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+                {% empty %}
+                    <li>Not a member of any parties</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- /SAMPLE -->
+
+        
+        {% include "core/contact_list.html" with contacts=object.contacts.all %}
     </div>
 
-    <div class="content_box">
-        <h3>Previous Political Positions</h3>
-        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
+    <div class="large-container">
+        <div class="tab-wrapper">
+            {% if object.summary %}
+            <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
+            <div class="tab markdown" id="overview">
+                {{ object.summary }}
+            </div>
+            {% endif %}
+
+            <h2 class="tab-nav" rel="#experience"><a href="/">Experience</a></h2>
+            <div class="tab" id="experience">
+                <div class="left-col">
+                    <section>
+                        <h3>Current Political Positions</h3>
+                        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
+                    </section>
+
+                    <section>
+                        <h3>Previous Political Positions</h3>
+                        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
+                    </section>
+                </div>
+                
+                <div class="right-col">
+                    <section>
+                        <h3>Job History</h3>
+                        {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
+                    </section>
+
+                    <section>
+                        <h3>Education</h3>
+                        {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
+                    </section>
+                </div>
+            </div>
+
+            {% include 'comments/detail_page_comments.html' %}
+        </div>
     </div>
 
-    {% include "core/contact_list.html" with contacts=object.contacts.all %}
+    <div class="social-and-tools">
+        <div class="fb-like" data-send="false" data-layout="button_count" data-width="95" data-show-faces="false"></div>
+        
+        <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="mysociety">Tweet</a>
 
-    <div class="content_box">
-        <h3>Job History</h3>
-        {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
+        <ul class="tools">
+            <li><a href="{% get_comment_add_url object %}" class="big-btn-text-green">Post Comment</a></li>
+            <li><a href="#" class="big-btn-text-red">Correct this information</a></li>
+        </ul>
     </div>
-
-    <div class="content_box">
-        <h3>Education</h3>
-        {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
-    </div>
-
-
-    <div class="content_box">        
-        {% include 'comments/detail_page_comments.html' %}
-    </div>
-
 {% endblock %}
-

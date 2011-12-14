@@ -1,29 +1,29 @@
 {% load switch %}
 
-{% if contacts %}
-
-<div class="content_box">
-    
+{% if contacts %}    
     <h3>Contact Details</h3>
     
-    <ul class="contacts">
-    
+    <ul class="vcard">
         {% for c in contacts %}
             <li class="{{ c.kind.slug }}">
-    
+
                 {% switch c.kind.slug %}
     
                     {% case 'phone' %}
-                        {{ c.kind.name }}: <a href="tel:{{ c.value }}">{{ c.value }}</a>
+                        <span class="label">{{ c.kind.name }}:</span>
+                        <p><a href="tel:{{ c.value }}">{{ c.value }}</a></p>
                         
                     {% case 'facebook' %}
-                        <a href="{{ c.value }}">{{ c.kind.name }}</a>
+                        <span class="label">Link:</span>
+                        <p><a href="{{ c.value }}">{{ c.kind.name }}</a></p>
                         
                     {% case 'twitter' %}
-                        <a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter
+                        <span class="label">Link:</span>
+                        <p><a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter</p>
                         
                     {% else %}
-                        {{ c.kind.name }}: {{ c.value|urlizetrunc:50 }}
+                        <span class="label">{{ c.kind.name }}:</span>
+                        <p>{{ c.value|urlizetrunc:50 }}</p>
         
                 {% endswitch %}
     
@@ -31,9 +31,5 @@
     
             </li>
         {% endfor %}
-    
     </ul>
-</div>
-
-
 {% endif %}

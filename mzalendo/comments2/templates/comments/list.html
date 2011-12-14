@@ -1,16 +1,18 @@
-<dl class="comments">
-  {% for comment in comment_list %}
-    <dt id="comment_{{ comment.id }}">
-        <strong>{{ comment.title }}</strong>
-        by
-        <strong>{% firstof comment.user.get_full_name comment.user.username %}</strong>
-        <small title="{{ comment.submit_date }}">{{ comment.submit_date|timesince }} ago</small>
-        <a class="flag" href="/comments/flag/{{ comment.id }}/">report</a>
-        <a class="permalink" href="{{ comment.get_absolute_url }}">permalink</a>
-        <br clear="both">
-    </dt>
-    <dd>
-        <p>{{ comment.comment|linebreaksbr }}</p>
-    </dd>
-  {% endfor %}
-</dl>
+    <ul class="comments">
+      {% for comment in comment_list %}
+        <li id="comment_{{ comment.id }}">
+            <img src="http://dummyimage.com/60x60/bfbfbf/fff&amp;text=FIXME" alt="" />
+            <section>
+                <h4>{{ comment.title }}</h4>
+                <p class="meta">by {% firstof comment.user.get_full_name comment.user.username %} <time datetime="{{ comment.submit_date }}">{{ comment.submit_date|timesince }}</time> ago</p>
+                <ul class="tools">
+                    <li><a href="#" class="like">like</a></li>
+                    <li><a href="/comments/flag/{{ comment.id }}/" class="report">report</a></li>
+                    <li><a href="{{ comment.get_absolute_url }}">permalink</a></li>
+                </ul>
+                <p>{{ comment.comment|linebreaksbr }}</p>
+                <a href="{{ comment.get_absolute_url }}" class="read-more">read more</a>
+            </section>
+        </li>
+      {% endfor %}
+    </ul>

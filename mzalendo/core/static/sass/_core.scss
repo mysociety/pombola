@@ -1,0 +1,193 @@
+// -------------------------------------------------------------- 
+
+// _CORE CSS
+// mzalendo.com
+
+// AUTHOR: Josh Angell, Supercool
+// josh [at] supercooldesign.co.uk
+
+// 1. VARIABLES
+// 2. MIXINS
+// 3. FUNCTIONS
+
+// --------------------------------------------------------------
+@import "compass";
+
+
+// 1. VARIABLES
+// --------------------------------------------------------------
+// Green
+// $colour1: #46A81B;
+$colour1: #009245;
+
+// Light green
+$colour2: #87C43C;
+
+// Blue
+$colour3: #1B7999;
+
+// Black ish
+$colour4: #777;
+
+// Black
+$colour5: #000;
+
+// White
+$colour6: #FFF;
+
+// Grey
+$colour7: #E6E6E6;
+
+// Darker Grey
+$colour8: #808080;
+
+// Lighter Grey
+$colour9: #F6F6F6;
+
+// Light Black
+$colour10: #2E2E2E;
+
+// Red
+$colour11: #D40000;
+
+// 2. MIXINS
+// --------------------------------------------------------------
+// Green Gradient
+@mixin gradient1 {@include background (linear-gradient($colour2, $colour1)) ;}
+@mixin gradient1b {@include background (linear-gradient($colour1, $colour2)) ;}
+
+// Light Grey Gradient
+@mixin gradient2 {@include background(linear-gradient(#ebebeb, #f5f5f5));}
+@mixin gradient2b {@include background(linear-gradient(#ebebeb, #f5f5f5));}
+
+// Button reset
+@mixin button-reset {
+  cursor:pointer;
+  display:block;
+  border:none;
+  padding:0;
+  margin:0;
+  width: auto;
+  height: auto;
+  text-indent:-999999px;
+  @include border-radius(2px);
+}
+
+@mixin button-reset-text {
+  cursor:pointer;
+  background:$colour8;
+  color:$colour6;
+  text: {
+    decoration:none;
+    transform:uppercase;
+  }
+  font-size:11px;
+  line-height:1;
+  padding:3px 5px;
+  @include border-radius(2px);
+  &:hover {
+    background:$colour8/0.8;
+    color:$colour6;
+  }
+}
+@mixin button-text-red {
+  @include button-reset-text;
+  background:$colour11;
+  &:hover {
+    background:$colour11/0.7;
+  }
+}
+@mixin button-text-green {
+  @include button-reset-text;
+  background:$colour2;
+  &:hover {
+    background:$colour2/0.9;
+  }
+}
+
+@mixin big-button-reset-text {
+  @include button-reset-text;
+  text-transform:none;
+  font-size:14px;
+  padding:5px 8px;
+  @include inline-block;
+  @include border-radius(5px);
+}
+
+@mixin big-button-text-green {
+  @include big-button-reset-text;
+  background:$colour2;
+  @include background(linear-gradient($colour2/0.9, $colour2));
+  &:hover {
+    background:$colour2/0.9;
+    @include background(linear-gradient($colour2, $colour2/0.9));
+  }
+}
+
+@mixin big-button-text-red {
+  @include big-button-reset-text;
+  background:$colour11;
+  @include background(linear-gradient($colour11/0.7, $colour11));
+  &:hover {
+    background:$colour11/0.7;
+    @include background(linear-gradient($colour11, $colour11/0.7));
+  }
+}
+
+
+
+// list resets
+@mixin list-reset-copy {
+  padding-left:30px;
+  margin-bottom:20px;
+  li {
+    font-size:14px;
+    line-height:20px;
+    list-style:disc;
+    margin-bottom:10px;
+    background:none;
+    padding:0;
+  }
+}
+
+@mixin list-reset-soft {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+  li{
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+}
+
+@mixin list-reset {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+  li{
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    float:left;
+    display:inline;
+    a {
+      float:left;
+      display:block;
+    }
+  }
+}
+
+
+// .ellipsis {
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+//   white-space: nowrap;
+// }
+
+// textarea[contenteditable] {-webkit-appearance: none;}
+
+// 3. FUNCTIONS
+// --------------------------------------------------------------

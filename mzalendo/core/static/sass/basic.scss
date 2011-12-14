@@ -1,0 +1,629 @@
+/* -------------------------------------------------------------- 
+
+BASIC CSS
+mzalendo.com
+
+AUTHOR: Josh Angell, Supercool
+josh [at] supercooldesign.co.uk
+
+  1. RESET / CORE
+  2. BASIC TYPOGRAPHY, LINKS AND IMAGES
+  3. BASIC LAYOUT
+  4. MENU
+  5. SHARED ELEMENTS
+  6. BLOG
+  7. WORK
+  8. INFO
+  9. FORMS
+  10. SYSTEM MESSAGES
+  11. MEDIA QUERIES
+
+-------------------------------------------------------------- */
+
+
+
+/* 1. RESET / CORE
+-------------------------------------------------------------- */
+@import "compass/reset";
+@import "core";
+@import "common";
+
+
+body {
+  // default highlight on buttons links etc
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  // Prevent mobile zooming while remain desktop zooming.
+  // github.com/shichuan/mobile-html5-boilerplate/issues/closed#issue/14
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: none;
+}
+
+/* 2. BASIC TYPOGRAPHY, LINKS AND IMAGES
+-------------------------------------------------------------- */
+
+body {
+  font-family: 'arial',sans-serif;
+  color:#444;
+  font-size:100%;
+}
+
+p, h1, h2, h3 {
+  margin-bottom:15px;
+  line-height:20px;
+}
+h1, h2, h3, h4 {
+  color:$colour5;
+}
+p {
+  font-size:14px;
+  line-height:20px;
+}
+a {
+  color:$colour1;
+  &:hover {
+    color:$colour2;
+  }
+}
+.vcard {
+  li.address p {
+    line-height:15px;
+    padding-top:4px;
+  }
+  a {
+    text-decoration:none;
+  }
+}
+h1 {
+  font: {
+    size:24px;
+    weight:bold;
+  }
+  line-height:25px;
+}
+h2 {
+  font: {
+    size:18px;
+    weight:bold;
+  }
+  margin-bottom:10px;
+}
+h3 {
+  font: {
+    size:16px;
+    weight:bold;
+  }
+  margin-bottom:10px;
+}
+h4 {
+  font: {
+    size:14px;
+    weight:bold;
+  }
+}
+
+ul, ol {
+  @include list-reset-copy;
+}
+
+ol li {
+  list-style:decimal;
+}
+
+dl {
+  dt {
+    font: {
+      size:14px;
+      weight:bold;
+    }
+    line-height:20px;
+  }
+  dd {
+    font-size:14px;
+    line-height:20px;
+    margin-bottom:5px;
+  }
+}
+
+blockquote {
+  padding-left: 10px;
+  p:before {
+    content: '“';
+  }
+  p:after {
+    content: '”';
+  }
+}
+
+pre {
+  font-family: monospace;
+}
+
+.big-btn-text-green {
+  @include big-button-text-green;
+}
+.big-btn-text-red {
+  @include big-button-text-red;
+}
+
+.m-fb {
+  @include big-button-reset-text;
+  @include background(linear-gradient(#0042C2/0.9, #0042C2));
+  &:hover {
+    @include background(linear-gradient(#0042C2, #0042C2/0.9));
+  }
+}
+.m-twitter {
+  @include big-button-reset-text;
+  @include background(linear-gradient(#74CFDC/0.95, #74CFDC));
+  &:hover {
+    @include background(linear-gradient(#74CFDC, #74CFDC/0.95));
+  }
+}
+
+
+/* 3. BASIC LAYOUT
+   320px - following the Mobile First principle
+   cols    1   2   3    4    5    6    7    8    9    10
+   px      30  60  90   120  150  180  210  240  270  300
+-------------------------------------------------------------- */
+.wrapper {
+  width: 100%;
+}
+
+#site-header {
+  clear:both;
+  background:$colour1;
+  .wrapper {
+    overflow:hidden;
+    #logo {
+      display:block;
+      margin-left:10px;
+      float:left;
+      height:42px;
+      text-indent:-999999em;
+      width:147px;
+      background:url(../images/m-logo.png) 0 center no-repeat;
+    }
+    menu#site-user-tools {
+      display:none; // SORT THIS
+    }
+    menu#m-top-tools {
+      float:right;
+      button {
+        @include button-reset;
+        display:inline;
+        border-left:1px solid $colour6;
+        &.m-icon-nav {
+          text: {
+            indent:0;
+            transform:uppercase;
+          }
+          height:42px;
+          color:$colour6;
+          padding:0 15px 0 10px;
+          background:url(../images/m-menu-nub.png) right center no-repeat;
+          &.active {
+            background:url(../images/m-menu-nub-r.png) right center no-repeat;
+          }
+        }
+        &.icon-search {
+          height:42px;
+          width:42px;
+          margin-left:10px;
+          background:url(../images/search-icon.png) center no-repeat;
+          &.active {
+            background:url(../images/close.png) center no-repeat;
+          }
+        }
+      }
+    }
+    #search {
+      clear:both;
+      height:26px;
+      padding:6px 10px;
+      display:block;
+      background:$colour7;
+      border-bottom:2px solid $colour6;
+      input {
+        padding:1px 4px;
+        border:1px solid $colour8;
+        height:22px;
+        width:214px;
+        float:left;
+      }
+      button {
+        @include button-reset;
+        width:64px;
+        height:26px;
+        float:left;
+        margin-left:10px;
+        background:$colour5 url(../images/search-icon.png) center no-repeat;
+        &:hover {
+          background-color:$colour4;
+        }
+      }
+    }
+  }
+}
+
+#main-menu {
+  nav {
+    width:100%;
+    ul {
+      @include list-reset-soft;
+      width:100%;
+      li {
+        a {
+          display:block;
+          height:20px;
+          padding:10px;
+          font: {
+            size:18px;
+            weight:bold;
+          }
+          color:$colour6;
+          text-decoration:none;
+          background:$colour5;
+          border-bottom:2px solid $colour6;
+          &:hover {
+            background:$colour4;
+          }
+        }
+        &:last-child a,
+        &.last a {
+          border-bottom:none;
+        }
+      }
+    }
+  }
+}
+
+#breadcrumb {
+  height:40px;
+  nav {
+    ul {
+      @include list-reset-soft;
+      li {
+        display:none;
+        &.page-title {
+          display:block;
+          background:$colour7;
+          font: {
+            size:18px;
+            weight:bold;
+          }
+          color:$colour5;
+          padding:10px;
+        }
+      }
+    }
+  }
+}
+
+#site-footer {
+  clear:both;
+  border-top:4px solid $colour1;
+  padding:10px;
+  background:$colour7;
+  overflow:hidden;
+  p {
+    font-style:italic;
+    color:$colour4;
+  }
+  ul {
+    @include list-reset-soft;
+    float:left;
+    width:200px;
+    margin-right:30px;
+  }
+}
+
+#page {
+  position:relative;
+  margin-bottom:30px;
+  .title-space {
+    min-height:130px;
+    margin-left:120px;
+    margin-top:10px;
+    h1 {
+      margin:0;
+    }
+    p {
+      font-style:italic;
+    }
+  }
+  .profile-pic {
+    position:absolute;
+    top:0;
+    left:10px;
+    width:100px;
+    img {
+      width:100px;
+      height:auto;
+    }
+  }
+  .small-container {
+    h3.scorecard-overall {
+      display:block;
+      font-weight:bold;
+      padding:10px;
+      color:$colour5;
+      margin-bottom:10px;
+      border:none;
+      background:none;
+      span {
+        font-weight:normal;
+        display:block;
+        height:22px;
+        padding-top:20px;
+        margin-top:-20px;
+        background:url(../images/m-smiley-sprite.png) right -3px no-repeat;
+        &.score-overall-good {
+          background-position:right -3px;
+        }
+        &.score-overall-average {
+          background-position:right -53px;
+        }
+        &.score-overall-bad {
+          background-position:right -103px;
+        }
+      }
+    }
+    ul.scorecard {
+      @include list-reset-soft;
+      @include inline-block;
+      li {
+        article {
+          padding:10px;
+          background:$colour9;
+          color:$colour5;
+          border-bottom:2px solid $colour6;
+          overflow:hidden;
+          header {
+            p {
+              margin:-20px 0 0 0;
+              padding-top:20px;
+              &.score-good {
+                background:url(../images/score-good.png) right 0 no-repeat;
+              }
+              &.score-average {
+                background:url(../images/score-average.png) right 0 no-repeat;
+              }
+              &.score-bad {
+                background:url(../images/score-bad.png) right 0 no-repeat;
+              }
+            }
+            span.shout {
+              display:block;
+              background:$colour11;
+              color:$colour6;
+              margin:10px 0;
+              padding:10px;
+              text-align:center;
+              font-weight:bold;
+              clear:both;
+              @include border-radius(5px);
+            }
+          }
+          div.details {
+            // height:0px;
+          }
+        }
+      }
+    }
+  }
+  .profile-info {
+    .constituency-party {
+      h3 {
+        margin:0;
+      }
+      ul {
+        @include list-reset-soft;
+        li {
+          border-top:2px solid $colour6;
+          a {
+            font-size:13px;
+            display:block;
+            background:$colour9 url(../images/chevron-right.png) right center no-repeat;
+            color:$colour5;
+            padding:0 10px;
+            text-decoration:none;
+            &:hover {
+              background-color:$colour6;
+            }
+          }
+        }
+      }
+    }
+    .vcard {
+      @include list-reset-soft;
+      overflow:hidden;
+      li {
+        .label {
+          text-transform:uppercase;
+          color:$colour8;
+          font-size:11px;
+          float:left;
+          clear:left;
+          width:50px;
+          margin-left:10px;
+        }
+        p {
+          padding-left:80px;
+        }
+      }
+    }
+  }
+  .large-container {
+    p {
+      margin-left:10px;
+      margin-right:10px;
+    }
+    h3 {
+      border-top:none;
+      border-bottom:2px solid $colour5;
+      background:none;
+      padding:0 0 5px 0;
+      margin:20px 10px;
+    }
+    h4 {
+      font-weight:normal;
+    }
+    .tab {
+      overflow:hidden;
+    }
+    section {
+      ul {
+        @include list-reset-soft;
+        margin:20px 0;
+        li {
+          border-bottom:1px solid $colour5;
+          margin:0 10px 5px 10px;
+          &:last-child,
+          &.last {
+            border-bottom:none;
+          }
+          p {
+            margin:0 0 5px 0;
+            font: {
+              style:italic;
+              size:13px;
+            }
+          }
+        }
+      }
+    }
+    article {
+      
+    }
+    .tab-nav a {
+      color:$colour5;
+      text-decoration:none;
+    }
+    #comments {
+      // display:none; // TEMP, need to not include the content and ajax it in  on desk, link to it on mob
+      .big-btn-text-green {
+        display:none;
+      }
+    }
+    ul.comments li section {
+      max-width:590px;
+    }
+  }
+  ul.comments {
+    @include list-reset-soft;
+    li {
+      @include inline-block;
+      position:relative;
+      background:$colour9;
+      padding:10px;
+      margin-bottom:5px;
+      img {
+        width:60px;
+        height:60px;
+        border:5px solid $colour7;
+        float:left;
+        margin:0 20px 10px 0;
+      }
+      section {
+        float:left;
+        max-width:850px;
+        p {
+          margin-left:0;
+          margin-right:0;
+          &.meta {
+            font: {
+              style:italic;
+              size:13px;
+            }
+          }
+        }
+        h4 {
+          font-weight:bold;
+        }
+        a.read-more {
+          @include button-reset-text;
+          float:right;
+        }
+        ul {
+          @include list-reset-copy;
+          &.tools {
+            @include list-reset;
+            position:absolute;
+            right:10px;
+            top:10px;
+            li {
+              margin-left:5px;
+              a {
+                @include button-reset-text;
+                &.like {
+                  @include button-text-green;
+                }
+                &.report {
+                  @include button-text-red;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .social-and-tools {
+    .fb-like,
+    .twitter-share-button,
+    iframe {
+      display:none;
+    }
+    ul {
+      @include list-reset-soft;
+      margin:20px 0;
+      li {
+        a {
+          display:block;
+          padding:10px;
+          margin:5px 10px;
+          font: {
+            size:17px;
+            weight:bold;
+          }
+        }
+      }
+    }
+  }
+  h2, h3 {
+    border-top:4px solid $colour1;
+    background:$colour7;
+    padding:10px;
+  }
+}
+
+
+ul.hansard_entries {
+    em {
+        font-style: italic;
+    }
+    
+    strong {
+        font-weight: bold;
+    }
+ 
+    li {
+        margin-bottom: 0.5em;
+        list-style: none;
+    }
+    
+    li.scene {
+        margin-left: 2em;
+    }
+    
+    li.speech p {
+        margin-left: 1em;
+    }
+    
+    li.page_number {
+        text-align: right;
+        background: #eee;
+        padding: 0.2em;
+    }
+}

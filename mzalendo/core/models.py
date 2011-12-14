@@ -202,14 +202,31 @@ class Person(ModelBase, HasImageMixin):
         else:
             return []
     
+            
+    def mp_positions(self):
+        return self.position_set.all().currently_active().filter(title__slug='mp')
+            
+
     def is_mp(self):
         """Return the mp position if this person is an MP, else None"""
         try:
-            return self.position_set.all().currently_active().filter(title__slug='mp')[0]
+            return self.mp_positions()[0]
         except IndexError:
             return None
-        
+
+
+    def parties(self):
+        """Return list of parties that this person is currently a member of"""
+        party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
+        parties = [ x.organisation for x in party_memberships ]
+        return parties
     
+
+    def constituencies(self):
+        """Return list of constituencies that this person is currently an MP for"""
+        constituencies = [ x.place for x in self.mp_positions() if x.place ]
+        return constituencies
+
     def __unicode__(self):
         return self.legal_name
 

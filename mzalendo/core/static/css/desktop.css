@@ -1,0 +1,501 @@
+/* -------------------------------------------------------------- 
+
+DESKTOP CSS
+mzalendo.com
+
+AUTHOR: Josh Angell, Supercool
+josh [at] supercooldesign.co.uk
+
+  1. RESET / CORE
+  2. DESKTOP LAYOUT
+  3. MEDIA QUERIES
+
+-------------------------------------------------------------- */
+/* 1. RESET / CORE
+-------------------------------------------------------------- */
+/* 2. DESKTOP LAYOUT
+   960px
+   cols    1   2   3    4    5    6    7    8    9    10   11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27    28    29    30    31    32
+   px      30  60  90   120  150  180  210  240  270  300  330   360   390   420   450   480   510   540   570   600   630   660   690   720   750   780   810   840   870   900   930   960
+-------------------------------------------------------------- */
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+#site-header {
+  background: #009245;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00c25c), color-stop(100%, #009245));
+  background: -webkit-linear-gradient(#00c25c, #009245);
+  background: -moz-linear-gradient(#00c25c, #009245);
+  background: -o-linear-gradient(#00c25c, #009245);
+  background: -ms-linear-gradient(#00c25c, #009245);
+  background: linear-gradient(#00c25c, #009245);
+  height: 60px;
+}
+#site-header .wrapper {
+  position: relative;
+  overflow: visible;
+}
+#site-header .wrapper menu#site-user-tools {
+  display: block;
+  position: absolute;
+  right: 200px;
+  top: 15px;
+}
+#site-header .wrapper menu#site-user-tools ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li {
+  color: #fff;
+  margin-left: 10px;
+  float: left;
+}
+#site-header .wrapper menu#site-user-tools ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+#site-header .wrapper menu#site-user-tools ul li a:hover {
+  text-decoration: underline;
+}
+#site-header .wrapper #logo {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  height: 34px;
+  width: 418px;
+  background: url(../images/d-logo.png) 0 center no-repeat;
+}
+#site-header .wrapper #search {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  border: none;
+}
+#site-header .wrapper #search input {
+  width: 100px;
+  border: 1px solid black;
+  font-size: 14px;
+}
+#site-header .wrapper #search button {
+  width: 26px;
+  height: 26px;
+  margin: 0 0 0 -2px;
+}
+
+#main-menu {
+  background: black;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
+  background: -webkit-linear-gradient(#000000, #555555);
+  background: -moz-linear-gradient(#000000, #555555);
+  background: -o-linear-gradient(#000000, #555555);
+  background: -ms-linear-gradient(#000000, #555555);
+  background: linear-gradient(#000000, #555555);
+}
+#main-menu nav {
+  text-align: center;
+}
+#main-menu nav ul {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  width: auto;
+}
+#main-menu nav ul {
+  *display: inline;
+}
+#main-menu nav ul li {
+  display: inline;
+  float: left;
+  height: 40px;
+  border-right: 2px solid black;
+}
+#main-menu nav ul li:last-child, #main-menu nav ul li.last {
+  border-right: 0;
+}
+#main-menu nav ul li a {
+  float: left;
+  border-bottom: 0;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 10px 16px;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
+  background: -webkit-linear-gradient(#000000, #555555);
+  background: -moz-linear-gradient(#000000, #555555);
+  background: -o-linear-gradient(#000000, #555555);
+  background: -ms-linear-gradient(#000000, #555555);
+  background: linear-gradient(#000000, #555555);
+}
+#main-menu nav ul li a:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555555), color-stop(100%, #000000));
+  background: -webkit-linear-gradient(#555555, #000000);
+  background: -moz-linear-gradient(#555555, #000000);
+  background: -o-linear-gradient(#555555, #000000);
+  background: -ms-linear-gradient(#555555, #000000);
+  background: linear-gradient(#555555, #000000);
+}
+
+#breadcrumb {
+  height: 40px;
+}
+#breadcrumb nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  float: left;
+}
+#breadcrumb nav ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#breadcrumb nav ul li,
+#breadcrumb nav ul li.page-title,
+#breadcrumb nav ul li a {
+  display: inline;
+  padding: 0;
+  color: gray;
+  display: inline;
+  background: none;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: normal;
+}
+#breadcrumb nav ul li a:hover {
+  text-decoration: underline;
+  color: #777777;
+}
+
+#page {
+  position: relative;
+  overflow: hidden;
+}
+#page .title-space {
+  max-width: 510px;
+  min-height: 0;
+  float: left;
+  clear: left;
+  margin: 0 0 10px 240px;
+}
+#page .profile-pic {
+  height: 200px;
+  width: 210px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#page .profile-pic img {
+  width: auto;
+  height: 200px;
+}
+#page .small-container {
+  max-width: 510px;
+  clear: left;
+  margin-left: 240px;
+}
+#page .small-container h3.scorecard-overall {
+  margin: 0;
+  padding: 15px 10px 10px 10px;
+  background: #f6f6f6;
+  border-bottom: 2px solid white;
+}
+#page .small-container h3.scorecard-overall span {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  height: 25px;
+  padding: 5px 0 0 130px;
+  margin: -5px 0 0 24px;
+  background: url(../images/d-smiley-sprite.png) 0 0 no-repeat;
+}
+#page .small-container h3.scorecard-overall span {
+  *display: inline;
+}
+#page .small-container h3.scorecard-overall span.score-overall-good {
+  background-position: left -2px;
+}
+#page .small-container h3.scorecard-overall span.score-overall-average {
+  background-position: left -44px;
+}
+#page .small-container h3.scorecard-overall span.score-overall-bad {
+  background-position: left -82px;
+}
+#page .small-container ul.scorecard {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+#page .small-container ul.scorecard li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#page .small-container ul.scorecard li article:hover {
+  cursor: pointer;
+  background-color: #e6e6e6;
+}
+#page .small-container ul.scorecard li article.active {
+  background-color: #e6e6e6;
+}
+#page .small-container ul.scorecard li article.active header {
+  background: url(../images/arrow-up.png) right 0 no-repeat;
+}
+#page .small-container ul.scorecard li article header {
+  overflow: hidden;
+  background: url(../images/arrow-down.png) right 0 no-repeat;
+}
+#page .small-container ul.scorecard li article header h4 {
+  float: left;
+  width: 120px;
+}
+#page .small-container ul.scorecard li article header p {
+  float: left;
+  max-width: 250px;
+  font-style: italic;
+  margin: 0 0 0 20px;
+  padding: 0 0 4px 60px;
+}
+#page .small-container ul.scorecard li article header p.score-good {
+  background: url(../images/score-good.png) left 0 no-repeat;
+}
+#page .small-container ul.scorecard li article header p.score-average {
+  background: url(../images/score-average.png) left 0 no-repeat;
+}
+#page .small-container ul.scorecard li article header p.score-bad {
+  background: url(../images/score-bad.png) left 0 no-repeat;
+}
+#page .small-container ul.scorecard li article div.details {
+  float: left;
+  display: block;
+  margin-top: 10px;
+}
+#page .small-container ul.scorecard li article div.details p {
+  font-size: 13px;
+}
+#page .profile-info {
+  min-height: 200px;
+  width: 210px;
+  position: absolute;
+  top: 210px;
+  left: 0;
+}
+#page .profile-info h3 {
+  text-transform: uppercase;
+  color: gray;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+#page .profile-info .constituency-party ul {
+  margin-bottom: 10px;
+}
+#page .profile-info .constituency-party ul li {
+  border: 0;
+  margin-bottom: 5px;
+}
+#page .profile-info .constituency-party ul li a {
+  background: #2e2e2e;
+  color: white;
+  padding: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+#page .profile-info .constituency-party ul li a:hover {
+  background: #d40000;
+}
+#page .profile-info .vcard li .label {
+  margin: 0;
+}
+#page .large-container {
+  position: relative;
+  max-width: 720px;
+  float: left;
+  clear: left;
+  margin-left: 240px;
+}
+#page .large-container .left-col,
+#page .large-container .right-col {
+  width: 335px;
+  float: left;
+}
+#page .large-container .left-col {
+  margin-right: 30px;
+}
+#page .large-container p, #page .large-container h3 {
+  margin-left: 0;
+  margin-right: 0;
+}
+#page .large-container section h3 {
+  margin: 20px 0 0 0;
+}
+#page .large-container section ul {
+  margin-bottom: 30px;
+}
+#page .large-container section ul li {
+  margin-left: 0;
+  margin-right: 0;
+}
+#page .large-container article h3 {
+  margin: 20px 0 5px 0;
+  border: none;
+}
+#page .large-container #tab-nav {
+  display: block;
+  border-bottom: 1px solid #bbb;
+  margin: 30px 0 0 0;
+  z-index: 1;
+  position: relative;
+  height: 38px;
+}
+#page .large-container #tab-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+#page .large-container #tab-nav ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  float: left;
+  display: inline;
+}
+#page .large-container #tab-nav ul li a {
+  float: left;
+  display: block;
+}
+#page .large-container #tab-nav ul li {
+  display: inline;
+  float: left;
+}
+#page .large-container #tab-nav ul li a {
+  display: block;
+  float: left;
+  color: #009245;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 9px 15px 8px 15px;
+  margin-right: 4px;
+  border: 1px solid #bbb;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f6f6f6));
+  background: -webkit-linear-gradient(#ffffff, #f6f6f6);
+  background: -moz-linear-gradient(#ffffff, #f6f6f6);
+  background: -o-linear-gradient(#ffffff, #f6f6f6);
+  background: -ms-linear-gradient(#ffffff, #f6f6f6);
+  background: linear-gradient(#ffffff, #f6f6f6);
+}
+#page .large-container #tab-nav ul li a:hover {
+  background: #fff;
+  color: #87c43c;
+}
+#page .large-container #tab-nav ul li.active a {
+  color: black;
+  padding: 9px 15px;
+  background: #fff;
+  border-bottom: 1px solid #fff;
+  -moz-border-radius: 0 0 2px 2px;
+  -webkit-border-radius: 0 0 2px 2px;
+  -o-border-radius: 0 0 2px 2px;
+  -ms-border-radius: 0 0 2px 2px;
+  -khtml-border-radius: 0 0 2px 2px;
+  border-radius: 0 0 2px 2px;
+}
+#page .large-container .tab-wrapper {
+  clear: both;
+  border-left: 1px solid #bbb;
+  padding: 15px 0 0 15px;
+  position: relative;
+  top: -1px;
+}
+#page #comments {
+  display: block;
+}
+#page #comments .big-btn-text-green {
+  float: right;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+}
+#page #comments .big-btn-text-green {
+  *display: inline;
+}
+#page #comments h3 {
+  clear: both;
+}
+#page .social-and-tools {
+  height: 150px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+}
+#page .social-and-tools .fb-like,
+#page .social-and-tools .twitter-share-button,
+#page .social-and-tools iframe {
+  display: inline;
+  float: left;
+  width: 84px !important;
+}
+#page .social-and-tools .twitter-share-button {
+  width: 96px !important;
+}
+#page .social-and-tools ul {
+  clear: both;
+  margin: 30px 0;
+}
+#page .social-and-tools ul li a {
+  padding: 5px;
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: normal;
+}
+#page h2, #page h3 {
+  border-top: none;
+  background: none;
+  padding: 0;
+}
+
+/* 3. MEDIA QUERIES
+   for tablets mainly, but also smaller screens
+   that can't handle 960px
+-------------------------------------------------------------- */
+@media only screen and (min-width: 640px) and (max-width: 960px) {
+  #page .social-and-tools {
+    position: relative;
+    top: auto;
+    right: auto;
+    float: left;
+    clear: left;
+    margin-left: 240px;
+  }
+}

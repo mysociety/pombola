@@ -3,8 +3,8 @@
 
 
 {% block extrastyle %}
-    <link rel="icon" type="image/png" href="{{ STATIC_URL }}favicon.png">
-    <link href="{{ STATIC_URL }}common.css" media="screen" rel="stylesheet" type="text/css" /> 
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
+    <link href="{{ STATIC_URL }}css/common.css" media="screen" rel="stylesheet" type="text/css" /> 
 {% endblock %}
 
 {% block blockbots %}
@@ -28,9 +28,12 @@
     		document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"><\/script>');
     	}
     }
+    //]]>
+    </script>
+    <script type="text/javascript">//<![CDATA[
     if(!jQuery || (typeof jQuery.ui == 'undefined')) {
     	document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"><\/script>');
-    	document.write('<link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />');
+    	document.write('<link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />');
     }
     //]]>
     </script>
