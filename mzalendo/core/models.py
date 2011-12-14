@@ -136,8 +136,12 @@ class InformationSource(ModelBase):
 
 
 class PersonQuerySet(models.query.GeoQuerySet):
-    def is_mp(self):
-        return self.filter( position__title__slug='mp' )
+    def is_mp(self, when=None):
+        
+        mp_qs = Position.objects.filter( title__slug='mp' ).currently_active( when )
+
+        qs = self.filter( position__in = mp_qs )
+        return qs
 
 
 class PersonManager(ManagerBase):
