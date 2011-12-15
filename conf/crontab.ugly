@@ -18,3 +18,4 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 
 0 7 * * * !!(*= $user *)!! check_for_comments_needing_attention.py
 
+6 7 * * * !!(*= $user *)!! update_hansard.bash
