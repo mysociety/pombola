@@ -84,18 +84,20 @@ class SittingView(DetailView):
 
 # TODO - change to class based views. 
 
-def person_entries(request, slug):
-    """Display entries for a person"""
-
-    person = get_object_or_404( Person, slug=slug )
-
-    return render_to_response(
-        'hansard/person_entries.html',
-        {
-            'object': person,
-        },
-        context_instance=RequestContext(request)
-    )
+# TODO - implement a view of all of a persons speeches
+#
+# def person_entries(request, slug):
+#     """Display entries for a person"""
+# 
+#     person = get_object_or_404( Person, slug=slug )
+# 
+#     return render_to_response(
+#         'hansard/person_entries.html',
+#         {
+#             'object': person,
+#         },
+#         context_instance=RequestContext(request)
+#     )
     
 
 def person_summary(request, slug):

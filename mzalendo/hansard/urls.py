@@ -9,6 +9,6 @@ urlpatterns = patterns('hansard.views',
     
     # views for a specific person
     url( r'^person/(?P<slug>[\w\-]+)/summary/', 'person_summary', name='person_summary' ),
-    url( r'^person/(?P<slug>[\w\-]+)/',         'person_entries', name='person_entries' ),
+    # url( r'^person/(?P<slug>[\w\-]+)/',         'person_entries', name='person_entries' ),
 
 )
