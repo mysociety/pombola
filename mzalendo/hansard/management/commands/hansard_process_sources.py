@@ -12,7 +12,9 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
 
         for source in Source.objects.all().requires_processing():
-            print "Looking at %s" % source
+            
+            if int(options.get('verbosity')) >= 2:
+                print "Looking at %s" % source
 
             source.last_processing_attempt = datetime.datetime.now()
             source.save()
