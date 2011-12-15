@@ -21,7 +21,7 @@
     <li>
         <strong>{{ entry.sitting.start_date}}</strong> in <strong>{{ entry.sitting.venue.name }}</strong>:
         {{ entry.content|truncatewords:40 }}
-        FIXME: add link to entry in full transcript
+        <a href="{% url hansard:sitting_view pk=entry.sitting.id %}#entry-{{ entry.id }}">view</a>
     </li>
     {% endfor %}
 

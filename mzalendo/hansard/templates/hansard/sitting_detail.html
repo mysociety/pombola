@@ -17,7 +17,7 @@
             <li class="page_number">Page {{ entry.page_number }} of <a href="{{ source_url }}">{{ source_name }}</a></li>
         {% endifchanged %}
 
-        <li class="{{ entry.type }}">
+        <li class="{{ entry.type }}" id="entry-{{ entry.id }}">
             {% switch entry.type %}
                 {% case 'heading' %}
                     <h2>{{ entry.content }}</h2>
