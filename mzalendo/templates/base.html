@@ -11,6 +11,8 @@
 
         {% comment %}
 
+            FIXME - add this back once design is done
+
             The 'STATIC_GENERATION_NUMBER' is used to force the caches to fetch
             new content. To update manually change the value in settings.py.
 
@@ -77,15 +79,15 @@
         <div id="main-menu">
             <nav class="wrapper">
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#">Democracy Resources</a></li>
-                    <li><a href="#">Politicians</a></li>
-                    <li><a href="#">Parliament</a></li>
-                    <li><a href="#">Places</a></li>
+                    <li><a href="{% url home %}">Home</a></li>
+                    <li><a href="{% url info_page slug='how-democracy-works' %}">Democracy Resources</a></li>
+                    <li><a href="{% url person_list %}">Politicians</a></li>
+                    <li><a href="{% url hansard:index %}">Parliament</a></li>
+                    <li><a href="{% url place_list %}">Places</a></li>
                     <li><a href="#">2012</a></li>
                     <li><a href="#">Lest We Forget</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="http://www.mzalendo.com/">Blog</a></li>
+                    <li><a href="{% url info_page slug='about' %}">About</a></li>
                 </ul>
             </nav>
         </div>
