@@ -14,7 +14,7 @@
     <ul>
         
         {% for sitting in sittings %}
-        <li><a href="{% url sitting_view pk=sitting.id %}">{{ sitting }}</a></li>
+        <li><a href="{% url hansard:sitting_view pk=sitting.id %}">{{ sitting }}</a></li>
         {% empty %}
         <li>There are no transcripts</li>
         {% endfor %}

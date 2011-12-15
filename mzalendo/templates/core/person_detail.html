@@ -170,6 +170,19 @@
             </div>
 
             {% include 'comments/detail_page_comments.html' %}
+
+
+            <!-- Hansard appearances -->
+            {% with hansard_count=object.hansard_entries.count %}
+                {% if hansard_count %}
+                <h2 class="tab-nav" rel="#appearances">Appearances ({{ hansard_count }})</h2>
+    
+                <div class="tab" id="appearances" data-comment-source-url="{% url hansard:person_summary slug=object.slug %}">
+                    Loading...
+                </div>
+                {% endif %}
+            {% endwith %}
+            
         </div>
     </div>
 

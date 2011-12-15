@@ -5,6 +5,50 @@ from django.db import models
 from core.models import Person
 from hansard.models import Sitting, Alias
 
+
+class EntryQuerySet(models.query.QuerySet):
+    def monthly_appearance_counts(self):
+        """return an array of hasher for date ad counts for each month"""
+
+        # would prefer to do this as a single query but I can't seem to make the ORM do that.
+
+        dates = self.dates('sitting__start_date','month', 'DESC' )
+        counts = []
+        
+        for d in dates:
+            qs = self.filter(sitting__start_date__month=d.month, sitting__start_date__year=d.year )
+            counts.append(
+                dict( date=d, count=qs.count() )
+            )
+
+        return counts
+
+
+class EntryManager(models.Manager):
+    def get_query_set(self):
+        return EntryQuerySet(self.model)
+    
+    # def loose_match_name(self, name):
+    #     """Search for a loose match on a name. May not be too reliable"""
+    # 
+    #     # Try matching all the bits
+    #     results = SearchQuerySet().filter_and( content=name ).models( self.model )
+    # 
+    #     # if that fails try matching all the bits in any order
+    #     if not len( results ):
+    #         results = SearchQuerySet().models(Person)
+    #         for bit in re.split(r'\s+', name):
+    #             results = results.filter_and( content=bit )
+    # 
+    #     # If we have exactly one result return that
+    #     if len( results ) == 1:
+    #         return results[0].object
+    #     else:
+    #         return None
+        
+
+
+
 class Entry(models.Model):
     """Model for representing an entry in Hansard - speeches, headings etc"""
 
@@ -30,10 +74,12 @@ class Entry(models.Model):
     # link the speech up to a person.
     speaker_name  = models.CharField( max_length=200, blank=True )
     speaker_title = models.CharField( max_length=200, blank=True )
-    speaker       = models.ForeignKey( Person, blank=True, null=True )
+    speaker       = models.ForeignKey( Person, blank=True, null=True, related_name='hansard_entries' )
 
     # What was actually said
     content       = models.TextField()
+
+    objects = EntryManager()
 
     def __unicode__(self):
         return "%s: %s" % (self.type, self.content[:100])
