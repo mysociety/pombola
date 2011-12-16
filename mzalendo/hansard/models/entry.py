@@ -22,32 +22,33 @@ class EntryQuerySet(models.query.QuerySet):
             )
 
         return counts
+        
+    def unassigned_speeches(self):
+        """All speeches that do not have a speaker assigned"""
+        return self.filter(
+            speaker__isnull = True,
+            type            = 'speech',
+        ).exclude(
+            speaker_name = '',
+        )
+    
+    def unassigned_speaker_names(self):
+        return (
+            Entry.objects
+                .all()
+                .unassigned_speeches()
+                .values('speaker_name')
+                .order_by('speaker_name')
+                .exclude( speaker_name__in=Alias.objects.values('alias') )
+                .distinct()
+        )
+    
 
 
 class EntryManager(models.Manager):
     def get_query_set(self):
         return EntryQuerySet(self.model)
     
-    # def loose_match_name(self, name):
-    #     """Search for a loose match on a name. May not be too reliable"""
-    # 
-    #     # Try matching all the bits
-    #     results = SearchQuerySet().filter_and( content=name ).models( self.model )
-    # 
-    #     # if that fails try matching all the bits in any order
-    #     if not len( results ):
-    #         results = SearchQuerySet().models(Person)
-    #         for bit in re.split(r'\s+', name):
-    #             results = results.filter_and( content=bit )
-    # 
-    #     # If we have exactly one result return that
-    #     if len( results ) == 1:
-    #         return results[0].object
-    #     else:
-    #         return None
-        
-
-
 
 class Entry(models.Model):
     """Model for representing an entry in Hansard - speeches, headings etc"""
@@ -93,12 +94,7 @@ class Entry(models.Model):
     def assign_speakers(cls):
         """Go through all entries and assign speakers"""
         
-        entries = cls.objects.filter(
-            speaker__isnull = True,
-            type            = 'speech',
-        ).exclude(
-            speaker_name = '',
-        )
+        entries = cls.objects.all().unassigned_speeches()
         
         # create an in memory cache of speaker names and the sitting dates, to
         # avoid hitting the db as badly with all the repeated requests

@@ -10,18 +10,7 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
-        qs= (
-            Entry.objects
-                .values('speaker_name')
-                .order_by('speaker_name')
-                .filter(type='speech', speaker__isnull=True)
-                .exclude(speaker_name='')
-                .exclude( speaker_name__in=Alias.objects.values('alias') )
-                .distinct()
-        )
-
-        print qs.query
-
+        qs = Entry.objects.all().unassigned_speaker_names()
         count = qs.count()
         
         if count:

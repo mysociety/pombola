@@ -9,7 +9,11 @@ from django.test import TestCase
 from django.utils import unittest
 
 from hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
-from hansard.models import Source, Sitting, Entry, Venue
+from hansard.models import Source, Sitting, Entry, Venue, Alias
+
+from core.models import Person, PositionTitle, Position
+
+from django_date_extensions.fields import ApproximateDate
 
 
 class KenyaParserTest(TestCase):
@@ -79,18 +83,20 @@ class KenyaParserTest(TestCase):
         )
 
 
-    def test_create_entries_from_data_and_source(self):
-        """Take the data and source, and create the sitting and entries from it"""
-
-        # Create a new source in the database to attach sitting to
-        source   = Source(
+    def _create_source_and_load_test_json_to_entries(self):
+        source   = Source.objects.create(
             name = 'Test source',
             url  = 'http://example.com/foo/bar/testing',
             date = datetime.date( 2011, 9, 1 )
         )
-        source.save()
-        
         data = json.loads( open( self.expected_data_json, 'r'  ).read() )
+        KenyaParser.create_entries_from_data_and_source( data, source )
+        return source
+
+    def test_create_entries_from_data_and_source(self):
+        """Take the data and source, and create the sitting and entries from it"""
+
+        source = self._create_source_and_load_test_json_to_entries()
 
         # hand the data and source over to the parser so that it can do the
         # inserting into the database.
@@ -117,5 +123,97 @@ class KenyaParserTest(TestCase):
         # check entries created and that we have the right number
         entries = sitting.entry_set
         self.assertEqual( entries.count(), 64 )
+    
+    
+    def test_assign_speaker_names(self):
+        """Test that the speaker names are assigned as expected"""
+
+        # This should really be in a seperate file as it is not related to the
+        # Kenya parser, but keeping it here for now as it is a step in the
+        # parsing flow that is being tested.
+        
+        # set up the entries
+        source = self._create_source_and_load_test_json_to_entries()
+
+        entry_qs = Entry.objects.all()
+
+        # check that none of the speakers are assigned
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
+        
+        # Assign speakers
+        Entry.assign_speakers()
+        
+        # check that none of the speakers got assigned - there are no entries in the database
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 12 )
+
+        print [ x['speaker_name'] for x in entry_qs.unassigned_speaker_names() ]
+
+
+        # Add an mp that should match but don't make an mp - no match
+        james_gabbow = Person.objects.create(
+            legal_name = 'James Gabbow',
+            slug       = 'james-gabbow',
+        )
+        Entry.assign_speakers()
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 12 )
+
+
+        # create the position - check matched
+        mp = PositionTitle.objects.create(
+            name = 'Member of Parliament',
+            slug = 'mp',
+        )
+        Position.objects.create(
+            person     = james_gabbow,
+            title      = mp,
+            start_date = ApproximateDate( year=2011, month=1, day = 1 ),
+            end_date   = ApproximateDate( future=True ),
+        )
+        Entry.assign_speakers()
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 11 )
+
+        # Add an mp that is no longer current, check not matched
+        bob_musila = Person.objects.create(
+            legal_name = 'Bob Musila',
+            slug       = 'bob-musila',
+        )
+        Position.objects.create(
+            person     = james_gabbow,
+            title      = mp,
+            start_date = ApproximateDate( year=2007, month=1, day = 1 ),
+            end_date   = ApproximateDate( year=2009, month=1, day = 1 ),
+        )
+        Entry.assign_speakers()
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 11 )
+        
+        # Add a name to the aliases and check it is matched
+        betty_laboso = Person.objects.create(
+            legal_name = 'Betty Laboso',
+            slug       = 'betty-laboso',
+        )
+        Alias.objects.create(
+            alias  = 'Dr. Laboso',
+            person = betty_laboso,
+        )
+        Entry.assign_speakers()
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 10 )
         
 
+        # Add a name to alias that should be ignored, check not matched but not listed in names any more
+        
+        # Add all remaining names to alias and check that all matched
+        for name in [ x['speaker_name'] for x in entry_qs.unassigned_speaker_names() ]:
+            Alias.objects.create(
+                alias  = name,
+                person = betty_laboso,
+            )
+        Entry.assign_speakers()
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 0 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 0 )
+        
+        
