@@ -122,11 +122,15 @@ class Entry(models.Model):
 
         name = self.speaker_name
         
-        # First check for a matching alias
-        # try:
+        # First check for a matching alias that is not ignored
         try:
             alias = Alias.objects.get( alias=name )
-            return [ alias.person ]
+            
+            if alias.ignored:
+                return []
+            else:
+                return [ alias.person ]
+
         except Alias.DoesNotExist:
             pass
 

@@ -147,7 +147,8 @@ class KenyaParserTest(TestCase):
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
         self.assertEqual( len(entry_qs.unassigned_speaker_names()), 12 )
 
-        print [ x['speaker_name'] for x in entry_qs.unassigned_speaker_names() ]
+
+        # print [ x['speaker_name'] for x in entry_qs.unassigned_speaker_names() ]
 
 
         # Add an mp that should match but don't make an mp - no match
@@ -203,8 +204,14 @@ class KenyaParserTest(TestCase):
         self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
         self.assertEqual( len(entry_qs.unassigned_speaker_names()), 10 )
         
-
         # Add a name to alias that should be ignored, check not matched but not listed in names any more
+        Alias.objects.create(
+            alias   = 'Mr. Speaker',
+            ignored = True,
+        )
+        Entry.assign_speakers()
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 9 )        
         
         # Add all remaining names to alias and check that all matched
         for name in [ x['speaker_name'] for x in entry_qs.unassigned_speaker_names() ]:
@@ -213,7 +220,7 @@ class KenyaParserTest(TestCase):
                 person = betty_laboso,
             )
         Entry.assign_speakers()
-        self.assertEqual( entry_qs.unassigned_speeches().count(), 0 )
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 6 )
         self.assertEqual( len(entry_qs.unassigned_speaker_names()), 0 )
         
         
