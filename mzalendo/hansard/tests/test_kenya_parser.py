@@ -97,10 +97,6 @@ class KenyaParserTest(TestCase):
         """Take the data and source, and create the sitting and entries from it"""
 
         source = self._create_source_and_load_test_json_to_entries()
-
-        # hand the data and source over to the parser so that it can do the
-        # inserting into the database.
-        KenyaParser.create_entries_from_data_and_source( data, source )
         
         # check source now marked as processed
         source = Source.objects.get(id=source.id) # reload from db
