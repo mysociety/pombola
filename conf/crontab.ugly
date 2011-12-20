@@ -14,6 +14,9 @@ PATH=/data/vhost/!!(*= $vhost *)!!/mzalendo/bin/:$VIRTUAL_ENV/bin:/usr/local/bin
 # and have everything work.
 PYTHONPATH=/data/vhost/!!(*= $vhost *)!!/mzalendo
 
+# Set this so that python does not choke trying to output utf8
+PYTHONIOENCODING=utf-8
+
 MAILTO=cron-!!(*= $site *)!!@mysociety.org
 
 0 7 * * * !!(*= $user *)!! check_for_comments_needing_attention.py
