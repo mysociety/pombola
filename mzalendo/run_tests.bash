@@ -12,6 +12,7 @@ set -e
     images         \
     info           \
     place_data     \
+    search         \
     tasks          \
     user_profile   \
 

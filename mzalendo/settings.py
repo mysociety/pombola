@@ -225,6 +225,7 @@ INSTALLED_APPS = (
     'hansard',
     'projects',
     'place_data',
+    'search',
     'user_profile',
     'core',
 )
