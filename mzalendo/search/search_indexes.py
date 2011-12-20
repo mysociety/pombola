@@ -1,7 +1,8 @@
-import datetime
 from haystack import indexes
 from haystack import site
-from mzalendo.core import models
+
+from mzalendo.core    import models as core_models
+from mzalendo.hansard import models as hansard_models
 
 
 # TODO - currently I'm using the realtime search index - which is possibly a bad
@@ -16,21 +17,36 @@ from mzalendo.core import models
 #   http://docs.haystacksearch.org/dev/best_practices.html#avoid-hitting-the-database
 
 
-class PersonIndex(indexes.RealTimeSearchIndex):
+# Note - these indexes could be specified in the individual apps, which might
+# well be cleaner. They are all in one place as I believe there is a good chance
+# that they'll be heavily edited when moving to Haystack 2, or some other search
+# index abstraction.
+
+
+class BaseIndex(indexes.RealTimeSearchIndex):
     text = indexes.CharField(document=True, use_template=True)
+
+
+class PersonIndex(BaseIndex):
     name_auto = indexes.EdgeNgramField(model_attr='name')
 
-class PlaceIndex(indexes.RealTimeSearchIndex):
-    text = indexes.CharField(document=True, use_template=True)
+class PlaceIndex(BaseIndex):
+    pass
 
-class OrganisationIndex(indexes.RealTimeSearchIndex):
-    text = indexes.CharField(document=True, use_template=True)
+class OrganisationIndex(BaseIndex):
+    pass
 
-class PositionTitleIndex(indexes.RealTimeSearchIndex):
-    text = indexes.CharField(document=True, use_template=True)
+class PositionTitleIndex(BaseIndex):
+    pass
+
+site.register( core_models.Person,        PersonIndex        )
+site.register( core_models.Place,         PlaceIndex         )
+site.register( core_models.Organisation,  OrganisationIndex  )
+site.register( core_models.PositionTitle, PositionTitleIndex )
 
 
-site.register( models.Person,        PersonIndex        )
-site.register( models.Place,         PlaceIndex         )
-site.register( models.Organisation,  OrganisationIndex  )
-site.register( models.PositionTitle, PositionTitleIndex )
+
+# class HansardEntryIndex(indexes.RealTimeSearchIndex):
+#     text = indexes.CharField(document=True, use_template=True)
+#     
+# site.register( hansard_models.Entry, HansardEntryIndex )
