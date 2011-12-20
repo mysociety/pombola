@@ -34,6 +34,7 @@
         <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
 
+        <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
         
         {% block map_related_headers %}
         <script type="text/javascript">
@@ -144,6 +145,12 @@
              * Test for mobile / desktop and load appropriate libs/scripts
              */
             // this is not yet ideal... it reacts a bit slow if the cdn fails
+
+            var post_jquery_desktop_load = [
+                '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
+                '{{ STATIC_URL }}js/desktop-functions.js'
+            ];
+
             Modernizr.load([
                 {
                     test : Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)'),
@@ -161,14 +168,14 @@
                                         complete : function () {
                                             // once local has been fetched, check for jQuery object again and load static libs and functions if there
                                             if ( window.jQuery ) {
-                                                Modernizr.load(['{{ STATIC_URL }}js/libs/jquery.autocomplete.min.js', '{{ STATIC_URL }}js/desktop-functions.js']);
+                                                Modernizr.load( post_jquery_desktop_load );
                                             }
                                         }
                                     }
                                 ]);
                             }else{
                                 // if jQuery object is there, load in the rest of the static libs and functions
-                                Modernizr.load(['{{ STATIC_URL }}js/libs/jquery.autocomplete.min.js', '{{ STATIC_URL }}js/desktop-functions.js']);
+                                Modernizr.load( post_jquery_desktop_load );
                             }
                         }
                     }
