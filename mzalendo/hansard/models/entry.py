@@ -33,7 +33,7 @@ class EntryQuerySet(models.query.QuerySet):
         )
     
     def unassigned_speaker_names(self):
-        return (
+        unassigned_names = (
             Entry.objects
                 .all()
                 .unassigned_speeches()
@@ -42,7 +42,15 @@ class EntryQuerySet(models.query.QuerySet):
                 .exclude( speaker_name__in=Alias.objects.values('alias') )
                 .distinct()
         )
-    
+
+        names = [
+            x['speaker_name']
+            for x
+            in unassigned_names
+            if not Entry.can_ignore_name(x['speaker_name'])
+        ]
+
+        return names
 
 
 class EntryManager(models.Manager):
@@ -133,7 +141,7 @@ class Entry(models.Model):
 
         except Alias.DoesNotExist:
             pass
-
+            
         # drop the prefix
         name = re.sub( r'^\w+\.\s', '', name )
         
@@ -147,3 +155,32 @@ class Entry(models.Model):
 
         return person_search.all()[0:]
 
+
+    @classmethod
+    def can_ignore_name(cls, name):
+        
+        # Ignore anything with numbers in
+        if re.search(r'\d', name):
+            return True
+
+        # Ignore titles - they start with 'The'
+        if re.match(r'The', name):
+            return True
+
+        # Ignore anything with CAPITALS in
+        if re.search(r'[A-Z]{3,}', name):
+            return True
+            
+        # Ignore anything with Speaker in it
+        if re.search(r'\bSpeaker\b', name):
+            return True
+        
+        # Ignore anything that looks like a bullet point
+        if re.match(r'\(.\)', name):
+            return True
+
+        # Ignore anything that looks like an parliamentary support role
+        if re.search( r'\bTellers\b', name):
+            return True
+
+        return False

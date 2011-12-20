@@ -141,10 +141,10 @@ class KenyaParserTest(TestCase):
         
         # check that none of the speakers got assigned - there are no entries in the database
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 12 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 11 )
 
 
-        # print [ x['speaker_name'] for x in entry_qs.unassigned_speaker_names() ]
+        # print entry_qs.unassigned_speaker_names()
 
 
         # Add an mp that should match but don't make an mp - no match
@@ -154,7 +154,7 @@ class KenyaParserTest(TestCase):
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 12 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 11 )
 
 
         # create the position - check matched
@@ -170,7 +170,7 @@ class KenyaParserTest(TestCase):
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 11 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 10 )
 
         # Add an mp that is no longer current, check not matched
         bob_musila = Person.objects.create(
@@ -185,7 +185,7 @@ class KenyaParserTest(TestCase):
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 11 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 10 )
         
         # Add a name to the aliases and check it is matched
         betty_laboso = Person.objects.create(
@@ -198,25 +198,60 @@ class KenyaParserTest(TestCase):
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 10 )
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 9 )
         
         # Add a name to alias that should be ignored, check not matched but not listed in names any more
         Alias.objects.create(
-            alias   = 'Mr. Speaker',
+            alias   = 'Prof. Kaloki',
             ignored = True,
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 9 )        
+        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 8 )        
         
         # Add all remaining names to alias and check that all matched
-        for name in [ x['speaker_name'] for x in entry_qs.unassigned_speaker_names() ]:
+        for name in entry_qs.unassigned_speaker_names():
             Alias.objects.create(
                 alias  = name,
                 person = betty_laboso,
             )
         Entry.assign_speakers()
-        self.assertEqual( entry_qs.unassigned_speeches().count(), 6 )
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 8 )
         self.assertEqual( len(entry_qs.unassigned_speaker_names()), 0 )
         
+    
+    def test_can_ignore_some_speakers(self):
+
+        # These are all names that appear because the parser sometimes gets confused.
+        # Rather than fix the parser (very hard) make sure that we ignore these names so
+        # that missing name report is not so long.
+        speaker_names = [
+            "10 Thursday 10th February, 2011(P) Mr. Kombo",
+            "(a)",
+            "Act to 58A.",
+            "ADJOURNMENT 29 Wednesday, 1st December, 2010 (A) Mr. Deputy Speaker",
+            "April 21, 2009 PARLIAMENTARY DEBATES 2 Mr. Speaker",
+            "(b)",
+            "Cap.114 26.",
+            "COMMUNICATION FROM THE CHAIR Mr. Speaker",
+            "Deputy Speaker",
+            "(i) Energy, Communications and Information Committee",
+            "NOTICES OF MOTIONS Mr. Affey",
+            "QUORUM Mr. Ahenda",
+            "Tellers of Ayes",
+            "The Assistant for Lands",
+            "The Assistant Minister for Agriculture",
+            "The Attorney-General",
+            "The Member for Fafi",
+            "The Minister for Roads",
+        ]
         
+        false_count = 0
+        
+        for name in speaker_names:
+            result = Entry.can_ignore_name( name ) 
+            if not result:
+                print "Got True for Entry.can_ignore_name( '%s' ), expecting False" % name
+                false_count += 1
+    
+        self.assertEqual( false_count, 0 )

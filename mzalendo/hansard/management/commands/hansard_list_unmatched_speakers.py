@@ -10,12 +10,12 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
-        qs = Entry.objects.all().unassigned_speaker_names()
-        count = qs.count()
+        names = Entry.objects.all().unassigned_speaker_names()
+        count = len(names)
         
         if count:
             print "There are %u Hansard speaker names that could not be matched to a person" % count
             print ""
 
-            for entry in qs:
-                print "\t'%s'" % entry['speaker_name']
+            for name in names:
+                print "\t'%s'" % name
