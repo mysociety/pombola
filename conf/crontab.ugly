@@ -19,6 +19,6 @@ PYTHONIOENCODING=utf-8
 
 MAILTO=cron-!!(*= $site *)!!@mysociety.org
 
-0 7 * * * !!(*= $user *)!! check_for_comments_needing_attention.py
+0 7 * * * !!(*= $user *)!! check_comments.bash
 
 6 7 * * * !!(*= $user *)!! update_hansard.bash
