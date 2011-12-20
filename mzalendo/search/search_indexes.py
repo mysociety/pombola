@@ -46,7 +46,7 @@ site.register( core_models.PositionTitle, PositionTitleIndex )
 
 
 
-# class HansardEntryIndex(indexes.RealTimeSearchIndex):
-#     text = indexes.CharField(document=True, use_template=True)
-#     
-# site.register( hansard_models.Entry, HansardEntryIndex )
+class HansardEntryIndex(BaseIndex):
+    pass
+    
+site.register( hansard_models.Entry, HansardEntryIndex )

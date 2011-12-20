@@ -1,6 +1,7 @@
 import re
 
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from core.models import Person
 from hansard.models import Sitting, Alias
@@ -93,6 +94,14 @@ class Entry(models.Model):
     def __unicode__(self):
         return "%s: %s" % (self.type, self.content[:100])
     
+    def get_absolute_url(self):
+        url = reverse(
+            'hansard:sitting_view',
+            kwargs={ 'pk': self.sitting.id },
+        )
+        return "%s#entry-%u" % (url, self.id)
+
+
     class Meta:
         ordering = ['sitting', 'text_counter']
         app_label = 'hansard'
