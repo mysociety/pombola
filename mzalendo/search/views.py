@@ -25,7 +25,7 @@ def location_search(request):
         areas = None
         
     return render_to_response(
-        'core/location_search.html',
+        'search/location.html',
         {
             'loc': loc,
             'results': results,
