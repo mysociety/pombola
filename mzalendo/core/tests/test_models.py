@@ -31,6 +31,12 @@ class PositionTestCase(unittest.TestCase):
             slug = "place",
             kind = place_kind,
         )
+    
+    def tearDown(self):
+        """Clean up after the tests"""
+        self.person.delete()
+        self.organisation.delete()
+        self.place.delete()
 
     def getPos(self, **kwargs):
         title_kind, created = models.PositionTitle.objects.get_or_create(
