@@ -22,13 +22,6 @@ urlpatterns = patterns('core.views',
     # specials
     url(r'^parties', 'parties', name='parties'),
 
-
-    # Haystack and other searches
-    url(r'^search/', include('haystack.urls') ),
-    url(r'^location/', 'location_search', name="location_search"),
-    url(r'^autocomplete', 'autocomplete', name="autocomplete"),
-    
-
     # Ajax select
     url(r'^ajax_select/', include('ajax_select.urls')),
 )

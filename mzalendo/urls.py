@@ -64,6 +64,11 @@ urlpatterns += patterns('',
     url(r'^social/', include('social_auth.urls')),
 )
 
+# search
+urlpatterns += patterns('',
+    (r'^search/', include('search.urls')),
+)
+
 # Everything else goes to core
 urlpatterns += patterns('',
     (r'^', include('core.urls')),
