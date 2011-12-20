@@ -2,6 +2,7 @@
 
 {% load thumbnail %}
 {% load pagination_tags %}
+{% load highlight %}
 
 {% block title %}
     {% if query %}
@@ -28,12 +29,20 @@
         {% if query %}
             <h3>Results</h3>
 
+            <style type="text/css" media="screen">
+                span.highlighted {
+                    background-color: #8f8;
+                }
+            </style>
+
             <ul class="listing">        
             {% for result in page.object_list %}
                 <li>
-                    <strong>{{ result.object.sitting.name }}</strong>:
-                    {{ result.object.content }}
+                    <strong>{{ result.object.sitting.name }}</strong>
                     <a href="{{ result.object.get_absolute_url }}">view</a>
+                    <br>
+                    
+                    {% highlight result.object.content with request.GET.q %}
                     
                 </li>
             {% empty %}
