@@ -223,6 +223,7 @@ INSTALLED_APPS = (
     'info',
     'tasks',
     'hansard',
+    'feedback',
     'projects',
     'place_data',
     'search',
