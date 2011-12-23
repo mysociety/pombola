@@ -81,6 +81,13 @@ class MzalendoSeleniumTestCase(SeleniumTestCase):
         self.driver.find_element_by_link_text("logout").click()
         self.assertTrue( '/accounts/logout/' in self.driver.current_url )
         self.assert_user_logged_out()
+        
+    def resize_to_mobile(self):
+        self.driver.set_window_size(400, 600)
+
+    def resize_to_desktop(self):
+        self.driver.set_window_size(800, 1000)
+    
 
 
 # gather the twitter details. Do this here so that the values can be used in the
