@@ -12,7 +12,7 @@ def add(request):
     submit_was_success = False
     return_to_url      = None
 
-    # If it is a post request try to create the feedbacj
+    # If it is a post request try to create the feedback
     if request.method == 'POST':
         form = FeedbackForm( request.POST )
         if form.is_valid():
