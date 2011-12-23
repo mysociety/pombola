@@ -24,7 +24,7 @@
 
     {% if submit_was_success %}
 
-        <div id="ajax_subcontent">
+        <div id="ajax_dialog_subcontent">
             <div class="success">
                 Thank you for your feedback!            
             </div>
@@ -36,7 +36,7 @@
 
     {% else %}
 
-        <div id="ajax_subcontent">
+        <div id="ajax_dialog_subcontent">
             <form method="post" action="{% url feedback_add %}" id="add_feedback">
                 {% csrf_token %}
                 

@@ -82,15 +82,15 @@ $(function(){
                 var dialog_div = $('<div>Loading...</div>');
     
                 // Load the initial content for the dialog
-                dialog_div.load( event.target.href + ' #ajax_subcontent' )
+                dialog_div.load( event.target.href + ' #ajax_dialog_subcontent' )
     
-                // Form subission should be done using ajax, and only the ajax_subcontent should be shown.
+                // Form subission should be done using ajax, and only the ajax_dialog_subcontent should be shown.
                 var handle_form_submission = function( form_submit_event ) {
                     form_submit_event.preventDefault();
                     var form = $(form_submit_event.target);
                     form.ajaxSubmit({
                         success: function( responseText ) {
-                            dialog_div.html( $(responseText).find('#ajax_subcontent') );
+                            dialog_div.html( $(responseText).find('#ajax_dialog_subcontent') );
                         }
                     });
                 };
