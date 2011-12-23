@@ -61,6 +61,48 @@ $(function(){
             if (ui.item) return window.location = ui.item.url;
         }
     });
+    
+    
+    /*
+     * enable dialog based feedback links
+     */
+     $('a.feedback_link')
+        .on(
+            'click',
+            function(event) {
+                // Note - we could bail out here if the window is too small, as
+                // we'd be on a mobile and it might be better just to send them to
+                // the feedback page. Not done as this js should only be loaded on
+                // a desktop.
+    
+                // don't follow the link to the feedback page.
+                event.preventDefault();
+    
+                // create a div to use in the dialog
+                var dialog_div = $('<div>Loading...</div>');
+    
+                // Load the initial content for the dialog
+                dialog_div.load( event.target.href + ' #ajax_subcontent' )
+    
+                // Form subission should be done using ajax, and only the ajax_subcontent should be shown.
+                var handle_form_submission = function( form_submit_event ) {
+                    form_submit_event.preventDefault();
+                    var form = $(form_submit_event.target);
+                    form.ajaxSubmit({
+                        success: function( responseText ) {
+                            dialog_div.html( $(responseText).find('#ajax_subcontent') );
+                        }
+                    });
+                };
+                
+                // catch all form submissions and do them using ajax
+                dialog_div.on( 'submit', 'form', handle_form_submission );
+            
+                // Show the dialog
+                dialog_div.dialog({modal: true});
+    
+            }
+        );
 
   /*
    * simple tabs

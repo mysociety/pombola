@@ -122,7 +122,7 @@
                 <ul class="utilities">
                     <li><a href="{% url privacy %}">privacy</a></li>
                     <li><a href="http://eepurl.com/gPMJL">Subscribe to our newsletter</a></li>
-                    <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}">Give us feedback</a></li>
+                    <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
                 </ul>
                 
                 <ul class="utilities">
@@ -149,6 +149,7 @@
 
             var post_jquery_desktop_load = [
                 '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
+                '{{ STATIC_URL }}js/libs/jquery.form-v2.94.js', // TODO - only load when needed for feedback form
                 '{{ STATIC_URL }}js/desktop-functions.js'
             ];
 

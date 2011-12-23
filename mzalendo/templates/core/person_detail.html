@@ -215,7 +215,7 @@
 
         <ul class="tools">
             <li><a href="{% get_comment_add_url object %}" class="big-btn-text-green">Post Comment</a></li>
-            <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="big-btn-text-red">Correct this information</a></li>
+            <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link big-btn-text-red">Correct this information</a></li>
         </ul>
     </div>
 {% endblock %}
