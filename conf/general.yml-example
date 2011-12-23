@@ -43,4 +43,7 @@ TEST_TWITTER_PASSWORD: ''
 TEST_TWITTER_REAL_NAME: ''
 
 # Where is the selenium server? (If empty then selenium tests can't run)
+# download it from here: http://seleniumhq.org/download/
+# Note - need a recent one so that the window resizing has been implemented -
+# probably >= 2.15 is a good idea
 SELENIUM_PATH: ''

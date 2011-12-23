@@ -43,7 +43,7 @@ python-openid
 oauth2
 django-social-auth
 -e git://github.com/nathforge/django-mechanize.git#egg=django-mechanize
-selenium
+selenium>=2.15
 django-selenium
 
 BeautifulSoup>=3.2.0
