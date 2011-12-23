@@ -69,6 +69,11 @@ urlpatterns += patterns('',
     (r'^search/', include('search.urls')),
 )
 
+# search
+urlpatterns += patterns('',
+    (r'^feedback/', include('feedback.urls')),
+)
+
 # Everything else goes to core
 urlpatterns += patterns('',
     (r'^', include('core.urls')),

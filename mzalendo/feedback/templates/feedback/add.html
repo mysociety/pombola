@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% comment %}
+    'form':               form,
+    'submit_was_success': submit_was_success,
+    'return_to_url':      return_to_url,
+{% endcomment %}
+
+{% block title %}
+    Leave feedback
+    {% if form.url %}
+     on {{ form.url }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>
+        Leave feedback
+        {% if form.url.value %}
+            on {{ form.url.value }}
+        {% endif %}
+    </h1>
+
+    {% if submit_was_success %}
+
+        <div class="success">
+            Thank you for your feedback!            
+        </div>
+
+        {% if return_to_url %}
+            <p>You can return to the <a href="{{ return_to_url }}">page you were</a></p>
+        {% endif %}
+
+    {% else %}
+
+        <form method="post" action="{% url feedback_add %}" id="add_feedback">
+            {% csrf_token %}
+            
+            <table>
+                {{ form.as_table }}
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <input type="submit" value="Leave feedback">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    {% endif %}
+
+{% endblock %}
