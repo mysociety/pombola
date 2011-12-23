@@ -19,5 +19,7 @@ class Feedback(models.Model):
         return self.comment[:100]
     
     class Meta:
-       ordering = ["created", ]      
+       ordering = ["created", ]
+       verbose_name_plural = 'feedback'
+       
 
