@@ -164,4 +164,16 @@ $(function(){
   $('ul.scorecard article').live('click', function(){
     hideShow($('div.details', $(this)), $(this));
   });
+
+
+  /*
+   * Height fix for pages with .profile-info box
+   */
+  var pro_h = $('.profile-info').height()+210; //add 210 for the profile pic
+  var main_h = $('#page').height();
+
+  if(pro_h > main_h){
+    $('#page').css({'min-height':pro_h});
+  }
+
 });
