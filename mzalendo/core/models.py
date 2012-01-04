@@ -19,7 +19,8 @@ from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from tasks.models import Task
 from images.models import HasImageMixin, Image
 from comments2.models import Comment
-from scorecards.models import Entry as ScorecardEntry
+
+from scorecards.models import ScorecardMixin
 
 # tell South how to handle the custom fields 
 from south.modelsinspector import add_introspection_rules
@@ -168,7 +169,7 @@ class PersonManager(ManagerBase):
             return None
         
 
-class Person(ModelBase, HasImageMixin):
+class Person(ModelBase, HasImageMixin, ScorecardMixin ):
     title           = models.CharField(max_length=100, blank=True)
     legal_name      = models.CharField(max_length=300)
     other_names     = models.TextField(blank=True, default='', help_text="other names the person might be known by - one per line")
@@ -184,8 +185,6 @@ class Person(ModelBase, HasImageMixin):
     contacts = generic.GenericRelation(Contact)
     images   = generic.GenericRelation(Image)
     objects  = PersonManager()
-    scorecard_entries = generic.GenericRelation(ScorecardEntry)
-    
 
     comments = generic.GenericRelation(Comment)
     

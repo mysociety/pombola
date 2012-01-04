@@ -109,9 +109,13 @@ class Entry(models.Model):
         return '%s for %s (%s)' % (self.category, self.content_object, self.date)
 
     def score_as_word(self):
-        if   self.score >=  1: return 'good'
-        elif self.score <= -1: return 'bad'
-        else:                  return 'average'
+        return self.score_to_word( self.score )
+
+    @classmethod
+    def score_to_word(cls, score):
+        if   score >=  0.5: return 'good'
+        elif score <= -0.5: return 'bad'
+        else:               return 'average'
 
     # def pretty_value(self):
     #     """Format the value in the correct way for the category type"""
@@ -226,3 +230,20 @@ class Entry(models.Model):
     #         'entries':     entries,
     #         'file_error':  None,
     #     }
+
+
+class ScorecardMixin(models.Model):
+    scorecard_entries = generic.GenericRelation(Entry)
+
+    def scorecard_overall(self):
+        return self.scorecard_entries.all().aggregate( models.Avg( 'score' ) )
+
+    def scorecard_overall_as_word(self):
+        return Entry.score_to_word( self.scorecard_overall )
+        
+    def has_scorecards(self):
+        return bool(self.scorecard_entries.all().count())
+    
+    class Meta:
+       abstract = True
+    
