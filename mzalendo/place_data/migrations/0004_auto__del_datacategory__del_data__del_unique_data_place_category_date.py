@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Removing unique constraint on 'Data', fields ['place', 'category', 'date']
-        db.delete_unique('place_data_data', ['place_id', 'category_id', 'date'])
+        # db.delete_unique('place_data_data', ['place_id', 'category_id', 'date'])
 
         # Deleting model 'DataCategory'
         db.delete_table('place_data_datacategory')
