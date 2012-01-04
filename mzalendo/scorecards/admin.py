@@ -20,7 +20,7 @@ class CategoryAdmin(admin.ModelAdmin):
 #     )
 
 class EntryAdmin(admin.ModelAdmin):
-    pass
+    list_display  = [ 'category', 'content_object', 'score', 'remark', ]
     
     # def upload_csv(self, request):
     #     

@@ -233,6 +233,10 @@ class Entry(models.Model):
 
 
 class ScorecardMixin(models.Model):
+    """Mixin to add scorecard related methods to models"""
+
+    # TODO - we should limit the scorecards to the newest in each category
+
     scorecard_entries = generic.GenericRelation(Entry)
 
     def scorecard_overall(self):
