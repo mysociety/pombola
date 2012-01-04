@@ -1,0 +1,196 @@
+{% extends "admin/base_site.html" %}
+
+{# TODO - probably not inheriting from the right template to get all the breadcrumb goodness. Tried using 'change_list.html' but then there are lots of blanks so there must be values that I should be passing to the template. #}
+
+{% load i18n admin_modify adminmedia %}
+{% load url from future %}
+
+
+{% block content %}
+
+<div id="content-main">
+
+    <style type="text/css" media="screen">
+        div.entries div { padding: 1em; }
+        div.entries div.create { background-color: #bfb; }
+        div.entries div.update { background-color: #bbf; }
+        div.entries div.error  { background-color: #fbb; }
+    </style>
+
+    <h1>Upload Data CSV file</h1>
+
+    <form action="" method="post" enctype="multipart/form-data" style="border: 1px solid #333; padding: 1em;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+    
+    {% if results.file_error %}
+        <div class="error">{{ results.file_error }}</div>
+    {% endif %}
+    
+    {% if results.error_count %}
+        <div class="error">Found {{ results.error_count }} error(s) in the entries below.</div>        
+    {% endif %}
+
+    {% if results.entries %}
+        <div class="entries">
+        {% for entry in results.entries %}
+            <hr />
+            <div class="{% if entry.error %}error{% else %}{{ entry.action }}{% endif %}">
+
+                <strong>Line {{ entry.line_number }}: {{ entry.action }}</strong>
+
+                {% if entry.error %}
+                    <span class="error">{{ entry.error }}</span>
+                {% endif %}
+
+                {% if entry.obj %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>New value</th>
+                            <th>Old value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>place</th>
+                            <td>{{ entry.obj.place }}</td>
+                            <td>{{entry.original.place }}</td>
+                        </tr>
+                        <tr>
+                            <th>category</th>
+                            <td>{{entry.obj.category }}</td>
+                            <td>{{entry.original.category }}</td>
+                        </tr>
+                        <tr>
+                            <th>date</th>
+                            <td>{{entry.obj.date }}</td>
+                            <td>{{entry.original.date }}</td>
+                        </tr>
+                        <tr>
+                            <th>value</th>
+                            <td>{{entry.obj.value }}</td>
+                            <td>{{entry.original.value }}</td>
+                        </tr>
+                        <tr>
+                            <th>general_remark</th>
+                            <td>{{entry.obj.general_remark }}</td>
+                            <td>{{entry.original.general_remark }}</td>
+                        </tr>
+                        <tr>
+                            <th>comparative_remark</th>
+                            <td>{{entry.obj.comparative_remark }}</td>
+                            <td>{{entry.original.comparative_remark }}</td>
+                        </tr>
+                        <tr>
+                            <th>equivalent_remark</th>
+                            <td>{{entry.obj.equivalent_remark }}</td>
+                            <td>{{entry.original.equivalent_remark }}</td>
+                        </tr>
+                        <tr>
+                            <th>source_url</th>
+                            <td>{{entry.obj.source_url }}</td>
+                            <td>{{entry.original.source_url }}</td>
+                        </tr>
+                        <tr>
+                            <th>source_name</th>
+                            <td>{{entry.obj.source_name }}</td>
+                            <td>{{entry.original.source_name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+            <hr />
+        </div>
+    {% endif %}
+
+    <h2>Documentation</h2>
+
+    <p>This page lets you update or create data entries by uploading a correctly
+    formatted CSV file.</p>
+
+    <p>When you upload the CSV file with the 'apply to database' checkbox
+    unchecked the result will be a list of additions / changes that will be made
+    to the database. You should upload and check the results, and once happy
+    upload again with the checkbox ticked to actually change the database.</p>
+
+    <p>Note that you cannot delete from the database with a CSV upload. To
+    delete you should manually find the entry and delete it. Or select all
+    entries for a certain category, delete them all and then upload new data
+    using a CSV.</p>
+
+    <p>The first row of the CSV file must be the headers, with the remaining
+    rows being the data. The following table summarizes the headers, and the
+    data expected for each.</p>
+
+    <div class="module">
+        <div class="results">
+            <table class="result_list">
+                <thead>
+                    <tr>
+                        <th>Header</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>place_slug</td>
+                        <td>The slug for the place that this data refers to. Typically this will be the constituency.</td>
+                    </tr>
+                    <tr>
+                        <td>category_slug</td>
+                        <td>The slug for the data category. You may need to create a new one if this is a new dataset.</td>
+                    </tr>
+                    <tr>
+                        <td>date</td>
+                        <td>The date for this data. Probably the date when it was released. By default the most recent data is shown.</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><strong>NOTE:</strong> The place_slug, category_slug and date are used to search for an existing data entry. If you upload a row with values that match what is already in the database then that row will be updated, rather than a new one created.</td>
+                    </tr>
+                    <tr>
+                        <td>value</td>
+                        <td>The actual data value. This should just be a number as the data category is used to determine how to display it an what it means.</td>
+                    </tr>
+                    <tr>
+                        <td>general_remark</td>
+                        <td>A general comment on the data, such as "<em>An unacceptable amount of money is missing or unaccounted for in this constituency.</em>"</td>
+                    </tr>
+                    <tr>
+                        <td>comparative_remark</td>
+                        <td>A remark that compares the value to other values in the same category, eg "<em>This is an above average performance.</em>"</td>
+                    </tr>
+                    <tr>
+                        <td>equivalent_remark</td>
+                        <td>If the value can be meaningfully compared to something tangible this remark can be used to do that. "<em>Enough money is going missing to pay for 250 teachers.</em>"</td>
+                    </tr>
+                    <tr>
+                        <td>source_url</td>
+                        <td>A URL that the visitor can go to for more details on the numbers. Should probably be the source of the data, or if not available a page we put up explaining the data in detail.</td>
+                    </tr>
+                    <tr>
+                        <td>source_name</td>
+                        <td>The text that the source_url will be displayed with. eg "<em>Source</em>" or "<em>Bureau of Statistics - annual report 2010</em>".</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}
