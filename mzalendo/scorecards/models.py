@@ -240,10 +240,10 @@ class ScorecardMixin(models.Model):
     scorecard_entries = generic.GenericRelation(Entry)
 
     def scorecard_overall(self):
-        return self.scorecard_entries.all().aggregate( models.Avg( 'score' ) )
+        return self.scorecard_entries.all().aggregate( models.Avg( 'score' ) )['score__avg']
 
     def scorecard_overall_as_word(self):
-        return Entry.score_to_word( self.scorecard_overall )
+        return Entry.score_to_word( self.scorecard_overall() )
         
     def has_scorecards(self):
         return bool(self.scorecard_entries.all().count())
