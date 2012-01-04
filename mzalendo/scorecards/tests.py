@@ -1,5 +1,5 @@
 """
-Test that the place_data works as expected
+Test that the scorecards works as expected
 """
 import datetime
 import pprint

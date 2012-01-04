@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 
-from place_data import models
+from scorecards import models
 
 class DataCategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"] }
@@ -39,7 +39,7 @@ class DataAdmin(admin.ModelAdmin):
             results = None    
             
         return render_to_response(
-            'admin/place_data/data/upload_csv.html',
+            'admin/scorecards/data/upload_csv.html',
             {
                 'form': form,
                 'results': results,

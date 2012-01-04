@@ -146,7 +146,7 @@ SECRET_KEY = config.get('DJANGO_SECRET_KEY')
 
 # Always use the TemporaryFileUploadHandler as it allows us to access the
 # uploaded file on disk more easily. Currently used by the CSV upload in
-# place_data admin.
+# scorecards admin.
 FILE_UPLOAD_HANDLERS = (
     # "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
@@ -225,10 +225,13 @@ INSTALLED_APPS = (
     'hansard',
     'feedback',
     'projects',
-    'place_data',
+    'scorecards',
     'search',
     'user_profile',
     'core',
+
+    'place_data', # TODO - remove entry and app once migrations have run on all servers
+    
 )
 
 # A sample logging configuration. The only tangible logging

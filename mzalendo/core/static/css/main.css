@@ -330,21 +330,21 @@ div.project_detail dl dd {
   padding: 0 0 0.5em 0;
 }
 
-div.place_data_entry dl {
+div.scorecards_entry dl {
   padding: 0.5em;
   font-size: 90%;
 }
-div.place_data_entry dl dt {
+div.scorecards_entry dl dt {
   float: left;
   clear: left;
   width: 6em;
   text-align: right;
   font-weight: bold;
 }
-div.place_data_entry dl dt:after {
+div.scorecards_entry dl dt:after {
   content: ":";
 }
-div.place_data_entry dl dd {
+div.scorecards_entry dl dd {
   margin: 0 0 0 6.5em;
   padding: 0 0 0.5em 0;
 }
