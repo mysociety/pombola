@@ -8,8 +8,6 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
 
-from core.models import Place
-
 from markitup.fields import MarkupField
 
 class Category(models.Model):
@@ -50,6 +48,9 @@ class Category(models.Model):
     
     class Meta():
         ordering = ( 'name', )
+        verbose_name_plural = 'categories'
+
+        
 
 
 class Entry(models.Model):
@@ -106,6 +107,11 @@ class Entry(models.Model):
 
     def __unicode__(self):
         return '%s for %s (%s)' % (self.category, self.content_object, self.date)
+
+    def score_as_word(self):
+        if   self.score >=  1: return 'good'
+        elif self.score <= -1: return 'bad'
+        else:                  return 'average'
 
     # def pretty_value(self):
     #     """Format the value in the correct way for the category type"""

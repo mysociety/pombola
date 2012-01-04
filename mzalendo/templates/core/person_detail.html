@@ -57,75 +57,22 @@
         {% endif %}
         {% endwith %}
         -->
-        
-        <style type="text/css" media="screen">
-            div.sample_scorecard {
-                position: absolute;
-                color: red;
-                font-size: 100px;
-                margin-top: 70px;
-                font-weight: bold;
-                opacity: 0.2;
-                text-align: center;
-
-                -moz-transform:rotate(    30deg );
-                -moz-transform:rotate(    30deg );
-                -webkit-transform:rotate( 30deg );
-                -o-transform:rotate(      30deg );
-                -ms-transform:rotate(     30deg );
-            }
-        </style>
-        <div class="sample_scorecard">
-            SAMPLE
-        </div>
-        
+                
         <h2>Scorecard</h2>
-        <!-- /SAMPLE -->
-        <h3 class="scorecard-overall">Overall Rating <span class="score-overall-average">Average</span></h3>
+        <h3 class="scorecard-overall">Overall Rating <span class="score-overall-average">FIXME</span></h3>
         <ul class="scorecard">
+            {% for entry in object.scorecard_entries.all %}
             <li>
                 <article>
                     <header>
-                        <h4>Ease of Contact</h4>
-                        <p class="score-good">This MP is very easy to contact</p>
+                        <h4>{{ entry.category.name }}</h4>
+                        <p class="score-{{ entry.score_as_word }}">This MP is very easy to contact</p>
                     </header>
                 </article>
             </li>
-
-            <li>
-                <article>
-                    <header>
-                        <h4>CFD Performance</h4>
-                        <p class="score-bad">An unacceptable amount of money is missing or unaccounted for in this constituency.</p>
-                        <span class="shout">Enough money is going missing to pay for 250 teachers.</span>
-                    </header>
-                </article>
-            </li>
-
-            <!-- <li>
-                <article>
-                    <header>
-                        <h4>Education Performance</h4>
-                        <p class="score-average">The improvement in education performance in this constituency is about average.</p>
-                    </header>
-
-                    <div class="details">
-                        <p>This copy described how Education performance is collected and analysed. This copy described how Education performance is collected and analysed.</p>
-                        <p>This copy described how Education performance is collected and analysed. This copy described how Education performance is collected and analysed. This copy described how Education performance is collected and analysed. This copy described how Education performance is collected and analysed.</p>
-                    </div>
-                </article>
-            </li>
-
-            <li>
-                <article>
-                    <header>
-                        <h4>Education Performance</h4>
-                        <p class="score-average">The improvement in education performance in this constituency is about average.</p>
-                    </header>
-                </article>
-            </li> -->
+            {% endfor %}
         </ul>
-        <!-- /SAMPLE -->
+
     </div>
 
     <div class="profile-info">
