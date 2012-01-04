@@ -609,6 +609,8 @@ pre {
 }
 
 #page {
+  display: table;
+  caption-side: bottom;
   position: relative;
   margin-bottom: 30px;
 }
@@ -987,6 +989,9 @@ pre {
 }
 #page ul.comments li section ul.tools li a.report:hover {
   background: red;
+}
+#page .social-and-tools {
+  display: table-caption;
 }
 #page .social-and-tools .fb-like,
 #page .social-and-tools .twitter-share-button,

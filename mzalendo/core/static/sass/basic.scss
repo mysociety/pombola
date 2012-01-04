@@ -319,6 +319,8 @@ pre {
 }
 
 #page {
+  display:table;
+  caption-side:bottom;
   position:relative;
   margin-bottom:30px;
   .title-space {
@@ -570,6 +572,7 @@ pre {
     }
   }
   .social-and-tools {
+    display:table-caption;
     .fb-like,
     .twitter-share-button,
     iframe {

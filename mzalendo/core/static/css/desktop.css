@@ -186,6 +186,7 @@ josh [at] supercooldesign.co.uk
 }
 
 #page {
+  display: block;
   position: relative;
   overflow: hidden;
 }
@@ -453,11 +454,9 @@ josh [at] supercooldesign.co.uk
   clear: both;
 }
 #page .social-and-tools {
-  height: 150px;
-  position: absolute;
-  top: 0;
-  right: 0;
+  display: block;
   width: 180px;
+  float: right;
 }
 #page .social-and-tools .fb-like,
 #page .social-and-tools .twitter-share-button,
@@ -471,7 +470,7 @@ josh [at] supercooldesign.co.uk
 }
 #page .social-and-tools ul {
   clear: both;
-  margin: 30px 0;
+  margin: 30px 0 0 0;
 }
 #page .social-and-tools ul li a {
   padding: 5px;
@@ -490,12 +489,30 @@ josh [at] supercooldesign.co.uk
    that can't handle 960px
 -------------------------------------------------------------- */
 @media only screen and (min-width: 640px) and (max-width: 960px) {
+  #page .title-space h1 {
+    margin-top: 35px;
+  }
+  #page .fb-like,
+  #page .twitter-share-button {
+    margin-top: 7px;
+  }
   #page .social-and-tools {
-    position: relative;
-    top: auto;
-    right: auto;
+    display: block;
+    width: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    float: none;
+  }
+  #page .social-and-tools ul {
+    margin: 0;
     float: left;
-    clear: left;
-    margin-left: 240px;
+    clear: none;
+  }
+  #page .social-and-tools ul li {
+    display: inline;
+  }
+  #page .social-and-tools ul li a {
+    display: inline-block;
   }
 }

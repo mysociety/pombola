@@ -39,6 +39,17 @@
         {% endthumbnail %}
     </div>
 
+    <div class="social-and-tools">
+        <div class="fb-like" data-send="false" data-layout="button_count" data-width="95" data-show-faces="false"></div>
+        
+        <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="mysociety">Tweet</a>
+
+        <ul class="tools">
+            <li><a href="{% get_comment_add_url object %}" class="big-btn-text-green">Post Comment</a></li>
+            <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link big-btn-text-red">Correct this information</a></li>
+        </ul>
+    </div>
+
     <div class="small-container">
         <!--
         {% with constituency=object.is_mp.place %}
@@ -184,16 +195,5 @@
             {% endwith %}
             
         </div>
-    </div>
-
-    <div class="social-and-tools">
-        <div class="fb-like" data-send="false" data-layout="button_count" data-width="95" data-show-faces="false"></div>
-        
-        <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="mysociety">Tweet</a>
-
-        <ul class="tools">
-            <li><a href="{% get_comment_add_url object %}" class="big-btn-text-green">Post Comment</a></li>
-            <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link big-btn-text-red">Correct this information</a></li>
-        </ul>
     </div>
 {% endblock %}

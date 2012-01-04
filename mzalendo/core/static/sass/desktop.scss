@@ -155,6 +155,7 @@ josh [at] supercooldesign.co.uk
 }
 
 #page {
+  display:block;
   position:relative;
   overflow:hidden;
   .title-space {
@@ -380,11 +381,9 @@ josh [at] supercooldesign.co.uk
     }
   }
   .social-and-tools {
-    height:150px;
-    position:absolute;
-    top:0;
-    right:0;
+    display:block;
     width:180px;
+    float:right;
     .fb-like,
     .twitter-share-button,
     iframe {
@@ -397,7 +396,7 @@ josh [at] supercooldesign.co.uk
     }
     ul {
       clear:both;
-      margin:30px 0;
+      margin:30px 0 0 0;
       li {
         a {
           padding:5px;
@@ -423,13 +422,31 @@ josh [at] supercooldesign.co.uk
 -------------------------------------------------------------- */
 @media only screen and (min-width: 640px) and (max-width: 960px) {
   #page {
+    .title-space h1 {
+      margin-top:35px;
+    }
+    .fb-like,
+    .twitter-share-button {
+      margin-top:7px;
+    }
     .social-and-tools {
-      position:relative;
-      top:auto;
-      right:auto;
-      float:left;
-      clear:left;
-      margin-left:240px;
+      display:block;
+      width:auto;
+      position:absolute;
+      right:0;
+      top:0;
+      float:none;
+      ul {
+        margin:0;
+        float:left;
+        clear:none;
+        li {
+          display:inline;
+          a {
+            display:inline-block;
+          }
+        }
+      }
     }
   }
 }
