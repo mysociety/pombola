@@ -81,10 +81,16 @@ class Entry(models.Model):
         max_length=50,
     )
 
+    extended_remark = MarkupField(
+        max_length = 1000,
+        blank      = True,
+        help_text  = "Extra details about the entry, not shown in summary view.",
+    )
+
     score = models.IntegerField(
         choices = (
             ( +1, 'Good (+1)'   ),
-            (  0, 'Average (0)' ),
+            (  0, 'Neutral (0)' ),
             ( -1, 'Bad (-1)'    ),
         ),
     )
@@ -115,7 +121,7 @@ class Entry(models.Model):
     def score_to_word(cls, score):
         if   score >=  0.5: return 'good'
         elif score <= -0.5: return 'bad'
-        else:               return 'average'
+        else:               return 'average'  # TODO - should be neutral (change once design work is done)
 
     # def pretty_value(self):
     #     """Format the value in the correct way for the category type"""
