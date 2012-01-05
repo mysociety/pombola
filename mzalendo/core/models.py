@@ -11,8 +11,6 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 
-from haystack.query import SearchQuerySet
-
 from markitup.fields import MarkupField
 
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
@@ -152,6 +150,9 @@ class PersonManager(ManagerBase):
     
     def loose_match_name(self, name):
         """Search for a loose match on a name. May not be too reliable"""
+
+        # import here to avoid creating an import loop
+        from haystack.query import SearchQuerySet    
 
         # Try matching all the bits
         results = SearchQuerySet().filter_and( content=name ).models( self.model )
