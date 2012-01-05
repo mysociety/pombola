@@ -1,4 +1,3 @@
-        
 {% load thumbnail %}
 {% load switch %}
 
@@ -7,73 +6,106 @@
     {% switch object.css_class %}
 
         {% case 'position' %}
-            <div class="thumb">
-                {% thumbnail object.person.primary_image "60x60" crop="center" as im %}
+            {% thumbnail object.person.primary_image "90x90" crop="center" as im %}
+                <a href="{{ object.person.get_absolute_url }}">
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                {% empty %}
-                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
-                {% endthumbnail %}
-            </div>
-    
-            <div class="name">
-                <a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a>
-            </div>
+                </a>
+            {% empty %}
+                <a href="{{ object.person.get_absolute_url }}">
+                    <img src="http://dummyimage.com/90x90/ddd/888.png" />
+                </a>
+            {% endthumbnail %}
+
+            <section>
+                <h4><a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a></h4>
+
+                <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
+            </section>
 
         {% case 'positiontitle' %}
-            <div class="name">
-                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
-            </div>
+            <section>
+                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+
+                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
+            </section>
 
         {% case 'person' %}
-            <div class="thumb">
-                {% thumbnail object.primary_image "60x60" crop="center" as im %}
+            {% thumbnail object.primary_image "90x90" crop="center" as im %}
+                <a href="{{ object.get_absolute_url }}">
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                {% empty %}
-                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
-                {% endthumbnail %}
-            </div>
+                </a>
+            {% empty %}
+                <a href="{{ object.get_absolute_url }}">
+                    <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
+                </a>
+            {% endthumbnail %}
             
-            <div class="name">
-                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
-            </div>
-            
-            <div class="positions">
+            <section>
+                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+                
+                <p>
                 {% for position in object.position_set.all %}
-                <span>{{ position.title.name }}, {{ position.organisation.name }};</span>
+                    {{ position.title.name }}, {{ position.organisation.name }};
                 {% endfor %}
-            </div>
-            
-        {% case 'organisation' %}
-            <div class="thumb">
-                <img src="http://dummyimage.com/60x60/ddd/888.png" />
-            </div>
+                </p>
 
-            <div class="name">
-                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
-            </div>
-            
-            {% if object.num_positions %}
-                {{ object.num_positions }} related positions
-            {% endif %}
+                <p class="meta">since 1987</p>
+                
+                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
+            </section>
+
+        {% case 'organisation' %}
+            {% thumbnail object.primary_image "90x90" crop="center" as im %}
+                <a href="{{ object.get_absolute_url }}">
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                </a>
+            {% empty %}
+                <a href="{{ object.get_absolute_url }}">
+                    <img src="{{STATIC_URL}}images/org-90x90.jpg" />
+                </a>
+            {% endthumbnail %}
+
+            <section>
+                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+
+                <div class="kind">{{ object.kind.name }}</div>
+
+                {% if object.num_positions %}
+                    <p class="meta">{{ object.num_positions }} related positions</p>
+                {% endif %}
+
+                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
+            </section>
         
         {% case 'place' %}
-            <div class="thumb">
-                <img src="http://dummyimage.com/60x60/ddd/888.png" />
-            </div>
+            {% thumbnail object.primary_image "90x90" crop="center" as im %}
+                <a href="{{ object.get_absolute_url }}">
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                </a>
+            {% empty %}
+                <a href="{{ object.get_absolute_url }}">
+                    <img src="{{STATIC_URL}}images/place-90x90.jpg" />
+                </a>
+            {% endthumbnail %}
         
-            <div class="name">
-                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
-            </div>
-        
-            {{ object.kind.name }}
-        
-            
+            <section>
+                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+                
+                <p>If there's a parent name</p>
+
+                <p class="meta">If there's a description of the link...</p>
+
+                <div class="kind">{{ object.kind.name }}</div>
+
+                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
+            </section>
 
         {% else %}
-            <div class="name">
-                <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
-            </div>            
+            <section>
+                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+
+                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
+            </section>
 
     {% endswitch %}
-
 </li>

@@ -340,12 +340,13 @@ pre {
   }
   .profile-pic {
     position:absolute;
-    top:0;
+    top:10px;
     left:10px;
     width:100px;
-    img {
+    img,
+    #map_canvas {
       width:100px;
-      height:auto;
+      height:100px;
     }
   }
   .small-container {
@@ -437,6 +438,9 @@ pre {
             &:hover {
               background-color:$colour6;
             }
+            span {
+              font-style:italic;
+            }
           }
         }
       }
@@ -515,69 +519,6 @@ pre {
       max-width:590px;
     }
   }
-  ul.comments {
-    @include list-reset-soft;
-    li {
-      display:block;
-      overflow:hidden;
-      position:relative;
-      background:$colour12;
-      padding:15px 15px 30px 15px;
-      margin-bottom:5px;
-      img {
-        width:40px;
-        height:40px;
-        border:5px solid $colour7;
-        float:left;
-        margin:0 20px 10px 0;
-      }
-      section {
-        float:left;
-        clear:left;
-        max-width:840px;
-        p {
-          margin-left:0;
-          margin-right:15px;
-          font-size:12px;
-          &.meta {
-            font-style:italic;
-          }
-        }
-        h4 {
-          font-weight:bold;
-        }
-        .read-more-wrap {
-          position:absolute;
-          right:15px;
-          bottom:15px;
-        }
-        a.read-more {
-          @include button-reset-text;
-        }
-        ul {
-          @include list-reset-copy;
-          &.tools {
-            @include list-reset;
-            position:absolute;
-            right:15px;
-            top:15px;
-            li {
-              margin-left:5px;
-              a {
-                @include button-reset-text;
-                &.like {
-                  @include button-text-green;
-                }
-                &.report {
-                  @include button-text-red;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
   .social-and-tools {
     display:table-caption;
     .fb-like,
@@ -636,4 +577,116 @@ ul.hansard_entries {
         background: #eee;
         padding: 0.2em;
     }
+}
+
+ul.comments {
+  @include list-reset-soft;
+  li {
+    display:block;
+    overflow:hidden;
+    position:relative;
+    background:$colour12;
+    padding:15px 15px 30px 15px;
+    margin-bottom:5px;
+    img {
+      width:40px;
+      height:40px;
+      border:5px solid $colour7;
+      float:left;
+      margin:0 20px 10px 0;
+    }
+    section {
+      float:left;
+      clear:left;
+      max-width:840px;
+      p {
+        margin-left:0;
+        margin-right:15px;
+        font-size:12px;
+        &.meta {
+          font-style:italic;
+        }
+      }
+      h4 {
+        font-weight:bold;
+      }
+      .read-more-wrap {
+        position:absolute;
+        right:15px;
+        bottom:15px;
+      }
+      a.read-more {
+        @include button-reset-text;
+      }
+      ul {
+        @include list-reset-copy;
+        &.tools {
+          @include list-reset;
+          position:absolute;
+          right:15px;
+          top:15px;
+          li {
+            margin-left:5px;
+            a {
+              @include button-reset-text;
+              &.like {
+                @include button-text-green;
+              }
+              &.report {
+                @include button-text-red;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+ul.listing {
+  @extend .comments;
+  li {
+    padding:15px;
+    h4 a {
+      text-decoration:none;
+      color:$colour5;
+    }
+    img {
+      width:60px;
+      height:60px;
+      margin-bottom:0;
+    }
+    section {
+      float:none;
+      clear:none;
+      padding:0 40px 0 90px;
+      p {
+        margin:0 !important;
+      }
+      .kind {
+        position:absolute;
+        top:15px;
+        right:15px;
+      }
+      .read-more-wrap {
+        top:35px;
+        bottom:auto;
+      }
+      .meta {
+        color:$colour8;
+      }
+      a.read-more {
+        display:block;
+        text-indent:-999999px;
+        padding:0;
+        width:24px;
+        height:24px;
+        background:$colour5 url(../images/chevron-right.png) 6px 2px no-repeat;
+        @include border-radius(24px);
+        &:hover {
+          background:$colour4 url(../images/chevron-right.png) 6px center no-repeat;
+        }
+      }
+    }
+  }
 }

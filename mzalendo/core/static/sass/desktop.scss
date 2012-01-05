@@ -165,6 +165,13 @@ josh [at] supercooldesign.co.uk
     float:left;
     clear:left;
     margin:0 0 10px 240px;
+    position:relative;
+    .object-kind {
+      position:absolute;
+      right:-180px;
+      top:0;
+      text-align:right;
+    }
   }
   .profile-pic {
     height:200px;
@@ -174,6 +181,10 @@ josh [at] supercooldesign.co.uk
     left:0;
     img {
       width:auto;
+      height:200px;
+    }
+    #map_canvas {
+      width:200px;
       height:200px;
     }
   }
@@ -381,28 +392,6 @@ josh [at] supercooldesign.co.uk
       clear:both;
     }
   }
-  ul.comments {
-    li {
-      img {
-        width:60px;
-        height:60px;
-      }
-      section {
-        clear:none;
-      }
-      .tools,
-      .read-more-wrap {
-        left:-999999px;
-      }
-      &:hover,
-      &.hovered {
-        .tools,
-        .read-more-wrap {
-          left:auto;
-        }
-      }
-    }
-  }
   .social-and-tools {
     display:block;
     width:180px;
@@ -436,6 +425,51 @@ josh [at] supercooldesign.co.uk
     border-top:none;
     background:none;
     padding:0;
+  }
+}
+
+ul.comments {
+  li {
+    img {
+      width:60px;
+      height:60px;
+    }
+    section {
+      clear:none;
+    }
+    .tools,
+    .read-more-wrap {
+      left:-999999px;
+    }
+    &:hover,
+    &.hovered {
+      .tools,
+      .read-more-wrap {
+        left:auto;
+      }
+    }
+  }
+}
+
+ul.listing {
+  li {
+    img {
+      width:90px;
+      height:90px;
+    }
+    section {
+      clear:none;
+      .read-more-wrap {
+        top:auto;
+        bottom:15px;
+      }
+      a.read-more {
+        @include button-reset-text;
+        text-indent:0;
+        width:auto;
+        height:auto;
+      }
+    }
   }
 }
 

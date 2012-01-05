@@ -195,6 +195,13 @@ josh [at] supercooldesign.co.uk
   float: left;
   clear: left;
   margin: 0 0 10px 240px;
+  position: relative;
+}
+#page .title-space .object-kind {
+  position: absolute;
+  right: -180px;
+  top: 0;
+  text-align: right;
 }
 #page .profile-pic {
   height: 200px;
@@ -205,6 +212,10 @@ josh [at] supercooldesign.co.uk
 }
 #page .profile-pic img {
   width: auto;
+  height: 200px;
+}
+#page .profile-pic #map_canvas {
+  width: 200px;
   height: 200px;
 }
 #page .small-container {
@@ -452,21 +463,6 @@ josh [at] supercooldesign.co.uk
 #page #comments h3 {
   clear: both;
 }
-#page ul.comments li img {
-  width: 60px;
-  height: 60px;
-}
-#page ul.comments li section {
-  clear: none;
-}
-#page ul.comments li .tools,
-#page ul.comments li .read-more-wrap {
-  left: -999999px;
-}
-#page ul.comments li:hover .tools,
-#page ul.comments li:hover .read-more-wrap, #page ul.comments li.hovered .tools, #page ul.comments li.hovered .read-more-wrap {
-  left: auto;
-}
 #page .social-and-tools {
   display: block;
   width: 180px;
@@ -496,6 +492,58 @@ josh [at] supercooldesign.co.uk
   border-top: none;
   background: none;
   padding: 0;
+}
+
+ul.comments li img {
+  width: 60px;
+  height: 60px;
+}
+ul.comments li section {
+  clear: none;
+}
+ul.comments li .tools,
+ul.comments li .read-more-wrap {
+  left: -999999px;
+}
+ul.comments li:hover .tools,
+ul.comments li:hover .read-more-wrap, ul.comments li.hovered .tools, ul.comments li.hovered .read-more-wrap {
+  left: auto;
+}
+
+ul.listing li img {
+  width: 90px;
+  height: 90px;
+}
+ul.listing li section {
+  clear: none;
+}
+ul.listing li section .read-more-wrap {
+  top: auto;
+  bottom: 15px;
+}
+ul.listing li section a.read-more {
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  text-indent: 0;
+  width: auto;
+  height: auto;
+}
+ul.listing li section a.read-more:hover {
+  background: #a0a0a0;
+  color: white;
 }
 
 /* 3. MEDIA QUERIES

@@ -635,13 +635,14 @@ pre {
 }
 #page .profile-pic {
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 10px;
   width: 100px;
 }
-#page .profile-pic img {
+#page .profile-pic img,
+#page .profile-pic #map_canvas {
   width: 100px;
-  height: auto;
+  height: 100px;
 }
 #page .small-container h3.scorecard-overall {
   display: block;
@@ -752,6 +753,9 @@ pre {
 #page .profile-info .constituency-party ul li a:hover {
   background-color: white;
 }
+#page .profile-info .constituency-party ul li a span {
+  font-style: italic;
+}
 #page .profile-info .vcard {
   list-style-type: none;
   padding: 0;
@@ -824,182 +828,8 @@ pre {
 #page .large-container #comments .big-btn-text-green {
   display: none;
 }
-#page .large-container ul.comments li section {
+#page .large-container ul.comments li section, #page .large-container ul.listing li section {
   max-width: 590px;
-}
-#page ul.comments {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-#page ul.comments li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-#page ul.comments li {
-  display: block;
-  overflow: hidden;
-  position: relative;
-  background: #f7f7f7;
-  padding: 15px 15px 30px 15px;
-  margin-bottom: 5px;
-}
-#page ul.comments li img {
-  width: 40px;
-  height: 40px;
-  border: 5px solid #e6e6e6;
-  float: left;
-  margin: 0 20px 10px 0;
-}
-#page ul.comments li section {
-  float: left;
-  clear: left;
-  max-width: 840px;
-}
-#page ul.comments li section p {
-  margin-left: 0;
-  margin-right: 15px;
-  font-size: 12px;
-}
-#page ul.comments li section p.meta {
-  font-style: italic;
-}
-#page ul.comments li section h4 {
-  font-weight: bold;
-}
-#page ul.comments li section .read-more-wrap {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-}
-#page ul.comments li section a.read-more {
-  cursor: pointer;
-  background: gray;
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 1;
-  padding: 5px 8px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
-  border-radius: 2px;
-}
-#page ul.comments li section a.read-more:hover {
-  background: #a0a0a0;
-  color: white;
-}
-#page ul.comments li section ul {
-  padding-left: 30px;
-  margin-bottom: 20px;
-}
-#page ul.comments li section ul li {
-  font-size: 14px;
-  line-height: 20px;
-  list-style: disc;
-  margin-bottom: 10px;
-  background: none;
-  padding: 0;
-}
-#page ul.comments li section ul.tools {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  right: 15px;
-  top: 15px;
-}
-#page ul.comments li section ul.tools li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  float: left;
-  display: inline;
-}
-#page ul.comments li section ul.tools li a {
-  float: left;
-  display: block;
-}
-#page ul.comments li section ul.tools li {
-  margin-left: 5px;
-}
-#page ul.comments li section ul.tools li a {
-  cursor: pointer;
-  background: gray;
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 1;
-  padding: 5px 8px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
-  border-radius: 2px;
-}
-#page ul.comments li section ul.tools li a:hover {
-  background: #a0a0a0;
-  color: white;
-}
-#page ul.comments li section ul.tools li a.like {
-  cursor: pointer;
-  background: gray;
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 1;
-  padding: 5px 8px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
-  border-radius: 2px;
-  background: #87c43c;
-}
-#page ul.comments li section ul.tools li a.like:hover {
-  background: #a0a0a0;
-  color: white;
-}
-#page ul.comments li section ul.tools li a.like:hover {
-  background: #96d942;
-}
-#page ul.comments li section ul.tools li a.report {
-  cursor: pointer;
-  background: gray;
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 1;
-  padding: 5px 8px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
-  border-radius: 2px;
-  background: #d40000;
-}
-#page ul.comments li section ul.tools li a.report:hover {
-  background: #a0a0a0;
-  color: white;
-}
-#page ul.comments li section ul.tools li a.report:hover {
-  background: red;
 }
 #page .social-and-tools {
   display: table-caption;
@@ -1054,4 +884,229 @@ ul.hansard_entries li.page_number {
   text-align: right;
   background: #eee;
   padding: 0.2em;
+}
+
+ul.comments, ul.listing {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ul.comments li, ul.listing li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+ul.comments li, ul.listing li {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  background: #f7f7f7;
+  padding: 15px 15px 30px 15px;
+  margin-bottom: 5px;
+}
+ul.comments li img, ul.listing li img {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #e6e6e6;
+  float: left;
+  margin: 0 20px 10px 0;
+}
+ul.comments li section, ul.listing li section {
+  float: left;
+  clear: left;
+  max-width: 840px;
+}
+ul.comments li section p, ul.listing li section p {
+  margin-left: 0;
+  margin-right: 15px;
+  font-size: 12px;
+}
+ul.comments li section p.meta, ul.listing li section p.meta {
+  font-style: italic;
+}
+ul.comments li section h4, ul.listing li section h4 {
+  font-weight: bold;
+}
+ul.comments li section .read-more-wrap, ul.listing li section .read-more-wrap {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+ul.comments li section a.read-more, ul.listing li section a.read-more {
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+}
+ul.comments li section a.read-more:hover, ul.listing li section a.read-more:hover {
+  background: #a0a0a0;
+  color: white;
+}
+ul.comments li section ul, ul.listing li section ul {
+  padding-left: 30px;
+  margin-bottom: 20px;
+}
+ul.comments li section ul li, ul.listing li section ul li {
+  font-size: 14px;
+  line-height: 20px;
+  list-style: disc;
+  margin-bottom: 10px;
+  background: none;
+  padding: 0;
+}
+ul.comments li section ul.tools, ul.listing li section ul.tools {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+ul.comments li section ul.tools li, ul.listing li section ul.tools li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  float: left;
+  display: inline;
+}
+ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
+  float: left;
+  display: block;
+}
+ul.comments li section ul.tools li, ul.listing li section ul.tools li {
+  margin-left: 5px;
+}
+ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+}
+ul.comments li section ul.tools li a:hover, ul.listing li section ul.tools li a:hover {
+  background: #a0a0a0;
+  color: white;
+}
+ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.like {
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  background: #87c43c;
+}
+ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
+  background: #a0a0a0;
+  color: white;
+}
+ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
+  background: #96d942;
+}
+ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a.report {
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  background: #d40000;
+}
+ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tools li a.report:hover {
+  background: #a0a0a0;
+  color: white;
+}
+ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tools li a.report:hover {
+  background: red;
+}
+
+ul.listing li {
+  padding: 15px;
+}
+ul.listing li h4 a {
+  text-decoration: none;
+  color: black;
+}
+ul.listing li img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 0;
+}
+ul.listing li section {
+  float: none;
+  clear: none;
+  padding: 0 40px 0 90px;
+}
+ul.listing li section p {
+  margin: 0 !important;
+}
+ul.listing li section .kind {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+ul.listing li section .read-more-wrap {
+  top: 35px;
+  bottom: auto;
+}
+ul.listing li section .meta {
+  color: gray;
+}
+ul.listing li section a.read-more {
+  display: block;
+  text-indent: -999999px;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  background: black url(../images/chevron-right.png) 6px 2px no-repeat;
+  -moz-border-radius: 24px;
+  -webkit-border-radius: 24px;
+  -o-border-radius: 24px;
+  -ms-border-radius: 24px;
+  -khtml-border-radius: 24px;
+  border-radius: 24px;
+}
+ul.listing li section a.read-more:hover {
+  background: #777777 url(../images/chevron-right.png) 6px center no-repeat;
 }
