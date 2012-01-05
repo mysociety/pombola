@@ -2,8 +2,8 @@ from haystack import indexes
 from haystack import site
 from haystack.exceptions import AlreadyRegistered
 
-from mzalendo.core    import models as core_models
-from mzalendo.hansard import models as hansard_models
+from core    import models as core_models
+from hansard import models as hansard_models
 
 
 # TODO - currently I'm using the realtime search index - which is possibly a bad
