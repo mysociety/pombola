@@ -157,7 +157,6 @@ josh [at] supercooldesign.co.uk
   margin: 0;
   display: block;
   width: 100%;
-  border-bottom: 1px solid #e6e6e6;
   padding: 10px 0;
   margin-bottom: 10px;
   float: left;
@@ -185,10 +184,10 @@ josh [at] supercooldesign.co.uk
   color: #777777;
 }
 
-#page {
+#page .page-wrapper {
   display: block;
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 #page .title-space {
   max-width: 510px;

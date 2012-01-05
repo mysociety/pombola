@@ -45,6 +45,7 @@ body {
   font-family: 'arial',sans-serif;
   color:#444;
   font-size:100%;
+  background:$colour7;
 }
 
 p, h1, h2, h3 {
@@ -319,10 +320,13 @@ pre {
 }
 
 #page {
-  display:table;
-  caption-side:bottom;
-  position:relative;
-  margin-bottom:30px;
+  background:$colour6;
+  padding-bottom:30px;
+  .page-wrapper {
+    display:table;
+    position:relative;
+    caption-side:bottom;
+  }
   .title-space {
     min-height:130px;
     margin-left:120px;

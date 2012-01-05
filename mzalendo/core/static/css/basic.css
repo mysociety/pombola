@@ -106,6 +106,7 @@ body {
   font-family: 'arial',sans-serif;
   color: #444;
   font-size: 100%;
+  background: #e6e6e6;
 }
 
 p, h1, h2, h3 {
@@ -613,10 +614,13 @@ pre {
 }
 
 #page {
+  background: white;
+  padding-bottom: 30px;
+}
+#page .page-wrapper {
   display: table;
-  caption-side: bottom;
   position: relative;
-  margin-bottom: 30px;
+  caption-side: bottom;
 }
 #page .title-space {
   min-height: 130px;
