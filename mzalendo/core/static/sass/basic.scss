@@ -503,7 +503,6 @@ pre {
       text-decoration:none;
     }
     #comments {
-      // display:none; // TEMP, need to not include the content and ajax it in  on desk, link to it on mob
       .big-btn-text-green {
         display:none;
       }
@@ -515,45 +514,49 @@ pre {
   ul.comments {
     @include list-reset-soft;
     li {
-      @include inline-block;
+      display:block;
+      overflow:hidden;
       position:relative;
-      background:$colour9;
-      padding:10px;
+      background:$colour12;
+      padding:15px 15px 30px 15px;
       margin-bottom:5px;
       img {
-        width:60px;
-        height:60px;
+        width:40px;
+        height:40px;
         border:5px solid $colour7;
         float:left;
         margin:0 20px 10px 0;
       }
       section {
         float:left;
-        max-width:850px;
+        clear:left;
+        max-width:840px;
         p {
           margin-left:0;
-          margin-right:0;
+          margin-right:15px;
+          font-size:12px;
           &.meta {
-            font: {
-              style:italic;
-              size:13px;
-            }
+            font-style:italic;
           }
         }
         h4 {
           font-weight:bold;
         }
+        .read-more-wrap {
+          position:absolute;
+          right:15px;
+          bottom:15px;
+        }
         a.read-more {
           @include button-reset-text;
-          float:right;
         }
         ul {
           @include list-reset-copy;
           &.tools {
             @include list-reset;
             position:absolute;
-            right:10px;
-            top:10px;
+            right:15px;
+            top:15px;
             li {
               margin-left:5px;
               a {

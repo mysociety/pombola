@@ -380,6 +380,28 @@ josh [at] supercooldesign.co.uk
       clear:both;
     }
   }
+  ul.comments {
+    li {
+      img {
+        width:60px;
+        height:60px;
+      }
+      section {
+        clear:none;
+      }
+      .tools,
+      .read-more-wrap {
+        left:-999999px;
+      }
+      &:hover,
+      &.hovered {
+        .tools,
+        .read-more-wrap {
+          left:auto;
+        }
+      }
+    }
+  }
   .social-and-tools {
     display:block;
     width:180px;

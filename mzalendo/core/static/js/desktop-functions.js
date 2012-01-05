@@ -177,4 +177,14 @@ $(function(){
     $('#page').css({'min-height':pro_h});
   }
 
+  /*
+   * Comments: hover and show tools
+   */
+  $('.comments li').hover(function() {
+    $(this).addClass('hovered');
+  },
+  function() {
+    $(this).removeClass('hovered');
+  });
+
 });

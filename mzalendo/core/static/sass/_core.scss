@@ -50,6 +50,9 @@ $colour10: #2E2E2E;
 // Red
 $colour11: #D40000;
 
+// Lighterer Grey
+$colour12: #F7F7F7;
+
 // 2. MIXINS
 // --------------------------------------------------------------
 // Green Gradient
@@ -81,9 +84,12 @@ $colour11: #D40000;
     decoration:none;
     transform:uppercase;
   }
-  font-size:11px;
+  font: {
+    size:10px;
+    weight:bold;
+  }
   line-height:1;
-  padding:3px 5px;
+  padding:5px 8px;
   @include border-radius(2px);
   &:hover {
     background:$colour8/0.8;

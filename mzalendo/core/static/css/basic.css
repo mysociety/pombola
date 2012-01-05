@@ -208,9 +208,10 @@ pre {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: bold;
   line-height: 1;
-  padding: 3px 5px;
+  padding: 5px 8px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
@@ -262,9 +263,10 @@ pre {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: bold;
   line-height: 1;
-  padding: 3px 5px;
+  padding: 5px 8px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
@@ -316,9 +318,10 @@ pre {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: bold;
   line-height: 1;
-  padding: 3px 5px;
+  padding: 5px 8px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
@@ -368,9 +371,10 @@ pre {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: bold;
   line-height: 1;
-  padding: 3px 5px;
+  padding: 5px 8px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
@@ -831,40 +835,40 @@ pre {
   border: 0;
 }
 #page ul.comments li {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
+  display: block;
+  overflow: hidden;
   position: relative;
-  background: #f6f6f6;
-  padding: 10px;
+  background: #f7f7f7;
+  padding: 15px 15px 30px 15px;
   margin-bottom: 5px;
 }
-#page ul.comments li {
-  *display: inline;
-}
 #page ul.comments li img {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border: 5px solid #e6e6e6;
   float: left;
   margin: 0 20px 10px 0;
 }
 #page ul.comments li section {
   float: left;
-  max-width: 850px;
+  clear: left;
+  max-width: 840px;
 }
 #page ul.comments li section p {
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 15px;
+  font-size: 12px;
 }
 #page ul.comments li section p.meta {
   font-style: italic;
-  font-size: 13px;
 }
 #page ul.comments li section h4 {
   font-weight: bold;
+}
+#page ul.comments li section .read-more-wrap {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
 }
 #page ul.comments li section a.read-more {
   cursor: pointer;
@@ -872,16 +876,16 @@ pre {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: bold;
   line-height: 1;
-  padding: 3px 5px;
+  padding: 5px 8px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
   -ms-border-radius: 2px;
   -khtml-border-radius: 2px;
   border-radius: 2px;
-  float: right;
 }
 #page ul.comments li section a.read-more:hover {
   background: #a0a0a0;
@@ -904,8 +908,8 @@ pre {
   padding: 0;
   margin: 0;
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 15px;
+  top: 15px;
 }
 #page ul.comments li section ul.tools li {
   list-style-type: none;
@@ -928,9 +932,10 @@ pre {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: bold;
   line-height: 1;
-  padding: 3px 5px;
+  padding: 5px 8px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
@@ -948,9 +953,10 @@ pre {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: bold;
   line-height: 1;
-  padding: 3px 5px;
+  padding: 5px 8px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
@@ -972,9 +978,10 @@ pre {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: bold;
   line-height: 1;
-  padding: 3px 5px;
+  padding: 5px 8px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;

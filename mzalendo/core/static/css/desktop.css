@@ -453,6 +453,21 @@ josh [at] supercooldesign.co.uk
 #page #comments h3 {
   clear: both;
 }
+#page ul.comments li img {
+  width: 60px;
+  height: 60px;
+}
+#page ul.comments li section {
+  clear: none;
+}
+#page ul.comments li .tools,
+#page ul.comments li .read-more-wrap {
+  left: -999999px;
+}
+#page ul.comments li:hover .tools,
+#page ul.comments li:hover .read-more-wrap, #page ul.comments li.hovered .tools, #page ul.comments li.hovered .read-more-wrap {
+  left: auto;
+}
 #page .social-and-tools {
   display: block;
   width: 180px;
