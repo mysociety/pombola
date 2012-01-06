@@ -195,7 +195,7 @@ class PositionTest(WebTest):
             start_date = ApproximateDate( year=earlier.year, month=earlier.month, day=earlier.day ),
             end_date   = ApproximateDate( year=later.year,   month=later.month,   day=later.day   ),
         )
-                
+        
         # check that we match by default
         self.assertEqual( pos_qs.currently_active().count(), 1 )
         self.assertEqual( pos_qs.currently_inactive().count(), 0 )
@@ -311,4 +311,30 @@ class PositionTest(WebTest):
         self.assertEqual( pos_qs.currently_active( much_later   ).count(), 0 )
         self.assertEqual( pos_qs.currently_inactive( much_earlier ).count(), 1 )
         self.assertEqual( pos_qs.currently_inactive( much_later   ).count(), 1 )
+
+
+
+        # check partial dates
+        mid_2010 = datetime.date(year=2010, month=6, day=1)
+        mid_2011 = datetime.date(year=2011, month=6, day=1)
+        mid_2012 = datetime.date(year=2012, month=6, day=1)
+        mid_2013 = datetime.date(year=2013, month=6, day=1)
+
+        position.start_date = ApproximateDate(year=2011)
+        position.end_date   = ApproximateDate(year=2012)
+        position.save()
+
+        # from django.forms.models import model_to_dict
+        # from pprint import pprint
+        # pprint( model_to_dict( position ) )
+                
+        self.assertEqual( pos_qs.currently_active(mid_2010).count(), 0 )
+        self.assertEqual( pos_qs.currently_active(mid_2011).count(), 1 )
+        self.assertEqual( pos_qs.currently_active(mid_2012).count(), 1 )
+        self.assertEqual( pos_qs.currently_active(mid_2013).count(), 0 )
+
+        self.assertEqual( pos_qs.currently_inactive(mid_2010).count(), 1 )
+        self.assertEqual( pos_qs.currently_inactive(mid_2011).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive(mid_2012).count(), 0 )
+        self.assertEqual( pos_qs.currently_inactive(mid_2013).count(), 1 )
 
