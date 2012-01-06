@@ -21,3 +21,5 @@ PYTHONIOENCODING=utf-8
 0 7 * * * !!(*= $user *)!! check_comments.bash
 
 6 7 * * * !!(*= $user *)!! update_hansard.bash
+
+* 0 * * * !!(*= $user *)!! update_scorecards.bash

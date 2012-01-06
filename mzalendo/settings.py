@@ -200,6 +200,8 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django_bcrypt',
     
+    'core',
+
     'registration_defaults',
     'registration',
     
@@ -228,7 +230,6 @@ INSTALLED_APPS = (
     'scorecards',
     'search',
     'user_profile',
-    'core',
 
     'place_data', # TODO - remove entry and app once migrations have run on all servers
     
