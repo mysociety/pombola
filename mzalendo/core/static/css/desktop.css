@@ -185,6 +185,7 @@ josh [at] supercooldesign.co.uk
 }
 
 #page .page-wrapper {
+  clear: both;
   display: block;
   overflow: hidden;
   position: relative;
