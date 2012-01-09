@@ -30,12 +30,33 @@ class SittingAdmin(admin.ModelAdmin):
     
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display  = [ 'sitting', 'type', 'speaker_name', '__unicode__' ]
+    list_display  = [ 'sitting', 'type', 'speaker_name', 'speaker',  '__unicode__' ]
     
+
+# # When we have Django 1.4
+# from django.contrib.admin import SimpleListFilter
+# 
+# class AliasStatusListFilter(SimpleListFilter):
+#     title = _('alias status')
+#     parameter_name = 'status'
+# 
+#     def lookups(self, request, model_admin):
+#         return (
+#             ('unassigned', 'unassigned'),
+#             # ('90s', _('in the nineties')),
+#         )
+# 
+#     def queryset(self, request, queryset):
+#         if self.value() == 'unassigned':
+#             return queryset.unassigned()
+
 
 class AliasAdmin(admin.ModelAdmin):
     search_fields = [ 'alias', 'person__legal_name' ]
-    # list_filter  = [ 'ignored' ]
+    list_filter  = [
+        'ignored',
+        # AliasStatusListFilter,  # Django 1.4
+    ]
     list_display = [ 'alias', 'person', 'ignored', ]
     form = make_ajax_form(
         models.Alias,
