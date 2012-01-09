@@ -4,6 +4,20 @@ import models
 from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
 
+import datetime
+
+# from django import forms
+from django.conf.urls.defaults import patterns
+# from django.contrib import admin
+from django.utils.decorators import method_decorator
+from django.contrib.admin.views.decorators import staff_member_required
+from django.core.urlresolvers import reverse
+from django.shortcuts  import  redirect
+from django.template   import RequestContext
+
+import models
+from pprint import pprint
+
 # from django.contrib.gis import db
 # from django.core.urlresolvers import reverse
 # from django.contrib.contenttypes.generic import GenericTabularInline
@@ -65,6 +79,27 @@ class AliasAdmin(admin.ModelAdmin):
         }
     )    
 
+    def get_urls(self):
+        urls = super(AliasAdmin, self).get_urls()
+        my_urls = patterns('',
+            ( r'^next_unassigned/$', self.next_unassigned ),
+        )
+        return my_urls + urls
+        
+
+    @method_decorator(staff_member_required)
+    def next_unassigned(self, request):
+        unassigned = models.Alias.objects.all().unassigned()
+
+        try:
+            alias = unassigned[0]
+            return redirect( '/admin/hansard/alias/' + str(alias.id) + '/' )
+        except IndexError:
+            return render_to_response(
+                'admin/hansard/alias',
+                {},
+                context_instance=RequestContext(request)
+            )
 
 admin.site.register( models.Source,  SourceAdmin )
 admin.site.register( models.Venue,   VenueAdmin )
