@@ -123,6 +123,7 @@ class Entry(models.Model):
         """
 
         name = self.speaker_name
+        name = Alias.clean_up_name( name )
         
         # First check for a matching alias that is not ignored
         try:
