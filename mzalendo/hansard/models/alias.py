@@ -5,7 +5,9 @@ from django.db import models
 from core.models import Person
 
 class AliasQuerySet(models.query.QuerySet):
-    pass
+    def unassigned(self):
+        return self.filter(person__isnull=True, ignored=False)
+
 
 class AliasManager(models.Manager):
     def get_query_set(self):
@@ -20,10 +22,10 @@ class Alias(models.Model):
     
       person   | ignored  | meaning
       ---------+----------+--------------------------------------------
-      has val  | None     | use this alias                             
-      None     | has val  | ignore this alias                          
-      None     | None     | Human should inspect this entry            
-      has val  | has val  | Does not make sense - entry will be ignored
+      has val  | False    | use this alias                             
+      None     | True     | ignore this alias                          
+      None     | False    | Human should inspect this entry            
+      has val  | True     | Does not make sense - entry will be ignored
 
     When the check is run for missing aliases entries are made with both person
     and ignored as None for aliases that are found. These can then be used in
@@ -34,9 +36,14 @@ class Alias(models.Model):
     alias   = models.CharField( max_length=40, unique=True )
     person  = models.ForeignKey( Person, blank=True, null=True )
     ignored = models.BooleanField( default=False )
+    
+    objects = AliasManager()
 
     def __unicode__(self):
-        return "%s (aka %s)" % ( self.alias, self.person.name() )
+        string = self.alias
+        if self.person:
+            string += " (aka %s)" % self.person.name()
+        return string
     
     class Meta:
         ordering = ['alias']
