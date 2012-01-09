@@ -845,9 +845,6 @@ pre {
 #page .large-container #comments .big-btn-text-green {
   display: none;
 }
-#page .large-container ul.comments li section, #page .large-container ul.listing li section {
-  max-width: 590px;
-}
 #page .social-and-tools {
   display: table-caption;
 }
