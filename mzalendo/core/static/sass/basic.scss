@@ -501,6 +501,9 @@ pre {
             }
           }
         }
+        &.tools {
+          @include list-reset;
+        }
       }
     }
     article {

@@ -328,6 +328,11 @@ josh [at] supercooldesign.co.uk
           margin-left:0;
           margin-right:0;
         }
+        &.tools {
+          li {
+            margin-left:5px;
+          }
+        }
       }
     }
     article {
@@ -434,9 +439,6 @@ ul.comments {
     img {
       width:60px;
       height:60px;
-    }
-    section {
-      clear:none;
     }
     .tools,
     .read-more-wrap {
