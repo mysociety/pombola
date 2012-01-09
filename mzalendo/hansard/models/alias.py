@@ -49,3 +49,47 @@ class Alias(models.Model):
         ordering = ['alias']
         app_label = 'hansard'
         verbose_name_plural = 'aliases'
+
+    @classmethod
+    def clean_up_name(cls, name):
+        name = name.strip()
+        name = re.sub( r'\s+',                    r' ',    name )
+        name = re.sub( r'^\(\s*(.*)\s*\)$',       r'\1',   name )
+        name = re.sub( r'\s*,+$',                 r'',     name )
+        name = re.sub( r'\.(\S)',                 r'. \1', name )
+
+        # Take titles and add a '.' after if needed
+        name = re.sub( r'^(Mr|Mrs|Ms|Prof|Eng|Dr) ', r'\1. ',  name )
+        
+
+        return name
+    
+    @classmethod
+    def can_ignore_name(cls, name):
+    
+        # Ignore anything with numbers in
+        if re.search(r'\d', name):
+            return True
+    
+        # Ignore titles - they start with 'The'
+        if re.match(r'The', name):
+            return True
+    
+        # Ignore anything with CAPITALS in
+        if re.search(r'[A-Z]{3,}', name):
+            return True
+    
+        # Ignore anything with Speaker in it
+        if re.search(r'\bSpeaker\b', name):
+            return True
+    
+        # Ignore anything that looks like a bullet point
+        if re.match(r'\(.\)', name):
+            return True
+    
+        # Ignore anything that looks like an parliamentary support role
+        if re.search( r'\bTellers\b', name):
+            return True
+    
+        return False
+    

@@ -147,7 +147,7 @@ class Entry(models.Model):
             
             results = person_search.all()[0:]
             
-            if create_alias and not len(results) == 1 and not self.can_ignore_name(name):
+            if create_alias and not len(results) == 1 and not Alias.can_ignore_name(name):
                 # create an entry in the aliases table if one is needed
                 Alias.objects.create(
                     alias   = name,
@@ -158,31 +158,3 @@ class Entry(models.Model):
             return results
 
 
-    @classmethod
-    def can_ignore_name(cls, name):
-        
-        # Ignore anything with numbers in
-        if re.search(r'\d', name):
-            return True
-
-        # Ignore titles - they start with 'The'
-        if re.match(r'The', name):
-            return True
-
-        # Ignore anything with CAPITALS in
-        if re.search(r'[A-Z]{3,}', name):
-            return True
-            
-        # Ignore anything with Speaker in it
-        if re.search(r'\bSpeaker\b', name):
-            return True
-        
-        # Ignore anything that looks like a bullet point
-        if re.match(r'\(.\)', name):
-            return True
-
-        # Ignore anything that looks like an parliamentary support role
-        if re.search( r'\bTellers\b', name):
-            return True
-
-        return False
