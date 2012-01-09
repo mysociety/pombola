@@ -45,6 +45,7 @@ python-xapian
 python-yaml
 python-openid
 python-beautifulsoup
+python-dateutil
 
 # For hansard parsing - need pdftohtml
 poppler-utils
