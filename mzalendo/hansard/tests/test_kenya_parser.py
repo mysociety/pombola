@@ -220,38 +220,3 @@ class KenyaParserTest(TestCase):
         self.assertEqual( len(entry_qs.unassigned_speaker_names()), 0 )
         
     
-    def test_can_ignore_some_speakers(self):
-
-        # These are all names that appear because the parser sometimes gets confused.
-        # Rather than fix the parser (very hard) make sure that we ignore these names so
-        # that missing name report is not so long.
-        speaker_names = [
-            "10 Thursday 10th February, 2011(P) Mr. Kombo",
-            "(a)",
-            "Act to 58A.",
-            "ADJOURNMENT 29 Wednesday, 1st December, 2010 (A) Mr. Deputy Speaker",
-            "April 21, 2009 PARLIAMENTARY DEBATES 2 Mr. Speaker",
-            "(b)",
-            "Cap.114 26.",
-            "COMMUNICATION FROM THE CHAIR Mr. Speaker",
-            "Deputy Speaker",
-            "(i) Energy, Communications and Information Committee",
-            "NOTICES OF MOTIONS Mr. Affey",
-            "QUORUM Mr. Ahenda",
-            "Tellers of Ayes",
-            "The Assistant for Lands",
-            "The Assistant Minister for Agriculture",
-            "The Attorney-General",
-            "The Member for Fafi",
-            "The Minister for Roads",
-        ]
-        
-        false_count = 0
-        
-        for name in speaker_names:
-            result = Entry.can_ignore_name( name ) 
-            if not result:
-                print "Got True for Entry.can_ignore_name( '%s' ), expecting False" % name
-                false_count += 1
-    
-        self.assertEqual( false_count, 0 )
