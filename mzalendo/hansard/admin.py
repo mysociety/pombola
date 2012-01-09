@@ -34,6 +34,9 @@ class EntryAdmin(admin.ModelAdmin):
     
 
 class AliasAdmin(admin.ModelAdmin):
+    search_fields = [ 'alias', 'person__legal_name' ]
+    # list_filter  = [ 'ignored' ]
+    list_display = [ 'alias', 'person', 'ignored', ]
     form = make_ajax_form(
         models.Alias,
         {
