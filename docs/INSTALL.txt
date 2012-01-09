@@ -35,7 +35,6 @@ git clone https://evdb@github.com/mysociety/mzalendo.git
 # There are some dependencies that need to be installed. Please see the
 # 'conf/packages' file for details.
 
-
 # DATABASES
 
 # A Postgis enabled Postgres database is required
@@ -51,6 +50,7 @@ cd mzalendo
 
 # copy config example and set values needed
 cp conf/general-example.yml conf/general.yml
+cp conf/general.yml-example conf/general.yml
 nano conf/general.yml
 
 
