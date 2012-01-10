@@ -1274,10 +1274,7 @@ h3.scorecard-overall span.score-overall-bad {
 }
 #page .home-left h2#home-intro,
 #page .home-right h2#home-intro {
-  font-weight: normal;
-  font-size: 16px;
-  text-transform: none;
-  color: #009245;
+  display: none;
 }
 #page .home-left h3,
 #page .home-right h3 {

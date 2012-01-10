@@ -488,6 +488,15 @@ ul.listing {
   .home-right {
     float:left;
     width:465px;
+    h2#home-intro {
+      display:block;
+      text-transform:none;
+      color:$colour1;
+      font: {
+        weight:normal;
+        size:16px;
+      }
+    }
   }
   .home-left {
     clear:left;
