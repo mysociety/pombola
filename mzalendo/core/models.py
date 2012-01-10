@@ -417,12 +417,12 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter on start and end dates to limit to currently active postitions"""
 
         if when == None: when = datetime.date.today()
-        now_approx = ApproximateDate( year=when.year, month=when.month, day=when.day )
+        now_approx = repr( ApproximateDate( year=when.year, month=when.month, day=when.day ) )
 
         qs = (
             self
                 .filter( start_date__lte = now_approx )
-                .filter( Q( end_date__gte = now_approx ) | Q( end_date = '' ) )
+                .filter( Q( sorting_end_date_high__gte = now_approx ) | Q( end_date = '' ) )
         )
 
         return qs
@@ -432,10 +432,10 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter on start and end dates to limit to currently inactive postitions"""
     
         if when == None: when = datetime.date.today()
-        now_approx = ApproximateDate( year=when.year, month=when.month, day=when.day )
+        now_approx = repr( ApproximateDate( year=when.year, month=when.month, day=when.day ) )
     
         start_criteria = Q( start_date__gt = now_approx )
-        end_criteria   = Q( end_date__lt   = now_approx ) & ~Q(end_date = '')
+        end_criteria   = Q( sorting_end_date_high__lt   = now_approx ) & ~Q(end_date = '')
         
         qs = self.filter( start_criteria | end_criteria )
 
@@ -477,9 +477,11 @@ class Position(ModelBase):
     start_date      = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date        = ApproximateDateField(blank=True, help_text=date_help_text, default="future")
 
-    # Two hidden fields that are only used to do sorting. Filled in by code.
+    # hidden fields that are only used to do sorting. Filled in by code.
     sorting_start_date      = models.CharField(editable=True, default='', max_length=10)
     sorting_end_date        = models.CharField(editable=True, default='', max_length=10)
+    sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
+    sorting_end_date_high   = models.CharField(editable=True, default='', max_length=10)
     
     objects = PositionManager()
 
@@ -555,9 +557,12 @@ class Position(ModelBase):
         # To make the sorting consistent special case some parts
         if not end and start == 'future':
             sorting_start_date = 'a-future' # come after 'future'
-        
+
         self.sorting_start_date = sorting_start_date
         self.sorting_end_date   = sorting_end_date
+        
+        self.sorting_start_date_high = re.sub('-00', '-99', sorting_start_date)
+        self.sorting_end_date_high   = re.sub('-00', '-99', sorting_end_date)     
         
         return True
 
