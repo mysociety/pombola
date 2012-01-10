@@ -702,9 +702,7 @@ h3.scorecard-overall {
   }
 }
 
-ul.news-list {
-  
-}
+
 
 
 
@@ -715,6 +713,7 @@ ul.news-list {
   .home-left,
   .home-right {
     h2 {
+      margin:0;
       background:none;
       border-top:none;
       color:$colour8;
@@ -726,6 +725,10 @@ ul.news-list {
         }
         color:$colour1;
       }
+    }
+    h3 {
+      background:none;
+      border-top:none;
     }
   }
   .home-left {
@@ -742,6 +745,8 @@ ul.news-list {
   padding:10px;
   overflow:hidden;
   label {
+    display:block;
+    margin-bottom:10px;
     color:$colour8;
     font: {
       weight:bold;
@@ -753,12 +758,14 @@ ul.news-list {
     font-size:15px;
     padding:6px 8px;
     float:left;
+    margin:0;
+    width:240px;
   }
   button {
     @include button-reset;
     float:left;
-    width:64px;
-    height:26px;
+    width:50px;
+    height:30px;
     background:$colour2 url(../images/search-icon.png) center no-repeat;
     @include background(
               url(../images/search-icon.png) center no-repeat,
@@ -774,8 +781,52 @@ ul.news-list {
   }
 }
 #home-featured {
+  margin-top:20px;
+  padding:10px;
+  overflow:hidden;
   img {
     width:90px;
     height:auto;
+    float:left;
+    margin-right:10px;
+  }
+  .caption {
+    padding-left:100px;
+  }
+  p {
+    margin:0;
+    &.meta {
+      font: {
+        style:italic;
+        size:13px;
+      }
+    }
+  }
+}
+ul#home-news-list {
+  @include list-reset;
+  border-top:5px solid $colour9;
+  padding-top:15px;
+  li {
+    margin-bottom:15px;
+    padding-bottom:15px;
+    border-bottom:3px solid $colour9;
+    h3, p {
+      padding:0 100px 0 10px;
+      margin:0;
+    }
+    p {
+      &.meta {
+        font: {
+          style:italic;
+          size:13px;
+        }
+        margin-bottom:10px;
+      }
+    }
+    img {
+      float:right;
+      margin-left:10px;
+    }
   }
 }

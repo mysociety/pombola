@@ -1265,6 +1265,7 @@ h3.scorecard-overall span.score-overall-bad {
 /* HOME */
 #page .home-left h2,
 #page .home-right h2 {
+  margin: 0;
   background: none;
   border-top: none;
   color: gray;
@@ -1276,6 +1277,11 @@ h3.scorecard-overall span.score-overall-bad {
   font-size: 16px;
   color: #009245;
 }
+#page .home-left h3,
+#page .home-right h3 {
+  background: none;
+  border-top: none;
+}
 #page .home-right .social-and-tools {
   display: block;
 }
@@ -1286,6 +1292,8 @@ h3.scorecard-overall span.score-overall-bad {
   overflow: hidden;
 }
 #home-search label {
+  display: block;
+  margin-bottom: 10px;
   color: gray;
   font-weight: bold;
   font-size: 17px;
@@ -1295,6 +1303,8 @@ h3.scorecard-overall span.score-overall-bad {
   font-size: 15px;
   padding: 6px 8px;
   float: left;
+  margin: 0;
+  width: 240px;
 }
 #home-search button {
   cursor: pointer;
@@ -1312,8 +1322,8 @@ h3.scorecard-overall span.score-overall-bad {
   -khtml-border-radius: 2px;
   border-radius: 2px;
   float: left;
-  width: 64px;
-  height: 26px;
+  width: 50px;
+  height: 30px;
   background: #87c43c url(../images/search-icon.png) center no-repeat;
   background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #009245));
   background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#87c43c, #009245);
@@ -1332,7 +1342,62 @@ h3.scorecard-overall span.score-overall-bad {
   background: url(../images/search-icon.png) center no-repeat, linear-gradient(#009245, #87c43c);
 }
 
+#home-featured {
+  margin-top: 20px;
+  padding: 10px;
+  overflow: hidden;
+}
 #home-featured img {
   width: 90px;
   height: auto;
+  float: left;
+  margin-right: 10px;
+}
+#home-featured .caption {
+  padding-left: 100px;
+}
+#home-featured p {
+  margin: 0;
+}
+#home-featured p.meta {
+  font-style: italic;
+  font-size: 13px;
+}
+
+ul#home-news-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-top: 5px solid #f6f6f6;
+  padding-top: 15px;
+}
+ul#home-news-list li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  float: left;
+  display: inline;
+}
+ul#home-news-list li a {
+  float: left;
+  display: block;
+}
+ul#home-news-list li {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #f6f6f6;
+}
+ul#home-news-list li h3, ul#home-news-list li p {
+  padding: 0 100px 0 10px;
+  margin: 0;
+}
+ul#home-news-list li p.meta {
+  font-style: italic;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+ul#home-news-list li img {
+  float: right;
+  margin-left: 10px;
 }
