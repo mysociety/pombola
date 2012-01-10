@@ -1,4 +1,5 @@
 import re
+import datetime
 
 from django.db import models
 
@@ -6,12 +7,16 @@ from core.models import Person
 
 class AliasQuerySet(models.query.QuerySet):
     def unassigned(self):
+        """
+        Limit to aliases that have not been assigned.
+        """
         return self.filter(person__isnull=True, ignored=False)
 
 
 class AliasManager(models.Manager):
     def get_query_set(self):
-        return AliasQuerySet(self.model)        
+        return AliasQuerySet(self.model)
+
 
 class Alias(models.Model):
     """
@@ -32,6 +37,9 @@ class Alias(models.Model):
     the interface to find the next alias that needs to be filled in.
 
     """
+
+    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
+    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
 
     alias   = models.CharField( max_length=40, unique=True )
     person  = models.ForeignKey( Person, blank=True, null=True )

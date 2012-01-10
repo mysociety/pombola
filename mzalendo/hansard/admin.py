@@ -89,7 +89,16 @@ class AliasAdmin(admin.ModelAdmin):
 
     @method_decorator(staff_member_required)
     def next_unassigned(self, request):
-        unassigned = models.Alias.objects.all().unassigned()
+
+        # Select the unassigned, and order so that most recently updated come
+        # last. This prevents the same one coming back again and again if it
+        # cannot be resolved (eg if it is ambiguous). Partial fix for that
+        # problem - better would be a 'cant_be_done' flag or similar, or date
+        # ranges so that 'Mr. Foo' from 1999 to 2003 is one person, and 2004
+        # onwards another. Not implemented now as it is not certain that this
+        # is actually a problem.
+        unassigned = models.Alias.objects.all().unassigned().order_by('updated')
+        
 
         try:
             alias = unassigned[0]
