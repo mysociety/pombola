@@ -1388,6 +1388,9 @@ ul#home-news-list li {
   padding-bottom: 15px;
   border-bottom: 3px solid #f6f6f6;
 }
+ul#home-news-list li:last-child {
+  border-bottom: 0;
+}
 ul#home-news-list li h3, ul#home-news-list li p {
   padding: 0 100px 0 10px;
   margin: 0;
@@ -1400,4 +1403,22 @@ ul#home-news-list li p.meta {
 ul#home-news-list li img {
   float: right;
   margin-left: 10px;
+}
+
+#home-mpratings {
+  border-top: 5px solid #f6f6f6;
+  padding: 15px 10px 10px 10px;
+}
+#home-mpratings img {
+  float: left;
+  widht: 60px;
+  margin-right: 10px;
+}
+#home-mpratings h3.scorecard-overall {
+  padding: 0 0 0 70px;
+  margin: 0;
+}
+
+#twitter {
+  display: none;
 }

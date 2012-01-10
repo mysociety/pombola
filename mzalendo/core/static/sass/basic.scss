@@ -811,6 +811,9 @@ ul#home-news-list {
     margin-bottom:15px;
     padding-bottom:15px;
     border-bottom:3px solid $colour9;
+    &:last-child {
+      border-bottom:0;
+    }
     h3, p {
       padding:0 100px 0 10px;
       margin:0;
@@ -829,4 +832,20 @@ ul#home-news-list {
       margin-left:10px;
     }
   }
+}
+#home-mpratings {
+  border-top:5px solid $colour9;
+  padding:15px 10px 10px 10px;
+  img {
+    float:left;
+    widht:60px;
+    margin-right:10px;
+  }
+  h3.scorecard-overall {
+    padding:0 0 0 70px;
+    margin:0;
+  }
+}
+#twitter {
+  display:none;
 }
