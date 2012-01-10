@@ -803,7 +803,7 @@ h3.scorecard-overall {
   }
 }
 ul#home-news-list {
-  @include list-reset;
+  @include list-reset-soft;
   border-top:5px solid $colour9;
   padding-top:15px;
   li {
@@ -816,6 +816,9 @@ ul#home-news-list {
     h3, p {
       padding:0 10px;
       margin:0;
+      a {
+        text-decoration:none;
+      }
     }
     p {
       &.meta {
