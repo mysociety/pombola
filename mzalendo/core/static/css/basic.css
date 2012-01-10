@@ -9,14 +9,9 @@ josh [at] supercooldesign.co.uk
   1. RESET / CORE
   2. BASIC TYPOGRAPHY, LINKS AND IMAGES
   3. BASIC LAYOUT
-  4. MENU
-  5. SHARED ELEMENTS
-  6. BLOG
-  7. WORK
-  8. INFO
-  9. FORMS
-  10. SYSTEM MESSAGES
-  11. MEDIA QUERIES
+  4. SHARED ELEMENTS
+  5. PAGE SPECIFIC
+  6. MEDIA QUERIES
 
 -------------------------------------------------------------- */
 /* 1. RESET / CORE
@@ -103,7 +98,7 @@ body {
 /* 2. BASIC TYPOGRAPHY, LINKS AND IMAGES
 -------------------------------------------------------------- */
 body {
-  font-family: 'arial',sans-serif;
+  font-family: 'Arial', sans-serif;
   color: #444;
   font-size: 100%;
   background: #e6e6e6;
@@ -203,7 +198,80 @@ pre {
   font-family: monospace;
 }
 
+.btn-text-green {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  background: #87c43c;
+}
+.btn-text-green {
+  *display: inline;
+}
+.btn-text-green:hover {
+  background: #a0a0a0;
+  color: white;
+}
+.btn-text-green:hover {
+  background: #96d942;
+}
+
+.btn-text-red {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  background: #d40000;
+}
+.btn-text-red {
+  *display: inline;
+}
+.btn-text-red:hover {
+  background: #a0a0a0;
+  color: white;
+}
+.btn-text-red:hover {
+  background: red;
+}
+
 .big-btn-text-green {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -241,6 +309,9 @@ pre {
   background: -ms-linear-gradient(#96d942, #87c43c);
   background: linear-gradient(#96d942, #87c43c);
 }
+.big-btn-text-green {
+  *display: inline;
+}
 .big-btn-text-green:hover {
   background: #a0a0a0;
   color: white;
@@ -259,6 +330,11 @@ pre {
 }
 
 .big-btn-text-red {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -296,6 +372,9 @@ pre {
   background: -ms-linear-gradient(#ff0000, #d40000);
   background: linear-gradient(#ff0000, #d40000);
 }
+.big-btn-text-red {
+  *display: inline;
+}
 .big-btn-text-red:hover {
   background: #a0a0a0;
   color: white;
@@ -314,6 +393,11 @@ pre {
 }
 
 .m-fb {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -350,6 +434,9 @@ pre {
   background: -ms-linear-gradient(#0049d7, #0042c2);
   background: linear-gradient(#0049d7, #0042c2);
 }
+.m-fb {
+  *display: inline;
+}
 .m-fb:hover {
   background: #a0a0a0;
   color: white;
@@ -367,6 +454,11 @@ pre {
 }
 
 .m-twitter {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -402,6 +494,9 @@ pre {
   background: -o-linear-gradient(#7ad9e7, #74cfdc);
   background: -ms-linear-gradient(#7ad9e7, #74cfdc);
   background: linear-gradient(#7ad9e7, #74cfdc);
+}
+.m-twitter {
+  *display: inline;
 }
 .m-twitter:hover {
   background: #a0a0a0;
@@ -645,30 +740,15 @@ pre {
   height: 100px;
 }
 #page .small-container h3.scorecard-overall {
-  display: block;
-  font-weight: bold;
   padding: 10px;
-  color: black;
   margin-bottom: 10px;
   border: none;
   background: none;
 }
 #page .small-container h3.scorecard-overall span {
-  font-weight: normal;
-  display: block;
-  height: 22px;
   padding-top: 20px;
   margin-top: -20px;
-  background: url(../images/m-smiley-sprite.png) right -3px no-repeat;
-}
-#page .small-container h3.scorecard-overall span.score-overall-good {
-  background-position: right -3px;
-}
-#page .small-container h3.scorecard-overall span.score-overall-average {
-  background-position: right -53px;
-}
-#page .small-container h3.scorecard-overall span.score-overall-bad {
-  background-position: right -103px;
+  height: 22px;
 }
 #page .small-container ul.scorecard {
   list-style-type: none;
@@ -878,6 +958,8 @@ pre {
   padding: 10px;
 }
 
+/* 4. SHARED ELEMENTS
+-------------------------------------------------------------- */
 ul.hansard_entries em {
   font-style: italic;
 }
@@ -948,6 +1030,11 @@ ul.comments li section .read-more-wrap, ul.listing li section .read-more-wrap {
   bottom: 15px;
 }
 ul.comments li section a.read-more, ul.listing li section a.read-more {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -963,6 +1050,9 @@ ul.comments li section a.read-more, ul.listing li section a.read-more {
   -ms-border-radius: 2px;
   -khtml-border-radius: 2px;
   border-radius: 2px;
+}
+ul.comments li section a.read-more, ul.listing li section a.read-more {
+  *display: inline;
 }
 ul.comments li section a.read-more:hover, ul.listing li section a.read-more:hover {
   background: #a0a0a0;
@@ -1004,6 +1094,11 @@ ul.comments li section ul.tools li, ul.listing li section ul.tools li {
   margin-left: 5px;
 }
 ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -1020,11 +1115,19 @@ ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
   -khtml-border-radius: 2px;
   border-radius: 2px;
 }
+ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
+  *display: inline;
+}
 ul.comments li section ul.tools li a:hover, ul.listing li section ul.tools li a:hover {
   background: #a0a0a0;
   color: white;
 }
 ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.like {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -1042,6 +1145,9 @@ ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.l
   border-radius: 2px;
   background: #87c43c;
 }
+ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.like {
+  *display: inline;
+}
 ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
   background: #a0a0a0;
   color: white;
@@ -1050,6 +1156,11 @@ ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools 
   background: #96d942;
 }
 ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a.report {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -1066,6 +1177,9 @@ ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a
   -khtml-border-radius: 2px;
   border-radius: 2px;
   background: #d40000;
+}
+ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a.report {
+  *display: inline;
 }
 ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tools li a.report:hover {
   background: #a0a0a0;
@@ -1123,4 +1237,102 @@ ul.listing li section a.read-more {
 }
 ul.listing li section a.read-more:hover {
   background: #777777 url(../images/chevron-right.png) 6px center no-repeat;
+}
+
+h3.scorecard-overall {
+  display: block;
+  font-weight: bold;
+  color: black;
+}
+h3.scorecard-overall span {
+  font-weight: normal;
+  display: block;
+  height: 44px;
+  background: url(../images/m-smiley-sprite.png) right -3px no-repeat;
+}
+h3.scorecard-overall span.score-overall-good {
+  background-position: right -3px;
+}
+h3.scorecard-overall span.score-overall-average {
+  background-position: right -53px;
+}
+h3.scorecard-overall span.score-overall-bad {
+  background-position: right -103px;
+}
+
+/* 5. PAGE SPECIFIC
+-------------------------------------------------------------- */
+/* HOME */
+#page .home-left h2,
+#page .home-right h2 {
+  background: none;
+  border-top: none;
+  color: gray;
+  font-size: 24px;
+}
+#page .home-left h2#home-intro,
+#page .home-right h2#home-intro {
+  font-weight: normal;
+  font-size: 16px;
+  color: #009245;
+}
+#page .home-right .social-and-tools {
+  display: block;
+}
+
+#home-search {
+  background: #f6f6f6;
+  padding: 10px;
+  overflow: hidden;
+}
+#home-search label {
+  color: gray;
+  font-weight: bold;
+  font-size: 17px;
+}
+#home-search input {
+  border: none;
+  font-size: 15px;
+  padding: 6px 8px;
+  float: left;
+}
+#home-search button {
+  cursor: pointer;
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  text-indent: -999999px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  float: left;
+  width: 64px;
+  height: 26px;
+  background: #87c43c url(../images/search-icon.png) center no-repeat;
+  background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #009245));
+  background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#87c43c, #009245);
+  background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#87c43c, #009245);
+  background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#87c43c, #009245);
+  background: url(../images/search-icon.png) center no-repeat, -ms-linear-gradient(#87c43c, #009245);
+  background: url(../images/search-icon.png) center no-repeat, linear-gradient(#87c43c, #009245);
+}
+#home-search button:hover {
+  background: #009245 url(../images/search-icon.png) center no-repeat;
+  background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #87c43c));
+  background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#009245, #87c43c);
+  background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#009245, #87c43c);
+  background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#009245, #87c43c);
+  background: url(../images/search-icon.png) center no-repeat, -ms-linear-gradient(#009245, #87c43c);
+  background: url(../images/search-icon.png) center no-repeat, linear-gradient(#009245, #87c43c);
+}
+
+#home-featured img {
+  width: 90px;
+  height: auto;
 }

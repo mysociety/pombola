@@ -8,7 +8,9 @@ josh [at] supercooldesign.co.uk
 
   1. RESET / CORE
   2. DESKTOP LAYOUT
-  3. MEDIA QUERIES
+  3. SHARED ELEMENTS
+  4. PAGE SPECIFIC
+  5. MEDIA QUERIES
 
 -------------------------------------------------------------- */
 
@@ -434,6 +436,8 @@ josh [at] supercooldesign.co.uk
   }
 }
 
+/* 3. SHARED ELEMENTS
+-------------------------------------------------------------- */
 ul.comments {
   li {
     img {
@@ -476,7 +480,21 @@ ul.listing {
   }
 }
 
-/* 3. MEDIA QUERIES
+/* 4. PAGE SPECIFIC
+-------------------------------------------------------------- */
+#page {
+  .home-left,
+  .home-right {
+    float:left;
+    width:465px;
+  }
+  .home-left {
+    margin-right:30px;
+  }
+}
+
+
+/* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens
    that can't handle 960px
 -------------------------------------------------------------- */

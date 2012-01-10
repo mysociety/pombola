@@ -8,7 +8,9 @@ josh [at] supercooldesign.co.uk
 
   1. RESET / CORE
   2. DESKTOP LAYOUT
-  3. MEDIA QUERIES
+  3. SHARED ELEMENTS
+  4. PAGE SPECIFIC
+  5. MEDIA QUERIES
 
 -------------------------------------------------------------- */
 /* 1. RESET / CORE
@@ -498,6 +500,8 @@ josh [at] supercooldesign.co.uk
   padding: 0;
 }
 
+/* 3. SHARED ELEMENTS
+-------------------------------------------------------------- */
 ul.comments li img {
   width: 60px;
   height: 60px;
@@ -523,6 +527,11 @@ ul.listing li section .read-more-wrap {
   bottom: 15px;
 }
 ul.listing li section a.read-more {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
   cursor: pointer;
   background: gray;
   color: white;
@@ -542,12 +551,26 @@ ul.listing li section a.read-more {
   width: auto;
   height: auto;
 }
+ul.listing li section a.read-more {
+  *display: inline;
+}
 ul.listing li section a.read-more:hover {
   background: #a0a0a0;
   color: white;
 }
 
-/* 3. MEDIA QUERIES
+/* 4. PAGE SPECIFIC
+-------------------------------------------------------------- */
+#page .home-left,
+#page .home-right {
+  float: left;
+  width: 465px;
+}
+#page .home-left {
+  margin-right: 30px;
+}
+
+/* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens
    that can't handle 960px
 -------------------------------------------------------------- */

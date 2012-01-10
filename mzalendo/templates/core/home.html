@@ -3,118 +3,75 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <style type="text/css" media="screen">
-        div.homepage_chunk {
-            margin: 1%;
-            padding: 2%;
-            min-height: 6em;
-            border: 1px solid #888;
-        }
+    <div class="home-left">
+        <h2 id="home-intro">Mzalendo is a volunteer run project whose mission is to ‘keep an eye on the Kenyan Parliament’. Mzalendo is a volunteer run project whose mission is to ‘keep an eye on the.</h2>
 
-        @media all and (min-width: 480px) {
-            div.homepage_chunk {
-                float: left;
-                width: 43%;
-            }
-        }
-        
-    </style>
-
-    <h1>Mzalendo</h1>
-
-    <p>This is the homepage of the pre-alpha Mzalendo 2.0</p>
-
-    <p>Note - greyed out boxes are not finished yet</p>
-
-    <div class="homepage_chunk">
-        Search for a location or your representative:<br>
-        
-        <form action="{% url location_search %}">
-            <input type="search" name="loc" value="" placeholder="Where...">
-            <input type="submit" value="Search">
+        <form action="{% url core_search %}" id="home-search">
+            <label for="core-search">Search people, places and organisations</label>
+            <input id="core-search" type="text" name="q" value="" placeholder="e.g. Nairobi, Uhuru Kenyatta">
+            <button type="submit">Search</button>
         </form>
-        <br>
-
-        <form action="{% url core_search %}">
-            <input type="search" name="q" value="" placeholder="Person or Party...">
-            <input type="submit" value="Search">
-        </form>
-
-        <form action="{% url hansard_search %}">
-            <input type="search" name="q" value="" placeholder="Hansard entry">
-            <input type="submit" value="Search">
-        </form>
-
+    </div>
+    <div class="home-right">
+        <div id="home-featured">
+            <img src="{{STATIC_URL}}images/ex-feat.jpg" width="510" height="240" />
+            <div class="caption">
+                <p>Lest we forget: Police involved with corruption in Niarobi</p>
+                <p class="meta">posted: 12 January 2012</p>
+            </div>
+        </div>
     </div>
 
-    <div class="todo homepage_chunk">
-        <strong>Questions about the new constitution?</strong>
-
-        <ul>
-            <li>What is it?</li>
-            <li>Another FAQ question?</li>
+    <div class="home-left">
+        <h2>Latest</h2>
+        <ul class="news-list">
+            <li>
+                <h3>Harambees and Elections</h3>
+                <p class="meta">12 January 2012</p>
+                <p>Talking about the “harambee ban” on political aspirants Isaack Hassan, the Chairperson of the Independent Electoral Boundaries...</p>
+                <img src="{{STATIC_URL}}images/ex-news1.jpg" width="90" />
+            </li>
+            <li>
+                <h3>On the Electoral Opinion Bill</h3>
+                <p class="meta">12 January 2012</p>
+                <p>Is the Electoral Opinion Bill overkill or much needed? Though no one can argue about the need for polls to be conducted in a scientific and transparent...</p>
+            </li>
+            <li>
+                <h3>Mzalendo Vox Pop: A doctor’s perspective on the strike / linda afya</h3>
+                <p class="meta">12 January 2012</p>
+                <p>The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick</p>
+                <img src="{{STATIC_URL}}images/ex-news2.jpg" width="90" />
+            </li>
+            <li>
+                <h3>Scrap the Senate?</h3>
+                <p class="meta">12 January 2012</p>
+                <p>The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
+            </li>
         </ul>
     </div>
 
-    <div class="homepage_chunk">
-        <strong>Political Figureheads</strong>
+    <div class="home-right">
+        <h2>MP Ratings</h2>
+        <div id="home-mpratings">
+            <img src="{{STATIC_URL}}images/ex-face2.jpg" width="60" />
+            <h3 class="scorecard-overall">Ahmed, Ahmed - why we rated him dangerous <span class="score-overall-bad">wowser</span></h3>
+        </div>
 
-        <ul>
-            <li><a href="{% url person slug='mwai-kibaki' %}">Mwai Kibaki</a> (President)</li>
-            <li><a href="{% url person slug='kalonzo-musyoka' %}">Kalonzo Musyoka</a> (Vice-President)</li>
-            <li><a href="{% url person slug='raila-odinga' %}">Raila Odinga</a> (Prime Minister)</li>
-        </ul>
+        <h2>Twitter</h2>
+        <div id="twitter">
+            <p>The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
+            <p class="meta">posted: 4 hours ago</p>
+            <a href="/" class="btn-text-green">Follow</a>
+        </div>
+
+        <div class="social-and-tools">
+            <div class="fb-like" data-send="false" data-layout="button_count" data-width="95" data-show-faces="false"></div>
+            
+            <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="mysociety">Tweet</a>
+
+            <ul class="tools">
+                <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link big-btn-text-red">Correct this information</a></li>
+            </ul>
+        </div>
     </div>
-
-    <div class="homepage_chunk">
-        <strong>Largest Parties</strong>
-
-        <ul>
-            <li><a href="{% url organisation slug='odm' %}">ODM</a></li>
-            <li><a href="{% url organisation slug='pnu' %}">Party of National Unity</a></li>
-            <li><a href="{% url organisation slug='kanu' %}">Kenya African National Union</a></li>
-        </ul>
-    </div>
-
-    <div class="homepage_chunk">
-        <strong>Top Cabinet Positions</strong>
-        
-        <ul>
-            <li>Deputy Prime Minister: <a href="{% url person slug='uhuru-kenyatta' %}">Uhuru Kenyatta</a> &amp; <a href="{% url person slug='musalia-mudavadi' %}">Musalia Mudavadi</a></li>
-            <li>Office of the Attorney General: <a href="{% url person slug='amos-wako' %}">Amos Wako</a></li>	
-            <li>Provincial Administration and National Security: <a href="{% url person slug='george-saitoti' %}">George Saitoti</a></li>
-        </ul>
-    </div>
-
-    <div class="homepage_chunk">
-        <strong>Notable Constituencies</strong>
-
-        <ul>
-            <li><a href="{% url place slug='nairobi' %}">Nairobi</a></li>
-            <li><a href="{% url place slug='kakamega' %}">Kakamega</a></li>
-        </ul>
-    </div>
-                                     
-        
-    <div class="todo homepage_chunk">
-        Imported twitter headlines
-    </div>
-                                     
-        
-    <div class="todo homepage_chunk">
-        Most recent blog post snippet, plus links to blog
-    </div>
-    
-    <div class="homepage_chunk">
-        <strong>Complete lists</strong>
-
-        <ul>
-            <li><a href="{% url position 'mp' %}">Members of Parliament</a></li>
-            <li><a href="{% url parties %}">Represented Political Parties</a></li>
-        </ul>
-    </div>
-
-    <br clear="both">
-    
 {% endblock %}
-

@@ -9,14 +9,9 @@ josh [at] supercooldesign.co.uk
   1. RESET / CORE
   2. BASIC TYPOGRAPHY, LINKS AND IMAGES
   3. BASIC LAYOUT
-  4. MENU
-  5. SHARED ELEMENTS
-  6. BLOG
-  7. WORK
-  8. INFO
-  9. FORMS
-  10. SYSTEM MESSAGES
-  11. MEDIA QUERIES
+  4. SHARED ELEMENTS
+  5. PAGE SPECIFIC
+  6. MEDIA QUERIES
 
 -------------------------------------------------------------- */
 
@@ -40,9 +35,8 @@ body {
 
 /* 2. BASIC TYPOGRAPHY, LINKS AND IMAGES
 -------------------------------------------------------------- */
-
 body {
-  font-family: 'arial',sans-serif;
+  font-family: 'Arial', sans-serif;
   color:#444;
   font-size:100%;
   background:$colour7;
@@ -137,6 +131,13 @@ blockquote {
 
 pre {
   font-family: monospace;
+}
+
+.btn-text-green {
+  @include button-text-green;
+}
+.btn-text-red {
+  @include button-text-red;
 }
 
 .big-btn-text-green {
@@ -351,29 +352,14 @@ pre {
   }
   .small-container {
     h3.scorecard-overall {
-      display:block;
-      font-weight:bold;
       padding:10px;
-      color:$colour5;
       margin-bottom:10px;
       border:none;
       background:none;
       span {
-        font-weight:normal;
-        display:block;
-        height:22px;
         padding-top:20px;
         margin-top:-20px;
-        background:url(../images/m-smiley-sprite.png) right -3px no-repeat;
-        &.score-overall-good {
-          background-position:right -3px;
-        }
-        &.score-overall-average {
-          background-position:right -53px;
-        }
-        &.score-overall-bad {
-          background-position:right -103px;
-        }
+        height:22px;
       }
     }
     ul.scorecard {
@@ -552,34 +538,35 @@ pre {
   }
 }
 
-
+/* 4. SHARED ELEMENTS
+-------------------------------------------------------------- */
 ul.hansard_entries {
-    em {
-        font-style: italic;
-    }
-    
-    strong {
-        font-weight: bold;
-    }
- 
-    li {
-        margin-bottom: 0.5em;
-        list-style: none;
-    }
-    
-    li.scene {
-        margin-left: 2em;
-    }
-    
-    li.speech p {
-        margin-left: 1em;
-    }
-    
-    li.page_number {
-        text-align: right;
-        background: #eee;
-        padding: 0.2em;
-    }
+  em {
+      font-style: italic;
+  }
+  
+  strong {
+      font-weight: bold;
+  }
+
+  li {
+      margin-bottom: 0.5em;
+      list-style: none;
+  }
+  
+  li.scene {
+      margin-left: 2em;
+  }
+  
+  li.speech p {
+      margin-left: 1em;
+  }
+  
+  li.page_number {
+      text-align: right;
+      background: #eee;
+      padding: 0.2em;
+  }
 }
 
 ul.comments {
@@ -691,5 +678,104 @@ ul.listing {
         }
       }
     }
+  }
+}
+
+h3.scorecard-overall {
+  display:block;
+  font-weight:bold;
+  color:$colour5;
+  span {
+    font-weight:normal;
+    display:block;
+    height:44px;
+    background:url(../images/m-smiley-sprite.png) right -3px no-repeat;
+    &.score-overall-good {
+      background-position:right -3px;
+    }
+    &.score-overall-average {
+      background-position:right -53px;
+    }
+    &.score-overall-bad {
+      background-position:right -103px;
+    }
+  }
+}
+
+ul.news-list {
+  
+}
+
+
+
+/* 5. PAGE SPECIFIC
+-------------------------------------------------------------- */
+/* HOME */
+#page {
+  .home-left,
+  .home-right {
+    h2 {
+      background:none;
+      border-top:none;
+      color:$colour8;
+      font-size:24px;
+      &#home-intro {
+        font: {
+          weight:normal;
+          size:16px;
+        }
+        color:$colour1;
+      }
+    }
+  }
+  .home-left {
+    
+  }
+  .home-right {
+    .social-and-tools {
+      display:block;
+    }
+  }
+}
+#home-search {
+  background:$colour9;
+  padding:10px;
+  overflow:hidden;
+  label {
+    color:$colour8;
+    font: {
+      weight:bold;
+      size:17px;
+    }
+  }
+  input {
+    border:none;
+    font-size:15px;
+    padding:6px 8px;
+    float:left;
+  }
+  button {
+    @include button-reset;
+    float:left;
+    width:64px;
+    height:26px;
+    background:$colour2 url(../images/search-icon.png) center no-repeat;
+    @include background(
+              url(../images/search-icon.png) center no-repeat,
+              linear-gradient($colour2, $colour1)
+            );
+    &:hover {
+      background:$colour1 url(../images/search-icon.png) center no-repeat;
+      @include background(
+                url(../images/search-icon.png) center no-repeat,
+                linear-gradient($colour1, $colour2)
+              );
+    }
+  }
+}
+#home-featured {
+  img {
+    width:90px;
+    height:auto;
   }
 }
