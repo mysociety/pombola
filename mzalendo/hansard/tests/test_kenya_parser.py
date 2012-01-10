@@ -132,6 +132,7 @@ class KenyaParserTest(TestCase):
         source = self._create_source_and_load_test_json_to_entries()
 
         entry_qs = Entry.objects.all()
+        unassigned_aliases_qs = Alias.objects.all().unassigned()
 
         # check that none of the speakers are assigned
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
@@ -141,7 +142,7 @@ class KenyaParserTest(TestCase):
         
         # check that none of the speakers got assigned - there are no entries in the database
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 11 )
+        self.assertEqual( unassigned_aliases_qs.count(), 11 )
 
 
         # print entry_qs.unassigned_speaker_names()
@@ -154,7 +155,7 @@ class KenyaParserTest(TestCase):
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 11 )
+        self.assertEqual( unassigned_aliases_qs.count(), 11 )
 
 
         # create the position - check matched
@@ -170,7 +171,7 @@ class KenyaParserTest(TestCase):
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 10 )
+        self.assertEqual( unassigned_aliases_qs.count(), 10 )
 
         # Add an mp that is no longer current, check not matched
         bob_musila = Person.objects.create(
@@ -185,38 +186,37 @@ class KenyaParserTest(TestCase):
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 10 )
+        self.assertEqual( unassigned_aliases_qs.count(), 10 )
         
         # Add a name to the aliases and check it is matched
         betty_laboso = Person.objects.create(
             legal_name = 'Betty Laboso',
             slug       = 'betty-laboso',
         )
-        Alias.objects.create(
-            alias  = 'Dr. Laboso',
-            person = betty_laboso,
-        )
+        betty_laboso_alias = Alias.objects.get(alias  = 'Dr. Laboso')
+        betty_laboso_alias.person = betty_laboso
+        betty_laboso_alias.save()
+
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 9 )
+        self.assertEqual( unassigned_aliases_qs.count(), 9 )
         
         # Add a name to alias that should be ignored, check not matched but not listed in names any more
-        Alias.objects.create(
-            alias   = 'Prof. Kaloki',
-            ignored = True,
-        )
+        prof_kaloki_alias = Alias.objects.get( alias = 'Prof. Kaloki')
+        prof_kaloki_alias.ignored = True
+        prof_kaloki_alias.save()
+
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 8 )        
+        self.assertEqual( unassigned_aliases_qs.count(), 8 )        
         
         # Add all remaining names to alias and check that all matched
-        for name in entry_qs.unassigned_speaker_names():
-            Alias.objects.create(
-                alias  = name,
-                person = betty_laboso,
-            )
+        for alias in unassigned_aliases_qs.all():
+            alias.person = betty_laboso
+            alias.save()
+
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 8 )
-        self.assertEqual( len(entry_qs.unassigned_speaker_names()), 0 )
+        self.assertEqual( unassigned_aliases_qs.count(), 0 )
         
     

@@ -104,7 +104,7 @@ class Entry(models.Model):
             if cache_key in cache:
                 speakers = cache[cache_key]
             else:
-                speakers = entry.possible_matching_speakers( create_alias=True )
+                speakers = entry.possible_matching_speakers( update_aliases=True )
                 cache[cache_key] = speakers
 
             if len(speakers) == 1:
@@ -113,11 +113,11 @@ class Entry(models.Model):
                 entry.save()                
                 
 
-    def possible_matching_speakers(self, create_alias=False):
+    def possible_matching_speakers(self, update_aliases=False):
         """
         Return array of person objects that might be the speaker.
 
-        If 'create_alias' is True (False by default) and the name cannot be
+        If 'update_aliases' is True (False by default) and the name cannot be
         ignored then an entry will be made in the alias table that so that the
         alias is inspected by an admin.
         """
@@ -131,31 +131,44 @@ class Entry(models.Model):
             
             if alias.person and not alias.ignored:
                 return [ alias.person ]
+            elif alias.is_unassigned:
+                # Pretend that this alias does not exist so that it is checked
+                # in case new people have been added to the database since the
+                # last run.
+                pass
             else:
                 return []
 
         except Alias.DoesNotExist:
-            # drop the prefix
-            stripped_name = re.sub( r'^\w+\.\s', '', name )
+            alias = None
+        
+        # drop the prefix
+        stripped_name = re.sub( r'^\w+\.\s', '', name )
+        
+        person_search = (
+            Person
+            .objects
+            .all()
+            .is_mp( when=self.sitting.start_date )
+            .filter(legal_name__icontains=stripped_name)
+        )
+        
+        results = person_search.all()[0:]
+        
+        found_one_result = len(results) == 1
+
+        # If there is a single matching speaker and an unassigned alias delete it
+        if found_one_result and alias and alias.is_unassigned:
+            alias.delete()
             
-            person_search = (
-                Person
-                .objects
-                .all()
-                .is_mp( when=self.sitting.start_date )
-                .filter(legal_name__icontains=stripped_name)
+        # create an entry in the aliases table if one is needed
+        if not alias and update_aliases and not found_one_result and not Alias.can_ignore_name(name):
+            Alias.objects.create(
+                alias   = name,
+                ignored = False,
+                person  = None,
             )
-            
-            results = person_search.all()[0:]
-            
-            if create_alias and not len(results) == 1 and not Alias.can_ignore_name(name):
-                # create an entry in the aliases table if one is needed
-                Alias.objects.create(
-                    alias   = name,
-                    ignored = False,
-                    person  = None,
-                )
-            
-            return results
+        
+        return results
 
 

@@ -57,6 +57,9 @@ class Alias(models.Model):
         ordering = ['alias']
         app_label = 'hansard'
         verbose_name_plural = 'aliases'
+    
+    def is_unassigned(self):
+        return bool(not self.person and not self.ignored)
 
     @classmethod
     def clean_up_name(cls, name):
