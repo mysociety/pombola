@@ -1270,6 +1270,7 @@ h3.scorecard-overall span.score-overall-bad {
   border-top: none;
   color: gray;
   font-size: 24px;
+  text-transform: uppercase;
 }
 #page .home-left h2#home-intro,
 #page .home-right h2#home-intro {
@@ -1392,7 +1393,7 @@ ul#home-news-list li:last-child {
   border-bottom: 0;
 }
 ul#home-news-list li h3, ul#home-news-list li p {
-  padding: 0 100px 0 10px;
+  padding: 0 10px;
   margin: 0;
 }
 ul#home-news-list li p.meta {
@@ -1402,7 +1403,7 @@ ul#home-news-list li p.meta {
 }
 ul#home-news-list li img {
   float: right;
-  margin-left: 10px;
+  margin: 0 10px;
 }
 
 #home-mpratings {

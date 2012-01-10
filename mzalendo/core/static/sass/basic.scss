@@ -718,6 +718,7 @@ h3.scorecard-overall {
       border-top:none;
       color:$colour8;
       font-size:24px;
+      text-transform:uppercase;
       &#home-intro {
         font: {
           weight:normal;
@@ -730,9 +731,6 @@ h3.scorecard-overall {
       background:none;
       border-top:none;
     }
-  }
-  .home-left {
-    
   }
   .home-right {
     .social-and-tools {
@@ -815,7 +813,7 @@ ul#home-news-list {
       border-bottom:0;
     }
     h3, p {
-      padding:0 100px 0 10px;
+      padding:0 10px;
       margin:0;
     }
     p {
@@ -829,7 +827,7 @@ ul#home-news-list {
     }
     img {
       float:right;
-      margin-left:10px;
+      margin:0 10px;
     }
   }
 }

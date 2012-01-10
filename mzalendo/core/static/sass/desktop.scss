@@ -482,6 +482,7 @@ ul.listing {
 
 /* 4. PAGE SPECIFIC
 -------------------------------------------------------------- */
+/* HOME */
 #page {
   .home-left,
   .home-right {
@@ -491,6 +492,86 @@ ul.listing {
   .home-left {
     margin-right:30px;
   }
+}
+#home-search {
+  margin-top:30px;
+  padding:20px;
+}
+#home-featured {
+  margin:0 0 30px 0;
+  padding:0;
+  position:relative;
+  img {
+    width:auto;
+    float:none;
+    margin:0;
+  }
+  .caption {
+    position:absolute;
+    bottom:0;
+    left:0;
+    padding:10px;
+    width:445px;
+    background:$colour5;
+    background:rgba(0, 0, 0, 0.8);
+    color:$colour6;
+    h4 {
+      display:none;
+    }
+  }
+}
+ul#home-news-list {
+  margin-top:15px;
+  li {
+    h3, p {
+      padding:0;
+    }
+    img {
+      margin-right:0;
+    }
+  }
+}
+#home-mpratings {
+  margin:15px 0 30px 0;
+  padding:0;
+  background:$colour5;
+  height:200px;
+  img, h3 {
+    display:none;
+  }
+}
+#twitter {
+  display:block;
+  float:left;
+  width:275px;
+  h3 {
+    color:$colour8;
+    font-size:18px;
+    text-transform:uppercase;
+  }
+  .tw-wrap {
+    overflow:hidden;
+    padding:20px;
+    background:$colour9 url(../images/quotes.png) 10px 10px no-repeat;
+  }
+  p {
+    margin:0;
+    &.meta {
+      float:left;
+      margin-top:10px;
+      font: {
+        size:13px;
+        style:italic;
+      }
+    }
+  }
+  .btn-text-green {
+    margin-top:10px;
+    float:right;
+  }
+}
+#page .home-right .social-and-tools {
+  margin-top:30px;
 }
 
 
