@@ -21,7 +21,7 @@ python-pip
 python-virtualenv
 
 
-# Various micelaneous tools - needed for the python libraries to be built.
+# Various miscellaneous tools - needed for the python libraries to be built.
 bcrypt
 
 # libjpeg - needed on non-debian. On debian installed as a requirement for others so no need to list seperately
@@ -45,6 +45,7 @@ python-xapian
 python-yaml
 python-openid
 python-beautifulsoup
+python-dateutil
 
 # For hansard parsing - need pdftohtml
 poppler-utils

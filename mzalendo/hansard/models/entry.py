@@ -32,27 +32,6 @@ class EntryQuerySet(models.query.QuerySet):
         ).exclude(
             speaker_name = '',
         )
-    
-    def unassigned_speaker_names(self):
-        unassigned_names = (
-            Entry.objects
-                .all()
-                .unassigned_speeches()
-                .values('speaker_name')
-                .order_by('speaker_name')
-                .exclude( speaker_name__in=Alias.objects.values('alias') )
-                .distinct()
-        )
-
-        names = [
-            x['speaker_name']
-            for x
-            in unassigned_names
-            if not Entry.can_ignore_name(x['speaker_name'])
-        ]
-
-        return names
-
 
 class EntryManager(models.Manager):
     def get_query_set(self):
@@ -125,71 +104,71 @@ class Entry(models.Model):
             if cache_key in cache:
                 speakers = cache[cache_key]
             else:
-                speakers = entry.possible_matching_speakers()
+                speakers = entry.possible_matching_speakers( update_aliases=True )
                 cache[cache_key] = speakers
 
             if len(speakers) == 1:
                 speaker = speakers[0]
                 entry.speaker = speaker
-                entry.save()
+                entry.save()                
+                
 
+    def possible_matching_speakers(self, update_aliases=False):
+        """
+        Return array of person objects that might be the speaker.
 
-    def possible_matching_speakers(self):
-        """Return array of person objects that might be the speaker"""
+        If 'update_aliases' is True (False by default) and the name cannot be
+        ignored then an entry will be made in the alias table that so that the
+        alias is inspected by an admin.
+        """
 
         name = self.speaker_name
+        name = Alias.clean_up_name( name )
         
         # First check for a matching alias that is not ignored
         try:
             alias = Alias.objects.get( alias=name )
             
-            if alias.ignored:
-                return []
-            else:
+            if alias.person and not alias.ignored:
                 return [ alias.person ]
+            elif alias.is_unassigned:
+                # Pretend that this alias does not exist so that it is checked
+                # in case new people have been added to the database since the
+                # last run.
+                pass
+            else:
+                return []
 
         except Alias.DoesNotExist:
-            pass
-            
+            alias = None
+        
         # drop the prefix
-        name = re.sub( r'^\w+\.\s', '', name )
+        stripped_name = re.sub( r'^\w+\.\s', '', name )
         
         person_search = (
             Person
             .objects
             .all()
             .is_mp( when=self.sitting.start_date )
-            .filter(legal_name__icontains=name)
+            .filter(legal_name__icontains=stripped_name)
         )
-
-        return person_search.all()[0:]
-
-
-    @classmethod
-    def can_ignore_name(cls, name):
         
-        # Ignore anything with numbers in
-        if re.search(r'\d', name):
-            return True
+        results = person_search.all()[0:]
+        
+        found_one_result = len(results) == 1
 
-        # Ignore titles - they start with 'The'
-        if re.match(r'The', name):
-            return True
-
-        # Ignore anything with CAPITALS in
-        if re.search(r'[A-Z]{3,}', name):
-            return True
+        # If there is a single matching speaker and an unassigned alias delete it
+        if found_one_result and alias and alias.is_unassigned:
+            alias.delete()
             
-        # Ignore anything with Speaker in it
-        if re.search(r'\bSpeaker\b', name):
-            return True
+        # create an entry in the aliases table if one is needed
+        if not alias and update_aliases and not found_one_result and not Alias.can_ignore_name(name):
+            Alias.objects.create(
+                alias   = name,
+                ignored = False,
+                person  = None,
+            )
         
-        # Ignore anything that looks like a bullet point
-        if re.match(r'\(.\)', name):
-            return True
+        return results
 
-        # Ignore anything that looks like an parliamentary support role
-        if re.search( r'\bTellers\b', name):
-            return True
 
-        return False

@@ -74,12 +74,12 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('-submit_date', )
-        permissions = [("can_moderate", "Can moderate comments")]
         verbose_name = _('comment')
         verbose_name_plural = _('comments')
-        permissions = (
+        permissions = [
+            ("can_moderate", "Can moderate comments"),
             ("can_post_without_moderation", "Can post comments without moderation"),
-        )
+        ]
         
     def __unicode__(self):
         return "%s: %s..." % (self.user, self.comment[:50])
