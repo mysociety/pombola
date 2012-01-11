@@ -4,9 +4,11 @@ import re
 from django.db import models
 from django.core.urlresolvers import reverse
 
+from hansard.models.base import HansardModelBase
 from hansard.models import Source, Venue
 
-class Sitting(models.Model):
+
+class Sitting(HansardModelBase):
 
     source = models.ForeignKey(Source)
     venue  = models.ForeignKey(Venue)
@@ -34,14 +36,6 @@ class Sitting(models.Model):
             },
         )
 
-        return url
-
-
-    def get_admin_url(self):
-        url = reverse(
-            'admin:%s_%s_change' % ( self._meta.app_label, self._meta.module_name),
-            args=[self.id]
-        )
         return url
 
 

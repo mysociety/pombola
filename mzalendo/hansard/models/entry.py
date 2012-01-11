@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 
 from core.models import Person
 from hansard.models import Sitting, Alias
+from hansard.models.base import HansardModelBase
 
 
 class EntryQuerySet(models.query.QuerySet):
@@ -38,7 +39,7 @@ class EntryManager(models.Manager):
         return EntryQuerySet(self.model)
     
 
-class Entry(models.Model):
+class Entry(HansardModelBase):
     """Model for representing an entry in Hansard - speeches, headings etc"""
 
     type_choices = (
