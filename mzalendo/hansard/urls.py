@@ -12,7 +12,7 @@ urlpatterns = patterns('hansard.views',
     # sitting/main_chamber/2011-12-03
     # sitting/main_chamber/2011-12-03-14-00-00
     url(
-        r'^sitting/(?P<venue_slug>[\w\-]+)/(?P<start_date_and_time>\d{4}-\d{2}-\d{2}(?:-\d{2}-\d{2}-\d{2}))?',
+        r'^sitting/(?P<venue_slug>[\w\-]+)/(?P<start_date_and_time>\d{4}-\d{2}-\d{2}(?:-\d{2}-\d{2}-\d{2})?)',
         SittingView.as_view(),
         name="sitting_view"
     ),

@@ -1,4 +1,8 @@
+import re
+import datetime
+
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
+from django.http import Http404
 from django.template   import RequestContext
 from django.views.generic import TemplateView, DetailView
 
@@ -58,6 +62,39 @@ class IndexView(TemplateView):
 
 class SittingView(DetailView):
     model = Sitting
+    
+    def get_object(self):
+        """Get the object based on venue and start date and time"""
+
+        venue_slug          = self.kwargs['venue_slug']
+        start_date_and_time = self.kwargs['start_date_and_time']
+
+        query_args = {
+            'venue__slug':     venue_slug,
+        }
+
+        # add blank HH-MM-SS if needed
+        start_time_parts = re.split('-', start_date_and_time)
+        if len(start_time_parts) == 3:
+            start_time_parts.extend( [ '00','00','00' ] )
+
+        # split the date and time up into the relevant fields
+        (year,month,day,hour,minute,second) = [ int(x) for x in start_time_parts ]
+
+        # add start_date to the query
+        query_args['start_date'] = datetime.date(year=year,month=month,day=day)
+
+        # if there is a time use it
+        if hour or minute or second:
+            query_args['start_time__gte'] = datetime.time(hour=hour, minute=minute, second=second)
+
+        # get all matching sittings
+        sittings = Sitting.objects.filter( **query_args ).order_by('start_time')
+        
+        if not len(sittings):
+            raise Http404
+        
+        return sittings[0]
 
 
 # class BaseView ( View ):
