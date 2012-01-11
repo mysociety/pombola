@@ -36,6 +36,15 @@ class Sitting(models.Model):
 
         return url
 
+
+    def get_admin_url(self):
+        url = reverse(
+            'admin:%s_%s_change' % ( self._meta.app_label, self._meta.module_name),
+            args=[self.id]
+        )
+        return url
+
+
     def name(self):
         """Format the times nicely to give a name"""
 

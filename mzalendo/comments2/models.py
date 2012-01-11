@@ -111,6 +111,8 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return ( 'comments-view', [ self.id ] )
 
+    
+
     def approve(self):
         """Mark this comment as 'Approved' and clear any flags on it"""
         self.status = 'approved'
