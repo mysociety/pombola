@@ -13,8 +13,8 @@
     * related people
     
     * related places
-    
-    * related orgs
+        
+    * image
 
 ### Place detail page
 
@@ -22,10 +22,10 @@
     
     * related people
     
-    * related places
-    
     * related orgs
 
+    * image
+    
 ### Person detail page
 
     * scorecard of related constituency too if an MP
