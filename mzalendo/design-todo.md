@@ -8,7 +8,36 @@
 
     * resolve how to handle breadcrumb trail
 
+### Org detail page
     
+    * related people
+    
+    * related places
+    
+    * related orgs
+
+### Place detail page
+
+    * if constituency show current MP
+
+    * scorecard
+    
+    * related people
+    
+    * related places
+    
+    * related orgs
+
+### Person detail page
+
+    * scorecard of related constituency too if an MP
+
+
+## List pages
+
+    * inspect for bits that need hooking up
+
+
 ## Homepage
 
     * Wording on homepage
@@ -34,6 +63,10 @@
 
     * delete this file
     
+### Footer
+
+    * make admin and debug links only show up if you are an admin
+
 
 ## Search
 
