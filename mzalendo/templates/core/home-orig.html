@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <style type="text/css" media="screen">
+        div.homepage_chunk {
+            margin: 1%;
+            padding: 2%;
+            min-height: 6em;
+            border: 1px solid #888;
+        }
+
+        @media all and (min-width: 480px) {
+            div.homepage_chunk {
+                float: left;
+                width: 43%;
+            }
+        }
+        
+    </style>
+
+    <h1>Mzalendo</h1>
+
+    <p>This is the homepage of the pre-alpha Mzalendo 2.0</p>
+
+    <p>Note - greyed out boxes are not finished yet</p>
+
+    <div class="homepage_chunk">
+        Search for a location or your representative:<br>
+        
+        <form action="{% url location_search %}">
+            <input type="search" name="loc" value="" placeholder="Where...">
+            <input type="submit" value="Search">
+        </form>
+        <br>
+
+        <form action="{% url core_search %}">
+            <input type="search" name="q" value="" placeholder="Person or Party...">
+            <input type="submit" value="Search">
+        </form>
+
+        <form action="{% url hansard_search %}">
+            <input type="search" name="q" value="" placeholder="Hansard entry">
+            <input type="submit" value="Search">
+        </form>
+
+    </div>
+
+    <div class="todo homepage_chunk">
+        <strong>Questions about the new constitution?</strong>
+
+        <ul>
+            <li>What is it?</li>
+            <li>Another FAQ question?</li>
+        </ul>
+    </div>
+
+    <div class="homepage_chunk">
+        <strong>Political Figureheads</strong>
+
+        <ul>
+            <li><a href="{% url person slug='mwai-kibaki' %}">Mwai Kibaki</a> (President)</li>
+            <li><a href="{% url person slug='kalonzo-musyoka' %}">Kalonzo Musyoka</a> (Vice-President)</li>
+            <li><a href="{% url person slug='raila-odinga' %}">Raila Odinga</a> (Prime Minister)</li>
+        </ul>
+    </div>
+
+    <div class="homepage_chunk">
+        <strong>Largest Parties</strong>
+
+        <ul>
+            <li><a href="{% url organisation slug='odm' %}">ODM</a></li>
+            <li><a href="{% url organisation slug='pnu' %}">Party of National Unity</a></li>
+            <li><a href="{% url organisation slug='kanu' %}">Kenya African National Union</a></li>
+        </ul>
+    </div>
+
+    <div class="homepage_chunk">
+        <strong>Top Cabinet Positions</strong>
+        
+        <ul>
+            <li>Deputy Prime Minister: <a href="{% url person slug='uhuru-kenyatta' %}">Uhuru Kenyatta</a> &amp; <a href="{% url person slug='musalia-mudavadi' %}">Musalia Mudavadi</a></li>
+            <li>Office of the Attorney General: <a href="{% url person slug='amos-wako' %}">Amos Wako</a></li>	
+            <li>Provincial Administration and National Security: <a href="{% url person slug='george-saitoti' %}">George Saitoti</a></li>
+        </ul>
+    </div>
+
+    <div class="homepage_chunk">
+        <strong>Notable Constituencies</strong>
+
+        <ul>
+            <li><a href="{% url place slug='nairobi' %}">Nairobi</a></li>
+            <li><a href="{% url place slug='kakamega' %}">Kakamega</a></li>
+        </ul>
+    </div>
+                                     
+        
+    <div class="todo homepage_chunk">
+        Imported twitter headlines
+    </div>
+                                     
+        
+    <div class="todo homepage_chunk">
+        Most recent blog post snippet, plus links to blog
+    </div>
+    
+    <div class="homepage_chunk">
+        <strong>Complete lists</strong>
+
+        <ul>
+            <li><a href="{% url position 'mp' %}">Members of Parliament</a></li>
+            <li><a href="{% url parties %}">Represented Political Parties</a></li>
+        </ul>
+    </div>
+
+    <br clear="both">
+    
+{% endblock %}
+

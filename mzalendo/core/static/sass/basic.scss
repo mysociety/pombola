@@ -9,14 +9,9 @@ josh [at] supercooldesign.co.uk
   1. RESET / CORE
   2. BASIC TYPOGRAPHY, LINKS AND IMAGES
   3. BASIC LAYOUT
-  4. MENU
-  5. SHARED ELEMENTS
-  6. BLOG
-  7. WORK
-  8. INFO
-  9. FORMS
-  10. SYSTEM MESSAGES
-  11. MEDIA QUERIES
+  4. SHARED ELEMENTS
+  5. PAGE SPECIFIC
+  6. MEDIA QUERIES
 
 -------------------------------------------------------------- */
 
@@ -40,11 +35,11 @@ body {
 
 /* 2. BASIC TYPOGRAPHY, LINKS AND IMAGES
 -------------------------------------------------------------- */
-
 body {
-  font-family: 'arial',sans-serif;
+  font-family: 'Arial', sans-serif;
   color:#444;
   font-size:100%;
+  background:$colour7;
 }
 
 p, h1, h2, h3 {
@@ -136,6 +131,13 @@ blockquote {
 
 pre {
   font-family: monospace;
+}
+
+.btn-text-green {
+  @include button-text-green;
+}
+.btn-text-red {
+  @include button-text-red;
 }
 
 .big-btn-text-green {
@@ -319,8 +321,13 @@ pre {
 }
 
 #page {
-  position:relative;
-  margin-bottom:30px;
+  background:$colour6;
+  padding-bottom:30px;
+  .page-wrapper {
+    display:table;
+    position:relative;
+    caption-side:bottom;
+  }
   .title-space {
     min-height:130px;
     margin-left:120px;
@@ -334,39 +341,25 @@ pre {
   }
   .profile-pic {
     position:absolute;
-    top:0;
+    top:10px;
     left:10px;
     width:100px;
-    img {
+    img,
+    #map_canvas {
       width:100px;
-      height:auto;
+      height:100px;
     }
   }
   .small-container {
     h3.scorecard-overall {
-      display:block;
-      font-weight:bold;
       padding:10px;
-      color:$colour5;
       margin-bottom:10px;
       border:none;
       background:none;
       span {
-        font-weight:normal;
-        display:block;
-        height:22px;
         padding-top:20px;
         margin-top:-20px;
-        background:url(../images/m-smiley-sprite.png) right -3px no-repeat;
-        &.score-overall-good {
-          background-position:right -3px;
-        }
-        &.score-overall-average {
-          background-position:right -53px;
-        }
-        &.score-overall-bad {
-          background-position:right -103px;
-        }
+        height:22px;
       }
     }
     ul.scorecard {
@@ -431,6 +424,9 @@ pre {
             &:hover {
               background-color:$colour6;
             }
+            span {
+              font-style:italic;
+            }
           }
         }
       }
@@ -491,6 +487,9 @@ pre {
             }
           }
         }
+        &.tools {
+          @include list-reset;
+        }
       }
     }
     article {
@@ -501,75 +500,16 @@ pre {
       text-decoration:none;
     }
     #comments {
-      // display:none; // TEMP, need to not include the content and ajax it in  on desk, link to it on mob
       .big-btn-text-green {
         display:none;
       }
     }
     ul.comments li section {
-      max-width:590px;
-    }
-  }
-  ul.comments {
-    @include list-reset-soft;
-    li {
-      @include inline-block;
-      position:relative;
-      background:$colour9;
-      padding:10px;
-      margin-bottom:5px;
-      img {
-        width:60px;
-        height:60px;
-        border:5px solid $colour7;
-        float:left;
-        margin:0 20px 10px 0;
-      }
-      section {
-        float:left;
-        max-width:850px;
-        p {
-          margin-left:0;
-          margin-right:0;
-          &.meta {
-            font: {
-              style:italic;
-              size:13px;
-            }
-          }
-        }
-        h4 {
-          font-weight:bold;
-        }
-        a.read-more {
-          @include button-reset-text;
-          float:right;
-        }
-        ul {
-          @include list-reset-copy;
-          &.tools {
-            @include list-reset;
-            position:absolute;
-            right:10px;
-            top:10px;
-            li {
-              margin-left:5px;
-              a {
-                @include button-reset-text;
-                &.like {
-                  @include button-text-green;
-                }
-                &.report {
-                  @include button-text-red;
-                }
-              }
-            }
-          }
-        }
-      }
+      // max-width:590px;
     }
   }
   .social-and-tools {
+    display:table-caption;
     .fb-like,
     .twitter-share-button,
     iframe {
@@ -598,32 +538,311 @@ pre {
   }
 }
 
-
+/* 4. SHARED ELEMENTS
+-------------------------------------------------------------- */
 ul.hansard_entries {
-    em {
-        font-style: italic;
+  em {
+      font-style: italic;
+  }
+  
+  strong {
+      font-weight: bold;
+  }
+
+  li {
+      margin-bottom: 0.5em;
+      list-style: none;
+  }
+  
+  li.scene {
+      margin-left: 2em;
+  }
+  
+  li.speech p {
+      margin-left: 1em;
+  }
+  
+  li.page_number {
+      text-align: right;
+      background: #eee;
+      padding: 0.2em;
+  }
+}
+
+ul.comments {
+  @include list-reset-soft;
+  li {
+    display:block;
+    overflow:hidden;
+    position:relative;
+    background:$colour12;
+    padding:15px 15px 30px 15px;
+    margin-bottom:5px;
+    img {
+      width:40px;
+      height:40px;
+      border:5px solid $colour7;
+      float:left;
+      margin:0 20px 10px 0;
     }
-    
-    strong {
-        font-weight: bold;
+    section {
+      float:left;
+      clear:left;
+      max-width:840px;
+      p {
+        margin-left:0;
+        margin-right:15px;
+        font-size:12px;
+        &.meta {
+          font-style:italic;
+        }
+      }
+      h4 {
+        font-weight:bold;
+      }
+      .read-more-wrap {
+        position:absolute;
+        right:15px;
+        bottom:15px;
+      }
+      a.read-more {
+        @include button-reset-text;
+      }
+      ul {
+        @include list-reset-copy;
+        &.tools {
+          @include list-reset;
+          position:absolute;
+          right:15px;
+          top:15px;
+          li {
+            margin-left:5px;
+            a {
+              @include button-reset-text;
+              &.like {
+                @include button-text-green;
+              }
+              &.report {
+                @include button-text-red;
+              }
+            }
+          }
+        }
+      }
     }
- 
-    li {
-        margin-bottom: 0.5em;
-        list-style: none;
+  }
+}
+
+ul.listing {
+  @extend .comments;
+  li {
+    padding:15px;
+    h4 a {
+      text-decoration:none;
+      color:$colour5;
     }
-    
-    li.scene {
-        margin-left: 2em;
+    img {
+      width:60px;
+      height:60px;
+      margin-bottom:0;
     }
-    
-    li.speech p {
-        margin-left: 1em;
+    section {
+      float:none;
+      clear:none;
+      padding:0 40px 0 90px;
+      p {
+        margin:0 !important;
+      }
+      .kind {
+        position:absolute;
+        top:15px;
+        right:15px;
+      }
+      .read-more-wrap {
+        top:35px;
+        bottom:auto;
+      }
+      .meta {
+        color:$colour8;
+      }
+      a.read-more {
+        display:block;
+        text-indent:-999999px;
+        padding:0;
+        width:24px;
+        height:24px;
+        background:$colour5 url(../images/chevron-right.png) 6px 2px no-repeat;
+        @include border-radius(24px);
+        &:hover {
+          background:$colour4 url(../images/chevron-right.png) 6px center no-repeat;
+        }
+      }
     }
-    
-    li.page_number {
-        text-align: right;
-        background: #eee;
-        padding: 0.2em;
+  }
+}
+
+h3.scorecard-overall {
+  display:block;
+  font-weight:bold;
+  color:$colour5;
+  span {
+    font-weight:normal;
+    display:block;
+    height:44px;
+    background:url(../images/m-smiley-sprite.png) right -3px no-repeat;
+    &.score-overall-good {
+      background-position:right -3px;
     }
+    &.score-overall-average {
+      background-position:right -53px;
+    }
+    &.score-overall-bad {
+      background-position:right -103px;
+    }
+  }
+}
+
+
+
+
+
+/* 5. PAGE SPECIFIC
+-------------------------------------------------------------- */
+/* HOME */
+#page {
+  .home-left,
+  .home-right {
+    h2 {
+      margin:0;
+      background:none;
+      border-top:none;
+      color:$colour8;
+      font-size:24px;
+      text-transform:uppercase;
+      &#home-intro {
+        display:none;
+      }
+    }
+    h3 {
+      background:none;
+      border-top:none;
+    }
+  }
+  .home-right {
+    .social-and-tools {
+      display:block;
+    }
+  }
+}
+#home-search {
+  background:$colour9;
+  padding:10px;
+  overflow:hidden;
+  label {
+    display:block;
+    margin-bottom:10px;
+    color:$colour8;
+    font: {
+      weight:bold;
+      size:17px;
+    }
+  }
+  input {
+    border:none;
+    font-size:15px;
+    padding:6px 8px;
+    float:left;
+    margin:0;
+    width:200px;
+  }
+  button {
+    @include button-reset;
+    float:left;
+    width:50px;
+    height:30px;
+    background:$colour2 url(../images/search-icon.png) center no-repeat;
+    @include background(
+              url(../images/search-icon.png) center no-repeat,
+              linear-gradient($colour2, $colour1)
+            );
+    &:hover {
+      background:$colour1 url(../images/search-icon.png) center no-repeat;
+      @include background(
+                url(../images/search-icon.png) center no-repeat,
+                linear-gradient($colour1, $colour2)
+              );
+    }
+  }
+}
+#home-featured {
+  margin-top:20px;
+  padding:10px;
+  overflow:hidden;
+  img {
+    width:90px;
+    height:auto;
+    float:left;
+    margin-right:10px;
+  }
+  .caption {
+    padding-left:100px;
+  }
+  p {
+    margin:0;
+    &.meta {
+      font: {
+        style:italic;
+        size:13px;
+      }
+    }
+  }
+}
+ul#home-news-list {
+  @include list-reset-soft;
+  border-top:5px solid $colour9;
+  padding-top:15px;
+  li {
+    margin-bottom:15px;
+    padding-bottom:15px;
+    border-bottom:3px solid $colour9;
+    &:last-child {
+      border-bottom:0;
+    }
+    h3, p {
+      padding:0 10px;
+      margin:0;
+      a {
+        text-decoration:none;
+      }
+    }
+    p {
+      &.meta {
+        font: {
+          style:italic;
+          size:13px;
+        }
+        margin-bottom:10px;
+      }
+    }
+    img {
+      float:right;
+      margin:0 10px;
+    }
+  }
+}
+#home-mpratings {
+  border-top:5px solid $colour9;
+  padding:15px 10px 10px 10px;
+  img {
+    float:left;
+    widht:60px;
+    margin-right:10px;
+  }
+  h3.scorecard-overall {
+    padding:0 0 0 70px;
+    margin:0;
+  }
+}
+#twitter {
+  display:none;
 }

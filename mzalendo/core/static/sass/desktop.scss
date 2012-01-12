@@ -8,7 +8,9 @@ josh [at] supercooldesign.co.uk
 
   1. RESET / CORE
   2. DESKTOP LAYOUT
-  3. MEDIA QUERIES
+  3. SHARED ELEMENTS
+  4. PAGE SPECIFIC
+  5. MEDIA QUERIES
 
 -------------------------------------------------------------- */
 
@@ -128,7 +130,6 @@ josh [at] supercooldesign.co.uk
       @include list-reset-soft;
       display:block;
       width:100%;
-      border-bottom:1px solid $colour7;
       padding:10px 0;
       margin-bottom:10px;
       float:left;
@@ -155,14 +156,25 @@ josh [at] supercooldesign.co.uk
 }
 
 #page {
-  position:relative;
-  overflow:hidden;
+  .page-wrapper {
+    clear: both;
+    display:block;
+    overflow:hidden;
+    position:relative;
+  }
   .title-space {
     max-width:510px;
     min-height:0;
     float:left;
     clear:left;
     margin:0 0 10px 240px;
+    position:relative;
+    .object-kind {
+      position:absolute;
+      right:-180px;
+      top:0;
+      text-align:right;
+    }
   }
   .profile-pic {
     height:200px;
@@ -172,6 +184,10 @@ josh [at] supercooldesign.co.uk
     left:0;
     img {
       width:auto;
+      height:200px;
+    }
+    #map_canvas {
+      width:200px;
       height:200px;
     }
   }
@@ -314,6 +330,11 @@ josh [at] supercooldesign.co.uk
           margin-left:0;
           margin-right:0;
         }
+        &.tools {
+          li {
+            margin-left:5px;
+          }
+        }
       }
     }
     article {
@@ -380,11 +401,9 @@ josh [at] supercooldesign.co.uk
     }
   }
   .social-and-tools {
-    height:150px;
-    position:absolute;
-    top:0;
-    right:0;
+    display:block;
     width:180px;
+    float:right;
     .fb-like,
     .twitter-share-button,
     iframe {
@@ -397,7 +416,7 @@ josh [at] supercooldesign.co.uk
     }
     ul {
       clear:both;
-      margin:30px 0;
+      margin:30px 0 0 0;
       li {
         a {
           padding:5px;
@@ -417,19 +436,208 @@ josh [at] supercooldesign.co.uk
   }
 }
 
-/* 3. MEDIA QUERIES
+/* 3. SHARED ELEMENTS
+-------------------------------------------------------------- */
+ul.comments {
+  li {
+    img {
+      width:60px;
+      height:60px;
+    }
+    .tools,
+    .read-more-wrap {
+      left:-999999px;
+    }
+    &:hover,
+    &.hovered {
+      .tools,
+      .read-more-wrap {
+        left:auto;
+      }
+    }
+  }
+}
+
+ul.listing {
+  li {
+    img {
+      width:90px;
+      height:90px;
+    }
+    section {
+      clear:none;
+      .read-more-wrap {
+        top:auto;
+        bottom:15px;
+      }
+      a.read-more {
+        @include button-reset-text;
+        text-indent:0;
+        width:auto;
+        height:auto;
+      }
+    }
+  }
+}
+
+/* 4. PAGE SPECIFIC
+-------------------------------------------------------------- */
+/* HOME */
+#page {
+  .home-left,
+  .home-right {
+    float:left;
+    width:465px;
+    h2#home-intro {
+      display:block;
+      text-transform:none;
+      color:$colour1;
+      font: {
+        weight:normal;
+        size:16px;
+      }
+    }
+  }
+  .home-left {
+    clear:left;
+    margin-right:30px;
+  }
+}
+#home-search {
+  margin:30px 0;
+  padding:20px;
+  input {
+    width:260px;
+  }
+}
+#home-featured {
+  margin:0 0 30px 0;
+  padding:0;
+  position:relative;
+  img {
+    width:auto;
+    float:none;
+    margin:0;
+  }
+  .caption {
+    position:absolute;
+    bottom:0;
+    left:0;
+    padding:10px;
+    width:445px;
+    background:$colour5;
+    background:rgba(0, 0, 0, 0.8);
+    color:$colour6;
+    h4 {
+      display:none;
+    }
+  }
+}
+ul#home-news-list {
+  margin-top:15px;
+  li {
+    h3, p {
+      padding:0;
+    }
+    img {
+      margin-right:0;
+    }
+  }
+}
+#home-mpratings {
+  margin:15px 0 30px 0;
+  padding:0;
+  background:$colour5;
+  height:200px;
+  img, h3 {
+    display:none;
+  }
+}
+#twitter {
+  display:block;
+  float:left;
+  width:275px;
+  h3 {
+    color:$colour8;
+    font-size:18px;
+    text-transform:uppercase;
+  }
+  .tw-wrap {
+    overflow:hidden;
+    padding:20px;
+    background:$colour9 url(../images/quotes.png) 10px 10px no-repeat;
+  }
+  p {
+    margin:0;
+    &.meta {
+      float:left;
+      margin-top:10px;
+      font: {
+        size:13px;
+        style:italic;
+      }
+    }
+  }
+  .btn-text-green {
+    margin-top:10px;
+    float:right;
+  }
+}
+#page .home-right .social-and-tools {
+  margin-top:30px;
+}
+
+
+/* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens
    that can't handle 960px
 -------------------------------------------------------------- */
 @media only screen and (min-width: 640px) and (max-width: 960px) {
+  #main-menu nav ul li {
+    height:36px;
+    a {
+      font-size:14px;
+      padding:8px 10px;
+    }
+  }
   #page {
+    .title-space h1 {
+      margin-top:35px;
+    }
+    .fb-like,
+    .twitter-share-button {
+      margin-top:7px;
+    }
     .social-and-tools {
+      display:block;
+      width:auto;
+      position:absolute;
+      right:0;
+      top:0;
+      float:none;
+      ul {
+        margin:0;
+        float:left;
+        clear:none;
+        li {
+          display:inline;
+          a {
+            display:inline-block;
+          }
+        }
+      }
+    }
+    .home-right .social-and-tools {
       position:relative;
-      top:auto;
       right:auto;
-      float:left;
-      clear:left;
-      margin-left:240px;
+      top:auto;
+      float:right;
+      ul {
+        float:none;
+        li {
+          display:block;
+        }
+      }
     }
   }
 }

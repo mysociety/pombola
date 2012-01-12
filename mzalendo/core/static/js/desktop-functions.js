@@ -5,7 +5,7 @@ Modernizr.load(['//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.j
 function activateSimpleTab( $heading_element ) {
     
   // Check that we have something to work with
-  if ( ! $heading_element.size() ) return false
+  if ( ! $heading_element.size() ) return false;
 
   var tab_content_id = $heading_element.attr('rel');
   var $tab_content = $(tab_content_id);
@@ -25,9 +25,9 @@ function activateSimpleTab( $heading_element ) {
 
   // load content using ajax if the div has an data-comment-source-url
   // TODO: use a cleaner way to specify this - probably best to have a global object and tell it that certain tabs have special opening behaviour
-  var content_url = $tab_content.attr('data-comment-source-url')
+  var content_url = $tab_content.attr('data-comment-source-url');
   if ( content_url ) {
-      $tab_content.load(content_url)
+      $tab_content.load(content_url);
   }
   
 }
@@ -82,7 +82,7 @@ $(function(){
                 var dialog_div = $('<div>Loading...</div>');
     
                 // Load the initial content for the dialog
-                dialog_div.load( event.target.href + ' #ajax_dialog_subcontent' )
+                dialog_div.load( event.target.href + ' #ajax_dialog_subcontent' );
     
                 // Form subission should be done using ajax, and only the ajax_dialog_subcontent should be shown.
                 var handle_form_submission = function( form_submit_event ) {
@@ -119,7 +119,7 @@ $(function(){
     $('#tab-nav ul').append(newElem);
   }).remove();
 
-  if(window.location.hash != '')
+  if(window.location.hash !== '')
   {
     // get hash from url and activate it
     var hash = window.location.hash;
@@ -129,11 +129,12 @@ $(function(){
   else
   {
     //make initial tab active and hide other tabs
+    var simpleTabActive = "";
     if(!$('#tab-nav ul li').hasClass('active')){
-      var simpleTabActive = $('#tab-nav ul li:first-child').attr('rel');
+      simpleTabActive = $('#tab-nav ul li:first-child').attr('rel');
       $('#tab-nav ul li:first-child').addClass('active');
     }else{
-      var simpleTabActive = $('#tab-nav ul li.active').attr('rel');
+      simpleTabActive = $('#tab-nav ul li.active').attr('rel');
     }
     $(simpleTabActive).addClass('open');
     $('.tab').not('.open').hide();
@@ -164,4 +165,26 @@ $(function(){
   $('ul.scorecard article').live('click', function(){
     hideShow($('div.details', $(this)), $(this));
   });
+
+
+  /*
+   * Height fix for pages with .profile-info box
+   */
+  var pro_h = $('.profile-info').height()+210; //add 210 for the profile pic
+  var main_h = $('#page .page-wrapper').height();
+
+  if(pro_h > main_h){
+    $('#page .page-wrapper').css({'min-height':pro_h});
+  }
+
+  /*
+   * Comments: hover and show tools
+   */
+  $('.comments li').hover(function() {
+    $(this).addClass('hovered');
+  },
+  function() {
+    $(this).removeClass('hovered');
+  });
+
 });

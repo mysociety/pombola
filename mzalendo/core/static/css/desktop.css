@@ -8,7 +8,9 @@ josh [at] supercooldesign.co.uk
 
   1. RESET / CORE
   2. DESKTOP LAYOUT
-  3. MEDIA QUERIES
+  3. SHARED ELEMENTS
+  4. PAGE SPECIFIC
+  5. MEDIA QUERIES
 
 -------------------------------------------------------------- */
 /* 1. RESET / CORE
@@ -157,7 +159,6 @@ josh [at] supercooldesign.co.uk
   margin: 0;
   display: block;
   width: 100%;
-  border-bottom: 1px solid #e6e6e6;
   padding: 10px 0;
   margin-bottom: 10px;
   float: left;
@@ -185,9 +186,11 @@ josh [at] supercooldesign.co.uk
   color: #777777;
 }
 
-#page {
-  position: relative;
+#page .page-wrapper {
+  clear: both;
+  display: block;
   overflow: hidden;
+  position: relative;
 }
 #page .title-space {
   max-width: 510px;
@@ -195,6 +198,13 @@ josh [at] supercooldesign.co.uk
   float: left;
   clear: left;
   margin: 0 0 10px 240px;
+  position: relative;
+}
+#page .title-space .object-kind {
+  position: absolute;
+  right: -180px;
+  top: 0;
+  text-align: right;
 }
 #page .profile-pic {
   height: 200px;
@@ -205,6 +215,10 @@ josh [at] supercooldesign.co.uk
 }
 #page .profile-pic img {
   width: auto;
+  height: 200px;
+}
+#page .profile-pic #map_canvas {
+  width: 200px;
   height: 200px;
 }
 #page .small-container {
@@ -361,6 +375,9 @@ josh [at] supercooldesign.co.uk
   margin-left: 0;
   margin-right: 0;
 }
+#page .large-container section ul.tools li {
+  margin-left: 5px;
+}
 #page .large-container article h3 {
   margin: 20px 0 5px 0;
   border: none;
@@ -453,11 +470,9 @@ josh [at] supercooldesign.co.uk
   clear: both;
 }
 #page .social-and-tools {
-  height: 150px;
-  position: absolute;
-  top: 0;
-  right: 0;
+  display: block;
   width: 180px;
+  float: right;
 }
 #page .social-and-tools .fb-like,
 #page .social-and-tools .twitter-share-button,
@@ -471,7 +486,7 @@ josh [at] supercooldesign.co.uk
 }
 #page .social-and-tools ul {
   clear: both;
-  margin: 30px 0;
+  margin: 30px 0 0 0;
 }
 #page .social-and-tools ul li a {
   padding: 5px;
@@ -485,17 +500,220 @@ josh [at] supercooldesign.co.uk
   padding: 0;
 }
 
-/* 3. MEDIA QUERIES
+/* 3. SHARED ELEMENTS
+-------------------------------------------------------------- */
+ul.comments li img {
+  width: 60px;
+  height: 60px;
+}
+ul.comments li .tools,
+ul.comments li .read-more-wrap {
+  left: -999999px;
+}
+ul.comments li:hover .tools,
+ul.comments li:hover .read-more-wrap, ul.comments li.hovered .tools, ul.comments li.hovered .read-more-wrap {
+  left: auto;
+}
+
+ul.listing li img {
+  width: 90px;
+  height: 90px;
+}
+ul.listing li section {
+  clear: none;
+}
+ul.listing li section .read-more-wrap {
+  top: auto;
+  bottom: 15px;
+}
+ul.listing li section a.read-more {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  text-indent: 0;
+  width: auto;
+  height: auto;
+}
+ul.listing li section a.read-more {
+  *display: inline;
+}
+ul.listing li section a.read-more:hover {
+  background: #a0a0a0;
+  color: white;
+}
+
+/* 4. PAGE SPECIFIC
+-------------------------------------------------------------- */
+/* HOME */
+#page .home-left,
+#page .home-right {
+  float: left;
+  width: 465px;
+}
+#page .home-left h2#home-intro,
+#page .home-right h2#home-intro {
+  display: block;
+  text-transform: none;
+  color: #009245;
+  font-weight: normal;
+  font-size: 16px;
+}
+#page .home-left {
+  clear: left;
+  margin-right: 30px;
+}
+
+#home-search {
+  margin: 30px 0;
+  padding: 20px;
+}
+#home-search input {
+  width: 260px;
+}
+
+#home-featured {
+  margin: 0 0 30px 0;
+  padding: 0;
+  position: relative;
+}
+#home-featured img {
+  width: auto;
+  float: none;
+  margin: 0;
+}
+#home-featured .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  width: 445px;
+  background: black;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+#home-featured .caption h4 {
+  display: none;
+}
+
+ul#home-news-list {
+  margin-top: 15px;
+}
+ul#home-news-list li h3, ul#home-news-list li p {
+  padding: 0;
+}
+ul#home-news-list li img {
+  margin-right: 0;
+}
+
+#home-mpratings {
+  margin: 15px 0 30px 0;
+  padding: 0;
+  background: black;
+  height: 200px;
+}
+#home-mpratings img, #home-mpratings h3 {
+  display: none;
+}
+
+#twitter {
+  display: block;
+  float: left;
+  width: 275px;
+}
+#twitter h3 {
+  color: gray;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+#twitter .tw-wrap {
+  overflow: hidden;
+  padding: 20px;
+  background: #f6f6f6 url(../images/quotes.png) 10px 10px no-repeat;
+}
+#twitter p {
+  margin: 0;
+}
+#twitter p.meta {
+  float: left;
+  margin-top: 10px;
+  font-size: 13px;
+  font-style: italic;
+}
+#twitter .btn-text-green {
+  margin-top: 10px;
+  float: right;
+}
+
+#page .home-right .social-and-tools {
+  margin-top: 30px;
+}
+
+/* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens
    that can't handle 960px
 -------------------------------------------------------------- */
 @media only screen and (min-width: 640px) and (max-width: 960px) {
+  #main-menu nav ul li {
+    height: 36px;
+  }
+  #main-menu nav ul li a {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  #page .title-space h1 {
+    margin-top: 35px;
+  }
+  #page .fb-like,
+  #page .twitter-share-button {
+    margin-top: 7px;
+  }
   #page .social-and-tools {
-    position: relative;
-    top: auto;
-    right: auto;
+    display: block;
+    width: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    float: none;
+  }
+  #page .social-and-tools ul {
+    margin: 0;
     float: left;
-    clear: left;
-    margin-left: 240px;
+    clear: none;
+  }
+  #page .social-and-tools ul li {
+    display: inline;
+  }
+  #page .social-and-tools ul li a {
+    display: inline-block;
+  }
+  #page .home-right .social-and-tools {
+    position: relative;
+    right: auto;
+    top: auto;
+    float: right;
+  }
+  #page .home-right .social-and-tools ul {
+    float: none;
+  }
+  #page .home-right .social-and-tools ul li {
+    display: block;
   }
 }

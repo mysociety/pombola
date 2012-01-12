@@ -27,13 +27,13 @@ $colour2: #87C43C;
 $colour3: #1B7999;
 
 // Black ish
-$colour4: #777;
+$colour4: #777777;
 
 // Black
-$colour5: #000;
+$colour5: #000000;
 
 // White
-$colour6: #FFF;
+$colour6: #FFFFFF;
 
 // Grey
 $colour7: #E6E6E6;
@@ -50,15 +50,30 @@ $colour10: #2E2E2E;
 // Red
 $colour11: #D40000;
 
+// Lighterer Grey
+$colour12: #F7F7F7;
+
 // 2. MIXINS
 // --------------------------------------------------------------
 // Green Gradient
-@mixin gradient1 {@include background (linear-gradient($colour2, $colour1)) ;}
-@mixin gradient1b {@include background (linear-gradient($colour1, $colour2)) ;}
+@mixin gradient1 {
+  background:$colour2;
+  @include background (linear-gradient($colour2, $colour1));
+}
+@mixin gradient1b {
+  background:$colour1;
+  @include background (linear-gradient($colour1, $colour2));
+}
 
 // Light Grey Gradient
-@mixin gradient2 {@include background(linear-gradient(#ebebeb, #f5f5f5));}
-@mixin gradient2b {@include background(linear-gradient(#ebebeb, #f5f5f5));}
+@mixin gradient2 {
+  background:#ebebeb;
+  @include background(linear-gradient(#ebebeb, #f5f5f5));
+}
+@mixin gradient2b {
+  background:#f5f5f5;
+  @include background(linear-gradient(#f5f5f5, #ebebeb));
+}
 
 // Button reset
 @mixin button-reset {
@@ -74,6 +89,7 @@ $colour11: #D40000;
 }
 
 @mixin button-reset-text {
+  @include inline-block;
   cursor:pointer;
   background:$colour8;
   color:$colour6;
@@ -81,9 +97,12 @@ $colour11: #D40000;
     decoration:none;
     transform:uppercase;
   }
-  font-size:11px;
+  font: {
+    size:10px;
+    weight:bold;
+  }
   line-height:1;
-  padding:3px 5px;
+  padding:5px 8px;
   @include border-radius(2px);
   &:hover {
     background:$colour8/0.8;
