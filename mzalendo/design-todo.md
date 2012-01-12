@@ -36,8 +36,6 @@
 
 ## General
 
-    * hook up mysociety link in footer
-
     * check that selenium tests still pass
 
     * style the correction dialog - issue #189
