@@ -8,8 +8,6 @@
 
     * resolve how to handle breadcrumb trail
 
-    * ensure that comments are shown
-    
     * check that the summary is shown if available
     
     

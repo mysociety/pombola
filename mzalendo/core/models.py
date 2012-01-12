@@ -304,6 +304,8 @@ class Organisation(ModelBase):
 
     objects  = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
+    
+    comments = generic.GenericRelation(Comment)    
 
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.kind )
@@ -342,6 +344,8 @@ class Place(ModelBase):
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
 
     objects = ManagerBase()
+
+    comments = generic.GenericRelation(Comment)
 
     def parent_places(self):
         """Return a list of parents, with top parent first."""
