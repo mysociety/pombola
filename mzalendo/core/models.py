@@ -336,6 +336,7 @@ class Place(ModelBase):
     name         = models.CharField(max_length=200)
     slug         = models.SlugField(max_length=100, unique=True, help_text="created from name")
     kind         = models.ForeignKey('PlaceKind')
+    summary      = MarkupField(blank=True, default='')
     shape_url    = models.URLField(verify_exists=True, blank=True )
     location     = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )

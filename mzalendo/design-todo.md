@@ -8,8 +8,6 @@
 
     * resolve how to handle breadcrumb trail
 
-    * check that the summary is shown if available
-    
     
 ## Homepage
 

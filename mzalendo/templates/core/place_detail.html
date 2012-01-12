@@ -35,6 +35,12 @@
         </ul>
     </div>
 
+    {% if object.summary %}
+        <div class="small-container">
+            {{ object.summary }}
+        </div>
+    {% endif %}
+
     <div class="small-container">
         <h3 class="scorecard-overall">Overall Rating <span class="score-overall-average">Average</span></h3>
         <ul class="scorecard">
