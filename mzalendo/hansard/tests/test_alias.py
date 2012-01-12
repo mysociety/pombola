@@ -18,6 +18,7 @@ class HansardAliasTest(TestCase):
             ('Mr.Foo,',      'Mr. Foo' ),
             ('Mr.   Foo,',   'Mr. Foo' ),
             ('(Mr. Foo)',    'Mr. Foo' ),
+            ('[Mr. Foo]',    'Mr. Foo' ),
 
             ( 'Mr A.N. Other', 'Mr. A. N. Other' ),
 
@@ -42,6 +43,9 @@ class HansardAliasTest(TestCase):
             "COMMUNICATION FROM THE CHAIR Mr. Speaker",
             "Deputy Speaker",
             "(i) Energy, Communications and Information Committee",
+            "(ii) Local Authorities Committee",
+            "(iii) Transport, Public Works and Housing Committee",
+            "(iv) Committee on Implementation",
             "NOTICES OF MOTIONS Mr. Affey",
             "QUORUM Mr. Ahenda",
             "Tellers of Ayes",

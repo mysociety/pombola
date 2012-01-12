@@ -67,6 +67,7 @@ class Alias(HansardModelBase):
         name = name.strip()
         name = re.sub( r'\s+',                    r' ',    name )
         name = re.sub( r'^\(\s*(.*)\s*\)$',       r'\1',   name )
+        name = re.sub( r'^\[\s*(.*)\s*\]$',       r'\1',   name )
         name = re.sub( r'\s*,+$',                 r'',     name )
         name = re.sub( r'\.(\S)',                 r'. \1', name )
 
@@ -96,7 +97,7 @@ class Alias(HansardModelBase):
             return True
     
         # Ignore anything that looks like a bullet point
-        if re.match(r'\(.\)', name):
+        if re.match(r'\(.\)', name) or re.match(r'\(i{0,3}v?i{0,3}\)', name):
             return True
     
         # Ignore anything that looks like an parliamentary support role
