@@ -66,12 +66,16 @@
     </div>
 
     <div class="profile-info">
+        {% with mp_pos=object.current_mp_position %}
+        {% if mp_pos %}
         <div class="constituency-party">
             <h3>Key figure</h3>
             <ul>
-                <li><a href="/">Ahmed Ahmed <span>[mp]</span></a></li>
+                <li><a href="{{ mp_pos.person.get_absolute_url }}">{{ mp_pos.person.name }} <span>[mp]</span></a></li>
             </ul>
         </div>
+        {% endif %}
+        {% endwith %}
         
         <h3>Contact Details</h3>
         <ul class="vcard">        

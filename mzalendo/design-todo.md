@@ -16,9 +16,9 @@
     
     * related orgs
 
-### Place detail page
+    * contact details
 
-    * if constituency show current MP
+### Place detail page
 
     * scorecard
     
@@ -27,6 +27,8 @@
     * related places
     
     * related orgs
+
+    * contact details
 
 ### Person detail page
 
