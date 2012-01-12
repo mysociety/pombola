@@ -8,7 +8,10 @@
     <div class="title-space">
         <h1>{{ object.name }}</h1>
 
-        <p>part of <a href="/">Parent Company</a></p>
+        {% comment %}
+            # Not possible in the database yet - but a nice idea.
+            <p>part of <a href="/">Parent Company</a></p>
+        {% endcomment %}
 
         {% if object.kind.slug != 'unknown' %}
             <span class="object-kind">{{ object.kind.name }}</span>

@@ -12,11 +12,6 @@
     
     * check that the summary is shown if available
     
-
-### orgs
-
-    * parent company - not supported in database yet
-    
     
 ## Homepage
 
