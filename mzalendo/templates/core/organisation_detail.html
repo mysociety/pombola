@@ -42,17 +42,8 @@
 
     <div class="profile-info">
        
-        <h3>Contact Details</h3>
-        <ul class="vcard">        
-            <li class="address">
-                <span class="label">Address:</span>
-                <p>P.O. Box 58722 Nairobi, Kenya</p>
-            </li>
-            <li class="phone">
-                <span class="label">Phone:</span>
-                <p><a href="tel:0733 289501">0733 289501</a></p>
-            </li>
-        </ul>
+        {% include "core/contact_list.html" with contacts=object.contacts.all %}
+
     </div>
 
     <div class="large-container">
