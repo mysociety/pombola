@@ -35,12 +35,6 @@
         </ul>
     </div>
 
-    {% if object.summary %}
-        <div class="small-container">
-            {{ object.summary }}
-        </div>
-    {% endif %}
-
     <div class="small-container">
         <h3 class="scorecard-overall">Overall Rating <span class="score-overall-average">Average</span></h3>
         <ul class="scorecard">
@@ -94,11 +88,13 @@
 
     <div class="large-container">
         <div class="tab-wrapper">
-            <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
-            <div class="tab markdown" id="overview">
-                <p>I feel it is important to inform u that, ur political popularity is diminishing day by day on the grounds that, currently ur making some political choices which are not popular, for instance in the last general elections u withdrew 4m the presidential race only 2 back up ur kinsman(kibaki), at the same note u ganged upwith ur kinsmen and violently grabbed the victory 4M (RAILA). an architect of post- election violence and even to worsen everything uv been appointed to head the finance docket. this is terrible! want to loot the gvt kit. these are deeds that need not to be condoned at all. instead of politicking launch campaigns countrywide and ask 4 forgiveness 4m the citicens.</p>
-                <p>At the same note u ganged upwith ur kinsmen and violently grabbed the victory 4M (RAILA). an architect of post- election violence and even to worsen everything uv been appointed to head the finance docket. this is terrible! want to loot the gvt kit. these are deeds that need not to be condoned at all. instead of politicking launch campaigns countrywide and ask 4 forgiveness 4m the citicens.</p>
-            </div>
+
+            {% if object.summary %}
+                <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
+                <div class="tab markdown" id="overview">
+                    {{ object.summary }}
+                </div>
+            {% endif %}
 
             <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
             <div class="tab markdown" id="related-people">

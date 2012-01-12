@@ -33,6 +33,7 @@
         </ul>
     </div>
 
+    {# organisations do not have scorecards (yet) so the summary appears at the top rather than in a tab #}
     {% if object.summary %}
         <div class="small-container">
             {{ object.summary }}
