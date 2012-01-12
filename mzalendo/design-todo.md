@@ -10,13 +10,12 @@
 
     * ensure that comments are shown
     
+
 ### orgs
 
     * parent company - not supported in database yet
     
-    * deal with 'unknown' text - should be type of org        
-
-
+    
 ## Homepage
 
     * Wording on homepage

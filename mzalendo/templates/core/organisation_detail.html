@@ -10,7 +10,9 @@
 
         <p>part of <a href="/">Parent Company</a></p>
 
-        <span class="object-kind">{{ object.kind.name }}</span>
+        {% if object.kind.slug != 'unknown' %}
+            <span class="object-kind">{{ object.kind.name }}</span>
+        {% endif %}
     </div>
     
     <div class="profile-pic">
