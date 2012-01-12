@@ -115,7 +115,7 @@ $(function(){
     var rel = $(this).attr('rel');
     var txt = $(this).text();
     var href = $('a', this).attr('href');
-    var newElem = '<li rel="'+rel+'"><a href="'+href+'">'+txt+'</a></li>';
+    var newElem = '<li rel="'+rel+'" class="tab-nav-heading"><a href="'+href+'">'+txt+'</a></li>';
     $('#tab-nav ul').append(newElem);
   }).remove();
 
@@ -123,8 +123,16 @@ $(function(){
   {
     // get hash from url and activate it
     var hash = window.location.hash;
-    $heading_element = $('li[rel='+hash+']');
+    var $heading_element = $('li[rel='+hash+']');
+    
+    // check that we actually matched something - if not use the first tab
+    if ( ! $heading_element.length ) {
+        $heading_element = $('li.tab-nav-heading').first();
+    }
+    
+    // activate the tab
     activateSimpleTab($heading_element);
+    
   }
   else
   {
