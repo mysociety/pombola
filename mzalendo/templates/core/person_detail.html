@@ -188,7 +188,7 @@
                 {% if hansard_count %}
                 <h2 class="tab-nav" rel="#appearances">Appearances ({{ hansard_count }})</h2>
     
-                <div class="tab" id="appearances" data-comment-source-url="{% url hansard:person_summary slug=object.slug %}">
+                <div class="tab" id="appearances" data-tab-content-source-url="{% url hansard:person_summary slug=object.slug %}">
                     Loading...
                 </div>
                 {% endif %}
