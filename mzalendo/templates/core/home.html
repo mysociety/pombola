@@ -4,12 +4,13 @@
 
 {% block content %}
     <div class="home-left">
-        <h2 id="home-intro">Mzalendo is a volunteer run project whose mission is to ‘keep an eye on the Kenyan Parliament’. Mzalendo is a volunteer run project whose mission is to ‘keep an eye on the.</h2>
+        <h2 id="home-intro">Mzalendo is a volunteer run project whose mission is to ‘keep an eye on the Kenyan Parliament’. Mzalendo is a volunteer run project whose mission is to ‘keep an eye on.</h2>
 
         <form action="{% url core_search %}" id="home-search">
             <label for="core-search">Search people, places and organisations</label>
             <input id="core-search" type="text" name="q" value="" placeholder="e.g. Nairobi, Uhuru Kenyatta">
             <button type="submit">Search</button>
+            <a href="#">Advanced search</a>
         </form>
     </div>
     <div class="home-right">
@@ -58,14 +59,17 @@
             <div class="tw-wrap">
                 <p>The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
                 <p class="meta">posted: 4 hours ago</p>
-                <a href="/" class="btn-text-green">Follow</a>
             </div>
+            <span class="nub"></span>
         </div>
 
         <div class="social-and-tools">
             <div class="fb-like" data-send="false" data-layout="button_count" data-width="95" data-show-faces="false"></div>
             
             <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="mysociety">Tweet</a>
+
+            <span class="tw-nub"></span>
+            <a href="http://twitter.com/mzalendo" class="btn-text-green tw-follow">Follow</a>
         </div>
     </div>
 {% endblock %}

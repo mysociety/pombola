@@ -1340,6 +1340,16 @@ h3.scorecard-overall span.score-overall-bad {
   background: url(../images/search-icon.png) center no-repeat, -ms-linear-gradient(#009245, #87c43c);
   background: url(../images/search-icon.png) center no-repeat, linear-gradient(#009245, #87c43c);
 }
+#home-search > a {
+  float: left;
+  margin: 10px 0 0 0;
+  color: gray;
+  font-size: 14px;
+  text-decoration: none;
+}
+#home-search > a:hover {
+  text-decoration: underline;
+}
 
 #home-featured {
   margin-top: 20px;
@@ -1415,6 +1425,8 @@ ul#home-news-list li img {
   margin: 0;
 }
 
-#twitter {
+#twitter,
+.tw-nub,
+.tw-follow {
   display: none;
 }

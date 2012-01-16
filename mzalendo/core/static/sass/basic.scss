@@ -773,6 +773,16 @@ h3.scorecard-overall {
               );
     }
   }
+  >a {
+    float:left;
+    margin:10px 0 0 0;
+    color:$colour8;
+    font-size:14px;
+    text-decoration:none;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
 }
 #home-featured {
   margin-top:20px;
@@ -843,6 +853,8 @@ ul#home-news-list {
     margin:0;
   }
 }
-#twitter {
+#twitter,
+.tw-nub,
+.tw-follow {
   display:none;
 }

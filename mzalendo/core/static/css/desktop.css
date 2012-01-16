@@ -562,22 +562,24 @@ ul.listing li section a.read-more:hover {
 /* 4. PAGE SPECIFIC
 -------------------------------------------------------------- */
 /* HOME */
-#page .home-left,
-#page .home-right {
+#page .home-left {
   float: left;
-  width: 465px;
+  width: 420px;
+  clear: left;
+  margin-right: 30px;
 }
-#page .home-left h2#home-intro,
-#page .home-right h2#home-intro {
+#page .home-left h2#home-intro {
   display: block;
   text-transform: none;
   color: #009245;
+  margin-top: 15px;
+  line-height: 25px;
   font-weight: normal;
   font-size: 16px;
 }
-#page .home-left {
-  clear: left;
-  margin-right: 30px;
+#page .home-right {
+  float: left;
+  width: 510px;
 }
 
 #home-search {
@@ -625,8 +627,8 @@ ul#home-news-list li img {
 #home-mpratings {
   margin: 15px 0 30px 0;
   padding: 0;
-  background: black;
-  height: 200px;
+  background: url(../images/ex-home.png) 0 0 no-repeat;
+  height: 224px;
 }
 #home-mpratings img, #home-mpratings h3 {
   display: none;
@@ -635,7 +637,7 @@ ul#home-news-list li img {
 #twitter {
   display: block;
   float: left;
-  width: 275px;
+  width: 375px;
 }
 #twitter h3 {
   color: gray;
@@ -643,15 +645,15 @@ ul#home-news-list li img {
   text-transform: uppercase;
 }
 #twitter .tw-wrap {
-  overflow: hidden;
   padding: 20px;
+  min-height: 58px;
   background: #f6f6f6 url(../images/quotes.png) 10px 10px no-repeat;
 }
 #twitter p {
   margin: 0;
 }
 #twitter p.meta {
-  float: left;
+  color: gray;
   margin-top: 10px;
   font-size: 13px;
   font-style: italic;
@@ -663,6 +665,34 @@ ul#home-news-list li img {
 
 #page .home-right .social-and-tools {
   margin-top: 30px;
+  width: 90px;
+  position: relative;
+}
+#page .home-right .social-and-tools .fb-like,
+#page .home-right .social-and-tools .twitter-share-button,
+#page .home-right .social-and-tools iframe {
+  display: block;
+  float: none;
+  margin-bottom: 15px;
+}
+#page .home-right .social-and-tools .tw-nub {
+  display: block;
+  width: 23px;
+  height: 26px;
+  position: absolute;
+  bottom: -4px;
+  left: -45px;
+  background: url(../images/nub.png) 0 0 no-repeat;
+}
+#page .home-right .social-and-tools .tw-follow {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+}
+#page .home-right .social-and-tools .tw-follow {
+  *display: inline;
 }
 
 /* 5. MEDIA QUERIES

@@ -484,23 +484,26 @@ ul.listing {
 -------------------------------------------------------------- */
 /* HOME */
 #page {
-  .home-left,
-  .home-right {
+  .home-left {
     float:left;
-    width:465px;
+    width:420px;
+    clear:left;
+    margin-right:30px;
     h2#home-intro {
       display:block;
       text-transform:none;
       color:$colour1;
+      margin-top:15px;
+      line-height:25px;
       font: {
         weight:normal;
         size:16px;
       }
     }
   }
-  .home-left {
-    clear:left;
-    margin-right:30px;
+  .home-right {
+    float:left;
+    width:510px;
   }
 }
 #home-search {
@@ -547,8 +550,8 @@ ul#home-news-list {
 #home-mpratings {
   margin:15px 0 30px 0;
   padding:0;
-  background:$colour5;
-  height:200px;
+  background:url(../images/ex-home.png) 0 0 no-repeat;
+  height:224px;
   img, h3 {
     display:none;
   }
@@ -556,21 +559,21 @@ ul#home-news-list {
 #twitter {
   display:block;
   float:left;
-  width:275px;
+  width:375px;
   h3 {
     color:$colour8;
     font-size:18px;
     text-transform:uppercase;
   }
   .tw-wrap {
-    overflow:hidden;
     padding:20px;
+    min-height:58px;
     background:$colour9 url(../images/quotes.png) 10px 10px no-repeat;
   }
   p {
     margin:0;
     &.meta {
-      float:left;
+      color:$colour8;
       margin-top:10px;
       font: {
         size:13px;
@@ -585,6 +588,27 @@ ul#home-news-list {
 }
 #page .home-right .social-and-tools {
   margin-top:30px;
+  width:90px;
+  position:relative;
+  .fb-like,
+  .twitter-share-button,
+  iframe {
+    display:block;
+    float:none;
+    margin-bottom:15px;
+  }
+  .tw-nub {
+    display:block;
+    width:23px;
+    height:26px;
+    position:absolute;
+    bottom:-4px;
+    left:-45px;
+    background:url(../images/nub.png) 0 0 no-repeat;
+  }
+  .tw-follow {
+    @include inline-block;
+  }
 }
 
 
