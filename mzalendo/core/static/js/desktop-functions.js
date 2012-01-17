@@ -119,34 +119,23 @@ $(function(){
     $('#tab-nav ul').append(newElem);
   }).remove();
 
-  if(window.location.hash !== '')
-  {
-    // get hash from url and activate it
+
+  // store the matched element from the hash here.
+  var matched_element = []
+
+  // If there is a hash try to load from that
+  if(window.location.hash !== '') {
     var hash = window.location.hash;
-    var $heading_element = $('li[rel='+hash+']');
-    
-    // check that we actually matched something - if not use the first tab
-    if ( ! $heading_element.length ) {
-        $heading_element = $('li.tab-nav-heading').first();
-    }
-    
-    // activate the tab
-    activateSimpleTab($heading_element);
-    
+    matched_element = $('li[rel='+hash+']');
   }
-  else
-  {
-    //make initial tab active and hide other tabs
-    var simpleTabActive = "";
-    if(!$('#tab-nav ul li').hasClass('active')){
-      simpleTabActive = $('#tab-nav ul li:first-child').attr('rel');
-      $('#tab-nav ul li:first-child').addClass('active');
-    }else{
-      simpleTabActive = $('#tab-nav ul li.active').attr('rel');
-    }
-    $(simpleTabActive).addClass('open');
-    $('.tab').not('.open').hide();
+
+  // If there was no hash, or it didn't match, use the first one
+  if ( ! matched_element.length ) {
+    matched_element = $('li.tab-nav-heading').first();
   }
+    
+  // activate the tab
+  activateSimpleTab(matched_element);
 
   //for clicks
   $("#tab-nav ul li a").click(function(e){
