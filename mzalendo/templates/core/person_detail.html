@@ -40,24 +40,7 @@
     </div>
 
     <div class="small-container">
-        <!--
-        {% with constituency=object.is_mp.place %}
-        {% if constituency and constituency.data_set.count %}
-        <div class="content_box">
-            <h3>Performance data for {{ constituency.name }}</h3>
 
-            {% for data in constituency.data_set.all %}
-                <p>
-                    {{ data.category.name }}: {{ data.pretty_value }} ({{ data.general_remark }})
-                </p>
-            {% endfor %}
-
-            <p>More details: <a href="{% url place constituency.slug %}">{{ constituency.name }}</a></p>
-        </div>
-        {% endif %}
-        {% endwith %}
-        -->
-                
         {% if object.has_scorecards %}
         <h2>Scorecard</h2>
         
