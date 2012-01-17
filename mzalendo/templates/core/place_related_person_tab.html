@@ -1,0 +1,24 @@
+{% load thumbnail %}
+
+<ul class="listing">
+    {% for position in object.position_set.all %}
+        {% with person=position.person person_url=position.person.get_absolute_url %}
+            <li>
+                <a href="{{ person_url }}">
+                    {% thumbnail person.primary_image "90x90" as im %}
+                    <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                    {% empty %}
+                    <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
+                    {% endthumbnail %}
+                </a>
+            
+                <section>
+                    <h4><a href="{{ person_url }}">{{ person.name }}</a></h4>
+                    <p>{{ position.title.name }}</p>
+                    <!-- <p class="meta">since 1987</p> -->
+                    <div class="read-more-wrap"><a href="{{ person_url }}" class="read-more">read more</a></div>
+                </section>
+            </li>
+        {% endwith %}
+    {% endfor %}
+</ul>

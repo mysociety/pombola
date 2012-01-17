@@ -20,8 +20,6 @@
 
     * scorecard
     
-    * related people
-    
     * related orgs
 
     * image

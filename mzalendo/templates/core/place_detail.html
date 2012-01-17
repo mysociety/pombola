@@ -90,47 +90,10 @@
             {% endif %}
 
             <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
-            <div class="tab markdown" id="related-people">
-                <ul class="listing">
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
 
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
+            <!-- place_related_person_tab -->
 
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                </ul>
+            <div class="tab" id="related-people" data-tab-content-source-url="{% url place_related_person_tab slug=object.slug %}">
             </div>
 
 
