@@ -60,19 +60,14 @@ $(function(){
    * Main non AJAX interactions
    */
   // prep
-  $('#main-menu, #search').hide();
+  $('#main-menu, #search, #site-user-tools').hide();
   $('#search').before('<menu id="m-top-tools"><button class="nav-trigger m-icon-nav">menu</button><button class="search-trigger icon-search">search</button></menu>');
 
   // nav
   $('.nav-trigger').live('click', function(){
     //add states to trigger elem
-    hideShow('#main-menu', $(this));
+    hideShow('#main-menu, #site-user-tools', $(this));
   });
-  // $('.nav-trigger-foot').live('click', function(){
-  //   closeThings('#main-menu');
-  //   hideShow('#main-menu');
-  //   $('html, body').animate({scrollTop:0}, 'slow');
-  // });
 
   // search
   $('.search-trigger').live('click', function(){

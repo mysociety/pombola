@@ -539,9 +539,6 @@ pre {
   width: 147px;
   background: url(../images/m-logo.png) 0 center no-repeat;
 }
-#site-header .wrapper menu#site-user-tools {
-  display: none;
-}
 #site-header .wrapper menu#m-top-tools {
   float: right;
 }
@@ -621,6 +618,56 @@ pre {
 }
 #site-header .wrapper #search button:hover {
   background-color: #777777;
+}
+#site-header .wrapper menu#site-user-tools {
+  clear: both;
+}
+#site-header .wrapper menu#site-user-tools .login-tw,
+#site-header .wrapper menu#site-user-tools .login-fb {
+  display: none;
+}
+#site-header .wrapper menu#site-user-tools ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li.login a {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  background: #e6e6e6;
+  border-bottom: 2px solid white;
+  height: 20px;
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+}
+#site-header .wrapper menu#site-user-tools ul li.login a:hover {
+  color: white;
+  background: black;
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  background: #e6e6e6;
+  border-bottom: 2px solid white;
+  height: 20px;
+  padding: 10px;
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in a {
+  color: black;
+  text-decoration: none;
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in a:hover {
+  color: white;
+  background: black;
 }
 
 #main-menu nav {

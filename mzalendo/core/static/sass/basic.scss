@@ -186,9 +186,6 @@ pre {
       width:147px;
       background:url(../images/m-logo.png) 0 center no-repeat;
     }
-    menu#site-user-tools {
-      display:none; // SORT THIS
-    }
     menu#m-top-tools {
       float:right;
       button {
@@ -242,6 +239,54 @@ pre {
         background:$colour5 url(../images/search-icon.png) center no-repeat;
         &:hover {
           background-color:$colour4;
+        }
+      }
+    }
+    menu#site-user-tools {
+      clear:both;
+      .login-tw,
+      .login-fb {
+        display:none;
+      }
+      ul {
+        @include list-reset-soft;
+        li.login {
+          a {
+            display:block;
+            font: {
+              size:18px;
+              weight:bold;
+            }
+            background:$colour7;
+            border-bottom:2px solid $colour6;
+            height:20px;
+            padding:10px;
+            color:$colour5;
+            text-decoration:none;
+            &:hover {
+              color:$colour6;
+              background:$colour5;
+            }
+          }
+        }
+        li.logged-in {
+          display:block;
+          font: {
+            size:18px;
+            weight:bold;
+          }
+          background:$colour7;
+          border-bottom:2px solid $colour6;
+          height:20px;
+          padding:10px;
+          a {
+            color:$colour5;
+            text-decoration:none;
+            &:hover {
+              color:$colour6;
+              background:$colour5;
+            }
+          }
         }
       }
     }
