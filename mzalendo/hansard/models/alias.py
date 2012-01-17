@@ -3,6 +3,7 @@ import datetime
 
 from django.db import models
 
+from hansard.models.base import HansardModelBase
 from core.models import Person
 
 class AliasQuerySet(models.query.QuerySet):
@@ -18,7 +19,7 @@ class AliasManager(models.Manager):
         return AliasQuerySet(self.model)
 
 
-class Alias(models.Model):
+class Alias(HansardModelBase):
     """
     Model for linking a parliamentary alias to a person
     
@@ -66,6 +67,7 @@ class Alias(models.Model):
         name = name.strip()
         name = re.sub( r'\s+',                    r' ',    name )
         name = re.sub( r'^\(\s*(.*)\s*\)$',       r'\1',   name )
+        name = re.sub( r'^\[\s*(.*)\s*\]$',       r'\1',   name )
         name = re.sub( r'\s*,+$',                 r'',     name )
         name = re.sub( r'\.(\S)',                 r'. \1', name )
 
@@ -95,7 +97,7 @@ class Alias(models.Model):
             return True
     
         # Ignore anything that looks like a bullet point
-        if re.match(r'\(.\)', name):
+        if re.match(r'\(.\)', name) or re.match(r'\(i{0,3}v?i{0,3}\)', name):
             return True
     
         # Ignore anything that looks like an parliamentary support role

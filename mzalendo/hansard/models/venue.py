@@ -1,6 +1,8 @@
 from django.db import models
 
-class Venue(models.Model):
+from hansard.models.base import HansardModelBase
+
+class Venue(HansardModelBase):
     """
     Venues for the sittings
     """

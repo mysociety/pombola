@@ -6,6 +6,8 @@ from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
+from hansard.models.base import HansardModelBase
+
 # check that the cache is setup and the directory exists
 try:
     HANSARD_CACHE = settings.HANSARD_CACHE
@@ -36,7 +38,7 @@ class SourceManager(models.Manager):
         return SourceQuerySet(self.model)
 
 
-class Source(models.Model):
+class Source(HansardModelBase):
     """
     Sources of the hansard transcripts
     

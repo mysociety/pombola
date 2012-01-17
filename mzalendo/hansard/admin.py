@@ -79,6 +79,17 @@ class AliasAdmin(admin.ModelAdmin):
         }
     )    
 
+    actions = ["ignore_aliases",]
+    
+    def ignore_aliases(self, request, queryset):
+        for alias in queryset:
+            alias.ignored = True
+            alias.save()
+
+        self.message_user(request, "Ignored the aliases")
+    ignore_aliases.short_description = "Ignore the selected aliases"
+    
+
     def get_urls(self):
         urls = super(AliasAdmin, self).get_urls()
         my_urls = patterns('',

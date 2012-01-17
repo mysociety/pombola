@@ -2,9 +2,13 @@ import datetime
 import re
 
 from django.db import models
+from django.core.urlresolvers import reverse
+
+from hansard.models.base import HansardModelBase
 from hansard.models import Source, Venue
 
-class Sitting(models.Model):
+
+class Sitting(HansardModelBase):
 
     source = models.ForeignKey(Source)
     venue  = models.ForeignKey(Venue)
@@ -16,6 +20,23 @@ class Sitting(models.Model):
     
     def __unicode__(self):
         return self.name()
+
+    def get_absolute_url(self):
+        """Create a url from the venue slug and the start time"""
+        start_date_and_time = str( self.start_date )
+        if self.start_time:
+            start_date_and_time += '-' + str( self.start_time )
+            start_date_and_time = re.sub(':','-',start_date_and_time)
+
+        url = reverse(
+            'hansard:sitting_view',
+            kwargs={
+                'venue_slug':      self.venue.slug,
+                'start_date_and_time': start_date_and_time,
+            },
+        )
+
+        return url
 
 
     def name(self):

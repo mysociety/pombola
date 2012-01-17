@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 
 from core.models import Person
 from hansard.models import Sitting, Alias
+from hansard.models.base import HansardModelBase
 
 
 class EntryQuerySet(models.query.QuerySet):
@@ -38,7 +39,7 @@ class EntryManager(models.Manager):
         return EntryQuerySet(self.model)
     
 
-class Entry(models.Model):
+class Entry(HansardModelBase):
     """Model for representing an entry in Hansard - speeches, headings etc"""
 
     type_choices = (
@@ -74,11 +75,8 @@ class Entry(models.Model):
         return "%s: %s" % (self.type, self.content[:100])
     
     def get_absolute_url(self):
-        url = reverse(
-            'hansard:sitting_view',
-            kwargs={ 'pk': self.sitting.id },
-        )
-        return "%s#entry-%u" % (url, self.id)
+        sitting_url = self.sitting.get_absolute_url()
+        return "%s#entry-%u" % (sitting_url, self.id)
 
 
     class Meta:
