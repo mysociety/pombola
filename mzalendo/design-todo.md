@@ -70,6 +70,8 @@
 
     * allow user to choose between various things to search
     
-    * add faceted search box to the /person/all pages, and the others.
-
+    * add faceted search box to the /person/all pages, and the others
     
+    * expose hansard search
+
+
