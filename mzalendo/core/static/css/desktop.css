@@ -40,33 +40,116 @@ josh [at] supercooldesign.co.uk
   overflow: visible;
 }
 #site-header .wrapper menu#site-user-tools {
-  display: block;
   position: absolute;
   right: 200px;
   top: 15px;
 }
-#site-header .wrapper menu#site-user-tools ul {
-  list-style-type: none;
+#site-header .wrapper menu#site-user-tools ul li.login,
+#site-header .wrapper menu#site-user-tools ul li.logged-in,
+#site-header .wrapper menu#site-user-tools ul li.login a,
+#site-header .wrapper menu#site-user-tools ul li.logged-in a {
   padding: 0;
-  margin: 0;
-}
-#site-header .wrapper menu#site-user-tools ul li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-#site-header .wrapper menu#site-user-tools ul li {
-  color: #fff;
-  margin-left: 10px;
-  float: left;
-}
-#site-header .wrapper menu#site-user-tools ul li a {
-  color: #fff;
+  color: white;
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: normal;
   text-decoration: none;
 }
-#site-header .wrapper menu#site-user-tools ul li a:hover {
+#site-header .wrapper menu#site-user-tools ul li.login a:hover,
+#site-header .wrapper menu#site-user-tools ul li.logged-in a:hover,
+#site-header .wrapper menu#site-user-tools ul li.login a a:hover,
+#site-header .wrapper menu#site-user-tools ul li.logged-in a a:hover {
+  background: none;
   text-decoration: underline;
+}
+#site-header .wrapper menu#site-user-tools ul li.login {
+  text-transform: uppercase;
+  height: 20px;
+  width: 70px;
+}
+#site-header .wrapper menu#site-user-tools ul li.login a {
+  font-size: 11px;
+  padding: 0 16px 0 10px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  background: black url(../images/login-arrows.png) 54px -22px no-repeat;
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #707070), color-stop(100%, #000000));
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -webkit-linear-gradient(#707070, #000000);
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -moz-linear-gradient(#707070, #000000);
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -o-linear-gradient(#707070, #000000);
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -ms-linear-gradient(#707070, #000000);
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, linear-gradient(#707070, #000000);
+}
+#site-header .wrapper menu#site-user-tools ul li.login a:hover {
+  text-decoration: none;
+  background: #707070 url(../images/login-arrows.png) 54px -22px no-repeat;
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #707070));
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -webkit-linear-gradient(#000000, #707070);
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -moz-linear-gradient(#000000, #707070);
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -o-linear-gradient(#000000, #707070);
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, -ms-linear-gradient(#000000, #707070);
+  background: url(../images/login-arrows.png) 54px -22px no-repeat, linear-gradient(#000000, #707070);
+}
+#site-header .wrapper menu#site-user-tools ul li.active {
+  position: relative;
+  border-top: 1px solid #666666;
+  border-left: 1px solid #666666;
+  border-right: 1px solid #666666;
+  z-index: 2;
+}
+#site-header .wrapper menu#site-user-tools ul li.active a {
+  color: gray;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -o-border-radius: 0;
+  -ms-border-radius: 0;
+  -khtml-border-radius: 0;
+  border-radius: 0;
+  background: #e6e6e6 url(../images/login-arrows.png) 54px 8px no-repeat;
+}
+#site-header .wrapper menu#site-user-tools ul li.active a:hover {
+  color: black;
+  background: #e6e6e6 url(../images/login-arrows.png) 54px 8px no-repeat;
+}
+#site-header .wrapper #login-box {
+  z-index: 1;
+  position: absolute;
+  right: 200px;
+  top: 35px;
+  display: none;
+  background: #e6e6e6;
+  border: 1px solid #666666;
+  width: 200px;
+  padding: 10px;
+}
+#site-header .wrapper #login-box #login {
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
+#site-header .wrapper #login-box #login form {
+  width: auto;
+}
+#site-header .wrapper #login-box #login form input#id_username,
+#site-header .wrapper #login-box #login form input#id_password {
+  width: 188px;
+  margin: 0 0 10px 0;
+}
+#site-header .wrapper #login-box #login form input.login-button {
+  margin: 0;
+}
+#site-header .wrapper #login-box #login form p.forgot-register {
+  margin: 0;
+  font-size: 11px;
+}
+#site-header .wrapper #login-box #login .login-social {
+  margin: 0;
+  font-size: 12px;
 }
 #site-header .wrapper #logo {
   position: absolute;
@@ -693,6 +776,48 @@ ul#home-news-list li img {
 }
 #page .home-right .social-and-tools .tw-follow {
   *display: inline;
+}
+
+/* Login Page */
+#login-pagetitle {
+  display: block;
+  background: #e6e6e6;
+  margin: 0 auto;
+  padding: 10px;
+  width: 300px;
+}
+
+#login {
+  background: #e6e6e6;
+  padding: 0 10px 10px 10px;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 300px;
+}
+#login p.error {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+}
+#login form {
+  width: 300px;
+}
+#login form input#id_username,
+#login form input#id_password {
+  width: 288px;
+  margin: 10px 0;
+}
+#login form input.login-button {
+  margin: 0;
+}
+#login form p.forgot-register {
+  margin: 0;
+}
+#login .login-social {
+  margin: 0;
 }
 
 /* 5. MEDIA QUERIES

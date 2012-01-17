@@ -71,6 +71,6 @@ $(function(){
 
   // search
   $('.search-trigger').live('click', function(){
-  	hideShow('#search', $(this));
+    hideShow('#search', $(this));
   });
 });

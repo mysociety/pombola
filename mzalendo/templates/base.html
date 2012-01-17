@@ -62,12 +62,6 @@
                                 <li class="logged-in">{% firstof request.user.get_full_name request.user.username %} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)</li>
                             {% else %}
                                 <li class="login"><a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a></li>
-                                {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                                    <li class="login-tw"><a rel="nofollow" href="{% url socialauth_begin 'twitter' %}?next={% firstof post_login_url request.path %}">twitter</a></li>
-                                {% endif %}
-                                {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                                    <li class="login-fb"><a rel="nofollow" href="{% url socialauth_begin 'facebook' %}?next={% firstof post_login_url request.path %}">fb</a></li>
-                                {% endif %}
                             {% endif %}
                         {% endblock %}                 
                     </ul>
