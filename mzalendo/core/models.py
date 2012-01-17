@@ -332,7 +332,7 @@ class PlaceKind(ModelBase):
        ordering = ["slug"]      
 
 
-class Place(ModelBase):
+class Place(ModelBase, ScorecardMixin):
     name         = models.CharField(max_length=200)
     slug         = models.SlugField(max_length=100, unique=True, help_text="created from name")
     kind         = models.ForeignKey('PlaceKind')

@@ -6,6 +6,16 @@
 
     * resolve how to handle breadcrumb trail
 
+
+### Scorecards
+
+    * need to hook up the little arrow to make it expand/collapse the extra info
+    
+    * some display issues - eg equivalent remark bubble getting cut off
+    
+    * Need to display extended remark and category notes
+
+
 ### Org detail page
     
     * related people
@@ -16,13 +26,11 @@
 
 ### Place detail page
 
-    * scorecard
-    
     * image
     
 ### Person detail page
 
-    * scorecard of related constituency too if an MP
+    * scorecard of related constituency too if an MP (issue 173)
 
 
 ## List pages
