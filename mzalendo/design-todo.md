@@ -2,8 +2,6 @@
 
 ## Profile pages
 
-    * fill in detail tabs on places
-
     * fill in detail tabs on organisations
 
     * resolve how to handle breadcrumb trail
@@ -20,8 +18,6 @@
 
     * scorecard
     
-    * related orgs
-
     * image
     
 ### Person detail page

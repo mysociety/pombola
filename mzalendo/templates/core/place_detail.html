@@ -90,72 +90,11 @@
             {% endif %}
 
             <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
-
-            <!-- place_related_person_tab -->
-
             <div class="tab" id="related-people" data-tab-content-source-url="{% url place_related_person_tab slug=object.slug %}">
             </div>
 
-
             <h2 class="tab-nav" rel="#related-organisations"><a href="/">Related Organisations</a></h2>
-            <div class="tab markdown" id="related-organisations">
-                <ul class="listing">
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                </ul>
+            <div class="tab" id="related-organisations" data-tab-content-source-url="{% url place_related_organisation_tab slug=object.slug %}">
             </div>
 
             {% include 'comments/detail_page_comments.html' %}

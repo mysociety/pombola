@@ -348,6 +348,10 @@ class Place(ModelBase):
 
     comments = generic.GenericRelation(Comment)
 
+    @property
+    def position_with_organisation_set(self):
+        return self.position_set.filter( organisation__isnull=False )
+
     def parent_places(self):
         """Return a list of parents, with top parent first."""
         if not self.parent_place:

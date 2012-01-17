@@ -32,6 +32,14 @@ urlpatterns = patterns('core.views',
         ),
         name="place_related_person_tab",        
     ),
+    url(
+        r'^place/(?P<slug>[-\w]+)/related_organisation_tab', 
+        DetailView.as_view(
+            model=models.Place,
+            template_name_suffix='_related_organisation_tab',
+        ),
+        name="place_related_organisation_tab",        
+    ),
 
     # specials
     url(r'^parties', 'parties', name='parties'),
