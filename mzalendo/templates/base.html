@@ -141,6 +141,12 @@
              */
             // this is not yet ideal... it reacts a bit slow if the cdn fails
 
+            //define global vars
+            window.mzalendo_settings = {
+                analytics_id : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
+                facebook_app_id: '{{ settings.FACEBOOK_APP_ID }}'
+            }
+
             var post_jquery_desktop_load = [
                 '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
                 '{{ STATIC_URL }}js/libs/jquery.form-v2.94.js', // TODO - only load when needed for feedback form
@@ -177,29 +183,10 @@
                     }
                 },
                 {
-                    load: '//platform.twitter.com/widgets.js'
+                    load: ['//platform.twitter.com/widgets.js', '{{ STATIC_URL }}js/analytics.js', '{{ STATIC_URL }}js/fb-like.js']
                 }
             ]);
         </script>
         <div id="fb-root"></div>
-        <script>
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId={{ settings.FACEBOOK_APP_ID }}";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
-
-        {% if settings.GOOGLE_ANALYTICS_ACCOUNT %}
-        <!-- mathiasbynens.be/notes/async-analytics-snippet -->
-        <script type="text/javascript">
-            var _gaq=[["_setAccount","{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}"],["_trackPageview"]];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-            g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
-            s.parentNode.insertBefore(g,s)}(document,"script"));
-        </script>
-        {% endif %}
     </body>
 </html>
