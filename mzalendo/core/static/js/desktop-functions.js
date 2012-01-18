@@ -193,17 +193,12 @@ $(function(){
    */
   var login_target = $('#site-user-tools .login a').attr('href');
 
-  $('#site-user-tools').after('<div id="login-box"></div>');
+  $('#site-user-tools').after('<div id="login-box">Loading...</div>');
   
-  $('#login-box').load(login_target + ' #login');
 
   $('li.login').on('click', function(event) {
     event.preventDefault();
-    //check if login page got loaded, if not just work as a normal link
-    if($('#login').length > 0){
-      hideShow($('#login-box'), $(this));
-    }else{
-      document.location = login_target;
-    }
+    $('#login-box').load(login_target + ' #login');
+    hideShow($('#login-box'), $(this));
   });
 });
