@@ -539,9 +539,6 @@ pre {
   width: 147px;
   background: url(../images/m-logo.png) 0 center no-repeat;
 }
-#site-header .wrapper menu#site-user-tools {
-  display: none;
-}
 #site-header .wrapper menu#m-top-tools {
   float: right;
 }
@@ -621,6 +618,52 @@ pre {
 }
 #site-header .wrapper #search button:hover {
   background-color: #777777;
+}
+#site-header .wrapper menu#site-user-tools {
+  clear: both;
+}
+#site-header .wrapper menu#site-user-tools ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li.login a {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  background: #e6e6e6;
+  border-bottom: 2px solid white;
+  height: 20px;
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+}
+#site-header .wrapper menu#site-user-tools ul li.login a:hover {
+  color: white;
+  background: black;
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  background: #e6e6e6;
+  border-bottom: 2px solid white;
+  height: 20px;
+  padding: 10px;
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in a {
+  color: black;
+  text-decoration: none;
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in a:hover {
+  color: white;
+  background: black;
 }
 
 #main-menu nav {
@@ -1340,6 +1383,16 @@ h3.scorecard-overall span.score-overall-bad {
   background: url(../images/search-icon.png) center no-repeat, -ms-linear-gradient(#009245, #87c43c);
   background: url(../images/search-icon.png) center no-repeat, linear-gradient(#009245, #87c43c);
 }
+#home-search > a {
+  float: left;
+  margin: 10px 0 0 0;
+  color: gray;
+  font-size: 14px;
+  text-decoration: none;
+}
+#home-search > a:hover {
+  text-decoration: underline;
+}
 
 #home-featured {
   margin-top: 20px;
@@ -1415,6 +1468,105 @@ ul#home-news-list li img {
   margin: 0;
 }
 
-#twitter {
+#twitter,
+.tw-nub,
+.tw-follow {
   display: none;
+}
+
+/* Login Page */
+#login-pagetitle {
+  display: none;
+}
+
+#login p.error {
+  background: white;
+  padding: 10px;
+  color: #d40000;
+  margin: 0;
+}
+#login form {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#login form label {
+  position: absolute;
+  left: -999999px;
+}
+#login form input#id_username,
+#login form input#id_password {
+  width: 90%;
+  margin: 10px auto;
+  font-size: 14px;
+  padding: 3px 5px;
+  display: block;
+  background: white;
+  border: 1px solid #b3b3b3;
+}
+#login form input.login-button {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  float: right;
+  margin: 0 10px;
+  border: 0;
+  background: #000000;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #707070), color-stop(100%, #000000));
+  background: -webkit-linear-gradient(#707070, #000000);
+  background: -moz-linear-gradient(#707070, #000000);
+  background: -o-linear-gradient(#707070, #000000);
+  background: -ms-linear-gradient(#707070, #000000);
+  background: linear-gradient(#707070, #000000);
+}
+#login form input.login-button {
+  *display: inline;
+}
+#login form input.login-button:hover {
+  background: #a0a0a0;
+  color: white;
+}
+#login form input.login-button:hover {
+  background: #707070;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #707070));
+  background: -webkit-linear-gradient(#000000, #707070);
+  background: -moz-linear-gradient(#000000, #707070);
+  background: -o-linear-gradient(#000000, #707070);
+  background: -ms-linear-gradient(#000000, #707070);
+  background: linear-gradient(#000000, #707070);
+}
+#login form p.forgot-register {
+  float: left;
+  margin: 0 10px;
+}
+#login form p.forgot-register a {
+  display: block;
+  color: gray;
+}
+#login .login-social {
+  margin: 10px;
+  float: left;
+}
+#login .login-social a {
+  text-decoration: none;
+  color: #666666;
+  display: block;
+  margin: 10px 0;
 }

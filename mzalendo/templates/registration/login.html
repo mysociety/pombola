@@ -1,61 +1,47 @@
 {% extends "registration/registration_base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
+<h1 id="login-pagetitle">Login</h1>
+<div id="login">
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+    {% if form.errors %}
+    <p class="error">Your username and password didn't match. Please try again.</p>
+    {% endif %}
 
 
-{% if request.GET.social_error %}
+    {% if request.GET.social_error %}
 
-    <div class="error">
-        <h2>Something went wrong</h2>
+        <div class="error">
+            <h2>Something went wrong</h2>
 
-        <p>
-            You tried to login using a website like Twitter or Facebook, but
-            something went wrong. Perhaps you cancelled or there was some other
-            issue. Please try again, or use the form below.
+            <p>
+                You tried to login using a website like Twitter or Facebook, but
+                something went wrong. Perhaps you cancelled or there was some other
+                issue. Please try again, or use the form below.
+            </p>
+        </div>
+
+    {% endif %}
+
+    <form method="post" action="{% url django.contrib.auth.views.login %}">
+        
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        
+        <label for="id_username">Username</label>
+        <input id="id_username" type="text" name="username" maxlength="30" placeholder="Username">
+
+        <label for="id_password">Password</label>
+        <input type="password" name="password" id="id_password" placeholder="Password">
+
+        <p class="forgot-register">
+            <a href="{% url auth_password_reset %}">Forgot your password?</a>
+            <a href="{% url registration_register %}">Need an account?</a>
         </p>
-    </div>
 
-{% endif %}
+        <input type="submit" class="login-button" value="login" />
+    </form>
 
-{% include 'social_login_buttons.html' %}
-
-<h2>Login using username and password</h2>
-
-<form method="post" action="{% url django.contrib.auth.views.login %}">
-    
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
-
-<table>
-
-<tr>
-    <th>{{ form.username.label_tag }}</th>
-    <td>{{ form.username }}</td>
-</tr>
-
-<tr>
-    <th>{{ form.password.label_tag }}</th>
-    <td>{{ form.password }}</td>
-</tr>
-
-<tr>
-    <th>&nbsp;</th>
-    <td><input type="submit" value="login" /></td>
-</tr>
-
-</table>
-
-</form>
-
-<p>
-    <a href="{% url auth_password_reset %}">Forgot</a> your password?
-    <a href="{% url registration_register %}">Need an account</a>?
-</p>
-
-
-
+    {% include 'social_login_buttons.html' %}
+</div>
 {% endblock %}

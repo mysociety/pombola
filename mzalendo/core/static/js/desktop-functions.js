@@ -53,7 +53,7 @@ $(function(){
   /*
    * auto complete
    */
-  $('#main_search_box')
+    $('#main_search_box')
     .autocomplete({
         source: "/search/autocomplete/",
         minLength: 2,
@@ -66,7 +66,7 @@ $(function(){
     /*
      * enable dialog based feedback links
      */
-     $('a.feedback_link')
+      $('a.feedback_link')
         .on(
             'click',
             function(event) {
@@ -184,4 +184,18 @@ $(function(){
     $(this).removeClass('hovered');
   });
 
+
+  /*
+   * Login box
+   */
+  var login_target = $('#site-user-tools .login a').attr('href');
+
+  $('#site-user-tools').after('<div id="login-box">Loading...</div>');
+  
+
+  $('li.login').on('click', function(event) {
+    event.preventDefault();
+    $('#login-box').load(login_target + ' #login');
+    hideShow($('#login-box'), $(this));
+  });
 });

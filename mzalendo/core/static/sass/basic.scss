@@ -186,9 +186,6 @@ pre {
       width:147px;
       background:url(../images/m-logo.png) 0 center no-repeat;
     }
-    menu#site-user-tools {
-      display:none; // SORT THIS
-    }
     menu#m-top-tools {
       float:right;
       button {
@@ -242,6 +239,50 @@ pre {
         background:$colour5 url(../images/search-icon.png) center no-repeat;
         &:hover {
           background-color:$colour4;
+        }
+      }
+    }
+    menu#site-user-tools {
+      clear:both;
+      ul {
+        @include list-reset-soft;
+        li.login {
+          a {
+            display:block;
+            font: {
+              size:18px;
+              weight:bold;
+            }
+            background:$colour7;
+            border-bottom:2px solid $colour6;
+            height:20px;
+            padding:10px;
+            color:$colour5;
+            text-decoration:none;
+            &:hover {
+              color:$colour6;
+              background:$colour5;
+            }
+          }
+        }
+        li.logged-in {
+          display:block;
+          font: {
+            size:18px;
+            weight:bold;
+          }
+          background:$colour7;
+          border-bottom:2px solid $colour6;
+          height:20px;
+          padding:10px;
+          a {
+            color:$colour5;
+            text-decoration:none;
+            &:hover {
+              color:$colour6;
+              background:$colour5;
+            }
+          }
         }
       }
     }
@@ -773,6 +814,16 @@ h3.scorecard-overall {
               );
     }
   }
+  >a {
+    float:left;
+    margin:10px 0 0 0;
+    color:$colour8;
+    font-size:14px;
+    text-decoration:none;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
 }
 #home-featured {
   margin-top:20px;
@@ -843,6 +894,70 @@ ul#home-news-list {
     margin:0;
   }
 }
-#twitter {
+#twitter,
+.tw-nub,
+.tw-follow {
   display:none;
+}
+
+/* Login Page */
+#login-pagetitle {
+  display:none;
+}
+#login {
+  p.error {
+    background:$colour6;
+    padding:10px;
+    color:$colour11;
+    margin:0;
+  }
+  form {
+    overflow:hidden;
+    margin-bottom:10px;
+    label {
+      position:absolute;
+      left:-999999px;
+    }
+    input#id_username,
+    input#id_password {
+      width:90%;
+      margin:10px auto;
+      font-size:14px;
+      padding:3px 5px;
+      display:block;
+      background:$colour6;
+      border:1px solid $colour13;
+    }
+    input.login-button {
+      @include button-reset-text;
+      cursor:pointer;
+      float:right;
+      margin:0 10px;
+      border:0;
+      background:#000000;
+      @include background (linear-gradient(#707070, #000000));
+      &:hover {
+        background:#707070;
+        @include background (linear-gradient(#000000, #707070));
+      }
+    }
+    p.forgot-register {
+      float:left;
+      margin:0 10px;
+      a {
+        display:block;
+        color:$colour8;
+      }
+    }
+  }
+  .login-social {
+    margin:10px;
+    float:left;
+    a {
+      text-decoration:none;
+      color:#666666;
+      display:block;
+      margin:10px 0;
+    }
+  }
 }

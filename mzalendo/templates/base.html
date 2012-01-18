@@ -51,29 +51,21 @@
         <header id="site-header">
             <div class="wrapper">
                 <a href="{% url home %}" id="logo">Mzalendo</a>
-                <menu id="site-user-tools">
-                    <ul>
-                        <li>
-                            {% block menu_login_options %}
-                                {% if request.user.is_authenticated  %}
-                                    {% firstof request.user.get_full_name request.user.username %} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
-                                {% else %}
-                                    <a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a>
-                                    {% if 'twitter' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                                        <a rel="nofollow" href="{% url socialauth_begin 'twitter' %}?next={% firstof post_login_url request.path %}">twitter</a>
-                                    {% endif %}
-                                    {% if 'facebook' in settings.SOCIAL_AUTH_ENABLED_BACKENDS %}
-                                        <a rel="nofollow" href="{% url socialauth_begin 'facebook' %}?next={% firstof post_login_url request.path %}">fb</a>
-                                    {% endif %}
-                                {% endif %}
-                            {% endblock %}
-                        </li>                 
-                    </ul>
-                </menu>
                 <form action="{% url core_search %}" method="get" id="search">
                     <input id="main_search_box" type="text" name="q" placeholder="search&hellip;" />
                     <button type="submit">Submit</button>
                 </form>
+                <menu id="site-user-tools">
+                    <ul>
+                        {% block menu_login_options %}
+                            {% if request.user.is_authenticated  %}
+                                <li class="logged-in">{% firstof request.user.get_full_name request.user.username %} (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)</li>
+                            {% else %}
+                                <li class="login"><a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a></li>
+                            {% endif %}
+                        {% endblock %}                 
+                    </ul>
+                </menu>
             </div>
         </header>
 
@@ -189,7 +181,6 @@
                 }
             ]);
         </script>
-        <!-- fb stuff, using one of my apps at the mo -->
         <div id="fb-root"></div>
         <script>
             (function(d, s, id) {
