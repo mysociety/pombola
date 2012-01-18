@@ -2,7 +2,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns( 'comments2.views',
     url(r'^for/(?P<module_name>[a-z]+)/(?P<slug>[\w\-]+)/add/', 'add' ),
-    url(r'^for/(?P<module_name>[a-z]+)/(?P<slug>[\w\-]+)/tab/', 'list_for_tab' ),
+    url(r'^for/(?P<module_name>[a-z]+)/(?P<slug>[\w\-]+)/tab/', 'comments_tab' ),
     url(r'^for/(?P<module_name>[a-z]+)/(?P<slug>[\w\-]+)/',     'list_for' ),
 
     url(r'^flag/(?P<comment_id>\d+)/', 'flag' ),
