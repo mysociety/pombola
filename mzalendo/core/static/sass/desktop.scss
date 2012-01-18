@@ -245,13 +245,16 @@ josh [at] supercooldesign.co.uk
     min-height:0;
     float:left;
     clear:left;
-    margin:0 0 10px 240px;
+    margin:0 0 20px 240px;
     position:relative;
     .object-kind {
-      position:absolute;
-      right:-180px;
-      top:0;
-      text-align:right;
+      font: {
+        style:normal;
+        weight:bold;
+        size:12px;
+      }
+      margin:0;
+      text-transform:uppercase;
     }
   }
   .profile-pic {
@@ -739,8 +742,8 @@ ul#home-news-list {
     }
   }
   #page {
-    .title-space h1 {
-      margin-top:35px;
+    .title-space {
+      padding-top:35px;
     }
     .fb-like,
     .twitter-share-button {

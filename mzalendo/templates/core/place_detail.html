@@ -6,13 +6,12 @@
 {% block content %}
     
     <div class="title-space">
+        <p class="object-kind">{{ object.kind.name }}</p>
         <h1>{{ object.name }}</h1>
 
         {% if object.organisation %}
         <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
         {% endif %}
-
-        <span class="object-kind">{{ object.kind.name }}</span>
     </div>
     
     <div class="profile-pic">
