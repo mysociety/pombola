@@ -6,6 +6,7 @@
 
     * resolve how to handle breadcrumb trail
 
+    * 200x200 avatar images: https://github.com/mysociety/mzalendo/issues/223
 
 ### Scorecards
 
@@ -22,12 +23,8 @@
     
     * related places
         
-    * image
-
 ### Place detail page
 
-    * image
-    
 ### Person detail page
 
     * scorecard of related constituency too if an MP (issue 173)

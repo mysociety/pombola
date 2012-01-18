@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load comments %}
+{% load thumbnail %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -19,7 +20,11 @@
     </div>
     
     <div class="profile-pic">
-        <img src="http://dummyimage.com/210x200">
+        {% thumbnail object.primary_image "200x200" as im %}
+        <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% empty %}
+        <img src="{{STATIC_URL}}images/org-200x200.jpg" />
+        {% endthumbnail %}        
     </div>
 
     <div class="social-and-tools">

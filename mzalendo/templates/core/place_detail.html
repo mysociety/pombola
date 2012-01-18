@@ -1,5 +1,6 @@
 {% extends 'base_with_maps.html' %}
 {% load comments %}
+{% load thumbnail %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -21,6 +22,14 @@
             <script type="text/javascript" charset="utf-8">
                 add_kml_to_map( '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001' );            
             </script>
+        {% else %}
+            <div class="profile-pic">
+                {% thumbnail object.primary_image "200x200" as im %}
+                <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                {% empty %}
+                <img src="{{STATIC_URL}}images/place-200x200.jpg" />
+                {% endthumbnail %}        
+            </div>        
         {% endif %}
     </div>
 
