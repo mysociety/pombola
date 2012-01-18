@@ -2,8 +2,6 @@
 
 ## Profile pages
 
-    * fill in detail tabs on organisations
-
     * resolve how to handle breadcrumb trail
 
     * 200x200 avatar images: https://github.com/mysociety/mzalendo/issues/223
@@ -19,10 +17,6 @@
 
 ### Org detail page
     
-    * related people
-    
-    * related places
-        
 ### Place detail page
 
 ### Person detail page
