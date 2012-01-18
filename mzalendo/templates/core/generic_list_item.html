@@ -49,7 +49,7 @@
                 {% endfor %}
                 </p>
 
-                <p class="meta">since 1987</p>
+                <p class="meta">{{ position.display_dates|safe }}</p>
                 
                 <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
             </section>

@@ -15,7 +15,7 @@
                 <section>
                     <h4><a href="{{ person_url }}">{{ person.name }}</a></h4>
                     <p>{{ position.title.name }}</p>
-                    <!-- <p class="meta">since 1987</p> -->
+                    <p class="meta">{{ position.display_dates|safe }}</p>
                     <div class="read-more-wrap"><a href="{{ person_url }}" class="read-more">read more</a></div>
                 </section>
             </li>
