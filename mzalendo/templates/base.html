@@ -29,7 +29,18 @@
             <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
         <![endif]-->
 
+        <script type="text/javascript" charset="utf-8">
+            window.mzalendo_settings = {
+                google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
+                facebook_app_id:           '{{ settings.FACEBOOK_APP_ID }}',
+                static_url:                '{{ STATIC_URL }}',
+                static_generation_number:  '{{ STATIC_GENERATION_NUMBER }}',
+            }
+        </script>
+
         <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
+        <script src="{{ STATIC_URL }}js/main.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
 
         <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
@@ -142,12 +153,6 @@
              * Test for mobile / desktop and load appropriate libs/scripts
              */
             // this is not yet ideal... it reacts a bit slow if the cdn fails
-
-            //define global vars
-            window.mzalendo_settings = {
-                analytics_id : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
-                facebook_app_id: '{{ settings.FACEBOOK_APP_ID }}'
-            }
 
             var post_jquery_desktop_load = [
                 '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
