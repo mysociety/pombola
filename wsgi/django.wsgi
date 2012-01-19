@@ -9,7 +9,7 @@ sys.path.insert(
     os.path.normpath(file_dir + "/../mzalendo")
 )
 
-import setup_env
+
 
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()

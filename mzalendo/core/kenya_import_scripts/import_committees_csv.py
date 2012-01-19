@@ -9,7 +9,7 @@ sys.path.append(
     )
 )
 
-import setup_env
+
 
 from haystack.query import SearchQuerySet
 from core.models import Person, Organisation, OrganisationKind, PositionTitle, Position

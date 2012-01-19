@@ -10,7 +10,7 @@ sys.path.append(
     ),
 ),
 
-import setup_env
+
 
 from pprint import pprint
 from django.template.defaultfilters import slugify
