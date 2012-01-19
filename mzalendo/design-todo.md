@@ -29,8 +29,6 @@
 
 ## Homepage
 
-    * Wording on homepage
-
     * links in menu bar - some don't go anywhere
 
     * autocomplete on homepage search
