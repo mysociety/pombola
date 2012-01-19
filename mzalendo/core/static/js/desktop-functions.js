@@ -53,7 +53,7 @@ $(function(){
   /*
    * auto complete
    */
-    $('#main_search_box')
+    $('input.search-autocomplete-name')
     .autocomplete({
         source: "/search/autocomplete/",
         minLength: 2,
