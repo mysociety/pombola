@@ -32,13 +32,13 @@ class PersonIndex(BaseIndex):
     name_auto = indexes.EdgeNgramField(model_attr='name')
 
 class PlaceIndex(BaseIndex):
-    pass
+    name_auto = indexes.EdgeNgramField(model_attr='name')
 
 class OrganisationIndex(BaseIndex):
-    pass
+    name_auto = indexes.EdgeNgramField(model_attr='name')
 
 class PositionTitleIndex(BaseIndex):
-    pass
+    name_auto = indexes.EdgeNgramField(model_attr='name')
 
 class HansardEntryIndex(BaseIndex):
     pass
