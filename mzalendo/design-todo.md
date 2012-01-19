@@ -2,8 +2,6 @@
 
 ## Profile pages
 
-    * resolve how to handle breadcrumb trail
-
 ### Scorecards
 
     * need to hook up the little arrow to make it expand/collapse the extra info
@@ -29,18 +27,18 @@
 
 ## Homepage
 
-    * autocomplete on homepage search
-
     * hook up latest news to the blog's RSS feed
     
     * hook up twitter
     
-    * replace 'lest we forget' with meaningful content
-    
     * hook up MP ratings
+    
+    * new logo (with the coloured shield)
     
 
 ## General
+
+    * resolve how to handle breadcrumb trail
 
     * check that selenium tests still pass
 
