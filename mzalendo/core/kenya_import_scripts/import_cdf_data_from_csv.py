@@ -10,7 +10,7 @@ sys.path.append(
     )
 )
 
-import setup_env
+
 
 import csv
 import pprint
