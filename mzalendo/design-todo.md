@@ -4,8 +4,6 @@
 
     * resolve how to handle breadcrumb trail
 
-    * 200x200 avatar images: https://github.com/mysociety/mzalendo/issues/223
-
 ### Scorecards
 
     * need to hook up the little arrow to make it expand/collapse the extra info
