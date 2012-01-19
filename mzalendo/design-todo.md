@@ -29,8 +29,6 @@
 
 ## Homepage
 
-    * links in menu bar - some don't go anywhere
-
     * autocomplete on homepage search
 
     * hook up latest news to the blog's RSS feed
