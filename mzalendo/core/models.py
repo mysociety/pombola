@@ -192,7 +192,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
     def clean(self):
         # strip other_names and flatten multiple newlines
         self.other_names = re.sub(r"\n+", "\n", self.other_names ).strip()
-        
+
+    @property
     def name(self):
         if self.other_names:
             return self.other_names.split("\n")[0]
@@ -588,7 +589,7 @@ class Position(ModelBase):
         else:
             organisation = '???'
 
-        return "%s (%s at %s)" % ( self.person.name(), title, organisation)
+        return "%s (%s at %s)" % ( self.person.name, title, organisation)
 
     class Meta:
         ordering = ['-sorting_end_date', '-sorting_start_date']  

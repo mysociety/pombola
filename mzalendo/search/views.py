@@ -62,7 +62,7 @@ def autocomplete(request):
         for result in sqs.all()[0:10]:
             response_data.append({
             	'url':   result.object.get_absolute_url(),
-            	'label': result.object.name(),
+            	'label': result.object.name,
             })
     
     # send back the results as JSON

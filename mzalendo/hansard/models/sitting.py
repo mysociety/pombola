@@ -19,7 +19,7 @@ class Sitting(HansardModelBase):
     end_time   = models.TimeField( blank=True, null=True )
     
     def __unicode__(self):
-        return self.name()
+        return self.name
 
     def get_absolute_url(self):
         """Create a url from the venue slug and the start time"""
@@ -39,6 +39,7 @@ class Sitting(HansardModelBase):
         return url
 
 
+    @property
     def name(self):
         """Format the times nicely to give a name"""
 

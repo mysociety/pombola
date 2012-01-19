@@ -77,7 +77,7 @@ class PositionAdmin(AjaxSelectAdmin):
     )    
     
     def show_person(self, obj):
-        return create_admin_link_for( obj.person, obj.person.name() )
+        return create_admin_link_for( obj.person, obj.person.name )
     show_person.allow_tags = True
     
     def show_organisation(self, obj):
