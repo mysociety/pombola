@@ -14,3 +14,9 @@ div.error {
   padding: 5px;
   margin: 1em 0;
 }
+
+ul.ui-autocomplete {
+    li {
+        list-icon: none;
+    }
+}

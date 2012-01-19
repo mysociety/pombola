@@ -89,6 +89,10 @@ div.error {
   margin: 1em 0;
 }
 
+ul.ui-autocomplete li {
+  list-icon: none;
+}
+
 body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-text-size-adjust: 100%;
