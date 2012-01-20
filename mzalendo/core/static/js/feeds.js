@@ -43,4 +43,43 @@
         google.load('feeds', '1', { callback: fetch_blog_feeds });
     }
 
+    // For any twitter box load the tweets
+    $('.twitter-feed').each( function ( index, element ) {
+
+        var $twitter_feed = $(element);
+        
+        var screen_name = $twitter_feed.attr( 'data-twitter-username' );
+        
+        $.ajax({
+            url: 'https://api.twitter.com/1/statuses/user_timeline.json',
+            data: {
+                screen_name:      screen_name,
+                count:            4
+            },
+            dataType: 'jsonp',
+            success: function ( data, textStatus, jqXHR ) {
+
+                $twitter_feed.html('');
+                var $nub = $( '<span class="nub"></span>' );
+
+                $.each(
+                    data,
+                    function( index, tweet_data ) {
+
+                        var pub_date = new Date( tweet_data.created_at );
+
+                        var $tweet = $( '<div class="tw-wrap" />');
+                        $tweet
+                            .append( '<p>' + tweet_data.text + '</p>' )
+                            .append( '<p class="meta">' + pub_date.toDateString() + '</p>');
+
+                        $twitter_feed
+                            .append($tweet)
+                            .append($nub);
+                    }
+                );
+            }
+        });
+    });
+
 })();
