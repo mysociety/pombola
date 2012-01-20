@@ -11,6 +11,14 @@
             + '?'
             + mzalendo_settings.static_generation_number;
     };
+    
+    // create links to all the extra js needed
+    var extra_js = [];
+    for ( i=0; i<mzalendo_settings.extra_js.length; i++ ) {
+        var extra = mzalendo_settings.extra_js[i];
+        var url = static_url( extra );
+        extra_js.push( url );
+    }
         
     Modernizr.load(
         {
@@ -28,9 +36,25 @@
             both: [
                 '//platform.twitter.com/widgets.js',
                 static_url('js/analytics.js'),
-                static_url('js/fb-like.js')
-            ]
+                static_url('js/fb-like.js'),
+                '//www.google.com/jsapi' // ?key=INSERT-YOUR-KEY
+            ].concat( extra_js ),
+            complete: function () {
+                for (i=0; i<mzalendo_run_when_document_ready_array.length; i++) {
+                    $( mzalendo_run_when_document_ready_array[i] );
+                }
+            }
         }
     );
 
 })();
+
+var mzalendo_run_when_document_ready_array = [];
+
+function mzalendo_run_when_document_ready (func) {
+    if ( window.$ ) {
+        $(func);
+    } else {
+        mzalendo_run_when_document_ready_array.push( func );
+    }
+}

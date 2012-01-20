@@ -35,8 +35,15 @@
                 facebook_app_id:           '{{ settings.FACEBOOK_APP_ID }}',
                 static_url:                '{{ STATIC_URL }}',
                 static_generation_number:  '{{ STATIC_GENERATION_NUMBER }}',
+                extra_js: [],
             }
+
+            {% block extra_js_to_load %}
+                // no extra js added to be loaded
+            {% endblock %}
+
         </script>
+        
 
         <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
         <script src="{{ STATIC_URL }}js/loader.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
@@ -45,16 +52,8 @@
 
         <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
         
-        {% block map_related_headers %}
-        <script type="text/javascript">
-          function initialize() {
-            /* no-op */
-            return true;
-          }
-        </script>
-        {% endblock %}
     </head>
-    <body onload="initialize()">
+    <body>
         {% include 'staging_header.html' %}
 
         <header id="site-header">

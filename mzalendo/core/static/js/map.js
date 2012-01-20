@@ -2,10 +2,6 @@ var map = undefined;
 var kml_urls_to_add = [];
 var markers_to_add = [];
 
-function initialize() {
-    initialize_map();
-}
-
 function initialize_map() {
 
     var map_element = document.getElementById("map_canvas")
@@ -100,3 +96,15 @@ function add_kml_to_map( kml_url ) {
 function add_marker_to_map( args ) {
     markers_to_add.push(args);
 }
+
+mzalendo_run_when_document_ready(
+    function () {
+        google.load(
+            'maps', '3',
+            {
+                callback: initialize_map,
+                other_params:'sensor=false'
+            }
+        );
+    }
+);

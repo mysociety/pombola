@@ -1,4 +1,4 @@
-{% extends 'base_with_maps.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Location Search{% endblock %}
 
@@ -7,7 +7,6 @@
 {# TODO - add autolocate magic here #}
 {# TODO - map showing locations found #}
 {# TODO - search using the map as a drilldown #}
-
 
 <h2>Location Search</h2>
 
@@ -58,6 +57,7 @@
             </a>
         </li>
 
+        <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
         
         <script type="text/javascript" charset="utf-8">
             add_marker_to_map(
