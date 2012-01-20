@@ -134,6 +134,7 @@
                     <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
                 </ul>
                 
+                {% if request.user.is_staff %}
                 <ul class="utilities">
                     <li><a href="https://github.com/mysociety/mzalendo/issues">issues</a></li>
                     <li><a href="https://github.com/mysociety/mzalendo/wiki">wiki</a></li>
@@ -141,13 +142,13 @@
                     {% if object %}
                         <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
                     {% endif %}
-                </ul>
 
-                {% if settings.STAGING %}
-                <ul class="utilities">
-                    <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+                    {% if settings.STAGING %}
+                        <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+                    {% endif %}
                 </ul>
                 {% endif %}
+
             </div>
         </footer>
         <div id="fb-root"></div>

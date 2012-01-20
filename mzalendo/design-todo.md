@@ -44,10 +44,6 @@
 
     * delete this file
     
-### Footer
-
-    * make admin and debug links only show up if you are an admin
-
 
 ## Search
 
