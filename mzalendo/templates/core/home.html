@@ -2,6 +2,10 @@
 
 {% block title %}Home{% endblock %}
 
+{% block extra_js_to_load %}
+    mzalendo_settings.extra_js.push( 'js/feeds.js' );
+{% endblock %}
+
 {% block content %}
     <div class="home-left">
         <h2 id="home-intro">
@@ -32,24 +36,19 @@
     </div>
 
     <div class="home-left">
-        <h2>Latest News</h2>
-        <ul id="home-news-list">
+        
+        <script id="home-news-list-item-template" type="text/x-jquery-tmpl">
             <li>
-                <img src="{{STATIC_URL}}images/ex-news1.jpg" width="90" />
-                <h3><a href="/">Harambees and Elections</a></h3>
+                <h3><a href="{$link}">{$title}</a></h3>
                 <p class="meta">12 January 2012</p>
                 <p>Talking about the “harambee ban” on political aspirants Isaack Hassan, the Chairperson of the Independent Electoral Boundaries...</p>
             </li>
+        </script>
+        
+        <h2>Latest News</h2>
+        <ul id="home-news-list">
             <li>
-                <h3><a href="/">On the Electoral Opinion Bill</a></h3>
-                <p class="meta">12 January 2012</p>
-                <p>Is the Electoral Opinion Bill overkill or much needed? Though no one can argue about the need for polls to be conducted in a scientific and transparent...</p>
-            </li>
-            <li>
-                <img src="{{STATIC_URL}}images/ex-news2.jpg" width="90" />
-                <h3><a href="/">Mzalendo Vox Pop: A doctor’s perspective on the strike / linda afya</a></h3>
-                <p class="meta">12 January 2012</p>
-                <p>The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick</p>
+                Loading news...
             </li>
         </ul>
     </div>

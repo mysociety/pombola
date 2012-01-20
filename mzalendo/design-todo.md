@@ -27,8 +27,6 @@
 
 ## Homepage
 
-    * hook up latest news to the blog's RSS feed
-    
     * hook up twitter
     
     * hook up MP ratings
@@ -59,4 +57,5 @@
     
     * expose hansard search
 
+    * generic search results have stub text in
 
