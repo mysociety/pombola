@@ -1,5 +1,3 @@
-// load all other jquery related resources
-Modernizr.load(['//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js','//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css']);
 
 // Show a tab and hide the others. Load content from remote source if needed.
 function activateSimpleTab( $heading_element ) {

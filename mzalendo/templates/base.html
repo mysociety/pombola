@@ -39,7 +39,7 @@
         </script>
 
         <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
-        <script src="{{ STATIC_URL }}js/main.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+        <script src="{{ STATIC_URL }}js/loader.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
 
@@ -148,52 +148,6 @@
                 {% endif %}
             </div>
         </footer>
-        <script type="text/javascript">
-            /*
-             * Test for mobile / desktop and load appropriate libs/scripts
-             */
-            // this is not yet ideal... it reacts a bit slow if the cdn fails
-
-            var post_jquery_desktop_load = [
-                '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
-                '{{ STATIC_URL }}js/libs/jquery.form-v2.94.js', // TODO - only load when needed for feedback form
-                '{{ STATIC_URL }}js/desktop-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}'
-            ];
-
-            Modernizr.load([
-                {
-                    test : Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)'),
-                    yep : ['{{ STATIC_URL }}js/libs/zepto-0.8.min.js', '{{ STATIC_URL }}js/mobile-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}'],
-                    nope : '//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js',
-                    complete: function () {
-                        // only run this if mq failed - e.g. desktop or no mq support (IE)
-                        if(Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)') === false) {
-                            // test for jquery
-                            if ( !window.jQuery ) {
-                                // not downloaded from CDN, so get local
-                                Modernizr.load([
-                                    {
-                                        load : '{{ STATIC_URL }}js/libs/jquery-1.7.0.min.js',
-                                        complete : function () {
-                                            // once local has been fetched, check for jQuery object again and load static libs and functions if there
-                                            if ( window.jQuery ) {
-                                                Modernizr.load( post_jquery_desktop_load );
-                                            }
-                                        }
-                                    }
-                                ]);
-                            }else{
-                                // if jQuery object is there, load in the rest of the static libs and functions
-                                Modernizr.load( post_jquery_desktop_load );
-                            }
-                        }
-                    }
-                },
-                {
-                    load: ['//platform.twitter.com/widgets.js', '{{ STATIC_URL }}js/analytics.js', '{{ STATIC_URL }}js/fb-like.js']
-                }
-            ]);
-        </script>
         <div id="fb-root"></div>
     </body>
 </html>

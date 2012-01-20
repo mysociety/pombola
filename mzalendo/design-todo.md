@@ -43,6 +43,8 @@
     * check that selenium tests still pass
 
     * style the correction dialog - issue #189
+    
+    * twitter and facebook on all pages - #28
 
     * delete this file
     
