@@ -38,8 +38,6 @@
 
 ## General
 
-    * resolve how to handle breadcrumb trail
-
     * check that selenium tests still pass
 
     * style the correction dialog - issue #189
