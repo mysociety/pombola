@@ -30,7 +30,7 @@
                                     )
                             )
                             .append( '<p class="meta">' + pub_date.toDateString() + '</p>')
-                            .append( '<p>' + entry.contentSnippet + '</p>' );
+                            .append( $('<p/>').text(entry.contentSnippet) );
             
             
                         $blog_container.append( $item );
@@ -66,11 +66,13 @@
                     data,
                     function( index, tweet_data ) {
 
+                        console.debug( tweet_data );
+
                         var pub_date = new Date( tweet_data.created_at );
 
                         var $tweet = $( '<div class="tw-wrap" />');
                         $tweet
-                            .append( '<p>' + tweet_data.text + '</p>' )
+                            .append( $('<p/>').text( tweet_data.text ) )
                             .append( '<p class="meta">' + pub_date.toDateString() + '</p>');
 
                         $twitter_feed
