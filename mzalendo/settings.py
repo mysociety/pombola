@@ -221,6 +221,7 @@ INSTALLED_APPS = (
     'helpers',
     'info',
     'tasks',
+    'core',
     'hansard',
     'feedback',
     'projects',
@@ -230,7 +231,6 @@ INSTALLED_APPS = (
 
     'place_data', # TODO - remove entry and app once migrations have run on all servers
     
-    'core',
 
 )
 
