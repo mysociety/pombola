@@ -78,7 +78,7 @@ class Entry(models.Model):
     # ) 
 
     remark = models.CharField(
-        max_length=50,
+        max_length=150,
     )
 
     extended_remark = MarkupField(
