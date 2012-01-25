@@ -131,6 +131,7 @@ class PersonScorecardTest(TestCase):
     def testConstituencies(self):
         assert not self.alf.constituencies()
         assert len(self.bob.constituencies()) == 1, self.bob.constituencies()
+        assert self.bob.constituencies()[0].slug == 'bobs_place'
 
     def testScorecardOverallMP(self):
         assert self.bob.scorecard_overall() == -0.5, "Bob's score: %s" %self.bob.scorecard_overall()

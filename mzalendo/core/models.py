@@ -206,11 +206,9 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
         else:
             return []
     
-            
     def mp_positions(self):
         return self.position_set.all().currently_active().filter(title__slug='mp')
             
-
     def is_mp(self):
         """Return the mp position if this person is an MP, else None"""
         try:
@@ -228,8 +226,9 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
 
     def constituencies(self):
         """Return list of constituencies that this person is currently an MP for"""
-        constituencies = [ x.place for x in self.mp_positions() if x.place ]
-        return constituencies
+        # NOTE: This could be done without the subquery, but it would need some
+        # refactoring of this and mp_positions to avoid repeated code.
+        return Place.objects.filter(position__in=self.mp_positions())
 
     def __unicode__(self):
         return self.legal_name
