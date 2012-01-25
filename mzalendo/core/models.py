@@ -1,3 +1,5 @@
+from __future__ import division
+
 import datetime
 import re
 from warnings import warn
@@ -250,10 +252,10 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
         return task_slugs
 
     def scorecard_overall(self):
-        own_scorecards_count = super(Person, self).scorecard_entries.all().count()
-        own_scorecards_average = super(Person, self).scorecard_entries.all().aggregate( models.Avg( 'score' ) )['score__avg']
+        total_count = super(Person, self).scorecard_entries.all().count()
+        total_score = super(Person, self).scorecard_entries.all().aggregate( models.Sum( 'score' ) )['score__sum']
 
-        return own_scorecards_average
+        return total_score / total_count
 
 #     def has_scorecards(self):
 #         return bool(self.scorecard_entries.all().count())
