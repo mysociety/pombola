@@ -128,6 +128,10 @@ class PersonScorecardTest(TestCase):
         assert self.alf.scorecard_overall() == 0
         assert self.alf.scorecard_overall_as_word() == 'average'
 
+    def testConstituencies(self):
+        assert not self.alf.constituencies()
+        assert len(self.bob.constituencies()) == 1, self.bob.constituencies()
+
     def testScorecardOverallMP(self):
         assert self.bob.scorecard_overall() == -0.5, "Bob's score: %s" %self.bob.scorecard_overall()
         assert self.bob.scorecard_overall_as_word() == 'bad', "Bob's word: %s" %self.bob.scorecard_overall_as_word()
