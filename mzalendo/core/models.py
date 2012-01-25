@@ -252,8 +252,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
         return task_slugs
 
     def scorecard_overall(self):
-        total_count = super(Person, self).scorecard_entries.all().count()
-        total_score = super(Person, self).scorecard_entries.all().aggregate( models.Sum( 'score' ) )['score__sum']
+        total_count = super(Person, self).scorecard_entries.count()
+        total_score = super(Person, self).scorecard_entries.aggregate( models.Sum( 'score' ) )['score__sum']
 
         return total_score / total_count
 
