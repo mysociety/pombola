@@ -249,6 +249,15 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
                 task_slugs.append( "find-missing-" + wanted )
         
         return task_slugs
+
+    def scorecard_overall(self):
+        own_scorecards_count = super(Person, self).scorecard_entries.all().count()
+        own_scorecards_average = super(Person, self).scorecard_entries.all().aggregate( models.Avg( 'score' ) )['score__avg']
+
+        return own_scorecards_average
+
+#     def has_scorecards(self):
+#         return bool(self.scorecard_entries.all().count())
         
     class Meta:
        ordering = ["slug"]      
