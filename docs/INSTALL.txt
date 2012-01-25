@@ -49,7 +49,6 @@ createdb -T template_postgis mzalendo
 cd mzalendo
 
 # copy config example and set values needed
-cp conf/general-example.yml conf/general.yml
 cp conf/general.yml-example conf/general.yml
 nano conf/general.yml
 
