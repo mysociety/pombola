@@ -39,7 +39,7 @@ class PersonTest(WebTest):
         person.clean()   # would normally be called by 'save()'
         self.assertEqual( person.name, "Fred Smith" )
         self.assertEqual( person.additional_names(), ['Freddy Smith'] )
-        
+
 class PersonScorecardTest(TestCase):
     def setUp(self):    
         # Alf is a person, but with no particular position.
@@ -76,7 +76,8 @@ class PersonScorecardTest(TestCase):
             )
 
         self.mp_title = models.PositionTitle.objects.create(
-            name='mp',
+            name='MP',
+            slug='mp',
             )
 
         self.place_kind_constituency = models.PlaceKind.objects.create(
@@ -85,6 +86,7 @@ class PersonScorecardTest(TestCase):
 
         self.bobs_place = models.Place.objects.create(
             name="Bob's Place",
+            slug='bobs_place',
             kind=self.place_kind_constituency,
             )
 
