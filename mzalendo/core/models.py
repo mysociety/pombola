@@ -218,14 +218,12 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
         except IndexError:
             return None
 
-
     def parties(self):
         """Return list of parties that this person is currently a member of"""
         party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
         parties = [ x.organisation for x in party_memberships ]
         return parties
     
-
     def constituencies(self):
         """Return list of constituencies that this person is currently an MP for"""
         # NOTE: This could be done without the subquery, but it would need some
@@ -253,7 +251,11 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
 
     def scorecard_overall(self):
         total_count = super(Person, self).scorecard_entries.count()
-        total_score = super(Person, self).scorecard_entries.aggregate( models.Sum( 'score' ) )['score__sum']
+        total_score = super(Person, self).scorecard_entries.aggregate(models.Sum('score'))['score__sum']
+
+        for constituency in self.constituencies():
+            total_count += constituency.scorecard_entries.count()
+            total_score += constituency.scorecard_entries.aggregate(models.Sum('score'))['score__sum']
 
         return total_score / total_count
 
