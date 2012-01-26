@@ -32,14 +32,15 @@
                 <header>
                     <h4>{{ entry.category.name }}</h4>
                     <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>
-                    {% if entry.equivalent_remark %}
-                    <span class="shout shout-{{ entry.score_as_word }}">{{ entry.equivalent_remark }}</span>
-                    {% endif %}
-    
-                    {% if entry.source_url %}
-                        <a href="{{ entry.source_url}}">{% firstof entry.source_name 'source' %}</a>
-                    {% endif %}
                     
+                    <div class="details">
+                        {% if entry.equivalent_remark %}
+                            <span class="shout shout-{{ entry.score_as_word }}">{{ entry.equivalent_remark }}</span>
+                        {% endif %}
+                        {% if entry.source_url %}
+                            <a class="source" href="{{ entry.source_url}}">{% firstof entry.source_name 'source' %}</a>
+                        {% endif %}
+                    </div>
                 </header>
             </article>
         </li>

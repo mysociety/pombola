@@ -283,7 +283,7 @@ josh [at] supercooldesign.co.uk
       border-bottom:2px solid $colour6;
       span {
         @include inline-block;
-        height:25px;
+        height:32px;
         padding:5px 0 0 130px;
         margin:-5px 0 0 24px;
         background:url(../images/d-smiley-sprite.png) 0 0 no-repeat;
@@ -338,7 +338,7 @@ josh [at] supercooldesign.co.uk
             }
           }
           div.details {
-            float:left;
+            margin: 0px 0px 8px 200px; /* 200 from 120 (width of head) + 80 (padding+margin of text) */
             display:block;
             margin-top:10px;
             p {
