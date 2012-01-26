@@ -255,8 +255,10 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
         total_score = super(Person, self).scorecard_entries.aggregate(models.Sum('score'))['score__sum']
 
         for constituency in self.constituencies():
-            total_count += constituency.scorecard_entries.count()
-            total_score += constituency.scorecard_entries.aggregate(models.Sum('score'))['score__sum']
+            constituency_count = constituency.scorecard_entries.count()
+            if constituency_count:
+                total_count += constituency_count
+                total_score += constituency.scorecard_entries.aggregate(models.Sum('score'))['score__sum']
 
         return total_score / total_count
 
