@@ -175,8 +175,8 @@ class KenyaParserTest(TestCase):
             )
 
         calist_mwatela = Person.objects.create(
-            legal_name='Calist Matela',
-            slug='calist-matela',
+            legal_name='Calist Mwatela',
+            slug='calist-mwatela',
             )
 
         Position.objects.create(
