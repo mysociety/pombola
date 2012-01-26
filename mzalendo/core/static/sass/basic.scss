@@ -427,8 +427,7 @@ pre {
                 background:url(../images/score-bad.png) right 0 no-repeat;
               }
             }
-            .more-details {
-
+            .details {
                 span.shout {
                   display:block;
                   background:$colour11;
@@ -440,6 +439,7 @@ pre {
                   clear:both;
                   @include border-radius(5px);
                   p {
+                    font-size: 100%;
                     float: none;
                     padding: 4px;
                     margin: 0 auto;

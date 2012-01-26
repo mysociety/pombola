@@ -836,7 +836,7 @@ pre {
 #page .small-container ul.scorecard li article header p.score-bad {
   background: url(../images/score-bad.png) right 0 no-repeat;
 }
-#page .small-container ul.scorecard li article header .more-details span.shout {
+#page .small-container ul.scorecard li article header .details span.shout {
   display: block;
   background: #d40000;
   color: white;
@@ -852,21 +852,22 @@ pre {
   -khtml-border-radius: 5px;
   border-radius: 5px;
 }
-#page .small-container ul.scorecard li article header .more-details span.shout p {
+#page .small-container ul.scorecard li article header .details span.shout p {
+  font-size: 100%;
   float: none;
   padding: 4px;
   margin: 0 auto;
 }
-#page .small-container ul.scorecard li article header .more-details span.shout-good {
+#page .small-container ul.scorecard li article header .details span.shout-good {
   background-color: #009245;
 }
-#page .small-container ul.scorecard li article header .more-details span.shout-average {
+#page .small-container ul.scorecard li article header .details span.shout-average {
   background-color: #f9a326;
 }
-#page .small-container ul.scorecard li article header .more-details span.shout-bad {
+#page .small-container ul.scorecard li article header .details span.shout-bad {
   background-color: #d40000;
 }
-#page .small-container ul.scorecard li article header .more-details .source {
+#page .small-container ul.scorecard li article header .details .source {
   display: block;
   padding-right: 1em;
   text-align: right;
