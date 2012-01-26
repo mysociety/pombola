@@ -26,7 +26,7 @@
     
     <h3 class="scorecard-overall">Overall Rating <span class="score-overall-{{ object.scorecard_overall_as_word }}">{{ object.scorecard_overall_as_word|capfirst }}</span></h3>
     <ul class="scorecard">
-        {% for entry in object.scorecard_entries.all %}
+        {% for entry in object.scorecards %}
         <li>
             <article>
                 <header>

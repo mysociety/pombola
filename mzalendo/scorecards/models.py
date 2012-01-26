@@ -228,7 +228,10 @@ class ScorecardMixin(models.Model):
         return Entry.score_to_word( self.scorecard_overall() )
         
     def has_scorecards(self):
-        return bool(self.scorecard_entries.all().count())
+        return self.scorecard_entries.exists()
+
+    def scorecards(self):
+        return self.scorecard_entries.all()
     
     class Meta:
        abstract = True
