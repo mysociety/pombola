@@ -3,7 +3,6 @@ from __future__ import division
 import datetime
 import re
 import itertools
-from warnings import warn
 
 from django.core import exceptions
 from django.core.urlresolvers import reverse
