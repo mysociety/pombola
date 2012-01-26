@@ -31,8 +31,7 @@ date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or '
 
 
 
-class ModelBase(models.Model):
-    
+class ModelBase(models.Model):    
     created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
     updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
 
@@ -133,11 +132,12 @@ class InformationSource(ModelBase):
 
 class PersonQuerySet(models.query.GeoQuerySet):
     def is_mp(self, when=None):
-        
-        mp_qs = Position.objects.filter(title__slug='mp').currently_active(when)
-
-        qs = self.filter(position__in = mp_qs)
-        return qs
+        mp_positions = (
+            Position.objects
+            .filter(Q(title__slug='mp') | Q(title__slug='nominated-member-parliament'))
+            .currently_active(when)
+            )
+        return self.filter(position__in = mp_positions)
 
 
 class PersonManager(ManagerBase):
@@ -164,7 +164,6 @@ class PersonManager(ManagerBase):
             return results[0].object
         else:
             return None
-        
 
 class Person(ModelBase, HasImageMixin, ScorecardMixin):
     title = models.CharField(max_length=100, blank=True)
@@ -449,7 +448,9 @@ class PositionQuerySet(models.query.GeoQuerySet):
     def currently_active(self, when=None):
         """Filter on start and end dates to limit to currently active postitions"""
 
-        if when == None: when = datetime.date.today()
+        if when == None:
+            when = datetime.date.today()
+
         now_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
 
         qs = (
