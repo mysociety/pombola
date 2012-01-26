@@ -210,8 +210,10 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
             return []
     
     def mp_positions(self):
-        return self.position_set.all().currently_active().filter(title__slug='mp')
-            
+        return self.position_set.all().currently_active().filter(
+            Q(title__slug='mp') | Q(title__slug='nominated-member-parliament'),
+            )
+
     def is_mp(self):
         """Return the mp position if this person is an MP, else None"""
         try:
@@ -255,19 +257,29 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
         total_score = super(Person, self).scorecard_entries.aggregate(models.Sum('score'))['score__sum']
 
         for constituency in self.constituencies():
-            total_count += constituency.scorecard_entries.count()
-            total_score += constituency.scorecard_entries.aggregate(models.Sum('score'))['score__sum']
+            constituency_count = constituency.scorecard_entries.count()
+            if constituency_count:
+                total_count += constituency_count
+                total_score += constituency.scorecard_entries.aggregate(models.Sum('score'))['score__sum']
 
         return total_score / total_count
 
     def scorecards(self):
-        scorecard_lists = [super(Person, self).scorecard_entries.all()]
+        """This is the list of scorecards that will actually be displayed on the site."""
+        scorecard_lists = []
+
+        # We're only showing scorecards for current MPs
+        if self.is_mp():
+            scorecard_lists.append(super(Person, self).scorecard_entries.all())
+
         scorecard_lists.extend([x.scorecard_entries.all() for x in self.constituencies()])
 
         return itertools.chain(*scorecard_lists)
 
     def has_scorecards(self):
-        return self.scorecard_entries.exists() or any([x.scorecard_entries.exists() for x in self.constituencies()])
+        # We're only showing scorecards for current MPs
+        if self.is_mp():
+            return self.scorecard_entries.exists() or any([x.scorecard_entries.exists() for x in self.constituencies()])
         
     class Meta:
        ordering = ["slug"]      
