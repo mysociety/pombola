@@ -80,6 +80,11 @@ class PersonScorecardTest(TestCase):
             slug='mp',
             )
 
+        self.nominated_mp_title = models.PositionTitle.objects.create(
+            name='Nominated Member of Parliament',
+            slug='nominated-member-parliament',
+            )
+
         self.place_kind_constituency = models.PlaceKind.objects.create(
             name='Constituency',
             )
@@ -113,6 +118,18 @@ class PersonScorecardTest(TestCase):
             score=-1,
             )
 
+        # Charlie is a nominated MP with no constituency
+        self.charlie = models.Person.objects.create(
+            legal_name='Charlie Brown',
+            slug='charlie_brown',
+            )
+
+        self.charlies_position = models.Position.objects.create(
+            person=self.bob,
+            category='political',
+            title=self.nominated_mp_title,
+            )
+
     def testScorecardOverallNonMP(self):
         # import pdb;pdb.set_trace()
         assert self.alf.scorecard_overall() == 1
@@ -128,11 +145,16 @@ class PersonScorecardTest(TestCase):
         assert self.alf.scorecard_overall() == 0
         assert self.alf.scorecard_overall_as_word() == 'average'
 
+    def testScorecardOverallMP(self):
+        assert self.bob.scorecard_overall() == -0.5, "Bob's score: %s" %self.bob.scorecard_overall()
+        assert self.bob.scorecard_overall_as_word() == 'bad', "Bob's word: %s" %self.bob.scorecard_overall_as_word()
+
     def testConstituencies(self):
         assert not self.alf.constituencies()
         assert len(self.bob.constituencies()) == 1, self.bob.constituencies()
         assert self.bob.constituencies()[0].slug == 'bobs_place'
 
-    def testScorecardOverallMP(self):
-        assert self.bob.scorecard_overall() == -0.5, "Bob's score: %s" %self.bob.scorecard_overall()
-        assert self.bob.scorecard_overall_as_word() == 'bad', "Bob's word: %s" %self.bob.scorecard_overall_as_word()
+    def testIsMP(self):
+        assert self.bob.is_mp()
+        assert not self.alf.is_mp()
+        assert self.charlie.is_mp()
