@@ -427,17 +427,39 @@ pre {
                 background:url(../images/score-bad.png) right 0 no-repeat;
               }
             }
-            span.shout {
-              display:block;
-              background:$colour11;
-              color:$colour6;
-              margin:10px 0;
-              padding:10px;
-              text-align:center;
-              font-weight:bold;
-              clear:both;
-              @include border-radius(5px);
-            }
+            .more-details {
+
+                span.shout {
+                  display:block;
+                  background:$colour11;
+                  color:$colour6;
+                  margin:10px 0;
+                  padding:10px;
+                  text-align:center;
+                  font-weight:bold;
+                  clear:both;
+                  @include border-radius(5px);
+                  p {
+                    float: none;
+                    padding: 4px;
+                    margin: 0 auto;
+                  }
+                }
+                span.shout-good {
+                  background-color: $colour1;
+                }
+                span.shout-average {
+                  background-color: $colour14;
+                }
+                span.shout-bad {
+                  background-color: $colour11;
+                }
+                .source {
+                    display: block;
+                    padding-right: 1em;
+                    text-align:right;
+                }
+             }
           }
           div.details {
             // height:0px;
