@@ -125,7 +125,7 @@ class PersonScorecardTest(TestCase):
             )
 
         self.charlies_position = models.Position.objects.create(
-            person=self.bob,
+            person=self.charlie,
             category='political',
             title=self.nominated_mp_title,
             )
