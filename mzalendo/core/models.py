@@ -210,8 +210,10 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin ):
             return []
     
     def mp_positions(self):
-        return self.position_set.all().currently_active().filter(title__slug='mp')
-            
+        return self.position_set.all().currently_active().filter(
+            Q(title__slug='mp') | Q(title__slug='nominated-member-parliament'),
+            )
+
     def is_mp(self):
         """Return the mp position if this person is an MP, else None"""
         try:
