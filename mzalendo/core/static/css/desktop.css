@@ -351,17 +351,17 @@ josh [at] supercooldesign.co.uk
   margin: 0;
   border: 0;
 }
-#page .small-container ul.scorecard li article.has-data:hover {
+#page .small-container ul.scorecard li article.has-details:hover {
   cursor: pointer;
   background-color: #e6e6e6;
 }
-#page .small-container ul.scorecard li article.has-data.active {
+#page .small-container ul.scorecard li article.has-details.active {
   background-color: #e6e6e6;
 }
-#page .small-container ul.scorecard li article.has-data.active header {
+#page .small-container ul.scorecard li article.has-details.active header {
   background: url(../images/arrow-up.png) right 0 no-repeat;
 }
-#page .small-container ul.scorecard li article.has-data header {
+#page .small-container ul.scorecard li article.has-details header {
   background: url(../images/arrow-down.png) right 0 no-repeat;
 }
 #page .small-container ul.scorecard li article header {

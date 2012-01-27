@@ -28,7 +28,7 @@
     <ul class="scorecard">
         {% for entry in object.scorecards %}
         <li>
-            <article {% if entry.has_details %}class="has-data"{% endif %}>
+            <article {% if entry.has_details %}class="has-details"{% endif %}>
                 <header>
                     <h4>{{ entry.category.name }}<a style="vertical-align:super" href="/scorecard-faq#{{ entry.category.slug }}" title="what's {{ entry.category.name }}?">?</a></h4>
                     <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>
