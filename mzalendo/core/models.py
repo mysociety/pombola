@@ -31,8 +31,7 @@ date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or '
 
 
 
-class ModelBase(models.Model):
-    
+class ModelBase(models.Model):    
     created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
     updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
 
@@ -133,12 +132,8 @@ class InformationSource(ModelBase):
 
 class PersonQuerySet(models.query.GeoQuerySet):
     def is_mp(self, when=None):
-        
-        mp_qs = Position.objects.filter(title__slug='mp').currently_active(when)
-
-        qs = self.filter(position__in = mp_qs)
-        return qs
-
+        # FIXME - Don't like the look of this, rather a big subquery.
+        return self.filter(position__in=Position.objects.all().current_mp_positions(when))
 
 class PersonManager(ManagerBase):
     def get_query_set(self):
@@ -164,7 +159,6 @@ class PersonManager(ManagerBase):
             return results[0].object
         else:
             return None
-        
 
 class Person(ModelBase, HasImageMixin, ScorecardMixin):
     title = models.CharField(max_length=100, blank=True)
@@ -203,27 +197,18 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
             return []
     
     def mp_positions(self):
-        return self.position_set.all().currently_active().filter(
-            Q(title__slug='mp') | Q(title__slug='nominated-member-parliament'),
-            )
+        return self.position_set.all().current_mp_positions()
 
     def is_mp(self):
-        """Return the mp position if this person is an MP, else None"""
-        try:
-            return self.mp_positions()[0]
-        except IndexError:
-            return None
+        return self.mp_positions().exists()
 
     def parties(self):
         """Return list of parties that this person is currently a member of"""
         party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
-        parties = [x.organisation for x in party_memberships]
-        return parties
+        return Organisation.objects.filter(position__in=party_memberships)
     
     def constituencies(self):
         """Return list of constituencies that this person is currently an MP for"""
-        # NOTE: This could be done without the subquery, but it would need some
-        # refactoring of this and mp_positions to avoid repeated code.
         return Place.objects.filter(position__in=self.mp_positions())
 
     def __unicode__(self):
@@ -297,7 +282,8 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
         return self.filter(kind__slug='party')
 
     def active_parties(self):
-        active_mp_positions = Position.objects.all().filter(title__slug='mp').currently_active()
+        # FIXME - What a lot of subqueries...
+        active_mp_positions = Position.objects.all().current_mp_positions()
         active_member_positions = Position.objects.all().filter(title__slug='member').currently_active()
 
         current_mps = Person.objects.all().filter(position__in=active_mp_positions).distinct()
@@ -389,7 +375,7 @@ class Place(ModelBase, ScorecardMixin):
     
     def current_mp_position(self):
         """Return the current MP position, or None"""
-        qs = self.position_set.filter(title__slug='mp').currently_active()
+        qs = self.position_set.current_mp_positions()
         try:
             return qs[0]
         except IndexError:
@@ -449,17 +435,18 @@ class PositionQuerySet(models.query.GeoQuerySet):
     def currently_active(self, when=None):
         """Filter on start and end dates to limit to currently active postitions"""
 
-        if when == None: when = datetime.date.today()
+        if when == None:
+            when = datetime.date.today()
+
         now_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
 
         qs = (
             self
-                .filter(start_date__lte = now_approx)
+                .filter(start_date__lte=now_approx)
                 .filter(Q(sorting_end_date_high__gte=now_approx) | Q(end_date=''))
         )
 
         return qs
-
 
     def currently_inactive(self, when=None):
         """Filter on start and end dates to limit to currently inactive postitions"""
@@ -475,7 +462,17 @@ class PositionQuerySet(models.query.GeoQuerySet):
         qs = self.filter(start_criteria | end_criteria)
 
         return qs
-    
+
+    def mp_positions(self):
+        """Filter down to only positions which are one of the two kinds of mp
+        (those with constituencies, and nominated ones).
+        """
+        return self.filter(Q(title__slug='mp') | Q(title__slug='nominated-member-parliament'))
+
+    def current_mp_positions(self, when=None):
+        """Filter down to only positions which are those of current MPs."""
+        return self.mp_positions().currently_active(when)
+
     def political(self):
         """Filter down to only the political category"""
         return self.filter(category='political')
@@ -576,7 +573,6 @@ class Position(ModelBase):
         """Is there at least one known (not future) date?"""
         return (self.start_date and not self.start_date.future) or (self.end_date and not self.end_date.future)
     
-
     def _set_sorting_dates(self):
         """Set the sorting dates from the actual dates (does not call save())"""
         # value can be yyyy-mm-dd, future or None

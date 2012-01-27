@@ -17,7 +17,6 @@ from django_date_extensions.fields import ApproximateDate
 
 
 class KenyaParserTest(TestCase):
-
     local_dir          = os.path.abspath( os.path.dirname( __file__ ) )
     sample_pdf         = os.path.join( local_dir, '2011-09-01-sample.pdf'  )
     sample_html        = os.path.join( local_dir, '2011-09-01-sample.html' )
@@ -30,7 +29,6 @@ class KenyaParserTest(TestCase):
             name = 'National Assembly',
         ).save()
     
-    
     def test_converting_pdf_to_html(self):
         """Test that the pdf becomes the html that we expect"""
         pdf_file = open( self.sample_pdf, 'r' )
@@ -39,7 +37,6 @@ class KenyaParserTest(TestCase):
         expected_html = open( self.sample_html, 'r' ).read()
         
         self.assertEqual( html, expected_html )
-
 
     def test_converting_html_to_data(self):
         """test the convert_pdf_to_data function"""
@@ -82,7 +79,6 @@ class KenyaParserTest(TestCase):
             'foo.bar'
         )
 
-
     def _create_source_and_load_test_json_to_entries(self):
         source   = Source.objects.create(
             name = 'Test source',
@@ -119,12 +115,11 @@ class KenyaParserTest(TestCase):
         # check entries created and that we have the right number
         entries = sitting.entry_set
         self.assertEqual( entries.count(), 64 )
-    
-    
+        
     def test_assign_speaker_names(self):
         """Test that the speaker names are assigned as expected"""
 
-        # This should really be in a seperate file as it is not related to the
+        # This should really be in a separate file as it is not related to the
         # Kenya parser, but keeping it here for now as it is a step in the
         # parsing flow that is being tested.
         
@@ -157,7 +152,6 @@ class KenyaParserTest(TestCase):
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
         self.assertEqual( unassigned_aliases_qs.count(), 11 )
 
-
         # create the position - check matched
         mp = PositionTitle.objects.create(
             name = 'Member of Parliament',
@@ -173,6 +167,29 @@ class KenyaParserTest(TestCase):
         self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
         self.assertEqual( unassigned_aliases_qs.count(), 10 )
 
+        # Add a nominated MP and check it is matched
+
+        nominated_mp = PositionTitle.objects.create(
+            name='Nominated MP',
+            slug='nominated-member-parliament',
+            )
+
+        calist_mwatela = Person.objects.create(
+            legal_name='Calist Mwatela',
+            slug='calist-mwatela',
+            )
+
+        Position.objects.create(
+            person = calist_mwatela,
+            title = nominated_mp,
+            start_date = ApproximateDate( year=2011, month=1, day = 1 ),
+            end_date   = ApproximateDate( future=True ),
+            )
+
+        Entry.assign_speakers()
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
+        self.assertEqual( unassigned_aliases_qs.count(), 9 )
+
         # Add an mp that is no longer current, check not matched
         bob_musila = Person.objects.create(
             legal_name = 'Bob Musila',
@@ -185,8 +202,8 @@ class KenyaParserTest(TestCase):
             end_date   = ApproximateDate( year=2009, month=1, day = 1 ),
         )
         Entry.assign_speakers()
-        self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
-        self.assertEqual( unassigned_aliases_qs.count(), 10 )
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
+        self.assertEqual( unassigned_aliases_qs.count(), 9 )
         
         # Add a name to the aliases and check it is matched
         betty_laboso = Person.objects.create(
@@ -198,8 +215,8 @@ class KenyaParserTest(TestCase):
         betty_laboso_alias.save()
 
         Entry.assign_speakers()
-        self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
-        self.assertEqual( unassigned_aliases_qs.count(), 9 )
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 22 )
+        self.assertEqual( unassigned_aliases_qs.count(), 8 )
         
         # Add a name to alias that should be ignored, check not matched but not listed in names any more
         prof_kaloki_alias = Alias.objects.get( alias = 'Prof. Kaloki')
@@ -207,8 +224,8 @@ class KenyaParserTest(TestCase):
         prof_kaloki_alias.save()
 
         Entry.assign_speakers()
-        self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
-        self.assertEqual( unassigned_aliases_qs.count(), 8 )        
+        self.assertEqual( entry_qs.unassigned_speeches().count(), 22 )
+        self.assertEqual( unassigned_aliases_qs.count(), 7 )        
         
         # Add all remaining names to alias and check that all matched
         for alias in unassigned_aliases_qs.all():
