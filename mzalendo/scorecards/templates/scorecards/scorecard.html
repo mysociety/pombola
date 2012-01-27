@@ -28,11 +28,10 @@
     <ul class="scorecard">
         {% for entry in object.scorecards %}
         <li>
-            <article>
+            <article {% if entry.equivalent_remark or entry.source_url %}class="has-data"{% endif %}>
                 <header>
                     <h4>{{ entry.category.name }}</h4>
                     <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>
-                    
                     <div class="details">
                         {% if entry.equivalent_remark %}
                             <span class="shout shout-{{ entry.score_as_word }}">{{ entry.equivalent_remark }}</span>

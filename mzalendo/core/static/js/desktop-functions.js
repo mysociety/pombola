@@ -157,7 +157,7 @@ $(function(){
   $('div.details').hide();
 
   // hide/show details
-  $('ul.scorecard article').live('click', function(){
+  $('ul.scorecard article.has-data').live('click', function(){
     hideShow($('div.details', $(this)), $(this));
   });
 
