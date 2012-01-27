@@ -541,7 +541,16 @@ ul.comments {
     }
   }
 }
-
+.tab {
+  ul.comments,
+  ul.listing {
+    li {
+      section {
+        width:580px;
+      }
+    }
+  }
+}
 ul.listing {
   li {
     img {

@@ -602,6 +602,11 @@ ul.comments li:hover .read-more-wrap, ul.comments li.hovered .tools, ul.comments
   left: auto;
 }
 
+.tab ul.comments li section,
+.tab ul.listing li section {
+  width: 580px;
+}
+
 ul.listing li img {
   width: 90px;
   height: 90px;
