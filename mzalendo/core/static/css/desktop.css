@@ -590,6 +590,9 @@ ul.comments li img {
   width: 60px;
   height: 60px;
 }
+ul.comments li section {
+  clear: none;
+}
 ul.comments li .tools,
 ul.comments li .read-more-wrap {
   left: -999999px;
