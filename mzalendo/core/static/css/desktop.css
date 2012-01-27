@@ -661,8 +661,21 @@ ul.listing li section a.read-more:hover {
   color: #009245;
   margin-top: 15px;
   line-height: 25px;
+  padding: 6px;
+  background: url(../images/arrow-down.png) right 0 no-repeat;
   font-weight: normal;
   font-size: 16px;
+}
+#page .home-left h2#home-intro:hover {
+  background-color: #e5fff3;
+  color: #009245;
+  cursor: pointer;
+}
+#page .home-left h2#home-intro .details {
+  display: none;
+}
+#page .home-left h2#home-intro.active {
+  background: #e5fff3 url(../images/arrow-up.png) right 0 no-repeat;
 }
 #page .home-right {
   float: left;

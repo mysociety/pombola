@@ -580,9 +580,22 @@ ul.listing {
       color:$colour1;
       margin-top:15px;
       line-height:25px;
+      padding: 6px;
+      background:url(../images/arrow-down.png) right 0 no-repeat;
       font: {
         weight:normal;
         size:16px;
+      }
+      &:hover {
+        background-color: $colour15;
+        color: $colour1;
+        cursor: pointer;
+      } 
+      .details {
+        display: none;
+      }       
+      &.active {
+        background:$colour15 url(../images/arrow-up.png) right 0 no-repeat;
       }
     }
   }
