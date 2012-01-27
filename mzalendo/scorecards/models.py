@@ -85,6 +85,10 @@ class Entry(models.Model):
     def score_as_word(self):
         return self.score_to_word( self.score )
 
+    # it's useful if the template can detect if there are additional details that might need to be displayed
+    def has_details(self):
+        return (self.equivalent_remark or self.extended_remark or self.source_url )
+        
     @classmethod
     def score_to_word(cls, score):
         if   score >=  0.5: return 'good'

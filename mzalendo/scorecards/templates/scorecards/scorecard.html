@@ -28,16 +28,19 @@
     <ul class="scorecard">
         {% for entry in object.scorecards %}
         <li>
-            <article {% if entry.equivalent_remark or entry.source_url %}class="has-data"{% endif %}>
+            <article {% if entry.has_details %}class="has-data"{% endif %}>
                 <header>
-                    <h4>{{ entry.category.name }}</h4>
+                    <h4>{{ entry.category.name }}<a style="vertical-align:super" href="/scorecard-faq#{{ entry.category.slug }}" title="what's {{ entry.category.name }}?">?</a></h4>
                     <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>
                     <div class="details">
                         {% if entry.equivalent_remark %}
                             <span class="shout shout-{{ entry.score_as_word }}">{{ entry.equivalent_remark }}</span>
                         {% endif %}
+                        {% if entry.extended_remark %}
+                            <span class="shout">{{ entry.extended_remark }}</span>
+                        {% endif %}
                         {% if entry.source_url %}
-                            <a class="source" href="{{ entry.source_url}}">{% firstof entry.source_name 'source' %}</a>
+                            <span class="source">Source: <a href="{{ entry.source_url}}">{% firstof entry.source_name 'source' %}</a></span>
                         {% endif %}
                     </div>
                 </header>
