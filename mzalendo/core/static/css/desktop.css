@@ -806,7 +806,11 @@ ul#home-news-list li img {
 .featured-person {
   color: white;
   margin: 0.666em 0 2em 0;
-  background: #009245 url("/static/images/avatar-200x200.jpg") 0px 0px no-repeat;
+  background-color: #009245;
+}
+.featured-person img {
+  float: left;
+  max-width: 200px;
 }
 .featured-person .featured-person-info {
   margin-left: 200px;

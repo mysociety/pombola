@@ -695,7 +695,8 @@ ul#home-news-list {
     margin-top:10px;
     float:right;
   }
-}
+} 
+
 #page .home-right .social-and-tools {
   margin-top:30px;
   width:90px;
@@ -724,7 +725,11 @@ ul#home-news-list {
 .featured-person {
   color:$colour6;
   margin:0.666em 0 2em 0;
-  background:$colour1 url('/static/images/avatar-200x200.jpg') 0px 0px no-repeat;
+  background-color:$colour1;
+  img {
+    float:left;
+    max-width: 200px;
+  }
   .featured-person-info {
     margin-left:200px;
     padding:10px;

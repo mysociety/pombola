@@ -16,7 +16,7 @@ def home(request):
     return render_to_response(
         'core/home.html',
         {
-          'featured_person': models.Person.objects.filter()[0]
+          'featured_person': models.Person.objects.filter(slug='ababu-namwamba')[0]
         },
         context_instance=RequestContext(request)
     )

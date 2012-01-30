@@ -1,7 +1,11 @@
+{% load thumbnail %}
+
 <div class="featured-person">
-    {% if featured_person.images.exists %}
-        <img src="{{ featured_person.images.0 }}" style="border:1px solid red;" />
-    {% endif %}
+    {% thumbnail featured_person.primary_image "200x200" as im %}
+        <img src="{{ im.url }}" alt="{{ featured_person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+    {% empty %}
+        <img src="{{STATIC_URL}}images/avatar-200x200.jpg" />
+    {% endthumbnail %}        
     <div class="featured-person-info">   
         <span class="feature-nav feature-next"></span>
         <span class="feature-nav feature-prev"></span>
