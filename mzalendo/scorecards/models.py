@@ -51,8 +51,8 @@ class Entry(models.Model):
 
     extended_remark = MarkupField(
         max_length = 1000,
-        blank      = True,
-        help_text  = "Extra details about the entry, not shown in summary view.",
+        blank = True,
+        help_text = "Extra details about the entry, not shown in summary view.",
     )
 
     score = models.IntegerField(
@@ -63,19 +63,19 @@ class Entry(models.Model):
         ),
     )
 
-    equivalent_remark   = MarkupField(
+    equivalent_remark = MarkupField(
         max_length = 400,
-        blank      = True,
-        help_text  = 'Please **bold** the relevant part - eg "Enough money is going missing to pay for **123 teachers**"'
+        blank = True,
+        help_text = 'Please **bold** the relevant part - eg "Enough money is going missing to pay for **123 teachers**"',
     )  
     
     # Every data point can have an external source. 
-    source_url  = models.URLField( blank=True)  
-    source_name = models.CharField( max_length=200, blank=True )
+    source_url = models.URLField(blank=True)  
+    source_name = models.CharField(max_length=200, blank=True)
 
     class Meta():
-        ordering = ( '-date', 'category' )
-        unique_together = ( 'content_type', 'object_id', 'category', 'date' )
+        ordering = ('-date', 'category')
+        unique_together = ('content_type', 'object_id', 'category', 'date')
         verbose_name_plural = 'entries'
     
 
@@ -83,7 +83,7 @@ class Entry(models.Model):
         return '%s for %s (%s)' % (self.category, self.content_object, self.date)
 
     def score_as_word(self):
-        return self.score_to_word( self.score )
+        return self.score_to_word(self.score)
 
     @classmethod
     def score_to_word(cls, score):
