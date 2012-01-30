@@ -383,6 +383,11 @@ class Place(ModelBase, ScorecardMixin):
         except IndexError:
             return None
 
+    def related_people(self):
+        # Can't order by the sorting_end_date_high of position
+        # because that ruins the distinct.
+        return Person.objects.filter(position__place=self).distinct()#.order_by('-position__sorting_end_date_high')
+
     @models.permalink
     def get_absolute_url(self):
         return ('place', [self.slug])
