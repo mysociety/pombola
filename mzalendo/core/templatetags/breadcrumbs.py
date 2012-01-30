@@ -8,7 +8,7 @@ register = Library()
 
 url_name_mappings = {
   'info'   : ('Information', '/info'),
-  'organisation' : ('Organisations', '/organisation'),
+  'organisation' : ('Organisations', '/organisation/all'),
   'person' : ('Politicians', '/person/all'),
   'place' : ('Places', '/place/all'),
 }
@@ -37,12 +37,12 @@ def breadcrumbs(url):
                 if link in url_name_mappings:
                     (sub_link, this_url) = url_name_mappings[link]
                 else:
-                    sub_link = re.sub('-', ' ', link)
+                    sub_link = re.sub('-', ' ', link).title()
                     this_url = "/".join(bread)
                 if not i == total:
                     tlink = '<li><a href="%s/" title="Breadcrumb link to %s">%s</a> %s</li>' % (this_url, sub_link, sub_link, separator)
                 else:
-                    tlink = '<li>%s</li>' % sub_link.title()
+                    tlink = '<li>%s</li>' % sub_link
                 home.append(tlink)
         bcrumb = "".join(home)
     return mark_safe(bcrumb)
