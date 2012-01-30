@@ -225,6 +225,10 @@ josh [at] supercooldesign.co.uk
           weight:normal;
         }
       }
+      li .sep {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
       li a:hover {
         text-decoration:underline;
         color:$colour4;
