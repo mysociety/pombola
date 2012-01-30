@@ -375,7 +375,7 @@ class Place(ModelBase, ScorecardMixin):
     
     def current_mp_position(self):
         """Return the current MP position, or None"""
-        qs = self.position_set.current_mp_positions()
+        qs = self.position_set.all().current_mp_positions()
         try:
             return qs[0]
         except IndexError:

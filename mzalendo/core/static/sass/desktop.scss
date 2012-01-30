@@ -529,6 +529,9 @@ ul.comments {
       width:60px;
       height:60px;
     }
+    section {
+      clear:none;
+    }
     .tools,
     .read-more-wrap {
       left:-999999px;
@@ -542,7 +545,16 @@ ul.comments {
     }
   }
 }
-
+.tab {
+  ul.comments,
+  ul.listing {
+    li {
+      section {
+        width:580px;
+      }
+    }
+  }
+}
 ul.listing {
   li {
     img {
