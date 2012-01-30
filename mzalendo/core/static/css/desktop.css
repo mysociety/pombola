@@ -593,6 +593,9 @@ ul.comments li img {
   width: 60px;
   height: 60px;
 }
+ul.comments li section {
+  clear: none;
+}
 ul.comments li .tools,
 ul.comments li .read-more-wrap {
   left: -999999px;
@@ -600,6 +603,11 @@ ul.comments li .read-more-wrap {
 ul.comments li:hover .tools,
 ul.comments li:hover .read-more-wrap, ul.comments li.hovered .tools, ul.comments li.hovered .read-more-wrap {
   left: auto;
+}
+
+.tab ul.comments li section,
+.tab ul.listing li section {
+  width: 580px;
 }
 
 ul.listing li img {
