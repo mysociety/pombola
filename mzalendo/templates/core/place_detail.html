@@ -78,9 +78,12 @@
             <div class="tab" id="related-people" data-tab-content-source-url="{% url place_related_person_tab slug=object.slug %}">
             </div>
 
+	    {% comment %}
+	    <!-- Not showing organisations for the moment as the list isn't very good. -->
             <h2 class="tab-nav" rel="#related-organisations"><a href="/">Related Organisations</a></h2>
             <div class="tab" id="related-organisations" data-tab-content-source-url="{% url place_related_organisation_tab slug=object.slug %}">
             </div>
+	    {% endcomment %}
 
             {% include 'comments/detail_page_comments.html' %}
         </div>
