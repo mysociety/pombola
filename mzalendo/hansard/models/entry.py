@@ -10,18 +10,16 @@ from hansard.models.base import HansardModelBase
 
 class EntryQuerySet(models.query.QuerySet):
     def monthly_appearance_counts(self):
-        """return an array of hasher for date ad counts for each month"""
+        """Return an list of dictionaries for dates and counts for each month"""
 
         # would prefer to do this as a single query but I can't seem to make the ORM do that.
 
-        dates = self.dates('sitting__start_date','month', 'DESC' )
+        dates = self.dates('sitting__start_date','month', 'DESC')
         counts = []
         
         for d in dates:
-            qs = self.filter(sitting__start_date__month=d.month, sitting__start_date__year=d.year )
-            counts.append(
-                dict( date=d, count=qs.count() )
-            )
+            qs = self.filter(sitting__start_date__month=d.month, sitting__start_date__year=d.year)
+            counts.append(dict(date=d, count=qs.count()))
 
         return counts
         

@@ -356,6 +356,8 @@ class Place(ModelBase, ScorecardMixin):
 
     objects = ManagerBase()
 
+    show_overall_score = False
+
     comments = generic.GenericRelation(Comment)
 
     @property
