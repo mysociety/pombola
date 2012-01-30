@@ -221,11 +221,16 @@ class ScorecardMixin(models.Model):
 
     scorecard_entries = generic.GenericRelation(Entry)
 
+    # Show an overall score for this Item.
+    # Set this to false in anything for which you only want the individual
+    # scores and no average.
+    show_overall_score = True
+
     def scorecard_overall(self):
-        return self.scorecard_entries.all().aggregate( models.Avg( 'score' ) )['score__avg']
+        return self.scorecard_entries.all().aggregate(models.Avg('score'))['score__avg']
 
     def scorecard_overall_as_word(self):
-        return Entry.score_to_word( self.scorecard_overall() )
+        return Entry.score_to_word(self.scorecard_overall())
         
     def has_scorecards(self):
         return self.scorecard_entries.exists()
