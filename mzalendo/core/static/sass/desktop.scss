@@ -658,8 +658,8 @@ ul#home-news-list {
   display:block;
   float:left;
   width:375px;
-  h3 {
-    color:$colour8;
+  h2 {
+    color: $colour8;
     font-size:18px;
     text-transform:uppercase;
   }
@@ -708,6 +708,61 @@ ul#home-news-list {
     @include inline-block;
   }
 }
+
+.featured-person {
+  color:$colour6;
+  margin:0.666em 0 2em 0;
+  background:$colour1 url('/static/images/avatar-200x200.jpg') 0px 0px no-repeat;
+  .featured-person-info {
+    margin-left:200px;
+    padding:10px;
+    background-color:$colour1;
+    .feature-nav {
+      float:right; 
+      display:block;
+      width:20px;
+      height:20px;
+      background-image:url(/static/images/feature_chevrons.png);
+      background-repeat: no-repeat;          
+      &.feature-prev {
+        background-position: 0 0; 
+        &:hover {
+          background-position:0 -20px;
+        }
+      }
+      &.feature-next {
+        background-position: -20px 0;
+        &:hover {
+          background-position:-20px -20px;
+        }
+      }
+    }
+  }
+  .rating {
+    margin:0.5em 0 0 0;
+    font-size:1.2em; 
+    min-height:24px;
+    background-position: right 0;
+    background-repeat: no-repeat;
+    &.bad {
+      background-image:url(/static/images/score-bad.png);
+    }
+    &.average {
+      background-image:url(/static/images/score-average.png);
+    }
+    &.good {
+      background-image:url(/static/images/score-good.png);
+    }
+  }
+  &.featured-person-placeholder {
+    text-align: center;
+    height: 250px;
+    background: $colour1 url(/static/images/logo-450-x-150.png) center center no-repeat;
+  }
+}
+
+/* =================================== */
+
 
 /* Login Page */
 #login-pagetitle {

@@ -739,7 +739,7 @@ ul#home-news-list li img {
   float: left;
   width: 375px;
 }
-#twitter h3 {
+#twitter h2 {
   color: gray;
   font-size: 18px;
   text-transform: uppercase;
@@ -795,6 +795,59 @@ ul#home-news-list li img {
   *display: inline;
 }
 
+.featured-person {
+  color: white;
+  margin: 0.666em 0 2em 0;
+  background: #009245 url("/static/images/avatar-200x200.jpg") 0px 0px no-repeat;
+}
+.featured-person .featured-person-info {
+  margin-left: 200px;
+  padding: 10px;
+  background-color: #009245;
+}
+.featured-person .featured-person-info .feature-nav {
+  float: right;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/static/images/feature_chevrons.png);
+  background-repeat: no-repeat;
+}
+.featured-person .featured-person-info .feature-nav.feature-prev {
+  background-position: 0 0;
+}
+.featured-person .featured-person-info .feature-nav.feature-prev:hover {
+  background-position: 0 -20px;
+}
+.featured-person .featured-person-info .feature-nav.feature-next {
+  background-position: -20px 0;
+}
+.featured-person .featured-person-info .feature-nav.feature-next:hover {
+  background-position: -20px -20px;
+}
+.featured-person .rating {
+  margin: 0.5em 0 0 0;
+  font-size: 1.2em;
+  min-height: 24px;
+  background-position: right 0;
+  background-repeat: no-repeat;
+}
+.featured-person .rating.bad {
+  background-image: url(/static/images/score-bad.png);
+}
+.featured-person .rating.average {
+  background-image: url(/static/images/score-average.png);
+}
+.featured-person .rating.good {
+  background-image: url(/static/images/score-good.png);
+}
+.featured-person.featured-person-placeholder {
+  text-align: center;
+  height: 250px;
+  background: #009245 url(/static/images/logo-450-x-150.png) center center no-repeat;
+}
+
+/* =================================== */
 /* Login Page */
 #login-pagetitle {
   display: block;

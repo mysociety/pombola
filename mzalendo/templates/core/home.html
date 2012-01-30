@@ -26,14 +26,13 @@
         </form>
     </div>
     <div class="home-right">
-        <div id="home-featured">
-            <img src="{{STATIC_URL}}images/ex-feat.jpg" width="510" height="240" />
-            <div class="caption">
-                <h4>Featured</h4>
-                <p>Lest we forget: Police involved with corruption in Niarobi</p>
-                <p class="meta">posted: 12 January 2012</p>
+        <h2>MP Ratings</h2>
+        {% if not  featured_mp %}
+            {% include 'core/person_feature.html' %}
+        {% else %}
+            <div class="featured-person featured-person-placeholder">
             </div>
-        </div>
+        {% endif %}
     </div>
 
     <div class="home-left">
@@ -47,14 +46,15 @@
     </div>
 
     <div class="home-right">
-        <h2>MP Ratings</h2>
+        <!--
         <div id="home-mpratings">
             <img src="{{STATIC_URL}}images/ex-face2.jpg" width="60" />
             <h3 class="scorecard-overall">Ahmed, Ahmed - why we rated him dangerous <span class="score-overall-bad"></span></h3>
         </div>
-
+        -->
+        
         <div id="twitter">
-            <h3>Twitter</h3>
+            <h2>Twitter</h2>
             
             <div class="twitter-feed" data-twitter-username="mzalendowatch">                
                 Loading tweets &hellip;
