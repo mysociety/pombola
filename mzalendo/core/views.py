@@ -1,4 +1,5 @@
 import re
+import random
 
 from django.db.models import Count
 from django.db.models import Q
@@ -16,7 +17,7 @@ def home(request):
     featured_person = None
     featured_people = models.Person.objects.filter(can_be_featured=True)
     if featured_people.exists():
-      featured_person = featured_people[0]
+      featured_person = random.choice(featured_people)
     return render_to_response(
         'core/home.html',
         {
