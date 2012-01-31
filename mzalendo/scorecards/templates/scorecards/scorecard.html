@@ -33,7 +33,7 @@
         <li>
             <article {% if entry.has_details %}class="has-details"{% endif %}>
                 <header>
-                    <h4>{{ entry.category.name }}<a style="vertical-align:super" href="/scorecard-faq#{{ entry.category.slug }}" title="what's {{ entry.category.name }}?">?</a></h4>
+                    <h4>{{ entry.category.name }}<a style="vertical-align:super" href="/info/scorecard-faq#{{ entry.category.slug }}" title="what's {{ entry.category.name }}?">?</a></h4>
                     <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>
                     <div class="details">
                         {% if entry.equivalent_remark %}
