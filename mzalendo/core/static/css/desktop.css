@@ -909,6 +909,11 @@ ul#home-news-list li img {
 .markdown h2, .markdown h3 {
   margin-top: 2em;
 }
+.markdown h4 {
+  margin-top: 2em;
+  padding-bottom: 0.2em;
+  border-bottom: 2px solid #dfdfdf;
+}
 
 /* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens
