@@ -27,7 +27,7 @@
     </div>
     <div class="home-right">
         <h2>MP Ratings</h2>
-        {% if not  featured_mp %}
+        {% if featured_person != None %}
             {% include 'core/person_feature.html' %}
         {% else %}
             <div class="featured-person featured-person-placeholder">

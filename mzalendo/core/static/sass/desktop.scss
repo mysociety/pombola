@@ -217,7 +217,6 @@ josh [at] supercooldesign.co.uk
         display:inline;
         padding:0;
         color:$colour8;
-        display:inline;
         background:none;
         text-decoration:none;
         font: {
@@ -821,6 +820,13 @@ ul#home-news-list {
   }
 }
 
+/* ============ markdown used in e.g., info pages ============ */
+
+.markdown {
+  h2, h3 {
+    margin-top:2em;
+  }
+}
 
 /* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens

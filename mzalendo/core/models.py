@@ -179,6 +179,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
     comments = generic.GenericRelation(Comment)
     
+    can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
+    
     def clean(self):
         # strip other_names and flatten multiple newlines
         self.other_names = re.sub(r"\n+", "\n", self.other_names).strip()
