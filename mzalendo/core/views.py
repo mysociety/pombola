@@ -13,10 +13,14 @@ from mzalendo.helpers import geocode
 
 def home(request):
     """Homepage"""
+    featured_person = None
+    featured_people = models.Person.objects.filter(can_be_featured=True)
+    if featured_people.exists():
+      featured_person = featured_people[0]
     return render_to_response(
         'core/home.html',
         {
-          'featured_person': models.Person.objects.filter(slug='ababu-namwamba')[0]
+          'featured_person': featured_person
         },
         context_instance=RequestContext(request)
     )
