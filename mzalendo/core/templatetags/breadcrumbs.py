@@ -38,6 +38,7 @@ def breadcrumbs(url):
                     (sub_link, this_url) = url_name_mappings[link]
                 else:
                     sub_link = re.sub('-', ' ', link).title()
+                    sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
                     this_url = "/".join(bread)
                 if not i == total:
                     tlink = '<li><a href="%s/" title="Breadcrumb link to %s">%s</a> %s</li>' % (this_url, sub_link, sub_link, separator)
