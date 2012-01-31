@@ -258,7 +258,6 @@ josh [at] supercooldesign.co.uk
   display: inline;
   padding: 0;
   color: gray;
-  display: inline;
   background: none;
   text-decoration: none;
   font-size: 12px;
@@ -904,6 +903,11 @@ ul#home-news-list li img {
 }
 #login .login-social {
   margin: 0;
+}
+
+/* ============ markdown used in e.g., info pages ============ */
+.markdown h2, .markdown h3 {
+  margin-top: 2em;
 }
 
 /* 5. MEDIA QUERIES
