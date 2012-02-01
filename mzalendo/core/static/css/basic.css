@@ -1327,6 +1327,58 @@ h3.scorecard-overall span.score-overall-bad {
   background-position: right -103px;
 }
 
+.pagination {
+  overflow: hidden;
+  margin: 10px 0;
+}
+.pagination a,
+.pagination span {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  padding: 6px 10px;
+  background: #F6F6F6;
+  text-decoration: none;
+  border: 2px solid #F6F6F6;
+}
+.pagination a,
+.pagination span {
+  *display: inline;
+}
+.pagination a:hover,
+.pagination span:hover {
+  background-color: #333333;
+  color: #ffffff;
+  border: 2px solid #333333;
+}
+.pagination a.prev,
+.pagination span.prev {
+  padding-left: 34px;
+  background-position: 5px -67px;
+  background-repeat: no-repeat;
+  background-image: url(../images/pagination.png);
+}
+.pagination a.next,
+.pagination span.next {
+  padding-right: 34px;
+  background-position: right 3px;
+  background-repeat: no-repeat;
+  background-image: url(../images/pagination.png);
+}
+.pagination .disabled {
+  display: none;
+}
+.pagination .current {
+  background: none;
+}
+.pagination .current:hover {
+  color: #444444;
+  background: none;
+  border: 2px solid #F6F6F6;
+}
+
 /* 5. PAGE SPECIFIC
 -------------------------------------------------------------- */
 /* HOME */
