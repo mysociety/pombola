@@ -23,6 +23,13 @@ urlpatterns = patterns('core.views',
 
     url(r'^organisation/all/', 'organisation_list', name='organisation_list'),
     
+    # featured person ajax load
+    url(
+        r'^person/featured/(?P<direction>(before|after))/(?P<current_slug>[-\w]+)',
+        'featured_person', 
+        name='featured_person'
+    ),
+    
     # Objects
     url(r'^person/(?P<slug>[-\w]+)/',       'person',       name='person'),
     url(r'^position/(?P<slug>[-\w]+)/',     'position',     name='position'),
@@ -58,7 +65,7 @@ urlpatterns = patterns('core.views',
         ),
         name="place_related_organisation_tab",        
     ),
-
+    
     # specials
     url(r'^parties', 'parties', name='parties'),
 

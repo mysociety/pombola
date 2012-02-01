@@ -16,11 +16,11 @@ def home(request):
     """Homepage"""
     featured_person = None
     current_slug = False
-    if request.GET.get('next_from'):
-        current_slug = request.GET.get('next_from')
-        want_previous = False
-    elif request.GET.get('prev_from'):
-        current_slug = request.GET.get('prev_from')
+    want_previous = False
+    if request.GET.get('after'):
+        current_slug = request.GET.get('after')
+    elif request.GET.get('before'):
+        current_slug = request.GET.get('before')
         want_previous = True
     if current_slug:
         featured_person = models.Person.objects.get_next_featured(current_slug, want_previous)
@@ -141,3 +141,16 @@ def parties(request):
         },
         context_instance = RequestContext( request ),
     )
+
+def featured_person(request, current_slug, direction):
+    """Show featured mp either before or after the current one"""
+    want_previous = direction == 'before'
+    featured_person = models.Person.objects.get_next_featured(current_slug, want_previous)
+    return render_to_response(
+        'core/person_feature.html',
+        {
+            'featured_person': featured_person,
+        },
+        context_instance = RequestContext( request ),
+    )
+

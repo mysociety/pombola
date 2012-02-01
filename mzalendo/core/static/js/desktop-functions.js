@@ -65,6 +65,26 @@ $(function(){
       hideShow($('span.details', $(this)), $(this));
     });
     
+    // featured-person prev and next clicks: for now, we only have this in one place, so use id
+    // broken out as a function so it can re-invent itself on load
+    function enableFeaturedPersonNav() {
+      $('.feature-nav', '#home-featured-person').click(
+        function(e){
+          e.preventDefault();
+          var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
+          if (m.length==3) { // wee sanity check: found direction and slug
+            $('#home-featured-person').load(
+              "person/featured/" + m[1] + '/' + m[2],
+              function() {
+                enableFeaturedPersonNav();
+              }
+            );
+          }
+        }
+      );
+    }
+    
+    enableFeaturedPersonNav();
     
     /*
      * enable dialog based feedback links

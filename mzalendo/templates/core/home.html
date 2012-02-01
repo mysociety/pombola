@@ -27,12 +27,13 @@
     </div>
     <div class="home-right">
         <h2>MP Ratings</h2>
-        {% if featured_person != None %}
-            {% include 'core/person_feature.html' %}
-        {% else %}
-            <div class="featured-person featured-person-placeholder">
-            </div>
-        {% endif %}
+        <div id="home-featured-person">
+            {% if featured_person != None %}
+                {% include 'core/person_feature.html' %}
+            {% else %}
+                <div class="featured-person featured-person-placeholder"></div>
+            {% endif %}
+        </div>
     </div>
 
     <div class="home-left">
