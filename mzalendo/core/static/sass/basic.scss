@@ -66,6 +66,7 @@ a {
   }
   a {
     text-decoration:none;
+    font-size:12px;
   }
 }
 h1 {
@@ -434,7 +435,6 @@ pre {
                   color:$colour6;
                   margin:10px 0;
                   padding:10px;
-                  text-align:center;
                   font-weight:bold;
                   clear:both;
                   @include border-radius(5px);
@@ -508,11 +508,11 @@ pre {
           font-size:11px;
           float:left;
           clear:left;
-          width:50px;
+          width:40px;
           margin-left:10px;
         }
         p {
-          padding-left:80px;
+          padding-left:45px;
         }
       }
     }
@@ -769,6 +769,47 @@ h3.scorecard-overall {
   }
 }
 
+
+.pagination {
+  overflow:hidden;
+  margin:10px 0;
+  a,
+  span {
+    @include inline-block;
+    padding:6px 10px;
+    background:#F6F6F6;
+    text-decoration:none;
+    border:2px solid #F6F6F6;
+    &:hover {
+      background-color:#333333;
+      color:#ffffff;
+      border:2px solid #333333;
+    }
+    &.prev {
+      padding-left:34px;
+      background-position:5px -67px;
+      background-repeat:no-repeat;
+      background-image:url(../images/pagination.png);
+    }
+    &.next {
+      padding-right:34px;
+      background-position:right 3px;
+      background-repeat:no-repeat;
+      background-image:url(../images/pagination.png);
+    }
+  }
+  .disabled {
+    display:none;
+  }
+  .current {
+    background:none;
+    &:hover {
+      color:#444444;
+      background:none;
+      border:2px solid #F6F6F6;
+    }
+  }
+}
 
 
 
