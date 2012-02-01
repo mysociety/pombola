@@ -3,8 +3,6 @@
 
 {% if object.project_set.count %}
     <div class="content_box">
-        <h3>CDF Projects</h3>
-
         <p>
             There are <a href="{% url project_in_place slug=object.slug %}">{{ object.project_set.count }} CDF projects</a> in {{ object.name }}.
             These are the most expensive:

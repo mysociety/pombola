@@ -86,8 +86,6 @@
 	    {% endcomment %}
 
             {% include 'comments/detail_page_comments.html' %}
-        </div>
-    </div>
 
 
 
@@ -182,9 +180,14 @@
             </div>
         {% endif %}
     {% endwith %}
-
-    {% include "projects/place_summary.html" %}
-
     {% endcomment %}
+
+            <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects</a></h2>
+            <div class="tab" id="cdf-projects">
+                {% include "projects/place_summary.html" %}
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}
