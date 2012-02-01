@@ -10,7 +10,7 @@
                 {% switch c.kind.slug %}
     
                     {% case 'phone' %}
-                        <span class="label">{{ c.kind.name }}:</span>
+                        <span class="label">Tel:</span>
                         <p><a href="tel:{{ c.value }}">{{ c.value }}</a></p>
                         
                     {% case 'facebook' %}
@@ -21,6 +21,10 @@
                         <span class="label">Link:</span>
                         <p><a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter</p>
                         
+                    {% case 'address' %}
+                        <span class="label">Post:</span>
+                        <p>{{ c.value|urlizetrunc:50 }}</p>
+
                     {% else %}
                         <span class="label">{{ c.kind.name }}:</span>
                         <p>{{ c.value|urlizetrunc:50 }}</p>
