@@ -182,12 +182,13 @@
     {% endwith %}
     {% endcomment %}
 
-            <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects</a></h2>
-            <div class="tab" id="cdf-projects">
-                {% include "projects/place_summary.html" %}
-            </div>
+            {% if object.is_constituency %}
+                <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects</a></h2>
+                    <div class="tab" id="cdf-projects">
+                        {% include "projects/place_summary.html" %}
+                    </div>
+            {% endif %}
         </div>
     </div>
-
 
 {% endblock %}

@@ -406,6 +406,9 @@ class Place(ModelBase, ScorecardMixin):
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.kind)
+
+    def is_constituency(self):
+        return self.kind.slug == 'constituency'
     
     def current_mp_position(self):
         """Return the current MP position, or None"""
