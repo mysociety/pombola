@@ -163,6 +163,12 @@ class PersonManager(ManagerBase):
     # featured MPs are returned in slug order: using this cos it's unique and easy to exclude current MP
     def get_next_featured(self, current_slug, want_previous=False):
         all_results = self.filter(can_be_featured=True).exclude(slug=current_slug)
+        if len(all_results) == 0: # special case: return the excluded person if they are the only one or nothing
+            all_results = self.filter(can_be_featured=True)
+            if all_results.exists():
+                return all_results[0]
+            else:
+                return None
         if want_previous:
             sort_order = '-slug'
             results = all_results.order_by(sort_order).filter(slug__lt=current_slug)[:1]

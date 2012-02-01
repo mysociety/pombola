@@ -6,7 +6,7 @@
     {% empty %}
         <img src="{{STATIC_URL}}images/avatar-200x200.jpg" />
     {% endthumbnail %}        
-    <div class="featured-person-info">   
+    <div class="featured-person-info">
         <a class="feature-nav feature-next" href="/?after={{ featured_person.slug }}"></a>
         <a class="feature-nav feature-prev" href="/?before={{ featured_person.slug }}"></a>
         <h2 style="color:#fff;text-transform:none;">{{ featured_person.name }}</h2>
