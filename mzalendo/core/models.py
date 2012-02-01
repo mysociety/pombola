@@ -134,7 +134,7 @@ class PersonQuerySet(models.query.GeoQuerySet):
     def is_mp(self, when=None):
         # FIXME - Don't like the look of this, rather a big subquery.
         return self.filter(position__in=Position.objects.all().current_mp_positions(when))
-
+        
 class PersonManager(ManagerBase):
     def get_query_set(self):
         return PersonQuerySet(self.model)
@@ -159,6 +159,25 @@ class PersonManager(ManagerBase):
             return results[0].object
         else:
             return None
+
+    def get_next_featured(self, current_slug, want_previous=False):
+        all_results = self.filter(can_be_featured=True).exclude(slug=current_slug)
+        if want_previous:
+            sort_order = '-slug'
+            results = all_results.order_by(sort_order).filter(slug__lt=current_slug)[:1]
+        else:
+            sort_order = 'slug'
+            results = all_results.order_by(sort_order).filter(slug__gt=current_slug)[:1]
+        if len(results) == 1:
+            return results[0]
+        else: # we're at the start/end of the list, wrap round to the other end
+            results = all_results.order_by(sort_order)[:1]
+            if len(results) == 1:
+                return results[0]
+            else:
+                return None
+
+
 
 class Person(ModelBase, HasImageMixin, ScorecardMixin):
     title = models.CharField(max_length=100, blank=True)
