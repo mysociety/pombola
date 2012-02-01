@@ -89,6 +89,10 @@ div.error {
   margin: 1em 0;
 }
 
+ul.ui-autocomplete li {
+  list-style: none;
+}
+
 body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-text-size-adjust: 100%;
@@ -832,7 +836,7 @@ pre {
 #page .small-container ul.scorecard li article header p.score-bad {
   background: url(../images/score-bad.png) right 0 no-repeat;
 }
-#page .small-container ul.scorecard li article header span.shout {
+#page .small-container ul.scorecard li article header .details span.shout {
   display: block;
   background: #d40000;
   color: white;
@@ -847,6 +851,26 @@ pre {
   -ms-border-radius: 5px;
   -khtml-border-radius: 5px;
   border-radius: 5px;
+}
+#page .small-container ul.scorecard li article header .details span.shout p {
+  font-size: 100%;
+  float: none;
+  padding: 4px;
+  margin: 0 auto;
+}
+#page .small-container ul.scorecard li article header .details span.shout-good {
+  background-color: #009245;
+}
+#page .small-container ul.scorecard li article header .details span.shout-average {
+  background-color: #f9a326;
+}
+#page .small-container ul.scorecard li article header .details span.shout-bad {
+  background-color: #d40000;
+}
+#page .small-container ul.scorecard li article header .details .source {
+  display: block;
+  padding-right: 1em;
+  text-align: right;
 }
 #page .profile-info .constituency-party h3 {
   margin: 0;

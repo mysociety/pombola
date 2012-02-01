@@ -1,0 +1,26 @@
+{% load thumbnail %}
+
+<ul class="listing">
+    {% for position in object.position_with_organisation_set.all %}
+        {% with organisation=position.organisation organisation_url=position.organisation.get_absolute_url %}
+            <li>
+                <a href="{{ organisation_url }}">
+                    {% thumbnail organisation.primary_image "90x90" as im %}
+                    <img src="{{ im.url }}" alt="{{ organisation.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                    {% empty %}
+                    <img src="{{STATIC_URL}}images/org-90x90.jpg" />
+                    {% endthumbnail %}
+                </a>
+            
+                <section>
+                    <h4><a href="{{ organisation_url }}">{{ organisation.name }}</a></h4>
+                    <p class="meta">{{ position.person.name }}: {{ position.title.name }}, {{ position.display_dates|safe }}</p>
+                    {% if organisation.kind.slug != 'unknown' %}
+                        <div class="kind">{{ organisation.kind.name }}</div>
+                    {% endif %}
+                    <div class="read-more-wrap"><a href="{{ organisation_url }}" class="read-more">read more</a></div>
+                </section>
+            </li>
+        {% endwith %}
+    {% endfor %}
+</ul>

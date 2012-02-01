@@ -11,7 +11,7 @@ sys.path.append(
     )
 )
 
-import setup_env
+
 
 import simplejson
 from pprint import pprint

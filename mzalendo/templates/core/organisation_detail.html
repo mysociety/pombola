@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load comments %}
+{% load thumbnail %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -8,13 +9,22 @@
     <div class="title-space">
         <h1>{{ object.name }}</h1>
 
-        <p>part of <a href="/">Parent Company</a></p>
+        {% comment %}
+            # Not possible in the database yet - but a nice idea.
+            <p>part of <a href="/">Parent Company</a></p>
+        {% endcomment %}
 
-        <span class="object-kind">{{ object.kind.name }}</span>
+        {% if object.kind.slug != 'unknown' %}
+            <span class="object-kind">{{ object.kind.name }}</span>
+        {% endif %}
     </div>
     
     <div class="profile-pic">
-        <img src="http://dummyimage.com/210x200">
+        {% thumbnail object.primary_image "200x200" as im %}
+        <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% empty %}
+        <img src="{{STATIC_URL}}images/org-200x200.jpg" />
+        {% endthumbnail %}        
     </div>
 
     <div class="social-and-tools">
@@ -28,227 +38,30 @@
         </ul>
     </div>
 
-    <div class="small-container">
-        <p>At the same note u ganged upwith ur kinsmen and violently grabbed the victory 4M (RAILA). an architect of post- election violence and even to worsen everything uv been appointed to head the finance docket. this is terrible! want to loot the gvt kit. these are deeds that need not to be condoned at all. instead of politicking launch campaigns countrywide and ask 4 forgiveness 4m the citicens.</p>
-    </div>
+    {# organisations do not have scorecards (yet) so the summary appears at the top rather than in a tab #}
+    {% if object.summary %}
+        <div class="small-container">
+            {{ object.summary }}
+        </div>
+    {% endif %}
 
     <div class="profile-info">
        
-        <h3>Contact Details</h3>
-        <ul class="vcard">        
-            <li class="address">
-                <span class="label">Address:</span>
-                <p>P.O. Box 58722 Nairobi, Kenya</p>
-            </li>
-            <li class="phone">
-                <span class="label">Phone:</span>
-                <p><a href="tel:0733 289501">0733 289501</a></p>
-            </li>
-        </ul>
+        {% include "core/contact_list.html" with contacts=object.contacts.all %}
+
     </div>
 
     <div class="large-container">
         <div class="tab-wrapper">
+
             <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
-            <div class="tab markdown" id="related-people">
-                <ul class="listing">
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                </ul>
+            <div class="tab" id="related-people" data-tab-content-source-url="{% url organisation_related_person_tab slug=object.slug %}">
             </div>
 
-            <h2 class="tab-nav" rel="#related-places"><a href="/">Related Places</a></h2>
-            <div class="tab markdown" id="related-places">
-                <ul class="listing">
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/place-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a place</a></h4>
-                            <p>Part of ‘the name of the parent place’</p>
-                            <p class="meta">If there’s a description of the link...</p>
-                            <div class="kind">Constituency</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/place-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a place</a></h4>
-                            <p>Part of ‘the name of the parent place’</p>
-                            <p class="meta">If there’s a description of the link...</p>
-                            <div class="kind">Division</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/place-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a place</a></h4>                            
-                            <p>Part of ‘the name of the parent place’</p>
-                            <p class="meta">If there’s a description of the link...</p>
-                            <div class="kind">Constituency</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                </ul>
-            </div>
 
-            <h2 class="tab-nav" rel="#related-organisations"><a href="/">Related Organisations</a></h2>
-            <div class="tab markdown" id="related-organisations">
-                <ul class="listing">
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                </ul>
-            </div>
 
             {% include 'comments/detail_page_comments.html' %}
         </div>
     </div>
 
-    {% comment %}
-    <h1>{{ object.name }}</h1>
-
-        {% if object.summary %}
-        <div class="summary markdown">
-            {{ object.summary }}
-        </div>
-    {% endif %}
-
-    {% include "core/contact_list.html" with contacts=object.contacts.all %}
-
-    
-    {% if object.place_set.all %}
-        <h2>Related places</h2>
-    
-        <ul>
-        {% for place in object.place_set.all %}
-            <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-
-
-
-    {% if positions %}
-        <h2>Related people</h2>
-    
-        <ul class="listing">
-        {% for position in positions %}
-            <li class="position">
-                <div class="thumb">
-                    <img src="http://dummyimage.com/60x60/ddd/888.png" />
-                </div>
-
-                <div class="name">
-                    <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>
-                </div>
-
-                {{ position.title.name }}
-
-                {% if object.place %}
-                    in <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>                
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    {% endcomment %}
 {% endblock %}

@@ -5,13 +5,11 @@
         <title>{% block title %}{% endblock %} :: Mzalendo</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0;">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
         <meta http-equiv="cleartype" content="on">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
         {% comment %}
-
-            FIXME - add this back once design is done
 
             The 'STATIC_GENERATION_NUMBER' is used to force the caches to fetch
             new content. To update manually change the value in settings.py.
@@ -31,28 +29,38 @@
             <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
         <![endif]-->
 
+        <script type="text/javascript" charset="utf-8">
+            window.mzalendo_settings = {
+                google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
+                facebook_app_id:           '{{ settings.FACEBOOK_APP_ID }}',
+                static_url:                '{{ STATIC_URL }}',
+                static_generation_number:  '{{ STATIC_GENERATION_NUMBER }}',
+                extra_js: [],
+            }
+
+            {% block extra_js_to_load %}
+                // no extra js added to be loaded
+            {% endblock %}
+
+        </script>
+        
+
         <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
+        <script src="{{ STATIC_URL }}js/loader.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
 
         <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
         
-        {% block map_related_headers %}
-        <script type="text/javascript">
-          function initialize() {
-            /* no-op */
-            return true;
-          }
-        </script>
-        {% endblock %}
     </head>
-    <body onload="initialize()">
+    <body>
         {% include 'staging_header.html' %}
 
         <header id="site-header">
             <div class="wrapper">
                 <a href="{% url home %}" id="logo">Mzalendo</a>
                 <form action="{% url core_search %}" method="get" id="search">
-                    <input id="main_search_box" type="text" name="q" placeholder="search&hellip;" />
+                    <input class="search-autocomplete-name" type="text" name="q" placeholder="search&hellip;" />
                     <button type="submit">Submit</button>
                 </form>
                 <menu id="site-user-tools">
@@ -77,8 +85,12 @@
                     <li><a href="{% url person_list %}">Politicians</a></li>
                     <li><a href="{% url hansard:index %}">Parliament</a></li>
                     <li><a href="{% url place_list %}">Places</a></li>
-                    <li><a href="#">2012</a></li>
-                    <li><a href="#">Lest We Forget</a></li>
+                    {% comment %}
+                        Not needed now - but will add these back in later
+
+                        <li><a href="#">2012</a></li>
+                        <li><a href="#">Lest We Forget</a></li>
+                    {% endcomment %}
                     <li><a href="http://www.mzalendo.com/">Blog</a></li>
                     <li><a href="{% url info_page slug='about' %}">About</a></li>
                 </ul>
@@ -86,6 +98,8 @@
         </div>
 
 
+        {% comment %}
+        <!-- This is commented out because it is not clear how a breadcrumb trail should be done - see issue #225 -->
         <div id="breadcrumb">
             <nav class="wrapper">
                 <ul>
@@ -95,6 +109,7 @@
                 </ul>
             </nav>
         </div>
+        {% endcomment %}
 
         <div id="page">
             <div class="page-wrapper wrapper">
@@ -105,7 +120,7 @@
 
         <footer id="site-footer">
             <div class="wrapper">
-                <p>By MySociety</p>
+                <p>By <a href="http://www.mysociety.org/">mySociety</a></p>
 
                 <ul class="nav">
                     <li><a href="{% url person_list %}">people</a></li>
@@ -119,6 +134,7 @@
                     <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
                 </ul>
                 
+                {% if request.user.is_staff %}
                 <ul class="utilities">
                     <li><a href="https://github.com/mysociety/mzalendo/issues">issues</a></li>
                     <li><a href="https://github.com/mysociety/mzalendo/wiki">wiki</a></li>
@@ -126,67 +142,15 @@
                     {% if object %}
                         <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
                     {% endif %}
-                </ul>
 
-                {% if settings.STAGING %}
-                <ul class="utilities">
-                    <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+                    {% if settings.STAGING %}
+                        <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+                    {% endif %}
                 </ul>
                 {% endif %}
+
             </div>
         </footer>
-        <script type="text/javascript">
-            /*
-             * Test for mobile / desktop and load appropriate libs/scripts
-             */
-            // this is not yet ideal... it reacts a bit slow if the cdn fails
-
-            //define global vars
-            window.mzalendo_settings = {
-                analytics_id : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
-                facebook_app_id: '{{ settings.FACEBOOK_APP_ID }}'
-            }
-
-            var post_jquery_desktop_load = [
-                '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
-                '{{ STATIC_URL }}js/libs/jquery.form-v2.94.js', // TODO - only load when needed for feedback form
-                '{{ STATIC_URL }}js/desktop-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}'
-            ];
-
-            Modernizr.load([
-                {
-                    test : Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)'),
-                    yep : ['{{ STATIC_URL }}js/libs/zepto-0.8.min.js', '{{ STATIC_URL }}js/mobile-functions.js?{{ settings.STATIC_GENERATION_NUMBER }}'],
-                    nope : '//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js',
-                    complete: function () {
-                        // only run this if mq failed - e.g. desktop or no mq support (IE)
-                        if(Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)') === false) {
-                            // test for jquery
-                            if ( !window.jQuery ) {
-                                // not downloaded from CDN, so get local
-                                Modernizr.load([
-                                    {
-                                        load : '{{ STATIC_URL }}js/libs/jquery-1.7.0.min.js',
-                                        complete : function () {
-                                            // once local has been fetched, check for jQuery object again and load static libs and functions if there
-                                            if ( window.jQuery ) {
-                                                Modernizr.load( post_jquery_desktop_load );
-                                            }
-                                        }
-                                    }
-                                ]);
-                            }else{
-                                // if jQuery object is there, load in the rest of the static libs and functions
-                                Modernizr.load( post_jquery_desktop_load );
-                            }
-                        }
-                    }
-                },
-                {
-                    load: ['//platform.twitter.com/widgets.js', '{{ STATIC_URL }}js/analytics.js', '{{ STATIC_URL }}js/fb-like.js']
-                }
-            ]);
-        </script>
         <div id="fb-root"></div>
     </body>
 </html>

@@ -36,7 +36,9 @@
     <div class="profile-pic">
         {% thumbnail object.primary_image "200x200" as im %}
         <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-        {% endthumbnail %}
+        {% empty %}
+        <img src="{{STATIC_URL}}images/avatar-200x200.jpg" />
+        {% endthumbnail %}        
     </div>
 
     <div class="social-and-tools">
@@ -51,55 +53,9 @@
     </div>
 
     <div class="small-container">
-
-        {% if object.has_scorecards %}
-        <h2>Scorecard</h2>
+                
+        {% include 'scorecards/scorecard.html' %}
         
-        {% comment %}
-
-            The *_as_word functions return one of 'good', 'neutral' or 'bad'.
-
-            The entry.category object also has fields 'synopsis' and
-            'description' which could be used to provide more information to the
-            user. Synopsis could be shown when the entry is expanded, and
-            description shown on another page or in a popup/dialog if even more
-            info is needed.
-            
-            There is an entry.extended_remark that contains more details on the
-            entry. These details should not be needed in a summary view.
-
-            The shout span might need styling appropriately for good, neutral
-            and bad. It could well be that we want to shout out some positive
-            achievement.
-
-            Some scorecard entries may have source_url and source_name. These
-            are links to where the data came from - some partners have requested
-            this be shown.
-
-        {% endcomment %}
-        
-        <h3 class="scorecard-overall">Overall Rating <span class="score-overall-{{ object.scorecard_overall_as_word }}">{{ object.scorecard_overall_as_word|capfirst }}</span></h3>
-        <ul class="scorecard">
-            {% for entry in object.scorecard_entries.all %}
-            <li>
-                <article>
-                    <header>
-                        <h4>{{ entry.category.name }}</h4>
-                        <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>
-                        {% if entry.equivalent_remark %}
-                        <span class="shout shout-{{ entry.score_as_word }}">{{ entry.equivalent_remark }}</span>
-                        {% endif %}
-
-                        {% if entry.source_url %}
-                            <a href="{{ entry.source_url}}">{% firstof entry.source_name 'source' %}</a>
-                        {% endif %}
-                        
-                    </header>
-                </article>
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
 
     </div>
 
@@ -171,7 +127,7 @@
                 {% if hansard_count %}
                 <h2 class="tab-nav" rel="#appearances">Appearances ({{ hansard_count }})</h2>
     
-                <div class="tab" id="appearances" data-comment-source-url="{% url hansard:person_summary slug=object.slug %}">
+                <div class="tab" id="appearances" data-tab-content-source-url="{% url hansard:person_summary slug=object.slug %}">
                     Loading...
                 </div>
                 {% endif %}

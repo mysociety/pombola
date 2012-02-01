@@ -1,5 +1,3 @@
-// load all other jquery related resources
-Modernizr.load(['//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js','//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css']);
 
 // Show a tab and hide the others. Load content from remote source if needed.
 function activateSimpleTab( $heading_element ) {
@@ -23,9 +21,9 @@ function activateSimpleTab( $heading_element ) {
   $heading_element.addClass('active');
   $tab_content.addClass('open').show();
 
-  // load content using ajax if the div has an data-comment-source-url
+  // load content using ajax if the div has an data-tab-content-source-url
   // TODO: use a cleaner way to specify this - probably best to have a global object and tell it that certain tabs have special opening behaviour
-  var content_url = $tab_content.attr('data-comment-source-url');
+  var content_url = $tab_content.attr('data-tab-content-source-url');
   if ( content_url ) {
       $tab_content.load(content_url);
   }
@@ -53,7 +51,7 @@ $(function(){
   /*
    * auto complete
    */
-    $('#main_search_box')
+    $('input.search-autocomplete-name')
     .autocomplete({
         source: "/search/autocomplete/",
         minLength: 2,
@@ -115,30 +113,27 @@ $(function(){
     var rel = $(this).attr('rel');
     var txt = $(this).text();
     var href = $('a', this).attr('href');
-    var newElem = '<li rel="'+rel+'"><a href="'+href+'">'+txt+'</a></li>';
+    var newElem = '<li rel="'+rel+'" class="tab-nav-heading"><a href="'+href+'">'+txt+'</a></li>';
     $('#tab-nav ul').append(newElem);
   }).remove();
 
-  if(window.location.hash !== '')
-  {
-    // get hash from url and activate it
+
+  // store the matched element from the hash here.
+  var matched_element = []
+
+  // If there is a hash try to load from that
+  if(window.location.hash !== '') {
     var hash = window.location.hash;
-    $heading_element = $('li[rel='+hash+']');
-    activateSimpleTab($heading_element);
+    matched_element = $('li[rel='+hash+']');
   }
-  else
-  {
-    //make initial tab active and hide other tabs
-    var simpleTabActive = "";
-    if(!$('#tab-nav ul li').hasClass('active')){
-      simpleTabActive = $('#tab-nav ul li:first-child').attr('rel');
-      $('#tab-nav ul li:first-child').addClass('active');
-    }else{
-      simpleTabActive = $('#tab-nav ul li.active').attr('rel');
-    }
-    $(simpleTabActive).addClass('open');
-    $('.tab').not('.open').hide();
+
+  // If there was no hash, or it didn't match, use the first one
+  if ( ! matched_element.length ) {
+    matched_element = $('li.tab-nav-heading').first();
   }
+    
+  // activate the tab
+  activateSimpleTab(matched_element);
 
   //for clicks
   $("#tab-nav ul li a").click(function(e){
@@ -162,7 +157,7 @@ $(function(){
   $('div.details').hide();
 
   // hide/show details
-  $('ul.scorecard article').live('click', function(){
+  $('ul.scorecard article.has-data').live('click', function(){
     hideShow($('div.details', $(this)), $(this));
   });
 

@@ -51,7 +51,7 @@ class Alias(HansardModelBase):
     def __unicode__(self):
         string = self.alias
         if self.person:
-            string += " (aka %s)" % self.person.name()
+            string += " (aka %s)" % self.person.name
         return string
     
     class Meta:

@@ -4,7 +4,6 @@ import os
 import shutil
 import sys
 import logging
-import setup_env
 import yaml
 
 # We need to work out if we are in test mode so that the various directories can
@@ -200,8 +199,6 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django_bcrypt',
     
-    'core',
-
     'registration_defaults',
     'registration',
     
@@ -224,6 +221,7 @@ INSTALLED_APPS = (
     'helpers',
     'info',
     'tasks',
+    'core',
     'hansard',
     'feedback',
     'projects',
@@ -233,6 +231,7 @@ INSTALLED_APPS = (
 
     'place_data', # TODO - remove entry and app once migrations have run on all servers
     
+
 )
 
 # A sample logging configuration. The only tangible logging

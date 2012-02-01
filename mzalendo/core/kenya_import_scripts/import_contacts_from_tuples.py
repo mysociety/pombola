@@ -10,7 +10,7 @@ sys.path.append(
     )
 )
 
-import setup_env
+
 
 from pprint import pprint
 from core import models
@@ -41,7 +41,7 @@ for row in mp_contacts.entries:
     
     mp = matches[0]
     
-    # print "%s -> %s" % ( name, mp.name() )
+    # print "%s -> %s" % ( name, mp.name )
 
 
     content_type = ContentType.objects.get_for_model(mp)

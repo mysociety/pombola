@@ -1,10 +1,11 @@
-{% extends 'base_with_maps.html' %}
+{% extends 'base.html' %}
 {% load comments %}
+{% load thumbnail %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
-    
+
     <div class="title-space">
         <p class="object-kind">{{ object.kind.name }}</p>
         <h1>{{ object.name }}</h1>
@@ -16,10 +17,21 @@
     
     <div class="profile-pic">
         {% if object.mapit_id %}
+
+            <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+
             <div id="map_canvas"></div>
             <script type="text/javascript" charset="utf-8">
                 add_kml_to_map( '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001' );            
             </script>
+        {% else %}
+            <div class="profile-pic">
+                {% thumbnail object.primary_image "200x200" as im %}
+                <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                {% empty %}
+                <img src="{{STATIC_URL}}images/place-200x200.jpg" />
+                {% endthumbnail %}        
+            </div>        
         {% endif %}
     </div>
 
@@ -35,212 +47,39 @@
     </div>
 
     <div class="small-container">
-        <h3 class="scorecard-overall">Overall Rating <span class="score-overall-average">Average</span></h3>
-        <ul class="scorecard">
-            <li>
-                <article>
-                    <header>
-                        <h4>CFD Performance</h4>
-                        <p class="score-bad">An unacceptable amount of money is missing or unaccounted for in this constituency.</p>
-                    </header>
-                </article>
-            </li>
-            <li>
-                <article>
-                    <header>
-                        <h4>Education Performance</h4>
-                        <p class="score-average">The improvement in education performance in this constituency is about average.</p>
-                    </header>
-                </article>
-            </li>
-            <li>
-                <article>
-                    <header>
-                        <h4>Education Performance</h4>
-                        <p class="score-average">The improvement in education performance in this constituency is about average.</p>
-                    </header>
-                </article>
-            </li>
-        </ul>
+        {% include 'scorecards/scorecard.html' %}
     </div>
 
     <div class="profile-info">
+        {% with mp_pos=object.current_mp_position %}
+        {% if mp_pos %}
         <div class="constituency-party">
             <h3>Key figure</h3>
             <ul>
-                <li><a href="/">Ahmed Ahmed <span>[mp]</span></a></li>
+                <li><a href="{{ mp_pos.person.get_absolute_url }}">{{ mp_pos.person.name }} <span>[mp]</span></a></li>
             </ul>
         </div>
+        {% endif %}
+        {% endwith %}
         
-        <h3>Contact Details</h3>
-        <ul class="vcard">        
-            <li class="address">
-                <span class="label">Address:</span>
-                <p>P.O. Box 58722 Nairobi, Kenya</p>
-            </li>
-            <li class="phone">
-                <span class="label">Phone:</span>
-                <p><a href="tel:0733 289501">0733 289501</a></p>
-            </li>
-        </ul>
     </div>
 
     <div class="large-container">
         <div class="tab-wrapper">
-            <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
-            <div class="tab markdown" id="overview">
-                <p>I feel it is important to inform u that, ur political popularity is diminishing day by day on the grounds that, currently ur making some political choices which are not popular, for instance in the last general elections u withdrew 4m the presidential race only 2 back up ur kinsman(kibaki), at the same note u ganged upwith ur kinsmen and violently grabbed the victory 4M (RAILA). an architect of post- election violence and even to worsen everything uv been appointed to head the finance docket. this is terrible! want to loot the gvt kit. these are deeds that need not to be condoned at all. instead of politicking launch campaigns countrywide and ask 4 forgiveness 4m the citicens.</p>
-                <p>At the same note u ganged upwith ur kinsmen and violently grabbed the victory 4M (RAILA). an architect of post- election violence and even to worsen everything uv been appointed to head the finance docket. this is terrible! want to loot the gvt kit. these are deeds that need not to be condoned at all. instead of politicking launch campaigns countrywide and ask 4 forgiveness 4m the citicens.</p>
-            </div>
+
+            {% if object.summary %}
+                <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
+                <div class="tab markdown" id="overview">
+                    {{ object.summary }}
+                </div>
+            {% endif %}
 
             <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
-            <div class="tab markdown" id="related-people">
-                <ul class="listing">
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/avatar-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a related MP</a></h4>
-                            <p>Leader of the something somethign party</p>
-                            <p class="meta">since 1987</p>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                </ul>
-            </div>
-
-            <h2 class="tab-nav" rel="#related-places"><a href="/">Related Places</a></h2>
-            <div class="tab markdown" id="related-places">
-                <ul class="listing">
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/place-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a place</a></h4>
-                            <p>Part of ‘the name of the parent place’</p>
-                            <p class="meta">If there’s a description of the link...</p>
-                            <div class="kind">Constituency</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/place-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a place</a></h4>
-                            <p>Part of ‘the name of the parent place’</p>
-                            <p class="meta">If there’s a description of the link...</p>
-                            <div class="kind">Division</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/place-90x90.jpg" />
-                        </a>
-                    
-                        <section>
-                            <h4><a href="/">The name of a place</a></h4>                            
-                            <p>Part of ‘the name of the parent place’</p>
-                            <p class="meta">If there’s a description of the link...</p>
-                            <div class="kind">Constituency</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                </ul>
+            <div class="tab" id="related-people" data-tab-content-source-url="{% url place_related_person_tab slug=object.slug %}">
             </div>
 
             <h2 class="tab-nav" rel="#related-organisations"><a href="/">Related Organisations</a></h2>
-            <div class="tab markdown" id="related-organisations">
-                <ul class="listing">
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-
-                    <li>
-                        <a href="/">
-                            <img src="{{STATIC_URL}}images/org-90x90.jpg" />
-                        </a>
-
-                        <section>
-                            <h4><a href="/">The name of an organisation</a></h4>
-                            <p>If there’s a parent name</p>
-                            <p class="meta">related positions</p>
-                            <div class="kind">Educational</div>
-                            <div class="read-more-wrap"><a href="/" class="read-more">read more</a></div>
-                        </section>
-                    </li>
-                </ul>
+            <div class="tab" id="related-organisations" data-tab-content-source-url="{% url place_related_organisation_tab slug=object.slug %}">
             </div>
 
             {% include 'comments/detail_page_comments.html' %}

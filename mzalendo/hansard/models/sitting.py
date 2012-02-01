@@ -9,17 +9,16 @@ from hansard.models import Source, Venue
 
 
 class Sitting(HansardModelBase):
-
     source = models.ForeignKey(Source)
-    venue  = models.ForeignKey(Venue)
+    venue = models.ForeignKey(Venue)
     
     start_date = models.DateField()
-    start_time = models.TimeField( blank=True, null=True )
-    end_date   = models.DateField( blank=True, null=True )
-    end_time   = models.TimeField( blank=True, null=True )
+    start_time = models.TimeField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    end_time = models.TimeField(blank=True, null=True)
     
     def __unicode__(self):
-        return self.name()
+        return self.name
 
     def get_absolute_url(self):
         """Create a url from the venue slug and the start time"""
@@ -31,14 +30,14 @@ class Sitting(HansardModelBase):
         url = reverse(
             'hansard:sitting_view',
             kwargs={
-                'venue_slug':      self.venue.slug,
+                'venue_slug': self.venue.slug,
                 'start_date_and_time': start_date_and_time,
             },
         )
 
         return url
 
-
+    @property
     def name(self):
         """Format the times nicely to give a name"""
 
@@ -67,14 +66,14 @@ class Sitting(HansardModelBase):
                 ret += ": %s" % self.start_time
             if self.end_time:
                 ret += " to %s" % self.end_time
-        
+
         # strip off trailing :00 seconds from times
         ret = re.sub( r':00(\s|$)', r'\1', ret )
-                
+
         return self.venue.name + ' ' + ret
 
     class Meta:
         ordering = ['-start_date']
         app_label = 'hansard'
-        
+
 

@@ -322,7 +322,7 @@ josh [at] supercooldesign.co.uk
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  height: 25px;
+  height: 32px;
   padding: 5px 0 0 130px;
   margin: -5px 0 0 24px;
   background: url(../images/d-smiley-sprite.png) 0 0 no-repeat;
@@ -351,19 +351,21 @@ josh [at] supercooldesign.co.uk
   margin: 0;
   border: 0;
 }
-#page .small-container ul.scorecard li article:hover {
+#page .small-container ul.scorecard li article.has-data:hover {
   cursor: pointer;
   background-color: #e6e6e6;
 }
-#page .small-container ul.scorecard li article.active {
+#page .small-container ul.scorecard li article.has-data.active {
   background-color: #e6e6e6;
 }
-#page .small-container ul.scorecard li article.active header {
+#page .small-container ul.scorecard li article.has-data.active header {
   background: url(../images/arrow-up.png) right 0 no-repeat;
+}
+#page .small-container ul.scorecard li article.has-data header {
+  background: url(../images/arrow-down.png) right 0 no-repeat;
 }
 #page .small-container ul.scorecard li article header {
   overflow: hidden;
-  background: url(../images/arrow-down.png) right 0 no-repeat;
 }
 #page .small-container ul.scorecard li article header h4 {
   float: left;
@@ -386,7 +388,8 @@ josh [at] supercooldesign.co.uk
   background: url(../images/score-bad.png) left 0 no-repeat;
 }
 #page .small-container ul.scorecard li article div.details {
-  float: left;
+  margin: 0px 0px 8px 200px;
+  /* 200 from 120 (width of head) + 80 (padding+margin of text) */
   display: block;
   margin-top: 10px;
 }

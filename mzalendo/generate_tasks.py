@@ -5,7 +5,7 @@ Go through all models that are task related and check that all tasks have been
 generated.
 """
 
-import setup_env
+
 from core import models
 from tasks.models import Task
 

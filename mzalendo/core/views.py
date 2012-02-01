@@ -40,7 +40,6 @@ def organisation_list(request):
     )
 
 def person(request, slug):
-    """"""
     return object_detail(
         request,
         queryset = models.Person.objects,
@@ -49,7 +48,6 @@ def person(request, slug):
 
 
 def place(request, slug):
-    """"""
     return object_detail(
         request,
         queryset = models.Place.objects,
@@ -57,7 +55,6 @@ def place(request, slug):
     )
 
 def place_kind(request, slug):
-    """"""
     print slug
     place_kind = get_object_or_404(
         models.PlaceKind,
@@ -72,8 +69,6 @@ def place_kind(request, slug):
 
 
 def position(request, slug):
-    """"""
-    
     title = get_object_or_404(
         models.PositionTitle,
         slug=slug
@@ -89,8 +84,6 @@ def position(request, slug):
 
 
 def organisation(request, slug):
-    """"""
-
     org = get_object_or_404(
         models.Organisation,
         slug=slug
@@ -107,8 +100,6 @@ def organisation(request, slug):
 
 
 def organisation_kind(request, slug):
-    """"""
-    
     org_kind = get_object_or_404(
         models.OrganisationKind,
         slug=slug

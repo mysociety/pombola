@@ -2,13 +2,24 @@
 
 {% block title %}Home{% endblock %}
 
+{% block extra_js_to_load %}
+    mzalendo_settings.extra_js.push( 'js/feeds.js' );
+{% endblock %}
+
 {% block content %}
     <div class="home-left">
-        <h2 id="home-intro">Mzalendo is a volunteer run project whose mission is to ‘keep an eye on the Kenyan Parliament’. Mzalendo is a volunteer run project whose mission is to ‘keep an eye on.</h2>
+        <h2 id="home-intro">
+            Mzalendo (‘Patriot’ in Swahili) is a non-partisan project started in
+            2003 whose mission is to ‘keep an eye on the Kenyan parliament.’
+            Mzalendo site seeks to promote greater public voice and enhance
+            public participation in politics by providing relevant information
+            about the National Assembly’s activities, MPs, and aspirants ahead
+            of the 2012 elections.
+        </h2>
 
         <form action="{% url core_search %}" id="home-search">
             <label for="core-search">Search people, places and organisations</label>
-            <input id="core-search" type="text" name="q" value="" placeholder="e.g. Nairobi, Uhuru Kenyatta">
+            <input class="search-autocomplete-name" id="core-search" type="text" name="q" value="" placeholder="e.g. Nairobi, Uhuru Kenyatta">
             <button type="submit">Search</button>
             <a href="#">Advanced search</a>
         </form>
@@ -25,24 +36,19 @@
     </div>
 
     <div class="home-left">
-        <h2>Latest News</h2>
-        <ul id="home-news-list">
+        
+        <script id="home-news-list-item-template" type="text/x-jquery-tmpl">
             <li>
-                <img src="{{STATIC_URL}}images/ex-news1.jpg" width="90" />
-                <h3><a href="/">Harambees and Elections</a></h3>
+                <h3><a href="{$link}">{$title}</a></h3>
                 <p class="meta">12 January 2012</p>
                 <p>Talking about the “harambee ban” on political aspirants Isaack Hassan, the Chairperson of the Independent Electoral Boundaries...</p>
             </li>
+        </script>
+        
+        <h2>Latest News</h2>
+        <ul id="home-news-list">
             <li>
-                <h3><a href="/">On the Electoral Opinion Bill</a></h3>
-                <p class="meta">12 January 2012</p>
-                <p>Is the Electoral Opinion Bill overkill or much needed? Though no one can argue about the need for polls to be conducted in a scientific and transparent...</p>
-            </li>
-            <li>
-                <img src="{{STATIC_URL}}images/ex-news2.jpg" width="90" />
-                <h3><a href="/">Mzalendo Vox Pop: A doctor’s perspective on the strike / linda afya</a></h3>
-                <p class="meta">12 January 2012</p>
-                <p>The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick</p>
+                Loading news&hellip;
             </li>
         </ul>
     </div>
@@ -56,11 +62,10 @@
 
         <div id="twitter">
             <h3>Twitter</h3>
-            <div class="tw-wrap">
-                <p>The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.</p>
-                <p class="meta">posted: 4 hours ago</p>
+            
+            <div class="twitter-feed" data-twitter-username="mzalendowatch">                
+                Loading tweets &hellip;
             </div>
-            <span class="nub"></span>
         </div>
 
         <div class="social-and-tools">

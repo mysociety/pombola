@@ -10,7 +10,7 @@ sys.path.append(
     ),
 ),
 
-import setup_env
+
 
 from pprint import pprint
 from django.template.defaultfilters import slugify
@@ -262,7 +262,7 @@ for from_to in constituency_renames:
 #     mps = [ i.person for i in place.position_set.filter( title__slug='mp' )]
 # 
 #     for mp in mps:
-#         print ( constituency, mp.id, mp.name(), first, middle, last )
+#         print ( constituency, mp.id, mp.name, first, middle, last )
 
 
 renames = [
@@ -492,7 +492,7 @@ for obj in models.Place.objects.all():
 
 
 for obj in models.Person.objects.all():
-    slug = slugify( obj.name() )
+    slug = slugify( obj.name )
     if slug != obj.slug:
         print "changing person slug from '%s' to '%s'" % (obj.slug, slug)
         obj.slug = slug
