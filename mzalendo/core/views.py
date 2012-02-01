@@ -15,13 +15,23 @@ from mzalendo.helpers import geocode
 def home(request):
     """Homepage"""
     featured_person = None
-    featured_people = models.Person.objects.filter(can_be_featured=True)
-    if featured_people.exists():
-      featured_person = random.choice(featured_people)
+    current_slug = False
+    if request.GET.get('next_from'):
+        current_slug = request.GET.get('next_from')
+        want_previous = False
+    elif request.GET.get('prev_from'):
+        current_slug = request.GET.get('prev_from')
+        want_previous = True
+    if current_slug:
+        featured_person = models.Person.objects.get_next_featured(current_slug, want_previous)
+    if featured_person == None:
+        featured_people = models.Person.objects.filter(can_be_featured=True)
+        if featured_people.exists():
+            featured_person = random.choice(featured_people)
     return render_to_response(
         'core/home.html',
         {
-          'featured_person': featured_person
+          'featured_person': featured_person,
         },
         context_instance=RequestContext(request)
     )

@@ -373,6 +373,7 @@ josh [at] supercooldesign.co.uk
 #page .small-container ul.scorecard li article header h4 {
   float: left;
   width: 120px;
+  line-height: 1em;
 }
 #page .small-container ul.scorecard li article header p {
   float: left;
@@ -910,9 +911,9 @@ ul#home-news-list li img {
   margin-top: 2em;
 }
 .markdown h4 {
-  margin-top: 2em;
+  margin: 2em 0 0.333em 0;
   padding-bottom: 0.2em;
-  border-bottom: 2px solid #dfdfdf;
+  border-bottom: 2px solid #e6e6e6;
 }
 
 /* 5. MEDIA QUERIES
