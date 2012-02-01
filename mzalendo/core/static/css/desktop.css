@@ -373,6 +373,7 @@ josh [at] supercooldesign.co.uk
 #page .small-container ul.scorecard li article header h4 {
   float: left;
   width: 120px;
+  line-height: 1em;
 }
 #page .small-container ul.scorecard li article header p {
   float: left;
