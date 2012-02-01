@@ -1,0 +1,27 @@
+{% load thumbnail %}
+
+<div class="featured-person">
+    {% thumbnail featured_person.primary_image "200x200" as im %}
+        <img src="{{ im.url }}" alt="{{ featured_person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+    {% empty %}
+        <img src="{{STATIC_URL}}images/avatar-200x200.jpg" />
+    {% endthumbnail %}        
+    <div class="featured-person-info">
+        <a class="feature-nav feature-next" href="/?after={{ featured_person.slug }}"></a>
+        <a class="feature-nav feature-prev" href="/?before={{ featured_person.slug }}"></a>
+        <h2 style="color:#fff;text-transform:none;">{{ featured_person.name }}</h2>
+        <div class="feature-person-title" style="margin:0.5em 0;font-style:italic;">{{ featured_person.title }}</div>
+        <p class="" style="overflow:hidden;text-overflow:ellipsis; height: 120px;white-space: normal;margin:0;">
+            {{ featured_person.summary }}
+        </p>
+        <div class="rating {{ featured_person.scorecard_overall_as_word }}">
+            Mzalendo Rating: 
+            {% if featured_person.has_scorecards %}
+                <span style="font-weight:bold;">{{ featured_person.scorecard_overall_as_word|capfirst }}</span>
+            {% else %}
+                None
+            {% endif %}
+        </div>
+    </div>
+</div>
+

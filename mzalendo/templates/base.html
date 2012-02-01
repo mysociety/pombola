@@ -1,3 +1,4 @@
+{% load breadcrumbs %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -98,18 +99,13 @@
         </div>
 
 
-        {% comment %}
-        <!-- This is commented out because it is not clear how a breadcrumb trail should be done - see issue #225 -->
         <div id="breadcrumb">
             <nav class="wrapper">
                 <ul>
-                    <li><a href="/">Home</a> &raquo;</li>
-                    <li><a href="/">Find your MP</a> &raquo;</li>
-                    <li class="page-title">MP Profile</li>
+                    {{ request.get_full_path|breadcrumbs }}
                 </ul>
             </nav>
         </div>
-        {% endcomment %}
 
         <div id="page">
             <div class="page-wrapper wrapper">

@@ -124,13 +124,16 @@
 
             <!-- Hansard appearances -->
             {% with hansard_count=object.hansard_entries.count %}
-                {% if hansard_count %}
-                <h2 class="tab-nav" rel="#appearances">Appearances ({{ hansard_count }})</h2>
-    
-                <div class="tab" id="appearances" data-tab-content-source-url="{% url hansard:person_summary slug=object.slug %}">
-                    Loading...
-                </div>
-                {% endif %}
+                <h2 class="tab-nav" rel="#appearances"><a href='/'>Appearances ({{ hansard_count }})</a></h2>
+                {% if hansard_count %}    
+                    <div class="tab" id="appearances" data-tab-content-source-url="{% url hansard:person_summary slug=object.slug %}">
+                        Loading...
+                    </div>
+		{% else %}
+		    <div class="tab" id="appearances">
+                        <p>{{ object.name }} has never spoken in parliament.</p>
+		    </div>
+		{% endif %}
             {% endwith %}
             
         </div>

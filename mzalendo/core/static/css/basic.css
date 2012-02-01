@@ -839,7 +839,7 @@ pre {
 }
 #page .small-container ul.scorecard li article header .details span.shout {
   display: block;
-  background: #d40000;
+  background: gray;
   color: white;
   margin: 10px 0;
   padding: 10px;
@@ -858,19 +858,23 @@ pre {
   padding: 4px;
   margin: 0 auto;
 }
-#page .small-container ul.scorecard li article header .details span.shout-good {
+#page .small-container ul.scorecard li article header .details span.shout.shout-good {
   background-color: #009245;
 }
-#page .small-container ul.scorecard li article header .details span.shout-average {
+#page .small-container ul.scorecard li article header .details span.shout.shout-average {
   background-color: #f9a326;
 }
-#page .small-container ul.scorecard li article header .details span.shout-bad {
+#page .small-container ul.scorecard li article header .details span.shout.shout-bad {
   background-color: #d40000;
 }
 #page .small-container ul.scorecard li article header .details .source {
   display: block;
   padding-right: 1em;
   text-align: right;
+  font-style: italic;
+}
+#page .small-container ul.scorecard li article header .details .source a {
+  font-style: normal;
 }
 #page .profile-info .constituency-party h3 {
   margin: 0;

@@ -217,13 +217,16 @@ josh [at] supercooldesign.co.uk
         display:inline;
         padding:0;
         color:$colour8;
-        display:inline;
         background:none;
         text-decoration:none;
         font: {
           size:12px;
           weight:normal;
         }
+      }
+      li .sep {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
       }
       li a:hover {
         text-decoration:underline;
@@ -303,7 +306,7 @@ josh [at] supercooldesign.co.uk
       display:block;
       li {
         article {
-          &.has-data {
+          &.has-details {
             &:hover {
               cursor:pointer;
               background-color:$colour7;
@@ -323,6 +326,7 @@ josh [at] supercooldesign.co.uk
             h4 {
               float:left;
               width:120px;
+              line-height: 1em /* tightened up for line-wrapping */
             }
             p {
               float:left;
@@ -592,9 +596,22 @@ ul.listing {
       color:$colour1;
       margin-top:15px;
       line-height:25px;
+      padding: 6px;
+      background:url(../images/arrow-down.png) right 0 no-repeat;
       font: {
         weight:normal;
         size:16px;
+      }
+      &:hover {
+        background-color: $colour15;
+        color: $colour1;
+        cursor: pointer;
+      } 
+      .details {
+        display: none;
+      }       
+      &.active {
+        background:$colour15 url(../images/arrow-up.png) right 0 no-repeat;
       }
     }
   }
@@ -657,8 +674,8 @@ ul#home-news-list {
   display:block;
   float:left;
   width:375px;
-  h3 {
-    color:$colour8;
+  h2 {
+    color: $colour8;
     font-size:18px;
     text-transform:uppercase;
   }
@@ -682,7 +699,8 @@ ul#home-news-list {
     margin-top:10px;
     float:right;
   }
-}
+} 
+
 #page .home-right .social-and-tools {
   margin-top:30px;
   width:90px;
@@ -707,6 +725,65 @@ ul#home-news-list {
     @include inline-block;
   }
 }
+
+.featured-person {
+  color:$colour6;
+  margin:0.666em 0 2em 0;
+  background-color:$colour1;
+  img {
+    float:left;
+    max-width: 200px;
+  }
+  .featured-person-info {
+    margin-left:200px;
+    padding:10px;
+    background-color:$colour1;
+    .feature-nav {
+      float:right; 
+      display:block;
+      width:20px;
+      height:20px;
+      background-image:url(/static/images/feature_chevrons.png);
+      background-repeat: no-repeat;          
+      &.feature-prev {
+        background-position: 0 0; 
+        &:hover {
+          background-position:0 -20px;
+        }
+      }
+      &.feature-next {
+        background-position: -20px 0;
+        &:hover {
+          background-position:-20px -20px;
+        }
+      }
+    }
+  }
+  .rating {
+    margin:0.5em 0 0 0;
+    font-size:1.2em; 
+    min-height:24px;
+    background-position: right 0;
+    background-repeat: no-repeat;
+    &.bad {
+      background-image:url(/static/images/score-bad.png);
+    }
+    &.average {
+      background-image:url(/static/images/score-average.png);
+    }
+    &.good {
+      background-image:url(/static/images/score-good.png);
+    }
+  }
+  &.featured-person-placeholder {
+    text-align: center;
+    height: 250px;
+    background: $colour1 url(/static/images/logo-450-x-150.png) center center no-repeat;
+  }
+}
+
+/* =================================== */
+
 
 /* Login Page */
 #login-pagetitle {
@@ -744,6 +821,19 @@ ul#home-news-list {
   }
 }
 
+/* ============ markdown used in e.g., info pages ============ */
+
+.markdown {
+  h2, h3 {
+    margin-top:2em;
+  }
+  h4 {
+    margin: 2em 0 0.333em 0;
+    padding-bottom: 0.2em;
+    border-bottom:2px solid $colour7;
+  }
+  
+}
 
 /* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens

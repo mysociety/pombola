@@ -258,11 +258,14 @@ josh [at] supercooldesign.co.uk
   display: inline;
   padding: 0;
   color: gray;
-  display: inline;
   background: none;
   text-decoration: none;
   font-size: 12px;
   font-weight: normal;
+}
+#breadcrumb nav ul li .sep {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 #breadcrumb nav ul li a:hover {
   text-decoration: underline;
@@ -351,17 +354,17 @@ josh [at] supercooldesign.co.uk
   margin: 0;
   border: 0;
 }
-#page .small-container ul.scorecard li article.has-data:hover {
+#page .small-container ul.scorecard li article.has-details:hover {
   cursor: pointer;
   background-color: #e6e6e6;
 }
-#page .small-container ul.scorecard li article.has-data.active {
+#page .small-container ul.scorecard li article.has-details.active {
   background-color: #e6e6e6;
 }
-#page .small-container ul.scorecard li article.has-data.active header {
+#page .small-container ul.scorecard li article.has-details.active header {
   background: url(../images/arrow-up.png) right 0 no-repeat;
 }
-#page .small-container ul.scorecard li article.has-data header {
+#page .small-container ul.scorecard li article.has-details header {
   background: url(../images/arrow-down.png) right 0 no-repeat;
 }
 #page .small-container ul.scorecard li article header {
@@ -370,6 +373,7 @@ josh [at] supercooldesign.co.uk
 #page .small-container ul.scorecard li article header h4 {
   float: left;
   width: 120px;
+  line-height: 1em;
 }
 #page .small-container ul.scorecard li article header p {
   float: left;
@@ -669,8 +673,21 @@ ul.listing li section a.read-more:hover {
   color: #009245;
   margin-top: 15px;
   line-height: 25px;
+  padding: 6px;
+  background: url(../images/arrow-down.png) right 0 no-repeat;
   font-weight: normal;
   font-size: 16px;
+}
+#page .home-left h2#home-intro:hover {
+  background-color: #e5fff3;
+  color: #009245;
+  cursor: pointer;
+}
+#page .home-left h2#home-intro .details {
+  display: none;
+}
+#page .home-left h2#home-intro.active {
+  background: #e5fff3 url(../images/arrow-up.png) right 0 no-repeat;
 }
 #page .home-right {
   float: left;
@@ -734,7 +751,7 @@ ul#home-news-list li img {
   float: left;
   width: 375px;
 }
-#twitter h3 {
+#twitter h2 {
   color: gray;
   font-size: 18px;
   text-transform: uppercase;
@@ -790,6 +807,63 @@ ul#home-news-list li img {
   *display: inline;
 }
 
+.featured-person {
+  color: white;
+  margin: 0.666em 0 2em 0;
+  background-color: #009245;
+}
+.featured-person img {
+  float: left;
+  max-width: 200px;
+}
+.featured-person .featured-person-info {
+  margin-left: 200px;
+  padding: 10px;
+  background-color: #009245;
+}
+.featured-person .featured-person-info .feature-nav {
+  float: right;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/static/images/feature_chevrons.png);
+  background-repeat: no-repeat;
+}
+.featured-person .featured-person-info .feature-nav.feature-prev {
+  background-position: 0 0;
+}
+.featured-person .featured-person-info .feature-nav.feature-prev:hover {
+  background-position: 0 -20px;
+}
+.featured-person .featured-person-info .feature-nav.feature-next {
+  background-position: -20px 0;
+}
+.featured-person .featured-person-info .feature-nav.feature-next:hover {
+  background-position: -20px -20px;
+}
+.featured-person .rating {
+  margin: 0.5em 0 0 0;
+  font-size: 1.2em;
+  min-height: 24px;
+  background-position: right 0;
+  background-repeat: no-repeat;
+}
+.featured-person .rating.bad {
+  background-image: url(/static/images/score-bad.png);
+}
+.featured-person .rating.average {
+  background-image: url(/static/images/score-average.png);
+}
+.featured-person .rating.good {
+  background-image: url(/static/images/score-good.png);
+}
+.featured-person.featured-person-placeholder {
+  text-align: center;
+  height: 250px;
+  background: #009245 url(/static/images/logo-450-x-150.png) center center no-repeat;
+}
+
+/* =================================== */
 /* Login Page */
 #login-pagetitle {
   display: block;
@@ -830,6 +904,16 @@ ul#home-news-list li img {
 }
 #login .login-social {
   margin: 0;
+}
+
+/* ============ markdown used in e.g., info pages ============ */
+.markdown h2, .markdown h3 {
+  margin-top: 2em;
+}
+.markdown h4 {
+  margin: 2em 0 0.333em 0;
+  padding-bottom: 0.2em;
+  border-bottom: 2px solid #e6e6e6;
 }
 
 /* 5. MEDIA QUERIES

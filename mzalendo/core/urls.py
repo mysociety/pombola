@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from core import models
 
@@ -10,8 +10,25 @@ urlpatterns = patterns('core.views',
 
     # Lists
     url(r'^person/all/',       'person_list',       name='person_list'),
-    url(r'^place/all/',        'place_list',        name='place_list'),
+
+    url(r'^place/all/',
+        ListView.as_view(model=models.Place),
+        name='place_list'),
+    url(r'^place/constituencies/',
+        ListView.as_view(queryset=models.Place.objects.all().constituencies()),
+        name='constituency_list'),
+    url(r'^place/counties/',
+        ListView.as_view(queryset=models.Place.objects.all().counties()),
+        name='county_list'),
+
     url(r'^organisation/all/', 'organisation_list', name='organisation_list'),
+    
+    # featured person ajax load
+    url(
+        r'^person/featured/(?P<direction>(before|after))/(?P<current_slug>[-\w]+)',
+        'featured_person', 
+        name='featured_person'
+    ),
     
     # Objects
     url(r'^person/(?P<slug>[-\w]+)/',       'person',       name='person'),
@@ -48,7 +65,7 @@ urlpatterns = patterns('core.views',
         ),
         name="place_related_organisation_tab",        
     ),
-
+    
     # specials
     url(r'^parties', 'parties', name='parties'),
 

@@ -8,6 +8,12 @@
 
     <h1>Places</h1>
 
+    <ul>
+      <li><a href="{% url constituency_list %}">Constituencies</a></li>
+      <li><a href="{% url county_list %}">Counties</a></li>
+      <li><a href="{% url place_list %}">All</a></li>      
+    </ul>
+
     {% include 'core/generic_list.html' %}
 
 {% endblock %}
