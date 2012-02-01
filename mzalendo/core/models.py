@@ -364,6 +364,17 @@ class PlaceKind(ModelBase):
        ordering = ["slug"]      
 
 
+class PlaceQuerySet(models.query.GeoQuerySet):
+    def constituencies(self):
+        return self.filter(kind__slug='constituency')
+
+    def counties(self):
+        return self.filter(kind__slug='county')
+
+class PlaceManager(ManagerBase):
+    def get_query_set(self):
+        return PlaceQuerySet(self.model)
+
 class Place(ModelBase, ScorecardMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=100, unique=True, help_text="created from name")
@@ -376,8 +387,7 @@ class Place(ModelBase, ScorecardMixin):
     mapit_id = models.PositiveIntegerField(blank=True, null=True)
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
 
-    objects = ManagerBase()
-
+    objects = PlaceManager()
     show_overall_score = False
 
     comments = generic.GenericRelation(Comment)

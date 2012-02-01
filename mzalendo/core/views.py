@@ -43,12 +43,6 @@ def person_list(request):
         queryset=models.Person.objects.all(),
     )
 
-def place_list(request):
-    return object_list(
-        request,
-        queryset=models.Place.objects.all(),
-    )
-
 def organisation_list(request):
     return object_list(
         request,
