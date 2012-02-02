@@ -189,6 +189,14 @@ dl dd {
   margin-bottom: 5px;
 }
 
+b, strong {
+  font-weight: bolder;
+}
+
+i, em {
+  font-style: italic;
+}
+
 blockquote {
   padding-left: 10px;
 }
@@ -705,37 +713,25 @@ pre {
 }
 
 #breadcrumb {
-  height: 40px;
-}
-#breadcrumb nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-#breadcrumb nav ul li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-#breadcrumb nav ul li {
   display: none;
 }
-#breadcrumb nav ul li.page-title {
+
+.page-title {
   display: block;
   background: #e6e6e6;
-  font-size: 18px;
-  font-weight: bold;
-  color: black;
   padding: 10px;
 }
 
 #site-footer {
   clear: both;
   border-top: 4px solid #009245;
-  padding: 10px;
   background: #e6e6e6;
   overflow: hidden;
+}
+#site-footer > .wrapper {
+  display: table;
+  caption-side: top;
+  position: relative;
 }
 #site-footer p {
   font-style: italic;
@@ -745,15 +741,80 @@ pre {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  float: left;
-  width: 200px;
-  margin-right: 30px;
+  clear: both;
+  margin: 10px;
 }
 #site-footer ul li {
   list-style-type: none;
   padding: 0;
   margin: 0;
   border: 0;
+}
+#site-footer .subscribe-box {
+  display: table-caption;
+  padding: 10px;
+  background: #009245;
+}
+#site-footer .subscribe-box h2 {
+  color: white;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: normal;
+  background: url(../images/chevron-right.png) right 0 no-repeat;
+}
+#site-footer .subscribe-box h2.active {
+  background-image: url(../images/chevron-down.png);
+}
+#site-footer .subscribe-box form label {
+  display: block;
+  color: white;
+  font-size: 15px;
+  margin: 15px 0 10px 0;
+}
+#site-footer .subscribe-box form .subscribe-fields {
+  overflow: hidden;
+}
+#site-footer .subscribe-box form .subscribe-fields input.email {
+  height: 20px;
+  float: left;
+  border: none;
+  font-size: 15px;
+  padding: 6px 8px;
+  width: 200px;
+}
+#site-footer .subscribe-box form .subscribe-fields input.button {
+  cursor: pointer;
+  float: left;
+  width: 32px;
+  height: 32px;
+  border: none;
+  margin-left: -2px;
+  text-indent: -999999px;
+  background: #777777 url(../images/chevron-right.png) 9px center no-repeat;
+  background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #777777), color-stop(100%, #000000));
+  background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-linear-gradient(#777777, #000000);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -moz-linear-gradient(#777777, #000000);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -o-linear-gradient(#777777, #000000);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -ms-linear-gradient(#777777, #000000);
+  background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#777777, #000000);
+}
+#site-footer .subscribe-box form .subscribe-fields input.button:hover {
+  background: #848484 url(../images/chevron-right.png) 9px center no-repeat;
+  background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #848484), color-stop(100%, #000000));
+  background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-linear-gradient(#848484, #000000);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -moz-linear-gradient(#848484, #000000);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -o-linear-gradient(#848484, #000000);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -ms-linear-gradient(#848484, #000000);
+  background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#848484, #000000);
+}
+#site-footer .subscribe-box form .subscribe-fields input.button:active {
+  background: black url(../images/chevron-right.png) 9px center no-repeat;
+  background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #777777));
+  background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-linear-gradient(#000000, #777777);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -moz-linear-gradient(#000000, #777777);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -o-linear-gradient(#000000, #777777);
+  background: url(../images/chevron-right.png) 9px center no-repeat, -ms-linear-gradient(#000000, #777777);
+  background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#000000, #777777);
 }
 
 #page {
