@@ -1,5 +1,4 @@
 import re
-import random
 
 from django.db.models import Count
 from django.db.models import Q
@@ -14,20 +13,12 @@ from mzalendo.helpers import geocode
 
 def home(request):
     """Homepage"""
-    featured_person = None
     current_slug = False
-    want_previous = False
     if request.GET.get('after'):
         current_slug = request.GET.get('after')
     elif request.GET.get('before'):
         current_slug = request.GET.get('before')
-        want_previous = True
-    if current_slug:
-        featured_person = models.Person.objects.get_next_featured(current_slug, want_previous)
-    if featured_person == None:
-        featured_people = models.Person.objects.filter(can_be_featured=True)
-        if featured_people.exists():
-            featured_person = random.choice(featured_people)
+    featured_person = models.Person.objects.get_next_featured(current_slug, request.GET.get('before'))
     return render_to_response(
         'core/home.html',
         {
