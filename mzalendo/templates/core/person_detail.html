@@ -124,16 +124,17 @@
 
             <!-- Hansard appearances -->
             {% with hansard_count=object.hansard_entries.count %}
-                <h2 class="tab-nav" rel="#appearances"><a href='/'>Appearances ({{ hansard_count }})</a></h2>
-                {% if hansard_count %}    
+                {% if hansard_count %}
+                    <h2 class="tab-nav" rel="#appearances"><a href='{% url hansard:person_summary slug=object.slug %}' class="appearances-trigger">Appearances ({{ hansard_count }})</a></h2>
                     <div class="tab" id="appearances" data-tab-content-source-url="{% url hansard:person_summary slug=object.slug %}">
                         Loading...
                     </div>
-		{% else %}
-		    <div class="tab" id="appearances">
+        		{% else %}
+                    <h2>Appearances ({{ hansard_count }})</h2>
+        		    <div id="appearances">
                         <p>{{ object.name }} has never spoken in parliament.</p>
-		    </div>
-		{% endif %}
+        		    </div>
+        		{% endif %}
             {% endwith %}
             
         </div>
