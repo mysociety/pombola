@@ -202,6 +202,7 @@ josh [at] supercooldesign.co.uk
 }
 
 #breadcrumb {
+  display:block;
   height:40px;
   nav {
     ul {
@@ -579,6 +580,12 @@ ul.listing {
       }
     }
   }
+}
+
+.page-title {
+  display:block;
+  background:none;
+  padding:0;
 }
 
 /* 4. PAGE SPECIFIC

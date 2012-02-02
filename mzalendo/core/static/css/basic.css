@@ -705,28 +705,12 @@ pre {
 }
 
 #breadcrumb {
-  height: 40px;
-}
-#breadcrumb nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-#breadcrumb nav ul li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-#breadcrumb nav ul li {
   display: none;
 }
-#breadcrumb nav ul li.page-title {
+
+.page-title {
   display: block;
   background: #e6e6e6;
-  font-size: 18px;
-  font-weight: bold;
-  color: black;
   padding: 10px;
 }
 

@@ -323,25 +323,13 @@ pre {
 }
 
 #breadcrumb {
-  height:40px;
-  nav {
-    ul {
-      @include list-reset-soft;
-      li {
-        display:none;
-        &.page-title {
-          display:block;
-          background:$colour7;
-          font: {
-            size:18px;
-            weight:bold;
-          }
-          color:$colour5;
-          padding:10px;
-        }
-      }
-    }
-  }
+  display:none;
+}
+
+.page-title {
+  display:block;
+  background:$colour7;
+  padding:10px;
 }
 
 #site-footer {

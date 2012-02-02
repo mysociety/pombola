@@ -234,6 +234,7 @@ josh [at] supercooldesign.co.uk
 }
 
 #breadcrumb {
+  display: block;
   height: 40px;
 }
 #breadcrumb nav ul {
@@ -656,6 +657,12 @@ ul.listing li section a.read-more {
 ul.listing li section a.read-more:hover {
   background: #a0a0a0;
   color: white;
+}
+
+.page-title {
+  display: block;
+  background: none;
+  padding: 0;
 }
 
 /* 4. PAGE SPECIFIC
