@@ -3,6 +3,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.views.generic import DetailView, ListView
 
 from core import models
+from core.views import PlaceListView
 
 person_patterns = patterns('core.views',
     url(r'^all/',
@@ -18,17 +19,17 @@ person_patterns = patterns('core.views',
         name='featured_person'),
     
     url(r'^(?P<slug>[-\w]+)/',       'person',       name='person'),
-                         )
+  )
 
 place_patterns = patterns('core.views',
     url(r'^all/',
-        ListView.as_view(model=models.Place),
+        PlaceListView.as_view(queryset=models.Place.objects.all()),
         name='place_list'),
     url(r'^constituencies/',
-        ListView.as_view(queryset=models.Place.objects.all().constituencies()),
+        PlaceListView.as_view(queryset=models.Place.objects.all().constituencies(), context_object_name='constituencies'),
         name='constituency_list'),
     url(r'^counties/',
-        ListView.as_view(queryset=models.Place.objects.all().counties()),
+        PlaceListView.as_view(queryset=models.Place.objects.all().counties(), context_object_name='counties'),    
         name='county_list'),
 
     url(r'^is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'),

@@ -7,9 +7,10 @@ from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.views.generic.list_detail import object_detail, object_list
 
+from django.views.generic import ListView
+
 from mzalendo.core import models
 from mzalendo.helpers import geocode
-
 
 def home(request):
     """Homepage"""
@@ -42,6 +43,7 @@ def person(request, slug):
 
 
 def place(request, slug):
+    
     return object_detail(
         request,
         queryset = models.Place.objects,
@@ -137,4 +139,16 @@ def featured_person(request, current_slug, direction):
         },
         context_instance = RequestContext( request ),
     )
+
+
+class PlaceListView(ListView):
+    model = models.Place
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ListView, self).get_context_data(**kwargs)
+        if self.context_object_name:
+            context[self.context_object_name] = True
+        else:
+            context['all_places'] = True            
+        return context
 

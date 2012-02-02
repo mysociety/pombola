@@ -1,20 +1,36 @@
 {% extends 'base.html' %}
 {% load pagination_tags %}
 
-
 {% block title %}Places{% endblock %}
 
 {% block content %}
 
     <h1 class="page-title">Places</h1>
 
-    <ul>
-      <li><a href="{% url constituency_list %}">Constituencies</a></li>
-      <li><a href="{% url county_list %}">Counties</a></li>
-      <li><a href="{% url place_list %}">All</a></li>      
-    </ul>
+    <div class="tab-wrapper">
 
-    {% include 'core/generic_list.html' %}
+        <h2 class="tab-nav tab-static-link {% if constituencies %}tab-active{% endif %}" rel="#constituency"><a href="{% url constituency_list %}">Constituencies</a></h2>
+        <div class="tab markdown" id="constituency">
+            {% if constituencies %}
+                {% include 'core/generic_list.html' %}
+            {% endif %}
+        </div>
 
+        <h2 class="tab-nav tab-static-link {% if counties %}tab-active{% endif %}" rel="#counties"><a href="{% url county_list %}">Counties</a></h2>
+        <div class="tab markdown" id="counties">
+            {% if counties %}
+                {% include 'core/generic_list.html' %}
+            {% endif %}
+        </div>
+
+        <h2 class="tab-nav tab-static-link {% if all_places %}tab-active{% endif %}" rel="#all"><a href="{% url place_list %}">All</a></h2>
+        <div class="tab markdown" id="all">
+            {% if all_places %}
+                {% include 'core/generic_list.html' %}
+            {% endif %}
+        </div>
+
+    </div>
+    
 {% endblock %}
 

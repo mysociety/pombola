@@ -500,76 +500,6 @@ josh [at] supercooldesign.co.uk
   margin: 20px 0 5px 0;
   border: none;
 }
-#page .large-container #tab-nav {
-  display: block;
-  border-bottom: 1px solid #bbb;
-  margin: 30px 0 0 0;
-  z-index: 1;
-  position: relative;
-  height: 38px;
-}
-#page .large-container #tab-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  position: relative;
-  z-index: 2;
-}
-#page .large-container #tab-nav ul li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  float: left;
-  display: inline;
-}
-#page .large-container #tab-nav ul li a {
-  float: left;
-  display: block;
-}
-#page .large-container #tab-nav ul li {
-  display: inline;
-  float: left;
-}
-#page .large-container #tab-nav ul li a {
-  display: block;
-  float: left;
-  color: #009245;
-  text-decoration: none;
-  font-size: 13px;
-  padding: 9px 15px 8px 15px;
-  margin-right: 4px;
-  border: 1px solid #bbb;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f6f6f6));
-  background: -webkit-linear-gradient(#ffffff, #f6f6f6);
-  background: -moz-linear-gradient(#ffffff, #f6f6f6);
-  background: -o-linear-gradient(#ffffff, #f6f6f6);
-  background: -ms-linear-gradient(#ffffff, #f6f6f6);
-  background: linear-gradient(#ffffff, #f6f6f6);
-}
-#page .large-container #tab-nav ul li a:hover {
-  background: #fff;
-  color: #87c43c;
-}
-#page .large-container #tab-nav ul li.active a {
-  color: black;
-  padding: 9px 15px;
-  background: #fff;
-  border-bottom: 1px solid #fff;
-  -moz-border-radius: 0 0 2px 2px;
-  -webkit-border-radius: 0 0 2px 2px;
-  -o-border-radius: 0 0 2px 2px;
-  -ms-border-radius: 0 0 2px 2px;
-  -khtml-border-radius: 0 0 2px 2px;
-  border-radius: 0 0 2px 2px;
-}
-#page .large-container .tab-wrapper {
-  clear: both;
-  border-left: 1px solid #bbb;
-  padding: 15px 0 0 15px;
-  position: relative;
-  top: -1px;
-}
 #page #comments {
   display: block;
 }
@@ -616,6 +546,10 @@ josh [at] supercooldesign.co.uk
   border-top: none;
   background: none;
   padding: 0;
+}
+#page .pagination .disabled {
+  /* override main.css setting */
+  display: none;
 }
 
 /* 3. SHARED ELEMENTS
@@ -683,6 +617,78 @@ ul.listing li section a.read-more {
 ul.listing li section a.read-more:hover {
   background: #a0a0a0;
   color: white;
+}
+
+#tab-nav {
+  display: block;
+  border-bottom: 1px solid #bbb;
+  margin: 30px 0 0 0;
+  z-index: 1;
+  position: relative;
+  height: 38px;
+}
+#tab-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+#tab-nav ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  float: left;
+  display: inline;
+}
+#tab-nav ul li a {
+  float: left;
+  display: block;
+}
+#tab-nav ul li {
+  display: inline;
+  float: left;
+}
+#tab-nav ul li a {
+  display: block;
+  float: left;
+  color: #009245;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 9px 15px 8px 15px;
+  margin-right: 4px;
+  border: 1px solid #bbb;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f6f6f6));
+  background: -webkit-linear-gradient(#ffffff, #f6f6f6);
+  background: -moz-linear-gradient(#ffffff, #f6f6f6);
+  background: -o-linear-gradient(#ffffff, #f6f6f6);
+  background: -ms-linear-gradient(#ffffff, #f6f6f6);
+  background: linear-gradient(#ffffff, #f6f6f6);
+}
+#tab-nav ul li a:hover {
+  background: #fff;
+  color: #87c43c;
+}
+#tab-nav ul li.active a {
+  color: black;
+  padding: 9px 15px;
+  background: #fff;
+  border-bottom: 1px solid #fff;
+  -moz-border-radius: 0 0 2px 2px;
+  -webkit-border-radius: 0 0 2px 2px;
+  -o-border-radius: 0 0 2px 2px;
+  -ms-border-radius: 0 0 2px 2px;
+  -khtml-border-radius: 0 0 2px 2px;
+  border-radius: 0 0 2px 2px;
+}
+
+.tab-wrapper {
+  clear: both;
+  border-left: 1px solid #bbb;
+  padding: 15px 0 0 15px;
+  position: relative;
+  top: -1px;
 }
 
 .page-title {
