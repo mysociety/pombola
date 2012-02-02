@@ -120,6 +120,14 @@ dl {
   }
 }
 
+b, strong {
+  font-weight:bolder;
+}
+
+i, em {
+  font-style:italic;
+}
+
 blockquote {
   padding-left: 10px;
   p:before {
