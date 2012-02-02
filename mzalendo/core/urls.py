@@ -3,6 +3,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.views.generic import DetailView, ListView
 
 from core import models
+from core.views import PlaceListView
 
 urlpatterns = patterns('core.views',
     # Homepage
@@ -12,13 +13,13 @@ urlpatterns = patterns('core.views',
     url(r'^person/all/',       'person_list',       name='person_list'),
 
     url(r'^place/all/',
-        ListView.as_view(model=models.Place),
+        PlaceListView.as_view(queryset=models.Place.objects.all().constituencies()),
         name='place_list'),
     url(r'^place/constituencies/',
-        ListView.as_view(queryset=models.Place.objects.all().constituencies()),
+        PlaceListView.as_view(queryset=models.Place.objects.all().constituencies(), context_object_name='constituencies'),
         name='constituency_list'),
     url(r'^place/counties/',
-        ListView.as_view(queryset=models.Place.objects.all().counties()),
+        PlaceListView.as_view(queryset=models.Place.objects.all().counties(), context_object_name='counties'),    
         name='county_list'),
 
     url(r'^organisation/all/', 'organisation_list', name='organisation_list'),

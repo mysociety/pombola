@@ -130,7 +130,8 @@ $(function(){
   /*
    * simple tabs
    */
-  // build the nav from the relavent links dotted around
+
+  // build the nav from the relavant links dotted around
   var $tabnavs = $('h2.tab-nav');
   $tabnavs.hide();
   $('.tab-wrapper').before('<div id="tab-nav"><ul></ul></div>');
@@ -138,16 +139,18 @@ $(function(){
     var rel = $(this).attr('rel');
     var txt = $(this).text();
     var href = $('a', this).attr('href');
-    var newElem = '<li rel="'+rel+'" class="tab-nav-heading"><a href="'+href+'">'+txt+'</a></li>';
+    var aClass  = $(this).hasClass('tab-static-link')? 'class="tab-static-link"':'';
+    var liClass = $(this).hasClass('tab-active')? 'tab-active':'';
+    var newElem = '<li rel="'+rel+'" class="tab-nav-heading ' + liClass + '"><a href="'+href+'" '+aClass+'>'+txt+'</a></li>';
     $('#tab-nav ul').append(newElem);
   }).remove();
 
+  // store the matched element from the hash here:
+  // first look to see if it's already been marked server-side (tab-active)
+  var matched_element = $('li.tab-active').first();
 
-  // store the matched element from the hash here.
-  var matched_element = []
-
-  // If there is a hash try to load from that
-  if(window.location.hash !== '') {
+  // If not already active, if there is a hash try to load from that
+  if(! matched_element.length && window.location.hash !== '') {
     var hash = window.location.hash;
     matched_element = $('li[rel='+hash+']');
   }
@@ -156,24 +159,24 @@ $(function(){
   if ( ! matched_element.length ) {
     matched_element = $('li.tab-nav-heading').first();
   }
-    
+  
   // activate the tab
   activateSimpleTab(matched_element);
 
   //for clicks
-  $("#tab-nav ul li a").click(function(e){
+  $("#tab-nav ul li a").not(".tab-static-link").click(function(e){
     e.preventDefault();
     window.location.hash = $(this).parent('li').attr('rel');
     activateSimpleTab($(this).parent('li'));
   });
 
-  $(".tab-static-link").click(function(e){
-    var hash = $(this).attr('rel');
-    window.location.hash = hash;
-    e.preventDefault();
-    activateSimpleTab($(this));
-    $("#tab-nav ul li[rel='"+hash+"']").addClass('active');
-  });
+  // $(".tab-static-link").click(function(e){
+  //   var hash = $(this).attr('rel');
+  //   window.location.hash = hash;
+  //   e.preventDefault();
+  //   activateSimpleTab($(this));
+  //   $("#tab-nav ul li[rel='"+hash+"']").addClass('active');
+  // });
 
   /*
    * scorecard
