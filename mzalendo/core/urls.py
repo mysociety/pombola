@@ -5,17 +5,17 @@ from django.views.generic import DetailView, ListView
 from core import models
 
 person_patterns = patterns('core.views',
-    url(r'^all/',       'person_list',       name='person_list'),
+    url(r'^all/',
+        ListView.as_view(model=models.Person),
+        name='person_list'),
     url(r'^politicians/',
         ListView.as_view(queryset=models.Person.objects.all().is_mp()),
         name='politician_list'),
                            
     # featured person ajax load
-    url(
-        r'^featured/(?P<direction>(before|after))/(?P<current_slug>[-\w]+)',
+    url(r'^featured/(?P<direction>(before|after))/(?P<current_slug>[-\w]+)',
         'featured_person', 
-        name='featured_person'
-    ),
+        name='featured_person'),
     
     url(r'^(?P<slug>[-\w]+)/',       'person',       name='person'),
                          )
