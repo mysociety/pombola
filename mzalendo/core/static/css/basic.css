@@ -753,15 +753,17 @@ pre {
 #site-footer .subscribe-box {
   display: table-caption;
   padding: 10px;
-  background: #009245 url(../images/chevron-right.png) right 9px no-repeat;
+  background: #009245;
 }
 #site-footer .subscribe-box h2 {
   color: white;
+  margin: 0;
   text-transform: uppercase;
   font-weight: normal;
+  background: url(../images/chevron-right.png) right 0 no-repeat;
 }
-#site-footer .subscribe-box h2:hover {
-  background: #00b656;
+#site-footer .subscribe-box h2.active {
+  background-image: url(../images/chevron-down.png);
 }
 #site-footer .subscribe-box form label {
   display: block;

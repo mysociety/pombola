@@ -251,12 +251,8 @@ josh [at] supercooldesign.co.uk
   .subscribe-box {
     display:block;
     float:right;
-    background:$colour1;
     h2 {
-      color:$colour6;
-      &:hover {
-        background:none;
-      }
+      background:none;
     }
   }
 }

@@ -362,13 +362,15 @@ pre {
   .subscribe-box {
     display:table-caption;
     padding:10px;
-    background:$colour1 url(../images/chevron-right.png) right 9px no-repeat;
+    background:$colour1;
     h2 {
       color:$colour6;
+      margin:0;
       text-transform:uppercase;
       font-weight:normal;
-      &:hover {
-        background:$colour1/0.8;
+      background:url(../images/chevron-right.png) right 0 no-repeat;
+      &.active {
+        background-image:url(../images/chevron-down.png);
       }
     }
     form {

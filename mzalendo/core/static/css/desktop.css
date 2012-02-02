@@ -294,12 +294,8 @@ josh [at] supercooldesign.co.uk
 #site-footer .subscribe-box {
   display: block;
   float: right;
-  background: #009245;
 }
 #site-footer .subscribe-box h2 {
-  color: white;
-}
-#site-footer .subscribe-box h2:hover {
   background: none;
 }
 
