@@ -3,6 +3,7 @@ from __future__ import division
 import datetime
 import re
 import itertools
+import random
 
 from django.core import exceptions
 from django.core.urlresolvers import reverse
@@ -161,8 +162,15 @@ class PersonManager(ManagerBase):
             return None
 
     # featured MPs are returned in slug order: using this cos it's unique and easy to exclude current MP
+    # returns a random candidate if no slug if provided
     def get_next_featured(self, current_slug, want_previous=False):
-        all_results = self.filter(can_be_featured=True).exclude(slug=current_slug)
+        all_results = self.filter(can_be_featured=True) 
+        if not current_slug:
+            if all_results.exists():
+                return random.choice(all_results)
+            else:
+                return None
+        all_results = all_results.exclude(slug=current_slug)
         if len(all_results) == 0: # special case: return the excluded person if they are the only one or nothing
             all_results = self.filter(can_be_featured=True)
             if all_results.exists():
