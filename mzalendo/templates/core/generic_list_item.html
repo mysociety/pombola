@@ -22,7 +22,7 @@
                     <p>Member for {{ object.place.name }}</p>
                 {% else %}
 		    {# Bring on the elif clause! #}
-                    {% if object.kind.slug == 'nominated-member-parliament' %} 
+                    {% if object.is_nominated_mp %} 
                         <p>Nominated Member</p>
                     {% endif %}
                 {% endif %}
