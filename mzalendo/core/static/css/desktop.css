@@ -952,9 +952,9 @@ ul#home-news-list li img {
   margin-top: 2em;
 }
 .markdown h4 {
-  margin: 2em 0 0.333em 0;
-  padding-bottom: 0.2em;
-  border-bottom: 2px solid #e6e6e6;
+  margin: 30px 0 10px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 /* 5. MEDIA QUERIES
