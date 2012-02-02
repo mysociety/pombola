@@ -18,6 +18,14 @@
 
             <section>
                 <h4><a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a></h4>
+		{% if object.place %}
+                    <p>Member for {{ object.place.name }}</p>
+                {% else %}
+		    {# Bring on the elif clause! #}
+                    {% if object.kind.slug == 'nominated-member-parliament' %} 
+                        <p>Nominated Member</p>
+                    {% endif %}
+                {% endif %}
 
                 <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
             </section>
