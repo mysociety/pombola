@@ -7,15 +7,15 @@
             There are <a href="{% url project_in_place slug=object.slug %}">{{ object.project_set.count }} CDF projects</a> in {{ object.name }}.
             These are the most expensive:
         </p>
-
+        <ul>
         {% for p in object.project_set.all|slice:":10" %}
-            <strong>{{ p.project_name }}</strong>:
-            Ksh {{ p.total_cost|floatformat|intcomma }}
-            spent on {{ p.activity_to_be_done }}.
-
-            (<a href="{% url projects.views.in_place slug=object.slug %}#project-{{ p.cdf_index }}">more</a>)
-            <br>
+            <li>
+                <strong>{{ p.project_name }}</strong>:
+                Ksh {{ p.total_cost|floatformat|intcomma }}
+                spent on {{ p.activity_to_be_done }}.
+                (<a href="{% url projects.views.in_place slug=object.slug %}#project-{{ p.cdf_index }}">more</a>)
+            </li>
         {% endfor %}
-
+        </ul>
     </div>
 {% endif %}
