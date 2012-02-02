@@ -120,6 +120,14 @@ dl {
   }
 }
 
+b, strong {
+  font-weight:bolder;
+}
+
+i, em {
+  font-style:italic;
+}
+
 blockquote {
   padding-left: 10px;
   p:before {
@@ -323,42 +331,95 @@ pre {
 }
 
 #breadcrumb {
-  height:40px;
-  nav {
-    ul {
-      @include list-reset-soft;
-      li {
-        display:none;
-        &.page-title {
-          display:block;
-          background:$colour7;
-          font: {
-            size:18px;
-            weight:bold;
-          }
-          color:$colour5;
-          padding:10px;
-        }
-      }
-    }
-  }
+  display:none;
+}
+
+.page-title {
+  display:block;
+  background:$colour7;
+  padding:10px;
 }
 
 #site-footer {
   clear:both;
   border-top:4px solid $colour1;
-  padding:10px;
   background:$colour7;
   overflow:hidden;
+  >.wrapper {
+    display:table;
+    caption-side:top;
+    position: relative;
+  }
   p {
     font-style:italic;
     color:$colour4;
   }
   ul {
     @include list-reset-soft;
-    float:left;
-    width:200px;
-    margin-right:30px;
+    clear:both;
+    margin:10px;
+  }
+  .subscribe-box {
+    display:table-caption;
+    padding:10px;
+    background:$colour1;
+    h2 {
+      color:$colour6;
+      margin:0;
+      text-transform:uppercase;
+      font-weight:normal;
+      background:url(../images/chevron-right.png) right 0 no-repeat;
+      &.active {
+        background-image:url(../images/chevron-down.png);
+      }
+    }
+    form {
+      label {
+        display:block;
+        color:$colour6;
+        font-size:15px;
+        margin:15px 0 10px 0;
+      }
+      .subscribe-fields {
+        overflow:hidden;
+        input.email {
+          height:20px;
+          float:left;
+          border:none;
+          font-size:15px;
+          padding:6px 8px;
+          width:200px;
+        }
+        input.button {
+          cursor:pointer;
+          float:left;
+          width:32px;
+          height:32px;
+          border:none;
+          margin-left:-2px;
+          text-indent:-999999px;
+          background:$colour4 url(../images/chevron-right.png) 9px center no-repeat;
+          @include background(
+            url(../images/chevron-right.png) 9px center no-repeat,
+            linear-gradient($colour4, $colour5)
+          );
+          &:hover {
+            background:$colour4/0.9 url(../images/chevron-right.png) 9px center no-repeat;
+            @include background(
+              url(../images/chevron-right.png) 9px center no-repeat,
+              linear-gradient($colour4/0.9, $colour5)
+            );
+          }
+          &:active {
+            background:$colour5 url(../images/chevron-right.png) 9px center no-repeat;
+            @include background(
+              url(../images/chevron-right.png) 9px center no-repeat,
+              linear-gradient($colour5, $colour4)
+            );
+          }
+        }
+      }
+    }
   }
 }
 

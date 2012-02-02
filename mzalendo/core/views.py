@@ -28,13 +28,6 @@ def home(request):
         context_instance=RequestContext(request)
     )
 
-
-def person_list(request):
-    return object_list(
-        request,
-        queryset=models.Person.objects.all(),
-    )
-
 def organisation_list(request):
     return object_list(
         request,
