@@ -116,7 +116,7 @@
 
         <footer id="site-footer">
             <div class="wrapper">
-                <p>By <a href="http://www.mysociety.org/">mySociety</a></p>
+                <!-- <p>By <a href="http://www.mysociety.org/">mySociety</a></p> -->
 
                 <ul class="nav">
                     <li><a href="{% url person_list %}">people</a></li>
@@ -145,6 +145,17 @@
                 </ul>
                 {% endif %}
 
+                <div class="subscribe-box">
+                    <h2>Email Newsletter</h2>
+
+                    <form action="http://mzalendo.us2.list-manage.com/subscribe/post?u=c0b4940a102336a932a5c30c4&amp;id=9963e6377d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                        <label for="mce-EMAIL">Subscribe to recieve updates</label>
+                        <div class="subscribe-fields">
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Your email address here" required>
+                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+                        </div>
+                    </form>
+                </div>
             </div>
         </footer>
         <div id="fb-root"></div>

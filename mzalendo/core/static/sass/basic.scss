@@ -343,18 +343,81 @@ pre {
 #site-footer {
   clear:both;
   border-top:4px solid $colour1;
-  padding:10px;
   background:$colour7;
   overflow:hidden;
+  >.wrapper {
+    display:table;
+    caption-side:top;
+    position: relative;
+  }
   p {
     font-style:italic;
     color:$colour4;
   }
   ul {
     @include list-reset-soft;
-    float:left;
-    width:200px;
-    margin-right:30px;
+    clear:both;
+    margin:10px;
+  }
+  .subscribe-box {
+    display:table-caption;
+    padding:10px;
+    background:$colour1 url(../images/chevron-right.png) right 9px no-repeat;
+    h2 {
+      color:$colour6;
+      text-transform:uppercase;
+      font-weight:normal;
+      &:hover {
+        background:$colour1/0.8;
+      }
+    }
+    form {
+      label {
+        display:block;
+        color:$colour6;
+        font-size:15px;
+        margin:15px 0 10px 0;
+      }
+      .subscribe-fields {
+        overflow:hidden;
+        input.email {
+          height:20px;
+          float:left;
+          border:none;
+          font-size:15px;
+          padding:6px 8px;
+          width:200px;
+        }
+        input.button {
+          cursor:pointer;
+          float:left;
+          width:32px;
+          height:32px;
+          border:none;
+          margin-left:-2px;
+          text-indent:-999999px;
+          background:$colour4 url(../images/chevron-right.png) 9px center no-repeat;
+          @include background(
+            url(../images/chevron-right.png) 9px center no-repeat,
+            linear-gradient($colour4, $colour5)
+          );
+          &:hover {
+            background:$colour4/0.9 url(../images/chevron-right.png) 9px center no-repeat;
+            @include background(
+              url(../images/chevron-right.png) 9px center no-repeat,
+              linear-gradient($colour4/0.9, $colour5)
+            );
+          }
+          &:active {
+            background:$colour5 url(../images/chevron-right.png) 9px center no-repeat;
+            @include background(
+              url(../images/chevron-right.png) 9px center no-repeat,
+              linear-gradient($colour5, $colour4)
+            );
+          }
+        }
+      }
+    }
   }
 }
 

@@ -237,6 +237,30 @@ josh [at] supercooldesign.co.uk
   }
 }
 
+#site-footer {
+  >.wrapper {
+    display:block;
+  }
+  ul {
+    @include list-reset-soft;
+    clear:none;
+    float:left;
+    width:200px;
+    margin:0 30px 0 0;
+  }
+  .subscribe-box {
+    display:block;
+    float:right;
+    background:$colour1;
+    h2 {
+      color:$colour6;
+      &:hover {
+        background:none;
+      }
+    }
+  }
+}
+
 #page {
   .page-wrapper {
     clear: both;
