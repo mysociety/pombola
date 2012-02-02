@@ -6,7 +6,10 @@ from core import models
 
 person_patterns = patterns('core.views',
     url(r'^all/',       'person_list',       name='person_list'),
-
+    url(r'^politicians/',
+        ListView.as_view(queryset=models.Person.objects.all().is_mp()),
+        name='politician_list'),
+                           
     # featured person ajax load
     url(
         r'^featured/(?P<direction>(before|after))/(?P<current_slug>[-\w]+)',
