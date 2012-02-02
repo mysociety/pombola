@@ -116,8 +116,6 @@
 
         <footer id="site-footer">
             <div class="wrapper">
-                <!-- <p>By <a href="http://www.mysociety.org/">mySociety</a></p> -->
-
                 <ul class="nav">
                     <li><a href="{% url person_list %}">people</a></li>
                     <li><a href="{% url organisation_list %}">organisations</a></li>
@@ -132,9 +130,6 @@
                 
                 {% if request.user.is_staff %}
                 <ul class="utilities">
-                    <li><a href="https://github.com/mysociety/mzalendo/issues">issues</a></li>
-                    <li><a href="https://github.com/mysociety/mzalendo/wiki">wiki</a></li>
-                    <li><a href="{% url admin:index %}">admin</a></li>
                     {% if object %}
                         <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
                     {% endif %}
