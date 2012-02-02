@@ -9,7 +9,7 @@ person_patterns = patterns('core.views',
         ListView.as_view(model=models.Person),
         name='person_list'),
     url(r'^politicians/',
-        ListView.as_view(queryset=models.Person.objects.all().is_mp()),
+        ListView.as_view(queryset=models.Position.objects.all().current_mp_positions().order_by('place__slug')),
         name='politician_list'),
                            
     # featured person ajax load

@@ -649,6 +649,9 @@ class Position(ModelBase):
         self.sorting_start_date_high = re.sub('-00', '-99', sorting_start_date)
         self.sorting_end_date_high = re.sub('-00', '-99', sorting_end_date)     
 
+    def is_nominated_mp(self):
+        return self.title.slug == 'nominated-member-parliament'
+
     def save(self, *args, **kwargs):
         self._set_sorting_dates()
         super(Position, self).save(*args, **kwargs)
