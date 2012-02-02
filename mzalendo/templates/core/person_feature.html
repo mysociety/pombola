@@ -28,7 +28,7 @@
             <div class="rating {{ featured_person.scorecard_overall_as_word }}">
                 Mzalendo Rating: 
                 {% if featured_person.has_scorecards %}
-                    <span style="font-weight:bold;">{{ featured_person.scorecard_overall_as_word|capfirst }}</span>
+                    <strong>{{ featured_person.scorecard_overall_as_word|capfirst }}</strong>
                 {% else %}
                     None
                 {% endif %}
