@@ -1634,41 +1634,46 @@ ul#home-news-list li img {
 #home-links {
   margin-bottom: 30px;
 }
-#home-links a {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  cursor: pointer;
-  background: gray;
+#home-links a.aspirants {
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  -ms-border-radius: 5px 5px 0 0;
+  -khtml-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
   color: white;
+  display: block;
+  margin: 10px 10px 3px 10px;
+  padding: 10px;
+  background: #009245;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00a24c), color-stop(100%, #009245));
+  background: -webkit-linear-gradient(#00a24c, #009245);
+  background: -moz-linear-gradient(#00a24c, #009245);
+  background: -o-linear-gradient(#00a24c, #009245);
+  background: -ms-linear-gradient(#00a24c, #009245);
+  background: linear-gradient(#00a24c, #009245);
+}
+#home-links a.aspirants:hover {
   text-decoration: none;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 1;
-  padding: 5px 8px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
-  border-radius: 2px;
-  text-transform: none;
-  font-size: 14px;
-  padding: 5px 8px;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
+  background: #00a24c;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #00a24c));
+  background: -webkit-linear-gradient(#009245, #00a24c);
+  background: -moz-linear-gradient(#009245, #00a24c);
+  background: -o-linear-gradient(#009245, #00a24c);
+  background: -ms-linear-gradient(#009245, #00a24c);
+  background: linear-gradient(#009245, #00a24c);
+}
+#home-links a.citizens {
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  -o-border-radius: 0 0 5px 5px;
+  -ms-border-radius: 0 0 5px 5px;
+  -khtml-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  color: white;
+  display: block;
+  margin: 0 10px 10px 10px;
+  padding: 10px;
   background: #87c43c;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
   background: -webkit-linear-gradient(#96d942, #87c43c);
@@ -1676,21 +1681,9 @@ ul#home-news-list li img {
   background: -o-linear-gradient(#96d942, #87c43c);
   background: -ms-linear-gradient(#96d942, #87c43c);
   background: linear-gradient(#96d942, #87c43c);
-  display: block;
-  margin: 10px;
-  padding: 10px;
 }
-#home-links a {
-  *display: inline;
-}
-#home-links a:hover {
-  background: #a0a0a0;
-  color: white;
-}
-#home-links a {
-  *display: inline;
-}
-#home-links a:hover {
+#home-links a.citizens:hover {
+  text-decoration: none;
   background: #96d942;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
   background: -webkit-linear-gradient(#87c43c, #96d942);

@@ -133,13 +133,13 @@ $colour15: #e5fff3;
   }
 }
 
-@mixin big-button-reset-text {
+@mixin big-button-reset-text($rad: 5px) {
   @include button-reset-text;
   text-transform:none;
   font-size:14px;
   padding:5px 8px;
   @include inline-block;
-  @include border-radius(5px);
+  @include border-radius($rad);
 }
 
 @mixin big-button-text-green {
