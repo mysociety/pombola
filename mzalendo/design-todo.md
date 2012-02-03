@@ -4,13 +4,6 @@
 
 ### Scorecards
 
-    * need to hook up the little arrow to make it expand/collapse the extra info
-    
-    * some display issues - eg equivalent remark bubble getting cut off
-    
-    * Need to display extended remark and category notes
-
-
 ### Org detail page
     
 ### Place detail page
@@ -29,11 +22,6 @@
 
     * hook up twitter
     
-    * hook up MP ratings
-    
-    * new logo (with the coloured shield)
-    
-
 ## General
 
     * check that selenium tests still pass
