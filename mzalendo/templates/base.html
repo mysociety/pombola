@@ -117,14 +117,13 @@
         <footer id="site-footer">
             <div class="wrapper">
                 <ul class="nav">
-                    <li><a href="{% url person_list %}">people</a></li>
-                    <li><a href="{% url organisation_list %}">organisations</a></li>
-                    <li><a href="{% url place_list %}">places</a></li>
+                    <li><a href="{% url person_list %}">People</a></li>
+                    <li><a href="{% url organisation_list %}">Organisations</a></li>
+                    <li><a href="{% url place_list %}">Places</a></li>
                 </ul>
 
                 <ul class="utilities">
-                    <li><a href="{% url privacy %}">privacy</a></li>
-                    <li><a href="http://eepurl.com/gPMJL">Subscribe to our newsletter</a></li>
+                    <li><a href="{% url privacy %}">Privacy</a></li>
                     <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
                 </ul>
                 
