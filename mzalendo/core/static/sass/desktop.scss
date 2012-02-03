@@ -196,6 +196,9 @@ josh [at] supercooldesign.co.uk
             @include background(linear-gradient($colour4/1.4, $colour5));
           }
         }
+        ul {
+          display: none; /* temporary hide prior to proper styling FIXME! */
+        }
       }
     }
   }
