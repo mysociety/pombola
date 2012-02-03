@@ -862,8 +862,11 @@ ul#home-news-list li img {
 .featured-person img {
   float: left;
   max-width: 200px;
+  border: 4px solid #009245;
 }
 .featured-person .featured-person-info {
+  height: 200px;
+  position: relative;
   margin-left: 200px;
   padding: 10px;
   background-color: #009245;
@@ -888,20 +891,39 @@ ul#home-news-list li img {
 .featured-person .featured-person-info .feature-nav.feature-next:hover {
   background-position: -20px -20px;
 }
-.featured-person .rating {
-  margin: 0.5em 0 0 0;
+.featured-person .featured-person-info .feature-person-role {
+  margin: 0.5em 0;
+  font-style: italic;
+}
+.featured-person .featured-person-info .feature-person-summary {
+  overflow: hidden;
+  margin: 0;
+}
+.featured-person .featured-person-info .rating-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 20px 0 0 0;
+  background: url(/static/images/fade-to-green.png) 0 0 repeat-x;
+  width: 100%;
+  margin: 0;
+}
+.featured-person .featured-person-info .rating-container .rating {
+  padding: 4px 30px 4px 4px;
+  text-align: right;
+  margin: 0 0.5em 0 0;
   font-size: 1.2em;
   min-height: 24px;
   background-position: right 0;
   background-repeat: no-repeat;
 }
-.featured-person .rating.bad {
+.featured-person .featured-person-info .rating-container .rating.bad {
   background-image: url(/static/images/score-bad.png);
 }
-.featured-person .rating.average {
+.featured-person .featured-person-info .rating-container .rating.average {
   background-image: url(/static/images/score-average.png);
 }
-.featured-person .rating.good {
+.featured-person .featured-person-info .rating-container .rating.good {
   background-image: url(/static/images/score-good.png);
 }
 .featured-person.featured-person-placeholder {

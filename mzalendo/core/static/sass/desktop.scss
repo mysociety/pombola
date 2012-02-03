@@ -774,8 +774,11 @@ ul#home-news-list {
   img {
     float:left;
     max-width: 200px;
+    border:4px solid $colour1;
   }
   .featured-person-info {
+    height:200px;
+    position:relative;
     margin-left:200px;
     padding:10px;
     background-color:$colour1;
@@ -799,21 +802,40 @@ ul#home-news-list {
         }
       }
     }
-  }
-  .rating {
-    margin:0.5em 0 0 0;
-    font-size:1.2em; 
-    min-height:24px;
-    background-position: right 0;
-    background-repeat: no-repeat;
-    &.bad {
-      background-image:url(/static/images/score-bad.png);
+    .feature-person-role {
+      margin:0.5em 0;
+      font-style:italic;
     }
-    &.average {
-      background-image:url(/static/images/score-average.png);
+    .feature-person-summary {
+      overflow:hidden;
+      margin:0;
     }
-    &.good {
-      background-image:url(/static/images/score-good.png);
+    .rating-container {
+      position:absolute;
+      bottom:0;
+      right:0;
+      padding:20px 0 0 0;
+      background:url(/static/images/fade-to-green.png) 0 0 repeat-x;
+      width:100%;
+      margin:0;
+      .rating {
+        padding:4px 30px 4px 4px;
+        text-align:right;
+        margin:0 0.5em 0 0;
+        font-size:1.2em; 
+        min-height:24px;
+        background-position: right 0;
+        background-repeat: no-repeat;
+        &.bad {
+          background-image:url(/static/images/score-bad.png);
+        }
+        &.average {
+          background-image:url(/static/images/score-average.png);
+        }
+        &.good {
+          background-image:url(/static/images/score-good.png);
+        }
+      }
     }
   }
   &.featured-person-placeholder {
