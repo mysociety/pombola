@@ -802,8 +802,8 @@ ul#home-news-list {
 #home-links {
   overflow:hidden;
   a {
-    width:223px;
-    height:70px;
+    width:213px;
+    height:60px;
     float:left;
     line-height:30px;
     font: {
@@ -813,7 +813,7 @@ ul#home-news-list {
     &.aspirants {
       @include border-radius(5px 0 0 5px);
       margin:0 3px 0 0;
-      padding:20px 20px 10px 10px;
+      padding:20px;
       background:$colour1 url(../images/big-chevron.png) 180px center no-repeat;
       @include background(
         url(../images/big-chevron.png) 180px center no-repeat,
@@ -830,7 +830,7 @@ ul#home-news-list {
     &.citizens {
       @include border-radius(0 5px 5px 0);
       margin:0;
-      padding:20px 20px 10px 10px;
+      padding:20px;
       background:$colour2 url(../images/big-chevron.png) 180px center no-repeat;
       @include background(
         url(../images/big-chevron.png) 180px center no-repeat,

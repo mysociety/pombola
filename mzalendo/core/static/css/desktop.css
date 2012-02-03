@@ -923,8 +923,8 @@ ul#home-news-list li img {
   overflow: hidden;
 }
 #home-links a {
-  width: 223px;
-  height: 70px;
+  width: 213px;
+  height: 60px;
   float: left;
   line-height: 30px;
   font-size: 22px;
@@ -938,7 +938,7 @@ ul#home-news-list li img {
   -khtml-border-radius: 5px 0 0 5px;
   border-radius: 5px 0 0 5px;
   margin: 0 3px 0 0;
-  padding: 20px 20px 10px 10px;
+  padding: 20px;
   background: #009245 url(../images/big-chevron.png) 180px center no-repeat;
   background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00a24c), color-stop(100%, #009245));
   background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#00a24c, #009245);
@@ -964,7 +964,7 @@ ul#home-news-list li img {
   -khtml-border-radius: 0 5px 5px 0;
   border-radius: 0 5px 5px 0;
   margin: 0;
-  padding: 20px 20px 10px 10px;
+  padding: 20px;
   background: #87c43c url(../images/big-chevron.png) 180px center no-repeat;
   background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
   background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#96d942, #87c43c);
