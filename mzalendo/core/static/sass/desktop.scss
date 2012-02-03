@@ -39,9 +39,10 @@ josh [at] supercooldesign.co.uk
     overflow:visible;
     menu#site-user-tools {
       position:absolute;
-      right:200px;
-      top:15px;
+      right:151px;
+      top:0;
       ul {
+        @include list-reset;
         li.login,
         li.logged-in,
         li.login a,
@@ -62,40 +63,59 @@ josh [at] supercooldesign.co.uk
         }
         li.login {
           text-transform:uppercase;
-          height:20px;
           width:70px;
           a {
             font-size:11px;
-            padding:0 16px 0 10px;
-            @include border-radius(2px);
-            background:#000000 url(../images/login-arrows.png) 54px -22px no-repeat;
+            padding:3px 25px 3px 10px;
+            @include border-radius(2px 0 0 2px);
+            background:#000000 url(../images/login-arrows.png) 54px -19px no-repeat;
             @include background(
-              url(../images/login-arrows.png) 54px -22px no-repeat,
+              url(../images/login-arrows.png) 54px -19px no-repeat,
               linear-gradient(#707070, #000000)
             );
             &:hover {
               text-decoration:none;
-              background:#707070 url(../images/login-arrows.png) 54px -22px no-repeat;
+              background:#707070 url(../images/login-arrows.png) 54px -19px no-repeat;
               @include background(
-                url(../images/login-arrows.png) 54px -22px no-repeat,
+                url(../images/login-arrows.png) 54px -19px no-repeat,
                 linear-gradient(#000000, #707070)
               );
             }
           }
         }
+        li.logged-in {
+          text-transform:uppercase;
+          a {
+            font-size:11px;
+            padding:3px 10px;
+            @include border-radius(2px 0 0 2px);
+            background:#000000;
+            @include background(linear-gradient(#707070, #000000));
+            &:hover {
+              text-decoration:none;
+              background:#707070 no-repeat;
+              @include background(linear-gradient(#000000, #707070));
+            }
+          }
+        }
+        li.logged-in-name {
+          display:block;
+          margin:3px 10px 0 0;
+          color:#fff;
+        }
         li.active {
           position:relative;
           border-top:1px solid #666666;
           border-left:1px solid #666666;
-          border-right:1px solid #666666;
+          // border-right:1px solid #666666;
           z-index:2;
           a {
             color:$colour8;
             @include border-radius(0);
-            background:$colour7 url(../images/login-arrows.png) 54px 8px no-repeat;
+            background:$colour7 url(../images/login-arrows.png) 54px 11px no-repeat;
             &:hover {
               color:$colour5;
-              background:$colour7 url(../images/login-arrows.png) 54px 8px no-repeat;
+              background:$colour7 url(../images/login-arrows.png) 54px 11px no-repeat;
             }
           }
         }
@@ -104,13 +124,16 @@ josh [at] supercooldesign.co.uk
     #login-box {
       z-index:1;
       position:absolute;
-      right:200px;
-      top:35px;
+      right:25px;
+      top:26px;
       display:none;
       background:$colour7;
-      border:1px solid #666666;
-      width:200px;
+      border-left:1px solid #666666;
+      border-right:1px solid #666666;
+      border-bottom:1px solid #666666;
+      width:175px;
       padding:10px;
+      @include box-shadow(rgba(0, 0, 0, 0.3) 0 5px 4px);
       #login {
         padding:0;
         margin:0;
@@ -119,7 +142,7 @@ josh [at] supercooldesign.co.uk
           width:auto;
           input#id_username,
           input#id_password {
-            width:188px;
+            width:163px;
             margin:0 0 10px 0;
           }
           input.login-button {
@@ -146,14 +169,14 @@ josh [at] supercooldesign.co.uk
     }
     #search {
       position:absolute;
-      top:10px;
+      top:0;
       right:0;
       background:transparent;
       padding:0;
       height:auto;
       border:none;
       input {
-        width:100px;
+        width:117px;
         border:1px solid $colour5;
         font-size:14px;
       }
@@ -243,6 +266,7 @@ josh [at] supercooldesign.co.uk
 #site-footer {
   >.wrapper {
     display:block;
+    padding:0;
   }
   ul {
     @include list-reset-soft;
@@ -250,6 +274,9 @@ josh [at] supercooldesign.co.uk
     float:left;
     width:200px;
     margin:10px 30px 0 0;
+    li {
+      margin-bottom:10px;
+    }
   }
   .subscribe-box {
     display:block;
@@ -633,21 +660,26 @@ ul.listing {
       margin-top:15px;
       line-height:25px;
       padding: 6px;
-      background:url(../images/arrow-down.png) right 0 no-repeat;
       font: {
         weight:normal;
         size:16px;
       }
-      &:hover {
-        background-color: $colour15;
-        color: $colour1;
-        cursor: pointer;
-      } 
       .details {
         display: none;
-      }       
-      &.active {
-        background:$colour15 url(../images/arrow-up.png) right 0 no-repeat;
+      }
+      .home-read-more {
+        text-transform:uppercase;
+        font-size:12px;
+        color:$colour13;
+        padding-right:18px;
+        background:url(../images/chevron-down-sml.png) right 2px no-repeat;
+        &:hover {
+          color:$colour13/1.1;
+          text-decoration:none;
+        }
+        &.active {
+          background:url(../images/chevron-up-sml.png) right 2px no-repeat;
+        }
       }
     }
   }
@@ -657,10 +689,18 @@ ul.listing {
   }
 }
 #home-search {
+  background:$colour10;
   margin:30px 0;
   padding:20px;
+  label {
+    color:$colour6;
+  }
   input {
     width:260px;
+    margin-right:10px;
+  }
+  >a {
+    color:$colour8;
   }
 }
 #home-featured {

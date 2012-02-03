@@ -55,8 +55,10 @@ p {
 }
 a {
   color:$colour1;
+  text-decoration:none;
   &:hover {
-    color:$colour2;
+    color:#004422;
+    text-decoration:underline;
   }
 }
 .vcard {
@@ -293,6 +295,9 @@ pre {
             }
           }
         }
+        li.logged-in-name {
+          display:none;
+        }
       }
     }
   }
@@ -349,6 +354,7 @@ pre {
     display:table;
     caption-side:top;
     position: relative;
+    padding-top:5px;
   }
   p {
     font-style:italic;
@@ -357,7 +363,19 @@ pre {
   ul {
     @include list-reset-soft;
     clear:both;
-    margin:10px;
+    margin: 0 10px;
+    li {
+      border-top:1px solid $colour13;
+      padding:5px 0;
+      a:hover {
+        text-decoration:none;
+      }
+    }
+    &.nav {
+      li:first-child {
+        border-top:none;
+      }
+    }
   }
   .subscribe-box {
     display:table-caption;

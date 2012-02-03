@@ -41,8 +41,25 @@ josh [at] supercooldesign.co.uk
 }
 #site-header .wrapper menu#site-user-tools {
   position: absolute;
-  right: 200px;
-  top: 15px;
+  right: 151px;
+  top: 0;
+}
+#site-header .wrapper menu#site-user-tools ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#site-header .wrapper menu#site-user-tools ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  float: left;
+  display: inline;
+}
+#site-header .wrapper menu#site-user-tools ul li a {
+  float: left;
+  display: block;
 }
 #site-header .wrapper menu#site-user-tools ul li.login,
 #site-header .wrapper menu#site-user-tools ul li.logged-in,
@@ -65,41 +82,74 @@ josh [at] supercooldesign.co.uk
 }
 #site-header .wrapper menu#site-user-tools ul li.login {
   text-transform: uppercase;
-  height: 20px;
   width: 70px;
 }
 #site-header .wrapper menu#site-user-tools ul li.login a {
   font-size: 11px;
-  padding: 0 16px 0 10px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
-  border-radius: 2px;
-  background: black url(../images/login-arrows.png) 54px -22px no-repeat;
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #707070), color-stop(100%, #000000));
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -webkit-linear-gradient(#707070, #000000);
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -moz-linear-gradient(#707070, #000000);
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -o-linear-gradient(#707070, #000000);
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -ms-linear-gradient(#707070, #000000);
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, linear-gradient(#707070, #000000);
+  padding: 3px 25px 3px 10px;
+  -moz-border-radius: 2px 0 0 2px;
+  -webkit-border-radius: 2px 0 0 2px;
+  -o-border-radius: 2px 0 0 2px;
+  -ms-border-radius: 2px 0 0 2px;
+  -khtml-border-radius: 2px 0 0 2px;
+  border-radius: 2px 0 0 2px;
+  background: black url(../images/login-arrows.png) 54px -19px no-repeat;
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #707070), color-stop(100%, #000000));
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -webkit-linear-gradient(#707070, #000000);
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -moz-linear-gradient(#707070, #000000);
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -o-linear-gradient(#707070, #000000);
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -ms-linear-gradient(#707070, #000000);
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#707070, #000000);
 }
 #site-header .wrapper menu#site-user-tools ul li.login a:hover {
   text-decoration: none;
-  background: #707070 url(../images/login-arrows.png) 54px -22px no-repeat;
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #707070));
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -webkit-linear-gradient(#000000, #707070);
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -moz-linear-gradient(#000000, #707070);
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -o-linear-gradient(#000000, #707070);
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, -ms-linear-gradient(#000000, #707070);
-  background: url(../images/login-arrows.png) 54px -22px no-repeat, linear-gradient(#000000, #707070);
+  background: #707070 url(../images/login-arrows.png) 54px -19px no-repeat;
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #707070));
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -webkit-linear-gradient(#000000, #707070);
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -moz-linear-gradient(#000000, #707070);
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -o-linear-gradient(#000000, #707070);
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, -ms-linear-gradient(#000000, #707070);
+  background: url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#000000, #707070);
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in {
+  text-transform: uppercase;
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in a {
+  font-size: 11px;
+  padding: 3px 10px;
+  -moz-border-radius: 2px 0 0 2px;
+  -webkit-border-radius: 2px 0 0 2px;
+  -o-border-radius: 2px 0 0 2px;
+  -ms-border-radius: 2px 0 0 2px;
+  -khtml-border-radius: 2px 0 0 2px;
+  border-radius: 2px 0 0 2px;
+  background: #000000;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #707070), color-stop(100%, #000000));
+  background: -webkit-linear-gradient(#707070, #000000);
+  background: -moz-linear-gradient(#707070, #000000);
+  background: -o-linear-gradient(#707070, #000000);
+  background: -ms-linear-gradient(#707070, #000000);
+  background: linear-gradient(#707070, #000000);
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in a:hover {
+  text-decoration: none;
+  background: #707070 no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #707070));
+  background: -webkit-linear-gradient(#000000, #707070);
+  background: -moz-linear-gradient(#000000, #707070);
+  background: -o-linear-gradient(#000000, #707070);
+  background: -ms-linear-gradient(#000000, #707070);
+  background: linear-gradient(#000000, #707070);
+}
+#site-header .wrapper menu#site-user-tools ul li.logged-in-name {
+  display: block;
+  margin: 3px 10px 0 0;
+  color: #fff;
 }
 #site-header .wrapper menu#site-user-tools ul li.active {
   position: relative;
   border-top: 1px solid #666666;
   border-left: 1px solid #666666;
-  border-right: 1px solid #666666;
   z-index: 2;
 }
 #site-header .wrapper menu#site-user-tools ul li.active a {
@@ -110,22 +160,28 @@ josh [at] supercooldesign.co.uk
   -ms-border-radius: 0;
   -khtml-border-radius: 0;
   border-radius: 0;
-  background: #e6e6e6 url(../images/login-arrows.png) 54px 8px no-repeat;
+  background: #e6e6e6 url(../images/login-arrows.png) 54px 11px no-repeat;
 }
 #site-header .wrapper menu#site-user-tools ul li.active a:hover {
   color: black;
-  background: #e6e6e6 url(../images/login-arrows.png) 54px 8px no-repeat;
+  background: #e6e6e6 url(../images/login-arrows.png) 54px 11px no-repeat;
 }
 #site-header .wrapper #login-box {
   z-index: 1;
   position: absolute;
-  right: 200px;
-  top: 35px;
+  right: 25px;
+  top: 26px;
   display: none;
   background: #e6e6e6;
-  border: 1px solid #666666;
-  width: 200px;
+  border-left: 1px solid #666666;
+  border-right: 1px solid #666666;
+  border-bottom: 1px solid #666666;
+  width: 175px;
   padding: 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
+  -o-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
 }
 #site-header .wrapper #login-box #login {
   padding: 0;
@@ -137,7 +193,7 @@ josh [at] supercooldesign.co.uk
 }
 #site-header .wrapper #login-box #login form input#id_username,
 #site-header .wrapper #login-box #login form input#id_password {
-  width: 188px;
+  width: 163px;
   margin: 0 0 10px 0;
 }
 #site-header .wrapper #login-box #login form input.login-button {
@@ -161,7 +217,7 @@ josh [at] supercooldesign.co.uk
 }
 #site-header .wrapper #search {
   position: absolute;
-  top: 10px;
+  top: 0;
   right: 0;
   background: transparent;
   padding: 0;
@@ -169,7 +225,7 @@ josh [at] supercooldesign.co.uk
   border: none;
 }
 #site-header .wrapper #search input {
-  width: 100px;
+  width: 117px;
   border: 1px solid black;
   font-size: 14px;
 }
@@ -279,6 +335,7 @@ josh [at] supercooldesign.co.uk
 
 #site-footer > .wrapper {
   display: block;
+  padding: 0;
 }
 #site-footer ul {
   list-style-type: none;
@@ -294,6 +351,9 @@ josh [at] supercooldesign.co.uk
   padding: 0;
   margin: 0;
   border: 0;
+}
+#site-footer ul li {
+  margin-bottom: 10px;
 }
 #site-footer .subscribe-box {
   display: block;
@@ -717,20 +777,25 @@ ul.listing li section a.read-more:hover {
   margin-top: 15px;
   line-height: 25px;
   padding: 6px;
-  background: url(../images/arrow-down.png) right 0 no-repeat;
   font-weight: normal;
   font-size: 16px;
-}
-#page .home-left h2#home-intro:hover {
-  background-color: #e5fff3;
-  color: #009245;
-  cursor: pointer;
 }
 #page .home-left h2#home-intro .details {
   display: none;
 }
-#page .home-left h2#home-intro.active {
-  background: #e5fff3 url(../images/arrow-up.png) right 0 no-repeat;
+#page .home-left h2#home-intro .home-read-more {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #b3b3b3;
+  padding-right: 18px;
+  background: url(../images/chevron-down-sml.png) right 2px no-repeat;
+}
+#page .home-left h2#home-intro .home-read-more:hover {
+  color: #a2a2a2;
+  text-decoration: none;
+}
+#page .home-left h2#home-intro .home-read-more.active {
+  background: url(../images/chevron-up-sml.png) right 2px no-repeat;
 }
 #page .home-right {
   float: left;
@@ -738,11 +803,19 @@ ul.listing li section a.read-more:hover {
 }
 
 #home-search {
+  background: #2e2e2e;
   margin: 30px 0;
   padding: 20px;
 }
+#home-search label {
+  color: white;
+}
 #home-search input {
   width: 260px;
+  margin-right: 10px;
+}
+#home-search > a {
+  color: gray;
 }
 
 #home-featured {
