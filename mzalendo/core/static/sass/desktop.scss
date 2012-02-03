@@ -850,26 +850,25 @@ ul#home-news-list {
 
 
 .featured-person {
-  color:$colour6;
-  margin:0.666em 0 2em 0;
-  background-color:$colour1;
+  color:$colour5;
+  margin:0 0 30px 0;
+  border:1px solid $colour13;
+  background:$colour9;
+  overflow:hidden;
   img {
     float:left;
-    max-width: 200px;
-    border:4px solid $colour1;
+    max-width: 180px;
   }
   .featured-person-info {
-    height:200px;
     position:relative;
     margin-left:200px;
-    padding:10px;
-    background-color:$colour1;
+    // padding:10px;
     .feature-nav {
       float:right; 
       display:block;
       width:20px;
       height:20px;
-      background-image:url(/static/images/feature_chevrons.png);
+      background-image:url(../images/feature_chevrons.png);
       background-repeat: no-repeat;          
       &.feature-prev {
         background-position: 0 0; 
@@ -897,7 +896,7 @@ ul#home-news-list {
       bottom:0;
       right:0;
       padding:20px 0 0 0;
-      background:url(/static/images/fade-to-green.png) 0 0 repeat-x;
+      background:url(../images/fade-to-green.png) 0 0 repeat-x;
       width:100%;
       margin:0;
       .rating {
