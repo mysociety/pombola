@@ -882,7 +882,7 @@ h3.scorecard-overall {
   .home-left,
   .home-right {
     h2 {
-      margin:0;
+      margin:0 0 10px 0;
       background:none;
       border-top:none;
       color:$colour8;
@@ -1027,6 +1027,15 @@ ul#home-news-list {
 .tw-follow {
   display:none;
 }
+#home-links {
+  margin-bottom:30px;
+  a {
+    @include big-button-text-green;
+    display:block;
+    margin:10px;
+    padding:10px;
+  }
+}
 
 /* Login Page */
 #login-pagetitle {
@@ -1087,5 +1096,15 @@ ul#home-news-list {
       display:block;
       margin:10px 0;
     }
+  }
+}
+
+
+/* appearances tab bits */
+h2 a.appearances-trigger {
+  background:url(../images/chevron-right-alt.png) right center no-repeat;
+  display:block;
+  &.active {
+    background:url(../images/chevron-down-alt.png) right center no-repeat;
   }
 }
