@@ -232,6 +232,10 @@ josh [at] supercooldesign.co.uk
   background: -ms-linear-gradient(#555555, #000000);
   background: linear-gradient(#555555, #000000);
 }
+#main-menu nav ul li ul {
+  display: none;
+  /* temporary hide prior to proper styling FIXME! */
+}
 
 #breadcrumb {
   display: block;
