@@ -142,6 +142,7 @@ josh [at] supercooldesign.co.uk
   background: linear-gradient(#000000, #707070);
 }
 #site-header .wrapper menu#site-user-tools ul li.logged-in-name {
+  display: block;
   margin: 3px 10px 0 0;
   color: #fff;
 }

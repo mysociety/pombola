@@ -680,6 +680,9 @@ pre {
   color: white;
   background: black;
 }
+#site-header .wrapper menu#site-user-tools ul li.logged-in-name {
+  display: none;
+}
 
 #main-menu nav {
   width: 100%;
