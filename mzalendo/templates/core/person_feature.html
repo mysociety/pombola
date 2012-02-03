@@ -1,26 +1,38 @@
 {% load thumbnail %}
 
 <div class="featured-person">
-    {% thumbnail featured_person.primary_image "200x200" as im %}
-        <img src="{{ im.url }}" alt="{{ featured_person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-    {% empty %}
-        <img src="{{STATIC_URL}}images/avatar-200x200.jpg" />
-    {% endthumbnail %}        
+    <a href="{{ featured_person.get_absolute_url }}">
+        {% thumbnail featured_person.primary_image "200x200" as im %}
+            <img src="{{ im.url }}" alt="{{ featured_person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% empty %}
+            <img src="{{STATIC_URL}}images/avatar-200x200.jpg" />
+        {% endthumbnail %}
+    </a>
     <div class="featured-person-info">
         <a class="feature-nav feature-next" href="/?after={{ featured_person.slug }}"></a>
         <a class="feature-nav feature-prev" href="/?before={{ featured_person.slug }}"></a>
-        <h2 style="color:#fff;text-transform:none;">{{ featured_person.name }}</h2>
-        <div class="feature-person-title" style="margin:0.5em 0;font-style:italic;">{{ featured_person.title }}</div>
-        <p class="" style="overflow:hidden;text-overflow:ellipsis; height: 120px;white-space: normal;margin:0;">
+        <a href="{{ featured_person.get_absolute_url }}">
+            <h2 style="color:#fff;text-transform:none;">        
+                {{ featured_person.title }}{{ featured_person.name }}
+            </h2>
+        </a>
+        <div class="feature-person-role">
+            {% if featured_person.is_mp %}
+                Kenyan Member of Parliament
+            {% endif %}    
+        </div>
+        <div class="feature-person-summary">
             {{ featured_person.summary }}
-        </p>
-        <div class="rating {{ featured_person.scorecard_overall_as_word }}">
-            Mzalendo Rating: 
-            {% if featured_person.has_scorecards %}
-                <span style="font-weight:bold;">{{ featured_person.scorecard_overall_as_word|capfirst }}</span>
-            {% else %}
-                None
-            {% endif %}
+        </div>
+        <div class="rating-container">
+            <div class="rating {{ featured_person.scorecard_overall_as_word }}">
+                Mzalendo Rating: 
+                {% if featured_person.has_scorecards %}
+                    <strong>{{ featured_person.scorecard_overall_as_word|capfirst }}</strong>
+                {% else %}
+                    None
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
