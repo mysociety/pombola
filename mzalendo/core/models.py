@@ -451,6 +451,7 @@ class PositionTitle(ModelBase):
     summary = MarkupField(blank=True, default='')
     original_id = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to data in original mzalendo.com db')
     requires_place = models.BooleanField(default=False, help_text="Does this job title require a place to complete the position?")
+    display_order = models.IntegerField(blank=True, null=True, help_text='Used to order the politicians page - higher is earlier.')
 
     objects = ManagerBase()
 
