@@ -1449,7 +1449,7 @@ h3.scorecard-overall span.score-overall-bad {
 /* HOME */
 #page .home-left h2,
 #page .home-right h2 {
-  margin: 0;
+  margin: 0 0 10px 0;
   background: none;
   border-top: none;
   color: gray;
@@ -1615,6 +1615,75 @@ ul#home-news-list li img {
   display: none;
 }
 
+#home-links {
+  margin-bottom: 30px;
+}
+#home-links a {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  text-transform: none;
+  font-size: 14px;
+  padding: 5px 8px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  background: #87c43c;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
+  background: -webkit-linear-gradient(#96d942, #87c43c);
+  background: -moz-linear-gradient(#96d942, #87c43c);
+  background: -o-linear-gradient(#96d942, #87c43c);
+  background: -ms-linear-gradient(#96d942, #87c43c);
+  background: linear-gradient(#96d942, #87c43c);
+  display: block;
+  margin: 10px;
+  padding: 10px;
+}
+#home-links a {
+  *display: inline;
+}
+#home-links a:hover {
+  background: #a0a0a0;
+  color: white;
+}
+#home-links a {
+  *display: inline;
+}
+#home-links a:hover {
+  background: #96d942;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
+  background: -webkit-linear-gradient(#87c43c, #96d942);
+  background: -moz-linear-gradient(#87c43c, #96d942);
+  background: -o-linear-gradient(#87c43c, #96d942);
+  background: -ms-linear-gradient(#87c43c, #96d942);
+  background: linear-gradient(#87c43c, #96d942);
+}
+
 /* Login Page */
 #login-pagetitle {
   display: none;
@@ -1710,4 +1779,13 @@ ul#home-news-list li img {
   color: #666666;
   display: block;
   margin: 10px 0;
+}
+
+/* appearances tab bits */
+h2 a.appearances-trigger {
+  background: url(../images/chevron-right-alt.png) right center no-repeat;
+  display: block;
+}
+h2 a.appearances-trigger.active {
+  background: url(../images/chevron-down-alt.png) right center no-repeat;
 }
