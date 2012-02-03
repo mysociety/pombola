@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ object.title }}</h1>
+    <h1 class="page-title" data-sub-menu-id="{{ object.slug }}">{{ object.title }}</h1>
 
     <div class="markdown">
         {{ object.content }}

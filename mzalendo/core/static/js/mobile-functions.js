@@ -80,9 +80,8 @@ $(function(){
   });
 
   /*
-   * Get things
+   * Get appearances
    */
-
   var appearances_url = $('#appearances').attr('data-tab-content-source-url');
 
   $('#appearances').hide();
@@ -100,4 +99,12 @@ $(function(){
       });
     }
   });
+
+  /*
+   * Get the sub-menu links if on a page with child items
+   */
+  //if .page-title has a data-sub-menu-id attr
+  //clone the relavent ul#data-sub-menu-id from in the menu
+  //stick below .page-title
+  //show button inside .page-title that toggles the ul#data-sub-menu-id
 });
