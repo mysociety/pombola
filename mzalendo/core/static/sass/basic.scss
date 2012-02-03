@@ -310,6 +310,7 @@ pre {
       @include list-reset-soft;
       width:100%;
       li {
+        position:relative;
         a {
           display:block;
           height:20px;
@@ -329,6 +330,11 @@ pre {
         &:last-child a,
         &.last a {
           border-bottom:none;
+        }
+        ul {
+          position:absolute;
+          z-index:20;
+          left:-999999px;
         }
       }
     }
@@ -1048,10 +1054,34 @@ ul#home-news-list {
 #home-links {
   margin-bottom:30px;
   a {
-    @include big-button-text-green;
-    display:block;
-    margin:10px;
-    padding:10px;
+    &.aspirants {
+      @include border-radius(5px 5px 0 0);
+      color:$colour6;
+      display:block;
+      margin:10px 10px 3px 10px;
+      padding:10px;
+      background:$colour1;
+      @include background(linear-gradient($colour1/0.9, $colour1));
+      &:hover {
+        text-decoration:none;
+        background:$colour1/0.9;
+        @include background(linear-gradient($colour1, $colour1/0.9));
+      }
+    }
+    &.citizens {
+      @include border-radius(0 0 5px 5px);
+      color:$colour6;
+      display:block;
+      margin:0 10px 10px 10px;
+      padding:10px;
+      background:$colour2;
+      @include background(linear-gradient($colour2/0.9, $colour2));
+      &:hover {
+        text-decoration:none;
+        background:$colour2/0.9;
+        @include background(linear-gradient($colour2, $colour2/0.9));
+      }
+    }
   }
 }
 
