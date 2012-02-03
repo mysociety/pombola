@@ -699,6 +699,9 @@ pre {
   margin: 0;
   border: 0;
 }
+#main-menu nav ul li {
+  position: relative;
+}
 #main-menu nav ul li a {
   display: block;
   height: 20px;
@@ -715,6 +718,11 @@ pre {
 }
 #main-menu nav ul li:last-child a, #main-menu nav ul li.last a {
   border-bottom: none;
+}
+#main-menu nav ul li ul {
+  position: absolute;
+  z-index: 20;
+  left: -999999px;
 }
 
 #breadcrumb {

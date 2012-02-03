@@ -219,8 +219,30 @@ josh [at] supercooldesign.co.uk
             @include background(linear-gradient($colour4/1.4, $colour5));
           }
         }
-        ul {
-          display: none; /* temporary hide prior to proper styling FIXME! */
+        &:hover {
+          ul {
+            left:0;
+            top:40px;
+            text-align:left;
+            width:200px;
+            border:1px solid #d4d4d4;
+            li {
+              display:block;
+              float:none;
+              height:auto;
+              border:none;
+              a {
+                font-size:14px;
+                color:#444;
+                background:#f6f6f6;
+                height:auto;
+                float:none;
+                &:hover {
+                  background:#d4d4d4;
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -310,6 +310,7 @@ pre {
       @include list-reset-soft;
       width:100%;
       li {
+        position:relative;
         a {
           display:block;
           height:20px;
@@ -329,6 +330,11 @@ pre {
         &:last-child a,
         &.last a {
           border-bottom:none;
+        }
+        ul {
+          position:absolute;
+          z-index:20;
+          left:-999999px;
         }
       }
     }

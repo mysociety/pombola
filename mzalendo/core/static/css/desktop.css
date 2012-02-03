@@ -288,9 +288,28 @@ josh [at] supercooldesign.co.uk
   background: -ms-linear-gradient(#555555, #000000);
   background: linear-gradient(#555555, #000000);
 }
-#main-menu nav ul li ul {
-  display: none;
-  /* temporary hide prior to proper styling FIXME! */
+#main-menu nav ul li:hover ul {
+  left: 0;
+  top: 40px;
+  text-align: left;
+  width: 200px;
+  border: 1px solid #d4d4d4;
+}
+#main-menu nav ul li:hover ul li {
+  display: block;
+  float: none;
+  height: auto;
+  border: none;
+}
+#main-menu nav ul li:hover ul li a {
+  font-size: 14px;
+  color: #444;
+  background: #f6f6f6;
+  height: auto;
+  float: none;
+}
+#main-menu nav ul li:hover ul li a:hover {
+  background: #d4d4d4;
 }
 
 #breadcrumb {
