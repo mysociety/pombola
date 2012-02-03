@@ -124,9 +124,11 @@ p {
 
 a {
   color: #009245;
+  text-decoration: none;
 }
 a:hover {
-  color: #87c43c;
+  color: #004422;
+  text-decoration: underline;
 }
 
 .vcard li.address p {
@@ -732,6 +734,7 @@ pre {
   display: table;
   caption-side: top;
   position: relative;
+  padding-top: 5px;
 }
 #site-footer p {
   font-style: italic;
@@ -742,13 +745,23 @@ pre {
   padding: 0;
   margin: 0;
   clear: both;
-  margin: 10px;
+  margin: 0 10px;
 }
 #site-footer ul li {
   list-style-type: none;
   padding: 0;
   margin: 0;
   border: 0;
+}
+#site-footer ul li {
+  border-top: 1px solid #b3b3b3;
+  padding: 5px 0;
+}
+#site-footer ul li a:hover {
+  text-decoration: none;
+}
+#site-footer ul.nav li:first-child {
+  border-top: none;
 }
 #site-footer .subscribe-box {
   display: table-caption;
