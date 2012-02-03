@@ -773,20 +773,25 @@ ul.listing li section a.read-more:hover {
   margin-top: 15px;
   line-height: 25px;
   padding: 6px;
-  background: url(../images/arrow-down.png) right 0 no-repeat;
   font-weight: normal;
   font-size: 16px;
-}
-#page .home-left h2#home-intro:hover {
-  background-color: #e5fff3;
-  color: #009245;
-  cursor: pointer;
 }
 #page .home-left h2#home-intro .details {
   display: none;
 }
-#page .home-left h2#home-intro.active {
-  background: #e5fff3 url(../images/arrow-up.png) right 0 no-repeat;
+#page .home-left h2#home-intro .home-read-more {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #b3b3b3;
+  padding-right: 18px;
+  background: url(../images/chevron-down-sml.png) right 2px no-repeat;
+}
+#page .home-left h2#home-intro .home-read-more:hover {
+  color: #a2a2a2;
+  text-decoration: none;
+}
+#page .home-left h2#home-intro .home-read-more.active {
+  background: url(../images/chevron-up-sml.png) right 2px no-repeat;
 }
 #page .home-right {
   float: left;
@@ -794,11 +799,19 @@ ul.listing li section a.read-more:hover {
 }
 
 #home-search {
+  background: #2e2e2e;
   margin: 30px 0;
   padding: 20px;
 }
+#home-search label {
+  color: white;
+}
 #home-search input {
   width: 260px;
+  margin-right: 10px;
+}
+#home-search > a {
+  color: gray;
 }
 
 #home-featured {

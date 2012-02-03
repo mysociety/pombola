@@ -61,8 +61,13 @@ $(function(){
     });
     
     // hide/show home intro
-    $('#home-intro').live('click', function(){
-      hideShow($('span.details', $(this)), $(this));
+    $('.home-read-more').on('click', function(){
+      hideShow($('#home-intro span.details'), $(this));
+      if($('.home-read-more.active').length !== 0){
+        $(this).text('less');
+      }else{
+        $(this).text('more');
+      }
     });
     
     // featured-person prev and next clicks: for now, we only have this in one place, so use id

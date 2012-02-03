@@ -657,21 +657,26 @@ ul.listing {
       margin-top:15px;
       line-height:25px;
       padding: 6px;
-      background:url(../images/arrow-down.png) right 0 no-repeat;
       font: {
         weight:normal;
         size:16px;
       }
-      &:hover {
-        background-color: $colour15;
-        color: $colour1;
-        cursor: pointer;
-      } 
       .details {
         display: none;
-      }       
-      &.active {
-        background:$colour15 url(../images/arrow-up.png) right 0 no-repeat;
+      }
+      .home-read-more {
+        text-transform:uppercase;
+        font-size:12px;
+        color:$colour13;
+        padding-right:18px;
+        background:url(../images/chevron-down-sml.png) right 2px no-repeat;
+        &:hover {
+          color:$colour13/1.1;
+          text-decoration:none;
+        }
+        &.active {
+          background:url(../images/chevron-up-sml.png) right 2px no-repeat;
+        }
       }
     }
   }
@@ -681,10 +686,18 @@ ul.listing {
   }
 }
 #home-search {
+  background:$colour10;
   margin:30px 0;
   padding:20px;
+  label {
+    color:$colour6;
+  }
   input {
     width:260px;
+    margin-right:10px;
+  }
+  >a {
+    color:$colour8;
   }
 }
 #home-featured {
