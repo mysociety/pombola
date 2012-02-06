@@ -5,7 +5,8 @@ import csv
 import os
 import decimal
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'mzalendo.settings'
+sys.path.append('../../../')
 sys.path.append('../../')
 
 from mzalendo.core.models import Place
