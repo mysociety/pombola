@@ -6,6 +6,12 @@ set -e
 # check that we are in the expected directory
 cd `dirname $0`/..
 
+
+# Some env variables used during development seem to make things break - set
+# them back to the defaults which is what they would have on the servers.
+PYTHONDONTWRITEBYTECODE=""
+
+
 # create the virtual environment, install/update required packages
 virtualenv ../mzalendo-virtualenv
 source ../mzalendo-virtualenv/bin/activate

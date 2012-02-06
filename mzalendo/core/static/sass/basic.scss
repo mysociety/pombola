@@ -349,6 +349,44 @@ pre {
   display:block;
   background:$colour7;
   padding:10px;
+  &.has-sub-menu {
+    margin:0;
+  }
+  .m-sub-menu-trigger {
+    @include button-reset;
+    float:right;
+    border:1px solid $colour13;
+    height:24px;
+    width:24px;
+    background:#d2d2d2 url(../images/chevron-down-alt.png) center no-repeat;
+    @include background(
+      url(../images/chevron-down-alt.png) center no-repeat,
+      linear-gradient(#ffffff, #d2d2d2)
+    );
+    &.active {
+      background:#d2d2d2 url(../images/chevron-up-alt.png) center no-repeat;
+      @include background(
+        url(../images/chevron-up-alt.png) center no-repeat,
+        linear-gradient(#d2d2d2, #ffffff)
+      );
+    }
+  }
+}
+
+.m-sub-menu {
+  @include list-reset-soft;
+  background:$colour7;
+  li {
+    margin:0 10px;
+    border-top:1px solid $colour5;
+    a {
+      display:block;
+      padding:10px 0;
+      &:hover {
+        text-decoration:none;
+      }
+    }
+  }
 }
 
 #site-footer {
