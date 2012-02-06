@@ -9,23 +9,22 @@
         {% endthumbnail %}
     </a>
     <div class="featured-person-info">
-        <a class="feature-nav feature-next" href="/?after={{ featured_person.slug }}"></a>
-        <a class="feature-nav feature-prev" href="/?before={{ featured_person.slug }}"></a>
-        <a href="{{ featured_person.get_absolute_url }}">
-            <h2 style="color:#fff;text-transform:none;">        
-                {{ featured_person.title }}{{ featured_person.name }}
-            </h2>
-        </a>
-        <div class="feature-person-role">
-            {% if featured_person.is_mp %}
-                Kenyan Member of Parliament
-            {% endif %}    
+        <div class="feature-nav">
+            <a class="feature-prev" href="/?before={{ featured_person.slug }}">previous</a>
+            <a class="feature-next" href="/?after={{ featured_person.slug }}">next</a>
         </div>
+        
+        <h2><a href="{{ featured_person.get_absolute_url }}">{{ featured_person.title }}{{ featured_person.name }}</a></h2>
+
+        {% if featured_person.is_mp %}
+        <p class="feature-person-role">Kenyan Member of Parliament</p>
+        {% endif %}
+        
         <div class="feature-person-summary">
             {{ featured_person.summary }}
         </div>
         <div class="rating-container">
-            <div class="rating {{ featured_person.scorecard_overall_as_word }}">
+            <div class="rating">
                 Mzalendo Rating: 
                 {% if featured_person.has_scorecards %}
                     <strong>{{ featured_person.scorecard_overall_as_word|capfirst }}</strong>
@@ -33,6 +32,7 @@
                     None
                 {% endif %}
             </div>
+            <div class="rating-img {{ featured_person.scorecard_overall_as_word }}"></div>
         </div>
     </div>
 </div>
