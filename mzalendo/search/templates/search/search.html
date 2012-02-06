@@ -12,7 +12,13 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Search</h2>
+    <h2>Search Mzalendo</h2>
+
+    <p>Use this form to search Mzalendo's data.</p>
+    <p>
+        Alternatively,
+        <a href="{% url hansard_search  %}" class="aspirants">search Hansard transcipts</a> instead.
+    </p>
 
     <form method="get" action=".">
         <table>
@@ -45,7 +51,7 @@
             {% endif %}
         {% else %}
             {# Show some example queries to run, maybe query syntax, something else? #}
-            <p>Please search using the form above.</p>
+            <p>Example searches: <i>Nairobi</i>, <i>Uhuru Kenyatta</i></p>
         {% endif %}
     </form>
 {% endblock %}
