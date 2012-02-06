@@ -703,7 +703,8 @@ pre {
   left: -999999px;
 }
 
-#breadcrumb {
+#breadcrumb,
+#breadcrumb-replacement {
   display: none;
 }
 
