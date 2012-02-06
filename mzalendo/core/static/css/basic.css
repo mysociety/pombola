@@ -635,7 +635,7 @@ pre {
   background-color: #777777;
 }
 #site-header .wrapper menu#site-user-tools {
-  clear: both;
+  float: right;
 }
 #site-header .wrapper menu#site-user-tools ul {
   list-style-type: none;
@@ -648,40 +648,18 @@ pre {
   margin: 0;
   border: 0;
 }
-#site-header .wrapper menu#site-user-tools ul li.login a {
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-  background: #e6e6e6;
-  border-bottom: 2px solid white;
-  height: 20px;
+#site-header .wrapper menu#site-user-tools ul li {
   padding: 10px;
-  color: black;
-  text-decoration: none;
-}
-#site-header .wrapper menu#site-user-tools ul li.login a:hover {
-  color: white;
-  background: black;
-}
-#site-header .wrapper menu#site-user-tools ul li.logged-in {
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-  background: #e6e6e6;
-  border-bottom: 2px solid white;
-  height: 20px;
-  padding: 10px;
-}
-#site-header .wrapper menu#site-user-tools ul li.logged-in a {
-  color: black;
-  text-decoration: none;
-}
-#site-header .wrapper menu#site-user-tools ul li.logged-in a:hover {
-  color: white;
-  background: black;
 }
 #site-header .wrapper menu#site-user-tools ul li.logged-in-name {
   display: none;
+}
+#site-header .wrapper menu#site-user-tools ul li a {
+  color: white;
+  text-decoration: none;
+}
+#site-header .wrapper menu#site-user-tools ul li a:hover {
+  color: black;
 }
 
 #main-menu nav {
