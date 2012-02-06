@@ -11,6 +11,7 @@ url_name_mappings = {
   'organisation' : ('Organisations', '/organisation/all'),
   'person' : ('Politicians', '/person/all'),
   'place' : ('Places', '/place/all'),
+  'search' : ('Search', '/search')
 }
 
 separator = ' <span class="sep">&raquo;</span> ';
