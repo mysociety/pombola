@@ -6,6 +6,11 @@
     mzalendo_settings.extra_js.push( 'js/feeds.js' );
 {% endblock %}
 
+{% block breadcrumbs %}
+    {# Hide bread crumbs on the home page. Insert blank div to add padding #}
+    <div id="breadcrumb-replacement">&nbsp;</div>
+{% endblock %}
+
 {% block content %}
     <div class="home-left">
         <h2 id="home-intro">
