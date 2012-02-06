@@ -229,9 +229,7 @@ INSTALLED_APPS = (
     'search',
     'user_profile',
 
-    'place_data', # TODO - remove entry and app once migrations have run on all servers
-    
-
+    'place_data',
 )
 
 # A sample logging configuration. The only tangible logging
