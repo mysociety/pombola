@@ -1,3 +1,5 @@
+from __future__ import division
+
 from django.db import models
 
 from mzalendo.core import models as core_models
@@ -16,6 +18,23 @@ class Entry(models.Model):
 
     households_total = models.PositiveIntegerField()
     area = models.DecimalField(max_digits=10, decimal_places=2)
+
+    @property
+    def average_household_size(self):
+        return self.population_total / self.households_total
+
+    @property
+    def population_density(self):
+        return self.population_total / self.area
+
+    @property
+    def gender_index(self):
+        return self.population_female / self.population_male
+
+    @property
+    def household_density(self):
+        return self.households_total / self.area
+
 
 # class DataCategory(models.Model):
 #     DATA_TYPE_CHOICES = (
