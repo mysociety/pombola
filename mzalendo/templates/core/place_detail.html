@@ -184,10 +184,24 @@
 
             {% if object.is_constituency %}
                 <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects</a></h2>
-                    <div class="tab" id="cdf-projects">
-                        {% include "projects/place_summary.html" %}
-                    </div>
+                <div class="tab" id="cdf-projects">
+                    {% include "projects/place_summary.html" %}
+                </div>
             {% endif %}
+
+            {% if object.placedata %}
+                <h2 class="tab-nav" rel="#population-data"><a href="/">Population Data</a></h2>
+                <div class="tab" id="population-data">
+                    <dl>
+                        <dt>Population</dt><dd>{{ object.placedata.population_total }}</dd>
+                        <dt>Male</dt><dd>{{ object.placedata.population_male }}</dd>
+                        <dt>Female</dt><dd>{{ object.placedata.population_female }}</dd>
+                        <dt>Households</dt><dd>{{ object.placedata.households_total }}</dd>
+                        <dt>Area</dt><dd>{{ object.placedata.area }} km<sup>2</sup>
+                    </dl>
+                </div>
+            {% endif %}
+
         </div>
     </div>
 
