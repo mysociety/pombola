@@ -31,6 +31,11 @@ urlpatterns += patterns('',
     (r'^info/', include('info.urls')),
 )
 
+# File archive
+urlpatterns += patterns('',
+    (r'^file_archive/', include('file_archive.urls')),
+)
+
 # Hansard pages
 urlpatterns += patterns('',
     (r'^hansard/', include('hansard.urls', namespace='hansard', app_name='hansard')),
