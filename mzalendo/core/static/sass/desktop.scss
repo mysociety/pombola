@@ -867,7 +867,7 @@ ul#home-news-list {
 
 
 .featured-person {
-  color:$colour5;
+  color:#333333;
   margin:0 0 30px 0;
   border:1px solid $colour13;
   background:$colour9;
@@ -879,59 +879,74 @@ ul#home-news-list {
   .featured-person-info {
     position:relative;
     margin-left:200px;
-    // padding:10px;
+    max-width: 300px;
+    min-height: 180px;
     .feature-nav {
-      float:right; 
-      display:block;
-      width:20px;
-      height:20px;
-      background-image:url(../images/feature_chevrons.png);
-      background-repeat: no-repeat;          
-      &.feature-prev {
-        background-position: 0 0; 
+      float:right;
+      a {
+        @include button-reset;
+        display:block;
+        width:20px;
+        height:22px;
+        float:left;
+        @include opacity(0.7);
+      }
+      .feature-prev {
+        background:transparent url(../images/chevron-left-alt.png) center no-repeat;
+        margin-right:10px;
         &:hover {
-          background-position:0 -20px;
+          @include opacity(1);
         }
       }
-      &.feature-next {
-        background-position: -20px 0;
+      .feature-next {
+        background:transparent url(../images/chevron-right-alt.png) center no-repeat;
         &:hover {
-          background-position:-20px -20px;
+          @include opacity(1);
         }
+      }
+    }
+    h2 {
+      margin:15px 0 0 0 !important;
+      line-height:30px;
+      a {
+        text-transform:none;
       }
     }
     .feature-person-role {
-      margin:0.5em 0;
+      color:$colour8;
       font-style:italic;
     }
     .feature-person-summary {
-      overflow:hidden;
-      margin:0;
+      padding:0 0 40px 0;
+      p {
+        font-size:12px;
+      }
     }
     .rating-container {
       position:absolute;
-      bottom:0;
-      right:0;
-      padding:20px 0 0 0;
-      width:100%;
+      bottom:10px;
+      right:10px;
       margin:0;
       .rating {
-        padding:4px 30px 4px 4px;
-        text-align:right;
-        margin:0 0.5em 0 0;
-        font-size:1.2em; 
-        min-height:24px;
-        background-position: right 0;
-        background-repeat: no-repeat;
-        &.bad {
-          background-image:url(/static/images/score-bad.png);
-        }
-        &.average {
-          background-image:url(/static/images/score-average.png);
-        }
-        &.good {
-          background-image:url(/static/images/score-good.png);
-        }
+        max-width:300px;
+        margin:0 40px 15px 0;
+        font-size:17px;
+      }
+      .rating-img {
+        position:absolute;
+        right:0;
+        bottom:10px;
+        height:32px;
+        width:32px;
+          &.bad {
+            background:url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
+          }
+          &.average {
+            background:url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat;
+          }
+          &.good {
+            background:url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
+          }
       }
     }
   }

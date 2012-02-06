@@ -999,7 +999,7 @@ ul#home-news-list li img {
 }
 
 .featured-person {
-  color: black;
+  color: #333333;
   margin: 0 0 30px 0;
   border: 1px solid #b3b3b3;
   background: #f6f6f6;
@@ -1012,60 +1012,92 @@ ul#home-news-list li img {
 .featured-person .featured-person-info {
   position: relative;
   margin-left: 200px;
+  max-width: 300px;
+  min-height: 180px;
 }
 .featured-person .featured-person-info .feature-nav {
   float: right;
+}
+.featured-person .featured-person-info .feature-nav a {
+  cursor: pointer;
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  text-indent: -999999px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
   display: block;
   width: 20px;
-  height: 20px;
-  background-image: url(../images/feature_chevrons.png);
-  background-repeat: no-repeat;
+  height: 22px;
+  float: left;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
 }
-.featured-person .featured-person-info .feature-nav.feature-prev {
-  background-position: 0 0;
+.featured-person .featured-person-info .feature-nav .feature-prev {
+  background: transparent url(../images/chevron-left-alt.png) center no-repeat;
+  margin-right: 10px;
 }
-.featured-person .featured-person-info .feature-nav.feature-prev:hover {
-  background-position: 0 -20px;
+.featured-person .featured-person-info .feature-nav .feature-prev:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
 }
-.featured-person .featured-person-info .feature-nav.feature-next {
-  background-position: -20px 0;
+.featured-person .featured-person-info .feature-nav .feature-next {
+  background: transparent url(../images/chevron-right-alt.png) center no-repeat;
 }
-.featured-person .featured-person-info .feature-nav.feature-next:hover {
-  background-position: -20px -20px;
+.featured-person .featured-person-info .feature-nav .feature-next:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+.featured-person .featured-person-info h2 {
+  margin: 15px 0 0 0 !important;
+  line-height: 30px;
+}
+.featured-person .featured-person-info h2 a {
+  text-transform: none;
 }
 .featured-person .featured-person-info .feature-person-role {
-  margin: 0.5em 0;
+  color: gray;
   font-style: italic;
 }
 .featured-person .featured-person-info .feature-person-summary {
-  overflow: hidden;
-  margin: 0;
+  padding: 0 0 40px 0;
+}
+.featured-person .featured-person-info .feature-person-summary p {
+  font-size: 12px;
 }
 .featured-person .featured-person-info .rating-container {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 20px 0 0 0;
-  width: 100%;
+  bottom: 10px;
+  right: 10px;
   margin: 0;
 }
 .featured-person .featured-person-info .rating-container .rating {
-  padding: 4px 30px 4px 4px;
-  text-align: right;
-  margin: 0 0.5em 0 0;
-  font-size: 1.2em;
-  min-height: 24px;
-  background-position: right 0;
-  background-repeat: no-repeat;
+  max-width: 300px;
+  margin: 0 40px 15px 0;
+  font-size: 17px;
 }
-.featured-person .featured-person-info .rating-container .rating.bad {
-  background-image: url(/static/images/score-bad.png);
+.featured-person .featured-person-info .rating-container .rating-img {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  height: 32px;
+  width: 32px;
 }
-.featured-person .featured-person-info .rating-container .rating.average {
-  background-image: url(/static/images/score-average.png);
+.featured-person .featured-person-info .rating-container .rating-img.bad {
+  background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
 }
-.featured-person .featured-person-info .rating-container .rating.good {
-  background-image: url(/static/images/score-good.png);
+.featured-person .featured-person-info .rating-container .rating-img.average {
+  background: url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat;
+}
+.featured-person .featured-person-info .rating-container .rating-img.good {
+  background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
 }
 .featured-person.featured-person-placeholder {
   text-align: center;
