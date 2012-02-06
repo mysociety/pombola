@@ -1019,29 +1019,7 @@ h3.scorecard-overall {
     }
   }
 }
-#home-featured {
-  margin-top:20px;
-  padding:10px;
-  overflow:hidden;
-  img {
-    width:90px;
-    height:auto;
-    float:left;
-    margin-right:10px;
-  }
-  .caption {
-    padding-left:100px;
-  }
-  p {
-    margin:0;
-    &.meta {
-      font: {
-        style:italic;
-        size:13px;
-      }
-    }
-  }
-}
+
 ul#home-news-list {
   @include list-reset-soft;
   border-top:5px solid $colour9;

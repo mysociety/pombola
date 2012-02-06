@@ -741,29 +741,6 @@ ul.listing {
     color:$colour8;
   }
 }
-#home-featured {
-  margin:0 0 30px 0;
-  padding:0;
-  position:relative;
-  img {
-    width:auto;
-    float:none;
-    margin:0;
-  }
-  .caption {
-    position:absolute;
-    bottom:0;
-    left:0;
-    padding:10px;
-    width:490px;
-    background:$colour5;
-    background:rgba(0, 0, 0, 0.8);
-    color:$colour6;
-    h4 {
-      display:none;
-    }
-  }
-}
 ul#home-news-list {
   margin-top:15px;
   li {
@@ -889,7 +866,6 @@ ul#home-news-list {
 }
 
 
-
 .featured-person {
   color:$colour5;
   margin:0 0 30px 0;
@@ -937,7 +913,6 @@ ul#home-news-list {
       bottom:0;
       right:0;
       padding:20px 0 0 0;
-      background:url(../images/fade-to-green.png) 0 0 repeat-x;
       width:100%;
       margin:0;
       .rating {
@@ -966,6 +941,7 @@ ul#home-news-list {
     background: $colour1 url(/static/images/logo-450-x-150.png) center center no-repeat;
   }
 }
+
 
 /* =================================== */
 

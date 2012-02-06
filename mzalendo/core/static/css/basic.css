@@ -1626,28 +1626,6 @@ h3.scorecard-overall span.score-overall-bad {
   text-decoration: underline;
 }
 
-#home-featured {
-  margin-top: 20px;
-  padding: 10px;
-  overflow: hidden;
-}
-#home-featured img {
-  width: 90px;
-  height: auto;
-  float: left;
-  margin-right: 10px;
-}
-#home-featured .caption {
-  padding-left: 100px;
-}
-#home-featured p {
-  margin: 0;
-}
-#home-featured p.meta {
-  font-style: italic;
-  font-size: 13px;
-}
-
 ul#home-news-list {
   list-style-type: none;
   padding: 0;

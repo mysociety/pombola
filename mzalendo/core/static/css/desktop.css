@@ -853,30 +853,6 @@ ul.listing li section a.read-more:hover {
   color: gray;
 }
 
-#home-featured {
-  margin: 0 0 30px 0;
-  padding: 0;
-  position: relative;
-}
-#home-featured img {
-  width: auto;
-  float: none;
-  margin: 0;
-}
-#home-featured .caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 10px;
-  width: 490px;
-  background: black;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-}
-#home-featured .caption h4 {
-  display: none;
-}
-
 ul#home-news-list {
   margin-top: 15px;
 }
@@ -1070,7 +1046,6 @@ ul#home-news-list li img {
   bottom: 0;
   right: 0;
   padding: 20px 0 0 0;
-  background: url(../images/fade-to-green.png) 0 0 repeat-x;
   width: 100%;
   margin: 0;
 }
