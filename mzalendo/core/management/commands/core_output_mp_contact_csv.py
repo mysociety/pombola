@@ -48,10 +48,10 @@ class Command(BaseCommand):
                 value = value.encode('utf-8')
 
                 contact_field_names_set.add(kind_name)
-                try:
-                    data[ kind_name ] = value
-                except KeyError:
+                if data.get( kind_name, None ):
                     data[ kind_name ] += '; ' + value
+                else:
+                    data[ kind_name ] = value
 
             mp_data.append(data)
         
