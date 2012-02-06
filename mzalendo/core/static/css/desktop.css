@@ -999,23 +999,18 @@ ul#home-news-list li img {
 }
 
 .featured-person {
-  color: #333333;
-  margin: 0 0 30px 0;
   border: 1px solid #b3b3b3;
-  background: #f6f6f6;
-  overflow: hidden;
 }
 .featured-person img {
-  float: left;
   max-width: 180px;
 }
 .featured-person .featured-person-info {
-  position: relative;
   margin-left: 200px;
   max-width: 300px;
   min-height: 180px;
 }
 .featured-person .featured-person-info .feature-nav {
+  display: block;
   float: right;
 }
 .featured-person .featured-person-info .feature-nav a {
@@ -1059,50 +1054,21 @@ ul#home-news-list li img {
   margin: 15px 0 0 0 !important;
   line-height: 30px;
 }
-.featured-person .featured-person-info h2 a {
-  text-transform: none;
-}
-.featured-person .featured-person-info .feature-person-role {
-  color: gray;
-  font-style: italic;
-}
 .featured-person .featured-person-info .feature-person-summary {
+  display: block;
   padding: 0 0 40px 0;
 }
 .featured-person .featured-person-info .feature-person-summary p {
   font-size: 12px;
 }
 .featured-person .featured-person-info .rating-container {
-  position: absolute;
   bottom: 10px;
-  right: 10px;
-  margin: 0;
 }
 .featured-person .featured-person-info .rating-container .rating {
-  max-width: 300px;
   margin: 0 40px 15px 0;
-  font-size: 17px;
 }
 .featured-person .featured-person-info .rating-container .rating-img {
-  position: absolute;
-  right: 0;
   bottom: 10px;
-  height: 32px;
-  width: 32px;
-}
-.featured-person .featured-person-info .rating-container .rating-img.bad {
-  background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
-}
-.featured-person .featured-person-info .rating-container .rating-img.average {
-  background: url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat;
-}
-.featured-person .featured-person-info .rating-container .rating-img.good {
-  background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
-}
-.featured-person.featured-person-placeholder {
-  text-align: center;
-  height: 250px;
-  background: #009245 url(/static/images/logo-450-x-150.png) center center no-repeat;
 }
 
 /* =================================== */

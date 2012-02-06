@@ -867,21 +867,16 @@ ul#home-news-list {
 
 
 .featured-person {
-  color:#333333;
-  margin:0 0 30px 0;
   border:1px solid $colour13;
-  background:$colour9;
-  overflow:hidden;
   img {
-    float:left;
     max-width: 180px;
   }
   .featured-person-info {
-    position:relative;
     margin-left:200px;
-    max-width: 300px;
+    max-width:300px;
     min-height: 180px;
     .feature-nav {
+      display:block;
       float:right;
       a {
         @include button-reset;
@@ -908,52 +903,23 @@ ul#home-news-list {
     h2 {
       margin:15px 0 0 0 !important;
       line-height:30px;
-      a {
-        text-transform:none;
-      }
-    }
-    .feature-person-role {
-      color:$colour8;
-      font-style:italic;
     }
     .feature-person-summary {
+      display:block;
       padding:0 0 40px 0;
       p {
         font-size:12px;
       }
     }
     .rating-container {
-      position:absolute;
       bottom:10px;
-      right:10px;
-      margin:0;
       .rating {
-        max-width:300px;
         margin:0 40px 15px 0;
-        font-size:17px;
       }
       .rating-img {
-        position:absolute;
-        right:0;
         bottom:10px;
-        height:32px;
-        width:32px;
-          &.bad {
-            background:url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
-          }
-          &.average {
-            background:url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat;
-          }
-          &.good {
-            background:url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
-          }
       }
     }
-  }
-  &.featured-person-placeholder {
-    text-align: center;
-    height: 250px;
-    background: $colour1 url(/static/images/logo-450-x-150.png) center center no-repeat;
   }
 }
 
