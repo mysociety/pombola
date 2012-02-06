@@ -351,10 +351,14 @@ pre {
   padding:10px;
   &.has-sub-menu {
     margin:0;
+    padding-right:40px;
+    position:relative;
   }
   .m-sub-menu-trigger {
     @include button-reset;
-    float:right;
+    position:absolute;
+    right:10px;
+    top:10px;
     border:1px solid $colour13;
     height:24px;
     width:24px;

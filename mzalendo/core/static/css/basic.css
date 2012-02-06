@@ -736,6 +736,8 @@ pre {
 }
 .page-title.has-sub-menu {
   margin: 0;
+  padding-right: 40px;
+  position: relative;
 }
 .page-title .m-sub-menu-trigger {
   cursor: pointer;
@@ -752,7 +754,9 @@ pre {
   -ms-border-radius: 2px;
   -khtml-border-radius: 2px;
   border-radius: 2px;
-  float: right;
+  position: absolute;
+  right: 10px;
+  top: 10px;
   border: 1px solid #b3b3b3;
   height: 24px;
   width: 24px;
