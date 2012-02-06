@@ -219,8 +219,30 @@ josh [at] supercooldesign.co.uk
             @include background(linear-gradient($colour4/1.4, $colour5));
           }
         }
-        ul {
-          display: none; /* temporary hide prior to proper styling FIXME! */
+        &:hover {
+          ul {
+            left:0;
+            top:40px;
+            text-align:left;
+            width:200px;
+            border:1px solid #d4d4d4;
+            li {
+              display:block;
+              float:none;
+              height:auto;
+              border:none;
+              a {
+                font-size:14px;
+                color:#444;
+                background:#f6f6f6;
+                height:auto;
+                float:none;
+                &:hover {
+                  background:#d4d4d4;
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -809,34 +831,75 @@ ul#home-news-list {
 }
 
 #home-links {
-  text-align:center;
+  overflow:hidden;
   a {
-    margin:0 3px;
-    display:inline;
+    width:213px;
+    height:60px;
+    float:left;
+    line-height:30px;
+    font: {
+      size:22px;
+      weight:bold;
+    }
+    &.aspirants {
+      @include border-radius(5px 0 0 5px);
+      margin:0 3px 0 0;
+      padding:20px;
+      background:$colour1 url(../images/big-chevron.png) 180px center no-repeat;
+      @include background(
+        url(../images/big-chevron.png) 180px center no-repeat,
+        linear-gradient($colour1/0.9, $colour1)
+      );
+      &:hover {
+        background:$colour1/0.9 url(../images/big-chevron.png) 180px center no-repeat;
+        @include background(
+          url(../images/big-chevron.png) 180px center no-repeat,
+          linear-gradient($colour1, $colour1/0.9)
+        );
+      }
+    }
+    &.citizens {
+      @include border-radius(0 5px 5px 0);
+      margin:0;
+      padding:20px;
+      background:$colour2 url(../images/big-chevron.png) 180px center no-repeat;
+      @include background(
+        url(../images/big-chevron.png) 180px center no-repeat,
+        linear-gradient($colour2/0.9, $colour2)
+      );
+      &:hover {
+        background:$colour2/0.9 url(../images/big-chevron.png) 180px center no-repeat;
+        @include background(
+          url(../images/big-chevron.png) 180px center no-repeat,
+          linear-gradient($colour2, $colour2/0.9)
+        );
+      }
+    }
   }
 }
 
+
+
 .featured-person {
-  color:$colour6;
-  margin:0.666em 0 2em 0;
-  background-color:$colour1;
+  color:$colour5;
+  margin:0 0 30px 0;
+  border:1px solid $colour13;
+  background:$colour9;
+  overflow:hidden;
   img {
     float:left;
-    max-width: 200px;
-    border:4px solid $colour1;
+    max-width: 180px;
   }
   .featured-person-info {
-    height:200px;
     position:relative;
     margin-left:200px;
-    padding:10px;
-    background-color:$colour1;
+    // padding:10px;
     .feature-nav {
       float:right; 
       display:block;
       width:20px;
       height:20px;
-      background-image:url(/static/images/feature_chevrons.png);
+      background-image:url(../images/feature_chevrons.png);
       background-repeat: no-repeat;          
       &.feature-prev {
         background-position: 0 0; 
@@ -864,7 +927,7 @@ ul#home-news-list {
       bottom:0;
       right:0;
       padding:20px 0 0 0;
-      background:url(/static/images/fade-to-green.png) 0 0 repeat-x;
+      background:url(../images/fade-to-green.png) 0 0 repeat-x;
       width:100%;
       margin:0;
       .rating {

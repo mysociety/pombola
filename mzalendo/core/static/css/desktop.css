@@ -288,9 +288,28 @@ josh [at] supercooldesign.co.uk
   background: -ms-linear-gradient(#555555, #000000);
   background: linear-gradient(#555555, #000000);
 }
-#main-menu nav ul li ul {
-  display: none;
-  /* temporary hide prior to proper styling FIXME! */
+#main-menu nav ul li:hover ul {
+  left: 0;
+  top: 40px;
+  text-align: left;
+  width: 200px;
+  border: 1px solid #d4d4d4;
+}
+#main-menu nav ul li:hover ul li {
+  display: block;
+  float: none;
+  height: auto;
+  border: none;
+}
+#main-menu nav ul li:hover ul li a {
+  font-size: 14px;
+  color: #444;
+  background: #f6f6f6;
+  height: auto;
+  float: none;
+}
+#main-menu nav ul li:hover ul li a:hover {
+  background: #d4d4d4;
 }
 
 #breadcrumb {
@@ -930,36 +949,90 @@ ul#home-news-list li img {
 }
 
 #home-links {
-  text-align: center;
+  overflow: hidden;
 }
 #home-links a {
-  margin: 0 3px;
-  display: inline;
+  width: 213px;
+  height: 60px;
+  float: left;
+  line-height: 30px;
+  font-size: 22px;
+  font-weight: bold;
+}
+#home-links a.aspirants {
+  -moz-border-radius: 5px 0 0 5px;
+  -webkit-border-radius: 5px 0 0 5px;
+  -o-border-radius: 5px 0 0 5px;
+  -ms-border-radius: 5px 0 0 5px;
+  -khtml-border-radius: 5px 0 0 5px;
+  border-radius: 5px 0 0 5px;
+  margin: 0 3px 0 0;
+  padding: 20px;
+  background: #009245 url(../images/big-chevron.png) 180px center no-repeat;
+  background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00a24c), color-stop(100%, #009245));
+  background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#00a24c, #009245);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#00a24c, #009245);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#00a24c, #009245);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -ms-linear-gradient(#00a24c, #009245);
+  background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#00a24c, #009245);
+}
+#home-links a.aspirants:hover {
+  background: #00a24c url(../images/big-chevron.png) 180px center no-repeat;
+  background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #00a24c));
+  background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#009245, #00a24c);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#009245, #00a24c);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#009245, #00a24c);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -ms-linear-gradient(#009245, #00a24c);
+  background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#009245, #00a24c);
+}
+#home-links a.citizens {
+  -moz-border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0 5px 5px 0;
+  -o-border-radius: 0 5px 5px 0;
+  -ms-border-radius: 0 5px 5px 0;
+  -khtml-border-radius: 0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
+  margin: 0;
+  padding: 20px;
+  background: #87c43c url(../images/big-chevron.png) 180px center no-repeat;
+  background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
+  background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#96d942, #87c43c);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#96d942, #87c43c);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#96d942, #87c43c);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -ms-linear-gradient(#96d942, #87c43c);
+  background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#96d942, #87c43c);
+}
+#home-links a.citizens:hover {
+  background: #96d942 url(../images/big-chevron.png) 180px center no-repeat;
+  background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
+  background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#87c43c, #96d942);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#87c43c, #96d942);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#87c43c, #96d942);
+  background: url(../images/big-chevron.png) 180px center no-repeat, -ms-linear-gradient(#87c43c, #96d942);
+  background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#87c43c, #96d942);
 }
 
 .featured-person {
-  color: white;
-  margin: 0.666em 0 2em 0;
-  background-color: #009245;
+  color: black;
+  margin: 0 0 30px 0;
+  border: 1px solid #b3b3b3;
+  background: #f6f6f6;
+  overflow: hidden;
 }
 .featured-person img {
   float: left;
-  max-width: 200px;
-  border: 4px solid #009245;
+  max-width: 180px;
 }
 .featured-person .featured-person-info {
-  height: 200px;
   position: relative;
   margin-left: 200px;
-  padding: 10px;
-  background-color: #009245;
 }
 .featured-person .featured-person-info .feature-nav {
   float: right;
   display: block;
   width: 20px;
   height: 20px;
-  background-image: url(/static/images/feature_chevrons.png);
+  background-image: url(../images/feature_chevrons.png);
   background-repeat: no-repeat;
 }
 .featured-person .featured-person-info .feature-nav.feature-prev {
@@ -987,7 +1060,7 @@ ul#home-news-list li img {
   bottom: 0;
   right: 0;
   padding: 20px 0 0 0;
-  background: url(/static/images/fade-to-green.png) 0 0 repeat-x;
+  background: url(../images/fade-to-green.png) 0 0 repeat-x;
   width: 100%;
   margin: 0;
 }
