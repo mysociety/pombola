@@ -107,4 +107,15 @@ $(function(){
   //clone the relavent ul#data-sub-menu-id from in the menu
   //stick below .page-title
   //show button inside .page-title that toggles the ul#data-sub-menu-id
+  var sub_menu_id = '#'+$('.page-title').attr('data-sub-menu-id'),
+      $page_title = $('.page-title');
+  if(sub_menu_id){
+    $page_title.addClass('has-sub-menu').append('<button class="m-sub-menu-trigger">Show sub menu</button>');
+    $(sub_menu_id).hide().insertAfter($page_title).addClass('m-sub-menu');
+  }
+
+  $('.m-sub-menu-trigger').on('click', function(e){
+    e.preventDefault();
+    hideShow(sub_menu_id, $(this));
+  });
 });

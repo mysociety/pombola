@@ -734,6 +734,69 @@ pre {
   background: #e6e6e6;
   padding: 10px;
 }
+.page-title.has-sub-menu {
+  margin: 0;
+}
+.page-title .m-sub-menu-trigger {
+  cursor: pointer;
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  text-indent: -999999px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  float: right;
+  border: 1px solid #b3b3b3;
+  height: 24px;
+  width: 24px;
+  background: #d2d2d2 url(../images/chevron-down-alt.png) center no-repeat;
+  background: url(../images/chevron-down-alt.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #d2d2d2));
+  background: url(../images/chevron-down-alt.png) center no-repeat, -webkit-linear-gradient(#ffffff, #d2d2d2);
+  background: url(../images/chevron-down-alt.png) center no-repeat, -moz-linear-gradient(#ffffff, #d2d2d2);
+  background: url(../images/chevron-down-alt.png) center no-repeat, -o-linear-gradient(#ffffff, #d2d2d2);
+  background: url(../images/chevron-down-alt.png) center no-repeat, -ms-linear-gradient(#ffffff, #d2d2d2);
+  background: url(../images/chevron-down-alt.png) center no-repeat, linear-gradient(#ffffff, #d2d2d2);
+}
+.page-title .m-sub-menu-trigger.active {
+  background: #d2d2d2 url(../images/chevron-up-alt.png) center no-repeat;
+  background: url(../images/chevron-up-alt.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d2d2d2), color-stop(100%, #ffffff));
+  background: url(../images/chevron-up-alt.png) center no-repeat, -webkit-linear-gradient(#d2d2d2, #ffffff);
+  background: url(../images/chevron-up-alt.png) center no-repeat, -moz-linear-gradient(#d2d2d2, #ffffff);
+  background: url(../images/chevron-up-alt.png) center no-repeat, -o-linear-gradient(#d2d2d2, #ffffff);
+  background: url(../images/chevron-up-alt.png) center no-repeat, -ms-linear-gradient(#d2d2d2, #ffffff);
+  background: url(../images/chevron-up-alt.png) center no-repeat, linear-gradient(#d2d2d2, #ffffff);
+}
+
+.m-sub-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #e6e6e6;
+}
+.m-sub-menu li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.m-sub-menu li {
+  margin: 0 10px;
+  border-top: 1px solid black;
+}
+.m-sub-menu li a {
+  display: block;
+  padding: 10px 0;
+}
+.m-sub-menu li a:hover {
+  text-decoration: none;
+}
 
 #site-footer {
   clear: both;
