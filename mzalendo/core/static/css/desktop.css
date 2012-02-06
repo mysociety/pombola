@@ -362,6 +362,12 @@ josh [at] supercooldesign.co.uk
   color: #777777;
 }
 
+#breadcrumb-replacement {
+  display: block;
+  height: 20px;
+  background-color: #fff;
+}
+
 #site-footer > .wrapper {
   display: block;
   padding: 0;

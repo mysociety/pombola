@@ -35,7 +35,7 @@
                 google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
                 facebook_app_id:           '{{ settings.FACEBOOK_APP_ID }}',
                 static_url:                '{{ STATIC_URL }}',
-                static_generation_number:  '{{ STATIC_GENERATION_NUMBER }}',
+                static_generation_number:  '{{ settings.STATIC_GENERATION_NUMBER }}',
                 extra_js: [],
             }
 
@@ -179,6 +179,7 @@
             </nav>
         </div>
 
+        {% block breadcrumbs %}
         <div id="breadcrumb">
             <nav class="wrapper">
                 <ul>
@@ -186,6 +187,7 @@
                 </ul>
             </nav>
         </div>
+        {% endblock %}
 
         <div id="page">
             <div class="page-wrapper wrapper">
@@ -223,7 +225,7 @@
                     <h2>Email Newsletter</h2>
 
                     <form action="http://mzalendo.us2.list-manage.com/subscribe/post?u=c0b4940a102336a932a5c30c4&amp;id=9963e6377d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-                        <label for="mce-EMAIL">Subscribe to recieve updates</label>
+                        <label for="mce-EMAIL">Subscribe to receive updates</label>
                         <div class="subscribe-fields">
                             <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Your email address here" required>
                             <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
