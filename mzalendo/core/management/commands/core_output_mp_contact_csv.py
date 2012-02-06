@@ -59,7 +59,15 @@ class Command(BaseCommand):
         csv_fieldnames =  [ 'Name', 'Constituency' ] + sorted( list(contact_field_names_set) )
         writer = csv.DictWriter( csv_output, csv_fieldnames )
         
-        writer.writeheader()
+
+        # Needs Python 2.7
+        # writer.writeheader()
+        
+        # Silly dance for Python 2.6.6's csv.DictWriter which bizarrely does not have writeheader
+        fieldname_dict = {}
+        for key in csv_fieldnames:
+            fieldname_dict[key] = key
+        writer.writerow( fieldname_dict )
         
         for data in mp_data:
             writer.writerow( data )
