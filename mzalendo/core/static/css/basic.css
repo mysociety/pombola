@@ -703,7 +703,8 @@ pre {
   left: -999999px;
 }
 
-#breadcrumb {
+#breadcrumb,
+#breadcrumb-replacement {
   display: none;
 }
 
@@ -1661,7 +1662,7 @@ h3.scorecard-overall span.score-overall-bad {
   width: 32px;
 }
 .featured-person .featured-person-info .rating-container .rating-img.bad {
-  background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
+  background: url(/static/images/d-smiley-sprite.png) -78px -82px no-repeat;
 }
 .featured-person .featured-person-info .rating-container .rating-img.average {
   background: url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat;
