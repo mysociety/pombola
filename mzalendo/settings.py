@@ -228,6 +228,7 @@ INSTALLED_APPS = (
     'scorecards',
     'search',
     'user_profile',
+    'file_archive',
 
     'place_data',
 )
