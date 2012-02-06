@@ -8,7 +8,7 @@ from mzalendo.core import models as core_models
 # more general stuff at the bottom of this file.
 
 class Entry(models.Model):
-    place = models.ForeignKey(core_models.Place, unique=True)
+    place = models.OneToOneField(core_models.Place, related_name='placedata')
 
     population_male = models.PositiveIntegerField()
     population_female = models.PositiveIntegerField()

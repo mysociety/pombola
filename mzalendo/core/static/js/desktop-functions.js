@@ -229,4 +229,16 @@ $(function(){
     $('#login-box').load(login_target + ' #login');
     hideShow($('#login-box'), $(this));
   });
+
+  /*
+   * Main nav hover
+   */
+  $('#main-menu ul > li').on('mouseover', function(){
+    if($(this).children('ul').length === 1){
+      // alert('oh yeah');
+      $(this).addClass('active');
+    }
+  }).on('mouseout', function(){
+    $(this).removeClass('active');
+  });
 });

@@ -116,7 +116,7 @@ STATIC_URL = '/static/'
 
 # integer which when updated causes the caches to fetch new content. See note in
 # 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 12
+STATIC_GENERATION_NUMBER = 13
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -228,6 +228,7 @@ INSTALLED_APPS = (
     'scorecards',
     'search',
     'user_profile',
+    'file_archive',
 
     'place_data',
 )
