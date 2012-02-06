@@ -1054,6 +1054,9 @@ ul#home-news-list li img {
   margin: 15px 0 0 0 !important;
   line-height: 30px;
 }
+.featured-person .featured-person-info h2 a {
+  font-size: 24px;
+}
 .featured-person .featured-person-info .feature-person-summary {
   display: block;
   padding: 0 0 40px 0;

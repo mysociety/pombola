@@ -73,7 +73,7 @@ $(function(){
     // featured-person prev and next clicks: for now, we only have this in one place, so use id
     // broken out as a function so it can re-invent itself on load
     function enableFeaturedPersonNav() {
-      $('.feature-nav', '#home-featured-person').click(
+      $('.feature-nav > a', '#home-featured-person').click(
         function(e){
           e.preventDefault();
           var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
