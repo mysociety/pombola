@@ -241,4 +241,18 @@ $(function(){
   }).on('mouseout', function(){
     $(this).removeClass('active');
   });
+  
+  $("#search-hansard-home").click(function(e){
+    e.preventDefault();
+    location.href="/search/hansard?q=" + escape($('#core-search').val());
+  });
+  $("#search-hansard-instead").click(function(e){
+    e.preventDefault();
+    location.href="/search/hansard?q=" + escape($('#id_q').val());
+  });
+  $("#search-core-instead").click(function(e){
+    e.preventDefault();
+    location.href="/search?q=" + escape($('#id_q').val());
+  })
+  
 });
