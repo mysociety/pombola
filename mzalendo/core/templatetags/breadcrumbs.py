@@ -15,14 +15,17 @@ url_name_mappings = {
 }
 
 separator = ' <span class="sep">&raquo;</span> ';
+hansard_part = 'hansard/'
 
 @register.filter
 def breadcrumbs(url):
     query_pos = url.find("?")
-    bare_url = url
     if query_pos >= 0:
         bare_url = bare_url[0:query_pos]
-    links = bare_url.strip('/').split('/')
+    bare_url = url.strip('/')
+    if bare_url.startswith(hansard_part):
+        bare_url = hansard_part + bare_url[len(hansard_part):].replace('/',' : ')
+    links = bare_url.split('/')
     bread = []
     total = len(links)-1
     if total == 0 and links[0] == "":
