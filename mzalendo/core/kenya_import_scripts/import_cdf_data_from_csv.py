@@ -102,6 +102,7 @@ class ProjectImporter(object):
             remarks             = row['remarks'][:400],
             estimated_cost      = row['estimated cost'],
             total_cost          = row['Total Amount'],
+            first_funding_year = None,
         )
         
         # find and add the constituency (do this by name rather than location)
@@ -116,16 +117,25 @@ class ProjectImporter(object):
             # warnings.warn("Could not find constituency '%s' on csv line '%u'" % ( row['Constituency'], self.reader.line_num ))
             return None
         
+        # Establish the first year that there was funding
+        for year in range(2000, 2020):
+            key = "%u-%u" % ( year, year+1 )
+            amount = re.sub( r'\D', '', row.get(key, '0') )
+            if len(amount) and int(amount):
+                data['first_funding_year'] = year
+                break
+
         # create the location from coordinates given
         try:
             number_regex = re.compile(r'([-\d\.]+)')
             (lat,lng) = number_regex.findall(row['Loc'])
-            data['location'] = Point( float(lat), float(lng) )
+            point = Point( float(lng), float(lat), srid='4326' )            
+            print [ point, point.x, point.y, point.srid ]
+            data['location'] = point
         except ValueError:
             # No location found - can't add to database
             return None
 
-        
         # pprint.pprint( row )
         # pprint.pprint( data )
 

@@ -420,11 +420,12 @@ josh [at] supercooldesign.co.uk
   text-transform: uppercase;
 }
 #page .profile-pic {
-  height: 200px;
+  height: 210px;
   width: 210px;
   position: absolute;
   top: 0;
   left: 0;
+  overflow: hidden;
 }
 #page .profile-pic img {
   width: 100%;
@@ -432,6 +433,8 @@ josh [at] supercooldesign.co.uk
   height: auto;
   max-width: 200px;
   max-height: 200px;
+  max-width: 210px;
+  max-height: 210px;
 }
 #page .profile-pic #map_canvas {
   width: 200px;
@@ -623,26 +626,47 @@ josh [at] supercooldesign.co.uk
   display: block;
   width: 180px;
   float: right;
-}
-#page .social-and-tools .fb-like,
-#page .social-and-tools .twitter-share-button,
-#page .social-and-tools iframe {
-  display: inline;
-  float: left;
-  width: 84px !important;
-}
-#page .social-and-tools .twitter-share-button {
-  width: 96px !important;
+  background: #f7f7f7;
 }
 #page .social-and-tools ul {
   clear: both;
-  margin: 30px 0 0 0;
+  margin: 10px;
 }
 #page .social-and-tools ul li a {
-  padding: 5px;
+  display: block;
+  padding: 8px 0 12px 40px;
   margin: 5px 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
+  color: #777777;
+  background: transparent url(../images/social-links.png) 0 -192px no-repeat;
+}
+#page .social-and-tools ul li a:hover {
+  color: black;
+}
+#page .social-and-tools ul li a.big-btn-text-fb {
+  background-position: 0 -192px;
+}
+#page .social-and-tools ul li a.big-btn-text-fb:hover {
+  background-position: 0 0;
+}
+#page .social-and-tools ul li a.big-btn-text-tw {
+  background-position: 0 -239px;
+}
+#page .social-and-tools ul li a.big-btn-text-tw:hover {
+  background-position: 0 -47px;
+}
+#page .social-and-tools ul li a.big-btn-text-red {
+  background-position: 0 -286px;
+}
+#page .social-and-tools ul li a.big-btn-text-red:hover {
+  background-position: 0 -94px;
+}
+#page .social-and-tools ul li a.big-btn-text-green {
+  background-position: 0 -333px;
+}
+#page .social-and-tools ul li a.big-btn-text-green:hover {
+  background-position: 0 -141px;
 }
 #page h2, #page h3 {
   border-top: none;
@@ -719,6 +743,7 @@ ul.listing li section a.read-more {
 ul.listing li section a.read-more:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 
 #tab-nav {
@@ -797,6 +822,120 @@ ul.listing li section a.read-more:hover {
   display: block;
   background: none;
   padding: 0;
+}
+
+#ajax_dialog_subcontent {
+  width: 466px;
+}
+#ajax_dialog_subcontent label {
+  display: block;
+  font-size: 18px;
+  margin: 6px 0 10px 0;
+}
+#ajax_dialog_subcontent textarea {
+  width: 448px;
+  height: 160px;
+  border: 2px solid #777777;
+  padding: 6px;
+  font-size: 16px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+}
+#ajax_dialog_subcontent textarea:focus {
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 8px;
+}
+#ajax_dialog_subcontent input.submit {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  text-transform: none;
+  font-size: 14px;
+  padding: 5px 8px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  background: #87c43c;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
+  background: -webkit-linear-gradient(#96d942, #87c43c);
+  background: -moz-linear-gradient(#96d942, #87c43c);
+  background: -o-linear-gradient(#96d942, #87c43c);
+  background: -ms-linear-gradient(#96d942, #87c43c);
+  background: linear-gradient(#96d942, #87c43c);
+  border: none;
+  float: right;
+}
+#ajax_dialog_subcontent input.submit {
+  *display: inline;
+}
+#ajax_dialog_subcontent input.submit:hover {
+  background: #a0a0a0;
+  color: white;
+  text-decoration: none;
+}
+#ajax_dialog_subcontent input.submit {
+  *display: inline;
+}
+#ajax_dialog_subcontent input.submit:hover {
+  background: #96d942;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
+  background: -webkit-linear-gradient(#87c43c, #96d942);
+  background: -moz-linear-gradient(#87c43c, #96d942);
+  background: -o-linear-gradient(#87c43c, #96d942);
+  background: -ms-linear-gradient(#87c43c, #96d942);
+  background: linear-gradient(#87c43c, #96d942);
+}
+#ajax_dialog_subcontent .errorlist {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#ajax_dialog_subcontent .errorlist li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#ajax_dialog_subcontent .errorlist li {
+  background: #d40000;
+  color: white;
+  padding: 4px 6px;
+  font-size: 13px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
 }
 
 /* 4. PAGE SPECIFIC
@@ -909,13 +1048,7 @@ ul#home-news-list li img {
   margin-top: 30px;
   width: 90px;
   position: relative;
-}
-#page .home-right .social-and-tools .fb-like,
-#page .home-right .social-and-tools .twitter-share-button,
-#page .home-right .social-and-tools iframe {
-  display: block;
-  float: none;
-  margin-bottom: 15px;
+  background: none;
 }
 #page .home-right .social-and-tools .tw-nub {
   display: block;
@@ -1144,30 +1277,24 @@ ul#home-news-list li img {
   }
 
   #page .title-space {
-    padding-top: 35px;
-  }
-  #page .fb-like,
-  #page .twitter-share-button {
-    margin-top: 7px;
+    padding-top: 60px;
   }
   #page .social-and-tools {
     display: block;
     width: auto;
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 0;
     float: none;
   }
   #page .social-and-tools ul {
-    margin: 0;
+    margin: 5px 10px;
     float: left;
     clear: none;
   }
   #page .social-and-tools ul li {
-    display: inline;
-  }
-  #page .social-and-tools ul li a {
-    display: inline-block;
+    float: left;
+    margin-right: 10px;
   }
   #page .home-right .social-and-tools {
     position: relative;

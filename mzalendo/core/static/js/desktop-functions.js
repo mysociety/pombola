@@ -127,7 +127,12 @@ $(function(){
                 dialog_div.on( 'submit', 'form', handle_form_submission );
             
                 // Show the dialog
-                dialog_div.dialog({modal: true});
+                dialog_div.dialog({
+                  modal: true,
+                  minHeight: 320,
+                  width: 500,
+                  title: 'Leave Feedback'
+                });
     
             }
         );

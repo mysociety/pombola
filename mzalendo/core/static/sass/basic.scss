@@ -157,15 +157,14 @@ pre {
 .big-btn-text-red {
   @include big-button-text-red;
 }
-
-.m-fb {
+.big-btn-text-fb {
   @include big-button-reset-text;
   @include background(linear-gradient(#0042C2/0.9, #0042C2));
   &:hover {
     @include background(linear-gradient(#0042C2, #0042C2/0.9));
   }
 }
-.m-twitter {
+.big-btn-text-tw {
   @include big-button-reset-text;
   @include background(linear-gradient(#74CFDC/0.95, #74CFDC));
   &:hover {
@@ -686,11 +685,6 @@ pre {
   }
   .social-and-tools {
     display:table-caption;
-    .fb-like,
-    .twitter-share-button,
-    iframe {
-      display:none;
-    }
     ul {
       @include list-reset-soft;
       margin:20px 0;
@@ -968,6 +962,17 @@ h3.scorecard-overall {
   }
 }
 
+.btn-question {
+  @include inline-block;
+  width: 15px;
+  height: 15px;
+  margin:-4px 0 0 5px;
+  text-indent:-999999px;
+  background:url(../images/question.png) 0 0 no-repeat;
+  &:hover {
+    background-position:0 -21px;
+  }
+}
 
 
 
@@ -1060,6 +1065,7 @@ h3.scorecard-overall {
   img {
     float:left;
     max-width: 90px;
+    height:auto;
   }
   .featured-person-info {
     position:relative;

@@ -8,8 +8,13 @@
 
 {% block content %}
 
+    <p>The Constituencies Development Fund was established through the CDF Act, 2003 as a public funded kitty that targets development projects at the grassroots level.</p>
+
+    <p>It is one of the several devolved funds set up by the Government to mitigate poverty and to harmonize the spread of development throughout the country. It aims at ensuring a portion of the Government Annual Revenue is earmarked for constituencies to finance development projects qualified on a priority basis arrived at by members of a constituency. It aims at ensuring a portion of the Government Annual Revenue is earmarked for constituencies to finance development projects qualified on a priority basis arrived at by members of a constituency.</p>
+
+    <p>It aims at ensuring a portion of the Government Annual Revenue is earmarked for constituencies to finance development projects qualified on a priority basis arrived at by members of a constituency.</p>
+
     <h1>Projects in <a href="{{ place.get_absolute_url }}">{{ place.name }}</a></h1>
-    
 
     {% for p in projects.all %}
         <div class="project_detail" id="project-{{ p.cdf_index }}">
@@ -35,18 +40,40 @@
             estimated_cost                  {{ p.estimated_cost      }}
             total_cost                      {{ p.total_cost          }}
             location                        {{ p.location            }}
+            first_funding_year              {{ p.first_funding_year  }}
+
             
             {% endcomment %}
 
             <h3>{{ p.project_name }}</h3>
             
+            <style type="text/css" media="screen">
+                dt {
+                    float: left;
+                    width: 12em;
+                }
+                
+                dl {
+                    margin-bottom: 2em;
+                }
+            </style>
+
             <dl>
                 <dt>location</dt>
-                    <dd>{{ p.location_name }}</dd>
+                    <dd>
+                        {{ p.location_name }}
+                        (in <a href="{{ p.constituency.get_absolute_url }}">{{ p.constituency.name }}</a>)
+                    </dd>
+
+                {% if p.first_funding_year %}
+                <dt>year first funded</dt>
+                    <dd>{{ p.first_funding_year }}</dd>
+                {% endif %}
+
                 <dt>action</dt>
                     <dd>{{ p.activity_to_be_done }}</dd>
                 <dt>output</dt>
-                    <dd>{{ p.expected_output }}</dd>
+                    <dd>{% firstof p.expected_output '-' %}</dd>
             
                 <dt>implementation status</dt>
                     <dd>{% firstof p.status p.remarks 'not known' %}</dd>
