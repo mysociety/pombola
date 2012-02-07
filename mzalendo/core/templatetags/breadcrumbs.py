@@ -20,9 +20,10 @@ hansard_part = 'hansard/'
 @register.filter
 def breadcrumbs(url):
     query_pos = url.find("?")
+    bare_url = url
     if query_pos >= 0:
         bare_url = bare_url[0:query_pos]
-    bare_url = url.strip('/')
+    bare_url = bare_url.strip('/')
     if bare_url.startswith(hansard_part):
         bare_url = hansard_part + bare_url[len(hansard_part):].replace('/',' : ')
     links = bare_url.split('/')
