@@ -20,7 +20,8 @@ class EntryAdminCSVUploadForm(forms.Form):
     )
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display  = [ 'category', 'content_object', 'score', 'remark', ]
+    list_display  = [ 'category', 'content_object', 'score', 'remark', 'disabled']
+    list_filter = ['category', 'disabled']
     
     def upload_csv(self, request):
         
