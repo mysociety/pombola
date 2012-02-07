@@ -358,7 +358,9 @@ josh [at] supercooldesign.co.uk
     overflow:hidden;
     img {
       width:auto;
-      height:210px;
+      height:auto;
+      max-width:210px;
+      max-height:210px;
     }
     #map_canvas {
       width:200px;
