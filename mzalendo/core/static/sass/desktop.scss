@@ -683,6 +683,45 @@ ul.listing {
 }
 
 
+#ajax_dialog_subcontent {
+  width:466px;
+  label {
+    display:block;
+    font-size:18px;
+    margin:6px 0 10px 0;
+  }
+  textarea {
+    width:448px;
+    height:160px;
+    border:2px solid #777777;
+    padding:6px;
+    font-size:16px;
+    @include border-radius(4px);
+    &:focus {
+      outline:none;
+      box-shadow:rgba(0, 0, 0, 0.2) 0 0 8px;
+    }
+  }
+  input.submit {
+    @include big-button-text-green;
+    border:none;
+    float:right;
+  }
+  .errorlist {
+    @include list-reset-soft;
+    li {
+      background:$colour11;
+      color:$colour6;
+      padding:4px 6px;
+      font-size:13px;
+      @include border-radius(3px);
+    }
+  }
+}
+
+
+
+
 /* 4. PAGE SPECIFIC
 -------------------------------------------------------------- */
 /* HOME */
