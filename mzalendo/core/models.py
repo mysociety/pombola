@@ -286,7 +286,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         if self.is_mp():
             scorecard_lists.append(super(Person, self).scorecard_entries.all())
 
-        scorecard_lists.extend([x.scorecard_entries.all() for x in self.constituencies()])
+        scorecard_lists.extend([x.scorecards() for x in self.constituencies()])
 
         return itertools.chain(*scorecard_lists)
 
