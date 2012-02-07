@@ -8,8 +8,13 @@
 
 {% block content %}
 
+    <p>The Constituencies Development Fund was established through the CDF Act, 2003 as a public funded kitty that targets development projects at the grassroots level.</p>
+
+    <p>It is one of the several devolved funds set up by the Government to mitigate poverty and to harmonize the spread of development throughout the country. It aims at ensuring a portion of the Government Annual Revenue is earmarked for constituencies to finance development projects qualified on a priority basis arrived at by members of a constituency. It aims at ensuring a portion of the Government Annual Revenue is earmarked for constituencies to finance development projects qualified on a priority basis arrived at by members of a constituency.</p>
+
+    <p>It aims at ensuring a portion of the Government Annual Revenue is earmarked for constituencies to finance development projects qualified on a priority basis arrived at by members of a constituency.</p>
+
     <h1>Projects in <a href="{{ place.get_absolute_url }}">{{ place.name }}</a></h1>
-    
 
     {% for p in projects.all %}
         <div class="project_detail" id="project-{{ p.cdf_index }}">
