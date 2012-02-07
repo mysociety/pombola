@@ -673,6 +673,9 @@ josh [at] supercooldesign.co.uk
   background: none;
   padding: 0;
 }
+#page .search-wrap {
+  margin: 0;
+}
 #page .pagination .disabled {
   /* override main.css setting */
   display: none;

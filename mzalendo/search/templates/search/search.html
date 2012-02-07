@@ -14,12 +14,9 @@
 {% block content %}
     <h2>Search Mzalendo</h2>
 
-    <p>
-        Alternatively,
-        <a href="{% url hansard_search  %}" id="search-hansard-instead">search Hansard transcipts</a> instead.
-    </p>
+    <form method="get" action="." class="search-wrap">
+        <p>Alternatively, <a href="{% url hansard_search  %}" id="search-hansard- instead">search Hansard transcipts</a> instead.</p>
 
-    <form method="get" action=".">
         <div class="search-box">
             {{ form.q }}
             <input type="submit" value="Search" class="button">
