@@ -88,3 +88,8 @@ urlpatterns = patterns('core.views',
     # Ajax select
     url(r'^ajax_select/', include('ajax_select.urls')),
 )
+
+urlpatterns += patterns('core.views',
+    url(r'^external_feeds/twitter/', 'twitter_feed', name='twitter_feed'),
+                        )
+

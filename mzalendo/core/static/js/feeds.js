@@ -49,14 +49,17 @@
         var $twitter_feed = $(element);
         
         var screen_name = $twitter_feed.attr( 'data-twitter-username' );
+        var feed_url = $twitter_feed.attr( 'data-feed-url' );
         
         $.ajax({
-            url: 'https://api.twitter.com/1/statuses/user_timeline.json',
+            url: feed_url,
+            //url: 'http://192.168.1.32:8000/external_feeds/twitter/',
+            //url: 'http://api.twitter.com/1/statuses/user_timeline.json',
             data: {
                 screen_name:      screen_name,
                 count:            4
             },
-            dataType: 'jsonp',
+          //dataType: 'jsonp',
             success: function ( data, textStatus, jqXHR ) {
 
                 $twitter_feed.html('');

@@ -1,4 +1,5 @@
 import re
+import urllib2
 
 from django.db.models import Count
 from django.db.models import Q
@@ -6,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.views.generic.list_detail import object_detail, object_list
-
+from django.views.decorators.cache import cache_control
 from django.views.generic import ListView
 
 from mzalendo.core import models
@@ -152,3 +153,9 @@ class PlaceListView(ListView):
             context['all_places'] = True            
         return context
 
+@cache_control(max_age=300)
+def twitter_feed(request):
+    return HttpResponse(
+        urllib2.urlopen('http://api.twitter.com/1/statuses/user_timeline.json?screen_name=MzalendoWatch&count=4').read(),
+        content_type='application/json',
+        )
