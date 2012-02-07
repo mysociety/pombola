@@ -1616,6 +1616,7 @@ h3.scorecard-overall span.score-overall-bad {
 .featured-person img {
   float: left;
   max-width: 90px;
+  height: auto;
 }
 .featured-person .featured-person-info {
   position: relative;
