@@ -32,7 +32,7 @@ class Project(models.Model):
     
     first_funding_year = models.IntegerField(blank=True, null=True)
 
-    location = models.PointField(srid=4326, null=True, blank=True)
+    location = models.PointField(srid=4326)
         
     class Meta():
         # NOTE - the templates rely on this default ordering. Really we should
