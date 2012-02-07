@@ -53,8 +53,6 @@ $(function(){
   // add appropriate stuff to head
   // <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
   $('head').append('<meta name="HandheldFriendly" content="True">').append('<meta name="MobileOptimized" content="320">');
-  
-  $('.social-and-tools').append('<ul><li><a href="/" class="m-fb">Share page via Facebook</a></li><li><a href="/" class="m-twitter">Share page via Twitter</a></li></ul>');
 
   /*
    * Main non AJAX interactions

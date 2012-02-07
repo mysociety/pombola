@@ -242,6 +242,7 @@ pre {
 .btn-text-green:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 .btn-text-green:hover {
   background: #96d942;
@@ -276,6 +277,7 @@ pre {
 .btn-text-red:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 .btn-text-red:hover {
   background: red;
@@ -330,6 +332,7 @@ pre {
 .big-btn-text-green:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 .big-btn-text-green {
   *display: inline;
@@ -393,6 +396,7 @@ pre {
 .big-btn-text-red:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 .big-btn-text-red {
   *display: inline;
@@ -407,7 +411,7 @@ pre {
   background: linear-gradient(#d40000, #ff0000);
 }
 
-.m-fb {
+.big-btn-text-fb {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -449,17 +453,18 @@ pre {
   background: -ms-linear-gradient(#0049d7, #0042c2);
   background: linear-gradient(#0049d7, #0042c2);
 }
-.m-fb {
+.big-btn-text-fb {
   *display: inline;
 }
-.m-fb:hover {
+.big-btn-text-fb:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
-.m-fb {
+.big-btn-text-fb {
   *display: inline;
 }
-.m-fb:hover {
+.big-btn-text-fb:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0042c2), color-stop(100%, #0049d7));
   background: -webkit-linear-gradient(#0042c2, #0049d7);
   background: -moz-linear-gradient(#0042c2, #0049d7);
@@ -468,7 +473,7 @@ pre {
   background: linear-gradient(#0042c2, #0049d7);
 }
 
-.m-twitter {
+.big-btn-text-tw {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -510,17 +515,18 @@ pre {
   background: -ms-linear-gradient(#7ad9e7, #74cfdc);
   background: linear-gradient(#7ad9e7, #74cfdc);
 }
-.m-twitter {
+.big-btn-text-tw {
   *display: inline;
 }
-.m-twitter:hover {
+.big-btn-text-tw:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
-.m-twitter {
+.big-btn-text-tw {
   *display: inline;
 }
-.m-twitter:hover {
+.big-btn-text-tw:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #74cfdc), color-stop(100%, #7ad9e7));
   background: -webkit-linear-gradient(#74cfdc, #7ad9e7);
   background: -moz-linear-gradient(#74cfdc, #7ad9e7);
@@ -1130,11 +1136,6 @@ pre {
 #page .social-and-tools {
   display: table-caption;
 }
-#page .social-and-tools .fb-like,
-#page .social-and-tools .twitter-share-button,
-#page .social-and-tools iframe {
-  display: none;
-}
 #page .social-and-tools ul {
   list-style-type: none;
   padding: 0;
@@ -1263,6 +1264,7 @@ ul.comments li section a.read-more, ul.listing li section a.read-more {
 ul.comments li section a.read-more:hover, ul.listing li section a.read-more:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 ul.comments li section ul, ul.listing li section ul {
   padding-left: 30px;
@@ -1327,6 +1329,7 @@ ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
 ul.comments li section ul.tools li a:hover, ul.listing li section ul.tools li a:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.like {
   display: -moz-inline-box;
@@ -1357,6 +1360,7 @@ ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.l
 ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
   background: #96d942;
@@ -1390,6 +1394,7 @@ ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a
 ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tools li a.report:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tools li a.report:hover {
   background: red;
@@ -1888,6 +1893,7 @@ ul#home-news-list li img {
 #login form input.login-button:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 #login form input.login-button:hover {
   background: #707070;

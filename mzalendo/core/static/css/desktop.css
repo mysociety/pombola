@@ -429,7 +429,9 @@ josh [at] supercooldesign.co.uk
 }
 #page .profile-pic img {
   width: auto;
-  height: 210px;
+  height: auto;
+  max-width: 210px;
+  max-height: 210px;
 }
 #page .profile-pic #map_canvas {
   width: 200px;
@@ -621,26 +623,47 @@ josh [at] supercooldesign.co.uk
   display: block;
   width: 180px;
   float: right;
-}
-#page .social-and-tools .fb-like,
-#page .social-and-tools .twitter-share-button,
-#page .social-and-tools iframe {
-  display: inline;
-  float: left;
-  width: 84px !important;
-}
-#page .social-and-tools .twitter-share-button {
-  width: 96px !important;
+  background: #f7f7f7;
 }
 #page .social-and-tools ul {
   clear: both;
-  margin: 30px 0 0 0;
+  margin: 10px;
 }
 #page .social-and-tools ul li a {
-  padding: 5px;
+  display: block;
+  padding: 8px 0 12px 40px;
   margin: 5px 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
+  color: #777777;
+  background: transparent url(../images/social-links.png) 0 -192px no-repeat;
+}
+#page .social-and-tools ul li a:hover {
+  color: black;
+}
+#page .social-and-tools ul li a.big-btn-text-fb {
+  background-position: 0 -192px;
+}
+#page .social-and-tools ul li a.big-btn-text-fb:hover {
+  background-position: 0 0;
+}
+#page .social-and-tools ul li a.big-btn-text-tw {
+  background-position: 0 -239px;
+}
+#page .social-and-tools ul li a.big-btn-text-tw:hover {
+  background-position: 0 -47px;
+}
+#page .social-and-tools ul li a.big-btn-text-red {
+  background-position: 0 -286px;
+}
+#page .social-and-tools ul li a.big-btn-text-red:hover {
+  background-position: 0 -94px;
+}
+#page .social-and-tools ul li a.big-btn-text-green {
+  background-position: 0 -333px;
+}
+#page .social-and-tools ul li a.big-btn-text-green:hover {
+  background-position: 0 -141px;
 }
 #page h2, #page h3 {
   border-top: none;
@@ -717,6 +740,7 @@ ul.listing li section a.read-more {
 ul.listing li section a.read-more:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 
 #tab-nav {
@@ -873,6 +897,7 @@ ul.listing li section a.read-more:hover {
 #ajax_dialog_subcontent input.submit:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 #ajax_dialog_subcontent input.submit {
   *display: inline;
@@ -1020,13 +1045,7 @@ ul#home-news-list li img {
   margin-top: 30px;
   width: 90px;
   position: relative;
-}
-#page .home-right .social-and-tools .fb-like,
-#page .home-right .social-and-tools .twitter-share-button,
-#page .home-right .social-and-tools iframe {
-  display: block;
-  float: none;
-  margin-bottom: 15px;
+  background: none;
 }
 #page .home-right .social-and-tools .tw-nub {
   display: block;
@@ -1255,30 +1274,24 @@ ul#home-news-list li img {
   }
 
   #page .title-space {
-    padding-top: 35px;
-  }
-  #page .fb-like,
-  #page .twitter-share-button {
-    margin-top: 7px;
+    padding-top: 60px;
   }
   #page .social-and-tools {
     display: block;
     width: auto;
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 0;
     float: none;
   }
   #page .social-and-tools ul {
-    margin: 0;
+    margin: 5px 10px;
     float: left;
     clear: none;
   }
   #page .social-and-tools ul li {
-    display: inline;
-  }
-  #page .social-and-tools ul li a {
-    display: inline-block;
+    float: left;
+    margin-right: 10px;
   }
   #page .home-right .social-and-tools {
     position: relative;
