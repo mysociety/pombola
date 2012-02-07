@@ -130,7 +130,8 @@ $(function(){
                 dialog_div.dialog({
                   modal: true,
                   minHeight: 320,
-                  width: 500
+                  width: 500,
+                  title: 'Leave Feedback'
                 });
     
             }
