@@ -515,6 +515,7 @@ pre {
     ul.scorecard {
       @include list-reset-soft;
       @include inline-block;
+      width:100%;
       li {
         article {
           padding:10px;
@@ -706,30 +707,41 @@ pre {
     background:$colour7;
     padding:10px;
   }
-  
+  .search-wrap {
+    border-bottom:1px solid #dddddd;
+    padding-bottom:30px;
+    margin:0 10px;
+  }
   .search-box {
     display:inline-block;
-    margin: 0.5em 0 1em 0;
-    padding:10px;
     color: $colour6;
-    background-color: $colour1;
     width: auto;
-    input[type=text] {
+    margin-bottom:10px;
+    input#id_q {
       float:left;
       height: 20px;
       border: none;
       font-size: 15px;
-      padding: 6px 8px;
+      padding: 4px 6px;
       width: 300px;
+      border-top:3px solid $colour4;
+      border-left:3px solid $colour4;
+      border-bottom:3px solid $colour4;
+      @include border-radius(4px 0 0 4px);
+      &:focus {
+        outline:none;
+        @include box-shadow(inset rgba(0, 0, 0, 0.5) 0 0 4px);
+      }
     }
     input.button {
       cursor:pointer;
       float:left;
-      width:32px;
-      height:32px;
+      width:34px;
+      height:34px;
       border:none;
       margin-left:-2px;
       text-indent:-999999px;
+      @include border-radius(0 4px 4px 0);
       background:$colour4 url(../images/search-icon.png) 9px center no-repeat;
       @include background(
         url(../images/search-icon.png) 9px center no-repeat,
