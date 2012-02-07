@@ -75,16 +75,17 @@
                         var tweet_html = $('<div/>').text( tweet_data.text ).html();
 
                         // make t.co links clickable
-                        http_regex = new RegExp('(http://t\.co/[a-z0-9]+)', 'gi');
+                        var http_regex = new RegExp('(http://t\.co/[a-z0-9]+)', 'gi');
                         tweet_html = tweet_html.replace( http_regex, '<a href="$1">$1</a>' );
 
                         // activate @names too
-                        name_regex = new RegExp('@([a-z0-9]+)', 'gi' );
+                        var name_regex = new RegExp('@([a-z0-9]+)', 'gi' );
                         tweet_html = tweet_html.replace( name_regex, '<a href="http://twitter.com/$1">@$1</a>' );
 
-                        $tweet
-                            .append( $('<p/>').html( tweet_html ) )
-                            .append( '<p class="meta">' + pub_date.toDateString() + '</p>');
+                        $tweet.append( $('<p/>').html( tweet_html ) );
+                            
+                        var tweet_url = 'http://twitter.com/' + screen_name + '/status/' + tweet_data.id;                        
+                        $tweet.append( '<p class="meta"><a href="' + tweet_url + '">' + pub_date.toDateString() + '</a></p>');
 
                         $twitter_feed
                             .append($tweet)
