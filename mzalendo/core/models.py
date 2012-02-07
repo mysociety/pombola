@@ -267,14 +267,14 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         return task_slugs
 
     def scorecard_overall(self):
-        total_count = super(Person, self).scorecard_entries.count()
-        total_score = super(Person, self).scorecard_entries.aggregate(models.Sum('score'))['score__sum']
+        total_count = super(Person, self).active_scorecards().count()
+        total_score = super(Person, self).active_scorecards().aggregate(models.Sum('score'))['score__sum']
 
         for constituency in self.constituencies():
-            constituency_count = constituency.scorecard_entries.count()
+            constituency_count = constituency.active_scorecards().count()
             if constituency_count:
                 total_count += constituency_count
-                total_score += constituency.scorecard_entries.aggregate(models.Sum('score'))['score__sum']
+                total_score += constituency.active_scorecards().aggregate(models.Sum('score'))['score__sum']
 
         return total_score / total_count
 
@@ -284,16 +284,16 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
         # We're only showing scorecards for current MPs
         if self.is_mp():
-            scorecard_lists.append(super(Person, self).scorecard_entries.all())
+            scorecard_lists.append(super(Person, self).active_scorecards())
 
-            scorecard_lists.extend([x.scorecards() for x in self.constituencies()])
+            scorecard_lists.extend([x.active_scorecards() for x in self.constituencies()])
 
         return itertools.chain(*scorecard_lists)
 
     def has_scorecards(self):
         # We're only showing scorecards for current MPs
         if self.is_mp():
-            return self.scorecard_entries.exists() or any([x.scorecard_entries.exists() for x in self.constituencies()])
+            return super(Person, self).has_scorecards() or any([x.has_scorecards() for x in self.constituencies()])
         
     class Meta:
        ordering = ["slug"]      
