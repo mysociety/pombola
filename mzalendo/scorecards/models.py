@@ -42,6 +42,9 @@ class Entry(models.Model):
     # for simplicity.
     date = models.DateField()
 
+    # Used to manually stop a scorecard being shown.
+    disabled = models.BooleanField(default=False)
+
     # place, category, date are unique so can be used to update/overwrite
     # information when doing a CSV upload - see unique_together in Meta below.
 
@@ -230,17 +233,20 @@ class ScorecardMixin(models.Model):
     # scores and no average.
     show_overall_score = True
 
+    def active_scorecards(self):
+        return self.scorecard_entries.filter(disabled=False)
+
     def scorecard_overall(self):
-        return self.scorecard_entries.all().aggregate(models.Avg('score'))['score__avg']
+        return self.active_scorecards().aggregate(models.Avg('score'))['score__avg']
 
     def scorecard_overall_as_word(self):
         return Entry.score_to_word(self.scorecard_overall())
         
     def has_scorecards(self):
-        return self.scorecard_entries.exists()
+        return self.active_scorecards().exists()
 
     def scorecards(self):
-        return self.scorecard_entries.all()
+        return self.active_scorecards()
     
     class Meta:
        abstract = True
