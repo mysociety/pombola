@@ -66,7 +66,7 @@
                     data,
                     function( index, tweet_data ) {
 
-                        console.debug( tweet_data );
+                        // console.debug( tweet_data );
 
                         var pub_date = new Date( tweet_data.created_at );
 
