@@ -29,8 +29,10 @@ class Project(models.Model):
 
     estimated_cost = models.FloatField()
     total_cost     = models.FloatField()
+    
+    first_funding_year = models.IntegerField(blank=True, null=True)
 
-    location = models.PointField()
+    location = models.PointField(srid=4326, null=True, blank=True)
         
     class Meta():
         # NOTE - the templates rely on this default ordering. Really we should

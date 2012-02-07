@@ -10,7 +10,7 @@
         <ul>
         {% for p in object.project_set.all|slice:":10" %}
             <li>
-                <strong>{{ p.project_name }}</strong>:
+                <strong>{{ p.project_name }} {% if p.first_funding_year %}({{ p.first_funding_year }}){% endif %}</strong>:
                 Ksh {{ p.total_cost|floatformat|intcomma }}
                 spent on {{ p.activity_to_be_done }}.
                 (<a href="{% url projects.views.in_place slug=object.slug %}#project-{{ p.cdf_index }}">more</a>)

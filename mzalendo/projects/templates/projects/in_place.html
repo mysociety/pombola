@@ -35,18 +35,40 @@
             estimated_cost                  {{ p.estimated_cost      }}
             total_cost                      {{ p.total_cost          }}
             location                        {{ p.location            }}
+            first_funding_year              {{ p.first_funding_year  }}
+
             
             {% endcomment %}
 
             <h3>{{ p.project_name }}</h3>
             
+            <style type="text/css" media="screen">
+                dt {
+                    float: left;
+                    width: 12em;
+                }
+                
+                dl {
+                    margin-bottom: 2em;
+                }
+            </style>
+
             <dl>
                 <dt>location</dt>
-                    <dd>{{ p.location_name }}</dd>
+                    <dd>
+                        {{ p.location_name }}
+                        (in <a href="{{ p.constituency.get_absolute_url }}">{{ p.constituency.name }}</a>)
+                    </dd>
+
+                {% if p.first_funding_year %}
+                <dt>year first funded</dt>
+                    <dd>{{ p.first_funding_year }}</dd>
+                {% endif %}
+
                 <dt>action</dt>
                     <dd>{{ p.activity_to_be_done }}</dd>
                 <dt>output</dt>
-                    <dd>{{ p.expected_output }}</dd>
+                    <dd>{% firstof p.expected_output '-' %}</dd>
             
                 <dt>implementation status</dt>
                     <dd>{% firstof p.status p.remarks 'not known' %}</dd>
