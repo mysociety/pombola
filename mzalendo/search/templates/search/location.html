@@ -8,14 +8,19 @@
 {# TODO - map showing locations found #}
 {# TODO - search using the map as a drilldown #}
 
-<h2>Location Search</h2>
+<h2>Search for a Location</h2>
 
 <div class="content_box">
-    <form method="get" action="{% url location_search %}">
-        <input type="search" name="loc" placeholder="location name" value="{{ loc }}"/>
-        <input type="submit" value="search" />
-    </form>
 
+        <p>Alternatively, <a href="{% url core_search  %}" id="search-core-instead">search Mzalendo's data</a> or <a href="{% url hansard_search  %}" id="search-hansard-instead">search Hansard transcripts</a> instead.</p>
+        
+    <form method="get" action="{% url location_search %}">
+        <div class="search-box">
+            <input type="input" name="loc" placeholder="location name" value="{{ loc }}" id="loc"/>
+            <input type="submit" value="Search" class="button">
+        </div>
+    </form>
+    <p> Example location searches:</p>
     <ul class="search_hints">
         <li><a href="{% url location_search %}?loc=Nairobi">Nairobi</a></li>
         <li><a href="{% url location_search %}?loc=Kenyatta">Kenyatta</a></li>
