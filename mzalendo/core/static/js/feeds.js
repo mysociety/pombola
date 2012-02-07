@@ -78,6 +78,10 @@
                         http_regex = new RegExp('(http://t\.co/[a-z0-9]+)', 'gi');
                         tweet_html = tweet_html.replace( http_regex, '<a href="$1">$1</a>' );
 
+                        // activate @names too
+                        name_regex = new RegExp('@([a-z0-9]+)', 'gi' );
+                        tweet_html = tweet_html.replace( name_regex, '<a href="http://twitter.com/$1">@$1</a>' );
+
                         $tweet
                             .append( $('<p/>').html( tweet_html ) )
                             .append( '<p class="meta">' + pub_date.toDateString() + '</p>');
