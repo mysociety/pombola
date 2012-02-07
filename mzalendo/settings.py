@@ -142,6 +142,20 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = config.get('DJANGO_SECRET_KEY')
 
+# Enable caching for the whole site by default. Note that the 'dummy' cache is
+# used as we don't actually want to store anything, but rather we want to add
+# the correct headers to responses so that Varnish does all the caching for us.
+# This works for now as we are not caching anything in the code (eg template
+# partials, db queries) and are just caching whole pages. Caching these would
+# just eat up storage that should never get hit again, possibly affecting other
+# sites using the same backend.
+#
+# To start doing more fine grained cachin we'd need to enable a backend that
+# actually stores things, most probably the memcached one.
+CACHE_BACKEND = 'dummy://'
+CACHE_MIDDLEWARE_SECONDS = 60 * 20 # twenty minutes
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 # Always use the TemporaryFileUploadHandler as it allows us to access the
 # uploaded file on disk more easily. Currently used by the CSV upload in
@@ -159,8 +173,11 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
