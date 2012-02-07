@@ -116,6 +116,7 @@ $colour15: #e5fff3;
   &:hover {
     background:$colour8/0.8;
     color:$colour6;
+    text-decoration:none;
   }
 }
 @mixin button-text-red {

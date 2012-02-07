@@ -34,9 +34,7 @@
                 static_url('js/desktop-functions.js'),                
             ],
             both: [
-                '//platform.twitter.com/widgets.js',
                 static_url('js/analytics.js'),
-                static_url('js/fb-like.js'),
                 '//www.google.com/jsapi' // ?key=INSERT-YOUR-KEY
             ].concat( extra_js ),
             complete: function () {

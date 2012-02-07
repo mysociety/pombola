@@ -717,6 +717,7 @@ ul.listing li section a.read-more {
 ul.listing li section a.read-more:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 
 #tab-nav {
@@ -873,6 +874,7 @@ ul.listing li section a.read-more:hover {
 #ajax_dialog_subcontent input.submit:hover {
   background: #a0a0a0;
   color: white;
+  text-decoration: none;
 }
 #ajax_dialog_subcontent input.submit {
   *display: inline;
