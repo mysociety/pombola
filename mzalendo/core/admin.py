@@ -125,10 +125,10 @@ class PersonAdmin(admin.ModelAdmin):
 
 class PlaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display  = [ 'slug', 'name', 'kind', 'show_organisation' ]
-    list_filter   = [ 'kind' ]
-    search_fields = [ 'name', 'organisation__name' ]
-    inlines       = [ InformationSourceInlineAdmin, ]
+    list_display = ('slug', 'name', 'kind', 'show_organisation')
+    list_filter = ('kind',)
+    search_fields = ('name', 'organisation__name')
+    inlines = (InformationSourceInlineAdmin, ScorecardInlineAdmin)
 
     def show_organisation(self, obj):
         if obj.organisation:
