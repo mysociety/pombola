@@ -71,8 +71,15 @@
                         var pub_date = new Date( tweet_data.created_at );
 
                         var $tweet = $( '<div class="tw-wrap" />');
+
+                        var tweet_html = $('<div/>').text( tweet_data.text ).html();
+
+                        // make t.co links clickable
+                        http_regex = new RegExp('(http://t\.co/[a-z0-9]+)', 'gi');
+                        tweet_html = tweet_html.replace( http_regex, '<a href="$1">$1</a>' );
+
                         $tweet
-                            .append( $('<p/>').text( tweet_data.text ) )
+                            .append( $('<p/>').html( tweet_html ) )
                             .append( '<p class="meta">' + pub_date.toDateString() + '</p>');
 
                         $twitter_feed
