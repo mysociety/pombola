@@ -1178,6 +1178,10 @@ ul.hansard_entries li.scene {
 ul.hansard_entries li.speech p {
   margin-left: 1em;
 }
+ul.hansard_entries li.search_hansard {
+  text-align: right;
+  padding: 0.2em;
+}
 ul.hansard_entries li.page_number {
   text-align: right;
   background: #eee;
@@ -1514,6 +1518,25 @@ h3.scorecard-overall span.score-overall-bad {
   border: 2px solid #F6F6F6;
 }
 
+.btn-question {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  width: 15px;
+  height: 15px;
+  margin: -4px 0 0 5px;
+  text-indent: -999999px;
+  background: url(../images/question.png) 0 0 no-repeat;
+}
+.btn-question {
+  *display: inline;
+}
+.btn-question:hover {
+  background-position: 0 -21px;
+}
+
 /* 5. PAGE SPECIFIC
 -------------------------------------------------------------- */
 /* HOME */
@@ -1616,6 +1639,7 @@ h3.scorecard-overall span.score-overall-bad {
 .featured-person img {
   float: left;
   max-width: 90px;
+  height: auto;
 }
 .featured-person .featured-person-info {
   position: relative;

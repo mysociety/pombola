@@ -40,15 +40,8 @@
             <form method="post" action="{% url feedback_add %}" id="add_feedback">
                 {% csrf_token %}
                 
-                <table>
-                    {{ form.as_table }}
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>
-                            <input type="submit" value="Leave feedback">
-                        </td>
-                    </tr>
-                </table>
+                {{ form.as_p }}
+                <input type="submit" class="submit" value="Send feedback">
             </form>
         </div>
 

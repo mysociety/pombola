@@ -11,6 +11,9 @@
     {% with source_name=sitting.source.name source_url=sitting.source.url %}
 
     <ul class="hansard_entries">
+
+      <li class="search_hansard"><a href="{% url hansard_search %}">search Hansard</a></li>
+
     {% for entry in sitting.entry_set.all %}
 
         {% ifchanged %}
@@ -41,6 +44,11 @@
             {% endswitch %}
         </li>
     {% endfor %}
+    
+    {% if sitting.entry_set.all %}
+        <li class="search_hansard"><a href="{% url hansard_search %}">search Hansard</a></li>
+    {% endif %}
+    
     </ul>
 
     {% endwith %}
