@@ -84,7 +84,7 @@
 
                         $tweet.append( $('<p/>').html( tweet_html ) );
                             
-                        var tweet_url = 'http://twitter.com/' + screen_name + '/status/' + tweet_data.id;                        
+                        var tweet_url = 'http://twitter.com/' + screen_name + '/status/' + tweet_data.id_str;                        
                         $tweet.append( '<p class="meta"><a href="' + tweet_url + '">' + pub_date.toDateString() + '</a></p>');
 
                         $twitter_feed
