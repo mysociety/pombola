@@ -14,7 +14,7 @@
     </div>
     
     <div class="profile-pic">
-        {% thumbnail object.primary_image "210x210" as im %}
+        {% thumbnail object.primary_image "210x210" crop="center" as im %}
         <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
         {% empty %}
         <img src="{{STATIC_URL}}images/avatar-210x210.jpg" />
