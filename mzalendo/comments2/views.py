@@ -34,6 +34,11 @@ def get_object(module_name, slug):
     return obj
     
 
+# Note on caching: We could specify that the following views should never be
+# cached. But it is probably not needed as long as the total cache time is quite
+# low. Comments can only be created by logged in users, and the site is not
+# cached for them so they will see the new comments straight away.
+
 def list_for(request, module_name, slug):
     """Display comments"""
 
@@ -46,7 +51,7 @@ def list_for(request, module_name, slug):
         },
         context_instance=RequestContext(request)
     )
-    
+
 
 def comments_tab(request, module_name, slug):
     """Display comments, but just the contents for the tab"""
@@ -63,9 +68,6 @@ def comments_tab(request, module_name, slug):
         },
         context_instance=RequestContext(request)
     )
-    
-
-
 
 @login_required
 @csrf_protect
