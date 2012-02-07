@@ -121,7 +121,7 @@ class ProjectImporter(object):
         for year in range(2000, 2020):
             key = "%u-%u" % ( year, year+1 )
             amount = re.sub( r'\D', '', row.get(key, '0') )
-            if int(amount):
+            if len(amount) and int(amount):
                 data['first_funding_year'] = year
                 break
 
