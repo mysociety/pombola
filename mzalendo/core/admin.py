@@ -1,5 +1,6 @@
 from django.contrib import admin
 from mzalendo.core import models
+from mzalendo.scorecards import models as scorecard_models
 from django.contrib.gis import db
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.generic import GenericTabularInline
@@ -109,19 +110,25 @@ class PositionInlineAdmin(admin.TabularInline):
         }
     )    
 
+class ScorecardInlineAdmin(GenericTabularInline):
+    model = scorecard_models.Entry
+    fields = ('date', 'score', 'disabled')
+    readonly_fields = ('date', 'score')
+    extra = 0
+    can_delete = False
 
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["legal_name"]}
-    inlines       = [ PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ]
-    list_display  = [ 'slug', 'name', 'date_of_birth' ]
+    inlines = [PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ScorecardInlineAdmin]
+    list_display = ['slug', 'name', 'date_of_birth']
     search_fields = ['legal_name']
 
 class PlaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display  = [ 'slug', 'name', 'kind', 'show_organisation' ]
-    list_filter   = [ 'kind' ]
-    search_fields = [ 'name', 'organisation__name' ]
-    inlines       = [ InformationSourceInlineAdmin, ]
+    list_display = ('slug', 'name', 'kind', 'show_organisation')
+    list_filter = ('kind',)
+    search_fields = ('name', 'organisation__name')
+    inlines = (InformationSourceInlineAdmin, ScorecardInlineAdmin)
 
     def show_organisation(self, obj):
         if obj.organisation:

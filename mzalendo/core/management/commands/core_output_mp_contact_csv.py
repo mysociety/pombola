@@ -48,10 +48,10 @@ class Command(BaseCommand):
                 value = value.encode('utf-8')
 
                 contact_field_names_set.add(kind_name)
-                try:
-                    data[ kind_name ] = value
-                except KeyError:
+                if data.get( kind_name, None ):
                     data[ kind_name ] += '; ' + value
+                else:
+                    data[ kind_name ] = value
 
             mp_data.append(data)
         
@@ -59,7 +59,15 @@ class Command(BaseCommand):
         csv_fieldnames =  [ 'Name', 'Constituency' ] + sorted( list(contact_field_names_set) )
         writer = csv.DictWriter( csv_output, csv_fieldnames )
         
-        writer.writeheader()
+
+        # Needs Python 2.7
+        # writer.writeheader()
+        
+        # Silly dance for Python 2.6.6's csv.DictWriter which bizarrely does not have writeheader
+        fieldname_dict = {}
+        for key in csv_fieldnames:
+            fieldname_dict[key] = key
+        writer.writerow( fieldname_dict )
         
         for data in mp_data:
             writer.writerow( data )

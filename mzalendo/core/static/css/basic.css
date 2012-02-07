@@ -1178,6 +1178,10 @@ ul.hansard_entries li.scene {
 ul.hansard_entries li.speech p {
   margin-left: 1em;
 }
+ul.hansard_entries li.search_hansard {
+  text-align: right;
+  padding: 0.2em;
+}
 ul.hansard_entries li.page_number {
   text-align: right;
   background: #eee;
