@@ -515,6 +515,7 @@ pre {
     ul.scorecard {
       @include list-reset-soft;
       @include inline-block;
+      width:100%;
       li {
         article {
           padding:10px;

@@ -944,6 +944,7 @@ pre {
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  width: 100%;
 }
 #page .small-container ul.scorecard li {
   list-style-type: none;
