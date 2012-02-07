@@ -14,23 +14,17 @@
 {% block content %}
     <h2>Search Mzalendo</h2>
 
-    <p>Use this form to search Mzalendo's data.</p>
     <p>
         Alternatively,
         <a href="{% url hansard_search  %}" id="search-hansard-instead">search Hansard transcipts</a> instead.
     </p>
 
     <form method="get" action=".">
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Search">
-                </td>
-            </tr>
-        </table>
-
+        <div class="search-box">
+            {{ form.q }}
+            <input type="submit" value="Search" class="button">
+        </div>
+        
         {% if query %}
             <h3>Results</h3>
 
