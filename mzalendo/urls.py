@@ -46,11 +46,6 @@ urlpatterns += patterns('',
     (r'^projects/', include('projects.urls')),
 )
 
-# serve some pages directly from templates
-urlpatterns += patterns('',
-    url(r'^privacy/$', direct_to_template, {'template': 'privacy.html'}, name='privacy'),
-)
-
 # ajax preview of the markdown
 urlpatterns += patterns('',
     url(r'^markitup/', include('markitup.urls'))
