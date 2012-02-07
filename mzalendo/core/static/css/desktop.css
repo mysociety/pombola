@@ -702,8 +702,15 @@ ul.comments li:hover .read-more-wrap, ul.comments li.hovered .tools, ul.comments
 }
 
 ul.listing li img {
+  width: auto;
+  height: auto;
+  max-width: 90px;
+  max-height: 90px;
+}
+ul.listing li .thumbnail-image-link {
   width: 90px;
-  height: 90px;
+  /* force fixed width for links that may contain narrow images */
+  text-align: right;
 }
 ul.listing li section {
   clear: none;

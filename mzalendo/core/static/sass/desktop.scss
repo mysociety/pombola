@@ -636,8 +636,14 @@ ul.comments {
 ul.listing {
   li {
     img {
-      width:90px;
-      height:90px;
+      width:auto;
+      height:auto;
+      max-width:90px;
+      max-height:90px;
+    }
+    .thumbnail-image-link {
+      width: 90px; /* force fixed width for links that may contain narrow images */
+      text-align:right;
     }
     section {
       clear:none;
