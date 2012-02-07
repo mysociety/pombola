@@ -350,14 +350,15 @@ josh [at] supercooldesign.co.uk
     }
   }
   .profile-pic {
-    height:200px;
+    height:210px;
     width:210px;
     position:absolute;
     top:0;
     left:0;
+    overflow:hidden;
     img {
       width:auto;
-      height:200px;
+      height:210px;
     }
     #map_canvas {
       width:200px;
