@@ -1,3 +1,15 @@
+/*
+ * Height fix for pages with .profile-info box
+ */
+function profileInfoHeightFix() {
+  var pro_h = $('.profile-info').height()+210; //add 210 for the profile pic
+  var main_h = $('#page .page-wrapper').height();
+
+  if(pro_h > main_h){
+    $('#page .page-wrapper').css({'min-height':pro_h});
+  }
+}
+
 
 // Show a tab and hide the others. Load content from remote source if needed.
 function activateSimpleTab( $heading_element ) {
@@ -27,7 +39,6 @@ function activateSimpleTab( $heading_element ) {
   if ( content_url ) {
       $tab_content.load(content_url);
   }
-  
 }
 
 //generic re-usable hide or show with class states
@@ -172,12 +183,14 @@ $(function(){
   
   // activate the tab
   activateSimpleTab(matched_element);
+  profileInfoHeightFix();
 
   //for clicks
   $("#tab-nav ul li a").not(".tab-static-link").click(function(e){
     e.preventDefault();
     window.location.hash = $(this).parent('li').attr('rel');
     activateSimpleTab($(this).parent('li'));
+    profileInfoHeightFix();
   });
 
   // $(".tab-static-link").click(function(e){
@@ -198,17 +211,6 @@ $(function(){
   $('ul.scorecard article.has-details').live('click', function(){
     hideShow($('div.details', $(this)), $(this));
   });
-
-
-  /*
-   * Height fix for pages with .profile-info box
-   */
-  var pro_h = $('.profile-info').height()+210; //add 210 for the profile pic
-  var main_h = $('#page .page-wrapper').height();
-
-  if(pro_h > main_h){
-    $('#page .page-wrapper').css({'min-height':pro_h});
-  }
 
   /*
    * Comments: hover and show tools
@@ -256,5 +258,4 @@ $(function(){
     e.preventDefault();
     location.href="/search?q=" + escape($('#id_q,#loc').first().val());
   });
-  
 });
