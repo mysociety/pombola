@@ -278,7 +278,7 @@ class ScorecardMixin(models.Model):
 # from core.models import Place
 # from scorecards.models import Category, Entry
 # 
-# nta_cat = Category.objects.get(slug='cdf-data')
+# nta_cat = Category.objects.get(slug='cdf-performance')
 # 
 # for cons in Place.objects.all().constituencies():
 # 
