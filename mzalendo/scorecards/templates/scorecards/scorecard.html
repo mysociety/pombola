@@ -31,23 +31,32 @@
     <ul class="scorecard">
         {% for entry in object.scorecards %}
         <li>
-            <article {% if entry.has_details %}class="has-details"{% endif %}>
+            {% if entry.disabled %}
+            <article>
                 <header>
-                    <h4>{{ entry.category.name }}<a href="/info/scorecard-faq#{{ entry.category.slug }}" title="what's {{ entry.category.name }}?" class="btn-question">?</a></h4>
-                    <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>
-                    <div class="details">
-                        {% if entry.equivalent_remark %}
-                            <span class="shout shout-{{ entry.score_as_word }}">{{ entry.equivalent_remark }}</span>
-                        {% endif %}
-                        {% if entry.extended_remark %}
-                            <span class="shout">{{ entry.extended_remark }}</span>
-                        {% endif %}
-                        {% if entry.source_url %}
-                            <span class="source">Source: <a href="{{ entry.source_url}}">{% firstof entry.source_name 'source' %}</a></span>
-                        {% endif %}
-                    </div>
+                    <h4>{{ entry.category.name }}<a href="/info/scorecard-faq#{{ entry.category.slug }}" title="What's {{ entry.category.name }}?" class="btn-question">?</a></h4>
+                    <p class="score-disabled">{{ entry.disabled_comment }}</p>
                 </header>
             </article>
+            {% else %}
+                <article {% if entry.has_details %}class="has-details"{% endif %}>
+                    <header>
+                        <h4>{{ entry.category.name }}<a href="/info/scorecard-faq#{{ entry.category.slug }}" title="What's {{ entry.category.name }}?" class="btn-question">?</a></h4>
+                        <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>
+                        <div class="details">
+                            {% if entry.equivalent_remark %}
+                                <span class="shout shout-{{ entry.score_as_word }}">{{ entry.equivalent_remark }}</span>
+                            {% endif %}
+                            {% if entry.extended_remark %}
+                                <span class="shout">{{ entry.extended_remark }}</span>
+                            {% endif %}
+                            {% if entry.source_url %}
+                                <span class="source">Source: <a href="{{ entry.source_url}}">{% firstof entry.source_name 'source' %}</a></span>
+                            {% endif %}
+                        </div>
+                    </header>
+                </article>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>

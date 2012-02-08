@@ -18,6 +18,7 @@ def add(request):
         if form.is_valid():
             feedback = Feedback()
             feedback.url      = form.cleaned_data['url']
+            feedback.email    = form.cleaned_data['email']
             feedback.comment  = form.cleaned_data['comment']
 
             if request.user.is_authenticated():
