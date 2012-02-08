@@ -52,3 +52,7 @@ josh [at] supercooldesign.co.uk
   background: -ms-linear-gradient(#000000, #555555);
   background: linear-gradient(#000000, #555555);
 }
+
+#home-search #search-hansard-instead {
+  padding-left: 0.5em;
+}

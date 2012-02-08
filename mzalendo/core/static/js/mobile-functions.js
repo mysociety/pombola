@@ -116,4 +116,14 @@ $(function(){
     e.preventDefault();
     hideShow(sub_menu_id, $(this));
   });
+  
+  /* carry search terms across when switching between search pages */
+  $("#search-hansard-instead").click(function(e){
+    e.preventDefault();
+    location.href="/search/hansard?q=" + escape($('#core-search,#id_q,#loc').first().val());
+  });
+  $("#search-core-instead").click(function(e){
+    e.preventDefault();
+    location.href="/search?q=" + escape($('#id_q,#loc').first().val());
+  });
 });
