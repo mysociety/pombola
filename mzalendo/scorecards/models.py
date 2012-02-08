@@ -268,4 +268,31 @@ class ScorecardMixin(models.Model):
     
     class Meta:
        abstract = True
-    
+
+
+
+# This is code to paste into the shell to create entries for all the
+# constiteuncies that do not have NTA data.
+
+# import datetime
+# from core.models import Place
+# from scorecards.models import Category, Entry
+# 
+# nta_cat = Category.objects.get(slug='cdf-data')
+# 
+# for cons in Place.objects.all().constituencies():
+# 
+#     if Entry.objects.filter(place=cons, category=nta_cat).exists():
+#         print 'skipping ' + cons.name
+#     else:
+#         print 'adding disabled entry for ' + cons.name        
+#         Entry(
+#             content_object=cons,
+#             category=nta_cat,
+#             date = datetime.date.today(),
+#             disabled=True,
+#             disabled_comment = "The NTA have not audited " + cons.name,
+#             remark = 'dummy text',
+#             score = 0,
+#         ).save()
+
