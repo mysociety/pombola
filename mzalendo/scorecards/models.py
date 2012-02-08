@@ -291,7 +291,7 @@ class ScorecardMixin(models.Model):
 #             category=nta_cat,
 #             date = datetime.date.today(),
 #             disabled=True,
-#             disabled_comment = "The NTA have not audited " + cons.name,
+#             disabled_comment = "The NTA have not audited CDF spending in %s for a year when the current MP was in office." % cons.name,
 #             remark = 'dummy text',
 #             score = 0,
 #         ).save()
