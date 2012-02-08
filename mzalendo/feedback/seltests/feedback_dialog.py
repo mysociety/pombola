@@ -17,14 +17,14 @@ class FeedbackTestCase(MzalendoSeleniumTestCase):
 
 
         # make the window small so that the mobile js is loaded
-        self.create_feedback_using_narrow_screen('narrow window')
+        self.create_feedback_using_narrow_screen(message='narrow window')
 
         # use a large window so we get the dialog
-        self.create_feedback_using_wide_screen('wide window')
+        self.create_feedback_using_wide_screen(message='wide window')
 
         # log in and check that the user is stored.
         self.login('superuser')
-        self.create_feedback_using_wide_screen('logged_in_user')
+        self.create_feedback_using_wide_screen(message='logged_in_user')
 
         # check that the two bits of feedback are stored in the the database
         self.assertEqual( Feedback.objects.all().count(), 3 )
@@ -51,11 +51,7 @@ class FeedbackTestCase(MzalendoSeleniumTestCase):
         driver = self.driver
 
         driver.find_element_by_link_text("Give us feedback").click()
-        driver.find_element_by_id("id_comment").clear()
-        driver.find_element_by_id("id_comment").send_keys(message)
-        driver.find_element_by_xpath("//input[@value='Leave feedback']").click()
-        time.sleep(1) # just to let things catch up
-        self.failUnless(self.thanks_text in driver.page_source)
+        self.fill_in_feedback_form(message)
         driver.find_element_by_css_selector("span.ui-icon.ui-icon-closethick").click()
 
 
@@ -66,9 +62,15 @@ class FeedbackTestCase(MzalendoSeleniumTestCase):
         driver = self.driver
 
         driver.find_element_by_link_text("Give us feedback").click()
+        self.fill_in_feedback_form(message)
+        driver.find_element_by_link_text("page you were on").click()
+    
+    
+    def fill_in_feedback_form(self, message):
+        driver = self.driver
         driver.find_element_by_id("id_comment").clear()
         driver.find_element_by_id("id_comment").send_keys(message)
-        driver.find_element_by_css_selector("input[type=\"submit\"]").click()
+        driver.find_element_by_xpath("//input[@value='Send feedback']").click()
+        time.sleep(1) # just to let things catch up
         self.failUnless(self.thanks_text in driver.page_source)
-        driver.find_element_by_link_text("page you were on").click()
         
