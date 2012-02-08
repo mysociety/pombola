@@ -536,6 +536,9 @@ pre {
               &.score-bad {
                 background:url(../images/score-bad.png) right 0 no-repeat;
               }
+              &.score-disabled {
+                background:url(../images/score-disabled.png) right 0 no-repeat;
+              }
             }
             .details {
                 span.shout {

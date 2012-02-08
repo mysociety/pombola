@@ -42,8 +42,17 @@ class Entry(models.Model):
     # for simplicity.
     date = models.DateField()
 
-    # Used to manually stop a scorecard being shown.
-    disabled = models.BooleanField(default=False)
+    # Used to manually stop a scorecard being shown. If disabled is true then there
+    # the scorecard will not count towards the totals. If there is a comment a
+    # placeholder will be shown with the comment text, if comment is blank (the
+    # default) then nothing will be shown.    
+    disabled         = models.BooleanField(default=False)
+    disabled_comment = models.CharField(
+        max_length = 300,
+        blank      = True,
+        default    = '',
+        help_text  = "A comment to explain why the scorecard is disabled - eg 'No data is available'",
+    )
 
     # place, category, date are unique so can be used to update/overwrite
     # information when doing a CSV upload - see unique_together in Meta below.
@@ -231,10 +240,19 @@ class ScorecardMixin(models.Model):
     # Show an overall score for this Item.
     # Set this to false in anything for which you only want the individual
     # scores and no average.
-    show_overall_score = True
+    is_overall_scorecard_score_applicable = True
 
+    @property
+    def show_overall_score(self):
+        """Should we show an overall score? Yes if applicable and there are active scorecards"""
+        return self.is_overall_scorecard_score_applicable and self.active_scorecards().exists()
+        
     def active_scorecards(self):
         return self.scorecard_entries.filter(disabled=False)
+
+    def visible_scorecards(self):
+        """All scorecards, except disabled ones with no comment"""
+        return self.scorecard_entries.exclude(disabled=True, disabled_comment='')
 
     def scorecard_overall(self):
         return self.active_scorecards().aggregate(models.Avg('score'))['score__avg']
@@ -243,10 +261,10 @@ class ScorecardMixin(models.Model):
         return Entry.score_to_word(self.scorecard_overall())
         
     def has_scorecards(self):
-        return self.active_scorecards().exists()
+        return self.visible_scorecards().exists()
 
     def scorecards(self):
-        return self.active_scorecards()
+        return self.visible_scorecards()
     
     class Meta:
        abstract = True

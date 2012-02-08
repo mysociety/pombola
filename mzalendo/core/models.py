@@ -284,9 +284,9 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
         # We're only showing scorecards for current MPs
         if self.is_mp():
-            scorecard_lists.append(super(Person, self).active_scorecards())
+            scorecard_lists.append(super(Person, self).scorecards())
 
-            scorecard_lists.extend([x.active_scorecards() for x in self.constituencies()])
+            scorecard_lists.extend([x.scorecards() for x in self.constituencies()])
 
         return itertools.chain(*scorecard_lists)
 
@@ -402,7 +402,7 @@ class Place(ModelBase, ScorecardMixin):
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
 
     objects = PlaceManager()
-    show_overall_score = False
+    is_overall_scorecard_score_applicable = False
 
     comments = generic.GenericRelation(Comment)
 
