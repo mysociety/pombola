@@ -524,6 +524,16 @@ pre {
           border-bottom:2px solid $colour6;
           overflow:hidden;
           header {
+            h4 {
+              @include inline-block;
+              padding-right:20px;
+              position:relative;
+              .btn-question {
+                position:absolute;
+                top:3px;
+                right:0;
+              }
+            }
             p {
               margin:-20px 0 0 0;
               padding-top:20px;
@@ -978,10 +988,9 @@ h3.scorecard-overall {
 }
 
 .btn-question {
-  @include inline-block;
+  display:block;
   width: 15px;
   height: 15px;
-  margin:-4px 0 0 5px;
   text-indent:-999999px;
   background:url(../images/question.png) 0 0 no-repeat;
   &:hover {

@@ -505,7 +505,12 @@ josh [at] supercooldesign.co.uk
 #page .small-container ul.scorecard li article header h4 {
   float: left;
   width: 120px;
-  line-height: 1em;
+  line-height: 14px;
+}
+#page .small-container ul.scorecard li article header h4 .btn-question {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 #page .small-container ul.scorecard li article header p {
   float: left;

@@ -962,6 +962,23 @@ pre {
   border-bottom: 2px solid white;
   overflow: hidden;
 }
+#page .small-container ul.scorecard li article header h4 {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  padding-right: 20px;
+  position: relative;
+}
+#page .small-container ul.scorecard li article header h4 {
+  *display: inline;
+}
+#page .small-container ul.scorecard li article header h4 .btn-question {
+  position: absolute;
+  top: 3px;
+  right: 0;
+}
 #page .small-container ul.scorecard li article header p {
   margin: -20px 0 0 0;
   padding-top: 20px;
@@ -1603,19 +1620,11 @@ h3.scorecard-overall span.score-overall-bad {
 }
 
 .btn-question {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
+  display: block;
   width: 15px;
   height: 15px;
-  margin: -4px 0 0 5px;
   text-indent: -999999px;
   background: url(../images/question.png) 0 0 no-repeat;
-}
-.btn-question {
-  *display: inline;
 }
 .btn-question:hover {
   background-position: 0 -21px;

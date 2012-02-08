@@ -421,7 +421,12 @@ josh [at] supercooldesign.co.uk
             h4 {
               float:left;
               width:120px;
-              line-height: 1em /* tightened up for line-wrapping */
+              line-height:14px;
+              .btn-question {
+                position:absolute;
+                top:0;
+                right:0;
+              }
             }
             p {
               float:left;
