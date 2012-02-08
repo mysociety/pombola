@@ -31,23 +31,27 @@ class PositionTestCase(unittest.TestCase):
             slug = "place",
             kind = place_kind,
         )
+        
+        self.position_title = models.PositionTitle.objects.create(
+            name        = 'Job Title',
+            slug        = 'job-title',
+        )
+        
+        
     
     def tearDown(self):
         """Clean up after the tests"""
         self.person.delete()
         self.organisation.delete()
         self.place.delete()
+        self.position_title.delete()
 
     def getPos(self, **kwargs):
-        title_kind, created = models.PositionTitle.objects.get_or_create(
-            name        = 'Job Title',
-            slug        = 'job-title',
-        )
         return models.Position.objects.create(
             person       = kwargs.get('person',       self.person       ),
             organisation = kwargs.get('organisation', self.organisation ),
             place        = kwargs.get('place',        self.place        ),
-            title        = title_kind,
+            title        = self.position_title,
             start_date   = '',
             end_date     = '',
         )
