@@ -438,6 +438,9 @@ josh [at] supercooldesign.co.uk
               &.score-bad {
                 background:url(../images/score-bad.png) left 0 no-repeat;
               }
+              &.score-disabled {
+                background:url(../images/score-disabled.png) left 0 no-repeat;
+              }
             }
           }
           div.details {
