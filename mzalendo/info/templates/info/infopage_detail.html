@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-
-
 {% block title %}
     {{ object.title }}
 {% endblock %}
@@ -10,6 +8,6 @@
     <h1 class="page-title" data-sub-menu-id="{{ object.slug }}">{{ object.title }}</h1>
 
     <div class="markdown infopage">
-        {{ object.content }}
+        {{ object.content_with_anchors|safe }}
     </div>
 {% endblock %}
