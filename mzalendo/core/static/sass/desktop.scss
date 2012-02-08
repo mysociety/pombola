@@ -421,7 +421,12 @@ josh [at] supercooldesign.co.uk
             h4 {
               float:left;
               width:120px;
-              line-height: 1em /* tightened up for line-wrapping */
+              line-height:14px;
+              .btn-question {
+                position:absolute;
+                top:0;
+                right:0;
+              }
             }
             p {
               float:left;
@@ -456,7 +461,6 @@ josh [at] supercooldesign.co.uk
     }
   }
   .profile-info {
-    min-height:200px;
     width:210px;
     position:absolute;
     top:210px;
@@ -723,40 +727,10 @@ ul.listing {
 
 #ajax_dialog_subcontent {
   width:466px;
-  label {
-    display:block;
-    font-size:18px;
-    margin:6px 0 10px 0;
-  }
   textarea {
     width:448px;
-    height:160px;
-    border:2px solid #777777;
-    padding:6px;
-    font-size:16px;
-    @include border-radius(4px);
-    &:focus {
-      outline:none;
-      box-shadow:rgba(0, 0, 0, 0.2) 0 0 8px;
-    }
-  }
-  input.submit {
-    @include big-button-text-green;
-    border:none;
-    float:right;
-  }
-  .errorlist {
-    @include list-reset-soft;
-    li {
-      background:$colour11;
-      color:$colour6;
-      padding:4px 6px;
-      font-size:13px;
-      @include border-radius(3px);
-    }
   }
 }
-
 
 
 

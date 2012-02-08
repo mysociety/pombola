@@ -524,6 +524,16 @@ pre {
           border-bottom:2px solid $colour6;
           overflow:hidden;
           header {
+            h4 {
+              @include inline-block;
+              padding-right:20px;
+              position:relative;
+              .btn-question {
+                position:absolute;
+                top:3px;
+                right:0;
+              }
+            }
             p {
               margin:-20px 0 0 0;
               padding-top:20px;
@@ -978,10 +988,9 @@ h3.scorecard-overall {
 }
 
 .btn-question {
-  @include inline-block;
+  display:block;
   width: 15px;
   height: 15px;
-  margin:-4px 0 0 5px;
   text-indent:-999999px;
   background:url(../images/question.png) 0 0 no-repeat;
   &:hover {
@@ -989,6 +998,43 @@ h3.scorecard-overall {
   }
 }
 
+
+
+#ajax_dialog_subcontent {
+  width:320px;
+  label {
+    display:block;
+    font-size:18px;
+    margin:6px 0 10px 0;
+  }
+  textarea {
+    width:300px;
+    height:160px;
+    border:2px solid #777777;
+    padding:6px;
+    font-size:16px;
+    @include border-radius(4px);
+    &:focus {
+      outline:none;
+      box-shadow:rgba(0, 0, 0, 0.2) 0 0 8px;
+    }
+  }
+  input.submit {
+    @include big-button-text-green;
+    border:none;
+    float:right;
+  }
+  .errorlist {
+    @include list-reset-soft;
+    li {
+      background:$colour11;
+      color:$colour6;
+      padding:4px 6px;
+      font-size:13px;
+      @include border-radius(3px);
+    }
+  }
+}
 
 
 /* 5. PAGE SPECIFIC
