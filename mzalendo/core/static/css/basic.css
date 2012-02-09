@@ -1836,7 +1836,7 @@ h3.scorecard-overall span.score-overall-bad {
 }
 
 .featured-person {
-  color: #333333;
+  color: #2e2e2e;
   margin: 0 0 30px 0;
   border-top: 3px solid #b3b3b3;
   border-bottom: 3px solid #b3b3b3;
@@ -1884,6 +1884,13 @@ h3.scorecard-overall span.score-overall-bad {
   max-width: 300px;
   margin: 0 40px 7px 0;
   font-size: 17px;
+}
+.featured-person .featured-person-info .rating-container .rating a {
+  color: #2e2e2e;
+}
+.featured-person .featured-person-info .rating-container .rating a:hover {
+  text-decoration: none;
+  color: black;
 }
 .featured-person .featured-person-info .rating-container .rating-img {
   position: absolute;

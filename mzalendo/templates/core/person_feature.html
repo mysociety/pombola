@@ -25,14 +25,16 @@
         </div>
         <div class="rating-container">
             <div class="rating">
-                Mzalendo Rating: 
-                {% if featured_person.has_scorecards %}
-                    <strong>{{ featured_person.scorecard_overall_as_word|capfirst }}</strong>
-                {% else %}
-                    None
-                {% endif %}
+                <a href="{{ featured_person.get_absolute_url }}">
+                    Mzalendo Rating: 
+                    {% if featured_person.has_scorecards %}
+                        <strong>{{ featured_person.scorecard_overall_as_word|capfirst }}</strong>
+                    {% else %}
+                        None
+                    {% endif %}
+                </a>
             </div>
-            <div class="rating-img {{ featured_person.scorecard_overall_as_word }}"></div>
+            <a class="rating-img {{ featured_person.scorecard_overall_as_word }}" href="{{ featured_person.get_absolute_url }}"></a>
         </div>
     </div>
 </div>
