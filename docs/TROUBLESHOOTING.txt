@@ -18,3 +18,12 @@ Try deleting the cached search in 'httplib2_cache'
 
 Check that the database has PostGIS added to it
 
+
+## Caching does not appear to be working
+
+Point your browser at '/status/memcached/' - first hit should save a val to
+cache and subsequent ones should show that it is in the cache until the ttl
+expires.
+
+Check that you are not logged in, and don't have a sessionid or csrf_token
+cookie - both of which will cause caches to fetch you new content.

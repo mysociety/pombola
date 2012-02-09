@@ -1,5 +1,7 @@
 import re
 import urllib2
+import time
+import calendar
 
 from django.db.models import Count
 from django.db.models import Q
@@ -7,8 +9,9 @@ from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.views.generic.list_detail import object_detail, object_list
-from django.views.decorators.cache import cache_control
+from django.views.decorators.cache import cache_control, never_cache
 from django.views.generic import ListView
+from django.core.cache import cache
 
 from mzalendo.core import models
 from mzalendo.helpers import geocode
@@ -160,3 +163,26 @@ def twitter_feed(request):
         urllib2.urlopen('http://api.twitter.com/1/statuses/user_timeline.json?screen_name=MzalendoWatch&count=4').read(),
         content_type='application/json',
         )
+# We never want this to be cached
+@never_cache
+def memcached_status(request):
+    """Helper view that let's us check that the values are being stored in the cache, and subsequently purged"""
+
+    cache_key = 'memcached_status'
+    now = calendar.timegm( time.gmtime() )
+    ttl = 10
+    
+    cached = cache.get(cache_key)
+    
+    if cached:
+        response = "Found %u in cache, which was %u seconds ago (ttl is %u seconds)" % (cached, now - cached, ttl )
+    else:
+        cache.set( cache_key, now, ttl )
+        response = "Value not found in cache - added %u for %u seconds" % ( now, ttl )
+    
+    return HttpResponse(
+        response,
+        content_type='text/plain',
+    )
+
+    
