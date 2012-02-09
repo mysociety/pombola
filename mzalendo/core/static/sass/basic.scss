@@ -431,19 +431,18 @@ pre {
         overflow:hidden;
         input.email {
           height:20px;
-          float:left;
           border:none;
           font-size:15px;
           padding:6px 8px;
           width:200px;
         }
         input.button {
+          vertical-align:top;
           cursor:pointer;
-          float:left;
           width:32px;
           height:32px;
           border:none;
-          margin-left:-2px;
+          margin-left:-4px;
           text-indent:-999999px;
           background:$colour4 url(../images/chevron-right.png) 9px center no-repeat;
           @include background(
