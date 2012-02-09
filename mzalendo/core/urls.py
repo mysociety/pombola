@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
 from django.views.generic import DetailView, ListView
+from django.views.generic.simple import direct_to_template
 
 from core import models
 from core.views import PlaceListView
@@ -92,5 +93,9 @@ urlpatterns = patterns('core.views',
 urlpatterns += patterns('core.views',
     url(r'^external_feeds/twitter/', 'twitter_feed',     name='twitter_feed'),
     url(r'^status/memcached/',       'memcached_status', name='memcached_status'),
+)
+
+urlpatterns += patterns('',
+    url(r'^status/down/', direct_to_template, {'template': 'down.html'} ),
 )
 
