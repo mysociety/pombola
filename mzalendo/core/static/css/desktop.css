@@ -35,6 +35,9 @@ josh [at] supercooldesign.co.uk
   background: linear-gradient(#00c25c, #009245);
   height: 60px;
 }
+#site-header.down {
+  height: 80px;
+}
 #site-header .wrapper {
   position: relative;
   overflow: visible;
@@ -214,6 +217,11 @@ josh [at] supercooldesign.co.uk
   height: 34px;
   width: 418px;
   background: url(../images/d-logo.png) 0 center no-repeat;
+}
+#site-header .wrapper #logo.down {
+  width: 600px;
+  height: 50px;
+  background: url(../images/down-logo.png) 0 center no-repeat;
 }
 #site-header .wrapper #search {
   position: absolute;
@@ -398,6 +406,14 @@ josh [at] supercooldesign.co.uk
   background: none;
 }
 
+#page.down h1 {
+  font-size: 40px;
+  line-height: 50px;
+  margin: 20px 0 40px 0;
+}
+#page.down h2 {
+  font-size: 30px;
+}
 #page .page-wrapper {
   clear: both;
   display: block;

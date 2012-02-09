@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Down :: Mzalendo</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <meta http-equiv="cleartype" content="on">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        {% comment %}
+
+            The 'STATIC_GENERATION_NUMBER' is used to force the caches to fetch
+            new content. To update manually change the value in settings.py.
+
+            Much better will be to use the 'CachedStaticFilesStorage' when it
+            becomes available in the next version of Django.
+
+            https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/
+        
+        {% endcomment %}
+
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/basic.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen, handheld" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mobile.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="only screen and (min-width: 320px) and (max-width: 640px)" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="only screen and (min-width: 640px)" />
+
+        <!--[if lt IE 9]>
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
+        <![endif]-->
+
+        <script type="text/javascript" charset="utf-8">
+            window.mzalendo_settings = {
+                google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
+                facebook_app_id:           '{{ settings.FACEBOOK_APP_ID }}',
+                static_url:                '{{ STATIC_URL }}',
+                static_generation_number:  '{{ settings.STATIC_GENERATION_NUMBER }}',
+                extra_js: [],
+            }
+
+            {% block extra_js_to_load %}
+                // no extra js added to be loaded
+            {% endblock %}
+
+        </script>
+        
+
+        <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
+        <script src="{{ STATIC_URL }}js/loader.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+
+        <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
+        
+    </head>
+    <body>
+        <header id="site-header" class="down">
+            <div class="wrapper">
+                <a href="{% url home %}" id="logo" class="down">Mzalendo</a>
+            </div>
+        </header>
+
+      	<div id="breadcrumb-replacement">&nbsp;</div> 
+
+        <div id="page" class="down">
+            <div class="page-wrapper wrapper">
+			    <h1>Sorry Mzalendo is down for maintenance.</h1>
+			    <h2>Please try again soon.</h2>
+            </div>
+        </div>
+
+        <footer id="site-footer"></footer>
+    </body>
+</html>
