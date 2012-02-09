@@ -1,19 +1,21 @@
     <ul class="comments">
       {% for comment in comment_list %}
-        <li id="comment_{{ comment.id }}">
-            <img src="{{ STATIC_URL }}images/avatar-60x60.jpg" alt="{% firstof comment.user.get_full_name comment.user.username %}" />
-            <section>
-                <h4>{{ comment.title }}</h4>
-                <p class="meta">by {% firstof comment.user.get_full_name comment.user.username %} <time datetime="{{ comment.submit_date }}">{{ comment.submit_date|timesince }}</time> ago</p>
-                <ul class="tools">
-                    <li><a href="#" class="like">like</a></li>
-                    <li><a href="/comments/flag/{{ comment.id }}/" class="report">report</a></li>
-                    <li><a href="{{ comment.get_absolute_url }}">link</a></li>
-                </ul>
-                <p>{{ comment.comment|linebreaksbr }}</p>
-
-                <div class="read-more-wrap"><a href="{{ comment.get_absolute_url }}" class="read-more">read more</a></div>
-            </section>
-        </li>
+        {% if comment.status == 'approved' %}
+            <li id="comment_{{ comment.id }}">
+                <img src="{{ STATIC_URL }}images/avatar-60x60.jpg" alt="{% firstof comment.user.get_full_name comment.user.username %}" />
+                <section>
+                    <h4>{{ comment.title }}</h4>
+                    <p class="meta">by {% firstof comment.user.get_full_name comment.user.username %} <time datetime="{{ comment.submit_date }}">{{ comment.submit_date|timesince }}</time> ago</p>
+                    <ul class="tools">
+                        <li><a href="#" class="like">like</a></li>
+                        <li><a href="/comments/flag/{{ comment.id }}/" class="report">report</a></li>
+                        <li><a href="{{ comment.get_absolute_url }}">link</a></li>
+                    </ul>
+                    <p>{{ comment.comment|linebreaksbr }}</p>
+            
+                    <div class="read-more-wrap"><a href="{{ comment.get_absolute_url }}" class="read-more">read more</a></div>
+                </section>
+            </li>
+        {% endif %}
       {% endfor %}
     </ul>

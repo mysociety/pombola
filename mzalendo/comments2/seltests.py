@@ -23,7 +23,7 @@ class CommentTestCase(MzalendoSeleniumTestCase):
         # Go to the comments, and then login to add one
         driver.find_element_by_link_text("add your own").click()
 
-        self.login('superuser')
+        self.login('normaluser')
 
         # fill in the comment and submit
         driver.find_element_by_id("id_title").clear()
@@ -40,6 +40,16 @@ class CommentTestCase(MzalendoSeleniumTestCase):
 
         # Check that we are on the comment page.
         self.assertTrue( comment.get_absolute_url() in driver.current_url )
+        self.assertTrue( comment.title in self.page_source )
+        
+        # go to the person page and click on the comments tab and check that the comment
+        # is not show                
+        self.open_url('/person/joseph-bloggs#comments')
+        self.assertFalse( comment.title in self.page_source )
+        
+        # moderate and check that the comment is now visible
+        comment.approve()
+        self.open_url('/person/joseph-bloggs#comments')
         self.assertTrue( comment.title in self.page_source )
         
         
