@@ -472,6 +472,14 @@ pre {
 #page {
   background:$colour6;
   padding-bottom:30px;
+  &.down {
+    padding:10px;
+    h2 {
+      border:none;
+      background:none;
+      padding:0;
+    }
+  }
   .page-wrapper {
     display:table;
     position:relative;

@@ -896,6 +896,14 @@ pre {
   background: white;
   padding-bottom: 30px;
 }
+#page.down {
+  padding: 10px;
+}
+#page.down h2 {
+  border: none;
+  background: none;
+  padding: 0;
+}
 #page .page-wrapper {
   display: table;
   position: relative;
