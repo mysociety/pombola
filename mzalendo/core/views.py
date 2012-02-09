@@ -153,7 +153,8 @@ class PlaceListView(ListView):
             context['all_places'] = True            
         return context
 
-@cache_control(max_age=300)
+# We really want this to be cached
+@cache_control(max_age=300, s_maxage=300, public=True)
 def twitter_feed(request):
     return HttpResponse(
         urllib2.urlopen('http://api.twitter.com/1/statuses/user_timeline.json?screen_name=MzalendoWatch&count=4').read(),
