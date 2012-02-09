@@ -508,6 +508,11 @@ josh [at] supercooldesign.co.uk
         }
       }
     }
+    .profile-names {
+      p {
+        margin:0 0 10px 0;
+      }
+    }
     .vcard li .label {
       margin:0;
     }
@@ -750,8 +755,6 @@ ul.listing {
     width:448px;
   }
 }
-
-
 
 /* 4. PAGE SPECIFIC
 -------------------------------------------------------------- */
@@ -1038,20 +1041,23 @@ ul#home-news-list {
   }
 }
 
-/* ============ markdown used in e.g., info pages ============ */
 
+/* ============ info page markdown styles ============ */
 .infopage {
-  h2, h3 {
-    margin-top:2em;
+  margin:0;
+  h1 {
+    margin:0 0 20px 0;
   }
   h4 {
-    margin: 30px 0 10px 0;
-    padding-bottom: 5px;
-    border-bottom:1px solid $colour7;
+    padding: 0 0 5px 0;
   }
-  
+  p {
+    padding:0;
+  }
+  ul, ol, dl {
+    margin:0;
+  }
 }
-
 /* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens
    that can't handle 960px

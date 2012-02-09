@@ -603,11 +603,13 @@ pre {
   }
   .profile-info {
     .constituency-party {
+      margin:10px 0;
       h3 {
         margin:0;
       }
       ul {
         @include list-reset-soft;
+        margin:0 0 20px 0;
         li {
           border-top:2px solid $colour6;
           a {
@@ -615,7 +617,7 @@ pre {
             display:block;
             background:$colour9 url(../images/chevron-right.png) right center no-repeat;
             color:$colour5;
-            padding:0 10px;
+            padding:10px;
             text-decoration:none;
             &:hover {
               background-color:$colour6;
@@ -625,6 +627,11 @@ pre {
             }
           }
         }
+      }
+    }
+    .profile-names {
+      p {
+        margin:0 10px 10px 10px;
       }
     }
     .vcard {
@@ -1356,5 +1363,34 @@ h2 a.appearances-trigger {
   display:block;
   &.active {
     background:url(../images/chevron-down-alt.png) right center no-repeat;
+  }
+}
+
+/* ============ info page markdown styles ============ */
+
+.infopage {
+  margin:20px 0;
+  h1 {
+    margin:0 10px 20px 10px;
+  }
+  h2, h3 {
+
+  }
+  h4 {
+    margin: 30px 0 10px 0;
+    padding: 0 10px 5px 10px;
+    border-bottom:2px solid $colour7;
+    line-height:20px;
+  }
+  p {
+    padding:0 10px;
+  }
+  ul, ol, dl {
+    margin:0 10px;
+  }
+  hr {
+    border:none;
+    background:$colour1;
+    height:2px;
   }
 }
