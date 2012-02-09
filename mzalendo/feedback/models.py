@@ -15,6 +15,19 @@ class Feedback(models.Model):
     email   = models.EmailField( blank=True, help_text="Please let us have your email address so that we can get back to you." )
     url     = models.URLField( blank=True )
     comment = models.TextField()
+    
+    status = models.CharField(
+        max_length = 20,
+        default = 'pending',
+        choices = (
+            ( 'pending',        'Pending' ),
+            ( 'rejected',       'Rejected' ),
+            ( 'applied',        'Applied' ),
+            ( 'non-actionable', 'Non-actionable' ),
+        ),
+    )
+    
+    response = models.TextField( blank=True )
 
     def __unicode__(self):
         return self.comment[:100]
