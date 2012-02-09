@@ -209,10 +209,12 @@
                     <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
                 </ul>
                 
-                {% if request.user.is_staff %}
+                {% if request.user.is_staff or settings.STAGING %}
                 <ul class="utilities">
-                    {% if object %}
-                        <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
+                    {% if request.user.is_staff %}
+                        {% if object %}
+                            <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
+                        {% endif %}
                     {% endif %}
 
                     {% if settings.STAGING %}
