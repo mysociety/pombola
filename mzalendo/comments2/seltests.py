@@ -46,10 +46,14 @@ class CommentTestCase(MzalendoSeleniumTestCase):
         # is not show                
         self.open_url('/person/joseph-bloggs#comments')
         self.assertFalse( comment.title in self.page_source )
+        self.open_url('/comments/for/person/joseph-bloggs/')
+        self.assertFalse( comment.title in self.page_source )
         
         # moderate and check that the comment is now visible
         comment.approve()
         self.open_url('/person/joseph-bloggs#comments')
+        self.assertTrue( comment.title in self.page_source )
+        self.open_url('/comments/for/person/joseph-bloggs/')
         self.assertTrue( comment.title in self.page_source )
         
         
