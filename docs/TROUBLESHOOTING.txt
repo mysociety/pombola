@@ -1,7 +1,19 @@
 # TROUBLESHOOTING
 
-If something goes wrong please check the following for help. If problem not
-listed please add it after fixing.
+If something goes wrong please check the following for help. 
+If your problem is not listed please add it after fixing.
+
+## Remember to set up the environment!
+
+If you see errors like this...
+
+    File "./manage.py", line 5, in <module>
+    import settings
+    ImportError: No module named yaml
+
+...then you probably forgot to set the virtualenv for your current session.
+See the VIRTUALENV section in INSTALL.txt.
+
 
 ## Web requests block
 
