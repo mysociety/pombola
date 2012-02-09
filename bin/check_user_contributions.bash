@@ -10,5 +10,7 @@ source ../../mzalendo-virtualenv/bin/activate
 
 # This will print out to STDOUT if there are any. This should then get emailed to
 # the right people by the cron script.
+
 ./manage.py comments2_report_needing_attention
 
+./manage.py feedback_report_pending
