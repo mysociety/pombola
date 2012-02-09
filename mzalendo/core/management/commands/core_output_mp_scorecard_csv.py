@@ -42,7 +42,11 @@ class Command(BaseCommand):
             except IndexError:
                 data['Constituency'] = u'N/A' # some mps don't have constituencies
 
-            for scorecard_entry in mp.active_scorecards():
+            # we want all scorecards - the person model has an overide on the 'scorecards'
+            # method that mixes in the constituency ones
+            for scorecard_entry in mp.scorecards():
+                if scorecard_entry.disabled: continue # don't want these - their rating is bogus
+
                 category_name = scorecard_entry.category.name
                 rating = scorecard_entry.score_as_word()
 
