@@ -72,7 +72,8 @@ $(function(){
     });
     
     // hide/show home intro
-    $('.home-read-more').on('click', function(){
+    $('.home-read-more').on('click', function(e){
+      e.preventDefault();
       hideShow($('#home-intro span.details'), $(this));
       if($('.home-read-more.active').length !== 0){
         $(this).text('less');
