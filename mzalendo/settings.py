@@ -142,17 +142,26 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = config.get('DJANGO_SECRET_KEY')
 
-# Enable caching for the whole site by default. Note that the 'dummy' cache is
-# used as we don't actually want to store anything, but rather we want to add
-# the correct headers to responses so that Varnish does all the caching for us.
-# This works for now as we are not caching anything in the code (eg template
-# partials, db queries) and are just caching whole pages. Caching these would
-# just eat up storage that should never get hit again, possibly affecting other
-# sites using the same backend.
-#
-# To start doing more fine grained cachin we'd need to enable a backend that
-# actually stores things, most probably the memcached one.
-CACHE_BACKEND = 'dummy://'
+CACHES = {
+
+    # by default use memcached locally. This is what get used by
+    # django.core.cache.cache
+    'default': {
+        'BACKEND':    'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION':   '127.0.0.1:11211',
+        'KEY_PREFIX': 'mzalendo',
+    },
+
+    # we also have a dummy cache that is used for all the page requests - we want
+    # the cache framework to auto-add all the caching headers, but we don't actually
+    # want to do the caching ourselves - rather we leave that to Varnish on the
+    # servers.
+    'dummy': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',    
+    },
+}
+
+CACHE_MIDDLEWARE_ALIAS='dummy'
 CACHE_MIDDLEWARE_SECONDS = 60 * 20 # twenty minutes
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True

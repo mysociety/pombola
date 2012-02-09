@@ -50,3 +50,5 @@ selenium>=2.15
 django-selenium
 
 BeautifulSoup>=3.2.0
+
+python-memcached
