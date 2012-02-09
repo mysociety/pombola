@@ -27,3 +27,9 @@ class FeedbackForm(forms.Form):
         label  = _('Your feedback'),
         widget = forms.Textarea,
     )
+
+    email = forms.EmailField(
+        label  = _('Your email'),
+        required = False,
+        help_text = "optional - but lets us get back to you...",
+    )

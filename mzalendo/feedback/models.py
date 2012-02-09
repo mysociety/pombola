@@ -12,6 +12,7 @@ class Feedback(models.Model):
     updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
 
     user    = models.ForeignKey( User, blank=True, null=True )
+    email   = models.EmailField( blank=True, help_text="Please let us have your email address so that we can get back to you." )
     url     = models.URLField( blank=True )
     comment = models.TextField()
 

@@ -1116,7 +1116,7 @@ h3.scorecard-overall {
 }
 
 .featured-person {
-  color:#333333;
+  color:$colour10;
   margin:0 0 30px 0;
   border-top:3px solid $colour13;
   border-bottom:3px solid $colour13;
@@ -1161,6 +1161,13 @@ h3.scorecard-overall {
         max-width:300px;
         margin:0 40px 7px 0;
         font-size:17px;
+        a {
+          color: $colour10;
+          &:hover {
+            text-decoration: none;
+            color: $colour5;
+          }
+        }
       }
       .rating-img {
         position:absolute;
