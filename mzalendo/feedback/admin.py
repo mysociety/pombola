@@ -3,8 +3,8 @@ from feedback.models import Feedback
 
 class FeedbackAdmin(admin.ModelAdmin):
 
-    list_display = ('comment', 'user', 'email', 'url', 'created',)
-    list_filter = ('created',)
+    list_display = ('status', 'comment', 'user', 'email', 'url', 'created',)
+    list_filter = ('created', 'status')
     date_hierarchy = 'created'
     ordering = ('-created',)
     raw_id_fields = ('user',)
