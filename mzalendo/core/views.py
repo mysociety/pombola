@@ -156,13 +156,25 @@ class PlaceListView(ListView):
             context['all_places'] = True            
         return context
 
+
 # We really want this to be cached
 @cache_control(max_age=300, s_maxage=300, public=True)
 def twitter_feed(request):
+
+    # get the json from the cache, or fetch it if needed
+    cache_key = 'MzalendoWatch-twitter-feed'
+    json = cache.get(cache_key)
+
+    if not json:
+        json = urllib2.urlopen('http://api.twitter.com/1/statuses/user_timeline.json?screen_name=MzalendoWatch&count=4').read()
+        cache.set( cache_key, json, 300 )
+
     return HttpResponse(
-        urllib2.urlopen('http://api.twitter.com/1/statuses/user_timeline.json?screen_name=MzalendoWatch&count=4').read(),
+        json,
         content_type='application/json',
-        )
+    )
+
+
 # We never want this to be cached
 @never_cache
 def memcached_status(request):
