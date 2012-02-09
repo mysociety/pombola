@@ -15,13 +15,15 @@
 
 {% block content %}
 
-    <h1>
+    
+    <h1 class="page-title">
         Leave feedback
         {% if form.url.value %}
             on {{ form.url.value }}
         {% endif %}
     </h1>
 
+    <div class="infopage">
     {% if submit_was_success %}
 
         <div id="ajax_dialog_subcontent">
@@ -46,5 +48,6 @@
         </div>
 
     {% endif %}
+    </div>
 
 {% endblock %}

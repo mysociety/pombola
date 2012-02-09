@@ -34,6 +34,9 @@ josh [at] supercooldesign.co.uk
   background:$colour1;
   @include background(linear-gradient($colour1/0.75, $colour1));
   height:60px;
+  &.down {
+    height:80px;
+  }
   .wrapper {
     position:relative;
     overflow:visible;
@@ -166,6 +169,11 @@ josh [at] supercooldesign.co.uk
       height:34px;
       width:418px;
       background:url(../images/d-logo.png) 0 center no-repeat;
+      &.down {
+        width:600px;
+        height:50px;
+        background:url(../images/down-logo.png) 0 center no-repeat;
+      }
     }
     #search {
       position:absolute;
@@ -326,6 +334,16 @@ josh [at] supercooldesign.co.uk
 }
 
 #page {
+  &.down {
+    h1 {
+      font-size:40px;
+      line-height:50px;
+      margin:20px 0 40px 0;
+    }
+    h2 {
+      font-size:30px;
+    }
+  }
   .page-wrapper {
     clear: both;
     display:block;
@@ -374,6 +392,7 @@ josh [at] supercooldesign.co.uk
     max-width:510px;
     clear:left;
     margin-left:240px;
+    min-height:120px;
     h3.scorecard-overall {
       margin:0;
       padding:15px 10px 10px 10px;
@@ -487,6 +506,11 @@ josh [at] supercooldesign.co.uk
             }
           }
         }
+      }
+    }
+    .profile-names {
+      p {
+        margin:0 0 10px 0;
       }
     }
     .vcard li .label {
@@ -731,8 +755,6 @@ ul.listing {
     width:448px;
   }
 }
-
-
 
 /* 4. PAGE SPECIFIC
 -------------------------------------------------------------- */
@@ -1019,20 +1041,23 @@ ul#home-news-list {
   }
 }
 
-/* ============ markdown used in e.g., info pages ============ */
 
+/* ============ info page markdown styles ============ */
 .infopage {
-  h2, h3 {
-    margin-top:2em;
+  margin:0;
+  h1 {
+    margin:0 0 20px 0;
   }
   h4 {
-    margin: 30px 0 10px 0;
-    padding-bottom: 5px;
-    border-bottom:1px solid $colour7;
+    padding: 0 0 5px 0;
   }
-  
+  p {
+    padding:0;
+  }
+  ul, ol, dl {
+    margin:0;
+  }
 }
-
 /* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens
    that can't handle 960px

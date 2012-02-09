@@ -35,6 +35,9 @@ josh [at] supercooldesign.co.uk
   background: linear-gradient(#00c25c, #009245);
   height: 60px;
 }
+#site-header.down {
+  height: 80px;
+}
 #site-header .wrapper {
   position: relative;
   overflow: visible;
@@ -214,6 +217,11 @@ josh [at] supercooldesign.co.uk
   height: 34px;
   width: 418px;
   background: url(../images/d-logo.png) 0 center no-repeat;
+}
+#site-header .wrapper #logo.down {
+  width: 600px;
+  height: 50px;
+  background: url(../images/down-logo.png) 0 center no-repeat;
 }
 #site-header .wrapper #search {
   position: absolute;
@@ -398,6 +406,14 @@ josh [at] supercooldesign.co.uk
   background: none;
 }
 
+#page.down h1 {
+  font-size: 40px;
+  line-height: 50px;
+  margin: 20px 0 40px 0;
+}
+#page.down h2 {
+  font-size: 30px;
+}
 #page .page-wrapper {
   clear: both;
   display: block;
@@ -444,6 +460,7 @@ josh [at] supercooldesign.co.uk
   max-width: 510px;
   clear: left;
   margin-left: 240px;
+  min-height: 120px;
 }
 #page .small-container h3.scorecard-overall {
   margin: 0;
@@ -572,6 +589,9 @@ josh [at] supercooldesign.co.uk
 }
 #page .profile-info .constituency-party ul li a:hover {
   background: #d40000;
+}
+#page .profile-info .profile-names p {
+  margin: 0 0 10px 0;
 }
 #page .profile-info .vcard li .label {
   margin: 0;
@@ -1170,14 +1190,21 @@ ul#home-news-list li img {
   margin: 0;
 }
 
-/* ============ markdown used in e.g., info pages ============ */
-.infopage h2, .infopage h3 {
-  margin-top: 2em;
+/* ============ info page markdown styles ============ */
+.infopage {
+  margin: 0;
+}
+.infopage h1 {
+  margin: 0 0 20px 0;
 }
 .infopage h4 {
-  margin: 30px 0 10px 0;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #e6e6e6;
+  padding: 0 0 5px 0;
+}
+.infopage p {
+  padding: 0;
+}
+.infopage ul, .infopage ol, .infopage dl {
+  margin: 0;
 }
 
 /* 5. MEDIA QUERIES
