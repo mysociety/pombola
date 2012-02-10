@@ -44,14 +44,14 @@ class Command(NoArgsCommand):
                 elif hansard_count == 1:
                     entry.remark = "Only spoke once in parliament in the last %s" % ( duration_string )
                 else:
-                    entry.remark = "Hardly ever spoke in parliament - only %u times in the last %s" % ( hansard_count, duration_string )
+                    entry.remark = "Hardly ever spoke in parliament, only %u times in the last %s" % ( hansard_count, duration_string )
 
             elif hansard_count < 60:
                 entry.score = 0
-                entry.remark = "Sometimes spoke in parliament - %u times in the last %s" % ( hansard_count, duration_string )
+                entry.remark = "Sometimes spoke in parliament, %u times in the last %s" % ( hansard_count, duration_string )
             else:
                 entry.score = 1
-                entry.remark = "Frequently spoke in parliament - %u times in the last %s" % ( hansard_count, duration_string )
+                entry.remark = "Frequently spoke in parliament, %u times in the last %s" % ( hansard_count, duration_string )
             
             entry.date = datetime.date.today()
 
