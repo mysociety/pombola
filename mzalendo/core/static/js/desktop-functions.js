@@ -81,12 +81,15 @@ $(function(){
       }
     });
     
+    var auto_advance_delay = 10000;
     // featured-person prev and next clicks: for now, we only have this in one place, so use id
     // broken out as a function so it can re-invent itself on load
     function enableFeaturedPersonNav() {
+      $('#home-featured-person').show()
       $('.feature-nav > a', '#home-featured-person').click(
         function(e){
           e.preventDefault();
+          auto_advance_delay = 0;
           var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
           if (m.length==3) { // wee sanity check: found direction and slug
             $('#home-featured-person').load(
@@ -101,7 +104,16 @@ $(function(){
     }
     
     enableFeaturedPersonNav();
-    
+    $('#home-featured-person').hide().load('person/featured/' + Math.floor(Math.random()*900), function(){enableFeaturedPersonNav();});
+    var timer = window.setTimeout(auto_advance, auto_advance_delay);
+    function auto_advance(){
+      if (auto_advance_delay > 0){
+        $('a.feature-next', '#home-featured-person').click();
+        auto_advance_delay = 10000;
+        timer = window.setTimeout(auto_advance, auto_advance_delay);
+      }
+    }
+
     /*
      * enable dialog based feedback links
      */
