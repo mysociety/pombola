@@ -873,8 +873,8 @@ ul.listing li section a.read-more:hover {
 /* HOME */
 #page .home-left {
   float: left;
-  width: 420px;
   clear: left;
+  width: 420px;
   margin-right: 30px;
 }
 #page .home-left h2#home-intro {
@@ -918,7 +918,7 @@ ul.listing li section a.read-more:hover {
   color: white;
 }
 #home-search input {
-  width: 260px;
+  max-width: 260px;
   margin-right: 10px;
 }
 #home-search > a {
@@ -1220,6 +1220,14 @@ ul#home-news-list li img {
     padding: 8px 10px;
   }
 
+  #breadcrumb,
+  #site-footer {
+    padding: 0 10px;
+  }
+
+  #page {
+    padding: 0 10px;
+  }
   #page .title-space {
     padding-top: 60px;
   }
@@ -1240,16 +1248,67 @@ ul#home-news-list li img {
     float: left;
     margin-right: 10px;
   }
+  #page .home-left {
+    width: 320px;
+  }
+  #page .home-right {
+    float: right;
+  }
   #page .home-right .social-and-tools {
     position: relative;
     right: auto;
     top: auto;
-    float: right;
+    float: left;
   }
   #page .home-right .social-and-tools ul {
     float: none;
   }
   #page .home-right .social-and-tools ul li {
     display: block;
+  }
+}
+@media only screen and (min-width: 640px) and (max-width: 880px) {
+  #page .home-right {
+    width: 380px;
+  }
+  #page .home-right .social-and-tools {
+    width: 355px;
+    margin: 0 0 20px 0;
+    padding: 10px;
+  }
+  #page .home-right .social-and-tools .tw-nub {
+    display: none;
+  }
+  #page .home-right .social-and-tools ul {
+    float: right;
+    margin: 0;
+  }
+  #page .home-right .social-and-tools ul li {
+    float: left;
+  }
+  #page .home-right .social-and-tools .tw-follow {
+    float: left;
+    margin: 8px 0 0 10px;
+  }
+
+  #home-links a {
+    width: 168px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  #home-links a.aspirants, #home-links a.citizens, #home-links a:hover.aspirants, #home-links a:hover.citizens {
+    padding: 10px 10px 15px;
+    background-position: 120px center;
+  }
+}
+@media only screen and (min-width: 640px) and (max-width: 760px) {
+  #page .home-left {
+    width: 100%;
+  }
+
+  #page .home-right {
+    float: left;
+    width: 510px;
+    margin-bottom: 20px;
   }
 }
