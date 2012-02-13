@@ -84,7 +84,7 @@ $(function(){
     
     // auto-advance cycles through featured MPs; it also immediately replaces the
     // featured MP in the page (since we assume that has been frozen by caching)
-    var auto_advance_enabled = true;
+    var auto_advance_enabled = false;
     var init_auto_advance_delay = 12000;
     var auto_advance_delay = init_auto_advance_delay;
     
