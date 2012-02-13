@@ -81,7 +81,10 @@ $(function(){
       }
     });
     
-    var init_auto_advance_delay = 1000;
+    // auto-advance cycles through featured MPs; it also immediately replaces the
+    // featured MP in the page (since we assume that has been frozen by caching)
+    var auto_advance_enabled = true;
+    var init_auto_advance_delay = 12000;
     var auto_advance_delay = init_auto_advance_delay;
     
     function transitionDiv(height) {
@@ -91,13 +94,14 @@ $(function(){
 
     // featured-person prev and next clicks: for now, we only have this in one place, so use id
     // broken out as a function so it can re-invent itself on load
+    // note: any click stops autoadvance (by setting delay to zero)
     function enableFeaturedPersonNav() {
       $('.feature-nav > a', '#home-featured-person').click(
         function(e){
           e.preventDefault();
           auto_advance_delay = 0;
           var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
-          if (m.length==3) { // wee sanity check: found direction and slug
+          if (m.length==3) { // wee sanity check: found direction [1] and slug [2]
             $('#home-featured-person')
               .html(transitionDiv($('#home-featured-person').height()))
                 .load(
@@ -112,19 +116,21 @@ $(function(){
     }
     
     enableFeaturedPersonNav();
-    $('#home-featured-person').html(transitionDiv(30)).load(
-        'person/featured/' + Math.floor(Math.random()*900), 
-        function(){enableFeaturedPersonNav();
-    });
-    var timer = window.setTimeout(auto_advance, auto_advance_delay);
-    function auto_advance(){
-      if (auto_advance_delay > 0){
-        $('a.feature-next', '#home-featured-person').click();
-        auto_advance_delay = init_auto_advance_delay;
-        timer = window.setTimeout(auto_advance, auto_advance_delay);
+    if (auto_advance_enabled) {
+      $('#home-featured-person').html(transitionDiv(30)).load(
+          'person/featured/' + Math.floor(Math.random()*900), 
+          function(){enableFeaturedPersonNav();
+      });
+      var timer = window.setTimeout(auto_advance, auto_advance_delay);
+      function auto_advance(){
+        if (auto_advance_delay > 0){
+          $('a.feature-next', '#home-featured-person').click();
+          auto_advance_delay = init_auto_advance_delay;
+          timer = window.setTimeout(auto_advance, auto_advance_delay);
+        }
       }
     }
-
+    
     /*
      * enable dialog based feedback links
      */
