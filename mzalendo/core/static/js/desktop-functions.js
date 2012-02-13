@@ -118,7 +118,7 @@ $(function(){
     
     enableFeaturedPersonNav();
     if (auto_advance_enabled) {
-      $('#home-featured-person').html(transitionDiv(30)).load(
+      $('#home-featured-person').html(transitionDiv($('#home-featured-person').height())).load(
           'person/featured/' + Math.floor(Math.random()*900), 
           function(){enableFeaturedPersonNav();
       });
