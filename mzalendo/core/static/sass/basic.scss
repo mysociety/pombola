@@ -1207,6 +1207,14 @@ h3.scorecard-overall {
     height: 250px;
     background: $colour1 url(/static/images/logo-450-x-150.png) center center no-repeat;
   }
+  &.featured-person-loading {
+    height: 250px;
+    text-align: center;
+    p {
+      margin:30px 0;
+      color:$colour8;
+    }
+  }
 }
 
 ul#home-news-list {

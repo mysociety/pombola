@@ -133,7 +133,10 @@ def parties(request):
     )
 
 def featured_person(request, current_slug, direction):
-    """Show featured mp either before or after the current one"""
+    """Show featured mp either before or after the current one.
+       Returns a random person if current slug doesn't match, although numeric
+       slugs are consistent to ease the caching a little (so javascript can make
+       random requests that can be cached)."""
     want_previous = direction == 'before'
     featured_person = models.Person.objects.get_next_featured(current_slug, want_previous)
     return render_to_response(

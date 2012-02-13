@@ -15,7 +15,7 @@ person_patterns = patterns('core.views',
         name='politician_list'),
                            
     # featured person ajax load
-    url(r'^featured/(?P<direction>(before|after))/(?P<current_slug>[-\w]+)',
+    url(r'^featured/((?P<direction>(before|after))/)?(?P<current_slug>[-\w]+)',
         'featured_person', 
         name='featured_person'),
     
