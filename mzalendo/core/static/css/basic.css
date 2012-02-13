@@ -1913,6 +1913,14 @@ h3.scorecard-overall span.score-overall-bad {
   height: 250px;
   background: #009245 url(/static/images/logo-450-x-150.png) center center no-repeat;
 }
+.featured-person.featured-person-loading {
+  height: 250px;
+  text-align: center;
+}
+.featured-person.featured-person-loading p {
+  margin: 30px 0;
+  color: gray;
+}
 
 ul#home-news-list {
   list-style-type: none;
