@@ -44,7 +44,7 @@
     }
 
     // For any twitter box load the tweets
-    $('.twitter-feed').each( function ( index, element ) {
+    $('.twitter-feed:visible').each( function ( index, element ) {
 
         var $twitter_feed = $(element);
         
