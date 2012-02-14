@@ -27,8 +27,8 @@ class Command(NoArgsCommand):
         2009: full_url_format % ( 90,  83  ),
         2010: full_url_format % ( 91,  84  ),
         2011: full_url_format % ( 184, 159 ),
+        2012: full_url_format % ( 243, 206 ),
     }
-    
     
     def handle_noargs(self, **options):
 
