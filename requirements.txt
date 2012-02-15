@@ -52,3 +52,5 @@ django-selenium
 BeautifulSoup>=3.2.0
 
 python-memcached
+
+django-mapit
