@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block extra_js_to_load %}
+    mzalendo_settings.extra_js.push( 'http://www.openlayers.org/api/OpenLayers.js' );
+{% endblock %}
+
+{% block after_content %}
+
+    <hr/ >
+
+    <p>
+        MapIt is a database and web service that maps locations to current or
+        past administrative area information and polygons. It was created by <a
+        href="http://www.mysociety.org/">mySociety</a>, more details are
+        available at the <a href="http://mapit.mysociety.org/">main MapIt
+        site</a> and the source code is <a
+        href="http://github.com/mysociety/mapit">available on GitHub</a>.
+    </p>
+
+{% endblock %}
