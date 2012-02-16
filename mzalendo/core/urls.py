@@ -4,7 +4,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.simple import direct_to_template
 
 from core import models
-from core.views import PlaceListView
+from core.views import PlaceListView, PlaceDetailView
 
 person_patterns = patterns('core.views',
     url(r'^all/',
@@ -34,8 +34,10 @@ place_patterns = patterns('core.views',
         name='county_list'),
 
     url(r'^is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'),
-    url(r'^(?P<slug>[-\w]+)/$',   'place',      name='place'),
-
+    url(r'^(?P<slug>[-\w]+)/$',
+        PlaceDetailView.as_view(),      
+        name='place'),
+                          
     # Tab content
     url(
         r'^(?P<slug>[-\w]+)/related_person_tab', 

@@ -10,7 +10,7 @@ from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.views.generic.list_detail import object_detail, object_list
 from django.views.decorators.cache import cache_control, never_cache
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.core.cache import cache
 
 from mzalendo.core import models
@@ -45,14 +45,14 @@ def person(request, slug):
         slug     = slug,
     )
 
+class PlaceDetailView(DetailView):
+    model = models.Place
 
-def place(request, slug):
-    
-    return object_detail(
-        request,
-        queryset = models.Place.objects,
-        slug     = slug,
-    )
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(PlaceDetailView, self).get_context_data(**kwargs)
+        context['constituency_count'] = models.Place.objects.all().constituencies().count()           
+        return context
 
 def place_kind(request, slug):
     print slug
