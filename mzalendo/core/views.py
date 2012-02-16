@@ -52,10 +52,6 @@ class PlaceDetailView(DetailView):
         # Call the base implementation first to get a context
         context = super(PlaceDetailView, self).get_context_data(**kwargs)
         context['place_type_count'] = models.Place.objects.all().constituencies().count()
-
-        # FIXME - This can't stay here as it needs to vary by place_kind.
-        # probably I need to add another column to the place kind table.
-        context['place_type_plural_name'] = 'constituencies'
         return context
 
 def place_kind(request, slug):
