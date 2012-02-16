@@ -15,26 +15,26 @@ class Entry(models.Model):
     population_male = models.PositiveIntegerField()
     population_female = models.PositiveIntegerField()
     population_total = models.PositiveIntegerField()
+    population_rank = models.PositiveIntegerField(null=True)
+    gender_index = models.DecimalField(max_digits=7, decimal_places=6, null=True)
+    gender_index_rank = models.PositiveIntegerField(null=True)
 
     households_total = models.PositiveIntegerField()
+    average_household_size = models.DecimalField(max_digits=5, decimal_places=3, null=True)
+    household_size_rank = models.PositiveIntegerField(null=True)
+
     area = models.DecimalField(max_digits=10, decimal_places=2)
+    area_rank = models.PositiveIntegerField(null=True)
 
-    @property
-    def average_household_size(self):
-        return self.population_total / self.households_total
+    population_density = models.DecimalField(max_digits=9, decimal_places=2, null=True)
+    population_density_rank = models.PositiveIntegerField(null=True)
 
-    @property
-    def population_density(self):
-        return self.population_total / self.area
-
-    @property
-    def gender_index(self):
-        return self.population_female / self.population_male
-
-    @property
-    def household_density(self):
-        return self.households_total / self.area
-
+    registered_voters_total = models.PositiveIntegerField(null=True)
+    registered_voters_proportion = models.DecimalField(max_digits=4, decimal_places=3, null=True)
+    registered_voters_proportion_rank = models.PositiveIntegerField(null=True)
+    
+    youth_voters_proportion = models.DecimalField(max_digits=4, decimal_places=3, null=True)
+    youth_voters_proportion_rank = models.PositiveIntegerField(null=True)
 
 # class DataCategory(models.Model):
 #     DATA_TYPE_CHOICES = (
