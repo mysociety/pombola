@@ -35,4 +35,7 @@ class Command(NoArgsCommand):
         print unmoderated_url
         print
         print flagged_url
+        print
+        print
+        print
 
