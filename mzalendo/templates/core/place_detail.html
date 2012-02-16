@@ -223,6 +223,7 @@
 			    (Ranked {{ object.placedata.household_size_rank }} of 
 			    {{ place_type_count }} {{ object.kind.plural_name }})
 			</dd>
+		      {% if object.placedata.registered_voters_total != None %}
 			<dt>Registered Voters</dt><dd>{{ object.placedata.registered_voters_total|intcomma }}</dd>
 			<dt>Proportion of Population Registered to Vote</dt>
 			<dd>
@@ -230,12 +231,15 @@
 			    (Ranked {{ object.placedata.registered_voters_proportion_rank }} of 
 			    {{ place_type_count }} {{ object.kind.plural_name }})
 			</dd>
+                      {% endif %}
+		      {% if object.placedata.youth_voters_proportion != None %}
 			<dt>Proportion of Youth Voters</dt>
 			<dd>
 			    {{ object.placedata.youth_voters_proportion|floatformat:2 }}
 			    (Ranked {{ object.placedata.youth_voters_proportion_rank }} of 
 			    {{ place_type_count }} {{ object.kind.plural_name }})
 			</dd>
+                      {% endif %}
                     </dl>
                 </div>
             {% endif %}
