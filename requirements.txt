@@ -53,4 +53,5 @@ BeautifulSoup>=3.2.0
 
 python-memcached
 
-django-mapit
+# django-mapit
+git+ssh://evdb@git.mysociety.org/data/git/public/mapit.git@mapit-as-app#egg=django-mapit
