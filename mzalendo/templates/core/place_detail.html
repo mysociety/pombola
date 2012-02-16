@@ -79,6 +79,36 @@
             </div>
 	    {% endcomment %}
 
+            <h2 class="tab-nav" rel="#related-places"><a href="/">Related Places</a></h2>
+            <div class="tab" id="related-places">
+
+	    {# Do we want to display more than just the parent? #}
+
+            {% if object.parent_place %}
+                {{ object.name }} is contained in
+                <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
+		{% if object.parent_place.kind.slug != 'country' %}
+                    {{ object.parent_place.kind.name }}.
+                {% endif %}
+            {% endif %}
+
+            {% if object.child_places.count %}
+                <div class="content_box">
+		    <h3>Areas within {{ object.name }}</h3>
+		  
+		    <ul class="listing">
+		        {% for child in object.child_places.all %}
+                            <li>
+                                <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+                                {{ child.kind.name }}
+                            </li>
+		        {% endfor %}
+                    </ul>            
+                </div>
+            {% endif %}
+
+            </div>
+
             {% include 'comments/detail_page_comments.html' %}
 
 
@@ -106,20 +136,9 @@
 
 
 
+
     {% comment %}
-
-
-    {% if object.parent_place %}
-        <ul class="location_breadcrumb">
-        {% for parent in object.parent_places %}
-            <li><a href="{% url place slug=parent.slug %}">{{ parent.name }}</a></li>
-        {% endfor %}
-            <li>{{ object.name }}</li>
-        </ul>
-    {% endif %}
     
-    
-
     <h1>{{ object.name }}</h1>
 
     {% if object.organisation %}
@@ -140,22 +159,6 @@
 
     {% endif %}
     
-
-    {% if object.child_places.count %}        
-        <div class="content_box">
-            <h3>Areas within {{ object.name }}</h3>
-            
-            <ul class="listing">
-            {% for child in object.child_places.all %}
-                <li>
-                    <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
-                </li>
-            {% empty %}
-                <li>No child places</li>
-            {% endfor %}
-            </ul>            
-        </div>
-    {% endif %}
 
 
     {% with mp_pos=object.current_mp_position %}
