@@ -373,6 +373,7 @@ class Organisation(ModelBase):
 
 class PlaceKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
+    plural_name = models.CharField(max_length=200, blank=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
 
