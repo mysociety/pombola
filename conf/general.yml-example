@@ -27,6 +27,9 @@ GOOGLE_ANALYTICS_ACCOUNT: ''
 MANAGERS_NAME: 'Mzalendo Managers'
 MANAGERS_EMAIL: 'managers@example.com'
 
+# Email address that will be used in the 'From' line
+FROM_EMAIL: 'you@example.com'
+
 # If the local version of pdftohtml is wrong (ie != 0.12.4) - blank means do it
 # locally
 KENYA_PARSER_PDF_TO_HTML_HOST: ''

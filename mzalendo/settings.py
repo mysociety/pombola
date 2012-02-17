@@ -57,6 +57,8 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+DEFAULT_FROM_EMAIL = config.get('FROM_EMAIL')
+
 MANAGERS = (
     (config.get('MANAGERS_NAME'), config.get('MANAGERS_EMAIL')),
 )
