@@ -51,7 +51,7 @@ class PlaceDetailView(DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(PlaceDetailView, self).get_context_data(**kwargs)
-        context['place_type_count'] = models.Place.objects.all().constituencies().count()
+        context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
         return context
 
 def place_kind(request, slug):
