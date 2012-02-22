@@ -1,5 +1,6 @@
-
 # Debian packages that we need.
+
+libapache2-mod-wsgi
 
 # On non-debian systems you'll need to build these using the appropriate tools
 # (eg on Mac consider using Homebrew: http://mxcl.github.com/homebrew/).
