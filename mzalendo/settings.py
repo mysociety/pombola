@@ -240,6 +240,7 @@ INSTALLED_APPS = (
     'social_auth',
 
     'comments2',
+    'mapit',
 
     'images',
     'sorl.thumbnail',
@@ -260,6 +261,12 @@ INSTALLED_APPS = (
 
     'place_data',
 )
+
+# mapit related settings
+MAPIT_AREA_SRID = 4326
+MAPIT_COUNTRY = 'KE'
+MAPIT_RATE_LIMIT = ['127.0.0.1']
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -386,9 +393,6 @@ AJAX_LOOKUP_CHANNELS = {
 }
 AJAX_SELECT_BOOTSTRAP = False
 AJAX_SELECT_INLINES   = None # we add the js and css ourselves in the header
-
-# Mapit config
-MAPIT_URL = config.get('MAPIT_URL')
 
 # misc settings
 HTTPLIB2_CACHE_DIR = os.path.join( root_dir, 'httplib2_cache' )

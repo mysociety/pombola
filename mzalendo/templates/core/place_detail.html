@@ -17,13 +17,13 @@
     </div>
     
     <div class="profile-pic">
-        {% if object.mapit_id %}
+        {% if object.mapit_area %}
 
             <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
             <div id="map_canvas"></div>
             <script type="text/javascript" charset="utf-8">
-                add_kml_to_map( '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001' );            
+                add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url mapit_index %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );            
             </script>
         {% else %}
             <div class="profile-pic">
@@ -143,22 +143,7 @@
 
     {% if object.organisation %}
     <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
-    {% endif %}
-
-    {% if object.mapit_id %}
-    
-        <div class="content_box">
-    
-            <div id="map_canvas" style="width:50%; min-width: 240px; height:300px"></div>
-            
-            <script type="text/javascript" charset="utf-8">
-                add_kml_to_map( '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001' );            
-            </script>
-
-        </div>
-
-    {% endif %}
-    
+    {% endif %}    
 
 
     {% with mp_pos=object.current_mp_position %}

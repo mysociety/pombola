@@ -27,7 +27,7 @@ implemented using Haystack for full text searching.
 Location searches are carried out using Google's geolocate tools, with calls
 being made to their API. These are cached after the first request.
 
-Boundary data is taken from a MaPit service (a separate install), this is used
+Boundary data is taken from a MaPit service (an embedded app), this is used
 to find the constituency for a point and also to serve the KML boundaries used
 on the Google maps.
 
@@ -44,7 +44,6 @@ have a specific branch called 'production'. We then use our master branch as the
 ## External requests that may block:
 
   * Google location API
-  * MaPit API
 
 Other dependencies are listed in 'conf/packages' (debian packages) and in
 'requirements.txt'.

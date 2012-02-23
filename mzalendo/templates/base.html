@@ -53,6 +53,8 @@
 
         <link href="{{ STATIC_URL }}css/jquery-ui-1.8.17.custom.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen" rel="stylesheet" type="text/css" />
         
+        {% block extra_headers %}{% endblock %}
+        
     </head>
     <body>
         {% include 'staging_header.html' %}
@@ -191,8 +193,8 @@
 
         <div id="page">
             <div class="page-wrapper wrapper">
-                {% block content %}
-                {% endblock %}
+                {% block content %}{% endblock %}
+                {% block after_content %}{% endblock %}
             </div>
         </div>
 

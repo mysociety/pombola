@@ -23,6 +23,8 @@ from comments2.models import Comment
 
 from scorecards.models import ScorecardMixin
 
+from mapit import models as mapit_models
+
 # tell South how to handle the custom fields 
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateField"])
@@ -406,7 +408,8 @@ class Place(ModelBase, ScorecardMixin):
     location = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
     original_id  = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to constituencies in original mzalendo.com db')
-    mapit_id = models.PositiveIntegerField(blank=True, null=True)
+
+    mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
 
     objects = PlaceManager()
