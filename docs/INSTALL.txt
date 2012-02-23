@@ -78,10 +78,6 @@ cd mzalendo
 # machine's hostname and port
 
 
-# You'll need to populate the places from the mapit instance - this can take a little while
-./manage.py import_areas_from_mapit
-
-
 
 # Get Busy!
 

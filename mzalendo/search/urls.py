@@ -10,7 +10,7 @@ from mzalendo.hansard import models as hansard_models
 urlpatterns = patterns('search.views',
 
     # Haystack and other searches
-    url( r'^location/',    'location_search',        name="location_search"     ),
+    # url( r'^location/',    'location_search',        name="location_search"     ),
     url( r'^autocomplete/', 'autocomplete',           name="autocomplete"        ),
 
     # General search - just intended for the core app

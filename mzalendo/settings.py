@@ -392,9 +392,6 @@ AJAX_LOOKUP_CHANNELS = {
 AJAX_SELECT_BOOTSTRAP = False
 AJAX_SELECT_INLINES   = None # we add the js and css ourselves in the header
 
-# Mapit config
-MAPIT_URL = config.get('MAPIT_URL')
-
 # misc settings
 HTTPLIB2_CACHE_DIR = os.path.join( root_dir, 'httplib2_cache' )
 GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')

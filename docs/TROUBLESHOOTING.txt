@@ -17,8 +17,8 @@ See the VIRTUALENV section in INSTALL.txt.
 
 ## Web requests block
 
-If location searches black then check that the external requests to Google or
-MaPit are not hanging.
+If location searches black then check that the external requests to Google are
+not hanging.
 
 
 ## Location searches return old/bad data

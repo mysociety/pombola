@@ -124,22 +124,7 @@
 
     {% if object.organisation %}
     <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
-    {% endif %}
-
-    {% if object.mapit_id %}
-    
-        <div class="content_box">
-    
-            <div id="map_canvas" style="width:50%; min-width: 240px; height:300px"></div>
-            
-            <script type="text/javascript" charset="utf-8">
-                add_kml_to_map( '{{ settings.MAPIT_URL }}/area/{{ object.mapit_id }}.kml?simplify_tolerance=0.001' );            
-            </script>
-
-        </div>
-
-    {% endif %}
-    
+    {% endif %}    
 
     {% if object.child_places.count %}        
         <div class="content_box">
