@@ -225,6 +225,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.gis',
     'django_bcrypt',
     
     'registration_defaults',
