@@ -304,18 +304,6 @@ josh [at] supercooldesign.co.uk
   border-top: 1px solid #d4d4d4;
   padding: 9px 15px 10px 15px;
 }
-@media only screen and (min-width: 640px) and (max-width: 960px) {
-  #main-menu nav ul li {
-    height: 36px;
-  }
-  #main-menu nav ul li a {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
-  #main-menu nav ul li.active > a {
-    padding: 7px 9px 8px 9px;
-  }
-}
 #main-menu nav ul li:hover ul {
   left: 0;
   top: 40px;
@@ -340,6 +328,25 @@ josh [at] supercooldesign.co.uk
 }
 #main-menu nav ul li:hover ul li a:hover {
   background: #d4d4d4;
+}
+@media only screen and (min-width: 640px) and (max-width: 960px) {
+  #main-menu nav ul li {
+    height: 36px;
+  }
+  #main-menu nav ul li a {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+  #main-menu nav ul li.active > a {
+    padding: 7px 9px 8px 9px;
+  }
+  #main-menu nav ul li:hover ul {
+    top: 36px;
+    width: 180px;
+  }
+  #main-menu nav ul li:hover ul li a {
+    font-size: 12px;
+  }
 }
 
 #breadcrumb {

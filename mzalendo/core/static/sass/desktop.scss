@@ -236,23 +236,11 @@ josh [at] supercooldesign.co.uk
           padding:9px 15px 10px 15px;
         }
 
-        @media only screen and (min-width: 640px) and (max-width: 960px) {
-          & {
-            height:36px;
-            a {
-              font-size:14px;
-              padding:8px 10px;
-            }
-            &.active > a {
-               padding:7px 9px 8px 9px;
-             }
-          }
-        }
 
         &:hover {
           ul {
             left:0;
-            top:40px;
+            top:40px;        
             text-align:left;
             width:193px;
             border-left:1px solid #d4d4d4;
@@ -276,6 +264,31 @@ josh [at] supercooldesign.co.uk
             }
           }
         }
+
+        @media only screen and (min-width: 640px) and (max-width: 960px) {
+          & {
+            height:36px;
+            a {
+              font-size:14px;
+              padding:8px 10px;
+            }
+            &.active > a {
+               padding:7px 9px 8px 9px;
+            }
+            &:hover {
+              ul {
+                top:36px;
+                width: 180px;
+                li {
+                  a {
+                    font-size:12px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        
       }
     }
   }
