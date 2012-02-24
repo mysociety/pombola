@@ -261,6 +261,7 @@ INSTALLED_APPS = (
     'file_archive',
 
     'place_data',
+    'kenya',
 )
 
 # mapit related settings
