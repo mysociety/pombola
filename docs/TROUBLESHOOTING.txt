@@ -45,6 +45,11 @@ be necessary if you have updated your Mzalendo buy pulling from the git reposito
 since your initial installation. It's safe to run even if there have been no changes.
 
 
+## ./manage.py migrate will not run correctly
+
+Check that the database has PostGIS added to it
+
+
 ## Web requests block
 
 If location searches black then check that the external requests to Google are
@@ -56,11 +61,6 @@ not hanging.
 Try deleting the cached search in 'httplib2_cache'
 
 
-## ./manage.py migrate will not run correctly
-
-Check that the database has PostGIS added to it
-
-
 ## Caching does not appear to be working
 
 Point your browser at '/status/memcached/' - first hit should save a val to
@@ -69,3 +69,13 @@ expires.
 
 Check that you are not logged in, and don't have a sessionid or csrf_token
 cookie - both of which will cause caches to fetch you new content.
+
+
+## No featured people on the home page: just a big Mzalendo logo
+
+The home page displays a random featured person (typically an MP) provided there is at least 
+one in the database with can_be_featured set to true. To choose people to feature, log into 
+the admin and choose people from Core > Persons. Select the individuals you want to feature
+by the checkbox "can be featured" for each one.
+
+
