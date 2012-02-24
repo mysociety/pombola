@@ -13,7 +13,7 @@ function initialize_map() {
         east:  44,
         south: -5,
         west:  33.5
-    }
+    };
 
     var map_has_been_located = false;
 
