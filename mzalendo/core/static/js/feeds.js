@@ -6,7 +6,7 @@
 
         function fetch_blog_feeds () {
         
-            var feed = new google.feeds.Feed("http://www.mzalendo.com/feed/atom/");
+            var feed = new google.feeds.Feed("http://www.mzalendo.com/feed/");
 
             feed.load(function(result) {
                 if (!result.error) {
