@@ -40,6 +40,7 @@ class Command(LabelCommand):
         # print raw_line
         line = re.sub(r'[^\d.,\-]+', '', raw_line)
 
+        # The lat, lng here might be the wrong way round :)
         lng, lat = map( lambda x: float(x), re.split(',', line) )
         point = Point( lat, lng, srid=4326)
 
