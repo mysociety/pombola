@@ -1060,7 +1060,7 @@ pre {
     background: #d4d4d4;
   }
 }
-@media only screen and (min-width: 640px) and only screen and (min-width: 640px) and (max-width: 960px) {
+@media only screen and (min-width: 640px) and (max-width: 960px) {
   #main-menu nav ul li {
     height: 36px;
   }
@@ -2017,8 +2017,7 @@ pre {
   #page .pagination .disabled {
     display: none;
   }
-}
-@media only screen and (min-width: 640px) and only screen and (min-width: 640px) {
+
   .page-title {
     display: block;
     background: none;

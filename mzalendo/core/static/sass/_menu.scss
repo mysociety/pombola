@@ -102,7 +102,7 @@
                   float: none;
                   &:hover {
                     background: #d4d4d4; } } } } }
-          @media only screen and (min-width: 640px) and (max-width: 960px) {
+          @media (max-width: 960px) {
             & {
               height: 36px;
               a {
