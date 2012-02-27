@@ -111,9 +111,9 @@
         <footer id="site-footer">
             <div class="wrapper">
                 <ul class="nav">
-                    <li><a href="{% url person_list %}">People</a></li>
-                    <li><a href="{% url organisation_list %}">Organisations</a></li>
-                    <li><a href="{% url place_list %}">Places</a></li>
+                    {% with include_sub_menu_entries=0 %}
+                        {% include 'menu_entries.html' %}
+                    {% endwith %}
                 </ul>
 
                 <ul class="utilities">
