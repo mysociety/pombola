@@ -1,0 +1,25 @@
+#breadcrumb,
+#breadcrumb-replacement {
+  display: none; }
+
+.page-title {
+  display: block;
+  background: $colour7;
+  padding: 10px;
+  &.has-sub-menu {
+    margin: 0;
+    padding-right: 40px;
+    position: relative; }
+  .m-sub-menu-trigger {
+    @include button-reset;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: 1px solid $colour_middling_grey;
+    height: 24px;
+    width: 24px;
+    background: #d2d2d2 url(../images/chevron-down-alt.png) center no-repeat;
+    @include background(url(../images/chevron-down-alt.png) center no-repeat, linear-gradient(white, #d2d2d2));
+    &.active {
+      background: #d2d2d2 url(../images/chevron-up-alt.png) center no-repeat;
+      @include background(url(../images/chevron-up-alt.png) center no-repeat, linear-gradient(#d2d2d2, white)); } } }

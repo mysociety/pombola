@@ -1,0 +1,28 @@
+#main-menu {
+  nav {
+    width: 100%;
+    ul {
+      @include list-reset-soft;
+      width: 100%;
+      li {
+        position: relative;
+        a {
+          display: block;
+          height: 20px;
+          padding: 10px;
+          font: {
+            size: 18px;
+            weight: bold; };
+          color: $colour_white;
+          text-decoration: none;
+          background: $colour_black;
+          border-bottom: 2px solid $colour_white;
+          &:hover {
+            background: $colour_blackish; } }
+        &:last-child a,
+        &.last a {
+          border-bottom: none; }
+        ul {
+          position: absolute;
+          z-index: 20;
+          left: -999999px; } } } } }

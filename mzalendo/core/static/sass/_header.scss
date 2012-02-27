@@ -1,0 +1,80 @@
+#site-header {
+  clear: both;
+  background: $colour_green;
+  .wrapper {
+    overflow: hidden;
+    #logo {
+      display: block;
+      margin-left: 10px;
+      float: left;
+      height: 42px;
+      text-indent: -999999em;
+      width: 147px;
+      background: url(../images/m-logo.png) 0 center no-repeat; }
+    menu#m-top-tools {
+      float: right;
+      button {
+        @include button-reset;
+        display: inline;
+        border-left: 1px solid $colour_white;
+        &.m-icon-nav {
+          text: {
+            indent: 0;
+            transform: uppercase; };
+          height: 42px;
+          color: $colour_white;
+          padding: 0 15px 0 10px;
+          background: url(../images/m-menu-nub.png) right center no-repeat;
+          &.active {
+            background: url(../images/m-menu-nub-r.png) right center no-repeat; } }
+        &.icon-search {
+          height: 42px;
+          width: 42px;
+          margin-left: 10px;
+          background: url(../images/search-icon.png) center no-repeat;
+          &.active {
+            background: url(../images/close.png) center no-repeat; } } } }
+    #search {
+      clear: both;
+      height: 26px;
+      padding: 6px 10px;
+      display: block;
+      background: $colour7;
+      border-bottom: 2px solid $colour_white;
+      input {
+        padding: 1px 4px;
+        border: 1px solid $colour_grey;
+        height: 22px;
+        width: 214px;
+        float: left; }
+      button {
+        @include button-reset;
+        width: 64px;
+        height: 26px;
+        float: left;
+        margin-left: 10px;
+        background: $colour_black url(../images/search-icon.png) center no-repeat;
+        &:hover {
+          background-color: $colour_blackish; } } }
+    menu#site-user-tools {
+      // clear:both;
+      float: right;
+      ul {
+        @include list-reset-soft;
+        li {
+          // display:block;
+          // font: {
+          // size:18px;
+          // weight:bold;
+          // }
+          // background:$colour7;
+          // border-bottom:2px solid $colour_white;
+          // height:20px;
+          padding: 10px;
+          &.logged-in-name {
+            display: none; }
+          a {
+            color: $colour_white;
+            text-decoration: none;
+            &:hover {
+              color: $colour_black; } } } } } } }

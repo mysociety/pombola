@@ -1,0 +1,194 @@
+/* 5. PAGE SPECIFIC
+-------------------------------------------------------------- */
+/* HOME */
+#page {
+  .home-left,
+  .home-right {
+    h2 {
+      margin: 0 0 10px 0;
+      background: none;
+      border-top: none;
+      color: $colour_grey;
+      font-size: 24px;
+      text-transform: uppercase;
+      &#home-intro {
+        display: none; } }
+    h3 {
+      background: none;
+      border-top: none; } }
+  .home-right {
+    .social-and-tools {
+      display: block; } } }
+
+#home-search {
+  background: $colour_light_grey;
+  padding: 10px;
+  overflow: hidden;
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: $colour_grey;
+    font: {
+      weight: bold;
+      size: 17px; }; }
+  input {
+    border: none;
+    font-size: 15px;
+    padding: 6px 8px;
+    float: left;
+    margin: 0;
+    width: 200px; }
+  button {
+    @include button-reset;
+    float: left;
+    width: 50px;
+    height: 30px;
+    background: $colour_light_green url(../images/search-icon.png) center no-repeat;
+    @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_light_green, $colour_green));
+    &:hover {
+      background: $colour_green url(../images/search-icon.png) center no-repeat;
+      @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_green, $colour_light_green)); } }
+  >a {
+    float: left;
+    margin: 10px 0 0 0;
+    color: $colour_grey;
+    font-size: 14px;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline; } } }
+
+.featured-person {
+  color: $colour_dark_grey;
+  margin: 0 0 30px 0;
+  border-top: 3px solid $colour_middling_grey;
+  border-bottom: 3px solid $colour_middling_grey;
+  background: $colour_light_grey;
+  overflow: hidden;
+  img {
+    float: left;
+    max-width: 90px;
+    height: auto; }
+  .featured-person-info {
+    position: relative;
+    margin-left: 110px;
+    min-height: 130px;
+    .feature-nav {
+      display: none; }
+    h2 {
+      padding-left: 0 !important;
+      margin-bottom: 0 !important;
+      a {
+        font-size: 18px;
+        text-transform: none;
+        &:hover {
+          text-decoration: none; } } }
+    .feature-person-role {
+      color: $colour_grey;
+      font-style: italic; }
+    .feature-person-summary {
+      display: none; }
+    .rating-container {
+      position: absolute;
+      bottom: 0;
+      right: 10px;
+      margin: 0;
+      .rating {
+        max-width: 300px;
+        margin: 0 40px 7px 0;
+        font-size: 17px;
+        a {
+          color: $colour_dark_grey;
+          &:hover {
+            text-decoration: none;
+            color: $colour_black; } } }
+      .rating-img {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: 32px;
+        width: 32px;
+        &.bad {
+          background: url(/static/images/d-smiley-sprite.png) -78px -82px no-repeat; }
+        &.average {
+          background: url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat; }
+        &.good {
+          background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat; } } } }
+  &.featured-person-placeholder {
+    text-align: center;
+    height: 250px;
+    background: $colour_green url(/static/images/logo-450-x-150.png) center center no-repeat; }
+  &.featured-person-loading {
+    height: 250px;
+    text-align: center;
+    p {
+      margin: 30px 0;
+      color: $colour_grey; } } }
+
+ul#home-news-list {
+  @include list-reset-soft;
+  border-top: 5px solid $colour_light_grey;
+  padding-top: 15px;
+  li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid $colour_light_grey;
+    &:last-child {
+      border-bottom: 0; }
+    h3, p {
+      padding: 0 10px;
+      margin: 0;
+      a {
+        text-decoration: none; } }
+    p {
+      &.meta {
+        font: {
+          style: italic;
+          size: 13px; };
+        margin-bottom: 10px; } }
+    img {
+      float: right;
+      margin: 0 10px; } } }
+
+#home-mpratings {
+  border-top: 5px solid $colour_light_grey;
+  padding: 15px 10px 10px 10px;
+  img {
+    float: left;
+    widht: 60px;
+    margin-right: 10px; }
+  h3.scorecard-overall {
+    padding: 0 0 0 70px;
+    margin: 0; } }
+
+#twitter,
+.tw-nub,
+.tw-follow {
+  display: none; }
+
+#home-links {
+  margin-bottom: 30px;
+  a {
+    &.aspirants {
+      @include border-radius(5px 5px 0 0);
+      color: $colour_white;
+      display: block;
+      margin: 10px 10px 3px 10px;
+      padding: 10px;
+      background: $colour_green;
+      @include background(linear-gradient($colour_green / 0.9, $colour_green));
+      &:hover {
+        text-decoration: none;
+        background: $colour_green / 0.9;
+        @include background(linear-gradient($colour_green, $colour_green / 0.9)); } }
+    &.citizens {
+      @include border-radius(0 0 5px 5px);
+      color: $colour_white;
+      display: block;
+      margin: 0 10px 10px 10px;
+      padding: 10px;
+      background: $colour_light_green;
+      @include background(linear-gradient($colour_light_green / 0.9, $colour_light_green));
+      &:hover {
+        text-decoration: none;
+        background: $colour_light_green / 0.9;
+        @include background(linear-gradient($colour_light_green, $colour_light_green / 0.9)); } } } }
