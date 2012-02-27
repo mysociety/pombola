@@ -18,3 +18,15 @@
     border: none;
     background: $colour_green;
     height: 2px; } }
+
+@media only screen and (min-width: 640px) {
+  .infopage {
+    margin: 0;
+    h1 {
+      margin: 0 0 20px 0; }
+    h4 {
+      padding: 0 0 5px 0; }
+    p {
+      padding: 0; }
+    ul, ol, dl {
+      margin: 0; } } }

@@ -88,3 +88,135 @@
 @media only screen and (min-width: 320px) and (max-width: 640px) {
   #home-search #search-hansard-instead {
     padding-left: 0.5em; } }
+
+@media only screen and (min-width: 640px) {
+  #site-header {
+    background: $colour_green;
+    @include background(linear-gradient($colour_green / 0.75, $colour_green));
+    height: 60px;
+    &.down {
+      height: 80px; }
+    .wrapper {
+      position: relative;
+      overflow: visible;
+      menu#site-user-tools {
+        position: absolute;
+        right: 151px;
+        top: 0;
+        ul {
+          @include list-reset;
+          li.login,
+          li.logged-in,
+          li.login a,
+          li.logged-in a {
+            padding: 0;
+            color: $colour_white;
+            background: none;
+            border: none;
+            font: {
+              size: 13px;
+              weight: normal; };
+            text-decoration: none;
+            a:hover {
+              background: none;
+              text-decoration: underline; } }
+          li.login {
+            text-transform: uppercase;
+            width: 70px;
+            a {
+              font-size: 11px;
+              padding: 3px 25px 3px 10px;
+              @include border-radius(2px 0 0 2px);
+              background: black url(../images/login-arrows.png) 54px -19px no-repeat;
+              @include background(url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#707070, black));
+              &:hover {
+                text-decoration: none;
+                background: #707070 url(../images/login-arrows.png) 54px -19px no-repeat;
+                @include background(url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(black, #707070)); } } }
+          li.logged-in {
+            text-transform: uppercase;
+            a {
+              font-size: 11px;
+              padding: 3px 10px;
+              @include border-radius(2px 0 0 2px);
+              background: #000000;
+              @include background(linear-gradient(#707070, black));
+              &:hover {
+                text-decoration: none;
+                background: #707070 no-repeat;
+                @include background(linear-gradient(black, #707070)); } } }
+          li.logged-in-name {
+            display: block;
+            margin: 3px 10px 0 0;
+            color: #fff; }
+          li.active {
+            position: relative;
+            border-top: 1px solid #666666;
+            border-left: 1px solid #666666;
+            // border-right:1px solid #666666;
+            z-index: 2;
+            a {
+              color: $colour_grey;
+              @include border-radius(0);
+              background: $colour7 url(../images/login-arrows.png) 54px 11px no-repeat;
+              &:hover {
+                color: $colour_black;
+                background: $colour7 url(../images/login-arrows.png) 54px 11px no-repeat; } } } } }
+      #login-box {
+        z-index: 1;
+        position: absolute;
+        right: 25px;
+        top: 26px;
+        display: none;
+        background: $colour7;
+        border-left: 1px solid #666666;
+        border-right: 1px solid #666666;
+        border-bottom: 1px solid #666666;
+        width: 175px;
+        padding: 10px;
+        @include box-shadow(rgba(0, 0, 0, 0.3) 0 5px 4px);
+        #login {
+          padding: 0;
+          margin: 0;
+          width: auto;
+          form {
+            width: auto;
+            input#id_username,
+            input#id_password {
+              width: 163px;
+              margin: 0 0 10px 0; }
+            input.login-button {
+              margin: 0; }
+            p.forgot-register {
+              margin: 0;
+              font-size: 11px; } }
+          .login-social {
+            margin: 0;
+            font-size: 12px; } } }
+      #logo {
+        position: absolute;
+        left: 0;
+        top: 10px;
+        height: 34px;
+        width: 418px;
+        background: url(../images/d-logo.png) 0 center no-repeat;
+        &.down {
+          width: 600px;
+          height: 50px;
+          background: url(../images/down-logo.png) 0 center no-repeat; } }
+      #search {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: transparent;
+        padding: 0;
+        height: auto;
+        border: none;
+        input {
+          width: 117px;
+          border: 1px solid $colour_black;
+          font-size: 14px; }
+        button {
+          width: 26px;
+          height: 26px;
+          margin: 0 0 0 -2px; } } } } }

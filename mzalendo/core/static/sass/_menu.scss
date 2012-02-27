@@ -44,3 +44,76 @@
     @include background(linear-gradient($colour_blackish / 1.4, $colour_black));
     &:hover {
       @include background(linear-gradient($colour_black, $colour_blackish / 1.4)); } } }
+
+@media only screen and (min-width: 640px) {
+  #main-menu {
+    background: $colour_black;
+    @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
+    nav {
+      text-align: center;
+      ul {
+        @include inline-block;
+        // overflow:hidden;
+        width: auto;
+        li {
+          display: inline;
+          float: left;
+          height: 40px;
+          border-right: 2px solid $colour_black;
+          &:last-child,
+          &.last {
+            border-right: 0; }
+          a {
+            float: left;
+            border-bottom: 0;
+            font: {
+              size: 16px;
+              weight: normal; };
+            padding: 10px 16px;
+            @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
+            &:hover {
+              @include background(linear-gradient($colour_blackish / 1.4, $colour_black)); } }
+          &.active > a {
+            background: #f6f6f6;
+            color: #444;
+            border-left: 1px solid #d4d4d4;
+            border-right: 1px solid #d4d4d4;
+            border-top: 1px solid #d4d4d4;
+            padding: 9px 15px 10px 15px; }
+          &:hover {
+            ul {
+              left: 0;
+              top: 40px;
+              text-align: left;
+              width: 193px;
+              border-left: 1px solid #d4d4d4;
+              border-right: 1px solid #d4d4d4;
+              border-bottom: 1px solid #d4d4d4;
+              li {
+                display: block;
+                float: none;
+                height: auto;
+                border: none;
+                a {
+                  font-size: 14px;
+                  color: #444;
+                  background: #f6f6f6;
+                  height: auto;
+                  float: none;
+                  &:hover {
+                    background: #d4d4d4; } } } } }
+          @media only screen and (min-width: 640px) and (max-width: 960px) {
+            & {
+              height: 36px;
+              a {
+                font-size: 14px;
+                padding: 8px 10px; }
+              &.active > a {
+                padding: 7px 9px 8px 9px; }
+              &:hover {
+                ul {
+                  top: 36px;
+                  width: 180px;
+                  li {
+                    a {
+                      font-size: 12px; } } } } } } } } } } }

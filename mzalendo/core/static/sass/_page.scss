@@ -1,9 +1,18 @@
+// --- mobile ---
 // 320px - following the Mobile First principle
 // cols    1   2   3    4    5    6    7    8    9    10
 // px      30  60  90   120  150  180  210  240  270  300
 
+// --- desktop ---
+// 960px
+// cols    1   2   3    4    5    6    7    8    9    10   11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27    28    29    30    31    32
+// px      30  60  90   120  150  180  210  240  270  300  330   360   390   420   450   480   510   540   570   600   630   660   690   720   750   780   810   840   870   900   930   960
+
 .wrapper {
-  width: 100%; }
+  width: 100%;
+  @media only screen and (min-width: 640px) {
+    max-width: 960px;
+    margin: 0 auto; } }
 
 #page {
   background: $colour_white;
@@ -243,3 +252,232 @@
       &:active {
         background: $colour_black url(../images/chevron-right.png) 9px center no-repeat;
         @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour_black, $colour_blackish)); } } } }
+
+@media only screen and (min-width: 640px) {
+  #page {
+    &.down {
+      h1 {
+        font-size: 40px;
+        line-height: 50px;
+        margin: 20px 0 40px 0; }
+      h2 {
+        font-size: 30px; } }
+    .page-wrapper {
+      clear: both;
+      display: block;
+      overflow: hidden;
+      position: relative; }
+    .title-space {
+      max-width: 510px;
+      min-height: 0;
+      float: left;
+      clear: left;
+      margin: 0 0 20px 240px;
+      position: relative;
+      .object-kind {
+        font: {
+          style: normal;
+          weight: bold;
+          size: 12px; };
+        margin: 0;
+        text-transform: uppercase; } }
+    .profile-pic {
+      height: 210px;
+      width: 210px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      img {
+        width: 100%;
+        width: auto;
+        height: auto;
+        max-width: 200px;
+        max-height: 200px;
+        max-width: 210px;
+        max-height: 210px; }
+      #map_canvas {
+        width: 200px;
+        height: 200px; } }
+    .small-container {
+      max-width: 510px;
+      clear: left;
+      margin-left: 240px;
+      min-height: 120px;
+      h3.scorecard-overall {
+        margin: 0;
+        padding: 15px 10px 10px 10px;
+        background: $colour_light_grey;
+        border-bottom: 2px solid $colour_white;
+        span {
+          @include inline-block;
+          height: 32px;
+          padding: 5px 0 0 130px;
+          margin: -5px 0 0 24px;
+          background: url(../images/d-smiley-sprite.png) 0 0 no-repeat;
+          &.score-overall-good {
+            background-position: left -2px; }
+          &.score-overall-average {
+            background-position: left -44px; }
+          &.score-overall-bad {
+            background-position: left -82px; } } }
+      ul.scorecard {
+        @include list-reset-soft;
+        display: block;
+        li {
+          article {
+            &.has-details {
+              &:hover {
+                cursor: pointer;
+                background-color: $colour7; }
+              &.active {
+                background-color: $colour7;
+                header {
+                  background: url(../images/arrow-up.png) right 0 no-repeat; } }
+              header {
+                background: url(../images/arrow-down.png) right 0 no-repeat; } }
+            header {
+              overflow: hidden;
+              h4 {
+                float: left;
+                width: 120px;
+                line-height: 14px;
+                .btn-question {
+                  position: absolute;
+                  top: 0;
+                  right: 0; } }
+              p {
+                float: left;
+                max-width: 250px;
+                font-style: italic;
+                margin: 0 0 0 20px;
+                padding: 0 0 4px 60px;
+                &.score-good {
+                  background: url(../images/score-good.png) left 0 no-repeat; }
+                &.score-average {
+                  background: url(../images/score-average.png) left 0 no-repeat; }
+                &.score-bad {
+                  background: url(../images/score-bad.png) left 0 no-repeat; }
+                &.score-disabled {
+                  background: url(../images/score-disabled.png) left 0 no-repeat; } } }
+            div.details {
+              margin: 0px 0px 8px 200px;
+              /* 200 from 120 (width of head) + 80 (padding+margin of text) */
+              display: block;
+              margin-top: 10px;
+              p {
+                font-size: 13px; } } } } } }
+    .profile-info {
+      width: 210px;
+      position: absolute;
+      top: 210px;
+      left: 0;
+      h3 {
+        text-transform: uppercase;
+        color: $colour_grey;
+        font-size: 12px;
+        margin-bottom: 0; }
+      .constituency-party {
+        ul {
+          margin-bottom: 10px;
+          li {
+            border: 0;
+            margin-bottom: 5px;
+            a {
+              background: $colour_dark_grey;
+              color: $colour_white;
+              padding: 5px;
+              @include border-radius(5px);
+              &:hover {
+                background: $colour_red; } } } } }
+      .profile-names {
+        p {
+          margin: 0 0 10px 0; } }
+      .vcard li .label {
+        margin: 0; } }
+    .large-container {
+      position: relative;
+      max-width: 720px;
+      float: left;
+      clear: left;
+      margin-left: 240px;
+      .left-col,
+      .right-col {
+        width: 335px;
+        float: left; }
+      .left-col {
+        margin-right: 30px; }
+      p, h3 {
+        margin-left: 0;
+        margin-right: 0; }
+      section {
+        h3 {
+          margin: 20px 0 0 0; }
+        ul {
+          margin-bottom: 30px;
+          li {
+            margin-left: 0;
+            margin-right: 0; }
+          &.tools {
+            li {
+              margin-left: 5px; } } } }
+      article {
+        h3 {
+          margin: 20px 0 5px 0;
+          border: none; } } }
+    #comments {
+      display: block;
+      .big-btn-text-green {
+        float: right;
+        @include inline-block; }
+      h3 {
+        clear: both; } }
+    .social-and-tools {
+      display: block;
+      width: 180px;
+      float: right;
+      background: $colour_lighter_grey;
+      ul {
+        clear: both;
+        margin: 10px;
+        li {
+          a {
+            display: block;
+            padding: 8px 0 12px 40px;
+            margin: 5px 0;
+            font: {
+              size: 12px;
+              weight: normal; };
+            color: $colour_blackish;
+            background: transparent url(../images/social-links.png) 0 -192px no-repeat;
+            &:hover {
+              color: $colour_black; }
+            &.big-btn-text-fb {
+              background-position: 0 -192px;
+              &:hover {
+                background-position: 0 0; } }
+            &.big-btn-text-tw {
+              background-position: 0 -239px;
+              &:hover {
+                background-position: 0 -47px; } }
+            &.big-btn-text-red {
+              background-position: 0 -286px;
+              &:hover {
+                background-position: 0 -94px; } }
+            &.big-btn-text-green {
+              background-position: 0 -333px;
+              &:hover {
+                background-position: 0 -141px; } } } } } }
+    h2, h3 {
+      border-top: none;
+      background: none;
+      padding: 0; }
+    .search-wrap {
+      margin: 0; }
+    .pagination .disabled {
+      display: none; } }
+  @media only screen and (min-width: 640px) {
+    .page-title {
+      display: block;
+      background: none;
+      padding: 0; } } }

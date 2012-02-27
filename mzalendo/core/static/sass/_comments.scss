@@ -46,3 +46,26 @@ ul.comments {
                 @include button-text-green; }
               &.report {
                 @include button-text-red; } } } } } } } }
+
+@media only screen and (min-width: 640px) {
+  ul.comments {
+    li {
+      img {
+        width: 60px;
+        height: 60px; }
+      section {
+        clear: none; }
+      .tools,
+      .read-more-wrap {
+        left: -999999px; }
+      &:hover,
+      &.hovered {
+        .tools,
+        .read-more-wrap {
+          left: auto; } } } }
+  .tab {
+    ul.comments,
+    ul.listing {
+      li {
+        section {
+          width: 580px; } } } } }

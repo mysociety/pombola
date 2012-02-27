@@ -9,12 +9,13 @@
 @import "html_elements";
 @import "buttons";
 
-// specific chunks of all pages
+// specific chunks of all or several pages
 @import "header";
 @import "menu";
 @import "breadcrumb";
 @import "footer";
 @import "page";
+@import "tabs";
 
 // specific pages and parts of pages
 @import "hansard";
@@ -27,6 +28,3 @@
 @import "auth_pages";
 @import "appearances";
 @import "info_pages";
-
-// specific bits for desktop - should be factored out to the imports above
-@import "desktop";

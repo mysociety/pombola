@@ -34,3 +34,26 @@ ul.listing {
         @include border-radius(24px);
         &:hover {
           background: $colour_blackish url(../images/chevron-right.png) 6px center no-repeat; } } } } }
+
+@media only screen and (min-width: 640px) {
+  ul.listing {
+    li {
+      img {
+        width: auto;
+        height: auto;
+        max-width: 90px;
+        max-height: 90px; }
+      .thumbnail-image-link {
+        width: 90px;
+        /* force fixed width for links that may contain narrow images */
+        text-align: right; }
+      section {
+        clear: none;
+        .read-more-wrap {
+          top: auto;
+          bottom: 15px; }
+        a.read-more {
+          @include button-reset-text;
+          text-indent: 0;
+          width: auto;
+          height: auto; } } } } }

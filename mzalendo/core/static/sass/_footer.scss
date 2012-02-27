@@ -65,3 +65,26 @@
           &:active {
             background: $colour_black url(../images/chevron-right.png) 9px center no-repeat;
             @include background(url(../images/chevron-right.png) 9px center no-repeat, linear-gradient($colour_black, $colour_blackish)); } } } } } }
+
+@media only screen and (min-width: 640px) {
+  #site-footer {
+    >.wrapper {
+      display: block;
+      padding: 0; }
+    ul {
+      @include list-reset-soft;
+      clear: none;
+      float: left;
+      width: 200px;
+      margin: 10px 30px 0 0;
+      li {
+        margin-bottom: 10px; } }
+    .subscribe-box {
+      display: block;
+      float: right;
+      h2 {
+        background: none; } } } }
+
+@media only screen and (min-width: 640px) and (max-width: 960px) {
+  #site-footer {
+    padding: 0 10px; } }

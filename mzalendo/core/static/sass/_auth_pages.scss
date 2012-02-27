@@ -48,3 +48,31 @@
       color: #666666;
       display: block;
       margin: 10px 0; } } }
+
+@media only screen and (min-width: 640px) {
+  #login-pagetitle {
+    display: block;
+    background: $colour7;
+    margin: 0 auto;
+    padding: 10px;
+    width: 300px; }
+  #login {
+    background: $colour7;
+    padding: 0 10px 10px 10px;
+    overflow: hidden;
+    margin: 0 auto;
+    width: 300px;
+    p.error {
+      @include border-radius(6px); }
+    form {
+      width: 300px;
+      input#id_username,
+      input#id_password {
+        width: 288px;
+        margin: 10px 0; }
+      input.login-button {
+        margin: 0; }
+      p.forgot-register {
+        margin: 0; } }
+    .login-social {
+      margin: 0; } } }
