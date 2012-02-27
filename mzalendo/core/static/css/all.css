@@ -530,122 +530,6 @@ pre {
 #site-header .wrapper {
   overflow: hidden;
 }
-#site-header .wrapper #logo {
-  display: block;
-  margin-left: 10px;
-  float: left;
-  height: 42px;
-  text-indent: -999999em;
-  width: 147px;
-  background: url(../images/m-logo.png) 0 center no-repeat;
-}
-#site-header .wrapper menu#m-top-tools {
-  float: right;
-}
-#site-header .wrapper menu#m-top-tools button {
-  cursor: pointer;
-  display: block;
-  border: none;
-  padding: 0;
-  margin: 0;
-  width: auto;
-  height: auto;
-  text-indent: -999999px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
-  border-radius: 2px;
-  display: inline;
-  border-left: 1px solid white;
-}
-#site-header .wrapper menu#m-top-tools button.m-icon-nav {
-  text-indent: 0;
-  text-transform: uppercase;
-  height: 42px;
-  color: white;
-  padding: 0 15px 0 10px;
-  background: url(../images/m-menu-nub.png) right center no-repeat;
-}
-#site-header .wrapper menu#m-top-tools button.m-icon-nav.active {
-  background: url(../images/m-menu-nub-r.png) right center no-repeat;
-}
-#site-header .wrapper menu#m-top-tools button.icon-search {
-  height: 42px;
-  width: 42px;
-  margin-left: 10px;
-  background: url(../images/search-icon.png) center no-repeat;
-}
-#site-header .wrapper menu#m-top-tools button.icon-search.active {
-  background: url(../images/close.png) center no-repeat;
-}
-#site-header .wrapper #search {
-  clear: both;
-  height: 26px;
-  padding: 6px 10px;
-  display: block;
-  background: #e6e6e6;
-  border-bottom: 2px solid white;
-}
-#site-header .wrapper #search input {
-  padding: 1px 4px;
-  border: 1px solid gray;
-  height: 22px;
-  width: 214px;
-  float: left;
-}
-#site-header .wrapper #search button {
-  cursor: pointer;
-  display: block;
-  border: none;
-  padding: 0;
-  margin: 0;
-  width: auto;
-  height: auto;
-  text-indent: -999999px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
-  border-radius: 2px;
-  width: 64px;
-  height: 26px;
-  float: left;
-  margin-left: 10px;
-  background: black url(../images/search-icon.png) center no-repeat;
-}
-#site-header .wrapper #search button:hover {
-  background-color: #777777;
-}
-#site-header .wrapper menu#site-user-tools {
-  float: right;
-}
-#site-header .wrapper menu#site-user-tools ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-#site-header .wrapper menu#site-user-tools ul li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-#site-header .wrapper menu#site-user-tools ul li {
-  padding: 10px;
-}
-#site-header .wrapper menu#site-user-tools ul li.logged-in-name {
-  display: none;
-}
-#site-header .wrapper menu#site-user-tools ul li a {
-  color: white;
-  text-decoration: none;
-}
-#site-header .wrapper menu#site-user-tools ul li a:hover {
-  color: black;
-}
 
 @media only screen and (max-width: 640px) {
   #site-header {
@@ -663,11 +547,6 @@ pre {
     -ms-border-radius: 5px;
     -khtml-border-radius: 5px;
     border-radius: 5px;
-  }
-}
-@media only screen and (max-width: 640px) {
-  #home-search #search-hansard-instead {
-    padding-left: 0.5em;
   }
 }
 @media only screen and (min-width: 640px) {
@@ -688,17 +567,175 @@ pre {
     position: relative;
     overflow: visible;
   }
-  #site-header .wrapper menu#site-user-tools {
+}
+#logo {
+  display: block;
+  margin-left: 10px;
+  float: left;
+  height: 42px;
+  text-indent: -999999em;
+  width: 147px;
+  background: url(../images/m-logo.png) 0 center no-repeat;
+}
+@media only screen and (min-width: 640px) {
+  #logo {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    height: 34px;
+    width: 418px;
+    background: url(../images/d-logo.png) 0 center no-repeat;
+  }
+  #logo.down {
+    width: 600px;
+    height: 50px;
+    background: url(../images/down-logo.png) 0 center no-repeat;
+  }
+}
+
+menu#m-top-tools {
+  float: right;
+}
+menu#m-top-tools button {
+  cursor: pointer;
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  text-indent: -999999px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  display: inline;
+  border-left: 1px solid white;
+}
+menu#m-top-tools button.m-icon-nav {
+  text-indent: 0;
+  text-transform: uppercase;
+  height: 42px;
+  color: white;
+  padding: 0 15px 0 10px;
+  background: url(../images/m-menu-nub.png) right center no-repeat;
+}
+menu#m-top-tools button.m-icon-nav.active {
+  background: url(../images/m-menu-nub-r.png) right center no-repeat;
+}
+menu#m-top-tools button.icon-search {
+  height: 42px;
+  width: 42px;
+  margin-left: 10px;
+  background: url(../images/search-icon.png) center no-repeat;
+}
+menu#m-top-tools button.icon-search.active {
+  background: url(../images/close.png) center no-repeat;
+}
+
+#search {
+  clear: both;
+  height: 26px;
+  padding: 6px 10px;
+  display: block;
+  background: #e6e6e6;
+  border-bottom: 2px solid white;
+}
+#search input {
+  padding: 1px 4px;
+  border: 1px solid gray;
+  height: 22px;
+  width: 214px;
+  float: left;
+}
+#search button {
+  cursor: pointer;
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  text-indent: -999999px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  width: 64px;
+  height: 26px;
+  float: left;
+  margin-left: 10px;
+  background: black url(../images/search-icon.png) center no-repeat;
+}
+#search button:hover {
+  background-color: #777777;
+}
+
+@media only screen and (min-width: 640px) {
+  #search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    padding: 0;
+    height: auto;
+    border: none;
+  }
+  #search input {
+    width: 117px;
+    border: 1px solid black;
+    font-size: 14px;
+  }
+  #search button {
+    width: 26px;
+    height: 26px;
+    margin: 0 0 0 -2px;
+  }
+}
+menu#site-user-tools {
+  float: right;
+}
+menu#site-user-tools ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+menu#site-user-tools ul li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+menu#site-user-tools ul li {
+  padding: 10px;
+}
+menu#site-user-tools ul li.logged-in-name {
+  display: none;
+}
+menu#site-user-tools ul li a {
+  color: white;
+  text-decoration: none;
+}
+menu#site-user-tools ul li a:hover {
+  color: black;
+}
+
+@media only screen and (min-width: 640px) {
+  menu#site-user-tools {
     position: absolute;
     right: 151px;
     top: 0;
   }
-  #site-header .wrapper menu#site-user-tools ul {
+  menu#site-user-tools ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
-  #site-header .wrapper menu#site-user-tools ul li {
+  menu#site-user-tools ul li {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -706,14 +743,14 @@ pre {
     float: left;
     display: inline;
   }
-  #site-header .wrapper menu#site-user-tools ul li a {
+  menu#site-user-tools ul li a {
     float: left;
     display: block;
   }
-  #site-header .wrapper menu#site-user-tools ul li.login,
-  #site-header .wrapper menu#site-user-tools ul li.logged-in,
-  #site-header .wrapper menu#site-user-tools ul li.login a,
-  #site-header .wrapper menu#site-user-tools ul li.logged-in a {
+  menu#site-user-tools ul li.login,
+  menu#site-user-tools ul li.logged-in,
+  menu#site-user-tools ul li.login a,
+  menu#site-user-tools ul li.logged-in a {
     padding: 0;
     color: white;
     background: none;
@@ -722,18 +759,18 @@ pre {
     font-weight: normal;
     text-decoration: none;
   }
-  #site-header .wrapper menu#site-user-tools ul li.login a:hover,
-  #site-header .wrapper menu#site-user-tools ul li.logged-in a:hover,
-  #site-header .wrapper menu#site-user-tools ul li.login a a:hover,
-  #site-header .wrapper menu#site-user-tools ul li.logged-in a a:hover {
+  menu#site-user-tools ul li.login a:hover,
+  menu#site-user-tools ul li.logged-in a:hover,
+  menu#site-user-tools ul li.login a a:hover,
+  menu#site-user-tools ul li.logged-in a a:hover {
     background: none;
     text-decoration: underline;
   }
-  #site-header .wrapper menu#site-user-tools ul li.login {
+  menu#site-user-tools ul li.login {
     text-transform: uppercase;
     width: 70px;
   }
-  #site-header .wrapper menu#site-user-tools ul li.login a {
+  menu#site-user-tools ul li.login a {
     font-size: 11px;
     padding: 3px 25px 3px 10px;
     -moz-border-radius: 2px 0 0 2px;
@@ -750,7 +787,7 @@ pre {
     background: url(../images/login-arrows.png) 54px -19px no-repeat, -ms-linear-gradient(#707070, #000000);
     background: url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#707070, #000000);
   }
-  #site-header .wrapper menu#site-user-tools ul li.login a:hover {
+  menu#site-user-tools ul li.login a:hover {
     text-decoration: none;
     background: #707070 url(../images/login-arrows.png) 54px -19px no-repeat;
     background: url(../images/login-arrows.png) 54px -19px no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #707070));
@@ -760,10 +797,10 @@ pre {
     background: url(../images/login-arrows.png) 54px -19px no-repeat, -ms-linear-gradient(#000000, #707070);
     background: url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#000000, #707070);
   }
-  #site-header .wrapper menu#site-user-tools ul li.logged-in {
+  menu#site-user-tools ul li.logged-in {
     text-transform: uppercase;
   }
-  #site-header .wrapper menu#site-user-tools ul li.logged-in a {
+  menu#site-user-tools ul li.logged-in a {
     font-size: 11px;
     padding: 3px 10px;
     -moz-border-radius: 2px 0 0 2px;
@@ -780,7 +817,7 @@ pre {
     background: -ms-linear-gradient(#707070, #000000);
     background: linear-gradient(#707070, #000000);
   }
-  #site-header .wrapper menu#site-user-tools ul li.logged-in a:hover {
+  menu#site-user-tools ul li.logged-in a:hover {
     text-decoration: none;
     background: #707070 no-repeat;
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #707070));
@@ -790,18 +827,18 @@ pre {
     background: -ms-linear-gradient(#000000, #707070);
     background: linear-gradient(#000000, #707070);
   }
-  #site-header .wrapper menu#site-user-tools ul li.logged-in-name {
+  menu#site-user-tools ul li.logged-in-name {
     display: block;
     margin: 3px 10px 0 0;
     color: #fff;
   }
-  #site-header .wrapper menu#site-user-tools ul li.active {
+  menu#site-user-tools ul li.active {
     position: relative;
     border-top: 1px solid #666666;
     border-left: 1px solid #666666;
     z-index: 2;
   }
-  #site-header .wrapper menu#site-user-tools ul li.active a {
+  menu#site-user-tools ul li.active a {
     color: gray;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
@@ -811,11 +848,13 @@ pre {
     border-radius: 0;
     background: #e6e6e6 url(../images/login-arrows.png) 54px 11px no-repeat;
   }
-  #site-header .wrapper menu#site-user-tools ul li.active a:hover {
+  menu#site-user-tools ul li.active a:hover {
     color: black;
     background: #e6e6e6 url(../images/login-arrows.png) 54px 11px no-repeat;
   }
-  #site-header .wrapper #login-box {
+}
+@media only screen and (min-width: 640px) {
+  #login-box {
     z-index: 1;
     position: absolute;
     right: 25px;
@@ -832,61 +871,29 @@ pre {
     -o-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
     box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
   }
-  #site-header .wrapper #login-box #login {
+  #login-box #login {
     padding: 0;
     margin: 0;
     width: auto;
   }
-  #site-header .wrapper #login-box #login form {
+  #login-box #login form {
     width: auto;
   }
-  #site-header .wrapper #login-box #login form input#id_username,
-  #site-header .wrapper #login-box #login form input#id_password {
+  #login-box #login form input#id_username,
+  #login-box #login form input#id_password {
     width: 163px;
     margin: 0 0 10px 0;
   }
-  #site-header .wrapper #login-box #login form input.login-button {
+  #login-box #login form input.login-button {
     margin: 0;
   }
-  #site-header .wrapper #login-box #login form p.forgot-register {
+  #login-box #login form p.forgot-register {
     margin: 0;
     font-size: 11px;
   }
-  #site-header .wrapper #login-box #login .login-social {
+  #login-box #login .login-social {
     margin: 0;
     font-size: 12px;
-  }
-  #site-header .wrapper #logo {
-    position: absolute;
-    left: 0;
-    top: 10px;
-    height: 34px;
-    width: 418px;
-    background: url(../images/d-logo.png) 0 center no-repeat;
-  }
-  #site-header .wrapper #logo.down {
-    width: 600px;
-    height: 50px;
-    background: url(../images/down-logo.png) 0 center no-repeat;
-  }
-  #site-header .wrapper #search {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: transparent;
-    padding: 0;
-    height: auto;
-    border: none;
-  }
-  #site-header .wrapper #search input {
-    width: 117px;
-    border: 1px solid black;
-    font-size: 14px;
-  }
-  #site-header .wrapper #search button {
-    width: 26px;
-    height: 26px;
-    margin: 0 0 0 -2px;
   }
 }
 #main-menu nav {
@@ -2682,6 +2689,11 @@ h3.scorecard-overall span.score-overall-bad {
   display: block;
 }
 
+@media only screen and (max-width: 640px) {
+  #home-search #search-hansard-instead {
+    padding-left: 0.5em;
+  }
+}
 #home-search {
   background: #f6f6f6;
   padding: 10px;

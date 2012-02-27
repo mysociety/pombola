@@ -20,6 +20,10 @@
     .social-and-tools {
       display: block; } } }
 
+@media only screen and (max-width: 640px) {
+  #home-search #search-hansard-instead {
+    padding-left: 0.5em; } }
+
 #home-search {
   background: $colour_light_grey;
   padding: 10px;
