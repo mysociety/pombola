@@ -28,6 +28,5 @@
 @import "appearances";
 @import "info_pages";
 
-// specific bits for mobile and desktop - should be factored out to the imports above
-@import "mobile";
+// specific bits for desktop - should be factored out to the imports above
 @import "desktop";
