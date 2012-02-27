@@ -42,14 +42,14 @@ p, h1, h2, h3 {
   line-height: 20px; }
 
 h1, h2, h3, h4 {
-  color: $colour5; }
+  color: $colour_black; }
 
 p {
   font-size: 14px;
   line-height: 20px; }
 
 a {
-  color: $colour1;
+  color: $colour_green;
   text-decoration: none;
   &:hover {
     color: #004422;
@@ -153,7 +153,7 @@ pre {
 
 #site-header {
   clear: both;
-  background: $colour1;
+  background: $colour_green;
   .wrapper {
     overflow: hidden;
     #logo {
@@ -169,13 +169,13 @@ pre {
       button {
         @include button-reset;
         display: inline;
-        border-left: 1px solid $colour6;
+        border-left: 1px solid $colour_white;
         &.m-icon-nav {
           text: {
             indent: 0;
             transform: uppercase; };
           height: 42px;
-          color: $colour6;
+          color: $colour_white;
           padding: 0 15px 0 10px;
           background: url(../images/m-menu-nub.png) right center no-repeat;
           &.active {
@@ -193,10 +193,10 @@ pre {
       padding: 6px 10px;
       display: block;
       background: $colour7;
-      border-bottom: 2px solid $colour6;
+      border-bottom: 2px solid $colour_white;
       input {
         padding: 1px 4px;
-        border: 1px solid $colour8;
+        border: 1px solid $colour_grey;
         height: 22px;
         width: 214px;
         float: left; }
@@ -206,9 +206,9 @@ pre {
         height: 26px;
         float: left;
         margin-left: 10px;
-        background: $colour5 url(../images/search-icon.png) center no-repeat;
+        background: $colour_black url(../images/search-icon.png) center no-repeat;
         &:hover {
-          background-color: $colour4; } } }
+          background-color: $colour_blackish; } } }
     menu#site-user-tools {
       // clear:both;
       float: right;
@@ -221,16 +221,16 @@ pre {
           // weight:bold;
           // }
           // background:$colour7;
-          // border-bottom:2px solid $colour6;
+          // border-bottom:2px solid $colour_white;
           // height:20px;
           padding: 10px;
           &.logged-in-name {
             display: none; }
           a {
-            color: $colour6;
+            color: $colour_white;
             text-decoration: none;
             &:hover {
-              color: $colour5; } } } } } } }
+              color: $colour_black; } } } } } } }
 
 #main-menu {
   nav {
@@ -247,12 +247,12 @@ pre {
           font: {
             size: 18px;
             weight: bold; };
-          color: $colour6;
+          color: $colour_white;
           text-decoration: none;
-          background: $colour5;
-          border-bottom: 2px solid $colour6;
+          background: $colour_black;
+          border-bottom: 2px solid $colour_white;
           &:hover {
-            background: $colour4; } }
+            background: $colour_blackish; } }
         &:last-child a,
         &.last a {
           border-bottom: none; }
@@ -278,7 +278,7 @@ pre {
     position: absolute;
     right: 10px;
     top: 10px;
-    border: 1px solid $colour13;
+    border: 1px solid $colour_middling_grey;
     height: 24px;
     width: 24px;
     background: #d2d2d2 url(../images/chevron-down-alt.png) center no-repeat;
@@ -292,7 +292,7 @@ pre {
   background: $colour7;
   li {
     margin: 0 10px;
-    border-top: 1px solid $colour5;
+    border-top: 1px solid $colour_black;
     a {
       display: block;
       padding: 10px 0;
@@ -301,7 +301,7 @@ pre {
 
 #site-footer {
   clear: both;
-  border-top: 4px solid $colour1;
+  border-top: 4px solid $colour_green;
   background: $colour7;
   overflow: hidden;
   >.wrapper {
@@ -311,13 +311,13 @@ pre {
     padding-top: 5px; }
   p {
     font-style: italic;
-    color: $colour4; }
+    color: $colour_blackish; }
   ul {
     @include list-reset-soft;
     clear: both;
     margin: 0 10px;
     li {
-      border-top: 1px solid $colour13;
+      border-top: 1px solid $colour_middling_grey;
       padding: 5px 0;
       a:hover {
         text-decoration: none; } }
@@ -327,9 +327,9 @@ pre {
   .subscribe-box {
     display: table-caption;
     padding: 10px;
-    background: $colour1;
+    background: $colour_green;
     h2 {
-      color: $colour6;
+      color: $colour_white;
       margin: 0;
       text-transform: uppercase;
       font-weight: normal;
@@ -339,7 +339,7 @@ pre {
     form {
       label {
         display: block;
-        color: $colour6;
+        color: $colour_white;
         font-size: 15px;
         margin: 15px 0 10px 0; }
       .subscribe-fields {
@@ -358,17 +358,17 @@ pre {
           border: none;
           margin-left: -4px;
           text-indent: -999999px;
-          background: $colour4 url(../images/chevron-right.png) 9px center no-repeat;
-          @include background(url(../images/chevron-right.png) 9px center no-repeat, linear-gradient($colour4, $colour5));
+          background: $colour_blackish url(../images/chevron-right.png) 9px center no-repeat;
+          @include background(url(../images/chevron-right.png) 9px center no-repeat, linear-gradient($colour_blackish, $colour_black));
           &:hover {
-            background: $colour4 / 0.9 url(../images/chevron-right.png) 9px center no-repeat;
-            @include background(url(../images/chevron-right.png) 9px center no-repeat, linear-gradient($colour4 / 0.9, $colour5)); }
+            background: $colour_blackish / 0.9 url(../images/chevron-right.png) 9px center no-repeat;
+            @include background(url(../images/chevron-right.png) 9px center no-repeat, linear-gradient($colour_blackish / 0.9, $colour_black)); }
           &:active {
-            background: $colour5 url(../images/chevron-right.png) 9px center no-repeat;
-            @include background(url(../images/chevron-right.png) 9px center no-repeat, linear-gradient($colour5, $colour4)); } } } } } }
+            background: $colour_black url(../images/chevron-right.png) 9px center no-repeat;
+            @include background(url(../images/chevron-right.png) 9px center no-repeat, linear-gradient($colour_black, $colour_blackish)); } } } } } }
 
 #page {
-  background: $colour6;
+  background: $colour_white;
   padding-bottom: 30px;
   &.down {
     padding: 10px;
@@ -414,9 +414,9 @@ pre {
       li {
         article {
           padding: 10px;
-          background: $colour9;
-          color: $colour5;
-          border-bottom: 2px solid $colour6;
+          background: $colour_light_grey;
+          color: $colour_black;
+          border-bottom: 2px solid $colour_white;
           overflow: hidden;
           header {
             h4 {
@@ -441,8 +441,8 @@ pre {
             .details {
               span.shout {
                 display: block;
-                background: $colour8;
-                color: $colour6;
+                background: $colour_grey;
+                color: $colour_white;
                 margin: 10px 0;
                 padding: 10px;
                 font-weight: bold;
@@ -454,11 +454,11 @@ pre {
                   padding: 4px;
                   margin: 0 auto; }
                 &.shout-good {
-                  background-color: $colour1; }
+                  background-color: $colour_green; }
                 &.shout-average {
-                  background-color: $colour14; }
+                  background-color: $colour_amber; }
                 &.shout-bad {
-                  background-color: $colour11; } }
+                  background-color: $colour_red; } }
               .source {
                 display: block;
                 padding-right: 1em;
@@ -478,16 +478,16 @@ pre {
         @include list-reset-soft;
         margin: 0 0 20px 0;
         li {
-          border-top: 2px solid $colour6;
+          border-top: 2px solid $colour_white;
           a {
             font-size: 13px;
             display: block;
-            background: $colour9 url(../images/chevron-right.png) right center no-repeat;
-            color: $colour5;
+            background: $colour_light_grey url(../images/chevron-right.png) right center no-repeat;
+            color: $colour_black;
             padding: 10px;
             text-decoration: none;
             &:hover {
-              background-color: $colour6; }
+              background-color: $colour_white; }
             span {
               font-style: italic; } } } } }
     .profile-names {
@@ -499,7 +499,7 @@ pre {
       li {
         .label {
           text-transform: uppercase;
-          color: $colour8;
+          color: $colour_grey;
           font-size: 11px;
           float: left;
           clear: left;
@@ -513,7 +513,7 @@ pre {
       margin-right: 10px; }
     h3 {
       border-top: none;
-      border-bottom: 2px solid $colour5;
+      border-bottom: 2px solid $colour_black;
       background: none;
       padding: 0 0 5px 0;
       margin: 20px 10px; }
@@ -526,7 +526,7 @@ pre {
         @include list-reset-soft;
         margin: 20px 0;
         li {
-          border-bottom: 1px solid $colour5;
+          border-bottom: 1px solid $colour_black;
           margin: 0 10px 5px 10px;
           &:last-child,
           &.last {
@@ -540,7 +540,7 @@ pre {
           @include list-reset; } } }
     article {}
     .tab-nav a {
-      color: $colour5;
+      color: $colour_black;
       text-decoration: none; }
     #comments {
       .big-btn-text-green {
@@ -562,7 +562,7 @@ pre {
             size: 17px;
             weight: bold; }; } } } }
   h2, h3 {
-    border-top: 4px solid $colour1;
+    border-top: 4px solid $colour_green;
     background: $colour7;
     padding: 10px; }
   .search-wrap {
@@ -571,7 +571,7 @@ pre {
     margin: 0 10px; }
   .search-box {
     display: inline-block;
-    color: $colour6;
+    color: $colour_white;
     width: auto;
     margin-bottom: 10px;
     input#id_q, input#loc {
@@ -581,9 +581,9 @@ pre {
       font-size: 15px;
       padding: 4px 6px;
       width: 300px;
-      border-top: 3px solid $colour4;
-      border-left: 3px solid $colour4;
-      border-bottom: 3px solid $colour4;
+      border-top: 3px solid $colour_blackish;
+      border-left: 3px solid $colour_blackish;
+      border-bottom: 3px solid $colour_blackish;
       @include border-radius(4px 0 0 4px);
       &:focus {
         outline: none;
@@ -597,14 +597,14 @@ pre {
       margin-left: -2px;
       text-indent: -999999px;
       @include border-radius(0 4px 4px 0);
-      background: $colour4 url(../images/search-icon.png) 9px center no-repeat;
-      @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour4, $colour5));
+      background: $colour_blackish url(../images/search-icon.png) 9px center no-repeat;
+      @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour_blackish, $colour_black));
       &:hover {
-        background: $colour4 / 0.9 url(../images/chevron-right.png) 9px center no-repeat;
-        @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour4 / 0.9, $colour5)); }
+        background: $colour_blackish / 0.9 url(../images/chevron-right.png) 9px center no-repeat;
+        @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour_blackish / 0.9, $colour_black)); }
       &:active {
-        background: $colour5 url(../images/chevron-right.png) 9px center no-repeat;
-        @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour5, $colour4)); } } } }
+        background: $colour_black url(../images/chevron-right.png) 9px center no-repeat;
+        @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour_black, $colour_blackish)); } } } }
 
 /* 4. SHARED ELEMENTS
 -------------------------------------------------------------- */
@@ -634,7 +634,7 @@ ul.comments {
     display: block;
     overflow: hidden;
     position: relative;
-    background: $colour12;
+    background: $colour_lighter_grey;
     padding: 15px 15px 30px 15px;
     margin-bottom: 5px;
     img {
@@ -683,7 +683,7 @@ ul.listing {
     padding: 15px;
     h4 a {
       text-decoration: none;
-      color: $colour5; }
+      color: $colour_black; }
     img {
       width: 60px;
       height: 60px;
@@ -702,22 +702,22 @@ ul.listing {
         top: 35px;
         bottom: auto; }
       .meta {
-        color: $colour8; }
+        color: $colour_grey; }
       a.read-more {
         display: block;
         text-indent: -999999px;
         padding: 0;
         width: 24px;
         height: 24px;
-        background: $colour5 url(../images/chevron-right.png) 6px 2px no-repeat;
+        background: $colour_black url(../images/chevron-right.png) 6px 2px no-repeat;
         @include border-radius(24px);
         &:hover {
-          background: $colour4 url(../images/chevron-right.png) 6px center no-repeat; } } } } }
+          background: $colour_blackish url(../images/chevron-right.png) 6px center no-repeat; } } } } }
 
 h3.scorecard-overall {
   display: block;
   font-weight: bold;
-  color: $colour5;
+  color: $colour_black;
   span {
     font-weight: normal;
     display: block;
@@ -795,8 +795,8 @@ h3.scorecard-overall {
   .errorlist {
     @include list-reset-soft;
     li {
-      background: $colour11;
-      color: $colour6;
+      background: $colour_red;
+      color: $colour_white;
       padding: 4px 6px;
       font-size: 13px;
       @include border-radius(3px); } } }
@@ -811,7 +811,7 @@ h3.scorecard-overall {
       margin: 0 0 10px 0;
       background: none;
       border-top: none;
-      color: $colour8;
+      color: $colour_grey;
       font-size: 24px;
       text-transform: uppercase;
       &#home-intro {
@@ -824,13 +824,13 @@ h3.scorecard-overall {
       display: block; } } }
 
 #home-search {
-  background: $colour9;
+  background: $colour_light_grey;
   padding: 10px;
   overflow: hidden;
   label {
     display: block;
     margin-bottom: 10px;
-    color: $colour8;
+    color: $colour_grey;
     font: {
       weight: bold;
       size: 17px; }; }
@@ -846,26 +846,26 @@ h3.scorecard-overall {
     float: left;
     width: 50px;
     height: 30px;
-    background: $colour2 url(../images/search-icon.png) center no-repeat;
-    @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour2, $colour1));
+    background: $colour_light_green url(../images/search-icon.png) center no-repeat;
+    @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_light_green, $colour_green));
     &:hover {
-      background: $colour1 url(../images/search-icon.png) center no-repeat;
-      @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour1, $colour2)); } }
+      background: $colour_green url(../images/search-icon.png) center no-repeat;
+      @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_green, $colour_light_green)); } }
   >a {
     float: left;
     margin: 10px 0 0 0;
-    color: $colour8;
+    color: $colour_grey;
     font-size: 14px;
     text-decoration: none;
     &:hover {
       text-decoration: underline; } } }
 
 .featured-person {
-  color: $colour10;
+  color: $colour_dark_grey;
   margin: 0 0 30px 0;
-  border-top: 3px solid $colour13;
-  border-bottom: 3px solid $colour13;
-  background: $colour9;
+  border-top: 3px solid $colour_middling_grey;
+  border-bottom: 3px solid $colour_middling_grey;
+  background: $colour_light_grey;
   overflow: hidden;
   img {
     float: left;
@@ -886,7 +886,7 @@ h3.scorecard-overall {
         &:hover {
           text-decoration: none; } } }
     .feature-person-role {
-      color: $colour8;
+      color: $colour_grey;
       font-style: italic; }
     .feature-person-summary {
       display: none; }
@@ -900,10 +900,10 @@ h3.scorecard-overall {
         margin: 0 40px 7px 0;
         font-size: 17px;
         a {
-          color: $colour10;
+          color: $colour_dark_grey;
           &:hover {
             text-decoration: none;
-            color: $colour5; } } }
+            color: $colour_black; } } }
       .rating-img {
         position: absolute;
         right: 0;
@@ -919,22 +919,22 @@ h3.scorecard-overall {
   &.featured-person-placeholder {
     text-align: center;
     height: 250px;
-    background: $colour1 url(/static/images/logo-450-x-150.png) center center no-repeat; }
+    background: $colour_green url(/static/images/logo-450-x-150.png) center center no-repeat; }
   &.featured-person-loading {
     height: 250px;
     text-align: center;
     p {
       margin: 30px 0;
-      color: $colour8; } } }
+      color: $colour_grey; } } }
 
 ul#home-news-list {
   @include list-reset-soft;
-  border-top: 5px solid $colour9;
+  border-top: 5px solid $colour_light_grey;
   padding-top: 15px;
   li {
     margin-bottom: 15px;
     padding-bottom: 15px;
-    border-bottom: 3px solid $colour9;
+    border-bottom: 3px solid $colour_light_grey;
     &:last-child {
       border-bottom: 0; }
     h3, p {
@@ -953,7 +953,7 @@ ul#home-news-list {
       margin: 0 10px; } } }
 
 #home-mpratings {
-  border-top: 5px solid $colour9;
+  border-top: 5px solid $colour_light_grey;
   padding: 15px 10px 10px 10px;
   img {
     float: left;
@@ -973,28 +973,28 @@ ul#home-news-list {
   a {
     &.aspirants {
       @include border-radius(5px 5px 0 0);
-      color: $colour6;
+      color: $colour_white;
       display: block;
       margin: 10px 10px 3px 10px;
       padding: 10px;
-      background: $colour1;
-      @include background(linear-gradient($colour1 / 0.9, $colour1));
+      background: $colour_green;
+      @include background(linear-gradient($colour_green / 0.9, $colour_green));
       &:hover {
         text-decoration: none;
-        background: $colour1 / 0.9;
-        @include background(linear-gradient($colour1, $colour1 / 0.9)); } }
+        background: $colour_green / 0.9;
+        @include background(linear-gradient($colour_green, $colour_green / 0.9)); } }
     &.citizens {
       @include border-radius(0 0 5px 5px);
-      color: $colour6;
+      color: $colour_white;
       display: block;
       margin: 0 10px 10px 10px;
       padding: 10px;
-      background: $colour2;
-      @include background(linear-gradient($colour2 / 0.9, $colour2));
+      background: $colour_light_green;
+      @include background(linear-gradient($colour_light_green / 0.9, $colour_light_green));
       &:hover {
         text-decoration: none;
-        background: $colour2 / 0.9;
-        @include background(linear-gradient($colour2, $colour2 / 0.9)); } } } }
+        background: $colour_light_green / 0.9;
+        @include background(linear-gradient($colour_light_green, $colour_light_green / 0.9)); } } } }
 
 /* Login Page */
 #login-pagetitle {
@@ -1002,9 +1002,9 @@ ul#home-news-list {
 
 #login {
   p.error {
-    background: $colour6;
+    background: $colour_white;
     padding: 10px;
-    color: $colour11;
+    color: $colour_red;
     margin: 0; }
   form {
     overflow: hidden;
@@ -1019,8 +1019,8 @@ ul#home-news-list {
       font-size: 14px;
       padding: 3px 5px;
       display: block;
-      background: $colour6;
-      border: 1px solid $colour13; }
+      background: $colour_white;
+      border: 1px solid $colour_middling_grey; }
     input.login-button {
       @include button-reset-text;
       cursor: pointer;
@@ -1037,7 +1037,7 @@ ul#home-news-list {
       margin: 0 10px;
       a {
         display: block;
-        color: $colour8; } } }
+        color: $colour_grey; } } }
   .login-social {
     margin: 10px;
     float: left;
@@ -1072,7 +1072,7 @@ h2 a.appearances-trigger {
     margin: 0 10px; }
   hr {
     border: none;
-    background: $colour1;
+    background: $colour_green;
     height: 2px; } }
 
 @import "mobile";
