@@ -1,96 +1,33 @@
-/* -------------------------------------------------------------- 
-
-BASIC CSS
-mzalendo.com
-
-AUTHOR: Josh Angell, Supercool
-josh [at] supercooldesign.co.uk
-
-  1. RESET / CORE
-  2. BASIC TYPOGRAPHY, LINKS AND IMAGES
-  3. BASIC LAYOUT
-  4. SHARED ELEMENTS
-  5. PAGE SPECIFIC
-  6. MEDIA QUERIES
-
--------------------------------------------------------------- */
-
-/* 1. RESET / CORE
--------------------------------------------------------------- */
+// reset everything
 @import "compass/reset";
+
+// variables and macros
 @import "core";
+
+// very general styling
 @import "common";
-
-body {
-  // default highlight on buttons links etc
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  // Prevent mobile zooming while remain desktop zooming.
-  // github.com/shichuan/mobile-html5-boilerplate/issues/closed#issue/14
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: none; }
-
 @import "html_elements";
-
 @import "buttons";
 
-/* 3. BASIC LAYOUT
-   320px - following the Mobile First principle
-   cols    1   2   3    4    5    6    7    8    9    10
-   px      30  60  90   120  150  180  210  240  270  300
--------------------------------------------------------------- */
-.wrapper {
-  width: 100%; }
-
+// specific chunks of all pages
 @import "header";
 @import "menu";
 @import "breadcrumb";
-
-.m-sub-menu {
-  @include list-reset-soft;
-  background: $colour7;
-  li {
-    margin: 0 10px;
-    border-top: 1px solid $colour_black;
-    a {
-      display: block;
-      padding: 10px 0;
-      &:hover {
-        text-decoration: none; } } } }
-
 @import "footer";
 @import "page";
 
-/* 4. SHARED ELEMENTS
--------------------------------------------------------------- */
+// specific pages and parts of pages
 @import "hansard";
-
 @import "comments";
-
 @import "listing";
-
 @import "scorecard";
-
 @import "pagination";
-
-.btn-question {
-  display: block;
-  width: 15px;
-  height: 15px;
-  text-indent: -999999px;
-  background: url(../images/question.png) 0 0 no-repeat;
-  &:hover {
-    background-position: 0 -21px; } }
-
 @import "ajax_dialog";
-
 @import "home_page";
-
 @import "auth_pages";
-
 @import "appearances";
-
 @import "info_pages";
 
+// specific bits for mobile and desktop - should be factored out to the imports above
 @import "mobile";
-
 @import "desktop";

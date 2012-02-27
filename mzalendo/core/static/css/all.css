@@ -1,21 +1,3 @@
-/* -------------------------------------------------------------- 
-
-BASIC CSS
-mzalendo.com
-
-AUTHOR: Josh Angell, Supercool
-josh [at] supercooldesign.co.uk
-
-  1. RESET / CORE
-  2. BASIC TYPOGRAPHY, LINKS AND IMAGES
-  3. BASIC LAYOUT
-  4. SHARED ELEMENTS
-  5. PAGE SPECIFIC
-  6. MEDIA QUERIES
-
--------------------------------------------------------------- */
-/* 1. RESET / CORE
--------------------------------------------------------------- */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -97,9 +79,6 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: none;
-}
-
-body {
   font-family: 'Arial', sans-serif;
   color: #444;
   font-size: 100%;
@@ -533,13 +512,15 @@ pre {
   background: linear-gradient(#74cfdc, #7ad9e7);
 }
 
-/* 3. BASIC LAYOUT
-   320px - following the Mobile First principle
-   cols    1   2   3    4    5    6    7    8    9    10
-   px      30  60  90   120  150  180  210  240  270  300
--------------------------------------------------------------- */
-.wrapper {
-  width: 100%;
+.btn-question {
+  display: block;
+  width: 15px;
+  height: 15px;
+  text-indent: -999999px;
+  background: url(../images/question.png) 0 0 no-repeat;
+}
+.btn-question:hover {
+  background-position: 0 -21px;
 }
 
 #site-header {
@@ -707,6 +688,30 @@ pre {
   left: -999999px;
 }
 
+.m-sub-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #e6e6e6;
+}
+.m-sub-menu li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.m-sub-menu li {
+  margin: 0 10px;
+  border-top: 1px solid black;
+}
+.m-sub-menu li a {
+  display: block;
+  padding: 10px 0;
+}
+.m-sub-menu li a:hover {
+  text-decoration: none;
+}
+
 #breadcrumb,
 #breadcrumb-replacement {
   display: none;
@@ -759,30 +764,6 @@ pre {
   background: url(../images/chevron-up-alt.png) center no-repeat, -o-linear-gradient(#d2d2d2, #ffffff);
   background: url(../images/chevron-up-alt.png) center no-repeat, -ms-linear-gradient(#d2d2d2, #ffffff);
   background: url(../images/chevron-up-alt.png) center no-repeat, linear-gradient(#d2d2d2, #ffffff);
-}
-
-.m-sub-menu {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  background: #e6e6e6;
-}
-.m-sub-menu li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-.m-sub-menu li {
-  margin: 0 10px;
-  border-top: 1px solid black;
-}
-.m-sub-menu li a {
-  display: block;
-  padding: 10px 0;
-}
-.m-sub-menu li a:hover {
-  text-decoration: none;
 }
 
 #site-footer {
@@ -888,6 +869,10 @@ pre {
   background: url(../images/chevron-right.png) 9px center no-repeat, -o-linear-gradient(#000000, #777777);
   background: url(../images/chevron-right.png) 9px center no-repeat, -ms-linear-gradient(#000000, #777777);
   background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#000000, #777777);
+}
+
+.wrapper {
+  width: 100%;
 }
 
 #page {
@@ -1269,8 +1254,6 @@ pre {
   background: url(../images/search-icon.png) 9px center no-repeat, linear-gradient(#000000, #777777);
 }
 
-/* 4. SHARED ELEMENTS
--------------------------------------------------------------- */
 ul.hansard_entries em {
   font-style: italic;
 }
@@ -1629,17 +1612,6 @@ h3.scorecard-overall span.score-overall-bad {
   color: #444444;
   background: none;
   border: 2px solid #F6F6F6;
-}
-
-.btn-question {
-  display: block;
-  width: 15px;
-  height: 15px;
-  text-indent: -999999px;
-  background: url(../images/question.png) 0 0 no-repeat;
-}
-.btn-question:hover {
-  background-position: 0 -21px;
 }
 
 #ajax_dialog_subcontent {

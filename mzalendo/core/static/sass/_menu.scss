@@ -26,3 +26,15 @@
           position: absolute;
           z-index: 20;
           left: -999999px; } } } } }
+
+.m-sub-menu {
+  @include list-reset-soft;
+  background: $colour7;
+  li {
+    margin: 0 10px;
+    border-top: 1px solid $colour_black;
+    a {
+      display: block;
+      padding: 10px 0;
+      &:hover {
+        text-decoration: none; } } } }

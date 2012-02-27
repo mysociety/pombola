@@ -21,3 +21,12 @@
   @include background(linear-gradient(#74cfdc / 0.95, #74cfdc));
   &:hover {
     @include background(linear-gradient(#74cfdc, #74cfdc / 0.95)); } }
+
+.btn-question {
+  display: block;
+  width: 15px;
+  height: 15px;
+  text-indent: -999999px;
+  background: url(../images/question.png) 0 0 no-repeat;
+  &:hover {
+    background-position: 0 -21px; } }
