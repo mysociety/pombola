@@ -20,26 +20,19 @@ josh [at] supercooldesign.co.uk
 
 -------------------------------------------------------------- */
 
-
 @import "core";
 
 // add extra mobile specific stuff in here, like background re-sizes and higher-res images
 
 #site-header {
-  @include background(linear-gradient($colour1/0.75, $colour1));
+  @include background(linear-gradient($colour1 / 0.75, $colour1));
   .wrapper #search button {
-    @include border-radius(5px);
-  }
-}
-
+    @include border-radius(5px); } }
 
 #main-menu nav ul li a {
-  @include background(linear-gradient($colour4/1.4, $colour5));
+  @include background(linear-gradient($colour4 / 1.4, $colour5));
   &:hover {
-    @include background(linear-gradient($colour5, $colour4/1.4));
-  }
-}
+    @include background(linear-gradient($colour5, $colour4 / 1.4)); } }
 
 #home-search #search-hansard-instead {
-  padding-left: 0.5em;
-}
+  padding-left: 0.5em; }
