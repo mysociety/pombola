@@ -647,7 +647,7 @@ pre {
   color: black;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 640px) {
+@media only screen and (max-width: 640px) {
   #site-header {
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00c25c), color-stop(100%, #009245));
     background: -webkit-linear-gradient(#00c25c, #009245);
@@ -665,7 +665,7 @@ pre {
     border-radius: 5px;
   }
 }
-@media only screen and (min-width: 320px) and (max-width: 640px) {
+@media only screen and (max-width: 640px) {
   #home-search #search-hansard-instead {
     padding-left: 0.5em;
   }
@@ -954,7 +954,7 @@ pre {
   text-decoration: none;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 640px) {
+@media only screen and (max-width: 640px) {
   #main-menu nav ul li a {
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555555), color-stop(100%, #000000));
     background: -webkit-linear-gradient(#555555, #000000);

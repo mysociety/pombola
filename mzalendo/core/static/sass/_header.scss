@@ -79,13 +79,13 @@
             &:hover {
               color: $colour_black; } } } } } } }
 
-@media only screen and (min-width: 320px) and (max-width: 640px) {
+@media only screen and (max-width: 640px) {
   #site-header {
     @include background(linear-gradient($colour_green / 0.75, $colour_green));
     .wrapper #search button {
       @include border-radius(5px); } } }
 
-@media only screen and (min-width: 320px) and (max-width: 640px) {
+@media only screen and (max-width: 640px) {
   #home-search #search-hansard-instead {
     padding-left: 0.5em; } }
 
