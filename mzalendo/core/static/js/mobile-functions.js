@@ -60,21 +60,10 @@ $(function(){
    * Main non AJAX interactions
    */
   // prep
-  $('#search, #mc-embedded-subscribe-form').hide();
-  $('#search').before('<menu id="m-top-tools"><button class="nav-trigger m-icon-nav">menu</button><button class="search-trigger icon-search">search</button></menu>');
+  $('#mc-embedded-subscribe-form').hide();
 
-  // nav
-  $('.nav-trigger').live('click', function(){
-    //add states to trigger elem
-    hideShow('#main-menu', $(this));
-  });
 
-  // search
-  $('.search-trigger').live('click', function(){
-    hideShow('#search', $(this));
-  });
-
-  // search
+  // news letter subscribe
   $('.subscribe-box > h2').on('click', function(){
     hideShow('#mc-embedded-subscribe-form', $(this));
   });

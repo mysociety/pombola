@@ -1,19 +1,12 @@
 #site-header {
   clear: both;
   background: $colour_green;
+  @include background(linear-gradient($colour_green / 0.75, $colour_green));
   .wrapper {
     overflow: hidden; } }
 
-@media only screen and (max-width: 640px) {
-  #site-header {
-    @include background(linear-gradient($colour_green / 0.75, $colour_green));
-    .wrapper #search button {
-      @include border-radius(5px); } } }
-
 @media only screen and (min-width: 640px) {
   #site-header {
-    background: $colour_green;
-    @include background(linear-gradient($colour_green / 0.75, $colour_green));
     height: 60px;
     &.down {
       height: 80px; }
@@ -45,37 +38,26 @@
 
 // ------------------------------------------------------
 
-menu#m-top-tools {
+menu#mobile-top-tools {
+  @media only screen and (min-width: 640px) {
+    display: none; }
   float: right;
-  button {
-    @include button-reset;
-    display: inline;
-    border-left: 1px solid $colour_white;
-    &.m-icon-nav {
-      text: {
-        indent: 0;
-        transform: uppercase; };
-      height: 42px;
-      color: $colour_white;
-      padding: 0 15px 0 10px;
-      background: url(../images/m-menu-nub.png) right center no-repeat;
-      &.active {
-        background: url(../images/m-menu-nub-r.png) right center no-repeat; } }
-    &.icon-search {
-      height: 42px;
-      width: 42px;
-      margin-left: 10px;
-      background: url(../images/search-icon.png) center no-repeat;
-      &.active {
-        background: url(../images/close.png) center no-repeat; } } } }
+  ul {
+    @include list-reset;
+    li {
+      padding: 0.5em 1em 0 0;
+      a {
+        color: $colour_white;
+        img {
+          vertical-align: middle; } } } } }
 
 // ------------------------------------------------------
 
-#search {
+#header-search {
+  display: none;
   clear: both;
   height: 26px;
   padding: 6px 10px;
-  display: block;
   background: $colour7;
   border-bottom: 2px solid $colour_white;
   input {
@@ -91,11 +73,11 @@ menu#m-top-tools {
     float: left;
     margin-left: 10px;
     background: $colour_black url(../images/search-icon.png) center no-repeat;
+    @include border-radius(5px);
     &:hover {
-      background-color: $colour_blackish; } } }
-
-@media only screen and (min-width: 640px) {
-  #search {
+      background-color: $colour_blackish; } }
+  @media only screen and (min-width: 640px) {
+    display: block;
     position: absolute;
     top: 0;
     right: 0;
@@ -115,6 +97,7 @@ menu#m-top-tools {
 // ------------------------------------------------------
 
 menu#site-user-tools {
+  display: none;
   // clear:both;
   float: right;
   ul {
@@ -139,6 +122,7 @@ menu#site-user-tools {
 
 @media only screen and (min-width: 640px) {
   menu#site-user-tools {
+    display: block;
     position: absolute;
     right: 151px;
     top: 0;
