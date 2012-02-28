@@ -60,7 +60,7 @@ $(function(){
    * Main non AJAX interactions
    */
   // prep
-  $('#main-menu, #search, #mc-embedded-subscribe-form').hide();
+  $('#search, #mc-embedded-subscribe-form').hide();
   $('#search').before('<menu id="m-top-tools"><button class="nav-trigger m-icon-nav">menu</button><button class="search-trigger icon-search">search</button></menu>');
 
   // nav

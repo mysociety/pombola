@@ -896,6 +896,9 @@ menu#site-user-tools ul li a:hover {
     font-size: 12px;
   }
 }
+#main-menu {
+  display: none;
+}
 #main-menu nav {
   width: 100%;
 }
@@ -961,26 +964,9 @@ menu#site-user-tools ul li a:hover {
   text-decoration: none;
 }
 
-@media only screen and (max-width: 640px) {
-  #main-menu nav ul li a {
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555555), color-stop(100%, #000000));
-    background: -webkit-linear-gradient(#555555, #000000);
-    background: -moz-linear-gradient(#555555, #000000);
-    background: -o-linear-gradient(#555555, #000000);
-    background: -ms-linear-gradient(#555555, #000000);
-    background: linear-gradient(#555555, #000000);
-  }
-  #main-menu nav ul li a:hover {
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
-    background: -webkit-linear-gradient(#000000, #555555);
-    background: -moz-linear-gradient(#000000, #555555);
-    background: -o-linear-gradient(#000000, #555555);
-    background: -ms-linear-gradient(#000000, #555555);
-    background: linear-gradient(#000000, #555555);
-  }
-}
 @media only screen and (min-width: 640px) {
   #main-menu {
+    display: block;
     background: black;
     background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
     background: -webkit-linear-gradient(#000000, #555555);

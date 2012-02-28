@@ -1,4 +1,6 @@
 #main-menu {
+  // Don't show this menu at all by default
+  display: none;
   nav {
     width: 100%;
     ul {
@@ -39,14 +41,14 @@
       &:hover {
         text-decoration: none; } } } }
 
-@media only screen and (max-width: 640px) {
-  #main-menu nav ul li a {
-    @include background(linear-gradient($colour_blackish / 1.4, $colour_black));
-    &:hover {
-      @include background(linear-gradient($colour_black, $colour_blackish / 1.4)); } } }
+//  #main-menu nav ul li a {
+//    @include background(linear-gradient($colour_blackish / 1.4, $colour_black));
+//    &:hover {
+//      @include background(linear-gradient($colour_black, $colour_blackish / 1.4)); } }
 
 @media only screen and (min-width: 640px) {
   #main-menu {
+    display: block;
     background: $colour_black;
     @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
     nav {
