@@ -85,51 +85,49 @@ $(function(){
     // auto-advance cycles through featured MPs; it also immediately replaces the
     // featured MP in the page (since we assume that has been frozen by caching)
     var auto_advance_enabled = false;
-    var init_auto_advance_delay = 12000;
-    var auto_advance_delay = init_auto_advance_delay;
-    
+    var auto_advance_delay = 12000;
+        
     function transitionDiv(height) {
       return '<div class="featured-person featured-person-loading" style="height:' +
-        + height + 'px"><p>loading...</p></div>';      
-    }
-
-    // featured-person prev and next clicks: for now, we only have this in one place, so use id
-    // broken out as a function so it can re-invent itself on load
-    // note: any click stops autoadvance (by setting delay to zero)
-    function enableFeaturedPersonNav() {
-      $('.feature-nav > a', '#home-featured-person').click(
-        function(e){
-          e.preventDefault();
-          auto_advance_delay = 0;
-          var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
-          if (m.length==3) { // wee sanity check: found direction [1] and slug [2]
-            $('#home-featured-person')
-              .html(transitionDiv($('#home-featured-person').height()))
-                .load(
-                  "person/featured/" + m[1] + '/' + m[2],
-                  function() {
-                    enableFeaturedPersonNav();
-                  }
-                );
-          }
-        }
-      );
+        + $('#home-featured-person').height() + 'px"><p>loading...</p></div>';      
     }
     
-    enableFeaturedPersonNav();
+    // important to delegate this (with on()) because the contents change each auto-advance
+    $('#home-featured-person').on("click", '.feature-nav > a',
+        function(e, is_auto_advancing){
+          e.preventDefault();
+          if (! is_auto_advancing) { // user clicked
+            auto_advance_enabled = false;
+          }
+          var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
+          if (m.length==3) { // wee sanity check: found direction [1] and slug [2]
+            // fix the container height to stop content below jumping up when contents fadeOut
+            $('#home-featured-person').css("height", $('#home-featured-person').height() + "px");
+            $('.featured-person', '#home-featured-person').fadeOut('fast',
+              function(){
+                 $('#home-featured-person').html(transitionDiv())
+                    .load(
+                      "person/featured/" + m[1] + '/' + m[2],
+                      function() {
+                        $('#home-featured-person').css("height","auto");
+                      }
+                    );
+              })
+          }
+        }
+    );
+    
     if (auto_advance_enabled) {
-      $('#home-featured-person').html(transitionDiv($('#home-featured-person').height())).load(
-          'person/featured/' + Math.floor(Math.random()*900), 
-          function(){enableFeaturedPersonNav();
-      });
-      var timer = window.setTimeout(auto_advance, auto_advance_delay);
+      $('#home-featured-person').html(transitionDiv()).load(
+          'person/featured/' + Math.floor(Math.random()*900)
+      );
       function auto_advance(){
-        if (auto_advance_delay > 0){
-          $('a.feature-next', '#home-featured-person').click();
-          auto_advance_delay = init_auto_advance_delay;
+        if (auto_advance_enabled){
+          $('a.feature-next', '#home-featured-person').trigger("click", true);
           timer = window.setTimeout(auto_advance, auto_advance_delay);
         }
       }
+      var timer = window.setTimeout(auto_advance, auto_advance_delay);
     }
     
     /*
