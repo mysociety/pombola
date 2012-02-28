@@ -8,13 +8,17 @@
     caption-side: top;
     position: relative;
     padding-top: 5px; }
+  div.footer-section {
+    padding: 10px; }
+  h4 {
+    font-size: 120%;
+    border-bottom: 3px solid $colour_middling_grey; }
   p {
     font-style: italic;
     color: $colour_blackish; }
   ul {
     @include list-reset-soft;
     clear: both;
-    margin: 0 10px;
     li {
       border-top: 1px solid $colour_middling_grey;
       padding: 5px 0;
@@ -25,7 +29,7 @@
         border-top: none; } } }
   .subscribe-box {
     display: table-caption;
-    padding: 10px;
+    padding: 20px;
     background: $colour_green;
     h2 {
       color: $colour_white;
@@ -68,23 +72,26 @@
 
 @media only screen and (min-width: 640px) {
   #site-footer {
+    padding: 0 10px;
     >.wrapper {
       display: block;
       padding: 0; }
+    div.footer-section {
+      float: left; 
+      max-width: 250px;
+      width: 30%;
+      }
     ul {
       @include list-reset-soft;
       clear: none;
-      float: left;
-      width: 200px;
       margin: 10px 30px 0 0;
-      li {
-        margin-bottom: 10px; } }
+         }
     .subscribe-box {
       display: block;
       float: right;
       h2 {
         background: none; } } } }
 
-@media only screen and (min-width: 640px) and (max-width: 960px) {
+@media only screen and (min-width: 960px) {
   #site-footer {
-    padding: 0 10px; } }
+    padding: 0; } }
