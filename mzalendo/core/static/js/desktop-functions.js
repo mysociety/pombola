@@ -85,10 +85,11 @@ $(function(){
     // auto-advance cycles through featured MPs; it also immediately replaces the
     // featured MP in the page (since we assume that has been frozen by caching)
     var auto_advance_enabled = false;
-    var auto_advance_delay = 12000;
+    var auto_advance_delay = 12000; // milliseconds
+    var auto_advance_timeout = false;
         
     function transitionDiv(height) {
-      return '<div class="featured-person featured-person-loading" style="height:' +
+      return '<div class="featured-person featured-person-loading" style="height:'
         + $('#home-featured-person').height() + 'px"><p>loading...</p></div>';      
     }
     
@@ -98,6 +99,9 @@ $(function(){
           e.preventDefault();
           if (! is_auto_advancing) { // user clicked
             auto_advance_enabled = false;
+            if (auto_advance_timeout) {
+              clearTimeout(auto_advance_timeout);
+            }
           }
           var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
           if (m.length==3) { // wee sanity check: found direction [1] and slug [2]
@@ -119,15 +123,15 @@ $(function(){
     
     if (auto_advance_enabled) {
       $('#home-featured-person').html(transitionDiv()).load(
-          'person/featured/' + Math.floor(Math.random()*900)
+          'person/featured/' + Math.floor(Math.random()*100) // some random index of featured person
       );
       function auto_advance(){
         if (auto_advance_enabled){
           $('a.feature-next', '#home-featured-person').trigger("click", true);
-          timer = window.setTimeout(auto_advance, auto_advance_delay);
+          auto_advance_timeout = window.setTimeout(auto_advance, auto_advance_delay);
         }
       }
-      var timer = window.setTimeout(auto_advance, auto_advance_delay);
+      auto_advance_timeout = window.setTimeout(auto_advance, auto_advance_delay);
     }
     
     /*
