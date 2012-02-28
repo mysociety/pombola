@@ -872,15 +872,33 @@ menu#site-user-tools ul li.active a:hover {
 
 #main-menu {
   display: none;
+  background: black;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
+  background: -webkit-linear-gradient(#000000, #555555);
+  background: -moz-linear-gradient(#000000, #555555);
+  background: -o-linear-gradient(#000000, #555555);
+  background: -ms-linear-gradient(#000000, #555555);
+  background: linear-gradient(#000000, #555555);
+}
+@media only screen and (min-width: 640px) {
+  #main-menu {
+    display: block;
+  }
 }
 #main-menu nav {
   width: 100%;
+  text-align: center;
 }
 #main-menu nav ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 100%;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  width: auto;
 }
 #main-menu nav ul li {
   list-style-type: none;
@@ -888,30 +906,91 @@ menu#site-user-tools ul li.active a:hover {
   margin: 0;
   border: 0;
 }
+#main-menu nav ul {
+  *display: inline;
+}
 #main-menu nav ul li {
   position: relative;
+  display: inline;
+  float: left;
+  height: 36px;
+  border-right: 2px solid black;
 }
 #main-menu nav ul li a {
   display: block;
+  float: left;
+  font-size: 12px;
   height: 20px;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
+  padding: 8px 7px;
   text-decoration: none;
+  color: white;
   background: black;
-  border-bottom: 2px solid white;
+  border-bottom: 0;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
+  background: -webkit-linear-gradient(#000000, #555555);
+  background: -moz-linear-gradient(#000000, #555555);
+  background: -o-linear-gradient(#000000, #555555);
+  background: -ms-linear-gradient(#000000, #555555);
+  background: linear-gradient(#000000, #555555);
 }
 #main-menu nav ul li a:hover {
   background: #777777;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555555), color-stop(100%, #000000));
+  background: -webkit-linear-gradient(#555555, #000000);
+  background: -moz-linear-gradient(#555555, #000000);
+  background: -o-linear-gradient(#555555, #000000);
+  background: -ms-linear-gradient(#555555, #000000);
+  background: linear-gradient(#555555, #000000);
 }
-#main-menu nav ul li:last-child a, #main-menu nav ul li.last a {
-  border-bottom: none;
+#main-menu nav ul li:last-child {
+  border-right: 0;
 }
 #main-menu nav ul li ul {
   position: absolute;
   z-index: 20;
   left: -999999px;
+}
+#main-menu nav ul li.active > a {
+  background: #f6f6f6;
+  color: #444;
+  border-left: 1px solid #d4d4d4;
+  border-right: 1px solid #d4d4d4;
+  border-top: 1px solid #d4d4d4;
+  padding: 9px 6px 10px 6px;
+}
+#main-menu nav ul li:hover ul {
+  left: 0;
+  top: 36px;
+  text-align: left;
+  width: 193px;
+  border-left: 1px solid #d4d4d4;
+  border-right: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+}
+#main-menu nav ul li:hover ul li {
+  display: block;
+  float: none;
+  height: auto;
+  border: none;
+}
+#main-menu nav ul li:hover ul li a {
+  font-size: 13px;
+  color: #444;
+  background: #f6f6f6;
+  height: auto;
+  float: none;
+}
+#main-menu nav ul li:hover ul li a:hover {
+  background: #d4d4d4;
+}
+@media (min-width: 720px) {
+  #main-menu nav ul li a {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+  #main-menu nav ul li.active > a {
+    padding: 7px 9px 8px 9px;
+  }
 }
 
 .m-sub-menu {
@@ -936,115 +1015,6 @@ menu#site-user-tools ul li.active a:hover {
 }
 .m-sub-menu li a:hover {
   text-decoration: none;
-}
-
-@media only screen and (min-width: 640px) {
-  #main-menu {
-    display: block;
-    background: black;
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
-    background: -webkit-linear-gradient(#000000, #555555);
-    background: -moz-linear-gradient(#000000, #555555);
-    background: -o-linear-gradient(#000000, #555555);
-    background: -ms-linear-gradient(#000000, #555555);
-    background: linear-gradient(#000000, #555555);
-  }
-  #main-menu nav {
-    text-align: center;
-  }
-  #main-menu nav ul {
-    display: -moz-inline-box;
-    -moz-box-orient: vertical;
-    display: inline-block;
-    vertical-align: middle;
-    *vertical-align: auto;
-    width: auto;
-  }
-  #main-menu nav ul {
-    *display: inline;
-  }
-  #main-menu nav ul li {
-    display: inline;
-    float: left;
-    height: 40px;
-    border-right: 2px solid black;
-  }
-  #main-menu nav ul li:last-child, #main-menu nav ul li.last {
-    border-right: 0;
-  }
-  #main-menu nav ul li a {
-    float: left;
-    border-bottom: 0;
-    font-size: 16px;
-    font-weight: normal;
-    padding: 10px 16px;
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
-    background: -webkit-linear-gradient(#000000, #555555);
-    background: -moz-linear-gradient(#000000, #555555);
-    background: -o-linear-gradient(#000000, #555555);
-    background: -ms-linear-gradient(#000000, #555555);
-    background: linear-gradient(#000000, #555555);
-  }
-  #main-menu nav ul li a:hover {
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555555), color-stop(100%, #000000));
-    background: -webkit-linear-gradient(#555555, #000000);
-    background: -moz-linear-gradient(#555555, #000000);
-    background: -o-linear-gradient(#555555, #000000);
-    background: -ms-linear-gradient(#555555, #000000);
-    background: linear-gradient(#555555, #000000);
-  }
-  #main-menu nav ul li.active > a {
-    background: #f6f6f6;
-    color: #444;
-    border-left: 1px solid #d4d4d4;
-    border-right: 1px solid #d4d4d4;
-    border-top: 1px solid #d4d4d4;
-    padding: 9px 15px 10px 15px;
-  }
-  #main-menu nav ul li:hover ul {
-    left: 0;
-    top: 40px;
-    text-align: left;
-    width: 193px;
-    border-left: 1px solid #d4d4d4;
-    border-right: 1px solid #d4d4d4;
-    border-bottom: 1px solid #d4d4d4;
-  }
-  #main-menu nav ul li:hover ul li {
-    display: block;
-    float: none;
-    height: auto;
-    border: none;
-  }
-  #main-menu nav ul li:hover ul li a {
-    font-size: 14px;
-    color: #444;
-    background: #f6f6f6;
-    height: auto;
-    float: none;
-  }
-  #main-menu nav ul li:hover ul li a:hover {
-    background: #d4d4d4;
-  }
-}
-@media only screen and (min-width: 640px) and (max-width: 960px) {
-  #main-menu nav ul li {
-    height: 36px;
-  }
-  #main-menu nav ul li a {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
-  #main-menu nav ul li.active > a {
-    padding: 7px 9px 8px 9px;
-  }
-  #main-menu nav ul li:hover ul {
-    top: 36px;
-    width: 180px;
-  }
-  #main-menu nav ul li:hover ul li a {
-    font-size: 12px;
-  }
 }
 
 #breadcrumb,
