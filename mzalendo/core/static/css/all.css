@@ -836,49 +836,48 @@ menu#site-user-tools ul li a:hover {
     background: #e6e6e6 url(../images/login-arrows.png) 54px 11px no-repeat;
   }
 }
-@media only screen and (min-width: 640px) {
-  #login-box {
-    z-index: 1;
-    position: absolute;
-    right: 25px;
-    top: 26px;
-    display: none;
-    background: #e6e6e6;
-    border-left: 1px solid #666666;
-    border-right: 1px solid #666666;
-    border-bottom: 1px solid #666666;
-    width: 175px;
-    padding: 10px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
-    -o-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
-  }
-  #login-box #login {
-    padding: 0;
-    margin: 0;
-    width: auto;
-  }
-  #login-box #login form {
-    width: auto;
-  }
-  #login-box #login form input#id_username,
-  #login-box #login form input#id_password {
-    width: 163px;
-    margin: 0 0 10px 0;
-  }
-  #login-box #login form input.login-button {
-    margin: 0;
-  }
-  #login-box #login form p.forgot-register {
-    margin: 0;
-    font-size: 11px;
-  }
-  #login-box #login .login-social {
-    margin: 0;
-    font-size: 12px;
-  }
+#login-box {
+  z-index: 1;
+  position: absolute;
+  right: 25px;
+  top: 26px;
+  display: none;
+  background: #e6e6e6;
+  border-left: 1px solid #666666;
+  border-right: 1px solid #666666;
+  border-bottom: 1px solid #666666;
+  width: 175px;
+  padding: 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
+  -o-box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 5px 4px;
 }
+#login-box #login {
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
+#login-box #login form {
+  width: auto;
+}
+#login-box #login form input#id_username,
+#login-box #login form input#id_password {
+  width: 163px;
+  margin: 0 0 10px 0;
+}
+#login-box #login form input.login-button {
+  margin: 0;
+}
+#login-box #login form p.forgot-register {
+  margin: 0;
+  font-size: 11px;
+}
+#login-box #login .login-social {
+  margin: 0;
+  font-size: 12px;
+}
+
 #main-menu {
   display: none;
 }

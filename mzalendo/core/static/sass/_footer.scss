@@ -77,15 +77,13 @@
       display: block;
       padding: 0; }
     div.footer-section {
-      float: left; 
+      float: left;
       max-width: 250px;
-      width: 30%;
-      }
+      width: 30%; }
     ul {
       @include list-reset-soft;
       clear: none;
-      margin: 10px 30px 0 0;
-         }
+      margin: 10px 30px 0 0; }
     .subscribe-box {
       display: block;
       float: right;
