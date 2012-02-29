@@ -1,0 +1,32 @@
+.pagination {
+  overflow: hidden;
+  margin: 10px 0;
+  a,
+  span {
+    @include inline-block;
+    padding: 6px 10px;
+    background: #F6F6F6;
+    text-decoration: none;
+    border: 2px solid #F6F6F6;
+    &:hover {
+      background-color: #333333;
+      color: #ffffff;
+      border: 2px solid #333333; }
+    &.prev {
+      padding-left: 34px;
+      background-position: 5px -67px;
+      background-repeat: no-repeat;
+      background-image: url(../images/pagination.png); }
+    &.next {
+      padding-right: 34px;
+      background-position: right 3px;
+      background-repeat: no-repeat;
+      background-image: url(../images/pagination.png); } }
+  .disabled {
+    display: none; }
+  .current {
+    background: none;
+    &:hover {
+      color: #444444;
+      background: none;
+      border: 2px solid #F6F6F6; } } }

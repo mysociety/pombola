@@ -22,13 +22,7 @@
         
         {% endcomment %}
 
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/basic.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen, handheld" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mobile.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="only screen and (min-width: 320px) and (max-width: 640px)" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="only screen and (min-width: 640px)" />
-
-        <!--[if lt IE 9]>
-            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/desktop.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
-        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/all.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen, handheld" />
 
         <script type="text/javascript" charset="utf-8">
             window.mzalendo_settings = {
@@ -46,6 +40,10 @@
         </script>
         
 
+        <!--[if (lt IE 9) & (!IEMobile)]>
+            <script src="{{ STATIC_URL }}js/respond.v1.1.0.min.js"></script>
+        <![endif]-->
+
         <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
         <script src="{{ STATIC_URL }}js/loader.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
@@ -62,10 +60,26 @@
         <header id="site-header">
             <div class="wrapper">
                 <a href="{% url home %}" id="logo">Mzalendo</a>
-                <form action="{% url core_search %}" method="get" id="search">
+
+                <menu id="mobile-top-tools">
+                    <ul>
+                        <li>
+                            {% if request.user.is_authenticated  %}
+                                <a href="{% url django.contrib.auth.views.logout %}">logout</a>
+                            {% else %}
+                                <a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a>
+                            {% endif %}
+                        </li>
+                        <li><a href="#footer-menu" class="m-icon-nav">menu</a></li>
+                        <li><a href="{% url core_search %}" class="icon-search"><img src="{{ STATIC_URL }}images/search-icon.png" alt="search"/></a></li>
+                    </ul>
+                </menu>
+
+                <form action="{% url core_search %}" method="get" id="header-search">
                     <input class="search-autocomplete-name" type="text" name="q" placeholder="search&hellip;" />
                     <button type="submit">Submit</button>
                 </form>
+                
                 <menu id="site-user-tools">
                     <ul>
                         {% block menu_login_options %}
@@ -84,99 +98,9 @@
         <div id="main-menu">
             <nav class="wrapper">
                 <ul>
-                    <li><a href="{% url home %}">Home</a></li>
-                    <li><a href="{% url info_page slug='democracy-resources' %}">Democracy Resources</a>
-                        <ul id="democracy-resources">
-                            <li>
-                                <a href="{% url info_page slug='citizens-rights' %}">Citizens Rights &amp; Responsibilities</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='how-democracy-works' %}">How Our Democracy Works</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='democracy-faq' %}">Democracy FAQs</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='constitution-2010' %}">Constitution 2010</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='election-legislation' %}">Election Legislation</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='democracy-documents' %}">Democracy Documents</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="{% url politician_list %}">Politicians</a></li>
-                    <li><a href="{% url info_page slug='parliament-overview' %}">Parliament</a>
-                        <ul id="parliament-overview">
-                            <li>
-                                <a href="{% url info_page slug='parliament-overview' %}">Parliament Overview</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='ministry-overview' %}">Ministry Overview</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='committee-overview' %}">Committee Overview</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='bills-overview' %}">Bills Overview</a>
-                            </li>
-                            <li>
-                                <a href="{% url hansard:index %}">Hansard</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='political-parties' %}">Political Parties</a>
-                            </li>
-                        </ul>                    
-                    </li>
-                    <li><a href="{% url info_page slug='places-overview' %}">Places</a>
-                        <ul id="places-overview">
-                            <li>
-                                <a href="{% url info_page slug='places-overview' %}">Places Overview</a>
-                            </li>
-                            <li>
-                                <a href="{% url constituency_list %}">Constituencies</a>
-                            </li>
-                            <li>
-                                <a href="{% url county_list %}">Counties</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="{% url info_page slug='2012-overview' %}">2012</a>
-                        <ul id="2012">
-                            <li>
-                                <a href="{% url info_page slug='2012-overview' %}">2012 Overview</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='2012-aspirants' %}">Aspirants</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="http://mzalendo.com/blog/">Blog</a></li>
-                    <li><a href="{% url info_page slug='newsletter' %}">Newsletter</a></li>
-                    <li><a href="{% url info_page slug='mzalendo-overview' %}">About</a>
-                        <ul id="mzalendo-overview">
-                            <li>
-                                <a href="{% url info_page slug='mzalendo-overview' %}">Mzalendo Overview</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='site-faq' %}">Site FAQs</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='policies' %}">Policies</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='partners' %}">Partners</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='scorecard-faq' %}">Scorecard FAQs</a>
-                            </li>
-                            <li>
-                                <a href="{% url info_page slug='contact' %}">Contact</a>
-                            </li>
-                        </ul>
-                    </li>
+                    {% with include_sub_menu_entries=1 %}
+                        {% include 'menu_entries.html' %}
+                    {% endwith %}
                 </ul>
             </nav>
         </div>
@@ -200,26 +124,33 @@
 
         <footer id="site-footer">
             <div class="wrapper">
-                <ul class="nav">
-                    <li><a href="{% url person_list %}">People</a></li>
-                    <li><a href="{% url organisation_list %}">Organisations</a></li>
-                    <li><a href="{% url place_list %}">Places</a></li>
-                </ul>
 
-                <ul class="utilities">
-                    <li><a href="{% url info_page slug='policies' %}">Privacy</a></li>
-                    <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
+                <div id="footer-menu" class="footer-section">
+                    <h4>Mzalendo</h4>
+                    <ul class="nav">
+                        {% with include_sub_menu_entries=0 %}
+                            {% include 'menu_entries.html' %}
+                        {% endwith %}
+                    </ul>
+                </div>
 
-                    {% if object and request.user.is_staff %}
-                        <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
-                    {% endif %}
-                    
-                    {% if settings.STAGING %}
-                        <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
-                    {% endif %}
-                </ul>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul class="utilities">
+                        <li><a href="{% url info_page slug='policies' %}">Privacy</a></li>
+                        <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
+                        
+                        {% if object and request.user.is_staff %}
+                            <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
+                        {% endif %}
+                        
+                        {% if settings.STAGING %}
+                            <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+                        {% endif %}
+                    </ul>
+                </div>
 
-                <div class="subscribe-box">
+                <div class="footer-section subscribe-box">
                     <h2>Email Newsletter</h2>
 
                     <form action="http://mzalendo.us2.list-manage.com/subscribe/post?u=c0b4940a102336a932a5c30c4&amp;id=9963e6377d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">

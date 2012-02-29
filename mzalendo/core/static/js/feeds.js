@@ -71,8 +71,9 @@
 
                         // console.debug( tweet_data );
 
-                        var pub_date = new Date( tweet_data.created_at );
-
+                        // FIXME - should parse these in and then output in the user's timezone
+                        var date_string = tweet_data.created_at.replace( /\+.*$/, '' );
+                        
                         var $tweet = $( '<div class="tw-wrap" />');
 
                         var tweet_html = $('<div/>').text( tweet_data.text ).html();
@@ -88,7 +89,7 @@
                         $tweet.append( $('<p/>').html( tweet_html ) );
                             
                         var tweet_url = 'http://twitter.com/' + screen_name + '/status/' + tweet_data.id_str;                        
-                        $tweet.append( '<p class="meta"><a href="' + tweet_url + '">' + pub_date.toDateString() + '</a></p>');
+                        $tweet.append( '<p class="meta"><a href="' + tweet_url + '">' + date_string + '</a></p>');
 
                         $twitter_feed
                             .append($tweet)

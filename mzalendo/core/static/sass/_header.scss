@@ -1,0 +1,202 @@
+#site-header {
+  clear: both;
+  background: $colour_green;
+  @include background(linear-gradient($colour_green / 0.75, $colour_green));
+  .wrapper {
+    overflow: hidden; } }
+
+@media only screen and (min-width: 640px) {
+  #site-header {
+    height: 60px;
+    &.down {
+      height: 80px; }
+    .wrapper {
+      position: relative;
+      overflow: visible; } } }
+
+// ------------------------------------------------------
+
+#logo {
+  display: block;
+  margin-left: 10px;
+  float: left;
+  height: 42px;
+  text-indent: -999999em;
+  width: 147px;
+  background: url(../images/m-logo.png) 0 center no-repeat;
+  @media only screen and (min-width: 640px) {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    height: 34px;
+    width: 418px;
+    background: url(../images/d-logo.png) 0 center no-repeat;
+    &.down {
+      width: 600px;
+      height: 50px;
+      background: url(../images/down-logo.png) 0 center no-repeat; } } }
+
+// ------------------------------------------------------
+
+menu#mobile-top-tools {
+  @media only screen and (min-width: 640px) {
+    display: none; }
+  float: right;
+  ul {
+    @include list-reset;
+    li {
+      padding: 0.5em 1em 0 0;
+      a {
+        color: $colour_white;
+        img {
+          vertical-align: middle; } } } } }
+
+// ------------------------------------------------------
+
+#header-search {
+  display: none;
+  @media only screen and (min-width: 640px) {
+    display: block; }
+  float: right;
+  background: transparent;
+  margin: 5px 5px 5px 15px;
+  height: auto;
+  border: none;
+  input {
+    padding: 1px 4px 1px 8px;
+    border: 1px solid $colour_grey;
+    height: 22px;
+    @include border-radius(5px 0 0 5px);
+    float: left;
+    width: 117px;
+    border: 1px solid $colour_black;
+    font-size: 14px; }
+  button {
+    float: left;
+    @include button-reset;
+    background: $colour_black url(../images/search-icon.png) center no-repeat;
+    width: 26px;
+    height: 26px;
+    margin: 0 0 0 0;
+    @include border-radius(0 5px 5px 0);
+    &:hover {
+      background-color: $colour_blackish; } } }
+
+// ------------------------------------------------------
+
+menu#site-user-tools {
+  // Only display this for wide screens
+  display: none;
+  @media only screen and (min-width: 640px) {
+    display: block; }
+  float: right;
+  background: transparent;
+  margin: 5px;
+  height: auto;
+  border: none;
+  ul {
+    @include list-reset-soft;
+    li {
+      padding: 10px;
+      &.logged-in-name {
+        display: none; }
+      a {
+        color: $colour_white;
+        text-decoration: none;
+        &:hover {
+          color: $colour_black; } } } }
+  ul {
+    @include list-reset;
+    li.login,
+    li.logged-in,
+    li.login a,
+    li.logged-in a {
+      padding: 0;
+      color: $colour_white;
+      background: none;
+      border: none;
+      font: {
+        size: 13px;
+        weight: normal; };
+      text-decoration: none;
+      a:hover {
+        background: none;
+        text-decoration: underline; } }
+    li.login {
+      text-transform: uppercase;
+      width: 70px;
+      a {
+        font-size: 11px;
+        padding: 3px 25px 3px 10px;
+        @include border-radius(2px 0 0 2px);
+        background: black url(../images/login-arrows.png) 54px -19px no-repeat;
+        @include background(url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#707070, black));
+        &:hover {
+          text-decoration: none;
+          background: #707070 url(../images/login-arrows.png) 54px -19px no-repeat;
+          @include background(url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(black, #707070)); } } }
+    li.logged-in {
+      text-transform: uppercase;
+      a {
+        font-size: 9px;
+        margin: 3px;
+        padding: 0 7px;
+        @include border-radius(5px);
+        @include background(linear-gradient(#707070, black));
+        &:hover {
+          text-decoration: none;
+          background: #707070 no-repeat;
+          @include background(linear-gradient(black, #707070)); } } }
+    li.logged-in-name {
+      display: block;
+      padding: 3px;
+      color: #fff; }
+    li.active {
+      position: relative;
+      border-top: 1px solid #666666;
+      border-left: 1px solid #666666;
+      // border-right:1px solid #666666;
+      z-index: 2;
+      a {
+        color: $colour_grey;
+        @include border-radius(0);
+        background: $colour7 url(../images/login-arrows.png) 54px 11px no-repeat;
+        &:hover {
+          color: $colour_black;
+          background: $colour7 url(../images/login-arrows.png) 54px 11px no-repeat; } } } } }
+
+// ------------------------------------------------------
+
+#login-box {
+  display: none;
+  z-index: 1;
+  // FIXME - should not be absolutely positioning this - should determine
+  // position in JS when displaying it.
+  position: absolute;
+  right: 56px;
+  top: 32px;
+  background: $colour7;
+  border-left: 1px solid #666666;
+  border-right: 1px solid #666666;
+  border-bottom: 1px solid #666666;
+  width: 175px;
+  padding: 10px;
+  @include box-shadow(rgba(0, 0, 0, 0.5) 0px 2px 12px);
+  #login {
+    padding: 0;
+    margin: 0;
+    width: auto;
+    form {
+      width: auto;
+      input#id_username,
+      input#id_password {
+        width: 163px;
+        margin: 0 0 10px 0; }
+      input.login-button {
+        margin: 0; }
+      p.forgot-register {
+        margin: 0;
+        font-size: 11px; } }
+    .login-social {
+      margin: 0;
+      font-size: 12px; } } }

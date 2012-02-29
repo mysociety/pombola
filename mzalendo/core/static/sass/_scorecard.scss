@@ -1,0 +1,15 @@
+h3.scorecard-overall {
+  display: block;
+  font-weight: bold;
+  color: $colour_black;
+  span {
+    font-weight: normal;
+    display: block;
+    height: 44px;
+    background: url(../images/m-smiley-sprite.png) right -3px no-repeat;
+    &.score-overall-good {
+      background-position: right -3px; }
+    &.score-overall-average {
+      background-position: right -53px; }
+    &.score-overall-bad {
+      background-position: right -103px; } } }

@@ -1,4 +1,4 @@
-// -------------------------------------------------------------- 
+// --------------------------------------------------------------
 
 // _CORE CSS
 // mzalendo.com
@@ -13,199 +13,177 @@
 // --------------------------------------------------------------
 @import "compass";
 
-
 // 1. VARIABLES
 // --------------------------------------------------------------
 // Green
-// $colour1: #46A81B;
-$colour1: #009245;
+// $colour_green: #46A81B;
+$colour_green: #009245;
 
 // Light green
-$colour2: #87C43C;
+$colour_light_green: #87c43c;
 
 // Blue
-$colour3: #1B7999;
+//$colour3: #1b7999;
 
 // Black ish
-$colour4: #777777;
+$colour_blackish: #777777;
 
 // Black
-$colour5: #000000;
+$colour_black: black;
 
 // White
-$colour6: #FFFFFF;
+$colour_white: white;
 
 // Grey
-$colour7: #E6E6E6;
+$colour7: #e6e6e6;
 
 // Darker Grey
-$colour8: #808080;
+$colour_grey: gray;
 
 // Lighter Grey
-$colour9: #F6F6F6;
+$colour_light_grey: #f6f6f6;
 
 // Light Black
-$colour10: #2E2E2E;
+$colour_dark_grey: #2e2e2e;
 
 // Red
-$colour11: #D40000;
+$colour_red: #d40000;
 
 // Lighterer Grey
-$colour12: #F7F7F7;
+$colour_lighter_grey: #f7f7f7;
 
 // Middling grey
-$colour13: #B3B3B3;
+$colour_middling_grey: #b3b3b3;
 
 // average amber
-$colour14: #F9A326;
+$colour_amber: #f9a326;
+
+// Would like to add the size for the media queries as variables too, but that
+// is not currently supported. Should be from Sass 3.2.0 onwards though.
 
 // 2. MIXINS
 // --------------------------------------------------------------
 // Green Gradient
 @mixin gradient1 {
-  background:$colour2;
-  @include background (linear-gradient($colour2, $colour1));
-}
+  background: $colour_light_green;
+  @include background(linear-gradient($colour_light_green, $colour_green)); }
+
 @mixin gradient1b {
-  background:$colour1;
-  @include background (linear-gradient($colour1, $colour2));
-}
+  background: $colour_green;
+  @include background(linear-gradient($colour_green, $colour_light_green)); }
 
 // Light Grey Gradient
 @mixin gradient2 {
-  background:#ebebeb;
-  @include background(linear-gradient(#ebebeb, #f5f5f5));
-}
+  background: #ebebeb;
+  @include background(linear-gradient(#ebebeb, #f5f5f5)); }
+
 @mixin gradient2b {
-  background:#f5f5f5;
-  @include background(linear-gradient(#f5f5f5, #ebebeb));
-}
+  background: #f5f5f5;
+  @include background(linear-gradient(#f5f5f5, #ebebeb)); }
 
 // Button reset
 @mixin button-reset {
-  cursor:pointer;
-  display:block;
-  border:none;
-  padding:0;
-  margin:0;
+  cursor: pointer;
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
   width: auto;
   height: auto;
-  text-indent:-999999px;
-  @include border-radius(2px);
-}
+  text-indent: -999999px;
+  @include border-radius(2px); }
 
 @mixin button-reset-text {
   @include inline-block;
-  cursor:pointer;
-  background:$colour8;
-  color:$colour6;
+  cursor: pointer;
+  background: $colour_grey;
+  color: $colour_white;
   text: {
-    decoration:none;
-    transform:uppercase;
-  }
+    decoration: none;
+    transform: uppercase; };
   font: {
-    size:10px;
-    weight:bold;
-  }
-  line-height:1;
-  padding:5px 8px;
+    size: 10px;
+    weight: bold; };
+  line-height: 1;
+  padding: 5px 8px;
   @include border-radius(2px);
   &:hover {
-    background:$colour8/0.8;
-    color:$colour6;
-    text-decoration:none;
-  }
-}
+    background: $colour_grey / 0.8;
+    color: $colour_white;
+    text-decoration: none; } }
+
 @mixin button-text-red {
   @include button-reset-text;
-  background:$colour11;
+  background: $colour_red;
   &:hover {
-    background:$colour11/0.7;
-  }
-}
+    background: $colour_red / 0.7; } }
+
 @mixin button-text-green {
   @include button-reset-text;
-  background:$colour2;
+  background: $colour_light_green;
   &:hover {
-    background:$colour2/0.9;
-  }
-}
+    background: $colour_light_green / 0.9; } }
 
 @mixin big-button-reset-text($rad: 5px) {
   @include button-reset-text;
-  text-transform:none;
-  font-size:14px;
-  padding:5px 8px;
+  text-transform: none;
+  font-size: 14px;
+  padding: 5px 8px;
   @include inline-block;
-  @include border-radius($rad);
-}
+  @include border-radius($rad); }
 
 @mixin big-button-text-green {
   @include big-button-reset-text;
-  background:$colour2;
-  @include background(linear-gradient($colour2/0.9, $colour2));
+  background: $colour_light_green;
+  @include background(linear-gradient($colour_light_green / 0.9, $colour_light_green));
   &:hover {
-    background:$colour2/0.9;
-    @include background(linear-gradient($colour2, $colour2/0.9));
-  }
-}
+    background: $colour_light_green / 0.9;
+    @include background(linear-gradient($colour_light_green, $colour_light_green / 0.9)); } }
 
 @mixin big-button-text-red {
   @include big-button-reset-text;
-  background:$colour11;
-  @include background(linear-gradient($colour11/0.7, $colour11));
+  background: $colour_red;
+  @include background(linear-gradient($colour_red / 0.7, $colour_red));
   &:hover {
-    background:$colour11/0.7;
-    @include background(linear-gradient($colour11, $colour11/0.7));
-  }
-}
-
-
+    background: $colour_red / 0.7;
+    @include background(linear-gradient($colour_red, $colour_red / 0.7)); } }
 
 // list resets
 @mixin list-reset-copy {
-  padding-left:30px;
-  margin-bottom:20px;
+  padding-left: 30px;
+  margin-bottom: 20px;
   li {
-    font-size:14px;
-    line-height:20px;
-    list-style:disc;
-    margin-bottom:10px;
-    background:none;
-    padding:0;
-  }
-}
+    font-size: 14px;
+    line-height: 20px;
+    list-style: disc;
+    margin-bottom: 10px;
+    background: none;
+    padding: 0; } }
 
 @mixin list-reset-soft {
-  list-style-type:none;
+  list-style-type: none;
   padding: 0;
   margin: 0;
-  li{
-    list-style-type:none;
+  li {
+    list-style-type: none;
     padding: 0;
     margin: 0;
-    border: 0;
-  }
-}
+    border: 0; } }
 
 @mixin list-reset {
-  list-style-type:none;
+  list-style-type: none;
   padding: 0;
   margin: 0;
-  li{
-    list-style-type:none;
+  li {
+    list-style-type: none;
     padding: 0;
     margin: 0;
     border: 0;
-    float:left;
-    display:inline;
+    float: left;
+    display: inline;
     a {
-      float:left;
-      display:block;
-    }
-  }
-}
-
+      float: left;
+      display: block; } } }
 
 // .ellipsis {
 //   text-overflow: ellipsis;

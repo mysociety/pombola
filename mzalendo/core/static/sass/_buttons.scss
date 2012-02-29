@@ -1,0 +1,32 @@
+.btn-text-green {
+  @include button-text-green; }
+
+.btn-text-red {
+  @include button-text-red; }
+
+.big-btn-text-green {
+  @include big-button-text-green; }
+
+.big-btn-text-red {
+  @include big-button-text-red; }
+
+.big-btn-text-fb {
+  @include big-button-reset-text;
+  @include background(linear-gradient(#0042c2 / 0.9, #0042c2));
+  &:hover {
+    @include background(linear-gradient(#0042c2, #0042c2 / 0.9)); } }
+
+.big-btn-text-tw {
+  @include big-button-reset-text;
+  @include background(linear-gradient(#74cfdc / 0.95, #74cfdc));
+  &:hover {
+    @include background(linear-gradient(#74cfdc, #74cfdc / 0.95)); } }
+
+.btn-question {
+  display: block;
+  width: 15px;
+  height: 15px;
+  text-indent: -999999px;
+  background: url(../images/question.png) 0 0 no-repeat;
+  &:hover {
+    background-position: 0 -21px; } }
