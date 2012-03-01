@@ -165,7 +165,7 @@
     {% endcomment %}
 
             {% if object.is_constituency %}
-                <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects</a></h2>
+                <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects ({{ object.project_set.count }})</a></h2>
                 <div class="tab" id="cdf-projects">
                     {% include "projects/place_summary.html" %}
                 </div>
