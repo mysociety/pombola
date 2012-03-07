@@ -30,8 +30,8 @@
                 facebook_app_id:           '{{ settings.FACEBOOK_APP_ID }}',
                 static_url:                '{{ STATIC_URL }}',
                 static_generation_number:  '{{ settings.STATIC_GENERATION_NUMBER }}',
-                extra_js: [],
-            }
+                extra_js: []
+            };
 
             {% block extra_js_to_load %}
                 // no extra js added to be loaded
