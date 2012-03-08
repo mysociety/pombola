@@ -9,10 +9,13 @@
     position: relative;
     padding-top: 5px; }
   div.footer-section {
+    border-top: 2px solid $colour_green;
+    &:first-child {
+      border: none; }
     padding: 10px; }
   h4 {
     font-size: 120%;
-    border-bottom: 3px solid $colour_middling_grey; }
+    color: $colour_green; }
   p {
     font-style: italic;
     color: $colour_blackish; }
@@ -20,13 +23,9 @@
     @include list-reset-soft;
     clear: both;
     li {
-      border-top: 1px solid $colour_middling_grey;
       padding: 5px 0;
       a:hover {
-        text-decoration: none; } }
-    &.nav {
-      li:first-child {
-        border-top: none; } } }
+        text-decoration: none; } } }
   .subscribe-box {
     display: table-caption;
     padding: 20px;
@@ -77,6 +76,7 @@
       display: block;
       padding: 0; }
     div.footer-section {
+      border: none;
       float: left;
       max-width: 250px;
       width: 30%; }
