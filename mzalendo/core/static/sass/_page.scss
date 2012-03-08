@@ -35,15 +35,18 @@
       margin: 0; }
     p {
       font-style: italic; } }
-  .profile-pic {
+  .profile-pic, .profile-map {
     position: absolute;
     top: 10px;
     left: 10px;
-    width: 100px;
-    img,
-    #map_canvas {
+    width: 100px; }
+  .profile-pic {
+    img {
       width: 100px;
       height: 100px; } }
+  #map_canvas {
+    width: 100px;
+    height: 100px; }
   .small-container {
     h3.scorecard-overall {
       padding: 10px;
@@ -241,13 +244,14 @@
           size: 12px; };
         margin: 0;
         text-transform: uppercase; } }
-    .profile-pic {
+    .profile-pic, .profile-map {
       height: 210px;
       width: 210px;
       position: absolute;
       top: 0;
       left: 0;
-      overflow: hidden;
+      overflow: hidden; }
+    .profile-pic {
       img {
         width: 100%;
         width: auto;
@@ -255,10 +259,10 @@
         max-width: 200px;
         max-height: 200px;
         max-width: 210px;
-        max-height: 210px; }
-      #map_canvas {
-        width: 200px;
-        height: 200px; } }
+        max-height: 210px; } }
+    #map_canvas {
+      width: 200px;
+      height: 200px; }
     .small-container {
       max-width: 510px;
       clear: left;

@@ -1262,14 +1262,17 @@ menu#site-user-tools ul li.active a:hover {
 #page .title-space p {
   font-style: italic;
 }
-#page .profile-pic {
+#page .profile-pic, #page .profile-map {
   position: absolute;
   top: 10px;
   left: 10px;
   width: 100px;
 }
-#page .profile-pic img,
-#page .profile-pic #map_canvas {
+#page .profile-pic img {
+  width: 100px;
+  height: 100px;
+}
+#page #map_canvas {
   width: 100px;
   height: 100px;
 }
@@ -1568,7 +1571,7 @@ menu#site-user-tools ul li.active a:hover {
     margin: 0;
     text-transform: uppercase;
   }
-  #page .profile-pic {
+  #page .profile-pic, #page .profile-map {
     height: 210px;
     width: 210px;
     position: absolute;
@@ -1585,7 +1588,7 @@ menu#site-user-tools ul li.active a:hover {
     max-width: 210px;
     max-height: 210px;
   }
-  #page .profile-pic #map_canvas {
+  #page #map_canvas {
     width: 200px;
     height: 200px;
   }
