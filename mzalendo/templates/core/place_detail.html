@@ -16,25 +16,24 @@
         {% endif %}
     </div>
     
-    <div class="profile-pic">
-        {% if object.mapit_area %}
-
+    {% if object.mapit_area %}
+        <div class="profile-map">
             <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
-
-            <div id="map_canvas"></div>
+        
+            <div id="map_canvas" width="300" height="300"></div>
             <script type="text/javascript" charset="utf-8">
                 add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url mapit_index %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );            
             </script>
-        {% else %}
-            <div class="profile-pic">
-                {% thumbnail object.primary_image "200x200" as im %}
-                <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-                {% empty %}
-                <img src="{{STATIC_URL}}images/place-200x200.jpg" />
-                {% endthumbnail %}        
-            </div>        
-        {% endif %}
-    </div>
+        </div>
+    {% else %}
+        <div class="profile-pic">
+            {% thumbnail object.primary_image "200x200" as im %}
+            <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% empty %}
+            <img src="{{STATIC_URL}}images/place-200x200.jpg" />
+            {% endthumbnail %}        
+        </div>        
+    {% endif %}
 
     <div class="social-and-tools">
         {% include 'core/social_tools.html' %}
@@ -82,27 +81,27 @@
             <h2 class="tab-nav" rel="#related-places"><a href="/">Related Places</a></h2>
             <div class="tab" id="related-places">
 
-	    {# Do we want to display more than just the parent? #}
+	        {# Do we want to display more than just the parent? #}
 
             {% if object.parent_place %}
                 {{ object.name }} is contained in
                 <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
-		{% if object.parent_place.kind.slug != 'country' %}
+		        {% if object.parent_place.kind.slug != 'country' %}
                     {{ object.parent_place.kind.name }}.
                 {% endif %}
             {% endif %}
 
             {% if object.child_places.count %}
                 <div class="content_box">
-		    <h3>Areas within {{ object.name }}</h3>
+		            <h3>Areas within {{ object.name }}</h3>
 		  
-		    <ul class="listing">
-		        {% for child in object.child_places.all %}
-                            <li>
-                                <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
-                                {{ child.kind.name }}
-                            </li>
-		        {% endfor %}
+		            <ul class="listing">
+		            {% for child in object.child_places.all %}
+                        <li>
+                            <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+                            {{ child.kind.name }}
+                        </li>
+		            {% endfor %}
                     </ul>            
                 </div>
             {% endif %}
@@ -110,31 +109,6 @@
             </div>
 
             {% include 'comments/detail_page_comments.html' %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     {% comment %}
@@ -165,7 +139,7 @@
     {% endcomment %}
 
             {% if object.is_constituency %}
-                <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects</a></h2>
+                <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects ({{ object.project_set.count }})</a></h2>
                 <div class="tab" id="cdf-projects">
                     {% include "projects/place_summary.html" %}
                 </div>

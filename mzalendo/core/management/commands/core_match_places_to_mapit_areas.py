@@ -13,10 +13,13 @@ class Command(NoArgsCommand):
     help = 'Link places to areas in mapit'
 
     def handle_noargs(self, **options):
-        self.match_for_types(type_code='con', place_kind_slug='constituency')
+        self.match_for_types(type_code='con', place_kind_slug='constituency'          )
+        self.match_for_types(type_code='pro', place_kind_slug='province', suffix=True )
+        self.match_for_types(type_code='dis', place_kind_slug='county',   suffix=True )
+        self.match_for_types(type_code='ctr', place_kind_slug='country',  suffix=True )
 
 
-    def match_for_types(self, type_code, place_kind_slug ):
+    def match_for_types(self, type_code, place_kind_slug, suffix=False ):
 
         # Get these even if not used so that we know that they exist
         area_type  = mapit_models.Type.objects.get( code = type_code )
@@ -27,8 +30,10 @@ class Command(NoArgsCommand):
 
         for area in areas:
 
-            # Use the slug fer matching, easiet way to normalize
+            # Use the slug for matching, easiest way to normalize
             slug = slugify( area.name )
+            if suffix:
+                slug += '-' + place_kind_slug
             
             # find it and update, or print out an error for a human to follow up
             try:

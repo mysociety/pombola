@@ -35,15 +35,18 @@
       margin: 0; }
     p {
       font-style: italic; } }
-  .profile-pic {
+  .profile-pic, .profile-map {
     position: absolute;
     top: 10px;
     left: 10px;
-    width: 100px;
-    img,
-    #map_canvas {
+    width: 100px; }
+  .profile-pic {
+    img {
       width: 100px;
       height: 100px; } }
+  #map_canvas {
+    width: 100px;
+    height: 100px; }
   .small-container {
     h3.scorecard-overall {
       padding: 10px;
@@ -211,47 +214,7 @@
   h2, h3 {
     border-top: 4px solid $colour_green;
     background: $colour7;
-    padding: 10px; }
-  .search-wrap {
-    border-bottom: 1px solid #dddddd;
-    padding-bottom: 30px;
-    margin: 0 10px; }
-  .search-box {
-    display: inline-block;
-    color: $colour_white;
-    width: auto;
-    margin-bottom: 10px;
-    input#id_q, input#loc {
-      float: left;
-      height: 20px;
-      border: none;
-      font-size: 15px;
-      padding: 4px 6px;
-      width: 300px;
-      border-top: 3px solid $colour_blackish;
-      border-left: 3px solid $colour_blackish;
-      border-bottom: 3px solid $colour_blackish;
-      @include border-radius(4px 0 0 4px);
-      &:focus {
-        outline: none;
-        @include box-shadow(inset rgba(0, 0, 0, 0.5) 0 0 4px); } }
-    input.button {
-      cursor: pointer;
-      float: left;
-      width: 34px;
-      height: 34px;
-      border: none;
-      margin-left: -2px;
-      text-indent: -999999px;
-      @include border-radius(0 4px 4px 0);
-      background: $colour_blackish url(../images/search-icon.png) 9px center no-repeat;
-      @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour_blackish, $colour_black));
-      &:hover {
-        background: $colour_blackish / 0.9 url(../images/chevron-right.png) 9px center no-repeat;
-        @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour_blackish / 0.9, $colour_black)); }
-      &:active {
-        background: $colour_black url(../images/chevron-right.png) 9px center no-repeat;
-        @include background(url(../images/search-icon.png) 9px center no-repeat, linear-gradient($colour_black, $colour_blackish)); } } } }
+    padding: 10px; } }
 
 @media only screen and (min-width: 640px) {
   #page {
@@ -281,13 +244,14 @@
           size: 12px; };
         margin: 0;
         text-transform: uppercase; } }
-    .profile-pic {
+    .profile-pic, .profile-map {
       height: 210px;
       width: 210px;
       position: absolute;
       top: 0;
       left: 0;
-      overflow: hidden;
+      overflow: hidden; }
+    .profile-pic {
       img {
         width: 100%;
         width: auto;
@@ -295,10 +259,10 @@
         max-width: 200px;
         max-height: 200px;
         max-width: 210px;
-        max-height: 210px; }
-      #map_canvas {
-        width: 200px;
-        height: 200px; } }
+        max-height: 210px; } }
+    #map_canvas {
+      width: 200px;
+      height: 200px; }
     .small-container {
       max-width: 510px;
       clear: left;
