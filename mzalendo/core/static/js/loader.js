@@ -6,6 +6,9 @@
 (function () {
     
     var static_url = function ( path ) {
+        if ( path.match('^http://') )
+            return path;
+
         return mzalendo_settings.static_url
             + path
             + '?'
@@ -22,7 +25,7 @@
         
     Modernizr.load(
         {
-            test : Modernizr.mq('only screen and (min-width: 320px) and (max-width: 640px)'),
+            test : Modernizr.mq('only screen and (max-width: 640px)'),
             yep : [
                 static_url('js/libs/zepto-0.8.min.js'),
                 static_url('js/mobile-functions.js')

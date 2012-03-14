@@ -10,6 +10,9 @@ libapache2-mod-wsgi
 postgresql
 postgis
 
+# For mapit
+libgdal1-1.6.0 | libgdal1-1.5.0
+python-gdal
 
 # Search Index - Xapian http://xapian.org/
 libxapian22

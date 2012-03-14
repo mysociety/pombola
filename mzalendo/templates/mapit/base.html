@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block extra_headers %}
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    
+    <style type="text/css" media="screen">
+        #mapBox {
+            margin-left: 1em;
+            margin-bottom: 1em;
+            float: right;
+        }
+        #map {
+            width: 390px;
+            height: 390px;
+            border: solid 1px #999999;
+        }        
+    </style>
+    
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+
+{% block after_content %}
+
+    <hr style="clear: both;" />
+
+    <p>
+        MapIt is a database and web service that maps locations to current or
+        past administrative area information and polygons. It was created by <a
+        href="http://www.mysociety.org/">mySociety</a>, more details are
+        available at the <a href="http://mapit.mysociety.org/">main MapIt
+        site</a> and the source code is <a
+        href="http://github.com/mysociety/mapit">available on GitHub</a>.
+    </p>
+
+{% endblock %}

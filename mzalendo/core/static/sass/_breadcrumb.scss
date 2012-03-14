@@ -1,0 +1,41 @@
+#breadcrumb,
+#breadcrumb-replacement {
+  display: none; }
+
+@media only screen and (min-width: 640px) {
+  #breadcrumb {
+    display: block;
+    height: 40px;
+    nav {
+      ul {
+        @include list-reset-soft;
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        margin-bottom: 10px;
+        float: left;
+        li,
+        li.page-title,
+        li a {
+          display: inline;
+          padding: 0;
+          color: $colour_grey;
+          background: none;
+          text-decoration: none;
+          font: {
+            size: 12px;
+            weight: normal; }; }
+        li .sep {
+          padding-left: 0.5em;
+          padding-right: 0.5em; }
+        li a:hover {
+          text-decoration: underline;
+          color: $colour_blackish; } } } }
+  #breadcrumb-replacement {
+    display: block;
+    height: 20px;
+    background-color: #fff; } }
+
+@media only screen and (min-width: 640px) and (max-width: 960px) {
+  #breadcrumb {
+    padding: 0 10px; } }

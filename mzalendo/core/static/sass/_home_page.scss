@@ -1,0 +1,446 @@
+/* 5. PAGE SPECIFIC
+-------------------------------------------------------------- */
+/* HOME */
+#page {
+  .home-left,
+  .home-right {
+    h2 {
+      margin: 0 0 10px 0;
+      background: none;
+      border-top: none;
+      color: $colour_grey;
+      font-size: 24px;
+      text-transform: uppercase;
+      &#home-intro {
+        display: none; } }
+    h3 {
+      background: none;
+      border-top: none; } }
+  .home-right {
+    .social-and-tools {
+      display: block; } } }
+
+@media only screen and (max-width: 640px) {
+  #home-search #header-search-hansard-instead {
+    padding-left: 0.5em; } }
+
+#home-search {
+  background: $colour_light_grey;
+  padding: 10px;
+  overflow: hidden;
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: $colour_grey;
+    font: {
+      weight: bold;
+      size: 17px; }; }
+  input {
+    border: none;
+    font-size: 15px;
+    padding: 6px 8px;
+    float: left;
+    margin: 0;
+    width: 200px; }
+  button {
+    @include button-reset;
+    float: left;
+    width: 50px;
+    height: 30px;
+    background: $colour_light_green url(../images/search-icon.png) center no-repeat;
+    @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_light_green, $colour_green));
+    &:hover {
+      background: $colour_green url(../images/search-icon.png) center no-repeat;
+      @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_green, $colour_light_green)); } }
+  >a {
+    float: left;
+    margin: 10px 0 0 0;
+    color: $colour_grey;
+    font-size: 14px;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline; } } }
+
+#home-featured-person {
+  margin-bottom: 30px; }
+
+.featured-person {
+  color: $colour_dark_grey;
+  margin: 0 0 30px 0;
+  border-top: 3px solid $colour_middling_grey;
+  border-bottom: 3px solid $colour_middling_grey;
+  background: $colour_light_grey;
+  overflow: hidden;
+  img {
+    float: left;
+    max-width: 90px;
+    height: auto; }
+  .featured-person-info {
+    position: relative;
+    margin-left: 110px;
+    min-height: 130px;
+    .feature-nav {
+      display: none; }
+    h2 {
+      padding-left: 0 !important;
+      margin-bottom: 0 !important;
+      a {
+        font-size: 18px;
+        text-transform: none;
+        &:hover {
+          text-decoration: none; } } }
+    .feature-person-role {
+      color: $colour_grey;
+      font-style: italic; }
+    .feature-person-summary {
+      display: none; }
+    .rating-container {
+      position: absolute;
+      bottom: 0;
+      right: 10px;
+      margin: 0;
+      .rating {
+        max-width: 300px;
+        margin: 0 40px 7px 0;
+        font-size: 17px;
+        a {
+          color: $colour_dark_grey;
+          &:hover {
+            text-decoration: none;
+            color: $colour_black; } } }
+      .rating-img {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: 32px;
+        width: 32px;
+        &.bad {
+          background: url(/static/images/d-smiley-sprite.png) -78px -82px no-repeat; }
+        &.average {
+          background: url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat; }
+        &.good {
+          background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat; } } } }
+  &.featured-person-placeholder {
+    text-align: center;
+    height: 250px;
+    background: $colour_green url(/static/images/logo-450-x-150.png) center center no-repeat; }
+  &.featured-person-loading {
+    height: 250px;
+    text-align: center;
+    p {
+      margin: 30px 0;
+      color: $colour_grey; } } }
+
+ul#home-news-list {
+  @include list-reset-soft;
+  border-top: 5px solid $colour_light_grey;
+  padding-top: 15px;
+  li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid $colour_light_grey;
+    &:last-child {
+      border-bottom: 0; }
+    h3, p {
+      padding: 0 10px;
+      margin: 0;
+      a {
+        text-decoration: none; } }
+    p {
+      &.meta {
+        font: {
+          style: italic;
+          size: 13px; };
+        margin-bottom: 10px; } }
+    img {
+      float: right;
+      margin: 0 10px; } } }
+
+#home-mpratings {
+  border-top: 5px solid $colour_light_grey;
+  padding: 15px 10px 10px 10px;
+  img {
+    float: left;
+    widht: 60px;
+    margin-right: 10px; }
+  h3.scorecard-overall {
+    padding: 0 0 0 70px;
+    margin: 0; } }
+
+#twitter,
+.tw-nub,
+.tw-follow {
+  display: none; }
+
+#home-links {
+  margin-bottom: 30px;
+  a {
+    &.aspirants {
+      @include border-radius(5px 5px 0 0);
+      color: $colour_white;
+      display: block;
+      margin: 10px 10px 3px 10px;
+      padding: 10px;
+      background: $colour_green;
+      @include background(linear-gradient($colour_green / 0.9, $colour_green));
+      &:hover {
+        text-decoration: none;
+        background: $colour_green / 0.9;
+        @include background(linear-gradient($colour_green, $colour_green / 0.9)); } }
+    &.citizens {
+      @include border-radius(0 0 5px 5px);
+      color: $colour_white;
+      display: block;
+      margin: 0 10px 10px 10px;
+      padding: 10px;
+      background: $colour_light_green;
+      @include background(linear-gradient($colour_light_green / 0.9, $colour_light_green));
+      &:hover {
+        text-decoration: none;
+        background: $colour_light_green / 0.9;
+        @include background(linear-gradient($colour_light_green, $colour_light_green / 0.9)); } } } }
+
+@media only screen and (min-width: 640px) {
+  #page {
+    .home-left {
+      float: left;
+      clear: left;
+      width: 420px;
+      margin-right: 30px;
+      h2#home-intro {
+        display: block;
+        text-transform: none;
+        color: $colour_green;
+        margin-top: 15px;
+        line-height: 25px;
+        padding: 6px;
+        font: {
+          weight: normal;
+          size: 16px; };
+        .details {
+          display: none; }
+        .home-read-more {
+          text-transform: uppercase;
+          font-size: 12px;
+          color: $colour_middling_grey;
+          padding-right: 18px;
+          background: url(../images/chevron-down-sml.png) right 2px no-repeat;
+          &:hover {
+            color: $colour_middling_grey / 1.1;
+            text-decoration: none; }
+          &.active {
+            background: url(../images/chevron-up-sml.png) right 2px no-repeat; } } } }
+    .home-right {
+      float: left;
+      width: 510px; } } }
+
+@media only screen and (min-width: 640px) {
+  #home-search {
+    background: $colour_dark_grey;
+    margin: 30px 0;
+    padding: 20px;
+    label {
+      color: $colour_white; }
+    input {
+      max-width: 260px;
+      margin-right: 10px; }
+    >a {
+      color: $colour_grey; } }
+  ul#home-news-list {
+    margin-top: 15px;
+    li {
+      h3, p {
+        padding: 0; }
+      img {
+        margin-right: 0; } } }
+  #home-mpratings {
+    margin: 15px 0 30px 0;
+    padding: 0;
+    background: url(../images/ex-home.png) 0 0 no-repeat;
+    height: 224px;
+    img, h3 {
+      display: none; } }
+  #twitter {
+    display: block;
+    float: left;
+    width: 375px;
+    h2 {
+      color: $colour_grey;
+      font-size: 18px;
+      text-transform: uppercase; }
+    .twitter-feed {
+      border: 4px solid #dddddd; }
+    .tw-wrap {
+      padding: 20px;
+      min-height: 58px;
+      background: url(../images/quotes.png) 10px 10px no-repeat; }
+    p {
+      margin: 0;
+      &.meta {
+        color: $colour_grey;
+        margin-top: 10px;
+        font: {
+          size: 13px;
+          style: italic; }; } }
+    .btn-text-green {
+      margin-top: 10px;
+      float: right; } }
+  #page .home-right .social-and-tools {
+    margin-top: 30px;
+    width: 110px;
+    position: relative;
+    padding: 0 0 20px 25px;
+    background: #dddddd;
+    ul {
+      margin: 20px 0; }
+    .tw-nub {
+      display: block;
+      width: 23px;
+      height: 26px;
+      position: absolute;
+      bottom: 17px;
+      left: -4px;
+      background: url(../images/nub.png) 0 0 no-repeat; }
+    .tw-follow {
+      @include inline-block; } }
+  #home-links {
+    overflow: hidden;
+    a {
+      width: 213px;
+      height: 60px;
+      float: left;
+      line-height: 30px;
+      font: {
+        size: 22px;
+        weight: bold; };
+      &.aspirants {
+        @include border-radius(5px 0 0 5px);
+        margin: 0 3px 0 0;
+        padding: 20px;
+        background: $colour_green url(../images/big-chevron.png) 180px center no-repeat;
+        @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_green / 0.9, $colour_green));
+        &:hover {
+          background: $colour_green / 0.9 url(../images/big-chevron.png) 180px center no-repeat;
+          @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_green, $colour_green / 0.9)); } }
+      &.citizens {
+        @include border-radius(0 5px 5px 0);
+        margin: 0;
+        padding: 20px;
+        background: $colour_light_green url(../images/big-chevron.png) 180px center no-repeat;
+        @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_light_green / 0.9, $colour_light_green));
+        &:hover {
+          background: $colour_light_green / 0.9 url(../images/big-chevron.png) 180px center no-repeat;
+          @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_light_green, $colour_light_green / 0.9)); } } } }
+  .featured-person {
+    border: 1px solid $colour_middling_grey;
+    img {
+      max-width: 180px; }
+    .featured-person-info {
+      margin-left: 200px;
+      max-width: 300px;
+      min-height: 180px;
+      .feature-nav {
+        display: block;
+        float: right;
+        a {
+          @include button-reset;
+          display: block;
+          width: 20px;
+          height: 22px;
+          float: left;
+          @include opacity(0.7); }
+        .feature-prev {
+          background: transparent url(../images/chevron-left-alt.png) center no-repeat;
+          margin-right: 10px;
+          &:hover {
+            @include opacity(1); } }
+        .feature-next {
+          background: transparent url(../images/chevron-right-alt.png) center no-repeat;
+          &:hover {
+            @include opacity(1); } } }
+      h2 {
+        margin: 15px 0 0 0 !important;
+        line-height: 30px;
+        a {
+          font-size: 24px; } }
+      .feature-person-summary {
+        display: block;
+        padding: 0 0 40px 0;
+        p {
+          font-size: 12px; } }
+      .rating-container {
+        bottom: 10px;
+        .rating {
+          margin: 0 40px 15px 0; }
+        .rating-img {
+          bottom: 10px; } } } } }
+
+@media only screen and (min-width: 640px) and (max-width: 960px) {
+  #page {
+    padding: 0 10px;
+    .title-space {
+      padding-top: 60px; }
+    .social-and-tools {
+      display: block;
+      width: auto;
+      position: absolute;
+      right: 10px;
+      top: 0;
+      float: none;
+      ul {
+        margin: 5px 10px;
+        float: left;
+        clear: none;
+        li {
+          float: left;
+          margin-right: 10px;
+          a {} } } }
+    .home-left {
+      width: 320px; }
+    .home-right {
+      float: right;
+      .social-and-tools {
+        position: relative;
+        right: auto;
+        top: auto;
+        float: left;
+        ul {
+          float: none;
+          li {
+            display: block; } } } } } }
+
+@media only screen and (min-width: 640px) and (max-width: 880px) {
+  #page .home-right {
+    width: 380px;
+    .social-and-tools {
+      width: 355px;
+      margin: 0 0 20px 0;
+      padding: 10px;
+      .tw-nub {
+        display: none; }
+      ul {
+        float: right;
+        margin: 0;
+        li {
+          float: left; } }
+      .tw-follow {
+        float: left;
+        margin: 8px 0 0 10px; } } }
+  #home-links a {
+    width: 168px;
+    font-size: 18px;
+    line-height: 22px;
+    &.aspirants,
+    &.citizens,
+    &:hover.aspirants,
+    &:hover.citizens {
+      padding: 10px 10px 15px 10px;
+      background-position: 120px center; } } }
+
+@media only screen and (min-width: 640px) and (max-width: 760px) {
+  #page .home-left {
+    width: 100%; }
+  #page .home-right {
+    float: left;
+    width: 510px;
+    margin-bottom: 20px; } }

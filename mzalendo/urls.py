@@ -26,6 +26,11 @@ urlpatterns += patterns('',
     (r'^comments/', include('comments2.urls')),
 )
 
+# mapit
+urlpatterns += patterns('',    
+    (r'^mapit/', include('mapit.urls')),
+)
+
 # Info pages
 urlpatterns += patterns('',
     (r'^info/', include('info.urls')),

@@ -1,0 +1,71 @@
+ul.comments {
+  @include list-reset-soft;
+  li {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    background: $colour_lighter_grey;
+    padding: 15px 15px 30px 15px;
+    margin-bottom: 5px;
+    img {
+      width: 40px;
+      height: 40px;
+      border: 5px solid $colour7;
+      float: left;
+      margin: 0 20px 10px 0; }
+    section {
+      float: left;
+      clear: left;
+      max-width: 840px;
+      p {
+        margin-left: 0;
+        margin-right: 15px;
+        font-size: 12px;
+        &.meta {
+          font-style: italic; } }
+      h4 {
+        font-weight: bold; }
+      .read-more-wrap {
+        position: absolute;
+        right: 15px;
+        bottom: 15px; }
+      a.read-more {
+        @include button-reset-text; }
+      ul {
+        @include list-reset-copy;
+        &.tools {
+          @include list-reset;
+          position: absolute;
+          right: 15px;
+          top: 15px;
+          li {
+            margin-left: 5px;
+            a {
+              @include button-reset-text;
+              &.like {
+                @include button-text-green; }
+              &.report {
+                @include button-text-red; } } } } } } } }
+
+@media only screen and (min-width: 640px) {
+  ul.comments {
+    li {
+      img {
+        width: 60px;
+        height: 60px; }
+      section {
+        clear: none; }
+      .tools,
+      .read-more-wrap {
+        left: -999999px; }
+      &:hover,
+      &.hovered {
+        .tools,
+        .read-more-wrap {
+          left: auto; } } } }
+  .tab {
+    ul.comments,
+    ul.listing {
+      li {
+        section {
+          width: 580px; } } } } }
