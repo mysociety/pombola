@@ -28,32 +28,20 @@ from mzalendo.core import models
 all_constituencies = set([x.slug for x in models.Place.objects.filter(kind__slug='constituency')])
 
 csv_filename = sys.argv[1]
-csv_file = open(csv_filename)
-csv_reader = csv.reader(csv_file)
+csv_file = open(csv_filename, 'rU')
+csv_reader = csv.DictReader(csv_file)
 
-# First line is just headers
-csv_reader.next()
+for item in csv_reader:
+    county_slug = slugify(item['County'] + ' County')
 
-county_name = None
-county_slug = None
-constituency_slug = None
+    try:
+        county = models.Place.objects.get(
+            slug=county_slug, kind__slug='county')
+    except models.Place.DoesNotExist:
+        print "Can't find county %s" % county_slug
+        break
 
-for county_text, constituency_name, count in csv_reader:
-    if not constituency_name:
-        continue
-
-    if county_text:
-        county_name = county_text
-        county_slug = slugify(county_name) + '-county'
-
-        try:
-            county = models.Place.objects.get(
-                slug=county_slug, kind__slug='county')
-        except models.Place.DoesNotExist:
-            print "Can't find county %s" % county_slug
-            break
-
-    constituency_slug = slugify(constituency_name)
+    constituency_slug = slugify(item['Constituency'])
 
     try:
         constituency = models.Place.objects.get(
@@ -67,4 +55,4 @@ for county_text, constituency_name, count in csv_reader:
     constituency.parent_place = county
     constituency.save()
 
-print "Left over constituencies", all_constituencies
+print "%d leftover constituencies" % len(all_constituencies), all_constituencies
