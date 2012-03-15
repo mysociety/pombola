@@ -10,6 +10,7 @@ $( function () {
             
             // use toggle, slideToggle not available in Zepto which is what the mobiles load
             $post.find( 'section' ).toggle();
+            $post.find( 'p.comments-link' ).toggle();
 
             // Don't follow the click
             e.preventDefault();

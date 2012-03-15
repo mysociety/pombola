@@ -125,8 +125,10 @@
         style: italic;
         size: 12px; };
       margin: 0; }
-    .comments-link,
-    >section {
+    .comments-link {
+      display: none;
+      float: right; }
+    > section {
       display: none; } }
   &.single {
     .post {

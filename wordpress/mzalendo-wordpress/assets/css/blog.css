@@ -190,7 +190,10 @@
   font-size: 12px;
   margin: 0;
 }
-#blog-posts .post .comments-link,
+#blog-posts .post .comments-link {
+  display: none;
+  float: right;
+}
 #blog-posts .post > section {
   display: none;
 }
