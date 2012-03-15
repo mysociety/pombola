@@ -142,7 +142,7 @@
                       </ul>
                   
                   </li>
-                  <li><a href="http://www.mzalendo.com/blog/">Blog</a></li>
+                  <li><a href="<?php bloginfo('url'); ?>/">Blog</a></li>
                   <li><a href="http://info.mzalendo.com/info/newsletter">Newsletter</a></li>
                   <li><a href="http://info.mzalendo.com/info/mzalendo-overview">About</a>
                   

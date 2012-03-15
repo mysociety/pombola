@@ -13,7 +13,7 @@
                       <li><a href="http://info.mzalendo.com/info/parliament-overview">Parliament</a></li>
                       <li><a href="http://info.mzalendo.com/info/places-overview">Places</a></li>
                       <li><a href="http://info.mzalendo.com/info/2012-overview">2012</a></li>
-                      <li><a href="http://www.mzalendo.com/blog/">Blog</a></li>
+                      <li><a href="<?php bloginfo('url'); ?>/">Blog</a></li>
                       <li><a href="http://info.mzalendo.com/info/newsletter">Newsletter</a></li>
                       <li><a href="http://info.mzalendo.com/info/mzalendo-overview">About</a></li>
                       <li><a href="http://info.mzalendo.com/info/policies">Privacy</a></li>                        
