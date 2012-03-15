@@ -22,8 +22,9 @@
 		<ul class="sidebar-list">
 		<?php
 			$categories = get_categories(); 
+      $base = get_bloginfo('url');
 			foreach ($categories as $category) {
-				echo "<li><a href='/category/{$category->category_nicename}'>{$category->cat_name}</a></li>";
+				echo "<li><a href='{$base}/category/{$category->category_nicename}'>{$category->cat_name}</a></li>";
 			}
 		?>
 		</ul>
