@@ -34,6 +34,8 @@
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
         <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
 
+        <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url'); ?>/assets/css/blog.css" />
+
         <?php 
             //no js allowed, I want only mine here....*evil laugh*
             //wp_enqueue_script('jquery');

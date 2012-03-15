@@ -216,3 +216,167 @@
 #blog-sidebar section.sidebar-archive .sidebar-list li {
   width: 90px;
 }
+
+@media only screen and (min-width: 640px) {
+  /*
+   * shared
+   */
+  #comments h2.comments-heading,
+  #comments h2.respond-heading,
+  #respond h2.comments-heading,
+  #respond h2.respond-heading {
+    background: none;
+    margin: 40px 0 20px 0;
+    color: #B3B3B3;
+    text-transform: uppercase;
+  }
+  #comments h2.comments-heading:hover,
+  #comments h2.respond-heading:hover,
+  #respond h2.comments-heading:hover,
+  #respond h2.respond-heading:hover {
+    background: none;
+  }
+  #comments h2.comments-heading a,
+  #comments h2.respond-heading a,
+  #respond h2.comments-heading a,
+  #respond h2.respond-heading a {
+    color: #B3B3B3;
+  }
+
+  #respond #comment-form {
+    position: relative;
+  }
+  #respond #comment-form .comment-field input {
+    width: 300px;
+  }
+  #respond #comment-form .comment-field textarea {
+    width: 460px;
+    height: 180px;
+    margin-bottom: 0;
+  }
+  #respond #comment-form button {
+    position: absolute;
+    right: 50px;
+    bottom: 10px;
+  }
+
+  ul.comments li section {
+    clear: none;
+    max-width: 540px;
+  }
+
+  #blog-title-space {
+    margin: 20px 0;
+  }
+
+  .social-and-tools {
+    position: absolute;
+    top: 85px;
+    left: 500px;
+  }
+
+  #page .page-wrapper {
+    padding-top: 20px;
+  }
+
+  /*
+   * specific
+   */
+  #blog-posts {
+    float: left;
+    width: 660px;
+    margin-right: 30px;
+  }
+  #blog-posts .post {
+    background: none;
+    position: relative;
+    padding: 0;
+    margin-bottom: 60px;
+  }
+  #blog-posts .post h2 {
+    font-size: 18px;
+  }
+  #blog-posts .post .meta {
+    color: #999999;
+    margin-bottom: 10px;
+  }
+  #blog-posts .post .comments-link {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 30px;
+  }
+  #blog-posts .post .comments-link a {
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  #blog-posts .post > section {
+    display: block;
+    border-top: 1px solid #eee;
+  }
+
+  #blog-sidebar {
+    float: left;
+    width: 270px;
+  }
+  #blog-sidebar section {
+    background: #F6F6F6;
+    padding: 10px;
+    margin-bottom: 30px;
+  }
+  #blog-sidebar section h3 {
+    color: #B3B3B3;
+  }
+  #blog-sidebar section .sidebar-list {
+    margin: 0;
+  }
+  #blog-sidebar section.latest-posts {
+    display: block;
+  }
+  #blog-sidebar section.latest-posts ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+  #blog-sidebar section.latest-posts ul li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  #blog-sidebar section.latest-posts ul li h4 {
+    font-weight: normal;
+  }
+  #blog-sidebar section.latest-posts ul li h4 a {
+    text-decoration: none;
+  }
+  #blog-sidebar section.latest-posts ul li p.meta {
+    font-size: 12px;
+    color: #666666;
+  }
+  #blog-sidebar section.sidebar-categories .sidebar-list li {
+    width: 115px;
+  }
+  #blog-sidebar section.sidebar-archive .sidebar-list li {
+    width: 72px;
+  }
+
+  #page .social-and-tools {
+    background: none;
+    width: auto;
+  }
+  #page .social-and-tools .fb-like,
+  #page .social-and-tools .twitter-share-button,
+  #page .social-and-tools iframe {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+@media only screen and (min-width: 640px) and (max-width: 960px) {
+  #page .social-and-tools {
+    top: 78px;
+    left: 500px;
+  }
+}
