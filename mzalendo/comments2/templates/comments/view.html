@@ -50,19 +50,6 @@
             <span class="fb-send" data-href="http://{{ request.get_host }}{{ comment.get_absolute_url }}"></span>
         </p>
 
-        <!-- FIXME - still needed here as loaded in loader.js? -->
-
-        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {return;}
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=158454200832640";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-
     {% endif %}
     
 {% endblock %}

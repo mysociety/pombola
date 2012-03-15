@@ -38,6 +38,7 @@
             ],
             both: [
                 static_url('js/analytics.js'),
+                '//platform.twitter.com/widgets.js',
                 '//www.google.com/jsapi' // ?key=INSERT-YOUR-KEY
             ].concat( extra_js ),
             complete: function () {
