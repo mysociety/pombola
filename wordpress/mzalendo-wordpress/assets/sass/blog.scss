@@ -129,7 +129,14 @@
       display: none;
       float: right; }
     > section {
-      display: none; } }
+      display: none; }
+    .more-link {
+      display: block;
+      text-align: right;
+      padding: 0.5em 1em;
+      background: #009245;
+      color: #ffffff;
+      @include border-radius(5px); } }
   &.single {
     .post {
       background: none;
@@ -223,7 +230,15 @@
           font-weight: bold; } }
       >section {
         display: block;
-        border-top: 1px solid #eee; } } }
+        border-top: 1px solid #eee; }
+      .more-link {
+        display: block;
+        text-align: left;
+        background: #f6f6f6;
+        margin-top: 0.5em;
+        padding: 0.5em;
+        color: #333;
+        border: 0; } } }
   #blog-sidebar {
     float: left;
     width: 270px;

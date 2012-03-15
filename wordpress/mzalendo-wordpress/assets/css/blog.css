@@ -197,6 +197,19 @@
 #blog-posts .post > section {
   display: none;
 }
+#blog-posts .post .more-link {
+  display: block;
+  text-align: right;
+  padding: 0.5em 1em;
+  background: #009245;
+  color: #ffffff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
 #blog-posts.single .post {
   background: none;
 }
@@ -317,6 +330,15 @@
   #blog-posts .post > section {
     display: block;
     border-top: 1px solid #eee;
+  }
+  #blog-posts .post .more-link {
+    display: block;
+    text-align: left;
+    background: #f6f6f6;
+    margin-top: 0.5em;
+    padding: 0.5em;
+    color: #333;
+    border: 0;
   }
 
   #blog-sidebar {
