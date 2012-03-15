@@ -21,7 +21,7 @@
                 facebook_app_id: '315517795130516',
                 static_url:                'http://info.mzalendo.com/static/',
                 static_generation_number:  '21',
-                extra_js: []
+                extra_js: ["<?php bloginfo('template_url'); ?>/assets/js/blog.js"]
             }
         </script>
         <script src="http://info.mzalendo.com/static/js/libs/modernizr-2.0.6.custom.js"></script>
