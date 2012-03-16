@@ -71,7 +71,7 @@ class AliasAdmin(admin.ModelAdmin):
         'ignored',
         # AliasStatusListFilter,  # Django 1.4
     ]
-    list_display = [ 'alias', 'person', 'ignored', ]
+    list_display = [ 'alias', 'person', 'ignored', 'created' ]
     form = make_ajax_form(
         models.Alias,
         {
@@ -108,7 +108,7 @@ class AliasAdmin(admin.ModelAdmin):
         # ranges so that 'Mr. Foo' from 1999 to 2003 is one person, and 2004
         # onwards another. Not implemented now as it is not certain that this
         # is actually a problem.
-        unassigned = models.Alias.objects.all().unassigned().order_by('updated')
+        unassigned = models.Alias.objects.all().unassigned().order_by('-created')
         
 
         try:
