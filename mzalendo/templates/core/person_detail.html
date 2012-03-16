@@ -82,6 +82,9 @@
 
     <div class="large-container">
         <div class="tab-wrapper">
+
+            {% include 'comments/detail_page_comments.html' %}
+
             {% if object.summary %}
             <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
             <div class="tab markdown" id="overview">
@@ -115,8 +118,6 @@
                     </section>
                 </div>
             </div>
-
-            {% include 'comments/detail_page_comments.html' %}
 
 
             <!-- Hansard appearances -->
