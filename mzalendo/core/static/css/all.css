@@ -2297,16 +2297,6 @@ ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tool
   ul.comments li section, ul.listing li section {
     clear: none;
   }
-  ul.comments li .tools, ul.listing li .tools,
-  ul.comments li .read-more-wrap,
-  ul.listing li .read-more-wrap {
-    left: -999999px;
-  }
-  ul.comments li:hover .tools, ul.listing li:hover .tools,
-  ul.comments li:hover .read-more-wrap,
-  ul.listing li:hover .read-more-wrap, ul.comments li.hovered .tools, ul.listing li.hovered .tools, ul.comments li.hovered .read-more-wrap, ul.listing li.hovered .read-more-wrap {
-    left: auto;
-  }
 
   .tab ul.comments li section, .tab ul.listing li section,
   .tab ul.listing li section {
