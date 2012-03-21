@@ -154,7 +154,12 @@ class CommentFlag(models.Model):
         verbose_name_plural = _('comment flags')
 
     def __unicode__(self):
-        return "Flag of comment ID %s by %s" % (self.comment_id, self.user.username)
+        if self.user:
+            username = self.user.username
+        else:
+            username = 'anonymous'
+
+        return "Flag of comment ID %s by %s" % (self.comment_id, username)
 
     def save(self, *args, **kwargs):
         if self.flag_date is None:
