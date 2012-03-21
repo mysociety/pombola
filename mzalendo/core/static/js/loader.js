@@ -38,6 +38,8 @@
             ],
             both: [
                 static_url('js/analytics.js'),
+                '//platform.twitter.com/widgets.js',
+                '//connect.facebook.net/en_GB/all.js#xfbml=1&appId=' + mzalendo_settings.facebook_app_id,
                 '//www.google.com/jsapi' // ?key=INSERT-YOUR-KEY
             ].concat( extra_js ),
             complete: function () {
@@ -47,7 +49,6 @@
             }
         }
     );
-
 })();
 
 var mzalendo_run_when_document_ready_array = [];

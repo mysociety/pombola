@@ -7,6 +7,20 @@
 
 {% block content %}
 
+    <ul class="social-buttons" style="float: right;">
+        <li>
+            <a                
+                href="https://twitter.com/share"
+                class="twitter-share-button"
+                data-text="Good comment on {{ comment.content_object.name }}: {{ comment.title }}"
+                data-count="vertical"
+            >Tweet</a>
+        </li>
+        <li>
+            <div class="fb-like" data-send="false" data-layout="box_count"></div>
+        </li>
+    </ul>
+
     {% if comment_rejected %}
         <h1>Comment has been removed</h1>
     
@@ -37,31 +51,6 @@
             <a class="flag" href="/comments/flag/{{ comment.id }}/">report</a>
             <a class="permalink" href="{{ comment.get_absolute_url }}">permalink</a>
         </p>
-
-        <p>
-            Share this comment with others:
-            <a                
-                href="https://twitter.com/share"
-                class="twitter-share-button"
-                data-text="Good comment on {{ comment.content_object.name }}: {{ comment.title }}"
-                data-count="none"
-            >Tweet your comment</a>
-
-            <span class="fb-send" data-href="http://{{ request.get_host }}{{ comment.get_absolute_url }}"></span>
-        </p>
-
-        <!-- FIXME - still needed here as loaded in loader.js? -->
-
-        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {return;}
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=158454200832640";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
 
     {% endif %}
     

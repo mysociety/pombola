@@ -1554,8 +1554,6 @@ menu#site-user-tools ul li.active a:hover {
   #page .page-wrapper {
     clear: both;
     display: block;
-    overflow: hidden;
-    position: relative;
   }
   #page .title-space {
     max-width: 510px;
@@ -2298,16 +2296,6 @@ ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tool
   }
   ul.comments li section, ul.listing li section {
     clear: none;
-  }
-  ul.comments li .tools, ul.listing li .tools,
-  ul.comments li .read-more-wrap,
-  ul.listing li .read-more-wrap {
-    left: -999999px;
-  }
-  ul.comments li:hover .tools, ul.listing li:hover .tools,
-  ul.comments li:hover .read-more-wrap,
-  ul.listing li:hover .read-more-wrap, ul.comments li.hovered .tools, ul.listing li.hovered .tools, ul.comments li.hovered .read-more-wrap, ul.listing li.hovered .read-more-wrap {
-    left: auto;
   }
 
   .tab ul.comments li section, .tab ul.listing li section,
@@ -3475,4 +3463,19 @@ h2 a.appearances-trigger.active {
   .infopage ul, .infopage ol, .infopage dl {
     margin: 0;
   }
+}
+ul.social-buttons {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ul.social-buttons li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+ul.social-buttons li {
+  float: left;
+  padding: 4px;
 }

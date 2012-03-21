@@ -82,14 +82,17 @@
 
     <div class="large-container">
         <div class="tab-wrapper">
+
+            {% include 'comments/detail_page_comments.html' %}
+
             {% if object.summary %}
-            <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
+            <h2 class="tab-nav" rel="#overview">Overview</h2>
             <div class="tab markdown" id="overview">
                 {{ object.summary }}
             </div>
             {% endif %}
 
-            <h2 class="tab-nav" rel="#experience"><a href="/">Experience</a></h2>
+            <h2 class="tab-nav" rel="#experience">Experience</h2>
             <div class="tab" id="experience">
                 <div class="left-col">
                     <section>
@@ -115,8 +118,6 @@
                     </section>
                 </div>
             </div>
-
-            {% include 'comments/detail_page_comments.html' %}
 
 
             <!-- Hansard appearances -->

@@ -8,6 +8,7 @@ def add_settings( request ):
             'STAGING':                  settings.STAGING,
             'STATIC_GENERATION_NUMBER': settings.STATIC_GENERATION_NUMBER,
             'GOOGLE_ANALYTICS_ACCOUNT': settings.GOOGLE_ANALYTICS_ACCOUNT,
+            'FACEBOOK_APP_ID':          settings.FACEBOOK_APP_ID,
             'SOCIAL_AUTH_ENABLED_BACKENDS': settings.SOCIAL_AUTH_ENABLED_BACKENDS,
         }        
     }
