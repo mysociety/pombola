@@ -37,6 +37,8 @@ Markdown>=2.0.3
 
 xapian-haystack
 django-haystack
+# note that this might not be a complete install. You my also need to install the bindings.
+# see http://www.epicserve.com/blog/2010/oct/16/installing-xapian-osx-python-bindings/
 
 WebTest>=1.3.2
 django-webtest
@@ -55,3 +57,5 @@ python-memcached
 
 # django-mapit
 -e git://github.com/mysociety/mapit.git@mapit-as-app#egg=django-mapit
+
+python-dateutil
