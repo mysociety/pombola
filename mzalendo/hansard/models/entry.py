@@ -125,7 +125,10 @@ class Entry(HansardModelBase):
         try:
             alias = Alias.objects.get( alias=name )
             
-            if alias.person and not alias.ignored:
+            if alias.ignored:
+                # if the alias is ignored we should not match anything
+                return []
+            elif alias.person:
                 return [ alias.person ]
             elif alias.is_unassigned:
                 # Pretend that this alias does not exist so that it is checked
