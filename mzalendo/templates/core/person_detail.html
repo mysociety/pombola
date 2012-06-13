@@ -11,6 +11,16 @@
         {% if object.is_mp %}
             <p>Kenyan Member of Parliament (MP) Profile Page</p>
         {% endif %}
+        
+        {% if object.is_aspirant %}
+            <p>
+                Aspirant in the upcoming elections:
+                {% for aspiration in object.aspirant_positions %}
+                    {{ aspiration.title }}
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        {% endif %}
     </div>
     
     <div class="profile-pic">

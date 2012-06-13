@@ -241,6 +241,12 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         else:
             return []
     
+    def aspirant_positions(self):
+        return self.position_set.all().current_aspirant_positions()
+
+    def is_aspirant(self):
+        return self.aspirant_positions().exists()
+
     def mp_positions(self):
         return self.position_set.all().current_mp_positions()
 
@@ -521,6 +527,18 @@ class PositionQuerySet(models.query.GeoQuerySet):
         qs = self.filter(start_criteria | end_criteria)
 
         return qs
+
+
+    def aspirant_positions(self):
+        """
+        Filter down to only positions which are aspirant ones. This uses the
+        convention that the slugs always start with 'aspirant-'.
+        """
+        return self.filter( title__slug__startswith='aspirant-' )
+
+    def current_aspirant_positions(self, when=None):
+        """Filter down to only positions which are those of current MPs."""
+        return self.aspirant_positions().currently_active(when)
 
     def mp_positions(self):
         """Filter down to only positions which are one of the two kinds of mp
