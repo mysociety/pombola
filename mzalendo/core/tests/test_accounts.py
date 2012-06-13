@@ -20,7 +20,7 @@ class AccountTest(WebTest):
         res = (
             app
               .get( '/' )
-              .click( description='login' )
+              .click(description='login', index=1)
               .click( description='Need an account' )
         )
         
@@ -54,7 +54,7 @@ class AccountTest(WebTest):
         self.assertTrue( user.is_active )
 
         # check that the user con login
-        res = res.click(description='login', index=1)
+        res = res.click(description='login', index=2)
         form = res.forms[1]
         form['username'] = 'test_user'
         form['password'] = 's3cr3t'
@@ -65,6 +65,6 @@ class AccountTest(WebTest):
         self.assertContains( res, 'test_user' )
         
         # logout
-        res = res.click( description='logout' )
+        res = res.click( description='logout', index=1 )
         self.assertEqual('/accounts/logout/',  res.request.path)
         
