@@ -93,6 +93,8 @@
     <div class="large-container">
         <div class="tab-wrapper">
 
+            {% include 'disqus_comments.html' %}
+
             {% include 'comments/detail_page_comments.html' %}
 
             {% if object.summary %}
