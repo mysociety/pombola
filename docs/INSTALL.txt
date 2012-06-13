@@ -1,9 +1,9 @@
 # INSTALL
 #
 # Mzalendo is mostly a standard Django project. There are some unusual
-# depedencies that are noted below.
+# dependencies that are noted below.
 
-# The lines without a '#' at the start are commands to run on your commandline
+# The lines without a '#' at the start are commands to run on your command line
 
 
 # WHERE TO PUT THE CODE
