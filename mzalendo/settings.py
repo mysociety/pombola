@@ -416,3 +416,7 @@ TEST_RUNNER   = 'django_selenium.selenium_runner.SeleniumTestRunner'
 SELENIUM_PATH = config.get( 'SELENIUM_PATH', None )
 
 
+# For the disqus comments
+DISQUS_SHORTNAME = config.get( 'DISQUS_SHORTNAME', None )
+
+
