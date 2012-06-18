@@ -2,7 +2,7 @@ from optparse import make_option
 import os.path
 
 from django.conf import settings
-from django.contrib import comments
+import comments2
 from django.contrib.sites.models import Site
 from django.core.management.base import NoArgsCommand
 from django.utils import simplejson as json
@@ -19,13 +19,13 @@ class Command(NoArgsCommand):
                     help="Saves the state of the export in the given file " +
                          "and auto-resumes from this file if possible."),
     )
-    help = 'Export comments from contrib.comments to DISQUS'
+    help = 'Export comments from comments2 to DISQUS'
     requires_model_validation = False
 
     def _get_comments_to_export(self, last_export_id=None):
         """Return comments which should be exported."""
-        qs = comments.get_model().objects.order_by('pk')\
-                .filter(is_public=True, is_removed=False)
+        qs = comments2.models.Comment.objects.order_by('pk')\
+                .filter(status='approved')
         if last_export_id is not None:
             print "Resuming after comment %s" % str(last_export_id)
             qs = qs.filter(id__gt=last_export_id)
