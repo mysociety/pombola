@@ -17,5 +17,11 @@ urlpatterns = patterns( 'comments2.views',
     # url(r'^deleted/$',       'moderation.delete_done',      name='comments-delete-done'),
     # url(r'^approve/(\d+)/$', 'moderation.approve',          name='comments-approve'),
     # url(r'^approved/$',      'moderation.approve_done',     name='comments-approve-done'),
+)
 
+
+from comments2.feeds import CommentWxrFeed
+
+urlpatterns += patterns('',
+    (r'^wxr_feed/$', CommentWxrFeed()),
 )
