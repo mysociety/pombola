@@ -1,6 +1,6 @@
 from disqus.wxr_feed import ContribCommentsWxrFeed
 # from comments2.models import Comment
-from core.models import Person
+from core.models import Person, Place, Organisation
 
 
 # http://help.disqus.com/customer/portal/articles/472150-custom-xml-import-format
@@ -9,7 +9,11 @@ class CommentWxrFeed(ContribCommentsWxrFeed):
     link = "/"
 
     def items(self):
-        return Person.objects.all()[:5] # remove [:5] before generating full dump
+        list = []
+        list.extend( Person.objects.all() )
+        list.extend( Organisation.objects.all() )
+        list.extend( Place.objects.all() )
+        return list
 
     def item_pubdate(self, item):
         return item.created
