@@ -1,7 +1,6 @@
 from mzalendo.testing.selenium import MzalendoSeleniumTestCase
 
 # from mzalendo.core.models import Person
-# from mzalendo.comments2.models import Comment
 
 class AdminTestCase(MzalendoSeleniumTestCase):
     

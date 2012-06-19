@@ -240,7 +240,6 @@ INSTALLED_APPS = (
     'markitup',
     'social_auth',
 
-    'comments2',
     'mapit',
 
     'images',
@@ -262,6 +261,8 @@ INSTALLED_APPS = (
 
     'place_data',
     'kenya',
+    
+    'disqus',
 )
 
 # mapit related settings
@@ -416,9 +417,12 @@ TEST_RUNNER   = 'django_selenium.selenium_runner.SeleniumTestRunner'
 SELENIUM_PATH = config.get( 'SELENIUM_PATH', None )
 
 
+# For the disqus comments
+DISQUS_SHORTNAME = config.get( 'DISQUS_SHORTNAME', None )
+
+
 # Polldaddy widget ID - from http://polldaddy.com/
 # Use the widget rather than embedding a poll direct as it will allow the poll 
 # to be changed without having to alter the settings or HTML. If left blank
 # then no poll will be shown.
 POLLDADDY_WIDGET_ID = config.get( 'POLLDADDY_WIDGET_ID', None );
-

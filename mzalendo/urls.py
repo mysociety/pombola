@@ -21,11 +21,6 @@ urlpatterns += patterns('',
     (r'^accounts/', include('registration.backends.default.urls')),
 )
 
-# Comments
-urlpatterns += patterns('',    
-    (r'^comments/', include('comments2.urls')),
-)
-
 # mapit
 urlpatterns += patterns('',    
     (r'^mapit/', include('mapit.urls')),

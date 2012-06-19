@@ -49,5 +49,9 @@ TEST_TWITTER_REAL_NAME: ''
 # probably >= 2.15 is a good idea
 SELENIUM_PATH: ''
 
+# Comments are handled by Disqus - http://disqus.com/
+# The 'shortname' is the code that identifies the correct account to link to on # their site. 
+DISQUS_SHORTNAME: ''
+
 # Widget id for polls to be embedded on the site.
 POLLDADDY_WIDGET_ID: ''
