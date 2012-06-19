@@ -9,5 +9,5 @@ find . -name '*.pyc' -delete
 ./manage.py test --selenium-only \
   core                           \
   feedback                       \
-  user_profile                   \
-  # comments2                      \
+  user_profile                   
+  

@@ -19,7 +19,6 @@ from markitup.fields import MarkupField
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from tasks.models import Task
 from images.models import HasImageMixin, Image
-from comments2.models import Comment
 
 from scorecards.models import ScorecardMixin
 
@@ -220,8 +219,6 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     images = generic.GenericRelation(Image)
     objects = PersonManager()
 
-    comments = generic.GenericRelation(Comment)
-    
     can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
     
     def clean(self):
@@ -366,8 +363,6 @@ class Organisation(ModelBase):
     objects = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
     
-    comments = generic.GenericRelation(Comment)    
-
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.kind)
 
@@ -420,8 +415,6 @@ class Place(ModelBase, ScorecardMixin):
 
     objects = PlaceManager()
     is_overall_scorecard_score_applicable = False
-
-    comments = generic.GenericRelation(Comment)
 
     @property
     def position_with_organisation_set(self):
