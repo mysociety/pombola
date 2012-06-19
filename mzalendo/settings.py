@@ -240,7 +240,6 @@ INSTALLED_APPS = (
     'markitup',
     'social_auth',
 
-    'comments2',
     'mapit',
 
     'images',
