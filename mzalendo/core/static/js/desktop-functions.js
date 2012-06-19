@@ -217,11 +217,21 @@ $(function(){
   activateSimpleTab(matched_element);
   profileInfoHeightFix();
 
-  //for clicks
+  // for clicks on tabs
   $("#tab-nav ul li a").not(".tab-static-link").click(function(e){
     e.preventDefault();
     window.location.hash = $(this).parent('li').attr('rel');
     activateSimpleTab($(this).parent('li'));
+    profileInfoHeightFix();
+  });
+
+  // for clicks elsewhere
+  $("a.activate-tab").click(function(e){
+    e.preventDefault();
+    var hash = $(this).attr('href');
+    window.location.hash = hash.replace('#', '');
+    var $tab = $( '#tab-nav li[rel=' + hash + ']' );
+    activateSimpleTab($tab);
     profileInfoHeightFix();
   });
 

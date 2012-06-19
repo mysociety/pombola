@@ -262,6 +262,8 @@ INSTALLED_APPS = (
 
     'place_data',
     'kenya',
+    
+    'disqus',
 )
 
 # mapit related settings
@@ -414,5 +416,9 @@ SOUTH_TESTS_MIGRATE = False
 # Settings for the selenium tests
 TEST_RUNNER   = 'django_selenium.selenium_runner.SeleniumTestRunner'
 SELENIUM_PATH = config.get( 'SELENIUM_PATH', None )
+
+
+# For the disqus comments
+DISQUS_SHORTNAME = config.get( 'DISQUS_SHORTNAME', None )
 
 
