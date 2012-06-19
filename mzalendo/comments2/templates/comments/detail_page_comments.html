@@ -1,8 +1,0 @@
-{% load comments %}
-
-{% get_comment_count for object as comment_count %}
-
-<h2 class="tab-nav" rel="#old-comments"><a href="{% get_comment_list_url object %}">Old Comments ({{ comment_count }})</a></h2>
-
-<div class="tab" id="old-comments" data-tab-content-source-url="{% get_comment_list_url object %}tab/">
-</div>
