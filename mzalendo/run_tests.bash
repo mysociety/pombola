@@ -7,7 +7,6 @@ find . -name '*.pyc' -delete
 
 # run our tests
 ./manage.py test   \
-    comments2      \
     core           \
     hansard        \
     helpers        \
@@ -17,6 +16,7 @@ find . -name '*.pyc' -delete
     search         \
     tasks          \
     user_profile   \
+    # comments2      \
 
 # This is a very ugly solution to running all the tests just for our own code.
 # running './manage.py test' will cause all the django etc tests to run as well

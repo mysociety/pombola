@@ -51,9 +51,8 @@
             <div class="tab" id="related-people" data-tab-content-source-url="{% url organisation_related_person_tab slug=object.slug %}">
             </div>
 
+            {% include 'disqus_comments.html' %}
 
-
-            {% include 'comments/detail_page_comments.html' %}
         </div>
     </div>
 
