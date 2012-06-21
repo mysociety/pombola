@@ -52,6 +52,19 @@
         </div>
         
         
+        {% if settings.POLLDADDY_WIDGET_ID %}
+            <style>
+                .pds-box { width: 100% !important; }
+                #polldaddy { margin-bottom: 30px; }
+            </style>
+            
+            <div id="polldaddy">
+                <h2>Latest Poll</h2>            
+                <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
+                <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
+            </div>
+        {% endif %}
+
         <div id="twitter">
             <h2>Twitter</h2>
             
