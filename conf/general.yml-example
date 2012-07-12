@@ -55,3 +55,7 @@ DISQUS_SHORTNAME: ''
 
 # Widget id for polls to be embedded on the site.
 POLLDADDY_WIDGET_ID: ''
+
+# The name of the twitter account. If your account is '@foobar' thun use
+# 'foobar'
+TWITTER_ACCOUNT_NAME: ''

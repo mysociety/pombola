@@ -12,6 +12,8 @@ from django.views.generic.list_detail import object_detail, object_list
 from django.views.decorators.cache import cache_control, never_cache
 from django.views.generic import ListView, DetailView
 from django.core.cache import cache
+from django.conf import settings
+from django.http import Http404
 
 from mzalendo.core import models
 from mzalendo.helpers import geocode
@@ -164,12 +166,19 @@ class PlaceListView(ListView):
 @cache_control(max_age=300, s_maxage=300, public=True)
 def twitter_feed(request):
 
+    # for now ignore the screen name that we get sent.
+    twitter_name = settings.TWITTER_ACCOUNT_NAME
+
+    # If we don't have a twitter name we can't fetch it
+    if not twitter_name:
+        raise Http404
+
     # get the json from the cache, or fetch it if needed
-    cache_key = 'MzalendoWatch-twitter-feed'
+    cache_key = twitter_name + '-twitter-feed'
     json = cache.get(cache_key)
 
     if not json:
-        json = urllib2.urlopen('http://api.twitter.com/1/statuses/user_timeline.json?screen_name=MzalendoWatch&count=4').read()
+        json = urllib2.urlopen('http://api.twitter.com/1/statuses/user_timeline.json?screen_name='+twitter_name+'&count=4').read()
         cache.set( cache_key, json, 300 )
 
     return HttpResponse(
