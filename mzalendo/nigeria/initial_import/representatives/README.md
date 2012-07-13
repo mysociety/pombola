@@ -14,3 +14,6 @@ Get all the representative pages
 
     wget -i representative_urls.txt 
 
+Process all the HTML and extract the relevant details:
+
+    python ../representative_page_to_json.py profile.php*
