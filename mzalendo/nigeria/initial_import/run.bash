@@ -14,13 +14,13 @@ cd var/representatives
 curl -o all.html $ALL_REP_URL
 ../../extract_urls.py < all.html > urls.txt
 wget -B $ALL_REP_URL -i urls.txt 
-../../page_to_json.py profile.php*
+../../representative_page_to_json.py profile.php*
 cd ../..
 
 cd var/senators
 curl -o all.html $ALL_SEN_URL
 ../../extract_urls.py < all.html > urls.txt
 wget -B $ALL_SEN_URL -i urls.txt 
-../../page_to_json.py profile.php*
+../../senators_page_to_json.py profile.php*
 cd ../..
 
