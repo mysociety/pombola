@@ -33,3 +33,13 @@ class FeedbackForm(forms.Form):
         required = False,
         help_text = "optional - but lets us get back to you...",
     )
+
+    # This is a honeypot field to catch spam bots. If there is any content in
+    # it the feedback status will be set to 'spammy'. This field is hidden by
+    # CSS in the form so should never be shown to a user. Hopefully it will not
+    # be autofilled either.
+    website = forms.CharField(
+        label = _('Leave this blank'),
+        required = False,
+    )
+    

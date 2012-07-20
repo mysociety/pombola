@@ -39,6 +39,15 @@
     {% else %}
 
         <div id="ajax_dialog_subcontent">
+
+            {% comment %}
+                hide the honeypot field from humans
+            {% endcomment %}
+            <style type="text/css" media="screen">
+                #add_feedback label[for=id_website] { display: none; }
+                #add_feedback input[name=website]   { display: none; }
+            </style>
+
             <form method="post" action="{% url feedback_add %}" id="add_feedback">
                 {% csrf_token %}
                 
