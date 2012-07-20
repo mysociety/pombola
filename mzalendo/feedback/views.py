@@ -21,6 +21,10 @@ def add(request):
             feedback.email    = form.cleaned_data['email']
             feedback.comment  = form.cleaned_data['comment']
 
+            # if there is any content in the honeypot field then label this comment as spammy
+            if form.cleaned_data['website']:
+                feedback.status = 'spammy'
+
             if request.user.is_authenticated():
                 feedback.user = request.user
 

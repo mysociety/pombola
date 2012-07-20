@@ -426,3 +426,8 @@ DISQUS_SHORTNAME = config.get( 'DISQUS_SHORTNAME', None )
 # to be changed without having to alter the settings or HTML. If left blank
 # then no poll will be shown.
 POLLDADDY_WIDGET_ID = config.get( 'POLLDADDY_WIDGET_ID', None );
+
+
+# The name of a Twitter account related to this website. This will be used to
+# pull in the latest tweets on the homepage and in the share on twitter links.
+TWITTER_ACCOUNT_NAME = config.get( 'TWITTER_ACCOUNT_NAME', None );

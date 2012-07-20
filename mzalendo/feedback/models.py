@@ -24,6 +24,7 @@ class Feedback(models.Model):
             ( 'rejected',       'Rejected' ),
             ( 'applied',        'Applied' ),
             ( 'non-actionable', 'Non-actionable' ),
+            ( 'spammy',         'Possible Spam'),
         ),
     )
     
