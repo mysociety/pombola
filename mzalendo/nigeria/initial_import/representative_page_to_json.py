@@ -122,6 +122,7 @@ def process(filename):
     
     for committee in raw_data["Committees Membership"].split("\n"):
     
+        original_line = committee
         is_chairman = re.search("Chairman", committee)
     
         if is_chairman:
@@ -131,6 +132,7 @@ def process(filename):
             title = "Committee Member"
     
         data['positions'].append({
+            "original_line": original_line,
             "title":        title,
             "organisation": committee + ' Committee',
             "type":         "political",
