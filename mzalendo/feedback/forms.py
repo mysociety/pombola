@@ -26,6 +26,7 @@ class FeedbackForm(forms.Form):
     comment = forms.CharField(
         label  = _('Your feedback'),
         widget = forms.Textarea,
+        max_length = 2000,
     )
 
     email = forms.EmailField(
