@@ -14,7 +14,7 @@ class Feedback(models.Model):
     user    = models.ForeignKey( User, blank=True, null=True )
     email   = models.EmailField( blank=True, help_text="Please let us have your email address so that we can get back to you." )
     url     = models.URLField( blank=True )
-    comment = models.TextField()
+    comment = models.CharField(max_length=2000)
     
     status = models.CharField(
         max_length = 20,

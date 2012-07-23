@@ -5,6 +5,9 @@ from django.views.decorators.csrf import csrf_protect
 from models import Feedback
 from forms import FeedbackForm
 
+import re
+
+
 @csrf_protect
 def add(request):
     """Gather feedback for a page, and if it is ok show a thanks message and link back to the page."""
@@ -23,6 +26,10 @@ def add(request):
 
             # if there is any content in the honeypot field then label this comment as spammy
             if form.cleaned_data['website']:
+                feedback.status = 'spammy'
+            
+            # if the comment starts with an html tag it is probably spam
+            if re.search('\A\s*<\w+>', form.cleaned_data['comment']):
                 feedback.status = 'spammy'
 
             if request.user.is_authenticated():
