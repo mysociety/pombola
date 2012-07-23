@@ -28,3 +28,11 @@ cd ../..
 cd var/senators
 ../../senator_page_to_json.py profile.php*
 cd ../..
+
+
+# create a csv with all the areas that people cover
+for DIR in var/representatives, var/senators: do
+  cd $DIR;
+  ./extract_areas.py *.json > areas.csv;
+  cd ../..
+done
