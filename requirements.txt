@@ -57,7 +57,7 @@ BeautifulSoup==3.2.0
 python-memcached
 
 # django-mapit
--e git://github.com/mysociety/mapit.git@mapit-as-app#egg=django-mapit
+-e git://github.com/mysociety/mapit.git@pypi#egg=django-mapit
 
 python-dateutil
 
