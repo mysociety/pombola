@@ -433,3 +433,10 @@ TWITTER_ACCOUNT_NAME = config.get( 'TWITTER_ACCOUNT_NAME', None );
 # RSS feed to the blog related to this site. If present will cause the 'Latest
 # News' to appear on the homepage.
 BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
+
+
+# create the ENABLED_FEATURES hash that is used to toggle features on and off.
+ENABLED_FEATURES = {}
+for key in ['hansard']: # add in the optional apps
+    ENABLED_FEATURES[key] = key in INSTALLED_APPS
+
