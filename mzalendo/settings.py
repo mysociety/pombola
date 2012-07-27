@@ -260,7 +260,7 @@ INSTALLED_APPS = (
     'place_data',
 
     # some apps are optional
-    # 'hansard',
+    'hansard',
 
     'kenya',
 )
