@@ -6,7 +6,8 @@
 
         function fetch_blog_feeds () {
         
-            var feed = new google.feeds.Feed("http://www.mzalendo.com/feed/");
+            var feed_url = $blog_container.attr("data-blog-rss-feed");
+            var feed = new google.feeds.Feed( feed_url );
 
             feed.load(function(result) {
                 if (!result.error) {

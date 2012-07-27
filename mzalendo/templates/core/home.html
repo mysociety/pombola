@@ -28,12 +28,14 @@
         </form>
 
                 
-        <h2>Latest News</h2>
-        <ul id="home-news-list">
-            <li>
-                Loading news&hellip;
-            </li>
-        </ul>
+        {% if settings.BLOG_RSS_FEED %}
+            <h2>Latest News</h2>
+            <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
+                <li>
+                    Loading news&hellip;
+                </li>
+            </ul>
+        {% endif %}
     </div>
     <div class="home-right">
         <h2>MP Ratings</h2>

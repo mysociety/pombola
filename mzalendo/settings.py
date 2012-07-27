@@ -431,3 +431,7 @@ POLLDADDY_WIDGET_ID = config.get( 'POLLDADDY_WIDGET_ID', None );
 # The name of a Twitter account related to this website. This will be used to
 # pull in the latest tweets on the homepage and in the share on twitter links.
 TWITTER_ACCOUNT_NAME = config.get( 'TWITTER_ACCOUNT_NAME', None );
+
+# RSS feed to the blog related to this site. If present will cause the 'Latest
+# News' to appear on the homepage.
+BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
