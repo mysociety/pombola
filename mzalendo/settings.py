@@ -261,8 +261,6 @@ INSTALLED_APPS = (
 
     'place_data',
     'kenya',
-    
-    'disqus',
 )
 
 # mapit related settings

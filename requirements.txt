@@ -60,7 +60,3 @@ python-memcached
 -e git://github.com/mysociety/mapit.git@pypi#egg=django-mapit
 
 python-dateutil
-
-
-# For the disqus comments export
-django-disqus
