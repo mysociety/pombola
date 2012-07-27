@@ -252,7 +252,6 @@ INSTALLED_APPS = (
     'tasks',
     'core',
     'feedback',
-    'projects',
     'scorecards',
     'search',
     'user_profile',
@@ -261,6 +260,7 @@ INSTALLED_APPS = (
 
     # some apps are optional
     'hansard',
+    'projects',
 
     'kenya',
 )
@@ -439,6 +439,6 @@ BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 
 # create the ENABLED_FEATURES hash that is used to toggle features on and off.
 ENABLED_FEATURES = {}
-for key in ['hansard']: # add in the optional apps
+for key in ['hansard', 'projects']: # add in the optional apps
     ENABLED_FEATURES[key] = key in INSTALLED_APPS
 

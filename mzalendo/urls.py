@@ -42,10 +42,11 @@ if settings.ENABLED_FEATURES['hansard']:
         (r'^hansard/', include('hansard.urls', namespace='hansard', app_name='hansard')),
     )
 
-# Project pages
-urlpatterns += patterns('',
-    (r'^projects/', include('projects.urls')),
-)
+# oject pages
+if settings.ENABLED_FEATURES['projects']:
+    urlpatterns += patterns('',
+        (r'^projects/', include('projects.urls')),
+    )
 
 # ajax preview of the markdown
 urlpatterns += patterns('',
