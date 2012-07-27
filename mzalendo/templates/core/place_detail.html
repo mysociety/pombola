@@ -139,19 +139,7 @@
             {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
                 <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects ({{ object.project_set.count }})</a></h2>
                 <div class="tab" id="cdf-projects">
-                    {% with template_from_app_that_may_not_be_present="projects/place_summary.html" %}
-
-                        {# This silliness takes into account the differing
-                        behaviour of the `include` tag with regards to static
-                        text and variables. It allows us to do a conditional
-                        include of a non-existent template. It is related to
-                        https://code.djangoproject.com/ticket/12064 which no-one
-                        seems in a hurry to fix. Once the include behaviour is
-                        made consistent this hack will probably stop working and
-                        we'll need to use an even sillier workaround. #}
-
-                        {% include template_from_app_that_may_not_be_present %}
-                    {% endwith %}
+                    {% include "include.html" with template="projects/place_summary.html" %}
                 </div>
             {% endif %}
 

@@ -1,0 +1,33 @@
+
+{% comment %}
+
+    Example usage:
+
+        {% include "include.html" with template="app/file.html" %}
+
+    If you include a template that does not exist and have TEMPLATE_DEBUG=True
+    an exception is thrown. Even if the include is inside a conditional that
+    does not execute.
+
+    This is a bug which no-one seems in a hurry to fix:
+
+        https://code.djangoproject.com/ticket/12064
+
+    This hack takes advantage of the differing behaviour of the `include` tag
+    with regards to static text and variables. It allows us to do a conditional
+    include of a non-existent template, if for example the template belongs to
+    an app that has not been enabled. As we are passing include a variable it
+    won't complain that the template does not exist.
+
+    Once the include behaviour is made consistent this hack will probably stop
+    working and we'll need to use an even sillier workaround. Or they'll fix the
+    bug and we can remove it all.
+
+    Done as a separate file so that this (somewhat pissy) explanation has
+    somewhere to live. Also means that there should be lees magic scattered
+    through out the code to find and remove at a later date.
+
+{% endcomment %}
+
+
+{% include template %}
