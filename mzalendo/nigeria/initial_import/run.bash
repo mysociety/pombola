@@ -33,6 +33,10 @@ cd ../..
 # create a csv with all the areas that people cover
 for DIR in var/representatives, var/senators: do
   cd $DIR;
-  ./extract_areas.py *.json > areas.csv;
+  ../../extract_areas.py *.json > areas.csv;
   cd ../..
 done
+
+
+# add all the people to the database
+find var/ -name *.json | xargs ./import_people_from_json.py
