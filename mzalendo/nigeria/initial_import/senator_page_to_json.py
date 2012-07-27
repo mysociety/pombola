@@ -172,7 +172,7 @@ def process(filename):
     
     for key in ["Target Achievement(s)", "Legistlative Interest(s)", "Awards & Honours"]:
         if raw_data[key]:
-            summary += key + ": " + raw_data['Target Achievement(s)'] + "\n\n"
+            summary += key + ": " + raw_data[key] + "\n\n"
     
     data['summary'] = summary
     
