@@ -42,6 +42,7 @@ def process(filename):
     
     try:
         person = models.Person.objects.get(slug=slug)
+        return # don't try to update the person        
     except models.Person.DoesNotExist:
         person = models.Person(slug=slug)
 
@@ -57,7 +58,7 @@ def process(filename):
         models.Contact.objects.get_or_create(
             content_type = content_type,
             object_id    = person.id,
-            value        = data['profile_url'],
+            value        = re.sub('\s', '%20', data['profile_url'] ),
             kind         = profile_url_kind,
         )
     
@@ -74,21 +75,24 @@ def process(filename):
 
         image_url = re.sub('\s', '%20', data['image'] );
 
-        print "  Fetching " + image_url
-        try:
-            img_temp = NamedTemporaryFile(delete=True)
-            img_temp.write( urllib2.urlopen(image_url).read() )
-            img_temp.flush()
-            
-            photo, created = Image.objects.get_or_create(
-                content_type = content_type,
-                object_id    = person.id,
-                source       = data['image'],
-            )
-            photo.image.save( person.slug, File(img_temp) )
-            photo.save()
-        except urllib2.HTTPError:
-            print "  ...failed!"
+        photo, created = Image.objects.get_or_create(
+            content_type = content_type,
+            object_id    = person.id,
+            source       = image_url,
+        )
+
+        if created:
+
+            print "  Fetching " + image_url
+            try:
+                img_temp = NamedTemporaryFile(delete=True)
+                img_temp.write( urllib2.urlopen(image_url).read() )
+                img_temp.flush()
+                
+                photo.image.save( person.slug, File(img_temp) )
+                photo.save()
+            except urllib2.HTTPError:
+                print "  ...failed!"
 
 
 for filename in sys.argv[1:]:
