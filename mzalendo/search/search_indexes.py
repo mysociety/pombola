@@ -1,9 +1,10 @@
+from django.conf import settings
+
 from haystack import indexes
 from haystack import site
 from haystack.exceptions import AlreadyRegistered
 
 from core    import models as core_models
-from hansard import models as hansard_models
 
 
 # TODO - currently I'm using the realtime search index - which is possibly a bad
@@ -40,18 +41,22 @@ class OrganisationIndex(BaseIndex):
 class PositionTitleIndex(BaseIndex):
     name_auto = indexes.EdgeNgramField(model_attr='name')
 
-class HansardEntryIndex(BaseIndex):
-    pass
-    
-
 
 try:
     site.register( core_models.Person,        PersonIndex        )
     site.register( core_models.Place,         PlaceIndex         )
     site.register( core_models.Organisation,  OrganisationIndex  )
     site.register( core_models.PositionTitle, PositionTitleIndex )
-    site.register( hansard_models.Entry, HansardEntryIndex )
 except AlreadyRegistered:
     # Ignore this error
     pass
 
+
+
+if settings.ENABLED_FEATURES['hansard']:
+    from hansard import models as hansard_models
+
+    class HansardEntryIndex(BaseIndex):
+        pass
+
+    site.register( hansard_models.Entry, HansardEntryIndex )

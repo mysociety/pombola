@@ -251,15 +251,17 @@ INSTALLED_APPS = (
     'info',
     'tasks',
     'core',
-    'hansard',
     'feedback',
     'projects',
     'scorecards',
     'search',
     'user_profile',
     'file_archive',
-
     'place_data',
+
+    # some apps are optional
+    # 'hansard',
+
     'kenya',
 )
 

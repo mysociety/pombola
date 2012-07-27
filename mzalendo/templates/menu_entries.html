@@ -51,9 +51,13 @@
         <li>
             <a href="{% url info_page slug='bills-overview' %}">Bills Overview</a>
         </li>
-        <li>
-            <a href="{% url hansard:index %}">Hansard</a>
-        </li>
+
+        {% if settings.ENABLED_FEATURES.hansard %}
+            <li>
+                <a href="{% url hansard:index %}">Hansard</a>
+            </li>
+        {% endif %}
+
         <li>
             <a href="{% url info_page slug='political-parties' %}">Political Parties</a>
         </li>

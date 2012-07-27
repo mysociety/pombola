@@ -37,9 +37,10 @@ urlpatterns += patterns('',
 )
 
 # Hansard pages
-urlpatterns += patterns('',
-    (r'^hansard/', include('hansard.urls', namespace='hansard', app_name='hansard')),
-)
+if settings.ENABLED_FEATURES['hansard']:
+    urlpatterns += patterns('',
+        (r'^hansard/', include('hansard.urls', namespace='hansard', app_name='hansard')),
+    )
 
 # Project pages
 urlpatterns += patterns('',
