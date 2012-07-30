@@ -143,7 +143,7 @@
                 </div>
             {% endif %}
 
-            {% if object.placedata %}
+            {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
                 <h2 class="tab-nav" rel="#population-data"><a href="/">Population Data</a></h2>
                 <div class="tab" id="population-data">
                     <dl>
