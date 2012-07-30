@@ -256,14 +256,12 @@ INSTALLED_APPS = (
     'search',
     'user_profile',
     'file_archive',
-
-    # some apps are optional
-    'hansard',
-    'projects',
-    'place_data',
-
-    'kenya',
 )
+
+# add the optional apps
+ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'kenya')
+OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
+INSTALLED_APPS += OPTIONAL_APPS
 
 # mapit related settings
 MAPIT_AREA_SRID = 4326
@@ -439,6 +437,6 @@ BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 
 # create the ENABLED_FEATURES hash that is used to toggle features on and off.
 ENABLED_FEATURES = {}
-for key in ['hansard', 'projects', 'place_data']: # add in the optional apps
+for key in ALL_OPTIONAL_APPS: # add in the optional apps
     ENABLED_FEATURES[key] = key in INSTALLED_APPS
 
