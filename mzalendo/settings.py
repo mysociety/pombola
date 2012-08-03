@@ -242,6 +242,8 @@ INSTALLED_APPS = (
 
     'mapit',
 
+    config.get('COUNTRY_APP'),
+
     'images',
     'sorl.thumbnail',
     
@@ -259,7 +261,7 @@ INSTALLED_APPS = (
 )
 
 # add the optional apps
-ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'kenya')
+ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data' )
 OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
 INSTALLED_APPS += OPTIONAL_APPS
 

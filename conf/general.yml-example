@@ -64,10 +64,15 @@ TWITTER_ACCOUNT_NAME: ''
 # eg 'http://foo.com/feed/'
 BLOG_RSS_FEED: ''
 
+
+# The country app is loaded early so that its templates take priority over those
+# from other apps
+COUNTRY_APP: kenya
+
+
 # some apps are optional
 OPTIONAL_APPS:
   - hansard
   - projects
   - place_data
-  - kenya
 
