@@ -45,9 +45,9 @@ def process(filename):
 
         if row.get('place'):
 
-            if row['title'] == 'representative':
+            if row['title'] == 'Representative':
                 kind_name = 'Constituency'
-            elif row['title'] == 'senator':
+            elif row['title'] == 'Senator':
                 kind_name = 'State'
             else:
                 kind_name = 'Other'
