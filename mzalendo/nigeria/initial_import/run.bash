@@ -40,3 +40,6 @@ done
 
 # add all the people to the database
 find var/ -name *.json | xargs ./import_people_from_json.py
+
+# import all the positions from the csv to the database
+./import_positions_from_csv.py *.csv
