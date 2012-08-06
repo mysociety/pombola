@@ -27,7 +27,7 @@ def home(request):
         current_slug = request.GET.get('before')
     featured_person = models.Person.objects.get_next_featured(current_slug, request.GET.get('before'))
     return render_to_response(
-        'core/home.html',
+        'home.html',
         {
           'featured_person': featured_person,
         },
