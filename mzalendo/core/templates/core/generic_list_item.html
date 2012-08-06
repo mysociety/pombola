@@ -110,12 +110,11 @@
             <section>
                 <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
                 
-		{% if object.parent_place %}
+		        {% if object.parent_place %}
                     <p>Parent place: <a href="{{ object.parent_place.get_absolute_url }}">{{ object.parent_place.name }}</a></p>
                 {% endif %}
 
-                <p class="meta">{{ object.kind.summary }}</p>
-
+                <p class="meta">{{ object.summary }}</p>
 
                 <div class="kind">{{ object.kind.name }}</div>
 

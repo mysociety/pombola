@@ -71,10 +71,10 @@
             <a href="{% url info_page slug='places-overview' %}">Places Overview</a>
         </li>
         <li>
-            <a href="{% url constituency_list %}">Constituencies</a>
+            <a href="{% url place_kind slug='constituency' %}">Constituencies</a>
         </li>
         <li>
-            <a href="{% url county_list %}">Counties</a>
+            <a href="{% url place_kind slug='county' %}">Counties</a>
         </li>
     </ul>
     {% endif %}

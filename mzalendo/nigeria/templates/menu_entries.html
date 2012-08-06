@@ -9,35 +9,30 @@
 
 {% endcomment %}
 
-
 <li><a href="{% url home %}">Home</a></li>
 <li><a href="{% url politician_list %}">Politicians</a>
-    {% comment %}
     {% if include_sub_menu_entries %}
     <ul id="politicians-overview">
         <li>
-            <a href="{% url state_list %}">Senators</a>
+            <a href="FIXME">FIXME - Senators</a>
         </li>
         <li>
-            <a href="{% url constituency_list %}">Representatives</a>
+            <a href="FIXME">FIXME - Representatives</a>
         </li>
     </ul>
     {% endif %}
-    {% endcomment %}
 </li>
 <li><a href="{% url info_page slug='parliament-overview' %}">Parliament</a></li>
 <li><a href="{% url info_page slug='places-overview' %}">Places</a>
-    {% comment %}
     {% if include_sub_menu_entries %}
     <ul id="places-overview">
         <li>
-            <a href="{% url state_list %}">States</a>
+            <a href="{% url place_kind slug='state' %}">States</a>
         </li>
         <li>
-            <a href="{% url constituency_list %}">Constituencies</a>
+            <a href="{% url place_kind slug='constituency' %}">Constituencies</a>
         </li>
     </ul>
     {% endif %}
-    {% endcomment %}
 </li>
 <li><a href="{% url info_page slug='about' %}">About</a></li>

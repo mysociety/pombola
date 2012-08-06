@@ -4,7 +4,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.simple import direct_to_template
 
 from core import models
-from core.views import PlaceListView, PlaceDetailView
+from core.views import PlaceDetailView
 
 person_patterns = patterns('core.views',
     url(r'^all/',
@@ -23,17 +23,10 @@ person_patterns = patterns('core.views',
   )
 
 place_patterns = patterns('core.views',
-    url(r'^all/',
-        PlaceListView.as_view(queryset=models.Place.objects.all()),
-        name='place_list'),
-    url(r'^constituencies/',
-        PlaceListView.as_view(queryset=models.Place.objects.all().constituencies(), context_object_name='constituencies'),
-        name='constituency_list'),
-    url(r'^counties/',
-        PlaceListView.as_view(queryset=models.Place.objects.all().counties(), context_object_name='counties'),    
-        name='county_list'),
 
-    url(r'^is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'),
+    url( r'^all/',                 'place_kind', name='place_kind_all' ),
+    url( r'^is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'     ),
+
     url(r'^(?P<slug>[-\w]+)/$',
         PlaceDetailView.as_view(),      
         name='place'),

@@ -9,34 +9,28 @@
 
     <div class="tab-wrapper">
 
-        <h2 class="tab-nav tab-static-link {% if constituencies %}tab-active{% endif %}" rel="#constituency"><a href="{% url constituency_list %}">Constituencies</a></h2>
-        <div class="tab markdown infopage" id="constituency">
-            {% if constituencies %}
-                <p>There are currently 210 constituencies in Kenya, each electing an MP to represent them in the National Assembly - they are listed below. This number will be increasing to to 290 for the 2012 election.</p>
-
-                <p>A portion of the Government Annual Revenue is distributed at constituency level through the Constituency Development Fund. These funds are allocated via a committee appointed by the MP for that constituency. Each of the constituency pages includes a breakdown of the projects funded in their constituency.</p>
-
-                {% include 'core/generic_list.html' %}
-            {% endif %}
-        </div>
-
-        <h2 class="tab-nav tab-static-link {% if counties %}tab-active{% endif %}" rel="#counties"><a href="{% url county_list %}">Counties</a></h2>
-        <div class="tab markdown infopage" id="counties">
-            {% if counties %}
-	        <p>The 2010 Constitution has significantly changed the role of counties in the democratic system in Kenya. In the 2012 elections there will be 47 counties, based upon the 47 legally recognised districts of Kenya. The citizens in each county will elect a senator to represent the country in the Senate, a woman MP to represent the county in the National Assembly, a Governor and Deputy Governor for the county and an elected county assembly.</p>
-
-                {% include 'core/generic_list.html' %}
-            {% endif %}
-        </div>
-
-        <h2 class="tab-nav tab-static-link {% if all_places %}tab-active{% endif %}" rel="#all"><a href="{% url place_list %}">All</a></h2>
+        <h2 class="tab-nav tab-static-link {% if not kind %}tab-active{% endif %}" rel="#all"><a href="{% url place_kind_all %}">All</a></h2>
         <div class="tab markdown" id="all">
-            {% if all_places %}
+            {% if not kind %}
                 {% include 'core/generic_list.html' %}
             {% endif %}
         </div>
+
+        {% for place_kind in all_kinds %}
+            <h2 class="tab-nav tab-static-link {% if kind == place_kind %}tab-active{% endif %}" rel="#{{ place_kind.slug }}"><a href="{% url place_kind slug=place_kind.slug %}">{% firstof place_kind.plural_name place_kind.name %}</a></h2>
+            <div class="tab markdown infopage" id="{{ place_kind.slug }}">
+                {% if kind == place_kind %}
+                    
+                    {% if kind.summary %}
+                        <p>{{ kind.summary }}</p>
+                    {% endif %}
+
+                    {% include 'core/generic_list.html' %}
+                {% endif %}
+            </div>
+        {% endfor %}
+
 
     </div>
     
 {% endblock %}
-
