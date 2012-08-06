@@ -25,7 +25,9 @@
         
         {% endcomment %}
 
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/all.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen, handheld" />
+        {% block css_headers %}
+            <!-- Create a 'css_headers' block in your base.html and use it to include the correct CSS for you country -->
+        {% endblock %}
 
         <script type="text/javascript" charset="utf-8">
             window.mzalendo_settings = {
