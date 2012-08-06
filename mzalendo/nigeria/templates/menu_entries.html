@@ -14,10 +14,10 @@
     {% if include_sub_menu_entries %}
     <ul id="politicians-overview">
         <li>
-            <a href="FIXME">FIXME - Senators</a>
+            <a href="{% url position slug='senator' %}">Senators</a>
         </li>
         <li>
-            <a href="FIXME">FIXME - Representatives</a>
+            <a href="{% url position slug='representative' %}">Representatives</a>
         </li>
     </ul>
     {% endif %}
