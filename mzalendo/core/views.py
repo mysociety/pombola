@@ -27,7 +27,7 @@ def home(request):
         current_slug = request.GET.get('before')
     featured_person = models.Person.objects.get_next_featured(current_slug, request.GET.get('before'))
     return render_to_response(
-        'core/home.html',
+        'home.html',
         {
           'featured_person': featured_person,
         },
@@ -56,17 +56,26 @@ class PlaceDetailView(DetailView):
         context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
         return context
 
-def place_kind(request, slug):
-    print slug
-    place_kind = get_object_or_404(
-        models.PlaceKind,
-        slug=slug
-    )
+
+def place_kind(request, slug=None):
+
+    if slug and slug != 'all':
+        kind = get_object_or_404(
+            models.PlaceKind,
+            slug=slug
+        )
+        queryset = kind.place_set.all()
+    else:
+        kind = None
+        queryset = models.Place.objects.all()
 
     return object_list(
         request,
-        queryset = place_kind.place_set.all(),
-        extra_context = { 'kind': place_kind, },
+        queryset = queryset,
+        extra_context = {
+            'kind':       kind,
+            'all_kinds':  models.PlaceKind.objects.all(),
+        },
     )
 
 
@@ -148,18 +157,6 @@ def featured_person(request, current_slug, direction):
         },
         context_instance = RequestContext( request ),
     )
-
-
-class PlaceListView(ListView):
-    model = models.Place
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(ListView, self).get_context_data(**kwargs)
-        if self.context_object_name:
-            context[self.context_object_name] = True
-        else:
-            context['all_places'] = True            
-        return context
 
 
 # We really want this to be cached

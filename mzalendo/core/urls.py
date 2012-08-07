@@ -1,18 +1,28 @@
 from django.conf.urls.defaults import patterns, include, url
 
 from django.views.generic import DetailView, ListView
-from django.views.generic.simple import direct_to_template
+from django.views.generic.simple import direct_to_template, redirect_to
 
 from core import models
-from core.views import PlaceListView, PlaceDetailView
+from core.views import PlaceDetailView
 
 person_patterns = patterns('core.views',
     url(r'^all/',
         ListView.as_view(model=models.Person),
         name='person_list'),
-    url(r'^politicians/',
-        ListView.as_view(queryset=models.Position.objects.all().current_mp_positions().order_by('place__slug')),
-        name='politician_list'),
+
+    url(
+        r'^politicians/',
+        redirect_to,
+        {
+            # This is what I'd like to have - but as the 'position' path does
+            # not exist yet it gets confused. Hardcode instead - this end point
+            # should be removed at some point - legacy from the MzKe site.
+            # 'url': reverse('position', kwargs={'slug':'mp'}),
+            'url': '/position/mp',
+            'permanent': True,
+        }
+    ),
                            
     # featured person ajax load
     url(r'^featured/((?P<direction>(before|after))/)?(?P<current_slug>[-\w]+)',
@@ -23,17 +33,10 @@ person_patterns = patterns('core.views',
   )
 
 place_patterns = patterns('core.views',
-    url(r'^all/',
-        PlaceListView.as_view(queryset=models.Place.objects.all()),
-        name='place_list'),
-    url(r'^constituencies/',
-        PlaceListView.as_view(queryset=models.Place.objects.all().constituencies(), context_object_name='constituencies'),
-        name='constituency_list'),
-    url(r'^counties/',
-        PlaceListView.as_view(queryset=models.Place.objects.all().counties(), context_object_name='counties'),    
-        name='county_list'),
 
-    url(r'^is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'),
+    url( r'^all/',                 'place_kind', name='place_kind_all' ),
+    url( r'^is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'     ),
+
     url(r'^(?P<slug>[-\w]+)/$',
         PlaceDetailView.as_view(),      
         name='place'),

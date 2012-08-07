@@ -13,5 +13,7 @@ def add_settings( request ):
             'POLLDADDY_WIDGET_ID':          settings.POLLDADDY_WIDGET_ID,
             'DISQUS_SHORTNAME':             settings.DISQUS_SHORTNAME,
             'TWITTER_ACCOUNT_NAME':         settings.TWITTER_ACCOUNT_NAME,
+            'BLOG_RSS_FEED':                settings.BLOG_RSS_FEED,
+            'ENABLED_FEATURES':             settings.ENABLED_FEATURES,
         }        
     }

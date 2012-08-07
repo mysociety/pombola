@@ -6,7 +6,8 @@
 
         function fetch_blog_feeds () {
         
-            var feed = new google.feeds.Feed("http://www.mzalendo.com/feed/");
+            var feed_url = $blog_container.attr("data-blog-rss-feed");
+            var feed = new google.feeds.Feed( feed_url );
 
             feed.load(function(result) {
                 if (!result.error) {
@@ -76,14 +77,14 @@
                         
                         var $tweet = $( '<div class="tw-wrap" />');
 
-                        var tweet_html = $('<div/>').text( tweet_data.text ).html();
+                        var tweet_html = $('<div/>').html( tweet_data.text ).html();
 
                         // make t.co links clickable
                         var http_regex = new RegExp('(http://t\.co/[a-z0-9]+)', 'gi');
                         tweet_html = tweet_html.replace( http_regex, '<a href="$1">$1</a>' );
 
                         // activate @names too
-                        var name_regex = new RegExp('@([a-z0-9]+)', 'gi' );
+                        var name_regex = new RegExp('@([a-z0-9_]+)', 'gi' );
                         tweet_html = tweet_html.replace( name_regex, '<a href="http://twitter.com/$1">@$1</a>' );
 
                         $tweet.append( $('<p/>').html( tweet_html ) );

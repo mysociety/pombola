@@ -118,7 +118,7 @@ STATIC_URL = '/static/'
 
 # integer which when updated causes the caches to fetch new content. See note in
 # 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 21
+STATIC_GENERATION_NUMBER = 22
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -242,6 +242,8 @@ INSTALLED_APPS = (
 
     'mapit',
 
+    config.get('COUNTRY_APP'),
+
     'images',
     'sorl.thumbnail',
     
@@ -251,19 +253,17 @@ INSTALLED_APPS = (
     'info',
     'tasks',
     'core',
-    'hansard',
     'feedback',
-    'projects',
     'scorecards',
     'search',
     'user_profile',
     'file_archive',
-
-    'place_data',
-    'kenya',
-    
-    'disqus',
 )
+
+# add the optional apps
+ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data' )
+OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
+INSTALLED_APPS += OPTIONAL_APPS
 
 # mapit related settings
 MAPIT_AREA_SRID = 4326
@@ -431,3 +431,14 @@ POLLDADDY_WIDGET_ID = config.get( 'POLLDADDY_WIDGET_ID', None );
 # The name of a Twitter account related to this website. This will be used to
 # pull in the latest tweets on the homepage and in the share on twitter links.
 TWITTER_ACCOUNT_NAME = config.get( 'TWITTER_ACCOUNT_NAME', None );
+
+# RSS feed to the blog related to this site. If present will cause the 'Latest
+# News' to appear on the homepage.
+BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
+
+
+# create the ENABLED_FEATURES hash that is used to toggle features on and off.
+ENABLED_FEATURES = {}
+for key in ALL_OPTIONAL_APPS: # add in the optional apps
+    ENABLED_FEATURES[key] = key in INSTALLED_APPS
+

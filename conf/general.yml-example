@@ -59,3 +59,20 @@ POLLDADDY_WIDGET_ID: ''
 # The name of the twitter account. If your account is '@foobar' thun use
 # 'foobar'
 TWITTER_ACCOUNT_NAME: ''
+
+# Blog feed url - used to create the latest news on homepage.
+# eg 'http://foo.com/feed/'
+BLOG_RSS_FEED: ''
+
+
+# The country app is loaded early so that its templates take priority over those
+# from other apps
+COUNTRY_APP: kenya
+
+
+# some apps are optional
+OPTIONAL_APPS:
+  - hansard
+  - projects
+  - place_data
+

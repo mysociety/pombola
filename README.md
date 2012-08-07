@@ -3,8 +3,13 @@
 This web app allows you to store and share information on public figure,
 especially politicians.
 
+Please see the [operations
+manual](https://docs.google.com/document/d/1ksbCal3Sc2HoIYy76zRXIVB-DIbrZr7I8DV8OwHt4KY/edit)
+which covers all aspects of running a Mzalendo site.
+
 For an overview of the system please see the files in docs/ - especially
 OVERVIEW.txt
+
 
 ##To install
 
