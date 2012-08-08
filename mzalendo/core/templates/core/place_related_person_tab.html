@@ -19,7 +19,7 @@
     {% endfor %}
 
     {% for child_place in object.child_places.all %}
-        {% with position=child_place.current_mp_position %}
+        {% with position=child_place.current_politician_position %}
             {% with person=position.person %}
                 {% if person %}
                     <li>                

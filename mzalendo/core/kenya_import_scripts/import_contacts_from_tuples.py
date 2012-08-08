@@ -30,7 +30,7 @@ for row in mp_contacts.entries:
         continue
 
     # code needs reworking now that the name structure of the database has changed
-    matches = models.Person.objects.all().is_mp().name_matches( name )
+    matches = models.Person.objects.all().is_politician().name_matches( name )
     
     if matches.count() == 0:
         print "  no match for '%s', '%s', '%s'" % (name, phone, email)

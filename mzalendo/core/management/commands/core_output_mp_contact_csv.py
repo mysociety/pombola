@@ -27,9 +27,9 @@ class Command(BaseCommand):
 
         # gather all the data before creating the CSV
         contact_field_names_set = set()
-        mp_data = []
+        politician_data = []
 
-        mps = models.Person.objects.all().is_mp()
+        mps = models.Person.objects.all().is_politician()
         
         for mp in mps:
             data = {}
@@ -53,7 +53,7 @@ class Command(BaseCommand):
                 else:
                     data[ kind_name ] = value
 
-            mp_data.append(data)
+            politician_data.append(data)
         
         csv_output = StringIO.StringIO()
         csv_fieldnames =  [ 'Name', 'Constituency' ] + sorted( list(contact_field_names_set) )
@@ -69,7 +69,7 @@ class Command(BaseCommand):
             fieldname_dict[key] = key
         writer.writerow( fieldname_dict )
         
-        for data in mp_data:
+        for data in politician_data:
             writer.writerow( data )
         
         print csv_output.getvalue()
