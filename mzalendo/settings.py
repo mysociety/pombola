@@ -442,3 +442,13 @@ ENABLED_FEATURES = {}
 for key in ALL_OPTIONAL_APPS: # add in the optional apps
     ENABLED_FEATURES[key] = key in INSTALLED_APPS
 
+
+
+# list of all the position title slugs considered to be politicians
+POLITICIAN_TITLE_SLUGS = [
+    'mp',
+    'nominated-member-parliament',
+    'representative',
+    'senator',
+]
+

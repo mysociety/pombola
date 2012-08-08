@@ -539,7 +539,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter down to only positions which are one of the two kinds of
         politician (those with constituencies, and nominated ones).
         """
-        return self.filter(Q(title__slug='mp') | Q(title__slug='nominated-member-parliament'))
+        return self.filter(title__slug__in=settings.POLITICIAN_TITLE_SLUGS)
 
     def current_politician_positions(self, when=None):
         """Filter down to only positions which are those of current politicians."""
