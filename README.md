@@ -3,7 +3,7 @@
 This web app allows you to store and share information on public figure,
 especially politicians.
 
-Please see the [Operations Manual](http://goo.gl/uaXup)which covers all aspects of running a Mzalendo site.
+Please see the [Operations Manual](http://goo.gl/uaXup) which covers all aspects of running a Mzalendo site.
 
 For an overview of the system please see the files in docs/ - especially
 OVERVIEW.txt
