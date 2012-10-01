@@ -54,7 +54,8 @@ selenium==2.15.0
 django-selenium==0.4.1
 
 BeautifulSoup==3.2.0
-
+BeautifulSoup4
+unidecode
 python-memcached
 
 # django-mapit
