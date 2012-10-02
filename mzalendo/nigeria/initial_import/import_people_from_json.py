@@ -36,7 +36,7 @@ email_kind, created       = models.ContactKind.objects.get_or_create(slug='email
 def process(filename):
     data = json.loads( open(filename, 'r').read() )
     # pprint.pprint( data )
-    print "%s (%s)" % (data['name'], data['slug'])
+    print "%s (%s) - %s" % (data['name'], data['slug'], filename)
 
     slug = data['slug']
     
