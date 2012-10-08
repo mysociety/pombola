@@ -556,6 +556,10 @@ class PositionQuerySet(models.query.GeoQuerySet):
     def other(self):
         """Filter down to only the other category"""
         return self.filter(category='other')
+    
+    def order_by_place(self):
+        """Sort by the place name"""
+        return self.order_by('place__name')
 
 class PositionManager(ManagerBase):
     def get_query_set(self):
