@@ -4,12 +4,26 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.simple import direct_to_template
 
+urlpatterns = []
+
+
+# Country app. In order to let the country app inject its own pages we list it
+# first and send all urls through it. If it does not match anything routing
+# continues as normal.
+#
+# Note that anything the country app catches it has to actually process, Django
+# does not appear to support fallthrough from controllers:
+# http://stackoverflow.com/questions/4495763/fallthrough-in-django-urlconf
+urlpatterns += patterns('',
+    (r'^', include( settings.COUNTRY_APP + '.urls' ) ),
+)
+
 
 # Admin section
 from django.contrib import admin
 admin.autodiscover()
 from ajax_select import urls as ajax_select_urls
-urlpatterns = patterns('',
+urlpatterns += patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/lookups/', include(ajax_select_urls)),
     url(r'^admin/', include(admin.site.urls)),
