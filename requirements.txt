@@ -40,6 +40,7 @@ xapian-haystack==1.1.5beta
 django-haystack==1.2.5
 # note that this might not be a complete install. You my also need to install the bindings.
 # see http://www.epicserve.com/blog/2010/oct/16/installing-xapian-osx-python-bindings/
+# or if using homebrew do `brew install xapian --python`
 
 WebTest>=1.3.2
 django-webtest==1.4.3
@@ -53,10 +54,12 @@ selenium==2.15.0
 django-selenium==0.4.1
 
 BeautifulSoup==3.2.0
-
+BeautifulSoup4
+unidecode
 python-memcached
 
 # django-mapit
+# -e git://github.com/mysociety/mapit.git@7-area-unions#egg=django-mapit
 -e git://github.com/mysociety/mapit.git@pypi#egg=django-mapit
 
 python-dateutil

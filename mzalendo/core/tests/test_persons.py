@@ -75,12 +75,12 @@ class PersonScorecardTest(TestCase):
             slug='bob_jones',
             )
 
-        self.mp_title = models.PositionTitle.objects.create(
+        self.politician_title = models.PositionTitle.objects.create(
             name='MP',
             slug='mp',
             )
 
-        self.nominated_mp_title = models.PositionTitle.objects.create(
+        self.nominated_politician_title = models.PositionTitle.objects.create(
             name='Nominated Member of Parliament',
             slug='nominated-member-parliament',
             )
@@ -99,7 +99,7 @@ class PersonScorecardTest(TestCase):
             person=self.bob,
             place=self.bobs_place,
             category='political',
-            title=self.mp_title,
+            title=self.politician_title,
             )
         
         # Bob is average at one thing
@@ -127,7 +127,7 @@ class PersonScorecardTest(TestCase):
         self.charlies_position = models.Position.objects.create(
             person=self.charlie,
             category='political',
-            title=self.nominated_mp_title,
+            title=self.nominated_politician_title,
             )
 
     def testScorecardOverallNonMP(self):
@@ -155,6 +155,6 @@ class PersonScorecardTest(TestCase):
         assert self.bob.constituencies()[0].slug == 'bobs_place'
 
     def testIsMP(self):
-        assert self.bob.is_mp()
-        assert not self.alf.is_mp()
-        assert self.charlie.is_mp()
+        assert self.bob.is_politician()
+        assert not self.alf.is_politician()
+        assert self.charlie.is_politician()

@@ -5,6 +5,8 @@ import re
 import itertools
 import random
 
+from django.conf import settings
+
 from django.core import exceptions
 from django.core.urlresolvers import reverse
 
@@ -133,9 +135,9 @@ class InformationSource(ModelBase):
 
 
 class PersonQuerySet(models.query.GeoQuerySet):
-    def is_mp(self, when=None):
+    def is_politician(self, when=None):
         # FIXME - Don't like the look of this, rather a big subquery.
-        return self.filter(position__in=Position.objects.all().current_mp_positions(when))
+        return self.filter(position__in=Position.objects.all().current_politician_positions(when))
         
 class PersonManager(ManagerBase):
     def get_query_set(self):
@@ -244,11 +246,11 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     def is_aspirant(self):
         return self.aspirant_positions().exists()
 
-    def mp_positions(self):
-        return self.position_set.all().current_mp_positions()
+    def politician_positions(self):
+        return self.position_set.all().current_politician_positions()
 
-    def is_mp(self):
-        return self.mp_positions().exists()
+    def is_politician(self):
+        return self.politician_positions().exists()
 
     def parties(self):
         """Return list of parties that this person is currently a member of"""
@@ -256,8 +258,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         return Organisation.objects.filter(position__in=party_memberships)
     
     def constituencies(self):
-        """Return list of constituencies that this person is currently an MP for"""
-        return Place.objects.filter(position__in=self.mp_positions())
+        """Return list of constituencies that this person is currently an politician for"""
+        return Place.objects.filter(position__in=self.politician_positions())
 
     def __unicode__(self):
         return self.legal_name
@@ -295,7 +297,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         scorecard_lists = []
 
         # We're only showing scorecards for current MPs
-        if self.is_mp():
+        if self.is_politician():
             scorecard_lists.append(super(Person, self).scorecards())
 
             scorecard_lists.extend([x.scorecards() for x in self.constituencies()])
@@ -304,7 +306,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
     def has_scorecards(self):
         # We're only showing scorecards for current MPs
-        if self.is_mp():
+        if self.is_politician():
             return super(Person, self).has_scorecards() or any([x.has_scorecards() for x in self.constituencies()])
         
     class Meta:
@@ -331,16 +333,16 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
 
     def active_parties(self):
         # FIXME - What a lot of subqueries...
-        active_mp_positions = Position.objects.all().current_mp_positions()
+        active_politician_positions = Position.objects.all().current_politician_positions()
         active_member_positions = Position.objects.all().filter(title__slug='member').currently_active()
 
-        current_mps = Person.objects.all().filter(position__in=active_mp_positions).distinct()
+        current_politicians = Person.objects.all().filter(position__in=active_politician_positions).distinct()
         current_members = Person.objects.all().filter(position__in=active_member_positions).distinct()
 
         return (
             self
                 .parties()
-                .filter(position__person__in=current_mps)
+                .filter(position__person__in=current_politicians)
                 .filter(position__person__in=current_members)
                 .distinct()                
         )
@@ -426,9 +428,9 @@ class Place(ModelBase, ScorecardMixin):
     def is_constituency(self):
         return self.kind.slug == 'constituency'
     
-    def current_mp_position(self):
-        """Return the current MP position, or None"""
-        qs = self.position_set.all().current_mp_positions()
+    def current_politician_position(self):
+        """Return the current politician position, or None"""
+        qs = self.position_set.all().current_politician_positions()
         try:
             return qs[0]
         except IndexError:
@@ -530,18 +532,18 @@ class PositionQuerySet(models.query.GeoQuerySet):
         return self.filter( title__slug__startswith='aspirant-' )
 
     def current_aspirant_positions(self, when=None):
-        """Filter down to only positions which are those of current MPs."""
+        """Filter down to only positions which are those of current aspirantsns."""
         return self.aspirant_positions().currently_active(when)
 
-    def mp_positions(self):
-        """Filter down to only positions which are one of the two kinds of mp
-        (those with constituencies, and nominated ones).
+    def politician_positions(self):
+        """Filter down to only positions which are one of the two kinds of
+        politician (those with constituencies, and nominated ones).
         """
-        return self.filter(Q(title__slug='mp') | Q(title__slug='nominated-member-parliament'))
+        return self.filter(title__slug__in=settings.POLITICIAN_TITLE_SLUGS)
 
-    def current_mp_positions(self, when=None):
-        """Filter down to only positions which are those of current MPs."""
-        return self.mp_positions().currently_active(when)
+    def current_politician_positions(self, when=None):
+        """Filter down to only positions which are those of current politicians."""
+        return self.politician_positions().currently_active(when)
 
     def political(self):
         """Filter down to only the political category"""
@@ -554,6 +556,10 @@ class PositionQuerySet(models.query.GeoQuerySet):
     def other(self):
         """Filter down to only the other category"""
         return self.filter(category='other')
+    
+    def order_by_place(self):
+        """Sort by the place name"""
+        return self.order_by('place__name')
 
 class PositionManager(ManagerBase):
     def get_query_set(self):
@@ -569,7 +575,7 @@ class Position(ModelBase):
 
     person = models.ForeignKey('Person')
     organisation = models.ForeignKey('Organisation', null=True, blank=True)
-    place = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for an 'MP'" )
+    place = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for a politician" )
     title = models.ForeignKey('PositionTitle', null=True, blank=True)
     subtitle = models.CharField(max_length=200, blank=True, default='')
     category = models.CharField(max_length=20, choices=category_choices, default='other', help_text="What sort of position was this?")
@@ -663,7 +669,7 @@ class Position(ModelBase):
         self.sorting_start_date_high = re.sub('-00', '-99', sorting_start_date)
         self.sorting_end_date_high = re.sub('-00', '-99', sorting_end_date)     
 
-    def is_nominated_mp(self):
+    def is_nominated_politician(self):
         return self.title.slug == 'nominated-member-parliament'
 
     def save(self, *args, **kwargs):

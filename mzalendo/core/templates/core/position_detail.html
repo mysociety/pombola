@@ -16,12 +16,12 @@
     
     <div class="content_box">
         <h3>Current Position Holders</h3>
-        {% include 'core/position_position_section.html' with positions=object.position_set.all.currently_active %}
+        {% include 'core/position_position_section.html' with positions=object.position_set.all.currently_active.order_by_place %}
     </div>
 
     <div class="content_box">
         <h3>Past Position Holders</h3>
-        {% include 'core/position_position_section.html' with positions=object.position_set.all.currently_inactive %}
+        {% include 'core/position_position_section.html' with positions=object.position_set.all.currently_inactive.order_by_place %}
     </div>
     
     {% with orgs=object.organisations %}

@@ -20,7 +20,7 @@ class Command(NoArgsCommand):
             raise ImproperlyConfigured("Please create a scorecard category with the slug 'hansard-appearances'")
 
         # Find all the people we should score for
-        people = Person.objects.all().is_mp()
+        people = Person.objects.all().is_politician()
         
         # How far back should we look for hansard appearances?
         duration_string = "six months"

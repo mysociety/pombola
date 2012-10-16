@@ -217,6 +217,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "mzalendo.core.context_processors.add_settings",    
 )
 
+COUNTRY_APP = config.get('COUNTRY_APP')
+if not COUNTRY_APP:
+    raise Exception("You need to set 'COUNTRY_APP' in your config")
+
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -242,7 +247,7 @@ INSTALLED_APPS = (
 
     'mapit',
 
-    config.get('COUNTRY_APP'),
+    COUNTRY_APP,
 
     'images',
     'sorl.thumbnail',
@@ -441,4 +446,14 @@ BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 ENABLED_FEATURES = {}
 for key in ALL_OPTIONAL_APPS: # add in the optional apps
     ENABLED_FEATURES[key] = key in INSTALLED_APPS
+
+
+
+# list of all the position title slugs considered to be politicians
+POLITICIAN_TITLE_SLUGS = [
+    'mp',
+    'nominated-member-parliament',
+    'representative',
+    'senator',
+]
 

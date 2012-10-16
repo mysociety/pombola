@@ -43,12 +43,12 @@
     </div>
 
     <div class="profile-info">
-        {% with mp_pos=object.current_mp_position %}
-        {% if mp_pos %}
+        {% with politician_pos=object.current_politician_position %}
+        {% if politician_pos %}
         <div class="constituency-party">
             <h3>Key figure</h3>
             <ul>
-                <li><a href="{{ mp_pos.person.get_absolute_url }}">{{ mp_pos.person.name }} <span>[mp]</span></a></li>
+                <li><a href="{{ politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }} <span>[mp]</span></a></li>
             </ul>
         </div>
         {% endif %}
@@ -118,16 +118,16 @@
     {% endif %}    
 
 
-    {% with mp_pos=object.current_mp_position %}
-        {% if mp_pos %}
+    {% with politician_pos=object.current_politician_position %}
+        {% if politician_pos %}
             <div class="content_box">
-                <h3>{{ mp_pos.person.name }}</h3>
+                <h3>{{ politician_pos.person.name }}</h3>
         
                 <p>
-                    <a href="{{mp_pos.person.get_absolute_url }}">{{ mp_pos.person.name }}</a>
+                    <a href="{{politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }}</a>
                     is the MP for {{ object.name }}
-                    {% if mp_pos.start_date %}
-                        (started {{ mp_pos.start_date }})
+                    {% if politician_pos.start_date %}
+                        (started {{ politician_pos.start_date }})
                     {% endif %}
                 </p>
         

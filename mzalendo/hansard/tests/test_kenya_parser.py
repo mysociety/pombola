@@ -169,7 +169,7 @@ class KenyaParserTest(TestCase):
 
         # Add a nominated MP and check it is matched
 
-        nominated_mp = PositionTitle.objects.create(
+        nominated_politician = PositionTitle.objects.create(
             name='Nominated MP',
             slug='nominated-member-parliament',
             )
@@ -181,7 +181,7 @@ class KenyaParserTest(TestCase):
 
         Position.objects.create(
             person = calist_mwatela,
-            title = nominated_mp,
+            title = nominated_politician,
             start_date = ApproximateDate( year=2011, month=1, day = 1 ),
             end_date   = ApproximateDate( future=True ),
             )

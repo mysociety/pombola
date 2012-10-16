@@ -148,7 +148,7 @@ class Entry(HansardModelBase):
             Person
             .objects
             .all()
-            .is_mp( when=self.sitting.start_date )
+            .is_politician( when=self.sitting.start_date )
             .filter(legal_name__icontains=stripped_name)
         )
         
