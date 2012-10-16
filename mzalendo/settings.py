@@ -217,6 +217,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "mzalendo.core.context_processors.add_settings",    
 )
 
+COUNTRY_APP = config.get('COUNTRY_APP')
+if not COUNTRY_APP:
+    raise Exception("You need to set 'COUNTRY_APP' in your config")
+
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -242,7 +247,7 @@ INSTALLED_APPS = (
 
     'mapit',
 
-    config.get('COUNTRY_APP'),
+    COUNTRY_APP,
 
     'images',
     'sorl.thumbnail',
