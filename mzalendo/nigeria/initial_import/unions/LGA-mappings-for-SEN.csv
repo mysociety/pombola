@@ -1,33 +1,43 @@
 ABA NORTH,Aba North
 ABA SOUTH,Aba South
 ABADAM,Abadam
+ABAJI AREA COUNCIL,Abaji
 ABAK,Abak
+ABAKALIKI,Abakalik
 ABEOKUTA NORTH,AbeokutaNorth
 ABEOKUTA SOUTH,Abeokuta South
 ABI,Abi
+ABOH MBAISE,Aboh-Mba
+ABUA-ODUAL,Abua/Odu
 ADAVI,Adavi
-ADO,Ado
 ADO EKITI,Ado-Ekiti
+ADO,Ado
 ADO-ODO/OTA,AdoOdo/Ota
 AFIJIO,Afijio
+AFIKPO NORTH,Afikpo
+AFIKPO SOUTH,AfikpoSo
 AGAIE,Agaie
 AGATU,Agatu
 AGEGE,Agege
 AGUATA,Aguata
 AGWARA,Agwara
+AHIAZU MBAISE,Ahizu-Mb
 AHOADA EAST,Ahoada East
 AHOADA WEST,Ahoada West
 AJAOKUTA,Ajaokuta
 AJEROMI/IFELODUN,Ajeromi/Ifelodun
 AJINGI,Ajingi
 AKAMKPA,Akamkpa
+AKAWANGA,Akwanga
 AKINYELE,Akinyele
 AKKO,Akko
+AKOKO EDO,Akoko-Ed
 AKOKO NORTH EAST,Akoko North-East
 AKOKO NORTH WEST,AkokoNorthWest
 AKOKO SOUTH EAST,Akoko South-East
 AKOKO SOUTH WEST,Akoko South-West
 AKPABUYO,Akpabuyo
+AKUKU-TORU,Akukutor
 AKURE NORTH,Akure North
 AKURE SOUTH,Akure South
 ALBASU,Albasu
@@ -38,6 +48,10 @@ AMUWO-ODOFIN,Amuwo Odofin
 ANAMBRA EAST,Anambra East
 ANAMBRA WEST,Anambra West
 ANAOCHA,Anaocha
+ANDONI,Andoni/O
+ANINIRI,Aninri
+ANIOCHA NORTH,AniochaN
+ANIOCHA SOUTH,AniochaS
 ANKA,Anka
 ANKPA,Ankpa
 APA,Apa
@@ -45,16 +59,25 @@ APAPA,Apapa
 ARDO-KOLA,Ardo-Kola
 AREWA,Arewa
 ARGUNGU,Argungu
+Arochukw,Arochukw
 ASA,Asa
+ASARI-TORU,Asari-To
+ASKIRA/UBA,Askira/U
+ATAKUNMOSA EAST,Atakumosa East
+ATAKUNMOSA WEST,Atakumosa West
 ATIBA,Atiba
+ATIGBO,Atisbo
 AUGIE,Augie
 AUYO,Auyo
 AWE,Awe
 AWGU,Awgu
+AWKA NORTH,AwkaNort
+AWKA SOUTH,AwkaSout
+AYADAADE,Ayedaade
 AYAMELUM,Ayamelum
 AYEDIRE,Ayedire
-Arochukw,Arochukw
 BABURA,Babura
+BADAGRY,Badagary
 BADE,Bade
 BAGUDO,Bagudo
 BAGWAI,Bagwai
@@ -68,6 +91,7 @@ BARKIN LADI,Barkin Ladi
 BARUTEN,Baruten
 BASSA,Bassa
 BATAGARAWA,Batagarawa
+BATAGI,Bida
 BATSARI,Batsari
 BAUCHI,Bauchi
 BAURE,Baure
@@ -81,11 +105,17 @@ BIDA,Bida
 BILLIRI,Billiri
 BINDAWA,Bindawa
 BINJI,Binji
+BIRNIN GWARI,Birnin-G
+BIRNIN KEBBI,BirninKe
+BIRNIN KUDU,BirninKu
+BIRNIN MAGAJI,Birnin-Magaji/Kiyaw
+BIRNIWA,Biriniwa
 BIU,Biu
 BODINGA,Bodinga
 BOGORO,Bogoro
 BOKI,Boki
 BOKKOS,Bokkos
+BOLOWADURO,Boluwaduro
 BOMADI,Bomadi
 BONNY,Bonny
 BORGU,Borgu
@@ -97,15 +127,21 @@ BUKKUYUM,Bukkuyum
 BUNGUDU,Bungudu
 BUNKURE,Bunkure
 BUNZA,Bunza
+BURSARI,Borsari
 BURUKU,Buruku
 BURUTU,Burutu
+BWARI AREA COUNCIL,Bwari
+CALABAR MUNICIPAL,Calabar
 CALABAR SOUTH,Calabar South
+CHACHANGA,Chanchaga
 CHARANCHI,Charanchi
 CHIBOK,Chibok
 CHIKUN,Chikun
 DALA,Dala
+DAMABOA,Damboa
 DAMATURU,Damaturu
 DAMBAN,Damban
+DANBATTA,Dambatta
 DANDI,Dandi
 DANDUME,Dandume
 DANGE SHUNI,Dange-Shuni
@@ -114,6 +150,7 @@ DANMUSA,Danmusa
 DARAZO,Darazo
 DASS,Dass
 DAURA,Daura
+DAWAKIN,DawakinK
 DEGEMA,Degema
 DEKINA,Dekina
 DEMSA,Demsa
@@ -125,8 +162,10 @@ DUKKU,Dukku
 DUNUKOFIA,Dunukofia
 DUTSE,Dutse
 DUTSI,Dutsi
+DUTSIN-MA,Dutsin-M
 EASTERN OBOLO,Eastern Obolo
 EBONYI,Ebonyi
+EDATI-IDATI,Edati
 EDE NORTH,Ede North
 EDE SOUTH,Ede South
 EDU,Edu
@@ -136,30 +175,42 @@ EGBADO SOUTH,EgbadoSouth
 EGBEDA,Egbeda
 EGBEDORE,Egbedore
 EGOR,Egor
+EHIME MBANO,Ehime-Mb
 EJIGBO,Ejigbo
 EKEREMOR,Ekeremor
 EKET,Eket
-EKITI,Ekiti
+EKITI EAST,EkitiEas
 EKITI SOUTH WEST,EkitiSouth-West
 EKITI WEST,EkitiWest
+EKITI,Ekiti
 EKWUSIGO,Ekwusigo
 ELEME,Eleme
+EMOHUA,Emuoha
+EMURE,Emure/Ise/Orun
 ENUGU EAST,Enugu East
 ENUGU NORTH,Enugu North
+ENUGU SOUTH,EnuguSou
 EPE,Epe
+ESAN CENTRAL,EsanCent
+ESAN NORTH EAST,EsanNort
+ESAN SOUTH EAST,EsanSout
 ESAN WEST,EsanWest
 ESE-ODO,Ese-Odo
 ESIT EKET,Esit Eket
 ESSIEN-U,Essien-U
 ETCHE,Etche
+ETHIOPE EAST,EthiopeE
 ETHIOPE WEST,Ethiope West
 ETI-OSA,Eti-Osa
 ETIMEKPO,EtimEkpo
 ETINAN,Etinan
 ETSAKO CENTRAL,Etsako Central
+ETSAKO EAST,EtsakoEa
+ETSAKO WEST,EtsakoWe
 ETUNG,Etung
 EWEKORO,Ewekoro
 EZEAGU,Ezeagu
+EZINIHITTE,Ezinihit
 EZZA NORTH,Ezza North
 EZZA SOUTH,Ezza South
 FAGGE,Fagge
@@ -172,7 +223,9 @@ FUNE,Fune
 FUNTUA,Funtua
 GABASAWA,Gabasawa
 GADA,Gada
+GAGARA,Gagarawa
 GAMAWA,Gamawa
+GANJUWA,Gamjuwa
 GANYE,Ganye
 GARKI,Garki
 GARKO,Garko
@@ -181,6 +234,7 @@ GASHAKA,Gashaka
 GASSOL,Gassol
 GAYA,Gaya
 GBOKO,Gboko
+GBONYIN,Gboyin
 GEIDAM,Geidam
 GEZAWA,Gezawa
 GIADE,Giade
@@ -193,12 +247,15 @@ GUDU,Gudu
 GUJBA,Gujba
 GULANI,Gulani
 GUMA,Guma
+GUME,Gumel
 GUMMI,Gummi
 GURARA,Gurara
 GURI,Guri
 GUSAU,Gusau
 GUYUK,Guyuk
 GUZAMALA,Guzamala
+GWADABAWA,Gwadabaw
+GWAGWA AREA COUNCIL,Gwagwala
 GWALE,Gwale
 GWANDU,Gwandu
 GWARAM,Gwaram
@@ -210,9 +267,9 @@ GWOZA,Gwoza
 HADEJIA,Hadejia
 HAWUL,Hawul
 HONG,Hong
-IBADAN NORTH,IbadanNorth
 IBADAN NORTH EAST,IbadanNorth-East
 IBADAN NORTH WEST,IbadanNorth-West
+IBADAN NORTH,IbadanNorth
 IBADAN SOUTH EAST,IbadanSouth-East
 IBADAN SOUTH WEST,IbadanSouth-West
 IBAJI,Ibaji
@@ -226,6 +283,7 @@ IBI,Ibi
 IBIONO IBOM,Ibiono Ibom
 IDAH,Idah
 IDANRE,Idanre
+IDEATO NORTH,IdeatoNo
 IDEATO SOUTH,Ideato South
 IDEMILI NORTH,Idemili North
 IDEMILI SOUTH,Idemili South
@@ -242,17 +300,21 @@ IFELODUN,Ifelodun
 IFO,Ifo
 IGABI,Igabi
 IGALAMELA-ODOLU,Igalamela-Odolu
+IGBO-ETITI,Igbo-Eti
 IGBO-EZE NORTH,Igbo-eze North
+IGO-EZE SOUTH,Igbo-eze South
 IGUEBEN,Igueben
 IHIALA,Ihiala
+IHITE/UBOMA,Ihitte/U
 IJEBU EAST,IjebuEast
-IJEBU NORTH,IjebuNorth
 IJEBU NORTH EAST,Ijebu North-East
+IJEBU NORTH,IjebuNorth
 IJEBU-ODE,IjebuOde
 IJERO,Ijero
 IJUMU,Ijumu
-IKA,Ika
+IKA NORTH-EAST,IkaNorth
 IKA SOUTH,IkaSouth
+IKA,Ika
 IKARA,Ikara
 IKEDURU,Ikeduru
 IKEJA,Ikeja
@@ -269,11 +331,15 @@ IKWERRE,Ikwerre
 IKWO,Ikwo
 IKWUANO,Ikwuano
 ILA,Ila
+ILAJE,IlajeEseodo
 ILEJEMEJE,Ilejemeje
 ILEOLUJI/OKEIGBO,IleOluji/Okeigbo
+ILESA EAST,Ilesha East
+ILESA WEST,Ilesha West
 ILLELA,Illela
 ILORIN EAST,Ilorin East
 ILORIN SOUTH,Ilorin South
+ILORIN WEST,IlorinWe
 IMEKO AFON,Imeko-Afon
 INGAWA,Ingawa
 INI,Ini
@@ -288,23 +354,28 @@ ISE/ORUN,Ise/Orun
 ISEYIN,Iseyin
 ISHIELU,Ishielu
 ISI-UZO,Isi-Uzo
+ISIALA MBANO,IsialaMb
 ISIALA NGWA NORTH,Isiala Ngwa North
 ISIALA NGWA SOUTH,Isiala Ngwa South
 ISIN,Isin
 ISOKAN,Isokan
+ISOKO NORTH,IsokoNor
+ISOKO SOUTH,IsokoSou
 ISU,Isu
+Isuikwua,Isuikwua
+ITAS-GADAU,Itas/Gad
 ITESIWAJU,Itesiwaju
 ITU,Itu
 IVO,Ivo
 IWAJOWA,Iwajowa
 IWO,Iwo
 IZZI,Izzi
-Isuikwua,Isuikwua
 JABA,Jaba
 JADA,Jada
 JAKUSKO,Jakusko
 JALINGO,Jalingo
 JAMA’ARE,Jama'are
+JAUN,Jahun
 JEGA,Jega
 JEMA’A,Jema'a
 JERE,Jere
@@ -312,6 +383,10 @@ JIBIA,Jibia
 JOS EAST,Jos East
 JOS NORTH,Jos North
 JOS SOUTH,Jos South
+K/HAUSA,KafinHau
+K/KASAMMA,KiriKasa
+K/NAMODA,Kaura-Na
+KABBA,Kabba/Bu
 KABO,Kabo
 KACHIA,Kachia
 KADUNA NORTH,Kaduna North
@@ -329,11 +404,16 @@ KALTUNGO,Kaltungo
 KANAM,Kanam
 KANKARA,Kankara
 KANKE,Kanke
+KANKIA,Kankiya
+KANO MUNICIPAL,Kano
 KARASUWA,Karasuwa
 KARAYE,Karaye
+KARIM-LAMIDO,Karim-La
 KARU,Karu
 KATAGUM,Katagum
 KATCHA,Katcha
+KATSINA,Katsina (K)
+KATSINA-ALA,Katsina (Benue)
 KAUGAMA,Kaugama
 KAURA,Kaura
 KAZAURE,Kazaure
@@ -345,12 +425,17 @@ KIBIYA,Kibiya
 KIRFI,Kirfi
 KIRU,Kiru
 KIYAWA,Kiyawa
+KOGI,Kuje
+KOKO BESSE,Koko/Bes
 KOKONA,Kokona
 KOLOKUMA/OPOKUMA,Kolokuma/Opokuma
 KONDUGA,Konduga
+KONSHISHA,Konshish
+KONTOGORA,Kontogur
 KOSOFE,Kosofe
 KUBAU,Kubau
 KUDAN,Kudan
+KUJE AREA COUNCIL,Kuje
 KUKAWA,Kukawa
 KUMBOTSO,Kumbotso
 KUNCHI,Kunchi
@@ -358,40 +443,51 @@ KURA,Kura
 KURFI,Kurfi
 KURMI,Kurmi
 KUSADA,Kusada
+KWALI AREA COUNCIL,Kwali
 KWAMI,Kwami
 KWANDE,Kwande
 KWARE,Kware
+KWAYA,Kwaya Kusar
 LAFIA,Lafia
 LAGELU,Lagelu
 LAGOS ISLAND,LagosIsland
+LAGOS MAINLAND,Mainland
 LAMURDE,Lamurde
+LANTANG NORTH,Langtang North
+LANTANG SOUTH,Langtang South
 LAPAI,Lapai
 LAU,Lau
 LAVUN,Lavun
 LERE,Lere
 LOGO,Logo
 LOKOJA,Lokoja
+M/MADORI,MalamMad
 MACHINA,Machina
 MADAGALI,Madagali
 MADOBI,Madobi
 MAFA,Mafa
 MAGUMERI,Magumeri
 MAIADUA,Mai'Adua
+MAIGATAR,Maigatari
 MAIHA,Maiha
 MAIYAMA,Maiyama
 MAKARFI,Makarfi
 MAKODA,Makoda
+MALUMEFASHI,Malumfashi
 MANGU,Mangu
 MANI,Mani
 MARADUN,Maradun
 MARIGA,Mariga
+MARKURDI,Makurdi
 MARTE,Marte
 MARU,Maru
+MASHEGU MAGAMA,Mashegu
 MASHI,Mashi
 MATAZU,Matazu
 MAYO-BEL,Mayo-Bel
 MBAITOLI,Mbaitoli
 MBO,Mbo
+METROPOLITAN,Kotonkar
 MICHIKA,Michika
 MIGA,Miga
 MIKANG,Mikang
@@ -400,27 +496,36 @@ MISAU,Misau
 MKPAT ENIN,Mkpat Enin
 MOBA,Moba
 MOBBAR,Mobbar
+MOGUNO,Monguno
 MOKWA,Mokwa
 MOPAMURO,Mopa-Muro
 MORO,Moro
 MUBI NORTH,Mubi North
 MUBI SOUTH,Mubi South
+MUNICIPAL AREA COUNCIL,AbujaMun
 MUSAWA,Musawa
 MUSHIN,Mushin
 MUYA,Muya
 NAFADA,Nafada
 NANGERE,Nangere
-NDOKWA EAST,Ndokwa East
-NDOKWA WEST,Ndokwa West
+NASSARAWA EGGON,Nassarawa Egon
+NASSARAWA,Nassaraw
+NDOKWA EAST,Ndokwa West
+NDOKWA WEST,Ndokwa East
 NEMBE,Nembe
 NGALA,Ngala
+NGANZA,Nganzai
 NGASKI,Ngaski
+NGOR OKPALA,Ngor-Okp
 NGURU,Nguru
 NINGI,Ningi
 NJABA,Njaba
 NJIKOKA,Njikoka
 NKANU EAST,Nkanu East
 NKANU WEST,Nkanu West
+NKWERE,Nkwerre
+NNEWI NORTH,NnewiNort
+NNEWI SOUTH,NnewiSou
 NSIT ATAI,Nsit Atai
 NSIT IBOM,Nsit Ibom
 NSIT UBIUM,Nsit Ubium
@@ -430,6 +535,8 @@ NWANGELE,Nwangele
 OBAFEMI/OWODE,Obafemi-Owode
 OBANLIKU,Obanliku
 OBI,Obi
+OBIO AKPOR,Obio/Akp
+Obio/Akp,Obio/Akp
 OBOKUN,Obokun
 OBOT AKARA,Obot Akara
 OBOWO,Obowo
@@ -437,20 +544,25 @@ OBUBRA,Obubra
 OBUDU,Obudu
 ODEDA,Odeda
 ODIGBO,Odigbo
+ODO-OTIN,Odo0tin
 ODOGBOLU,Odogbolu
 ODUKPANI,Odukpani
 OFFA,Offa
 OFU,Ofu
+OGBA/EGBEMA/NDONI,Ogba/Egbe
 OGBADIBO,Ogbadibo
 OGBARU,Ogbaru
 OGBIA,Ogbia
 OGBOMOSHO NORTH,Ogbomosho North
 OGBOMOSHO SOUTH,Ogbomosho South
+OGO OLUWA,Ogo-Oluw
 OGOJA,Ogoja
 OGORI/MAGONGO,Ogori/Magongo
 OGU BOLO,Ogu/Bolo
 OGUN WATERSIDE,OgunWaterside
 OGUTA,Oguta
+Ohafia Abia,Ohafia Abia
+OHAJI/EGBEMA,Ohaji/Eg
 OHAOZARA,Ohaozara
 OHAUKWU,Ohaukwu
 OHIMINI,Ohimini
@@ -461,15 +573,18 @@ OKE-ERO,Oke-Ero
 OKEHI,Okehi
 OKENE,Okene
 OKIGWE,Okigwe
+OKIRIKA,Okrika
 OKITIPUPA,Okitipupa
 OKOBO,Okobo
 OKPE,Okpe
 OKPOKWU,Okpokwu
 OLA-OLUWA,Ola-Oluwa
+OLAMABORO,Olamabor
 OLORUNDA,Olorunda
 OLORUNSOGO,Olorunsogo
 OLUYOLE,Oluyole
 OMALA,Omala
+OMUMA,Omumma
 ONA-ARA,Ona-Ara
 ONDO EAST,Ondo East
 ONDO WEST,Ondo West
@@ -477,8 +592,13 @@ ONICHA,Onicha
 ONITSHA NORTH,Onitsha North
 ONITSHA SOUTH,Onitsha South
 ONNA,Onna
+ONUIMO,Unuimo
+OORELOPE,Orelope
 OPOBO/NKORO,Opobo/Nkoro
+OREDO,Oredo Edo
+ORHIONMWON,Orhionmw
 ORIADE,Oriade
+ORIRE,Ori-Ire
 ORLU,Orlu
 OROLU,Orolu
 ORON,Oron
@@ -486,11 +606,16 @@ ORSU,Orsu
 ORU EAST,Oru East
 ORU WEST,Oru West
 ORUK-ANA,Oruk-Ana
+ORUMBA NORTH,OrumbaNo
+ORUMBA SOUTH,OrumbaSo
 OSE,Ose
 OSHIMILI NORTH,Oshimili North
 OSHIMILI SOUTH,Oshimili South
 OSHODI/ISOLO,Oshodi/Isolo
+Osisioma Ngwa,Osisioma Ngwa
 OSOGBO,Osogbo
+OTUKPO,Oturkpo
+OVIA NORTH EAST,OviaNort
 OVIA SOUTH WEST,OviaSouth-West
 OWAN EAST,Owan East
 OWAN WEST,OwanWest
@@ -504,26 +629,30 @@ OYIGBO,Oyigbo
 OYO EAST,Oyo East
 OYO WEST,Oyo West
 OYUN,Oyun
-Obio/Akp,Obio/Akp
-Ohafia Abia,Ohafia Abia
-Osisioma Ngwa,Osisioma Ngwa
 PAIKORO,Paikoro
 PANKSHIN,Pankshin
 PATANI,Patani
+PATIGI,Pategi
 PORT HARCOURT,Port Harcourt
 POTISKUM,Potiskum
+QUA’AN PAN,Qua'anpa
 RABAH,Rabah
 RAFI,Rafi
 RANO,Rano
 REMO NORTH,Remo-North
 RIJAU,Rijau
+RIMI GADO,RiminGad
 RIMI,Rimi
+RINGIN,Ringim
 RIYOM,Riyom
 ROGO,Rogo
 RONI,Roni
+S/TANKAR,Sule-Tan
 SABON BIRNI,Sabon Birni
+SABON GARI,Sabon-Ga
 SABUWA,Sabuwa
 SAFANA,Safana
+SAGAMU,Shagamu
 SAGBAMA,Sagbama
 SAKABA,Sakaba
 SAKI EAST,Saki East
@@ -542,6 +671,7 @@ SHINKAFI,Shinkafi
 SHIRA,Shira
 SHIRORO,Shiroro
 SHOMOLU,Shomolu
+SHONGOM,Shomgom
 SILAME,Silame
 SOBA,Soba
 SOKOTO NORTH,Sokoto North
@@ -551,28 +681,36 @@ SOUTHERN IJAW,Southern Ijaw
 SULEJA,Suleja
 SUMAILA,Sumaila
 SURU,Suru
+SURULERE,Gumel
 SURULERE,Surulere
+T/MAFARA,Talata-Mafara
 TAFA,Tafa
+TAFAWA BALEWA,Tafawa-B
 TAI,Tai
 TAKAI,Takai
 TAKUM,Takum
+TAMBUWA,Tambawal
+TANGAZA,Tangazar
 TARAUNI,Tarauni
 TARKA,Tarka
 TARMUWA,Tarmuwa
 TAURA,Taura
+TeUNGO,Teungo
 TOFA,Tofa
 TORO,Toro
 TOTO,Toto
 TSAFE,Tsafe
 TSANYAWA,Tsanyawa
+TUDUN WADA,Tundun Wada
 TURETA,Tureta
-TeUNGO,Teungo
 UDENU,Udenu
 UDI,Udi
 UDU,Udu
 UDUNG UKO,Udung Uko
+UGHELI SOUTH,Ughelli South
 UGHELLI NORTH,Ughelli North
 UGWUNAGBO,Ugwunagbo
+UHUNMWODE,Uhunmwonde
 UKANAFUN,Ukanafun
 UKUM,Ukum
 UKWA EAST,Ukwa East
@@ -583,18 +721,22 @@ UMUAHIA NORTH,Umuahia North
 UMUAHIA SOUTH,Umuahia South
 UNGOGO,Ungogo
 URUAN,Uruan
+URUE OFFONG/ORUKO,UrueOffo
 USHONGO,Ushongo
 USSA,Ussa
 UVWIE,Uvwie
 UYO,Uyo
 UZO UWANI,Uzo-Uwani
+VANDEIKYA,Vandeiky
 WAMAKKO,Wamakko
 WAMBA,Wamba
 WARAWA,Warawa
 WARJI,Warji
 WARRI NORTH,Warri North
-WARRI SOUTH,Warri South
 WARRI SOUTH WEST,Warri South-West
+WARRI SOUTH,Warri South
+WASAGU/DANKO,Danko Wasagu
+WASAGU/DANKO,Gwadabaw
 WASE,Wase
 WUDIL,Wudil
 WUKARI,Wukari
@@ -604,8 +746,11 @@ YABO,Yabo
 YAGBA EAST,Yagba East
 YAGBA WEST,Yagba West
 YAKURR,Yakurr
+YALA,Yala Cross
+YAMALTU/DEBA,Yamaltu
 YANKWASHI,Yankwashi
 YAURI,Yauri
+YENAGOA,Yenegoa
 YOLA NORTH,Yola North
 YOLA SOUTH,Yola South
 YORRO,Yorro
@@ -613,159 +758,8 @@ YUNUSARI,Yunusari
 YUSUFARI,Yusufari
 ZAKI,Zaki
 ZANGO,Zango
+ZANGON,ZangonKa
 ZARIA,Zaria
 ZING,Zing
 ZURMI,Zurmi
 ZURU,Zuru
-GAGARA,Gagarawa
-YENAGOA,Yenegoa
-UGHELI SOUTH,Ughelli South
-NGOR OKPALA,Ngor-Okp
-ABOH MBAISE,Aboh-Mba
-KONSHISHA,Konshish
-ASKIRA/UBA,Askira/U
-KONTOGORA,Kontogur
-TAMBUWA,Damboa
-VANDEIKYA,Vandeiky
-ORHIONMWON,Orhionmw
-OHAJI/EGBEMA,Ohaji/Eg
-ANIOCHA NORTH,AniochaN
-ESAN CENTRAL,EsanCent
-MALUMEFASHI,Malumfashi
-BURSARI,Borsari
-ILORIN WEST,IlorinWe
-OVIA NORTH EAST,OviaNort
-IGBO-ETITI,Igbo-Eti
-YAMALTU/DEBA,Yamaltu
-AHIAZU MBAISE,Ahizu-Mb
-OLAMABORO,Olamabor
-ASARI-TORU,Asari-To
-SABON GARI,Sabon-Ga
-MAIGATAR,Maigatari
-KARIM-LAMIDO,Karim-La
-BADAGRY,Badagary
-EMOHUA,Emuoha
-CALABAR MUNICIPAL,Calabar
-ORIRE,Ori-Ire
-NKWERE,Nkwerre
-OGBA/EGBEMA/NDONI,Ogba/Egbe
-KOKO BESSE,Koko/Bes
-ANINIRI,Aninri
-EZINIHITTE,Ezinihit
-EHIME MBANO,Ehime-Mb
-NASSARAWA EGGON,Nassarawa Egon
-ONUIMO,Unuimo
-NASSARAWA,Nasarawa
-NGANZA,Nganzai
-BIRNIWA,Biriniwa
-ABAKALIKI,Abaji
-OKIRIKA,Okrika
-PATIGI,Pategi
-EKITI EAST,EkitiEas
-KANKIA,Kankiya
-ISOKO SOUTH,IsokoSou
-ANDONI,Andoni/O
-ESAN SOUTH EAST,EsanSout
-UHUNMWODE,Uhunmwonde
-DUTSIN-MA,Dutsin-M
-OMUMA,Omumma
-AKAWANGA,Akwanga
-ISOKO NORTH,IsokoNor
-ZANGON,ZangonKa
-OORELOPE,Orelope
-BOLOWADURO,Boluwaduro
-ENUGU SOUTH,EnuguSou
-KAURA,Kauru
-ISIALA MBANO,IsialaMb
-ANIOCHA SOUTH,AniochaS
-ORUMBA NORTH,OrumbaNo
-ORUMBA SOUTH,OrumbaSo
-ODO-OTIN,Odo0tin
-IDEATO NORTH,IdeatoNo
-AFIKPO SOUTH,AfikpoSo
-IKA NORTH-EAST,IkaNorth
-AWKA NORTH,AwkaNort
-KATSINA,Katsina (K)
-KATSINA-ALA,Katsina (Benue)
-AKUKU-TORU,Akukutor
-AKOKO EDO,Akoko-Ed
-TANGAZA,Tangazar
-AYADAADE,Ayedaade
-AFIKPO NORTH,Abakalik
-AWKA SOUTH,AwkaSout
-ETSAKO EAST,EtsakoEa
-ITAS-GADAU,Itas/Gad
-ETSAKO WEST,EtsakoWe
-BIRNIN KUDU,BirninKu
-BIRNIN KEBBI,BirninKe
-BIRNIN MAGAJI,Birnin-G
-BIRNIN GWARI,Afikpo
-NNEWI NORTH,NnewiNort
-KOGI,Kuje
-OTUKPO,Oturkpo
-T/MAFARA,Magama
-URUE OFFONG/ORUKO,UrueOffo
-EMURE,Bwari
-MARKURDI,Makurdi
-MOGUNO,Monguno
-KUJE AREA COUNCIL,Kwaya Kusar
-LANTANG SOUTH,Langtang South
-ESAN NORTH EAST,EsanNort
-ATIGBO,Atisbo
-K/NAMODA,Abua/Odu
-K/HAUSA,Gamjuwa
-K/KASAMMA,MalamMad
-ILAJE,Edati
-KWAYA,Kwali
-SURULERE,Gumel
-MASHEGU MAGAMA,Mashegu
-BWARI AREA COUNCIL,Emure/Ise/Orun
-GBONYIN,Gboyin
-ILESA WEST,Ilesha West
-ABUA-ODUAL,Gbako
-IFELODUN,Sule-Tan
-GUME,Gombi
-IGO-EZE SOUTH,Igbo-eze South
-RIMI GADO,RiminGad
-YALA,Kano
-SHONGOM,Shomgom
-LAGOS MAINLAND,Mainland
-GANJUWA,Gwagwala
-CHACHANGA,Qua'anpa
-EDATI-IDATI,DawakinT
-TUDUN WADA,Tundun Wada
-OBI,Dambatta
-LANTANG NORTH,Langtang North
-METROPOLITAN,Kotonkar
-BASSA,Kabba/Bu
-ATAKUNMOSA WEST,Atakumosa West
-IHITE/UBOMA,Ihitte/U
-S/TANKAR,KafinHau
-OBIO AKPOR,Oboma Ngwa
-OREDO,Oredo Edo
-MUNICIPAL AREA COUNCIL,IlajeEseodo
-SAGAMU,Shagamu
-DAMABOA,Tambawal
-TAFAWA BALEWA,Tafawa-B
-QUA’AN PAN,Kaura-Na
-M/MADORI,DawakinK
-DAWAKIN,KiriKasa
-DAWAKIN,Maidugur
-GWAGWA AREA COUNCIL,Yala Cross
-ILESA EAST,Ilesha East
-KABBA,NnewiSou
-IREPODUN,Danko Wasagu
-DANBATTA,Talata-Mafara
-ATAKUNMOSA EAST,Atakumosa East
-KANO MUNICIPAL,Birnin-Magaji/Kiyaw
-NASSARAWA,Nassaraw
-OGO OLUWA,Ogo-Oluw
-GWADABAWA,Chanchaga
-ETHIOPE EAST,EthiopeE
-BATAGI,Jahun
-RINGIN,Ringim
-NNEWI SOUTH,AbujaMun
-JAUN,Girie
-KWALI AREA COUNCIL,Lake chad
-WASAGU/DANKO,Gwadabaw
-ABAJI AREA COUNCIL,
