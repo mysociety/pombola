@@ -59,7 +59,7 @@ unidecode
 python-memcached
 
 # django-mapit
-# -e git://github.com/mysociety/mapit.git@7-area-unions#egg=django-mapit
--e git://github.com/mysociety/mapit.git@pypi#egg=django-mapit
+-e git://github.com/mysociety/mapit.git@7-area-unions#egg=django-mapit
+# -e git://github.com/mysociety/mapit.git@pypi#egg=django-mapit
 
 python-dateutil
