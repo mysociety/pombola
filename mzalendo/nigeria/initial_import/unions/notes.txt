@@ -1,0 +1,7 @@
+./manage.py  mapit_create_area_unions \
+    --commit \
+    --header-row \
+    --generation-id=1 \
+    --region-name-field=1 \
+    --area-type-code=SEN \
+    nigeria/initial_import/unions/states_and_senatorial_districts_for_create_union.csv
