@@ -71,4 +71,14 @@ update core_place
     )
     where kind_id = 4
     ;
+
+update core_place
+    SET mapit_area_id = (
+        select id
+            from mapit_area
+            where mapit_area.name = core_place.name
+              and mapit_area.type_id = 2
+    )
+    where kind_id = 3
+    ;
     
