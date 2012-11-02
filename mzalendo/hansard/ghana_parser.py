@@ -102,8 +102,8 @@ def body(lines):
     """Returns a generator for lines in the body of the hansard"""
     for i, row in enumerate(lines):
         _, line, _ = row
-        if line.strip().startswith('Printed by Department of Official Report'):
-            return (x for x in lines[i+1:])
+        if line.lower().strip().startswith('the house met at'):
+            return (x for x in lines[i:])
     return (x for x in lines)
 
 

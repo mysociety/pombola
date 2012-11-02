@@ -1,33 +1,40 @@
-import datetime
 import os
-import time
-import json
-import tempfile
-import subprocess
+import datetime
+# import time
+# import json
+# import tempfile
+# import subprocess
 
 from django.test import TestCase
 from django.utils import unittest
 
-from hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
-from hansard.models import Source, Sitting, Entry, Venue, Alias
+from django_date_extensions.fields import ApproximateDate
+
+# from hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
 
 from core.models import Person, PositionTitle, Position
-
-from django_date_extensions.fields import ApproximateDate
+from hansard.models import Source, Sitting, Entry, Venue, Alias
 
 from hansard.ghana_parser import parse
 
 
 class KenyaParserTest(TestCase):
     baresir = os.path.abspath(os.path.dirname( __file__ ))
-    sample_001 = = os.path.join(basedir, 'hansard-sample-001.txt')
+    sample_001 = os.path.join(basedir, 'hansard-sample-001.txt')
     
+    entries = None
+    head = None
+
+
     @classmethod
     def setUpClass(cls):
         fin = open(cls.sample_001, 'r')
         lines = fin.readlines()
         fin.close()
         head, entries = parse()
+
+        cls.entries = entries
+        cls.head = head
 
     @classmethod
     def tearDownClass(cls):
@@ -58,9 +65,42 @@ class KenyaParserTest(TestCase):
     #         'foo.bar'
     #     )
 
+    def test_header_001(self):
+        self.assertEqual(4, self.head['series'])
+        self.assertEqual(76, self.head['volume'])
+        self.assertEqual(13, self.head['number'])
+        self.assertEqual(datetime.date(2012, 2, 14), self.head['date'])
+        self.assertEqual(datetime.time(10, 40), self.head['time'])
 
-    def test_number_of_entries():
+    def test_entries_001(self):
+        t = datetime.time(10, 40)
+
+        x = self.entries[0]
+        self.assertTrue(x['text'].lower().endswith('speaker in the chair]'))
+        self.assertEqual(t, x['time'])
+
+        x = self.entries[1]
+        self.assertEqual('PRAYERS', x['text'])
+        self.assertEqual(t, x['time'])
+
+        topic = 'Votes and Proceedings and the Official Report'
+        
+
+        speeches = [x for x in self.entries if x['kind'] is 'speech']
+
+        self.assertEqual(169, len(speeches))
+        
+        x = self.entries[0]
+
+        self.assertEqual(topic, x['topic'])
+        self.assertEqual('Madam Speaker', x['name'])
+
+
+
+
+    def test_page_order_001(self):
         pass
+
 
     # def test_create_entries_from_data_and_source(self):
     #     """Take the data and source, and create the sitting and entries from it"""
