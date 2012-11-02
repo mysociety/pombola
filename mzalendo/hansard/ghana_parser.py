@@ -159,15 +159,19 @@ def parse_line(line):
     return (LINE, line.replace('\n', ' '), None)
 
 
+def parse(lines):
+    lines = parse_lines(lines)
+
+    head = parse_head(lines) # end_line
+    entries = parse_body(body(lines)) # start_line
+    return head, entries
+
 def main(args):
     fin = open(args[1], 'r')
     lines = fin.readlines()
     fin.close()
     # print lines
-    lines = parse_lines(lines)
-
-    head = parse_head(lines) # end_line
-    entries = parse_body(body(lines)) # start_line
+    head, entries = parse(lines)
     print head
     for entry in entries:
         print entry, '\n'
