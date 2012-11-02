@@ -86,11 +86,7 @@ def parse_body(lines):
             elif kind is HEADING:
                 entries.append(dict(heading=line.strip(), time=time))
             elif kind in (TIME, START_TIME):
-                hh, mm = int(match.group(1)), int(match.group(3))
-                t = match.group(4)
-                if t in ('pm', 'PM', 'p.m', 'P.M') and hh != 12:
-                    hh += 12
-                time = datetime.time(hh, mm)
+                time = parse_time(match)
             elif kind is ACTION:
                 person = '%s%s' % (match.group(1), match.group(2))
                 entries.append(dict(action=match.group(3), name=person.strip()))
@@ -109,6 +105,14 @@ def body(lines):
         if line.strip().startswith('Printed by Department of Official Report'):
             return (x for x in lines[i+1:])
     return (x for x in lines)
+
+
+def parse_time(match):
+    hh, mm = int(match.group(1)), int(match.group(3))
+    t = match.group(4)
+    if t in ('pm', 'PM', 'p.m', 'P.M') and hh != 12:
+        hh += 12
+    return datetime.time(hh, mm)
 
 def parse_speech(time, match, lines):
     """A speech has the ff properties:
