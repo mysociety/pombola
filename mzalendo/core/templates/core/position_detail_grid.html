@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load switch %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+
+    <div class="view-selector">
+        <a href="{% url position slug=object.slug %}">View as list</a>
+    </div>
+
+    <h1 class="page-title">{{ object.name }}</h1>
+    
+    {% if object.summary %}
+        <div class="summary markdown">
+            {{ object.summary }}
+        </div>
+    {% endif %}
+    
+    
+    <div class="content_box">
+        <h3>Current Position Holders</h3>
+
+        {% for position in object.position_set.all.currently_active %}
+            <div class="grid-listing-item">
+                {% thumbnail position.person.primary_image "210x210" crop="center" as im %}
+                    <a href="{{ position.person.get_absolute_url }}">
+                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                    </a>
+                {% empty %}
+                    <a href="{{ position.person.get_absolute_url }}">
+                        <img src="{{STATIC_URL}}images/avatar-210x210.jpg" />
+                    </a>
+                {% endthumbnail %}
+
+                <br />
+                <a href="{{ position.person.get_absolute_url }}">
+                    {{ position.person.name }}
+                </a>
+
+            </div>
+        {% endfor %}
+    </div>
+
+    <br clear="both" />
+
+    <div>
+        For past position holders please <a href="{% url position slug=object.slug %}">view as list</a>.
+    </div>
+
+
+
+{% endblock %}
+

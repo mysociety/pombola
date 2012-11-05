@@ -85,8 +85,16 @@ def position(request, slug):
         slug=slug
     )
     
+    # see if we should show the grid
+    view = request.GET.get('view', 'list')
+
+    if view == 'grid':
+        template = 'core/position_detail_grid.html'
+    else:
+        template = 'core/position_detail.html'
+
     return render_to_response(
-        'core/position_detail.html',
+        template,
         {
             'object': title,
         },
