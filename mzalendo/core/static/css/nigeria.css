@@ -90,7 +90,7 @@ ul.ui-autocomplete li {
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
   box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
 }
-.grid-listing-item a.name {
+.grid-listing-item span.name {
   font-size: 120%;
   display: block;
   height: 2.5em;
