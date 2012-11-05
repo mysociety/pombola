@@ -85,6 +85,8 @@ def position(request, slug):
         slug=slug
     )
     
+    positions = title.position_set.all().currently_active().order_by('place')
+    
     # see if we should show the grid
     view = request.GET.get('view', 'list')
 
@@ -97,6 +99,7 @@ def position(request, slug):
         template,
         {
             'object': title,
+            'positions': positions,
         },
         context_instance=RequestContext(request)
     )

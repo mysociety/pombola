@@ -22,7 +22,7 @@
     <div class="content_box">
         <h3>Current Position Holders</h3>
 
-        {% for position in object.position_set.all.currently_active %}
+        {% for position in positions %}
             <div class="grid-listing-item">
                 <a href="{{ position.person.get_absolute_url }}">
                     {% thumbnail position.person.primary_image "210x210" crop="center" as im %}
