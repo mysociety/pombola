@@ -1,4 +1,7 @@
 {% load thumbnail %}
+{% load pagination_tags %}
+
+{% autopaginate positions %}
 
 <ul class="position-listing">
 {% for position in positions %}
@@ -55,3 +58,5 @@
     <li>No records found.</li>
 {% endfor %}
 </ul>
+
+{% paginate %}
