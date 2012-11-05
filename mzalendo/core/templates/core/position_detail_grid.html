@@ -34,8 +34,7 @@
                     </a>
                 {% endthumbnail %}
 
-                <br />
-                <a href="{{ position.person.get_absolute_url }}">
+                <a class="name" href="{{ position.person.get_absolute_url }}">
                     {{ position.person.name }}
                 </a>
 
@@ -44,6 +43,8 @@
     </div>
 
     <br clear="both" />
+
+    <br><br>
 
     <div>
         For past position holders please <a href="{% url position slug=object.slug %}">view as list</a>.
