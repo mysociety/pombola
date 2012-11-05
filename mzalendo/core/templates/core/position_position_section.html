@@ -1,25 +1,54 @@
-<ul class="listing">
+{% load thumbnail %}
+
+<ul class="position-listing">
 {% for position in positions %}
     <li class="position">
         
-        {% if position.is_ongoing %}<strong>{% endif %}
-            <a href="{{ position.person.get_absolute_url }}">{{ position.person.name }}</a>
-        {% if position.is_ongoing %}</strong>{% endif %}                
+        <a href="{{ position.person.get_absolute_url }}">
+            {% thumbnail position.person.primary_image "50x50" crop="center" as im %}
+                <img src="{{ im.url }}" alt="{{ position.person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% empty %}
+                <img src="{{STATIC_URL}}images/avatar-90x90.jpg" height="50" width="50"/>
+            {% endthumbnail %}
+
+            <span class="name">{{ position.person.name }}</span>
+
+            <span class="more">more&hellip;</span>
+        </a>
         
-        {% if position.place %}            
-            of
-            <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
-        {% endif %}
+        <div>
+            {{ object.name }}
+        
+            {% if position.place %}
+                for
+                <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
 
+                {% if position.place.parent_place %}
+                    (in
+                    <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
+                    {{ position.place.parent_place.kind.name }}).
+                {% endif %}
 
-        <div style="float: right">
-            {{ position.display_dates|safe }}
+            {% endif %}
+
+            
+            {% if position.person.parties %}
+
+                Member of
+                {% for party in position.person.parties %}
+                    {% if forloop.revcounter0 %}
+                        {% if forloop.last %}
+                            and
+                        {% else %}
+                            ,
+                        {% endif %}
+                    {% endif %}
+                    <a href="{{ party.get_absolute_url }}">{{ party.name }}</a>
+                {% endfor %}.
+
+            {% endif %}
+            
         </div>
-
-        {% if position.organisation %}
-            at
-            <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>
-        {% endif %}
                 
     </li>
 {% empty %}

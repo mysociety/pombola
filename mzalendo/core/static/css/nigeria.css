@@ -2333,6 +2333,33 @@ ul.listing li section a.read-more:hover {
     text-decoration: none;
   }
 }
+ul.position-listing {
+  padding: 0;
+}
+ul.position-listing li {
+  margin: 0;
+  padding: 4px;
+  min-height: 50px;
+  list-style: none;
+  border-bottom: 1px solid #bbb;
+}
+ul.position-listing li:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+ul.position-listing li span.name {
+  font-size: 125%;
+}
+ul.position-listing li span.more {
+  float: right;
+}
+ul.position-listing li img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin-right: 1em;
+  margin-bottom: 0;
+}
+
 h3.scorecard-overall {
   display: block;
   font-weight: bold;

@@ -57,3 +57,39 @@ ul.listing {
           text-indent: 0;
           width: auto;
           height: auto; } } } } }
+
+
+ul.position-listing {
+
+  padding: 0;
+
+  li {
+
+    margin: 0;
+    padding: 4px;
+    min-height: 50px;
+    
+    list-style: none;
+    border-bottom: 1px solid #bbb;
+
+    &:nth-child(odd) {
+      background-color: #f9f9f9;
+    }
+
+    span.name {
+      font-size: 125%;
+    }
+
+    span.more {
+      float: right;
+    }
+
+    img {
+      float: left;
+      width:  50px;
+      height: 50px;
+      margin-right: 1em;
+      margin-bottom: 0;
+    }
+  }
+}
