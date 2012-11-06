@@ -3,6 +3,28 @@
 
 {% autopaginate positions %}
 
+<div class="search-filters">
+    <form method="get">
+        Where:
+        
+        <select name="place_slug">
+            <option value="">All</option>
+            {% for place in places  %}
+                <option
+                    {% if place_slug = place.slug %}selected="selected"{% endif %}
+                    value="{{ place.slug }}"
+                >{{ place.name }} ({{ place.kind.name }})</option>
+            {% endfor %}
+        </select>
+        
+        <input type="submit" value="Search" />
+    </form>
+</div>
+
+<div class="search-pagination">
+    Showing <strong>{{ page_obj.start_index }}</strong> to <strong>{{ page_obj.end_index }}</strong> of <strong>{{ paginator.count }}</strong>.
+</div>
+
 <ul class="position-listing">
 {% for position in positions %}
     <li class="position">

@@ -87,19 +87,32 @@ def position(request, slug):
     
     positions = title.position_set.all().currently_active().order_by('place')
     
+    place_slug = request.GET.get('place_slug')
+    if place_slug:
+        positions = positions.filter(place__slug=place_slug)
+    
     # see if we should show the grid
     view = request.GET.get('view', 'list')
 
     if view == 'grid':
         template = 'core/position_detail_grid.html'
+        places   = [] # not relevant to this view
     else:
         template = 'core/position_detail.html'
+
+        # This is an expensive query. Alternative is to have some sort of config that
+        # links job titles to relevant place kinds - eg MP :: constituency. Even that
+        # would fail for some types of position though.
+        places = [x.place for x in positions.distinct('place').order_by('place__name')]
+
 
     return render_to_response(
         template,
         {
-            'object': title,
-            'positions': positions,
+            'object':     title,
+            'positions':  positions,
+            'places':     places,
+            'place_slug': place_slug,
         },
         context_instance=RequestContext(request)
     )

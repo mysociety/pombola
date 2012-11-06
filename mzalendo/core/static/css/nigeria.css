@@ -2335,6 +2335,9 @@ ul.listing li section a.read-more:hover {
 }
 ul.position-listing {
   padding: 0;
+  border-color: #bbb;
+  border-style: solid;
+  border-width: 0 1px;
 }
 ul.position-listing li {
   margin: 0;
@@ -2344,7 +2347,7 @@ ul.position-listing li {
   border-bottom: 1px solid #bbb;
 }
 ul.position-listing li:nth-child(odd) {
-  background-color: #f9f9f9;
+  background-color: #f4f4f4;
 }
 ul.position-listing li span.name {
   font-size: 125%;
@@ -2358,6 +2361,29 @@ ul.position-listing li img {
   height: 50px;
   margin-right: 1em;
   margin-bottom: 0;
+}
+
+div.search-filters, div.search-pagination {
+  color: #eee;
+  padding: 8px;
+  min-height: 1.5em;
+  font-size: 90%;
+}
+
+div.search-filters {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #27a942), color-stop(100%, #22913b));
+  background: -webkit-linear-gradient(#27a942, #22913b);
+  background: -moz-linear-gradient(#27a942, #22913b);
+  background: -o-linear-gradient(#27a942, #22913b);
+  background: linear-gradient(#27a942, #22913b);
+}
+
+div.search-pagination {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333132), color-stop(100%, #4c4c4e));
+  background: -webkit-linear-gradient(#333132, #4c4c4e);
+  background: -moz-linear-gradient(#333132, #4c4c4e);
+  background: -o-linear-gradient(#333132, #4c4c4e);
+  background: linear-gradient(#333132, #4c4c4e);
 }
 
 h3.scorecard-overall {
