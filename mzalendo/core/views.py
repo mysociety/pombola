@@ -109,7 +109,7 @@ def position(request, slug):
         
         # Extract all the parent places too
         parent_places = [x.parent_place for x in child_places]
-        parent_places = sorted( set( parent_places ) ) 
+        parent_places = sorted( set( parent_places ), key=lambda item: item.name ) 
         
         # combine the places into a single list for the search drop down
         places = []
