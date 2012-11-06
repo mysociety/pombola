@@ -89,7 +89,9 @@ def position(request, slug):
     
     place_slug = request.GET.get('place_slug')
     if place_slug:
-        positions = positions.filter(place__slug=place_slug)
+        positions = positions.filter(
+            Q(place__slug=place_slug) | Q(place__parent_place__slug=place_slug)
+        )
     
     # see if we should show the grid
     view = request.GET.get('view', 'list')
@@ -103,7 +105,16 @@ def position(request, slug):
         # This is an expensive query. Alternative is to have some sort of config that
         # links job titles to relevant place kinds - eg MP :: constituency. Even that
         # would fail for some types of position though.
-        places = [x.place for x in positions.distinct('place').order_by('place__name')]
+        child_places = [x.place for x in positions.distinct('place').order_by('place__name')]
+        
+        # Extract all the parent places too
+        parent_places = [x.parent_place for x in child_places]
+        parent_places = sorted( set( parent_places ) ) 
+        
+        # combine the places into a single list for the search drop down
+        places = []
+        places.extend(parent_places)
+        places.extend(child_places)
 
 
     return render_to_response(
