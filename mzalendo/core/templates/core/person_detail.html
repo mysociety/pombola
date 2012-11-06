@@ -43,6 +43,15 @@
 
     <div class="profile-info">
         <div class="constituency-party">
+
+            {% if object.aspirant_constituencies.count %}
+                <h3>Aspirant for</h3>
+                <ul>
+                    {% for constituency in object.aspirant_constituencies %}
+                        <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
+                    {% endfor %}
+            {% endif %}
+
             <h3>Constituency</h3>
             <ul>
                 {% for constituency in object.constituencies %}
@@ -92,14 +101,14 @@
     <div class="large-container">
         <div class="tab-wrapper">
 
-            {% include 'disqus_comments.html' %}
-
             {% if object.summary %}
             <h2 class="tab-nav" rel="#overview">Overview</h2>
             <div class="tab markdown" id="overview">
                 {{ object.summary }}
             </div>
             {% endif %}
+
+            {% include 'disqus_comments.html' %}
 
             <h2 class="tab-nav" rel="#experience">Experience</h2>
             <div class="tab" id="experience">

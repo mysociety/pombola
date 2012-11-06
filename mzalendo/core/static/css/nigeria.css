@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -14,12 +15,12 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
+  font-size: 100%;
   vertical-align: baseline;
 }
 
-body {
+html {
   line-height: 1;
 }
 
@@ -73,6 +74,27 @@ div.error {
 
 ul.ui-autocomplete li {
   list-style: none;
+}
+
+.view-selector {
+  float: right;
+}
+
+.grid-listing-item {
+  float: left;
+  width: 210px;
+  margin: 10px;
+  padding: 5px;
+  overflow: hidden;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+}
+.grid-listing-item span.name {
+  font-size: 120%;
+  display: block;
+  height: 2.5em;
+  overflow: hidden;
 }
 
 body {
@@ -191,11 +213,12 @@ pre {
 }
 
 .btn-text-green {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -205,16 +228,12 @@ pre {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   background: #87c43c;
-}
-.btn-text-green {
-  *display: inline;
 }
 .btn-text-green:hover {
   background: #a0a0a0;
@@ -226,11 +245,12 @@ pre {
 }
 
 .btn-text-red {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -240,16 +260,12 @@ pre {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   background: #d40000;
-}
-.btn-text-red {
-  *display: inline;
 }
 .btn-text-red:hover {
   background: #a0a0a0;
@@ -261,11 +277,12 @@ pre {
 }
 
 .big-btn-text-green {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -275,44 +292,36 @@ pre {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   text-transform: none;
   font-size: 14px;
   padding: 5px 8px;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  -moz-border-radius: 5px;
+  zoom: 1;
+  *display: inline;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
   background: #87c43c;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
   background: -webkit-linear-gradient(#96d942, #87c43c);
   background: -moz-linear-gradient(#96d942, #87c43c);
   background: -o-linear-gradient(#96d942, #87c43c);
-  background: -ms-linear-gradient(#96d942, #87c43c);
   background: linear-gradient(#96d942, #87c43c);
-}
-.big-btn-text-green {
-  *display: inline;
 }
 .big-btn-text-green:hover {
   background: #a0a0a0;
   color: white;
   text-decoration: none;
-}
-.big-btn-text-green {
-  *display: inline;
 }
 .big-btn-text-green:hover {
   background: #96d942;
@@ -320,16 +329,16 @@ pre {
   background: -webkit-linear-gradient(#87c43c, #96d942);
   background: -moz-linear-gradient(#87c43c, #96d942);
   background: -o-linear-gradient(#87c43c, #96d942);
-  background: -ms-linear-gradient(#87c43c, #96d942);
   background: linear-gradient(#87c43c, #96d942);
 }
 
 .big-btn-text-red {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -339,44 +348,36 @@ pre {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   text-transform: none;
   font-size: 14px;
   padding: 5px 8px;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  -moz-border-radius: 5px;
+  zoom: 1;
+  *display: inline;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
   background: #d40000;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ff0000), color-stop(100%, #d40000));
   background: -webkit-linear-gradient(#ff0000, #d40000);
   background: -moz-linear-gradient(#ff0000, #d40000);
   background: -o-linear-gradient(#ff0000, #d40000);
-  background: -ms-linear-gradient(#ff0000, #d40000);
   background: linear-gradient(#ff0000, #d40000);
-}
-.big-btn-text-red {
-  *display: inline;
 }
 .big-btn-text-red:hover {
   background: #a0a0a0;
   color: white;
   text-decoration: none;
-}
-.big-btn-text-red {
-  *display: inline;
 }
 .big-btn-text-red:hover {
   background: red;
@@ -384,16 +385,16 @@ pre {
   background: -webkit-linear-gradient(#d40000, #ff0000);
   background: -moz-linear-gradient(#d40000, #ff0000);
   background: -o-linear-gradient(#d40000, #ff0000);
-  background: -ms-linear-gradient(#d40000, #ff0000);
   background: linear-gradient(#d40000, #ff0000);
 }
 
 .big-btn-text-fb {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -403,59 +404,51 @@ pre {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   text-transform: none;
   font-size: 14px;
   padding: 5px 8px;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  -moz-border-radius: 5px;
+  zoom: 1;
+  *display: inline;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0049d7), color-stop(100%, #0042c2));
   background: -webkit-linear-gradient(#0049d7, #0042c2);
   background: -moz-linear-gradient(#0049d7, #0042c2);
   background: -o-linear-gradient(#0049d7, #0042c2);
-  background: -ms-linear-gradient(#0049d7, #0042c2);
   background: linear-gradient(#0049d7, #0042c2);
-}
-.big-btn-text-fb {
-  *display: inline;
 }
 .big-btn-text-fb:hover {
   background: #a0a0a0;
   color: white;
   text-decoration: none;
-}
-.big-btn-text-fb {
-  *display: inline;
 }
 .big-btn-text-fb:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0042c2), color-stop(100%, #0049d7));
   background: -webkit-linear-gradient(#0042c2, #0049d7);
   background: -moz-linear-gradient(#0042c2, #0049d7);
   background: -o-linear-gradient(#0042c2, #0049d7);
-  background: -ms-linear-gradient(#0042c2, #0049d7);
   background: linear-gradient(#0042c2, #0049d7);
 }
 
 .big-btn-text-tw {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -465,50 +458,41 @@ pre {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   text-transform: none;
   font-size: 14px;
   padding: 5px 8px;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  -moz-border-radius: 5px;
+  zoom: 1;
+  *display: inline;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #7ad9e7), color-stop(100%, #74cfdc));
   background: -webkit-linear-gradient(#7ad9e7, #74cfdc);
   background: -moz-linear-gradient(#7ad9e7, #74cfdc);
   background: -o-linear-gradient(#7ad9e7, #74cfdc);
-  background: -ms-linear-gradient(#7ad9e7, #74cfdc);
   background: linear-gradient(#7ad9e7, #74cfdc);
-}
-.big-btn-text-tw {
-  *display: inline;
 }
 .big-btn-text-tw:hover {
   background: #a0a0a0;
   color: white;
   text-decoration: none;
 }
-.big-btn-text-tw {
-  *display: inline;
-}
 .big-btn-text-tw:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #74cfdc), color-stop(100%, #7ad9e7));
   background: -webkit-linear-gradient(#74cfdc, #7ad9e7);
   background: -moz-linear-gradient(#74cfdc, #7ad9e7);
   background: -o-linear-gradient(#74cfdc, #7ad9e7);
-  background: -ms-linear-gradient(#74cfdc, #7ad9e7);
   background: linear-gradient(#74cfdc, #7ad9e7);
 }
 
@@ -530,7 +514,6 @@ pre {
   background: -webkit-linear-gradient(#00c25c, #009245);
   background: -moz-linear-gradient(#00c25c, #009245);
   background: -o-linear-gradient(#00c25c, #009245);
-  background: -ms-linear-gradient(#00c25c, #009245);
   background: linear-gradient(#00c25c, #009245);
 }
 #site-header .wrapper {
@@ -626,11 +609,10 @@ menu#mobile-top-tools ul li a img {
   padding: 1px 4px 1px 8px;
   border: 1px solid gray;
   height: 22px;
-  -moz-border-radius: 5px 0 0 5px;
   -webkit-border-radius: 5px 0 0 5px;
-  -o-border-radius: 5px 0 0 5px;
+  -moz-border-radius: 5px 0 0 5px;
   -ms-border-radius: 5px 0 0 5px;
-  -khtml-border-radius: 5px 0 0 5px;
+  -o-border-radius: 5px 0 0 5px;
   border-radius: 5px 0 0 5px;
   float: left;
   width: 117px;
@@ -647,21 +629,19 @@ menu#mobile-top-tools ul li a img {
   width: auto;
   height: auto;
   text-indent: -999999px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   background: black url(../images/search-icon.png) center no-repeat;
   width: 26px;
   height: 26px;
   margin: 0 0 0 0;
-  -moz-border-radius: 0 5px 5px 0;
   -webkit-border-radius: 0 5px 5px 0;
-  -o-border-radius: 0 5px 5px 0;
+  -moz-border-radius: 0 5px 5px 0;
   -ms-border-radius: 0 5px 5px 0;
-  -khtml-border-radius: 0 5px 5px 0;
+  -o-border-radius: 0 5px 5px 0;
   border-radius: 0 5px 5px 0;
 }
 #header-search button:hover {
@@ -748,18 +728,16 @@ menu#site-user-tools ul li.login {
 menu#site-user-tools ul li.login a {
   font-size: 11px;
   padding: 3px 25px 3px 10px;
-  -moz-border-radius: 2px 0 0 2px;
   -webkit-border-radius: 2px 0 0 2px;
-  -o-border-radius: 2px 0 0 2px;
+  -moz-border-radius: 2px 0 0 2px;
   -ms-border-radius: 2px 0 0 2px;
-  -khtml-border-radius: 2px 0 0 2px;
+  -o-border-radius: 2px 0 0 2px;
   border-radius: 2px 0 0 2px;
   background: black url(../images/login-arrows.png) 54px -19px no-repeat;
   background: url(../images/login-arrows.png) 54px -19px no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #707070), color-stop(100%, #000000));
   background: url(../images/login-arrows.png) 54px -19px no-repeat, -webkit-linear-gradient(#707070, #000000);
   background: url(../images/login-arrows.png) 54px -19px no-repeat, -moz-linear-gradient(#707070, #000000);
   background: url(../images/login-arrows.png) 54px -19px no-repeat, -o-linear-gradient(#707070, #000000);
-  background: url(../images/login-arrows.png) 54px -19px no-repeat, -ms-linear-gradient(#707070, #000000);
   background: url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#707070, #000000);
 }
 menu#site-user-tools ul li.login a:hover {
@@ -769,7 +747,6 @@ menu#site-user-tools ul li.login a:hover {
   background: url(../images/login-arrows.png) 54px -19px no-repeat, -webkit-linear-gradient(#000000, #707070);
   background: url(../images/login-arrows.png) 54px -19px no-repeat, -moz-linear-gradient(#000000, #707070);
   background: url(../images/login-arrows.png) 54px -19px no-repeat, -o-linear-gradient(#000000, #707070);
-  background: url(../images/login-arrows.png) 54px -19px no-repeat, -ms-linear-gradient(#000000, #707070);
   background: url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#000000, #707070);
 }
 menu#site-user-tools ul li.logged-in {
@@ -779,17 +756,15 @@ menu#site-user-tools ul li.logged-in a {
   font-size: 9px;
   margin: 3px;
   padding: 0 7px;
-  -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #707070), color-stop(100%, #000000));
   background: -webkit-linear-gradient(#707070, #000000);
   background: -moz-linear-gradient(#707070, #000000);
   background: -o-linear-gradient(#707070, #000000);
-  background: -ms-linear-gradient(#707070, #000000);
   background: linear-gradient(#707070, #000000);
 }
 menu#site-user-tools ul li.logged-in a:hover {
@@ -799,7 +774,6 @@ menu#site-user-tools ul li.logged-in a:hover {
   background: -webkit-linear-gradient(#000000, #707070);
   background: -moz-linear-gradient(#000000, #707070);
   background: -o-linear-gradient(#000000, #707070);
-  background: -ms-linear-gradient(#000000, #707070);
   background: linear-gradient(#000000, #707070);
 }
 menu#site-user-tools ul li.logged-in-name {
@@ -815,11 +789,10 @@ menu#site-user-tools ul li.active {
 }
 menu#site-user-tools ul li.active a {
   color: gray;
-  -moz-border-radius: 0;
   -webkit-border-radius: 0;
-  -o-border-radius: 0;
+  -moz-border-radius: 0;
   -ms-border-radius: 0;
-  -khtml-border-radius: 0;
+  -o-border-radius: 0;
   border-radius: 0;
   background: #e6e6e6 url(../images/login-arrows.png) 54px 11px no-repeat;
 }
@@ -840,9 +813,8 @@ menu#site-user-tools ul li.active a:hover {
   border-bottom: 1px solid #666666;
   width: 175px;
   padding: 10px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
-  -o-box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
 }
 #login-box #login {
@@ -877,7 +849,6 @@ menu#site-user-tools ul li.active a:hover {
   background: -webkit-linear-gradient(#000000, #555555);
   background: -moz-linear-gradient(#000000, #555555);
   background: -o-linear-gradient(#000000, #555555);
-  background: -ms-linear-gradient(#000000, #555555);
   background: linear-gradient(#000000, #555555);
 }
 @media only screen and (min-width: 640px) {
@@ -893,11 +864,12 @@ menu#site-user-tools ul li.active a:hover {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   width: auto;
 }
 #main-menu nav ul li {
@@ -905,9 +877,6 @@ menu#site-user-tools ul li.active a:hover {
   padding: 0;
   margin: 0;
   border: 0;
-}
-#main-menu nav ul {
-  *display: inline;
 }
 #main-menu nav ul li {
   position: relative;
@@ -930,7 +899,6 @@ menu#site-user-tools ul li.active a:hover {
   background: -webkit-linear-gradient(#000000, #555555);
   background: -moz-linear-gradient(#000000, #555555);
   background: -o-linear-gradient(#000000, #555555);
-  background: -ms-linear-gradient(#000000, #555555);
   background: linear-gradient(#000000, #555555);
 }
 #main-menu nav ul li a:hover {
@@ -939,7 +907,6 @@ menu#site-user-tools ul li.active a:hover {
   background: -webkit-linear-gradient(#555555, #000000);
   background: -moz-linear-gradient(#555555, #000000);
   background: -o-linear-gradient(#555555, #000000);
-  background: -ms-linear-gradient(#555555, #000000);
   background: linear-gradient(#555555, #000000);
 }
 #main-menu nav ul li:last-child {
@@ -1163,7 +1130,6 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-linear-gradient(#777777, #000000);
   background: url(../images/chevron-right.png) 9px center no-repeat, -moz-linear-gradient(#777777, #000000);
   background: url(../images/chevron-right.png) 9px center no-repeat, -o-linear-gradient(#777777, #000000);
-  background: url(../images/chevron-right.png) 9px center no-repeat, -ms-linear-gradient(#777777, #000000);
   background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#777777, #000000);
 }
 #site-footer .subscribe-box form .subscribe-fields input.button:hover {
@@ -1172,7 +1138,6 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-linear-gradient(#848484, #000000);
   background: url(../images/chevron-right.png) 9px center no-repeat, -moz-linear-gradient(#848484, #000000);
   background: url(../images/chevron-right.png) 9px center no-repeat, -o-linear-gradient(#848484, #000000);
-  background: url(../images/chevron-right.png) 9px center no-repeat, -ms-linear-gradient(#848484, #000000);
   background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#848484, #000000);
 }
 #site-footer .subscribe-box form .subscribe-fields input.button:active {
@@ -1181,7 +1146,6 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/chevron-right.png) 9px center no-repeat, -webkit-linear-gradient(#000000, #777777);
   background: url(../images/chevron-right.png) 9px center no-repeat, -moz-linear-gradient(#000000, #777777);
   background: url(../images/chevron-right.png) 9px center no-repeat, -o-linear-gradient(#000000, #777777);
-  background: url(../images/chevron-right.png) 9px center no-repeat, -ms-linear-gradient(#000000, #777777);
   background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#000000, #777777);
 }
 
@@ -1292,11 +1256,12 @@ menu#site-user-tools ul li.active a:hover {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   width: 100%;
 }
 #page .small-container ul.scorecard li {
@@ -1304,9 +1269,6 @@ menu#site-user-tools ul li.active a:hover {
   padding: 0;
   margin: 0;
   border: 0;
-}
-#page .small-container ul.scorecard {
-  *display: inline;
 }
 #page .small-container ul.scorecard li article {
   padding: 10px;
@@ -1316,16 +1278,14 @@ menu#site-user-tools ul li.active a:hover {
   overflow: hidden;
 }
 #page .small-container ul.scorecard li article header h4 {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   padding-right: 20px;
   position: relative;
-}
-#page .small-container ul.scorecard li article header h4 {
-  *display: inline;
 }
 #page .small-container ul.scorecard li article header h4 .btn-question {
   position: absolute;
@@ -1356,11 +1316,10 @@ menu#site-user-tools ul li.active a:hover {
   padding: 10px;
   font-weight: bold;
   clear: both;
-  -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
 }
 #page .small-container ul.scorecard li article header .details span.shout p {
@@ -1604,18 +1563,16 @@ menu#site-user-tools ul li.active a:hover {
     border-bottom: 2px solid white;
   }
   #page .small-container h3.scorecard-overall span {
-    display: -moz-inline-box;
-    -moz-box-orient: vertical;
+    display: -moz-inline-stack;
     display: inline-block;
     vertical-align: middle;
     *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
     height: 32px;
     padding: 5px 0 0 130px;
     margin: -5px 0 0 24px;
     background: url(../images/d-smiley-sprite.png) 0 0 no-repeat;
-  }
-  #page .small-container h3.scorecard-overall span {
-    *display: inline;
   }
   #page .small-container h3.scorecard-overall span.score-overall-good {
     background-position: left -2px;
@@ -1715,11 +1672,10 @@ menu#site-user-tools ul li.active a:hover {
     background: #2e2e2e;
     color: white;
     padding: 5px;
-    -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    -o-border-radius: 5px;
+    -moz-border-radius: 5px;
     -ms-border-radius: 5px;
-    -khtml-border-radius: 5px;
+    -o-border-radius: 5px;
     border-radius: 5px;
   }
   #page .profile-info .constituency-party ul li a:hover {
@@ -1772,13 +1728,11 @@ menu#site-user-tools ul li.active a:hover {
   }
   #page #comments .big-btn-text-green {
     float: right;
-    display: -moz-inline-box;
-    -moz-box-orient: vertical;
+    display: -moz-inline-stack;
     display: inline-block;
     vertical-align: middle;
     *vertical-align: auto;
-  }
-  #page #comments .big-btn-text-green {
+    zoom: 1;
     *display: inline;
   }
   #page #comments h3 {
@@ -1861,11 +1815,10 @@ menu#site-user-tools ul li.active a:hover {
   width: auto;
   height: auto;
   text-indent: -999999px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   position: absolute;
   right: 10px;
@@ -1878,7 +1831,6 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/chevron-down-alt.png) center no-repeat, -webkit-linear-gradient(#ffffff, #d2d2d2);
   background: url(../images/chevron-down-alt.png) center no-repeat, -moz-linear-gradient(#ffffff, #d2d2d2);
   background: url(../images/chevron-down-alt.png) center no-repeat, -o-linear-gradient(#ffffff, #d2d2d2);
-  background: url(../images/chevron-down-alt.png) center no-repeat, -ms-linear-gradient(#ffffff, #d2d2d2);
   background: url(../images/chevron-down-alt.png) center no-repeat, linear-gradient(#ffffff, #d2d2d2);
 }
 .page-title .m-sub-menu-trigger.active {
@@ -1887,7 +1839,6 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/chevron-up-alt.png) center no-repeat, -webkit-linear-gradient(#d2d2d2, #ffffff);
   background: url(../images/chevron-up-alt.png) center no-repeat, -moz-linear-gradient(#d2d2d2, #ffffff);
   background: url(../images/chevron-up-alt.png) center no-repeat, -o-linear-gradient(#d2d2d2, #ffffff);
-  background: url(../images/chevron-up-alt.png) center no-repeat, -ms-linear-gradient(#d2d2d2, #ffffff);
   background: url(../images/chevron-up-alt.png) center no-repeat, linear-gradient(#d2d2d2, #ffffff);
 }
 
@@ -1943,7 +1894,6 @@ menu#site-user-tools ul li.active a:hover {
     background: -webkit-linear-gradient(#ffffff, #f6f6f6);
     background: -moz-linear-gradient(#ffffff, #f6f6f6);
     background: -o-linear-gradient(#ffffff, #f6f6f6);
-    background: -ms-linear-gradient(#ffffff, #f6f6f6);
     background: linear-gradient(#ffffff, #f6f6f6);
   }
   #tab-nav ul li a:hover {
@@ -1955,11 +1905,10 @@ menu#site-user-tools ul li.active a:hover {
     padding: 9px 15px;
     background: #fff;
     border-bottom: 1px solid #fff;
-    -moz-border-radius: 0 0 2px 2px;
     -webkit-border-radius: 0 0 2px 2px;
-    -o-border-radius: 0 0 2px 2px;
+    -moz-border-radius: 0 0 2px 2px;
     -ms-border-radius: 0 0 2px 2px;
-    -khtml-border-radius: 0 0 2px 2px;
+    -o-border-radius: 0 0 2px 2px;
     border-radius: 0 0 2px 2px;
   }
 }
@@ -1993,18 +1942,16 @@ menu#site-user-tools ul li.active a:hover {
   border-top: 3px solid #777777;
   border-left: 3px solid #777777;
   border-bottom: 3px solid #777777;
-  -moz-border-radius: 4px 0 0 4px;
   -webkit-border-radius: 4px 0 0 4px;
-  -o-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
   -ms-border-radius: 4px 0 0 4px;
-  -khtml-border-radius: 4px 0 0 4px;
+  -o-border-radius: 4px 0 0 4px;
   border-radius: 4px 0 0 4px;
 }
 .search-box input#id_q:focus, .search-box input#loc:focus {
   outline: none;
-  -moz-box-shadow: inset rgba(0, 0, 0, 0.5) 0 0 4px;
   -webkit-box-shadow: inset rgba(0, 0, 0, 0.5) 0 0 4px;
-  -o-box-shadow: inset rgba(0, 0, 0, 0.5) 0 0 4px;
+  -moz-box-shadow: inset rgba(0, 0, 0, 0.5) 0 0 4px;
   box-shadow: inset rgba(0, 0, 0, 0.5) 0 0 4px;
 }
 .search-box input.button {
@@ -2015,18 +1962,16 @@ menu#site-user-tools ul li.active a:hover {
   border: none;
   margin-left: -2px;
   text-indent: -999999px;
-  -moz-border-radius: 0 4px 4px 0;
   -webkit-border-radius: 0 4px 4px 0;
-  -o-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
   -ms-border-radius: 0 4px 4px 0;
-  -khtml-border-radius: 0 4px 4px 0;
+  -o-border-radius: 0 4px 4px 0;
   border-radius: 0 4px 4px 0;
   background: #777777 url(../images/search-icon.png) 9px center no-repeat;
   background: url(../images/search-icon.png) 9px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #777777), color-stop(100%, #000000));
   background: url(../images/search-icon.png) 9px center no-repeat, -webkit-linear-gradient(#777777, #000000);
   background: url(../images/search-icon.png) 9px center no-repeat, -moz-linear-gradient(#777777, #000000);
   background: url(../images/search-icon.png) 9px center no-repeat, -o-linear-gradient(#777777, #000000);
-  background: url(../images/search-icon.png) 9px center no-repeat, -ms-linear-gradient(#777777, #000000);
   background: url(../images/search-icon.png) 9px center no-repeat, linear-gradient(#777777, #000000);
 }
 .search-box input.button:hover {
@@ -2035,7 +1980,6 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/search-icon.png) 9px center no-repeat, -webkit-linear-gradient(#848484, #000000);
   background: url(../images/search-icon.png) 9px center no-repeat, -moz-linear-gradient(#848484, #000000);
   background: url(../images/search-icon.png) 9px center no-repeat, -o-linear-gradient(#848484, #000000);
-  background: url(../images/search-icon.png) 9px center no-repeat, -ms-linear-gradient(#848484, #000000);
   background: url(../images/search-icon.png) 9px center no-repeat, linear-gradient(#848484, #000000);
 }
 .search-box input.button:active {
@@ -2044,7 +1988,6 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/search-icon.png) 9px center no-repeat, -webkit-linear-gradient(#000000, #777777);
   background: url(../images/search-icon.png) 9px center no-repeat, -moz-linear-gradient(#000000, #777777);
   background: url(../images/search-icon.png) 9px center no-repeat, -o-linear-gradient(#000000, #777777);
-  background: url(../images/search-icon.png) 9px center no-repeat, -ms-linear-gradient(#000000, #777777);
   background: url(../images/search-icon.png) 9px center no-repeat, linear-gradient(#000000, #777777);
 }
 
@@ -2126,11 +2069,12 @@ ul.comments li section .read-more-wrap, ul.listing li section .read-more-wrap {
   bottom: 15px;
 }
 ul.comments li section a.read-more, ul.listing li section a.read-more {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -2140,15 +2084,11 @@ ul.comments li section a.read-more, ul.listing li section a.read-more {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
-}
-ul.comments li section a.read-more, ul.listing li section a.read-more {
-  *display: inline;
 }
 ul.comments li section a.read-more:hover, ul.listing li section a.read-more:hover {
   background: #a0a0a0;
@@ -2191,11 +2131,12 @@ ul.comments li section ul.tools li, ul.listing li section ul.tools li {
   margin-left: 5px;
 }
 ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -2205,15 +2146,11 @@ ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
-}
-ul.comments li section ul.tools li a, ul.listing li section ul.tools li a {
-  *display: inline;
 }
 ul.comments li section ul.tools li a:hover, ul.listing li section ul.tools li a:hover {
   background: #a0a0a0;
@@ -2221,11 +2158,12 @@ ul.comments li section ul.tools li a:hover, ul.listing li section ul.tools li a:
   text-decoration: none;
 }
 ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.like {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -2235,16 +2173,12 @@ ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.l
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   background: #87c43c;
-}
-ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.like {
-  *display: inline;
 }
 ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
   background: #a0a0a0;
@@ -2255,11 +2189,12 @@ ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools 
   background: #96d942;
 }
 ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a.report {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -2269,16 +2204,12 @@ ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   background: #d40000;
-}
-ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a.report {
-  *display: inline;
 }
 ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tools li a.report:hover {
   background: #a0a0a0;
@@ -2342,11 +2273,10 @@ ul.listing li section a.read-more {
   width: 24px;
   height: 24px;
   background: black url(../images/chevron-right.png) 6px 2px no-repeat;
-  -moz-border-radius: 24px;
   -webkit-border-radius: 24px;
-  -o-border-radius: 24px;
+  -moz-border-radius: 24px;
   -ms-border-radius: 24px;
-  -khtml-border-radius: 24px;
+  -o-border-radius: 24px;
   border-radius: 24px;
 }
 ul.listing li section a.read-more:hover {
@@ -2373,11 +2303,12 @@ ul.listing li section a.read-more:hover {
     bottom: 15px;
   }
   ul.listing li section a.read-more {
-    display: -moz-inline-box;
-    -moz-box-orient: vertical;
+    display: -moz-inline-stack;
     display: inline-block;
     vertical-align: middle;
     *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
     cursor: pointer;
     background: gray;
     color: white;
@@ -2387,18 +2318,14 @@ ul.listing li section a.read-more:hover {
     font-weight: bold;
     line-height: 1;
     padding: 5px 8px;
-    -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    -o-border-radius: 2px;
+    -moz-border-radius: 2px;
     -ms-border-radius: 2px;
-    -khtml-border-radius: 2px;
+    -o-border-radius: 2px;
     border-radius: 2px;
     text-indent: 0;
     width: auto;
     height: auto;
-  }
-  ul.listing li section a.read-more {
-    *display: inline;
   }
   ul.listing li section a.read-more:hover {
     background: #a0a0a0;
@@ -2406,6 +2333,59 @@ ul.listing li section a.read-more:hover {
     text-decoration: none;
   }
 }
+ul.position-listing {
+  padding: 0;
+  border-color: #bbb;
+  border-style: solid;
+  border-width: 0 1px;
+}
+ul.position-listing li {
+  margin: 0;
+  padding: 4px;
+  min-height: 50px;
+  list-style: none;
+  border-bottom: 1px solid #bbb;
+}
+ul.position-listing li:nth-child(odd) {
+  background-color: #f4f4f4;
+}
+ul.position-listing li span.name {
+  font-size: 125%;
+}
+ul.position-listing li span.more {
+  float: right;
+}
+ul.position-listing li img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin-right: 1em;
+  margin-bottom: 0;
+}
+
+div.search-filters, div.search-pagination {
+  color: #eee;
+  padding: 8px;
+  min-height: 1.5em;
+  font-size: 90%;
+}
+
+div.search-filters {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #27a942), color-stop(100%, #22913b));
+  background: -webkit-linear-gradient(#27a942, #22913b);
+  background: -moz-linear-gradient(#27a942, #22913b);
+  background: -o-linear-gradient(#27a942, #22913b);
+  background: linear-gradient(#27a942, #22913b);
+}
+
+div.search-pagination {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333132), color-stop(100%, #4c4c4e));
+  background: -webkit-linear-gradient(#333132, #4c4c4e);
+  background: -moz-linear-gradient(#333132, #4c4c4e);
+  background: -o-linear-gradient(#333132, #4c4c4e);
+  background: linear-gradient(#333132, #4c4c4e);
+}
+
 h3.scorecard-overall {
   display: block;
   font-weight: bold;
@@ -2433,19 +2413,16 @@ h3.scorecard-overall span.score-overall-bad {
 }
 .pagination a,
 .pagination span {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   padding: 6px 10px;
   background: #F6F6F6;
   text-decoration: none;
   border: 2px solid #F6F6F6;
-}
-.pagination a,
-.pagination span {
-  *display: inline;
 }
 .pagination a:hover,
 .pagination span:hover {
@@ -2493,11 +2470,10 @@ h3.scorecard-overall span.score-overall-bad {
   border: 2px solid #777777;
   padding: 6px;
   font-size: 16px;
-  -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
-  -o-border-radius: 4px;
+  -moz-border-radius: 4px;
   -ms-border-radius: 4px;
-  -khtml-border-radius: 4px;
+  -o-border-radius: 4px;
   border-radius: 4px;
 }
 #ajax_dialog_subcontent textarea:focus {
@@ -2505,11 +2481,12 @@ h3.scorecard-overall span.score-overall-bad {
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 8px;
 }
 #ajax_dialog_subcontent input.submit {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -2519,46 +2496,38 @@ h3.scorecard-overall span.score-overall-bad {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   text-transform: none;
   font-size: 14px;
   padding: 5px 8px;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  -moz-border-radius: 5px;
+  zoom: 1;
+  *display: inline;
   -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
   background: #87c43c;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
   background: -webkit-linear-gradient(#96d942, #87c43c);
   background: -moz-linear-gradient(#96d942, #87c43c);
   background: -o-linear-gradient(#96d942, #87c43c);
-  background: -ms-linear-gradient(#96d942, #87c43c);
   background: linear-gradient(#96d942, #87c43c);
   border: none;
   float: right;
-}
-#ajax_dialog_subcontent input.submit {
-  *display: inline;
 }
 #ajax_dialog_subcontent input.submit:hover {
   background: #a0a0a0;
   color: white;
   text-decoration: none;
-}
-#ajax_dialog_subcontent input.submit {
-  *display: inline;
 }
 #ajax_dialog_subcontent input.submit:hover {
   background: #96d942;
@@ -2566,7 +2535,6 @@ h3.scorecard-overall span.score-overall-bad {
   background: -webkit-linear-gradient(#87c43c, #96d942);
   background: -moz-linear-gradient(#87c43c, #96d942);
   background: -o-linear-gradient(#87c43c, #96d942);
-  background: -ms-linear-gradient(#87c43c, #96d942);
   background: linear-gradient(#87c43c, #96d942);
 }
 #ajax_dialog_subcontent .errorlist {
@@ -2585,11 +2553,10 @@ h3.scorecard-overall span.score-overall-bad {
   color: white;
   padding: 4px 6px;
   font-size: 13px;
-  -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  -o-border-radius: 3px;
+  -moz-border-radius: 3px;
   -ms-border-radius: 3px;
-  -khtml-border-radius: 3px;
+  -o-border-radius: 3px;
   border-radius: 3px;
 }
 
@@ -2660,11 +2627,10 @@ h3.scorecard-overall span.score-overall-bad {
   width: auto;
   height: auto;
   text-indent: -999999px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   float: left;
   width: 50px;
@@ -2674,7 +2640,6 @@ h3.scorecard-overall span.score-overall-bad {
   background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#87c43c, #009245);
   background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#87c43c, #009245);
   background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#87c43c, #009245);
-  background: url(../images/search-icon.png) center no-repeat, -ms-linear-gradient(#87c43c, #009245);
   background: url(../images/search-icon.png) center no-repeat, linear-gradient(#87c43c, #009245);
 }
 #home-search button:hover {
@@ -2683,7 +2648,6 @@ h3.scorecard-overall span.score-overall-bad {
   background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#009245, #87c43c);
   background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#009245, #87c43c);
   background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#009245, #87c43c);
-  background: url(../images/search-icon.png) center no-repeat, -ms-linear-gradient(#009245, #87c43c);
   background: url(../images/search-icon.png) center no-repeat, linear-gradient(#009245, #87c43c);
 }
 #home-search > a {
@@ -2850,11 +2814,10 @@ ul#home-news-list li img {
   margin-bottom: 30px;
 }
 #home-links a.aspirants {
-  -moz-border-radius: 5px 5px 0 0;
   -webkit-border-radius: 5px 5px 0 0;
-  -o-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
   -ms-border-radius: 5px 5px 0 0;
-  -khtml-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
   color: white;
   display: block;
@@ -2865,7 +2828,6 @@ ul#home-news-list li img {
   background: -webkit-linear-gradient(#00a24c, #009245);
   background: -moz-linear-gradient(#00a24c, #009245);
   background: -o-linear-gradient(#00a24c, #009245);
-  background: -ms-linear-gradient(#00a24c, #009245);
   background: linear-gradient(#00a24c, #009245);
 }
 #home-links a.aspirants:hover {
@@ -2875,15 +2837,13 @@ ul#home-news-list li img {
   background: -webkit-linear-gradient(#009245, #00a24c);
   background: -moz-linear-gradient(#009245, #00a24c);
   background: -o-linear-gradient(#009245, #00a24c);
-  background: -ms-linear-gradient(#009245, #00a24c);
   background: linear-gradient(#009245, #00a24c);
 }
 #home-links a.citizens {
-  -moz-border-radius: 0 0 5px 5px;
   -webkit-border-radius: 0 0 5px 5px;
-  -o-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
   -ms-border-radius: 0 0 5px 5px;
-  -khtml-border-radius: 0 0 5px 5px;
+  -o-border-radius: 0 0 5px 5px;
   border-radius: 0 0 5px 5px;
   color: white;
   display: block;
@@ -2894,7 +2854,6 @@ ul#home-news-list li img {
   background: -webkit-linear-gradient(#96d942, #87c43c);
   background: -moz-linear-gradient(#96d942, #87c43c);
   background: -o-linear-gradient(#96d942, #87c43c);
-  background: -ms-linear-gradient(#96d942, #87c43c);
   background: linear-gradient(#96d942, #87c43c);
 }
 #home-links a.citizens:hover {
@@ -2904,7 +2863,6 @@ ul#home-news-list li img {
   background: -webkit-linear-gradient(#87c43c, #96d942);
   background: -moz-linear-gradient(#87c43c, #96d942);
   background: -o-linear-gradient(#87c43c, #96d942);
-  background: -ms-linear-gradient(#87c43c, #96d942);
   background: linear-gradient(#87c43c, #96d942);
 }
 
@@ -3036,13 +2994,11 @@ ul#home-news-list li img {
     background: url(../images/nub.png) 0 0 no-repeat;
   }
   #page .home-right .social-and-tools .tw-follow {
-    display: -moz-inline-box;
-    -moz-box-orient: vertical;
+    display: -moz-inline-stack;
     display: inline-block;
     vertical-align: middle;
     *vertical-align: auto;
-  }
-  #page .home-right .social-and-tools .tw-follow {
+    zoom: 1;
     *display: inline;
   }
 
@@ -3058,11 +3014,10 @@ ul#home-news-list li img {
     font-weight: bold;
   }
   #home-links a.aspirants {
-    -moz-border-radius: 5px 0 0 5px;
     -webkit-border-radius: 5px 0 0 5px;
-    -o-border-radius: 5px 0 0 5px;
+    -moz-border-radius: 5px 0 0 5px;
     -ms-border-radius: 5px 0 0 5px;
-    -khtml-border-radius: 5px 0 0 5px;
+    -o-border-radius: 5px 0 0 5px;
     border-radius: 5px 0 0 5px;
     margin: 0 3px 0 0;
     padding: 20px;
@@ -3071,7 +3026,6 @@ ul#home-news-list li img {
     background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#00a24c, #009245);
     background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#00a24c, #009245);
     background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#00a24c, #009245);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -ms-linear-gradient(#00a24c, #009245);
     background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#00a24c, #009245);
   }
   #home-links a.aspirants:hover {
@@ -3080,15 +3034,13 @@ ul#home-news-list li img {
     background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#009245, #00a24c);
     background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#009245, #00a24c);
     background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#009245, #00a24c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -ms-linear-gradient(#009245, #00a24c);
     background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#009245, #00a24c);
   }
   #home-links a.citizens {
-    -moz-border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0;
-    -o-border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
     -ms-border-radius: 0 5px 5px 0;
-    -khtml-border-radius: 0 5px 5px 0;
+    -o-border-radius: 0 5px 5px 0;
     border-radius: 0 5px 5px 0;
     margin: 0;
     padding: 20px;
@@ -3097,7 +3049,6 @@ ul#home-news-list li img {
     background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#96d942, #87c43c);
     background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#96d942, #87c43c);
     background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#96d942, #87c43c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -ms-linear-gradient(#96d942, #87c43c);
     background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#96d942, #87c43c);
   }
   #home-links a.citizens:hover {
@@ -3106,7 +3057,6 @@ ul#home-news-list li img {
     background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#87c43c, #96d942);
     background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#87c43c, #96d942);
     background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#87c43c, #96d942);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -ms-linear-gradient(#87c43c, #96d942);
     background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#87c43c, #96d942);
   }
 
@@ -3134,11 +3084,10 @@ ul#home-news-list li img {
     width: auto;
     height: auto;
     text-indent: -999999px;
-    -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    -o-border-radius: 2px;
+    -moz-border-radius: 2px;
     -ms-border-radius: 2px;
-    -khtml-border-radius: 2px;
+    -o-border-radius: 2px;
     border-radius: 2px;
     display: block;
     width: 20px;
@@ -3304,11 +3253,12 @@ ul#home-news-list li img {
   border: 1px solid #b3b3b3;
 }
 #login form input.login-button {
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   cursor: pointer;
   background: gray;
   color: white;
@@ -3318,11 +3268,10 @@ ul#home-news-list li img {
   font-weight: bold;
   line-height: 1;
   padding: 5px 8px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  -o-border-radius: 2px;
+  -moz-border-radius: 2px;
   -ms-border-radius: 2px;
-  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
   border-radius: 2px;
   cursor: pointer;
   float: right;
@@ -3333,11 +3282,7 @@ ul#home-news-list li img {
   background: -webkit-linear-gradient(#707070, #000000);
   background: -moz-linear-gradient(#707070, #000000);
   background: -o-linear-gradient(#707070, #000000);
-  background: -ms-linear-gradient(#707070, #000000);
   background: linear-gradient(#707070, #000000);
-}
-#login form input.login-button {
-  *display: inline;
 }
 #login form input.login-button:hover {
   background: #a0a0a0;
@@ -3350,7 +3295,6 @@ ul#home-news-list li img {
   background: -webkit-linear-gradient(#000000, #707070);
   background: -moz-linear-gradient(#000000, #707070);
   background: -o-linear-gradient(#000000, #707070);
-  background: -ms-linear-gradient(#000000, #707070);
   background: linear-gradient(#000000, #707070);
 }
 #login form p.forgot-register {
@@ -3389,11 +3333,10 @@ ul#home-news-list li img {
     width: 300px;
   }
   #login p.error {
-    -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
-    -o-border-radius: 6px;
+    -moz-border-radius: 6px;
     -ms-border-radius: 6px;
-    -khtml-border-radius: 6px;
+    -o-border-radius: 6px;
     border-radius: 6px;
   }
   #login form {

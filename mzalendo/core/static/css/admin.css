@@ -18,3 +18,24 @@ div.error {
 ul.ui-autocomplete li {
   list-style: none;
 }
+
+.view-selector {
+  float: right;
+}
+
+.grid-listing-item {
+  float: left;
+  width: 210px;
+  margin: 10px;
+  padding: 5px;
+  overflow: hidden;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+}
+.grid-listing-item span.name {
+  font-size: 120%;
+  display: block;
+  height: 2.5em;
+  overflow: hidden;
+}
