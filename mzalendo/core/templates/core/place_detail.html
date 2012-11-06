@@ -43,12 +43,26 @@
     </div>
 
     <div class="profile-info">
+
         {% with politician_pos=object.current_politician_position %}
         {% if politician_pos %}
         <div class="constituency-party">
             <h3>Key figure</h3>
             <ul>
-                <li><a href="{{ politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }} <span>[mp]</span></a></li>
+                <li><a href="{{ politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }} <span>[{{ politician_pos.title.name }}]</span></a></li>
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        
+        {% with aspirant_positions=object.position_set.all.current_aspirant_positions %}
+        {% if aspirant_positions %}
+        <div class="constituency-party">
+            <h3>Aspirant(s)</h3>
+            <ul>
+                {% for aspirant_pos in aspirant_positions %}
+                    <li><a href="{{ aspirant_pos.person.get_absolute_url }}">{{ aspirant_pos.person.name }} <span>[{{ aspirant_pos.title.name }}]</span></a></li>
+                {% endfor %}
             </ul>
         </div>
         {% endif %}
