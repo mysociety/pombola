@@ -82,6 +82,18 @@ def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
         if init is 'yes':
             webapp.init()
 
+        # ensite nginx.conf -> odekro
+        try:
+            nginx.dissite('default')
+        except: pass
+
+        try:
+            nginx.dissite('odekro')
+        except: pass
+        
+        nginx.ensite('%(basedir)s/releases/%(version)s/conf/nginx.conf' % env,
+                     'odekro')
+
         restart = True
     else:
         #TODO check to see if version exists
@@ -102,7 +114,7 @@ def rollback():
     pass
 
 def app(cmd):
-    sudo('service odekro %s' % cmd)
+    webapp.ctl(cmd)
 
 
 # ADHOC

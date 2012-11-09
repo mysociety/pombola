@@ -12,7 +12,7 @@ def install(start=True):
     sudo('aptitude -y install nginx')
     
     if start:
-        nginx('start')
+        ctl('start')
 
 def dissite(site):
     """remove an enabled nginx site configuration link"""
@@ -20,24 +20,25 @@ def dissite(site):
     with settings(warn_only=True):
         return sudo('rm %s/%s' % (ENABLED, site))
 
-def ensite(path, site):
+def ensite(path, site=''):
     require('hosts')
-    enabled = ENABLED
     with settings(warn_only=True):
-        return sudo('ln -s %(path)s %(enabled)s/%(site)s' % locals())
+        with cd(ENABLED):
+            return sudo('ln -s %(path)s %(site)s' % locals())
 
 def reload():
-    return nginx('reload')
+    return ctl('reload')
 
 def restart():
-    return nginx('restart')
+    return ctl('restart')
 
 def stop():
-    return nginx('stop')
+    return ctl('stop')
 
 def start():
-    return nginx('start')
+    return ctl('start')
 
-def nginx(cmd):
-    return sudo("/etc/init.d/nginx %s" % cmd)
+def ctl(cmd):
+    if cmd in ['start', 'stop', 'reload', 'restart', 'status']:
+        return sudo("/etc/init.d/nginx %s" % cmd)
 
