@@ -6,15 +6,17 @@ BLANK, SERIES_VOL_NO, TIME, DATE, START_TIME, \
 HEADING, LINE, SCENE, SPEECH, ACTION = range(10)
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
-DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\s+(\w+),?\s+(\d+)\s*$'
+DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
 
-TITLES_TEMPLATE = '(Mr|Mrs|Ms|Alhaji|Madam|Dr|Prof)'
+TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson)'
 TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.m|AM|A.M|pm|PM|p.m|P.M|noon)\.?[\s\-]*'
 
 
 HEADING_PATTERN = r'^\s*([A-Z\s]+)\s*$'
 SCENE_PATTERN = r'^\s*(\[[\w\s]+\])\s*$'
 SPEECH_PATTERN = r'^\s*%s(.+):\s*(.*)\s*$' % TITLES_TEMPLATE
+# POSSIBLE_SPEECH_PATTERN = r'^\s*%s(.+)\s*$' % TITLES_TEMPLATE
+
 ACTION_PATTERN = r'^\s*%s(.+)\s*-\s+(.+)\s+-\s*$' % TITLES_TEMPLATE
 
 START_TIME_PATTERN = r'The\s+House\s+met\s+at\s+%s' % TIME_TEMPLATE
@@ -41,6 +43,28 @@ PATTERNS = (
     (SCENE, SCENE_PATTERN),
     (ACTION, ACTION_PATTERN)
     )
+
+
+
+def parse(lines):
+    lines = scan(lines)
+
+    head = parse_head(lines) # end_line
+    entries = parse_body(body(lines)) # start_line
+    return head, entries
+
+def scan(lines, header=True):
+    if header:
+        return [scan_header_line(x) or scan_line(x) for x in lines]
+    return [scan_line(x) for x in lines]
+
+def body(lines):
+    """Returns a generator for lines in the body of the hansard"""
+    for i, row in enumerate(lines):
+        _, line, _ = row
+        if line.lower().strip().startswith('the house met at'):
+            return (x for x in lines[i:])
+    return (x for x in lines)
 
 
 def parse_head(lines, nbr=0):
@@ -86,7 +110,7 @@ def parse_body(lines):
             elif kind is HEADING:
                 entries.append(dict(heading=line.strip(), time=time))
             elif kind in (TIME, START_TIME):
-                time = parse_time(match)
+                time = _time(match)
             elif kind is ACTION:
                 person = '%s%s' % (match.group(1), match.group(2))
                 entries.append(dict(action=match.group(3), name=person.strip()))
@@ -97,22 +121,6 @@ def parse_body(lines):
 
     return entries
 
-
-def body(lines):
-    """Returns a generator for lines in the body of the hansard"""
-    for i, row in enumerate(lines):
-        _, line, _ = row
-        if line.lower().strip().startswith('the house met at'):
-            return (x for x in lines[i:])
-    return (x for x in lines)
-
-
-def parse_time(match):
-    hh, mm = int(match.group(1)), int(match.group(3))
-    t = match.group(4)
-    if t in ('pm', 'PM', 'p.m', 'P.M') and hh != 12:
-        hh += 12
-    return datetime.time(hh, mm)
 
 def parse_speech(time, match, lines):
     """A speech has the ff properties:
@@ -137,19 +145,27 @@ def parse_speech(time, match, lines):
             break
     return (dict(time=time, name=name, speech=speech.strip()), kind, line, match, ahead)
 
-def parse_lines(lines, header=True):
-    if header:
-        return [parse_header_line(x) or parse_line(x) for x in lines]
-    return [parse_line(x) for x in lines]
+def parse_time(s):
+    match = re.match(TIME_PATTERN, s)
+    if match:
+        return _time(match)
+    return None
 
-def parse_header_line(line):
+def _time(match):
+    hh, mm = int(match.group(1)), int(match.group(3))
+    t = match.group(4)
+    if t in ('pm', 'PM', 'p.m', 'P.M') and hh != 12:
+        hh += 12
+    return datetime.time(hh, mm)
+
+def scan_header_line(line):
     for kind, pattern in HEADER_PATTERNS:
         match = re.match(pattern, line)
         if match:
             return (kind, line, match)
     return None
 
-def parse_line(line):
+def scan_line(line):
     if not line.strip():
         return (BLANK, '\n', None)
     for kind, pattern in PATTERNS:
@@ -158,13 +174,6 @@ def parse_line(line):
             return (kind, line, match)
     return (LINE, line.replace('\n', ' '), None)
 
-
-def parse(lines):
-    lines = parse_lines(lines)
-
-    head = parse_head(lines) # end_line
-    entries = parse_body(body(lines)) # start_line
-    return head, entries
 
 def main(args):
     fin = open(args[1], 'r')
