@@ -1,15 +1,18 @@
-  #!/bin/bash
-  set -e
-  LOGFILE=/var/log/gunicorn/access.log
-  LOGDIR=$(dirname $LOGFILE)
-  LOGLEVEL=%(log_level)s
-  NUM_WORKERS=3
-  # user/group to run as
-  USER=%(webapp_user)s
-  GROUP=%(webapp_group)s
-  cd %(project_home)s
-  source %(virtualenv)s/bin/activate
-  test -d $LOGDIR || mkdir -p $LOGDIR
-  exec %(virtualenv)s/bin/gunicorn_django -w $NUM_WORKERS \
-    --user=$USER --group=$GROUP --log-level=$LOGLEVEL \
-    --log-file=$LOGFILE 2>>$LOGFILE 
+#!/bin/bash
+set -e
+LOGFILE=/var/log/gunicorn/access.log
+LOGDIR=$(dirname $LOGFILE)
+LOGLEVEL=%(log_level)s
+NUM_WORKERS=3
+
+# user/group to run as
+USER=%(webapp_user)s
+GROUP=%(webapp_group)s
+
+cd %(project_home)s
+source %(virtualenv)s/bin/activate
+test -d $LOGDIR || mkdir -p $LOGDIR
+exec %(virtualenv)s/bin/gunicorn_django \
+  -b 0.0.0.0:8000 -w $NUM_WORKERS \
+  --user=$USER --group=$GROUP --log-level=$LOGLEVEL \
+  --log-file=$LOGFILE 2>>$LOGFILE 
