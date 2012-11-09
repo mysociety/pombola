@@ -45,7 +45,7 @@ def setup(dbuser=None, dbpassword=None):
     server.install_packages()
     server.create_webapp_user()
     
-    postgres.install()
+    pg.install()
 
     try:
         pg.setup_postgis()
@@ -76,6 +76,9 @@ def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
         webapp.upload()
         webapp.install()
 
+        if db and dbuser and dbpasswd:
+            configure(db, dbuser, dbpasswd)
+
         if init is 'yes':
             webapp.init()
 
@@ -86,34 +89,37 @@ def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
         # _symlink_current_version()
         pass   
 
-    if db and dbuser and dbpasswd:
-        configure(db, dbuser, dbpasswd)
 
     if restart: 
         nginx.reload()
         webapp.start()
         
+def init():
+    webapp.init()
+
 
 def rollback():
     pass
 
+def app(cmd):
+    sudo('service odekro %s' % cmd)
+
 
 # ADHOC
 
-def configure(db=env.dbname, dbuser=env.dbuser, password=''):
-    setup_db(db, dbuser, password)
-    configure_webapp(db, dbuser, password)
+def configure(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
+    setup_db(db, dbuser, dbpasswd)
+    configure_webapp(db, dbuser, dbpasswd)
 
-def setup_db(db=env.dbname, user=env.dbuser, password=''):
-    if not pg.user_exists(user):
-        pg.create_user(user, password)
+def setup_db(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
+    if not pg.user_exists(dbuser):
+        pg.create_user(dbuser, dbpasswd, groups=['gisgroup'])
     if not pg.database_exists(db):
-        pg.create_database(db, user, 
-                           template='template_postgis')
+        pg.create_database(db, dbuser, template='template_postgis')
 
-def configure_webapp(db=env.dbname, user=env.dbuser, password=''):
+def configure_webapp(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
     env.version = 'current'
-    webapp.configure(dbuser=user, dbpass=password, dbname=db)
+    webapp.configure(db=db, dbuser=dbuser, dbpasswd=dbpasswd)
     
 
 # ENVIRONMENTS

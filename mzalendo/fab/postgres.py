@@ -19,7 +19,7 @@ def setup_postgis():
     configure_postgis()
 
 
-def create_user(name, password, encrypted=True):
+def create_user(name, password, groups=None, encrypted=True):
     """
     Create a PostgreSQL user.
 
@@ -35,7 +35,12 @@ def create_user(name, password, encrypted=True):
     else:
         with_password = 'WITH PASSWORD'
 
-    _run('''psql -c "CREATE USER %(name)s %(with_password)s '%(password)s';"''' % locals())
+    if groups:
+        groups = ' IN GROUP %s' % ', '.join(groups)
+    else:
+        groups = ''
+
+    _run('''psql -c "CREATE USER %(name)s %(with_password)s '%(password)s'%(groups)s;"''' % locals())
 
 
 def create_database(name, owner, template='template0', encoding='UTF8', locale='en_US.UTF-8'):

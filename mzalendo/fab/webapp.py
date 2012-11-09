@@ -3,6 +3,10 @@ from fabric.contrib.files import exists
 import os
 import sys
 
+import random; 
+
+CHARS = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^*(-_=+)"
+
 def prepare():
     """Setup a fresh virtualenv as well as a few useful directories
     """
@@ -37,7 +41,7 @@ def upload(rm_local=True):
         local('rm %s' % tarfile)
     unpack()
 
-def install():
+def install(db=None, dbuser=None, dbpasswd=None):
     require('version')
     require('basedir')
     require('project')
@@ -45,7 +49,7 @@ def install():
 
     install_requirements()
     link_current_version()
-    configure()
+    # configure()
     # upload nginx conf
     # upload supervisord conf
 
@@ -60,7 +64,7 @@ def init():
         # _vsudo('./manage.py collectstatic --noinput')
         with prefix('PATH=%(basedir)s/bin/:PATH' % env):
             _sudo('python manage.py syncdb --noinput --verbosity=1')
-            _sudo('python manage.py migrate --noinput --verbosity=1')
+            _sudo('python manage.py migrate --verbosity=1')
             _sudo('python manage.py collectstatic --noinput')
 
 def start():
@@ -120,14 +124,30 @@ def link_current_version():
            'ln -s %(basedir)s/releases/%(version)s %(basedir)s/releases/current') % env)
 
 
-def configure(dbname='odekro', dbuser='postgres', dbpass='', dbhost='localhost',
-              timezone='Africa/Accra'):
+def configure(db=None, dbuser=None, dbpasswd=None, 
+              dbhost='localhost', timezone='Africa/Accra'):
     require('basedir')
     require('version')
 
-    settings=dict(DB_USER=dbuser, DB_NAME=dbname, DB_PASS=dbpass, DB_HOST=dbhost,
-                  TIME_ZONE=timezone,
-                  SECRET_KEY=_random_chars(50))
+    if db is None:
+        db = 'odekro'
+    if dbuser is None:
+        dbuser = 'postgres'
+    if dbpasswd is None:
+        dbpasswd = ''
+
+    configs = (
+        ('DB_USER', dbuser), 
+        ('DB_NAME', db), 
+        ('DB_PASS', dbpasswd), 
+        ('DB_HOST', dbhost),
+        ('TIME_ZONE', timezone),
+        ('SECRET_KEY', _random_chars(50))
+    )
+
+    configs2 = (
+        ('COUNTRY_APP', 'kenya'),
+    )
 
     path = '%(basedir)s/releases/%(version)s/conf/general.yml' % env
     
@@ -137,14 +157,22 @@ def configure(dbname='odekro', dbuser='postgres', dbpass='', dbhost='localhost',
     
     _sudo('cp %s-example %s' % (path, path))
 
-    cmd1 = '''sed -e "s|%s: '[^\']*'|%s: '%s'|" -i %s %s'''
-    for key in settings:
-        _sed(cmd1, key, settings[key], path)
+    def __sed(st, configs, path):
+        s = ';'.join([st % (key, key, val) for key, val in configs])
+        return _sed(s, path)  
 
-    cmd2 = '''sed -e "s|%s: .*|%s: %s|" -i %s %s'''
-    settings = dict(COUNTRY_APP='kenya')
-    for key in settings:
-        _sed(cmd2, key, settings[key], path)
+    __sed("s|%s: '[^\']*'|%s: '%s'|", configs, path)
+    __sed("s|%s: .*|%s: %s|", configs2, path)
+
+
+def _sed(s, filepath):
+    cmd = '''sed %s-e "%s" %s %s'''
+    try:
+        # GNU
+        _sudo(cmd % ('-i ', s, '', filepath))
+    except:
+        # BSD
+        _sudo(cmd % ('', s, '-i ""', filepath))
 
 
 def _configure_gunicorn(user=None, group=None):
@@ -167,14 +195,15 @@ def _configure_gunicorn(user=None, group=None):
 
     _sudo('cp %(src)s %(dest)s' % locals())
     
-    for search, replace in (
-            ('%(webapp_user)s', user),
-            ('%(webapp_group)s', group),
-            ('%(project_home)s', project_home),
-            ('%(virtualenv)s', env.basedir),
-            ('%(log_level)s', env.log_level or 'debug')
-        ):
-        _sed2(search, replace, dest)
+    configs =  (
+        ('%(webapp_user)s', user),
+        ('%(webapp_group)s', group),
+        ('%(project_home)s', project_home),
+        ('%(virtualenv)s', env.basedir),
+        ('%(log_level)s', env.log_level or 'debug')
+    )
+    s = ';'.join(["s|%s|%s|" % (s, r) for s, r in configs])
+    _sed(s, dest)
     _sudo('chmod +x %(dest)s' % locals())
 
         
@@ -183,32 +212,20 @@ def _configure_upstart():
     require('basedir')
 
     src = '%(basedir)s/releases/%(version)s/conf/upstart.conf-template' % env
-    dest = '/etc/init/odekro'
-
+    dest = '%(basedir)s/releases/%(version)s/bin/upstart.conf' % env
     _sudo('cp %(src)s %(dest)s' % locals())
-    for search, replace in (
-            ('%(basedir)s', '%(basedir)s' % env),
-            ('%(version)s', '%(version)s' % env)
-        ):
-        _sed2(search, replace, fpath)
-    _sudo('chmod +x %(dest)s' % locals())
 
-def _sed2(search, replace, path):
-    cmd = '''sed -e "s|%s|%s|" -i %s %s'''
-    try:
-        _sudo(cmd % (search, replace, '', path))
-    except:
-        _sudo(cmd % (search, replace, '""', path))
+    configs = (
+        ('%(basedir)s', '%(basedir)s' % env),
+        ('%(version)s', '%(version)s' % env)
+    )
+    s = ';'.join(["s|%s|%s|" % (s, r) for s, r in configs])
+    _sed(s, dest)
+    # _sudo('chmod +x %(dest)s' % locals())
+    # sudo('ln -s %(dest)s /etc/init/odkero' % locals())
+    sudo('mv %(dest)s /etc/init/odekro.conf' % locals())
 
 
-def _sed(cmd, key, value, filepath):
-
-    try:
-        # GNU
-        _sudo(cmd % (key, key, value, '', filepath))
-    except:
-        # BSD
-        _sudo(cmd % (key, key, value, '""', filepath))
 
 def _install_gdal():
     require('basedir')
@@ -266,8 +283,6 @@ def _install_gunicorn():
     
 def _random_chars(size):
     """Generates a string of random characters."""
-    import random; 
-    CHARS = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"
     return "".join([random.choice(CHARS) for i in range(size)])
 
 def _vsudo(cmd):
