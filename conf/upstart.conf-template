@@ -1,0 +1,6 @@
+description "Django Gunicorn Server"
+start on runlevel [2345]
+stop on runlevel [06]
+respawn
+respawn limit 10 5
+exec %(basedir)s/releases/%(version)s/bin/start_gunicorn.sh

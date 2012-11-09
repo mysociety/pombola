@@ -46,6 +46,9 @@ def install():
     install_requirements()
     link_current_version()
     configure()
+    # upload nginx conf
+    # upload supervisord conf
+
 
 def init():
     require('basedir')
@@ -59,6 +62,16 @@ def init():
             _sudo('python manage.py syncdb --noinput --verbosity=1')
             _sudo('python manage.py migrate --noinput --verbosity=1')
             _sudo('python manage.py collectstatic --noinput')
+
+def start():
+    _sudo('service odekro start')
+
+def stop():
+    _sudo('service odekro stop')
+
+def restart():
+    _sudo('service odekro restart')
+
 
 def archive(branch, filename, path='', prefix='', format='tar'):
     if prefix:
@@ -93,6 +106,9 @@ def install_requirements():
         _sudo('source ./bin/activate')
         _sudo(('./bin/pip install -r '
                './releases/%(version)s/%(pip_requirements)s') % env)
+    _configure_gunicorn()
+    _configure_upstart()
+
 
 def link_current_version():
     """Symlink our current version."""
@@ -113,25 +129,80 @@ def configure(dbname='odekro', dbuser='postgres', dbpass='', dbhost='localhost',
                   TIME_ZONE=timezone,
                   SECRET_KEY=_random_chars(50))
 
-    yml_file = '%(basedir)s/releases/%(version)s/conf/general.yml' % env
+    path = '%(basedir)s/releases/%(version)s/conf/general.yml' % env
     
     try:
-        _sudo('rm %s' % yml_file)
+        _sudo('rm %s' % path)
     except: pass
     
-    _sudo('cp %s-example %s' % (yml_file, yml_file))
+    _sudo('cp %s-example %s' % (path, path))
 
     cmd1 = '''sed -e "s|%s: '[^\']*'|%s: '%s'|" -i %s %s'''
     for key in settings:
-        _sed(cmd1, key, settings[key], yml_file)
+        _sed(cmd1, key, settings[key], path)
 
     cmd2 = '''sed -e "s|%s: .*|%s: %s|" -i %s %s'''
     settings = dict(COUNTRY_APP='kenya')
     for key in settings:
-        _sed(cmd2, key, settings[key], yml_file)
+        _sed(cmd2, key, settings[key], path)
+
+
+def _configure_gunicorn(user=None, group=None):
+    require('version')
+    require('basedir')
+    require('webapp_user')
+    require('webapp_group')
+    require('log_level')
+
+    if not user:
+        user = env.webapp_user
+    if not group:
+        group = env.webapp_group
+
+    fname = 'start_gunicorn.sh'
+    project_home = '%(basedir)s/releases/%(version)s' % env
+
+    src = '%(project_home)s/conf/%(fname)s-template' % locals()
+    dest = '%(project_home)s/bin/%(fname)s' % locals()
+
+    _sudo('cp %(src)s %(dest)s' % locals())
+    
+    for search, replace in (
+            ('%(webapp_user)s', user),
+            ('%(webapp_group)s', group),
+            ('%(project_home)s', project_home),
+            ('%(virtualenv)s', env.basedir),
+            ('%(log_level)s', env.log_level or 'debug')
+        ):
+        _sed2(search, replace, dest)
+    _sudo('chmod +x %(dest)s' % locals())
+
+        
+def _configure_upstart():
+    require('version')
+    require('basedir')
+
+    src = '%(basedir)s/releases/%(version)s/conf/upstart.conf-template' % env
+    dest = '/etc/init/odekro'
+
+    _sudo('cp %(src)s %(dest)s' % locals())
+    for search, replace in (
+            ('%(basedir)s', '%(basedir)s' % env),
+            ('%(version)s', '%(version)s' % env)
+        ):
+        _sed2(search, replace, fpath)
+    _sudo('chmod +x %(dest)s' % locals())
+
+def _sed2(search, replace, path):
+    cmd = '''sed -e "s|%s|%s|" -i %s %s'''
+    try:
+        _sudo(cmd % (search, replace, '', path))
+    except:
+        _sudo(cmd % (search, replace, '""', path))
 
 
 def _sed(cmd, key, value, filepath):
+
     try:
         # GNU
         _sudo(cmd % (key, key, value, '', filepath))
