@@ -63,12 +63,16 @@ def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
     Deploy a version to the servers, install any required third party 
     modules, install the virtual host and then restart the webserver
     """
-    require('hosts', provided_by=[dev, staging, production])
+    require('hosts', provided_by=[vm, staging, production])
     require('basedir')
     require('webapp_user')
     require('git_branch')
 
     restart = False
+
+    try:
+        webapp.stop()
+    except: pass
 
     if not version:
         env.version = time.strftime('%Y%m%d%H%M%S')
