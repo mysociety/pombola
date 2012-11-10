@@ -10,6 +10,7 @@ import os, re , time
 
 from fabric.api import hide, settings, cd, env, prefix, put, get, require
 from fabric.api import local, run, sudo
+from fabric.contrib.files import exists
 
 from fab import postgres as pg
 from fab import server, nginx, webapp
@@ -37,12 +38,29 @@ env.basedir = '/var/www/%(project)s' % env
 
 #env.shell = "/bin/sh -c"
 
-def setup(dbuser=None, dbpassword=None):
+def clean():
+    require('hosts', provided_by=[vm, staging, production])
+    require('basedir')
+    try:
+        webapp.stop()
+    except: pass
+    
+    try:
+        sudo('rm -fr %(basedir)s' % env)
+    except: pass
+
+def setup(packages=None):
     require('hosts', provided_by=[vm, staging, production])
     require('webapp_user')
     require('basedir')
+    
+    try:
+        webapp.stop()
+    except: pass
 
-    server.install_packages()
+    if not packages or packages.lower() not in ['0', 'no', 'n', 'false']:
+        server.install_packages()
+    
     server.create_webapp_user()
     
     pg.install()
@@ -53,7 +71,8 @@ def setup(dbuser=None, dbpassword=None):
 
     setup_db()
     
-    nginx.install()
+    if not exists('/etc/init.d/nginx'):
+        nginx.install()
     webapp.prepare()
 
 

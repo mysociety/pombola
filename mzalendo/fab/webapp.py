@@ -47,8 +47,10 @@ def install(db=None, dbuser=None, dbpasswd=None):
     require('project')
     require('pip_requirements')
 
-    _install_gdal()
-    _install_xapian()
+    if not exists('%(basedir)s/lib/python2.7/site-packages/gdal.py' % env):
+        _install_gdal()
+    if not exists('%(basedir)s/lib/libxapian.so' % env):
+        _install_xapian()
     _install_gunicorn()
     _install_requirements()
     _configure_gunicorn()
@@ -175,18 +177,67 @@ def _install_requirements():
 
 
 def _install_gdal():
-    """Build and install GDAL into the virtualenv."""
+    """Build and install GDAL into the virtualenv.
+    More here: http://openblockproject.org/docs/install/common_install_problems.html
+    """
     require('basedir')
+
+    packages = (
+        # 'postgresql-9.1-postgis', 
+        'libgdal1', 
+        'libgdal1-dev', 
+        'build-essential',
+        'python-dev'
+    )
+    sudo('aptitude install %s' % ' '.join(packages))
+    sudo('ldconfig')
+
     with cd('%(basedir)s' % env):
         _sudo('source ./bin/activate')
-        _sudo('./bin/pip install --no-install GDAL')
+        _sudo('./bin/pip install --no-install "%s"' % _gdal_pip_version())
         try:
             with cd('%(basedir)s/build/GDAL' % env):
-                _sudo(('%(basedir)s/bin/python setup.py build_ext'
-                       ' --include-dirs=/usr/include/gdal/') % env)
+                _sudo('rm -f setup.cfg')
+                library_dirs, libraries, include_dirs = _gdal_configs()
+                bin_python = '%(basedir)s/bin/python' % env
+                _sudo(('%(bin_python)s setup.py build_ext'
+                       ' --include-dirs=%(include_dirs)s '
+                       ' --library-dirs=%(library_dirs)s '
+                       ' --libraries=%(libraries)s') % locals())
         except: pass
         _sudo('./bin/pip install --no-download GDAL')
 
+def _gdal_pip_version():
+    version = sudo('gdal-config --version')[:3]
+    m = version[0]
+    n = version[2]
+    o  = str(int(n) + 1)
+    return 'GDAL>=%(m)s.%(n)s,<%(m)s.%(o)sa' % locals()
+
+def _gdal_configs():
+    import re
+    res = sudo('gdal-config --libs')
+
+    m = re.match('.*-L([^\s]+).*', res)
+    if m:
+        library_dirs = m.group(1)
+    else:
+        library_dirs = ''
+
+    m = re.match('.*-l([^\s]+).*', res)
+    if m:
+        libraries = m.group(1)
+    else:
+        libraries = ''
+
+    res = sudo('gdal-config --cflags')
+    m = re.match('.*-I([^\s]+).*', res)
+    if m:
+        include_dirs = m.group(1)
+    else:
+        include_dirs = ''
+
+    return (library_dirs, libraries, include_dirs)
 
 def _install_xapian(version='1.2.12'):
     """Install Xapian into the virtual env."""
@@ -287,13 +338,14 @@ def _configure_nginx():
     require('basedir')
     require('domain')
 
-    dest = '%(basedir)s/releases/%(version)s/conf/nginx.conf'
+    dest = '%(basedir)s/releases/%(version)s/conf/nginx.conf' % env
     src = '%s-template' % dest
+    project_home = '%(basedir)s/releases/%(version)s/%(project)s' % env
 
-    _sudo('cp %(src)s %(dest)s')
+    _sudo('cp %(src)s %(dest)s' % locals())
     configs = (
         ('%(domain)s', '%(domain)s' % env),
-        ('%(project_home)s', '%(project_home)s' % env)
+        ('%(project_home)s', project_home)
     )
     _sed2(configs, dest)
 

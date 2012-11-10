@@ -65,6 +65,7 @@ def install_packages():
     )
 
     # for gdal
+    # TODO: determine if repository already added
     sudo('apt-add-repository -y ppa:ubuntugis/ubuntugis-unstable')
     # sudo('apt-add-repository -y ppa:xapian-backports/xapian-1.2')
 
