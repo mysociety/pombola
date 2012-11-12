@@ -169,9 +169,16 @@ class PersonManager(ManagerBase):
             exclude the current person.
             
             If no slug is provided, returns a random person.
-            If the slug is purely numeric (n), this consisently returns a person (actually the nth wrapping around 
-            where necessary): this allows js to generate random calls that can nonetheless be served from the cache."""
-        all_results = self.filter(can_be_featured=True) 
+            If the slug is purely numeric (n), this consistently returns a person (actually the nth wrapping around 
+            where necessary): this allows js to generate random calls that can nonetheless be served from the cache.\
+        """
+
+        # original code that selects based on the can_be_featured flag
+        # all_results = self.filter(can_be_featured=True) 
+        
+        # select all the presidential aspirants
+        all_results = self.filter(position__title__slug='aspirant-president') 
+
         if not all_results.exists():
             return None
         sort_order = 'slug'
