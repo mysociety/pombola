@@ -121,11 +121,15 @@ def configure(db=None, dbuser=None, dbpasswd=None,
         ('DB_PASS', dbpasswd), 
         ('DB_HOST', dbhost),
         ('TIME_ZONE', timezone),
-        ('SECRET_KEY', _random_chars(50))
+        ('SECRET_KEY', _random_chars(50)),
+        ('MANAGERS_EMAIL', 'managers@odekro.org'),
+        ('MANAGERS_NAME', 'Odekro Managers'),
+        ('TWITTER_ACCOUNT_NAME', 'odekro'),
+        ('DISQUS_SHORTNAME', 'odekro')
     )
 
     configs2 = (
-        ('COUNTRY_APP', 'kenya'),
+        ('COUNTRY_APP', 'odekro'),
     )
 
     path = '%(basedir)s/releases/%(version)s/conf/general.yml' % env

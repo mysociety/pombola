@@ -21,7 +21,7 @@ env.local_root = os.path.abspath(os.path.dirname(__file__))
 
 env.project = 'mzalendo'
 env.git_remote = "origin"
-env.git_branch = "master"
+env.git_branch = "odekro"
 env.pip_requirements = 'requirements.txt'
 env.local_settings = 'deploy/local_settings.py'
 env.log_level = 'debug'
