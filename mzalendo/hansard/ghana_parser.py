@@ -3,7 +3,7 @@ import re
 import datetime
 
 BLANK, SERIES_VOL_NO, TIME, DATE, START_TIME, \
-HEADING, LINE, SCENE, SPEECH, ACTION = range(10)
+HEADING, LINE, SCENE, SPEECH, ACTION,PAGE_HEADER = range(11)
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\s+(\w+),?\s+(\d+)\s*$'
@@ -15,6 +15,10 @@ TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.m|AM|A.M|pm|PM|p.m|P.M|noon)\.?[\s\
 HEADING_PATTERN = r'^\s*([A-Z\s]+)\s*$'
 SCENE_PATTERN = r'^\s*(\[[\w\s]+\])\s*$'
 SPEECH_PATTERN = r'^\s*%s(.+):\s*(.*)\s*$' % TITLES_TEMPLATE
+# POSSIBLE_SPEECH_PATTERN = r'^\s*%s(.+)\s*$' % TITLES_TEMPLATE
+
+PAGE_HEADER_PATTERN =r'^(\d+)\s*(.*)(\d{2}\s*(.8)\d{4})\s*(\d+)\s*$' 
+
 ACTION_PATTERN = r'^\s*%s(.+)\s*-\s+(.+)\s+-\s*$' % TITLES_TEMPLATE
 
 START_TIME_PATTERN = r'The\s+House\s+met\s+at\s+%s' % TIME_TEMPLATE
@@ -39,7 +43,8 @@ PATTERNS = (
     (TIME, TIME_PATTERN),
     (START_TIME, START_TIME_PATTERN),
     (SCENE, SCENE_PATTERN),
-    (ACTION, ACTION_PATTERN)
+    (ACTION, ACTION_PATTERN),
+    (PAGE_HEADER, PAGE_HEADER_PATTERN)
     )
 
 
@@ -82,7 +87,7 @@ def parse_body(lines):
 
             if kind is SPEECH:
                 speech, kind, line, match, ahead = parse_speech(time, match, lines)
-                entries.append(speech)
+                #entries.append(speech)
             elif kind is HEADING:
                 entries.append(dict(heading=line.strip(), time=time))
             elif kind in (TIME, START_TIME):
@@ -94,6 +99,10 @@ def parse_body(lines):
             elif kind is ACTION:
                 person = '%s%s' % (match.group(1), match.group(2))
                 entries.append(dict(action=match.group(3), name=person.strip()))
+            elif kind is PAGE_HEADER:
+                pages = '%s - %s' % (match.group(1),match.group(3))
+                title = '%s' % (match.group(2))
+                entries.append(dict(page=pages,pagetitle=title,date=match.group(3)))
             else:
                 pass
         except StopIteration:
@@ -123,7 +132,7 @@ def parse_speech(time, match, lines):
         try:
             kind, line, match = lines.next()
             if kind == LINE: 
-                speech += line
+                speech += ' ' + line
             elif kind == BLANK:
                 speech = speech.strip() + '\n'
             else:
