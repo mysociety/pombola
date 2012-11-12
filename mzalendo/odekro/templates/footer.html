@@ -1,0 +1,81 @@
+<div class="row linkFirst">
+    <ul class="leftLink sixcol">
+        <h3>Browse Odekro</h3>
+        <ul class="fourcol">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Politicians</a></li>
+            <li><a href="#">Democracy Resources</a></li>
+            <li><a href="#">Parliament</a></li>
+            <li><a href="#">Newsletter</a></li>
+        </ul>
+        <ul class="fourcol">
+            <li><a href="#">The Team</a></li>
+            <li><a href="#">Elections</a></li>
+            <li><a href="#">Places</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Privacy</a></li>
+        </ul>
+    </ul>
+    <ul class="rightLink sixcol">
+        <h3>Follow us on social networks</h3>
+        <p>Get updates, stay connected with Odekro<br />
+        via Email, Facebook, Twitter or Google +</p>
+        <form id="e-subscribe" method="get" action="#">
+            <input type="text" value="Email" onblur="this.value=!this.value?'Email':this.value;" onfocus="this.select()" onclick="this.value='';" />
+            <button type="submit">Signup</button>
+        </form>
+    </ul>
+</div>
+
+<div class="row linkSecond">
+    <ul class="qLinks sixcol">                                                            
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+    <ul class="copyRight">
+        <li>Copyright &copy;2012 Odekro. All Rights Reserved.<a class="pw" href="#">Powered by 123 Company</a></li>
+    </ul>
+</div>
+
+
+
+{% comment %}
+<div id="footer-menu" class="footer-section">
+    <h4>Mzalendo</h4>
+    <ul class="nav">
+        {% with include_sub_menu_entries=0 %}
+            {% include 'menu_entries.html' %}
+        {% endwith %}
+    </ul>
+</div>
+
+<div class="footer-section">
+    <h4>About</h4>
+    <ul class="utilities">
+        <li><a href="{% url info_page slug='policies' %}">Privacy</a></li>
+        <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
+        
+        {% if object and request.user.is_staff %}
+            <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
+        {% endif %}
+        
+        {% if settings.STAGING %}
+            <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="footer-section subscribe-box">
+    <h2>Email Newsletter</h2>
+
+    <form action="http://mzalendo.us2.list-manage.com/subscribe/post?u=c0b4940a102336a932a5c30c4&amp;id=9963e6377d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <label for="mce-EMAIL">Subscribe to receive updates</label>
+        <div class="subscribe-fields">
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Your email address here" required>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+        </div>
+    </form>
+</div>
+{% endcomment %}

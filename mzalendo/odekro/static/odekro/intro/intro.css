@@ -1,0 +1,310 @@
+    /*!normalize.css v1.0.1 | MIT License | git.io/normalize */ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}html,button,input,select,textarea{font-family:sans-serif;}body{margin:0;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;margin:.67em 0;}h2{font-size:1.5em;margin:.83em 0;}h3{font-size:1.17em;margin:1em 0;}h4{font-size:1em;margin:1.33em 0;}h5{font-size:.83em;margin:1.67em 0;}h6{font-size:.75em;margin:2.33em 0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:bold;}blockquote{margin:1em 40px;}dfn{font-style:italic;}mark{background:#ff0;color:#000;}p,pre{margin:1em 0;}code,kbd,pre,samp{font-family:monospace,serif;_font-family:'courier new',monospace;font-size:1em;}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word;}q{quotes:none;}q:before,q:after{content:'';content:none;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}dl,menu,ol,ul{margin:1em 0;}dd{margin:0 0 0 40px;}menu,ol,ul{padding:0 0 0 40px;}nav ul,nav ol{list-style:none;list-style-image:none;}img{border:0;-ms-interpolation-mode:bicubic;}svg:not(:root){overflow:hidden;}figure{margin:0;}form{margin:0;}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em;}legend{border:0;padding:0;white-space:normal;*margin-left:-7px;}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle;}button,input{line-height:normal;}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;*overflow:visible;}button[disabled],input[disabled]{cursor:default;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;*height:13px;*width:13px;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+    /**
+     * Micro ClearFix : http://nicolasgallagher.com/micro-clearfix-hack/
+     * -----------------------------------------------------------------
+     * For modern browsers
+     * 1. The space content is one way to avoid an Opera bug when the
+     *    contenteditable attribute is included anywhere else in the document.
+     *    Otherwise it causes space to appear at the top and bottom of elements
+     *    that are clearfixed.
+     * 2. The use of `table` rather than `block` is only necessary if using
+     *    `:before` to contain the top-margins of child elements.
+     */
+    .cf:before,
+    .cf:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+
+    .cf:after {
+        clear: both;
+    }
+
+    /**
+     * For IE 6/7 only
+     * Include this rule to trigger hasLayout and contain floats.
+     */
+    .cf {
+        *zoom: 1;
+    }
+    a{ color:#fff;text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+/*    body{ width: 800px;margin:auto;}*/
+    html{
+      background-color: #339847; /* Old browsers */
+       /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+       background: #339847 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzN2FjNGUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMzM5ODQ3IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+       background: #339847 -moz-radial-gradient(center, ellipse cover, #37ac4e 0px, #339847 700px); /* FF3.6+ */
+       background: #339847 -webkit-gradient(radial, center center, 0px, center center, 700px, color-stop(0px,#37ac4e), color-stop(700px,#339847)); /* Chrome,Safari4+ */
+       background: #339847 -webkit-radial-gradient(center, ellipse cover, #37ac4e 0px,#339847 700px); /* Chrome10+,Safari5.1+ */
+       background: #339847 -o-radial-gradient(center, ellipse cover, #37ac4e 0px,#339847 700px); /* Opera 12+ */
+       background: #339847 -ms-radial-gradient(center, ellipse cover, #37ac4e 0px,#339847 700px); /* IE10+ */
+       background: #339847 radial-gradient(ellipse at center, #37ac4e 0px,#339847 700px); /* W3C */
+       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#37ac4e', endColorstr='#339847',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+       background-size: auto 100%;
+       background-position:  center -200px;
+       background-repeat:no-repeat;
+    }
+    
+    #logo{
+      font: 0/0 a;
+      text-shadow: none;
+      color: transparent;
+      width:407px;
+      height:152px;
+      background: transparent url(logo.png) no-repeat scroll center center;
+      margin: auto;
+    }
+    
+    #mzalendo_main_actions{
+      padding:1em;
+      padding-top:2em;
+      padding-bottom:3em;
+      width: 100%;
+      margin:auto;
+      clear: both;
+    }
+    #mzalendo_main_actions ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-indent:0;
+      display:block;
+      width: 100%;
+      text-align:center;
+    }
+    #mzalendo_main_actions ul li{
+      display:block;
+      text-align:left;
+    }
+@media screen and (min-width: 564px) {
+    #mzalendo_main_actions ul li.action1{
+      float:left;
+    }
+    #mzalendo_main_actions ul li.action2{
+      margin:auto;
+    }
+    #mzalendo_main_actions ul li.action3{
+      float:right;
+    }
+}
+    #mzalendo_main_actions ul li a{
+      display:block;
+      width:100%;
+      float:left;
+      text-align:center;
+      background-color: #333333;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#333333), to(#555)); /* Safari 4+, Chrome */
+        background-image: -webkit-linear-gradient(top, #333333, #555); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+        background-image:    -moz-linear-gradient(top, #333333, #555); /* Firefox 3.6-15 */
+        background-image:      -o-linear-gradient(top, #333333, #555); /* Opera 11.10-12.00 */
+        background-image:         linear-gradient(to bottom, #333333, #555); /* Firefox 16+, IE10, Opera 12.50+ */
+      padding: 1.5em 0.5em;
+      border: 4px solid #339847;
+      color: #ccc;
+      color: rgba(255,255,255,0.7);
+      text-decoration:none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.7em;
+      -webkit-border-radius: 1em; /* Safari 3-4, iOS 1-3.2, Android ≤1.6 */
+              border-radius: 1em; /* Opera 10.5, IE9+, Safari 5, Chrome, Firefox 4+, iOS 4, Android 2.1+ */
+
+        /* useful if you don't want a bg color from leaking outside the border: */
+      -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+      -webkit-transition: all 0.3s ease-out;  /* Safari 3.2+, Chrome */
+           -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
+             -o-transition: all 0.3s ease-out;  /* Opera 10.5–12.00 */
+                transition: all 0.3s ease-out;  /* Firefox 16+, Opera 12.50+ */
+    }
+    #mzalendo_main_actions ul li a:hover{
+      background-color: #111;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#111), to(#333)); /* Safari 4+, Chrome */
+        background-image: -webkit-linear-gradient(top, #111, #333); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+        background-image:    -moz-linear-gradient(top, #111, #333); /* Firefox 3.6-15 */
+        background-image:      -o-linear-gradient(top, #111, #333); /* Opera 11.10-12.00 */
+        background-image:         linear-gradient(to bottom, #111, #333); /* Firefox 16+, IE10, Opera 12.50+ */
+    }
+    #mzalendo_main_actions ul li a strong{
+      display:block;
+      color: #fff;
+      font-size:1.8em;
+      text-transform: none;
+      letter-spacing: none;
+    }
+    #mzalendo_main_actions ul li.action1 a{
+      background-color: #bf2726;
+      background-image:none;
+    }
+    #mzalendo_main_actions ul li.action1 a:hover{
+      background-color: #d92c2b;
+    }
+    
+    #mzalendo_search{
+      width: 100%;
+      margin:auto;
+      clear: both;
+      padding:1em;
+      padding-bottom:1.5em;
+    }
+    #mzalendo_search_box{
+      margin-top: 0.5em;
+      border: 4px solid #ccc;
+      -webkit-border-radius: 0.5em; /* Safari 3-4, iOS 1-3.2, Android ≤1.6 */
+              border-radius: 0.5em; /* Opera 10.5, IE9+, Safari 5, Chrome, Firefox 4+, iOS 4, Android 2.1+ */
+      background-color: #fff;
+      -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    }
+    #mz-search{
+      width:85%;
+      border:none;
+      background:none;
+      display:inline-block;
+      float:left;
+      font-size: 1.5em;
+      line-height:1;
+      height:2em;
+      padding: 0.25em;
+      box-sizing: border-box;
+      -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    }
+    .submit-search{
+      display:block;
+      -moz-appearance:none;
+      -webkit-appearance:none;
+      float:right;
+      width:15%;
+      border:none;
+      height:2.35em;
+      font-size: 1.5em;
+      line-height:1;
+      background: #bf2726;
+      color: #fff;
+      text-shadow: none;
+      color: transparent;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEX////////////////////////////////////////////////////////////////////lEOhHAAAAEHRSTlMAQBDfn8/vr4C/II9gUHAwAn5pjAAAAMpJREFUeF6VkVkOhDAMQ9OkG2Xz/U87iqqZQIOo5n2R4trB0A8+FgDIZaNHjowvEsjBBVe8SX+f1hrlUVEBoDRSgkpwT2kAEH9xSc3oyqr3bWQZLfSAydjUcEjQ2ciAkBEAHHRFKxsEwX3VPw7nbAedM5OxjzcigHXoYXdNbje9kKsSpaeEZP/CSFBKrbU/VRrghCuRPBWGbuxpq0BJyVZwhHD2YoUHgSu60AtqgX1mkd9CTsxC4iykoYdMLJaJhavLNb+8ZXCWvuQH9dAPYCPvqZYAAAAASUVORK5CYII=);
+      background-repeat: no-repeat;
+      background-position: center center;
+      margin-top: -4px;
+      margin-right: -4px;
+      margin-bottom: -4px;
+      -webkit-border-top-right-radius: 0.25em;
+      -webkit-border-bottom-right-radius: 0.25em;
+      -moz-border-radius-topright: 0.25em;
+      -moz-border-radius-bottomright: 0.25em;
+      border-top-right-radius: 0.25em;
+      border-bottom-right-radius: 0.25em;
+      -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+      -webkit-transition: all 0.3s ease-out;  /* Safari 3.2+, Chrome */
+           -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
+             -o-transition: all 0.3s ease-out;  /* Opera 10.5–12.00 */
+                transition: all 0.3s ease-out;  /* Firefox 16+, Opera 12.50+ */
+    }
+    .submit-search:hover{
+      background-color: #d92c2b;
+    }
+    
+    #mzalendo_about{
+      width: 100%;
+      padding:1em;
+      margin:auto;
+      clear: both;
+      color: #fff;
+      line-height: 1.5;
+    }
+    
+    
+    
+    // Replace images with Retina equivilants
+    @media only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)
+    {
+      #logo{
+        background-image: url(logo.svg);
+        background-size: 100% auto;
+      }
+    }
+    .svg #logo{
+      background-image: url(logo.svg) !important;
+      background-size: 100% auto;
+    }
+    
+  // Replace images with non-alpha versions for IE6
+    .ie6 #logo{
+      background-image: url(logo_ie6.png);
+    }
+    
+    
+    
+    
+    
+    @media screen and (min-width: 564px) {
+      #mzalendo_about{
+        width: 564px;
+        padding:0;
+      }
+      #mzalendo_main_actions ul li{
+        display:block;
+        display:inline-block;
+        width:33%;
+        text-align:left;
+      }
+      #mzalendo_search{
+        padding:0;
+        width: 564px;
+        padding-bottom:1.5em;
+      }
+    }
+    
+    @media screen and (min-width : 720px) {
+      #mzalendo_main_actions{
+        padding:0;
+        padding-top:2em;
+        padding-bottom:3em;
+        width: 720px;
+      }
+    }
+    
+    @media screen and (min-width : 406px) {
+      #logo{
+        background-size: 100% auto;
+      }
+    }
+     ul.ui-autocomplete{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-indent:0;
+    display:block;
+    padding: 1em;
+    background-color: rgba(10, 10, 10, 0.9);
+    max-width: 400px;
+    border: 4px solid #444;
+    margin-left: 20px;
+    margin-top:4px;
+    
+  }
+  ul.ui-autocomplete a{
+    cursor: pointer;
+    padding: 0.5em 1em;
+    display:block;
+  }
+  ul.ui-autocomplete a.person{
+    padding-left: 2em;
+    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAb0lEQVQ4y2P4//8/AyUYl4QAEO//jwD7oWJEGzD/PyaYT6wBCv9xAwViDAjAY0AAMQY04DGggS4uoDgMKI4FitKBA9Sm9VA2svh6qJwDNgMM0GwkBPZD9TDANL//TzoA6TFgINFmDJcw/KcQMFCKAVBGbH6TzJqNAAAAAElFTkSuQmCC) no-repeat scroll 10px center;
+  }
+  ul.ui-autocomplete a.place{
+    padding-left: 2em;
+    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAk0lEQVR42qWSbQ3AIAxEJwEJSEDCJCAFCXWAhEmYhElAAhIm4bYfJDRbd5DskpcQAq98dAFgITcnWtpYrLXW5g3f2UaCFeOsTKCrl5vYKPoUTHCgJ6r5iJ6DCfa/Apm4gjBBwDhh9I2VbK4zfZCIIM0InO7CRzc6JtBkQ5BJK7/whsATgUkm1blAv0XDMQFDenWbC+EkWPMqzDhLAAAAAElFTkSuQmCC) no-repeat scroll 10px center;
+  }
+  ul.ui-autocomplete a.org{
+    padding-left: 2em;
+    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMklEQVQ4y2P4Txgw4MMM1DIAJvAfC58+BtA8DAhK0jwMyHMeXQ2g2At0CwPkGBguBgAA4X2ejBlLFvgAAAAASUVORK5CYII=) no-repeat scroll 10px center;
+  }
+  ul.ui-autocomplete a:hover{
+    text-decoration: none;
+    background-color: #333;
+  }
+    
+    

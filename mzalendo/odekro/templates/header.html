@@ -1,0 +1,61 @@
+<div id="h_top"></div>
+<div id="h_mid">
+    <div class="wrap">
+        <h1 id="logo"><a href="#">Odekro Logo</a></h1>
+        <ul class="header" style="border:none;">
+            <a class="topMenu" href="#">What is <br />Odekro ?</a>
+        </ul>
+        <ul class="header">
+            <a href="#">Discover</a>
+            <span>your parliament</span>
+        </ul>
+        <ul class="header">
+            <a href="#">Know</a>
+            <span>your MP's</span>
+        </ul>
+        <div id="rightArea">
+            <div id="account">
+                <a href="#">login</a>
+                <a href="#">register</a>
+            </div>
+            <div id="search">
+                <form id="odekro_search" method="get" action="{% url core_search %}">
+                    <input type="text" value="Search" onblur="this.value=!this.value?'Search':this.value;" onfocus="this.select()" onclick="this.value='';" />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="main-menu">
+    <nav class="wrapper">
+        <ul class="menu" id="menu">
+            {% for item in menu_items %}
+                <li>
+                    <a href="{% url"
+                </li>
+            {% endfor %}
+            <li><a href="#" class="menulink">Home</a></li>                                                                                                 
+            <li><a href="#" class="menulink">About</a></li>
+            <li><a href="#" class="menulink">Politicians</a></li>
+            <li><a href="#" class="menulink">Elections</a></li>
+            <li>
+                <a href="#" class="menulink">Democracy Resources</a>
+                <!--<ul>
+                    <li><a href="#">Citizens Rights &amp; Responsibilities</a></li>
+                    <li><a href="#">How Our Democracy Works</a></li>
+                    <li><a href="#">Democracy FAQs</a></li>
+                    <li><a href="#">Constitution 2012</a></li>
+                </ul>-->
+            </li>
+            <li><a href="#" class="menulink">Places</a></li>
+            <li><a href="#" class="menulink">Parliament</a></li>
+            <li><a href="#" class="menulink">Blog</a></li>
+            <li><a href="#" class="menulink">Newsletter</a></li>
+        </ul>
+        <script type="text/javascript">
+            var menu=new menu.dd("menu");
+            menu.init("menu","menuhover");
+        </script>
+    </nav>
+</div>

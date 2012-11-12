@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        {% block title %}Odekro{% endblock %}
+        {% block sub_title %}{% endblock %}
+    </title>
+
+    {% block styles %}
+    <link type="text/css" href="{{ STATIC_URL }}css/1140.css" rel="stylesheet" />
+    <link type="text/css" href="{{ STATIC_URL }}css/styles.css" rel="stylesheet" />
+    {% endblock %}
+
+    {% block extra_styles %}
+    {% endblock %}
+
+    {% block scripts %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/css3-mediaqueries.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/s3Slider.js"></script> 
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.jshowoff.min.js"></script>
+    {% endblock %}
+
+    {% block extra_scripts %}
+    <script type="text/javascript">     
+        $(function() { 
+            $('#personFeatures').jshowoff({ 
+               links: false,
+               controls: false,
+               effect: 'fade',
+               cssClass: 'personFeatures',
+               hoverPause: false,
+               speed: 20000
+           }) 
+        })
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('#slider1').s3Slider({
+                timeOut: 5000 
+            })
+        })
+    </script>
+    {% endblock %}
+</head>
+
+<body>
+
+    {% block pre_header %}
+    {% endblock %}
+
+    <header id="odekro-header">
+        {% include 'header.html' %}
+    </header>
+
+    <div id="breadcrumb-rep"></div>
+
+    {% block breadcrumb %}
+    {% endblock %}
+
+    <div id="odekro-page">
+        <div class="page-wrapper row">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    
+    <footer id="odekro-footer">
+        {% block footer %}
+            {% include 'footer.html' %}
+        {% endblock %}
+    </footer>
+</body>
+</html>

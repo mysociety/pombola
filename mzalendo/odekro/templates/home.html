@@ -1,0 +1,43 @@
+{% extends 'shell.html' %}
+
+{% block title %}Odekro{% endblock %}
+
+{% block styles %}
+<link type="text/css" href="{{ STATIC_URL }}css/1140.css" rel="stylesheet" />
+<link type="text/css" href="{{ STATIC_URL }}css/styles.css" rel="stylesheet" />
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.4.3.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/s3Slider.js"></script> 
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.jshowoff.min.js"></script>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script type="text/javascript">     
+    $(function() { 
+        $('#personFeatures').jshowoff({ 
+           links: false,
+           controls: false,
+           effect: 'fade',
+           cssClass: 'personFeatures',
+           hoverPause: false,
+           speed: 20000
+       }) 
+    })
+</script>
+<script type="text/javascript">
+    $(function() {
+        $('#slider1').s3Slider({
+            timeOut: 5000 
+        })
+    })
+</script>
+{% endblock %}
+
+{% block content %}
+    {% include 'home_content.html' %}
+{% endblock %}

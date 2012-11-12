@@ -10,6 +10,42 @@ import datetime
 import unittest
 
 from management.hansard_parser import parse
+from utils import split_name, legal_name
+
+
+class ImporterTest(unittest.TestCase):
+    NAMES =  (
+        ('Abayateye, Alfred W. G.', 
+            ('Abayateye', 'Alfred', 'W. G.', ''),
+            'Alfred W. G. Abayateye'),
+        ('Abongo, Albert', ('Abongo', 'Albert', '', ''),
+            'Albert Abongo'),
+        ('Abdul-Karim, Iddrisu (Alhaji)', 
+            ('Abdul-Karim', 'Iddrisu', '', 'Alhaji'),
+            'Iddrisu Abdul-Karim'),
+        ('Abdul-Rahman, Masoud Baba', 
+            ('Abdul-Rahman', 'Masoud', 'Baba', ''),
+            'Masoud Baba Abdul-Rahman'),
+        ('Abubakari, Ibrahim Dey (Alhaji)', 
+            ('Abubakari', 'Ibrahim', 'Dey', 'Alhaji'),
+            'Ibrahim Dey Abubakari'),
+        ('Ameyaw-Akumfi, Christopher (Prof)', 
+            ('Ameyaw-Akumfi', 'Christopher', '', 'Prof'),
+            'Christopher Ameyaw-Akumfi'),
+        ('Alhassan, Ahmed Yakubu (Dr)', 
+            ('Alhassan', 'Ahmed', 'Yakubu', 'Dr'),
+            'Ahmed Yakubu Alhassan'),
+        ('Ahmed, Mustapha (Maj [rtd]) (Dr) (Alh)', 
+            ('Ahmed', 'Mustapha', '', 'Maj (rtd) Dr Alh'),
+            'Mustapha Ahmed')
+    )
+
+    def test_split_name(self):
+        for name, split, legal in self.NAMES:
+            self.assertEqual(split, split_name(name))
+            last_name, first_name, middle_name, title = split
+            self.assertEqual(legal, 
+                    legal_name(last_name, first_name, middle_name))
 
 
 class GhanaParserTest(unittest.TestCase):

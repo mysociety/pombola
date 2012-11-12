@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hansardContainer elevencol">
+    <div id="hansardIntro">
+        <h1 class="hansardH1">The Debates of the House of Commons</h1>
+        <p>When Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search via the box above.</p>
+    </div>
+    <div class="hansardMeta">
+        <h2 id="title">Topics</h2>
+        <ul id="content">
+            <li><a href="#">Question Period</a></li>
+            <li><a href="#">Workforce Integration Organization</a></li>
+            <li><a href="#">Boys and Girls Club</a></li>
+            <li><a href="#">Brain Tumour Awareness Month</a></li>
+            <li><a href="#">The Economy</a></li>
+            <li><a href="#">Food Safety Question Period</a></li>
+            <li><a href="#">Queen's Diamond Jubilee</a></li>
+            <li><a href="#">Youth Criminal Justice</a></li>
+            <li><a href="#">Foreign Investment</a></li>
+            <li><a href="#">Member for New Town</a></li>
+            <li><a href="#">Jobs and Growth Act, 2012</a></li>
+        </ul>
+    </div>
+
+    <ul class="hansardEntries">
+        {% for entry in sitting.entry_set.all %}
+        <li class="statement">
+            <div class="context">
+                <p><strong>Foreign Investment</strong> 
+                <br />Statements By Members</p>
+                <span>October 12th, 2012 / 11 a.m</span>
+                <strong><a class="partytag" href="#">NPP</a></strong>
+            </div>
+            <div class="focus">
+                <a class="hansardAvatar" href="#"><img src="#" /></a>
+                <p class="speaker">
+                    <a href="#"><strong>Lala Mitre</strong></a>
+                    <span>Tema West, GR</span>
+                </p>
+                <p>
+                    Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search.
+                </p>
+                <p>
+                    Transcribed, and published in a document called a Hansard svery word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search.
+                </p>
+            </div>
+        </li>        
+        {% endfor %}
+
+        {% comment %}        
+        <li class="statement">
+            <div class="context">
+                <p>
+                    <strong>Foreign Investment</strong> 
+                    <br />
+                    Statements By Members
+                </p>
+                <span>October 12th, 2012 / 11 a.m</span>
+                <strong><a class="partytag" href="#">NPP</a></strong>
+            </div>
+            <div class="focus">
+                <a class="hansardAvatar" href="#"><img src="#" /></a>
+                <p class="speaker">
+                    <a href="#"><strong>Lala Mitre</strong></a>
+                    <span>Tema West, GR</span>
+                </p>
+                <p>
+                    Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search Parliament is in session, every word spoken
+                </p>
+                <p>
+                    Transcribed, and published in a document called a Hansard svery word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search
+                </p>
+            </div>
+        </li>
+        {% endcomment %}
+    </ul>
+</div>
+{% endblock %}

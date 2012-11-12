@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>
+    {% if message_title %}
+      {{ message_title }}
+    {% else %}
+      Import Data
+    {% endif %}
+  </h1>
+  
+  {% if done %}
+    <p>Done :)</p>
+  {% else %}
+    <form enctype="multipart/form-data" method="post" action="{% url data_upload %}">
+      {% csrf_token %}
+      {{ form }}
+      <br/>
+      <br/>
+      <input class="r" type="submit" value="Import"/>
+    </form>
+  {% endif %}
+{% endblock %}
