@@ -320,6 +320,19 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         if self.is_politician():
             return super(Person, self).has_scorecards() or any([x.has_scorecards() for x in self.constituencies()])
         
+    @property
+    def show_overall_score(self):
+        """Should we show an overall score? Yes if applicable and there are active scorecards and we have the CDF category"""
+        if super(Person, self).show_overall_score:
+            # We could show the scorecard. Check that there is a CDF report in there.
+            for constituency in self.constituencies():
+                if constituency.active_scorecards().filter(category__slug='cdf-performance').exists():
+                    return True        
+
+        # fall through to here
+        return False
+
+
     class Meta:
        ordering = ["slug"]      
 
