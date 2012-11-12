@@ -121,6 +121,7 @@ class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["legal_name"]}
     inlines = [PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ScorecardInlineAdmin]
     list_display = ['slug', 'name', 'date_of_birth']
+    list_filter   = [ 'can_be_featured', ]
     search_fields = ['legal_name']
 
 class PlaceAdmin(admin.ModelAdmin):
