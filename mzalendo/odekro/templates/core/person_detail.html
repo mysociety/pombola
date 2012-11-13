@@ -7,20 +7,20 @@
         <div class="bioData">
             <h4>Biography</h4>
             <ul>
-                <li><strong>Hometown:</strong><span>Anyamam-Ada, Greater Accra Region</span></li>
-                <li><strong>Religion:</strong><span>Christianity (Presbyterian)</span></li>
-                <li><strong>Birth:</strong><span>20th October 1955</span></li>
-                <li><strong>Profession:</strong><span>Economist/Banker</span></li>
+                <li><strong>Hometown:</strong><span>{{ mp.hometown }}</span></li>
+                <li><strong>Religion:</strong><span>{{ mp.religion }}</span></li>
+                <li><strong>Birth:</strong><span>{{ person.date_of_birth }}</span></li>
+                <li><strong>Profession:</strong><span>{{ mp.occupation }}</span></li>
                 <li><strong>Education:</strong><span>University Diploma in Accounting (UG), 1987</span></li>
             </ul>
         </div>
     </div>
     <div id="profileContent">
         <div class="titleSpace">
-            <h2>Hon. Alfred W. G. Abayateye</h2>
-            <p>MP for Sege Constituency</p>
+            <h2>Hon. {{ object.title }} {{ object.legal_name }}</h2>
+            <p>MP for {{ object.}}</p>
             <a class="mp_tag_container" href="#">
-                <img src="images/ndc_tag.png" />
+                <img src="{{ STATIC_URL }}images/ndc_tag.png" />
             </a>
         </div>
         

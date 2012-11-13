@@ -18,3 +18,4 @@ web/down.default.html
 .project
 .pydevproject
 build/
+tmp/
