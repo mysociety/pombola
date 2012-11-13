@@ -4,7 +4,14 @@
 
 {% block extra_js_to_load %}
     mzalendo_settings.extra_js.push( 'js/feeds.js' );
+    mzalendo_settings.extra_js.push( 'js/libs/jquery.countdown-v1.6.0.js' );
+    mzalendo_settings.extra_js.push( 'js/election_countdown.js' );
 {% endblock %}
+
+{% block extra_headers %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.countdown-v1.6.0.css" media="screen, handheld" />
+{% endblock %}
+
 
 {% block breadcrumbs %}
     {# Hide bread crumbs on the home page. Insert blank div to add padding #}
@@ -42,7 +49,7 @@
         {% endif %}
     </div>
     <div class="home-right">
-        <h2>MP Ratings</h2>
+        <h2>Presidential Aspirants</h2>
         <div id="home-featured-person">
             {% if featured_person != None %}
                 {% include 'core/person_feature.html' %}
@@ -50,14 +57,39 @@
                 <div class="featured-person featured-person-placeholder"></div>
             {% endif %}
         </div>
-
         
+
         <div id="home-links">
             <a href="{% url info_page slug='2012-aspirants' %}" class="aspirants">Presidential Aspirants Page</a>
             <a href="{% url info_page slug='citizens-rights' %}" class="citizens">Citizen's Rights and Responsibilities</a>
         </div>
         
         
+        <style type="text/css" media="screen">
+          #election_countdown {
+            height: 4em;
+            padding: 0.5em;
+            margin-bottom: 1em;
+          }
+          
+          #election_countdown .countdown_descr {
+            padding-top: 0.5em;
+          }
+        </style>
+
+        <div id="election_countdown" data-description="Time until 2013 presidential elections" data-until="2013/3/4 00:00:00">
+          <span class="countdown_row countdown_show4">
+            <span class="countdown_section"><span class="countdown_amount">??</span><br>Days</span>
+            <span class="countdown_section"><span class="countdown_amount">??</span><br>Hours</span>
+            <span class="countdown_section"><span class="countdown_amount">??</span><br>Minutes</span>
+            <span class="countdown_section"><span class="countdown_amount">??</span><br>Seconds</span>
+          </span>
+          
+          <span class="countdown_row countdown_descr">...</span>
+        </div>
+        
+        <br clear="both">
+                
         {% if settings.POLLDADDY_WIDGET_ID %}
             <style>
                 .pds-box { width: 100% !important; }
