@@ -1,6 +1,6 @@
 [
     {
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Abayateye, Alfred W. G.", 
         "url": "details.php?id=16", 
         "Date of Birth": "October 20, 1955", 
@@ -15,7 +15,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Abdul-Karim, Iddrisu (Alhaji)", 
         "url": "details.php?id=17", 
         "Date of Birth": "June 1, 1948", 
@@ -29,7 +29,7 @@
         "Region": "Northern"
     }, 
     {
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Abdul-Rahman, Masoud Baba", 
         "url": "details.php?id=18", 
         "Date of Birth": "December 4,1952", 
@@ -104,7 +104,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Abukari, Sumani (Alhaji)", 
         "url": "details.php?id=22", 
         "Date of Birth": "April 28, 1946", 
@@ -136,7 +136,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Ackah, Stephen M. E. K.", 
         "url": "details.php?id=24", 
         "Date of Birth": "September 22, 1950", 
@@ -151,7 +151,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Adda, Joseph Kofi", 
         "url": "details.php?id=25", 
         "Date of Birth": "April 22, 1956", 
@@ -166,7 +166,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Addae, Christopher", 
         "url": "details.php?id=26", 
         "Date of Birth": "February 25, 1963", 
@@ -182,7 +182,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Addai, Simons", 
         "url": "details.php?id=27", 
         "Date of Birth": "April 14,1954", 
@@ -198,7 +198,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Development Planners/Architects/Quantity Surveyors", 
+        "Occupation/Profession": "Development Planner/Architect/Quantity Surveyor", 
         "Name": "Addai-Nimoh, Francis", 
         "url": "details.php?id=28", 
         "Date of Birth": "March 23, 1965", 
@@ -214,7 +214,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Addo, Grace (Ms)", 
         "url": "details.php?id=29", 
         "Date of Birth": "December 24, 1960", 
@@ -230,7 +230,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Addo, Irene Naa Torshie (Mrs)", 
         "url": "details.php?id=30", 
         "Date of Birth": "September 30,1970", 
@@ -262,7 +262,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Adjaho, Edward K. D.", 
         "url": "details.php?id=32", 
         "Date of Birth": "January 3,1957", 
@@ -277,7 +277,7 @@
         "Region": "Volta"
     }, 
     {
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Adjei-Baah, Seth", 
         "url": "details.php?id=33", 
         "Date of Birth": "May 18, 1960", 
@@ -294,7 +294,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Adjei-Yeboah, Andrews", 
         "url": "details.php?id=34", 
         "Date of Birth": "November 26,1955", 
@@ -310,7 +310,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Adu-Asare, Kojo", 
         "url": "details.php?id=35", 
         "Date of Birth": "June 30, 1966", 
@@ -335,7 +335,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Afful, Yaw Maama", 
         "url": "details.php?id=37", 
         "Date of Birth": "June 10,1959", 
@@ -367,7 +367,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Agbenyefia-Lassey, Richard", 
         "url": "details.php?id=39", 
         "Date of Birth": "August 19,1968", 
@@ -383,7 +383,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Agbesi, Alfred Kwame", 
         "url": "details.php?id=40", 
         "Date of Birth": "February 20,1955", 
@@ -399,7 +399,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Agyabeng, John", 
         "url": "details.php?id=41", 
         "Date of Birth": "February 14, 1965", 
@@ -429,7 +429,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Agyeman, Elizabeth", 
         "url": "details.php?id=42", 
         "Date of Birth": "May 13, 1949", 
@@ -460,7 +460,7 @@
         "Region": "Brong Ahafo"
     }, 
     {
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Agyen, Frank Boakye", 
         "url": "details.php?id=46", 
         "Date of Birth": "January 1,1946", 
@@ -476,7 +476,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Agyenim-Boateng, Kwaku", 
         "url": "details.php?id=47", 
         "Date of Birth": "November 1, 1972", 
@@ -508,7 +508,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Ahi, Sampson", 
         "url": "details.php?id=49", 
         "Date of Birth": "September 14, 1976", 
@@ -540,7 +540,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Aidoo, Evans Paul", 
         "url": "details.php?id=51", 
         "Date of Birth": "August 4, 1958", 
@@ -556,7 +556,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Aidoo, Joseph Boahen", 
         "url": "details.php?id=52", 
         "Date of Birth": "August 4, 1958", 
@@ -649,7 +649,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Akyea, Samuel Atta", 
         "url": "details.php?id=58", 
         "Date of Birth": "August 20,1962", 
@@ -690,7 +690,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Alidu, Iddrisu Zakari", 
         "url": "details.php?id=61", 
         "Date of Birth": "March 6,1956", 
@@ -706,7 +706,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Alowe, Leo Kabah", 
         "url": "details.php?id=62", 
         "Date of Birth": "April 11,1951", 
@@ -738,7 +738,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Amankwanor, Joseph Sam", 
         "url": "details.php?id=64", 
         "Date of Birth": "October 14, 1954", 
@@ -770,7 +770,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Ameyaw-Akumfi, Christopher (Prof)", 
         "url": "details.php?id=66", 
         "Date of Birth": "January 21, 1945", 
@@ -784,7 +784,7 @@
         "Region": "Brong Ahafo"
     }, 
     {
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Ameyaw-Cheremeh, Kwasi", 
         "url": "details.php?id=67", 
         "Date of Birth": "November 6, 1966", 
@@ -817,7 +817,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Amoah, Osei Bonsu", 
         "url": "details.php?id=69", 
         "Date of Birth": "August 15, 1961", 
@@ -833,7 +833,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Amoah-Tetteh, Elizabeth (Mrs)", 
         "url": "details.php?id=70", 
         "Date of Birth": "November 25,1945", 
@@ -848,7 +848,7 @@
         "Region": "Central"
     }, 
     {
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Constituency": "Atiwa", 
         "Name": "Amoako-Attah, Kwasi", 
         "url": "details.php?id=74", 
@@ -914,7 +914,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Anyimadu-Antwi, Kwame", 
         "url": "details.php?id=76", 
         "Date of Birth": "April 12, 1962", 
@@ -944,7 +944,7 @@
         "Region": "Greater Accra"
     }, 
     {
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Constituency": "Atwima Kwanwoma", 
         "Name": "Appiah-Kubi, Kojo (Dr)", 
         "url": "details.php?id=78", 
@@ -954,7 +954,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Appiah-Ofori, P.C.", 
         "url": "details.php?id=79", 
         "Date of Birth": "August 19,1943", 
@@ -1002,7 +1002,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Arthur, Francis Kojo", 
         "url": "details.php?id=82", 
         "Date of Birth": "November 22,1954", 
@@ -1018,7 +1018,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Arthur, George Kofi", 
         "url": "details.php?id=83", 
         "Date of Birth": "February 24,1969", 
@@ -1034,7 +1034,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Asaga, Moses", 
         "url": "details.php?id=84", 
         "Date of Birth": "June 1, 1957", 
@@ -1081,7 +1081,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Ashietey, Nii Armah", 
         "url": "details.php?id=86", 
         "Date of Birth": "January 28,1950", 
@@ -1097,7 +1097,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Asiamah, Amankwa Kwabena", 
         "url": "details.php?id=87", 
         "Date of Birth": "August 28,1958", 
@@ -1158,7 +1158,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Asum-Ahensah, Alex", 
         "url": "details.php?id=91", 
         "Date of Birth": "July 23, 1953", 
@@ -1189,7 +1189,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Avoka, Apul Cletus", 
         "url": "details.php?id=93", 
         "Date of Birth": "November 30,1951", 
@@ -1203,7 +1203,7 @@
         "Region": "Upper East"
     }, 
     {
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Awontiirim, Ataboadey Timothy", 
         "url": "details.php?id=94", 
         "Date of Birth": "July 1, 1970", 
@@ -1219,7 +1219,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Awuah, Ignatius Baffour", 
         "url": "details.php?id=95", 
         "Date of Birth": "August 24, 1966", 
@@ -1267,7 +1267,7 @@
     }, 
     {
         "Party": "PNC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Azong, Alhassan", 
         "url": "details.php?id=99", 
         "Date of Birth": "December 18, 1965", 
@@ -1342,7 +1342,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Bagbin, Alban S. K.", 
         "url": "details.php?id=103", 
         "Date of Birth": "September 24,1957", 
@@ -1374,7 +1374,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Baloroo, Duoghr John", 
         "url": "details.php?id=105", 
         "Date of Birth": "December 17,1956", 
@@ -1390,7 +1390,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Banda, Ben Abdallah", 
         "url": "details.php?id=106", 
         "Date of Birth": "August 15, 1971", 
@@ -1406,7 +1406,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Bandua, Emmanuel Kwasi", 
         "url": "details.php?id=107", 
         "Date of Birth": "September 11,1949", 
@@ -1421,7 +1421,7 @@
         "Region": "Volta"
     }, 
     {
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Barton-Odro, Ebo", 
         "url": "details.php?id=108", 
         "Date of Birth": "January 8, 1952", 
@@ -1452,7 +1452,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Bayon, Godfrey Tangu", 
         "url": "details.php?id=110", 
         "Date of Birth": "March 3, 1956", 
@@ -1512,7 +1512,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Boafo, William Ofori", 
         "url": "details.php?id=114", 
         "Date of Birth": "December 30,1946", 
@@ -1527,7 +1527,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Boakye, George", 
         "url": "details.php?id=115", 
         "Date of Birth": "October 6, 1956", 
@@ -1556,7 +1556,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Boateng, Bernice Beatrice (Ms)", 
         "url": "details.php?id=117", 
         "Date of Birth": "August 19,1951", 
@@ -1571,7 +1571,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Boforo, Mary Salifu (Hajia)", 
         "url": "details.php?id=118", 
         "Date of Birth": "February 25, 1951", 
@@ -1619,7 +1619,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Buah, Emmanuel Armah-Kofi", 
         "url": "details.php?id=122", 
         "Date of Birth": "May 10, 1966", 
@@ -1634,7 +1634,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Bukari, Joseph Nikpe", 
         "url": "details.php?id=123", 
         "Date of Birth": "October 3, 1969", 
@@ -1649,7 +1649,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Chaie, Theophilus Tetteh", 
         "url": "details.php?id=124", 
         "Date of Birth": "April 4, 1972", 
@@ -1664,7 +1664,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Chireh, Joseph Yieleh", 
         "url": "details.php?id=125", 
         "Date of Birth": "July 8, 1954", 
@@ -1754,7 +1754,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Daramani-Sakande, Adamu", 
         "url": "details.php?id=130", 
         "Date of Birth": "May 6,1962", 
@@ -1783,7 +1783,7 @@
         "Region": "Western"
     }, 
     {
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Constituency": "Asutifi South", 
         "Name": "Dauda, Collins (Alhaji)", 
         "url": "details.php?id=258", 
@@ -1793,7 +1793,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Debrah, Ernest Akobuor", 
         "url": "details.php?id=132", 
         "Date of Birth": "June 3, 1947", 
@@ -1807,7 +1807,7 @@
         "Region": "Brong Ahafo"
     }, 
     {
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Dery, P. Ambrose", 
         "url": "details.php?id=133", 
         "Date of Birth": "August 23, 1956", 
@@ -1867,7 +1867,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Duut, Emmanuel Kwame", 
         "url": "details.php?id=137", 
         "Date of Birth": "June 6,1959", 
@@ -1882,7 +1882,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Eduamoah, Ekow Panyin Okyere", 
         "url": "details.php?id=138", 
         "Date of Birth": "November 23,1972", 
@@ -1941,7 +1941,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Fobih, Dominic K. (Prof)", 
         "url": "details.php?id=142", 
         "Date of Birth": "July 16,1942", 
@@ -1971,7 +1971,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Frimpong, Kofi", 
         "url": "details.php?id=144", 
         "Date of Birth": "June 17, 1951", 
@@ -1986,7 +1986,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Fuseini, Inusah Abdulai B.", 
         "url": "details.php?id=145", 
         "Date of Birth": "January 23, 1962", 
@@ -2000,7 +2000,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Gbediame, Gershon K. B.", 
         "url": "details.php?id=146", 
         "Date of Birth": "June 4,1953", 
@@ -2015,7 +2015,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Ghartey, Joe", 
         "url": "details.php?id=147", 
         "Date of Birth": "June 15,1961", 
@@ -2029,7 +2029,7 @@
         "Region": "Western"
     }, 
     {
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Constituency": "Central Tongu", 
         "Name": "Gidisu, Joe Kwashie", 
         "url": "details.php?id=148", 
@@ -2066,7 +2066,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Gyan-Baffour, George Yaw (Prof)", 
         "url": "details.php?id=150", 
         "Date of Birth": "March 27,1951", 
@@ -2081,7 +2081,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Gyetuah, John", 
         "url": "details.php?id=151", 
         "Date of Birth": "October 1, 1959", 
@@ -2111,7 +2111,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Hammond, Kobina Tahir", 
         "url": "details.php?id=153", 
         "Date of Birth": "June 16, 1960", 
@@ -2126,7 +2126,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Hayibor, Prince Jacob", 
         "url": "details.php?id=154", 
         "Date of Birth": "September 12, 1962", 
@@ -2156,7 +2156,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Humado, Clement Kofi", 
         "url": "details.php?id=156", 
         "Date of Birth": "December 18,1953", 
@@ -2171,7 +2171,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Ibrahim, Ahmed", 
         "url": "details.php?id=157", 
         "Date of Birth": "May 6, 1974", 
@@ -2200,7 +2200,7 @@
         "Region": "Northern"
     }, 
     {
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Iddrisu, Dawuda", 
         "url": "details.php?id=159", 
         "Hometown": "Karaga, Northern Region", 
@@ -2214,7 +2214,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Iddrisu, Haruna", 
         "url": "details.php?id=160", 
         "Date of Birth": "September 8,1970", 
@@ -2258,7 +2258,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Jabanyite, Samuel Abdulai", 
         "url": "details.php?id=228", 
         "Date of Birth": "March 4,1972", 
@@ -2273,7 +2273,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Johnfiah, Samuel", 
         "url": "details.php?id=167", 
         "Date of Birth": "September 9, 1952", 
@@ -2288,7 +2288,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Jumah, Maxwell Kofi", 
         "url": "details.php?id=249", 
         "Date of Birth": "June 26, 1950", 
@@ -2303,7 +2303,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Kamel, Henry Ford", 
         "url": "details.php?id=164", 
         "Date of Birth": "December 21,1961", 
@@ -2362,7 +2362,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Kunsu, Stephen", 
         "url": "details.php?id=169", 
         "Date of Birth": "September 30,1949", 
@@ -2392,7 +2392,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Kwao, Stephen Amoanor", 
         "url": "details.php?id=171", 
         "Date of Birth": "September 12,1951", 
@@ -2421,7 +2421,7 @@
         "Region": "Ashanti"
     }, 
     {
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Larbie, David Nana", 
         "url": "details.php?id=173", 
         "Date of Birth": "October 29,1950", 
@@ -2436,7 +2436,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Likpalimor, Kwajo Tawiah", 
         "url": "details.php?id=174", 
         "Date of Birth": "September 9,1960", 
@@ -2451,7 +2451,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Manu, S. K. Balado", 
         "url": "details.php?id=175", 
         "Date of Birth": "August 23, 1958", 
@@ -2553,7 +2553,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Nayan, Joseph Kwaku", 
         "url": "details.php?id=182", 
         "Date of Birth": "May 22, 1964", 
@@ -2583,7 +2583,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Nitiwul, Dominic B. A.", 
         "url": "details.php?id=184", 
         "Date of Birth": "November 4,1977", 
@@ -2613,7 +2613,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Ntim, Augustine Collins", 
         "url": "details.php?id=186", 
         "Date of Birth": "September 24, 1968", 
@@ -2628,7 +2628,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Ntow, Mathias Kwame", 
         "url": "details.php?id=187", 
         "Date of Birth": "November 11,1957", 
@@ -2643,7 +2643,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Ntow-Ababio, Yaw", 
         "url": "details.php?id=188", 
         "Date of Birth": "August 20,1959", 
@@ -2671,7 +2671,7 @@
         "Region": "Eastern"
     }, 
     {
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Obeng Dappah, Esther (Ms)", 
         "url": "details.php?id=190", 
         "Date of Birth": "January 18,1945", 
@@ -2712,7 +2712,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Ofori, Joseph Kwadwo", 
         "url": "details.php?id=193", 
         "Date of Birth": "March 13, 1967", 
@@ -2742,7 +2742,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Ofosu, Asamoah", 
         "url": "details.php?id=195", 
         "Date of Birth": "November 25,1969", 
@@ -2772,7 +2772,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Okoh, Paul", 
         "url": "details.php?id=197", 
         "Date of Birth": "February 22,1949", 
@@ -2816,7 +2816,7 @@
         "Region": "Eastern"
     }, 
     {
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Oquaye, Aaron  Michael (Prof.)", 
         "url": "details.php?id=200", 
         "Date of Birth": "April 4,1944", 
@@ -2830,7 +2830,7 @@
         "Region": "Greater Accra"
     }, 
     {
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Osei, Anthony Akoto  (Dr)", 
         "url": "details.php?id=201", 
         "Date of Birth": "April 18, 1953", 
@@ -2845,7 +2845,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Osei, Isaac", 
         "url": "details.php?id=202", 
         "Date of Birth": "March 29,1951", 
@@ -2860,7 +2860,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Osei-Mensah, Simon", 
         "url": "details.php?id=203", 
         "Date of Birth": "May 27, 1961", 
@@ -2875,7 +2875,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Osei-Opare, Akosua Frema (Mrs)", 
         "url": "details.php?id=204", 
         "Date of Birth": "June 5,1947", 
@@ -2890,7 +2890,7 @@
     }, 
     {
         "Party": "INDEPENDENT", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Osei-Owusu, Joseph", 
         "url": "details.php?id=205", 
         "Date of Birth": "January 22, 1962", 
@@ -2905,7 +2905,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Osei-Prempeh, Kwame", 
         "url": "details.php?id=206", 
         "Date of Birth": "December 19, 1957", 
@@ -2919,7 +2919,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Osei-Sarfo, Francis Yaw", 
         "url": "details.php?id=207", 
         "Date of Birth": "October 1, 1955", 
@@ -2964,7 +2964,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Owusu-Ankomah, Papa", 
         "url": "details.php?id=210", 
         "Date of Birth": "April 27, 1958", 
@@ -2979,7 +2979,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Lawyers", 
+        "Occupation/Profession": "Lawyer", 
         "Name": "Owusu-Ansah, Emmanuel Asamoah (DECEASED - 22/06/12)", 
         "url": "details.php?id=211", 
         "Date of Birth": "July 17, 1939", 
@@ -3007,7 +3007,7 @@
         "Region": "Ashanti"
     }, 
     {
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Constituency": "Akim Oda", 
         "Name": "Owusu-Boateng, Yaw", 
         "url": "details.php?id=213", 
@@ -3017,7 +3017,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Owusu-Mainu, Emmanuel", 
         "url": "details.php?id=214", 
         "Date of Birth": "September 3, 1949", 
@@ -3077,7 +3077,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Puozaa, Mathias A.", 
         "url": "details.php?id=219", 
         "Date of Birth": "January 10, 1948", 
@@ -3152,7 +3152,7 @@
     }, 
     {
         "Party": "INDEPENDENT", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Saani, Iddi (Alhaji) (DECEASED - 05/06/12)", 
         "url": "details.php?id=224", 
         "Date of Birth": "May 26,1956", 
@@ -3167,7 +3167,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Economists/Bankers", 
+        "Occupation/Profession": "Economist/Banker", 
         "Name": "Sackey, Elizabeth K. T. (Mrs)", 
         "url": "details.php?id=225", 
         "Date of Birth": "May 6, 1958", 
@@ -3196,7 +3196,7 @@
         "Region": "Brong Ahafo"
     }, 
     {
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Soditey, Donald Dari", 
         "url": "details.php?id=229", 
         "Date of Birth": "September 25, 1957", 
@@ -3211,7 +3211,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Sorogho, Amadu B. (Alhaji)", 
         "url": "details.php?id=230", 
         "Date of Birth": "May 5, 1955", 
@@ -3256,7 +3256,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Tettey-Enyo, Alexander Narh", 
         "url": "details.php?id=233", 
         "Date of Birth": "June 6, 1940", 
@@ -3283,7 +3283,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Twumasi, Kwame Amporfo", 
         "url": "details.php?id=235", 
         "Date of Birth": "December 10,1954", 
@@ -3296,7 +3296,7 @@
         "Region": "Brong Ahafo"
     }, 
     {
-        "Occupation/Profession": "Managers/Administrators", 
+        "Occupation/Profession": "Manager/Administrator", 
         "Name": "Twumasi-Appiah, Felix", 
         "url": "details.php?id=236", 
         "Date of Birth": "August 30,1968", 
@@ -3308,7 +3308,7 @@
         "Region": "Brong Ahafo"
     }, 
     {
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Woyome, Kobla Mensah", 
         "url": "details.php?id=237", 
         "Date of Birth": "September 21,1971", 
@@ -3323,7 +3323,7 @@
     }, 
     {
         "Party": "NDC", 
-        "Occupation/Profession": "Educationist/Teachers", 
+        "Occupation/Profession": "Educationist/Teacher", 
         "Name": "Wusah, Sammy B.", 
         "url": "details.php?id=238", 
         "Date of Birth": "December 15,1957", 
@@ -3368,7 +3368,7 @@
     }, 
     {
         "Party": "NPP", 
-        "Occupation/Profession": "Business Persons", 
+        "Occupation/Profession": "Business Person", 
         "Name": "Yeboah, David Hennric", 
         "url": "details.php?id=241", 
         "Date of Birth": "March 11, 1957", 

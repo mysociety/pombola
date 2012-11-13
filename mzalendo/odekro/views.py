@@ -62,5 +62,5 @@ def add_info_page(slug, title, content):
         page = InfoPage(slug=slug)
 
     page.title = title
-    page.content = content
+    page.content = unicode(content, 'utf-8')
     return page.save()

@@ -12,7 +12,7 @@
             <span>your parliament</span>
         </ul>
         <ul class="header">
-            <a href="#">Know</a>
+            <a href="{% url position slug='mp' %}">Know</a>
             <span>your MP's</span>
         </ul>
         <div id="rightArea">
@@ -41,22 +41,94 @@
 <div id="main-menu">
     <nav class="wrapper">
         <ul class="menu" id="menu">
-            <li><a href="{% url home %}" class="menulink">Home</a></li>                                                                                                 
-            <li><a href="{% url position slug='mp' %}" class="menulink">MPs</a></li>
-            <li><a href="#" class="menulink">Elections</a></li>
+            <li><a href="{% url home %}" class="menulink">Home</a></li>           
+            <li>
+                <a href="{% url info_page slug='2012-overview' %}" class="menulink">
+                    Elections 2012
+                </a>
+                <ul>
+                    <li>
+                        <a href="{% url info_page slug='2012-overview' %}">
+                            Overview
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url position slug='aspirant-president' %}">
+                            Presidential Aspirants
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url position slug='aspirant-mp' %}">
+                            Parliamentary Aspirants
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url info_page slug='political-parties' %}">
+                            Political Parties
+                        </a>
+                    </li>                    
+                </ul>
+            </li>
+
+            <li>
+                <a href="{% url info_page slug='parliament-overview' %}" class="menulink">
+                    Parliament
+                </a>
+                <ul id="parliament-overview">
+                    {% if settings.ENABLED_FEATURES.hansard %}
+                    <li>
+                        <a href="{% url hansard:index %}">Hansard</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="{% url position slug='mp' %}">MPs</a>
+                    </li>
+                    <li>
+                        <a href="{% url info_page slug='parliament-overview' %}">
+                            Parliament Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url info_page slug='committee-overview' %}">
+                            Committee Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url info_page slug='bills-overview' %}">
+                            Bills Overview
+                        </a>
+                    </li>
+                </ul>                 
+            </li>
+
+            <li>
+                <a href="{% url info_page slug='places-overview' %}" 
+                   class="menulink">
+                    Places
+                </a>
+                <ul>
+                    <li>
+                        <a href="{% url info_page slug='places-overview' %}">
+                            Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url place_kind slug='constituency' %}">
+                            Constituencies
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% comment %}
             <li>
                 <a href="#" class="menulink">Democracy Resources</a>
-                <!--<ul>
-                    <li><a href="#">Citizens Rights &amp; Responsibilities</a></li>
-                    <li><a href="#">How Our Democracy Works</a></li>
-                    <li><a href="#">Democracy FAQs</a></li>
-                    <li><a href="#">Constitution 2012</a></li>
-                </ul>-->
             </li>
-            <li><a href="{% url info_page slug='places-overview' %}" class="menulink">Places</a></li>
-            <li><a href="#" class="menulink">Parliament</a></li>
+
             <li><a href="#" class="menulink">Blog</a></li>
             <li><a href="#" class="menulink">Newsletter</a></li>
+            {% endcomment %}
+            
             <li>
                 <a href="{% url info_page slug='odekro-overview' %}" class="menulink">About</a>
                 <ul>
@@ -64,10 +136,6 @@
                     <li><a href="{% url info_page slug='faqs' %}">FAQs</a></li>
                     <li><a href="{% url info_page slug='policies' %}">Policies</a></li>
                     <li><a href="{% url info_page slug='partners' %}">Partners</a></li>
-                    {% comment %}
-                    <li><a href="#">Democracy FAQs</a></li>
-                    <li><a href="#">Constitution 2012</a></li>
-                    {% endcomment %}
                 </ul>               
             </li>
         </ul>
