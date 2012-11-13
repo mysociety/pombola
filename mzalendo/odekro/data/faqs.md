@@ -1,11 +1,11 @@
-#####1. What is the aim of Odekro?
+######1. What is the aim of Odekro?
  
 Odekro is a non-partisan project that seeks empower communities and marginalized populations to promote transparency, accountability and democratic governance through citizen action and engagement with relevant government agencies. Specifically, the intervention will focus on the Parliament/Legislature of Ghana.
 
-#####2. When was Odekro founded? Who founded it?
+######2. When was Odekro founded? Who founded it?
 Odekro was founded in 2012 by
 
-#####3. Who else is involved with the site?
+######3. Who else is involved with the site?
 The site is supported by a number of partner organisations and through the hard work of a number of volunteers
 
 ######4. How should I can I get in touch with Odekro.org?
