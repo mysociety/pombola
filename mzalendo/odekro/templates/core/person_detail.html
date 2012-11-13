@@ -1,24 +1,37 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block content %}
 <div class="member-profile ninecol">
     <div id="profileInfo">
-        <img class="profile-avatar" width="250" height="270" src="#" />
+        {#<img width="250" height="270" src="#" />#}
+
+        {% thumbnail object.primary_image "250x270" crop="center" as img %}
+            <img class="profile-avatar" src="{{ img.url }}" alt="{{ object.name }}" 
+                  width="{{ img.width }}" height="{{ img.height }}" />
+        {% empty %}
+            <img src="{{STATIC_URL}}images/avatar-210x210.jpg" />
+        {% endthumbnail %}  
+
         <div class="bioData">
             <h4>Biography</h4>
             <ul>
                 <li><strong>Hometown:</strong><span>{{ mp.hometown }}</span></li>
                 <li><strong>Religion:</strong><span>{{ mp.religion }}</span></li>
-                <li><strong>Birth:</strong><span>{{ person.date_of_birth }}</span></li>
+                <li><strong>Birth:</strong><span>{{ object.date_of_birth }}</span></li>
                 <li><strong>Profession:</strong><span>{{ mp.occupation }}</span></li>
-                <li><strong>Education:</strong><span>University Diploma in Accounting (UG), 1987</span></li>
+                <li><strong>Education:</strong><span>{{ mp.education}}</span></li>
             </ul>
         </div>
     </div>
     <div id="profileContent">
         <div class="titleSpace">
             <h2>Hon. {{ object.title }} {{ object.legal_name }}</h2>
-            <p>MP for {{ object.}}</p>
+            <p>MP for 
+                {% for constituency in object.constituencies %}
+                    <a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a>
+                {% endfor %}
+            </p>
             <a class="mp_tag_container" href="#">
                 <img src="{{ STATIC_URL }}images/ndc_tag.png" />
             </a>
@@ -35,6 +48,9 @@
         {% endcomment %}
 
         <div id="profileAsset">
+            {% include 'disqus_comments.html' %}
+            
+            {% comment %}
             <ul class="menu">
                 <li id="comments" class="active">Comments</li>
                 <li id="overview">Overview</li>
@@ -43,7 +59,10 @@
                 <li id="appearances">Appearances (2290)</li>
             </ul>
             <span class="clear"></span>
+
             <div class="content comments">
+                
+                
                 <a id="post-count" href="#"><h3>3 comments</h3></a>
                 <div class="userAvatar">
                     <img src="#" />
@@ -97,6 +116,7 @@
                         </div>
                     </li>
                 </div>
+
             </div>
             <div class="content overview">
                 <ul>
@@ -124,6 +144,7 @@
                     <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.dmsconsulting.es">www.dmsconsulting.es</a> - Great guys</li>
                 </ul>
             </div>
+            {% endcomment %}
         </div>
     </div>                
 </div>
@@ -173,7 +194,7 @@
             </li>
         </ul>
     </div>
-    <h3>Categories</h3>
+    <h3>Tags</h3>
     <div class="featBox categories-field">
         <ul>
             <a href="#">2008 Aspirants</a>

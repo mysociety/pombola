@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% comment %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Citizens Rights :: ODEKRO</title>
+<link href="css/1140.css" rel="stylesheet" type="text/css" />
+<link href="css/styles.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="scripts/script.js"></script>
+<script type="text/javascript" src="scripts/css3-mediaqueries.js"></script>
+</head>
+<body>
+    <header id="odekro-header">
+        <div id="h_top"></div>
+        <div id="h_mid">
+            <div class="wrap">
+                <h1 id="logo"><a href="#">Odekro Logo</a></h1>
+                <ul class="header" style="border:none;">
+                    <a class="topMenu" href="#">What is <br />Odekro ?</a>
+                </ul>
+                <ul class="header">
+                    <a href="#">Discover</a>
+                    <span>your parliament</span>
+                </ul>
+                <ul class="header">
+                    <a href="#">Know</a>
+                    <span>your MP's</span>
+                </ul>
+                <div id="rightArea">
+                    <div id="account">
+                        <a href="#">login</a>
+                        <a href="#">register</a>
+                    </div>
+                    <div id="search">
+                        <form id="odekro_search" method="get" action="#">
+                            <input type="text" value="Search" onblur="this.value=!this.value?'Search':this.value;" onfocus="this.select()" onclick="this.value='';" />
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main-menu">
+            <nav class="wrapper">
+                <ul class="menu" id="menu">
+                    <li><a href="#" class="menulink">Home</a></li>                                                                                                 
+                    <li><a href="#" class="menulink">About</a></li>
+                    <li><a href="#" class="menulink">Politicians</a></li>
+                    <li><a href="#" class="menulink">Elections</a></li>
+                    <li><a href="#" class="menulink">Democracy Resources</a>
+                        <!--<ul>
+                            <li><a href="#">Citizens Rights &amp; Responsibilities</a></li>
+                            <li><a href="#">How Our Democracy Works</a></li>
+                            <li><a href="#">Democracy FAQs</a></li>
+                            <li><a href="#">Constitution 2012</a></li>
+                        </ul>-->
+                    </li>
+                    <li><a href="#" class="menulink">Places</a></li>
+                    <li><a href="#" class="menulink">Parliament</a></li>
+                    <li><a href="#" class="menulink">Blog</a></li>
+                    <li><a href="#" class="menulink">Newsletter</a></li>
+                </ul>
+                <script type="text/javascript">
+                    var menu=new menu.dd("menu");
+                    menu.init("menu","menuhover");
+                </script>
+            </nav>
+        </div>
+    </header>
+
+{% endcomment %}
+
+{% comment %}    
+    <div id="breadcrumb">
+        <nav class="wrapper">
+            <ul>
+                <li>
+                    <a href="#">home</a><span class="sep">»</span>
+                </li>
+                <li>
+                    <a href="#">information</a><span class="sep">»</span>
+                </li>
+                <li>citizens rights</li>
+            </ul>
+        </nav>
+    </div>
+{% endcomment %}
+
+{% block content %}
+    <div class="typo-left ninecol">
+        <h1>{{ object.title }}</h1>
+
+        {{ object.content_with_anchors|safe }}
+    </div>
+
+    <div class="index-right threecol">
+        <h3>Follow Us</h3>
+        <ul class="socialLinks">
+            <li class="facebook">
+                <a href="#">
+                    <span class="icon">Facebook</span>
+                </a>
+                <iframe scrolling="no" frameborder="0" allowtransparency="true" style="border:none;overflow:hidden;width:96px;height:21px;margin:5px 0 0;" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.odekro.org%2Fsocial-media-icons%2F&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;height=21&amp;width=90"></iframe>
+            </li>
+            <li class="twitter">
+                <a href="#">
+                    <span class="icon">Twitter</span>
+                </a>
+                <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1351848862.html#_=1351979906569&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=Odekro&amp;show_count=false&amp;show_screen_name=true&amp;size=m" class="twitter-follow-button" style="width:175px;height:20px;margin:6px 0 0;" title="Twitter Follow Button" data-twttr-rendered="true"></iframe>
+            </li>
+            <li class="googleplus">
+                <a href="#"><span class="icon">Googleplus</span></a>
+                <iframe width="100%" scrolling="no" frameborder="0" allowtransparency="true" hspace="0" marginheight="0" marginwidth="0" style="position:static;top:0pt;width:90px;margin:0px;border-style:none;left:0pt;visibility:visible;height:20px;margin:6px 0 0;" tabindex="0" vspace="0" id="I0_1351979851748" name="I0_1351979851748" src="https://plusone.google.com/_/+1/fastbutton?bsv=m&amp;abtk=AEIZW7QIrl2eWE%2BEfkX1GUuJ5z91sABA0JLcUOKZyJeWHaYes1TOJ%2BfgORbEQCHR8wnpbqviLB0sZmSxRlmfXcXR5B48l/XDG4zD9T51ScoFJhMyd9CUSf0%3D&amp;size=medium&amp;hl=en-US&amp;origin=http%3A%2F%2Fwww.briangardner.com&amp;url=http%3A%2F%2Fwww.briangardner.com%2Fsocial-media-icons%2F&amp;jsh=m%3B%2F_%2Fapps-static%2F_%2Fjs%2Fgapi%2F__features__%2Frt%3Dj%2Fver%3DGrT6xlVusV4.en_GB.%2Fsv%3D1%2Fam%3D!EjuVRaiyNaqIjBsSTg%2Fd%3D1%2Frs%3DAItRSTPP8XcYgVHBiYjEaHRudoswlscExg#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Conload&amp;id=I0_1351979851748&amp;parent=http%3A%2F%2Fwww.odekro.org" title="+1"></iframe>
+            </li>
+        </ul>
+
+        {% comment %}
+        <h3>Odekro News</h3>
+        <ul id="odekro-news-list">
+            <li>
+                <div class="meta-date">
+                    <strong class="month">Nov</strong>
+                    <span class="day">24</span>
+                </div>
+                <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
+                <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
+                <a href="#">more</a>
+            </li>
+            <li>
+                <div class="meta-date">
+                    <strong class="month">Nov</strong>
+                    <span class="day">24</span>
+                </div>
+                <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
+                <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
+                <a href="#">more</a>
+            </li>
+            <li>
+                <div class="meta-date">
+                    <strong class="month">Nov</strong>
+                    <span class="day">24</span>
+                </div>
+                <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
+                <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
+                <a href="#">more</a>
+            </li>
+            <li>
+                <div class="meta-date">
+                    <strong class="month">Nov</strong>
+                    <span class="day">24</span>
+                </div>
+                <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
+                <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
+                <a href="#">more</a>
+            </li>
+        </ul>
+        {% endcomment %}
+
+        {% comment %}
+        <h3>Have Your Say</h3>
+        <div class="featBox poll-field">
+            <h4 id="poll-question">Ipsum dolor sit met, consectetur adipiscing. Nullam feugiat dignissim metus, id suscipit vitae. Cras sapien ?</h4>
+            <div id="poll-answer">
+                <span class="answerGroup">
+                    <input type="radio" />
+                    <label>Yes</label>
+                </span>
+                <span class="answerGroup">
+                    <input type="radio" />
+                    <label>No</label>
+                </span>
+                <span class="answerGroup">
+                    <input type="radio" />
+                    <label>Not Sure</label>
+                </span>
+            </div>
+            <div id="pollVote">
+                <a id="voteBTN" href="#">Vote</a>
+                <a id="ryte" href="#">View Poll</a>
+            </div>
+        </div>
+        {% endcomment %}
+    </div>
+{% endblock %}
+

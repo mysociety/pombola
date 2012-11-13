@@ -5,22 +5,31 @@ from django.shortcuts import render
 
 from odekro import forms
 import json
-
 import importer
+from info.models import InfoPage
+
+def info_page_upload(request):
+    if request.POST:
+        form = forms.InfoPageUpload(request.POST, request.FILES)
+        if form.is_valid():
+            upload = form.save(commit=False)
+            content = contents(upload, '\n')
+            title = form.cleaned_data['title']
+            slug = form.cleaned_data['name'][:-3]            
+            done = add_info_page(slug, title, content)
+    else:
+        form = forms.InfoPageUpload()
+        done = False
+    return render(request, 'info_page_upload.html',
+                  dict(form=form, done=done))
+
 
 def data_upload(request):
     if request.POST:
         form = forms.UploadForm(request.POST, request.FILES)
         if form.is_valid():
             upload = form.save(commit=False)
-            xs = [chunk.splitlines() for chunk in upload.file.chunks()]
-            data = []
-            for x in xs:
-                if isinstance(x, list):
-                    data.extend(x)
-                else:
-                    data.append(x)
-            data = ''.join(data)
+            data = contents(upload)
             import_mps(data)
             done = True
     else:
@@ -30,10 +39,28 @@ def data_upload(request):
     return render(request, 'data_upload.html', 
                   dict(form=form, done=done))
 
+def contents(upload, joint=''):
+    xs = [chunk.splitlines() for chunk in upload.file.chunks()]
+    data = []
+    for x in xs:
+        if isinstance(x, list):
+            data.extend(x)
+        else:
+            data.append(x)
+    return joint.join(data)    
 
 def import_mps(data):
-    
     data = json.loads(data)
     print '>>>>>', len(data)
-
     importer.import_to_db(data)
+
+
+def add_info_page(slug, title, content):
+    try:
+        page = InfoPage.objects.get(slug=slug)
+    except InfoPage.DoesNotExist:
+        page = InfoPage(slug=slug)
+
+    page.title = title
+    page.content = content
+    return page.save()

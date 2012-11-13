@@ -33,8 +33,6 @@ env.webapp_user = 'odekro_webapp'
 env.webapp_group = 'odekro_webapp'
 
 env.basedir = '/var/www/%(project)s' % env
-# env.basedir = '/var/www/%(project)s' % env
-
 
 #env.shell = "/bin/sh -c"
 
@@ -139,6 +137,9 @@ def rollback():
 def app(cmd):
     webapp.ctl(cmd)
 
+
+def setup_info_pages():
+    pass
 
 # ADHOC
 
