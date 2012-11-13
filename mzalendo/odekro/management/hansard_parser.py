@@ -3,7 +3,7 @@ import re
 import datetime
 
 BLANK, SERIES_VOL_NO, TIME, DATE, START_TIME, \
-HEADING, LINE, SCENE, SPEECH, ACTION, PAGE_HEADER = range(11)
+HEADING, LINE, SCENE, SPEECH, ACTION, PAGE_HEADER,CONTINUED_SPEECH = range(12)
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
@@ -13,8 +13,10 @@ TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.m|AM|A.M|pm|PM|p.m|P.M|noon)\.?[\s\
 VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the\s*)'
 
 HEADING_PATTERN = r'^\s*([A-Z-,\s]+|%s)\s*$' % VOTES_AND_PROCEEDINGS_HEADER
-SCENE_PATTERN = r'^\s*(\[[\w\s]+\])\s*$'
+SCENE_PATTERN = r'^\s*(\[[A-Za-z-\s]+\])\s*$'
 SPEECH_PATTERN = r'^\s*%s(.+):\s*(.*)\s*$' % TITLES_TEMPLATE
+CONTINUED_SPEECH_PATTERN = r'^\s*\[%s.+\]\s*'% (TITLES_TEMPLATE.upper())
+
 # POSSIBLE_SPEECH_PATTERN = r'^\s*%s(.+)\s*$' % TITLES_TEMPLATE
 #PAGE_HEADER_PATTERN =r'^(\d+)\s*(.*?)(\d{2}\s*\w*,\s*\d{4})(\s*.*?\s*)(\d+)\s*$'
 PAGE_HEADER_PATTERN = r'^\[(\d+)\]\s*$'
@@ -42,6 +44,7 @@ PATTERNS = (
     (TIME, TIME_PATTERN),
     (START_TIME, START_TIME_PATTERN),
     (PAGE_HEADER, PAGE_HEADER_PATTERN),
+    (CONTINUED_SPEECH, CONTINUED_SPEECH_PATTERN),
     (SCENE, SCENE_PATTERN),
     (ACTION, ACTION_PATTERN),
     )
@@ -111,10 +114,11 @@ def parse_body(lines):
             else:
                 ahead = False
 
+            
             if kind is SPEECH:
                 if not time == None:
                     speech, kind, line, match, ahead = parse_speech(time, match, lines)
-                    entries.append(dict(speech.items() + dict(section=curr_section, page=curr_col).items()))
+                    entries.append(dict(speech.items() + dict(section=curr_section, column=curr_col).items()))
             elif kind is HEADING:
                 if not time == None:
                     if  line.startswith('Votes and Proceedings and the'):
@@ -132,6 +136,12 @@ def parse_body(lines):
                 curr_col = match.group(1) 
                 #title = '%s%s' % (match.group(2),match.group(4))
                 #entries.append(dict(page=pages))
+            elif kind is CONTINUED_SPEECH:
+                prev_entry = entries[-1]
+                #print 'PREV: ' + str(prev_entry)
+                if not time == None:
+                    speech, kind, line, match, ahead = parse_speech(time, match, lines,name=prev_entry['name'])
+                    entries.append(dict(speech.items() + dict(section=curr_section, column=curr_col).items()))     
             else:
                 pass
         except StopIteration:
@@ -140,14 +150,18 @@ def parse_body(lines):
     return entries
 
 
-def parse_speech(time, match, lines):
+def parse_speech(time, match, lines, name=None):
     """A speech has the ff properties:
     1. Starts with a member's name followed by a colon
     2. Is followed by a number of LINEs or BLANKs
     3. May be continued on a new page [page#] [scene]
     """
-    name = '%s%s' % (match.group(1), match.group(2))
-    speech = match.group(3)
+    if name == None:
+        name = '%s%s' % (match.group(1), match.group(2))
+        speech = match.group(3)
+    else:
+        speech = ''
+
     kind, line, match = None, None, None
     ahead = False
     newpage= False
@@ -159,13 +173,6 @@ def parse_speech(time, match, lines):
                 speech += ' ' + line
             elif kind == BLANK:
                 speech = speech.strip() + '\n'
-            # we need to catch these and mark/return a variable to allow us to continue
-            # add to this speech 
-            #
-            #elif kind == PAGE_HEADER:
-            #    speech += ''
-            #elif kind == SCENE:
-            #    speech += ''
             else:
                 ahead = True
                 break
@@ -199,6 +206,8 @@ def scan_line(line):
     for kind, pattern in PATTERNS:
         match = re.match(pattern, line)
         if match:
+            if kind == CONTINUED_SPEECH and 'in the chair' in line.lower():
+                return (SCENE, line, match)
             return (kind, line, match)
     return (LINE, line.replace('\n', ' '), None)
 
