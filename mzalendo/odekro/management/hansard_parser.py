@@ -3,25 +3,26 @@ import re
 import datetime
 
 BLANK, SERIES_VOL_NO, TIME, DATE, START_TIME, \
-HEADING, LINE, SCENE, SPEECH, ACTION = range(10)
+HEADING, LINE, SCENE, SPEECH, ACTION, PAGE_HEADER = range(11)
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
 
 TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson)'
 TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.m|AM|A.M|pm|PM|p.m|P.M|noon)\.?[\s\-]*'
+VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the\s*)'
 
-
-HEADING_PATTERN = r'^\s*([A-Z\s]+)\s*$'
+HEADING_PATTERN = r'^\s*([A-Z-,\s]+|%s)\s*$' % VOTES_AND_PROCEEDINGS_HEADER
 SCENE_PATTERN = r'^\s*(\[[\w\s]+\])\s*$'
 SPEECH_PATTERN = r'^\s*%s(.+):\s*(.*)\s*$' % TITLES_TEMPLATE
 # POSSIBLE_SPEECH_PATTERN = r'^\s*%s(.+)\s*$' % TITLES_TEMPLATE
+#PAGE_HEADER_PATTERN =r'^(\d+)\s*(.*?)(\d{2}\s*\w*,\s*\d{4})(\s*.*?\s*)(\d+)\s*$'
+PAGE_HEADER_PATTERN = r'^\[(\d+)\]\s*$'
 
 ACTION_PATTERN = r'^\s*%s(.+)\s*-\s+(.+)\s+-\s*$' % TITLES_TEMPLATE
 
 START_TIME_PATTERN = r'The\s+House\s+met\s+at\s+%s' % TIME_TEMPLATE
 TIME_PATTERN = r'^\s*%s$' % TIME_TEMPLATE
-
 
 MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, 
               jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
@@ -40,15 +41,16 @@ PATTERNS = (
     (HEADING, HEADING_PATTERN),
     (TIME, TIME_PATTERN),
     (START_TIME, START_TIME_PATTERN),
+    (PAGE_HEADER, PAGE_HEADER_PATTERN),
     (SCENE, SCENE_PATTERN),
-    (ACTION, ACTION_PATTERN)
+    (ACTION, ACTION_PATTERN),
     )
 
 
 
 def parse(lines):
     lines = scan(lines)
-
+        
     head = parse_head(lines) # end_line
     entries = parse_body(body(lines)) # start_line
     return head, entries
@@ -62,7 +64,8 @@ def body(lines):
     """Returns a generator for lines in the body of the hansard"""
     for i, row in enumerate(lines):
         _, line, _ = row
-        if line.lower().strip().startswith('the house met at'):
+        #if line.lower().strip().startswith('the house met at'):
+        if line.lower().strip().startswith('printed by department of offical report'):
             return (x for x in lines[i:])
     return (x for x in lines)
 
@@ -86,14 +89,18 @@ def parse_head(lines, nbr=0):
             break
     return series, vol, no, date, nbr
 
+def parse_content(lines):
+    return
+
 def parse_body(lines):
     entries = []
     
     time = None
     topic = None
-    page = None
+    #page = None
     ahead = False
-
+    curr_col = None
+    curr_section = None
     kind, line, match = None, None, None
 
     # lines = (x for x in lines)
@@ -105,15 +112,26 @@ def parse_body(lines):
                 ahead = False
 
             if kind is SPEECH:
-                speech, kind, line, match, ahead = parse_speech(time, match, lines)
-                entries.append(speech)
+                if not time == None:
+                    speech, kind, line, match, ahead = parse_speech(time, match, lines)
+                    entries.append(dict(speech.items() + dict(section=curr_section, page=curr_col).items()))
             elif kind is HEADING:
-                entries.append(dict(heading=line.strip(), time=time))
+                if not time == None:
+                    if  line.startswith('Votes and Proceedings and the'):
+                        line = 'Votes and Proceedings and the Official Report'
+                    curr_section = line.strip().upper()
+                    entries.append(dict(heading=line.strip().upper(), time=time))
             elif kind in (TIME, START_TIME):
                 time = _time(match)
             elif kind is ACTION:
-                person = '%s%s' % (match.group(1), match.group(2))
-                entries.append(dict(action=match.group(3), name=person.strip()))
+                if not time == None:
+                    person = '%s%s' % (match.group(1), match.group(2))
+                    entries.append(dict(action=match.group(3), name=person.strip()))
+            elif kind is PAGE_HEADER:
+                pages = '%s' % (match.group(1))
+                curr_col = match.group(1) 
+                #title = '%s%s' % (match.group(2),match.group(4))
+                #entries.append(dict(page=pages))
             else:
                 pass
         except StopIteration:
@@ -125,19 +143,29 @@ def parse_body(lines):
 def parse_speech(time, match, lines):
     """A speech has the ff properties:
     1. Starts with a member's name followed by a colon
-    2. Is followed by a number of LINEs or BLANKs"""
+    2. Is followed by a number of LINEs or BLANKs
+    3. May be continued on a new page [page#] [scene]
+    """
     name = '%s%s' % (match.group(1), match.group(2))
     speech = match.group(3)
     kind, line, match = None, None, None
     ahead = False
+    newpage= False
 
     while True:
         try:
             kind, line, match = lines.next()
             if kind == LINE: 
-                speech += line
+                speech += ' ' + line
             elif kind == BLANK:
                 speech = speech.strip() + '\n'
+            # we need to catch these and mark/return a variable to allow us to continue
+            # add to this speech 
+            #
+            #elif kind == PAGE_HEADER:
+            #    speech += ''
+            #elif kind == SCENE:
+            #    speech += ''
             else:
                 ahead = True
                 break
