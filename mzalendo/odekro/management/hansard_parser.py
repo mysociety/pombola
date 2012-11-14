@@ -74,8 +74,11 @@ def body(lines):
 
 
 def parse_head(lines, nbr=0):
+    """
+    Parse the document to extract the header information. Returns a dict.
+    """
 
-    series, vol, no, date = None, None, None, None
+    series, vol, no, date, time = None, None, None, None, None
     
     for i, row in enumerate(lines):
         kind, line, match = row
@@ -90,7 +93,15 @@ def parse_head(lines, nbr=0):
         if series and vol and no and date:
             nbr += i
             break
-    return series, vol, no, date, nbr
+
+    return dict(
+        series = series,
+        volume = vol,
+        number = no,
+        date   = date,
+        time   = time,
+        nbr    = nbr,
+    )
 
 def parse_content(lines):
     return
