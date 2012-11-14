@@ -8,6 +8,7 @@ import subprocess
 
 from django.test import TestCase
 from django.utils import unittest
+from django.conf import settings
 
 from nose.plugins.attrib import attr
 
