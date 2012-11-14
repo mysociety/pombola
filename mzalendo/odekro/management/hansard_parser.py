@@ -46,8 +46,9 @@ ORDINAL_WORDS = dict(first=1, second=2, third=3, fourth=4, fifth=5,
 
 HEADER_PATTERNS = (
     (DATE, DATE_PATTERN),
-    (SERIES_VOL_NO, SERIES_VOL_NO_PATTERN)
-    )
+    (SERIES_VOL_NO, SERIES_VOL_NO_PATTERN),
+    (TIME, START_TIME_PATTERN),
+)
 
 PATTERNS = (
     (SPEECH, SPEECH_PATTERN),
@@ -92,7 +93,6 @@ def parse_head(lines, number_of_breaks=0):
     series = volume = number = date = time = None
     
     for i, row in enumerate(lines):
-        print row
         kind, line, match = row
         if SERIES_VOL_NO == kind:
             series = ORDINAL_WORDS[match.group(1).lower()]
@@ -102,6 +102,8 @@ def parse_head(lines, number_of_breaks=0):
             date = datetime.date(int(match.group(4)),
                                  MONTHS[match.group(3).lower()[:3]], 
                                  int(match.group(2)))
+        elif TIME == kind:
+            time = parse_time( ''.join( match.groups() ) )
         if series and volume and number and date and time:
             number_of_breaks += i
             break
