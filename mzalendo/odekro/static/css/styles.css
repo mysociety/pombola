@@ -52,7 +52,7 @@ ul.menu ul{padding:0;position:absolute;top:37px;left:0px;display:none;opacity:0;
 ul.menu ul li{position:relative;min-width:220px;display:inline-block;padding:0;margin:0;clear:both;}
 ul.menu ul li a{text-align:left;padding:7px;color:#fff;background:#a30000;font-size:.9em;}
 ul.menu ul li a:hover{background:#ccc;color:#000;}
-ul.menu .menulink{color:#8e8e8e;font-size:1.1em;padding:10px;text-transform:capitalize;text-shadow:1px 1px 0px #fff;-moz-text-shadow:1px 1px 0px #fff;-webkit-text-shadow:1px 1px 0px #fff;}
+ul.menu .menulink{color:#8e8e8e;font-size:1em;padding:11px 10px 10px;text-transform:capitalize;text-shadow:1px 1px 0px #fff;-moz-text-shadow:1px 1px 0px #fff;-webkit-text-shadow:1px 1px 0px #fff;}
 ul.menu .menulink:hover, #nav ul.menu .menuhover, ul.menu li:hover a.menulink{color:#fff;text-shadow:1px 1px 0px #000;-moz-text-shadow:1px 1px 0px #000;-webkit-text-shadow:1px 1px 0px #000;background:url(../images/hover.png) repeat-x;}
 #breadcrumb{height:30px;display:block;background:#f3f3f3;border-top:1px solid #ddd;border-bottom:1px solid #ddd;margin:0 0 10px;}
 #breadcrumb-rep{height:15px;display:block;}
@@ -123,10 +123,11 @@ a.recommendations:hover{color:#1fbc0a;}
 #slider1 ul#slider1Content li.slider1Image span a{font-size:1.3em;float:right;color:#0096ff;}
 .right{right:0;bottom:0;top:219px;width:501px !important;height:50px;}
 /*-- jShowOff module styles --*/
-#personFeatures{position:relative;float:left;margin:40px 0 30px;background:#f6f6f6;border:1px solid #ddd;padding:10px;width:524px;}
+#personFeatures{position:relative;float:left;margin:40px 0 30px;background:#f6f6f6;border:1px solid #ddd;padding:10px;}
 .featured-person{}
 .featured-person a{float:left;margin:-40px 5px 10px 10px;border:1px solid #dedede;padding:4px;background:#fff;}
 .featured-person img{float:left;display:block;background:url(../images/indexAvatar.jpg) no-repeat;width:130px;height:150px;}
+.ninecol .featured-person img{float:left;display:block;background:url(../images/indexAvatarL.jpg) no-repeat;width:330px;height:350px;}
 .featured-person-info{margin:0;padding:5px;overflow:hidden;}
 .featured-person-info p{margin:0 0 30px;color:#888;}
 .featured-person-info h2{overflow:hidden;}
@@ -252,8 +253,8 @@ ul.listings li section .more-link a:hover{background:#bbb;color:#fff;}
 .search-filters{padding:10px 5px;background:#eee;}
 .search-filters select{padding:3px;width:320px;border:1px solid #ccc;}
 .search-filters button{height:25px;}
-ul.position-list{border:1px solid #eee;padding:0;}
-ul.position-list li{padding:5px;overflow:hidden;border-bottom:1px solid #eee;margin:0;}
+ul.position-list{border:1px solid #eee;padding:0;width:auto;overflow:hidden;margin:0 0 10px;}
+ul.position-list li{list-style:none;padding:5px;overflow:hidden;border-bottom:1px solid #eee;margin:0;}
 ul.position-list li:last-child{border:none;}
 ul.position-list li:nth-child(2n+2){background:#f8f8f8;}
 ul.position-list img{border:2px solid #eee;float:left;margin:0 5px 0 0;}
@@ -269,3 +270,8 @@ form#register input{width:250px;padding:5px;border:1px solid #ddd;color:#aaa;}
 form#register button{margin:0 0 0 150px;background:#6bb95d;padding:5px 15px;color:#fff;border:1px solid #146c03;}
 form#register span{display:block;margin:0 0 8px 150px;font-size:.9em;color:#888;width:260px;}
 form#register span a{color:#f20;}
+/* content */
+ol#pagination{overflow:hidden;padding:0;}
+ol#pagination li{color:#fff;float:left;list-style:none;cursor:pointer;margin:0 .5em 0 0;border-radius:15px;padding:3px 7px;background:#eee;}
+ol#pagination li.current{color:#f20;font-weight:bold;cursor:default;background:none;}
+    
