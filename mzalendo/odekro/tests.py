@@ -9,7 +9,7 @@ import datetime
 
 import unittest
 
-from management.hansard_parser import parse
+from management.hansard_parser import parse, parse_time
 from utils import split_name, legal_name
 
 
@@ -76,7 +76,7 @@ class GhanaParserTest(unittest.TestCase):
         for s, t in data.items():
             self.assertEqual(parse_time(s), t)
 
-        self.assertNone(parse_time('foo.bar'))
+        self.assertIsNone(parse_time('foo.bar'))
         
 
     def test_header(self):
