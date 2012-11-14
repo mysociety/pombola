@@ -84,7 +84,7 @@ def body(lines):
     return (x for x in lines)
 
 
-def parse_head(lines, nbr=0):
+def parse_head(lines, number_of_breaks=0):
     """
     Parse the document to extract the header information. Returns a dict.
     """
@@ -96,23 +96,22 @@ def parse_head(lines, nbr=0):
         kind, line, match = row
         if SERIES_VOL_NO == kind:
             series = ORDINAL_WORDS[match.group(1).lower()]
-            vol = int(match.group(2))
-            no = int(match.group(4))
+            volume = int(match.group(2))
+            number = int(match.group(4))
         elif DATE == kind:
             date = datetime.date(int(match.group(4)),
                                  MONTHS[match.group(3).lower()[:3]], 
                                  int(match.group(2)))
-        if series and vol and no and date:
-            nbr += i
+        if series and volume and number and date and time:
+            number_of_breaks += i
             break
 
     return dict(
         series = series,
-        volume = vol,
-        number = no,
+        volume = volume,
+        number = number,
         date   = date,
         time   = time,
-        nbr    = nbr,
     )
 
 def parse_content(lines):
