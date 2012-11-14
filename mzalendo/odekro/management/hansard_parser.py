@@ -3,19 +3,19 @@ import re
 import datetime
 
 # Constants for various types of line that might be found in the transcript
-BLANK            = 0
-SERIES_VOL_NO    = 1
-TIME             = 2
-DATE             = 3
-START_TIME       = 4
-HEADING          = 5
-LINE             = 6
-SCENE            = 7
-SPEECH           = 8
-ACTION           = 9
-PAGE_HEADER      = 10
-CONTINUED_SPEECH = 11
-CHAIR            = 12
+BLANK            = 'blank'
+SERIES_VOL_NO    = 'series volume number'
+TIME             = 'time'
+DATE             = 'date'
+START_TIME       = 'start time'
+HEADING          = 'heading'
+LINE             = 'line'
+SCENE            = 'scene'
+SPEECH           = 'speech'
+ACTION           = 'action'
+PAGE_HEADER      = 'page header'
+CONTINUED_SPEECH = 'continued speech'
+CHAIR            = 'chair'
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
