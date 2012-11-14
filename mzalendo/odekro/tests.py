@@ -90,11 +90,11 @@ class GhanaParserTest(unittest.TestCase):
         t = datetime.time(10, 40)
 
         x = self.entries[0]
-        self.assertTrue(x['text'].lower().endswith('speaker in the chair'))
+        self.assertEqual(x['chair'], 'MADAM SPEAKER')
         self.assertEqual(t, x['time'])
 
         x = self.entries[1]
-        self.assertEqual('PRAYERS', x['text'])
+        self.assertEqual('PRAYERS', x['heading'])
         self.assertEqual(t, x['time'])
 
         topic = 'Votes and Proceedings and the Official Report'

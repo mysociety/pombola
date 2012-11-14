@@ -15,6 +15,7 @@ SPEECH           = 8
 ACTION           = 9
 PAGE_HEADER      = 10
 CONTINUED_SPEECH = 11
+CHAIR            = 12
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
@@ -37,6 +38,8 @@ ACTION_PATTERN = r'^\s*%s(.+)\s*-\s+(.+)\s+-\s*$' % TITLES_TEMPLATE
 START_TIME_PATTERN = r'The\s+House\s+met\s+at\s+%s' % TIME_TEMPLATE
 TIME_PATTERN = r'^\s*%s$' % TIME_TEMPLATE
 
+CHAIR_PATTERN = r'^\[\s*(.*?)\s+IN\s+THE\s+CHAIR\s*\]$'
+
 MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, 
               jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
 
@@ -56,6 +59,7 @@ PATTERNS = (
     (TIME, TIME_PATTERN),
     (START_TIME, START_TIME_PATTERN),
     (PAGE_HEADER, PAGE_HEADER_PATTERN),
+    (CHAIR, CHAIR_PATTERN),
     (CONTINUED_SPEECH, CONTINUED_SPEECH_PATTERN),
     (SCENE, SCENE_PATTERN),
     (ACTION, ACTION_PATTERN),
@@ -80,7 +84,7 @@ def body(lines):
     for i, row in enumerate(lines):
         _, line, _ = row
         #if line.lower().strip().startswith('the house met at'):
-        if line.lower().strip().startswith('printed by department of offical report'):
+        if line.lower().strip().startswith('printed by department of official report'):
             return (x for x in lines[i:])
     return (x for x in lines)
 
@@ -166,6 +170,8 @@ def parse_body(lines):
                 if not time == None:
                     speech, kind, line, match, ahead = parse_speech(time, match, lines,name=prev_entry['name'])
                     entries.append(dict(speech.items() + dict(section=curr_section, column=curr_col).items()))     
+            elif kind is CHAIR:
+                entries.append(dict(chair=match.group(1), time=time))
             else:
                 pass
         except StopIteration:
