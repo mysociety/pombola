@@ -102,7 +102,7 @@ class GhanaParserTest(unittest.TestCase):
 
         speeches = [x for x in self.entries if x['kind'] is 'speech']
 
-        self.assertEqual(122, len(speeches))
+        self.assertEqual(95, len(speeches))
         
         x = self.entries[0]
 
@@ -111,7 +111,7 @@ class GhanaParserTest(unittest.TestCase):
 
 
         x = self.entries[-1]
-        self.assertEqual('ADJOURNMENT', x['text'])
+        self.assertEqual('ADJOURNMENT', x['original'])
         self.assertEqual(datetime.time(13, 20), x['time'])
         self.assertEqual(datetime.datetime(2012, 2, 15, 10), x['next'])
 

@@ -143,22 +143,25 @@ def parse_body(lines):
                 ahead = False
 
             
+            # store any entry details here. Later we'll add common fields as required
+            entry = None
+
             if kind is SPEECH:
                 if not time == None:
                     speech, kind, line, match, ahead = parse_speech(time, match, lines)
-                    entries.append(dict(speech.items() + dict(section=curr_section, column=curr_col).items()))
+                    entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
             elif kind is HEADING:
                 if not time == None:
                     if  line.startswith('Votes and Proceedings and the'):
                         line = 'Votes and Proceedings and the Official Report'
                     curr_section = line.strip().upper()
-                    entries.append(dict(heading=line.strip().upper(), time=time))
+                    entry = dict(heading=line.strip().upper())
             elif kind in (TIME, START_TIME):
                 time = _time(match)
             elif kind is ACTION:
                 if not time == None:
                     person = '%s%s' % (match.group(1), match.group(2))
-                    entries.append(dict(action=match.group(3), name=person.strip()))
+                    entry = dict(action=match.group(3), name=person.strip())
             elif kind is PAGE_HEADER:
                 pages = '%s' % (match.group(1))
                 curr_col = match.group(1) 
@@ -169,11 +172,18 @@ def parse_body(lines):
                 #print 'PREV: ' + str(prev_entry)
                 if not time == None:
                     speech, kind, line, match, ahead = parse_speech(time, match, lines,name=prev_entry['name'])
-                    entries.append(dict(speech.items() + dict(section=curr_section, column=curr_col).items()))     
+                    entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
             elif kind is CHAIR:
-                entries.append(dict(chair=match.group(1), time=time))
+                entry = dict( chair=match.group(1) )
             else:
                 pass
+            
+            if entry:
+                entry['time']     = time
+                entry['kind']     = kind
+                entry['original'] = line.rstrip()
+                
+                entries.append(entry)
         except StopIteration:
             break
 
