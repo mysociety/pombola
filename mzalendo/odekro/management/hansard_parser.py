@@ -2,8 +2,19 @@ import sys
 import re
 import datetime
 
-BLANK, SERIES_VOL_NO, TIME, DATE, START_TIME, \
-HEADING, LINE, SCENE, SPEECH, ACTION, PAGE_HEADER,CONTINUED_SPEECH = range(12)
+# Constants for various types of line that might be found in the transcript
+BLANK            = 0
+SERIES_VOL_NO    = 1
+TIME             = 2
+DATE             = 3
+START_TIME       = 4
+HEADING          = 5
+LINE             = 6
+SCENE            = 7
+SPEECH           = 8
+ACTION           = 9
+PAGE_HEADER      = 10
+CONTINUED_SPEECH = 11
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
@@ -78,9 +89,10 @@ def parse_head(lines, nbr=0):
     Parse the document to extract the header information. Returns a dict.
     """
 
-    series, vol, no, date, time = None, None, None, None, None
+    series = volume = number = date = time = None
     
     for i, row in enumerate(lines):
+        print row
         kind, line, match = row
         if SERIES_VOL_NO == kind:
             series = ORDINAL_WORDS[match.group(1).lower()]
