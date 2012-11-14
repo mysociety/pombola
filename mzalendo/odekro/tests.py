@@ -1,7 +1,7 @@
 import os
 import datetime
+import json
 # import time
-# import json
 # import tempfile
 # import subprocess
 
@@ -120,6 +120,64 @@ class GhanaParserTest(unittest.TestCase):
 
     def test_page_order(self):
         pass
+    
+
+    def convert_parsed_data_to_json(self, parsed):
+        # Can't jsonify dates and times - use the default to covert to iso format
+        def dthandler(obj):
+            if isinstance(obj, datetime.time) or isinstance(obj, datetime.date):
+                return obj.isoformat()
+            return None
+
+        return json.dumps(parsed, sort_keys=True, indent=4, default=dthandler)
+
+    def test_entire_output(self):
+        """
+        For the sample files that we have parse them and then compare the
+        results to those stored in JSON. This will allow us to quickly spot
+        changes that are not individually tested.
+
+        Note that there is a flag that can be used to write the new JSON to
+        disk. This can be used to update the test data and, and also to make it
+        possible to use a diff tool to see the changes more clearly than is
+        possible in the failing test output.
+        """
+        
+        # change to true to update the test json files.
+        overwrite_json_files = False
+        
+        # list of all the files that we should parse and compare (path should
+        # be relative to this test file).
+        transcript_files = [
+            'data/hansard-sample.txt',
+        ] 
+        
+        for transcript_file in transcript_files:
+            transcript_abs_path = os.path.join(os.path.dirname(__file__), transcript_file)
+            data_abs_path       = os.path.splitext(transcript_abs_path)[0] + '.json'
+
+            print transcript_abs_path
+            print data_abs_path
+            
+            # grab the sample content, parse it, store in data structure
+            sample_lines = open(transcript_abs_path, 'r').readlines()
+            head, entries = parse(sample_lines)
+            parsed_data = { 'head': head, 'entries': entries }
+            parsed_data_as_json = self.convert_parsed_data_to_json( parsed_data )
+            
+            # Write this parsed data out to disk (this should normally be
+            # commented out, but is convenient to uncomment during development)
+            if overwrite_json_files:
+                print "** WARNING - overwriting json files ***"
+                open(data_abs_path, 'w').write( parsed_data_as_json )
+            
+            # Read in the expected data and compare to what we got from parsing
+            expected_data = json.loads( open( data_abs_path, 'r').read() )
+            self.assertEqual(
+                json.loads( parsed_data_as_json ), # so datetimes are iso formatted
+                expected_data
+                # "Correctly parsed %s" % transcript_file
+            )
 
 
 if __name__ == "__main__":
