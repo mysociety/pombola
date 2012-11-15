@@ -4,7 +4,7 @@
 set -e
 
 # check that we are in the expected directory
-cd `dirname $0`/..
+cd "$(dirname $BASH_SOURCE)"/..
 
 
 # Some env variables used during development seem to make things break - set
