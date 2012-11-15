@@ -184,8 +184,9 @@ def ian_vm():
     Specs: RAM - 512 MB
            HDD - 64bit 20 GB 
     """
-    env.hosts = ['192.168.167.135']
-    env.user = 'dev'
+    env.hosts = ['127.0.0.1']
+    env.port = 2233
+    env.user = 'idesouza'
     env.domain = 'odekro.vm'
     env.log_level = 'debug'
 
