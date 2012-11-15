@@ -122,6 +122,8 @@ class GhanaParserTest(unittest.TestCase):
         pass
     
 
+class GhanaParserRegressionTest(unittest.TestCase):
+
     def convert_parsed_data_to_json(self, parsed):
         # Can't jsonify dates and times - use the default to covert to iso format
         def dthandler(obj):
