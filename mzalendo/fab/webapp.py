@@ -3,7 +3,7 @@ from fabric.contrib.files import exists
 import os
 import sys
 
-import random; 
+import random
 
 CHARS = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^*(-_=+)"
 
@@ -115,6 +115,8 @@ def configure(db=None, dbuser=None, dbpasswd=None,
     if dbpasswd is None:
         dbpasswd = ''
 
+    # TODO: move hardcoded values out of here to fabfile.py
+
     configs = (
         ('DB_USER', dbuser), 
         ('DB_NAME', db), 
@@ -125,7 +127,8 @@ def configure(db=None, dbuser=None, dbpasswd=None,
         ('MANAGERS_EMAIL', 'managers@odekro.org'),
         ('MANAGERS_NAME', 'Odekro Managers'),
         ('TWITTER_ACCOUNT_NAME', 'odekro'),
-        ('DISQUS_SHORTNAME', 'odekro')
+        ('DISQUS_SHORTNAME', 'odekro'),
+        ('GOOGLE_ANALYTICS_ACCOUNT', 'UA-36374336-1')
     )
 
     configs2 = (

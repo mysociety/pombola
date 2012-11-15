@@ -23,7 +23,7 @@ def install_packages():
     """Installs the required packages"""
     require('hosts')
 
-    packages = (
+    python_essentials = (
         # python and build essensials
         'build-essential',
         'bcrypt',
@@ -31,6 +31,11 @@ def install_packages():
         'python-pip',
         'python-virtualenv',
         'python-software-properties',
+
+    )
+
+
+    packages = (
         # "supervisor",
 
         # for mapit
@@ -64,10 +69,11 @@ def install_packages():
         # 'python-dateutil',
     )
 
+    sudo('aptitude -y install %s' % ' '.join(python_essentials))
+    
     # for gdal
     # TODO: determine if repository already added
     sudo('apt-add-repository -y ppa:ubuntugis/ubuntugis-unstable')
-    # sudo('apt-add-repository -y ppa:xapian-backports/xapian-1.2')
 
     try:
         sudo('aptitude update')

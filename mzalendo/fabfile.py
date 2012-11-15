@@ -60,18 +60,22 @@ def setup(packages=None):
         server.install_packages()
     
     server.create_webapp_user()
+    webapp.prepare()
     
-    pg.install()
-
-    try:
-        pg.setup_postgis()
-    except: pass
-
+    setup_postgis()
     setup_db()
     
     if not exists('/etc/init.d/nginx'):
         nginx.install()
-    webapp.prepare()
+
+def setup_postgis():    
+    require('hosts', provided_by=[vm, staging, production])
+    require('basedir')
+    try:
+        # install postgres and postgis
+        pg.setup_postgis()
+    except: pass
+
 
 
 def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
@@ -156,7 +160,7 @@ def setup_db(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
 def configure_webapp(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
     env.version = 'current'
     webapp.configure(db=db, dbuser=dbuser, dbpasswd=dbpasswd)
-    
+
 
 # ENVIRONMENTS
 def dev():
@@ -170,6 +174,17 @@ def vm():
            HDD - 64bit 20 GB 
     """
     env.hosts = ['192.168.167.134']
+    env.user = 'dev'
+    env.domain = 'odekro.vm'
+    env.log_level = 'debug'
+
+def vm2():
+    """Local VMware test server.
+
+    Specs: RAM - 512 MB
+           HDD - 64bit 20 GB 
+    """
+    env.hosts = ['192.168.167.135']
     env.user = 'dev'
     env.domain = 'odekro.vm'
     env.log_level = 'debug'
