@@ -178,8 +178,8 @@ def vm():
     env.domain = 'odekro.vm'
     env.log_level = 'debug'
 
-def vm2():
-    """Local VMware test server.
+def ian_vm():
+    """Local VirtualBox test server.
 
     Specs: RAM - 512 MB
            HDD - 64bit 20 GB 
@@ -195,7 +195,7 @@ def staging():
 
 def production():
     env.hosts = ['208.68.37.14']
-    env.user = 'root'
+    env.user = 'root'  #we need a new user for this; root can't ssh
     env.domain = 'odekro.org'
     env.log_level = 'info'
 
