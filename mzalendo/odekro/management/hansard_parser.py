@@ -252,6 +252,44 @@ def scan_line(line):
     return (LINE, line.replace('\n', ' '), None)
 
 
+def normalize_line_breaks(content):
+
+    # Each tuple is a (pattern, replacement) to apply to the string, in the
+    # order listed here. Note that the re.M flag is applied so that ^ and $
+    # DWIM.
+    transformations = [
+
+        # make whitespace consistent
+        ( r'[ \t]+', ' '  ), # horizontal whitespace becomes single space
+        ( r' *\n *', '\n' ), # trim spaces from around newlines
+        
+        # Add breaks around around the column numbers
+        ( r'\s*(\[\d+\])\s*', r"\n\n\1\n\n" ),
+        
+        # Add breaks around timestamps
+        ( r'^(%s)$' % TIME_TEMPLATE, r"\n\n\1\n\n"),
+        
+        # Add a break before anything that looks like it might be a person's name
+        ( r'^(%s.+:)' % TITLES_TEMPLATE, r'\n\n\1' ),
+
+        # Finally normalise the whitespace
+        ( r'(\S)\n(\S)', r'\1 \2' ), # wrap consecutive lines
+        ( r'\n\n+', "\n\n" ),        # normalise line breaks
+    ]
+
+    # apply all the transformations above
+    for pattern, replacement in transformations:
+        content = re.sub( pattern, replacement, content, flags=re.M )
+    
+    # print    
+    # print content
+    # print
+
+    return content
+
+
+
+
 def main(args):
     fin = open(args[1], 'r')
     lines = fin.readlines()

@@ -9,7 +9,7 @@ import json
 
 import unittest
 
-from management.hansard_parser import parse, parse_time
+from management.hansard_parser import parse, parse_time, normalize_line_breaks
 from utils import split_name, legal_name
 
 
@@ -177,6 +177,75 @@ class GhanaParserRegressionTest(unittest.TestCase):
                 expected_data
                 # "Correctly parsed %s" % transcript_file
             )
+
+class GhanaParserLineBreakNormalizeTest(unittest.TestCase):
+
+    def test_entire_output(self):
+        raw = """
+PRAYERS
+
+
+Votes and Proceedings and the
+Official Report
+
+Madam Speaker: Hon Members,
+Correction of Votes and Proceedings of
+Friday, 10th February, 2012. 
+
+Page 111-
+
+Mr Joseph Y. Chireh: Madam
+Speaker, this is a speech that goes over two paragraphs.
+
+Hon Members, I have admitted a
+Statement from Hon Justice Joe Appiah,
+Member of Parliament (MP) for Ablekuma
+North.
+
+[896] 
+10.50 am
+
+1.00 p.m.
+Mr Second Deputy Speaker: This is a
+House of debate and debate will continue.
+Mr Bandua: Mr Speaker, a sentence.
+Mr Second Deputy Speaker: Hon
+Members, in fact, this is the only way
+some of these important matters may be
+addressed, is the way Hon Members are
+doing now.
+        """.strip()
+        
+        expected = """
+PRAYERS
+
+Votes and Proceedings and the Official Report
+
+Madam Speaker: Hon Members, Correction of Votes and Proceedings of Friday, 10th February, 2012.
+
+Page 111-
+
+Mr Joseph Y. Chireh: Madam Speaker, this is a speech that goes over two paragraphs.
+
+Hon Members, I have admitted a Statement from Hon Justice Joe Appiah, Member of Parliament (MP) for Ablekuma North.
+
+[896]
+
+10.50 am
+
+1.00 p.m.
+
+Mr Second Deputy Speaker: This is a House of debate and debate will continue.
+
+Mr Bandua: Mr Speaker, a sentence.
+
+Mr Second Deputy Speaker: Hon Members, in fact, this is the only way some of these important matters may be addressed, is the way Hon Members are doing now.
+        """.strip()
+
+        self.assertEqual(
+            normalize_line_breaks( raw ),
+            expected
+        )
 
 
 if __name__ == "__main__":
