@@ -133,17 +133,13 @@ def parse_body(lines):
     time = None
     topic = None
     #page = None
-    ahead = False
     curr_col = None
     curr_section = None
     kind, line, match = None, None, None
 
     # lines = (x for x in lines)
     while len(lines):
-        if not ahead:
-            kind, line, match = lines.pop(0)
-        else:
-            ahead = False
+        kind, line, match = lines.pop(0)
         
         
         # store any entry details here. Later we'll add common fields as required
@@ -151,7 +147,7 @@ def parse_body(lines):
         
         if kind is SPEECH:
             if not time == None:
-                speech, kind, line, match, ahead = parse_speech(time, match, lines)
+                speech, kind, line, match = parse_speech(time, match, lines)
                 entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is HEADING:
             if not time == None:
@@ -174,7 +170,7 @@ def parse_body(lines):
             prev_entry = entries[-1]
             #print 'PREV: ' + str(prev_entry)
             if not time == None:
-                speech, kind, line, match, ahead = parse_speech(time, match, lines,name=prev_entry['name'])
+                speech, kind, line, match = parse_speech(time, match, lines,name=prev_entry['name'])
                 entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is CHAIR:
             entry = dict( chair=match.group(1) )
@@ -204,7 +200,6 @@ def parse_speech(time, match, lines, name=None):
         speech = ''
 
     kind, line, match = None, None, None
-    ahead   = False
     newpage = False
 
     while len(lines):
@@ -214,10 +209,11 @@ def parse_speech(time, match, lines, name=None):
         elif kind == BLANK:
             speech = speech.strip() + '\n'
         else:
-            ahead = True
+            # put the line back on the lines
+            lines.insert(0, (kind, line, match))
             break
 
-    return (dict(time=time, name=name, speech=speech.strip()), kind, line, match, ahead)
+    return (dict(time=time, name=name, speech=speech.strip()), kind, line, match)
 
 def parse_time(s):
     match = re.match(TIME_PATTERN, s)
