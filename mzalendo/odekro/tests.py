@@ -143,7 +143,7 @@ class GhanaParserTest(unittest.TestCase):
         possible in the failing test output.
         """
         
-        # change to true to update the test json files.
+        # change to True to update the test json files.
         overwrite_json_files = False
         
         # list of all the files that we should parse and compare (path should
@@ -156,19 +156,16 @@ class GhanaParserTest(unittest.TestCase):
             transcript_abs_path = os.path.join(os.path.dirname(__file__), transcript_file)
             data_abs_path       = os.path.splitext(transcript_abs_path)[0] + '.json'
 
-            print transcript_abs_path
-            print data_abs_path
-            
             # grab the sample content, parse it, store in data structure
             sample_lines = open(transcript_abs_path, 'r').readlines()
             head, entries = parse(sample_lines)
             parsed_data = { 'head': head, 'entries': entries }
             parsed_data_as_json = self.convert_parsed_data_to_json( parsed_data )
             
-            # Write this parsed data out to disk (this should normally be
-            # commented out, but is convenient to uncomment during development)
+            # Write this parsed data out to disk if desired - this should
+            # normally not happen, but is convenient to do during development
             if overwrite_json_files:
-                print "** WARNING - overwriting json files ***"
+                print "** WARNING - overwriting json file '%s' ***" % data_abs_path
                 open(data_abs_path, 'w').write( parsed_data_as_json )
             
             # Read in the expected data and compare to what we got from parsing
