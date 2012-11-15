@@ -147,7 +147,7 @@ def parse_body(lines):
         
         if kind is SPEECH:
             if not time == None:
-                speech, kind, line, match = parse_speech(time, match, lines)
+                speech = parse_speech(time, match, lines)
                 entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is HEADING:
             if not time == None:
@@ -168,7 +168,7 @@ def parse_body(lines):
             prev_entry = entries[-1]
             #print 'PREV: ' + str(prev_entry)
             if not time == None:
-                speech, kind, line, match = parse_speech(time, match, lines,name=prev_entry['name'])
+                speech = parse_speech(time, match, lines,name=prev_entry['name'])
                 entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is CHAIR:
             entry = dict( chair=match.group(1) )
@@ -211,7 +211,7 @@ def parse_speech(time, match, lines, name=None):
             lines.insert(0, (kind, line, match))
             break
 
-    return (dict(time=time, name=name, speech=speech.strip()), kind, line, match)
+    return dict(time=time, name=name, speech=speech.strip())
 
 def parse_time(s):
     match = re.match(TIME_PATTERN, s)
