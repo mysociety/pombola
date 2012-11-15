@@ -18,9 +18,6 @@ source ../mzalendo-virtualenv/bin/activate
 pip install Mercurial
 pip install -r requirements.txt
 
-# use the virtualenv just created/updated
-source ../mzalendo-virtualenv/bin/activate
-
 # make sure that there is no old code (the .py files may have been git deleted) 
 find . -name '*.pyc' -delete
 
