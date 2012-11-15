@@ -30,5 +30,3 @@ cd mzalendo
 
 # gather all the static files in one place
 ./manage.py collectstatic --noinput
-
-cd --
