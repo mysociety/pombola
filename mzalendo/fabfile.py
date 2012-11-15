@@ -190,6 +190,17 @@ def ian_vm():
     env.domain = 'odekro.vm'
     env.log_level = 'debug'
 
+def vm2():
+    """Local VMware test server.
+
+    Specs: RAM - 512 MB
+           HDD - 64bit 20 GB 
+    """
+    env.hosts = ['192.168.167.135']
+    env.user = 'dev'
+    env.domain = 'odekro.vm'
+    env.log_level = 'debug'
+
 
 def staging():
     pass
