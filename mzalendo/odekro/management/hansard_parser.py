@@ -89,8 +89,8 @@ def body(lines):
         _, line, _ = row
         #if line.lower().strip().startswith('the house met at'):
         if line.lower().strip().startswith('printed by department of official report'):
-            return (x for x in lines[i:])
-    return (x for x in lines)
+            return [x for x in lines[i:]]
+    return [x for x in lines]
 
 
 def parse_head(lines, number_of_breaks=0):
@@ -139,57 +139,54 @@ def parse_body(lines):
     kind, line, match = None, None, None
 
     # lines = (x for x in lines)
-    while True:
-        try:
-            if not ahead:
-                kind, line, match = lines.next()
-            else:
-                ahead = False
-
+    while len(lines):
+        if not ahead:
+            kind, line, match = lines.pop(0)
+        else:
+            ahead = False
+        
+        
+        # store any entry details here. Later we'll add common fields as required
+        entry = None
+        
+        if kind is SPEECH:
+            if not time == None:
+                speech, kind, line, match, ahead = parse_speech(time, match, lines)
+                entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
+        elif kind is HEADING:
+            if not time == None:
+                if  line.startswith('Votes and Proceedings and the'):
+                    line = 'Votes and Proceedings and the Official Report'
+                curr_section = line.strip().upper()
+                entry = dict(heading=line.strip().upper())
+        elif kind in (TIME, START_TIME):
+            time = _time(match)
+        elif kind is ACTION:
+            if not time == None:
+                person = '%s%s' % (match.group(1), match.group(2))
+                entry = dict(action=match.group(3), name=person.strip())
+        elif kind is PAGE_HEADER:
+            pages = '%s' % (match.group(1))
+            curr_col = match.group(1) 
+            #title = '%s%s' % (match.group(2),match.group(4))
+            #entries.append(dict(page=pages))
+        elif kind is CONTINUED_SPEECH:
+            prev_entry = entries[-1]
+            #print 'PREV: ' + str(prev_entry)
+            if not time == None:
+                speech, kind, line, match, ahead = parse_speech(time, match, lines,name=prev_entry['name'])
+                entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
+        elif kind is CHAIR:
+            entry = dict( chair=match.group(1) )
+        else:
+            pass
+        
+        if entry:
+            entry['time']     = time
+            entry['kind']     = kind
+            entry['original'] = line.rstrip()
             
-            # store any entry details here. Later we'll add common fields as required
-            entry = None
-
-            if kind is SPEECH:
-                if not time == None:
-                    speech, kind, line, match, ahead = parse_speech(time, match, lines)
-                    entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
-            elif kind is HEADING:
-                if not time == None:
-                    if  line.startswith('Votes and Proceedings and the'):
-                        line = 'Votes and Proceedings and the Official Report'
-                    curr_section = line.strip().upper()
-                    entry = dict(heading=line.strip().upper())
-            elif kind in (TIME, START_TIME):
-                time = _time(match)
-            elif kind is ACTION:
-                if not time == None:
-                    person = '%s%s' % (match.group(1), match.group(2))
-                    entry = dict(action=match.group(3), name=person.strip())
-            elif kind is PAGE_HEADER:
-                pages = '%s' % (match.group(1))
-                curr_col = match.group(1) 
-                #title = '%s%s' % (match.group(2),match.group(4))
-                #entries.append(dict(page=pages))
-            elif kind is CONTINUED_SPEECH:
-                prev_entry = entries[-1]
-                #print 'PREV: ' + str(prev_entry)
-                if not time == None:
-                    speech, kind, line, match, ahead = parse_speech(time, match, lines,name=prev_entry['name'])
-                    entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
-            elif kind is CHAIR:
-                entry = dict( chair=match.group(1) )
-            else:
-                pass
-            
-            if entry:
-                entry['time']     = time
-                entry['kind']     = kind
-                entry['original'] = line.rstrip()
-                
-                entries.append(entry)
-        except StopIteration:
-            break
+            entries.append(entry)
 
     return entries
 
@@ -207,21 +204,19 @@ def parse_speech(time, match, lines, name=None):
         speech = ''
 
     kind, line, match = None, None, None
-    ahead = False
-    newpage= False
+    ahead   = False
+    newpage = False
 
-    while True:
-        try:
-            kind, line, match = lines.next()
-            if kind == LINE: 
-                speech += ' ' + line
-            elif kind == BLANK:
-                speech = speech.strip() + '\n'
-            else:
-                ahead = True
-                break
-        except StopIteration:
+    while len(lines):
+        kind, line, match = lines.pop(0)
+        if kind == LINE: 
+            speech += ' ' + line
+        elif kind == BLANK:
+            speech = speech.strip() + '\n'
+        else:
+            ahead = True
             break
+
     return (dict(time=time, name=name, speech=speech.strip()), kind, line, match, ahead)
 
 def parse_time(s):
