@@ -58,7 +58,7 @@ class GhanaParserTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.head, cls.entries = parse(open(cls.sample, 'r').readlines())
+        cls.head, cls.entries = parse(open(cls.sample, 'r').read())
 
     @classmethod
     def tearDownClass(cls):
@@ -159,8 +159,8 @@ class GhanaParserRegressionTest(unittest.TestCase):
             data_abs_path       = os.path.splitext(transcript_abs_path)[0] + '.json'
 
             # grab the sample content, parse it, store in data structure
-            sample_lines = open(transcript_abs_path, 'r').readlines()
-            head, entries = parse(sample_lines)
+            sample_content = open(transcript_abs_path, 'r').read()
+            head, entries = parse(sample_content)
             parsed_data = { 'head': head, 'entries': entries }
             parsed_data_as_json = self.convert_parsed_data_to_json( parsed_data )
             

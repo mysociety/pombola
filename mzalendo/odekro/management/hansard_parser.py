@@ -67,7 +67,8 @@ PATTERNS = (
 
 
 
-def parse(lines):
+def parse(content):
+    lines = content.split("\n");
     lines = scan(lines)
         
     head = parse_head(lines) # end_line
@@ -269,7 +270,8 @@ def normalize_line_breaks(content):
         # Add breaks around timestamps
         ( r'^(%s)$' % TIME_TEMPLATE, r"\n\n\1\n\n"),
         
-        # Add a break before anything that looks like it might be a person's name
+        # Add a break before anything that looks like it might be a person's
+        # name at the start of a speech
         ( r'^(%s.+:)' % TITLES_TEMPLATE, r'\n\n\1' ),
 
         # Finally normalise the whitespace
@@ -292,10 +294,10 @@ def normalize_line_breaks(content):
 
 def main(args):
     fin = open(args[1], 'r')
-    lines = fin.readlines()
+    content = fin.read()
     fin.close()
-    # print lines
-    head, entries = parse(lines)
+    # print content
+    head, entries = parse(content)
     print head
     for entry in entries:
         print entry, '\n'
