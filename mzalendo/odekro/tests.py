@@ -102,7 +102,7 @@ class GhanaParserTest(unittest.TestCase):
 
         speeches = [x for x in self.entries if x['kind'] is 'speech']
 
-        self.assertEqual(95, len(speeches))
+        self.assertEqual(101, len(speeches))
         
     @unittest.skipIf( True, "Skipped for now, should be fixed instead")
     def test_need_to_be_completed(self):

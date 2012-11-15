@@ -22,7 +22,7 @@ DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
 
 TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson)'
 TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.m|AM|A.M|pm|PM|p.m|P.M|noon)\.?[\s\-]*'
-VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the\s*)'
+VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the Official Report\s*)'
 
 HEADING_PATTERN = r'^\s*([A-Z-,\s]+|%s)\s*$' % VOTES_AND_PROCEEDINGS_HEADER
 SCENE_PATTERN = r'^\s*(\[[A-Za-z-\s]+\])\s*$'
@@ -68,7 +68,10 @@ PATTERNS = (
 
 
 def parse(content):
-    lines = content.split("\n");
+    
+    normalized = normalize_line_breaks( content )
+    
+    lines = normalized.split("\n");
     lines = scan(lines)
         
     head = parse_head(lines) # end_line
