@@ -151,8 +151,6 @@ def parse_body(lines):
                 entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is HEADING:
             if not time == None:
-                if  line.startswith('Votes and Proceedings and the'):
-                    line = 'Votes and Proceedings and the Official Report'
                 curr_section = line.strip().upper()
                 entry = dict(heading=line.strip().upper())
         elif kind in (TIME, START_TIME):
