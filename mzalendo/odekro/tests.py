@@ -182,6 +182,10 @@ class GhanaParserLineBreakNormalizeTest(unittest.TestCase):
 
     def test_entire_output(self):
         raw = """
+PARLIAMENTARY DEBATES
+OFFICIAL REPORT
+TUESDAY, 14 FEBRUARY, 2012
+
 PRAYERS
 
 
@@ -217,6 +221,12 @@ doing now.
         """.strip()
         
         expected = """
+PARLIAMENTARY DEBATES
+
+OFFICIAL REPORT
+
+TUESDAY, 14 FEBRUARY, 2012
+
 PRAYERS
 
 Votes and Proceedings and the Official Report

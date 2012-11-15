@@ -264,16 +264,21 @@ def normalize_line_breaks(content):
         ( r'[ \t]+', ' '  ), # horizontal whitespace becomes single space
         ( r' *\n *', '\n' ), # trim spaces from around newlines
         
-        # Add breaks around around the column numbers
+        # Add breaks around the column numbers
         ( r'\s*(\[\d+\])\s*', r"\n\n\1\n\n" ),
         
+        # Add breaks around anything that is all in CAPITALS
+        ( r'^([^a-z]+?)$', r"\n\n\1\n\n" ),
+        # not sure why the '+?' can't just be '+' - if it is just '+' the
+        # newline gets included too despite the re.M. Pah!
+
         # Add breaks around timestamps
         ( r'^(%s)$' % TIME_TEMPLATE, r"\n\n\1\n\n"),
         
         # Add a break before anything that looks like it might be a person's
         # name at the start of a speech
         ( r'^(%s.+:)' % TITLES_TEMPLATE, r'\n\n\1' ),
-
+        
         # Finally normalise the whitespace
         ( r'(\S)\n(\S)', r'\1 \2' ), # wrap consecutive lines
         ( r'\n\n+', "\n\n" ),        # normalise line breaks
@@ -286,6 +291,7 @@ def normalize_line_breaks(content):
     # print    
     # print content
     # print
+    content = content.strip()
 
     return content
 
