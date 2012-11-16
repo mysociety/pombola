@@ -175,13 +175,17 @@ def parse_body(lines):
                 prev_entry = entries[-1]
                 if prev_entry.get('name'):
                     kind = SPEECH
-                    entry = dict(
-                        time    = time,
-                        name    = prev_entry['name'],
-                        speech  = line.strip(),
-                        section = curr_section,
-                        column  = curr_col,
-                    )
+
+                    entry = entries.pop(-1)
+                    entry['speech'] = '%s\n\n%s' % (entry.get('speech'), line.strip())
+
+                    # entry = dict(
+                    #     time    = time,
+                    #     name    = prev_entry['name'],
+                    #     speech  = line.strip(),
+                    #     section = curr_section,
+                    #     column  = curr_col,
+                    # )
         elif kind is CHAIR:
             entry = dict( chair=match.group(1) )
         elif kind is BLANK:
@@ -191,10 +195,14 @@ def parse_body(lines):
             pass
         
         if entry:
+
             entry['time']     = time
             entry['kind']     = kind
-            entry['original'] = line.rstrip()
             
+            if not entry.get('original', None):
+                entry['original'] = line.rstrip()
+            else:
+                entry['original'] = '%s\n%s' % (entry['original'], line.strip())
             entries.append(entry)
 
     return entries
