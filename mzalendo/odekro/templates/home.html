@@ -15,6 +15,7 @@
         $.getJSON("search/tagcloud/", 
         {},
         function(data){
+            console.log(data);
             $("#tagcloud").jQCloud(data);
         });
       });
