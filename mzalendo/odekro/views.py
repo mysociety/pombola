@@ -4,9 +4,8 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 
 from odekro import forms
-import json
-import importer
 from info.models import InfoPage
+import data
 
 def info_page_upload(request):
     if request.POST:
@@ -16,21 +15,19 @@ def info_page_upload(request):
             content = contents(upload, '\n')
             title = form.cleaned_data['title']
             slug = form.cleaned_data['name'][:-3]            
-            done = add_info_page(slug, title, content)
+            done = data.add_info_page(slug, title, content)
     else:
         form = forms.InfoPageUpload()
         done = False
     return render(request, 'info_page_upload.html',
                   dict(form=form, done=done))
 
-
 def data_upload(request):
     if request.POST:
         form = forms.UploadForm(request.POST, request.FILES)
         if form.is_valid():
             upload = form.save(commit=False)
-            data = contents(upload)
-            import_mps(data)
+            data.add_mps_from_json(contents(upload))
             done = True
     else:
         form = forms.UploadForm()
@@ -49,18 +46,3 @@ def contents(upload, joint=''):
             data.append(x)
     return joint.join(data)    
 
-def import_mps(data):
-    data = json.loads(data)
-    print '>>>>>', len(data)
-    importer.import_to_db(data)
-
-
-def add_info_page(slug, title, content):
-    try:
-        page = InfoPage.objects.get(slug=slug)
-    except InfoPage.DoesNotExist:
-        page = InfoPage(slug=slug)
-
-    page.title = title
-    page.content = unicode(content, 'utf-8')
-    return page.save()

@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import base64
+import json
 
 from django.core.files.base import ContentFile
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
@@ -46,85 +47,93 @@ parliament, _ = Organisation.objects.get_or_create(name='Ghana Parliament',
 # "Constituency": "Asante Akim North", 
 # "Region": "Ashanti"
 
-def import_to_db(objects):
-    KEYS = ['Party', 'Occupation/Profession', 'Name', 'Date of Birth',
-            'Votes Obtained', 'Image', 'Marital Status', 'Religion',
-            'Hometown', 'Last Employment', 'Constituency', 'Region',
-            'Highest Education']
+MP_FIELDS = ['Party', 'Occupation/Profession', 'Name', 'Date of Birth',
+             'Votes Obtained', 'Image', 'Marital Status', 'Religion',
+             'Hometown', 'Last Employment', 'Constituency', 'Region',
+             'Highest Education']
 
-    for obj in objects:
-        party, occupation, name, dob, votes, image, \
-        marital_status, religion, hometown, last_employment, constituency, \
-        region, education = [obj.get(k, '') for k in KEYS]
 
-        try:
-            last, first, middle, title = split_name(name)
-        except:
-            print ">>> Error splitting name:", name
-            continue
+
+def add_mps_from_json(content):
+    for obj in json.loads(content):
+        add_mp(obj)
+
+def add_mp(obj):
+    party, occupation, name, dob, votes, image, \
+    marital_status, religion, hometown, last_employment, constituency, \
+    region, education = [obj.get(k, '') for k in MP_FIELDS]
+
+    try:
+        last, first, middle, title = split_name(name)
+    except:
+        print ">>> Error splitting name:", name
+        return
+    
+    legal = legal_name(last, first, middle)
+    slug = slugify(legal)
+
+    person, _ = Person.objects.get_or_create(slug=slug)
+
+    if dob:
+        dob = convert_date(dob)
+        # TODO: investigate using a datetime.date object
+        person.date_of_birth = ApproximateDate(year=dob.year, month=dob.month, day=dob.day)
         
-        legal = legal_name(last, first, middle)
-        slug = slugify(legal)
+    person.title = title
+    person.legal_name = legal
+    person.save()
 
-        print '>>> Slug: ', slug
+    constituency, _ = Place.objects.get_or_create(name=constituency, 
+                                                  slug=slugify(constituency), 
+                                                  kind=constituency_kind)
 
-        person, _ = Person.objects.get_or_create(slug=slug)
+    party, _ = Organisation.objects.get_or_create(name=party,
+                                                  slug=slugify(party),
+                                                  kind=party_kind)
 
-        if dob:
-            dob = convert_date(dob)
-            person.date_of_birth = ApproximateDate(year=dob.year, month=dob.month, day=dob.day)
-            
-        # person.original_id = obj['MemberID']
+    # add to party
+    party_position, _ = Position.objects.get_or_create(person=person,
+                                   title=member_job_title,
+                                   organisation=party)
+    # add to parliament (as mp)
+    mp_position, _ = Position.objects.get_or_create(person=person,
+                                   title=mp_job_title,
+                                   organisation=parliament,
+                                   place=constituency)
+    
+    mp, _ = MP.objects.get_or_create(person=person,
+                                  party_position=party_position,
+                                  parliament_position=mp_position)
+    mp.first_name  = first
+    mp.middle_name = middle
+    mp.last_name   = last
 
-        person.title = title
-        person.legal_name = legal
-        person.save()
+    mp.occupation = occupation
+    mp.marital_status = marital_status
+    mp.hometown = hometown
+    mp.education = education
+    mp.religion = religion
+    mp.last_employment = last_employment[:150]
+    mp.votes_obtained = votes
 
+    mp.save()
 
-        constituency, _ = Place.objects.get_or_create(name=constituency, 
-                                                      slug=slugify(constituency), 
-                                                      kind=constituency_kind)
-
-        party, _ = Organisation.objects.get_or_create(name=party,
-                                                      slug=slugify(party),
-                                                      kind=party_kind)
-
-
-        # add to party
-        party_position, _ = Position.objects.get_or_create(person=person,
-                                       title=member_job_title,
-                                       organisation=party)
-        # add to parliament (as mp)
-        mp_position, _ = Position.objects.get_or_create(person=person,
-                                       title=mp_job_title,
-                                       organisation=parliament,
-                                       place=constituency)
-        
-        mp, _ = MP.objects.get_or_create(person=person,
-                                      party_position=party_position,
-                                      parliament_position=mp_position)
-        mp.first_name  = first
-        mp.middle_name = middle
-        mp.last_name   = last
-
-        mp.occupation = occupation
-        mp.marital_status = marital_status
-        mp.hometown = hometown
-        mp.education = education
-        mp.religion = religion
-        mp.last_employment = last_employment[:150]
-        mp.votes_obtained = votes
-
-        mp.save()
-
-        add_person_image(person, base64.decodestring(image))
+    add_person_image(person, base64.decodestring(image))
 
 def add_person_image(person, image):
     person_image = Image(content_object=person, source=person.slug)
     person_image.image.save(name='thumbnail',
                             content=ContentFile(image))
 
+def add_info_page(slug, title, content):
+    try:
+        page = InfoPage.objects.get(slug=slug)
+    except InfoPage.DoesNotExist:
+        page = InfoPage(slug=slug)
 
+    page.title = title
+    page.content = unicode(content, 'utf-8')
+    return page.save()
 
 # def import_to_db2(objects):
 #     for obj in objects:

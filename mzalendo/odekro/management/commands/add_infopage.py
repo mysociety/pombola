@@ -7,7 +7,7 @@ import os
 from optparse import make_option
 
 from django.core.management.base import BaseCommand, CommandError
-from odekro.views import add_info_page
+from odekro import data
 
 
 class Command(BaseCommand):
@@ -30,4 +30,4 @@ class Command(BaseCommand):
         else:
             slug = os.path.basename(path)[:-3]
 
-        add_info_page(slug, title, content)
+        data.add_info_page(slug, title, content)
