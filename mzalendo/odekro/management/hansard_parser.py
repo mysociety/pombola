@@ -253,6 +253,7 @@ def normalise_line_breaks(content):
     transformations = [
 
         # make whitespace consistent
+        ( r'\r',     '\n' ), # convert any vertical whitespace to '\n'
         ( r'[ \t]+', ' '  ), # horizontal whitespace becomes single space
         ( r' *\n *', '\n' ), # trim spaces from around newlines
         
