@@ -94,9 +94,9 @@
             "column": "744", 
             "kind": "speech", 
             "name": "Madam Speaker", 
-            "original": "Madam Speaker: In the absence of any corrections, the Votes and Proceedings of Friday, 4th November, 2011 are hereby adopted as the true record of proceedings.", 
+            "original": "Madam Speaker: In the absence of any corrections, the Votes and Proceedings of Friday, 4th November, 2011 are hereby adopted as the true record of proceedings.\nWe move on to item 3 - Leader, Questions- Is the Minister for Water Resources, Works and Housing here?", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "In the absence of any corrections, the Votes and Proceedings of Friday, 4th November, 2011 are hereby adopted as the true record of proceedings.\n [No correction was made to the Official Report of Wednesday, 2nd November, 2011.]\n We move on to item 3 - Leader, Questions- Is the Minister for Water Resources, Works and Housing here?", 
+            "speech": "In the absence of any corrections, the Votes and Proceedings of Friday, 4th November, 2011 are hereby adopted as the true record of proceedings.\n\nWe move on to item 3 - Leader, Questions- Is the Minister for Water Resources, Works and Housing here?", 
             "time": "10:30:00"
         }, 
         {
@@ -913,9 +913,9 @@
             "column": "778", 
             "kind": "speech", 
             "name": "Mr Bagbin: Madam Speaker, records- from CWSA database indicate the current water situation in these communities as follows", 
-            "original": "Mr Bagbin: Madam Speaker, records- from CWSA database indicate the current water situation in these communities as follows:\nNo Community Projected 2010 Population Number of Boreholes in Community\n1 Debebi 7318 7\n2 Brodi 4613 9\n3 Brahani 6105 10\n4 Menji 3235 4\n5 Namasa 2682 6\n6 Banda-Ahenkro 4323 5 [/Table]", 
+            "original": "Mr Bagbin: Madam Speaker, records- from CWSA database indicate the current water situation in these communities as follows:\nNo Community Projected 2010 Population Number of Boreholes in Community\n1 Debebi 7318 7\n2 Brodi 4613 9\n3 Brahani 6105 10\n4 Menji 3235 4\n5 Namasa 2682 6", 
             "section": "WORKS AND HOUSING", 
-            "speech": "\n\nNo Community Projected 2010 Population Number of Boreholes in Community\n\n1 Debebi 7318 7\n\n2 Brodi 4613 9\n\n3 Brahani 6105 10\n\n4 Menji 3235 4\n\n5 Namasa 2682 6\n\n6 Banda-Ahenkro 4323 5 [/Table]", 
+            "speech": "\n\nNo Community Projected 2010 Population Number of Boreholes in Community\n\n1 Debebi 7318 7\n\n2 Brodi 4613 9\n\n3 Brahani 6105 10\n\n4 Menji 3235 4\n\n5 Namasa 2682 6", 
             "time": "12:00:00"
         }, 
         {
@@ -1009,9 +1009,16 @@
             "column": "781", 
             "kind": "speech", 
             "name": "Madam Speaker", 
-            "original": "Madam Speaker: Hon Members, Consideration Stage would be considered by the Second Deputy Speaker.\n[MR SECOND DEPUTY SPEAKER IN\nCHAIR]", 
+            "original": "Madam Speaker: Hon Members, Consideration Stage would be considered by the Second Deputy Speaker.", 
             "section": "PAPERS", 
-            "speech": "Hon Members, Consideration Stage would be considered by the Second Deputy Speaker.\n\n[MR SECOND DEPUTY SPEAKER IN\n\nCHAIR]", 
+            "speech": "Hon Members, Consideration Stage would be considered by the Second Deputy Speaker.", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "781", 
+            "kind": "scene", 
+            "original": "[MR SECOND DEPUTY SPEAKER IN\n\nCHAIR]", 
+            "scene": "[MR SECOND DEPUTY SPEAKER IN CHAIR]", 
             "time": "12:12:00"
         }, 
         {
@@ -1269,7 +1276,7 @@
             "name": "Mr Adda: Mr Speaker, indeed, my contention had to deal with negotiating a PPA. So if we were going to go along with what the Hon Minority Leader is proposing, perhaps, we need to include the \"Power Purchase Agreement\" along with the \"negotiations\" as he is pro- posing, which means that, it will read like this", 
             "original": "Mr Adda: Mr Speaker, indeed, my contention had to deal with negotiating a PPA. So if we were going to go along with what the Hon Minority Leader is proposing, perhaps, we need to include the \"Power Purchase Agreement\" along with the \"negotiations\" as he is pro- posing, which means that, it will read like this:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "' \"An electricity distribution utility shall not negotiate a Power Purchase Agreement . . .\"\n I think in his review, he left out the \"Power Purchase Agreement\". [Interruptions]", 
+            "speech": "' \"An electricity distribution utility shall not negotiate a Power Purchase Agreement . . .\"", 
             "time": "12:30:00"
         }, 
         {
@@ -1647,7 +1654,7 @@
             "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, if you read through 41 and with your permission, I beg to quote", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, if you read through 41 and with your permission, I beg to quote:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"A licensee that has been granted a licence under this Act to produce bio-fuel from feedstock, shall obtain the relevant permit from the Ministry of Food and Agriculture. . ..\"\n If the person fails, some sanction must be applied.\n Then it goes on, not only the Ministry of Food and Agriculture, the person is also required to obtain the relevant permit from the Environmental Protection Agency. If the person fails, again, some sanction must be applied So that is what I sought to do to put the two together and that is why I have put it this way -- that is, if it meets the acceptance of the Committee:\n [8O1]", 
+            "speech": "\"A licensee that has been granted a licence under this Act to produce bio-fuel from feedstock, shall obtain the relevant permit from the Ministry of Food and Agriculture. . ..\"\n If the person fails, some sanction must be applied.\n Then it goes on, not only the Ministry of Food and Agriculture, the person is also required to obtain the relevant permit from the Environmental Protection Agency. If the person fails, again, some sanction must be applied So that is what I sought to do to put the two together and that is why I have put it this way -- that is, if it meets the acceptance of the Committee:", 
             "time": "12:50:00"
         }, 
         {
@@ -2079,7 +2086,7 @@
             "name": "Mr Kyei Mensah-Bonsu", 
             "original": "Mr Kyei Mensah-Bonsu: Mr Speaker, with respect, if a referral is made in this House to any committee, that committee is supposed to take charge of the drafting of the Bill. It is not the draftspersons. If they are not too sure, they may consult the technical people. But she should not say, for heavens sake, that it is the draftsperson who was leading them. She had no locus in this at all and he or she has no power to legislate. So we cannot wait on the draftsperson.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "Mr Speaker, with respect, if a referral is made in this House to any committee, that committee is supposed to take charge of the drafting of the Bill. It is not the draftspersons. If they are not too sure, they may consult the technical people. But she should not say, for heavens sake, that it is the draftsperson who was leading them. She had no locus in this at all and he or she has no power to legislate. So we cannot wait on the draftsperson.\n Mr Speaker, what they are saying is rather confusing it. Whoever led them on the path of righteousness, just get back to the path of righteousness. [Laughter]", 
+            "speech": "Mr Speaker, with respect, if a referral is made in this House to any committee, that committee is supposed to take charge of the drafting of the Bill. It is not the draftspersons. If they are not too sure, they may consult the technical people. But she should not say, for heavens sake, that it is the draftsperson who was leading them. She had no locus in this at all and he or she has no power to legislate. So we cannot wait on the draftsperson.", 
             "time": "13:00:00"
         }, 
         {
@@ -2151,7 +2158,7 @@
             "name": "MrAsaga: Mr Speaker, I beg to move, clause 50 - ad the following new paragraphs", 
             "original": "MrAsaga: Mr Speaker, I beg to move, clause 50 - ad the following new paragraphs:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"(a) to prescribe fees and charges; and\n (b) for the conditions of licences\"\n Mr Speaker, if you look at the original Bill, clause 50, under the \"Regulations\", we had up to (g) and then the Committee decided that we should add two more items - so that will now become (h) and (i). [Interruptions.]", 
+            "speech": "\"(a) to prescribe fees and charges; and\n (b) for the conditions of licences\"", 
             "time": "13:00:00"
         }, 
         {

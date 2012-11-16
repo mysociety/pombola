@@ -16,8 +16,8 @@ ACTION           = 'action'
 PAGE_HEADER      = 'page header'
 CONTINUED_SPEECH = 'continued speech'
 CHAIR            = 'chair'
-# SCENE_START      = 'scene_start'
-# SCENE_END        = 'scene_end'
+SCENE_START      = 'scene_start'
+SCENE_END        = 'scene_end'
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
@@ -31,10 +31,12 @@ SCENE_PATTERN = r'^\s*(\[[A-Za-z-\s]+\])\s*$'
 SPEECH_PATTERN = r'^\s*%s(.+):\s*(.*)\s*$' % TITLES_TEMPLATE
 CONTINUED_SPEECH_PATTERN = r'^\s*\[%s.+\]\s*' % (TITLES_TEMPLATE.upper())
 
-# SCENE_START_PATTERN = r'^\s*(\[[^\]]+)\s*$'
-# SCENE_END_PATTERN = r'^\s*([^\]]+\])\s*$'
-# POSSIBLE_SPEECH_PATTERN = r'^\s*%s(.+)\s*$' % TITLES_TEMPLATE
+SCENE_START_PATTERN = r'^\s*(\[[^\]]+)\s*$'
+SCENE_END_PATTERN = r'^\s*([^\]]*\])\s*$'
+
+#POSSIBLE_SPEECH_PATTERN = r'^\s*%s(.+)\s*$' % TITLES_TEMPLATE
 #PAGE_HEADER_PATTERN =r'^(\d+)\s*(.*?)(\d{2}\s*\w*,\s*\d{4})(\s*.*?\s*)(\d+)\s*$'
+
 PAGE_HEADER_PATTERN = r'^\[(\d+)\]\s*$'
 
 ACTION_PATTERN = r'^\s*%s(.+\w)\s*[\-]+\s*(.+)\s*[\-]+\s*$' % TITLES_TEMPLATE
@@ -67,8 +69,8 @@ PATTERNS = (
     (CONTINUED_SPEECH, CONTINUED_SPEECH_PATTERN),
     (SCENE, SCENE_PATTERN),
     (ACTION, ACTION_PATTERN),
-    # (SCENE_START, SCENE_START_PATTERN),
-    # (SCENE_END, SCENE_END_PATTERN),
+    (SCENE_START, SCENE_START_PATTERN),
+    (SCENE_END, SCENE_END_PATTERN),
 )
 
 def parse(content):   
@@ -87,7 +89,7 @@ def scan(lines, header=True):
     return [scan_line(x) for x in lines]
 
 def body(lines):
-    """Returns a generator for lines in the body of the hansard"""
+    """Returns lines in the body of the hansard"""
     for i, row in enumerate(lines):
         _, line, _ = row
         #if line.lower().strip().startswith('the house met at'):
@@ -163,6 +165,17 @@ def parse_body(lines):
             curr_col = match.group(1) 
             #title = '%s%s' % (match.group(2),match.group(4))
             #entries.append(dict(page=pages))
+        elif kind is SCENE_START:
+            entry = parse_scene(time, match, lines, line)
+            entry['column'] = curr_col
+            # hack to catch chair on multiple lines
+            m = re.match(CHAIR_PATTERN, entry['scene'])
+            if m:
+                kind = CHAIR
+                entry = dict(chair=m.group(1), original=entry['original'])
+            else:
+                kind = SCENE
+
         elif kind is CONTINUED_SPEECH:
             if len(entries):
                 prev_entry = entries[-1]
@@ -170,6 +183,7 @@ def parse_body(lines):
                 if prev_entry.get('name'):
                     speech = parse_speech(time, match, lines,name=prev_entry['name'])
                     entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
+        
         elif kind is LINE:
             if len(entries):
                 prev_entry = entries[-1]
@@ -201,12 +215,33 @@ def parse_body(lines):
             
             if not entry.get('original', None):
                 entry['original'] = line.rstrip()
-            else:
+            elif entry['kind'] not in (SCENE, CHAIR):
                 entry['original'] = '%s\n%s' % (entry['original'], line.strip())
             entries.append(entry)
 
     return entries
 
+
+def parse_scene(time, match, lines, line=''):
+    scene = match.group(1)
+    original = line.strip()
+
+    while len(lines):
+        kind, line, match = lines.pop(0)
+        
+        original += '\n' + line.strip()
+        
+        if kind == SCENE_END:
+            scene += ' ' + line.strip()
+            break
+        elif kind == LINE:
+            scene += ' ' + line.strip()
+        elif kind == BLANK:
+            pass
+        else:
+            lines.insert(0, (kind, line, match))
+            break
+    return dict(scene=scene.strip(), original=original)
 
 def parse_speech(time, match, lines, name=None):
     """A speech has the ff properties:

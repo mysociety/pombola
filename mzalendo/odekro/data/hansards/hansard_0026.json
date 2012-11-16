@@ -19,6 +19,12 @@
             "time": null
         }, 
         {
+            "chair": "MR FIRST DEPUTY SPEAKER", 
+            "kind": "chair", 
+            "original": "[MR FIRST DEPUTY SPEAKER\n\nIN THE CHAIR]", 
+            "time": "10:55:00"
+        }, 
+        {
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
@@ -1081,9 +1087,9 @@
             "column": "151", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker: Hon Members, the matter had been taken care of in What we did yesterday. Look at page 11 of the Votes and Proceedings of yesterday - the amendment stands in the name of the Hon Minority Leader which read as follows", 
-            "original": "Mr First Deputy Speaker: Hon Members, the matter had been taken care of in What we did yesterday. Look at page 11 of the Votes and Proceedings of yesterday - the amendment stands in the name of the Hon Minority Leader which read as follows:\n_ Alhaji Dauda: Mr Speaker, I am satisfied.", 
+            "original": "Mr First Deputy Speaker: Hon Members, the matter had been taken care of in What we did yesterday. Look at page 11 of the Votes and Proceedings of yesterday - the amendment stands in the name of the Hon Minority Leader which read as follows:\nHon Minister, are you satisfied?\n_ Alhaji Dauda: Mr Speaker, I am satisfied.", 
             "section": "CONSIDERATION STAGE", 
-            "speech": "\"The Minister may on the approval of the Board grant permit subject to\". -\n Hon Members, it is there. Hon Members, that brings us to the end -- Hon Minister, have you seen it? [Pause]\n Hon Minister, are you satisfied?\n\n_ Alhaji Dauda: Mr Speaker, I am satisfied.", 
+            "speech": "\"The Minister may on the approval of the Board grant permit subject to\". -\n\nHon Minister, are you satisfied?\n\n_ Alhaji Dauda: Mr Speaker, I am satisfied.", 
             "time": "11:55:00"
         }, 
         {
@@ -1188,7 +1194,13 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, the House is suspended for 30 minutes.", 
             "section": "BILLS --THIRD READING", 
-            "speech": "Hon Members, the House is suspended for 30 minutes.\n 12.11 p.m. - Sitting suspended.\n 12.58 p.m. -Sitting resumed.\n [MR SECOND DEPUTY SPEAKER IN\n THE CHAIR]", 
+            "speech": "Hon Members, the House is suspended for 30 minutes.\n 12.11 p.m. - Sitting suspended.\n 12.58 p.m. -Sitting resumed.", 
+            "time": "11:55:00"
+        }, 
+        {
+            "chair": "MR SECOND DEPUTY SPEAKER", 
+            "kind": "chair", 
+            "original": "[MR SECOND DEPUTY SPEAKER IN\n\nTHE CHAIR]", 
             "time": "11:55:00"
         }, 
         {

@@ -52,9 +52,9 @@
             "column": "895", 
             "kind": "speech", 
             "name": "Madam Speaker", 
-            "original": "Madam Speaker: So, it should be captured as presented to the House?", 
+            "original": "Madam Speaker: So, it should be captured as presented to the House?\nHon Members, the Votes and Proceedings of Friday, 10th February, 2012 as corrected are adopted as the true record of proceedings.\nHon Members, we have the Official Report of Thursday, 9th February, 2012.\nAny corrections?\nHon Members, in the absence of any corrections, the Official Report of Thursday, 9th February 2012 is adopted as the true record of proceedings.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "So, it should be captured as presented to the House?\n All right.\n Page 11... 2O-[Pause.]\n Hon Members, the Votes and Proceedings of Friday, 10th February, 2012 as corrected are adopted as the true record of proceedings.\n Hon Members, we have the Official Report of Thursday, 9th February, 2012.\n Any corrections?\n Hon Members, in the absence of any corrections, the Official Report of Thursday, 9th February 2012 is adopted as the true record of proceedings.", 
+            "speech": "So, it should be captured as presented to the House?\n All right.\n\nHon Members, the Votes and Proceedings of Friday, 10th February, 2012 as corrected are adopted as the true record of proceedings.\n\nHon Members, we have the Official Report of Thursday, 9th February, 2012.\n\nAny corrections?\n\nHon Members, in the absence of any corrections, the Official Report of Thursday, 9th February 2012 is adopted as the true record of proceedings.", 
             "time": "10:40:00"
         }, 
         {
@@ -312,9 +312,15 @@
             "column": "899", 
             "kind": "speech", 
             "name": "Madam Speaker", 
-            "original": "Madam Speaker: Hon Deputy Minister, I think you have permission to lay the Papers.\n[MR SECOND DEPUTY SPEAKER IN THE\nCHAIR]", 
+            "original": "Madam Speaker: Hon Deputy Minister, I think you have permission to lay the Papers.", 
             "section": "PAPERS", 
-            "speech": "Hon Deputy Minister, I think you have permission to lay the Papers.\n\n[MR SECOND DEPUTY SPEAKER IN THE\n\nCHAIR]", 
+            "speech": "Hon Deputy Minister, I think you have permission to lay the Papers.", 
+            "time": "11:10:00"
+        }, 
+        {
+            "chair": "MR SECOND DEPUTY SPEAKER", 
+            "kind": "chair", 
+            "original": "[MR SECOND DEPUTY SPEAKER IN THE\n\nCHAIR]", 
             "time": "11:15:00"
         }, 
         {
@@ -1196,7 +1202,7 @@
             "name": "Mr Twumasi-Appiah", 
             "original": "Mr Twumasi-Appiah: Mr Speaker, a sentence.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "Mr Speaker, a sentence.\n I think that was in 19 - [Interruption]", 
+            "speech": "Mr Speaker, a sentence.", 
             "time": "13:10:00"
         }, 
         {

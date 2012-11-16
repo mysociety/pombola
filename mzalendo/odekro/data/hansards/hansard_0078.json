@@ -76,9 +76,9 @@
             "column": "913", 
             "kind": "speech", 
             "name": "Madam Speaker", 
-            "original": "Madam Speaker: Hon Members, I wish to inform the House of the sudden death of the Member of Parliament for Wulensi, HonAlhaji Saani Iddi, which sad event occurred on Monday, 4th of June, 2012 in Accra. May I therefore, invite Hon Members to rise and observe a minute of silence in memory of our departed Hon Member, Alhaji Saani Iddi.", 
+            "original": "Madam Speaker: Hon Members, I wish to inform the House of the sudden death of the Member of Parliament for Wulensi, HonAlhaji Saani Iddi, which sad event occurred on Monday, 4th of June, 2012 in Accra. May I therefore, invite Hon Members to rise and observe a minute of silence in memory of our departed Hon Member, Alhaji Saani Iddi.\nMay His soul rest in perfect peace.", 
             "section": "ANNOUNCEMENTS", 
-            "speech": "Hon Members, I wish to inform the House of the sudden death of the Member of Parliament for Wulensi, HonAlhaji Saani Iddi, which sad event occurred on Monday, 4th of June, 2012 in Accra. May I therefore, invite Hon Members to rise and observe a minute of silence in memory of our departed Hon Member, Alhaji Saani Iddi.\n [A minute is silence was observed.]\n May His soul rest in perfect peace.", 
+            "speech": "Hon Members, I wish to inform the House of the sudden death of the Member of Parliament for Wulensi, HonAlhaji Saani Iddi, which sad event occurred on Monday, 4th of June, 2012 in Accra. May I therefore, invite Hon Members to rise and observe a minute of silence in memory of our departed Hon Member, Alhaji Saani Iddi.\n\nMay His soul rest in perfect peace.", 
             "time": "11:00:00"
         }, 
         {
@@ -112,6 +112,13 @@
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "915", 
+            "kind": "scene", 
+            "original": "[No correction was made to the Votes and Proceedings of Tuesday, 5th June,\n\n2012.]", 
+            "scene": "[No correction was made to the Votes and Proceedings of Tuesday, 5th June, 2012.]", 
             "time": "11:10:00"
         }, 
         {

@@ -78,7 +78,7 @@
             "name": "Madam Speaker", 
             "original": "Madam Speaker: Honourable Members, 1 welcome you all to the Second Meeting of the Fourth Session of the Fifth Parliament of the Fourth Republic. I thank the Almighty God for seeing to your well- being while you were away and bringing you all safely back to the House this morning.", 
             "section": "WELCOME ADDRESS", 
-            "speech": "Honourable Members, 1 welcome you all to the Second Meeting of the Fourth Session of the Fifth Parliament of the Fourth Republic. I thank the Almighty God for seeing to your well- being while you were away and bringing you all safely back to the House this morning.\n It is my prayer that He will continue to endow us with wisdom and a keen. sense of duty during the course of this Meeting, to enable us continue our work here satisfactorily as in all previous meetings.\n Honourable Members, 1 am aware you did not have the opportunity to rest and invigorate yourselves as you would have wished from the pressures of the work, as a result of the recent biometric registration exercise which thankfully has ended successfully.\n Also, I know that, Honourable Members have also been busy with other constituency engagements. But as exhausting as your Work has been, l wish to state that this is all about the call to national service as Hon Members of Parliament and sacrifices associated with it.\n Hon Members, I take this opportunity to warmly congratulate you for the good work done.\n The present Meeting will be hectic as we have a lot of business to conduct. I trust Honourable Members will, as usual, continue to give the Chair and Leadership, the needed cooperation and improve upon their attendance to the House to enable us complete our business on time.\n Honourable Members, once again, I welcome you back to the House and wish you an enjoyable and fruitful working Meeting.\n Thank you. [Hear! Hear!]", 
+            "speech": "Honourable Members, 1 welcome you all to the Second Meeting of the Fourth Session of the Fifth Parliament of the Fourth Republic. I thank the Almighty God for seeing to your well- being while you were away and bringing you all safely back to the House this morning.\n It is my prayer that He will continue to endow us with wisdom and a keen. sense of duty during the course of this Meeting, to enable us continue our work here satisfactorily as in all previous meetings.\n Honourable Members, 1 am aware you did not have the opportunity to rest and invigorate yourselves as you would have wished from the pressures of the work, as a result of the recent biometric registration exercise which thankfully has ended successfully.\n Also, I know that, Honourable Members have also been busy with other constituency engagements. But as exhausting as your Work has been, l wish to state that this is all about the call to national service as Hon Members of Parliament and sacrifices associated with it.\n Hon Members, I take this opportunity to warmly congratulate you for the good work done.\n The present Meeting will be hectic as we have a lot of business to conduct. I trust Honourable Members will, as usual, continue to give the Chair and Leadership, the needed cooperation and improve upon their attendance to the House to enable us complete our business on time.\n Honourable Members, once again, I welcome you back to the House and wish you an enjoyable and fruitful working Meeting.", 
             "time": "10:10:00"
         }, 
         {
@@ -238,9 +238,9 @@
             "column": "7", 
             "kind": "speech", 
             "name": "Madam Speaker", 
-            "original": "Madam Speaker: Clerk, can you help us? Was the minutes of the Thirty-Fifth Sitting adopted? [Pause]", 
+            "original": "Madam Speaker: Clerk, can you help us? Was the minutes of the Thirty-Fifth Sitting adopted? [Pause]\nHon Members, the Votes and Proceedings of Thursday the 22 March, 2012 as corrected, is adopted as the true record of proceedings.\nWe do not have issues of the Official Report today, so let us move to item 3 then - Questions.\nHon Leader, we have Questions for the Hon Minister for Environment, Science and Technology.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Clerk, can you help us? Was the minutes of the Thirty-Fifth Sitting adopted? [Pause]\n Hon Minority Leader, I see the point you are making because item 6 talks about Thirty-Third, Thirty-Fourth, no Thirty- Fifth but Thirty~Sixth Sitting was talked about in item 5 so we would investigate and find out. We cannot tell you straightaway but it will be investigated and if it has not been approved, then we will bring it to the House.\n Thank you.\n Any more corrections on page 6?\n Page 7 37 --[Pause.]\n Hon Members, the Votes and Proceedings of Thursday the 22 March, 2012 as corrected, is adopted as the true record of proceedings.\n We do not have issues of the Official Report today, so let us move to item 3 then - Questions.\n Hon Leader, we have Questions for the Hon Minister for Environment, Science and Technology.", 
+            "speech": "Clerk, can you help us? Was the minutes of the Thirty-Fifth Sitting adopted? [Pause]\n Hon Minority Leader, I see the point you are making because item 6 talks about Thirty-Third, Thirty-Fourth, no Thirty- Fifth but Thirty~Sixth Sitting was talked about in item 5 so we would investigate and find out. We cannot tell you straightaway but it will be investigated and if it has not been approved, then we will bring it to the House.\n Thank you.\n Any more corrections on page 6?\n\nHon Members, the Votes and Proceedings of Thursday the 22 March, 2012 as corrected, is adopted as the true record of proceedings.\n\nWe do not have issues of the Official Report today, so let us move to item 3 then - Questions.\n\nHon Leader, we have Questions for the Hon Minister for Environment, Science and Technology.", 
             "time": "10:20:00"
         }, 
         {
@@ -274,9 +274,15 @@
             "column": "8", 
             "kind": "speech", 
             "name": "Madam Speaker", 
-            "original": "Madam Speaker: Hon Members, Item 5 will be taken by the Mr First Deputy Speaker.\n[MR FIRST DEPUTY SPEAKER IN THE\nCHAIR]", 
+            "original": "Madam Speaker: Hon Members, Item 5 will be taken by the Mr First Deputy Speaker.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Hon Members, Item 5 will be taken by the Mr First Deputy Speaker.\n\n[MR FIRST DEPUTY SPEAKER IN THE\n\nCHAIR]", 
+            "speech": "Hon Members, Item 5 will be taken by the Mr First Deputy Speaker.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "chair": "MR FIRST DEPUTY SPEAKER", 
+            "kind": "chair", 
+            "original": "[MR FIRST DEPUTY SPEAKER IN THE\n\nCHAIR]", 
             "time": "10:34:00"
         }, 
         {
@@ -828,7 +834,7 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Very well, you may ask the Question.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "Very well, you may ask the Question.\n [Resumption of debate at column 55.]", 
+            "speech": "Very well, you may ask the Question.", 
             "time": "11:00:00"
         }, 
         {
@@ -1573,7 +1579,7 @@
             "name": "Mr Charles S. Hodogbey", 
             "original": "Mr Charles S. Hodogbey: Mr Speaker, in the Hon Minister\u2019s answer, she addressed several areas of pollution. I believe Ghana is a signatory to several international Conventions on the degradation of the environment, such as the Stockholm Declaration, the Rio Declaration, the Kyoto Declaration and many others. All of these, about the \"polluter pays\" principle, meaning whatever industry or person who pollutes the environment pays for the cost.", 
             "section": "SCIENCE AND TECHNOLOGY", 
-            "speech": "Mr Speaker, in the Hon Minister\u2019s answer, she addressed several areas of pollution. I believe Ghana is a signatory to several international Conventions on the degradation of the environment, such as the Stockholm Declaration, the Rio Declaration, the Kyoto Declaration and many others. All of these, about the \"polluter pays\" principle, meaning whatever industry or person who pollutes the environment pays for the cost.\n But in the Hon Minister\u2018s address, even when she came to the issue of land -- if you drive around Accra, you will see so many sachets - these non-degradable materials lying all over, in the Hon Minister\u2019s Answer, she never addressed that issue. When I was in the Western Region, I saw so many rivers de-coloured. I would like to know whether by\" the \"polluter pays\" principle, her Ministry is able to enforce that law for polluters to pay - [Interruption]", 
+            "speech": "Mr Speaker, in the Hon Minister\u2019s answer, she addressed several areas of pollution. I believe Ghana is a signatory to several international Conventions on the degradation of the environment, such as the Stockholm Declaration, the Rio Declaration, the Kyoto Declaration and many others. All of these, about the \"polluter pays\" principle, meaning whatever industry or person who pollutes the environment pays for the cost.", 
             "time": "12:00:00"
         }, 
         {
@@ -1957,7 +1963,7 @@
             "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, you are putting the Question that, \"after \"a person\" we are putting \"or animal\" and then the \"medical officer\" would be \"medical or veterinary officer\". That is what we seek to do.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "Mr Speaker, you are putting the Question that, \"after \"a person\" we are putting \"or animal\" and then the \"medical officer\" would be \"medical or veterinary officer\". That is what we seek to do.\n But the issue about carrying out business is to allow the drafters to reconstruct the - to re-look at it to take care of -- [Interruption]", 
+            "speech": "Mr Speaker, you are putting the Question that, \"after \"a person\" we are putting \"or animal\" and then the \"medical officer\" would be \"medical or veterinary officer\". That is what we seek to do.", 
             "time": "12:10:00"
         }, 
         {
