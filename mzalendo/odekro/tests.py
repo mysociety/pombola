@@ -155,6 +155,19 @@ class GhanaParserRegressionTest(unittest.TestCase):
         # be relative to this test file).
         transcript_files = [
             'data/hansard-sample.txt',
+            'data/hansards/hansard_0025.txt',
+            'data/hansards/hansard_0026.txt',
+            'data/hansards/hansard_0028.txt',
+            'data/hansards/hansard_0029.txt',
+            'data/hansards/hansard_0030.txt',
+            'data/hansards/hansard_0031.txt',
+            'data/hansards/hansard_0032.txt',
+            'data/hansards/hansard_0034.txt',
+            'data/hansards/hansard_0038.txt',
+            'data/hansards/hansard_0051.txt',
+            'data/hansards/hansard_0075.txt',
+            'data/hansards/hansard_0077.txt',
+            'data/hansards/hansard_0078.txt',
         ] 
         
         for transcript_file in transcript_files:
