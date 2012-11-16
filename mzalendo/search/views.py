@@ -92,11 +92,13 @@ def tagcloud(request):
         if x.strip() in ignore_terms:
             pass
         words[x.strip()] = 1 + words.get(x.strip(), 0)
-
+    cloudlist =[]
+    for word in words:
+        cloudlist.append({"text":word , "weight": words.get(word)})
 
     # return results
     return HttpResponse(
-        simplejson.dumps(words),
+        simplejson.dumps(cloudlist),
         mimetype='application/json'
     )
 

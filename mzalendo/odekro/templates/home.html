@@ -8,6 +8,18 @@
     Launch-specific scripts should be moved out after launch
   {% endcomment %}
 
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jqcloud-1.0..2.min.js"></script>
+  <link rel="stylesheet" type="text/css"  href="{{ STATIC_URL}}css/jqcloud.css" />
+  <script type = "text/javacsript">
+    $(function() {
+        $.getJSON("search/tagcloud/", 
+        {},
+        function(data){
+            $("#tagcloud").jQCloud(data);
+        });
+      });
+    </script>
+
   <script type="text/javascript" src="{{ STATIC_URL }}js/countdown.js"></script>
   <script type="text/javascript">
         function diff(end, start) {
