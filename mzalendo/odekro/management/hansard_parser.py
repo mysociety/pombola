@@ -167,9 +167,24 @@ def parse_body(lines):
                 if prev_entry.get('name'):
                     speech = parse_speech(time, match, lines,name=prev_entry['name'])
                     entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
+        elif kind is LINE:
+            if len(entries):
+                prev_entry = entries[-1]
+                if prev_entry.get('name'):
+                    kind = SPEECH
+                    entry = dict(
+                        time    = time,
+                        name    = prev_entry['name'],
+                        speech  = line.strip(),
+                        section = curr_section,
+                        column  = curr_col,
+                    );
         elif kind is CHAIR:
             entry = dict( chair=match.group(1) )
+        elif kind is BLANK:
+            pass
         else:
+            # print "skipping '%s': '%s'" % ( kind, line )
             pass
         
         if entry:

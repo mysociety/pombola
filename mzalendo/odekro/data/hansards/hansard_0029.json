@@ -130,6 +130,24 @@
             "time": "10:15:00"
         }, 
         {
+            "column": "4", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "[MR SECOND DEPUTY SPEAKER IN", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "[MR SECOND DEPUTY SPEAKER IN", 
+            "time": "10:25:00"
+        }, 
+        {
+            "column": "4", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "THE CHAIR]", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "THE CHAIR]", 
+            "time": "10:25:00"
+        }, 
+        {
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -214,6 +232,15 @@
             "original": "Mr Avoka: Mr Speaker, I beg to indicate that the substantive Minister is not available; he travelled outside the country before we resumed today. But the Hon Deputy Minister in the Ministry, who is also a Colleague of ours in this House, is available to stand in for him.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "Mr Speaker, I beg to indicate that the substantive Minister is not available; he travelled outside the country before we resumed today. But the Hon Deputy Minister in the Ministry, who is also a Colleague of ours in this House, is available to stand in for him.\n So subject to the convenience of the House, I am craving your indulgence to permit the Hon Deputy Minister to answer the Question on his behalf. But I notice that this is an Urgent Question and it appears the Hon Member who has asked the Question is not here himself and the Question looks like constituency-specific, or it has some bearing to his constituency Dormaa Municipal area. So I do not know whether in the circumstances, we", 
+            "time": "10:25:00"
+        }, 
+        {
+            "column": "6", 
+            "kind": "speech", 
+            "name": "Mr Avoka", 
+            "original": "would defer the Question or somebody else would ask it on his behalf, if the Member has the information or the background.", 
+            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "speech": "would defer the Question or somebody else would ask it on his behalf, if the Member has the information or the background.", 
             "time": "10:25:00"
         }, 
         {
@@ -319,6 +346,15 @@
             "original": "Mr Kamel: Mr Speaker, the problem cuts across all plantation sites in the country. We have identified the problem and we know it has caused the Ministry some worrisome moments. We have taken", 
             "section": "RESOURCES", 
             "speech": "Mr Speaker, the problem cuts across all plantation sites in the country. We have identified the problem and we know it has caused the Ministry some worrisome moments. We have taken", 
+            "time": "10:35:00"
+        }, 
+        {
+            "column": "8", 
+            "kind": "speech", 
+            "name": "Mr Kamel", 
+            "original": "steps to clear every arrears that is owed the plantation workers and we are also ensuring that payments would be very regular.", 
+            "section": "RESOURCES", 
+            "speech": "steps to clear every arrears that is owed the plantation workers and we are also ensuring that payments would be very regular.", 
             "time": "10:35:00"
         }, 
         {
@@ -540,10 +576,82 @@
         {
             "column": "13", 
             "kind": "speech", 
+            "name": "Mr Kamel", 
+            "original": "Returning Compulsorily Acquired Lands", 
+            "section": "RESOURCES", 
+            "speech": "Returning Compulsorily Acquired Lands", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "13", 
+            "kind": "speech", 
+            "name": "Mr Kamel", 
+            "original": "Q. 886. Mr Joseph Boahen Aidoo asked the Minister for Lands and Natural Resources when compulsorily-acquired lands at Tuba, Plerno, Amanfro and Kokrobite would be returned-to the owners in accordance with article 20 (6) of the 1992 Constitution of Ghana.", 
+            "section": "RESOURCES", 
+            "speech": "Q. 886. Mr Joseph Boahen Aidoo asked the Minister for Lands and Natural Resources when compulsorily-acquired lands at Tuba, Plerno, Amanfro and Kokrobite would be returned-to the owners in accordance with article 20 (6) of the 1992 Constitution of Ghana.", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "13", 
+            "kind": "speech", 
             "name": "Mr Henry Ford Kamel", 
             "original": "Mr Henry Ford Kamel: Mr Speaker, portions of the lands of Tuba, Plerno, Amanfro and Kokrobite are located within the lands acquired under Executive", 
             "section": "RESOURCES", 
             "speech": "Mr Speaker, portions of the lands of Tuba, Plerno, Amanfro and Kokrobite are located within the lands acquired under Executive", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "14", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "Instrument No. 61/1979 for Irrigation Project No. 2 at Weija. The acquisition covers a total area of 5,53 1 .542 acres. The purpose of the acquisition was for irrigation development, to make use of the reservoir created by the dam on the River Densu at Weija.", 
+            "section": "RESOURCES", 
+            "speech": "Instrument No. 61/1979 for Irrigation Project No. 2 at Weija. The acquisition covers a total area of 5,53 1 .542 acres. The purpose of the acquisition was for irrigation development, to make use of the reservoir created by the dam on the River Densu at Weija.", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "14", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "The beneficiary agency was the Irrigation Development Authority (IDA) of the Ministry of Food and Agriculture. No compensation has been paid for the acquisition. The total compensation assessed as of 2007 was forty-one million, four hundred and eighty-six thousand, five hundred and sixty-five Ghana cedis", 
+            "section": "RESOURCES", 
+            "speech": "The beneficiary agency was the Irrigation Development Authority (IDA) of the Ministry of Food and Agriculture. No compensation has been paid for the acquisition. The total compensation assessed as of 2007 was forty-one million, four hundred and eighty-six thousand, five hundred and sixty-five Ghana cedis", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "14", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "(GH\u00a241,486,565.00)", 
+            "section": "RESOURCES", 
+            "speech": "(GH\u00a241,486,565.00)", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "14", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "In 1983, with the assistance of the European Union, about 6 km of canal, two pumping stations, 220 hectares of developed farm land, one large warehouse and 20 bungalows were provided as a pilot scheme for the development of the land. In 1996, another 40 hectares of a drip irrigation project was added as a private/ public initiative. Currently, about 1,000 acres of the acquired land have been developed for irrigation.", 
+            "section": "RESOURCES", 
+            "speech": "In 1983, with the assistance of the European Union, about 6 km of canal, two pumping stations, 220 hectares of developed farm land, one large warehouse and 20 bungalows were provided as a pilot scheme for the development of the land. In 1996, another 40 hectares of a drip irrigation project was added as a private/ public initiative. Currently, about 1,000 acres of the acquired land have been developed for irrigation.", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "14", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "With the passage of time and due to pressure on land, portions of the land eventually became encroached upon. A portion covering an area of 260.13 was also leased by Government to the Central. Mechanics and Scrap Dealers Association (CEMSDA), following a request from the Central Regional Administration and a portion covering 47.309 areas leased to Medium Dwelling Company Limited for real estate purposes after the company had encroached on the land, following misrepresentation that it was not State land.", 
+            "section": "RESOURCES", 
+            "speech": "With the passage of time and due to pressure on land, portions of the land eventually became encroached upon. A portion covering an area of 260.13 was also leased by Government to the Central. Mechanics and Scrap Dealers Association (CEMSDA), following a request from the Central Regional Administration and a portion covering 47.309 areas leased to Medium Dwelling Company Limited for real estate purposes after the company had encroached on the land, following misrepresentation that it was not State land.", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "14", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "Mr Speaker, in 2007, Cabinet, after reviewing the status of the acquisition as part of the inventory of State acquired/ occupied lands in Accra, decided that the", 
+            "section": "RESOURCES", 
+            "speech": "Mr Speaker, in 2007, Cabinet, after reviewing the status of the acquisition as part of the inventory of State acquired/ occupied lands in Accra, decided that the", 
             "time": "10:55:00"
         }, 
         {
@@ -553,6 +661,15 @@
             "original": "[MR KAMEL]", 
             "section": "RESOURCES", 
             "speech": "\"State investments in the land and State leases granted should be protected from further encroachments and that the Executive Instrument should be amended to exclude the encroached portions so that Government retained only the area it had developed and leased out\". This decision was communicated to the Lands Commission for implementation.\n The implementation of this decision required the Lands Commission to do a number of things:\n undertake a complete inventory and delineation the State investments on the land.\n amendment of the E.I. to limit the \" acquisition to the portion to be retained by the State.\n a proper planning of the encroached lands to ensure judicious use so as not to blight the State investments on the retained portion.\n release of the portions of the land not required by the State to the landowners.\n Mr Speaker, a committee comprising the Ministry of Lands and Natural Resources, the Lands Commission, Town and Country Planning Department, and the District Assemblies has been formed to implement the Cabinet decision. The inventory and delineation of the area occupied by IDA has been completed and discussions have been held with the leadership of CEMSDA. As soon as the consultation processes are completed, the Executive Instrument will be amended to release the encroached portion to the owners.\n Madam Speaker, I wish to point out that the Supreme Court, in the case Nii Kpobi Tettey Tisuru vAtz\u20180rney~General, has ruled", 
+            "time": "10:55:00"
+        }, 
+        {
+            "column": "16", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "that the 1992 Constitution does not have retrospective effect. Article 20 (6) of the 1992 Constitution cannot therefore apply to acquisitions done before the Constitution came into effect. Dealing with the Tuba, Plerno, Kokrobite andAmanfro lands affected by the acquisition therefore requires political decisions and Government will ensure that the right thing is done such that both the State investments in the area and the community rights are respected and protected.", 
+            "section": "RESOURCES", 
+            "speech": "that the 1992 Constitution does not have retrospective effect. Article 20 (6) of the 1992 Constitution cannot therefore apply to acquisitions done before the Constitution came into effect. Dealing with the Tuba, Plerno, Kokrobite andAmanfro lands affected by the acquisition therefore requires political decisions and Government will ensure that the right thing is done such that both the State investments in the area and the community rights are respected and protected.", 
             "time": "10:55:00"
         }, 
         {
@@ -711,6 +828,15 @@
         {
             "column": "20", 
             "kind": "speech", 
+            "name": "Mr Hodogbey", 
+            "original": "automatically goes back to the landowner. Therefore 1 today landowners say, this land was our farmland therefore we have to go and acquire that land back, has he any problem with that?", 
+            "section": "RESOURCES", 
+            "speech": "automatically goes back to the landowner. Therefore 1 today landowners say, this land was our farmland therefore we have to go and acquire that land back, has he any problem with that?", 
+            "time": "11:05:00"
+        }, 
+        {
+            "column": "20", 
+            "kind": "speech", 
             "name": "Papa Owusu Ankomah", 
             "original": "Papa Owusu Ankomah: Mr Speaker, the question posed by the Hon ember offends the Standing Orders relating to Questions. He is making assumptions not even of facts but of law and e is not supposed to make assumptions when he poses Questions to Ministers, that on arm lands, there is a law stating that 8 years ---", 
             "section": "RESOURCES", 
@@ -733,6 +859,24 @@
             "original": "Papa Owusu-Ankomah: Thank you very much, Mr Speaker.", 
             "section": "RESOURCES", 
             "speech": "Thank you very much, Mr Speaker.\n I will refer you to Order 67 (l) (a) and it states - _\n -Questions must comply with the following conditions:\n (b)a Question shall not contain arguments, expression of opinion, inferences, imputations, epithets or controversial, ironical or offensive expressions or hypothetical cases.\"\n And if you also look at (e) it states:\n \"a Question shall not solicit the expression of opinion or the solution o an abstract legal case or a hypothetical\" proposition\".\n Mr Speaker, the combined effect of these expressions make the Hon Member\u2019s question contrary to Order 67 and ought not to be allowed by the Chair, particularly Mr Speaker, that portion of the Question that states that there is a Farm Lands Act.\n I do not know any law in this country called the Farm Land Act, which provides that 8 years when a farm land is not developed, it belongs to the State. That can never be a statement either of law or fact. It is an assumption that emerges in the Question and solicits the Minister's opinion where opinions are not supposed to be solicited in respect of Questions.\n Thank you, Mr Speaker.", 
+            "time": "11:05:00"
+        }, 
+        {
+            "column": "21", 
+            "kind": "speech", 
+            "name": "Papa Owusu-Ankomah", 
+            "original": "Mr Second Deputy Speaker; I think if a reference to a law or order is not appropriate in the circumstances, the Hon Deputy Minister for the appropriate Ministry will be in a position to tell that as part of the Answer.", 
+            "section": "RESOURCES", 
+            "speech": "Mr Second Deputy Speaker; I think if a reference to a law or order is not appropriate in the circumstances, the Hon Deputy Minister for the appropriate Ministry will be in a position to tell that as part of the Answer.", 
+            "time": "11:05:00"
+        }, 
+        {
+            "column": "21", 
+            "kind": "speech", 
+            "name": "Papa Owusu-Ankomah", 
+            "original": "Hon Minister, you may please answer the Question.", 
+            "section": "RESOURCES", 
+            "speech": "Hon Minister, you may please answer the Question.", 
             "time": "11:05:00"
         }, 
         {
@@ -787,6 +931,15 @@
             "original": "Ms Shirley A. Botchway: Mr Speaker, in the Hon Deputy Minister\u2019s Answer, and I refer to the very last sentence, it talks about Government making sure that the right thing is done. Would the Hon Deputy Minister tell the House, whether the right thing would include payment of compensation to people Whose properties were demolished in the last demolition exercise a few months ago on that very site?", 
             "section": "RESOURCES", 
             "speech": "Mr Speaker, in the Hon Deputy Minister\u2019s Answer, and I refer to the very last sentence, it talks about Government making sure that the right thing is done. Would the Hon Deputy Minister tell the House, whether the right thing would include payment of compensation to people Whose properties were demolished in the last demolition exercise a few months ago on that very site?\n This is because he says it needs a political decision and I think this is something that should be looked at as well", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "22", 
+            "kind": "speech", 
+            "name": "Ms Shirley A. Botchway", 
+            "original": "as making sure that the land is protected for the farmers - those that have been sold; and with this, some of them predate 2007. There was a demolition exercise which is why this Question was asked. Would the Hon Deputy Minister tell us whether compensation would be paid to people whose homes were destroyed?", 
+            "section": "RESOURCES", 
+            "speech": "as making sure that the land is protected for the farmers - those that have been sold; and with this, some of them predate 2007. There was a demolition exercise which is why this Question was asked. Would the Hon Deputy Minister tell us whether compensation would be paid to people whose homes were destroyed?", 
             "time": "11:15:00"
         }, 
         {
@@ -850,6 +1003,60 @@
             "original": "Mr Henry Ford Kamel: Mr Speaker, the Abonyere Forest Reserve is one of the eight (8) forest reserves managed by the Goaso Forest District. It covers a total area of 41 .18 km with a total perimeter of 43 .64 kilometers. It is located within the jurisdiction of Asunafo South District Assembly and owned by the Kwapong, Akrodie and Sankore Stools. It is predominantly a production forest reserve and the Timber Utilization Contract (TUC) is owned by Messrs Logs and Lumber Limited (LLL).", 
             "section": "RESOURCES", 
             "speech": "Mr Speaker, the Abonyere Forest Reserve is one of the eight (8) forest reserves managed by the Goaso Forest District. It covers a total area of 41 .18 km with a total perimeter of 43 .64 kilometers. It is located within the jurisdiction of Asunafo South District Assembly and owned by the Kwapong, Akrodie and Sankore Stools. It is predominantly a production forest reserve and the Timber Utilization Contract (TUC) is owned by Messrs Logs and Lumber Limited (LLL).\n Threat by chainsaw operators\n Despite the enormous production potential of the forest reserve (consisting of 35 production compartments), it has been subjected to wanton destruction in recent years by chainsaw operators and a number of interventions have been put in place to reverse this negative trend.\n Interventions to save the forest reserve\n The interventions include the following:", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "24", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "i. Collaborative Forest Resource Management has been initiated by holding a maiden durbar with the Omanhene of Sankore Traditional Area and his subjects to solicit their support in dealing with the problem. The response was generally positive With\" the Omanhene pledging his personal commitment to bringing the situation under control.", 
+            "section": "RESOURCES", 
+            "speech": "i. Collaborative Forest Resource Management has been initiated by holding a maiden durbar with the Omanhene of Sankore Traditional Area and his subjects to solicit their support in dealing with the problem. The response was generally positive With\" the Omanhene pledging his personal commitment to bringing the situation under control.", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "24", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "ii. Four (4) military personnel have been permanently attached to the District Forestry Office to embark on frequent monitoring operations jointly with the staff of the Forest Services Division (FSD). This had led to the arrest of six (6) people who have been prosecuted. at the Goaso Circuit Court with four (4) jailed six months each with hard labour and two fined one thousand, eight hundred Ghana cedis (GH\u00a2l,800.00) each.", 
+            "section": "RESOURCES", 
+            "speech": "ii. Four (4) military personnel have been permanently attached to the District Forestry Office to embark on frequent monitoring operations jointly with the staff of the Forest Services Division (FSD). This had led to the arrest of six (6) people who have been prosecuted. at the Goaso Circuit Court with four (4) jailed six months each with hard labour and two fined one thousand, eight hundred Ghana cedis (GH\u00a2l,800.00) each.", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "24", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "iii. Messrs Logs and Lumber Limited (LLL) have constructed one v permanent security gate and also created 3 blockades with heaps of sand at strategic locations to help ward off persistent encroachers on the forest reserve. They have also beefed up their own security in the area.", 
+            "section": "RESOURCES", 
+            "speech": "iii. Messrs Logs and Lumber Limited (LLL) have constructed one v permanent security gate and also created 3 blockades with heaps of sand at strategic locations to help ward off persistent encroachers on the forest reserve. They have also beefed up their own security in the area.", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "24", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "iv. The Forest Services Division has intensified community sensitization through the local media to gain support from the fringe communities in protecting the forest reserve.", 
+            "section": "RESOURCES", 
+            "speech": "iv. The Forest Services Division has intensified community sensitization through the local media to gain support from the fringe communities in protecting the forest reserve.", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "24", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "Challenges", 
+            "section": "RESOURCES", 
+            "speech": "Challenges", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "24", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "l. Difficulty in coping with the challenges of nocturnal chainsawing operations.", 
+            "section": "RESOURCES", 
+            "speech": "l. Difficulty in coping with the challenges of nocturnal chainsawing operations.", 
             "time": "11:15:00"
         }, 
         {
@@ -972,6 +1179,15 @@
         {
             "column": "28", 
             "kind": "speech", 
+            "name": "Mr Second Deputy Speaker", 
+            "original": "The next question is_ the Question numbered 109 standing in the name of Hon_Benito Owusu-Bio, on Member for Atwima NWabiagya.", 
+            "section": "RESOURCES", 
+            "speech": "The next question is_ the Question numbered 109 standing in the name of Hon_Benito Owusu-Bio, on Member for Atwima NWabiagya.", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "28", 
+            "kind": "speech", 
             "name": "Mr Isaac K. Asiamah", 
             "original": "Mr Isaac K. Asiamah:_ Mr Speaker, the Hon Colleague is not available and I have his permission to ask this Question on his behalf.", 
             "section": "RESOURCES", 
@@ -1003,6 +1219,105 @@
             "original": "[MR KAMEL]", 
             "section": "RESOURCES", 
             "speech": "With regard to disbursement, the following criteria have been approved for fund disbursement.\n i Land size for plantation development:\n The minimum land size to be considered for support would be 4 ha to ensure the economic viability of the venture.\n ii. Gender consideration:\n Women, disabled people and the vulnerable groups within poor rural communities would be given priority .in fund disbursement.\n iii. Support to co-operatives and plantation groups:\n Priority would be given to plantation groups and local communities from rural communities. However, individuals who meet the full criteria for support would also be considered.\n iv. Types of species for planting: Support would be given to people who plant appropriate tree species. Care would be taken to ensure that the selected species match the site for plantation development.\n v. Suitability of land for plantation development:\n Land holdings of prospective applicants should be suitable for forest plantation development- Applicants with marginal lands will not be eligible for benefits under the fund.\n With respect to loan disbursement, all the above stated criteria and under grant disbursement will have to be met. In addition, the following criteria would also have to be met by the applications:", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "vi.Secured Land tenure, proof of user-rights or ownership of land for plantation development:", 
+            "section": "RESOURCES", 
+            "speech": "vi.Secured Land tenure, proof of user-rights or ownership of land for plantation development:", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "Applicants should have the documentation to prove that they have user-rights over land for plantation development, including:", 
+            "section": "RESOURCES", 
+            "speech": "Applicants should have the documentation to prove that they have user-rights over land for plantation development, including:", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "Lease document or Land Title Deed.", 
+            "section": "RESOURCES", 
+            "speech": "Lease document or Land Title Deed.", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "Statutory declaration of user right of land for plantation development, in accordance with the Statutory Declarations Act, 1971 (Act 389), and bearing the signature or seal of the village chief, family head and notary public officer or court registrar.", 
+            "section": "RESOURCES", 
+            "speech": "Statutory declaration of user right of land for plantation development, in accordance with the Statutory Declarations Act, 1971 (Act 389), and bearing the signature or seal of the village chief, family head and notary public officer or court registrar.", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "A site plan depicting the land earmarked for forest plantation development.", 
+            "section": "RESOURCES", 
+            "speech": "A site plan depicting the land earmarked for forest plantation development.", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "vii. Counterpart (matching) funds/ support:", 
+            "section": "RESOURCES", 
+            "speech": "vii. Counterpart (matching) funds/ support:", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "The demonstrated ability of applicants to contribute labour, materials or even matching funds to incentives provided by the Board would improve the chances of support to an applicant.", 
+            "section": "RESOURCES", 
+            "speech": "The demonstrated ability of applicants to contribute labour, materials or even matching funds to incentives provided by the Board would improve the chances of support to an applicant.", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "The Board. is of the view that people are likely to take better care of the plantations if they spend their labour or part of their own funds on the maintenance of the plantations.", 
+            "section": "RESOURCES", 
+            "speech": "The Board. is of the view that people are likely to take better care of the plantations if they spend their labour or part of their own funds on the maintenance of the plantations.", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "viii. Business plan:", 
+            "section": "RESOURCES", 
+            "speech": "viii. Business plan:", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "Large-scale plantation growers would have to submit business plans for review before their applications are supported.", 
+            "section": "RESOURCES", 
+            "speech": "Large-scale plantation growers would have to submit business plans for review before their applications are supported.", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "86", 
+            "kind": "speech", 
+            "name": "Mr Henry Ford Kamel", 
+            "original": "Small-scale farmers will not be required to submit business plans.", 
+            "section": "RESOURCES", 
+            "speech": "Small-scale farmers will not be required to submit business plans.", 
             "time": "11:25:00"
         }, 
         {
@@ -1314,6 +1629,24 @@
         {
             "column": "98", 
             "kind": "speech", 
+            "name": "MrAl0we", 
+            "original": "I want to find out because I have personally taken up the issue of feeder roads in the district and Government had already indicated that they would be desilting a number of dams in the Upper East Region and I expected that, that would include the ponds at Paga.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "I want to find out because I have personally taken up the issue of feeder roads in the district and Government had already indicated that they would be desilting a number of dams in the Upper East Region and I expected that, that would include the ponds at Paga.", 
+            "time": "11:45:00"
+        }, 
+        {
+            "column": "98", 
+            "kind": "speech", 
+            "name": "MrAl0we", 
+            "original": "I want to find out from the Hon Minister is she going to do anything urgently, like liaising with the Ministry of Roads and Highways to get that road done quickly as well as with the Hon Minister for Food and Agriculture to have the Zenga Pond desilted?", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "I want to find out from the Hon Minister is she going to do anything urgently, like liaising with the Ministry of Roads and Highways to get that road done quickly as well as with the Hon Minister for Food and Agriculture to have the Zenga Pond desilted?", 
+            "time": "11:45:00"
+        }, 
+        {
+            "column": "98", 
+            "kind": "speech", 
             "name": "Ms Dansua", 
             "original": "Ms Dansua: Mr Speaker, it is true that most roads leading to our tourist sites are in a very bad shape and the Ministry therefore has taken it upon itself to lobby or talk to our Colleague Hon Minister for Roads and Highways to help with the development of some of these roads next year. I do not know whether that particular road has been captured but I take his word for it, because he is an Hon Colleague and I know that whatever information he provides is the truth. So I will follow up with my Colleague.", 
             "section": "MINISTRY OF TOURISM", 
@@ -1354,6 +1687,51 @@
             "original": "Ms Dansua: Mr Speaker, I am very happy that my Colleague has brought up this issue because until this point, tourism is one sector that has not been given the needed attention over the years. In fact, people tend to see the tourism sector as one that is just full of entertainment; so", 
             "section": "MINISTRY OF TOURISM", 
             "speech": "Mr Speaker, I am very happy that my Colleague has brought up this issue because until this point, tourism is one sector that has not been given the needed attention over the years. In fact, people tend to see the tourism sector as one that is just full of entertainment; so", 
+            "time": "11:55:00"
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Ms Dansua", 
+            "original": "nobody takes us seriously when it comes to budget allocation and all of that.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "nobody takes us seriously when it comes to budget allocation and all of that.", 
+            "time": "11:55:00"
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Ms Dansua", 
+            "original": "But I am happy to inform the Honourable House that we have been making some attempts over the past few months to change the face of tourism in this country, to get the co-operation of Hon Colleagues in this House when it comes to the approval of our budget for next .year. We look forward to bigger resources being given to us so that -we can be in a position to do some of these advertisings on the major news channels like CNN, Al Jazeera and the rest.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "But I am happy to inform the Honourable House that we have been making some attempts over the past few months to change the face of tourism in this country, to get the co-operation of Hon Colleagues in this House when it comes to the approval of our budget for next .year. We look forward to bigger resources being given to us so that -we can be in a position to do some of these advertisings on the major news channels like CNN, Al Jazeera and the rest.", 
+            "time": "11:55:00"
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Ms Dansua", 
+            "original": "I am also happy to inform the House that at the recent General Assembly of the United Nations World Tourism Organization (UNWTO) in Korea, we had the opportunity to participate in a session with CNN and we exchanged ideas as to how they can help Ghana to promote our tourism industry on the world market. So I look forward to one of their officers visiting Ghana, perhaps, in the first quarter of next year, so that we can sit down and look at modalities of getting Ghana promoted on the international scene.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "I am also happy to inform the House that at the recent General Assembly of the United Nations World Tourism Organization (UNWTO) in Korea, we had the opportunity to participate in a session with CNN and we exchanged ideas as to how they can help Ghana to promote our tourism industry on the world market. So I look forward to one of their officers visiting Ghana, perhaps, in the first quarter of next year, so that we can sit down and look at modalities of getting Ghana promoted on the international scene.", 
+            "time": "11:55:00"
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Ms Dansua", 
+            "original": "When it comes to our budget, I would like appeal to Hon Colleagues to help us get at least, a decent budget that would enable the sector to do something.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "When it comes to our budget, I would like appeal to Hon Colleagues to help us get at least, a decent budget that would enable the sector to do something.", 
+            "time": "11:55:00"
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Ms Dansua", 
+            "original": "We also need to change our attitude towards the tourism sector. Mr Speaker, I want to use this opportunity to invite Hon Colleagues to participate in a cruise on the Dodi island. Very soon we would be putting out some information encouraging Hon Members to participate in this cruise so that when we get to the island, we would see the potentials that exist there, and this way, I believe, Hon Colleagues would be in the position to help the Ministry get investors, private sector people, even Hon Colleagues who", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "We also need to change our attitude towards the tourism sector. Mr Speaker, I want to use this opportunity to invite Hon Colleagues to participate in a cruise on the Dodi island. Very soon we would be putting out some information encouraging Hon Members to participate in this cruise so that when we get to the island, we would see the potentials that exist there, and this way, I believe, Hon Colleagues would be in the position to help the Ministry get investors, private sector people, even Hon Colleagues who", 
             "time": "11:55:00"
         }, 
         {
@@ -1456,12 +1834,84 @@
             "time": "12:05:00"
         }, 
         {
+            "column": "104", 
+            "kind": "speech", 
+            "name": "Mr Clestus A. Avoka", 
+            "original": "the work week by week. But at this .stage, it is only fair for me to acquaint Hon Members of the nature of work that we have before us between now and our rising in December.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "the work week by week. But at this .stage, it is only fair for me to acquaint Hon Members of the nature of work that we have before us between now and our rising in December.", 
+            "time": "12:05:00"
+        }, 
+        {
+            "column": "104", 
+            "kind": "speech", 
+            "name": "Mr Clestus A. Avoka", 
+            "original": "Mr Speaker, we have 23 Bills for Presentation; two Bills for Second Reading; five Bills at the Consideration Stage and 16 Bills before various committees at various stages. I would explain that later.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "Mr Speaker, we have 23 Bills for Presentation; two Bills for Second Reading; five Bills at the Consideration Stage and 16 Bills before various committees at various stages. I would explain that later.", 
+            "time": "12:05:00"
+        }, 
+        {
+            "column": "104", 
+            "kind": "speech", 
+            "name": "Mr Clestus A. Avoka", 
+            "original": "We also have 27 Legislative Instruments to be laid; 28 Papers to be laid; two committee reports (from ECOWAS and Pan-African Parliaments); 66 other referrals to committees.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "We also have 27 Legislative Instruments to be laid; 28 Papers to be laid; two committee reports (from ECOWAS and Pan-African Parliaments); 66 other referrals to committees.", 
+            "time": "12:05:00"
+        }, 
+        {
+            "column": "104", 
+            "kind": "speech", 
+            "name": "Mr Clestus A. Avoka", 
+            "original": "These also include Questions to be asked of Hon Ministers. So, from this itinerary, we have a long. list of items to do. So, I had the opportunity of meeting the Hon Ministers yesterday and we have decided that when the Business committee meets in the future, we have to prioritize the work that we have between now and December ending.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "These also include Questions to be asked of Hon Ministers. So, from this itinerary, we have a long. list of items to do. So, I had the opportunity of meeting the Hon Ministers yesterday and we have decided that when the Business committee meets in the future, we have to prioritize the work that we have between now and December ending.", 
+            "time": "12:05:00"
+        }, 
+        {
+            "column": "104", 
+            "kind": "speech", 
+            "name": "Mr Clestus A. Avoka", 
+            "original": "Suffice it to add, Mr Speaker, that on or by the middle of November, we have to be taking the Budget from the Hon Minister for Finance and Economic Planning for and on behalf of the President. So, I recall that if the Budget starts sometime in the middle of November, it will be difficult to take legislation or other activity side by side with the Budget because the Budget is of prime importance for us to pass before we rise.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "Suffice it to add, Mr Speaker, that on or by the middle of November, we have to be taking the Budget from the Hon Minister for Finance and Economic Planning for and on behalf of the President. So, I recall that if the Budget starts sometime in the middle of November, it will be difficult to take legislation or other activity side by side with the Budget because the Budget is of prime importance for us to pass before we rise.", 
+            "time": "12:05:00"
+        }, 
+        {
+            "column": "104", 
+            "kind": "speech", 
+            "name": "Mr Clestus A. Avoka", 
+            "original": "So, I have to take this opportunity to implore Hon Members, particularly Hon Chairpersons and Ranking Members of Committees to be able to deliver their responsibilities timeously in the Chamber. I also take the opportunity to urge Hon Members to be punctual in our work in the Chamber; not just to be punctual but to be available in the Chamber for us to", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "So, I have to take this opportunity to implore Hon Members, particularly Hon Chairpersons and Ranking Members of Committees to be able to deliver their responsibilities timeously in the Chamber. I also take the opportunity to urge Hon Members to be punctual in our work in the Chamber; not just to be punctual but to be available in the Chamber for us to", 
+            "time": "12:05:00"
+        }, 
+        {
             "column": "105", 
             "kind": "continued speech", 
             "name": "Mr Clestus A. Avoka", 
             "original": "[MR AVOKA]", 
             "section": "MINISTRY OF TOURISM", 
             "speech": "do some work. I appreciate that the committees will have to work but we have to deliver in the Chamber as well. So, it is a tall order and I am confident that Hon Members will be up to the task as we have done in the past.\n I want to join Madam Speaker, who earlier on sat in the chair this morning to welcome Hon Members back on board and to urge everybody to deliver before we rise in December.\n Mr Speaker, another matter of prime importance to us is the issue of the striking doctors in the country. It is a very delicate affair. I think that our responsibility is not just making good laws to govern this country but we are also interested in the welfare of our constituents.\n Mr Speaker, the consequences of this strike action on our constituents is trite knowledge and it will be notorious for somebody to echo the trauma and the desperation going on in our country today. So, as an institution that has a responsibility for assisting to manage the affairs of this country and particularly the interest of our constituents, I think that we cannot pretend not to be part of the solution to this problem.\n Against this background, Mr Speaker, Leadership is trying to meet the Speakership so that we can draw a road map as to how we can engage the various stakeholders in this exercise. So that at the end of the day, we can come to an amicable solution so that our constituents will have the peace of mind to take care of their health and to work diligently.\n Mr Speaker, while we are trying to draw the road map to engage the various", 
+            "time": "12:05:00"
+        }, 
+        {
+            "column": "106", 
+            "kind": "speech", 
+            "name": "Mr Clestus A. Avoka", 
+            "original": "stakeholders in this exercise, let me take this opportunity, on behalf of this august House, to appeal to our striking doctors, the Ghana Medical Association, to exercise restraint and to try to save lives and souls of our constituents while we, as an independent body, also intervene to try to see how we can solve the matter.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "stakeholders in this exercise, let me take this opportunity, on behalf of this august House, to appeal to our striking doctors, the Ghana Medical Association, to exercise restraint and to try to save lives and souls of our constituents while we, as an independent body, also intervene to try to see how we can solve the matter.", 
+            "time": "12:05:00"
+        }, 
+        {
+            "column": "106", 
+            "kind": "speech", 
+            "name": "Mr Clestus A. Avoka", 
+            "original": "I thank you, Mr Speaker.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "I thank you, Mr Speaker.", 
             "time": "12:05:00"
         }, 
         {
@@ -1516,6 +1966,69 @@
             "original": "[MR KYEI-MENSAH-BONSU]", 
             "section": "MINISTRY OF TOURISM", 
             "speech": "Economic Planning to come early to this House with the Budget. The imposition of the Constitution requiring us to consider and approve of the Budget before the financial year comes to an end really constricts both space and time needed to deal scrutinizingly with the Budget that comes before us. That is Why if Budgets delay in coming, then we are left with, sometimes, about just four weeks to consider and approve of the Budget. That is not good enough. Parliament requires, at least, eight weeks to deal with the Budget.\n Increasingly, it is becoming difficult for us to have space and time to deal most diligently with Budgets that are presented to us in this House. So, let us urge the Government and also our Colleague the Hon Majority Leader, who is the Leader of Government Business, to dialogue with the Hon Minister so that this time round, we will have the Budget in the early weeks of November. If it is possible to have it, maybe in the first week of November, we will have more time dealing with it.\n Let us not forget, we have fashioned for ourselves a programme which allows us, after the presentation of the Budget, to engage experts to have a second look at it and then have a workshop with the various committee chairmen and Ranking Members to open our eyes to certain critical areas which may otherwise elude us. So it is important that we have this broad fold.\n Mr Speaker, let me also remind us that there is one critical matter that is outstanding which we have not found sufficient time to deal with. It relates to putting together and having plenary approved of this committee to delve into the unbridled activities of Fulani", 
+            "time": "12:15:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Osei Kyei Mensah-Bonsu", 
+            "original": "herdsmen. While we were away, this matter resurfaced and there were several agitations at various places in the country. Can we attend to this, possibly in the course of even this week, put a team together, a group together, resource them and allow them to begin to work?", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "herdsmen. While we were away, this matter resurfaced and there were several agitations at various places in the country. Can we attend to this, possibly in the course of even this week, put a team together, a group together, resource them and allow them to begin to work?", 
+            "time": "12:15:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Osei Kyei Mensah-Bonsu", 
+            "original": "Mr Speaker, it is also true that in spite of some strides that we have made, our countrymen and women continue to be afflicted with many challenges, in particular, challenges relating to poverty, unemployment and disease. The fruits of democracy must be the enhancement in the. quality of the lives of our people. Anything short of that would cause people to lose faith in democratic governance.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "Mr Speaker, it is also true that in spite of some strides that we have made, our countrymen and women continue to be afflicted with many challenges, in particular, challenges relating to poverty, unemployment and disease. The fruits of democracy must be the enhancement in the. quality of the lives of our people. Anything short of that would cause people to lose faith in democratic governance.", 
+            "time": "12:15:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Osei Kyei Mensah-Bonsu", 
+            "original": "That is why nobody in this country can be happy about the deadlock in the negotiations between the striking doctors and Government parties. Mr Speaker, if there is anything that we as a House can do to contribute to resolve this impasse, we would need to take those steps urgently as we can, to try to have this problem resolved.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "That is why nobody in this country can be happy about the deadlock in the negotiations between the striking doctors and Government parties. Mr Speaker, if there is anything that we as a House can do to contribute to resolve this impasse, we would need to take those steps urgently as we can, to try to have this problem resolved.", 
+            "time": "12:15:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Osei Kyei Mensah-Bonsu", 
+            "original": "Yesterday, I was woken up by my constituency chairman, informing me that a local chairman in one of the electoral areas in my constituency had lost his daughter; a pregnant woman who had gone to the Komfo Anokye Teaching Hospital to deliver. There was nobody to attend to her; they went round scampering for help, they could not touch base with any ready hands and the woman perished, the unborn baby perished; as well.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "Yesterday, I was woken up by my constituency chairman, informing me that a local chairman in one of the electoral areas in my constituency had lost his daughter; a pregnant woman who had gone to the Komfo Anokye Teaching Hospital to deliver. There was nobody to attend to her; they went round scampering for help, they could not touch base with any ready hands and the woman perished, the unborn baby perished; as well.", 
+            "time": "12:15:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Osei Kyei Mensah-Bonsu", 
+            "original": "Certainly, this cannot be right. Now is not the time to apportion blame; it is important for us to look at it dispassionately, very objectively to see how we can help to resolve this matter that is before us.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "Certainly, this cannot be right. Now is not the time to apportion blame; it is important for us to look at it dispassionately, very objectively to see how we can help to resolve this matter that is before us.", 
+            "time": "12:15:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Osei Kyei Mensah-Bonsu", 
+            "original": "Mr Speaker, next year would certainly witness elections. Last year, around this time, when we had the Budget, there were some outstanding matters relating to", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "Mr Speaker, next year would certainly witness elections. Last year, around this time, when we had the Budget, there were some outstanding matters relating to", 
+            "time": "12:15:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Osei Kyei Mensah-Bonsu", 
+            "original": "[1O9]", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "[1O9]", 
             "time": "12:15:00"
         }, 
         {

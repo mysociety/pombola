@@ -286,6 +286,24 @@
         {
             "column": "899", 
             "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "[MR SECOND DEPUTY SPEAKER IN THE", 
+            "section": "PAPERS", 
+            "speech": "[MR SECOND DEPUTY SPEAKER IN THE", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "899", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "CHAIR]", 
+            "section": "PAPERS", 
+            "speech": "CHAIR]", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "899", 
+            "kind": "speech", 
             "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: Hon Members, Presidential (Transition) Bill, 2010 at the Consideration Stage.", 
             "section": "PAPERS", 
@@ -359,6 +377,15 @@
             "original": "Mr Second Deputy Speaker: So, a question? a statement.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "So, a question? a statement.", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "909", 
+            "kind": "speech", 
+            "name": "Mr Second Deputy Speaker", 
+            "original": "Clause 7 -Availability of the handing over notes", 
+            "section": "BILLS - CONSIDERATION STAGE", 
+            "speech": "Clause 7 -Availability of the handing over notes", 
             "time": "11:15:00"
         }, 
         {

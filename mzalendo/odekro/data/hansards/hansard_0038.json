@@ -46,6 +46,60 @@
             "time": null
         }, 
         {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Ambassador Amin Amidu Sulemani, currently Ghana\u2018s Ambassador to Egypt - Minister-designate for Upper West Region.", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "Ambassador Amin Amidu Sulemani, currently Ghana\u2018s Ambassador to Egypt - Minister-designate for Upper West Region.", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Deputy Ministers-designate: Hon Stephen Ackah, Member of Parliament for Suaman - Deputy Minister -designate for the Ministry of Local Government and Rural Development;", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "Deputy Ministers-designate: Hon Stephen Ackah, Member of Parliament for Suaman - Deputy Minister -designate for the Ministry of Local Government and Rural Development;", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Mr Isaac Vanderpuiye - Deputy Minister designate for Greater Accra Region;", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "Mr Isaac Vanderpuiye - Deputy Minister designate for Greater Accra Region;", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Mr Henry Ametepey - Deputy Minister-designate for the Volta Region.", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "Mr Henry Ametepey - Deputy Minister-designate for the Volta Region.", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Kindly accept, Right Honourable, the assurances of my highest consideration.", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "Kindly accept, Right Honourable, the assurances of my highest consideration.", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "(Sgd.) PROF. JOHN EVANS ATTA MILLS", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "(Sgd.) PROF. JOHN EVANS ATTA MILLS", 
+            "time": null
+        }, 
+        {
             "heading": "PRESIDENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PRESIDENT OF THE REPUBLIC", 
@@ -300,6 +354,15 @@
         {
             "column": "104", 
             "kind": "speech", 
+            "name": "Dr A. A. Osei", 
+            "original": "newspapers and bring it to us, it might be dangerous. This is because the newspapers could be wrong, and they are wrong several times. So l do not know the source of this fact.", 
+            "section": "GHANA", 
+            "speech": "newspapers and bring it to us, it might be dangerous. This is because the newspapers could be wrong, and they are wrong several times. So l do not know the source of this fact.", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "104", 
+            "kind": "speech", 
             "name": "Madam Speaker", 
             "original": "Madam Speaker: Well, l would agree with you in respect of, maybe, the Deputy Ministers who have not yet been vetted. Is it not? But with - for instance, l, like you are saying, most of them have already been vetted, have they not; so that even if it is printed here -", 
             "section": "GHANA", 
@@ -349,6 +412,15 @@
             "original": "Dr A. A. Osei: Madam Speaker, Ministers act for their Colleagues all the time. For example, when Hon Joseph Yieleh Chireh went on sick leave, Hon Haruna Iddrisu was acting for him but we never published it in here as Acting Minister. So they act for their Colleagues all the time.", 
             "section": "GHANA", 
             "speech": "Madam Speaker, Ministers act for their Colleagues all the time. For example, when Hon Joseph Yieleh Chireh went on sick leave, Hon Haruna Iddrisu was acting for him but we never published it in here as Acting Minister. So they act for their Colleagues all the time.\n My concern is that, this is saying that officially, this House is accepting that Hon Dr Kunbuor has been appointed as Acting Attorney-General and Minister for Justice and unless there is official communication to the House, it can be dangerous if we are picking the information from the newspapers.\n This is because Ministers act for their Colleagues all the time and where do we take it as official and not? The Daily Graphic, Ghanaian Times, they make mistakes all the time. So we should be careful the source of the information that we put in the Hansard. The Hansard should accurately reflect what this House knows officially, not what is in the public domain, otherwise, we would be heading towards trouble. It is not a good practice; I think we need to be guided by it.", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "106", 
+            "kind": "speech", 
+            "name": "Dr A. A. Osei", 
+            "original": "11.10.a.m.", 
+            "section": "GHANA", 
+            "speech": "11.10.a.m.", 
             "time": "11:00:00"
         }, 
         {
@@ -435,6 +507,33 @@
         {
             "column": "108", 
             "kind": "speech", 
+            "name": "Mr Hackman Owusu-Agyemang", 
+            "original": "Speaker, I wonder whether communication to your goodself must be made public before it comes to you. In other words, I am saying that it is not the best of practices when the letter being written to the Third Lady of the nation and to this august House, should then be given to the public, to the press before it comes to your goodself.", 
+            "section": "GHANA", 
+            "speech": "Speaker, I wonder whether communication to your goodself must be made public before it comes to you. In other words, I am saying that it is not the best of practices when the letter being written to the Third Lady of the nation and to this august House, should then be given to the public, to the press before it comes to your goodself.", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Hackman Owusu-Agyemang", 
+            "original": "So, even though the practice has been that the Presidential Spokesperson will announce this or that, maybe, the time has come to revisit that particular issue. This is because I sincerely believe that issues to be put before you should not be in the public domain before your goodself reads it and before the House has been informed.", 
+            "section": "GHANA", 
+            "speech": "So, even though the practice has been that the Presidential Spokesperson will announce this or that, maybe, the time has come to revisit that particular issue. This is because I sincerely believe that issues to be put before you should not be in the public domain before your goodself reads it and before the House has been informed.", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
+            "name": "Mr Hackman Owusu-Agyemang", 
+            "original": "So, I believe that the Hon Leader must take it in good faith that the point being canvassed by the Hon Member for Old Tafo is that, once it has not been officially done here, it cannot be recorded in our official book. Otherwise, the next time - I heard rumours that the Hon Majority Leader was going to be removed and then you go ahead and put it in the official record that the Hon Majority Leader is going to be removed. Or you hear that Hon Yieleh Chireh is going to go, then put it there. You cannot do that. It is against the rules; you cannot do that.", 
+            "section": "GHANA", 
+            "speech": "So, I believe that the Hon Leader must take it in good faith that the point being canvassed by the Hon Member for Old Tafo is that, once it has not been officially done here, it cannot be recorded in our official book. Otherwise, the next time - I heard rumours that the Hon Majority Leader was going to be removed and then you go ahead and put it in the official record that the Hon Majority Leader is going to be removed. Or you hear that Hon Yieleh Chireh is going to go, then put it there. You cannot do that. It is against the rules; you cannot do that.", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "108", 
+            "kind": "speech", 
             "name": "Madam Speaker", 
             "original": "Madam Speaker: Hon Member, there is a difference between that and the report in the papers that the President has said that somebody is going to be shifted; is -it there? Or just ordinary rumour that I heard. So, let us differentiate that.", 
             "section": "GHANA", 
@@ -464,6 +563,15 @@
             "original": "Papa Owusu-Ankomah: Madam Speaker, events occur for us to take a look at past and existing practices and see how best we can put in place measures that will strengthen our democratic ethos and government. I raised this matter sometime yesterday.", 
             "section": "GHANA", 
             "speech": "Madam Speaker, events occur for us to take a look at past and existing practices and see how best we can put in place measures that will strengthen our democratic ethos and government. I raised this matter sometime yesterday.\n Madam Speaker, what you are saying is entirely correct; however, we transact business of government on the floor of this House. And my experience in government is that, when we even have reshuffles, the Hon Ministers who do not need to be vetted, do not immediately take over. There is usually a time lapse. But it is dealt with administratively. It is not known by the House but that also creates problems for us.\n So, I think in all these things - it may help in terms of parliamentary business and the conduct of government business for the Hon Majority Leader to be able to advise the House when the Hon Ministers are even supposed to assume duty, even though it has not been done in the past. It is really not the best. Of course, we may take cognisance of public announce- ments.\n Now, we know that Hon E. T. Mensah is the Hon Minister for Water Resources, Works and Housing. Can we recognise him? Hon Alban Bagbin is the Hon Minister for Health. Probably, in the letters advising them, it may not be immediate but this House does not know. So, do we entertain Hon Bagbin as the Hon Minister for Water Resources, Works and Housing? So, I am saying that we are dealing with governance; as a nation, we progress.\n So, the Leadership, together with Madam Speaker, may discuss these things and find a way which will enable us move ahead democratically. But to be dogmatic and say that this was what we have been", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "110", 
+            "kind": "speech", 
+            "name": "Papa Owusu-Ankomah", 
+            "original": "doing in the past, I do not think it will really helps us. After all, we are growing. Somebody was 10 years, 30 or 40 years ago. He is now not 10 years. We are growing.", 
+            "section": "GHANA", 
+            "speech": "doing in the past, I do not think it will really helps us. After all, we are growing. Somebody was 10 years, 30 or 40 years ago. He is now not 10 years. We are growing.", 
             "time": "11:00:00"
         }, 
         {
@@ -568,6 +676,33 @@
         {
             "column": "112", 
             "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "know you would talk about what happens on the day. But this was a day before and I think it is the 24th. If that is so, 25th things happened, 26th things happened, 27th things happened, and I think the real issue is, we should really know the official position, not get it from the newspapers.", 
+            "section": "GHANA", 
+            "speech": "know you would talk about what happens on the day. But this was a day before and I think it is the 24th. If that is so, 25th things happened, 26th things happened, 27th things happened, and I think the real issue is, we should really know the official position, not get it from the newspapers.", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "112", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "But a real official position - they are expecting that you as Leader of the House should be able to inform us. Of course, you would not be able to inform us what would happened later to that day, but the day that this is coming out, we should know the official position. I think this is the issue.", 
+            "section": "GHANA", 
+            "speech": "But a real official position - they are expecting that you as Leader of the House should be able to inform us. Of course, you would not be able to inform us what would happened later to that day, but the day that this is coming out, we should know the official position. I think this is the issue.", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "112", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "What do you say to that?", 
+            "section": "GHANA", 
+            "speech": "What do you say to that?", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "112", 
+            "kind": "speech", 
             "name": "Mr Avoka", 
             "original": "Mr Avoka: Madam Speaker, I think that the issues raised are quite interesting and quite valid. My position is, I do not want it to be the case that what is happening is a departure from what has happened in the past. I think we have been talking the same language. We agree that, one, Ministers who are newly nominated, their names would have to come here, appear before the Appointments Committee, vetted and approved; we understand.", 
             "section": "GHANA", 
@@ -635,12 +770,174 @@
             "time": "11:20:00"
         }, 
         {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "design and engineering;", 
+            "section": "MOTIONS", 
+            "speech": "design and engineering;", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "dredging of impoundment weir to increase storage capacity;", 
+            "section": "MOTIONS", 
+            "speech": "dredging of impoundment weir to increase storage capacity;", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "rehabilitation of existing water treatment plant; .", 
+            "section": "MOTIONS", 
+            "speech": "rehabilitation of existing water treatment plant; .", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "rehabilitation of booster stations;", 
+            "section": "MOTIONS", 
+            "speech": "rehabilitation of booster stations;", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "construction of additional 2,500m3/ day Water Treatment Plant;", 
+            "section": "MOTIONS", 
+            "speech": "construction of additional 2,500m3/ day Water Treatment Plant;", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "new water transmission pipelines;", 
+            "section": "MOTIONS", 
+            "speech": "new water transmission pipelines;", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "rehabilitation and extension of distribution network;", 
+            "section": "MOTIONS", 
+            "speech": "rehabilitation and extension of distribution network;", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "installation of community stand- pipes;", 
+            "section": "MOTIONS", 
+            "speech": "installation of community stand- pipes;", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "construction of sludge Treatment Facility; and", 
+            "section": "MOTIONS", 
+            "speech": "construction of sludge Treatment Facility; and", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "technical and post-construction operational support.", 
+            "section": "MOTIONS", 
+            "speech": "technical and post-construction operational support.", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The project aims at enabling Ghana Water Company Limited enhance access to potable water and improve productivity of the inhabitants. This will pave the way for economic development, growth and poverty reduction It would also boost business opportunities mainly industrial and commercial activities and maximize the social and health benefits of clean and reliable drinking water.", 
+            "section": "MOTIONS", 
+            "speech": "The project aims at enabling Ghana Water Company Limited enhance access to potable water and improve productivity of the inhabitants. This will pave the way for economic development, growth and poverty reduction It would also boost business opportunities mainly industrial and commercial activities and maximize the social and health benefits of clean and reliable drinking water.", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "3.0 Approval of the Credit Agreement", 
+            "section": "MOTIONS", 
+            "speech": "3.0 Approval of the Credit Agreement", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "116", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Parliament on Tuesday, 7th May, 2010 approved by Resolution the Credit Agreement between the Government of Ghana and the Export-Import Bank of the", 
+            "section": "MOTIONS", 
+            "speech": "Parliament on Tuesday, 7th May, 2010 approved by Resolution the Credit Agreement between the Government of Ghana and the Export-Import Bank of the", 
+            "time": "11:20:00"
+        }, 
+        {
             "column": "117", 
             "kind": "continued speech", 
             "name": "Chairman of the Committee (Mr James K. Avedzi)", 
             "original": "[MRAVEDZI]", 
             "section": "MOTIONS", 
             "speech": "United States ofAmerica for an amount of twenty-three million, one hundred and twelve thousand, seven hundred and twenty-three US dollars (US$23,122,723.00) for the construction of the Mampong water supply expansion project.\n 4.0 Required waiver\n The total amount of taxes liabilities of equipment materials; and corporate as well as expatriate income taxes required to be waived is the sum of US$4,666,833 and GH\u00a2 1,368, 139.38 respectively.\n Attached as Appendix 1-6 are assessments conducted by the Customs, Excise and Preventive Service (CEPS) on the tax liability to be waived and expatriate income tax required.\n 5.0 Observations\n The Committee noted that tax assessment was made on the following by the (CEPS):\n One unit station wagon pipes and utensils - US$6,002,l90.00\n Three units D/C pick-ups and two units saloon cars--US$l40,942.00\n One unit crane-mounted truck pumps, printers, scanner, desktop computer, laptop and software - US$737,617.00\n Water treatment plant accessories, building and civil materials, electrical equipment, photocopies, fax machines - US$6,889,200.00\n Total tax liability-US$4,666,833.00", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "118", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee observed that the project is being financed by the Government of Ghana and the Export- Import Bank of the United States of America at the cost of twenty-three million, one hundred and twelve thousand, seven hundred and twenty-three US dollars (US$23,l12,723.00).", 
+            "section": "MOTIONS", 
+            "speech": "The Committee observed that the project is being financed by the Government of Ghana and the Export- Import Bank of the United States of America at the cost of twenty-three million, one hundred and twelve thousand, seven hundred and twenty-three US dollars (US$23,l12,723.00).", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "118", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee noted that the facility will enable Ghana Water Company Limited enhance access to potable water and improve productivity of the inhabitants- It would pave the way for economic development, growth and poverty reduction. It would also boost business opportunities mainly industrial and commercial activities and maximize the social and health benefits of clean and reliable drinking water.", 
+            "section": "MOTIONS", 
+            "speech": "The Committee noted that the facility will enable Ghana Water Company Limited enhance access to potable water and improve productivity of the inhabitants- It would pave the way for economic development, growth and poverty reduction. It would also boost business opportunities mainly industrial and commercial activities and maximize the social and health benefits of clean and reliable drinking water.", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "118", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee has carefully considered the request and found that the tax waiver is necessary for the smooth implementation of the Mampong Water supply rehabilitation and Expansion project.", 
+            "section": "MOTIONS", 
+            "speech": "The Committee has carefully considered the request and found that the tax waiver is necessary for the smooth implementation of the Mampong Water supply rehabilitation and Expansion project.", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "118", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee, therefore, recom- mends to the House to adopt this Report and approve by Resolution, the waiver of tax liability on equipment and materials, corporate Income Taxes as wells as Expatriate income tax in the sum of four million, six hundred and sixty-six thousand, eight hundred and thirty-three United States dollars (US$4,666,833.00) and one million, three hundred and sixty- eighty thousand, one hundred and thirty- nine Ghana cedis, thirty-eight pesewas (GH\u00a21,368,139.38) respectively, for the Mampong water supply rehabilitation and expansion project in accordance with article 174(2) of the Constitution.", 
+            "section": "MOTIONS", 
+            "speech": "The Committee, therefore, recom- mends to the House to adopt this Report and approve by Resolution, the waiver of tax liability on equipment and materials, corporate Income Taxes as wells as Expatriate income tax in the sum of four million, six hundred and sixty-six thousand, eight hundred and thirty-three United States dollars (US$4,666,833.00) and one million, three hundred and sixty- eighty thousand, one hundred and thirty- nine Ghana cedis, thirty-eight pesewas (GH\u00a21,368,139.38) respectively, for the Mampong water supply rehabilitation and expansion project in accordance with article 174(2) of the Constitution.", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "118", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Respectfully submitted.", 
+            "section": "MOTIONS", 
+            "speech": "Respectfully submitted.", 
             "time": "11:20:00"
         }, 
         {
@@ -805,6 +1102,24 @@
         {
             "column": "134", 
             "kind": "speech", 
+            "name": "Mr Hackman Owusu-Agyemang (NPP -New Juaben North)", 
+            "original": "So I would like to submit that the Hon Minister, fortunately, is here today- our good Friend would do a very comprehensive study of these waivers. In some cases, they are huge, especially when you find that you have a 133-million dollar project, 16 million dollars of it is just insurance and all these things and then eventually, they, who are enjoying these- high salaries and benefits are the ones Who are absolved from paying the taxes- And then the ordinary Ghanaian who is borrowing, who is being fleeced, is then not benefiting from it.", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "So I would like to submit that the Hon Minister, fortunately, is here today- our good Friend would do a very comprehensive study of these waivers. In some cases, they are huge, especially when you find that you have a 133-million dollar project, 16 million dollars of it is just insurance and all these things and then eventually, they, who are enjoying these- high salaries and benefits are the ones Who are absolved from paying the taxes- And then the ordinary Ghanaian who is borrowing, who is being fleeced, is then not benefiting from it.", 
+            "time": "11:30:00"
+        }, 
+        {
+            "column": "134", 
+            "kind": "speech", 
+            "name": "Mr Hackman Owusu-Agyemang (NPP -New Juaben North)", 
+            "original": "So inasmuch as I support the Motion, I would like to humbly request the Hon Minister to let one of his staff to really delve deep into these issues and find out. This is because many a time, we approve frivolous exemptions and at the end of the day, as I said, it does not benefit us. But as I said, where we have double taxation agreements, then Madam Speaker, we would like to know whether this has been taken good cognizance of This is because I believe they must pay it to us and then refuse to pay it to the United Kingdom (U.K). The United Kingdom has made so much money, so has Holland and most of these countries. Then they rather go and pay to Holland or UK. instead of paying it to us. And the laws are very clear, Madam Speaker; and that is what I also want us to canvass.", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "So inasmuch as I support the Motion, I would like to humbly request the Hon Minister to let one of his staff to really delve deep into these issues and find out. This is because many a time, we approve frivolous exemptions and at the end of the day, as I said, it does not benefit us. But as I said, where we have double taxation agreements, then Madam Speaker, we would like to know whether this has been taken good cognizance of This is because I believe they must pay it to us and then refuse to pay it to the United Kingdom (U.K). The United Kingdom has made so much money, so has Holland and most of these countries. Then they rather go and pay to Holland or UK. instead of paying it to us. And the laws are very clear, Madam Speaker; and that is what I also want us to canvass.", 
+            "time": "11:30:00"
+        }, 
+        {
+            "column": "134", 
+            "kind": "speech", 
             "name": "Mr Moses Asaga (NDC - Nabdam)", 
             "original": "Mr Moses Asaga (NDC - Nabdam): Madam Speaker, I think this is a standard practice where there is always a waiver for such projects. And I think this particular loan is meant for a water project in Mampong and it is the ordinary people of Mampong who should be rejoicing, that such a loan agreement has been approved and there is a waiver for taxes.", 
             "section": "IN ASHANTI REGION", 
@@ -827,6 +1142,33 @@
             "original": "Mr Albert Kan-Dapaah (NPP - Afigya-Sekyere West): Madam Speaker, I am much aware of the water problems confronting the people of Mampong and I was one of those people who were very happy when the loan came.", 
             "section": "IN ASHANTI REGION", 
             "speech": "Madam Speaker, I am much aware of the water problems confronting the people of Mampong and I was one of those people who were very happy when the loan came.\n But Madam Speaker, just a couple of issues -- the first one of which my Hon Colleague, Hon Dr Akoto Osei has talked about.The exemption that they seek refer to items such as microwave, coffee maker and utensils. This is scandalous. Obviously, the agreement granting them the tax exemptions was not thinking of items like these. If we are not careful, the next time they come, it will be for their clothes, their personal clothing. and obviously, we need to have a second look at this.\n Madam Speaker, the second issue I would want to raise, is that We have the duty as Parliament to go through this exemption and give it to them but we also have an oversight responsibility and I would have been more comfortable - today somebody was telling us, yes, the goods have arrived and that they are being used in Mampong and whether the project is going on at all. We have no", 
+            "time": "11:40:00"
+        }, 
+        {
+            "column": "136", 
+            "kind": "speech", 
+            "name": "Mr Albert Kan-Dapaah (NPP - Afigya-Sekyere West)", 
+            "original": "such assurance. We are being asked to grant the exemptions. I think it will be better if in future such reports can come with reports probably, from other committees to certify that, yes, the work is going on satisfactorily, the equipment, we have seen and that we are all right to give them the exemptions. Just to be very sure that we are not giving them exemptions which they will use for other purposes.", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "such assurance. We are being asked to grant the exemptions. I think it will be better if in future such reports can come with reports probably, from other committees to certify that, yes, the work is going on satisfactorily, the equipment, we have seen and that we are all right to give them the exemptions. Just to be very sure that we are not giving them exemptions which they will use for other purposes.", 
+            "time": "11:40:00"
+        }, 
+        {
+            "column": "136", 
+            "kind": "speech", 
+            "name": "Mr Albert Kan-Dapaah (NPP - Afigya-Sekyere West)", 
+            "original": "This is because we are witnesses to all sort of things that can happen in the developing world and also in our country. So if we can be a bit careful and exercise that oversight responsibility, I think it will be in order.", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "This is because we are witnesses to all sort of things that can happen in the developing world and also in our country. So if we can be a bit careful and exercise that oversight responsibility, I think it will be in order.", 
+            "time": "11:40:00"
+        }, 
+        {
+            "column": "136", 
+            "kind": "speech", 
+            "name": "Mr Albert Kan-Dapaah (NPP - Afigya-Sekyere West)", 
+            "original": "In any case, Madam Speaker, as I said, I am very much aware of the difficulties confronting the people of Mampong as far as water is concerned and just as I Sllpp0riI6(l the original loan agreement, I have no problem supporting in principle the tax waiver, except to put on record that I find granting tax exemptions for microwaves, coffee makers and utensils rather a bit scandalous -", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "In any case, Madam Speaker, as I said, I am very much aware of the difficulties confronting the people of Mampong as far as water is concerned and just as I Sllpp0riI6(l the original loan agreement, I have no problem supporting in principle the tax waiver, except to put on record that I find granting tax exemptions for microwaves, coffee makers and utensils rather a bit scandalous -", 
             "time": "11:40:00"
         }, 
         {
@@ -863,6 +1205,15 @@
             "original": "Mr Hackman Owusu-Agyemang: On a point of order.", 
             "section": "IN ASHANTI REGION", 
             "speech": "On a point of order.\n Madam Speaker, we are not saying that We have not done this in the past. We are saying it is time now maybe, to take a look at the whole practice and to see how best we can make efficacious and to the benefit of the people of Ghana. That is all that we are saying. They must not make it look as if we are against the project.\n We have supported it fully; We continue to support it but we think that a few things need to be looked at as we develop in the nation. So our systems must also develop in tandem with our process and especially to avoid the situation where money, which", 
+            "time": "11:40:00"
+        }, 
+        {
+            "column": "138", 
+            "kind": "speech", 
+            "name": "Mr Hackman Owusu-Agyemang", 
+            "original": "should come to us rather would be paid to the metropolis. That is what we are saying.", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "should come to us rather would be paid to the metropolis. That is what we are saying.", 
             "time": "11:40:00"
         }, 
         {
@@ -1019,6 +1370,15 @@
             "time": "11:50:00"
         }, 
         {
+            "column": "142", 
+            "kind": "speech", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
+            "original": "the demand is and what indeed, the per capita delivery is going to be. Delivery of the potable water, they are telling us the demand - it is to satisfy the demand. What is the demand for 90,000 people? And what is going to be the per capita delivery of potable water in this case?", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "the demand is and what indeed, the per capita delivery is going to be. Delivery of the potable water, they are telling us the demand - it is to satisfy the demand. What is the demand for 90,000 people? And what is going to be the per capita delivery of potable water in this case?", 
+            "time": "11:50:00"
+        }, 
+        {
             "action": "rose", 
             "kind": "action", 
             "name": "Mr Asaga", 
@@ -1113,6 +1473,15 @@
             "original": "Mr Kyei-Mensah-Bonsu: Madam Speaker, as the Hon Chairman said, it brings the total capacity to 5,000 cubic meters per day and I am asking how it translates to per capita delivery because -", 
             "section": "IN ASHANTI REGION", 
             "speech": "Madam Speaker, as the Hon Chairman said, it brings the total capacity to 5,000 cubic meters per day and I am asking how it translates to per capita delivery because -", 
+            "time": "11:50:00"
+        }, 
+        {
+            "column": "144", 
+            "kind": "speech", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
+            "original": "Of course, that one is computed normally in gallons and we know the minimum as prescribed by the United Nations. So, for him to tell us that this will meet the demand, he should be able to tell us what the per capita delivery is. Can he respond to that?", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "Of course, that one is computed normally in gallons and we know the minimum as prescribed by the United Nations. So, for him to tell us that this will meet the demand, he should be able to tell us what the per capita delivery is. Can he respond to that?", 
             "time": "11:50:00"
         }, 
         {
@@ -1357,6 +1726,15 @@
             "time": "11:50:00"
         }, 
         {
+            "column": "148", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Hon Minister for Finance and Economic Planning, it is a Resolution but you - Which item then on the Order Paper?", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "Hon Minister for Finance and Economic Planning, it is a Resolution but you - Which item then on the Order Paper?", 
+            "time": "11:50:00"
+        }, 
+        {
             "heading": "RESOLUTIONS", 
             "kind": "heading", 
             "original": "RESOLUTIONS", 
@@ -1410,6 +1788,24 @@
         {
             "column": "150", 
             "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "[MR FIRST DEPUTY SPEAKER IN THE", 
+            "section": "RESOLUTIONS", 
+            "speech": "[MR FIRST DEPUTY SPEAKER IN THE", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "150", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "CHAIR]", 
+            "section": "RESOLUTIONS", 
+            "speech": "CHAIR]", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "150", 
+            "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, item 6 on the Order Paper.", 
             "section": "RESOLUTIONS", 
@@ -1429,6 +1825,105 @@
             "original": "Chairman of the Committee (Mr James K. Avedzi): Mr Speaker, I rise to support the Motion and in doing so, present your Committee\u2019s Report.", 
             "section": "BILLS-SECOND READING", 
             "speech": "Mr Speaker, I rise to support the Motion and in doing so, present your Committee\u2019s Report.\n 1.0 Introduction\n The National Fiscal Stbilization Levy (Repeal) Bill, 201 1 was presented and read the First time in the House on Friday, 16th December, 2011 and, referred to the Finance Committee for consideration and report, in accordance with the Constitution and Standing Orders of the House.\n The Committee subsequently met and considered the Bill with the Deputy Minister for Finance and Economic Planning, Hon Seth Terkpeh, Commissioner-General of the Ghana Revenue Authority and officials from the Ministry of Finance and Economic Planning (MOFEP) and the Ghana Revenue Authority (GRA) and presents this Report", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "to the House pursuant to Order 161(1) of the Standing Orders of the House. 2. Purpose of the Bill 1 The purpose of the Bill is to repeal the National Fiscal Stabilization Levy Act, 2009 (Act 785).", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "to the House pursuant to Order 161(1) of the Standing Orders of the House. 2. Purpose of the Bill 1 The purpose of the Bill is to repeal the National Fiscal Stabilization Levy Act, 2009 (Act 785).", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "3.0Content of the Bill", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "3.0Content of the Bill", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Bill contains a total of two (2) clauses.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "The Bill contains a total of two (2) clauses.", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Clause I repeals the National Fiscal Stabilization Levy Act, 2009 (Act 785).", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "Clause I repeals the National Fiscal Stabilization Levy Act, 2009 (Act 785).", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Clause 2 makes transitional provisions to preserve the rights, liabilities and obligations in existence immediately before the commencement of this Act, when passed.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "Clause 2 makes transitional provisions to preserve the rights, liabilities and obligations in existence immediately before the commencement of this Act, when passed.", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "4.0 Observations", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "4.0 Observations", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee observed that the National Fiscal StabihiationAct, 2009 (Act 785) was introduced in the second half of the year 2009 to raise funds for national development. Even though the Act was initially for a period of eighteen (18) months, Government extended the duration of the levy for an additional one year with a pledge to discontinue it thereafter.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "The Committee observed that the National Fiscal StabihiationAct, 2009 (Act 785) was introduced in the second half of the year 2009 to raise funds for national development. Even though the Act was initially for a period of eighteen (18) months, Government extended the duration of the levy for an additional one year with a pledge to discontinue it thereafter.", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "It was noted that this repeal Bill is in fulfillment of the pledge by Government to discontinue the levy.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "It was noted that this repeal Bill is in fulfillment of the pledge by Government to discontinue the levy.", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "5.0 Conclusion", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "5.0 Conclusion", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee respectfully recommends to the House to pass the National Fiscal Stabilization Levy (Repeal) Bill, 2011.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "The Committee respectfully recommends to the House to pass the National Fiscal Stabilization Levy (Repeal) Bill, 2011.", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Respectfully submitted.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "Respectfully submitted.", 
             "time": "12:10:00"
         }, 
         {
@@ -1528,6 +2023,24 @@
             "original": "Mr First Deputy Speaker: Hon Minority Leader, when the Hon Minority Chief Whip raised the point, I was carried away, but when I looked at clause 2 of the Bill again, I see it is a saving clause. So if", 
             "section": "BILLS-SECOND READING", 
             "speech": "Hon Minority Leader, when the Hon Minority Chief Whip raised the point, I was carried away, but when I looked at clause 2 of the Bill again, I see it is a saving clause. So if", 
+            "time": "12:20:00"
+        }, 
+        {
+            "column": "156", 
+            "kind": "speech", 
+            "name": "Mr First Deputy Speaker", 
+            "original": "somebody or a certain right has accrued, then that right has to be pursued. So I think that the main important point of this Bill, really, is that saving clause 2 of the Bill.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "somebody or a certain right has accrued, then that right has to be pursued. So I think that the main important point of this Bill, really, is that saving clause 2 of the Bill.", 
+            "time": "12:20:00"
+        }, 
+        {
+            "column": "156", 
+            "kind": "speech", 
+            "name": "Mr First Deputy Speaker", 
+            "original": "But with regard to the clause 1, you have a very important point there because it is time-bound. In terms of clause 2, it is very, very key because if somebody is liable to pay within that period and he did not pay, an obligation is on him to pay. A certain right has already accrued by law, so it will protect that right and that obligation in clause 2 of the Bill.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "But with regard to the clause 1, you have a very important point there because it is time-bound. In terms of clause 2, it is very, very key because if somebody is liable to pay within that period and he did not pay, an obligation is on him to pay. A certain right has already accrued by law, so it will protect that right and that obligation in clause 2 of the Bill.", 
             "time": "12:20:00"
         }, 
         {
@@ -1737,6 +2250,105 @@
         {
             "column": "164", 
             "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "5 .0 Amendments Proposed", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "5 .0 Amendments Proposed", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "i. Clause I -Amendment Proposed- Second column of Table, under the heading \"Tariff Description\" , line 1, before \"packaging\" insert \"plastic\" and in paragraph (a) of that column, delete \"sachet/bottled water\" and insert \"plastic packaging for sachet and bottled water.\"", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "i. Clause I -Amendment Proposed- Second column of Table, under the heading \"Tariff Description\" , line 1, before \"packaging\" insert \"plastic\" and in paragraph (a) of that column, delete \"sachet/bottled water\" and insert \"plastic packaging for sachet and bottled water.\"", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "ii Clause 2-Amendment Proposed- Delete and insert the following:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "ii Clause 2-Amendment Proposed- Delete and insert the following:", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "\"2. Repeals", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"2. Repeals", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "The following provisions are hereby repealed:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "The following provisions are hereby repealed:", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "(a) Tariff No. 6 of the Fifth Schedule of the Customs and Excise (Duties and Other Taxes) Act, 1996 (Act 512), and", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "(a) Tariff No. 6 of the Fifth Schedule of the Customs and Excise (Duties and Other Taxes) Act, 1996 (Act 512), and", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "(b) Tariff No. 6 of sectional (a) of the Customs and Excise (Duties and Other Taxes) Act, 2010 (Act", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "(b) Tariff No. 6 of sectional (a) of the Customs and Excise (Duties and Other Taxes) Act, 2010 (Act", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "809).\"", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "809).\"", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "iii. Long Title -Amendment Proposed -After \"to\" in line 2, delete all words and insert \"review environmental excise tax on plastic packaging materials and to provide for exemptions\"", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "iii. Long Title -Amendment Proposed -After \"to\" in line 2, delete all words and insert \"review environmental excise tax on plastic packaging materials and to provide for exemptions\"", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "6.0 Conclusion The Committee respectfully recommends to the House to pass the Customs and Excise (Duties and Other Taxes) (Amendment) Bill, 20 ll, subject to the amendments proposed.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "6.0 Conclusion The Committee respectfully recommends to the House to pass the Customs and Excise (Duties and Other Taxes) (Amendment) Bill, 20 ll, subject to the amendments proposed.", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee(Mr James K. Avedzi)", 
+            "original": "Respectfully submitted.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Respectfully submitted.", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "164", 
+            "kind": "speech", 
             "name": "Dr A. A. Osei", 
             "original": "Dr A. A. Osei: Mr Speaker, I do not have any contribution. During the Consideration Stage, We shall discuss the amendments.", 
             "section": "BILLS -SECOND READING", 
@@ -1786,6 +2398,69 @@
             "time": "12:40:00"
         }, 
         {
+            "column": "166", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "1.0 Introduction", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "1.0 Introduction", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "166", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Internal Revenue (Amendment) (N o. 2) Bill, 2011 was presented and read the First time in the House on Friday, 16th December, 2011 and referred to the Finance Committee for consideration and report in accordance with the Constitution and Standing Orders of the House.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "The Internal Revenue (Amendment) (N o. 2) Bill, 2011 was presented and read the First time in the House on Friday, 16th December, 2011 and referred to the Finance Committee for consideration and report in accordance with the Constitution and Standing Orders of the House.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "166", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee met and considered the Bill with the Minister for Finance and Economic Planning, Hon Dr Kwabena Duffuor, Deputy Minister for Finance and Economic Planning, Hon Seth Terkpeh and officials from the Ghana Revenue Authority and the Ministry of Finance and Economic Planning and hereby presents this Report to the House, pursuant to Order 161(1) of the Standing Orders of the House.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "The Committee met and considered the Bill with the Minister for Finance and Economic Planning, Hon Dr Kwabena Duffuor, Deputy Minister for Finance and Economic Planning, Hon Seth Terkpeh and officials from the Ghana Revenue Authority and the Ministry of Finance and Economic Planning and hereby presents this Report to the House, pursuant to Order 161(1) of the Standing Orders of the House.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "166", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "2.0 Background", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "2.0 Background", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "166", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Ghana Stock Exchange (GSE) has enjoyed tax holidays for the past twenty years. Total capitalisation of the Exchange has, however, not met the country\u2019s expectation. There is therefore the need to extend the tax holiday of the Exchange for another five years.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "The Ghana Stock Exchange (GSE) has enjoyed tax holidays for the past twenty years. Total capitalisation of the Exchange has, however, not met the country\u2019s expectation. There is therefore the need to extend the tax holiday of the Exchange for another five years.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "166", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Personal income tax continues to be used as a measure for equitable distribution of income and also for the protection of low income earners. The upward revision of the income tax thresholds and brackets would help cushion taxpayers from the impact of inflation trends in the country by compensating for the losses in purchasing power of income earners.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Personal income tax continues to be used as a measure for equitable distribution of income and also for the protection of low income earners. The upward revision of the income tax thresholds and brackets would help cushion taxpayers from the impact of inflation trends in the country by compensating for the losses in purchasing power of income earners.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "166", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "In accordance with established practice in the extractive industry, income tax rate for mining companies is\" being increased from the current twenty-five per cent to thirty-five per cent.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "In accordance with established practice in the extractive industry, income tax rate for mining companies is\" being increased from the current twenty-five per cent to thirty-five per cent.", 
+            "time": "12:40:00"
+        }, 
+        {
             "column": "167", 
             "kind": "continued speech", 
             "name": "Chairman of the Committee (Mr James K. Avedzi)", 
@@ -1795,12 +2470,390 @@
             "time": "12:40:00"
         }, 
         {
+            "column": "168", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "industry from 22 per cent to 20 per cent while increasing the income tax rate applicable to mining companies to 35 per cent.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "industry from 22 per cent to 20 per cent while increasing the income tax rate applicable to mining companies to 35 per cent.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "168", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Clause 5 provides for the amendment of the third Schedule of Act 5 92 to stipulate \"classes of depreciable asset\" and the rates of depreciation applicable to them.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Clause 5 provides for the amendment of the third Schedule of Act 5 92 to stipulate \"classes of depreciable asset\" and the rates of depreciation applicable to them.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "168", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "4.0 Observations", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "4.0 Observations", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "168", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee observed that the Bill would promote the capital market by extending the tax holiday enjoyed by the Ghana Stock Exchange. It would also protect low income earners in particular and all individuals in general from the effect of inflation on their incomes by adjusting the income tax brackets (bands) upwards.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "The Committee observed that the Bill would promote the capital market by extending the tax holiday enjoyed by the Ghana Stock Exchange. It would also protect low income earners in particular and all individuals in general from the effect of inflation on their incomes by adjusting the income tax brackets (bands) upwards.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "168", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Hon Members of the Committee were assured that with the new thresholds and brackets, income earners whose income remain the same Would pay lesser income tax.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Hon Members of the Committee were assured that with the new thresholds and brackets, income earners whose income remain the same Would pay lesser income tax.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "168", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "It was further noted that the corporate tax rate of companies principally engaged in the hotel industry would be reduced from 22 per cent to 20 per cent upon the passage of the Bill into an Act.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "It was further noted that the corporate tax rate of companies principally engaged in the hotel industry would be reduced from 22 per cent to 20 per cent upon the passage of the Bill into an Act.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "168", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee was informed that a separate Bill on \u2018windfall profit tax\u2019 of extractive industries is currently being prepared and would soon be laid before Parliament for consideration and passage. It was noted that the brackets (bands) for personal income tax rates are adjusted annually to keep the rates in consonance with inflation and the loss of value of same amount of income.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "The Committee was informed that a separate Bill on \u2018windfall profit tax\u2019 of extractive industries is currently being prepared and would soon be laid before Parliament for consideration and passage. It was noted that the brackets (bands) for personal income tax rates are adjusted annually to keep the rates in consonance with inflation and the loss of value of same amount of income.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "168", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Members advised the Ghana Revenue Authority to intensify public education on the advantages offered by the Bill, especially to individual low income earners.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Members advised the Ghana Revenue Authority to intensify public education on the advantages offered by the Bill, especially to individual low income earners.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "[MRAVEDZI", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "[MRAVEDZI", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "4.1 Amendments Proposed", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "4.1 Amendments Proposed", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "The Committee respectfully proposes the following amendments to the Bill:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "The Committee respectfully proposes the following amendments to the Bill:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "i. Clause 5 - Amendment proposed - paragraph (a), line l, delete \"Clause\" and insert \"paragraph\".", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "i. Clause 5 - Amendment proposed - paragraph (a), line l, delete \"Clause\" and insert \"paragraph\".", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "ii. Clause 5 - Amendment proposed - paragraph (b), delete and insert the following:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "ii. Clause 5 - Amendment proposed - paragraph (b), delete and insert the following:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "\"(b) the deletion of \u20183\u2019 in the first line of paragraph 3(1)\".", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"(b) the deletion of \u20183\u2019 in the first line of paragraph 3(1)\".", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "iii. Clause 5-Amendment proposed- paragraph (c), delete the first two lines and insert \"the substitution for paragraph 3(2) of\u2019.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "iii. Clause 5-Amendment proposed- paragraph (c), delete the first two lines and insert \"the substitution for paragraph 3(2) of\u2019.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "iv. Clause 5-Amendment proposed- Paragraph (d), delete and insert the following:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "iv. Clause 5-Amendment proposed- Paragraph (d), delete and insert the following:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "\"(d) the deletion of paragraph 3 (3 )(b)\".", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"(d) the deletion of paragraph 3 (3 )(b)\".", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "v. Clause 5 - Amendment proposed- paragraph (e), delete and insert the following:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "v. Clause 5 - Amendment proposed- paragraph (e), delete and insert the following:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "\"(e) the substitution for the heading of paragraph 4 of Class 3, 5 and 6 depreciable assets\".", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"(e) the substitution for the heading of paragraph 4 of Class 3, 5 and 6 depreciable assets\".", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "vi. Clause 5 - Amendment proposed - paragraph (f), delete and insert the following:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "vi. Clause 5 - Amendment proposed - paragraph (f), delete and insert the following:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "\"(f) the insertion after paragraph 4(1) of new sub-paragraphs (lA) and", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"(f) the insertion after paragraph 4(1) of new sub-paragraphs (lA) and", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "(1B)", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "(1B)", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "169", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "\"(1A). A person shall be granted for each year of assessment . a capital allowance for each Class 3 depreciable asset with respect to a basis period ending within the year calculated using the formula:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"(1A). A person shall be granted for each year of assessment . a capital allowance for each Class 3 depreciable asset with respect to a basis period ending within the year calculated using the formula:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "AxBxC/365", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "AxBxC/365", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Where,", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Where,", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "A is the cost base of the asset", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "A is the cost base of the asset", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "B is the rate of 20 per cent", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "B is the rate of 20 per cent", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "C is the number of days in the basis period.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "C is the number of days in the basis period.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "(1B). The written down value of the pool. of Class 3 depreciable assets of a person in the year of assessment immediately preceding the year of assessment in which this Act comes into effect shall, for the purpose of subparagraph 1A of this paragraph, be regarded as the cost base of a Class 3 depreciable asset acquired in the year of assessment in . which this Act commences.\"", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "(1B). The written down value of the pool. of Class 3 depreciable assets of a person in the year of assessment immediately preceding the year of assessment in which this Act comes into effect shall, for the purpose of subparagraph 1A of this paragraph, be regarded as the cost base of a Class 3 depreciable asset acquired in the year of assessment in . which this Act commences.\"", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "vii. Clause 5 - Amendment proposed - paragraph (g), delete and insert the following:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "vii. Clause 5 - Amendment proposed - paragraph (g), delete and insert the following:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "\"(g) the insertion in paragraph 4(3) of \"3\" before \"S\"; and\".", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"(g) the insertion in paragraph 4(3) of \"3\" before \"S\"; and\".", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "viii. Clause 5 -Amendment proposed - paragraph (h), delete and insert the following:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "viii. Clause 5 -Amendment proposed - paragraph (h), delete and insert the following:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "\"(h) the insertion in paragraph ' 4(4) of \"3\" before \"5\".", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"(h) the insertion in paragraph ' 4(4) of \"3\" before \"5\".", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "ix. Amendment proposed ~-Add a new clause 6 to the Bill as follows:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "ix. Amendment proposed ~-Add a new clause 6 to the Bill as follows:", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "\"Revocation 0fL.I. 1996", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "\"Revocation 0fL.I. 1996", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "6.The Internal Revenue (Amendment) Regulations, 2011 (L.I. 1996) is hereby revoked.\"", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "6.The Internal Revenue (Amendment) Regulations, 2011 (L.I. 1996) is hereby revoked.\"", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "170", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "x. Long Title- Amendment proposed - Delete and insert the following:", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "x. Long Title- Amendment proposed - Delete and insert the following:", 
+            "time": "12:40:00"
+        }, 
+        {
             "column": "171", 
             "kind": "continued speech", 
             "name": "Chairman of the Committee (Mr James K. Avedzi)", 
             "original": "[MR AVEDZI]", 
             "section": "BILLS -SECOND READING", 
             "speech": "\"An Act to amend the Internal Revenue Act, 2000 (Act 592) to review upwards the tax holiday for the Ghana Stock Exchange, to review the tax band for resident individuals, to increase the income tax rate for mining companies, to reduce the tax rate for hotel industries and to provide for related matters.\"\n Short Title-Amendment proposed -After \"(AMENDMENT)\" insert \"(Na 2)\".\n 5.0 Conclusion\n The Committee respectfully recommends to the House to pass the Internal Revenue (Amendment) Bill, 2011.\n Respectfully submitted.\n Ranking Member of the Committee (Dr Anthony A. Osei): Mr Speaker, anytime measures are taken to reduce the cost of doing business to Ghanaians, we should all support it.\n These amendments seek to do two things. In some cases, they seek to reduce taxes, in a major case, they seek to increase taxes. We will discuss the merits of both sides when we come to the Consideration Stage.\n But Mr Speaker, I would want to urge the Minister.- I believe that some time ago, last year when we approved for him to raise the income tax bar, somehow, the Ghana Revenue Authority (GRA) failed to bring the Bill for us to amend it. So individuals could not take advantage of it. Now that we are doing it, I hope that the people can take advantage of it.\n In particular, the education on that matter ought to be wide enough for people", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "172", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "to know, so that people can begin to take advantage of what is being proposed.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "to know, so that people can begin to take advantage of what is being proposed.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "172", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Mr Speaker, the hospitality industry, I believe, when we looked at the budget, showed some decline. One cannot conclude that it was as a result of excessive taxation. However, one can be sure that if taxes are reduced, that decline could be reversed. So l think we should all support it for that purpose.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Mr Speaker, the hospitality industry, I believe, when we looked at the budget, showed some decline. One cannot conclude that it was as a result of excessive taxation. However, one can be sure that if taxes are reduced, that decline could be reversed. So l think we should all support it for that purpose.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "172", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "But it is difficult to explain exactly why there was the decline last year. This is because if you looked at the number of flights that were coming in, it should not have gone down.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "But it is difficult to explain exactly why there was the decline last year. This is because if you looked at the number of flights that were coming in, it should not have gone down.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "172", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "So I am hopeful that this move would bring them back-up because it could potentially become the largest foreign exchange earner if we nurture it properly.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "So I am hopeful that this move would bring them back-up because it could potentially become the largest foreign exchange earner if we nurture it properly.", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "172", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Mr James K. Avedzi)", 
+            "original": "Mr Speaker, as-I have said, on the matter of the extractive industry increase, when we come to the amendments, we would be able to adduce reasons for or against that. So I reserve my arguments there. Otherwise, I urge all Hon Members\u2018 to adopt the Report of the Committee, so that we can move to the Consideration Stage.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Mr Speaker, as-I have said, on the matter of the extractive industry increase, when we come to the amendments, we would be able to adduce reasons for or against that. So I reserve my arguments there. Otherwise, I urge all Hon Members\u2018 to adopt the Report of the Committee, so that we can move to the Consideration Stage.", 
             "time": "12:40:00"
         }, 
         {
@@ -1912,6 +2965,42 @@
             "time": "12:50:00"
         }, 
         {
+            "column": "176", 
+            "kind": "speech", 
+            "name": "Dr Prempeh", 
+            "original": "Mr Speaker, we were in this country when through the effect of the Bretton- Wood institutions, taxes were removed from mining companies, even bringing in capital investments, assets and things like that. It has not augured well for the economy of the country. Look at the enormous profit. Now, we are thinking of doing windfall taxes. Our fellow colleagues in some southern African countries did not go through that way.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Mr Speaker, we were in this country when through the effect of the Bretton- Wood institutions, taxes were removed from mining companies, even bringing in capital investments, assets and things like that. It has not augured well for the economy of the country. Look at the enormous profit. Now, we are thinking of doing windfall taxes. Our fellow colleagues in some southern African countries did not go through that way.", 
+            "time": "12:50:00"
+        }, 
+        {
+            "column": "176", 
+            "kind": "speech", 
+            "name": "Dr Prempeh", 
+            "original": "So, Mr Speaker, the Ministry of Finance and Economic Planning should use its leverage on taxation to cause specific policy shifts. Why can we come here and discuss windfall taxes, then the whole mining industry stands up and starts fighting the poor Ghana Government, whereas we still make sure that the capitals that they are bringing are tax-exempt at our ports? So, we must be deliberate. I believe that the windfall tax in the mining industry, even if it is brought and we support it, it should lead to a fundamental change in our taxation as to our ports and harbours when they are bringing in equipment.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "So, Mr Speaker, the Ministry of Finance and Economic Planning should use its leverage on taxation to cause specific policy shifts. Why can we come here and discuss windfall taxes, then the whole mining industry stands up and starts fighting the poor Ghana Government, whereas we still make sure that the capitals that they are bringing are tax-exempt at our ports? So, we must be deliberate. I believe that the windfall tax in the mining industry, even if it is brought and we support it, it should lead to a fundamental change in our taxation as to our ports and harbours when they are bringing in equipment.", 
+            "time": "12:50:00"
+        }, 
+        {
+            "column": "176", 
+            "kind": "speech", 
+            "name": "Dr Prempeh", 
+            "original": "Mr Speaker, this is the Work the Ministry of Finance and Economic Planning should be doing for us, not just coming to say Ghana Stock Exchange when we know the players are big players. How many poor people go on the Ghana Stock Exchange anyway? How many poor people? So, Mr Speaker, I am yet to be convinced that we should wholeheartedly support it even though the Committee is supporting it.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Mr Speaker, this is the Work the Ministry of Finance and Economic Planning should be doing for us, not just coming to say Ghana Stock Exchange when we know the players are big players. How many poor people go on the Ghana Stock Exchange anyway? How many poor people? So, Mr Speaker, I am yet to be convinced that we should wholeheartedly support it even though the Committee is supporting it.", 
+            "time": "12:50:00"
+        }, 
+        {
+            "column": "176", 
+            "kind": "speech", 
+            "name": "Dr Prempeh", 
+            "original": "Mr Speaker, the hospitality industry was protected by the Free-Zone Board when they applied. This is because they service the tourism industry. What has happened to those taxes and the reliefs that they were being given then? It is not just good enough to come and say 20 per cent to 15 per cent. We must see a deliberate policy to help some of these industries grow.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Mr Speaker, the hospitality industry was protected by the Free-Zone Board when they applied. This is because they service the tourism industry. What has happened to those taxes and the reliefs that they were being given then? It is not just good enough to come and say 20 per cent to 15 per cent. We must see a deliberate policy to help some of these industries grow.", 
+            "time": "12:50:00"
+        }, 
+        {
             "column": "177", 
             "kind": "continued speech", 
             "name": "Dr Prempeh", 
@@ -1945,6 +3034,15 @@
             "original": "Mr Opare-Ansah: Mr Speaker, just to draw attention to the earlier debate we had on the repeal of the National Fiscal Stabilisation Levy Bill, 2011.", 
             "section": "BILLS -SECOND READING", 
             "speech": "Mr Speaker, just to draw attention to the earlier debate we had on the repeal of the National Fiscal Stabilisation Levy Bill, 2011.", 
+            "time": "12:50:00"
+        }, 
+        {
+            "column": "178", 
+            "kind": "speech", 
+            "name": "Mr Opare-Ansah", 
+            "original": "Mr Speaker, when you look at it, the Bill is seeking to repeal the National Fiscal Stabilisation Levy Act, 2009 (Act 785). The Hon Ranking Member alluded to the fact that there was an amendment Act to extend the life -", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Mr Speaker, when you look at it, the Bill is seeking to repeal the National Fiscal Stabilisation Levy Act, 2009 (Act 785). The Hon Ranking Member alluded to the fact that there was an amendment Act to extend the life -", 
             "time": "12:50:00"
         }, 
         {
