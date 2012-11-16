@@ -69,9 +69,9 @@ PATTERNS = (
 
 def parse(content):
     
-    normalized = normalize_line_breaks( content )
+    normalised = normalise_line_breaks( content )
     
-    lines = normalized.split("\n");
+    lines = normalised.split("\n");
     lines = scan(lines)
         
     head = parse_head(lines) # end_line
@@ -244,7 +244,7 @@ def scan_line(line):
     return (LINE, line.replace('\n', ' '), None)
 
 
-def normalize_line_breaks(content):
+def normalise_line_breaks(content):
 
     # Each tuple is a (pattern, replacement) to apply to the string, in the
     # order listed here. Note that the re.M flag is applied so that ^ and $

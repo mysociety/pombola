@@ -9,7 +9,7 @@ import json
 
 import unittest
 
-from management.hansard_parser import parse, parse_time, normalize_line_breaks
+from management.hansard_parser import parse, parse_time, normalise_line_breaks
 from utils import split_name, legal_name
 
 
@@ -139,17 +139,17 @@ class GhanaParserRegressionTest(unittest.TestCase):
     def test_entire_output(self):
         """
         For the sample files that we have parse them and then compare the
-        results to those stored in JSON. This will allow us to quickly spot
-        changes that are not individually tested.
+        results to those stored in JSON, and to the normalised line breaks. This
+        will allow us to quickly spot changes that are not individually tested.
 
-        Note that there is a flag that can be used to write the new JSON to
+        Note that there is a flag that can be used to write the new output to
         disk. This can be used to update the test data and, and also to make it
         possible to use a diff tool to see the changes more clearly than is
         possible in the failing test output.
         """
         
         # change to True to update the test json files.
-        overwrite_json_files = False
+        overwrite_known_good_files = False
         
         # list of all the files that we should parse and compare (path should
         # be relative to this test file).
@@ -159,20 +159,33 @@ class GhanaParserRegressionTest(unittest.TestCase):
         
         for transcript_file in transcript_files:
             transcript_abs_path = os.path.join(os.path.dirname(__file__), transcript_file)
+            normalised_abs_path = os.path.splitext(transcript_abs_path)[0] + '-normalised.txt'
             data_abs_path       = os.path.splitext(transcript_abs_path)[0] + '.json'
 
-            # grab the sample content, parse it, store in data structure
+            # Read the sample content
             sample_content = open(transcript_abs_path, 'r').read()
+
+            # normalise the line breaks
+            normalised_sample_content = normalise_line_breaks( sample_content )
+
+            # parse sample content, store in data structure
             head, entries = parse(sample_content)
             parsed_data = { 'head': head, 'entries': entries }
             parsed_data_as_json = self.convert_parsed_data_to_json( parsed_data )
             
             # Write this parsed data out to disk if desired - this should
             # normally not happen, but is convenient to do during development
-            if overwrite_json_files:
-                print "** WARNING - overwriting json file '%s' ***" % data_abs_path
-                open(data_abs_path, 'w').write( parsed_data_as_json )
+            if overwrite_known_good_files:
+                print "** WARNING - overwriting known good files for '%s' ***" % transcript_abs_path
+                open(data_abs_path,       'w').write( parsed_data_as_json )
+                open(normalised_abs_path, 'w').write( normalised_sample_content )
             
+            # check that the line splitting works as expected
+            self.assertEqual(
+                open(normalised_abs_path, 'r').read(),
+                normalised_sample_content
+            )
+
             # Read in the expected data and compare to what we got from parsing
             expected_data = json.loads( open( data_abs_path, 'r').read() )
             self.assertEqual(
@@ -180,85 +193,8 @@ class GhanaParserRegressionTest(unittest.TestCase):
                 expected_data
                 # "Correctly parsed %s" % transcript_file
             )
+            
 
-class GhanaParserLineBreakNormalizeTest(unittest.TestCase):
-
-    def test_entire_output(self):
-        raw = """
-PARLIAMENTARY DEBATES
-OFFICIAL REPORT
-TUESDAY, 14 FEBRUARY, 2012
-
-PRAYERS
-
-
-Votes and Proceedings and the
-Official Report
-
-Madam Speaker: Hon Members,
-Correction of Votes and Proceedings of
-Friday, 10th February, 2012. 
-
-Page 111-
-
-Mr Joseph Y. Chireh: Madam
-Speaker, this is a speech that goes over two paragraphs.
-
-Hon Members, I have admitted a
-Statement from Hon Justice Joe Appiah,
-Member of Parliament (MP) for Ablekuma
-North.
-
-[896] 
-10.50 am
-
-1.00 p.m.
-Mr Second Deputy Speaker: This is a
-House of debate and debate will continue.
-Mr Bandua: Mr Speaker, a sentence.
-Mr Second Deputy Speaker: Hon
-Members, in fact, this is the only way
-some of these important matters may be
-addressed, is the way Hon Members are
-doing now.
-        """.strip()
-        
-        expected = """
-PARLIAMENTARY DEBATES
-
-OFFICIAL REPORT
-
-TUESDAY, 14 FEBRUARY, 2012
-
-PRAYERS
-
-Votes and Proceedings and the Official Report
-
-Madam Speaker: Hon Members, Correction of Votes and Proceedings of Friday, 10th February, 2012.
-
-Page 111-
-
-Mr Joseph Y. Chireh: Madam Speaker, this is a speech that goes over two paragraphs.
-
-Hon Members, I have admitted a Statement from Hon Justice Joe Appiah, Member of Parliament (MP) for Ablekuma North.
-
-[896]
-
-10.50 am
-
-1.00 p.m.
-
-Mr Second Deputy Speaker: This is a House of debate and debate will continue.
-
-Mr Bandua: Mr Speaker, a sentence.
-
-Mr Second Deputy Speaker: Hon Members, in fact, this is the only way some of these important matters may be addressed, is the way Hon Members are doing now.
-        """.strip()
-
-        self.assertEqual(
-            normalize_line_breaks( raw ),
-            expected
-        )
 
 
 if __name__ == "__main__":
