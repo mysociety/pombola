@@ -330,7 +330,14 @@
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Very well, Mr Speaker, it is a decision for the House to take. I agree with you but the House may decide to take that, position. But the House too may decide that, then let us wait, when the regulations come. But to annul the Regulation, we need two-thirds; and that is always a difficulty. That is why sometimes, in these matters, we try and put in limitations so that the House is not put in a position where because we do not have the two-thirds, even though we have the majority, we cannot annul the Regulation --", 
             "section": "- PAPERS", 
-            "speech": "Very well, Mr Speaker, it is a decision for the House to take. I agree with you but the House may decide to take that, position. But the House too may decide that, then let us wait, when the regulations come. But to annul the Regulation, we need two-thirds; and that is always a difficulty. That is why sometimes, in these matters, we try and put in limitations so that the House is not put in a position where because we do not have the two-thirds, even though we have the majority, we cannot annul the Regulation --\n Mr Haruna Iddrisu --rose-", 
+            "speech": "Very well, Mr Speaker, it is a decision for the House to take. I agree with you but the House may decide to take that, position. But the House too may decide that, then let us wait, when the regulations come. But to annul the Regulation, we need two-thirds; and that is always a difficulty. That is why sometimes, in these matters, we try and put in limitations so that the House is not put in a position where because we do not have the two-thirds, even though we have the majority, we cannot annul the Regulation --", 
+            "time": "11:05:00"
+        }, 
+        {
+            "action": "rose", 
+            "kind": "action", 
+            "name": "Mr Haruna Iddrisu", 
+            "original": "Mr Haruna Iddrisu --rose-", 
             "time": "11:05:00"
         }, 
         {
@@ -933,7 +940,14 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member for Bekwai, because yesterday the Minister for Communications was trying to move an amendment by bringing in the Board somewhere along the line. As a member of the Committee, you tried to explain why it was not necessary to do that and the Minister withdrew his amendment, that is why I am calling you to help the House--", 
             "section": "- PAPERS", 
-            "speech": "Hon Member for Bekwai, because yesterday the Minister for Communications was trying to move an amendment by bringing in the Board somewhere along the line. As a member of the Committee, you tried to explain why it was not necessary to do that and the Minister withdrew his amendment, that is why I am calling you to help the House--\n Papa Owusu-Ankomah --rose--", 
+            "speech": "Hon Member for Bekwai, because yesterday the Minister for Communications was trying to move an amendment by bringing in the Board somewhere along the line. As a member of the Committee, you tried to explain why it was not necessary to do that and the Minister withdrew his amendment, that is why I am calling you to help the House--", 
+            "time": "11:35:00"
+        }, 
+        {
+            "action": "rose-", 
+            "kind": "action", 
+            "name": "Papa Owusu-Ankomah", 
+            "original": "Papa Owusu-Ankomah --rose--", 
             "time": "11:35:00"
         }, 
         {
@@ -1062,7 +1076,14 @@
             "name": "Alhaji Dauda", 
             "original": "Alhaji Dauda: Yes, I support it. I have no objection at all. It should go--", 
             "section": "CONSIDERATION STAGE", 
-            "speech": "Yes, I support it. I have no objection at all. It should go--\n MrKobina T. Hammond --rose--", 
+            "speech": "Yes, I support it. I have no objection at all. It should go--", 
+            "time": "11:45:00"
+        }, 
+        {
+            "action": "rose-", 
+            "kind": "action", 
+            "name": "MrKobina T. Hammond", 
+            "original": "MrKobina T. Hammond --rose--", 
             "time": "11:45:00"
         }, 
         {

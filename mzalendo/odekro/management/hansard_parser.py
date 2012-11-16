@@ -16,24 +16,28 @@ ACTION           = 'action'
 PAGE_HEADER      = 'page header'
 CONTINUED_SPEECH = 'continued speech'
 CHAIR            = 'chair'
+# SCENE_START      = 'scene_start'
+# SCENE_END        = 'scene_end'
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
 
-TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson)'
-TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.m|AM|A.M|pm|PM|p.m|P.M|noon)\.?[\s\-]*'
+TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson|Minister of State|An Hon Mem|Some Hon Mem|Minority Leader|Majority Leader|Nana)'
+TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.\s*m|AM|A.\s*M|pm|PM|p.\s*m|P.\s*M|noon)\.?[\s\-]*'
 VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the Official Report\s*)'
 
 HEADING_PATTERN = r'^\s*([A-Z-,\s]+|%s)\s*$' % VOTES_AND_PROCEEDINGS_HEADER
 SCENE_PATTERN = r'^\s*(\[[A-Za-z-\s]+\])\s*$'
 SPEECH_PATTERN = r'^\s*%s(.+):\s*(.*)\s*$' % TITLES_TEMPLATE
-CONTINUED_SPEECH_PATTERN = r'^\s*\[%s.+\]\s*'% (TITLES_TEMPLATE.upper())
+CONTINUED_SPEECH_PATTERN = r'^\s*\[%s.+\]\s*' % (TITLES_TEMPLATE.upper())
 
+# SCENE_START_PATTERN = r'^\s*(\[[^\]]+)\s*$'
+# SCENE_END_PATTERN = r'^\s*([^\]]+\])\s*$'
 # POSSIBLE_SPEECH_PATTERN = r'^\s*%s(.+)\s*$' % TITLES_TEMPLATE
 #PAGE_HEADER_PATTERN =r'^(\d+)\s*(.*?)(\d{2}\s*\w*,\s*\d{4})(\s*.*?\s*)(\d+)\s*$'
 PAGE_HEADER_PATTERN = r'^\[(\d+)\]\s*$'
 
-ACTION_PATTERN = r'^\s*%s(.+)\s*-\s+(.+)\s+-\s*$' % TITLES_TEMPLATE
+ACTION_PATTERN = r'^\s*%s(.+\w)\s*[\-]+\s*(.+)\s*[\-]+\s*$' % TITLES_TEMPLATE
 
 START_TIME_PATTERN = r'The\s+House\s+met\s+at\s+%s' % TIME_TEMPLATE
 TIME_PATTERN = r'^\s*%s$' % TIME_TEMPLATE
@@ -63,12 +67,11 @@ PATTERNS = (
     (CONTINUED_SPEECH, CONTINUED_SPEECH_PATTERN),
     (SCENE, SCENE_PATTERN),
     (ACTION, ACTION_PATTERN),
-    )
+    # (SCENE_START, SCENE_START_PATTERN),
+    # (SCENE_END, SCENE_END_PATTERN),
+)
 
-
-
-def parse(content):
-    
+def parse(content):   
     normalised = normalise_line_breaks( content )
     
     lines = normalised.split("\n");
@@ -178,7 +181,7 @@ def parse_body(lines):
                         speech  = line.strip(),
                         section = curr_section,
                         column  = curr_col,
-                    );
+                    )
         elif kind is CHAIR:
             entry = dict( chair=match.group(1) )
         elif kind is BLANK:
@@ -234,7 +237,7 @@ def parse_time(s):
 def _time(match):
     hh, mm = int(match.group(1)), int(match.group(3))
     t = match.group(4)
-    if t in ('pm', 'PM', 'p.m', 'P.M') and hh != 12:
+    if t.lower() in ('pm', 'p.m') and hh != 12:
         hh += 12
     return datetime.time(hh, mm)
 
@@ -255,7 +258,6 @@ def scan_line(line):
                 return (SCENE, line, match)
             return (kind, line, match)
     return (LINE, line.replace('\n', ' '), None)
-
 
 def normalise_line_breaks(content):
 

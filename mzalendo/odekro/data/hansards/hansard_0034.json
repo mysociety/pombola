@@ -544,7 +544,7 @@
             "time": "11:30:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
             "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu - rose -", 
@@ -562,28 +562,10 @@
         {
             "column": "678", 
             "kind": "speech", 
-            "name": "Madam Speaker", 
+            "name": "Minority Leader Mr (Osei Kyei~ Mensah-Bonsu)", 
             "original": "Minority Leader Mr (Osei Kyei~ Mensah-Bonsu): Madam Speaker, I am sorry. I saw the Hon Member for Juabuso, so I thought you were going to call him. That was why I did not get up. However, I would also want to make some contribution here on this amendment.", 
             "section": "BILLS - SECOND READING", 
-            "speech": "Minority Leader Mr (Osei Kyei~ Mensah-Bonsu): Madam Speaker, I am sorry. I saw the Hon Member for Juabuso, so I thought you were going to call him. That was why I did not get up. However, I would also want to make some contribution here on this amendment.", 
-            "time": "11:30:00"
-        }, 
-        {
-            "column": "678", 
-            "kind": "speech", 
-            "name": "Madam Speaker", 
-            "original": "Madam Speaker, the Bill before us is calling for an amendment to paragraph (a) (ii) of subsection (4) of Section I of Act 462. Madam Speaker, we are told that reference is being made to something, a construction, or a phrase in the Local Government Act, 1993 (Act 462) and it reads as follows \"that the geographical area consists of a single compact settlement and\". That is what is intended to be deleted.", 
-            "section": "BILLS - SECOND READING", 
-            "speech": "Madam Speaker, the Bill before us is calling for an amendment to paragraph (a) (ii) of subsection (4) of Section I of Act 462. Madam Speaker, we are told that reference is being made to something, a construction, or a phrase in the Local Government Act, 1993 (Act 462) and it reads as follows \"that the geographical area consists of a single compact settlement and\". That is what is intended to be deleted.", 
-            "time": "11:30:00"
-        }, 
-        {
-            "column": "678", 
-            "kind": "speech", 
-            "name": "Madam Speaker", 
-            "original": "Madam Speaker, I have combed through the Act, there is no word like \"settlement.\" as appears in this Bill in the Act. So I do not know what is being referred to- So if the Hon Minister can educate us. There is no word like that in Act 462. So what are they referring to? Madam Speaker, I would not want to proceed until I hear from the Hon Minister", 
-            "section": "BILLS - SECOND READING", 
-            "speech": "Madam Speaker, I have combed through the Act, there is no word like \"settlement.\" as appears in this Bill in the Act. So I do not know what is being referred to- So if the Hon Minister can educate us. There is no word like that in Act 462. So what are they referring to? Madam Speaker, I would not want to proceed until I hear from the Hon Minister", 
+            "speech": "Madam Speaker, I am sorry. I saw the Hon Member for Juabuso, so I thought you were going to call him. That was why I did not get up. However, I would also want to make some contribution here on this amendment.\n Madam Speaker, the Bill before us is calling for an amendment to paragraph (a) (ii) of subsection (4) of Section I of Act 462. Madam Speaker, we are told that reference is being made to something, a construction, or a phrase in the Local Government Act, 1993 (Act 462) and it reads as follows \"that the geographical area consists of a single compact settlement and\". That is what is intended to be deleted.\n Madam Speaker, I have combed through the Act, there is no word like \"settlement.\" as appears in this Bill in the Act. So I do not know what is being referred to- So if the Hon Minister can educate us. There is no word like that in Act 462. So what are they referring to? Madam Speaker, I would not want to proceed until I hear from the Hon Minister", 
             "time": "11:30:00"
         }, 
         {
@@ -809,12 +791,10 @@
             "time": "11:50:00"
         }, 
         {
-            "column": "687", 
-            "kind": "speech", 
-            "name": "Chairman of the Committee (Mr Dominic A. Azumah)", 
+            "action": "-", 
+            "kind": "action", 
+            "name": "Mr Joseph B. Aidoo - rose", 
             "original": "Mr Joseph B. Aidoo - rose ---", 
-            "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "Mr Joseph B. Aidoo - rose ---", 
             "time": "11:50:00"
         }, 
         {
@@ -2887,7 +2867,14 @@
             "name": "Mrs Osei-Opare", 
             "original": "Mrs Osei-Opare: Mr Speaker, I appreciate the word \"eminent\". However, in this law, it cannot be used. For good reason, there is no \"eminent citizens\" list in Ghana which has been developed out of the kind of criterion that the Hon Member is proposing. We do not have it and therefore we cannot put this in the law - [Interruption.]", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "Mr Speaker, I appreciate the word \"eminent\". However, in this law, it cannot be used. For good reason, there is no \"eminent citizens\" list in Ghana which has been developed out of the kind of criterion that the Hon Member is proposing. We do not have it and therefore we cannot put this in the law - [Interruption.]\n Prof. Gyan-Baffour -rose-", 
+            "speech": "Mr Speaker, I appreciate the word \"eminent\". However, in this law, it cannot be used. For good reason, there is no \"eminent citizens\" list in Ghana which has been developed out of the kind of criterion that the Hon Member is proposing. We do not have it and therefore we cannot put this in the law - [Interruption.]", 
+            "time": "13:30:00"
+        }, 
+        {
+            "action": "rose", 
+            "kind": "action", 
+            "name": "Prof. Gyan-Baffour", 
+            "original": "Prof. Gyan-Baffour -rose-", 
             "time": "13:30:00"
         }, 
         {
@@ -3949,7 +3936,14 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Then he should file his amendment and then we look at it.", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "Then he should file his amendment and then we look at it.\n Nana Abu-Bonsra Yes. So I was wondering why the Majority Leader still wanted to prolong ---", 
+            "speech": "Then he should file his amendment and then we look at it.", 
+            "time": "14:20:00"
+        }, 
+        {
+            "action": "-", 
+            "kind": "action", 
+            "name": "Nana Abu-Bonsra Yes. So I was wondering why the Majority Leader still wanted to prolong", 
+            "original": "Nana Abu-Bonsra Yes. So I was wondering why the Majority Leader still wanted to prolong ---", 
             "time": "14:20:00"
         }, 
         {

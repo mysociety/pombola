@@ -736,12 +736,10 @@
             "time": "11:05:00"
         }, 
         {
-            "column": "615", 
-            "kind": "speech", 
-            "name": "Madam Speaker", 
+            "action": "rose -", 
+            "kind": "action", 
+            "name": "Mr Kobina T. Hammond", 
             "original": "Mr Kobina T. Hammond ---rose --", 
-            "section": "--", 
-            "speech": "Mr Kobina T. Hammond ---rose --", 
             "time": "11:05:00"
         }, 
         {
@@ -876,7 +874,16 @@
             "name": "Mr Ampofo", 
             "original": "Mr Ampofo: Madam Speaker, he is an Hon Member of my committee and he knows that during the budget hearing, the Committee on Local Government and Rural Development - [Interruption]", 
             "section": "--", 
-            "speech": "Madam Speaker, he is an Hon Member of my committee and he knows that during the budget hearing, the Committee on Local Government and Rural Development - [Interruption]\n An Hon Member: Madam Speaker, point of order.\n His Committee on Local Government and Rural Development?", 
+            "speech": "Madam Speaker, he is an Hon Member of my committee and he knows that during the budget hearing, the Committee on Local Government and Rural Development - [Interruption]", 
+            "time": "11:15:00"
+        }, 
+        {
+            "column": "617", 
+            "kind": "speech", 
+            "name": "An Hon Member", 
+            "original": "An Hon Member: Madam Speaker, point of order.", 
+            "section": "--", 
+            "speech": "Madam Speaker, point of order.\n His Committee on Local Government and Rural Development?", 
             "time": "11:15:00"
         }, 
         {
@@ -1821,7 +1828,14 @@
             "name": "Mr Gbediame", 
             "original": "Mr Gbediame: Madam Speaker, the Hon Minister for Transport is in the Chamber and he will lay the first one.", 
             "section": "--", 
-            "speech": "Madam Speaker, the Hon Minister for Transport is in the Chamber and he will lay the first one.\n Mr Opare-Ansah --rose--", 
+            "speech": "Madam Speaker, the Hon Minister for Transport is in the Chamber and he will lay the first one.", 
+            "time": "11:55:00"
+        }, 
+        {
+            "action": "rose-", 
+            "kind": "action", 
+            "name": "Mr Opare-Ansah", 
+            "original": "Mr Opare-Ansah --rose--", 
             "time": "11:55:00"
         }, 
         {
@@ -2478,52 +2492,16 @@
         {
             "column": "652", 
             "kind": "speech", 
-            "name": "Mrs Gifty Eugenia Kusi (NPP - Tarkwa-Nsuaem)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Madam Speaker, these are a few comments to support the Statement ably made by Hon Elizabeth Sackey, the Member for Okaikoi North.", 
             "section": "STATEMENTS", 
-            "speech": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Madam Speaker, these are a few comments to support the Statement ably made by Hon Elizabeth Sackey, the Member for Okaikoi North.", 
-            "time": "12:25:00"
-        }, 
-        {
-            "column": "652", 
-            "kind": "speech", 
-            "name": "Mrs Gifty Eugenia Kusi (NPP - Tarkwa-Nsuaem)", 
-            "original": "Madam Speaker, as we have been told, it is important for us as a nation to come to terms with the health hazards of tobacco use, in particular, those of them who use tobacco. I think where we are as a nation, we need to intensify public education against the use of tobacco.", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, as we have been told, it is important for us as a nation to come to terms with the health hazards of tobacco use, in particular, those of them who use tobacco. I think where we are as a nation, we need to intensify public education against the use of tobacco.", 
-            "time": "12:25:00"
-        }, 
-        {
-            "column": "652", 
-            "kind": "speech", 
-            "name": "Mrs Gifty Eugenia Kusi (NPP - Tarkwa-Nsuaem)", 
-            "original": "Madam Speaker, the impact of smoking on the health of the citizens of this country and its concomitant effect on the purse of this country, ought to be elevated to a higher status than we have done thus far.", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, the impact of smoking on the health of the citizens of this country and its concomitant effect on the purse of this country, ought to be elevated to a higher status than we have done thus far.", 
-            "time": "12:25:00"
-        }, 
-        {
-            "column": "652", 
-            "kind": "speech", 
-            "name": "Mrs Gifty Eugenia Kusi (NPP - Tarkwa-Nsuaem)", 
-            "original": "Madam Speaker, what is becoming a commonplace event, is for smokers particularly, in the countryside, to send children to buy cigarettes for them. When they are sent to buy the cigarettes, in many instances, they tell them to light the sticks of cigarettes that they send them to buy before bringing them.", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, what is becoming a commonplace event, is for smokers particularly, in the countryside, to send children to buy cigarettes for them. When they are sent to buy the cigarettes, in many instances, they tell them to light the sticks of cigarettes that they send them to buy before bringing them.", 
-            "time": "12:25:00"
-        }, 
-        {
-            "column": "652", 
-            "kind": "speech", 
-            "name": "Mrs Gifty Eugenia Kusi (NPP - Tarkwa-Nsuaem)", 
-            "original": "Madam Speaker, what is embedded in this is that, the child is being encouraged to taste cigarette at a very young age. Ultimately, when such people grow up, they become used to the taste of cigarette and they also resort to smoking. Madam Speaker, I believe we should also concern ourselves with the effect of smoking on children in particular, and also", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, what is embedded in this is that, the child is being encouraged to taste cigarette at a very young age. Ultimately, when such people grow up, they become used to the taste of cigarette and they also resort to smoking. Madam Speaker, I believe we should also concern ourselves with the effect of smoking on children in particular, and also", 
+            "speech": "Madam Speaker, these are a few comments to support the Statement ably made by Hon Elizabeth Sackey, the Member for Okaikoi North.\n Madam Speaker, as we have been told, it is important for us as a nation to come to terms with the health hazards of tobacco use, in particular, those of them who use tobacco. I think where we are as a nation, we need to intensify public education against the use of tobacco.\n Madam Speaker, the impact of smoking on the health of the citizens of this country and its concomitant effect on the purse of this country, ought to be elevated to a higher status than we have done thus far.\n Madam Speaker, what is becoming a commonplace event, is for smokers particularly, in the countryside, to send children to buy cigarettes for them. When they are sent to buy the cigarettes, in many instances, they tell them to light the sticks of cigarettes that they send them to buy before bringing them.\n Madam Speaker, what is embedded in this is that, the child is being encouraged to taste cigarette at a very young age. Ultimately, when such people grow up, they become used to the taste of cigarette and they also resort to smoking. Madam Speaker, I believe we should also concern ourselves with the effect of smoking on children in particular, and also", 
             "time": "12:25:00"
         }, 
         {
             "column": "653", 
             "kind": "continued speech", 
-            "name": "Mrs Gifty Eugenia Kusi (NPP - Tarkwa-Nsuaem)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "[MRKYEI-MENSAH-BONSU]", 
             "section": "STATEMENTS", 
             "speech": "on the reproductive health of women. This is because as the Hon Member who made the Statement has indicated to us, smoking or being in a smoky environment has a turning effect on the reproductive health of women.\n May I, at this juncture Madam Speaker, invite us to liaise with the Ministry of Women and Children\u2019s Affairs to get the people of this country agitated and stimulated on the effect of smoking on reproductive health of women and for the Ministry to take this up as a project, so that next year when we meet, they will be in a position to report to us on the progress they have made in these areas.\n Madam Speaker, I thank you for this opportunity.", 
@@ -2676,43 +2654,16 @@
         {
             "column": "657", 
             "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
+            "name": "Minister of State (Mr Dominic A. Azumah)(MP)", 
             "original": "Minister of State (Mr Dominic A. Azumah)(MP): Madam Speaker, listening carefully to the Statement, I can feel the sense of this House that a heinous crime had been committed and this poor young boy has left this world.", 
             "section": "STATEMENTS", 
-            "speech": "Minister of State (Mr Dominic A. Azumah)(MP): Madam Speaker, listening carefully to the Statement, I can feel the sense of this House that a heinous crime had been committed and this poor young boy has left this world.", 
-            "time": "12:45:00"
-        }, 
-        {
-            "column": "657", 
-            "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
-            "original": "Madam Speaker, some of us, a few, have come across our Hon Colleague, Leo Kabah\u2019s son. Desmond was a very young boy when some of us met him; a very enterprising boy, very intelligent and very respectful. The last time I visited Hon Leo Kabah, I met this young man and I cannot believe that this was the way he was going to go. We discussed a few things, that the North was lacking medical doctors.", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, some of us, a few, have come across our Hon Colleague, Leo Kabah\u2019s son. Desmond was a very young boy when some of us met him; a very enterprising boy, very intelligent and very respectful. The last time I visited Hon Leo Kabah, I met this young man and I cannot believe that this was the way he was going to go. We discussed a few things, that the North was lacking medical doctors.", 
-            "time": "12:45:00"
-        }, 
-        {
-            "column": "657", 
-            "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
-            "original": "In the course of our discussions, we prevailed on his father, Hon Leo Kabah, that if this young man should come out of the Medical School to be a hopeful doctor, he should do everything possible to accept posting to the Upper East Region, especially Bolgatanga Hospital. Indeed, the young man did say that he was committed to serving the rural folk. It is shocking that this should happen to him.", 
-            "section": "STATEMENTS", 
-            "speech": "In the course of our discussions, we prevailed on his father, Hon Leo Kabah, that if this young man should come out of the Medical School to be a hopeful doctor, he should do everything possible to accept posting to the Upper East Region, especially Bolgatanga Hospital. Indeed, the young man did say that he was committed to serving the rural folk. It is shocking that this should happen to him.", 
-            "time": "12:45:00"
-        }, 
-        {
-            "column": "657", 
-            "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
-            "original": "But Madam Speaker, I think the Ghana Police Service should be called upon to do everything possible to track down these perpetrators. VVhoever is involved in this crime, the police should show to us that they are really competent. This is a test case we are going to present to them. They must do everything, otherwise, I would want to say that it will be devastating for the whole country for this boy to be buried without us knowing who are the cause of his death.", 
-            "section": "STATEMENTS", 
-            "speech": "But Madam Speaker, I think the Ghana Police Service should be called upon to do everything possible to track down these perpetrators. VVhoever is involved in this crime, the police should show to us that they are really competent. This is a test case we are going to present to them. They must do everything, otherwise, I would want to say that it will be devastating for the whole country for this boy to be buried without us knowing who are the cause of his death.", 
+            "speech": "Madam Speaker, listening carefully to the Statement, I can feel the sense of this House that a heinous crime had been committed and this poor young boy has left this world.\n Madam Speaker, some of us, a few, have come across our Hon Colleague, Leo Kabah\u2019s son. Desmond was a very young boy when some of us met him; a very enterprising boy, very intelligent and very respectful. The last time I visited Hon Leo Kabah, I met this young man and I cannot believe that this was the way he was going to go. We discussed a few things, that the North was lacking medical doctors.\n In the course of our discussions, we prevailed on his father, Hon Leo Kabah, that if this young man should come out of the Medical School to be a hopeful doctor, he should do everything possible to accept posting to the Upper East Region, especially Bolgatanga Hospital. Indeed, the young man did say that he was committed to serving the rural folk. It is shocking that this should happen to him.\n But Madam Speaker, I think the Ghana Police Service should be called upon to do everything possible to track down these perpetrators. VVhoever is involved in this crime, the police should show to us that they are really competent. This is a test case we are going to present to them. They must do everything, otherwise, I would want to say that it will be devastating for the whole country for this boy to be buried without us knowing who are the cause of his death.", 
             "time": "12:45:00"
         }, 
         {
             "column": "658", 
             "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
+            "name": "Minister of State (Mr Dominic A. Azumah)(MP)", 
             "original": "Madam Speaker, the Members of Parliament (MPs) of the three northern regions were going to meet this morning to send a delegation to our Brother, Hon Leo Kabah. But now that the whole House feels the sentiments of this issue, I would call that a very powerful delegation be sent to console our Collewe, the father and that we should be actively involved in the burial of this young man who was prepared to serve the nation.", 
             "section": "STATEMENTS", 
             "speech": "Madam Speaker, the Members of Parliament (MPs) of the three northern regions were going to meet this morning to send a delegation to our Brother, Hon Leo Kabah. But now that the whole House feels the sentiments of this issue, I would call that a very powerful delegation be sent to console our Collewe, the father and that we should be actively involved in the burial of this young man who was prepared to serve the nation.", 
@@ -2721,7 +2672,7 @@
         {
             "column": "658", 
             "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
+            "name": "Minister of State (Mr Dominic A. Azumah)(MP)", 
             "original": "Madam Speaker, again, reading from the Papers, there is a call for security beef- up in Korle-Bu where this unfortunate incident occurred.", 
             "section": "STATEMENTS", 
             "speech": "Madam Speaker, again, reading from the Papers, there is a call for security beef- up in Korle-Bu where this unfortunate incident occurred.", 
@@ -2730,7 +2681,7 @@
         {
             "column": "658", 
             "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
+            "name": "Minister of State (Mr Dominic A. Azumah)(MP)", 
             "original": "We do not want to stray into how it all happened. This is because we were not there. But to read that his body was found naked lying in his room with bloodstains, reveals something different and I think that if we had very good security at Korle-Bu, whether the incident occurred in the room or outside, possibly, some people would have been tracked - somebody would have been tracked along the line. Unfortunately, this did not happen.", 
             "section": "STATEMENTS", 
             "speech": "We do not want to stray into how it all happened. This is because we were not there. But to read that his body was found naked lying in his room with bloodstains, reveals something different and I think that if we had very good security at Korle-Bu, whether the incident occurred in the room or outside, possibly, some people would have been tracked - somebody would have been tracked along the line. Unfortunately, this did not happen.", 
@@ -2739,7 +2690,7 @@
         {
             "column": "658", 
             "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
+            "name": "Minister of State (Mr Dominic A. Azumah)(MP)", 
             "original": "So, Madam Speaker, I wish to urge the Inspector- General of Police (IGP) that he must put up a very strong team to go into this matter and come out with something to convince Ghanaians that they are up to the task.", 
             "section": "STATEMENTS", 
             "speech": "So, Madam Speaker, I wish to urge the Inspector- General of Police (IGP) that he must put up a very strong team to go into this matter and come out with something to convince Ghanaians that they are up to the task.", 
@@ -2748,7 +2699,7 @@
         {
             "column": "658", 
             "kind": "speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
+            "name": "Minister of State (Mr Dominic A. Azumah)(MP)", 
             "original": "This young boy is gone. There are lessons for us to learn, that wherever we find ourselves, we must tighten the security around us. This young boy had nothing against anybody. We cannot predict but he was so young a boy, very respectful that you doubt whether he would have had any problem with anybody. But the incident has occurred. I can only call on everybody to console his senior brother and to say that may this young boy rest in peace. May his", 
             "section": "STATEMENTS", 
             "speech": "This young boy is gone. There are lessons for us to learn, that wherever we find ourselves, we must tighten the security around us. This young boy had nothing against anybody. We cannot predict but he was so young a boy, very respectful that you doubt whether he would have had any problem with anybody. But the incident has occurred. I can only call on everybody to console his senior brother and to say that may this young boy rest in peace. May his", 
@@ -2757,7 +2708,7 @@
         {
             "column": "659", 
             "kind": "continued speech", 
-            "name": "Mr Dominic B. A. Nitiwul (NPP - Bimbilla)", 
+            "name": "Minister of State (Mr Dominic A. Azumah)(MP)", 
             "original": "[MRAZUMAH]", 
             "section": "STATEMENTS", 
             "speech": "intentions that he did have inspire others to take up the challenge he left behind.\n Madam Speaker, once again, may he rest in peace.", 
@@ -3072,61 +3023,16 @@
         {
             "column": "669", 
             "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Thank you very much, Madam Speaker, for the opporttmity to say a few words-", 
             "section": "STATEMENTS", 
-            "speech": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Thank you very much, Madam Speaker, for the opporttmity to say a few words-", 
-            "time": "13:15:00"
-        }, 
-        {
-            "column": "669", 
-            "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
-            "original": "Madam Speaker, in these days of brutal carnage and sundry bestiality deaths no longer agitate the people of this country. Yet the death of this young man has touched the nerves of many in this country.", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, in these days of brutal carnage and sundry bestiality deaths no longer agitate the people of this country. Yet the death of this young man has touched the nerves of many in this country.", 
-            "time": "13:15:00"
-        }, 
-        {
-            "column": "669", 
-            "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
-            "original": "Madam Speaker, the police have, in their initial statement, said that they suspect foul play and that they have started full scale investigation. We are told that recognizing the insecurity at the Korle-Bu Teaching Hospital, the residence of the housemen in particular, the hospital authorities have begtm in earnest to erect security facilities there. That is most welcome but it ought not to be a knee-jerk reaction.", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, the police have, in their initial statement, said that they suspect foul play and that they have started full scale investigation. We are told that recognizing the insecurity at the Korle-Bu Teaching Hospital, the residence of the housemen in particular, the hospital authorities have begtm in earnest to erect security facilities there. That is most welcome but it ought not to be a knee-jerk reaction.", 
-            "time": "13:15:00"
-        }, 
-        {
-            "column": "669", 
-            "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
-            "original": "Madam Speaker, we are infonned that a person who was not used to sleeping naked was found naked. A person with no known ailment was found with blood stains in his armpit, scrotum and with some blood trickling from the nostrils. And part ofthe skin on the leg was peeled off and his bed sheet was soaked in blood. That is why the police have said they suspect foul play. The police have just started working on the case.", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, we are infonned that a person who was not used to sleeping naked was found naked. A person with no known ailment was found with blood stains in his armpit, scrotum and with some blood trickling from the nostrils. And part ofthe skin on the leg was peeled off and his bed sheet was soaked in blood. That is why the police have said they suspect foul play. The police have just started working on the case.", 
-            "time": "13:15:00"
-        }, 
-        {
-            "column": "669", 
-            "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
-            "original": "Against this background, Madam Speaker, it is utterly nauseating for a local FM station to begin to peddle the information to the effect that the young man took his own life.", 
-            "section": "STATEMENTS", 
-            "speech": "Against this background, Madam Speaker, it is utterly nauseating for a local FM station to begin to peddle the information to the effect that the young man took his own life.", 
-            "time": "13:15:00"
-        }, 
-        {
-            "column": "669", 
-            "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
-            "original": "Madam Speaker, people should be sensitive to the sensibilities of others.", 
-            "section": "STATEMENTS", 
-            "speech": "Madam Speaker, people should be sensitive to the sensibilities of others.", 
+            "speech": "Thank you very much, Madam Speaker, for the opporttmity to say a few words-\n Madam Speaker, in these days of brutal carnage and sundry bestiality deaths no longer agitate the people of this country. Yet the death of this young man has touched the nerves of many in this country.\n Madam Speaker, the police have, in their initial statement, said that they suspect foul play and that they have started full scale investigation. We are told that recognizing the insecurity at the Korle-Bu Teaching Hospital, the residence of the housemen in particular, the hospital authorities have begtm in earnest to erect security facilities there. That is most welcome but it ought not to be a knee-jerk reaction.\n Madam Speaker, we are infonned that a person who was not used to sleeping naked was found naked. A person with no known ailment was found with blood stains in his armpit, scrotum and with some blood trickling from the nostrils. And part ofthe skin on the leg was peeled off and his bed sheet was soaked in blood. That is why the police have said they suspect foul play. The police have just started working on the case.\n Against this background, Madam Speaker, it is utterly nauseating for a local FM station to begin to peddle the information to the effect that the young man took his own life.\n Madam Speaker, people should be sensitive to the sensibilities of others.", 
             "time": "13:15:00"
         }, 
         {
             "column": "670", 
             "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "When the police have just started action on this, it borders on insanity for somebody to just begin to put out this information that the young man might have taken his own life. Madam Speaker, it is simply not right. It is for this reason that it is perhaps, imperative for the medical authorities to invite members of the family to be present at the conduct of the autopsy.", 
             "section": "STATEMENTS", 
             "speech": "When the police have just started action on this, it borders on insanity for somebody to just begin to put out this information that the young man might have taken his own life. Madam Speaker, it is simply not right. It is for this reason that it is perhaps, imperative for the medical authorities to invite members of the family to be present at the conduct of the autopsy.", 
@@ -3135,7 +3041,7 @@
         {
             "column": "670", 
             "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "I am hearing that the family are not being invited. I hope it is untrue. Just so that the family may rest assured, may I with utmost respect urge the hospital authorities to invite at least, a member of the family to be present in the conduct of the autopsy. I think it will provide the reassurance that they require in these circumstances.", 
             "section": "STATEMENTS", 
             "speech": "I am hearing that the family are not being invited. I hope it is untrue. Just so that the family may rest assured, may I with utmost respect urge the hospital authorities to invite at least, a member of the family to be present in the conduct of the autopsy. I think it will provide the reassurance that they require in these circumstances.", 
@@ -3144,7 +3050,7 @@
         {
             "column": "670", 
             "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "Madam Speaker, yesterday, when we went to visit our Hon Colleague and his family, I was particularly amazed at the demeanour of our Hon Colleague (Mr Leo Kabah) in the face of such grave adversity. Narrating the event to us, subsequently, he broke down and betrayed his other side that he is after all human and that indeed, he is shattered. He began to sob uncontrollably and Hon Colleagues who were with us caught the bug and shed tears profusely.", 
             "section": "STATEMENTS", 
             "speech": "Madam Speaker, yesterday, when we went to visit our Hon Colleague and his family, I was particularly amazed at the demeanour of our Hon Colleague (Mr Leo Kabah) in the face of such grave adversity. Narrating the event to us, subsequently, he broke down and betrayed his other side that he is after all human and that indeed, he is shattered. He began to sob uncontrollably and Hon Colleagues who were with us caught the bug and shed tears profusely.", 
@@ -3153,7 +3059,7 @@
         {
             "column": "670", 
             "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "We mourn with the family, Madam Speaker, knowing fully well that the tears of the parents, of the family would not be adequate to ferry the young man to the greater beyond and that is why we mourn with them. The good book obliges us to mourn with those who mourn. God knows best what has happened and we pray to God to grant the young man eternal rest.", 
             "section": "STATEMENTS", 
             "speech": "We mourn with the family, Madam Speaker, knowing fully well that the tears of the parents, of the family would not be adequate to ferry the young man to the greater beyond and that is why we mourn with them. The good book obliges us to mourn with those who mourn. God knows best what has happened and we pray to God to grant the young man eternal rest.", 
@@ -3162,7 +3068,7 @@
         {
             "column": "670", 
             "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "We will urge our Hon Colleague and his Wife to remain steadfast and not capitulate in the face of these events. This is because capitulation would mean being vanquished by death. He should rise up and conquer death by showing steely determination and we will be by the side of the family.", 
             "section": "STATEMENTS", 
             "speech": "We will urge our Hon Colleague and his Wife to remain steadfast and not capitulate in the face of these events. This is because capitulation would mean being vanquished by death. He should rise up and conquer death by showing steely determination and we will be by the side of the family.", 
@@ -3171,7 +3077,7 @@
         {
             "column": "671", 
             "kind": "continued speech", 
-            "name": "Mr Gershon K. B. Gbediame (NDC-- Nkwanta South)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "[MRKYEI-MENSAH-BONSU]", 
             "section": "STATEMENTS", 
             "speech": "Madam Speaker, I thank you for this opportunity.", 
@@ -3228,7 +3134,7 @@
             "name": "Mr Gbediame", 
             "original": "Mr Gbediame: Mr Speaker, we have agreed to move to item 9, Public Health Bill at the Consideration Stage.", 
             "section": "STATEMENTS", 
-            "speech": "Mr Speaker, we have agreed to move to item 9, Public Health Bill at the Consideration Stage.\n 1.25 p. m.", 
+            "speech": "Mr Speaker, we have agreed to move to item 9, Public Health Bill at the Consideration Stage.", 
             "time": "13:22:00"
         }, 
         {
@@ -3238,7 +3144,7 @@
             "original": "Mr First Deputy Speaker: Hon Members, what is the fate of the Criminal Offences (Amendment) Bill, 2011?", 
             "section": "STATEMENTS", 
             "speech": "Hon Members, what is the fate of the Criminal Offences (Amendment) Bill, 2011?", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "672", 
@@ -3247,7 +3153,7 @@
             "original": "Mr Gbediame: Mr Speaker, I am told that --", 
             "section": "STATEMENTS", 
             "speech": "Mr Speaker, I am told that --", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "672", 
@@ -3256,7 +3162,7 @@
             "original": "Mr First Deputy Speaker: Very well. Hon Deputy Attorney-General and Deputy Minister for Justice, have you resolved all the issues?", 
             "section": "STATEMENTS", 
             "speech": "Very well. Hon Deputy Attorney-General and Deputy Minister for Justice, have you resolved all the issues?", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "672", 
@@ -3265,7 +3171,7 @@
             "original": "Mr Ebo Barton-Odro: Mr Speaker, as much as we could, yes, we have dealt with the issues.", 
             "section": "STATEMENTS", 
             "speech": "Mr Speaker, as much as we could, yes, we have dealt with the issues.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "672", 
@@ -3274,7 +3180,7 @@
             "original": "Mr First Deputy Speaker: Very well. Hon Members, Criminal Offences (Amendment) Bill, 20 ll at the Consideration Stage.", 
             "section": "STATEMENTS", 
             "speech": "Very well. Hon Members, Criminal Offences (Amendment) Bill, 20 ll at the Consideration Stage.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "672", 
@@ -3283,7 +3189,7 @@
             "original": "Mr Barton-Odro: Mr Speaker, the arrangement was put in place for Hon Yieleh Chireh to take the place of the Chairman but because early on, an announcement was made to the effect that the Mental Health Bill will be dealt with,", 
             "section": "STATEMENTS", 
             "speech": "Mr Speaker, the arrangement was put in place for Hon Yieleh Chireh to take the place of the Chairman but because early on, an announcement was made to the effect that the Mental Health Bill will be dealt with,", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "673", 
@@ -3292,7 +3198,7 @@
             "original": "[MRBARTON-ODRO]", 
             "section": "STATEMENTS", 
             "speech": "he moved out of the Chamber but somebody will bring him back. We are sorry for this state of affairs.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "673", 
@@ -3301,7 +3207,7 @@
             "original": "Mr First Deputy Speaker: Hon Members, before we proceed, let us get -- I would want clarification from the Committee whether we are taking the amendments that we have on the original Order Paper as well as the Addendum to the Order Paper. I have seen that We have amendments dealing with the same clause 5 advertised on the Order Paper and we have another one on the Addendum to the Order Paper. Which is which or both?", 
             "section": "STATEMENTS", 
             "speech": "Hon Members, before we proceed, let us get -- I would want clarification from the Committee whether we are taking the amendments that we have on the original Order Paper as well as the Addendum to the Order Paper. I have seen that We have amendments dealing with the same clause 5 advertised on the Order Paper and we have another one on the Addendum to the Order Paper. Which is which or both?", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "673", 
@@ -3310,7 +3216,7 @@
             "original": "Mr Gbediame: Mr Speaker, my information is that, we will go through the original Order Paper and then the Addendum, that is the second Consideration of the same Bill. So, we will go through the initial or the main Order Paper.", 
             "section": "STATEMENTS", 
             "speech": "Mr Speaker, my information is that, we will go through the original Order Paper and then the Addendum, that is the second Consideration of the same Bill. So, we will go through the initial or the main Order Paper.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "673", 
@@ -3319,13 +3225,13 @@
             "original": "Mr First Deputy Speaker: Very Well. Hon Members, we are lookincg at the amendments on the Criminal Offences (Ammendment) Bill 2011 in the original rder Paper ortoday. So, clause 5 -- we continue with clause 5.", 
             "section": "STATEMENTS", 
             "speech": "Very Well. Hon Members, we are lookincg at the amendments on the Criminal Offences (Ammendment) Bill 2011 in the original rder Paper ortoday. So, clause 5 -- we continue with clause 5.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "heading": "BILLS - CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS - CONSIDERATION STAGE", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "673", 
@@ -3334,7 +3240,7 @@
             "original": "Mr Joseph Yieleh Chireh: Mr Speaker, under clause 5, we have the (b) in the original Bill--- 200 -- delete that whole clause and substitute - and I want to make some amendments on what has been done here.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "Mr Speaker, under clause 5, we have the (b) in the original Bill--- 200 -- delete that whole clause and substitute - and I want to make some amendments on what has been done here.\n In the Order Paper you have it starting with (2), (3) and (4). It should be (1), (2) and (3) with the following amendment:\n Mr Speaker, I beg to move, clause 5, subclause 200A (1), \"200B (1) A person who engages in racketeering commits an offence and is liable on conviction to a term of imprisonment for life or for a period of not less than five years.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "674", 
@@ -3343,7 +3249,7 @@
             "original": "(2) For purposes of subsections (1) and (2), racketeering is the act of operating an illegal business", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "(2) For purposes of subsections (1) and (2), racketeering is the act of operating an illegal business", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "674", 
@@ -3352,7 +3258,7 @@
             "original": "--\"", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "--\"", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "674", 
@@ -3361,7 +3267,7 @@
             "original": "Mr First Deputy Speaker: Let us take it one by one, that is the formula we adopted yesterday.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "Let us take it one by one, that is the formula we adopted yesterday.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "674", 
@@ -3370,7 +3276,7 @@
             "original": "Mr Chireh: Mr Speaker, all right.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "Mr Speaker, all right.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "674", 
@@ -3379,7 +3285,7 @@
             "original": "Mr First Deputy Speaker: Hon Members, any comments on the amendment moved by the Hon Yieleh Chireh? He is moving (2), 200B (2), page 2 of the original Order Paper. Let us ignore the subclauses; they can be rearranged at the appropriate time. This is because we took one yesterday and that is why they are making that one (2).", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "Hon Members, any comments on the amendment moved by the Hon Yieleh Chireh? He is moving (2), 200B (2), page 2 of the original Order Paper. Let us ignore the subclauses; they can be rearranged at the appropriate time. This is because we took one yesterday and that is why they are making that one (2).", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "674", 
@@ -3388,7 +3294,7 @@
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, yesterday, the Question was put and I think what we agreed on was what has been captured in the Addendum, that is the person who belongs to or participates in an activity of an organised criminal group, commits an offence and is liable on conviction to a maximum penalty--", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "Mr Speaker, yesterday, the Question was put and I think what we agreed on was what has been captured in the Addendum, that is the person who belongs to or participates in an activity of an organised criminal group, commits an offence and is liable on conviction to a maximum penalty--", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "674", 
@@ -3397,7 +3303,7 @@
             "original": "Mr First Deputy Speaker: We are not on organised crime. The organised crime, we gave some directives; we are dealing with racketeering. We are dealing with 200B; We are dealing with. racketeering. The directive we gave, I think, is what has been captured in the Addendum.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "We are not on organised crime. The organised crime, we gave some directives; we are dealing with racketeering. We are dealing with 200B; We are dealing with. racketeering. The directive we gave, I think, is what has been captured in the Addendum.\n Mr Kyei-Mensah-Bonsuz Mr Speaker, right. We debated this matter about the maximum sentence, whether it should be life imprisonment or death. People are of the opinion that because former Heads of State have not had the courage to go the whole hog and cause the execution of condemned prisoners by the issuance of the relevant warrant, we should not any longer have it on our statute books.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "675", 
@@ -3406,7 +3312,7 @@
             "original": "[MRKYELMENSAH-BONSU]", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "The other side was that it does not offend the Constitution. In any event, that is what the conventions call for. Now, having dealt with the organised crime, and adopted the death penalty as the maximum penalty, I would not be right to say that here, it should rather be imprisonment for life. So, we should be consistent. If we are saying that it should be imprisonment for life, so be it. Then we should go and replicate same in the earlier one that we agreed on. I think we should be consistent. That is Why I thought that we should still keep the death sentence.\n The trial judge is not obliged to give the maximum sentence anyway. But as was alluded to by the Hon Member for Akropong, we were just discussing the suspected murder of a young doctor. Would anybody say that if indeed, the perpetrator is found out and that person is subjected to the same punishment that he meted out, it would be outrageous?", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "675", 
@@ -3415,7 +3321,7 @@
             "original": "Mr First Deputy Speaker: Hon Member, I think yesterday, the argument boiled down to what constitutes racketeering as opposed to organised crime. And given the nature of some of the items listed in the subsequent amendment to constitute racketeering, whether we can exact the maximum penalty of death as against organised crime. So, those are -- if you look at racketeering, it is the act of operating an illegal business or scheme in order to make a profit perpetuated by a structured group. So, the emphasis is when the group is run to make some illegal profit, business scheme.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "Hon Member, I think yesterday, the argument boiled down to what constitutes racketeering as opposed to organised crime. And given the nature of some of the items listed in the subsequent amendment to constitute racketeering, whether we can exact the maximum penalty of death as against organised crime. So, those are -- if you look at racketeering, it is the act of operating an illegal business or scheme in order to make a profit perpetuated by a structured group. So, the emphasis is when the group is run to make some illegal profit, business scheme.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "675", 
@@ -3424,7 +3330,7 @@
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, I fully appreciate it. Yesterday, I spoke to it as well. But if we are talking about human trafficking, it is a grave offence. It is a", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I fully appreciate it. Yesterday, I spoke to it as well. But if we are talking about human trafficking, it is a grave offence. It is a", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "676", 
@@ -3433,7 +3339,7 @@
             "original": "grave offence. Yes, I acknowledge that there are some there and that is why I thought we could maybe, structure the offences contained in that provision. Prostitution, as I said, I do not think that if anybody engages in prostitution, we could have as a sanction, the ultimate of death penalty.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "grave offence. Yes, I acknowledge that there are some there and that is why I thought we could maybe, structure the offences contained in that provision. Prostitution, as I said, I do not think that if anybody engages in prostitution, we could have as a sanction, the ultimate of death penalty.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "676", 
@@ -3442,7 +3348,7 @@
             "original": "I do not believe that. But for human traffic -- and we are saying that for such conducts, perhaps, it might have been persistent and we have a group or a person who continues to deal in this, would not the person be fit, if he is ultimately found out to have trafficked human beings -- 2, 3, 4, 5 of them -- We should look at it again but I agree that it may not really affect all but some of them are grave enough and I think human trafficking and migrant smuggling are grave offences.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "I do not believe that. But for human traffic -- and we are saying that for such conducts, perhaps, it might have been persistent and we have a group or a person who continues to deal in this, would not the person be fit, if he is ultimately found out to have trafficked human beings -- 2, 3, 4, 5 of them -- We should look at it again but I agree that it may not really affect all but some of them are grave enough and I think human trafficking and migrant smuggling are grave offences.", 
-            "time": "13:22:00"
+            "time": "01:25:00"
         }, 
         {
             "column": "676", 
@@ -3540,7 +3446,14 @@
             "name": "Mr Owusu-Agyemang", 
             "original": "[MROWUSU-AGYEMANG]", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "about individuals? If it is not a group, what happens? That is why I wanted a clarification from the Hon Deputy Attorney-General and Deputy Minister for Justice. If he could explain this to me, I will be grateful.\n Some Hon Members - rose -", 
+            "speech": "about individuals? If it is not a group, what happens? That is why I wanted a clarification from the Hon Deputy Attorney-General and Deputy Minister for Justice. If he could explain this to me, I will be grateful.", 
+            "time": "13:35:00"
+        }, 
+        {
+            "action": "rose ", 
+            "kind": "action", 
+            "name": "Some Hon Members", 
+            "original": "Some Hon Members - rose -", 
             "time": "13:35:00"
         }, 
         {
@@ -6091,9 +6004,9 @@
             "time": "20:25:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
-            "name": "Mr Kan-Dap aah -", 
+            "name": "Mr Kan-Dap aah", 
             "original": "Mr Kan-Dap aah -- rose -", 
             "time": "20:25:00"
         }, 

@@ -541,7 +541,7 @@
             "time": "11:00:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
             "name": "Dr Mathew O. Prempeh", 
             "original": "Dr Mathew O. Prempeh - rose -", 
@@ -1064,6 +1064,13 @@
             "time": "11:20:00"
         }, 
         {
+            "action": "designate for Employment and Social Welfare ", 
+            "kind": "action", 
+            "name": "Madam Speaker, I am addressing the Hon Minister and he is in conversation with his Minister", 
+            "original": "Madam Speaker, I am addressing the Hon Minister and he is in conversation with his Minister-designate for Employment and Social Welfare -", 
+            "time": "11:30:00"
+        }, 
+        {
             "column": "132", 
             "kind": "speech", 
             "name": "Madam Speaker", 
@@ -1240,13 +1247,22 @@
             "name": "Madam Speaker", 
             "original": "Madam Speaker: We will get him to say but does it not happen all the time?", 
             "section": "IN ASHANTI REGION", 
-            "speech": "We will get him to say but does it not happen all the time?\n Yes, let us have the last contribution before we come to you for answering this point.\n Minority Leader (Mr Kyei-Mensah- Bonsu): Madam Speaker, I speak in support of the Motion but there are a few things that are not very clear.\n Madam Speaker, page 4 of the Report, \"Observations\". We are told of the procurement of one unit crane-mounted truck. Then alongside, we have the procurement of pumps, printers, scanner, desktop computer, laptop and software. Altogether, the cost comes to\n US$737,617.00.", 
+            "speech": "We will get him to say but does it not happen all the time?\n Yes, let us have the last contribution before we come to you for answering this point.", 
+            "time": "11:40:00"
+        }, 
+        {
+            "column": "138", 
+            "kind": "speech", 
+            "name": "Minority Leader (Mr Kyei-Mensah- Bonsu)", 
+            "original": "Minority Leader (Mr Kyei-Mensah- Bonsu): Madam Speaker, I speak in support of the Motion but there are a few things that are not very clear.", 
+            "section": "IN ASHANTI REGION", 
+            "speech": "Madam Speaker, I speak in support of the Motion but there are a few things that are not very clear.\n Madam Speaker, page 4 of the Report, \"Observations\". We are told of the procurement of one unit crane-mounted truck. Then alongside, we have the procurement of pumps, printers, scanner, desktop computer, laptop and software. Altogether, the cost comes to\n US$737,617.00.", 
             "time": "11:40:00"
         }, 
         {
             "column": "139", 
             "kind": "continued speech", 
-            "name": "Madam Speaker", 
+            "name": "Minority Leader (Mr Kyei-Mensah- Bonsu)", 
             "original": "[MR KYEI-MENSAH-BONSU]", 
             "section": "IN ASHANTI REGION", 
             "speech": "Madam Speaker, as it is before us, how do we know the cost of the one unit crane- mounted truck? We do not know. They have lumped everything together and they. are seeking an exemption; yet they do not tell us What the cost of the item is. What kind of arrangement is that? So we are not doing justice to ourselves if we approve of this in this form. As it is, if we walk out of here and l am asked what was the cost of the truck, and what was the exemption sought for the truck, what would I say?\n Madam Speaker, to page 3 - \"Approval of the Credit Agreement\". We are told that - [Interruption]", 
@@ -1379,7 +1395,7 @@
             "time": "11:50:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
             "name": "Mr Asaga", 
             "original": "Mr Asaga - rose -", 
@@ -1521,7 +1537,7 @@
             "time": "11:50:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
             "name": "Mr Asaga", 
             "original": "Mr Asaga - rose -", 
@@ -2013,7 +2029,16 @@
             "name": "Mr Joseph Y. Chireh (NDC - Wa West)", 
             "original": "[MR CHIREH]", 
             "section": "BILLS-SECOND READING", 
-            "speech": "as a spent legislation which has a period by itself. So this House must send a clear message that this Bill repeals the Act and in doing so, we are notifying the whole community of industries that were affected by this. That is why it is also a notice to the whole world that Government has kept faith with its pledge to end the Stabilisation Levy and therefore, we should not have any doubt whether we are doing the right thing or not.\n I urge all Hon Members to vote for it.\n Minority Leader (Mr OSei Kyei- Mensah-Bonsu): Mr Speaker, I think I would want to go on the lines of the Hon Minority Chief Whip.\n As he said, the Bill or the law, when it was introduced in this House, was time- bound. It was supposed to end in 2010, that is, at the end of fiscal year 2010. The Hon Minister subsequently came to this House to have it extended for another year - again, time-bound. So with the expiration of the fiscal year on 31st December, 201 1, unless the Hon Minister chose to extend it further, certainly, on 11th December, 2011, it expired; that regime expired automatically.\n Mr Speaker, what are we seeking to achieve, now that we are doing this, not on 31st December, 2011 but 26* January, 2012? What happens in the period between 31st December, 2011 and now? Would we say that it is legal?\n Clearly, I think this is an exercise that is unnecessary.", 
+            "speech": "as a spent legislation which has a period by itself. So this House must send a clear message that this Bill repeals the Act and in doing so, we are notifying the whole community of industries that were affected by this. That is why it is also a notice to the whole world that Government has kept faith with its pledge to end the Stabilisation Levy and therefore, we should not have any doubt whether we are doing the right thing or not.\n I urge all Hon Members to vote for it.", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "155", 
+            "kind": "speech", 
+            "name": "Minority Leader (Mr OSei Kyei- Mensah-Bonsu)", 
+            "original": "Minority Leader (Mr OSei Kyei- Mensah-Bonsu): Mr Speaker, I think I would want to go on the lines of the Hon Minority Chief Whip.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "Mr Speaker, I think I would want to go on the lines of the Hon Minority Chief Whip.\n As he said, the Bill or the law, when it was introduced in this House, was time- bound. It was supposed to end in 2010, that is, at the end of fiscal year 2010. The Hon Minister subsequently came to this House to have it extended for another year - again, time-bound. So with the expiration of the fiscal year on 31st December, 201 1, unless the Hon Minister chose to extend it further, certainly, on 11th December, 2011, it expired; that regime expired automatically.\n Mr Speaker, what are we seeking to achieve, now that we are doing this, not on 31st December, 2011 but 26* January, 2012? What happens in the period between 31st December, 2011 and now? Would we say that it is legal?\n Clearly, I think this is an exercise that is unnecessary.", 
             "time": "12:10:00"
         }, 
         {

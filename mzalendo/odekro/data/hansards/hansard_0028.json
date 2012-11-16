@@ -601,7 +601,7 @@
             "time": "10:40:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
             "name": "Mr Osei Kyei Mensah-Bonsu", 
             "original": "Mr Osei Kyei Mensah-Bonsu - rose -", 
@@ -748,13 +748,20 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Chairman of the Committee, this is a very simple issue. This Bill is about humans and animals. [Interruption] Hon Members, order!", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "Chairman of the Committee, this is a very simple issue. This Bill is about humans and animals. [Interruption] Hon Members, order!\n Some Hon Members - rose --", 
+            "speech": "Chairman of the Committee, this is a very simple issue. This Bill is about humans and animals. [Interruption] Hon Members, order!", 
+            "time": "10:50:00"
+        }, 
+        {
+            "action": "rose -", 
+            "kind": "action", 
+            "name": "Some Hon Members", 
+            "original": "Some Hon Members - rose --", 
             "time": "10:50:00"
         }, 
         {
             "column": "18", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
+            "name": "Some Hon Members", 
             "original": "Mr First Deputy Speaker; Hon Member for Amenfi East, you were on your feet.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr First Deputy Speaker; Hon Member for Amenfi East, you were on your feet.", 
@@ -1432,7 +1439,14 @@
             "name": "Ms Ayittey", 
             "original": "[MS AYITTEY]", 
             "section": "SCIENCE AND TECHNOLOGY", 
-            "speech": "Frequency Modulation (FM) stations, they would speak the predominant language Within the area. But if that has not gone done well, we can repeat the exercise using the appropriate language again.\n Prof (Emeritus) Amoako -rose -", 
+            "speech": "Frequency Modulation (FM) stations, they would speak the predominant language Within the area. But if that has not gone done well, we can repeat the exercise using the appropriate language again.", 
+            "time": "11:30:00"
+        }, 
+        {
+            "action": "rose ", 
+            "kind": "action", 
+            "name": "Prof (Emeritus) Amoako", 
+            "original": "Prof (Emeritus) Amoako -rose -", 
             "time": "11:30:00"
         }, 
         {

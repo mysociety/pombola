@@ -595,6 +595,13 @@
             "time": "11:45:00"
         }, 
         {
+            "action": "rose\u2013", 
+            "kind": "action", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
+            "original": "Mr Kyei-Mensah-Bonsu --rose\u2013-", 
+            "time": "11:45:00"
+        }, 
+        {
             "column": "771", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
@@ -1656,34 +1663,16 @@
         {
             "column": "803", 
             "kind": "speech", 
-            "name": "Dr Kojo Appiah-Kubi (NPP-AtWima- Kwanwoma)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Mr Speaker, thank you for the opportunity to contribute to the Motion.", 
             "section": "-", 
-            "speech": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Mr Speaker, thank you for the opportunity to contribute to the Motion.", 
-            "time": "12:35:00"
-        }, 
-        {
-            "column": "803", 
-            "kind": "speech", 
-            "name": "Dr Kojo Appiah-Kubi (NPP-AtWima- Kwanwoma)", 
-            "original": "Undoubtedly, Mr Speaker, improvement in teacher education is pivotal to any educational reform. So if government is undertaking to upgrade teacher training colleges to tertiary educational institutions, certainly, it is worthy of support. In a lighter vein, what I notice is that once this Bill is passed and assented to by the President, colleges in the system including Achimota College, Prempeh College may become extinct species.", 
-            "section": "-", 
-            "speech": "Undoubtedly, Mr Speaker, improvement in teacher education is pivotal to any educational reform. So if government is undertaking to upgrade teacher training colleges to tertiary educational institutions, certainly, it is worthy of support. In a lighter vein, what I notice is that once this Bill is passed and assented to by the President, colleges in the system including Achimota College, Prempeh College may become extinct species.", 
-            "time": "12:35:00"
-        }, 
-        {
-            "column": "803", 
-            "kind": "speech", 
-            "name": "Dr Kojo Appiah-Kubi (NPP-AtWima- Kwanwoma)", 
-            "original": "So when they describe other institutions, secondary schools that they", 
-            "section": "-", 
-            "speech": "So when they describe other institutions, secondary schools that they", 
+            "speech": "Mr Speaker, thank you for the opportunity to contribute to the Motion.\n Undoubtedly, Mr Speaker, improvement in teacher education is pivotal to any educational reform. So if government is undertaking to upgrade teacher training colleges to tertiary educational institutions, certainly, it is worthy of support. In a lighter vein, what I notice is that once this Bill is passed and assented to by the President, colleges in the system including Achimota College, Prempeh College may become extinct species.\n So when they describe other institutions, secondary schools that they", 
             "time": "12:35:00"
         }, 
         {
             "column": "805", 
             "kind": "continued speech", 
-            "name": "Dr Kojo Appiah-Kubi (NPP-AtWima- Kwanwoma)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "[MR KYEI-MENSAH-BONSU]", 
             "section": "-", 
             "speech": "are the colleges in the system, from now on, they will become extinct. However, those of them bearing the name \"Academy\" will be spared and that includes your own alma mater. [Laughter]\n Mr Speaker, as I was saying, the intendment of this Bill is to provide improvement in the quality of teaching. If that happens, certainly, it will impact on the education of pupils and students. And because of the improvement in their own abilities and competencies, it will urge the teachers to remain in the classrooms and so, the rate of retention of teachers in the classrooms would appreciate considerably. But certainly, once their capacities are built, it comes necessarily with upping their remunerations, certainly, it will have an impact on our budget-\n If we are talking about building capacities and competence of teachers, I believe necessarily, some restrictions will be imposed on entry into these institutions. That is something that we should factor in.\n That being the case, Mr Speaker, if we are not careful, it will restrict the number of students who would enter these institutions. Yes, the professional teachers, it is something that we should consider- Already, the number in the system, 3 8\u2018, is not encouraging enough and if by elevating them to tertiary institutions, we are going to further restrict entry into those institutions, we may have to look at it. Ultimately, we should work towards increasing the numbers of such institutions-\n For now, we are looking for qualitative improvement, which is good but we should also aim at increasing the numbers of such institutions; otherwise, as I have said, if already we are going to restrict", 
@@ -1692,7 +1681,7 @@
         {
             "column": "806", 
             "kind": "speech", 
-            "name": "Dr Kojo Appiah-Kubi (NPP-AtWima- Kwanwoma)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "entry into these institutions, 38, not as many as we desire, it may consequentially affect the number of teachers who may come out. This is my worry. The principle is understood but I think ultimately, we should work to broaden the horizon, the number of teachers to be employed; otherwise, in the short to medium-term, we should work to expand, the infrastructure in these institutions to accommodate many more applicants while taking steps not to lower standards.", 
             "section": "-", 
             "speech": "entry into these institutions, 38, not as many as we desire, it may consequentially affect the number of teachers who may come out. This is my worry. The principle is understood but I think ultimately, we should work to broaden the horizon, the number of teachers to be employed; otherwise, in the short to medium-term, we should work to expand, the infrastructure in these institutions to accommodate many more applicants while taking steps not to lower standards.", 
@@ -1701,7 +1690,7 @@
         {
             "column": "806", 
             "kind": "speech", 
-            "name": "Dr Kojo Appiah-Kubi (NPP-AtWima- Kwanwoma)", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
             "original": "Mr Speaker, with these not too many words, l would also want to lend my support to the Motion.", 
             "section": "-", 
             "speech": "Mr Speaker, with these not too many words, l would also want to lend my support to the Motion.", 

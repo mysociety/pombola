@@ -1,97 +1,6 @@
 {
     "entries": [
         {
-            "action": "rose", 
-            "kind": "action", 
-            "name": "Mr Ambrose P. Dery", 
-            "original": "Mr Ambrose P. Dery - rose -", 
-            "time": null
-        }, 
-        {
-            "column": "39", 
-            "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Hon Deputy Minority Leader?", 
-            "section": null, 
-            "speech": "Hon Deputy Minority Leader?", 
-            "time": null
-        }, 
-        {
-            "column": "39", 
-            "kind": "speech", 
-            "name": "Mr Dery", 
-            "original": "Mr Dery: Mr Speaker, I just wanted guidance on item 4. I did not get what the Leader of the House said in respect of item 4. That is what I wanted but i did not also want to interfere with the presentation.", 
-            "section": null, 
-            "speech": "Mr Speaker, I just wanted guidance on item 4. I did not get what the Leader of the House said in respect of item 4. That is what I wanted but i did not also want to interfere with the presentation.", 
-            "time": null
-        }, 
-        {
-            "column": "39", 
-            "kind": "speech", 
-            "name": "Mr Avoka", 
-            "original": "Mr Avoka: Mr Speaker, I am sorry if I was not very clear. I said item 4 was not yet ready for laying and that during the course of the day, the joint Chairmen of the Finance and Poverty Reduction Strategy Committees will advise me and I will let the House know. It is deferred for that matter.", 
-            "section": null, 
-            "speech": "Mr Speaker, I am sorry if I was not very clear. I said item 4 was not yet ready for laying and that during the course of the day, the joint Chairmen of the Finance and Poverty Reduction Strategy Committees will advise me and I will let the House know. It is deferred for that matter.", 
-            "time": null
-        }, 
-        {
-            "column": "39", 
-            "kind": "speech", 
-            "name": "Mr Dery", 
-            "original": "Mr Dery: Mr Speaker, so it is deferred till later and not for tomorrow? That is what I wanted to know.", 
-            "section": null, 
-            "speech": "Mr Speaker, so it is deferred till later and not for tomorrow? That is what I wanted to know.", 
-            "time": null
-        }, 
-        {
-            "column": "39", 
-            "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Hon Deputy Minority Leader, we are talking about the business of today. In other words, it is not being laid today.", 
-            "section": null, 
-            "speech": "Hon Deputy Minority Leader, we are talking about the business of today. In other words, it is not being laid today.", 
-            "time": null
-        }, 
-        {
-            "column": "39", 
-            "kind": "speech", 
-            "name": "Mr Dery", 
-            "original": "Mr Dery: Thank, you, Mr Speaker. That is what I wanted, a clear indication, that is what we understood outside. I thought my senior Colleague was trying to do a political summersault without notice.", 
-            "section": null, 
-            "speech": "Thank, you, Mr Speaker. That is what I wanted, a clear indication, that is what we understood outside. I thought my senior Colleague was trying to do a political summersault without notice.", 
-            "time": null
-        }, 
-        {
-            "heading": "BILLS--FIRST READING", 
-            "kind": "heading", 
-            "original": "BILLS--FIRST READING", 
-            "time": null
-        }, 
-        {
-            "column": "40", 
-            "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Hon Members, shall we move to item 5 (b).", 
-            "section": "BILLS--FIRST READING", 
-            "speech": "Hon Members, shall we move to item 5 (b).\n University of Energy and Natural resources Bill , 2011\n An Act to (provide for the University of Energy an Natural Resource and for related matters.\n Presented by the Minister for Education. Rea the First time; referred to the Committee on Education.", 
-            "time": null
-        }, 
-        {
-            "heading": "MOTIONS", 
-            "kind": "heading", 
-            "original": "MOTIONS", 
-            "time": null
-        }, 
-        {
-            "column": "40", 
-            "kind": "speech", 
-            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
-            "original": "Chairman of the Committee](Mr James K. Avedzi): Mr Speaker, I beg to move that this Honourable House adopts", 
-            "section": "MOTIONS", 
-            "speech": "Mr Speaker, I beg to move that this Honourable House adopts", 
-            "time": null
-        }, 
-        {
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
@@ -113,13 +22,13 @@
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "37", 
@@ -128,7 +37,7 @@
             "original": "Mr First Deputy Speaker: Hon Members, correction of the Votes and Proceedings of the First Special Sitting of Parliament, Monday, 22nd August, 2011.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "Hon Members, correction of the Votes and Proceedings of the First Special Sitting of Parliament, Monday, 22nd August, 2011.\n Page l 6-", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "37", 
@@ -137,7 +46,7 @@
             "original": "Mrs Gifty E. Kusi: Mr Speaker, page 5, paragraph 6, number 20 -- Hon Nana Amoakoh Was here yesterday; I spoke with him here.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "Mr Speaker, page 5, paragraph 6, number 20 -- Hon Nana Amoakoh Was here yesterday; I spoke with him here.", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "37", 
@@ -146,7 +55,7 @@
             "original": "Mr First Deputy Speaker: Very well.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "Very well.\n Page 6, yes, Hon Member forAblekuma South --", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "37", 
@@ -155,7 +64,7 @@
             "original": "Mr Fritz F. Baffour: Mr Speaker, page 6, number 65 --Hon Daoud Anum Yemoh, he was here yesterday and so I just want to correct it.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "Mr Speaker, page 6, number 65 --Hon Daoud Anum Yemoh, he was here yesterday and so I just want to correct it.", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "37", 
@@ -164,7 +73,7 @@
             "original": "Mr First Deputy Speaker: Very well.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "Very well.\n Page 7... 12 ---\n Hon Members, the Votes and Proceedings of the First Special Sitting of Parliament, Monday, 22nd August 201 1, as corrected, be adopted as the true record of proceedings.\n [No correction was made to the Official Report of Monday, 18th July, 2011", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "38", 
@@ -173,7 +82,7 @@
             "original": "[No correction was made to the Official Report of Tuesday, 19th July,", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "[No correction was made to the Official Report of Tuesday, 19th July,", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "38", 
@@ -182,7 +91,7 @@
             "original": "2011.]", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "2011.]", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "38", 
@@ -191,7 +100,7 @@
             "original": "[No correction was made to the Official Report of Wednesday, 20th July,", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "[No correction was made to the Official Report of Wednesday, 20th July,", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "38", 
@@ -200,7 +109,7 @@
             "original": "2011.]", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "2011.]", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "38", 
@@ -209,7 +118,7 @@
             "original": "[No correction was made to the Official Report of Thursday, 21st July,", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "[No correction was made to the Official Report of Thursday, 21st July,", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "38", 
@@ -218,7 +127,7 @@
             "original": "2011.]", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "2011.]", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "38", 
@@ -227,7 +136,7 @@
             "original": "Hon Members, we have the Official Report of Monday, 22nd August, 2011, Special Meeting. That is yesterday. Any correction?", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "speech": "Hon Members, we have the Official Report of Monday, 22nd August, 2011, Special Meeting. That is yesterday. Any correction?", 
-            "time": null
+            "time": "10:20:00"
         }, 
         {
             "column": "38", 
@@ -257,368 +166,355 @@
             "time": "10:30:00"
         }, 
         {
-            "column": "55", 
+            "column": "39", 
             "kind": "continued speech", 
             "name": "Mr Cletus A. Avoka", 
-            "original": "[MR KAN-DAPAAH]", 
+            "original": "[MR AVOKA]", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Speaker, somebody gets up one day, dreams up a project and from nowhere, he comes to Parliament for approval. Mr Speaker, that cannot be accepted; and to the extent that this project has not been captured in the medium-term plan and in the annual Budget, I have serious reservations about what we are trying to do by giving approval to this.\n Mr Speaker, with the facility itself, I would not have much problem, but Mr Speaker, please, we need to be serious about this and I would be grateful if the Hon Minister would take this into account. This is because as a bank manager, he would not approve any loan with the sort of information that he is giving to us and I think it is improper and should not be accepted by this House.\n Thank you, Mr Speaker.", 
+            "speech": "Mr Speaker, we will start Public Business with item 5, then after that we do items 6 and 8 as consequential for the meantime.", 
             "time": "10:30:00"
         }, 
         {
-            "column": "55", 
-            "kind": "speech", 
-            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
-            "original": "Mr Alfred W. G. Abayateye (NDC - Sege): Mr Speaker, to contribute to the Motion on the floor, I urge all Members to vote massively for this.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, to contribute to the Motion on the floor, I urge all Members to vote massively for this.\n Mr Speaker, I happen to be a member of the Committee which dealt with this and in the course of our deliberations, the Chief Executive Officer (CEO) of Ghana Interbank Payment and Settlement System (GhlPSS) informed the Committee that the Germans were in Ghana, they came to carry out a survey and they saw the work that GhIPSS was doing and how effectively they were running the thing, so their decision was to assist the country and the body handling this issue to perform better.\n Speaker, it would interest you to note that the amount is 7 million euros, there is a grant of 500,000 euros, the grace period is ten years and the maturity period is forty years. In -fact, giving the total", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "56", 
-            "kind": "speech", 
-            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
-            "original": "period --the repayment period is forty years giving the total maturity period of fifty years.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "period --the repayment period is forty years giving the total maturity period of fifty years.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "56", 
-            "kind": "speech", 
-            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
-            "original": "Mr Speaker, my and view expectation and with the deliberations we had with the CEO, I can foresee that, if we access this opportunity, in the end, it would be beneficiary. I can foresee that the Germans might write off this loan for us. [Interruptions]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, my and view expectation and with the deliberations we had with the CEO, I can foresee that, if we access this opportunity, in the end, it would be beneficiary. I can foresee that the Germans might write off this loan for us. [Interruptions]", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "56", 
-            "kind": "speech", 
-            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
-            "original": "We have forty years, a grace period of ten years, giving a maturity period of fifty years for 7 million euros. I want to urge all. my brethren that let us expect the rain, the clouds are forming, therefore the country must gather the bowls to collect the rain. [Hear! Hear!]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "We have forty years, a grace period of ten years, giving a maturity period of fifty years for 7 million euros. I want to urge all. my brethren that let us expect the rain, the clouds are forming, therefore the country must gather the bowls to collect the rain. [Hear! Hear!]", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "56", 
-            "kind": "speech", 
-            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
-            "original": "Mr Speaker, I want to again say that the work of the e-Zwich is very, very beneficial to the country. As I am talking now, with what they are doing, all over the country, the students of Ghana who are accessing loans from the Students Loan Trust, every payment to them is done through the e-Zwich even in the remotest corner of the country. Therefore, if we can access this facility to expand the system, it would be better for the country and the country would be a better place to live in.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, I want to again say that the work of the e-Zwich is very, very beneficial to the country. As I am talking now, with what they are doing, all over the country, the students of Ghana who are accessing loans from the Students Loan Trust, every payment to them is done through the e-Zwich even in the remotest corner of the country. Therefore, if we can access this facility to expand the system, it would be better for the country and the country would be a better place to live in.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "56", 
-            "kind": "speech", 
-            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
-            "original": "With these points, I urge all Hon Members to let us see with the eye of faith, because what is in stock for the country is good.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "With these points, I urge all Hon Members to let us see with the eye of faith, because what is in stock for the country is good.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "56", 
-            "kind": "speech", 
-            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
-            "original": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu) Mr Speaker, Without doubt, listening to Hon Colleagues, I think we are all united that this is a good facility and that Parliament without much hesitation may approve of it.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu) Mr Speaker, Without doubt, listening to Hon Colleagues, I think we are all united that this is a good facility and that Parliament without much hesitation may approve of it.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "56", 
-            "kind": "speech", 
-            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
-            "original": "But Mr Speaker, I am not too clear in my mind looking at the purpose of the credit captured in item 3.0 on page 3 of the Report. We are told that and with your permission, I quote:", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "But Mr Speaker, I am not too clear in my mind looking at the purpose of the credit captured in item 3.0 on page 3 of the Report. We are told that and with your permission, I quote:", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "53", 
-            "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Do you have a point of order, Hon Minister?", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Do you have a point of order, Hon Minister?", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "53", 
-            "kind": "speech", 
-            "name": "Dr Prempeh", 
-            "original": "Dr Prempeh: He was not at the Ministry, Mr Speaker. I wonder how he is going to answer this question.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "He was not at the Ministry, Mr Speaker. I wonder how he is going to answer this question.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "53", 
-            "kind": "speech", 
-            "name": "Mr Chireh", 
-            "original": "Mr Chireh: Mr Speaker thank you very much. I am standing on a point of order and information to my Colleague.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker thank you very much. I am standing on a point of order and information to my Colleague.\n The matter of the loan approved for ambulances is well in hand. So KtW knows that things have moved very fast and all the processes have been taken through and soon -- [Interruption] - before the end of the year, you will get --", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "53", 
-            "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Hon Minister, that is not a point of order; it is point of information-", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Hon Minister, that is not a point of order; it is point of information-", 
-            "time": "10:30:00"
-        }, 
-        {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
-            "name": "Dr Prempeh -", 
-            "original": "Dr Prempeh -- rose -", 
+            "name": "Mr Ambrose P. Dery", 
+            "original": "Mr Ambrose P. Dery - rose -", 
             "time": "10:30:00"
         }, 
         {
-            "column": "53", 
+            "column": "39", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: I thought you have concluded. _", 
+            "original": "Mr First Deputy Speaker: Hon Deputy Minority Leader?", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "I thought you have concluded. _", 
+            "speech": "Hon Deputy Minority Leader?", 
             "time": "10:30:00"
         }, 
         {
-            "column": "53", 
+            "column": "39", 
             "kind": "speech", 
-            "name": "Dr Prempeh", 
-            "original": "Dr Prempeh: I want to conclude.", 
+            "name": "Mr Dery", 
+            "original": "Mr Dery: Mr Speaker, I just wanted guidance on item 4. I did not get what the Leader of the House said in respect of item 4. That is what I wanted but i did not also want to interfere with the presentation.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "I want to conclude.", 
+            "speech": "Mr Speaker, I just wanted guidance on item 4. I did not get what the Leader of the House said in respect of item 4. That is what I wanted but i did not also want to interfere with the presentation.", 
             "time": "10:30:00"
         }, 
         {
-            "column": "53", 
+            "column": "39", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Conclude.", 
+            "name": "Mr Avoka", 
+            "original": "Mr Avoka: Mr Speaker, I am sorry if I was not very clear. I said item 4 was not yet ready for laying and that during the course of the day, the joint Chairmen of the Finance and Poverty Reduction Strategy Committees will advise me and I will let the House know. It is deferred for that matter.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Conclude.", 
+            "speech": "Mr Speaker, I am sorry if I was not very clear. I said item 4 was not yet ready for laying and that during the course of the day, the joint Chairmen of the Finance and Poverty Reduction Strategy Committees will advise me and I will let the House know. It is deferred for that matter.", 
             "time": "10:30:00"
         }, 
         {
-            "column": "53", 
+            "column": "39", 
             "kind": "speech", 
-            "name": "DrPrempeh", 
-            "original": "DrPrempeh: Mr Speaker, I thank you very much for allowing the Hon Minister for Health to confirm my point.", 
+            "name": "Mr Dery", 
+            "original": "Mr Dery: Mr Speaker, so it is deferred till later and not for tomorrow? That is what I wanted to know.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, I thank you very much for allowing the Hon Minister for Health to confirm my point.\n Ten months down the line, this same KfW has not been able to grant us the money for the ambulances. How are we sure, ten months further up front, KfW will give us money for such a national important issue?", 
+            "speech": "Mr Speaker, so it is deferred till later and not for tomorrow? That is what I wanted to know.", 
             "time": "10:30:00"
         }, 
         {
-            "column": "53", 
-            "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Hon Members, I will take brief comments from two more, I think the Hon Kan-Dapaah and Hon Member for Sege.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Hon Members, I will take brief comments from two more, I think the Hon Kan-Dapaah and Hon Member for Sege.\n Hon Kan-Dapaah very brief (NPP-- Afigya-Sekyere West).", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "53", 
-            "kind": "speech", 
-            "name": "MrAlbert Kan-Dapaah", 
-            "original": "MrAlbert Kan-Dapaah: Mr Speaker, this is a facility for 7 million euros, 500,000 euros grant element and grace period of", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, this is a facility for 7 million euros, 500,000 euros grant element and grace period of", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "54", 
-            "kind": "speech", 
-            "name": "MrAlbert Kan-Dapaah", 
-            "original": "ten years, and repayment period of 40 years for such a very important project. I have no problem with it at all, but Mr Speaker, I have a problem with the procedures that we are following.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "ten years, and repayment period of 40 years for such a very important project. I have no problem with it at all, but Mr Speaker, I have a problem with the procedures that we are following.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "54", 
-            "kind": "speech", 
-            "name": "MrAlbert Kan-Dapaah", 
-            "original": "Mr Speaker, the requirement for Parliament to approve loans to be contracted by Government is a very important accountability mechanism in the financial management of this country and I believe that when we are called upon to approve such loans, we need to be given enough information for us to be able to make up our minds.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, the requirement for Parliament to approve loans to be contracted by Government is a very important accountability mechanism in the financial management of this country and I believe that when we are called upon to approve such loans, we need to be given enough information for us to be able to make up our minds.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "54", 
-            "kind": "speech", 
-            "name": "MrAlbert Kan-Dapaah", 
-            "original": "And I think we must only do so after serious and painstaking scrutiny of the data that is given to us.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "And I think we must only do so after serious and painstaking scrutiny of the data that is given to us.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "54", 
-            "kind": "speech", 
-            "name": "MrAlbert Kan-Dapaah", 
-            "original": "Mr Speaker, we are going to approve this loan-I am going to have to approve it in my capacity as a Member of Parliament and yet I ask myself, after this loan is contracted, what would be the stock of public debt? Mr Speaker, this is not given in the document and I wonder whether it was given to the Committee.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, we are going to approve this loan-I am going to have to approve it in my capacity as a Member of Parliament and yet I ask myself, after this loan is contracted, what would be the stock of public debt? Mr Speaker, this is not given in the document and I wonder whether it was given to the Committee.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "54", 
-            "kind": "speech", 
-            "name": "MrAlbert Kan-Dapaah", 
-            "original": "Mr Speaker, I am being asked,.as- a bank manager, to approve a loan and nobody is in the position to show me the debt sustainability analysis that has been done. Let us forget about the amount of the loan, but I need to know this before I can approve.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, I am being asked,.as- a bank manager, to approve a loan and nobody is in the position to show me the debt sustainability analysis that has been done. Let us forget about the amount of the loan, but I need to know this before I can approve.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "54", 
-            "kind": "speech", 
-            "name": "MrAlbert Kan-Dapaah", 
-            "original": "Mr Speaker, even more important, in this country, we have approved that we will ensure proper transparency and accountability of the public resources through what is referred to as the \"budget cycle\". Mr Speaker, under the budget cycle, we cannot undertake any project which has not -been captured either in the medium-term plan or in the annual Budget.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, even more important, in this country, we have approved that we will ensure proper transparency and accountability of the public resources through what is referred to as the \"budget cycle\". Mr Speaker, under the budget cycle, we cannot undertake any project which has not -been captured either in the medium-term plan or in the annual Budget.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "54", 
-            "kind": "speech", 
-            "name": "MrAlbert Kan-Dapaah", 
-            "original": "Mr Speaker, I have checked-- this Project is not in the annual Budget, it is not in the medium-term plan, so Mr", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, I have checked-- this Project is not in the annual Budget, it is not in the medium-term plan, so Mr", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "51", 
+            "column": "39", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: I will take one each, then put the Question.", 
+            "original": "Mr First Deputy Speaker: Hon Deputy Minority Leader, we are talking about the business of today. In other words, it is not being laid today.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "I will take one each, then put the Question.\n Hon Member for Ashaiman and --", 
+            "speech": "Hon Deputy Minority Leader, we are talking about the business of today. In other words, it is not being laid today.", 
             "time": "10:30:00"
         }, 
         {
-            "column": "51", 
+            "column": "39", 
             "kind": "speech", 
-            "name": "Mr Alfred K. Agbesi (NDC-- Ashaiman)", 
-            "original": "Mr Alfred K. Agbesi (NDC-- Ashaiman): Mr Speaker, as one of the contributors have said, this is not a controversial matter; it is something which all of us should agree to --he said both sides of the House agreed that this is a necessary facility and we should all support it and I urge Hon Members to do same.", 
+            "name": "Mr Dery", 
+            "original": "Mr Dery: Thank, you, Mr Speaker. That is what I wanted, a clear indication, that is what we understood outside. I thought my senior Colleague was trying to do a political summersault without notice.", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, as one of the contributors have said, this is not a controversial matter; it is something which all of us should agree to --he said both sides of the House agreed that this is a necessary facility and we should all support it and I urge Hon Members to do same.\n Mr Speaker, it is said that, this facility will be suitable for the rural areas and for the less-educated people. Mr Speaker, that is a very good statement because most of our people coming from the rural areas and less educated are not happy going to banks to secure money, hence some of them are tempted to keep the money under their pillows. Any facility that would come to their aid in the rural area, for them to access easily, Mr Speaker, is something that all of us must support.\n Again, Mr Speaker, it is said that this will also enable people not to carry large sums of money on them, thereby falling prey to armed robbers as they travel along. Of late-armed robbers are attacking people on the roads suspecting that they are carrying money.\n Mr Speaker, this facility is going to eliminate this situation where e~Zwich banking will be a matter for all of us who attempt to travel not to carry large sums of money.\n Mr Speaker, I wish to urge all Hon Members to support this facility and vote massively for it.", 
+            "speech": "Thank, you, Mr Speaker. That is what I wanted, a clear indication, that is what we understood outside. I thought my senior Colleague was trying to do a political summersault without notice.", 
             "time": "10:30:00"
         }, 
         {
-            "column": "51", 
+            "heading": "BILLS--FIRST READING", 
+            "kind": "heading", 
+            "original": "BILLS--FIRST READING", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "40", 
             "kind": "speech", 
-            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
-            "original": "Mr Matthew O. Prempeh( NPP -- Manhyia): Mr Speaker, the e-_Zwich is a payment system; it is a payment system", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, the e-_Zwich is a payment system; it is a payment system", 
+            "name": "Mr First Deputy Speaker", 
+            "original": "Mr First Deputy Speaker: Hon Members, shall we move to item 5 (b).", 
+            "section": "BILLS--FIRST READING", 
+            "speech": "Hon Members, shall we move to item 5 (b).\n University of Energy and Natural resources Bill , 2011\n An Act to (provide for the University of Energy an Natural Resource and for related matters.\n Presented by the Minister for Education. Rea the First time; referred to the Committee on Education.", 
             "time": "10:30:00"
         }, 
         {
-            "column": "52", 
+            "heading": "MOTIONS", 
+            "kind": "heading", 
+            "original": "MOTIONS", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "40", 
             "kind": "speech", 
-            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
-            "original": "that I am pretty certain that very soon, most countries in our sub-region will come and copy and emulate from Ghana. Mr Speaker, it is a payment system aimed at bringing more money out of the informal system to the more formal system.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "that I am pretty certain that very soon, most countries in our sub-region will come and copy and emulate from Ghana. Mr Speaker, it is a payment system aimed at bringing more money out of the informal system to the more formal system.", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "Chairman of the Committee](Mr James K. Avedzi): Mr Speaker, I beg to move that this Honourable House adopts", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, I beg to move that this Honourable House adopts", 
             "time": "10:30:00"
         }, 
         {
-            "column": "52", 
-            "kind": "speech", 
-            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
-            "original": "The aim of e-Zwich should not only be to target seven million people, every Ghanaian probably should carry e~Zwich card, may be, in the next five or six years because it will help us tremendously in our payment systems in the country.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The aim of e-Zwich should not only be to target seven million people, every Ghanaian probably should carry e~Zwich card, may be, in the next five or six years because it will help us tremendously in our payment systems in the country.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "52", 
-            "kind": "speech", 
-            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
-            "original": "I support the Committee when they say that national service personnel, pensioners, students and everybody should try and be on the e-Zwich system so that payment systems can be more facilitated in this country.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "I support the Committee when they say that national service personnel, pensioners, students and everybody should try and be on the e-Zwich system so that payment systems can be more facilitated in this country.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "52", 
-            "kind": "speech", 
-            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
-            "original": "Mr Speaker, my only worry- now that I see one of the Ministers for Finance and Economic Planning around, is where we are getting this funding from. Mr Speaker, this House in November, last year, passed a loan Agreement with KfW as the money givers, and that loan was a very vital issue of national importance.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, my only worry- now that I see one of the Ministers for Finance and Economic Planning around, is where we are getting this funding from. Mr Speaker, this House in November, last year, passed a loan Agreement with KfW as the money givers, and that loan was a very vital issue of national importance.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "52", 
-            "kind": "speech", 
-            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
-            "original": "Mr Speaker, that loan was to give this country ambulances and it was funded by KfW. Mr Speaker, you know that ambulances are of such crucial importance When armed robberies and deaths, as my Friends are saying, are occurring on our highways.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, that loan was to give this country ambulances and it was funded by KfW. Mr Speaker, you know that ambulances are of such crucial importance When armed robberies and deaths, as my Friends are saying, are occurring on our highways.", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "52", 
-            "kind": "speech", 
-            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
-            "original": "Mr Speaker, I asked this question when this loan agreement was laid first, that, where are the ambulances supposed to be provided by KfW? This KtW gave us money to provide ambulances and those ambulances, nearly eight months down the line have not been delivered. How are we sure KfW can give us money for the e- Zwich?", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, I asked this question when this loan agreement was laid first, that, where are the ambulances supposed to be provided by KfW? This KtW gave us money to provide ambulances and those ambulances, nearly eight months down the line have not been delivered. How are we sure KfW can give us money for the e- Zwich?", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "52", 
-            "kind": "speech", 
-            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
-            "original": "Mr Speaker, that is the only contribution. - [Interruption.]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, that is the only contribution. - [Interruption.]", 
-            "time": "10:30:00"
-        }, 
-        {
-            "action": "rose", 
-            "kind": "action", 
-            "name": "Mr Joseph Yieleh Chireh -", 
-            "original": "Mr Joseph Yieleh Chireh -- rose -", 
-            "time": "10:30:00"
-        }, 
-        {
-            "column": "49", 
+            "column": "41", 
             "kind": "continued speech", 
-            "name": "Mr Joseph Yieleh Chireh -", 
-            "original": "[MR NTOW]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "been said by my Hon Colleague on the other side of the House.\n There are two particular areas I want to highlight. One is the activities of market women in the rural areas.\n It may interest you to note that, these days, women find it very, very difficult to travel in the night because of the activities of these notorious armed robbers. These women carry a lot of money on them while visiting the marketing centers like Kumasi, Accra, Takoradi, et cetera. So, with the introduction of the e-Zwich, I think it would go a long way in assisting our rural women in going about their normal activities without fear or harm.\n Another area is students from rural areas who are in the cities and towns to continue their education. I think, with the e-Zwich, parents from rural areas will be able to send moneys or remittances to these students in a very easy and safe manner. So, I think it is a very good idea for the Government of Ghana to take this amount of money to continue making banking very, very effective in our rural areas.\n Come to places like Assemkro, Jima, Boisoo, Omapem in my constituency that do not have access to banking facilities. There is only one commercial bank which is sited at the center of the district capital so, with the introduction of the e-Zwich, I think it will help my people and all over this country to have access to good banking system.\n Thank you very much, for the opportunity.", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "[MR AVEDZI]", 
+            "section": "MOTIONS", 
+            "speech": "the Report of the Committee on Finance on the Loan Agreement between the Government of the Republic of Ghana and the Kredistanstalt fur Wiederaufbau (l<lfW) for an amount of 7.0 million euros and a grant of 0.5 million euros to finance the e-Zwich Rural Branch-less Banking Project.\n Mr Speaker, l present the Report of the Committee.\n 1.0 Introduction\n The Loan Agreement between the Government of the Republic of Ghana and Kredistanstalt fur Wiederaufbau (KfW), Frankfurt AM Main, Germany for an amount of seven million Euros (7,000,000.00) for the implementation of the e-Zwich Rural Branch-less Banking was laid in the House on Tuesday, 12\" July, 2011 in accordance with article 181 of the 1992 Constitution of the Republic of Ghana.\n Pursuant to article 103 of the Constitution and Order 171 (l) of the Standing Orders of the House,Madam Speaker referred the Agreement to the Committee on Finance for consideration and report.\n The Committee met and considered the Agreement with the Minister for Finance and Economic Planning, Hon Dr Kwabena Duffuor and his Deputy, Hon Seth Terkpeh as well as officials from the Ministry of Finance and Economic Planning and the Ghana Interbank Payment and Settlement Systems '(GhlPSS) and hereby presents this Report to the House in accordance with Order 161(1) of the Standing Orders of the House.\n 2.0 Background\n The GhIPSS is a wholly owned subsidiary of the Bank of Ghana tasked", 
             "time": "10:30:00"
         }, 
         {
-            "column": "50", 
+            "column": "42", 
             "kind": "speech", 
-            "name": "Mr Isaac Osei (NPP -- Subin)", 
-            "original": "Mr Isaac Osei (NPP -- Subin): Mr Speaker, I believe that the objective of the facility is to make formal financial services available to persons resident in our country. I think it is a very good objective. However, for the committee to reach the Conclusion that this particular facility would improve the economic circumstance of people living in the rural areas, I think that one is very far-fetched.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, I believe that the objective of the facility is to make formal financial services available to persons resident in our country. I think it is a very good objective. However, for the committee to reach the Conclusion that this particular facility would improve the economic circumstance of people living in the rural areas, I think that one is very far-fetched.\n This singular loan cannot improve the economic conditions of the people living in the rural areas. There are many other things that we ought to do in order to attain that particular goal which all of us strive for.\n But Mr Speaker, I would have wanted to see the effects of the e-Zwich system in the areas where it has been applied over the last few years and I believe that the e- Zwich probably has not been as successful as was\" initially planned. However, the objective of banking the un-banked, especially in the rural areas is something I believe all of us can support.\n But I get worried, Mr Speaker that; it appears we are getting ourselves caught in a loan strap where everything that we need in this country, we have to borrow money from somewhere. If one looks at the quantum of money for this one 7 million euros, it is something I believe could have been found within the banking sector in our country. After all, this is to support the financial sector of our country and then link it up with the rural areas of our country.\n I think 7 million euros we could probably have found it .within our country. So my worry is that, let us not get into a loan strap because that will also lead us into a debt trap.\n I thank you, Mr Speaker.", 
-            "time": "10:50:00"
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "to implement a countrywide biometric payment system, popularly known as \"e- zwich\". The system allows the delivery of quality financial services to the population of Ghana, especially the un-banked and the under-banked. The e-Zwich technology permits off-line transactions and fingerprint recognition making it highly suitable for rural areas and for less educated people.", 
+            "section": "MOTIONS", 
+            "speech": "to implement a countrywide biometric payment system, popularly known as \"e- zwich\". The system allows the delivery of quality financial services to the population of Ghana, especially the un-banked and the under-banked. The e-Zwich technology permits off-line transactions and fingerprint recognition making it highly suitable for rural areas and for less educated people.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "42", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The e-Zwich product came to the market in April, 2008 and has since operated mainly in urban areas. After three years of operations, the need is felt to bring it to the rural areas.", 
+            "section": "MOTIONS", 
+            "speech": "The e-Zwich product came to the market in April, 2008 and has since operated mainly in urban areas. After three years of operations, the need is felt to bring it to the rural areas.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "42", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The strategy of GhlPSS (known as the Rural Branch-less Banking Project) is to deploy, in partnership with financial institutions, the e-Zwich infrastructure in rural areas through networks of agents and merchants. The objective is to make formal financial services available to all persons resident in Ghana.", 
+            "section": "MOTIONS", 
+            "speech": "The strategy of GhlPSS (known as the Rural Branch-less Banking Project) is to deploy, in partnership with financial institutions, the e-Zwich infrastructure in rural areas through networks of agents and merchants. The objective is to make formal financial services available to all persons resident in Ghana.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "42", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "As the cost of investment for the e- Zwich infrastructure is high in comparison with expected revenues in rural areas, Government approached Kreditanstalt fur Wiederaufbau (KfW) to consider providing this facility which would operate as aRevo1ving Credit Fund (RCF) to financial institutions interested in deploying e-Zwich infrastructure in rural areas through networks of agents and merchants.", 
+            "section": "MOTIONS", 
+            "speech": "As the cost of investment for the e- Zwich infrastructure is high in comparison with expected revenues in rural areas, Government approached Kreditanstalt fur Wiederaufbau (KfW) to consider providing this facility which would operate as aRevo1ving Credit Fund (RCF) to financial institutions interested in deploying e-Zwich infrastructure in rural areas through networks of agents and merchants.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "42", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The 7.0 million euros loan would therefore be used to finance the RCF facility which promises to be a strong incentive to support the deployment of e- Zwich in rural areas.", 
+            "section": "MOTIONS", 
+            "speech": "The 7.0 million euros loan would therefore be used to finance the RCF facility which promises to be a strong incentive to support the deployment of e- Zwich in rural areas.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "42", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "3.0 Purpose of the credit", 
+            "section": "MOTIONS", 
+            "speech": "3.0 Purpose of the credit", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "42", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The purpose of the Credit is to procure funds to establish RCF from which loans would be provided to financial institutions", 
+            "section": "MOTIONS", 
+            "speech": "The purpose of the Credit is to procure funds to establish RCF from which loans would be provided to financial institutions", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "43", 
+            "kind": "continued speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "[MR AVEDZI]", 
+            "section": "MOTIONS", 
+            "speech": "on revolving basis to enable them to acquire e-Zwich infrastructure for the implementation of the e-Zwich Rural Branch-less Banking Project.\n 4.0 Terms of the loan\n The terms of the loan are as follows:\n Euros\n Grant amount -- 500,000.00\n Loan amount - 7,000,000.00\n Grace period -- 10 years\n Repayment period - 40 years\n Maturity period - 50 years\n Interest rate - 0.75 per cent\n Commitment fee --maximum of 0.25 per cent per annum\n Closing date -- 30th December, 2016\n 5.0 Observations\n The Committee observed that the loan shall be used exclusively to finance the RCF under the e-zwich Rural Branch-less Banking Project. The project activities to be financed from the loan include the investment cost of e-Zwich infrastructure including Point of Sale Devices, Merchant Cards, customer cards and Automated Teller Machines (ATMs) mainly in the rural areas.\n As to what constitutes a \"rural area\" for purposes of the project, the Committee was informed that under the project, rural areas are defined as \"areas in communities of less than 5,000 inhabitants, which are located further than one hour walking distance or 4 kilometers from a branch of a universal bank\", and that at least 80 per", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "44", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "cent of the e-Zwich infrastructure purchased from the proceeds of the loan shall be invested in such areas.", 
+            "section": "MOTIONS", 
+            "speech": "cent of the e-Zwich infrastructure purchased from the proceeds of the loan shall be invested in such areas.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "44", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The technical team informed the Committee that the CRF would be established by the Bank of Ghana] GhIPSS on behalf of Government of Ghana from which loans would be provided to financial institutions on revolving basis in order to acquire the e-Zwich infrastructure.", 
+            "section": "MOTIONS", 
+            "speech": "The technical team informed the Committee that the CRF would be established by the Bank of Ghana] GhIPSS on behalf of Government of Ghana from which loans would be provided to financial institutions on revolving basis in order to acquire the e-Zwich infrastructure.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "44", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "Hon Members sought to find out how much the rate of interest would be on the on-lent loans to the rural financial institutions, especially considering that the rate of interest on the Euro loan from KfW is 0.75 per cent. To this, it was explained to the Committee that, loans from the RCF to the financial institutions would be cedi denominated, therefore the interest rate would be pegged at 6 per cent, a rate far lower than the BOG prime rate, to enable as many financial institutions as possible to take advantage of the facility to bring the e-Zwich services to rural dwellers.", 
+            "section": "MOTIONS", 
+            "speech": "Hon Members sought to find out how much the rate of interest would be on the on-lent loans to the rural financial institutions, especially considering that the rate of interest on the Euro loan from KfW is 0.75 per cent. To this, it was explained to the Committee that, loans from the RCF to the financial institutions would be cedi denominated, therefore the interest rate would be pegged at 6 per cent, a rate far lower than the BOG prime rate, to enable as many financial institutions as possible to take advantage of the facility to bring the e-Zwich services to rural dwellers.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "44", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The Committee noted that the project would contribute to the development of the financial system and improve the economic circumstance of people living in rural areas.", 
+            "section": "MOTIONS", 
+            "speech": "The Committee noted that the project would contribute to the development of the financial system and improve the economic circumstance of people living in rural areas.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "44", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The Chief Executive Officer of GhlPSS projected to the Committee that seven million people are expected to be using the e-Zwich by the year 2015; about seven million of whom would be in rural areas. The e-Zwich system would allow merchants\" and card holders easy and secure access to their money.", 
+            "section": "MOTIONS", 
+            "speech": "The Chief Executive Officer of GhlPSS projected to the Committee that seven million people are expected to be using the e-Zwich by the year 2015; about seven million of whom would be in rural areas. The e-Zwich system would allow merchants\" and card holders easy and secure access to their money.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "44", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The Committee was further informed that the project would target rural sectors such as cocoa, fruit processing, fish farming, palm. oil extraction, et cetera, to help enroll more people onto the e-Zwich in groups.", 
+            "section": "MOTIONS", 
+            "speech": "The Committee was further informed that the project would target rural sectors such as cocoa, fruit processing, fish farming, palm. oil extraction, et cetera, to help enroll more people onto the e-Zwich in groups.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "45", 
+            "kind": "continued speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "[MR AVEDZI]", 
+            "section": "MOTIONS", 
+            "speech": "Some Hon Members advised the Bank of Ghana and GhlPSS to put in place effective mechanisms to ensure that unscrupulous persons do not take advantage of rural dwellers to defraud them under the pretext of providing them with services connected to the Rural Branch-less Banking Project.\n Hon Members of the Committee advised the GhlPSS Management to intensify public education on the e- Zwich, particularly, in the rural areas so as to enable especially, the less educated to understand and take advantage of the facility. They further suggested that the e-Zwich be used to pay pensioners, student loan beneficiaries, national service persons, National Youth Employment Programme beneficiaries and other like groups for enhanced convenience and to help reduce banking charges.\n The Committee observed that the e- Zwich facility would help rural dwellers, especially, traders to avoid travelling with large sums of cash and the attendant robbery attacks.\n Some Hon Members of the Committee expressed the opinion that the loan, amounting to 7.0 million euros, should have rather been sourced from the local financial market rather than from the KfW, a foreign entity. Deputy Minister Finance and Economic Planning, Hon Seth Terkpeh however, explained that even though borrowing from the local market was desirable, most of the local banks were unwilling to lend funds beyond five years and additionally were unable to lend to Government on concessionary terms.\n Anti-Corruption\n Pursuant to article 8.1 of the Loan Agreement, the Government of Ghana (Borrower) is required to\n \"ensure that the persons charged by the same with the preparation and implementation of the project, the award of any contract for the", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "supplies and services to be financed and with requesting disbursements of loan amounts do not demand, assume, render, grant, promise or obtain a promise of unlawful payments or other advantages in connection with these tasks.\"", 
+            "section": "MOTIONS", 
+            "speech": "supplies and services to be financed and with requesting disbursements of loan amounts do not demand, assume, render, grant, promise or obtain a promise of unlawful payments or other advantages in connection with these tasks.\"", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "6.0 Taxes and Public Charges", 
+            "section": "MOTIONS", 
+            "speech": "6.0 Taxes and Public Charges", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "Article 5 (1) of the Loan Agreement stipulates that", 
+            "section": "MOTIONS", 
+            "speech": "Article 5 (1) of the Loan Agreement stipulates that", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "\"the Borrower shall make all payments to be effected under this Agreement Without any deduction for taxes, other public charges, or other costs, and shall pay the transfer and conversion costs . accruing in connection with the disbursement of the loan.\"", 
+            "section": "MOTIONS", 
+            "speech": "\"the Borrower shall make all payments to be effected under this Agreement Without any deduction for taxes, other public charges, or other costs, and shall pay the transfer and conversion costs . accruing in connection with the disbursement of the loan.\"", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "Again, the Government of Ghana (Borrower) is required to", 
+            "section": "MOTIONS", 
+            "speech": "Again, the Government of Ghana (Borrower) is required to", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "bear all taxes and other public charges accruing outside the - Federal Republic of Germany in connection with the conclusion and execution of this Agreement\" (article", 
+            "section": "MOTIONS", 
+            "speech": "bear all taxes and other public charges accruing outside the - Federal Republic of Germany in connection with the conclusion and execution of this Agreement\" (article", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "52).", 
+            "section": "MOTIONS", 
+            "speech": "52).", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "The Committee entreated the Ministry of Finance and Economic Planning to endeavor to bring a formal request to Parliament for the waiver of the relevant taxes and duties associated with the project for consideration and approval.", 
+            "section": "MOTIONS", 
+            "speech": "The Committee entreated the Ministry of Finance and Economic Planning to endeavor to bring a formal request to Parliament for the waiver of the relevant taxes and duties associated with the project for consideration and approval.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "7.0 Conclusion", 
+            "section": "MOTIONS", 
+            "speech": "7.0 Conclusion", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "In view of the foregoing observations, the Committee recommends to the House to adopt this Report and approve by Resolution, the Loan Agreement between the Government of the Republic of Ghana and Kredistanstalt fur Wiederaufbau (KfW) Frankfurt AM Main, Germany for an amount of seven million euros (7,000,000.00 euros) for the implementation of the e-Zwich Rural Branch-less Banking in accordance with article 181 of the Constitution, sections 3 and 7 of the Loans Act, 1970 (Act 33 5) and the Standing Orders of the House.", 
+            "section": "MOTIONS", 
+            "speech": "In view of the foregoing observations, the Committee recommends to the House to adopt this Report and approve by Resolution, the Loan Agreement between the Government of the Republic of Ghana and Kredistanstalt fur Wiederaufbau (KfW) Frankfurt AM Main, Germany for an amount of seven million euros (7,000,000.00 euros) for the implementation of the e-Zwich Rural Branch-less Banking in accordance with article 181 of the Constitution, sections 3 and 7 of the Loans Act, 1970 (Act 33 5) and the Standing Orders of the House.", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "46", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "Respectfully submitted.", 
+            "section": "MOTIONS", 
+            "speech": "Respectfully submitted.", 
+            "time": "10:30:00"
         }, 
         {
             "column": "47", 
             "kind": "speech", 
-            "name": "Mr Isaac Osei (NPP -- Subin)", 
-            "original": "A Mr Ignatius BaffourAWuah (NPP~- Sunyani West): Mr Speaker, I must admit that this loan is not contentious- [Interruption.]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "A Mr Ignatius BaffourAWuah (NPP~- Sunyani West): Mr Speaker, I must admit that this loan is not contentious- [Interruption.]", 
+            "name": "Chairman of the Committee](Mr James K. Avedzi)", 
+            "original": "A Mr Ignatius BaffourAWuah (NPP-- Sunyani West): Mr Speaker, I must admit that this loan is not contentious- [Interruption.]", 
+            "section": "MOTIONS", 
+            "speech": "A Mr Ignatius BaffourAWuah (NPP-- Sunyani West): Mr Speaker, I must admit that this loan is not contentious- [Interruption.]", 
             "time": "10:40:00"
         }, 
         {
@@ -626,7 +522,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member, you have the floor.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Hon Member, you have the floor.", 
             "time": "10:40:00"
         }, 
@@ -635,8 +531,8 @@
             "kind": "speech", 
             "name": "Mr Awuah", 
             "original": "Mr Awuah: MrSpeaker, to admit that it is not contentious and that both sides of the House agree to the facility. However, I would want to point out one or two observations that we made at the committee meeting.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "MrSpeaker, to admit that it is not contentious and that both sides of the House agree to the facility. However, I would want to point out one or two observations that we made at the committee meeting.\n Just before recess, I was privileged to be in the team of Members of Parliament that went for a West Africa Monitory Zone meeting in Guinea, Conakry, to be precise.\n Mr Speaker, if there Was one thing that Ghana was praised for implementing, then it is this particular project that Ghana has implemented since 2008. We are told that the focus of this project is the rural areas and the target group is the rural banking industry.\n The definition of a rural community by the project, is a community which is 4 kilometers away from a branch of a commercial bank or a community with an inhabitant of not more than 5,000.\n We think that this should be looked at. This is because if indeed, the rural banking industry is the target, then I must admit that most of these rural banks are located in areas with populations more than 4,000 and indeed, most of them too are in the peripheries of cities. So, if we go by this definition, most of them would be left out.\n Apart from that, we also have a problem with the interest rate at which the money would be on-lent to the institutions which will take this facility.~ This is because if", 
+            "section": "MOTIONS", 
+            "speech": "MrSpeaker, to admit that it is not contentious and that both sides of the House agree to the facility. However, I would want to point out one or two observations that we made at the committee meeting.\n Just before recess, I was privileged to be in the team of Members of Parliament that went for a West Africa Monitory Zone meeting in Guinea, Conakry, to be precise.\n Mr Speaker, if there Was one thing that Ghana was praised for implementing, then it is this particular project that Ghana has implemented since 2008. We are told that the focus of this project is the rural areas and the target group is the rural banking industry.\n The definition of a rural community by the project, is a community which is 4 kilometers away from a branch of a commercial bank or a community with an inhabitant of not more than 5,000.\n We think that this should be looked at. This is because if indeed, the rural banking industry is the target, then I must admit that most of these rural banks are located in areas with populations more than 4,000 and indeed, most of them too are in the peripheries of cities. So, if we go by this definition, most of them would be left out.\n Apart from that, we also have a problem with the interest rate at which the money would be on-lent to the institutions which will take this facility.- This is because if", 
             "time": "10:40:00"
         }, 
         {
@@ -644,7 +540,7 @@
             "kind": "speech", 
             "name": "Mr Awuah", 
             "original": "Government is going for the facility at 0.75 per cent, for 40 years, then some of us think that, giving it to the banks and institutions at 6 per cent is on the higher side. This is because Government\u2019s aim is not necessarily to make profit, it is just to facilitate the Project and indeed, the difference between 6 per cent and 0.75 per cent, some of us think it is too high.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Government is going for the facility at 0.75 per cent, for 40 years, then some of us think that, giving it to the banks and institutions at 6 per cent is on the higher side. This is because Government\u2019s aim is not necessarily to make profit, it is just to facilitate the Project and indeed, the difference between 6 per cent and 0.75 per cent, some of us think it is too high.", 
             "time": "10:40:00"
         }, 
@@ -653,7 +549,7 @@
             "kind": "speech", 
             "name": "Mr Awuah", 
             "original": "So, we actually pleaded with the implementers to see if it will be possible to reduce the interest rate. This would encourage more and more banks to come in and indeed, if Government is taking the facility for 40 years and then adding the grace period of 10 years to it, it means that the facility is going to be in Ghana for 50 years. But then, the banks are taking it for four years. Which means that the repayment period too for the banks, would be too short; so at least, if it can be extended.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "So, we actually pleaded with the implementers to see if it will be possible to reduce the interest rate. This would encourage more and more banks to come in and indeed, if Government is taking the facility for 40 years and then adding the grace period of 10 years to it, it means that the facility is going to be in Ghana for 50 years. But then, the banks are taking it for four years. Which means that the repayment period too for the banks, would be too short; so at least, if it can be extended.", 
             "time": "10:40:00"
         }, 
@@ -662,7 +558,7 @@
             "kind": "speech", 
             "name": "Mr Awuah", 
             "original": "Mr Speaker, I am convinced that the 6 per cent interest rate is high, especially now that we are even claiming that our cedi is stable against the Dollar. So, if the cedi is stable, Why are we then saying that a Cedi denominated facility should attract a higher interest rate. I am not too much convinced by the argument for the increase in the interest rate.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Mr Speaker, I am convinced that the 6 per cent interest rate is high, especially now that we are even claiming that our cedi is stable against the Dollar. So, if the cedi is stable, Why are we then saying that a Cedi denominated facility should attract a higher interest rate. I am not too much convinced by the argument for the increase in the interest rate.", 
             "time": "10:40:00"
         }, 
@@ -671,7 +567,7 @@
             "kind": "speech", 
             "name": "Mr Awuah", 
             "original": "On the whole, I believe strongly that this facility will help reduce the circulation of cash in the system and make Ghana move towards a cashless country. In my view this is something that we should all give our support to.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "On the whole, I believe strongly that this facility will help reduce the circulation of cash in the system and make Ghana move towards a cashless country. In my view this is something that we should all give our support to.", 
             "time": "10:40:00"
         }, 
@@ -680,7 +576,7 @@
             "kind": "speech", 
             "name": "Mr Awuah", 
             "original": "On this note, I urge Hon Members to second the Motion.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "On this note, I urge Hon Members to second the Motion.", 
             "time": "10:40:00"
         }, 
@@ -689,7 +585,7 @@
             "kind": "speech", 
             "name": "Mr Awuah", 
             "original": "Thank you.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Thank you.", 
             "time": "10:40:00"
         }, 
@@ -698,7 +594,7 @@
             "kind": "speech", 
             "name": "Mr Awuah", 
             "original": "Question proposed.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Question proposed.", 
             "time": "10:40:00"
         }, 
@@ -707,399 +603,503 @@
             "kind": "speech", 
             "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
             "original": "Mr Matthias Kwame Ntow (NDC - AWin): Mr Speaker, on the floor. I think this loan facility is a very good one as has", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Mr Speaker, on the floor. I think this loan facility is a very good one as has", 
             "time": "10:40:00"
         }, 
         {
-            "column": "45", 
+            "column": "49", 
             "kind": "continued speech", 
             "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "[MR AVEDZI]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Some Hon Members advised the Bank of Ghana and GhlPSS to put in place effective mechanisms to ensure that unscrupulous persons do not take advantage of rural dwellers to defraud them under the pretext of providing them with services connected to the Rural Branch-less Banking Project.\n Hon Members of the Committee advised the GhlPSS Management to intensify public education on the e- Zwich, particularly, in the rural areas so as to enable especially, the less educated to understand and take advantage of the facility. They further suggested that the e-Zwich be used to pay pensioners, student loan beneficiaries, national service persons, National Youth Employment Programme beneficiaries and other like groups for enhanced convenience and to help reduce banking charges.\n The Committee observed that the e- Zwich facility would help rural dwellers, especially, traders to avoid travelling with large sums of cash and the attendant robbery attacks.\n Some Hon Members of the Committee expressed the opinion that the loan, amounting to 7.0 million euros, should have rather been sourced from the local financial market rather than from the KfW, a foreign entity. Deputy Minister Finance and Economic Planning, Hon Seth Terkpeh however, explained that even though borrowing from the local market was desirable, most of the local banks were unwilling to lend funds beyond five years and additionally were unable to lend to Government on concessionary terms.\n Anti-Corruption\n Pursuant to article 8.1 of the Loan Agreement, the Government of Ghana (Borrower) is required to\n \"ensure that the persons charged by the same with the preparation and implementation of the project, the award of any contract for the", 
+            "original": "[MR NTOW]", 
+            "section": "MOTIONS", 
+            "speech": "been said by my Hon Colleague on the other side of the House.\n There are two particular areas I want to highlight. One is the activities of market women in the rural areas.\n It may interest you to note that, these days, women find it very, very difficult to travel in the night because of the activities of these notorious armed robbers. These women carry a lot of money on them while visiting the marketing centers like Kumasi, Accra, Takoradi, et cetera. So, with the introduction of the e-Zwich, I think it would go a long way in assisting our rural women in going about their normal activities without fear or harm.\n Another area is students from rural areas who are in the cities and towns to continue their education. I think, with the e-Zwich, parents from rural areas will be able to send moneys or remittances to these students in a very easy and safe manner. So, I think it is a very good idea for the Government of Ghana to take this amount of money to continue making banking very, very effective in our rural areas.\n Come to places like Assemkro, Jima, Boisoo, Omapem in my constituency that do not have access to banking facilities. There is only one commercial bank which is sited at the center of the district capital so, with the introduction of the e-Zwich, I think it will help my people and all over this country to have access to good banking system.\n Thank you very much, for the opportunity.", 
             "time": "10:40:00"
         }, 
         {
-            "column": "46", 
+            "column": "50", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "supplies and services to be financed and with requesting disbursements of loan amounts do not demand, assume, render, grant, promise or obtain a promise of unlawful payments or other advantages in connection with these tasks.\"", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "supplies and services to be financed and with requesting disbursements of loan amounts do not demand, assume, render, grant, promise or obtain a promise of unlawful payments or other advantages in connection with these tasks.\"", 
-            "time": "10:40:00"
+            "name": "Mr Isaac Osei (NPP -- Subin)", 
+            "original": "Mr Isaac Osei (NPP -- Subin): Mr Speaker, I believe that the objective of the facility is to make formal financial services available to persons resident in our country. I think it is a very good objective. However, for the committee to reach the Conclusion that this particular facility would improve the economic circumstance of people living in the rural areas, I think that one is very far-fetched.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, I believe that the objective of the facility is to make formal financial services available to persons resident in our country. I think it is a very good objective. However, for the committee to reach the Conclusion that this particular facility would improve the economic circumstance of people living in the rural areas, I think that one is very far-fetched.\n This singular loan cannot improve the economic conditions of the people living in the rural areas. There are many other things that we ought to do in order to attain that particular goal which all of us strive for.\n But Mr Speaker, I would have wanted to see the effects of the e-Zwich system in the areas where it has been applied over the last few years and I believe that the e- Zwich probably has not been as successful as was\" initially planned. However, the objective of banking the un-banked, especially in the rural areas is something I believe all of us can support.\n But I get worried, Mr Speaker that; it appears we are getting ourselves caught in a loan strap where everything that we need in this country, we have to borrow money from somewhere. If one looks at the quantum of money for this one 7 million euros, it is something I believe could have been found within the banking sector in our country. After all, this is to support the financial sector of our country and then link it up with the rural areas of our country.\n I think 7 million euros we could probably have found it .within our country. So my worry is that, let us not get into a loan strap because that will also lead us into a debt trap.\n I thank you, Mr Speaker.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "51", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "6.0 Taxes and Public Charges", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "6.0 Taxes and Public Charges", 
-            "time": "10:40:00"
+            "name": "Mr First Deputy Speaker", 
+            "original": "Mr First Deputy Speaker: I will take one each, then put the Question.", 
+            "section": "MOTIONS", 
+            "speech": "I will take one each, then put the Question.\n Hon Member for Ashaiman and --", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "51", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "Article 5 (1) of the Loan Agreement stipulates that", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Article 5 (1) of the Loan Agreement stipulates that", 
-            "time": "10:40:00"
+            "name": "Mr Alfred K. Agbesi (NDC-- Ashaiman)", 
+            "original": "Mr Alfred K. Agbesi (NDC-- Ashaiman): Mr Speaker, as one of the contributors have said, this is not a controversial matter; it is something which all of us should agree to --he said both sides of the House agreed that this is a necessary facility and we should all support it and I urge Hon Members to do same.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, as one of the contributors have said, this is not a controversial matter; it is something which all of us should agree to --he said both sides of the House agreed that this is a necessary facility and we should all support it and I urge Hon Members to do same.\n Mr Speaker, it is said that, this facility will be suitable for the rural areas and for the less-educated people. Mr Speaker, that is a very good statement because most of our people coming from the rural areas and less educated are not happy going to banks to secure money, hence some of them are tempted to keep the money under their pillows. Any facility that would come to their aid in the rural area, for them to access easily, Mr Speaker, is something that all of us must support.\n Again, Mr Speaker, it is said that this will also enable people not to carry large sums of money on them, thereby falling prey to armed robbers as they travel along. Of late-armed robbers are attacking people on the roads suspecting that they are carrying money.\n Mr Speaker, this facility is going to eliminate this situation where e-Zwich banking will be a matter for all of us who attempt to travel not to carry large sums of money.\n Mr Speaker, I wish to urge all Hon Members to support this facility and vote massively for it.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "51", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "\"the Borrower shall make all payments to be effected under this Agreement Without any deduction for taxes, other public charges, or other costs, and shall pay the transfer and conversion costs . accruing in connection with the disbursement of the loan.\"", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "\"the Borrower shall make all payments to be effected under this Agreement Without any deduction for taxes, other public charges, or other costs, and shall pay the transfer and conversion costs . accruing in connection with the disbursement of the loan.\"", 
-            "time": "10:40:00"
+            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
+            "original": "Mr Matthew O. Prempeh( NPP -- Manhyia): Mr Speaker, the e-_Zwich is a payment system; it is a payment system", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, the e-_Zwich is a payment system; it is a payment system", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "52", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "Again, the Government of Ghana (Borrower) is required to", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Again, the Government of Ghana (Borrower) is required to", 
-            "time": "10:40:00"
+            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
+            "original": "that I am pretty certain that very soon, most countries in our sub-region will come and copy and emulate from Ghana. Mr Speaker, it is a payment system aimed at bringing more money out of the informal system to the more formal system.", 
+            "section": "MOTIONS", 
+            "speech": "that I am pretty certain that very soon, most countries in our sub-region will come and copy and emulate from Ghana. Mr Speaker, it is a payment system aimed at bringing more money out of the informal system to the more formal system.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "52", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "bear all taxes and other public charges accruing outside the - Federal Republic of Germany in connection with the conclusion and execution of this Agreement\" (article", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "bear all taxes and other public charges accruing outside the - Federal Republic of Germany in connection with the conclusion and execution of this Agreement\" (article", 
-            "time": "10:40:00"
+            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
+            "original": "The aim of e-Zwich should not only be to target seven million people, every Ghanaian probably should carry e-Zwich card, may be, in the next five or six years because it will help us tremendously in our payment systems in the country.", 
+            "section": "MOTIONS", 
+            "speech": "The aim of e-Zwich should not only be to target seven million people, every Ghanaian probably should carry e-Zwich card, may be, in the next five or six years because it will help us tremendously in our payment systems in the country.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "52", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "52).", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "52).", 
-            "time": "10:40:00"
+            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
+            "original": "I support the Committee when they say that national service personnel, pensioners, students and everybody should try and be on the e-Zwich system so that payment systems can be more facilitated in this country.", 
+            "section": "MOTIONS", 
+            "speech": "I support the Committee when they say that national service personnel, pensioners, students and everybody should try and be on the e-Zwich system so that payment systems can be more facilitated in this country.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "52", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The Committee entreated the Ministry of Finance and Economic Planning to endeavor to bring a formal request to Parliament for the waiver of the relevant taxes and duties associated with the project for consideration and approval.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The Committee entreated the Ministry of Finance and Economic Planning to endeavor to bring a formal request to Parliament for the waiver of the relevant taxes and duties associated with the project for consideration and approval.", 
-            "time": "10:40:00"
+            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
+            "original": "Mr Speaker, my only worry- now that I see one of the Ministers for Finance and Economic Planning around, is where we are getting this funding from. Mr Speaker, this House in November, last year, passed a loan Agreement with KfW as the money givers, and that loan was a very vital issue of national importance.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, my only worry- now that I see one of the Ministers for Finance and Economic Planning around, is where we are getting this funding from. Mr Speaker, this House in November, last year, passed a loan Agreement with KfW as the money givers, and that loan was a very vital issue of national importance.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "52", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "7.0 Conclusion", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "7.0 Conclusion", 
-            "time": "10:40:00"
+            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
+            "original": "Mr Speaker, that loan was to give this country ambulances and it was funded by KfW. Mr Speaker, you know that ambulances are of such crucial importance When armed robberies and deaths, as my Friends are saying, are occurring on our highways.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, that loan was to give this country ambulances and it was funded by KfW. Mr Speaker, you know that ambulances are of such crucial importance When armed robberies and deaths, as my Friends are saying, are occurring on our highways.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "52", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "In view of the foregoing observations, the Committee recommends to the House to adopt this Report and approve by Resolution, the Loan Agreement between the Government of the Republic of Ghana and Kredistanstalt fur Wiederaufbau (KfW) Frankfurt AM Main, Germany for an amount of seven million euros (7,000,000.00 euros) for the implementation of the e-Zwich Rural Branch-less Banking in accordance with article 181 of the Constitution, sections 3 and 7 of the Loans Act, 1970 (Act 33 5) and the Standing Orders of the House.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "In view of the foregoing observations, the Committee recommends to the House to adopt this Report and approve by Resolution, the Loan Agreement between the Government of the Republic of Ghana and Kredistanstalt fur Wiederaufbau (KfW) Frankfurt AM Main, Germany for an amount of seven million euros (7,000,000.00 euros) for the implementation of the e-Zwich Rural Branch-less Banking in accordance with article 181 of the Constitution, sections 3 and 7 of the Loans Act, 1970 (Act 33 5) and the Standing Orders of the House.", 
-            "time": "10:40:00"
+            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
+            "original": "Mr Speaker, I asked this question when this loan agreement was laid first, that, where are the ambulances supposed to be provided by KfW? This KtW gave us money to provide ambulances and those ambulances, nearly eight months down the line have not been delivered. How are we sure KfW can give us money for the e- Zwich?", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, I asked this question when this loan agreement was laid first, that, where are the ambulances supposed to be provided by KfW? This KtW gave us money to provide ambulances and those ambulances, nearly eight months down the line have not been delivered. How are we sure KfW can give us money for the e- Zwich?", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "46", 
+            "column": "52", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "Respectfully submitted.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Respectfully submitted.", 
-            "time": "10:40:00"
+            "name": "Mr Matthew O. Prempeh( NPP -- Manhyia)", 
+            "original": "Mr Speaker, that is the only contribution. - [Interruption.]", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, that is the only contribution. - [Interruption.]", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "43", 
+            "action": "rose ", 
+            "kind": "action", 
+            "name": "Mr Joseph Yieleh Chireh", 
+            "original": "Mr Joseph Yieleh Chireh -- rose -", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "Mr First Deputy Speaker", 
+            "original": "Mr First Deputy Speaker: Do you have a point of order, Hon Minister?", 
+            "section": "MOTIONS", 
+            "speech": "Do you have a point of order, Hon Minister?", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "Dr Prempeh", 
+            "original": "Dr Prempeh: He was not at the Ministry, Mr Speaker. I wonder how he is going to answer this question.", 
+            "section": "MOTIONS", 
+            "speech": "He was not at the Ministry, Mr Speaker. I wonder how he is going to answer this question.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "Mr Chireh", 
+            "original": "Mr Chireh: Mr Speaker thank you very much. I am standing on a point of order and information to my Colleague.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker thank you very much. I am standing on a point of order and information to my Colleague.\n The matter of the loan approved for ambulances is well in hand. So KtW knows that things have moved very fast and all the processes have been taken through and soon -- [Interruption] - before the end of the year, you will get --", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "Mr First Deputy Speaker", 
+            "original": "Mr First Deputy Speaker: Hon Minister, that is not a point of order; it is point of information-", 
+            "section": "MOTIONS", 
+            "speech": "Hon Minister, that is not a point of order; it is point of information-", 
+            "time": "10:50:00"
+        }, 
+        {
+            "action": "rose ", 
+            "kind": "action", 
+            "name": "Dr Prempeh", 
+            "original": "Dr Prempeh -- rose -", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "Mr First Deputy Speaker", 
+            "original": "Mr First Deputy Speaker: I thought you have concluded. _", 
+            "section": "MOTIONS", 
+            "speech": "I thought you have concluded. _", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "Dr Prempeh", 
+            "original": "Dr Prempeh: I want to conclude.", 
+            "section": "MOTIONS", 
+            "speech": "I want to conclude.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "Mr First Deputy Speaker", 
+            "original": "Mr First Deputy Speaker: Conclude.", 
+            "section": "MOTIONS", 
+            "speech": "Conclude.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "DrPrempeh", 
+            "original": "DrPrempeh: Mr Speaker, I thank you very much for allowing the Hon Minister for Health to confirm my point.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, I thank you very much for allowing the Hon Minister for Health to confirm my point.\n Ten months down the line, this same KfW has not been able to grant us the money for the ambulances. How are we sure, ten months further up front, KfW will give us money for such a national important issue?", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "Mr First Deputy Speaker", 
+            "original": "Mr First Deputy Speaker: Hon Members, I will take brief comments from two more, I think the Hon Kan-Dapaah and Hon Member for Sege.", 
+            "section": "MOTIONS", 
+            "speech": "Hon Members, I will take brief comments from two more, I think the Hon Kan-Dapaah and Hon Member for Sege.\n Hon Kan-Dapaah very brief (NPP-- Afigya-Sekyere West).", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "53", 
+            "kind": "speech", 
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "MrAlbert Kan-Dapaah: Mr Speaker, this is a facility for 7 million euros, 500,000 euros grant element and grace period of", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, this is a facility for 7 million euros, 500,000 euros grant element and grace period of", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "54", 
+            "kind": "speech", 
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "ten years, and repayment period of 40 years for such a very important project. I have no problem with it at all, but Mr Speaker, I have a problem with the procedures that we are following.", 
+            "section": "MOTIONS", 
+            "speech": "ten years, and repayment period of 40 years for such a very important project. I have no problem with it at all, but Mr Speaker, I have a problem with the procedures that we are following.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "54", 
+            "kind": "speech", 
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "Mr Speaker, the requirement for Parliament to approve loans to be contracted by Government is a very important accountability mechanism in the financial management of this country and I believe that when we are called upon to approve such loans, we need to be given enough information for us to be able to make up our minds.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, the requirement for Parliament to approve loans to be contracted by Government is a very important accountability mechanism in the financial management of this country and I believe that when we are called upon to approve such loans, we need to be given enough information for us to be able to make up our minds.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "54", 
+            "kind": "speech", 
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "And I think we must only do so after serious and painstaking scrutiny of the data that is given to us.", 
+            "section": "MOTIONS", 
+            "speech": "And I think we must only do so after serious and painstaking scrutiny of the data that is given to us.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "54", 
+            "kind": "speech", 
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "Mr Speaker, we are going to approve this loan-I am going to have to approve it in my capacity as a Member of Parliament and yet I ask myself, after this loan is contracted, what would be the stock of public debt? Mr Speaker, this is not given in the document and I wonder whether it was given to the Committee.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, we are going to approve this loan-I am going to have to approve it in my capacity as a Member of Parliament and yet I ask myself, after this loan is contracted, what would be the stock of public debt? Mr Speaker, this is not given in the document and I wonder whether it was given to the Committee.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "54", 
+            "kind": "speech", 
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "Mr Speaker, I am being asked,.as- a bank manager, to approve a loan and nobody is in the position to show me the debt sustainability analysis that has been done. Let us forget about the amount of the loan, but I need to know this before I can approve.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, I am being asked,.as- a bank manager, to approve a loan and nobody is in the position to show me the debt sustainability analysis that has been done. Let us forget about the amount of the loan, but I need to know this before I can approve.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "54", 
+            "kind": "speech", 
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "Mr Speaker, even more important, in this country, we have approved that we will ensure proper transparency and accountability of the public resources through what is referred to as the \"budget cycle\". Mr Speaker, under the budget cycle, we cannot undertake any project which has not -been captured either in the medium-term plan or in the annual Budget.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, even more important, in this country, we have approved that we will ensure proper transparency and accountability of the public resources through what is referred to as the \"budget cycle\". Mr Speaker, under the budget cycle, we cannot undertake any project which has not -been captured either in the medium-term plan or in the annual Budget.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "54", 
+            "kind": "speech", 
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "Mr Speaker, I have checked-- this Project is not in the annual Budget, it is not in the medium-term plan, so Mr", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, I have checked-- this Project is not in the annual Budget, it is not in the medium-term plan, so Mr", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "55", 
             "kind": "continued speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "[MR AVEDZI]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "on revolving basis to enable them to acquire e-Zwich infrastructure for the implementation of the e-Zwich Rural Branch-less Banking Project.\n 4.0 Terms of the loan\n The terms of the loan are as follows:\n Euros\n Grant amount -- 500,000.00\n Loan amount - 7,000,000.00\n Grace period -- 10 years\n Repayment period - 40 years\n Maturity period - 50 years\n Interest rate - 0.75 per cent\n Commitment fee --maximum of 0.25 per cent per annum\n Closing date -- 30th December, 2016\n 5.0 Observations\n The Committee observed that the loan shall be used exclusively to finance the RCF under the e-zwich Rural Branch-less Banking Project. The project activities to be financed from the loan include the investment cost of e~Zwich infrastructure including Point of Sale Devices, Merchant Cards, customer cards and Automated Teller Machines (ATMs) mainly in the rural areas.\n As to what constitutes a \"rural area\" for purposes of the project, the Committee was informed that under the project, rural areas are defined as \"areas in communities of less than 5,000 inhabitants, which are located further than one hour walking distance or 4 kilometers from a branch of a universal bank\", and that at least 80 per", 
-            "time": "10:40:00"
+            "name": "MrAlbert Kan-Dapaah", 
+            "original": "[MR KAN-DAPAAH]", 
+            "section": "MOTIONS", 
+            "speech": "Speaker, somebody gets up one day, dreams up a project and from nowhere, he comes to Parliament for approval. Mr Speaker, that cannot be accepted; and to the extent that this project has not been captured in the medium-term plan and in the annual Budget, I have serious reservations about what we are trying to do by giving approval to this.\n Mr Speaker, with the facility itself, I would not have much problem, but Mr Speaker, please, we need to be serious about this and I would be grateful if the Hon Minister would take this into account. This is because as a bank manager, he would not approve any loan with the sort of information that he is giving to us and I think it is improper and should not be accepted by this House.\n Thank you, Mr Speaker.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "44", 
+            "column": "55", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "cent of the e-Zwich infrastructure purchased from the proceeds of the loan shall be invested in such areas.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "cent of the e-Zwich infrastructure purchased from the proceeds of the loan shall be invested in such areas.", 
-            "time": "10:40:00"
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
+            "original": "Mr Alfred W. G. Abayateye (NDC - Sege): Mr Speaker, to contribute to the Motion on the floor, I urge all Members to vote massively for this.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, to contribute to the Motion on the floor, I urge all Members to vote massively for this.\n Mr Speaker, I happen to be a member of the Committee which dealt with this and in the course of our deliberations, the Chief Executive Officer (CEO) of Ghana Interbank Payment and Settlement System (GhlPSS) informed the Committee that the Germans were in Ghana, they came to carry out a survey and they saw the work that GhIPSS was doing and how effectively they were running the thing, so their decision was to assist the country and the body handling this issue to perform better.\n Speaker, it would interest you to note that the amount is 7 million euros, there is a grant of 500,000 euros, the grace period is ten years and the maturity period is forty years. In -fact, giving the total", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "44", 
+            "column": "56", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The technical team informed the Committee that the CRF would be established by the Bank of Ghana] GhIPSS on behalf of Government of Ghana from which loans would be provided to financial institutions on revolving basis in order to acquire the e-Zwich infrastructure.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The technical team informed the Committee that the CRF would be established by the Bank of Ghana] GhIPSS on behalf of Government of Ghana from which loans would be provided to financial institutions on revolving basis in order to acquire the e-Zwich infrastructure.", 
-            "time": "10:40:00"
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
+            "original": "period --the repayment period is forty years giving the total maturity period of fifty years.", 
+            "section": "MOTIONS", 
+            "speech": "period --the repayment period is forty years giving the total maturity period of fifty years.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "44", 
+            "column": "56", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "Hon Members sought to find out how much the rate of interest would be on the on-lent loans to the rural financial institutions, especially considering that the rate of interest on the Euro loan from KfW is 0.75 per cent. To this, it was explained to the Committee that, loans from the RCF to the financial institutions would be cedi denominated, therefore the interest rate would be pegged at 6 per cent, a rate far lower than the BOG prime rate, to enable as many financial institutions as possible to take advantage of the facility to bring the e-Zwich services to rural dwellers.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Hon Members sought to find out how much the rate of interest would be on the on-lent loans to the rural financial institutions, especially considering that the rate of interest on the Euro loan from KfW is 0.75 per cent. To this, it was explained to the Committee that, loans from the RCF to the financial institutions would be cedi denominated, therefore the interest rate would be pegged at 6 per cent, a rate far lower than the BOG prime rate, to enable as many financial institutions as possible to take advantage of the facility to bring the e-Zwich services to rural dwellers.", 
-            "time": "10:40:00"
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
+            "original": "Mr Speaker, my and view expectation and with the deliberations we had with the CEO, I can foresee that, if we access this opportunity, in the end, it would be beneficiary. I can foresee that the Germans might write off this loan for us. [Interruptions]", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, my and view expectation and with the deliberations we had with the CEO, I can foresee that, if we access this opportunity, in the end, it would be beneficiary. I can foresee that the Germans might write off this loan for us. [Interruptions]", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "44", 
+            "column": "56", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The Committee noted that the project would contribute to the development of the financial system and improve the economic circumstance of people living in rural areas.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The Committee noted that the project would contribute to the development of the financial system and improve the economic circumstance of people living in rural areas.", 
-            "time": "10:40:00"
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
+            "original": "We have forty years, a grace period of ten years, giving a maturity period of fifty years for 7 million euros. I want to urge all. my brethren that let us expect the rain, the clouds are forming, therefore the country must gather the bowls to collect the rain. [Hear! Hear!]", 
+            "section": "MOTIONS", 
+            "speech": "We have forty years, a grace period of ten years, giving a maturity period of fifty years for 7 million euros. I want to urge all. my brethren that let us expect the rain, the clouds are forming, therefore the country must gather the bowls to collect the rain. [Hear! Hear!]", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "44", 
+            "column": "56", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The Chief Executive Officer of GhlPSS projected to the Committee that seven million people are expected to be using the e-Zwich by the year 2015; about seven million of whom would be in rural areas. The e-Zwich system would allow merchants\" and card holders easy and secure access to their money.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The Chief Executive Officer of GhlPSS projected to the Committee that seven million people are expected to be using the e-Zwich by the year 2015; about seven million of whom would be in rural areas. The e-Zwich system would allow merchants\" and card holders easy and secure access to their money.", 
-            "time": "10:40:00"
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
+            "original": "Mr Speaker, I want to again say that the work of the e-Zwich is very, very beneficial to the country. As I am talking now, with what they are doing, all over the country, the students of Ghana who are accessing loans from the Students Loan Trust, every payment to them is done through the e-Zwich even in the remotest corner of the country. Therefore, if we can access this facility to expand the system, it would be better for the country and the country would be a better place to live in.", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, I want to again say that the work of the e-Zwich is very, very beneficial to the country. As I am talking now, with what they are doing, all over the country, the students of Ghana who are accessing loans from the Students Loan Trust, every payment to them is done through the e-Zwich even in the remotest corner of the country. Therefore, if we can access this facility to expand the system, it would be better for the country and the country would be a better place to live in.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "44", 
+            "column": "56", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The Committee was further informed that the project would target rural sectors such as cocoa, fruit processing, fish farming, palm. oil extraction, et cetera, to help enroll more people onto the e-Zwich in groups.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The Committee was further informed that the project would target rural sectors such as cocoa, fruit processing, fish farming, palm. oil extraction, et cetera, to help enroll more people onto the e-Zwich in groups.", 
-            "time": "10:40:00"
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
+            "original": "With these points, I urge all Hon Members to let us see with the eye of faith, because what is in stock for the country is good.", 
+            "section": "MOTIONS", 
+            "speech": "With these points, I urge all Hon Members to let us see with the eye of faith, because what is in stock for the country is good.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "41", 
-            "kind": "continued speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "[MR AVEDZI]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "the Report of the Committee on Finance on the Loan Agreement between the Government of the Republic of Ghana and the Kredistanstalt fur Wiederaufbau (l<lfW) for an amount of 7.0 million euros and a grant of 0.5 million euros to finance the e-Zwich Rural Branch-less Banking Project.\n Mr Speaker, l present the Report of the Committee.\n 1.0 Introduction\n The Loan Agreement between the Government of the Republic of Ghana and Kredistanstalt fur Wiederaufbau (KfW), Frankfurt AM Main, Germany for an amount of seven million Euros (7,000,000.00) for the implementation of the e~Zwich Rural Branch-less Banking was laid in the House on Tuesday, 12\" July, 2011 in accordance with article 181 of the 1992 Constitution of the Republic of Ghana.\n Pursuant to article 103 of the Constitution and Order 171 (l) of the Standing Orders of the House,Madam Speaker referred the Agreement to the Committee on Finance for consideration and report.\n The Committee met and considered the Agreement with the Minister for Finance and Economic Planning, Hon Dr Kwabena Duffuor and his Deputy, Hon Seth Terkpeh as well as officials from the Ministry of Finance and Economic Planning and the Ghana Interbank Payment and Settlement Systems '(GhlPSS) and hereby presents this Report to the House in accordance with Order 161(1) of the Standing Orders of the House.\n 2.0 Background\n The GhIPSS is a wholly owned subsidiary of the Bank of Ghana tasked", 
-            "time": "10:40:00"
-        }, 
-        {
-            "column": "42", 
+            "column": "56", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "to implement a countrywide biometric payment system, popularly known as \"e~ zwich\". The system allows the delivery of quality financial services to the population of Ghana, especially the un-banked and the under-banked. The e-Zwich technology permits off-line transactions and fingerprint recognition making it highly suitable for rural areas and for less educated people.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "to implement a countrywide biometric payment system, popularly known as \"e~ zwich\". The system allows the delivery of quality financial services to the population of Ghana, especially the un-banked and the under-banked. The e-Zwich technology permits off-line transactions and fingerprint recognition making it highly suitable for rural areas and for less educated people.", 
-            "time": "10:40:00"
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
+            "original": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu) Mr Speaker, Without doubt, listening to Hon Colleagues, I think we are all united that this is a good facility and that Parliament without much hesitation may approve of it.", 
+            "section": "MOTIONS", 
+            "speech": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu) Mr Speaker, Without doubt, listening to Hon Colleagues, I think we are all united that this is a good facility and that Parliament without much hesitation may approve of it.", 
+            "time": "10:50:00"
         }, 
         {
-            "column": "42", 
+            "column": "56", 
             "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The e-Zwich product came to the market in April, 2008 and has since operated mainly in urban areas. After three years of operations, the need is felt to bring it to the rural areas.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The e-Zwich product came to the market in April, 2008 and has since operated mainly in urban areas. After three years of operations, the need is felt to bring it to the rural areas.", 
-            "time": "10:40:00"
-        }, 
-        {
-            "column": "42", 
-            "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The strategy of GhlPSS (known as the Rural Branch-less Banking Project) is to deploy, in partnership with financial institutions, the e~Zwich infrastructure in rural areas through networks of agents and merchants. The objective is to make formal financial services available to all persons resident in Ghana.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The strategy of GhlPSS (known as the Rural Branch-less Banking Project) is to deploy, in partnership with financial institutions, the e~Zwich infrastructure in rural areas through networks of agents and merchants. The objective is to make formal financial services available to all persons resident in Ghana.", 
-            "time": "10:40:00"
-        }, 
-        {
-            "column": "42", 
-            "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "As the cost of investment for the e- Zwich infrastructure is high in comparison with expected revenues in rural areas, Government approached Kreditanstalt fur Wiederaufbau (KfW) to consider providing this facility which would operate as aRevo1ving Credit Fund (RCF) to financial institutions interested in deploying e-Zwich infrastructure in rural areas through networks of agents and merchants.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "As the cost of investment for the e- Zwich infrastructure is high in comparison with expected revenues in rural areas, Government approached Kreditanstalt fur Wiederaufbau (KfW) to consider providing this facility which would operate as aRevo1ving Credit Fund (RCF) to financial institutions interested in deploying e-Zwich infrastructure in rural areas through networks of agents and merchants.", 
-            "time": "10:40:00"
-        }, 
-        {
-            "column": "42", 
-            "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The 7.0 million euros loan would therefore be used to finance the RCF facility which promises to be a strong incentive to support the deployment of e- Zwich in rural areas.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The 7.0 million euros loan would therefore be used to finance the RCF facility which promises to be a strong incentive to support the deployment of e- Zwich in rural areas.", 
-            "time": "10:40:00"
-        }, 
-        {
-            "column": "42", 
-            "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "3.0 Purpose of the credit", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "3.0 Purpose of the credit", 
-            "time": "10:40:00"
-        }, 
-        {
-            "column": "42", 
-            "kind": "speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
-            "original": "The purpose of the Credit is to procure funds to establish RCF from which loans would be provided to financial institutions", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "The purpose of the Credit is to procure funds to establish RCF from which loans would be provided to financial institutions", 
-            "time": "10:40:00"
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
+            "original": "But Mr Speaker, I am not too clear in my mind looking at the purpose of the credit captured in item 3.0 on page 3 of the Report. We are told that and with your permission, I quote:", 
+            "section": "MOTIONS", 
+            "speech": "But Mr Speaker, I am not too clear in my mind looking at the purpose of the credit captured in item 3.0 on page 3 of the Report. We are told that and with your permission, I quote:", 
+            "time": "10:50:00"
         }, 
         {
             "column": "57", 
             "kind": "continued speech", 
-            "name": "Mr Matthias Kwame Ntow (NDC - AWin)", 
+            "name": "Mr Alfred W. G. Abayateye (NDC - Sege)", 
             "original": "[MR KYEI-MENSAH-BONSU]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "\"The purpose of the Credit is to procure funds to establish a Revolving Credit Fund (RCF) from which loans Would be provided to financial institutions on revolving basis to enable them to acquire e- Zwich infrastructure for the implementation of the e-Zwich Rural Branch-less Banking Project.\"\n I am told that about eighty per cent of the facility is to go to rural banks but this description \"Rural Branch-less Banking Project\", what does it really mean, knowing that about 80 per cent of the rural banks have branches anyway? What is the \"Rural Branch[less Banking Project\"? Can we have a better elucidation of that?", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "57", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Chairman of the Committee?", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Chairman of the Committee?", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "57", 
             "kind": "speech", 
             "name": "Mr James K.Avedzi", 
             "original": "Mr James K.Avedzi: Mr Speaker, not all banks have branches in all towns and villages of this country and even the rural banks do not have branches in all villages. But this infrastructure equipment are going to be sited in those villages that the banks or the rural banks do not have branches. With those equipment, the use of the e-Zwich can be effectively promoted.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Mr Speaker, not all banks have branches in all towns and villages of this country and even the rural banks do not have branches in all villages. But this infrastructure equipment are going to be sited in those villages that the banks or the rural banks do not have branches. With those equipment, the use of the e-Zwich can be effectively promoted.\n So we would not see the preserve of a branch of a bank in that community but with this equipment, we can use our e- Zwich facility and that is the branch-less project they are talking about.", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "57", 
             "kind": "speech", 
             "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, listening to the Chairman, I am not too sure that the Chair is persuaded by this explanation at all. Maybe, we may have to live with it, but clearly, it does not explain the intent that it wants to capture.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Mr Speaker, listening to the Chairman, I am not too sure that the Chair is persuaded by this explanation at all. Maybe, we may have to live with it, but clearly, it does not explain the intent that it wants to capture.", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "58", 
             "kind": "speech", 
             "name": "Mr Avedzi", 
             "original": "Mr Avedzi: Mr Speaker, if I may give an example, the Automatic Teller Machines (ATMS) are equipment that can be installed at a point where a bank would not have a branch. But with the ATM, you can go and transact business with your e-Zwich. That is what We are talking about.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Mr Speaker, if I may give an example, the Automatic Teller Machines (ATMS) are equipment that can be installed at a point where a bank would not have a branch. But with the ATM, you can go and transact business with your e-Zwich. That is what We are talking about.", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "58", 
             "kind": "speech", 
             "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: MrSpeaker, I think the Hon Chairman does not understand what I mean. The intent, the principle is clear to me, but the description does not capture what he is telling us as \"Rural Branch-less Banking Project\". What does it mean? So that is the point I am making. I understand the principle behind what he is saying but the description does not-really capture what they want to portray to us.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "MrSpeaker, I think the Hon Chairman does not understand what I mean. The intent, the principle is clear to me, but the description does not capture what he is telling us as \"Rural Branch-less Banking Project\". What does it mean? So that is the point I am making. I understand the principle behind what he is saying but the description does not-really capture what they want to portray to us.", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "58", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: The good news is that you understand the principle. [Laughter]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "The good news is that you understand the principle. [Laughter]\n Hon Members, that brings us to the end of the debate- I will put the Question.\n Question put and Motion agreed to.\n Resolved:\n That this Honourable House adopts the Report of the Finance Committee on the Loan Agreement between the Government of the Republic of Ghana and the Kreditansalt fur Wiederauibau (KfW) for an amount of 7.0 million euros and a grant of O.5 million euros to finance the e- Zwich Rural Branch-less Banking Project.", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "58", 
             "kind": "speech", 
             "name": "Mr first Deputy Speaker", 
             "original": "Mr first Deputy Speaker: Hon Members, item 8 on the Order Paper?", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Hon Members, item 8 on the Order Paper?", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "58", 
             "kind": "speech", 
             "name": "Mr Avoka", 
             "original": "Mr Avoka: Mr Speaker, may I kindly apply for permission for the Hon Deputy Minister, Mr Seth Terkpeh to move the Motion on behalf of the substantive Minister who is not in the Chamber this morning?", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Mr Speaker, may I kindly apply for permission for the Hon Deputy Minister, Mr Seth Terkpeh to move the Motion on behalf of the substantive Minister who is not in the Chamber this morning?", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "58", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Minority Leader? Hon Minority Leader? [Laughter]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Hon Minority Leader? Hon Minority Leader? [Laughter]", 
-            "time": "10:40:00"
-        }, 
-        {
-            "column": "59", 
-            "kind": "speech", 
-            "name": "Mr First Deputy Speaker", 
-            "original": "ll.10 a.m.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "ll.10 a.m.", 
-            "time": "10:40:00"
+            "time": "10:50:00"
         }, 
         {
             "column": "59", 
             "kind": "speech", 
             "name": "Mr Kyei-Mensah-Bonsu", 
-            "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, my Hon Colleague was giving me some vital information -~ [Laughter]", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Mr Speaker, my Hon Colleague was giving me some vital information -~ [Laughter]", 
-            "time": "10:40:00"
+            "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, my Hon Colleague was giving me some vital information -- [Laughter]", 
+            "section": "MOTIONS", 
+            "speech": "Mr Speaker, my Hon Colleague was giving me some vital information -- [Laughter]", 
+            "time": "11:10:00"
         }, 
         {
             "column": "59", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Your Hon Colleague has made an application to allow the Hon Deputy Minister for Finance and Economic Planning to move the consequential Resolution on behalf of the substantive Minister.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Your Hon Colleague has made an application to allow the Hon Deputy Minister for Finance and Economic Planning to move the consequential Resolution on behalf of the substantive Minister.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "59", 
             "kind": "speech", 
             "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, we cannot have anything against that.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Mr Speaker, we cannot have anything against that.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "59", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Very well.", 
-            "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
+            "section": "MOTIONS", 
             "speech": "Very well.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "heading": "RESOLUTIONS", 
             "kind": "heading", 
             "original": "RESOLUTIONS", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "heading": "THIS HONOURABLE HOUSE", 
             "kind": "heading", 
             "original": "THIS HONOURABLE HOUSE", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "60", 
@@ -1108,7 +1108,7 @@
             "original": "Mr Avedzi: Mr Speaker, I beg to second the Motion.", 
             "section": "THIS HONOURABLE HOUSE", 
             "speech": "Mr Speaker, I beg to second the Motion.\n Question put and Motion agreed to.\n Resolved accordingly.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "60", 
@@ -1117,7 +1117,7 @@
             "original": "MrAvoka: Mr Speaker, we go to items numbered 9, 10 and thereafter--", 
             "section": "THIS HONOURABLE HOUSE", 
             "speech": "Mr Speaker, we go to items numbered 9, 10 and thereafter--", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "60", 
@@ -1126,13 +1126,13 @@
             "original": "Mr First Deputy Speaker: Very well.", 
             "section": "THIS HONOURABLE HOUSE", 
             "speech": "Very well.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "heading": "BILLS --SECOND READING", 
             "kind": "heading", 
             "original": "BILLS --SECOND READING", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "63", 
@@ -1140,8 +1140,152 @@
             "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
             "original": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka): Mr Speaker, I rise to support the Motion and in doing so, present your Committee\u2019s Report.", 
             "section": "BILLS --SECOND READING", 
-            "speech": "Mr Speaker, I rise to support the Motion and in doing so, present your Committee\u2019s Report.\n 1.0 Introduction\n In accordance with article 103 of the 1992 Constitution of Ghana, the Hon. Minister for Health, Hon Joseph Yieleh Chireh on st March, 2011 , laid before the House, the Health Training and Research Bill. Pursuant to article 106 of the Constitution and Standing Orders 125 and 178, Madam Speaker referred the Bill to the Committee on Health, for consideration and report.\n 2.0 Consideration of the Bill\n The Committee on Health as part of its mandate under article 106 (4) of the Constitution of Ghana and Standing Orders 125 and 178 published in the media requests for Written memoranda on the Bill. Subsequently, opportunity was provided for those who presented memoranda on the Bill to meet with the Committee for further deliberation on their proposals.\n The Committee further met for six (6) days with stakeholders from the health Sector to examine the Bill in detail.\n The Committee is grateful to the following for their inputs and support during the deliberations:\n 1 . Hon Joseph Yieleh Chireh, Minister for Health;\n 2. Chief Executives, Registrars, Rectors, Directors and officials from:\n Ministry of Health;\n Ghana College of Physicians and Surgeons;\n West African College of Nurses;\n Ghana Registered Nurses and Midwives Association;\n Nurses and Midwives Council;\n School of Public Health;\n Pharmaceutical Society of Ghana;\n Pharmacy Council;\n Center for Scientific Research into Plant Medicine;\n Attorney-General\u2019s Department.\n 3 .0 Reference Documents\n In examining the Bill, the Committee made reference to the following documents:\n 1. The 1992 Constitution of the Republic of Ghana;\n 2. The Standing Orders of the Parliament of Ghana;\n 3. Memoranda from the public\n 4. The Medical Training and Research Bill.\n 4.0 Background\n Government has decided that laws in the health sector should be consolidated as appropriate into group legislation with common focus to reduce the number of laws relating to the sector. The Health Research and Training Bill therefore combines the laws for the Center for Plant Medicine Research, the Ghana College of Physicians and Surgeons, the Ghana College of Nursing and Midwifery as well as the Ghana College of Pharmacists.", 
-            "time": "10:40:00"
+            "speech": "Mr Speaker, I rise to support the Motion and in doing so, present your Committee\u2019s Report.\n 1.0 Introduction\n In accordance with article 103 of the 1992 Constitution of Ghana, the Hon. Minister for Health, Hon Joseph Yieleh Chireh on st March, 2011 , laid before the House, the Health Training and Research Bill. Pursuant to article 106 of the Constitution and Standing Orders 125 and 178, Madam Speaker referred the Bill to the Committee on Health, for consideration and report.\n 2.0 Consideration of the Bill\n The Committee on Health as part of its mandate under article 106 (4) of the Constitution of Ghana and Standing Orders 125 and 178 published in the media requests for Written memoranda on the Bill. Subsequently, opportunity was provided for those who presented memoranda on the Bill to meet with the Committee for further deliberation on their proposals.\n The Committee further met for six (6) days with stakeholders from the health Sector to examine the Bill in detail.\n The Committee is grateful to the following for their inputs and support during the deliberations:\n 1 . Hon Joseph Yieleh Chireh, Minister for Health;\n 2. Chief Executives, Registrars, Rectors, Directors and officials from:\n Ministry of Health;\n Ghana College of Physicians and Surgeons;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "West African College of Nurses;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "West African College of Nurses;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "Ghana Registered Nurses and Midwives Association;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "Ghana Registered Nurses and Midwives Association;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "Nurses and Midwives Council;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "Nurses and Midwives Council;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "School of Public Health;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "School of Public Health;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "Pharmaceutical Society of Ghana;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "Pharmaceutical Society of Ghana;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "Pharmacy Council;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "Pharmacy Council;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "Center for Scientific Research into Plant Medicine;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "Center for Scientific Research into Plant Medicine;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "Attorney-General\u2019s Department.", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "Attorney-General\u2019s Department.", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "3 .0 Reference Documents", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "3 .0 Reference Documents", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "In examining the Bill, the Committee made reference to the following documents:", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "In examining the Bill, the Committee made reference to the following documents:", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "1. The 1992 Constitution of the Republic of Ghana;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "1. The 1992 Constitution of the Republic of Ghana;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "2. The Standing Orders of the Parliament of Ghana;", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "2. The Standing Orders of the Parliament of Ghana;", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "3. Memoranda from the public", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "3. Memoranda from the public", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "4. The Medical Training and Research Bill.", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "4. The Medical Training and Research Bill.", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "4.0 Background", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "4.0 Background", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "64", 
+            "kind": "speech", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
+            "original": "Government has decided that laws in the health sector should be consolidated as appropriate into group legislation with common focus to reduce the number of laws relating to the sector. The Health Research and Training Bill therefore combines the laws for the Center for Plant Medicine Research, the Ghana College of Physicians and Surgeons, the Ghana College of Nursing and Midwifery as well as the Ghana College of Pharmacists.", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "Government has decided that laws in the health sector should be consolidated as appropriate into group legislation with common focus to reduce the number of laws relating to the sector. The Health Research and Training Bill therefore combines the laws for the Center for Plant Medicine Research, the Ghana College of Physicians and Surgeons, the Ghana College of Nursing and Midwifery as well as the Ghana College of Pharmacists.", 
+            "time": "11:10:00"
         }, 
         {
             "column": "65", 
@@ -1150,7 +1294,7 @@
             "original": "[ALHAJI MUNTAKA]", 
             "section": "BILLS --SECOND READING", 
             "speech": "The Center for Plant Medicine Research law seeks to review the law which established the Center for Scientific Research into Plant Medicine Decree, 1975 (NRCD 344) which was amended in 1976 by the Center for Scientific Research into Plant Medicine (Amendment) Act (S.M.C.D.12). The Center was mandated to conduct and promote scientific research which relates to the improvement of plant medicine.\n The law was enacted when the Food and Drugs Board was not in existence and was therefore given some regulatory functions which are now being performed by the Food and Drugs Board. This has led to duplication of functions.\n The current law does not also provide for a deputy director of the Center and the tenure of office of a director. It does not further differentiate between phyto- pharmaceutical and other pharmaceuticals, medicines and related substances.\n It is further necessary to change the name of the Center because it is often confused with the \"Centre for Scientific and Industrial Research\".\n Ghana over the years, experienced the exodus of doctors to other countries to either seek greener pastures or specialist training. The establishment of the Ghana College of Physicians and Surgeons seeks to curb this trend. The training of specialists locally will save the foreign exchange expended on foreign training.\n The availability of specialists locally may further attract foreign exchange to the country as non-Ghanaians in the sub- region seek specialist service in this country which is not available in their home countries.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "66", 
@@ -1159,7 +1303,7 @@
             "original": "The Bill provides a legal framework for running of the College. The College will also develop and oversee structured post- graduate training programmes in various medical and surgical specialists. This will lead to the production of specialists to serve in the regions and districts, thereby making medicine and surgery readily available and accessible to ordinary citizens. It will again assist in reducing the patient to doctor ratio to an appreciable level.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The Bill provides a legal framework for running of the College. The College will also develop and oversee structured post- graduate training programmes in various medical and surgical specialists. This will lead to the production of specialists to serve in the regions and districts, thereby making medicine and surgery readily available and accessible to ordinary citizens. It will again assist in reducing the patient to doctor ratio to an appreciable level.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "66", 
@@ -1168,7 +1312,7 @@
             "original": "There has never been a postgraduate College of Nursing and Midwifery in the country. This therefore resulted in the mass exodus of nurses from the country. The establishment of the Ghana College of Nursing and Midwifery will promote specialist education in nursing and midwifery.", 
             "section": "BILLS --SECOND READING", 
             "speech": "There has never been a postgraduate College of Nursing and Midwifery in the country. This therefore resulted in the mass exodus of nurses from the country. The establishment of the Ghana College of Nursing and Midwifery will promote specialist education in nursing and midwifery.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "66", 
@@ -1177,7 +1321,7 @@
             "original": "The College will also conduct and organize specialist examinations in nursing, midwifery and related disciplines. This will ensure the production of adequate nurses to serve in the regions and districts as well as ensure effective and efficient care of patients in our hospitals.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The College will also conduct and organize specialist examinations in nursing, midwifery and related disciplines. This will ensure the production of adequate nurses to serve in the regions and districts as well as ensure effective and efficient care of patients in our hospitals.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "66", 
@@ -1186,7 +1330,7 @@
             "original": "The Ghana College of Pharmacists will promote specialist education in pharmacy by organizing and supervising specialist training in pharmacy and related disciplines. Graduates from the schools will assist our hospitals as well as industries in the purchasing, dispensing and manufacture of drugs.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The Ghana College of Pharmacists will promote specialist education in pharmacy by organizing and supervising specialist training in pharmacy and related disciplines. Graduates from the schools will assist our hospitals as well as industries in the purchasing, dispensing and manufacture of drugs.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "66", 
@@ -1195,7 +1339,7 @@
             "original": "5.0 Object of the Bill", 
             "section": "BILLS --SECOND READING", 
             "speech": "5.0 Object of the Bill", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "66", 
@@ -1204,7 +1348,7 @@
             "original": "The object of this Bill is to establish four postgraduate colleges. They are:", 
             "section": "BILLS --SECOND READING", 
             "speech": "The object of this Bill is to establish four postgraduate colleges. They are:", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "66", 
@@ -1213,7 +1357,7 @@
             "original": "l.The Center for Plant Medicine Research for the promotion of scientific research, knowledge and development of the field of plant medicine.", 
             "section": "BILLS --SECOND READING", 
             "speech": "l.The Center for Plant Medicine Research for the promotion of scientific research, knowledge and development of the field of plant medicine.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "67", 
@@ -1222,7 +1366,7 @@
             "original": "[ALHAJI MUNTAKA]", 
             "section": "BILLS --SECOND READING", 
             "speech": "2 The Ghana College of Physicians and Surgeons as a national post- graduate medical college for the training of specialists in medicine, surgery and other disciplines.\n 3. The Ghana College of Nursing and Midwifery to promote specialist education in nursing and midwifery.\n 4. The Ghana College of Pharmacists is expected to promote specialist education in Pharmacy.\n 5.l Parts of the Bill\n The Bill is divided into four parts. Part one of the Bill deals with the Center for Plant Medicine Research. Part two deals \"with the establishment of the Ghana College of Physicians and Surgeons and Part three provides for the establishment of the Ghana College of Nursing and Midwifery. Part four also deals with the Ghana College of Pharmacists.\n 6.0 Observations and recommendations\n 6.1 Ghana college of physicians and surgeons\n The Committee noted that the establishment of the Ghana College of Physicians and Surgeons would assist in bridging the doctor/patient ratio in rural Ghana. This is because the law provides for specialist doctors to serve in rural areas for a period during their training. The provision would bring specialist training to the doorstep of the rural poor and to areas where doctors would otherwise not offer their services.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "68", 
@@ -1231,7 +1375,7 @@
             "original": "The training of specialists locally will also save the foreign exchange expended on Ghanaians who seek foreign training abroad. The availability of specialists locally may further attract foreign exchange to the country as non- Ghanaians in the sub-region may seek specialist training and service in this country.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The training of specialists locally will also save the foreign exchange expended on Ghanaians who seek foreign training abroad. The availability of specialists locally may further attract foreign exchange to the country as non- Ghanaians in the sub-region may seek specialist training and service in this country.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "68", 
@@ -1240,7 +1384,7 @@
             "original": "The Committee recommends that after the passage of the Bill, the College should ensure that specialists serve in the districts as proposed in the law because the concentration of specialists in the capital does not help in promoting health services of our people.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The Committee recommends that after the passage of the Bill, the College should ensure that specialists serve in the districts as proposed in the law because the concentration of specialists in the capital does not help in promoting health services of our people.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "68", 
@@ -1249,7 +1393,7 @@
             "original": "6.2 Center for scientific research into plant medicine", 
             "section": "BILLS --SECOND READING", 
             "speech": "6.2 Center for scientific research into plant medicine", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "68", 
@@ -1258,7 +1402,7 @@
             "original": "The Committee further noted that the establishment of this College would boost research into plant medicine and also bring sanity to bear on traditional medicine practice in the country. This is because it would regulate and transfer information on research findings to stakeholders for the benefit of the country.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The Committee further noted that the establishment of this College would boost research into plant medicine and also bring sanity to bear on traditional medicine practice in the country. This is because it would regulate and transfer information on research findings to stakeholders for the benefit of the country.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "68", 
@@ -1267,7 +1411,7 @@
             "original": "The Committee recommends collaboration between the Center and other traditional medicine practitioners to ensure growth in the practice of traditional medicine.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The Committee recommends collaboration between the Center and other traditional medicine practitioners to ensure growth in the practice of traditional medicine.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "68", 
@@ -1276,7 +1420,7 @@
             "original": "6.3 Ghana college of nurses and midwives", 
             "section": "BILLS --SECOND READING", 
             "speech": "6.3 Ghana college of nurses and midwives", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "68", 
@@ -1285,7 +1429,7 @@
             "original": "The establishment of the College as proposed in the law would provide for specialist nurses and midwives. These nurses would serve in the districts as support to medical specialists in their work. This in the opinion of the Committee would ensure maximum care in our hospitals. it would also serve as a boost to the profession of nursing and midwifery. It may even assist in the reduction in maternal mortality.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The establishment of the College as proposed in the law would provide for specialist nurses and midwives. These nurses would serve in the districts as support to medical specialists in their work. This in the opinion of the Committee would ensure maximum care in our hospitals. it would also serve as a boost to the profession of nursing and midwifery. It may even assist in the reduction in maternal mortality.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "69", 
@@ -1294,7 +1438,7 @@
             "original": "[ALHAJI MUNTAKA]", 
             "section": "BILLS --SECOND READING", 
             "speech": "The Committee is pleased with the proposals made and hopes that it would mark a new phase in the profession of nursing and midwifery.\n 6.4 Ghana college of pharmacists\n The Ghana College of Pharmacists would also promote specialist education in pharmacy. It would ensure professional development as well as support research in pharmacy. This in the opinion of the Committee, would promote development in the pharmaceutical industry in Ghana. It would also ensure that genuine pharmaceuticals are dispensed and the issue of fake drugs is brought to its barest minimum\n 7.0 Amendments\n The Committee after careful consideration of the Health Training and Research Bill recommends the following amendments:\n 1. Clause 33 --Amendment proposed -- Sub-clause (1) line (1) after \"good\" insert \"Standing\".\n 2. Clause 41 --Amendment proposed - paragraph (c) delete.\n 3 . Clause 65 -Amendment proposed- Sub-clause (4), delete.\n 4. Clause 69 ---Amendment proposed-- Sub-clause (1) paragraph (a) after \"nursing\" insert \"and\".\n 5. Clause 77 -Amendment proposed - delete.\n 8.0 Conclusion\n The Medical Training and Research Bill would be of immense benefit to the health sector and the country as a whole since it", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "70", 
@@ -1303,7 +1447,7 @@
             "original": "would provide the public with efficient and effective specialists to handle medical cases both in the cities and the districts.", 
             "section": "BILLS --SECOND READING", 
             "speech": "would provide the public with efficient and effective specialists to handle medical cases both in the cities and the districts.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "70", 
@@ -1312,7 +1456,7 @@
             "original": "The Committee, having examined and satisfied itself with the provisions of this Bill, recommends to the House to adopt its Report and the passage of the Bill subject to the proposed amendments.", 
             "section": "BILLS --SECOND READING", 
             "speech": "The Committee, having examined and satisfied itself with the provisions of this Bill, recommends to the House to adopt its Report and the passage of the Bill subject to the proposed amendments.", 
-            "time": "10:40:00"
+            "time": "11:10:00"
         }, 
         {
             "column": "70", 
@@ -1452,7 +1596,7 @@
             "name": "Chairman of the Committee (Alhaji Mohammed Mubarak Muntaka)", 
             "original": "Chairman of the Committee (Alhaji Mohammed Mubarak Muntaka): Mr Speaker I beg to support the Motion moved by the Hon Minister and in doing so, submit your Committee\u2019s Report.", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Mr Speaker I beg to support the Motion moved by the Hon Minister and in doing so, submit your Committee\u2019s Report.\n 1.0 Introduction\n On l6thNovember, 2010, the fonner~Hon Minister for Health, Mr Benjamin Kumbuor, in accordance with article 103 of the 1992 Constitution of Ghana laid the Mental Health Bill before the -House. Pursuant to article 106 of the Constitution and Standing Orders 125 and 178, Madam Speaker, Justice Mrs. Joyce Bamford- Addo referred the Bill to the Committee on Health for consideration and report.\n 2.0 Consideration of the Bill\n As part of its mandate under article 106 (4) of the Constitution of Ghana and Standing Orders 125 and 178, the Committee on Health published in the media requests for written memoranda on the Bill. Thereafter, opportunity was provided for those who presented memoranda to meet with the Committee for further deliberation on their proposals.\n The Committee in January, 2011 commenced deliberation on the Bill but discussions stalled because of the provision in article 190 of the 1992 Constitution that promotes the establishment under the Public Services of Ghana, \"the Health Service\". The proposal for the establishment of another independent Mental Health Service, apart from the Ghana Health Service, was therefore an issue that needed further", 
+            "speech": "Mr Speaker I beg to support the Motion moved by the Hon Minister and in doing so, submit your Committee\u2019s Report.\n 1.0 Introduction\n On l6thNovember, 2010, the fonner-Hon Minister for Health, Mr Benjamin Kumbuor, in accordance with article 103 of the 1992 Constitution of Ghana laid the Mental Health Bill before the -House. Pursuant to article 106 of the Constitution and Standing Orders 125 and 178, Madam Speaker, Justice Mrs. Joyce Bamford- Addo referred the Bill to the Committee on Health for consideration and report.\n 2.0 Consideration of the Bill\n As part of its mandate under article 106 (4) of the Constitution of Ghana and Standing Orders 125 and 178, the Committee on Health published in the media requests for written memoranda on the Bill. Thereafter, opportunity was provided for those who presented memoranda to meet with the Committee for further deliberation on their proposals.\n The Committee in January, 2011 commenced deliberation on the Bill but discussions stalled because of the provision in article 190 of the 1992 Constitution that promotes the establishment under the Public Services of Ghana, \"the Health Service\". The proposal for the establishment of another independent Mental Health Service, apart from the Ghana Health Service, was therefore an issue that needed further", 
             "time": "11:30:00"
         }, 
         {
@@ -1666,9 +1810,9 @@
             "column": "79", 
             "kind": "speech", 
             "name": "Chairman of the Committee (Alhaji Mohammed Mubarak Muntaka)", 
-            "original": "Clauses 24 to 33 make provision for a quasi~judicial Mental Health Tribunal.", 
+            "original": "Clauses 24 to 33 make provision for a quasi-judicial Mental Health Tribunal.", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Clauses 24 to 33 make provision for a quasi~judicial Mental Health Tribunal.", 
+            "speech": "Clauses 24 to 33 make provision for a quasi-judicial Mental Health Tribunal.", 
             "time": "11:30:00"
         }, 
         {
@@ -1747,9 +1891,9 @@
             "column": "79", 
             "kind": "speech", 
             "name": "Chairman of the Committee (Alhaji Mohammed Mubarak Muntaka)", 
-            "original": "The Committee noted that the Bill proposes the establishment of a Mental Health Service. However, article 190 of the l992 Constitution of Ghana provides for a \"National Health Service\" which presupposes that there cannot be another health service. The establishment of a Mental Health Service would therefore contravene the law. It may also bring to bear, a new charge to the Consolidated Fund.", 
+            "original": "The Committee noted that the Bill proposes the establishment of a Mental Health Service. However, article 190 of the 1992 Constitution of Ghana provides for a \"National Health Service\" which presupposes that there cannot be another health service. The establishment of a Mental Health Service would therefore contravene the law. It may also bring to bear, a new charge to the Consolidated Fund.", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "The Committee noted that the Bill proposes the establishment of a Mental Health Service. However, article 190 of the l992 Constitution of Ghana provides for a \"National Health Service\" which presupposes that there cannot be another health service. The establishment of a Mental Health Service would therefore contravene the law. It may also bring to bear, a new charge to the Consolidated Fund.", 
+            "speech": "The Committee noted that the Bill proposes the establishment of a Mental Health Service. However, article 190 of the 1992 Constitution of Ghana provides for a \"National Health Service\" which presupposes that there cannot be another health service. The establishment of a Mental Health Service would therefore contravene the law. It may also bring to bear, a new charge to the Consolidated Fund.", 
             "time": "11:30:00"
         }, 
         {
@@ -1882,9 +2026,9 @@
             "column": "82", 
             "kind": "speech", 
             "name": "Chairman of the Committee (Alhaji Mohammed Mubarak Muntaka)", 
-            "original": "Clause 5 -~Amendment proposed -' Sub-clause (7), closing statement, line 2, after \"vacancy\", insert \"for the unexpired tenure of office of that member\".", 
+            "original": "Clause 5 --Amendment proposed -' Sub-clause (7), closing statement, line 2, after \"vacancy\", insert \"for the unexpired tenure of office of that member\".", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Clause 5 -~Amendment proposed -' Sub-clause (7), closing statement, line 2, after \"vacancy\", insert \"for the unexpired tenure of office of that member\".", 
+            "speech": "Clause 5 --Amendment proposed -' Sub-clause (7), closing statement, line 2, after \"vacancy\", insert \"for the unexpired tenure of office of that member\".", 
             "time": "11:30:00"
         }, 
         {
@@ -1965,7 +2109,7 @@
             "name": "Chairman of the Committee (Alhaji Mohammed Mubarak Muntaka)", 
             "original": "[ALHAJI MUNTAKA]", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "\"The sub-committees shall be responsible for mental health at the regional and district levels\".\n Clause 18 --Amendment proposed - Head note, after \"Health\" delete \"Committee\" and insert\"Sub-committee\" and do same wherever it appears in clauses 19 to 23.\n Clause 18 -Amendment proposed-.- Sub-clause (2), line 2, after \"Board\" insert \"in consultation with the Regional Health Management Team\".\n Clause 2O-Amendment proposed --- Head-note, delete \"of the service\".\n Clause 21- Amendment proposed-- Sub-clause (2), delete and insert \"The members of the District Mental Health Sub-Committee shall be appointed by the Board in consultation with the District Health Management Team\".\n Clause 23~-Amendment proposed - Head-note, delete \"of the service\".\n Clause 25- Amendment proposed- Sub-clause (2), paragraph (a), line 1, after \"a\" delete \"private legal practitioner often years\" and insert \"legal practitioner of not less than ten years\".\n Clause 3 O --Amendment proposed - Sub-clause (1), line 4 delete \"Hospital Director\" and insert \"Head of facility\".\n Clause 33 --~Arnendment proposed-- line (2) after \"Minister\" insert \"through the Board\".\n Clause 35 --Amendment proposed- Sub-clause (1), paragraph (a), line 2, after \"Director\" inserts \"who shall be the Chairperson\".", 
+            "speech": "\"The sub-committees shall be responsible for mental health at the regional and district levels\".\n Clause 18 --Amendment proposed - Head note, after \"Health\" delete \"Committee\" and insert\"Sub-committee\" and do same wherever it appears in clauses 19 to 23.\n Clause 18 -Amendment proposed-.- Sub-clause (2), line 2, after \"Board\" insert \"in consultation with the Regional Health Management Team\".\n Clause 2O-Amendment proposed --- Head-note, delete \"of the service\".\n Clause 21- Amendment proposed-- Sub-clause (2), delete and insert \"The members of the District Mental Health Sub-Committee shall be appointed by the Board in consultation with the District Health Management Team\".\n Clause 23--Amendment proposed - Head-note, delete \"of the service\".\n Clause 25- Amendment proposed- Sub-clause (2), paragraph (a), line 1, after \"a\" delete \"private legal practitioner often years\" and insert \"legal practitioner of not less than ten years\".\n Clause 3 O --Amendment proposed - Sub-clause (1), line 4 delete \"Hospital Director\" and insert \"Head of facility\".\n Clause 33 ---Arnendment proposed-- line (2) after \"Minister\" insert \"through the Board\".\n Clause 35 --Amendment proposed- Sub-clause (1), paragraph (a), line 2, after \"Director\" inserts \"who shall be the Chairperson\".", 
             "time": "11:30:00"
         }, 
         {
@@ -2017,18 +2161,18 @@
             "column": "84", 
             "kind": "speech", 
             "name": "Chairman of the Committee (Alhaji Mohammed Mubarak Muntaka)", 
-            "original": "Clause 44 -Amendment proposed -- Sub-clause (1), line l, after\"patient\" delete \"and\" and insert \"or\".", 
+            "original": "Clause 44 -Amendment proposed -- Sub-clause (1), line l, after \"patient\" delete \"and\" and insert \"or\".", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Clause 44 -Amendment proposed -- Sub-clause (1), line l, after\"patient\" delete \"and\" and insert \"or\".", 
+            "speech": "Clause 44 -Amendment proposed -- Sub-clause (1), line l, after \"patient\" delete \"and\" and insert \"or\".", 
             "time": "11:30:00"
         }, 
         {
             "column": "84", 
             "kind": "speech", 
             "name": "Chairman of the Committee (Alhaji Mohammed Mubarak Muntaka)", 
-            "original": "Clause 44 ~-Amendment proposed - Sub-clause (5), line 2, after \"patient\" insert \"or the personal representative of the patient\".", 
+            "original": "Clause 44 --Amendment proposed - Sub-clause (5), line 2, after \"patient\" insert \"or the personal representative of the patient\".", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Clause 44 ~-Amendment proposed - Sub-clause (5), line 2, after \"patient\" insert \"or the personal representative of the patient\".", 
+            "speech": "Clause 44 --Amendment proposed - Sub-clause (5), line 2, after \"patient\" insert \"or the personal representative of the patient\".", 
             "time": "11:30:00"
         }, 
         {
@@ -2259,8 +2403,8 @@
         {
             "column": "89", 
             "kind": "speech", 
-            "name": "Mr Kyei-iMensah-Bonsu", 
-            "original": "Mr Kyei-iMensah-Bonsu: Mr Speaker, Mr First Deputy Speaker Only on the I thought some others were going to contribute.", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
+            "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, Mr First Deputy Speaker Only on the I thought some others were going to contribute.", 
             "section": "BILLS ---SECOND READING", 
             "speech": "Mr Speaker, Mr First Deputy Speaker Only on the I thought some others were going to contribute.", 
             "time": "11:40:00"
@@ -2271,7 +2415,16 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Very well, you have the floor.", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Very well, you have the floor.\n Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Mr Speaker, the Committee informs us that they\n \"noted that the Bill proposes\"-and I am reading from page 5--\n \"the establishment of a Mental Health Service. However, article 190 of the 1992 Constitution of Ghana provides for a Health Service, which presupposes that there cannot be another health service.\"\n Mr Speaker, I totally disagree with the Committee on this.", 
+            "speech": "Very well, you have the floor.", 
+            "time": "11:40:00"
+        }, 
+        {
+            "column": "89", 
+            "kind": "speech", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
+            "original": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Mr Speaker, the Committee informs us that they", 
+            "section": "BILLS ---SECOND READING", 
+            "speech": "Mr Speaker, the Committee informs us that they\n \"noted that the Bill proposes\"-and I am reading from page 5--\n \"the establishment of a Mental Health Service. However, article 190 of the 1992 Constitution of Ghana provides for a Health Service, which presupposes that there cannot be another health service.\"\n Mr Speaker, I totally disagree with the Committee on this.", 
             "time": "11:40:00"
         }, 
         {
@@ -2325,7 +2478,7 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: All right.", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "All right.\n Minister for Communications (Mr Haruna Iddrisu) (MP): Mr Speaker, I entirely want to associate myself with the concerns raised by the Hon Minority Leader and that if you look at the Committee's Report, particular reference has been made to page 5, and even page l, the first paragraph - the consideration of the Bill subsequent to their travelling abroad.\n Mr Speaker, article 190 - if you look at the head note there, it is \"The Public Services\". It is what composes of the \"Public Services of Ghana\" and that should not allow for any ambiguity in Parliament exercising its authority to create another institution to be known as the \"Mental Health Service. So, I think that the Committee got it wrong.\n We still can have a Mental Health service which will concentrate on the core objectives associated with this particular Bill. And I rather thought that the Committee should not mix matters of public service with Parliament exercising its mandate to create another institution even as it is allowed under article 190 (1) (d)\n \". . . such other public services as Parliament may by law prescribe\". Once we give approval to this Bill, Parliament has by law prescribed the establishment of a new institution to be known as the Mental Health Service. I think that I associate myself with those concerns.\n The Committee can deal with the other recommendations that they made.", 
+            "speech": "All right.\n Minister for Communications (Mr Haruna Iddrisu) (MP): Mr Speaker, I entirely want to associate myself with the concerns raised by the Hon Minority Leader and that if you look at the Committee's Report, particular reference has been made to page 5, and even page l, the first paragraph - the consideration of the Bill subsequent to their traveling abroad.\n Mr Speaker, article 190 - if you look at the head note there, it is \"The Public Services\". It is what composes of the \"Public Services of Ghana\" and that should not allow for any ambiguity in Parliament exercising its authority to create another institution to be known as the \"Mental Health Service. So, I think that the Committee got it wrong.\n We still can have a Mental Health service which will concentrate on the core objectives associated with this particular Bill. And I rather thought that the Committee should not mix matters of public service with Parliament exercising its mandate to create another institution even as it is allowed under article 190 (1) (d)\n \". . . such other public services as Parliament may by law prescribe\". Once we give approval to this Bill, Parliament has by law prescribed the establishment of a new institution to be known as the Mental Health Service. I think that I associate myself with those concerns.\n The Committee can deal with the other recommendations that they made.", 
             "time": "11:40:00"
         }, 
         {
@@ -2379,13 +2532,22 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Well, that is a different matter you are raising. But they have made a categorical statement that it is going to offend the Constitution of the Republic of Ghana and I think that that should be our concern.", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Well, that is a different matter you are raising. But they have made a categorical statement that it is going to offend the Constitution of the Republic of Ghana and I think that that should be our concern.\n Majority Leader (Mr Cletus A. Avoka): Mr Speaker, I just want to associate myself with the constitutional position taken by the Hon Minority Leader and I agree that he is entirely right. This is because what has been captured in the Committee\u2019s Report, it is not correct, as far as the Constitution is concerned. It reads:\n \"However, article 190 of the 1992 Constitution of Ghana provides for a \u2018National Health Service which presuppose that there cannot be another health service.\"\n That is where it is wrong. So, to that extent, I think that we can change. But fortunately, Mr Speaker, this is only a Committee\u2019s Report; it is not law. That is why we are in the process of transforming this Bill into law. So, we will I take note of that when it comes to the Consideration Stage. I hope that it is not a provision in the Bill anyway.\n I also want to allude to the earlier statement made by the Hon Deputy Ranking Member when we criticized the idea of our inability to supervise charismatic churches and other institutions outside the health institutions that deal with mental patients. I think that as a country, it is important for us to have a system that affects all other structures in the country. And if you look at the indignity that some of these patients go through in some of these spiritual churches, at cetera, I think it is important that we have a legal framework.", 
+            "speech": "Well, that is a different matter you are raising. But they have made a categorical statement that it is going to offend the Constitution of the Republic of Ghana and I think that that should be our concern.", 
+            "time": "11:40:00"
+        }, 
+        {
+            "column": "92", 
+            "kind": "speech", 
+            "name": "Majority Leader (Mr Cletus A. Avoka): Mr Speaker, I just want to associate myself with the constitutional position taken by the Hon Minority Leader and I agree that he is entirely right. This is because what has been captured in the Committee\u2019s Report, it is not correct, as far as the Constitution is concerned. It reads", 
+            "original": "Majority Leader (Mr Cletus A. Avoka): Mr Speaker, I just want to associate myself with the constitutional position taken by the Hon Minority Leader and I agree that he is entirely right. This is because what has been captured in the Committee\u2019s Report, it is not correct, as far as the Constitution is concerned. It reads:", 
+            "section": "BILLS ---SECOND READING", 
+            "speech": "\"However, article 190 of the 1992 Constitution of Ghana provides for a \u2018National Health Service which presuppose that there cannot be another health service.\"\n That is where it is wrong. So, to that extent, I think that we can change. But fortunately, Mr Speaker, this is only a Committee\u2019s Report; it is not law. That is why we are in the process of transforming this Bill into law. So, we will I take note of that when it comes to the Consideration Stage. I hope that it is not a provision in the Bill anyway.\n I also want to allude to the earlier statement made by the Hon Deputy Ranking Member when we criticized the idea of our inability to supervise charismatic churches and other institutions outside the health institutions that deal with mental patients. I think that as a country, it is important for us to have a system that affects all other structures in the country. And if you look at the indignity that some of these patients go through in some of these spiritual churches, at cetera, I think it is important that we have a legal framework.", 
             "time": "11:40:00"
         }, 
         {
             "column": "93", 
             "kind": "continued speech", 
-            "name": "Mr First Deputy Speaker", 
+            "name": "Majority Leader (Mr Cletus A. Avoka): Mr Speaker, I just want to associate myself with the constitutional position taken by the Hon Minority Leader and I agree that he is entirely right. This is because what has been captured in the Committee\u2019s Report, it is not correct, as far as the Constitution is concerned. It reads", 
             "original": "[MR AVOKA]", 
             "section": "BILLS ---SECOND READING", 
             "speech": "So that if somebody is going contrary to the spirit and terms of this framework that we have, then we can bring the person to order. But if there is no legal framework and they do what they want, it is difficult to sanction or bring them to book. So, I think it is important that when we are making legislation, we must be able to guide or affect all structures that deal with the subject. So, to that extent, I think the Committee is right.\n Thank you.", 
@@ -2700,8 +2862,8 @@
         {
             "column": "99", 
             "kind": "speech", 
-            "name": "Mr Michael C. Boampong)", 
-            "original": "Mr Michael C. Boampong): Mr Speaker, I beg to second the Motion.", 
+            "name": "Mr Michael C. Boampong", 
+            "original": "Mr Michael C. Boampong: Mr Speaker, I beg to second the Motion.", 
             "section": "BILLS ---SECOND READING", 
             "speech": "Mr Speaker, I beg to second the Motion.\n Question put and Motion agreed to.\n Resolved accordingly.", 
             "time": "12:00:00"
@@ -2785,9 +2947,9 @@
             "column": "101", 
             "kind": "speech", 
             "name": "MrHaruna Iddrisu", 
-            "original": "MrHaruna Iddrisu: Mr Speaker, if you will indulge me, is it also not possible to marry the two, that the Minister would have given approval on the basis of recommendations made by the Director~ General? Would the Chairman be averse to an improvement of that particular clause?", 
+            "original": "MrHaruna Iddrisu: Mr Speaker, if you will indulge me, is it also not possible to marry the two, that the Minister would have given approval on the basis of recommendations made by the Director- General? Would the Chairman be averse to an improvement of that particular clause?", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "Mr Speaker, if you will indulge me, is it also not possible to marry the two, that the Minister would have given approval on the basis of recommendations made by the Director~ General? Would the Chairman be averse to an improvement of that particular clause?", 
+            "speech": "Mr Speaker, if you will indulge me, is it also not possible to marry the two, that the Minister would have given approval on the basis of recommendations made by the Director- General? Would the Chairman be averse to an improvement of that particular clause?", 
             "time": "12:00:00"
         }, 
         {
@@ -3999,8 +4161,8 @@
         {
             "column": "121", 
             "kind": "speech", 
-            "name": "Mr Kyei~Mensah-Bonsu", 
-            "original": "Mr Kyei~Mensah-Bonsu: Mr Speaker, the other more important thing that I want u-s to advert our minds to is -- [Interruption.] Mr Speaker, I am told they are yet to do it and if they are yet to do it, let them consider that.", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
+            "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, the other more important thing that I want u-s to advert our minds to is -- [Interruption.] Mr Speaker, I am told they are yet to do it and if they are yet to do it, let them consider that.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, the other more important thing that I want u-s to advert our minds to is -- [Interruption.] Mr Speaker, I am told they are yet to do it and if they are yet to do it, let them consider that.\n I propose that instead of saying \"An Act to amend the Ghana Shipping Act, 2003 (Act 645) to extend the definition of ' Ghanaian waters\", he may just say, delete \"extend the definition of and insert \"to redefine Ghanaian waters \"or\" define Ghanaian waters to include\" instead of saying you wants to extend.\n It may involve some misunderstanding, Mr Speaker.", 
             "time": "13:00:00"
@@ -4180,9 +4342,9 @@
             "column": "124", 
             "kind": "speech", 
             "name": "Mr Kyei-Mensah-Bonsu", 
-            "original": "not the Director-General. So the Schedule should also have that amendment, that it should be the Minister responsible for Transport and not the Director~General. So we should have a further amendment to that.", 
+            "original": "not the Director-General. So the Schedule should also have that amendment, that it should be the Minister responsible for Transport and not the Director-General. So we should have a further amendment to that.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "not the Director-General. So the Schedule should also have that amendment, that it should be the Minister responsible for Transport and not the Director~General. So we should have a further amendment to that.", 
+            "speech": "not the Director-General. So the Schedule should also have that amendment, that it should be the Minister responsible for Transport and not the Director-General. So we should have a further amendment to that.", 
             "time": "13:10:00"
         }, 
         {
@@ -4439,7 +4601,7 @@
         "date": "2011-08-23", 
         "number": 2, 
         "series": 4, 
-        "time": "10:30:00", 
+        "time": "10:20:00", 
         "volume": 74
     }
 }

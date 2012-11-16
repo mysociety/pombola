@@ -678,7 +678,16 @@
             "name": "Alhaji Fuseini", 
             "original": "Alhaji Fuseini: Madam Speaker, in accordance with the provisions of the Local Government (Department of District Assemblies) (Commencement) Instru- ment, 2009 (L.I. I961), Metropolitan, Municipal, District Assemblies (MMDAs) are responsible for the development, installation, ownership and maintenance of street lights throughout the country. The provision of this facility in Ghana is still the responsibility of the MMDAs.", 
             "section": "MINISTRY OF ENERGY", 
-            "speech": "Madam Speaker, in accordance with the provisions of the Local Government (Department of District Assemblies) (Commencement) Instru- ment, 2009 (L.I. I961), Metropolitan, Municipal, District Assemblies (MMDAs) are responsible for the development, installation, ownership and maintenance of street lights throughout the country. The provision of this facility in Ghana is still the responsibility of the MMDAs.\n The rehabilitation of the dysfunctional street lights in the Awutu, Bereku, Bawjiase, Senya and Kasoa communities, is therefore, the responsibility of the respective District Assembly, that is, the Awutu-Senya District Assembly.\n Nana Larbie: Madam Speaker, I think his Answer has answered my second and third questions and I am satisfied with it.\n Thank you very much.", 
+            "speech": "Madam Speaker, in accordance with the provisions of the Local Government (Department of District Assemblies) (Commencement) Instru- ment, 2009 (L.I. I961), Metropolitan, Municipal, District Assemblies (MMDAs) are responsible for the development, installation, ownership and maintenance of street lights throughout the country. The provision of this facility in Ghana is still the responsibility of the MMDAs.\n The rehabilitation of the dysfunctional street lights in the Awutu, Bereku, Bawjiase, Senya and Kasoa communities, is therefore, the responsibility of the respective District Assembly, that is, the Awutu-Senya District Assembly.", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "838", 
+            "kind": "speech", 
+            "name": "Nana Larbie", 
+            "original": "Nana Larbie: Madam Speaker, I think his Answer has answered my second and third questions and I am satisfied with it.", 
+            "section": "MINISTRY OF ENERGY", 
+            "speech": "Madam Speaker, I think his Answer has answered my second and third questions and I am satisfied with it.\n Thank you very much.", 
             "time": "11:00:00"
         }, 
         {
@@ -1765,12 +1774,10 @@
             "time": "12:20:00"
         }, 
         {
-            "column": "868", 
-            "kind": "speech", 
-            "name": "Alhaji Muntaka", 
+            "action": "rose -", 
+            "kind": "action", 
+            "name": "Mr J. B. Aidoo", 
             "original": "Mr J. B. Aidoo --rose --", 
-            "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "Mr J. B. Aidoo --rose --", 
             "time": "12:20:00"
         }, 
         {
@@ -2314,7 +2321,7 @@
             "time": "12:40:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
             "name": "Mr Boafo", 
             "original": "Mr Boafo - rose -", 
@@ -2614,7 +2621,14 @@
             "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, \"the proposed amendment, under clause 26, as advertised, is abandoned. And in its place, I beg to move, clause 26, line 2, after \"country\", delete \"by air, land or sea, who\" and insert \"but\".", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "Mr Speaker, \"the proposed amendment, under clause 26, as advertised, is abandoned. And in its place, I beg to move, clause 26, line 2, after \"country\", delete \"by air, land or sea, who\" and insert \"but\".\n Question put and amendment agreed to.\n Mr W. O. Boafo --rose--", 
+            "speech": "Mr Speaker, \"the proposed amendment, under clause 26, as advertised, is abandoned. And in its place, I beg to move, clause 26, line 2, after \"country\", delete \"by air, land or sea, who\" and insert \"but\".\n Question put and amendment agreed to.", 
+            "time": "13:00:00"
+        }, 
+        {
+            "action": "rose-", 
+            "kind": "action", 
+            "name": "Mr W. O. Boafo", 
+            "original": "Mr W. O. Boafo --rose--", 
             "time": "13:00:00"
         }, 
         {
@@ -2965,7 +2979,14 @@
             "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: Hon Member, you will find that the essence of that whole provision is \"examination and vaccination\". So once the Headnote is clear, that it is for examination at the point of entry, then the appropriate step would be taken at the appropriate time with regard to matters of examination and vaccination. So let us make progress. This is an, observation.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "Hon Member, you will find that the essence of that whole provision is \"examination and vaccination\". So once the Headnote is clear, that it is for examination at the point of entry, then the appropriate step would be taken at the appropriate time with regard to matters of examination and vaccination. So let us make progress. This is an, observation.\n Alhaji Muntaka -- rose ---", 
+            "speech": "Hon Member, you will find that the essence of that whole provision is \"examination and vaccination\". So once the Headnote is clear, that it is for examination at the point of entry, then the appropriate step would be taken at the appropriate time with regard to matters of examination and vaccination. So let us make progress. This is an, observation.", 
+            "time": "13:10:00"
+        }, 
+        {
+            "action": "-", 
+            "kind": "action", 
+            "name": "Alhaji Muntaka -- rose", 
+            "original": "Alhaji Muntaka -- rose ---", 
             "time": "13:10:00"
         }, 
         {

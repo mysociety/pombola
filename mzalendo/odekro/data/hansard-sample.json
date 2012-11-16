@@ -228,7 +228,41 @@
             "name": "Dr A. A. Osei", 
             "original": "Dr A. A. Osei: No. This is the Master Facility Agreement. Yet more statements.", 
             "section": "PAPERS", 
-            "speech": "No. This is the Master Facility Agreement. Yet more statements.\n An Hon Member: Madam Speaker, point of order.\n Minister of State (Mr Dominic A. Azumah)(MP): Madam Speaker, Here is my statement. Another sentence\n Some Hon Members - rose -\n Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Thank you very much, Madam Speaker, for the opporttmity to say", 
+            "speech": "No. This is the Master Facility Agreement. Yet more statements.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "899", 
+            "kind": "speech", 
+            "name": "An Hon Member", 
+            "original": "An Hon Member: Madam Speaker, point of order.", 
+            "section": "PAPERS", 
+            "speech": "Madam Speaker, point of order.", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "899", 
+            "kind": "speech", 
+            "name": "Minister of State (Mr Dominic A. Azumah)(MP)", 
+            "original": "Minister of State (Mr Dominic A. Azumah)(MP): Madam Speaker, Here is my statement. Another sentence", 
+            "section": "PAPERS", 
+            "speech": "Madam Speaker, Here is my statement. Another sentence", 
+            "time": "10:50:00"
+        }, 
+        {
+            "action": "rose ", 
+            "kind": "action", 
+            "name": "Some Hon Members", 
+            "original": "Some Hon Members - rose -", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "899", 
+            "kind": "speech", 
+            "name": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu)", 
+            "original": "Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Thank you very much, Madam Speaker, for the opporttmity to say", 
+            "section": "PAPERS", 
+            "speech": "Thank you very much, Madam Speaker, for the opporttmity to say", 
             "time": "10:50:00"
         }, 
         {
@@ -241,9 +275,9 @@
             "time": "11:00:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
-            "name": "Mr Joe Ghartey -", 
+            "name": "Mr Joe Ghartey", 
             "original": "Mr Joe Ghartey -- rose -", 
             "time": "11:00:00"
         }, 
@@ -578,7 +612,7 @@
             "time": "11:30:00"
         }, 
         {
-            "action": "rose", 
+            "action": "rose ", 
             "kind": "action", 
             "name": "Dr Anthony A. Osei", 
             "original": "Dr Anthony A. Osei - rose -", 
@@ -608,7 +642,14 @@
             "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: Very well \"", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "Very well \"\n Question put and amendment agreed to.\n Mr Avoka -rose-", 
+            "speech": "Very well \"\n Question put and amendment agreed to.", 
+            "time": "11:30:00"
+        }, 
+        {
+            "action": "rose", 
+            "kind": "action", 
+            "name": "Mr Avoka", 
+            "original": "Mr Avoka -rose-", 
             "time": "11:30:00"
         }, 
         {
@@ -824,7 +865,14 @@
             "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: Hon Members, this is a very critical stage of this Consideration Stage and I believe we should -", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "Hon Members, this is a very critical stage of this Consideration Stage and I believe we should -\n Some Hon Members -- rose-", 
+            "speech": "Hon Members, this is a very critical stage of this Consideration Stage and I believe we should -", 
+            "time": "12:00:00"
+        }, 
+        {
+            "action": "rose", 
+            "kind": "action", 
+            "name": "Some Hon Members", 
+            "original": "Some Hon Members -- rose-", 
             "time": "12:00:00"
         }, 
         {

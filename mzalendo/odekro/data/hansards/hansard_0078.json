@@ -456,7 +456,16 @@
             "name": "Madam Speaker", 
             "original": "Madam Speaker: Hon Member, you have three questions.", 
             "section": "MINISTRY OF THE INTERIOR", 
-            "speech": "Hon Member, you have three questions.\n Nana Larbie: Madam Speaker, I am very, very happy with the arrangement made so far. So the Answer to my Question is all right and I am happy. I have no more questions to ask.", 
+            "speech": "Hon Member, you have three questions.", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "920", 
+            "kind": "speech", 
+            "name": "Nana Larbie", 
+            "original": "Nana Larbie: Madam Speaker, I am very, very happy with the arrangement made so far. So the Answer to my Question is all right and I am happy. I have no more questions to ask.", 
+            "section": "MINISTRY OF THE INTERIOR", 
+            "speech": "Madam Speaker, I am very, very happy with the arrangement made so far. So the Answer to my Question is all right and I am happy. I have no more questions to ask.", 
             "time": "11:20:00"
         }, 
         {
@@ -762,7 +771,14 @@
             "name": "Mr Aboah", 
             "original": "Mr Aboah: Madam Speaker, that is the law at the moment and his submission is noted.", 
             "section": "MINISTRY OF THE INTERIOR", 
-            "speech": "Madam Speaker, that is the law at the moment and his submission is noted.\n Mr Agyeman-Manu -- rose --", 
+            "speech": "Madam Speaker, that is the law at the moment and his submission is noted.", 
+            "time": "11:30:00"
+        }, 
+        {
+            "action": "rose -", 
+            "kind": "action", 
+            "name": "Mr Agyeman-Manu", 
+            "original": "Mr Agyeman-Manu -- rose --", 
             "time": "11:30:00"
         }, 
         {
@@ -861,7 +877,14 @@
             "name": "Mr Aboah", 
             "original": "Mr Aboah: Madam Speaker, unapproved routes are known very well by everybody and that is why we put border patrols at the place. So we have border patrols around all unapproved routes.", 
             "section": "MINISTRY OF THE INTERIOR", 
-            "speech": "Madam Speaker, unapproved routes are known very well by everybody and that is why we put border patrols at the place. So we have border patrols around all unapproved routes.\n Dr Anthony A. Osei --rose--", 
+            "speech": "Madam Speaker, unapproved routes are known very well by everybody and that is why we put border patrols at the place. So we have border patrols around all unapproved routes.", 
+            "time": "11:40:00"
+        }, 
+        {
+            "action": "rose-", 
+            "kind": "action", 
+            "name": "Dr Anthony A. Osei", 
+            "original": "Dr Anthony A. Osei --rose--", 
             "time": "11:40:00"
         }, 
         {
@@ -1056,7 +1079,14 @@
             "name": "Dr Prempeh", 
             "original": "Dr Prempeh: Hon Seth Terkpeh; he is here. But Madam Speaker, it is not right that Hon Members of the Committee -- [Interruption.]", 
             "section": "PAPERS", 
-            "speech": "Hon Seth Terkpeh; he is here. But Madam Speaker, it is not right that Hon Members of the Committee -- [Interruption.]\n Mr Avoka -- rose --", 
+            "speech": "Hon Seth Terkpeh; he is here. But Madam Speaker, it is not right that Hon Members of the Committee -- [Interruption.]", 
+            "time": "11:40:00"
+        }, 
+        {
+            "action": "rose -", 
+            "kind": "action", 
+            "name": "Mr Avoka", 
+            "original": "Mr Avoka -- rose --", 
             "time": "11:40:00"
         }, 
         {

@@ -894,7 +894,14 @@
             "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: Thank you very much, Hon Deputy Minister.", 
             "section": "RESOURCES", 
-            "speech": "Thank you very much, Hon Deputy Minister.\n Some Hon Members --rose-", 
+            "speech": "Thank you very much, Hon Deputy Minister.", 
+            "time": "11:05:00"
+        }, 
+        {
+            "action": "rose", 
+            "kind": "action", 
+            "name": "Some Hon Members", 
+            "original": "Some Hon Members --rose-", 
             "time": "11:05:00"
         }, 
         {
@@ -1461,7 +1468,14 @@
             "name": "Mr Kamel", 
             "original": "Mr Kamel: Mr Speaker, this is the criteria that we have, but depending on the circumstances of the applicant, we are not so water-tight. We are generally keen on helping the most vulnerable groups and women fall into this group. So depending on the circumstances, we are able to see what we can do to support genuine applicants.", 
             "section": "RESOURCES", 
-            "speech": "Mr Speaker, this is the criteria that we have, but depending on the circumstances of the applicant, we are not so water-tight. We are generally keen on helping the most vulnerable groups and women fall into this group. So depending on the circumstances, we are able to see what we can do to support genuine applicants.\n But let me also make this appeal that, it is becoming obvious that people are accessing the Fund. You can see from the regional distribution table that some regions have not benefited at all from the whole arrangement. So we call on Hon Members to make this information available to their constituents and we want them to encourage-serious minded plantation developers to access the Fund.\n Thank you.\n Mr Aidoo and Mr Joseph Osei-Owusu -- rose --", 
+            "speech": "Mr Speaker, this is the criteria that we have, but depending on the circumstances of the applicant, we are not so water-tight. We are generally keen on helping the most vulnerable groups and women fall into this group. So depending on the circumstances, we are able to see what we can do to support genuine applicants.\n But let me also make this appeal that, it is becoming obvious that people are accessing the Fund. You can see from the regional distribution table that some regions have not benefited at all from the whole arrangement. So we call on Hon Members to make this information available to their constituents and we want them to encourage-serious minded plantation developers to access the Fund.\n Thank you.", 
+            "time": "11:35:00"
+        }, 
+        {
+            "action": "rose -", 
+            "kind": "action", 
+            "name": "Mr Aidoo and Mr Joseph Osei-Owusu", 
+            "original": "Mr Aidoo and Mr Joseph Osei-Owusu -- rose --", 
             "time": "11:35:00"
         }, 
         {
