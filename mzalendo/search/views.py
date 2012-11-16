@@ -94,6 +94,6 @@ def tagcloud(request):
     return HttpResponse(
         simplejson.dumps(words),
         mimetype='application/json'
-    }
+    )
 
 
