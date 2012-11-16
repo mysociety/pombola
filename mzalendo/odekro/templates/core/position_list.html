@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}PoliticiansZZZZZ{% endblock %}
+
+{% block content %}
+
+    <div class="infopage">
+    <h1 class="page-title">Politicians</h1>
+
+    <p>There are currently 222 Members of Parliament. 210 directly elected by their constituencies, and 12 nominated MPs.
+
+    <p>In the 2012 election the number of MPs will increase to 290 members elected by registered votes in an increased number of constituencies, 47 women elected by registered voters from the counties, 12 members nominated by parliamentary political parties to represent special interests of youth, persons with disabilities and workers, and the Speaker of the National Assembly.
+
+{% comment %}
+    <h2>Roles of the MPs</h2>
+
+    <p>The members of the National Assembly represent the people of constituencies and as well as special interests (youth, women, persons with disabilities and workers) in the National Assembly.</p>
+
+    <p>The roles of the members of the national assembly are to:</p>
+
+    <ul>
+        <li>Make laws,</li>
+    <li>Determine how resources are allocated between national and county governments,</li>
+    <li>Review the conduct of the state officers that include the president and deputy president,</li>
+    <li>Make and approve declarations of war,</li>
+    <li>Exercise oversight over national revenue,</li>
+    <li>Debate and provide solutions to issues that concern the people and exercise oversight over the over state organs. State organs include commissions, offices and bodies established under the Constitution. The people can approach their representatives in the National Assembly to ask questions and debate issues that affect them in the Assembly.</li>
+    </ul>
+{% endcomment %}
+
+    <p>Below is a list of all existing MPs, sorted alphabetically by constituency for the first 210 MPs, with the 12 nominated MPs at the end.</p>
+
+    </div>
+
+    {% include 'core/generic_list.html' %}
+
+{% endblock %}
+

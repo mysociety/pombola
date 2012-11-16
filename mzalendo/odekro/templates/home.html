@@ -1,43 +1,65 @@
-{% extends 'shell.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Odekro{% endblock %}
 
-{% block styles %}
-<link type="text/css" href="{{ STATIC_URL }}css/1140.css" rel="stylesheet" />
-<link type="text/css" href="{{ STATIC_URL }}css/styles.css" rel="stylesheet" />
-{% endblock %}
-
-{% block scripts %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/css3-mediaqueries.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.4.3.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/s3Slider.js"></script> 
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.jshowoff.min.js"></script>
-{% endblock %}
-
 
 {% block extra_scripts %}
-<script type="text/javascript">     
-    $(function() { 
-        $('#personFeatures').jshowoff({ 
-           links: false,
-           controls: false,
-           effect: 'fade',
-           cssClass: 'personFeatures',
-           hoverPause: false,
-           speed: 20000
-       }) 
-    })
-</script>
-<script type="text/javascript">
-    $(function() {
-        $('#slider1').s3Slider({
-            timeOut: 5000 
-        })
-    })
-</script>
+  {% comment %}
+    Launch-specific scripts should be moved out after launch
+  {% endcomment %}
+
+  <script type="text/javascript" src="{{ STATIC_URL }}js/countdown.js"></script>
+  <script type="text/javascript">
+        function diff(end, start) {
+            if (!start) {
+                start = new Date()
+            }
+
+            var ms = (end - start)
+            var s = Math.floor(ms / 1000)
+            var m = Math.floor(s / 60)
+            s %= 60
+            var h = Math.floor(m / 60)
+            m %= 60
+            var d = Math.floor(h / 24)
+            h %= 24
+
+            return [d, h, m, s]
+        }
+
+        $(function(){
+            $('#counter').countdown({
+                image: '{{ STATIC_URL }}images/digits.png',
+                startTime: diff(new Date(2012, 11, 7)).join(':')
+            });
+        });
+  </script>
+
+  <script type="text/javascript">     
+      $(function() { 
+          $('#personFeatures').jshowoff({ 
+             links: false,
+             controls: false,
+             effect: 'fade',
+             cssClass: 'personFeatures',
+             hoverPause: false,
+             speed: 20000
+         }) 
+      })
+  </script>
+
+  <script type="text/javascript">
+      $(function() {
+          $('#slider1').s3Slider({
+              timeOut: 5000 
+          })
+      })
+  </script>
 {% endblock %}
 
+{% block custom-crumb-id %}-rep{% endblock %}
+
 {% block content %}
-    {% include 'home_content.html' %}
+    {# include 'home_content.html' #}
+    {% include 'home_content_launch.html' %}
 {% endblock %}

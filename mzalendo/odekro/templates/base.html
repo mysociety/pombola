@@ -11,6 +11,7 @@
 
     {% block styles %}
     <link type="text/css" href="{{ STATIC_URL }}css/1140.css" rel="stylesheet" />
+    <link type="text/css" href="{{ STATIC_URL }}css/ie.css" rel="stylesheet" />
     <link type="text/css" href="{{ STATIC_URL }}css/styles.css" rel="stylesheet" />
     {% endblock %}
 
@@ -25,26 +26,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.jshowoff.min.js"></script>
     {% endblock %}
 
-    {% block extra_scripts %}
-    <script type="text/javascript">     
-        $(function() { 
-            $('#personFeatures').jshowoff({ 
-               links: false,
-               controls: false,
-               effect: 'fade',
-               cssClass: 'personFeatures',
-               hoverPause: false,
-               speed: 20000
-           }) 
-        })
-    </script>
-    <script type="text/javascript">
-        $(function() {
-            $('#slider1').s3Slider({
-                timeOut: 5000 
-            })
-        })
-    </script>
+    {% block extra_scripts %}    
     {% endblock %}
 </head>
 
@@ -52,13 +34,15 @@
     {% block pre_header %}
     {% endblock %}
 
+
     <header id="odekro-header">
-        {% include 'header.html' %}
+        {% block header %}
+            {% include 'header.html' %}
+        {% endblock %}
     </header>
 
-    <div id="breadcrumb-rep"></div>
-
     {% block breadcrumb %}
+        <div id="breadcrumb{% block custom-crumb-id %}{% endblock %}"></div>
     {% endblock %}
 
     <div id="odekro-page">

@@ -14,6 +14,7 @@ h1, h2, h3, h4{color:#444;}
 #odekro-page h1{border-bottom:1px solid #eee;padding:0 0 3px;margin:0 0 8px;font-weight:500;}
 #odekro-page h2{margin:0 0 8px;font-weight:500;}
 #odekro-page h3{text-transform:uppercase;border-bottom:1px solid #eee;padding:0 0 3px;margin:0 0 8px;clear:both;}
+#odekro-page h3#indexIntro{text-transform:none;border:none;font-size:1.2em;font-weight:500;margin:0 0 15px;clear:both;color:#f20;}
 .search-left h2{border-bottom:1px solid #eee;clear:both;}
 .blog-post h2{color:#d30c0c;font-weight:500;}
 .blog-post p.meta{border-bottom:1px solid #eee;padding:0 0 5px;font-size: 0.95em;}
@@ -28,15 +29,19 @@ button, input{border:none;}
 #h_mid h1#logo a{background:url(../images/logo.png) no-repeat;display:block;width:193px;height:40px;text-indent:-9999px;}
 ul.header{color:#3b3b3b;padding:8px 17px;height:2.3em;float:left;margin:14px 0;border-left:1px solid #e7e7e7;}
 ul.header a{display:block;color:#f20;font-weight:bold;}
-ul.header a:hover{color:#3b3b3b;}
+ul.header a:hover, #log_account a.profile:hover{color:#3b3b3b;}
 ul.header span{color:#c1c1c1;}
 ul a.topMenu, .comment-heading a, #response h2{color:#222;}
 ul a.topMenu:hover, #odekro-news-list h4 a:hover, .election-news a:hover, .comment-heading a:hover{color:#666;}
 #rightArea{float:right;}
 #account{float:right;margin:10px 0 0;}
-#account a{border-left:1px solid #e7e7e7;padding:0 0 0 8px;color:#000;font-size:.88em;}
-#account a:hover{color:#f20;}
-#account a:first-child{float:left;border:none;margin:2px 8px 0;padding:0;width:16px;height:13px;display:block;background:url(../images/login_icon.png) no-repeat;text-indent:-9999px;}
+#log_account{float:right;margin:6px 0 0;}
+#account a, #log_account a{border-left:1px solid #e7e7e7;padding:0 0 0 8px;color:#000;font-size:.88em;}
+#account a:hover, #log_account a:hover{color:#f20;}
+#log_account a.profile{float:left;border:none;margin:0 8px;padding:0;height:13px;display:block;background:none;color:#f20;font-size:.9em;font-weight:bold;}
+#log_account a.profile img{float:left;border:1px solid #ddd;margin:-1px 8px;height:20px;width:20px;display:block;background:url(../images/ode_avatar.jpg) no-repeat;}
+#log_account a.profile span{float:left;margin:1px 0;}
+#account a.no_profile{float:left;border:none;margin:2px 8px 0;padding:0;width:16px;height:13px;display:block;background:url(../images/login_icon.png) no-repeat;text-indent:-9999px;}
 #search{margin:10px 0 0;float:right;clear:both;}
 form#odekro_search{width:265px;padding:5px 0 5px 15px;height:20px;background:url(../images/search_bg.png) no-repeat;}
 form#odekro_search input{width:228px;height:16px;color:#727272;font-size:.9em;}
@@ -68,7 +73,7 @@ ul.menu .menulink:hover, #nav ul.menu .menuhover, ul.menu li:hover a.menulink{co
 .typo-left ul li{margin:0 0 5px;list-style:disc;color:#888;}
 #odekro-page ol li{margin:0 0 5px;}
 .page-wrapper{margin:0 auto;width:1140px;}
-.index-left, .index-mid, .index-right{min-height:500px;overflow:hidden;padding:0 0 5px;}
+.index-left, .index-mid, .index-right{overflow:hidden;padding:0 0 5px;}
 .index-left{}
 .search-box{margin:0 0 10px;padding:3px 0 0;}
 .search-box input{width:300px;height:20px;float:left;padding:5px;margin:0 10px 0 0;border:1px solid #ccc;}
@@ -149,16 +154,13 @@ form#e-subscribe button{width:60px;height:33px;float:right;margin:0 0 0 5px;back
 form.search-wrap button, .search-filters button{height:32px;width:60px;background:#3d912d url(../images/page-search_btn.png) center no-repeat;text-indent:-9999px;cursor:pointer;border-radius:2px;}
 ul.socialLinks, ul.socialShare{margin:0 0 25px;}
 ul.socialLinks li{border-bottom:1px solid #ebebeb;margin-bottom:0;min-height:33px;padding:5px 0;}
-ul.socialLinks li:last-child{border:none;}
+ul.socialLinks li:last-child, ul.socialShare li:last-child{border:none;}
 ul.socialLinks li a{color:#6a6a6a;font-weight:normal;text-decoration:none;width:32px;height:32px;}
 ul.socialLinks li .icon{float:left;height:32px;margin-right:12px;overflow:hidden;text-indent:-99em;width:32px;}
-ul.socialLinks .facebook .icon{background:url(../images/facebook_dark.png) no-repeat;}
-ul.socialLinks .twitter .icon{background:url(../images/twitter_dark.png) no-repeat;}
-ul.socialLinks .googleplus .icon{background:url(../images/googleplus_dark.png) no-repeat;}
-ul.socialLinks .facebook .icon:hover, ul.socialShare .facebook{background:url(../images/facebook.png) no-repeat;}
-ul.socialLinks .twitter .icon:hover, ul.socialShare .twitter{background:url(../images/twitter.png) no-repeat;}
-ul.socialLinks .googleplus .icon:hover, ul.socialShare .googleplus{background:url(../images/googleplus.png) no-repeat;}
-ul.socialShare li{padding:8px 0 8px 40px;margin:0 0 5px;}
+ul.socialLinks .facebook .icon:hover{background:url(../images/facebook.png) no-repeat;}
+ul.socialLinks .twitter .icon:hover{background:url(../images/twitter.png) no-repeat;}
+ul.socialLinks .googleplus .icon:hover{background:url(../images/googleplus.png) no-repeat;}
+ul.socialShare li{margin:0 0 5px;border-bottom:1px solid #ebebeb;margin-bottom:0;min-height:23px;padding:5px 0;}
 ul.socialShare li a{color:#f20;}
 ul.socialShare li a:hover{color:#666;font-style:italic;}
 .qLinks li{margin:5px 20px 5px 0;float:left;}
@@ -274,4 +276,11 @@ form#register span a{color:#f20;}
 ol#pagination{overflow:hidden;padding:0;}
 ol#pagination li{color:#fff;float:left;list-style:none;cursor:pointer;margin:0 .5em 0 0;border-radius:15px;padding:3px 7px;background:#eee;}
 ol#pagination li.current{color:#f20;font-weight:bold;cursor:default;background:none;}
-    
+span#pollOpen{color:#444;font-size:1.3em;}
+#counter{height:77px;overflow:hidden;margin:15px 0 ;}
+.cntSeparator{font-size:54px;margin:10px 7px;color:#000;}
+.desc{margin:7px 0 20px;overflow:hidden;}
+.desc div{float:left;font-family:Arial;width:70px;margin-right:65px;font-size:13px;font-weight:bold;color:#000;}
+.Plinks{float:left;width:100%;}
+.Plinks a{color:#fff;font-size:1.6em;float:left;text-align:center;height:50px;width:45%;margin:0 10px 10px 0;background:#6c6;display:inline-block;padding:10px;}
+.Plinks a:nth-child(2n+2){margin:0 0 10px;}

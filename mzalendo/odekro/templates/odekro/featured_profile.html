@@ -1,0 +1,32 @@
+{% load thumbnail %}
+
+<h3>Featured Profile</h3>
+
+{% with featured_person as p %}
+
+<div id="personFeatures">
+    <div class="featured-person">
+        <a href="{{ p.get_absolute_url }}">
+        {% thumbnail p.primary_image "200x200" as img %}
+            <img src="{{ img.url }}" alt="{{ p.name }}" width="{{ img.width }}" height="{{ img.height }}" />
+        {% empty %}
+            <img src="{{STATIC_URL}}images/avatar-200x200.jpg" />
+        {% endthumbnail %}                
+        </a>
+        <div class="featured-person-info">
+            <p>
+                {% if p.summary %}
+                    {{ p.summary }}
+                {% else %}
+                [Dolor sit amet, nibhorem ipsum euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam]
+                {% endif %}
+            </p>
+            <h2><a href="#">Hon. {{ p.title }} {{ p.name }}</a></h2>
+            {% for place in p.constituencies %}
+                <span>MP for {{ place.name }}</span>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endwith %}

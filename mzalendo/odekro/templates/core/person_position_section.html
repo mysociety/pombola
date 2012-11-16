@@ -1,0 +1,43 @@
+{% load switch %}
+
+<ul>
+{% for position in positions %}
+    <li class="position">
+        <h4>
+            {% if position.is_ongoing %}<strong>{% endif %}
+                {% if position.title.slug == 'mp' %}
+                    Member of <a href="{% url organisation 'parliament' %}">Parliament</a>
+                {% else %}
+                    {{ position.title }}
+                {% endif %}
+            {% if position.is_ongoing %}</strong>{% endif %}
+        </h4>
+
+        {% if position.subtitle %}
+            <p>({{ position.subtitle }})</p>
+        {% endif %}
+
+        <p>
+            {{ position.display_dates|safe }}
+
+            {% if position.place %}
+                for <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
+            {% endif %}
+
+            {% if position.organisation %}
+                {% if position.organisation.slug == "parliament" and position.category == 'political' %}
+                    {# pass #}
+                {% else %}
+                    of <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>
+                {% endif %}
+            {% endif %}
+        </p>
+            
+        {% if position.note %}
+            <p><small>{{ position.note }}</small></p>
+        {% endif %}
+    </li>
+{% empty %}
+    <li>No records found.</li>
+{% endfor %}
+</ul>

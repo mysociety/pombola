@@ -7,14 +7,24 @@
                href="{% url info_page slug='odekro-overview' %}">What is <br />Odekro?
             </a>
         </ul>
+        
         <ul class="header">
             <a href="#">Discover</a>
             <span>your parliament</span>
         </ul>
+
         <ul class="header">
             <a href="{% url position slug='mp' %}">Know</a>
             <span>your MP's</span>
         </ul>
+
+        {% comment %}
+        <ul class="header">
+            <a href="#">Read</a>
+            <span>the Hansard</span>
+        </ul>
+        {% endcomment %}
+
         <div id="rightArea">
 
             {% comment %}
@@ -38,6 +48,7 @@
         </div>
     </div>
 </div>
+
 <div id="main-menu">
     <nav class="wrapper">
         <ul class="menu" id="menu">
