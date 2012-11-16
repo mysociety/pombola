@@ -1,6 +1,372 @@
 {
     "entries": [
         {
+            "heading": "REGIONAL MINISTERS", 
+            "kind": "heading", 
+            "original": "REGIONAL MINISTERS", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPUTY REGIONAL MINISTERS", 
+            "kind": "heading", 
+            "original": "DEPUTY REGIONAL MINISTERS", 
+            "time": null
+        }, 
+        {
+            "heading": "NON CABINET MINISTERS", 
+            "kind": "heading", 
+            "original": "NON CABINET MINISTERS", 
+            "time": null
+        }, 
+        {
+            "heading": "MJNISTERS OF STATE", 
+            "kind": "heading", 
+            "original": "MJNISTERS OF STATE", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPUTY MINISTERS", 
+            "kind": "heading", 
+            "original": "DEPUTY MINISTERS", 
+            "time": null
+        }, 
+        {
+            "heading": "OFFICERS AND OFFICIALS OF PARLIAMENT", 
+            "kind": "heading", 
+            "original": "OFFICERS AND OFFICIALS OF PARLIAMENT", 
+            "time": null
+        }, 
+        {
+            "heading": "OFFICE OF THE MARJORITY LEADER", 
+            "kind": "heading", 
+            "original": "OFFICE OF THE MARJORITY LEADER", 
+            "time": null
+        }, 
+        {
+            "heading": "OFFICE OF THE MINORITY LEADER", 
+            "kind": "heading", 
+            "original": "OFFICE OF THE MINORITY LEADER", 
+            "time": null
+        }, 
+        {
+            "heading": "ALPHABETICAL LIST OF MEMBERS OF PARLIAMENT", 
+            "kind": "heading", 
+            "original": "ALPHABETICAL LIST OF MEMBERS OF PARLIAMENT", 
+            "time": null
+        }, 
+        {
+            "heading": "B", 
+            "kind": "heading", 
+            "original": "B", 
+            "time": null
+        }, 
+        {
+            "heading": "C", 
+            "kind": "heading", 
+            "original": "C", 
+            "time": null
+        }, 
+        {
+            "heading": "D", 
+            "kind": "heading", 
+            "original": "D", 
+            "time": null
+        }, 
+        {
+            "heading": "E", 
+            "kind": "heading", 
+            "original": "E", 
+            "time": null
+        }, 
+        {
+            "heading": "F", 
+            "kind": "heading", 
+            "original": "F", 
+            "time": null
+        }, 
+        {
+            "heading": "G", 
+            "kind": "heading", 
+            "original": "G", 
+            "time": null
+        }, 
+        {
+            "heading": "H", 
+            "kind": "heading", 
+            "original": "H", 
+            "time": null
+        }, 
+        {
+            "heading": "I", 
+            "kind": "heading", 
+            "original": "I", 
+            "time": null
+        }, 
+        {
+            "heading": "J", 
+            "kind": "heading", 
+            "original": "J", 
+            "time": null
+        }, 
+        {
+            "heading": "K", 
+            "kind": "heading", 
+            "original": "K", 
+            "time": null
+        }, 
+        {
+            "heading": "L", 
+            "kind": "heading", 
+            "original": "L", 
+            "time": null
+        }, 
+        {
+            "heading": "M", 
+            "kind": "heading", 
+            "original": "M", 
+            "time": null
+        }, 
+        {
+            "heading": "N", 
+            "kind": "heading", 
+            "original": "N", 
+            "time": null
+        }, 
+        {
+            "heading": "P", 
+            "kind": "heading", 
+            "original": "P", 
+            "time": null
+        }, 
+        {
+            "heading": "Q", 
+            "kind": "heading", 
+            "original": "Q", 
+            "time": null
+        }, 
+        {
+            "heading": "S", 
+            "kind": "heading", 
+            "original": "S", 
+            "time": null
+        }, 
+        {
+            "heading": "T", 
+            "kind": "heading", 
+            "original": "T", 
+            "time": null
+        }, 
+        {
+            "heading": "W", 
+            "kind": "heading", 
+            "original": "W", 
+            "time": null
+        }, 
+        {
+            "heading": "Y", 
+            "kind": "heading", 
+            "original": "Y", 
+            "time": null
+        }, 
+        {
+            "heading": "Z", 
+            "kind": "heading", 
+            "original": "Z", 
+            "time": null
+        }, 
+        {
+            "heading": "SUMMARY OF PARLJAMENTARY SEATS", 
+            "kind": "heading", 
+            "original": "SUMMARY OF PARLJAMENTARY SEATS", 
+            "time": null
+        }, 
+        {
+            "heading": "PARLIAMENTARY SERVICE BOARD MEMBERS", 
+            "kind": "heading", 
+            "original": "PARLIAMENTARY SERVICE BOARD MEMBERS", 
+            "time": null
+        }, 
+        {
+            "heading": "OFFICERS OF PARLIAMENTARY SERVICE", 
+            "kind": "heading", 
+            "original": "OFFICERS OF PARLIAMENTARY SERVICE", 
+            "time": null
+        }, 
+        {
+            "heading": "CLERK TO PARLIAMENT", 
+            "kind": "heading", 
+            "original": "CLERK TO PARLIAMENT", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPUTY CLERKS", 
+            "kind": "heading", 
+            "original": "DEPUTY CLERKS", 
+            "time": null
+        }, 
+        {
+            "heading": "OFFICERS", 
+            "kind": "heading", 
+            "original": "OFFICERS", 
+            "time": null
+        }, 
+        {
+            "heading": "DIVISION OF LEGISLATIVE MANAGEMENT", 
+            "kind": "heading", 
+            "original": "DIVISION OF LEGISLATIVE MANAGEMENT", 
+            "time": null
+        }, 
+        {
+            "heading": "ICT DEPARTMENT", 
+            "kind": "heading", 
+            "original": "ICT DEPARTMENT", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPARTMENT OF OFFICIAL REPORT", 
+            "kind": "heading", 
+            "original": "DEPARTMENT OF OFFICIAL REPORT", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPARTMENT OF RESEARCH", 
+            "kind": "heading", 
+            "original": "DEPARTMENT OF RESEARCH", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPARTMENT OF LIBRARY", 
+            "kind": "heading", 
+            "original": "DEPARTMENT OF LIBRARY", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPARTMENT OF PUBLIC AFFAIRS", 
+            "kind": "heading", 
+            "original": "DEPARTMENT OF PUBLIC AFFAIRS", 
+            "time": null
+        }, 
+        {
+            "heading": "PARLIAMENTARY RESOURCE CENTRE", 
+            "kind": "heading", 
+            "original": "PARLIAMENTARY RESOURCE CENTRE", 
+            "time": null
+        }, 
+        {
+            "heading": "AUDIO VISUAL UNIT", 
+            "kind": "heading", 
+            "original": "AUDIO VISUAL UNIT", 
+            "time": null
+        }, 
+        {
+            "heading": "PARLIAMENTARY RELATIONS AND PROTOCOL", 
+            "kind": "heading", 
+            "original": "PARLIAMENTARY RELATIONS AND PROTOCOL", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPARTMENT OF FINANCE", 
+            "kind": "heading", 
+            "original": "DEPARTMENT OF FINANCE", 
+            "time": null
+        }, 
+        {
+            "heading": "STORES UNIT", 
+            "kind": "heading", 
+            "original": "STORES UNIT", 
+            "time": null
+        }, 
+        {
+            "heading": "AUDIT DEPARTMENT", 
+            "kind": "heading", 
+            "original": "AUDIT DEPARTMENT", 
+            "time": null
+        }, 
+        {
+            "heading": "CATERING UNIT", 
+            "kind": "heading", 
+            "original": "CATERING UNIT", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPARTMENT OF THE MARSHAL", 
+            "kind": "heading", 
+            "original": "DEPARTMENT OF THE MARSHAL", 
+            "time": null
+        }, 
+        {
+            "heading": "SECURITY", 
+            "kind": "heading", 
+            "original": "SECURITY", 
+            "time": null
+        }, 
+        {
+            "heading": "TRANSPORT UNIT", 
+            "kind": "heading", 
+            "original": "TRANSPORT UNIT", 
+            "time": null
+        }, 
+        {
+            "heading": "DEPARTMENT OF DEVELOPMENT", 
+            "kind": "heading", 
+            "original": "DEPARTMENT OF DEVELOPMENT", 
+            "time": null
+        }, 
+        {
+            "heading": "THE", 
+            "kind": "heading", 
+            "original": "THE", 
+            "time": null
+        }, 
+        {
+            "heading": "PARLIAMENTARY DEBATES", 
+            "kind": "heading", 
+            "original": "PARLIAMENTARY DEBATES", 
+            "time": null
+        }, 
+        {
+            "heading": "OFFICIAL REPORT", 
+            "kind": "heading", 
+            "original": "OFFICIAL REPORT", 
+            "time": null
+        }, 
+        {
+            "heading": "IN THE FIRST MEETING OF THE FOURTH SESSION OF THE", 
+            "kind": "heading", 
+            "original": "IN THE FIRST MEETING OF THE FOURTH SESSION OF THE", 
+            "time": null
+        }, 
+        {
+            "heading": "FIFTH PARLIAMENT OF T HE FOURTH REPUBLIC OF GHANA", 
+            "kind": "heading", 
+            "original": "FIFTH PARLIAMENT OF T HE FOURTH REPUBLIC OF GHANA", 
+            "time": null
+        }, 
+        {
+            "heading": "TWENTIETH YEAR OF THE FOURTH REPUBLIC", 
+            "kind": "heading", 
+            "original": "TWENTIETH YEAR OF THE FOURTH REPUBLIC", 
+            "time": null
+        }, 
+        {
+            "heading": "THE", 
+            "kind": "heading", 
+            "original": "THE", 
+            "time": null
+        }, 
+        {
+            "heading": "PARLIAMENT OF THE REPUBLIC", 
+            "kind": "heading", 
+            "original": "PARLIAMENT OF THE REPUBLIC", 
+            "time": null
+        }, 
+        {
+            "heading": "OF GHANA", 
+            "kind": "heading", 
+            "original": "OF GHANA", 
+            "time": null
+        }, 
+        {
             "chair": "MADAM SPEAKER", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 

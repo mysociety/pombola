@@ -145,26 +145,23 @@ def parse_body(lines):
         entry = None
         
         if kind is SPEECH:
-            if time:
-                speech = parse_speech(time, match, lines)
-                entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
+            speech = parse_speech(time, match, lines)
+            entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is HEADING:
-            if time:
-                curr_section = line.strip().upper()
-                entry = dict(heading=line.strip().upper())
+            curr_section = line.strip().upper()
+            entry = dict(heading=line.strip().upper())
         elif kind in (TIME, START_TIME):
             time = _time(match)
         elif kind is ACTION:
-            if time:
-                person = '%s%s' % (match.group(1), match.group(2))
-                entry = dict(action=match.group(3), name=person.strip())
+            person = '%s%s' % (match.group(1), match.group(2))
+            entry = dict(action=match.group(3), name=person.strip())
         elif kind is PAGE_HEADER:
             pages = '%s' % (match.group(1))
             curr_col = match.group(1) 
             #title = '%s%s' % (match.group(2),match.group(4))
             #entries.append(dict(page=pages))
         elif kind is CONTINUED_SPEECH:
-            if time and len(entries):
+            if len(entries):
                 prev_entry = entries[-1]
 
                 if prev_entry.get('name'):

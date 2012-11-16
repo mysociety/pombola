@@ -1,9 +1,117 @@
 {
     "entries": [
         {
+            "heading": "THE", 
+            "kind": "heading", 
+            "original": "THE", 
+            "time": null
+        }, 
+        {
+            "heading": "PARLIAMENT OF THE REPUBLIC", 
+            "kind": "heading", 
+            "original": "PARLIAMENT OF THE REPUBLIC", 
+            "time": null
+        }, 
+        {
+            "heading": "OF GHANA", 
+            "kind": "heading", 
+            "original": "OF GHANA", 
+            "time": null
+        }, 
+        {
             "chair": "MADAM SPEAKER", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
+            "time": null
+        }, 
+        {
+            "heading": "PRAYERS", 
+            "kind": "heading", 
+            "original": "PRAYERS", 
+            "time": null
+        }, 
+        {
+            "heading": "ANNOUNCEMENTS", 
+            "kind": "heading", 
+            "original": "ANNOUNCEMENTS", 
+            "time": null
+        }, 
+        {
+            "column": "99", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Madam Speaker: Hon Members, I have received communication from His Excellency the President and I will read it to you.", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "Hon Members, I have received communication from His Excellency the President and I will read it to you.\n \"25th January, 2012\n Right Honourable Speaker,\n I wish to inform you that I have nominated for consideration by Parliament the following:\n Ministers-designate:\n Hon Moses Asaga, Member of Parliament for Nabdam - Minister-designate for Employment and Social Welfare;\n Mr William Kwasi Aboah - Minister designate for the Interior\n Ambassador Lee Ocran, Ghana\u2019s High Commissioner to South Africa- Minister-designate for Education;\n Hon Fritz Baffour, Member of Parliament for Ablekuma South - Minister designate for Information;\n Hon Dominic Azimbe Azumah, Member of Parliament for Garuf Tempane - Minister of State-designate at the Presidency; and", 
+            "time": null
+        }, 
+        {
+            "heading": "PRESIDENT OF THE REPUBLIC", 
+            "kind": "heading", 
+            "original": "PRESIDENT OF THE REPUBLIC", 
+            "time": null
+        }, 
+        {
+            "heading": "OF GHANA", 
+            "kind": "heading", 
+            "original": "OF GHANA", 
+            "time": null
+        }, 
+        {
+            "heading": "OFFICE OF PARLIAMENT", 
+            "kind": "heading", 
+            "original": "OFFICE OF PARLIAMENT", 
+            "time": null
+        }, 
+        {
+            "heading": "STATE HOUSE", 
+            "kind": "heading", 
+            "original": "STATE HOUSE", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Dr Anthony A. Osei", 
+            "original": "Dr Anthony A. Osei: Madam Speaker, I recall the day - is it two days ago, we heard some rumours -", 
+            "section": "STATE HOUSE", 
+            "speech": "Madam Speaker, I recall the day - is it two days ago, we heard some rumours -", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Madam Speaker: You see, the rumours I do not accept -", 
+            "section": "STATE HOUSE", 
+            "speech": "You see, the rumours I do not accept -", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Dr A. A. Osei", 
+            "original": "Dr A. A. Osei: They have been confirmed.", 
+            "section": "STATE HOUSE", 
+            "speech": "They have been confirmed.", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Madam Speaker", 
+            "original": "Madam Speaker: But not all rumours have been confirmed.", 
+            "section": "STATE HOUSE", 
+            "speech": "But not all rumours have been confirmed.", 
+            "time": null
+        }, 
+        {
+            "column": "101", 
+            "kind": "speech", 
+            "name": "Dr A. A. Osei", 
+            "original": "Dr A. A. Osei: No, I was not specific. I said a reshuffle was impending so we are waiting for the Minister-designate to - we shall not name the position.", 
+            "section": "STATE HOUSE", 
+            "speech": "No, I was not specific. I said a reshuffle was impending so we are waiting for the Minister-designate to - we shall not name the position.", 
             "time": null
         }, 
         {
@@ -11,7 +119,7 @@
             "kind": "speech", 
             "name": "Madam Speaker", 
             "original": "Madam Speaker: Hon Members, I have not even finished reading the communications, I have another one from the President dated 25th January, 2012.", 
-            "section": null, 
+            "section": "STATE HOUSE", 
             "speech": "Hon Members, I have not even finished reading the communications, I have another one from the President dated 25th January, 2012.\n \"25th January, 2012", 
             "time": "11:00:00"
         }, 
