@@ -265,6 +265,9 @@ def normalise_line_breaks(content):
         # not sure why the '+?' can't just be '+' - if it is just '+' the
         # newline gets included too despite the re.M. Pah!
 
+        # Add break before things that look like lists
+        ( r'^([ivx]+\))', r'\n\n\1' ),
+
         # Add breaks around timestamps
         ( r'^(%s)$' % TIME_TEMPLATE, r"\n\n\1\n\n"),
         
