@@ -1,17 +1,10 @@
-import re 
-import csv
-import sys
-
-import os
-
-from optparse import make_option
-
 from django.core.management.base import BaseCommand, CommandError
+
 from odekro import data
 
 
 class Command(BaseCommand):
-    """Read in an info page file and either create or update existing info"""
+    """Read in mps data and either create or update existing info"""
 
     help = 'Add MPs data'
     args = '<file>'
