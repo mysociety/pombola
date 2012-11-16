@@ -10,13 +10,13 @@
 
   <script type="text/javascript" src="{{ STATIC_URL }}js/jqcloud-1.0.0.min.js"></script>
   <link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/jqcloud.css" />
-  <script type = "text/javacsript">
+  <script type = "text/javascript">
     $(function() {
         $.getJSON("search/tagcloud/", 
         {},
         function(data){
             console.log(data);
-            $("#tagcloud").jQCloud(data);
+            $("#wordcloud").jQCloud(data);
         });
       });
     </script>
