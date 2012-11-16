@@ -137,26 +137,25 @@ def parse_body(lines):
     curr_section = None
     kind, line, match = None, None, None
 
-    # lines = (x for x in lines)
     while len(lines):
-        kind, line, match = lines.pop(0)
-        
+
+        kind, line, match = lines.pop(0)        
         
         # store any entry details here. Later we'll add common fields as required
         entry = None
         
         if kind is SPEECH:
-            if not time == None:
+            if time:
                 speech = parse_speech(time, match, lines)
                 entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is HEADING:
-            if not time == None:
+            if time:
                 curr_section = line.strip().upper()
                 entry = dict(heading=line.strip().upper())
         elif kind in (TIME, START_TIME):
             time = _time(match)
         elif kind is ACTION:
-            if not time == None:
+            if time:
                 person = '%s%s' % (match.group(1), match.group(2))
                 entry = dict(action=match.group(3), name=person.strip())
         elif kind is PAGE_HEADER:
@@ -167,7 +166,7 @@ def parse_body(lines):
         elif kind is CONTINUED_SPEECH:
             prev_entry = entries[-1]
             #print 'PREV: ' + str(prev_entry)
-            if not time == None:
+            if time:
                 speech = parse_speech(time, match, lines,name=prev_entry['name'])
                 entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is CHAIR:
