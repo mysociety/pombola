@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.utils import simplejson
+import datetime
 
 # from mzalendo.helpers import geocode
 
@@ -76,18 +77,21 @@ def autocomplete(request):
 def tagcloud(request):
     """ Return tag cloud JSON results"""
     # Build a query based on duration default is 1 month
-    cutoff = datetime.date.today() - datetime.timedelta(weeks=1)
-    sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting__start_date>=cuttoff)
+    #cutoff = datetime.date.today() - datetime.timedelta(weeks=1)
+    #sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting__start_date>=cuttoff)
 
     # Generate tag cloud from content of returned entries
     ignore_terms =['and', 'of', 'the','is','to']
     words = {}
-    for entry in sqs.all():
-        text = entry.object.content
-        for x in text.split():
-            if x.strip() in ignore_terms:
-                pass
-            words[x.strip()] = 1 + words.get(x.strip(), 0)
+    #for entry in sqs.all():
+    #    text = entry.object.content
+    
+    #sample text for testing
+    text = "<p>A member of the Gonja ethnic group, specifically from Bole, John Dramani Mahama was born 29 November 1958 in Damingo in the Damango-Daboya constituency of Ghana. He has been President of Ghana since July 2012. He was the Vice President of Ghana from 2009 to 2012, and he took office as President on 24 July 2012 following the death of his predecessor, President John Atta Mills. He was a Member of Parliament from 1997 to 2009 and Minister of Communications from 1998 to 2001.</p><p> Mahama attended Achimota School and then proceeded to Ghana Secondary School (Tamale) and the University of Ghana, Legon, receiving a bachelor's degree in history in 1981 and a postgraduate diploma in communication studies in 1986. Following this, he travelled to the Institute of Social Sciences, Moscow in the then Soviet Union for further studies in a two-year postgraduate programme, specializing in social psychology.He obtained a master's degree in 1988.</p>"
+    for x in text.split():
+        if x.strip() in ignore_terms:
+            pass
+        words[x.strip()] = 1 + words.get(x.strip(), 0)
 
 
     # return results
