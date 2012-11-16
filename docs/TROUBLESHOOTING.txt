@@ -202,3 +202,37 @@ Then, do the following steps:
 The build should then succeed, and if you rerun
 prepare_environment.bash then the installation should complete
 successfully.
+
+## Installing the Python xapian bindings
+
+If you get the following error when running
+prepare_environment.bash:
+
+   haystack.exceptions.MissingDependency: The 'xapian' backend requires the installation of 'xapian'. Please refer to the documentation.
+
+... then the Python xapian bindings cannot be found.  If you're
+using Mac OS, then there are some suggestions in
+requirements.txt.  If you're using a Debian-based GNU/Linux
+distribution, then the following steps may help.
+
+The problem here is that xapian-bindings isn't installable with
+pip, so probably the easiest way to get around this is to
+install your distribution's python-xapian, and then make the
+virtualenv able to use it:
+
+    sudo apt-get install python-xapian
+
+If your virtualenv uses the system Python packages, this should
+be sufficient, and running the prepare_environment.bash script
+again should work.  If your virtualenv was created with
+--no-site-packages, on the other hand, the suggestion here:
+
+    https://groups.google.com/forum/?fromgroups=#!msg/python-virtualenv/f-0m7d_PQKQ/wE3yyskhjvUJ
+
+... is to symlink in your system's Python xapian bindings.  On
+my test machine, that can be done with:
+
+    cd mzalendo-virtualenv/lib/python2.7/site-packages
+    ln -s /usr/lib/python2.7/dist-packages/xapian/
+
+Re-running prepare_environment.bash should then work.
