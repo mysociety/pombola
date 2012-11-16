@@ -164,11 +164,12 @@ def parse_body(lines):
             #title = '%s%s' % (match.group(2),match.group(4))
             #entries.append(dict(page=pages))
         elif kind is CONTINUED_SPEECH:
-            prev_entry = entries[-1]
-            #print 'PREV: ' + str(prev_entry)
-            if time:
-                speech = parse_speech(time, match, lines,name=prev_entry['name'])
-                entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
+            if time and len(entries):
+                prev_entry = entries[-1]
+
+                if prev_entry.get('name'):
+                    speech = parse_speech(time, match, lines,name=prev_entry['name'])
+                    entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
         elif kind is CHAIR:
             entry = dict( chair=match.group(1) )
         else:
