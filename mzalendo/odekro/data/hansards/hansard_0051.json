@@ -1,18 +1,21 @@
 {
     "entries": [
         {
+            "column": "743", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "743", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "743", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -20,17 +23,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": "743", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "10:30:00"
         }, 
         {
+            "column": "743", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:30:00"
         }, 
         {
+            "column": "743", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -118,21 +124,33 @@
             "time": "10:30:00"
         }, 
         {
+            "column": "744", 
             "heading": "ORAL ANSWERS TO QUESTIONS", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS", 
             "time": "10:30:00"
         }, 
         {
+            "column": "744", 
             "heading": "MINISTRY OF WATER RESOURCES,", 
             "kind": "heading", 
             "original": "MINISTRY OF WATER RESOURCES,", 
             "time": "10:30:00"
         }, 
         {
+            "column": "744", 
             "heading": "WORKS AND HOUSING", 
             "kind": "heading", 
             "original": "WORKS AND HOUSING", 
+            "time": "10:30:00"
+        }, 
+        {
+            "column": "745", 
+            "kind": "speech", 
+            "name": "Minister for Water Resources, Works and Housing (Mr Alban S. K. Bagbin)", 
+            "original": "Minister for Water Resources, Works and Housing (Mr Alban S. K. Bagbin): Madam Speaker, the Abesim Water Supply System is one of the priority water projects under the Government Sanitation and Water for All Projects (SWAP). It is to supply Abesim, Yamfo, Chiraa, Odumasi, Fiapre and Nsuatre as Well as several communities.", 
+            "section": "WORKS AND HOUSING", 
+            "speech": "Madam Speaker, the Abesim Water Supply System is one of the priority water projects under the Government Sanitation and Water for All Projects (SWAP). It is to supply Abesim, Yamfo, Chiraa, Odumasi, Fiapre and Nsuatre as Well as several communities.\n Currently, the Abesim Headworks operates six (6) pumps at its intake.\n Current water production stands at 1.8 million gallons per day as against a demand of 4.2 million gallans per day.\n Rehabilitation and expansion works.\n Feasibility and preliminary studies for the rehabilitation and expansion of the Abesim Water Supply System to meet 2030 demand has been completed. It is estimated to cost US$85 million.\n Parliament approved an amount of US$92 million (financing cost inclusive). BN Paribas, the lead bank, did not syndicate the loan in accordance with the terms approved by Parliament\n Government is sourcing funding from China to implement the project. The Ministry of Finance and Economic Planning is in contact with the China Exim Bank in this regard and discussions are in an advanced stage to secure the loan facility. Work will commence soon, on securing financing.", 
             "time": "10:30:00"
         }, 
         {
@@ -201,10 +219,10 @@
         {
             "column": "748", 
             "kind": "speech", 
-            "name": "Ms Cecilia A. Dapaah: Madam Speaker, I would want to find out from the Hon Minister, what happened to the loan of US$92 million. This is because in the fifth paragraph of his Answer, he said and with your permission, I beg to quote", 
+            "name": "Ms Cecilia A. Dapaah", 
             "original": "Ms Cecilia A. Dapaah: Madam Speaker, I would want to find out from the Hon Minister, what happened to the loan of US$92 million. This is because in the fifth paragraph of his Answer, he said and with your permission, I beg to quote:", 
             "section": "WORKS AND HOUSING", 
-            "speech": "\"The lead bank BN Paribas did not syndicate the loan in accordance with the terms approved by Parliament\"\n I would want to find out what exactly happened to that loan.", 
+            "speech": "Madam Speaker, I would want to find out from the Hon Minister, what happened to the loan of US$92 million. This is because in the fifth paragraph of his Answer, he said and with your permission, I beg to quote:\n \"The lead bank BN Paribas did not syndicate the loan in accordance with the terms approved by Parliament\"\n I would want to find out what exactly happened to that loan.", 
             "time": "10:40:00"
         }, 
         {
@@ -912,16 +930,16 @@
         {
             "column": "778", 
             "kind": "speech", 
-            "name": "Mr Bagbin: Madam Speaker, records- from CWSA database indicate the current water situation in these communities as follows", 
+            "name": "Mr Bagbin", 
             "original": "Mr Bagbin: Madam Speaker, records- from CWSA database indicate the current water situation in these communities as follows:\nNo Community Projected 2010 Population Number of Boreholes in Community\n1 Debebi 7318 7\n2 Brodi 4613 9\n3 Brahani 6105 10\n4 Menji 3235 4\n5 Namasa 2682 6", 
             "section": "WORKS AND HOUSING", 
-            "speech": "\n\nNo Community Projected 2010 Population Number of Boreholes in Community\n\n1 Debebi 7318 7\n\n2 Brodi 4613 9\n\n3 Brahani 6105 10\n\n4 Menji 3235 4\n\n5 Namasa 2682 6", 
+            "speech": "Madam Speaker, records- from CWSA database indicate the current water situation in these communities as follows:\n\nNo Community Projected 2010 Population Number of Boreholes in Community\n\n1 Debebi 7318 7\n\n2 Brodi 4613 9\n\n3 Brahani 6105 10\n\n4 Menji 3235 4\n\n5 Namasa 2682 6", 
             "time": "12:00:00"
         }, 
         {
             "column": "779", 
             "kind": "continued speech", 
-            "name": "Mr Bagbin: Madam Speaker, records- from CWSA database indicate the current water situation in these communities as follows", 
+            "name": "Mr Bagbin", 
             "original": "[MR BAGBIN]", 
             "section": "WORKS AND HOUSING", 
             "speech": "From the above records, the residents of the towns rely on boreholes fitted with handpumps for their daily Water supply needs.\n From the projected 20 10 population, all the towns fall within CWSA classification of small towns and will therefore, require small town water supply systems for their water supply needs.\n Currently, the Government with the assistance of the IDA of the World Bank is implementing the Sustainable Rural Water and Sanitation Project in six (6) regions. including the -Brong-Ahafo Region.\n Tain District is one of the beneficiary districts under the project. The selection of beneficiary towns is the responsibility of the Regional Co-ordinating Councils which are the implementers of the project.\n I, therefore, urge the Hon Member to liaise with his District Chief Executive for any or all of the towns to he selected and confirmed by the Regional Co-ordinating Councils as beneficiary communities. The Ministry would continue to source funding to ensure that towns that are not selected are served in the very near future.", 
@@ -982,6 +1000,7 @@
             "time": "12:00:00"
         }, 
         {
+            "column": "780", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -1148,6 +1167,7 @@
             "time": "12:20:00"
         }, 
         {
+            "column": "785", 
             "heading": "BILLS -- CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS -- CONSIDERATION STAGE", 
@@ -1156,10 +1176,10 @@
         {
             "column": "785", 
             "kind": "speech", 
-            "name": "Chairman of the Committee (Mr Moses A. Asaga): Mr Speaker, I beg to move, clause 27, sub-clause (1), delete and insert the following", 
+            "name": "Chairman of the Committee (Mr Moses A. Asaga)", 
             "original": "Chairman of the Committee (Mr Moses A. Asaga): Mr Speaker, I beg to move, clause 27, sub-clause (1), delete and insert the following:\nThe reason is that the Public Utilities Regulatory Commission (PURC) is normally involved in the determination of the prices at which utility companies buy power from utility energy sources. But even most important is the fact that we are dealing with renewable energy which is normally very, very expensive. Therefore, it is the duty of the PURC to also indicate the quantity allowable for production.\n- This is because, if the PURC is not involved in the approval of the Power PurchaseAgreement (PPA), the generator or the distributors may want to push in more solar energy into the system and because that is very, very expensive, we would have the end-users being at a disadvantage. That is why PURC should look at how much energy you want to put into the system.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"An electricity distribution utility shall not buy or negotiate a Power Purchase Agreement with a generator of electricity from renewable energy sources without the Written approval of the Public Utilities Regulatory Commission\".\n\nThe reason is that the Public Utilities Regulatory Commission (PURC) is normally involved in the determination of the prices at which utility companies buy power from utility energy sources. But even most important is the fact that we are dealing with renewable energy which is normally very, very expensive. Therefore, it is the duty of the PURC to also indicate the quantity allowable for production.\n\n- This is because, if the PURC is not involved in the approval of the Power PurchaseAgreement (PPA), the generator or the distributors may want to push in more solar energy into the system and because that is very, very expensive, we would have the end-users being at a disadvantage. That is why PURC should look at how much energy you want to put into the system.", 
+            "speech": "Mr Speaker, I beg to move, clause 27, sub-clause (1), delete and insert the following:\n \"An electricity distribution utility shall not buy or negotiate a Power Purchase Agreement with a generator of electricity from renewable energy sources without the Written approval of the Public Utilities Regulatory Commission\".\n\nThe reason is that the Public Utilities Regulatory Commission (PURC) is normally involved in the determination of the prices at which utility companies buy power from utility energy sources. But even most important is the fact that we are dealing with renewable energy which is normally very, very expensive. Therefore, it is the duty of the PURC to also indicate the quantity allowable for production.\n\n- This is because, if the PURC is not involved in the approval of the Power PurchaseAgreement (PPA), the generator or the distributors may want to push in more solar energy into the system and because that is very, very expensive, we would have the end-users being at a disadvantage. That is why PURC should look at how much energy you want to put into the system.", 
             "time": "12:20:00"
         }, 
         {
@@ -1273,10 +1293,10 @@
         {
             "column": "790", 
             "kind": "speech", 
-            "name": "Mr Adda: Mr Speaker, indeed, my contention had to deal with negotiating a PPA. So if we were going to go along with what the Hon Minority Leader is proposing, perhaps, we need to include the \"Power Purchase Agreement\" along with the \"negotiations\" as he is pro- posing, which means that, it will read like this", 
+            "name": "Mr Adda", 
             "original": "Mr Adda: Mr Speaker, indeed, my contention had to deal with negotiating a PPA. So if we were going to go along with what the Hon Minority Leader is proposing, perhaps, we need to include the \"Power Purchase Agreement\" along with the \"negotiations\" as he is pro- posing, which means that, it will read like this:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "' \"An electricity distribution utility shall not negotiate a Power Purchase Agreement . . .\"", 
+            "speech": "Mr Speaker, indeed, my contention had to deal with negotiating a PPA. So if we were going to go along with what the Hon Minority Leader is proposing, perhaps, we need to include the \"Power Purchase Agreement\" along with the \"negotiations\" as he is pro- posing, which means that, it will read like this:\n ' \"An electricity distribution utility shall not negotiate a Power Purchase Agreement . . .\"", 
             "time": "12:30:00"
         }, 
         {
@@ -1399,16 +1419,16 @@
         {
             "column": "794", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: MI Speaker, I said that the construction should be follows", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: MI Speaker, I said that the construction should be follows:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "", 
+            "speech": "MI Speaker, I said that the construction should be follows:", 
             "time": "12:40:00"
         }, 
         {
             "column": "795", 
             "kind": "continued speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: MI Speaker, I said that the construction should be follows", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "[MR KYEI-MENSAH-BONSU]", 
             "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "\"An electricity distribution utility shall not negotiate a Power Purchase Agreement with or buy power from a generator of electricity from a renewable energy source without the written approval of the Public Utilities Regulatory Commission\".\n Question put and amendment agreed to.\n 4 Mr Second Deputy Speaker: There is a further amendment to clause 27. If anybody feels strongly about this, we can take it up at the Second Consideration Stage, but that is what we have at the moment.\n There is a further amendment to clause 27 standing in the name of the Hon Chairman of the Committee.", 
@@ -1417,10 +1437,10 @@
         {
             "column": "795", 
             "kind": "speech", 
-            "name": "MrAsaga: Mr Speaker, I beg to move, clause 27, add the following new sub-clause", 
+            "name": "MrAsaga", 
             "original": "MrAsaga: Mr Speaker, I beg to move, clause 27, add the following new sub-clause:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"An electricity distribution utility which \"contravenes subsection (1), commits an offence and is liable on summary conviction to a fine often thousand penalty units\".\n So this is a sanction for contravening the clauses.", 
+            "speech": "Mr Speaker, I beg to move, clause 27, add the following new sub-clause:\n \"An electricity distribution utility which \"contravenes subsection (1), commits an offence and is liable on summary conviction to a fine often thousand penalty units\".\n So this is a sanction for contravening the clauses.", 
             "time": "12:40:00"
         }, 
         {
@@ -1453,16 +1473,16 @@
         {
             "column": "795", 
             "kind": "speech", 
-            "name": "Mr Asaga: Mr Speaker, I beg to move, clause 47, delete and insert the following", 
+            "name": "Mr Asaga", 
             "original": "Mr Asaga: Mr Speaker, I beg to move, clause 47, delete and insert the following:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "(a.) Display at the point of sale the proportion of bio-fuel contained in the bio-fuel blend contrary to section 43; or\n (b) Maintain the equipment and property used in the provision of the service contrary to paragraph (a) of section 45; or\n (c) Comply with the technical standards established by the Commission, Commits an offence and is liable on summary conviction to a fine not exceeding five thousand penalty units and if the offence is continuing one to", 
+            "speech": "Mr Speaker, I beg to move, clause 47, delete and insert the following:\n (a.) Display at the point of sale the proportion of bio-fuel contained in the bio-fuel blend contrary to section 43; or\n (b) Maintain the equipment and property used in the provision of the service contrary to paragraph (a) of section 45; or\n (c) Comply with the technical standards established by the Commission, Commits an offence and is liable on summary conviction to a fine not exceeding five thousand penalty units and if the offence is continuing one to", 
             "time": "12:40:00"
         }, 
         {
             "column": "797", 
             "kind": "continued speech", 
-            "name": "Mr Asaga: Mr Speaker, I beg to move, clause 47, delete and insert the following", 
+            "name": "Mr Asaga", 
             "original": "[MR ASAGA]", 
             "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "a further fine not exceeding fifty penalty units for each day or part of a day during which the offence has continued\".\n This is a redrafting of the clause to make it clearer. The initial rendition was a bit clumsy, so we wanted to clarify it better.", 
@@ -1471,10 +1491,10 @@
         {
             "column": "797", 
             "kind": "speech", 
-            "name": "Mr Second Deputy Speaker: Very well- Except that Hon Chairman, you want to keep under (b), second line ", 
+            "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: Very well- Except that Hon Chairman, you want to keep under (b), second line : --", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "--\n \". . . provision of the service contrary to paragraph of section 45\".\n i Mr Asaga: Mr Speaker, \"paragraph (a)\".", 
+            "speech": "Very well- Except that Hon Chairman, you want to keep under (b), second line : --\n \". . . provision of the service contrary to paragraph of section 45\".\n i Mr Asaga: Mr Speaker, \"paragraph (a)\".", 
             "time": "12:40:00"
         }, 
         {
@@ -1552,10 +1572,10 @@
         {
             "column": "798", 
             "kind": "speech", 
-            "name": "Mrs Kusi: That if there will be a (d), which says that", 
+            "name": "Mrs Kusi", 
             "original": "Mrs Kusi: That if there will be a (d), which says that:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"A licensee who fails to comply with the provision of section 20 of this Bill\".", 
+            "speech": "That if there will be a (d), which says that:\n \"A licensee who fails to comply with the provision of section 20 of this Bill\".", 
             "time": "12:40:00"
         }, 
         {
@@ -1651,16 +1671,16 @@
         {
             "column": "800", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, if you read through 41 and with your permission, I beg to quote", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, if you read through 41 and with your permission, I beg to quote:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"A licensee that has been granted a licence under this Act to produce bio-fuel from feedstock, shall obtain the relevant permit from the Ministry of Food and Agriculture. . ..\"\n If the person fails, some sanction must be applied.\n Then it goes on, not only the Ministry of Food and Agriculture, the person is also required to obtain the relevant permit from the Environmental Protection Agency. If the person fails, again, some sanction must be applied So that is what I sought to do to put the two together and that is why I have put it this way -- that is, if it meets the acceptance of the Committee:", 
+            "speech": "Mr Speaker, if you read through 41 and with your permission, I beg to quote:\n \"A licensee that has been granted a licence under this Act to produce bio-fuel from feedstock, shall obtain the relevant permit from the Ministry of Food and Agriculture. . ..\"\n If the person fails, some sanction must be applied.\n Then it goes on, not only the Ministry of Food and Agriculture, the person is also required to obtain the relevant permit from the Environmental Protection Agency. If the person fails, again, some sanction must be applied So that is what I sought to do to put the two together and that is why I have put it this way -- that is, if it meets the acceptance of the Committee:", 
             "time": "12:50:00"
         }, 
         {
             "column": "800", 
             "kind": "continued speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, if you read through 41 and with your permission, I beg to quote", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "[MR KYEI-MENSAH-BONSU]", 
             "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "\"A person who fails to (a) obtain the relevant permit from the Ministry of Food and Agriculture and the Environmental Protection Agency after the grant of licence contrary to section 41 --\"", 
@@ -1723,10 +1743,10 @@
         {
             "column": "802", 
             "kind": "speech", 
-            "name": "Mr Kyei Meusah-Bonsu: Mr Speaker, I think this emphasises the point made by the Deputy Minister for Energy. This is because clause 48 provides that the provisions of the Energy Commission Act are", 
+            "name": "Mr Kyei Meusah-Bonsu", 
             "original": "Mr Kyei Meusah-Bonsu: Mr Speaker, I think this emphasises the point made by the Deputy Minister for Energy. This is because clause 48 provides that the provisions of the Energy Commission Act are:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"or any other relevant enactment shall have effect subject to the modifications necessary to give effect to this Act and to the extent that the provisions of an enactment are inconsistent with this Act the provisions of this Act shall prevail\"-\n Which may then mean that if in our wisdom, we decided for purposes of this Act to enhance it, the provisions in this Act shall prevail; and I talk with specific reference to the sanctions regime provided in the EPA. So the Table Office would see how to synchronise the two.", 
+            "speech": "Mr Speaker, I think this emphasises the point made by the Deputy Minister for Energy. This is because clause 48 provides that the provisions of the Energy Commission Act are:\n \"or any other relevant enactment shall have effect subject to the modifications necessary to give effect to this Act and to the extent that the provisions of an enactment are inconsistent with this Act the provisions of this Act shall prevail\"-\n Which may then mean that if in our wisdom, we decided for purposes of this Act to enhance it, the provisions in this Act shall prevail; and I talk with specific reference to the sanctions regime provided in the EPA. So the Table Office would see how to synchronise the two.", 
             "time": "12:50:00"
         }, 
         {
@@ -2002,10 +2022,10 @@
         {
             "column": "807", 
             "kind": "speech", 
-            "name": "Mr Asaga: Mr Speaker, I beg to move, clause 49, sub-clause (3), delete and insert the following", 
+            "name": "Mr Asaga", 
             "original": "Mr Asaga: Mr Speaker, I beg to move, clause 49, sub-clause (3), delete and insert the following:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"Where the Commission amends or revokes a guideline, it shall publish the amendment or revocation in the Gazette or in at least one of the national daily newspapers determined by the Commission.\"\n Mr Speaker, it is almost consequential. So here again, we will not use the phrase \"determined by the Commission.\"", 
+            "speech": "Mr Speaker, I beg to move, clause 49, sub-clause (3), delete and insert the following:\n \"Where the Commission amends or revokes a guideline, it shall publish the amendment or revocation in the Gazette or in at least one of the national daily newspapers determined by the Commission.\"\n Mr Speaker, it is almost consequential. So here again, we will not use the phrase \"determined by the Commission.\"", 
             "time": "13:00:00"
         }, 
         {
@@ -2155,10 +2175,10 @@
         {
             "column": "809", 
             "kind": "speech", 
-            "name": "MrAsaga: Mr Speaker, I beg to move, clause 50 - ad the following new paragraphs", 
+            "name": "MrAsaga", 
             "original": "MrAsaga: Mr Speaker, I beg to move, clause 50 - ad the following new paragraphs:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"(a) to prescribe fees and charges; and\n (b) for the conditions of licences\"", 
+            "speech": "Mr Speaker, I beg to move, clause 50 - ad the following new paragraphs:\n \"(a) to prescribe fees and charges; and\n (b) for the conditions of licences\"", 
             "time": "13:00:00"
         }, 
         {
@@ -2173,10 +2193,10 @@
         {
             "column": "810", 
             "kind": "speech", 
-            "name": "Mr Second Deputy Speaker: Let us go to substance. The new paragraphs proposed", 
+            "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: Let us go to substance. The new paragraphs proposed: '.'to prescribe fees and charges\" and then \"for the conditions of licences\". Let us discuss the substance and then as to placements, even the draftspersons can help us at the appropriate time.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "'.'to prescribe fees and charges\" and then \"for the conditions of licences\". Let us discuss the substance and then as to placements, even the draftspersons can help us at the appropriate time.", 
+            "speech": "Let us go to substance. The new paragraphs proposed: '.'to prescribe fees and charges\" and then \"for the conditions of licences\". Let us discuss the substance and then as to placements, even the draftspersons can help us at the appropriate time.", 
             "time": "13:20:00"
         }, 
         {
@@ -2371,10 +2391,10 @@
         {
             "column": "814", 
             "kind": "speech", 
-            "name": "Mr Gershon K. B. Gbediame: Mr Speaker, indeed, I agree with you. I beg to move, that this House do now adjourn and reconvene tomorrow at 10.00 o'clock' to enable the Committee to do further consultations, so that we can move this process faster", 
+            "name": "Mr Gershon K. B. Gbediame", 
             "original": "Mr Gershon K. B. Gbediame: Mr Speaker, indeed, I agree with you. I beg to move, that this House do now adjourn and reconvene tomorrow at 10.00 o'clock' to enable the Committee to do further consultations, so that we can move this process faster:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "Thank you.", 
+            "speech": "Mr Speaker, indeed, I agree with you. I beg to move, that this House do now adjourn and reconvene tomorrow at 10.00 o'clock' to enable the Committee to do further consultations, so that we can move this process faster:\n Thank you.", 
             "time": "13:30:00"
         }, 
         {
@@ -2388,6 +2408,7 @@
         }, 
         {
             "action": "rose-", 
+            "column": "815", 
             "kind": "action", 
             "name": "Mr Gbediame", 
             "original": "Mr Gbediame -rose--", 

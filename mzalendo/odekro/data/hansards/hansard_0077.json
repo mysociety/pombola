@@ -1,18 +1,21 @@
 {
     "entries": [
         {
+            "column": "599", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "599", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "599", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -20,17 +23,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": "599", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "10:35:00"
         }, 
         {
+            "column": "599", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:35:00"
         }, 
         {
+            "column": "599", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -82,21 +88,33 @@
             "time": "10:35:00"
         }, 
         {
+            "column": "600", 
             "heading": "ORAL ANSWERS TO QUESTIONS", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS", 
             "time": "10:35:00"
         }, 
         {
+            "column": "600", 
             "heading": "MINISTRY OF LOCAL GOVERNMENT", 
             "kind": "heading", 
             "original": "MINISTRY OF LOCAL GOVERNMENT", 
             "time": "10:35:00"
         }, 
         {
+            "column": "600", 
             "heading": "AND RURAL DEVELOPMENT", 
             "kind": "heading", 
             "original": "AND RURAL DEVELOPMENT", 
+            "time": "10:35:00"
+        }, 
+        {
+            "column": "600", 
+            "kind": "speech", 
+            "name": "Minister for Local Government and Rural Development (Mr Samuel Ofosu Ampofo)", 
+            "original": "Minister for Local Government and Rural Development (Mr Samuel Ofosu Ampofo): Madam Speaker, I am reliably informed by management of KMA that levies collected by the Assembly are in respect of only vehicles that are registered and operating in the metropolis. Vehicles that are not registered in the metropolis but only pass through the Assembly\u2019s jurisdiction are made to show evidence of registration from the Assemblies of their origin. This is to ensure that all commercial vehicles are properly registered and could be traced in case of accidents or emergencies.", 
+            "section": "AND RURAL DEVELOPMENT", 
+            "speech": "Madam Speaker, I am reliably informed by management of KMA that levies collected by the Assembly are in respect of only vehicles that are registered and operating in the metropolis. Vehicles that are not registered in the metropolis but only pass through the Assembly\u2019s jurisdiction are made to show evidence of registration from the Assemblies of their origin. This is to ensure that all commercial vehicles are properly registered and could be traced in case of accidents or emergencies.\n Madam Speaker, drivers of commercial vehicles who are able to show evidence of registration are not supposed to pay fees to the Assembly.", 
             "time": "10:35:00"
         }, 
         {
@@ -139,9 +157,18 @@
             "column": "601", 
             "kind": "speech", 
             "name": "Mr Osei Kyei-Mensah-Bonsu", 
-            "original": "Mr Osei Kyei-Mensah-Bonsu: Madam Speaker, the Question to the Hon\nMinister reads and with your permission, I beg to quote:\n\"To ask the Minister for Local Government and Rural Development why registered commercial vehicle drivers from Atwima-Nwabiagya District passing through Kumasi were arrested and made to pay levies by the Kumasi Metropolitan Assembly when they had already paid their levies to their own Assemblies.\"\nThe Hon Minister, in his Answer, emphasises registration and operation within the metropolis; that is in paragraph one. He indicated to us that levies collected by the Assembly, that is, the KMA, are in respect of only vehicles that are registered and operating in the metropolis.\nIn the second paragraph, the indication is that if commercial vehicles are able to show evidence of registration, they are not supposed to pay fees to the Assembly.\nIn the first paragraph, he is linking up two things: registration and operation of the vehicles. In the second one, he is alluding to only registration. What is really the case?\nIs the emphasis on just registration or operation, in which case, it may, perhaps, mean that even if vehicles are registered at Atwima-Nwabiagya but they are operating Within the Kurnasi Metropolis, they may still be required to pay levies. What is really the situation?", 
+            "original": "Mr Osei Kyei-Mensah-Bonsu: Madam Speaker, the Question to the Hon", 
             "section": "AND RURAL DEVELOPMENT", 
-            "speech": "Madam Speaker, the Question to the Hon\n\nMinister reads and with your permission, I beg to quote:\n\n\"To ask the Minister for Local Government and Rural Development why registered commercial vehicle drivers from Atwima-Nwabiagya District passing through Kumasi were arrested and made to pay levies by the Kumasi Metropolitan Assembly when they had already paid their levies to their own Assemblies.\"\n\nThe Hon Minister, in his Answer, emphasises registration and operation within the metropolis; that is in paragraph one. He indicated to us that levies collected by the Assembly, that is, the KMA, are in respect of only vehicles that are registered and operating in the metropolis.\n\nIn the second paragraph, the indication is that if commercial vehicles are able to show evidence of registration, they are not supposed to pay fees to the Assembly.\n\nIn the first paragraph, he is linking up two things: registration and operation of the vehicles. In the second one, he is alluding to only registration. What is really the case?\n\nIs the emphasis on just registration or operation, in which case, it may, perhaps, mean that even if vehicles are registered at Atwima-Nwabiagya but they are operating Within the Kurnasi Metropolis, they may still be required to pay levies. What is really the situation?", 
+            "speech": "Madam Speaker, the Question to the Hon", 
+            "time": "10:45:00"
+        }, 
+        {
+            "column": "602", 
+            "kind": "speech", 
+            "name": "Minister reads and with your permission, I beg to quote", 
+            "original": "Minister reads and with your permission, I beg to quote:", 
+            "section": "AND RURAL DEVELOPMENT", 
+            "speech": "\"To ask the Minister for Local Government and Rural Development why registered commercial vehicle drivers from Atwima-Nwabiagya District passing through Kumasi were arrested and made to pay levies by the Kumasi Metropolitan Assembly when they had already paid their levies to their own Assemblies.\"\n The Hon Minister, in his Answer, emphasises registration and operation within the metropolis; that is in paragraph one. He indicated to us that levies collected by the Assembly, that is, the KMA, are in respect of only vehicles that are registered and operating in the metropolis.\n In the second paragraph, the indication is that if commercial vehicles are able to show evidence of registration, they are not supposed to pay fees to the Assembly.\n In the first paragraph, he is linking up two things: registration and operation of the vehicles. In the second one, he is alluding to only registration. What is really the case?\n Is the emphasis on just registration or operation, in which case, it may, perhaps, mean that even if vehicles are registered at Atwima-Nwabiagya but they are operating Within the Kurnasi Metropolis, they may still be required to pay levies. What is really the situation?", 
             "time": "10:45:00"
         }, 
         {
@@ -192,10 +219,10 @@
         {
             "column": "604", 
             "kind": "speech", 
-            "name": "Madam Speaker: Hon Minority Leader, I think the \"fee\" is what he has answered and shown that they are two", 
+            "name": "Madam Speaker", 
             "original": "Madam Speaker: Hon Minority Leader, I think the \"fee\" is what he has answered and shown that they are two: Fees for registration and levies for using certain facilities. Is it not?", 
             "section": "AND RURAL DEVELOPMENT", 
-            "speech": "Fees for registration and levies for using certain facilities. Is it not?", 
+            "speech": "Hon Minority Leader, I think the \"fee\" is what he has answered and shown that they are two: Fees for registration and levies for using certain facilities. Is it not?", 
             "time": "10:45:00"
         }, 
         {
@@ -298,6 +325,7 @@
             "time": "10:55:00"
         }, 
         {
+            "column": "607", 
             "heading": "--", 
             "kind": "heading", 
             "original": "--", 
@@ -656,6 +684,7 @@
         }, 
         {
             "action": "rose -", 
+            "column": "615", 
             "kind": "action", 
             "name": "Mr Kobina T. Hammond", 
             "original": "Mr Kobina T. Hammond ---rose --", 
@@ -1339,10 +1368,10 @@
         {
             "column": "635", 
             "kind": "speech", 
-            "name": "Madam Speaker: Hon Members, we have finished with Questions. I said the last question. We have spent one hour on Questions. We have Statements, we have Public Business. [An Hon Member", 
+            "name": "Madam Speaker", 
             "original": "Madam Speaker: Hon Members, we have finished with Questions. I said the last question. We have spent one hour on Questions. We have Statements, we have Public Business. [An Hon Member: Madam Speaker, but the Hon Minister is wrong]", 
             "section": "--", 
-            "speech": "Madam Speaker, but the Hon Minister is wrong]", 
+            "speech": "Hon Members, we have finished with Questions. I said the last question. We have spent one hour on Questions. We have Statements, we have Public Business. [An Hon Member: Madam Speaker, but the Hon Minister is wrong]", 
             "time": "11:45:00"
         }, 
         {
@@ -1384,10 +1413,10 @@
         {
             "column": "636", 
             "kind": "speech", 
-            "name": "Mr Gbediame: Madam Speaker, I am coming on Order 53 (2) and with your permission, I beg to read", 
+            "name": "Mr Gbediame", 
             "original": "Mr Gbediame: Madam Speaker, I am coming on Order 53 (2) and with your permission, I beg to read:", 
             "section": "--", 
-            "speech": "\"By leave of Mr Speaker, the Order of Business set out in the Order Paper may be altered on any particular day.\"\n I am trying to apply that by your leave, the order of Business be altered, so that some Papers will be laid to give the Finance Committee enough time to go and work, while we go back to Statements.", 
+            "speech": "Madam Speaker, I am coming on Order 53 (2) and with your permission, I beg to read:\n \"By leave of Mr Speaker, the Order of Business set out in the Order Paper may be altered on any particular day.\"\n I am trying to apply that by your leave, the order of Business be altered, so that some Papers will be laid to give the Finance Committee enough time to go and work, while we go back to Statements.", 
             "time": "11:45:00"
         }, 
         {
@@ -1500,6 +1529,7 @@
         }, 
         {
             "action": "rose-", 
+            "column": "637", 
             "kind": "action", 
             "name": "Mr Opare-Ansah", 
             "original": "Mr Opare-Ansah --rose--", 
@@ -1533,6 +1563,7 @@
             "time": "11:55:00"
         }, 
         {
+            "column": "637", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -1739,10 +1770,10 @@
         {
             "column": "641", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Madam Speaker, before the Minister -- I understand the difficulty that we are in. Madam Speaker, but I think this whole thing arises from the mix up in communication. We recognize the Hon Deputy Minister. He has been very helpful in this House but our rules are clear. Order 74 provides", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Madam Speaker, before the Minister -- I understand the difficulty that we are in. Madam Speaker, but I think this whole thing arises from the mix up in communication. We recognize the Hon Deputy Minister. He has been very helpful in this House but our rules are clear. Order 74 provides:", 
             "section": "PAPERS", 
-            "speech": "\"A Paper may be-presented to the House only by Mr Speaker, the Chainnan of a Committee, a Member or a Minister\".\n The Deputy Minister is not the Speaker, he is not the Chairman of the Committee, he is not a Member of this House and he is not a Minister. But as I said, we all recognize that he has been most co- operative and that, we will not obstruct that but it was for the Chief Whip to have told us why the Minister is unable to be here with us, in particular, when the Deputy Minister has stated on another platform that he was not apprised of the reason for the delay.\n So now that he has said so and fully informed this House and the Minister has told the Deputy Majority Chief Whip in confidence that he is now fully apprised of the circumstances surrounding this and given an undertaking that the Minister would be forthcoming, I believe we cannot further litigate the matter but allow the Deputy Minister to lay the Paper. But the indication ought to have come from the Majority Chief Whip.", 
+            "speech": "Madam Speaker, before the Minister -- I understand the difficulty that we are in. Madam Speaker, but I think this whole thing arises from the mix up in communication. We recognize the Hon Deputy Minister. He has been very helpful in this House but our rules are clear. Order 74 provides:\n \"A Paper may be-presented to the House only by Mr Speaker, the Chainnan of a Committee, a Member or a Minister\".\n The Deputy Minister is not the Speaker, he is not the Chairman of the Committee, he is not a Member of this House and he is not a Minister. But as I said, we all recognize that he has been most co- operative and that, we will not obstruct that but it was for the Chief Whip to have told us why the Minister is unable to be here with us, in particular, when the Deputy Minister has stated on another platform that he was not apprised of the reason for the delay.\n So now that he has said so and fully informed this House and the Minister has told the Deputy Majority Chief Whip in confidence that he is now fully apprised of the circumstances surrounding this and given an undertaking that the Minister would be forthcoming, I believe we cannot further litigate the matter but allow the Deputy Minister to lay the Paper. But the indication ought to have come from the Majority Chief Whip.", 
             "time": "12:05:00"
         }, 
         {
@@ -1854,6 +1885,7 @@
             "time": "12:05:00"
         }, 
         {
+            "column": "644", 
             "heading": "STATEMENTS", 
             "kind": "heading", 
             "original": "STATEMENTS", 
@@ -2149,6 +2181,7 @@
         }, 
         {
             "chair": "MR FIRST DEPUTY SPEAKER", 
+            "column": "672", 
             "kind": "chair", 
             "original": "[MR FIRST DEPUTY SPEAKER IN\n\nTHE CHAIR]", 
             "time": "13:22:00"
@@ -2253,6 +2286,7 @@
             "time": "01:25:00"
         }, 
         {
+            "column": "673", 
             "heading": "BILLS - CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS - CONSIDERATION STAGE", 
@@ -2431,6 +2465,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "679", 
             "kind": "action", 
             "name": "Some Hon Members", 
             "original": "Some Hon Members - rose -", 
@@ -2475,10 +2510,10 @@
         {
             "column": "680", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Hon Members, I would want to remind the Honourable House that we are creating criminal offences. I have seen a certain sense of elasticity in What you are doing and if we are not very careful, we would pass a law that would come back to haunt us one day, depending on who is presiding over the case. Again, a person who is prosecuting can decide -- Also, we should not leave room for somebody to decide that", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, I would want to remind the Honourable House that we are creating criminal offences. I have seen a certain sense of elasticity in What you are doing and if we are not very careful, we would pass a law that would come back to haunt us one day, depending on who is presiding over the case. Again, a person who is prosecuting can decide -- Also, we should not leave room for somebody to decide that:", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"Look, bribery is an offence under a certain Act, so I will go and charge under that Act instead of charging under this.\"\n There are a lot of factors that the House must consider and make sure - If we have to take time, to disaggregate and pass a law that can stand the test of time, I do not think it would be too costly for us to do so. If you look at the Acts that they are talking about, he mentioned them there - \"without more\".", 
+            "speech": "Hon Members, I would want to remind the Honourable House that we are creating criminal offences. I have seen a certain sense of elasticity in What you are doing and if we are not very careful, we would pass a law that would come back to haunt us one day, depending on who is presiding over the case. Again, a person who is prosecuting can decide -- Also, we should not leave room for somebody to decide that:\n \"Look, bribery is an offence under a certain Act, so I will go and charge under that Act instead of charging under this.\"\n There are a lot of factors that the House must consider and make sure - If we have to take time, to disaggregate and pass a law that can stand the test of time, I do not think it would be too costly for us to do so. If you look at the Acts that they are talking about, he mentioned them there - \"without more\".", 
             "time": "13:35:00"
         }, 
         {
@@ -2635,12 +2670,14 @@
             "time": "13:55:00"
         }, 
         {
+            "column": "683", 
             "heading": "F", 
             "kind": "heading", 
             "original": "F", 
             "time": "13:55:00"
         }, 
         {
+            "column": "683", 
             "heading": "-", 
             "kind": "heading", 
             "original": "-", 
@@ -2667,10 +2704,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-B0nsu: Mr Speaker, we are dealing with \"racketeering\" and the definition of \"racketeering\" provided for by subclause (3) says", 
+            "name": "Mr Kyei-Mensah-B0nsu", 
             "original": "Mr Kyei-Mensah-B0nsu: Mr Speaker, we are dealing with \"racketeering\" and the definition of \"racketeering\" provided for by subclause (3) says: \"For purposes of subsections 1 and 2, racketeering is the act of operating an illegal business or scheme\"-", 
             "section": "-", 
-            "speech": "\"For purposes of subsections 1 and 2, racketeering is the act of operating an illegal business or scheme\"-", 
+            "speech": "Mr Speaker, we are dealing with \"racketeering\" and the definition of \"racketeering\" provided for by subclause (3) says: \"For purposes of subsections 1 and 2, racketeering is the act of operating an illegal business or scheme\"-", 
             "time": "13:55:00"
         }, 
         {
@@ -3018,13 +3055,14 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, while we are at that, let me just indicate to the Chairperson or the Hon Member who has been drafted to now shepherd the Bill, the Hon Yieleh Chireh, to look at subclause (3). I think maybe, he would proffer a better construction", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, while we are at that, let me just indicate to the Chairperson or the Hon Member who has been drafted to now shepherd the Bill, the Hon Yieleh Chireh, to look at subclause (3). I think maybe, he would proffer a better construction: \"For purposes of subsection (I) and (2) racketeering is the act of operating an illegal business or scheme.\" . In my view, we should rather situate \"perpetuated by a structured group in order to make a profit\". But the way it has been crafted here, \"an illegal business or scheme in order to make a profit", 
             "section": "-", 
-            "speech": "\"For purposes of subsection (I) and (2) racketeering is the act of operating an illegal business or scheme.\" . In my view, we should rather situate \"perpetuated by a structured group in order to make a profit\". But the way it has been crafted here, \"an illegal business or scheme in order to make a profit\n (-", 
+            "speech": "Mr Speaker, while we are at that, let me just indicate to the Chairperson or the Hon Member who has been drafted to now shepherd the Bill, the Hon Yieleh Chireh, to look at subclause (3). I think maybe, he would proffer a better construction: \"For purposes of subsection (I) and (2) racketeering is the act of operating an illegal business or scheme.\" . In my view, we should rather situate \"perpetuated by a structured group in order to make a profit\". But the way it has been crafted here, \"an illegal business or scheme in order to make a profit\n (-", 
             "time": "14:05:00"
         }, 
         {
+            "column": "683", 
             "heading": "I-", 
             "kind": "heading", 
             "original": "I-", 
@@ -3033,10 +3071,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Is that not what we agreed, that we would take it up at the Second Consideration Stage? Mr Kyei-Mensah-Bonsuz Mr Speaker, just so that they sanitize it. Because for subclause (4), sanitizing it is different from what I am going to raise because this relates to clause 4 where you have stated", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Is that not what we agreed, that we would take it up at the Second Consideration Stage? Mr Kyei-Mensah-Bonsuz Mr Speaker, just so that they sanitize it. Because for subclause (4), sanitizing it is different from what I am going to raise because this relates to clause 4 where you have stated: \"For the purposes of this section, a person causes the enforced disappearance of another person if that person arrests, detains, abducts But if you go to the Memorandum page 2, last paragraph, they have stated categorically, \"enforced disappearance is not kidnapping and it is not abduction\". And yet they come here to say that \"enforced disappearance\" means \"abduction\". Can they look at it?", 
             "section": "I-", 
-            "speech": "\"For the purposes of this section, a person causes the enforced disappearance of another person if that person arrests, detains, abducts But if you go to the Memorandum page 2, last paragraph, they have stated categorically, \"enforced disappearance is not kidnapping and it is not abduction\". And yet they come here to say that \"enforced disappearance\" means \"abduction\". Can they look at it?", 
+            "speech": "Is that not what we agreed, that we would take it up at the Second Consideration Stage? Mr Kyei-Mensah-Bonsuz Mr Speaker, just so that they sanitize it. Because for subclause (4), sanitizing it is different from what I am going to raise because this relates to clause 4 where you have stated: \"For the purposes of this section, a person causes the enforced disappearance of another person if that person arrests, detains, abducts But if you go to the Memorandum page 2, last paragraph, they have stated categorically, \"enforced disappearance is not kidnapping and it is not abduction\". And yet they come here to say that \"enforced disappearance\" means \"abduction\". Can they look at it?", 
             "time": "14:05:00"
         }, 
         {
@@ -3123,10 +3161,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr Barton-0dro: Mr Speaker, if you could read down further, it says and with your permission,I beg to read", 
+            "name": "Mr Barton-0dro", 
             "original": "Mr Barton-0dro: Mr Speaker, if you could read down further, it says and with your permission,I beg to read: \"Kidnapping usually involves the consent of the victim. The victim of abduction is usually a child in the possession of or under the control of another person. A person may be abducted for the purpose of sexual exploitation or taken ...\" So we need to look at it in that line. Apart from that, when you talk about kidnapping, you are talking about the areas of ransom. [Inz\u2018erruptz'0n.] Yes, it goes with ransom. So we would want to make that distinction very clear.", 
             "section": "I-", 
-            "speech": "\"Kidnapping usually involves the consent of the victim. The victim of abduction is usually a child in the possession of or under the control of another person. A person may be abducted for the purpose of sexual exploitation or taken ...\" So we need to look at it in that line. Apart from that, when you talk about kidnapping, you are talking about the areas of ransom. [Inz\u2018erruptz'0n.] Yes, it goes with ransom. So we would want to make that distinction very clear.", 
+            "speech": "Mr Speaker, if you could read down further, it says and with your permission,I beg to read: \"Kidnapping usually involves the consent of the victim. The victim of abduction is usually a child in the possession of or under the control of another person. A person may be abducted for the purpose of sexual exploitation or taken ...\" So we need to look at it in that line. Apart from that, when you talk about kidnapping, you are talking about the areas of ransom. [Inz\u2018erruptz'0n.] Yes, it goes with ransom. So we would want to make that distinction very clear.", 
             "time": "14:25:00"
         }, 
         {
@@ -3328,12 +3366,14 @@
             "time": "14:25:00"
         }, 
         {
+            "column": "683", 
             "heading": "I", 
             "kind": "heading", 
             "original": "I", 
             "time": "14:25:00"
         }, 
         {
+            "column": "683", 
             "heading": "I", 
             "kind": "heading", 
             "original": "I", 
@@ -3394,6 +3434,7 @@
             "time": "14:25:00"
         }, 
         {
+            "column": "683", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -3427,6 +3468,7 @@
             "time": "14:25:00"
         }, 
         {
+            "column": "683", 
             "heading": "MOTIONS", 
             "kind": "heading", 
             "original": "MOTIONS", 
@@ -3534,10 +3576,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Hon Members, has everybody got a copy of the Report? [Some Hon Members", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, has everybody got a copy of the Report? [Some Hon Members: Yesl] Hon Members, a lot of consultation has gone on with regard to this matter. A certain understanding was reached by the Committee and the Leadership and that is why the House was not adjourned to tomorrow because there is a time element on this matter. And that is why I was advised to suspend Sitting. I believe everybody is tired. I am just returning from the Appointments Committee together with a numberiof my own Hon Colleagues here. It was on the basis that we would come back and take this matter that we suspended Sitting. 7.15 p.m. I", 
             "section": "MOTIONS", 
-            "speech": "Yesl] Hon Members, a lot of consultation has gone on with regard to this matter. A certain understanding was reached by the Committee and the Leadership and that is why the House was not adjourned to tomorrow because there is a time element on this matter. And that is why I was advised to suspend Sitting. I believe everybody is tired. I am just returning from the Appointments Committee together with a numberiof my own Hon Colleagues here. It was on the basis that we would come back and take this matter that we suspended Sitting. 7.15 p.m. I", 
+            "speech": "Hon Members, has everybody got a copy of the Report? [Some Hon Members: Yesl] Hon Members, a lot of consultation has gone on with regard to this matter. A certain understanding was reached by the Committee and the Leadership and that is why the House was not adjourned to tomorrow because there is a time element on this matter. And that is why I was advised to suspend Sitting. I believe everybody is tired. I am just returning from the Appointments Committee together with a numberiof my own Hon Colleagues here. It was on the basis that we would come back and take this matter that we suspended Sitting. 7.15 p.m. I", 
             "time": "14:25:00"
         }, 
         {
@@ -3732,16 +3774,16 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Papa OWusu-Ankomah: Mr Speaker, I was seeking to explain matters to Hon Members; that is all I was seeking to do. This is because, Hon Members were somehow not understanding what was happening. They thought they had not been given adequate notice, so I was just seeking to explain it. I must apologize if any Hon Member has taken an offence. So, Mr Speaker, it is on this basis that the House is being asked to approve this Receivable-backed Trade Finance Facility Agreement. That is what it is, which will then enable COCOBOD obtain a loan of US$2,000,000,000 (two billion US dollars) to purchase cocoa for this season, using the expected proceeds from the cocoa sales as security for the repayment. I thank you, Mr Speaker. Question proposed Mr Kwame Osei-Prempeh (NPP - Nsuta/Kwamang/Beposo)", 
+            "name": "Papa OWusu-Ankomah", 
             "original": "Papa OWusu-Ankomah: Mr Speaker, I was seeking to explain matters to Hon Members; that is all I was seeking to do. This is because, Hon Members were somehow not understanding what was happening. They thought they had not been given adequate notice, so I was just seeking to explain it. I must apologize if any Hon Member has taken an offence. So, Mr Speaker, it is on this basis that the House is being asked to approve this Receivable-backed Trade Finance Facility Agreement. That is what it is, which will then enable COCOBOD obtain a loan of US$2,000,000,000 (two billion US dollars) to purchase cocoa for this season, using the expected proceeds from the cocoa sales as security for the repayment. I thank you, Mr Speaker. Question proposed Mr Kwame Osei-Prempeh (NPP - Nsuta/Kwamang/Beposo): Mr Speaker, I rise to support the Motion but to make some few observations. I thought the Hon Member for Sekondi was trying to explain to those of us who are not on the Committee. Perhaps, matters like interest on cash collateral deposit, does it mean that COCOBOD is going to deposit some money? We ought to know -- \"underwriting level\", \"fully underwritten\". That is the level of insurance. What is the quantum of insurance? It is better for the House to know. Instead of leaving us in the dark, saying, \"fully underwritten\", to What level? Let me go to page 4 of the observations. It seems that the Committee was a bit confused. Paragraph 3,\"Cocoa production/purchase for 2011/2012 cocoa season, in respect of which this stamp duty waiver is sought, is expected to reach 850 tonnes\". But this Motion is not for the waiver of stamp duty; it is for the approval ofthe US$2,000,000,000. So, I believe that the - [Interruptz'on.] I know. I am speaking from the Report under discussion now. Look at page 4, paragraphs 3, 4 - I believe that paragraph 5, I believe the Committee needs to amend this Report before it is approved. The Observations, I believe should be in relationship with", 
             "section": "MOTIONS", 
-            "speech": "Mr Speaker, I rise to support the Motion but to make some few observations. I thought the Hon Member for Sekondi was trying to explain to those of us who are not on the Committee. Perhaps, matters like interest on cash collateral deposit, does it mean that COCOBOD is going to deposit some money? We ought to know -- \"underwriting level\", \"fully underwritten\". That is the level of insurance. What is the quantum of insurance? It is better for the House to know. Instead of leaving us in the dark, saying, \"fully underwritten\", to What level? Let me go to page 4 of the observations. It seems that the Committee was a bit confused. Paragraph 3,\"Cocoa production/purchase for 2011/2012 cocoa season, in respect of which this stamp duty waiver is sought, is expected to reach 850 tonnes\". But this Motion is not for the waiver of stamp duty; it is for the approval ofthe US$2,000,000,000. So, I believe that the - [Interruptz'on.] I know. I am speaking from the Report under discussion now. Look at page 4, paragraphs 3, 4 - I believe that paragraph 5, I believe the Committee needs to amend this Report before it is approved. The Observations, I believe should be in relationship with\n 719 COCOBOD/Consortium of 31 May, 2012 Banks Trade Finance Facility 720", 
+            "speech": "Mr Speaker, I was seeking to explain matters to Hon Members; that is all I was seeking to do. This is because, Hon Members were somehow not understanding what was happening. They thought they had not been given adequate notice, so I was just seeking to explain it. I must apologize if any Hon Member has taken an offence. So, Mr Speaker, it is on this basis that the House is being asked to approve this Receivable-backed Trade Finance Facility Agreement. That is what it is, which will then enable COCOBOD obtain a loan of US$2,000,000,000 (two billion US dollars) to purchase cocoa for this season, using the expected proceeds from the cocoa sales as security for the repayment. I thank you, Mr Speaker. Question proposed Mr Kwame Osei-Prempeh (NPP - Nsuta/Kwamang/Beposo): Mr Speaker, I rise to support the Motion but to make some few observations. I thought the Hon Member for Sekondi was trying to explain to those of us who are not on the Committee. Perhaps, matters like interest on cash collateral deposit, does it mean that COCOBOD is going to deposit some money? We ought to know -- \"underwriting level\", \"fully underwritten\". That is the level of insurance. What is the quantum of insurance? It is better for the House to know. Instead of leaving us in the dark, saying, \"fully underwritten\", to What level? Let me go to page 4 of the observations. It seems that the Committee was a bit confused. Paragraph 3,\"Cocoa production/purchase for 2011/2012 cocoa season, in respect of which this stamp duty waiver is sought, is expected to reach 850 tonnes\". But this Motion is not for the waiver of stamp duty; it is for the approval ofthe US$2,000,000,000. So, I believe that the - [Interruptz'on.] I know. I am speaking from the Report under discussion now. Look at page 4, paragraphs 3, 4 - I believe that paragraph 5, I believe the Committee needs to amend this Report before it is approved. The Observations, I believe should be in relationship with\n 719 COCOBOD/Consortium of 31 May, 2012 Banks Trade Finance Facility 720", 
             "time": "19:25:00"
         }, 
         {
             "column": "683", 
             "kind": "continued speech", 
-            "name": "Papa OWusu-Ankomah: Mr Speaker, I was seeking to explain matters to Hon Members; that is all I was seeking to do. This is because, Hon Members were somehow not understanding what was happening. They thought they had not been given adequate notice, so I was just seeking to explain it. I must apologize if any Hon Member has taken an offence. So, Mr Speaker, it is on this basis that the House is being asked to approve this Receivable-backed Trade Finance Facility Agreement. That is what it is, which will then enable COCOBOD obtain a loan of US$2,000,000,000 (two billion US dollars) to purchase cocoa for this season, using the expected proceeds from the cocoa sales as security for the repayment. I thank you, Mr Speaker. Question proposed Mr Kwame Osei-Prempeh (NPP - Nsuta/Kwamang/Beposo)", 
+            "name": "Papa OWusu-Ankomah", 
             "original": "[MROSEI-PREMPEH]", 
             "section": "MOTIONS", 
             "speech": "the other Report for the waiver of the Stamp Duty and not for this one. Perhaps, the rush in doing it -", 
@@ -3813,10 +3855,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Papa Owusu-Ankomah: Mr Speaker, I would seek the indulgence of the Hon Chairman and the House, that instead of cocoa production purchase, er cetera, it should read as follows", 
+            "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Mr Speaker, I would seek the indulgence of the Hon Chairman and the House, that instead of cocoa production purchase, er cetera, it should read as follows: \"Cocoa production/purchase for the 2011 cocoa season in respect of which this facility is governed is expected to reach 850 thousand tonnes at a projected Free on Board. . .\" Mr Speaker, I am saying that paragraph 3 should be deleted. Paragraph 2 should be deleted. I Will leave it at that.", 
             "section": "MOTIONS", 
-            "speech": "\"Cocoa production/purchase for the 2011 cocoa season in respect of which this facility is governed is expected to reach 850 thousand tonnes at a projected Free on Board. . .\" Mr Speaker, I am saying that paragraph 3 should be deleted. Paragraph 2 should be deleted. I Will leave it at that.", 
+            "speech": "Mr Speaker, I would seek the indulgence of the Hon Chairman and the House, that instead of cocoa production purchase, er cetera, it should read as follows: \"Cocoa production/purchase for the 2011 cocoa season in respect of which this facility is governed is expected to reach 850 thousand tonnes at a projected Free on Board. . .\" Mr Speaker, I am saying that paragraph 3 should be deleted. Paragraph 2 should be deleted. I Will leave it at that.", 
             "time": "19:25:00"
         }, 
         {
@@ -3840,10 +3882,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Papa Owusu-Ankomah: Mr Speaker, I thought seeking its deletion will make it simpler. But of course, we could delete the first and second lines, that is, \"in respect of which this duty waiver is sought\". So that it will read", 
+            "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Mr Speaker, I thought seeking its deletion will make it simpler. But of course, we could delete the first and second lines, that is, \"in respect of which this duty waiver is sought\". So that it will read: \"cocoa production/purchase for 2011/2012 is expected to reach\". That is it. I thank the Hon Member.", 
             "section": "MOTIONS", 
-            "speech": "\"cocoa production/purchase for 2011/2012 is expected to reach\". That is it. I thank the Hon Member.", 
+            "speech": "Mr Speaker, I thought seeking its deletion will make it simpler. But of course, we could delete the first and second lines, that is, \"in respect of which this duty waiver is sought\". So that it will read: \"cocoa production/purchase for 2011/2012 is expected to reach\". That is it. I thank the Hon Member.", 
             "time": "19:25:00"
         }, 
         {
@@ -3921,10 +3963,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Hon Members, we are being told that it is a projection, it is not actual. So that explains the position. So let us continue. Alhaj i Fuseini", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, we are being told that it is a projection, it is not actual. So that explains the position. So let us continue. Alhaj i Fuseini: Mr Speaker, I would want to effect a consequential amendment to -", 
             "section": "MOTIONS", 
-            "speech": "Mr Speaker, I would want to effect a consequential amendment to -", 
+            "speech": "Hon Members, we are being told that it is a projection, it is not actual. So that explains the position. So let us continue. Alhaj i Fuseini: Mr Speaker, I would want to effect a consequential amendment to -", 
             "time": "19:35:00"
         }, 
         {
@@ -4092,10 +4134,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Hon Members, we are debating this matter and let us make progress. Hon Members, I will call on the Hon Member for Manhyia. Dr Matthew O. Prempeh (NPP -- Manhyia)", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, we are debating this matter and let us make progress. Hon Members, I will call on the Hon Member for Manhyia. Dr Matthew O. Prempeh (NPP -- Manhyia): Mr Speaker, in rising to support this Motion, I would want the Hon Deputy Minister for Finance and Economic Planning, who finds himself here to explain certain terminology associated with the loan Agreement. I do not know how many people in this House really understand it.", 
             "section": "MOTIONS", 
-            "speech": "Mr Speaker, in rising to support this Motion, I would want the Hon Deputy Minister for Finance and Economic Planning, who finds himself here to explain certain terminology associated with the loan Agreement. I do not know how many people in this House really understand it.", 
+            "speech": "Hon Members, we are debating this matter and let us make progress. Hon Members, I will call on the Hon Member for Manhyia. Dr Matthew O. Prempeh (NPP -- Manhyia): Mr Speaker, in rising to support this Motion, I would want the Hon Deputy Minister for Finance and Economic Planning, who finds himself here to explain certain terminology associated with the loan Agreement. I do not know how many people in this House really understand it.", 
             "time": "19:45:00"
         }, 
         {
@@ -4281,10 +4323,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Papa Owusu-Ankomah: On a point of order", 
+            "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: On a point of order: Mr Speaker, I am not sure I heard the Hon Member for Manhyia right, that they should come and take Hon Members of the Finance Committee. It is not the business of Parliament to be part of an Executive negotiating team; it is not the business of Parliament and we must all bear that in mind. We exercise oversight; we are not part of the Executive. So when we talk about negotiation, we cannot be part of a delegation that is going to negotiate.", 
             "section": "MOTIONS", 
-            "speech": "Mr Speaker, I am not sure I heard the Hon Member for Manhyia right, that they should come and take Hon Members of the Finance Committee. It is not the business of Parliament to be part of an Executive negotiating team; it is not the business of Parliament and we must all bear that in mind. We exercise oversight; we are not part of the Executive. So when we talk about negotiation, we cannot be part of a delegation that is going to negotiate.", 
+            "speech": "On a point of order: Mr Speaker, I am not sure I heard the Hon Member for Manhyia right, that they should come and take Hon Members of the Finance Committee. It is not the business of Parliament to be part of an Executive negotiating team; it is not the business of Parliament and we must all bear that in mind. We exercise oversight; we are not part of the Executive. So when we talk about negotiation, we cannot be part of a delegation that is going to negotiate.", 
             "time": "19:45:00"
         }, 
         {
@@ -4324,6 +4366,7 @@
             "time": "19:45:00"
         }, 
         {
+            "column": "683", 
             "heading": "L", 
             "kind": "heading", 
             "original": "L", 
@@ -4395,16 +4438,16 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Hon Members, I will take one more from the Hon Minority Leader, if he is minded to contribute, otherwise, I will put the Question. Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Mr Speaker, as various Hon Members have indicated, I think we fmd ourselves in some predicament and, given the exigencies of this time, we must fmd the way out. I agree that this is the first time this is happening and we can work to improve whatever we initiate today. Mr Speaker, what we are doing today is approving of this Agreement and as Hon Members have already indicated, hitherto, we have been dealing with the waiver of Stamp Duty. The import of it was that we were dealing With, like, a Legislative Instnnnent (Ll) or a Regulation without having participated in the crafting of an Act. So we are saying that the proper thing to do is to approve of the Agreement before we go to the next stage, which is the waiver of Stamp Duty. So I think We are correct. But being the first step we may stumble. However, I believe that as we proceed, we would work to improve what we are beginning today. Mr Speaker, the Report on page 4, the last paragraph under \"Observations\" states that", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, I will take one more from the Hon Minority Leader, if he is minded to contribute, otherwise, I will put the Question. Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Mr Speaker, as various Hon Members have indicated, I think we fmd ourselves in some predicament and, given the exigencies of this time, we must fmd the way out. I agree that this is the first time this is happening and we can work to improve whatever we initiate today. Mr Speaker, what we are doing today is approving of this Agreement and as Hon Members have already indicated, hitherto, we have been dealing with the waiver of Stamp Duty. The import of it was that we were dealing With, like, a Legislative Instnnnent (Ll) or a Regulation without having participated in the crafting of an Act. So we are saying that the proper thing to do is to approve of the Agreement before we go to the next stage, which is the waiver of Stamp Duty. So I think We are correct. But being the first step we may stumble. However, I believe that as we proceed, we would work to improve what we are beginning today. Mr Speaker, the Report on page 4, the last paragraph under \"Observations\" states that: \"The Committee was infonned that the Facility Agreement requires Ghana COCOBOD to take steps to obtain a waiver of Stamp Duty for the Facility by 31\" May, 2012\". That is right. But why are we approving of this Agreement? I think the Report ought to have gone further to say that \"For that reason, we need to approve of", 
             "section": "L", 
-            "speech": "\"The Committee was infonned that the Facility Agreement requires Ghana COCOBOD to take steps to obtain a waiver of Stamp Duty for the Facility by 31\" May, 2012\". That is right. But why are we approving of this Agreement? I think the Report ought to have gone further to say that \"For that reason, we need to approve of\n 733 COCOBOD/Consortium of 31 May, 2012 Banks Trade Finance F acilily 734", 
+            "speech": "Hon Members, I will take one more from the Hon Minority Leader, if he is minded to contribute, otherwise, I will put the Question. Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Mr Speaker, as various Hon Members have indicated, I think we fmd ourselves in some predicament and, given the exigencies of this time, we must fmd the way out. I agree that this is the first time this is happening and we can work to improve whatever we initiate today. Mr Speaker, what we are doing today is approving of this Agreement and as Hon Members have already indicated, hitherto, we have been dealing with the waiver of Stamp Duty. The import of it was that we were dealing With, like, a Legislative Instnnnent (Ll) or a Regulation without having participated in the crafting of an Act. So we are saying that the proper thing to do is to approve of the Agreement before we go to the next stage, which is the waiver of Stamp Duty. So I think We are correct. But being the first step we may stumble. However, I believe that as we proceed, we would work to improve what we are beginning today. Mr Speaker, the Report on page 4, the last paragraph under \"Observations\" states that: \"The Committee was infonned that the Facility Agreement requires Ghana COCOBOD to take steps to obtain a waiver of Stamp Duty for the Facility by 31\" May, 2012\". That is right. But why are we approving of this Agreement? I think the Report ought to have gone further to say that \"For that reason, we need to approve of\n 733 COCOBOD/Consortium of 31 May, 2012 Banks Trade Finance F acilily 734", 
             "time": "19:55:00"
         }, 
         {
             "column": "683", 
             "kind": "continued speech", 
-            "name": "Mr First Deputy Speaker: Hon Members, I will take one more from the Hon Minority Leader, if he is minded to contribute, otherwise, I will put the Question. Minority Leader (Mr Osei Kyei- Mensah-Bonsu): Mr Speaker, as various Hon Members have indicated, I think we fmd ourselves in some predicament and, given the exigencies of this time, we must fmd the way out. I agree that this is the first time this is happening and we can work to improve whatever we initiate today. Mr Speaker, what we are doing today is approving of this Agreement and as Hon Members have already indicated, hitherto, we have been dealing with the waiver of Stamp Duty. The import of it was that we were dealing With, like, a Legislative Instnnnent (Ll) or a Regulation without having participated in the crafting of an Act. So we are saying that the proper thing to do is to approve of the Agreement before we go to the next stage, which is the waiver of Stamp Duty. So I think We are correct. But being the first step we may stumble. However, I believe that as we proceed, we would work to improve what we are beginning today. Mr Speaker, the Report on page 4, the last paragraph under \"Observations\" states that", 
+            "name": "Mr First Deputy Speaker", 
             "original": "[MRKYELMENSAH-B ONSU]", 
             "section": "L", 
             "speech": "this Parent Agreement\"_ When it stops short, we are not too clear about it. Further to that, the Report will tell us why it has become necessary to consider this under a certificate of urgency. Throughout, there was nothing in this to indicate to the House that this is being considered under a certificate of urgency. So I would plead with the Committee to have a look at it and if it is possible, to have, maybe, a sentence or two --", 
@@ -4440,16 +4483,16 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, moving on, I thought that we would not limit ourselves only to clause 4 of article 181. The clause 5 of article 181 is also relevant, except perhaps, maybe, it may betray the fact that Parliament has not acted timely on that. But seriously, maybe, I think it is also relevant. Mr Speaker, the attention of this House has been drawn to the fact that this Agreement was signed on Wednesday, 21*\u2018 September, 2011 in London. Indeed, the Budget Statement which was read to us - Paragraph 292 of the budget for 2012 provides, and Mr Speaker, with your kind indulgence, I would want to read", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, moving on, I thought that we would not limit ourselves only to clause 4 of article 181. The clause 5 of article 181 is also relevant, except perhaps, maybe, it may betray the fact that Parliament has not acted timely on that. But seriously, maybe, I think it is also relevant. Mr Speaker, the attention of this House has been drawn to the fact that this Agreement was signed on Wednesday, 21*\u2018 September, 2011 in London. Indeed, the Budget Statement which was read to us - Paragraph 292 of the budget for 2012 provides, and Mr Speaker, with your kind indulgence, I would want to read: \"Madam Speaker, for the 2012 crop year, an amount of US$2 billion was raised in the syndicated loan as compared with the US$ 1.5 billion during the 2010 and 2011 cocoa season.\" What it means is that, even before the budget was read, these things had been done, and it is not tidy this thing having been before the budget even came here. And how many months thereafter? About eight months? Parliament is now being called to deal with this. Mr Speaker, it is most. unfortunate. However, let us concede that, as I indicated earlier, it being a first time, perhaps, we are bound to stumble but let us Work to improve this, so that the next time round, it does not happen this way. Mr Speaker, we are told in the penultimate paragraph under \"Observations\", that cocoa production purchases for 201 1, 2012 cocoa season. in respect of which this Stamp Duty Waiver - of course you have corrected it - is sourced, is expected to reach 850,000 metric tonnes. Our attention has been drawn to the fact that even the usage of the word \"reach\" may be out of place because we were operating at 1.1 million and if we climb down to 850, we will not say that we are now \"reaching\" the place. \"Reaching\" means something that is positive - you ascending. But you are plummeting. We should concede that and perhaps, change that word. Mr Speaker, the relevant issue that I would want to bring out -- The Hon Minister for Finance and Economic Planning himself indicated in this House that he conceded that cocoa production would plummet this year to between", 
             "section": "L", 
-            "speech": "\"Madam Speaker, for the 2012 crop year, an amount of US$2 billion was raised in the syndicated loan as compared with the US$ 1.5 billion during the 2010 and 2011 cocoa season.\" What it means is that, even before the budget was read, these things had been done, and it is not tidy this thing having been before the budget even came here. And how many months thereafter? About eight months? Parliament is now being called to deal with this. Mr Speaker, it is most. unfortunate. However, let us concede that, as I indicated earlier, it being a first time, perhaps, we are bound to stumble but let us Work to improve this, so that the next time round, it does not happen this way. Mr Speaker, we are told in the penultimate paragraph under \"Observations\", that cocoa production purchases for 201 1, 2012 cocoa season. in respect of which this Stamp Duty Waiver - of course you have corrected it - is sourced, is expected to reach 850,000 metric tonnes. Our attention has been drawn to the fact that even the usage of the word \"reach\" may be out of place because we were operating at 1.1 million and if we climb down to 850, we will not say that we are now \"reaching\" the place. \"Reaching\" means something that is positive - you ascending. But you are plummeting. We should concede that and perhaps, change that word. Mr Speaker, the relevant issue that I would want to bring out -- The Hon Minister for Finance and Economic Planning himself indicated in this House that he conceded that cocoa production would plummet this year to between\n 735 COCOBOD/Consortium of 31 May, 2012 Banks Trade Finance Facility 736", 
+            "speech": "Mr Speaker, moving on, I thought that we would not limit ourselves only to clause 4 of article 181. The clause 5 of article 181 is also relevant, except perhaps, maybe, it may betray the fact that Parliament has not acted timely on that. But seriously, maybe, I think it is also relevant. Mr Speaker, the attention of this House has been drawn to the fact that this Agreement was signed on Wednesday, 21*\u2018 September, 2011 in London. Indeed, the Budget Statement which was read to us - Paragraph 292 of the budget for 2012 provides, and Mr Speaker, with your kind indulgence, I would want to read: \"Madam Speaker, for the 2012 crop year, an amount of US$2 billion was raised in the syndicated loan as compared with the US$ 1.5 billion during the 2010 and 2011 cocoa season.\" What it means is that, even before the budget was read, these things had been done, and it is not tidy this thing having been before the budget even came here. And how many months thereafter? About eight months? Parliament is now being called to deal with this. Mr Speaker, it is most. unfortunate. However, let us concede that, as I indicated earlier, it being a first time, perhaps, we are bound to stumble but let us Work to improve this, so that the next time round, it does not happen this way. Mr Speaker, we are told in the penultimate paragraph under \"Observations\", that cocoa production purchases for 201 1, 2012 cocoa season. in respect of which this Stamp Duty Waiver - of course you have corrected it - is sourced, is expected to reach 850,000 metric tonnes. Our attention has been drawn to the fact that even the usage of the word \"reach\" may be out of place because we were operating at 1.1 million and if we climb down to 850, we will not say that we are now \"reaching\" the place. \"Reaching\" means something that is positive - you ascending. But you are plummeting. We should concede that and perhaps, change that word. Mr Speaker, the relevant issue that I would want to bring out -- The Hon Minister for Finance and Economic Planning himself indicated in this House that he conceded that cocoa production would plummet this year to between\n 735 COCOBOD/Consortium of 31 May, 2012 Banks Trade Finance Facility 736", 
             "time": "19:55:00"
         }, 
         {
             "column": "683", 
             "kind": "continued speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, moving on, I thought that we would not limit ourselves only to clause 4 of article 181. The clause 5 of article 181 is also relevant, except perhaps, maybe, it may betray the fact that Parliament has not acted timely on that. But seriously, maybe, I think it is also relevant. Mr Speaker, the attention of this House has been drawn to the fact that this Agreement was signed on Wednesday, 21*\u2018 September, 2011 in London. Indeed, the Budget Statement which was read to us - Paragraph 292 of the budget for 2012 provides, and Mr Speaker, with your kind indulgence, I would want to read", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "[MRKYEI-MENSA.H-BONSU]", 
             "section": "L", 
             "speech": "850,000 and 900,000 metrictonnes. NOW, this loan is being syndicated for the production and purchase of 85 0,000 metric tonnes. What happens if we achieve the 900,00 metric tonnes. Mr Speakenwhat happens if we achieve that level? By the calculation, the price is gone up from US$15 billion to US$2 billion. Even though production is coming down, the world market price has shot up. So, the computation relates to 850,000 metric tonnes. What if, according to the Hon Minister for Finance and Economic Planning himself, we hit the target of 900,000 metric tonnes? Ithought, maybe, we were going to be told if it happens that way, maybe, remedies have been put in place to salvage that situation. We have no answer to that possibility. Perhaps, the Deputy Minister may relate to it in his winding up. Mr Speaker, these are some of the critical issues that I thought I felt that we should draw attention to. Not withstanding, as I have indicated, even. though it is not tidy, but because it is the first time, I believe we may have to work with it. That being the case, Mr Speaker, I would want to support the approval for this Agreement. 8.05p.1n. \u2018", 
@@ -4618,18 +4661,21 @@
             "time": "19:55:00"
         }, 
         {
+            "column": "683", 
             "heading": "RESOLUTIONS", 
             "kind": "heading", 
             "original": "RESOLUTIONS", 
             "time": "19:55:00"
         }, 
         {
+            "column": "683", 
             "heading": "THIS HONOURABLE HOUSE", 
             "kind": "heading", 
             "original": "THIS HONOURABLE HOUSE", 
             "time": "19:55:00"
         }, 
         {
+            "column": "683", 
             "heading": "HEREBY RESOLVES AS", 
             "kind": "heading", 
             "original": "HEREBY RESOLVES AS", 
@@ -4681,6 +4727,7 @@
             "time": "19:55:00"
         }, 
         {
+            "column": "683", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -4689,43 +4736,49 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Papa Owusu-Ankomah: Mr Speaker, I beg to second the Motion. Question put and Motion agreed to. Resolved accordingly. Waiver of Stamp Duty on offshore Syndicated Receivables-backed Trade Finance Facility Vice Chairman of the Finance Committee (MrALfred W. G. Abayateye) (on behab\u2019 of the Chairman)", 
+            "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Mr Speaker, I beg to second the Motion. Question put and Motion agreed to. Resolved accordingly. Waiver of Stamp Duty on offshore Syndicated Receivables-backed Trade Finance Facility Vice Chairman of the Finance Committee (MrALfred W. G. Abayateye) (on behab\u2019 of the Chairman): Mr Speaker, I beg to move, that this Honourable House adopts the Report of the Finance Committee on the request for Waiver of Stamp Duty on Offshore Syndicated Receivable-b acked Trade Finance Facility amounting to US$2,000,000,000. 00 for the year 201 1/20 12 cocoa purchases by Ghana Cocoa Board. 1.0 Introduction The request for the waiver of Stamp Duty on the Offshore Syndicated Receivables-backed Trade Finance Facility amounting to two billion United States dollars (US$2,000,000,000) for the year 2011/20 12 cocoa purchases by Ghana Cocoa Board was laid in the House on 22'\" March, 2012 and referred to the Finance Committee for consideration and report in accordance with article 174 (2) of the Constitution and Standing Orders of the House. ln its deliberation on the request, the Committee met with the Hon Minister for Finance and Economic Planning and the Deputy Minister for Finance and Economic Planning, Hon Seth Emmanuel Terkpeh, Officials from the Ghana Cocoa Board and the Ministry of Finance and Economic Planning and hereby present this Report to the House. 20 Background The Ghana Cocoa Board contracts offshore syndicated trade finance facility annually to finance cocoa purchases and other payments to stakeholders, which normally commenceinOctoberofeve.1yyear. This financing anangementhas been in place since 1994. This year, over twenty-seven (27) international and local banks (consortium) were involved in arranging the facility amounting to US$2,000,000,000.00. The Agreement on the facility was signed on Wednesday, 2 l \"Septern bet, 201 1 in London, United Kingdom. 3.0 Stamp Duty Section 32(6) of the Stamp Duty Act, 2005 (Act 689) mandates that for documents to be executable, valid and enforceable in Ghana, such documents would have to be stamped. However, the Commissioner of lntemal Revenue (Commissioner General of the Ghana Revenue Authority) is empowered under sections 158(2) and ll3(4) of the Internal Revenue Act, 2000 (A ct 5 9 1) to waive Stamp Duty subject to approval by Parliament 4.0 Total waiver The total Stamp Duty to be waived on all the documents covering the facility is", 
             "section": "PAPERS", 
-            "speech": "Mr Speaker, I beg to move, that this Honourable House adopts the Report of the Finance Committee on the request for Waiver of Stamp Duty on Offshore Syndicated Receivable-b acked Trade Finance Facility amounting to US$2,000,000,000. 00 for the year 201 1/20 12 cocoa purchases by Ghana Cocoa Board. 1.0 Introduction The request for the waiver of Stamp Duty on the Offshore Syndicated Receivables-backed Trade Finance Facility amounting to two billion United States dollars (US$2,000,000,000) for the year 2011/20 12 cocoa purchases by Ghana Cocoa Board was laid in the House on 22'\" March, 2012 and referred to the Finance Committee for consideration and report in accordance with article 174 (2) of the Constitution and Standing Orders of the House. ln its deliberation on the request, the Committee met with the Hon Minister for Finance and Economic Planning and the Deputy Minister for Finance and Economic Planning, Hon Seth Emmanuel Terkpeh, Officials from the Ghana Cocoa Board and the Ministry of Finance and Economic Planning and hereby present this Report to the House. 20 Background The Ghana Cocoa Board contracts offshore syndicated trade finance facility annually to finance cocoa purchases and other payments to stakeholders, which normally commenceinOctoberofeve.1yyear. This financing anangementhas been in place since 1994. This year, over twenty-seven (27) international and local banks (consortium) were involved in arranging the facility amounting to US$2,000,000,000.00. The Agreement on the facility was signed on Wednesday, 2 l \"Septern bet, 201 1 in London, United Kingdom. 3.0 Stamp Duty Section 32(6) of the Stamp Duty Act, 2005 (Act 689) mandates that for documents to be executable, valid and enforceable in Ghana, such documents would have to be stamped. However, the Commissioner of lntemal Revenue (Commissioner General of the Ghana Revenue Authority) is empowered under sections 158(2) and ll3(4) of the Internal Revenue Act, 2000 (A ct 5 9 1) to waive Stamp Duty subject to approval by Parliament 4.0 Total waiver The total Stamp Duty to be waived on all the documents covering the facility is\n 1", 
+            "speech": "Mr Speaker, I beg to second the Motion. Question put and Motion agreed to. Resolved accordingly. Waiver of Stamp Duty on offshore Syndicated Receivables-backed Trade Finance Facility Vice Chairman of the Finance Committee (MrALfred W. G. Abayateye) (on behab\u2019 of the Chairman): Mr Speaker, I beg to move, that this Honourable House adopts the Report of the Finance Committee on the request for Waiver of Stamp Duty on Offshore Syndicated Receivable-b acked Trade Finance Facility amounting to US$2,000,000,000. 00 for the year 201 1/20 12 cocoa purchases by Ghana Cocoa Board. 1.0 Introduction The request for the waiver of Stamp Duty on the Offshore Syndicated Receivables-backed Trade Finance Facility amounting to two billion United States dollars (US$2,000,000,000) for the year 2011/20 12 cocoa purchases by Ghana Cocoa Board was laid in the House on 22'\" March, 2012 and referred to the Finance Committee for consideration and report in accordance with article 174 (2) of the Constitution and Standing Orders of the House. ln its deliberation on the request, the Committee met with the Hon Minister for Finance and Economic Planning and the Deputy Minister for Finance and Economic Planning, Hon Seth Emmanuel Terkpeh, Officials from the Ghana Cocoa Board and the Ministry of Finance and Economic Planning and hereby present this Report to the House. 20 Background The Ghana Cocoa Board contracts offshore syndicated trade finance facility annually to finance cocoa purchases and other payments to stakeholders, which normally commenceinOctoberofeve.1yyear. This financing anangementhas been in place since 1994. This year, over twenty-seven (27) international and local banks (consortium) were involved in arranging the facility amounting to US$2,000,000,000.00. The Agreement on the facility was signed on Wednesday, 2 l \"Septern bet, 201 1 in London, United Kingdom. 3.0 Stamp Duty Section 32(6) of the Stamp Duty Act, 2005 (Act 689) mandates that for documents to be executable, valid and enforceable in Ghana, such documents would have to be stamped. However, the Commissioner of lntemal Revenue (Commissioner General of the Ghana Revenue Authority) is empowered under sections 158(2) and ll3(4) of the Internal Revenue Act, 2000 (A ct 5 9 1) to waive Stamp Duty subject to approval by Parliament 4.0 Total waiver The total Stamp Duty to be waived on all the documents covering the facility is\n 1", 
             "time": "20:15:00"
         }, 
         {
+            "column": "683", 
             "heading": "I", 
             "kind": "heading", 
             "original": "I", 
             "time": "20:15:00"
         }, 
         {
+            "column": "683", 
             "heading": "I", 
             "kind": "heading", 
             "original": "I", 
             "time": "20:15:00"
         }, 
         {
+            "column": "683", 
             "heading": "I", 
             "kind": "heading", 
             "original": "I", 
             "time": "20:15:00"
         }, 
         {
+            "column": "683", 
             "heading": "I", 
             "kind": "heading", 
             "original": "I", 
             "time": "20:15:00"
         }, 
         {
+            "column": "683", 
             "heading": "G", 
             "kind": "heading", 
             "original": "G", 
             "time": "20:15:00"
         }, 
         {
+            "column": "683", 
             "heading": "-", 
             "kind": "heading", 
             "original": "-", 
@@ -4734,10 +4787,10 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Hon Members, most of the issues that we have to raise in this matter have been raised in the main Motion dealing with the US$2,000,000,000.00. So I will take a limited nmnber of contributions from Hon Members on this. Mr Albert Kan-Dapaah (NPP - Afigya-Sekyere West): Mr Speaker, I just Wanted a clarification. This is because in seconding the Motion, the point was made that it does not make sense for COCOBOD to pay taxes to the Government of Ghana. Ghana COCOBOD is a commercial entity. What is wrong with Ghana COCOBOD paying taxes to the Republic of Ghana? In fact, Mr Speaker, we should be encouraging this. They would be paying interest to outside bodies, to the banks. As for that, there is nothing wrong with it. But the small taxes that it would be paying to the Government of Ghana -- [An Hon Member", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, most of the issues that we have to raise in this matter have been raised in the main Motion dealing with the US$2,000,000,000.00. So I will take a limited nmnber of contributions from Hon Members on this. Mr Albert Kan-Dapaah (NPP - Afigya-Sekyere West): Mr Speaker, I just Wanted a clarification. This is because in seconding the Motion, the point was made that it does not make sense for COCOBOD to pay taxes to the Government of Ghana. Ghana COCOBOD is a commercial entity. What is wrong with Ghana COCOBOD paying taxes to the Republic of Ghana? In fact, Mr Speaker, we should be encouraging this. They would be paying interest to outside bodies, to the banks. As for that, there is nothing wrong with it. But the small taxes that it would be paying to the Government of Ghana -- [An Hon Member: US$20 1nillion?] Yes. The principle Mr Speaker, is wrong and it is wrong and should never be supported by this House -", 
             "section": "-", 
-            "speech": "US$20 1nillion?] Yes. The principle Mr Speaker, is wrong and it is wrong and should never be supported by this House -", 
+            "speech": "Hon Members, most of the issues that we have to raise in this matter have been raised in the main Motion dealing with the US$2,000,000,000.00. So I will take a limited nmnber of contributions from Hon Members on this. Mr Albert Kan-Dapaah (NPP - Afigya-Sekyere West): Mr Speaker, I just Wanted a clarification. This is because in seconding the Motion, the point was made that it does not make sense for COCOBOD to pay taxes to the Government of Ghana. Ghana COCOBOD is a commercial entity. What is wrong with Ghana COCOBOD paying taxes to the Republic of Ghana? In fact, Mr Speaker, we should be encouraging this. They would be paying interest to outside bodies, to the banks. As for that, there is nothing wrong with it. But the small taxes that it would be paying to the Government of Ghana -- [An Hon Member: US$20 1nillion?] Yes. The principle Mr Speaker, is wrong and it is wrong and should never be supported by this House -", 
             "time": "20:15:00"
         }, 
         {
@@ -4887,16 +4940,16 @@
         {
             "column": "683", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Yes, gender. Mrs Akosua Frema Osei-Opare (NPP -Ayawaso West Wuogon)", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Yes, gender. Mrs Akosua Frema Osei-Opare (NPP -Ayawaso West Wuogon): Mr Speaker, yes, for gender balance; but I am speaking as the Hon Ranking Member for the Committee on Employment, Social Welfare and State Enterprises, which has an oversight responsibility on State enterprises. Even though the Finance Committee seems to have consumed COCOBOD, it is actually by our Standing Orders under our Committee. Mr Speaker, I think it is important for us to examine the viability of COCOBOD because that is part of the business of this Committee, that we must know that they are operating on sound business principles. _ Mr Speaker, there are other schools of thought that CO COB OD should liberalise the external marketing of cocoa. In the\"", 
             "section": "-", 
-            "speech": "Mr Speaker, yes, for gender balance; but I am speaking as the Hon Ranking Member for the Committee on Employment, Social Welfare and State Enterprises, which has an oversight responsibility on State enterprises. Even though the Finance Committee seems to have consumed COCOBOD, it is actually by our Standing Orders under our Committee. Mr Speaker, I think it is important for us to examine the viability of COCOBOD because that is part of the business of this Committee, that we must know that they are operating on sound business principles. _ Mr Speaker, there are other schools of thought that CO COB OD should liberalise the external marketing of cocoa. In the\"\n 753 Waiver of Stamp Duty on Trade 31 May, 20 I2 _ Finance Facility 754", 
+            "speech": "Yes, gender. Mrs Akosua Frema Osei-Opare (NPP -Ayawaso West Wuogon): Mr Speaker, yes, for gender balance; but I am speaking as the Hon Ranking Member for the Committee on Employment, Social Welfare and State Enterprises, which has an oversight responsibility on State enterprises. Even though the Finance Committee seems to have consumed COCOBOD, it is actually by our Standing Orders under our Committee. Mr Speaker, I think it is important for us to examine the viability of COCOBOD because that is part of the business of this Committee, that we must know that they are operating on sound business principles. _ Mr Speaker, there are other schools of thought that CO COB OD should liberalise the external marketing of cocoa. In the\"\n 753 Waiver of Stamp Duty on Trade 31 May, 20 I2 _ Finance Facility 754", 
             "time": "20:25:00"
         }, 
         {
             "column": "683", 
             "kind": "continued speech", 
-            "name": "Mr First Deputy Speaker: Yes, gender. Mrs Akosua Frema Osei-Opare (NPP -Ayawaso West Wuogon)", 
+            "name": "Mr First Deputy Speaker", 
             "original": "[MRS OSELOPARE]", 
             "section": "-", 
             "speech": "past, I have had an experience working to support Kuapa Cocoa Limited and I know that when they liberalised the internal marketing of cocoa, there were lots of pressure from abroad, that We should also push for the liberalisation of the e>:ternal market, which some of us vehemently opposed. This is because we felt that Cocoa Marketing Company was doing so well on the international market and that there was a need to protect that enterprise. Now, I know that there is still pressure for the liberalisation of the external marketing of cocoa. Therefore, it is important for us as a country, to satisfy ourselves that the decisions we are making towards COCOBOD, still holding the monopoly of the external market, are still a more viable option than liberalising it. That is why, all the loans that they take, we must really now begin to let them operate as a proper business, so that We satisfy ourselves that, perhaps, we can earn more if we allow them to be one of the buyers or we would not eam so much. But as a business, I think the time has come for us to scrutinise COCOB OD\u2019s operations. I am putting this on the table for our Committee to look into it and make some recommendations in that light. Prof. A.meyaw-Aku1nfi --- rose --", 
@@ -4958,6 +5011,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "683", 
             "kind": "action", 
             "name": "Mr Kan-Dap aah", 
             "original": "Mr Kan-Dap aah -- rose -", 
@@ -5081,6 +5135,7 @@
             "time": "20:35:00"
         }, 
         {
+            "column": "683", 
             "heading": "RESOLUTIONS", 
             "kind": "heading", 
             "original": "RESOLUTIONS", 
@@ -5132,6 +5187,7 @@
             "time": "20:35:00"
         }, 
         {
+            "column": "683", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

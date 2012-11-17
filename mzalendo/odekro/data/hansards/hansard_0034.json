@@ -1,18 +1,21 @@
 {
     "entries": [
         {
+            "column": "661", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "661", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "661", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -20,17 +23,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": "661", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "10:50:00"
         }, 
         {
+            "column": "661", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:50:00"
         }, 
         {
+            "column": "661", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -82,6 +88,7 @@
             "time": "10:50:00"
         }, 
         {
+            "column": "662", 
             "heading": "MOTIONS", 
             "kind": "heading", 
             "original": "MOTIONS", 
@@ -97,9 +104,28 @@
             "time": "10:50:00"
         }, 
         {
+            "column": "662", 
             "heading": "BILLS - SECOND READING", 
             "kind": "heading", 
             "original": "BILLS - SECOND READING", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "662", 
+            "kind": "speech", 
+            "name": "Minister for Local Government and Rural Development (Mr Samuel Ofosu Ampofo)", 
+            "original": "Minister for Local Government and Rural Development (Mr Samuel Ofosu Ampofo): Madam Speaker, I beg to move, that the Local Government (Amendment) Bill, 2012 be now read a Second time.", 
+            "section": "BILLS - SECOND READING", 
+            "speech": "Madam Speaker, I beg to move, that the Local Government (Amendment) Bill, 2012 be now read a Second time.", 
+            "time": "11:00:00"
+        }, 
+        {
+            "column": "663", 
+            "kind": "speech", 
+            "name": "Minister for Local Government and Rural Development (Mr Samuel Ofosu Ampofo)", 
+            "original": "[MR AMPOFO]\ngeographical contiguity, et cetera are also considered. If that is done, it would remove that obstacle which does not fit into the single compact geographical areas. That can be problematic because when it is contested in court and challenged that those communities are not single compact settlements, we may have problems with it.\nMadam Speaker, that is the basic reasons we want to come up with this amendment, so that we can remove that aspect.\nThank you\nQuestion proposed.", 
+            "section": "BILLS - SECOND READING", 
+            "speech": "Madam Speaker, the rationale behind the Motion is to simply remove sub- section 4(l) of Section 1 of Act 462 of 1993; It talks about the definition of a Municipality and it defines \u2018Municipality\u2019 as \"a single, compact, geographical settlement\".\n Madam Speaker, when the decentralization process started and Assemblies were created, according to the law, we had Districts, Municipalities and Metropolis. A district was defined as a settlement with a population of over 75,000; that of a municipality had a population of over 95,000 but must consist of a single compact geographical settlement.\n For that matter, the six municipalities that were created during those times were all single compact settlements, for example, Techiman Municipality, Sunyani Municipality, Tema Municipality. These municipalities were named after the main communities around which the districts were created. .\n Along the line, between 2000 and 2009, a number of municipalities were created and were not in conformity with this requirement of single compact geographical settlement. In order to remove that obstacle, we are coming up with this amendment to remove the single compact settlement and then allow contiguous settlement areas also to be considered as municipalities. In that case, all the other municipalities that have been created would then fall in line.\n Again, it will make the law very consistent. The determinant factor now would be the population of the districts, municipalities and metropolis. Again, the aspect will stand, which requires that other factors such as economic viability,\n\ngeographical contiguity, et cetera are also considered. If that is done, it would remove that obstacle which does not fit into the single compact geographical areas. That can be problematic because when it is contested in court and challenged that those communities are not single compact settlements, we may have problems with it.\n\nMadam Speaker, that is the basic reasons we want to come up with this amendment, so that we can remove that aspect.\n\nThank you\n\nQuestion proposed.", 
             "time": "11:00:00"
         }, 
         {
@@ -266,6 +292,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "677", 
             "kind": "action", 
             "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu - rose -", 
@@ -425,6 +452,7 @@
             "time": "11:50:00"
         }, 
         {
+            "column": "686", 
             "heading": "BILLS - CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS - CONSIDERATION STAGE", 
@@ -441,6 +469,7 @@
         }, 
         {
             "action": "-", 
+            "column": "687", 
             "kind": "action", 
             "name": "Mr Joseph B. Aidoo - rose", 
             "original": "Mr Joseph B. Aidoo - rose ---", 
@@ -575,16 +604,16 @@
         {
             "column": "690", 
             "kind": "speech", 
-            "name": "Mr J. B. Aidoo: My amendment is to delete the entire provision in (ii) and then substitute with the following", 
+            "name": "Mr J. B. Aidoo", 
             "original": "Mr J. B. Aidoo: My amendment is to delete the entire provision in (ii) and then substitute with the following:", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"A municipality, that there is a minimum of 95 ,0O0 people and that the nucleus of the municipality shall consist of a single compact \" settlement which is known for cultural, educational, economic or political purpose\".\n Madam Speaker, I am saying that with this amendment, it will satisfy the population threshold of 95 ,000 and at the same time, give identity to the municipality. But if you take the original amendment that had been proposed by the Chairman and the Hon Minister, the identity of the municipality would be lost; once you remove the single compact settlement, it would be lost. And I have also indicated that municipalities should have urban identity.\n The urban nucleus plus its periphery, that is the pre-urban area together, then it becomes the single compact settlement. Then you can bring in other settlements for it to get the population threshold of 95 ,O0O. And I would want to believe that my proposed amendment satisfies the rationale behind the originators of this particular law. The moment you remove the single compact settlement as they are trying to do, Madam Speaker, that rationale will be lost and it will even introduce ambiguity.\n In essence, if you have so many hamlets, for instance, in Lawra, so many hamlets put together and you get 95,000 people and then you say it is a municipality, it is wrong. Hamlets which", 
+            "speech": "My amendment is to delete the entire provision in (ii) and then substitute with the following:\n \"A municipality, that there is a minimum of 95 ,0O0 people and that the nucleus of the municipality shall consist of a single compact \" settlement which is known for cultural, educational, economic or political purpose\".\n Madam Speaker, I am saying that with this amendment, it will satisfy the population threshold of 95 ,000 and at the same time, give identity to the municipality. But if you take the original amendment that had been proposed by the Chairman and the Hon Minister, the identity of the municipality would be lost; once you remove the single compact settlement, it would be lost. And I have also indicated that municipalities should have urban identity.\n The urban nucleus plus its periphery, that is the pre-urban area together, then it becomes the single compact settlement. Then you can bring in other settlements for it to get the population threshold of 95 ,O0O. And I would want to believe that my proposed amendment satisfies the rationale behind the originators of this particular law. The moment you remove the single compact settlement as they are trying to do, Madam Speaker, that rationale will be lost and it will even introduce ambiguity.\n In essence, if you have so many hamlets, for instance, in Lawra, so many hamlets put together and you get 95,000 people and then you say it is a municipality, it is wrong. Hamlets which", 
             "time": "12:00:00"
         }, 
         {
             "column": "691", 
             "kind": "speech", 
-            "name": "Mr J. B. Aidoo: My amendment is to delete the entire provision in (ii) and then substitute with the following", 
+            "name": "Mr J. B. Aidoo", 
             "original": "[MRJ.B. AIDOO]\nMadam Speaker, every municipality should have an urban - because if you look at the definition bra municipality, it is just an urban administrative unit. Of course, in what we are trying to do, the geographical area being defined as a municipality may not necessarily have 95,000 but there should be that single compactness to give it that urban identity and then we can add other settlements to it\nTherefore, my proposition is that, the single compact sphere is the nucleus and then it should have some economic purpose, it should have some cultural purpose; it can be an educational purpose like Cape Coast. And I think, Madam Speaker, in that case, we will be satisfying the provision of this particular amendment we are seeking to do.\nl2.10p.m.", 
             "section": "BILLS - CONSIDERATION STAGE", 
             "speech": "\n\nMadam Speaker, every municipality should have an urban - because if you look at the definition bra municipality, it is just an urban administrative unit. Of course, in what we are trying to do, the geographical area being defined as a municipality may not necessarily have 95,000 but there should be that single compactness to give it that urban identity and then we can add other settlements to it\n\nTherefore, my proposition is that, the single compact sphere is the nucleus and then it should have some economic purpose, it should have some cultural purpose; it can be an educational purpose like Cape Coast. And I think, Madam Speaker, in that case, we will be satisfying the provision of this particular amendment we are seeking to do.\n\nl2.10p.m.", 
@@ -699,6 +728,7 @@
             "time": "12:20:00"
         }, 
         {
+            "column": "697", 
             "heading": "BILLS - THIRD READING", 
             "kind": "heading", 
             "original": "BILLS - THIRD READING", 
@@ -730,6 +760,7 @@
             "time": "12:20:00"
         }, 
         {
+            "column": "698", 
             "heading": "BILLS -CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS -CONSIDERATION STAGE", 
@@ -756,10 +787,10 @@
         {
             "column": "698", 
             "kind": "speech", 
-            "name": "Alhaji Haruna Iddrisu:Mr Speaker, I support the Chairman\u2019s amendment, but I would seek your leave that apart from the insertion of \"from among\", \"members of the team\", in my view, should not be -- We cannot have \"the team shall establish from among members of the team\". You have already said \"team\" . So if he has no objection, it should read", 
+            "name": "Alhaji Haruna Iddrisu", 
             "original": "Alhaji Haruna Iddrisu:Mr Speaker, I support the Chairman\u2019s amendment, but I would seek your leave that apart from the insertion of \"from among\", \"members of the team\", in my view, should not be -- We cannot have \"the team shall establish from among members of the team\". You have already said \"team\" . So if he has no objection, it should read:", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"The team shall establish from among its members \u2013\n (a) an inauguration sub-committee \u2026\u2026\u201d", 
+            "speech": "Mr Speaker, I support the Chairman\u2019s amendment, but I would seek your leave that apart from the insertion of \"from among\", \"members of the team\", in my view, should not be -- We cannot have \"the team shall establish from among members of the team\". You have already said \"team\" . So if he has no objection, it should read:\n \"The team shall establish from among its members \u2013\n (a) an inauguration sub-committee \u2026\u2026\u201d", 
             "time": "12:30:00"
         }, 
         {
@@ -774,10 +805,10 @@
         {
             "column": "698", 
             "kind": "speech", 
-            "name": "Alhaji H. Iddrisu: Mr Speaker, mine is elegance. How can we say", 
+            "name": "Alhaji H. Iddrisu", 
             "original": "Alhaji H. Iddrisu: Mr Speaker, mine is elegance. How can we say:", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"The team shall establish from among members of the team\"?\n I have some difficulty with it.", 
+            "speech": "Mr Speaker, mine is elegance. How can we say:\n \"The team shall establish from among members of the team\"?\n I have some difficulty with it.", 
             "time": "12:30:00"
         }, 
         {
@@ -828,19 +859,19 @@
         {
             "column": "699", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, we are talking about sub-committees of the team. We must establish the team, the functions and the schedule for the team. And we are now into the establishment of sub-committees. I think it is appropriate the Way it has been captured. l) thought when he got up, because he is speaking about elegance, we could have a construction like this", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, we are talking about sub-committees of the team. We must establish the team, the functions and the schedule for the team. And we are now into the establishment of sub-committees. I think it is appropriate the Way it has been captured. l) thought when he got up, because he is speaking about elegance, we could have a construction like this:", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"The team shall establish from among members .. .\"\n And we do not repeat the team. But I think it is elegant and more concise the Way it has been structured; so we can go with that.", 
+            "speech": "Mr Speaker, we are talking about sub-committees of the team. We must establish the team, the functions and the schedule for the team. And we are now into the establishment of sub-committees. I think it is appropriate the Way it has been captured. l) thought when he got up, because he is speaking about elegance, we could have a construction like this:\n \"The team shall establish from among members .. .\"\n And we do not repeat the team. But I think it is elegant and more concise the Way it has been structured; so we can go with that.", 
             "time": "12:30:00"
         }, 
         {
             "column": "699", 
             "kind": "speech", 
-            "name": "Mr Chireh: Mr Speaker, in order not to have a doubt about what-he said earlier, in providing for- In fact, this is why the first line of this clause says", 
+            "name": "Mr Chireh", 
             "original": "Mr Chireh: Mr Speaker, in order not to have a doubt about what-he said earlier, in providing for- In fact, this is why the first line of this clause says: \"There shall be. . .\" It means that is the enabling provision making room for the sub- committees. So there should not be any problem of having to put it earlier. That is the only thing I wanted to explain.", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"There shall be. . .\" It means that is the enabling provision making room for the sub- committees. So there should not be any problem of having to put it earlier. That is the only thing I wanted to explain.\n Question put and amendment agreed to", 
+            "speech": "Mr Speaker, in order not to have a doubt about what-he said earlier, in providing for- In fact, this is why the first line of this clause says: \"There shall be. . .\" It means that is the enabling provision making room for the sub- committees. So there should not be any problem of having to put it earlier. That is the only thing I wanted to explain.\n Question put and amendment agreed to", 
             "time": "12:30:00"
         }, 
         {
@@ -873,10 +904,10 @@
         {
             "column": "700", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsuz Mr Speaker, by way of further improvement, we agreed yesterday that the person elected as President should now read: \"the President-elect\". The same description should affect the \"Vice President. So it should read", 
+            "name": "Mr Kyei-Mensah-Bonsuz Mr Speaker, by way of further improvement, we agreed yesterday that the person elected as President should now read", 
             "original": "Mr Kyei-Mensah-Bonsuz Mr Speaker, by way of further improvement, we agreed yesterday that the person elected as President should now read: \"the President-elect\". The same description should affect the \"Vice President. So it should read: \"Vice President elect\u201d", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"Vice President elect\u201d", 
+            "speech": "\"the President-elect\". The same description should affect the \"Vice President. So it should read: \"Vice President elect\u201d", 
             "time": "12:30:00"
         }, 
         {
@@ -1800,16 +1831,16 @@
         {
             "column": "714", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, alternatively, we could go to clause 3 (5) and amend that one. That one reads", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, alternatively, we could go to clause 3 (5) and amend that one. That one reads:", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"The members of the team unless otherwise, provided by this section, shall determine the procedure for the meetings of the team and the subcommittees of the team\".", 
+            "speech": "Mr Speaker, alternatively, we could go to clause 3 (5) and amend that one. That one reads:\n \"The members of the team unless otherwise, provided by this section, shall determine the procedure for the meetings of the team and the subcommittees of the team\".", 
             "time": "12:50:00"
         }, 
         {
             "column": "715", 
             "kind": "continued speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, alternatively, we could go to clause 3 (5) and amend that one. That one reads", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "[MR KYEI-MENSAH-BONSU]", 
             "section": "BILLS -CONSIDERATION STAGE", 
             "speech": "If we like that, then we will delete this one. If the first one is better, then we will go for that.", 
@@ -1908,16 +1939,16 @@
         {
             "column": "716", 
             "kind": "speech", 
-            "name": "Mr Bandua: Mr Speaker, I beg to move, clause 5, delete and insert the following", 
+            "name": "Mr Bandua", 
             "original": "Mr Bandua: Mr Speaker, I beg to move, clause 5, delete and insert the following:", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "(1) There is established by this Act an Advisory Council consisting of: (a) one eminent citizen appointed by the incumbent President; (b) one eminent citizen appointed by the person elected as the President, and (c) one eminent citizen appointed as the chairperson of the Advisory council by the eminent citizens referred to in paragraphs (a) and (b).\n (2) Where the eminent citizens referred to in paragraphs (a) and (b) of subsection (1) fail to appoint the chairperson of the Advisory Council, they shall so inform the Speaker of Parliament who shall then become the chairperson of the Advisory Council.", 
+            "speech": "Mr Speaker, I beg to move, clause 5, delete and insert the following:\n (1) There is established by this Act an Advisory Council consisting of: (a) one eminent citizen appointed by the incumbent President; (b) one eminent citizen appointed by the person elected as the President, and (c) one eminent citizen appointed as the chairperson of the Advisory council by the eminent citizens referred to in paragraphs (a) and (b).\n (2) Where the eminent citizens referred to in paragraphs (a) and (b) of subsection (1) fail to appoint the chairperson of the Advisory Council, they shall so inform the Speaker of Parliament who shall then become the chairperson of the Advisory Council.", 
             "time": "13:10:00"
         }, 
         {
             "column": "717", 
             "kind": "continued speech", 
-            "name": "Mr Bandua: Mr Speaker, I beg to move, clause 5, delete and insert the following", 
+            "name": "Mr Bandua", 
             "original": "[MR BANDUA]", 
             "section": "BILLS -CONSIDERATION STAGE", 
             "speech": "(3)The Advisory Council shall expeditiously determine the issue referred to the Council under subsection (4) of section 3, and the decision of the Council binds the team and all of the subcommittees of the team.\n This formulation makes it more elaborate. So I do not know whether it Will be necessary for us to read the new provision.", 
@@ -2366,6 +2397,7 @@
         }, 
         {
             "action": "rose", 
+            "column": "727", 
             "kind": "action", 
             "name": "Prof. Gyan-Baffour", 
             "original": "Prof. Gyan-Baffour -rose-", 
@@ -2446,16 +2478,16 @@
         {
             "column": "730", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, before we get there, we should look at clause 6 (1) and I thought when you referred to", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, before we get there, we should look at clause 6 (1) and I thought when you referred to:", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"The Office of the President shall prepare a set of comprehensive handing-over notes covering 'the term of office of the President as the executive authority under article 5 8 of the Constitution\"\n Earlier, we had used the Words \"the Presidency\". I do not know Whether We would not want to look at that. But if we maintain 6 (1) as it is then for 6 (2), we necessarily have to include the Vice President.", 
+            "speech": "Mr Speaker, before we get there, we should look at clause 6 (1) and I thought when you referred to:\n \"The Office of the President shall prepare a set of comprehensive handing-over notes covering 'the term of office of the President as the executive authority under article 5 8 of the Constitution\"\n Earlier, we had used the Words \"the Presidency\". I do not know Whether We would not want to look at that. But if we maintain 6 (1) as it is then for 6 (2), we necessarily have to include the Vice President.", 
             "time": "13:40:00"
         }, 
         {
             "column": "731", 
             "kind": "continued speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, before we get there, we should look at clause 6 (1) and I thought when you referred to", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "[MR KYEI-MENSAH-BONSU]", 
             "section": "BILLS -CONSIDERATION STAGE", 
             "speech": "\"The Notes prepared under subection (1) shall include \u2013\n (a) the handing-over notes received by the President, the Vice President and the Ministers on assuming office.\"\n Maybe, for 6 (1), we could leave it as it is but for 6 (b) \u2013", 
@@ -2485,7 +2517,16 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Minority Leader, if you look at (i), the notes on the activities of the Vice President is there. By mentioning article 58, they want to make it clear that the executive authority is vested in the President. But then they want to make sure that it gives better and further particulars and by so doing , they brought in the President, the Office of the Vice President and then in (b) (i).", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "Hon Minority Leader, if you look at (i), the notes on the activities of the Vice President is there. By mentioning article 58, they want to make it clear that the executive authority is vested in the President. But then they want to make sure that it gives better and further particulars and by so doing , they brought in the President, the Office of the Vice President and then in (b) (i).\n Mr Kyei-Mensah-Bonsuz Mr Speaker, as\u2018I indicated, I would not have much problem with 6(1). It is the 6 (2) (a) that my concern lies with\u2014\n \"The notes prepared under sub- section l shall include:\n (a)the handing-over notes received by the President, the Vice President and the Ministers: on assuming office\"", 
+            "speech": "Hon Minority Leader, if you look at (i), the notes on the activities of the Vice President is there. By mentioning article 58, they want to make it clear that the executive authority is vested in the President. But then they want to make sure that it gives better and further particulars and by so doing , they brought in the President, the Office of the Vice President and then in (b) (i).\n Mr Kyei-Mensah-Bonsuz Mr Speaker, as\u2018I indicated, I would not have much problem with 6(1). It is the 6 (2) (a) that my concern lies with\u2014\n \"The notes prepared under sub- section l shall include:\n (a)the handing-over notes received by the President, the Vice President and the", 
+            "time": "13:40:00"
+        }, 
+        {
+            "column": "731", 
+            "kind": "speech", 
+            "name": "Ministers", 
+            "original": "Ministers: on assuming office\"", 
+            "section": "BILLS -CONSIDERATION STAGE", 
+            "speech": "on assuming office\"", 
             "time": "13:40:00"
         }, 
         {
@@ -2572,10 +2613,10 @@
         {
             "column": "733", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: So it will then read", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: So it will then read: \"The Ministries, Departments and Agencies\", not \"under the portfolio of the Ministers\", just to be in sync with what we did earlier.", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"The Ministries, Departments and Agencies\", not \"under the portfolio of the Ministers\", just to be in sync with what we did earlier.", 
+            "speech": "So it will then read: \"The Ministries, Departments and Agencies\", not \"under the portfolio of the Ministers\", just to be in sync with what we did earlier.", 
             "time": "13:40:00"
         }, 
         {
@@ -2635,10 +2676,10 @@
         {
             "column": "735", 
             "kind": "speech", 
-            "name": "Mr Bandua: Mr Speaker, I beg to move, clause 6, subclause (2), paragraph (b), add the following new subparagraph", 
+            "name": "Mr Bandua", 
             "original": "Mr Bandua: Mr Speaker, I beg to move, clause 6, subclause (2), paragraph (b), add the following new subparagraph:", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"(iv) political appointees\".\n I think that this amendment is necessary, so that when a President-elect assumes office, he would be apprised of the state of the whole nation, because if we leave out \"political appointees\", I think \u2013", 
+            "speech": "Mr Speaker, I beg to move, clause 6, subclause (2), paragraph (b), add the following new subparagraph:\n \"(iv) political appointees\".\n I think that this amendment is necessary, so that when a President-elect assumes office, he would be apprised of the state of the whole nation, because if we leave out \"political appointees\", I think \u2013", 
             "time": "13:50:00"
         }, 
         {
@@ -2869,10 +2910,10 @@
         {
             "column": "739", 
             "kind": "speech", 
-            "name": "Mr Avoka: Mr Speaker, if I may add the referral to the Council of State. The Council of State exists to advise the President- It does not have executive functions to do any other thing. If you look at article 89, it says and I beg to quote", 
+            "name": "Mr Avoka", 
             "original": "Mr Avoka: Mr Speaker, if I may add the referral to the Council of State. The Council of State exists to advise the President- It does not have executive functions to do any other thing. If you look at article 89, it says and I beg to quote:\nSo, I think that all those they are talking about are those who perform executive fi1nctions.- will come under the Executive - either a Minister or the President, et cetera. We do not need to add the political appointees there.", 
             "section": "BILLS -CONSIDERATION STAGE", 
-            "speech": "\"There shall be a Council of State to counsel the President in the A performance of his functions.\"\n So, what handing-over notes do they need to prepare when they are only advising the President? They do not need to.\n\nSo, I think that all those they are talking about are those who perform executive fi1nctions.- will come under the Executive - either a Minister or the President, et cetera. We do not need to add the political appointees there.", 
+            "speech": "Mr Speaker, if I may add the referral to the Council of State. The Council of State exists to advise the President- It does not have executive functions to do any other thing. If you look at article 89, it says and I beg to quote:\n \"There shall be a Council of State to counsel the President in the A performance of his functions.\"\n So, what handing-over notes do they need to prepare when they are only advising the President? They do not need to.\n\nSo, I think that all those they are talking about are those who perform executive fi1nctions.- will come under the Executive - either a Minister or the President, et cetera. We do not need to add the political appointees there.", 
             "time": "14:00:00"
         }, 
         {
@@ -3354,6 +3395,7 @@
         }, 
         {
             "action": "-", 
+            "column": "750", 
             "kind": "action", 
             "name": "Nana Abu-Bonsra Yes. So I was wondering why the Majority Leader still wanted to prolong", 
             "original": "Nana Abu-Bonsra Yes. So I was wondering why the Majority Leader still wanted to prolong ---", 
@@ -3369,6 +3411,7 @@
             "time": "14:20:00"
         }, 
         {
+            "column": "750", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

@@ -1,18 +1,21 @@
 {
     "entries": [
         {
+            "column": "37", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "37", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "37", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -20,17 +23,20 @@
         }, 
         {
             "chair": "MR FIRST DEPUTY SPEAKER", 
+            "column": "37", 
             "kind": "chair", 
             "original": "[MR FIRST DEPUTY SPEAKER\n\nIN THE CHAIR]", 
             "time": "10:20:00"
         }, 
         {
+            "column": "37", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:20:00"
         }, 
         {
+            "column": "37", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -140,6 +146,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "39", 
             "kind": "action", 
             "name": "Mr Ambrose P. Dery", 
             "original": "Mr Ambrose P. Dery - rose -", 
@@ -200,6 +207,7 @@
             "time": "10:30:00"
         }, 
         {
+            "column": "39", 
             "heading": "BILLS--FIRST READING", 
             "kind": "heading", 
             "original": "BILLS--FIRST READING", 
@@ -215,6 +223,7 @@
             "time": "10:30:00"
         }, 
         {
+            "column": "40", 
             "heading": "MOTIONS", 
             "kind": "heading", 
             "original": "MOTIONS", 
@@ -330,6 +339,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "52", 
             "kind": "action", 
             "name": "Mr Joseph Yieleh Chireh", 
             "original": "Mr Joseph Yieleh Chireh -- rose -", 
@@ -373,6 +383,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "53", 
             "kind": "action", 
             "name": "Dr Prempeh", 
             "original": "Dr Prempeh -- rose -", 
@@ -577,12 +588,14 @@
             "time": "11:10:00"
         }, 
         {
+            "column": "59", 
             "heading": "RESOLUTIONS", 
             "kind": "heading", 
             "original": "RESOLUTIONS", 
             "time": "11:10:00"
         }, 
         {
+            "column": "60", 
             "heading": "THIS HONOURABLE HOUSE", 
             "kind": "heading", 
             "original": "THIS HONOURABLE HOUSE", 
@@ -616,9 +629,28 @@
             "time": "11:10:00"
         }, 
         {
+            "column": "60", 
             "heading": "BILLS --SECOND READING", 
             "kind": "heading", 
             "original": "BILLS --SECOND READING", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "60", 
+            "kind": "speech", 
+            "name": "Minister for Health (Mr Joseph Y. Chireh) (MP)", 
+            "original": "Minister for Health (Mr Joseph Y. Chireh) (MP): Mr Speaker, I beg to move,", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "Mr Speaker, I beg to move,", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "61", 
+            "kind": "speech", 
+            "name": "Minister for Health (Mr Joseph Y. Chireh) (MP)", 
+            "original": "[MR CHIREH]\nIt is important that as a country, We further legislate to improve the conditions that are there.\nThe West African sub-region cherishes particularly this College because many of them seek admission for the training here and the standards are quite high, as a result of which we have been collaborating with a number of colleges from America, Europe and many other countries. That is why the re- enactment of this is very important.\nThe College of Nurses and Midwives is also one of the colleges that we need to have specialized training for those who are going to be midwives, those who do mental health nursing, community health nursing and public health nursing. Again, each of these professions needs to upgrade themselves, go through professional training, and this could be distinguished from the pre-professional qualification that is undertaken at the various universities and colleges. It is professional development and we specialize to get the people retained.\nAgain, it is going to serve the same purpose of maintaining the human resource that we have in the health sector if this is taken through.\nFinally, the College of Pharmacists also is to help train professional pharmacists in the various disciplines and this will again retain the number of people we need in industry, in community practice and those into research and the rest of them and also those who do clinical pharmacy.\nThat is why I will urge this House to agree that this Motion be carried today.\nQuestion proposed", 
+            "section": "BILLS --SECOND READING", 
+            "speech": "In moving the Motion, I wish to explain that there are four parts to the Bill. The first part is dealing with the Center for Plant Medicine Research which is going to replace the Long Title of the other center, that is, the Center for Research into Plant Medicine. It makes it easier.\n Secondly, it distinguishes it from the Center for Scientific and Industrial Research (CSIR). But the main point is that we want this Bill to focus on its main function of doing research into the various plants that we have in Ghana and which are of medicinal value.\n The Act that we will be seeking to repeal also has regulatory functions because at that time the Food and Drugs Board was not in place. Now that the Food and Drugs Board is there regulating the standards of products, it is appropriate to delink the regulatory functions and focus on the research into plant medicine.\n We are also collaborating with other countries to build the capacity for us to make use of our plant medicine that we have. Over the years, the Center has done quite a lot of work and has produced very good results. Some of them are being put into use.\n The second one is the College of Physicians and Surgeons, and we are going to repeal Act 165, more or less, incorporating what exists there now. The purpose again is for us to train specialists, to deal with the brain drain that we normally have when we train people outside. And I can say that over the past few years, we have retained quite a number of the people and some of the residents who are undertaking these courses are also serving in district hospitals where they may have specialists.\n\nIt is important that as a country, We further legislate to improve the conditions that are there.\n\nThe West African sub-region cherishes particularly this College because many of them seek admission for the training here and the standards are quite high, as a result of which we have been collaborating with a number of colleges from America, Europe and many other countries. That is why the re- enactment of this is very important.\n\nThe College of Nurses and Midwives is also one of the colleges that we need to have specialized training for those who are going to be midwives, those who do mental health nursing, community health nursing and public health nursing. Again, each of these professions needs to upgrade themselves, go through professional training, and this could be distinguished from the pre-professional qualification that is undertaken at the various universities and colleges. It is professional development and we specialize to get the people retained.\n\nAgain, it is going to serve the same purpose of maintaining the human resource that we have in the health sector if this is taken through.\n\nFinally, the College of Pharmacists also is to help train professional pharmacists in the various disciplines and this will again retain the number of people we need in industry, in community practice and those into research and the rest of them and also those who do clinical pharmacy.\n\nThat is why I will urge this House to agree that this Motion be carried today.\n\nQuestion proposed", 
             "time": "11:10:00"
         }, 
         {
@@ -766,10 +798,29 @@
             "time": "11:20:00"
         }, 
         {
+            "column": "72", 
             "heading": "BILLS ---SECOND READING", 
             "kind": "heading", 
             "original": "BILLS ---SECOND READING", 
             "time": "11:20:00"
+        }, 
+        {
+            "column": "72", 
+            "kind": "speech", 
+            "name": "Minister for Health (lVIr Joseph Y. Chireh) (MP)", 
+            "original": "Minister for Health (lVIr Joseph Y. Chireh) (MP): Mr Speaker, I beg to move, that the Mental Health Bill, 2010 be now read a Second time.", 
+            "section": "BILLS ---SECOND READING", 
+            "speech": "Mr Speaker, I beg to move, that the Mental Health Bill, 2010 be now read a Second time.\n In doing so, let me explain that, our legislation so far on mental health, has lacked certain essential features. This Bill seeks to integrate mental health into the", 
+            "time": "11:20:00"
+        }, 
+        {
+            "column": "73", 
+            "kind": "speech", 
+            "name": "Minister for Health (lVIr Joseph Y. Chireh) (MP)", 
+            "original": "[MR CHIREH]\nIt is very important that we also have people who move from institution to institution to inspect the kind of care that is being given to mental health patients.\nThis is an area that all Ghanaians would be urged to support. Indeed, in discussion with the Committee, we are looking at the possibility of creating a fund that can help us build more institutions that will support mental health care. Mental Health is just like any other health situation and all of us are urged to Support it so that we put this new Bill into place.\nThe most important thing is also to mention that, instead of a Mental Health Service, the view is that, in the Constitution we have one Ghana Health Service and therefore we think that it should be an Authority given enough autonomy to operate; given resources and the sources of funding should not be confined to only Government.\nThere are many, many institutions outside which may want to contribute towards the proper functioning of our mental health system. That is why once again, I urge all of you to support this Motion. It is long overdue and this is also in fulfillment of the National Democratic Congress (NDC) Manifesto. If you want you can look at the appropriate page, we are fulfilling that in respect of this, the page on Health.\nI once again, thank you for the opportunity.\nQuestion proposed.", 
+            "section": "BILLS ---SECOND READING", 
+            "speech": "general health care of the country. Mental Health has been left neglected for a long time in terms of facilities that they used to have.\n Again, we want to make it an integrated system into all the health structures within the Ghana Health Service. Apart from that, the better thing to do is also to have community care and not necessarily put everybody into an institution to be taken care of, as if all the. persons who have mental diseases are supposed to be in facilities.\n What will hap en is that, more training of mental health nurses and health workers would be done and some posted to districts and the regions and where the diagnosis shows that the person can just be treated as an outpatient, then, that would be the case and it would be integrated.\n The second part is to ensure that those who are treated and cured or whatever mental ailments they have, are reintegrated into society and accepted by families. We can only do so when we all disabuse our minds about the superstition regarding mental health. Mental sickness, like all sicknesses happens to everybody and they can be cured. Where it is not cured, the person remains in an in-house facility.\n There are only three mental health institutions along the coast, so what is he talking about those far away? It is important that we also in this Bill create more facilities.\n The last but most important thing is the respect for mental patients in terms of their human rights. You will recall and many of you would have read in news- papers about the fact that some people are sent to prayer camps and chained, they are part of this Bill. We want the Bill to take account of them and these places should be properly monitored and supervised and advice given to them instead of the inhumane manner in which they are treated.\n\nIt is very important that we also have people who move from institution to institution to inspect the kind of care that is being given to mental health patients.\n\nThis is an area that all Ghanaians would be urged to support. Indeed, in discussion with the Committee, we are looking at the possibility of creating a fund that can help us build more institutions that will support mental health care. Mental Health is just like any other health situation and all of us are urged to Support it so that we put this new Bill into place.\n\nThe most important thing is also to mention that, instead of a Mental Health Service, the view is that, in the Constitution we have one Ghana Health Service and therefore we think that it should be an Authority given enough autonomy to operate; given resources and the sources of funding should not be confined to only Government.\n\nThere are many, many institutions outside which may want to contribute towards the proper functioning of our mental health system. That is why once again, I urge all of you to support this Motion. It is long overdue and this is also in fulfillment of the National Democratic Congress (NDC) Manifesto. If you want you can look at the appropriate page, we are fulfilling that in respect of this, the page on Health.\n\nI once again, thank you for the opportunity.\n\nQuestion proposed.", 
+            "time": "11:30:00"
         }, 
         {
             "column": "75", 
@@ -948,7 +999,16 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: All right.", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "All right.\n Minister for Communications (Mr Haruna Iddrisu) (MP): Mr Speaker, I entirely want to associate myself with the concerns raised by the Hon Minority Leader and that if you look at the Committee's Report, particular reference has been made to page 5, and even page l, the first paragraph - the consideration of the Bill subsequent to their traveling abroad.\n Mr Speaker, article 190 - if you look at the head note there, it is \"The Public Services\". It is what composes of the \"Public Services of Ghana\" and that should not allow for any ambiguity in Parliament exercising its authority to create another institution to be known as the \"Mental Health Service. So, I think that the Committee got it wrong.\n We still can have a Mental Health service which will concentrate on the core objectives associated with this particular Bill. And I rather thought that the Committee should not mix matters of public service with Parliament exercising its mandate to create another institution even as it is allowed under article 190 (1) (d)\n \". . . such other public services as Parliament may by law prescribe\". Once we give approval to this Bill, Parliament has by law prescribed the establishment of a new institution to be known as the Mental Health Service. I think that I associate myself with those concerns.\n The Committee can deal with the other recommendations that they made.", 
+            "speech": "All right.", 
+            "time": "11:40:00"
+        }, 
+        {
+            "column": "90", 
+            "kind": "speech", 
+            "name": "Minister for Communications (Mr Haruna Iddrisu) (MP)", 
+            "original": "Minister for Communications (Mr Haruna Iddrisu) (MP): Mr Speaker, I entirely want to associate myself with the concerns raised by the Hon Minority Leader and that if you look at the Committee's Report, particular reference has been made to page 5, and even page l, the first paragraph - the consideration of the Bill subsequent to their traveling abroad.", 
+            "section": "BILLS ---SECOND READING", 
+            "speech": "Mr Speaker, I entirely want to associate myself with the concerns raised by the Hon Minority Leader and that if you look at the Committee's Report, particular reference has been made to page 5, and even page l, the first paragraph - the consideration of the Bill subsequent to their traveling abroad.\n Mr Speaker, article 190 - if you look at the head note there, it is \"The Public Services\". It is what composes of the \"Public Services of Ghana\" and that should not allow for any ambiguity in Parliament exercising its authority to create another institution to be known as the \"Mental Health Service. So, I think that the Committee got it wrong.\n We still can have a Mental Health service which will concentrate on the core objectives associated with this particular Bill. And I rather thought that the Committee should not mix matters of public service with Parliament exercising its mandate to create another institution even as it is allowed under article 190 (1) (d)\n \". . . such other public services as Parliament may by law prescribe\". Once we give approval to this Bill, Parliament has by law prescribed the establishment of a new institution to be known as the Mental Health Service. I think that I associate myself with those concerns.\n The Committee can deal with the other recommendations that they made.", 
             "time": "11:40:00"
         }, 
         {
@@ -1008,16 +1068,16 @@
         {
             "column": "92", 
             "kind": "speech", 
-            "name": "Majority Leader (Mr Cletus A. Avoka): Mr Speaker, I just want to associate myself with the constitutional position taken by the Hon Minority Leader and I agree that he is entirely right. This is because what has been captured in the Committee\u2019s Report, it is not correct, as far as the Constitution is concerned. It reads", 
+            "name": "Majority Leader (Mr Cletus A. Avoka)", 
             "original": "Majority Leader (Mr Cletus A. Avoka): Mr Speaker, I just want to associate myself with the constitutional position taken by the Hon Minority Leader and I agree that he is entirely right. This is because what has been captured in the Committee\u2019s Report, it is not correct, as far as the Constitution is concerned. It reads:", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "\"However, article 190 of the 1992 Constitution of Ghana provides for a \u2018National Health Service which presuppose that there cannot be another health service.\"\n That is where it is wrong. So, to that extent, I think that we can change. But fortunately, Mr Speaker, this is only a Committee\u2019s Report; it is not law. That is why we are in the process of transforming this Bill into law. So, we will I take note of that when it comes to the Consideration Stage. I hope that it is not a provision in the Bill anyway.\n I also want to allude to the earlier statement made by the Hon Deputy Ranking Member when we criticized the idea of our inability to supervise charismatic churches and other institutions outside the health institutions that deal with mental patients. I think that as a country, it is important for us to have a system that affects all other structures in the country. And if you look at the indignity that some of these patients go through in some of these spiritual churches, at cetera, I think it is important that we have a legal framework.", 
+            "speech": "Mr Speaker, I just want to associate myself with the constitutional position taken by the Hon Minority Leader and I agree that he is entirely right. This is because what has been captured in the Committee\u2019s Report, it is not correct, as far as the Constitution is concerned. It reads:\n \"However, article 190 of the 1992 Constitution of Ghana provides for a \u2018National Health Service which presuppose that there cannot be another health service.\"\n That is where it is wrong. So, to that extent, I think that we can change. But fortunately, Mr Speaker, this is only a Committee\u2019s Report; it is not law. That is why we are in the process of transforming this Bill into law. So, we will I take note of that when it comes to the Consideration Stage. I hope that it is not a provision in the Bill anyway.\n I also want to allude to the earlier statement made by the Hon Deputy Ranking Member when we criticized the idea of our inability to supervise charismatic churches and other institutions outside the health institutions that deal with mental patients. I think that as a country, it is important for us to have a system that affects all other structures in the country. And if you look at the indignity that some of these patients go through in some of these spiritual churches, at cetera, I think it is important that we have a legal framework.", 
             "time": "11:40:00"
         }, 
         {
             "column": "93", 
             "kind": "continued speech", 
-            "name": "Majority Leader (Mr Cletus A. Avoka): Mr Speaker, I just want to associate myself with the constitutional position taken by the Hon Minority Leader and I agree that he is entirely right. This is because what has been captured in the Committee\u2019s Report, it is not correct, as far as the Constitution is concerned. It reads", 
+            "name": "Majority Leader (Mr Cletus A. Avoka)", 
             "original": "[MR AVOKA]", 
             "section": "BILLS ---SECOND READING", 
             "speech": "So that if somebody is going contrary to the spirit and terms of this framework that we have, then we can bring the person to order. But if there is no legal framework and they do what they want, it is difficult to sanction or bring them to book. So, I think it is important that when we are making legislation, we must be able to guide or affect all structures that deal with the subject. So, to that extent, I think the Committee is right.\n Thank you.", 
@@ -1056,7 +1116,16 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, let us move quickly to item number 13 on the Order Paper.", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Hon Members, let us move quickly to item number 13 on the Order Paper.\n Hon Minister for Transport?\n Suspension of Standing Order 128(1)\n Minister for transpOrt (Alhaji Collins Dauda): Mr Speaker, I beg to move, that notwithstanding the provisions of Standing Order 128 (l) which require that when a Bill has been read a Second time, it shall pass through a Consideration Stage which shall not be taken until at least 48 hours have elapsed, the Consideration Stage of the Ghana Shipping (Amendment) Bill, 2011 may be taken today.", 
+            "speech": "Hon Members, let us move quickly to item number 13 on the Order Paper.\n Hon Minister for Transport?\n Suspension of Standing Order 128(1)", 
+            "time": "11:50:00"
+        }, 
+        {
+            "column": "95", 
+            "kind": "speech", 
+            "name": "Minister for transpOrt (Alhaji Collins Dauda)", 
+            "original": "Minister for transpOrt (Alhaji Collins Dauda): Mr Speaker, I beg to move, that notwithstanding the provisions of Standing Order 128 (l) which require that when a Bill has been read a Second time, it shall pass through a Consideration Stage which shall not be taken until at least 48 hours have elapsed, the Consideration Stage of the Ghana Shipping (Amendment) Bill, 2011 may be taken today.", 
+            "section": "BILLS ---SECOND READING", 
+            "speech": "Mr Speaker, I beg to move, that notwithstanding the provisions of Standing Order 128 (l) which require that when a Bill has been read a Second time, it shall pass through a Consideration Stage which shall not be taken until at least 48 hours have elapsed, the Consideration Stage of the Ghana Shipping (Amendment) Bill, 2011 may be taken today.", 
             "time": "11:50:00"
         }, 
         {
@@ -1152,10 +1221,10 @@
         {
             "column": "97", 
             "kind": "speech", 
-            "name": "Alhaji Dauda: MI Speaker, I beg to move, that notwithstanding the provisions under Standing Order 128 (1) which require that when a Bill -- [An Hon Member", 
+            "name": "Alhaji Dauda", 
             "original": "Alhaji Dauda: MI Speaker, I beg to move, that notwithstanding the provisions under Standing Order 128 (1) which require that when a Bill -- [An Hon Member: Where is item 13?]", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "Where is item 13?]", 
+            "speech": "MI Speaker, I beg to move, that notwithstanding the provisions under Standing Order 128 (1) which require that when a Bill -- [An Hon Member: Where is item 13?]", 
             "time": "11:50:00"
         }, 
         {
@@ -1197,10 +1266,10 @@
         {
             "column": "97", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, with respect, the order of Business in this House is set out in Standing Order 53. Order 53 provides and and with your permission I read", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, with respect, the order of Business in this House is set out in Standing Order 53. Order 53 provides and and with your permission I read:", 
             "section": "BILLS ---SECOND READING", 
-            "speech": "\"The business for each Sitting day, as decided by the Business Committee shall be set out in the Order Paper, and shall whenever possible be transacted in the following order .. .\"", 
+            "speech": "Mr Speaker, with respect, the order of Business in this House is set out in Standing Order 53. Order 53 provides and and with your permission I read:\n \"The business for each Sitting day, as decided by the Business Committee shall be set out in the Order Paper, and shall whenever possible be transacted in the following order .. .\"", 
             "time": "11:50:00"
         }, 
         {
@@ -1285,6 +1354,7 @@
             "time": "12:00:00"
         }, 
         {
+            "column": "99", 
             "heading": "BILLS -- CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS -- CONSIDERATION STAGE", 
@@ -1294,9 +1364,18 @@
             "column": "100", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Hon Members, that brings us to the end of the Consideration Stage of the Ghana Maritime Security (Amendment) Bill.\nVery well, Hon Minister for Transport, item number 15.\nSuspension of Standing Order 128 (1)\nMinister for'Iransport (Alhaji Collins Dauda): Mr Speaker, I beg to move, that notwithstanding the provisions of Standing Order 128 (1) which require that when a Bill has been read a Second time it shall pass through a Consideration Stage which shall not be taken until at least forty- eight hours have elapsed, the Consideration Stage of the Ghana Shipping (Amendment) Bill, 201 l may be taken today.", 
+            "original": "Mr First Deputy Speaker: Hon Members, that brings us to the end of the Consideration Stage of the Ghana Maritime Security (Amendment) Bill.\nVery well, Hon Minister for Transport, item number 15.\nSuspension of Standing Order 128 (1)", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "Hon Members, that brings us to the end of the Consideration Stage of the Ghana Maritime Security (Amendment) Bill.\n\nVery well, Hon Minister for Transport, item number 15.\n\nSuspension of Standing Order 128 (1)\n\nMinister for'Iransport (Alhaji Collins Dauda): Mr Speaker, I beg to move, that notwithstanding the provisions of Standing Order 128 (1) which require that when a Bill has been read a Second time it shall pass through a Consideration Stage which shall not be taken until at least forty- eight hours have elapsed, the Consideration Stage of the Ghana Shipping (Amendment) Bill, 201 l may be taken today.", 
+            "speech": "Hon Members, that brings us to the end of the Consideration Stage of the Ghana Maritime Security (Amendment) Bill.\n\nVery well, Hon Minister for Transport, item number 15.\n\nSuspension of Standing Order 128 (1)", 
+            "time": "12:00:00"
+        }, 
+        {
+            "column": "100", 
+            "kind": "speech", 
+            "name": "Minister for'Iransport (Alhaji Collins Dauda)", 
+            "original": "Minister for'Iransport (Alhaji Collins Dauda): Mr Speaker, I beg to move, that notwithstanding the provisions of Standing Order 128 (1) which require that when a Bill has been read a Second time it shall pass through a Consideration Stage which shall not be taken until at least forty- eight hours have elapsed, the Consideration Stage of the Ghana Shipping (Amendment) Bill, 201 l may be taken today.", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
+            "speech": "Mr Speaker, I beg to move, that notwithstanding the provisions of Standing Order 128 (1) which require that when a Bill has been read a Second time it shall pass through a Consideration Stage which shall not be taken until at least forty- eight hours have elapsed, the Consideration Stage of the Ghana Shipping (Amendment) Bill, 201 l may be taken today.", 
             "time": "12:00:00"
         }, 
         {
@@ -1309,6 +1388,7 @@
             "time": "12:00:00"
         }, 
         {
+            "column": "100", 
             "heading": "BILLS -- CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS -- CONSIDERATION STAGE", 
@@ -1497,19 +1577,19 @@
         {
             "column": "104", 
             "kind": "speech", 
-            "name": "Mr Boampong: Mr Speaker, I beg to move, clause 1, sub-clause (lA), paragraph (3), subparagraph (i), delete and insert the following", 
+            "name": "Mr Boampong", 
             "original": "Mr Boampong: Mr Speaker, I beg to move, clause 1, sub-clause (lA), paragraph (3), subparagraph (i), delete and insert the following:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"evidence that indicates the applicant\u2019s commitment to social responsibility in relation to the training of Ghana seafarers and cadets\".\n Mr Speaker, this was so because it was noted that a new paragraph be inserted to indicate an applicant of a foreign ship intending to trade in Ghanaian waters to show commitment to social responsibility in the area of training of seafarers and cadets. The reason being that there has been lack of training and exposure for these professionals and the amendment now requires that the foreign ships should be mandated to train these professionals.\n Question put and amendment agreed to.", 
+            "speech": "Mr Speaker, I beg to move, clause 1, sub-clause (lA), paragraph (3), subparagraph (i), delete and insert the following:\n \"evidence that indicates the applicant\u2019s commitment to social responsibility in relation to the training of Ghana seafarers and cadets\".\n Mr Speaker, this was so because it was noted that a new paragraph be inserted to indicate an applicant of a foreign ship intending to trade in Ghanaian waters to show commitment to social responsibility in the area of training of seafarers and cadets. The reason being that there has been lack of training and exposure for these professionals and the amendment now requires that the foreign ships should be mandated to train these professionals.\n Question put and amendment agreed to.", 
             "time": "12:00:00"
         }, 
         {
             "column": "104", 
             "kind": "speech", 
-            "name": "Mr Boampong: Mr Speaker, I beg to move, clause 1, sub-clause (lA), paragraph (4), delete and insert the following", 
+            "name": "Mr Boampong", 
             "original": "Mr Boampong: Mr Speaker, I beg to move, clause 1, sub-clause (lA), paragraph (4), delete and insert the following:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"An applicant may provide evidence that shares in the foreign ship are owned or controlled by a citizen, the government or a company or partnership registered by law in the Republic; and\".\n Mr Speaker, the reason is that, a foreign ship intending to trade in Ghanaian waters should show evidence of local participation in its stock-holding and ownership.", 
+            "speech": "Mr Speaker, I beg to move, clause 1, sub-clause (lA), paragraph (4), delete and insert the following:\n \"An applicant may provide evidence that shares in the foreign ship are owned or controlled by a citizen, the government or a company or partnership registered by law in the Republic; and\".\n Mr Speaker, the reason is that, a foreign ship intending to trade in Ghanaian waters should show evidence of local participation in its stock-holding and ownership.", 
             "time": "12:00:00"
         }, 
         {
@@ -1722,10 +1802,10 @@
         {
             "column": "107", 
             "kind": "speech", 
-            "name": "Mr H. Iddrisu: Mr Speaker, in respect of clause 1A (iv), I move that, the new rendition should read", 
+            "name": "Mr H. Iddrisu", 
             "original": "Mr H. Iddrisu: Mr Speaker, in respect of clause 1A (iv), I move that, the new rendition should read:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"The Minister shall grant the permit on the recommendations of the board subject to (a) and (b)\".\n Thank you, Mr Speaker.", 
+            "speech": "Mr Speaker, in respect of clause 1A (iv), I move that, the new rendition should read:\n \"The Minister shall grant the permit on the recommendations of the board subject to (a) and (b)\".\n Thank you, Mr Speaker.", 
             "time": "12:20:00"
         }, 
         {
@@ -1999,10 +2079,10 @@
         {
             "column": "112", 
             "kind": "speech", 
-            "name": "Mr Boampong: Mr Speaker, I beg to move, clause 1, sub-clause (IA), add the following new paragraph", 
+            "name": "Mr Boampong", 
             "original": "Mr Boampong: Mr Speaker, I beg to move, clause 1, sub-clause (IA), add the following new paragraph:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"(5) The Minister shall in accordance with the recommendation of the Board grant the permit subject to the payment of the prescribed fee.\"\n Mr Speaker, the reasons are that the permit ought to be granted by the Minister and not the authority after the appropriate fees have been paid by the applicants.\n Thank you, Mr Speaker.", 
+            "speech": "Mr Speaker, I beg to move, clause 1, sub-clause (IA), add the following new paragraph:\n \"(5) The Minister shall in accordance with the recommendation of the Board grant the permit subject to the payment of the prescribed fee.\"\n Mr Speaker, the reasons are that the permit ought to be granted by the Minister and not the authority after the appropriate fees have been paid by the applicants.\n Thank you, Mr Speaker.", 
             "time": "12:35:00"
         }, 
         {
@@ -2089,10 +2169,10 @@
         {
             "column": "113", 
             "kind": "speech", 
-            "name": "Mr Boampong: Mr Speaker, I beg to move, clause l, sub-clause (1A), add the following new paragraph", 
+            "name": "Mr Boampong", 
             "original": "Mr Boampong: Mr Speaker, I beg to move, clause l, sub-clause (1A), add the following new paragraph:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"(7) The Minister shall in granting the application take into account any evidence provided under sub-clause\n (4)\"", 
+            "speech": "Mr Speaker, I beg to move, clause l, sub-clause (1A), add the following new paragraph:\n \"(7) The Minister shall in granting the application take into account any evidence provided under sub-clause\n (4)\"", 
             "time": "12:40:00"
         }, 
         {
@@ -2116,10 +2196,10 @@
         {
             "column": "114", 
             "kind": "speech", 
-            "name": "Alhaji Dauda: Mr Speaker, I think he is talking about something that is not related to the amendment being discussed on the floor at the moment. The amendment being discussed now is (vii) of clause l on the Order Paper and it says that", 
+            "name": "Alhaji Dauda", 
             "original": "Alhaji Dauda: Mr Speaker, I think he is talking about something that is not related to the amendment being discussed on the floor at the moment. The amendment being discussed now is (vii) of clause l on the Order Paper and it says that:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"(7) The Minister shall in granting the application take into account any evidence provided under sub clause\n (4)\".\n In sub-clause (4), you would recall that some amendments have already been made, particularly with regard to the deletion of \"Board of the Ghana Maritime Authority\" and the insertion of the \"Minister\". That has- passed and therefore, Mr Speaker, this in my opinion becomes superfluous.", 
+            "speech": "Mr Speaker, I think he is talking about something that is not related to the amendment being discussed on the floor at the moment. The amendment being discussed now is (vii) of clause l on the Order Paper and it says that:\n \"(7) The Minister shall in granting the application take into account any evidence provided under sub clause\n (4)\".\n In sub-clause (4), you would recall that some amendments have already been made, particularly with regard to the deletion of \"Board of the Ghana Maritime Authority\" and the insertion of the \"Minister\". That has- passed and therefore, Mr Speaker, this in my opinion becomes superfluous.", 
             "time": "12:40:00"
         }, 
         {
@@ -2548,10 +2628,10 @@
         {
             "column": "122", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, I beg to move, Long Title, delete \"extend the definition of and insert \"define\" so that the rendition will read", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, I beg to move, Long Title, delete \"extend the definition of and insert \"define\" so that the rendition will read: -", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "-\n \". . .To define Ghanaian waters to include the waters in the safety zone around the offshore\".\n In line 3, the word \"constellations\" should - be deleted and insert \"installations\".", 
+            "speech": "Mr Speaker, I beg to move, Long Title, delete \"extend the definition of and insert \"define\" so that the rendition will read: -\n \". . .To define Ghanaian waters to include the waters in the safety zone around the offshore\".\n In line 3, the word \"constellations\" should - be deleted and insert \"installations\".", 
             "time": "13:10:00"
         }, 
         {
@@ -2710,10 +2790,10 @@
         {
             "column": "125", 
             "kind": "speech", 
-            "name": "Mr Obodai: Mr Speaker, I find it a bit difficult to understand the use of \"nature and character\" especially with respect to what we are talking about; that is, if we should substitute it here, it would read", 
+            "name": "Mr Obodai", 
             "original": "Mr Obodai: Mr Speaker, I find it a bit difficult to understand the use of \"nature and character\" especially with respect to what we are talking about; that is, if we should substitute it here, it would read:\n\"The nature and. character of the intended trade\".\nIt is a bit ridiculous. So I think that we should maintain the \"nature\".", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\n\n\"The nature and. character of the intended trade\".\n\nIt is a bit ridiculous. So I think that we should maintain the \"nature\".", 
+            "speech": "Mr Speaker, I find it a bit difficult to understand the use of \"nature and character\" especially with respect to what we are talking about; that is, if we should substitute it here, it would read:\n\n\"The nature and. character of the intended trade\".\n\nIt is a bit ridiculous. So I think that we should maintain the \"nature\".", 
             "time": "13:10:00"
         }, 
         {
@@ -2834,6 +2914,7 @@
             "time": "13:20:00"
         }, 
         {
+            "column": "128", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

@@ -1,54 +1,63 @@
 {
     "entries": [
         {
+            "column": null, 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENTARY DEBATES", 
             "kind": "heading", 
             "original": "PARLIAMENTARY DEBATES", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "OFFICIAL REPORT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "IN THE SECOND MEETING OF THE FOURTH SESSION OF THE", 
             "kind": "heading", 
             "original": "IN THE SECOND MEETING OF THE FOURTH SESSION OF THE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "FIFTH PARLIAMENT OF THE FOURTH REPUBLIC OF GHANA", 
             "kind": "heading", 
             "original": "FIFTH PARLIAMENT OF THE FOURTH REPUBLIC OF GHANA", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "TWENTIETH YEAR OF THE FOURTH REPUBLIC", 
             "kind": "heading", 
             "original": "TWENTIETH YEAR OF THE FOURTH REPUBLIC", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -56,17 +65,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": null, 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "10:10:00"
         }, 
         {
+            "column": null, 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:10:00"
         }, 
         {
+            "column": null, 
             "heading": "WELCOME ADDRESS", 
             "kind": "heading", 
             "original": "WELCOME ADDRESS", 
@@ -82,6 +94,7 @@
             "time": "10:10:00"
         }, 
         {
+            "column": "3", 
             "heading": "ANNOUNCEMENTS", 
             "kind": "heading", 
             "original": "ANNOUNCEMENTS", 
@@ -90,49 +103,56 @@
         {
             "column": "3", 
             "kind": "speech", 
-            "name": "Madam Speaker: Hon Members, I have received communication from His Excellency the President and I would like to read this to you. The first one is dated the 12th of April, 2012", 
+            "name": "Madam Speaker", 
             "original": "Madam Speaker: Hon Members, I have received communication from His Excellency the President and I would like to read this to you. The first one is dated the 12th of April, 2012:", 
             "section": "ANNOUNCEMENTS", 
-            "speech": "RT. HON. SPEAKER, A", 
+            "speech": "Hon Members, I have received communication from His Excellency the President and I would like to read this to you. The first one is dated the 12th of April, 2012:\n RT. HON. SPEAKER, A", 
             "time": "10:10:00"
         }, 
         {
+            "column": "3", 
             "heading": "OFFICE OF PARLIAMENT,", 
             "kind": "heading", 
             "original": "OFFICE OF PARLIAMENT,", 
             "time": "10:10:00"
         }, 
         {
+            "column": "3", 
             "heading": "STATE HOUSE,", 
             "kind": "heading", 
             "original": "STATE HOUSE,", 
             "time": "10:10:00"
         }, 
         {
+            "column": "3", 
             "heading": "PRESIDENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PRESIDENT OF THE REPUBLIC", 
             "time": "10:10:00"
         }, 
         {
+            "column": "4", 
             "heading": "OFFICE OF PARLIAMENT", 
             "kind": "heading", 
             "original": "OFFICE OF PARLIAMENT", 
             "time": "10:10:00"
         }, 
         {
+            "column": "4", 
             "heading": "PARLIAMENT HOUSE", 
             "kind": "heading", 
             "original": "PARLIAMENT HOUSE", 
             "time": "10:10:00"
         }, 
         {
+            "column": "4", 
             "heading": "ACCRA", 
             "kind": "heading", 
             "original": "ACCRA", 
             "time": "10:10:00"
         }, 
         {
+            "column": "4", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -202,6 +222,7 @@
             "time": "10:20:00"
         }, 
         {
+            "column": "6", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -281,6 +302,7 @@
         }, 
         {
             "chair": "MR FIRST DEPUTY SPEAKER", 
+            "column": "8", 
             "kind": "chair", 
             "original": "[MR FIRST DEPUTY SPEAKER IN THE\n\nCHAIR]", 
             "time": "10:34:00"
@@ -313,6 +335,7 @@
             "time": "10:34:00"
         }, 
         {
+            "column": "9", 
             "heading": "BILLS -- CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS -- CONSIDERATION STAGE", 
@@ -357,10 +380,10 @@
         {
             "column": "9", 
             "kind": "speech", 
-            "name": "Mr Kyei-Mensah-Bonsu: Mr Speaker, you asked the Chair to refresh the minds of Hon Members including in particular, the Chair, about the grounds that We had covered before we left, and he says to us that we are going to start all over. Mr (Speaker, I am just perusing this document and the-first provision, part one", 
+            "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, you asked the Chair to refresh the minds of Hon Members including in particular, the Chair, about the grounds that We had covered before we left, and he says to us that we are going to start all over. Mr (Speaker, I am just perusing this document and the-first provision, part one:\n\"Application of this part to other diseases\".", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\n\n\"Application of this part to other diseases\".", 
+            "speech": "Mr Speaker, you asked the Chair to refresh the minds of Hon Members including in particular, the Chair, about the grounds that We had covered before we left, and he says to us that we are going to start all over. Mr (Speaker, I am just perusing this document and the-first provision, part one:\n\n\"Application of this part to other diseases\".", 
             "time": "10:34:00"
         }, 
         {
@@ -420,10 +443,10 @@
         {
             "column": "11", 
             "kind": "speech", 
-            "name": "Alhaji Muntaka: Mr Speaker, I beg to move, clause 3, sub-clause (2), delete and substitute the following", 
+            "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, I beg to move, clause 3, sub-clause (2), delete and substitute the following:\n(a) A person suffering or suspected to be suffering from a communicable disease from a vehicle; or\n(b) A corpse or article suspected to be capable of spreading infection from a vehicle\"", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"The Minister may by Regulations provide for the removal of:\n\n(a) A person suffering or suspected to be suffering from a communicable disease from a vehicle; or\n\n(b) A corpse or article suspected to be capable of spreading infection from a vehicle\"", 
+            "speech": "Mr Speaker, I beg to move, clause 3, sub-clause (2), delete and substitute the following:\n \"The Minister may by Regulations provide for the removal of:\n\n(a) A person suffering or suspected to be suffering from a communicable disease from a vehicle; or\n\n(b) A corpse or article suspected to be capable of spreading infection from a vehicle\"", 
             "time": "10:40:00"
         }, 
         {
@@ -474,10 +497,10 @@
         {
             "column": "13", 
             "kind": "speech", 
-            "name": "Alhaji Muntaka: Mr Speaker, if you look at what is currently in the Bill, it is so. If you look especially at the last sentence, and with your permission, I read", 
+            "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, if you look at what is currently in the Bill, it is so. If you look especially at the last sentence, and with your permission, I read:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"A person suffering or suspected to be suffering from a communicable disease, or a corpse or an article suspected to be capable of spreading infection may be removed from the vehicle and dealt with as prescribed by Regulations.\"", 
+            "speech": "Mr Speaker, if you look at what is currently in the Bill, it is so. If you look especially at the last sentence, and with your permission, I read:\n \"A person suffering or suspected to be suffering from a communicable disease, or a corpse or an article suspected to be capable of spreading infection may be removed from the vehicle and dealt with as prescribed by Regulations.\"", 
             "time": "10:40:00"
         }, 
         {
@@ -527,6 +550,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "14", 
             "kind": "action", 
             "name": "Mr Osei Kyei Mensah-Bonsu", 
             "original": "Mr Osei Kyei Mensah-Bonsu - rose -", 
@@ -544,16 +568,16 @@
         {
             "column": "14", 
             "kind": "speech", 
-            "name": "Mr Kyei Mensah-Bonsu: Mr Speaker, I did own up and said that I have not really had a good look at this Bill. I notice that the short title provides as follows", 
+            "name": "Mr Kyei Mensah-Bonsu", 
             "original": "Mr Kyei Mensah-Bonsu: Mr Speaker, I did own up and said that I have not really had a good look at this Bill. I notice that the short title provides as follows:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"An ACT to revise and consolidate the law relating to public health to prevent diseases, promote, safeguard, maintain and protect the health of humans and animals and to provide for related matters.\"\n - Mr Speaker, the little that I have seen from, where we have gotten to, we seem to be concentrating on human beings but we are talking about humans and animals.", 
+            "speech": "Mr Speaker, I did own up and said that I have not really had a good look at this Bill. I notice that the short title provides as follows:\n \"An ACT to revise and consolidate the law relating to public health to prevent diseases, promote, safeguard, maintain and protect the health of humans and animals and to provide for related matters.\"\n - Mr Speaker, the little that I have seen from, where we have gotten to, we seem to be concentrating on human beings but we are talking about humans and animals.", 
             "time": "10:40:00"
         }, 
         {
             "column": "15", 
             "kind": "continued speech", 
-            "name": "Mr Kyei Mensah-Bonsu: Mr Speaker, I did own up and said that I have not really had a good look at this Bill. I notice that the short title provides as follows", 
+            "name": "Mr Kyei Mensah-Bonsu", 
             "original": "[MR KYEI-MENSAH-BONSU]", 
             "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "So I thought that for a start, if we spoke about corpse, we would be talking about carcass as well and as you said any other things. But we seem to be concentrating on that one in respect of clauses 1, 2 and even where we are now, 3.\n I was just perusing it to see whether there are specific places designated for the treatment of animals. I do not see it expressly and so I am wondering why we are choosing this path, if I could have some explanation.", 
@@ -669,6 +693,7 @@
         }, 
         {
             "action": "rose -", 
+            "column": "17", 
             "kind": "speech", 
             "name": "Some Hon Members", 
             "original": "Some Hon Members - rose --\nMr First Deputy Speaker; Hon Member for Amenfi East, you were on your feet.", 
@@ -838,18 +863,21 @@
             "time": "11:00:00"
         }, 
         {
+            "column": "22", 
             "heading": "ORAL ANSWERS TO QUESTIONS", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS", 
             "time": "11:00:00"
         }, 
         {
+            "column": "22", 
             "heading": "MINISTRY OF ENVIRONMENT,", 
             "kind": "heading", 
             "original": "MINISTRY OF ENVIRONMENT,", 
             "time": "11:00:00"
         }, 
         {
+            "column": "22", 
             "heading": "SCIENCE AND TECHNOLOGY", 
             "kind": "heading", 
             "original": "SCIENCE AND TECHNOLOGY", 
@@ -1262,6 +1290,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "35", 
             "kind": "action", 
             "name": "Prof (Emeritus) Amoako", 
             "original": "Prof (Emeritus) Amoako -rose -", 
@@ -1279,10 +1308,10 @@
         {
             "column": "35", 
             "kind": "speech", 
-            "name": "Prof (Emeritus) Amoako: Mr Speaker, page 33 of the Hon Minister\u2019s Answer and I refer to the last sentence of the third bullet point and with your permission I quote", 
+            "name": "Prof (Emeritus) Amoako", 
             "original": "Prof (Emeritus) Amoako: Mr Speaker, page 33 of the Hon Minister\u2019s Answer and I refer to the last sentence of the third bullet point and with your permission I quote:", 
             "section": "SCIENCE AND TECHNOLOGY", 
-            "speech": "\"The goal of GEMP is to strengthen Ghanaian institutions and rural communities to enable them to reverse land degradation and desertification in the three northern regions of Ghana and adopt sustainable land and water management systems that improve food security and reduce poverty.\"\n This part of the Answer is too general.\n Would the Hon Minister please tell us specifically what has been done in the area of reversing degradation and desertification of this part of our country?", 
+            "speech": "Mr Speaker, page 33 of the Hon Minister\u2019s Answer and I refer to the last sentence of the third bullet point and with your permission I quote:\n \"The goal of GEMP is to strengthen Ghanaian institutions and rural communities to enable them to reverse land degradation and desertification in the three northern regions of Ghana and adopt sustainable land and water management systems that improve food security and reduce poverty.\"\n This part of the Answer is too general.\n Would the Hon Minister please tell us specifically what has been done in the area of reversing degradation and desertification of this part of our country?", 
             "time": "11:30:00"
         }, 
         {
@@ -1651,14 +1680,14 @@
             "name": "Mr Kyei Mensah-Bonsu", 
             "original": "[MR KYEI MENSAH-BONSU]", 
             "section": "SCIENCE AND TECHNOLOGY", 
-            "speech": "other African countries, you would see a very different picture and I think we would encourage her to go on this path.", 
+            "speech": "other African countries, you would see a very different picture and I think we would encourage her to go on this path.\n Mr Speaker, to remind the Hon", 
             "time": "12:00:00"
         }, 
         {
             "column": "53", 
             "kind": "speech", 
-            "name": "Mr Speaker, to remind the Hon Minister, the Question is", 
-            "original": "Mr Speaker, to remind the Hon Minister, the Question is:", 
+            "name": "Minister, the Question is", 
+            "original": "Minister, the Question is:", 
             "section": "SCIENCE AND TECHNOLOGY", 
             "speech": "\"To ask the Ministry for Environment, Science and Technology what measures the Ministry is putting in place to formulate the necessary laws and regulations on environmental pollution for the country.\"\n The Ministry in this case is the State - the obligation of the State. Mr Speaker, unfortunately, in her Answer, the Hon Minister draws attention to article 41(k). Article 41(k) Mr Speaker, with respect to the Hon Minister relates to duties of a citizen. We are talking about what role the state should be playing and with respect, may I draw attention of the Hon Minister to article 36 (9) which provides as follows:\n \"The State shall take appropriate measures needed to protect and safeguard the national environment for posterity. . .\"\n Mr Speaker, would the Hon Minister agree that she got it wrong this time?", 
             "time": "12:00:00"
@@ -1799,6 +1828,7 @@
             "time": "12:10:00"
         }, 
         {
+            "column": "55", 
             "heading": "BILLS -- CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS -- CONSIDERATION STAGE", 
@@ -1924,10 +1954,10 @@
         {
             "column": "57", 
             "kind": "speech", 
-            "name": "Alhaji Muntaka: Mr Speaker, in-line 1, after \"a person\" we insert \"or animals\" and then in line 4, after \"medical officer\" we insert \"or veterinary officer\" and in the same line 4, at the tail end, we have \"a medical officer\". After that \"medical officer\" again, we have \"or a veterinary officer\" so that the new rendition will read, with your indulgence, Mr Speaker, as follows", 
+            "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, in-line 1, after \"a person\" we insert \"or animals\" and then in line 4, after \"medical officer\" we insert \"or veterinary officer\" and in the same line 4, at the tail end, we have \"a medical officer\". After that \"medical officer\" again, we have \"or a veterinary officer\" so that the new rendition will read, with your indulgence, Mr Speaker, as follows:", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "\"A person or animal shall not reside, enter or carry on businesses within an infected area or a part of an infected area in contravention of an order for evacuation except under an order in writing to that effect signed by the medical officer or veterinary officer and under conditions specified by the medical officer or veterinary officer.\"", 
+            "speech": "Mr Speaker, in-line 1, after \"a person\" we insert \"or animals\" and then in line 4, after \"medical officer\" we insert \"or veterinary officer\" and in the same line 4, at the tail end, we have \"a medical officer\". After that \"medical officer\" again, we have \"or a veterinary officer\" so that the new rendition will read, with your indulgence, Mr Speaker, as follows:\n \"A person or animal shall not reside, enter or carry on businesses within an infected area or a part of an infected area in contravention of an order for evacuation except under an order in writing to that effect signed by the medical officer or veterinary officer and under conditions specified by the medical officer or veterinary officer.\"", 
             "time": "12:10:00"
         }, 
         {
@@ -2444,6 +2474,7 @@
             "time": "12:30:00"
         }, 
         {
+            "column": "66", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

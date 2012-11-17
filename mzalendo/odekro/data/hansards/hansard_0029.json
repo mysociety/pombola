@@ -1,78 +1,91 @@
 {
     "entries": [
         {
+            "column": null, 
             "heading": "PARLIAMENTARY DEBATES", 
             "kind": "heading", 
             "original": "PARLIAMENTARY DEBATES", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "OFFICIAL REPORT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "CONTENTS", 
             "kind": "heading", 
             "original": "CONTENTS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "ORAL ANSWERS TO URGENT QUESTIONS-", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO URGENT QUESTIONS-", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "ORAL ANSWERS TO QUESTIONS --", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS --", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENTARY DEBATES", 
             "kind": "heading", 
             "original": "PARLIAMENTARY DEBATES", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "OFFICIAL REPORT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "FIFTH PARLIAMENT OF THE FOURTH REPUBLIC OF GHANA", 
             "kind": "heading", 
             "original": "FIFTH PARLIAMENT OF THE FOURTH REPUBLIC OF GHANA", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "NINETEENTH YEAR OF THE FOURTH REPUBLIC", 
             "kind": "heading", 
             "original": "NINETEENTH YEAR OF THE FOURTH REPUBLIC", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -80,17 +93,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": null, 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "10:15:00"
         }, 
         {
+            "column": null, 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:15:00"
         }, 
         {
+            "column": null, 
             "heading": "WELCOME ADDRESS", 
             "kind": "heading", 
             "original": "WELCOME ADDRESS", 
@@ -115,6 +131,7 @@
             "time": "10:15:00"
         }, 
         {
+            "column": "3", 
             "heading": "ANNOUNCEMENTS", 
             "kind": "heading", 
             "original": "ANNOUNCEMENTS", 
@@ -131,11 +148,13 @@
         }, 
         {
             "chair": "MR SECOND DEPUTY SPEAKER", 
+            "column": "4", 
             "kind": "chair", 
             "original": "[MR SECOND DEPUTY SPEAKER IN\n\nTHE CHAIR]", 
             "time": "10:25:00"
         }, 
         {
+            "column": "4", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -268,24 +287,28 @@
             "time": "10:25:00"
         }, 
         {
+            "column": "6", 
             "heading": "ORAL ANSWERS TO URGENT", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO URGENT", 
             "time": "10:25:00"
         }, 
         {
+            "column": "6", 
             "heading": "QUESTIONS", 
             "kind": "heading", 
             "original": "QUESTIONS", 
             "time": "10:25:00"
         }, 
         {
+            "column": "6", 
             "heading": "MINISTRY OF LANDS AND NATURAL", 
             "kind": "heading", 
             "original": "MINISTRY OF LANDS AND NATURAL", 
             "time": "10:25:00"
         }, 
         {
+            "column": "6", 
             "heading": "RESOURCES", 
             "kind": "heading", 
             "original": "RESOURCES", 
@@ -454,18 +477,21 @@
             "time": "10:45:00"
         }, 
         {
+            "column": "11", 
             "heading": "ORAL ANSWERS TO QUESTIONS", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS", 
             "time": "10:45:00"
         }, 
         {
+            "column": "11", 
             "heading": "MINISTRY OF LANDS AND NATURAL", 
             "kind": "heading", 
             "original": "MINISTRY OF LANDS AND NATURAL", 
             "time": "10:45:00"
         }, 
         {
+            "column": "11", 
             "heading": "RESOURCES", 
             "kind": "heading", 
             "original": "RESOURCES", 
@@ -761,6 +787,7 @@
         }, 
         {
             "action": "rose", 
+            "column": "21", 
             "kind": "action", 
             "name": "Some Hon Members", 
             "original": "Some Hon Members --rose-", 
@@ -814,10 +841,10 @@
         {
             "column": "22", 
             "kind": "speech", 
-            "name": "Dr A. A. Osei: Mr Speaker, I am surprised at the last statement made by the Hon Deputy Minister. Let me remind him of his own statement. It states as follows", 
+            "name": "Dr A. A. Osei", 
             "original": "Dr A. A. Osei: Mr Speaker, I am surprised at the last statement made by the Hon Deputy Minister. Let me remind him of his own statement. It states as follows:", 
             "section": "RESOURCES", 
-            "speech": "\". . . government will ensure that the right thing is done such that both the State investments in the area and the community rights . . .\" '\n And he is saying that people who build property do not have a right? He said they cannot do anything about that. Mr Speaker, that contradicts his own statement. Mr Speaker, he should come again.", 
+            "speech": "Mr Speaker, I am surprised at the last statement made by the Hon Deputy Minister. Let me remind him of his own statement. It states as follows:\n \". . . government will ensure that the right thing is done such that both the State investments in the area and the community rights . . .\" '\n And he is saying that people who build property do not have a right? He said they cannot do anything about that. Mr Speaker, that contradicts his own statement. Mr Speaker, he should come again.", 
             "time": "11:15:00"
         }, 
         {
@@ -1164,6 +1191,7 @@
         }, 
         {
             "action": "rose -", 
+            "column": "90", 
             "kind": "action", 
             "name": "Mr Aidoo and Mr Joseph Osei-Owusu", 
             "original": "Mr Aidoo and Mr Joseph Osei-Owusu -- rose --", 
@@ -1233,27 +1261,49 @@
             "time": "11:35:00"
         }, 
         {
+            "column": "92", 
             "heading": "WRITTEN ANSWERS TO", 
             "kind": "heading", 
             "original": "WRITTEN ANSWERS TO", 
             "time": "11:35:00"
         }, 
         {
+            "column": "92", 
             "heading": "QUESTIONS", 
             "kind": "heading", 
             "original": "QUESTIONS", 
             "time": "11:35:00"
         }, 
         {
+            "column": "92", 
             "heading": "MIINISTRY OF LANDS AND", 
             "kind": "heading", 
             "original": "MIINISTRY OF LANDS AND", 
             "time": "11:35:00"
         }, 
         {
+            "column": "92", 
             "heading": "NATURAL RESOURCES", 
             "kind": "heading", 
             "original": "NATURAL RESOURCES", 
+            "time": "11:35:00"
+        }, 
+        {
+            "column": "92", 
+            "kind": "speech", 
+            "name": "Minister for Lands and Natural Resources (Mr1\\/like Allen Hammah)", 
+            "original": "Minister for Lands and Natural Resources (Mr1\\/like Allen Hammah): Mr Speaker, Golden Star Resources, having acquired the Bogoso Gold Limited open pit operations in 1999 and the Prestea surface concessions in 2000, assumed control of the Prestea Underground through the formation of the New Century Mines (NCM) Joint Venture in March, 2002. Since that time, the underground mine has been on a care-and-maintenance basis only. However, there has been significant exploration drilling along with several engineering studies to resume operations.", 
+            "section": "NATURAL RESOURCES", 
+            "speech": "Mr Speaker, Golden Star Resources, having acquired the Bogoso Gold Limited open pit operations in 1999 and the Prestea surface concessions in 2000, assumed control of the Prestea Underground through the formation of the New Century Mines (NCM) Joint Venture in March, 2002. Since that time, the underground mine has been on a care-and-maintenance basis only. However, there has been significant exploration drilling along with several engineering studies to resume operations.\n Company Activities from 2002 to 2010\n In total, Golden Star Resources (GSR) has invested well over US$55 million towards the maintenance, refurbishment, evaluation and exploration of the Prestea Underground.\n Some of the major highlights of activities include:\n Significant refurbishment of the Central Shaft facility to improve integrity and safety 64,000 meters of Underground and Surface exploration drilling.\n Purchase of new pumping and mining equipment", 
+            "time": "11:35:00"
+        }, 
+        {
+            "column": "93", 
+            "kind": "speech", 
+            "name": "Minister for Lands and Natural Resources (Mr1\\/like Allen Hammah)", 
+            "original": "[MR HAMMAH]\nthe major costs to the underground is electrical power. Should domestic power rates dramatically increase over the near term, economic viability of the underground could be drawn into question.\nThus, from the foregoing, it is evident that the Prestea mine is a potentially viable enterprise based on the significant investment the company is doing to finalize the feasibility studies for the eventual re-opening. Currently, GSR has recruited 150 people from the local area, 60 of whom have already been sent to AngloGold Ashanti mine in Obuasi for underground training.", 
+            "section": "NATURAL RESOURCES", 
+            "speech": "Pre-feasibility Study in 2008 for West and Footwall Reef.\n Strategy for Resuming Mining Operations\n Golden Star Resources has carried out several scoping and pre-feasibility level studies in order to identity an effective strategy for resuming mining operations. One of the major limiting factors to these evaluations was the obsolete mining infrastructure inherited. In addition, drastic changes in both the national and worldwide economic climate (such as the cost of oil and electricity) posed significant pressures on the financial viability of the project.\n However, given the significant increases in gold price over the past two years, a re-examination of the strategy was carried out that aimed at re-starting mining operations on a smaller production scale than previously targeted. It is envisioned that this would facilitate a phased approach to the refurbishment of the infrastructure and development of the mining areas.\n In addition to the over US$55 million invested by Golden Star Resource since 2002, an equally significant investment is required to develop the mine.\n Viability of the Prestea Underground Mine\n The continuing \"robust gold prices (US$ 1,200 per ounce) in recent times and the planned optimization of mining costs will support ongoing development of the underground operations. However, one of\n\nthe major costs to the underground is electrical power. Should domestic power rates dramatically increase over the near term, economic viability of the underground could be drawn into question.\n\nThus, from the foregoing, it is evident that the Prestea mine is a potentially viable enterprise based on the significant investment the company is doing to finalize the feasibility studies for the eventual re-opening. Currently, GSR has recruited 150 people from the local area, 60 of whom have already been sent to AngloGold Ashanti mine in Obuasi for underground training.", 
             "time": "11:35:00"
         }, 
         {
@@ -1273,15 +1323,35 @@
             "time": "11:35:00"
         }, 
         {
+            "column": "94", 
             "heading": "ORAL AN SVVERS TO QUESTIONS", 
             "kind": "heading", 
             "original": "ORAL AN SVVERS TO QUESTIONS", 
             "time": "11:45:00"
         }, 
         {
+            "column": "94", 
             "heading": "MINISTRY OF TOURISM", 
             "kind": "heading", 
             "original": "MINISTRY OF TOURISM", 
+            "time": "11:45:00"
+        }, 
+        {
+            "column": "94", 
+            "kind": "speech", 
+            "name": "Minister for Tourism (Ms Akua Sena Dansua)", 
+            "original": "Minister for Tourism (Ms Akua Sena Dansua): Mr Speaker, the Paga Crocodile Ponds and the Pikworo Slave Camp are some of the major tourist attractions in", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "Mr Speaker, the Paga Crocodile Ponds and the Pikworo Slave Camp are some of the major tourist attractions in", 
+            "time": "11:45:00"
+        }, 
+        {
+            "column": "95", 
+            "kind": "speech", 
+            "name": "Minister for Tourism (Ms Akua Sena Dansua)", 
+            "original": "[MS DANSUA]\nwhere cultural performances are held. The Ministry intends to expand the facility to meet required standard in future if resources are available.\nMr Speaker, the Ministry and the GTA are also working closely with the Kassena Nankana West District Assembly and other stakeholders to promote tourism in this district and in other Districts across the country in view of the socio-economic benefits that tourism development brings. The Ministry will also provide training and capacity building for service providers to improve standards and quality service to tourists.\nMr Speaker, under PNDC Law 237, Metropolitan, Municipal and District Assemblies (MMDAs) have greater responsibility for urban and sub-urban infrastructural development. The Ministry has, recently, therefore, appealed to the MMDAS to invest in tourism development since such investment will inure to the benefit of their people, in terms of job creation, revenue generation and the overall development of their respective districts. MMDAs including the Kessena Nankana West District Assembly, in particular, are hereby called upon to incorporate tourism development in their annual plans and budgets.\nFinally, Mr Speaker, permit me to use this platform to invite the participation of all stakeholders, including the private sector, to contribute to the sustainable development of tourism, not only in the Kassena Nankana District, but in other parts of the country.", 
+            "section": "MINISTRY OF TOURISM", 
+            "speech": "the Kassena Nankana District of the Upper East Region. The two attractions have been documented in several brochures and the website of the Ghana Tourism Authority (GTA), contributing to the good patronage they have been witnessing.\n The two ponds-the Chief Pond and the Zenga Pond, which are located at opposite sides of the main Navrongo- Paga Highway, according to the GTA office in Bolgatanga, generated a total of GH\u00a25,73 6.50 in 2010 and in the 1\" quarter of 20ll, the total number of visitors within the period was 3,577 people made up of 2,748 residents and 829 non-residents.\n Mr Speaker, the popularity of the two attractions, especially the Page Crocodile Ponds can be attributed to their location on a major transit highway between the land-locked countries of Mali, Niger, Burkina Faso and Ghana.\n Mr Speaker, good infrastructure is a prerequisite for the development of any tourist attraction. That is why the Ministry of Tourism is committed to ensuring that basic infrastructure is provided at these sites.\n However, Mr Speaker, since tourism development is mainly a private sector- driven activity, the Ministry has always encouraged private individuals to invest in the development of tourism infrastructure since by so doing, the small and medium-scale tourism enterprises such as hotels, restaurants, entertainment] recreational facilities, souvenirs, shops and transport services will be created to, among others, create jobs, provide income to operators in these sectors and improve the local economies of these areas.\n Currently, the District Assembly has provided a modest visitor center with facilities such as washrooms, restaurant, information office and entertainment area,\n\nwhere cultural performances are held. The Ministry intends to expand the facility to meet required standard in future if resources are available.\n\nMr Speaker, the Ministry and the GTA are also working closely with the Kassena Nankana West District Assembly and other stakeholders to promote tourism in this district and in other Districts across the country in view of the socio-economic benefits that tourism development brings. The Ministry will also provide training and capacity building for service providers to improve standards and quality service to tourists.\n\nMr Speaker, under PNDC Law 237, Metropolitan, Municipal and District Assemblies (MMDAs) have greater responsibility for urban and sub-urban infrastructural development. The Ministry has, recently, therefore, appealed to the MMDAS to invest in tourism development since such investment will inure to the benefit of their people, in terms of job creation, revenue generation and the overall development of their respective districts. MMDAs including the Kessena Nankana West District Assembly, in particular, are hereby called upon to incorporate tourism development in their annual plans and budgets.\n\nFinally, Mr Speaker, permit me to use this platform to invite the participation of all stakeholders, including the private sector, to contribute to the sustainable development of tourism, not only in the Kassena Nankana District, but in other parts of the country.", 
             "time": "11:45:00"
         }, 
         {
@@ -1591,6 +1661,7 @@
             "time": "12:15:00"
         }, 
         {
+            "column": "110", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

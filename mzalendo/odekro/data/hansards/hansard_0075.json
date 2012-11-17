@@ -1,18 +1,21 @@
 {
     "entries": [
         {
+            "column": "823", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "823", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "823", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -20,17 +23,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": "823", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "10:40:00"
         }, 
         {
+            "column": "823", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:40:00"
         }, 
         {
+            "column": "823", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -96,6 +102,7 @@
             "time": "10:40:00"
         }, 
         {
+            "column": "824", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -111,6 +118,7 @@
             "time": "10:40:00"
         }, 
         {
+            "column": "825", 
             "heading": "BILLS -- FIRST READING", 
             "kind": "heading", 
             "original": "BILLS -- FIRST READING", 
@@ -252,16 +260,27 @@
             "time": "10:40:00"
         }, 
         {
+            "column": "826", 
             "heading": "ORAL ANSWERS TO QUESTIONS", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS", 
             "time": "10:40:00"
         }, 
         {
+            "column": "826", 
             "heading": "MINISTRY OF ENERGY", 
             "kind": "heading", 
             "original": "MINISTRY OF ENERGY", 
             "time": "10:40:00"
+        }, 
+        {
+            "column": "827", 
+            "kind": "speech", 
+            "name": "Minister for Energy)", 
+            "original": "Minister for Energy): Madam Speaker, records available at the Ministry of Energy indicate that about 1,500 jobs have been created in the oil and gas sector. Out of this number, about 840, representing 57 per cent are Ghanaians.\n5. The enactment of a local content and local participation regu- lations to safeguard the interest of communities affected directly by the oil and gas activities in particular and Ghanaians in general.\n6. The Oil and Gas Capacity Building Project (OGCBP) being implemented by the Ministry in partnership with development partners, have strengthened institutions of learning and capacity-building, such as KNUST, Council for Technical and Vocational Education and Training (COTVET), Takoradi Technical Institute, Kikam Technical Institute and the Regional Maritime University.", 
+            "section": "MINISTRY OF ENERGY", 
+            "speech": "Madam Speaker, records available at the Ministry of Energy indicate that about 1,500 jobs have been created in the oil and gas sector. Out of this number, about 840, representing 57 per cent are Ghanaians.\n The Ministry is unable to know the exact number from the Western Region employed in the oil and gas sector as the information gathering instruments do not make provision for regional consi- derations.\n The Ministry, however, recognises that exploitation of the oil and gas resources located in the Western Region certainly have some environmental risks to the citizens and generated high expectations from the population. The Ministry, in recognition of these and other considerations, has put in place, the following specific interventions in the Western Region to address some of these challenges:\n 1. The Ministry, in collaboration with Tullow Ghana, is establishing an SME Skills Development Centre in Takoradi.\n 2. The Ministry and Tullow have allocated 40 per cent of annual scholarships initiated by Tullow, to train Ghanaians in UK universities in areas of oil and gas to the Western Region. -\n 3. The Petroleum Commission will have an operational office in Takoradi.\n 4. The Government is implementing a western corridor infrastructural development programme that will be funded by the CDB loan.\n\n5. The enactment of a local content and local participation regu- lations to safeguard the interest of communities affected directly by the oil and gas activities in particular and Ghanaians in general.\n\n6. The Oil and Gas Capacity Building Project (OGCBP) being implemented by the Ministry in partnership with development partners, have strengthened institutions of learning and capacity-building, such as KNUST, Council for Technical and Vocational Education and Training (COTVET), Takoradi Technical Institute, Kikam Technical Institute and the Regional Maritime University.", 
+            "time": "10:50:00"
         }, 
         {
             "column": "828", 
@@ -896,10 +915,10 @@
         {
             "column": "843", 
             "kind": "speech", 
-            "name": "Alhaji Fuseini: Madam Speaker, indeed, any Member of Parliament can apply and many have applied. Madam Speaker, some have not applied for street lights. Some have applied for transformers and same have been delivered to them. Others have applied for poles and some have been delivered to them --- [Interruptions] -- yes", 
+            "name": "Alhaji Fuseini", 
             "original": "Alhaji Fuseini: Madam Speaker, indeed, any Member of Parliament can apply and many have applied. Madam Speaker, some have not applied for street lights. Some have applied for transformers and same have been delivered to them. Others have applied for poles and some have been delivered to them --- [Interruptions] -- yes: Madam Speaker, the Old Book says, \"Seek and you shall find, ask and you shall be given\".", 
             "section": "MINISTRY OF ENERGY", 
-            "speech": "Madam Speaker, the Old Book says, \"Seek and you shall find, ask and you shall be given\".", 
+            "speech": "Madam Speaker, indeed, any Member of Parliament can apply and many have applied. Madam Speaker, some have not applied for street lights. Some have applied for transformers and same have been delivered to them. Others have applied for poles and some have been delivered to them --- [Interruptions] -- yes: Madam Speaker, the Old Book says, \"Seek and you shall find, ask and you shall be given\".", 
             "time": "11:20:00"
         }, 
         {
@@ -912,6 +931,7 @@
             "time": "11:20:00"
         }, 
         {
+            "column": "843", 
             "heading": "STATEMENTS", 
             "kind": "heading", 
             "original": "STATEMENTS", 
@@ -1090,6 +1110,7 @@
         }, 
         {
             "chair": "MR SECOND DEPUTY SPEAKER", 
+            "column": "861", 
             "kind": "chair", 
             "original": "[MR SECOND DEPUTY SPEAKER IN\n\nTHE CHAIR]", 
             "time": "12:05:00"
@@ -1104,6 +1125,7 @@
             "time": "12:05:00"
         }, 
         {
+            "column": "861", 
             "heading": "BILLS - CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS - CONSIDERATION STAGE", 
@@ -1112,10 +1134,10 @@
         {
             "column": "861", 
             "kind": "speech", 
-            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka): Mr Speaker, with your indulgence, I would want to draw the attention of your goodself and the House, that after a careful deliberation with most of our Colleagues, together with the Attorney- General\u2019s Department, it was realised that an attempt to pursue the Bill clause by clause, trying to insert \"animal\" was going to be more problematic. So, it was agreed that from clause 173 too, a new provision should be inserted, that with your permission, would read as follows", 
+            "name": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka)", 
             "original": "Chairman of the Committee (Alhaji Mohammed-Mubarak Muntaka): Mr Speaker, with your indulgence, I would want to draw the attention of your goodself and the House, that after a careful deliberation with most of our Colleagues, together with the Attorney- General\u2019s Department, it was realised that an attempt to pursue the Bill clause by clause, trying to insert \"animal\" was going to be more problematic. So, it was agreed that from clause 173 too, a new provision should be inserted, that with your permission, would read as follows:\n\"That the provisions of Part (1) to (5) of this Act on communicable diseases -- vaccination, quarantine, vector control and environmental sanitation shall apply to animals with the necessary modification.\"\nThe understanding is that with the draftspersons, once this omnibus clause is provided, it gives room for Part (1) to (5) to be dealt with, using the Veterinary Officers, using the necessary modification. So, with this information, even though we are yet to be at clause 173, we would be abandoning most of the amendments that were proposed in trying to fix the animal-human issue.\nJust for your attention, Mr Speaker.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\n\n\"That the provisions of Part (1) to (5) of this Act on communicable diseases -- vaccination, quarantine, vector control and environmental sanitation shall apply to animals with the necessary modification.\"\n\nThe understanding is that with the draftspersons, once this omnibus clause is provided, it gives room for Part (1) to (5) to be dealt with, using the Veterinary Officers, using the necessary modification. So, with this information, even though we are yet to be at clause 173, we would be abandoning most of the amendments that were proposed in trying to fix the animal-human issue.\n\nJust for your attention, Mr Speaker.", 
+            "speech": "Mr Speaker, with your indulgence, I would want to draw the attention of your goodself and the House, that after a careful deliberation with most of our Colleagues, together with the Attorney- General\u2019s Department, it was realised that an attempt to pursue the Bill clause by clause, trying to insert \"animal\" was going to be more problematic. So, it was agreed that from clause 173 too, a new provision should be inserted, that with your permission, would read as follows:\n\n\"That the provisions of Part (1) to (5) of this Act on communicable diseases -- vaccination, quarantine, vector control and environmental sanitation shall apply to animals with the necessary modification.\"\n\nThe understanding is that with the draftspersons, once this omnibus clause is provided, it gives room for Part (1) to (5) to be dealt with, using the Veterinary Officers, using the necessary modification. So, with this information, even though we are yet to be at clause 173, we would be abandoning most of the amendments that were proposed in trying to fix the animal-human issue.\n\nJust for your attention, Mr Speaker.", 
             "time": "12:05:00"
         }, 
         {
@@ -1274,10 +1296,10 @@
         {
             "column": "865", 
             "kind": "speech", 
-            "name": "Alhaji Muntaka: Mr Speaker, I beg to move, clause 173-- Add the following new subclause", 
+            "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, I beg to move, clause 173-- Add the following new subclause: \"(2) The provisions of Part 1 to 5 of this Act on communicable diseases, vaccination, quarantine, vector control and environmental sanitation shall apply to animals with the necessary modification.\"", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"(2) The provisions of Part 1 to 5 of this Act on communicable diseases, vaccination, quarantine, vector control and environmental sanitation shall apply to animals with the necessary modification.\"\n So it is a little different from what was advertised.", 
+            "speech": "Mr Speaker, I beg to move, clause 173-- Add the following new subclause: \"(2) The provisions of Part 1 to 5 of this Act on communicable diseases, vaccination, quarantine, vector control and environmental sanitation shall apply to animals with the necessary modification.\"\n So it is a little different from what was advertised.", 
             "time": "12:10:00"
         }, 
         {
@@ -1336,6 +1358,7 @@
         }, 
         {
             "action": "rose -", 
+            "column": "868", 
             "kind": "action", 
             "name": "Mr J. B. Aidoo", 
             "original": "Mr J. B. Aidoo --rose --", 
@@ -1488,10 +1511,10 @@
         {
             "column": "871", 
             "kind": "speech", 
-            "name": "Alhaji Muntaka: Mr Speaker, I think it was an issue at the Committee level. But the challenge with the health professionals is that - The reason they were leaving as \"opinion\" is that it may differ from one person to another, based on the persons training. Someone will come and say that", 
+            "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, I think it was an issue at the Committee level. But the challenge with the health professionals is that - The reason they were leaving as \"opinion\" is that it may differ from one person to another, based on the persons training. Someone will come and say that: \"I was vaccinated three months ago\", and based on that, he says you do not need vaccination. Or \"From the way your ailment is, if you are further vaccinated, it is going to create this effect\".\nBut if you make it so explicit in the law, when the person says that: \"You do not need it\" when in the actual sense, you need it, the person will say that: \"The law says that when I say it, that is it\". But the law makes room for you to use your discretion, and then you would be made to answer for your discretion. That was why it was left so.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"I was vaccinated three months ago\", and based on that, he says you do not need vaccination. Or \"From the way your ailment is, if you are further vaccinated, it is going to create this effect\".\n The explanation they gave was that because all medical practitioners have code of ethics and conduct, the belief is that if you say that when the person does not need it, it becomes more or less restrictive. Also, the person who is going to do or not to do the vaccination, should be allowed to take decisions that he or she would be held responsible for. That is at the Committee level; it was decided that it should be with the person\u2019s opinion, so that that person could still be liable for their action and inaction.\n\nBut if you make it so explicit in the law, when the person says that: \"You do not need it\" when in the actual sense, you need it, the person will say that: \"The law says that when I say it, that is it\". But the law makes room for you to use your discretion, and then you would be made to answer for your discretion. That was why it was left so.", 
+            "speech": "Mr Speaker, I think it was an issue at the Committee level. But the challenge with the health professionals is that - The reason they were leaving as \"opinion\" is that it may differ from one person to another, based on the persons training. Someone will come and say that: \"I was vaccinated three months ago\", and based on that, he says you do not need vaccination. Or \"From the way your ailment is, if you are further vaccinated, it is going to create this effect\".\n The explanation they gave was that because all medical practitioners have code of ethics and conduct, the belief is that if you say that when the person does not need it, it becomes more or less restrictive. Also, the person who is going to do or not to do the vaccination, should be allowed to take decisions that he or she would be held responsible for. That is at the Committee level; it was decided that it should be with the person\u2019s opinion, so that that person could still be liable for their action and inaction.\n\nBut if you make it so explicit in the law, when the person says that: \"You do not need it\" when in the actual sense, you need it, the person will say that: \"The law says that when I say it, that is it\". But the law makes room for you to use your discretion, and then you would be made to answer for your discretion. That was why it was left so.", 
             "time": "12:20:00"
         }, 
         {
@@ -1506,10 +1529,10 @@
         {
             "column": "872", 
             "kind": "speech", 
-            "name": "Mr Second Deputy Speaker: Hon Chairman, can I, maybe, give a direction? \"Subsection 1 does not apply where vaccination could be injurious to health\". Still the vaccinator will have to form an opinion. Definitely, he would have to make a decision. Nevertheless, the subjectivity is removed and if challenged, he should be able to justify his decision. We do not want the impression whereby it would look like", 
+            "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: Hon Chairman, can I, maybe, give a direction? \"Subsection 1 does not apply where vaccination could be injurious to health\". Still the vaccinator will have to form an opinion. Definitely, he would have to make a decision. Nevertheless, the subjectivity is removed and if challenged, he should be able to justify his decision. We do not want the impression whereby it would look like: \"That is my discretion and that is the end of the matter\".", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"That is my discretion and that is the end of the matter\".", 
+            "speech": "Hon Chairman, can I, maybe, give a direction? \"Subsection 1 does not apply where vaccination could be injurious to health\". Still the vaccinator will have to form an opinion. Definitely, he would have to make a decision. Nevertheless, the subjectivity is removed and if challenged, he should be able to justify his decision. We do not want the impression whereby it would look like: \"That is my discretion and that is the end of the matter\".", 
             "time": "12:20:00"
         }, 
         {
@@ -1569,10 +1592,10 @@
         {
             "column": "873", 
             "kind": "speech", 
-            "name": "Mr Chireh: Mr Speaker, in terms of what he is saying, it is even more important that we should have a certain level of satisfaction and if we should look at the way that it was originally put, it was an \"opinion of the public vaccinator\". That is why the \"satisfactory evidence\". If we just leave it as \"evidence\" a person can say that", 
+            "name": "Mr Chireh", 
             "original": "Mr Chireh: Mr Speaker, in terms of what he is saying, it is even more important that we should have a certain level of satisfaction and if we should look at the way that it was originally put, it was an \"opinion of the public vaccinator\". That is why the \"satisfactory evidence\". If we just leave it as \"evidence\" a person can say that: \"I have evidence that this has happened\". If it is documented, if after the vaccination, the person has been\ngiven a card or there is a mark or something that has been left on the body, these are cases that you can say that: \"It is satisfactory\". But the determination of satisfaction is normally given to the one who has some level of expertise in this.\nSo if we do not want the word \"satisfactory\" because it cannot be qualified, it is a different argument. But it is better that you have a minimum of the evidence that must qualify for this to be applied.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"I have evidence that this has happened\". If it is documented, if after the vaccination, the person has been\n\ngiven a card or there is a mark or something that has been left on the body, these are cases that you can say that: \"It is satisfactory\". But the determination of satisfaction is normally given to the one who has some level of expertise in this.\n\nSo if we do not want the word \"satisfactory\" because it cannot be qualified, it is a different argument. But it is better that you have a minimum of the evidence that must qualify for this to be applied.", 
+            "speech": "Mr Speaker, in terms of what he is saying, it is even more important that we should have a certain level of satisfaction and if we should look at the way that it was originally put, it was an \"opinion of the public vaccinator\". That is why the \"satisfactory evidence\". If we just leave it as \"evidence\" a person can say that: \"I have evidence that this has happened\". If it is documented, if after the vaccination, the person has been\n\ngiven a card or there is a mark or something that has been left on the body, these are cases that you can say that: \"It is satisfactory\". But the determination of satisfaction is normally given to the one who has some level of expertise in this.\n\nSo if we do not want the word \"satisfactory\" because it cannot be qualified, it is a different argument. But it is better that you have a minimum of the evidence that must qualify for this to be applied.", 
             "time": "12:20:00"
         }, 
         {
@@ -1614,10 +1637,10 @@
         {
             "column": "875", 
             "kind": "speech", 
-            "name": "Mrs Kusi: Mr Speaker, I was just going to say what my Hon Colleague said, that once a person is vaccinated, he is given a certificate and sometimes, for some vaccinations, he needs to go two or three times and they are marked. The person goes twice, he stops and then he produces a certificate or a book that", 
+            "name": "Mrs Kusi", 
             "original": "Mrs Kusi: Mr Speaker, I was just going to say what my Hon Colleague said, that once a person is vaccinated, he is given a certificate and sometimes, for some vaccinations, he needs to go two or three times and they are marked. The person goes twice, he stops and then he produces a certificate or a book that: \"I have had this\". So I think both words are necessary.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"I have had this\". So I think both words are necessary.\n It is \"satisfactory\" that he has had the evidence, and then \"successfully\" because the person went through all the stages. It does not cause any harm. So I think it should be there.", 
+            "speech": "Mr Speaker, I was just going to say what my Hon Colleague said, that once a person is vaccinated, he is given a certificate and sometimes, for some vaccinations, he needs to go two or three times and they are marked. The person goes twice, he stops and then he produces a certificate or a book that: \"I have had this\". So I think both words are necessary.\n It is \"satisfactory\" that he has had the evidence, and then \"successfully\" because the person went through all the stages. It does not cause any harm. So I think it should be there.", 
             "time": "12:20:00"
         }, 
         {
@@ -1811,6 +1834,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "879", 
             "kind": "action", 
             "name": "Mr Boafo", 
             "original": "Mr Boafo - rose -", 
@@ -1972,10 +1996,10 @@
         {
             "column": "883", 
             "kind": "speech", 
-            "name": "Mr J. B. Aidoo: He is asking", 
+            "name": "Mr J. B. Aidoo", 
             "original": "Mr J. B. Aidoo: He is asking: \"What is a yard\" and I am saying three feet will make a yard.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"What is a yard\" and I am saying three feet will make a yard.", 
+            "speech": "He is asking: \"What is a yard\" and I am saying three feet will make a yard.", 
             "time": "12:50:00"
         }, 
         {
@@ -2035,10 +2059,10 @@
         {
             "column": "884", 
             "kind": "speech", 
-            "name": "Alhaji Muntaka: Mr Speaker, it is about grammar. I think, maybe, the best rendition could be to say \"but cannot produce\". So I will change the \"that\" to \"but\". And I do not know whether that would satisfy my Hon Colleague, so that the new rendition will read", 
+            "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, it is about grammar. I think, maybe, the best rendition could be to say \"but cannot produce\". So I will change the \"that\" to \"but\". And I do not know whether that would satisfy my Hon Colleague, so that the new rendition will read:", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"A public vaccinator may examine and vaccinate a person who arrives in the country but cannot produce satisfactory evidence of successful vaccination\".\n Mr Speaker, if that is better, we can take it", 
+            "speech": "Mr Speaker, it is about grammar. I think, maybe, the best rendition could be to say \"but cannot produce\". So I will change the \"that\" to \"but\". And I do not know whether that would satisfy my Hon Colleague, so that the new rendition will read:\n \"A public vaccinator may examine and vaccinate a person who arrives in the country but cannot produce satisfactory evidence of successful vaccination\".\n Mr Speaker, if that is better, we can take it", 
             "time": "13:00:00"
         }, 
         {
@@ -2088,6 +2112,7 @@
         }, 
         {
             "action": "rose-", 
+            "column": "885", 
             "kind": "action", 
             "name": "Mr W. O. Boafo", 
             "original": "Mr W. O. Boafo --rose--", 
@@ -2141,10 +2166,10 @@
         {
             "column": "885", 
             "kind": "speech", 
-            "name": "Mr Boafo: Mr Speaker, this is with regard to the Headnote. It reads", 
+            "name": "Mr Boafo", 
             "original": "Mr Boafo: Mr Speaker, this is with regard to the Headnote. It reads:", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"examination and vaccination of visitors\".\n Mr Speaker, when people arrive in this country, we have classes of them. We have visitors, we have students, we have people who come to seek medical examination or check-ups. I think if we delete \"visitors\" and substitute \"immigrants\" that will take care of every class of persons.", 
+            "speech": "Mr Speaker, this is with regard to the Headnote. It reads:\n \"examination and vaccination of visitors\".\n Mr Speaker, when people arrive in this country, we have classes of them. We have visitors, we have students, we have people who come to seek medical examination or check-ups. I think if we delete \"visitors\" and substitute \"immigrants\" that will take care of every class of persons.", 
             "time": "13:00:00"
         }, 
         {
@@ -2285,10 +2310,10 @@
         {
             "column": "888", 
             "kind": "speech", 
-            "name": "Mr Boafo: Immigrants", 
+            "name": "Mr Boafo", 
             "original": "Mr Boafo: Immigrants: United States of America (USA) citizens, and non-USA citizens, we may not have it at the Kotoka International Airport (KIA) --- [Interruptions]", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "United States of America (USA) citizens, and non-USA citizens, we may not have it at the Kotoka International Airport (KIA) --- [Interruptions]", 
+            "speech": "Immigrants: United States of America (USA) citizens, and non-USA citizens, we may not have it at the Kotoka International Airport (KIA) --- [Interruptions]", 
             "time": "13:10:00"
         }, 
         {
@@ -2428,6 +2453,7 @@
         }, 
         {
             "action": "-", 
+            "column": "891", 
             "kind": "action", 
             "name": "Alhaji Muntaka -- rose", 
             "original": "Alhaji Muntaka -- rose ---", 
@@ -2688,10 +2714,10 @@
         {
             "column": "901", 
             "kind": "speech", 
-            "name": "Alhaji Muntaka: Mr Speaker, I get the concern of the Hon Member but let me just give the background. Aside, when someone is engaged, maybe, the person is the one administering, but a situation, where you facilitate, I do not know how we are going to capture that. Maybe, that is what is being _ --- [Interruption] -- All right, so maybe", 
+            "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, I get the concern of the Hon Member but let me just give the background. Aside, when someone is engaged, maybe, the person is the one administering, but a situation, where you facilitate, I do not know how we are going to capture that. Maybe, that is what is being _ --- [Interruption] -- All right, so maybe:", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"A person who engages in or facilitates in an inoculation practice, or at the performance of an operation of an inoculation commits an offence.\"\n We would want to be able to broaden it, so that it is not only the one who maybe, is administering but those who facilitate.", 
+            "speech": "Mr Speaker, I get the concern of the Hon Member but let me just give the background. Aside, when someone is engaged, maybe, the person is the one administering, but a situation, where you facilitate, I do not know how we are going to capture that. Maybe, that is what is being _ --- [Interruption] -- All right, so maybe:\n \"A person who engages in or facilitates in an inoculation practice, or at the performance of an operation of an inoculation commits an offence.\"\n We would want to be able to broaden it, so that it is not only the one who maybe, is administering but those who facilitate.", 
             "time": "13:30:00"
         }, 
         {
@@ -2715,10 +2741,10 @@
         {
             "column": "901", 
             "kind": "speech", 
-            "name": "Mr Banda: Mr Speaker, I would rather proffer this suggestion. I would want to read it this way", 
+            "name": "Mr Banda", 
             "original": "Mr Banda: Mr Speaker, I would rather proffer this suggestion. I would want to read it this way: \"A person who engages\nin or is involved\" -- Instead of using the word \"concerned\", I would rather suggest that we use the words \"is involved in an inoculation.\"", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"A person who engages\n\nin or is involved\" -- Instead of using the word \"concerned\", I would rather suggest that we use the words \"is involved in an inoculation.\"", 
+            "speech": "Mr Speaker, I would rather proffer this suggestion. I would want to read it this way: \"A person who engages\n\nin or is involved\" -- Instead of using the word \"concerned\", I would rather suggest that we use the words \"is involved in an inoculation.\"", 
             "time": "13:40:00"
         }, 
         {
@@ -3147,10 +3173,10 @@
         {
             "column": "910", 
             "kind": "speech", 
-            "name": "Alhaji Muntaka: Mr Speaker, I beg to move, clause 36, delete and substitute the following", 
+            "name": "Alhaji Muntaka", 
             "original": "Alhaji Muntaka: Mr Speaker, I beg to move, clause 36, delete and substitute the following:", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"(1) A District Assembly shall provide appropriate equipment, houses, structures and sanitary stations for the purposes of this Part and (2) The Minister may, by appropriate instrument, declare an area as a sanitary station or sanitary anchorage for the purposes of this Part.\"", 
+            "speech": "Mr Speaker, I beg to move, clause 36, delete and substitute the following:\n \"(1) A District Assembly shall provide appropriate equipment, houses, structures and sanitary stations for the purposes of this Part and (2) The Minister may, by appropriate instrument, declare an area as a sanitary station or sanitary anchorage for the purposes of this Part.\"", 
             "time": "14:00:00"
         }, 
         {
@@ -3217,6 +3243,7 @@
             "time": "14:00:00"
         }, 
         {
+            "column": "912", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

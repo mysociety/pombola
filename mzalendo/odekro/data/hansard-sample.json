@@ -1,12 +1,14 @@
 {
     "entries": [
         {
+            "column": "895", 
             "heading": "THE PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "THE PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "895", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -14,17 +16,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": "895", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "10:40:00"
         }, 
         {
+            "column": "895", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:40:00"
         }, 
         {
+            "column": "895", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -78,10 +83,10 @@
         {
             "column": "895", 
             "kind": "speech", 
-            "name": "Dr. A.A- Osei: Madam Speaker,column 753, my second intervention, it reads as follows", 
+            "name": "Dr. A.A- Osei", 
             "original": "Dr. A.A- Osei: Madam Speaker,column 753, my second intervention, it reads as follows:", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "\". . . in today\u2019s Order Paper...\"", 
+            "speech": "Madam Speaker,column 753, my second intervention, it reads as follows:\n \". . . in today\u2019s Order Paper...\"", 
             "time": "10:40:00"
         }, 
         {
@@ -94,6 +99,7 @@
             "time": "10:40:00"
         }, 
         {
+            "column": "896", 
             "heading": "STATEMENTS", 
             "kind": "heading", 
             "original": "STATEMENTS", 
@@ -199,6 +205,7 @@
             "time": "10:50:00"
         }, 
         {
+            "column": "898", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -251,6 +258,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "899", 
             "kind": "action", 
             "name": "Some Hon Members", 
             "original": "Some Hon Members - rose -", 
@@ -276,6 +284,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "899", 
             "kind": "action", 
             "name": "Mr Joe Ghartey", 
             "original": "Mr Joe Ghartey -- rose -", 
@@ -319,6 +328,7 @@
         }, 
         {
             "chair": "MR SECOND DEPUTY SPEAKER", 
+            "column": "899", 
             "kind": "chair", 
             "original": "[MR SECOND DEPUTY SPEAKER IN THE\n\nCHAIR]", 
             "time": "11:15:00"
@@ -333,6 +343,7 @@
             "time": "11:15:00"
         }, 
         {
+            "column": "899", 
             "heading": "BILLS - CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "BILLS - CONSIDERATION STAGE", 
@@ -592,6 +603,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "909", 
             "kind": "action", 
             "name": "Dr Anthony A. Osei", 
             "original": "Dr Anthony A. Osei - rose -", 
@@ -626,6 +638,7 @@
         }, 
         {
             "action": "rose", 
+            "column": "909", 
             "kind": "action", 
             "name": "Mr Avoka", 
             "original": "Mr Avoka -rose-", 
@@ -849,6 +862,7 @@
         }, 
         {
             "action": "rose", 
+            "column": "961", 
             "kind": "action", 
             "name": "Some Hon Members", 
             "original": "Some Hon Members -- rose-", 
@@ -947,10 +961,10 @@
         {
             "column": "961", 
             "kind": "speech", 
-            "name": "Mr Boafo: Precisely so, Mr Speaker. Some more statements. And some more statements: \"The officials of the Unit are to be of State\". Some statement ending with a colon", 
+            "name": "Mr Boafo", 
             "original": "Mr Boafo: Precisely so, Mr Speaker. Some more statements. And some more statements: \"The officials of the Unit are to be of State\". Some statement ending with a colon: \"some quote\" Mr Speaker, a sentence.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"some quote\" Mr Speaker, a sentence.", 
+            "speech": "Precisely so, Mr Speaker. Some more statements. And some more statements: \"The officials of the Unit are to be of State\". Some statement ending with a colon: \"some quote\" Mr Speaker, a sentence.", 
             "time": "12:10:00"
         }, 
         {
@@ -1118,10 +1132,10 @@
         {
             "column": "961", 
             "kind": "speech", 
-            "name": "Mr Second Deputy Speaker: That would be very tidy. Hon Dr Akoto Osei, you would wait a while. Hon Member", 
+            "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: That would be very tidy. Hon Dr Akoto Osei, you would wait a while. Hon Member: I want us to spread the contribution as much as possible.", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "I want us to spread the contribution as much as possible.", 
+            "speech": "That would be very tidy. Hon Dr Akoto Osei, you would wait a while. Hon Member: I want us to spread the contribution as much as possible.", 
             "time": "12:40:00"
         }, 
         {
@@ -1181,10 +1195,10 @@
         {
             "column": "961", 
             "kind": "speech", 
-            "name": "Mr Avoka: Mr Speaker, a sentence. Article 95 (4) says", 
+            "name": "Mr Avoka", 
             "original": "Mr Avoka: Mr Speaker, a sentence. Article 95 (4) says: \"A quote quote quote quote quote quote quote quote sentences sentences quote ...\" -", 
             "section": "BILLS - CONSIDERATION STAGE", 
-            "speech": "\"A quote quote quote quote quote quote quote quote sentences sentences quote ...\" -\n So if we meet as Hon Members of Parliament without even taking an oath as Such, we can elect a Speaker.", 
+            "speech": "Mr Speaker, a sentence. Article 95 (4) says: \"A quote quote quote quote quote quote quote quote sentences sentences quote ...\" -\n So if we meet as Hon Members of Parliament without even taking an oath as Such, we can elect a Speaker.", 
             "time": "13:00:00"
         }, 
         {
@@ -1251,6 +1265,7 @@
             "time": "13:10:00"
         }, 
         {
+            "column": "961", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

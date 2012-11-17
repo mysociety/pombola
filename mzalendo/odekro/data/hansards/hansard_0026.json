@@ -1,18 +1,21 @@
 {
     "entries": [
         {
+            "column": "129", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "129", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "129", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -20,17 +23,20 @@
         }, 
         {
             "chair": "MR FIRST DEPUTY SPEAKER", 
+            "column": "129", 
             "kind": "chair", 
             "original": "[MR FIRST DEPUTY SPEAKER\n\nIN THE CHAIR]", 
             "time": "10:55:00"
         }, 
         {
+            "column": "129", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:55:00"
         }, 
         {
+            "column": "129", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -154,6 +160,7 @@
             "time": "10:55:00"
         }, 
         {
+            "column": "130", 
             "heading": "- PAPERS", 
             "kind": "heading", 
             "original": "- PAPERS", 
@@ -207,10 +214,10 @@
         {
             "column": "132", 
             "kind": "speech", 
-            "name": "Chairman of the Committee (Mr Michael C. Boampong): Mr Speaker, I beg to move, clause 2, sub-clause 1, add the following new paragraph", 
+            "name": "Chairman of the Committee (Mr Michael C. Boampong)", 
             "original": "Chairman of the Committee (Mr Michael C. Boampong): Mr Speaker, I beg to move, clause 2, sub-clause 1, add the following new paragraph: 1 \"for offences and penalties under the Act\".", 
             "section": "- PAPERS", 
-            "speech": "1 \"for offences and penalties under the Act\".\n This is so because since Statutory instrument Act, 1959, number 32 of 1959, the Fines Penalty Units Act, 2000 has been repealed, it is necessary to create a provision to take care of all offences and penalties under the Act. These provisions would also empower the Hon Minister to come up with the offences and penalties for the Regulations that are yet to come after the passage of this Bill.\n Thank you, Mr Speaker.", 
+            "speech": "Mr Speaker, I beg to move, clause 2, sub-clause 1, add the following new paragraph: 1 \"for offences and penalties under the Act\".\n This is so because since Statutory instrument Act, 1959, number 32 of 1959, the Fines Penalty Units Act, 2000 has been repealed, it is necessary to create a provision to take care of all offences and penalties under the Act. These provisions would also empower the Hon Minister to come up with the offences and penalties for the Regulations that are yet to come after the passage of this Bill.\n Thank you, Mr Speaker.", 
             "time": "11:05:00"
         }, 
         {
@@ -225,10 +232,10 @@
         {
             "column": "132", 
             "kind": "speech", 
-            "name": "Mr Boampong: Mr Speaker, I beg to _move - Sub-clause 1, add the following new paragraph", 
+            "name": "Mr Boampong", 
             "original": "Mr Boampong: Mr Speaker, I beg to _move - Sub-clause 1, add the following new paragraph: 9", 
             "section": "- PAPERS", 
-            "speech": "9\n \"for offences and penalties\"", 
+            "speech": "Mr Speaker, I beg to _move - Sub-clause 1, add the following new paragraph: 9\n \"for offences and penalties\"", 
             "time": "11:05:00"
         }, 
         {
@@ -332,6 +339,7 @@
         }, 
         {
             "action": "rose", 
+            "column": "134", 
             "kind": "action", 
             "name": "Mr Haruna Iddrisu", 
             "original": "Mr Haruna Iddrisu --rose-", 
@@ -601,16 +609,16 @@
         {
             "column": "140", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Hon Member, why are you not reading Standing Order 131(1)? This goes with amendment of Bills after Consideration Stage; that is the relevant provision. What you are reading is not the relevant provision under the Standing Orders. Amendment of Bills after Consideration Stage, Standing Order 130, that says", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member, why are you not reading Standing Order 131(1)? This goes with amendment of Bills after Consideration Stage; that is the relevant provision. What you are reading is not the relevant provision under the Standing Orders. Amendment of Bills after Consideration Stage, Standing Order 130, that says:", 
             "section": "- PAPERS", 
-            "speech": "\"If any Member desires to delete or amend a provision contained in a Bill which has passed through the Consideration Stage. . .\"", 
+            "speech": "Hon Member, why are you not reading Standing Order 131(1)? This goes with amendment of Bills after Consideration Stage; that is the relevant provision. What you are reading is not the relevant provision under the Standing Orders. Amendment of Bills after Consideration Stage, Standing Order 130, that says:\n \"If any Member desires to delete or amend a provision contained in a Bill which has passed through the Consideration Stage. . .\"", 
             "time": "11:25:00"
         }, 
         {
             "column": "141", 
             "kind": "continued speech", 
-            "name": "Mr First Deputy Speaker: Hon Member, why are you not reading Standing Order 131(1)? This goes with amendment of Bills after Consideration Stage; that is the relevant provision. What you are reading is not the relevant provision under the Standing Orders. Amendment of Bills after Consideration Stage, Standing Order 130, that says", 
+            "name": "Mr First Deputy Speaker", 
             "original": "[MR FIRST DEPUTY SPEAKER]", 
             "section": "- PAPERS", 
             "speech": "Which has passed through the Consideration Stage as it is in this case --\n \"... or to introduce any new provision to it, he may, at any time before a Member rises to move the Third Reading of the Bill, move that the Bill do pass through a second Consideration Stage (either wholly or in respect only of some particular part or parts of the Bill or some proposed new clause of new schedule). No notice of such Motion shall be required. If the Motion is agreed to, the Bill shall immediately pass through a second Consideration Stage.\"\n And I am saying that he has allowed the Hon Minister to move the Motion; that is why I am saying that he did not act timeously. But if his point will enrich the Bill, we can relax the rules to enable him do it because the relevant provision is Standing Order 130 (1).", 
@@ -789,6 +797,7 @@
         }, 
         {
             "action": "rose-", 
+            "column": "145", 
             "kind": "action", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah --rose--", 
@@ -867,12 +876,14 @@
             "time": "11:35:00"
         }, 
         {
+            "column": "147", 
             "heading": "BILLS - SECOND", 
             "kind": "heading", 
             "original": "BILLS - SECOND", 
             "time": "11:35:00"
         }, 
         {
+            "column": "147", 
             "heading": "CONSIDERATION STAGE", 
             "kind": "heading", 
             "original": "CONSIDERATION STAGE", 
@@ -925,6 +936,7 @@
         }, 
         {
             "action": "rose-", 
+            "column": "147", 
             "kind": "action", 
             "name": "MrKobina T. Hammond", 
             "original": "MrKobina T. Hammond --rose--", 
@@ -1032,10 +1044,10 @@
         {
             "column": "150", 
             "kind": "speech", 
-            "name": "Mr H. Iddrisu: Mr Speaker, I beg with your leave, to move that clause 1A (4) also is subjected to a \u2018second Consideration Stage and that clause 4 (a) with your indulgence should read as follows", 
+            "name": "Mr H. Iddrisu", 
             "original": "Mr H. Iddrisu: Mr Speaker, I beg with your leave, to move that clause 1A (4) also is subjected to a \u2018second Consideration Stage and that clause 4 (a) with your indulgence should read as follows:", 
             "section": "CONSIDERATION STAGE", 
-            "speech": "\"The Minister may grant the permit on the recommendations of the Board\". .\n Question put and amendment agreed to.", 
+            "speech": "Mr Speaker, I beg with your leave, to move that clause 1A (4) also is subjected to a \u2018second Consideration Stage and that clause 4 (a) with your indulgence should read as follows:\n \"The Minister may grant the permit on the recommendations of the Board\". .\n Question put and amendment agreed to.", 
             "time": "11:45:00"
         }, 
         {
@@ -1086,10 +1098,10 @@
         {
             "column": "151", 
             "kind": "speech", 
-            "name": "Mr First Deputy Speaker: Hon Members, the matter had been taken care of in What we did yesterday. Look at page 11 of the Votes and Proceedings of yesterday - the amendment stands in the name of the Hon Minority Leader which read as follows", 
+            "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, the matter had been taken care of in What we did yesterday. Look at page 11 of the Votes and Proceedings of yesterday - the amendment stands in the name of the Hon Minority Leader which read as follows:\nHon Minister, are you satisfied?\n_ Alhaji Dauda: Mr Speaker, I am satisfied.", 
             "section": "CONSIDERATION STAGE", 
-            "speech": "\"The Minister may on the approval of the Board grant permit subject to\". -\n\nHon Minister, are you satisfied?\n\n_ Alhaji Dauda: Mr Speaker, I am satisfied.", 
+            "speech": "Hon Members, the matter had been taken care of in What we did yesterday. Look at page 11 of the Votes and Proceedings of yesterday - the amendment stands in the name of the Hon Minority Leader which read as follows:\n \"The Minister may on the approval of the Board grant permit subject to\". -\n\nHon Minister, are you satisfied?\n\n_ Alhaji Dauda: Mr Speaker, I am satisfied.", 
             "time": "11:55:00"
         }, 
         {
@@ -1138,6 +1150,7 @@
             "time": "11:55:00"
         }, 
         {
+            "column": "152", 
             "heading": "BILLS --THIRD READING", 
             "kind": "heading", 
             "original": "BILLS --THIRD READING", 
@@ -1199,6 +1212,7 @@
         }, 
         {
             "chair": "MR SECOND DEPUTY SPEAKER", 
+            "column": "153", 
             "kind": "chair", 
             "original": "[MR SECOND DEPUTY SPEAKER IN\n\nTHE CHAIR]", 
             "time": "11:55:00"
@@ -1276,6 +1290,7 @@
             "time": "11:55:00"
         }, 
         {
+            "column": "156", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

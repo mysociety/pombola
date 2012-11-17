@@ -1,24 +1,28 @@
 {
     "entries": [
         {
+            "column": "751", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "751", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "751", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
             "time": null
         }, 
         {
+            "column": "751", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
@@ -376,6 +380,7 @@
             "time": "11:15:00"
         }, 
         {
+            "column": "759", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -401,6 +406,7 @@
         }, 
         {
             "chair": "MR FIRST DEPUTY SPEAKER", 
+            "column": "768", 
             "kind": "chair", 
             "original": "[MR FIRST DEPUTY SPEAKER IN THE\n\nCHAIR]", 
             "time": "11:42:00"
@@ -496,6 +502,7 @@
             "time": "11:45:00"
         }, 
         {
+            "column": "771", 
             "heading": "BILLS--SECOND READING", 
             "kind": "heading", 
             "original": "BILLS--SECOND READING", 
@@ -503,6 +510,7 @@
         }, 
         {
             "action": "rose\u2013", 
+            "column": "771", 
             "kind": "action", 
             "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu --rose\u2013-", 
@@ -698,6 +706,7 @@
             "time": "11:55:00"
         }, 
         {
+            "column": "787", 
             "heading": "-", 
             "kind": "heading", 
             "original": "-", 
@@ -707,9 +716,18 @@
             "column": "793", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Hon Ranking Member, the Report indicated that they would award degrees. What kind of degrees would they award\u2018? [Pause]\nassociate myself with the Motion ably moved by the Hon Deputy Minister, Hon Mahama Ayariga and in doing so, to refer you to paragraph 8(ii), page (4) of your Committee\u2019s Report.", 
+            "original": "Mr First Deputy Speaker: Hon Ranking Member, the Report indicated that they would award degrees. What kind of degrees would they award\u2018? [Pause]", 
             "section": "-", 
-            "speech": "Hon Ranking Member, the Report indicated that they would award degrees. What kind of degrees would they award\u2018? [Pause]\n Hon Minister for Communication Alhaji?\n Minister for Communications Alhaji Haruna Iddrisu) (MP): Mr Speaker, thank you very much for the opportunity to\n\nassociate myself with the Motion ably moved by the Hon Deputy Minister, Hon Mahama Ayariga and in doing so, to refer you to paragraph 8(ii), page (4) of your Committee\u2019s Report.", 
+            "speech": "Hon Ranking Member, the Report indicated that they would award degrees. What kind of degrees would they award\u2018? [Pause]\n Hon Minister for Communication Alhaji?", 
+            "time": "12:05:00"
+        }, 
+        {
+            "column": "793", 
+            "kind": "speech", 
+            "name": "Minister for Communications Alhaji Haruna Iddrisu) (MP)", 
+            "original": "Minister for Communications Alhaji Haruna Iddrisu) (MP): Mr Speaker, thank you very much for the opportunity to\nassociate myself with the Motion ably moved by the Hon Deputy Minister, Hon Mahama Ayariga and in doing so, to refer you to paragraph 8(ii), page (4) of your Committee\u2019s Report.", 
+            "section": "-", 
+            "speech": "Mr Speaker, thank you very much for the opportunity to\n\nassociate myself with the Motion ably moved by the Hon Deputy Minister, Hon Mahama Ayariga and in doing so, to refer you to paragraph 8(ii), page (4) of your Committee\u2019s Report.", 
             "time": "12:05:00"
         }, 
         {
@@ -787,16 +805,16 @@
         {
             "column": "797", 
             "kind": "speech", 
-            "name": "Mrs Gifty E. Kusi: (NPP --Tarkwa- Nsuaem)", 
+            "name": "Mrs Gifty E. Kusi", 
             "original": "Mrs Gifty E. Kusi: (NPP --Tarkwa- Nsuaem): Mr Speaker, I rise to support the Motion on the floor to approve the Committee\u2018s Report on the Colleges Education Bill, 2011.\nof reducing the Vice\u2019s to three years. I do not know, maybe, they will have a reason. The Hon Deputy Minister can explain when he is winding up.\nMr Speaker, I would also want to say on award of degrees-- They say they want to restrict them only to diplomas because there are other institutions that award degrees. The institutions are few; so if they would even upgrade them and make sure that some do award degrees and some graduate when the developing of the country gets to a state that we can accommodate that, it will be better. This is because the population of the country is growing so big and private universities are springing up here and there. So if government universities \"would be increased as time goes on, I think that will also be good. So these are my comments.\nI thank you, Mr Speaker, for the opportunity.\nMS Beatrice B. Boateng (NPP --New Juaben South): Mr Speaker, I thank you for the opportunity given me to add my voice to the Motion on floor, that is, the Colleges of Education Bill , 2011.\nMr Speaker, I would want to thank the Hon Minister and the Hon Chairman for ably moving this Motion\u2018 and I would also want to thank God for having the asset of saying that it is better late than never. This proposal, I believe, has been too late but thank God, whatever it is, it has now come to the fore. It has today seen the light and I believe the lecturers and teachers concerned would want me to convey their appreciation to the House for how far we have brought this thing.\nI know the number of Motions, the number of memoranda, the number of letters, personal interactions that have gone into having this Bill being moved to day for a Second Reading and I would want to appreciate all those concerned who have made this a reality.", 
             "section": "-", 
-            "speech": "Mr Speaker, I rise to support the Motion on the floor to approve the Committee\u2018s Report on the Colleges Education Bill, 2011.\n Mr Speaker, I would want to support the Committee\u2019s Report which says that College Principals should be made to hold office for a period of four years but they are also recommending that the Vice~ Principal should hold office for three years.\n I would want the Committee to consider the number of years, so that the Principal and the Vice will have four years instead\n\nof reducing the Vice\u2019s to three years. I do not know, maybe, they will have a reason. The Hon Deputy Minister can explain when he is winding up.\n\nMr Speaker, I would also want to say on award of degrees-- They say they want to restrict them only to diplomas because there are other institutions that award degrees. The institutions are few; so if they would even upgrade them and make sure that some do award degrees and some graduate when the developing of the country gets to a state that we can accommodate that, it will be better. This is because the population of the country is growing so big and private universities are springing up here and there. So if government universities \"would be increased as time goes on, I think that will also be good. So these are my comments.\n\nI thank you, Mr Speaker, for the opportunity.\n\nMS Beatrice B. Boateng (NPP --New Juaben South): Mr Speaker, I thank you for the opportunity given me to add my voice to the Motion on floor, that is, the Colleges of Education Bill , 2011.\n\nMr Speaker, I would want to thank the Hon Minister and the Hon Chairman for ably moving this Motion\u2018 and I would also want to thank God for having the asset of saying that it is better late than never. This proposal, I believe, has been too late but thank God, whatever it is, it has now come to the fore. It has today seen the light and I believe the lecturers and teachers concerned would want me to convey their appreciation to the House for how far we have brought this thing.\n\nI know the number of Motions, the number of memoranda, the number of letters, personal interactions that have gone into having this Bill being moved to day for a Second Reading and I would want to appreciate all those concerned who have made this a reality.", 
+            "speech": "(NPP --Tarkwa- Nsuaem): Mr Speaker, I rise to support the Motion on the floor to approve the Committee\u2018s Report on the Colleges Education Bill, 2011.\n Mr Speaker, I would want to support the Committee\u2019s Report which says that College Principals should be made to hold office for a period of four years but they are also recommending that the Vice~ Principal should hold office for three years.\n I would want the Committee to consider the number of years, so that the Principal and the Vice will have four years instead\n\nof reducing the Vice\u2019s to three years. I do not know, maybe, they will have a reason. The Hon Deputy Minister can explain when he is winding up.\n\nMr Speaker, I would also want to say on award of degrees-- They say they want to restrict them only to diplomas because there are other institutions that award degrees. The institutions are few; so if they would even upgrade them and make sure that some do award degrees and some graduate when the developing of the country gets to a state that we can accommodate that, it will be better. This is because the population of the country is growing so big and private universities are springing up here and there. So if government universities \"would be increased as time goes on, I think that will also be good. So these are my comments.\n\nI thank you, Mr Speaker, for the opportunity.\n\nMS Beatrice B. Boateng (NPP --New Juaben South): Mr Speaker, I thank you for the opportunity given me to add my voice to the Motion on floor, that is, the Colleges of Education Bill , 2011.\n\nMr Speaker, I would want to thank the Hon Minister and the Hon Chairman for ably moving this Motion\u2018 and I would also want to thank God for having the asset of saying that it is better late than never. This proposal, I believe, has been too late but thank God, whatever it is, it has now come to the fore. It has today seen the light and I believe the lecturers and teachers concerned would want me to convey their appreciation to the House for how far we have brought this thing.\n\nI know the number of Motions, the number of memoranda, the number of letters, personal interactions that have gone into having this Bill being moved to day for a Second Reading and I would want to appreciate all those concerned who have made this a reality.", 
             "time": "12:05:00"
         }, 
         {
             "column": "799", 
             "kind": "speech", 
-            "name": "Mrs Gifty E. Kusi: (NPP --Tarkwa- Nsuaem)", 
+            "name": "Mrs Gifty E. Kusi", 
             "original": "[MS BOATENG]\nwhat they have set up for them, so that we do not have a situation of this nature happening again.\nMr Speaker, I also think that there are a few things that the Hon Ranking Member has enumerated as needs to put them on their feet. They are very necessary. But then we also expect the Board, whoever is in charge of running this institution, to also move ahead. They should be innovative enough to try to come out with good things, to be seen to be new wine in a new bottle and not new wine in an old bottle, so that sooner, we would have very progressive colleges of education in the offing.\nMr Speaker, I am also trying to say that Government should also play its part. We do not like the lip-service that normally characters a lot of things that we do here. We really Want to see things happening. If it is infrastructure, they should be put forward quickly, so that they start working. If it is managerial things, they should be put in place to see them start work as soon as possible, so that all these efforts that we have put in to come that far with this Bill, will not be in vain. I would want to congratulate all and urge the House to move for its acceptance when it comes to the final Vote.\nMr Speaker, thank you for ,this opportunity.", 
             "section": "-", 
             "speech": "Mr Speaker, I would want to commend all of us for the time we have spent in coming up with this Bill and to say that it is not for anything that certain observations have been made and these observations include the award of degrees or certificates. For this, we are saying that for now and for a start, we should restrict them to the award of diplomas and other certificates, hoping that with time, we could go ahead to improve upon what we have now. So that is that.\n Mr Speaker, we have also talked about affiliation. I am very much concerned about this affiliation issue because just this morning, we have heard and read that some students in one of our private universities, almost 700, have been asked to go home for not having the entry requirements.\n The question is, how did they find their way into the universities? What were the criteria that were put down by the affiliated institutions that were guiding them? If they were going strictly by them, why will this thing happen to confuse a lot of students, their parents and the country as a whole? Huge fees and the like - I spoke on one of the radio stations and proposed that if they had agreed to refund their moneys to them, it should not be just the moneys they have given to them.\n They should charge them on the prevailing interest rate\u2018 and then they should also consider the emotional trauma, other problems that they might have associated with --- the embarrassment --- and pay whatever they are to them. It is for this reason that I am also trying to stress that these \u2018colleges of education, as they come into being, should take every observation that we have made to the letter and they should go strictly by the affiliated institutions,\n\nwhat they have set up for them, so that we do not have a situation of this nature happening again.\n\nMr Speaker, I also think that there are a few things that the Hon Ranking Member has enumerated as needs to put them on their feet. They are very necessary. But then we also expect the Board, whoever is in charge of running this institution, to also move ahead. They should be innovative enough to try to come out with good things, to be seen to be new wine in a new bottle and not new wine in an old bottle, so that sooner, we would have very progressive colleges of education in the offing.\n\nMr Speaker, I am also trying to say that Government should also play its part. We do not like the lip-service that normally characters a lot of things that we do here. We really Want to see things happening. If it is infrastructure, they should be put forward quickly, so that they start working. If it is managerial things, they should be put in place to see them start work as soon as possible, so that all these efforts that we have put in to come that far with this Bill, will not be in vain. I would want to congratulate all and urge the House to move for its acceptance when it comes to the final Vote.\n\nMr Speaker, thank you for ,this opportunity.", 
@@ -1028,6 +1046,7 @@
             "time": "12:35:00"
         }, 
         {
+            "column": "810", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

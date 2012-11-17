@@ -1,366 +1,427 @@
 {
     "entries": [
         {
+            "column": null, 
             "heading": "REGIONAL MINISTERS", 
             "kind": "heading", 
             "original": "REGIONAL MINISTERS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPUTY REGIONAL MINISTERS", 
             "kind": "heading", 
             "original": "DEPUTY REGIONAL MINISTERS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "NON CABINET MINISTERS", 
             "kind": "heading", 
             "original": "NON CABINET MINISTERS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "MJNISTERS OF STATE", 
             "kind": "heading", 
             "original": "MJNISTERS OF STATE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPUTY MINISTERS", 
             "kind": "heading", 
             "original": "DEPUTY MINISTERS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICERS AND OFFICIALS OF PARLIAMENT", 
             "kind": "heading", 
             "original": "OFFICERS AND OFFICIALS OF PARLIAMENT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICE OF THE MARJORITY LEADER", 
             "kind": "heading", 
             "original": "OFFICE OF THE MARJORITY LEADER", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICE OF THE MINORITY LEADER", 
             "kind": "heading", 
             "original": "OFFICE OF THE MINORITY LEADER", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "ALPHABETICAL LIST OF MEMBERS OF PARLIAMENT", 
             "kind": "heading", 
             "original": "ALPHABETICAL LIST OF MEMBERS OF PARLIAMENT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "B", 
             "kind": "heading", 
             "original": "B", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "C", 
             "kind": "heading", 
             "original": "C", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "D", 
             "kind": "heading", 
             "original": "D", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "E", 
             "kind": "heading", 
             "original": "E", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "F", 
             "kind": "heading", 
             "original": "F", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "G", 
             "kind": "heading", 
             "original": "G", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "H", 
             "kind": "heading", 
             "original": "H", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "I", 
             "kind": "heading", 
             "original": "I", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "J", 
             "kind": "heading", 
             "original": "J", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "K", 
             "kind": "heading", 
             "original": "K", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "L", 
             "kind": "heading", 
             "original": "L", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "M", 
             "kind": "heading", 
             "original": "M", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "N", 
             "kind": "heading", 
             "original": "N", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "P", 
             "kind": "heading", 
             "original": "P", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "Q", 
             "kind": "heading", 
             "original": "Q", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "S", 
             "kind": "heading", 
             "original": "S", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "T", 
             "kind": "heading", 
             "original": "T", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "W", 
             "kind": "heading", 
             "original": "W", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "Y", 
             "kind": "heading", 
             "original": "Y", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "Z", 
             "kind": "heading", 
             "original": "Z", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "SUMMARY OF PARLJAMENTARY SEATS", 
             "kind": "heading", 
             "original": "SUMMARY OF PARLJAMENTARY SEATS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENTARY SERVICE BOARD MEMBERS", 
             "kind": "heading", 
             "original": "PARLIAMENTARY SERVICE BOARD MEMBERS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICERS OF PARLIAMENTARY SERVICE", 
             "kind": "heading", 
             "original": "OFFICERS OF PARLIAMENTARY SERVICE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "CLERK TO PARLIAMENT", 
             "kind": "heading", 
             "original": "CLERK TO PARLIAMENT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPUTY CLERKS", 
             "kind": "heading", 
             "original": "DEPUTY CLERKS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICERS", 
             "kind": "heading", 
             "original": "OFFICERS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DIVISION OF LEGISLATIVE MANAGEMENT", 
             "kind": "heading", 
             "original": "DIVISION OF LEGISLATIVE MANAGEMENT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "ICT DEPARTMENT", 
             "kind": "heading", 
             "original": "ICT DEPARTMENT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPARTMENT OF OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "DEPARTMENT OF OFFICIAL REPORT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPARTMENT OF RESEARCH", 
             "kind": "heading", 
             "original": "DEPARTMENT OF RESEARCH", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPARTMENT OF LIBRARY", 
             "kind": "heading", 
             "original": "DEPARTMENT OF LIBRARY", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPARTMENT OF PUBLIC AFFAIRS", 
             "kind": "heading", 
             "original": "DEPARTMENT OF PUBLIC AFFAIRS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENTARY RESOURCE CENTRE", 
             "kind": "heading", 
             "original": "PARLIAMENTARY RESOURCE CENTRE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "AUDIO VISUAL UNIT", 
             "kind": "heading", 
             "original": "AUDIO VISUAL UNIT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENTARY RELATIONS AND PROTOCOL", 
             "kind": "heading", 
             "original": "PARLIAMENTARY RELATIONS AND PROTOCOL", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPARTMENT OF FINANCE", 
             "kind": "heading", 
             "original": "DEPARTMENT OF FINANCE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "STORES UNIT", 
             "kind": "heading", 
             "original": "STORES UNIT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "AUDIT DEPARTMENT", 
             "kind": "heading", 
             "original": "AUDIT DEPARTMENT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "CATERING UNIT", 
             "kind": "heading", 
             "original": "CATERING UNIT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPARTMENT OF THE MARSHAL", 
             "kind": "heading", 
             "original": "DEPARTMENT OF THE MARSHAL", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "SECURITY", 
             "kind": "heading", 
             "original": "SECURITY", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "TRANSPORT UNIT", 
             "kind": "heading", 
             "original": "TRANSPORT UNIT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "DEPARTMENT OF DEVELOPMENT", 
             "kind": "heading", 
             "original": "DEPARTMENT OF DEVELOPMENT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENTARY DEBATES", 
             "kind": "heading", 
             "original": "PARLIAMENTARY DEBATES", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "OFFICIAL REPORT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "IN THE FIRST MEETING OF THE FOURTH SESSION OF THE", 
             "kind": "heading", 
             "original": "IN THE FIRST MEETING OF THE FOURTH SESSION OF THE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "FIFTH PARLIAMENT OF T HE FOURTH REPUBLIC OF GHANA", 
             "kind": "heading", 
             "original": "FIFTH PARLIAMENT OF T HE FOURTH REPUBLIC OF GHANA", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "TWENTIETH YEAR OF THE FOURTH REPUBLIC", 
             "kind": "heading", 
             "original": "TWENTIETH YEAR OF THE FOURTH REPUBLIC", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -368,17 +429,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": null, 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "10:25:00"
         }, 
         {
+            "column": null, 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "10:25:00"
         }, 
         {
+            "column": null, 
             "heading": "WELCOME ADDRESS", 
             "kind": "heading", 
             "original": "WELCOME ADDRESS", 
@@ -403,6 +467,7 @@
             "time": "10:25:00"
         }, 
         {
+            "column": "3", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -420,10 +485,10 @@
         {
             "column": "3", 
             "kind": "speech", 
-            "name": "Mr Cletus A. Avoka: Madam Speaker, column 3131, under my name, the next paragraph reads", 
+            "name": "Mr Cletus A. Avoka", 
             "original": "Mr Cletus A. Avoka: Madam Speaker, column 3131, under my name, the next paragraph reads:", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "\"Many Motions are ready for debate this morning but with your kind permission, I would want us to take Motion number 9 out of ten.\" They have put in here \"ten\". alt is \"out of turn\".\n It is not number \"ten\".", 
+            "speech": "Madam Speaker, column 3131, under my name, the next paragraph reads:\n \"Many Motions are ready for debate this morning but with your kind permission, I would want us to take Motion number 9 out of ten.\" They have put in here \"ten\". alt is \"out of turn\".\n It is not number \"ten\".", 
             "time": "10:35:00"
         }, 
         {
@@ -634,6 +699,7 @@
             "time": "10:45:00"
         }, 
         {
+            "column": "10", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -1127,6 +1193,7 @@
         }, 
         {
             "action": "rose", 
+            "column": "24", 
             "kind": "action", 
             "name": "Mr Isaac K. Asiamah", 
             "original": "Mr Isaac K. Asiamah - rose-", 
@@ -1259,6 +1326,7 @@
             "time": "11:25:00"
         }, 
         {
+            "column": "28", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

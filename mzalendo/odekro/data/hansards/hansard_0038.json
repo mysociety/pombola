@@ -1,18 +1,21 @@
 {
     "entries": [
         {
+            "column": "99", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "99", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "99", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -20,17 +23,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": "99", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": null
         }, 
         {
+            "column": "99", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": null
         }, 
         {
+            "column": "99", 
             "heading": "ANNOUNCEMENTS", 
             "kind": "heading", 
             "original": "ANNOUNCEMENTS", 
@@ -40,30 +46,43 @@
             "column": "99", 
             "kind": "speech", 
             "name": "Madam Speaker", 
-            "original": "Madam Speaker: Hon Members, I have received communication from His Excellency the President and I will read it to you.\nAmbassador Amin Amidu Sulemani, currently Ghana\u2018s Ambassador to Egypt - Minister-designate for Upper West Region.\nDeputy Ministers-designate: Hon Stephen Ackah, Member of Parliament for Suaman - Deputy Minister -designate for the Ministry of Local Government and Rural Development;\nMr Isaac Vanderpuiye - Deputy Minister designate for Greater Accra Region;\nMr Henry Ametepey - Deputy Minister-designate for the Volta Region.\nKindly accept, Right Honourable, the assurances of my highest consideration.\n(Sgd.) PROF. JOHN EVANS ATTA MILLS", 
+            "original": "Madam Speaker: Hon Members, I have received communication from His Excellency the President and I will read it to you.", 
             "section": "ANNOUNCEMENTS", 
-            "speech": "Hon Members, I have received communication from His Excellency the President and I will read it to you.\n \"25th January, 2012\n Right Honourable Speaker,\n I wish to inform you that I have nominated for consideration by Parliament the following:\n Ministers-designate:\n Hon Moses Asaga, Member of Parliament for Nabdam - Minister-designate for Employment and Social Welfare;\n Mr William Kwasi Aboah - Minister designate for the Interior\n Ambassador Lee Ocran, Ghana\u2019s High Commissioner to South Africa- Minister-designate for Education;\n Hon Fritz Baffour, Member of Parliament for Ablekuma South - Minister designate for Information;\n Hon Dominic Azimbe Azumah, Member of Parliament for Garuf Tempane - Minister of State-designate at the Presidency; and\n\nAmbassador Amin Amidu Sulemani, currently Ghana\u2018s Ambassador to Egypt - Minister-designate for Upper West Region.\n\nDeputy Ministers-designate: Hon Stephen Ackah, Member of Parliament for Suaman - Deputy Minister -designate for the Ministry of Local Government and Rural Development;\n\nMr Isaac Vanderpuiye - Deputy Minister designate for Greater Accra Region;\n\nMr Henry Ametepey - Deputy Minister-designate for the Volta Region.\n\nKindly accept, Right Honourable, the assurances of my highest consideration.\n\n(Sgd.) PROF. JOHN EVANS ATTA MILLS", 
+            "speech": "Hon Members, I have received communication from His Excellency the President and I will read it to you.\n \"25th January, 2012\n Right Honourable Speaker,\n I wish to inform you that I have nominated for consideration by Parliament the following:", 
             "time": null
         }, 
         {
+            "column": "99", 
+            "kind": "speech", 
+            "name": "Ministers-designate", 
+            "original": "Ministers-designate:\nAmbassador Amin Amidu Sulemani, currently Ghana\u2018s Ambassador to Egypt - Minister-designate for Upper West Region.\nDeputy Ministers-designate: Hon Stephen Ackah, Member of Parliament for Suaman - Deputy Minister -designate for the Ministry of Local Government and Rural Development;\nMr Isaac Vanderpuiye - Deputy Minister designate for Greater Accra Region;\nMr Henry Ametepey - Deputy Minister-designate for the Volta Region.\nKindly accept, Right Honourable, the assurances of my highest consideration.\n(Sgd.) PROF. JOHN EVANS ATTA MILLS", 
+            "section": "ANNOUNCEMENTS", 
+            "speech": "Hon Moses Asaga, Member of Parliament for Nabdam - Minister-designate for Employment and Social Welfare;\n Mr William Kwasi Aboah - Minister designate for the Interior\n Ambassador Lee Ocran, Ghana\u2019s High Commissioner to South Africa- Minister-designate for Education;\n Hon Fritz Baffour, Member of Parliament for Ablekuma South - Minister designate for Information;\n Hon Dominic Azimbe Azumah, Member of Parliament for Garuf Tempane - Minister of State-designate at the Presidency; and\n\nAmbassador Amin Amidu Sulemani, currently Ghana\u2018s Ambassador to Egypt - Minister-designate for Upper West Region.\n\nDeputy Ministers-designate: Hon Stephen Ackah, Member of Parliament for Suaman - Deputy Minister -designate for the Ministry of Local Government and Rural Development;\n\nMr Isaac Vanderpuiye - Deputy Minister designate for Greater Accra Region;\n\nMr Henry Ametepey - Deputy Minister-designate for the Volta Region.\n\nKindly accept, Right Honourable, the assurances of my highest consideration.\n\n(Sgd.) PROF. JOHN EVANS ATTA MILLS", 
+            "time": null
+        }, 
+        {
+            "column": "100", 
             "heading": "PRESIDENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PRESIDENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "100", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
             "time": null
         }, 
         {
+            "column": "100", 
             "heading": "OFFICE OF PARLIAMENT", 
             "kind": "heading", 
             "original": "OFFICE OF PARLIAMENT", 
             "time": null
         }, 
         {
+            "column": "100", 
             "heading": "STATE HOUSE", 
             "kind": "heading", 
             "original": "STATE HOUSE", 
@@ -124,30 +143,35 @@
             "time": "11:00:00"
         }, 
         {
+            "column": "101", 
             "heading": "THE RT HON SPEAKER", 
             "kind": "heading", 
             "original": "THE RT HON SPEAKER", 
             "time": "11:00:00"
         }, 
         {
+            "column": "101", 
             "heading": "PARLIAMENT HOUSE", 
             "kind": "heading", 
             "original": "PARLIAMENT HOUSE", 
             "time": "11:00:00"
         }, 
         {
+            "column": "101", 
             "heading": "ACCRA", 
             "kind": "heading", 
             "original": "ACCRA", 
             "time": "11:00:00"
         }, 
         {
+            "column": "101", 
             "heading": "PRESIDENT OF THE REPUBLIC OF", 
             "kind": "heading", 
             "original": "PRESIDENT OF THE REPUBLIC OF", 
             "time": "11:00:00"
         }, 
         {
+            "column": "101", 
             "heading": "GHANA", 
             "kind": "heading", 
             "original": "GHANA", 
@@ -408,16 +432,16 @@
         {
             "column": "106", 
             "kind": "speech", 
-            "name": "Mr Joseph Y. Chireh: Madam Speaker, first of all, this publication that my Hon Colleague is referring to is only for the day Parliament is reconvening that this information is provided. Now, this information is provided on the Ministers, Deputy Ministers, Regional Ministers and their Deputies. [An Hon Member", 
+            "name": "Mr Joseph Y. Chireh", 
             "original": "Mr Joseph Y. Chireh: Madam Speaker, first of all, this publication that my Hon Colleague is referring to is only for the day Parliament is reconvening that this information is provided. Now, this information is provided on the Ministers, Deputy Ministers, Regional Ministers and their Deputies. [An Hon Member: By who?] That has been the practice since", 
             "section": "GHANA", 
-            "speech": "By who?] That has been the practice since\n 1993.\n Now, the position he is talking about, when an official statement is issued by the President, accepting or asking an Hon Minister to step aside and then another Hon Minister to act in his stead, that is official notice to all of us. The report in the newspapers is just what the President has indicated. So, there is no issue involved in this.", 
+            "speech": "Madam Speaker, first of all, this publication that my Hon Colleague is referring to is only for the day Parliament is reconvening that this information is provided. Now, this information is provided on the Ministers, Deputy Ministers, Regional Ministers and their Deputies. [An Hon Member: By who?] That has been the practice since\n 1993.\n Now, the position he is talking about, when an official statement is issued by the President, accepting or asking an Hon Minister to step aside and then another Hon Minister to act in his stead, that is official notice to all of us. The report in the newspapers is just what the President has indicated. So, there is no issue involved in this.", 
             "time": "11:00:00"
         }, 
         {
             "column": "107", 
             "kind": "continued speech", 
-            "name": "Mr Joseph Y. Chireh: Madam Speaker, first of all, this publication that my Hon Colleague is referring to is only for the day Parliament is reconvening that this information is provided. Now, this information is provided on the Ministers, Deputy Ministers, Regional Ministers and their Deputies. [An Hon Member", 
+            "name": "Mr Joseph Y. Chireh", 
             "original": "[MR CHIREH]", 
             "section": "GHANA", 
             "speech": "Number two, to enforce what my Hon Leader said, the practice has been that those Hon Ministers who have been vetted before by the Appointments Committee, the moment it is announced that they have been moved to another Ministry, that becomes the official notice again from the Presidency.\n Yesterday, for instance, the President\u2019s Secretary issued a statement and it is notice. If Parliament now desires that even in the ministerial re-arrangement or reshuffle, Parliament should be informed officially, again, it can be done. But this is not required at all by any of our Standing Orders.\n I would want to emphasise that this practice is only for the day of the reconvening. It is not everyday that the you put in the Hansard when - and I am saying that appropriate information has been provided by the President.", 
@@ -443,6 +467,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "108", 
             "kind": "action", 
             "name": "Dr Mathew O. Prempeh", 
             "original": "Dr Mathew O. Prempeh - rose -", 
@@ -611,6 +636,7 @@
             "time": "11:20:00"
         }, 
         {
+            "column": "114", 
             "heading": "MOTIONS", 
             "kind": "heading", 
             "original": "MOTIONS", 
@@ -725,42 +751,49 @@
             "time": "11:20:00"
         }, 
         {
+            "column": "127", 
             "heading": "INTERNAL REVENUE SERVICE", 
             "kind": "heading", 
             "original": "INTERNAL REVENUE SERVICE", 
             "time": "11:20:00"
         }, 
         {
+            "column": "127", 
             "heading": "GHANA REVENUE AUTHORITY", 
             "kind": "heading", 
             "original": "GHANA REVENUE AUTHORITY", 
             "time": "11:20:00"
         }, 
         {
+            "column": "127", 
             "heading": "DOMESTIC TAX REVENUE DIVISION", 
             "kind": "heading", 
             "original": "DOMESTIC TAX REVENUE DIVISION", 
             "time": "11:20:00"
         }, 
         {
+            "column": "127", 
             "heading": "REQUEST FOR CONFIRMATION OF CORPORATE AND", 
             "kind": "heading", 
             "original": "REQUEST FOR CONFIRMATION OF CORPORATE AND", 
             "time": "11:20:00"
         }, 
         {
+            "column": "127", 
             "heading": "EXPATRIATE INCOME TAX ASSESSMENT FOR MAMPONG", 
             "kind": "heading", 
             "original": "EXPATRIATE INCOME TAX ASSESSMENT FOR MAMPONG", 
             "time": "11:20:00"
         }, 
         {
+            "column": "127", 
             "heading": "WATER SUPPLY EXPANSION AND REHABILITATIONS PROJECT", 
             "kind": "heading", 
             "original": "WATER SUPPLY EXPANSION AND REHABILITATIONS PROJECT", 
             "time": "11:20:00"
         }, 
         {
+            "column": "127", 
             "heading": "IN ASHANTI REGION", 
             "kind": "heading", 
             "original": "IN ASHANTI REGION", 
@@ -768,6 +801,7 @@
         }, 
         {
             "action": "designate for Employment and Social Welfare ", 
+            "column": "132", 
             "kind": "action", 
             "name": "Madam Speaker, I am addressing the Hon Minister and he is in conversation with his Minister", 
             "original": "Madam Speaker, I am addressing the Hon Minister and he is in conversation with his Minister-designate for Employment and Social Welfare -", 
@@ -1036,6 +1070,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "142", 
             "kind": "action", 
             "name": "Mr Asaga", 
             "original": "Mr Asaga - rose -", 
@@ -1169,6 +1204,7 @@
         }, 
         {
             "action": "rose ", 
+            "column": "144", 
             "kind": "action", 
             "name": "Mr Asaga", 
             "original": "Mr Asaga - rose -", 
@@ -1373,9 +1409,28 @@
             "time": "11:50:00"
         }, 
         {
+            "column": "148", 
             "heading": "RESOLUTIONS", 
             "kind": "heading", 
             "original": "RESOLUTIONS", 
+            "time": "11:50:00"
+        }, 
+        {
+            "column": "148", 
+            "kind": "speech", 
+            "name": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor)", 
+            "original": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor): Madam Speaker, I beg to move, that this Honourable House is respectfully requested to adopt the following Resolution:", 
+            "section": "RESOLUTIONS", 
+            "speech": "Madam Speaker, I beg to move, that this Honourable House is respectfully requested to adopt the following Resolution:\n WHEREAS by the provisions of article 174 (2) of the Constitution, Parliament is empowered to confer power on any person or authority to waive or vary a tax imposed by an Act of Parliament;\n THE EXERCISE of any power conferred, on any person or authority to waive or vary a tax in favour of any person or authority is by the said provisions made subject to the prior approval of Parliament t by resolution;\n BY THE COMBINED operation of the provisions of section 26 (2) of the Customs, Excise and Preventive Service (Management) Law, 1993 (PNDCL 330), the Export and Import Act, 1995 (Act 503), the Export Development and Investment Fund Act, 2000 (Act 582), the ValueAdded Tax Act, 1998 (Act 546), the Value Added Tax (Amendment) Act, 2000 (Act 579) and other existing Laws and Regulations applicable to the collection of customs duties and other taxes on the importation of goods into Ghana, the Minister for Finance and Economic Planning may exempt any statutory corporation, institution or individual from the payment of duties and taxes, otherwise, payable under the said laws and Regulations or waive", 
+            "time": "11:50:00"
+        }, 
+        {
+            "column": "149", 
+            "kind": "speech", 
+            "name": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor)", 
+            "original": "[DR DUFFUOR]\nthousand, eight hundred and thirty- three United States dollars (US$4,666,833.00) and corporate and expatriate income taxes amounting to one million, three hundred and sixty-eight thousand, one hundred and thirty-nine Ghana cedis, thirty- eight Ghana pesewas (GH\u00a2 l ,368, 139.38) in respect of the Mampong Water Supply Rehabilitation and Expansion Project.", 
+            "section": "RESOLUTIONS", 
+            "speech": "or vary the requirement of such statutory corporation, institution or individual to pay such duties and taxes; IN ACCORDANCE with the provisions of the Constitution and at the request of the Government of Ghana, acting through the Minister responsible for Finance and Economic Planning, there has been laid before Parliament a request by the Minister for Finance and Economic Planning for the prior approval of Parliament the exercise by him of his power under the Laws and Regulations relating to the waiver and exemption of taxes and duties on equipment and materials to be imported or purchased locally in the sum of four million, six hundred and sixty-six thousand, eight hundred and thirty-three United States dollars (US$4,666,833.00) and corporate and expatriate income taxes amounting to one million, three hundred and sixty~ eight thousand, one hundred and thirty-nine Ghana cedis, thirty-eight Ghana pesewas (GH\u00a21,368,139.38) in respect of the Mampong Water Supply Rehabilitation and Expansion Project.\n NOW THEREFORE, this Honourable House hereby approves the exercise by the Minister responsible for Finance and Economic Planning of the power granted to him by Parliament by Statute to waive such taxes and duties or to exempt the payment of taxes and duties on equipment and materials to be imported or purchased locally in the sum of four million, six hundred and sixty-six\n\nthousand, eight hundred and thirty- three United States dollars (US$4,666,833.00) and corporate and expatriate income taxes amounting to one million, three hundred and sixty-eight thousand, one hundred and thirty-nine Ghana cedis, thirty- eight Ghana pesewas (GH\u00a2 l ,368, 139.38) in respect of the Mampong Water Supply Rehabilitation and Expansion Project.", 
             "time": "11:50:00"
         }, 
         {
@@ -1425,6 +1480,7 @@
         }, 
         {
             "chair": "MR FIRST DEPUTY SPEAKER", 
+            "column": "150", 
             "kind": "chair", 
             "original": "[MR FIRST DEPUTY SPEAKER IN THE\n\nCHAIR]", 
             "time": "12:10:00"
@@ -1439,9 +1495,19 @@
             "time": "12:10:00"
         }, 
         {
+            "column": "151", 
             "heading": "BILLS-SECOND READING", 
             "kind": "heading", 
             "original": "BILLS-SECOND READING", 
+            "time": "12:10:00"
+        }, 
+        {
+            "column": "151", 
+            "kind": "speech", 
+            "name": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor)", 
+            "original": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor): Mr Speaker, l beg to move, that the National Fiscal Stabilisation Levy (Repeal) Bill, 201 1 be now read a Second time.", 
+            "section": "BILLS-SECOND READING", 
+            "speech": "Mr Speaker, l beg to move, that the National Fiscal Stabilisation Levy (Repeal) Bill, 201 1 be now read a Second time.\n Mr Speaker, the obj ect of the Bill is to repeal the National Fiscal Stabilisation Levy Act, 2009 (Act 785). This was introduced in 2009 to raise additional funds for national development for a period of 18 months.\n However, Mr Speaker, in 2011 Government extended the levy for additional one year. Government in fulfilment of its pledge, has decided to discontinue this levy.\n Mr Speaker, I thank you.\n Question proposed.", 
             "time": "12:10:00"
         }, 
         {
@@ -1742,9 +1808,19 @@
             "time": "12:30:00"
         }, 
         {
+            "column": "162", 
             "heading": "BILLS -SECOND READING", 
             "kind": "heading", 
             "original": "BILLS -SECOND READING", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "162", 
+            "kind": "speech", 
+            "name": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor)", 
+            "original": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor): Mr Speaker, I beg to move, that the Customs and Excise (Duties and Other Taxes) (Amendment) Bill, 2011 be now read a Second time.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Mr Speaker, I beg to move, that the Customs and Excise (Duties and Other Taxes) (Amendment) Bill, 2011 be now read a Second time.\n Mr Speaker, the object of this Bill is to reduce the Environmental Excise Tax imposed on plastic packaging materials from 20 per cent to 15 per cent. The pharmaceutical and agricultural products are exempted from the Environmental Excise Tax, Mr Speaker. It is expected that the reduction would decrease the input costs for the production and packaging of products.\n Question proposed", 
             "time": "12:30:00"
         }, 
         {
@@ -1802,9 +1878,19 @@
             "time": "12:30:00"
         }, 
         {
+            "column": "165", 
             "heading": "BILLS -SECOND READING", 
             "kind": "heading", 
             "original": "BILLS -SECOND READING", 
+            "time": "12:40:00"
+        }, 
+        {
+            "column": "165", 
+            "kind": "speech", 
+            "name": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor)", 
+            "original": "Minister for Finance and Economic Planning (Dr Kwabena Duffuor): Mr Speaker, I beg to move that the Internal Revenue (Amendment) (No. 2) Bill, 2011 be now read a Second time.", 
+            "section": "BILLS -SECOND READING", 
+            "speech": "Mr Speaker, I beg to move that the Internal Revenue (Amendment) (No. 2) Bill, 2011 be now read a Second time.\n Mr Speaker, the object of this Bill is to amend the Internal Revenue Act 2000, Act 592. It would. be recalled that even though the Ghana Stock Exchange has over the past 20 years enjoyed tax holidays, total capitalisation of the exchange has not met the country's expectation. To scale up total capitalisation of the exchange, this Bill seeks to extend tax holiday of the Ghana Stock Exchange for another five years.\n Additionally, the exemption from Capital Gains Tax would also be extended for five years with the view to promoting investment and to augment activities of the stock exchange. I so move, Mr Speaker.\n Question proposed.", 
             "time": "12:40:00"
         }, 
         {
@@ -2085,6 +2171,7 @@
             "time": "13:00:00"
         }, 
         {
+            "column": "182", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

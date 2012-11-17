@@ -1,54 +1,63 @@
 {
     "entries": [
         {
+            "column": null, 
             "heading": "PARLIAMENTARY DEBATES", 
             "kind": "heading", 
             "original": "PARLIAMENTARY DEBATES", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "OFFICIAL REPORT", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "CONTENTS", 
             "kind": "heading", 
             "original": "CONTENTS", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "ANNOUNCEMENTS-", 
             "kind": "heading", 
             "original": "ANNOUNCEMENTS-", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "ORAL ANSWERS TO QUESTIONS--", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS--", 
             "time": null
         }, 
         {
+            "column": null, 
             "heading": "PAPERS -", 
             "kind": "heading", 
             "original": "PAPERS -", 
             "time": null
         }, 
         {
+            "column": "913", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "913", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "913", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -56,17 +65,20 @@
         }, 
         {
             "chair": "MADAM SPEAKER", 
+            "column": "913", 
             "kind": "chair", 
             "original": "[MADAM SPEAKER IN THE CHAIR]", 
             "time": "11:00:00"
         }, 
         {
+            "column": "913", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
             "time": "11:00:00"
         }, 
         {
+            "column": "913", 
             "heading": "ANNOUNCEMENTS", 
             "kind": "heading", 
             "original": "ANNOUNCEMENTS", 
@@ -109,6 +121,7 @@
             "time": "11:00:00"
         }, 
         {
+            "column": "915", 
             "heading": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
             "kind": "heading", 
             "original": "Votes and Proceedings and the Official Report", 
@@ -158,15 +171,26 @@
             "time": "11:10:00"
         }, 
         {
+            "column": "915", 
             "heading": "ORAL ANSWERS TO QUESTIONS", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS", 
             "time": "11:10:00"
         }, 
         {
+            "column": "915", 
             "heading": "MINISTRY OF THE INTERIOR", 
             "kind": "heading", 
             "original": "MINISTRY OF THE INTERIOR", 
+            "time": "11:10:00"
+        }, 
+        {
+            "column": "915", 
+            "kind": "speech", 
+            "name": "Minister for the Interior (Mr William Kwasi Aboah)", 
+            "original": "Minister for the Interior (Mr William Kwasi Aboah): Madam Speaker, the Attorney-General and Minister for Justice, in collaboration with the Ghana Prisons Service, Ghana Police Service and the Judiciary Service has instituted the \"Justice for all Court Programme\" which aims at:\naddressing problems of untried prisoners who have been on remand for very long periods of time and usually on expired warrants;\nconsidering all such cases and, either reviewing expired warrants or discharging deserving inmates; and\nensuring fair and expeditious hearing and trial of cases of remand prisoners.", 
+            "section": "MINISTRY OF THE INTERIOR", 
+            "speech": "Madam Speaker, the Attorney-General and Minister for Justice, in collaboration with the Ghana Prisons Service, Ghana Police Service and the Judiciary Service has instituted the \"Justice for all Court Programme\" which aims at:\n\naddressing problems of untried prisoners who have been on remand for very long periods of time and usually on expired warrants;\n\nconsidering all such cases and, either reviewing expired warrants or discharging deserving inmates; and\n\nensuring fair and expeditious hearing and trial of cases of remand prisoners.", 
             "time": "11:10:00"
         }, 
         {
@@ -496,10 +520,10 @@
         {
             "column": "922", 
             "kind": "speech", 
-            "name": "Mr Aboah: Madam Speaker, Ghana and its neighbouring States have agreed on the times borders are to remain opened for travellers. The borders with la Cote d\u2019Ivoire and Burkina Faso are opened from 06:00 hours to 18:30 hours. With respect to Togo, the Aflao border is opened from 06:00 hours to 18", 
+            "name": "Mr Aboah", 
             "original": "Mr Aboah: Madam Speaker, Ghana and its neighbouring States have agreed on the times borders are to remain opened for travellers. The borders with la Cote d\u2019Ivoire and Burkina Faso are opened from 06:00 hours to 18:30 hours. With respect to Togo, the Aflao border is opened from 06:00 hours to 18:00 hours.", 
             "section": "MINISTRY OF THE INTERIOR", 
-            "speech": "00 hours.\n It had been the wish of the Government of Ghana to operate the vital posts of Aflao, Elubo and Paga for twenty-four hours daily to facilitate trade and movement of persons. This has been a subject of high level security discussions between the Government and her neighbouring States. Agreements, however, are yet to be reached.", 
+            "speech": "Madam Speaker, Ghana and its neighbouring States have agreed on the times borders are to remain opened for travellers. The borders with la Cote d\u2019Ivoire and Burkina Faso are opened from 06:00 hours to 18:30 hours. With respect to Togo, the Aflao border is opened from 06:00 hours to 18:00 hours.\n It had been the wish of the Government of Ghana to operate the vital posts of Aflao, Elubo and Paga for twenty-four hours daily to facilitate trade and movement of persons. This has been a subject of high level security discussions between the Government and her neighbouring States. Agreements, however, are yet to be reached.", 
             "time": "11:20:00"
         }, 
         {
@@ -693,6 +717,7 @@
         }, 
         {
             "action": "rose -", 
+            "column": "926", 
             "kind": "action", 
             "name": "Mr Agyeman-Manu", 
             "original": "Mr Agyeman-Manu -- rose --", 
@@ -799,6 +824,7 @@
         }, 
         {
             "action": "rose-", 
+            "column": "927", 
             "kind": "action", 
             "name": "Dr Anthony A. Osei", 
             "original": "Dr Anthony A. Osei --rose--", 
@@ -940,6 +966,7 @@
             "time": "11:40:00"
         }, 
         {
+            "column": "930", 
             "heading": "PAPERS", 
             "kind": "heading", 
             "original": "PAPERS", 
@@ -1001,6 +1028,7 @@
         }, 
         {
             "action": "rose -", 
+            "column": "931", 
             "kind": "action", 
             "name": "Mr Avoka", 
             "original": "Mr Avoka -- rose --", 
@@ -1088,6 +1116,7 @@
             "time": "11:50:00"
         }, 
         {
+            "column": "934", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 

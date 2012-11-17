@@ -1,18 +1,21 @@
 {
     "entries": [
         {
+            "column": "111", 
             "heading": "THE", 
             "kind": "heading", 
             "original": "THE", 
             "time": null
         }, 
         {
+            "column": "111", 
             "heading": "PARLIAMENT OF THE REPUBLIC", 
             "kind": "heading", 
             "original": "PARLIAMENT OF THE REPUBLIC", 
             "time": null
         }, 
         {
+            "column": "111", 
             "heading": "OF GHANA", 
             "kind": "heading", 
             "original": "OF GHANA", 
@@ -20,11 +23,13 @@
         }, 
         {
             "chair": "MR SECOND DEPUTY SPEAKER", 
+            "column": "111", 
             "kind": "chair", 
             "original": "[MR SECOND DEPUTY SPEAKER IN\n\nTHE CHAIR]", 
             "time": "10:50:00"
         }, 
         {
+            "column": "111", 
             "heading": "PRAYERS", 
             "kind": "heading", 
             "original": "PRAYERS", 
@@ -83,15 +88,26 @@
             "time": "10:50:00"
         }, 
         {
+            "column": "111", 
             "heading": "ORAL ANSWERS TO QUESTIONS", 
             "kind": "heading", 
             "original": "ORAL ANSWERS TO QUESTIONS", 
             "time": "10:50:00"
         }, 
         {
+            "column": "111", 
             "heading": "MINISTRY OF EDUCATION", 
             "kind": "heading", 
             "original": "MINISTRY OF EDUCATION", 
+            "time": "10:50:00"
+        }, 
+        {
+            "column": "112", 
+            "kind": "speech", 
+            "name": "Minister for Education (Mrs Betty Mould-Iddrisu)", 
+            "original": "Minister for Education (Mrs Betty Mould-Iddrisu): Mr Speaker, the New Juaben Municipality in the Eastern Region has 84 kindergartens, 84 Primary Schools and 55 Junior High Schools.", 
+            "section": "MINISTRY OF EDUCATION", 
+            "speech": "Mr Speaker, the New Juaben Municipality in the Eastern Region has 84 kindergartens, 84 Primary Schools and 55 Junior High Schools.\n Currently, we are informed that 23 primary and 5 Junior High Schools are actually running the shift system. Out of the 23 primary schools, 17 are in the New Juaben South Constituency and 6 in the New Juaben North Constituency. All the 5 Junior High Schools which run the shift system are in the New Juaben South Constituency.\n The Municipal Assembly in its effort at providing infrastructure to stop the shift system has provided classroom blocks for Adweso R/C Primary and Junior High Schools and Ada Kyerematen M/A Schools at New Juaben South constituency. The Assembly is also in the process of completing a storey building at Nana Kwaku Boateng C & D Primary School and all in the New Juaben South Constituency.\n Nsukwao M/A A&B Primary Schools in the New Juaben South Constituency and Oyoko Roman Catholic Primary School in the New Juaben North Constituency have been merged due to low enrolment.\n There are plans also to merge schools where enrollment is not too high.", 
             "time": "10:50:00"
         }, 
         {
@@ -124,10 +140,10 @@
         {
             "column": "113", 
             "kind": "speech", 
-            "name": "Ms Boateng: Mr Speaker, from the third paragraph of the Hon Minister\u2019s Answer, and Mr Speaker, with your permission, l quote", 
+            "name": "Ms Boateng", 
             "original": "Ms Boateng: Mr Speaker, from the third paragraph of the Hon Minister\u2019s Answer, and Mr Speaker, with your permission, l quote:", 
             "section": "MINISTRY OF EDUCATION", 
-            "speech": "\"The Assembly is also in the process of completing a storey building. . .\n By the word \"completion\", my mind tells me that it has been started. But from my own observation, only one floor out of three storeys has been built. The one floor has been there for quite a long time now.\n Even last week when I went there, nothing more had been done. Again, because it has been \"floored\", water gathers there and it causes electrical\" shocks and other things. This is the \"something little\" that has been done. I would want to know how they are completing the supposed storey building for the use of the students.", 
+            "speech": "Mr Speaker, from the third paragraph of the Hon Minister\u2019s Answer, and Mr Speaker, with your permission, l quote:\n \"The Assembly is also in the process of completing a storey building. . .\n By the word \"completion\", my mind tells me that it has been started. But from my own observation, only one floor out of three storeys has been built. The one floor has been there for quite a long time now.\n Even last week when I went there, nothing more had been done. Again, because it has been \"floored\", water gathers there and it causes electrical\" shocks and other things. This is the \"something little\" that has been done. I would want to know how they are completing the supposed storey building for the use of the students.", 
             "time": "11:00:00"
         }, 
         {
@@ -1087,10 +1103,10 @@
         {
             "column": "136", 
             "kind": "speech", 
-            "name": "Mr Opare-Ansah: I would like to refer her to the Budget Statement of the Economic Policy of the Government of Ghana for 2011. Paragraph 497 - and the heading of that paragraph, Mr Speaker, is Primary and Junior High School, Education\". Mr Speaker, with your permission I quote, it says that", 
+            "name": "Mr Opare-Ansah", 
             "original": "Mr Opare-Ansah: I would like to refer her to the Budget Statement of the Economic Policy of the Government of Ghana for 2011. Paragraph 497 - and the heading of that paragraph, Mr Speaker, is Primary and Junior High School, Education\". Mr Speaker, with your permission I quote, it says that:\nDevelopment. One is the School Feeding Programme and the other has to do with community-based, technical and vocational training institutes.\nMr Speaker, since when did the Minister for Education realise that responsibility for the construction of basic school infrastructure lies with the -Ministry of Local Government and Rural Development?\nMrs Mould-Iddrisu Mr Speaker, It is well known that education in all the districts in the country are shared responsibilities between the Assemblies and the Ministry of Education and the Members of Parliament.\nI thank you.", 
             "section": "MINISTRY OF EDUCATION", 
-            "speech": "\"Madam Speaker, to further expand and improve upon educational infrastructure, the Ministry will continue to upgrade basic school infrastructure including the programme to\u2018 eliminate \u2018schools under trees.\u2019\n Mr Speaker, I further went to look at the programmes under the Ministry for Local Government and Rural Development. Indeed, there are only two references to education under the Ministry of Local Government and Rural\n\nDevelopment. One is the School Feeding Programme and the other has to do with community-based, technical and vocational training institutes.\n\nMr Speaker, since when did the Minister for Education realise that responsibility for the construction of basic school infrastructure lies with the -Ministry of Local Government and Rural Development?\n\nMrs Mould-Iddrisu Mr Speaker, It is well known that education in all the districts in the country are shared responsibilities between the Assemblies and the Ministry of Education and the Members of Parliament.\n\nI thank you.", 
+            "speech": "I would like to refer her to the Budget Statement of the Economic Policy of the Government of Ghana for 2011. Paragraph 497 - and the heading of that paragraph, Mr Speaker, is Primary and Junior High School, Education\". Mr Speaker, with your permission I quote, it says that:\n \"Madam Speaker, to further expand and improve upon educational infrastructure, the Ministry will continue to upgrade basic school infrastructure including the programme to\u2018 eliminate \u2018schools under trees.\u2019\n Mr Speaker, I further went to look at the programmes under the Ministry for Local Government and Rural Development. Indeed, there are only two references to education under the Ministry of Local Government and Rural\n\nDevelopment. One is the School Feeding Programme and the other has to do with community-based, technical and vocational training institutes.\n\nMr Speaker, since when did the Minister for Education realise that responsibility for the construction of basic school infrastructure lies with the -Ministry of Local Government and Rural Development?\n\nMrs Mould-Iddrisu Mr Speaker, It is well known that education in all the districts in the country are shared responsibilities between the Assemblies and the Ministry of Education and the Members of Parliament.\n\nI thank you.", 
             "time": "11:50:00"
         }, 
         {
@@ -1103,6 +1119,7 @@
             "time": "12:00:00"
         }, 
         {
+            "column": "138", 
             "heading": "STATEMENTS", 
             "kind": "heading", 
             "original": "STATEMENTS", 
@@ -1227,17 +1244,26 @@
         }, 
         {
             "column": "147", 
-            "kind": "speech", 
+            "kind": "continued speech", 
             "name": "Papa Owusu-Ankomah (NPP - Sekondi)", 
-            "original": "[PAPA OWUSU-ANKOMAH]\nMinister for Women and Children\u2019s Affairs (Mrs Juliana Azumah-Mensah): Mr Speaker, I would like to take this opportunity to congratulate the Hon Member who made this very important Statement.\nMr Speaker, when the strike action started, I, through the Ministry of Women and Children\u2019s Affairs, put out an SOS call to our doctors to try and go to the negotiating table while they work. This is because as we know, when one is in the hospital and doctors or nurses go on strike, the very first thing that comes to mind - I have been in that position because I have been in the hospital. I am a nurse; I am midwife.\nThe first thing that happens, is that when women are in labour and there are complications, when sick children _are brought in, the nurses and other auxiliary staff can do their best but when the doctors are not there, what we have is deaths of these women who cannot take control of their own labour. We know that in the hospitals, it is not only the doctors\nwho are the only health workers. Within the hospital, they work as a team-- doctors, nurses, pharmacists and ancillary workers -- to make the work holistic. I believe where there is discontent, we must take to consideration, the lives of people who come to hospital who may, as a result of the strike action, meet their untimely demise.\nSo, in actual fact, a woman, who is nearing the state of labour when she hears that doctors are on strike, it is very, very frightening. So, I believe a lot is being done to actually meet the doctors on the negotiating table. But I believe also that for the doctors to really go back and visit their Hippocratic Oath, they should take the lives of those people in the hospitals into consideration. They may not be dead but the morbidity and the mortality that can come as a result of the strike action, I believe, they should look at that carefully so that they return to the hospitals and the clinics while negotiations are going on. I know.\nI have been there; I am a nurse as I said before. We cannot pay the health professional enough for what they do, but that does not mean that we should use the general public, women and children especially as pawns when we are fighting for when we need; our allowances and salaries.\nSo, again on this platform, as woman and as the Hon Minister for Women and Children\u2019s Affairs, and also as a woman who has a husband, an uncle and everybody to appeal to our colleagues, the doctors to try and be a little bit altruistic, that is put themselves in the shoes of those who are visiting the hospitals who need their services so that they go back to the hospitals to work while the negotiations go on.", 
+            "original": "[PAPA OWUSU-ANKOMAH]", 
             "section": "STATEMENTS", 
-            "speech": "There is pressure. And there is the need for medical supplies to be given them urgently. Let us cut the bureaucracy now. In times of war, we do not deal with bureaucracy. Things that can take three months ought to be dealt with in a day and that is what is required of Government now.\n I pray that sooner rather than later, this unfortunate situation will end, and after it is ended, all of us will learn lessons out of it so that the next time things do not deteriorate to this level.\n\nMinister for Women and Children\u2019s Affairs (Mrs Juliana Azumah-Mensah): Mr Speaker, I would like to take this opportunity to congratulate the Hon Member who made this very important Statement.\n\nMr Speaker, when the strike action started, I, through the Ministry of Women and Children\u2019s Affairs, put out an SOS call to our doctors to try and go to the negotiating table while they work. This is because as we know, when one is in the hospital and doctors or nurses go on strike, the very first thing that comes to mind - I have been in that position because I have been in the hospital. I am a nurse; I am midwife.\n\nThe first thing that happens, is that when women are in labour and there are complications, when sick children _are brought in, the nurses and other auxiliary staff can do their best but when the doctors are not there, what we have is deaths of these women who cannot take control of their own labour. We know that in the hospitals, it is not only the doctors\n\nwho are the only health workers. Within the hospital, they work as a team-- doctors, nurses, pharmacists and ancillary workers -- to make the work holistic. I believe where there is discontent, we must take to consideration, the lives of people who come to hospital who may, as a result of the strike action, meet their untimely demise.\n\nSo, in actual fact, a woman, who is nearing the state of labour when she hears that doctors are on strike, it is very, very frightening. So, I believe a lot is being done to actually meet the doctors on the negotiating table. But I believe also that for the doctors to really go back and visit their Hippocratic Oath, they should take the lives of those people in the hospitals into consideration. They may not be dead but the morbidity and the mortality that can come as a result of the strike action, I believe, they should look at that carefully so that they return to the hospitals and the clinics while negotiations are going on. I know.\n\nI have been there; I am a nurse as I said before. We cannot pay the health professional enough for what they do, but that does not mean that we should use the general public, women and children especially as pawns when we are fighting for when we need; our allowances and salaries.\n\nSo, again on this platform, as woman and as the Hon Minister for Women and Children\u2019s Affairs, and also as a woman who has a husband, an uncle and everybody to appeal to our colleagues, the doctors to try and be a little bit altruistic, that is put themselves in the shoes of those who are visiting the hospitals who need their services so that they go back to the hospitals to work while the negotiations go on.", 
+            "speech": "There is pressure. And there is the need for medical supplies to be given them urgently. Let us cut the bureaucracy now. In times of war, we do not deal with bureaucracy. Things that can take three months ought to be dealt with in a day and that is what is required of Government now.\n I pray that sooner rather than later, this unfortunate situation will end, and after it is ended, all of us will learn lessons out of it so that the next time things do not deteriorate to this level.", 
+            "time": "12:00:00"
+        }, 
+        {
+            "column": "147", 
+            "kind": "speech", 
+            "name": "Minister for Women and Children\u2019s Affairs (Mrs Juliana Azumah-Mensah)", 
+            "original": "Minister for Women and Children\u2019s Affairs (Mrs Juliana Azumah-Mensah): Mr Speaker, I would like to take this opportunity to congratulate the Hon Member who made this very important Statement.\nwho are the only health workers. Within the hospital, they work as a team-- doctors, nurses, pharmacists and ancillary workers -- to make the work holistic. I believe where there is discontent, we must take to consideration, the lives of people who come to hospital who may, as a result of the strike action, meet their untimely demise.\nSo, in actual fact, a woman, who is nearing the state of labour when she hears that doctors are on strike, it is very, very frightening. So, I believe a lot is being done to actually meet the doctors on the negotiating table. But I believe also that for the doctors to really go back and visit their Hippocratic Oath, they should take the lives of those people in the hospitals into consideration. They may not be dead but the morbidity and the mortality that can come as a result of the strike action, I believe, they should look at that carefully so that they return to the hospitals and the clinics while negotiations are going on. I know.\nI have been there; I am a nurse as I said before. We cannot pay the health professional enough for what they do, but that does not mean that we should use the general public, women and children especially as pawns when we are fighting for when we need; our allowances and salaries.\nSo, again on this platform, as woman and as the Hon Minister for Women and Children\u2019s Affairs, and also as a woman who has a husband, an uncle and everybody to appeal to our colleagues, the doctors to try and be a little bit altruistic, that is put themselves in the shoes of those who are visiting the hospitals who need their services so that they go back to the hospitals to work while the negotiations go on.", 
+            "section": "STATEMENTS", 
+            "speech": "Mr Speaker, I would like to take this opportunity to congratulate the Hon Member who made this very important Statement.\n Mr Speaker, when the strike action started, I, through the Ministry of Women and Children\u2019s Affairs, put out an SOS call to our doctors to try and go to the negotiating table while they work. This is because as we know, when one is in the hospital and doctors or nurses go on strike, the very first thing that comes to mind - I have been in that position because I have been in the hospital. I am a nurse; I am midwife.\n The first thing that happens, is that when women are in labour and there are complications, when sick children _are brought in, the nurses and other auxiliary staff can do their best but when the doctors are not there, what we have is deaths of these women who cannot take control of their own labour. We know that in the hospitals, it is not only the doctors\n\nwho are the only health workers. Within the hospital, they work as a team-- doctors, nurses, pharmacists and ancillary workers -- to make the work holistic. I believe where there is discontent, we must take to consideration, the lives of people who come to hospital who may, as a result of the strike action, meet their untimely demise.\n\nSo, in actual fact, a woman, who is nearing the state of labour when she hears that doctors are on strike, it is very, very frightening. So, I believe a lot is being done to actually meet the doctors on the negotiating table. But I believe also that for the doctors to really go back and visit their Hippocratic Oath, they should take the lives of those people in the hospitals into consideration. They may not be dead but the morbidity and the mortality that can come as a result of the strike action, I believe, they should look at that carefully so that they return to the hospitals and the clinics while negotiations are going on. I know.\n\nI have been there; I am a nurse as I said before. We cannot pay the health professional enough for what they do, but that does not mean that we should use the general public, women and children especially as pawns when we are fighting for when we need; our allowances and salaries.\n\nSo, again on this platform, as woman and as the Hon Minister for Women and Children\u2019s Affairs, and also as a woman who has a husband, an uncle and everybody to appeal to our colleagues, the doctors to try and be a little bit altruistic, that is put themselves in the shoes of those who are visiting the hospitals who need their services so that they go back to the hospitals to work while the negotiations go on.", 
             "time": "12:20:00"
         }, 
         {
             "column": "148", 
             "kind": "continued speech", 
-            "name": "Papa Owusu-Ankomah (NPP - Sekondi)", 
+            "name": "Minister for Women and Children\u2019s Affairs (Mrs Juliana Azumah-Mensah)", 
             "original": "[MRS AZUMAH-MENSAH]", 
             "section": "STATEMENTS", 
             "speech": "So on this note, Mr Speaker, others have said it all. We are behind them for what they do but I believe that when one is standing for something good and it goes too far, then everybody stands against that person. So, we will be very happy for them to go back to work while negotiations go on.\n Thank you, Mr Speaker.", 
@@ -1301,15 +1327,24 @@
             "column": "151", 
             "kind": "speech", 
             "name": "Mrs Osei-Opare", 
-            "original": "Mrs Osei-Opare: If they get there and there is nobody, what is the use? All I am saying, Mr Speaker, is that this is an emergency, it requires emergency\nresponse and I plead with our doctors to go back to full work. But I also plead more with Government, that the ball is in their court; they can do a lot by having a fatherly and motherly attitude to bring them on board and that a calm word can kill any sore.\nMinister for Health Joseph Yieleh Chireh): Mr Speaker, let me first of all thank the Hon Member for making the Statement and urging the parties in this negotiation to do their utmost for a solution to be reached.\nOf course, we all know that this strike action is very unfortunate and that is why I would again also appreciate those opinion leaders, whether political, traditional or religious, who have joined the President to ask the doctors to go back to work while we go on with negotiations.\nThe Statement as made is to let all of us appreciate the difficulties. But at the same time, I have to state that the Committee claims they met only the GMA And the GMA statement being made about people not being given sufficient mandate - I wish the Committee could have the opportunity of also meeting with the or even the management of these institutions.\nBut once that has not happened, all we are appealing to everybody is that as we all listen every morning-- some of the radio stations, after the visit of President Obama-~ would say that we should build strong institutions and not strong men; everyday you would hear it. Therefore, if this Parliament passes a law establishing bodies, I expect all of us to be making sure that these bodies are strong and not individuals. We must make sure that these bodies work.\nOne thing more: What I would ask all Ghanaians, no matter who you are, is that for democracy to work, we must also", 
+            "original": "Mrs Osei-Opare: If they get there and there is nobody, what is the use? All I am saying, Mr Speaker, is that this is an emergency, it requires emergency\nresponse and I plead with our doctors to go back to full work. But I also plead more with Government, that the ball is in their court; they can do a lot by having a fatherly and motherly attitude to bring them on board and that a calm word can kill any sore.", 
             "section": "STATEMENTS", 
-            "speech": "If they get there and there is nobody, what is the use? All I am saying, Mr Speaker, is that this is an emergency, it requires emergency\n\nresponse and I plead with our doctors to go back to full work. But I also plead more with Government, that the ball is in their court; they can do a lot by having a fatherly and motherly attitude to bring them on board and that a calm word can kill any sore.\n\nMinister for Health Joseph Yieleh Chireh): Mr Speaker, let me first of all thank the Hon Member for making the Statement and urging the parties in this negotiation to do their utmost for a solution to be reached.\n\nOf course, we all know that this strike action is very unfortunate and that is why I would again also appreciate those opinion leaders, whether political, traditional or religious, who have joined the President to ask the doctors to go back to work while we go on with negotiations.\n\nThe Statement as made is to let all of us appreciate the difficulties. But at the same time, I have to state that the Committee claims they met only the GMA And the GMA statement being made about people not being given sufficient mandate - I wish the Committee could have the opportunity of also meeting with the or even the management of these institutions.\n\nBut once that has not happened, all we are appealing to everybody is that as we all listen every morning-- some of the radio stations, after the visit of President Obama-~ would say that we should build strong institutions and not strong men; everyday you would hear it. Therefore, if this Parliament passes a law establishing bodies, I expect all of us to be making sure that these bodies are strong and not individuals. We must make sure that these bodies work.\n\nOne thing more: What I would ask all Ghanaians, no matter who you are, is that for democracy to work, we must also", 
+            "speech": "If they get there and there is nobody, what is the use? All I am saying, Mr Speaker, is that this is an emergency, it requires emergency\n\nresponse and I plead with our doctors to go back to full work. But I also plead more with Government, that the ball is in their court; they can do a lot by having a fatherly and motherly attitude to bring them on board and that a calm word can kill any sore.", 
+            "time": "12:30:00"
+        }, 
+        {
+            "column": "152", 
+            "kind": "speech", 
+            "name": "Minister for Health Joseph Yieleh Chireh)", 
+            "original": "Minister for Health Joseph Yieleh Chireh): Mr Speaker, let me first of all thank the Hon Member for making the Statement and urging the parties in this negotiation to do their utmost for a solution to be reached.", 
+            "section": "STATEMENTS", 
+            "speech": "Mr Speaker, let me first of all thank the Hon Member for making the Statement and urging the parties in this negotiation to do their utmost for a solution to be reached.\n Of course, we all know that this strike action is very unfortunate and that is why I would again also appreciate those opinion leaders, whether political, traditional or religious, who have joined the President to ask the doctors to go back to work while we go on with negotiations.\n The Statement as made is to let all of us appreciate the difficulties. But at the same time, I have to state that the Committee claims they met only the GMA And the GMA statement being made about people not being given sufficient mandate - I wish the Committee could have the opportunity of also meeting with the or even the management of these institutions.\n But once that has not happened, all we are appealing to everybody is that as we all listen every morning-- some of the radio stations, after the visit of President Obama-~ would say that we should build strong institutions and not strong men; everyday you would hear it. Therefore, if this Parliament passes a law establishing bodies, I expect all of us to be making sure that these bodies are strong and not individuals. We must make sure that these bodies work.\n One thing more: What I would ask all Ghanaians, no matter who you are, is that for democracy to work, we must also", 
             "time": "12:30:00"
         }, 
         {
             "column": "153", 
             "kind": "continued speech", 
-            "name": "Mrs Osei-Opare", 
+            "name": "Minister for Health Joseph Yieleh Chireh)", 
             "original": "[MR CHIREH]", 
             "section": "STATEMENTS", 
             "speech": "exercise a lot of restraint and patience. It is not right that you think you enjoy a benefit and it must be given to you immediately.\n So once again, we are appealing to the doctors. As we talk, there is supposed to be compulsory arbitration by the Labour Commission with the parties. It means that we are following procedures. Sometimes the delays may be very, very unfortunate, but they are necessary for the sanity of public discourse, for all of us to appreciate.\n The loss of lives is unfortunate and again, as I always say and I would say again, it is not how many times you insult and tell people what your feelings are; it is for us to be responsible, each and every one of us, Therefore, I would again thank all of you for showing this concern and appeal once more as the President has already done, to the medical doctors to go back to work. The systems will work.\n Mr Speaker, in terms of support for the emergency centres that are carrying on the duties while they are on strike, the Ministry is not employing bureaucratic methods. Indeed, we are making sure that the medical suppliers are quickly delivered to 37 Military Hospital and the Police Hospital in Accra and in the other regions. Government is aware that emergencies are required to be treated there.\n So we are not going to employ any difficulties in terms of medical supplies. The President himself was on the site to ensure that these things are done. We are going to make sure to save as many lives as we can. But to this House once more, thank you for showing the concern.", 
@@ -1514,6 +1549,7 @@
             "time": "13:10:00"
         }, 
         {
+            "column": "170", 
             "heading": "ADJOURNMENT", 
             "kind": "heading", 
             "original": "ADJOURNMENT", 
