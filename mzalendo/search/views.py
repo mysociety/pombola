@@ -12,7 +12,7 @@ from operator import itemgetter
 from core import models
 
 from haystack.query import SearchQuerySet
-from mzalendo.hansard import models as hansard_models
+from mzalendo.odekro.models import HansardEntry
 
 # def location_search(request):
 #     
@@ -99,7 +99,7 @@ def tagcloud(request):
     """ Return tag cloud JSON results"""
     # Build a query based on duration default is 1 month
     cutoff = datetime.date.today() - datetime.timedelta(weeks=1)
-    sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting__start_date>=cuttoff)
+    sqs  = SearchQuerySet().models(HansardEntry) #.filter(sitting__start_date>=cuttoff)
 
     # Generate tag cloud from content of returned entries
     words = {}
