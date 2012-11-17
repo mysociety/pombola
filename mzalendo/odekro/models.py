@@ -1,7 +1,7 @@
 from django.db import models
 
 from core.models import Person, Position
-# Create your models here.
+from hansard.models import Sitting, Entry
 
 
 class UploadModel(models.Model):
@@ -32,3 +32,11 @@ class MP(models.Model):
     religion = models.CharField(max_length=100, blank=True, default='')
     last_employment = models.CharField(max_length=150, blank=True, default='')
     votes_obtained = models.CharField(max_length=150, blank=True, default='')
+
+
+class HansardEntry(models.Model):
+    sitting = models.ForeignKey(Sitting)
+    entry = models.ForeignKey(Entry)
+    time = models.TimeField()
+    section = models.CharField(max_length=255, blank=True, default='')
+    column = models.IntegerField(default=0)

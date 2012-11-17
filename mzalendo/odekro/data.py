@@ -15,8 +15,9 @@ from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from images.models import Image
 from core.models import PlaceKind, OrganisationKind, PositionTitle
 from core.models import Place, Person, Organisation, Position
+from hansard.models import Venue, Source, Sitting, Entry
 
-from odekro.models  import MP
+from odekro.models  import MP, HansardEntry
 from utils import split_name, convert_date, legal_name
 
 KINDS = ((PlaceKind, 'constituency'),
@@ -135,6 +136,61 @@ def add_info_page(slug, title, content):
     page.content = unicode(content, 'utf-8')
     return page.save()
 
+
+def add_hansard(head, entries):
+    venue = Venue.objects.get_or_create(
+                    slug='parliament-house', 
+                    name='Parliament House')[0]
+    xs = (head['series'], head['volume'], head['number'])
+    source = Source.objects.get_or_create(
+                    name='Bound Volume - SER %d VOL. %d No. %d' % xs,
+                    date=head['date'])[0]
+
+    adjournment = entries.pop(-1)
+
+    sitting = Sitting.objects.get_or_create(
+                        source=source, 
+                        venue=venue, 
+                        start_date=head['date'],
+                        start_time=head['time'],
+                        end_date=head['date'],
+                        end_time=adjournment['time'])[0]
+    entry = None
+    while len(entries):
+        entry = entries.pop(0)
+        if entry['kind'] == 'chair':
+            break
+    counter = 0
+    add_hansard_entry(venue, source, sitting, entry, counter)
+    while len(entries):
+        counter += 1
+        add_hansard_entry(venue, source, sitting, entries.pop(0), counter)
+
+
+def add_hansard_entry(venue, source, sitting, obj, counter):
+    kind = entry_kind(obj)
+    entry = Entry.objects.get_or_create(
+                    type=kind,
+                    sitting=sitting,
+                    page_number=obj.get('column', None),
+                    speaker_name=obj.get('name', ''),
+                    content=obj.get(kind, ''),
+                    defaults=(dict(text_counter=counter)))[0]
+    entry.text_counter = counter
+    entry.save()
+
+    return HansardEntry.objects.get_or_create(
+                      sitting=sitting,
+                      entry=entry,
+                      time=obj.get('time', None),
+                      section=obj.get('section', ''),
+                      column=obj.get('column', 0))[0]
+
+def entry_kind(entry):
+    kind = entry['kind']
+    return kind if kind in ['heading', 'scene', 'speech'] else 'other'
+
+
 # def import_to_db2(objects):
 #     for obj in objects:
         
@@ -219,4 +275,6 @@ def add_info_page(slug, title, content):
 #             value=obj['Email'],
 #             kind=email_kind,
 #         )
+
+
 
