@@ -110,13 +110,12 @@ def tagcloud(request):
     text = "A member of the Gonja ethnic group, specifically from Bole, John Dramani Mahama was born 29 November 1958 in Damingo in the Damango-Daboya constituency of Ghana. He has been President of Ghana since July 2012. He was the Vice President of Ghana from 2009 to 2012, and he took office as President on 24 July 2012 following the death of his predecessor, President John Atta Mills. He was a Member of Parliament from 1997 to 2009 and Minister of Communications from 1998 to 2001. Mahama attended Achimota School and then proceeded to Ghana Secondary School (Tamale) and the University of Ghana, Legon, receiving a bachelor's degree in history in 1981 and a postgraduate diploma in communication studies in 1986. Following this, he travelled to the Institute of Social Sciences, Moscow in the then Soviet Union for further studies in a two-year postgraduate programme, specializing in social psychology. He obtained a master's degree in 1988."
     for x in text.lower().split():
         cleanx = x.replace(',','').replace('.','').replace('"','').strip()
-        if cleanx in stopwords:
-            pass
-        words[cleanx] = 1 + words.get(cleanx, 0)
+        if not cleanx in stopwords:
+            words[cleanx] = 1 + words.get(cleanx, 0)
 
     cloudlist =[]
     for word in words:
-        cloudlist.append({"text":word , "weight": words.get(word), "link":"/search/hansard/word"})
+        cloudlist.append({"text":word , "weight": words.get(word), "link":"/search/hansard/?q=%s" % word })
 
     sortedlist = sorted(cloudlist, key=itemgetter('weight'))
     # return results
