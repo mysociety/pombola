@@ -5,6 +5,7 @@ from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.utils import simplejson
 import datetime
+from operator import itemgetter
 
 # from mzalendo.helpers import geocode
 
@@ -96,7 +97,7 @@ def tagcloud(request):
     for word in words:
         cloudlist.append({"text":word , "weight": words.get(word)})
 
-    sortedlist = sorted(cloudlist, key=operator.itemgetter('weight'))
+    sortedlist = sorted(cloudlist, key=itemgetter('weight'))
     # return results
     return HttpResponse(
         simplejson.dumps(sortedlist[:10]),
