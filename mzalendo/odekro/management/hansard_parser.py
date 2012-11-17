@@ -22,13 +22,13 @@ SCENE_END        = 'scene_end'
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
 
-TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson|Minister of State|An Hon Mem|Some Hon Mem|Minority Leader|Majority Leader|Nana)'
+TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson|Minister|An Hon Mem|Some Hon Mem|Minority|Majority|Nana)'
 TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.\s*m|AM|A.\s*M|pm|PM|p.\s*m|P.\s*M|noon)\.?[\s\-]*'
 VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the Official Report\s*)'
 
 HEADING_PATTERN = r'^\s*([A-Z-,\s]+|%s)\s*$' % VOTES_AND_PROCEEDINGS_HEADER
 SCENE_PATTERN = r'^\s*(\[[A-Za-z-\s]+\])\s*$'
-SPEECH_PATTERN = r'^\s*%s(.+):\s*(.*)\s*$' % TITLES_TEMPLATE
+SPEECH_PATTERN = r'^\s*%s([^:]+):\s*(.*)\s*$' % TITLES_TEMPLATE
 CONTINUED_SPEECH_PATTERN = r'^\s*\[%s.+\]\s*' % (TITLES_TEMPLATE.upper())
 
 SCENE_START_PATTERN = r'^\s*(\[[^\]]+)\s*$'
@@ -138,8 +138,8 @@ def parse_body(lines):
     time = None
     topic = None
     #page = None
-    curr_col = None
-    curr_section = None
+    column = None
+    section = None
     kind, line, match = None, None, None
 
     while len(lines):
@@ -151,28 +151,29 @@ def parse_body(lines):
         
         if kind is SPEECH:
             speech = parse_speech(time, match, lines)
-            entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
+            entry = dict(speech.items() + dict(section=section, column=column).items())
         elif kind is HEADING:
-            curr_section = line.strip().upper()
-            entry = dict(heading=line.strip().upper())
+            section = line.strip().upper()
+            entry = dict(heading=line.strip().upper(), column=column)
         elif kind in (TIME, START_TIME):
             time = _time(match)
         elif kind is ACTION:
             person = '%s%s' % (match.group(1), match.group(2))
-            entry = dict(action=match.group(3), name=person.strip())
+            entry = dict(action=match.group(3), name=person.strip(), column=column)
         elif kind is PAGE_HEADER:
-            pages = '%s' % (match.group(1))
-            curr_col = match.group(1) 
+            # pages = '%s' % (match.group(1))
+            column = match.group(1) 
             #title = '%s%s' % (match.group(2),match.group(4))
             #entries.append(dict(page=pages))
         elif kind is SCENE_START:
             entry = parse_scene(time, match, lines, line)
-            entry['column'] = curr_col
+            entry['column'] = column
             # hack to catch chair on multiple lines
             m = re.match(CHAIR_PATTERN, entry['scene'])
             if m:
                 kind = CHAIR
-                entry = dict(chair=m.group(1), original=entry['original'])
+                entry = dict(chair=m.group(1), 
+                             original=entry['original'], column=column)
             else:
                 kind = SCENE
 
@@ -182,26 +183,17 @@ def parse_body(lines):
 
                 if prev_entry.get('name'):
                     speech = parse_speech(time, match, lines,name=prev_entry['name'])
-                    entry = dict(speech.items() + dict(section=curr_section, column=curr_col).items())
+                    entry = dict(speech.items() + \
+                                 dict(section=section, column=column).items())
         
         elif kind is LINE:
-            if len(entries):
-                prev_entry = entries[-1]
-                if prev_entry.get('name'):
+            if len(entries) and entries[-1].get('name', None):
                     kind = SPEECH
-
                     entry = entries.pop(-1)
                     entry['speech'] = '%s\n\n%s' % (entry.get('speech'), line.strip())
 
-                    # entry = dict(
-                    #     time    = time,
-                    #     name    = prev_entry['name'],
-                    #     speech  = line.strip(),
-                    #     section = curr_section,
-                    #     column  = curr_col,
-                    # )
         elif kind is CHAIR:
-            entry = dict( chair=match.group(1) )
+            entry = dict(chair=match.group(1), original=line, column=column)
         elif kind is BLANK:
             pass
         else:
@@ -212,7 +204,7 @@ def parse_body(lines):
 
             entry['time']     = time
             entry['kind']     = kind
-            
+            # entry['column']   = column
             if not entry.get('original', None):
                 entry['original'] = line.rstrip()
             elif entry['kind'] not in (SCENE, CHAIR):
@@ -220,6 +212,10 @@ def parse_body(lines):
             entries.append(entry)
 
     return entries
+
+
+def chair(match, line, column):
+    return dict(chair=match.group(1), original=line, column=column) 
 
 
 def parse_scene(time, match, lines, line=''):
