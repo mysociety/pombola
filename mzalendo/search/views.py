@@ -93,7 +93,7 @@ stopwords = ["'tis", "'t was", "a", "able","about", "across", "after",
             "what'd", "what's", "when", "when", "when'd", "when'll", "when's", "where", "where'd", "where'll", "where's",
             "which", "while", "who", "who'd", "who'll", "who's", "whom", "why", "why'd", "why'll", 
             "why's", "will", "with", "won't", "would", "would've", "wouldn't", "yet", "you", "you'd",
-            "you'll", "you're", "you've", "your" ]
+            "you'll", "you're", "you've", "your", "mr", "mrs","minister","speaker", "madam" ]
 
 def tagcloud(request):
     """ Return tag cloud JSON results"""
@@ -115,7 +115,7 @@ def tagcloud(request):
         for word in words:
             cloudlist.append({"text":word , "weight": words.get(word), "link":"/search/hansard/?q=%s" % word })
 
-        sortedlist = sorted(cloudlist, key=itemgetter('weight'),reverse=True)[:10]
+        sortedlist = sorted(cloudlist, key=itemgetter('weight'),reverse=True)[:20]
     except:
         sortedlist =[]
 
