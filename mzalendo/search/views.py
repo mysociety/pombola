@@ -99,7 +99,7 @@ def tagcloud(request):
     """ Return tag cloud JSON results"""
     # Build a query based on duration default is 1 month
     cutoff = datetime.date.today() - datetime.timedelta(weeks=1)
-    sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting__start_date>=cuttoff)
+    sqs  = SearchQuerySet().models(hansard_models.Entry)#.filter(sitting_date>=cuttoff)
     cloudlist =[]
     try:
         # Generate tag cloud from content of returned entries
