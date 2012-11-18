@@ -15,6 +15,7 @@
         $.getJSON("search/tagcloud/", 
         {},
         function(data){
+            $("#wordcloud").empty();
             $("#wordcloud").jQCloud(data, {width: 525, height:345, shape: "rectangular"});
         });
       });
