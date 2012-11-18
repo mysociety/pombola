@@ -115,7 +115,7 @@ def tagcloud(request):
         for word in words:
             cloudlist.append({"text":word , "weight": words.get(word), "link":"/search/hansard/?q=%s" % word })
 
-        sortedlist = sorted(cloudlist, key=itemgetter('weight'))[:10]
+        sortedlist = sorted(cloudlist, key=itemgetter('weight'),reverse=True)[:10]
     except:
         sortedlist =[]
 
