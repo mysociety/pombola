@@ -74,7 +74,7 @@ def autocomplete(request):
         mimetype='application/json'
     )
   
-
+# normal english stop words to ignore
 stopwords = ["'tis", "'t was", "a", "able","about", "across", "after", 
              "ain't","all", "almost", "also", "am", "among", "an", "and",   
             "any", "are", "aren't", "as", "at", "be", "because", "been", "but",  
@@ -93,7 +93,10 @@ stopwords = ["'tis", "'t was", "a", "able","about", "across", "after",
             "what'd", "what's", "when", "when", "when'd", "when'll", "when's", "where", "where'd", "where'll", "where's",
             "which", "while", "who", "who'd", "who'll", "who's", "whom", "why", "why'd", "why'll", 
             "why's", "will", "with", "won't", "would", "would've", "wouldn't", "yet", "you", "you'd",
-            "you'll", "you're", "you've", "your", "mr", "mrs","minister","speaker", "madam" ]
+            "you'll", "you're", "you've", "your","shall","very"]
+
+# hansard-centric words to ignore
+hansardwords = ["mr", "mrs","minister","speaker", "madam","delete","insert","hon","think","-" ]
 
 def tagcloud(request):
     """ Return tag cloud JSON results"""
@@ -109,13 +112,13 @@ def tagcloud(request):
     
             for x in text.lower().split():
                 cleanx = x.replace(',','').replace('.','').replace('"','').strip()
-                if not cleanx in stopwords:
+                if not cleanx in stopwords and not cleanx in hansardwords:
                     words[cleanx] = 1 + words.get(cleanx, 0)
 
         for word in words:
             cloudlist.append({"text":word , "weight": words.get(word), "link":"/search/hansard/?q=%s" % word })
 
-        sortedlist = sorted(cloudlist, key=itemgetter('weight'),reverse=True)[:20]
+        sortedlist = sorted(cloudlist, key=itemgetter('weight'),reverse=True)[:25]
     except:
         sortedlist =[]
 
