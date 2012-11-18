@@ -12,7 +12,7 @@ from operator import itemgetter
 from core import models
 
 from haystack.query import SearchQuerySet
-from mzalendo.models import models as hansard_models
+from mzalendo.hansard import models as hansard_models
 
 # def location_search(request):
 #     
