@@ -15,7 +15,6 @@
         $.getJSON("search/tagcloud/", 
         {},
         function(data){
-            $("#wordcloud").empty();
             $("#wordcloud").jQCloud(data, {width: 525, height:345, shape: "rectangular"});
         });
       });
@@ -41,7 +40,6 @@
         }
 
         $(function(){
-            $('#counter').empty();
             $('#counter').countdown({
                 image: '{{ STATIC_URL }}images/digits.png',
                 startTime: diff(new Date(2012, 11, 7)).join(':')
@@ -64,9 +62,11 @@
 
   <script type="text/javascript">
       $(function() {
-          $('#slider1').s3Slider({
+        try{
+        $('#slider1').s3Slider({
               timeOut: 5000 
           })
+          }catch(err) { /* slider1 does not exist - so ignore */ }
       })
   </script>
 {% endblock %}
