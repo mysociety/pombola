@@ -41,6 +41,7 @@
         }
 
         $(function(){
+            $('#counter').empty()
             $('#counter').countdown({
                 image: '{{ STATIC_URL }}images/digits.png',
                 startTime: diff(new Date(2012, 11, 7)).join(':')
