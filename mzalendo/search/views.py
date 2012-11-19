@@ -101,8 +101,10 @@ hansardwords = ["mr", "mrs","minister","speaker", "madam","delete","insert","hon
 def tagcloud(request,wks=4):
     """ Return tag cloud JSON results"""
     # Build a query based on duration default is 1 month
-    cutoff = datetime.date.today() - datetime.timedelta(weeks=int(wks))
-    sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting_date__gte=cutoff)
+    #cutoff = datetime.date.today() - datetime.timedelta(weeks=int(wks))
+    #sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting_date__gte=cutoff)
+    cutoff = SearchQuerySet().models(hansard_models.Sitting).latest(sitting__id).id
+    sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting__id__gte=(cutoff-wks))
     cloudlist =[]
     try:
         # Generate tag cloud from content of returned entries
