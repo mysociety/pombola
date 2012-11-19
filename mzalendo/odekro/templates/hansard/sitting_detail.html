@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
+{% load switch %}
+
+{% load thumbnail %}
 
 {% block content %}
 <div class="hansardContainer elevencol">
     <div id="hansardIntro">
-        <h1 class="hansardH1">The Debates of the House of Commons</h1>
-        <p>When Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search via the box above.</p>
+        <h1 class="hansardH1">Parliamentary Debates</h1>
+        <p>When Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the Ghana Parliament dating back to {{ earliest_year }}. Browse through them below, or search via the box above.</p>
     </div>
+
+    {% if topics %}
     <div class="hansardMeta">
         <h2 id="title">Topics</h2>
         <ul id="content">
@@ -22,58 +27,71 @@
             <li><a href="#">Jobs and Growth Act, 2012</a></li>
         </ul>
     </div>
+    {% endif %}
 
+    {% if sitting %}
     <ul class="hansardEntries">
         {% for entry in sitting.entry_set.all %}
-        <li class="statement">
-            <div class="context">
-                <p><strong>Foreign Investment</strong> 
-                <br />Statements By Members</p>
-                <span>October 12th, 2012 / 11 a.m</span>
-                <strong><a class="partytag" href="#">NPP</a></strong>
-            </div>
-            <div class="focus">
-                <a class="hansardAvatar" href="#"><img src="#" /></a>
-                <p class="speaker">
-                    <a href="#"><strong>Lala Mitre</strong></a>
-                    <span>Tema West, GR</span>
-                </p>
-                <p>
-                    Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search.
-                </p>
-                <p>
-                    Transcribed, and published in a document called a Hansard svery word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search.
-                </p>
-            </div>
-        </li>        
-        {% endfor %}
+            {% with entry.hansardentry_set.all.0 as he %}
 
-        {% comment %}        
-        <li class="statement">
-            <div class="context">
-                <p>
-                    <strong>Foreign Investment</strong> 
-                    <br />
-                    Statements By Members
-                </p>
-                <span>October 12th, 2012 / 11 a.m</span>
-                <strong><a class="partytag" href="#">NPP</a></strong>
-            </div>
-            <div class="focus">
-                <a class="hansardAvatar" href="#"><img src="#" /></a>
-                <p class="speaker">
-                    <a href="#"><strong>Lala Mitre</strong></a>
-                    <span>Tema West, GR</span>
-                </p>
-                <p>
-                    Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search Parliament is in session, every word spoken
-                </p>
-                <p>
-                    Transcribed, and published in a document called a Hansard svery word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the House of Commons dating back to 1994. Browse through them below, or search
-                </p>
-            </div>
-        </li>
-        {% endcomment %}
+            {% switch entry.type %}
+                {% case  'speech' %}
+                <li class="statement">
+                    <div class="context">
+                        <p><h6>{{ he.section }}</h6>
+                        {# <br />Statements By Members #}
+                        </p>
+                        <span>{{ entry.sitting.start_date }} / {{ he.time }}</span>
+                        
+                        {% with entry.speaker.parties.0 as party %}
+                        {% if party %}
+                        <strong>
+                            <a class="patytag" 
+                               href="{{ party.get_absolute_url }}">
+                               {{ party.name }}
+                           </a>
+                        </strong>
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    
+
+                    <div class="focus">
+                        {% thumbnail entry.speaker.primary_image "200x200" as img %}
+                            <a class="hansardAvatar" 
+                               href="{{ he.get_absolute_url }}">
+                               <img src="{{ img.url }}" />
+                            </a>
+                        {% empty %}                          
+                        {% endthumbnail %}
+                        <p class="speaker">
+                            <a href="{{ entry.speaker.get_absolute_url }}">
+                                <strong>
+                                    {{ entry.speaker_name }}
+                                </strong>
+                            </a>
+                            {#<span>{{ entry.speaker.}}</span>#}
+                        </p>
+                        <p>
+                            {{ entry.content|linebreaksbr }}
+                        </p>
+                    </div>
+                </li> 
+                {% case 'heading' %}
+                    {% if entry.content %}
+                    <li>
+                        <div class="focus">
+                            <h4>{{ entry.content|linebreaksbr }}</h4>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% case 'other' %}
+                    <font col="red">{{ entry.content }}</font>
+            {% endswitch %}
+
+            {% endwith %}       
+        {% endfor %}
+    {% endif %}
     </ul>
 </div>
 {% endblock %}

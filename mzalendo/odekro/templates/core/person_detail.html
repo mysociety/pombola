@@ -32,9 +32,11 @@
                     <a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a>
                 {% endfor %}
             </p>
-            <a class="mp_tag_container" href="#">
-                <img src="{{ STATIC_URL }}images/ndc_tag.png" />
+            {% with object.parties.0 as party %}
+            <a class="{{ party.name|lower }}_tag" href="#">
+                {#<img src="{{ STATIC_URL }}images/ndc_tag.png" />#}
             </a>
+            {% endwith %}
         </div>
         
         {% comment %}

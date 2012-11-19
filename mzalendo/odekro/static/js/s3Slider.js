@@ -18,8 +18,12 @@
         var timeOutFn   = null;
         var faderStat   = true;
         var mOver       = false;
-        var items       = $("#" + element[0].id + "Content ." + element[0].id + "Image");
-        var itemsSpan   = $("#" + element[0].id + "Content ." + element[0].id + "Image span");
+        if (element != null && element.length > 0) {
+            var items       = $("#" + element[0].id + "Content ." + element[0].id + "Image");
+            var itemsSpan   = $("#" + element[0].id + "Content ." + element[0].id + "Image span");
+        } else {
+            var items, itemSpan;
+        }
             
         items.each(function(i) {
     
