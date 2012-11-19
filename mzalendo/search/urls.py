@@ -43,6 +43,6 @@ urlpatterns = patterns('search.views',
 
     # Tag cloud
     url( r'^tagcloud/$', 'tagcloud', name='tagcloud'),
-    url( r'^tagcloud/(?P<wks>\d)/$', 'tagcloud', name='tagcloud'),
+    url( r'^tagcloud/(?P<wks>\d+)/$', 'tagcloud', name='tagcloud'),
 
 )
