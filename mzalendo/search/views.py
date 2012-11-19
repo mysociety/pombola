@@ -104,7 +104,7 @@ def tagcloud(request,wks=4):
     #cutoff = datetime.date.today() - datetime.timedelta(weeks=int(wks))
     #sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting_date__gte=cutoff)
     cutoff = SearchQuerySet().models(hansard_models.Entry).latest('sitting_date').id
-    sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting__id__gte=(cutoff-wks))
+    sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting__id__gte=(int(cutoff)-int(wks)))
     cloudlist =[]
     try:
         # Generate tag cloud from content of returned entries
