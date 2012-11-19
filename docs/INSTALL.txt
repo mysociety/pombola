@@ -58,8 +58,9 @@ nano conf/general.yml
 # Most of this is done using the 'bin/prepare_environment.bash' script. This
 # will create the virtual environment, install needed python dependencies and
 # then set up the database
-./bin/prepare_environment.bash
+bin/prepare_environment.bash
 
+If this step fails, please consult TROUBLESHOOTING.txt
 
 # VIRTUALENV
 

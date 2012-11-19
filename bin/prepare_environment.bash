@@ -4,7 +4,7 @@
 set -e
 
 # check that we are in the expected directory
-cd `dirname $0`/..
+cd "$(dirname $BASH_SOURCE)"/..
 
 
 # Some env variables used during development seem to make things break - set
@@ -18,9 +18,6 @@ source ../mzalendo-virtualenv/bin/activate
 pip install Mercurial
 pip install -r requirements.txt
 
-# use the virtualenv just created/updated
-source ../mzalendo-virtualenv/bin/activate
-
 # make sure that there is no old code (the .py files may have been git deleted) 
 find . -name '*.pyc' -delete
 
@@ -33,5 +30,3 @@ cd mzalendo
 
 # gather all the static files in one place
 ./manage.py collectstatic --noinput
-
-cd --
