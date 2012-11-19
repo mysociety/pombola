@@ -74,8 +74,14 @@ class Command(BaseCommand):
                 # else:
                 #     return output_json({ 'error': 'No polygons found' }, code=404)
 
+
+                # Note - the following commented out as it causes issues for
+                # some constiuncies - see
+                #   https://github.com/mysociety/mzalendo/issues/443 for details.
+                # Not using this only results in the CS produced bein much larger
+                # (7MB as opposed to 1MB) but for us this is not really an issue.
                 # apply a simplify_tolerance to make CSV smaller
-                all_areas = all_areas.simplify(0.001)                                        
+                # all_areas = all_areas.simplify(0.001)                                        
 
                 row['location'] = all_areas.kml
                         
