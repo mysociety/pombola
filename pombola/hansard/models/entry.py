@@ -89,27 +89,37 @@ class Entry(HansardModelBase):
         """Go through all entries and assign speakers"""
         
         entries = cls.objects.all().unassigned_speeches()
-        
+        # entries = entries.filter(speaker_name__icontains='Speaker')
         # create an in memory cache of speaker names and the sitting dates, to
         # avoid hitting the db as badly with all the repeated requests
         cache = {}
 
         for entry in entries:
-            # print '--------- ' + entry.speaker_name + ' ---------'
-
             cache_key = "%s-%s" % (entry.sitting.start_date, entry.speaker_name)
 
-            if cache_key in cache:
-                speakers = cache[cache_key]
-            else:
-                speakers = entry.possible_matching_speakers( update_aliases=True )
-                cache[cache_key] = speakers
+            # if cache_key in cache:
+            #     speakers = cache[cache_key]
+            # else:
+            # speakers = entry.possible_matching_speakers(update_aliases=True )
+
+            speakers = entry.possible_matching_speakers2()
 
             if len(speakers) == 1:
                 speaker = speakers[0]
                 entry.speaker = speaker
                 entry.save()                
-                
+                    
+    def possible_matching_speakers2(self):
+        alias = Alias.objects.filter(alias=entry.speaker_name)
+        if len(alias):
+            alias = alias[0]
+
+            person = alias.person
+            if person:
+                speakers = Person.objects.filter(id=person.id)
+                cache[cache_key] = speakers
+                return speakers
+        return None
 
     def possible_matching_speakers(self, update_aliases=False):
         """
