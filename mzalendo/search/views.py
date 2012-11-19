@@ -98,10 +98,10 @@ stopwords = ["'tis", "'t was", "a", "able","about", "across", "after",
 # hansard-centric words to ignore
 hansardwords = ["mr", "mrs","minister","speaker", "madam","delete","insert","hon","think","-" ]
 
-def tagcloud(request):
+def tagcloud(request,wks=4):
     """ Return tag cloud JSON results"""
     # Build a query based on duration default is 1 month
-    cutoff = datetime.date.today() - datetime.timedelta(weeks=4)
+    cutoff = datetime.date.today() - datetime.timedelta(weeks=wks)
     sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting_date__gte=cutoff)
     cloudlist =[]
     try:
