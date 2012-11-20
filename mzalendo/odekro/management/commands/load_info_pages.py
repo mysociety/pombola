@@ -20,10 +20,9 @@ class Command(BaseCommand):
             # Places
             ('places-overview.md', 'Overview'),
             # Parliament
-            ('bills-overview.md', 'Bills overview'),
-            # ??
-            # ??
-
+            ('parliament-overview.md', 'Parliament'),
+            ('bills-overview.md', 'Bills'),
+            ('committee-overview.md', 'Committees'),
         )
 
         basedir = os.path.abspath(os.path.dirname( __file__ ))
