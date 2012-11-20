@@ -6,7 +6,7 @@ set -e
 find . -name '*.pyc' -delete
 
 # run our tests
-./manage.py test   \
+coverage run ./manage.py test   \
     core           \
     hansard        \
     helpers        \
