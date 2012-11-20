@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load humanize %}
+
+{% block title %}{{ object.name }}tttttt{% endblock %}
+
+{% block content %}
+
+    <div class="title-space">
+        <p class="object-kind">{{ object.kind.name }}</p>
+        <h1>{{ object.name }}</h1>
+
+        {% if object.organisation %}
+        <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
+        {% endif %}
+    </div>
+    
+    {% if object.mapit_area %}
+        <div class="profile-map">
+            <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+        
+            <div id="map_canvas" width="300" height="300"></div>
+            <script type="text/javascript" charset="utf-8">
+                add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url mapit_index %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );            
+            </script>
+        </div>
+    {% else %}
+        <div class="profile-pic">
+            {% thumbnail object.primary_image "200x200" as im %}
+            <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% empty %}
+            <img src="{{STATIC_URL}}images/place-200x200.jpg" />
+            {% endthumbnail %}        
+        </div>        
+    {% endif %}
+
+    <div class="social-and-tools">
+        {% include 'core/social_tools.html' %}
+    </div>
+
+    <div class="small-container">
+        {% include 'scorecards/scorecard.html' %}
+    </div>
+
+    <div class="profile-info">
+        {% with politician_pos=object.current_politician_position %}
+        {% if politician_pos %}
+        <div class="constituency-party">
+            <h3>Key figure</h3>
+            <ul>
+                <li><a href="{{ politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }} <span>[mp]</span></a></li>
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        
+    </div>
+
+    <div class="large-container">
+        <div class="tab-wrapper">
+
+            {% if object.summary %}
+                <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
+                <div class="tab markdown" id="overview">
+                    {{ object.summary }}
+                </div>
+            {% endif %}
+
+            <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
+            <div class="tab" id="related-people" data-tab-content-source-url="{% url place_related_person_tab slug=object.slug %}">
+            </div>
+
+	    {% comment %}
+	    <!-- Not showing organisations for the moment as the list isn't very good. -->
+            <h2 class="tab-nav" rel="#related-organisations"><a href="/">Related Organisations</a></h2>
+            <div class="tab" id="related-organisations" data-tab-content-source-url="{% url place_related_organisation_tab slug=object.slug %}">
+            </div>
+	    {% endcomment %}
+
+            <h2 class="tab-nav" rel="#related-places"><a href="/">Related Places</a></h2>
+            <div class="tab" id="related-places">
+
+	        {# Do we want to display more than just the parent? #}
+
+            {% if object.parent_place %}
+                {{ object.name }} is contained in
+                <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
+		        {% if object.parent_place.kind.slug != 'country' %}
+                    {{ object.parent_place.kind.name }}.
+                {% endif %}
+            {% endif %}
+
+            {% if object.child_places.count %}
+                <div class="content_box">
+		            <h3>Areas within {{ object.name }}</h3>
+		  
+		            <ul class="listing">
+		            {% for child in object.child_places.all %}
+                        <li>
+                            <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+                            {{ child.kind.name }}
+                        </li>
+		            {% endfor %}
+                    </ul>            
+                </div>
+            {% endif %}
+
+            </div>
+
+            {% include 'disqus_comments.html' %}
+
+    {% comment %}
+    
+    <h1>{{ object.name }}</h1>
+
+    {% if object.organisation %}
+    <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
+    {% endif %}    
+
+
+    {% with politician_pos=object.current_politician_position %}
+        {% if politician_pos %}
+            <div class="content_box">
+                <h3>{{ politician_pos.person.name }}</h3>
+        
+                <p>
+                    <a href="{{politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }}</a>
+                    is the MP for {{ object.name }}
+                    {% if politician_pos.start_date %}
+                        (started {{ politician_pos.start_date }})
+                    {% endif %}
+                </p>
+        
+            </div>
+        {% endif %}
+    {% endwith %}
+    {% endcomment %}
+
+            {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
+                <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects ({{ object.project_set.count }})</a></h2>
+                <div class="tab" id="cdf-projects">
+                    {% include "include.html" with template="projects/place_summary.html" %}
+                </div>
+            {% endif %}
+
+            {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
+                <h2 class="tab-nav" rel="#population-data"><a href="/">Population Data</a></h2>
+                <div class="tab" id="population-data">
+                    <dl>
+                        <dt>Area</dt>
+			<dd>
+			    {{ object.placedata.area|floatformat:0 }} km<sup>2</sup>
+			    (Ranked {{ object.placedata.area_rank }} of 
+			    {{ place_type_count }} {{ object.kind.plural_name }})
+			</dd>
+                        <dt>Population</dt>
+			<dd>
+			    {{ object.placedata.population_total|intcomma }}
+			    (Ranked {{ object.placedata.population_rank }} of 
+			    {{ place_type_count }} {{ object.kind.plural_name }})
+			</dd>
+                        <dt>Population Density</dt>
+			<dd>
+			    {{ object.placedata.population_density|floatformat:1 }} people per km<sup>2</sup>
+			    (Ranked {{ object.placedata.population_density_rank }} of 
+			    {{ place_type_count }} {{ object.kind.plural_name }})
+			</dd>
+                        <dt>Male</dt><dd>{{ object.placedata.population_male|intcomma }}</dd>
+                        <dt>Female</dt><dd>{{ object.placedata.population_female|intcomma }}</dd>
+			<dt>Gender Index (women to men)</dt>
+			<dd>
+			    {{ object.placedata.gender_index|floatformat:2 }}
+			    (Ranked {{ object.placedata.gender_index_rank }} of 
+			    {{ place_type_count }} {{ object.kind.plural_name }})
+			</dd>
+                        <dt>Households</dt><dd>{{ object.placedata.households_total|intcomma }}</dd>
+			<dt>Average Household size</dt>
+			<dd>
+			    {{ object.placedata.average_household_size|floatformat:2 }}
+			    (Ranked {{ object.placedata.household_size_rank }} of 
+			    {{ place_type_count }} {{ object.kind.plural_name }})
+			</dd>
+		      {% if object.placedata.registered_voters_total != None %}
+			<dt>Registered Voters</dt><dd>{{ object.placedata.registered_voters_total|intcomma }}</dd>
+			<dt>Proportion of Population Registered to Vote</dt>
+			<dd>
+			    {{ object.placedata.registered_voters_proportion|floatformat:2 }}
+			    (Ranked {{ object.placedata.registered_voters_proportion_rank }} of 
+			    {{ place_type_count }} {{ object.kind.plural_name }})
+			</dd>
+                      {% endif %}
+		      {% if object.placedata.youth_voters_proportion != None %}
+			<dt>Proportion of Youth Voters</dt>
+			<dd>
+			    {{ object.placedata.youth_voters_proportion|floatformat:2 }}
+			    (Ranked {{ object.placedata.youth_voters_proportion_rank }} of 
+			    {{ place_type_count }} {{ object.kind.plural_name }})
+			</dd>
+                      {% endif %}
+                    </dl>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

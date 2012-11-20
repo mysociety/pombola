@@ -38,10 +38,19 @@
             {% endif %}
             {% endcomment %}
 
+
             <div id="account">
-                <a href="#">login</a>
-                <a href="#">register</a>
+            {% if request.user.is_authenticated  %}
+                {{ request.user }} |
+                <a href="{% url django.contrib.auth.views.logout %}">logout</a>
+            {% else %}
+                    <a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a>
+                    <a href="#">register</a>
+            {% endif %}
             </div>
+
+
+
             <div id="search">
                 <form id="odekro_search" method="get" action="{% url core_search %}">
                     <input type="text" value="Search" onblur="this.value=!this.value?'Search':this.value;" onfocus="this.select()" onclick="this.value='';" />

@@ -276,22 +276,33 @@ ul.position-list{border:1px solid #eee;padding:0;width:auto;overflow:hidden;marg
 ul.position-list li{list-style:none;padding:5px;overflow:hidden;border-bottom:1px solid #eee;margin:0;}
 ul.position-list li:last-child{border:none;}
 ul.position-list li:nth-child(2n+2){background:#f8f8f8;}
-ul.position-list img{border:2px solid #eee;float:left;margin:0 5px 0 0;}
+ul.position-list img{border:2px solid #eee;float:left;margin:0 5px 0 0;text-indent:-9999px;}
 ul.position-list .name{font-size:1.5em;font-weight:normal;display:block;margin:0 0 5px;}
 ul.position-list .more{float:right;margin:-14px 0 0;}
 ul.position-list strong{float:left;color:#bbb;}
 li.positionArea a{color:#f20;padding:0 5px;}
+li.positionArea a:hover, .listing li a:hover{color:#444;}
 li.positionArea div{margin:0 0 0 75px;}
 form#register{padding:5px;box-shadow:0 0 2px #ccc;margin:20px 0 0 3px;}
-.register{background:#f8f8f8;border:1px solid #ddd;padding:15px;}
+#login{padding:5px;box-shadow:0 0 2px #ccc;margin:20px 0 5px 3px;width:550px;}
+.register, #login form{background:#f8f8f8;border:1px solid #ddd;padding:15px;}
 form#register label{width:140px;font-size:.9em;float:left;text-align:right;padding:5px 10px 0 0;}
+#login form label{display:inline-block;width:140px;font-size:.9em;float:left;text-align:right;padding:5px 10px 0 0;}
 form#register input{width:250px;padding:5px;border:1px solid #ddd;color:#aaa;}
-form#register button{margin:0 0 0 150px;background:#6bb95d;padding:5px 15px;color:#fff;border:1px solid #146c03;}
+#login form input{margin:0 0 10px;display:block;width:250px;padding:5px;border:1px solid #ddd;color:#aaa;}
+form#register button, #login form .login-button{margin:0 0 0 150px;background:#6bb95d;padding:5px 15px;color:#fff;border:1px solid #146c03;cursor:pointer;}
+#login form .login-button{width:90px;}
+#login form p{display:inline-block;margin:0 0 10px 150px;}
+#login form p a{margin:0 5px 3px 0;color:#f20;display:block;}
+#login form p a:hover{color:#444;}
 form#register span{display:block;margin:0 0 8px 150px;font-size:.9em;color:#888;width:260px;}
 form#register span a{color:#f20;}
+.login-social{margin:10px 0;}
+.login-social a:first-child{width:210px;height:46px;background:url(../images/social-media-login.png) no-repeat;display:block;}
+.login-social a:last-child{width:210px;height:46px;background:url(../images/social-media-login.png) no-repeat;display:block;}
 /* content */
 ol#pagination{overflow:hidden;padding:0;}
-ol#pagination li, .pagination .page{color:#fff;float:left;list-style:none;cursor:pointer;margin:0 .5em 0 0;border-radius:15px;padding:3px 7px;background:#ddd;}
+ol#pagination li, .pagination .page, .pagination a{color:#fff;float:left;list-style:none;cursor:pointer;margin:0 .5em 0 0;border-radius:15px;padding:3px 7px;background:#ddd;}
 ol#pagination li:hover{color:#fff;background:#f20;}
 ol#pagination li.current, .pagination .current{color:#f20;font-weight:bold;cursor:default;background:none;}
 .hansardContainer > ul.pagination{margin:0 auto;float:right;}

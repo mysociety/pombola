@@ -128,7 +128,11 @@ def configure(db=None, dbuser=None, dbpasswd=None,
         ('MANAGERS_NAME', 'Odekro Managers'),
         ('TWITTER_ACCOUNT_NAME', 'odekro'),
         ('DISQUS_SHORTNAME', 'odekro'),
-        ('GOOGLE_ANALYTICS_ACCOUNT', 'UA-36374336-1')
+        ('GOOGLE_ANALYTICS_ACCOUNT', 'UA-36374336-1'),
+        ('FACEBOOK_APP_ID', '342278959203828'),
+        ('FACEBOOK_API_SECRET', 'b1508ccaed96bc4006e8f485257e3833'),
+        ('TWITTER_CONSUMER_KEY', 'xPO8GPH9fJFvp89KnAtrZw'),
+        ('TWITTER_CONSUMER_SECRET', 'jHYE0inEBMixgiQny1LltYenxWk5HUmTfM3E1hzzTYw')
     )
 
     configs2 = (
