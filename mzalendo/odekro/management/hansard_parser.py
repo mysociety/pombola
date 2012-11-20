@@ -73,8 +73,18 @@ PATTERNS = (
     (SCENE_END, SCENE_END_PATTERN),
 )
 
-def parse(content):   
-    normalised = normalise_line_breaks( content )
+
+def preprocess(content):
+    # hack to clear newlines and other chars we are seeing in some of the content
+    content = '\n'.join([x.strip() for x in content.splitlines()])
+    content = content.decode('utf8')
+    content = '-'.join(content.split(u'\u2013'))
+    content = '-'.join(content.split('~'))
+    return content
+
+def parse(content):
+
+    normalised = normalise_line_breaks(preprocess(content))
     
     lines = normalised.split("\n");
     lines = scan(lines)

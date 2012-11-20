@@ -100,9 +100,9 @@
             "column": "130", 
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
-            "original": "Mr First Deputy Speaker: Is she from the Attorney~General\u2019s Department\u00bb or Ministry of Justice?", 
+            "original": "Mr First Deputy Speaker: Is she from the Attorney-General\u2019s Department\u00bb or Ministry of Justice?", 
             "section": "VOTES AND PROCEEDINGS AND THE OFFICIAL REPORT", 
-            "speech": "Is she from the Attorney~General\u2019s Department\u00bb or Ministry of Justice?", 
+            "speech": "Is she from the Attorney-General\u2019s Department\u00bb or Ministry of Justice?", 
             "time": "10:55:00"
         }, 
         {
@@ -172,7 +172,14 @@
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, item number5 _", 
             "section": "- PAPERS", 
-            "speech": "Hon Members, item number5 _\n BILLS -~ CONSIDERATION STAGE\n Ghana Maritime Authority (Amendment) Bill, 2011\n Clause 1 - Section (16) of Act 630 amended. _", 
+            "speech": "Hon Members, item number5 _", 
+            "time": "11:05:00"
+        }, 
+        {
+            "column": "131", 
+            "heading": "BILLS -- CONSIDERATION STAGE", 
+            "kind": "heading", 
+            "original": "BILLS -- CONSIDERATION STAGE", 
             "time": "11:05:00"
         }, 
         {
@@ -180,7 +187,7 @@
             "kind": "speech", 
             "name": "Prof. Christopher Ameyaw-Akumfi", 
             "original": "Prof. Christopher Ameyaw-Akumfi: Mr Speaker, this was not one of the amendments but I thought we would take this opportunity to amend -", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, this was not one of the amendments but I thought we would take this opportunity to amend -", 
             "time": "11:05:00"
         }, 
@@ -189,7 +196,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member, I have called clause 1; if you do not have any amendment--- No amendment has been slated on the Order Paper but you also have the right to move an amendment to the clause 1. So if it is an amendment to the clause 1, let me know. Is it an amendment?", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Hon Member, I have called clause 1; if you do not have any amendment--- No amendment has been slated on the Order Paper but you also have the right to move an amendment to the clause 1. So if it is an amendment to the clause 1, let me know. Is it an amendment?", 
             "time": "11:05:00"
         }, 
@@ -198,7 +205,7 @@
             "kind": "speech", 
             "name": "Prof. Ameyaw-Akumfi", 
             "original": "Prof. Ameyaw-Akumfi: Clause 2.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Clause 2.", 
             "time": "11:05:00"
         }, 
@@ -207,7 +214,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Very well.\nClause 2 - Section 25 of Act 630 amended.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Very well.\n Clause 1 ordered to stand part of the Bill\n\nClause 2 - Section 25 of Act 630 amended.", 
             "time": "11:05:00"
         }, 
@@ -216,7 +223,7 @@
             "kind": "speech", 
             "name": "Chairman of the Committee (Mr Michael C. Boampong)", 
             "original": "Chairman of the Committee (Mr Michael C. Boampong): Mr Speaker, I beg to move, clause 2, sub-clause 1, add the following new paragraph: 1 \"for offences and penalties under the Act\".", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I beg to move, clause 2, sub-clause 1, add the following new paragraph: 1 \"for offences and penalties under the Act\".\n This is so because since Statutory instrument Act, 1959, number 32 of 1959, the Fines Penalty Units Act, 2000 has been repealed, it is necessary to create a provision to take care of all offences and penalties under the Act. These provisions would also empower the Hon Minister to come up with the offences and penalties for the Regulations that are yet to come after the passage of this Bill.\n Thank you, Mr Speaker.", 
             "time": "11:05:00"
         }, 
@@ -225,7 +232,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Mr Chairman, I thought it would be neater to say \"for offences and penalties\". This is because the Act has not created any offence. Do you understand? The Act itself has not created any offences or penalties so for offences and penalties which would be created in the Regulations - So it should be \"for offences and penalties\". So move the amendment and let me-", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Chairman, I thought it would be neater to say \"for offences and penalties\". This is because the Act has not created any offence. Do you understand? The Act itself has not created any offences or penalties so for offences and penalties which would be created in the Regulations - So it should be \"for offences and penalties\". So move the amendment and let me-", 
             "time": "11:05:00"
         }, 
@@ -234,7 +241,7 @@
             "kind": "speech", 
             "name": "Mr Boampong", 
             "original": "Mr Boampong: Mr Speaker, I beg to _move - Sub-clause 1, add the following new paragraph: 9", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I beg to _move - Sub-clause 1, add the following new paragraph: 9\n \"for offences and penalties\"", 
             "time": "11:05:00"
         }, 
@@ -243,7 +250,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member for Sekondi, any comment?", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Hon Member for Sekondi, any comment?", 
             "time": "11:05:00"
         }, 
@@ -252,7 +259,7 @@
             "kind": "speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah:Unfortunately, Mr Speaker, I had not been following the debate except to comment that in respect of these offences and penalties, it is anticipated that, the Regulations would", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Unfortunately, Mr Speaker, I had not been following the debate except to comment that in respect of these offences and penalties, it is anticipated that, the Regulations would", 
             "time": "11:05:00"
         }, 
@@ -261,7 +268,7 @@
             "kind": "continued speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "[PAPA OWUSU-ANKOMAH]", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "create the offence. That is, the Minister responsible would create the offence. However, what that provision seeks to do is to limit the discretion of the Hon Minister in terms of the extent to which he can go. I do not know whether that is What -", 
             "time": "11:05:00"
         }, 
@@ -270,7 +277,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: But when the -- the Regulation would be brought to the House.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "But when the -- the Regulation would be brought to the House.", 
             "time": "11:05:00"
         }, 
@@ -279,7 +286,7 @@
             "kind": "speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Yes.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Yes.", 
             "time": "11:05:00"
         }, 
@@ -288,7 +295,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: When we have not seen the offence, why should they now be giving us a cap when as a House we have not seen the offence?", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "When we have not seen the offence, why should they now be giving us a cap when as a House we have not seen the offence?", 
             "time": "11:05:00"
         }, 
@@ -297,7 +304,7 @@
             "kind": "speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Mr Speaker, you know that the power of the House to approve Regulations is constrained by the Constitution. If we have given the Hon Minister the power to create an offence and the offence is not inconsistent with the Constitution, we cannot do anything about it. This is because we have given the Hon Minister the power to create the offence.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, you know that the power of the House to approve Regulations is constrained by the Constitution. If we have given the Hon Minister the power to create an offence and the offence is not inconsistent with the Constitution, we cannot do anything about it. This is because we have given the Hon Minister the power to create the offence.\n We are telling the Hon Minister that \"look, in case you create the offence, the penalty that you prescribe will be limited within the confines of the provision in the amended Act\", so to speak. But if we do not do that, and we are waiting for the Hon Minister to bring the offence, then it means that even in the case of the penalty, we cannot limit it.", 
             "time": "11:05:00"
         }, 
@@ -306,7 +313,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Yes; but you also know that when he brings a penalty that is outrageous and is not consistent with other penalties, the House can use that as a basis to annul the Regulation.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Yes; but you also know that when he brings a penalty that is outrageous and is not consistent with other penalties, the House can use that as a basis to annul the Regulation.", 
             "time": "11:05:00"
         }, 
@@ -315,7 +322,7 @@
             "kind": "speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: MrSpeaker, indeed -", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "MrSpeaker, indeed -", 
             "time": "11:05:00"
         }, 
@@ -324,7 +331,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: No, the problem with clause 2 is that, we have been given a cap and we do not know the nature of the offence that would be created, and ordinarily, it is not neat.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "No, the problem with clause 2 is that, we have been given a cap and we do not know the nature of the offence that would be created, and ordinarily, it is not neat.", 
             "time": "11:05:00"
         }, 
@@ -333,7 +340,7 @@
             "kind": "speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Very well, Mr Speaker, it is a decision for the House to take. I agree with you but the House may decide to take that, position. But the House too may decide that, then let us wait, when the regulations come. But to annul the Regulation, we need two-thirds; and that is always a difficulty. That is why sometimes, in these matters, we try and put in limitations so that the House is not put in a position where because we do not have the two-thirds, even though we have the majority, we cannot annul the Regulation --", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Very well, Mr Speaker, it is a decision for the House to take. I agree with you but the House may decide to take that, position. But the House too may decide that, then let us wait, when the regulations come. But to annul the Regulation, we need two-thirds; and that is always a difficulty. That is why sometimes, in these matters, we try and put in limitations so that the House is not put in a position where because we do not have the two-thirds, even though we have the majority, we cannot annul the Regulation --", 
             "time": "11:05:00"
         }, 
@@ -350,7 +357,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Very well,", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Very well,\n I will put the Question.\n Yes?", 
             "time": "11:05:00"
         }, 
@@ -359,7 +366,7 @@
             "kind": "speech", 
             "name": "Mr H. Iddrisu", 
             "original": "Mr H. Iddrisu: Mr Speaker, I listened to Hon Papa Owusu-Ankomah -", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I listened to Hon Papa Owusu-Ankomah -", 
             "time": "11:05:00"
         }, 
@@ -368,7 +375,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: In fact, the amendment there interrelates to the clause", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "In fact, the amendment there interrelates to the clause\n 2 _ .", 
             "time": "11:05:00"
         }, 
@@ -377,7 +384,7 @@
             "kind": "speech", 
             "name": "Mr H. Iddrisu", 
             "original": "Mr H. Iddrisu: Clause 2(1)? Or we are taking the entire clause 2 (1) and (2), Mr Speaker?", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Clause 2(1)? Or we are taking the entire clause 2 (1) and (2), Mr Speaker?", 
             "time": "11:05:00"
         }, 
@@ -386,7 +393,7 @@
             "kind": "speech", 
             "name": "Mr _First Deputy Speaker\"", 
             "original": "Mr _First Deputy Speaker\": You can; you can, so that when I come to it, I would just put the Question.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "You can; you can, so that when I come to it, I would just put the Question.", 
             "time": "11:05:00"
         }, 
@@ -395,7 +402,7 @@
             "kind": "speech", 
             "name": "Mr H. Iddrisu", 
             "original": "Mr H. Iddrisu: Mr Speaker, just for elegance, \"the Minister may\"- there is a comma there, \"by Legislative Instrument\" - another comma there. I am not even too sure whether they should be there. \"The Minister may by Legislative Instrument make Regulations\" -Normally, the \"for\" would have joined this wording, then the rest of the provision would follow instead of having \"for\" in (a), \"for\" in (b) and \"for\" in (c) as it flows.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, just for elegance, \"the Minister may\"- there is a comma there, \"by Legislative Instrument\" - another comma there. I am not even too sure whether they should be there. \"The Minister may by Legislative Instrument make Regulations\" -Normally, the \"for\" would have joined this wording, then the rest of the provision would follow instead of having \"for\" in (a), \"for\" in (b) and \"for\" in (c) as it flows.\n Mr Speaker, further to -", 
             "time": "11:15:00"
         }, 
@@ -404,7 +411,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Then move the amendment; move that amendment because the point you are making makes sense. -", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Then move the amendment; move that amendment because the point you are making makes sense. -", 
             "time": "11:15:00"
         }, 
@@ -413,7 +420,7 @@
             "kind": "speech", 
             "name": "Mr H. Iddrisu", 
             "original": "Mr H. Iddrisu: Mr Speaker, 1 beg to move, clause 2 (1),", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, 1 beg to move, clause 2 (1),\n \"The Minister may by Legislative Instrument .. .\"", 
             "time": "11:15:00"
         }, 
@@ -422,7 +429,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Let me put the Question on this one then you move that amendment because it is an entirely different matter.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Let me put the Question on this one then you move that amendment because it is an entirely different matter.\n Hon Members, the Question is, clause 2 (1), add the following new paragraph \"For offences and penalties\". Question put and amendment agreed to.", 
             "time": "11:15:00"
         }, 
@@ -431,7 +438,7 @@
             "kind": "speech", 
             "name": "Mr H. Iddrisu", 
             "original": "Mr H. Iddrisu: Mr Speaker, I beg to move, clause 25 (1) should read", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I beg to move, clause 25 (1) should read\n \"The Minister may by Legislative Instrument make regulations for.\" Then delete the rest of the \"for\" from subclauses (a)-(e) and then the two commas, one, after \"may\" and \"Instrument\" should also be deleted.", 
             "time": "11:15:00"
         }, 
@@ -440,7 +447,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: As for the commas, it is a drafting issue so the draftsperson to take note.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "As for the commas, it is a drafting issue so the draftsperson to take note.", 
             "time": "11:15:00"
         }, 
@@ -449,7 +456,7 @@
             "kind": "speech", 
             "name": "Prof. Ameyaw-Akumfi", 
             "original": "Prof. Ameyaw-Akumfi: Mr Speaker, it seems section 1 (b), \"for the prevention of marine source pollution,\" it should be \"marine pollution\" because the \"source\" may not be \"marine pollution\". '", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, it seems section 1 (b), \"for the prevention of marine source pollution,\" it should be \"marine pollution\" because the \"source\" may not be \"marine pollution\". '", 
             "time": "11:15:00"
         }, 
@@ -458,7 +465,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: That is also another amendment. So let us deal with the Hon Minister for Communications\u2019 amendment then we come to yours.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "That is also another amendment. So let us deal with the Hon Minister for Communications\u2019 amendment then we come to yours.\n Hon Members, the amendment is to bring the word \"for\" after \"regulations\" and therefore consequentially delete all the \"for\" from (a) to (e) including the one the House has just endorsed.\n Question put and amendment agreed to.", 
             "time": "11:15:00"
         }, 
@@ -467,7 +474,7 @@
             "kind": "speech", 
             "name": "Prof. Ameyaw-Akumfi", 
             "original": "Prof. Ameyaw-Akumfi: Mr Speaker, I beg to move, clause 25 (1)(b) delete \"source\" after \"marine\". It should read \"the prevention of marine pollution\". What we are looking at is pollution affecting the marine environment and not necessarily the source being sea water.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I beg to move, clause 25 (1)(b) delete \"source\" after \"marine\". It should read \"the prevention of marine pollution\". What we are looking at is pollution affecting the marine environment and not necessarily the source being sea water.", 
             "time": "11:15:00"
         }, 
@@ -476,7 +483,7 @@
             "kind": "speech", 
             "name": "Mr H. Iddrisu", 
             "original": "Mr H. Iddrisu: Mr Speaker, I support the amendment being moved by Hon Ameyaw-Akumfi. But if he can guide us further as an expert. - If you read (b) and (c) together-- (b) -- \"for the prevention of marine pollution; (c) --- \"for the protection of the marine and response to marine environment incidents\". I wonder; even the (b) and (c) can be collapsed into just one paragraph which deals with issues of marine pollution, save that he may want to give us some guidance.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I support the amendment being moved by Hon Ameyaw-Akumfi. But if he can guide us further as an expert. - If you read (b) and (c) together-- (b) -- \"for the prevention of marine pollution; (c) --- \"for the protection of the marine and response to marine environment incidents\". I wonder; even the (b) and (c) can be collapsed into just one paragraph which deals with issues of marine pollution, save that he may want to give us some guidance.", 
             "time": "11:15:00"
         }, 
@@ -485,7 +492,7 @@
             "kind": "speech", 
             "name": "Prof. Ameyaw-Akumfi", 
             "original": "Prof. Ameyaw-Akumfi: Mr Speaker, (c) can be allowed because -I think here reference is being made to incidents so it should stay. But the first one is marine pollution in general.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, (c) can be allowed because -I think here reference is being made to incidents so it should stay. But the first one is marine pollution in general.", 
             "time": "11:15:00"
         }, 
@@ -494,7 +501,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Members, clause 2, paragraph (b) between \"marine\" and \"pollution\" delete \"source\".", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Hon Members, clause 2, paragraph (b) between \"marine\" and \"pollution\" delete \"source\".", 
             "time": "11:15:00"
         }, 
@@ -503,7 +510,7 @@
             "kind": "speech", 
             "name": "Alhaji Collins Dauda", 
             "original": "Alhaji Collins Dauda: Mr Speaker, I had the opportunity of discussing this amendment proposed by my Hon Colleague, the Member of Parliament for Techiman North and we are not opposed to it. We support the amendment proposed.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I had the opportunity of discussing this amendment proposed by my Hon Colleague, the Member of Parliament for Techiman North and we are not opposed to it. We support the amendment proposed.\n I thank you very much.\n Question put and amendment agreed to.", 
             "time": "11:15:00"
         }, 
@@ -512,7 +519,7 @@
             "kind": "speech", 
             "name": "Mr Boampong", 
             "original": "Mr Boampong: Mr Speaker, I beg to move, clause 2 sub-clause (2), delete.", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I beg to move, clause 2 sub-clause (2), delete.\n Mr Speaker, we propose the deletion of this sub-clause because it will not be appropriate to put a cap on a penalty to be imposed when we have no way of knowing the gravity of the offence and whether the penalty will be commensurate with the offence in the Regulations which are yet to be made.\n Question put and amendment agreed to.\n Clause 2 as amended ordered to stand part of the Bill.\n The Long Title ordered to stand part of the Bill.\n Suspension -of Standing Order 131 (1) Minister for Transport (Alhaji Collins Dauda) (IVJIP): Mr Speaker, I beg to move, that notwithstanding the provisions of Standing Order 131(1) which require that when a Bill has passed through the. Consideration Stage, the Third Reading thereof shall not be taken until at least twenty-four hours have elapsed, the Motion for the Third Reading of the Ghana Maritime Authority (Amendment) Bill, 2011 may be moved today.", 
             "time": "11:15:00"
         }, 
@@ -521,7 +528,7 @@
             "kind": "speech", 
             "name": "Mr Michael C. Boampong", 
             "original": "Mr Michael C. Boampong: Mr Speaker, I beg to second the Motion.\nBILLS.-THIRD READING\nThe Ghana Maritime Authority (Amendment) Bill, 2011 -read the Third time and passed -[Minister for Transport] .", 
-            "section": "- PAPERS", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
             "speech": "Mr Speaker, I beg to second the Motion.\n Question put and Motion agreed to. Resolved accordingly.\n\nBILLS.-THIRD READING\n\nThe Ghana Maritime Authority (Amendment) Bill, 2011 -read the Third time and passed -[Minister for Transport] .", 
             "time": "11:15:00"
         }, 
@@ -530,8 +537,15 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Item 8.", 
-            "section": "- PAPERS", 
-            "speech": "Item 8.\n BILLS~--THIRD READING\n The Ghana Maritime Security (Amendment) Bill, 2011 -~ read the Third time and passed ~-- [Minister for Transport].", 
+            "section": "BILLS -- CONSIDERATION STAGE", 
+            "speech": "Item 8.", 
+            "time": "11:25:00"
+        }, 
+        {
+            "column": "138", 
+            "heading": "BILLS---THIRD READING", 
+            "kind": "heading", 
+            "original": "BILLS---THIRD READING", 
             "time": "11:25:00"
         }, 
         {
@@ -539,7 +553,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Item 9 on the Order Paper.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Item 9 on the Order Paper.\n BILLS -TH]RD READING\n The Ghana Shipping (Amendment) Bill, 2011 - read the Third time and passed -- [Minister for Transport].", 
             "time": "11:25:00"
         }, 
@@ -548,7 +562,7 @@
             "kind": "speech", 
             "name": "Mr Kwame Osei-Prempeh", 
             "original": "Mr Kwame Osei-Prempeh: Mr Speaker, I beg to move, the Ghana Shipping (Amendment) Bill, 201 1 be taken through a second Consideration Stage.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, I beg to move, the Ghana Shipping (Amendment) Bill, 201 1 be taken through a second Consideration Stage.", 
             "time": "11:25:00"
         }, 
@@ -557,7 +571,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Osei- Prempeh, you are late. You should have got up before he moved the Motion.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Osei- Prempeh, you are late. You should have got up before he moved the Motion.", 
             "time": "11:25:00"
         }, 
@@ -566,7 +580,7 @@
             "kind": "speech", 
             "name": "Mr Osei-Prempeh", 
             "original": "Mr Osei-Prempeh: Mr Speaker, it has not been seconded so I am Within my .-.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, it has not been seconded so I am Within my .-.", 
             "time": "11:25:00"
         }, 
@@ -575,7 +589,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: No! He has moved it so -You are, but on a more serious note, if it is a very fundamental matter, you are against the rules. But if it is a very serious matter that will enrich the Bill, I will allow you because seriously, it is when I call it that you are supposed to get up, be on your feet for me to call you. As of now, I do not know, but why do you want it to pass through a second Consideration Stage?", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "No! He has moved it so -You are, but on a more serious note, if it is a very fundamental matter, you are against the rules. But if it is a very serious matter that will enrich the Bill, I will allow you because seriously, it is when I call it that you are supposed to get up, be on your feet for me to call you. As of now, I do not know, but why do you want it to pass through a second Consideration Stage?", 
             "time": "11:25:00"
         }, 
@@ -584,7 +598,7 @@
             "kind": "speech", 
             "name": "Mr Osei-Prempeh", 
             "original": "Mr Osei-Prempeh: Mr Speaker, yesterday, the Bill was amended.\u2019 Clause 1(a) 2(a) was amended to replace \"Director-General\" with \"Minister\u2019 that application for a permit shall be made to a Minister.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, yesterday, the Bill was amended.\u2019 Clause 1(a) 2(a) was amended to replace \"Director-General\" with \"Minister\u2019 that application for a permit shall be made to a Minister.\n Mr Speaker, the Ghana Maritime Authority is the regulatory body for shipping and power has been given to it. That power is being taken and given to a Minister. I think we must aim at building strong institutions and we must build the capacity of these institutions to work.\n Why do we take it from the Authority to a Minister\u2019s office? I believe that Ministers have a lot to do and why will they want to do everything? I believe that what is in the original rendition of the Bill is better for this country.\n I therefore want to move that we maintain that the Bill be further amended to retain the direct application to be made to the Director-General instead of the Minister and I believe it will help.", 
             "time": "11:25:00"
         }, 
@@ -593,7 +607,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member, I want to make sure that I situate myself within the rules. As I have indicated earlier, you are out of order. You are out of order but as I rightly pointed out, if anything you raise will enrich the Bill, I will allow you. So, I do not know whether we have to suspend. I do not know how I will go about it so that the rule will allow you to do what you want to do.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Member, I want to make sure that I situate myself within the rules. As I have indicated earlier, you are out of order. You are out of order but as I rightly pointed out, if anything you raise will enrich the Bill, I will allow you. So, I do not know whether we have to suspend. I do not know how I will go about it so that the rule will allow you to do what you want to do.", 
             "time": "11:25:00"
         }, 
@@ -602,7 +616,7 @@
             "kind": "speech", 
             "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, I believe that we are not really offending\nany of our rules. Standing Order 131(2) provides:\n\"Upon a motion \u2018That the... Bill be now read the Third time. - [which is what was done by the Minister] -\n\"it shall be competent for any Member to move an amendment to delete the words \u2018read the Third time\u2019 and to insert the word \u2018rejected\u2019, or to move a \u2018reasoned\u2019 amendment- [and I want to believe that what the Hon Member was doing was to move for a reasoned amendment]-stating the object and motive on which the opposition to the Bill is based, but such words must be strictly relevant to the Bill and not deal with its details.\"\nThat is what was done and I want to believe that what the Hon Member was doing was to move for a reasoned amendment. Mr Speaker, I believe that we can have some space ---", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, I believe that we are not really offending\n\nany of our rules. Standing Order 131(2) provides:\n\n\"Upon a motion \u2018That the... Bill be now read the Third time. - [which is what was done by the Minister] -\n\n\"it shall be competent for any Member to move an amendment to delete the words \u2018read the Third time\u2019 and to insert the word \u2018rejected\u2019, or to move a \u2018reasoned\u2019 amendment- [and I want to believe that what the Hon Member was doing was to move for a reasoned amendment]-stating the object and motive on which the opposition to the Bill is based, but such words must be strictly relevant to the Bill and not deal with its details.\"\n\nThat is what was done and I want to believe that what the Hon Member was doing was to move for a reasoned amendment. Mr Speaker, I believe that we can have some space ---", 
             "time": "11:25:00"
         }, 
@@ -611,7 +625,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member, why are you not reading Standing Order 131(1)? This goes with amendment of Bills after Consideration Stage; that is the relevant provision. What you are reading is not the relevant provision under the Standing Orders. Amendment of Bills after Consideration Stage, Standing Order 130, that says:", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Member, why are you not reading Standing Order 131(1)? This goes with amendment of Bills after Consideration Stage; that is the relevant provision. What you are reading is not the relevant provision under the Standing Orders. Amendment of Bills after Consideration Stage, Standing Order 130, that says:\n \"If any Member desires to delete or amend a provision contained in a Bill which has passed through the Consideration Stage. . .\"", 
             "time": "11:25:00"
         }, 
@@ -620,7 +634,7 @@
             "kind": "continued speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "[MR FIRST DEPUTY SPEAKER]", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Which has passed through the Consideration Stage as it is in this case --\n \"... or to introduce any new provision to it, he may, at any time before a Member rises to move the Third Reading of the Bill, move that the Bill do pass through a second Consideration Stage (either wholly or in respect only of some particular part or parts of the Bill or some proposed new clause of new schedule). No notice of such Motion shall be required. If the Motion is agreed to, the Bill shall immediately pass through a second Consideration Stage.\"\n And I am saying that he has allowed the Hon Minister to move the Motion; that is why I am saying that he did not act timeously. But if his point will enrich the Bill, we can relax the rules to enable him do it because the relevant provision is Standing Order 130 (1).", 
             "time": "11:25:00"
         }, 
@@ -629,7 +643,7 @@
             "kind": "speech", 
             "name": "Mr Kyei-Mensah-Bonsu", 
             "original": "Mr Kyei-Mensah-Bonsu: Mr Speaker, I am not arguing at all with you on that. What I am saying is that, our rules, besides what we have quoted, also permit us to use this window of opportunity. That is all that I am saying. I do not think that you will say that l am out of order in this. He has - he can create space to move a reasoned amendment --", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, I am not arguing at all with you on that. What I am saying is that, our rules, besides what we have quoted, also permit us to use this window of opportunity. That is all that I am saying. I do not think that you will say that l am out of order in this. He has - he can create space to move a reasoned amendment --", 
             "time": "11:25:00"
         }, 
@@ -638,7 +652,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Minority Leader, there is a specific provision -- -", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Minority Leader, there is a specific provision -- -", 
             "time": "11:25:00"
         }, 
@@ -647,7 +661,7 @@
             "kind": "speech", 
             "name": "Mr Kyei Mensah-Bonsu", 
             "original": "Mr Kyei Mensah-Bonsu: Mr Speaker,\u2018 that is contained in Standing Order 13 1(2).", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker,\u2018 that is contained in Standing Order 13 1(2).", 
             "time": "11:25:00"
         }, 
@@ -656,7 +670,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Minority Leader, there is a specific provision under our rules. After the Bill\nhas passed through the Consideration Stage and what you have to do, if you want to move the Bill through a second Consideration Stage - The one that you are talking about is that the person can get up an say that it should be rejected. Yes, that is when you are opposed to it.\nStanding Order 131(2) is dealing with where you do not want the Bill to be passed at all. This is because upon a Motion that the Bill be now read the Third time, it shall be competent for any Member to\" move an amendment to delete the Words, \"read the Third time\" and to insert the word \"rejected\"\nOr to move a reasoned amendment stating the object and motive on which the opposition to the Bill is based, but such words must be strictly relevant to the Bill and not deal with its details\".\nThis is second Consideration Stage, this particular Question was put to the House yesterday and it was agreed on. What he is raising, a decision was taken on it yesterday coming from the Committee. But I will relax the rules, and then I put the Question whether the House wants the Bill to pass through a second Consideration Stage. If the House agrees, before we move to his amendment.\nMr Haruna Iddrisu; Mr Speaker, I assume that you are permitting the second Consideration Stage proposed by the Hon Member and to state that yesterday, when that particular amendment was considered, it was not for the Minister on his own to make that determination on matters relating to the permit. It was to be on the advice of the Board which the Director -General serves on.\nTherefore, his argument that that will water down their regulatory power is neither here nor there.\nI think that his proposal is misplaced and I will urge him to abandon it so that we can go through the Third Reading.\nI so submit.\nThank you.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Minority Leader, there is a specific provision under our rules. After the Bill\n\nhas passed through the Consideration Stage and what you have to do, if you want to move the Bill through a second Consideration Stage - The one that you are talking about is that the person can get up an say that it should be rejected. Yes, that is when you are opposed to it.\n\nStanding Order 131(2) is dealing with where you do not want the Bill to be passed at all. This is because upon a Motion that the Bill be now read the Third time, it shall be competent for any Member to\" move an amendment to delete the Words, \"read the Third time\" and to insert the word \"rejected\"\n\nOr to move a reasoned amendment stating the object and motive on which the opposition to the Bill is based, but such words must be strictly relevant to the Bill and not deal with its details\".\n\nThis is second Consideration Stage, this particular Question was put to the House yesterday and it was agreed on. What he is raising, a decision was taken on it yesterday coming from the Committee. But I will relax the rules, and then I put the Question whether the House wants the Bill to pass through a second Consideration Stage. If the House agrees, before we move to his amendment.\n\nMr Haruna Iddrisu; Mr Speaker, I assume that you are permitting the second Consideration Stage proposed by the Hon Member and to state that yesterday, when that particular amendment was considered, it was not for the Minister on his own to make that determination on matters relating to the permit. It was to be on the advice of the Board which the Director -General serves on.\n\nTherefore, his argument that that will water down their regulatory power is neither here nor there.\n\nI think that his proposal is misplaced and I will urge him to abandon it so that we can go through the Third Reading.\n\nI so submit.\n\nThank you.", 
             "time": "11:25:00"
         }, 
@@ -665,7 +679,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: We are not saying it should pass through the second Consideration Stage. It is when the House agrees; so that is why I want to take one or two people and then I will put the Question.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "We are not saying it should pass through the second Consideration Stage. It is when the House agrees; so that is why I want to take one or two people and then I will put the Question.\n Yes, let me hear from you, Hon Member for Techiman North.", 
             "time": "11:35:00"
         }, 
@@ -674,7 +688,7 @@
             "kind": "speech", 
             "name": "Prof. Ameyaw-Akumfi", 
             "original": "Prof. Ameyaw-Akumfi: Mr Speaker, I am happy that this point is being raised in this last minute. Mr Speaker, that clause is only asking for the application to be submitted to the Director -General. When you go to (4) - I think this is the amendment that carried- The Minister in consultation with the Board will now grant the permit.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, I am happy that this point is being raised in this last minute. Mr Speaker, that clause is only asking for the application to be submitted to the Director -General. When you go to (4) - I think this is the amendment that carried- The Minister in consultation with the Board will now grant the permit.\n Mr Speaker, I agree with this idea coming out now that, for the application, the Director-General\u2019s office should be appropriate and then that application again will be processed, recommendations made through the Board for the Minister to grant the permit. So I think that this step should be left in the hands of the Director-General.", 
             "time": "11:35:00"
         }, 
@@ -683,7 +697,7 @@
             "kind": "speech", 
             "name": "Alhaji Abdul-Rashid Pelpuo", 
             "original": "Alhaji Abdul-Rashid Pelpuo: Mr Speaker, under normal circumstances it would have been logical for us to say that this matter be taken through a Consideration Stage, particularly if the issue is so weighty and so crucial to the overall purpose of the Bill; but I think that this issue on the table is not. The reason is that it is so much debatable and possibly unacceptable for us to say that a fundamental. issue that allows giving permit to vessels begiven toa Board rather than the Minister.\nBesides that, the Minister does not act in isolation. He acts because he is advised by the Board and so issues of this nature will necessarily be in consultation with the Board.\nSo I think that because of the crucial nature of it and the fact that the Minister is so important to the whole matter, I do not think that it is so necessary for us to allow us to go back to a second Consideration Stage. It will waste our time, it will not still be acceptable and I think that we do not have to take it.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, under normal circumstances it would have been logical for us to say that this matter be taken through a Consideration Stage, particularly if the issue is so weighty and so crucial to the overall purpose of the Bill; but I think that this issue on the table is not. The reason is that it is so much debatable and possibly unacceptable for us to say that a fundamental. issue that allows giving permit to vessels begiven toa Board rather than the Minister.\n This also has to do with international vessels coming into Ghana\u2019s waters and it should not be a Board; it must be a Minister who takes ultimate responsibility.\n\nBesides that, the Minister does not act in isolation. He acts because he is advised by the Board and so issues of this nature will necessarily be in consultation with the Board.\n\nSo I think that because of the crucial nature of it and the fact that the Minister is so important to the whole matter, I do not think that it is so necessary for us to allow us to go back to a second Consideration Stage. It will waste our time, it will not still be acceptable and I think that we do not have to take it.", 
             "time": "11:35:00"
         }, 
@@ -692,7 +706,7 @@
             "kind": "speech", 
             "name": "Mr FirstDeputy Speaker", 
             "original": "Mr FirstDeputy Speaker: Hon Deputy Majority Leader, withdraw the words \"waste of time\".", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Deputy Majority Leader, withdraw the words \"waste of time\".", 
             "time": "11:35:00"
         }, 
@@ -701,7 +715,7 @@
             "kind": "speech", 
             "name": "Mr Osei-Prempeh", 
             "original": "Mr Osei-Prempeh: I am not here to waste anybody\u2019s time, I am a Member of Parliament", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "I am not here to waste anybody\u2019s time, I am a Member of Parliament", 
             "time": "11:35:00"
         }, 
@@ -710,7 +724,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member, I did not call you. I want him to withdraw the use of the words.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Member, I did not call you. I want him to withdraw the use of the words.", 
             "time": "11:35:00"
         }, 
@@ -719,7 +733,7 @@
             "kind": "speech", 
             "name": "Alhaji Pelpuo", 
             "original": "Alhaji Pelpuo: Mr Speaker, I want to withdraw \"waste of time\". I think it is in bad taste. I want to say that it is not going to help us at all. It is not going to support the essence of the Bill to reflect our thinking and the purpose for which we are bringing it up here for amendment.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, I want to withdraw \"waste of time\". I think it is in bad taste. I want to say that it is not going to help us at all. It is not going to support the essence of the Bill to reflect our thinking and the purpose for which we are bringing it up here for amendment.", 
             "time": "11:35:00"
         }, 
@@ -728,7 +742,7 @@
             "kind": "speech", 
             "name": "Mr Osei-Prempeh", 
             "original": "Mr Osei-Prempeh: Mr Speaker, if the Hon Deputy Majority Leader does not understand the issue at stake, it is better for him to keep quiet.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, if the Hon Deputy Majority Leader does not understand the issue at stake, it is better for him to keep quiet.", 
             "time": "11:35:00"
         }, 
@@ -737,7 +751,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member, Withdraw. Hon Member, any Hon Member is entitled to express his opinion on the floor of this House. H_on Member, withdraw - [Interruptions] - I say withdraw.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Member, Withdraw. Hon Member, any Hon Member is entitled to express his opinion on the floor of this House. H_on Member, withdraw - [Interruptions] - I say withdraw.", 
             "time": "11:35:00"
         }, 
@@ -746,7 +760,7 @@
             "kind": "speech", 
             "name": "Mr Osei-Prempeh", 
             "original": "Mr Osei-Prempeh: Which part do I withdraw?", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Which part do I withdraw?", 
             "time": "11:35:00"
         }, 
@@ -755,7 +769,7 @@
             "kind": "speech", 
             "name": "Mr -First Deputy Speaker", 
             "original": "Mr -First Deputy Speaker: The one imputing that he did not understand what he was saying.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "The one imputing that he did not understand what he was saying.", 
             "time": "11:35:00"
         }, 
@@ -764,7 +778,7 @@
             "kind": "speech", 
             "name": "Mr Osei-Prempeh", 
             "original": "Mr Osei-Prempeh: I am saying if he does not understand what I am saying --", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "I am saying if he does not understand what I am saying --", 
             "time": "11:35:00"
         }, 
@@ -773,7 +787,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Withdraw.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Withdraw.", 
             "time": "11:35:00"
         }, 
@@ -782,7 +796,7 @@
             "kind": "speech", 
             "name": "Mr Osei-Prempeh", 
             "original": "Mr Osei-Prempeh: I Withdraw.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "I Withdraw.\n Mr Speaker, all I am saying is, by this application instead of being submitted to the Director-General, should be submitted to the Minister as Hon Member for Techiman North puts it. Should we go through the institution before it gets to the Minister or gets to the Minister before it gets to the institution?\n Mr Speaker, I believe that this is a regulatory body, it goes to the institution, it makes sure that everything has been satisfied before the Minister plays a role in it, why should the Minister be the one who receives the application?\n I believe that it should go to the authority if the Minister wants to have a role in it. It is not for the Minister to do the work of the Authority. So I believe that my application is well founded and I urge you to put the Question.", 
             "time": "11:35:00"
         }, 
@@ -791,7 +805,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member for Bekwai, because yesterday the Minister for Communications was trying to move an amendment by bringing in the Board somewhere along the line. As a member of the Committee, you tried to explain why it was not necessary to do that and the Minister withdrew his amendment, that is why I am calling you to help the House--", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Member for Bekwai, because yesterday the Minister for Communications was trying to move an amendment by bringing in the Board somewhere along the line. As a member of the Committee, you tried to explain why it was not necessary to do that and the Minister withdrew his amendment, that is why I am calling you to help the House--", 
             "time": "11:35:00"
         }, 
@@ -808,7 +822,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Hon Member for Sekondi, I will call you, do not worry.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Hon Member for Sekondi, I will call you, do not worry.", 
             "time": "11:35:00"
         }, 
@@ -817,7 +831,7 @@
             "kind": "speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Mr Speaker, no. But I see the Maze; we are not going through the second Consideration Stage", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, no. But I see the Maze; we are not going through the second Consideration Stage", 
             "time": "11:35:00"
         }, 
@@ -826,7 +840,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Yes.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Yes.", 
             "time": "11:35:00"
         }, 
@@ -835,7 +849,7 @@
             "kind": "speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Yes. The arguments that are being proffered are arguments that will be advanced when we get to the second Consideration Stage.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Yes. The arguments that are being proffered are arguments that will be advanced when we get to the second Consideration Stage.", 
             "time": "11:35:00"
         }, 
@@ -844,7 +858,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: No. The House must decide whether they will want it to go through second Consideration Stage.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "No. The House must decide whether they will want it to go through second Consideration Stage.", 
             "time": "11:35:00"
         }, 
@@ -853,7 +867,7 @@
             "kind": "speech", 
             "name": "Papa Owusu-Ankomah", 
             "original": "Papa Owusu-Ankomah: Mr Speaker, this is a House that makes law, this is a House that encourages debate. Mr Speaker, the Hon Member strongly feels that there is a matter that needs re- consideration by the House. I will plead with Mr Speaker to put the Question, so that we go through\" that second Consideration Stage and t-hen all the arguments will be advanced because already we have spent about 15 minutes on this preliminary point.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Mr Speaker, this is a House that makes law, this is a House that encourages debate. Mr Speaker, the Hon Member strongly feels that there is a matter that needs re- consideration by the House. I will plead with Mr Speaker to put the Question, so that we go through\" that second Consideration Stage and t-hen all the arguments will be advanced because already we have spent about 15 minutes on this preliminary point.\n So I am appealing to you to exercise your discretion, curtail the preliminary debate, put the Question, if the Question is agreed to by the House, he moves his amendment and we take a decision instead of this going back and forth. They are all raising substantive arguments even in supporting or going against the request.", 
             "time": "11:35:00"
         }, 
@@ -862,7 +876,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: I doubt whether what will happen will be different from what happens at the next level. So Hon Members, at this stage the Hon Member is moving that we pass the Bill through a second Consideration Stage in respect of the clause that vests a certain power in the Minister.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "I doubt whether what will happen will be different from what happens at the next level. So Hon Members, at this stage the Hon Member is moving that we pass the Bill through a second Consideration Stage in respect of the clause that vests a certain power in the Minister.\n Question put and agreed to.", 
             "time": "11:35:00"
         }, 
@@ -871,7 +885,7 @@
             "kind": "speech", 
             "name": "Mr First Deputy Speaker", 
             "original": "Mr First Deputy Speaker: Let us listen to him. At this stage it is passing through the second Consideration Stage, whether you agree to the amendment or not is another matter. That is a Second leg. That is not the end of the matter. So let us listen to his amendment now.", 
-            "section": "- PAPERS", 
+            "section": "BILLS---THIRD READING", 
             "speech": "Let us listen to him. At this stage it is passing through the second Consideration Stage, whether you agree to the amendment or not is another matter. That is a Second leg. That is not the end of the matter. So let us listen to his amendment now.", 
             "time": "11:35:00"
         }, 
