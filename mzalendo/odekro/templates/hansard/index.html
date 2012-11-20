@@ -1,15 +1,22 @@
-{% extends 'shell.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div class="hansardContainer elevencol">
     <div id="hansardIntro">
         <h1 class="hansardH1">The Hansard</h1>
-        <p>The official record of the Ghanaian Parliament is called the Hansard – named after the British publication of parliamentary proceedings.</p>
-        <p>We have the Hansards of the Ghana Parliament dating back to 2008. Browse through them below, or search via the box above.</p>
+        <p>The transcript of the proceedings in the Parliament of Ghana is called the Hansard – named after the British publication of parliamentary proceedings.
+        </p>
+        <p> Browse through them below, or search via the box above.</p>
+        {% comment %}
+        <p>We have the Hansards of the Ghana Parliament dating back to 2008.
+        </p>
+        {% endcomment %}
     </div>
     
     <div class="hansardMeta">
-        <h2 id="title">[Latest Date]</h2>
+        {% comment %}
+        <h2>[Latest Date]</h2>
+        
         <ul id="content">
             <li><a href="#">Question Period</a></li>
             <li><a href="#">Workforce Integration Organization</a></li>
@@ -23,11 +30,22 @@
             <li><a href="#">Member for New Town</a></li>
             <li><a href="#">Jobs and Growth Act, 2012</a></li>
         </ul>
+        {% endcomment %}
 
         <h2>Recent</h2>
         <ul>
-            {# recent dates #}
+            {% for sitting in sittings %}
+                <li>
+                    <a href="{{ sitting.get_absolute_url }}">
+                        {{ sitting.start_date }}
+                    </a>
+                </li>
+            {% empty %}
+                <li>There are no transcripts</li>
+            {% endfor %}
         </ul>
+        
+        <br />
 
         <h2>Past</h2>
         <ul>

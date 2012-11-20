@@ -1,31 +1,37 @@
 {% block content %}
     <div class="index-left sixcol">
+        <h3>Odekro</h3>
+
+        <h3 id="indexIntro">
+            Odekro promotes transparency, provides online access to public records and empowers citizens to keep an eye on public officials, especially parliament.
+        </h3>
+
+        <br />
+
+        <h3>What Are They Debating</h3>
+        <div id="wordcloud" style="width: 540px, height: 350px; border: 1px solid #ccc;">
+        </div>
+
+    </div>
+    <div class="index-right sixcol">
         
         {% if featured_person %}
             {% include 'odekro/featured_profile.html' %}
         {% endif %}
 
-        <div class="Plinks">
-            <a class="" href="#">How Our Democracy Works</a>
-            <a class="yellow" href="#">Something New</a>
-            <a class="green" href="#">Promotes Transparency</a>
-            <a class="" href="#">Public Records &amp; Bills</a>
-        </div>
-
-    </div>
-    <div class="index-right sixcol">
-        <h3 id="indexIntro">Odekro promotes transparency, provides online access to public records and empowers citizens to keep an eye on public officials, especially parliament.</h3>
-        <div id="wordcloud" style="width: 540px, height: 350px; border: 1px solid #ccc;"></div>
         <span id="pollOpen">Elections 2012 Polls Open In</span>
-        <div id="counter">  
-        </div>
+        <div id="counter"></div>
+        
         <div class="desc">
             <div>Days</div>
             <div>Hours</div>
             <div>Minutes</div>
             <div>Seconds</div>
         </div>
-        <div class="index-right sixcol">
+        
+
+        
+        <div class="index-right">
             {% include 'odekro/social_links.html' %}
         </div>
     </div>

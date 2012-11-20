@@ -12,7 +12,7 @@ ul li{list-style:none;}
 button{cursor:pointer;}
 h1, h2, h3, h4, h5, h6{color:#444;}
 #odekro-page h1{border-bottom:1px solid #eee;padding:0 0 3px;margin:0 0 8px;font-weight:500;}
-#odekro-page h2{margin:0 0 8px;font-weight:500;}
+#odekro-page > h2{margin:0 0 8px;font-weight:500;}
 #odekro-page h3{text-transform:uppercase;border-bottom:1px solid #eee;padding:0 0 3px;margin:0 0 8px;clear:both;}
 #odekro-page h3#indexIntro{text-transform:none;border:none;font-size:1.2em;font-weight:500;margin:0 0 15px;clear:both;color:#f20;}
 .search-left h2{border-bottom:1px solid #eee;clear:both;}
@@ -70,11 +70,11 @@ ul.menu .menulink:hover, #nav ul.menu .menuhover, ul.menu li:hover a.menulink{co
 #breadcrumb nav ul li a{color:#bebebe;}
 #breadcrumb nav ul li a:hover{text-decoration:underline;}
 #breadcrumb nav ul li .sep{padding:0 0.5em;color:#bebebe;}
-#odekro-page{padding:0 0 15px;min-height:750px;}
+#odekro-page{padding:0 0 45px;position:relative;}
 .typo-left p, .blog-post p, #odekro-page ol, .hansardContainer p, .search-left p{margin:0 0 10px;color:#888;font-size:1.1em;clear:both;}
 #odekro-page ol{padding:0 0 0 20px;}
 .typo-left ul{padding:0 0 0 15px;}
-.typo-left h6{font-size:.85em;}
+.typo-left h6{font-size:1.2em;}
 .typo-left ul li{margin:0 0 5px;list-style:disc;color:#888;}
 #odekro-page ol li{margin:0 0 5px;}
 .page-wrapper{margin:0 auto;width:1140px;}
@@ -84,9 +84,9 @@ ul.menu .menulink:hover, #nav ul.menu .menuhover, ul.menu li:hover a.menulink{co
 .search-box input{width:300px;height:20px;float:left;padding:5px;margin:0 10px 0 0;border:1px solid #ccc;}
 .hansardContainer{margin:0 auto;float:none;min-height:400px;}
 .hansardContainer #hansardIntro{padding:0 0 0 260px;margin:0 0 15px;}
-.hansardMeta h2#title{margin:15px 0 0;width:240px;float:left;background:#f0f0f0;padding:5px;border:1px solid #dedede;}
-.hansardMeta ul{border:1px solid #dedede;float:left;padding:15px 15px 5px;width:756px;-webkit-box-shadow:0px 0px 0px 3px rgba(130, 130, 130, .08);box-shadow:0px 0px 0px 3px rgba(130, 130, 130, .08);}
-.hansardMeta{margin:0 0 20px;overflow:hidden;}
+.hansardMeta h2{margin:15px 0 0;width:240px;float:left;background:#f0f0f0;padding:5px;border:1px solid #dedede;}
+.hansardMeta ul{min-height:40px;border:1px solid #dedede;float:left;padding:15px 13px 5px;width:756px;-webkit-box-shadow:0px 0px 0px 3px rgba(130, 130, 130, .08);box-shadow:0px 0px 0px 3px rgba(130, 130, 130, .08);margin:0 0 15px;}
+.hansardMeta{margin:0 0 20px;overflow:hidden;padding:3px 0 0;}
 .hansardMeta li{width:240px;float:left;margin:0 10px 0 0;}
 ul.hansardEntries{float:left;}
 ul.hansardEntries li.statement, ul.hansardEntries li{overflow:hidden;border-top:1px dashed #ccc;padding:10px 0 15px;width:1040px;}
@@ -147,7 +147,7 @@ a.recommendations:hover{color:#1fbc0a;}
 /***Featured Ends***/
 .index-mid{}
 .index-right{margin:0;}
-#odekro-footer{height:198px;padding:15px 0 0;background:#e1e1e1 url(../images/footer_bg.png) repeat-x;border-top:1px dashed #cdcdcd;}
+#odekro-footer{background:#e1e1e1;border-top:1px dashed #cdcdcd;width:100%;height:25px;padding:10px 0;position:fixed;bottom:0;left:0;}
 .linkFirst{margin:0 auto 20px;}
 #odekro-footer h3{text-shadow:1px 1px 0px rgba(255,255,255,0.8);-webkit-text-shadow:1px 1px 0px rgba(255,255,255,0.8);padding:0 0 15px;font-size:1.5em;font-weight:500;}
 .leftLink li{margin:0 0 5px;}
@@ -159,8 +159,9 @@ form#e-subscribe input{border:1px solid #a4a4a4;width:199px;border-radius:4px 0 
 form#e-subscribe button{width:60px;height:33px;float:right;margin:0 0 0 5px;background:url(../images/esign_btn.png) no-repeat;text-indent:-9999px;cursor:pointer;}
 form.search-wrap button, .search-filters button, input.button{height:32px;width:60px;background:#3d912d url(../images/page-search_btn.png) center no-repeat;text-indent:-9999px;cursor:pointer;border-radius:2px;border:none;}
 ul.socialLinks, ul.socialShare{margin:0 0 25px;}
-ul.socialLinks li{border-bottom:1px solid #ebebeb;margin-bottom:0;min-height:33px;padding:5px 0;}
-ul.socialLinks li:last-child{border:none;}
+ul.socialLinks li{1px solid #ebebeb;margin-bottom:0;min-height:33px;padding:5px 0;}
+.index-right > ul.socialLinks li{border-bottom:none;margin:0 10px 0 0;min-height:33px;padding:5px 0;float:left;min-width:130px;}
+ul.socialLinks li:last-child{border:none;margin:0;}
 ul.socialLinks li a{color:#6a6a6a;font-weight:normal;text-decoration:none;width:32px;height:32px;}
 ul.socialLinks li .icon{float:left;height:32px;margin-right:12px;overflow:hidden;text-indent:-99em;width:32px;}
 ul.socialLinks .facebook .icon{background:url(../images/facebook_dark.png) no-repeat;}
@@ -306,6 +307,7 @@ span#pollOpen{color:#f20;font-size:1.3em;margin:12px 0 0;display:block;}
 background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjOWRkNTNhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzdjYmMwYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
 background: -moz-linear-gradient(-45deg, #9dd53a 0%, #7cbc0a 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#9dd53a), color-stop(100%,#7cbc0a)); /* Chrome,Safari4+ */background: -webkit-linear-gradient(-45deg, #9dd53a 0%,#7cbc0a 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(-45deg, #9dd53a 0%,#7cbc0a 100%); /* Opera 11.10+ */background: -ms-linear-gradient(-45deg, #9dd53a 0%,#7cbc0a 100%); /* IE10+ */background: linear-gradient(135deg, #9dd53a 0%,#7cbc0a 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */display:inline-block;padding:10px;}
 .Plinks a:nth-child(2n+2){margin:0 0 10px;}
+.Plinks a:hover{}
 .cntSeparator{font-size:54px;margin:5px 7px;color:#000;}
 .countdownHolder{width:450px;height:60px;padding:10px;overflow:hidden;margin:0;font:40px/1.5 'Open Sans Condensed',sans-serif;text-align:center;letter-spacing:-3px;}
 .position{display:inline-block;height:1.6em;overflow:hidden;position:relative;width:1.05em;}
@@ -324,3 +326,4 @@ background: -moz-linear-gradient(-45deg, #9dd53a 0%, #7cbc0a 100%); /* FF3.6+ */
 .fdw-background span{padding:0;float:right; }
 .c-two{}
 .border{background:#eee;overflow:hidden;}
+html, body{height:100%;}

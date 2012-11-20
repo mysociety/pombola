@@ -1,3 +1,20 @@
+<div class="row linkSecond">
+    <ul class="qLinks sixcol">                                                            
+        <li><a href="{% url info_page slug='policies' %}">Privacy</a></li>
+        <li><a href="{% url info_page slug='faqs' %}">Help</a></li>
+        <li><a href="{% url info_page slug='contact-us' %}">Contact</a></li>
+    </ul>
+    <ul class="copyRight">
+            <a class="pw" href="http://www.hutspace.net">Website by Hutspace</a>
+    {% comment %}
+        <li>Copyright &copy;2012 Odekro. All Rights Reserved. 
+        </li>
+    {% endcomment %}
+    </ul>
+</div>
+
+{% comment %}
+
 <div class="row linkFirst">
     <ul class="leftLink sixcol">
         <h3>Browse Odekro</h3>
@@ -16,7 +33,6 @@
             <li><a href="#">Privacy</a></li>
         </ul>
     </ul>
-    {% comment %}
     <ul class="rightLink sixcol">
         <h3>Email Newsletter</h3>
         <p>Get updates, stay connected with Odekro<br />
@@ -26,23 +42,8 @@
             <button type="submit">Signup</button>
         </form>
     </ul>
-    {% endcomment %}
 </div>
-
-<div class="row linkSecond">
-    <ul class="qLinks sixcol">                                                            
-        <li><a href="#">Help</a></li>
-        <li><a href="#">Terms of Use</a></li>
-        <li><a href="#">Jobs</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-    <ul class="copyRight">
-        <li>Copyright &copy;2012 Odekro. All Rights Reserved. <a class="pw" href="http://www.hutspace.net">Website by Hutspace</a></li>
-    </ul>
-</div>
-
-
-
+{% endcomment %}
 {% comment %}
 <div id="footer-menu" class="footer-section">
     <h4>Mzalendo</h4>

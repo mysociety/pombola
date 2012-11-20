@@ -9,21 +9,24 @@
         </ul>
         
         <ul class="header">
-            <a href="#">Discover</a>
-            <span>your parliament</span>
+            <a href="{% url info_page slug='parliament-overview' %}">Discover
+                <span>your parliament</span>
+            </a>
         </ul>
 
         <ul class="header">
-            <a href="{% url position slug='mp' %}">Know</a>
-            <span>your MP's</span>
+            <a href="{% url position slug='mp' %}">Know
+                <span>your MP's</span>
+            </a>
         </ul>
 
-        {% comment %}
+        {% if settings.ENABLED_FEATURES.hansard %}
         <ul class="header">
-            <a href="#">Read</a>
-            <span>the Hansard</span>
+            <a href="{% url hansard:index %}">Read
+                <span>the Hansard</span>
+            </a>
         </ul>
-        {% endcomment %}
+        {% endif %}
 
         <div id="rightArea">
 
@@ -53,6 +56,7 @@
     <nav class="wrapper">
         <ul class="menu" id="menu">
             <li><a href="{% url home %}" class="menulink">Home</a></li>           
+            {% comment %}
             <li>
                 <a href="{% url info_page slug='2012-overview' %}" class="menulink">
                     Elections 2012
@@ -81,6 +85,7 @@
                     </li>                    
                 </ul>
             </li>
+            {% endcomment %}
 
             <li>
                 <a href="{% url info_page slug='parliament-overview' %}" class="menulink">
@@ -105,11 +110,13 @@
                             Committee Overview
                         </a>
                     </li>
+                    {% comment %}
                     <li>
                         <a href="{% url info_page slug='bills-overview' %}">
                             Bills Overview
                         </a>
                     </li>
+                    {% endcomment %}
                 </ul>                 
             </li>
 

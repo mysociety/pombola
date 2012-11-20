@@ -3,11 +3,26 @@
 
 {% load thumbnail %}
 
+{% block extra_scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.truncate.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.truncate').truncate({charLength: 50, perOT: true, fx: "easeOutBounce"})
+    })
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="hansardContainer elevencol">
     <div id="hansardIntro">
-        <h1 class="hansardH1">Parliamentary Debates</h1>
+        <h1 class="hansardH1">Debates of {{ sitting.start_date }}</h1>
+        <p>
+
+        </p>
+        {% comment %}
         <p>When Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the Ghana Parliament dating back to {{ earliest_year }}. Browse through them below, or search via the box above.</p>
+        {% endcomment %}
+
     </div>
 
     {% if topics %}

@@ -1,0 +1,15 @@
+{% if breadcrumbs %}
+<nav class="wrapper">
+    <ul>
+        {% for title, url in breadcrumbs %}
+        <li>
+            {% if url %}
+                <a href="{{ url }}">{{ title }}</a><span class="sep">&raquo;</span>
+            {% else %}
+                {{ title }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+{% endif %}
