@@ -16,6 +16,7 @@ class Command(BaseCommand):
             ('faqs.md', 'FAQs'),
             ('policies.md', 'Policies'),
             ('partners.md', 'Partners'),
+            ('contact-us.md', 'Contact Information for Odekro.org'),
             # Places
             ('places-overview.md', 'Overview'),
             # Parliament
