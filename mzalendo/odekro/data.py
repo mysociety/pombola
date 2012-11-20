@@ -15,7 +15,10 @@ from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from images.models import Image
 from core.models import PlaceKind, OrganisationKind, PositionTitle
 from core.models import Place, Person, Organisation, Position
+from info.models import InfoPage
 from hansard.models import Venue, Source, Sitting, Entry
+
+
 
 from odekro.models  import MP, HansardEntry
 from utils import split_name, convert_date, legal_name
