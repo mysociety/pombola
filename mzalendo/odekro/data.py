@@ -54,7 +54,7 @@ parliament, _ = Organisation.objects.get_or_create(name='Ghana Parliament',
 MP_FIELDS = ['Party', 'Occupation/Profession', 'Name', 'Date of Birth',
              'Votes Obtained', 'Image', 'Marital Status', 'Religion',
              'Hometown', 'Last Employment', 'Constituency', 'Region',
-             'Highest Education']
+             'Highest Education', 'Gender', 'Summary']
 
 
 
@@ -65,7 +65,7 @@ def add_mps_from_json(content):
 def add_mp(obj):
     party, occupation, name, dob, votes, image, \
     marital_status, religion, hometown, last_employment, constituency, \
-    region, education = [obj.get(k, '') for k in MP_FIELDS]
+    region, education, gender, summary = [obj.get(k, '') for k in MP_FIELDS]
 
     try:
         last, first, middle, title = split_name(name)
@@ -85,6 +85,10 @@ def add_mp(obj):
         
     person.title = title
     person.legal_name = legal
+    person.summary = summary
+    person.gender = gender.lower() or 'm'
+    if summary:
+        person.can_be_featured = True
     person.save()
 
     constituency, _ = Place.objects.get_or_create(name=constituency, 
