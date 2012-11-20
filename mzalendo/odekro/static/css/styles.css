@@ -304,6 +304,8 @@ form#register span a{color:#f20;}
 .login-social a:last-child{float:left;width:160px;height:36px;background:url(../images/social-media-login.png) no-repeat;display:block;text-indent:-9999px;}
 .login-social a:first-child:hover{background-position:0 -129.5px;}
 .login-social a:last-child:hover{background-position:0 -86px;}
+#login .error{margin:0 10px;text-align:center;background:#f20;padding:5px;color:#fff;}
+#login .error h2{color:#000;}
 /* content */
 ol#pagination{overflow:hidden;padding:0;}
 ol#pagination li, .pagination .page, .pagination a{color:#fff;float:left;list-style:none;cursor:pointer;margin:0 .5em 0 0;border-radius:15px;padding:3px 7px;background:#ddd;}
