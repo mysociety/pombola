@@ -10,6 +10,7 @@ a{text-decoration:none;}
 ul{text-decoration:none;}
 ul li{list-style:none;}
 button{cursor:pointer;}
+td, th, tr{background:none;border:none;padding:0;}
 h1, h2, h3, h4, h5, h6{color:#444;}
 #odekro-page h1{border-bottom:1px solid #eee;padding:0 0 3px;margin:0 0 8px;font-weight:500;}
 #odekro-page > h2{margin:0 0 8px;font-weight:500;}
@@ -284,14 +285,15 @@ li.positionArea a{color:#f20;padding:0 5px;}
 li.positionArea a:hover, .listing li a:hover{color:#444;}
 li.positionArea div{margin:0 0 0 75px;}
 form#register{padding:5px;box-shadow:0 0 2px #ccc;margin:20px 0 0 3px;}
-#login{padding:5px;box-shadow:0 0 2px #ccc;margin:20px 0 5px 3px;width:550px;}
+#login, table{padding:5px;box-shadow:0 0 2px #ccc;margin:20px 0 5px 3px;width:550px;}
 .register, #login form{background:#f8f8f8;border:1px solid #ddd;padding:15px;}
 form#register label{width:140px;font-size:.9em;float:left;text-align:right;padding:5px 10px 0 0;}
-#login form label{display:inline-block;width:140px;font-size:.9em;float:left;text-align:right;padding:5px 10px 0 0;}
+#login form label, tbody label{display:inline-block;width:140px;font-size:.9em;float:left;text-align:right;padding:5px 10px 0 0;}
 form#register input{width:250px;padding:5px;border:1px solid #ddd;color:#aaa;}
-#login form input{margin:0 0 10px;display:block;width:250px;padding:5px;border:1px solid #ddd;color:#aaa;}
-form#register button, #login form .login-button{margin:0 0 0 150px;background:#6bb95d;padding:5px 15px;color:#fff;border:1px solid #146c03;cursor:pointer;}
+#login form input, tbody input{margin:0 0 10px;display:block;width:250px;padding:5px;border:1px solid #ddd;color:#aaa;}
+form#register button, #login form .login-button, tbody input[type=submit]{margin:0 0 0 150px;background:#6bb95d;padding:5px 15px;color:#fff;border:1px solid #146c03;cursor:pointer;}
 #login form .login-button{width:90px;}
+tbody input[type=submit]{width:150px;margin:0;}
 #login form p{display:inline-block;margin:0 0 10px 150px;}
 #login form p a{margin:0 5px 3px 0;color:#f20;display:block;}
 #login form p a:hover{color:#444;}
