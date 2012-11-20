@@ -297,9 +297,11 @@ form#register button, #login form .login-button{margin:0 0 0 150px;background:#6
 #login form p a:hover{color:#444;}
 form#register span{display:block;margin:0 0 8px 150px;font-size:.9em;color:#888;width:260px;}
 form#register span a{color:#f20;}
-.login-social{margin:10px 0;}
-.login-social a:first-child{width:210px;height:46px;background:url(../images/social-media-login.png) no-repeat;display:block;}
-.login-social a:last-child{width:210px;height:46px;background:url(../images/social-media-login.png) no-repeat;display:block;}
+.login-social{margin:8px 0 0 110px;overflow:hidden;}
+.login-social a:first-child{float:left;width:160px;height:36px;margin:0 10px 0 0;background:url(../images/social-media-login.png) 0 -43px no-repeat;display:block;text-indent:-9999px;}
+.login-social a:last-child{float:left;width:160px;height:36px;background:url(../images/social-media-login.png) no-repeat;display:block;text-indent:-9999px;}
+.login-social a:first-child:hover{background-position:0 -129.5px;}
+.login-social a:last-child:hover{background-position:0 -86px;}
 /* content */
 ol#pagination{overflow:hidden;padding:0;}
 ol#pagination li, .pagination .page, .pagination a{color:#fff;float:left;list-style:none;cursor:pointer;margin:0 .5em 0 0;border-radius:15px;padding:3px 7px;background:#ddd;}

@@ -45,7 +45,7 @@
                 <a href="{% url django.contrib.auth.views.logout %}">logout</a>
             {% else %}
                     <a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a>
-                    <a href="#">register</a>
+                    <a href="{% url registration_register %}">register</a>
             {% endif %}
             </div>
 
