@@ -97,20 +97,20 @@ class Entry(HansardModelBase):
         for entry in entries:
             cache_key = "%s-%s" % (entry.sitting.start_date, entry.speaker_name)
 
-            # if cache_key in cache:
-            #     speakers = cache[cache_key]
-            # else:
-            # speakers = entry.possible_matching_speakers(update_aliases=True )
+            if cache_key in cache:
+                speakers = cache[cache_key]
+            else:
+                speakers = entry.possible_matching_speakers(update_aliases=True)
+                if not speakers:
+                    speakers = entry.possible_matching_speakers2() 
 
-            speakers = entry.possible_matching_speakers2()
-
-            if len(speakers) == 1:
+            if speakers and len(speakers) == 1:
                 speaker = speakers[0]
                 entry.speaker = speaker
                 entry.save()                
                     
     def possible_matching_speakers2(self):
-        alias = Alias.objects.filter(alias=entry.speaker_name)
+        alias = Alias.objects.filter(alias=self.speaker_name)
         if len(alias):
             alias = alias[0]
 
