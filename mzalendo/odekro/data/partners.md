@@ -2,7 +2,9 @@ Odekro is working with a number of partners to create this platform:
 
 ## Indigo Trust
 
-[Insert indigo info]
+The Indigo Trust is a grant making foundation that funds technology-driven projects to bring about social change, largely in African countries.  The Trust focuses mainly on innovation, transparency and citizen empowerment.
+
+The Indigo Trust believes that if people have the ability to access, share and create information, then they are empowered to make positive changes in their own lives and communities.
 
 ## mySociety
 

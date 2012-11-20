@@ -1,0 +1,63 @@
+{% load thumbnail %}
+
+{% with object.position_set.all.currently_active.order_by_place as positions %}
+<div class="typo-left ninecol">
+    <h1>Members of Parliament</h1>
+    <p>
+        There are currently 230 MPs.
+    </p>
+    <p>In the 2012 election the number of MPs will increase to 275 members elected by registered voters due to an addition of 45 new constituencies, established by CI-78.
+    </p>
+
+    {#<h2>Current Position Holders</h2>#}
+    
+    {% comment %}
+    <div class="search-filters">
+        <form method="get">Where:        
+            <select name="place_slug">
+                <option value="">All</option>            
+                <option value="baringo">Baringo</option>            
+                <option value="bomet">Bomet</option>            
+                <option value="bungoma">Bungoma</option>            
+                <option value="busia">Busia</option>            
+                <option value="elgeyo-marakwet">Elgeyo-Marakwet</option>            
+                <option value="embu">Embu</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% endcomment %}
+
+    <ul class="position-list">
+        {% for position in positions %}
+        {% with position.person as person %}
+        <li class="positionArea">
+            <a href="{{ person.get_absolute_url }}">
+                {% thumbnail person.primary_image "60x60" as img %}
+                <img src="{{ img.url }}" alt="{{ person.name }}" class="avatar"
+                     width="{{ img.width }}" height="{{ img.height }}" />
+                {% empty %}
+                <img class="avatar" src="#" />
+                {% endthumbnail %} 
+                <span class="name">{{ person.name }}</span>
+            </a>
+            <strong>Party:</strong>
+            <a href="{{ person.parties.0.get_absolute_url }}">{{ person.parties.0.name }}</a><br />
+            <strong>Constituency:</strong>
+            <a href="{{ person.constituencies.0.get_absolute_url }}">
+                {{ person.constituencies.0.name }}
+            </a><br />
+            <span class="more">
+                <a href="{{ person.get_absolute_url }}">more info</a>
+            </span>
+        </li>
+        {% endwith %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="index-right threecol">
+    <h1>Social</h1>
+    {% include 'odekro/social_links.html' %}
+</div>
+{% endwith %}

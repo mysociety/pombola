@@ -21,7 +21,7 @@
                 [Dolor sit amet, nibhorem ipsum euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam]
                 {% endif %}
             </p>
-            <h2><a href="#">Hon. {{ p.title }} {{ p.name }}</a></h2>
+            <h2><a href="{{ p.get_absolute_url }}">Hon. {{ p.title }} {{ p.name }}</a></h2>
             {% for place in p.constituencies %}
                 <span>MP for {{ place.name }}</span>
             {% endfor %}

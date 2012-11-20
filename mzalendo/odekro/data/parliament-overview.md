@@ -18,16 +18,16 @@ Law-making is considered to be the most important function of Parliament. Under 
 
 Chapter Thirteen of the 1992 Constitution variously, vests the control of all public funds (power of the public purse) in Parliament. In specific terms this means:
 
-    No tax can be imposed without the authority of Parliament (art. 174)
-    Apart from moneys charged directly on the Consolidated Fund by the Constitution, no moneys can be withdrawn from the Fund without the authority of Parliament (art. 178)
-    Parliament has the power and duty to monitor the expenditure of public funds to ensure that the monies it has authorised are used for the purposes for which they are intended by taking appropriate action on the Auditor-General’s Reports.
+No tax can be imposed without the authority of Parliament (art. 174)
+Apart from moneys charged directly on the Consolidated Fund by the Constitution, no moneys can be withdrawn from the Fund without the authority of Parliament (art. 178)
+Parliament has the power and duty to monitor the expenditure of public funds to ensure that the monies it has authorised are used for the purposes for which they are intended by taking appropriate action on the Auditor-General’s Reports.
 
 In addition to these, Parliament’s financial powers cover:
 
-    Authorising the granting or receiving of loans (cf. article 181)
-    Monitoring the country’s foreign exchange receipts and payments or transfers (article 184)
-    Authorising the waiver/exemption or variation of taxes (article 174)
-    Appointing an auditor to audit and report on the accounts of the Auditor-General’s office (article 187[15]).
+Authorising the granting or receiving of loans (cf. article 181)
+Monitoring the country’s foreign exchange receipts and payments or transfers (article 184)
+Authorising the waiver/exemption or variation of taxes (article 174)
+Appointing an auditor to audit and report on the accounts of the Auditor-General’s office (article 187[15]).
 
 In effect, the Executive is free to propose various expenditure levels and how revenue should be raised to meet them. Parliament is, however, empowered to control the expenditure of public funds.
 
@@ -39,7 +39,6 @@ As the embodiment of the sovereign will of the people of Ghana, Parliament exerc
 Parliament exercises this function by way of scrutiny of policy measures and executive conduct through its Committees, Questions to Ministers, Motions, and Censorship of Ministers among others.
 
 Parliament also exercises this power through the approval or otherwise of Presidential nominees for appointment as Ministers, Deputy Ministers, Chief Justice and other Justices of the Supreme Court, Members of the Council of State and other public offices specified by law.
-
 
 
 ### Representational Forum

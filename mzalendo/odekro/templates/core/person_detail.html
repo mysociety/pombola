@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 
+{% block extra_scripts %}
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">
+    stLight.options({publisher: "5e003073-041c-4ff8-8b24-bf3e9f4315fb"});
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="member-profile ninecol">
     <div id="profileInfo">
@@ -33,9 +41,7 @@
                 {% endfor %}
             </p>
             {% with object.parties.0 as party %}
-            <a class="{{ party.name|lower }}_tag" href="#">
-                {#<img src="{{ STATIC_URL }}images/ndc_tag.png" />#}
-            </a>
+            <a class="{{ party.name|lower }}_tag" href="#"></a>
             {% endwith %}
         </div>
         
@@ -63,8 +69,6 @@
             <span class="clear"></span>
 
             <div class="content comments">
-                
-                
                 <a id="post-count" href="#"><h3>3 comments</h3></a>
                 <div class="userAvatar">
                     <img src="#" />
@@ -152,25 +156,24 @@
 </div>
 
 <div class="index-right threecol">
-    <h3>Follow Us</h3>
-    <ul class="socialLinks">
-        <li class="facebook">
-            <a href="#">
-                <span class="icon">Facebook</span>
-            </a>
-            <iframe scrolling="no" frameborder="0" allowtransparency="true" style="border:none;overflow:hidden;width:96px;height:21px;margin:5px 0 0;" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.odekro.org%2Fsocial-media-icons%2F&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;height=21&amp;width=90"></iframe>
+    <h3>Share</h3>
+    <ul class="socialShare">
+        <li>
+            <span class='st_facebook_hcount' displayText='Facebook'></span>
         </li>
-        <li class="twitter">
-            <a href="#">
-                <span class="icon">Twitter</span>
-            </a>
-            <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1351848862.html#_=1351979906569&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=Odekro&amp;show_count=false&amp;show_screen_name=true&amp;size=m" class="twitter-follow-button" style="width:175px;height:20px;margin:6px 0 0;" title="Twitter Follow Button" data-twttr-rendered="true"></iframe>
+        <li>
+        <span class='st_twitter_hcount' displayText='Tweet'></span>
         </li>
-        <li class="googleplus">
-            <a href="#"><span class="icon">Googleplus</span></a>
-            <iframe width="100%" scrolling="no" frameborder="0" allowtransparency="true" hspace="0" marginheight="0" marginwidth="0" style="position:static;top:0pt;width:90px;margin:0px;border-style:none;left:0pt;visibility:visible;height:20px;margin:6px 0 0;" tabindex="0" vspace="0" id="I0_1351979851748" name="I0_1351979851748" src="https://plusone.google.com/_/+1/fastbutton?bsv=m&amp;abtk=AEIZW7QIrl2eWE%2BEfkX1GUuJ5z91sABA0JLcUOKZyJeWHaYes1TOJ%2BfgORbEQCHR8wnpbqviLB0sZmSxRlmfXcXR5B48l/XDG4zD9T51ScoFJhMyd9CUSf0%3D&amp;size=medium&amp;hl=en-US&amp;origin=http%3A%2F%2Fwww.briangardner.com&amp;url=http%3A%2F%2Fwww.briangardner.com%2Fsocial-media-icons%2F&amp;jsh=m%3B%2F_%2Fapps-static%2F_%2Fjs%2Fgapi%2F__features__%2Frt%3Dj%2Fver%3DGrT6xlVusV4.en_GB.%2Fsv%3D1%2Fam%3D!EjuVRaiyNaqIjBsSTg%2Fd%3D1%2Frs%3DAItRSTPP8XcYgVHBiYjEaHRudoswlscExg#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Conload&amp;id=I0_1351979851748&amp;parent=http%3A%2F%2Fwww.odekro.org" title="+1"></iframe>
+        <li>
+        <span class='st_googleplus_hcount' displayText='Google +'></span>
+        </li>
+        <li>
+        <span class='st_email_hcount' displayText='Email'></span>
         </li>
     </ul>
+
+    {% comment %}
+
     <h3>Latest Post</h3>
     <div class="featBox activity">
         <ul>
@@ -210,5 +213,6 @@
             <a href="#">MP's</a>
         </ul>
     </div>
+    {% endcomment %}
 </div>
 {% endblock %}

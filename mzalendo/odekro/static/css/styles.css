@@ -77,7 +77,7 @@ ul.menu .menulink:hover, #nav ul.menu .menuhover, ul.menu li:hover a.menulink{co
 .typo-left h6{font-size:1.2em;}
 .typo-left ul li{margin:0 0 5px;list-style:disc;color:#888;}
 #odekro-page ol li{margin:0 0 5px;}
-.page-wrapper{margin:0 auto;width:1140px;}
+.page-wrapper{margin:0 auto 15px;width:1140px;}
 .index-left, .index-mid, .index-right{overflow:hidden;padding:0 0 5px;}
 .index-left{}
 .search-box{margin:0 0 10px;padding:3px 0 0;}
@@ -95,6 +95,7 @@ ul.hansardEntries li.statement .focus, ul.hansardEntries li .focus{float:right;w
 li.statement .context p{color:#444;}
 li.statement .context span{color:#bbb;display:block;margin:0 0 5px;}
 li.statement .context a{color:#666;background:#97c8f1;padding:2px 3px;}
+ul.hansardEntries li.statement .context h6{font-size:.8em;}
 li.statement .focus a.hansardAvatar{float:left;border:2px solid #ccc;margin:0 10px 10px 0;}
 li.statement .focus img, li .focus img{display:block;width:65px;height:73px;background:url(../images/hansardAvatar.jpg) no-repeat;}
 li.statement .focus p, li .focus p{clear:none;font-size:.95em;}
@@ -241,7 +242,7 @@ ul.postLink a{color:#0875c1;padding:0 5px 0;}
 .bioData span{float:right;width:160px;}
 .bioData span a{color:#f20;}
 .titleSpace{overflow:hidden;margin:0 0 10px;}
-.titleSpace h2{color:#f20;font-size:1.9em;border-bottom:1px solid #eee;padding:0 0 3px;}
+.titleSpace h2{color:#f20;font-size:1.9em;border-bottom:1px solid #eee;padding:0 0 3px;margin:0 0 8px;}
 .titleSpace p{color:#ccc;font-style:italic;}
 .titleSpace p a{color:#f20;}
 .indi_tag{background:url(../images/ind_tag.png) no-repeat;display:block;float:right;height:54px;margin:-25px 0 0;width:155px;}
@@ -258,14 +259,14 @@ ul.postLink a{color:#0875c1;padding:0 5px 0;}
 ul.listing{margin:3px;padding:10px 0;}
 ul.listing li{overflow:hidden;border:1px solid #dedede;padding:5px;-webkit-box-shadow:0px 0px 0px 3px rgba(130, 130, 130, .08);box-shadow:0px 0px 0px 3px rgba(130, 130, 130, .08);margin:0 0 10px;}
 ul.listing li a{margin:0 2px 0 0;color:#f20;}
-ul.listing li img{display:block;width:100px;height:100px;background:#eee;border:2px solid #ccc;}
+ul.listing li img{margin:0 5px 0 0;display:block;width:100px;height:100px;background:#eee;border:2px solid #ccc;float:left;}
 ul.listing li.person img{background:url(../images/personAvatar.png) no-repeat;}
 ul.listing li.organisation img{background:url(../images/org.png) no-repeat;}
 ul.listing li.place img{background:url(../images/loca.png) no-repeat;}
-ul.listing li h4{}
-ul.listing li h4 a{border:none;margin:0;width:600px;}
+ul.listing li h4{width:970px;}
+ul.listing li h4 a{border:none;margin:0;}
 ul.listing li section{padding:0 0 5px;}
-ul.listing li section .type, ul.listing li section .kind{margin:0;float:right;}
+ul.listing li section .type, ul.listing li section .kind{margin:-33px 0 0;float:right;}
 ul.listing li section .more-link a, ul.listing li section a.read-more{margin:-16px 0 0;border:none;float:right;clear:both;padding:3px 7px;background:#ddd;text-transform:uppercase;font-size:.8em;border-radius:3px;}
 ul.listing li section .more-link a:hover{background:#bbb;color:#fff;}
 .search-filters{padding:10px 5px;background:#eee;}
@@ -290,13 +291,14 @@ form#register span{display:block;margin:0 0 8px 150px;font-size:.9em;color:#888;
 form#register span a{color:#f20;}
 /* content */
 ol#pagination{overflow:hidden;padding:0;}
-ol#pagination li{color:#fff;float:left;list-style:none;cursor:pointer;margin:0 .5em 0 0;border-radius:15px;padding:3px 7px;background:#eee;}
-ol#pagination li.current{color:#f20;font-weight:bold;cursor:default;background:none;}
-.hansardContainer > ol#pagination{margin:0 auto;float:right;}
-.hansardContainer > ol#pagination li{background:none;color:#1bb010;border-radius:0;}
-.hansardContainer > ol#pagination li.current{color:#000;font-weight:bold;cursor:default;background:none;}
-.hansardContainer > ol#pagination li.next{background:url(../images/nxt_bg.png) no-repeat;height:20px;text-indent:-9999px;width:12px;}
-.hansardContainer > ol#pagination li.prev{background:url(../images/prev_bg.png) no-repeat;height:20px;text-indent:-9999px;width:12px;}
+ol#pagination li, .pagination .page{color:#fff;float:left;list-style:none;cursor:pointer;margin:0 .5em 0 0;border-radius:15px;padding:3px 7px;background:#ddd;}
+ol#pagination li:hover{color:#fff;background:#f20;}
+ol#pagination li.current, .pagination .current{color:#f20;font-weight:bold;cursor:default;background:none;}
+.hansardContainer > ul.pagination{margin:0 auto;float:right;}
+.hansardContainer > ul.pagination .page{background:none;color:#1bb010;border-radius:0;}
+.hansardContainer > ul.pagination .current{color:#000;font-weight:bold;cursor:default;background:none;}
+.hansardContainer > ul.pagination .page .next{background:url(../images/nxt_bg.png) no-repeat;height:20px;text-indent:-9999px;width:12px;}
+.hansardContainer > ul.pagination .page .prev{background:url(../images/prev_bg.png) no-repeat;height:20px;text-indent:-9999px;width:12px;}
 span#pollOpen{color:#f20;font-size:1.3em;margin:12px 0 0;display:block;}
 #counter{height:77px;overflow:hidden;margin:15px 0 ;}
 .desc{margin:0 0 20px;overflow:hidden;}
