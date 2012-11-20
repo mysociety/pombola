@@ -103,19 +103,20 @@ def tagcloud(request,wks=4):
     # Build a query based on duration default is 1 month
     #cutoff = datetime.date.today() - datetime.timedelta(weeks=int(wks))
     #sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting_date__gte=cutoff)
+    
     cutoff = SearchQuerySet().models(hansard_models.Entry).latest('sitting_date')
-    #sqs  = SearchQuerySet().models(hansard_models.Entry).all()#filter(sitting__pk__gte=(int(cutoff.pk)-int(wks)))
+    sqs  = SearchQuerySet().models(hansard_models.Entry).all()#filter(sitting__pk__gte=(int(cutoff.pk)-int(wks)))
     cloudlist =[]
     try:
         # Generate tag cloud from content of returned entries
         words = {}
-        #for entry in sqs.all():
-        text = cutoff.object.content
+        for entry in sqs.all():
+            text = entry.object.content
     
-        for x in text.lower().split():
-            cleanx = x.replace(',','').replace('.','').replace('"','').strip()
-            if not cleanx in stopwords and not cleanx in hansardwords:
-                words[cleanx] = 1 + words.get(cleanx, 0)
+            for x in text.lower().split():
+                cleanx = x.replace(',','').replace('.','').replace('"','').strip()
+                if not cleanx in stopwords and not cleanx in hansardwords:
+                    words[cleanx] = 1 + words.get(cleanx, 0)
 
         for word in words:
             cloudlist.append({"text":word , "weight": words.get(word), "link":"/search/hansard/?q=%s" % word })
