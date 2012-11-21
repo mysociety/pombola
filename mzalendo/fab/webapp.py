@@ -21,6 +21,14 @@ def prepare():
     with cd('%(basedir)s' % env):
         sudo('chown -R %(webapp_user)s:%(webapp_user)s .' % env)
 
+    if not exists('%(basedir)s/lib/python2.7/site-packages/gdal.py' % env):
+        _install_gdal()
+    if not exists('%(basedir)s/lib/libxapian.so' % env):
+        _install_xapian()
+    _install_pil()
+    _install_gunicorn()
+
+
 def upload(rm_local=True):
     """Create an archive from the current Git master branch and upload it."""
     require('version')
@@ -47,15 +55,12 @@ def install(db=None, dbuser=None, dbpasswd=None):
     require('project')
     require('pip_requirements')
 
-    if not exists('%(basedir)s/lib/python2.7/site-packages/gdal.py' % env):
-        _install_gdal()
-    if not exists('%(basedir)s/lib/libxapian.so' % env):
-        _install_xapian()
-    _install_gunicorn()
     _install_requirements()
+
     _configure_gunicorn()
     _configure_upstart()
     _configure_nginx()
+
     link_current_version()
 
 def init():
@@ -96,9 +101,13 @@ def link_current_version():
     require('version')
     require('basedir')
 
-    _sudo(('rm %(basedir)s/releases/previous; '
-           'mv %(basedir)s/releases/current %(basedir)s/releases/previous; '
-           'ln -s %(basedir)s/releases/%(version)s %(basedir)s/releases/current') % env)
+    previous = '%(basedir)s/releases/previous' % env
+    current  = '%(basedir)s/releases/current' % env
+    source   = '%(basedir)s/releases/%(version)s' % env
+
+    _sudo(('rm %(previous)s; '
+           'mv %(current)s %(previous)s; '
+           'ln -s %(source)s %(current)s') % locals())
 
 
 def configure(db=None, dbuser=None, dbpasswd=None, 
@@ -187,6 +196,21 @@ def _install_requirements():
                './releases/%(version)s/%(pip_requirements)s') % env)
 
 
+def _install_pil():
+    require('virtualenv')
+
+    # install the build dependencies
+    sudo('apt-get -y build-dep python-imaging')
+    # symlink the libraries
+
+    for pkg in ('libfreetype', 'libjpeg', 'libz'):
+        try:
+            sudo('ln -s /usr/lib/`uname -i`-linux-gnu/%s.so /usr/lib/' % pkg)
+        except: pass
+    # install
+
+    sudo('%(basedir)s/bin/pip install PIL' % env)
+
 def _install_gdal():
     """Build and install GDAL into the virtualenv.
     More here: http://openblockproject.org/docs/install/common_install_problems.html
@@ -200,7 +224,7 @@ def _install_gdal():
         'build-essential',
         'python-dev'
     )
-    sudo('aptitude install %s' % ' '.join(packages))
+    sudo('aptitude install -y %s' % ' '.join(packages))
     sudo('ldconfig')
 
     with cd('%(basedir)s' % env):
@@ -376,8 +400,6 @@ def _sed(s, filepath):
         _sudo(cmd % ('', s, '-i ""', filepath)) # BSD
 
 def _vsudo(cmd):
-    # activate = 'source %(basedir)s/bin/activate' % env
-    # return _sudo('%s && %s' % (activate , cmd))
     with prefix('PATH=%(basedir)s/bin/:PATH' % env):
         return _sudo(cmd)
 

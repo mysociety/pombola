@@ -33,12 +33,16 @@ env.webapp_user = 'odekro_webapp'
 env.webapp_group = 'odekro_webapp'
 
 env.basedir = '/var/www/%(project)s' % env
+env.virtualenv = env.basedir
+
 
 #env.shell = "/bin/sh -c"
 
 def clean():
     require('hosts', provided_by=[vm, staging, production])
     require('basedir')
+    require('virtualenv')
+    
     try:
         webapp.stop()
     except: pass
@@ -47,30 +51,38 @@ def clean():
         sudo('rm -fr %(basedir)s' % env)
     except: pass
 
-def setup(packages=None):
+
+def setup():
     require('hosts', provided_by=[vm, staging, production])
     require('webapp_user')
     require('basedir')
+    require('virtualenv')
     
     try:
         webapp.stop()
     except: pass
 
-    if not packages or packages.lower() not in ['0', 'no', 'n', 'false']:
-        server.install_packages()
-    
-    server.create_webapp_user()
-    webapp.prepare()
-    
+    prepare()
+
     setup_postgis()
     setup_db()
     
     if not exists('/etc/init.d/nginx'):
         nginx.install()
 
+def prepare():
+    require('hosts')
+    require('webapp_user')
+
+    server.install_packages()    
+    server.create_webapp_user()
+    webapp.prepare()
+
 def setup_postgis():    
     require('hosts', provided_by=[vm, staging, production])
     require('basedir')
+    require('virtualenv')
+
     try:
         # install postgres and postgis
         pg.setup_postgis()
@@ -86,6 +98,7 @@ def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
     """
     require('hosts', provided_by=[vm, staging, production])
     require('basedir')
+    require('virtualenv')
     require('webapp_user')
     require('git_branch')
 
@@ -130,7 +143,7 @@ def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
     if restart: 
         nginx.reload()
         webapp.start()
-        
+
 def init():
     webapp.init()
 
@@ -144,6 +157,20 @@ def app(cmd):
 
 def setup_info_pages():
     pass
+
+
+def manage_py(cmd, version='current'):
+    require('basedir')
+    require('project')
+
+    basedir = env.basedir
+    project = env.project
+    virtualenv = basedir
+
+    with cd ('%(basedir)s/releases/%(version)s/%(project)s' % locals()):
+        webapp._sudo(('source %(virtualenv)s/bin/activate && '
+                      '%(virtualenv)s/bin/python manage.py %(cmd)s') % locals())
+
 
 # ADHOC
 

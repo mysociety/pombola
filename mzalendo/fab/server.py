@@ -1,4 +1,5 @@
 from fabric.api import *
+from fabric.contrib.files import exists
 
 def add_ssh_key(path, password=None, user=None):
     require('hosts')
@@ -9,15 +10,18 @@ def add_ssh_key(path, password=None, user=None):
 
     tmp_key = os.path.join('/tmp', os.path.basename(path))
     authorized_keys2 = '$HOME/.ssh/authorized_keys2'
-    
     put(path, tmp_key)
+
     with settings(hide('running', 'stdout', 'stderr', 'warnings'), 
                   warn_only=True):
-        run(('mkdir $HOME/.ssh; '
-             'chmod 0700 $HOME/.ssh'))
-    run('cat %s >> %s' % (tmp_key, authorized_keys2))
-    run('rm %s' % tmp_key)
-    run('chmod 0600 %s' % authorized_keys2)
+        if not exists('$HOME/.ssh'):
+            run(('mkdir $HOME/.ssh; '
+                 'chmod 0700 $HOME/.ssh'))
+        if not exists(authorized_keys2):
+            run(('touch %(authorized_keys2)s; '
+                 'chmod 0600 %(authorized_keys2)s') % locals())
+        run('cat %s >> %s' % (tmp_key, authorized_keys2))
+        run('rm %s' % tmp_key)
 
 def install_packages():
     """Installs the required packages"""
@@ -37,18 +41,11 @@ def install_packages():
 
     packages = (
         # "supervisor",
-
-        # for mapit
-        #| libgdal1-1.5.0
-        # 'libgdal1-1.6.0',
         'gdal-bin',
         'libgdal-dev',
         # 'libgdal1',
         # 'libgdal1-dev',
         'python-gdal',
-
-        # Xapian search engine
-        # 'libxapian22',
 
         # probably installed as requirement for others
         'libjpeg',
@@ -57,27 +54,20 @@ def install_packages():
         # so we need the various repo management tools to fetch them.
         'mercurial',
         'git-core',
-
-        # May as well use the Debian maintained versions.
-        # 'python-docutils',
-        # 'python-bcrypt',
-        # 'python-xapian',
-        # 'python-markdown',
-        # 'python-yaml',
-        # 'python-openid',
-        # 'python-beautifulsoup',
-        # 'python-dateutil',
     )
 
+    try:
+        sudo('aptitude update')
+    except: pass
     sudo('aptitude -y install %s' % ' '.join(python_essentials))
     
     # for gdal
     # TODO: determine if repository already added
     sudo('apt-add-repository -y ppa:ubuntugis/ubuntugis-unstable')
-
     try:
         sudo('aptitude update')
     except: pass
+
     
     sudo('aptitude -y install %s' % ' '.join(packages))
     
