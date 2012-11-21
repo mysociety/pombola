@@ -175,16 +175,21 @@ def add_hansard(head, entries):
 
 
 def add_hansard_entry(venue, source, sitting, obj, counter):
-    kind = entry_kind(obj)
-    entry = Entry.objects.get_or_create(
+    try:
+        kind = entry_kind(obj)
+        eintry = Entry.objects.get_or_create(
                     type=kind,
                     sitting=sitting,
                     page_number=obj.get('column', None),
                     speaker_name=obj.get('name', ''),
                     content=obj.get(kind, ''),
                     defaults=(dict(text_counter=counter)))[0]
-    entry.text_counter = counter
-    entry.save()
+        entry.text_counter = counter
+        entry.save()
+    catch Exception, err:
+        print err
+        print obj
+        print sitting
 
     return HansardEntry.objects.get_or_create(
                       sitting=sitting,
