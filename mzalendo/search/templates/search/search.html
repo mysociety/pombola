@@ -15,7 +15,9 @@
     <h2>Search</h2>
 
     <form method="get" action="." class="search-wrap">
-        <p>Alternatively, <a href="{% url hansard_search  %}" id="search-hansard-instead">search Hansard transcripts</a> instead.</p>
+        {% if settings.ENABLED_FEATURES.hansard %}
+            <p>Alternatively, <a href="{% url hansard_search  %}" id="search-hansard-instead">search Hansard transcripts</a> instead.</p>
+        {% endif %}
 
         <div class="search-box">
             {{ form.q }}
