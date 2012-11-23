@@ -2,8 +2,16 @@
 
 
 {% block extra_headers %}
-    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
-    
+    <link rel="stylesheet" href="/static/mapit/leaflet/leaflet.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/static/mapit/leaflet/leaflet.ie.css" />
+        <script src="/static/mapit/js/html5shiv.min.js"></script>
+        <script src="/static/mapit/js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/static/mapit/js/reqwest.min.js"></script>
+    <script src="/static/mapit/leaflet/leaflet.js"></script>
+
     <style type="text/css" media="screen">
         #mapBox {
             margin-left: 1em;
