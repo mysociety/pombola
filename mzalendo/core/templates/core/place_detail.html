@@ -60,24 +60,24 @@
         <div class="tab-wrapper">
 
             {% if object.summary %}
-                <h2 class="tab-nav" rel="#overview"><a href="/">Overview</a></h2>
+                <h2 class="tab-nav" rel="#overview"><a href="#overview">Overview</a></h2>
                 <div class="tab markdown" id="overview">
                     {{ object.summary }}
                 </div>
             {% endif %}
 
-            <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
+            <h2 class="tab-nav" rel="#related-people"><a href="#related-people">Related People</a></h2>
             <div class="tab" id="related-people" data-tab-content-source-url="{% url place_related_person_tab slug=object.slug %}">
             </div>
 
 	    {% comment %}
 	    <!-- Not showing organisations for the moment as the list isn't very good. -->
-            <h2 class="tab-nav" rel="#related-organisations"><a href="/">Related Organisations</a></h2>
+            <h2 class="tab-nav" rel="#related-organisations"><a href="#related-organisations">Related Organisations</a></h2>
             <div class="tab" id="related-organisations" data-tab-content-source-url="{% url place_related_organisation_tab slug=object.slug %}">
             </div>
 	    {% endcomment %}
 
-            <h2 class="tab-nav" rel="#related-places"><a href="/">Related Places</a></h2>
+            <h2 class="tab-nav" rel="#related-places"><a href="#related-places">Related Places</a></h2>
             <div class="tab" id="related-places">
 
 	        {# Do we want to display more than just the parent? #}
@@ -137,14 +137,14 @@
     {% endcomment %}
 
             {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
-                <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects ({{ object.project_set.count }})</a></h2>
+                <h2 class="tab-nav" rel="#cdf-projects"><a href="#cdf-projects">CDF Projects ({{ object.project_set.count }})</a></h2>
                 <div class="tab" id="cdf-projects">
                     {% include "include.html" with template="projects/place_summary.html" %}
                 </div>
             {% endif %}
 
             {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
-                <h2 class="tab-nav" rel="#population-data"><a href="/">Population Data</a></h2>
+                <h2 class="tab-nav" rel="#population-data"><a href="#population-data">Population Data</a></h2>
                 <div class="tab" id="population-data">
                     <dl>
                         <dt>Area</dt>
