@@ -191,7 +191,7 @@ $(function(){
   $tabnavs.each(function(){
     var rel = $(this).attr('rel');
     var txt = $(this).text();
-    var href = $('a', this).attr('href');
+    var href = $(this).attr('rel');
     var aClass  = $(this).hasClass('tab-static-link')? 'class="tab-static-link"':'';
     var liClass = $(this).hasClass('tab-active')? 'tab-active':'';
     var newElem = '<li rel="'+rel+'" class="tab-nav-heading ' + liClass + '"><a href="'+href+'" '+aClass+'>'+txt+'</a></li>';
