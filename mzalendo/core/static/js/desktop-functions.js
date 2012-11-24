@@ -202,8 +202,9 @@ $(function(){
   // first look to see if it's already been marked server-side (tab-active)
   var matched_element = $('li.tab-active').first();
 
-  // If not already active, if there is a hash try to load from that
-  if(! matched_element.length && window.location.hash !== '') {
+  // Allow the URL fragment to override the tab selection
+  // indicated by the tab-active class
+  if(window.location.hash !== '') {
     var hash = window.location.hash;
     matched_element = $('li[rel='+hash+']');
   }
