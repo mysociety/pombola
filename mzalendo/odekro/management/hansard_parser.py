@@ -18,6 +18,7 @@ CONTINUED_SPEECH = 'continued speech'
 CHAIR            = 'chair'
 SCENE_START      = 'scene_start'
 SCENE_END        = 'scene_end'
+ADJOURNMENT      = 'adjournment'
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
@@ -28,7 +29,7 @@ VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the Official Repor
 
 HEADING_PATTERN = r'^\s*([A-Z-,\s]+|%s)\s*$' % VOTES_AND_PROCEEDINGS_HEADER
 SCENE_PATTERN = r'^\s*(\[[A-Za-z-\s]+\])\s*$'
-SPEECH_PATTERN = r'^\s*%s([^:]+):\s*(.*)\s*$' % TITLES_TEMPLATE
+SPEECH_PATTERN = r'^\s*%s([^:{}\[\]]+):\s*(.*)\s*$' % TITLES_TEMPLATE
 CONTINUED_SPEECH_PATTERN = r'^\s*\[%s.+\]\s*' % (TITLES_TEMPLATE.upper())
 
 SCENE_START_PATTERN = r'^\s*(\[[^\]]+)\s*$'
@@ -39,12 +40,17 @@ SCENE_END_PATTERN = r'^\s*([^\]]*\])\s*$'
 
 PAGE_HEADER_PATTERN = r'^\[(\d+)\]\s*$'
 
-ACTION_PATTERN = r'^\s*%s(.+\w)\s*[\-]+\s*(.+)\s*[\-]+\s*$' % TITLES_TEMPLATE
+ACTION_PATTERN = r'^\s*%s(.+\w)\s*[\-]+\s*([^-]+)\s*[\-]+\s*$' % TITLES_TEMPLATE
 
 START_TIME_PATTERN = r'The\s+House\s+met\s+at\s+%s' % TIME_TEMPLATE
 TIME_PATTERN = r'^\s*%s$' % TIME_TEMPLATE
 
 CHAIR_PATTERN = r'^\[\s*(.*?)\s+IN\s+THE\s+CHAIR\s*\]$'
+
+#WEEKDAY_TEMPLATE ='(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)'
+#DATE_SUFFIX_TEMPLATE ='(st|ST|nd|ND|rd|RD|th|TH)'
+#LONG_DATE_PATTERN = r'^%s[,]?\s+\d+%s\w+,\d{4}'%(WEEKDAY_TEMPLATE,DATE_SUFFIX_TEMPLATE)
+ADJOURNMENT_PATTERN = r'^The\s+House\s+was\s+accordingly\s+adjourned\s+at\s+(%s)\s+till\s+(.*)\s+at\s+(%s)\s*$'%(TIME_TEMPLATE,TIME_TEMPLATE)
 
 MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, 
               jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
@@ -71,6 +77,7 @@ PATTERNS = (
     (ACTION, ACTION_PATTERN),
     (SCENE_START, SCENE_START_PATTERN),
     (SCENE_END, SCENE_END_PATTERN),
+    (ADJOURNMENT, ADJOURNMENT_PATTERN),
 )
 
 
@@ -204,6 +211,10 @@ def parse_body(lines):
 
         elif kind is CHAIR:
             entry = dict(chair=match.group(1), original=line, column=column)
+        elif kind is ADJOURNMENT:
+            entry = dict(scene=line, original=line,column=column)
+            kind = SCENE
+            time = _time(re.match(TIME_PATTERN,match.group(1)))
         elif kind is BLANK:
             pass
         else:
