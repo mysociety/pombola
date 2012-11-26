@@ -60,20 +60,8 @@
         
     </head>
     <body>
-        {% include 'staging_header.html' %}
 
-        {% include 'site_header.html' %}
-
-
-        <div id="main-menu">
-            <nav class="wrapper">
-                <ul>
-                    {% with include_sub_menu_entries=1 %}
-                        {% include 'menu_entries.html' %}
-                    {% endwith %}
-                </ul>
-            </nav>
-        </div>
+        {% include 'header.html' %}
 
         {% block breadcrumbs %}
         <div id="breadcrumb">
