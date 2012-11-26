@@ -423,7 +423,10 @@ SELENIUM_PATH = config.get( 'SELENIUM_PATH', None )
 
 
 # For the disqus comments
-DISQUS_SHORTNAME = config.get( 'DISQUS_SHORTNAME', None )
+DISQUS_SHORTNAME       = config.get( 'DISQUS_SHORTNAME', None )
+# At some point we should deprecate this. For now it defaults to true so that
+# no entry in the config does the right thing.
+DISQUS_USE_IDENTIFIERS = config.get( 'DISQUS_USE_IDENTIFIERS', True )
 
 
 # Polldaddy widget ID - from http://polldaddy.com/

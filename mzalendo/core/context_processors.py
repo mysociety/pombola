@@ -12,6 +12,7 @@ def add_settings( request ):
             'SOCIAL_AUTH_ENABLED_BACKENDS': settings.SOCIAL_AUTH_ENABLED_BACKENDS,
             'POLLDADDY_WIDGET_ID':          settings.POLLDADDY_WIDGET_ID,
             'DISQUS_SHORTNAME':             settings.DISQUS_SHORTNAME,
+            'DISQUS_USE_IDENTIFIERS':       settings.DISQUS_USE_IDENTIFIERS,
             'TWITTER_ACCOUNT_NAME':         settings.TWITTER_ACCOUNT_NAME,
             'BLOG_RSS_FEED':                settings.BLOG_RSS_FEED,
             'ENABLED_FEATURES':             settings.ENABLED_FEATURES,

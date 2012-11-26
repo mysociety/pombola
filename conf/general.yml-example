@@ -53,6 +53,13 @@ SELENIUM_PATH: ''
 # The 'shortname' is the code that identifies the correct account to link to on # their site. 
 DISQUS_SHORTNAME: ''
 
+# Set this to true if you'd like to use identifiers instead of the page urls.
+# Should almost certainly be true unless you are supporting a site that started
+# using Disqus comments before this was added. In that case you'll need to migrate
+# the comments before setting this true.
+# See https://github.com/mysociety/mzalendo/issues/421 for more details.
+DISQUS_USE_IDENTIFIERS: 1
+
 # Widget id for polls to be embedded on the site.
 POLLDADDY_WIDGET_ID: ''
 
