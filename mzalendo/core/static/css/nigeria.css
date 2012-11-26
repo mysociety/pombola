@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -75,10 +76,6 @@ ul.ui-autocomplete li {
   list-style: none;
 }
 
-html {
-  background-color: white;
-}
-
 body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-text-size-adjust: 100%;
@@ -86,7 +83,7 @@ body {
   font-family: 'Arial', sans-serif;
   color: #444;
   font-size: 100%;
-  background: white;
+  background: #e6e6e6;
 }
 
 p, h1, h2, h3 {
@@ -492,9 +489,11 @@ pre {
 #site-header {
   clear: both;
   background: #55a4da;
-  background-image: url(/static/images/header_bottom.png);
-  background-repeat: repeat-x;
-  background-position: bottom center;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #71daff), color-stop(100%, #55a4da));
+  background: -webkit-linear-gradient(#71daff, #55a4da);
+  background: -moz-linear-gradient(#71daff, #55a4da);
+  background: -o-linear-gradient(#71daff, #55a4da);
+  background: linear-gradient(#71daff, #55a4da);
 }
 #site-header .wrapper {
   overflow: hidden;
@@ -502,7 +501,7 @@ pre {
 
 @media only screen and (min-width: 640px) {
   #site-header {
-    height: 100px;
+    height: 60px;
   }
   #site-header.down {
     height: 80px;
@@ -519,27 +518,16 @@ pre {
   height: 42px;
   text-indent: -999999em;
   width: 147px;
-  background: url(/static/images/mz-nigeria-logo-symbol.png) 0 center no-repeat;
-  background-position: left 20%;
+  background: url(../images/m-logo.png) 0 center no-repeat;
 }
 @media only screen and (min-width: 640px) {
   #logo {
     position: absolute;
     left: 0;
-    top: -20px;
-    height: 130px;
-    width: 630px;
-    background: url(/static/images/mz-nigeria-logo-text.png) 0 center no-repeat;
-  }
-  #logo.down {
-    width: 600px;
-    height: 50px;
-    background: url(../images/down-logo.png) 0 center no-repeat;
-  }
-}
-@media only screen and (min-width: 768px) {
-  #logo {
-    background: url(/static/images/mz-nigeria-logo.png) 0 center no-repeat;
+    top: 10px;
+    height: 34px;
+    width: 418px;
+    background: url(../images/d-logo.png) 0 center no-repeat;
   }
   #logo.down {
     width: 600px;
@@ -587,18 +575,13 @@ menu#mobile-top-tools ul li a img {
   display: none;
   float: right;
   background: transparent;
-  margin: 15px 5px 5px 15px;
+  margin: 5px 5px 5px 15px;
   height: auto;
   border: none;
 }
 @media only screen and (min-width: 640px) {
   #header-search {
     display: block;
-  }
-}
-@media only screen and (min-width: 900px) {
-  #header-search {
-    margin: 40px 5px 5px 15px;
   }
 }
 #header-search input {
@@ -649,19 +632,12 @@ menu#site-user-tools {
   float: right;
   background: transparent;
   margin: 5px;
-  clear: right;
   height: auto;
   border: none;
 }
 @media only screen and (min-width: 640px) {
   menu#site-user-tools {
     display: block;
-  }
-}
-@media only screen and (min-width: 900px) {
-  menu#site-user-tools {
-    margin-top: 40px;
-    clear: none;
   }
 }
 menu#site-user-tools ul {
@@ -847,12 +823,12 @@ menu#site-user-tools ul li.active a:hover {
 
 #main-menu {
   display: none;
-  background: white;
-  padding-top: 20px;
-  margin-top: 10px;
-  background-image: url(/static/images/header_top.png);
-  background-repeat: repeat-x;
-  background-position: top center;
+  background: black;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
+  background: -webkit-linear-gradient(#000000, #555555);
+  background: -moz-linear-gradient(#000000, #555555);
+  background: -o-linear-gradient(#000000, #555555);
+  background: linear-gradient(#000000, #555555);
 }
 @media only screen and (min-width: 640px) {
   #main-menu {
@@ -874,9 +850,6 @@ menu#site-user-tools ul li.active a:hover {
   zoom: 1;
   *display: inline;
   width: auto;
-  position: relative;
-  z-index: 2;
-  float: right;
 }
 #main-menu nav ul li {
   list-style-type: none;
@@ -889,7 +862,7 @@ menu#site-user-tools ul li.active a:hover {
   display: inline;
   float: left;
   height: 36px;
-  border-right: 2px solid white;
+  border-right: 2px solid black;
 }
 #main-menu nav ul li a {
   display: block;
@@ -898,13 +871,22 @@ menu#site-user-tools ul li.active a:hover {
   height: 20px;
   padding: 8px 7px;
   text-decoration: none;
-  color: black;
-  background: white;
-  background-image: none;
+  color: white;
+  background: black;
   border-bottom: 0;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #555555));
+  background: -webkit-linear-gradient(#000000, #555555);
+  background: -moz-linear-gradient(#000000, #555555);
+  background: -o-linear-gradient(#000000, #555555);
+  background: linear-gradient(#000000, #555555);
 }
 #main-menu nav ul li a:hover {
-  background: white;
+  background: #777777;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555555), color-stop(100%, #000000));
+  background: -webkit-linear-gradient(#555555, #000000);
+  background: -moz-linear-gradient(#555555, #000000);
+  background: -o-linear-gradient(#555555, #000000);
+  background: linear-gradient(#555555, #000000);
 }
 #main-menu nav ul li:last-child {
   border-right: 0;
@@ -3365,4 +3347,93 @@ ul.social-buttons li {
 ul.social-buttons li {
   float: left;
   padding: 4px;
+}
+
+#main-menu {
+  background: white;
+  padding-top: 20px;
+  margin-top: 10px;
+  background-image: url(/static/images/header_top.png);
+  background-repeat: repeat-x;
+  background-position: top center;
+}
+#main-menu nav {
+  position: relative;
+  z-index: 2;
+  float: right;
+}
+#main-menu nav ul li {
+  border-right: 2px solid white;
+}
+#main-menu nav ul li a {
+  color: black;
+  background: white;
+  background-image: none;
+}
+#main-menu nav ul li a:hover {
+  background: #d4d4d4;
+}
+
+html {
+  background-color: white;
+}
+
+body {
+  background: white;
+}
+
+#site-header {
+  clear: both;
+  background: #55a4da;
+  background-image: url(/static/images/header_bottom.png);
+  background-repeat: repeat-x;
+  background-position: bottom center;
+}
+
+@media only screen and (min-width: 640px) {
+  #site-header {
+    height: 100px;
+  }
+}
+#logo {
+  background: url(/static/images/mz-nigeria-logo-symbol.png) 0 center no-repeat;
+  background-position: left 20%;
+}
+@media only screen and (min-width: 640px) {
+  #logo {
+    top: -20px;
+    height: 130px;
+    width: 630px;
+    background: url(/static/images/mz-nigeria-logo-text.png) 0 center no-repeat;
+  }
+  #logo.down {
+    background: url(../images/down-logo.png) 0 center no-repeat;
+  }
+}
+@media only screen and (min-width: 768px) {
+  #logo {
+    background: url(/static/images/mz-nigeria-logo.png) 0 center no-repeat;
+  }
+  #logo.down {
+    background: url(../images/down-logo.png) 0 center no-repeat;
+  }
+}
+
+#header-search {
+  margin: 15px 5px 5px 15px;
+}
+@media only screen and (min-width: 900px) {
+  #header-search {
+    margin: 40px 5px 5px 15px;
+  }
+}
+
+menu#site-user-tools {
+  clear: right;
+}
+@media only screen and (min-width: 900px) {
+  menu#site-user-tools {
+    margin-top: 40px;
+    clear: none;
+  }
 }

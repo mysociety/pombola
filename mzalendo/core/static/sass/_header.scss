@@ -1,16 +1,13 @@
 #site-header {
   clear: both;
   background: $colour_primary;
-  background-image: url(/static/images/header_bottom.png);
-  background-repeat: repeat-x;
-  background-position: bottom center;
-  
+  @include background(linear-gradient($colour_primary / 0.75, $colour_primary));
   .wrapper {
     overflow: hidden; } }
 
 @media only screen and (min-width: 640px) {
   #site-header {
-    height: 100px;
+    height: 60px;
     &.down {
       height: 80px; }
     .wrapper {
@@ -26,30 +23,18 @@
   height: 42px;
   text-indent: -999999em;
   width: 147px;
-  background: url(/static/images/mz-nigeria-logo-symbol.png) 0 center no-repeat;
-  background-position: left 20%;
+  background: url(../images/m-logo.png) 0 center no-repeat;
   @media only screen and (min-width: 640px) {
     position: absolute;
     left: 0;
-    top: -20px;
-    height: 130px;
-    width: 630px;
-    background: url(/static/images/mz-nigeria-logo-text.png) 0 center no-repeat;
+    top: 10px;
+    height: 34px;
+    width: 418px;
+    background: url(../images/d-logo.png) 0 center no-repeat;
     &.down {
       width: 600px;
       height: 50px;
-      background: url(../images/down-logo.png) 0 center no-repeat;
-    }
-  }
-  @media only screen and (min-width: 768px) {
-    background: url(/static/images/mz-nigeria-logo.png) 0 center no-repeat;
-    &.down {
-      width: 600px;
-      height: 50px;
-      background: url(../images/down-logo.png) 0 center no-repeat;
-    }
-  }
-}
+      background: url(../images/down-logo.png) 0 center no-repeat; } } }
 
 // ------------------------------------------------------
 
@@ -74,10 +59,7 @@ menu#mobile-top-tools {
     display: block; }
   float: right;
   background: transparent;
-  margin: 15px 5px 5px 15px;
-  @media only screen and (min-width: 900px) {
-    margin: 40px 5px 5px 15px;
-  }
+  margin: 5px 5px 5px 15px;
   height: auto;
   border: none;
   input {
@@ -110,15 +92,8 @@ menu#site-user-tools {
   float: right;
   background: transparent;
   margin: 5px;
-  clear: right;
   height: auto;
   border: none;
-  
-  @media only screen and (min-width: 900px) {
-    margin-top: 40px;
-    clear:none;
-  }
-  
   ul {
     @include list-reset-soft;
     li {

@@ -1,0 +1,96 @@
+#main-menu {
+  background: $colour_white;
+  padding-top: 20px;
+  margin-top: 10px;
+  background-image: url(/static/images/header_top.png);
+  background-repeat: repeat-x;
+  background-position: top center;
+
+  nav {
+    position:relative;
+    z-index:2;
+    float:right;
+    
+    ul {
+      li {
+        border-right: 2px solid $colour_white;
+      
+         a {
+          color: $colour_black;
+          background: $colour_white;
+          background-image: none;
+      
+          &:hover {
+            background: #d4d4d4;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+html{
+  background-color: $colour_white;
+}
+
+body {
+  background: $colour_white;
+}
+
+
+#site-header {
+  clear: both;
+  background: $colour_primary;
+  background-image: url(/static/images/header_bottom.png);
+  background-repeat: repeat-x;
+  background-position: bottom center;
+}
+ 
+@media only screen and (min-width: 640px) {
+  #site-header {
+    height: 100px;
+  }
+}
+
+
+#logo {
+  
+  background: url(/static/images/mz-nigeria-logo-symbol.png) 0 center no-repeat;
+  background-position: left 20%;
+
+  @media only screen and (min-width: 640px) {
+    top: -20px;
+    height: 130px;
+    width: 630px;
+    background: url(/static/images/mz-nigeria-logo-text.png) 0 center no-repeat;
+    &.down {
+      background: url(../images/down-logo.png) 0 center no-repeat;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    background: url(/static/images/mz-nigeria-logo.png) 0 center no-repeat;
+    &.down {
+      background: url(../images/down-logo.png) 0 center no-repeat;
+    }
+  }
+}
+ 
+
+#header-search {
+  margin: 15px 5px 5px 15px;
+  @media only screen and (min-width: 900px) {
+    margin: 40px 5px 5px 15px;
+  }
+}
+
+
+menu#site-user-tools {
+  clear: right;
+
+  @media only screen and (min-width: 900px) {
+    margin-top: 40px;
+    clear:none;
+  }
+}  
