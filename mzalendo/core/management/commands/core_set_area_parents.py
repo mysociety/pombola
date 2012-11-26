@@ -103,7 +103,7 @@ class Command(BaseCommand):
             child_parent_placekinds.append(tuple(m.groups()))
 
         child_slugs = [x[0] for x in child_parent_placekinds]
-        if len(child_slugs) != set(child_slugs):
+        if len(child_slugs) != len(set(child_slugs)):
             raise CommandError, "You can only specify each child placekind once, since each child can only have one parent"
 
         for child_slug, parent_slug in child_parent_placekinds:
