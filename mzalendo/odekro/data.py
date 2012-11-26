@@ -154,7 +154,7 @@ def add_hansard(head, entries):
                     date=head['date'])[0]
 
     #adjournment = entries.pop(-1)
-    adjournment = entries.get(-1)   #leave adjourment scene to be displayed
+    adjournment = entries[-1]   #leave adjourment scene to be displayed
 
     sitting = Sitting.objects.get_or_create(
                         source=source, 
