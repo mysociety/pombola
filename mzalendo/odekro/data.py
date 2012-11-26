@@ -185,7 +185,7 @@ def add_hansard_entry(venue, source, sitting, obj, counter):
                     defaults=(dict(text_counter=counter)))[0]
     entry.text_counter = counter
     entry.save()
-    print "%s [%s]: %s (%s)"%(entry.sitting.start_date, entry.type, entry.speaker_name, obj,get('section','-'))
+    print "%s [%s]: %s (%s)"%(entry.sitting.start_date, entry.type, entry.speaker_name, obj.get('section','-'))
     return HansardEntry.objects.get_or_create(
                       sitting=sitting,
                       entry=entry,
