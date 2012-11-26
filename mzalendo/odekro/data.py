@@ -153,7 +153,8 @@ def add_hansard(head, entries):
                     name='Bound Volume - SER %d VOL. %d No. %d' % xs,
                     date=head['date'])[0]
 
-    adjournment = entries.pop(-1)
+    #adjournment = entries.pop(-1)
+    adjournment = entries.get(-1)   #leave adjourment scene to be displayed
 
     sitting = Sitting.objects.get_or_create(
                         source=source, 
@@ -185,7 +186,8 @@ def add_hansard_entry(venue, source, sitting, obj, counter):
                     defaults=(dict(text_counter=counter)))[0]
     entry.text_counter = counter
     entry.save()
-    print "%s [%s]: %s (%s)"%(entry.sitting.start_date, obj['kind'], entry.speaker_name, obj.get('section','-'))
+    
+    #print "%s [%s]: %s (%s)"%(entry.sitting.start_date, obj['kind'], entry.speaker_name, obj.get('section','-'))
     return HansardEntry.objects.get_or_create(
                       sitting=sitting,
                       entry=entry,
