@@ -4,9 +4,15 @@
   // Don't show this menu at all by default
   display: none;
   @media only screen and (min-width: 640px) {
-    display: block; }
-  background: $colour_black;
-  @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
+    display: block;
+  }
+  background: $colour_white;
+  padding-top: 20px;
+  margin-top: 10px;
+  background-image: url(/static/images/header_top.png);
+  background-repeat: repeat-x;
+  background-position: top center;
+  
   nav {
     width: 100%;
     text-align: center;
@@ -14,12 +20,15 @@
       @include list-reset-soft;
       @include inline-block;
       width: auto;
+      position:relative;
+      z-index:2;
+      float:right;
       li {
         position: relative;
         display: inline;
         float: left;
         height: 36px;
-        border-right: 2px solid $colour_black;
+        border-right: 2px solid $colour_white;
         a {
           display: block;
           float: left;
@@ -27,26 +36,30 @@
           height: 20px;
           padding: 8px 7px;
           text-decoration: none;
-          color: $colour_white;
-          background: $colour_black;
+          color: $colour_black;
+          background: $colour_white;
+          background-image: none;
           border-bottom: 0;
-          @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
           &:hover {
-            background: $colour_blackish;
-            @include background(linear-gradient($colour_blackish / 1.4, $colour_black)); } }
+            background: $colour_white;
+          }
+        }
         &:last-child {
-          border-right: 0; }
+          border-right: 0; 
+        }
         ul {
           position: absolute;
           z-index: 20;
-          left: -999999px; }
+          left: -999999px;
+        }
         &.active > a {
           background: #f6f6f6;
           color: #444;
           border-left: 1px solid #d4d4d4;
           border-right: 1px solid #d4d4d4;
           border-top: 1px solid #d4d4d4;
-          padding: 9px 6px 10px 6px; }
+          padding: 9px 6px 10px 6px;
+        }
         &:hover {
           ul {
             left: 0;
@@ -68,14 +81,26 @@
                 height: auto;
                 float: none;
                 &:hover {
-                  background: #d4d4d4; } } } } }
+                  background: #d4d4d4;
+                }
+              }
+            }
+          }
+        }
         @media (min-width: 720px) {
           & {
             a {
               font-size: 14px;
               padding: 8px 10px; }
             &.active > a {
-              padding: 7px 9px 8px 9px; } } } } } } }
+              padding: 7px 9px 8px 9px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 .m-sub-menu {
   @include list-reset-soft;
@@ -87,4 +112,8 @@
       display: block;
       padding: 10px 0;
       &:hover {
-        text-decoration: none; } } } }
+        text-decoration: none;
+      }
+    }
+  }
+}

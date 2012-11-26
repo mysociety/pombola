@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en-gb">
+<head>
+	<meta charset="UTF-8">
+	<title>Mz Nigeria Header</title>
+	
+	<link rel="stylesheet" href="/static/css/nigeria.css">
+	<script src="/static/js/libs/modernizr-2.0.6.custom.js"></script>
+  <script src="/static/js/loader.js?22"></script>
+	
+</head>
+<body>
+  <div id="main-menu">
+	  <nav class="wrapper">
+	    <ul>
+	      <li><a href="/">Home</a></li>
+	      <li><a href="/info/democracy-resources">Democracy Resources</a></li>
+	      <li><a href="/info/elections">Elections</a></li>
+	      <li><a href="/info/government-officials">Government Officials</a>
+	        <ul id="government-officials">
+	          <li>
+	            <a href="/position/senator/">Senators</a>
+	          </li>
+	          <li>
+	            <a href="/position/representative/">Representatives</a>
+	          </li>
+	        </ul>
+	      </li>
+	      <li><a href="/info/national-assembly-overview">National Assembly</a></li>
+	      <li><a href="/info/places-overview">Places</a>
+	        <ul id="places-overview">
+	          <li>
+	            <a href="/place/is/state/">States</a>
+	          </li>
+	          <li>
+	            <a href="/place/is/senatorial-district/">Senatorial Districts</a>
+	          </li>
+	          <li>
+	            <a href="/place/is/constituency/">Federal Constituencies</a>
+	          </li>
+	        </ul>
+	      </li>
+	      <li><a href="/info/about">About</a></li>
+	    </ul>
+	  </nav>
+	</div>
+
+	<header id="site-header">
+	  <div class="wrapper">
+	    <a href="/" id="logo">EiE Nigeria</a>
+
+	    <menu id="mobile-top-tools">
+	      <ul>
+	        <li><a href="/accounts/login/?next=/">login</a></li>
+	        <li><a href="#footer-menu" class="m-icon-nav">menu</a></li>
+	        <li><a href="/search/" class="icon-search"><img src="/static/images/search-icon.png" alt="search"/></a></li>
+	      </ul>
+	    </menu>
+
+	    <form action="/search/" method="get" id="header-search">
+	      <input class="search-autocomplete-name" type="text" name="q" placeholder="search&hellip;">
+	      <button type="submit">Submit</button>
+	    </form>
+
+	    <menu id="site-user-tools">
+	      <ul>
+	        <li class="login"><a href="/accounts/login/?next=/">login</a></li>
+	      </ul>
+	    </menu>
+	  </div>
+	</header>
+</body>
+</html>
