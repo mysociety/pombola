@@ -104,7 +104,7 @@
                   padding: 4px;
                   margin: 0 auto; }
                 &.shout-good {
-                  background-color: $colour_green; }
+                  background-color: $colour_primary; }
                 &.shout-average {
                   background-color: $colour_amber; }
                 &.shout-bad {
@@ -212,8 +212,8 @@
             size: 17px;
             weight: bold; }; } } } }
   h2, h3 {
-    border-top: 4px solid $colour_green;
-    background: $colour7;
+    border-top: 4px solid $colour_primary;
+    background: $colour_muted;
     padding: 10px; } }
 
 @media only screen and (min-width: 640px) {
@@ -294,9 +294,9 @@
             &.has-details {
               &:hover {
                 cursor: pointer;
-                background-color: $colour7; }
+                background-color: $colour_muted; }
               &.active {
-                background-color: $colour7;
+                background-color: $colour_muted;
                 header {
                   background: url(../images/arrow-up.png) right 0 no-repeat; } }
               header {
@@ -444,7 +444,7 @@
 
 .page-title {
   display: block;
-  background: $colour7;
+  background: $colour_muted;
   padding: 10px;
   &.has-sub-menu {
     margin: 0;

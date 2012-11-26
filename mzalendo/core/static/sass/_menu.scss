@@ -79,7 +79,7 @@
 
 .m-sub-menu {
   @include list-reset-soft;
-  background: $colour7;
+  background: $colour_muted;
   li {
     margin: 0 10px;
     border-top: 1px solid $colour_black;

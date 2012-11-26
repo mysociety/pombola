@@ -1,7 +1,7 @@
 #site-header {
   clear: both;
-  background: $colour_green;
-  @include background(linear-gradient($colour_green / 0.75, $colour_green));
+  background: $colour_primary;
+  @include background(linear-gradient($colour_primary / 0.75, $colour_primary));
   .wrapper {
     overflow: hidden; } }
 
@@ -160,10 +160,10 @@ menu#site-user-tools {
       a {
         color: $colour_grey;
         @include border-radius(0);
-        background: $colour7 url(../images/login-arrows.png) 54px 11px no-repeat;
+        background: $colour_muted url(../images/login-arrows.png) 54px 11px no-repeat;
         &:hover {
           color: $colour_black;
-          background: $colour7 url(../images/login-arrows.png) 54px 11px no-repeat; } } } } }
+          background: $colour_muted url(../images/login-arrows.png) 54px 11px no-repeat; } } } } }
 
 // ------------------------------------------------------
 
@@ -175,7 +175,7 @@ menu#site-user-tools {
   position: absolute;
   right: 56px;
   top: 32px;
-  background: $colour7;
+  background: $colour_muted;
   border-left: 1px solid #666666;
   border-right: 1px solid #666666;
   border-bottom: 1px solid #666666;

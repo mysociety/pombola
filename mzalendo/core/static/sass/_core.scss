@@ -21,12 +21,12 @@
 // --------------------------------------------------------------
 // Green Gradient
 @mixin gradient1 {
-  background: $colour_light_green;
-  @include background(linear-gradient($colour_light_green, $colour_green)); }
+  background: $colour_primary_light;
+  @include background(linear-gradient($colour_primary_light, $colour_primary)); }
 
 @mixin gradient1b {
-  background: $colour_green;
-  @include background(linear-gradient($colour_green, $colour_light_green)); }
+  background: $colour_primary;
+  @include background(linear-gradient($colour_primary, $colour_primary_light)); }
 
 // Light Grey Gradient
 @mixin gradient2 {
@@ -76,9 +76,9 @@
 
 @mixin button-text-green {
   @include button-reset-text;
-  background: $colour_light_green;
+  background: $colour_primary_light;
   &:hover {
-    background: $colour_light_green / 0.9; } }
+    background: $colour_primary_light / 0.9; } }
 
 @mixin big-button-reset-text($rad: 5px) {
   @include button-reset-text;
@@ -90,11 +90,11 @@
 
 @mixin big-button-text-green {
   @include big-button-reset-text;
-  background: $colour_light_green;
-  @include background(linear-gradient($colour_light_green / 0.9, $colour_light_green));
+  background: $colour_primary_light;
+  @include background(linear-gradient($colour_primary_light / 0.9, $colour_primary_light));
   &:hover {
-    background: $colour_light_green / 0.9;
-    @include background(linear-gradient($colour_light_green, $colour_light_green / 0.9)); } }
+    background: $colour_primary_light / 0.9;
+    @include background(linear-gradient($colour_primary_light, $colour_primary_light / 0.9)); } }
 
 @mixin big-button-text-red {
   @include big-button-reset-text;
