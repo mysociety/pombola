@@ -19,6 +19,8 @@ import fab
 
 env.local_root = os.path.abspath(os.path.dirname(__file__))
 
+env.use_ssh_config = True
+
 env.project = 'mzalendo'
 env.git_remote = "origin"
 env.git_branch = "odekro"

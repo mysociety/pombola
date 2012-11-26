@@ -189,7 +189,6 @@ def _install_requirements():
     require('project')
     require('pip_requirements')
 
-
     with cd('%(basedir)s' % env):
         _sudo('source ./bin/activate')
         _sudo(('./bin/pip install -r '
@@ -200,7 +199,7 @@ def _install_pil():
     require('virtualenv')
 
     # install the build dependencies
-    sudo('apt-get -y build-dep python-imaging')
+    sudo('aptitude -y install build-dep python-imaging')
     # symlink the libraries
 
     for pkg in ('libfreetype', 'libjpeg', 'libz'):

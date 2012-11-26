@@ -2,7 +2,7 @@
 
 server {
     listen 80;
-    server_name %(domain)s www.%(domain)s;
+    server_name %(domain)s;
     
     # no security problem here, since / is alway passed to upstream
     root %(project_home)s;
