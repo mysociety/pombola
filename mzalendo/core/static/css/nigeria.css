@@ -3437,3 +3437,9 @@ menu#site-user-tools {
     clear: none;
   }
 }
+
+.featured-person.featured-person-placeholder {
+  text-align: center;
+  height: 250px;
+  background: #55a4da url(/static/images/mz-nigeria-logo-symbol.png) center center no-repeat;
+}
