@@ -101,8 +101,6 @@ class Entry(HansardModelBase):
                 speakers = cache[cache_key]
             else:
                 speakers = entry.possible_matching_speakers(update_aliases=True)
-                if not speakers:
-                    speakers = entry.possible_matching_speakers2() 
 
             if speakers and len(speakers) == 1:
                 speaker = speakers[0]
