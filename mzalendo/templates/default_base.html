@@ -62,46 +62,8 @@
     <body>
         {% include 'staging_header.html' %}
 
-        <header id="site-header">
-            <div class="wrapper">
+        {% include 'site_header.html' %}
 
-                {% block site_header_logo %}
-                    Header goes here!
-                {% endblock %}
-
-                <menu id="mobile-top-tools">
-                    <ul>
-                        <li>
-                            {% if request.user.is_authenticated  %}
-                                <a href="{% url django.contrib.auth.views.logout %}">logout</a>
-                            {% else %}
-                                <a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a>
-                            {% endif %}
-                        </li>
-                        <li><a href="#footer-menu" class="m-icon-nav">menu</a></li>
-                        <li><a href="{% url core_search %}" class="icon-search"><img src="{{ STATIC_URL }}images/search-icon.png" alt="search"/></a></li>
-                    </ul>
-                </menu>
-
-                <form action="{% url core_search %}" method="get" id="header-search">
-                    <input class="search-autocomplete-name" type="text" name="q" placeholder="search&hellip;" />
-                    <button type="submit">Submit</button>
-                </form>
-                
-                <menu id="site-user-tools">
-                    <ul>
-                        {% block menu_login_options %}
-                            {% if request.user.is_authenticated  %}
-                                <li class="logged-in-name">Hi {% firstof request.user.get_full_name request.user.username %}</li>
-                                <li class="logged-in"><a href="{% url django.contrib.auth.views.logout %}">logout</a></li>
-                            {% else %}
-                                <li class="login"><a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a></li>
-                            {% endif %}
-                        {% endblock %}                 
-                    </ul>
-                </menu>
-            </div>
-        </header>
 
         <div id="main-menu">
             <nav class="wrapper">
