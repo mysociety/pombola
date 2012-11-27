@@ -29,7 +29,7 @@ VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the Official Repor
 
 HEADING_PATTERN = r'^\s*([A-Z-,\s]+|%s)\s*$' % VOTES_AND_PROCEEDINGS_HEADER
 SCENE_PATTERN = r'^\s*(\[[A-Za-z-\s]+\])\s*$'
-SPEECH_PATTERN = r'^\s*%s([^:{}"\[\]]+):\s*(.*)\s*$' % TITLES_TEMPLATE
+SPEECH_PATTERN = r'^\s*%s([^:;{}"\[\]]+):\s*(.*)\s*$' % TITLES_TEMPLATE
 CONTINUED_SPEECH_PATTERN = r'^\s*\[%s.+\]\s*' % (TITLES_TEMPLATE.upper())
 
 SCENE_START_PATTERN = r'^\s*(\[[^\]]+)\s*$'
@@ -50,7 +50,7 @@ CHAIR_PATTERN = r'^\[\s*(.*?)\s+IN\s+THE\s+CHAIR\s*\]$'
 #WEEKDAY_TEMPLATE ='(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)'
 #DATE_SUFFIX_TEMPLATE ='(st|ST|nd|ND|rd|RD|th|TH)'
 #LONG_DATE_PATTERN = r'^%s[,]?\s+\d+%s\w+,\d{4}'%(WEEKDAY_TEMPLATE,DATE_SUFFIX_TEMPLATE)
-ADJOURNMENT_PATTERN = r'^The\s+House\s+was\s+accordingly\s+adjourned\s+at\s+(%s)\s+till\s+(.*)\s+at\s+(%s)\s*$'%(TIME_TEMPLATE,TIME_TEMPLATE)
+ADJOURNMENT_PATTERN = r'^The\s+House\s+was\s+(accordingly\s+)?adjourned\s+at\s+(%s)\s+till\s+(.*)\s+at\s+(%s).*\s*$'%(TIME_TEMPLATE,TIME_TEMPLATE)
 
 MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, 
               jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
@@ -214,7 +214,7 @@ def parse_body(lines):
         elif kind is ADJOURNMENT:
             entry = dict(scene=line, original=line,column=column)
             kind = SCENE
-            time = _time(re.match(TIME_PATTERN,match.group(1)))
+            time = _time(re.match(TIME_PATTERN,match.group(2)))
         elif kind is BLANK:
             pass
         else:
