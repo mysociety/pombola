@@ -14,11 +14,6 @@ You can use the Contact Page
 ######5. What policies does the site operate?
 See Policies for more information on this point
 
-<!--
-######6. What is the aim of the scorecard?
-The aim of the scorecard is provide citizens of a means of assessing the performance of their elected representative.
--->
-
 ######6. Will you be adding more data to the site?
 Yes we will, data soon to be added to the site.
 

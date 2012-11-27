@@ -161,17 +161,22 @@ def setup_info_pages():
     pass
 
 
-def manage_py(cmd, version='current'):
+def manage_py(cmd, args='', version='current'):
     require('basedir')
     require('project')
 
     basedir = env.basedir
     project = env.project
     virtualenv = basedir
+    
+    if args:
+        args = ' %s' % args
 
-    with cd ('%(basedir)s/releases/%(version)s/%(project)s' % locals()):
+    project_home = '%(basedir)s/releases/%(version)s/%(project)s' % locals()
+    with cd(project_home):
         webapp._sudo(('source %(virtualenv)s/bin/activate && '
-                      '%(virtualenv)s/bin/python manage.py %(cmd)s') % locals())
+                  # 'cd %(project_home)s && '
+                      '%(virtualenv)s/bin/python manage.py %(cmd)s%(args)s') % locals())
 
 
 # ADHOC
