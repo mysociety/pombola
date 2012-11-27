@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.conf import settings
 
 from haystack.forms import ModelSearchForm, SearchForm
 from haystack.query import SearchQuerySet
@@ -27,18 +28,21 @@ urlpatterns = patterns('search.views',
         ),
         name='core_search'
     ),
-
-    # Hansard search
-    url(
-        r'^hansard/$',
-        SearchView(
-            searchqueryset = SearchQuerySet().models(
-                hansard_models.Entry,
-            ),
-            form_class=SearchForm,
-            template="search/hansard.html",            
-        ),
-        name='hansard_search',
-    ),
-
 )
+
+
+# Hansard search - only loaded if hansard is enabled
+if settings.ENABLED_FEATURES['hansard']:
+    urlpatterns += patterns('search.views',
+        url(
+            r'^hansard/$',
+            SearchView(
+                searchqueryset = SearchQuerySet().models(
+                    hansard_models.Entry,
+                ),
+                form_class=SearchForm,
+                template="search/hansard.html",            
+            ),
+            name='hansard_search',
+        ),
+    )
