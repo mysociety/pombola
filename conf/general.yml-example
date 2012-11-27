@@ -89,3 +89,9 @@ DEBUG_TOOLBAR: True
 # If compass is not installed system-wide, you can set this config
 # option to indicate the GEM_HOME that it's installed in:
 GEMS_DIRECTORY: ''
+EMAIL_SETTINGS: false
+EMAIL_HOST: ''
+EMAIL_HOST_USER: ''
+EMAIL_HOST_PASSWORD: ''
+EMAIL_PORT: 0
+EMAIL_USE_TLS: false
