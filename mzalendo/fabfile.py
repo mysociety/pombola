@@ -92,7 +92,7 @@ def setup_postgis():
 
 
 
-def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
+def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None, version=None, init='yes'):
     """Deploy latest version of the site (or a specific version to be made live)
         
     Deploy a version to the servers, install any required third party 
@@ -117,7 +117,7 @@ def deploy(db=None, dbuser=None, dbpasswd=None, version=None, init='yes'):
         webapp.install()
 
         if db and dbuser and dbpasswd:
-            configure(db, dbuser, dbpasswd)
+            configure(db, dbuser, dbpasswd, email_passwd)
 
         if init is 'yes':
             webapp.init()

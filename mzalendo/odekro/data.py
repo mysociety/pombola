@@ -56,6 +56,7 @@ MP_FIELDS = ['Party', 'Occupation/Profession', 'Name', 'Date of Birth',
              'Hometown', 'Last Employment', 'Constituency', 'Region',
              'Highest Education', 'Gender', 'Summary']
 
+PERSON_FIELDS = ['Name', 'Date of Birth', 'Gender', 'Image', 'Summary']
 
 
 def add_mps_from_json(content):
@@ -73,23 +74,9 @@ def add_mp(obj):
         print ">>> Error splitting name:", name
         return
     
-    legal = legal_name(last, first, middle)
-    slug = slugify(legal)
-
-    person, _ = Person.objects.get_or_create(slug=slug)
-
-    if dob:
-        dob = convert_date(dob)
-        # TODO: investigate using a datetime.date object
-        person.date_of_birth = ApproximateDate(year=dob.year, month=dob.month, day=dob.day)
-        
-    person.title = title
-    person.legal_name = legal
-    person.summary = summary
-    person.gender = gender.lower() or 'm'
-    if summary:
-        person.can_be_featured = True
-    person.save()
+    person = add_person(name=legal_name(last, first, middle), 
+                        gender=gender, title=title, dob=dob, 
+                        image=image, summary=summary)
 
     constituency, _ = Place.objects.get_or_create(name=constituency, 
                                                   slug=slugify(constituency), 
@@ -123,10 +110,46 @@ def add_mp(obj):
     mp.religion = religion
     mp.last_employment = last_employment[:150]
     mp.votes_obtained = votes
-
+    
     mp.save()
 
-    add_person_image(person, base64.decodestring(image))
+def add_person_object(obj):
+    name, dob, gender, image, summary = \
+    [obj.get(k, '') for k in PERSON_FIELDS]
+
+    try:
+        last, first, middle, title = split_name(name)
+    except:
+        print ">>> Error splitting name:", name
+        return
+
+
+    add_person(name=legal_name(last, first, middle), 
+               gender=gender, title=title, dob=dob, 
+               image=image, summary=summary)
+
+def add_person(name, gender, title='', dob=None, image=None, summary=''):
+    person, _ = Person.objects.get_or_create(slug=slugify(name))
+
+    person.legal_name = name
+    person.gender = gender.lower() or 'm'
+    person.title = title
+    
+    if dob:
+        dob = convert_date(dob)
+        # TODO: investigate using a datetime.date object
+        person.date_of_birth = ApproximateDate(year=dob.year, month=dob.month, day=dob.day)
+        
+    if summary:
+        person.summary = summary
+        person.can_be_featured = True
+    
+    if image:
+      add_person_image(person, base64.decodestring(image))
+    
+    person.save()
+    return person
+
 
 def add_person_image(person, image):
     person_image = Image(content_object=person, source=person.slug)
@@ -176,13 +199,12 @@ def add_hansard(head, entries):
 
 
 def add_hansard_entry(venue, source, sitting, obj, counter):
-    kind = entry_kind(obj)
     entry = Entry.objects.get_or_create(
-                    type=kind,
+                    type=entry_kind(obj),
                     sitting=sitting,
                     page_number=obj.get('column', None),
                     speaker_name=obj.get('name', ''),
-                    content=obj.get(kind, ''),
+                    content=obj.get(obj.get('kind'), ''),
                     defaults=(dict(text_counter=counter)))[0]
     entry.text_counter = counter
     entry.save()
@@ -199,91 +221,6 @@ def entry_kind(entry):
     kind = entry['kind']
     return kind if kind in ['heading', 'scene', 'speech'] else 'other'
 
-
-# def import_to_db2(objects):
-#     for obj in objects:
-        
-#         member_id = obj['MemberID']
-#         image_link = obj["ImageLink"]
-        
-#         if not image_link:
-#             continue
-
-#         try:
-#             person = models.Person.objects.get(original_id=member_id)
-#         except models.Person.DoesNotExist:
-#             print "Could not find %s - ignoring" % person
-#             continue
-
-#         url = 'http://mzalendo.com/Images/%s' % image_link
-
-
-#         source_string = "Original Mzalendo.com website (%s)" % image_link
-
-#         # check to see if this photo has already been used
-#         if Image.objects.filter(source=source_string).count():
-#             print "Skipping %s - image already used" % person
-#             continue
-
-#         print "Fetching image for '%s': '%s'" % ( person, url )
-#         person_image = Image(
-#             content_object = person,
-#             source = source_string,
-#         )
-#         person_image.image.save(
-#             name    = image_link,
-#             content = ContentFile( urllib.urlopen( url ).read() ),
-#         )
-
-#         # break
-#         time.sleep(2)
-
-# def not_implemented():
-#     phone_kind, _   = ContactKind.objects.get_or_create(slug='phone', name='Phone')
-#     address_kind, _ = ContactKind.objects.get_or_create(slug='address', name='Address')
-#     email_kind, _ = ContactKind.objects.get(slug='email', name='Email')
-
-#     # do the contact details
-#     #  'Phone': '221291',
-#     #  'PhysicalAddress': '',
-#     #  'PostalAddress': '',
-#     #  'Email': '',
-
-#     content_type = ContentType.objects.get_for_model(person)
-
-#     if obj.get('Phone'):
-#         models.Contact.objects.get_or_create(
-#             content_type=content_type,
-#             object_id=person.id,
-#             value=obj['Phone'],
-#             kind=phone_kind
-#         )
-
-#     if obj.get('PhysicalAddress'):
-#         models.Contact.objects.get_or_create(
-#             content_type=content_type,
-#             object_id=person.id,
-#             value=obj['PhysicalAddress'],
-#             kind=address_kind,
-#             note="physical address",
-#         )
-
-#     if obj.get('PostalAddress'):
-#         models.Contact.objects.get_or_create(
-#             content_type=content_type,
-#             object_id=person.id,
-#             value=obj['PostalAddress'],
-#             kind=address_kind,
-#             note="postal address",
-#         )
-
-#     if obj.get('Email'):
-#         models.Contact.objects.get_or_create(
-#             content_type=content_type,
-#             object_id=person.id,
-#             value=obj['Email'],
-#             kind=email_kind,
-#         )
 
 
 

@@ -110,7 +110,7 @@ def link_current_version():
            'ln -s %(source)s %(current)s') % locals())
 
 
-def configure(db=None, dbuser=None, dbpasswd=None, 
+def configure(db=None, dbuser=None, dbpasswd=None, email_passwd=''
               dbhost='localhost', timezone='Africa/Accra'):
     """Create the general.yml configuration."""
 
@@ -141,11 +141,18 @@ def configure(db=None, dbuser=None, dbpasswd=None,
         ('FACEBOOK_APP_ID', '342278959203828'),
         ('FACEBOOK_API_SECRET', 'b1508ccaed96bc4006e8f485257e3833'),
         ('TWITTER_CONSUMER_KEY', 'xPO8GPH9fJFvp89KnAtrZw'),
-        ('TWITTER_CONSUMER_SECRET', 'jHYE0inEBMixgiQny1LltYenxWk5HUmTfM3E1hzzTYw')
+        ('TWITTER_CONSUMER_SECRET', 'jHYE0inEBMixgiQny1LltYenxWk5HUmTfM3E1hzzTYw'),
+        # Email
+        ('EMAIL_HOST', 'smtp.gmail.com'),
+        ('EMAIL_HOST_USER', 'mailer@odekro.org'),
+        ('EMAIL_HOST_PASSWORD', 'mailer@odekro.org'),
     )
 
     configs2 = (
         ('COUNTRY_APP', 'odekro'),
+        ('EMAIL_SETTINGS', 'true'),
+        ('EMAIL_PORT', '587'),
+        ('EMAIL_USE_TLS', 'true')
     )
 
     path = '%(basedir)s/releases/%(version)s/conf/general.yml' % env
