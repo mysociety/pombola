@@ -102,6 +102,8 @@
                     {% endif %}
                 {% case 'other' %}
                     <font col="red">{{ entry.content }}</font>
+                {% else %}
+                    <font>{{ entry.content }}</font>
             {% endswitch %}
 
             {% endwith %}       
