@@ -103,7 +103,11 @@
                 {% case 'other' %}
                     <font col="red">{{ entry.content }}</font>
                 {% else %}
-                    <font>{{ entry.content }}</font>
+                    <li>
+                        <div class="focus">
+                            <font>{{ entry.content }}</font>
+                        </div>
+                    </li>
             {% endswitch %}
 
             {% endwith %}       
