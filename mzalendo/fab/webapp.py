@@ -110,7 +110,7 @@ def link_current_version():
            'ln -s %(source)s %(current)s') % locals())
 
 
-def configure(db=None, dbuser=None, dbpasswd=None, email_passwd=''
+def configure(db=None, dbuser=None, dbpasswd=None, email_passwd='',
               dbhost='localhost', timezone='Africa/Accra'):
     """Create the general.yml configuration."""
 
