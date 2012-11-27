@@ -23,9 +23,6 @@ IN_TEST_MODE = sys.argv[1:2] == ['test']
 base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..' ) )
 root_dir = os.path.abspath( os.path.join( base_dir, '..' ) )
 
-# print "base_dir: " + base_dir
-# print "root_dir: " + root_dir
-
 # Change the root dir in testing, and delete it to ensure that we have a clean
 # slate. Also rint out a little warning - adds clutter to the test output but
 # better than letting a site go live and not notice that the test mode has been
@@ -85,7 +82,7 @@ TIME_ZONE = config.get('TIME_ZONE')
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-GB'
+LANGUAGE_CODE = config.get('LANGUAGE_CODE', 'en-GB')
 
 SITE_ID = 1
 
@@ -118,7 +115,7 @@ STATIC_URL = '/static/'
 
 # integer which when updated causes the caches to fetch new content. See note in
 # 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 22
+STATIC_GENERATION_NUMBER = config.get('STATIC_GENERATION_NUMBER', 22)
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -217,10 +214,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "mzalendo.core.context_processors.add_settings",    
 )
 
-EXT_CONTEXT_PROCESSORS = config.get('EXT_CONTEXT_PROCESSORS')
-
-if EXT_CONTEXT_PROCESSORS:
-    TEMPLATE_CONTEXT_PROCESSORS += tuple(EXT_CONTEXT_PROCESSORS)
+TEMPLATE_CONTEXT_PROCESSORS += tuple(config.get('EXT_CONTEXT_PROCESSORS', []))
 
 COUNTRY_APP = config.get('COUNTRY_APP')
 if not COUNTRY_APP:
@@ -271,9 +265,8 @@ INSTALLED_APPS = (
 )
 
 # add the optional apps
+INSTALLED_APPS += tuple(config.get('OPTIONAL_APPS', []))
 ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data' )
-OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
-INSTALLED_APPS += OPTIONAL_APPS
 
 # mapit related settings
 MAPIT_AREA_SRID = 4326
@@ -461,4 +454,13 @@ POLITICIAN_TITLE_SLUGS = [
     'representative',
     'senator',
 ]
+
+if config.get('EMAIL_SETTINGS', None):
+    EMAIL_HOST = config.get('EMAIL_HOST', '')
+    EMAIL_HOST_USER = config.get('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD', '')
+    port = config.get('EMAIL_PORT', None)
+    if port:
+        EMAIL_PORT = port
+    EMAIL_USE_TLS = config.get('EMAIL_USE_TLS', False)
 

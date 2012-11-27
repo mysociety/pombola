@@ -144,8 +144,8 @@ def configure(db=None, dbuser=None, dbpasswd=None, email_passwd='',
         ('TWITTER_CONSUMER_SECRET', 'jHYE0inEBMixgiQny1LltYenxWk5HUmTfM3E1hzzTYw'),
         # Email
         ('EMAIL_HOST', 'smtp.gmail.com'),
-        ('EMAIL_HOST_USER', 'mailer@odekro.org'),
-        ('EMAIL_HOST_PASSWORD', 'mailer@odekro.org'),
+        ('EMAIL_HOST_USER', 'mailman@odekro.org'),
+        ('EMAIL_HOST_PASSWORD', email_passwd),
     )
 
     configs2 = (

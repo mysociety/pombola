@@ -11,11 +11,11 @@ ul{text-decoration:none;}
 ul li{list-style:none;}
 button{cursor:pointer;}
 td, th, tr{background:none;border:none;padding:0;}
-h1, h2, h3, h4, h5, h6{color:#444;}
+h1, h2, h3, h4, h5, h6{color:#000;}
 #odekro-page h1{border-bottom:1px solid #eee;padding:0 0 3px;margin:0 0 8px;font-weight:500;}
 #odekro-page > h2{margin:0 0 8px;font-weight:500;}
 #odekro-page h3{text-transform:uppercase;border-bottom:1px solid #eee;padding:0 0 3px;margin:0 0 8px;clear:both;}
-#odekro-page h3#indexIntro{text-transform:none;border:none;font-size:1.2em;font-weight:500;margin:0 0 15px;clear:both;color:#f20;}
+#odekro-page h3#indexIntro{text-transform:none;border:none;font-size:1.2em;font-weight:500;margin:0 0 15px;clear:both;color:#000;}
 .search-left h2{border-bottom:1px solid #eee;clear:both;}
 .blog-post h2{color:#d30c0c;font-weight:500;}
 .blog-post p.meta{border-bottom:1px solid #eee;padding:0 0 5px;font-size: 0.95em;}
@@ -72,11 +72,11 @@ ul.menu .menulink:hover, #nav ul.menu .menuhover, ul.menu li:hover a.menulink{co
 #breadcrumb nav ul li a:hover{text-decoration:underline;}
 #breadcrumb nav ul li .sep{padding:0 0.5em;color:#bebebe;}
 #odekro-page{padding:0 0 45px;position:relative;}
-.typo-left p, .blog-post p, #odekro-page ol, .hansardContainer p, .search-left p{margin:0 0 10px;color:#888;font-size:1.1em;clear:both;}
+.typo-left p, .blog-post p, #odekro-page ol, .hansardContainer p, .search-left p{margin:0 0 10px;color:#000;font-size:1.1em;clear:both;}
 #odekro-page ol{padding:0 0 0 20px;}
 .typo-left ul{padding:0 0 0 15px;}
 .typo-left h6{font-size:1.2em;}
-.typo-left ul li{margin:0 0 5px;list-style:disc;color:#888;}
+.typo-left ul li{margin:0 0 5px;list-style:disc;color:#000;}
 #odekro-page ol li{margin:0 0 5px;}
 .page-wrapper{margin:0 auto 15px;width:1140px;}
 .index-left, .index-mid, .index-right{overflow:hidden;padding:0 0 5px;}
@@ -142,7 +142,7 @@ a.recommendations:hover{color:#1fbc0a;}
 .featured-person img{float:left;display:block;background:url(../images/indexAvatar.jpg) no-repeat;width:130px;height:150px;}
 .ninecol .featured-person img{float:left;display:block;background:url(../images/indexAvatarL.jpg) no-repeat;width:330px;height:350px;}
 .featured-person-info{margin:0;padding:5px;overflow:hidden;}
-.featured-person-info p{margin:0 0 30px;color:#888;}
+.featured-person-info p{margin:0 0 30px;color:#000;}
 .featured-person-info h2{overflow:hidden;}
 .featured-person-info h2 a{margin:0;padding:0;border:none;background:none;box-shadow:none;color:#f20;}
 .featured-person-info span{color:#bbb;font-style:italic;}

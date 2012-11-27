@@ -117,7 +117,7 @@ def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None, version=None,
         webapp.install()
 
         if db and dbuser and dbpasswd:
-            configure(db, dbuser, dbpasswd, email_passwd)
+            configure(db, dbuser, dbpasswd, email_passwd, env.version)
 
         if init is 'yes':
             webapp.init()
@@ -181,9 +181,9 @@ def manage_py(cmd, args='', version='current'):
 
 # ADHOC
 
-def configure(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
+def configure(db=env.dbname, dbuser=env.dbuser, dbpasswd='', email_passwd='', version='current'):
     setup_db(db, dbuser, dbpasswd)
-    configure_webapp(db, dbuser, dbpasswd)
+    configure_webapp(db, dbuser, dbpasswd, email_passwd, version)
 
 def setup_db(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
     if not pg.user_exists(dbuser):
@@ -191,9 +191,9 @@ def setup_db(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
     if not pg.database_exists(db):
         pg.create_database(db, dbuser, template='template_postgis')
 
-def configure_webapp(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
-    env.version = 'current'
-    webapp.configure(db=db, dbuser=dbuser, dbpasswd=dbpasswd)
+def configure_webapp(db=env.dbname, dbuser=env.dbuser, dbpasswd='', email_passwd='', version='current'):
+    env.version = version
+    webapp.configure(db=db, dbuser=dbuser, dbpasswd=dbpasswd, email_passwd=email_passwd)
 
 
 # ENVIRONMENTS
