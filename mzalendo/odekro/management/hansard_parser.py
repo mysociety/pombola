@@ -29,7 +29,7 @@ VOTES_AND_PROCEEDINGS_HEADER = '(\s*Votes and Proceedings and the Official Repor
 
 HEADING_PATTERN = r'^\s*([A-Z-,\s]+|%s)\s*$' % VOTES_AND_PROCEEDINGS_HEADER
 SCENE_PATTERN = r'^\s*(\[[A-Za-z-\s]+\])\s*$'
-SPEECH_PATTERN = r'^\s*%s([^:{}\[\]]+):\s*(.*)\s*$' % TITLES_TEMPLATE
+SPEECH_PATTERN = r'^\s*%s([^:{}"\[\]]+):\s*(.*)\s*$' % TITLES_TEMPLATE
 CONTINUED_SPEECH_PATTERN = r'^\s*\[%s.+\]\s*' % (TITLES_TEMPLATE.upper())
 
 SCENE_START_PATTERN = r'^\s*(\[[^\]]+)\s*$'
