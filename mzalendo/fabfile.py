@@ -36,7 +36,7 @@ env.webapp_group = 'odekro_webapp'
 
 env.basedir = '/var/www/%(project)s' % env
 env.virtualenv = env.basedir
-
+env.is_staging = True
 
 #env.shell = "/bin/sh -c"
 
@@ -197,6 +197,20 @@ def configure_webapp(db=env.dbname, dbuser=env.dbuser, dbpasswd='', email_passwd
 
 
 # ENVIRONMENTS
+def production():
+    env.hosts = ['208.68.37.14']
+    env.user = 'root'  #we need a new user for this; root can't ssh
+    env.domain = 'odekro.org'
+    env.log_level = 'info'
+    env.is_staging = False
+
+def staging():
+    env.hosts = ['208.68.37.14']
+    env.user = 'eokyere'  #we need a new user for this; root can't ssh
+    env.domain = 'staging.odekro.org'
+    env.log_level = 'debug'
+
+
 def dev():
     """local machine."""
     env.hosts = ['0.0.0.0']

@@ -116,6 +116,7 @@ def configure(db=None, dbuser=None, dbpasswd=None, email_passwd='',
 
     require('basedir')
     require('version')
+    require('is_staging')
 
     if db is None:
         db = 'odekro'
@@ -145,7 +146,8 @@ def configure(db=None, dbuser=None, dbpasswd=None, email_passwd='',
         # Email
         ('EMAIL_HOST', 'smtp.gmail.com'),
         ('EMAIL_HOST_USER', 'mailman@odekro.org'),
-        ('EMAIL_HOST_PASSWORD', email_passwd),
+        ('EMAIL_HOST_PASSWORD', email_passwd or ''),
+        ('STAGING', '1' if env.is_staging else '0')
     )
 
     configs2 = (
