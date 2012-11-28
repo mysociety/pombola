@@ -19,3 +19,4 @@ web/down.default.html
 .pydevproject
 build/
 tmp/
+local_fabfile.py

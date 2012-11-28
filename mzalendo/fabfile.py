@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 
-
 """
 Odekro deployment script
 """
 
 import os, re , time
-#, getpass, fileinput, shutil
 
 from fabric.api import hide, settings, cd, env, prefix, put, get, require
 from fabric.api import local, run, sudo
@@ -14,11 +12,16 @@ from fabric.contrib.files import exists
 
 from fab import postgres as pg
 from fab import server, nginx, webapp
-import fab
 
 
-env.local_root = os.path.abspath(os.path.dirname(__file__))
+LOCAL_BASEDIR = os.path.abspath(os.path.dirname(__file__))
+PRODUCTION_ENV_USER = 'root'
+STAGING_ENV_USER    = 'root'
+PRODUCTION_ENV_PASS = None
+STAGING_ENV_PASS    = None
 
+
+env.local_root = LOCAL_BASEDIR
 env.use_ssh_config = True
 
 env.project = 'mzalendo'
@@ -38,7 +41,6 @@ env.basedir = '/var/www/%(project)s' % env
 env.virtualenv = env.basedir
 env.is_staging = True
 
-#env.shell = "/bin/sh -c"
 
 def clean():
     require('hosts', provided_by=[vm, staging, production])
@@ -52,7 +54,6 @@ def clean():
     try:
         sudo('rm -fr %(basedir)s' % env)
     except: pass
-
 
 def setup():
     require('hosts', provided_by=[vm, staging, production])
@@ -90,13 +91,12 @@ def setup_postgis():
         pg.setup_postgis()
     except: pass
 
-
-
-def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None, version=None, init='yes'):
-    """Deploy latest version of the site (or a specific version to be made live)
+def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None, 
+           version=None, init='yes'):
+    """Deploy latest (or a specific version) of the site.
         
-    Deploy a version to the servers, install any required third party 
-    modules, install the virtual host and then restart the webserver
+    Deploys a version to the servers, install any required third party 
+    modules, install the virtual host and then restart the web app server
     """
     require('hosts', provided_by=[vm, staging, production])
     require('basedir')
@@ -141,7 +141,6 @@ def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None, version=None,
         # _symlink_current_version()
         pass   
 
-
     if restart: 
         nginx.reload()
         webapp.start()
@@ -150,15 +149,8 @@ def init():
     webapp.init()
 
 
-def rollback():
-    pass
-
 def app(cmd):
     webapp.ctl(cmd)
-
-
-def setup_info_pages():
-    pass
 
 
 def manage_py(cmd, args='', version='current'):
@@ -196,67 +188,30 @@ def configure_webapp(db=env.dbname, dbuser=env.dbuser, dbpasswd='', email_passwd
     webapp.configure(db=db, dbuser=dbuser, dbpasswd=dbpasswd, email_passwd=email_passwd)
 
 
+try:
+    from local_fabfile import *
+except ImportError as e:
+    pass
+
+
 # ENVIRONMENTS
 def production():
     env.hosts = ['208.68.37.14']
-    env.user = 'root'  #we need a new user for this; root can't ssh
+    env.user = PRODUCT_ENV_USER # update this in the local_fabfile.py file
+    if PRODUCT_ENV_PASS:
+        env.password = PRODUCT_ENV_PASS
     env.domain = 'odekro.org'
     env.log_level = 'info'
     env.is_staging = False
 
 def staging():
     env.hosts = ['208.68.37.14']
-    env.user = 'eokyere'  #we need a new user for this; root can't ssh
+    env.user = STAGING_ENV_USER # update this in the local_fabfile.py file
+    if STAGING_ENV_USER:
+        env.password = STAGING_ENV_PASS
     env.domain = 'staging.odekro.org'
     env.log_level = 'debug'
-
 
 def dev():
     """local machine."""
     env.hosts = ['0.0.0.0']
-
-def vm():
-    """Local VMware test server.
-
-    Specs: RAM - 512 MB
-           HDD - 64bit 20 GB 
-    """
-    env.hosts = ['192.168.167.134']
-    env.user = 'dev'
-    env.domain = 'odekro.vm'
-    env.log_level = 'debug'
-
-def ian_vm():
-    """Local VirtualBox test server.
-
-    Specs: RAM - 512 MB
-           HDD - 64bit 20 GB 
-    """
-    env.hosts = ['127.0.0.1']
-    env.port = 2233
-    env.user = 'idesouza'
-    env.domain = 'odekro.vm'
-    env.log_level = 'debug'
-
-def vm2():
-    """Local VMware test server.
-
-    Specs: RAM - 512 MB
-           HDD - 64bit 20 GB 
-    """
-    env.hosts = ['192.168.167.135']
-    env.user = 'dev'
-    env.domain = 'odekro.vm'
-    env.log_level = 'debug'
-
-
-def staging():
-    pass
-
-def production():
-    env.hosts = ['208.68.37.14']
-    env.user = 'root'  #we need a new user for this; root can't ssh
-    env.domain = 'odekro.org'
-    env.log_level = 'info'
-
- 

@@ -154,7 +154,8 @@ def configure(db=None, dbuser=None, dbpasswd=None, email_passwd='',
         ('COUNTRY_APP', 'odekro'),
         ('EMAIL_SETTINGS', 'true'),
         ('EMAIL_PORT', '587'),
-        ('EMAIL_USE_TLS', 'true')
+        ('EMAIL_USE_TLS', 'true'),
+        ('EXT_CONTEXT_PROCESSORS', '["odekro.context_processors.process"]')
     )
 
     path = '%(basedir)s/releases/%(version)s/conf/general.yml' % env

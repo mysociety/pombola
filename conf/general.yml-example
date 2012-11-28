@@ -86,9 +86,14 @@ POPIT_API_URL: 'http://popit.example.com/api/v0.1/'
 
 DEBUG_TOOLBAR: True
 
+<<<<<<< HEAD
 # If compass is not installed system-wide, you can set this config
 # option to indicate the GEM_HOME that it's installed in:
 GEMS_DIRECTORY: ''
+=======
+EXT_CONTEXT_PROCESSORS: []
+
+>>>>>>> 0a05aa9... Refactored fabfile
 EMAIL_SETTINGS: false
 EMAIL_HOST: ''
 EMAIL_HOST_USER: ''
