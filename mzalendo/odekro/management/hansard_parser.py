@@ -20,6 +20,8 @@ SCENE_START      = 'scene_start'
 SCENE_END        = 'scene_end'
 ADJOURNMENT      = 'adjournment'
 
+PRINTED_BY_MARKER = 'printed by department of official report'
+
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
 DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
 
@@ -81,19 +83,8 @@ PATTERNS = (
 )
 
 
-def preprocess(content):
-    # hack to clear newlines and other chars we are seeing in some of the content
-    content = '\n'.join([x.strip() for x in content.splitlines()])
-    content = content.decode('utf8')
-    content = '-'.join(content.split(u'\u2013'))
-    content = '-'.join(content.split('~'))
-    return content
-
 def parse(content):
-
-    normalised = normalise_line_breaks(preprocess(content))
-    
-    lines = normalised.split("\n");
+    lines = normalised_lines(content)
     lines = scan(lines)
         
     head = parse_head(lines) # end_line
@@ -105,17 +96,7 @@ def scan(lines, header=True):
         return [scan_header_line(x) or scan_line(x) for x in lines]
     return [scan_line(x) for x in lines]
 
-def body(lines):
-    """Returns lines in the body of the hansard"""
-    for i, row in enumerate(lines):
-        _, line, _ = row
-        #if line.lower().strip().startswith('the house met at'):
-        if line.lower().strip().startswith('printed by department of official report'):
-            return [x for x in lines[i:]]
-    return [x for x in lines]
-
-
-def parse_head(lines, number_of_breaks=0):
+def parse_head(lines):
     """
     Parse the document to extract the header information. Returns a dict.
     """
@@ -123,6 +104,7 @@ def parse_head(lines, number_of_breaks=0):
     series = volume = number = date = time = None
     
     for i, row in enumerate(lines):
+        # print row
         kind, line, match = row
         if SERIES_VOL_NO == kind:
             series = ORDINAL_WORDS[match.group(1).lower()]
@@ -135,7 +117,6 @@ def parse_head(lines, number_of_breaks=0):
         elif TIME == kind:
             time = parse_time( ''.join( match.groups() ) )
         if series and volume and number and date and time:
-            number_of_breaks += i
             break
 
     return dict(
@@ -145,9 +126,6 @@ def parse_head(lines, number_of_breaks=0):
         date   = date,
         time   = time,
     )
-
-def parse_content(lines):
-    return
 
 def parse_body(lines):
     entries = []
@@ -319,6 +297,27 @@ def scan_line(line):
             return (kind, line, match)
     return (LINE, line.replace('\n', ' '), None)
 
+def meta(lines):
+    xs = []
+    for line in lines:
+        if line.lower().strip().startswith(PRINTED_BY_MARKER):
+            break
+        xs.append(line)
+    return xs
+
+def body(lines):
+    """Returns lines in the body of the hansard"""
+    for i, row in enumerate(lines):
+        _, line, _ = row
+        #if line.lower().strip().startswith('the house met at'):
+        if line.lower().strip().startswith(PRINTED_BY_MARKER):
+            return lines[i:] #[x for x in lines[i:]]
+    # return [x for x in lines] ??
+    return lines
+
+def normalised_lines(content):
+    return normalise_line_breaks(preprocess(content)).split("\n")
+
 def normalise_line_breaks(content):
 
     # Each tuple is a (pattern, replacement) to apply to the string, in the
@@ -358,15 +357,15 @@ def normalise_line_breaks(content):
     for pattern, replacement in transformations:
         content = re.sub( pattern, replacement, content, flags=re.M )
     
-    # print    
-    # print content
-    # print
-    content = content.strip()
+    return content.strip()
 
+def preprocess(content):
+    # hack to clear newlines and other chars we are seeing in some of the content
+    content = '\n'.join([x.strip() for x in content.splitlines()])
+    content = content.decode('utf8')
+    for s, r in [(u'\u2013', '-'), (u'\ufeff', ''), ('~', '-')]:
+        content = r.join(content.split(s))
     return content
-
-
-
 
 def main(args):
     fin = open(args[1], 'r')
