@@ -48,15 +48,6 @@
                     <a href="{% url registration_register %}">register</a>
             {% endif %}
             </div>
-
-
-
-            <div id="search">
-                <form id="odekro_search" method="get" action="{% url core_search %}">
-                    <input type="text" value="Search" onblur="this.value=!this.value?'Search':this.value;" onfocus="this.select()" onclick="this.value='';" />
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
         </div>
     </div>
 </div>
@@ -171,5 +162,13 @@
             var menu=new menu.dd("menu");
             menu.init("menu","menuhover");
         </script>
+
+        <div id="search">
+            <form id="odekro_search" method="get" action="{% url core_search %}">
+                <input type="text" value="Search" onblur="this.value=!this.value?'Search':this.value;" onfocus="this.select()" onclick="this.value='';" />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
     </nav>
 </div>
