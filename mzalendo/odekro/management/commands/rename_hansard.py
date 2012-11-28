@@ -11,7 +11,6 @@ from odekro.management.hansard_parser import normalised_lines, scan, \
 
 # from odekro import data
 
-
 class Command(BaseCommand):
     """Read in an info page file and either create or update existing info"""
 
@@ -19,19 +18,16 @@ class Command(BaseCommand):
     args = '<file> <Title> [<slug>]'
 
     def handle(self, *args, **options):
-        # file = open(args[])
         if not len(args):
             raise CommandError
         
         src = args[0]
-
         
         content = open(src, 'rU').read()
         lines = scan(meta(normalised_lines(content)), header=True)
-        head = parse_head(lines)
         
         try:
-            fname = '%s.txt' % self.filename(head)
+            fname = '%s.txt' % self.filename(parse_head(lines))
             dst = os.path.join(os.path.dirname(src), fname)
             print dst
             os.rename(src, dst)
