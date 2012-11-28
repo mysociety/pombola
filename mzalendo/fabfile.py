@@ -6,6 +6,7 @@ Odekro deployment script
 
 import os, re , time
 
+from fabric.api import task
 from fabric.api import hide, settings, cd, env, prefix, put, get, require
 from fabric.api import local, run, sudo
 from fabric.contrib.files import exists
@@ -42,55 +43,29 @@ env.virtualenv = env.basedir
 env.is_staging = True
 
 
-def clean():
-    require('hosts', provided_by=[vm, staging, production])
+@task
+def odekro(cmd):
+    webapp.ctl(cmd)
+
+@task
+def app(cmd, args='', version='current'):
     require('basedir')
-    require('virtualenv')
+    require('project')
+
+    basedir = env.basedir
+    project = env.project
+    virtualenv = basedir
     
-    try:
-        webapp.stop()
-    except: pass
-    
-    try:
-        sudo('rm -fr %(basedir)s' % env)
-    except: pass
+    if args:
+        args = ' %s' % args
 
-def setup():
-    require('hosts', provided_by=[vm, staging, production])
-    require('webapp_user')
-    require('basedir')
-    require('virtualenv')
-    
-    try:
-        webapp.stop()
-    except: pass
+    project_home = '%(basedir)s/releases/%(version)s/%(project)s' % locals()
+    with cd(project_home):
+        webapp._sudo(('source %(virtualenv)s/bin/activate && '
+                  # 'cd %(project_home)s && '
+                      '%(virtualenv)s/bin/python manage.py %(cmd)s%(args)s') % locals())
 
-    prepare()
-
-    setup_postgis()
-    setup_db()
-    
-    if not exists('/etc/init.d/nginx'):
-        nginx.install()
-
-def prepare():
-    require('hosts')
-    require('webapp_user')
-
-    server.install_packages()    
-    server.create_webapp_user()
-    webapp.prepare()
-
-def setup_postgis():    
-    require('hosts', provided_by=[vm, staging, production])
-    require('basedir')
-    require('virtualenv')
-
-    try:
-        # install postgres and postgis
-        pg.setup_postgis()
-    except: pass
-
+@task
 def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None, 
            version=None, init='yes'):
     """Deploy latest (or a specific version) of the site.
@@ -145,48 +120,81 @@ def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None,
         nginx.reload()
         webapp.start()
 
+@task
+def setup():
+    require('hosts', provided_by=[vm, staging, production])
+    require('webapp_user')
+    require('basedir')
+    require('virtualenv')
+    
+    try:
+        webapp.stop()
+    except: pass
+
+    prepare()
+
+    setup_postgis()
+    setup_db()
+    
+    if not exists('/etc/init.d/nginx'):
+        nginx.install()
+
+@task
+def prepare():
+    require('hosts')
+    require('webapp_user')
+
+    server.install_packages()    
+    server.create_webapp_user()
+    webapp.prepare()
+
+@task
+def setup_postgis():    
+    require('hosts', provided_by=[vm, staging, production])
+    require('basedir')
+    require('virtualenv')
+
+    try:
+        # install postgres and postgis
+        pg.setup_postgis()
+    except: pass
+
+@task
+def clean():
+    require('hosts', provided_by=[vm, staging, production])
+    require('basedir')
+    require('virtualenv')
+    
+    try:
+        webapp.stop()
+    except: pass
+    
+    try:
+        sudo('rm -fr %(basedir)s' % env)
+    except: pass
+
+@task
 def init():
     webapp.init()
 
-
-def app(cmd):
-    webapp.ctl(cmd)
-
-
-def manage_py(cmd, args='', version='current'):
-    require('basedir')
-    require('project')
-
-    basedir = env.basedir
-    project = env.project
-    virtualenv = basedir
-    
-    if args:
-        args = ' %s' % args
-
-    project_home = '%(basedir)s/releases/%(version)s/%(project)s' % locals()
-    with cd(project_home):
-        webapp._sudo(('source %(virtualenv)s/bin/activate && '
-                  # 'cd %(project_home)s && '
-                      '%(virtualenv)s/bin/python manage.py %(cmd)s%(args)s') % locals())
-
-
 # ADHOC
 
+@task
 def configure(db=env.dbname, dbuser=env.dbuser, dbpasswd='', email_passwd='', version='current'):
     setup_db(db, dbuser, dbpasswd)
     configure_webapp(db, dbuser, dbpasswd, email_passwd, version)
 
+@task
 def setup_db(db=env.dbname, dbuser=env.dbuser, dbpasswd=''):
     if not pg.user_exists(dbuser):
         pg.create_user(dbuser, dbpasswd, groups=['gisgroup'])
     if not pg.database_exists(db):
         pg.create_database(db, dbuser, template='template_postgis')
 
+@task
 def configure_webapp(db=env.dbname, dbuser=env.dbuser, dbpasswd='', email_passwd='', version='current'):
     env.version = version
     webapp.configure(db=db, dbuser=dbuser, dbpasswd=dbpasswd, email_passwd=email_passwd)
-
 
 try:
     from local_fabfile import *
@@ -195,6 +203,8 @@ except ImportError as e:
 
 
 # ENVIRONMENTS
+
+@task
 def production():
     env.hosts = ['208.68.37.14']
     env.user = PRODUCT_ENV_USER # update this in the local_fabfile.py file
@@ -204,6 +214,7 @@ def production():
     env.log_level = 'info'
     env.is_staging = False
 
+@task
 def staging():
     env.hosts = ['208.68.37.14']
     env.user = STAGING_ENV_USER # update this in the local_fabfile.py file
@@ -212,6 +223,7 @@ def staging():
     env.domain = 'staging.odekro.org'
     env.log_level = 'debug'
 
+@task
 def dev():
     """local machine."""
     env.hosts = ['0.0.0.0']
