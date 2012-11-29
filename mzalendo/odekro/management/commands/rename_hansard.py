@@ -12,29 +12,41 @@ from odekro.management.hansard_parser import normalised_lines, scan, \
 # from odekro import data
 
 class Command(BaseCommand):
-    """Read in an info page file and either create or update existing info"""
+    """Rename hansard text files based on header information"""
 
-    help = 'Create/Update info page'
-    args = '<file> <Title> [<slug>]'
+    help = 'Rename hansard text files based on header information'
+    args = '<file>'
 
     def handle(self, *args, **options):
         if not len(args):
             raise CommandError
         
         src = args[0]
+        self.rename(src)
+
+    def rename(self, src, name=None, ext=None, verbose=False):
+        if not name:
+            name = self.filename(src)
+        if not ext:
+            ext = src[-4:]
         
+        dst = os.path.join(os.path.dirname(src), '%s%s' % (name, ext))
+        if verbose:
+            print dst
+        if src != dst:
+            os.rename(src, dst)
+
+    def filename(self, src):
         content = open(src, 'rU').read()
         lines = scan(meta(normalised_lines(content)), header=True)
         
         try:
-            fname = '%s.txt' % self.filename(parse_head(lines))
-            dst = os.path.join(os.path.dirname(src), fname)
-            print dst
-            os.rename(src, dst)
+            head = parse_head(lines)
+            return 'debate-%(series)02d-%(volume)03d-%(number)03d-%(date)s' % head
         except:
             print 'Error processing %s ...' % src
-            print lines
+            print lines[:20]
             sys.exit(1)
 
-    def filename(self, head):
-        return 'debate-%(series)02d-%(volume)03d-%(number)03d-%(date)s' % head
+
+
