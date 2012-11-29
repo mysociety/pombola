@@ -23,7 +23,7 @@ ADJOURNMENT      = 'adjournment'
 PRINTED_BY_MARKER = 'printed by department of official report'
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
-DATE_PATTERN = r'^\s*(\w+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
+DATE_PATTERN = r'^\s*([A-Za-z]+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
 
 TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson|Minister|An Hon Mem|Some Hon Mem|Minority|Majority|Nana)'
 TIME_TEMPLATE = '(\d\d?)(:|\.)(\d\d)\s*(am|a.\s*m|AM|A.\s*M|pm|PM|p.\s*m|P.\s*M|noon)\.?[\s\-]*'
@@ -110,12 +110,12 @@ def parse_head(lines):
             series = ORDINAL_WORDS[match.group(1).lower()]
             volume = int(match.group(2))
             number = int(match.group(4))
-        elif DATE == kind:
+        elif DATE == kind and not date:
             date = datetime.date(int(match.group(4)),
                                  MONTHS[match.group(3).lower()[:3]], 
                                  int(match.group(2)))
-        elif TIME == kind:
-            time = parse_time( ''.join( match.groups() ) )
+        elif TIME == kind and not time:
+            time = parse_time(''.join(match.groups()))
         if series and volume and number and date and time:
             break
 
@@ -144,7 +144,15 @@ def parse_body(lines):
         # store any entry details here. Later we'll add common fields as required
         entry = None
         
-        if kind is SPEECH:
+        if kind is LINE:
+            if len(entries) and entries[-1].get('name', None):
+                    kind = SPEECH
+                    entry = entries.pop(-1)
+                    entry['speech'] = '%s\n\n%s' % (entry.get('speech'), line.strip())
+        elif kind is BLANK:
+            pass
+
+        elif kind is SPEECH:
             speech = parse_speech(time, match, lines)
             entry = dict(speech.items() + dict(section=section, column=column).items())
         elif kind is HEADING:
@@ -181,20 +189,12 @@ def parse_body(lines):
                     entry = dict(speech.items() + \
                                  dict(section=section, column=column).items())
         
-        elif kind is LINE:
-            if len(entries) and entries[-1].get('name', None):
-                    kind = SPEECH
-                    entry = entries.pop(-1)
-                    entry['speech'] = '%s\n\n%s' % (entry.get('speech'), line.strip())
-
         elif kind is CHAIR:
             entry = dict(chair=match.group(1), original=line, column=column)
         elif kind is ADJOURNMENT:
             entry = dict(scene=line, original=line,column=column)
             kind = SCENE
             time = _time(re.match(TIME_PATTERN,match.group(2)))
-        elif kind is BLANK:
-            pass
         else:
             # print "skipping '%s': '%s'" % ( kind, line )
             pass
@@ -245,8 +245,7 @@ def parse_speech(time, match, lines, name=None):
     3. May be continued on a new page [page#] [scene]
     """
     if name == None:
-        name = '%s%s' % (match.group(1), match.group(2))
-        speech = match.group(3)
+        name, speech = speech_match_parts(match)
     else:
         speech = ''
 
@@ -266,6 +265,15 @@ def parse_speech(time, match, lines, name=None):
 
     return dict(time=time, name=name, speech=speech.strip())
 
+
+def speech_match_parts(match):
+    try:
+        name = '%s%s' % (match.group(1), match.group(2))
+        speech = match.group(3)
+        return (name, speech)
+    except: pass
+    return (None, None)
+
 def parse_time(s):
     match = re.match(TIME_PATTERN, s)
     if match:
@@ -284,7 +292,7 @@ def scan_header_line(line):
         match = re.match(pattern, line)
         if match:
             return (kind, line, match)
-    return None
+    return (LINE, line.replace('\n', ' '), None)
 
 def scan_line(line):
     if not line.strip():
@@ -294,6 +302,10 @@ def scan_line(line):
         if match:
             if kind == CONTINUED_SPEECH and 'in the chair' in line.lower():
                 return (SCENE, line, match)
+            elif kind == SPEECH_PATTERN:
+                name, speech = speech_match_parts(match)
+                if name and len(name) >= 100:
+                    break
             return (kind, line, match)
     return (LINE, line.replace('\n', ' '), None)
 
@@ -343,7 +355,10 @@ def normalise_line_breaks(content):
 
         # Add breaks around timestamps
         ( r'^(%s)$' % TIME_TEMPLATE, r"\n\n\1\n\n"),
+        # ( DATE_PATTERN, r"\n\n\1\n\n"),
         
+        (SERIES_VOL_NO_PATTERN, r'\n\n\1 SERIES VOL \2 No. \4\n\n'),
+
         # Add a break before anything that looks like it might be a person's
         # name at the start of a speech
         ( r'^(%s.+:)' % TITLES_TEMPLATE, r'\n\n\1' ),
@@ -361,9 +376,15 @@ def normalise_line_breaks(content):
 
 def preprocess(content):
     # hack to clear newlines and other chars we are seeing in some of the content
-    content = '\n'.join([x.strip() for x in content.splitlines()])
-    content = content.decode('utf8')
-    for s, r in [(u'\u2013', '-'), (u'\ufeff', ''), ('~', '-')]:
+    content = '\n'.join([x.strip().decode('utf8','ignore') for x in content.splitlines()])
+    # content = u'%s' % content
+    # content = content.decode('utf8')
+    content = ''.join(content.split(u'\xaf'))
+    # content = content.decode('utf8')
+    for s, r in [(u'\u2013', '-'), (u'\ufeff', ''), 
+                 (u'O\ufb01icial', 'Official'), 
+                 (u'Of\ufb01cial', 'Official'), 
+                 (u'\ufb01', 'fi'), (u'\ufb02', 'ff'), ('~', '-')]:
         content = r.join(content.split(s))
     return content
 
