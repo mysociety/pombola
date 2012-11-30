@@ -20,11 +20,15 @@ class Command(BaseCommand):
             if not os.path.exists(src):
                 sys.exit(1)
 
-            if os.path.isfile(src):
+            if os.path.isfile(src) and src.endswith('.txt'):
                 self.add_hansard(src)
             elif os.path.isdir(src):
                 for f in os.listdir(src):
                     self.handle(os.path.abspath(os.path.join(src, f)), **options)
 
     def add_hansard(self, src):
-        data.add_hansard(*parse(open(src, 'r').read()))
+        try:
+            data.add_hansard(*parse(open(src, 'r').read()))
+        except Exception, e:
+            print 'Error adding hansard: %s' % src
+            print e
