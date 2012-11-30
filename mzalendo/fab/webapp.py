@@ -381,6 +381,10 @@ def _configure_nginx():
     require('version')
     require('basedir')
     require('domain')
+    require('collected_static')
+    require('robots_dir')
+    require('media_root')
+    require('base_domain')
 
     dest = '%(basedir)s/releases/%(version)s/conf/nginx.conf' % env
     src = '%s-template' % dest
@@ -393,7 +397,7 @@ def _configure_nginx():
 
     configs = [('%%(%s)s' % k,  ('%%(%s)s' % k) % env) for k in \
                ['domain', 'project_home', 'base_domain', 
-                'media_root', 'robots_dir']]
+                'media_root', 'robots_dir', 'collected_static']]
     # (
     #     ('%(domain)s', '%(domain)s' % env),
     #     ('%(project_home)s', project_home),
