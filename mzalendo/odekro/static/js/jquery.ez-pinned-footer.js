@@ -11,23 +11,23 @@
 		var wH = $(window).height();
 		var wW = getWindowWidth();
 		var fH = $(this).outerHeight(true);
-		var bH = $("body").outerHeight(true);
-		var mB = parseInt($("body").css("margin-bottom"));
+		var bH = $("#odekro-page").outerHeight(true);
+		var mB = parseInt($("#odekro-page").css("margin-bottom"));
 		
 		if (options == 'relative') {
 			if (bH > getWindowHeight()) {
 				$(this).css("position","absolute");
 				$(this).css("width",wW + "px");
 				$(this).css("top",bH - fH + "px");
-				$("body").css("overflow-x","hidden");
+				$("#odekro-page").css("overflow-x","hidden");
 			} else {
-				$(this).css("position","fixed");
+				$(this).css("position","relative");
 				$(this).css("width",wW + "px");
 				$(this).css("top",wH - fH + "px");
 			}
 		} else { // Pinned option
 			// Set CSS attributes for positioning footer
-			$(this).css("position","fixed");
+			$(this).css("position","relative");
 			$(this).css("width",wW + "px");
 			$(this).css("top",wH - fH + "px");
 			$("body").css("height",(bH + mB) + "px");
