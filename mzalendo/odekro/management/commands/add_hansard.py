@@ -1,3 +1,5 @@
+import os
+
 from django.core.management.base import BaseCommand, CommandError
 
 from odekro.management.hansard_parser import parse
@@ -8,12 +10,21 @@ class Command(BaseCommand):
     """Import Hansard"""
 
     help = 'Import Hansard'
-    args = '<file>'
+    args = '<file1> <file2> ...'
 
     def handle(self, *args, **options):
         if len(args) != 1:
             raise CommandError
         
-        path = args[0]
-        content = open(path, 'r').read()
-        data.add_hansard(*parse(content))
+        for src in args:
+            if not os.path.exists(src):
+                sys.exit(1)
+
+            if os.path.isfile(src):
+                self.add_hansard(src)
+            elif os.path.isdir(src):
+                for f in os.listdir(src):
+                    self.handle(os.path.abspath(os.path.join(src, f)), **options)
+
+    def add_hansard(self, src):
+        data.add_hansard(*parse(open(src, 'r').read()))
