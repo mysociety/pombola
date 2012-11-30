@@ -292,7 +292,8 @@ def scan_header_line(line):
         match = re.match(pattern, line)
         if match:
             return (kind, line, match)
-    return (LINE, line.replace('\n', ' '), None)
+    # return (LINE, line.replace('\n', ' '), None)
+    return None
 
 def scan_line(line):
     if not line.strip():
