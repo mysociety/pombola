@@ -163,10 +163,12 @@
         <ul class="mob-menu"> 
             <li><a href="#">Menu</a>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Places</a></li>
-                    <li><a href="#">Parliament</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="{% url home %}">Home</a></li>
+                    <li><a href="{% url info_page slug='places-overview' %}">Places</a></li>
+                    <li><a href="{% url info_page slug='parliament-overview' %}">Parliament</a></li>
+                    <li><a href="{% url position slug='mp' %}">MPs</a></li>
+                    <li><a href="{% url hansard:index %}">Hansard</a></li>
+                    <li><a href="{% url info_page slug='odekro-overview' %}">About</a></li>
                 </ul>
             </li>
         </ul>
