@@ -391,7 +391,7 @@ def _configure_nginx():
     env.project_home = project_home
     env.base_domain = '.'.join(env.domain.split('.')[-2:])
 
-    configs = [('%(%s)s' % k,  ('%(%s)s' % k) % env) for k in \
+    configs = [('%%(%s)s' % k,  ('%%(%s)s' % k) % env) for k in \
                ['domain', 'project_home', 'base_domain', 
                 'media_root', 'robots_dir']]
     # (
