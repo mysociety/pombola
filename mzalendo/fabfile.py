@@ -24,24 +24,50 @@ STAGING_ENV_PASS    = None
 
 env.local_root = LOCAL_BASEDIR
 env.use_ssh_config = True
-
-env.project = 'mzalendo'
-env.git_remote = "origin"
-env.git_branch = "odekro"
-env.pip_requirements = 'requirements.txt'
-env.local_settings = 'deploy/local_settings.py'
 env.log_level = 'debug'
 
-env.dbname = 'odekro'
-env.dbuser = 'postgres'
 
 env.webapp_user = 'odekro_webapp'
 env.webapp_group = 'odekro_webapp'
 
+env.project = 'mzalendo'
+env.git_remote = "origin"
+env.git_branch = "odekro"
+
 env.basedir = '/var/www/%(project)s' % env
 env.virtualenv = env.basedir
+env.pip_requirements = 'requirements.txt'
+env.dbname = 'odekro'
+env.dbuser = 'postgres'
 env.is_staging = True
 
+# nginx
+env.collected_static = '/var/www/mzalendo/releases/collected_static'
+env.media_root = '/var/www/mzalendo/releases'
+env.robots_dir = '/var/www/mzalendo/releases/current/web'
+
+@task
+def upload_hansards(src):
+    require('basedir')
+    require('project')
+
+    if os.path.isfile(src):
+        put(src, '/tmp/')
+        app('add_hansard', os.path.join('/tmp', os.path.basename(src)))
+    elif os.path.isdir(src):
+        try:
+            local('rm -fr /tmp/debates')
+        except: pass
+        local('mkdir /tmp/debates && cp %(src)s/debate*.txt /tmp/debates' % locals())
+        local('cd /tmp && tar -czf debates.tar.gz debates')
+        put('/tmp/debates.tar.gz', '/tmp/')
+        try:
+            run('rm -fr /tmp/debates')
+        except: pass
+        run('cd /tmp && tar -xzf debates.tar.gz')
+        app('add_hansard', '/tmp/debates')
+    else:
+        print 'Wuptidoo'
 
 @task
 def odekro(cmd):
@@ -203,6 +229,7 @@ except ImportError as e:
 
 
 # ENVIRONMENTS
+# TODO Make sure nginx setup is done
 
 @task
 def production():
@@ -210,9 +237,9 @@ def production():
     env.user = PRODUCT_ENV_USER # update this in the local_fabfile.py file
     if PRODUCT_ENV_PASS:
         env.password = PRODUCT_ENV_PASS
-    env.domain = 'odekro.org'
     env.log_level = 'info'
     env.is_staging = False
+    env.domain = 'www.odekro.org'    
 
 @task
 def staging():
@@ -220,8 +247,8 @@ def staging():
     env.user = STAGING_ENV_USER # update this in the local_fabfile.py file
     if STAGING_ENV_USER:
         env.password = STAGING_ENV_PASS
-    env.domain = 'staging.odekro.org'
     env.log_level = 'debug'
+    env.domain = 'staging.odekro.org'
 
 @task
 def dev():

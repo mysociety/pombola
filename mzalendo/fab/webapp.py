@@ -387,10 +387,19 @@ def _configure_nginx():
     project_home = '%(basedir)s/releases/%(version)s/%(project)s' % env
 
     _sudo('cp %(src)s %(dest)s' % locals())
-    configs = (
-        ('%(domain)s', '%(domain)s' % env),
-        ('%(project_home)s', project_home)
-    )
+    
+    env.project_home = project_home
+    env.base_domain = '.'.join(env.domain.split('.')[-2:])
+
+    configs = [('%(%s)s' % k,  ('%(%s)s' % k) % env) for k in \
+               ['domain', 'project_home', 'base_domain', 
+                'media_root', 'robots_dir']]
+    # (
+    #     ('%(domain)s', '%(domain)s' % env),
+    #     ('%(project_home)s', project_home),
+    #     ('%(naked_domain)s', '%(naked_domain)s' % env),
+    #     ('%(media_root)s', '%(media_root)s' % env),
+    # )
     _sed2(configs, dest)
 
 def _random_chars(size):

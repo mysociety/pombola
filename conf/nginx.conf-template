@@ -2,9 +2,13 @@
 
 server {
     listen 80;
+    server_name %(naked_domain)s;
+    return 301 http://%(domain)s$request_uri;
+}
+
+server {
+    listen 80;
     server_name %(domain)s;
-    
-    # no security problem here, since / is alway passed to upstream
     root %(project_home)s;
 
 #   Serve directly - analogous for static/staticfiles
@@ -21,17 +25,17 @@ server {
 #        root /path/to/test/lib/python2.7/site-packages/django/contrib;
 #   }
 
-#   location /media_root {
-#        root %(media_root)s
-#   }
+    location /media_root {
+         root %(media_root)s;
+    }
 
-#   location /static {
-#        root %(collected_static)s
-#   }
+    location /static {
+         alias %(collected_static)s;
+    }
 
-#   location /robots.txt {
-#        root %(robots_dir)s/robots.txt
-#   }
+    location /robots.txt {
+         root %(robots_dir)s;
+    }
 
 #   location /favicon.ico {
 #       root %(docs_dir)s/favicon.ico
