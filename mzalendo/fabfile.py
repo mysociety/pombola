@@ -249,9 +249,9 @@ def _dest(src):
 @task
 def production():
     env.hosts = ['208.68.37.14']
-    env.user = PRODUCT_ENV_USER # update this in the local_fabfile.py file
-    if PRODUCT_ENV_PASS:
-        env.password = PRODUCT_ENV_PASS
+    env.user = PRODUCTION_ENV_USER # update this in the local_fabfile.py file
+    if PRODUCTION_ENV_PASS:
+        env.password = PRODUCTION_ENV_PASS
     env.log_level = 'info'
     env.is_staging = False
     env.domain = 'www.odekro.org'    
