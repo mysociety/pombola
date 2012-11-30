@@ -228,6 +228,21 @@ except ImportError as e:
     pass
 
 
+@task
+def update_file(src, dest=None, relative=True):
+    # webapp._sudo
+    put(src, _dest(dest) if dest and relative else dest or _dest(src),
+        use_sudo=True)
+
+
+def get_file(src, dest=None, relative=True):
+    get(_dest(src), dest or ('/tmp/%s' % src))
+
+def _dest(src):
+    project_home = '%(basedir)s/releases/current/%(project)s/' % env
+    return os.path.join(project_home, src)
+
+
 # ENVIRONMENTS
 # TODO Make sure nginx setup is done
 
