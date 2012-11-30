@@ -384,7 +384,10 @@ def preprocess(content):
     for s, r in [(u'\u2013', '-'), (u'\ufeff', ''), 
                  (u'O\ufb01icial', 'Official'), 
                  (u'Of\ufb01cial', 'Official'), 
-                 (u'\ufb01', 'fi'), (u'\ufb02', 'ff'), ('~', '-')]:
+                 (u'\ufb01', 'fi'), (u'\ufb02', 'ff'), 
+                 (u'\u2019', "'"),
+                 ('~', '-'), 
+                 ]:
         content = r.join(content.split(s))
     return content
 
