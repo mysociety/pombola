@@ -199,23 +199,27 @@ def add_hansard(head, entries):
 
 
 def add_hansard_entry(venue, source, sitting, obj, counter):
-    entry = Entry.objects.get_or_create(
-                    type=entry_kind(obj),
-                    sitting=sitting,
-                    page_number=obj.get('column', None),
-                    speaker_name=obj.get('name', ''),
-                    content=obj.get(obj.get('kind'), ''),
-                    defaults=(dict(text_counter=counter)))[0]
-    entry.text_counter = counter
-    entry.save()
-    
-    #print "%s [%s]: %s (%s)"%(entry.sitting.start_date, obj['kind'], entry.speaker_name, obj.get('section','-'))
-    return HansardEntry.objects.get_or_create(
-                      sitting=sitting,
-                      entry=entry,
-                      time=obj.get('time', None),
-                      section=obj.get('section', ''),
-                      column=obj.get('column', 0))[0]
+    try:
+        entry = Entry.objects.get_or_create(
+                        type=entry_kind(obj),
+                        sitting=sitting,
+                        page_number=obj.get('column', None),
+                        speaker_name=obj.get('name', ''),
+                        content=obj.get(obj.get('kind'), ''),
+                        defaults=(dict(text_counter=counter)))[0]
+        entry.text_counter = counter
+        entry.save()
+      
+        #print "%s [%s]: %s (%s)"%(entry.sitting.start_date, obj['kind'], entry.speaker_name, obj.get('section','-'))
+        return HansardEntry.objects.get_or_create(
+                          sitting=sitting,
+                          entry=entry,
+                          time=obj.get('time', None),
+                          section=obj.get('section', ''),
+                          column=obj.get('column', 0))[0]
+    except Exception, e:
+        print e, '\n', source, '\n', obj
+
 
 def entry_kind(entry):
     kind = entry['kind']
