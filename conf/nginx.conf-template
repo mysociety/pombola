@@ -2,7 +2,7 @@
 
 server {
     listen 80;
-    server_name %(naked_domain)s;
+    server_name %(base_domain)s;
     return 301 http://%(domain)s$request_uri;
 }
 
