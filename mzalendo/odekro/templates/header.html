@@ -3,6 +3,7 @@
     <div class="wrap">
         <h1 id="logo"><a href="{% url home %}">Odekro Logo</a></h1>
         
+        {% comment %}
         <ul class="header" style="border:none;">
             <a class="topMenu" 
                href="{% url info_page slug='odekro-overview' %}">What is <br />Odekro?
@@ -28,6 +29,8 @@
             </a>
         </ul>
         {% endif %}
+
+        {% endcomment %}
 
         <div id="rightArea">
 

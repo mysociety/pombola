@@ -37,8 +37,11 @@
             src="{{ STATIC_URL }}js/jquery.jshowoff.min.js"></script>
     <script type="text/javascript" 
             src="{{ STATIC_URL }}js/jquery.animate.js"></script>
+    
+    {% comment %}
     <script type="text/javascript" 
             src="{{ STATIC_URL }}js/jquery.ez-pinned-footer.js"></script>
+    {% endcomment %}
     <script>
         $(window).load(function() {
             $("#odekro-footer").pinFooter();
