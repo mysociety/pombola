@@ -384,7 +384,7 @@ def _configure_nginx():
     require('collected_static')
     require('robots_dir')
     require('media_root')
-    require('base_domain')
+    # require('base_domain')
 
     dest = '%(basedir)s/releases/%(version)s/conf/nginx.conf' % env
     src = '%s-template' % dest
