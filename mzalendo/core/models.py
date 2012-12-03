@@ -177,7 +177,7 @@ class PersonManager(ManagerBase):
         # all_results = self.filter(can_be_featured=True) 
         
         # select all the presidential aspirants
-        all_results = self.filter(position__title__slug='aspirant-president') 
+        all_results = self.filter(position__in=Position.objects.all().filter(title__slug='aspirant-president').currently_active()) 
 
         if not all_results.exists():
             return None
