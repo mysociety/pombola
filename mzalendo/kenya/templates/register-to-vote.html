@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Register to Vote{% endblock %}
+
+{% block breadcrumbs %}
+    {# Hide bread crumbs on the home page. Insert blank div to add padding #}
+    <div id="breadcrumb-replacement">&nbsp;</div>
+{% endblock %}
+
+{% block content %}
+
+  <h1>Register to Vote!</h1>
+
+  <p>
+    Please use the tools below to find your nearest registration centre.
+  </p>
+
+  <p>
+    You can also go <a href="http://vote.iebc.or.ke/">direct to the IEBC page</a>, or the alternative <a href="http://gottovote.code4kenya.org/">GotToVote tool</a> from Code4Kenya.
+  </p>
+
+  <!-- from http://vote.iebc.or.ke/ -->
+  <iframe src="http://vote.iebc.or.ke/gadget/" width="1024" height="552"></iframe>
+
+{% endblock %}
