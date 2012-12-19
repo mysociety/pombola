@@ -108,9 +108,9 @@ def position(request, slug):
         child_places = [x.place for x in positions.distinct('place').order_by('place__name')]
         
         # Extract all the parent places too
-        parent_places = [x.parent_place for x in child_places if (x and x.parent_place)]
-        parent_places = sorted( set( parent_places ), key=lambda item: item.name ) 
-        
+        parent_places = set(x.parent_place for x in child_places if (x and x.parent_place))
+        parent_places = sorted(parent_places, key=lambda item: item.name)
+
         # combine the places into a single list for the search drop down
         places = []
         places.extend(parent_places)
