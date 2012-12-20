@@ -17,7 +17,6 @@
       
          a {
           color: $colour_black;
-          background: $colour_white;
           background-image: none;
       
           &:hover {
@@ -69,7 +68,7 @@ body {
       background: url(../images/down-logo.png) 0 center no-repeat;
     }
   }
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 900px) {
     background: url(/static/images/mz-nigeria-logo.png) 0 center no-repeat;
     &.down {
       background: url(../images/down-logo.png) 0 center no-repeat;
@@ -80,19 +79,11 @@ body {
 
 #header-search {
   margin: 15px 5px 5px 15px;
-  @media only screen and (min-width: 900px) {
-    margin: 40px 5px 5px 15px;
-  }
 }
 
 
 menu#site-user-tools {
   clear: right;
-
-  @media only screen and (min-width: 900px) {
-    margin-top: 40px;
-    clear:none;
-  }
 }  
 
 #login-box {
