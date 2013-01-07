@@ -80,7 +80,7 @@ class PopItBase(object):
         result_dict = slumber_resource(self.popit_id).get()
         if 'error' in result_dict:
             raise Exception, "Error fetching %s: %s" % (self.resource_name, result_dict['error'])
-        if self.complete_from_api_specific(result_dict['result']):
+        if self.complete_from_dictionary(result_dict['result']):
             self.completed = True
 
 
@@ -96,9 +96,9 @@ class PopItPerson(PopItBase):
         self.other_names = None
         super(PopItPerson,self).__init__(client, dictionary)
         if client.api_version != "v1":
-            self.complete_from_api_specific(dictionary)
+            self.complete_from_dictionary(dictionary)
 
-    def complete_from_api_specific(self, result_dict):
+    def complete_from_dictionary(self, result_dict):
         self.date_of_birth = PartialDate.create(result_dict['personal_details']['date_of_birth'])
         self.date_of_death = PartialDate.create(result_dict['personal_details']['date_of_death'])
         self.images = result_dict['images']
@@ -127,9 +127,9 @@ class PopItPosition(PopItBase):
         self.person = None
         self.organisation = None
         if client.api_version != "v1":
-            self.complete_from_api_specific(dictionary)
+            self.complete_from_dictionary(dictionary)
 
-    def complete_from_api_specific(self, result_dict):
+    def complete_from_dictionary(self, result_dict):
         if ('start_date' not in result_dict) or ('end_date' not in result_dict):
             raise Exception, "start_date or end_date was missing from %s" % (result_dict)
         self.start_date = PartialDate.create(result_dict['start_date'])
@@ -167,9 +167,9 @@ class PopItOrganisation(PopItBase):
         self.category = None
         super(PopItOrganisation,self).__init__(client, dictionary)
         if client.api_version != "v1":
-            self.complete_from_api_specific(dictionary)
+            self.complete_from_dictionary(dictionary)
 
-    def complete_from_api_specific(self, result_dict):
+    def complete_from_dictionary(self, result_dict):
         self.images = result_dict['images']
         self.category = result_dict['category']
         return True
