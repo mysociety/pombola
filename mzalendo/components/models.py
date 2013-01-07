@@ -250,7 +250,8 @@ class ComponentClient(object):
 
         for position_dictionary in all_positions['results']:
             p = PopItPosition(self, position_dictionary)
-            p.complete_from_api()
+            if self.api_version == "v1":
+                p.complete_from_api()
             self.all_positions[p.popit_id] = p
 
     def get_all_people(self):
