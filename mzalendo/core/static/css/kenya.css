@@ -63,6 +63,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   text-align: center;
 }
 
+.notice {
+  text-align: center;
+  padding: 0.5em;
+  background-color: #f7f7f7;
+}
+
 div.error {
   border: 2px solid #f00;
   background-color: #fcc;
@@ -74,6 +80,27 @@ div.error {
 
 ul.ui-autocomplete li {
   list-style: none;
+}
+
+.view-selector {
+  float: right;
+}
+
+.grid-listing-item {
+  float: left;
+  width: 210px;
+  margin: 10px;
+  padding: 5px;
+  overflow: hidden;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
+}
+.grid-listing-item span.name {
+  font-size: 120%;
+  display: block;
+  height: 2.5em;
+  overflow: hidden;
 }
 
 body {
@@ -2312,6 +2339,59 @@ ul.listing li section a.read-more:hover {
     text-decoration: none;
   }
 }
+ul.position-listing {
+  padding: 0;
+  border-color: #bbb;
+  border-style: solid;
+  border-width: 0 1px;
+}
+ul.position-listing li {
+  margin: 0;
+  padding: 4px;
+  min-height: 50px;
+  list-style: none;
+  border-bottom: 1px solid #bbb;
+}
+ul.position-listing li:nth-child(odd) {
+  background-color: #f4f4f4;
+}
+ul.position-listing li span.name {
+  font-size: 125%;
+}
+ul.position-listing li span.more {
+  float: right;
+}
+ul.position-listing li img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin-right: 1em;
+  margin-bottom: 0;
+}
+
+div.search-filters, div.search-pagination {
+  color: #eee;
+  padding: 8px;
+  min-height: 1.5em;
+  font-size: 90%;
+}
+
+div.search-filters {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #27a942), color-stop(100%, #22913b));
+  background: -webkit-linear-gradient(#27a942, #22913b);
+  background: -moz-linear-gradient(#27a942, #22913b);
+  background: -o-linear-gradient(#27a942, #22913b);
+  background: linear-gradient(#27a942, #22913b);
+}
+
+div.search-pagination {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333132), color-stop(100%, #4c4c4e));
+  background: -webkit-linear-gradient(#333132, #4c4c4e);
+  background: -moz-linear-gradient(#333132, #4c4c4e);
+  background: -o-linear-gradient(#333132, #4c4c4e);
+  background: linear-gradient(#333132, #4c4c4e);
+}
+
 h3.scorecard-overall {
   display: block;
   font-weight: bold;

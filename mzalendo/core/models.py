@@ -169,9 +169,16 @@ class PersonManager(ManagerBase):
             exclude the current person.
             
             If no slug is provided, returns a random person.
-            If the slug is purely numeric (n), this consisently returns a person (actually the nth wrapping around 
-            where necessary): this allows js to generate random calls that can nonetheless be served from the cache."""
-        all_results = self.filter(can_be_featured=True) 
+            If the slug is purely numeric (n), this consistently returns a person (actually the nth wrapping around 
+            where necessary): this allows js to generate random calls that can nonetheless be served from the cache.\
+        """
+
+        # original code that selects based on the can_be_featured flag
+        # all_results = self.filter(can_be_featured=True) 
+        
+        # select all the presidential aspirants
+        all_results = self.filter(position__in=Position.objects.all().filter(title__slug='aspirant-president').currently_active()) 
+
         if not all_results.exists():
             return None
         sort_order = 'slug'
@@ -261,6 +268,10 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         """Return list of constituencies that this person is currently an politician for"""
         return Place.objects.filter(position__in=self.politician_positions())
 
+    def aspirant_constituencies(self):
+        """Return list of constituencies that this person is currently an aspirant for"""
+        return Place.objects.filter(position__in=self.aspirant_positions())
+
     def __unicode__(self):
         return self.legal_name
 
@@ -309,6 +320,19 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         if self.is_politician():
             return super(Person, self).has_scorecards() or any([x.has_scorecards() for x in self.constituencies()])
         
+    @property
+    def show_overall_score(self):
+        """Should we show an overall score? Yes if applicable and there are active scorecards and we have the CDF category"""
+        if super(Person, self).show_overall_score:
+            # We could show the scorecard. Check that there is a CDF report in there.
+            for constituency in self.constituencies():
+                if constituency.active_scorecards().filter(category__slug='cdf-performance').exists():
+                    return True        
+
+        # fall through to here
+        return False
+
+
     class Meta:
        ordering = ["slug"]      
 
@@ -493,7 +517,7 @@ class PositionTitle(ModelBase):
 
 class PositionQuerySet(models.query.GeoQuerySet):
     def currently_active(self, when=None):
-        """Filter on start and end dates to limit to currently active postitions"""
+        """Filter on start and end dates to limit to currently active positions"""
 
         if when == None:
             when = datetime.date.today()
@@ -509,7 +533,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
         return qs
 
     def currently_inactive(self, when=None):
-        """Filter on start and end dates to limit to currently inactive postitions"""
+        """Filter on start and end dates to limit to currently inactive positions"""
     
         if when == None:
             when = datetime.date.today()
@@ -532,7 +556,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
         return self.filter( title__slug__startswith='aspirant-' )
 
     def current_aspirant_positions(self, when=None):
-        """Filter down to only positions which are those of current aspirantsns."""
+        """Filter down to only positions which are those of current aspirants."""
         return self.aspirant_positions().currently_active(when)
 
     def politician_positions(self):

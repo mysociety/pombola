@@ -25,6 +25,10 @@ GOOGLE_ANALYTICS_ACCOUNT: ''
 MANAGERS_NAME: 'Mzalendo Managers'
 MANAGERS_EMAIL: 'managers@example.com'
 
+# The email address to which errors should be sent:
+ERRORS_NAME: 'Mzalendo Developers'
+ERRORS_EMAIL: 'developers@example.com'
+
 # Email address that will be used in the 'From' line
 FROM_EMAIL: 'you@example.com'
 

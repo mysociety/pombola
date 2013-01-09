@@ -63,3 +63,5 @@ python-memcached
 # -e git://github.com/mysociety/mapit.git@pypi#egg=django-mapit
 
 python-dateutil
+
+coverage>=3

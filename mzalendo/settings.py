@@ -54,10 +54,13 @@ TEMPLATE_DEBUG = STAGING
 SERVE_STATIC_FILES = STAGING
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    (config.get('ERRORS_NAME'), config.get('ERRORS_EMAIL')),
 )
 
 DEFAULT_FROM_EMAIL = config.get('FROM_EMAIL')
+
+# This is the From: address used for error emails to ADMINS
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 MANAGERS = (
     (config.get('MANAGERS_NAME'), config.get('MANAGERS_EMAIL')),
@@ -295,9 +298,14 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django.request': {
+        'django': {
             'handlers': ['stream_to_stderr'],
-            'level': 'WARN',
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
             'propagate': True,
         },
     }
