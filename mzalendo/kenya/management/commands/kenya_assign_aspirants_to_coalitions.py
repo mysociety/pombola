@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import re 
 import sys
 
@@ -205,4 +207,70 @@ class Command(BaseCommand):
 
     def handle(self, **options):
 
-        pass
+        coalition_member_title, created = models.PositionTitle.objects.get_or_create(
+            name="Coalition Member", slug="coalition_member"
+        )
+
+        # get a list of all parties in a coalition
+        coalition_party_slugs = [
+            slug
+            for slug
+            in self.party_to_coalition_mapping.keys()
+            if self.party_to_coalition_mapping[slug]
+        ]
+        
+        # get all the parties representing those slugs
+        coalition_parties = [
+            models.Organisation.objects.get(slug=slug)
+            for slug
+            in coalition_party_slugs
+        ]
+        
+        # get all the positions of people who are currently members of those parties
+        coalition_member_positions = (
+            models
+            .Position
+            .objects
+            .all()
+            .filter(title__slug='member')
+            .filter(organisation__in=coalition_parties)
+            .currently_active()
+        )
+
+        # get all current aspirant positions
+        current_aspirant_positions = (
+            models
+            .Position
+            .objects
+            .all()
+            .current_aspirant_positions()            
+        )
+
+        # extract the people who are both members of a coalition party and currently an aspirant
+        coalition_members = (
+            models
+            .Person
+            .objects
+            .all()
+            .filter( position__in = coalition_member_positions )
+            .filter( position__in = current_aspirant_positions )
+            .distinct()
+        )
+
+        # for all the coalition members go through and ensure that they are linked to the coalition as well
+        for member in coalition_members:
+            print member
+            for party in member.parties():
+                coalition_slug = self.party_to_coalition_mapping.get(party.slug)
+                if coalition_slug:
+                    coalition = models.Organisation.objects.get(slug=coalition_slug)
+                    models.Position.objects.get_or_create(
+                        title        = coalition_member_title,
+                        person       = member,
+                        organisation = coalition,
+                        category     = 'political',
+                        defaults = {
+                            # 'start_date': '2013-01-18', # date when the coalitions will be confirmed
+                            'end_date':   'future',                            
+                        }
+                    )        
