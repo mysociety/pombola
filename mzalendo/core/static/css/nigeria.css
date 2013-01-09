@@ -239,11 +239,7 @@ pre {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-<<<<<<< HEAD
   background: #75a8cd;
-=======
-  background: #87c43c;
->>>>>>> master
 }
 .btn-text-green:hover {
   background: #a0a0a0;
@@ -321,21 +317,12 @@ pre {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-<<<<<<< HEAD
   background: #75a8cd;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #82bae3), color-stop(100%, #75a8cd));
   background: -webkit-linear-gradient(#82bae3, #75a8cd);
   background: -moz-linear-gradient(#82bae3, #75a8cd);
   background: -o-linear-gradient(#82bae3, #75a8cd);
   background: linear-gradient(#82bae3, #75a8cd);
-=======
-  background: #87c43c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
-  background: -webkit-linear-gradient(#96d942, #87c43c);
-  background: -moz-linear-gradient(#96d942, #87c43c);
-  background: -o-linear-gradient(#96d942, #87c43c);
-  background: linear-gradient(#96d942, #87c43c);
->>>>>>> master
 }
 .big-btn-text-green:hover {
   background: #a0a0a0;
@@ -343,21 +330,12 @@ pre {
   text-decoration: none;
 }
 .big-btn-text-green:hover {
-<<<<<<< HEAD
   background: #82bae3;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #75a8cd), color-stop(100%, #82bae3));
   background: -webkit-linear-gradient(#75a8cd, #82bae3);
   background: -moz-linear-gradient(#75a8cd, #82bae3);
   background: -o-linear-gradient(#75a8cd, #82bae3);
   background: linear-gradient(#75a8cd, #82bae3);
-=======
-  background: #96d942;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
-  background: -webkit-linear-gradient(#87c43c, #96d942);
-  background: -moz-linear-gradient(#87c43c, #96d942);
-  background: -o-linear-gradient(#87c43c, #96d942);
-  background: linear-gradient(#87c43c, #96d942);
->>>>>>> master
 }
 
 .big-btn-text-red {
@@ -537,21 +515,12 @@ pre {
 
 #site-header {
   clear: both;
-<<<<<<< HEAD
   background: #55a4da;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #71daff), color-stop(100%, #55a4da));
   background: -webkit-linear-gradient(#71daff, #55a4da);
   background: -moz-linear-gradient(#71daff, #55a4da);
   background: -o-linear-gradient(#71daff, #55a4da);
   background: linear-gradient(#71daff, #55a4da);
-=======
-  background: #009245;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00c25c), color-stop(100%, #009245));
-  background: -webkit-linear-gradient(#00c25c, #009245);
-  background: -moz-linear-gradient(#00c25c, #009245);
-  background: -o-linear-gradient(#00c25c, #009245);
-  background: linear-gradient(#00c25c, #009245);
->>>>>>> master
 }
 #site-header .wrapper {
   overflow: hidden;
@@ -2215,11 +2184,7 @@ ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.l
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-<<<<<<< HEAD
   background: #75a8cd;
-=======
-  background: #87c43c;
->>>>>>> master
 }
 ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
   background: #a0a0a0;
@@ -2556,21 +2521,12 @@ h3.scorecard-overall span.score-overall-bad {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-<<<<<<< HEAD
   background: #75a8cd;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #82bae3), color-stop(100%, #75a8cd));
   background: -webkit-linear-gradient(#82bae3, #75a8cd);
   background: -moz-linear-gradient(#82bae3, #75a8cd);
   background: -o-linear-gradient(#82bae3, #75a8cd);
   background: linear-gradient(#82bae3, #75a8cd);
-=======
-  background: #87c43c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
-  background: -webkit-linear-gradient(#96d942, #87c43c);
-  background: -moz-linear-gradient(#96d942, #87c43c);
-  background: -o-linear-gradient(#96d942, #87c43c);
-  background: linear-gradient(#96d942, #87c43c);
->>>>>>> master
   border: none;
   float: right;
 }
@@ -2580,21 +2536,12 @@ h3.scorecard-overall span.score-overall-bad {
   text-decoration: none;
 }
 #ajax_dialog_subcontent input.submit:hover {
-<<<<<<< HEAD
   background: #82bae3;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #75a8cd), color-stop(100%, #82bae3));
   background: -webkit-linear-gradient(#75a8cd, #82bae3);
   background: -moz-linear-gradient(#75a8cd, #82bae3);
   background: -o-linear-gradient(#75a8cd, #82bae3);
   background: linear-gradient(#75a8cd, #82bae3);
-=======
-  background: #96d942;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
-  background: -webkit-linear-gradient(#87c43c, #96d942);
-  background: -moz-linear-gradient(#87c43c, #96d942);
-  background: -o-linear-gradient(#87c43c, #96d942);
-  background: linear-gradient(#87c43c, #96d942);
->>>>>>> master
 }
 #ajax_dialog_subcontent .errorlist {
   list-style-type: none;
@@ -2694,7 +2641,6 @@ h3.scorecard-overall span.score-overall-bad {
   float: left;
   width: 50px;
   height: 30px;
-<<<<<<< HEAD
   background: #75a8cd url(../images/search-icon.png) center no-repeat;
   background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #75a8cd), color-stop(100%, #55a4da));
   background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#75a8cd, #55a4da);
@@ -2709,22 +2655,6 @@ h3.scorecard-overall span.score-overall-bad {
   background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#55a4da, #75a8cd);
   background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#55a4da, #75a8cd);
   background: url(../images/search-icon.png) center no-repeat, linear-gradient(#55a4da, #75a8cd);
-=======
-  background: #87c43c url(../images/search-icon.png) center no-repeat;
-  background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #009245));
-  background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#87c43c, #009245);
-  background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#87c43c, #009245);
-  background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#87c43c, #009245);
-  background: url(../images/search-icon.png) center no-repeat, linear-gradient(#87c43c, #009245);
-}
-#home-search button:hover {
-  background: #009245 url(../images/search-icon.png) center no-repeat;
-  background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #87c43c));
-  background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#009245, #87c43c);
-  background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#009245, #87c43c);
-  background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#009245, #87c43c);
-  background: url(../images/search-icon.png) center no-repeat, linear-gradient(#009245, #87c43c);
->>>>>>> master
 }
 #home-search > a {
   float: left;
@@ -2899,7 +2829,6 @@ ul#home-news-list li img {
   display: block;
   margin: 10px 10px 3px 10px;
   padding: 10px;
-<<<<<<< HEAD
   background: #55a4da;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5eb6f2), color-stop(100%, #55a4da));
   background: -webkit-linear-gradient(#5eb6f2, #55a4da);
@@ -2915,23 +2844,6 @@ ul#home-news-list li img {
   background: -moz-linear-gradient(#55a4da, #5eb6f2);
   background: -o-linear-gradient(#55a4da, #5eb6f2);
   background: linear-gradient(#55a4da, #5eb6f2);
-=======
-  background: #009245;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00a24c), color-stop(100%, #009245));
-  background: -webkit-linear-gradient(#00a24c, #009245);
-  background: -moz-linear-gradient(#00a24c, #009245);
-  background: -o-linear-gradient(#00a24c, #009245);
-  background: linear-gradient(#00a24c, #009245);
-}
-#home-links a.aspirants:hover {
-  text-decoration: none;
-  background: #00a24c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #00a24c));
-  background: -webkit-linear-gradient(#009245, #00a24c);
-  background: -moz-linear-gradient(#009245, #00a24c);
-  background: -o-linear-gradient(#009245, #00a24c);
-  background: linear-gradient(#009245, #00a24c);
->>>>>>> master
 }
 #home-links a.citizens {
   -webkit-border-radius: 0 0 5px 5px;
@@ -2943,7 +2855,6 @@ ul#home-news-list li img {
   display: block;
   margin: 0 10px 10px 10px;
   padding: 10px;
-<<<<<<< HEAD
   background: #75a8cd;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #82bae3), color-stop(100%, #75a8cd));
   background: -webkit-linear-gradient(#82bae3, #75a8cd);
@@ -2959,23 +2870,6 @@ ul#home-news-list li img {
   background: -moz-linear-gradient(#75a8cd, #82bae3);
   background: -o-linear-gradient(#75a8cd, #82bae3);
   background: linear-gradient(#75a8cd, #82bae3);
-=======
-  background: #87c43c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
-  background: -webkit-linear-gradient(#96d942, #87c43c);
-  background: -moz-linear-gradient(#96d942, #87c43c);
-  background: -o-linear-gradient(#96d942, #87c43c);
-  background: linear-gradient(#96d942, #87c43c);
-}
-#home-links a.citizens:hover {
-  text-decoration: none;
-  background: #96d942;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
-  background: -webkit-linear-gradient(#87c43c, #96d942);
-  background: -moz-linear-gradient(#87c43c, #96d942);
-  background: -o-linear-gradient(#87c43c, #96d942);
-  background: linear-gradient(#87c43c, #96d942);
->>>>>>> master
 }
 
 @media only screen and (min-width: 640px) {
@@ -3133,7 +3027,6 @@ ul#home-news-list li img {
     border-radius: 5px 0 0 5px;
     margin: 0 3px 0 0;
     padding: 20px;
-<<<<<<< HEAD
     background: #55a4da url(../images/big-chevron.png) 180px center no-repeat;
     background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5eb6f2), color-stop(100%, #55a4da));
     background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#5eb6f2, #55a4da);
@@ -3148,22 +3041,6 @@ ul#home-news-list li img {
     background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#55a4da, #5eb6f2);
     background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#55a4da, #5eb6f2);
     background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#55a4da, #5eb6f2);
-=======
-    background: #009245 url(../images/big-chevron.png) 180px center no-repeat;
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00a24c), color-stop(100%, #009245));
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#00a24c, #009245);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#00a24c, #009245);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#00a24c, #009245);
-    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#00a24c, #009245);
-  }
-  #home-links a.aspirants:hover {
-    background: #00a24c url(../images/big-chevron.png) 180px center no-repeat;
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #00a24c));
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#009245, #00a24c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#009245, #00a24c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#009245, #00a24c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#009245, #00a24c);
->>>>>>> master
   }
   #home-links a.citizens {
     -webkit-border-radius: 0 5px 5px 0;
@@ -3173,7 +3050,6 @@ ul#home-news-list li img {
     border-radius: 0 5px 5px 0;
     margin: 0;
     padding: 20px;
-<<<<<<< HEAD
     background: #75a8cd url(../images/big-chevron.png) 180px center no-repeat;
     background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #82bae3), color-stop(100%, #75a8cd));
     background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#82bae3, #75a8cd);
@@ -3188,22 +3064,6 @@ ul#home-news-list li img {
     background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#75a8cd, #82bae3);
     background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#75a8cd, #82bae3);
     background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#75a8cd, #82bae3);
-=======
-    background: #87c43c url(../images/big-chevron.png) 180px center no-repeat;
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#96d942, #87c43c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#96d942, #87c43c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#96d942, #87c43c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#96d942, #87c43c);
-  }
-  #home-links a.citizens:hover {
-    background: #96d942 url(../images/big-chevron.png) 180px center no-repeat;
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#87c43c, #96d942);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#87c43c, #96d942);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#87c43c, #96d942);
-    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#87c43c, #96d942);
->>>>>>> master
   }
 
   .featured-person {
@@ -3655,4 +3515,20 @@ menu#site-user-tools {
   text-align: center;
   height: 250px;
   background: #55a4da url(/static/images/mz-nigeria-logo-symbol.png) center center no-repeat;
+}
+
+div.search-filters {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #55a4da), color-stop(100%, #75a8cd));
+  background: -webkit-linear-gradient(#55a4da, #75a8cd);
+  background: -moz-linear-gradient(#55a4da, #75a8cd);
+  background: -o-linear-gradient(#55a4da, #75a8cd);
+  background: linear-gradient(#55a4da, #75a8cd);
+}
+
+div.search-pagination {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333132), color-stop(100%, #4c4c4e));
+  background: -webkit-linear-gradient(#333132, #4c4c4e);
+  background: -moz-linear-gradient(#333132, #4c4c4e);
+  background: -o-linear-gradient(#333132, #4c4c4e);
+  background: linear-gradient(#333132, #4c4c4e);
 }

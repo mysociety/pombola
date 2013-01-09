@@ -97,3 +97,11 @@ menu#site-user-tools {
     background: $colour_primary url(/static/images/mz-nigeria-logo-symbol.png) center center no-repeat;
   }
 }
+
+
+div.search-filters {
+  @include background(linear-gradient($colour_primary, $colour_primary_light));
+}
+div.search-pagination {
+  @include background(linear-gradient(#333132, #4C4C4E));
+}
