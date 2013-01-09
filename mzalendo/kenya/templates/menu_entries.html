@@ -35,7 +35,18 @@
     </ul>
     {% endif %}
 </li>
-<li><a href="{% url position slug='mp' %}">Politicians</a></li>
+
+
+<li>
+  <a href="{% url position slug='mp' %}">MPs</a>
+  {% if include_sub_menu_entries %}
+  <ul id="parliament-overview">    
+    <li><a href="{% url organisation_kind slug='party' %}">Political Parties</a></li>
+    <li><a href="{% url organisation_kind slug='coalition' %}">Coalitions</a></li>
+  </ul>                    
+  {% endif %}
+</li>
+
 <li><a href="{% url info_page slug='parliament-overview' %}">Parliament</a>
     {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
