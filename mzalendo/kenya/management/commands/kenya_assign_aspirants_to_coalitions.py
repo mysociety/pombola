@@ -208,7 +208,7 @@ class Command(BaseCommand):
     def handle(self, **options):
 
         coalition_member_title, created = models.PositionTitle.objects.get_or_create(
-            name="Coalition Member", slug="coalition_member"
+            name="Coalition Member", slug="coalition-member"
         )
 
         # get a list of all parties in a coalition
