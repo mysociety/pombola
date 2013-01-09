@@ -259,7 +259,7 @@ class Command(BaseCommand):
 
         # for all the coalition members go through and ensure that they are linked to the coalition as well
         for member in coalition_members:
-            print member
+            # print member
             for party in member.parties():
                 coalition_slug = self.party_to_coalition_mapping.get(party.slug)
                 if coalition_slug:
