@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Map{% endblock %}
+
+{% block extra_js_to_load %}
+    mzalendo_settings.extra_js.push( 'js/feeds.js' );
+{% endblock %}
+
+{% block extra_headers %}
+{% endblock %}
+
+
+{% block breadcrumbs %}
+    {# Hide bread crumbs on the home page. Insert blank div to add padding #}
+    <div id="breadcrumb-replacement">&nbsp;</div>
+{% endblock %}
+
+{% block content %}
+  Map stuff goes here
+{% endblock %}
