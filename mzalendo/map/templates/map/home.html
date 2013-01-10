@@ -3,7 +3,7 @@
 {% block title %}Map{% endblock %}
 
 {% block extra_js_to_load %}
-    mzalendo_settings.extra_js.push( 'js/feeds.js' );
+    mzalendo_settings.extra_js.push( 'js/map-drilldown.js' );
 {% endblock %}
 
 {% block extra_headers %}
@@ -16,5 +16,24 @@
 {% endblock %}
 
 {% block content %}
-  Map stuff goes here
+
+
+<style type="text/css" media="screen">
+  #map-drilldown-canvas {
+    background-color: #ccc;
+    width: 100%;
+    height: 400px;
+  }
+</style>
+
+
+<div class="map-drilldown">
+
+    <div id="map-drilldown-canvas">
+      loading&hellip;
+    </div>
+
+</div>
+
+
 {% endblock %}
