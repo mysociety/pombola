@@ -47,6 +47,12 @@
     
     reticleMarker.bindTo('position', map, 'center'); 
     
+    // react to changes in the map
+    var messageHolder = $('#map-drilldown-message');
+    google.maps.event.addListener(map, 'center_changed', function() {
+      messageHolder.html( map.getCenter() + '' );
+    });
+    
   }
   
   function make_bounds ( bounds ) {
