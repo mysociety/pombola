@@ -37,15 +37,19 @@
                 static_url('js/desktop-functions.js'),                
             ],
             both: [
-                static_url('js/analytics.js'),
-                '//platform.twitter.com/widgets.js',
-                '//connect.facebook.net/en_GB/all.js#xfbml=1&appId=' + mzalendo_settings.facebook_app_id,
                 '//www.google.com/jsapi' // ?key=INSERT-YOUR-KEY
             ].concat( extra_js ),
             complete: function () {
                 for (i=0; i<mzalendo_run_when_document_ready_array.length; i++) {
                     $( mzalendo_run_when_document_ready_array[i] );
                 }
+
+                // Now load all the optional bits that we didn't want slowing down the more important bits
+                Modernizr.load([
+                  static_url('js/analytics.js'),
+                  '//platform.twitter.com/widgets.js',
+                  '//connect.facebook.net/en_GB/all.js#xfbml=1&appId=' + mzalendo_settings.facebook_app_id
+                ]);
             }
         }
     );
