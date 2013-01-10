@@ -24,6 +24,29 @@
 
     map.fitBounds( make_bounds( map_bounds ) );
 
+    // Add crosshairs at the center - see merging of answers at 
+    // http://stackoverflow.com/questions/4130237
+    var crosshairs_path = window.mzalendo_settings.static_url + 'images/crosshairs.png?' + window.mzalendo_settings.static_generation_number 
+
+    var reticleImage = new google.maps.MarkerImage(
+       crosshairs_path,                 // marker image
+       new google.maps.Size(63, 63),    // marker size
+       new google.maps.Point(0,0),      // marker origin
+       new google.maps.Point(32, 32)    // marker anchor point
+    );
+    
+    var reticleShape = {
+      coords: [32,32,32,32],           // 1px
+      type: 'rect'                     // rectangle
+    };
+    
+    var reticleMarker = new google.maps.Marker({
+      map: map,
+      icon: reticleImage, 
+    });
+    
+    reticleMarker.bindTo('position', map, 'center'); 
+    
   }
   
   function make_bounds ( bounds ) {
