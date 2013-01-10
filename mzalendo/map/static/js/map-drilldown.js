@@ -16,8 +16,7 @@
     var map_has_been_located = false;
 
     var myOptions = {
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true,
+      mapTypeId: google.maps.MapTypeId.TERRAIN,
       maxZoom: 10
     };
 
