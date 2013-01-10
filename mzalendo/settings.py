@@ -266,6 +266,7 @@ INSTALLED_APPS = (
     'search',
     'user_profile',
     'file_archive',
+    'map',
 )
 
 # add the optional apps
