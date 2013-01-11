@@ -42,18 +42,51 @@
     
     var reticleMarker = new google.maps.Marker({
       map: map,
-      icon: reticleImage, 
+      icon: reticleImage
     });
     
-    reticleMarker.bindTo('position', map, 'center'); 
+    reticleMarker.bindTo('position', map, 'center');
     
+
     // react to changes in the map
-    var messageHolder = $('#map-drilldown-message');
-    google.maps.event.addListener(map, 'center_changed', function() {
-      messageHolder.html( map.getCenter() + '' );
-    });
+    google.maps.event.addListener(
+      map,
+      'center_changed',
+      function () { updateLocation( map.getCenter() ); }
+    );
     
   }
+  
+  function reducePrecision (val) {
+    var precision = 100;
+    return Math.round(val * precision ) / precision;
+  };
+
+  function updateLocation (latlng) {
+
+      var lat = reducePrecision( latlng.lat() );
+      var lng = reducePrecision( latlng.lng() );
+
+      fetchAreas( lat, lng, displayAreas );
+  } 
+
+  function fetchAreas ( lat, lng ) {
+
+    var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat;
+    console.log(lat, lng, mapitPointURL);
+  
+    $.get( mapitPointURL, displayAreas ); 
+  }
+  
+  function displayAreas (areas) {
+    var messageHolder = $('#map-drilldown-message');
+    messageHolder.html(
+      "Have areas " + Object.keys(areas).join(', ') + "&hellip;"
+    );    
+    console.log(areas);
+  }
+
+
   
   function make_bounds ( bounds ) {
       var sw = new google.maps.LatLng( bounds.south, bounds.west );
