@@ -82,7 +82,7 @@
   function fetchAreas ( lat, lng ) {
 
     var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat;
-    console.log(lat, lng, mapitPointURL);
+    // console.log(lat, lng, mapitPointURL);
 
     // Check that we are not at the current location already
     if (mapitPointURL == fetchAreasCurrentURL) {
@@ -103,8 +103,10 @@
     }
 
     // Not in cache - fetch from server
+    messageHolderHTML("Fetching area from server&hellip;");
     fetchAreasDebounceTimeout = setTimeout(
       function () {
+        // TODO - catch errors here and display them (ignoring aborts)
         fetchAreasCurrentRequest = $.get( mapitPointURL, function (data) {
           fetchAreasCache[mapitPointURL] = data;
           displayAreas(data);
@@ -114,12 +116,25 @@
     );  
   }
   
-  function displayAreas (areas) {
-    var messageHolder = $('#map-drilldown-message');
-    messageHolder.html(
-      "Have areas " + Object.keys(areas).join(', ') + "&hellip;"
+  function displayAreas (data) {
+
+    var areas = _.omit( data, ['debug_db_queries'] );
+    var default_message   = 'No matching areas were found';
+    var area_descriptions = '';
+
+    _.each( areas, function (area, area_id ) {
+      // console.log(area);
+      if (area_descriptions) { area_descriptions += ', '; } 
+      area_descriptions += '<a href="/place/mapit_area/' + area_id + '">' + area.name + '</a> (' + area.type_name + ')';
+    });
+
+    messageHolderHTML(
+      area_descriptions || default_message
     );    
-    console.log(areas);
+  }
+  
+  function messageHolderHTML (html) {
+    $('#map-drilldown-message').html( html );        
   }
 
 
