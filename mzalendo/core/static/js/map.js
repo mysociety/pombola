@@ -7,12 +7,11 @@ function initialize_map() {
     var map_element = document.getElementById("map_canvas")
     if (!map_element) return false;
 
-    // start with the default bounds for kenya
     var map_bounds = {
-        north: 5, 
-        east:  44,
-        south: -5,
-        west:  33.5
+      north: window.mzalendo_settings.map_bounds.north,
+      east:  window.mzalendo_settings.map_bounds.east,
+      south: window.mzalendo_settings.map_bounds.south,
+      west:  window.mzalendo_settings.map_bounds.west
     };
 
     var map_has_been_located = false;
