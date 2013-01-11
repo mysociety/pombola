@@ -55,6 +55,34 @@
       function () { updateLocation( map.getCenter() ); }
     );
     
+    var $geoLocateMeButton = $('#geo-locate-me-button');
+    if ( geo_position_js.init() ) {      
+
+      var originalMessage = $geoLocateMeButton.html();
+
+      $geoLocateMeButton
+        .click( function (event) {
+          event.preventDefault();
+          
+          $geoLocateMeButton.html('Trying to find your current location&hellip;');
+          geo_position_js.getCurrentPosition(
+            function (data) { // success
+              var coords = new google.maps.LatLng( data.coords.latitude, data.coords.longitude );
+              map.setCenter( coords );
+              map.setZoom( 10 ); // feels about right for locating a big area
+              $geoLocateMeButton.html(originalMessage);
+            },
+            function () { // failure or error
+              $geoLocateMeButton.html('There was a problem finding your current location');
+            }
+          );
+        
+        });
+    } else {
+      $geoLocateMeButton.hide();      
+    }
+
+    
   }
   
   function reducePrecision (val) {

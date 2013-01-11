@@ -3,8 +3,9 @@
 {% block title %}Map{% endblock %}
 
 {% block extra_js_to_load %}
-    mzalendo_settings.extra_js.push( 'js/map-drilldown.js' );
+    mzalendo_settings.extra_js.push( 'js/libs/geo-0.4.8.min.js' );
     mzalendo_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js' );
+    mzalendo_settings.extra_js.push( 'js/map-drilldown.js' );
 {% endblock %}
 
 {% block extra_headers %}
@@ -33,6 +34,8 @@
   <div id="map-drilldown-message">
     Drag and zoom the map to search for an area.
   </div>
+  
+  <button id="geo-locate-me-button">Auto-locate me!</button>
 
   <div id="map-drilldown-canvas">
     loading&hellip;
