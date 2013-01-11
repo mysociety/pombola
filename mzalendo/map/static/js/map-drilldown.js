@@ -70,12 +70,48 @@
       fetchAreas( lat, lng, displayAreas );
   } 
 
+
+  // Get the areas hash from the server, or the local cache. Debounce as well
+  // so that we don't issue too many requests during map movements.
+
+  var fetchAreasCurrentRequest  = null;
+  var fetchAreasDebounceTimeout = null;
+  var fetchAreasCurrentURL      = null;
+  var fetchAreasCache           = {};
+
   function fetchAreas ( lat, lng ) {
 
     var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat;
     console.log(lat, lng, mapitPointURL);
-  
-    $.get( mapitPointURL, displayAreas ); 
+
+    // Check that we are not at the current location already
+    if (mapitPointURL == fetchAreasCurrentURL) {
+      return;
+    }
+    fetchAreasCurrentURL = mapitPointURL;
+
+    // clear current request and timeout
+    clearTimeout(fetchAreasDebounceTimeout);
+    if (fetchAreasCurrentRequest) {
+      fetchAreasCurrentRequest.abort();
+    }
+
+    // Check to see if we have this result in cache already
+    if (fetchAreasCache[mapitPointURL]) {
+      displayAreas( fetchAreasCache[mapitPointURL] );
+      return;
+    }
+
+    // Not in cache - fetch from server
+    fetchAreasDebounceTimeout = setTimeout(
+      function () {
+        fetchAreasCurrentRequest = $.get( mapitPointURL, function (data) {
+          fetchAreasCache[mapitPointURL] = data;
+          displayAreas(data);
+        } );         
+      },
+      1000
+    );  
   }
   
   function displayAreas (areas) {
