@@ -78,6 +78,14 @@ def place_kind(request, slug=None):
         },
     )
 
+def place_mapit_area(request, mapit_id):
+
+    place = get_object_or_404(
+        models.Place,
+        mapit_area=mapit_id
+    )
+
+    return redirect(place)
 
 def position(request, slug):
     title = get_object_or_404(
