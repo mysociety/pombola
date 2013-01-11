@@ -6,7 +6,7 @@
 (function () {
     
     var static_url = function ( path ) {
-        if ( path.match('^http://') )
+        if ( path.match('^//') )
             return path;
 
         return mzalendo_settings.static_url
