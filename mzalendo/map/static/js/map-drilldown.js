@@ -81,7 +81,8 @@
 
   function fetchAreas ( lat, lng ) {
 
-    var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat;
+    // FIXME - change to CON after #495 closed.
+    var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat + '?type=con';
     // console.log(lat, lng, mapitPointURL);
 
     // Check that we are not at the current location already
