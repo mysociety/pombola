@@ -108,7 +108,7 @@
     fetchAreasDebounceTimeout = setTimeout(
       function () {
         // TODO - catch errors here and display them (ignoring aborts)
-        fetchAreasCurrentRequest = $.get( mapitPointURL, function (data) {
+        fetchAreasCurrentRequest = $.getJSON( mapitPointURL, function (data) {
           fetchAreasCache[mapitPointURL] = data;
           displayAreas(data);
         } );         
