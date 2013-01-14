@@ -179,7 +179,7 @@
               'maps', '3',
               {
                   callback: initialize_map,
-                  other_params:'sensor=false'
+                  other_params:'sensor=true'
               }
           );
       }
