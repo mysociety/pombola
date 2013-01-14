@@ -87,7 +87,7 @@
           geo_position_js.getCurrentPosition(
             function (data) { // success
               var coords = new google.maps.LatLng( data.coords.latitude, data.coords.longitude );
-              map.panTo( coords );
+              map.setCenter( coords );
               map.setZoom( 10 ); // feels about right for locating a big area
             },
             function () { // failure or error
@@ -209,18 +209,17 @@
   }
 
 
-  // var centerMapInWindowDebounce = 0;
-
   function centerMapInWindow (map, loc) {
     
     // Make the map the same height as the window, and then scroll to the top
     // of it to fill the window
     var $canvas = $('#map-drilldown-canvas');
     $canvas.height( $(window).height() );
+    google.maps.event.trigger(map, 'resize');
     window.scrollTo( 0, $canvas.offset().top );
 
     if ( loc ) {
-      map.panTo( loc );
+      map.setCenter( loc );
     }
   }
   
@@ -233,26 +232,29 @@
     // resized (includes changing screen orientation).
     // Adapted from http://stackoverflow.com/q/8792676/5349
     var currentMapCenter = null;
-    var currentMapCenterTimeout = null;
 
     // When the map is not moving store the current location. Use a timeout so rapid
     // changes do not get stored, which is what happens when the resize and
     // orientationchange events fire in succession on a mobile.
-    google.maps.event.addListener( map, 'idle', function () {
-      clearTimeout(currentMapCenterTimeout);
-      setTimeout(
+    google.maps.event.addListener(
+      map,
+      'idle',
+      _.debounce(
         function () {
           var center = map.getCenter();
           currentMapCenter = new google.maps.LatLng( center.lat(), center.lng() );        
         },
-        200
-      );
-    });
+        400
+      )
+    );
 
-    // Handle events
-    var eventHandler = function () {
-      centerMapInWindow( map, currentMapCenter );
-    };
+    // Handle events - debounce these as well
+    var eventHandler = _.debounce(
+      function () {
+        centerMapInWindow( map, currentMapCenter );
+      },
+      200
+    );
     google.maps.event.addDomListener( window, 'resize',            eventHandler);    
     google.maps.event.addDomListener( window, 'orientationchange', eventHandler);    
   }
