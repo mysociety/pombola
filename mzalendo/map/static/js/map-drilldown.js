@@ -12,8 +12,6 @@
       west:  window.mzalendo_settings.map_bounds.west
     };
 
-    var map_has_been_located = false;
-
     var myOptions = {
 
       // Choose a map type that is clear
@@ -23,13 +21,9 @@
       // constituency - adds server load and is not helpful to them.
       maxZoom: 10,
       
-      // Use limited controls
-      disableDefaultUI:   true,
-      panControl:         true,
-      zoomControl:        true,
-      zoomControlOptions: {
-        style: google.maps.ZoomControlStyle.SMALL
-      },
+      // Use default controls (ie show or hide depending on device) and then
+      // switch off irrelevant ones.
+      disableDefaultUI:   false,
       mapTypeControl:     false,
       scaleControl:       false,
       streetViewControl:  false,
@@ -192,15 +186,19 @@
   
 
   function addMessageControlToMap (map) {
+    var control = $('#map-drilldown-message').get(0);
+    control.index = 1;
     map
-      .controls[google.maps.ControlPosition.TOP_CENTER]
-      .push($('#map-drilldown-message').get(0));
+      .controls[google.maps.ControlPosition.TOP_LEFT]
+      .push(control);
   }
 
   function addGeoLocateControlToMap (map) {
+    var control = $('#geo-locate-me-button').get(0);
+    control.index = 1;
     map
       .controls[google.maps.ControlPosition.TOP_RIGHT]
-      .push($('#geo-locate-me-button').get(0));
+      .push(control);
   }
 
 
