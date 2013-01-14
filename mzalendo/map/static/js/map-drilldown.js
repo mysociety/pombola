@@ -74,31 +74,29 @@
     
     maintainMapCenterOnResize( map );
     
-    addControlsToMap( map );
+    addMessageControlToMap( map );
 
     var $geoLocateMeButton = $('#geo-locate-me-button').find('a');
     if ( geo_position_js.init() ) {      
-
-      var originalMessage = $geoLocateMeButton.html();
 
       $geoLocateMeButton
         .click( function (event) {
           event.preventDefault();
           
-          $geoLocateMeButton.html('Trying to find your current location&hellip;');
+          messageHolderHTML('Trying to find your current location&hellip;');
           geo_position_js.getCurrentPosition(
             function (data) { // success
               var coords = new google.maps.LatLng( data.coords.latitude, data.coords.longitude );
               map.setCenter( coords );
               map.setZoom( 10 ); // feels about right for locating a big area
-              $geoLocateMeButton.html(originalMessage);
             },
             function () { // failure or error
-              $geoLocateMeButton.html('There was a problem finding your current location');
+              messageHolderHTML('There was a problem finding your current location');
             }
           );
         
         });
+        addGeoLocateControlToMap( map );
     } else {
       $geoLocateMeButton.hide();      
     }
@@ -184,11 +182,13 @@
   }
   
 
-  function addControlsToMap (map) {
+  function addMessageControlToMap (map) {
     map
       .controls[google.maps.ControlPosition.TOP_CENTER]
       .push($('#map-drilldown-message').get(0));
+  }
 
+  function addGeoLocateControlToMap (map) {
     map
       .controls[google.maps.ControlPosition.TOP_RIGHT]
       .push($('#geo-locate-me-button').get(0));
