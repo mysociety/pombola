@@ -15,8 +15,26 @@
     var map_has_been_located = false;
 
     var myOptions = {
+
+      // Choose a map type that is clear
       mapTypeId: google.maps.MapTypeId.TERRAIN,
-      maxZoom: 10
+
+      // no point letting users zoom in too far for the purposes of finding a
+      // constituency - adds server load and is not helpful to them.
+      maxZoom: 10,
+      
+      // Use limited controls
+      disableDefaultUI:   true,
+      panControl:         true,
+      zoomControl:        true,
+      zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL
+      },
+      mapTypeControl:     false,
+      scaleControl:       false,
+      streetViewControl:  false,
+      overviewMapControl: false
+      
     };
 
     var map = new google.maps.Map(map_element, myOptions);
