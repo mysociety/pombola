@@ -26,19 +26,37 @@
     width: 100%;
     height: 400px;
   }
+  
+  .gmap-control {
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid black;
+    text-align: center;    
+  }
+
+  #map-drilldown-message {
+    width: 60%;
+  }
+  
+  #geo-locate-me-button {
+    width: 10%;
+  }
 </style>
 
 
 <div class="map-drilldown">
 
-  <div id="map-drilldown-message">
+  <div id="map-drilldown-canvas">
+    loading&hellip;
+  </div>
+
+  <div id="map-drilldown-message" class="gmap-control">
     Drag and zoom the map to search for an area.
   </div>
   
-  <button id="geo-locate-me-button">Auto-locate me!</button>
-
-  <div id="map-drilldown-canvas">
-    loading&hellip;
+  <div id="geo-locate-me-button" class="gmap-control">
+    <a href="#">Auto-locate me!</a>
   </div>
 
 </div>

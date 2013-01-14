@@ -73,8 +73,10 @@
     );
     
     maintainMapCenterOnResize( map );
+    
+    addControlsToMap( map );
 
-    var $geoLocateMeButton = $('#geo-locate-me-button');
+    var $geoLocateMeButton = $('#geo-locate-me-button').find('a');
     if ( geo_position_js.init() ) {      
 
       var originalMessage = $geoLocateMeButton.html();
@@ -181,6 +183,18 @@
     );    
   }
   
+
+  function addControlsToMap (map) {
+    map
+      .controls[google.maps.ControlPosition.TOP_CENTER]
+      .push($('#map-drilldown-message').get(0));
+
+    map
+      .controls[google.maps.ControlPosition.TOP_RIGHT]
+      .push($('#geo-locate-me-button').get(0));
+  }
+
+
   function messageHolderHTML (html) {
     $('#map-drilldown-message').html( html );        
   }
