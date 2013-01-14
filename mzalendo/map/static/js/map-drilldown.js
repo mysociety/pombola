@@ -72,6 +72,8 @@
       function () { updateLocation( map.getCenter() ); }
     );
     
+    maintainMapCenterOnResize( map );
+
     var $geoLocateMeButton = $('#geo-locate-me-button');
     if ( geo_position_js.init() ) {      
 
@@ -189,6 +191,22 @@
       var sw = new google.maps.LatLng( bounds.south, bounds.west );
       var ne = new google.maps.LatLng( bounds.north, bounds.east );
       return new google.maps.LatLngBounds( sw, ne );
+  }
+
+  function maintainMapCenterOnResize (map) {
+    // Maintain the centre of the map in the same place when the window is
+    // resized (includes changing screen orientation).
+    // Adapted from http://stackoverflow.com/q/8792676/5349
+    var currentMapCenter = null;
+    google.maps.event.addListener( map, 'idle', function () {
+        currentMapCenter = map.getCenter();
+    });
+    google.maps.event.addDomListener( window, 'resize', function () {
+      map.setCenter(currentMapCenter);
+    });    
+    google.maps.event.addDomListener( window, 'orientationchange', function () {
+      map.setCenter(currentMapCenter);
+    });    
   }
   
   mzalendo_run_when_document_ready(
