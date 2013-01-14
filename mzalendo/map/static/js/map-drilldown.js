@@ -75,7 +75,7 @@
     maintainMapCenterOnResize( map );
     
     addMessageControlToMap( map );
-
+    
     var $geoLocateMeButton = $('#geo-locate-me-button').find('a');
     if ( geo_position_js.init() ) {      
 
@@ -87,7 +87,7 @@
           geo_position_js.getCurrentPosition(
             function (data) { // success
               var coords = new google.maps.LatLng( data.coords.latitude, data.coords.longitude );
-              map.setCenter( coords );
+              map.panTo( coords );
               map.setZoom( 10 ); // feels about right for locating a big area
             },
             function () { // failure or error
@@ -101,6 +101,7 @@
       $geoLocateMeButton.hide();      
     }
 
+    
     
   }
   
@@ -151,10 +152,10 @@
     }
 
     // Not in cache - fetch from server
-    messageHolderHTML("Fetching area from server&hellip;");
     fetchAreasDebounceTimeout = setTimeout(
       function () {
         // TODO - catch errors here and display them (ignoring aborts)
+        messageHolderHTML("Fetching area from server&hellip;");
         fetchAreasCurrentRequest = $.getJSON( mapitPointURL, function (data) {
           fetchAreasCache[mapitPointURL] = data;
           displayAreas(data);
@@ -207,20 +208,53 @@
       return new google.maps.LatLngBounds( sw, ne );
   }
 
+
+  // var centerMapInWindowDebounce = 0;
+
+  function centerMapInWindow (map, loc) {
+    
+    // Make the map the same height as the window, and then scroll to the top
+    // of it to fill the window
+    var $canvas = $('#map-drilldown-canvas');
+    $canvas.height( $(window).height() );
+    window.scrollTo( 0, $canvas.offset().top );
+
+    if ( loc ) {
+      map.panTo( loc );
+    }
+  }
+  
+
   function maintainMapCenterOnResize (map) {
+
+    centerMapInWindow(map);
+    
     // Maintain the centre of the map in the same place when the window is
     // resized (includes changing screen orientation).
     // Adapted from http://stackoverflow.com/q/8792676/5349
     var currentMapCenter = null;
+    var currentMapCenterTimeout = null;
+
+    // When the map is not moving store the current location. Use a timeout so rapid
+    // changes do not get stored, which is what happens when the resize and
+    // orientationchange events fire in succession on a mobile.
     google.maps.event.addListener( map, 'idle', function () {
-        currentMapCenter = map.getCenter();
+      clearTimeout(currentMapCenterTimeout);
+      setTimeout(
+        function () {
+          var center = map.getCenter();
+          currentMapCenter = new google.maps.LatLng( center.lat(), center.lng() );        
+        },
+        200
+      );
     });
-    google.maps.event.addDomListener( window, 'resize', function () {
-      map.setCenter(currentMapCenter);
-    });    
-    google.maps.event.addDomListener( window, 'orientationchange', function () {
-      map.setCenter(currentMapCenter);
-    });    
+
+    // Handle events
+    var eventHandler = function () {
+      centerMapInWindow( map, currentMapCenter );
+    };
+    google.maps.event.addDomListener( window, 'resize',            eventHandler);    
+    google.maps.event.addDomListener( window, 'orientationchange', eventHandler);    
   }
   
   mzalendo_run_when_document_ready(
