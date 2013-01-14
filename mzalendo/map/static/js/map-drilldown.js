@@ -1,7 +1,15 @@
 (function () {
 
   function initialize_map() {
-
+    var map = createMap();
+    addCrosshairs( map );
+    trackMapMovements( map );   
+    maintainMapCenterOnResize( map );
+    addMessageControlToMap( map );
+    enableGeoLocateFeature( map );
+  }
+  
+  function createMap () {
     var map_element = document.getElementById("map-drilldown-canvas");
     if (!map_element) return false;
 
@@ -34,20 +42,11 @@
     var map = new google.maps.Map(map_element, myOptions);
 
     map.fitBounds( make_bounds( map_bounds ) );
+    
+    return map;
+  }
 
-    addCrosshairs( map );
-
-    // react to changes in the map
-    google.maps.event.addListener(
-      map,
-      'center_changed',
-      function () { updateLocation( map.getCenter() ); }
-    );
-    
-    maintainMapCenterOnResize( map );
-    
-    addMessageControlToMap( map );
-    
+  function enableGeoLocateFeature ( map ) {
     var $geoLocateMeButton = $('#geo-locate-me-button').find('a');
     if ( geo_position_js.init() ) {      
 
@@ -71,10 +70,7 @@
         addGeoLocateControlToMap( map );
     } else {
       $geoLocateMeButton.hide();      
-    }
-
-    
-    
+    }    
   }
   
   // Add crosshairs at the center - see merging of answers at 
@@ -111,6 +107,15 @@
     var precision = 100;
     return Math.round(val * precision ) / precision;
   };
+
+  function trackMapMovements( map ) {
+    google.maps.event.addListener(
+      map,
+      'center_changed',
+      function () { updateLocation( map.getCenter() ); }
+    ); 
+  }
+  
 
   function updateLocation (latlng) {
 
