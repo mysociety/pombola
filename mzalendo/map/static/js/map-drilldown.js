@@ -182,7 +182,7 @@
     _.each( areas, function (area, area_id ) {
       // console.log(area);
       if (area_descriptions) { area_descriptions += ', '; } 
-      area_descriptions += '<a href="/place/mapit_area/' + area_id + '">' + area.name + '</a> (' + area.type_name + ')';
+      area_descriptions += '<a href="/place/mapit_area/' + area_id + '">' + area.name + ' (' + area.type_name + ')</a>';
     });
 
     messageHolderHTML(
