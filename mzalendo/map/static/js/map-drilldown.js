@@ -1,6 +1,14 @@
 (function () {
 
   function initialize_map() {
+
+    // Opera Mini
+    if ( /Opera Mini/.test(navigator.userAgent) ) {
+      $(".map-drilldown")
+        .html('<div class="error">Your browser does not support Google Maps. Please <a href="/search/">search</a> for your constituency instead.</div>');
+      return;
+    }
+    
     var map = createMap();
     addCrosshairs( map );
     trackMapMovements( map );   
