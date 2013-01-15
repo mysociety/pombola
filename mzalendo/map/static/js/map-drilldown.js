@@ -47,10 +47,11 @@
   }
 
   function enableGeoLocateFeature ( map ) {
-    var $geoLocateMeButton = $('#geo-locate-me-button').find('a');
+    var $geoLocateMeButton     = $('#geo-locate-me-button');
+    var $geoLocateMeButtonLink = $geoLocateMeButton.find('a');
     if ( geo_position_js.init() ) {      
 
-      $geoLocateMeButton
+      $geoLocateMeButtonLink
         .click( function (event) {
           event.preventDefault();
           
