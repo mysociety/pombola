@@ -3,6 +3,7 @@
 
 import json
 import os
+import string
 import sys
 import urllib
 
@@ -36,6 +37,12 @@ class Command(NoArgsCommand):
             data = json.load(f)
             f.close()
             data['features'] = [f for f in data['features'] if f['properties']['COUNTY_NAM']]
+            if area_type_code == 'dis':
+                # Then title-case the string, being careful to use
+                # string.capwords instead of str.title, due to
+                # apostrophes in some names:
+                for f in data['features']:
+                    f['properties']['COUNTY_NAM'] = string.capwords(f['properties']['COUNTY_NAM'])
             with NamedTemporaryFile(delete=False) as ntf:
                 json.dump(data, ntf)
             print >> sys.stderr, ntf.name
