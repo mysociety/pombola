@@ -221,6 +221,7 @@
     map
       .controls[google.maps.ControlPosition.TOP_CENTER]
       .push(control);
+    $(control).show();
   }
 
   function addSearchByNameControlToMap (map) {
@@ -229,6 +230,7 @@
     map
       .controls[google.maps.ControlPosition.RIGHT_BOTTOM]
       .push(control);
+    $(control).show();
   }
 
   function addGeoLocateControlToMap (map) {
@@ -237,6 +239,7 @@
     map
       .controls[google.maps.ControlPosition.RIGHT_BOTTOM]
       .push(control);
+    $(control).show();
   }
 
 
