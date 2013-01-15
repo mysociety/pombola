@@ -225,6 +225,7 @@ if not COUNTRY_APP:
     raise Exception("You need to set 'COUNTRY_APP' in your config")
 
 
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -266,6 +267,7 @@ INSTALLED_APPS = (
     'search',
     'user_profile',
     'file_archive',
+    'map',
 )
 
 # add the optional apps
@@ -465,3 +467,8 @@ POLITICIAN_TITLE_SLUGS = [
     'senator',
 ]
 
+# map boundaries
+MAP_BOUNDING_BOX_NORTH = config.get('MAP_BOUNDING_BOX_NORTH')
+MAP_BOUNDING_BOX_EAST  = config.get('MAP_BOUNDING_BOX_EAST' )
+MAP_BOUNDING_BOX_SOUTH = config.get('MAP_BOUNDING_BOX_SOUTH')
+MAP_BOUNDING_BOX_WEST  = config.get('MAP_BOUNDING_BOX_WEST' )

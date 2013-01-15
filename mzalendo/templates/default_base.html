@@ -35,7 +35,13 @@
                 facebook_app_id:           '{{ settings.FACEBOOK_APP_ID }}',
                 static_url:                '{{ STATIC_URL }}',
                 static_generation_number:  '{{ settings.STATIC_GENERATION_NUMBER }}',
-                extra_js: []
+                extra_js: [],
+                map_bounds: { 
+                  north: {{ settings.MAP_BOUNDING_BOX_NORTH }},
+                  east:  {{ settings.MAP_BOUNDING_BOX_EAST  }},
+                  south: {{ settings.MAP_BOUNDING_BOX_SOUTH }},
+                  west:  {{ settings.MAP_BOUNDING_BOX_WEST  }}
+                }
             };
 
             {% block extra_js_to_load %}

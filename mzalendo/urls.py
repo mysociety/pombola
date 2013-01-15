@@ -85,9 +85,14 @@ urlpatterns += patterns('',
     (r'^search/', include('search.urls')),
 )
 
-# search
+# feedback
 urlpatterns += patterns('',
     (r'^feedback/', include('feedback.urls')),
+)
+
+# map
+urlpatterns += patterns('',
+    (r'^map/', include('map.urls')),
 )
 
 # Everything else goes to core

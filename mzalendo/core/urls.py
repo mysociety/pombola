@@ -36,6 +36,7 @@ place_patterns = patterns('core.views',
 
     url( r'^all/',                 'place_kind', name='place_kind_all' ),
     url( r'^is/(?P<slug>[-\w]+)/', 'place_kind', name='place_kind'     ),
+    url( r'^mapit_area/(?P<mapit_id>\d+)/', 'place_mapit_area', name='place_mapit_area' ),
 
     url(r'^(?P<slug>[-\w]+)/$',
         PlaceDetailView.as_view(),      
