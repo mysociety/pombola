@@ -42,6 +42,29 @@
 
     var map = new google.maps.Map(map_element, myOptions);
 
+    // We want a single click/tap to position the map where it was tapped. Add
+    // smarts to wait and be sure that we didn't just trigger on the start of a
+    // double tap, used to zoom. Could instead handle the zoom on dblclick
+    // ourselves, but that could get tricky...
+    var clickTimeoutId = null;
+    google.maps.event.addListener(
+      map,
+      'click',
+      function (event) {
+        clickTimeoutId = setTimeout(
+          function () { map.panTo(event.latLng); },
+          400 // max delay between two clicks
+        );
+      }
+    ); 
+    google.maps.event.addListener(
+      map,
+      'dblclick',
+      function () {
+        clearTimeout(clickTimeoutId);
+      }
+    ); 
+
     map.fitBounds( make_bounds( map_bounds ) );
     
     return map;
