@@ -6,6 +6,7 @@
     trackMapMovements( map );   
     maintainMapCenterOnResize( map );
     addMessageControlToMap( map );
+    addSearchByNameControlToMap( map );
     enableGeoLocateFeature( map );
   }
   
@@ -195,15 +196,23 @@
     var control = $('#map-drilldown-message').get(0);
     control.index = 1;
     map
-      .controls[google.maps.ControlPosition.TOP_LEFT]
+      .controls[google.maps.ControlPosition.TOP_CENTER]
+      .push(control);
+  }
+
+  function addSearchByNameControlToMap (map) {
+    var control = $('#search-by-name-button').get(0);
+    control.index = 1;
+    map
+      .controls[google.maps.ControlPosition.RIGHT_BOTTOM]
       .push(control);
   }
 
   function addGeoLocateControlToMap (map) {
     var control = $('#geo-locate-me-button').get(0);
-    control.index = 1;
+    control.index = 2;
     map
-      .controls[google.maps.ControlPosition.TOP_RIGHT]
+      .controls[google.maps.ControlPosition.RIGHT_BOTTOM]
       .push(control);
   }
 
