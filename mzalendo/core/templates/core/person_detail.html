@@ -61,12 +61,12 @@
                 {% endfor %}
             </ul>
 
-            <h3>Party / Parties</h3>
+            <h3>Party &amp; Coalition</h3>
             <ul>
-                {% for party in object.parties %}
+                {% for party in object.parties_and_coalitions %}
                     <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
                 {% empty %}
-                    <li>Not a member of any parties</li>
+                    <li>Not a member of any parties or coalitions</li>
                 {% endfor %}
             </ul>
         </div>
