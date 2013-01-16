@@ -97,11 +97,13 @@
 	        {# Do we want to display more than just the parent? #}
 
             {% if object.parent_place %}
-                {{ object.name }} is contained in
-                <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
-		        {% if object.parent_place.kind.slug != 'country' %}
+                <p>
+                  {{ object.name }} is contained in
+                  <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
+		              {% if object.parent_place.kind.slug != 'country' %}
                     {{ object.parent_place.kind.name }}.
-                {% endif %}
+                  {% endif %}
+                </p>
             {% endif %}
 
             {% if object.child_places.count %}

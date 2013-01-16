@@ -129,12 +129,15 @@
         margin: 0 0 20px 0;
         li {
           border-top: 2px solid $colour_white;
+          p, a {
+            padding: 10px;
+            margin: 0;
+          }
           a {
             font-size: 13px;
             display: block;
             background: $colour_light_grey url(../images/chevron-right.png) right center no-repeat;
             color: $colour_black;
-            padding: 10px;
             text-decoration: none;
             &:hover {
               background-color: $colour_white; }
@@ -348,6 +351,7 @@
           li {
             border: 0;
             margin-bottom: 5px;
+            p { padding: 0;}
             a {
               background: $colour_dark_grey;
               color: $colour_white;

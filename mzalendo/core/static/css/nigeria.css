@@ -1387,12 +1387,15 @@ menu#site-user-tools ul li.active a:hover {
 #page .profile-info .constituency-party ul li {
   border-top: 2px solid white;
 }
+#page .profile-info .constituency-party ul li p, #page .profile-info .constituency-party ul li a {
+  padding: 10px;
+  margin: 0;
+}
 #page .profile-info .constituency-party ul li a {
   font-size: 13px;
   display: block;
   background: #f6f6f6 url(../images/chevron-right.png) right center no-repeat;
   color: black;
-  padding: 10px;
   text-decoration: none;
 }
 #page .profile-info .constituency-party ul li a:hover {
@@ -1688,6 +1691,9 @@ menu#site-user-tools ul li.active a:hover {
     border: 0;
     margin-bottom: 5px;
   }
+  #page .profile-info .constituency-party ul li p {
+    padding: 0;
+  }
   #page .profile-info .constituency-party ul li a {
     background: #2e2e2e;
     color: white;
@@ -1941,6 +1947,10 @@ menu#site-user-tools ul li.active a:hover {
     top: -1px;
   }
 }
+.tab dl {
+  margin-left: 1em;
+}
+
 .search-wrap {
   border-bottom: 1px solid #dddddd;
   padding-bottom: 30px;
