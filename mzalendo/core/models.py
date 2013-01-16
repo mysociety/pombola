@@ -16,6 +16,8 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 
+from django.db.models.fields import DateField
+
 from markitup.fields import MarkupField
 
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
@@ -452,6 +454,7 @@ class Place(ModelBase, ScorecardMixin):
     location = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
     original_id  = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to constituencies in original mzalendo.com db')
+    parliamentary_session = models.ForeignKey('ParliamentarySession', null=True)
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
@@ -729,3 +732,22 @@ class Position(ModelBase):
 
     class Meta:
         ordering = ['-sorting_end_date', '-sorting_start_date']  
+
+class ParliamentarySession(ModelBase):
+    start_date = DateField(blank=True, null=True)
+    end_date = DateField(blank=True, null=True)
+    house = models.ForeignKey('Organisation')
+    # It's not clear whether this field is a good idea or not - it
+    # suggests that boundaries won't change within a
+    # ParliamentarySession.  This assumption might well be untrue.
+    mapit_generation = models.PositiveIntegerField(blank=True,
+                                                   null=True,
+                                                   help_text='The MapIt generation with boundaries for this session')
+    name = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, help_text="specify manually")
+
+    def __repr__(self):
+        return "<ParliamentarySession: %s>" % (self.name,)
+
+    def __unicode__(self):
+        return unicode(self.name)
