@@ -16,6 +16,17 @@ from django.core.management.base import NoArgsCommand
 
 from mapit.models import Generation
 
+def map_county_name(original_name):
+    # Then title-case the string, being careful to use string.capwords
+    # instead of str.title, due to apostrophes in some names:
+    result = string.capwords(original_name)
+    fixes = {"Elgeyo - Marakwet": "Elgeyo-Marakwet",
+             "Homabay": "Homa Bay",
+             "Muranga": "Murang'a",
+             "Trans Nzoia": "Trans-Nzoia",
+             "Makuen": "Makueni"}
+    return fixes.get(result, result)
+
 class Command(NoArgsCommand):
     help = 'Import boundaries for the 2013 election'
 
@@ -38,11 +49,8 @@ class Command(NoArgsCommand):
             f.close()
             data['features'] = [f for f in data['features'] if f['properties']['COUNTY_NAM']]
             if area_type_code == 'dis':
-                # Then title-case the string, being careful to use
-                # string.capwords instead of str.title, due to
-                # apostrophes in some names:
                 for f in data['features']:
-                    f['properties']['COUNTY_NAM'] = string.capwords(f['properties']['COUNTY_NAM'])
+                    f['properties']['COUNTY_NAM'] = map_county_name(f['properties']['COUNTY_NAM'])
             with NamedTemporaryFile(delete=False) as ntf:
                 json.dump(data, ntf)
             print >> sys.stderr, ntf.name
