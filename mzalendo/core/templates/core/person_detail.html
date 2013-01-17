@@ -98,17 +98,11 @@
           <div class="tab" id="contact-details">
             {% include "core/contact_list.html" with contacts=object.contacts.all %}
           </div>
-        </div>
-
-        <div class="tab-wrapper">
 
           <h2 class="tab-nav" rel="#scorecard">Scorecard</h2>
           <div class="tab" id="scorecard">
             {% include 'scorecards/scorecard.html' %}
           </div>
-        </div>
-
-        <div class="tab-wrapper">
 
             {% if object.summary %}
             <h2 class="tab-nav" rel="#overview">Overview</h2>
