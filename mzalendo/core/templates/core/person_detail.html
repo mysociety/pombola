@@ -64,29 +64,6 @@
             </ul>
         </div>
 
-        <div class="profile-names">
-            {% if object.name != object.legal_name %}
-                <h3>Full name</h3>
-                <p>{{ object.legal_name }}</p>
-            {% endif %}
-
-            {% if object.additional_names %}
-                <h3>Also known as</h3>
-                <p>{% for name in object.additional_names %}
-                    {% if not forloop.first %}
-                        {% if forloop.last %}or{% else %},{% endif %}
-                    {% endif %}
-                    <strong>{{ name }}</strong>
-                {% endfor %}</p>
-            {% endif %}
-        
-            {% if object.date_of_birth %}
-                <h3>Born</h3>
-                <p>{{ object.date_of_birth }} {# TODO - add age in years #}</p>
-            {% endif %}
-        
-            {# TODO - add death date too if it exists #}
-        </div>
 
     </div>
 
@@ -96,7 +73,31 @@
 
           <h2 class="tab-nav" rel="#overview">Overview</h2>
           <div class="tab markdown" id="overview">
+
+            {% if object.name != object.legal_name %}
+                <h3>Full name</h3>
+                <p>{{ object.legal_name }}</p>
+            {% endif %}
+            
+            {% if object.additional_names %}
+                <h3>Also known as</h3>
+                <p>{% for name in object.additional_names %}
+                    {% if not forloop.first %}
+                        {% if forloop.last %}or{% else %},{% endif %}
+                    {% endif %}
+                    <strong>{{ name }}</strong>
+                {% endfor %}</p>
+            {% endif %}
+            
+            {% if object.date_of_birth %}
+                <h3>Born</h3>
+                <p>{{ object.date_of_birth }} {# TODO - add age in years #}</p>
+            {% endif %}
+            
+            {# TODO - add death date too if it exists #}
+
             {% if object.summary %}
+              <h3>Summary</h3>
               {{ object.summary }}
             {% endif %}
           </div>
