@@ -1,5 +1,5 @@
 <ul class="tools">
-    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ object.name }} :: Mzalendo" target="_blank" class="big-btn-text-fb">Share on Facebook</a>
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ object.name }} :: Mzalendo" target="_blank" class="big-btn-text-fb">Share on Facebook</a></li>
     {% if settings.TWITTER_ACCOUNT_NAME %}
         <li><a href="https://twitter.com/share?via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;text={{ object.name }} :: Mzalendo&amp;url={{ request.build_absolute_uri }}" target="_blank" class="big-btn-text-tw">Share on Twitter</a></li>
     {% endif %}
