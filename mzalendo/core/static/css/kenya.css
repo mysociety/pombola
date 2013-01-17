@@ -136,15 +136,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.vcard li.address p {
-  line-height: 15px;
-  padding-top: 4px;
-}
-.vcard a {
-  text-decoration: none;
-  font-size: 12px;
-}
-
 h1 {
   font-size: 24px;
   font-weight: bold;
@@ -1302,30 +1293,6 @@ menu#site-user-tools ul li.active a:hover {
 #page .profile-info .profile-names p {
   margin: 0 10px 10px 10px;
 }
-#page .profile-info .vcard {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-}
-#page .profile-info .vcard li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-#page .profile-info .vcard li .label {
-  text-transform: uppercase;
-  color: gray;
-  font-size: 11px;
-  float: left;
-  clear: left;
-  width: 40px;
-  margin-left: 10px;
-}
-#page .profile-info .vcard li p {
-  padding-left: 45px;
-}
 #page .large-container p {
   margin-left: 10px;
   margin-right: 10px;
@@ -1918,6 +1885,39 @@ menu#site-user-tools ul li.active a:hover {
 
 #search-hansard-instead {
   padding-left: 0.5em;
+}
+
+.vcard {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.vcard li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.vcard li .address p {
+  line-height: 15px;
+  padding-top: 4px;
+}
+.vcard li .label {
+  text-transform: uppercase;
+  color: gray;
+  font-size: 11px;
+  float: left;
+  clear: left;
+  width: 40px;
+  margin-left: 10px;
+}
+.vcard li p {
+  padding-left: 45px;
+}
+.vcard a {
+  text-decoration: none;
+  font-size: 12px;
 }
 
 ul.hansard_entries em {

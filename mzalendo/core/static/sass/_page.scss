@@ -73,21 +73,7 @@
               font-style: italic; } } } } }
     .profile-names {
       p {
-        margin: 0 10px 10px 10px; } }
-    .vcard {
-      @include list-reset-soft;
-      overflow: hidden;
-      li {
-        .label {
-          text-transform: uppercase;
-          color: $colour_grey;
-          font-size: 11px;
-          float: left;
-          clear: left;
-          width: 40px;
-          margin-left: 10px; }
-        p {
-          padding-left: 45px; } } } }
+        margin: 0 10px 10px 10px; } } }
   .large-container {
     p {
       margin-left: 10px;

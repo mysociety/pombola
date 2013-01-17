@@ -88,10 +88,17 @@
             {# TODO - add death date too if it exists #}
         </div>
 
-        {% include "core/contact_list.html" with contacts=object.contacts.all %}
     </div>
 
     <div class="large-container">
+
+        <div class="tab-wrapper">
+
+          <h2 class="tab-nav" rel="#contact-details">Contact Details</h2>
+          <div class="tab" id="contact-details">
+            {% include "core/contact_list.html" with contacts=object.contacts.all %}
+          </div>
+        </div>
 
         <div class="tab-wrapper">
 
