@@ -34,13 +34,6 @@
         {% include 'core/social_tools.html' %}
     </div>
 
-    <div class="small-container">
-                
-        {% include 'scorecards/scorecard.html' %}
-        
-
-    </div>
-
     <div class="profile-info">
         <div class="constituency-party">
 
@@ -99,6 +92,15 @@
     </div>
 
     <div class="large-container">
+
+        <div class="tab-wrapper">
+
+          <h2 class="tab-nav" rel="#scorecard">Scorecard</h2>
+          <div class="tab" id="scorecard">
+            {% include 'scorecards/scorecard.html' %}
+          </div>
+        </div>
+
         <div class="tab-wrapper">
 
             {% if object.summary %}
