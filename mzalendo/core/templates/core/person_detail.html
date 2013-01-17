@@ -94,6 +94,13 @@
 
         <div class="tab-wrapper">
 
+          <h2 class="tab-nav" rel="#overview">Overview</h2>
+          <div class="tab markdown" id="overview">
+            {% if object.summary %}
+              {{ object.summary }}
+            {% endif %}
+          </div>
+
           <h2 class="tab-nav" rel="#contact-details">Contact Details</h2>
           <div class="tab" id="contact-details">
             {% include "core/contact_list.html" with contacts=object.contacts.all %}
@@ -104,12 +111,6 @@
             {% include 'scorecards/scorecard.html' %}
           </div>
 
-            {% if object.summary %}
-            <h2 class="tab-nav" rel="#overview">Overview</h2>
-            <div class="tab markdown" id="overview">
-                {{ object.summary }}
-            </div>
-            {% endif %}
 
             {% include 'disqus_comments.html' %}
 
