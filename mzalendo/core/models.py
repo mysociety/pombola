@@ -36,8 +36,8 @@ date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or '
 
 
 class ModelBase(models.Model):    
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
+    created = models.DateTimeField( auto_now_add=True )
+    updated = models.DateTimeField( auto_now=True )
 
     def css_class(self):
         return self._meta.module_name
