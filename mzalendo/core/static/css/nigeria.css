@@ -1261,111 +1261,6 @@ menu#site-user-tools ul li.active a:hover {
   width: 100px;
   height: 100px;
 }
-#page .small-container h3.scorecard-overall {
-  padding: 10px;
-  margin-bottom: 10px;
-  border: none;
-  background: none;
-}
-#page .small-container h3.scorecard-overall span {
-  padding-top: 20px;
-  margin-top: -20px;
-  height: 22px;
-}
-#page .small-container ul.scorecard {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  zoom: 1;
-  *display: inline;
-  width: 100%;
-}
-#page .small-container ul.scorecard li {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-#page .small-container ul.scorecard li article {
-  padding: 10px;
-  background: #f6f6f6;
-  color: black;
-  border-bottom: 2px solid white;
-  overflow: hidden;
-}
-#page .small-container ul.scorecard li article header h4 {
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  zoom: 1;
-  *display: inline;
-  padding-right: 20px;
-  position: relative;
-}
-#page .small-container ul.scorecard li article header h4 .btn-question {
-  position: absolute;
-  top: 3px;
-  right: 0;
-}
-#page .small-container ul.scorecard li article header p {
-  margin: -20px 0 0 0;
-  padding-top: 20px;
-}
-#page .small-container ul.scorecard li article header p.score-good {
-  background: url(../images/score-good.png) right 0 no-repeat;
-}
-#page .small-container ul.scorecard li article header p.score-average {
-  background: url(../images/score-average.png) right 0 no-repeat;
-}
-#page .small-container ul.scorecard li article header p.score-bad {
-  background: url(../images/score-bad.png) right 0 no-repeat;
-}
-#page .small-container ul.scorecard li article header p.score-disabled {
-  background: url(../images/score-disabled.png) right 0 no-repeat;
-}
-#page .small-container ul.scorecard li article header .details span.shout {
-  display: block;
-  background: gray;
-  color: white;
-  margin: 10px 0;
-  padding: 10px;
-  font-weight: bold;
-  clear: both;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-}
-#page .small-container ul.scorecard li article header .details span.shout p {
-  font-size: 100%;
-  float: none;
-  padding: 4px;
-  margin: 0 auto;
-}
-#page .small-container ul.scorecard li article header .details span.shout.shout-good {
-  background-color: #009245;
-}
-#page .small-container ul.scorecard li article header .details span.shout.shout-average {
-  background-color: #f9a326;
-}
-#page .small-container ul.scorecard li article header .details span.shout.shout-bad {
-  background-color: #d40000;
-}
-#page .small-container ul.scorecard li article header .details .source {
-  display: block;
-  padding-right: 1em;
-  text-align: right;
-  font-style: italic;
-}
-#page .small-container ul.scorecard li article header .details .source a {
-  font-style: normal;
-}
 #page .profile-info .constituency-party {
   margin: 10px 0;
 }
@@ -2420,11 +2315,17 @@ h3.scorecard-overall {
   display: block;
   font-weight: bold;
   color: black;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background: none;
 }
 h3.scorecard-overall span {
+  padding-top: 20px;
+  margin-top: -20px;
+  height: 22px;
   font-weight: normal;
   display: block;
-  height: 44px;
   background: url(../images/m-smiley-sprite.png) right -3px no-repeat;
 }
 h3.scorecard-overall span.score-overall-good {
@@ -2435,6 +2336,101 @@ h3.scorecard-overall span.score-overall-average {
 }
 h3.scorecard-overall span.score-overall-bad {
   background-position: right -103px;
+}
+
+ul.scorecard {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  width: 100%;
+}
+ul.scorecard li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+ul.scorecard li article {
+  padding: 10px;
+  background: #f6f6f6;
+  color: black;
+  border-bottom: 2px solid white;
+  overflow: hidden;
+}
+ul.scorecard li article header h4 {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  padding-right: 20px;
+  position: relative;
+}
+ul.scorecard li article header h4 .btn-question {
+  position: absolute;
+  top: 3px;
+  right: 0;
+}
+ul.scorecard li article header p {
+  margin: -20px 0 0 0;
+  padding-top: 20px;
+}
+ul.scorecard li article header p.score-good {
+  background: url(../images/score-good.png) right 0 no-repeat;
+}
+ul.scorecard li article header p.score-average {
+  background: url(../images/score-average.png) right 0 no-repeat;
+}
+ul.scorecard li article header p.score-bad {
+  background: url(../images/score-bad.png) right 0 no-repeat;
+}
+ul.scorecard li article header p.score-disabled {
+  background: url(../images/score-disabled.png) right 0 no-repeat;
+}
+ul.scorecard li article header .details span.shout {
+  display: block;
+  background: gray;
+  color: white;
+  margin: 10px 0;
+  padding: 10px;
+  font-weight: bold;
+  clear: both;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+ul.scorecard li article header .details span.shout p {
+  font-size: 100%;
+  float: none;
+  padding: 4px;
+  margin: 0 auto;
+}
+ul.scorecard li article header .details span.shout.shout-good {
+  background-color: #009245;
+}
+ul.scorecard li article header .details span.shout.shout-average {
+  background-color: #f9a326;
+}
+ul.scorecard li article header .details span.shout.shout-bad {
+  background-color: #d40000;
+}
+ul.scorecard li article header .details .source {
+  display: block;
+  padding-right: 1em;
+  text-align: right;
+  font-style: italic;
+}
+ul.scorecard li article header .details .source a {
+  font-style: normal;
 }
 
 .pagination {
