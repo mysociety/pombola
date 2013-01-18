@@ -47,6 +47,14 @@ def person(request, slug):
         slug     = slug,
     )
 
+def person_scorecard(request, slug):
+    return object_detail(
+        request,
+        queryset      = models.Person.objects,
+        template_name = "core/person_scorecard.html",
+        slug          = slug,
+    )
+
 class PlaceDetailView(DetailView):
     model = models.Place
 

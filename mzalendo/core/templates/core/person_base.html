@@ -20,6 +20,22 @@
                 {% endfor %}
             </p>
         {% endif %}
+        
+        <menu>
+          <ul>
+            <li><a href="{% url person slug=object.slug %}">Overview</a></li>
+            {% if object.has_scorecards %}
+              <li><a href="{% url person_scorecard slug=object.slug %}">Scorecard</a></li>
+            {% endif %}
+            {% if settings.DISQUS_SHORTNAME %}
+              <!-- <li><a href="">Comments</a></li> -->
+            {% endif %}
+            <!-- <li><a href="">Experience</a></li>       -->
+            <!-- <li><a href="">Appearances</a></li>      -->
+            <!-- <li><a href="">Contact details</a></li>  -->
+          </ul>
+        <menu>
+        
     </div>
     
     <div class="profile-pic">

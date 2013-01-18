@@ -29,7 +29,8 @@ person_patterns = patterns('core.views',
         'featured_person', 
         name='featured_person'),
     
-    url(r'^(?P<slug>[-\w]+)/',       'person',       name='person'),
+    url(r'^(?P<slug>[-\w]+)/$',            'person',             name='person'),
+    url(r'^(?P<slug>[-\w]+)/scorecard/',   'person_scorecard',   name='person_scorecard'),
   )
 
 place_patterns = patterns('core.views',
