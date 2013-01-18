@@ -3,96 +3,34 @@
 {% block title %}{{ object.name }} Overview{% endblock %}
 
 {% block subcontent %}
-        <div class="tab-wrapper">
-
-          <h2 class="tab-nav" rel="#overview">Overview</h2>
-          <div class="tab markdown" id="overview">
-
-            {% if object.name != object.legal_name %}
-                <h3>Full name</h3>
-                <p>{{ object.legal_name }}</p>
+  <h2 class="tab-nav" rel="#overview">Overview</h2>
+  <div class="tab markdown" id="overview">
+  
+    {% if object.name != object.legal_name %}
+        <h3>Full name</h3>
+        <p>{{ object.legal_name }}</p>
+    {% endif %}
+    
+    {% if object.additional_names %}
+        <h3>Also known as</h3>
+        <p>{% for name in object.additional_names %}
+            {% if not forloop.first %}
+                {% if forloop.last %}or{% else %},{% endif %}
             {% endif %}
-            
-            {% if object.additional_names %}
-                <h3>Also known as</h3>
-                <p>{% for name in object.additional_names %}
-                    {% if not forloop.first %}
-                        {% if forloop.last %}or{% else %},{% endif %}
-                    {% endif %}
-                    <strong>{{ name }}</strong>
-                {% endfor %}</p>
-            {% endif %}
-            
-            {% if object.date_of_birth %}
-                <h3>Born</h3>
-                <p>{{ object.date_of_birth }} {# TODO - add age in years #}</p>
-            {% endif %}
-            
-            {# TODO - add death date too if it exists #}
-
-            {% if object.summary %}
-              <h3>Summary</h3>
-              {{ object.summary }}
-            {% endif %}
-          </div>
-
-          <h2 class="tab-nav" rel="#contact-details">Contact Details</h2>
-          <div class="tab" id="contact-details">
-            {% include "core/contact_list.html" with contacts=object.contacts.all %}
-          </div>
-
-          <h2 class="tab-nav" rel="#scorecard">Scorecard</h2>
-          <div class="tab" id="scorecard">
-            {% include 'scorecards/scorecard.html' %}
-          </div>
-
-
-            {% include 'disqus_comments.html' %}
-
-            <h2 class="tab-nav" rel="#experience">Experience</h2>
-            <div class="tab" id="experience">
-                <div class="left-col">
-                    <section>
-                        <h3>Current Political Positions</h3>
-                        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
-                    </section>
-
-                    <section>
-                        <h3>Previous Political Positions</h3>
-                        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
-                    </section>
-                </div>
-                
-                <div class="right-col">
-                    <section>
-                        <h3>Job History</h3>
-                        {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
-                    </section>
-
-                    <section>
-                        <h3>Education</h3>
-                        {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
-                    </section>
-                </div>
-            </div>
-
-
-            {% if settings.ENABLED_FEATURES.hansard %}
-                {% with hansard_count=object.hansard_entries.count %}
-                    <h2 class="tab-nav" rel="#appearances">
-                        <a href='{% url hansard:person_summary slug=object.slug %}' class="appearances-trigger">Appearances ({{ hansard_count }})</a>
-                    </h2>
-                    {% if hansard_count %}
-                        <div class="tab" id="appearances" data-tab-content-source-url="{% url hansard:person_summary slug=object.slug %}">
-                            Loading...
-                        </div>
-                    {% else %}
-                        <div class="tab" id="appearances">
-                            <p>{{ object.name }} has never spoken in parliament.</p>
-                        </div>
-                    {% endif %}
-                {% endwith %}
-            {% endif  %}
-            
-        </div>
+            <strong>{{ name }}</strong>
+        {% endfor %}</p>
+    {% endif %}
+    
+    {% if object.date_of_birth %}
+        <h3>Born</h3>
+        <p>{{ object.date_of_birth }} {# TODO - add age in years #}</p>
+    {% endif %}
+    
+    {# TODO - add death date too if it exists #}
+  
+    {% if object.summary %}
+      <h3>Summary</h3>
+      {{ object.summary }}
+    {% endif %}
+  </div>
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'core/person_base.html' %}
+
+{% block title %}{{ object.name }} Overview{% endblock %}
+
+{% block subcontent %}
+  {% if settings.ENABLED_FEATURES.hansard %}
+      {% with hansard_count=object.hansard_entries.count %}
+          <h2 class="tab-nav" rel="#appearances">
+              <a href='{% url hansard:person_summary slug=object.slug %}' class="appearances-trigger">Appearances ({{ hansard_count }})</a>
+          </h2>
+          {% if hansard_count %}
+              <div class="tab" id="appearances" data-tab-content-source-url="{% url hansard:person_summary slug=object.slug %}">
+                  Loading...
+              </div>
+          {% else %}
+              <div class="tab" id="appearances">
+                  <p>{{ object.name }} has never spoken in parliament.</p>
+              </div>
+          {% endif %}
+      {% endwith %}
+  {% else %}
+    No appearances were found.
+  {% endif  %}
+{% endblock %}

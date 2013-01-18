@@ -1,0 +1,10 @@
+{% extends 'core/person_base.html' %}
+
+{% block title %}{{ object.name }} Overview{% endblock %}
+
+{% block subcontent %}
+  <h2 class="tab-nav" rel="#scorecard">Scorecard</h2>
+  <div class="tab" id="scorecard">
+    {% include 'scorecards/scorecard.html' %}
+  </div>
+{% endblock %}
