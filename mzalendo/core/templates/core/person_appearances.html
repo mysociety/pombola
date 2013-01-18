@@ -1,0 +1,37 @@
+{% extends 'core/person_base.html' %}
+
+{% comment %}
+  The appearances are loaded using js because that was how it was done using
+  the tabs. Ideally we'd put the content straight into the HTML here, but that
+  would mean a fair bit of moving code around between apps which is not
+  something I want to tackle right now.
+{% endcomment %}
+
+{% block title %}{{ object.name }} Appearances{% endblock %}
+
+{% block extra_js_to_load %}
+    mzalendo_settings.extra_js.push( 'js/load_appearances.js' );
+{% endblock %}
+
+{% block subcontent %}
+
+  {% if settings.ENABLED_FEATURES.hansard %}
+
+      {% with hansard_count=object.hansard_entries.count %}
+            {% if hansard_count %}
+              <div id="appearances" data-url="{% url hansard:person_summary slug=object.slug %}">
+                Loading&hellip;
+              </div>
+            {% else %}
+              <div>
+                <p>{{ object.name }} has never spoken in Parliament.</p>
+              </div>
+            {% endif %}
+
+      {% endwith %}
+  {% else %}
+
+    No appearances were found.
+  {% endif  %}
+
+{% endblock %}
