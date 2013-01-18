@@ -31,15 +31,21 @@ person_patterns = patterns('core.views',
     
     url(r'^(?P<slug>[-\w]+)/$', 'person', name='person'),
 
-    # ugly ugly ugly, must be a better way
-    url(
-        r'^(?P<slug>[-\w]+)/scorecard/',
-        'person_sub_page',
-        { 'sub_page': 'scorecard' },
-        'person_scorecard'
-    ),
-
   )
+
+# ugly, must be a better way
+for sub_page in ['scorecard']:
+    person_patterns += patterns(
+        'core.views',
+        url(
+            '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
+            'person_sub_page',                   # view function
+            { 'sub_page': sub_page },            # pass in the 'sub_page' arg
+            'person_%s' % sub_page               # url name for {% url ... %} tags
+        )
+    )
+
+
 
 place_patterns = patterns('core.views',
 
