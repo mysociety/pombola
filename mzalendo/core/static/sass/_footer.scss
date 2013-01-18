@@ -1,7 +1,7 @@
 #site-footer {
   clear: both;
-  border-top: 4px solid $colour_green;
-  background: $colour7;
+  border-top: 4px solid $colour_primary;
+  background: $colour_muted;
   overflow: hidden;
   >.wrapper {
     display: table;
@@ -9,13 +9,13 @@
     position: relative;
     padding-top: 5px; }
   div.footer-section {
-    border-top: 2px solid $colour_green;
+    border-top: 2px solid $colour_primary;
     &:first-child {
       border: none; }
     padding: 10px; }
   h4 {
     font-size: 120%;
-    color: $colour_green; }
+    color: $colour_primary; }
   p {
     font-style: italic;
     color: $colour_blackish; }
@@ -29,7 +29,7 @@
   .subscribe-box {
     display: table-caption;
     padding: 20px;
-    background: $colour_green;
+    background: $colour_primary;
     h2 {
       color: $colour_white;
       margin: 0;

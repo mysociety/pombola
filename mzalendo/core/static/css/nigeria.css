@@ -128,7 +128,7 @@ p {
 }
 
 a {
-  color: #009245;
+  color: #55a4da;
   text-decoration: none;
 }
 a:hover {
@@ -230,7 +230,7 @@ pre {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-  background: #87c43c;
+  background: #75a8cd;
 }
 .btn-text-green:hover {
   background: #a0a0a0;
@@ -238,7 +238,7 @@ pre {
   text-decoration: none;
 }
 .btn-text-green:hover {
-  background: #96d942;
+  background: #82bae3;
 }
 
 .btn-text-red {
@@ -308,12 +308,12 @@ pre {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  background: #87c43c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
-  background: -webkit-linear-gradient(#96d942, #87c43c);
-  background: -moz-linear-gradient(#96d942, #87c43c);
-  background: -o-linear-gradient(#96d942, #87c43c);
-  background: linear-gradient(#96d942, #87c43c);
+  background: #75a8cd;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #82bae3), color-stop(100%, #75a8cd));
+  background: -webkit-linear-gradient(#82bae3, #75a8cd);
+  background: -moz-linear-gradient(#82bae3, #75a8cd);
+  background: -o-linear-gradient(#82bae3, #75a8cd);
+  background: linear-gradient(#82bae3, #75a8cd);
 }
 .big-btn-text-green:hover {
   background: #a0a0a0;
@@ -321,12 +321,12 @@ pre {
   text-decoration: none;
 }
 .big-btn-text-green:hover {
-  background: #96d942;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
-  background: -webkit-linear-gradient(#87c43c, #96d942);
-  background: -moz-linear-gradient(#87c43c, #96d942);
-  background: -o-linear-gradient(#87c43c, #96d942);
-  background: linear-gradient(#87c43c, #96d942);
+  background: #82bae3;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #75a8cd), color-stop(100%, #82bae3));
+  background: -webkit-linear-gradient(#75a8cd, #82bae3);
+  background: -moz-linear-gradient(#75a8cd, #82bae3);
+  background: -o-linear-gradient(#75a8cd, #82bae3);
+  background: linear-gradient(#75a8cd, #82bae3);
 }
 
 .big-btn-text-red {
@@ -506,12 +506,12 @@ pre {
 
 #site-header {
   clear: both;
-  background: #009245;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00c25c), color-stop(100%, #009245));
-  background: -webkit-linear-gradient(#00c25c, #009245);
-  background: -moz-linear-gradient(#00c25c, #009245);
-  background: -o-linear-gradient(#00c25c, #009245);
-  background: linear-gradient(#00c25c, #009245);
+  background: #55a4da;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #71daff), color-stop(100%, #55a4da));
+  background: -webkit-linear-gradient(#71daff, #55a4da);
+  background: -moz-linear-gradient(#71daff, #55a4da);
+  background: -o-linear-gradient(#71daff, #55a4da);
+  background: linear-gradient(#71daff, #55a4da);
 }
 #site-header .wrapper {
   overflow: hidden;
@@ -1054,7 +1054,7 @@ menu#site-user-tools ul li.active a:hover {
 }
 #site-footer {
   clear: both;
-  border-top: 4px solid #009245;
+  border-top: 4px solid #55a4da;
   background: #e6e6e6;
   overflow: hidden;
 }
@@ -1065,7 +1065,7 @@ menu#site-user-tools ul li.active a:hover {
   padding-top: 5px;
 }
 #site-footer div.footer-section {
-  border-top: 2px solid #009245;
+  border-top: 2px solid #55a4da;
   padding: 10px;
 }
 #site-footer div.footer-section:first-child {
@@ -1073,7 +1073,7 @@ menu#site-user-tools ul li.active a:hover {
 }
 #site-footer h4 {
   font-size: 120%;
-  color: #009245;
+  color: #55a4da;
 }
 #site-footer p {
   font-style: italic;
@@ -1100,7 +1100,7 @@ menu#site-user-tools ul li.active a:hover {
 #site-footer .subscribe-box {
   display: table-caption;
   padding: 20px;
-  background: #009245;
+  background: #55a4da;
 }
 #site-footer .subscribe-box h2 {
   color: white;
@@ -1359,7 +1359,7 @@ menu#site-user-tools ul li.active a:hover {
   display: none;
 }
 #page h2, #page h3 {
-  border-top: 4px solid #009245;
+  border-top: 4px solid #55a4da;
   background: #e6e6e6;
   padding: 10px;
 }
@@ -1704,7 +1704,7 @@ menu#site-user-tools ul li.active a:hover {
   #tab-nav ul li a {
     display: block;
     float: left;
-    color: #009245;
+    color: #55a4da;
     text-decoration: none;
     font-size: 13px;
     padding: 9px 15px 8px 15px;
@@ -1718,7 +1718,7 @@ menu#site-user-tools ul li.active a:hover {
   }
   #tab-nav ul li a:hover {
     background: #fff;
-    color: #87c43c;
+    color: #75a8cd;
   }
   #tab-nav ul li.active a {
     color: black;
@@ -2106,7 +2106,7 @@ ul.comments li section ul.tools li a.like, ul.listing li section ul.tools li a.l
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-  background: #87c43c;
+  background: #75a8cd;
 }
 ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
   background: #a0a0a0;
@@ -2114,7 +2114,7 @@ ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools 
   text-decoration: none;
 }
 ul.comments li section ul.tools li a.like:hover, ul.listing li section ul.tools li a.like:hover {
-  background: #96d942;
+  background: #82bae3;
 }
 ul.comments li section ul.tools li a.report, ul.listing li section ul.tools li a.report {
   display: -moz-inline-stack;
@@ -2418,7 +2418,7 @@ ul.scorecard li article header .details span.shout p {
   margin: 0 auto;
 }
 ul.scorecard li article header .details span.shout.shout-good {
-  background-color: #009245;
+  background-color: #55a4da;
 }
 ul.scorecard li article header .details span.shout.shout-average {
   background-color: #f9a326;
@@ -2544,12 +2544,12 @@ ul.scorecard li article header .details .source a {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  background: #87c43c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
-  background: -webkit-linear-gradient(#96d942, #87c43c);
-  background: -moz-linear-gradient(#96d942, #87c43c);
-  background: -o-linear-gradient(#96d942, #87c43c);
-  background: linear-gradient(#96d942, #87c43c);
+  background: #75a8cd;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #82bae3), color-stop(100%, #75a8cd));
+  background: -webkit-linear-gradient(#82bae3, #75a8cd);
+  background: -moz-linear-gradient(#82bae3, #75a8cd);
+  background: -o-linear-gradient(#82bae3, #75a8cd);
+  background: linear-gradient(#82bae3, #75a8cd);
   border: none;
   float: right;
 }
@@ -2559,12 +2559,12 @@ ul.scorecard li article header .details .source a {
   text-decoration: none;
 }
 #ajax_dialog_subcontent input.submit:hover {
-  background: #96d942;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
-  background: -webkit-linear-gradient(#87c43c, #96d942);
-  background: -moz-linear-gradient(#87c43c, #96d942);
-  background: -o-linear-gradient(#87c43c, #96d942);
-  background: linear-gradient(#87c43c, #96d942);
+  background: #82bae3;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #75a8cd), color-stop(100%, #82bae3));
+  background: -webkit-linear-gradient(#75a8cd, #82bae3);
+  background: -moz-linear-gradient(#75a8cd, #82bae3);
+  background: -o-linear-gradient(#75a8cd, #82bae3);
+  background: linear-gradient(#75a8cd, #82bae3);
 }
 #ajax_dialog_subcontent .errorlist {
   list-style-type: none;
@@ -2664,20 +2664,20 @@ ul.scorecard li article header .details .source a {
   float: left;
   width: 50px;
   height: 30px;
-  background: #87c43c url(../images/search-icon.png) center no-repeat;
-  background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #009245));
-  background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#87c43c, #009245);
-  background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#87c43c, #009245);
-  background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#87c43c, #009245);
-  background: url(../images/search-icon.png) center no-repeat, linear-gradient(#87c43c, #009245);
+  background: #75a8cd url(../images/search-icon.png) center no-repeat;
+  background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #75a8cd), color-stop(100%, #55a4da));
+  background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#75a8cd, #55a4da);
+  background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#75a8cd, #55a4da);
+  background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#75a8cd, #55a4da);
+  background: url(../images/search-icon.png) center no-repeat, linear-gradient(#75a8cd, #55a4da);
 }
 #home-search button:hover {
-  background: #009245 url(../images/search-icon.png) center no-repeat;
-  background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #87c43c));
-  background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#009245, #87c43c);
-  background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#009245, #87c43c);
-  background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#009245, #87c43c);
-  background: url(../images/search-icon.png) center no-repeat, linear-gradient(#009245, #87c43c);
+  background: #55a4da url(../images/search-icon.png) center no-repeat;
+  background: url(../images/search-icon.png) center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #55a4da), color-stop(100%, #75a8cd));
+  background: url(../images/search-icon.png) center no-repeat, -webkit-linear-gradient(#55a4da, #75a8cd);
+  background: url(../images/search-icon.png) center no-repeat, -moz-linear-gradient(#55a4da, #75a8cd);
+  background: url(../images/search-icon.png) center no-repeat, -o-linear-gradient(#55a4da, #75a8cd);
+  background: url(../images/search-icon.png) center no-repeat, linear-gradient(#55a4da, #75a8cd);
 }
 #home-search > a {
   float: left;
@@ -2770,7 +2770,7 @@ ul.scorecard li article header .details .source a {
 .featured-person.featured-person-placeholder {
   text-align: center;
   height: 250px;
-  background: #009245 url(/static/images/logo-450-x-150.png) center center no-repeat;
+  background: #55a4da url(/static/images/logo-450-x-150.png) center center no-repeat;
 }
 .featured-person.featured-person-loading {
   height: 250px;
@@ -2852,21 +2852,21 @@ ul#home-news-list li img {
   display: block;
   margin: 10px 10px 3px 10px;
   padding: 10px;
-  background: #009245;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00a24c), color-stop(100%, #009245));
-  background: -webkit-linear-gradient(#00a24c, #009245);
-  background: -moz-linear-gradient(#00a24c, #009245);
-  background: -o-linear-gradient(#00a24c, #009245);
-  background: linear-gradient(#00a24c, #009245);
+  background: #55a4da;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5eb6f2), color-stop(100%, #55a4da));
+  background: -webkit-linear-gradient(#5eb6f2, #55a4da);
+  background: -moz-linear-gradient(#5eb6f2, #55a4da);
+  background: -o-linear-gradient(#5eb6f2, #55a4da);
+  background: linear-gradient(#5eb6f2, #55a4da);
 }
 #home-links a.aspirants:hover {
   text-decoration: none;
-  background: #00a24c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #00a24c));
-  background: -webkit-linear-gradient(#009245, #00a24c);
-  background: -moz-linear-gradient(#009245, #00a24c);
-  background: -o-linear-gradient(#009245, #00a24c);
-  background: linear-gradient(#009245, #00a24c);
+  background: #5eb6f2;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #55a4da), color-stop(100%, #5eb6f2));
+  background: -webkit-linear-gradient(#55a4da, #5eb6f2);
+  background: -moz-linear-gradient(#55a4da, #5eb6f2);
+  background: -o-linear-gradient(#55a4da, #5eb6f2);
+  background: linear-gradient(#55a4da, #5eb6f2);
 }
 #home-links a.citizens {
   -webkit-border-radius: 0 0 5px 5px;
@@ -2878,21 +2878,21 @@ ul#home-news-list li img {
   display: block;
   margin: 0 10px 10px 10px;
   padding: 10px;
-  background: #87c43c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
-  background: -webkit-linear-gradient(#96d942, #87c43c);
-  background: -moz-linear-gradient(#96d942, #87c43c);
-  background: -o-linear-gradient(#96d942, #87c43c);
-  background: linear-gradient(#96d942, #87c43c);
+  background: #75a8cd;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #82bae3), color-stop(100%, #75a8cd));
+  background: -webkit-linear-gradient(#82bae3, #75a8cd);
+  background: -moz-linear-gradient(#82bae3, #75a8cd);
+  background: -o-linear-gradient(#82bae3, #75a8cd);
+  background: linear-gradient(#82bae3, #75a8cd);
 }
 #home-links a.citizens:hover {
   text-decoration: none;
-  background: #96d942;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
-  background: -webkit-linear-gradient(#87c43c, #96d942);
-  background: -moz-linear-gradient(#87c43c, #96d942);
-  background: -o-linear-gradient(#87c43c, #96d942);
-  background: linear-gradient(#87c43c, #96d942);
+  background: #82bae3;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #75a8cd), color-stop(100%, #82bae3));
+  background: -webkit-linear-gradient(#75a8cd, #82bae3);
+  background: -moz-linear-gradient(#75a8cd, #82bae3);
+  background: -o-linear-gradient(#75a8cd, #82bae3);
+  background: linear-gradient(#75a8cd, #82bae3);
 }
 
 @media only screen and (min-width: 640px) {
@@ -2905,7 +2905,7 @@ ul#home-news-list li img {
   #page .home-left h2#home-intro {
     display: block;
     text-transform: none;
-    color: #009245;
+    color: #55a4da;
     margin-top: 15px;
     line-height: 25px;
     padding: 6px;
@@ -3050,20 +3050,20 @@ ul#home-news-list li img {
     border-radius: 5px 0 0 5px;
     margin: 0 3px 0 0;
     padding: 20px;
-    background: #009245 url(../images/big-chevron.png) 180px center no-repeat;
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00a24c), color-stop(100%, #009245));
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#00a24c, #009245);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#00a24c, #009245);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#00a24c, #009245);
-    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#00a24c, #009245);
+    background: #55a4da url(../images/big-chevron.png) 180px center no-repeat;
+    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5eb6f2), color-stop(100%, #55a4da));
+    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#5eb6f2, #55a4da);
+    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#5eb6f2, #55a4da);
+    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#5eb6f2, #55a4da);
+    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#5eb6f2, #55a4da);
   }
   #home-links a.aspirants:hover {
-    background: #00a24c url(../images/big-chevron.png) 180px center no-repeat;
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009245), color-stop(100%, #00a24c));
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#009245, #00a24c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#009245, #00a24c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#009245, #00a24c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#009245, #00a24c);
+    background: #5eb6f2 url(../images/big-chevron.png) 180px center no-repeat;
+    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #55a4da), color-stop(100%, #5eb6f2));
+    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#55a4da, #5eb6f2);
+    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#55a4da, #5eb6f2);
+    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#55a4da, #5eb6f2);
+    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#55a4da, #5eb6f2);
   }
   #home-links a.citizens {
     -webkit-border-radius: 0 5px 5px 0;
@@ -3073,20 +3073,20 @@ ul#home-news-list li img {
     border-radius: 0 5px 5px 0;
     margin: 0;
     padding: 20px;
-    background: #87c43c url(../images/big-chevron.png) 180px center no-repeat;
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #96d942), color-stop(100%, #87c43c));
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#96d942, #87c43c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#96d942, #87c43c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#96d942, #87c43c);
-    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#96d942, #87c43c);
+    background: #75a8cd url(../images/big-chevron.png) 180px center no-repeat;
+    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #82bae3), color-stop(100%, #75a8cd));
+    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#82bae3, #75a8cd);
+    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#82bae3, #75a8cd);
+    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#82bae3, #75a8cd);
+    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#82bae3, #75a8cd);
   }
   #home-links a.citizens:hover {
-    background: #96d942 url(../images/big-chevron.png) 180px center no-repeat;
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #87c43c), color-stop(100%, #96d942));
-    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#87c43c, #96d942);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#87c43c, #96d942);
-    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#87c43c, #96d942);
-    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#87c43c, #96d942);
+    background: #82bae3 url(../images/big-chevron.png) 180px center no-repeat;
+    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #75a8cd), color-stop(100%, #82bae3));
+    background: url(../images/big-chevron.png) 180px center no-repeat, -webkit-linear-gradient(#75a8cd, #82bae3);
+    background: url(../images/big-chevron.png) 180px center no-repeat, -moz-linear-gradient(#75a8cd, #82bae3);
+    background: url(../images/big-chevron.png) 180px center no-repeat, -o-linear-gradient(#75a8cd, #82bae3);
+    background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#75a8cd, #82bae3);
   }
 
   .featured-person {
@@ -3398,7 +3398,7 @@ h2 a.appearances-trigger.active {
 }
 .infopage hr {
   border: none;
-  background: #009245;
+  background: #55a4da;
   height: 2px;
 }
 
@@ -3433,4 +3433,92 @@ ul.social-buttons li {
 ul.social-buttons li {
   float: left;
   padding: 4px;
+}
+
+#main-menu {
+  background: white;
+  padding-top: 20px;
+  margin-top: 10px;
+  background-image: url(/static/images/header_top.png);
+  background-repeat: repeat-x;
+  background-position: top center;
+}
+#main-menu nav {
+  position: relative;
+  z-index: 2;
+  float: right;
+}
+#main-menu nav ul li {
+  border-right: 2px solid white;
+}
+#main-menu nav ul li a {
+  color: black;
+  background-image: none;
+}
+#main-menu nav ul li a:hover {
+  background: #d4d4d4;
+}
+
+html {
+  background-color: white;
+}
+
+body {
+  background: white;
+}
+
+#site-header {
+  clear: both;
+  background: #55a4da;
+  background-image: url(/static/images/header_bottom.png);
+  background-repeat: repeat-x;
+  background-position: bottom center;
+}
+
+@media only screen and (min-width: 640px) {
+  #site-header {
+    height: 100px;
+  }
+}
+#logo {
+  background: url(/static/images/mz-nigeria-logo-symbol.png) 0 center no-repeat;
+  background-position: left 20%;
+}
+@media only screen and (min-width: 640px) {
+  #logo {
+    top: -20px;
+    height: 130px;
+    width: 630px;
+    background: url(/static/images/mz-nigeria-logo-text.png) 0 center no-repeat;
+  }
+  #logo.down {
+    background: url(../images/down-logo.png) 0 center no-repeat;
+  }
+}
+@media only screen and (min-width: 900px) {
+  #logo {
+    background: url(/static/images/mz-nigeria-logo.png) 0 center no-repeat;
+  }
+  #logo.down {
+    background: url(../images/down-logo.png) 0 center no-repeat;
+  }
+}
+
+#header-search {
+  margin: 15px 5px 5px 15px;
+}
+
+menu#site-user-tools {
+  clear: right;
+}
+
+#login-box {
+  top: 78px;
+  right: 4px;
+}
+
+.featured-person.featured-person-placeholder {
+  text-align: center;
+  height: 250px;
+  background: #55a4da url(/static/images/mz-nigeria-logo-symbol.png) center center no-repeat;
 }

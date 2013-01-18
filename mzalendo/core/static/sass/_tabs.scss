@@ -16,7 +16,7 @@
         a {
           display: block;
           float: left;
-          color: $colour_green;
+          color: $colour_primary;
           text-decoration: none;
           font-size: 13px;
           padding: 9px 15px 8px 15px;
@@ -25,7 +25,7 @@
           @include background(linear-gradient(white, #f6f6f6));
           &:hover {
             background: #fff;
-            color: $colour_light_green; } }
+            color: $colour_primary_light; } }
         &.active a {
           color: $colour_black;
           padding: 9px 15px;

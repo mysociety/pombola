@@ -5,7 +5,24 @@
         <div id="disqus_thread"></div>
     
         <script type="text/javascript">
+
           var disqus_shortname = '{{ settings.DISQUS_SHORTNAME }}';
+
+          var disqus_identifier, disqus_developer;
+
+          {% if settings.STAGING %}
+            disqus_developer  = 1;
+          {% endif %}
+
+          {% if settings.DISQUS_USE_IDENTIFIERS %}
+            {% if object and object.css_class %}
+              {# If we have an object then we can use that to create a very robust identifier #}
+              disqus_identifier = '{{ object.css_class }}-{{ object.id }}';          
+            {% else %}
+              {# If not object then use the page url pathname (ie without the fragment or query). This is most likely the right thing to do. #}
+              disqus_identifier = window.location.pathname;
+            {% endif %}
+          {% endif %}
     
           (function() {
               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -1,0 +1,84 @@
+./manage.py  mapit_create_area_unions \
+    --commit \
+    --header-row \
+    --generation-id=1 \
+    --region-name-field=1 \
+    --area-type-code=SEN \
+    nigeria/initial_import/unions/states_and_senatorial_districts_for_create_union.csv
+
+./manage.py  mapit_create_area_unions \
+    --commit \
+    --header-row \
+    --generation-id=1 \
+    --region-name-field=1 \
+    --area-type-code=FED \
+    nigeria/initial_import/unions/constituencies_and_LGAs_for_create_unions.csv
+
+
+
+# SQL
+
+select id, slug from core_placekind;
+ id |        slug         
+----+---------------------
+  2 | constituency
+  1 | other
+  4 | senatorial-district
+  3 | state
+(4 rows)
+
+
+select kind_id, count(*) from core_place where mapit_area_id is null group by kind_id;
+ kind_id | count 
+---------+-------
+       2 |   359
+       3 |    37
+       4 |   104
+(3 rows)
+
+
+select * from mapit_type;
+ code | id |      description      
+------+----+-----------------------
+ CTR  |  1 | Country
+ STA  |  2 | State
+ LGA  |  3 | Local Government Area
+ SEN  |  4 | Senatorial District
+ FED  |  5 | Federal Constituency
+(5 rows)
+
+
+select p.name, a.name from core_place as p, mapit_area as a  where kind_id = 2 and p.name = a.name;
+
+
+
+update core_place
+    SET mapit_area_id = (
+        select id
+            from mapit_area
+            where mapit_area.name = core_place.name
+              and mapit_area.type_id = 5
+    )
+    where kind_id = 2
+    ;
+
+update core_place
+    SET mapit_area_id = (
+        select id
+            from mapit_area
+            where mapit_area.name = core_place.name
+              and mapit_area.type_id = 4
+    )
+    where kind_id = 4
+    ;
+
+update core_place
+    SET mapit_area_id = (
+        select id
+            from mapit_area
+            where mapit_area.name = core_place.name
+              and mapit_area.type_id = 2
+    )
+    where kind_id = 3
+    ;
+    

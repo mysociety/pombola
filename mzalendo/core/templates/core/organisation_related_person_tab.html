@@ -14,7 +14,17 @@
             
                 <section>
                     <h4><a href="{{ person_url }}">{{ person.name }}</a></h4>
-                    <p>{{ position.title.name }}</p>
+                    <p>
+                      {{ position.title.name }}
+                    </p>
+                    
+                    {% if position.place %}
+                      <p>
+                        <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
+                      </p>
+                    {% endif %}
+
+                    </p>
                     <p class="meta">{{ position.display_dates|safe }}</p>
                     <div class="read-more-wrap"><a href="{{ person_url }}" class="read-more">read more</a></div>
                 </section>
