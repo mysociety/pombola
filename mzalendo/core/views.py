@@ -47,11 +47,11 @@ def person(request, slug):
         slug     = slug,
     )
 
-def person_scorecard(request, slug):
+def person_sub_page(request, slug, sub_page):
     return object_detail(
         request,
         queryset      = models.Person.objects,
-        template_name = "core/person_scorecard.html",
+        template_name = "core/person_%s.html" % sub_page,
         slug          = slug,
     )
 
