@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+    <div class="title-space">
+        <h1>{{ object.title }} {{ object.name }}</h1>
+
+        {% if object.is_politician %}
+            <p>Politician Profile Page</p>
+        {% endif %}
+        
+        {% if object.is_aspirant %}
+            <p>
+                Aspirant in the upcoming elections:
+                {% for aspiration in object.aspirant_positions %}
+                    {{ aspiration.title }}
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        {% endif %}
+    </div>
+    
+    <div class="profile-pic">
+        {% thumbnail object.primary_image "210x210" crop="center" as im %}
+        <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% empty %}
+        <img src="{{STATIC_URL}}images/avatar-210x210.jpg" />
+        {% endthumbnail %}        
+    </div>
+
+    <div class="profile-info">
+        <div class="constituency-party">
+
+            {% if object.aspirant_constituencies.count %}
+                <h3>Aspirant for</h3>
+                <ul>
+                    {% for constituency in object.aspirant_constituencies %}
+                        <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
+                    {% endfor %}
+            {% endif %}
+
+            <h3>Constituency</h3>
+            <ul>
+                {% for constituency in object.constituencies %}
+                    <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
+                {% empty %}
+                    <li>Not an MP for any constituencies</li>
+                {% endfor %}
+            </ul>
+
+            <h3>Party &amp; Coalition</h3>
+            <ul>
+                {% for party in object.parties_and_coalitions %}
+                    <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+                {% empty %}
+                    <li><p>Not a member of any parties or coalitions</p></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="social-and-tools">
+            {% include 'core/social_tools.html' %}
+        </div>        
+
+    </div>
+
+    <div class="large-container">
+      {% block subcontent %}
+        You should add your own custom content to this layout in a 'subcontent' block.
+      {% endblock %}
+    </div>
+{% endblock %}
