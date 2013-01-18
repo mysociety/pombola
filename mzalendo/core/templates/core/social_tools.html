@@ -5,6 +5,6 @@
     {% endif %}
     <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link big-btn-text-red">Correct this page</a></li>
     {% if settings.DISQUS_SHORTNAME %}
-        <li><a href="#comments" class="big-btn-text-green activate-tab">Post Comment</a></li>
+        <li><a href="{% url person_comments slug=object.slug %}" class="big-btn-text-green">Post Comment</a></li>
     {% endif %}
 </ul>

@@ -34,7 +34,7 @@ person_patterns = patterns('core.views',
   )
 
 # ugly, must be a better way
-for sub_page in ['scorecard']:
+for sub_page in ['scorecard', 'comments']:
     person_patterns += patterns(
         'core.views',
         url(

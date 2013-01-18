@@ -4,6 +4,8 @@
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
+  {% include "disqus_javascript.html" %}
+
     <div class="title-space">
         <h1>{{ object.title }} {{ object.name }}</h1>
 
@@ -28,7 +30,7 @@
               <li><a href="{% url person_scorecard slug=object.slug %}">Scorecard</a></li>
             {% endif %}
             {% if settings.DISQUS_SHORTNAME %}
-              <!-- <li><a href="">Comments</a></li> -->
+              <li><a href="{% url person_comments slug=object.slug %}#disqus_thread" data-disqus-identifier="{{ object.css_class }}-{{ object.id }}">Comments</a></li>
             {% endif %}
             <!-- <li><a href="">Experience</a></li>       -->
             <!-- <li><a href="">Appearances</a></li>      -->
