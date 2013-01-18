@@ -32,9 +32,9 @@
             {% if settings.DISQUS_SHORTNAME %}
               <li><a href="{% url person_comments slug=object.slug %}#disqus_thread" data-disqus-identifier="{{ object.css_class }}-{{ object.id }}">Comments</a></li>
             {% endif %}
-            <!-- <li><a href="">Experience</a></li>       -->
-            <!-- <li><a href="">Appearances</a></li>      -->
-            <!-- <li><a href="">Contact details</a></li>  -->
+            <li><a href="{% url person_experience slug=object.slug %}">Experience</a></li>      
+            <!-- <li><a href="{% url person slug=object.slug %}">Appearances</a></li>      -->
+            <!-- <li><a href="{% url person slug=object.slug %}">Contact details</a></li>  -->
           </ul>
         <menu>
         
