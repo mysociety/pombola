@@ -59,14 +59,6 @@ place_patterns = patterns('core.views',
                           
     # Tab content
     url(
-        r'^(?P<slug>[-\w]+)/related_person_tab', 
-        DetailView.as_view(
-            model=models.Place,
-            template_name_suffix='_related_person_tab',
-        ),
-        name="place_related_person_tab",        
-    ),
-    url(
         r'^(?P<slug>[-\w]+)/related_organisation_tab', 
         DetailView.as_view(
             model=models.Place,

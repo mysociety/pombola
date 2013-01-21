@@ -15,6 +15,8 @@
           <li><a href="{% url place_scorecard slug=object.slug %}">Scorecard</a></li>
         {% endif %}
         
+        <li><a href="{% url place_people slug=object.slug %}">People</a></li>
+
         {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}
         {% if settings.DISQUS_SHORTNAME %}
           <li><a href="{% url place_comments slug=object.slug %}#disqus_thread" data-disqus-identifier="{{ object.css_class }}-{{ object.id }}">Comments</a></li>
