@@ -33,7 +33,7 @@
             {% thumbnail position.person.primary_image "50x50" crop="center" as im %}
                 <img src="{{ im.url }}" alt="{{ position.person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
             {% empty %}
-                <img src="{{STATIC_URL}}images/avatar-90x90.jpg" height="50" width="50"/>
+                <img src="{{STATIC_URL}}images/person-90x90.jpg" height="50" width="50"/>
             {% endthumbnail %}
 
             <span class="name">{{ position.person.name }}</span>
