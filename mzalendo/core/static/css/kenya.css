@@ -1661,25 +1661,25 @@ menu#site-user-tools ul li.active a:hover {
     padding: 0;
   }
 }
-div.entity_menu {
+div.object_menu {
   width: 100%;
 }
-div.entity_menu ul {
+div.object_menu ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-div.entity_menu ul li {
+div.object_menu ul li {
   list-style-type: none;
   padding: 0;
   margin: 0;
   border: 0;
 }
-div.entity_menu ul li {
+div.object_menu ul li {
   display: inline-block;
   margin: 0 0.5em 0.2em 0;
 }
-div.entity_menu ul li a {
+div.object_menu ul li a {
   text-decoration: underline;
 }
 
