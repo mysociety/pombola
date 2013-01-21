@@ -69,7 +69,7 @@ place_patterns = patterns('core.views',
 )
 
 # ugly, must be a better way
-for sub_page in ['scorecard', 'comments', 'people', 'places', 'organisations']:
+for sub_page in ['scorecard', 'comments', 'people', 'places', 'organisations', 'data']:
     place_patterns += patterns(
         'core.views',
         url(
