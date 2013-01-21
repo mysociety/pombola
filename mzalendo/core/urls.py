@@ -74,7 +74,20 @@ place_patterns = patterns('core.views',
         ),
         name="place_related_organisation_tab",        
     ),
-                          )
+)
+
+# ugly, must be a better way
+for sub_page in ['scorecard', 'comments', 'people', 'organisations']:
+    place_patterns += patterns(
+        'core.views',
+        url(
+            '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
+            'place_sub_page',                    # view function
+            { 'sub_page': sub_page },            # pass in the 'sub_page' arg
+            'place_%s' % sub_page                # url name for {% url ... %} tags
+        )
+    )
+
 
 organisation_patterns = patterns('core.views',
     url(r'^all/', 'organisation_list', name='organisation_list'),

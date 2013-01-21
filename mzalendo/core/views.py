@@ -64,6 +64,13 @@ class PlaceDetailView(DetailView):
         context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
         return context
 
+def place_sub_page(request, slug, sub_page):
+    return object_detail(
+        request,
+        queryset      = models.Place.objects,
+        template_name = "core/place_%s.html" % sub_page,
+        slug          = slug,
+    )
 
 def place_kind(request, slug=None):
 
