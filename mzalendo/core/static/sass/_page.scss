@@ -106,9 +106,6 @@
         &.tools {
           @include list-reset; } } }
     article {}
-    .tab-nav a {
-      color: $colour_black;
-      text-decoration: none; }
     #comments {
       .big-btn-text-green {
         display: none; } }
