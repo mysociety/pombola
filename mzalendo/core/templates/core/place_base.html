@@ -16,6 +16,7 @@
         {% endif %}
         
         <li><a href="{% url place_people slug=object.slug %}">People</a></li>
+        <li><a href="{% url place_places slug=object.slug %}">Places</a></li>
 
         {% comment %}
           <!-- Not showing organisations for the moment as the list isn't very good. -->

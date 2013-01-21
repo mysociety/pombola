@@ -1,0 +1,42 @@
+{% extends 'core/place_base.html' %}
+{% load thumbnail %}
+{% load humanize %}
+
+{% block title %}{{ object.name }} Places{% endblock %}
+
+{% block subcontent %}
+
+  <h2>Related Places</h2>
+
+  <div>
+
+    {# Do we want to display more than just the parent? #}
+
+    {% if object.parent_place %}
+      <p>
+        {{ object.name }} is contained in
+        <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
+        {% if object.parent_place.kind.slug != 'country' %}
+          {{ object.parent_place.kind.name }}.
+        {% endif %}
+      </p>
+    {% endif %}
+    
+    {% if object.child_places.count %}
+      <div class="content_box">
+        <h3>Areas within {{ object.name }}</h3>
+        
+        <ul class="listing">
+          {% for child in object.child_places.all %}
+            <li>
+              <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+              {{ child.kind.name }}
+            </li>
+          {% endfor %}
+        </ul>            
+      </div>
+    {% endif %}
+
+  </div>
+
+{% endblock %}
