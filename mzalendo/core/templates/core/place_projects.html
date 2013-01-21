@@ -1,0 +1,13 @@
+{% extends 'core/place_base.html' %}
+{% load thumbnail %}
+{% load humanize %}
+
+{% block title %}{{ object.name }} Projects{% endblock %}
+
+{% block subcontent %}
+
+  <h2>CDF Projects ({{ object.project_set.count }})</h2>
+  <div>
+      {% include "include.html" with template="projects/place_summary.html" %}
+  </div>
+{% endblock %}

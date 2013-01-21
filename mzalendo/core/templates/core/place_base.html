@@ -22,6 +22,10 @@
           <li><a href="{% url place_data slug=object.slug %}">Data</a></li>
         {% endif %}
 
+        {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
+          <li><a href="{% url place_projects slug=object.slug %}">CDF Projects ({{ object.project_set.count }})</a></li>
+        {% endif %}
+
         {% comment %}
           <!-- Not showing organisations for the moment as the list isn't very good. -->
           <li><a href="{% url place_organisations slug=object.slug %}">Organisations</a></li>
