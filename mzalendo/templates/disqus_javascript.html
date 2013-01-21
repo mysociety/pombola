@@ -19,21 +19,25 @@
     {% endif %}
   {% endif %}
 
-  (function() {
+  var disqusScriptTagsAdded = {};
+
+  function addDisqusScriptTag (name) {
+    if (!disqusScriptTagsAdded[name]) {
       var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
+      dsq.type  = 'text/javascript';
       dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      dsq.src   = 'http://' + disqus_shortname + '.disqus.com/' + name + '.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-  
-  (function () {
-      var s = document.createElement('script');
-      s.async = true;
-      s.type = 'text/javascript';
-      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-  }());
+      disqusScriptTagsAdded[name] = true;
+    }
+  }
+
+  // Load the correct tag using either of these lines in your code. Don't worry
+  // about repeating them, subsequent calls are ignored. Annoyingly the 'embed'
+  // one produces an exception if it can't find the element it wants :(
+  // 
+  // addDisqusScriptTag('embed');
+  // addDisqusScriptTag('count');
 
 </script>
 {% endif %}

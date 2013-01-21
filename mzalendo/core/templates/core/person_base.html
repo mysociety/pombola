@@ -5,6 +5,9 @@
 
 {% block content %}
   {% include "disqus_javascript.html" %}
+  <script type="text/javascript" charset="utf-8">
+    addDisqusScriptTag('count');
+  </script>
 
     <div class="title-space">
         <h1>{{ object.title }} {{ object.name }}</h1>
