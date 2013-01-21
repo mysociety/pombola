@@ -17,7 +17,7 @@ stop-dont-deploy-just-yet
 # identifiers and fixing all the comment issues in one go. See
 # https://github.com/mysociety/mzalendo/issues/421 for the details.
 
-# 3) the DISQUS_USE_IDENTIFIERS will need t obe added to Kenya's config, and set
+# 3) the DISQUS_USE_IDENTIFIERS will need to be added to Kenya's config, and set
 # to true. I think we should do munge the data in the CSV from (2), change the
 # config, deploy and then submit the CSV to disqus. Then a day later check the
 # urls they have for any that slipped through the net. That way the comments
