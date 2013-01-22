@@ -433,6 +433,25 @@ class PlaceKind(ModelBase):
     class Meta:
        ordering = ["slug"]      
 
+    def parliamentary_sessions(self):
+        """Return a list of any associated parliamentary sessions"""
+
+        return ParliamentarySession.objects.filter(place__kind=self).distinct()
+
+    def parliamentary_sessions_for_iteration(self):
+        """Return a list of associated parliamentary sessions for iteration
+
+        If there are no parliamentary_sessions associated with this
+        PlaceKind (e.g. as with Country) then rather than returning a
+        empty list, return [None].  This makes iterating over sessions
+        in templates much simpler."""
+
+        sessions = self.parliamentary_sessions()
+        if sessions.count() == 0:
+            return [None]
+        else:
+            return sessions
+
 
 class PlaceQuerySet(models.query.GeoQuerySet):
     def constituencies(self):
