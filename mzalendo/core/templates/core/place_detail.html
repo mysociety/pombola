@@ -7,12 +7,17 @@
 {% block content %}
 
     <div class="title-space">
-        <p class="object-kind">{{ object.kind.name }}</p>
+    {% with session=object.parliamentary_session %}
+        <p class="object-kind">{{ object.kind.name }}{% if session %} ({{ session.house.name }}){% endif %}</p>
+        {% if session %}
+        <p>{{ session.relative_time }} {{ object.kind.name }}: {{ session.readable_date_range }}</p>
+        {% endif %}
         <h1>{{ object.name }}</h1>
 
         {% if object.organisation %}
         <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
         {% endif %}
+    {% endwith %}
     </div>
     
     {% if object.mapit_area %}

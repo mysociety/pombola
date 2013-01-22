@@ -783,5 +783,17 @@ class ParliamentarySession(ModelBase):
         elif self.covers_date(today):
             return "Current"
 
+    @staticmethod
+    def format_date(d):
+        return d.strftime("%d %B %Y")
+
+    def readable_date_range(self):
+        future_sentinel = datetime.date(9999, 12, 31)
+        if self.end_date == future_sentinel:
+            return "from %s onwards" % (self.format_date(self.start_date),)
+        else:
+            return "from %s to %s" % (self.format_date(self.start_date),
+                                      self.format_date(self.end_date))
+
     class Meta:
         ordering = ['start_date']
