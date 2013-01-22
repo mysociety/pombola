@@ -70,7 +70,9 @@ BLOG_RSS_FEED: ''
 
 
 # The country app is loaded early so that its templates take priority over those
-# from other apps
+# from other apps.  Note that we also use this setting in a command
+# (core_create_parliamentary_sessions) to determine the country that this
+# instance of Mzalendo is set up for.
 COUNTRY_APP: kenya
 
 # The coordinates of the bounding box that should be used when maps are loaded.
