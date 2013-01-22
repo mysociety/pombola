@@ -770,3 +770,18 @@ class ParliamentarySession(ModelBase):
 
     def __unicode__(self):
         return unicode(self.name)
+
+    def covers_date(self, d):
+        return (d >= self.start_date) and (d <= self.end_date)
+
+    def relative_time(self):
+        today = datetime.date.today()
+        if today > self.end_date:
+            return "Past"
+        elif today < self.start_date:
+            return "Future"
+        elif self.covers_date(today):
+            return "Current"
+
+    class Meta:
+        ordering = ['start_date']
