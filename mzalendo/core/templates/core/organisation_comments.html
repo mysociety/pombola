@@ -1,0 +1,7 @@
+{% extends 'core/organisation_base.html' %}
+
+{% block title %}{{ object.name }} Comments{% endblock %}
+
+{% block subcontent %}
+  {% include 'disqus_comments.html' %}
+{% endblock %}

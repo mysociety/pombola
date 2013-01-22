@@ -167,6 +167,13 @@ def organisation(request, slug):
         context_instance=RequestContext(request)
     )
 
+def organisation_sub_page(request, slug, sub_page):
+    return object_detail(
+        request,
+        queryset      = models.Organisation.objects,
+        template_name = "core/organisation_%s.html" % sub_page,
+        slug          = slug,
+    )
 
 def organisation_kind(request, slug):
     org_kind = get_object_or_404(

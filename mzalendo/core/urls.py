@@ -56,16 +56,6 @@ place_patterns = patterns('core.views',
     url(r'^(?P<slug>[-\w]+)/$',
         PlaceDetailView.as_view(),      
         name='place'),
-                          
-    # Tab content
-    url(
-        r'^(?P<slug>[-\w]+)/related_organisation_tab', 
-        DetailView.as_view(
-            model=models.Place,
-            template_name_suffix='_related_organisation_tab',
-        ),
-        name="place_related_organisation_tab",        
-    ),
 )
 
 # ugly, must be a better way
@@ -83,21 +73,21 @@ for sub_page in ['scorecard', 'comments', 'people', 'places', 'organisations', '
 
 organisation_patterns = patterns('core.views',
     url(r'^all/', 'organisation_list', name='organisation_list'),
-
-    # Tab content
-    url(
-        r'^(?P<slug>[-\w]+)/related_person_tab', 
-        DetailView.as_view(
-            model=models.Organisation,
-            template_name_suffix='_related_person_tab',
-        ),
-        name="organisation_related_person_tab",        
-    ),
-
     url(r'^is/(?P<slug>[-\w]+)/', 'organisation_kind', name='organisation_kind'),
     url(r'^(?P<slug>[-\w]+)/$',   'organisation',      name='organisation'),
-    
-                                 )
+)    
+
+# ugly, must be a better way
+for sub_page in ['comments', 'contact_details', 'people']:
+    organisation_patterns += patterns(
+        'core.views',
+        url(
+            '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
+            'organisation_sub_page',                    # view function
+            { 'sub_page': sub_page },            # pass in the 'sub_page' arg
+            'organisation_%s' % sub_page                # url name for {% url ... %} tags
+        )
+    )
 
 urlpatterns = patterns('core.views',
     # Homepage

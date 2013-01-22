@@ -1,58 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'core/organisation_base.html' %}
 {% load thumbnail %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
-{% block content %}
+{% block subcontent %}
 
-    <div class="title-space">
-        <h1>{{ object.name }}</h1>
-
-        {% comment %}
-            # Not possible in the database yet - but a nice idea.
-            <p>part of <a href="/">Parent Company</a></p>
-        {% endcomment %}
-
-        {% if object.kind.slug != 'unknown' %}
-            <span class="object-kind">{{ object.kind.name }}</span>
-        {% endif %}
-    </div>
-    
-    <div class="profile-pic">
-        {% thumbnail object.primary_image "200x200" as im %}
-        <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-        {% empty %}
-        <img src="{{STATIC_URL}}images/organisation-200x200.jpg" />
-        {% endthumbnail %}        
-    </div>
-
-    <div class="social-and-tools">
-        {% include 'core/social_tools.html' %}
-    </div>
-
-    {# organisations do not have scorecards (yet) so the summary appears at the top rather than in a tab #}
-    {% if object.summary %}
-        <div class="small-container">
-            {{ object.summary }}
-        </div>
-    {% endif %}
-
-    <div class="profile-info">
-       
-        {% include "core/contact_list.html" with contacts=object.contacts.all %}
-
-    </div>
-
-    <div class="large-container">
-        <div class="tab-wrapper">
-
-            <h2 class="tab-nav" rel="#related-people"><a href="#related-people">Related People</a></h2>
-            <div class="tab" id="related-people" data-tab-content-source-url="{% url organisation_related_person_tab slug=object.slug %}">
-            </div>
-
-            {% include 'disqus_comments.html' %}
-
-        </div>
-    </div>
+  {% if object.summary %}
+    {{ object.summary }}
+  {% endif %}
 
 {% endblock %}
