@@ -9,9 +9,9 @@
     
 {% endcomment %}
 
-<h2>Parliamentary appearences</h2>
+<h2>Parliamentary appearances</h2>
 
-<p>{{ person.name }} has <a href='{% url hansard:person_summary slug=object.slug %}'>spoken {{ entry_count }} times</a> in Parliament.</p>
+<p>{{ person.name }} has <a href='{% url hansard:person_summary slug=person.slug %}'>spokenken {{ entry_count }} times</a> in Parliament.</p>
 
 <h3>Recent Appearances</h3>
 
