@@ -2,6 +2,7 @@ import re
 import urllib2
 import time
 import calendar
+import datetime
 
 from django.db.models import Count
 from django.db.models import Q
@@ -57,7 +58,7 @@ class PlaceDetailView(DetailView):
         return context
 
 
-def place_kind(request, slug=None):
+def place_kind(request, slug=None, session_slug=None):
 
     if slug and slug != 'all':
         kind = get_object_or_404(
@@ -69,12 +70,40 @@ def place_kind(request, slug=None):
         kind = None
         queryset = models.Place.objects.all()
 
+    if session_slug:
+        session = get_object_or_404(
+            models.ParliamentarySession,
+            slug=session_slug
+        )
+    else:
+        session = None
+
+    # If this is a PlaceKind with parliamentary sessions, but a
+    # particular one hasn't been specified, make the default either
+    # the current session, or the most recent one if there is no
+    # current session.  (This is largely to make any old bookmarked
+    # links to (e.g.) /place/is/constituency/ still work.)
+
+    if kind and not session:
+        sessions = list(kind.parliamentary_sessions())
+        if sessions:
+            today = datetime.date.today()
+            current_sessions = [s for s in sessions if s.covers_date(today)]
+            if current_sessions:
+                session = current_sessions[0]
+            else:
+                session = sessions[-1]
+
+    if queryset and session:
+        queryset = queryset.filter(parliamentary_session=session)
+
     return object_list(
         request,
         queryset = queryset,
         extra_context = {
-            'kind':       kind,
-            'all_kinds':  models.PlaceKind.objects.all(),
+            'kind':             kind,
+            'selected_session': session,
+            'all_kinds':        models.PlaceKind.objects.all(),
         },
     )
 
