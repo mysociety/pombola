@@ -31,3 +31,6 @@ urls they have for any that slipped through the net. That way the comments will
 be broken just until they have a chance to process the CSV. Obviously taking a
 backup first is a good idea too.
 
+There is a management script `core_cleanup_disqus_urls` that can be used to do
+this.
+
