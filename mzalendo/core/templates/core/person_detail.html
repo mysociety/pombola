@@ -3,34 +3,45 @@
 {% block title %}{{ object.name }} Overview{% endblock %}
 
 {% block subcontent %}
-  <h2>Overview</h2>
-  <div class="markdown" id="overview">
+
+  {% if object.summary %}
+    <h2>Summary</h2>
+    <div class="markdown">
+      {{ object.summary }}
+    </div>
+  {% endif %}
   
+
+  <h2>Personal Details</h2>
+
+  <dl>
     {% if object.name != object.legal_name %}
-        <h3>Full name</h3>
-        <p>{{ object.legal_name }}</p>
+        <dt>Full name</dt>
+        <dd>{{ object.legal_name }}</dd>
     {% endif %}
     
     {% if object.additional_names %}
-        <h3>Also known as</h3>
-        <p>{% for name in object.additional_names %}
+        <dt>Also known as</dt>
+        <dd>
+          {% for name in object.additional_names %}
             {% if not forloop.first %}
                 {% if forloop.last %}or{% else %},{% endif %}
             {% endif %}
             <strong>{{ name }}</strong>
-        {% endfor %}</p>
+          {% endfor %}
+        </dd>
     {% endif %}
     
     {% if object.date_of_birth %}
-        <h3>Born</h3>
-        <p>{{ object.date_of_birth }} {# TODO - add age in years #}</p>
+        <dt>Born</dt>
+        <dd>
+          {{ object.date_of_birth }}
+          {# TODO - add age in years #}
+        </dd>
     {% endif %}
     
     {# TODO - add death date too if it exists #}
+  </dl>
   
-    {% if object.summary %}
-      <h3>Summary</h3>
-      {{ object.summary }}
-    {% endif %}
-  </div>
+  
 {% endblock %}
