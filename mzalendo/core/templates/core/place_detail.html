@@ -117,7 +117,7 @@
 		            {% for child in object.child_places.all %}
                         <li>
                             <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
-                            {{ child.kind.name }}
+                            ({{child.parliamentary_session.relative_time}} {{ child.kind.name }})
                         </li>
 		            {% endfor %}
                     </ul>            
