@@ -38,7 +38,7 @@ def check_all_equal(iterable):
     except StopIteration:
         return True
 
-def get_mapit_type_for_mzalendo_plackind(placekind):
+def get_mapit_type_for_mzalendo_placekind(placekind):
     types_in_mapit = set(x.mapit_area.type for x in
                          Place.objects.filter(kind=placekind).select_related('mapit_area')
                          if x.mapit_area)
@@ -111,8 +111,8 @@ class Command(BaseCommand):
             child_placekind = PlaceKind.objects.get(slug=child_slug)
             parent_placekind = PlaceKind.objects.get(slug=parent_slug)
 
-            child_type = get_mapit_type_for_mzalendo_plackind(child_placekind)
-            parent_type = get_mapit_type_for_mzalendo_plackind(parent_placekind)
+            child_type = get_mapit_type_for_mzalendo_placekind(child_placekind)
+            parent_type = get_mapit_type_for_mzalendo_placekind(parent_placekind)
 
             recalculate_parents(child_placekind,
                                 child_type,
