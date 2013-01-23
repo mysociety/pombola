@@ -1,11 +1,20 @@
 (function () {
 
   function initialize_map() {
+
+    // Opera Mini
+    if ( /Opera Mini/.test(navigator.userAgent) ) {
+      $(".map-drilldown")
+        .html('<div class="error">Your browser does not support Google Maps. Please <a href="/search/">search</a> for your constituency instead.</div>');
+      return;
+    }
+    
     var map = createMap();
     addCrosshairs( map );
     trackMapMovements( map );   
     maintainMapCenterOnResize( map );
     addMessageControlToMap( map );
+    addSearchByNameControlToMap( map );
     enableGeoLocateFeature( map );
   }
   
@@ -41,16 +50,40 @@
 
     var map = new google.maps.Map(map_element, myOptions);
 
+    // We want a single click/tap to position the map where it was tapped. Add
+    // smarts to wait and be sure that we didn't just trigger on the start of a
+    // double tap, used to zoom. Could instead handle the zoom on dblclick
+    // ourselves, but that could get tricky...
+    var clickTimeoutId = null;
+    google.maps.event.addListener(
+      map,
+      'click',
+      function (event) {
+        clickTimeoutId = setTimeout(
+          function () { map.panTo(event.latLng); },
+          400 // max delay between two clicks
+        );
+      }
+    ); 
+    google.maps.event.addListener(
+      map,
+      'dblclick',
+      function () {
+        clearTimeout(clickTimeoutId);
+      }
+    ); 
+
     map.fitBounds( make_bounds( map_bounds ) );
     
     return map;
   }
 
   function enableGeoLocateFeature ( map ) {
-    var $geoLocateMeButton = $('#geo-locate-me-button').find('a');
+    var $geoLocateMeButton     = $('#geo-locate-me-button');
+    var $geoLocateMeButtonLink = $geoLocateMeButton.find('a');
     if ( geo_position_js.init() ) {      
 
-      $geoLocateMeButton
+      $geoLocateMeButtonLink
         .click( function (event) {
           event.preventDefault();
           
@@ -181,7 +214,7 @@
     _.each( areas, function (area, area_id ) {
       // console.log(area);
       if (area_descriptions) { area_descriptions += ', '; } 
-      area_descriptions += '<a href="/place/mapit_area/' + area_id + '">' + area.name + '</a> (' + area.type_name + ')';
+      area_descriptions += '<a href="/place/mapit_area/' + area_id + '">' + area.name + ' (' + area.type_name + ')</a>';
     });
 
     messageHolderHTML(
@@ -194,16 +227,27 @@
     var control = $('#map-drilldown-message').get(0);
     control.index = 1;
     map
-      .controls[google.maps.ControlPosition.TOP_LEFT]
+      .controls[google.maps.ControlPosition.TOP_CENTER]
       .push(control);
+    $(control).show();
+  }
+
+  function addSearchByNameControlToMap (map) {
+    var control = $('#search-by-name-button').get(0);
+    control.index = 1;
+    map
+      .controls[google.maps.ControlPosition.RIGHT_BOTTOM]
+      .push(control);
+    $(control).show();
   }
 
   function addGeoLocateControlToMap (map) {
     var control = $('#geo-locate-me-button').get(0);
-    control.index = 1;
+    control.index = 2;
     map
-      .controls[google.maps.ControlPosition.TOP_RIGHT]
+      .controls[google.maps.ControlPosition.RIGHT_BOTTOM]
       .push(control);
+    $(control).show();
   }
 
 

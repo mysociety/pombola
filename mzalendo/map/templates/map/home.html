@@ -3,7 +3,7 @@
 {% block title %}Map{% endblock %}
 
 {% block extra_js_to_load %}
-    mzalendo_settings.extra_js.push( 'js/libs/geo-0.4.8.min.js' );
+    mzalendo_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo-min.js' );
     mzalendo_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js' );
     mzalendo_settings.extra_js.push( 'js/map-drilldown.js' );
 {% endblock %}
@@ -28,6 +28,7 @@
   }
   
   .gmap-control {
+    display: none;
     background-color: white;
     margin: 5px;
     padding: 5px;
@@ -39,11 +40,12 @@
   }
 
   #map-drilldown-message {
-    width: 60%;
+    width: 80%;
+    font-size: 16px;    
   }
   
-  #geo-locate-me-button {
-    width: 10%;
+  #geo-locate-me-button, #search-by-name-button {
+    width: 10em;
   }
   
   
@@ -61,7 +63,11 @@
   </div>
   
   <div id="geo-locate-me-button" class="gmap-control">
-    <a href="#">Find me!</a>
+    <a href="#">Show my location</a>
+  </div>
+
+  <div id="search-by-name-button" class="gmap-control">
+    <a href="/search">Search by name</a>
   </div>
 
 </div>

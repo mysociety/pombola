@@ -17,17 +17,24 @@
         </div>
 
         {% for place_kind in all_kinds %}
-            <h2 class="tab-nav tab-static-link {% if kind == place_kind %}tab-active{% endif %}" rel="#{{ place_kind.slug }}"><a href="{% url place_kind slug=place_kind.slug %}">{% firstof place_kind.plural_name place_kind.name %}</a></h2>
-            <div class="tab markdown infopage" id="{{ place_kind.slug }}">
-                {% if kind == place_kind %}
+            {% for session in place_kind.parliamentary_sessions_for_iteration %}
+              <h2 class="tab-nav tab-static-link {% if kind == place_kind and session == selected_session %}tab-active{% endif %}"
+              {% if session %}
+                 rel="#{{ place_kind.slug }}-{{ session.slug }}"><a href="{% url place_kind slug=place_kind.slug, session_slug=session.slug %}">{% firstof place_kind.plural_name place_kind.name %} {% if session %}({{session.relative_time}}){% endif %}</a></h2>
+              {% else %}
+                 rel="#{{ place_kind.slug }}"><a href="{% url place_kind slug=place_kind.slug %}">{% firstof place_kind.plural_name place_kind.name %}</a>
+              {% endif %}</h2>
+              <div class="tab markdown infopage" id="{{ place_kind.slug }}{% if session %}-{{ session.slug }}{% else %}{% endif %}">
+                  {% if kind == place_kind and session == selected_session %}
                     
-                    {% if kind.summary %}
-                        <p>{{ kind.summary }}</p>
-                    {% endif %}
+                      {% if kind.summary %}
+                          <p>{{ kind.summary }}</p>
+                      {% endif %}
 
-                    {% include 'core/generic_list.html' %}
-                {% endif %}
-            </div>
+                      {% include 'core/generic_list.html' %}
+                  {% endif %}
+              </div>
+            {% endfor %}
         {% endfor %}
 
 

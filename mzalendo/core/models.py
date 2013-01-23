@@ -16,6 +16,8 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 
+from django.db.models.fields import DateField
+
 from markitup.fields import MarkupField
 
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
@@ -36,8 +38,8 @@ date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or '
 
 
 class ModelBase(models.Model):    
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
+    created = models.DateTimeField( auto_now_add=True )
+    updated = models.DateTimeField( auto_now=True )
 
     def css_class(self):
         return self._meta.module_name
@@ -264,6 +266,23 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
         return Organisation.objects.filter(position__in=party_memberships)
     
+    def parties_and_coalitions(self):
+        """Return list of parties and coalitions that this person is currently a member of"""
+        party_memberships = (
+            self
+            .position_set
+            .all()
+            .currently_active()
+            .filter(
+              # select the political party memberships
+              ( Q(title__slug='member') & Q(organisation__kind__slug='party') )
+
+              # select the coalition memberships
+              | Q(title__slug='coalition-member')
+            )            
+        )
+        return Organisation.objects.filter(position__in=party_memberships).distinct()
+    
     def constituencies(self):
         """Return list of constituencies that this person is currently an politician for"""
         return Place.objects.filter(position__in=self.politician_positions())
@@ -414,6 +433,25 @@ class PlaceKind(ModelBase):
     class Meta:
        ordering = ["slug"]      
 
+    def parliamentary_sessions(self):
+        """Return a list of any associated parliamentary sessions"""
+
+        return ParliamentarySession.objects.filter(place__kind=self).distinct()
+
+    def parliamentary_sessions_for_iteration(self):
+        """Return a list of associated parliamentary sessions for iteration
+
+        If there are no parliamentary_sessions associated with this
+        PlaceKind (e.g. as with Country) then rather than returning a
+        empty list, return [None].  This makes iterating over sessions
+        in templates much simpler."""
+
+        sessions = self.parliamentary_sessions()
+        if sessions.count() == 0:
+            return [None]
+        else:
+            return sessions
+
 
 class PlaceQuerySet(models.query.GeoQuerySet):
     def constituencies(self):
@@ -435,6 +473,7 @@ class Place(ModelBase, ScorecardMixin):
     location = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
     original_id  = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to constituencies in original mzalendo.com db')
+    parliamentary_session = models.ForeignKey('ParliamentarySession', null=True)
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
@@ -712,3 +751,49 @@ class Position(ModelBase):
 
     class Meta:
         ordering = ['-sorting_end_date', '-sorting_start_date']  
+
+class ParliamentarySession(ModelBase):
+    start_date = DateField(blank=True, null=True)
+    end_date = DateField(blank=True, null=True)
+    house = models.ForeignKey('Organisation')
+    # It's not clear whether this field is a good idea or not - it
+    # suggests that boundaries won't change within a
+    # ParliamentarySession.  This assumption might well be untrue.
+    mapit_generation = models.PositiveIntegerField(blank=True,
+                                                   null=True,
+                                                   help_text='The MapIt generation with boundaries for this session')
+    name = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, help_text="specify manually")
+
+    def __repr__(self):
+        return "<ParliamentarySession: %s>" % (self.name,)
+
+    def __unicode__(self):
+        return unicode(self.name)
+
+    def covers_date(self, d):
+        return (d >= self.start_date) and (d <= self.end_date)
+
+    def relative_time(self):
+        today = datetime.date.today()
+        if today > self.end_date:
+            return "Past"
+        elif today < self.start_date:
+            return "Future"
+        elif self.covers_date(today):
+            return "Current"
+
+    @staticmethod
+    def format_date(d):
+        return d.strftime("%d %B %Y")
+
+    def readable_date_range(self):
+        future_sentinel = datetime.date(9999, 12, 31)
+        if self.end_date == future_sentinel:
+            return "from %s onwards" % (self.format_date(self.start_date),)
+        else:
+            return "from %s to %s" % (self.format_date(self.start_date),
+                                      self.format_date(self.end_date))
+
+    class Meta:
+        ordering = ['start_date']

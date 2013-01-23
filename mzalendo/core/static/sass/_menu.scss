@@ -88,3 +88,23 @@
       padding: 10px 0;
       &:hover {
         text-decoration: none; } } } }
+
+#footer-menu {
+  // by default show the sub entries. Hide if the screen is big in which
+  // case the menu at the top will be shown instead.
+  li > ul { 
+    @media only screen and (min-width: 640px) {
+      display: none;
+    }
+    
+    margin-left: 1em;
+    
+    li {
+      display: inline;
+      font-size: 90%;
+      padding-right: 1em;
+    }
+  }
+}
+
+

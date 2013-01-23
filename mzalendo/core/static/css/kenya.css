@@ -990,6 +990,20 @@ menu#site-user-tools ul li.active a:hover {
   text-decoration: none;
 }
 
+#footer-menu li > ul {
+  margin-left: 1em;
+}
+@media only screen and (min-width: 640px) {
+  #footer-menu li > ul {
+    display: none;
+  }
+}
+#footer-menu li > ul li {
+  display: inline;
+  font-size: 90%;
+  padding-right: 1em;
+}
+
 #breadcrumb,
 #breadcrumb-replacement {
   display: none;
@@ -2264,6 +2278,7 @@ ul.listing li section .kind {
   position: absolute;
   top: 15px;
   right: 15px;
+  text-align: right;
 }
 ul.listing li section .read-more-wrap {
   top: 35px;
