@@ -12,9 +12,9 @@ from tempfile import NamedTemporaryFile
 from optparse import make_option
 
 from django.core.management import call_command
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import NoArgsCommand, CommandError
 
-from mapit.models import Generation
+from mapit.models import Generation, Area
 
 def map_county_name(original_name):
     # Then title-case the string, being careful to use string.capwords
@@ -39,6 +39,8 @@ class Command(NoArgsCommand):
 
     option_list = NoArgsCommand.option_list + (
         make_option('--commit', action='store_true', dest='commit', help='Actually update the database'),
+        make_option('--counties_shpfile', dest='counties_shpfile', help='The counties .shp file (required)'),
+        make_option('--constituencies_shpfile', dest='constituencies_shpfile', help='The constituencies .shp file (required)'),
     )
 
     def handle_noargs(self, **options):
@@ -47,19 +49,14 @@ class Command(NoArgsCommand):
         if not new:
             raise Exception, "There's no new inactive generation to import into"
 
-        geojson_urls = (('dis', 'COUNTY_NAM', map_county_name, 'http://vote.iebc.or.ke/js/counties.geojson'),
-                        ('con', 'CONSTITUEN', map_constituency_name, 'http://vote.iebc.or.ke/js/constituencies.geojson'))
+        for required in ('constituencies_shpfile', 'counties_shpfile'):
+            if not options[required]:
+                raise CommandError("You must specify --" + required)
 
-        for area_type_code, name_field, map_name_function, url in geojson_urls:
-            f = urllib.urlopen(url)
-            data = json.load(f)
-            f.close()
-            data['features'] = [f for f in data['features'] if f['properties']['COUNTY_NAM']]
-            for f in data['features']:
-                f['properties'][name_field] = map_name_function(f['properties'][name_field])
-            with NamedTemporaryFile(delete=False) as ntf:
-                json.dump(data, ntf)
-            print >> sys.stderr, ntf.name
+        all_data = (('dis', 'COUNTY_NAM', map_county_name, options['counties_shpfile']),
+                    ('con', 'CONSTITUEN', map_constituency_name, options['constituencies_shpfile']))
+
+        for area_type_code, name_field, map_name_function, filename in all_data:
 
             keyword_arguments = {'generation_id': new.id,
                                  'area_type_code': area_type_code,
@@ -74,6 +71,18 @@ class Command(NoArgsCommand):
                                  'use_code_as_id': None}
             keyword_arguments.update(options)
 
-            call_command('mapit_import', ntf.name, **keyword_arguments)
+            call_command('mapit_import', filename, **keyword_arguments)
 
-            os.remove(ntf.name)
+            # After a successful import, fix the names:
+            for area in Area.objects.filter(type__code=area_type_code,
+                                            generation_high__gte=new,
+                                            generation_low__lte=new):
+                mapped_name = map_name_function(area.name)
+                if mapped_name != area.name:
+                    print >> sys.stderr, "Changed %s to %s for %s" % (area.name, mapped_name, area)
+                    area.name = mapped_name
+                    if options['commit']:
+                        print >> sys.stderr, "   ... saved change"
+                        area.save()
+                    else:
+                        print >> sys.stderr, "   ... change not saved, since --commit wasn't specified"
