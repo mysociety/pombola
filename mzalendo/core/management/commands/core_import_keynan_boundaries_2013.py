@@ -24,8 +24,15 @@ def map_county_name(original_name):
              "Homabay": "Homa Bay",
              "Muranga": "Murang'a",
              "Trans Nzoia": "Trans-Nzoia",
-             "Makuen": "Makueni"}
+             "Makuen": "Makueni",
+             "Tharaka": "Tharaka-Nithi"}
     return fixes.get(result, result)
+
+def map_constituency_name(original_name):
+    # There are a few errors that Jessica spotted:
+    fixes = {"DAADAB": "DADAAB",
+             "WEBUTE WEST": "WEBUYE WEST"}
+    return fixes.get(original_name, original_name)
 
 class Command(NoArgsCommand):
     help = 'Import boundaries for the 2013 election'
@@ -40,17 +47,16 @@ class Command(NoArgsCommand):
         if not new:
             raise Exception, "There's no new inactive generation to import into"
 
-        geojson_urls = (('dis', 'COUNTY_NAM', 'http://vote.iebc.or.ke/js/counties.geojson'),
-                        ('con', 'CONSTITUEN', 'http://vote.iebc.or.ke/js/constituencies.geojson'))
+        geojson_urls = (('dis', 'COUNTY_NAM', map_county_name, 'http://vote.iebc.or.ke/js/counties.geojson'),
+                        ('con', 'CONSTITUEN', map_constituency_name, 'http://vote.iebc.or.ke/js/constituencies.geojson'))
 
-        for area_type_code, name_field, url in geojson_urls:
+        for area_type_code, name_field, map_name_function, url in geojson_urls:
             f = urllib.urlopen(url)
             data = json.load(f)
             f.close()
             data['features'] = [f for f in data['features'] if f['properties']['COUNTY_NAM']]
-            if area_type_code == 'dis':
-                for f in data['features']:
-                    f['properties']['COUNTY_NAM'] = map_county_name(f['properties']['COUNTY_NAM'])
+            for f in data['features']:
+                f['properties'][name_field] = map_name_function(f['properties'][name_field])
             with NamedTemporaryFile(delete=False) as ntf:
                 json.dump(data, ntf)
             print >> sys.stderr, ntf.name
