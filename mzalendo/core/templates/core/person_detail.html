@@ -12,6 +12,55 @@
   {% endif %}
   
 
+  {% if object.has_scorecards %}
+    <h2>Scorecards</h2>
+    
+    <p>
+      The past performance of {{ object.name }} can be seen in their
+      <a href="{% url person_scorecard slug=object.slug %}">scorecard</a>.
+    </p>
+  {% endif %}
+
+
+  <h2>Experience</h2>
+
+  <p>
+    We have records of
+    {{ object.position_set.all.political.count }} political,
+    {{ object.position_set.all.education.count }} educational and
+    {{ object.position_set.all.other.count     }} other
+    positions held. See <a href="{% url person_experience slug=object.slug %}">the full list</a>.
+  </p>
+
+
+  {% if settings.ENABLED_FEATURES.hansard %}            
+    {% with hansard_count=object.hansard_entries.count %}
+      {% if hansard_count %}
+        <h2>Parliamentary appearanes</h2>
+
+        <p>
+          {{ object.name }} has spoken {{ hansard_count }}
+          time{{ hansard_count|pluralize }} in Parliament. Read <a href="{% url person_appearances slug=object.slug %}">what they had to say</a>.
+        <p>
+      {% endif %}
+    {% endwith %}
+  {% endif %}
+
+
+  {% with contact_detail_count=object.contacts.all.count %}
+    {% if contact_detail_count %}
+      <h2>Contact Details</h2>
+      
+      <p>
+        There are {{ contact_detail_count }}
+        way{{ contact_detail_count|pluralize }} to
+        <a href="{% url person_contact_details slug=object.slug %}">get in touch</a>
+        with {{ object.name }}.
+      </p> 
+    {% endif %}
+  {% endwith %}
+
+
   <h2>Personal Details</h2>
 
   <dl>
