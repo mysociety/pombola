@@ -36,13 +36,22 @@ def breadcrumbs(url):
           links = links[0:total]
           total -= 1     
         home = ['<li><a href="/" title="Breadcrumb link to the homepage.">Home</a> %s </li>' % separator]
+
+        seen_links = {}
+
         for i, link in enumerate(links):
+            
+            if seen_links.get(link):
+                continue
+            else:
+                seen_links[link] = True
+            
             if not link == '':
                 bread.append(link)
                 if link in url_name_mappings:
                     (sub_link, this_url) = url_name_mappings[link]
                 else:
-                    sub_link = re.sub('-', ' ', link).title()
+                    sub_link = re.sub('[_\-]', ' ', link).title()
                     sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
                     this_url = "/".join(bread)
                 if not i == total:
@@ -52,3 +61,7 @@ def breadcrumbs(url):
                 home.append(tlink)
         bcrumb = "".join(home)
     return mark_safe(bcrumb)
+
+
+
+

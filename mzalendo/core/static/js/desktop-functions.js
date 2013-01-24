@@ -11,36 +11,6 @@ function profileInfoHeightFix() {
 }
 
 
-// Show a tab and hide the others. Load content from remote source if needed.
-function activateSimpleTab( $heading_element ) {
-    
-  // Check that we have something to work with
-  if ( ! $heading_element.size() ) return false;
-
-  var tab_content_id = $heading_element.attr('rel');
-  var $tab_content = $(tab_content_id);
-
-  // If this tab is already open don't open it again
-  if ( $tab_content.hasClass('open') )
-    return true;
-
-  // hide any currently active tabs
-  $('#tab-nav ul li.active').removeClass('active');
-  $('.tab.open').removeClass('open');
-  $('.tab').not('.open').hide();
-  
-  // Show and activate the new tab
-  $heading_element.addClass('active');
-  $tab_content.addClass('open').show();
-
-  // load content using ajax if the div has an data-tab-content-source-url
-  // TODO: use a cleaner way to specify this - probably best to have a global object and tell it that certain tabs have special opening behaviour
-  var content_url = $tab_content.attr('data-tab-content-source-url');
-  if ( content_url ) {
-      $tab_content.load(content_url);
-  }
-}
-
 //generic re-usable hide or show with class states
 //todo: add states to trigger elem if provided
 function hideShow(elem, trig) {
@@ -180,68 +150,7 @@ $(function(){
             }
         );
 
-  /*
-   * simple tabs
-   */
-
-  // build the nav from the relavant links dotted around
-  var $tabnavs = $('h2.tab-nav');
-  $tabnavs.hide();
-  $('.tab-wrapper').before('<div id="tab-nav"><ul></ul></div>');
-  $tabnavs.each(function(){
-    var rel = $(this).attr('rel');
-    var txt = $(this).text();
-    var href = $('a', this).attr('href');
-    var aClass  = $(this).hasClass('tab-static-link')? 'class="tab-static-link"':'';
-    var liClass = $(this).hasClass('tab-active')? 'tab-active':'';
-    var newElem = '<li rel="'+rel+'" class="tab-nav-heading ' + liClass + '"><a href="'+href+'" '+aClass+'>'+txt+'</a></li>';
-    $('#tab-nav ul').append(newElem);
-  }).remove();
-
-  // store the matched element from the hash here:
-  // first look to see if it's already been marked server-side (tab-active)
-  var matched_element = $('li.tab-active').first();
-
-  // If not already active, if there is a hash try to load from that
-  if(! matched_element.length && window.location.hash !== '') {
-    var hash = window.location.hash;
-    matched_element = $('li[rel='+hash+']');
-  }
-
-  // If there was no hash, or it didn't match, use the first one
-  if ( ! matched_element.length ) {
-    matched_element = $('li.tab-nav-heading').first();
-  }
-  
-  // activate the tab
-  activateSimpleTab(matched_element);
   profileInfoHeightFix();
-
-  // for clicks on tabs
-  $("#tab-nav ul li a").not(".tab-static-link").click(function(e){
-    e.preventDefault();
-    window.location.hash = $(this).parent('li').attr('rel');
-    activateSimpleTab($(this).parent('li'));
-    profileInfoHeightFix();
-  });
-
-  // for clicks elsewhere
-  $("a.activate-tab").click(function(e){
-    e.preventDefault();
-    var hash = $(this).attr('href');
-    window.location.hash = hash.replace('#', '');
-    var $tab = $( '#tab-nav li[rel=' + hash + ']' );
-    activateSimpleTab($tab);
-    profileInfoHeightFix();
-  });
-
-  // $(".tab-static-link").click(function(e){
-  //   var hash = $(this).attr('rel');
-  //   window.location.hash = hash;
-  //   e.preventDefault();
-  //   activateSimpleTab($(this));
-  //   $("#tab-nav ul li[rel='"+hash+"']").addClass('active');
-  // });
 
   /*
    * scorecard
@@ -254,15 +163,15 @@ $(function(){
     hideShow($('div.details', $(this)), $(this));
   });
 
-  /*
-   * Comments: hover and show tools
-   */
-  $('.comments li').hover(function() {
-    $(this).addClass('hovered');
-  },
-  function() {
-    $(this).removeClass('hovered');
-  });
+  // /*
+  //  * Comments: hover and show tools
+  //  */
+  // $('.comments li').hover(function() {
+  //   $(this).addClass('hovered');
+  // },
+  // function() {
+  //   $(this).removeClass('hovered');
+  // });
 
 
   /*

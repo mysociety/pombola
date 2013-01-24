@@ -13,50 +13,6 @@
 // --------------------------------------------------------------
 @import "compass";
 
-// 1. VARIABLES
-// --------------------------------------------------------------
-// Green
-// $colour_green: #46A81B;
-$colour_green: #009245;
-
-// Light green
-$colour_light_green: #87c43c;
-
-// Blue
-//$colour3: #1b7999;
-
-// Black ish
-$colour_blackish: #777777;
-
-// Black
-$colour_black: black;
-
-// White
-$colour_white: white;
-
-// Grey
-$colour7: #e6e6e6;
-
-// Darker Grey
-$colour_grey: gray;
-
-// Lighter Grey
-$colour_light_grey: #f6f6f6;
-
-// Light Black
-$colour_dark_grey: #2e2e2e;
-
-// Red
-$colour_red: #d40000;
-
-// Lighterer Grey
-$colour_lighter_grey: #f7f7f7;
-
-// Middling grey
-$colour_middling_grey: #b3b3b3;
-
-// average amber
-$colour_amber: #f9a326;
 
 // Would like to add the size for the media queries as variables too, but that
 // is not currently supported. Should be from Sass 3.2.0 onwards though.
@@ -65,12 +21,12 @@ $colour_amber: #f9a326;
 // --------------------------------------------------------------
 // Green Gradient
 @mixin gradient1 {
-  background: $colour_light_green;
-  @include background(linear-gradient($colour_light_green, $colour_green)); }
+  background: $colour_primary_light;
+  @include background(linear-gradient($colour_primary_light, $colour_primary)); }
 
 @mixin gradient1b {
-  background: $colour_green;
-  @include background(linear-gradient($colour_green, $colour_light_green)); }
+  background: $colour_primary;
+  @include background(linear-gradient($colour_primary, $colour_primary_light)); }
 
 // Light Grey Gradient
 @mixin gradient2 {
@@ -120,9 +76,9 @@ $colour_amber: #f9a326;
 
 @mixin button-text-green {
   @include button-reset-text;
-  background: $colour_light_green;
+  background: $colour_primary_light;
   &:hover {
-    background: $colour_light_green / 0.9; } }
+    background: $colour_primary_light / 0.9; } }
 
 @mixin big-button-reset-text($rad: 5px) {
   @include button-reset-text;
@@ -134,11 +90,11 @@ $colour_amber: #f9a326;
 
 @mixin big-button-text-green {
   @include big-button-reset-text;
-  background: $colour_light_green;
-  @include background(linear-gradient($colour_light_green / 0.9, $colour_light_green));
+  background: $colour_primary_light;
+  @include background(linear-gradient($colour_primary_light / 0.9, $colour_primary_light));
   &:hover {
-    background: $colour_light_green / 0.9;
-    @include background(linear-gradient($colour_light_green, $colour_light_green / 0.9)); } }
+    background: $colour_primary_light / 0.9;
+    @include background(linear-gradient($colour_primary_light, $colour_primary_light / 0.9)); } }
 
 @mixin big-button-text-red {
   @include big-button-reset-text;

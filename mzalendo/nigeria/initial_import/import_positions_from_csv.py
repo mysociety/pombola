@@ -32,13 +32,13 @@ def process(filename):
         person = models.Person.objects.get(slug=row['slug'])        
         
         # create the title
-        title, created = models.PositionTitle.objects.get_or_create(name=row['title'], defaults={'slug':slugify(row['title'])})
+        title, created = models.PositionTitle.objects.get_or_create(slug=slugify(row['title']), defaults=dict(name=row['title']))
 
         if row.get('organisation'):
             kind, created = models.OrganisationKind.objects.get_or_create(name="Political", defaults={'slug':'political'})
             organisation, created = models.Organisation.objects.get_or_create(
-                name     = row.get('organisation'),
-                defaults = { "kind": kind, 'slug': slugify(row['organisation']) },
+                slug = slugify(row['organisation']),
+                defaults = { "kind": kind, 'name': row.get('organisation') },
             )
         else:
             organisation = None

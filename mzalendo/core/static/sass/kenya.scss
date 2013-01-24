@@ -2,6 +2,7 @@
 @import "compass/reset";
 
 // variables and macros
+@import "colours_default";
 @import "core";
 
 // very general styling
@@ -15,8 +16,10 @@
 @import "breadcrumb";
 @import "footer";
 @import "page";
-@import "tabs";
+@import "object_menu";
 @import "search";
+@import "vcard";
+@import "social-and-tools";
 
 // specific pages and parts of pages
 @import "hansard";

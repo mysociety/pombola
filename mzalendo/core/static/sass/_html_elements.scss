@@ -8,7 +8,7 @@ body {
   font-family: 'Arial', sans-serif;
   color: #444;
   font-size: 100%;
-  background: $colour7; }
+  background: $colour_muted; }
 
 p, h1, h2, h3 {
   margin-bottom: 15px;
@@ -22,19 +22,11 @@ p {
   line-height: 20px; }
 
 a {
-  color: $colour_green;
+  color: $colour_primary;
   text-decoration: none;
   &:hover {
     color: #004422;
     text-decoration: underline; } }
-
-.vcard {
-  li.address p {
-    line-height: 15px;
-    padding-top: 4px; }
-  a {
-    text-decoration: none;
-    font-size: 12px; } }
 
 h1 {
   font: {

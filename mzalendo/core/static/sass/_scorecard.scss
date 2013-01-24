@@ -2,10 +2,16 @@ h3.scorecard-overall {
   display: block;
   font-weight: bold;
   color: $colour_black;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background: none;
   span {
+    padding-top: 20px;
+    margin-top: -20px;
+    height: 22px;
     font-weight: normal;
     display: block;
-    height: 44px;
     background: url(../images/m-smiley-sprite.png) right -3px no-repeat;
     &.score-overall-good {
       background-position: right -3px; }
@@ -13,3 +19,66 @@ h3.scorecard-overall {
       background-position: right -53px; }
     &.score-overall-bad {
       background-position: right -103px; } } }
+
+ul.scorecard {
+  @include list-reset-soft;
+  @include inline-block;
+  width: 100%;
+  li {
+    article {
+      padding: 10px;
+      background: $colour_light_grey;
+      color: $colour_black;
+      border-bottom: 2px solid $colour_white;
+      overflow: hidden;
+      header {
+        h4 {
+          @include inline-block;
+          padding-right: 20px;
+          position: relative;
+          .btn-question {
+            position: absolute;
+            top: 3px;
+            right: 0; } }
+        p {
+          margin: -20px 0 0 0;
+          padding-top: 20px;
+          &.score-good {
+            background: url(../images/score-good.png) right 0 no-repeat; }
+          &.score-average {
+            background: url(../images/score-average.png) right 0 no-repeat; }
+          &.score-bad {
+            background: url(../images/score-bad.png) right 0 no-repeat; }
+          &.score-disabled {
+            background: url(../images/score-disabled.png) right 0 no-repeat; } }
+        .details {
+          span.shout {
+            display: block;
+            background: $colour_grey;
+            color: $colour_white;
+            margin: 10px 0;
+            padding: 10px;
+            font-weight: bold;
+            clear: both;
+            @include border-radius(5px);
+            p {
+              font-size: 100%;
+              float: none;
+              padding: 4px;
+              margin: 0 auto; }
+            &.shout-good {
+              background-color: $colour_primary; }
+            &.shout-average {
+              background-color: $colour_amber; }
+            &.shout-bad {
+              background-color: $colour_red; } }
+          .source {
+            display: block;
+            padding-right: 1em;
+            text-align: right;
+            font-style: italic;
+            a {
+              font-style: normal; } } } }
+      div.details {
+        // height:0px;
+      } } } }
