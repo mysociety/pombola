@@ -514,6 +514,65 @@ class Place(ModelBase, ScorecardMixin):
     class Meta:
        ordering = ["slug"]      
 
+    def get_boundary_changes(self):
+        """Return a dictionary representing past and future boundary changes
+
+        A dictionary with the keys 'past' and 'future' either mapping
+        to null (if there is no boundary data in the previous / next
+        parliamentary session for this PlaceKind) or a dictionary with
+        details about the Places that this boundary overlapped with in
+        that session.  For example, it might return:
+
+        {'past': {'session': ParliamentarySession(...),
+                  'intersections': [{'percent': 92.5,
+                                     'place': Place(...)},
+                                    {'percent': 7.5,
+                                     'place': Place(...)}]},
+         'future': None}
+        """
+
+        past_sessions = []
+        future_sessions = []
+        append_to = past_sessions
+        for session in self.kind.parliamentary_sessions():
+            if session == self.parliamentary_session:
+                append_to = future_sessions
+                continue
+            append_to.append(session)
+
+        past_session = past_sessions[-1] if past_sessions else None
+        future_session = future_sessions[0] if future_sessions else None
+
+        result = {}
+
+        for key, session in (('past', past_session),
+                             ('future', future_session)):
+            if not session:
+                result[key] = None
+                continue
+            intersections = []
+            for area in mapit_models.Area.objects.intersect('intersects',
+                                               self.mapit_area,
+                                               [self.mapit_area.type.code],
+                                               mapit_models.Generation.objects.get(pk=session.mapit_generation)):
+                # Now work out the % intersection between the two:
+                self_geos_geometry = self.mapit_area.polygons.collect()
+                if self_geos_geometry.area == 0:
+                    continue
+                other_geos_geometry = area.polygons.collect()
+                intersection = self_geos_geometry.intersection(other_geos_geometry)
+                proportion_shared = intersection.area / self_geos_geometry.area
+                intersections.append((round(100 * proportion_shared),
+                                      Place.objects.get(kind=self.kind,
+                                                        parliamentary_session=session,
+                                                        mapit_area=area)))
+            intersections.sort(key=lambda x: -x[0])
+            result[key] = {'session': session,
+                           'intersections': [{'percent': i[0],
+                                              'place': i[1]} for i in intersections]}
+
+        return result
+
 
 class PositionTitle(ModelBase):
     name = models.CharField(max_length=200, unique=True)
