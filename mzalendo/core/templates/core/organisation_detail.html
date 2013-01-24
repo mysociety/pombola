@@ -1,58 +1,47 @@
-{% extends 'base.html' %}
+{% extends 'core/organisation_base.html' %}
 {% load thumbnail %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
-{% block content %}
+{% block subcontent %}
 
-    <div class="title-space">
-        <h1>{{ object.name }}</h1>
+  {% if object.summary %}
+    <h2>Summary</h2>
 
-        {% comment %}
-            # Not possible in the database yet - but a nice idea.
-            <p>part of <a href="/">Parent Company</a></p>
-        {% endcomment %}
-
-        {% if object.kind.slug != 'unknown' %}
-            <span class="object-kind">{{ object.kind.name }}</span>
-        {% endif %}
+    <div class="markdown">
+      {{ object.summary }}
     </div>
-    
-    <div class="profile-pic">
-        {% thumbnail object.primary_image "200x200" as im %}
-        <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-        {% empty %}
-        <img src="{{STATIC_URL}}images/org-200x200.jpg" />
-        {% endthumbnail %}        
-    </div>
+  {% endif %}
 
-    <div class="social-and-tools">
-        {% include 'core/social_tools.html' %}
-    </div>
+  {% with people_count=object.position_set.all.count %}
+    {% if people_count %}
+      <h2>People</h2>
 
-    {# organisations do not have scorecards (yet) so the summary appears at the top rather than in a tab #}
-    {% if object.summary %}
-        <div class="small-container">
-            {{ object.summary }}
-        </div>
+      <p>
+        There
+        {{ people_count|pluralize:"is,are"}}
+        <a href="{% url organisation_people slug=object.slug %}">
+          {{ people_count }}
+          {{ people_count|pluralize:"person,people"}}
+        </a>
+        related to {{ object.name }}.
+      </p>
     {% endif %}
+  {% endwith %}
 
-    <div class="profile-info">
-       
-        {% include "core/contact_list.html" with contacts=object.contacts.all %}
 
-    </div>
+  {% with contact_detail_count=object.contacts.all.count %}
+    {% if contact_detail_count %}
+      <h2>Contact Details</h2>
+      
+      <p>
+        There are {{ contact_detail_count }}
+        way{{ contact_detail_count|pluralize }} to
+        <a href="{% url organisation_contact_details slug=object.slug %}">get in touch</a>
+        with {{ object.name }}.
+      </p> 
+    {% endif %}
+  {% endwith %}
 
-    <div class="large-container">
-        <div class="tab-wrapper">
-
-            <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
-            <div class="tab" id="related-people" data-tab-content-source-url="{% url organisation_related_person_tab slug=object.slug %}">
-            </div>
-
-            {% include 'disqus_comments.html' %}
-
-        </div>
-    </div>
 
 {% endblock %}

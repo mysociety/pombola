@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+  {% if settings.DISQUS_SHORTNAME %}
+    {% include "disqus_javascript.html" %}
+  {% endif %}
+
+    <div class="title-space">
+
+      <h1>{{ object.title }} {{ object.name }}</h1>
+      
+      {% block object_tagline %}
+      {% endblock %}
+        
+      {% block object_menu %}
+      <div class="object_menu">
+        <nav>
+          <ul>
+            {% block object_menu_links %}
+            {% endblock %}
+          </ul>
+        </nav>
+      </div>
+      {% endblock %}
+
+    </div>
+    
+    {% block profile_pic %}
+      <div class="profile-pic">
+          {% thumbnail object.primary_image "210x210" crop="center" as im %}
+          <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+          {% empty %}
+          <img src="{{STATIC_URL}}images/{{object.css_class}}-210x210.jpg" />
+          {% endthumbnail %}        
+      </div>
+    {% endblock %}
+
+    <div class="profile-info">
+      {% block profile_info %}
+      {% endblock %}
+
+      <div class="social-and-tools">
+          {% include 'core/social_tools.html' %}
+      </div>        
+
+    </div>
+
+    <div class="large-container">
+      {% block subcontent %}
+        You should add your own custom content to this layout in a 'subcontent' block.
+      {% endblock %}
+    </div>
+{% endblock %}

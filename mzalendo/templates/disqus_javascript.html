@@ -1,0 +1,43 @@
+{% if settings.DISQUS_SHORTNAME %}
+<script type="text/javascript">
+
+  var disqus_shortname = '{{ settings.DISQUS_SHORTNAME }}';
+
+  var disqus_identifier, disqus_developer;
+
+  {% if settings.STAGING %}
+    disqus_developer  = 1;
+  {% endif %}
+
+  {% if settings.DISQUS_USE_IDENTIFIERS %}
+    {% if object and object.css_class %}
+      {# If we have an object then we can use that to create a very robust identifier #}
+      disqus_identifier = '{{ object.css_class }}-{{ object.id }}';          
+    {% else %}
+      {# If not object then use the page url pathname (ie without the fragment or query). This is most likely the right thing to do. #}
+      disqus_identifier = window.location.pathname;
+    {% endif %}
+  {% endif %}
+
+  var disqusScriptTagsAdded = {};
+
+  function addDisqusScriptTag (name) {
+    if (!disqusScriptTagsAdded[name]) {
+      var dsq = document.createElement('script');
+      dsq.type  = 'text/javascript';
+      dsq.async = true;
+      dsq.src   = 'http://' + disqus_shortname + '.disqus.com/' + name + '.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      disqusScriptTagsAdded[name] = true;
+    }
+  }
+
+  // Load the correct tag using either of these lines in your code. Don't worry
+  // about repeating them, subsequent calls are ignored. Annoyingly the 'embed'
+  // one produces an exception if it can't find the element it wants :(
+  // 
+  // addDisqusScriptTag('embed');
+  // addDisqusScriptTag('count');
+
+</script>
+{% endif %}

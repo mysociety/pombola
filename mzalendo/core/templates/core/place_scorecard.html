@@ -1,0 +1,7 @@
+{% extends 'core/place_base.html' %}
+
+{% block title %}{{ object.name }} Scorecard{% endblock %}
+
+{% block subcontent %}
+  {% include 'scorecards/scorecard.html' %}
+{% endblock %}

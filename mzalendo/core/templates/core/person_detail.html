@@ -1,160 +1,98 @@
-{% extends 'base.html' %}
-{% load thumbnail %}
+{% extends 'core/person_base.html' %}
 
-{% block title %}{{ object.name }}{% endblock %}
+{% block title %}{{ object.name }} Overview{% endblock %}
 
-{% block content %}
-    <div class="title-space">
-        <h1>{{ object.title }} {{ object.name }}</h1>
+{% block subcontent %}
 
-        {% if object.is_politician %}
-            <p>Politician Profile Page</p>
-        {% endif %}
-        
-        {% if object.is_aspirant %}
-            <p>
-                Aspirant in the upcoming elections:
-                {% for aspiration in object.aspirant_positions %}
-                    {{ aspiration.title }}
-                    {% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </p>
-        {% endif %}
+  {% if object.summary %}
+    <h2>Summary</h2>
+    <div class="markdown">
+      {{ object.summary }}
     </div>
+  {% endif %}
+  
+
+  {% if object.has_scorecards %}
+    <h2>Scorecards</h2>
     
-    <div class="profile-pic">
-        {% thumbnail object.primary_image "210x210" crop="center" as im %}
-        <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-        {% empty %}
-        <img src="{{STATIC_URL}}images/avatar-210x210.jpg" />
-        {% endthumbnail %}        
-    </div>
+    <p>
+      The past performance of {{ object.name }} can be seen in their
+      <a href="{% url person_scorecard slug=object.slug %}">scorecard</a>.
+    </p>
+  {% endif %}
 
-    <div class="social-and-tools">
-        {% include 'core/social_tools.html' %}
-    </div>
 
-    <div class="small-container">
-                
-        {% include 'scorecards/scorecard.html' %}
-        
+  <h2>Experience</h2>
 
-    </div>
+  <p>
+    We have records of
+    {{ object.position_set.all.political.count }} political,
+    {{ object.position_set.all.education.count }} educational and
+    {{ object.position_set.all.other.count     }} other
+    positions held. See <a href="{% url person_experience slug=object.slug %}">the full list</a>.
+  </p>
 
-    <div class="profile-info">
-        <div class="constituency-party">
 
-            {% if object.aspirant_constituencies.count %}
-                <h3>Aspirant for</h3>
-                <ul>
-                    {% for constituency in object.aspirant_constituencies %}
-                        <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
-                    {% endfor %}
+  {% if settings.ENABLED_FEATURES.hansard %}            
+    {% with hansard_count=object.hansard_entries.count %}
+      {% if hansard_count %}
+        <h2>Parliamentary appearanes</h2>
+
+        <p>
+          {{ object.name }} has spoken {{ hansard_count }}
+          time{{ hansard_count|pluralize }} in Parliament. Read <a href="{% url person_appearances slug=object.slug %}">what they had to say</a>.
+        <p>
+      {% endif %}
+    {% endwith %}
+  {% endif %}
+
+
+  {% with contact_detail_count=object.contacts.all.count %}
+    {% if contact_detail_count %}
+      <h2>Contact Details</h2>
+      
+      <p>
+        There
+        {{ contact_detail_count|pluralize:"is,are" }}
+        {{ contact_detail_count }}
+        way{{ contact_detail_count|pluralize }} to
+        <a href="{% url person_contact_details slug=object.slug %}">get in touch</a>
+        with {{ object.name }}.
+      </p> 
+    {% endif %}
+  {% endwith %}
+
+
+  <h2>Personal Details</h2>
+
+  <dl>
+    {% if object.name != object.legal_name %}
+        <dt>Full name</dt>
+        <dd>{{ object.legal_name }}</dd>
+    {% endif %}
+    
+    {% if object.additional_names %}
+        <dt>Also known as</dt>
+        <dd>
+          {% for name in object.additional_names %}
+            {% if not forloop.first %}
+                {% if forloop.last %}or{% else %},{% endif %}
             {% endif %}
-
-            <h3>Constituency</h3>
-            <ul>
-                {% for constituency in object.constituencies %}
-                    <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
-                {% empty %}
-                    <li>Not an MP for any constituencies</li>
-                {% endfor %}
-            </ul>
-
-            <h3>Party &amp; Coalition</h3>
-            <ul>
-                {% for party in object.parties_and_coalitions %}
-                    <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
-                {% empty %}
-                    <li>Not a member of any parties or coalitions</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="profile-names">
-            {% if object.name != object.legal_name %}
-                <h3>Full name</h3>
-                <p>{{ object.legal_name }}</p>
-            {% endif %}
-
-            {% if object.additional_names %}
-                <h3>Also known as</h3>
-                <p>{% for name in object.additional_names %}
-                    {% if not forloop.first %}
-                        {% if forloop.last %}or{% else %},{% endif %}
-                    {% endif %}
-                    <strong>{{ name }}</strong>
-                {% endfor %}</p>
-            {% endif %}
-        
-            {% if object.date_of_birth %}
-                <h3>Born</h3>
-                <p>{{ object.date_of_birth }} {# TODO - add age in years #}</p>
-            {% endif %}
-        
-            {# TODO - add death date too if it exists #}
-        </div>
-
-        {% include "core/contact_list.html" with contacts=object.contacts.all %}
-    </div>
-
-    <div class="large-container">
-        <div class="tab-wrapper">
-
-            {% if object.summary %}
-            <h2 class="tab-nav" rel="#overview">Overview</h2>
-            <div class="tab markdown" id="overview">
-                {{ object.summary }}
-            </div>
-            {% endif %}
-
-            {% include 'disqus_comments.html' %}
-
-            <h2 class="tab-nav" rel="#experience">Experience</h2>
-            <div class="tab" id="experience">
-                <div class="left-col">
-                    <section>
-                        <h3>Current Political Positions</h3>
-                        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
-                    </section>
-
-                    <section>
-                        <h3>Previous Political Positions</h3>
-                        {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
-                    </section>
-                </div>
-                
-                <div class="right-col">
-                    <section>
-                        <h3>Job History</h3>
-                        {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
-                    </section>
-
-                    <section>
-                        <h3>Education</h3>
-                        {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
-                    </section>
-                </div>
-            </div>
-
-
-            {% if settings.ENABLED_FEATURES.hansard %}
-                {% with hansard_count=object.hansard_entries.count %}
-                    <h2 class="tab-nav" rel="#appearances">
-                        <a href='{% url hansard:person_summary slug=object.slug %}' class="appearances-trigger">Appearances ({{ hansard_count }})</a>
-                    </h2>
-                    {% if hansard_count %}
-                        <div class="tab" id="appearances" data-tab-content-source-url="{% url hansard:person_summary slug=object.slug %}">
-                            Loading...
-                        </div>
-                    {% else %}
-                        <div class="tab" id="appearances">
-                            <p>{{ object.name }} has never spoken in parliament.</p>
-                        </div>
-                    {% endif %}
-                {% endwith %}
-            {% endif  %}
-            
-        </div>
-    </div>
+            <strong>{{ name }}</strong>
+          {% endfor %}
+        </dd>
+    {% endif %}
+    
+    {% if object.date_of_birth %}
+        <dt>Born</dt>
+        <dd>
+          {{ object.date_of_birth }}
+          {# TODO - add age in years #}
+        </dd>
+    {% endif %}
+    
+    {# TODO - add death date too if it exists #}
+  </dl>
+  
+  
 {% endblock %}

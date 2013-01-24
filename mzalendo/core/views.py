@@ -48,6 +48,14 @@ def person(request, slug):
         slug     = slug,
     )
 
+def person_sub_page(request, slug, sub_page):
+    return object_detail(
+        request,
+        queryset      = models.Person.objects,
+        template_name = "core/person_%s.html" % sub_page,
+        slug          = slug,
+    )
+
 class PlaceDetailView(DetailView):
     model = models.Place
 
@@ -57,6 +65,13 @@ class PlaceDetailView(DetailView):
         context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
         return context
 
+def place_sub_page(request, slug, sub_page):
+    return object_detail(
+        request,
+        queryset      = models.Place.objects,
+        template_name = "core/place_%s.html" % sub_page,
+        slug          = slug,
+    )
 
 def place_kind(request, slug=None, session_slug=None):
 
@@ -181,6 +196,13 @@ def organisation(request, slug):
         context_instance=RequestContext(request)
     )
 
+def organisation_sub_page(request, slug, sub_page):
+    return object_detail(
+        request,
+        queryset      = models.Organisation.objects,
+        template_name = "core/organisation_%s.html" % sub_page,
+        slug          = slug,
+    )
 
 def organisation_kind(request, slug):
     org_kind = get_object_or_404(

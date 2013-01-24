@@ -1,0 +1,32 @@
+.vcard {
+  
+  @include list-reset-soft;
+  overflow: hidden;
+
+  li {
+
+    .address p {
+      line-height: 15px;
+      padding-top: 4px;
+    }
+
+    .label {
+      text-transform: uppercase;
+      color: $colour_grey;
+      font-size: 11px;
+      float: left;
+      clear: left;
+      width: 40px;
+      margin-left: 10px;
+    }
+
+    p {
+      padding-left: 45px;
+    }
+  }
+      
+  a {
+    text-decoration: none;
+    font-size: 12px;
+  }
+}

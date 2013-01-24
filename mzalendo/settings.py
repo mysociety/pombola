@@ -121,7 +121,7 @@ STATIC_URL = '/static/'
 
 # integer which when updated causes the caches to fetch new content. See note in
 # 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 24
+STATIC_GENERATION_NUMBER = 25
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -433,7 +433,10 @@ SELENIUM_PATH = config.get( 'SELENIUM_PATH', None )
 
 
 # For the disqus comments
-DISQUS_SHORTNAME = config.get( 'DISQUS_SHORTNAME', None )
+DISQUS_SHORTNAME       = config.get( 'DISQUS_SHORTNAME', None )
+# At some point we should deprecate this. For now it defaults to true so that
+# no entry in the config does the right thing.
+DISQUS_USE_IDENTIFIERS = config.get( 'DISQUS_USE_IDENTIFIERS', True )
 
 
 # Polldaddy widget ID - from http://polldaddy.com/

@@ -1,0 +1,7 @@
+{% extends 'core/organisation_base.html' %}
+
+{% block title %}{{ object.name }} Contact Details{% endblock %}
+
+{% block subcontent %}
+  {% include "core/contact_list.html" with contacts=object.contacts.all %}
+{% endblock %}
