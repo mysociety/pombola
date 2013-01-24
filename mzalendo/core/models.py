@@ -486,7 +486,10 @@ class Place(ModelBase, ScorecardMixin):
         return self.position_set.filter(organisation__isnull=False)
 
     def __unicode__(self):
-        return "%s (%s)" % (self.name, self.kind)
+        session_suffix = ""
+        if self.parliamentary_session:
+            session_suffix += " " + str(self.parliamentary_session.short_date_range())
+        return "%s (%s%s)" % (self.name, self.kind, session_suffix)
 
     def is_constituency(self):
         return self.kind.slug == 'constituency'
@@ -782,6 +785,12 @@ class ParliamentarySession(ModelBase):
             return "Future"
         elif self.covers_date(today):
             return "Current"
+
+    def short_date_range(self):
+        if self.end_date and self.end_date.year != 9999:
+            return "%s-%s" % (self.start_date.year, self.end_date.year)
+        else:
+            return "%s-" % (self.start_date.year,)
 
     @staticmethod
     def format_date(d):
