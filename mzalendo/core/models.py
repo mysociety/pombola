@@ -562,7 +562,7 @@ class Place(ModelBase, ScorecardMixin):
                 other_geos_geometry = area.polygons.collect()
                 intersection = self_geos_geometry.intersection(other_geos_geometry)
                 proportion_shared = intersection.area / self_geos_geometry.area
-                intersections.append((round(100 * proportion_shared),
+                intersections.append((100 * proportion_shared,
                                       Place.objects.get(kind=self.kind,
                                                         parliamentary_session=session,
                                                         mapit_area=area)))
