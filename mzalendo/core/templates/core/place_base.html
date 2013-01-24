@@ -46,6 +46,17 @@
 
 
 {% block object_tagline %}
+  <p>
+    {{ object.kind.name }}
+    {% if object.parent_place %}
+      (in
+      <a href="{{ object.parent_place.get_absolute_url }}">
+        {{ object.parent_place.name }}
+      </a>
+      {{ object.parent_place.kind.name }})
+    {% endif %}
+  </p>
+
   {% if object.organisation %}
   <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
   {% endif %}
