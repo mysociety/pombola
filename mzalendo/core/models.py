@@ -762,6 +762,7 @@ class ParliamentarySession(ModelBase):
     # It's not clear whether this field is a good idea or not - it
     # suggests that boundaries won't change within a
     # ParliamentarySession.  This assumption might well be untrue.
+    # FIXME: in any case, this should just be a foreign key to Generation, surely...
     mapit_generation = models.PositiveIntegerField(blank=True,
                                                    null=True,
                                                    help_text='The MapIt generation with boundaries for this session')
