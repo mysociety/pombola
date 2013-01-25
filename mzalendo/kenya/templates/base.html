@@ -1,8 +1,10 @@
 {% extends "default_base.html" %}
 
+{% load compressed %}
+
 
 {% block title_suffix %} :: Mzalendo{% endblock %}
 
 {% block css_headers %}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/kenya.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen, handheld" />
+  {% compressed_css 'country_specific' %}
 {% endblock %}

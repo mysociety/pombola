@@ -481,3 +481,28 @@ MAP_BOUNDING_BOX_NORTH = config.get('MAP_BOUNDING_BOX_NORTH')
 MAP_BOUNDING_BOX_EAST  = config.get('MAP_BOUNDING_BOX_EAST' )
 MAP_BOUNDING_BOX_SOUTH = config.get('MAP_BOUNDING_BOX_SOUTH')
 MAP_BOUNDING_BOX_WEST  = config.get('MAP_BOUNDING_BOX_WEST' )
+
+
+
+
+
+# Set up the CSS and JS pipelines
+PIPELINE=True
+PIPELINE_CSS = {
+    'country_specific': {
+        'source_filenames': (
+          'sass/' + COUNTRY_APP + '.scss',
+        ),
+        'output_filename': 'css/' + COUNTRY_APP + '.css',
+        'extra_context': {
+            'media': 'screen,handheld,projection',
+        },
+    }
+}
+
+
+
+
+
+
+

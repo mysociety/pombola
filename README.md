@@ -22,7 +22,7 @@ There is also the Components mailing list for some of the code used to make the 
 
 ## Installing
 
-Please see the docs/INSTALL.txt and docs/INSTALL-macos.txt files
+Please see the docs/INSTALL.txt file
 
 
 ## Troubleshooting

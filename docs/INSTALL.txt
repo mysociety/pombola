@@ -35,6 +35,9 @@ git clone https://evdb@github.com/mysociety/mzalendo.git
 # There are some dependencies that need to be installed. Please see the
 # 'conf/packages' file for details.
 
+# You will also need the yuglify css and js compressor
+npm install yuglify
+
 # DATABASES
 
 # A Postgis enabled Postgres database is required
