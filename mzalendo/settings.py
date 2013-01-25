@@ -128,6 +128,9 @@ STATIC_GENERATION_NUMBER = 25
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
+# use pipeline storage
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -139,8 +142,8 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'staticfiles.finders.FileSystemFinder',
+    'staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -233,10 +236,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'pipeline',
+    'staticfiles', # use the one installed from pypi rather than django.contrib.staticfiles as we want a newer version to use with django-pipeline
     'django.contrib.humanize',
     'django.contrib.gis',
     'django_bcrypt',
+    'pipeline',
     
     'registration_defaults',
     'registration',
