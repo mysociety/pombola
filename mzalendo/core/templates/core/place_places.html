@@ -35,6 +35,24 @@
           </div>
     {% endif %}
 
+    {% with boundary_changes=object.get_boundary_changes %}
+      {% if boundary_changes.past or boundary_changes.future %}
+        <h3>Boundary Changes</h3>
+
+        {% for relative_time, changes in boundary_changes.items %}
+          {% if changes %}
+            <h4>{{ relative_time|title }} Boundaries</h4>
+            <ul>
+            {% for i in changes.intersections %}
+            <li>{{ i.percent|floatformat }}% is in <a href="{{ i.place.get_absolute_url }}">{{ i.place.name }}</a> {{ changes.session.readable_date_range }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
   </div>
 
 {% endblock %}
