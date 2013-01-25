@@ -12,29 +12,36 @@
 
     {# Do we want to display more than just the parent? #}
 
-      {% if object.parent_place %}
-          {{ object.name }} is contained in
-          <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
-      {% if object.parent_place.kind.slug != 'country' %}
-              {{ object.parent_place.kind.name }}.
-          {% endif %}
-      {% endif %}
-
-      {% if object.child_places.count %}
-          <div class="content_box">
-          <h3>Areas within {{ object.name }}</h3>
-
-          <ul class="listing">
-          {% for child in object.child_places.all %}
-                  <li>
-                      <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
-                      ({{child.parliamentary_session.relative_time}} {{ child.kind.name }})
-                  </li>
-          {% endfor %}
-              </ul>            
-          </div>
+    {% if object.parent_place %}
+        {{ object.name }} is contained in
+        <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
+    {% if object.parent_place.kind.slug != 'country' %}
+            {{ object.parent_place.kind.name }}.
+        {% endif %}
     {% endif %}
+    
+    {% with child_places=object.child_places.all.order_by_parliamentary_session %}
+      {% if object.child_places.count %}
 
+        {% regroup child_places by parliamentary_session as child_places_regrouped %}
+
+        {% for cp in child_places_regrouped %}
+          <div class="content_box">
+            <h3>"{{ cp.grouper.name }}" areas within {{ object.name }}</h3>
+            
+            <ul class="listing">
+              {% for child in cp.list %}
+                <li>
+                  <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+                  ({{child.parliamentary_session.relative_time}} {{ child.kind.name }})
+                </li>
+              {% endfor %}
+            </ul>            
+          </div>
+        {% endfor %}
+
+      {% endif %}
+    {% endwith %}
   </div>
 
 {% endblock %}

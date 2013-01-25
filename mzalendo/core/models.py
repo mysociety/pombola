@@ -459,6 +459,10 @@ class PlaceQuerySet(models.query.GeoQuerySet):
 
     def counties(self):
         return self.filter(kind__slug='county')
+        
+    def order_by_parliamentary_session(self):
+        """This is a helper for use in the place_places.html template"""
+        return self.order_by('-parliamentary_session__start_date', 'name')
 
 class PlaceManager(ManagerBase):
     def get_query_set(self):
