@@ -524,13 +524,19 @@ class Place(ModelBase, ScorecardMixin):
         that session.  For example, it might return:
 
         {'previous': {'session': ParliamentarySession(...),
-                  'connector': 'was in',
-                  'intersections': [{'percent': 92.5,
-                                     'place': Place(...)},
-                                    {'percent': 7.5,
-                                     'place': Place(...)}]},
+                      'connector': 'was in',
+                      'intersections': [{'percent': 92.5,
+                                         'place': Place(...)},
+                                        {'percent': 7.5,
+                                         'place': Place(...)}],
+                      'cutoff': 1,
+                      'others': [Place(...), Place(...)]}
          'next': None}
         """
+
+        # This is the percentage overlap below which we just list the
+        # area name in a note below the main changes:
+        cutoff = 1
 
         previous_sessions = []
         next_sessions = []
@@ -578,7 +584,10 @@ class Place(ModelBase, ScorecardMixin):
             result[key] = {'session': session,
                            'connector': connectors[key][session.relative_time()],
                            'intersections': [{'percent': i[0],
-                                              'place': i[1]} for i in intersections]}
+                                              'place': i[1]} for i in intersections if i[0] >= cutoff],
+                           'cutoff': cutoff,
+                           'others': sorted([i[1] for i in intersections if i[0] < cutoff],
+                                            key=lambda x: x.name)}
 
         return result
 
