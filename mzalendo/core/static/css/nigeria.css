@@ -1306,6 +1306,7 @@ menu#site-user-tools ul li.active a:hover {
 }
 #page .large-container h4 {
   font-weight: normal;
+  margin-bottom: 10px;
 }
 #page .large-container .tab {
   overflow: hidden;
