@@ -12,25 +12,3 @@ Constituencies' if memory serves).
 
 Before merging the latest changes to the nigeria branch, or switching the
 shineyoureye site to master, this needs to be resolved.
-
-
-# Kenya
-
-The disqus comments are now on a different page than they used to be. If
-DISQUS_USE_IDENTIFIERS was true in your settings this is no problem (ie Nigeria)
-otherwise it will break all your comments (ie Kenya). The fix is to download a
-list of all the urls and then create the renaming CSV that disqus can use to
-update their records, mapping the urls to 'objectType-123' style identifiers and
-fixing all the comment issues in one go. See
-https://github.com/mysociety/mzalendo/issues/421 for the details.
-
-The DISQUS_USE_IDENTIFIERS will need to be added to Kenya's config, and set to
-true. I think we should do munge the data in the CSV from (2), change the
-config, deploy and then submit the CSV to disqus. Then a day later check the
-urls they have for any that slipped through the net. That way the comments will
-be broken just until they have a chance to process the CSV. Obviously taking a
-backup first is a good idea too.
-
-There is a management script `core_cleanup_disqus_urls` that can be used to do
-this.
-

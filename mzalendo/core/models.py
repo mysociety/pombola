@@ -459,6 +459,10 @@ class PlaceQuerySet(models.query.GeoQuerySet):
 
     def counties(self):
         return self.filter(kind__slug='county')
+        
+    def order_by_parliamentary_session(self):
+        """This is a helper for use in the place_places.html template"""
+        return self.order_by('-parliamentary_session__start_date', 'name')
 
 class PlaceManager(ManagerBase):
     def get_query_set(self):
@@ -513,6 +517,83 @@ class Place(ModelBase, ScorecardMixin):
 
     class Meta:
        ordering = ["slug"]      
+
+    def get_boundary_changes(self):
+        """Return a dictionary representing previous and next boundary changes
+
+        A dictionary with the keys 'previous' and 'next' either mapping
+        to null (if there is no boundary data in the previous / next
+        parliamentary session for this PlaceKind) or a dictionary with
+        details about the Places that this boundary overlapped with in
+        that session.  For example, it might return:
+
+        {'previous': {'session': ParliamentarySession(...),
+                      'connector': 'was in',
+                      'intersections': [{'percent': 92.5,
+                                         'place': Place(...)},
+                                        {'percent': 7.5,
+                                         'place': Place(...)}],
+                      'cutoff': 1,
+                      'others': [Place(...), Place(...)]}
+         'next': None}
+        """
+
+        # This is the percentage overlap below which we just list the
+        # area name in a note below the main changes:
+        cutoff = 1
+
+        previous_sessions = []
+        next_sessions = []
+        append_to = previous_sessions
+        for session in self.kind.parliamentary_sessions():
+            if session == self.parliamentary_session:
+                append_to = next_sessions
+                continue
+            append_to.append(session)
+
+        previous_session = previous_sessions[-1] if previous_sessions else None
+        next_session = next_sessions[0] if next_sessions else None
+
+        connectors = {'previous': {'Past': 'was previously in',
+                                   'Current': 'is currently in',
+                                   'Future': 'will be in'},
+                      'next': {'Past': 'was subsequently in',
+                               'Current': 'is currently in',
+                               'Future': 'will be in'}}
+
+        result = {}
+
+        for key, session in (('previous', previous_session),
+                             ('next', next_session)):
+            if not session:
+                result[key] = None
+                continue
+            intersections = []
+            for area in mapit_models.Area.objects.intersect('intersects',
+                                               self.mapit_area,
+                                               [self.mapit_area.type.code],
+                                               mapit_models.Generation.objects.get(pk=session.mapit_generation)):
+                # Now work out the % intersection between the two:
+                self_geos_geometry = self.mapit_area.polygons.collect()
+                if self_geos_geometry.area == 0:
+                    continue
+                other_geos_geometry = area.polygons.collect()
+                intersection = self_geos_geometry.intersection(other_geos_geometry)
+                proportion_shared = intersection.area / self_geos_geometry.area
+                intersections.append((100 * proportion_shared,
+                                      Place.objects.get(kind=self.kind,
+                                                        parliamentary_session=session,
+                                                        mapit_area=area)))
+            intersections.sort(key=lambda x: -x[0])
+            result[key] = {'session': session,
+                           'connector': connectors[key][session.relative_time()],
+                           'intersections': [{'percent': i[0],
+                                              'place': i[1]} for i in intersections if i[0] >= cutoff],
+                           'cutoff': cutoff,
+                           'others': sorted([i[1] for i in intersections if i[0] < cutoff],
+                                            key=lambda x: x.name)}
+
+        return result
 
 
 class PositionTitle(ModelBase):
@@ -762,6 +843,7 @@ class ParliamentarySession(ModelBase):
     # It's not clear whether this field is a good idea or not - it
     # suggests that boundaries won't change within a
     # ParliamentarySession.  This assumption might well be untrue.
+    # FIXME: in any case, this should just be a foreign key to Generation, surely...
     mapit_generation = models.PositiveIntegerField(blank=True,
                                                    null=True,
                                                    help_text='The MapIt generation with boundaries for this session')

@@ -4,6 +4,7 @@
 # core_place.  This script creates the ParliamentarySessions for Kenya
 # or Nigeria and links Places with the right one.
 
+import datetime
 from django.core.management.base import NoArgsCommand
 from mapit.models import Area, Generation, Type, NameType, Country, CodeType
 from core.models import ParliamentarySession, Organisation, OrganisationKind, PlaceKind, Place
@@ -70,22 +71,22 @@ class Command(NoArgsCommand):
 
                 na1_kenya = ParliamentarySession(name="National Assembly 2007-2013",
                                                  slug='na2007',
-                                                 start_date='2007-12-28',
-                                                 end_date='2013-01-14',
+                                                 start_date=datetime.date(2007, 12, 28),
+                                                 end_date=datetime.date(2013, 1, 14),
                                                  mapit_generation=2,
                                                  house=ok_na)
                 maybe_save(na1_kenya)
                 na2_kenya = ParliamentarySession(name="National Assembly 2013-",
                                                  slug='na2013',
-                                                 start_date='2013-03-05',
-                                                 end_date='9999-12-31',
+                                                 start_date=datetime.date(2013, 3, 5),
+                                                 end_date=datetime.date(9999, 12, 31),
                                                  mapit_generation=3,
                                                  house=ok_na)
                 maybe_save(na2_kenya)
                 senate = ParliamentarySession(name="Senate 2013-",
                                               slug='s2013',
-                                              start_date='2013-03-05',
-                                              end_date='9999-12-31',
+                                              start_date=datetime.date(2013, 3, 5),
+                                              end_date=datetime.date(9999, 12, 31),
                                               mapit_generation=3,
                                               house=ok_senate)
                 maybe_save(senate)
@@ -94,15 +95,15 @@ class Command(NoArgsCommand):
                 ok_house = Organisation.objects.get(name='House of Representatives', kind__name='Political')
                 senate = ParliamentarySession(name="Senate 2011-",
                                               slug='s2011',
-                                              start_date='2011-04-10',
-                                              end_date='9999-12-31',
+                                              start_date=datetime.date(2011, 4, 10),
+                                              end_date=datetime.date(9999, 12, 31),
                                               mapit_generation=1,
                                               house=ok_senate)
                 maybe_save(senate)
                 house = ParliamentarySession(name="House of Representatives 2011-",
                                              slug='hr2011',
-                                             start_date='2011-04-10',
-                                             end_date='9999-12-31',
+                                             start_date=datetime.date(2011, 04, 10),
+                                             end_date=datetime.date(9999, 12, 31),
                                              mapit_generation=1,
                                              house=ok_house)
                 maybe_save(house)
