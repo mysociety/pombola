@@ -188,7 +188,8 @@ TEMPLATE_LOADERS = (
 )
 
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = (    
+    'django.middleware.gzip.GZipMiddleware', # first in list so it is able to act last on response
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

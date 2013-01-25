@@ -42,4 +42,25 @@ WSGIProcessGroup example.mzalendo.mysociety.org
 WSGIScriptAlias / /data/vhost/example.mzalendo.mysociety.org/mzalendo/wsgi/django.wsgi
 
 
+# Performance things - all css and js should either have a version number in
+# their filename, or a version number as a query parameter. So we can safely
+# have a longer expiry.
+ExpiresActive On
+ExpiresByType text/css               "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+
+# Images don't have the query parameter that updates when they change, so don't
+# cache for as long.
+ExpiresByType image/png              "access plus 1 hour"
+ExpiresByType image/jpeg             "access plus 1 hour"
+
+# Gzip these file suffixes
+AddOutputFilter DEFLATE js css svg ttf
+
+<Location /static/js/>
+    # Prevent proxies changing the javascript
+    Header append Cache-Control "no-transform"
+</Location>
+
+
 
