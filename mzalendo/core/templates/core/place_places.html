@@ -36,7 +36,7 @@
     {% endif %}
 
     {% with boundary_changes=object.get_boundary_changes %}
-      {% if boundary_changes.past or boundary_changes.future %}
+      {% if boundary_changes.previous or boundary_changes.next %}
         <h3>Boundary Changes</h3>
 
         {% for relative_time, changes in boundary_changes.items %}

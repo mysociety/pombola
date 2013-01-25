@@ -515,38 +515,38 @@ class Place(ModelBase, ScorecardMixin):
        ordering = ["slug"]      
 
     def get_boundary_changes(self):
-        """Return a dictionary representing past and future boundary changes
+        """Return a dictionary representing previous and next boundary changes
 
-        A dictionary with the keys 'past' and 'future' either mapping
+        A dictionary with the keys 'previous' and 'next' either mapping
         to null (if there is no boundary data in the previous / next
         parliamentary session for this PlaceKind) or a dictionary with
         details about the Places that this boundary overlapped with in
         that session.  For example, it might return:
 
-        {'past': {'session': ParliamentarySession(...),
+        {'previous': {'session': ParliamentarySession(...),
                   'intersections': [{'percent': 92.5,
                                      'place': Place(...)},
                                     {'percent': 7.5,
                                      'place': Place(...)}]},
-         'future': None}
+         'next': None}
         """
 
-        past_sessions = []
-        future_sessions = []
-        append_to = past_sessions
+        previous_sessions = []
+        next_sessions = []
+        append_to = previous_sessions
         for session in self.kind.parliamentary_sessions():
             if session == self.parliamentary_session:
-                append_to = future_sessions
+                append_to = next_sessions
                 continue
             append_to.append(session)
 
-        past_session = past_sessions[-1] if past_sessions else None
-        future_session = future_sessions[0] if future_sessions else None
+        previous_session = previous_sessions[-1] if previous_sessions else None
+        next_session = next_sessions[0] if next_sessions else None
 
         result = {}
 
-        for key, session in (('past', past_session),
-                             ('future', future_session)):
+        for key, session in (('previous', previous_session),
+                             ('next', next_session)):
             if not session:
                 result[key] = None
                 continue
