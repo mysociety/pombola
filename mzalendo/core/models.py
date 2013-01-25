@@ -524,6 +524,7 @@ class Place(ModelBase, ScorecardMixin):
         that session.  For example, it might return:
 
         {'previous': {'session': ParliamentarySession(...),
+                  'connector': 'was in',
                   'intersections': [{'percent': 92.5,
                                      'place': Place(...)},
                                     {'percent': 7.5,
@@ -542,6 +543,13 @@ class Place(ModelBase, ScorecardMixin):
 
         previous_session = previous_sessions[-1] if previous_sessions else None
         next_session = next_sessions[0] if next_sessions else None
+
+        connectors = {'previous': {'Past': 'was previously in',
+                                   'Current': 'is currently in',
+                                   'Future': 'will be in'},
+                      'next': {'Past': 'was subsequently in',
+                               'Current': 'is currently in',
+                               'Future': 'will be in'}}
 
         result = {}
 
@@ -568,6 +576,7 @@ class Place(ModelBase, ScorecardMixin):
                                                         mapit_area=area)))
             intersections.sort(key=lambda x: -x[0])
             result[key] = {'session': session,
+                           'connector': connectors[key][session.relative_time()],
                            'intersections': [{'percent': i[0],
                                               'place': i[1]} for i in intersections]}
 

@@ -44,7 +44,7 @@
             <h4>{{ relative_time|title }} Boundaries</h4>
             <ul>
             {% for i in changes.intersections %}
-            <li>{{ i.percent|floatformat }}% is in <a href="{{ i.place.get_absolute_url }}">{{ i.place.name }}</a> {{ changes.session.readable_date_range }}</li>
+            <li>{{ i.percent|floatformat }}% of this area {{ changes.connector }} <a href="{{ i.place.get_absolute_url }}">{{ i.place.name }}</a> {{ changes.session.readable_date_range }}</li>
             {% endfor %}
             </ul>
           {% endif %}
