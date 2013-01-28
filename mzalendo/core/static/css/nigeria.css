@@ -2549,16 +2549,15 @@ ul.scorecard li article header .details .source a {
   font-size: 24px;
   text-transform: uppercase;
 }
-#page .home-left h2#home-intro,
-#page .home-right h2#home-intro {
+#page .home-left h2#home-intro, #page .home-right h2#home-intro {
   display: none;
 }
-#page .home-left h3,
-#page .home-right h3 {
+#page .home-left h3, #page .home-right h3 {
   background: none;
   border-top: none;
 }
 #page .home-right .social-and-tools {
+  float: right;
   display: block;
 }
 
