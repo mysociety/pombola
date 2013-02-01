@@ -85,10 +85,13 @@
             <a href="{% url info_page slug='places-overview' %}">Places Overview</a>
         </li>
         <li>
+            <a href="{% url place_kind slug='county' %}">Counties</a>
+        </li>
+        <li>
             <a href="{% url place_kind slug='constituency' %}">Constituencies</a>
         </li>
         <li>
-            <a href="{% url place_kind slug='county' %}">Counties</a>
+            <a href="{% url place_kind slug='ward' %}">Wards</a>
         </li>
     </ul>
     {% endif %}
