@@ -4,6 +4,7 @@ import datetime
 import re
 import itertools
 import random
+from collections import defaultdict
 
 from django.conf import settings
 
@@ -615,6 +616,63 @@ class Place(ModelBase, ScorecardMixin):
 
         return result
 
+    def get_aspirants(self):
+        """Return aspirants for this place and each parent place
+
+        This returns, for this page and each larger parent place
+        recursively, all the current aspirants for positions that
+        reference that place.  The intention is that this provides a
+        data structure that is easily consumable by templates.  For
+        example, for the 2013 Constituency Ainabkoi, this might
+        return:
+
+           [(<Place: Ainabkoi (Constituency 2013-)>, {}),
+            (<Place: Uasin Gishu (County 2013-)>,
+             {u'Aspirant Governor': [<Person: Margaret Jepkoech Kamar >],
+              u'Aspirant Senator': [<Person: Abraham Kiptanui>]}),
+            (<Place: Rift Valley (Province)>, {}),
+            (<Place: Kenya (Country)>,
+             {u'Aspirant President': [<Person: David Gian Maillu>,
+               <Person: Peter Kenneth>,
+               <Person: Uhuru Muigai Kenyatta>,
+               <Person: Martha Wangari Karua>,
+               <Person: Paul Kibugi Muite>]})]
+
+        (Note that this example was based on incomplete test data.)"""
+
+        # This is a classically horrible thing to try to do with SQL -
+        # recurse up this place's hierarchy via the parent column -
+        # however, we know that there will only be at most 5 levels
+        # (Ward -> Constituency -> County -> Province -> Country) for
+        # Kenya, and the results of the query should be cached.
+
+        place_hierarchy = []
+
+        current_place = self
+        while True:
+            place_hierarchy.append(current_place)
+            parent = current_place.parent_place
+            if parent:
+                current_place = parent
+            else:
+                break
+
+        # Preserve the order of places in the hierarchy, but allow
+        # fast lookups with a dict:
+        place_to_index = dict((p, i) for i, p in enumerate(place_hierarchy))
+
+        aspirants_for_places = [(p, defaultdict(list)) for p in place_hierarchy]
+
+        for position in Position.objects.filter(place__in=place_hierarchy, title__slug__startswith='aspirant-').currently_active():
+            aspirants_for_places[place_to_index[position.place]][1][position.title.name].append(position.person)
+
+        # Annoyingly, defaultdicts can't be easily be iterated over in
+        # Django templates, since some_defaultdict.items first tries
+        # to access some_defaultdict['items'] which returns an empty
+        # list.  A workaround is to convert to a dictionary instead.
+        # See http://stackoverflow.com/q/4764110/223092
+
+        return [(p, dict(dd)) for p, dd in aspirants_for_places]
 
 class PositionTitle(ModelBase):
     name = models.CharField(max_length=200, unique=True)
