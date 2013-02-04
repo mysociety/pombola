@@ -1,0 +1,26 @@
+.local-aspirants{
+    @extend .cf;
+    border-top: 3px solid #009748;
+    margin-top: 24px;
+    padding: 10px 0;
+    
+    h3{
+        clear:both;
+    }
+    
+    ul{
+        @include list-reset-nopad;
+        
+        li{ // Needs to be this specific to overide list reset
+            @extend .grid-listing-item;
+            @include box-shadow(none);
+            margin: 13px;
+            
+            &:first-child{ margin-left:1px; }
+            &:last-child{ margin-right:1px; }
+            &:nth-child(4n+5){ margin-left:1px; clear:left; }
+            &:nth-child(4n+4){ margin-right:1px; }
+        }
+    }
+     
+}
