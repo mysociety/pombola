@@ -55,6 +55,21 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+.cf, .local-aspirants {
+  zoom: 1;
+}
+
+.cf:before, .local-aspirants:before,
+.cf:after,
+.local-aspirants:after {
+  content: "";
+  display: table;
+}
+
+.cf:after, .local-aspirants:after {
+  clear: both;
+}
+
 #staging_header {
   background-color: #faa;
   color: #000;

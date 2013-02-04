@@ -140,6 +140,21 @@
     a {
       float: left;
       display: block; } } }
+      
+@mixin list-reset-nopad {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+    li {
+      list-style-type: none;
+      margin: 0;
+      border: 0; } }
+
+// Clearfix
+.cf { zoom: 1; }
+.cf:before,
+.cf:after { content: ""; display: table; }
+.cf:after { clear: both; }
 
 // .ellipsis {
 //   text-overflow: ellipsis;
