@@ -2611,6 +2611,7 @@ ul.scorecard li article header .details .source a {
   border-top: none;
 }
 #page .home-right .social-and-tools {
+  float: right;
   display: block;
 }
 

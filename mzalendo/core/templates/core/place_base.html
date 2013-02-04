@@ -29,7 +29,9 @@
   
   {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}
   {% if settings.DISQUS_SHORTNAME %}
-    <li><a href="{% url place_comments slug=object.slug %}#disqus_thread" data-disqus-identifier="{{ object.css_class }}-{{ object.id }}">Comments</a></li>
+    {% comment %}
+    <li><a href="{% url place slug=object.slug %}#disqus_thread" data-disqus-identifier="{{ object.css_class }}-{{ object.id }}">Comments</a></li>
+    {% endcomment %}
     <script type="text/javascript" charset="utf-8">
       addDisqusScriptTag('count');
     </script>

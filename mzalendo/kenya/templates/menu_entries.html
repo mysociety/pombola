@@ -85,19 +85,22 @@
             <a href="{% url info_page slug='places-overview' %}">Places Overview</a>
         </li>
         <li>
+            <a href="{% url place_kind slug='county' %}">Counties</a>
+        </li>
+        <li>
             <a href="{% url place_kind slug='constituency' %}">Constituencies</a>
         </li>
         <li>
-            <a href="{% url place_kind slug='county' %}">Counties</a>
+            <a href="{% url place_kind slug='ward' %}">Wards</a>
         </li>
     </ul>
     {% endif %}
 </li>
-<li><a href="{% url info_page slug='2012-overview' %}">Election</a>
+<li><a href="{% url info_page slug='2013-overview' %}">Election</a>
     {% if include_sub_menu_entries %}
     <ul id="2012">
         <li>
-            <a href="{% url info_page slug='2012-overview' %}">Election Overview</a>
+            <a href="{% url info_page slug='2013-overview' %}">Election Overview</a>
         </li>
 
         <li><a href="{% url position slug='aspirant-president'            %}?view=grid">Presidential Aspirants</a></li>
