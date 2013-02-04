@@ -3408,6 +3408,28 @@ h2 a.appearances-trigger.active {
     margin: 0;
   }
 }
+.election-area-page header hgroup {
+  padding: 50px 0;
+}
+.election-area-page header hgroup h1 {
+  clear: left;
+  font-size: 48px;
+}
+.election-area-page header hgroup h2 {
+  clear: left;
+  font-weight: normal;
+  line-height: 1.4;
+  font-size: 21px;
+  color: #4d4d4d;
+}
+.election-area-page header .map-box {
+  background: url("../images/exmple-map-placeholder.png") repeat scroll top left;
+  width: 300px;
+  height: 200px;
+  margin-left: 100px;
+  float: right;
+}
+
 ul.social-buttons {
   list-style-type: none;
   padding: 0;

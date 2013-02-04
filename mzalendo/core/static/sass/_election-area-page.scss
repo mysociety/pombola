@@ -1,0 +1,32 @@
+.election-area-page{
+    header{
+        hgroup{
+            
+            padding: 50px 0;
+            
+            h1{
+                clear:left;
+                font-size: 48px;
+            }
+            h2{
+                clear:left;
+                font-weight: normal;
+                line-height: 1.4;
+                font-size: 21px;
+                color: #4d4d4d;
+            }
+        }
+    
+        .map-box{
+            background: url('../images/exmple-map-placeholder.png') repeat scroll top left;
+            width: 300px;
+            height: 200px;
+            margin-left:100px;
+            float:right;
+        }
+    }
+    
+    
+    
+    
+}
