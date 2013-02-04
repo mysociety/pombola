@@ -1,0 +1,29 @@
+{% extends 'core/object_base.html' %}
+{% load thumbnail %}
+{% load humanize %}
+
+{% block content %}
+
+  <div class="page-wrapper wrapper election-area-page">
+
+  <header>
+
+    <div class="map-box example"></div>
+
+    <hgroup>
+      <h1 class="page-title">{{ object.name }}</h1>
+      <h2>is a {{ object.kind.name }} {{ object.parliamentary_session.readable_date_range }}
+      {% if object.parent_place %}
+          and is contained within the {{ object.parent_place.kind.name }} <a href="{% url place_election slug=object.parent_place.slug %}">{{ object.parent_place.name }}.</a>
+      {% else %}.{% endif %}
+    </hgroup>
+
+  </header>
+
+  <!-- header with maps chould go here -->
+
+  {% include "core/place_candidate_lists.html" %}
+
+  </div>
+
+{% endblock %}

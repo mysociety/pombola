@@ -1,0 +1,83 @@
+{% load thumbnail %}
+
+<div class="content_box">
+
+    {% with all_child_places=object.child_places_by_kind %}
+
+      {% if all_child_places %}
+
+        <div class="local-aspirants">
+
+        {% for place_kind, child_places in all_child_places.items %}
+
+           There are {{ child_places|length }} {{ place_kind.plural_name|lower }} in
+           {{ object.name }}.  Please select your {{ place_kind.name|lower }} to view the aspirants:
+
+           <ul>
+           {% for child_place in child_places %}
+             <li>
+               <a href="{% url place_election slug=child_place.slug %}">
+                   <img src="/static/images/example-county-map.png" width="210" height="210"/>
+                   <span class="name">{{ child_place.name }}</span>
+               </a>
+             </li>
+           {% endfor %}
+           </ul>
+
+        {% endfor %}
+
+        </div>
+
+      {% else %}{% endif %}
+
+    {% endwith %}
+
+{% with all_places_aspirants=object.get_aspirants %}
+
+  {% for place, position_titles in all_places_aspirants %}
+
+    {% for position_title, people in position_titles.items %}
+
+       <div class="local-aspirants">
+           <h3>{{ position_title }}s for {{ place.name }}</h3>
+           <ul>
+
+           {% for person in people %}
+
+                <li>
+                  <a href="{{ person.get_absolute_url }}">
+
+                      {% thumbnail person.primary_image "210x210" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                      {% empty %}
+                      <img src="{{STATIC_URL}}images/{{person.css_class}}-210x210.jpg" />
+                      {% endthumbnail %}
+                      <span class="name">{{ person.name }}</span>
+                  </a>
+                      <p>Party:
+                           {% for party in person.parties_ever %}
+                             {% if forloop.first %}
+                             {% else %}
+                                {% if forloop.last %} and {% else %}, {% endif %}
+                             {% endif %}{{ party.name }}{% empty %}Not a member of any parties.{% endfor %}
+                      </p>
+                      <p>Coalition:
+                      </p>
+                </li>
+
+           {% endfor %}
+
+           </ul>
+       </div>
+
+    {% empty %}
+
+       <!-- We have no record (yet) of people standing for positions associated with {{ place.name }} -->
+
+    {% endfor %}
+
+  {% endfor %}
+
+{% endwith %}
+
+</div>
