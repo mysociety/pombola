@@ -12,6 +12,8 @@ from django.core.urlresolvers import reverse
 
 from django.db.models import Q
 
+from django.utils.dateformat import DateFormat
+
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
@@ -897,7 +899,8 @@ class ParliamentarySession(ModelBase):
 
     @staticmethod
     def format_date(d):
-        return d.strftime("%d %B %Y")
+        df = DateFormat(d)
+        return df.format('jS F Y')
 
     def readable_date_range(self):
         future_sentinel = datetime.date(9999, 12, 31)
