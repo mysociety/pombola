@@ -868,6 +868,9 @@ class ParliamentarySession(ModelBase):
         elif self.covers_date(today):
             return "Current"
 
+    def overlaps(self, other):
+        return self.start_date <= other.end_date and other.start_date <= self.end_date
+
     def short_date_range(self):
         if self.end_date and self.end_date.year != 9999:
             return "%s-%s" % (self.start_date.year, self.end_date.year)
