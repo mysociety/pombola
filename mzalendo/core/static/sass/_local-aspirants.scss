@@ -15,8 +15,11 @@
             @extend .grid-listing-item;
             @include box-shadow(none);
             padding: 13px;
-            height:300px;
+            height:340px;
             
+        }
+        p{
+            margin:0;
         }
     }
      
