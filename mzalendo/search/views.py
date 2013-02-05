@@ -36,7 +36,7 @@ from haystack.query import SearchQuerySet
 
 
 def autocomplete(request):
-    """Return autocomple JSON results"""
+    """Return autocomplete JSON results"""
     
     term = request.GET.get('term','').strip()
     response_data = []
@@ -60,9 +60,16 @@ def autocomplete(request):
 
         # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
+
+            if hasattr(result.object, 'name_autocomplete'):
+                label = result.object.name_autocomplete
+            else:
+                label = result.object.name
+
             response_data.append({
             	'url':   result.object.get_absolute_url(),
-            	'label': result.object.name,
+            	'label': label,
+            	'type':  result.object.css_class(),
             })
     
     # send back the results as JSON

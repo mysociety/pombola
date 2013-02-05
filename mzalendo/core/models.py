@@ -489,6 +489,10 @@ class Place(ModelBase, ScorecardMixin):
     def position_with_organisation_set(self):
         return self.position_set.filter(organisation__isnull=False)
 
+    @property
+    def name_autocomplete(self):
+        return "%s (%s)" % (self.name, self.kind.name)
+
     def __unicode__(self):
         session_suffix = ""
         if self.parliamentary_session:
