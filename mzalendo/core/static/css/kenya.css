@@ -2280,6 +2280,7 @@ div.search-pagination {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  margin: 0 -13px;
 }
 .local-aspirants ul li {
   list-style-type: none;
@@ -2290,20 +2291,8 @@ div.search-pagination {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  margin: 13px;
-}
-.local-aspirants ul li:first-child {
-  margin-left: 1px;
-}
-.local-aspirants ul li:last-child {
-  margin-right: 1px;
-}
-.local-aspirants ul li:nth-child(4n+5) {
-  margin-left: 1px;
-  clear: left;
-}
-.local-aspirants ul li:nth-child(4n+4) {
-  margin-right: 1px;
+  padding: 13px;
+  height: 300px;
 }
 
 h3.scorecard-overall {

@@ -10,16 +10,13 @@
     
     ul{
         @include list-reset-nopad;
-        
+        margin: 0 -13px;
         li{ // Needs to be this specific to overide list reset
             @extend .grid-listing-item;
             @include box-shadow(none);
-            margin: 13px;
+            padding: 13px;
+            height:300px;
             
-            &:first-child{ margin-left:1px; }
-            &:last-child{ margin-right:1px; }
-            &:nth-child(4n+5){ margin-left:1px; clear:left; }
-            &:nth-child(4n+4){ margin-right:1px; }
         }
     }
      
