@@ -48,14 +48,19 @@
                       {% endthumbnail %}
                       <span class="name">{{ person.name }}</span>
                   </a>
-                      <p>Party:
+                      <p><em>Parties:</em>
                            {% for party in person.parties_ever %}
                              {% if forloop.first %}
                              {% else %}
                                 {% if forloop.last %} and {% else %}, {% endif %}
-                             {% endif %}{{ party.name }}{% empty %}Not a member of any parties.{% endfor %}
+                             {% endif %}<strong>{{ party.name }}</strong>{% empty %}Not a member of any parties.{% endfor %}
                       </p>
-                      <p>Coalition:
+                      <p><em>Coalitions:</em>
+                           {% for coalition in person.coalitions %}
+                             {% if forloop.first %}
+                             {% else %}
+                                {% if forloop.last %} and {% else %}, {% endif %}
+                             {% endif %}<strong>{{ coalition.name }}</strong>{% empty %}Not a member of any coalitions.{% endfor %}
                       </p>
                 </li>
 

@@ -268,7 +268,12 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         """Return list of parties that this person is currently a member of"""
         party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
         return Organisation.objects.filter(position__in=party_memberships)
-    
+
+    def coalitions(self):
+        """Return list of coalitions that this person is currently a member of"""
+        coalition_memberships = self.position_set.all().currently_active().filter(title__slug='coalition-member')
+        return Organisation.objects.filter(position__in=coalition_memberships)
+
     def parties_and_coalitions(self):
         """Return list of parties and coalitions that this person is currently a member of"""
         party_memberships = (
