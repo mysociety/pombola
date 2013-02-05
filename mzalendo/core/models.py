@@ -511,6 +511,24 @@ class Place(ModelBase, ScorecardMixin):
         # because that ruins the distinct.
         return Person.objects.filter(position__place=self).distinct()#.order_by('-position__sorting_end_date_high')
 
+    def child_places_by_kind(self):
+        """Return all concurrent child places, grouped by their PlaceKind
+
+        By 'concurrent child places', we mean either those where their
+        parliamentary sessions overlap, or where either this place or
+        the child place isn't associated with a parliamentary session."""
+
+        results = defaultdict(list)
+        for p in self.child_places.all():
+            if self.parliamentary_session and p.parliamentary_session:
+                if self.parliamentary_session.overlaps(p.parliamentary_session):
+                    results[p.kind].append(p)
+            else:
+                results[p.kind].append(p)
+        for v in results.values():
+            v.sort(key=lambda e: e.name)
+        return dict(results)
+
     @models.permalink
     def get_absolute_url(self):
         return ('place', [self.slug])
