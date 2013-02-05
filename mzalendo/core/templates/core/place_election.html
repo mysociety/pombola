@@ -8,7 +8,16 @@
 
   <header>
 
-    <div class="map-box example"></div>
+    {% if object.mapit_area %}
+      <div class="map-box example">
+        <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+
+        <div id="map_canvas"></div>
+        <script type="text/javascript" charset="utf-8">
+          add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url mapit_index %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
+        </script>
+      </div>
+    {% endif %}
 
     <hgroup>
       <h1 class="page-title">{{ object.name }}</h1>
