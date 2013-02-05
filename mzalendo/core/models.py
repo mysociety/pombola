@@ -490,8 +490,8 @@ class Place(ModelBase, ScorecardMixin):
         return self.position_set.filter(organisation__isnull=False)
 
     @property
-    def name_autocomplete(self):
-        return "%s (%s)" % (self.name, self.kind.name)
+    def name_autocomplete_html(self):
+        return "%s <i>(%s)</i>" % (self.name, self.kind.name)
 
     def __unicode__(self):
         session_suffix = ""
