@@ -13,22 +13,16 @@
            There are {{ child_places|length }} {{ place_kind.plural_name|lower }} in
            {{ object.name }}.  Please select your {{ place_kind.name|lower }} to view the aspirants:
 
-           <ul>
-           {% for child_place in child_places %}
-             <li>
-               <a href="{% url place_election slug=child_place.slug %}">
-                   <img src="/static/images/example-county-map.png" width="210" height="210"/>
-                   <span class="name">{{ child_place.name }}</span>
-               </a>
-             </li>
-           {% endfor %}
-           </ul>
+           <p class="election-child-places">
+           {% for child_place in child_places %}{% if forloop.first %}
+             {% else %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}<a href="{% url place_election slug=child_place.slug %}">{{ child_place.name }}</a>{% endfor %}.
+           </p>
 
         {% endfor %}
 
         </div>
 
-      {% else %}{% endif %}
+      {% endif %}
 
     {% endwith %}
 

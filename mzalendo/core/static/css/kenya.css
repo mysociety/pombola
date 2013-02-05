@@ -2297,6 +2297,10 @@ div.search-pagination {
 .local-aspirants ul p {
   margin: 0;
 }
+.local-aspirants p.election-child-places {
+  font-size: larger;
+  margin-top: 15px;
+}
 
 h3.scorecard-overall {
   display: block;
