@@ -154,7 +154,7 @@ CACHES = {
     'default': {
         'BACKEND':    'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION':   '127.0.0.1:11211',
-        'KEY_PREFIX': 'mzalendo',
+        'KEY_PREFIX': config.get('MZALENDO_DB_NAME'),
     },
 
     # we also have a dummy cache that is used for all the page requests - we want
@@ -171,7 +171,7 @@ if DEBUG:
     CACHE_MIDDLEWARE_SECONDS = 0
 else:
     CACHE_MIDDLEWARE_SECONDS = 60 * 20 # twenty minutes
-CACHE_MIDDLEWARE_KEY_PREFIX = ''
+CACHE_MIDDLEWARE_KEY_PREFIX = config.get('MZALENDO_DB_NAME')
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 # Always use the TemporaryFileUploadHandler as it allows us to access the
