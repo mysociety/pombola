@@ -121,7 +121,7 @@ STATIC_URL = '/static/'
 
 # integer which when updated causes the caches to fetch new content. See note in
 # 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 25
+STATIC_GENERATION_NUMBER = 28
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -154,7 +154,7 @@ CACHES = {
     'default': {
         'BACKEND':    'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION':   '127.0.0.1:11211',
-        'KEY_PREFIX': 'mzalendo',
+        'KEY_PREFIX': config.get('MZALENDO_DB_NAME'),
     },
 
     # we also have a dummy cache that is used for all the page requests - we want
@@ -167,8 +167,11 @@ CACHES = {
 }
 
 CACHE_MIDDLEWARE_ALIAS='dummy'
-CACHE_MIDDLEWARE_SECONDS = 60 * 20 # twenty minutes
-CACHE_MIDDLEWARE_KEY_PREFIX = ''
+if DEBUG:
+    CACHE_MIDDLEWARE_SECONDS = 0
+else:
+    CACHE_MIDDLEWARE_SECONDS = 60 * 20 # twenty minutes
+CACHE_MIDDLEWARE_KEY_PREFIX = config.get('MZALENDO_DB_NAME')
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 # Always use the TemporaryFileUploadHandler as it allows us to access the

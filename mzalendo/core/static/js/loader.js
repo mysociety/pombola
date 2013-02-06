@@ -33,6 +33,7 @@
             nope : [
                 static_url('js/libs/jquery-1.7.1.min.js'),
                 static_url('js/libs/jquery-ui-1.8.17.custom.min.js'),
+                static_url('js/libs/jquery.ui.autocomplete.html.2010-10-25.js'),
                 static_url('js/libs/jquery.form-v2.94.js'), // TODO - only load when needed for feedback form                    
                 static_url('js/desktop-functions.js'),                
             ],

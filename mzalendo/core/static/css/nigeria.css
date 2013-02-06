@@ -55,6 +55,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+.cf {
+  zoom: 1;
+}
+
+.cf:before,
+.cf:after {
+  content: "";
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
 #staging_header {
   background-color: #faa;
   color: #000;
@@ -612,7 +626,7 @@ menu#mobile-top-tools ul li a img {
   -o-border-radius: 5px 0 0 5px;
   border-radius: 5px 0 0 5px;
   float: left;
-  width: 117px;
+  width: 10em;
   border: 1px solid black;
   font-size: 14px;
 }
@@ -2549,10 +2563,12 @@ ul.scorecard li article header .details .source a {
   font-size: 24px;
   text-transform: uppercase;
 }
-#page .home-left h2#home-intro, #page .home-right h2#home-intro {
+#page .home-left h2#home-intro,
+#page .home-right h2#home-intro {
   display: none;
 }
-#page .home-left h3, #page .home-right h3 {
+#page .home-left h3,
+#page .home-right h3 {
   background: none;
   border-top: none;
 }

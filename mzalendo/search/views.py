@@ -11,6 +11,8 @@ from core import models
 
 from haystack.query import SearchQuerySet
 
+from sorl.thumbnail import get_thumbnail
+
 # def location_search(request):
 #     
 #     loc = request.GET.get('loc', '')
@@ -36,7 +38,7 @@ from haystack.query import SearchQuerySet
 
 
 def autocomplete(request):
-    """Return autocomple JSON results"""
+    """Return autocomplete JSON results"""
     
     term = request.GET.get('term','').strip()
     response_data = []
@@ -60,9 +62,29 @@ def autocomplete(request):
 
         # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
+
+            object = result.object
+            css_class = object.css_class()
+
+            # use the specific field if it has one
+            if hasattr(object, 'name_autocomplete_html'):
+                label = object.name_autocomplete_html
+            else:
+                label = object.name
+
+            image_url = None
+            if hasattr(object, 'primary_image'):
+                image = object.primary_image()
+                if image:
+                    image_url = get_thumbnail(image, '16x16', crop="center").url
+
+            if not image_url:
+                image_url = "/static/images/" + css_class + "-16x16.jpg"
+
             response_data.append({
-            	'url':   result.object.get_absolute_url(),
-            	'label': result.object.name,
+            	'url':   object.get_absolute_url(),
+            	'label': '<img height="16" width="16" src="%s" /> %s' % (image_url, label),
+            	'type':  css_class,
             })
     
     # send back the results as JSON

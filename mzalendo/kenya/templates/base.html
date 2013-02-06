@@ -6,3 +6,9 @@
 {% block css_headers %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/kenya.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen, handheld" />
 {% endblock %}
+
+{% block site_wide_message %}
+  <div class="notice">
+    Where will you vote? <a href="/find-polling-station">Find your polling station</a>!
+  </div>
+{% endblock %}

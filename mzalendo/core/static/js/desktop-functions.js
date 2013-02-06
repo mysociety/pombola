@@ -36,6 +36,7 @@ $(function(){
     .autocomplete({
         source: "/search/autocomplete/",
         minLength: 2,
+        html: true,
         select: function(event, ui) {
             if (ui.item) return window.location = ui.item.url;
         }

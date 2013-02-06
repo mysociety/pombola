@@ -55,6 +55,21 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+.cf, .local-aspirants {
+  zoom: 1;
+}
+
+.cf:before, .local-aspirants:before,
+.cf:after,
+.local-aspirants:after {
+  content: "";
+  display: table;
+}
+
+.cf:after, .local-aspirants:after {
+  clear: both;
+}
+
 #staging_header {
   background-color: #faa;
   color: #000;
@@ -86,7 +101,7 @@ ul.ui-autocomplete li {
   float: right;
 }
 
-.grid-listing-item {
+.grid-listing-item, .local-aspirants ul li {
   float: left;
   width: 210px;
   margin: 10px;
@@ -96,7 +111,7 @@ ul.ui-autocomplete li {
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
   box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 12px;
 }
-.grid-listing-item span.name {
+.grid-listing-item span.name, .local-aspirants ul li span.name {
   font-size: 120%;
   display: block;
   height: 2.5em;
@@ -612,7 +627,7 @@ menu#mobile-top-tools ul li a img {
   -o-border-radius: 5px 0 0 5px;
   border-radius: 5px 0 0 5px;
   float: left;
-  width: 117px;
+  width: 10em;
   border: 1px solid black;
   font-size: 14px;
 }
@@ -2254,6 +2269,40 @@ div.search-pagination {
   background: linear-gradient(#333132, #4c4c4e);
 }
 
+.local-aspirants {
+  border-top: 3px solid #009748;
+  margin-top: 24px;
+  padding: 10px 0;
+}
+.local-aspirants h3 {
+  clear: both;
+}
+.local-aspirants ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin: 0 -13px;
+}
+.local-aspirants ul li {
+  list-style-type: none;
+  margin: 0;
+  border: 0;
+}
+.local-aspirants ul li {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  padding: 13px;
+  height: 340px;
+}
+.local-aspirants ul p {
+  margin: 0;
+}
+.local-aspirants p.election-child-places {
+  font-size: larger;
+  margin-top: 15px;
+}
+
 h3.scorecard-overall {
   display: block;
   font-weight: bold;
@@ -3357,6 +3406,32 @@ h2 a.appearances-trigger.active {
     margin: 0;
   }
 }
+.election-area-page header hgroup {
+  padding: 50px 0;
+}
+.election-area-page header hgroup h1 {
+  clear: left;
+  font-size: 48px;
+}
+.election-area-page header hgroup h2 {
+  clear: left;
+  font-weight: normal;
+  line-height: 1.4;
+  font-size: 21px;
+  color: #4d4d4d;
+}
+.election-area-page header .map-box {
+  width: 300px;
+  height: 200px;
+  margin-left: 100px;
+  float: right;
+}
+
+#page .election-area-page #map_canvas {
+  width: 100%;
+  height: 100%;
+}
+
 ul.social-buttons {
   list-style-type: none;
   padding: 0;

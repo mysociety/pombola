@@ -4,6 +4,7 @@ import datetime
 import re
 import itertools
 import random
+from collections import defaultdict
 
 from django.conf import settings
 
@@ -11,6 +12,8 @@ from django.core import exceptions
 from django.core.urlresolvers import reverse
 
 from django.db.models import Q
+
+from django.utils.dateformat import DateFormat
 
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
@@ -265,7 +268,12 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         """Return list of parties that this person is currently a member of"""
         party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
         return Organisation.objects.filter(position__in=party_memberships)
-    
+
+    def coalitions(self):
+        """Return list of coalitions that this person is currently a member of"""
+        coalition_memberships = self.position_set.all().currently_active().filter(title__slug='coalition-member')
+        return Organisation.objects.filter(position__in=coalition_memberships)
+
     def parties_and_coalitions(self):
         """Return list of parties and coalitions that this person is currently a member of"""
         party_memberships = (
@@ -489,6 +497,10 @@ class Place(ModelBase, ScorecardMixin):
     def position_with_organisation_set(self):
         return self.position_set.filter(organisation__isnull=False)
 
+    @property
+    def name_autocomplete_html(self):
+        return "%s <i>(%s)</i>" % (self.name, self.kind.name)
+
     def __unicode__(self):
         session_suffix = ""
         if self.parliamentary_session:
@@ -510,6 +522,24 @@ class Place(ModelBase, ScorecardMixin):
         # Can't order by the sorting_end_date_high of position
         # because that ruins the distinct.
         return Person.objects.filter(position__place=self).distinct()#.order_by('-position__sorting_end_date_high')
+
+    def child_places_by_kind(self):
+        """Return all concurrent child places, grouped by their PlaceKind
+
+        By 'concurrent child places', we mean either those where their
+        parliamentary sessions overlap, or where either this place or
+        the child place isn't associated with a parliamentary session."""
+
+        results = defaultdict(list)
+        for p in self.child_places.all():
+            if self.parliamentary_session and p.parliamentary_session:
+                if self.parliamentary_session.overlaps(p.parliamentary_session):
+                    results[p.kind].append(p)
+            else:
+                results[p.kind].append(p)
+        for v in results.values():
+            v.sort(key=lambda e: e.name)
+        return dict(results)
 
     @models.permalink
     def get_absolute_url(self):
@@ -595,6 +625,63 @@ class Place(ModelBase, ScorecardMixin):
 
         return result
 
+    def get_aspirants(self):
+        """Return aspirants for this place and each parent place
+
+        This returns, for this page and each larger parent place
+        recursively, all the current aspirants for positions that
+        reference that place.  The intention is that this provides a
+        data structure that is easily consumable by templates.  For
+        example, for the 2013 Constituency Ainabkoi, this might
+        return:
+
+           [(<Place: Ainabkoi (Constituency 2013-)>, {}),
+            (<Place: Uasin Gishu (County 2013-)>,
+             {u'Aspirant Governor': [<Person: Margaret Jepkoech Kamar >],
+              u'Aspirant Senator': [<Person: Abraham Kiptanui>]}),
+            (<Place: Rift Valley (Province)>, {}),
+            (<Place: Kenya (Country)>,
+             {u'Aspirant President': [<Person: David Gian Maillu>,
+               <Person: Peter Kenneth>,
+               <Person: Uhuru Muigai Kenyatta>,
+               <Person: Martha Wangari Karua>,
+               <Person: Paul Kibugi Muite>]})]
+
+        (Note that this example was based on incomplete test data.)"""
+
+        # This is a classically horrible thing to try to do with SQL -
+        # recurse up this place's hierarchy via the parent column -
+        # however, we know that there will only be at most 5 levels
+        # (Ward -> Constituency -> County -> Province -> Country) for
+        # Kenya, and the results of the query should be cached.
+
+        place_hierarchy = []
+
+        current_place = self
+        while True:
+            place_hierarchy.append(current_place)
+            parent = current_place.parent_place
+            if parent:
+                current_place = parent
+            else:
+                break
+
+        # Preserve the order of places in the hierarchy, but allow
+        # fast lookups with a dict:
+        place_to_index = dict((p, i) for i, p in enumerate(place_hierarchy))
+
+        aspirants_for_places = [(p, defaultdict(list)) for p in place_hierarchy]
+
+        for position in Position.objects.filter(place__in=place_hierarchy, title__slug__startswith='aspirant-').currently_active():
+            aspirants_for_places[place_to_index[position.place]][1][position.title.name].append(position.person)
+
+        # Annoyingly, defaultdicts can't be easily be iterated over in
+        # Django templates, since some_defaultdict.items first tries
+        # to access some_defaultdict['items'] which returns an empty
+        # list.  A workaround is to convert to a dictionary instead.
+        # See http://stackoverflow.com/q/4764110/223092
+
+        return [(p, dict(dd)) for p, dd in aspirants_for_places]
 
 class PositionTitle(ModelBase):
     name = models.CharField(max_length=200, unique=True)
@@ -868,6 +955,9 @@ class ParliamentarySession(ModelBase):
         elif self.covers_date(today):
             return "Current"
 
+    def overlaps(self, other):
+        return self.start_date <= other.end_date and other.start_date <= self.end_date
+
     def short_date_range(self):
         if self.end_date and self.end_date.year != 9999:
             return "%s-%s" % (self.start_date.year, self.end_date.year)
@@ -876,7 +966,8 @@ class ParliamentarySession(ModelBase):
 
     @staticmethod
     def format_date(d):
-        return d.strftime("%d %B %Y")
+        df = DateFormat(d)
+        return df.format('jS F Y')
 
     def readable_date_range(self):
         future_sentinel = datetime.date(9999, 12, 31)

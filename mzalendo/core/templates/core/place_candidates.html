@@ -1,0 +1,15 @@
+{% extends 'core/place_base.html' %}
+
+{% block title %}{{ object.name }} Candidates{% endblock %}
+
+{% block subcontent %}
+
+  <div class="page-wrapper wrapper election-area-page">
+
+  <!-- header with maps should go here -->
+
+  {% include "core/place_candidate_lists.html" %}
+
+  </div>
+
+{% endblock %}
