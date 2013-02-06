@@ -18,15 +18,15 @@
         }
     
         .map-box{
-            background: url('../images/exmple-map-placeholder.png') repeat scroll top left;
             width: 300px;
             height: 200px;
             margin-left:100px;
             float:right;
         }
     }
-    
-    
-    
-    
+}
+
+#page .election-area-page #map_canvas{
+        width: 100%;
+        height: 100%;
 }
