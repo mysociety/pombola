@@ -8,7 +8,8 @@
     mzalendo_settings.extra_js.push( 'js/election_countdown.js' );
 {% endblock %}
 
-{% block extra_headers %}
+{% block css_headers %}
+    {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.countdown-v1.6.0.css" media="screen, handheld" />
 {% endblock %}
 
