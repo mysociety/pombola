@@ -23,6 +23,10 @@
       <a href="{% url place_scorecard slug=object.slug %}">scorecard</a>.
     </p>
   {% endif %}
+
+  <h2>Candidates</h2>
+
+  {% include "core/place_candidate_lists.html" %}
   
   {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
   {% with people_related=object.related_people %}
