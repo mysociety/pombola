@@ -85,6 +85,7 @@ def autocomplete(request):
             	'url':   object.get_absolute_url(),
             	'label': '<img height="16" width="16" src="%s" /> %s' % (image_url, label),
             	'type':  css_class,
+            	'value': object.name,
             })
     
     # send back the results as JSON
