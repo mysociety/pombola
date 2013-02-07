@@ -7,7 +7,7 @@
 {% block object_menu_links %}
   <li><a href="{% url place slug=object.slug %}">Overview</a></li>
 
-  <li><a href="{% url place_candidates slug=object.slug %}">Candidates</a></li>
+  <li><a href="{% url place_aspirants slug=object.slug %}">Aspirants</a></li>
 
   {% if object.has_scorecards %}
     <li><a href="{% url place_scorecard slug=object.slug %}">Scorecard</a></li>
