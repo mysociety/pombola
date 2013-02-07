@@ -129,7 +129,7 @@ def place_mapit_area(request, mapit_id):
         mapit_area=mapit_id
     )
 
-    return redirect(place)
+    return redirect('place_election', slug=place.slug)
 
 def position(request, slug):
     title = get_object_or_404(
