@@ -63,8 +63,12 @@ class Command(NoArgsCommand):
         token_data = get_data(make_api_token_url(IEBC_API_ID, api_key))
         token = token_data['token']
 
+        def url(path, query_filter=None):
+            """A closure to avoid repeating parameters"""
+            return make_api_url(path, IEBC_API_SECRET, token, query_filter)
+
         # Just as an example, get all the counties:
-        county_data = get_data(make_api_url('/county/', IEBC_API_SECRET, token))
+        county_data = get_data(url('/county/'))
 
         print "got county_data:", county_data.keys()
 
@@ -86,24 +90,20 @@ class Command(NoArgsCommand):
         # Try to get a particular county:
 
         nairobi_county_code='0188D30F-5258-45B8-86F2-D6185B21884A'
-        nairobi_county_data = get_data(make_api_url('/county/%s/' % (nairobi_county_code,),
-                                                    IEBC_API_SECRET, token))
-
+        nairobi_county_data = get_data(url('/county/%s/' % (nairobi_county_code,)))
 
         print "not nairobi_county_data:", nairobi_county_data
 
         # Now try to get all constituencies within Nairobi, which uses
         # a query_filter:
 
-        constituencies_in_nairobi = get_data(make_api_url('/constituency/',
-                                                          IEBC_API_SECRET,
-                                                          token,
-                                                          query_filter='county=%s' % (nairobi_county_code)))
+        constituencies_in_nairobi = get_data(url('/constituency/',
+                                                 query_filter='county=%s' % (nairobi_county_code)))
 
         print len(constituencies_in_nairobi['region']['locations']), "constituencies in Nairobi county:"
 
         # Just as an example, get all the counties:
-        constituency_data = get_data(make_api_url('/constituency/', IEBC_API_SECRET, token))
+        constituency_data = get_data(url('/constituency/'))
 
         print "got constituency_data:", constituency_data['region']['locations']
         print "length is:", len(constituency_data['region']['locations'])
