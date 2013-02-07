@@ -2263,11 +2263,6 @@ div.search-pagination {
   background: linear-gradient(#333132, #4c4c4e);
 }
 
-.local-aspirants {
-  border-top: 3px solid #009748;
-  margin-top: 24px;
-  padding: 10px 0;
-}
 .local-aspirants h3 {
   clear: both;
 }
@@ -2275,7 +2270,6 @@ div.search-pagination {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  margin: 0 -13px;
 }
 .local-aspirants ul li {
   list-style-type: none;
@@ -2289,14 +2283,22 @@ div.search-pagination {
   padding: 13px;
   height: 340px;
 }
-.local-aspirants ul p {
+.local-aspirants ul li p {
   margin: 0;
+  padding: 0;
 }
 .local-aspirants p.election-child-places {
   font-size: larger;
   margin-top: 15px;
 }
 
+@media only screen and (min-width: 640px) {
+  .local-aspirants {
+    border-top: 3px solid #009748;
+    margin-top: 24px;
+    padding: 10px 0;
+  }
+}
 h3.scorecard-overall {
   display: block;
   font-weight: bold;
@@ -3405,6 +3407,9 @@ h2 a.appearances-trigger.active {
   height: 100%;
 }
 
+.election-area-page header {
+  margin-top: 10px;
+}
 .election-area-page header .map-box {
   float: right;
   width: 50%;
@@ -3425,7 +3430,7 @@ h2 a.appearances-trigger.active {
   line-height: 1.2;
   color: #4d4d4d;
 }
-.election-area-page .content_box p {
+.election-area-page .content_box > p {
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -3450,7 +3455,7 @@ h2 a.appearances-trigger.active {
     font-size: 21px;
     color: #4d4d4d;
   }
-  .election-area-page .content_box p {
+  .election-area-page .content_box > p {
     margin-left: 0;
     margin-right: 0;
   }

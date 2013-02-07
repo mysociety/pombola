@@ -6,6 +6,8 @@
 
 .election-area-page{
     header{
+      
+      margin-top: 10px;
         
         .map-box{
             float: right;
@@ -34,7 +36,7 @@
     
     }
     
-    .content_box p {
+    .content_box > p {
       margin-left:  10px;
       margin-right: 10px;
     }
@@ -72,7 +74,7 @@
       
       }
  
-      .content_box p {
+      .content_box > p {
         margin-left:  0;
         margin-right: 0;
       }
