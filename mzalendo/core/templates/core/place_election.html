@@ -25,6 +25,9 @@
       {% if object.parent_place %}
           and is contained within the {{ object.parent_place.kind.name }} <a href="{% url place_election slug=object.parent_place.slug %}">{{ object.parent_place.name }}.</a>
       {% else %}.{% endif %}
+      
+      <p><a href="{% url place object.slug %}">More details</a> about {{ object.name }}.</p>
+      
     </hgroup>
 
   </header>
