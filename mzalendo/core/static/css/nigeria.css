@@ -2135,12 +2135,6 @@ ul.listing li section {
 ul.listing li section p {
   margin: 0 !important;
 }
-ul.listing li section .kind {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  text-align: right;
-}
 ul.listing li section .read-more-wrap {
   top: 35px;
   bottom: auto;
