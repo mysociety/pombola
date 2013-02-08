@@ -21,6 +21,9 @@ class Quiz(TimeStampedModel):
     name = models.TextField(unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
 
+    def __unicode__(self):
+        return self.name
+
     class Meta:
         verbose_name_plural = "quizzes"
 
@@ -30,12 +33,18 @@ class Statement(TimeStampedModel):
     quiz = models.ForeignKey('Quiz')
     text = models.TextField()
 
+    def __unicode__(self):
+        return "%s (%s)" % ( self.text, self.quiz )
+
 
 class Party(TimeStampedModel):
     """ eg 'Mitt Romney' or 'Lib Dems' """
     quiz = models.ForeignKey('Quiz')
     name = models.TextField()
     summary = MarkupField()
+
+    def __unicode__(self):
+        return "%s (%s)" % ( self.name, self.quiz )
 
     class Meta:
         verbose_name_plural = "parties"
@@ -47,6 +56,9 @@ class Stance(TimeStampedModel):
     party = models.ForeignKey('Party')
     agreement = models.IntegerField(choices=agreement_choices)
 
+    def __unicode__(self):
+        return "%s - %s - %s" % ( self.party.name, self.agreement, self.statement.text )
+
 
 class Submission(TimeStampedModel):
     """ a single submission of answers for the quiz, and some demographic data """
@@ -55,12 +67,17 @@ class Submission(TimeStampedModel):
     age = models.PositiveIntegerField(blank=True, null=True)
     expected_result = models.ForeignKey('Party')
 
+    def __unicode__(self):
+        return "%s (%s)" % ( self.token, self.quiz )
+    
 
 class Answer(TimeStampedModel):
     """A visitor's agreement with a given statement"""
     submission = models.ForeignKey('Submission')
     statement  = models.ForeignKey('Statement')
-    agreement = models.IntegerField(choices=agreement_choices)
+    agreement  = models.IntegerField(choices=agreement_choices)
     
+    def __unicode__(self):
+        return "%s - %s - %s" % ( self.submission, self.agreement, self.statement.text )
     
      
