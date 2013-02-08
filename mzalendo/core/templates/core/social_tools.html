@@ -22,7 +22,7 @@
 
   {% if settings.DISQUS_SHORTNAME %}
     <li>
-      <a  href="{% url person_comments slug=object.slug %}"
+      <a  href="{% url person slug=object.slug %}#disqus_thread"
           class="big-btn-text-green"
       >Post Comment</a>
     </li>
