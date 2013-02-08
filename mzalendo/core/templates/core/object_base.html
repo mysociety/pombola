@@ -54,3 +54,12 @@
       {% endblock %}
     </div>
 {% endblock %}
+
+
+{% block extra_attribution %}
+  {# If the object has a summary it may have come from Wikipedia. Display the attribution. #}
+  {% if object.summary %}
+    {% include 'wikipedia_attribution.html' %}
+  {% endif %}
+{% endblock %}
+
