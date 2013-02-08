@@ -7,5 +7,13 @@ class QuizAdmin(admin.ModelAdmin):
 class StatementAdmin(admin.ModelAdmin):
     pass
 
+class PartyAdmin(admin.ModelAdmin):
+    pass
+
+class StanceAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(models.Quiz, QuizAdmin)
 admin.site.register(models.Statement, StatementAdmin)
+admin.site.register(models.Party, PartyAdmin)
+admin.site.register(models.Stance, StanceAdmin)
