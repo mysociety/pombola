@@ -65,3 +65,6 @@ python-memcached
 python-dateutil
 
 coverage>=3
+
+## votematch
+django-model-utils
