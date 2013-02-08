@@ -3,6 +3,8 @@ from model_utils.models import TimeStampedModel
 from markitup.fields import MarkupField
 from random import choice
 
+from django.core.urlresolvers import reverse
+
 agreement_choices = (
     (-2, 'strongly disagree'),
     (-1, 'disagree'),
@@ -23,6 +25,9 @@ class Quiz(TimeStampedModel):
 
     def __unicode__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('votematch-quiz', kwargs={'slug':self.slug})
 
     class Meta:
         verbose_name_plural = "quizzes"
