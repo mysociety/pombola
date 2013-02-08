@@ -1174,6 +1174,14 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#000000, #777777);
 }
 
+#site-footer div.attribution {
+  font-size: 80%;
+  color: gray;
+  text-align: center;
+  margin: 0.5em;
+  clear: both;
+}
+
 @media only screen and (min-width: 640px) {
   #site-footer {
     padding: 0 10px;
