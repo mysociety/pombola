@@ -8,3 +8,11 @@ class Quiz(TimeStampedModel):
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
 
 
+class Statement(TimeStampedModel):
+    quiz = models.ForeignKey('Quiz')
+    text = models.TextField()
+
+
+
+
+
