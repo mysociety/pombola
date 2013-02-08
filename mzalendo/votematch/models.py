@@ -21,6 +21,9 @@ class Quiz(TimeStampedModel):
     name = models.TextField(unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
 
+    class Meta:
+        verbose_name_plural = "quizzes"
+
 
 class Statement(TimeStampedModel):
     """ eg 'Cannabis SHOULD be legalised' """
@@ -33,6 +36,9 @@ class Party(TimeStampedModel):
     quiz = models.ForeignKey('Quiz')
     name = models.TextField()
     summary = MarkupField()
+
+    class Meta:
+        verbose_name_plural = "parties"
 
 
 class Stance(TimeStampedModel):
