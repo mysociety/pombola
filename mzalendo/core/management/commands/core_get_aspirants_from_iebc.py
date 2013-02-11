@@ -16,7 +16,7 @@ from django.template.defaultfilters import slugify
 from settings import IEBC_API_ID, IEBC_API_SECRET
 from optparse import make_option
 
-from core.models import Place, PlaceKind, Person, ParliamentarySession, PositionTitle, Organisation
+from core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation
 
 iebc_base_url = 'http://api.iebc.or.ke'
 
@@ -168,6 +168,21 @@ def parse_race_name(known_race_types, race_name):
         raise Exception, "Couldn't parse race:" + race_name
     return (m.group(2), m.group(3))
 
+def make_new_person(candidate, **options):
+    print "Make a person from", json.dumps(candidate, indent=4)
+    legal_name = candidate['other_name'].title()
+    if legal_name:
+        legal_name += ' '
+    else:
+        legal_name += candidate['surname'].title()
+    new_person = Person(legal_name=legal_name, slug=slugify(legal_name))
+    if options['commit']:
+        new_person.save()
+        print >> sys.stderr, 'Saving %s' % (person,)
+    else:
+        print >> sys.stderr, 'Not saving %s because --commit was not specified' % (person,)
+    return new_person
+
 class Command(NoArgsCommand):
     help = 'Update the database with aspirants from the IEBC website'
 
@@ -187,6 +202,8 @@ class Command(NoArgsCommand):
         def url(path, query_filter=None):
             """A closure to avoid repeating parameters"""
             return make_api_url(path, IEBC_API_SECRET, token, query_filter)
+
+        aspirants_to_remove = set(Position.objects.all().aspirant_positions().exclude(title__slug__iexact='aspirant-president').currently_active())
 
         # Set up a mapping between the race names and the
         # corresponding PlaceKind and Position title:
@@ -259,6 +276,22 @@ class Command(NoArgsCommand):
                             race_type_counts[race_type] += 1
                             person = get_person_from_names(first_names, surname)
                             if person:
+                                try:
+                                    same_person = same_people[(candidate['code'], int(person.id, 10))]
+                                except KeyError:
+                                    print >> sys.stderr, "No manually checked information found about the detected match between:"
+                                    print >> sys.stderr, candidate
+                                    print >> sys.stderr, person
+                                    raise Exception, "No manually checked information found"
+                                if not same_person:
+                                    person = None
+                            # Now we know we need to create a new Person:
+                            if not person:
+                                person = make_new_person(candidate, **options)
+                            update_parties(person, candidate)
+
+
+
                                 print "got match to:", person
                                 row = {}
                                 row['API Name'] = first_names + ' ' + surname
