@@ -1,6 +1,7 @@
 .social-and-tools {
 
-//  display: table-caption;
+  display: none;
+
   ul {
     @include list-reset-soft;
     margin: 20px 0;

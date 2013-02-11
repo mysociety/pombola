@@ -1090,6 +1090,9 @@ menu#site-user-tools ul li.active a:hover {
   font-size: 120%;
   color: #009245;
 }
+#site-footer div.footer-section > h4 {
+  margin-top: 1em;
+}
 #site-footer p {
   font-style: italic;
   color: #777777;
@@ -1814,6 +1817,9 @@ div.object_menu ul li a {
   font-size: 12px;
 }
 
+.social-and-tools {
+  display: none;
+}
 .social-and-tools ul {
   list-style-type: none;
   padding: 0;
