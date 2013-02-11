@@ -1813,6 +1813,9 @@ div.object_menu ul li a {
   font-size: 12px;
 }
 
+.social-and-tools {
+  display: none;
+}
 .social-and-tools ul {
   list-style-type: none;
   padding: 0;
