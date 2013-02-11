@@ -819,6 +819,16 @@ class Position(ModelBase):
     end_date = ApproximateDateField(blank=True, help_text=date_help_text, default="future")
 
     # hidden fields that are only used to do sorting. Filled in by code.
+    #
+    # These sort dates are here to enable the expected sorting. Ascending is 
+    # quite straight forward as the string stored (eg '2011-03-00') will sort as 
+    # expected. But for descending sorts they will not, as '2011-03-00' would 
+    # come after '2011-03-15'. To fix this the *_high dates below replace '00' 
+    # with '99' so that the desc sort can be carried out in SQL as expected.
+    #
+    # For 'future' dates there are also some special tweaks that makes them sort 
+    # as expeced. See the '_set_sorting_dates' method below for implementation.
+    #
     sorting_start_date = models.CharField(editable=True, default='', max_length=10)
     sorting_end_date = models.CharField(editable=True, default='', max_length=10)
     sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
