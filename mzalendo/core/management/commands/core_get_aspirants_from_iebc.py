@@ -16,7 +16,7 @@ from django.template.defaultfilters import slugify
 from settings import IEBC_API_ID, IEBC_API_SECRET
 from optparse import make_option
 
-from core.models import Place, PlaceKind, Person, ParliamentarySession, PositionTitle
+from core.models import Place, PlaceKind, Person, ParliamentarySession, PositionTitle, Organisation
 
 iebc_base_url = 'http://api.iebc.or.ke'
 
@@ -298,6 +298,17 @@ class Command(NoArgsCommand):
 
 
         return
+
+
+
+        if False:
+            party_names_api = set(d['name'].strip().encode('utf-8') for d in party_data['parties'])
+            party_names_db = set(o.name.strip().encode('utf-8') for o in Organisation.objects.filter(kind__slug='party'))
+
+            with open('party-names.csv', 'w') as fp:
+                writer = csv.writer(fp)
+                for t in itertools.izip_longest(party_names_api, party_names_db):
+                    writer.writerow(t)
 
 
         # Just as an example, get all the wards:
