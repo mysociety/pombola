@@ -3,5 +3,30 @@
 {% block content %}
 
   <h1>{{ object.name }}</h1>
+
+  <form action="" method="POST">
+
+    {% csrf_token %}
+    
+
+    {% for statement in object.statement_set.all %}
+    
+      <div>
+        {{ statement.text }}
+    
+        <input type="radio" name="statement[{{ statement.id }}]" value="1"> 
+        <input type="radio" name="statement[{{ statement.id }}]" value="2"> 
+        <input type="radio" name="statement[{{ statement.id }}]" value="3"> 
+        <input type="radio" name="statement[{{ statement.id }}]" value="4"> 
+        <input type="radio" name="statement[{{ statement.id }}]" value="5"> 
+        <input type="radio" name="statement[{{ statement.id }}]" value="-"> 
+    
+      </div>
+    
+    {% endfor %}
+  
+    <input type="submit" value="Go">
+
+  </form>
   
 {% endblock %}
