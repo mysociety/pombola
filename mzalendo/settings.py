@@ -121,7 +121,7 @@ STATIC_URL = '/static/'
 
 # integer which when updated causes the caches to fetch new content. See note in
 # 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 29
+STATIC_GENERATION_NUMBER = 30
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -185,9 +185,9 @@ FILE_UPLOAD_HANDLERS = (
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.filesystem.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 

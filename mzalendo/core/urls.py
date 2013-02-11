@@ -57,10 +57,25 @@ place_patterns = patterns('core.views',
     url(r'^(?P<slug>[-\w]+)/$',
         PlaceDetailView.as_view(),      
         name='place'),
+
+    # redirect .../candidates to .../aspirants so that the URL wording matches
+    # that on the site. This is to fix originally using the word 'candidates'
+    # and can probably be removed at some point when there are no more hits on
+    # this path - after July 2013 feels about right.
+    url(
+        r'^(?P<slug>[-\w]+)/candidates/$',
+        redirect_to,
+        {
+            'url':       '/place/%(slug)s/aspirants',
+            'permanent': True,
+        }
+    ),
+
+    
 )
 
 # ugly, must be a better way
-for sub_page in ['candidates', 'election', 'scorecard', 'comments', 'people', 'places', 'organisations', 'data', 'projects']:
+for sub_page in ['aspirants', 'election', 'scorecard', 'comments', 'people', 'places', 'organisations', 'data', 'projects']:
     place_patterns += patterns(
         'core.views',
         url(

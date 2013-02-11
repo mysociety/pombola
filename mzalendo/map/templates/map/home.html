@@ -40,14 +40,14 @@
   }
 
   #map-drilldown-message {
+    margin-top: 30px;
     width: 80%;
     font-size: 16px;    
   }
   
-  #geo-locate-me-button, #search-by-name-button {
-    width: 10em;
+  #map-drilldown-message div.location {
+    margin-top: 0.5em;
   }
-  
   
 </style>
 
@@ -59,17 +59,10 @@
   </div>
 
   <div id="map-drilldown-message" class="gmap-control">
-    Drag and zoom the map to search for an area.
+    <div class="instruction">loading&hellip;</div>
+    <div class="location"></div>
   </div>
   
-  <div id="geo-locate-me-button" class="gmap-control">
-    <a href="#">Show my location</a>
-  </div>
-
-  <div id="search-by-name-button" class="gmap-control">
-    <a href="/search">Search by name</a>
-  </div>
-
 </div>
 
 

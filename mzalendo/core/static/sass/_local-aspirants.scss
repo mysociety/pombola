@@ -1,8 +1,5 @@
 .local-aspirants{
     @extend .cf;
-    border-top: 3px solid #009748;
-    margin-top: 24px;
-    padding: 10px 0;
     
     h3{
         clear:both;
@@ -10,17 +7,18 @@
     
     ul{
         @include list-reset-nopad;
-        margin: 0 -13px;
         li{ // Needs to be this specific to overide list reset
             @extend .grid-listing-item;
             @include box-shadow(none);
             padding: 13px;
-            height:340px;
-            
+            height: 340px;
+
+            p{
+                margin:  0;
+                padding: 0;
+            }
         }
-        p{
-            margin:0;
-        }
+        
     }
 
     p.election-child-places{
@@ -28,4 +26,13 @@
         margin-top: 15px;
     }
 
+}
+
+@media only screen and (min-width: 640px) {
+
+    .local-aspirants{
+        border-top: 3px solid #009748;
+        margin-top: 24px;
+        padding: 10px 0;
+    }
 }

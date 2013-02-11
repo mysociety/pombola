@@ -129,7 +129,7 @@ def place_mapit_area(request, mapit_id):
         mapit_area=mapit_id
     )
 
-    return redirect(place)
+    return redirect('place_election', slug=place.slug)
 
 def position(request, slug):
     title = get_object_or_404(
@@ -290,10 +290,10 @@ def memcached_status(request):
     cached = cache.get(cache_key)
     
     if cached:
-        response = "Found %u in cache, which was %u seconds ago (ttl is %u seconds)" % (cached, now - cached, ttl )
+        response = "Found %u in cache with key %s, which was %u seconds ago (ttl is %u seconds)" % (cached, cache_key, now - cached, ttl )
     else:
         cache.set( cache_key, now, ttl )
-        response = "Value not found in cache - added %u for %u seconds" % ( now, ttl )
+        response = "Value not found in cache with key %s - added %u for %u seconds" % ( cache_key, now, ttl )
     
     return HttpResponse(
         response,

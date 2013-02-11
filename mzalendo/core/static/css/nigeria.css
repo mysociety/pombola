@@ -1174,6 +1174,14 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/chevron-right.png) 9px center no-repeat, linear-gradient(#000000, #777777);
 }
 
+#site-footer div.attribution {
+  font-size: 80%;
+  color: gray;
+  text-align: center;
+  margin: 0.5em;
+  clear: both;
+}
+
 @media only screen and (min-width: 640px) {
   #site-footer {
     padding: 0 10px;
@@ -2134,12 +2142,6 @@ ul.listing li section {
 }
 ul.listing li section p {
   margin: 0 !important;
-}
-ul.listing li section .kind {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  text-align: right;
 }
 ul.listing li section .read-more-wrap {
   top: 35px;

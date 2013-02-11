@@ -25,6 +25,8 @@
         
         {% endcomment %}
 
+        <link href="{{ STATIC_URL }}css/jquery-ui-1.8.17.custom.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen" rel="stylesheet" type="text/css" />
+
         {% block css_headers %}
             <!-- Create a 'css_headers' block in your base.html and use it to include the correct CSS for you country -->
         {% endblock %}
@@ -59,8 +61,6 @@
         <script src="{{ STATIC_URL }}js/loader.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
-
-        <link href="{{ STATIC_URL }}css/jquery-ui-1.8.17.custom.css?{{ settings.STATIC_GENERATION_NUMBER }}" media="screen" rel="stylesheet" type="text/css" />
         
         {% block extra_headers %}{% endblock %}
         
@@ -93,6 +93,14 @@
         <footer id="site-footer">
             <div class="wrapper">
                 {% include "footer.html" %}
+
+            <div class="attribution">
+
+              <p>This site runs on <a href="https://github.com/mysociety/mzalendo">open source code</a> written by <a href="http://www.mysociety.org">mySociety</a>.</p>
+
+              {% block extra_attribution %}
+              {% endblock %}
+
             </div>
         </footer>
         <div id="fb-root"></div>
