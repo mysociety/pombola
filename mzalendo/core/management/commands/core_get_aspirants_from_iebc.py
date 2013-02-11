@@ -291,23 +291,22 @@ class Command(NoArgsCommand):
                             update_parties(person, candidate)
 
 
-
-                                print "got match to:", person
-                                row = {}
-                                row['API Name'] = first_names + ' ' + surname
-                                party_data = candidate['party']
-                                row['API Party'] = party_data['name'] if 'name' in party_data else ''
-                                row['API Place'] = '%s (%s)' % (place_name, area_type)
-                                row['API Candidate Code'] = candidate['code']
-                                row['Mz Legal Name'] = person.legal_name
-                                row['Mz Other Names'] = person.other_names
-                                row['Mz URL'] = 'http://info.mzalendo.com' + person.get_absolute_url()
-                                row['Mz Parties Ever'] = ', '.join(o.name for o in person.parties_ever())
-                                for heading, positions in (('Mz Aspirant Ever', person.aspirant_positions_ever()),
-                                                           ('Mz Politician Ever', person.politician_positions_ever())):
-                                    row[heading] = ', '.join('%s at %s' % (p.title.name, p.place) for p in positions)
-                                row['Mz ID'] = person.id
-                                writer.writerow(row)
+                            #     print "got match to:", person
+                            #     row = {}
+                            #     row['API Name'] = first_names + ' ' + surname
+                            #     party_data = candidate['party']
+                            #     row['API Party'] = party_data['name'] if 'name' in party_data else ''
+                            #     row['API Place'] = '%s (%s)' % (place_name, area_type)
+                            #     row['API Candidate Code'] = candidate['code']
+                            #     row['Mz Legal Name'] = person.legal_name
+                            #     row['Mz Other Names'] = person.other_names
+                            #     row['Mz URL'] = 'http://info.mzalendo.com' + person.get_absolute_url()
+                            #     row['Mz Parties Ever'] = ', '.join(o.name for o in person.parties_ever())
+                            #     for heading, positions in (('Mz Aspirant Ever', person.aspirant_positions_ever()),
+                            #                                ('Mz Politician Ever', person.politician_positions_ever())):
+                            #         row[heading] = ', '.join('%s at %s' % (p.title.name, p.place) for p in positions)
+                            #     row['Mz ID'] = person.id
+                            #     writer.writerow(row)
                             total_candidates += 1
 
         print "total_candidates by area are:", total_candidates
