@@ -20,15 +20,17 @@ from core.models import Place, PlaceKind, Person, ParliamentarySession, Position
 
 iebc_base_url = 'http://api.iebc.or.ke'
 
+data_directory = os.path.join(sys.path[0], 'kenyan-election-data')
+
 # Calling these 'corrections' may not be quite right.  There are
 # naming discrepancies between the documents published by the IEBC and
 # the IEBC API in spellings of ward names in particular.  This maps
 # the IEBC API version to what we have in the API (which for wards was
 # derived from "Final Constituencies and Wards Description.pdf").
 
-place_name_corrections = {'LUNGALUNGA': 'Lunga Lunga'}
+place_name_corrections = {}
 
-with open('wards-names-matched.csv') as fp:
+with open(os.path.join(data_directory, 'wards-names-matched.csv')) as fp:
     reader = csv.reader(fp)
     for api_name, db_name in reader:
         if api_name and db_name:
@@ -234,7 +236,7 @@ class Command(NoArgsCommand):
 
         headings = ['API Name', 'API Party', 'API Place', 'API Candidate Code', 'Mz Legal Name', 'Mz Other Names', 'Mz URL', 'Mz Parties Ever', 'Mz Aspirant Ever', 'Mz Politician Ever', 'Mz ID']
 
-        with open('names-to-check.csv', 'w') as fp:
+        with open(os.path.join(sys.path[0], 'names-to-check.csv'), 'w') as fp:
 
             writer = csv.DictWriter(fp, headings)
 
@@ -365,7 +367,7 @@ class Command(NoArgsCommand):
             party_names_api = set(d['name'].strip().encode('utf-8') for d in party_data['parties'])
             party_names_db = set(o.name.strip().encode('utf-8') for o in Organisation.objects.filter(kind__slug='party'))
 
-            with open('party-names.csv', 'w') as fp:
+            with open(os.path.join(data_directory, 'party-names.csv'), 'w') as fp:
                 writer = csv.writer(fp)
                 for t in itertools.izip_longest(party_names_api, party_names_db):
                     writer.writerow(t)
@@ -378,7 +380,7 @@ class Command(NoArgsCommand):
             wards_from_api = sorted(ward['name'].encode('utf-8') for ward in ward_data['region']['locations'])
             wards_from_db = sorted(p.name.encode('utf-8') for p in Place.objects.filter(kind__slug='ward'))
 
-            with open('wards-names.csv', 'w') as fp:
+            with open(os.path.join(data_directory, 'wards-names.csv'), 'w') as fp:
                 writer = csv.writer(fp)
                 for t in itertools.izip_longest(wards_from_api, wards_from_db):
                     writer.writerow(t)
