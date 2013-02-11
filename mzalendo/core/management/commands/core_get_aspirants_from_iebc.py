@@ -143,7 +143,6 @@ def get_matching_place(place_name, place_kind, parliamentary_session):
         return matching_places[0]
 
 def parse_race_name(known_race_types, race_name):
-    print "parsing: '%s'" % (race_name,)
     types_alternation = "|".join(re.escape(krt) for krt in known_race_types)
     m = re.search('^((%s) - )(.*?)\s+\(\d+\)$' % (types_alternation,), race_name)
     if not m:
