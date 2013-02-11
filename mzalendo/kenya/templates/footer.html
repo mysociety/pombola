@@ -8,6 +8,24 @@
 </div>
 
 <div class="footer-section">
+
+    <h4>Share</h4>
+    <ul class="utilities">
+
+        <li>
+          <a  href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+            target="_blank"
+          >Facebook</a>
+        </li>
+
+        <li>
+          <a  href="https://twitter.com/share?{% if settings.TWITTER_ACCOUNT_NAME %}via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;{% endif %}url={{ request.build_absolute_uri }}"
+              target="_blank"
+          >Twitter</a>
+        </li>
+    </ul>
+    
+
     <h4>About</h4>
     <ul class="utilities">
         <li><a href="{% url info_page slug='policies' %}">Privacy</a></li>

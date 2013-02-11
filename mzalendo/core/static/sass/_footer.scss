@@ -8,14 +8,19 @@
     caption-side: top;
     position: relative;
     padding-top: 5px; }
-  div.footer-section {
-    border-top: 2px solid $colour_primary;
-    &:first-child {
-      border: none; }
-    padding: 10px; }
-  h4 {
-    font-size: 120%;
-    color: $colour_primary; }
+    div.footer-section {
+      border-top: 2px solid $colour_primary;
+      &:first-child {
+        border: none; }
+      padding: 10px; }
+    h4 {
+      font-size: 120%;
+      color: $colour_primary; }
+
+    div.footer-section > h4 {
+      margin-top: 1em;
+    }
+
   p {
     font-style: italic;
     color: $colour_blackish; }
