@@ -194,15 +194,8 @@ class Command(NoArgsCommand):
 
         known_race_types = known_race_type_mapping.keys()
 
-        # Since the following things don't work with the API:
-        #
-        #   - Requesting all contests via /contest/
-        #   - Requesting candidates for a particular constituency, ward or
-        #     county via /candidate/ with a query filter
-        #
-        # ... the simplest approach to getting all candidate data is
-        # to request all parties, and then request all candidates for
-        # each party.
+        # To get all the candidates, we iterate over each county,
+        # constituency and ward, and request the candidates for each.
 
         cache_directory = os.path.join(sys.path[0], 'cache')
         candidates_cache_directory = os.path.join(cache_directory, 'candidatates-by-party')
