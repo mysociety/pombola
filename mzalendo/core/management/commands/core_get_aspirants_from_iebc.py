@@ -215,6 +215,8 @@ class Command(NoArgsCommand):
         # Now that we've got all the parties, request all the
         # candidates for each party:
 
+        total_candidates = 0
+
         for d in party_data['parties']:
             code = d['code']
             candidates_cache_filename = os.path.join(cache_directory, 'candidates-for-' + code)
@@ -222,8 +224,66 @@ class Command(NoArgsCommand):
             for race in candidate_data['candidates']:
                 race_name = race['race']
                 candidates = race['candidates']
-                print len(candidates), race_name
+                # print len(candidates), race_name
+                total_candidates += len(candidates)
 
+        print "total_candidates by party are:", total_candidates
+
+        total_candidates = 0
+        race_type_counts = defaultdict(int)
+
+        headings = ['API Name', 'API Party', 'API Place', 'API Candidate Code', 'Mz Legal Name', 'Mz Other Names', 'Mz URL', 'Mz Parties Ever', 'Mz Aspirant Ever', 'Mz Politician Ever', 'Mz ID']
+
+        with open('names-to-check.csv', 'w') as fp:
+
+            writer = csv.DictWriter(fp, headings)
+
+            writer.writerow(dict((h, h) for h in headings))
+
+            for area_type in 'county', 'constituency', 'ward':
+                cache_filename = os.path.join(cache_directory, area_type)
+                area_type_data = get_data_with_cache(cache_filename, url('/%s/' % (area_type)))
+                areas = area_type_data['region']['locations']
+                for i, area in enumerate(areas):
+                    # Get the candidates for that area:
+                    code = area['code']
+                    candidates_cache_filename = os.path.join(cache_directory, 'candidates-for-' + area_type + '-' + code)
+                    candidate_data = get_data_with_cache(candidates_cache_filename, url('/candidate/', query_filter='%s=%s' % (area_type, code)))
+                    # print "got candidate_data:", candidate_data
+                    for race in candidate_data['candidates']:
+                        full_race_name = race['race']
+                        race_type, place_name = parse_race_name(known_race_types, full_race_name)
+                        candidates = race['candidates']
+                        for candidate in candidates:
+                            first_names = candidate['other_name'] or ''
+                            surname = candidate['surname'] or ''
+                            race_type_counts[race_type] += 1
+                            person = get_person_from_names(first_names, surname)
+                            if person:
+                                print "got match to:", person
+                                row = {}
+                                row['API Name'] = first_names + ' ' + surname
+                                party_data = candidate['party']
+                                row['API Party'] = party_data['name'] if 'name' in party_data else ''
+                                row['API Place'] = '%s (%s)' % (place_name, area_type)
+                                row['API Candidate Code'] = candidate['code']
+                                row['Mz Legal Name'] = person.legal_name
+                                row['Mz Other Names'] = person.legal_name
+                                row['Mz URL'] = 'http://info.mzalendo.com' + person.get_absolute_url()
+                                row['Mz Parties Ever'] = ', '.join(o.name for o in person.parties_ever())
+                                for heading, positions in (('Mz Aspirant Ever', person.aspirant_positions_ever()),
+                                                           ('Mz Politician Ever', person.politician_positions_ever())):
+                                    row[heading] = ', '.join('%s at %s' % (p.title.name, p.place) for p in positions)
+                                row['Mz ID'] = person.id
+                                writer.writerow(row)
+
+                        # print len(candidates), race_name
+                        total_candidates += len(candidates)
+
+        print "total_candidates by area are:", total_candidates
+
+        for race_type, count in race_type_counts.items():
+            print race_type, count
 
         return
 
