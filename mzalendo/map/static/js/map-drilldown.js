@@ -36,12 +36,12 @@
 
       // no point letting users zoom in too far for the purposes of finding a
       // constituency - adds server load and is not helpful to them.
-      maxZoom: 10,
+      maxZoom: 12,
       
       // Use default controls (ie show or hide depending on device) and then
       // switch off irrelevant ones.
       disableDefaultUI:   false,
-      mapTypeControl:     false,
+      mapTypeControl:     true,
       scaleControl:       false,
       streetViewControl:  false,
       overviewMapControl: false
