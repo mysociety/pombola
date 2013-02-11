@@ -258,9 +258,7 @@ class Command(NoArgsCommand):
                                     row[heading] = ', '.join('%s at %s' % (p.title.name, p.place) for p in positions)
                                 row['Mz ID'] = person.id
                                 writer.writerow(row)
-
-                        # print len(candidates), race_name
-                        total_candidates += len(candidates)
+                            total_candidates += 1
 
         print "total_candidates by area are:", total_candidates
 
