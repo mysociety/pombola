@@ -13,7 +13,6 @@
       this.createMap();
 
       this.addMessageControlToMap();
-      this.addSearchByNameControlToMap();
       this.addCrosshairs();
 
       this.trackMapMovements();   
@@ -239,16 +238,6 @@
       $(control).show();
     };
 
-
-    this.addSearchByNameControlToMap = function () {
-      var map = this.map; 
-      var control = $('#search-by-name-button').get(0);
-      control.index = 1;
-      map
-        .controls[google.maps.ControlPosition.RIGHT_BOTTOM]
-        .push(control);
-      $(control).show();
-    };
 
     this.messages = {
       "drag to find": 'Drag map to your location or <a href="/search">search by name</a>.',
