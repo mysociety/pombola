@@ -1,5 +1,6 @@
 from collections import defaultdict
 import csv
+import datetime
 import errno
 import hmac
 import hashlib
@@ -13,12 +14,19 @@ import sys
 from django.core.management.base import NoArgsCommand, CommandError
 from django.template.defaultfilters import slugify
 
+from django_date_extensions.fields import ApproximateDate
+
 from settings import IEBC_API_ID, IEBC_API_SECRET
 from optparse import make_option
 
-from core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation
+from core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
 
 iebc_base_url = 'http://api.iebc.or.ke'
+
+new_data_date = datetime.date(2013, 2, 8)
+new_data_approximate_date = ApproximateDate(new_data_date.year,
+                                            new_data_date.month,
+                                            new_data_date.day)
 
 data_directory = os.path.join(sys.path[0], 'kenyan-election-data')
 
@@ -35,6 +43,14 @@ with open(os.path.join(data_directory, 'wards-names-matched.csv')) as fp:
     for api_name, db_name in reader:
         if api_name and db_name:
             place_name_corrections[api_name] = db_name
+
+party_name_corrections = {}
+
+with open(os.path.join(data_directory, 'party-names-matched.csv')) as fp:
+    reader = csv.reader(fp)
+    for api_name, db_name in reader:
+        if api_name and db_name:
+            party_name_corrections[api_name] = db_name
 
 same_people = {}
 
@@ -133,14 +149,34 @@ def get_person_from_names(first_names, surname):
                 print "  good closest match to %s against %s was: %s (with score %d)" % (field, version, closest_match, closest_match.difference)
     return None
 
+def get_matching_party(party_name, **options):
+    party_name_to_use = party_name_corrections.get(party_name, party_name)
+    # print "looking for '%s'" % (party_name_to_use,)
+    matching_parties = Organisation.objects.filter(kind__slug='party',
+                                                   name__iexact=party_name_to_use)
+    if not matching_parties:
+        matching_parties = Organisation.objects.filter(kind__slug='party',
+                                                       name__istartswith=party_name_to_use)
+    if len(matching_parties) == 0:
+        party_name_for_creation = party_name_to_use.title()
+        new_party = Organisation(name=party_name_for_creation,
+                                 slug=slugify(party_name_for_creation),
+                                 started=ApproximateDate(datetime.date.today().year),
+                                 ended=None,
+                                 kind=OrganisationKind.objects.get(slug='party'))
+        maybe_save(new_party, **option)
+        return new_party
+    elif len(matching_parties) == 1:
+        return matching_parties[0]
+    else:
+        raise Exception, "Multiple parties matched %s" % (party_name_to_use,)
+
 def get_matching_place(place_name, place_kind, parliamentary_session):
     place_name_to_use = place_name_corrections.get(place_name, place_name)
     # We've normalized ward names to have a single space on either
     # side of a / or a -, so change API ward names to match:
     if place_kind.slug in ('ward', 'county'):
         place_name_to_use = re.sub(r'(\w) *([/-]) *(\w)', '\\1 \\2 \\3', place_name_to_use)
-
-    print "place_name_to_use is:", place_name_to_use
     # As with other place matching scripts here, look for the
     # slugified version to avoid problems with different separators:
     place_slug = slugify(place_name_to_use)
@@ -150,7 +186,6 @@ def get_matching_place(place_name, place_kind, parliamentary_session):
         place_slug += '-county'
     elif place_kind.slug == 'constituency':
         place_slug += '-2013'
-    print 'using slug:', place_slug
     matching_places = Place.objects.filter(slug=place_slug,
                                            kind=place_kind,
                                            parliamentary_session=parliamentary_session)
@@ -169,19 +204,54 @@ def parse_race_name(known_race_types, race_name):
     return (m.group(2), m.group(3))
 
 def make_new_person(candidate, **options):
-    print "Make a person from", json.dumps(candidate, indent=4)
-    legal_name = candidate['other_name'].title()
+    legal_name = (candidate.get('other_name', None) or '').title()
     if legal_name:
         legal_name += ' '
     else:
         legal_name += candidate['surname'].title()
     new_person = Person(legal_name=legal_name, slug=slugify(legal_name))
-    if options['commit']:
-        new_person.save()
-        print >> sys.stderr, 'Saving %s' % (person,)
-    else:
-        print >> sys.stderr, 'Not saving %s because --commit was not specified' % (person,)
+    maybe_save(new_person, **options)
     return new_person
+
+def update_parties(person, api_party, **options):
+    current_party_positions = person.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
+    if 'name' in api_party:
+        # Then we should be checking that a valid party membership
+        # exists, or create a new one otherwise:
+        api_party_name = api_party['name']
+        mz_party = get_matching_party(api_party_name, **options)
+        need_to_create_party_position = True
+        for party_position in (p for p in current_party_positions if p.organisation == mz_party):
+            # If there's a current position in this party, that's fine
+            # - just make sure that the end_date is 'future':
+            party_position.end_date = ApproximateDate(future=True)
+            maybe_save(party_position)
+            need_to_create_party_position = False
+        for party_position in (p for p in current_party_positions if p.organisation != mz_party):
+            # These shouldn't be current any more - end them when we
+            # got the new data:
+            party_position.end_date = new_data_approximate_date
+            maybe_save(party_position)
+        if need_to_create_party_position:
+            new_position = Position(title=PositionTitle.objects.get(name='Member'),
+                                    organisation=mz_party,
+                                    category='political',
+                                    person=person,
+                                    start_date=new_data_approximate_date,
+                                    end_date=ApproximateDate(future=True))
+            maybe_save(new_position)
+    else:
+        # If there's no party specified, end all current party positions:
+        for party_position in party_positions:
+            party_position.end_date = new_data_approximate_date
+            maybe_save(party_position, **options)
+
+def maybe_save(o, **options):
+    if options['commit']:
+        o.save()
+        print >> sys.stderr, 'Saving %s' % (o,)
+    else:
+        print >> sys.stderr, 'Not saving %s because --commit was not specified' % (o,)
 
 class Command(NoArgsCommand):
     help = 'Update the database with aspirants from the IEBC website'
@@ -277,7 +347,7 @@ class Command(NoArgsCommand):
                             person = get_person_from_names(first_names, surname)
                             if person:
                                 try:
-                                    same_person = same_people[(candidate['code'], int(person.id, 10))]
+                                    same_person = same_people[(candidate['code'], person.id)]
                                 except KeyError:
                                     print >> sys.stderr, "No manually checked information found about the detected match between:"
                                     print >> sys.stderr, candidate
@@ -288,7 +358,7 @@ class Command(NoArgsCommand):
                             # Now we know we need to create a new Person:
                             if not person:
                                 person = make_new_person(candidate, **options)
-                            update_parties(person, candidate)
+                            update_parties(person, candidate['party'], **options)
 
 
                             #     print "got match to:", person
