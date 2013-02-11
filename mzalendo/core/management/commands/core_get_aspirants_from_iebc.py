@@ -36,6 +36,23 @@ with open(os.path.join(data_directory, 'wards-names-matched.csv')) as fp:
         if api_name and db_name:
             place_name_corrections[api_name] = db_name
 
+same_people = {}
+
+names_checked_csv_file = 'names-manually-checked.csv'
+with open(os.path.join(data_directory, names_checked_csv_file)) as fp:
+    reader = csv.DictReader(fp)
+    for row in reader:
+        classification = row['Same/Different']
+        mz_id = int(row['Mz ID'], 10)
+        candidate_code = row['API Candidate Code']
+        key = (candidate_code, mz_id)
+        if re.search('^Same', classification):
+            same_people[key] = True
+        elif re.search('^Different', classification):
+            same_people[key] = False
+        else:
+            raise Exception, "Bad 'Same/Different' value in the line: %s" % (row,)
+
 # From: http://stackoverflow.com/q/600268/223092
 
 def mkdir_p(path):
