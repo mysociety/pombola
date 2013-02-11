@@ -250,7 +250,7 @@ class Command(NoArgsCommand):
                                 row['API Place'] = '%s (%s)' % (place_name, area_type)
                                 row['API Candidate Code'] = candidate['code']
                                 row['Mz Legal Name'] = person.legal_name
-                                row['Mz Other Names'] = person.legal_name
+                                row['Mz Other Names'] = person.other_names
                                 row['Mz URL'] = 'http://info.mzalendo.com' + person.get_absolute_url()
                                 row['Mz Parties Ever'] = ', '.join(o.name for o in person.parties_ever())
                                 for heading, positions in (('Mz Aspirant Ever', person.aspirant_positions_ever()),
