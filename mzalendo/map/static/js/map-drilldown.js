@@ -15,7 +15,7 @@
     maintainMapCenterOnResize( map );
     addMessageControlToMap( map );
     addSearchByNameControlToMap( map );
-    enableGeoLocateFeature( map );
+    enableGeoLocation( map );
   }
   
   function createMap () {
@@ -78,34 +78,22 @@
     return map;
   }
 
-  function enableGeoLocateFeature ( map ) {
-    var $geoLocateMeButton     = $('#geo-locate-me-button');
-    var $geoLocateMeButtonLink = $geoLocateMeButton.find('a');
+  function enableGeoLocation ( map ) {
     if ( geo_position_js.init() ) {      
-
-      $geoLocateMeButtonLink
-        .click( function (event) {
-          event.preventDefault();
-          
-          messageHolderHTML('Trying to find your current location&hellip;');
-          geo_position_js.getCurrentPosition(
-            function (data) { // success
-              var coords = new google.maps.LatLng( data.coords.latitude, data.coords.longitude );
-              map.setCenter( coords );
-              map.setZoom( 10 ); // feels about right for locating a big area
-            },
-            function () { // failure or error
-              messageHolderHTML('There was a problem finding your current location');
-            }
-          );
-        
-        });
-        addGeoLocateControlToMap( map );
-    } else {
-      $geoLocateMeButton.hide();      
+      messageHolderHTML('Trying to find your current location&hellip;');
+      geo_position_js.getCurrentPosition(
+        function (data) { // success
+          var coords = new google.maps.LatLng( data.coords.latitude, data.coords.longitude );
+          map.setCenter( coords );
+          map.setZoom( 10 ); // feels about right for locating a big area
+        },
+        function () { // failure or error
+          messageHolderHTML('There was a problem finding your current location');
+        }
+      );
     }    
   }
-  
+
   // Add crosshairs at the center - see merging of answers at 
   // http://stackoverflow.com/questions/4130237
   function addCrosshairs ( map ) {
@@ -240,16 +228,6 @@
       .push(control);
     $(control).show();
   }
-
-  function addGeoLocateControlToMap (map) {
-    var control = $('#geo-locate-me-button').get(0);
-    control.index = 2;
-    map
-      .controls[google.maps.ControlPosition.RIGHT_BOTTOM]
-      .push(control);
-    $(control).show();
-  }
-
 
   function messageHolderHTML (html) {
     $('#map-drilldown-message').html( html );        
