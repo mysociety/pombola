@@ -11,11 +11,14 @@
       }
 
       this.createMap();
-      this.addCrosshairs();
-      this.trackMapMovements();   
-      this.maintainMapCenterOnResize();
+
       this.addMessageControlToMap();
       this.addSearchByNameControlToMap();
+      this.addCrosshairs();
+
+      this.trackMapMovements();   
+      this.maintainMapCenterOnResize();
+
       this.enableGeoLocation();
     };
     
@@ -83,16 +86,22 @@
       var self = this;
       var map = this.map; 
       if ( geo_position_js.init() ) {      
-        this.messageHolderHTML('Trying to find your current location&hellip;');
+        self.messageHolderHTMLInstruction('geolocating');
         geo_position_js.getCurrentPosition(
           function (data) { // success
             var coords = new google.maps.LatLng( data.coords.latitude, data.coords.longitude );
             map.setCenter( coords );
             map.setZoom( 10 ); // feels about right for locating a big area
+            self.messageHolderHTMLInstruction('location found');
+            setTimeout(function() {
+              self.messageHolderHTMLInstruction('drag to find');              
+            }, 2000);
           },
           function () { // failure or error
-            console.log('location access denied?');
-            self.messageHolderHTML('There was a problem finding your current location');
+            self.messageHolderHTMLInstruction('could not geolocate');
+            setTimeout(function() {
+              self.messageHolderHTMLInstruction('drag to find');              
+            }, 2000);
           }
         );
       }    
@@ -157,10 +166,10 @@
     // Get the areas hash from the server, or the local cache. Debounce as well
     // so that we don't issue too many requests during map movements.
 
-    var fetchAreasCurrentRequest  = null;
-    var fetchAreasDebounceTimeout = null;
-    var fetchAreasCurrentURL      = null;
-    var fetchAreasCache           = {};
+    this.fetchAreasCurrentRequest  = null;
+    this.fetchAreasDebounceTimeout = null;
+    this.fetchAreasCurrentURL      = null;
+    this.fetchAreasCache           = {};
 
     this.fetchAreas = function ( lat, lng ) {
       var self = this;
@@ -170,30 +179,30 @@
       // console.log(lat, lng, mapitPointURL);
 
       // Check that we are not at the current location already
-      if (mapitPointURL == fetchAreasCurrentURL) {
+      if (mapitPointURL == self.fetchAreasCurrentURL) {
         return;
       }
-      fetchAreasCurrentURL = mapitPointURL;
+      self.fetchAreasCurrentURL = mapitPointURL;
 
       // clear current request and timeout
-      clearTimeout(fetchAreasDebounceTimeout);
-      if (fetchAreasCurrentRequest) {
-        fetchAreasCurrentRequest.abort();
+      clearTimeout(self.fetchAreasDebounceTimeout);
+      if (self.fetchAreasCurrentRequest) {
+        self.fetchAreasCurrentRequest.abort();
       }
 
       // Check to see if we have this result in cache already
-      if (fetchAreasCache[mapitPointURL]) {
-        self.displayAreas( fetchAreasCache[mapitPointURL] );
+      if (self.fetchAreasCache[mapitPointURL]) {
+        self.displayAreas( self.fetchAreasCache[mapitPointURL] );
         return;
       }
 
       // Not in cache - fetch from server
-      fetchAreasDebounceTimeout = setTimeout(
+      self.fetchAreasDebounceTimeout = setTimeout(
         function () {
           // TODO - catch errors here and display them (ignoring aborts)
-          self.messageHolderHTML("Fetching area from server&hellip;");
-          fetchAreasCurrentRequest = $.getJSON( mapitPointURL, function (data) {
-            fetchAreasCache[mapitPointURL] = data;
+          self.messageHolderHTMLLocation("Fetching area from server&hellip;");
+          self.fetchAreasCurrentRequest = $.getJSON( mapitPointURL, function (data) {
+            self.fetchAreasCache[mapitPointURL] = data;
             self.displayAreas(data);
           } );         
         },
@@ -205,7 +214,7 @@
     this.displayAreas = function (data) {
 
       var areas = _.omit( data, ['debug_db_queries'] );
-      var default_message   = 'No matching areas were found';
+      var default_message   = 'area not found';
       var area_descriptions = '';
 
       _.each( areas, function (area, area_id ) {
@@ -214,7 +223,7 @@
         area_descriptions += '<a href="/place/mapit_area/' + area_id + '">' + area.name + ' (' + area.type_name + ')</a>';
       });
 
-      this.messageHolderHTML(
+      this.messageHolderHTMLLocation(
         area_descriptions || default_message
       );    
     };
@@ -241,9 +250,25 @@
       $(control).show();
     };
 
+    this.messages = {
+      "drag to find": 'Drag map to your location or <a href="/search">search by name</a>.',
+      'geolocating':  "Trying to find your current location&hellip;",
+      'could not geolocate': "There was a problem finding your current location.",
+      'location found':      "Map has been centred on your current location.",
+      'area not found':      "No matching areas were found.",
+    };
 
-    this.messageHolderHTML = function (html) {
-      $('#map-drilldown-message').html( html );        
+    this.toMessage = function ( key ) {
+      return this.messages[key] || key;
+    }
+
+
+    this.messageHolderHTMLInstruction = function (html) {
+      $('#map-drilldown-message div.instruction').html( this.toMessage(html) );        
+    };
+
+    this.messageHolderHTMLLocation = function (html) {
+      $('#map-drilldown-message div.location').html( this.toMessage(html) );        
     };
 
 
