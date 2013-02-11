@@ -198,31 +198,8 @@ class Command(NoArgsCommand):
         # constituency and ward, and request the candidates for each.
 
         cache_directory = os.path.join(sys.path[0], 'cache')
-        candidates_cache_directory = os.path.join(cache_directory, 'candidatates-by-party')
-        parties_cache_filename = os.path.join(cache_directory, 'parties')
 
         mkdir_p(cache_directory)
-
-        # Get all the parties:
-
-        party_data = get_data_with_cache(parties_cache_filename, url('/party/'))
-
-        # Now that we've got all the parties, request all the
-        # candidates for each party:
-
-        total_candidates = 0
-
-        for d in party_data['parties']:
-            code = d['code']
-            candidates_cache_filename = os.path.join(cache_directory, 'candidates-for-' + code)
-            candidate_data = get_data_with_cache(candidates_cache_filename, url('/candidate/', query_filter='party=%s' % (code,)))
-            for race in candidate_data['candidates']:
-                race_name = race['race']
-                candidates = race['candidates']
-                # print len(candidates), race_name
-                total_candidates += len(candidates)
-
-        print "total_candidates by party are:", total_candidates
 
         total_candidates = 0
         race_type_counts = defaultdict(int)
