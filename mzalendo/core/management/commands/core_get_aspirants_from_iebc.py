@@ -170,6 +170,29 @@ class Command(NoArgsCommand):
             """A closure to avoid repeating parameters"""
             return make_api_url(path, IEBC_API_SECRET, token, query_filter)
 
+        # Set up a mapping between the race names and the
+        # corresponding PlaceKind and Position title:
+
+        known_race_type_mapping = {
+            "Governor": (PlaceKind.objects.get(slug='county'),
+                         ParliamentarySession.objects.get(slug='s2013'),
+                         PositionTitle.objects.filter(slug__startswith='aspirant-governor')),
+            "Senator": (PlaceKind.objects.get(slug='county'),
+                        ParliamentarySession.objects.get(slug='s2013'),
+                        PositionTitle.objects.filter(slug__startswith='aspirant-senator')),
+            "Women Representative": (PlaceKind.objects.get(slug='county'),
+                                     ParliamentarySession.objects.get(slug='s2013'),
+                                     PositionTitle.objects.filter(slug__startswith='aspirant-women-representative')),
+            "National Assembly Rep.": (PlaceKind.objects.get(slug='constituency'),
+                                       ParliamentarySession.objects.get(slug='na2013'),
+                                       PositionTitle.objects.filter(slug__startswith='aspirant-mp')),
+            "County Assembly Rep.": (PlaceKind.objects.get(slug='ward'),
+                                     ParliamentarySession.objects.get(slug='na2013'),
+                                     PositionTitle.objects.filter(slug__startswith='aspirant-governor')),
+            }
+
+        known_race_types = known_race_type_mapping.keys()
+
         # Since the following things don't work with the API:
         #
         #   - Requesting all contests via /contest/
@@ -351,28 +374,6 @@ class Command(NoArgsCommand):
             print "  ", c
 
 
-        # Set up a mapping between the race names and the
-        # corresponding PlaceKind and Position title:
-
-        known_race_type_mapping = {
-            "Governor": (PlaceKind.objects.get(slug='county'),
-                         ParliamentarySession.objects.get(slug='s2013'),
-                         PositionTitle.objects.filter(slug__startswith='aspirant-governor')),
-            "Senator": (PlaceKind.objects.get(slug='county'),
-                        ParliamentarySession.objects.get(slug='s2013'),
-                        PositionTitle.objects.filter(slug__startswith='aspirant-senator')),
-            "Women Representative": (PlaceKind.objects.get(slug='county'),
-                                     ParliamentarySession.objects.get(slug='s2013'),
-                                     PositionTitle.objects.filter(slug__startswith='aspirant-women-representative')),
-            "National Assembly Rep.": (PlaceKind.objects.get(slug='constituency'),
-                                       ParliamentarySession.objects.get(slug='na2013'),
-                                       PositionTitle.objects.filter(slug__startswith='aspirant-mp')),
-            "County Assembly Rep.": (PlaceKind.objects.get(slug='ward'),
-                                     ParliamentarySession.objects.get(slug='na2013'),
-                                     PositionTitle.objects.filter(slug__startswith='aspirant-governor')),
-            }
-
-        known_race_types = known_race_type_mapping.keys()
 
         for race in candidate_data['candidates']:
 
