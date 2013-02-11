@@ -234,7 +234,17 @@ class Command(NoArgsCommand):
         total_candidates = 0
         race_type_counts = defaultdict(int)
 
-        headings = ['API Name', 'API Party', 'API Place', 'API Candidate Code', 'Mz Legal Name', 'Mz Other Names', 'Mz URL', 'Mz Parties Ever', 'Mz Aspirant Ever', 'Mz Politician Ever', 'Mz ID']
+        headings = ['API Name',
+                    'API Party',
+                    'API Place',
+                    'API Candidate Code',
+                    'Mz Legal Name',
+                    'Mz Other Names',
+                    'Mz URL',
+                    'Mz Parties Ever',
+                    'Mz Aspirant Ever',
+                    'Mz Politician Ever',
+                    'Mz ID']
 
         with open(os.path.join(sys.path[0], 'names-to-check.csv'), 'w') as fp:
 
