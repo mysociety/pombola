@@ -308,12 +308,12 @@ class Command(NoArgsCommand):
             wards_from_api = sorted(ward['name'].encode('utf-8') for ward in ward_data['region']['locations'])
             wards_from_db = sorted(p.name.encode('utf-8') for p in Place.objects.filter(kind__slug='ward'))
 
-            both = itertools.izip_longest(wards_from_api, wards_from_db)
-
             with open('wards-names.csv', 'w') as fp:
                 writer = csv.writer(fp)
-                for t in both:
+                for t in itertools.izip_longest(wards_from_api, wards_from_db):
                     writer.writerow(t)
+
+
 
         # party_data = get_data(url('/party/'))
         # for d in party_data['parties']:
