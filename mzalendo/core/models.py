@@ -255,11 +255,17 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     def aspirant_positions(self):
         return self.position_set.all().current_aspirant_positions()
 
+    def aspirant_positions_ever(self):
+        return self.position_set.all().aspirant_positions()
+
     def is_aspirant(self):
         return self.aspirant_positions().exists()
 
     def politician_positions(self):
         return self.position_set.all().current_politician_positions()
+
+    def politician_positions_ever(self):
+        return self.politician_positions()
 
     def is_politician(self):
         return self.politician_positions().exists()
@@ -267,6 +273,11 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     def parties(self):
         """Return list of parties that this person is currently a member of"""
         party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
+        return Organisation.objects.filter(position__in=party_memberships)
+
+    def parties_ever(self):
+        """Return list of parties that this person has ever been a member of"""
+        party_memberships = self.position_set.all().filter(title__slug='member').filter(organisation__kind__slug='party')
         return Organisation.objects.filter(position__in=party_memberships)
 
     def coalitions(self):
