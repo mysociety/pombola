@@ -4,18 +4,25 @@
 
   <h1>{{ object.quiz.name }}</h1>
 
-    {% for answer in object.answer_set.all %}
-    
-      <div>
-
-        <h3>{{ answer.statement.text }}</h3>
-    
-          <p>
-            {{ answer.agreement }}
-          </p>
-
-      </div>
-    
-    {% endfor %}
+    <table>
+      <tr>
+        <th>Statement title</th>
+        <th>You</th>
+        {% for party in parties %}
+          <th>{{ party.name }}</th>
+        {% endfor %}
+      </tr>
+      
+      {% for row in rows %}
+        <tr>
+          <th>{{ row.statement.text }}</th>
+          <td>{{ row.answer.get_agreement_display }}</td>
+          {% for stance in row.party_stances %}
+            <td>{{ stance.get_agreement_display }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+      
+    </table>
   
 {% endblock %}
