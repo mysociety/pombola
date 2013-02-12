@@ -131,3 +131,11 @@ urlpatterns += patterns('',
     url(r'^status/down/', direct_to_template, {'template': 'down.html'} ),
 )
 
+
+# We handle the robots here rather than as a static file so that we can send
+# different content on a staging server. We don't use direct_to_template as we
+# want to set some caching headers too.
+urlpatterns += patterns('core.views',
+    url(r'robots.txt', 'robots' ),
+)
+

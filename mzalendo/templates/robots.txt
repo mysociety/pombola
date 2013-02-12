@@ -1,0 +1,10 @@
+User-agent: *
+
+{% if staging %}
+# This is a staging server, so we ask all search engines not to index it.
+Disallow: /
+{% endif %}
+
+Disallow: /feedback
+Disallow: /admin
+

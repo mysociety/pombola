@@ -26,3 +26,6 @@ Constituencies' if memory serves).
 
 Before merging the latest changes to the nigeria branch, or switching the
 shineyoureye site to master, this needs to be resolved.
+
+
+The Alias for robots.txt should be removed from the server http.conf so that the robots.txt can be templated.
