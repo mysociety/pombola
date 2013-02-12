@@ -126,10 +126,4 @@ def get_person_from_names(first_names, surname):
     matches = Person.objects.filter(slug=slugify(first_and_last))
     if len(matches) == 1:
         return matches[0]
-    # Otherwise, look for the best hits using Levenshtein distance:
-    for field in 'legal_name', 'other_names':
-        for version in (full_name, first_and_last):
-            closest_match = Person.objects.raw('SELECT *, levenshtein(legal_name, %s) AS difference FROM core_person ORDER BY difference LIMIT 1', [version])[0]
-            if closest_match.difference <= 2:
-                print >> sys.stderr, "  Good closest match to %s against %s was: %s (with score %d)" % (field, version, closest_match, closest_match.difference)
     return None
