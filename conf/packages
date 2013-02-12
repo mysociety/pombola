@@ -11,6 +11,10 @@ postgresql
 postgis
 libpq-dev
 
+# Also add postgresql-contrib, particularly for the fuzzystrmatch
+# extension
+postgresql-contrib
+
 # For mapit
 libgdal1-1.6.0 | libgdal1-1.5.0
 python-gdal
