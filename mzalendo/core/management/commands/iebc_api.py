@@ -74,12 +74,8 @@ def get_data_with_cache(cache_filename, *args, **kwargs):
 #------------------------------------------------------------------------
 
 def get_person_from_names(first_names, surname):
-    print "first_names:", first_names
-    print "surname:", surname
     full_name = first_names + ' ' + surname
     first_and_last = re.sub(' .*', '', first_names) + ' ' + surname
-    print "full_name:", full_name
-    print "first_and_last:", first_and_last
     for field in 'legal_name', 'other_names':
         for version in (full_name, first_and_last):
             kwargs = {field + '__iexact': version}
