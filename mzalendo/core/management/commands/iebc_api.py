@@ -82,8 +82,8 @@ def get_person_from_names(first_names, surname):
             matches = Person.objects.filter(**kwargs)
             if len(matches) > 1:
                 message = "Multiple Person matches for %s against %s" % (version, field)
-                # print >> sys.stderr, message
-                raise Exception, message
+                print >> sys.stderr, message
+                # raise Exception, message
             elif len(matches) == 1:
                 return matches[0]
     # Or look for an exact slug match:
