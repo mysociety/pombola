@@ -207,8 +207,7 @@ def make_new_person(candidate, **options):
     legal_name = (candidate.get('other_name', None) or '').title()
     if legal_name:
         legal_name += ' '
-    else:
-        legal_name += candidate['surname'].title()
+    legal_name += candidate['surname'].title()
     new_person = Person(legal_name=legal_name, slug=slugify(legal_name))
     maybe_save(new_person, **options)
     return new_person
