@@ -190,9 +190,9 @@ def get_matching_place(place_name, place_kind, parliamentary_session):
                                            kind=place_kind,
                                            parliamentary_session=parliamentary_session)
     if not matching_places:
-        raise Exception, "Found no place that matched: '%s' <%s> <%s>" % (place_name, place_kind, parliamentary_session)
+        raise Exception, "Found no place that matched: '%s' <%s> <%s>" % (place_slug, place_kind, parliamentary_session)
     elif len(matching_places) > 1:
-        raise Exception, "Multiple places found that matched: '%s' <%s> <%s> - they were: %s" % (place_name, place_kind, parliamentary_session, ",".join(str(p for p in matching_places)))
+        raise Exception, "Multiple places found that matched: '%s' <%s> <%s> - they were: %s" % (place_slug, place_kind, parliamentary_session, ",".join(str(p for p in matching_places)))
     else:
         return matching_places[0]
 
