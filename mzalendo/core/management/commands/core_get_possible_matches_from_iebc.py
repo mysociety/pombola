@@ -246,7 +246,8 @@ class Command(NoArgsCommand):
 
         # ------------------------------------------------------------------------
 
-        headings = ['API Name',
+        headings = ['Same/Different',
+                    'API Name',
                     'API Party',
                     'API Place',
                     'API Candidate Code',
@@ -288,6 +289,7 @@ class Command(NoArgsCommand):
 
                                 print "got match to:", person
                                 row = {}
+                                row['Same/Different'] = ''
                                 row['API Name'] = first_names + ' ' + surname
                                 party_data = candidate['party']
                                 row['API Party'] = party_data['name'] if 'name' in party_data else ''
