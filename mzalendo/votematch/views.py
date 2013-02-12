@@ -18,3 +18,22 @@ def quiz_detail (request, slug):
         context_instance=RequestContext(request)
     )
     
+
+def submission_detail (request, slug, token):
+
+    # TODO - we're not checking that the quiz slug is correct. We don't really
+    # care - but should probably check just to be correct.
+
+    submission = get_object_or_404(
+        models.Submission,
+        token = token
+    )
+
+    return render_to_response(
+        'votematch/submission_detail.html',
+        {
+            'object':     submission,
+        },
+        context_instance=RequestContext(request)
+    )
+    

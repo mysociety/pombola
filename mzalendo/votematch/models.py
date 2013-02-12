@@ -67,13 +67,23 @@ class Stance(TimeStampedModel):
 
 class Submission(TimeStampedModel):
     """ a single submission of answers for the quiz, and some demographic data """
-    quiz = models.ForeignKey('Quiz')    
-    token = models.TextField(default=generate_token, unique=True)
-    age = models.PositiveIntegerField(blank=True, null=True)
+    quiz            = models.ForeignKey('Quiz')    
+    token           = models.TextField(default=generate_token, unique=True)
+    age             = models.PositiveIntegerField(blank=True, null=True)
     expected_result = models.ForeignKey('Party', blank=True, null=True)
 
     def __unicode__(self):
         return "%s (%s)" % ( self.token, self.quiz )
+    
+    def get_absolute_url(self):
+        return reverse(
+            'votematch-submission',
+            kwargs = {
+                'slug':  self.quiz.slug,
+                'token': self.token
+            }
+        )
+
     
 
 class Answer(TimeStampedModel):

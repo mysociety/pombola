@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>{{ object.quiz.name }}</h1>
+
+    {% for answer in object.answer_set.all %}
+    
+      <div>
+
+        <h3>{{ answer.statement.text }}</h3>
+    
+          <p>
+            {{ answer.agreement }}
+          </p>
+
+      </div>
+    
+    {% endfor %}
+  
+{% endblock %}
