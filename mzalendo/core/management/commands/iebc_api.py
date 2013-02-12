@@ -3,7 +3,12 @@ import hmac
 import hashlib
 import json
 import os
+import re
 import requests
+
+from django.template.defaultfilters import slugify
+
+from core.models import Person
 
 iebc_base_url = 'http://api.iebc.or.ke'
 
@@ -65,3 +70,37 @@ def get_data_with_cache(cache_filename, *args, **kwargs):
         with open(cache_filename, 'w') as fp:
             json.dump(result, fp)
     return result
+
+#------------------------------------------------------------------------
+
+def get_person_from_names(first_names, surname):
+    print "first_names:", first_names
+    print "surname:", surname
+    full_name = first_names + ' ' + surname
+    first_and_last = re.sub(' .*', '', first_names) + ' ' + surname
+    print "full_name:", full_name
+    print "first_and_last:", first_and_last
+    for field in 'legal_name', 'other_names':
+        for version in (full_name, first_and_last):
+            kwargs = {field + '__iexact': version}
+            matches = Person.objects.filter(**kwargs)
+            if len(matches) > 1:
+                message = "Multiple Person matches for %s against %s" % (version, field)
+                # print >> sys.stderr, message
+                raise Exception, message
+            elif len(matches) == 1:
+                return matches[0]
+    # Or look for an exact slug match:
+    matches = Person.objects.filter(slug=slugify(full_name))
+    if len(matches) == 1:
+        return matches[0]
+    matches = Person.objects.filter(slug=slugify(first_and_last))
+    if len(matches) == 1:
+        return matches[0]
+    # Otherwise, look for the best hits using Levenshtein distance:
+    for field in 'legal_name', 'other_names':
+        for version in (full_name, first_and_last):
+            closest_match = Person.objects.raw('SELECT *, levenshtein(legal_name, %s) AS difference FROM core_person ORDER BY difference LIMIT 1', [version])[0]
+            if closest_match.difference <= 2:
+                print "  good closest match to %s against %s was: %s (with score %d)" % (field, version, closest_match, closest_match.difference)
+    return None

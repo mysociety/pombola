@@ -69,27 +69,6 @@ with open(os.path.join(data_directory, names_checked_csv_file)) as fp:
         else:
             raise Exception, "Bad 'Same/Different' value in the line: %s" % (row,)
 
-def get_person_from_names(first_names, surname):
-    full_name = first_names + ' ' + surname
-    first_and_last = re.sub(' .*', '', first_names) + ' ' + surname
-    for field in 'legal_name', 'other_names':
-        for version in (full_name, first_and_last):
-            kwargs = {field + '__iexact': version}
-            matches = Person.objects.filter(**kwargs)
-            if len(matches) > 1:
-                message = "Multiple Person matches for %s against %s" % (version, field)
-                # print >> sys.stderr, message
-                raise Exception, message
-            elif len(matches) == 1:
-                return matches[0]
-    # Otherwise, look for the best hits using Levenshtein distance:
-    for field in 'legal_name', 'other_names':
-        for version in (full_name, first_and_last):
-            closest_match = Person.objects.raw('SELECT *, levenshtein(legal_name, %s) AS difference FROM core_person ORDER BY difference LIMIT 1', [version])[0]
-            if closest_match.difference <= 2:
-                print "  good closest match to %s against %s was: %s (with score %d)" % (field, version, closest_match, closest_match.difference)
-    return None
-
 def get_matching_party(party_name, **options):
     party_name_to_use = party_name_corrections.get(party_name, party_name)
     # print "looking for '%s'" % (party_name_to_use,)
