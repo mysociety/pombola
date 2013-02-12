@@ -281,19 +281,19 @@ class Command(NoArgsCommand):
         known_race_type_mapping = {
             "Governor": (PlaceKind.objects.get(slug='county'),
                          ParliamentarySession.objects.get(slug='s2013'),
-                         PositionTitle.objects.filter(slug__startswith='aspirant-governor')),
+                         PositionTitle.objects.get(slug__startswith='aspirant-governor')),
             "Senator": (PlaceKind.objects.get(slug='county'),
                         ParliamentarySession.objects.get(slug='s2013'),
-                        PositionTitle.objects.filter(slug__startswith='aspirant-senator')),
+                        PositionTitle.objects.get(slug__startswith='aspirant-senator')),
             "Women Representative": (PlaceKind.objects.get(slug='county'),
                                      ParliamentarySession.objects.get(slug='s2013'),
-                                     PositionTitle.objects.filter(slug__startswith='aspirant-women-representative')),
+                                     PositionTitle.objects.get(slug__startswith='aspirant-women-representative')),
             "National Assembly Rep.": (PlaceKind.objects.get(slug='constituency'),
                                        ParliamentarySession.objects.get(slug='na2013'),
-                                       PositionTitle.objects.filter(slug__startswith='aspirant-mp')),
+                                       PositionTitle.objects.get(slug__startswith='aspirant-mp')),
             "County Assembly Rep.": (PlaceKind.objects.get(slug='ward'),
                                      ParliamentarySession.objects.get(slug='na2013'),
-                                     PositionTitle.objects.filter(slug__startswith='aspirant-governor')),
+                                     PositionTitle.objects.get(slug__startswith='aspirant-governor')),
             }
 
         known_race_types = known_race_type_mapping.keys()
