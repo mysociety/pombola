@@ -21,6 +21,10 @@ DJANGO_SECRET_KEY: 'abcabc'
 # create an account and then put the 'UA-123456-1' bit here
 GOOGLE_ANALYTICS_ACCOUNT: ''
 
+# The IEBC API credentials for fetching aspirant data:
+IEBC_API_ID: ''
+IEBC_API_SECRET: ''
+
 # Managers - might be worth having this set to a group email address
 MANAGERS_NAME: 'Mzalendo Managers'
 MANAGERS_EMAIL: 'managers@example.com'

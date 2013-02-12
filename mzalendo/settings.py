@@ -420,6 +420,8 @@ AJAX_SELECT_INLINES   = None # we add the js and css ourselves in the header
 HTTPLIB2_CACHE_DIR = os.path.join( root_dir, 'httplib2_cache' )
 GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
 
+IEBC_API_ID = config.get('IEBC_API_ID')
+IEBC_API_SECRET = config.get('IEBC_API_SECRET')
 
 # Markitup settings
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
