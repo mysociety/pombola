@@ -127,8 +127,18 @@ def make_new_person(candidate, **options):
     legal_name = (candidate.get('other_name', None) or '').title()
     if legal_name:
         legal_name += ' '
-    legal_name += candidate['surname'].title()
-    new_person = Person(legal_name=legal_name, slug=slugify(legal_name))
+    legal_name += (candidate.get('surname', None) or '').title()
+    slug_to_use = slugify(legal_name)
+    suffix = 2
+    while True:
+        try:
+            Person.objects.get(slug=slug_to_use)
+        except Person.DoesNotExist:
+            # Then this slug_to_use is fine, so just break:
+            break
+        slug_to_use = re.sub('-?\d*$', '', slug_to_use) + '-' + str(suffix)
+        suffix += 1
+    new_person = Person(legal_name=legal_name, slug=slug_to_use)
     maybe_save(new_person, **options)
     return new_person
 
@@ -268,13 +278,7 @@ class Command(NoArgsCommand):
                             person = get_person_from_names(first_names, surname)
                             print "returned person is:", person
                             if person:
-                                try:
-                                    same_person = same_people[(candidate['code'], person.id)]
-                                except KeyError:
-                                    print >> sys.stderr, "No manually checked information found about the detected match between:"
-                                    print >> sys.stderr, candidate
-                                    print >> sys.stderr, person
-                                    raise Exception, "No manually checked information found"
+                                same_person = same_people.get((candidate['code'], person.id), False)
                                 if not same_person:
                                     person = None
                             # Now we know we need to create a new Person:
