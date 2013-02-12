@@ -242,7 +242,7 @@ def update_parties(person, api_party, **options):
             maybe_save(new_position, **options)
     else:
         # If there's no party specified, end all current party positions:
-        for party_position in party_positions:
+        for party_position in current_party_positions:
             party_position.end_date = new_data_approximate_date
             maybe_save(party_position, **options)
 
@@ -339,6 +339,8 @@ class Command(NoArgsCommand):
                     for race in candidate_data['candidates']:
                         full_race_name = race['race']
                         race_type, place_name = parse_race_name(known_race_types, full_race_name)
+                        place_kind, session, title = known_race_type_mapping[race_type]
+                        place = get_matching_place(place_name, place_kind, session)
                         candidates = race['candidates']
                         for candidate in candidates:
                             first_names = candidate['other_name'] or ''
@@ -360,24 +362,34 @@ class Command(NoArgsCommand):
                                 person = make_new_person(candidate, **options)
                             update_parties(person, candidate['party'], **options)
 
+                            # Now we just need to make sure that there's an appropriate aspirant position, which will be defined by:
+                            #   - the place
+                            #   - the organisation (REPUBLIC OF KENYA used in most cases)
 
-                            #     print "got match to:", person
-                            #     row = {}
-                            #     row['API Name'] = first_names + ' ' + surname
-                            #     party_data = candidate['party']
-                            #     row['API Party'] = party_data['name'] if 'name' in party_data else ''
-                            #     row['API Place'] = '%s (%s)' % (place_name, area_type)
-                            #     row['API Candidate Code'] = candidate['code']
-                            #     row['Mz Legal Name'] = person.legal_name
-                            #     row['Mz Other Names'] = person.other_names
-                            #     row['Mz URL'] = 'http://info.mzalendo.com' + person.get_absolute_url()
-                            #     row['Mz Parties Ever'] = ', '.join(o.name for o in person.parties_ever())
-                            #     for heading, positions in (('Mz Aspirant Ever', person.aspirant_positions_ever()),
-                            #                                ('Mz Politician Ever', person.politician_positions_ever())):
-                            #         row[heading] = ', '.join('%s at %s' % (p.title.name, p.place) for p in positions)
-                            #     row['Mz ID'] = person.id
-                            #     writer.writerow(row)
+                            aspirant_position_properties = {
+                                'organisation': Organisation.objects.get(name='REPUBLIC OF KENYA'),
+                                'place': place,
+                                'person': person,
+                                'title': title,
+                                'category': 'political'}
+
+                            existing_matching_aspirant_positions = Position.objects.filter(**aspirant_position_properties).currently_active()
+
+                            for existing_matching_aspirant_position in existing_matching_aspirant_positions:
+                                # These are still valid, so don't remove them:
+                                aspirants_to_remove.discard(existing_matching_aspirant_position)
+
+                            if not existing_matching_aspirant_positions:
+                                new_position = Position(start_date=new_data_approximate_date,
+                                                        end_date=ApproximateDate(future=True),
+                                                        **aspirant_position_properties)
+                                maybe_save(new_position, **options)
+
                             total_candidates += 1
+
+        for aspirant_to_remove in aspirants_to_remove:
+            if options['commit']:
+                aspirants_to_remove.delete()
 
         print "total_candidates by area are:", total_candidates
 
