@@ -301,3 +301,15 @@ def memcached_status(request):
     )
 
     
+# Template the robots.txt so we can block robots on staging.
+@cache_control(max_age=86400, s_maxage=86400, public=True)
+def robots(request):
+
+    return render_to_response(
+        'robots.txt',
+        {
+            'staging': settings.STAGING,
+        },
+        context_instance = RequestContext( request ),
+        mimetype         = 'text/plain' # will need to change to content_type in Django 1.5
+    )
