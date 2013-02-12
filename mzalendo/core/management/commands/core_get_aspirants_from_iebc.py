@@ -249,67 +249,61 @@ class Command(NoArgsCommand):
                     'Mz Politician Ever',
                     'Mz ID']
 
-        with open(os.path.join(sys.path[0], 'names-to-check.csv'), 'w') as fp:
+        for area_type in 'county', 'constituency', 'ward':
+            cache_filename = os.path.join(cache_directory, area_type)
+            area_type_data = get_data_with_cache(cache_filename, url('/%s/' % (area_type)))
+            areas = area_type_data['region']['locations']
+            for i, area in enumerate(areas):
+                # Get the candidates for that area:
+                code = area['code']
+                candidates_cache_filename = os.path.join(cache_directory, 'candidates-for-' + area_type + '-' + code)
+                candidate_data = get_data_with_cache(candidates_cache_filename, url('/candidate/', query_filter='%s=%s' % (area_type, code)))
+                # print "got candidate_data:", candidate_data
+                for race in candidate_data['candidates']:
+                    full_race_name = race['race']
+                    race_type, place_name = parse_race_name(known_race_types, full_race_name)
+                    place_kind, session, title = known_race_type_mapping[race_type]
+                    place = get_matching_place(place_name, place_kind, session)
+                    candidates = race['candidates']
+                    for candidate in candidates:
+                        first_names = candidate['other_name'] or ''
+                        surname = candidate['surname'] or ''
+                        race_type_counts[race_type] += 1
+                        person = get_person_from_names(first_names, surname)
+                        print "returned person is:", person
+                        if person:
+                            same_person = same_people.get((candidate['code'], person.id), False)
+                            if not same_person:
+                                person = None
+                        # Now we know we need to create a new Person:
+                        if not person:
+                            person = make_new_person(candidate, **options)
+                        update_parties(person, candidate['party'], **options)
 
-            writer = csv.DictWriter(fp, headings)
+                        # Now we just need to make sure that there's an appropriate aspirant position, which will be defined by:
+                        #   - the place
+                        #   - the organisation (REPUBLIC OF KENYA used in most cases)
 
-            writer.writerow(dict((h, h) for h in headings))
+                        aspirant_position_properties = {
+                            'organisation': Organisation.objects.get(name='REPUBLIC OF KENYA'),
+                            'place': place,
+                            'person': person,
+                            'title': title,
+                            'category': 'political'}
 
-            for area_type in 'county', 'constituency', 'ward':
-                cache_filename = os.path.join(cache_directory, area_type)
-                area_type_data = get_data_with_cache(cache_filename, url('/%s/' % (area_type)))
-                areas = area_type_data['region']['locations']
-                for i, area in enumerate(areas):
-                    # Get the candidates for that area:
-                    code = area['code']
-                    candidates_cache_filename = os.path.join(cache_directory, 'candidates-for-' + area_type + '-' + code)
-                    candidate_data = get_data_with_cache(candidates_cache_filename, url('/candidate/', query_filter='%s=%s' % (area_type, code)))
-                    # print "got candidate_data:", candidate_data
-                    for race in candidate_data['candidates']:
-                        full_race_name = race['race']
-                        race_type, place_name = parse_race_name(known_race_types, full_race_name)
-                        place_kind, session, title = known_race_type_mapping[race_type]
-                        place = get_matching_place(place_name, place_kind, session)
-                        candidates = race['candidates']
-                        for candidate in candidates:
-                            first_names = candidate['other_name'] or ''
-                            surname = candidate['surname'] or ''
-                            race_type_counts[race_type] += 1
-                            person = get_person_from_names(first_names, surname)
-                            print "returned person is:", person
-                            if person:
-                                same_person = same_people.get((candidate['code'], person.id), False)
-                                if not same_person:
-                                    person = None
-                            # Now we know we need to create a new Person:
-                            if not person:
-                                person = make_new_person(candidate, **options)
-                            update_parties(person, candidate['party'], **options)
+                        existing_matching_aspirant_positions = Position.objects.filter(**aspirant_position_properties).currently_active()
 
-                            # Now we just need to make sure that there's an appropriate aspirant position, which will be defined by:
-                            #   - the place
-                            #   - the organisation (REPUBLIC OF KENYA used in most cases)
+                        for existing_matching_aspirant_position in existing_matching_aspirant_positions:
+                            # These are still valid, so don't remove them:
+                            aspirants_to_remove.discard(existing_matching_aspirant_position)
 
-                            aspirant_position_properties = {
-                                'organisation': Organisation.objects.get(name='REPUBLIC OF KENYA'),
-                                'place': place,
-                                'person': person,
-                                'title': title,
-                                'category': 'political'}
+                        if not existing_matching_aspirant_positions:
+                            new_position = Position(start_date=new_data_approximate_date,
+                                                    end_date=ApproximateDate(future=True),
+                                                    **aspirant_position_properties)
+                            maybe_save(new_position, **options)
 
-                            existing_matching_aspirant_positions = Position.objects.filter(**aspirant_position_properties).currently_active()
-
-                            for existing_matching_aspirant_position in existing_matching_aspirant_positions:
-                                # These are still valid, so don't remove them:
-                                aspirants_to_remove.discard(existing_matching_aspirant_position)
-
-                            if not existing_matching_aspirant_positions:
-                                new_position = Position(start_date=new_data_approximate_date,
-                                                        end_date=ApproximateDate(future=True),
-                                                        **aspirant_position_properties)
-                                maybe_save(new_position, **options)
-
-                            total_candidates += 1
+                        total_candidates += 1
 
         for aspirant_to_remove in aspirants_to_remove:
             if options['commit']:
