@@ -276,8 +276,8 @@ class Command(NoArgsCommand):
                         total_candidates += 1
 
         for aspirant_to_remove in aspirants_to_remove:
-            if options['commit']:
-                aspirants_to_remove.delete()
+            aspirant_to_remove.end_date = new_data_approximate_date
+            maybe_save(new_position, **options)
 
         print "total_candidates by area are:", total_candidates
 
