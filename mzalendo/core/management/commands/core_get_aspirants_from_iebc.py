@@ -164,7 +164,7 @@ def get_matching_party(party_name, **options):
                                  started=ApproximateDate(datetime.date.today().year),
                                  ended=None,
                                  kind=OrganisationKind.objects.get(slug='party'))
-        maybe_save(new_party, **option)
+        maybe_save(new_party, **options)
         return new_party
     elif len(matching_parties) == 1:
         return matching_parties[0]
