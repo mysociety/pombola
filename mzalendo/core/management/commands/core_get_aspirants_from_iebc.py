@@ -225,13 +225,13 @@ def update_parties(person, api_party, **options):
             # If there's a current position in this party, that's fine
             # - just make sure that the end_date is 'future':
             party_position.end_date = ApproximateDate(future=True)
-            maybe_save(party_position)
+            maybe_save(party_position, **options)
             need_to_create_party_position = False
         for party_position in (p for p in current_party_positions if p.organisation != mz_party):
             # These shouldn't be current any more - end them when we
             # got the new data:
             party_position.end_date = new_data_approximate_date
-            maybe_save(party_position)
+            maybe_save(party_position, **options)
         if need_to_create_party_position:
             new_position = Position(title=PositionTitle.objects.get(name='Member'),
                                     organisation=mz_party,
@@ -239,7 +239,7 @@ def update_parties(person, api_party, **options):
                                     person=person,
                                     start_date=new_data_approximate_date,
                                     end_date=ApproximateDate(future=True))
-            maybe_save(new_position)
+            maybe_save(new_position, **options)
     else:
         # If there's no party specified, end all current party positions:
         for party_position in party_positions:
