@@ -266,6 +266,7 @@ class Command(NoArgsCommand):
                             surname = candidate['surname'] or ''
                             race_type_counts[race_type] += 1
                             person = get_person_from_names(first_names, surname)
+                            print "returned person is:", person
                             if person:
                                 try:
                                     same_person = same_people[(candidate['code'], person.id)]
