@@ -1,0 +1,388 @@
+[
+  {
+    "pk": 1, 
+    "model": "votematch.quiz", 
+    "fields": {
+      "slug": "policies-thick-it", 
+      "modified": "2013-02-08 17:10:35", 
+      "name": "Policies from \"The Thick Of It\"", 
+      "created": "2013-02-08 17:10:35"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "Sat-nav for asylum seekers.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:10:58", 
+      "created": "2013-02-08 17:10:58"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "Tax breaks for aromatherapists.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:11:10", 
+      "created": "2013-02-08 17:11:10"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "A national spare room database.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:11:30", 
+      "created": "2013-02-08 17:11:30"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "Make Davina McCall the new pope.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:12:18", 
+      "created": "2013-02-08 17:12:18"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "Downloadable rice.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:12:25", 
+      "created": "2013-02-08 17:12:25"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "More wooden toys.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:12:30", 
+      "created": "2013-02-08 17:12:30"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "Improve the state of zoos.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:12:37", 
+      "created": "2013-02-08 17:12:37"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "Policemen's hats should be yellow.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:12:53", 
+      "created": "2013-02-08 17:12:53"
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "A government department to count the moon.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:13:00", 
+      "created": "2013-02-08 17:13:00"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "Inflatable churches for rural communities.", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:13:08", 
+      "created": "2013-02-08 17:13:08"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "votematch.statement", 
+    "fields": {
+      "text": "Triple the number of quiet coaches on inter-city lines", 
+      "quiz": 1, 
+      "modified": "2013-02-08 17:13:21", 
+      "created": "2013-02-08 17:13:21"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "votematch.party", 
+    "fields": {
+      "name": "Loonie Left", 
+      "created": "2013-02-12 15:47:57", 
+      "modified": "2013-02-12 15:47:57", 
+      "_summary_rendered": "<p>gargle</p>", 
+      "quiz": 1, 
+      "summary": "gargle\r\n"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "votematch.party", 
+    "fields": {
+      "name": "Radical Right", 
+      "created": "2013-02-12 15:48:10", 
+      "modified": "2013-02-12 15:48:10", 
+      "_summary_rendered": "<p>Wibble!</p>", 
+      "quiz": 1, 
+      "summary": "Wibble!"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": 2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 1, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 2, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": 1, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 2, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 3, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": 2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 3, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 4, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": 0, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 4, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 5, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": -1, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 5, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 6, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": 1, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 6, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 7, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": 2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 7, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 8, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": -2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 8, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 9, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": 0, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 9, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 10, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": 2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 10, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 11, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 1, 
+      "agreement": -2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 11, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 12, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": -2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 1, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 13, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": -1, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 2, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 14, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": -2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 3, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 15, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": 0, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 4, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 16, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": 1, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 5, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 17, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": -1, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 6, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 18, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": -2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 7, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 19, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": 2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 8, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 20, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": 0, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 9, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 21, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": -2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 10, 
+      "created": "2013-02-12 15:48:26"
+    }
+  },
+  {
+    "pk": 22, 
+    "model": "votematch.stance", 
+    "fields": {
+      "party": 2, 
+      "agreement": 2, 
+      "modified": "2013-02-12 15:48:26", 
+      "statement": 11, 
+      "created": "2013-02-12 15:48:26"
+    }
+  }
+]
