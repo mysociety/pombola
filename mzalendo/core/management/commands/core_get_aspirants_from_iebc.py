@@ -293,7 +293,7 @@ class Command(NoArgsCommand):
                                        PositionTitle.objects.get(slug__startswith='aspirant-mp')),
             "County Assembly Rep.": (PlaceKind.objects.get(slug='ward'),
                                      ParliamentarySession.objects.get(slug='na2013'),
-                                     PositionTitle.objects.get(slug__startswith='aspirant-governor')),
+                                     PositionTitle.objects.get(slug__startswith='aspirant-ward-representative')),
             }
 
         known_race_types = known_race_type_mapping.keys()
