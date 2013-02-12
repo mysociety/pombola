@@ -13,6 +13,7 @@ def quiz_detail (request, slug):
         'votematch/quiz_detail.html',
         {
             'object':     quiz,
+            'choices':    models.agreement_choices,
         },
         context_instance=RequestContext(request)
     )

@@ -12,14 +12,18 @@
     {% for statement in object.statement_set.all %}
     
       <div>
-        {{ statement.text }}
+
+        <h3>{{ statement.text }}</h3>
     
-        <input type="radio" name="statement[{{ statement.id }}]" value="1"> 
-        <input type="radio" name="statement[{{ statement.id }}]" value="2"> 
-        <input type="radio" name="statement[{{ statement.id }}]" value="3"> 
-        <input type="radio" name="statement[{{ statement.id }}]" value="4"> 
-        <input type="radio" name="statement[{{ statement.id }}]" value="5"> 
-        <input type="radio" name="statement[{{ statement.id }}]" value="-"> 
+        {% for key, text in choices %}
+          <p>
+            {{ text }}: <input type="radio" name="statement-{{ statement.id }}" value="{{ key }}">
+          </p>
+        {% endfor %}
+
+        <p>
+          not sure: <input type="radio" name="statement-{{ statement.id }}" value="" checked >
+        </p>
     
       </div>
     
