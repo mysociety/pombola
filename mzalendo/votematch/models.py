@@ -70,7 +70,7 @@ class Submission(TimeStampedModel):
     quiz = models.ForeignKey('Quiz')    
     token = models.TextField(default=generate_token, unique=True)
     age = models.PositiveIntegerField(blank=True, null=True)
-    expected_result = models.ForeignKey('Party')
+    expected_result = models.ForeignKey('Party', blank=True, null=True)
 
     def __unicode__(self):
         return "%s (%s)" % ( self.token, self.quiz )
