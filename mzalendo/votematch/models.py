@@ -62,7 +62,7 @@ class Stance(TimeStampedModel):
     agreement = models.IntegerField(choices=agreement_choices)
 
     def __unicode__(self):
-        return "%s - %s - %s" % ( self.party.name, self.agreement, self.statement.text )
+        return "%s - %s - %s" % ( self.party.name, self.get_agreement_display(), self.statement.text )
 
 
 class Submission(TimeStampedModel):
@@ -93,6 +93,6 @@ class Answer(TimeStampedModel):
     agreement  = models.IntegerField(choices=agreement_choices)
     
     def __unicode__(self):
-        return "%s - %s - %s" % ( self.submission, self.agreement, self.statement.text )
+        return "%s - %s - %s" % ( self.submission, self.get_agreement_display(), self.statement.text )
     
      
