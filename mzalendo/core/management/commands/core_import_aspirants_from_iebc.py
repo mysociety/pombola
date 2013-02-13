@@ -28,7 +28,7 @@ new_data_approximate_date = ApproximateDate(new_data_date.year,
                                             new_data_date.month,
                                             new_data_date.day)
 
-data_directory = os.path.join(sys.path[0], 'kenyan-election-data')
+data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
 
 # Calling these 'corrections' may not be quite right.  There are
 # naming discrepancies between the documents published by the IEBC and
@@ -200,7 +200,7 @@ class Command(NoArgsCommand):
         # To get all the candidates, we iterate over each county,
         # constituency and ward, and request the candidates for each.
 
-        cache_directory = os.path.join(sys.path[0], 'cache')
+        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-08')
 
         mkdir_p(cache_directory)
 

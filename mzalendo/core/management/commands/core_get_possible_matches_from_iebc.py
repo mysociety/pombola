@@ -28,7 +28,7 @@ from core.models import Place, PlaceKind, Person, ParliamentarySession, Position
 
 from iebc_api import *
 
-data_directory = os.path.join(sys.path[0], 'kenyan-election-data')
+data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
 
 class Command(NoArgsCommand):
     help = 'Update the database with aspirants from the IEBC website'
@@ -53,7 +53,7 @@ class Command(NoArgsCommand):
         # To get all the candidates, we iterate over each county,
         # constituency and ward, and request the candidates for each.
 
-        cache_directory = os.path.join(sys.path[0], 'cache')
+        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-08')
 
         mkdir_p(cache_directory)
 
