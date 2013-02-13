@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import re 
+import datetime
+import re
 import sys
 
 from optparse import make_option
@@ -224,7 +225,7 @@ class Command(BaseCommand):
             for slug
             in coalition_party_slugs
         ]
-        
+
         # get all the positions of people who are currently members of those parties
         coalition_member_positions = (
             models
@@ -256,20 +257,46 @@ class Command(BaseCommand):
             .distinct()
         )
 
+        coalition_memberships_to_end = set(
+            models
+            .Position
+            .objects
+            .all()
+            .filter(title=coalition_member_title)
+            .filter(organisation__kind__slug='coalition')
+            .filter(person__in=coalition_members)
+            .currently_active()
+            )
+
         # for all the coalition members go through and ensure that they are linked to the coalition as well
         for member in coalition_members:
-            # print member
             for party in member.parties():
                 coalition_slug = self.party_to_coalition_mapping.get(party.slug)
                 if coalition_slug:
                     coalition = models.Organisation.objects.get(slug=coalition_slug)
-                    models.Position.objects.get_or_create(
-                        title        = coalition_member_title,
-                        person       = member,
-                        organisation = coalition,
-                        category     = 'political',
-                        defaults = {
-                            # 'start_date': '2013-01-18', # date when the coalitions will be confirmed
-                            'end_date':   'future',                            
-                        }
-                    )        
+                    position_parameters = {'title': coalition_member_title,
+                                           'person': member,
+                                           'organisation': coalition,
+                                           'category': 'political'}
+                    positions = models.Position.objects.all().currently_active().filter(**position_parameters)
+                    if len(positions) > 1:
+                        raise Exception, "Multiple positions matched %s" % (position_parameters,)
+                    elif len(positions) == 1:
+                        # There's still a current position that represents this:
+                        existing_position = positions[0]
+                        # Make sure that its end date is 'future':
+                        existing_position.end_date = 'future'
+                        existing_position.save()
+                        coalition_memberships_to_end.discard(existing_position)
+                    else:
+                        # Otherwise the position has to be created:
+                        new_position = models.Position(
+                            start_date=str(datetime.date.today()),
+                            end_date='future',
+                            **position_parameters)
+                        new_position.save()
+
+        # End any coalition memberships that are no longer correct:
+        for position in coalition_memberships_to_end:
+            position.end_date = str(datetime.date.today() - datetime.timedelta(days=1))
+            position.save()
