@@ -49,11 +49,11 @@ def quiz_detail (request, slug):
 # convert the db stored agreement values into something that is more
 # representative of the relative weightings that they actually carry.
 agreement_fiddle_factor = {
-    -2: -9,
-    -1: -3,
+    -2: -3,
+    -1: -1,
      0:  0,
-     1:  3,
-     3:  9,
+     1:  1,
+     2:  3,
 }
 
 def submission_detail (request, slug, token):
@@ -114,6 +114,42 @@ def submission_detail (request, slug, token):
 
         rows.append(entry)
 
+    # now to work out which party most closely matches the answers given. We
+    # could store this in the submission model, but it is easier just to
+    # recalculate it as that avoids having to be smart when statements are
+    # added or removed, or the stances are changed.
+
+    # create a hash to store the running tally in. Initialize all values to zero.
+    differences_to_party = {}
+    for party in parties:
+        differences_to_party[party.id] = []
+
+    # for each row store the differences (if there was an answer)
+    for row in rows:
+        answer = row['answer']
+        for stance in row['party_stances']:
+            if stance and answer:
+                answer_score = agreement_fiddle_factor[ answer.agreement ]
+                stance_score = agreement_fiddle_factor[ stance.agreement ]
+                differences_to_party[stance.party.id].append( abs(answer_score - stance_score) )
+
+    # create a score per party - which is average of differences
+    party_scores = {}
+    for party in parties:
+        differences = differences_to_party[party.id]
+        party_scores[party.id] = average(differences)
+        
+    # calculate the average score that can be used to sort of center results
+    average_score = average(party_scores.values())
+    
+    # create an arry with the parties in order
+    party_results = []
+    for party in sorted( list(parties), key=lambda p: party_scores[p.id] ):
+        party_results.append({
+            'party': party,
+            'score': - party_scores[party.id] + average_score, # fudged to give appearance of a spread over center
+        })
+
 
     return render_to_response(
         'votematch/submission_detail.html',
@@ -123,7 +159,10 @@ def submission_detail (request, slug, token):
             'quiz':       quiz,
             'parties':    parties,
             'rows':       rows,
+            'party_results': party_results,
         },
         context_instance=RequestContext(request)
     )
-    
+
+def average(l):
+    return sum(l) / float(len(l))

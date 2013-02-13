@@ -2,7 +2,29 @@
 
 {% block content %}
 
-  <h1>{{ object.quiz.name }}</h1>
+    <h1>{{ object.quiz.name }}</h1>
+
+
+    <h2>Results</h2>
+    
+    <p>(Higher score means better match)</p>
+    
+    {% for result in party_results %}
+      <p>{{ result.party.name }}: {{ result.score}}</p>
+    {% endfor %}
+ 
+
+
+
+
+    <h2>Breakdown</h2>    
+
+
+    <style type="text/css" media="screen">
+      td, th {
+        border: 1px solid black;
+      }
+    </style>
 
     <table>
       <tr>
