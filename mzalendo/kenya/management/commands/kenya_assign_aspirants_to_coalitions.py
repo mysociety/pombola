@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import re 
+import datetime
+import re
 import sys
 
 from optparse import make_option
@@ -27,17 +28,23 @@ class Command(BaseCommand):
         'UDF':  'amani', # United Democratic Forum Party (UDFP)
 
         # CORD
-        'CCU':        'cord', # Chama Cha Uzalendo
-        'ford-kenya': 'cord', # Ford Kenya
-        'kadu-asili': 'cord', # Kenya African Democratic Union - Asili
-        'KSC':        'cord', # Kenya Social Congress
-        'mdm':        'cord', # Muungano Development Movement Party (MDM)
-        'MDM':        'cord', # Muungano Development Movement Party of Kenya
-        'msm':        'cord', # Mkenya Solidarity Movement
         'odm':        'cord', # Orange Democratic Movement
-        'P-D-P':      'cord', # People\'s Democratic Party (PDP)
-        'TIP':        'cord', # The Independent Party
+        'odm-k':      'cord', # Orange Democratic Movement Party Of Kenya
         'WDM-K':      'cord', # Wiper democratic Movement Kenya
+        'ford-kenya': 'cord', # Ford Kenya
+        'ford':       'cord', # Forum For The Restoration Of Democracy
+        'ford-k':     'cord', # Forum For The Restoration Of Democracy - Kenya
+        'KSC':        'cord', # Kenya Social Congress
+        'TIP':        'cord', # The Independent Party
+        'kadu-asili': 'cord', # Kenya African Democratic Union - Asili
+        'P-D-P':      'cord', # People\'s Democratic Party (PDP)
+        'msm':        'cord', # Mkenya Solidarity Movement
+        'CCU':        'cord', # Chama Cha Uzalendo
+        'MDM':        'cord', # Muungano Development Movement Party of Kenya
+        'UDM':        'cord', # United Democratic Movement
+        'CCM':        'cord', # Chama Cha Mwananchi
+        'lpk':        'cord', # Labour Party Of Kenya
+        'FPK':        'cord', # Federal Party of Kenya
 
         # Eagle
         'KNC': 'eagle', # Kenya National Congress
@@ -56,7 +63,6 @@ class Command(BaseCommand):
         'APK': '', # Alliance Party of Kenya (APK)
         'bdpk': '', # Bright Dawn Party of Kenya
         'ccm': '', # Chama Cha Majimbo na Mwangaza
-        'CCM': '', # Chama Cha Mwananchi
         'ccumma': '', # Chama Cha Uma Party
         'cdp': '', # Community Development Party of Kenya
         'cdpk': '', # Communal Democracy Party of Kenya
@@ -77,14 +83,11 @@ class Command(BaseCommand):
         'eakulima': '', # Wakulima Party of Kenya
         'ffr': '', # Forum for Republican Party
         'fodc': '', # Forum for Orange Democratic Change
-        'ford': '', # Forum For The Restoration Of Democracy
         'ford-asili': '', # Ford Asili
-        'ford-k': '', # Forum For The Restoration Of Democracy - Kenya
         'FORD-P': '', # Ford People
         'forum-restoration-and-democracy-people': '', # Forum for Restoration and Democracy- People
         'FP': '', # Farmers Party
         'fpk': '', # Freedom Party of Kenya
-        'FPK': '', # Federal Party of Kenya
         'gap': '', # Green African Party
         'gapk': '', # Generations Alliance Party of Kenya
         'gdp': '', # Growth and Development Party
@@ -112,7 +115,6 @@ class Command(BaseCommand):
         'lack': '', # Liberal Alliance Coalition of Kenya
         'ldm': '', # Liberal Democratic Movement
         'ldp': '', # Liberal Democratic Party
-        'lpk': '', # Labour Party Of Kenya
         'makadara': '', # Madaraka Party
         'mass': '', # Mass Party of Kenya
         'mdapk': '', # Movement for Democratic Advancement Party of Kenya
@@ -151,7 +153,6 @@ class Command(BaseCommand):
         'nspk': '', # National Star Party of Kenya
         'nuru': '', # Nuru Party
         'nvp': '', # The National Vision Party (NVP)
-        'odm-k': '', # Orange Democratic Movement Party Of Kenya
         'paa': '', # Pan Africa Assemblies
         'pambazuka': '', # Pambazuka Party of Kenya
         'papk': '', # Peoples Action Party of Kenya
@@ -190,7 +191,6 @@ class Command(BaseCommand):
         'sppc': '', # Social Peoples Party and Congress
         'tkp': '', # Tsadiq Kenya Party
         'ucn': '', # United Centrist National
-        'UDM': '', # United Democratic Movement
         'udpik': '', # United Democrats of Peace and Integrity in Kenya
         'ukcp': '', # United Kenya Citizen Party
         'universal-dp': '', # Universal Democratic Party of Kenya
@@ -225,7 +225,7 @@ class Command(BaseCommand):
             for slug
             in coalition_party_slugs
         ]
-        
+
         # get all the positions of people who are currently members of those parties
         coalition_member_positions = (
             models
@@ -257,20 +257,46 @@ class Command(BaseCommand):
             .distinct()
         )
 
+        coalition_memberships_to_end = set(
+            models
+            .Position
+            .objects
+            .all()
+            .filter(title=coalition_member_title)
+            .filter(organisation__kind__slug='coalition')
+            .filter(person__in=coalition_members)
+            .currently_active()
+            )
+
         # for all the coalition members go through and ensure that they are linked to the coalition as well
         for member in coalition_members:
-            # print member
             for party in member.parties():
                 coalition_slug = self.party_to_coalition_mapping.get(party.slug)
                 if coalition_slug:
                     coalition = models.Organisation.objects.get(slug=coalition_slug)
-                    models.Position.objects.get_or_create(
-                        title        = coalition_member_title,
-                        person       = member,
-                        organisation = coalition,
-                        category     = 'political',
-                        defaults = {
-                            # 'start_date': '2013-01-18', # date when the coalitions will be confirmed
-                            'end_date':   'future',                            
-                        }
-                    )        
+                    position_parameters = {'title': coalition_member_title,
+                                           'person': member,
+                                           'organisation': coalition,
+                                           'category': 'political'}
+                    positions = models.Position.objects.all().currently_active().filter(**position_parameters)
+                    if len(positions) > 1:
+                        raise Exception, "Multiple positions matched %s" % (position_parameters,)
+                    elif len(positions) == 1:
+                        # There's still a current position that represents this:
+                        existing_position = positions[0]
+                        # Make sure that its end date is 'future':
+                        existing_position.end_date = 'future'
+                        existing_position.save()
+                        coalition_memberships_to_end.discard(existing_position)
+                    else:
+                        # Otherwise the position has to be created:
+                        new_position = models.Position(
+                            start_date=str(datetime.date.today()),
+                            end_date='future',
+                            **position_parameters)
+                        new_position.save()
+
+        # End any coalition memberships that are no longer correct:
+        for position in coalition_memberships_to_end:
+            position.end_date = str(datetime.date.today() - datetime.timedelta(days=1))
+            position.save()
