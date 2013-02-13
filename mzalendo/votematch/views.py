@@ -23,9 +23,30 @@ def quiz_detail (request, slug):
             val = request.POST.get( 'statement-' + str(statement.id) )
             if len( val ): # ignore "" which is used for 'don't know' defaults
                 answers[statement.id] = int(val)
+
+        # get the demographic details 
+        try:
+            age = int(request.POST.get('age'))
+        except ValueError:
+            # some silly value entered
+            age = None
                 
+        expected_result_id = request.POST.get('expected_result')
+        expected_result = None
+        if expected_result_id:
+            try:
+                expected_result = quiz.party_set.filter(id=expected_result_id)[0]
+            except:
+                # ignore errors - not really important and not worth reporting back to user.
+                pass
+
+        # get all the answers
         if len(answers):
-            submission = models.Submission.objects.create(quiz=quiz)
+            submission = models.Submission.objects.create(
+                quiz            = quiz,
+                age             = age,
+                expected_result = expected_result
+            )
             
             for statement_id, answer in answers.iteritems():
                 submission.answer_set.create(

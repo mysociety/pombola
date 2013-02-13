@@ -19,6 +19,10 @@
       <p>{{ result.party.name }}: {{ result.score}}</p>
     {% endfor %}
  
+    {% if object.expected_result %}
+      <p>(You expected to match '{{ object.expected_result.name }}'.)</p>
+    {% endif %}
+
 
     <h2>Share these results</h2>
 

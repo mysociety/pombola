@@ -69,6 +69,8 @@ class Submission(TimeStampedModel):
     """ a single submission of answers for the quiz, and some demographic data """
     quiz            = models.ForeignKey('Quiz')    
     token           = models.TextField(default=generate_token, unique=True)
+
+    # demographic fields
     age             = models.PositiveIntegerField(blank=True, null=True)
     expected_result = models.ForeignKey('Party', blank=True, null=True)
 
