@@ -27,17 +27,24 @@ class Command(BaseCommand):
         'UDF':  'amani', # United Democratic Forum Party (UDFP)
 
         # CORD
-        'CCU':        'cord', # Chama Cha Uzalendo
+        'odm':        'cord', # Orange Democratic Movement
+        'odm-k':      'cord', # Orange Democratic Movement Party Of Kenya
+        'WDM-K':      'cord', # Wiper democratic Movement Kenya
         'ford-kenya': 'cord', # Ford Kenya
-        'kadu-asili': 'cord', # Kenya African Democratic Union - Asili
+        'ford':       'cord', # Forum For The Restoration Of Democracy
+        'ford-k':     'cord', # Forum For The Restoration Of Democracy - Kenya
         'KSC':        'cord', # Kenya Social Congress
+        'TIP':        'cord', # The Independent Party
+        'kadu-asili': 'cord', # Kenya African Democratic Union - Asili
+        'P-D-P':      'cord', # People\'s Democratic Party (PDP)
+        'msm':        'cord', # Mkenya Solidarity Movement
+        'CCU':        'cord', # Chama Cha Uzalendo
         'mdm':        'cord', # Muungano Development Movement Party (MDM)
         'MDM':        'cord', # Muungano Development Movement Party of Kenya
-        'msm':        'cord', # Mkenya Solidarity Movement
-        'odm':        'cord', # Orange Democratic Movement
-        'P-D-P':      'cord', # People\'s Democratic Party (PDP)
-        'TIP':        'cord', # The Independent Party
-        'WDM-K':      'cord', # Wiper democratic Movement Kenya
+        'UDM':        'cord', # United Democratic Movement
+        'CCM':        'cord', # Chama Cha Mwananchi
+        'lpk':        'cord', # Labour Party Of Kenya
+        'FPK':        'cord', # Federal Party of Kenya
 
         # Eagle
         'KNC': 'eagle', # Kenya National Congress
@@ -56,7 +63,6 @@ class Command(BaseCommand):
         'APK': '', # Alliance Party of Kenya (APK)
         'bdpk': '', # Bright Dawn Party of Kenya
         'ccm': '', # Chama Cha Majimbo na Mwangaza
-        'CCM': '', # Chama Cha Mwananchi
         'ccumma': '', # Chama Cha Uma Party
         'cdp': '', # Community Development Party of Kenya
         'cdpk': '', # Communal Democracy Party of Kenya
@@ -77,14 +83,11 @@ class Command(BaseCommand):
         'eakulima': '', # Wakulima Party of Kenya
         'ffr': '', # Forum for Republican Party
         'fodc': '', # Forum for Orange Democratic Change
-        'ford': '', # Forum For The Restoration Of Democracy
         'ford-asili': '', # Ford Asili
-        'ford-k': '', # Forum For The Restoration Of Democracy - Kenya
         'FORD-P': '', # Ford People
         'forum-restoration-and-democracy-people': '', # Forum for Restoration and Democracy- People
         'FP': '', # Farmers Party
         'fpk': '', # Freedom Party of Kenya
-        'FPK': '', # Federal Party of Kenya
         'gap': '', # Green African Party
         'gapk': '', # Generations Alliance Party of Kenya
         'gdp': '', # Growth and Development Party
@@ -112,7 +115,6 @@ class Command(BaseCommand):
         'lack': '', # Liberal Alliance Coalition of Kenya
         'ldm': '', # Liberal Democratic Movement
         'ldp': '', # Liberal Democratic Party
-        'lpk': '', # Labour Party Of Kenya
         'makadara': '', # Madaraka Party
         'mass': '', # Mass Party of Kenya
         'mdapk': '', # Movement for Democratic Advancement Party of Kenya
@@ -151,7 +153,6 @@ class Command(BaseCommand):
         'nspk': '', # National Star Party of Kenya
         'nuru': '', # Nuru Party
         'nvp': '', # The National Vision Party (NVP)
-        'odm-k': '', # Orange Democratic Movement Party Of Kenya
         'paa': '', # Pan Africa Assemblies
         'pambazuka': '', # Pambazuka Party of Kenya
         'papk': '', # Peoples Action Party of Kenya
@@ -190,7 +191,6 @@ class Command(BaseCommand):
         'sppc': '', # Social Peoples Party and Congress
         'tkp': '', # Tsadiq Kenya Party
         'ucn': '', # United Centrist National
-        'UDM': '', # United Democratic Movement
         'udpik': '', # United Democrats of Peace and Integrity in Kenya
         'ukcp': '', # United Kenya Citizen Party
         'universal-dp': '', # Universal Democratic Party of Kenya
