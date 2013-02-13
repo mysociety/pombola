@@ -70,12 +70,12 @@ def submission_detail (request, slug, token):
     
     # NB - this code written after bumping into numerous issues stemming from
     # Django's insistance that templates not have useful features like
-    # variables, or variable key lookups. Hence subsequent comments may be a
-    # bit brusque.
+    # variables, or variable key lookups in dictionaries. Hence subsequent
+    # comments may be a bit brusque.
     
-    # This code could also be moved to the Submission model, but I think as it
+    # This code could be moved to the Submission model, but I think as it
     # is just to produce the data that the template needs, in a form that the
-    # template needs, it is probably bettor off here in the view.
+    # template needs, it is probably better off here in the view.
 
     # put all the parties in a list. We need to fix their order because we can
     # key into a data structure in the template so need to prepare everything
@@ -85,7 +85,7 @@ def submission_detail (request, slug, token):
 
     # In the template the table will have rows with like:
     #
-    # statement text  |  submission answer  |  parties[0].answer  | ....
+    #   statement text  |  submission answer  |  parties[0] stance  |  ....
     # 
     # so create an array of items that will be needed to create these rows.
     rows = []
