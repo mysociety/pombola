@@ -68,6 +68,8 @@ class Stance(TimeStampedModel):
 class Submission(TimeStampedModel):
     """ a single submission of answers for the quiz, and some demographic data """
     quiz            = models.ForeignKey('Quiz')    
+
+    # TODO - there is no handling of token conflicts. There probably should be.
     token           = models.TextField(default=generate_token, unique=True)
 
     # demographic fields
