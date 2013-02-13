@@ -14,8 +14,19 @@
     {% endfor %}
  
 
+    <h2>Share these results</h2>
 
-
+      <p>
+        <a  href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ object.name }}"
+            target="_blank"
+        >Share on Facebook</a>
+      </p>
+    
+      <p>
+        <a  href="https://twitter.com/share?{% if settings.TWITTER_ACCOUNT_NAME %}via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;{% endif %}text={{ object.name }}&amp;url={{ request.build_absolute_uri }}"
+            target="_blank"
+        >Share on Twitter</a>
+      </p>
 
     <h2>Breakdown</h2>    
 
