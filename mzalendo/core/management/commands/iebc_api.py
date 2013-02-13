@@ -67,9 +67,12 @@ def get_data_with_cache(cache_filename, *args, **kwargs):
         with open(cache_filename) as fp:
             result = json.load(fp)
     else:
-        result = get_data(*args, **kwargs)
-        with open(cache_filename, 'w') as fp:
-            json.dump(result, fp)
+        if kwargs.get('only_from_cache', False):
+            raise CommandError, "There was no cached data for %s" % (args[0],)
+        else:
+            result = get_data(*args, **kwargs)
+            with open(cache_filename, 'w') as fp:
+                json.dump(result, fp)
     return result
 
 # ------------------------------------------------------------------------
