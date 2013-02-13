@@ -3,9 +3,9 @@
     "pk": 1, 
     "model": "votematch.quiz", 
     "fields": {
-      "slug": "policies-thick-it", 
+      "slug": "us-presidency-2012", 
       "modified": "2013-02-08 17:10:35", 
-      "name": "Policies from \"The Thick Of It\"", 
+      "name": "US Presidency 2012", 
       "created": "2013-02-08 17:10:35"
     }
   }, 
@@ -13,7 +13,7 @@
     "pk": 1, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Sat-nav for asylum seekers.", 
+      "text": "ECONOMY The government SHOULD have bailed out US car makers in 2008/09.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:10:58", 
       "created": "2013-02-08 17:10:58"
@@ -23,7 +23,7 @@
     "pk": 2, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Tax breaks for aromatherapists.", 
+      "text": "ECONOMY Taxes SHOULD be increased to reduce the federal deficit.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:11:10", 
       "created": "2013-02-08 17:11:10"
@@ -33,7 +33,7 @@
     "pk": 3, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "A national spare room database.", 
+      "text": "ECONOMY Congress SHOULD have increased the debt limit in August 2011 to prevent default.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:11:30", 
       "created": "2013-02-08 17:11:30"
@@ -43,7 +43,7 @@
     "pk": 4, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Make Davina McCall the new pope.", 
+      "text": "Put Davina McCall in charge of the nation's fitness.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:12:18", 
       "created": "2013-02-08 17:12:18"
@@ -53,7 +53,7 @@
     "pk": 5, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Downloadable rice.", 
+      "text": "SOCIETY Marijuana SHOULD be legalised.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:12:25", 
       "created": "2013-02-08 17:12:25"
@@ -63,7 +63,7 @@
     "pk": 6, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "More wooden toys.", 
+      "text": "SOCIETY Gay marriage SHOULD be legalised.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:12:30", 
       "created": "2013-02-08 17:12:30"
@@ -73,7 +73,7 @@
     "pk": 7, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Improve the state of zoos.", 
+      "text": "ENVIRONMENT The Clean Air Act SHOULD be amended to exclude carbon dioxide (CO2) from regulation.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:12:37", 
       "created": "2013-02-08 17:12:37"
@@ -83,7 +83,7 @@
     "pk": 8, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Policemen's hats should be yellow.", 
+      "text": "FOREIGN POLICY The USA SHOULD use only sanctions, and not military force if Iran continues its nuclear programme.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:12:53", 
       "created": "2013-02-08 17:12:53"
@@ -93,7 +93,7 @@
     "pk": 9, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "A government department to count the moon.", 
+      "text": "FOREIGN POLICY The Iraq war HAS made the USA safer.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:13:00", 
       "created": "2013-02-08 17:13:00"
@@ -103,7 +103,7 @@
     "pk": 10, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Inflatable churches for rural communities.", 
+      "text": "CRIME Felons SHOULD have the right to vote.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:13:08", 
       "created": "2013-02-08 17:13:08"
@@ -113,7 +113,7 @@
     "pk": 11, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Triple the number of quiet coaches on inter-city lines", 
+      "text": "CRIME The death penalty SHOULD remain legal in the USA", 
       "quiz": 1, 
       "modified": "2013-02-08 17:13:21", 
       "created": "2013-02-08 17:13:21"
