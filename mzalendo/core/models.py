@@ -423,6 +423,7 @@ class Organisation(ModelBase):
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended = ApproximateDateField(blank=True, help_text=date_help_text)
     original_id = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to parties in original mzalendo.com db')
+    external_id = models.CharField(max_length=128, blank=True, null=True)
 
     objects = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
@@ -497,6 +498,7 @@ class Place(ModelBase, ScorecardMixin):
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
     original_id  = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to constituencies in original mzalendo.com db')
     parliamentary_session = models.ForeignKey('ParliamentarySession', null=True)
+    external_id = models.CharField(max_length=128, blank=True, null=True)
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
@@ -825,6 +827,7 @@ class Position(ModelBase):
     subtitle = models.CharField(max_length=200, blank=True, default='')
     category = models.CharField(max_length=20, choices=category_choices, default='other', help_text="What sort of position was this?")
     note = models.CharField(max_length=300, blank=True, default='')
+    external_id = models.CharField(max_length=128, blank=True, null=True)
 
     start_date = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date = ApproximateDateField(blank=True, help_text=date_help_text, default="future")

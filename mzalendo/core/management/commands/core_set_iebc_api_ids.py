@@ -1,3 +1,8 @@
+# A one-off script to set the IEBC API codes in the external_id fields
+# of places, organisations (parties) and positions (aspirant
+# positions), to be run after core_import_aspirants_from_iebc - it has
+# the same shape as that script, but just sets the external_id.
+
 from collections import defaultdict
 import csv
 import datetime
@@ -78,14 +83,17 @@ def get_matching_party(party_name, **options):
         matching_parties = Organisation.objects.filter(kind__slug='party',
                                                        name__istartswith=party_name_to_use)
     if len(matching_parties) == 0:
-        party_name_for_creation = party_name_to_use.title()
-        new_party = Organisation(name=party_name_for_creation,
-                                 slug=slugify(party_name_for_creation),
-                                 started=ApproximateDate(datetime.date.today().year),
-                                 ended=None,
-                                 kind=OrganisationKind.objects.get(slug='party'))
-        maybe_save(new_party, **options)
-        return new_party
+        if options.get('create', True):
+            party_name_for_creation = party_name_to_use.title()
+            new_party = Organisation(name=party_name_for_creation,
+                                     slug=slugify(party_name_for_creation),
+                                     started=ApproximateDate(datetime.date.today().year),
+                                     ended=None,
+                                     kind=OrganisationKind.objects.get(slug='party'))
+            maybe_save(new_party, **options)
+            return new_party
+        else:
+            raise CommandError, "Would have to create %s, but 'create' was False" % (party_name,)
     elif len(matching_parties) == 1:
         return matching_parties[0]
     else:
@@ -195,8 +203,6 @@ class Command(NoArgsCommand):
             """A closure to avoid repeating parameters"""
             return make_api_url(path, IEBC_API_SECRET, token, query_filter)
 
-        aspirants_to_remove = set(Position.objects.all().aspirant_positions().exclude(title__slug__iexact='aspirant-president').currently_active())
-
         # To get all the candidates, we iterate over each county,
         # constituency and ward, and request the candidates for each.
 
@@ -204,82 +210,57 @@ class Command(NoArgsCommand):
 
         mkdir_p(cache_directory)
 
-        total_candidates = 0
-        race_type_counts = defaultdict(int)
+        parties_cache_filename = os.path.join(cache_directory, 'parties')
+        party_data = get_data_with_cache(parties_cache_filename, url('/party/'), only_from_cache=True)
+        for party in party_data['parties']:
+            party_api_code = party['code']
+            try:
+                party_organisation = get_matching_party(party['name'], create=False, **options)
+            except CommandError, ce:
+                print >> sys.stderr, "Not setting the API code: %s" % (ce,)
+            party_organisation.external_id = party_api_code
+            maybe_save(party_organisation, **options)
 
-        headings = ['API Name',
-                    'API Party',
-                    'API Place',
-                    'API Candidate Code',
-                    'Mz Legal Name',
-                    'Mz Other Names',
-                    'Mz URL',
-                    'Mz Parties Ever',
-                    'Mz Aspirant Ever',
-                    'Mz Politician Ever',
-                    'Mz ID']
+        print "########################################################################"
 
         for area_type in 'county', 'constituency', 'ward':
             cache_filename = os.path.join(cache_directory, area_type)
-            area_type_data = get_data_with_cache(cache_filename, url('/%s/' % (area_type)))
+            area_type_data = get_data_with_cache(cache_filename, url('/%s/' % (area_type)), only_from_cache=True)
             areas = area_type_data['region']['locations']
             for i, area in enumerate(areas):
                 # Get the candidates for that area:
                 code = area['code']
                 candidates_cache_filename = os.path.join(cache_directory, 'candidates-for-' + area_type + '-' + code)
-                candidate_data = get_data_with_cache(candidates_cache_filename, url('/candidate/', query_filter='%s=%s' % (area_type, code)))
+                candidate_data = get_data_with_cache(candidates_cache_filename, url('/candidate/', query_filter='%s=%s' % (area_type, code)), only_from_cache=True)
                 # print "got candidate_data:", candidate_data
                 for race in candidate_data['candidates']:
                     full_race_name = race['race']
                     race_type, place_name = parse_race_name(full_race_name)
                     place_kind, session, title = known_race_type_mapping[race_type]
                     place = get_matching_place(place_name, place_kind, session)
+                    place.external_id = code
+                    maybe_save(place, **options)
                     candidates = race['candidates']
                     for candidate in candidates:
                         first_names = candidate['other_name'] or ''
                         surname = candidate['surname'] or ''
-                        race_type_counts[race_type] += 1
                         person = get_person_from_names(first_names, surname)
-                        print "returned person is:", person
-                        if person:
-                            same_person = same_people.get((candidate['code'], person.id), False)
-                            if not same_person:
-                                person = None
-                        # Now we know we need to create a new Person:
                         if not person:
-                            person = make_new_person(candidate, **options)
-                        update_parties(person, candidate['party'], **options)
-
-                        # Now we just need to make sure that there's an appropriate aspirant position, which will be defined by:
-                        #   - the place
-                        #   - the organisation (REPUBLIC OF KENYA used in most cases)
-
+                            raise Exception, "Failed to find the person from '%s' '%s'" % (first_names, surname)
                         aspirant_position_properties = {
                             'organisation': Organisation.objects.get(name='REPUBLIC OF KENYA'),
                             'place': place,
                             'person': person,
                             'title': title,
                             'category': 'political'}
-
-                        existing_matching_aspirant_positions = Position.objects.filter(**aspirant_position_properties).currently_active()
-
-                        for existing_matching_aspirant_position in existing_matching_aspirant_positions:
-                            # These are still valid, so don't remove them:
-                            aspirants_to_remove.discard(existing_matching_aspirant_position)
-
-                        if not existing_matching_aspirant_positions:
-                            new_position = Position(start_date=new_data_approximate_date,
-                                                    end_date=ApproximateDate(future=True),
-                                                    **aspirant_position_properties)
-                            maybe_save(new_position, **options)
-
-                        total_candidates += 1
-
-        for aspirant_to_remove in aspirants_to_remove:
-            aspirant_to_remove.end_date = new_data_approximate_date
-            maybe_save(new_position, **options)
-
-        print "total_candidates by area are:", total_candidates
-
-        for race_type, count in race_type_counts.items():
-            print race_type, count
+                        positions = Position.objects.filter(**aspirant_position_properties).currently_active()
+                        if positions:
+                            if len(positions) > 1:
+                                print >> sys.stderr, "There were multiple (%d) matches for: %s" % (len(positions), aspirant_position_properties,)
+                            for position in positions:
+                                position.external_id = candidate['code']
+                                maybe_save(position, **options)
+                        else:
+                            message = "There were no matches for %s" % (aspirant_position_properties,)
+                            # raise Exception, message
+                            print >> sys.stderr, message
