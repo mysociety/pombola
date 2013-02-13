@@ -39,7 +39,6 @@ class Command(BaseCommand):
         'P-D-P':      'cord', # People\'s Democratic Party (PDP)
         'msm':        'cord', # Mkenya Solidarity Movement
         'CCU':        'cord', # Chama Cha Uzalendo
-        'mdm':        'cord', # Muungano Development Movement Party (MDM)
         'MDM':        'cord', # Muungano Development Movement Party of Kenya
         'UDM':        'cord', # United Democratic Movement
         'CCM':        'cord', # Chama Cha Mwananchi
