@@ -43,7 +43,7 @@
     "pk": 4, 
     "model": "votematch.statement", 
     "fields": {
-      "text": "Put Davina McCall in charge of the nation's fitness.", 
+      "text": "IMMIGRATION The USA SHOULD build a physical barrier along its border with Mexico.", 
       "quiz": 1, 
       "modified": "2013-02-08 17:12:18", 
       "created": "2013-02-08 17:12:18"
@@ -192,7 +192,7 @@
     "model": "votematch.stance", 
     "fields": {
       "party": 1, 
-      "agreement": -1, 
+      "agreement": 1, 
       "modified": "2013-02-12 15:48:26", 
       "statement": 5, 
       "created": "2013-02-12 15:48:26"
@@ -225,7 +225,7 @@
     "model": "votematch.stance", 
     "fields": {
       "party": 1, 
-      "agreement": -2, 
+      "agreement": 2, 
       "modified": "2013-02-12 15:48:26", 
       "statement": 8, 
       "created": "2013-02-12 15:48:26"
@@ -313,7 +313,7 @@
     "model": "votematch.stance", 
     "fields": {
       "party": 2, 
-      "agreement": 1, 
+      "agreement": -1, 
       "modified": "2013-02-12 15:48:26", 
       "statement": 5, 
       "created": "2013-02-12 15:48:26"
@@ -346,7 +346,7 @@
     "model": "votematch.stance", 
     "fields": {
       "party": 2, 
-      "agreement": 2, 
+      "agreement": -2, 
       "modified": "2013-02-12 15:48:26", 
       "statement": 8, 
       "created": "2013-02-12 15:48:26"
