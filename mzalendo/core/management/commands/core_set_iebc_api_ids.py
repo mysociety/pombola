@@ -1,3 +1,8 @@
+# A one-off script to set the IEBC API codes in the external_id fields
+# of places, organisations (parties) and positions (aspirant
+# positions), to be run after core_import_aspirants_from_iebc - it has
+# the same shape as that script, but just sets the external_id.
+
 from collections import defaultdict
 import csv
 import datetime
