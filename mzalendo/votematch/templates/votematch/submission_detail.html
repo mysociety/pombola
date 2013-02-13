@@ -3,6 +3,8 @@
 {% block content %}
 
     <h1>{{ object.quiz.name }}</h1>
+    
+    <p><a href="{% url votematch-quiz slug=quiz.slug %}">Do this quiz again</a></p>
 
 
     <h2>Results</h2>
