@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ quiz.name }} Results
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ object.quiz.name }}</h1>
+    
+    <p><a href="{% url votematch-quiz slug=quiz.slug %}">Do this quiz again</a></p>
+
+
+    <h2>Results</h2>
+    
+    <p>(Higher score means better match)</p>
+    
+    {% for result in party_results %}
+      <p>{{ result.party.name }}: {{ result.score}}</p>
+    {% endfor %}
+ 
+    {% if object.expected_result %}
+      <p>(You expected to match '{{ object.expected_result.name }}'.)</p>
+    {% endif %}
+
+
+    <h2>Share these results</h2>
+
+      <p>
+        <a  href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ object.name }}"
+            target="_blank"
+        >Share on Facebook</a>
+      </p>
+    
+      <p>
+        <a  href="https://twitter.com/share?{% if settings.TWITTER_ACCOUNT_NAME %}via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;{% endif %}text={{ object.name }}&amp;url={{ request.build_absolute_uri }}"
+            target="_blank"
+        >Share on Twitter</a>
+      </p>
+
+    <h2>Breakdown</h2>    
+
+
+    <style type="text/css" media="screen">
+      td, th {
+        border: 1px solid black;
+      }
+      
+      th {
+        font-weight: bold;
+      }
+    </style>
+
+    <table>
+      <tr>
+        <th>Statement title</th>
+        <th>You</th>
+        {% for party in parties %}
+          <th>{{ party.name }}</th>
+        {% endfor %}
+      </tr>
+      
+      {% for row in rows %}
+        <tr>
+          <th>{{ row.statement.text }}</th>
+          <td>{{ row.answer.get_agreement_display }}</td>
+          {% for stance in row.party_stances %}
+            <td>{{ stance.get_agreement_display }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+      
+    </table>
+  
+{% endblock %}

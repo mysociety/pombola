@@ -95,7 +95,14 @@ urlpatterns += patterns('',
     (r'^map/', include('map.urls')),
 )
 
+# votematch
+urlpatterns += patterns('',    
+    (r'^votematch/', include('votematch.urls')),
+)
+
+
 # Everything else goes to core
 urlpatterns += patterns('',
     (r'^', include('core.urls')),
 )
+

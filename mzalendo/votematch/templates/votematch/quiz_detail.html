@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ object.name }}
+{% endblock %}
+
+{% block content %}
+
+  <h1>{{ object.name }}</h1>
+
+  <form action="" method="POST">
+
+    {% csrf_token %}
+    
+
+    {% for statement in object.statement_set.all %}
+    
+      <div>
+
+        <h3>{{ statement.text }}</h3>
+    
+        {% for key, text in choices %}
+          <p>
+            {{ text }}: <input type="radio" name="statement-{{ statement.id }}" value="{{ key }}">
+          </p>
+        {% endfor %}
+
+        <p>
+          not sure: <input type="radio" name="statement-{{ statement.id }}" value="" checked >
+        </p>
+    
+      </div>
+    
+    {% endfor %}
+  
+
+    <h2>Demographic info (optional)</h2>
+    
+    <p>
+      Age:
+      <input type="number" name="age" placeholder="23" min="0" step="1" max="100"/>
+    </p>
+    
+    <p>
+      Expected result: 
+      <select name="expected_result">
+        <option value="">Please choose one</option>
+
+        {% for party in object.party_set.all %}
+          <option value="{{ party.id }}">{{ party.name }}</option>          
+        {% endfor %}
+      </select>
+    </p>
+
+
+    <input type="submit" value="Go">
+    
+  </form>
+  
+{% endblock %}

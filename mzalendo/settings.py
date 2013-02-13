@@ -275,7 +275,7 @@ INSTALLED_APPS = (
 )
 
 # add the optional apps
-ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data' )
+ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch' )
 OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
 INSTALLED_APPS += OPTIONAL_APPS
 

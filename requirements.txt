@@ -67,3 +67,6 @@ python-dateutil
 coverage>=3
 
 requests==0.14.2
+
+## votematch
+django-model-utils
