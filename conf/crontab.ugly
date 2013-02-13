@@ -26,7 +26,7 @@ PYTHONIOENCODING=utf-8
 0 7 * * * !!(*= $user *)!! check_user_contributions.bash
 6 7 * * * !!(*= $user *)!! update_hansard.bash
 0 1 * * * !!(*= $user *)!! update_scorecards.bash
-# 3 * * * * !!(*= $user *)!! update_coalition_memberships.bash
+3 10 * * * !!(*= $user *)!! update_coalition_memberships.bash
 !!(* } elsif ($vhost eq 'nigeria.mzalendo.mysociety.org') { *)!!
 10 7 * * * !!(*= $user *)!! check_user_contributions.bash
 !!(* } else { *)!!
