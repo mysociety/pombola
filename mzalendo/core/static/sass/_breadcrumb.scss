@@ -4,6 +4,9 @@
 
 @media only all and (min-width: 640px), print {
   #breadcrumb {
+
+    @media print { display: none; }
+    
     display: block;
     height: 40px;
     nav {

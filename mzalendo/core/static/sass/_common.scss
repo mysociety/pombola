@@ -6,6 +6,7 @@
   text-align: center; }
 
 .notice {
+  @media print { display: none; }  
   text-align: center;
   padding: 0.5em;
   background-color: #f7f7f7; }

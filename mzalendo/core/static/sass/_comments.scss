@@ -1,3 +1,7 @@
+#disqus_thread{
+  @media print { display: none; }  
+}
+
 ul.comments {
   @include list-reset-soft;
   li {

@@ -55,8 +55,12 @@ menu#mobile-top-tools {
 
 #header-search {
   display: none;
+
   @media only all and (min-width: 640px), print {
     display: block; }
+
+  @media print { display: none; }
+  
   float: right;
   background: transparent;
   margin: 5px 5px 5px 15px;
@@ -89,6 +93,7 @@ menu#site-user-tools {
   display: none;
   @media only all and (min-width: 640px), print {
     display: block; }
+  @media print { display: none; }
   float: right;
   background: transparent;
   margin: 5px;

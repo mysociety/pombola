@@ -82,6 +82,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 0.5em;
   background-color: #f7f7f7;
 }
+@media print {
+  .notice {
+    display: none;
+  }
+}
 
 div.error {
   border: 2px solid #f00;
@@ -616,6 +621,11 @@ menu#mobile-top-tools ul li a img {
     display: block;
   }
 }
+@media print {
+  #header-search {
+    display: none;
+  }
+}
 #header-search input {
   padding: 1px 4px 1px 8px;
   border: 1px solid gray;
@@ -670,6 +680,11 @@ menu#site-user-tools {
 @media only all and (min-width: 640px), print {
   menu#site-user-tools {
     display: block;
+  }
+}
+@media print {
+  menu#site-user-tools {
+    display: none;
   }
 }
 menu#site-user-tools ul {
@@ -867,6 +882,11 @@ menu#site-user-tools ul li.active a:hover {
     display: block;
   }
 }
+@media print {
+  #main-menu {
+    display: none;
+  }
+}
 #main-menu nav {
   width: 100%;
   text-align: center;
@@ -961,7 +981,7 @@ menu#site-user-tools ul li.active a:hover {
 #main-menu nav ul li:hover ul li a:hover {
   background: #d4d4d4;
 }
-@media (min-width: 720px), print {
+@media only all and (min-width: 720px), print {
   #main-menu nav ul li a {
     font-size: 14px;
     padding: 8px 10px;
@@ -1061,6 +1081,11 @@ menu#site-user-tools ul li.active a:hover {
     background-color: #fff;
   }
 }
+@media print {
+  #breadcrumb {
+    display: none;
+  }
+}
 @media only all and (min-width: 640px) and (max-width: 960px), print {
   #breadcrumb {
     padding: 0 10px;
@@ -1081,6 +1106,11 @@ menu#site-user-tools ul li.active a:hover {
 #site-footer div.footer-section {
   border-top: 2px solid #55a4da;
   padding: 10px;
+}
+@media print {
+  #site-footer div.footer-section {
+    display: none;
+  }
 }
 #site-footer div.footer-section:first-child {
   border: none;
@@ -1118,6 +1148,11 @@ menu#site-user-tools ul li.active a:hover {
   display: table-caption;
   padding: 20px;
   background: #55a4da;
+}
+@media print {
+  #site-footer .subscribe-box {
+    display: none;
+  }
 }
 #site-footer .subscribe-box h2 {
   color: white;
@@ -1889,6 +1924,11 @@ div.object_menu ul li a {
     background-position: 0 -141px;
   }
 }
+@media print {
+  .social-and-tools {
+    display: none;
+  }
+}
 
 ul.hansard_entries em {
   font-style: italic;
@@ -1914,6 +1954,12 @@ ul.hansard_entries li.page_number {
   text-align: right;
   background: #eee;
   padding: 0.2em;
+}
+
+@media print {
+  #disqus_thread {
+    display: none;
+  }
 }
 
 ul.comments, ul.listing {

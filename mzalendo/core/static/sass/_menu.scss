@@ -5,6 +5,7 @@
   display: none;
   @media only all and (min-width: 640px), print {
     display: block; }
+  @media print { display: none; }
   background: $colour_black;
   @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
   nav {
@@ -69,7 +70,7 @@
                 float: none;
                 &:hover {
                   background: #d4d4d4; } } } } }
-        @media only all and (min-width: 720px), print {
+        @media only all and (min-width: 720px), print { 
           & {
             a {
               font-size: 14px;

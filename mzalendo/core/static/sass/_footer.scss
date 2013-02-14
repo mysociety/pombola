@@ -9,6 +9,7 @@
     position: relative;
     padding-top: 5px; }
     div.footer-section {
+      @media print { display: none; }      
       border-top: 2px solid $colour_primary;
       &:first-child {
         border: none; }
@@ -32,6 +33,7 @@
       a:hover {
         text-decoration: none; } } }
   .subscribe-box {
+    @media print { display: none; }    
     display: table-caption;
     padding: 20px;
     background: $colour_primary;
@@ -108,3 +110,4 @@
 @media only all and (min-width: 960px), print {
   #site-footer {
     padding: 0; } }
+
