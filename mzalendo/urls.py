@@ -96,9 +96,10 @@ urlpatterns += patterns('',
 )
 
 # votematch
-urlpatterns += patterns('',    
-    (r'^votematch/', include('votematch.urls')),
-)
+if settings.ENABLED_FEATURES['votematch']:
+    urlpatterns += patterns('',    
+        (r'^votematch/', include('votematch.urls')),
+    )
 
 
 # Everything else goes to core
