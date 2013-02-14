@@ -97,7 +97,10 @@ def submission_detail (request, slug, token):
     # This code could be moved to the Submission model, but I think as it
     # is just to produce the data that the template needs, in a form that the
     # template needs, it is probably better off here in the view.
-
+    
+    # NB this source file is linked to from scoring.html as part of the
+    # explanation. If this code is moved that link should be updated too.
+    
     # put all the parties in a list. We need to fix their order because we can
     # key into a data structure in the template so need to prepare everything
     # here in the order that the table will need it. Tight coupling between
