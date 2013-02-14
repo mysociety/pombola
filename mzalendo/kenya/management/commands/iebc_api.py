@@ -130,3 +130,15 @@ def get_person_from_names(first_names, surname):
     if len(matches) == 1:
         return matches[0]
     return None
+
+def normalize_name(name):
+    result = re.sub(',', ' ', name)
+    result = re.sub('\s+', ' ', result)
+    return result.strip()
+
+def maybe_save(o, **options):
+    if options['commit']:
+        o.save()
+        print >> sys.stderr, 'Saving %s' % (o,)
+    else:
+        print >> sys.stderr, 'Not saving %s because --commit was not specified' % (o,)

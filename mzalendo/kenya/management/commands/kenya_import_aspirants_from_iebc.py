@@ -168,13 +168,6 @@ def update_parties(person, api_party, **options):
             party_position.end_date = new_data_approximate_date
             maybe_save(party_position, **options)
 
-def maybe_save(o, **options):
-    if options['commit']:
-        o.save()
-        print >> sys.stderr, 'Saving %s' % (o,)
-    else:
-        print >> sys.stderr, 'Not saving %s because --commit was not specified' % (o,)
-
 class Command(NoArgsCommand):
     help = 'Update the database with aspirants from the IEBC website'
 
