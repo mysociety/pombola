@@ -21,7 +21,7 @@
       float: right;
       display: block; } } }
 
-@media only all and (max-width: 640px) {
+@media only all and (max-width: 640px), print {
   #home-search #header-search-hansard-instead {
     padding-left: 0.5em; } }
 
@@ -201,7 +201,7 @@ ul#home-news-list {
         background: $colour_primary_light / 0.9;
         @include background(linear-gradient($colour_primary_light, $colour_primary_light / 0.9)); } } } }
 
-@media only all and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #page {
     .home-left {
       float: left;
@@ -235,7 +235,7 @@ ul#home-news-list {
       float: left;
       width: 510px; } } }
 
-@media only all and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #home-search {
     background: $colour_dark_grey;
     margin: 30px 0;
@@ -376,7 +376,7 @@ ul#home-news-list {
         .rating-img {
           bottom: 10px; } } } } }
 
-@media only all and (min-width: 640px) and (max-width: 960px) {
+@media only all and (min-width: 640px) and (max-width: 960px), print {
   #page {
     padding: 0 10px;
     .home-left {
@@ -393,7 +393,7 @@ ul#home-news-list {
           li {
             display: block; } } } } } }
 
-@media only all and (min-width: 640px) and (max-width: 880px) {
+@media only all and (min-width: 640px) and (max-width: 880px), print {
   #page .home-right {
     width: 380px;
     .social-and-tools {
@@ -421,7 +421,7 @@ ul#home-news-list {
       padding: 10px 10px 15px 10px;
       background-position: 120px center; } } }
 
-@media only all and (min-width: 640px) and (max-width: 760px) {
+@media only all and (min-width: 640px) and (max-width: 760px), print {
   #page .home-left {
     width: 100%; }
   #page .home-right {

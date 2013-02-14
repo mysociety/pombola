@@ -49,7 +49,7 @@
       display: block;
       margin: 10px 0; } } }
 
-@media only all and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #login-pagetitle {
     display: block;
     background: $colour_muted;

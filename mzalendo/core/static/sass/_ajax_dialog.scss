@@ -27,7 +27,7 @@
       font-size: 13px;
       @include border-radius(3px); } } }
 
-@media only all and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #ajax_dialog_subcontent {
     width: 466px;
     textarea {

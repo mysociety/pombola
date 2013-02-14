@@ -5,7 +5,7 @@
   .wrapper {
     overflow: hidden; } }
 
-@media only all and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #site-header {
     height: 60px;
     &.down {
@@ -24,7 +24,7 @@
   text-indent: -999999em;
   width: 147px;
   background: url(../images/m-logo.png) 0 center no-repeat;
-  @media only all and (min-width: 640px) {
+  @media only all and (min-width: 640px), print {
     position: absolute;
     left: 0;
     top: 10px;
@@ -39,7 +39,7 @@
 // ------------------------------------------------------
 
 menu#mobile-top-tools {
-  @media only all and (min-width: 640px) {
+  @media only all and (min-width: 640px), print {
     display: none; }
   float: right;
   ul {
@@ -55,7 +55,7 @@ menu#mobile-top-tools {
 
 #header-search {
   display: none;
-  @media only all and (min-width: 640px) {
+  @media only all and (min-width: 640px), print {
     display: block; }
   float: right;
   background: transparent;
@@ -87,7 +87,7 @@ menu#mobile-top-tools {
 menu#site-user-tools {
   // Only display this for wide screens
   display: none;
-  @media only all and (min-width: 640px) {
+  @media only all and (min-width: 640px), print {
     display: block; }
   float: right;
   background: transparent;
