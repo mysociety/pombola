@@ -131,6 +131,11 @@ def get_person_from_names(first_names, surname):
         return matches[0]
     return None
 
+def normalize_name(name):
+    result = re.sub(',', ' ', name)
+    result = re.sub('\s+', ' ', result)
+    return result.strip()
+
 def maybe_save(o, **options):
     if options['commit']:
         o.save()
