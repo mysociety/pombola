@@ -28,7 +28,7 @@
 
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
 
     .local-aspirants{
         border-top: 3px solid #009748;

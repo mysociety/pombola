@@ -47,7 +47,7 @@ body {
   background-position: bottom center;
 }
  
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #site-header {
     height: 100px;
   }
@@ -59,7 +59,7 @@ body {
   background: url(/static/images/mz-nigeria-logo-symbol.png) 0 center no-repeat;
   background-position: left 20%;
 
-  @media only screen and (min-width: 640px) {
+  @media only all and (min-width: 640px), print {
     top: -20px;
     height: 130px;
     width: 630px;
@@ -68,7 +68,7 @@ body {
       background: url(../images/down-logo.png) 0 center no-repeat;
     }
   }
-  @media only screen and (min-width: 900px) {
+  @media only all and (min-width: 900px), print {
     background: url(/static/images/mz-nigeria-logo.png) 0 center no-repeat;
     &.down {
       background: url(../images/down-logo.png) 0 center no-repeat;

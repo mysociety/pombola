@@ -11,6 +11,11 @@
   padding: 0.5em;
   background-color: #f7f7f7;
 }
+@media print {
+  .notice {
+    display: none;
+  }
+}
 
 div.error {
   border: 2px solid #f00;

@@ -1,3 +1,7 @@
+#disqus_thread{
+  @media print { display: none; }  
+}
+
 ul.comments {
   @include list-reset-soft;
   li {
@@ -47,7 +51,7 @@ ul.comments {
               &.report {
                 @include button-text-red; } } } } } } } }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   ul.comments {
     li {
       img {

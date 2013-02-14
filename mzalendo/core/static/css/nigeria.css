@@ -82,6 +82,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 0.5em;
   background-color: #f7f7f7;
 }
+@media print {
+  .notice {
+    display: none;
+  }
+}
 
 div.error {
   border: 2px solid #f00;
@@ -531,7 +536,7 @@ pre {
   overflow: hidden;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #site-header {
     height: 60px;
   }
@@ -552,7 +557,7 @@ pre {
   width: 147px;
   background: url(../images/m-logo.png) 0 center no-repeat;
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #logo {
     position: absolute;
     left: 0;
@@ -571,7 +576,7 @@ pre {
 menu#mobile-top-tools {
   float: right;
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   menu#mobile-top-tools {
     display: none;
   }
@@ -611,9 +616,14 @@ menu#mobile-top-tools ul li a img {
   height: auto;
   border: none;
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #header-search {
     display: block;
+  }
+}
+@media print {
+  #header-search {
+    display: none;
   }
 }
 #header-search input {
@@ -667,9 +677,14 @@ menu#site-user-tools {
   height: auto;
   border: none;
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   menu#site-user-tools {
     display: block;
+  }
+}
+@media print {
+  menu#site-user-tools {
+    display: none;
   }
 }
 menu#site-user-tools ul {
@@ -862,9 +877,14 @@ menu#site-user-tools ul li.active a:hover {
   background: -o-linear-gradient(#000000, #555555);
   background: linear-gradient(#000000, #555555);
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #main-menu {
     display: block;
+  }
+}
+@media print {
+  #main-menu {
+    display: none;
   }
 }
 #main-menu nav {
@@ -961,7 +981,7 @@ menu#site-user-tools ul li.active a:hover {
 #main-menu nav ul li:hover ul li a:hover {
   background: #d4d4d4;
 }
-@media (min-width: 720px) {
+@media only all and (min-width: 720px), print {
   #main-menu nav ul li a {
     font-size: 14px;
     padding: 8px 10px;
@@ -998,7 +1018,7 @@ menu#site-user-tools ul li.active a:hover {
 #footer-menu li > ul {
   margin-left: 1em;
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #footer-menu li > ul {
     display: none;
   }
@@ -1014,7 +1034,7 @@ menu#site-user-tools ul li.active a:hover {
   display: none;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #breadcrumb {
     display: block;
     height: 40px;
@@ -1061,7 +1081,12 @@ menu#site-user-tools ul li.active a:hover {
     background-color: #fff;
   }
 }
-@media only screen and (min-width: 640px) and (max-width: 960px) {
+@media print {
+  #breadcrumb {
+    display: none;
+  }
+}
+@media only all and (min-width: 640px) and (max-width: 960px), print {
   #breadcrumb {
     padding: 0 10px;
   }
@@ -1081,6 +1106,11 @@ menu#site-user-tools ul li.active a:hover {
 #site-footer div.footer-section {
   border-top: 2px solid #55a4da;
   padding: 10px;
+}
+@media print {
+  #site-footer div.footer-section {
+    display: none;
+  }
 }
 #site-footer div.footer-section:first-child {
   border: none;
@@ -1118,6 +1148,11 @@ menu#site-user-tools ul li.active a:hover {
   display: table-caption;
   padding: 20px;
   background: #55a4da;
+}
+@media print {
+  #site-footer .subscribe-box {
+    display: none;
+  }
 }
 #site-footer .subscribe-box h2 {
   color: white;
@@ -1185,7 +1220,7 @@ menu#site-user-tools ul li.active a:hover {
   clear: both;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #site-footer {
     padding: 0 10px;
   }
@@ -1220,7 +1255,7 @@ menu#site-user-tools ul li.active a:hover {
     background: none;
   }
 }
-@media only screen and (min-width: 960px) {
+@media only all and (min-width: 960px), print {
   #site-footer {
     padding: 0;
   }
@@ -1228,7 +1263,7 @@ menu#site-user-tools ul li.active a:hover {
 .wrapper {
   width: 100%;
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   .wrapper {
     max-width: 960px;
     margin: 0 auto;
@@ -1386,7 +1421,7 @@ menu#site-user-tools ul li.active a:hover {
   padding: 10px;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #page.down h1 {
     font-size: 40px;
     line-height: 50px;
@@ -1680,7 +1715,7 @@ menu#site-user-tools ul li.active a:hover {
   background: url(../images/chevron-up-alt.png) center no-repeat, linear-gradient(#d2d2d2, #ffffff);
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   .page-title {
     display: block;
     background: none;
@@ -1840,7 +1875,7 @@ div.object_menu ul li a {
   font-size: 17px;
   font-weight: bold;
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   .social-and-tools {
     display: block;
     padding: 10px;
@@ -1889,6 +1924,11 @@ div.object_menu ul li a {
     background-position: 0 -141px;
   }
 }
+@media print {
+  .social-and-tools {
+    display: none;
+  }
+}
 
 ul.hansard_entries em {
   font-style: italic;
@@ -1914,6 +1954,12 @@ ul.hansard_entries li.page_number {
   text-align: right;
   background: #eee;
   padding: 0.2em;
+}
+
+@media print {
+  #disqus_thread {
+    display: none;
+  }
 }
 
 ul.comments, ul.listing {
@@ -2115,7 +2161,7 @@ ul.comments li section ul.tools li a.report:hover, ul.listing li section ul.tool
   background: red;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   ul.comments li img, ul.listing li img {
     width: 60px;
     height: 60px;
@@ -2173,7 +2219,7 @@ ul.listing li section a.read-more:hover {
   background: #777777 url(../images/chevron-right.png) 6px center no-repeat;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   ul.listing li img {
     width: auto;
     height: auto;
@@ -2551,7 +2597,7 @@ ul.scorecard li article header .details .source a {
   border-radius: 3px;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #ajax_dialog_subcontent {
     width: 466px;
   }
@@ -2585,7 +2631,7 @@ ul.scorecard li article header .details .source a {
   display: block;
 }
 
-@media only screen and (max-width: 640px) {
+@media only all and (max-width: 640px), print {
   #home-search #header-search-hansard-instead {
     padding-left: 0.5em;
   }
@@ -2788,7 +2834,7 @@ ul#home-news-list li img {
 }
 #home-mpratings img {
   float: left;
-  widht: 60px;
+  width: 60px;
   margin-right: 10px;
 }
 #home-mpratings h3.scorecard-overall {
@@ -2858,7 +2904,7 @@ ul#home-news-list li img {
   background: linear-gradient(#75a8cd, #82bae3);
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #page .home-left {
     float: left;
     clear: left;
@@ -2897,7 +2943,7 @@ ul#home-news-list li img {
     width: 510px;
   }
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #home-search {
     background: #2e2e2e;
     margin: 30px 0;
@@ -3127,7 +3173,7 @@ ul#home-news-list li img {
     bottom: 10px;
   }
 }
-@media only screen and (min-width: 640px) and (max-width: 960px) {
+@media only all and (min-width: 640px) and (max-width: 960px), print {
   #page {
     padding: 0 10px;
   }
@@ -3135,6 +3181,7 @@ ul#home-news-list li img {
     width: 320px;
   }
   #page .home-right {
+    width: 45%;
     float: right;
   }
   #page .home-right .social-and-tools {
@@ -3150,7 +3197,7 @@ ul#home-news-list li img {
     display: block;
   }
 }
-@media only screen and (min-width: 640px) and (max-width: 880px) {
+@media only all and (min-width: 640px) and (max-width: 880px) {
   #page .home-right {
     width: 380px;
   }
@@ -3184,7 +3231,7 @@ ul#home-news-list li img {
     background-position: 120px center;
   }
 }
-@media only screen and (min-width: 640px) and (max-width: 760px) {
+@media only all and (min-width: 640px) and (max-width: 760px) {
   #page .home-left {
     width: 100%;
   }
@@ -3288,7 +3335,7 @@ ul#home-news-list li img {
   margin: 10px 0;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #login-pagetitle {
     display: block;
     background: #e6e6e6;
@@ -3362,7 +3409,7 @@ h2 a.appearances-trigger.active {
   height: 2px;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   .infopage {
     margin: 0;
   }
@@ -3435,7 +3482,7 @@ body {
   background-position: bottom center;
 }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #site-header {
     height: 100px;
   }
@@ -3444,7 +3491,7 @@ body {
   background: url(/static/images/mz-nigeria-logo-symbol.png) 0 center no-repeat;
   background-position: left 20%;
 }
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   #logo {
     top: -20px;
     height: 130px;
@@ -3455,7 +3502,7 @@ body {
     background: url(../images/down-logo.png) 0 center no-repeat;
   }
 }
-@media only screen and (min-width: 900px) {
+@media only all and (min-width: 900px), print {
   #logo {
     background: url(/static/images/mz-nigeria-logo.png) 0 center no-repeat;
   }

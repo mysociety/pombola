@@ -79,7 +79,7 @@
       display:block;
       text-align:left;
     }
-@media screen and (min-width: 564px) {
+@media screen and (min-width: 564px), print {
     #mzalendo_main_actions ul li.action1{
       float:left;
     }
@@ -218,8 +218,7 @@
     
     
     // Replace images with Retina equivilants
-    @media only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)
-    {
+    @media only all and (min--moz-device-pixel-ratio: 2), only all and (-o-min-device-pixel-ratio: 2/1), only all and (-webkit-min-device-pixel-ratio: 2), only all and (min-device-pixel-ratio: 2), print {
       #logo{
         background-image: url(logo.svg);
         background-size: 100% auto;
@@ -239,7 +238,7 @@
     
     
     
-    @media screen and (min-width: 564px) {
+    @media only all and (min-width: 564px), print {
       #mzalendo_about{
         width: 564px;
         padding:0;
@@ -257,7 +256,7 @@
       }
     }
     
-    @media screen and (min-width : 720px) {
+    @media only all and (min-width : 720px), print {
       #mzalendo_main_actions{
         padding:0;
         padding-top:2em;
@@ -266,7 +265,7 @@
       }
     }
     
-    @media screen and (min-width : 406px) {
+    @media only all and (min-width : 406px), print {
       #logo{
         background-size: 100% auto;
       }

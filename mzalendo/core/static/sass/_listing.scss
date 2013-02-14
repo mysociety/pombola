@@ -31,7 +31,7 @@ ul.listing {
         &:hover {
           background: $colour_blackish url(../images/chevron-right.png) 6px center no-repeat; } } } } }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px), print {
   ul.listing {
     li {
       img {
