@@ -218,7 +218,7 @@
     
     
     // Replace images with Retina equivilants
-    @media only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)
+    @media only all and (min--moz-device-pixel-ratio: 2), only all and (-o-min-device-pixel-ratio: 2/1), only all and (-webkit-min-device-pixel-ratio: 2), only all and (min-device-pixel-ratio: 2)
     {
       #logo{
         background-image: url(logo.svg);
@@ -239,7 +239,7 @@
     
     
     
-    @media screen and (min-width: 564px) {
+    @media only all and (min-width: 564px) {
       #mzalendo_about{
         width: 564px;
         padding:0;
@@ -257,7 +257,7 @@
       }
     }
     
-    @media screen and (min-width : 720px) {
+    @media only all and (min-width : 720px) {
       #mzalendo_main_actions{
         padding:0;
         padding-top:2em;
@@ -266,7 +266,7 @@
       }
     }
     
-    @media screen and (min-width : 406px) {
+    @media only all and (min-width : 406px) {
       #logo{
         background-size: 100% auto;
       }

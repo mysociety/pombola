@@ -2,7 +2,7 @@
 #breadcrumb-replacement {
   display: none; }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px) {
   #breadcrumb {
     display: block;
     height: 40px;
@@ -36,6 +36,6 @@
     height: 20px;
     background-color: #fff; } }
 
-@media only screen and (min-width: 640px) and (max-width: 960px) {
+@media only all and (min-width: 640px) and (max-width: 960px) {
   #breadcrumb {
     padding: 0 10px; } }

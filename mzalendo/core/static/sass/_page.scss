@@ -10,7 +10,7 @@
 
 .wrapper {
   width: 100%;
-  @media only screen and (min-width: 640px) {
+  @media only all and (min-width: 640px) {
     max-width: 960px;
     margin: 0 auto; } }
 
@@ -118,7 +118,7 @@
     background: $colour_muted;
     padding: 10px; } }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px) {
   #page {
     &.down {
       h1 {
@@ -327,7 +327,7 @@
       background: #d2d2d2 url(../images/chevron-up-alt.png) center no-repeat;
       @include background(url(../images/chevron-up-alt.png) center no-repeat, linear-gradient(#d2d2d2, white)); } } }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px) {
   .page-title {
     display: block;
     background: none;

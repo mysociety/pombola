@@ -47,7 +47,7 @@ ul.comments {
               &.report {
                 @include button-text-red; } } } } } } } }
 
-@media only screen and (min-width: 640px) {
+@media only all and (min-width: 640px) {
   ul.comments {
     li {
       img {

@@ -25,7 +25,7 @@
         
     Modernizr.load(
         {
-            test : Modernizr.mq('only screen and (max-width: 640px)'),
+            test : Modernizr.mq('only all and (max-width: 640px)'),
             yep : [
                 static_url('js/libs/zepto-0.8.min.js'),
                 static_url('js/mobile-functions.js')

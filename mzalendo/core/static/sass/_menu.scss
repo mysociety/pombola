@@ -3,7 +3,7 @@
 #main-menu {
   // Don't show this menu at all by default
   display: none;
-  @media only screen and (min-width: 640px) {
+  @media only all and (min-width: 640px) {
     display: block; }
   background: $colour_black;
   @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
@@ -69,7 +69,7 @@
                 float: none;
                 &:hover {
                   background: #d4d4d4; } } } } }
-        @media (min-width: 720px) {
+        @media only all and (min-width: 720px) {
           & {
             a {
               font-size: 14px;
@@ -93,7 +93,7 @@
   // by default show the sub entries. Hide if the screen is big in which
   // case the menu at the top will be shown instead.
   li > ul { 
-    @media only screen and (min-width: 640px) {
+    @media only all and (min-width: 640px) {
       display: none;
     }
     
