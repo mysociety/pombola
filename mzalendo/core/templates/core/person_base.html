@@ -47,6 +47,13 @@
               {% if not forloop.last %}, {% endif %}
           {% endfor %}
       </p>
+
+      <p>
+        Have information to add to our site about this aspirant?
+        <a  href="{% url feedback_add %}?url={{ request.build_absolute_uri }}"
+            class="feedback_link"
+        >Tell us!</a>
+      </p>
   {% endif %}
 {% endblock %}
 
