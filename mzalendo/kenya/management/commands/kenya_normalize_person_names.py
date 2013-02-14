@@ -33,9 +33,9 @@ class Command(NoArgsCommand):
             if (legal_name != normalized_legal_name) or (other_names != normalized_other_names):
                 print >> sys.stderr, "Found difference(s):"
                 if legal_name != normalized_legal_name:
-                    print >> sys.stderr, legal_name, "should be", normalized_legal_name
+                    print >> sys.stderr, "  ", legal_name, "should be", normalized_legal_name
                 if other_names != normalized_other_names:
-                    print >> sys.stderr, other_names, "should be", normalized_other_names
+                    print >> sys.stderr, "  ", other_names, "should be", normalized_other_names
                 person.legal_name = normalized_legal_name
                 person.other_names = normalized_other_names
                 maybe_save(person, **options)
