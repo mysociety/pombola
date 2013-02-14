@@ -382,6 +382,7 @@ ul#home-news-list {
     .home-left {
       width: 320px; }
     .home-right {
+      width: 45%;
       float: right;
       .social-and-tools {
         position: relative;
@@ -393,7 +394,7 @@ ul#home-news-list {
           li {
             display: block; } } } } } }
 
-@media only all and (min-width: 640px) and (max-width: 880px), print {
+@media only all and (min-width: 640px) and (max-width: 880px) {
   #page .home-right {
     width: 380px;
     .social-and-tools {
@@ -421,7 +422,7 @@ ul#home-news-list {
       padding: 10px 10px 15px 10px;
       background-position: 120px center; } } }
 
-@media only all and (min-width: 640px) and (max-width: 760px), print {
+@media only all and (min-width: 640px) and (max-width: 760px) {
   #page .home-left {
     width: 100%; }
   #page .home-right {
