@@ -55,14 +55,14 @@
                              {% if forloop.first %}
                              {% else %}
                                 {% if forloop.last %} and {% else %}, {% endif %}
-                             {% endif %}<strong>{{ party.name }}</strong>{% empty %}Not a member of any parties.{% endfor %}
+                             {% endif %}<strong><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></strong>{% empty %}Not a member of any parties.{% endfor %}
                       </p>
                       <p><em>Coalitions:</em>
                            {% for coalition in person.coalitions %}
                              {% if forloop.first %}
                              {% else %}
                                 {% if forloop.last %} and {% else %}, {% endif %}
-                             {% endif %}<strong>{{ coalition.name }}</strong>{% empty %}Not a member of any coalitions.{% endfor %}
+                             {% endif %}<strong><a href="{{ coalition.get_absolute_url }}">{{ coalition.name }}</a></strong>{% empty %}Not a member of any coalitions.{% endfor %}
                       </p>
                 </li>
 

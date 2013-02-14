@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
 from django.views.generic import ListView, DetailView
+from django.views.generic.simple import direct_to_template
 
 from .models import Quiz, Submission
 
@@ -10,6 +11,9 @@ urlpatterns = patterns( 'votematch.views',
 
     # .../                # list of quizzes
     url( r'^$', ListView.as_view(model=Quiz), name='votematch-quiz-list' ),
+
+    # .../scoring/        # How the scores are calculated
+    url( r'^scoring/$', direct_to_template, {'template': 'votematch/scoring.html'}, name='votematch-scoring' ),
 
     # .../<slug>/         # individual quiz form (submit on POST)
     url( r'^(?P<slug>[-\w]+)/$', 'quiz_detail', name='votematch-quiz' ),
