@@ -46,7 +46,9 @@ class Party(TimeStampedModel):
     """ eg 'Mitt Romney' or 'Lib Dems' """
     quiz = models.ForeignKey('Quiz')
     name = models.TextField()
-    summary = MarkupField()
+
+    url = models.URLField(blank=True, null=True)
+    summary = MarkupField(blank=True)
 
     def __unicode__(self):
         return "%s (%s)" % ( self.name, self.quiz )

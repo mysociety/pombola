@@ -125,10 +125,11 @@
     "fields": {
       "name": "Loonie Left", 
       "created": "2013-02-12 15:47:57", 
-      "modified": "2013-02-12 15:47:57", 
-      "_summary_rendered": "<p>gargle</p>", 
+      "url": "http://en.wikipedia.org/wiki/Loony_left", 
+      "modified": "2013-02-14 08:42:26", 
+      "_summary_rendered": "", 
       "quiz": 1, 
-      "summary": "gargle\r\n"
+      "summary": ""
     }
   }, 
   {
@@ -137,6 +138,7 @@
     "fields": {
       "name": "Radical Right", 
       "created": "2013-02-12 15:48:10", 
+      "url": null, 
       "modified": "2013-02-12 15:48:10", 
       "_summary_rendered": "<p>Wibble!</p>", 
       "quiz": 1, 
@@ -153,7 +155,7 @@
       "statement": 1, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 2, 
     "model": "votematch.stance", 
@@ -164,7 +166,7 @@
       "statement": 2, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 3, 
     "model": "votematch.stance", 
@@ -175,7 +177,7 @@
       "statement": 3, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 4, 
     "model": "votematch.stance", 
@@ -186,7 +188,7 @@
       "statement": 4, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 5, 
     "model": "votematch.stance", 
@@ -197,7 +199,7 @@
       "statement": 5, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 6, 
     "model": "votematch.stance", 
@@ -208,7 +210,7 @@
       "statement": 6, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 7, 
     "model": "votematch.stance", 
@@ -219,7 +221,7 @@
       "statement": 7, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 8, 
     "model": "votematch.stance", 
@@ -230,7 +232,7 @@
       "statement": 8, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 9, 
     "model": "votematch.stance", 
@@ -241,7 +243,7 @@
       "statement": 9, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 10, 
     "model": "votematch.stance", 
@@ -252,7 +254,7 @@
       "statement": 10, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 11, 
     "model": "votematch.stance", 
@@ -263,7 +265,7 @@
       "statement": 11, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 12, 
     "model": "votematch.stance", 
@@ -274,7 +276,7 @@
       "statement": 1, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 13, 
     "model": "votematch.stance", 
@@ -285,7 +287,7 @@
       "statement": 2, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 14, 
     "model": "votematch.stance", 
@@ -296,7 +298,7 @@
       "statement": 3, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 15, 
     "model": "votematch.stance", 
@@ -307,7 +309,7 @@
       "statement": 4, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 16, 
     "model": "votematch.stance", 
@@ -318,7 +320,7 @@
       "statement": 5, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 17, 
     "model": "votematch.stance", 
@@ -329,7 +331,7 @@
       "statement": 6, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 18, 
     "model": "votematch.stance", 
@@ -340,7 +342,7 @@
       "statement": 7, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 19, 
     "model": "votematch.stance", 
@@ -351,7 +353,7 @@
       "statement": 8, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 20, 
     "model": "votematch.stance", 
@@ -362,7 +364,7 @@
       "statement": 9, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 21, 
     "model": "votematch.stance", 
@@ -373,7 +375,7 @@
       "statement": 10, 
       "created": "2013-02-12 15:48:26"
     }
-  },
+  }, 
   {
     "pk": 22, 
     "model": "votematch.stance", 
