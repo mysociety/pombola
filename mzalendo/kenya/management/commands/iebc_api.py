@@ -144,6 +144,54 @@ def maybe_save(o, **options):
     else:
         print >> sys.stderr, 'Not saving %s because --commit was not specified' % (o,)
 
+def match_lists(a_list, a_key_function, b_list, b_key_function):
+    """Match up identical elements from two list of different lengths
+
+    Return a list of tuples that represent assignments from items in
+    a_list to those b_list.  The first tuples will be those where
+    a_key_function applied to the element from a_list was equal to
+    b_key_function applied to the element from b_list.  After that,
+    all the unmatched elements from a_list are listed in the first
+    slot of the tuple with None in the second.  Contrariwise, then all
+    the unmatched elements from b_list are listed.
+
+    There are bound to be more efficient ways of implementing this,
+    but this is at least simple, and it's not being used in
+    performance critical situations.
+
+    An example (and doctest):
+
+    >>> list1 = ['fOO', 'bar', 'BAz', 'quux']
+    >>> list2 = ['baz', 'quux', 'xyzzy', 'baz']
+    >>> match_lists(list1, lambda e: e.lower(), list2, lambda e: e)
+    [('BAz', 'baz'), ('quux', 'quux'), ('fOO', None), ('bar', None), (None, 'xyzzy'), (None, 'baz')]
+    """
+
+    # Shallow copy the lists, so we can safely remove elements:
+    a_list = a_list[:]
+    b_list = b_list[:]
+    a_keys = set(a_key_function(a) for a in a_list)
+    b_keys = set(b_key_function(b) for b in b_list)
+    exact_key_matches = a_keys & b_keys
+    results = []
+    for common_key in sorted(exact_key_matches):
+        # For each match, extract it from each list and add the tuple
+        # to the results:
+        for i, a in enumerate(a_list):
+            if a_key_function(a) == common_key:
+                matching_element_a = a_list.pop(i)
+                break
+        for i, b in enumerate(b_list):
+            if b_key_function(b) == common_key:
+                matching_element_b = b_list.pop(i)
+                break
+        results.append((matching_element_a, matching_element_b))
+    for a in a_list:
+        results.append((a, None))
+    for b in b_list:
+        results.append((None, b))
+    return results
+
 # ------------------------------------------------------------------------
 
 class SamePersonChecker(object):
