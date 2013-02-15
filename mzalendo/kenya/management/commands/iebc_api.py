@@ -82,24 +82,27 @@ def get_data_with_cache(cache_filename, *args, **kwargs):
 # corresponding PlaceKind and Position title:
 
 known_race_type_mapping = {
-    "Governor": (PlaceKind.objects.get(slug='county'),
-                 ParliamentarySession.objects.get(slug='s2013'),
-                 PositionTitle.objects.get(slug__startswith='aspirant-governor')),
-    "Senator": (PlaceKind.objects.get(slug='county'),
-                ParliamentarySession.objects.get(slug='s2013'),
-                PositionTitle.objects.get(slug__startswith='aspirant-senator')),
-    "Women Representative": (PlaceKind.objects.get(slug='county'),
-                             ParliamentarySession.objects.get(slug='s2013'),
-                             PositionTitle.objects.get(slug__startswith='aspirant-women-representative')),
-    "National Assembly Rep.": (PlaceKind.objects.get(slug='constituency'),
-                               ParliamentarySession.objects.get(slug='na2013'),
-                               PositionTitle.objects.get(slug__startswith='aspirant-mp')),
-    "County Assembly Rep.": (PlaceKind.objects.get(slug='ward'),
-                             ParliamentarySession.objects.get(slug='na2013'),
-                             PositionTitle.objects.get(slug__startswith='aspirant-ward-representative')),
+    "2": (PlaceKind.objects.get(slug='county'),
+          ParliamentarySession.objects.get(slug='s2013'),
+          PositionTitle.objects.get(slug__startswith='aspirant-governor'),
+          "Governor"),
+    "3": (PlaceKind.objects.get(slug='county'),
+          ParliamentarySession.objects.get(slug='s2013'),
+          PositionTitle.objects.get(slug__startswith='aspirant-senator'),
+          "Senator"),
+    "5": (PlaceKind.objects.get(slug='county'),
+          ParliamentarySession.objects.get(slug='s2013'),
+          PositionTitle.objects.get(slug__startswith='aspirant-women-representative'),
+          "Women Representative"),
+    "4": (PlaceKind.objects.get(slug='constituency'),
+          ParliamentarySession.objects.get(slug='na2013'),
+          PositionTitle.objects.get(slug__startswith='aspirant-mp'),
+          "National Assembly Rep."),
+    "6": (PlaceKind.objects.get(slug='ward'),
+          ParliamentarySession.objects.get(slug='na2013'),
+          PositionTitle.objects.get(slug__startswith='aspirant-ward-representative'),
+          "County Assembly Rep."),
     }
-
-known_race_types = known_race_type_mapping.keys()
 
 def parse_race_name(race_name):
     types_alternation = "|".join(re.escape(krt) for krt in known_race_types)
