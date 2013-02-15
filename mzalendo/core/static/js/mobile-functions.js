@@ -69,27 +69,6 @@ $(function(){
   });
 
   /*
-   * Get appearances
-   */
-  var appearances_url = $('#appearances').attr('data-tab-content-source-url');
-
-  $('#appearances').hide();
-
-  $('.appearances-trigger').on('click', function(e){
-    e.preventDefault();
-    hideShow('#appearances', $(this));
-
-    //only get data if its not already been got and there
-    //is a 'data-tab-content-source-url' attribute
-    if ( appearances_url && $('#appearances.has-data').length === 0) {
-      $('#appearances').load(appearances_url, function(){
-        $('#appearances').addClass('has-data');
-        $('#appearances > h2').hide();
-      });
-    }
-  });
-
-  /*
    * Get the sub-menu links if on a page with child items
    */
   //if .page-title has a data-sub-menu-id attr

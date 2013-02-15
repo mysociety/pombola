@@ -8,7 +8,7 @@
 
   <h2>Related Organisations</h2>
 
-  <div class="tab" id="related-organisations" data-tab-content-source-url="{% url place_related_organisation_tab slug=object.slug %}">
+  <div>
     <ul class="listing">
         {% for position in object.position_with_organisation_set.all %}
             {% with organisation=position.organisation organisation_url=position.organisation.get_absolute_url %}
