@@ -224,9 +224,9 @@ class SamePersonChecker(object):
                 mz_id = int(row['Mz ID'], 10)
                 candidate_code = row['API Candidate Code']
                 key = (candidate_code, mz_id)
-                if re.search('^Same', classification):
+                if re.search('(?i)^Same', classification):
                     self.same_people_lookup[key] = True
-                elif re.search('^Different', classification):
+                elif re.search('(?i)^Different', classification):
                     self.same_people_lookup[key] = False
                 else:
                     raise Exception, "Bad 'Same/Different' value in the line: %s" % (row,)
