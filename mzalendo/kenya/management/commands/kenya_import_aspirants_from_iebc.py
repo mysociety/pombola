@@ -52,22 +52,8 @@ with open(os.path.join(data_directory, 'party-names-matched.csv')) as fp:
         if api_name and db_name:
             party_name_corrections[api_name] = db_name
 
-same_people = {}
-
-names_checked_csv_file = 'names-manually-checked.csv'
-with open(os.path.join(data_directory, names_checked_csv_file)) as fp:
-    reader = csv.DictReader(fp)
-    for row in reader:
-        classification = row['Same/Different']
-        mz_id = int(row['Mz ID'], 10)
-        candidate_code = row['API Candidate Code']
-        key = (candidate_code, mz_id)
-        if re.search('^Same', classification):
-            same_people[key] = True
-        elif re.search('^Different', classification):
-            same_people[key] = False
-        else:
-            raise Exception, "Bad 'Same/Different' value in the line: %s" % (row,)
+same_person_checker = SamePersonChecker(os.path.join(data_directory,
+                                                     'names-manually-checked.csv'))
 
 def get_matching_party(party_name, **options):
     party_name_to_use = party_name_corrections.get(party_name, party_name)
@@ -212,6 +198,8 @@ class Command(NoArgsCommand):
                     'Mz Politician Ever',
                     'Mz ID']
 
+        failed = False
+
         for area_type in 'county', 'constituency', 'ward':
             cache_filename = os.path.join(cache_directory, area_type)
             area_type_data = get_data_with_cache(cache_filename, url('/%s/' % (area_type)))
@@ -235,7 +223,10 @@ class Command(NoArgsCommand):
                         person = get_person_from_names(first_names, surname)
                         print "returned person is:", person
                         if person:
-                            same_person = same_people.get((candidate['code'], person.id), False)
+                            same_person = same_person_checker.check_same_and_update((candidate['code'], person.id))
+                            if same_person is None:
+                                failed = True
+                                continue
                             if not same_person:
                                 person = None
                         # Now we know we need to create a new Person:
@@ -276,3 +267,6 @@ class Command(NoArgsCommand):
 
         for race_type, count in race_type_counts.items():
             print race_type, count
+
+        if failed:
+            print "Failed: you need to update", same_person_checker.csv_filename

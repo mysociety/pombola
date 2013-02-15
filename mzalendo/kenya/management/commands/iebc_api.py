@@ -1,3 +1,4 @@
+import csv
 import errno
 import hmac
 import hashlib
@@ -142,3 +143,90 @@ def maybe_save(o, **options):
         print >> sys.stderr, 'Saving %s' % (o,)
     else:
         print >> sys.stderr, 'Not saving %s because --commit was not specified' % (o,)
+
+# ------------------------------------------------------------------------
+
+class SamePersonChecker(object):
+
+    headings = ['Same/Different',
+                'API Name',
+                'API Party',
+                'API Place',
+                'API Candidate Code',
+                'Mz Legal Name',
+                'Mz Other Names',
+                'Mz URL',
+                'Mz Parties Ever',
+                'Mz Aspirant Ever',
+                'Mz Politician Ever',
+                'Mz ID']
+
+    def __init__(self, csv_filename):
+        self.csv_filename = csv_filename
+        self.same_people_lookup = {}
+        self.rows = []
+        with open(self.csv_filename) as fp:
+            reader = csv.DictReader(fp)
+            for row in reader:
+                self.rows.append(row)
+                classification = row['Same/Different']
+                mz_id = int(row['Mz ID'], 10)
+                candidate_code = row['API Candidate Code']
+                key = (candidate_code, mz_id)
+                if re.search('^Same', classification):
+                    self.same_people_lookup[key] = True
+                elif re.search('^Different', classification):
+                    self.same_people_lookup[key] = False
+                else:
+                    raise Exception, "Bad 'Same/Different' value in the line: %s" % (row,)
+
+    def add_possible_match(self,
+                           candidate_data,
+                           candidate_place,
+                           candidate_race_type,
+                           mz_person):
+        with open(self.csv_filename, 'w') as fp:
+            writer = csv.DictWriter(fp, SamePersonChecker.headings)
+            writer.writerow(dict((h, h) for h in SamePersonChecker.headings))
+            # Write out the existing data first:
+            for existing_row in self.rows:
+                writer.writerow(existing_row)
+                # And now add the new person:
+            row = {}
+            row['Same/Different'] = ''
+            first_names = normalize_name(candidate_data['other_name'] or '')
+            surname = normalize_name(candidate_data['surname'] or '')
+            row['API Name'] = first_names + ' ' + surname
+            party_data = candidate_data['party']
+            row['API Party'] = party_data['name'] if 'name' in party_data else ''
+            row['API Place'] = '%s (%s)' % (candidate_place.name, candidate_place.kind.name.lower())
+            row['API Candidate Code'] = candidate_data['code']
+            row['Mz Legal Name'] = mz_person.legal_name
+            row['Mz Other Names'] = mz_person.other_names
+            row['Mz URL'] = 'http://info.mzalendo.com' + mz_person.get_absolute_url()
+            row['Mz Parties Ever'] = ', '.join(o.name for o in mz_person.parties_ever())
+            for heading, positions in (('Mz Aspirant Ever', mz_person.aspirant_positions_ever()),
+                                       ('Mz Politician Ever', mz_person.politician_positions_ever())):
+                row[heading] = ', '.join('%s at %s' % (p.title.name, p.place) for p in positions)
+            row['Mz ID'] = mz_person.id
+            for key, value in row.items():
+                row[key] = unicode(value).encode('utf-8')
+            writer.writerow(row)
+            self.rows.append(row)
+
+    def check_same_and_update(self,
+                              candidate_data,
+                              candidate_place,
+                              candidate_race_type,
+                              mz_person):
+        key = (candidate_data['code'], mz_person.id)
+        if key in self.same_people_lookup:
+            return self.same_people_lookup[key]
+        else:
+            # Otherwise, add this person to the end of the CSV file
+            # for checking:
+            self.add_possible_match(candidate_data,
+                                    candidate_place,
+                                    candidate_race_type,
+                                    mz_person)
+            return None
