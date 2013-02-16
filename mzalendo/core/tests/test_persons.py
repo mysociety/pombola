@@ -18,25 +18,27 @@ class PersonTest(WebTest):
         person = models.Person(
             legal_name="Alfred Smith"
         )
-        person.clean()   # would normally be called by 'save()'
+        person.save()
         self.assertEqual( person.name, "Alfred Smith" )
         self.assertEqual( person.additional_names(), [] )
-        
+
         # Add an alternative name
-        person.other_names = "Freddy Smith"
-        person.clean()   # would normally be called by 'save()'
+        person.add_alternative_name("Freddy Smith", name_to_use=True)
         self.assertEqual( person.name, "Freddy Smith" )
         self.assertEqual( person.additional_names(), [] )
 
         # Add yet another alternative name
-        person.other_names = "Fred Smith\nFreddy Smith"
-        person.clean()   # would normally be called by 'save()'
+        person.add_alternative_name("Fred Smith", name_to_use=True)
         self.assertEqual( person.name, "Fred Smith" )
         self.assertEqual( person.additional_names(), ['Freddy Smith'] )
 
+        # Remove the first of those names:
+        person.remove_alternative_name("Fred Smith")
+        self.assertEqual( person.name, "Alfred Smith" )
+        self.assertEqual( person.additional_names(), ['Freddy Smith'] )
+
         # Add yet another alternative name
-        person.other_names = "\n\nFred Smith\n\nFreddy Smith\n\n\n"
-        person.clean()   # would normally be called by 'save()'
+        person.add_alternative_name("\n\nFred Smith\n\n", name_to_use=True)
         self.assertEqual( person.name, "Fred Smith" )
         self.assertEqual( person.additional_names(), ['Freddy Smith'] )
 

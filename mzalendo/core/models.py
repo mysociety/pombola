@@ -12,6 +12,7 @@ from django.core import exceptions
 from django.core.urlresolvers import reverse
 
 from django.db.models import Q
+from django.db import transaction
 
 from django.utils.dateformat import DateFormat
 
@@ -239,23 +240,34 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
     can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
     
-    def clean(self):
-        # strip other_names and flatten multiple newlines
-        self.other_names = re.sub(r"\n+", "\n", self.other_names).strip()
-
     @property
     def name(self):
-        if self.other_names:
-            return self.other_names.split("\n")[0]
+        alternative_names_to_use = self.alternative_names.filter(name_to_use=True)
+        if alternative_names_to_use:
+            return alternative_names_to_use[0].alternative_name
         else:
             return self.legal_name
     
     def additional_names(self):
-        if self.other_names:
-            return self.other_names.split("\n")[1:]
-        else:
-            return []
-    
+        return [an.alternative_name for an in self.alternative_names.filter(name_to_use=False)]
+
+    @transaction.commit_on_success
+    def add_alternative_name(self, alternative_name, name_to_use=False):
+        if name_to_use:
+            # Make sure that no other alternative names are set as
+            # the name to use:
+            for an in self.alternative_names.all():
+                an.name_to_use = False
+                an.save()
+        alternative_name = re.sub(r'\s+', ' ', alternative_name).strip()
+        apn = AlternativePersonName(person=self,
+                                    alternative_name=alternative_name,
+                                    name_to_use=name_to_use)
+        apn.save()
+
+    def remove_alternative_name(self, alternative_name):
+        self.alternative_names.filter(alternative_name=alternative_name).delete()
+
     def aspirant_positions(self):
         return self.position_set.all().current_aspirant_positions()
 
@@ -378,6 +390,14 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     class Meta:
        ordering = ["slug"]      
 
+
+class AlternativePersonName(ModelBase):
+    person = models.ForeignKey(Person, related_name='alternative_names')
+    alternative_name = models.CharField(max_length=300)
+    name_to_use = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.alternative_name + (" [*]" if self.name_to_use else "")
 
 class OrganisationKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
