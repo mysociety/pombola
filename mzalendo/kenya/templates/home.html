@@ -6,8 +6,7 @@
 
 {% block extra_js_to_load %}
     mzalendo_settings.extra_js.push( 'js/feeds.js' );
-    mzalendo_settings.extra_js.push( 'js/libs/jquery.countdown-v1.6.0.js' );
-    // mzalendo_settings.extra_js.push( 'js/election_countdown.js' );
+    mzalendo_settings.extra_js.push( 'js/election_countdown.js' );
 {% endblock %}
 
 {% block css_headers %}
@@ -15,8 +14,6 @@
     
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kenya/election-homepage/base.css" />
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kenya/election-homepage/layout.css" media="only screen and (min-width: 640px)" />
-    
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.countdown-v1.6.0.css" />
 {% endblock %}
 
 {% block site_wide_message %}
@@ -41,25 +38,25 @@
           <h4>2013 General Election polls opens <span class="election-date">Monday 4th March</span></h4>
           <span class="countdown_row countdown_show5">
               <span class="countdown_section countdown_icon"><span></span></span>
-              <span class="countdown_section countdown_day"><span class="countdown_amount">??</span><br>Days</span>
-              <span class="countdown_section countdown_hour"><span class="countdown_amount">??</span><br>Hours</span>
-              <span class="countdown_section countdown_minute"><span class="countdown_amount">??</span><br>Minutes</span>
-              <span class="countdown_section countdown_second"><span class="countdown_amount">??</span><br>Seconds</span>
+              <span class="countdown_section countdown_day"><span class="countdown_amount">--</span><br>Days</span>
+              <span class="countdown_section countdown_hour"><span class="countdown_amount">--</span><br>Hours</span>
+              <span class="countdown_section countdown_minute"><span class="countdown_amount">--</span><br>Minutes</span>
+              <span class="countdown_section countdown_second"><span class="countdown_amount">--</span><br>Seconds</span>
           </span>
   
           <!--              <span class="countdown_row countdown_descr">...</span> -->
       </div>
+    
   
   
   
-  
-        <menu id="mobile-top-tools">
-            <ul>
-                <li><a href="/accounts/login/?next=/">login</a></li>
-                <li><a href="#footer-menu" class="m-icon-nav">menu</a></li>
-                <li><a href="/search/" class="icon-search"><img src="/static/images/search-icon.png" alt="search"/></a></li>
-            </ul>
-        </menu>
+      <menu id="mobile-top-tools">
+          <ul>
+              <li><a href="/accounts/login/?next=/">login</a></li>
+              <li><a href="#footer-menu" class="m-icon-nav">menu</a></li>
+              <li><a href="/search/" class="icon-search"><img src="/static/images/search-icon.png" alt="search"/></a></li>
+          </ul>
+      </menu>
     </div>
   </header>
 
