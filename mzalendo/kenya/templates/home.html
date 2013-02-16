@@ -94,31 +94,16 @@
       </ul>
   </div>
   <div class="election-home-right">
-  
-  <h2 class="static">Editorial</h2>
-  
-  <ul id="home-news-list" data-blog-rss-feed="http://www.mzalendo.com/feed/">
-      <li>
-          <h3><a href="http://www.mzalendo.com/blog/2013/02/14/on-voter-education/">On Voter Education</a></h3>
-          <p class="meta">Thu Feb 14 2013</p>
-          <p>According to the Independent Electoral and Boundaries Commission’s (IEBC) website, “The Commission is responsible … voter ...</p>
-      </li>
-      <li>
-          <h3><a href="http://www.mzalendo.com/blog/2013/02/08/on-lower-salaries-for-state-officers/">On Lower Salaries for State Officers</a></h3>
-          <p class="meta">Fri Feb 08 2013</p>
-          <p>The statistics on the earnings of Kenyan MPs is well known, and leads to the fact that they are among the highest paid in the ...</p>
-      </li>
-      <li>
-          <h3><a href="http://www.mzalendo.com/blog/2013/02/05/we-will-see-final-party-lists-any-time-soon/">We Will See Final Party Lists Any Time Soon?</a></h3>
-          <p class="meta">Tue Feb 05 2013</p>
-          <p>Saying that the political party primaries were marred by irregularities would be an understatement. We have seen some political ...</p>
-      </li>
-      <li>
-          <h3><a href="http://www.mzalendo.com/blog/2013/02/01/should-aspirants-linked-to-corruption-scandals-be-allowed-to-run-for-public-office/">Should Aspirants linked to Corruption Scandals Be Allowed to Run for Public Office?</a></h3>
-          <p class="meta">Fri Feb 01 2013</p>
-          <p>At this point it is difficult to tell if any of the aspirants for the upcoming election have been&nbsp;vetted, not because they have ...</p>
-      </li>
-  </ul>
+    
+  {% if settings.BLOG_RSS_FEED %}
+      <h2 class="static">Editorial</h2>
+      <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
+          <li>
+              Loading news&hellip;
+          </li>
+      </ul>
+  {% endif %}
+
   
   </div>
 {% endblock %}
