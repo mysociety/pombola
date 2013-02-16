@@ -3,6 +3,7 @@ import urllib2
 import time
 import calendar
 import datetime
+import random
 
 from django.db.models import Count
 from django.db.models import Q
@@ -27,10 +28,16 @@ def home(request):
     elif request.GET.get('before'):
         current_slug = request.GET.get('before')
     featured_person = models.Person.objects.get_next_featured(current_slug, request.GET.get('before'))
+    
+    # for the eletion homepage produce a list of all the featured people. Shuffle it each time to avoid any bias.
+    featured_persons = list(models.Person.objects.get_featured())
+    random.shuffle(featured_persons)
+
     return render_to_response(
         'home.html',
         {
-          'featured_person': featured_person,
+          'featured_person':  featured_person,
+          'featured_persons': featured_persons,
         },
         context_instance=RequestContext(request)
     )

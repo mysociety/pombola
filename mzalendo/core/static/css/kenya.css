@@ -3521,6 +3521,11 @@ h2 a.appearances-trigger.active {
     margin-right: 0;
   }
 }
+@media print {
+  body {
+    width: 1000px;
+  }
+}
 ul.social-buttons {
   list-style-type: none;
   padding: 0;
