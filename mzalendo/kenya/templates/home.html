@@ -70,20 +70,20 @@
           <h2>Do you know who you can vote for?</h2>
           <p>Find out! Enter the name of your <a href="/place/is/constituency/">Constituency</a> or <a href="/place/is/county/">County</a> in the box below. Don’t know the name of your Constituency?  <a href="/map">Find it using our map</a>.
           </p>
-          <div class="styled-search">
-              <input type="text" class="search-box">
+          <form class="styled-search" action="{% url core_search %}">
+              <input type="text" class="search-box" name="q" value="" placeholder="Placename">
               <input type="submit" value="Search" class="search-btn">
-          </div>
+          </form>
       </div>
   
-      <div class="callout-search">
+      <form class="callout-search" action="{% url core_search %}">
           <h2>Check out a specific aspirant:</h2>
           <p>Enter their name in the box below to find them</p>
           <div class="styled-search">
-              <input type="text" class="search-box">
+              <input type="text" class="search-box" name="q" value="" placeholder="Aspirant's name">
               <input type="submit" value="Search" class="search-btn">
           </div>
-      </div>
+      </form>
   
       <h2>Frequently viewed:</h2>
       <ul class="frequently-viewed">
