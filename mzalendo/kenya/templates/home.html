@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block title %}Home{% endblock %}
 
@@ -85,12 +86,20 @@
           </div>
       </form>
   
-      <h2>Frequently viewed:</h2>
-      <ul class="frequently-viewed">
-          <li><a href="#"><img src="http://dummyimage.com/122x140"><h4>Ledama Olekina</h4></a></li>
-          <li><a href="#"><img src="http://dummyimage.com/122x140"><h4>Ledama Olekina</h4></a></li>
-          <li><a href="#"><img src="http://dummyimage.com/122x140"><h4>Ledama Olekina</h4></a></li>
-          <li><a href="#"><img src="http://dummyimage.com/122x140"><h4>Ledama Olekina</h4></a></li>
+      <h2>Presidential Aspirants:</h2>
+      <ul class="presidential-aspirants">
+        {% for person in featured_persons %}
+          <li>
+            <a href="{{ person.get_absolute_url }}">
+              {% thumbnail person.primary_image "122x140" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+              {% empty %}
+                <img src="{{STATIC_URL}}images/person-200x200.jpg" width="122" height="140"/>
+              {% endthumbnail %}
+              <h4>{{ person.name }}</h4>
+            </a>
+          </li>
+        {% endfor %}
       </ul>
   </div>
   <div class="election-home-right">

@@ -9,15 +9,22 @@
 	margin-top: 40px;
 }
 
-.election-home .frequently-viewed {
+.election-home .presidential-aspirants {
 	margin:0;
 	padding:0;
 	margin-left: -10px;
 }
-.election-home .frequently-viewed li{
+.election-home .presidential-aspirants li {
 	list-style: none;
 	float: left;
 	margin-left: 10px;
+  width: 120px;
+}
+
+.election-home .presidential-aspirants h4 {
+  height: 2.5em;
+  text-align: center;
+  overflow: hidden;
 }
 
 h2.static {
