@@ -1,0 +1,126 @@
+
+/**
+ * BASE STYLE
+ */
+
+
+.election-home .election-home-right,
+.election-home .election-home-left {
+	margin-top: 40px;
+}
+
+.election-home .frequently-viewed {
+	margin:0;
+	padding:0;
+	margin-left: -10px;
+}
+.election-home .frequently-viewed li{
+	list-style: none;
+	float: left;
+	margin-left: 10px;
+}
+
+h2.static {
+	font-weight: bold;
+	color: gray;
+	font-size: 24px;
+	text-transform: uppercase;
+	clear: left;
+}
+
+.callout-search h2{font-size: 24px; margin-left: -20px; margin-right: -20px;}
+.callout-search p{font-size: 16px;}
+.callout-search p a{color: #bf2726;}
+.callout-search{
+	margin-bottom: 50px;
+	margin: 0 20px 50px;
+}
+
+.styled-search {
+	width: 100%;
+	border: 2px solid #444;
+	border-radius: 6px;
+	overflow: hidden;
+
+}
+
+.styled-search .search-box{
+	width: 70%;
+	margin: 0;
+	float: left;
+	font-size: 16px;
+	color: #555;
+	padding: 13px 5%;
+	border: 0;
+}
+
+.styled-search .search-btn{
+	width: 15%;
+	height: 45px;
+	margin: 0;
+	background: #bf2726 url(images/election-search.png) no-repeat center;
+	float: right;
+	border: 0;
+	text-indent: -999999px;
+	cursor: pointer
+}
+
+.election-home #election_countdown {
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+	overflow: hidden;
+	display: block;
+	background: rgba(0,0,0,0.2);
+	border-radius: 8px;
+}
+
+.countdown_row {
+	display: table-row;
+	width: 300px;
+	background: rgba(0,0,0,0.3);
+}
+.countdown_section {
+	display: table-cell !important;
+	float: none !important;
+	text-align: center;
+	vertical-align: bottom !important;
+	height: 70px;
+	color: #fff;
+	width: 20%;
+	font-weight: normal;
+	text-transform: uppercase;
+	font-size: 10px !important;
+	padding-bottom: 8px;
+}
+
+.countdown_section .countdown_amount{
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.countdown_day .countdown_amount {font-size: 46px;}
+
+.countdown_icon		{width: 120px!important;}
+.countdown_day 		{background: rgba(0,0,0,0.1);}
+.countdown_hour 	{}
+.countdown_minute 	{background: rgba(0,0,0,0.1);}
+.countdown_second 	{width: 120px !important;}
+
+#election_countdown h4{
+	padding: 15px 10px 10px 10px;
+	font-size: 11px;
+	text-transform: uppercase;
+	colspan: 4;
+}
+
+#election_countdown h4 span{color: #fff;} 
+
+.countdown_icon span{
+	display: block;
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	background: url(images/countdown-icon.png) no-repeat;
+	top: 65px;
+}

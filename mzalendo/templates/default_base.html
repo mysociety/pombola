@@ -65,9 +65,11 @@
         {% block extra_headers %}{% endblock %}
         
     </head>
-    <body>
+    <body {% block body_attributes %}{% endblock %}>
 
-        {% include 'header.html' %}
+        {% block header %}
+          {% include 'header.html' %}
+        {% endblock %}
 
         {% block site_wide_message %}{% endblock %}
 
