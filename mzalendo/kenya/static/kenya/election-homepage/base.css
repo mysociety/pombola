@@ -74,8 +74,8 @@ h2.static {
 
 .election-home #election_countdown {
 	float: left;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin: 12px 20px;
+	width: 350px;  
 	overflow: hidden;
 	display: block;
 	background: rgba(0,0,0,0.2);
@@ -115,7 +115,7 @@ h2.static {
 .countdown_second 	{width: 120px !important;}
 
 #election_countdown h4{
-	padding: 15px 10px 10px 10px;
+	padding: 15px 10px 10px 80px;
 	font-size: 11px;
 	text-transform: uppercase;
 	colspan: 4;
@@ -125,9 +125,9 @@ h2.static {
 
 .countdown_icon span{
 	display: block;
-	position: absolute;
+	position: relative;
 	width: 80px;
 	height: 80px;
 	background: url(images/countdown-icon.png) no-repeat;
-	top: 65px;
+  top: -40px;
 }

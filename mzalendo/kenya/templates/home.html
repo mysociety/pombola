@@ -14,7 +14,7 @@
     {{ block.super }}
     
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kenya/election-homepage/base.css" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kenya/election-homepage/layout.css" media="only screen and (min-width: 640px)" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kenya/election-homepage/layout.css" />
 {% endblock %}
 
 {% block site_wide_message %}
@@ -35,8 +35,8 @@
   
       <a href="/" id="logo">Mzalendo</a>
   
-      <div id="election_countdown" data-description="Time until 2013 General Election polls open" data-until="2013/3/4 06:00:00 UTC+0300">
-          <h4>2013 General Election polls opens <span class="election-date">Monday 4th March</span></h4>
+      <div id="election_countdown" data-until="2013/3/4 06:00:00 UTC+0300">
+          <h4>2013 polls open: <span class="election-date">Monday 4th March</span></h4>
           <span class="countdown_row countdown_show5">
               <span class="countdown_section countdown_icon"><span></span></span>
               <span class="countdown_section countdown_day"><span class="countdown_amount">--</span><br>Days</span>
