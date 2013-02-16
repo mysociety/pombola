@@ -73,9 +73,9 @@ h2.static {
 }
 
 .election-home #election_countdown {
-	float: left;
-	margin: 12px 20px;
-	width: 350px;  
+	clear: both;
+	margin: 12px auto;
+	max-width: 350px;
 	overflow: hidden;
 	display: block;
 	background: rgba(0,0,0,0.2);
@@ -161,6 +161,7 @@ h2.static {
   
   .election-home #election_countdown {
   	float: right;
+  	margin-right: 20px;
   }
   
   .callout-search{ 
@@ -175,7 +176,7 @@ h2.static {
   
 }
 
-@media only screen and (min-width: 640px) and (max-width: 960px) {
+@media (min-width: 640px) and (max-width: 960px) {
 
   .election-home .election-home-left {
   	width: 60%;
