@@ -10,17 +10,17 @@ from core.models import Place, PlaceKind, Organisation, Position
 
 class Migration(DataMigration):
 
-    def presidential_aspirants(self, organisation):
-        for p in Position.objects.filter(title__name='Aspirant President', organisation=organisation):
+    def presidential_aspirants(self, orm, organisation):
+        for p in orm.Position.objects.filter(title__name='Aspirant President', organisation=organisation):
             yield p
 
     def forwards(self, orm):
         "Set place=<Place: Country(Country)> for each 'Aspirant President' Position"
 
-        pk_country = PlaceKind.objects.get(name='Country')
+        pk_country = orm.PlaceKind.objects.get(name='Country')
         if COUNTRY_APP == 'kenya':
-            place_country = Place.objects.get(name='Kenya', kind=pk_country)
-            for p in self.presidential_aspirants(Organisation.objects.get(name='REPUBLIC OF KENYA')):
+            place_country = orm.Place.objects.get(name='Kenya', kind=pk_country)
+            for p in self.presidential_aspirants(orm, orm.Organisation.objects.get(name='REPUBLIC OF KENYA')):
                 p.place = place_country
                 p.save()
         else:
@@ -31,7 +31,7 @@ class Migration(DataMigration):
         "Set place=None for each 'Aspirant President' Position"
 
         if COUNTRY_APP == 'kenya':
-            for p in self.presidential_aspirants(Organisation.objects.get(name='REPUBLIC OF KENYA')):
+            for p in self.presidential_aspirants(orm, orm.Organisation.objects.get(name='REPUBLIC OF KENYA')):
                 p.place = None
                 p.save()
         else:
