@@ -16,11 +16,10 @@ class AccountTest(WebTest):
     def test_create_account(self):
         app = self.app
 
-        # go to home page, go to login page, go to new account page
+        # Start at the login page and click 'Need an account'
         res = (
             app
-              .get( '/' )
-              .click(description='login', index=1)
+              .get( '/accounts/login/?next=/' )
               .click( description='Need an account' )
         )
         
@@ -62,9 +61,9 @@ class AccountTest(WebTest):
         
         # check that we are back on homepage and logged in
         self.assertEqual('/',  res.request.path, 'back on home page')
-        self.assertContains( res, 'test_user' )
-        
+
         # logout
-        res = res.click( description='logout', index=1 )
+        res = app.get('/accounts/logout/')
+        self.assertContains(res, 'Successfully logged out!')
         self.assertEqual('/accounts/logout/',  res.request.path)
         
