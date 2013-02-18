@@ -244,6 +244,7 @@ INSTALLED_APPS = (
     'registration_defaults',
     'registration',
     
+    'admin_additions',
     'django.contrib.admin',
     'django.contrib.admindocs',
 
