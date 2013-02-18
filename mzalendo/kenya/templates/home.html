@@ -56,13 +56,13 @@
           <h2>Do you know who you can vote for?</h2>
           <p>Find out! Enter the name of your <a href="/place/is/constituency/">Constituency</a> or <a href="/place/is/county/">County</a> in the box below. Don’t know the name of your Constituency?  <a href="/map">Find it using our map</a>.
           </p>
-          <form class="styled-search" action="{% url core_search %}">
+          <form class="styled-search" action="{% url core_place_search %}">
               <input type="text" class="search-autocomplete-name search-box" data-source="/search/autocomplete/?model=place" name="q" value="" placeholder="Placename">
               <input type="submit" value="Search" class="search-btn">
           </form>
       </div>
   
-      <form class="callout-search" action="{% url core_search %}">
+      <form class="callout-search" action="{% url core_person_search %}">
           <h2>Check out a specific aspirant:</h2>
           <p>Enter their name in the box below to find them</p>
           <div class="styled-search">

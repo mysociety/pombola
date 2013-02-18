@@ -28,6 +28,30 @@ urlpatterns = patterns('search.views',
         ),
         name='core_search'
     ),
+
+    # Person search
+    url(
+        r'^person/$',
+        SearchView(
+            searchqueryset = SearchQuerySet().models(
+                core_models.Person
+            ),
+            form_class=SearchForm,            
+        ),
+        name='core_person_search'
+    ),
+
+    # Place search
+    url(
+        r'^place/$',
+        SearchView(
+            searchqueryset = SearchQuerySet().models(
+                core_models.Place,
+            ),
+            form_class=SearchForm,            
+        ),
+        name='core_place_search'
+    ),
 )
 
 
