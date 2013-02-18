@@ -114,7 +114,6 @@ def autocomplete(request):
             if model:
                 sqs = sqs.models(model)
 
-
         # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
 
@@ -137,10 +136,10 @@ def autocomplete(request):
                 image_url = "/static/images/" + css_class + "-16x16.jpg"
 
             response_data.append({
-            	'url':   object.get_absolute_url(),
-            	'label': '<img height="16" width="16" src="%s" /> %s' % (image_url, label),
-            	'type':  css_class,
-            	'value': object.name,
+                'url':   object.get_absolute_url(),
+                'label': '<img height="16" width="16" src="%s" /> %s' % (image_url, label),
+                'type':  css_class,
+                'value': object.name,
                 'object': object
             })
 

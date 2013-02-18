@@ -1748,6 +1748,13 @@ div.object_menu ul li a {
   padding-bottom: 30px;
   margin: 0 10px;
 }
+.search-wrap .inactive {
+  background-color: #fcfcfc;
+  color: #cccccc;
+}
+.search-wrap .inactive h4 a {
+  color: #cccccc;
+}
 
 .search-box {
   display: inline-block;

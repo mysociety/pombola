@@ -1,7 +1,16 @@
+$inactive-place-color: #cccccc;
+
 .search-wrap {
   border-bottom: 1px solid #dddddd;
   padding-bottom: 30px;
-  margin: 0 10px; }
+  margin: 0 10px;
+  .inactive {
+    background-color: #fcfcfc;
+    color: $inactive-place-color;
+    h4 a {
+      color: $inactive-place-color;
+    }
+  } }
 
 .search-box {
   display: inline-block;
