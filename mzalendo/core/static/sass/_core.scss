@@ -151,10 +151,12 @@
       border: 0; } }
 
 // Clearfix
-.cf { zoom: 1; }
-.cf:before,
-.cf:after { content: ""; display: table; }
-.cf:after { clear: both; }
+.clearfix { zoom: 1; }
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after { clear: both; }
 
 // .ellipsis {
 //   text-overflow: ellipsis;

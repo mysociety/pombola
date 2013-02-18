@@ -55,17 +55,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-.cf {
+.clearfix, #page .page-wrapper {
   zoom: 1;
 }
 
-.cf:before,
-.cf:after {
+.clearfix:before, #page .page-wrapper:before, .clearfix:after, #page .page-wrapper:after {
   content: "";
   display: table;
 }
 
-.cf:after {
+.clearfix:after, #page .page-wrapper:after {
   clear: both;
 }
 
@@ -120,19 +119,6 @@ ul.ui-autocomplete li {
   display: block;
   height: 2.5em;
   overflow: hidden;
-}
-
-.clearfix, #page .page-wrapper {
-  zoom: 1;
-}
-.clearfix:before, #page .page-wrapper:before, .clearfix:after, #page .page-wrapper:after {
-  content: "\0020";
-  display: block;
-  height: 0;
-  overflow: hidden;
-}
-.clearfix:after, #page .page-wrapper:after {
-  clear: both;
 }
 
 body {
