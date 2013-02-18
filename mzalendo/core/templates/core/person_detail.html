@@ -13,10 +13,16 @@
   
 
   {% if object.has_scorecards %}
+    <span class="score-overall-{{ object.scorecard_overall_as_word }} scorecard-single-smiley">
+    </span>
+
     <h2>Scorecards</h2>
     
+
     <p>
-      The past performance of {{ object.name }} can be seen in their
+      The
+      {{ object.scorecard_overall_as_word }}
+      past performance of {{ object.name }} can be seen in their
       <a href="{% url person_scorecard slug=object.slug %}">scorecard</a>.
     </p>
   {% endif %}

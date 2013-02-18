@@ -2322,6 +2322,24 @@ h3.scorecard-overall span.score-overall-bad {
   background-position: right -103px;
 }
 
+span.scorecard-single-smiley {
+  display: block;
+  float: right;
+  margin-top: 2px;
+  height: 50px;
+  width: 50px;
+  background: url(../images/m-smiley-sprite.png) right -3px no-repeat;
+}
+span.scorecard-single-smiley.score-overall-good {
+  background-position: -3px -3px;
+}
+span.scorecard-single-smiley.score-overall-average {
+  background-position: -53px -53px;
+}
+span.scorecard-single-smiley.score-overall-bad {
+  background-position: -103px -103px;
+}
+
 ul.scorecard {
   list-style-type: none;
   padding: 0;
