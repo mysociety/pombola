@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -119,6 +120,19 @@ ul.ui-autocomplete li {
   display: block;
   height: 2.5em;
   overflow: hidden;
+}
+
+.clearfix, #page .page-wrapper {
+  zoom: 1;
+}
+.clearfix:before, #page .page-wrapper:before, .clearfix:after, #page .page-wrapper:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.clearfix:after, #page .page-wrapper:after {
+  clear: both;
 }
 
 body {

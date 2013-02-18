@@ -45,3 +45,17 @@ ul.ui-autocomplete {
     @include box-shadow(rgba(0, 0, 0, 0.3) 1px 1px 12px);
 }
 
+
+// As suggested in http://stackoverflow.com/a/7154716/5349
+.clearfix {
+    zoom:1;
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
