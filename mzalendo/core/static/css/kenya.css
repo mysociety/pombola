@@ -55,18 +55,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-.cf, .local-aspirants {
+.clearfix, #page .page-wrapper, .local-aspirants {
   zoom: 1;
 }
 
-.cf:before, .local-aspirants:before,
-.cf:after,
-.local-aspirants:after {
+.clearfix:before, #page .page-wrapper:before, .local-aspirants:before, .clearfix:after, #page .page-wrapper:after, .local-aspirants:after {
   content: "";
   display: table;
 }
 
-.cf:after, .local-aspirants:after {
+.clearfix:after, #page .page-wrapper:after, .local-aspirants:after {
   clear: both;
 }
 
