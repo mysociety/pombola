@@ -78,7 +78,7 @@
             {% if not forloop.first %}
                 {% if forloop.last %}or{% else %},{% endif %}
             {% endif %}
-            <strong>{{ name }}</strong>
+            {{ name }}
           {% endfor %}
         </dd>
     {% endif %}

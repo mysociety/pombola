@@ -24,6 +24,7 @@
       background: none;
       padding: 0; } }
   .page-wrapper {
+    @extend .clearfix;
     display: table;
     position: relative;
     caption-side: bottom; }

@@ -140,7 +140,6 @@
             "title": "Prof", 
             "gender": "m", 
             "created": "2011-11-10 11:04:34", 
-            "other_names": "Joe Bloggs\r\nJJ Bloggs", 
             "date_of_death": null, 
             "summary": "", 
             "date_of_birth": "1968-01-15", 
@@ -149,6 +148,24 @@
             "slug": "joseph-bloggs"
         }
     }, 
+    {
+        "pk": 1,
+        "model": "core.alternativepersonname",
+        "fields": {
+            "alternative_name": "Joe Bloggs",
+            "person": 1,
+            "name_to_use": true
+        }
+    },
+    {
+        "pk": 2,
+        "model": "core.alternativepersonname",
+        "fields": {
+            "alternative_name": "JJ Bloggs",
+            "person": 1,
+            "name_to_use": false
+        }
+    },
     {
         "pk": 1, 
         "model": "auth.user", 

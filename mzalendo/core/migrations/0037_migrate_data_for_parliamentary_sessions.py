@@ -1,17 +1,156 @@
 # encoding: utf-8
 import datetime
+import sys
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 from django.core.management import call_command
 
+from settings import COUNTRY_APP
+
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        call_command('core_create_parliamentary_sessions', commit=True, reverse=False)
+
+        # First, create the ParliamentarySession objects.  (If there
+        # are already parliamentary sessions, then don't try to create
+        # any new ones.)
+
+        na1_kenya = None
+        na2_kenya = None
+        senate = None
+
+        house = None
+
+        if 0 == orm.ParliamentarySession.objects.count():
+            if COUNTRY_APP == 'kenya':
+                ok_na = orm.Organisation.objects.get(name='Parliament', kind__name='Governmental')
+                try:
+                    ok_senate = orm.Organisation.objects.get(name='Senate', kind__name='Governmental')
+                except orm.Organisation.DoesNotExist:
+                    ok_senate = orm.Organisation(name='Senate',
+                                             slug='senate',
+                                             kind=orm.OrganisationKind.objects.get(name='Governmental'))
+                    ok_senate.save()
+
+                na1_kenya = orm.ParliamentarySession(name="National Assembly 2007-2013",
+                                                 slug='na2007',
+                                                 start_date=datetime.date(2007, 12, 28),
+                                                 end_date=datetime.date(2013, 1, 14),
+                                                 mapit_generation=2,
+                                                 house=ok_na)
+                na1_kenya.save()
+                na2_kenya = orm.ParliamentarySession(name="National Assembly 2013-",
+                                                 slug='na2013',
+                                                 start_date=datetime.date(2013, 3, 5),
+                                                 end_date=datetime.date(9999, 12, 31),
+                                                 mapit_generation=3,
+                                                 house=ok_na)
+                na2_kenya.save()
+                senate = orm.ParliamentarySession(name="Senate 2013-",
+                                              slug='s2013',
+                                              start_date=datetime.date(2013, 3, 5),
+                                              end_date=datetime.date(9999, 12, 31),
+                                              mapit_generation=3,
+                                              house=ok_senate)
+                senate.save()
+            elif COUNTRY_APP == 'nigeria':
+                ok_senate = orm.Organisation.objects.get(name='Senate', kind__name='Political')
+                ok_house = orm.Organisation.objects.get(name='House of Representatives', kind__name='Political')
+                senate = orm.ParliamentarySession(name="Senate 2011-",
+                                              slug='s2011',
+                                              start_date=datetime.date(2011, 4, 10),
+                                              end_date=datetime.date(9999, 12, 31),
+                                              mapit_generation=1,
+                                              house=ok_senate)
+                senate.save()
+                house = orm.ParliamentarySession(name="House of Representatives 2011-",
+                                             slug='hr2011',
+                                             start_date=datetime.date(2011, 04, 10),
+                                             end_date=datetime.date(9999, 12, 31),
+                                             mapit_generation=1,
+                                             house=ok_house)
+                house.save()
+            else:
+                # There's nothing to do:
+                print >> sys.stderr, "Unknown COUNTRY_APP (%s) - not creating parliamentary sessions"
+        else:
+            # There's nothing to do:
+            print >> sys.stderr, "There were already ParliamentarySessions - skipping their creation"
+
+        # Now link each Place to the right ParliamentarySession:
+
+        if COUNTRY_APP == 'kenya':
+
+            pk_constituency = orm.PlaceKind.objects.get(name='Constituency')
+            pk_2013_constituency = orm.PlaceKind.objects.get(name='2013 Constituency')
+            pk_county = orm.PlaceKind.objects.get(name='County')
+
+            if not na1_kenya:
+                na1_kenya = orm.ParliamentarySession.objects.get(name="National Assembly 2007-2013")
+            if not na2_kenya:
+                na2_kenya = orm.ParliamentarySession.objects.get(name="National Assembly 2013-")
+            if not senate:
+                senate = orm.ParliamentarySession.objects.get(name="Senate 2013-")
+
+            for place in pk_constituency.place_set.all():
+                if place.name == 'Mbeere South':
+                    print >> sys.stderr, "Skipping Mbeere South, which shouldn't be there"
+                place.parliamentary_session = na1_kenya
+                place.save()
+
+            for place in pk_2013_constituency.place_set.all():
+                place.parliamentary_session = na2_kenya
+                place.kind = pk_constituency
+                place.save()
+
+            for place in pk_county.place_set.all():
+                place.parliamentary_session = senate
+                place.save()
+
+            # We don't need the '2013 Constituencies' PlaceKind any
+            # more, so remove it:
+            pk_2013_constituency.delete()
+
+        elif COUNTRY_APP == 'nigeria':
+
+            if not house:
+                house = orm.ParliamentarySession.objects.get(name="House of Representatives 2011-")
+            if not senate:
+                senate = orm.ParliamentarySession.objects.get(name="Senate 2011-")
+
+            pk_fed = orm.PlaceKind.objects.get(name='Federal Constituency')
+            pk_sen = orm.PlaceKind.objects.get(name='Senatorial District')
+
+            for place in pk_fed.place_set.all():
+                place.parliamentary_session = house
+                place.save()
+
+            for place in pk_sen.place_set.all():
+                place.parliamentary_session = senate
+                place.save()
+
+        else:
+            # There's nothing to do:
+            print >> sys.stderr, "There were already ParliamentarySessions - skipping their creation"
+
 
     def backwards(self, orm):
-        call_command('core_create_parliamentary_sessions', commit=True, reverse=True)
+        # All we need to do when migrating backwards is to recreate
+        # the PlaceKind for '2013 Constituencies', and associate all
+        # the 2013 Session constituencies with them.  Then the earlier
+        # reverse migrations will remove the parliamentary_sessions
+        # column in core_places and the parliamentary_sessions table.
+        pk_2013 = orm.PlaceKind(slug="constituency-2013",
+                                name="2013 Constituency",
+                                plural_name="2013 Constituencies")
+        pk_2013.save()
+        na2_kenya = orm.ParliamentarySession.objects.get(name="National Assembly 2013-")
+        for place in orm.Place.objects.filter(parliamentary_session=na2_kenya):
+            place.kind = pk_2013
+            place.save()
+
 
     models = {
         'contenttypes.contenttype': {
