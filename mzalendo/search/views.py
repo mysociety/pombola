@@ -42,6 +42,48 @@ known_kinds = {
     'place':  models.Place,
 }
 
+def places_ordered_by_session(place_a, place_b):
+    """Return True if both places have sessions and place_b's is later"""
+    a_session = place_a.parliamentary_session
+    b_session = place_b.parliamentary_session
+    if not (a_session and b_session):
+        return False
+    return a_session.end_date < b_session.end_date
+
+def remove_duplicate_places(response_data):
+    """Remove all but the newest of places with indistinguishable labels
+
+    We have a slightly unpleasant problem where consituencies that
+    have the same name from one parliament to the next appear twice
+    with exactly the same label - people get confused if they pick the
+    old one and don't find their aspirants.  We could exclude all
+    older constituencies, but for people who don't know that their
+    constituency name has changed, it's potentially useful to still
+    have the old name returned in results.  So, look for duplicate
+    labels, and (if they're places) delete the one from the older
+    parliamentary session."""
+
+    indices_to_remove = []
+    previous_label_index = {}
+
+    for i, result in enumerate(response_data):
+        this_label = result['label']
+        this_object = result['object']
+        if (this_label in previous_label_index) and type(this_object) == models.Place:
+            previous_i = previous_label_index[this_label]
+            if places_ordered_by_session(response_data[previous_i]['object'], this_object):
+                indices_to_remove.append(previous_i)
+                previous_label_index[this_label] = i
+            else:
+                indices_to_remove.append(i)
+        else:
+            previous_label_index[this_label] = i
+
+    # Now remove those marked for deletion:
+    indices_to_remove.sort(reverse=True)
+    for index_to_remove in indices_to_remove:
+        del response_data[index_to_remove]
+
 def autocomplete(request):
     """Return autocomplete JSON results"""
     
@@ -72,6 +114,7 @@ def autocomplete(request):
             if model:
                 sqs = sqs.models(model)
 
+
         # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
 
@@ -98,7 +141,14 @@ def autocomplete(request):
             	'label': '<img height="16" width="16" src="%s" /> %s' % (image_url, label),
             	'type':  css_class,
             	'value': object.name,
+                'object': object
             })
+
+    remove_duplicate_places(response_data)
+
+    # Remove the 'object' elements before returning the response:
+    for d in response_data:
+        del d['object']
     
     # send back the results as JSON
     return HttpResponse(
