@@ -244,6 +244,7 @@ INSTALLED_APPS = (
     'registration_defaults',
     'registration',
     
+    'admin_additions',
     'django.contrib.admin',
     'django.contrib.admindocs',
 
@@ -253,9 +254,9 @@ INSTALLED_APPS = (
     'markitup',
     'social_auth',
 
-    'mapit',
-
     COUNTRY_APP,
+
+    'mapit',
 
     'images',
     'sorl.thumbnail',
