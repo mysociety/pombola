@@ -699,7 +699,14 @@ class Place(ModelBase, ScorecardMixin):
         while True:
             place_hierarchy.append(current_place)
             parent = current_place.parent_place
+            current_place_session = current_place.parliamentary_session
             if parent:
+                # If the parent place is actually from a non-overlapping
+                # parliamentary sessions, stop recursing:
+                parent_session = parent.parliamentary_session
+                if parent_session and current_place_session:
+                    if not parent_session.overlaps(current_place_session):
+                        break
                 current_place = parent
             else:
                 break
