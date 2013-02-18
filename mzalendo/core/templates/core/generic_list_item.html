@@ -1,7 +1,7 @@
 {% load thumbnail %}
 {% load switch %}
 
-<li class="{{ object.css_class }}">
+<li class="{{ object.css_class }}{% if not object.show_active %} inactive{% endif %}">
 
     {% switch object.css_class %}
 

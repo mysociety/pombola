@@ -54,7 +54,12 @@ class ModelBase(models.Model):
             args=[self.id]
         )
         return url
-    
+
+    @property
+    def show_active():
+        """Used to indicate whether results in search should be greyed out"""
+        return True
+
     class Meta:
        abstract = True      
 
@@ -731,6 +736,13 @@ class Place(ModelBase, ScorecardMixin):
             return [(p, dict(dd)) for p, dd in aspirants_for_places]
         else:
             return None
+
+    @property
+    def show_active(self):
+        if self.parliamentary_session:
+            return self.parliamentary_session.end_date >= datetime.date.today()
+        else:
+            True
 
 class PositionTitle(ModelBase):
     name = models.CharField(max_length=200, unique=True)
