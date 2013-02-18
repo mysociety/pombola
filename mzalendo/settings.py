@@ -253,9 +253,9 @@ INSTALLED_APPS = (
     'markitup',
     'social_auth',
 
-    'mapit',
-
     COUNTRY_APP,
+
+    'mapit',
 
     'images',
     'sorl.thumbnail',
