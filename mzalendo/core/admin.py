@@ -20,6 +20,11 @@ class ContactKindAdmin(admin.ModelAdmin):
     search_fields = [ 'name' ]
 
 
+class AlternativePersonNameInlineAdmin(admin.TabularInline):
+    model = models.AlternativePersonName
+    extra = 0
+
+
 class InformationSourceAdmin(admin.ModelAdmin):
     list_display  = [ 'source', 'show_foreign', 'entered', ]
     list_filter   = [ 'entered', ]
@@ -119,7 +124,7 @@ class ScorecardInlineAdmin(GenericTabularInline):
 
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["legal_name"]}
-    inlines = [PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ScorecardInlineAdmin]
+    inlines = [AlternativePersonNameInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ScorecardInlineAdmin]
     list_display = ['slug', 'name', 'date_of_birth']
     list_filter   = [ 'can_be_featured', ]
     search_fields = ['legal_name']

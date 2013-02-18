@@ -685,6 +685,8 @@ class Place(ModelBase, ScorecardMixin):
 
         (Note that this example was based on incomplete test data.)"""
 
+        found_any_aspirants = False
+
         # This is a classically horrible thing to try to do with SQL -
         # recurse up this place's hierarchy via the parent column -
         # however, we know that there will only be at most 5 levels
@@ -697,7 +699,14 @@ class Place(ModelBase, ScorecardMixin):
         while True:
             place_hierarchy.append(current_place)
             parent = current_place.parent_place
+            current_place_session = current_place.parliamentary_session
             if parent:
+                # If the parent place is actually from a non-overlapping
+                # parliamentary sessions, stop recursing:
+                parent_session = parent.parliamentary_session
+                if parent_session and current_place_session:
+                    if not parent_session.overlaps(current_place_session):
+                        break
                 current_place = parent
             else:
                 break
@@ -709,6 +718,7 @@ class Place(ModelBase, ScorecardMixin):
         aspirants_for_places = [(p, defaultdict(list)) for p in place_hierarchy]
 
         for position in Position.objects.filter(place__in=place_hierarchy, title__slug__startswith='aspirant-').currently_active():
+            found_any_aspirants = True
             aspirants_for_places[place_to_index[position.place]][1][position.title.name].append(position.person)
 
         # Annoyingly, defaultdicts can't be easily be iterated over in
@@ -717,7 +727,10 @@ class Place(ModelBase, ScorecardMixin):
         # list.  A workaround is to convert to a dictionary instead.
         # See http://stackoverflow.com/q/4764110/223092
 
-        return [(p, dict(dd)) for p, dd in aspirants_for_places]
+        if found_any_aspirants:
+            return [(p, dict(dd)) for p, dd in aspirants_for_places]
+        else:
+            return None
 
 class PositionTitle(ModelBase):
     name = models.CharField(max_length=200, unique=True)

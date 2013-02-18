@@ -4,6 +4,10 @@
 
     {% block candidate_information_note %}{% endblock %}
 
+{% with all_places_aspirants=object.get_aspirants %}
+
+{% if all_places_aspirants %}
+
     {% with all_child_places=object.child_places_by_kind %}
 
       {% if all_child_places %}
@@ -27,8 +31,6 @@
       {% endif %}
 
     {% endwith %}
-
-{% with all_places_aspirants=object.get_aspirants %}
 
   {% for place, position_titles in all_places_aspirants %}
 
@@ -78,6 +80,31 @@
     {% endfor %}
 
   {% endfor %}
+
+{% else %}
+
+  {% with boundary_changes=object.get_boundary_changes %}
+
+    {% if object.parliamentary_session.relative_time == 'Past' and boundary_changes.next %}
+
+       <p>This is an <strong>old</strong> {{ object.kind.name.lower }} - to find your
+          aspriants, please look at one of the {{ object.kind.plural_name.lower }} that replaced it:</p>
+
+       <ul>
+           {% for i in boundary_changes.next.intersections %}
+               <li><a href="{{ i.place.get_absolute_url }}">{{ i.place.name }}</a></li>
+           {% endfor %}
+       </ul>
+
+    {% else %}
+
+      <p>There are currently no aspirants for this {{ object.kind.name.lower }}.</p>
+
+    {% endif %}
+
+  {% endwith %}
+
+{% endif %}
 
 {% endwith %}
 
