@@ -1,4 +1,5 @@
 import json
+import re
 
 from django.conf import settings
 from django.test.client import Client
@@ -63,6 +64,13 @@ class AutocompleteTest(unittest.TestCase):
             'foo': [],
         }
 
+
+        # The returned labels now include an image to indicate
+        # the type of the object returned, so strip that out before
+        # checking that the names match:
+        def strip_leading_image(s):
+            return re.sub(r'(?ims)^\s*<img [^>]*>\s*', '', s)
+
         autocomplete_url = reverse('autocomplete')
 
         for test_input, expected_output in tests.items():
@@ -71,7 +79,8 @@ class AutocompleteTest(unittest.TestCase):
             self.assertEqual( response.status_code, 200 )
             
             actual_output = json.loads( response.content )
-            actual_names = [ i['label'] for i in actual_output ]
+            actual_names = [ strip_leading_image(i['label'])
+                             for i in actual_output ]
             
             self.assertEqual(
                 actual_names,
