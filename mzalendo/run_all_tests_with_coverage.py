@@ -4,7 +4,7 @@ find . -name '*.pyc' -delete
 
 coverage erase
 
-OMIT="$(python -c 'import sys; print sys.prefix')"
+OMIT="$(python -c 'import sys; print sys.prefix')/*"
 
 coverage run --omit=$OMIT ./manage.py test   \
     core           \
