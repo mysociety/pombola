@@ -1971,7 +1971,23 @@ ul.hansard_entries li.page_number {
   }
 }
 
+ul.listing {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 ul.listing li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+ul.listing li {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  background: #f7f7f7;
+  margin-bottom: 5px;
   padding: 15px;
 }
 ul.listing li h4 a {
@@ -1979,19 +1995,155 @@ ul.listing li h4 a {
   color: black;
 }
 ul.listing li img {
+  border: 5px solid #e6e6e6;
+  float: left;
   width: 60px;
   height: 60px;
-  margin-bottom: 0;
+  margin: 0 20px 0 0;
 }
 ul.listing li section {
+  max-width: 840px;
   float: none;
   clear: none;
   padding: 0 40px 0 90px;
 }
+ul.listing li section h4 {
+  font-weight: bold;
+}
+ul.listing li section ul {
+  padding-left: 30px;
+  margin-bottom: 20px;
+}
+ul.listing li section ul li {
+  font-size: 14px;
+  line-height: 20px;
+  list-style: disc;
+  margin-bottom: 10px;
+  background: none;
+  padding: 0;
+}
+ul.listing li section ul.tools {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+ul.listing li section ul.tools li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  float: left;
+  display: inline;
+}
+ul.listing li section ul.tools li a {
+  float: left;
+  display: block;
+}
+ul.listing li section ul.tools li {
+  margin-left: 5px;
+}
+ul.listing li section ul.tools li a {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+ul.listing li section ul.tools li a:hover {
+  background: #a0a0a0;
+  color: white;
+  text-decoration: none;
+}
+ul.listing li section ul.tools li a.like {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  background: #75a8cd;
+}
+ul.listing li section ul.tools li a.like:hover {
+  background: #a0a0a0;
+  color: white;
+  text-decoration: none;
+}
+ul.listing li section ul.tools li a.like:hover {
+  background: #82bae3;
+}
+ul.listing li section ul.tools li a.report {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  background: #d40000;
+}
+ul.listing li section ul.tools li a.report:hover {
+  background: #a0a0a0;
+  color: white;
+  text-decoration: none;
+}
+ul.listing li section ul.tools li a.report:hover {
+  background: red;
+}
 ul.listing li section p {
+  font-size: 12px;
   margin: 0 !important;
 }
+ul.listing li section p.meta {
+  font-style: italic;
+}
 ul.listing li section .read-more-wrap {
+  position: absolute;
+  right: 15px;
   top: 35px;
   bottom: auto;
 }
@@ -1999,6 +2151,26 @@ ul.listing li section .meta {
   color: gray;
 }
 ul.listing li section a.read-more {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  cursor: pointer;
+  background: gray;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 5px 8px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
   display: block;
   text-indent: -999999px;
   padding: 0;
@@ -2010,6 +2182,11 @@ ul.listing li section a.read-more {
   -ms-border-radius: 24px;
   -o-border-radius: 24px;
   border-radius: 24px;
+}
+ul.listing li section a.read-more:hover {
+  background: #a0a0a0;
+  color: white;
+  text-decoration: none;
 }
 ul.listing li section a.read-more:hover {
   background: #777777 url(../images/chevron-right.png) 6px center no-repeat;
