@@ -33,14 +33,19 @@ $(function(){
    * auto complete
    */
     $('input.search-autocomplete-name')
-    .autocomplete({
-        source: "/search/autocomplete/",
-        minLength: 2,
-        html: true,
-        select: function(event, ui) {
-            if (ui.item) return window.location = ui.item.url;
-        }
+    .each(function(){
+      var element = $(this);
+      var source = element.data('source') || "/search/autocomplete/";
+      element.autocomplete({
+          source: source,
+          minLength: 2,
+          html: true,
+          select: function(event, ui) {
+              if (ui.item) return window.location = ui.item.url;
+          }
+      });
     });
+    
     
     // hide/show home intro
     $('.home-read-more').on('click', function(e){
