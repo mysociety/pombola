@@ -37,6 +37,11 @@ from sorl.thumbnail import get_thumbnail
 #     )
 
 
+known_kinds = {
+    'person': models.Person,
+    'place':  models.Place,
+}
+
 def autocomplete(request):
     """Return autocomplete JSON results"""
     
@@ -59,6 +64,13 @@ def autocomplete(request):
             sqs = sqs.filter_and(
                 name_auto__startswith = sqs.query.clean( bit )
             )
+
+        # If we have a kind then filter on that too
+        model_kind = request.GET.get('model', None)
+        if model_kind:
+            model = known_kinds.get(model_kind, None)
+            if model:
+                sqs = sqs.models(model)
 
         # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
