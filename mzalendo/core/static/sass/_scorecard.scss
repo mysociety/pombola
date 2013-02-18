@@ -20,6 +20,32 @@ h3.scorecard-overall {
     &.score-overall-bad {
       background-position: right -103px; } } }
 
+
+
+span.scorecard-single-smiley {
+  display: block;
+  float: right;
+  
+  margin-top: 2px;
+
+  height: 50px;
+  width:  50px;
+
+  background: url(../images/m-smiley-sprite.png) right -3px no-repeat;
+
+  &.score-overall-good {
+    background-position: -3px -3px;
+  }
+  &.score-overall-average {
+    background-position: -53px -53px;
+  }
+  &.score-overall-bad {
+    background-position: -103px -103px;
+  }
+}
+
+
+
 ul.scorecard {
   @include list-reset-soft;
   @include inline-block;
