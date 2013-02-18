@@ -88,7 +88,7 @@
     {% if object.parliamentary_session.relative_time == 'Past' and boundary_changes.next %}
 
        <p>This is an <strong>old</strong> {{ object.kind.name.lower }} - to find your
-          aspriants, please look at one of the {{ object.kind.plural_name.lower }} that replaced it:</p>
+          aspirants, please look at one of the {{ object.kind.plural_name.lower }} that replaced it:</p>
 
        <ul>
            {% for i in boundary_changes.next.intersections %}
