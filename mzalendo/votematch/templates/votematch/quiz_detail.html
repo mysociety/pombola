@@ -1,13 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'votematch/base.html' %}
 
 {% block title %}
   {{ object.name }}
-{% endblock %}
-
-{% block css_headers %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}votematch/css/base.css" />
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}votematch/css/layout.css" media="only screen and (min-width: 640px)" />
 {% endblock %}
 
 {% block content %}
