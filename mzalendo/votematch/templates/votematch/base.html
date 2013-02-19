@@ -6,3 +6,7 @@
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}votematch/css/layout.css" media="only screen and (min-width: 640px)" />
 {% endblock %}
 
+{% block breadcrumbs %}
+    {# Hide bread crumbs on the home page. Insert blank div to add padding #}
+    <div id="breadcrumb-replacement">&nbsp;</div>
+{% endblock %}
