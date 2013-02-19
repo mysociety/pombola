@@ -53,7 +53,7 @@
                       <span class="name">{{ person.name }}</span>
                   </a>
                       <p><em>Parties:</em>
-                           {% for party in person.parties_ever %}
+                           {% for party in person.parties %}
                              {% if forloop.first %}
                              {% else %}
                                 {% if forloop.last %} and {% else %}, {% endif %}
