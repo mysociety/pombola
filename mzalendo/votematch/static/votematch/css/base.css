@@ -149,7 +149,7 @@ form.quiz-form .quiz-btn:hover {
   padding: 0 !important;
   border-top: 0 !important;
 }
-.quiz-results .pol-spectrum {
+.quiz-results .poll-spectrum {
   width: 100%;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
@@ -157,21 +157,21 @@ form.quiz-form .quiz-btn:hover {
   margin: 30px 0;
   position: relative;
 }
-.quiz-results .pol-spectrum .bar {
+.quiz-results .poll-spectrum .bar {
   position: absolute;
   width: 30%;
   right: 50%;
   height: 30px;
   background: green;
 }
-.quiz-results .pol-spectrum .left, .quiz-results .pol-spectrum .right {
+.quiz-results .poll-spectrum .left, .quiz-results .poll-spectrum .right {
   float: left;
   margin-top: 45px;
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
 }
-.quiz-results .pol-spectrum .right {
+.quiz-results .poll-spectrum .right {
   float: right;
 }
 .quiz-results .quiz-actions {
