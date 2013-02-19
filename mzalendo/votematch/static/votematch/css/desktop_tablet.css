@@ -1,0 +1,7 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    DESKTOP_TABLET.CSS
+\*------------------------------------*/
+form.quiz-form ul.check-list {
+  float: right;
+}
