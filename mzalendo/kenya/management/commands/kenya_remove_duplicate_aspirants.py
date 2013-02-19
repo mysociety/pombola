@@ -118,6 +118,7 @@ def remove_duplicate_candidates_for_place(place_name,
                 other_person = other_position.person
                 same_person = (real_person_position.person == other_person)
                 if same_person:
+                    removed_duplicate_position_for_same_person = True
                     # Then don't delete the other person, just delete the position:
                     if options['commit']:
                         other_position.delete()
