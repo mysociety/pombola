@@ -4,64 +4,108 @@
   {{ object.name }}
 {% endblock %}
 
+{% block css_headers %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}votematch/css/base.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}votematch/css/layout.css" media="only screen and (min-width: 640px)" />
+{% endblock %}
+
 {% block content %}
 
   <h1>{{ object.name }}</h1>
 
-  <form action="" method="POST">
+  <form action="" method="POST" class="quiz-form">
 
     {% csrf_token %}
     
-
+    
     {% for statement in object.statement_set.all %}
-    
-      <div>
+      <fieldset>
+      
+        {% comment %}
+      
+          If categories for the questions are implemented then this can be used to
+          display their title nicely. Until then we are splitting the questions up
+          into batches so that the legend in displayed often.
+      
+          <legend>{{ statement.category.name # not implemented in models yet }}</legend>
+        {% endcomment %}
+        
+        <ul class="quiz-key">
+            <li>Strongly<br>Disagree</li>
+            <li>Disagree</li>
+            <li>Neutral</li>
+            <li>Agree</li>
+            <li>Strongly<br>Agree</li>
+        </ul>
+      
+        <ul class="plain">
+            <li>
 
-        <h3>{{ statement.text }}</h3>
-    
-        {% for key, text in choices %}
-          <p>
-            {{ text }}: <input type="radio" name="statement-{{ statement.id }}" value="{{ key }}">
-          </p>
-        {% endfor %}
+                <h3>{{ statement.text }}</h3>
 
+                <ul class="check-list radio-group-active-states">
+                    <li><label><span class="ans-strongly-disagree">strongly disagree</span><input type="radio" name="statement-{{ statement.id }}" value="-2"></label></li>
+                    <li><label><span class="ans-disagree">disagree</span>                  <input type="radio" name="statement-{{ statement.id }}" value="-1"></label></li>
+                    <li><label><span class="ans-neutral">neutral</span>                    <input type="radio" name="statement-{{ statement.id }}" value="0"></label></li>
+                    <li><label><span class="ans-agree">agree</span>                        <input type="radio" name="statement-{{ statement.id }}" value="1"></label></li>
+                    <li><label><span class="ans-strongly-agree">strongly agree</span>      <input type="radio" name="statement-{{ statement.id }}" value="2"></label></li>
+
+                    {# This is the hidden not sure button #}
+                    <input type="radio" name="statement-1" value="" checked style="display: none">
+
+                </ul>
+
+            </li>
+        </ul>
+
+      </fieldset>    
+    {% endfor %}
+
+
+
+    <fieldset class="footer">
+        <legend>Demographic info (optional)</legend>
         <p>
-          not sure: <input type="radio" name="statement-{{ statement.id }}" value="" checked >
+          Age:
+          <input type="number" name="age" placeholder="23" min="0" step="1" max="100"/>
         </p>
     
-      </div>
+        <p>
+          Expected result: 
+          <select name="expected_result">
+          
+            <option value="">Please choose one</option>
+          
+            {% for party in object.party_set.all %}
+              <option value="{{ party.id }}">{{ party.name }}</option>          
+            {% endfor %}
+          
+          </select>
+        </p>
     
-    {% endfor %}
-  
-
-    <h2>Demographic info (optional)</h2>
-    
-    <p>
-      Age:
-      <input type="number" name="age" placeholder="23" min="0" step="1" max="100"/>
-    </p>
-    
-    <p>
-      Expected result: 
-      <select name="expected_result">
-        <option value="">Please choose one</option>
-
-        {% for party in object.party_set.all %}
-          <option value="{{ party.id }}">{{ party.name }}</option>          
-        {% endfor %}
-      </select>
-    </p>
-
-
-    <input type="submit" value="Go">
-    
+        <input type="submit" class="quiz-btn" value="Show my result">
+    </fieldset>
   </form>
 
   <p>
-    Your answers above will be stored anonymously - we do not collect any
-    personally identifying information. We may use your answers to compile
-    aggregate statistics. You will be given a secret URL that you can use to
-    share your results with others.
+      Your answers above will be stored anonymously - we do not collect any
+  personally identifying information. We may use your answers to compile
+  aggregate statistics. You will be given a secret URL that you can use to
+  share your results with others.
   </p>
+
+
+    <script type="text/javascript">
+    $(function(){
+      $('.radio-group-active-states').each(function(){
+        var $t = $(this);
+        $('input[type=radio]', $t).on('change', function(){
+          $('label', $t).removeClass('active');
+          $(this).parent('label').addClass('active');
+        });
+      });
+    });
+    </script>
     
-     {% endblock %}
+{% endblock %}
