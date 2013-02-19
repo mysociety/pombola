@@ -2,6 +2,7 @@ import models
 
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def quiz_detail (request, slug):
@@ -67,16 +68,6 @@ def quiz_detail (request, slug):
     )
     
 
-# convert the db stored agreement values into something that is more
-# representative of the relative weightings that they actually carry.
-agreement_fiddle_factor = {
-    -2: -3,
-    -1: -1,
-     0:  0,
-     1:  1,
-     2:  3,
-}
-
 def submission_detail (request, slug, token):
 
     # TODO - we're not checking that the quiz slug is correct. We don't really
@@ -88,105 +79,50 @@ def submission_detail (request, slug, token):
     )
     
     quiz = submission.quiz
-    
-    # NB - this code written after bumping into numerous issues stemming from
-    # Django's insistance that templates not have useful features like
-    # variables, or variable key lookups in dictionaries. Hence subsequent
-    # comments may be a bit brusque.
-    
-    # This code could be moved to the Submission model, but I think as it
-    # is just to produce the data that the template needs, in a form that the
-    # template needs, it is probably better off here in the view.
-    
-    # NB this source file is linked to from scoring.html as part of the
-    # explanation. If this code is moved that link should be updated too.
-    
-    # put all the parties in a list. We need to fix their order because we can
-    # key into a data structure in the template so need to prepare everything
-    # here in the order that the table will need it. Tight coupling between
-    # template and logic? Why yes!
-    parties = quiz.party_set.all().order_by('name')
 
-    # In the template the table will have rows with like:
-    #
-    #   statement text  |  submission answer  |  parties[0] stance  |  ....
-    # 
-    # so create an array of items that will be needed to create these rows.
-    rows = []
-    for statement in quiz.statement_set.all().order_by('text'):
-        entry = {}
-        entry['statement'] = statement
+    results = []
+    for party in quiz.party_set.all():
 
-        # get the answer, or None if user has not answered
-        try:
-            entry['answer'] = submission.answer_set.get(statement=statement)
-        except models.Answer.DoesNotExist:
-            entry['answer'] = None
-        
-        # Get the stance for each party in the parties list. This becomes an
-        # array in which the order is important.
-        entry['party_stances'] = []
-        for party in parties:
+        differences = { 0:0, 1:0, 2:0, 3:0, 4:0, 'x':0 }
+        statement_count  = quiz.statement_set.count()
+        difference_count = 0
+        difference_total = 0
+        percent_per_diff = 100.0 / statement_count
+        for statement in quiz.statement_set.all():
+            
+            # calculate difference between the answer and stance
             try:
+                answer = submission.answer_set.get(statement=statement)
                 stance = party.stance_set.get(statement=statement)
-            except models.Stance.DoesNotExist:
-                stance = None
-            entry['party_stances'].append(stance)
+                diff = abs( answer.agreement - stance.agreement)
+                difference_count += 1
+                difference_total += diff ** 1.5  # make bigger differences count more
+                differences[diff] += percent_per_diff
+            except ObjectDoesNotExist:
+                differences['x'] += percent_per_diff
 
-        # just for giggles the above lines would have been this in Perl:
-        # $entry{party_stances} = [ map { $party->stance_set->get({ statement => $statement}); } @parties ];
-
-        rows.append(entry)
-
-    # now to work out which party most closely matches the answers given. We
-    # could store this in the submission model, but it is easier just to
-    # recalculate it as that avoids having to be smart when statements are
-    # added or removed, or the stances are changed.
-
-    # create a hash to store the running tally in. Initialize all values to zero.
-    differences_to_party = {}
-    for party in parties:
-        differences_to_party[party.id] = []
-
-    # for each row store the differences (if there was an answer)
-    for row in rows:
-        answer = row['answer']
-        for stance in row['party_stances']:
-            if stance and answer:
-                answer_score = agreement_fiddle_factor[ answer.agreement ]
-                stance_score = agreement_fiddle_factor[ stance.agreement ]
-                differences_to_party[stance.party.id].append( abs(answer_score - stance_score) )
-
-    # create a score per party - which is average of differences
-    party_scores = {}
-    for party in parties:
-        differences = differences_to_party[party.id]
-        party_scores[party.id] = average(differences)
+        if difference_count:
+            score = difference_total / float(difference_count)
+        else:
+            score = 0
         
-    # calculate the average score that can be used to sort of center results
-    average_score = average(party_scores.values())
-    
-    # create an arry with the parties in order
-    party_results = []
-    for party in sorted( list(parties), key=lambda p: party_scores[p.id] ):
-        party_results.append({
-            'party': party,
-            'score': - party_scores[party.id] + average_score, # fudged to give appearance of a spread over center
+        results.append({
+            'score':       score,
+            'sort_score':  score or 1000000,
+            'differences': differences,
+            'party':       party,
         })
-
+        
+    # sort the results by the score. Lower score means better average match
+    results.sort(key=lambda x: x['sort_score'])
 
     return render_to_response(
-        'votematch/submission_detail.html',
-        {
-            'object':     submission,
-            'submission': submission,
-            'quiz':       quiz,
-            'parties':    parties,
-            'rows':       rows,
-            'party_results': party_results,
-        },
-        context_instance=RequestContext(request)
+       'votematch/submission_detail.html',
+       {
+           'object':     submission,
+           'submission': submission,
+           'quiz':       quiz,
+           'results':    results,
+       },
+       context_instance=RequestContext(request)
     )
-
-def average(l):
-    return sum(l) / float(len(l))

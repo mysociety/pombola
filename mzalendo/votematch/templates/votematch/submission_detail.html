@@ -9,7 +9,7 @@
   <h1>{{ object.quiz.name }}</h1>
 
   <div class="quiz-results">
-      <h2>Results</h2>
+      <h2>Results (best match first)</h2>
   
       <style type="text/css" media="screen">
         .votematch-poll-spectrum {
@@ -25,6 +25,8 @@
         .votematch-party-name {
           width: 30%;
           float: left;
+          overflow: hidden;
+          height: 3em;
         }
 
         .votematch-spectrum {
@@ -45,45 +47,26 @@
         .votematch-diff-x { background-color: #D3D3D3 }
 
       </style>
-  
-      <div class="votematch-poll-spectrum">
-        <div class="votematch-party-name">Lib</div>
-        <div class="votematch-spectrum">
-          <div class="votematch-spectrum-entry votematch-diff-0" style="width: 10%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-1" style="width: 20%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-2" style="width: 30%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-3" style="width: 25%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-4" style="width: 10%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-x" style="width: 5%;"> &nbsp;</div>
-        </div>
-      </div>
 
+      {% for result in results %}
       <div class="votematch-poll-spectrum">
-        <div class="votematch-party-name">Lab</div>
+        <div class="votematch-party-name">
+          <strong>{{ result.party.name }}</strong>
+        </div>
         <div class="votematch-spectrum">
-          <div class="votematch-spectrum-entry votematch-diff-0" style="width: 33%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-1" style="width: 15%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-2" style="width: 12%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-3" style="width: 10%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-4" style="width: 15%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-x" style="width: 15%;"> &nbsp;</div>
+          <div class="votematch-spectrum-entry votematch-diff-0" style="width: {{ result.differences.0 }}%;">&nbsp;</div>
+          <div class="votematch-spectrum-entry votematch-diff-1" style="width: {{ result.differences.1 }}%;">&nbsp;</div>
+          <div class="votematch-spectrum-entry votematch-diff-2" style="width: {{ result.differences.2 }}%;">&nbsp;</div>
+          <div class="votematch-spectrum-entry votematch-diff-3" style="width: {{ result.differences.3 }}%;">&nbsp;</div>
+          <div class="votematch-spectrum-entry votematch-diff-4" style="width: {{ result.differences.4 }}%;">&nbsp;</div>
+          <div class="votematch-spectrum-entry votematch-diff-x" style="width: {{ result.differences.x }}%;"> &nbsp;</div>
         </div>
       </div>
-
-      <div class="votematch-poll-spectrum">
-        <div class="votematch-party-name">Con</div>
-        <div class="votematch-spectrum">
-          <div class="votematch-spectrum-entry votematch-diff-0" style="width: 20%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-1" style="width: 22%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-2" style="width: 13%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-3" style="width: 25%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-4" style="width: 10%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-x" style="width: 10%;"> &nbsp;</div>
-        </div>
-      </div>
+      {% endfor %}
 
       <br clear="both">
 
+      {% comment %}
       <h3>This result is closest to</h3>
   
       <ol class="candidate-pref">
@@ -112,6 +95,7 @@
               </a>
           </li>
       </ol>
+      {% endcomment %}
   
   
       <ul class="quiz-actions">
@@ -129,137 +113,5 @@
 
     <p><small><a href="/votematch/scoring/">How scoring is calculated</a></small></p>
 
-    <hr>
-
-    
-  <div class="quiz-results">
-      <h2>Results</h2>
-  
-      <div class="poll-spectrum">
-          <div class="bar"></div>
-          <div class="left">Looney Left</div>
-          <div class="right">Radical Right</div>
-      </div>
-  
-      <h3>This result is closest to</h3>
-  
-      <ol class="candidate-pref">
-          <li>
-              <a href="#">
-              <img src="http://dummyimage.com/200x300">
-              <h4>The name of candidate</h4>
-              </a>
-          </li>
-          <li>
-              <a href="#">
-              <img src="http://dummyimage.com/200x300">
-              <h4>The name of candidate</h4>
-              </a>
-          </li>
-          <li>
-              <a href="#">
-              <img src="http://dummyimage.com/200x300">
-              <h4>The name of candidate</h4>
-              </a>
-          </li>
-          <li>
-              <a href="#">
-              <img src="http://dummyimage.com/200x300">
-              <h4>The name of candidate</h4>
-              </a>
-          </li>
-      </ol>
-  
-  
-      <ul class="quiz-actions">
-          <li class="play-again">
-            <a href="{% url votematch-quiz slug=quiz.slug %}">Play Again</a>
-          </li>
-          <li class="share-facebook">
-            <a  href="https://www.facebook.com/sharer/sharer.php?u=http://kenya.mzalendo.dev.mysociety.org/votematch/us-presidency-2012/993146d4/&amp;t=" target="_blank">Share on Facebook</a>
-          </li>
-          <li class="share-twitter">
-            <a  href="https://twitter.com/share?via=MzalendoWatch&amp;text=&amp;url=http://kenya.mzalendo.dev.mysociety.org/votematch/us-presidency-2012/993146d4/" target="_blank">Share on Twitter</a>
-          </li>
-        </ul>
-    </div>
-
-    <p><small><a href="/votematch/scoring/">How scoring is calculated</a></small></p>
-
-    <hr>
-
-    
-    {% for result in party_results %}
-      <p>
-        {% if result.party.url %}
-          <a href="{{ result.party.url }}">{{ result.party.name }}</a>:
-        {% else %}
-          {{ result.party.name }}:
-        {% endif %}
-        
-        {{ result.score}}
-        
-        {# NOTE: there is also an optional summary for each party that could perhaps be displayed here... #}
-      </p>
-    {% endfor %}
- 
-    {% if object.expected_result %}
-      <p>(You expected to match '{{ object.expected_result.name }}'.)</p>
-    {% endif %}
-
-
-    <h2>Share these results</h2>
-
-      <p>
-        <a  href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ object.name }}"
-            target="_blank"
-        >Share on Facebook</a>
-      </p>
-    
-      <p>
-        <a  href="https://twitter.com/share?{% if settings.TWITTER_ACCOUNT_NAME %}via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;{% endif %}text={{ object.name }}&amp;url={{ request.build_absolute_uri }}"
-            target="_blank"
-        >Share on Twitter</a>
-      </p>
-
-    <h2>Breakdown</h2>    
-
-
-    <style type="text/css">
-      td, th {
-        border: 1px solid black;
-      }
-      
-      th {
-        font-weight: bold;
-      }
-    </style>
-
-    <table>
-      <tr>
-        <th>Statement title</th>
-        <th>You</th>
-        {% for party in parties %}
-          <th>
-            {% if party.url %}
-              <a href="{{ party.url }}">{{ party.name }}</a>
-            {% else %}
-              {{ party.name }}
-            {% endif %}            
-          </th>
-        {% endfor %}
-      </tr>
-      
-      {% for row in rows %}
-        <tr>
-          <th>{{ row.statement.text }}</th>
-          <td>{{ row.answer.get_agreement_display }}</td>
-          {% for stance in row.party_stances %}
-            <td>{{ stance.get_agreement_display }}</td>
-          {% endfor %}
-        </tr>
-      {% endfor %}
-      
-    </table>
   
 {% endblock %}
