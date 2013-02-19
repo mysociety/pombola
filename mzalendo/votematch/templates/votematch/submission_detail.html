@@ -11,43 +11,6 @@
   <div class="quiz-results">
       <h2>Results (best match first)</h2>
   
-      <style type="text/css" media="screen">
-        .votematch-poll-spectrum {
-          width: 100%;
-          height: 3em;
-          padding: 0.5em 0;
-        }
-        
-        .votematch-poll-spectrum + .votematch-poll-spectrum {
-          border-top: 1px solid #ccc;
-        }
-        
-        .votematch-party-name {
-          width: 30%;
-          float: left;
-          overflow: hidden;
-          height: 3em;
-        }
-
-        .votematch-spectrum {
-          width: 70%;
-          float: left;
-        }
-
-        .votematch-spectrum-entry {
-          float: left;
-          height: 3em;          
-        }
-        
-        .votematch-diff-0 { background-color: #9BCC50 }
-        .votematch-diff-1 { background-color: #F9D126 }
-        .votematch-diff-2 { background-color: #F9B526 }
-        .votematch-diff-3 { background-color: #F99326 }
-        .votematch-diff-4 { background-color: #F2352F }
-        .votematch-diff-x { background-color: #D3D3D3 }
-
-      </style>
-
       {% for result in results %}
       <div class="votematch-poll-spectrum">
         <div class="votematch-party-name">
