@@ -22,25 +22,74 @@
 
       <h2>Results (best match first)</h2>
 
-      <div class="explanation">
-        
-        <p>Below are the results. Each colour is if you agreed, the width is how much.</p> 
-                
-      </div>
+      <p>Below are the results. Each circle represents the number of answers
+      that you made that exactly matches the candidate, that slightly disagreed,
+      etc.</p>
 
   
       {% for result in results %}
-      <div class="votematch-poll-spectrum">
+
+
+      <div id="party-result-{{ result.party.id }}" class="votematch-poll-spectrum">
+
+        <style type="text/css" media="screen">
+
+          #party-result-{{ result.party.id }} .votematch-diff-0 {
+            width:  {{ result.dimensions.0 }}px;
+            height: {{ result.dimensions.0 }}px;
+            margin-top:  -{{ result.margins.0 }}px;
+            margin-left: -{{ result.margins.0 }}px;
+          }
+
+          #party-result-{{ result.party.id }} .votematch-diff-1 {
+            width:  {{ result.dimensions.1 }}px;
+            height: {{ result.dimensions.1 }}px;
+            margin-top:  -{{ result.margins.1 }}px;
+            margin-left: -{{ result.margins.1 }}px;
+          }
+
+          #party-result-{{ result.party.id }} .votematch-diff-2 {
+            width:  {{ result.dimensions.2 }}px;
+            height: {{ result.dimensions.2 }}px;
+            margin-top:  -{{ result.margins.2 }}px;
+            margin-left: -{{ result.margins.2 }}px;
+          }
+
+          #party-result-{{ result.party.id }} .votematch-diff-3 {
+            width:  {{ result.dimensions.3 }}px;
+            height: {{ result.dimensions.3 }}px;
+            margin-top:  -{{ result.margins.3 }}px;
+            margin-left: -{{ result.margins.3 }}px;
+          }
+
+          #party-result-{{ result.party.id }} .votematch-diff-4 {
+            width:  {{ result.dimensions.4 }}px;
+            height: {{ result.dimensions.4 }}px;
+            margin-top:  -{{ result.margins.4 }}px;
+            margin-left: -{{ result.margins.4 }}px;
+          }
+
+          #party-result-{{ result.party.id }} .votematch-diff-x {
+            width:  {{ result.dimensions.x }}px;
+            height: {{ result.dimensions.x }}px;
+            margin-top:  -{{ result.margins.x }}px;
+            margin-left: -{{ result.margins.x }}px;
+          }
+
+        </style>
+
         <div class="votematch-party-name">
           <strong>{{ result.party.name }}</strong>
         </div>
+
+
         <div class="votematch-spectrum">
-          <div class="votematch-spectrum-entry votematch-diff-0" style="width: {{ result.differences.0 }}%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-1" style="width: {{ result.differences.1 }}%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-2" style="width: {{ result.differences.2 }}%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-3" style="width: {{ result.differences.3 }}%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-4" style="width: {{ result.differences.4 }}%;">&nbsp;</div>
-          <div class="votematch-spectrum-entry votematch-diff-x" style="width: {{ result.differences.x }}%;"> &nbsp;</div>
+          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-0">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-1">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-2">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-3">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-4">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-x">&nbsp;</div></div>
         </div>
       </div>
       {% endfor %}

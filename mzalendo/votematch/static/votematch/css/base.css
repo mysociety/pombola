@@ -250,6 +250,8 @@ form.quiz-form .quiz-btn:hover {
   clear: both;
   width: 100%;
   padding: 0.5em 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 @media (min-width: 640px) {
   .votematch .votematch-poll-spectrum .votematch-party-name {
@@ -257,6 +259,7 @@ form.quiz-form .quiz-btn:hover {
     height: 3em;
     width: 30%;
     overflow: hidden;
+    z-index: 100;
   }
 }
 @media (min-width: 640px) {
@@ -267,7 +270,15 @@ form.quiz-form .quiz-btn:hover {
 }
 .votematch .votematch-poll-spectrum .votematch-spectrum-entry {
   float: left;
-  height: 3em;
+  padding: 1.5em 8.33333%;
+}
+.votematch .votematch-poll-spectrum .votematch-spectrum-bubble {
+  position: absolute;
+  border-radius: 50%;
+  margin: 0 auto;
+  padding: 2px;
+  border: 1px solid #fff;
+  z-index: 1;
 }
 .votematch .votematch-legend .votematch-diff-0, .votematch .votematch-poll-spectrum .votematch-diff-0 {
   background-color: #9BCC50;
@@ -288,5 +299,5 @@ form.quiz-form .quiz-btn:hover {
   background-color: #D3D3D3;
 }
 .votematch .votematch-poll-spectrum + .votematch-poll-spectrum {
-  border-top: 1px solid #ccc;
+  border-top: none;
 }

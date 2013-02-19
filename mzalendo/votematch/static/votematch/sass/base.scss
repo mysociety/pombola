@@ -239,19 +239,14 @@ form.quiz-form {
     }
   }
   
-//  h2 {
-//    float: left;
-//  }
-//
-//  p.explanation{
-//    float: left;
-//  }
-  
   .votematch-poll-spectrum {
     @extend .clearfix;
     clear: both;
     width: 100%;
     padding: 0.5em 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    
   
     .votematch-party-name {
       @media (min-width: 640px) {
@@ -259,19 +254,29 @@ form.quiz-form {
         height: $votematch-bar-height;
         width: $votematch-name-width;
         overflow: hidden;
+        z-index: 100;
       }
     }
   
     .votematch-spectrum {
       @media (min-width: 640px) {
         width: 100% - $votematch-name-width;
-        float: left;
+        float: left;        
       }
     }
   
     .votematch-spectrum-entry {
       float: left;
-      height: $votematch-bar-height;
+      padding: $votematch-bar-height/2 8.33333%;
+    }
+
+    .votematch-spectrum-bubble {
+      position: absolute;
+      border-radius: 50%;
+      margin: 0 auto;
+      padding: 2px;
+      border: 1px solid #fff;
+      z-index: 1;      
     }
   }
   
@@ -285,7 +290,7 @@ form.quiz-form {
   }
   
   .votematch-poll-spectrum + .votematch-poll-spectrum {
-    border-top: 1px solid #ccc;
+    border-top: none;
   }
   
 }
