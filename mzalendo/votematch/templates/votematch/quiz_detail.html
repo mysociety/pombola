@@ -20,6 +20,10 @@
     
     
     {% for statement in object.statement_set.all %}
+
+
+      {% if forloop.first %}
+
       <fieldset>
       
         {% comment %}
@@ -40,6 +44,10 @@
         </ul>
       
         <ul class="plain">
+
+      {% endif %}
+
+
             <li>
 
                 <h3>{{ statement.text }}</h3>
@@ -57,9 +65,15 @@
                 </ul>
 
             </li>
+
+
+      {% if forloop.last %}
         </ul>
 
       </fieldset>    
+      {% endif %}
+
+
     {% endfor %}
 
 
