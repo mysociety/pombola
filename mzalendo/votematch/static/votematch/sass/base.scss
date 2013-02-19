@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import "compass/css3";
+
 ul.plain {
   margin: 0;
   padding: 0;
@@ -211,54 +213,69 @@ form.quiz-form {
   }
 }
 
-
-$votematch-bar-height: 3em;
-$votematch-name-width: 20%; // must be in percent
-
-.votematch-poll-spectrum {
-  width: 100%;
-  height: $votematch-bar-height;
-  padding: 0.5em 0;
-
-  .votematch-party-name {
-    width: $votematch-name-width;
+.votematch {
+  $votematch-bar-height: 3em;
+  $votematch-name-width: 20%; // must be in percent
+  
+  $votematch-legend-padding: 0.25em;
+  $votematch-legend-height: 2em;
+  
+  h2 {
+    min-width: 30%;
     float: left;
-    overflow: hidden;
+  }
+  
+  .votematch-legend {
+    height: $votematch-legend-height + 2 * $votematch-legend-padding;
+    float: right;
+    margin-bottom: 1em;
+  
+    div {
+      font-size: 0.75em;
+      float: left;
+      height: $votematch-legend-height;
+      text-align: center;
+      @include text-shadow(1px 1px 2px #fff);     
+      padding: $votematch-legend-padding;
+    }
+  }
+  
+  
+  .votematch-poll-spectrum {
+    clear: both;
+    width: 100%;
     height: $votematch-bar-height;
+    padding: 0.5em 0;
+  
+    .votematch-party-name {
+      width: $votematch-name-width;
+      float: left;
+      overflow: hidden;
+      height: $votematch-bar-height;
+    }
+  
+    .votematch-spectrum {
+      width: 100% - $votematch-name-width;
+      float: left;
+    }
+  
+    .votematch-spectrum-entry {
+      float: left;
+      height: $votematch-bar-height;
+    }
   }
-
-  .votematch-spectrum {
-    width: 100% - $votematch-name-width;
-    float: left;
+  
+  .votematch-legend, .votematch-poll-spectrum {
+    .votematch-diff-0 { background-color: #9BCC50 }
+    .votematch-diff-1 { background-color: #F9D126 }
+    .votematch-diff-2 { background-color: #F9B526 }
+    .votematch-diff-3 { background-color: #F99326 }
+    .votematch-diff-4 { background-color: #F2352F }
+    .votematch-diff-x { background-color: #D3D3D3 }
   }
-
-  .votematch-spectrum-entry {
-    float: left;
-    height: $votematch-bar-height;          
+  
+  .votematch-poll-spectrum + .votematch-poll-spectrum {
+    border-top: 1px solid #ccc;
   }
-
-  .votematch-diff-0 { background-color: #9BCC50 }
-  .votematch-diff-1 { background-color: #F9D126 }
-  .votematch-diff-2 { background-color: #F9B526 }
-  .votematch-diff-3 { background-color: #F99326 }
-  .votematch-diff-4 { background-color: #F2352F }
-  .votematch-diff-x { background-color: #D3D3D3 }
-
+  
 }
-
-.votematch-poll-spectrum + .votematch-poll-spectrum {
-  border-top: 1px solid #ccc;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

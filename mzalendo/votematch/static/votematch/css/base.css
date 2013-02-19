@@ -223,44 +223,61 @@ form.quiz-form .quiz-btn:hover {
   display: none;
 }
 
-.votematch-poll-spectrum {
+.votematch h2 {
+  min-width: 30%;
+  float: left;
+}
+.votematch .votematch-legend {
+  height: 2.5em;
+  float: right;
+  margin-bottom: 1em;
+}
+.votematch .votematch-legend div {
+  font-size: 0.75em;
+  float: left;
+  height: 2em;
+  text-align: center;
+  text-shadow: 1px 1px 2px white;
+  padding: 0.25em;
+}
+.votematch .votematch-poll-spectrum {
+  clear: both;
   width: 100%;
   height: 3em;
   padding: 0.5em 0;
 }
-.votematch-poll-spectrum .votematch-party-name {
+.votematch .votematch-poll-spectrum .votematch-party-name {
   width: 20%;
   float: left;
   overflow: hidden;
   height: 3em;
 }
-.votematch-poll-spectrum .votematch-spectrum {
+.votematch .votematch-poll-spectrum .votematch-spectrum {
   width: 80%;
   float: left;
 }
-.votematch-poll-spectrum .votematch-spectrum-entry {
+.votematch .votematch-poll-spectrum .votematch-spectrum-entry {
   float: left;
   height: 3em;
 }
-.votematch-poll-spectrum .votematch-diff-0 {
+.votematch .votematch-legend .votematch-diff-0, .votematch .votematch-poll-spectrum .votematch-diff-0 {
   background-color: #9BCC50;
 }
-.votematch-poll-spectrum .votematch-diff-1 {
+.votematch .votematch-legend .votematch-diff-1, .votematch .votematch-poll-spectrum .votematch-diff-1 {
   background-color: #F9D126;
 }
-.votematch-poll-spectrum .votematch-diff-2 {
+.votematch .votematch-legend .votematch-diff-2, .votematch .votematch-poll-spectrum .votematch-diff-2 {
   background-color: #F9B526;
 }
-.votematch-poll-spectrum .votematch-diff-3 {
+.votematch .votematch-legend .votematch-diff-3, .votematch .votematch-poll-spectrum .votematch-diff-3 {
   background-color: #F99326;
 }
-.votematch-poll-spectrum .votematch-diff-4 {
+.votematch .votematch-legend .votematch-diff-4, .votematch .votematch-poll-spectrum .votematch-diff-4 {
   background-color: #F2352F;
 }
-.votematch-poll-spectrum .votematch-diff-x {
+.votematch .votematch-legend .votematch-diff-x, .votematch .votematch-poll-spectrum .votematch-diff-x {
   background-color: #D3D3D3;
 }
-
-.votematch-poll-spectrum + .votematch-poll-spectrum {
+.votematch .votematch-poll-spectrum + .votematch-poll-spectrum {
   border-top: 1px solid #ccc;
 }

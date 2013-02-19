@@ -8,8 +8,18 @@
 
   <h1>{{ object.quiz.name }}</h1>
 
-  <div class="quiz-results">
+  <div class="quiz-results votematch">
+
       <h2>Results (best match first)</h2>
+
+      <div class="votematch-legend">
+        <div class="votematch-diff-0">Complete<br>agreement</div>
+        <div class="votematch-diff-1">Slight<br>difference</div>
+        <div class="votematch-diff-2">Some<br>difference</div>
+        <div class="votematch-diff-3">Large<br>difference</div>
+        <div class="votematch-diff-4">Complete<br>disagreement</div>
+        <div class="votematch-diff-x">No data              </div>
+      </div>
   
       {% for result in results %}
       <div class="votematch-poll-spectrum">
