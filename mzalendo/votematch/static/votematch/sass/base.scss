@@ -2,6 +2,14 @@
 
 @import "compass/css3";
 
+// Clearfix
+.clearfix { zoom: 1; }
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after { clear: both; }
+
 ul.plain {
   margin: 0;
   padding: 0;
@@ -215,48 +223,50 @@ form.quiz-form {
 
 .votematch {
   $votematch-bar-height: 3em;
-  $votematch-name-width: 20%; // must be in percent
+  $votematch-name-width: 30%; // must be in percent
   
-  $votematch-legend-padding: 0.25em;
-  $votematch-legend-height: 2em;
-  
-  h2 {
-    min-width: 30%;
-    float: left;
-  }
-  
-  .votematch-legend {
-    height: $votematch-legend-height + 2 * $votematch-legend-padding;
+  $votematch-legend-padding: 0.5em;
+    
+  ul.votematch-legend {
     float: right;
-    margin-bottom: 1em;
+    margin: 0 0 1em 1em;
   
-    div {
+    li {
       font-size: 0.75em;
-      float: left;
-      height: $votematch-legend-height;
-      text-align: center;
       @include text-shadow(1px 1px 2px #fff);     
       padding: $votematch-legend-padding;
+      margin: 1px;
     }
   }
   
+//  h2 {
+//    float: left;
+//  }
+//
+//  p.explanation{
+//    float: left;
+//  }
   
   .votematch-poll-spectrum {
+    @extend .clearfix;
     clear: both;
     width: 100%;
-    height: $votematch-bar-height;
     padding: 0.5em 0;
   
     .votematch-party-name {
-      width: $votematch-name-width;
-      float: left;
-      overflow: hidden;
-      height: $votematch-bar-height;
+      @media (min-width: 640px) {
+        float: left;
+        height: $votematch-bar-height;
+        width: $votematch-name-width;
+        overflow: hidden;
+      }
     }
   
     .votematch-spectrum {
-      width: 100% - $votematch-name-width;
-      float: left;
+      @media (min-width: 640px) {
+        width: 100% - $votematch-name-width;
+        float: left;
+      }
     }
   
     .votematch-spectrum-entry {

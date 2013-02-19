@@ -84,6 +84,7 @@ def submission_detail (request, slug, token):
     for party in quiz.party_set.all():
 
         differences = { 0:0, 1:0, 2:0, 3:0, 4:0, 'x':0 }
+        counts      = { 0:0, 1:0, 2:0, 3:0, 4:0, 'x':0 }
         statement_count  = quiz.statement_set.count()
         difference_count = 0
         difference_total = 0
@@ -98,8 +99,10 @@ def submission_detail (request, slug, token):
                 difference_count += 1
                 difference_total += diff ** 1.5  # make bigger differences count more
                 differences[diff] += percent_per_diff
+                counts[diff] += 1
             except ObjectDoesNotExist:
                 differences['x'] += percent_per_diff
+                counts['x'] += 1
 
         if difference_count:
             score = difference_total / float(difference_count)
@@ -110,6 +113,7 @@ def submission_detail (request, slug, token):
             'score':       score,
             'sort_score':  score or 1000000,
             'differences': differences,
+            'counts':      counts,
             'party':       party,
         })
         

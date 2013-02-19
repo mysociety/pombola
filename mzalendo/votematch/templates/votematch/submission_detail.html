@@ -10,16 +10,24 @@
 
   <div class="quiz-results votematch">
 
+    <ul class="plain votematch-legend">
+      <li class="votematch-diff-0">Complete agreement    </li>
+      <li class="votematch-diff-1">Slight difference     </li>
+      <li class="votematch-diff-2">Some difference       </li>
+      <li class="votematch-diff-3">Large difference      </li>
+      <li class="votematch-diff-4">Complete disagreement </li>
+      <li class="votematch-diff-x">No data               </li>
+    </ul>
+
+
       <h2>Results (best match first)</h2>
 
-      <div class="votematch-legend">
-        <div class="votematch-diff-0">Complete<br>agreement</div>
-        <div class="votematch-diff-1">Slight<br>difference</div>
-        <div class="votematch-diff-2">Some<br>difference</div>
-        <div class="votematch-diff-3">Large<br>difference</div>
-        <div class="votematch-diff-4">Complete<br>disagreement</div>
-        <div class="votematch-diff-x">No data              </div>
+      <div class="explanation">
+        
+        <p>Below are the results. Each colour is if you agreed, the width is how much.</p> 
+                
       </div>
+
   
       {% for result in results %}
       <div class="votematch-poll-spectrum">
@@ -37,7 +45,6 @@
       </div>
       {% endfor %}
 
-      <br clear="both">
 
       {% comment %}
       <h3>This result is closest to</h3>
