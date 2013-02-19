@@ -59,7 +59,11 @@ class Command(NoArgsCommand):
                 if not alternative_names_to_add:
                     continue
 
-                position = Position.objects.get(pk=row["Existing Aspirant Position ID"])
+                try:
+                    position = Position.objects.get(pk=row["Existing Aspirant Position ID"])
+                except Position.DoesNotExist:
+                    # Probably it's already been removed by the remove duplicates script
+                    continue
 
                 if alternative_names_to_add == '[endpos]':
                     position.end_date = yesterday_approximate_date
