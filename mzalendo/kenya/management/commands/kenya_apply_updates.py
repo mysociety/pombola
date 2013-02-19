@@ -59,7 +59,11 @@ class Command(NoArgsCommand):
                 if not alternative_names_to_add:
                     continue
 
-                position = Position.objects.get(pk=row["Existing Aspirant Position ID"])
+                try:
+                    position = Position.objects.get(pk=row["Existing Aspirant Position ID"])
+                except Position.DoesNotExist:
+                    # Probably it's already been removed by the remove duplicates script
+                    continue
 
                 if alternative_names_to_add == '[endpos]':
                     position.end_date = yesterday_approximate_date
@@ -75,17 +79,3 @@ class Command(NoArgsCommand):
                         person = Person.objects.get(pk=row['Existing Aspirant Person ID'])
                         person.add_alternative_name(n)
                         maybe_save(person, **options)
-
-#         for each county, representative, ward:
-#             for each contest_type:
-#                 get all the current aspirants
-#                 for each aspirant:
-#                     find each other aspirant that has this aspirant as an alternative name
-#                     (make a mapping of (person with multiple names) => all people whose names match those)
-#                     for each value in that mapping, check that they have the same API CODE
-#                     set the key person's API CODE
-#                     check that there's no extra data attached to the values peope, then remove the position + the person
-
-
-
-# check - if we're deleting a position, because there's already an older one there, make sure any IEBC code of the former is applied to the latter

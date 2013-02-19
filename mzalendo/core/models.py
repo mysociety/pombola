@@ -997,7 +997,7 @@ class Position(ModelBase):
         else:
             organisation = '???'
 
-        return "%s (%s at %s)" % ( self.person.name, title, organisation)
+        return "%s (%s at %s)" % ( self.person.legal_name, title, organisation)
 
     class Meta:
         ordering = ['-sorting_end_date', '-sorting_start_date']  
