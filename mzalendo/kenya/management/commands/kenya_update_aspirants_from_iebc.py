@@ -29,16 +29,6 @@ from iebc_api import *
 
 before_import_date = datetime.date(2013, 2, 7)
 
-today_date = datetime.date.today()
-today_approximate_date = ApproximateDate(today_date.year,
-                                         today_date.month,
-                                         today_date.day)
-
-yesterday_date = today_date - datetime.timedelta(days=1)
-yesterday_approximate_date = ApproximateDate(yesterday_date.year,
-                                             yesterday_date.month,
-                                             yesterday_date.day)
-
 data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
 
 # Calling these 'corrections' may not be quite right.  There are

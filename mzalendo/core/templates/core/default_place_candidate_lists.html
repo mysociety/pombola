@@ -53,7 +53,7 @@
                       <span class="name">{{ person.name }}</span>
                   </a>
                       <p><em>Parties:</em>
-                           {% for party in person.parties_ever %}
+                           {% for party in person.parties %}
                              {% if forloop.first %}
                              {% else %}
                                 {% if forloop.last %} and {% else %}, {% endif %}
@@ -88,7 +88,10 @@
     {% if object.parliamentary_session.relative_time == 'Past' and boundary_changes.next %}
 
        <p>This is an <strong>old</strong> {{ object.kind.name.lower }} - to find your
-          aspriants, please look at one of the {{ object.kind.plural_name.lower }} that replaced it:</p>
+          aspirants, you can <a href="{% url map-home %}">pick
+          where you are on a map</a>, or choose from one of the
+          {{ object.kind.plural_name.lower }} that replaced
+          {{object.name}}:</p>
 
        <ul>
            {% for i in boundary_changes.next.intersections %}

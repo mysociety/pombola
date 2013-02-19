@@ -1,4 +1,5 @@
 import csv
+import datetime
 import errno
 import hmac
 import hashlib
@@ -10,9 +11,21 @@ import sys
 
 from django.template.defaultfilters import slugify
 
+from django_date_extensions.fields import ApproximateDate
+
 from core.models import Person, Place, PlaceKind, ParliamentarySession, Position, PositionTitle
 
 iebc_base_url = 'http://api.iebc.or.ke'
+
+today_date = datetime.date.today()
+today_approximate_date = ApproximateDate(today_date.year,
+                                         today_date.month,
+                                         today_date.day)
+
+yesterday_date = today_date - datetime.timedelta(days=1)
+yesterday_approximate_date = ApproximateDate(yesterday_date.year,
+                                             yesterday_date.month,
+                                             yesterday_date.day)
 
 # From: http://stackoverflow.com/q/600268/223092
 

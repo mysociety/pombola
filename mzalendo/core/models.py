@@ -264,10 +264,12 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
                 an.name_to_use = False
                 an.save()
         alternative_name = re.sub(r'\s+', ' ', alternative_name).strip()
+        AlternativePersonName.objects.update_or_create({'person': self,
+                                                        'alternative_name': alternative_name},
+                                                       {'name_to_use': name_to_use})
         apn = AlternativePersonName(person=self,
                                     alternative_name=alternative_name,
                                     name_to_use=name_to_use)
-        apn.save()
 
     def remove_alternative_name(self, alternative_name):
         self.alternative_names.filter(alternative_name=alternative_name).delete()
@@ -400,8 +402,13 @@ class AlternativePersonName(ModelBase):
     alternative_name = models.CharField(max_length=300)
     name_to_use = models.BooleanField(default=False)
 
+    objects = ManagerBase()
+
     def __unicode__(self):
         return self.alternative_name + (" [*]" if self.name_to_use else "")
+
+    class Meta:
+        unique_together = ("person", "alternative_name")
 
 class OrganisationKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
