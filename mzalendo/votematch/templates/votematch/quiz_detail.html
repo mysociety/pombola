@@ -19,63 +19,67 @@
     {% csrf_token %}
     
     
-    {% for statement in object.statement_set.all %}
-
-
-      {% if forloop.first %}
-
-      <fieldset>
+    {% with batch_number=3 %}
+      {% for statement in object.statement_set.all %}
       
-        {% comment %}
       
-          If categories for the questions are implemented then this can be used to
-          display their title nicely. Until then we are splitting the questions up
-          into batches so that the legend in displayed often.
+        {% if forloop.first %}
       
-          <legend>{{ statement.category.name # not implemented in models yet }}</legend>
-        {% endcomment %}
+        <fieldset>
         
-        <ul class="quiz-key">
-            <li>Strongly<br>Disagree</li>
-            <li>Disagree</li>
-            <li>Neutral</li>
-            <li>Agree</li>
-            <li>Strongly<br>Agree</li>
-        </ul>
+          {% comment %}
+        
+            If categories for the questions are implemented then this can be used to
+            display their title nicely. Until then we are splitting the questions up
+            into batches so that the legend in displayed often.
+        
+            <legend>{{ statement.category.name # not implemented in models yet }}</legend>
+          {% endcomment %}
+          
+        
+            
+        {% endif %}
       
+        {% if forloop.counter0|divisibleby:batch_number %}
+          <ul class="quiz-key">
+              <li>Strongly<br>Disagree</li>
+              <li>Disagree</li>
+              <li>Neutral</li>
+              <li>Agree</li>
+              <li>Strongly<br>Agree</li>
+          </ul>
+        {% endif %}
+
         <ul class="plain">
-
-      {% endif %}
-
-
-            <li>
-
-                <h3>{{ statement.text }}</h3>
-
-                <ul class="check-list radio-group-active-states">
-                    <li><label><span class="ans-strongly-disagree">strongly disagree</span><input type="radio" name="statement-{{ statement.id }}" value="-2"></label></li>
-                    <li><label><span class="ans-disagree">disagree</span>                  <input type="radio" name="statement-{{ statement.id }}" value="-1"></label></li>
-                    <li><label><span class="ans-neutral">neutral</span>                    <input type="radio" name="statement-{{ statement.id }}" value="0"></label></li>
-                    <li><label><span class="ans-agree">agree</span>                        <input type="radio" name="statement-{{ statement.id }}" value="1"></label></li>
-                    <li><label><span class="ans-strongly-agree">strongly agree</span>      <input type="radio" name="statement-{{ statement.id }}" value="2"></label></li>
-
-                    {# This is the hidden not sure button #}
-                    <input type="radio" name="statement-1" value="" checked style="display: none">
-
-                </ul>
-
-            </li>
-
-
-      {% if forloop.last %}
-        </ul>
-
-      </fieldset>    
-      {% endif %}
-
-
-    {% endfor %}
-
+      
+              <li>
+      
+                  <h3>{{ statement.text }}</h3>
+      
+                  <ul class="check-list radio-group-active-states">
+                      <li><label><span class="ans-strongly-disagree">strongly disagree</span><input type="radio" name="statement-{{ statement.id }}" value="-2"></label></li>
+                      <li><label><span class="ans-disagree">disagree</span>                  <input type="radio" name="statement-{{ statement.id }}" value="-1"></label></li>
+                      <li><label><span class="ans-neutral">neutral</span>                    <input type="radio" name="statement-{{ statement.id }}" value="0"></label></li>
+                      <li><label><span class="ans-agree">agree</span>                        <input type="radio" name="statement-{{ statement.id }}" value="1"></label></li>
+                      <li><label><span class="ans-strongly-agree">strongly agree</span>      <input type="radio" name="statement-{{ statement.id }}" value="2"></label></li>
+      
+                      {# This is the hidden not sure button #}
+                      <input type="radio" name="statement-1" value="" checked style="display: none">
+      
+                  </ul>
+      
+              </li>
+      
+            </ul>
+      
+        {% if forloop.last %}
+      
+        </fieldset>    
+        {% endif %}
+      
+      
+      {% endfor %}
+    {% endwith %}
 
 
     <fieldset class="footer">
