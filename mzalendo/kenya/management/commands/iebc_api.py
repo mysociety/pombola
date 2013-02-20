@@ -129,7 +129,7 @@ def parse_race_name(race_name):
 def get_person_from_names(first_names, surname):
     full_name = first_names + ' ' + surname
     first_and_last = re.sub(' .*', '', first_names) + ' ' + surname
-    for field in 'legal_name', 'other_names':
+    for field in 'legal_name', 'alternative_names__alternative_name':
         for version in (full_name, first_and_last):
             kwargs = {field + '__iexact': version}
             matches = Person.objects.filter(**kwargs)
@@ -266,7 +266,7 @@ class SamePersonChecker(object):
             row['API Place'] = '%s (%s)' % (candidate_place.name, candidate_place.kind.name.lower())
             row['API Candidate Code'] = candidate_data['code']
             row['Mz Legal Name'] = mz_person.legal_name
-            row['Mz Other Names'] = mz_person.other_names
+            row['Mz Other Names'] = "\n".join(an.alternative_name for an in mz_person.alternative_names.all())
             row['Mz URL'] = 'http://info.mzalendo.com' + mz_person.get_absolute_url()
             row['Mz Parties Ever'] = ', '.join(o.name for o in mz_person.parties_ever())
             for heading, positions in (('Mz Aspirant Ever', mz_person.aspirant_positions_ever()),

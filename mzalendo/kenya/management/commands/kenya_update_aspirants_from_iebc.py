@@ -122,35 +122,37 @@ def make_new_person(candidate, **options):
 def update_parties(person, api_party, **options):
     current_party_positions = person.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
     if 'name' in api_party:
-        # Then we should be checking that a valid party membership
-        # exists, or create a new one otherwise:
         api_party_name = api_party['name']
-        mz_party = get_matching_party(api_party_name, **options)
-        need_to_create_party_position = True
-        for party_position in (p for p in current_party_positions if p.organisation == mz_party):
-            # If there's a current position in this party, that's fine
-            # - just make sure that the end_date is 'future':
-            party_position.end_date = ApproximateDate(future=True)
-            maybe_save(party_position, **options)
-            need_to_create_party_position = False
-        for party_position in (p for p in current_party_positions if p.organisation != mz_party):
-            # These shouldn't be current any more - end them when we
-            # got the new data:
-            party_position.end_date = yesterday_approximate_date
-            maybe_save(party_position, **options)
-        if need_to_create_party_position:
-            new_position = Position(title=PositionTitle.objects.get(name='Member'),
-                                    organisation=mz_party,
-                                    category='political',
-                                    person=person,
-                                    start_date=today_approximate_date,
-                                    end_date=ApproximateDate(future=True))
-            maybe_save(new_position, **options)
     else:
-        # If there's no party specified, end all current party positions:
-        for party_position in current_party_positions:
-            party_position.end_date = yesterday_approximate_date
-            maybe_save(party_position, **options)
+        api_party_name = 'Independent Aspirant'
+        # If there's a current assignment to another party, issue a warning:
+        current_party_assignments = [p for p in current_party_positions if p.organisation.slug != 'independent-aspirant']
+        if current_party_assignments:
+            print "Not resetting to Independent Aspirant someone who's in a party %s: %s" % (person, current_party_assignments)
+            return
+    # Then we should be checking that a valid party membership
+    # exists, or create a new one otherwise:
+    mz_party = get_matching_party(api_party_name, **options)
+    need_to_create_party_position = True
+    for party_position in (p for p in current_party_positions if p.organisation == mz_party):
+        # If there's a current position in this party, that's fine
+        # - just make sure that the end_date is 'future':
+        party_position.end_date = ApproximateDate(future=True)
+        maybe_save(party_position, **options)
+        need_to_create_party_position = False
+    for party_position in (p for p in current_party_positions if p.organisation != mz_party):
+        # These shouldn't be current any more - end them when we
+        # got the new data:
+        party_position.end_date = yesterday_approximate_date
+        maybe_save(party_position, **options)
+    if need_to_create_party_position:
+        new_position = Position(title=PositionTitle.objects.get(name='Member'),
+                                organisation=mz_party,
+                                category='political',
+                                person=person,
+                                start_date=today_approximate_date,
+                                end_date=ApproximateDate(future=True))
+        maybe_save(new_position, **options)
 
 def update_candidates_for_place(place_name,
                                 place_kind,
@@ -160,9 +162,11 @@ def update_candidates_for_place(place_name,
                                 candidates,
                                 same_person_checker,
                                 **options):
+
+    all_updates_succeeded = True
+
     place = get_matching_place(place_name, place_kind, parliamentary_session)
 
-    # Find the current aspirants:
     current_aspirants = Position.objects.filter(place=place, title=title).currently_active()
     
     print "%s %s %s %s %s" % (place_name,
@@ -180,11 +184,12 @@ def update_candidates_for_place(place_name,
     existing_aspirant_codes = set(code_to_existing_aspirant.keys())
     current_candidate_codes = set(code_to_current_candidates.keys())
 
-    # print "existing_aspirant_codes", existing_aspirant_codes
-    # print "current_candidate_codes", current_candidate_codes
-
     existing_aspirants_to_remove = existing_aspirant_codes - current_candidate_codes
     new_candidates_to_add = current_candidate_codes - existing_aspirant_codes
+
+    matched_candidate_codes = current_candidate_codes & existing_aspirant_codes
+
+    # Add each candidate that wasn't already present:
 
     for code in new_candidates_to_add:
         candidate = code_to_current_candidates[code]
@@ -193,13 +198,40 @@ def update_candidates_for_place(place_name,
         surname = normalize_name(candidate['surname'] or '')
         person = get_person_from_names(first_names, surname)
         print "  returned person is:", person
+        # If that person was an existing current aspirant, they'll
+        # just need to have the IEBC candidate code set:
+        iebc_code_just_needed_setting = False
+        for matching_existing_aspirant_position in current_aspirants.filter(person=person):
+            if matching_existing_aspirant_position.external_id:
+                if matching_existing_aspirant_position.external_id != code:
+                    print "     original: '%s'" % (matching_existing_aspirant_position.external_id,)
+                    print "    candidate: '%s'" % (code,)
+                    format_tuple = (matching_existing_aspirant_position.person,
+                                    matching_existing_aspirant_position.external_id,
+                                    person,
+                                    code)
+                    message = "There was an existing candidate (%s - %s) with a name match for (%s - %s) but different codes" % format_tuple
+                    # raise Exception, message
+                    print message
+            else:
+                print "  setting a missing IEBC code on", matching_existing_aspirant_position
+                matching_existing_aspirant_position.external_id = code
+                maybe_save(matching_existing_aspirant_position, **options)
+                update_parties(person, candidate['party'], **options)
+                iebc_code_just_needed_setting = True
+        if iebc_code_just_needed_setting:
+            continue
+        # If we have a person match, but they weren't a current
+        # aspirant in this race, then be careful that we're not
+        # mismatching using the SamePersonChecker:
         if person:
             same_person = same_person_checker.check_same_and_update(candidate,
                                                                     place,
                                                                     race_type,
                                                                     person)
             if same_person is None:
-                return False # To indicate this update didn't complete...
+                all_updates_succeeded = False
+                continue
         if not person:
             person = make_new_person(candidate, **options)
 
@@ -231,13 +263,24 @@ def update_candidates_for_place(place_name,
                                     **aspirant_position_properties)
             maybe_save(new_position, **options)
 
+    # For those aspirants that are no longer current, end their aspirant position:
+
     for code in existing_aspirants_to_remove:
         existing_aspirant_to_remove = code_to_existing_aspirant[code]
         print "  would end aspirant position:", existing_aspirant_to_remove.person.legal_name, "(position id: %s)" % (existing_aspirant_to_remove,)
         existing_aspirant_to_remove.end_date = yesterday_approximate_date
         maybe_save(existing_aspirant_to_remove, **options)
 
-    return True
+    # For those aspirants that were already present, just make sure
+    # their party assignments are correct:
+
+    for code in matched_candidate_codes:
+        # Make sure that the party assignments are correct:
+        person = code_to_existing_aspirant[code].person
+        candidate = code_to_current_candidates[code]
+        update_parties(person, candidate['party'], **options)
+
+    return all_updates_succeeded
 
 def get_contest_type(candidates):
     distinct_contest_types = set(c['contest_type'] for c in candidates)
@@ -287,7 +330,7 @@ class Command(NoArgsCommand):
         # To get all the candidates, we iterate over each county,
         # constituency and ward, and request the candidates for each.
 
-        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-14')
+        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-20')
 
         mkdir_p(cache_directory)
 
