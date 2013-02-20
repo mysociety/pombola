@@ -167,7 +167,6 @@ def update_candidates_for_place(place_name,
 
     place = get_matching_place(place_name, place_kind, parliamentary_session)
 
-    # Find the current aspirants:
     current_aspirants = Position.objects.filter(place=place, title=title).currently_active()
     
     print "%s %s %s %s %s" % (place_name,
@@ -184,9 +183,6 @@ def update_candidates_for_place(place_name,
 
     existing_aspirant_codes = set(code_to_existing_aspirant.keys())
     current_candidate_codes = set(code_to_current_candidates.keys())
-
-    # print "existing_aspirant_codes", existing_aspirant_codes
-    # print "current_candidate_codes", current_candidate_codes
 
     existing_aspirants_to_remove = existing_aspirant_codes - current_candidate_codes
     new_candidates_to_add = current_candidate_codes - existing_aspirant_codes
