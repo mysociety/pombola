@@ -313,7 +313,7 @@ class Command(NoArgsCommand):
         # To get all the candidates, we iterate over each county,
         # constituency and ward, and request the candidates for each.
 
-        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-14')
+        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-20')
 
         mkdir_p(cache_directory)
 
