@@ -79,6 +79,32 @@ def remove_duplicate_candidates_for_place(place_name,
     place = get_matching_place(place_name, place_kind, parliamentary_session)
     current_aspirant_positions = Position.objects.filter(place=place, title=title).currently_active()
 
+    # Create a person to position mapping to check for duplicate
+    # positions for people:
+
+    person_to_position = defaultdict(list)
+
+    for current_aspirant_position in current_aspirant_positions.all():
+        person = current_aspirant_position.person
+        person_to_position[person].append(current_aspirant_position)
+
+    for person, positions in person_to_position.items():
+        if len(positions) > 1:
+            # Then there are multiple positions for this person -
+            # use a method for picking the best one that happens
+            # to work for the 8 cases we have here; at the moment it's not
+            positions.sort(key=lambda x: (x.external_id, x.start_date))
+            best_position = positions[-1]
+            for position in positions:
+                if position != best_position:
+                    if options['commit']:
+                        position.delete()
+
+    # Now look for current aspirant positions where the
+    # alternative_name for its person is the legal_name of the person
+    # associated with another current aspirant position - remove the
+    # latter.
+
     real_person_to_others = defaultdict(set)
 
     for current_aspirant_position in current_aspirant_positions:
