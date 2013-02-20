@@ -187,6 +187,10 @@ def update_candidates_for_place(place_name,
     existing_aspirants_to_remove = existing_aspirant_codes - current_candidate_codes
     new_candidates_to_add = current_candidate_codes - existing_aspirant_codes
 
+    matched_candidate_codes = current_candidate_codes & existing_aspirant_codes
+
+    # Add each candidate that wasn't already present:
+
     for code in new_candidates_to_add:
         candidate = code_to_current_candidates[code]
         print "  would add:", full_name(candidate)
@@ -259,11 +263,22 @@ def update_candidates_for_place(place_name,
                                     **aspirant_position_properties)
             maybe_save(new_position, **options)
 
+    # For those aspirants that are no longer current, end their aspirant position:
+
     for code in existing_aspirants_to_remove:
         existing_aspirant_to_remove = code_to_existing_aspirant[code]
         print "  would end aspirant position:", existing_aspirant_to_remove.person.legal_name, "(position id: %s)" % (existing_aspirant_to_remove,)
         existing_aspirant_to_remove.end_date = yesterday_approximate_date
         maybe_save(existing_aspirant_to_remove, **options)
+
+    # For those aspirants that were already present, just make sure
+    # their party assignments are correct:
+
+    for code in matched_candidate_codes:
+        # Make sure that the party assignments are correct:
+        person = code_to_existing_aspirant[code].person
+        candidate = code_to_current_candidates[code]
+        update_parties(person, candidate['party'], **options)
 
     return all_updates_succeeded
 
