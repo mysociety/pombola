@@ -122,35 +122,37 @@ def make_new_person(candidate, **options):
 def update_parties(person, api_party, **options):
     current_party_positions = person.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
     if 'name' in api_party:
-        # Then we should be checking that a valid party membership
-        # exists, or create a new one otherwise:
         api_party_name = api_party['name']
-        mz_party = get_matching_party(api_party_name, **options)
-        need_to_create_party_position = True
-        for party_position in (p for p in current_party_positions if p.organisation == mz_party):
-            # If there's a current position in this party, that's fine
-            # - just make sure that the end_date is 'future':
-            party_position.end_date = ApproximateDate(future=True)
-            maybe_save(party_position, **options)
-            need_to_create_party_position = False
-        for party_position in (p for p in current_party_positions if p.organisation != mz_party):
-            # These shouldn't be current any more - end them when we
-            # got the new data:
-            party_position.end_date = yesterday_approximate_date
-            maybe_save(party_position, **options)
-        if need_to_create_party_position:
-            new_position = Position(title=PositionTitle.objects.get(name='Member'),
-                                    organisation=mz_party,
-                                    category='political',
-                                    person=person,
-                                    start_date=today_approximate_date,
-                                    end_date=ApproximateDate(future=True))
-            maybe_save(new_position, **options)
     else:
-        # If there's no party specified, end all current party positions:
-        for party_position in current_party_positions:
-            party_position.end_date = yesterday_approximate_date
-            maybe_save(party_position, **options)
+        api_party_name = 'Independent Aspirant'
+        # If there's a current assignment to another party, issue a warning:
+        current_party_assignments = [p for p in current_party_positions if p.organisation.slug != 'independent-aspirant']
+        if current_party_assignments:
+            print "Not resetting to Independent Aspirant someone who's in a party %s: %s" % (person, current_party_assignments)
+            return
+    # Then we should be checking that a valid party membership
+    # exists, or create a new one otherwise:
+    mz_party = get_matching_party(api_party_name, **options)
+    need_to_create_party_position = True
+    for party_position in (p for p in current_party_positions if p.organisation == mz_party):
+        # If there's a current position in this party, that's fine
+        # - just make sure that the end_date is 'future':
+        party_position.end_date = ApproximateDate(future=True)
+        maybe_save(party_position, **options)
+        need_to_create_party_position = False
+    for party_position in (p for p in current_party_positions if p.organisation != mz_party):
+        # These shouldn't be current any more - end them when we
+        # got the new data:
+        party_position.end_date = yesterday_approximate_date
+        maybe_save(party_position, **options)
+    if need_to_create_party_position:
+        new_position = Position(title=PositionTitle.objects.get(name='Member'),
+                                organisation=mz_party,
+                                category='political',
+                                person=person,
+                                start_date=today_approximate_date,
+                                end_date=ApproximateDate(future=True))
+        maybe_save(new_position, **options)
 
 def update_candidates_for_place(place_name,
                                 place_kind,
