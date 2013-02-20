@@ -193,6 +193,32 @@ def update_candidates_for_place(place_name,
         surname = normalize_name(candidate['surname'] or '')
         person = get_person_from_names(first_names, surname)
         print "  returned person is:", person
+        # If that person was an existing current aspirant, they'll
+        # just need to have the IEBC candidate code set:
+        iebc_code_just_needed_setting = False
+        for matching_existing_aspirant_position in current_aspirants.filter(person=person):
+            if matching_existing_aspirant_position.external_id:
+                if matching_existing_aspirant_position.external_id != code:
+                    print "     original: '%s'" % (matching_existing_aspirant_position.external_id,)
+                    print "    candidate: '%s'" % (code,)
+                    format_tuple = (matching_existing_aspirant_position.person,
+                                    matching_existing_aspirant_position.external_id,
+                                    person,
+                                    code)
+                    message = "There was an existing candidate (%s - %s) with a name match for (%s - %s) but different codes" % format_tuple
+                    # raise Exception, message
+                    print message
+            else:
+                print "  setting a missing IEBC code on", matching_existing_aspirant_position
+                matching_existing_aspirant_position.external_id = code
+                maybe_save(matching_existing_aspirant_position, **options)
+                update_parties(person, candidate['party'], **options)
+                iebc_code_just_needed_setting = True
+        if iebc_code_just_needed_setting:
+            continue
+        # If we have a person match, but they weren't a current
+        # aspirant in this race, then be careful that we're not
+        # mismatching using the SamePersonChecker:
         if person:
             same_person = same_person_checker.check_same_and_update(candidate,
                                                                     place,
