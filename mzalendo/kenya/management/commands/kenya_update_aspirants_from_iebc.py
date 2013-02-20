@@ -162,6 +162,9 @@ def update_candidates_for_place(place_name,
                                 candidates,
                                 same_person_checker,
                                 **options):
+
+    all_updates_succeeded = True
+
     place = get_matching_place(place_name, place_kind, parliamentary_session)
 
     # Find the current aspirants:
@@ -227,7 +230,8 @@ def update_candidates_for_place(place_name,
                                                                     race_type,
                                                                     person)
             if same_person is None:
-                return False # To indicate this update didn't complete...
+                all_updates_succeeded = False
+                continue
         if not person:
             person = make_new_person(candidate, **options)
 
@@ -265,7 +269,7 @@ def update_candidates_for_place(place_name,
         existing_aspirant_to_remove.end_date = yesterday_approximate_date
         maybe_save(existing_aspirant_to_remove, **options)
 
-    return True
+    return all_updates_succeeded
 
 def get_contest_type(candidates):
     distinct_contest_types = set(c['contest_type'] for c in candidates)
