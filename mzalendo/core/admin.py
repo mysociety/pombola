@@ -103,7 +103,7 @@ class PositionInlineAdmin(admin.TabularInline):
     model      = models.Position
     extra      = 3    # do not set to zero as the autocomplete does not work in inlines
     can_delete = True
-    fields     = [ 'person', 'organisation', 'place', 'title', 'subtitle', 'category', 'start_date', 'end_date' ]
+    fields     = [ 'person', 'organisation', 'place', 'title', 'subtitle', 'category', 'start_date', 'end_date', 'external_id' ]
 
     form = make_ajax_form(
         models.Position,
