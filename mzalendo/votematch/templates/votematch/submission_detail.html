@@ -10,21 +10,24 @@
 
   <div class="quiz-results votematch">
 
-    <ul class="plain votematch-legend">
-      <li class="votematch-diff-0">Complete agreement    </li>
-      <li class="votematch-diff-1">Slight difference     </li>
-      <li class="votematch-diff-2">Some difference       </li>
-      <li class="votematch-diff-3">Large difference      </li>
-      <li class="votematch-diff-4">Complete disagreement </li>
-      <li class="votematch-diff-x">No data               </li>
-    </ul>
-
-
       <h2>Results (best match first)</h2>
 
       <p>Below are the results. Each circle represents the number of answers
       that you made that exactly matches the candidate, that slightly disagreed,
       etc.</p>
+
+
+      <div class="votematch-poll-spectrum">
+        <div class="votematch-party-name"></div>
+        <div class="votematch-spectrum">
+          <div class="votematch-spectrum-legend votematch-col-0"><div class="votematch-spectrum-legend-entry">Agrees with you</div></div>
+          <div class="votematch-spectrum-legend votematch-col-1"><div class="votematch-spectrum-legend-entry">&hellip;</div></div>
+          <div class="votematch-spectrum-legend votematch-col-2"><div class="votematch-spectrum-legend-entry">&hellip;</div></div>
+          <div class="votematch-spectrum-legend votematch-col-3"><div class="votematch-spectrum-legend-entry">&hellip;</div></div>
+          <div class="votematch-spectrum-legend votematch-col-4"><div class="votematch-spectrum-legend-entry">Completely disagrees with you</div></div>
+          <div class="votematch-spectrum-legend votematch-col-x"><div class="votematch-spectrum-legend-entry">(no data)</div></div>
+        </div>
+      </div>
 
   
       {% for result in results %}
@@ -84,12 +87,12 @@
 
 
         <div class="votematch-spectrum">
-          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-0">&nbsp;</div></div>
-          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-1">&nbsp;</div></div>
-          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-2">&nbsp;</div></div>
-          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-3">&nbsp;</div></div>
-          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-4">&nbsp;</div></div>
-          <div class="votematch-spectrum-entry"><div class="votematch-spectrum-bubble votematch-diff-x">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry  votematch-col-0"><div class="votematch-spectrum-bubble votematch-diff-0">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry  votematch-col-1"><div class="votematch-spectrum-bubble votematch-diff-1">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry  votematch-col-2"><div class="votematch-spectrum-bubble votematch-diff-2">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry  votematch-col-3"><div class="votematch-spectrum-bubble votematch-diff-3">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry  votematch-col-4"><div class="votematch-spectrum-bubble votematch-diff-4">&nbsp;</div></div>
+          <div class="votematch-spectrum-entry  votematch-col-x"><div class="votematch-spectrum-bubble votematch-diff-x">&nbsp;</div></div>
         </div>
       </div>
       {% endfor %}
