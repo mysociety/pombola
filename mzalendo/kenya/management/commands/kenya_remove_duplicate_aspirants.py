@@ -17,13 +17,14 @@ import sys
 
 from django.core.management.base import NoArgsCommand, CommandError
 from django.template.defaultfilters import slugify
+from django.contrib.contenttypes.models import ContentType
 
 from django_date_extensions.fields import ApproximateDate
 
 from settings import IEBC_API_ID, IEBC_API_SECRET
 from optparse import make_option
 
-from core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
+from core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind, SlugRedirect
 
 from iebc_api import *
 
@@ -156,6 +157,13 @@ def remove_duplicate_candidates_for_place(place_name,
                         other_position.delete()
                     if other_person.created < before_import_date:
                         print "!! Would be deleting a person %s (%d) created before our first import: %s" % (other_person, other_person.id, other_person.created)
+                    # Create a redirect from the old slug:
+                    sr = SlugRedirect(content_type=ContentType.objects.get_for_model(Person),
+                                      old_object_slug=other_person.slug,
+                                      new_object_id=real_person_position.person.id,
+                                      new_object=real_person_position.person)
+                    maybe_save(sr, **options)
+                    # Then finally delete the person:
                     if options['commit']:
                         other_person.delete()
 
@@ -165,6 +173,7 @@ class Command(NoArgsCommand):
 
     option_list = NoArgsCommand.option_list + (
         make_option('--commit', action='store_true', dest='commit', help='Actually update the database'),
+        make_option('--only-place', dest='place', help='Only remove duplicates for particular places matching this name'),
         )
 
     def handle_noargs(self, **options):
@@ -204,6 +213,9 @@ class Command(NoArgsCommand):
                         print "Multiple contest types found for %s: %s" % (place_name, distinct_contest_types)
                     contest_type = iter(distinct_contest_types).next()
                     place_kind, session, title, race_type = known_race_type_mapping[contest_type]
+
+                    if options['place'] and options['place'].lower() != place_name.lower():
+                        continue
 
                     remove_duplicate_candidates_for_place(place_name,
                                                           place_kind,

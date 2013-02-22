@@ -16,6 +16,7 @@ from django.views.generic import ListView, DetailView
 from django.core.cache import cache
 from django.conf import settings
 from django.http import Http404
+from django.contrib.contenttypes.models import ContentType
 
 from mzalendo.core import models
 from mzalendo.helpers import geocode
@@ -49,11 +50,18 @@ def organisation_list(request):
     )
 
 def person(request, slug):
-    return object_detail(
-        request,
-        queryset = models.Person.objects,
-        slug     = slug,
-    )
+    # Check if this is old slug for redirection:
+    try:
+        sr = models.SlugRedirect.objects.get(content_type=ContentType.objects.get_for_model(models.Person),
+                                             old_object_slug=slug)
+        return redirect(sr.new_object)
+    # Otherwise look up the slug as normal:
+    except models.SlugRedirect.DoesNotExist:
+        return object_detail(
+                request,
+                queryset = models.Person.objects,
+                slug     = slug,
+        )
 
 def person_sub_page(request, slug, sub_page):
     return object_detail(

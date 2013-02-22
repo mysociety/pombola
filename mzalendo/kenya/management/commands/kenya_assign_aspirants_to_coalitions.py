@@ -54,6 +54,7 @@ class Command(BaseCommand):
         'TNA':  'jubilee', # The National Alliance (TNA)
         'URP':  'jubilee', # United Republican Party (URP)
         'NARC': 'jubilee', # National Rainbow Coalition
+        'RC':   'jubilee', # Republican Congress Party of Kenya
 
         # not in any coalition
         'adp': '', # Allied Democratic Party of Kenya
