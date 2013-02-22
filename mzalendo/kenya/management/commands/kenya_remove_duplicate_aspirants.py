@@ -17,13 +17,14 @@ import sys
 
 from django.core.management.base import NoArgsCommand, CommandError
 from django.template.defaultfilters import slugify
+from django.contrib.contenttypes.models import ContentType
 
 from django_date_extensions.fields import ApproximateDate
 
 from settings import IEBC_API_ID, IEBC_API_SECRET
 from optparse import make_option
 
-from core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
+from core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind, SlugRedirect
 
 from iebc_api import *
 
@@ -156,6 +157,13 @@ def remove_duplicate_candidates_for_place(place_name,
                         other_position.delete()
                     if other_person.created < before_import_date:
                         print "!! Would be deleting a person %s (%d) created before our first import: %s" % (other_person, other_person.id, other_person.created)
+                    # Create a redirect from the old slug:
+                    sr = SlugRedirect(content_type=ContentType.objects.get_for_model(Person),
+                                      old_object_slug=other_person.slug,
+                                      new_object_id=real_person_position.person.id,
+                                      new_object=real_person_position.person)
+                    maybe_save(sr, **options)
+                    # Then finally delete the person:
                     if options['commit']:
                         other_person.delete()
 
