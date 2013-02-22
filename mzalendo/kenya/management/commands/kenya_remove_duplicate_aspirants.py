@@ -165,6 +165,7 @@ class Command(NoArgsCommand):
 
     option_list = NoArgsCommand.option_list + (
         make_option('--commit', action='store_true', dest='commit', help='Actually update the database'),
+        make_option('--only-place', dest='place', help='Only remove duplicates for particular places matching this name'),
         )
 
     def handle_noargs(self, **options):
@@ -204,6 +205,9 @@ class Command(NoArgsCommand):
                         print "Multiple contest types found for %s: %s" % (place_name, distinct_contest_types)
                     contest_type = iter(distinct_contest_types).next()
                     place_kind, session, title, race_type = known_race_type_mapping[contest_type]
+
+                    if options['place'] and options['place'].lower() != place_name.lower():
+                        continue
 
                     remove_duplicate_candidates_for_place(place_name,
                                                           place_kind,
