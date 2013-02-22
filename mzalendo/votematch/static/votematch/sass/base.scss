@@ -221,6 +221,13 @@ form.quiz-form {
   }
 }
 
+$votematch-0: #9BCC50;
+$votematch-1: #F9D126;
+$votematch-2: #F9B526;
+$votematch-3: #F99326;
+$votematch-4: #F2352F;
+$votematch-x: #D3D3D3;
+
 .votematch {
   $votematch-bar-height: 3em;
   $votematch-name-width: 30%; // must be in percent
@@ -281,12 +288,12 @@ form.quiz-form {
   }
   
   .votematch-legend, .votematch-poll-spectrum {
-    .votematch-diff-0 { background-color: #9BCC50 }
-    .votematch-diff-1 { background-color: #F9D126 }
-    .votematch-diff-2 { background-color: #F9B526 }
-    .votematch-diff-3 { background-color: #F99326 }
-    .votematch-diff-4 { background-color: #F2352F }
-    .votematch-diff-x { background-color: #D3D3D3 }
+    .votematch-diff-0 { background-color: $votematch-0; }
+    .votematch-diff-1 { background-color: $votematch-1; }
+    .votematch-diff-2 { background-color: $votematch-2; }
+    .votematch-diff-3 { background-color: $votematch-3; }
+    .votematch-diff-4 { background-color: $votematch-4; }
+    .votematch-diff-x { background-color: $votematch-x; }
   }
   
   .votematch-poll-spectrum + .votematch-poll-spectrum {
