@@ -31,6 +31,7 @@
       <div id="party-result-{{ result.party.id }}" class="votematch-poll-spectrum">
 
 
+        {% comment %}
         <style type="text/css" media="screen">
 
           #party-result-{{ result.party.id }} .votematch-diff-0 {
@@ -76,6 +77,7 @@
           }
 
         </style>
+        {% endcomment %}
 
         <div class="votematch-party-name">
           <strong>{{ result.party.name }}</strong>
@@ -83,12 +85,12 @@
 
 
         <div class="votematch-spectrum">
-          <div class="votematch-spectrum-entry votematch-col-0"><div class="votematch-spectrum-bubble-holder"><div class="votematch-spectrum-bubble votematch-diff-0"></div></div></div>
-          <div class="votematch-spectrum-entry votematch-col-1"><div class="votematch-spectrum-bubble-holder"><div class="votematch-spectrum-bubble votematch-diff-1"></div></div></div>
-          <div class="votematch-spectrum-entry votematch-col-2"><div class="votematch-spectrum-bubble-holder"><div class="votematch-spectrum-bubble votematch-diff-2"></div></div></div>
-          <div class="votematch-spectrum-entry votematch-col-3"><div class="votematch-spectrum-bubble-holder"><div class="votematch-spectrum-bubble votematch-diff-3"></div></div></div>
-          <div class="votematch-spectrum-entry votematch-col-4"><div class="votematch-spectrum-bubble-holder"><div class="votematch-spectrum-bubble votematch-diff-4"></div></div></div>
-          <div class="votematch-spectrum-entry votematch-col-x"><div class="votematch-spectrum-bubble-holder"><div class="votematch-spectrum-bubble votematch-diff-x"></div></div></div>
+          <div class="votematch-spectrum-entry votematch-col-0"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.0 %}✔ {% endfor %}</div></div>
+          <div class="votematch-spectrum-entry votematch-col-1"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.1 %}✔ {% endfor %}</div></div>
+          <div class="votematch-spectrum-entry votematch-col-2"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.2 %}✔ {% endfor %}</div></div>
+          <div class="votematch-spectrum-entry votematch-col-3"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.3 %}✔ {% endfor %}</div></div>
+          <div class="votematch-spectrum-entry votematch-col-4"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.4 %}✔ {% endfor %}</div></div>
+          <div class="votematch-spectrum-entry votematch-col-x"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.x %}✔ {% endfor %}</div></div>
         </div>
 
 

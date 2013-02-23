@@ -112,9 +112,12 @@ def submission_detail (request, slug, token):
         # create the dimension and margins. Would that we could do this is the template.
         dimensions = {}
         margins    = {}
+        ranges     = {}
         for key, val in counts.items():
             dimensions[key] = 15 * val;
             margins[key] = dimensions[key] / 2.0;
+            ranges[key] = range(val)
+            print range(val)
         
         results.append({
             'score':       score,
@@ -124,6 +127,7 @@ def submission_detail (request, slug, token):
             'party':       party,
             'dimensions':  dimensions,
             'margins':     margins,
+            'ranges':      ranges,
         })
         
     # sort the results by the score. Lower score means better average match
