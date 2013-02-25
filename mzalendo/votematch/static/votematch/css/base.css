@@ -236,19 +236,32 @@ form.quiz-form .quiz-btn:hover {
   display: none;
 }
 
+.votematch .votematch-poll-spectrum + .votematch-poll-spectrum {
+  border-bottom: 1px solid #cccccc;
+}
 .votematch .votematch-poll-spectrum {
   clear: both;
   width: 100%;
-  border-bottom: 1px solid #cccccc;
+  border-top: 1px solid #cccccc;
+}
+@media (min-width: 640px) {
+  .votematch .votematch-poll-spectrum .votematch-party-name-wrapper {
+    float: left;
+    display: table;
+    width: 30%;
+    height: 4em;
+  }
+}
+.votematch .votematch-poll-spectrum .votematch-party-name {
+  font-weight: bold;
+  padding: 0.2em 0;
 }
 @media (min-width: 640px) {
   .votematch .votematch-poll-spectrum .votematch-party-name {
-    float: left;
-    padding: 0.5em 0;
-    height: 3em;
-    width: 30%;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
     overflow: hidden;
-    z-index: 100;
   }
 }
 @media (min-width: 640px) {
@@ -257,79 +270,57 @@ form.quiz-form .quiz-btn:hover {
     float: left;
   }
 }
-.votematch .votematch-poll-spectrum .votematch-spectrum-entry {
-  display: table;
+.votematch .votematch-poll-spectrum .score-bar-side {
+  width: 50%;
+  margin: 0.25em 0;
+  height: 3.5em;
+}
+.votematch .votematch-poll-spectrum .score-bar {
+  background-color: #ccc;
+  margin: 0.25em 0;
+  height: 3em;
+  min-width: 1px;
+}
+.votematch .votematch-poll-spectrum .score-side {
+  width: 50%;
+}
+.votematch .votematch-poll-spectrum .score {
+  font-size: 2em;
+  padding: 0.5em;
+}
+.votematch .votematch-poll-spectrum .positive .score-side {
   float: left;
-  width: 16%;
 }
-.votematch .votematch-poll-spectrum .votematch-spectrum-bubble-holder {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  width: 16%;
-  overflow: hidden;
-  height: 4em;
+.votematch .votematch-poll-spectrum .positive .score {
+  float: right;
 }
-.votematch .votematch-poll-spectrum .votematch-spectrum-bubble {
-  position: absolute;
-  display: inline-block;
-  border-radius: 50%;
-  padding: 2px;
-  border: 1px solid white;
+.votematch .votematch-poll-spectrum .positive .score-bar-side {
+  float: right;
 }
-.votematch .votematch-poll-spectrum .votematch-spectrum-legend {
-  display: table;
+.votematch .votematch-poll-spectrum .positive .score-bar {
   float: left;
-  width: 16%;
-  overflow: hidden;
-  height: 4em;
 }
-.votematch .votematch-poll-spectrum .votematch-spectrum-legend-entry {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  font-size: 80%;
-  margin: 0 auto;
+.votematch .votematch-poll-spectrum .positive .score-bar-side {
+  background-color: #d9eed9;
 }
-.votematch .votematch-poll-spectrum .votematch-col-0 {
-  background-color: #ebf4dc;
-  z-index: -2;
+.votematch .votematch-poll-spectrum .positive .score-bar {
+  background-color: #00cc00;
 }
-.votematch .votematch-poll-spectrum .votematch-col-1 {
-  background-color: #fdf5d3;
-  z-index: -2;
+.votematch .votematch-poll-spectrum .negative .score-side {
+  float: right;
 }
-.votematch .votematch-poll-spectrum .votematch-col-2 {
-  background-color: #fdf0d3;
-  z-index: -2;
+.votematch .votematch-poll-spectrum .negative .score {
+  float: left;
 }
-.votematch .votematch-poll-spectrum .votematch-col-3 {
-  background-color: #fde9d3;
-  z-index: -2;
+.votematch .votematch-poll-spectrum .negative .score-bar-side {
+  float: left;
 }
-.votematch .votematch-poll-spectrum .votematch-col-4 {
-  background-color: #fcd6d5;
-  z-index: -2;
+.votematch .votematch-poll-spectrum .negative .score-bar {
+  float: right;
 }
-.votematch .votematch-poll-spectrum .votematch-col-x {
-  background-color: #f6f6f6;
-  z-index: -2;
+.votematch .votematch-poll-spectrum .negative .score-bar-side {
+  background-color: #efd9d9;
 }
-.votematch .votematch-poll-spectrum .votematch-diff-0 {
-  background-color: #9bcc50;
-}
-.votematch .votematch-poll-spectrum .votematch-diff-1 {
-  background-color: #f9d126;
-}
-.votematch .votematch-poll-spectrum .votematch-diff-2 {
-  background-color: #f9b526;
-}
-.votematch .votematch-poll-spectrum .votematch-diff-3 {
-  background-color: #f99326;
-}
-.votematch .votematch-poll-spectrum .votematch-diff-4 {
-  background-color: #f2352f;
-}
-.votematch .votematch-poll-spectrum .votematch-diff-x {
-  background-color: lightgrey;
+.votematch .votematch-poll-spectrum .negative .score-bar {
+  background-color: #dd0000;
 }

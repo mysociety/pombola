@@ -68,6 +68,25 @@ def quiz_detail (request, slug):
     )
     
 
+
+# Mapping of the difference to the scores. This is to allow us to compare the
+# stances from the party and the user.
+#
+# Attempts to create a score that mixes the size of the disagreement with the
+# strength of the stance. Hence if either party are neutral the score is zero,
+# if either party holds a feling the score scales up to a maximum of +-9.
+#
+# Done as a nested hash for now with the structure:
+#   hash[party_stance][user stance]
+#
+stance_to_score_mapping = {
+       -2:     { -2:  9,  -1:  3,  0: 0,  1: -3,  2: -9 },
+       -1:     { -2:  4,  -1:  2,  0: 0,  1: -2,  2: -4 },
+        0:     { -2:  0,  -1:  0,  0: 0,  1:  0,  2:  0 },
+        1:     { -2: -4,  -1: -2,  0: 0,  1:  2,  2:  4 },
+        2:     { -2: -9,  -1: -3,  0: 0,  1:  3,  2:  9 },
+}
+
 def submission_detail (request, slug, token):
 
     # TODO - we're not checking that the quiz slug is correct. We don't really
@@ -82,56 +101,34 @@ def submission_detail (request, slug, token):
 
     results = []
     for party in quiz.party_set.all():
+        total_score = 0
 
-        differences = { 0:0, 1:0, 2:0, 3:0, 4:0, 'x':0 }
-        counts      = { 0:0, 1:0, 2:0, 3:0, 4:0, 'x':0 }
-        statement_count  = quiz.statement_set.count()
-        difference_count = 0
-        difference_total = 0
-        percent_per_diff = 100.0 / statement_count
         for statement in quiz.statement_set.all():
-            
-            # calculate difference between the answer and stance
             try:
                 answer = submission.answer_set.get(statement=statement)
                 stance = party.stance_set.get(statement=statement)
-                diff = abs( answer.agreement - stance.agreement)
-                difference_count += 1
-                difference_total += diff ** 1.5  # make bigger differences count more
-                differences[diff] += percent_per_diff
-                counts[diff] += 1
+                score = stance_to_score_mapping[stance.agreement][answer.agreement]
+                total_score += score
             except ObjectDoesNotExist:
-                differences['x'] += percent_per_diff
-                counts['x'] += 1
+                # One of the stances is missing. no change to score.
+                total_score += 0
 
-        if difference_count:
-            score = difference_total / float(difference_count)
-        else:
-            score = 0
-        
-        # create the dimension and margins. Would that we could do this is the template.
-        dimensions = {}
-        margins    = {}
-        ranges     = {}
-        for key, val in counts.items():
-            dimensions[key] = 15 * val;
-            margins[key] = dimensions[key] / 2.0;
-            ranges[key] = range(val)
-            print range(val)
-        
         results.append({
-            'score':       score,
-            'sort_score':  score or 1000000,
-            'differences': differences,
-            'counts':      counts,
-            'party':       party,
-            'dimensions':  dimensions,
-            'margins':     margins,
-            'ranges':      ranges,
+            'score':          total_score,
+            'party':          party,
         })
-        
+
+    # Useful for manually testing different scores.
+    # results[0]['score'] = 4
+    # results[1]['score'] = 0
+
     # sort the results by the score. Lower score means better average match
-    results.sort(key=lambda x: x['sort_score'])
+    results.sort(key=lambda x: -x['score'])
+
+    # get the max abs(score), and for each result store the percentage of it
+    max_score = max( [abs(x['score']) for x in results] )
+    for result in results:
+        result['score_percentage'] = abs(result['score']) / float(max_score) * 100
 
     return render_to_response(
        'votematch/submission_detail.html',

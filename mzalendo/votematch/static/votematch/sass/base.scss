@@ -138,8 +138,10 @@ form.quiz-form {
   }
 }
 
+$votematch-quiz-resuls-background-color: #f2f2f2;
+
 .quiz-results{
-  background: #f2f2f2;
+  background: $votematch-quiz-resuls-background-color;
   overflow: hidden;
   padding: 20px;
   h2, h3 {
@@ -221,34 +223,39 @@ form.quiz-form {
   }
 }
 
-$votematch-0: #9BCC50;
-$votematch-1: #F9D126;
-$votematch-2: #F9B526;
-$votematch-3: #F99326;
-$votematch-4: #F2352F;
-$votematch-x: #D3D3D3;
-
 .votematch {
   $votematch-bar-height: 4em;
   $votematch-name-width: 30%; // must be in percent
   $votematch-spectrum-col-width: 16%;
   
+  .votematch-poll-spectrum + .votematch-poll-spectrum {
+    border-bottom: 1px solid #ccc;
+  }
+
   .votematch-poll-spectrum {
     @extend .clearfix;
     clear: both;
     width: 100%;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
     
   
-    .votematch-party-name {
+    .votematch-party-name-wrapper {
       @media (min-width: 640px) {
         float: left;
-        padding: 0.5em 0;
-        height: $votematch-bar-height - 1em;
+        display: table;
         width: $votematch-name-width;
-        overflow: hidden;
-        z-index: 100;
+        height: $votematch-bar-height;
       }
+    }
+    .votematch-party-name {
+      font-weight: bold;
+      padding: 0.2em 0;
+      @media (min-width: 640px) {
+        display: table-cell; 
+        vertical-align: middle; 
+        text-align: left;
+        overflow: hidden;
+      }        
     }
   
     .votematch-spectrum {
@@ -258,61 +265,61 @@ $votematch-x: #D3D3D3;
       }
     }
   
-    .votematch-spectrum-entry {
-      display: table; 
-      float: left;
-      width: $votematch-spectrum-col-width;
+    .score-bar-side {
+      width: 50%;
+      margin: 0.25em 0;
+      height: $votematch-bar-height - 0.5em;
+    }    
+    .score-bar {
+      background-color: #ccc;
+      margin: 0.25em 0;
+      height: $votematch-bar-height - 1em;
+      min-width: 1px;  // so that zero width still visible
     }
-
-    .votematch-spectrum-bubble-holder {
-      display: table-cell; 
-      vertical-align: middle; 
-      text-align: center;
-      width: $votematch-spectrum-col-width;
-      overflow: hidden;
-      height: $votematch-bar-height;
-    }
-
-    .votematch-spectrum-bubble {
-      position: absolute;
-      display: inline-block;
-      border-radius: 50%;
-      padding: 2px;  // so that zero width still visible
-      border: 1px solid #fff;
-    }
-
-    .votematch-spectrum-legend {
-      display: table; 
-      float: left;
-      width: $votematch-spectrum-col-width;
-      overflow: hidden;
-      height: $votematch-bar-height;
-    }
-
-    .votematch-spectrum-legend-entry {
-      display: table-cell; 
-      vertical-align: middle; 
-      text-align: center;
-      font-size: 80%;
-      margin: 0 auto;
-    }
-
-  }
-  
-  .votematch-poll-spectrum {
-    .votematch-col-0 { background-color: mix($votematch-0, white, 20%); z-index: -2; }
-    .votematch-col-1 { background-color: mix($votematch-1, white, 20%); z-index: -2; }
-    .votematch-col-2 { background-color: mix($votematch-2, white, 20%); z-index: -2; }
-    .votematch-col-3 { background-color: mix($votematch-3, white, 20%); z-index: -2; }
-    .votematch-col-4 { background-color: mix($votematch-4, white, 20%); z-index: -2; }
-    .votematch-col-x { background-color: mix($votematch-x, white, 20%); z-index: -2; }
-
-    .votematch-diff-0 { background-color: $votematch-0; }
-    .votematch-diff-1 { background-color: $votematch-1; }
-    .votematch-diff-2 { background-color: $votematch-2; }
-    .votematch-diff-3 { background-color: $votematch-3; }
-    .votematch-diff-4 { background-color: $votematch-4; }
-    .votematch-diff-x { background-color: $votematch-x; }
-  }
     
+    .score-side {
+      width: 50%;
+    }    
+    .score {
+      font-size: 2em;
+      padding: 0.5em;
+    }
+
+    $votematch-positive-colour: #0c0;
+    $votematch-negative-colour: #d00;
+  
+    .positive {
+      // positioning
+      .score-side     { float: left;  }
+      .score          { float: right; }
+      .score-bar-side { float: right; }
+      .score-bar      { float: left;  }
+
+      //colours
+      .score-bar-side {
+        background-color: mix($votematch-positive-colour, $votematch-quiz-resuls-background-color, 10% );
+      }
+      .score-bar { background-color: $votematch-positive-colour; }
+      
+      
+    }
+    .negative {
+      // positioning
+      .score-side     { float: right; }
+      .score          { float: left;  }
+      .score-bar-side { float: left;  }
+      .score-bar      { float: right; }
+
+      //colours
+      .score-bar-side {
+        background-color: mix($votematch-negative-colour, $votematch-quiz-resuls-background-color, 10% );
+      }
+      .score-bar { background-color: $votematch-negative-colour; }
+      
+    }
+    
+  
+  
+  }
+      
 }

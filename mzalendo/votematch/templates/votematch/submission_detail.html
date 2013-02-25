@@ -10,137 +10,48 @@
 
   <div class="quiz-results votematch">
 
-      <h2>Results (best match first)</h2>
+      <h2>Your Results</h2>
 
-      <div class="votematch-poll-spectrum">
-        <div class="votematch-party-name"></div>
-        <div class="votematch-spectrum">
-          <div class="votematch-spectrum-legend votematch-col-0"><div class="votematch-spectrum-legend-entry">Agrees with you</div></div>
-          <div class="votematch-spectrum-legend votematch-col-1"><div class="votematch-spectrum-legend-entry">&hellip;</div></div>
-          <div class="votematch-spectrum-legend votematch-col-2"><div class="votematch-spectrum-legend-entry">&hellip;</div></div>
-          <div class="votematch-spectrum-legend votematch-col-3"><div class="votematch-spectrum-legend-entry">&hellip;</div></div>
-          <div class="votematch-spectrum-legend votematch-col-4"><div class="votematch-spectrum-legend-entry">Completely disagrees with you</div></div>
-          <div class="votematch-spectrum-legend votematch-col-x"><div class="votematch-spectrum-legend-entry">(no data)</div></div>
-        </div>
-      </div>
+      <p>
+        Based on you answers and those we have for the parties we've calculated
+        a score for each party. The higher the score the more you agree.
+      </p>
 
-  
       {% for result in results %}
-
-
       <div id="party-result-{{ result.party.id }}" class="votematch-poll-spectrum">
-
-
-        {% comment %}
-        <style type="text/css" media="screen">
-
-          #party-result-{{ result.party.id }} .votematch-diff-0 {
-            width:  {{ result.dimensions.0 }}px;
-            height: {{ result.dimensions.0 }}px;
-            margin-top:  -{{ result.margins.0 }}px;
-            margin-left: -{{ result.margins.0 }}px;
-          }
-
-          #party-result-{{ result.party.id }} .votematch-diff-1 {
-            width:  {{ result.dimensions.1 }}px;
-            height: {{ result.dimensions.1 }}px;
-            margin-top:  -{{ result.margins.1 }}px;
-            margin-left: -{{ result.margins.1 }}px;
-          }
-
-          #party-result-{{ result.party.id }} .votematch-diff-2 {
-            width:  {{ result.dimensions.2 }}px;
-            height: {{ result.dimensions.2 }}px;
-            margin-top:  -{{ result.margins.2 }}px;
-            margin-left: -{{ result.margins.2 }}px;
-          }
-
-          #party-result-{{ result.party.id }} .votematch-diff-3 {
-            width:  {{ result.dimensions.3 }}px;
-            height: {{ result.dimensions.3 }}px;
-            margin-top:  -{{ result.margins.3 }}px;
-            margin-left: -{{ result.margins.3 }}px;
-          }
-
-          #party-result-{{ result.party.id }} .votematch-diff-4 {
-            width:  {{ result.dimensions.4 }}px;
-            height: {{ result.dimensions.4 }}px;
-            margin-top:  -{{ result.margins.4 }}px;
-            margin-left: -{{ result.margins.4 }}px;
-          }
-
-          #party-result-{{ result.party.id }} .votematch-diff-x {
-            width:  {{ result.dimensions.x }}px;
-            height: {{ result.dimensions.x }}px;
-            margin-top:  -{{ result.margins.x }}px;
-            margin-left: -{{ result.margins.x }}px;
-          }
-
-        </style>
-        {% endcomment %}
-
-        <div class="votematch-party-name">
-          <strong>{{ result.party.name }}</strong>
+        <div class="votematch-party-name-wrapper">
+          <div class="votematch-party-name">
+            {{ result.party.name }}
+          </div>
         </div>
+        
+        <div class="votematch-spectrum {% if result.score >= 0 %}positive{% else %}negative{% endif %}">
 
+          <div class="score-bar-side">
+            <div class="score-bar" style="width: {{ result.score_percentage }}%;"></div>            
+          </div>
 
-        <div class="votematch-spectrum">
-          <div class="votematch-spectrum-entry votematch-col-0"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.0 %}✔ {% endfor %}</div></div>
-          <div class="votematch-spectrum-entry votematch-col-1"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.1 %}✔ {% endfor %}</div></div>
-          <div class="votematch-spectrum-entry votematch-col-2"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.2 %}✔ {% endfor %}</div></div>
-          <div class="votematch-spectrum-entry votematch-col-3"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.3 %}✔ {% endfor %}</div></div>
-          <div class="votematch-spectrum-entry votematch-col-4"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.4 %}✔ {% endfor %}</div></div>
-          <div class="votematch-spectrum-entry votematch-col-x"><div class="votematch-spectrum-bubble-holder">{% for i in result.ranges.x %}✔ {% endfor %}</div></div>
+          <div class="score-side">
+            <div class="score">{{ result.score }}</div>
+          </div>
+          
         </div>
-
-
+        
       </div>
       {% endfor %}
 
-
-      {% comment %}
-      <h3>This result is closest to</h3>
-  
-      <ol class="candidate-pref">
-          <li>
-              <a href="#">
-              <img src="http://dummyimage.com/200x300">
-              <h4>The name of candidate</h4>
-              </a>
-          </li>
-          <li>
-              <a href="#">
-              <img src="http://dummyimage.com/200x300">
-              <h4>The name of candidate</h4>
-              </a>
-          </li>
-          <li>
-              <a href="#">
-              <img src="http://dummyimage.com/200x300">
-              <h4>The name of candidate</h4>
-              </a>
-          </li>
-          <li>
-              <a href="#">
-              <img src="http://dummyimage.com/200x300">
-              <h4>The name of candidate</h4>
-              </a>
-          </li>
-      </ol>
-      {% endcomment %}
-  
-  
       <ul class="quiz-actions">
           <li class="play-again">
             <a href="{% url votematch-quiz slug=quiz.slug %}">Play Again</a>
           </li>
           <li class="share-facebook">
-            <a  href="https://www.facebook.com/sharer/sharer.php?u=http://kenya.mzalendo.dev.mysociety.org/votematch/us-presidency-2012/993146d4/&amp;t=" target="_blank">Share on Facebook</a>
+            <a  href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">Share on Facebook</a>
           </li>
           <li class="share-twitter">
-            <a  href="https://twitter.com/share?via=MzalendoWatch&amp;text=&amp;url=http://kenya.mzalendo.dev.mysociety.org/votematch/us-presidency-2012/993146d4/" target="_blank">Share on Twitter</a>
+            <a  href="https://twitter.com/share?via=MzalendoWatch&amp;text=&amp;url={{ request.build_absolute_uri }}" target="_blank">Share on Twitter</a>
           </li>
-        </ul>
+      </ul>
+
     </div>
 
     <p><small><a href="/votematch/scoring/">How scoring is calculated</a></small></p>
