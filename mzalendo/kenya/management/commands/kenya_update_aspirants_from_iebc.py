@@ -29,6 +29,8 @@ from iebc_api import *
 
 before_import_date = datetime.date(2013, 2, 7)
 
+future_approximate_date = ApproximateDate(future=True)
+
 data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
 
 # Calling these 'corrections' may not be quite right.  There are
@@ -137,8 +139,9 @@ def update_parties(person, api_party, **options):
     for party_position in (p for p in current_party_positions if p.organisation == mz_party):
         # If there's a current position in this party, that's fine
         # - just make sure that the end_date is 'future':
-        party_position.end_date = ApproximateDate(future=True)
-        maybe_save(party_position, **options)
+        if party_position.end_date != future_approximate_date:
+            party_position.end_date = future_approximate_date
+            maybe_save(party_position, **options)
         need_to_create_party_position = False
     for party_position in (p for p in current_party_positions if p.organisation != mz_party):
         # These shouldn't be current any more - end them when we
