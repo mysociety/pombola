@@ -1513,19 +1513,6 @@ menu#site-user-tools ul li.active a:hover {
     margin: 0;
     border: 0;
   }
-  #page .small-container ul.scorecard li article.has-details:hover {
-    cursor: pointer;
-    background-color: #e6e6e6;
-  }
-  #page .small-container ul.scorecard li article.has-details.active {
-    background-color: #e6e6e6;
-  }
-  #page .small-container ul.scorecard li article.has-details.active header {
-    background: url(../images/arrow-up.png) right 0 no-repeat;
-  }
-  #page .small-container ul.scorecard li article.has-details header {
-    background: url(../images/arrow-down.png) right 0 no-repeat;
-  }
   #page .small-container ul.scorecard li article header {
     overflow: hidden;
   }
