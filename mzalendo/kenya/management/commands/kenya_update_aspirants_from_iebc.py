@@ -157,7 +157,7 @@ def update_parties(person, api_party, **options):
                                 category='political',
                                 person=person,
                                 start_date=today_approximate_date,
-                                end_date=ApproximateDate(future=True))
+                                end_date=future_approximate_date)
         print >> sys.stderr, "* Creating a party position that needs to exist: %s should be in %s" % (person, mz_party)
         maybe_save(new_position, **options)
 
@@ -267,7 +267,7 @@ def update_candidates_for_place(place_name,
         else:
             # Then we have to create a new position:
             new_position = Position(start_date=today_approximate_date,
-                                    end_date=ApproximateDate(future=True),
+                                    end_date=future_approximate_date,
                                     **aspirant_position_properties)
             print >> sys.stderr, "* Creating a missing position: %s" % (new_position,)
             maybe_save(new_position, **options)
