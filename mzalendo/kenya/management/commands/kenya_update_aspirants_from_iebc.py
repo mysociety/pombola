@@ -29,6 +29,8 @@ from iebc_api import *
 
 before_import_date = datetime.date(2013, 2, 7)
 
+future_approximate_date = ApproximateDate(future=True)
+
 data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
 
 # Calling these 'corrections' may not be quite right.  There are
@@ -68,6 +70,7 @@ def get_matching_party(party_name, **options):
                                  started=ApproximateDate(datetime.date.today().year),
                                  ended=None,
                                  kind=OrganisationKind.objects.get(slug='party'))
+        print >> sys.stderr, "* Creating a new party because none matched '%s'" % (party_name_to_use,)
         maybe_save(new_party, **options)
         return new_party
     elif len(matching_parties) == 1:
@@ -137,13 +140,16 @@ def update_parties(person, api_party, **options):
     for party_position in (p for p in current_party_positions if p.organisation == mz_party):
         # If there's a current position in this party, that's fine
         # - just make sure that the end_date is 'future':
-        party_position.end_date = ApproximateDate(future=True)
-        maybe_save(party_position, **options)
+        if party_position.end_date != future_approximate_date:
+            party_position.end_date = future_approximate_date
+            print >> sys.stderr, "* Setting a party position end_date to 'future' for %s in %s" % (person, api_party)
+            maybe_save(party_position, **options)
         need_to_create_party_position = False
     for party_position in (p for p in current_party_positions if p.organisation != mz_party):
         # These shouldn't be current any more - end them when we
         # got the new data:
         party_position.end_date = yesterday_approximate_date
+        print >> sys.stderr, "* Ending a party position yesterday for %s: no longer in %s" % (person, party_position.organisation)
         maybe_save(party_position, **options)
     if need_to_create_party_position:
         new_position = Position(title=PositionTitle.objects.get(name='Member'),
@@ -151,7 +157,8 @@ def update_parties(person, api_party, **options):
                                 category='political',
                                 person=person,
                                 start_date=today_approximate_date,
-                                end_date=ApproximateDate(future=True))
+                                end_date=future_approximate_date)
+        print >> sys.stderr, "* Creating a party position that needs to exist: %s should be in %s" % (person, mz_party)
         maybe_save(new_position, **options)
 
 def update_candidates_for_place(place_name,
@@ -193,11 +200,9 @@ def update_candidates_for_place(place_name,
 
     for code in new_candidates_to_add:
         candidate = code_to_current_candidates[code]
-        print "  would add:", full_name(candidate)
         first_names = normalize_name(candidate['other_name'] or '')
         surname = normalize_name(candidate['surname'] or '')
         person = get_person_from_names(first_names, surname)
-        print "  returned person is:", person
         # If that person was an existing current aspirant, they'll
         # just need to have the IEBC candidate code set:
         iebc_code_just_needed_setting = False
@@ -214,8 +219,8 @@ def update_candidates_for_place(place_name,
                     # raise Exception, message
                     print message
             else:
-                print "  setting a missing IEBC code on", matching_existing_aspirant_position
                 matching_existing_aspirant_position.external_id = code
+                print >> sys.stderr, "* The IEBC code was missing for %s" % (matching_existing_aspirant_position,)
                 maybe_save(matching_existing_aspirant_position, **options)
                 update_parties(person, candidate['party'], **options)
                 iebc_code_just_needed_setting = True
@@ -233,6 +238,7 @@ def update_candidates_for_place(place_name,
                 all_updates_succeeded = False
                 continue
         if not person:
+            print >> sys.stderr, "* Creating a person because none matched %s %s" % (first_names, surname)
             person = make_new_person(candidate, **options)
 
         assert(person)
@@ -253,21 +259,24 @@ def update_candidates_for_place(place_name,
             # If it does, make sure that the IEBC code is set in
             # external_id, and that the end_date is 'future':
             for existing_matching_aspirant_position in existing_matching_aspirant_positions:
-                existing_matching_aspirant_position.external_id = code
-                existing_matching_aspirant_position.end_date = ApproximateDate(future=True)
-                maybe_save(existing_matching_aspirant_position, **options)
+                if existing_matching_aspirant_position.external_id != code or existing_matching_aspirant_position.end_date != future_approximate_date:
+                    print >> sys.stderr, "* Need to set either the IEBC code or the end date (future) for %s" % (existing_matching_aspirant_position,)
+                    existing_matching_aspirant_position.external_id = code
+                    existing_matching_aspirant_position.end_date = future_approximate_date
+                    maybe_save(existing_matching_aspirant_position, **options)
         else:
             # Then we have to create a new position:
             new_position = Position(start_date=today_approximate_date,
-                                    end_date=ApproximateDate(future=True),
+                                    end_date=future_approximate_date,
                                     **aspirant_position_properties)
+            print >> sys.stderr, "* Creating a missing position: %s" % (new_position,)
             maybe_save(new_position, **options)
 
     # For those aspirants that are no longer current, end their aspirant position:
 
     for code in existing_aspirants_to_remove:
         existing_aspirant_to_remove = code_to_existing_aspirant[code]
-        print "  would end aspirant position:", existing_aspirant_to_remove.person.legal_name, "(position id: %s)" % (existing_aspirant_to_remove,)
+        print >> sys.stderr, "* Removing a no longer current aspirant: %s (position id: %s)" % (existing_aspirant_to_remove, existing_aspirant_to_remove.id,)
         existing_aspirant_to_remove.end_date = yesterday_approximate_date
         maybe_save(existing_aspirant_to_remove, **options)
 
@@ -330,7 +339,7 @@ class Command(NoArgsCommand):
         # To get all the candidates, we iterate over each county,
         # constituency and ward, and request the candidates for each.
 
-        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-22')
+        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-25')
 
         mkdir_p(cache_directory)
 

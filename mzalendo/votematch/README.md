@@ -44,3 +44,8 @@ The submission token is a random string. Collisions should be handled gracefully
 if they occur.
 
 The admin is currently very simple - should add filters etc.
+
+It would be nice to put the statements into categories. There is styling in the
+templates to display this nicely, but it is no implemented in the data model
+yet.
+
