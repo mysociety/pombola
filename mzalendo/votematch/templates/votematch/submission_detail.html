@@ -21,7 +21,11 @@
       <div id="party-result-{{ result.party.id }}" class="votematch-poll-spectrum">
         <div class="votematch-party-name-wrapper">
           <div class="votematch-party-name">
-            {{ result.party.name }}
+            {% if result.party.url %}
+              <a href="{{ result.party.url }}">{{ result.party.name }}</a>
+            {% else %}
+              {{ result.party.name }}
+            {% endif %}
           </div>
         </div>
         
