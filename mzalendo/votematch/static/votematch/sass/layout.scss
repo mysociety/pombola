@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+form.quiz-form {
+	ul.plain {
+		> li {
+			min-height: 70px;
+		}
+		h3 {
+			margin-right: 320px;
+		}
+	}
+	ul.check-list {
+	position: absolute;
+	right: 0;
+	}
+	.quiz-key {
+	    float: right;
+	    clear: both;
+	}
+}
+
+.quiz-results {
+	.quiz-actions {
+		li {
+			width: auto;
+			float: right;
+	        &.play-again {
+		        float: left;
+		    }
+		}
+	}
+	.candidate-pref {
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+		img{
+			display: inline;
+			margin: 5px;
+		}
+		li {
+			text-align: center;
+			padding: 0;
+			margin: 0;
+			width: 25%;
+			list-style: none;
+			float: left;
+		}
+	}
+}

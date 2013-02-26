@@ -1,0 +1,40 @@
+@charset "UTF-8";
+form.quiz-form ul.plain > li {
+  min-height: 70px;
+}
+form.quiz-form ul.plain h3 {
+  margin-right: 320px;
+}
+form.quiz-form ul.check-list {
+  position: absolute;
+  right: 0;
+}
+form.quiz-form .quiz-key {
+  float: right;
+  clear: both;
+}
+
+.quiz-results .quiz-actions li {
+  width: auto;
+  float: right;
+}
+.quiz-results .quiz-actions li.play-again {
+  float: left;
+}
+.quiz-results .candidate-pref {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.quiz-results .candidate-pref img {
+  display: inline;
+  margin: 5px;
+}
+.quiz-results .candidate-pref li {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  width: 25%;
+  list-style: none;
+  float: left;
+}

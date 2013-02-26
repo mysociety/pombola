@@ -1,0 +1,325 @@
+@charset "UTF-8";
+
+@import "compass/css3";
+
+// Clearfix
+.clearfix { zoom: 1; }
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after { clear: both; }
+
+ul.plain {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}
+
+
+form.quiz-form {
+  fieldset{
+    position: relative;
+    border: 0;
+    padding: 0;
+    margin-bottom: 40px;
+    &.footer{
+      background: #f2f2f2;
+      padding: 20px;
+      margin-bottom: 10px;
+      legend {
+        background: none;
+        padding: 0;
+        margin-top: 0;
+        float: left;
+        color: #777;
+        width: 100%;
+      }
+    }
+  }  
+  legend {
+    display: block;
+    width: 96%;
+    margin-bottom: 20px;
+    background: #ddd;
+    position: relative;
+    font-weight: bold;
+    padding: 10px 2%;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  ul.plain > li {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+    width: 100%;
+    h3 {
+      font-size:18px;
+      clear: both;
+      float: left;
+      background: none !important;
+      border-top: none !important;
+
+    }
+    &:last-child {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;                                      
+    }
+  }
+  ul.check-list {
+    padding: 0;
+    list-style: none;
+    width: 310px;
+    margin: 0 auto;
+    clear: both;
+    li {
+      float: left;
+      text-align: center;
+      padding: 0 10px;
+    }
+    label span{ 
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      display: block;
+      background: url(../images/quiz-smileys.png) no-repeat;
+      text-indent: -999999px;
+    }
+    .ans-strongly-agree     {background-position: -202px -52px;}
+    .ans-agree              {background-position: -152px -52px;}
+    .ans-neutral            {background-position: -101px -52px;}
+    .ans-disagree           {background-position: -51px -52px;}
+    .ans-strongly-disagree  {background-position: -1px -52px;}
+
+    label.active {
+    .ans-strongly-agree     {background-position: -202px -1px;}
+    .ans-agree              {background-position: -152px -1px;}
+    .ans-neutral            {background-position: -101px -1px;}
+    .ans-disagree           {background-position: -51px -1px;}
+    .ans-strongly-disagree  {background-position: -1px -1px;}
+    }
+  }
+  ul.quiz-key {
+    padding:0;
+    width: 310px;
+    margin: 0 auto;
+    li {
+      list-style: none;
+      float: left;
+      width: 52px;
+      padding: 5px;
+      font-size: 9px;
+      color: #555;
+      text-transform: uppercase;
+      font-weight: bold;
+      line-height: 1;
+      text-align: center;
+    }
+    
+  }
+  .quiz-btn {
+    float: right;
+    color: #fff;
+    background: #00c25c;
+    border: 0;
+    font-size: 18px;
+    font-weight:bold;
+    padding: 15px;
+    text-transform: uppercase;    
+    &:hover {
+      background: #009245;
+      cursor: pointer;
+    }
+  }
+}
+
+$votematch-quiz-resuls-background-color: #f2f2f2;
+
+.quiz-results{
+  background: $votematch-quiz-resuls-background-color;
+  overflow: hidden;
+  padding: 20px;
+  h2, h3 {
+    background: none !important;
+    padding: 0 !important;
+    border-top: 0 !important;
+  }
+  .poll-spectrum {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    height: 50px;
+    margin: 30px 0;
+    position: relative;
+    .bar {
+      position: absolute;
+      width: 30%;
+      right: 50%;
+      height: 30px;
+      background: green;
+    }
+    .left ,.right {
+      float: left;
+      margin-top: 45px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+
+    }
+    .right {float: right;}
+  }
+
+  .quiz-actions {
+    margin: 40px 0 0 0;
+    padding: 0;
+    clear: both;
+    width: 100%;
+    li {
+      list-style: none;
+      display: inline;
+      float: left;
+      width: 100%;
+      a {
+        font-weight: bold;
+        color: #fff;
+        font-size: 18px;
+        text-transform: uppercase;
+        display: block;
+        padding: 15px;
+        width: 100%;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+      &.play-again {
+        float: left;
+      }
+      &.share-facebook {
+        background: #3b5998;
+        &:hover {background: #133783}
+      }
+      &.share-twitter {
+        background: #33bcef;
+        margin-right: 10px;
+        &:hover {
+          background: #019ad2;
+        }
+      }
+      &.play-again {
+        background: #00c25c;
+        &:hover {
+          background: #009245;
+        }
+      }
+    }
+  }
+  .candidate-pref {
+    img {display: none;}
+  }
+}
+
+.votematch {
+  $votematch-bar-height: 4em;
+  $votematch-name-width: 30%; // must be in percent
+  $votematch-spectrum-col-width: 16%;
+  
+  .votematch-poll-spectrum + .votematch-poll-spectrum {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .votematch-poll-spectrum {
+    @extend .clearfix;
+    clear: both;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    
+  
+    .votematch-party-name-wrapper {
+      @media (min-width: 640px) {
+        float: left;
+        display: table;
+        width: $votematch-name-width;
+        height: $votematch-bar-height;
+      }
+    }
+    .votematch-party-name {
+      font-weight: bold;
+      padding: 0.2em 0;
+      @media (min-width: 640px) {
+        display: table-cell; 
+        vertical-align: middle; 
+        text-align: left;
+        overflow: hidden;
+      }        
+    }
+  
+    .votematch-spectrum {
+      @media (min-width: 640px) {
+        width: 100% - $votematch-name-width;
+        float: left;        
+      }
+    }
+  
+    .score-bar-side {
+      width: 50%;
+      margin: 0.25em 0;
+      height: $votematch-bar-height - 0.5em;
+    }    
+    .score-bar {
+      background-color: #ccc;
+      margin: 0.25em 0;
+      height: $votematch-bar-height - 1em;
+      min-width: 1px;  // so that zero width still visible
+    }
+    
+    .score-side {
+      width: 50%;
+    }    
+    .score {
+      font-size: 2em;
+      padding: 0.5em;
+    }
+
+    $votematch-positive-colour: #0c0;
+    $votematch-negative-colour: #d00;
+  
+    .positive {
+      // positioning
+      .score-side     { float: left;  }
+      .score          { float: right; }
+      .score-bar-side { float: right; }
+      .score-bar      { float: left;  }
+
+      //colours
+      .score-bar-side {
+        background-color: mix($votematch-positive-colour, $votematch-quiz-resuls-background-color, 10% );
+      }
+      .score-bar { background-color: $votematch-positive-colour; }
+      
+      
+    }
+    .negative {
+      // positioning
+      .score-side     { float: right; }
+      .score          { float: left;  }
+      .score-bar-side { float: left;  }
+      .score-bar      { float: right; }
+
+      //colours
+      .score-bar-side {
+        background-color: mix($votematch-negative-colour, $votematch-quiz-resuls-background-color, 10% );
+      }
+      .score-bar { background-color: $votematch-negative-colour; }
+      
+    }
+    
+  
+  
+  }
+      
+}
