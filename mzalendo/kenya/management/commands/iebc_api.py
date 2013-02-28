@@ -8,12 +8,16 @@ import os
 import re
 import requests
 import sys
+import time
 
 from django.template.defaultfilters import slugify
 
 from django_date_extensions.fields import ApproximateDate
 
 from core.models import Person, Place, PlaceKind, ParliamentarySession, Position, PositionTitle
+
+from django.core.files.base import ContentFile
+from images.models import Image
 
 iebc_base_url = 'http://api.iebc.or.ke'
 
@@ -37,6 +41,9 @@ def mkdir_p(path):
             pass
         else:
             raise
+
+def file_mtime_iso8601(filename):
+    return time.strftime('%Y-%m-%dT%H-%M-%S', time.localtime(os.path.getmtime(filename)))
 
 def make_api_token_url(app_id, api_key):
     """Create the URL that should be used for retrieving an API token"""
@@ -88,6 +95,40 @@ def get_data_with_cache(cache_filename, *args, **kwargs):
             with open(cache_filename, 'w') as fp:
                 json.dump(result, fp)
     return result
+
+# ------------------------------------------------------------------------
+
+def update_picture_for_candidate(candidate_data, cache_directory, **options):
+    picture_intro = 'Picture from the IEBC API for candidate'
+    candidate_code = candidate_data['code']
+    filename = os.path.join(cache_directory, "candidate-%s.jpg" % (candidate_code,))
+    if not os.path.exists(filename):
+        image_url = candidate_data['picture']
+        r = requests.get(image_url)
+        if r.status_code == 200:
+            with open(filename, 'w') as fp:
+                fp.write(r.content)
+    # If that image now exists, use it:
+    if os.path.exists(filename):
+        # Find the position from the candidate code, so we can get the right person:
+        positions = Position.objects.filter(external_id=candidate_code).currently_active()
+        if not positions:
+            print "#### Missing position for:", candidate_code
+        elif len(positions) > 1:
+            print "#### Multiple positions for:", candidate_code
+        else:
+            person = positions[0].person
+            if options['commit']:
+                # Remove old IEBC images for that person:
+                person.images.filter(source__startswith=picture_intro).delete()
+                # And now create the new one:
+                new_image = Image(
+                    content_object = person,
+                    source = "%s %s" % (picture_intro, candidate_code))
+                with open(filename) as fp:
+                    new_image.image.save(
+                        name = "%s-%s.jpg" % (candidate_code, file_mtime_iso8601(filename)),
+                        content = ContentFile(fp.read()))
 
 # ------------------------------------------------------------------------
 

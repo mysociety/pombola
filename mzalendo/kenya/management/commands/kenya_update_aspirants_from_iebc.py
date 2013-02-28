@@ -385,5 +385,9 @@ class Command(NoArgsCommand):
                     if not succeeded:
                         failed = True
 
+                    # Try to update the picture for each candidate:
+                    for candidate in candidates:
+                        update_picture_for_candidate(candidate, cache_directory, **options)
+
         if failed:
             print "Failed: you need to update", same_person_checker.csv_filename
