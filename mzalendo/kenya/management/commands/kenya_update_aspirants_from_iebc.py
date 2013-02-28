@@ -339,7 +339,7 @@ class Command(NoArgsCommand):
         # To get all the candidates, we iterate over each county,
         # constituency and ward, and request the candidates for each.
 
-        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-25')
+        cache_directory = os.path.join(data_directory, 'api-cache-2013-02-28')
 
         mkdir_p(cache_directory)
 
@@ -384,6 +384,10 @@ class Command(NoArgsCommand):
                                                             **options)
                     if not succeeded:
                         failed = True
+
+                    # Try to update the picture for each candidate:
+                    for candidate in candidates:
+                        update_picture_for_candidate(candidate, cache_directory, **options)
 
         if failed:
             print "Failed: you need to update", same_person_checker.csv_filename

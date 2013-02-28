@@ -88,7 +88,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 div.error {
-  border: 2px solid #f00;
+  border: 2px solid red;
   background-color: #fcc;
   text-align: center;
   font-size: 125%;
@@ -125,7 +125,7 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: none;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   color: #444;
   font-size: 100%;
   background: #e6e6e6;
@@ -1513,19 +1513,6 @@ menu#site-user-tools ul li.active a:hover {
     margin: 0;
     border: 0;
   }
-  #page .small-container ul.scorecard li article.has-details:hover {
-    cursor: pointer;
-    background-color: #e6e6e6;
-  }
-  #page .small-container ul.scorecard li article.has-details.active {
-    background-color: #e6e6e6;
-  }
-  #page .small-container ul.scorecard li article.has-details.active header {
-    background: url(../images/arrow-up.png) right 0 no-repeat;
-  }
-  #page .small-container ul.scorecard li article.has-details header {
-    background: url(../images/arrow-down.png) right 0 no-repeat;
-  }
   #page .small-container ul.scorecard li article header {
     overflow: hidden;
   }
@@ -2260,7 +2247,7 @@ ul.position-listing li {
   padding: 4px;
   min-height: 50px;
   list-style: none;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #bbbbbb;
 }
 ul.position-listing li:nth-child(odd) {
   background-color: #f4f4f4;
@@ -2493,7 +2480,7 @@ ul.scorecard li article header .details .source a {
   padding: 6px 10px;
   background: #F6F6F6;
   text-decoration: none;
-  border: 2px solid #F6F6F6;
+  border: 2px solid #f6f6f6;
 }
 .pagination a:hover,
 .pagination span:hover {
@@ -2524,7 +2511,7 @@ ul.scorecard li article header .details .source a {
 .pagination .current:hover {
   color: #444444;
   background: none;
-  border: 2px solid #F6F6F6;
+  border: 2px solid #f6f6f6;
 }
 
 #ajax_dialog_subcontent {

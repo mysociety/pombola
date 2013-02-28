@@ -158,17 +158,6 @@ $(function(){
 
   profileInfoHeightFix();
 
-  /*
-   * scorecard
-   */
-  // prep
-  $('div.details').hide();
-
-  // hide/show details
-  $('ul.scorecard article.has-details').live('click', function(){
-    hideShow($('div.details', $(this)), $(this));
-  });
-
   // /*
   //  * Comments: hover and show tools
   //  */

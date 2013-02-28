@@ -39,7 +39,7 @@
                 </header>
             </article>
             {% else %}
-                <article {% if entry.has_details %}class="has-details"{% endif %}>
+                <article>
                     <header>
                         <h4>{{ entry.category.name }}<a href="/info/scorecard-faq#{{ entry.category.slug }}" title="What's {{ entry.category.name }}?" class="btn-question">?</a></h4>
                         <p class="score-{{ entry.score_as_word }}">{{ entry.remark }}</p>

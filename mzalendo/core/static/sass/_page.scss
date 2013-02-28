@@ -193,16 +193,6 @@
         display: block;
         li {
           article {
-            &.has-details {
-              &:hover {
-                cursor: pointer;
-                background-color: $colour_muted; }
-              &.active {
-                background-color: $colour_muted;
-                header {
-                  background: url(../images/arrow-up.png) right 0 no-repeat; } }
-              header {
-                background: url(../images/arrow-down.png) right 0 no-repeat; } }
             header {
               overflow: hidden;
               h4 {

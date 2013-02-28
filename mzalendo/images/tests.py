@@ -7,6 +7,8 @@ from django.contrib.contenttypes.models import ContentType
 
 from models import Image
 
+from sorl.thumbnail import get_thumbnail
+
 class ImageTest(TestCase):
     
     def get_test_file_content(self, filename):
@@ -91,6 +93,12 @@ class ImageTest(TestCase):
         self.assertFalse( self.reload_image(second).is_primary )
         self.assertTrue(  self.reload_image(third).is_primary )
         
-        
-        
-        
+        # Now try to create an thumbnail with sorl.  If this fails
+        # with "IOError: decoder zip not available", then probably
+        # this is a problem with an old version of PIL, or one that
+        # wasn't installed when the right build dependencies were
+        # present.  The simplest solution in most solutions is:
+        #   pip uninstall PIL
+        #   pip install pillow
+
+        im = get_thumbnail(third.image, '100x100', crop='center', quality=99)
