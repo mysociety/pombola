@@ -6,7 +6,7 @@
 py-bcrypt
 PyYAML
 Mercurial
-PIL >= 1.1.7
+Pillow
 
 ### Database drivers
 # Note - there is a Django bug with psycopg2==2.4.2 that means that the tests

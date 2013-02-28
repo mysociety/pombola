@@ -11,11 +11,17 @@ cd "$(dirname $BASH_SOURCE)"/..
 # them back to the defaults which is what they would have on the servers.
 PYTHONDONTWRITEBYTECODE=""
 
-
 # create the virtual environment, install/update required packages
 virtualenv ../mzalendo-virtualenv
 source ../mzalendo-virtualenv/bin/activate
 pip install Mercurial
+
+# We replaced PIL with Pillow, but "pip install -r" won't remove PIL
+# just because it has disappeared from the requirements.txt file.  If
+# we're at this version of the source code, however, we definitely
+# want Pillow in preference to PIL, so just remove the latter:
+pip uninstall -y PIL || true
+
 pip install -r requirements.txt
 
 # make sure that there is no old code (the .py files may have been git deleted) 
