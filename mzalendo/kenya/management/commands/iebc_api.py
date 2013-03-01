@@ -257,9 +257,11 @@ class SamePersonChecker(object):
                 'API Name',
                 'API Party',
                 'API Place',
+                'Contest Type',
                 'API Candidate Code',
                 'Mz Legal Name',
                 'Mz Other Names',
+                'Mz Candidate Code',
                 'Mz URL',
                 'Mz Parties Ever',
                 'Mz Aspirant Ever',
@@ -295,6 +297,8 @@ class SamePersonChecker(object):
             writer.writerow(dict((h, h) for h in SamePersonChecker.headings))
             # Write out the existing data first:
             for existing_row in self.rows:
+                for k in ('Contest Type', 'Mz Candidate Code'):
+                    existing_row[k] = ''
                 writer.writerow(existing_row)
                 # And now add the new person:
             row = {}
@@ -305,9 +309,11 @@ class SamePersonChecker(object):
             party_data = candidate_data['party']
             row['API Party'] = party_data['name'] if 'name' in party_data else ''
             row['API Place'] = '%s (%s)' % (candidate_place.name, candidate_place.kind.name.lower())
+            row['Contest Type'] = candidate_race_type
             row['API Candidate Code'] = candidate_data['code']
             row['Mz Legal Name'] = mz_person.legal_name
             row['Mz Other Names'] = "\n".join(an.alternative_name for an in mz_person.alternative_names.all())
+            row['Mz Candidate Code'] = ", ".join(mz_person.current_positions_external_ids)
             row['Mz URL'] = 'http://info.mzalendo.com' + mz_person.get_absolute_url()
             row['Mz Parties Ever'] = ', '.join(o.name for o in mz_person.parties_ever())
             for heading, positions in (('Mz Aspirant Ever', mz_person.aspirant_positions_ever()),
