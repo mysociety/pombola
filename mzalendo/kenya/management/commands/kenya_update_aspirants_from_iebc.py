@@ -268,6 +268,7 @@ def update_candidates_for_place(place_name,
             # Then we have to create a new position:
             new_position = Position(start_date=today_approximate_date,
                                     end_date=future_approximate_date,
+                                    external_id=code,
                                     **aspirant_position_properties)
             print >> sys.stderr, "* Creating a missing position: %s" % (new_position,)
             maybe_save(new_position, **options)
