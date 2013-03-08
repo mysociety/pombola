@@ -17,8 +17,8 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Set place=<Place: Country(Country)> for each 'Aspirant President' Position"
 
-        pk_country = orm.PlaceKind.objects.get(name='Country')
         if COUNTRY_APP == 'kenya':
+            pk_country = orm.PlaceKind.objects.get(name='Country')
             place_country = orm.Place.objects.get(name='Kenya', kind=pk_country)
             for p in self.presidential_aspirants(orm, orm.Organisation.objects.get(name='REPUBLIC OF KENYA')):
                 p.place = place_country
