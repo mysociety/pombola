@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from odekro import management
+from odekro.management.tagcloud import tagcloud
 
 
 class Command(BaseCommand):
@@ -16,6 +16,6 @@ class Command(BaseCommand):
         
         path = args[0]
         outfile = open(path, 'w')
-        content = management.generate_tagcloud()
+        content = tagcloud()
         outfile.write(content)
         outfile.close()
