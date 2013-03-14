@@ -1,0 +1,8 @@
+{% extends "default_base.html" %}
+
+
+{% block title_suffix %} :: Watani.org.ly {% endblock %}
+
+{% block css_headers %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libya.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
+{% endblock %}
