@@ -32,6 +32,7 @@ class Command(NoArgsCommand):
         make_option('--aspirant-end-date',    help="The end date to apply to matching positions"),
         make_option('--elected-person',       help="The Person slug of the winner"),
         make_option('--elected-title',        help="The PositionTitle slug for elected position"),
+        make_option('--elected-subtitle',     help="Optional subtitle for elected position"),
         make_option('--elected-start-date',   help="The start date to apply to matching positions"),        
     )
 
@@ -40,10 +41,11 @@ class Command(NoArgsCommand):
         print "Looking at '%s' in '%s'" % (options['elected_person'], options['place'] )
 
         # load up the place, org and positions
-        place              = Place.objects.get(slug=options['place'])
-        organisation       = Organisation.objects.get(slug=options['elected_organisation'])
-        aspirant_pos_title = PositionTitle.objects.get(slug=options['aspirant_title'])
-        elected_pos_title  = PositionTitle.objects.get(slug=options['elected_title'])
+        place                 = Place.objects.get(slug=options['place'])
+        organisation          = Organisation.objects.get(slug=options['elected_organisation'])
+        aspirant_pos_title    = PositionTitle.objects.get(slug=options['aspirant_title'])
+        elected_pos_title     = PositionTitle.objects.get(slug=options['elected_title'])
+        elected_subtitle      = options['elected_subtitle']
         
         # convert the dates to approximate dates
         aspirant_end_date  = yyyymmdd_to_approx(options['aspirant_end_date'])
@@ -63,6 +65,7 @@ class Command(NoArgsCommand):
                 start_date   = elected_start_date,
                 defaults     = {
                     'end_date': future_date,
+                    'subtitle': elected_subtitle,
                     'category': 'political',
                 }
             )
