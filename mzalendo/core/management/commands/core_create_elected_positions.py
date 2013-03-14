@@ -45,7 +45,7 @@ class Command(NoArgsCommand):
         organisation          = Organisation.objects.get(slug=options['elected_organisation'])
         aspirant_pos_title    = PositionTitle.objects.get(slug=options['aspirant_title'])
         elected_pos_title     = PositionTitle.objects.get(slug=options['elected_title'])
-        elected_subtitle      = options['elected_subtitle']
+        elected_subtitle      = options['elected_subtitle'] or ''
         
         # convert the dates to approximate dates
         aspirant_end_date  = yyyymmdd_to_approx(options['aspirant_end_date'])
