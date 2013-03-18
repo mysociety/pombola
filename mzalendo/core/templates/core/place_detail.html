@@ -24,6 +24,18 @@
     </p>
   {% endif %}
 
+
+  <h2>Current Politicians Representing {{ object.name }}</h2>
+
+  {% with politicians=object.related_people.is_politician %}
+    <ul class="listing">
+    {% for object in politicians %}
+        {% include 'core/generic_list_item.html' %}
+    {% endfor %}
+    </ul>  
+  {% endwith %}
+
+
   {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
   {% with people_related=object.related_people %}
 

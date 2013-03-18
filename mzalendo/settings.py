@@ -473,6 +473,7 @@ for key in ALL_OPTIONAL_APPS: # add in the optional apps
 POLITICIAN_TITLE_SLUGS = [
     'mp',
     'nominated-member-parliament',
+    'member-national-assembly',
     'representative',
     'senator',
 ]
