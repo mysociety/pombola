@@ -55,6 +55,12 @@
     {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
         <li>
+            <a href="{% url position slug='member-national-assembly' %}">Members of the National Assembly</a>
+        </li>
+        <li>
+            <a href="{% url position slug='senator' %}">Senators</a>
+        </li>
+        <li>
             <a href="{% url info_page slug='parliament-overview' %}">Parliament Overview</a>
         </li>
         <li>
