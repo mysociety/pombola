@@ -7,7 +7,6 @@
 
 {% block extra_js_to_load %}
     mzalendo_settings.extra_js.push( 'js/feeds.js' );
-    mzalendo_settings.extra_js.push( 'js/election_countdown.js' );
 {% endblock %}
 
 {% block css_headers %}
@@ -21,34 +20,7 @@
     <div id="breadcrumb-replacement">&nbsp;</div>
 {% endblock %}
 
-{% block header %}
-
-  {% include 'staging_header.html' %}
-
-  <header id="site-header">
-    <div class="wrapper">
-  
-      <a href="{% url home %}" id="logo">Mzalendo</a>
-  
-      <div id="election_countdown" data-until="2013/3/4 06:00:00 UTC+0300">
-          <h4>2013 polls open: <span class="election-date">Monday 4th March</span></h4>
-          <span class="countdown_row countdown_show5">
-              <span class="countdown_section countdown_icon"><span></span></span>
-              <span class="countdown_section countdown_day"><span class="countdown_amount">--</span><br>Days</span>
-              <span class="countdown_section countdown_hour"><span class="countdown_amount">--</span><br>Hours</span>
-              <span class="countdown_section countdown_minute"><span class="countdown_amount">--</span><br>Minutes</span>
-              <span class="countdown_section countdown_second"><span class="countdown_amount">--</span><br>Seconds</span>
-          </span>
-  
-          <!--              <span class="countdown_row countdown_descr">...</span> -->
-      </div>
-    
-    </div>
-  </header>
-
-  {% include 'main_menu.html' %}
-
-{% endblock %}
+{% include 'header.html' %}
 
 {% block content %}
   <div class="election-home-left">
