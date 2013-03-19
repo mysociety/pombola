@@ -53,7 +53,7 @@
 {% block content %}
   <div class="election-home-left">
       <div class="callout-search">
-          <h2>Do you know who you can vote for?</h2>
+          <h2>Who is your representative?</h2>
           <p>Find out! Enter the name of your <a href="{% url place_kind 'constituency' %}">Constituency</a> or <a href="{% url place_kind 'county' %}">County</a> in the box below. Don’t know the name of your Constituency?  <a href="{% url map-home %}">Find it using our map</a>.
           </p>
           <form class="styled-search" action="{% url core_place_search %}">
@@ -63,7 +63,7 @@
       </div>
   
       <form class="callout-search" action="{% url core_person_search %}">
-          <h2>Check out a specific aspirant:</h2>
+          <h2>Check out a specific representative:</h2>
           <p>Enter their name in the box below to find them</p>
           <div class="styled-search">
               <input type="text" class="search-autocomplete-name search-box" data-source="/search/autocomplete/?model=person" name="q" value="" placeholder="Aspirant's name">
@@ -71,6 +71,11 @@
           </div>
       </form>
   
+
+      {% comment %}
+
+      Not needed now that the elections are over.
+
       <h2>Presidential Aspirants:</h2>
       <ul class="presidential-aspirants">
         {% for person in featured_persons %}
@@ -86,6 +91,8 @@
           </li>
         {% endfor %}
       </ul>
+      {% endcomment %}
+
   </div>
   <div class="election-home-right">
     

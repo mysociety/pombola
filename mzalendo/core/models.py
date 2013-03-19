@@ -575,6 +575,31 @@ class Place(ModelBase, ScorecardMixin):
         # because that ruins the distinct.
         return Person.objects.filter(position__place=self).distinct()#.order_by('-position__sorting_end_date_high')
 
+    
+    def parent_places(self):
+        """Return an array of all the parent places."""
+        if self.parent_place:
+            parents = [ self.parent_place ]
+            parents.extend( self.parent_place.parent_places() )
+            # print parents
+            return parents
+        else:
+            return []
+        
+    def self_and_parents(self):
+        """Return a query set that matches this place and all parents."""
+        parents = self.parent_places()        
+        ids     = [ x.id for x in parents ]
+        ids.append(self.id)
+        print ids
+        return Place.objects.filter(pk__in=ids)
+    
+
+    def all_related_current_politicians(self):
+        """Return a query set of all the politicians for this place, and all parent places."""
+        positions = Position.objects.filter(place__in=self.self_and_parents()).current_politician_positions()
+        return Person.objects.filter(position__in=positions).distinct()
+
     def child_places_by_kind(self):
         """Return all concurrent child places, grouped by their PlaceKind
 

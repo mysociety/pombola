@@ -38,7 +38,7 @@
 
 
 <li>
-  <a href="{% url position slug='mp' %}">MPs</a>
+  <a href="{% url position slug='member-national-assembly' %}">NA Members</a>
   {% if include_sub_menu_entries %}
   <ul id="parliament-overview">    
     <li><a href="{% url organisation_kind slug='party' %}">Political Parties</a></li>
@@ -47,9 +47,19 @@
   {% endif %}
 </li>
 
+<li>
+  <a href="{% url position slug='senator' %}">Senators</a>
+</li>
+
 <li><a href="{% url info_page slug='parliament-overview' %}">Parliament</a>
     {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
+        <li>
+            <a href="{% url position slug='member-national-assembly' %}">Members of the National Assembly</a>
+        </li>
+        <li>
+            <a href="{% url position slug='senator' %}">Senators</a>
+        </li>
         <li>
             <a href="{% url info_page slug='parliament-overview' %}">Parliament Overview</a>
         </li>
@@ -96,24 +106,7 @@
     </ul>
     {% endif %}
 </li>
-<li><a href="{% url info_page slug='2013-overview' %}">Election</a>
-    {% if include_sub_menu_entries %}
-    <ul id="2012">
-        <li>
-            <a href="{% url info_page slug='2013-overview' %}">Election Overview</a>
-        </li>
 
-        <li><a href="{% url position slug='aspirant-president'            %}?view=grid">Presidential Aspirants</a></li>
-        <li><a href="{% url position slug='aspirant-mp'                   %}">Aspirant MPs</a></li>
-        <li><a href="{% url position slug='aspirant-governor'             %}">Aspirant Governors</a></li>
-        <li><a href="{% url position slug='aspirant-senator'              %}">Aspirant Senators</a></li>
-        <li><a href="{% url position slug='aspirant-ward-representative'  %}">Aspirant Ward reps</a></li>
-        <li><a href="{% url position slug='aspirant-women-representative' %}">Aspirant Women reps</a></li>
-
-
-    </ul>
-    {% endif %}
-</li>
 <li><a href="http://mzalendo.com/blog/">Blog</a></li>
 <li><a href="{% url info_page slug='newsletter' %}">Newsletter</a></li>
 <li><a href="{% url info_page slug='mzalendo-overview' %}">About</a>
