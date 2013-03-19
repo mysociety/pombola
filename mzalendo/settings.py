@@ -476,6 +476,7 @@ POLITICIAN_TITLE_SLUGS = [
     'member-national-assembly',
     'representative',
     'senator',
+    'president',
 ]
 
 # map boundaries
