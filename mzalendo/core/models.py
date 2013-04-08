@@ -940,36 +940,50 @@ class Position(ModelBase):
 
         if self.title and self.title.requires_place and not self.place:
             raise exceptions.ValidationError("The job title '%s' requires a place to be set" % self.title.name)
-            
+
+
     def display_dates(self):
         """Nice HTML for the display of dates"""
+
+        # used in comparisons in the conditionals below
+        today         = datetime.date.today()
+        approx_today  = ApproximateDate(year=today.year, month=today.month, day=today.day)
+        approx_future = ApproximateDate(future=True)
 
         # no dates
         if not (self.start_date or self.end_date):
             return ''
 
         # start but no end
-        if self.start_date and not self.end_date:
-            return "Started %s" % self.start_date
-
-        # both dates
-        if self.start_date and self.end_date:
-            if self.end_date.future:
+        elif not self.end_date:
+            if self.start_date == approx_future:
+                return "Not started yet"
+            elif self.start_date <= approx_today:
                 return "Started %s" % self.start_date
             else:
-                return "%s &rarr; %s" % (self.start_date, self.end_date)
-        
+                return "Will start %s" % self.start_date
+
         # end but no start
-        today         = datetime.date.today()
-        approx_today  = ApproximateDate(year=today.year, month=today.month, day=today.day)
-        approx_future = ApproximateDate(future=True)
-        if not self.start_date and self.end_date:
+        elif not self.start_date:
             if self.end_date == approx_future:
                 return "Ongoing"
             elif self.end_date < approx_today:
                 return "Ended %s" % self.end_date
             else:
                 return "Will end %s" % self.end_date
+
+        # both dates
+        else:
+            if self.end_date == approx_future:
+                if self.start_date == approx_future:
+                    return "Not started yet"
+                elif self.start_date <= approx_today:
+                    return "Started %s" % self.start_date
+                else:
+                    return "Will start %s" % self.start_date
+            else:
+                return "%s &rarr; %s" % (self.start_date, self.end_date)
+
 
     def display_start_date(self):
         """Return text that represents the start date"""

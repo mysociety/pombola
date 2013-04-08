@@ -69,11 +69,11 @@ class PositionTest(WebTest):
             ( y2000,  y2000,  "2000 &rarr; 2000" ),
             ( y2000,  y2100,  "2000 &rarr; 2100" ),
             ( y2000,  future, "Started 2000" ),
-            ( y2100,  None,   "Started 2100" ),
+            ( y2100,  None,   "Will start 2100" ),
             ( y2100,  y2100,  "2100 &rarr; 2100" ),
-            ( y2100,  future, "Started 2100" ),
-            ( future, None,   "Started future" ),
-            ( future, future, "Started future" ),
+            ( y2100,  future, "Will start 2100" ),
+            ( future, None,   "Not started yet" ),
+            ( future, future, "Not started yet" ),
         )
         
         for start_date, end_date, expected in tests:
