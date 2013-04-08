@@ -960,8 +960,16 @@ class Position(ModelBase):
                 return "%s &rarr; %s" % (self.start_date, self.end_date)
         
         # end but no start
+        today         = datetime.date.today()
+        approx_today  = ApproximateDate(year=today.year, month=today.month, day=today.day)
+        approx_future = ApproximateDate(future=True)
         if not self.start_date and self.end_date:
-            return 'ongoing'
+            if self.end_date == approx_future:
+                return "Ongoing"
+            elif self.end_date < approx_today:
+                return "Ended %s" % self.end_date
+            else:
+                return "Will end %s" % self.end_date
 
     def display_start_date(self):
         """Return text that represents the start date"""

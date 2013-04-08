@@ -62,9 +62,9 @@ class PositionTest(WebTest):
         # test grid: start, end, uot
         tests = (
             ( None,   None,   "" ),
-            ( None,   y2000,  "ongoing" ),
-            ( None,   y2100,  "ongoing" ),
-            ( None,   future, "ongoing" ),
+            ( None,   y2000,  "Ended 2000" ),
+            ( None,   y2100,  "Will end 2100" ),
+            ( None,   future, "Ongoing" ),
             ( y2000,  None,   "Started 2000" ),
             ( y2000,  y2000,  "2000 &rarr; 2000" ),
             ( y2000,  y2100,  "2000 &rarr; 2100" ),
