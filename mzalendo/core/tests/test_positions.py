@@ -50,6 +50,43 @@ class PositionTest(WebTest):
         self.assertEqual( str(position), 'Test Person (??? at ???)' )
 
     
+    def test_display_dates(self):
+        """Check that the date that is displayed is correct"""
+        position = models.Position(person = self.person)
+        
+        # Dates that will be used for testing
+        y2000  = ApproximateDate( year=2000 )
+        y2100  = ApproximateDate( year=2100 )
+        future = ApproximateDate( future=True )
+
+        # test grid: start, end, uot
+        tests = (
+            ( None,   None,   "" ),
+            ( None,   y2000,  "ongoing" ),
+            ( None,   y2100,  "ongoing" ),
+            ( None,   future, "ongoing" ),
+            ( y2000,  None,   "Started 2000" ),
+            ( y2000,  y2000,  "2000 &rarr; 2000" ),
+            ( y2000,  y2100,  "2000 &rarr; 2100" ),
+            ( y2000,  future, "Started 2000" ),
+            ( y2100,  None,   "Started 2100" ),
+            ( y2100,  y2100,  "2100 &rarr; 2100" ),
+            ( y2100,  future, "Started 2100" ),
+            ( future, None,   "Started future" ),
+            ( future, future, "Started future" ),
+        )
+        
+        for start_date, end_date, expected in tests:
+            position.start_date = start_date
+            position.end_date   = end_date
+            actual = position.display_dates()
+            self.assertEqual(
+                actual,
+                expected,
+                "%s -> %s should be '%s', not '%s'" % (start_date, end_date, expected, actual)
+            )
+    
+    
     def test_sorting(self):
         """Check that the sorting is as expected"""
         
