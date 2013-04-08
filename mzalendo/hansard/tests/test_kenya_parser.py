@@ -14,8 +14,9 @@ from hansard.models import Source, Sitting, Entry, Venue, Alias
 from core.models import Person, PositionTitle, Position
 
 from django_date_extensions.fields import ApproximateDate
+from django.conf import settings
 
-
+@unittest.skipUnless(settings.KENYA_PARSER_PDF_TO_HTML_HOST, "setting 'KENYA_PARSER_PDF_TO_HTML_HOST' not set")
 class KenyaParserTest(TestCase):
     local_dir          = os.path.abspath( os.path.dirname( __file__ ) )
     sample_pdf         = os.path.join( local_dir, '2011-09-01-sample.pdf'  )
