@@ -1041,23 +1041,34 @@ class Position(ModelBase):
     
     def _set_sorting_dates(self):
         """Set the sorting dates from the actual dates (does not call save())"""
+
+        past_repr = '0001-00-00'
+        none_repr = '0000-00-00'
+
         # value can be yyyy-mm-dd, future or None
-        start = repr(self.start_date) if self.start_date else ''
-        end   = repr(self.end_date) if self.end_date else ''
+        start = repr(self.start_date) if self.start_date else None
+        end   = repr(self.end_date)   if self.end_date   else None
         
         # set the value or default to something sane
-        sorting_start_date = start or '0000-00-00'
-        sorting_end_date = end or start or '0000-00-00'
+        sorting_start_date =        start or none_repr
+        sorting_end_date   = end or start or none_repr
+        if not end and start == 'past': sorting_end_date = none_repr
+        
+        # chaange entries to have the past_repr
+        if start              == 'past': start              = past_repr
+        if end                == 'past': end                = past_repr
+        if sorting_start_date == 'past': sorting_start_date = past_repr
+        if sorting_end_date   == 'past': sorting_end_date   = past_repr
         
         # To make the sorting consistent special case some parts
         if not end and start == 'future':
             sorting_start_date = 'a-future' # come after 'future'
 
         self.sorting_start_date = sorting_start_date
-        self.sorting_end_date = sorting_end_date
+        self.sorting_end_date   = sorting_end_date
         
         self.sorting_start_date_high = re.sub('-00', '-99', sorting_start_date)
-        self.sorting_end_date_high = re.sub('-00', '-99', sorting_end_date)     
+        self.sorting_end_date_high   = re.sub('-00', '-99', sorting_end_date)     
 
     def is_nominated_politician(self):
         return self.title.slug == 'nominated-member-parliament'

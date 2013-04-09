@@ -159,23 +159,32 @@ class PositionTest(WebTest):
             ( 'future',   None,     ),
             ( '2002',     'future', ),
             ( '2001',     'future', ),
+            ( 'past',     'future'  ),
             ( None,       'future', ),
 
             ( 'future',   '2010',   ),
             ( '2010',     None,     ),            
             ( '2002',     '2010',   ),
             ( '2001',     '2010',   ),
+            ( 'past',     '2010'    ),
             ( None,       '2010',   ),
 
             ( 'future',   '2009',   ),
             ( '2009',     None,     ),
             ( '2002',     '2009',   ),
             ( '2001',     '2009',   ),
+            ( 'past',     '2009'    ),
             ( None,       '2009',   ),
 
             ( '2002',     None,     ),
             ( '2001',     None,     ),            
 
+            ( 'future',   'past'    ), # <-- this is nonsensical
+            ( '2010',     'past'    ),
+            ( '2009',     'past'    ),
+            ( 'past',     'past'    ),
+            ( None,       'past'    ),
+            ( 'past',     None      ),
             ( None,       None,     ),
         ]
         
@@ -188,6 +197,8 @@ class PositionTest(WebTest):
                 return None
             if entry == 'future':
                 return ApproximateDate(future=True)
+            if entry == 'past':
+                return ApproximateDate(past=True)
             return ApproximateDate(year=int(entry))
 
         for dates in position_dates:
