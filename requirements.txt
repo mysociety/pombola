@@ -28,7 +28,7 @@ django-registration-defaults==0.3
 
 ### Mzalendo dependencies
 sorl-thumbnail==11.09
--e git://github.com/mhl/django-date-extensions.git@master#egg=django-date-extensions
+-e git://github.com/evdb/django-date-extensions.git@master#egg=django-date-extensions
 django-ajax-selects==1.2.1
 
 Markdown==2.0.3
