@@ -55,6 +55,7 @@ class PositionTest(WebTest):
         position = models.Position(person = self.person)
         
         # Dates that will be used for testing
+        past   = ApproximateDate( past=True )
         y2000  = ApproximateDate( year=2000 )
         y2100  = ApproximateDate( year=2100 )
         future = ApproximateDate( future=True )
@@ -62,18 +63,39 @@ class PositionTest(WebTest):
         # test grid: start, end, uot
         tests = (
             ( None,   None,   "" ),
+            ( None,   past,   "Ended" ),
             ( None,   y2000,  "Ended 2000" ),
             ( None,   y2100,  "Will end 2100" ),
             ( None,   future, "Ongoing" ),
+
+            ( past,   None,   "Started" ),
+            ( past,   past,   "Ended" ),
+            ( past,   y2000,  "Ended 2000" ),
+            ( past,   y2100,  "Will end 2100" ),
+            ( past,   future, "Ongoing" ),
+
             ( y2000,  None,   "Started 2000" ),
+            ( y2000,  past,   "Started 2000, now ended" ),
             ( y2000,  y2000,  "2000 &rarr; 2000" ),
             ( y2000,  y2100,  "2000 &rarr; 2100" ),
             ( y2000,  future, "Started 2000" ),
+
             ( y2100,  None,   "Will start 2100" ),
             ( y2100,  y2100,  "2100 &rarr; 2100" ),
             ( y2100,  future, "Will start 2100" ),
+
             ( future, None,   "Not started yet" ),
             ( future, future, "Not started yet" ),
+
+            # These are impossible, but we don't validate against them. Best check something
+            # sensible is returned. Might need if we ever do a site for Time Lords!
+            ( y2100,  past,   "Will start 2100, now ended" ),
+            ( y2100,  y2000,  "2100 &rarr; 2000" ), 
+
+            ( future, past,   "Ended" ),
+            ( future, y2000,  "Ended 2000" ),
+            ( future, y2100,  "Will end 2100" ),
+                        
         )
         
         for start_date, end_date, expected in tests:

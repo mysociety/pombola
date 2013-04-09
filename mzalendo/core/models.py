@@ -943,9 +943,15 @@ class Position(ModelBase):
 
 
     def display_dates(self):
-        """Nice HTML for the display of dates"""
+        """
+        Return nice HTML for the display of dates.
+
+        This has become a twisty maze of conditionals :( - note that there are
+        extensive tests for the various possible outputs.
+        """
 
         # used in comparisons in the conditionals below
+        approx_past   = ApproximateDate(past=True)
         today         = datetime.date.today()
         approx_today  = ApproximateDate(year=today.year, month=today.month, day=today.day)
         approx_future = ApproximateDate(future=True)
@@ -955,17 +961,32 @@ class Position(ModelBase):
             return ''
 
         # start but no end
-        elif not self.end_date:
-            if self.start_date == approx_future:
-                return "Not started yet"
+        elif not self.end_date or self.end_date == approx_past:
+            message = ''
+            if not self.start_date:
+                message = "Ended" # end_date is past
+            elif self.start_date == approx_future:
+                message = "Not started yet"
+            elif self.start_date == approx_past:
+                message = "Started"
             elif self.start_date <= approx_today:
-                return "Started %s" % self.start_date
+                message = "Started %s" % self.start_date
             else:
-                return "Will start %s" % self.start_date
+                message = "Will start %s" % self.start_date
+
+            if self.end_date == approx_past:
+                if not self.start_date or self.start_date == approx_past or self.start_date == approx_future:
+                    message = "Ended"
+                else:
+                    message += ", now ended"
+
+            return message
 
         # end but no start
-        elif not self.start_date:
-            if self.end_date == approx_future:
+        elif not self.start_date or self.start_date == approx_past:
+            if not self.end_date or self.end_date == approx_past:
+                return "Ended"
+            elif self.end_date == approx_future:
                 return "Ongoing"
             elif self.end_date < approx_today:
                 return "Ended %s" % self.end_date
@@ -981,6 +1002,11 @@ class Position(ModelBase):
                     return "Started %s" % self.start_date
                 else:
                     return "Will start %s" % self.start_date
+            elif self.start_date == approx_future:
+                if self.end_date < approx_today:
+                    return "Ended %s" % self.end_date
+                else:
+                    return "Will end %s" % self.end_date
             else:
                 return "%s &rarr; %s" % (self.start_date, self.end_date)
 
