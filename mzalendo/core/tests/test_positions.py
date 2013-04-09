@@ -86,7 +86,48 @@ class PositionTest(WebTest):
                 "%s -> %s should be '%s', not '%s'" % (start_date, end_date, expected, actual)
             )
     
-    
+
+    def test_past_end_dates(self):
+        """
+        Check that the entries can be created with past dates. Issues could
+        occur as past dates are before all others, so a past end_date would come
+        before a start_date. Should have a special case for this.
+        """
+
+        # Dates that will be used for testing
+        past   = ApproximateDate( past=True )
+        y2000  = ApproximateDate( year=2000 )
+        y2100  = ApproximateDate( year=2100 )
+        future = ApproximateDate( future=True )
+
+        tests = (
+            # [start, end, exception]
+            [None,   past, None],
+            [past,   past, None],
+            [y2000,  past, None],
+            [y2100,  past, None],
+            [future, past, None],
+
+            # Turns out that there is no validation for start > end. Perhaps there should be..
+            # [y2100,  past, exceptions.ValidationError],
+            # [future, past, exceptions.ValidationError],
+        )
+        
+        def create_position(**kwargs):
+            pos = models.Position(**kwargs)
+            pos._set_sorting_dates()
+            pos.full_clean() # needed as otherwise no validation occurs. Genius!
+
+        for start_date, end_date, exception in tests:
+            kwargs = dict(person=self.person, title=self.title, start_date=start_date, end_date=end_date)
+            if exception:
+                self.assertRaises(exception, create_position, **kwargs)
+            else:
+                # Should just work without throwing exception
+                create_position(**kwargs)                
+
+
+
     def test_sorting(self):
         """Check that the sorting is as expected"""
         
