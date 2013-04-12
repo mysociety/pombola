@@ -15,8 +15,8 @@ PYTHONDONTWRITEBYTECODE=""
 # create the virtual environment, install/update required packages
 virtualenv ../mzalendo-virtualenv
 source ../mzalendo-virtualenv/bin/activate
-pip install Mercurial
-pip install -r requirements.txt
+pip install Mercurial               --use-mirrors
+pip install -r requirements.txt     --use-mirrors
 
 # make sure that there is no old code (the .py files may have been git deleted) 
 find . -name '*.pyc' -delete
