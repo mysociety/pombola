@@ -47,7 +47,7 @@ class Source(HansardModelBase):
 
     name           = models.CharField(max_length=200, unique=True)
     date           = models.DateField()
-    url            = models.URLField()
+    url            = models.URLField(max_length=1000)
 
     last_processing_attempt = models.DateTimeField(blank=True, null=True)
     last_processing_success = models.DateTimeField(blank=True, null=True)

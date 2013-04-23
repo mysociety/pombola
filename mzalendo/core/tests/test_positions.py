@@ -50,6 +50,106 @@ class PositionTest(WebTest):
         self.assertEqual( str(position), 'Test Person (??? at ???)' )
 
     
+    def test_display_dates(self):
+        """Check that the date that is displayed is correct"""
+        position = models.Position(person = self.person)
+        
+        # Dates that will be used for testing
+        past   = ApproximateDate( past=True )
+        y2000  = ApproximateDate( year=2000 )
+        y2100  = ApproximateDate( year=2100 )
+        future = ApproximateDate( future=True )
+
+        # test grid: start, end, uot
+        tests = (
+            ( None,   None,   "" ),
+            ( None,   past,   "Ended" ),
+            ( None,   y2000,  "Ended 2000" ),
+            ( None,   y2100,  "Will end 2100" ),
+            ( None,   future, "Ongoing" ),
+
+            ( past,   None,   "Started" ),
+            ( past,   past,   "Ended" ),
+            ( past,   y2000,  "Ended 2000" ),
+            ( past,   y2100,  "Will end 2100" ),
+            ( past,   future, "Ongoing" ),
+
+            ( y2000,  None,   "Started 2000" ),
+            ( y2000,  past,   "Started 2000, now ended" ),
+            ( y2000,  y2000,  "2000 &rarr; 2000" ),
+            ( y2000,  y2100,  "2000 &rarr; 2100" ),
+            ( y2000,  future, "Started 2000" ),
+
+            ( y2100,  None,   "Will start 2100" ),
+            ( y2100,  y2100,  "2100 &rarr; 2100" ),
+            ( y2100,  future, "Will start 2100" ),
+
+            ( future, None,   "Not started yet" ),
+            ( future, future, "Not started yet" ),
+
+            # These are impossible, but we don't validate against them. Best check something
+            # sensible is returned. Might need if we ever do a site for Time Lords!
+            ( y2100,  past,   "Will start 2100, now ended" ),
+            ( y2100,  y2000,  "2100 &rarr; 2000" ), 
+
+            ( future, past,   "Ended" ),
+            ( future, y2000,  "Ended 2000" ),
+            ( future, y2100,  "Will end 2100" ),
+                        
+        )
+        
+        for start_date, end_date, expected in tests:
+            position.start_date = start_date
+            position.end_date   = end_date
+            actual = position.display_dates()
+            self.assertEqual(
+                actual,
+                expected,
+                "%s -> %s should be '%s', not '%s'" % (start_date, end_date, expected, actual)
+            )
+    
+
+    def test_past_end_dates(self):
+        """
+        Check that the entries can be created with past dates. Issues could
+        occur as past dates are before all others, so a past end_date would come
+        before a start_date. Should have a special case for this.
+        """
+
+        # Dates that will be used for testing
+        past   = ApproximateDate( past=True )
+        y2000  = ApproximateDate( year=2000 )
+        y2100  = ApproximateDate( year=2100 )
+        future = ApproximateDate( future=True )
+
+        tests = (
+            # [start, end, exception]
+            [None,   past, None],
+            [past,   past, None],
+            [y2000,  past, None],
+            [y2100,  past, None],
+            [future, past, None],
+
+            # Turns out that there is no validation for start > end. Perhaps there should be..
+            # [y2100,  past, exceptions.ValidationError],
+            # [future, past, exceptions.ValidationError],
+        )
+        
+        def create_position(**kwargs):
+            pos = models.Position(**kwargs)
+            pos._set_sorting_dates()
+            pos.full_clean() # needed as otherwise no validation occurs. Genius!
+
+        for start_date, end_date, exception in tests:
+            kwargs = dict(person=self.person, title=self.title, start_date=start_date, end_date=end_date)
+            if exception:
+                self.assertRaises(exception, create_position, **kwargs)
+            else:
+                # Should just work without throwing exception
+                create_position(**kwargs)                
+
+
+
     def test_sorting(self):
         """Check that the sorting is as expected"""
         
@@ -59,23 +159,32 @@ class PositionTest(WebTest):
             ( 'future',   None,     ),
             ( '2002',     'future', ),
             ( '2001',     'future', ),
+            ( 'past',     'future'  ),
             ( None,       'future', ),
 
             ( 'future',   '2010',   ),
             ( '2010',     None,     ),            
             ( '2002',     '2010',   ),
             ( '2001',     '2010',   ),
+            ( 'past',     '2010'    ),
             ( None,       '2010',   ),
 
             ( 'future',   '2009',   ),
             ( '2009',     None,     ),
             ( '2002',     '2009',   ),
             ( '2001',     '2009',   ),
+            ( 'past',     '2009'    ),
             ( None,       '2009',   ),
 
             ( '2002',     None,     ),
             ( '2001',     None,     ),            
 
+            ( 'future',   'past'    ), # <-- this is nonsensical
+            ( '2010',     'past'    ),
+            ( '2009',     'past'    ),
+            ( 'past',     'past'    ),
+            ( None,       'past'    ),
+            ( 'past',     None      ),
             ( None,       None,     ),
         ]
         
@@ -88,6 +197,8 @@ class PositionTest(WebTest):
                 return None
             if entry == 'future':
                 return ApproximateDate(future=True)
+            if entry == 'past':
+                return ApproximateDate(past=True)
             return ApproximateDate(year=int(entry))
 
         for dates in position_dates:

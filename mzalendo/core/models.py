@@ -940,28 +940,76 @@ class Position(ModelBase):
 
         if self.title and self.title.requires_place and not self.place:
             raise exceptions.ValidationError("The job title '%s' requires a place to be set" % self.title.name)
-            
+
+
     def display_dates(self):
-        """Nice HTML for the display of dates"""
+        """
+        Return nice HTML for the display of dates.
+
+        This has become a twisty maze of conditionals :( - note that there are
+        extensive tests for the various possible outputs.
+        """
+
+        # used in comparisons in the conditionals below
+        approx_past   = ApproximateDate(past=True)
+        today         = datetime.date.today()
+        approx_today  = ApproximateDate(year=today.year, month=today.month, day=today.day)
+        approx_future = ApproximateDate(future=True)
 
         # no dates
         if not (self.start_date or self.end_date):
             return ''
 
         # start but no end
-        if self.start_date and not self.end_date:
-            return "Started %s" % self.start_date
+        elif not self.end_date or self.end_date == approx_past:
+            message = ''
+            if not self.start_date:
+                message = "Ended" # end_date is past
+            elif self.start_date == approx_future:
+                message = "Not started yet"
+            elif self.start_date == approx_past:
+                message = "Started"
+            elif self.start_date <= approx_today:
+                message = "Started %s" % self.start_date
+            else:
+                message = "Will start %s" % self.start_date
+
+            if self.end_date == approx_past:
+                if not self.start_date or self.start_date == approx_past or self.start_date == approx_future:
+                    message = "Ended"
+                else:
+                    message += ", now ended"
+
+            return message
+
+        # end but no start
+        elif not self.start_date or self.start_date == approx_past:
+            if not self.end_date or self.end_date == approx_past:
+                return "Ended"
+            elif self.end_date == approx_future:
+                return "Ongoing"
+            elif self.end_date < approx_today:
+                return "Ended %s" % self.end_date
+            else:
+                return "Will end %s" % self.end_date
 
         # both dates
-        if self.start_date and self.end_date:
-            if self.end_date.future:
-                return "Started %s" % self.start_date
+        else:
+            if self.end_date == approx_future:
+                if self.start_date == approx_future:
+                    return "Not started yet"
+                elif self.start_date <= approx_today:
+                    return "Started %s" % self.start_date
+                else:
+                    return "Will start %s" % self.start_date
+            elif self.start_date == approx_future:
+                if self.end_date < approx_today:
+                    return "Ended %s" % self.end_date
+                else:
+                    return "Will end %s" % self.end_date
             else:
                 return "%s &rarr; %s" % (self.start_date, self.end_date)
-        
-        # end but no start
-        if not self.start_date and self.end_date:
-            return 'ongoing'
+
 
     def display_start_date(self):
         """Return text that represents the start date"""
@@ -993,23 +1041,34 @@ class Position(ModelBase):
     
     def _set_sorting_dates(self):
         """Set the sorting dates from the actual dates (does not call save())"""
+
+        past_repr = '0001-00-00'
+        none_repr = '0000-00-00'
+
         # value can be yyyy-mm-dd, future or None
-        start = repr(self.start_date) if self.start_date else ''
-        end   = repr(self.end_date) if self.end_date else ''
+        start = repr(self.start_date) if self.start_date else None
+        end   = repr(self.end_date)   if self.end_date   else None
         
         # set the value or default to something sane
-        sorting_start_date = start or '0000-00-00'
-        sorting_end_date = end or start or '0000-00-00'
+        sorting_start_date =        start or none_repr
+        sorting_end_date   = end or start or none_repr
+        if not end and start == 'past': sorting_end_date = none_repr
+        
+        # chaange entries to have the past_repr
+        if start              == 'past': start              = past_repr
+        if end                == 'past': end                = past_repr
+        if sorting_start_date == 'past': sorting_start_date = past_repr
+        if sorting_end_date   == 'past': sorting_end_date   = past_repr
         
         # To make the sorting consistent special case some parts
         if not end and start == 'future':
             sorting_start_date = 'a-future' # come after 'future'
 
         self.sorting_start_date = sorting_start_date
-        self.sorting_end_date = sorting_end_date
+        self.sorting_end_date   = sorting_end_date
         
         self.sorting_start_date_high = re.sub('-00', '-99', sorting_start_date)
-        self.sorting_end_date_high = re.sub('-00', '-99', sorting_end_date)     
+        self.sorting_end_date_high   = re.sub('-00', '-99', sorting_end_date)     
 
     def is_nominated_politician(self):
         return self.title.slug == 'nominated-member-parliament'
