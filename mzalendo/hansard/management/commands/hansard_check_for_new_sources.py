@@ -1,3 +1,10 @@
+
+# This script changed extensively when the Kenyan Parliament website changed after the 2013 Election.
+#
+# The previous version can be seen at:
+#
+#    https://github.com/mysociety/mzalendo/blob/7181e30519b140229e3817786e4a7440ac08288d/mzalendo/hansard/management/commands/hansard_check_for_new_sources.py
+
 import pprint
 import httplib2
 import re
@@ -16,91 +23,67 @@ from hansard.models import Source
 class Command(NoArgsCommand):
     help = 'Check for new sources'
 
-    # Manually list all the urls that we should check here. These are all the
-    # entries in the 'Hansard' tab: http://www.parliament.go.ke/
-    parliament_base_url = "http://www.parliament.go.ke"
-    full_url_format = parliament_base_url + "/index.php?option=com_content&view=article&id=%u&Itemid=%u"
-    listing_pages = {
-        2006: full_url_format % ( 202, 165 ),
-        2007: full_url_format % ( 188, 161 ),
-        2008: full_url_format % ( 89,  82  ),
-        2009: full_url_format % ( 90,  83  ),
-        2010: full_url_format % ( 91,  84  ),
-        2011: full_url_format % ( 184, 159 ),
-        2012: full_url_format % ( 243, 206 ),
-        2013: full_url_format % ( 280, 217 ),
-    }
-    
+    # http://www.parliament.go.ke
+    # /plone/national-assembly/business/hansard/copy_of_official-report-28-march-2013-pm/at_multi_download/item_files
+    # ?name=Hansard%20National%20Assembly%2028.03.2013P.pdf
+
+
     def handle_noargs(self, **options):
 
-        self.check_we_have_a_current_listing_url()
+        url = 'http://www.parliament.go.ke/plone/national-assembly/business/hansard'
 
-        for year, url in self.listing_pages.items():
-            # print 'scraping %s listing url: %s' % (year, url)
-            self.get_urls_from_listing_page( url )
-
-
-    def get_urls_from_listing_page(self, url):
         h = httplib2.Http( settings.HTTPLIB2_CACHE_DIR )
         response, content = h.request(url)
         # print content
-        
+
         # parse content
         soup = BeautifulSoup(
             content,
             convertEntities=BeautifulStoneSoup.HTML_ENTITIES
         )
 
-        links = soup.findAll( 'a', 'doclink')
+        spans = soup.findAll( 'span', 'contenttype-repositoryitem')
+
+        links = [ span.a for span in spans ]
 
         for link in links:
 
-            # print dir(link)
-            # import pdb; pdb.set_trace()
 
-            href = self.parliament_base_url + link['href'].strip()
-            name = ' '.join( [ x.string for x in link.contents[1:] ] )
+            # print '==============='
+            # # print dir(link)
+            # print link
 
-            # get rid of '(123kb)' and trim
-            name = re.sub( r'\(.*?\)', '', name ).strip()
+            href = link['href'].strip()
+            # print "href: " + href
 
-            if not name:
-                continue
-
-            # print "url: " + href
+            name = ' '.join(link.contents).strip()
             # print "name: " + name
 
+            date_string = re.search('(\d.*\d)', name).group()
+            date_string = re.sub(r'(\d)[a-z]+', r'\1', date_string)
+            date_string = re.sub(r'[^\w\s]',    r'',   date_string)
+            date_string = re.sub(r'\s+',        r' ',  date_string).strip()
+            # print "date_string: " + date_string
+
+            source_date = datetime.datetime.strptime(date_string, '%d %B %Y')
+            # print "source_date: " + str(source_date)
 
 
-            # Extract the date
-            date_match = re.search( r'(\d{1,2})\.(\d{1,2})\.(\d{2,4})', name)
-            if not date_match:
-                continue
-                
-            (dd,mm,yy) = map(
-                lambda xx: int(xx),
-                date_match.groups()
+            # I don't trust that we can accurately create the download link url with the
+            # details that we have. Instead fetche the page and extract the url.
+            download_response, download_content = h.request(href)
+            download_soup = BeautifulSoup(
+                download_content,
+                convertEntities=BeautifulStoneSoup.HTML_ENTITIES
             )
-
-            # check that our two digit date assumption remains sane
-            if yy <= 99: yy = yy + 2000
-            assert yy <= datetime.date.today().year, "year %u is too large - might be pre 2000?" % yy
-
-            source_date = datetime.date(yy, mm, dd)
-            # print source_date
-
+            download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
+            # print download_url
+            
             # create/update the source entry
             Source.objects.get_or_create(
                 name = name,
                 defaults = dict(
-                    url = href,
+                    url = download_url,
                     date = source_date,
                 )
             )
-                
-    def check_we_have_a_current_listing_url(self):
-        """check that we have a listing url for the current year, if not warn to logs"""
-
-        yyyy = datetime.date.today().year
-        if yyyy not in self.listing_pages:
-            sys.stderr.write("Don't have a url for the %s hansard transcripts - please add to %s\n\n" % (yyyy, __file__))
