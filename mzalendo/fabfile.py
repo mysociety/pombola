@@ -99,7 +99,7 @@ def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None,
     Deploys a version to the servers, install any required third party 
     modules, install the virtual host and then restart the web app server
     """
-    require('hosts', provided_by=[vm, staging, production])
+    require('hosts', provided_by=[dev, staging, production])
     require('basedir')
     require('virtualenv')
     require('webapp_user')
@@ -148,7 +148,7 @@ def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None,
 
 @task
 def setup():
-    require('hosts', provided_by=[vm, staging, production])
+    require('hosts', provided_by=[dev, staging, production])
     require('webapp_user')
     require('basedir')
     require('virtualenv')
@@ -176,7 +176,7 @@ def prepare():
 
 @task
 def setup_postgis():    
-    require('hosts', provided_by=[vm, staging, production])
+    require('hosts', provided_by=[dev, staging, production])
     require('basedir')
     require('virtualenv')
 
@@ -187,7 +187,7 @@ def setup_postgis():
 
 @task
 def clean():
-    require('hosts', provided_by=[vm, staging, production])
+    require('hosts', provided_by=[dev, staging, production])
     require('basedir')
     require('virtualenv')
     
@@ -265,7 +265,17 @@ def staging():
     env.log_level = 'debug'
     env.domain = 'staging.odekro.org'
 
+#@task
+#def dev():
+#    """local machine."""
+#    env.hosts = ['0.0.0.0']
+
 @task
 def dev():
-    """local machine."""
-    env.hosts = ['0.0.0.0']
+    env.hosts = ['127.0.0.1']
+    env.port = 2233
+    env.user = STAGING_ENV_USER # update this in the local_fabfile.py file
+    if STAGING_ENV_USER:
+        env.password = STAGING_ENV_PASS
+    env.log_level = 'debug'
+    env.domain = 'staging.odekro.org'
