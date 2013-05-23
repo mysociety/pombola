@@ -17,7 +17,7 @@ from fab import server, nginx, webapp
 
 LOCAL_BASEDIR = os.path.abspath(os.path.dirname(__file__))
 PRODUCTION_ENV_USER = 'root'
-STAGING_ENV_USER    = 'root'
+STAGING_ENV_USER    = 'idesouza'
 PRODUCTION_ENV_PASS = None
 STAGING_ENV_PASS    = None
 
@@ -37,8 +37,9 @@ env.git_branch = "odekro"
 env.basedir = '/var/www/%(project)s' % env
 env.virtualenv = env.basedir
 env.pip_requirements = 'requirements.txt'
-env.dbname = 'odekro'
-env.dbuser = 'postgres'
+env.dbname = 'odekro_db'
+env.dbuser = 'odekro_user'
+env.dbpasswd = 'orkedo'
 env.is_staging = True
 
 # nginx
@@ -119,6 +120,8 @@ def deploy(db=None, dbuser=None, dbpasswd=None, email_passwd=None,
 
         if db and dbuser and dbpasswd:
             configure(db, dbuser, dbpasswd, email_passwd, env.version)
+
+        webapp.configure()
 
         if init is 'yes':
             webapp.init()
