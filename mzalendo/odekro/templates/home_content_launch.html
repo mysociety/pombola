@@ -1,3 +1,16 @@
+{% block extra_styles %}
+#ticker { height: 540px; height: 300px; overflow: hidden;}
+#ticker li { height: 100px;}
+{% endblock %}
+
+{% block extra_scripts %}
+function tick(){
+	$('#ticker li:first').animate({'opacity':0}, 200, function () { $(this).appendTo($('#ticker')).css('opacity', 1); });
+}
+setInterval(function(){ tick () }, 4000);
+{% endblock %}
+
+
 {% block content %}
     <div class="index-left sixcol">
         <h3>What is Odekro?</h3>
@@ -18,6 +31,13 @@
 
         <h3>What Are Our MPs Debating</h3>
         <div id="wordcloud" style="width: 540px, height: 350px; border: 1px solid #ccc;">
+        </div>
+        
+        <h3>Recent News</h3>
+        <div>
+            <ul id='ticker'>
+            {% include  '{{ STATIC_URL }}/news.html' %}
+            </ul>
         </div>
 
     </div>
