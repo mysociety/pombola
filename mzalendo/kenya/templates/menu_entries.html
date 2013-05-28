@@ -64,9 +64,6 @@
             <a href="{% url info_page slug='parliament-overview' %}">Parliament Overview</a>
         </li>
         <li>
-            <a href="{% url info_page slug='ministry-overview' %}">Ministry Overview</a>
-        </li>
-        <li>
             <a href="{% url info_page slug='committee-overview' %}">Committee Overview</a>
         </li>
         <li>
@@ -85,6 +82,26 @@
     </ul>                    
     {% endif %}
 </li>
+
+<li><a href="{% url info_page slug='executive-government' %}">Executive Government</a>
+    {% if include_sub_menu_entries %}
+    <ul id="executive-government">
+        <li>
+            <a href="{% url person slug='uhuru-kenyatta' %}">President</a>
+        </li>
+        <li>
+            <a href="{% url person slug='william-ruto' %}">Deputy President</a>
+        </li>
+        <li>
+            <a href="{% url person slug='githu-muigai' %}">Attorney General</a>
+        </li>
+        <li>
+            <a href="{% url info_page slug='ministry-overview' %}">Ministry Overview</a>
+        </li>
+    </ul>                    
+    {% endif %}
+</li>
+
 <li><a href="{% url info_page slug='places-overview' %}">Places</a>
     {% if include_sub_menu_entries %}
     <ul id="places-overview">
