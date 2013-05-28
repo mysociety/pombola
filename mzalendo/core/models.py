@@ -177,7 +177,7 @@ class PersonManager(ManagerBase):
     
     def get_featured(self):
         # select all the presidential aspirants
-        return self.filter(position__in=Position.objects.all().filter(title__slug='aspirant-president').currently_active()) 
+        return self.filter(can_be_featured=True) 
     
     def get_next_featured(self, current_slug, want_previous=False):
         """ Returns the next featured person, in slug order: using slug order because it's unique and easy to
