@@ -1,82 +1,96 @@
 {% extends 'base.html' %}
-{% load thumbnail %}
 
 {% block title %}Home{% endblock %}
 
-{% block body_attributes %} class="election-home" {% endblock %}
-
 {% block extra_js_to_load %}
     mzalendo_settings.extra_js.push( 'js/feeds.js' );
+    mzalendo_settings.extra_js.push( 'js/libs/jquery.countdown-v1.6.0.js' );
+    mzalendo_settings.extra_js.push( 'js/election_countdown.js' );
 {% endblock %}
 
 {% block css_headers %}
     {{ block.super }}
-    
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kenya/election-homepage/base.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.countdown-v1.6.0.css" />
 {% endblock %}
+
 
 {% block breadcrumbs %}
     {# Hide bread crumbs on the home page. Insert blank div to add padding #}
     <div id="breadcrumb-replacement">&nbsp;</div>
 {% endblock %}
 
-{% include 'header.html' %}
-
 {% block content %}
-  <div class="election-home-left">
-      <div class="callout-search">
-          <h2>Who is your representative?</h2>
-          <p>Find out! Enter the name of your <a href="{% url place_kind 'constituency' %}">Constituency</a> or <a href="{% url place_kind 'county' %}">County</a> in the box below. Don’t know the name of your Constituency?  <a href="{% url map-home %}">Find it using our map</a>.
-          </p>
-          <form class="styled-search" action="{% url core_place_search %}">
-              <input type="text" class="search-autocomplete-name search-box" data-source="/search/autocomplete/?model=place" name="q" value="" placeholder="Place name">
-              <input type="submit" value="Search" class="search-btn">
-          </form>
-      </div>
-  
-      <form class="callout-search" action="{% url core_person_search %}">
-          <h2>Check out a specific representative:</h2>
-          <p>Enter their name in the box below to find them</p>
-          <div class="styled-search">
-              <input type="text" class="search-autocomplete-name search-box" data-source="/search/autocomplete/?model=person" name="q" value="" placeholder="Aspirant's name">
-              <input type="submit" value="Search" class="search-btn">
-          </div>
-      </form>
-  
+    <div class="home-left">
+        <h2 id="home-intro">
+            Mzalendo (‘Patriot’ in Swahili) is a non-partisan project started in 2003 whose mission is to “keep an eye on the Kenyan parliament”.
+            <span class="details">
+                Mzalendo seeks to promote a stronger public voice and to enhance public participation in politics by providing relevant information about the National Assembly’s activities, MPs and aspirants ahead of the 2012 elections.
+            </span>
+            <a href="#" class="home-read-more">more</a>
+        </h2>
+        <form action="{% url core_search %}" id="home-search">
+            <label for="core-search">Search people, places and organisations</label>
+            <input class="search-autocomplete-name" id="core-search" type="text" name="q" value="" placeholder="e.g. Nairobi, Uhuru Kenyatta">
+            <button type="submit">Search</button>
 
-      {% comment %}
+            {% if settings.ENABLED_FEATURES.hansard %}
+                <a href="{% url hansard_search  %}" id="search-hansard-instead">Search Hansard instead</a>
+            {% endif %}
 
-      Not needed now that the elections are over.
+        </form>
 
-      <h2>Presidential Aspirants:</h2>
-      <ul class="presidential-aspirants">
-        {% for person in featured_persons %}
-          <li>
-            <a href="{{ person.get_absolute_url }}">
-              {% thumbnail person.primary_image "122x140" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-              {% empty %}
-                <img src="{{STATIC_URL}}images/person-200x200.jpg" width="122" height="140"/>
-              {% endthumbnail %}
-              <h4>{{ person.name }}</h4>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-      {% endcomment %}
+                
+        {% if settings.BLOG_RSS_FEED %}
+            <h2>Latest News</h2>
+            <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
+                <li>
+                    Loading news&hellip;
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+    <div class="home-right">
+        <h2>Featured Person</h2>
+        <div id="home-featured-person">
+            {% if featured_person != None %}
+                {% include 'core/person_feature.html' %}
+            {% else %}
+                <div class="featured-person featured-person-placeholder"></div>
+            {% endif %}
+        </div>
+        
+                        
+        {% if settings.POLLDADDY_WIDGET_ID %}
+            <style>
+                .pds-box { width: 100% !important; }
+                #polldaddy { margin-bottom: 30px; }
+            </style>
+            
+            <div id="polldaddy">
+                <h2>Latest Poll</h2>            
+                <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
+                <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
+            </div>
+        {% endif %}
 
-  </div>
-  <div class="election-home-right">
-    
-  {% if settings.BLOG_RSS_FEED %}
-      <h2 class="static">Editorial</h2>
-      <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-          <li>
-              Loading news&hellip;
-          </li>
-      </ul>
-  {% endif %}
+        {% if settings.TWITTER_ACCOUNT_NAME %}
+            <div id="twitter">
+                <h2>Twitter</h2>
+                
+                <div class="twitter-feed" data-twitter-username="{{ settings.TWITTER_ACCOUNT_NAME }}" data-feed-url="{% url twitter_feed %}">                
+                    Loading tweets &hellip;
+                </div>
+            </div>
 
-  
-  </div>
+            <div class="social-and-tools">
+                <ul class="tools">
+                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t=Mzalendo" target="_blank" class="big-btn-text-fb">Facebook</a>
+                    <li><a href="https://twitter.com/share?via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;text=Mzalendo&amp;url={{ request.build_absolute_uri }}" target="_blank" class="big-btn-text-tw">Twitter</a></li>
+                </ul>            
+            
+                <span class="tw-nub"></span>
+                <a href="http://twitter.com/{{ settings.TWITTER_ACCOUNT_NAME }}" class="btn-text-green tw-follow" target="_blank">Follow</a>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
