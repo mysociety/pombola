@@ -25,8 +25,15 @@ PYTHONIOENCODING=utf-8
 !!(* if ($vhost eq 'mzalendo.mysociety.org') { *)!!
 0 7 * * * !!(*= $user *)!! check_user_contributions.bash
 6 7 * * * !!(*= $user *)!! update_hansard.bash
-0 1 * * * !!(*= $user *)!! update_scorecards.bash
 3 10 * * * !!(*= $user *)!! update_coalition_memberships.bash
+
+# disabling the scorcard updating to remove them from the site temporarily. This
+# is an interim measure, but much simpler than doing it properly by making the
+# scorecard app optional, or adding some feature flip for them. See #629
+
+# 0 1 * * * !!(*= $user *)!! update_scorecards.bash
+
+
 !!(* } elsif ($vhost eq 'nigeria.mzalendo.mysociety.org') { *)!!
 10 7 * * * !!(*= $user *)!! check_user_contributions.bash
 !!(* } else { *)!!
