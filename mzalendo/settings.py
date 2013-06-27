@@ -477,6 +477,8 @@ POLITICIAN_TITLE_SLUGS = [
     'representative',
     'senator',
     'president',
+    'governor',
+    'ward-representative',
 ]
 
 # map boundaries
