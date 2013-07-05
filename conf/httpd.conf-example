@@ -24,6 +24,7 @@
 ErrorDocument 401 /static/errors/401.html
 
 Alias /media_root /data/vhost/example.mzalendo.mysociety.org/media_root
+Alias /mapit/static /data/vhost/example.mzalendo.mysociety.org/collected_static
 Alias /static /data/vhost/example.mzalendo.mysociety.org/collected_static
 Alias /googlee8d580ff44c6001c.html /data/vhost/example.mzalendo.mysociety.org/docs/googlee8d580ff44c6001c.html
 Alias /favicon.ico /data/vhost/example.mzalendo.mysociety.org/docs/favicon.ico
