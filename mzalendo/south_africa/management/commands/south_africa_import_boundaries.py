@@ -51,7 +51,7 @@ from mapit.management.command_utils import (
 
 
 def get_unicode_field(field):
-    result = field.value.decode('utf-8')
+    result = field.value.decode('iso-8859-1')
     return re.sub('\s+', ' ', result).strip()
 
 
