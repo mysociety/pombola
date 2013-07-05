@@ -13,6 +13,10 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
 
+        governmental, _ = orm.OrganisationKind.objects.get_or_create(
+            name='Governmental',
+            slug='governmental')
+
         # First, create the ParliamentarySession objects.  (If there
         # are already parliamentary sessions, then don't try to create
         # any new ones.)
@@ -25,13 +29,13 @@ class Migration(DataMigration):
 
         if 0 == orm.ParliamentarySession.objects.count():
             if COUNTRY_APP == 'kenya':
-                ok_na = orm.Organisation.objects.get(name='Parliament', kind__name='Governmental')
+                ok_na = orm.Organisation.objects.get(name='Parliament', kind=governmental)
                 try:
-                    ok_senate = orm.Organisation.objects.get(name='Senate', kind__name='Governmental')
+                    ok_senate = orm.Organisation.objects.get(name='Senate', kind=governmental)
                 except orm.Organisation.DoesNotExist:
                     ok_senate = orm.Organisation(name='Senate',
                                              slug='senate',
-                                             kind=orm.OrganisationKind.objects.get(name='Governmental'))
+                                             kind=governmental)
                     ok_senate.save()
 
                 na1_kenya = orm.ParliamentarySession(name="National Assembly 2007-2013",
