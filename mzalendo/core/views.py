@@ -267,32 +267,6 @@ def featured_person(request, current_slug, direction):
         context_instance = RequestContext( request ),
     )
 
-
-# We really want this to be cached
-@cache_control(max_age=300, s_maxage=300, public=True)
-def twitter_feed(request):
-
-    # for now ignore the screen name that we get sent.
-    twitter_name = settings.TWITTER_ACCOUNT_NAME
-
-    # If we don't have a twitter name we can't fetch it
-    if not twitter_name:
-        raise Http404
-
-    # get the json from the cache, or fetch it if needed
-    cache_key = twitter_name + '-twitter-feed'
-    json = cache.get(cache_key)
-
-    if not json:
-        json = urllib2.urlopen('http://api.twitter.com/1/statuses/user_timeline.json?screen_name='+twitter_name+'&count=4').read()
-        cache.set( cache_key, json, 300 )
-
-    return HttpResponse(
-        json,
-        content_type='application/json',
-    )
-
-
 # We never want this to be cached
 @never_cache
 def memcached_status(request):

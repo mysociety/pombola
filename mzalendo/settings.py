@@ -341,6 +341,13 @@ TWITTER_CONSUMER_SECRET      = config.get('TWITTER_CONSUMER_SECRET')
 if TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET:
     SOCIAL_AUTH_ENABLED_BACKENDS.append('twitter')
 
+# The name of a Twitter account related to this website. This will be used to
+# pull in the latest tweets on the homepage and in the share on twitter links.
+TWITTER_USERNAME = config.get('TWITTER_USERNAME')
+
+# The widget ID is used for displaying tweets on the homepage.
+TWITTER_WIDGET_ID = config.get('TWITTER_WIDGET_ID')
+
 FACEBOOK_APP_ID              = config.get('FACEBOOK_APP_ID')
 FACEBOOK_API_SECRET          = config.get('FACEBOOK_API_SECRET')
 if FACEBOOK_APP_ID and FACEBOOK_API_SECRET:
@@ -452,10 +459,6 @@ DISQUS_USE_IDENTIFIERS = config.get( 'DISQUS_USE_IDENTIFIERS', True )
 # then no poll will be shown.
 POLLDADDY_WIDGET_ID = config.get( 'POLLDADDY_WIDGET_ID', None );
 
-
-# The name of a Twitter account related to this website. This will be used to
-# pull in the latest tweets on the homepage and in the share on twitter links.
-TWITTER_ACCOUNT_NAME = config.get( 'TWITTER_ACCOUNT_NAME', None );
 
 # RSS feed to the blog related to this site. If present will cause the 'Latest
 # News' to appear on the homepage.

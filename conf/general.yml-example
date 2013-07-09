@@ -71,9 +71,15 @@ DISQUS_USE_IDENTIFIERS: 1
 # Widget id for polls to be embedded on the site.
 POLLDADDY_WIDGET_ID: ''
 
-# The name of the twitter account. If your account is '@foobar' then use
+# The name of the Twitter account. If your account is '@foobar' then use
 # 'foobar'
-TWITTER_ACCOUNT_NAME: ''
+TWITTER_USERNAME: ''
+
+# If you want to show tweets on the front page, you need to create a
+# widget for the TWITTER_USERNAME account at
+# https://twitter.com/settings/widgets/ and dig the widget ID out of
+# the generated HTML - it'll be in there as a data-widget-id attribute.
+TWITTER_WIDGET_ID: ''
 
 # Blog feed url - used to create the latest news on homepage.
 # eg 'http://foo.com/feed/'
