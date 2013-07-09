@@ -74,7 +74,7 @@ class Migration(DataMigration):
                 house.save()
             else:
                 # There's nothing to do:
-                print >> sys.stderr, "Unknown COUNTRY_APP (%s) - not creating parliamentary sessions"
+                print >> sys.stderr, "Unknown COUNTRY_APP (%s) - not creating parliamentary sessions" % (COUNTRY_APP,)
         else:
             # There's nothing to do:
             print >> sys.stderr, "There were already ParliamentarySessions - skipping their creation"
@@ -133,7 +133,7 @@ class Migration(DataMigration):
 
         else:
             # There's nothing to do:
-            print >> sys.stderr, "There were already ParliamentarySessions - skipping their creation"
+            print >> sys.stderr, "Unknown COUNTRY_APP (%s) - not linking sessions to places" % (COUNTRY_APP,)
 
 
     def backwards(self, orm):
