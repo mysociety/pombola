@@ -19,7 +19,7 @@
         </li>
 
         <li>
-          <a  href="https://twitter.com/share?{% if settings.TWITTER_ACCOUNT_NAME %}via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;{% endif %}url={{ request.build_absolute_uri }}"
+          <a  href="https://twitter.com/share?{% if settings.TWITTER_USERNAME %}via={{ settings.TWITTER_USERNAME }}&amp;{% endif %}url={{ request.build_absolute_uri }}"
               target="_blank"
           >Twitter</a>
         </li>

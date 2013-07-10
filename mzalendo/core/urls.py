@@ -123,7 +123,6 @@ urlpatterns = patterns('core.views',
 )
 
 urlpatterns += patterns('core.views',
-    url(r'^external_feeds/twitter/', 'twitter_feed',     name='twitter_feed'),
     url(r'^status/memcached/',       'memcached_status', name='memcached_status'),
 )
 

@@ -5,9 +5,9 @@
         class="big-btn-text-fb"
     >Share on Facebook</a>
 
-  {% if settings.TWITTER_ACCOUNT_NAME %}
+  {% if settings.TWITTER_USERNAME %}
     <li>
-      <a  href="https://twitter.com/share?via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;text={{ object.name }}&amp;url={{ request.build_absolute_uri }}"
+      <a  href="https://twitter.com/share?via={{ settings.TWITTER_USERNAME }}&amp;text={{ object.name }}&amp;url={{ request.build_absolute_uri }}"
           target="_blank"
           class="big-btn-text-tw"
       >Share on Twitter</a>

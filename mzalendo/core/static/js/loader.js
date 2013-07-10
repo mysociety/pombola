@@ -39,6 +39,7 @@
             ],
             both: [
                 static_url('js/both-functions.js'),
+                static_url('js/twitter-embed.js'),
                 '//www.google.com/jsapi' // ?key=INSERT-YOUR-KEY
             ].concat( extra_js ),
             complete: function () {

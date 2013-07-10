@@ -88,23 +88,22 @@
             </div>
         {% endif %}
 
-        {% if settings.TWITTER_ACCOUNT_NAME %}
-            <div id="twitter">
-                <h2>Twitter</h2>
-                
-                <div class="twitter-feed" data-twitter-username="{{ settings.TWITTER_ACCOUNT_NAME }}" data-feed-url="{% url twitter_feed %}">                
-                    Loading tweets &hellip;
+        {% if settings.TWITTER_USERNAME %}
+            {% if settings.TWITTER_WIDGET_ID %}
+                <div id="twitter">
+                    <h2>Twitter</h2>
+                    {% include 'twitter_widget.html' %}
                 </div>
-            </div>
+            {% endif %}
 
             <div class="social-and-tools">
                 <ul class="tools">
                     <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t=Mzalendo" target="_blank" class="big-btn-text-fb">Facebook</a>
-                    <li><a href="https://twitter.com/share?via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;text=Mzalendo&amp;url={{ request.build_absolute_uri }}" target="_blank" class="big-btn-text-tw">Twitter</a></li>
+                    <li><a href="https://twitter.com/share?via={{ settings.TWITTER_USERNAME }}&amp;text=Mzalendo&amp;url={{ request.build_absolute_uri }}" target="_blank" class="big-btn-text-tw">Twitter</a></li>
                 </ul>            
             
                 <span class="tw-nub"></span>
-                <a href="http://twitter.com/{{ settings.TWITTER_ACCOUNT_NAME }}" class="btn-text-green tw-follow" target="_blank">Follow</a>
+                <a href="http://twitter.com/{{ settings.TWITTER_USERNAME }}" class="btn-text-green tw-follow" target="_blank">Follow</a>
             </div>
         {% endif %}
     </div>
