@@ -18,6 +18,12 @@ source ../mzalendo-virtualenv/bin/activate
 pip install Mercurial
 pip install -r requirements.txt
 
+# Try to make sure that the MapIt CSS has been generated.
+# The '|| echo' means that the script carries on even if this fails,
+# since the MapIt CSS isn't essential for the site.
+MAPIT_PATH="$(python -c 'import mapit; print mapit.__file__,')"
+"$(dirname $MAPIT_PATH)"/../bin/make_css || echo "Generating MapIt CSS failed"
+
 # make sure that there is no old code (the .py files may have been git deleted) 
 find . -name '*.pyc' -delete
 
