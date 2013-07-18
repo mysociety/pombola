@@ -414,6 +414,30 @@ class AlternativePersonName(ModelBase):
     class Meta:
         unique_together = ("person", "alternative_name")
 
+
+class Identifier(ModelBase):
+    """This model represents alternative identifiers for objects
+
+    This will replace the old external_id and original_id fields and
+    allow for generic addition of other ID schemes, as might be
+    specified in Popolo"""
+
+    scheme = models.CharField(max_length=200)
+    identifier = models.CharField(max_length=500)
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    objects = ManagerBase()
+
+    def __unicode__(self):
+        return '<Identifier scheme="%s" identifier="%s">' % (self.scheme, self.identifier)
+
+    class Meta:
+        unique_together = ('scheme', 'identifier')
+
+
 class OrganisationKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
