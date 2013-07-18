@@ -392,11 +392,6 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         # fall through to here
         return False
 
-    @property
-    def current_positions_external_ids(self):
-        return [p.external_id for p in self.position_set.filter(external_id__isnull=False).currently_active() if p.external_id]
-
-
     class Meta:
        ordering = ["slug"]      
 
