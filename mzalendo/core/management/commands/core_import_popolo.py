@@ -1,17 +1,19 @@
 import json
 import re
 import sys
+import time
+import urllib
 from optparse import make_option
 
+from django.contrib.contenttypes.models import ContentType
+from django.core.files.base import ContentFile
 from django.core.management.base import LabelCommand, CommandError
 from django.template.defaultfilters import slugify
-
-from django.contrib.contenttypes.models import ContentType
 
 from core.models import (Organisation, OrganisationKind, Identifier,
                          PlaceKind, Person, Contact, ContactKind, Position,
                          PositionTitle, Place, PlaceKind)
-
+from images.models import Image
 from mapit.models import Area, Generation
 
 VERBOSE = False
@@ -163,6 +165,24 @@ class Command(LabelCommand):
                               defaults=defaults)
 
             create_identifiers(person, p, options['commit'])
+
+            if 'image' in person:
+                image_url = person['image']
+                source = "Downloaded from: %s" % (image_url,)
+                if Image.objects.filter(source=source).count() > 0:
+                    print "  (image already imported)"
+                else:
+                    person_image = get_or_create(Image,
+                                                 commit=options['commit'],
+                                                 source=source,
+                                                 defaults={'content_object': p})
+                    if options['commit']:
+                        print "  (downloading %s)" % (image_url,)
+                        content = ContentFile(urllib.urlopen(image_url).read())
+                        time.sleep(2)
+                        person_image.image.save(
+                            name = 'Picture of ' + p.name,
+                            content=content)
 
             # Create a Contact object for each contact in the JSON:
 
