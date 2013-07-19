@@ -75,11 +75,11 @@ def get_or_create(model, **kwargs):
     except model.DoesNotExist:
         params = dict([(k, v) for k, v in kwargs.items() if '__' not in k])
         params.update(defaults)
-        o = model(**params)
         if VERBOSE:
             print "Creating %s with parameters:" % (model.__name__,)
             for k, v in params.items():
                 print "  " + k + ": " + unicode(v).encode('utf-8')
+        o = model(**params)
         if commit:
             verbose(" (saved)")
             o.save()
