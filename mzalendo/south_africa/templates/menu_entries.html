@@ -11,7 +11,20 @@
 
 <li><a href="{% url home %}">Home</a></li>
 
-<li><a href="{% url home %}">Menu items TBC</a></li>
+<li><a href="{% url home %}">Organisations</a>
+ {% if include_sub_menu_entries %}
+  <ul id="organisations-overview">
+    <li><a href="{% url organisation_kind slug='party' %}">Political Parties</a></li>
+  </ul>
+  {% endif %}
+</li>
 
+<li><a href="{% url home %}">National Assembly</a>
+ {% if include_sub_menu_entries %}
+  <ul id="na-overview">
+    <a href="{% url position slug='member' %}">Members</a>
+  </ul>
+  {% endif %}
+</li>
 
 <li><a href="{% url info_page slug='about' %}">About</a></li>
