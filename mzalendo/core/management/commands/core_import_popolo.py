@@ -43,6 +43,7 @@ known_fields = {
                                 'start_date',
                                 'end_date')),
                    'ignored': set(('label',
+                                   # FIXME: Mzalendo needs start/end_reason
                                    'end_reason'))},
     'contact_detail': {'used': set(('type',
                                     'note',
