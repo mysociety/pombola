@@ -146,20 +146,39 @@ def place_mapit_area(request, mapit_id):
 
     return redirect('place_election', slug=place.slug)
 
-def position(request, slug):
+def position_pt(request, pt_slug):
+    """Show current positions with a given PositionTitle"""
+    print "in position_pt, got pt_slug:", pt_slug
+    return position(request, pt_slug)
+
+def position_pt_ok(request, pt_slug, ok_slug):
+    """Show current positions with a given PositionTitle and OrganisationKind"""
+    print "in position_pt_ok, got pt_slug:", pt_slug, "got ok_slug:", ok_slug
+    return position(request, pt_slug, ok_slug=ok_slug)
+
+def position_pt_ok_o(request, pt_slug, ok_slug, o_slug):
+    """Show current positions with a given PositionTitle, OrganisationKind and Organisation"""
+    return position(request, pt_slug, ok_slug=ok_slug, o_slug=o_slug)
+
+def position(request, pt_slug, ok_slug=None, o_slug=None):
     title = get_object_or_404(
         models.PositionTitle,
-        slug=slug
+        slug=pt_slug
     )
-    
-    positions = title.position_set.all().currently_active().order_by('place')
-    
+
+    positions = title.position_set.all().currently_active()
+    if ok_slug is not None:
+        positions = positions.filter(organisation__kind__slug=ok_slug)
+    if o_slug is not None:
+        positions = positions.filter(organisation__slug=o_slug)
+    positions = positions.order_by('place')
+
     place_slug = request.GET.get('place_slug')
     if place_slug:
         positions = positions.filter(
             Q(place__slug=place_slug) | Q(place__parent_place__slug=place_slug)
         )
-    
+
     # see if we should show the grid
     view = request.GET.get('view', 'list')
 
