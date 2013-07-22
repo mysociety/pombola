@@ -22,8 +22,8 @@
 <li><a href="{% url home %}">People</a>
   {% if include_sub_menu_entries %}
     <ul id="people-overview">
-      <li><a href="{% url position_pt pt_slug='na-member' %}">NA Members</a></li>
-      <li><a href="{% url position_pt pt_slug='ncop-delegate' %}">NCOP Delegates</a></li>
+      <li><a href="{% url position_pt_ok_o pt_slug='member' ok_slug='house' o_slug='national-assembly' %}">NA Members</a></li>
+      <li><a href="{% url position_pt_ok_o pt_slug='delegate' ok_slug='house' o_slug='ncop' %}">NCOP Delegates</a></li>
     </ul>
   {% endif %}
 </li>
