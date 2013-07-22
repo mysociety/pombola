@@ -348,6 +348,8 @@ class Command(LabelCommand):
                 for field in ('start_date', 'end_date'):
                     if field in membership:
                         kwargs[field] = membership[field]
+                if place:
+                    kwargs['place'] = place
 
                 m = get_or_create(Position, **kwargs)
 
