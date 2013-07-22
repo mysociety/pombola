@@ -18,6 +18,29 @@ from mapit.models import Area, Generation
 
 VERBOSE = False
 
+def get_position_title(role, organisation_name, organisation_kind_name):
+
+    # FIXME: this temporary code is specific to South Africa, and
+    # should be removed if we have JSON where the membership roles are
+    # slightly more specific.  Alternatively, we could add an extra
+    # view to Mzalendo to show positions with a pariticular
+    # Organisation and OrganisationKind.
+
+    if not role:
+        okind = organisation_kind_name
+        if okind in ('Party', 'Committee'):
+            return okind + ' Member'
+        else:
+            raise Exception, "No role specified, and unknown organisation kind:" + okind
+
+    if organisation_kind_name == "House":
+        if role == "Member" and organisation_name == "National Assembly":
+            return "NA Member"
+        elif role == "Delegate" and organisation_name == "National Council of Provinces":
+            return "NCOP Delegate"
+
+    return role
+
 def verbose(message):
     """Output message only if VERBOSE is set"""
     if VERBOSE:
@@ -217,19 +240,15 @@ class Command(LabelCommand):
 
                 organisation = id_to_organisation[membership['organization_id']]
 
-                role = membership.get('role')
-                if not role:
-                    okind = organisation.kind.name
-                    if okind in ('Party', 'Committee'):
-                        role = 'Member'
-                    else:
-                        raise Exception, "No role specified, and unknown organisation kind:" + okind
+                position_title_name = get_position_title(membership.get('role'),
+                                                         organisation.name,
+                                                         organisation.kind.name)
 
                 # FIXME: also decide about PositionTitle.requires_place
                 position_title = get_or_create(PositionTitle,
                                                commit=options['commit'],
-                                               name=role,
-                                               defaults={'slug': slugify(role)})
+                                               name=position_title_name,
+                                               defaults={'slug': slugify(position_title_name)})
 
                 place = None
                 if "area" in membership:
