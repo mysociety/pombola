@@ -30,6 +30,7 @@ known_fields = {
                             'image',
                             'identifiers',
                             'contact_details',
+                            'other_names',
                             'memberships',)),
                'ignored': set(('family_name',
                                'initials_alt',
@@ -237,6 +238,16 @@ class Command(LabelCommand):
                               defaults=defaults)
 
             create_identifiers(person, p, options['commit'])
+
+            if options['commit'] and options['delete_old']:
+                p.alternative_names.all().delete()
+
+            if 'other_names' in person:
+                # FIXME: check the exact intended meaning of this
+                # field - in sa.json many appear to just be surnames,
+                # but some are full names.
+                for other_name in person['other_names']:
+                    p.add_alternative_name(other_name['name'])
 
             if 'image' in person:
                 image_url = fix_url(person['image'])
