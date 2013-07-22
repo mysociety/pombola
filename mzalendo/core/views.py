@@ -202,7 +202,6 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         places.extend(parent_places)
         places.extend(child_places)
 
-
     return render_to_response(
         template,
         {
