@@ -3,6 +3,7 @@ import re
 import sys
 import time
 import urllib
+from urlparse import urlsplit, urlunsplit
 from optparse import make_option
 
 from django.contrib.contenttypes.models import ContentType
@@ -40,6 +41,16 @@ def get_position_title(role, organisation_name, organisation_kind_name):
             return "NCOP Delegate"
 
     return role
+
+def fix_url(url):
+    # The path component of the URLs in the current South African
+    # Popolo JSON have Unicode characters that need to be UTF-8
+    # encoded and percent-escaped:
+    parts = urlsplit(url)
+    fixed_path = urllib.quote(parts.path.encode('UTF-8'))
+    parts = list(parts)
+    parts[2] = fixed_path
+    return urlunsplit(parts)
 
 def verbose(message):
     """Output message only if VERBOSE is set"""
@@ -191,7 +202,7 @@ class Command(LabelCommand):
             create_identifiers(person, p, options['commit'])
 
             if 'image' in person:
-                image_url = person['image']
+                image_url = fix_url(person['image'])
                 source = "Downloaded from: %s" % (image_url,)
                 if Image.objects.filter(source=source).count() > 0:
                     print "  (image already imported)"
