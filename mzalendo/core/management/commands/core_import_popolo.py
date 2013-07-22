@@ -57,24 +57,18 @@ def check_unknown_field(entity, key):
 
 def get_position_title(role, organisation_name, organisation_kind_name):
 
-    # FIXME: this temporary code is specific to South Africa, and
-    # should be removed if we have JSON where the membership roles are
-    # slightly more specific.  Alternatively, we could add an extra
-    # view to Mzalendo to show positions with a pariticular
-    # Organisation and OrganisationKind.
+    # FIXME: the role attribute was missing for all memberships of
+    # Party and Committee organisations, so (a) check that's still the
+    # case and (b) return a useful position title if it is.
+
+    if role and (organisation_kind_name in ('Party', 'Committee')):
+        raise Exception, "Found a non-None role for a Party or Committee membership"
 
     if not role:
-        okind = organisation_kind_name
-        if okind in ('Party', 'Committee'):
-            return okind + ' Member'
+        if organisation_kind_name in ('Party', 'Committee'):
+            return organisation_kind_name + ' Member'
         else:
             raise Exception, "No role specified, and unknown organisation kind:" + okind
-
-    if organisation_kind_name == "House":
-        if role == "Member" and organisation_name == "National Assembly":
-            return "NA Member"
-        elif role == "Delegate" and organisation_name == "National Council of Provinces":
-            return "NCOP Delegate"
 
     return role
 
