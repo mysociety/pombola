@@ -19,6 +19,40 @@ from mapit.models import Area, Generation
 
 VERBOSE = False
 
+# Use these to spot any fields that exist in the input data, but we
+# aren't either already dealing with, or deliberately ignoring:
+
+known_fields = {
+    'person': {'used': set(('id',
+                            'honorific_prefix',
+                            'name',
+                            'slug',
+                            'image',
+                            'identifiers',
+                            'contact_details',
+                            'memberships',)),
+               'ignored': set(('family_name',
+                               'initials_alt',
+                               'given_names',))},
+    'membership': {'used': set(('id',
+                                'organization_id',
+                                'person_id',
+                                'role',
+                                'area',
+                                'start_date',
+                                'end_date')),
+                   'ignored': set(('label',
+                                   'end_reason'))},
+    'contact_detail': {'used': set(('type',
+                                    'note',
+                                    'value')),
+                       'ignored': set()}}
+
+def check_unknown_field(entity, key):
+    d = known_fields[entity]
+    if not ((key in d['used']) or (key in d['ignored'])):
+        print "WARNING: unknown %s field: %s" % (entity, key)
+
 def get_position_title(role, organisation_name, organisation_kind_name):
 
     # FIXME: this temporary code is specific to South Africa, and
@@ -184,6 +218,9 @@ class Command(LabelCommand):
 
         for person in popolo_data['persons']:
 
+            for k in person.keys():
+                check_unknown_field('person', k)
+
             title = person.get('honorific_prefix')
 
             name = person['name']
@@ -227,6 +264,10 @@ class Command(LabelCommand):
                 p.contacts.all().delete()
 
             for contact in person.get('contact_details', []):
+
+                for k in contact.keys():
+                    check_unknown_field('contact_detail', k)
+
                 contact_type = contact['type']
                 c_kind = get_or_create(ContactKind,
                                        commit=options['commit'],
@@ -249,6 +290,9 @@ class Command(LabelCommand):
                 p.position_set.all().delete()
 
             for membership in person['memberships']:
+
+                for k in membership.keys():
+                    check_unknown_field('membership', k)
 
                 organisation = id_to_organisation[membership['organization_id']]
 
