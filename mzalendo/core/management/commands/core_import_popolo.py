@@ -95,6 +95,7 @@ class Command(LabelCommand):
 
     option_list = LabelCommand.option_list + (
         make_option('--commit', action='store_true', dest='commit', help='Actually update the database'),
+        make_option('--delete-old', action='store_true', dest='delete_old', help='Delete old positions and contacts, assuming we have complete information to recreate them'),
         )
 
     def handle_label(self,  input_filename, **options):
@@ -186,6 +187,10 @@ class Command(LabelCommand):
 
             # Create a Contact object for each contact in the JSON:
 
+            # We may have been asked to remove all previous contact details for this person:
+            if options['commit'] and options['delete_old']:
+                p.contacts.all().delete()
+
             for contact in person.get('contact_details', []):
                 contact_type = contact['type']
                 c_kind = get_or_create(ContactKind,
@@ -203,6 +208,10 @@ class Command(LabelCommand):
                                   defaults=defaults)
 
             # Create a Position object for each membership in the JSON:
+
+            # We may have been asked to remove all previous memberships for this person:
+            if options['commit'] and options['delete_old']:
+                p.position_set.all().delete()
 
             for membership in person['memberships']:
 
