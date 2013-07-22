@@ -205,7 +205,8 @@ class Command(LabelCommand):
                 image_url = fix_url(person['image'])
                 source = "Downloaded from: %s" % (image_url,)
                 if Image.objects.filter(source=source).count() > 0:
-                    print "  (image already imported)"
+                    if VERBOSE:
+                        print "  (image already imported)"
                 else:
                     person_image = get_or_create(Image,
                                                  commit=options['commit'],
