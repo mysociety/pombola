@@ -13,10 +13,6 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
 
-        governmental, _ = orm.OrganisationKind.objects.get_or_create(
-            name='Governmental',
-            slug='governmental')
-
         # First, create the ParliamentarySession objects.  (If there
         # are already parliamentary sessions, then don't try to create
         # any new ones.)
@@ -29,14 +25,17 @@ class Migration(DataMigration):
 
         if 0 == orm.ParliamentarySession.objects.count():
             if COUNTRY_APP == 'kenya':
-                ok_na = orm.Organisation.objects.get(name='Parliament', kind=governmental)
-                try:
-                    ok_senate = orm.Organisation.objects.get(name='Senate', kind=governmental)
-                except orm.Organisation.DoesNotExist:
-                    ok_senate = orm.Organisation(name='Senate',
-                                             slug='senate',
-                                             kind=governmental)
-                    ok_senate.save()
+
+                governmental, _ = orm.OrganisationKind.objects.get_or_create(
+                    name='Governmental',
+                    slug='governmental')
+
+                ok_na, _ = orm.Organisation.objects.get_or_create(name='Parliament',
+                                                                  slug='parliament',
+                                                                  kind=governmental)
+                ok_senate, _ = orm.Organisation.objects.get_or_create(name='Senate',
+                                                                      slug='senate',
+                                                                      kind=governmental)
 
                 na1_kenya = orm.ParliamentarySession(name="National Assembly 2007-2013",
                                                  slug='na2007',
@@ -60,8 +59,15 @@ class Migration(DataMigration):
                                               house=ok_senate)
                 senate.save()
             elif COUNTRY_APP == 'nigeria':
-                ok_senate = orm.Organisation.objects.get(name='Senate', kind__name='Political')
-                ok_house = orm.Organisation.objects.get(name='House of Representatives', kind__name='Political')
+                political, _ = orm.OrganisationKind.objects.get_or_create(
+                    name='Political',
+                    slug='political')
+                ok_senate, _ = orm.Organisation.objects.get_or_create(name='Senate',
+                                                                      slug='senate',
+                                                                      kind=political)
+                ok_house, _ = orm.Organisation.objects.get_or_create(name='House of Representatives',
+                                                                     slug='house-of-representatives',
+                                                                     kind=political)
                 senate = orm.ParliamentarySession(name="Senate 2011-",
                                               slug='s2011',
                                               start_date=datetime.date(2011, 4, 10),
@@ -87,9 +93,15 @@ class Migration(DataMigration):
 
         if COUNTRY_APP == 'kenya':
 
-            pk_constituency = orm.PlaceKind.objects.get(name='Constituency')
-            pk_2013_constituency = orm.PlaceKind.objects.get(name='2013 Constituency')
-            pk_county = orm.PlaceKind.objects.get(name='County')
+            pk_constituency, _ = orm.PlaceKind.objects.get_or_create(slug='constituency',
+                                                                     name='Constituency',
+                                                                     plural_name='Constituencies')
+            pk_2013_constituency, _ = orm.PlaceKind.objects.get_or_create(slug='2013-constituency',
+                                                                          name='2013 Constituency',
+                                                                          plural_name='2013 Constituencies')
+            pk_county, _ = orm.PlaceKind.objects.get_or_create(slug='county',
+                                                               name='County',
+                                                               plural_name='Counties')
 
             if not na1_kenya:
                 na1_kenya = orm.ParliamentarySession.objects.get(name="National Assembly 2007-2013")
@@ -124,8 +136,12 @@ class Migration(DataMigration):
             if not senate:
                 senate = orm.ParliamentarySession.objects.get(name="Senate 2011-")
 
-            pk_fed = orm.PlaceKind.objects.get(name='Federal Constituency')
-            pk_sen = orm.PlaceKind.objects.get(name='Senatorial District')
+            pk_fed, _ = orm.PlaceKind.objects.get_or_create(slug='federal-constituency',
+                                                            name='Federal Constituency',
+                                                            plural_name='Federal Constituencies')
+            pk_sen, _ = orm.PlaceKind.objects.get_or_create(slug='senatorial-district',
+                                                            name='Senatorial District',
+                                                            plural_name='Senatorial Districts')
 
             for place in pk_fed.place_set.all():
                 place.parliamentary_session = house
