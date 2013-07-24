@@ -255,7 +255,7 @@ class Command(LabelCommand):
                         # characters that can cause unpredictable
                         # locale-dependent problems, so remove any
                         # accents:
-                        normalized_name = unicodedata.normalize("NFKD", p.name).encode("ascii", errors="ignore")
+                        normalized_name = unicodedata.normalize("NFKD", p.name).encode("ascii", "ignore")
                         person_image.image.save(
                             name = 'Picture of ' + normalized_name,
                             content=content)
