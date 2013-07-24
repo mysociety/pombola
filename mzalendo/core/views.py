@@ -148,12 +148,10 @@ def place_mapit_area(request, mapit_id):
 
 def position_pt(request, pt_slug):
     """Show current positions with a given PositionTitle"""
-    print "in position_pt, got pt_slug:", pt_slug
     return position(request, pt_slug)
 
 def position_pt_ok(request, pt_slug, ok_slug):
     """Show current positions with a given PositionTitle and OrganisationKind"""
-    print "in position_pt_ok, got pt_slug:", pt_slug, "got ok_slug:", ok_slug
     return position(request, pt_slug, ok_slug=ok_slug)
 
 def position_pt_ok_o(request, pt_slug, ok_slug, o_slug):
