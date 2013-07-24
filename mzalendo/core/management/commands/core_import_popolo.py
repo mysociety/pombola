@@ -242,7 +242,12 @@ class Command(LabelCommand):
                                                  defaults={'content_object': p})
                     if options['commit']:
                         print "  (downloading %s)" % (image_url,)
-                        content = ContentFile(urllib.urlopen(image_url).read())
+                        response = urllib.urlopen(image_url)
+                        status_code = response.getcode()
+                        if status_code < 200 or status_code >= 300:
+                            message = "Unexpected HTTP status %d on downloading '%s'"
+                            raise RuntimeError, message % (status_code, image_url)
+                        content = ContentFile(response.read())
                         time.sleep(2)
                         person_image.image.save(
                             name = 'Picture of ' + p.name,
