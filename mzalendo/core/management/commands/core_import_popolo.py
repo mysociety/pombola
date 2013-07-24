@@ -2,6 +2,7 @@ import json
 import re
 import sys
 import time
+import unicodedata
 import urllib
 from urlparse import urlsplit, urlunsplit
 from optparse import make_option
@@ -249,8 +250,14 @@ class Command(LabelCommand):
                             raise RuntimeError, message % (status_code, image_url)
                         content = ContentFile(response.read())
                         time.sleep(2)
+                        # The image name is used to generate its
+                        # filename, and if it contains non-ASCII
+                        # characters that can cause unpredictable
+                        # locale-dependent problems, so remove any
+                        # accents:
+                        normalized_name = unicodedata.normalize("NFKD", p.name).encode("ascii", errors="ignore")
                         person_image.image.save(
-                            name = 'Picture of ' + p.name,
+                            name = 'Picture of ' + normalized_name,
                             content=content)
 
             # Create a Contact object for each contact in the JSON:
