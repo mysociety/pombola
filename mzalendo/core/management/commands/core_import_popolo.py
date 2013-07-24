@@ -67,16 +67,6 @@ def get_position_title(role, organisation_name, organisation_kind_name):
 
     return role
 
-def fix_url(url):
-    # The path component of the URLs in the current South African
-    # Popolo JSON have Unicode characters that need to be UTF-8
-    # encoded and percent-escaped:
-    parts = urlsplit(url)
-    fixed_path = urllib.quote(parts.path.encode('UTF-8'))
-    parts = list(parts)
-    parts[2] = fixed_path
-    return urlunsplit(parts)
-
 def verbose(message):
     """Output message only if VERBOSE is set"""
     if VERBOSE:
@@ -240,7 +230,7 @@ class Command(LabelCommand):
                     p.add_alternative_name(other_name['name'])
 
             if 'image' in person:
-                image_url = fix_url(person['image'])
+                image_url = person['image']
                 source = "Downloaded from: %s" % (image_url,)
                 if Image.objects.filter(source=source).count() > 0:
                     if VERBOSE:
