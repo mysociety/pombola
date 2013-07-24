@@ -164,6 +164,16 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         slug=pt_slug
     )
 
+    page_title = title.name
+    if o_slug:
+        organisation = get_object_or_404(models.Organisation,
+                                         slug=o_slug)
+        page_title += " of " + organisation.name
+    elif ok_slug:
+        organisation_kind = get_object_or_404(models.OrganisationKind,
+                                              slug=ok_slug)
+        page_title += " of any " + organisation_kind.name
+
     positions = title.position_set.all().currently_active()
     if ok_slug is not None:
         positions = positions.filter(organisation__kind__slug=ok_slug)
@@ -204,6 +214,7 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         template,
         {
             'object':     title,
+            'page_title': page_title,
             'positions':  positions,
             'places':     places,
             'place_slug': place_slug,

@@ -10,7 +10,7 @@
         <a href="{% url position_pt pt_slug=object.slug %}">View as list</a>
     </div>
 
-    <h1 class="page-title">{{ object.name }}</h1>
+    <h1 class="page-title">{{ page_title }}</h1>
     
     {% if object.summary %}
         <div class="summary markdown">
