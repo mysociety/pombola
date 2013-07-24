@@ -56,19 +56,14 @@ def check_unknown_field(entity, key):
         print "WARNING: unknown %s field: %s" % (entity, key)
 
 def get_position_title(role, organisation_name, organisation_kind_name):
-
-    # FIXME: the role attribute was missing for all memberships of
-    # Party and Committee organisations, so (a) check that's still the
-    # case and (b) return a useful position title if it is.
-
-    if role and (organisation_kind_name in ('Party', 'Committee')):
-        raise Exception, "Found a non-None role for a Party or Committee membership"
+    if organisation_kind_name in ('Party', 'Committee'):
+        if role:
+            # I imagine this will happen with e.g. Chair of Committee at some point
+            raise Exception, "Found a non-None role for a Party or Committee membership"
+        return 'Member'
 
     if not role:
-        if organisation_kind_name in ('Party', 'Committee'):
-            return organisation_kind_name + ' Member'
-        else:
-            raise Exception, "No role specified, and unknown organisation kind:" + okind
+        raise Exception, "No role specified, and unknown organisation kind: " + organisation_kind_name
 
     return role
 
