@@ -3,6 +3,7 @@ import sys
 import datetime
 from south.db import db
 from south.v2 import DataMigration
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 from settings import COUNTRY_APP
@@ -18,11 +19,14 @@ class Migration(DataMigration):
         "Set place=<Place: Country(Country)> for each 'Aspirant President' Position"
 
         if COUNTRY_APP == 'kenya':
-            pk_country = orm.PlaceKind.objects.get(name='Country')
-            place_country = orm.Place.objects.get(name='Kenya', kind=pk_country)
-            for p in self.presidential_aspirants(orm, orm.Organisation.objects.get(name='REPUBLIC OF KENYA')):
-                p.place = place_country
-                p.save()
+            try:
+                pk_country = orm.PlaceKind.objects.get(name='Country')
+                place_country = orm.Place.objects.get(name='Kenya', kind=pk_country)
+                for p in self.presidential_aspirants(orm, orm.Organisation.objects.get(name='REPUBLIC OF KENYA')):
+                    p.place = place_country
+                    p.save()
+            except ObjectDoesNotExist:
+                print >> sys.stderr, "Missing objects with COUNTRY_APP 'kenya', skipping migration 0038"
         else:
             # Not required for other countries as yet:
             pass
