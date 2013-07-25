@@ -12,6 +12,7 @@
 # ├── media_root.kenya -> media_root
 # ├── media_root.nigeria
 # ├── media_root.south-africa
+# ├── media_root.zimbabwe
 # ├── mzalendo
 # │   ├── .git
 # │   ├── bin
@@ -19,6 +20,7 @@
 # │   │   ├── general-kenya.yml
 # │   │   ├── general-nigeria.yml
 # │   │   ├── general-south-africa.yml
+# │   │   ├── general-zimbabwe.yml
 # │   │   └── general.yml -> general-kenya.yml
 # │   ├── mzalendo
 # │   │   ├── core
@@ -40,7 +42,7 @@ script_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
 mzalendo_directory = os.path.join(script_directory, '..', '..')
 mzalendo_directory = os.path.normpath(mzalendo_directory)
 
-available_mzalendi = ('nigeria', 'kenya', 'south-africa')
+available_mzalendi = ('nigeria', 'kenya', 'south-africa', 'zimbabwe')
 
 def usage_and_exit():
     print >> sys.stderr, "Usage: %s <COUNTRY>" % (sys.argv[0],)
