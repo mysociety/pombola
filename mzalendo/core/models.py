@@ -233,7 +233,6 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     gender = models.CharField(max_length=1, choices=(('m','Male'),('f','Female')) )
     date_of_birth = ApproximateDateField(blank=True, help_text=date_help_text)
     date_of_death = ApproximateDateField(blank=True, help_text=date_help_text)
-    original_id = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to members in original mzalendo.com db')
     # religion
     # tribe
     summary = MarkupField(blank=True, default='')
@@ -392,11 +391,6 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         # fall through to here
         return False
 
-    @property
-    def current_positions_external_ids(self):
-        return [p.external_id for p in self.position_set.filter(external_id__isnull=False).currently_active()]
-
-
     class Meta:
        ordering = ["slug"]      
 
@@ -413,6 +407,26 @@ class AlternativePersonName(ModelBase):
 
     class Meta:
         unique_together = ("person", "alternative_name")
+
+
+class Identifier(ModelBase):
+    """This model represents alternative identifiers for objects"""
+
+    scheme = models.CharField(max_length=200)
+    identifier = models.CharField(max_length=500)
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    objects = ManagerBase()
+
+    def __unicode__(self):
+        return '<Identifier scheme="%s" identifier="%s">' % (self.scheme, self.identifier)
+
+    class Meta:
+        unique_together = ('scheme', 'identifier')
+
 
 class OrganisationKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
@@ -461,8 +475,6 @@ class Organisation(ModelBase):
     kind = models.ForeignKey('OrganisationKind')
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended = ApproximateDateField(blank=True, help_text=date_help_text)
-    original_id = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to parties in original mzalendo.com db')
-    external_id = models.CharField(max_length=128, blank=True, null=True)
 
     objects = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
@@ -535,9 +547,7 @@ class Place(ModelBase, ScorecardMixin):
     shape_url = models.URLField(verify_exists=True, blank=True )
     location = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
-    original_id  = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to constituencies in original mzalendo.com db')
     parliamentary_session = models.ForeignKey('ParliamentarySession', null=True)
-    external_id = models.CharField(max_length=128, blank=True, null=True)
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
@@ -784,7 +794,6 @@ class PositionTitle(ModelBase):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
-    original_id = models.PositiveIntegerField(blank=True, null=True, help_text='temporary - used to link to data in original mzalendo.com db')
     requires_place = models.BooleanField(default=False, help_text="Does this job title require a place to complete the position?")
 
     objects = ManagerBase()
@@ -911,7 +920,6 @@ class Position(ModelBase):
     subtitle = models.CharField(max_length=200, blank=True, default='')
     category = models.CharField(max_length=20, choices=category_choices, default='other', help_text="What sort of position was this?")
     note = models.CharField(max_length=300, blank=True, default='')
-    external_id = models.CharField(max_length=128, blank=True, null=True)
 
     start_date = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date = ApproximateDateField(blank=True, help_text=date_help_text, default="future")

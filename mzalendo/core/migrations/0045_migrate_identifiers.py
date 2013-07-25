@@ -1,46 +1,51 @@
 # encoding: utf-8
-import sys
 import datetime
 from south.db import db
 from south.v2 import DataMigration
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.contenttypes import generic
 from django.db import models
-
-from settings import COUNTRY_APP
-from core.models import Place, PlaceKind, Organisation, Position
 
 class Migration(DataMigration):
 
-    def presidential_aspirants(self, orm, organisation):
-        for p in orm.Position.objects.filter(title__name='Aspirant President', organisation=organisation):
-            yield p
+    def get_fields_mapping(self, orm):
+        return {'old-mz-person-original': (orm.Person, 'original_id'),
+                'old-mz-organisation-original': (orm.Organisation, 'original_id'),
+                'old-mz-organisation-external': (orm.Organisation, 'external_id'),
+                'old-mz-place-original': (orm.Place, 'original_id'),
+                'old-mz-place-external': (orm.Place, 'external_id'),
+                'old-mz-position-external': (orm.Position, 'external_id'),
+                'old-mz-position-title-original': (orm.PositionTitle, 'original_id')}
 
     def forwards(self, orm):
-        "Set place=<Place: Country(Country)> for each 'Aspirant President' Position"
-
-        if COUNTRY_APP == 'kenya':
-            try:
-                pk_country = orm.PlaceKind.objects.get(name='Country')
-                place_country = orm.Place.objects.get(name='Kenya', kind=pk_country)
-                for p in self.presidential_aspirants(orm, orm.Organisation.objects.get(name='REPUBLIC OF KENYA')):
-                    p.place = place_country
-                    p.save()
-            except ObjectDoesNotExist:
-                print >> sys.stderr, "Missing objects with COUNTRY_APP 'kenya', skipping migration 0038"
-        else:
-            # Not required for other countries as yet:
-            pass
+        for scheme, model_and_field in self.get_fields_mapping(orm).items():
+            model, field = model_and_field
+            for o in model.objects.all():
+                old_value = getattr(o, field)
+                if old_value is None or old_value == '':
+                    continue
+                content_type = orm['contenttypes.ContentType'].objects.get(app_label="core",
+                                                                           model=model.__name__.lower())
+                orm.Identifier.objects.create(scheme=scheme,
+                                              identifier=unicode(old_value),
+                                              object_id=o.id,
+                                              content_type=content_type)
 
     def backwards(self, orm):
-        "Set place=None for each 'Aspirant President' Position"
-
-        if COUNTRY_APP == 'kenya':
-            for p in self.presidential_aspirants(orm, orm.Organisation.objects.get(name='REPUBLIC OF KENYA')):
-                p.place = None
-                p.save()
-        else:
-            # Not required for other countries as yet:
-            pass
+        # We need the next two lines to make the content_object field
+        # of Identifier work, as suggested here:
+        # http://south.readthedocs.org/en/latest/generics.html
+        gfk = generic.GenericForeignKey()
+        gfk.contribute_to_class(orm.Identifier, 'content_object')
+        fields_mapping = self.get_fields_mapping(orm)
+        for identifier in orm.Identifier.objects.all():
+            id_to_put_back = identifier.identifier
+            scheme = identifier.scheme
+            if scheme not in fields_mapping:
+                raise RuntimeError, "It's not possible to migrate identifiers of scheme '%s' backwards" % (scheme,)
+            if id_to_put_back is None or id_to_put_back == '':
+                continue
+            model, field = fields_mapping[scheme]
+            setattr(identifier.content_object, field, int(identifier.object_id))
 
     models = {
         'contenttypes.contenttype': {
@@ -49,6 +54,15 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
+        'core.alternativepersonname': {
+            'Meta': {'unique_together': "(('person', 'alternative_name'),)", 'object_name': 'AlternativePersonName'},
+            'alternative_name': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name_to_use': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
+            'person': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'alternative_names'", 'to': "orm['core.Person']"}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
         'core.contact': {
             'Meta': {'object_name': 'Contact'},
@@ -70,6 +84,16 @@ class Migration(DataMigration):
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
+        'core.identifier': {
+            'Meta': {'unique_together': "(('scheme', 'identifier'),)", 'object_name': 'Identifier'},
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'identifier': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
+            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
+            'scheme': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
+        },
         'core.informationsource': {
             'Meta': {'object_name': 'InformationSource'},
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
@@ -86,6 +110,7 @@ class Migration(DataMigration):
             '_summary_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'ended': ('django_date_extensions.fields.ApproximateDateField', [], {'max_length': '10', 'blank': 'True'}),
+            'external_id': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.OrganisationKind']"}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
@@ -128,7 +153,6 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'legal_name': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
             'original_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'other_names': ('django.db.models.fields.TextField', [], {'default': "''", 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
             'summary': ('markitup.fields.MarkupField', [], {'default': "''", 'no_rendered_field': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
@@ -138,6 +162,7 @@ class Migration(DataMigration):
             'Meta': {'object_name': 'Place'},
             '_summary_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'external_id': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.PlaceKind']"}),
             'location': ('django.contrib.gis.db.models.fields.PointField', [], {'null': 'True', 'blank': 'True'}),
@@ -168,6 +193,7 @@ class Migration(DataMigration):
             'category': ('django.db.models.fields.CharField', [], {'default': "'other'", 'max_length': '20'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'end_date': ('django_date_extensions.fields.ApproximateDateField', [], {'default': "'future'", 'max_length': '10', 'blank': 'True'}),
+            'external_id': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'note': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '300', 'blank': 'True'}),
             'organisation': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Organisation']", 'null': 'True', 'blank': 'True'}),
@@ -192,6 +218,15 @@ class Migration(DataMigration):
             'requires_place': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '200', 'db_index': 'True'}),
             'summary': ('markitup.fields.MarkupField', [], {'default': "''", 'no_rendered_field': 'True', 'blank': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
+        },
+        'core.slugredirect': {
+            'Meta': {'unique_together': "(('content_type', 'old_object_slug'),)", 'object_name': 'SlugRedirect'},
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'new_object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
+            'old_object_slug': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
         'images.image': {
@@ -235,13 +270,13 @@ class Migration(DataMigration):
         'scorecards.category': {
             'Meta': {'object_name': 'Category'},
             '_description_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 2, 4, 14, 43, 31, 427341)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 7, 18, 10, 59, 1, 621786)', 'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('markitup.fields.MarkupField', [], {'no_rendered_field': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '200'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'db_index': 'True'}),
             'synopsis': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 2, 4, 14, 43, 31, 427374)', 'auto_now': 'True', 'blank': 'True'})
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 7, 18, 10, 59, 1, 621832)', 'auto_now': 'True', 'blank': 'True'})
         },
         'scorecards.entry': {
             'Meta': {'unique_together': "(('content_type', 'object_id', 'category', 'date'),)", 'object_name': 'Entry'},
@@ -249,7 +284,7 @@ class Migration(DataMigration):
             '_extended_remark_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['scorecards.Category']"}),
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 2, 4, 14, 43, 31, 427906)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 7, 18, 10, 59, 1, 622393)', 'auto_now_add': 'True', 'blank': 'True'}),
             'date': ('django.db.models.fields.DateField', [], {}),
             'disabled': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
             'disabled_comment': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '300', 'blank': 'True'}),
@@ -261,8 +296,8 @@ class Migration(DataMigration):
             'score': ('django.db.models.fields.IntegerField', [], {}),
             'source_name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'source_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
-            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 2, 4, 14, 43, 31, 427932)', 'auto_now': 'True', 'blank': 'True'})
+            'updated': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 7, 18, 10, 59, 1, 622419)', 'auto_now': 'True', 'blank': 'True'})
         }
     }
 
-    complete_apps = ['core']
+    complete_apps = ['contenttypes', 'core']

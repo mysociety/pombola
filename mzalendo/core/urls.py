@@ -113,7 +113,9 @@ urlpatterns = patterns('core.views',
     (r'^place/', include(place_patterns)),
     (r'^organisation/', include(organisation_patterns)),
 
-    url(r'^position/(?P<slug>[-\w]+)/',     'position',     name='position'),
+    url(r'^position/(?P<pt_slug>[-\w]+)/$', 'position_pt', name='position_pt'),
+    url(r'^position/(?P<pt_slug>[-\w]+)/(?P<ok_slug>[-\w]+)/$', 'position_pt_ok', name='position_pt_ok'),
+    url(r'^position/(?P<pt_slug>[-\w]+)/(?P<ok_slug>[-\w]+)/(?P<o_slug>[-\w]+)/$', 'position_pt_ok_o', name='position_pt_ok_o'),
 
     # specials
     url(r'^parties', 'parties', name='parties'),
