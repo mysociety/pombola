@@ -1,16 +1,3 @@
-/*
- * Height fix for pages with .profile-info box
- */
-function profileInfoHeightFix() {
-  var pro_h = $('.profile-info').height()+210; //add 210 for the profile pic
-  var main_h = $('#page .page-wrapper').height();
-
-  if(pro_h > main_h){
-    $('#page .page-wrapper').css({'min-height':pro_h});
-  }
-}
-
-
 //generic re-usable hide or show with class states
 //todo: add states to trigger elem if provided
 function hideShow(elem, trig) {
@@ -155,8 +142,6 @@ $(function(){
     
             }
         );
-
-  profileInfoHeightFix();
 
   // /*
   //  * Comments: hover and show tools

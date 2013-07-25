@@ -84,7 +84,7 @@
         {% endblock %}
 
         <div id="page">
-            <div class="page-wrapper wrapper">
+            <div class="page-wrapper wrapper" id="hfWrap">
                 {% block content %}{% endblock %}
                 {% block after_content %}{% endblock %}
 
@@ -93,6 +93,12 @@
             </div>
 
         </div>
+        <script>
+            // Make sure the wrapper has a minimum height of the
+            // absolutely-positioned sidebar within it.
+            var pro_h = document.getElementById('hfProfileInfo').offsetHeight + 210;
+            document.getElementById('hfWrap').style.minHeight = pro_h + 'px';
+        </script>
 
         <footer id="site-footer">
             <div class="wrapper">
