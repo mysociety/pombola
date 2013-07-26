@@ -726,7 +726,10 @@ menu#site-user-tools ul li a {
   float: left;
   display: block;
 }
-menu#site-user-tools ul li.login, menu#site-user-tools ul li.logged-in, menu#site-user-tools ul li.login a, menu#site-user-tools ul li.logged-in a {
+menu#site-user-tools ul li.login,
+menu#site-user-tools ul li.logged-in,
+menu#site-user-tools ul li.login a,
+menu#site-user-tools ul li.logged-in a {
   padding: 0;
   color: white;
   background: none;
@@ -735,7 +738,10 @@ menu#site-user-tools ul li.login, menu#site-user-tools ul li.logged-in, menu#sit
   font-weight: normal;
   text-decoration: none;
 }
-menu#site-user-tools ul li.login a:hover, menu#site-user-tools ul li.logged-in a:hover, menu#site-user-tools ul li.login a a:hover, menu#site-user-tools ul li.logged-in a a:hover {
+menu#site-user-tools ul li.login a:hover,
+menu#site-user-tools ul li.logged-in a:hover,
+menu#site-user-tools ul li.login a a:hover,
+menu#site-user-tools ul li.logged-in a a:hover {
   background: none;
   text-decoration: underline;
 }
@@ -843,7 +849,8 @@ menu#site-user-tools ul li.active a:hover {
 #login-box #login form {
   width: auto;
 }
-#login-box #login form input#id_username, #login-box #login form input#id_password {
+#login-box #login form input#id_username,
+#login-box #login form input#id_password {
   width: 163px;
   margin: 0 0 10px 0;
 }
@@ -1046,7 +1053,9 @@ menu#site-user-tools ul li.active a:hover {
     margin: 0;
     border: 0;
   }
-  #breadcrumb nav ul li, #breadcrumb nav ul li.page-title, #breadcrumb nav ul li a {
+  #breadcrumb nav ul li,
+  #breadcrumb nav ul li.page-title,
+  #breadcrumb nav ul li a {
     display: inline;
     padding: 0;
     color: gray;
@@ -1589,7 +1598,8 @@ menu#site-user-tools ul li.active a:hover {
     clear: left;
     margin-left: 240px;
   }
-  #page .large-container .left-col, #page .large-container .right-col {
+  #page .large-container .left-col,
+  #page .large-container .right-col {
     width: 335px;
     float: left;
   }
@@ -2422,7 +2432,8 @@ ul.scorecard li article header .details .source a {
   overflow: hidden;
   margin: 10px 0;
 }
-.pagination a, .pagination span {
+.pagination a,
+.pagination span {
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
@@ -2434,18 +2445,21 @@ ul.scorecard li article header .details .source a {
   text-decoration: none;
   border: 2px solid #F6F6F6;
 }
-.pagination a:hover, .pagination span:hover {
+.pagination a:hover,
+.pagination span:hover {
   background-color: #333333;
   color: #ffffff;
   border: 2px solid #333333;
 }
-.pagination a.prev, .pagination span.prev {
+.pagination a.prev,
+.pagination span.prev {
   padding-left: 34px;
   background-position: 5px -67px;
   background-repeat: no-repeat;
   background-image: url(../images/pagination.png);
 }
-.pagination a.next, .pagination span.next {
+.pagination a.next,
+.pagination span.next {
   padding-right: 34px;
   background-position: right 3px;
   background-repeat: no-repeat;
@@ -2578,7 +2592,8 @@ ul.scorecard li article header .details .source a {
 /* 5. PAGE SPECIFIC
 -------------------------------------------------------------- */
 /* HOME */
-#page .home-left h2, #page .home-right h2 {
+#page .home-left h2,
+#page .home-right h2 {
   margin: 0 0 10px 0;
   background: none;
   border-top: none;
@@ -2586,10 +2601,12 @@ ul.scorecard li article header .details .source a {
   font-size: 24px;
   text-transform: uppercase;
 }
-#page .home-left h2#home-intro, #page .home-right h2#home-intro {
+#page .home-left h2#home-intro,
+#page .home-right h2#home-intro {
   display: none;
 }
-#page .home-left h3, #page .home-right h3 {
+#page .home-left h3,
+#page .home-right h3 {
   background: none;
   border-top: none;
 }
@@ -3228,7 +3245,8 @@ ul#home-news-list li img {
   position: absolute;
   left: -999999px;
 }
-#login form input#id_username, #login form input#id_password {
+#login form input#id_username,
+#login form input#id_password {
   width: 90%;
   margin: 10px auto;
   font-size: 14px;
@@ -3327,7 +3345,8 @@ ul#home-news-list li img {
   #login form {
     width: 300px;
   }
-  #login form input#id_username, #login form input#id_password {
+  #login form input#id_username,
+  #login form input#id_password {
     width: 288px;
     margin: 10px 0;
   }
