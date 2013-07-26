@@ -217,7 +217,6 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         # Extract all the parent places too
         parent_place_ids = [x.parent_place.id for x in child_places if (x and x.parent_place)]
         parent_places = models.Place.objects.filter(id__in=parent_place_ids).select_related('kind')
-        parent_places = sorted(parent_places, key=lambda item: item.name)
 
         # combine the places into a single list for the search drop down
         places = []
