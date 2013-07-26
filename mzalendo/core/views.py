@@ -193,7 +193,12 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         positions = positions.filter(organisation__kind__slug=ok_slug)
     if o_slug is not None:
         positions = positions.filter(organisation__slug=o_slug)
-    positions = positions.order_by('place')
+
+    # Order by place name unless ordering by person name is requested:
+    order = 'place'
+    if request.GET.get('order') == 'name':
+        order = 'person__legal_name'
+    positions = positions.order_by(order)
 
     positions = positions.select_related('person',
                                          'organisation',
@@ -217,17 +222,13 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
     else:
         template = 'core/position_detail.html'
 
-        # This is an expensive query. Alternative is to have some sort of config that
-        # links job titles to relevant place kinds - eg MP :: constituency. Even that
-        # would fail for some types of position though.
-        child_places = sorted(set(x.place for x in
-                                  positions.distinct('place').order_by('place__name')
-                                  if x.place))
+        # Collect all the places those positions refer to:
+        child_places = sorted(set(x.place for x in positions if x.place),
+                              key=lambda p: p.name)
 
-        # Extract all the parent places too
+        # Extract the parents of those places as well:
         parent_place_ids = [x.parent_place.id for x in child_places if (x and x.parent_place)]
         parent_places = models.Place.objects.filter(id__in=parent_place_ids).select_related('kind')
-        parent_places = sorted(parent_places, key=lambda item: item.name)
 
         # combine the places into a single list for the search drop down
         places = []
@@ -240,6 +241,7 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
             'object':     title,
             'page_title': page_title,
             'positions':  positions,
+            'order':      request.GET.get('order'),
             'places':     places,
             'place_slug': place_slug,
         },
