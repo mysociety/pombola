@@ -229,6 +229,7 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
             'object':     title,
             'page_title': page_title,
             'positions':  positions,
+            'order':      request.GET.get('order'),
             'places':     places,
             'place_slug': place_slug,
         },
