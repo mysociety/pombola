@@ -206,7 +206,9 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         # This is an expensive query. Alternative is to have some sort of config that
         # links job titles to relevant place kinds - eg MP :: constituency. Even that
         # would fail for some types of position though.
-        child_places = sorted(set(x.place for x in positions.distinct('place').order_by('place__name')))
+        child_places = sorted(set(x.place for x in
+                                  positions.distinct('place').order_by('place__name')
+                                  if x.place))
 
         # Extract all the parent places too
         parent_place_ids = [x.parent_place.id for x in child_places if (x and x.parent_place)]
