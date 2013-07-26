@@ -31,7 +31,7 @@ def home(request):
     elif request.GET.get('before'):
         current_slug = request.GET.get('before')
     featured_person = models.Person.objects.get_next_featured(current_slug, request.GET.get('before'))
-    
+
     # for the eletion homepage produce a list of all the featured people. Shuffle it each time to avoid any bias.
     featured_persons = list(models.Person.objects.get_featured())
     random.shuffle(featured_persons)
@@ -275,7 +275,7 @@ def organisation_kind(request, slug):
         models.OrganisationKind,
         slug=slug
     )
-    
+
     orgs = (
         org_kind
             .organisation_set
@@ -283,7 +283,7 @@ def organisation_kind(request, slug):
             .annotate(num_positions = Count('position'))
             .order_by('-num_positions', 'name')
     )
-    
+
     return object_list(
         request,
         queryset = orgs,
@@ -292,9 +292,9 @@ def organisation_kind(request, slug):
 
 def parties(request):
     """Show all parties that currently have MPs sitting in parliament"""
-    
+
     parties = models.Organisation.objects.all().active_parties()
-    
+
     return render_to_response(
         'core/parties.html',
         {
@@ -326,21 +326,21 @@ def memcached_status(request):
     cache_key = 'memcached_status'
     now = calendar.timegm( time.gmtime() )
     ttl = 10
-    
+
     cached = cache.get(cache_key)
-    
+
     if cached:
         response = "Found %u in cache with key %s, which was %u seconds ago (ttl is %u seconds)" % (cached, cache_key, now - cached, ttl )
     else:
         cache.set( cache_key, now, ttl )
         response = "Value not found in cache with key %s - added %u for %u seconds" % ( cache_key, now, ttl )
-    
+
     return HttpResponse(
         response,
         content_type='text/plain',
     )
 
-    
+
 # Template the robots.txt so we can block robots on staging.
 @cache_control(max_age=86400, s_maxage=86400, public=True)
 def robots(request):
