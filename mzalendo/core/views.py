@@ -19,7 +19,9 @@ from django.http import Http404
 from django.contrib.contenttypes.models import ContentType
 
 from mzalendo.core import models
+from mzalendo.info.models import InfoPage
 from mzalendo.helpers import geocode
+
 
 def home(request):
     """Homepage"""
@@ -34,11 +36,23 @@ def home(request):
     featured_persons = list(models.Person.objects.get_featured())
     random.shuffle(featured_persons)
 
+    # If there is editable homepage content make it available to the templates.
+    # Currently only Nigeria uses this, if more countries want it we should
+    # probably add a feature flip boolean to the config.
+    editable_content = None
+    if settings.COUNTRY_APP == 'nigeria':
+        try:
+            page = InfoPage.objects.get(slug="homepage")
+            editable_content = page.content
+        except InfoPage.DoesNotExist:
+            pass
+
     return render_to_response(
         'home.html',
         {
           'featured_person':  featured_person,
           'featured_persons': featured_persons,
+          'editable_content': editable_content,
         },
         context_instance=RequestContext(request)
     )

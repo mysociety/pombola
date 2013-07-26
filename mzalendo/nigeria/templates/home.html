@@ -18,29 +18,9 @@
           with National Assembly members and other elected officials.
         </h2>
 
-        <h3>Elections</h3>
-          
-        <p>
-          The next general elections in Nigeria will be in April 2015. In
-          the interim, there will be some gubernatorial and local government
-          elections:
-        </p>
-          
-        <p>
-          <strong>Anambra:</strong>
-          Tenure elapses March 2014, election date yet to be fixed.
-        </p>
-
-        <p>
-          <strong>Ekiti:</strong>
-          Tenure elapses October 15, 2014, election date yet to be fixed.
-        </p>
-
-        <p>
-          <strong>Osun:</strong>
-          Tenure elapses November 25, 2014, election date yet to be fixed.
-        </p>
-
+        {% if editable_content %}
+          {{ editable_content }}
+        {% endif %}
 
 
         <form action="{% url core_search %}" id="home-search">
