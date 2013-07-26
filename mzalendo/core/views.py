@@ -208,13 +208,11 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
     else:
         template = 'core/position_detail.html'
 
-        # This is an expensive query. Alternative is to have some sort of config that
-        # links job titles to relevant place kinds - eg MP :: constituency. Even that
-        # would fail for some types of position though.
+        # Collect all the places those positions refer to:
         child_places = sorted(set(x.place for x in positions if x.place),
                               key=lambda p: p.name)
 
-        # Extract all the parent places too
+        # Extract the parents of those places as well:
         parent_place_ids = [x.parent_place.id for x in child_places if (x and x.parent_place)]
         parent_places = models.Place.objects.filter(id__in=parent_place_ids).select_related('kind')
 
