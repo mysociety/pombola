@@ -1,12 +1,12 @@
 # Mzalendo
 
-This web app allows you to store and share information on public figure,
+This web app allows you to store and share information on public figures,
 especially politicians.
 
 Please see the [Operations Manual](http://goo.gl/uaXup) which covers all aspects of running a Mzalendo site.
 
 For an overview of the system please see the files in docs/ - especially
-OVERVIEW.txt
+[OVERVIEW.txt](https://github.com/mysociety/mzalendo/blob/master/docs/OVERVIEW.txt)
 
 
 ## Community
@@ -22,12 +22,12 @@ There is also the Components mailing list for some of the code used to make the 
 
 ## Installing
 
-Please see the docs/INSTALL.txt and docs/INSTALL-macos.txt files
+Please see [docs/INSTALL.txt](https://github.com/mysociety/mzalendo/blob/master/docs/INSTALL.txt)
 
 
 ## Troubleshooting
 
-Please see docs/TROUBLESHOOTING.txt file
+Please see [docs/TROUBLESHOOTING.txt](https://github.com/mysociety/mzalendo/blob/master/docs/TROUBLESHOOTING.txt) file
 
 ## Future
 

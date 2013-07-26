@@ -24,7 +24,7 @@ cd mzalendo_root
 # 
 # The code is available via github: https://github.com/mysociety/mzalendo
 
-git clone https://evdb@github.com/mysociety/mzalendo.git
+git clone https://github.com/mysociety/mzalendo.git
 
 # on a Mac you could fetch the code using GitHub's client - use the 'Clone in
 # Mac' button - http://mac.github.com/

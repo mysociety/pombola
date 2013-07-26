@@ -68,4 +68,4 @@ coverage>=3
 requests==0.14.2
 
 ## votematch
-django-model-utils
+django-model-utils==1.3.0

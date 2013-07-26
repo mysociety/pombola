@@ -19,7 +19,9 @@ from django.http import Http404
 from django.contrib.contenttypes.models import ContentType
 
 from mzalendo.core import models
+from mzalendo.info.models import InfoPage
 from mzalendo.helpers import geocode
+
 
 def home(request):
     """Homepage"""
@@ -29,16 +31,28 @@ def home(request):
     elif request.GET.get('before'):
         current_slug = request.GET.get('before')
     featured_person = models.Person.objects.get_next_featured(current_slug, request.GET.get('before'))
-    
+
     # for the eletion homepage produce a list of all the featured people. Shuffle it each time to avoid any bias.
     featured_persons = list(models.Person.objects.get_featured())
     random.shuffle(featured_persons)
+
+    # If there is editable homepage content make it available to the templates.
+    # Currently only Nigeria uses this, if more countries want it we should
+    # probably add a feature flip boolean to the config.
+    editable_content = None
+    if settings.COUNTRY_APP == 'nigeria':
+        try:
+            page = InfoPage.objects.get(slug="homepage")
+            editable_content = page.content
+        except InfoPage.DoesNotExist:
+            pass
 
     return render_to_response(
         'home.html',
         {
           'featured_person':  featured_person,
           'featured_persons': featured_persons,
+          'editable_content': editable_content,
         },
         context_instance=RequestContext(request)
     )
@@ -181,6 +195,13 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         positions = positions.filter(organisation__slug=o_slug)
     positions = positions.order_by('place')
 
+    positions = positions.select_related('person',
+                                         'organisation',
+                                         'title',
+                                         'place',
+                                         'place__kind',
+                                         'place__parent_place')
+
     place_slug = request.GET.get('place_slug')
     if place_slug:
         positions = positions.filter(
@@ -199,10 +220,13 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         # This is an expensive query. Alternative is to have some sort of config that
         # links job titles to relevant place kinds - eg MP :: constituency. Even that
         # would fail for some types of position though.
-        child_places = sorted(set(x.place for x in positions.distinct('place').order_by('place__name')))
+        child_places = sorted(set(x.place for x in
+                                  positions.distinct('place').order_by('place__name')
+                                  if x.place))
 
         # Extract all the parent places too
-        parent_places = set(x.parent_place for x in child_places if (x and x.parent_place))
+        parent_place_ids = [x.parent_place.id for x in child_places if (x and x.parent_place)]
+        parent_places = models.Place.objects.filter(id__in=parent_place_ids).select_related('kind')
         parent_places = sorted(parent_places, key=lambda item: item.name)
 
         # combine the places into a single list for the search drop down
@@ -251,7 +275,7 @@ def organisation_kind(request, slug):
         models.OrganisationKind,
         slug=slug
     )
-    
+
     orgs = (
         org_kind
             .organisation_set
@@ -259,7 +283,7 @@ def organisation_kind(request, slug):
             .annotate(num_positions = Count('position'))
             .order_by('-num_positions', 'name')
     )
-    
+
     return object_list(
         request,
         queryset = orgs,
@@ -268,9 +292,9 @@ def organisation_kind(request, slug):
 
 def parties(request):
     """Show all parties that currently have MPs sitting in parliament"""
-    
+
     parties = models.Organisation.objects.all().active_parties()
-    
+
     return render_to_response(
         'core/parties.html',
         {
@@ -302,21 +326,21 @@ def memcached_status(request):
     cache_key = 'memcached_status'
     now = calendar.timegm( time.gmtime() )
     ttl = 10
-    
+
     cached = cache.get(cache_key)
-    
+
     if cached:
         response = "Found %u in cache with key %s, which was %u seconds ago (ttl is %u seconds)" % (cached, cache_key, now - cached, ttl )
     else:
         cache.set( cache_key, now, ttl )
         response = "Value not found in cache with key %s - added %u for %u seconds" % ( cache_key, now, ttl )
-    
+
     return HttpResponse(
         response,
         content_type='text/plain',
     )
 
-    
+
 # Template the robots.txt so we can block robots on staging.
 @cache_control(max_age=86400, s_maxage=86400, public=True)
 def robots(request):
