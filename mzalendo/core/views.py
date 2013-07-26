@@ -181,6 +181,13 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         positions = positions.filter(organisation__slug=o_slug)
     positions = positions.order_by('place')
 
+    positions = positions.select_related('person',
+                                         'organisation',
+                                         'title',
+                                         'place',
+                                         'place__kind',
+                                         'place__parent_place')
+
     place_slug = request.GET.get('place_slug')
     if place_slug:
         positions = positions.filter(
@@ -202,7 +209,8 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         child_places = sorted(set(x.place for x in positions.distinct('place').order_by('place__name')))
 
         # Extract all the parent places too
-        parent_places = set(x.parent_place for x in child_places if (x and x.parent_place))
+        parent_place_ids = [x.parent_place.id for x in child_places if (x and x.parent_place)]
+        parent_places = models.Place.objects.filter(id__in=parent_place_ids).select_related('kind')
         parent_places = sorted(parent_places, key=lambda item: item.name)
 
         # combine the places into a single list for the search drop down
