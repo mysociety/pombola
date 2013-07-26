@@ -1,6 +1,6 @@
 # Mzalendo
 
-This web app allows you to store and share information on public figure,
+This web app allows you to store and share information on public figures,
 especially politicians.
 
 Please see the [Operations Manual](http://goo.gl/uaXup) which covers all aspects of running a Mzalendo site.
@@ -22,7 +22,7 @@ There is also the Components mailing list for some of the code used to make the 
 
 ## Installing
 
-Please see the docs/INSTALL.txt and docs/INSTALL-macos.txt files
+Please see docs/INSTALL.txt
 
 
 ## Troubleshooting
