@@ -55,10 +55,10 @@
     {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
         <li>
-            <a href="{% url position_pt pt_slug='member-national-assembly' %}">Members of the National Assembly</a>
+            <a href="{% url position_pt pt_slug='member-national-assembly' %}?order=name">Members of the National Assembly</a>
         </li>
         <li>
-            <a href="{% url position_pt pt_slug='senator' %}">Senators</a>
+            <a href="{% url position_pt pt_slug='senator' %}?order=name">Senators</a>
         </li>
         <li>
             <a href="{% url info_page slug='parliament-overview' %}">Parliament Overview</a>

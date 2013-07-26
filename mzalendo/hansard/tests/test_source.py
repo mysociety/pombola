@@ -16,7 +16,7 @@ class HansardSourceTest(TestCase):
         """Create a test source (easier than fixture for now)"""
         source = Source(
             name = 'Test Source',
-            url  = 'http://www.mysociety.org/robots.txt',
+            url  = 'http://www.mysociety.org/',
             date = datetime.date( 2011, 11, 14),
         )
         source.save()

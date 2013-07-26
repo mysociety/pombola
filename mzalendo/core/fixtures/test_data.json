@@ -18,7 +18,6 @@
           "ended" : null,
           "kind" : 1,
           "name" : "Parliament",
-          "original_id" : null,
           "slug" : "parliament",
           "started" : null,
           "summary" : "",
@@ -143,7 +142,6 @@
             "date_of_death": null, 
             "summary": "", 
             "date_of_birth": "1968-01-15", 
-            "original_id": null, 
             "_summary_rendered": "", 
             "slug": "joseph-bloggs"
         }
