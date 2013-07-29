@@ -49,11 +49,11 @@ class ContactAdmin(admin.ModelAdmin):
     list_display  = [ 'kind', 'value', 'show_foreign' ]
     search_fields = ['value', ]
     inlines       = [ InformationSourceInlineAdmin, ]
-    
+
     def show_foreign(self, obj):
         return create_admin_link_for( obj.content_object, str(obj.content_object) )
     show_foreign.allow_tags = True
-    
+
 
 class ContactInlineAdmin(GenericTabularInline):
     model      = models.Contact
@@ -68,7 +68,7 @@ class ContactInlineAdmin(GenericTabularInline):
 class PositionAdmin(AjaxSelectAdmin):
     list_display  = [ 'id', 'show_person', 'show_organisation', 'show_place', 'show_title', 'start_date', 'end_date' ]
     search_fields = [ 'person__legal_name', 'organisation__name', 'title__name' ]
-    list_filter   = [ 'title__name' ]    
+    list_filter   = [ 'title__name' ]
     inlines       = [ InformationSourceInlineAdmin, ]
     readonly_fields = ['sorting_start_date','sorting_end_date']
 
@@ -80,12 +80,12 @@ class PositionAdmin(AjaxSelectAdmin):
             'person':       'person_name',
             'title':        'title_name',
         }
-    )    
-    
+    )
+
     def show_person(self, obj):
         return create_admin_link_for( obj.person, obj.person.name )
     show_person.allow_tags = True
-    
+
     def show_organisation(self, obj):
         return create_admin_link_for(obj.organisation, obj.organisation.name)
     show_organisation.allow_tags = True
@@ -113,7 +113,7 @@ class PositionInlineAdmin(admin.TabularInline):
             'person':       'person_name',
             'title':        'title_name',
         }
-    )    
+    )
 
 class ScorecardInlineAdmin(GenericTabularInline):
     model = scorecard_models.Entry
@@ -192,7 +192,7 @@ class LogAdmin(admin.ModelAdmin):
     ordering = ('-action_time',)
     readonly_fields = [ 'user','content_type','object_id','object_repr','action_flag','change_message']
     date_hierarchy = 'action_time'
-    
+
     #We don't want people changing this historical record:
     def has_add_permission(self, request):
         return False
