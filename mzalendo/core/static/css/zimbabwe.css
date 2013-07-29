@@ -3392,6 +3392,20 @@ h2 a.appearances-trigger.active {
   background: #009245;
   height: 2px;
 }
+.infopage th {
+  font-weight: bold;
+}
+.infopage th, .infopage td {
+  padding: 0.25em;
+  border-bottom: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+}
+.infopage th:last-child, .infopage td:last-child {
+  border-right: none;
+}
+.infopage tr:last-child td {
+  border-bottom: none;
+}
 
 @media only all and (min-width: 640px), print {
   .infopage {

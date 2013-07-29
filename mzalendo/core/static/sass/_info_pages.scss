@@ -17,7 +17,17 @@
   hr {
     border: none;
     background: $colour_primary;
-    height: 2px; } }
+    height: 2px; }
+  th {
+    font-weight: bold; }
+  th, td {
+    padding: 0.25em;
+    border-bottom: 1px solid $colour_muted;
+    border-right:  1px solid $colour_muted;
+    &:last-child {
+      border-right: none; } }
+  tr:last-child td {
+    border-bottom: none; } }
 
 @media only all and (min-width: 640px), print {
   .infopage {
