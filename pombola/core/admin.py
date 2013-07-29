@@ -176,6 +176,7 @@ class OrganisationKindAdmin(admin.ModelAdmin):
 
 class PlaceKindAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    list_display = [ 'slug', 'name' ]
     search_fields = [ 'name' ]
 
 class PositionTitleAdmin(admin.ModelAdmin):
