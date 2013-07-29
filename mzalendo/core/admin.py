@@ -14,6 +14,14 @@ from images.admin import ImageAdminInline
 def create_admin_link_for(obj, link_text):
     return u'<a href="%s">%s</a>' % ( obj.get_admin_url(), link_text )
 
+class ContentTypeModelAdmin(admin.ModelAdmin):
+
+    def show_foreign(self, obj):
+        return create_admin_link_for( obj.content_object, str(obj.content_object) )
+
+    show_foreign.allow_tags = True
+
+
 
 class ContactKindAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
@@ -25,14 +33,10 @@ class AlternativePersonNameInlineAdmin(admin.TabularInline):
     extra = 0
 
 
-class InformationSourceAdmin(admin.ModelAdmin):
+class InformationSourceAdmin(ContentTypeModelAdmin):
     list_display  = [ 'source', 'show_foreign', 'entered', ]
     list_filter   = [ 'entered', ]
     search_fields = [ 'source', ]
-
-    def show_foreign(self, obj):
-        return create_admin_link_for( obj.content_object, str(obj.content_object) )
-    show_foreign.allow_tags = True
 
 
 class InformationSourceInlineAdmin(GenericTabularInline):
@@ -45,14 +49,10 @@ class InformationSourceInlineAdmin(GenericTabularInline):
     }
 
 
-class ContactAdmin(admin.ModelAdmin):
+class ContactAdmin(ContentTypeModelAdmin):
     list_display  = [ 'kind', 'value', 'show_foreign' ]
     search_fields = ['value', ]
     inlines       = [ InformationSourceInlineAdmin, ]
-
-    def show_foreign(self, obj):
-        return create_admin_link_for( obj.content_object, str(obj.content_object) )
-    show_foreign.allow_tags = True
 
 
 class ContactInlineAdmin(GenericTabularInline):
