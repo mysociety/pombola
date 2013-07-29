@@ -432,7 +432,7 @@ IEBC_API_ID = config.get('IEBC_API_ID')
 IEBC_API_SECRET = config.get('IEBC_API_SECRET')
 
 # Markitup settings
-MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions':['tables']})
 MARKITUP_SET = 'markitup/sets/markdown'
 
 
