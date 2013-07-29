@@ -64,6 +64,18 @@ class ContactInlineAdmin(GenericTabularInline):
         db.models.TextField: {'widget': forms.Textarea(attrs={'rows':2, 'cols':20})},
     }
 
+class IdentifierAdmin(ContentTypeModelAdmin):
+    list_display  = [ 'scheme', 'identifier', 'show_foreign' ]
+    search_fields = ['identifier', ]
+    inlines       = [ InformationSourceInlineAdmin, ]
+
+
+class IdentifierInlineAdmin(GenericTabularInline):
+    model      = models.Identifier
+    extra      = 0
+    can_delete = False
+    fields     = [ 'scheme', 'identifier' ]
+
 
 class PositionAdmin(AjaxSelectAdmin):
     list_display  = [ 'id', 'show_person', 'show_organisation', 'show_place', 'show_title', 'start_date', 'end_date' ]
@@ -124,7 +136,7 @@ class ScorecardInlineAdmin(GenericTabularInline):
 
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["legal_name"]}
-    inlines = [AlternativePersonNameInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ScorecardInlineAdmin]
+    inlines = [AlternativePersonNameInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ScorecardInlineAdmin, IdentifierInlineAdmin]
     list_display = ['slug', 'name', 'date_of_birth']
     list_filter   = [ 'can_be_featured', ]
     search_fields = ['legal_name']
@@ -134,7 +146,7 @@ class PlaceAdmin(admin.ModelAdmin):
     list_display = ('slug', 'name', 'kind', 'show_organisation')
     list_filter = ('kind',)
     search_fields = ('name', 'organisation__name')
-    inlines = (InformationSourceInlineAdmin, ScorecardInlineAdmin)
+    inlines = (InformationSourceInlineAdmin, ScorecardInlineAdmin, IdentifierInlineAdmin)
 
     def show_organisation(self, obj):
         if obj.organisation:
@@ -153,7 +165,7 @@ class PlaceInlineAdmin(admin.TabularInline):
 
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ]
+    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, IdentifierInlineAdmin]
     list_display  = [ 'slug', 'name', 'kind', ]
     list_filter   = [ 'kind', ]
     search_fields = [ 'name' ]
@@ -174,6 +186,7 @@ class PositionTitleAdmin(admin.ModelAdmin):
 # Add these to the admin
 admin.site.register( models.Contact,              ContactAdmin               )
 admin.site.register( models.ContactKind,          ContactKindAdmin           )
+admin.site.register( models.Identifier,           IdentifierAdmin            )
 admin.site.register( models.InformationSource,    InformationSourceAdmin     )
 admin.site.register( models.Organisation,         OrganisationAdmin          )
 admin.site.register( models.OrganisationKind,     OrganisationKindAdmin      )
