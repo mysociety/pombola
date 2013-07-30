@@ -37,13 +37,9 @@ django-haystack==1.2.5
 # see http://www.epicserve.com/blog/2010/oct/16/installing-xapian-osx-python-bindings/
 # or if using homebrew do `brew install xapian --python`
 
+# Testing helpers 
 WebTest>=1.3.2
 django-webtest==1.4.3
-
-# Social logins (Twitter/Facebook)
-python-openid
-oauth2==1.5.170
-django-social-auth==0.6.0
 -e git://github.com/nathforge/django-mechanize.git#egg=django-mechanize
 selenium==2.15.0
 django-selenium==0.4.1

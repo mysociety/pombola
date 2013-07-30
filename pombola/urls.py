@@ -70,11 +70,6 @@ if settings.SERVE_STATIC_FILES:
         (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     )
 
-# social auth
-urlpatterns += patterns('',
-    url(r'^social/', include('social_auth.urls')),
-)
-
 # search
 urlpatterns += patterns('',
     (r'^search/', include('search.urls')),
