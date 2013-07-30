@@ -53,17 +53,6 @@ class PombolaSeleniumTestCase(SeleniumTestCase):
     def assert_user_logged_out(self):
         self.assertFalse( self.get_current_user_id() )
 
-    def login(self, username, password='secret'):        
-        """Go to login page (if needed) and fill in the login details, and submit"""
-
-        if not '/accounts/login/' in self.driver.current_url:
-            self.open_url('/accounts/login/')
-
-        self.driver.find_element_by_id("id_username").send_keys(username)
-        self.driver.find_element_by_id("id_password").send_keys(password)
-        self.driver.find_element_by_css_selector("input[type=\"submit\"]").click()
-        self.assert_user_logged_in()
-
 
     def login_to_admin(self, username, password='secret'):
         """Login to the admin interface"""
@@ -75,12 +64,6 @@ class PombolaSeleniumTestCase(SeleniumTestCase):
         self.driver.find_element_by_id("id_password").clear()
         self.driver.find_element_by_id("id_password").send_keys(password)
         self.driver.find_element_by_css_selector("input[type=\"submit\"]").click()
-
-
-    def logout(self):
-        self.driver.find_element_by_link_text("logout").click()
-        self.assertTrue( '/accounts/logout/' in self.driver.current_url )
-        self.assert_user_logged_out()
         
     def resize_to_mobile(self):
         self.driver.set_window_size(400, 600)
