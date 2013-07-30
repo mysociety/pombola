@@ -50,8 +50,6 @@
                 // Now load all the optional bits that we didn't want slowing down the more important bits
                 Modernizr.load([
                   static_url('js/analytics.js')
-                  // ,
-                  // '//platform.twitter.com/widgets.js',
                 ]);
             }
         }

@@ -40,15 +40,6 @@ FROM_EMAIL: 'you@example.com'
 # locally
 KENYA_PARSER_PDF_TO_HTML_HOST: ''
 
-# Social app configs - can be left blank and the option will not be provided
-TWITTER_CONSUMER_KEY: ''
-TWITTER_CONSUMER_SECRET: ''
-
-# Social app testing - leaving these blank will skip the tests
-TEST_TWITTER_USERNAME: ''
-TEST_TWITTER_PASSWORD: ''
-TEST_TWITTER_REAL_NAME: ''
-
 # Where is the selenium server? (If empty then selenium tests can't run)
 # download it from here: http://seleniumhq.org/download/
 # Note - need a recent one so that the window resizing has been implemented -
