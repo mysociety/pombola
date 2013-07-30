@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -87,7 +88,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 div.error {
-  border: 2px solid #f00;
+  border: 2px solid red;
   background-color: #fcc;
   text-align: center;
   font-size: 125%;
@@ -124,7 +125,7 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: none;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   color: #444;
   font-size: 100%;
   background: #e6e6e6;
@@ -854,7 +855,9 @@ menu#mobile-top-tools ul li a img {
     margin: 0;
     border: 0;
   }
-  #breadcrumb nav ul li, #breadcrumb nav ul li.page-title, #breadcrumb nav ul li a {
+  #breadcrumb nav ul li,
+  #breadcrumb nav ul li.page-title,
+  #breadcrumb nav ul li a {
     display: inline;
     padding: 0;
     color: gray;
@@ -878,7 +881,7 @@ menu#mobile-top-tools ul li a img {
     background-color: #fff;
   }
 }
-@media only all and (min-width: 640px) and print, print and print {
+@media print {
   #breadcrumb {
     display: none;
   }
@@ -1397,7 +1400,8 @@ menu#mobile-top-tools ul li a img {
     clear: left;
     margin-left: 240px;
   }
-  #page .large-container .left-col, #page .large-container .right-col {
+  #page .large-container .left-col,
+  #page .large-container .right-col {
     width: 335px;
     float: left;
   }
@@ -2044,7 +2048,7 @@ ul.position-listing li {
   padding: 4px;
   min-height: 50px;
   list-style: none;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #bbbbbb;
 }
 ul.position-listing li:nth-child(odd) {
   background-color: #f4f4f4;
@@ -2230,7 +2234,8 @@ ul.scorecard li article header .details .source a {
   overflow: hidden;
   margin: 10px 0;
 }
-.pagination a, .pagination span {
+.pagination a,
+.pagination span {
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
@@ -2240,20 +2245,23 @@ ul.scorecard li article header .details .source a {
   padding: 6px 10px;
   background: #F6F6F6;
   text-decoration: none;
-  border: 2px solid #F6F6F6;
+  border: 2px solid #f6f6f6;
 }
-.pagination a:hover, .pagination span:hover {
+.pagination a:hover,
+.pagination span:hover {
   background-color: #333333;
   color: #ffffff;
   border: 2px solid #333333;
 }
-.pagination a.prev, .pagination span.prev {
+.pagination a.prev,
+.pagination span.prev {
   padding-left: 34px;
   background-position: 5px -67px;
   background-repeat: no-repeat;
   background-image: url(../images/pagination.png);
 }
-.pagination a.next, .pagination span.next {
+.pagination a.next,
+.pagination span.next {
   padding-right: 34px;
   background-position: right 3px;
   background-repeat: no-repeat;
@@ -2268,7 +2276,7 @@ ul.scorecard li article header .details .source a {
 .pagination .current:hover {
   color: #444444;
   background: none;
-  border: 2px solid #F6F6F6;
+  border: 2px solid #f6f6f6;
 }
 
 #ajax_dialog_subcontent {
@@ -2386,7 +2394,8 @@ ul.scorecard li article header .details .source a {
 /* 5. PAGE SPECIFIC
 -------------------------------------------------------------- */
 /* HOME */
-#page .home-left h2, #page .home-right h2 {
+#page .home-left h2,
+#page .home-right h2 {
   margin: 0 0 10px 0;
   background: none;
   border-top: none;
@@ -2394,10 +2403,12 @@ ul.scorecard li article header .details .source a {
   font-size: 24px;
   text-transform: uppercase;
 }
-#page .home-left h2#home-intro, #page .home-right h2#home-intro {
+#page .home-left h2#home-intro,
+#page .home-right h2#home-intro {
   display: none;
 }
-#page .home-left h3, #page .home-right h3 {
+#page .home-left h3,
+#page .home-right h3 {
   background: none;
   border-top: none;
 }
