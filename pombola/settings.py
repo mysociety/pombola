@@ -270,7 +270,6 @@ INSTALLED_APPS = (
     'feedback',
     'scorecards',
     'search',
-    'user_profile',
     'file_archive',
     'map',
 )
@@ -322,9 +321,6 @@ LOGGING = {
 HANSARD_CACHE = os.path.join( base_dir, "../hansard_cache" )
 KENYA_PARSER_PDF_TO_HTML_HOST = config.get('KENYA_PARSER_PDF_TO_HTML_HOST')
 
-# User profile related
-AUTH_PROFILE_MODULE = 'user_profile.UserProfile'
-
 # Social auth related
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
@@ -362,7 +358,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.associate_user',
     'social_auth.backends.pipeline.social.load_extra_data',
     # 'social_auth.backends.pipeline.user.update_user_details',
-    'user_profile.pipeline.update_user_details',
 )
 
 # Appears to have no effect - see https://github.com/omab/django-social-auth/issues/175

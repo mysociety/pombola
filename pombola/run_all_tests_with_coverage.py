@@ -14,12 +14,10 @@ coverage run --omit=$OMIT ./manage.py test   \
     images         \
     scorecards     \
     search         \
-    tasks          \
-    user_profile
+    tasks
 
 coverage run --omit=$OMIT ./manage.py test --selenium-only \
   core                           \
-  feedback                       \
-  user_profile
+  feedback
 
 coverage html -d pombola-coverage
