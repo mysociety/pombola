@@ -333,13 +333,6 @@ BCRYPT_ENABLED_UNDER_TEST = False
 # Number of rounds to use for bcrypt hashing. Defaults to 12.
 BCRYPT_ROUNDS = 12
 
-# How long does the user have to activate their account?
-ACCOUNT_ACTIVATION_DAYS = 7
-
-# After login go to home page
-LOGIN_REDIRECT_URL = '/'
-LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
-
 
 # pagination related settings
 PAGINATION_DEFAULT_PAGINATION      = 10
