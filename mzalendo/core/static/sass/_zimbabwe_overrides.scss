@@ -1,6 +1,17 @@
+$zw_red: #f2242c;
+$zw_green: #44c943;
+
 #logo {
-  background: url('//placehold.it/147x23') 0 center no-repeat;
+  height: 100px;
+  background: url('/static/images/zimbabwe-bird-with-text-147x42.png') 0 center no-repeat;
   @media only all and (min-width: 640px), print {
-    background: url('//placehold.it/418x34') 0 center no-repeat;
+    background: url('/static/images/zimbabwe-bird-with-text-420x96.png') 0 center no-repeat;
+  }
+}
+
+#site-header {
+  @include background(linear-gradient($zw_red, $zw_green));
+  @media only all and (min-width: 640px), print {
+    height: 120px;
   }
 }
