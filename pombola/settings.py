@@ -35,7 +35,7 @@ if IN_TEST_MODE:
     if os.path.exists( root_dir ):
         shutil.rmtree( root_dir )
     print "Running in test mode! (testing root_dir is '%s')" % root_dir
-    
+
 
 # load the mySociety config
 config_file = os.path.join( base_dir, 'conf', 'general.yml' )
@@ -162,7 +162,7 @@ CACHES = {
     # want to do the caching ourselves - rather we leave that to Varnish on the
     # servers.
     'dummy': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',    
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     },
 }
 
@@ -191,7 +191,7 @@ TEMPLATE_LOADERS = (
 )
 
 
-MIDDLEWARE_CLASSES = (    
+MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware', # first in list so it is able to act last on response
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -218,7 +218,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.static",
-    "django.core.context_processors.request",    
+    "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     "social_auth.context_processors.social_auth_by_type_backends",
     "pombola.core.context_processors.add_settings",    
@@ -240,10 +240,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.gis',
     'django_bcrypt',
-    
-    'registration_defaults',
-    'registration',
-    
+
     'admin_additions',
     'django.contrib.admin',
     'django.contrib.admindocs',
@@ -260,7 +257,7 @@ INSTALLED_APPS = (
 
     'images',
     'sorl.thumbnail',
-    
+
     'haystack',
 
     'helpers',
@@ -449,7 +446,7 @@ DISQUS_USE_IDENTIFIERS = config.get( 'DISQUS_USE_IDENTIFIERS', True )
 
 
 # Polldaddy widget ID - from http://polldaddy.com/
-# Use the widget rather than embedding a poll direct as it will allow the poll 
+# Use the widget rather than embedding a poll direct as it will allow the poll
 # to be changed without having to alter the settings or HTML. If left blank
 # then no poll will be shown.
 POLLDADDY_WIDGET_ID = config.get( 'POLLDADDY_WIDGET_ID', None );

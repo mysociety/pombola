@@ -30,11 +30,6 @@ urlpatterns += patterns('',
 )
 
 
-# Accounts
-urlpatterns += patterns('',
-    (r'^accounts/', include('registration.backends.default.urls')),
-)
-
 # mapit
 urlpatterns += patterns('',    
     (r'^mapit/', include('mapit.urls')),
