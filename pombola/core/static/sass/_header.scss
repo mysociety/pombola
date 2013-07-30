@@ -60,7 +60,7 @@ menu#mobile-top-tools {
     display: block; }
 
   @media print { display: none; }
-  
+
   float: right;
   background: transparent;
   margin: 5px 5px 5px 15px;
@@ -85,87 +85,3 @@ menu#mobile-top-tools {
     @include border-radius(0 5px 5px 0);
     &:hover {
       background-color: $colour_blackish; } } }
-
-// ------------------------------------------------------
-
-menu#site-user-tools {
-  // Only display this for wide screens
-  display: none;
-  @media only all and (min-width: 640px), print {
-    display: block; }
-  @media print { display: none; }
-  float: right;
-  background: transparent;
-  margin: 5px;
-  height: auto;
-  border: none;
-  ul {
-    @include list-reset-soft;
-    li {
-      padding: 10px;
-      &.logged-in-name {
-        display: none; }
-      a {
-        color: $colour_white;
-        text-decoration: none;
-        &:hover {
-          color: $colour_black; } } } }
-  ul {
-    @include list-reset;
-    li.login,
-    li.logged-in,
-    li.login a,
-    li.logged-in a {
-      padding: 0;
-      color: $colour_white;
-      background: none;
-      border: none;
-      font: {
-        size: 13px;
-        weight: normal; };
-      text-decoration: none;
-      a:hover {
-        background: none;
-        text-decoration: underline; } }
-    li.login {
-      text-transform: uppercase;
-      width: 70px;
-      a {
-        font-size: 11px;
-        padding: 3px 25px 3px 10px;
-        @include border-radius(2px 0 0 2px);
-        background: black url(../images/login-arrows.png) 54px -19px no-repeat;
-        @include background(url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(#707070, black));
-        &:hover {
-          text-decoration: none;
-          background: #707070 url(../images/login-arrows.png) 54px -19px no-repeat;
-          @include background(url(../images/login-arrows.png) 54px -19px no-repeat, linear-gradient(black, #707070)); } } }
-    li.logged-in {
-      text-transform: uppercase;
-      a {
-        font-size: 9px;
-        margin: 3px;
-        padding: 0 7px;
-        @include border-radius(5px);
-        @include background(linear-gradient(#707070, black));
-        &:hover {
-          text-decoration: none;
-          background: #707070 no-repeat;
-          @include background(linear-gradient(black, #707070)); } } }
-    li.logged-in-name {
-      display: block;
-      padding: 3px;
-      color: #fff; }
-    li.active {
-      position: relative;
-      border-top: 1px solid #666666;
-      border-left: 1px solid #666666;
-      // border-right:1px solid #666666;
-      z-index: 2;
-      a {
-        color: $colour_grey;
-        @include border-radius(0);
-        background: $colour_muted url(../images/login-arrows.png) 54px 11px no-repeat;
-        &:hover {
-          color: $colour_black;
-          background: $colour_muted url(../images/login-arrows.png) 54px 11px no-repeat; } } } } }

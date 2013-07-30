@@ -22,15 +22,5 @@
             <button type="submit">Submit</button>
         </form>
         
-        <menu id="site-user-tools">
-            <ul>
-                {% if request.user.is_authenticated  %}
-                    <li class="logged-in-name">Hi {% firstof request.user.get_full_name request.user.username %}</li>
-                    <li class="logged-in"><a href="{% url django.contrib.auth.views.logout %}">logout</a></li>
-                {% else %}
-                    <li class="login"><a href="{% url django.contrib.auth.views.login %}?next={% if request.path == '/accounts/logout/' %}/{% else %}{{ request.path }}{% endif %}">login</a></li>
-                {% endif %}
-            </ul>
-        </menu>
     </div>
 </header>

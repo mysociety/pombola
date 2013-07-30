@@ -153,21 +153,6 @@ $(function(){
   //   $(this).removeClass('hovered');
   // });
 
-
-  /*
-   * Login box
-   */
-  var login_target = $('#site-user-tools .login a').attr('href');
-
-  $('#site-user-tools').after('<div id="login-box">Loading...</div>');
-  
-
-  $('li.login').on('click', function(event) {
-    event.preventDefault();
-    $('#login-box').load(login_target + ' #login');
-    hideShow($('#login-box'), $(this));
-  });
-
   /*
    * Main nav hover
    */
