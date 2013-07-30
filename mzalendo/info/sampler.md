@@ -57,3 +57,12 @@ You can include images if you want:
 ![The Google Logo](http://www.google.co.uk/images/srpr/logo3w.png "Google Logo")
 
 These images must already be available on the web so that you have a URL to them.
+
+### Tables
+
+Tables can be formatted like this:
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell

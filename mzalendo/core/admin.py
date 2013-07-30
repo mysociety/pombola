@@ -14,6 +14,14 @@ from images.admin import ImageAdminInline
 def create_admin_link_for(obj, link_text):
     return u'<a href="%s">%s</a>' % ( obj.get_admin_url(), link_text )
 
+class ContentTypeModelAdmin(admin.ModelAdmin):
+
+    def show_foreign(self, obj):
+        return create_admin_link_for( obj.content_object, str(obj.content_object) )
+
+    show_foreign.allow_tags = True
+
+
 
 class ContactKindAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
@@ -25,14 +33,10 @@ class AlternativePersonNameInlineAdmin(admin.TabularInline):
     extra = 0
 
 
-class InformationSourceAdmin(admin.ModelAdmin):
+class InformationSourceAdmin(ContentTypeModelAdmin):
     list_display  = [ 'source', 'show_foreign', 'entered', ]
     list_filter   = [ 'entered', ]
     search_fields = [ 'source', ]
-
-    def show_foreign(self, obj):
-        return create_admin_link_for( obj.content_object, str(obj.content_object) )
-    show_foreign.allow_tags = True
 
 
 class InformationSourceInlineAdmin(GenericTabularInline):
@@ -45,15 +49,11 @@ class InformationSourceInlineAdmin(GenericTabularInline):
     }
 
 
-class ContactAdmin(admin.ModelAdmin):
+class ContactAdmin(ContentTypeModelAdmin):
     list_display  = [ 'kind', 'value', 'show_foreign' ]
     search_fields = ['value', ]
     inlines       = [ InformationSourceInlineAdmin, ]
-    
-    def show_foreign(self, obj):
-        return create_admin_link_for( obj.content_object, str(obj.content_object) )
-    show_foreign.allow_tags = True
-    
+
 
 class ContactInlineAdmin(GenericTabularInline):
     model      = models.Contact
@@ -64,11 +64,23 @@ class ContactInlineAdmin(GenericTabularInline):
         db.models.TextField: {'widget': forms.Textarea(attrs={'rows':2, 'cols':20})},
     }
 
+class IdentifierAdmin(ContentTypeModelAdmin):
+    list_display  = [ 'scheme', 'identifier', 'show_foreign' ]
+    search_fields = ['identifier', ]
+    inlines       = [ InformationSourceInlineAdmin, ]
+
+
+class IdentifierInlineAdmin(GenericTabularInline):
+    model      = models.Identifier
+    extra      = 0
+    can_delete = False
+    fields     = [ 'scheme', 'identifier' ]
+
 
 class PositionAdmin(AjaxSelectAdmin):
     list_display  = [ 'id', 'show_person', 'show_organisation', 'show_place', 'show_title', 'start_date', 'end_date' ]
     search_fields = [ 'person__legal_name', 'organisation__name', 'title__name' ]
-    list_filter   = [ 'title__name' ]    
+    list_filter   = [ 'title__name' ]
     inlines       = [ InformationSourceInlineAdmin, ]
     readonly_fields = ['sorting_start_date','sorting_end_date']
 
@@ -80,12 +92,12 @@ class PositionAdmin(AjaxSelectAdmin):
             'person':       'person_name',
             'title':        'title_name',
         }
-    )    
-    
+    )
+
     def show_person(self, obj):
         return create_admin_link_for( obj.person, obj.person.name )
     show_person.allow_tags = True
-    
+
     def show_organisation(self, obj):
         return create_admin_link_for(obj.organisation, obj.organisation.name)
     show_organisation.allow_tags = True
@@ -113,7 +125,7 @@ class PositionInlineAdmin(admin.TabularInline):
             'person':       'person_name',
             'title':        'title_name',
         }
-    )    
+    )
 
 class ScorecardInlineAdmin(GenericTabularInline):
     model = scorecard_models.Entry
@@ -124,7 +136,7 @@ class ScorecardInlineAdmin(GenericTabularInline):
 
 class PersonAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["legal_name"]}
-    inlines = [AlternativePersonNameInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ScorecardInlineAdmin]
+    inlines = [AlternativePersonNameInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ImageAdminInline, ScorecardInlineAdmin, IdentifierInlineAdmin]
     list_display = ['slug', 'name', 'date_of_birth']
     list_filter   = [ 'can_be_featured', ]
     search_fields = ['legal_name']
@@ -134,7 +146,7 @@ class PlaceAdmin(admin.ModelAdmin):
     list_display = ('slug', 'name', 'kind', 'show_organisation')
     list_filter = ('kind',)
     search_fields = ('name', 'organisation__name')
-    inlines = (InformationSourceInlineAdmin, ScorecardInlineAdmin)
+    inlines = (InformationSourceInlineAdmin, ScorecardInlineAdmin, IdentifierInlineAdmin)
 
     def show_organisation(self, obj):
         if obj.organisation:
@@ -153,7 +165,7 @@ class PlaceInlineAdmin(admin.TabularInline):
 
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, ]
+    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, IdentifierInlineAdmin]
     list_display  = [ 'slug', 'name', 'kind', ]
     list_filter   = [ 'kind', ]
     search_fields = [ 'name' ]
@@ -174,6 +186,7 @@ class PositionTitleAdmin(admin.ModelAdmin):
 # Add these to the admin
 admin.site.register( models.Contact,              ContactAdmin               )
 admin.site.register( models.ContactKind,          ContactKindAdmin           )
+admin.site.register( models.Identifier,           IdentifierAdmin            )
 admin.site.register( models.InformationSource,    InformationSourceAdmin     )
 admin.site.register( models.Organisation,         OrganisationAdmin          )
 admin.site.register( models.OrganisationKind,     OrganisationKindAdmin      )
@@ -192,7 +205,7 @@ class LogAdmin(admin.ModelAdmin):
     ordering = ('-action_time',)
     readonly_fields = [ 'user','content_type','object_id','object_repr','action_flag','change_message']
     date_hierarchy = 'action_time'
-    
+
     #We don't want people changing this historical record:
     def has_add_permission(self, request):
         return False

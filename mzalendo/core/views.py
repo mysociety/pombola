@@ -265,12 +265,23 @@ def organisation(request, slug):
     )
 
 def organisation_sub_page(request, slug, sub_page):
-    return object_detail(
-        request,
-        queryset      = models.Organisation.objects,
-        template_name = "core/organisation_%s.html" % sub_page,
-        slug          = slug,
-    )
+    kwargs = {
+        'queryset': models.Organisation.objects,
+        'template_name': "core/organisation_%s.html" % sub_page,
+        'slug': slug}
+    # Allow the order that people are listed on the 'people' sub-page
+    # of an organisation to be controlled with the 'order' query
+    # parameter:
+    if sub_page == 'people':
+        org = get_object_or_404(models.Organisation, slug=slug)
+        positions = org.position_set.all()
+        extra_context = {}
+        if request.GET.get('order') == 'place':
+            extra_context['sorted_positions'] = positions.order_by_place()
+        else:
+            extra_context['sorted_positions'] = positions.order_by_person_name()
+        kwargs['extra_context'] = extra_context
+    return object_detail(request, **kwargs)
 
 def organisation_kind(request, slug):
     org_kind = get_object_or_404(
