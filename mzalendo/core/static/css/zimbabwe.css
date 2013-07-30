@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -3446,10 +3447,24 @@ ul.social-buttons li {
 }
 
 #logo {
-  background: url("//placehold.it/147x23") 0 center no-repeat;
+  height: 100px;
+  background: url("/static/images/zimbabwe-bird-with-text-147x42.png") 0 center no-repeat;
 }
 @media only all and (min-width: 640px), print {
   #logo {
-    background: url("//placehold.it/418x34") 0 center no-repeat;
+    background: url("/static/images/zimbabwe-bird-with-text-420x96.png") 0 center no-repeat;
+  }
+}
+
+#site-header {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f2242c), color-stop(100%, #44c943));
+  background: -webkit-linear-gradient(#f2242c, #44c943);
+  background: -moz-linear-gradient(#f2242c, #44c943);
+  background: -o-linear-gradient(#f2242c, #44c943);
+  background: linear-gradient(#f2242c, #44c943);
+}
+@media only all and (min-width: 640px), print {
+  #site-header {
+    height: 120px;
   }
 }
