@@ -169,39 +169,3 @@ menu#site-user-tools {
         &:hover {
           color: $colour_black;
           background: $colour_muted url(../images/login-arrows.png) 54px 11px no-repeat; } } } } }
-
-// ------------------------------------------------------
-
-#login-box {
-  display: none;
-  z-index: 1;
-  // FIXME - should not be absolutely positioning this - should determine
-  // position in JS when displaying it.
-  position: absolute;
-  right: 56px;
-  top: 32px;
-  background: $colour_muted;
-  border-left: 1px solid #666666;
-  border-right: 1px solid #666666;
-  border-bottom: 1px solid #666666;
-  width: 175px;
-  padding: 10px;
-  @include box-shadow(rgba(0, 0, 0, 0.5) 0px 2px 12px);
-  #login {
-    padding: 0;
-    margin: 0;
-    width: auto;
-    form {
-      width: auto;
-      input#id_username,
-      input#id_password {
-        width: 163px;
-        margin: 0 0 10px 0; }
-      input.login-button {
-        margin: 0; }
-      p.forgot-register {
-        margin: 0;
-        font-size: 11px; } }
-    .login-social {
-      margin: 0;
-      font-size: 12px; } } }
