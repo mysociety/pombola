@@ -52,7 +52,6 @@
                   static_url('js/analytics.js')
                   // ,
                   // '//platform.twitter.com/widgets.js',
-                  // '//connect.facebook.net/en_GB/all.js#xfbml=1&appId=' + pombola_settings.facebook_app_id
                 ]);
             }
         }

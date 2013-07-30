@@ -5,7 +5,7 @@
 #
 # Copy this file to one called "general.yml" in the same directory.  Or
 # have multiple config files and use a symlink to change between them.
-# 
+#
 # Copyright (c) 2011 UK Citizens Online Democracy. All rights reserved.
 
 POMBOLA_DB_HOST: 'localhost'
@@ -43,8 +43,6 @@ KENYA_PARSER_PDF_TO_HTML_HOST: ''
 # Social app configs - can be left blank and the option will not be provided
 TWITTER_CONSUMER_KEY: ''
 TWITTER_CONSUMER_SECRET: ''
-FACEBOOK_APP_ID: ''
-FACEBOOK_API_SECRET: ''
 
 # Social app testing - leaving these blank will skip the tests
 TEST_TWITTER_USERNAME: ''
@@ -58,7 +56,7 @@ TEST_TWITTER_REAL_NAME: ''
 SELENIUM_PATH: ''
 
 # Comments are handled by Disqus - http://disqus.com/
-# The 'shortname' is the code that identifies the correct account to link to on # their site. 
+# The 'shortname' is the code that identifies the correct account to link to on # their site.
 DISQUS_SHORTNAME: ''
 
 # Set this to true if you'd like to use identifiers instead of the page urls.

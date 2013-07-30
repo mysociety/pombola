@@ -341,11 +341,6 @@ TWITTER_USERNAME = config.get('TWITTER_USERNAME')
 # The widget ID is used for displaying tweets on the homepage.
 TWITTER_WIDGET_ID = config.get('TWITTER_WIDGET_ID')
 
-FACEBOOK_APP_ID              = config.get('FACEBOOK_APP_ID')
-FACEBOOK_API_SECRET          = config.get('FACEBOOK_API_SECRET')
-if FACEBOOK_APP_ID and FACEBOOK_API_SECRET:
-    SOCIAL_AUTH_ENABLED_BACKENDS.append('facebook')
-
 SOCIAL_AUTH_CHANGE_SIGNAL_ONLY = True
 SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.social_auth_user',
