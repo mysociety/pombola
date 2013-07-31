@@ -32,7 +32,7 @@ class TaskAdmin(admin.ModelAdmin):
     fields          = [ 'priority', 'note' ]
     
     def show_foreign(self, obj):
-        return create_admin_link_for( obj.content_object, str(obj.content_object) )
+        return create_admin_link_for( obj.content_object, unicode(obj.content_object) )
     show_foreign.allow_tags = True
 
     def get_urls(self):

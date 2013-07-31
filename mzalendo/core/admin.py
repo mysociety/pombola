@@ -17,7 +17,7 @@ def create_admin_link_for(obj, link_text):
 class ContentTypeModelAdmin(admin.ModelAdmin):
 
     def show_foreign(self, obj):
-        return create_admin_link_for( obj.content_object, str(obj.content_object) )
+        return create_admin_link_for( obj.content_object, unicode(obj.content_object) )
 
     show_foreign.allow_tags = True
 
