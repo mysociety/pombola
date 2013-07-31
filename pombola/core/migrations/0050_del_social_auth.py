@@ -11,6 +11,11 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
 
+        # delete entries in a separate transaction.
+        db.start_transaction()
+        ContentType.objects.filter(app_label='social_auth').delete()
+        db.commit_transaction()
+
         tables_to_delete = [
             'social_auth_association',
             'social_auth_nonce',
@@ -20,7 +25,6 @@ class Migration(SchemaMigration):
         try:
             for table in tables_to_delete:
                 db.delete_table(table)
-            ContentType.objects.filter(app_label='social_auth').delete()
         except DatabaseError:
             # table does not exist to delete, probably because the database was
             # not created at a time when the user_profile app was still in use.

@@ -10,9 +10,19 @@ from django.contrib.contenttypes.models import ContentType
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+
+        # Do the deletes in a separate transaction, as database errors when
+        # deleting a table that does not exist would cause a transaction to be
+        # rolled back
+        db.start_transaction()
+
+        ContentType.objects.filter(app_label='user_profile').delete()
+
+        # Commit the deletes to the various tables.
+        db.commit_transaction()
+
         try:
             db.delete_table('user_profile_userprofile')
-            ContentType.objects.filter(app_label='user_profile').delete()
         except DatabaseError:
             # table does not exist to delete, probably because the database was
             # not created at a time when the user_profile app was still in use.
