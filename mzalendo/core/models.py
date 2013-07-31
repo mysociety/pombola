@@ -1179,3 +1179,31 @@ class SlugRedirect(ModelBase):
 
     class Meta:
         unique_together = ("content_type", "old_object_slug")
+
+
+class OrganisationRelationshipKind(ModelBase):
+    """This represent a kind of relationship two organisations can be in
+
+    For example (a) this might be "has_office" for:
+
+       party_a "has_office" constituency_office_42
+
+    For example (b) "is_in_coalition" for:
+
+       party_b "is_in_coalition" huge_coalition
+
+    This is deliberately kept quite minimal for this first
+    implementation, just using a relation name for a directed link
+    between the two organisations.  This potentially could also
+    include:
+      - The allowed OrganisationKind of each Organisation
+      - Start and end dates of the relationship
+    """
+    name = models.CharField(max_length=200, unique=True)
+
+
+class OrganisationRelationship(ModelBase):
+    """Represents a relationship between two organisations"""
+    organisation_a = models.ForeignKey(Organisation, related_name='org_rels_as_a')
+    organisation_b = models.ForeignKey(Organisation, related_name='org_rels_as_b')
+    kind = models.ForeignKey(OrganisationRelationshipKind)

@@ -147,3 +147,32 @@ class SummaryTest( unittest.TestCase ):
         # the templates its truthiness is correct.
         self.assertFalse( person.summary )
         self.assertEqual( len(person.summary), 0 )
+
+
+class RelatedOrganisationTest(unittest.TestCase):
+    def test_creation(self):
+        """Check that it's possible to relate organisations
+
+        For the moment, this just checks that it's possible to create
+        a OrganisationRelation and OrganisationRelationKind."""
+
+        party_kind = models.OrganisationKind.objects.create(name='Party',
+                                                            slug='party')
+        party_office_kind = models.OrganisationKind.objects.create(name='Party Office',
+                                                                   slug='party-office')
+
+        party = models.Organisation.objects.create(name='The Imaginary Party',
+                                                   slug='imaginary',
+                                                   kind=party_kind)
+
+        office = models.Organisation.objects.create(name='Local Office',
+                                                    slug='local-office',
+                                                    kind=party_office_kind)
+
+        rel_kind = models.OrganisationRelationshipKind.objects.create(
+            name='has_office')
+
+        rel = models.OrganisationRelationship.objects.create(
+            organisation_a=office,
+            organisation_b=party,
+            kind=rel_kind)
