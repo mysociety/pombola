@@ -2,6 +2,7 @@
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
+from south.models import MigrationHistory
 from django.db import models
 from django.db.utils import DatabaseError
 
@@ -17,6 +18,10 @@ class Migration(SchemaMigration):
         db.start_transaction()
 
         ContentType.objects.filter(app_label='user_profile').delete()
+
+        # Remove the entries from South's tables as we don't want to leave
+        # incorrect entries in there.
+        MigrationHistory.objects.filter(app_name='user_profile').delete()
 
         # Commit the deletes to the various tables.
         db.commit_transaction()
