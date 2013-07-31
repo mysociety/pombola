@@ -288,8 +288,14 @@ MAPIT_RATE_LIMIT = ['127.0.0.1']
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
     'handlers': {
         'mail_admins': {
+            'filters': ['require_debug_false'],
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
         },
