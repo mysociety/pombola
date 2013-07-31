@@ -1,16 +1,3 @@
-{% block extra_styles %}
-#ticker { height: 540px; height: 300px; overflow: hidden;}
-#ticker li { height: 100px;}
-{% endblock %}
-
-{% block extra_scripts %}
-function tick(){
-	$('#ticker li:first').animate({'opacity':0}, 200, function () { $(this).appendTo($('#ticker')).css('opacity', 1); });
-}
-setInterval(function(){ tick () }, 4000);
-{% endblock %}
-
-
 {% block content %}
     <div class="index-left sixcol">
         <h3>What is Odekro?</h3>
@@ -36,7 +23,7 @@ setInterval(function(){ tick () }, 4000);
         <h3>Recent News</h3>
         <div>
             <ul id='ticker'>
-            {% include  '{{ STATIC_URL }}/news.html' %}
+            {% include  'odekro/news.html' %}
             </ul>
         </div>
 
