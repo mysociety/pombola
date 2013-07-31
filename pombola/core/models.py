@@ -544,7 +544,7 @@ class Place(ModelBase, ScorecardMixin):
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     kind = models.ForeignKey('PlaceKind')
     summary = MarkupField(blank=True, default='')
-    shape_url = models.URLField(verify_exists=True, blank=True )
+    shape_url = models.URLField(blank=True )
     location = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
     parliamentary_session = models.ForeignKey('ParliamentarySession', null=True)
