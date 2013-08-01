@@ -1,5 +1,36 @@
+# This should only be used as a one-off script to import constituency
+# offices from the CSV file 'all constituencies2.csv'.  This is messy
+# data - columns have different formats and structures, the names of
+# people don't match those in our database, places are defined
+# inconsistently, etc. etc. and to represent all these relationships
+# in the Mzalendo database schema we need to create a lot of new rows
+# in different tables.  I strongly suggest this is only used for the
+# initial import on the 'all constituencies2.csv', or that file with
+# fixes manually applied to it.
+
+# Things still to do:
+#
+#  * Save the phone numbers for individual people that are sometimes
+#    come straight after their names.
+#
+#  * Create the people in the Administrator column, and attach their
+#    contacts.
+#
+#  * At the moment only 211 out of 282 physical addresses geolocate
+#    correctly. More work could be put into this, resolving them
+#    manually or trying other geocoders.
+#
+#  * Add MPL contacts when we have them in the database.
+#
+#  * Fix some of the unmatched member of NA / NCOP delegate names:
+#    https://gist.github.com/mhl/830a290fa50e2395b17d
+
+from collections import defaultdict, namedtuple
 import csv
+from difflib import SequenceMatcher
+from itertools import chain
 import json
+from optparse import make_option
 import os
 import re
 import requests
@@ -7,28 +38,34 @@ import sys
 import time
 import urllib
 
-from collections import defaultdict, namedtuple
-from optparse import make_option
-
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import LabelCommand, CommandError
+from django.db.models import Q
 from django.template.defaultfilters import slugify
 
 from core.models import (OrganisationKind, Organisation, PlaceKind,
                          ContactKind, OrganisationRelationshipKind,
-                         OrganisationRelationship)
+                         OrganisationRelationship, Identifier, Position)
 
-from mapit.models import Generation, Area
-
-class AmbiguousLocation(Exception):
-    pass
-
+from mapit.models import Generation, Area, Code
 
 class LocationNotFound(Exception):
     pass
 
+def fix_province_name(province_name):
+    if province_name == 'Kwa-Zulu Natal':
+        return 'KwaZulu-Natal'
+    else:
+        return province_name
+
+def fix_municipality_name(municipality_name):
+    if municipality_name == 'Merafong':
+        return 'Merafong City'
+    else:
+        return municipality_name
 
 def geocode(address_string, geocode_cache=None):
     if geocode_cache is None:
@@ -58,7 +95,7 @@ def geocode(address_string, geocode_cache=None):
             all_results.sort(key=lambda r: -len(r['formatted_address']))
             message = u"Warning: disambiguating %s to %s" % (address_string,
                                                              all_results[0]['formatted_address'])
-            print message.encode('UTF-8')
+            verbose(message.encode('UTF-8'))
         # FIXME: We should really check the accuracy information here, but
         # for the moment just use the 'location' coordinate as is:
         geometry = all_results[0]['geometry']
@@ -66,8 +103,106 @@ def geocode(address_string, geocode_cache=None):
         lat = float(geometry['location']['lat'])
         return lon, lat, geocode_cache
 
+def all_initial_forms(name, squash_initials=False):
+    '''Generate all initialized variants of first names
+
+    >>> for name in all_initial_forms('foo Bar baz quux', squash_initials=True):
+    ...     print name
+    foo Bar baz quux
+    f Bar baz quux
+    fB baz quux
+    fBb quux
+
+    >>> for name in all_initial_forms('foo Bar baz quux'):
+    ...     print name
+    foo Bar baz quux
+    f Bar baz quux
+    f B baz quux
+    f B b quux
+    '''
+    names = name.split(' ')
+    n = len(names)
+    if n == 0:
+        yield name
+    for i in range(0, n):
+        if i == 0:
+            yield ' '.join(names)
+            continue
+        initials = [name[0] for name in names[:i]]
+        if squash_initials:
+            result = [''.join(initials)]
+        else:
+            result = initials
+        yield ' '.join(result + names[i:])
+
+# Build an list of tuples of (mangled_mp_name, person_object) for each
+# member of the National Assembly and delegate of the National Coucil
+# of Provinces:
+
+na_member_lookup = {}
+
+
+
+for position in chain(Position.objects.all().filter(title__slug='member',
+                                                    organisation__slug='national-assembly').currently_active(),
+                      Position.objects.all().filter(title__slug='delegate',
+                                                    organisation__slug='ncop').currently_active()):
+    person = position.person
+    full_name = position.person.legal_name.lower()
+    # Always leave the last name, but generate all combinations of initials
+    for name_form in chain(all_initial_forms(full_name),
+                           all_initial_forms(full_name, squash_initials=True)):
+        if name_form in na_member_lookup:
+            message = "Tried to add '%s' => %s, but there was already '%s' => %s" % (
+                name_form, person, name_form, na_member_lookup[name_form])
+        else:
+            na_member_lookup[name_form] = person
+
+unknown_people = set()
+
 def find_mzalendo_person(name_string, representative_type):
-    return None
+
+    # Strip off any phone number at the end:
+    name_string = re.sub(r'[\s\d]+$', '', name_string).strip()
+    # And trim any list numbers from the beginning:
+    name_string = re.sub(r'^[\s\d\.]+', '', name_string)
+    # Strip off some titles:
+    name_string = re.sub(r'(?i)^(Min|Dep Min|Dep President|President) ', '', name_string)
+    name_string = name_string.strip()
+    if not name_string:
+        return None
+    if representative_type == 'MPL':
+        # We have no Members of the Provincial Legislature in the
+        # database at the moment:
+        return None
+    elif representative_type == 'MP':
+        # Move any initials to the front of the name:
+        name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
+        name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
+        # Score the similarity of name_string with each person:
+        scored_names = [(SequenceMatcher(None, name_string, actual_name).ratio(),
+                         actual_name,
+                         person)
+                        for actual_name, person in na_member_lookup.items()]
+
+        scored_names.sort(reverse=True, key=lambda n: n[0])
+        # If the top score is over 90%, it's very likely to be the
+        # same person with the current set of MPs - this leave a
+        # number of false negatives from misspellings in the CSV file,
+        # though.
+        if scored_names[0][0] >= 0.9:
+            return scored_names[0][2]
+        else:
+            verbose("Failed to find a match for " + name_string.encode('utf-8'))
+            return None
+    else:
+        raise Exception, "Unknown representative_type '%s'" % (representative_type,)
+
+VERBOSE = False
+
+def verbose(message):
+    if VERBOSE:
+        print message
 
 class Command(LabelCommand):
     """Import constituency offices"""
@@ -76,12 +211,30 @@ class Command(LabelCommand):
 
     option_list = LabelCommand.option_list + (
         make_option(
+            '--test',
+            action='store_true',
+            dest='test',
+            help='Run any doctests for this script'),
+        make_option(
+            '--verbose',
+            action='store_true',
+            dest='verbose',
+            help='Output extra information for debugging'),
+        make_option(
             '--commit',
             action='store_true',
             dest='commit',
             help='Actually update the database'),)
 
     def handle_label(self, input_filename, **options):
+
+        if options['test']:
+            import doctest
+            failure_count, _ = doctest.testmod(sys.modules[__name__])
+            sys.exit(0 if failure_count == 0 else 1)
+
+        global VERBOSE
+        VERBOSE = options['verbose']
 
         geocode_cache_filename = os.path.join(
             os.path.dirname(__file__),
@@ -93,27 +246,40 @@ class Command(LabelCommand):
         except IOError as e:
             geocode_cache = {}
 
+        # Ensure that all the required kinds and other objects exist:
+
         ok_party = OrganisationKind.objects.get(slug='party')
-        ok_constituency_office = OrganisationKind.objects.get_or_create(
+        ok_constituency_office, _ = OrganisationKind.objects.get_or_create(
             slug='constituency-office',
             name='Constituency Office')
-        ok_constituency_area = OrganisationKind.objects.get_or_create(
+        ok_constituency_area, _ = OrganisationKind.objects.get_or_create(
             slug='constituency-area',
             name='Constituency Area')
 
-        pk_constituency_office = PlaceKind.objects.get_or_create(
+        pk_constituency_office, _ = PlaceKind.objects.get_or_create(
             slug='constituency-office',
             name='Constituency Office')
-        pk_constituency_area = PlaceKind.objects.get_or_create(
+        pk_constituency_area, _ = PlaceKind.objects.get_or_create(
             slug='constituency-area',
             name='Constituency Area')
 
-        ck_address = ContactKind.objects.get_or_create(
+        ck_address, _ = ContactKind.objects.get_or_create(
             slug='address',
             name='Address')
+        ck_email, _ = ContactKind.objects.get_or_create(
+            slug='email',
+            name='Email')
+        ck_fax, _ = ContactKind.objects.get_or_create(
+            slug='fax',
+            name='Fax')
+        ck_telephone, _ = ContactKind.objects.get_or_create(
+            slug='voice',
+            name='Voice')
 
-        ork_has_office = OrganisationRelationshipKind.objects.get_or_create(
+        ork_has_office, _ = OrganisationRelationshipKind.objects.get_or_create(
             name='has_office')
+
+        organisation_content_type = ContentType.objects.get_for_model(Organisation)
 
         contact_source = "Data from the party via Geoffrey Kilpin"
 
@@ -147,16 +313,29 @@ class Command(LabelCommand):
                     municipality = row['Municipality']
                     wards = row['Wards']
 
+                    # Collapse whitespace in the name to a single space:
                     name = re.sub(r'(?ms)\s+', ' ', name)
 
                     mz_party = Organisation.objects.get(name=party)
 
-                    organisation_name = party + " office: " + name
+                    if party_code:
+                        organisation_name = party + "%s office (%s): %s" % (party, party_code, name)
+                    else:
+                        organisation_name = "%s office: %s" % (party, name)
                     organisation_slug = slugify(organisation_name)
 
                     places_to_add = []
                     contacts_to_add = []
                     people_to_add = []
+
+                    for contact_kind, value, in ((ck_email, email),
+                                                 (ck_telephone, telephone),
+                                                 (ck_fax, fax)):
+                        if value:
+                            contacts_to_add.append({
+                                    'kind': contact_kind,
+                                    'value': value,
+                                    'source': contact_source})
 
                     if office_or_area == 'Office':
                         constituency_kind = ok_constituency_office
@@ -174,10 +353,10 @@ class Command(LabelCommand):
                             with_physical_addresses += 1
                             physical_address = physical_address.rstrip(',') + ", South Africa"
                             try:
-                                print "physical_address:", physical_address.encode('UTF-8')
+                                verbose("physical_address: " + physical_address.encode('UTF-8'))
                                 lon, lat, geocode_cache = geocode(physical_address, geocode_cache)
-                                print "maps to:",
-                                print "http://maps.google.com/maps?q=%f,%f" % (lat, lon)
+                                verbose("maps to:")
+                                verbose("http://maps.google.com/maps?q=%f,%f" % (lat, lon))
                                 geolocated += 1
 
                                 place_name = u'Approximate position of ' + organisation_name
@@ -193,7 +372,7 @@ class Command(LabelCommand):
                                         'source': contact_source})
 
                             except LocationNotFound:
-                                print "XXX no results found"
+                                verbose("XXX no results found")
 
                             if pobox_address is not None:
                                 contacts_to_add.append({
@@ -201,12 +380,81 @@ class Command(LabelCommand):
                                         'value': pobox_address,
                                         'source': contact_source})
 
+                            # Deal with the different formats of MP
+                            # and MPL names for different parties:
+                            for representative_type in ('MP', 'MPL'):
+                                if party in ('ANC', 'ACDP'):
+                                    name_strings = re.split(r'\s{4,}',row[representative_type])
+                                    for name_string in name_strings:
+                                        person = find_mzalendo_person(name_string,
+                                                                      representative_type)
+                                        if person:
+                                            people_to_add.append(person)
+                                elif party in ('COPE', 'FF+'):
+                                    for contact in re.split(r'\s*;\s*', row[representative_type]):
+                                        # Strip off the phone number
+                                        # and email address before
+                                        # resolving:
+                                        person = find_mzalendo_person(
+                                            re.sub(r'(?ms)\s*\d.*', '', contact),
+                                            representative_type)
+                                        if person:
+                                            people_to_add.append(person)
+                                else:
+                                    raise Exception, "Unknown party '%s'" % (party,)
+
+                        if municipality:
+                            municipality = fix_municipality_name(municipality)
+
+                            # If there's a municipality, try to add that as a place as well:
+                            mapit_municipalities = Area.objects.filter(
+                                Q(type__code='LMN') | Q(type__code='DMN'),
+                                generation_high__gte=mapit_current_generation,
+                                generation_low__lte=mapit_current_generation,
+                                name=municipality)
+
+                            mapit_municipality = None
+
+                            if len(mapit_municipalities) == 1:
+                                mapit_municipality = mapit_municipalities[0]
+                            elif len(mapit_municipalities) == 2:
+                                # This is probably a Metropolitan Municipality, which due to
+                                # https://github.com/mysociety/mzalendo/issues/695 will match
+                                # an LMN and a DMN; just pick the DMN:
+                                if set(m.type.code for m in mapit_municipalities) == set(('LMN', 'DMN')):
+                                    mapit_municipality = [m for m in mapit_municipalities if m.type.code == 'DMN'][0]
+                                else:
+                                    # Special cases for 'Emalahleni' and 'Naledi', which
+                                    # are in multiple provinces:
+                                    if municipality == 'Emalahleni':
+                                        if 'Pule' in row['MP']:
+                                            mapit_municipality = Code.objects.get(type__code='l', code='MP312').area
+                                        elif 'Ndaka' in row['MP']:
+                                            mapit_municipality = Code.objects.get(type__code='l', code='EC136').area
+                                        else:
+                                            raise Exception, "Unknown Emalahleni row"
+                                    elif municipality == 'Naledi':
+                                        if 'Mmusi' in row['MP']:
+                                            mapit_municipality = Code.objects.get(type__code='l', code='NW392')
+                                        else:
+                                            raise Exception, "Unknown Naledi row"
+                                    else:
+                                        raise Exception, "Ambiguous municipality name '%s'" % (municipality,)
+
+                            if mapit_municipality:
+                                places_to_add.append({
+                                        'name': place_name,
+                                        'slug': slugify(place_name),
+                                        'kind': pk_constituency_office,
+                                        'mapit_area': mapit_municipality})
+
                     elif office_or_area == 'Area':
                         # At the moment it's only for DA that these
                         # Constituency Areas exist, so check that assumption:
                         if party != 'DA':
                             raise Exception, "Unexpected party %s with Area" % (party)
                         constituency_kind = ok_constituency_area
+                        province = fix_province_name(province)
                         mapit_province = Area.objects.get(
                             type__code='PRV',
                             generation_high__gte=mapit_current_generation,
@@ -222,10 +470,11 @@ class Command(LabelCommand):
                                 'mapit_area': mapit_province})
 
                         for representative_type in ('MP', 'MPL'):
-                            person = find_mzalendo_person(row[representative_type],
-                                                          representative_type)
-                            if person:
-                                people_to_add.append(mpl)
+                            for contact in re.split(r'(?ms)\s*;\s*', row[representative_type]):
+                                person = find_mzalendo_person(contact,
+                                                              representative_type)
+                                if person:
+                                    people_to_add.append(person)
 
                     else:
                         raise Exception, "Unknown type %s" % (office_or_area,)
@@ -237,27 +486,39 @@ class Command(LabelCommand):
 
                     # Check if this office appears to exist already:
 
+                    identifier = None
+                    identifier_scheme = "constituency-office/%s/" % (party,)
+
                     try:
                         if party_code:
                             # If there's something's in the "Party Code"
-                            # column, we can check for an identifier:
-                            identifier_schema = "constituency-office/%s/" % (party,)
-                            identifier_identifier = party_code
-                            org = Identifier.objects.get(identifier=identifier_identifier,
-                                                         schema=identifier_schema).content_object
+                            # column, we can check for an identifier and
+                            # get the existing object reliable through that.
+                            identifier = Identifier.objects.get(identifier=party_code,
+                                                                scheme=identifier_scheme)
+                            org = identifier.content_object
                         else:
                             # Otherwise use the slug we intend to use, and
                             # look for an existing organisation:
+                            print "trying to get with slug:", organisation_slug
                             org = Organisation.objects.get(slug=organisation_slug,
                                                            kind=constituency_kind)
+                            print "got is:", org
                     except ObjectDoesNotExist:
                         org = Organisation()
+                        if party_code:
+                            identifier = Identifier(identifier=party_code,
+                                                    scheme=identifier_scheme,
+                                                    content_type=organisation_content_type)
 
                     # Make sure we set the same attributes and save:
-                    for k, v in organisation_kwargs:
+                    for k, v in organisation_kwargs.items():
                         setattr(org, k, v)
                     if options['commit']:
                         org.save()
+                        if party_code:
+                            identifier.object_id = org.id
+                            identifier.save()
 
                     # Replace all places associated with this
                     # organisation and re-add them:
@@ -266,7 +527,7 @@ class Command(LabelCommand):
                     for place_dict in places_to_add:
                         # FIXME: complete
                         pass
-                    
+
                     # Replace all contact details associated with this
                     # organisation, and re-add them:
                     if options['commit']:
@@ -295,4 +556,4 @@ class Command(LabelCommand):
             with open(geocode_cache_filename, "w") as fp:
                 json.dump(geocode_cache, fp, indent=2)
 
-        print "Geolocated %d out of %d physical addresses" % (geolocated, with_physical_addresses)
+        verbose("Geolocated %d out of %d physical addresses" % (geolocated, with_physical_addresses))

@@ -422,7 +422,7 @@ class Identifier(ModelBase):
     objects = ManagerBase()
 
     def __unicode__(self):
-        return '<Identifier scheme="%s" identifier="%s">' % (self.scheme, self.identifier)
+        return '"%s%s"' % (self.scheme, self.identifier)
 
     class Meta:
         unique_together = ('scheme', 'identifier')
