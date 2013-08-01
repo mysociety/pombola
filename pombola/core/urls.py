@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
+from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
-from django.views.generic.simple import direct_to_template, redirect_to
 
 from core import models
 from core.views import PlaceDetailView
@@ -129,7 +129,7 @@ urlpatterns += patterns('core.views',
 )
 
 urlpatterns += patterns('',
-    url(r'^status/down/', direct_to_template, {'template': 'down.html'} ),
+    url(r'^status/down/', TemplateView.as_view(template_name='down.html') ),
 )
 
 
