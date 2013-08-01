@@ -4,10 +4,12 @@ import json
 import myreps
 import parl
 import manual
+import committees
 
 data = myreps.parse()
 data = parl.parse(data)
 data = manual.parse(data)
+data = committees.parse(data)
 
 # Sort output
 data['organizations'] = data['organizations'].values()

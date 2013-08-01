@@ -57,10 +57,9 @@ def check_unknown_field(entity, key):
         print "WARNING: unknown %s field: %s" % (entity, key)
 
 def get_position_title(role, organisation_name, organisation_kind_name):
-    if organisation_kind_name in ('Party', 'Committee'):
+    if organisation_kind_name == 'Party' or 'Committee' in organisation_kind_name:
         if role:
-            # I imagine this will happen with e.g. Chair of Committee at some point
-            raise Exception, "Found a non-None role for a Party or Committee membership"
+            return role
         return 'Member'
 
     if not role:
