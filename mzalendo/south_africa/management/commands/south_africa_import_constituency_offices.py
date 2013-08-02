@@ -49,12 +49,15 @@ from django.template.defaultfilters import slugify
 from core.models import (OrganisationKind, Organisation, PlaceKind,
                          ContactKind, OrganisationRelationshipKind,
                          OrganisationRelationship, Identifier, Position,
-                         PositionTitle)
+                         PositionTitle, Person)
 
 from mapit.models import Generation, Area, Code
 
 class LocationNotFound(Exception):
     pass
+
+def group_in_pairs(l):
+    return zip(l[0::2], l[1::2])
 
 def fix_province_name(province_name):
     if province_name == 'Kwa-Zulu Natal':
@@ -142,7 +145,7 @@ def all_initial_forms(name, squash_initials=False):
 
 na_member_lookup = {}
 
-
+nonexistent_phone_number = '000 000 0000'
 
 for position in chain(Position.objects.all().filter(title__slug='member',
                                                     organisation__slug='national-assembly').currently_active(),
@@ -280,6 +283,9 @@ class Command(LabelCommand):
         pt_constituency_contact, _ = PositionTitle.objects.get_or_create(
             slug='constituency-contact',
             name='Constituency Contact')
+        pt_administrator, _ = PositionTitle.objects.get_or_create(
+            slug='administrator',
+            name='Administrator')
 
         ork_has_office, _ = OrganisationRelationshipKind.objects.get_or_create(
             name='has_office')
@@ -292,6 +298,8 @@ class Command(LabelCommand):
 
         with_physical_addresses = 0
         geolocated = 0
+
+        created_administrators = {}
 
         try:
 
@@ -332,6 +340,7 @@ class Command(LabelCommand):
                     places_to_add = []
                     contacts_to_add = []
                     people_to_add = []
+                    administrators_to_add = []
 
                     for contact_kind, value, in ((ck_email, email),
                                                  (ck_telephone, telephone),
@@ -378,7 +387,7 @@ class Command(LabelCommand):
                                         'source': contact_source})
 
                             except LocationNotFound:
-                                verbose("XXX no results found")
+                                verbose("XXX no results found for: " + physical_address)
 
                             if pobox_address is not None:
                                 contacts_to_add.append({
@@ -486,6 +495,35 @@ class Command(LabelCommand):
                     else:
                         raise Exception, "Unknown type %s" % (office_or_area,)
 
+                    # The Administrator column might have multiple
+                    # administrators, each followed by their phone
+                    # number.  Names and phone numbers are always
+                    # split by multiple spaces, except in one case:
+                    if administrator and administrator.lower() != 'vacant':
+                        if administrator.startswith('Nkwenkwezi Nonbuyekezo 083 210 4811'):
+                            administrators_to_add.append(('Nkwenkwezi Nonbuyekezo', ['083 210 4811']))
+                        else:
+                            # This person is missing a phone number:
+                            administrator = re.sub(r'(2. Mbetse Selby)',
+                                                   '\\1       ' + nonexistent_phone_number,
+                                                   administrator)
+                            # Add a missing slash:
+                            administrator = re.sub(r'073 265 0391 072 762 5013',
+                                                   '073 265 0391 / 072 762 5013',
+                                                   administrator)
+                            # Remove this stray phone number prefix:
+                            administrator = re.sub(r'Mothsekga-', '', administrator)
+                            fields = re.split(r'\s{4,}', administrator)
+                            for administrator_name, administrator_numbers in group_in_pairs(fields):
+                                # Some names begin with "1.", "2.", etc.
+                                administrator_name = re.sub(r'^[\s\d\.]+', '', administrator_name)
+                                split_phone_numbers = re.split(r'\s*/\s*', administrator_numbers)
+                                tuple_to_add = (administrator_name,
+                                                tuple(s for s in split_phone_numbers
+                                                      if s != nonexistent_phone_number))
+                                verbose("administrator name '%s', numbers '%s'" % tuple_to_add)
+                                administrators_to_add.append(tuple_to_add)
+
                     organisation_kwargs = {
                         'name': organisation_name,
                         'slug': slugify(organisation_name),
@@ -521,30 +559,28 @@ class Command(LabelCommand):
                     # Make sure we set the same attributes and save:
                     for k, v in organisation_kwargs.items():
                         setattr(org, k, v)
+
                     if options['commit']:
                         org.save()
                         if party_code:
                             identifier.object_id = org.id
                             identifier.save()
 
-                    # Replace all places associated with this
-                    # organisation and re-add them:
-                    if options['commit']:
+                        # Replace all places associated with this
+                        # organisation and re-add them:
                         org.place_set.all().delete()
-                    for place_dict in places_to_add:
-                        org.place_set.create(**place_dict)
+                        for place_dict in places_to_add:
+                            org.place_set.create(**place_dict)
 
-                    # Replace all contact details associated with this
-                    # organisation, and re-add them:
-                    if options['commit']:
+                        # Replace all contact details associated with this
+                        # organisation, and re-add them:
                         org.contacts.all().delete()
-                    for contact_dict in contacts_to_add:
-                        org.contacts.create(**contact_dict)
+                        for contact_dict in contacts_to_add:
+                            org.contacts.create(**contact_dict)
 
-                    # Remove previous has_office relationships,
-                    # between this office and any party, then re-add
-                    # this one:
-                    if options['commit']:
+                        # Remove previous has_office relationships,
+                        # between this office and any party, then re-add
+                        # this one:
                         OrganisationRelationship.objects.filter(
                             organisation_b=org).delete()
                         OrganisationRelationship.objects.create(
@@ -552,15 +588,41 @@ class Command(LabelCommand):
                             kind=ork_has_office,
                             organisation_b=org)
 
-                    # Remove all Membership relationships between this
-                    # organisation and other people, then recreate them:
-                    if options['commit']:
+                        # Remove all Membership relationships between this
+                        # organisation and other people, then recreate them:
                         org.position_set.filter(title=pt_constituency_contact).delete()
                         for person in people_to_add:
                             org.position_set.create(
                                 person=person,
                                 title=pt_constituency_contact,
                                 category='political')
+
+                        # Remove any administrators for this organisation:
+                        for position in org.position_set.filter(title=pt_administrator):
+                            for contact in position.person.contacts.all():
+                                contact.delete()
+                            position.person.delete()
+                            position.delete()
+                        # And create new administrators:
+                        for administrator_tuple in administrators_to_add:
+                            administrator_name, phone_numbers = administrator_tuple
+                            if administrator_tuple in created_administrators:
+                                person = created_administrators[administrator_tuple]
+                                print "got administrator from hash:", person.id, person
+                            else:
+                                person = Person.objects.create(title=pt_administrator,
+                                                               legal_name=administrator_name,
+                                                               slug=slugify(administrator_name))
+                                print "created new administrator:", person.id, person
+                                created_administrators[administrator_tuple] = person
+                                for phone_number in phone_numbers:
+                                    person.contacts.create(kind=ck_telephone,
+                                                           value=phone_number,
+                                                           source=contact_source)
+                            Position.objects.create(person=person,
+                                                    organisation=org,
+                                                    title=pt_administrator,
+                                                    category='political')
 
         finally:
             with open(geocode_cache_filename, "w") as fp:
