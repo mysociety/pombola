@@ -443,6 +443,7 @@ class Command(LabelCommand):
                                         raise Exception, "Ambiguous municipality name '%s'" % (municipality,)
 
                             if mapit_municipality:
+                                place_name = u'Municipality associated with ' + organisation_name
                                 places_to_add.append({
                                     'name': place_name,
                                     'slug': slugify(place_name),
@@ -526,8 +527,7 @@ class Command(LabelCommand):
                     if options['commit']:
                         org.place_set.all().delete()
                     for place_dict in places_to_add:
-                        # FIXME: complete
-                        pass
+                        org.place_set.create(**place_dict)
 
                     # Replace all contact details associated with this
                     # organisation, and re-add them:
