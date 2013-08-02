@@ -339,6 +339,7 @@ class Command(LabelCommand):
 
                     if office_or_area == 'Office':
                         constituency_kind = ok_constituency_office
+
                         if physical_address:
 
                             # Sometimes there's lots of whitespace
@@ -361,10 +362,10 @@ class Command(LabelCommand):
 
                                 place_name = u'Approximate position of ' + organisation_name
                                 places_to_add.append({
-                                        'name': place_name,
-                                        'slug': slugify(place_name),
-                                        'kind': pk_constituency_office,
-                                        'location': Point(lon, lat)})
+                                    'name': place_name,
+                                    'slug': slugify(place_name),
+                                    'kind': pk_constituency_office,
+                                    'location': Point(lon, lat)})
 
                                 contacts_to_add.append({
                                         'kind': ck_address,
@@ -443,10 +444,10 @@ class Command(LabelCommand):
 
                             if mapit_municipality:
                                 places_to_add.append({
-                                        'name': place_name,
-                                        'slug': slugify(place_name),
-                                        'kind': pk_constituency_office,
-                                        'mapit_area': mapit_municipality})
+                                    'name': place_name,
+                                    'slug': slugify(place_name),
+                                    'kind': pk_constituency_office,
+                                    'mapit_area': mapit_municipality})
 
                     elif office_or_area == 'Area':
                         # At the moment it's only for DA that these
