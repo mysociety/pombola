@@ -541,7 +541,7 @@ class PlaceManager(ManagerBase):
 
 class Place(ModelBase, ScorecardMixin):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=100, unique=True, help_text="created from name")
+    slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     kind = models.ForeignKey('PlaceKind')
     summary = MarkupField(blank=True, default='')
     shape_url = models.URLField(verify_exists=True, blank=True )
