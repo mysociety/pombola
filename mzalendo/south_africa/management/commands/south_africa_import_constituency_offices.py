@@ -436,7 +436,7 @@ class Command(LabelCommand):
                                             raise Exception, "Unknown Emalahleni row"
                                     elif municipality == 'Naledi':
                                         if 'Mmusi' in row['MP']:
-                                            mapit_municipality = Code.objects.get(type__code='l', code='NW392')
+                                            mapit_municipality = Code.objects.get(type__code='l', code='NW392').area
                                         else:
                                             raise Exception, "Unknown Naledi row"
                                     else:
