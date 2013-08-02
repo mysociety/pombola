@@ -534,8 +534,7 @@ class Command(LabelCommand):
                     if options['commit']:
                         org.contacts.all().delete()
                     for contact_dict in contacts_to_add:
-                        # FIXME: complete
-                        pass
+                        org.contacts.create(**contact_dict)
 
                     # Remove previous has_office relationships,
                     # between this office and any party, then re-add
