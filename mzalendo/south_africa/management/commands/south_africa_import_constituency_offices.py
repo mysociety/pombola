@@ -8,22 +8,27 @@
 # initial import on the 'all constituencies2.csv', or that file with
 # fixes manually applied to it.
 
-# Things still to do:
+# Things still to do and other notes:
 #
 #  * Save the phone numbers for individual people that are sometimes
-#    come straight after their names.
-#
-#  * Create the people in the Administrator column, and attach their
-#    contacts.
+#    come straight after their names.  (This is done for
+#    administrators, but not for MPs - they may already have that
+#    contact number from the original import, so that would need to be
+#    checked.)
 #
 #  * At the moment only 211 out of 282 physical addresses geolocate
 #    correctly. More work could be put into this, resolving them
-#    manually or trying other geocoders.
+#    manually or trying other geocoders.  The unresolved addresses are:
+#    https://gist.github.com/mhl/c3a3ad3bf6cce357bb93
 #
-#  * Add MPL contacts when we have them in the database.
-#
-#  * Fix some of the unmatched member of NA / NCOP delegate names:
+#  * Fix some of the unmatched member of NA / NCOP delegate names
+#    should be manually fixed:
 #    https://gist.github.com/mhl/830a290fa50e2395b17d
+#
+#  * We don't have data for all the MPLs, so I'm only importing those
+#    that we can resolve the names of.  (In contrast, won't have any
+#    administrators of these offices in the database already, so I'm
+#    just creating a new person record for each.)
 
 from collections import defaultdict, namedtuple
 import csv
@@ -175,11 +180,7 @@ def find_mzalendo_person(name_string, representative_type):
     name_string = name_string.strip()
     if not name_string:
         return None
-    if representative_type == 'MPL':
-        # We have no Members of the Provincial Legislature in the
-        # database at the moment:
-        return None
-    elif representative_type == 'MP':
+    if representative_type in ('MPL', 'MP'):
         # Move any initials to the front of the name:
         name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
         name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
@@ -301,6 +302,9 @@ class Command(LabelCommand):
 
         created_administrators = {}
 
+        # There's at least one duplicate row, so detect and ignore any duplicates:
+        rows_already_done = set()
+
         try:
 
             with open(input_filename) as fp:
@@ -325,6 +329,13 @@ class Command(LabelCommand):
                     email = row['E-mail']
                     municipality = row['Municipality']
                     wards = row['Wards']
+
+                    unique_row_id = (party_code, name, party)
+
+                    if unique_row_id in rows_already_done:
+                        continue
+                    else:
+                        rows_already_done.add(unique_row_id)
 
                     # Collapse whitespace in the name to a single space:
                     name = re.sub(r'(?ms)\s+', ' ', name)
@@ -501,7 +512,7 @@ class Command(LabelCommand):
                     # split by multiple spaces, except in one case:
                     if administrator and administrator.lower() != 'vacant':
                         if administrator.startswith('Nkwenkwezi Nonbuyekezo 083 210 4811'):
-                            administrators_to_add.append(('Nkwenkwezi Nonbuyekezo', ['083 210 4811']))
+                            administrators_to_add.append(('Nkwenkwezi Nonbuyekezo', ('083 210 4811',)))
                         else:
                             # This person is missing a phone number:
                             administrator = re.sub(r'(2. Mbetse Selby)',
@@ -545,10 +556,8 @@ class Command(LabelCommand):
                         else:
                             # Otherwise use the slug we intend to use, and
                             # look for an existing organisation:
-                            print "trying to get with slug:", organisation_slug
                             org = Organisation.objects.get(slug=organisation_slug,
                                                            kind=constituency_kind)
-                            print "got is:", org
                     except ObjectDoesNotExist:
                         org = Organisation()
                         if party_code:
@@ -608,12 +617,10 @@ class Command(LabelCommand):
                             administrator_name, phone_numbers = administrator_tuple
                             if administrator_tuple in created_administrators:
                                 person = created_administrators[administrator_tuple]
-                                print "got administrator from hash:", person.id, person
                             else:
                                 person = Person.objects.create(title=pt_administrator,
                                                                legal_name=administrator_name,
                                                                slug=slugify(administrator_name))
-                                print "created new administrator:", person.id, person
                                 created_administrators[administrator_tuple] = person
                                 for phone_number in phone_numbers:
                                     person.contacts.create(kind=ck_telephone,
