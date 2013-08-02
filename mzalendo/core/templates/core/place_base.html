@@ -54,11 +54,7 @@
       {% endif %}
 
   {% endwith %}
-  
 
-  {% if object.organisation %}
-  <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
-  {% endif %}
 {% endblock %}
     
 {% block profile_pic %}
