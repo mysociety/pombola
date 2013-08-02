@@ -48,7 +48,8 @@ from django.template.defaultfilters import slugify
 
 from core.models import (OrganisationKind, Organisation, PlaceKind,
                          ContactKind, OrganisationRelationshipKind,
-                         OrganisationRelationship, Identifier, Position)
+                         OrganisationRelationship, Identifier, Position,
+                         PositionTitle)
 
 from mapit.models import Generation, Area, Code
 
@@ -275,6 +276,10 @@ class Command(LabelCommand):
         ck_telephone, _ = ContactKind.objects.get_or_create(
             slug='voice',
             name='Voice')
+
+        pt_constituency_contact, _ = PositionTitle.objects.get_or_create(
+            slug='constituency-contact',
+            name='Constituency Contact')
 
         ork_has_office, _ = OrganisationRelationshipKind.objects.get_or_create(
             name='has_office')
@@ -549,8 +554,13 @@ class Command(LabelCommand):
 
                     # Remove all Membership relationships between this
                     # organisation and other people, then recreate them:
-
-                    # TODO
+                    if options['commit']:
+                        org.position_set.filter(title=pt_constituency_contact).delete()
+                        for person in people_to_add:
+                            org.position_set.create(
+                                person=person,
+                                title=pt_constituency_contact,
+                                category='political')
 
         finally:
             with open(geocode_cache_filename, "w") as fp:
