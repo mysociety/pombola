@@ -3,7 +3,7 @@
 #
 # The previous version can be seen at:
 #
-#    https://github.com/mysociety/mzalendo/blob/7181e30519b140229e3817786e4a7440ac08288d/mzalendo/hansard/management/commands/hansard_check_for_new_sources.py
+#    https://github.com/mysociety/pombola/blob/7181e30519b140229e3817786e4a7440ac08288d/mzalendo/hansard/management/commands/hansard_check_for_new_sources.py
 
 import pprint
 import httplib2

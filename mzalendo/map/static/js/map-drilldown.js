@@ -26,10 +26,10 @@
       if (!map_element) return false;
 
       var map_bounds = {
-        north: window.mzalendo_settings.map_bounds.north,
-        east:  window.mzalendo_settings.map_bounds.east,
-        south: window.mzalendo_settings.map_bounds.south,
-        west:  window.mzalendo_settings.map_bounds.west
+        north: window.pombola_settings.map_bounds.north,
+        east:  window.pombola_settings.map_bounds.east,
+        south: window.pombola_settings.map_bounds.south,
+        west:  window.pombola_settings.map_bounds.west
       };
 
       var myOptions = {
@@ -110,7 +110,7 @@
     // http://stackoverflow.com/questions/4130237
     this.addCrosshairs = function () {
       var map = this.map; 
-      var crosshairs_path = window.mzalendo_settings.static_url + 'images/crosshairs.png?' + window.mzalendo_settings.static_generation_number 
+      var crosshairs_path = window.pombola_settings.static_url + 'images/crosshairs.png?' + window.pombola_settings.static_generation_number 
 
       var crosshairsImage = new google.maps.MarkerImage(
          crosshairs_path,                 // marker image
@@ -326,7 +326,7 @@
   
   
   
-  mzalendo_run_when_document_ready(
+  pombola_run_when_document_ready(
       function () {
           google.load(
               'maps', '3',

@@ -26,11 +26,11 @@ IEBC_API_ID: ''
 IEBC_API_SECRET: ''
 
 # Managers - might be worth having this set to a group email address
-MANAGERS_NAME: 'Mzalendo Managers'
+MANAGERS_NAME: 'Pombola Managers'
 MANAGERS_EMAIL: 'managers@example.com'
 
 # The email address to which errors should be sent:
-ERRORS_NAME: 'Mzalendo Developers'
+ERRORS_NAME: 'Pombola Developers'
 ERRORS_EMAIL: 'developers@example.com'
 
 # Email address that will be used in the 'From' line
@@ -65,7 +65,7 @@ DISQUS_SHORTNAME: ''
 # Should almost certainly be true unless you are supporting a site that started
 # using Disqus comments before this was added. In that case you'll need to migrate
 # the comments before setting this true.
-# See https://github.com/mysociety/mzalendo/issues/421 for more details.
+# See https://github.com/mysociety/pombola/issues/421 for more details.
 DISQUS_USE_IDENTIFIERS: 1
 
 # Widget id for polls to be embedded on the site.
@@ -89,7 +89,7 @@ BLOG_RSS_FEED: ''
 # The country app is loaded early so that its templates take priority over those
 # from other apps.  Note that we also use this setting in a command
 # (core_create_parliamentary_sessions) to determine the country that this
-# instance of Mzalendo is set up for.
+# instance of Pombola is set up for.
 COUNTRY_APP: kenya
 
 # The coordinates of the bounding box that should be used when maps are loaded.

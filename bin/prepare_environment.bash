@@ -13,8 +13,8 @@ PYTHONDONTWRITEBYTECODE=""
 
 
 # create the virtual environment, install/update required packages
-virtualenv ../mzalendo-virtualenv
-source ../mzalendo-virtualenv/bin/activate
+virtualenv ../pombola-virtualenv
+source ../pombola-virtualenv/bin/activate
 pip install Mercurial
 pip install -r requirements.txt
 

@@ -1,5 +1,5 @@
 # This command creates a new PopIt instance based on the Person,
-# Position and Organisation models in Mzalendo.
+# Position and Organisation models in Pombola.
 
 import re
 import sys
@@ -106,11 +106,11 @@ def make_personal_details(dob, dod):
             'date_of_death': date_to_popit_partial_date(dod)}
 
 def create_organisations(popit):
-    """Create organisations in PopIt based on those used in positions in Mzalendo
+    """Create organisations in PopIt based on those used in positions in Pombola
 
     Look through all positions in PopIt and find add the organisation
     that each refers to to PopIt.  Returns a dictionary where each key
-    is a slug for an organisations in Mzalendo, and the value is the
+    is a slug for an organisations in Pombola, and the value is the
     corresponding ID for the organisation in PopIt.
     """
 
@@ -151,7 +151,7 @@ def create_organisations(popit):
 
 class Command(BaseCommand):
     args = 'MZALENDO-URL'
-    help = 'Take all people in Mzalendo and import them into a PopIt instance'
+    help = 'Take all people in Pombola and import them into a PopIt instance'
     option_list = BaseCommand.option_list + (
             make_option("--instance", dest="instance",
                         help="The name of the PopIt instance (e.g. ukcabinet)",
@@ -182,7 +182,7 @@ class Command(BaseCommand):
         popit_options['api_version'] = 'v1'
 
         if len(args) != 1:
-            raise CommandError, "You must provide the base URL of the public Mzalendo site"
+            raise CommandError, "You must provide the base URL of the public Pombola site"
 
         try:
             popit = PopIt(**popit_options)
@@ -217,13 +217,13 @@ class Command(BaseCommand):
                 print >> sys.stderr, "deleting the position:", p
                 popit.position(p['_id']).delete()
 
-            # Create all the organisations found in Mzalendo, and get
-            # back a dictionary mapping the Mzalendo organisation slug
+            # Create all the organisations found in Pombola, and get
+            # back a dictionary mapping the Pombola organisation slug
             # to the PopIt ID.
 
             org_slug_to_id = create_organisations(popit)
 
-            # Create a person in PopIt for each Person in Mzalendo:
+            # Create a person in PopIt for each Person in Pombola:
 
             for person in Person.objects.all():
                 name = person.legal_name

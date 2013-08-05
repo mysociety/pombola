@@ -14,7 +14,7 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         self.open_url(start_url)
 
         # Go to twitter and cancel the login
-        self.twitter_click_login_link_on_mzalendo_site()
+        self.twitter_click_login_link_on_pombola_site()
         driver.find_element_by_link_text("Cancel, and return to app").click()
         
         # Check that the text is helpful
@@ -31,7 +31,7 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         self.open_url(start_url)
 
         # go to Twitter and confirm the log in
-        self.twitter_click_login_link_on_mzalendo_site()
+        self.twitter_click_login_link_on_pombola_site()
         driver.find_element_by_id("allow").click()
 
         # check that we are now logged in
@@ -52,11 +52,11 @@ class TwitterTestCase(TwitterSeleniumTestCase):
         user.last_name = "Lastly"
         user.save()
 
-        # now logout of Mzalendo
+        # now logout of Pombola
         self.logout()
 
         # log back in using twitter - should not need to approve anything
-        self.twitter_click_login_link_on_mzalendo_site()
+        self.twitter_click_login_link_on_pombola_site()
         self.assert_user_logged_in()
         
         # check that the name has not been updated

@@ -8,10 +8,10 @@ function initialize_map() {
     if (!map_element) return false;
 
     var map_bounds = {
-      north: window.mzalendo_settings.map_bounds.north,
-      east:  window.mzalendo_settings.map_bounds.east,
-      south: window.mzalendo_settings.map_bounds.south,
-      west:  window.mzalendo_settings.map_bounds.west
+      north: window.pombola_settings.map_bounds.north,
+      east:  window.pombola_settings.map_bounds.east,
+      south: window.pombola_settings.map_bounds.south,
+      west:  window.pombola_settings.map_bounds.west
     };
 
     var map_has_been_located = false;
@@ -96,7 +96,7 @@ function add_marker_to_map( args ) {
     markers_to_add.push(args);
 }
 
-mzalendo_run_when_document_ready(
+pombola_run_when_document_ready(
     function () {
         google.load(
             'maps', '3',

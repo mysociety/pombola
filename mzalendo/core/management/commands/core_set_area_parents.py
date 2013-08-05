@@ -1,9 +1,9 @@
-# This script tries to find a parent for each area in Mzalendo's
+# This script tries to find a parent for each area in Pombola's
 # core_place table by comparing polygons in MapIt.  You invoke the
 # script by giving as command-line arguments a series of pairs of
 # slugs from the core_placekind table, the first being the kind of the
 # child place, and the second being the kind of the parent place.  For
-# example, for Mzalendo Nigeria, you could run:
+# example, for Pombola Nigeria, you could run:
 #
 #   ./manage.py core_set_area_parents senatorial-district:state constituency:state
 #
@@ -38,7 +38,7 @@ def check_all_equal(iterable):
     except StopIteration:
         return True
 
-def get_mapit_type_for_mzalendo_placekind(placekind):
+def get_mapit_type_for_pombola_placekind(placekind):
     types_in_mapit = set(x.mapit_area.type for x in
                          Place.objects.filter(kind=placekind).select_related('mapit_area')
                          if x.mapit_area)
@@ -111,8 +111,8 @@ class Command(BaseCommand):
             child_placekind = PlaceKind.objects.get(slug=child_slug)
             parent_placekind = PlaceKind.objects.get(slug=parent_slug)
 
-            child_type = get_mapit_type_for_mzalendo_placekind(child_placekind)
-            parent_type = get_mapit_type_for_mzalendo_placekind(parent_placekind)
+            child_type = get_mapit_type_for_pombola_placekind(child_placekind)
+            parent_type = get_mapit_type_for_pombola_placekind(parent_placekind)
 
             recalculate_parents(child_placekind,
                                 child_type,

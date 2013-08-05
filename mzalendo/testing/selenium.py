@@ -17,11 +17,11 @@ from django_selenium.testcases import SeleniumTestCase
 #   driver:   http://selenium.googlecode.com/svn/trunk/docs/api/py/webdriver_remote/selenium.webdriver.remote.webdriver.html
 #   elements: http://selenium.googlecode.com/svn/trunk/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html
 
-class MzalendoSeleniumTestCase(SeleniumTestCase):
+class PombolaSeleniumTestCase(SeleniumTestCase):
     """Wrapper around SeleniumTestCase with some helpful additions"""
 
     def setUp(self):
-        super(MzalendoSeleniumTestCase, self).setUp()
+        super(PombolaSeleniumTestCase, self).setUp()
 
         # run the collectstatic command - so that all the static files can be served.
         call_command('collectstatic', interactive=False) 
@@ -113,7 +113,7 @@ twitter_skip_message = "Not testing twitter until the 'Fly' design widely deploy
 #     twitter_skip_message = "Do not have twitter login details, add TEST_TWITTER_USERNAME, TEST_TWITTER_PASSWORD and TEST_TWITTER_APP_NAME to your settings"
 
 @unittest.skipUnless( twitter_can_be_tested, twitter_skip_message )
-class TwitterSeleniumTestCase(MzalendoSeleniumTestCase):
+class TwitterSeleniumTestCase(PombolaSeleniumTestCase):
     """
     Twitter related add ons.
 
@@ -132,7 +132,7 @@ class TwitterSeleniumTestCase(MzalendoSeleniumTestCase):
         self.twitter_real_name = twitter_real_name
         
 
-    def twitter_click_login_link_on_mzalendo_site(self):
+    def twitter_click_login_link_on_pombola_site(self):
         """Click the twitter login link on the mz site"""
         return self.driver.find_element_by_link_text("twitter").click()
         

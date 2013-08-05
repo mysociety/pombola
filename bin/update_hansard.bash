@@ -6,7 +6,7 @@ set -e
 # check that we are in the expected directory
 cd `dirname $0`/../mzalendo
 
-source ../../mzalendo-virtualenv/bin/activate
+source ../../pombola-virtualenv/bin/activate
 
 ./manage.py hansard_check_for_new_sources
 ./manage.py hansard_process_sources

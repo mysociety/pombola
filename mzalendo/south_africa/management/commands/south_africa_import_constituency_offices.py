@@ -3,7 +3,7 @@
 # data - columns have different formats and structures, the names of
 # people don't match those in our database, places are defined
 # inconsistently, etc. etc. and to represent all these relationships
-# in the Mzalendo database schema we need to create a lot of new rows
+# in the Pombola database schema we need to create a lot of new rows
 # in different tables.  I strongly suggest this is only used for the
 # initial import on the 'all constituencies2.csv', or that file with
 # fixes manually applied to it.
@@ -169,7 +169,7 @@ for position in chain(Position.objects.all().filter(title__slug='member',
 
 unknown_people = set()
 
-def find_mzalendo_person(name_string, representative_type):
+def find_pombola_person(name_string, representative_type):
 
     # Strip off any phone number at the end:
     name_string = re.sub(r'[\s\d]+$', '', name_string).strip()
@@ -412,7 +412,7 @@ class Command(LabelCommand):
                                 if party in ('ANC', 'ACDP'):
                                     name_strings = re.split(r'\s{4,}',row[representative_type])
                                     for name_string in name_strings:
-                                        person = find_mzalendo_person(name_string,
+                                        person = find_pombola_person(name_string,
                                                                       representative_type)
                                         if person:
                                             people_to_add.append(person)
@@ -421,7 +421,7 @@ class Command(LabelCommand):
                                         # Strip off the phone number
                                         # and email address before
                                         # resolving:
-                                        person = find_mzalendo_person(
+                                        person = find_pombola_person(
                                             re.sub(r'(?ms)\s*\d.*', '', contact),
                                             representative_type)
                                         if person:
@@ -445,7 +445,7 @@ class Command(LabelCommand):
                                 mapit_municipality = mapit_municipalities[0]
                             elif len(mapit_municipalities) == 2:
                                 # This is probably a Metropolitan Municipality, which due to
-                                # https://github.com/mysociety/mzalendo/issues/695 will match
+                                # https://github.com/mysociety/pombola/issues/695 will match
                                 # an LMN and a DMN; just pick the DMN:
                                 if set(m.type.code for m in mapit_municipalities) == set(('LMN', 'DMN')):
                                     mapit_municipality = [m for m in mapit_municipalities if m.type.code == 'DMN'][0]
@@ -498,7 +498,7 @@ class Command(LabelCommand):
 
                         for representative_type in ('MP', 'MPL'):
                             for contact in re.split(r'(?ms)\s*;\s*', row[representative_type]):
-                                person = find_mzalendo_person(contact,
+                                person = find_pombola_person(contact,
                                                               representative_type)
                                 if person:
                                     people_to_add.append(person)

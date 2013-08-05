@@ -1,9 +1,9 @@
 # This command is intended to help with these issues:
 #
-#   https://github.com/mysociety/mzalendo/issues/599
-#   https://github.com/mysociety/mzalendo/issues/600
-#   https://github.com/mysociety/mzalendo/issues/601
-#   https://github.com/mysociety/mzalendo/issues/602
+#   https://github.com/mysociety/pombola/issues/599
+#   https://github.com/mysociety/pombola/issues/600
+#   https://github.com/mysociety/pombola/issues/601
+#   https://github.com/mysociety/pombola/issues/602
 #
 # This script takes arguments are passed in on the command line.
 

@@ -9,16 +9,16 @@
         if ( path.match('^//') )
             return path;
 
-        return mzalendo_settings.static_url
+        return pombola_settings.static_url
             + path
             + '?'
-            + mzalendo_settings.static_generation_number;
+            + pombola_settings.static_generation_number;
     };
     
     // create links to all the extra js needed
     var extra_js = [];
-    for ( i=0; i<mzalendo_settings.extra_js.length; i++ ) {
-        var extra = mzalendo_settings.extra_js[i];
+    for ( i=0; i<pombola_settings.extra_js.length; i++ ) {
+        var extra = pombola_settings.extra_js[i];
         var url = static_url( extra );
         extra_js.push( url );
     }
@@ -43,8 +43,8 @@
                 '//www.google.com/jsapi' // ?key=INSERT-YOUR-KEY
             ].concat( extra_js ),
             complete: function () {
-                for (i=0; i<mzalendo_run_when_document_ready_array.length; i++) {
-                    $( mzalendo_run_when_document_ready_array[i] );
+                for (i=0; i<pombola_run_when_document_ready_array.length; i++) {
+                    $( pombola_run_when_document_ready_array[i] );
                 }
 
                 // Now load all the optional bits that we didn't want slowing down the more important bits
@@ -52,19 +52,19 @@
                   static_url('js/analytics.js')
                   // ,
                   // '//platform.twitter.com/widgets.js',
-                  // '//connect.facebook.net/en_GB/all.js#xfbml=1&appId=' + mzalendo_settings.facebook_app_id
+                  // '//connect.facebook.net/en_GB/all.js#xfbml=1&appId=' + pombola_settings.facebook_app_id
                 ]);
             }
         }
     );
 })();
 
-var mzalendo_run_when_document_ready_array = [];
+var pombola_run_when_document_ready_array = [];
 
-function mzalendo_run_when_document_ready (func) {
+function pombola_run_when_document_ready (func) {
     if ( window.$ ) {
         $(func);
     } else {
-        mzalendo_run_when_document_ready_array.push( func );
+        pombola_run_when_document_ready_array.push( func );
     }
 }

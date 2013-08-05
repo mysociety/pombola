@@ -1,11 +1,11 @@
 import time
 
 from django.core.urlresolvers import reverse
-from mzalendo.testing.selenium import MzalendoSeleniumTestCase
+from mzalendo.testing.selenium import PombolaSeleniumTestCase
 
 from feedback.models import Feedback
 
-class FeedbackTestCase(MzalendoSeleniumTestCase):
+class FeedbackTestCase(PombolaSeleniumTestCase):
 
     fixtures = ['test_data']    
 

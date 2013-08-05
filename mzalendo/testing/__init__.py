@@ -1,1 +1,1 @@
-from selenium import MzalendoSeleniumTestCase, TwitterSeleniumTestCase
+from selenium import PombolaSeleniumTestCase, TwitterSeleniumTestCase

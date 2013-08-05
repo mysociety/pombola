@@ -1,8 +1,8 @@
-from mzalendo.testing.selenium import MzalendoSeleniumTestCase
+from mzalendo.testing.selenium import PombolaSeleniumTestCase
 
 # from mzalendo.core.models import Person
 
-class AdminTestCase(MzalendoSeleniumTestCase):
+class AdminTestCase(PombolaSeleniumTestCase):
     
     fixtures = ['test_data']
 

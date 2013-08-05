@@ -77,7 +77,7 @@ class Command(BaseCommand):
 
                 # Note - the following commented out as it causes issues for
                 # some constiuncies - see
-                #   https://github.com/mysociety/mzalendo/issues/443 for details.
+                #   https://github.com/mysociety/pombola/issues/443 for details.
                 # Not using this only results in the CS produced bein much larger
                 # (7MB as opposed to 1MB) but for us this is not really an issue.
                 # apply a simplify_tolerance to make CSV smaller

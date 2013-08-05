@@ -1,6 +1,6 @@
 # This command is intended to fix issue 550:
 #
-#   https://github.com/mysociety/mzalendo/issues/550
+#   https://github.com/mysociety/pombola/issues/550
 #
 #   "As mentioned in #494 there are lots of party membership positions
 #    that have an end date of 2012 - meaning that on the site many

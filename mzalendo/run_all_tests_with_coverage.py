@@ -23,4 +23,4 @@ coverage run --omit=$OMIT ./manage.py test --selenium-only \
   feedback                       \
   user_profile
 
-coverage html -d mzalendo-coverage
+coverage html -d pombola-coverage

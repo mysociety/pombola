@@ -44,7 +44,7 @@ known_fields = {
                                 'start_date',
                                 'end_date')),
                    'ignored': set(('label',
-                                   # FIXME: Mzalendo needs start/end_reason
+                                   # FIXME: Pombola needs start/end_reason
                                    'end_reason'))},
     'contact_detail': {'used': set(('type',
                                     'note',
@@ -164,7 +164,7 @@ class Command(LabelCommand):
         id_to_organisation = {}
 
         # First import all the organizations as Organisation objects
-        # in Mzalendo:
+        # in Pombola:
 
         for organisation in popolo_data['organizations']:
             o_id = organisation['id']
@@ -195,7 +195,7 @@ class Command(LabelCommand):
 
         current_mapit_generation = Generation.objects.current()
 
-        # Import all the people as Person objects in Mzalendo:
+        # Import all the people as Person objects in Pombola:
 
         for person in popolo_data['persons']:
 
