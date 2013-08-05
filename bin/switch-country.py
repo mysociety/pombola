@@ -22,7 +22,7 @@
 # │   │   ├── general-south-africa.yml
 # │   │   ├── general-zimbabwe.yml
 # │   │   └── general.yml -> general-kenya.yml
-# │   ├── mzalendo
+# │   ├── pombola
 # │   │   ├── core
 # ...
 #
@@ -59,7 +59,7 @@ requested = sys.argv[1]
 if requested not in available_pombolas:
     usage_and_exit()
 
-general_yml_symlink = os.path.join(pombola_directory, 'mzalendo', 'conf', 'general.yml')
+general_yml_symlink = os.path.join(pombola_directory, 'pombola', 'conf', 'general.yml')
 general_yml_target = 'general-' + requested + '.yml'
 
 media_root_path = os.path.join(pombola_directory, 'media_root')

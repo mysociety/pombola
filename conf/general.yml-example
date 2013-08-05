@@ -8,11 +8,11 @@
 # 
 # Copyright (c) 2011 UK Citizens Online Democracy. All rights reserved.
 
-MZALENDO_DB_HOST: 'localhost'
-MZALENDO_DB_PORT: '5432'
-MZALENDO_DB_USER: ''
-MZALENDO_DB_NAME: ''
-MZALENDO_DB_PASS: ''
+POMBOLA_DB_HOST: 'localhost'
+POMBOLA_DB_PORT: '5432'
+POMBOLA_DB_USER: ''
+POMBOLA_DB_NAME: ''
+POMBOLA_DB_PASS: ''
 
 STAGING: '1'
 TIME_ZONE: 'Europe/London'

@@ -11,7 +11,7 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 VIRTUAL_ENV="/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv"
 PATH=/data/vhost/!!(*= $vhost *)!!/pombola/bin/:/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv/bin:/usr/local/bin:/usr/bin:/bin
 
-# Set this PYTHONPATH so that the scripts can just 'import mzalendo.setup_env'
+# Set this PYTHONPATH so that the scripts can just 'import pombola.setup_env'
 # and have everything work.
 PYTHONPATH=/data/vhost/!!(*= $vhost *)!!/pombola
 

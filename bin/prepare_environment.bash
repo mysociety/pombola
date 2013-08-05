@@ -28,7 +28,7 @@ MAPIT_PATH="$(python -c 'import mapit; print mapit.__file__,')"
 find . -name '*.pyc' -delete
 
 # go to the project directory for local config
-cd mzalendo
+cd pombola
 
 # get the database up to speed
 ./manage.py syncdb --noinput

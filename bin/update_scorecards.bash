@@ -4,7 +4,7 @@
 set -e
 
 # check that we are in the expected directory
-cd `dirname $0`/../mzalendo
+cd `dirname $0`/../pombola
 
 source ../../pombola-virtualenv/bin/activate
 
