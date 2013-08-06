@@ -11,7 +11,6 @@ find . -name '*.pyc' -delete
     hansard        \
     helpers        \
     images         \
-    info           \
     scorecards     \
     search         \
     tasks          \
