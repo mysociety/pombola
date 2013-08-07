@@ -16,7 +16,7 @@ coverage run --omit=$OMIT ./manage.py test   \
     search         \
     tasks
 
-coverage run --omit=$OMIT ./manage.py test --selenium-only \
+coverage run --append --omit=$OMIT ./manage.py test --selenium-only \
   core                           \
   feedback
 

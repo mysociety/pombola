@@ -6,9 +6,7 @@ class CoreTestCase(PombolaSeleniumTestCase):
 
     def test_home(self):
         self.open_url(reverse('home'))
-        self.failUnless(self.is_text_present('Mzalendo'))
-        self.assertEquals(self.get_title(), 'Home :: Mzalendo')
-
+        self.assertRegexpMatches(self.get_title(), 'Home')
 
     def test_static(self):
         """Test that the static files are being served"""

@@ -150,6 +150,8 @@
         "pk": 1,
         "model": "core.alternativepersonname",
         "fields": {
+            "created": "2011-11-10 11:04:34", 
+            "updated": "2011-11-10 11:04:34", 
             "alternative_name": "Joe Bloggs",
             "person": 1,
             "name_to_use": true
@@ -159,6 +161,8 @@
         "pk": 2,
         "model": "core.alternativepersonname",
         "fields": {
+            "created": "2011-11-10 11:04:34", 
+            "updated": "2011-11-10 11:04:34", 
             "alternative_name": "JJ Bloggs",
             "person": 1,
             "name_to_use": false
