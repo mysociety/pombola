@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load url from future %}
 
 {% block title %}Home{% endblock %}
 
@@ -25,13 +26,13 @@
         {% endif %}
 
 
-        <form action="{% url core_search %}" id="home-search">
+        <form action="{% url "core_search" %}" id="home-search">
             <label for="core-search">Search people, places and organisations</label>
             <input class="search-autocomplete-name" id="core-search" type="text" name="q" value="" placeholder="e.g. Lagos, Goodluck Jonathan">
             <button type="submit">Search</button>
 
             {% if settings.ENABLED_FEATURES.hansard %}
-                <a href="{% url hansard_search  %}" id="search-hansard-instead">Search Hansard instead</a>
+                <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Search Hansard instead</a>
             {% endif %}
 
         </form>

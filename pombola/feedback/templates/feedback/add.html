@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load url from future %}
 
 {% comment %}
     'form':               form,
@@ -48,7 +49,7 @@
                 #add_feedback input[name=website]   { display: none; }
             </style>
 
-            <form method="post" action="{% url feedback_add %}" id="add_feedback">
+            <form method="post" action="{% url "feedback_add" %}" id="add_feedback">
                 {% csrf_token %}
                 
                 {{ form.as_p }}

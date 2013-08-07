@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load pagination_tags %}
+{% load url from future %}
 
 {% block title %}Places{% endblock %}
 
@@ -11,16 +12,16 @@
     <div class="object_menu">
       <nav>
         <ul>
-          <li><a href="{% url place_kind_all %}">All</a></li>
+          <li><a href="{% url "place_kind_all" %}">All</a></li>
 
           {% for place_kind in all_kinds %}
               {% for session in place_kind.parliamentary_sessions_for_iteration %}
                 <li>
                   
                   {% if session %}
-                     <a href="{% url place_kind slug=place_kind.slug, session_slug=session.slug %}">{% firstof place_kind.plural_name place_kind.name %} {% if session %}({{session.relative_time}}){% endif %}</a>
+                     <a href="{% url "place_kind" slug=place_kind.slug session_slug=session.slug %}">{% firstof place_kind.plural_name place_kind.name %} {% if session %}({{session.relative_time}}){% endif %}</a>
                   {% else %}
-                     <a href="{% url place_kind slug=place_kind.slug %}">{% firstof place_kind.plural_name place_kind.name %}</a>
+                     <a href="{% url "place_kind" slug=place_kind.slug %}">{% firstof place_kind.plural_name place_kind.name %}</a>
                   {% endif %}</h2>
                 </li>
               {% endfor %}

@@ -1,6 +1,7 @@
 {% extends 'core/place_base.html' %}
 {% load thumbnail %}
 {% load humanize %}
+{% load url from future %}
 
 {% block title %}{{ object.name }} Places{% endblock %}
 
@@ -14,7 +15,7 @@
 
     {% if object.parent_place %}
         {{ object.name }} is contained in
-        <a href="{% url place slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
+        <a href="{% url "place" slug=object.parent_place.slug %}">{{ object.parent_place.name }}</a>
     {% if object.parent_place.kind.slug != 'country' %}
             {{ object.parent_place.kind.name }}.
         {% endif %}

@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 {% load switch %}
+{% load url from future %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
 
     <div class="view-selector">
-        <a href="{% url position_pt pt_slug=object.slug %}?view=grid{% if order %}&order={{order|urlencode}}{% endif %}">View as grid</a>
+        <a href="{% url "position_pt" pt_slug=object.slug %}?view=grid{% if order %}&order={{order|urlencode}}{% endif %}">View as grid</a>
     </div>
 
     <h1 class="page-title">{{ page_title }}</h1>
