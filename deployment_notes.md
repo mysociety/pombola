@@ -9,7 +9,7 @@ This is currently not possible.
 The search index is stored on file locally on the machine. It is updated
 whenever there is a change to a person, organisation or place, and when the
 hansard imports happen.
-[see issue #524](https://github.com/mysociety/mzalendo/issues/524)
+[see issue #524](https://github.com/mysociety/pombola/issues/524)
 
 # Site specific
 

@@ -1,6 +1,6 @@
 # INSTALL
 #
-# Mzalendo is mostly a standard Django project. There are some unusual
+# Pombola is mostly a standard Django project. There are some unusual
 # dependencies that are noted below.
 
 # The lines without a '#' at the start are commands to run on your command line
@@ -13,18 +13,18 @@
 # 
 # These extra directories are by default put alongside the folder containing the
 # code. To keep these from getting mixed up with other directories on your
-# computer we suggest you create a folder called mzalendo_root for them all to
+# computer we suggest you create a folder called pombola_root for them all to
 # reside in.
 
-mkdir mzalendo_root
-cd mzalendo_root
+mkdir pombola_root
+cd pombola_root
 
 
 # GETTING THE CODE
 # 
-# The code is available via github: https://github.com/mysociety/mzalendo
+# The code is available via github: https://github.com/mysociety/pombola
 
-git clone https://github.com/mysociety/mzalendo.git
+git clone https://github.com/mysociety/pombola.git
 
 # on a Mac you could fetch the code using GitHub's client - use the 'Clone in
 # Mac' button - http://mac.github.com/
@@ -39,14 +39,14 @@ git clone https://github.com/mysociety/mzalendo.git
 
 # A Postgis enabled Postgres database is required
 
-# create the database - assuming here that you're calling it 'mzalendo'
-createdb -T template_postgis mzalendo
+# create the database - assuming here that you're calling it 'pombola'
+createdb -T template_postgis pombola
 
 
 # CONFIGURATION FILES
 
-# go to the mzalendo Django project
-cd mzalendo
+# go to the pombola Django project
+cd pombola
 
 # copy config example and set values needed
 cp conf/general.yml-example conf/general.yml
@@ -65,14 +65,14 @@ If this step fails, please consult TROUBLESHOOTING.txt
 # VIRTUALENV
 
 # now that the environment has been created you need to enable it
-source ../mzalendo-virtualenv/bin/activate
+source ../pombola-virtualenv/bin/activate
 
 
 # START THE DEV SERVER
 
 # The dev server will allow you to check that everything is working as expected.
 
-cd mzalendo
+cd pombola
 ./manage.py runserver
 
 # don't forget to log in to the admin and change the entry in 'sites' to your

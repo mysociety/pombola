@@ -1,0 +1,83 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+
+{% block extrastyle %}
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
+    <link href="{{ STATIC_URL }}css/admin.css" rel="stylesheet" type="text/css" /> 
+{% endblock %}
+
+{% block blockbots %}
+    <meta name="robots" content="NONE,NOARCHIVE" />
+
+    {% comment %}
+        This is in the 'blockbots' block rather than the 'extrahead' block as it
+        must be loaded after the django admin jquery so that there is no
+        confusion about the jqueries that are on the page. Trying to use a
+        super.block in 'extrahead' did not work.
+    {% endcomment %}
+
+    <!-- for the admin autocomplete -->
+
+    <!-- Use the admin jquery, if available, or load one off Google's CDN. Same for jQuery UI -->
+    <script type="text/javascript">//<![CDATA[
+    if (typeof jQuery == 'undefined') {
+    	try { // use django admins 
+    		jQuery=django.jQuery;
+    	} catch(err) {
+    		document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"><\/script>');
+    	}
+    }
+    //]]>
+    </script>
+    <script type="text/javascript">//<![CDATA[
+    if(!jQuery || (typeof jQuery.ui == 'undefined')) {
+    	document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"><\/script>');
+    	document.write('<link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />');
+    }
+    //]]>
+    </script>
+
+
+    <script src="{{ STATIC_URL }}js/ajax_select.js" type="text/javascript" charset="utf-8"></script>
+    <link href="{{ STATIC_URL }}css/ajax_select.css" rel="stylesheet" type="text/css" /> 
+
+
+    <script type="text/javascript" charset="utf-8">
+        /*
+
+            This is a hack to deal with the poor support for autocomplete in
+            inlines. There are some suggested patches but they did not work when
+            tried.
+
+            http://code.google.com/p/django-ajax-selects/issues/detail?id=50
+
+            The below code simply replaces the 'add more ...' link with a
+            message regarding a workaround. The setTimeout is there as the link
+            itself is created by javascript and we want to be sure that we run
+            after that has run.
+
+        */
+
+        // $( function () {
+        //     setTimeout(
+        //         function () {
+        //             $("a:contains('Add another Position')")
+        //                 .replaceWith( 'To create more positions save the page and then come back to fill in the additional rows');
+        //         },
+        //         2000
+        //     )
+        // })
+    </script>
+
+{% endblock %}
+
+{% block title %}{{ title }} | {% trans 'Pombola site admin' %}{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">{% trans 'Pombola administration' %}</h1>
+{% endblock %}
+
+{% block nav-global %}
+    {% include 'staging_header.html' %}
+{% endblock %}

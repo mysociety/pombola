@@ -4,9 +4,9 @@
 set -e
 
 # check that we are in the expected directory
-cd `dirname $0`/../mzalendo
+cd `dirname $0`/../pombola
 
-source ../../mzalendo-virtualenv/bin/activate
+source ../../pombola-virtualenv/bin/activate
 
 ./manage.py scorecard_update_person_contact_scores
 

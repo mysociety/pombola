@@ -1,0 +1,87 @@
+#site-header {
+  clear: both;
+  background: $colour_primary;
+  @include background(linear-gradient($colour_primary / 0.75, $colour_primary));
+  .wrapper {
+    overflow: hidden; } }
+
+@media only all and (min-width: 640px), print {
+  #site-header {
+    height: 60px;
+    &.down {
+      height: 80px; }
+    .wrapper {
+      position: relative;
+      overflow: visible; } } }
+
+// ------------------------------------------------------
+
+#logo {
+  display: block;
+  margin-left: 10px;
+  float: left;
+  height: 42px;
+  text-indent: -999999em;
+  width: 147px;
+  background: url(../images/m-logo.png) 0 center no-repeat;
+  @media only all and (min-width: 640px), print {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    height: 34px;
+    width: 418px;
+    background: url(../images/d-logo.png) 0 center no-repeat;
+    &.down {
+      width: 600px;
+      height: 50px;
+      background: url(../images/down-logo.png) 0 center no-repeat; } } }
+
+// ------------------------------------------------------
+
+menu#mobile-top-tools {
+  @media only all and (min-width: 640px), print {
+    display: none; }
+  float: right;
+  ul {
+    @include list-reset;
+    li {
+      padding: 0.5em 1em 0 0;
+      a {
+        color: $colour_white;
+        img {
+          vertical-align: middle; } } } } }
+
+// ------------------------------------------------------
+
+#header-search {
+  display: none;
+
+  @media only all and (min-width: 640px), print {
+    display: block; }
+
+  @media print { display: none; }
+
+  float: right;
+  background: transparent;
+  margin: 5px 5px 5px 15px;
+  height: auto;
+  border: none;
+  input {
+    padding: 1px 4px 1px 8px;
+    border: 1px solid $colour_grey;
+    height: 22px;
+    @include border-radius(5px 0 0 5px);
+    float: left;
+    width: 10em;
+    border: 1px solid $colour_black;
+    font-size: 14px; }
+  button {
+    float: left;
+    @include button-reset;
+    background: $colour_black url(../images/search-icon.png) center no-repeat;
+    width: 26px;
+    height: 26px;
+    margin: 0 0 0 0;
+    @include border-radius(0 5px 5px 0);
+    &:hover {
+      background-color: $colour_blackish; } } }

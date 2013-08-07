@@ -4,9 +4,9 @@
 set -e
 
 # check that we are in the expected directory
-cd `dirname $0`/../mzalendo
+cd `dirname $0`/../pombola
 
-source ../../mzalendo-virtualenv/bin/activate
+source ../../pombola-virtualenv/bin/activate
 
 # This will print out to STDOUT if there are any. This should then get emailed to
 # the right people by the cron script.

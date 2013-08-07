@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-# If you have a standard Mzalendo setup (see below) and need to switch
+# If you have a standard Pombola setup (see below) and need to switch
 # between developing for different countries, this script can be
 # useful for making that switch simply.  It assumes that you have the
 # following directory hierarchy, config files and symlinks set up:
@@ -13,7 +13,7 @@
 # ├── media_root.nigeria
 # ├── media_root.south-africa
 # ├── media_root.zimbabwe
-# ├── mzalendo
+# ├── pombola
 # │   ├── .git
 # │   ├── bin
 # │   ├── conf
@@ -22,7 +22,7 @@
 # │   │   ├── general-south-africa.yml
 # │   │   ├── general-zimbabwe.yml
 # │   │   └── general.yml -> general-kenya.yml
-# │   ├── mzalendo
+# │   ├── pombola
 # │   │   ├── core
 # ...
 #
@@ -39,15 +39,15 @@ import os
 import sys
 
 script_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
-mzalendo_directory = os.path.join(script_directory, '..', '..')
-mzalendo_directory = os.path.normpath(mzalendo_directory)
+pombola_directory = os.path.join(script_directory, '..', '..')
+pombola_directory = os.path.normpath(pombola_directory)
 
-available_mzalendi = ('nigeria', 'kenya', 'south-africa', 'zimbabwe')
+available_pombolas = ('nigeria', 'kenya', 'south-africa', 'zimbabwe')
 
 def usage_and_exit():
     print >> sys.stderr, "Usage: %s <COUNTRY>" % (sys.argv[0],)
     print >> sys.stderr, "... where country is one of:"
-    for country in available_mzalendi:
+    for country in available_pombolas:
         print >> sys.stderr, "  ", country
     sys.exit(1)
 
@@ -56,13 +56,13 @@ if len(sys.argv) != 2:
 
 requested = sys.argv[1]
 
-if requested not in available_mzalendi:
+if requested not in available_pombolas:
     usage_and_exit()
 
-general_yml_symlink = os.path.join(mzalendo_directory, 'mzalendo', 'conf', 'general.yml')
+general_yml_symlink = os.path.join(pombola_directory, 'pombola', 'conf', 'general.yml')
 general_yml_target = 'general-' + requested + '.yml'
 
-media_root_path = os.path.join(mzalendo_directory, 'media_root')
+media_root_path = os.path.join(pombola_directory, 'media_root')
 media_root_path_requested = media_root_path + "." + requested
 media_root_target = 'media_root.' + requested
 
@@ -90,7 +90,7 @@ switch_link(general_yml_symlink, general_yml_target)
 
 old_country = None
 
-for country in available_mzalendi:
+for country in available_pombolas:
     possible_symlink = media_root_path + '.' + country
     if os.path.islink(possible_symlink):
         resolved = os.readlink(possible_symlink)

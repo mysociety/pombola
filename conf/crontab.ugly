@@ -1,5 +1,5 @@
 # crontab.ugly:
-# Timed tasks for Mzalendo. Template file.
+# Timed tasks for Pombola. Template file.
 #
 # Copyright (c) 2007 UK Citizens Online Democracy. All rights reserved.
 # http://www.mysociety.org/
@@ -8,18 +8,18 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 
 # Set the virtualenv and add it to the path so that the correct python is used -
 # requires that scripts start with '#!/usr/bin/env python'
-VIRTUAL_ENV="/data/vhost/!!(*= $vhost *)!!/mzalendo-virtualenv"
-PATH=/data/vhost/!!(*= $vhost *)!!/mzalendo/bin/:/data/vhost/!!(*= $vhost *)!!/mzalendo-virtualenv/bin:/usr/local/bin:/usr/bin:/bin
+VIRTUAL_ENV="/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv"
+PATH=/data/vhost/!!(*= $vhost *)!!/pombola/bin/:/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv/bin:/usr/local/bin:/usr/bin:/bin
 
-# Set this PYTHONPATH so that the scripts can just 'import mzalendo.setup_env'
+# Set this PYTHONPATH so that the scripts can just 'import pombola.setup_env'
 # and have everything work.
-PYTHONPATH=/data/vhost/!!(*= $vhost *)!!/mzalendo
+PYTHONPATH=/data/vhost/!!(*= $vhost *)!!/pombola
 
 # Set this so that python does not choke trying to output utf8
 PYTHONIOENCODING=utf-8
 
 
-# Several sites use the Mz codebase. They don't all have the same requirements
+# Several sites use the Pombola codebase. They don't all have the same requirements
 # or apps. Use the conditionals below to run the correct cron jobs, and make
 # sure that they don't clash timewise.
 !!(* if ($vhost eq 'mzalendo.mysociety.org') { *)!!

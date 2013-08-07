@@ -1,0 +1,19 @@
+{% extends 'votematch/base.html' %}
+
+{% block title %}
+  Scoring
+{% endblock %}
+
+{% block content %}
+
+  <h1>Scoring</h1>
+
+  <p>This is a brief explanation of how the scoring is calculated.</p>
+    
+  <p>We take the answers that you give and compare them to the answers that we believe that the candidate would give. For each question where you agree we award positive points and vice versa for disagreement. The number of points depends on how strong the agreement or disagreement is.</p>
+  
+  <p>At the end we total the points given and order the choices based on these totals.</p>
+
+  <p>For the exact algorithm used please see the <a href="https://github.com/mysociety/pombola/blob/master/mzalendo/votematch/views.py">source code</a>.</p>
+
+{% endblock %}

@@ -13,8 +13,8 @@ PYTHONDONTWRITEBYTECODE=""
 
 
 # create the virtual environment, install/update required packages
-virtualenv ../mzalendo-virtualenv
-source ../mzalendo-virtualenv/bin/activate
+virtualenv ../pombola-virtualenv
+source ../pombola-virtualenv/bin/activate
 pip install Mercurial
 pip install -r requirements.txt
 
@@ -28,7 +28,7 @@ MAPIT_PATH="$(python -c 'import mapit; print mapit.__file__,')"
 find . -name '*.pyc' -delete
 
 # go to the project directory for local config
-cd mzalendo
+cd pombola
 
 # get the database up to speed
 ./manage.py syncdb --noinput
