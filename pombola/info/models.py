@@ -26,8 +26,8 @@ class InfoPage(models.Model):
     The page with the slug 'index' is special - it is used as the index page to all the other info pages, and so should probably be a table of contents or similar.
     """
 
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
+    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
+    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
 
     slug    = models.SlugField(unique=True)
     title   = models.CharField(max_length=300, unique=True)

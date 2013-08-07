@@ -39,8 +39,8 @@ class Alias(HansardModelBase):
 
     """
 
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
+    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
+    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
 
     alias   = models.CharField( max_length=200, unique=True )
     person  = models.ForeignKey( Person, blank=True, null=True )
