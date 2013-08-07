@@ -3,7 +3,7 @@ import time
 from django.core.urlresolvers import reverse
 from pombola.testing.selenium import PombolaSeleniumTestCase
 
-from feedback.models import Feedback
+from pombola.feedback.models import Feedback
 
 class FeedbackTestCase(PombolaSeleniumTestCase):
 
@@ -27,7 +27,7 @@ class FeedbackTestCase(PombolaSeleniumTestCase):
         self.create_feedback_using_wide_screen(message='wide window + email', email="foo@example.com")
 
         # log in and check that the user is stored.
-        self.login('superuser')
+        self.login_to_admin('superuser')
         self.create_feedback_using_wide_screen(message='logged_in_user')
 
         actual = {}

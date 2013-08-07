@@ -1,3 +1,4 @@
+{% load url from future %}
 <!DOCTYPE HTML>
 <html lang="en-gb">
 <head>
@@ -67,7 +68,7 @@
     <label for="mz-search">Search for your <a href="/position/mp/">MP</a>, <a href="/place/is/constituency/">Constituency</a> or&nbsp;<a href="/place/is/county/">County</a>:</label>
 
     <div id="mzalendo_search_box" class="clearfix">
-      <form action="{% url core_search %}" method="get" id="header-search">
+      <form action="{% url "core_search" %}" method="get" id="header-search">
         <input class="search-autocomplete-name" id="mz-search" name="q" autofocus type="text" value="">
         <input class="submit-search" type="submit" value="Search">
       </form>

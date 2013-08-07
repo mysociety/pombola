@@ -1,11 +1,6 @@
-from django.views.generic.list_detail import object_detail, object_list
+from django.views.generic import DetailView
 from models import InfoPage
 
-def info_page(request, slug='index'):
+class InfoPageView(DetailView):
     """Show the page, or 'index' if no slug"""
-    return object_detail(
-        request,
-        queryset = InfoPage.objects,
-        slug     = slug,
-    )
-
+    model = InfoPage

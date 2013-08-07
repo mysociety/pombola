@@ -1,3 +1,4 @@
+{% load url from future %}
 {% comment %}
 
     This is a partial loaded into the tab on the person profile page.
@@ -11,7 +12,7 @@
 
 <h2>Parliamentary appearances</h2>
 
-<p>{{ person.name }} has <a href='{% url hansard:person_summary slug=person.slug %}'>spoken {{ entry_count }} times</a> in Parliament.</p>
+<p>{{ person.name }} has <a href='{% url "hansard:person_summary" slug=person.slug %}'>spoken {{ entry_count }} times</a> in Parliament.</p>
 
 <h3>Recent Appearances</h3>
 

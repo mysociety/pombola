@@ -1,6 +1,6 @@
 from django.db import models
 
-from hansard.models.base import HansardModelBase
+from pombola.hansard.models.base import HansardModelBase
 
 class Venue(HansardModelBase):
     """

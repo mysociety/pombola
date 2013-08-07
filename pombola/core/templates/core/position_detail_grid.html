@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 {% load switch %}
+{% load url from future %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
 
     <div class="view-selector">
-        <a href="{% url position_pt pt_slug=object.slug %}{% if order %}?order={{order|urlencode}}{% endif %}">View as list</a>
+        <a href="{% url "position_pt" pt_slug=object.slug %}{% if order %}?order={{order|urlencode}}{% endif %}">View as list</a>
     </div>
 
     <h1 class="page-title">{{ page_title }}</h1>
@@ -44,7 +45,7 @@
     <br><br>
 
     <div>
-        For past position holders please <a href="{% url position_pt pt_slug=object.slug %}">view as list</a>.
+        For past position holders please <a href="{% url "position_pt" pt_slug=object.slug %}">view as list</a>.
     </div>
 
 

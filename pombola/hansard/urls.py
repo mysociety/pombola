@@ -1,7 +1,7 @@
-from django.conf.urls.defaults import patterns, include, url
-from hansard.views import IndexView, SittingView
+from django.conf.urls import patterns, include, url
+from pombola.hansard.views import IndexView, SittingView
 
-urlpatterns = patterns('hansard.views',
+urlpatterns = patterns('pombola.hansard.views',
     url( r'^$', IndexView.as_view(), name="index" ),
 
     # not the final URL structure - but something to start work with

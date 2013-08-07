@@ -1,27 +1,22 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 
-from django.views.generic import DetailView, ListView
-from django.views.generic.simple import direct_to_template, redirect_to
+from django.views.generic import TemplateView, ListView, RedirectView
 
-from core import models
-from core.views import PlaceDetailView
+from pombola.core import models
+from pombola.core.views import PlaceDetailView, OrganisationList, OrganisationKindList, PlaceKindList, PersonDetail, PersonDetailSub, PlaceDetailSub, OrganisationDetailSub
 
-person_patterns = patterns('core.views',
+person_patterns = patterns('pombola.core.views',
     url(r'^all/',
         ListView.as_view(model=models.Person),
         name='person_list'),
 
     url(
         r'^politicians/',
-        redirect_to,
-        {
-            # This is what I'd like to have - but as the 'position' path does
-            # not exist yet it gets confused. Hardcode instead - this end point
-            # should be removed at some point - legacy from the MzKe site.
-            # 'url': reverse('position', kwargs={'slug':'mp'}),
-            'url': '/position/mp',
-            'permanent': True,
-        }
+        # This is what I'd like to have - but as the 'position' path does
+        # not exist yet it gets confused. Hardcode instead - this end point
+        # should be removed at some point - legacy from the MzKe site.
+        # 'url': reverse('position', kwargs={'slug':'mp'}),
+        RedirectView.as_view(url='/position/mp', permanent=True),
     ),
                            
     # featured person ajax load
@@ -29,17 +24,17 @@ person_patterns = patterns('core.views',
         'featured_person', 
         name='featured_person'),
     
-    url(r'^(?P<slug>[-\w]+)/$', 'person', name='person'),
+    url(r'^(?P<slug>[-\w]+)/$', PersonDetail.as_view(), name='person'),
 
   )
 
 # ugly, must be a better way
 for sub_page in ['scorecard', 'comments', 'experience', 'appearances', 'contact_details']:
     person_patterns += patterns(
-        'core.views',
+        'pombola.core.views',
         url(
             '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
-            'person_sub_page',                   # view function
+            PersonDetailSub.as_view(),           # view function
             { 'sub_page': sub_page },            # pass in the 'sub_page' arg
             'person_%s' % sub_page               # url name for {% url ... %} tags
         )
@@ -47,11 +42,11 @@ for sub_page in ['scorecard', 'comments', 'experience', 'appearances', 'contact_
 
 
 
-place_patterns = patterns('core.views',
+place_patterns = patterns('pombola.core.views',
 
-    url( r'^all/',                 'place_kind', name='place_kind_all' ),
-    url( r'^is/(?P<slug>[-\w]+)/$', 'place_kind', name='place_kind'     ),
-    url( r'^is/(?P<slug>[-\w]+)/(?P<session_slug>[-\w]+)/?', 'place_kind', name='place_kind'     ),
+    url( r'^all/', PlaceKindList.as_view(), name='place_kind_all' ),
+    url( r'^is/(?P<slug>[-\w]+)/$', PlaceKindList.as_view(), name='place_kind'     ),
+    url( r'^is/(?P<slug>[-\w]+)/(?P<session_slug>[-\w]+)/?', PlaceKindList.as_view(), name='place_kind'     ),
     url( r'^mapit_area/(?P<mapit_id>\d+)/', 'place_mapit_area', name='place_mapit_area' ),
 
     url(r'^(?P<slug>[-\w]+)/$',
@@ -64,11 +59,7 @@ place_patterns = patterns('core.views',
     # this path - after July 2013 feels about right.
     url(
         r'^(?P<slug>[-\w]+)/candidates/$',
-        redirect_to,
-        {
-            'url':       '/place/%(slug)s/aspirants',
-            'permanent': True,
-        }
+        RedirectView.as_view(url='/place/%(slug)s/aspirants', permanent=True),
     ),
 
     
@@ -77,35 +68,35 @@ place_patterns = patterns('core.views',
 # ugly, must be a better way
 for sub_page in ['aspirants', 'election', 'scorecard', 'comments', 'people', 'places', 'organisations', 'data', 'projects']:
     place_patterns += patterns(
-        'core.views',
+        'pombola.core.views',
         url(
             '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
-            'place_sub_page',                    # view function
+            PlaceDetailSub.as_view(),            # view function
             { 'sub_page': sub_page },            # pass in the 'sub_page' arg
             'place_%s' % sub_page                # url name for {% url ... %} tags
         )
     )
 
 
-organisation_patterns = patterns('core.views',
-    url(r'^all/', 'organisation_list', name='organisation_list'),
-    url(r'^is/(?P<slug>[-\w]+)/', 'organisation_kind', name='organisation_kind'),
+organisation_patterns = patterns('pombola.core.views',
+    url(r'^all/', OrganisationList.as_view(), name='organisation_list'),
+    url(r'^is/(?P<slug>[-\w]+)/', OrganisationKindList.as_view(), name='organisation_kind'),
     url(r'^(?P<slug>[-\w]+)/$',   'organisation',      name='organisation'),
 )    
 
 # ugly, must be a better way
 for sub_page in ['comments', 'contact_details', 'people']:
     organisation_patterns += patterns(
-        'core.views',
+        'pombola.core.views',
         url(
             '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
-            'organisation_sub_page',                    # view function
+            OrganisationDetailSub.as_view(),     # view function
             { 'sub_page': sub_page },            # pass in the 'sub_page' arg
-            'organisation_%s' % sub_page                # url name for {% url ... %} tags
+            'organisation_%s' % sub_page         # url name for {% url ... %} tags
         )
     )
 
-urlpatterns = patterns('core.views',
+urlpatterns = patterns('pombola.core.views',
     # Homepage
     url(r'^$', 'home', name='home'),
 
@@ -124,19 +115,19 @@ urlpatterns = patterns('core.views',
     url(r'^ajax_select/', include('ajax_select.urls')),
 )
 
-urlpatterns += patterns('core.views',
+urlpatterns += patterns('pombola.core.views',
     url(r'^status/memcached/',       'memcached_status', name='memcached_status'),
 )
 
 urlpatterns += patterns('',
-    url(r'^status/down/', direct_to_template, {'template': 'down.html'} ),
+    url(r'^status/down/', TemplateView.as_view(template_name='down.html') ),
 )
 
 
 # We handle the robots here rather than as a static file so that we can send
 # different content on a staging server. We don't use direct_to_template as we
 # want to set some caching headers too.
-urlpatterns += patterns('core.views',
+urlpatterns += patterns('pombola.core.views',
     url(r'robots.txt', 'robots' ),
 )
 

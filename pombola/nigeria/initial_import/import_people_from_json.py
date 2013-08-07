@@ -26,8 +26,8 @@ sys.path.append(
 
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 
-from core import models
-from images.models import Image
+from pombola.core import models
+from pombola.images.models import Image
 
 profile_url_kind, created = models.ContactKind.objects.get_or_create(slug='profile_url', name="Profile URL")
 email_kind, created       = models.ContactKind.objects.get_or_create(slug='email', name="Email")

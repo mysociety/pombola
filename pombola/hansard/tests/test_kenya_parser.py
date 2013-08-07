@@ -8,10 +8,10 @@ import subprocess
 from django.test import TestCase
 from django.utils import unittest
 
-from hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
-from hansard.models import Source, Sitting, Entry, Venue, Alias
+from pombola.hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
+from pombola.hansard.models import Source, Sitting, Entry, Venue, Alias
 
-from core.models import Person, PositionTitle, Position
+from pombola.core.models import Person, PositionTitle, Position
 
 from django_date_extensions.fields import ApproximateDate
 from django.conf import settings

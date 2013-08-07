@@ -1,4 +1,5 @@
 {% load switch %}
+{% load url from future %}
 
 <ul>
 {% for position in positions %}
@@ -6,7 +7,7 @@
         <h4>
             {% if position.is_ongoing %}<strong>{% endif %}
                 {% if position.title.slug == 'mp' %}
-                    Member of <a href="{% url organisation 'parliament' %}">Parliament</a>
+                    Member of <a href="{% url "organisation" 'parliament' %}">Parliament</a>
                 {% else %}
                     {{ position.title }}
                 {% endif %}

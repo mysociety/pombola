@@ -14,7 +14,7 @@ sys.path.append(
 
 from pprint import pprint
 from django.template.defaultfilters import slugify
-from core import models
+from pombola.core import models
 
 
 

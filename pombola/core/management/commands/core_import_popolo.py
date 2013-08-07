@@ -12,10 +12,10 @@ from django.core.files.base import ContentFile
 from django.core.management.base import LabelCommand, CommandError
 from django.template.defaultfilters import slugify
 
-from core.models import (Organisation, OrganisationKind, Identifier,
+from pombola.core.models import (Organisation, OrganisationKind, Identifier,
                          PlaceKind, Person, Contact, ContactKind, Position,
                          PositionTitle, Place, PlaceKind)
-from images.models import Image
+from pombola.images.models import Image
 from mapit.models import Area, Generation
 
 VERBOSE = False

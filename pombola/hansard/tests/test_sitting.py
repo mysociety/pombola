@@ -4,7 +4,7 @@ import datetime
 from datetime import date, time
 
 from django.test import TestCase
-from hansard.models import Source, Sitting, Venue
+from pombola.hansard.models import Source, Sitting, Venue
 
 class HansardSittingTest(TestCase):
 

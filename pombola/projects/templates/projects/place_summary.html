@@ -1,10 +1,11 @@
 {% load humanize %}
+{% load url from future %}
 {# 'object' is the place #}
 
 {% if object.project_set.count %}
     <div class="content_box">
         <p>
-            There are <a href="{% url project_in_place slug=object.slug %}">{{ object.project_set.count }} CDF projects</a> in {{ object.name }}.
+            There are <a href="{% url "project_in_place" slug=object.slug %}">{{ object.project_set.count }} CDF projects</a> in {{ object.name }}.
             These are the most expensive:
         </p>
         <ul>
@@ -13,7 +14,7 @@
                 <strong>{{ p.project_name }} {% if p.first_funding_year %}({{ p.first_funding_year }}){% endif %}</strong>:
                 Ksh {{ p.total_cost|floatformat|intcomma }}
                 spent on {{ p.activity_to_be_done }}.
-                (<a href="{% url projects.views.in_place slug=object.slug %}#project-{{ p.cdf_index }}">more</a>)
+                (<a href="{% url "projects.views.in_place" slug=object.slug %}#project-{{ p.cdf_index }}">more</a>)
             </li>
         {% endfor %}
         </ul>

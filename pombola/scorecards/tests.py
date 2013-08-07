@@ -9,7 +9,7 @@ import csv
 
 from django.test import TestCase
 
-from core.models import Place, PlaceKind
+from pombola.core.models import Place, PlaceKind
 from models import Category, Entry
 
 class DataTest(TestCase):

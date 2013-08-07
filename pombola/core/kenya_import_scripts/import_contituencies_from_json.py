@@ -15,7 +15,7 @@ sys.path.append(
 import simplejson
 from pprint import pprint
 from django.template.defaultfilters import slugify
-from core import models
+from pombola.core import models
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 
 constituency_kind = models.PlaceKind.objects.get(slug="constituency")

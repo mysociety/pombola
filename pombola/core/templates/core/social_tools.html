@@ -1,3 +1,4 @@
+{% load url from future %}
 <ul class="tools">
   <li>
     <a  href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ object.name }}"
@@ -15,14 +16,14 @@
   {% endif %}
 
   <li>
-    <a  href="{% url feedback_add %}?url={{ request.build_absolute_uri }}"
+    <a  href="{% url "feedback_add" %}?url={{ request.build_absolute_uri }}"
         class="feedback_link big-btn-text-red"
     >Correct this page</a>
   </li>
 
   {% if settings.DISQUS_SHORTNAME %}
     <li>
-      <a  href="{% url person slug=object.slug %}#disqus_thread"
+      <a  href="{% url "person" slug=object.slug %}#disqus_thread"
           class="big-btn-text-green"
       >Post Comment</a>
     </li>

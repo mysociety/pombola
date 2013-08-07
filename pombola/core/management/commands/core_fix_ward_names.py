@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify
 
 from optparse import make_option
 
-from core.models import PlaceKind, Place
+from pombola.core.models import PlaceKind, Place
 
 def slugify_place_name(place_name):
     return 'ward-' + slugify(place_name)

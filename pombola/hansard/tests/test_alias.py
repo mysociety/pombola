@@ -4,7 +4,7 @@
 # from datetime import date, time
 # 
 from django.test import TestCase
-from hansard.models import Alias
+from pombola.hansard.models import Alias
 
 class HansardAliasTest(TestCase):
 

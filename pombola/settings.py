@@ -123,11 +123,6 @@ STATIC_URL = '/static/'
 # 'base.html' for a better alternative in Django 1.4
 STATIC_GENERATION_NUMBER = 36
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -238,9 +233,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.gis',
-    'django_bcrypt',
 
-    'admin_additions',
+    'pombola.admin_additions',
     'django.contrib.admin',
     'django.contrib.admindocs',
 
@@ -249,29 +243,29 @@ INSTALLED_APPS = (
     'ajax_select',
     'markitup',
 
-    COUNTRY_APP,
+    'pombola.' + COUNTRY_APP,
 
     'mapit',
 
-    'images',
+    'pombola.images',
     'sorl.thumbnail',
 
     'haystack',
 
-    'helpers',
-    'info',
-    'tasks',
-    'core',
-    'feedback',
-    'scorecards',
-    'search',
-    'file_archive',
-    'map',
+    'pombola.helpers',
+    'pombola.info',
+    'pombola.tasks',
+    'pombola.core',
+    'pombola.feedback',
+    'pombola.scorecards',
+    'pombola.search',
+    'pombola.file_archive',
+    'pombola.map',
 )
 
 # add the optional apps
 ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch' )
-OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
+OPTIONAL_APPS = tuple( [ 'pombola.' + a for a in config.get( 'OPTIONAL_APPS', [] ) ] )
 INSTALLED_APPS += OPTIONAL_APPS
 
 # mapit related settings
@@ -288,8 +282,14 @@ MAPIT_RATE_LIMIT = ['127.0.0.1']
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
     'handlers': {
         'mail_admins': {
+            'filters': ['require_debug_false'],
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
         },
@@ -321,18 +321,6 @@ KENYA_PARSER_PDF_TO_HTML_HOST = config.get('KENYA_PARSER_PDF_TO_HTML_HOST')
 TWITTER_USERNAME = config.get('TWITTER_USERNAME')
 # The widget ID is used for displaying tweets on the homepage.
 TWITTER_WIDGET_ID = config.get('TWITTER_WIDGET_ID')
-
-# configure the bcrypt settings
-# Enables bcrypt hashing when ``User.set_password()`` is called.
-BCRYPT_ENABLED = True
-
-# Enables bcrypt hashing when running inside Django
-# TestCases. Defaults to False, to speed up user creation.
-BCRYPT_ENABLED_UNDER_TEST = False
-
-# Number of rounds to use for bcrypt hashing. Defaults to 12.
-BCRYPT_ROUNDS = 12
-
 
 # pagination related settings
 PAGINATION_DEFAULT_PAGINATION      = 10
@@ -375,8 +363,7 @@ SOUTH_TESTS_MIGRATE = False
 
 # Settings for the selenium tests
 TEST_RUNNER   = 'django_selenium.selenium_runner.SeleniumTestRunner'
-SELENIUM_PATH = config.get( 'SELENIUM_PATH', None )
-
+SELENIUM_DRIVER = 'Firefox'
 
 # For the disqus comments
 DISQUS_SHORTNAME       = config.get( 'DISQUS_SHORTNAME', None )
@@ -400,7 +387,7 @@ BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 # create the ENABLED_FEATURES hash that is used to toggle features on and off.
 ENABLED_FEATURES = {}
 for key in ALL_OPTIONAL_APPS: # add in the optional apps
-    ENABLED_FEATURES[key] = key in INSTALLED_APPS
+    ENABLED_FEATURES[key] = 'pombola.' + key in INSTALLED_APPS
 
 
 

@@ -1,3 +1,4 @@
+{% load url from future %}
 <div id="footer-menu" class="footer-section">
     <h4>Mzalendo</h4>
     <ul class="nav">
@@ -28,8 +29,8 @@
 
     <h4>About</h4>
     <ul class="utilities">
-        <li><a href="{% url info_page slug='policies' %}">Privacy</a></li>
-        <li><a href="{% url feedback_add %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
+        <li><a href="{% url "info_page" slug='policies' %}">Privacy</a></li>
+        <li><a href="{% url "feedback_add" %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
         
         {% if object and request.user.is_staff %}
             <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>

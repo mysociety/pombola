@@ -1,20 +1,13 @@
-import re
 import random
 import datetime
 
-from django.conf import settings
-
-from django.core import mail
 from django.core import exceptions
-from django_webtest import WebTest
-from core         import models
-from django.test.client import Client
-from django.contrib.auth.models import User
-
+from django.test import TestCase
 from django_date_extensions.fields import ApproximateDate
 
+from pombola.core import models
 
-class PositionTest(WebTest):
+class PositionTest(TestCase):
     def setUp(self):
         self.person = models.Person(
             legal_name = 'Test Person',

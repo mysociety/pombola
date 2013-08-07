@@ -10,9 +10,9 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
-from django.views.generic.list_detail import object_detail, object_list
 from django.views.decorators.cache import cache_control, never_cache
 from django.views.generic import ListView, DetailView
+from django.views.generic.detail import SingleObjectMixin
 from django.core.cache import cache
 from django.conf import settings
 from django.http import Http404
@@ -57,33 +57,28 @@ def home(request):
         context_instance=RequestContext(request)
     )
 
-def organisation_list(request):
-    return object_list(
-        request,
-        queryset=models.Organisation.objects.all(),
-    )
+class OrganisationList(ListView):
+    model = models.Organisation
 
-def person(request, slug):
-    # Check if this is old slug for redirection:
-    try:
-        sr = models.SlugRedirect.objects.get(content_type=ContentType.objects.get_for_model(models.Person),
-                                             old_object_slug=slug)
-        return redirect(sr.new_object)
-    # Otherwise look up the slug as normal:
-    except models.SlugRedirect.DoesNotExist:
-        return object_detail(
-                request,
-                queryset = models.Person.objects,
-                slug     = slug,
-        )
+class PersonDetail(DetailView):
+    model = models.Person
 
-def person_sub_page(request, slug, sub_page):
-    return object_detail(
-        request,
-        queryset      = models.Person.objects,
-        template_name = "core/person_%s.html" % sub_page,
-        slug          = slug,
-    )
+    def get(self, request, *args, **kwargs):
+        # Check if this is old slug for redirection:
+        slug = kwargs['slug']
+        try:
+            sr = models.SlugRedirect.objects.get(content_type=ContentType.objects.get_for_model(models.Person),
+                                                 old_object_slug=slug)
+            return redirect(sr.new_object)
+        # Otherwise look up the slug as normal:
+        except models.SlugRedirect.DoesNotExist:
+            return super(PersonDetail, self).get(request, *args, **kwargs)
+
+class PersonDetailSub(DetailView):
+    model = models.Person
+
+    def get_template_names(self):
+        return [ "core/person_%s.html" % self.kwargs['sub_page'] ]
 
 class PlaceDetailView(DetailView):
     model = models.Place
@@ -94,62 +89,64 @@ class PlaceDetailView(DetailView):
         context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
         return context
 
-def place_sub_page(request, slug, sub_page):
-    return object_detail(
-        request,
-        queryset      = models.Place.objects,
-        template_name = "core/place_%s.html" % sub_page,
-        slug          = slug,
-    )
+class PlaceDetailSub(DetailView):
+    model = models.Place
 
-def place_kind(request, slug=None, session_slug=None):
+    def get_template_names(self):
+        return [ "core/place_%s.html" % self.kwargs['sub_page'] ]
 
-    if slug and slug != 'all':
-        kind = get_object_or_404(
-            models.PlaceKind,
-            slug=slug
+class PlaceKindList(ListView):
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        session_slug = self.kwargs.get('session_slug')
+
+        if slug and slug != 'all':
+            self.kind = get_object_or_404(
+                models.PlaceKind,
+                slug=slug
+            )
+            queryset = self.kind.place_set.all()
+        else:
+            self.kind = None
+            queryset = models.Place.objects.all()
+
+        if session_slug:
+            self.session = get_object_or_404(
+                models.ParliamentarySession,
+                slug=session_slug
+            )
+        else:
+            self.session = None
+
+        # If this is a PlaceKind with parliamentary sessions, but a
+        # particular one hasn't been specified, make the default either
+        # the current session, or the most recent one if there is no
+        # current session.  (This is largely to make any old bookmarked
+        # links to (e.g.) /place/is/constituency/ still work.)
+
+        if self.kind and not self.session:
+            sessions = list(self.kind.parliamentary_sessions())
+            if sessions:
+                today = datetime.date.today()
+                current_sessions = [s for s in sessions if s.covers_date(today)]
+                if current_sessions:
+                    self.session = current_sessions[0]
+                else:
+                    self.session = sessions[-1]
+
+        if queryset and self.session:
+            queryset = queryset.filter(parliamentary_session=self.session)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(PlaceKindList, self).get_context_data(**kwargs)
+        context.update(
+            kind = self.kind,
+            selected_session = self.session,
+            all_kinds = models.PlaceKind.objects.all(),
         )
-        queryset = kind.place_set.all()
-    else:
-        kind = None
-        queryset = models.Place.objects.all()
-
-    if session_slug:
-        session = get_object_or_404(
-            models.ParliamentarySession,
-            slug=session_slug
-        )
-    else:
-        session = None
-
-    # If this is a PlaceKind with parliamentary sessions, but a
-    # particular one hasn't been specified, make the default either
-    # the current session, or the most recent one if there is no
-    # current session.  (This is largely to make any old bookmarked
-    # links to (e.g.) /place/is/constituency/ still work.)
-
-    if kind and not session:
-        sessions = list(kind.parliamentary_sessions())
-        if sessions:
-            today = datetime.date.today()
-            current_sessions = [s for s in sessions if s.covers_date(today)]
-            if current_sessions:
-                session = current_sessions[0]
-            else:
-                session = sessions[-1]
-
-    if queryset and session:
-        queryset = queryset.filter(parliamentary_session=session)
-
-    return object_list(
-        request,
-        queryset = queryset,
-        extra_context = {
-            'kind':             kind,
-            'selected_session': session,
-            'all_kinds':        models.PlaceKind.objects.all(),
-        },
-    )
+        return context
 
 def place_mapit_area(request, mapit_id):
 
@@ -264,44 +261,46 @@ def organisation(request, slug):
         context_instance=RequestContext(request)
     )
 
-def organisation_sub_page(request, slug, sub_page):
-    kwargs = {
-        'queryset': models.Organisation.objects,
-        'template_name': "core/organisation_%s.html" % sub_page,
-        'slug': slug}
-    # Allow the order that people are listed on the 'people' sub-page
-    # of an organisation to be controlled with the 'order' query
-    # parameter:
-    if sub_page == 'people':
-        org = get_object_or_404(models.Organisation, slug=slug)
-        positions = org.position_set.all()
-        extra_context = {}
-        if request.GET.get('order') == 'place':
-            extra_context['sorted_positions'] = positions.order_by_place()
-        else:
-            extra_context['sorted_positions'] = positions.order_by_person_name()
-        kwargs['extra_context'] = extra_context
-    return object_detail(request, **kwargs)
+class OrganisationDetailSub(DetailView):
+    model = models.Organisation
 
-def organisation_kind(request, slug):
-    org_kind = get_object_or_404(
-        models.OrganisationKind,
-        slug=slug
-    )
+    def get_template_names(self):
+        return [ "core/organisation_%s.html" % self.kwargs['sub_page'] ]
 
-    orgs = (
-        org_kind
-            .organisation_set
-            .all()
-            .annotate(num_positions = Count('position'))
-            .order_by('-num_positions', 'name')
-    )
+    def get_context_data(self, **kwargs):
+        context = super(OrganisationDetailSub, self).get_context_data(**kwargs)
+        # Allow the order that people are listed on the 'people' sub-page
+        # of an organisation to be controlled with the 'order' query
+        # parameter:
+        if self.kwargs['sub_page'] == 'people':
+            positions = self.object.position_set.all()
+            if self.request.GET.get('order') == 'place':
+                context['sorted_positions'] = positions.order_by_place()
+            else:
+                context['sorted_positions'] = positions.order_by_person_name()
+        return context
 
-    return object_list(
-        request,
-        queryset = orgs,
-        extra_context = { 'kind': org_kind, },
-    )
+class OrganisationKindList(SingleObjectMixin, ListView):
+    model = models.OrganisationKind
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=self.model.objects.all())
+        return super(OrganisationKindList, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        orgs = (
+            self.object
+                .organisation_set
+                .all()
+                .annotate(num_positions = Count('position'))
+                .order_by('-num_positions', 'name')
+        )
+        return orgs
+
+    def get_context_data(self, **kwargs):
+        context = super(OrganisationKindList, self).get_context_data(**kwargs)
+        context['kind'] = self.object
+        return context
 
 def parties(request):
     """Show all parties that currently have MPs sitting in parliament"""

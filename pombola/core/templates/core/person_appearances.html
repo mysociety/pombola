@@ -1,4 +1,5 @@
 {% extends 'core/person_base.html' %}
+{% load url from future %}
 
 {% comment %}
   The appearances are loaded using js because that was how it was done using
@@ -19,7 +20,7 @@
 
       {% with hansard_count=object.hansard_entries.count %}
             {% if hansard_count %}
-              <div id="appearances" data-url="{% url hansard:person_summary slug=object.slug %}">
+              <div id="appearances" data-url="{% url "hansard:person_summary" slug=object.slug %}">
                 Loading&hellip;
               </div>
             {% else %}

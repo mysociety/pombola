@@ -9,7 +9,7 @@ from django import forms
 from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
 
-from images.admin import ImageAdminInline
+from pombola.images.admin import ImageAdminInline
 
 def create_admin_link_for(obj, link_text):
     return u'<a href="%s">%s</a>' % ( obj.get_admin_url(), link_text )

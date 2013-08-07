@@ -1,8 +1,7 @@
 from django.conf import settings
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.views.generic.simple import direct_to_template
 
 urlpatterns = []
 
@@ -15,7 +14,7 @@ urlpatterns = []
 # does not appear to support fallthrough from controllers:
 # http://stackoverflow.com/questions/4495763/fallthrough-in-django-urlconf
 urlpatterns += patterns('',
-    (r'^', include( settings.COUNTRY_APP + '.urls' ) ),
+    (r'^', include( 'pombola.' + settings.COUNTRY_APP + '.urls' ) ),
 )
 
 
@@ -37,24 +36,24 @@ urlpatterns += patterns('',
 
 # Info pages
 urlpatterns += patterns('',
-    (r'^info/', include('info.urls')),
+    (r'^info/', include('pombola.info.urls')),
 )
 
 # File archive
 urlpatterns += patterns('',
-    (r'^file_archive/', include('file_archive.urls')),
+    (r'^file_archive/', include('pombola.file_archive.urls')),
 )
 
 # Hansard pages
 if settings.ENABLED_FEATURES['hansard']:
     urlpatterns += patterns('',
-        (r'^hansard/', include('hansard.urls', namespace='hansard', app_name='hansard')),
+        (r'^hansard/', include('pombola.hansard.urls', namespace='hansard', app_name='hansard')),
     )
 
 # oject pages
 if settings.ENABLED_FEATURES['projects']:
     urlpatterns += patterns('',
-        (r'^projects/', include('projects.urls')),
+        (r'^projects/', include('pombola.projects.urls')),
     )
 
 # ajax preview of the markdown
@@ -72,28 +71,28 @@ if settings.SERVE_STATIC_FILES:
 
 # search
 urlpatterns += patterns('',
-    (r'^search/', include('search.urls')),
+    (r'^search/', include('pombola.search.urls')),
 )
 
 # feedback
 urlpatterns += patterns('',
-    (r'^feedback/', include('feedback.urls')),
+    (r'^feedback/', include('pombola.feedback.urls')),
 )
 
 # map
 urlpatterns += patterns('',
-    (r'^map/', include('map.urls')),
+    (r'^map/', include('pombola.map.urls')),
 )
 
 # votematch
 if settings.ENABLED_FEATURES['votematch']:
     urlpatterns += patterns('',    
-        (r'^votematch/', include('votematch.urls')),
+        (r'^votematch/', include('pombola.votematch.urls')),
     )
 
 
 # Everything else goes to core
 urlpatterns += patterns('',
-    (r'^', include('core.urls')),
+    (r'^', include('pombola.core.urls')),
 )
 

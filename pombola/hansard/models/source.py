@@ -6,7 +6,7 @@ from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-from hansard.models.base import HansardModelBase
+from pombola.hansard.models.base import HansardModelBase
 
 # check that the cache is setup and the directory exists
 try:

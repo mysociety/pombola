@@ -15,7 +15,7 @@ from django.db import transaction
 
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import Person, Organisation, Position
+from pombola.core.models import Person, Organisation, Position
 
 from popit import PopIt
 

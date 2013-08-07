@@ -1,4 +1,5 @@
 {% extends 'core/person_base.html' %}
+{% load url from future %}
 
 {% block title %}{{ object.name }} Overview{% endblock %}
 
@@ -23,7 +24,7 @@
       The
       {{ object.scorecard_overall_as_word }}
       past performance of {{ object.name }} can be seen in their
-      <a href="{% url person_scorecard slug=object.slug %}">scorecard</a>.
+      <a href="{% url "person_scorecard" slug=object.slug %}">scorecard</a>.
     </p>
   {% endif %}
 
@@ -35,7 +36,7 @@
     {{ object.position_set.all.political.count }} political,
     {{ object.position_set.all.education.count }} educational and
     {{ object.position_set.all.other.count     }} other
-    positions held. See <a href="{% url person_experience slug=object.slug %}">the full list</a>.
+    positions held. See <a href="{% url "person_experience" slug=object.slug %}">the full list</a>.
   </p>
 
 
@@ -46,7 +47,7 @@
 
         <p>
           {{ object.name }} has spoken {{ hansard_count }}
-          time{{ hansard_count|pluralize }} in Parliament. Read <a href="{% url person_appearances slug=object.slug %}">what they had to say</a>.
+          time{{ hansard_count|pluralize }} in Parliament. Read <a href="{% url "person_appearances" slug=object.slug %}">what they had to say</a>.
         <p>
       {% endif %}
     {% endwith %}
@@ -62,7 +63,7 @@
         {{ contact_detail_count|pluralize:"is,are" }}
         {{ contact_detail_count }}
         way{{ contact_detail_count|pluralize }} to
-        <a href="{% url person_contact_details slug=object.slug %}">get in touch</a>
+        <a href="{% url "person_contact_details" slug=object.slug %}">get in touch</a>
         with {{ object.name }}.
       </p> 
     {% endif %}

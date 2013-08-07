@@ -7,8 +7,8 @@ import re
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
-from core import models
-from scorecards.models import Entry
+from pombola.core import models
+from pombola.scorecards.models import Entry
 
 class Command(BaseCommand):
     help = 'Output CSV of all MPs and their scorecard ratings'

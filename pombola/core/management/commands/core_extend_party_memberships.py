@@ -21,7 +21,7 @@ from django.core.management.base import NoArgsCommand, CommandError
 
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import Person
+from pombola.core.models import Person
 
 class Command(NoArgsCommand):
     help = 'Change party memberships that end in 2012 to end in "future".'

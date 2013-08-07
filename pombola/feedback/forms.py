@@ -7,11 +7,10 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.utils.crypto import salted_hmac, constant_time_compare
 from django.utils.encoding import force_unicode
-from django.utils.hashcompat import sha_constructor
 from django.utils.text import get_text_list
 from django.utils.translation import ungettext, ugettext_lazy as _
 
-from feedback.models import Feedback
+from pombola.feedback.models import Feedback
 
 class FeedbackForm(forms.Form):
     """

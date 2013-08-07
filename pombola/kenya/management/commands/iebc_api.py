@@ -14,10 +14,10 @@ from django.template.defaultfilters import slugify
 
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import Person, Place, PlaceKind, ParliamentarySession, Position, PositionTitle
+from pombola.core.models import Person, Place, PlaceKind, ParliamentarySession, Position, PositionTitle
 
 from django.core.files.base import ContentFile
-from images.models import Image
+from pombola.images.models import Image
 
 iebc_base_url = 'http://api.iebc.or.ke'
 

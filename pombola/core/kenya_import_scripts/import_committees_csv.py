@@ -12,7 +12,7 @@ sys.path.append(
 
 
 from haystack.query import SearchQuerySet
-from core.models import Person, Organisation, OrganisationKind, PositionTitle, Position
+from pombola.core.models import Person, Organisation, OrganisationKind, PositionTitle, Position
 from django.template.defaultfilters import slugify
 
 reader = csv.DictReader( open(sys.argv[1], 'r') )

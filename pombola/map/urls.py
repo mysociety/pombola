@@ -1,5 +1,5 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 
-urlpatterns = patterns('map.views',
+urlpatterns = patterns('pombola.map.views',
     url(r'^$', 'home', name='map-home'),
 )

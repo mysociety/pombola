@@ -6,8 +6,8 @@ generated.
 """
 
 
-from core import models
-from tasks.models import Task
+from pombola.core import models
+from pombola.tasks.models import Task
 
 task_related_models = [ models.Person, models.Contact ]
 

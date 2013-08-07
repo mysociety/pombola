@@ -19,7 +19,7 @@ sys.path.append(
     )
 )
 
-from core import models
+from pombola.core import models
 from django.template.defaultfilters import slugify
 
 def process(filename):

@@ -18,7 +18,7 @@ from django.conf import settings
 
 from django.core.management.base import NoArgsCommand
 
-from hansard.models import Source
+from pombola.hansard.models import Source
 
 class Command(NoArgsCommand):
     help = 'Check for new sources'

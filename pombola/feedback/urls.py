@@ -1,5 +1,5 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 
-urlpatterns = patterns('feedback.views',
+urlpatterns = patterns('pombola.feedback.views',
     url( r'^$',       'add',    name='feedback_add'    ),
 )

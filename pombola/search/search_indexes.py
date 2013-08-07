@@ -4,7 +4,7 @@ from haystack import indexes
 from haystack import site
 from haystack.exceptions import AlreadyRegistered
 
-from core    import models as core_models
+from pombola.core import models as core_models
 
 
 # TODO - currently I'm using the realtime search index - which is possibly a bad
@@ -54,7 +54,7 @@ except AlreadyRegistered:
 
 
 if settings.ENABLED_FEATURES['hansard']:
-    from hansard import models as hansard_models
+    from pombola.hansard import models as hansard_models
 
     class HansardEntryIndex(BaseIndex):
         pass

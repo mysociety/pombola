@@ -11,8 +11,8 @@ class Command(NoArgsCommand):
 
         # Imports are here to avoid an import loop created when the Hansard
         # search indexes are checked
-        from core.models import Person
-        from scorecards.models import Category, Entry
+        from pombola.core.models import Person
+        from pombola.scorecards.models import Category, Entry
 
         # create the category
         try:

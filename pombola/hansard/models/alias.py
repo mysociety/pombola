@@ -3,8 +3,8 @@ import datetime
 
 from django.db import models
 
-from hansard.models.base import HansardModelBase
-from core.models import Person
+from pombola.hansard.models.base import HansardModelBase
+from pombola.core.models import Person
 
 class AliasQuerySet(models.query.QuerySet):
     def unassigned(self):
@@ -39,8 +39,8 @@ class Alias(HansardModelBase):
 
     """
 
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now(), )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now(), )    
+    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
+    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
 
     alias   = models.CharField( max_length=200, unique=True )
     person  = models.ForeignKey( Person, blank=True, null=True )

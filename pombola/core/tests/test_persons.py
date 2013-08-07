@@ -9,7 +9,7 @@ from django.test import TestCase
 
 from django.contrib.auth.models import User
 
-from core import models
+from pombola.core import models
 import pombola.scorecards.models
 
 class PersonTest(WebTest):
@@ -41,6 +41,16 @@ class PersonTest(WebTest):
         person.add_alternative_name("\n\nFred Smith\n\n", name_to_use=True)
         self.assertEqual( person.name, "Fred Smith" )
         self.assertEqual( person.additional_names(), ['Freddy Smith'] )
+
+    def test_urls(self):
+        person = models.Person(
+            legal_name="Alfred Smith",
+            slug='alfred-smith',
+        )
+        person.save()
+        resp = self.app.get('/person/alfred-smith/')
+        resp = resp.click('Experience')
+        resp = resp.click('Contact details')
 
 class PersonScorecardTest(TestCase):
     def setUp(self):    

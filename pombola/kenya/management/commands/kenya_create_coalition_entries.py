@@ -4,7 +4,7 @@ import sys
 from optparse import make_option
 
 from django.core.management.base import BaseCommand
-from core import models
+from pombola.core import models
 
 class Command(BaseCommand):
     """

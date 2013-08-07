@@ -1,5 +1,6 @@
 {% extends 'core/organisation_base.html' %}
 {% load thumbnail %}
+{% load url from future %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -20,7 +21,7 @@
       <p>
         There
         {{ people_count|pluralize:"is,are"}}
-        <a href="{% url organisation_people slug=object.slug %}">
+        <a href="{% url "organisation_people" slug=object.slug %}">
           {{ people_count }}
           {{ people_count|pluralize:"person,people"}}
         </a>
@@ -37,7 +38,7 @@
       <p>
         There are {{ contact_detail_count }}
         way{{ contact_detail_count|pluralize }} to
-        <a href="{% url organisation_contact_details slug=object.slug %}">get in touch</a>
+        <a href="{% url "organisation_contact_details" slug=object.slug %}">get in touch</a>
         with {{ object.name }}.
       </p> 
     {% endif %}

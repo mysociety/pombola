@@ -1,3 +1,4 @@
+{% load url from future %}
 {% comment %}
 
     Menu entries - for both desktop and mobile.
@@ -9,9 +10,9 @@
 
 {% endcomment %}
 
-<li><a href="{% url home %}">Home</a></li>
+<li><a href="{% url "home" %}">Home</a></li>
 
-<li><a href="{% url home %}">Menu items TBC</a></li>
+<li><a href="{% url "home" %}">Menu items TBC</a></li>
 
 
-<li><a href="{% url info_page slug='about' %}">About</a></li>
+<li><a href="{% url "info_page" slug='about' %}">About</a></li>

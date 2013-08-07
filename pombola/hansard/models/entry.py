@@ -3,9 +3,9 @@ import re
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from core.models import Person
-from hansard.models import Sitting, Alias
-from hansard.models.base import HansardModelBase
+from pombola.core.models import Person
+from pombola.hansard.models import Sitting, Alias
+from pombola.hansard.models.base import HansardModelBase
 
 
 class EntryQuerySet(models.query.QuerySet):
