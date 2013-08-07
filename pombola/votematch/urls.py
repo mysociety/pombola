@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 
-from django.views.generic import ListView, DetailView
-from django.views.generic.base import TemplateView
+from django.views.generic import ListView, TemplateView
 
 from .models import Quiz, Submission
 
