@@ -54,7 +54,7 @@ class EntryAdmin(admin.ModelAdmin):
         )
     
     def get_urls(self):
-        from django.conf.urls.defaults import patterns, url
+        from django.conf.urls import patterns, url
         urls = super(EntryAdmin, self).get_urls()
         my_urls = patterns('',
             url(

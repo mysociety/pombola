@@ -1,7 +1,7 @@
 import datetime
 
 from django import forms
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns
 from django.contrib import admin
 from django.utils.decorators import method_decorator
 from django.contrib.admin.views.decorators import staff_member_required

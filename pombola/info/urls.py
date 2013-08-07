@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url, handler404
+from django.conf.urls import patterns, include, url, handler404
 
 import views
 
