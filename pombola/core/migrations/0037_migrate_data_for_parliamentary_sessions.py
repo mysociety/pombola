@@ -6,7 +6,7 @@ from south.v2 import DataMigration
 from django.db import models
 from django.core.management import call_command
 
-from settings import COUNTRY_APP
+from pombola.settings import COUNTRY_APP
 
 
 class Migration(DataMigration):
