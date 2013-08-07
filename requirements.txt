@@ -48,6 +48,9 @@ python-memcached
 # django-mapit
 -e git://github.com/mysociety/mapit.git@master#egg=django-mapit
 
+# SayIt
+git://github.com/mysociety/sayit.git@master#egg=django-sayit
+
 python-dateutil
 
 coverage>=3

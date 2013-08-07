@@ -44,6 +44,12 @@ urlpatterns += patterns('',
     (r'^file_archive/', include('pombola.file_archive.urls')),
 )
 
+# SayIt - speeches
+if settings.ENABLED_FEATURES['speeches']:
+    urlpatterns += patterns('',
+        (r'^speeches/', include('speeches.urls')),
+    )
+
 # Hansard pages
 if settings.ENABLED_FEATURES['hansard']:
     urlpatterns += patterns('',
