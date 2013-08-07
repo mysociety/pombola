@@ -1,5 +1,5 @@
 from django.contrib import admin
-from file_archive import models
+from pombola.file_archive import models
 
 class FileAdmin(admin.ModelAdmin):
     list_display  = [ 'slug', 'updated' ]

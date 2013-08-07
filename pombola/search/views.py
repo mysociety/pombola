@@ -7,7 +7,7 @@ from django.utils import simplejson
 
 # from pombola.helpers import geocode
 
-from core import models
+from pombola.core import models
 
 from haystack.query import SearchQuerySet
 

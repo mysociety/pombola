@@ -9,7 +9,7 @@ from django.test import TestCase
 
 from django.contrib.auth.models import User
 
-from core import models
+from pombola.core import models
 import pombola.scorecards.models
 
 class PersonTest(WebTest):

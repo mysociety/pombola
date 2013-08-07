@@ -8,7 +8,7 @@ from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 
-from core.models import Person
+from pombola.core.models import Person
         
 class AutocompleteTest(unittest.TestCase):
     

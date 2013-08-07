@@ -24,7 +24,7 @@ from django_date_extensions.fields import ApproximateDate
 from settings import IEBC_API_ID, IEBC_API_SECRET
 from optparse import make_option
 
-from core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
+from pombola.core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
 
 from iebc_api import *
 

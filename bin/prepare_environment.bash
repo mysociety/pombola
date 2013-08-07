@@ -27,9 +27,6 @@ MAPIT_PATH="$(python -c 'import mapit; print mapit.__file__,')"
 # make sure that there is no old code (the .py files may have been git deleted) 
 find . -name '*.pyc' -delete
 
-# go to the project directory for local config
-cd pombola
-
 # get the database up to speed
 ./manage.py syncdb --noinput
 ./manage.py migrate

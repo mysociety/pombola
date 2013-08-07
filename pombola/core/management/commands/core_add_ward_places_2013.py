@@ -8,7 +8,7 @@
 # create areas in MapIt, although this might be desirable.
 
 import csv, re, sys
-from core.models import Place, PlaceKind, ParliamentarySession
+from pombola.core.models import Place, PlaceKind, ParliamentarySession
 from django.core.management.base import LabelCommand
 from django.template.defaultfilters import slugify
 from optparse import make_option

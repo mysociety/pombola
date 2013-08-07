@@ -5,7 +5,7 @@ from django.core import exceptions
 from django_webtest import WebTest
 from django_date_extensions.fields import ApproximateDate
 
-from core import models
+from pombola.core import models
 
 class PositionTest(WebTest):
     def setUp(self):

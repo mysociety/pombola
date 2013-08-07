@@ -2,7 +2,7 @@ import datetime
 
 from django.core.management.base import NoArgsCommand
 
-from hansard.models import Entry
+from pombola.hansard.models import Entry
 
 class Command(NoArgsCommand):
     help = 'Try to assign a person to each entry'

@@ -8,7 +8,7 @@ import subprocess
 from django.test import TestCase
 from django.utils import unittest
 
-from hansard.models import Source, SourceUrlCouldNotBeRetrieved
+from pombola.hansard.models import Source, SourceUrlCouldNotBeRetrieved
 
 class HansardSourceTest(TestCase):
 

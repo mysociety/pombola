@@ -4,9 +4,9 @@
 set -e
 
 # check that we are in the expected directory
-cd `dirname $0`/../mzalendo
+cd `dirname $0`/..
 
-source ../../pombola-virtualenv/bin/activate
+source ../pombola-virtualenv/bin/activate
 
 ./manage.py hansard_check_for_new_sources
 ./manage.py hansard_process_sources

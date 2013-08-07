@@ -1,4 +1,4 @@
-from core.models import *
+from pombola.core.models import *
 
 from django.core.management.base import NoArgsCommand, CommandError
 

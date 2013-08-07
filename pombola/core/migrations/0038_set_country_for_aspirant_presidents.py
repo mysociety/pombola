@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 from settings import COUNTRY_APP
-from core.models import Place, PlaceKind, Organisation, Position
+from pombola.core.models import Place, PlaceKind, Organisation, Position
 
 class Migration(DataMigration):
 

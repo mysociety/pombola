@@ -25,7 +25,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
 from mapit.models import Area, Generation, Type
-from core.models import Place, PlaceKind
+from pombola.core.models import Place, PlaceKind
 
 PROPORTION_OVERLAP_REQUIRED = 0.98
 

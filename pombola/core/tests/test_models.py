@@ -1,8 +1,8 @@
 from django.conf import settings
 
 from django.utils import unittest
-from core         import models
-from tasks.models import Task
+from pombola.core import models
+from pombola.tasks.models import Task
 
 from django_date_extensions.fields import ApproximateDate
 from django.contrib.contenttypes.models import ContentType

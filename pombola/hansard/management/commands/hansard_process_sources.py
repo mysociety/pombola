@@ -2,8 +2,8 @@ import datetime
 
 from django.core.management.base import NoArgsCommand
 
-from hansard.models import Source
-from hansard.kenya_parser import KenyaParser
+from pombola.hansard.models import Source
+from pombola.hansard.kenya_parser import KenyaParser
 
 class Command(NoArgsCommand):
     help = 'Process all sources that have not been done'

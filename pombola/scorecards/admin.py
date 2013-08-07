@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 
-from scorecards import models
+from pombola.scorecards import models
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"] }

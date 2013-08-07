@@ -13,7 +13,7 @@ sys.path.append(
 
 
 from pprint import pprint
-from core import models
+from pombola.core import models
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 
 import mp_contacts

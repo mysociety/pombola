@@ -10,7 +10,7 @@ from django.utils.encoding import force_unicode
 from django.utils.text import get_text_list
 from django.utils.translation import ungettext, ugettext_lazy as _
 
-from feedback.models import Feedback
+from pombola.feedback.models import Feedback
 
 class FeedbackForm(forms.Form):
     """

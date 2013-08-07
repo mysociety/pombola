@@ -4,8 +4,8 @@ import re
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from hansard.models.base import HansardModelBase
-from hansard.models import Source, Venue
+from pombola.hansard.models.base import HansardModelBase
+from pombola.hansard.models import Source, Venue
 
 
 class Sitting(HansardModelBase):

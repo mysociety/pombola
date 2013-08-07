@@ -11,7 +11,7 @@ from django.db import transaction
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, NavigableString, Tag
 
-from hansard.models import Source, Sitting, Entry, Venue
+from pombola.hansard.models import Source, Sitting, Entry, Venue
 
 # EXCEPTIONS
 class KenyaParserCouldNotParseTimeString(Exception):

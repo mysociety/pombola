@@ -239,7 +239,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.gis',
 
-    'admin_additions',
+    'pombola.admin_additions',
     'django.contrib.admin',
     'django.contrib.admindocs',
 
@@ -248,29 +248,29 @@ INSTALLED_APPS = (
     'ajax_select',
     'markitup',
 
-    COUNTRY_APP,
+    'pombola.' + COUNTRY_APP,
 
     'mapit',
 
-    'images',
+    'pombola.images',
     'sorl.thumbnail',
 
     'haystack',
 
-    'helpers',
-    'info',
-    'tasks',
-    'core',
-    'feedback',
-    'scorecards',
-    'search',
-    'file_archive',
-    'map',
+    'pombola.helpers',
+    'pombola.info',
+    'pombola.tasks',
+    'pombola.core',
+    'pombola.feedback',
+    'pombola.scorecards',
+    'pombola.search',
+    'pombola.file_archive',
+    'pombola.map',
 )
 
 # add the optional apps
 ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch' )
-OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
+OPTIONAL_APPS = tuple( [ 'pombola.' + a for a in config.get( 'OPTIONAL_APPS', [] ) ] )
 INSTALLED_APPS += OPTIONAL_APPS
 
 # mapit related settings
@@ -392,7 +392,7 @@ BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 # create the ENABLED_FEATURES hash that is used to toggle features on and off.
 ENABLED_FEATURES = {}
 for key in ALL_OPTIONAL_APPS: # add in the optional apps
-    ENABLED_FEATURES[key] = key in INSTALLED_APPS
+    ENABLED_FEATURES[key] = 'pombola.' + key in INSTALLED_APPS
 
 
 

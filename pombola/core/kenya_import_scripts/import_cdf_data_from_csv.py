@@ -21,8 +21,8 @@ import pprint
 import re
 import warnings
 
-from projects.models import Project
-from core.models import Place
+from pombola.projects.models import Project
+from pombola.core.models import Place
 
 import django.core.exceptions
 from django.contrib.gis.geos import Point

@@ -3,7 +3,7 @@ import time
 from django.core.urlresolvers import reverse
 from pombola.testing.selenium import PombolaSeleniumTestCase
 
-from feedback.models import Feedback
+from pombola.feedback.models import Feedback
 
 class FeedbackTestCase(PombolaSeleniumTestCase):
 

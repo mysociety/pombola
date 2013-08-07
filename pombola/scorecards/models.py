@@ -275,8 +275,8 @@ class ScorecardMixin(models.Model):
 # constiteuncies that do not have NTA data.
 
 # import datetime
-# from core.models import Place
-# from scorecards.models import Category, Entry
+# from pombola.core.models import Place
+# from pombola.scorecards.models import Category, Entry
 # 
 # nta_cat = Category.objects.get(slug='cdf-performance')
 # 

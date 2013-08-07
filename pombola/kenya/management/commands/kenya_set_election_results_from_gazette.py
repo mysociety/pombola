@@ -16,7 +16,7 @@ from django.core.management import call_command
 from django.core.management.base import NoArgsCommand, CommandError
 from django.template.defaultfilters import slugify
 
-from core.models import (
+from pombola.core.models import (
     AlternativePersonName, Organisation, Person, Place, PlaceKind, Position,
     PositionTitle)
 

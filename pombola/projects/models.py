@@ -3,7 +3,7 @@ import datetime
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
 
-from core.models import Place
+from pombola.core.models import Place
 
 
 class Project(models.Model):

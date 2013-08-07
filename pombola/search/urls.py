@@ -8,7 +8,7 @@ from haystack.views import SearchView
 from pombola.core    import models as core_models
 from pombola.hansard import models as hansard_models
 
-urlpatterns = patterns('search.views',
+urlpatterns = patterns('pombola.search.views',
 
     # Haystack and other searches
     # url( r'^location/',    'location_search',        name="location_search"     ),
@@ -57,7 +57,7 @@ urlpatterns = patterns('search.views',
 
 # Hansard search - only loaded if hansard is enabled
 if settings.ENABLED_FEATURES['hansard']:
-    urlpatterns += patterns('search.views',
+    urlpatterns += patterns('pombola.search.views',
         url(
             r'^hansard/$',
             SearchView(

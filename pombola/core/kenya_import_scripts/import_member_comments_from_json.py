@@ -15,7 +15,7 @@ sys.path.append(
 
 import simplejson
 from pprint import pprint
-from core.models import Person
+from pombola.core.models import Person
 
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.contrib.auth.models import User

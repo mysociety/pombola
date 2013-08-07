@@ -6,8 +6,8 @@ from django.http import Http404
 from django.template   import RequestContext
 from django.views.generic import TemplateView, DetailView
 
-from hansard.models import Sitting, Entry
-from core.models import Person
+from pombola.hansard.models import Sitting, Entry
+from pombola.core.models import Person
 
 # import models
 # from django.shortcuts  import render_to_response, redirect

@@ -6,7 +6,7 @@ from .models import Quiz, Submission
 
 
 
-urlpatterns = patterns( 'votematch.views',
+urlpatterns = patterns( 'pombola.votematch.views',
 
     # .../                # list of quizzes
     url( r'^$', ListView.as_view(model=Quiz), name='votematch-quiz-list' ),
