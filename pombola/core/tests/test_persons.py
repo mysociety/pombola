@@ -42,6 +42,16 @@ class PersonTest(WebTest):
         self.assertEqual( person.name, "Fred Smith" )
         self.assertEqual( person.additional_names(), ['Freddy Smith'] )
 
+    def test_urls(self):
+        person = models.Person(
+            legal_name="Alfred Smith",
+            slug='alfred-smith',
+        )
+        person.save()
+        resp = self.app.get('/person/alfred-smith/')
+        resp = resp.click('Experience')
+        resp = resp.click('Contact details')
+
 class PersonScorecardTest(TestCase):
     def setUp(self):    
         # Alf is a person, but with no particular position.
