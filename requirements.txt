@@ -15,7 +15,6 @@ psycopg2
 Django
 django-pagination
 South
-django-bcrypt
 
 
 ### Pombola dependencies

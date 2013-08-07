@@ -181,7 +181,7 @@
             "last_login": "2011-11-10 11:01:23", 
             "groups": [], 
             "user_permissions": [], 
-            "password": "bc$$2a$12$N9v8jqzj..UDnVC83ke9y.n4FMWroT5q7GeB38i7NhwOlYXm5IK/W", 
+            "password": "bcrypt$$2a$12$N9v8jqzj..UDnVC83ke9y.n4FMWroT5q7GeB38i7NhwOlYXm5IK/W", 
             "email": "superuser@example.com", 
             "date_joined": "2011-11-10 11:01:13"
         }
@@ -199,7 +199,7 @@
             "last_login": "2011-11-10 11:01:23", 
             "groups": [], 
             "user_permissions": [], 
-            "password": "bc$$2a$12$N9v8jqzj..UDnVC83ke9y.n4FMWroT5q7GeB38i7NhwOlYXm5IK/W", 
+            "password": "bcrypt$$2a$12$N9v8jqzj..UDnVC83ke9y.n4FMWroT5q7GeB38i7NhwOlYXm5IK/W", 
             "email": "normaluser@example.com", 
             "date_joined": "2011-11-10 11:01:13"
         }

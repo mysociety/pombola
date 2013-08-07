@@ -238,7 +238,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.gis',
-    'django_bcrypt',
 
     'admin_additions',
     'django.contrib.admin',
@@ -327,18 +326,6 @@ KENYA_PARSER_PDF_TO_HTML_HOST = config.get('KENYA_PARSER_PDF_TO_HTML_HOST')
 TWITTER_USERNAME = config.get('TWITTER_USERNAME')
 # The widget ID is used for displaying tweets on the homepage.
 TWITTER_WIDGET_ID = config.get('TWITTER_WIDGET_ID')
-
-# configure the bcrypt settings
-# Enables bcrypt hashing when ``User.set_password()`` is called.
-BCRYPT_ENABLED = True
-
-# Enables bcrypt hashing when running inside Django
-# TestCases. Defaults to False, to speed up user creation.
-BCRYPT_ENABLED_UNDER_TEST = False
-
-# Number of rounds to use for bcrypt hashing. Defaults to 12.
-BCRYPT_ROUNDS = 12
-
 
 # pagination related settings
 PAGINATION_DEFAULT_PAGINATION      = 10
