@@ -573,7 +573,10 @@ class Place(ModelBase, ScorecardMixin):
         return self.kind.slug == 'constituency'
     
     def current_politician_position(self):
-        """Return the current politician position, or None"""
+        """Return the current politician position, or None.
+
+        FIXME - This just returns a random position from what could be a set.
+        """
         qs = self.position_set.all().current_politician_positions()
         try:
             return qs[0]
