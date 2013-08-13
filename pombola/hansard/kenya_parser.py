@@ -147,6 +147,11 @@ class KenyaParser():
                     page_number = int(page_number_match.group(0))
                     continue
 
+            if tag_name == 'b':
+                if re.search( r'\s*Disclaimer:', line.text ):
+                    # This is a disclaimer line that we can skip
+                    continue
+
             # if br_count > 0:
             #     print 'br_count: ' + str(br_count)
             # print type( line )
