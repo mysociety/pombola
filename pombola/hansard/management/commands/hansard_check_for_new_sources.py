@@ -80,7 +80,7 @@ class Command(NoArgsCommand):
                         convertEntities=BeautifulStoneSoup.HTML_ENTITIES
                     )
                     download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
-                    print download_url
+                    # print download_url
                     
                     # create the source entry
                     Source.objects.create(
