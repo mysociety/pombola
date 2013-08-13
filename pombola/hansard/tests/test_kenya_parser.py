@@ -16,33 +16,35 @@ from pombola.core.models import Person, PositionTitle, Position
 from django_date_extensions.fields import ApproximateDate
 from django.conf import settings
 
-@unittest.skipUnless(settings.KENYA_PARSER_PDF_TO_HTML_HOST, "setting 'KENYA_PARSER_PDF_TO_HTML_HOST' not set")
-class KenyaParserTest(TestCase):
-    local_dir                   = os.path.abspath( os.path.dirname( __file__ ) )
-    sample_assembly_pdf         = os.path.join( local_dir, '2011-09-01-assembly-sample.pdf'  )
-    sample_assembly_html        = os.path.join( local_dir, '2011-09-01-assembly-sample.html' )
-    expected_assembly_data_json = os.path.join( local_dir, '2011-09-01-assembly-sample.json' )
+class KenyaParserVenueSpecificTestBase(object):
 
     def setUp(self):
         # create the venue
-        Venue(
-            slug = 'national_assembly',
-            name = 'National Assembly',
-        ).save()
+        Venue.objects.create(slug='national_assembly', name='National Assembly')
+
+    def _create_source_and_load_test_json_to_entries(self):
+        source   = Source.objects.create(
+            name = 'Test source',
+            url  = 'http://example.com/foo/bar/testing',
+            date = datetime.date( 2011, 9, 1 )
+        )
+        data = json.loads( open( self.expected_data_json, 'r'  ).read() )
+        KenyaParser.create_entries_from_data_and_source( data, source )
+        return source
 
     def test_converting_pdf_to_html(self):
         """Test that the pdf becomes the html that we expect"""
-        pdf_file = open( self.sample_assembly_pdf, 'r' )
+        pdf_file = open( self.sample_pdf, 'r' )
         html = KenyaParser.convert_pdf_to_html( pdf_file )
 
-        expected_html = open( self.sample_assembly_html, 'r' ).read()
+        expected_html = open( self.sample_html, 'r' ).read()
 
         self.assertEqual( html, expected_html )
 
     def test_converting_html_to_data(self):
         """test the convert_pdf_to_data function"""
 
-        html_file = open( self.sample_assembly_html, 'r')
+        html_file = open( self.sample_html, 'r')
         html = html_file.read()
 
         data = KenyaParser.convert_html_to_data( html=html )
@@ -54,7 +56,7 @@ class KenyaParserTest(TestCase):
         # tmp.close()
         # subprocess.call(['open', tmp.name ])
 
-        expected = json.loads( open( self.expected_assembly_data_json, 'r'  ).read() )
+        expected = json.loads( open( self.expected_data_json, 'r'  ).read() )
 
         self.assertEqual( data['transcript'], expected['transcript'] )
 
@@ -62,33 +64,13 @@ class KenyaParserTest(TestCase):
         self.assertEqual( data['meta'], expected['meta'] )
 
 
-    def test_parse_time_string(self):
+@unittest.skipUnless(settings.KENYA_PARSER_PDF_TO_HTML_HOST, "setting 'KENYA_PARSER_PDF_TO_HTML_HOST' not set")
+class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
 
-        time_tests = {
-            '1.00 p.m.':  '13:00:00',
-            '1.00 a.m.':  '01:00:00',
-            '12.00 p.m.': '12:00:00', # am and pm make no sense at noon or midnight - but define what we want to happen
-            '12.30 p.m.': '12:30:00',
-        }
-
-        for string, output in time_tests.items():
-            self.assertEqual( KenyaParser.parse_time_string( string ), output )
-
-        self.assertRaises(
-            KenyaParserCouldNotParseTimeString,
-            KenyaParser.parse_time_string,
-            'foo.bar'
-        )
-
-    def _create_source_and_load_test_json_to_entries(self):
-        source   = Source.objects.create(
-            name = 'Test source',
-            url  = 'http://example.com/foo/bar/testing',
-            date = datetime.date( 2011, 9, 1 )
-        )
-        data = json.loads( open( self.expected_assembly_data_json, 'r'  ).read() )
-        KenyaParser.create_entries_from_data_and_source( data, source )
-        return source
+    local_dir          = os.path.abspath( os.path.dirname( __file__ ) )
+    sample_pdf         = os.path.join( local_dir, '2011-09-01-assembly-sample.pdf'  )
+    sample_html        = os.path.join( local_dir, '2011-09-01-assembly-sample.html' )
+    expected_data_json = os.path.join( local_dir, '2011-09-01-assembly-sample.json' )
 
     def test_create_entries_from_data_and_source(self):
         """Take the data and source, and create the sitting and entries from it"""
@@ -236,5 +218,27 @@ class KenyaParserTest(TestCase):
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 8 )
         self.assertEqual( unassigned_aliases_qs.count(), 0 )
+
+
+
+class KenyaParserTest(TestCase):
+
+    def test_parse_time_string(self):
+
+        time_tests = {
+            '1.00 p.m.':  '13:00:00',
+            '1.00 a.m.':  '01:00:00',
+            '12.00 p.m.': '12:00:00', # am and pm make no sense at noon or midnight - but define what we want to happen
+            '12.30 p.m.': '12:30:00',
+        }
+
+        for string, output in time_tests.items():
+            self.assertEqual( KenyaParser.parse_time_string( string ), output )
+
+        self.assertRaises(
+            KenyaParserCouldNotParseTimeString,
+            KenyaParser.parse_time_string,
+            'foo.bar'
+        )
 
 
