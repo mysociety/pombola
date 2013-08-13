@@ -12,5 +12,10 @@ pdftohtml version 0.40:
     compilation errors
 
 pdftohtml version 0.12.4:
-    (installed on debian using apt-get) does produce the <b> and <i> tags
+    (installed on debian squeeze using apt-get)
+    does produce the <b> and <i> tags
+
+pdftohtml version 0.18.4:
+    (installed on debian wheezy using apt-get)
+    As 0.12.4 except html doctype different, ends tags with `/>` where appropriate and uses `&#160;` instead of `&nbsp`. Otherwise output identical so tests and code should be easy to adapt.
 
