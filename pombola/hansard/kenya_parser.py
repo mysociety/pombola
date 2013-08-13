@@ -124,6 +124,7 @@ class KenyaParser():
                 continue
             
             
+            # For Assembly
             # check for something that looks like the page number - when found
             # delete it and the two lines that follow
             if tag_name == 'b':
@@ -135,6 +136,15 @@ class KenyaParser():
                     while len(contents):
                         item = contents.pop(0)
                         if type(item) == Tag and item.name == 'hr': break
+                    continue
+
+            # For Senate
+            # check for something that looks like the page number
+            if tag_name == 'b':
+                page_number_match = re.search( r'\s{10,}(\d+)', line.text )
+                if page_number_match:
+                    # set the page number - the match is the page that we are on
+                    page_number = int(page_number_match.group(0))
                     continue
 
             # if br_count > 0:
