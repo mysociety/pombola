@@ -299,19 +299,33 @@ class KenyaParser():
 
     @classmethod
     def extract_meta_from_transcript(cls, transcript):
-        reg = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
 
-        # FIXME - should not hardcode this - but for Kenya it there is
-        # currently only one venue and it is not clear how others would be
-        # indentified
-
-        # Make sure it exists
-        venue, created = Venue.objects.get_or_create(
+        # create the two venues
+        national_assembly, created = Venue.objects.get_or_create(
             slug = 'national_assembly',
-            defaults = dict(
-                name = 'National Assembly'
-            )
+            defaults = {"name": "National Assembly"},
         )
+        senate, created = Venue.objects.get_or_create(
+            slug = 'senate',
+            defaults = {"name": "Senate"},
+        )
+
+        # regexps to capture the times
+        na_reg  = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
+        sen_reg = re.compile(r"The Senate (?P<action>met|rose).* at (?P<time>\d+\.\d+ [ap].m.)")
+        reg     = None
+
+        # work out which one we should use
+        for line in transcript:
+            text = line.get('text', '')
+            if na_reg.search(text):
+                reg = na_reg
+                venue = national_assembly
+                break
+            elif sen_reg.search(text):
+                reg = sen_reg
+                venue = senate
+                break
 
         results = {
             'venue': venue.slug,

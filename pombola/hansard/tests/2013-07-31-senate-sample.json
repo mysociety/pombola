@@ -1,6 +1,8 @@
 {
     "meta": {
-        "venue": "national_assembly"
+        "end_time": "18:30:00",
+        "start_time": "14:30:00",
+        "venue": "senate"
     },
     "transcript": [
         {
