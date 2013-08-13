@@ -10,6 +10,7 @@ import httplib2
 import re
 import datetime
 import sys
+import parsedatetime as pdt
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 
@@ -50,7 +51,6 @@ class Command(NoArgsCommand):
 
 
             # print '==============='
-            # # print dir(link)
             # print link
 
             href = link['href'].strip()
@@ -59,13 +59,10 @@ class Command(NoArgsCommand):
             name = ' '.join(link.contents).strip()
             # print "name: " + name
 
-            date_string = re.search('(\d.*\d)', name).group()
-            date_string = re.sub(r'(\d)[a-z]+', r'\1', date_string)
-            date_string = re.sub(r'[^\w\s]',    r'',   date_string)
-            date_string = re.sub(r'\s+',        r' ',  date_string).strip()
-            # print "date_string: " + date_string
 
-            source_date = datetime.datetime.strptime(date_string, '%d %B %Y')
+            cal = pdt.Calendar()
+            result = cal.parseDateText(name)
+            source_date = datetime.date(*result[:3])
             # print "source_date: " + str(source_date)
 
 
@@ -78,7 +75,7 @@ class Command(NoArgsCommand):
             )
             download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
             # print download_url
-            
+
             # create/update the source entry
             Source.objects.get_or_create(
                 name = name,
