@@ -51,7 +51,7 @@ class KenyaParserVenueSpecificTestBase(object):
 
         # Whilst developing the code this proved useful (on a mac at least)
         # tmp = tempfile.NamedTemporaryFile( delete=False, suffix=".json" )
-        # tmp = open( '/tmp/mzalend_hansard_parse.json', 'w')
+        # tmp = open( '/tmp/mzalendo_kenya_hansard_parse.json', 'w')
         # tmp.write( json.dumps( data, sort_keys=True, indent=4 ) )
         # tmp.close()
         # subprocess.call(['open', tmp.name ])
@@ -63,6 +63,14 @@ class KenyaParserVenueSpecificTestBase(object):
         # FIXME
         self.assertEqual( data['meta'], expected['meta'] )
 
+
+@unittest.skipUnless(settings.KENYA_PARSER_PDF_TO_HTML_HOST, "setting 'KENYA_PARSER_PDF_TO_HTML_HOST' not set")
+class KenyaParserSenateTest(KenyaParserVenueSpecificTestBase, TestCase):
+
+    local_dir          = os.path.abspath( os.path.dirname( __file__ ) )
+    sample_pdf         = os.path.join( local_dir, '2013-07-31-senate-sample.pdf'  )
+    sample_html        = os.path.join( local_dir, '2013-07-31-senate-sample.html' )
+    expected_data_json = os.path.join( local_dir, '2013-07-31-senate-sample.json' )
 
 @unittest.skipUnless(settings.KENYA_PARSER_PDF_TO_HTML_HOST, "setting 'KENYA_PARSER_PDF_TO_HTML_HOST' not set")
 class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):

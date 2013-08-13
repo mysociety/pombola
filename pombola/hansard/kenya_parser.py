@@ -27,9 +27,15 @@ class KenyaParser():
         remote_host = settings.KENYA_PARSER_PDF_TO_HTML_HOST
         
         if remote_host:
-            return cls.convert_pdf_to_html_remote_machine(pdf_file, remote_host)
+            output = cls.convert_pdf_to_html_remote_machine(pdf_file, remote_host)
         else:
-            return cls.convert_pdf_to_html_local_machine( pdf_file )
+            output = cls.convert_pdf_to_html_local_machine( pdf_file )
+
+        # cleanup some known bad chars in the output
+        output = re.sub("\xfe\xff", "", output)  # BOM
+        output = re.sub("\u201a\xc4\xf4", "\xe2\x80\x99", output) # smart quote
+        
+        return output
 
 
     @classmethod
