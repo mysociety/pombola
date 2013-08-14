@@ -99,6 +99,11 @@ LANGUAGE_CODE = 'en-GB'
 # Commented out until it is actually needed.
 # LANGUAGES = ()
 
+# The project layout is a bit of a mess. The makemessages command exepects to
+# find the 'locale' directory is a different place to the locale loaders (ie
+# next to the settings.py). Be specific here so that it is picked up.
+LOCALE_PATHS = ( os.path.join(base_dir, 'locale'), )
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
