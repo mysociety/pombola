@@ -20,6 +20,29 @@
       });
     </script>
 
+    <!-- add news ticker functionality -->
+   <script type='text/javascript'>
+   $(function(){
+       $.get('{{ STATIC_URL }}news.html', 
+             function(data) {
+              $('#ticker').html(data);   
+             });
+   });
+    
+    function tick(){
+        try{
+            $('#ticker li:first')
+              .animate({'opacity':0}, 200, 
+              function () 
+                 { $(this).appendTo($('#ticker')).css('opacity', 1); });
+             } catch(err) {/*ignore*/}
+    }
+    
+    $(function() { 
+        setInterval(tick, 10000);
+     });
+    </script>
+    
   <script type="text/javascript" src="{{ STATIC_URL }}js/countdown.js"></script>
   <script type="text/javascript">
         function diff(end, start) {

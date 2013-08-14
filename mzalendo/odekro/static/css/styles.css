@@ -356,7 +356,7 @@ html, body{height:100%;}
 #toTop{display:none;text-decoration:none;position:fixed;bottom:50px;right:10px;overflow:hidden;width:111px;height:31px;border:none;text-indent:100%;background:url(../images/ui.totop.png) no-repeat left top;}
 #toTopHover{background:url(../images/ui.totop.png) no-repeat left -31px;width:111px;height:31px;display:block;overflow:hidden;float:left;opacity:0;-moz-opacity:0;filter:alpha(opacity=0);}
 #toTop:active, #toTop:focus{outline:none;}
-#ticker { border: 1px solid #ccc; padding: 10px; width: 540px; height: 350px; overflow: hidden;}
+#ticker { border: 1px solid #ccc; padding: 5px; width: 515px; height: 350px; overflow: hidden;}
 #ticker li { height: 100px; padding: 10px; overflow: hidden;}
 #ticker img { width: 50px; height: 50px;}
 #ticker :link { text-decoration:none; border-bottom: none;!important }
