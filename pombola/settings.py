@@ -90,6 +90,15 @@ TIME_ZONE = config.get('TIME_ZONE')
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-GB'
 
+# Overide the list of languages supported. Note that we may need to do this to
+# support languages that are not supported by Django, or to limit the set of
+# languages supported to a subset.
+# 
+# See https://docs.djangoproject.com/en/1.4/ref/settings/#languages
+#
+# Commented out until it is actually needed.
+# LANGUAGES = ()
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -191,6 +200,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
