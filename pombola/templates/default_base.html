@@ -1,4 +1,5 @@
 {% load breadcrumbs %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -106,7 +107,11 @@
 
             <div class="attribution">
 
-              <p>This site runs on <a href="https://github.com/mysociety/pombola">open source code</a> written by <a href="http://www.mysociety.org">mySociety</a>.</p>
+              <p>
+                {% blocktrans with code_url="https://github.com/mysociety/pombola" mysoc_url="http://www.mysociety.org" %}
+                This site runs on <a href="{{ code_url }}">open source code</a> written by <a href="{{ mysoc_url }}">mySociety</a>.
+                {% endblocktrans %}
+              </p>
 
               {% block extra_attribution %}
               {% endblock %}
