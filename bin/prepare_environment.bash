@@ -24,7 +24,7 @@ pip install -r requirements.txt
 MAPIT_PATH="$(python -c 'import mapit; print mapit.__file__,')"
 "$(dirname $MAPIT_PATH)"/../bin/make_css || echo "Generating MapIt CSS failed"
 
-# make sure that there is no old code (the .py files may have been git deleted) 
+# make sure that there is no old code (the .py files may have been git deleted)
 find . -name '*.pyc' -delete
 
 # get the database up to speed
@@ -33,3 +33,6 @@ find . -name '*.pyc' -delete
 
 # gather all the static files in one place
 ./manage.py collectstatic --noinput
+
+# generate translation files
+./manage.py compilemessages
