@@ -1,0 +1,16 @@
+{% load i18n %}
+
+{% if LANGUAGES|length > 1 %}
+<form action="/i18n/setlang/" method="post">
+  {% csrf_token %}
+  <input name="next" type="hidden" value="{{ redirect_to }}" />
+  {% trans "Change language:" %}
+  <select name="language">
+    {% get_language_info_list for LANGUAGES as languages %}
+    {% for language in languages %}
+    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected="selected"{% endif %}>{{ language.name_local }} ({{ language.code }})</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="Go" />
+</form>
+{% endif %}
