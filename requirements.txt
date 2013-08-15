@@ -41,7 +41,8 @@ django-webtest
 selenium
 django-selenium
 
-BeautifulSoup
+# Hansard parsing is quite particular
+BeautifulSoup==3.2.1
 BeautifulSoup4
 unidecode
 python-memcached
