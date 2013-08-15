@@ -390,19 +390,6 @@ for key in ALL_OPTIONAL_APPS: # add in the optional apps
     ENABLED_FEATURES[key] = 'pombola.' + key in INSTALLED_APPS
 
 
-
-# list of all the position title slugs considered to be politicians
-POLITICIAN_TITLE_SLUGS = [
-    'mp',
-    'nominated-member-parliament',
-    'member-national-assembly',
-    'representative',
-    'senator',
-    'president',
-    'governor',
-    'ward-representative',
-]
-
 # map boundaries
 MAP_BOUNDING_BOX_NORTH = config.get('MAP_BOUNDING_BOX_NORTH')
 MAP_BOUNDING_BOX_EAST  = config.get('MAP_BOUNDING_BOX_EAST' )
