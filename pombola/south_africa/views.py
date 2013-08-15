@@ -3,6 +3,22 @@ from django.contrib.gis.geos import Point
 import mapit
 
 from pombola.core import models
+from pombola.core.views import PlaceDetailView
+
+class LatLonDetailView(PlaceDetailView):
+    def get_object(self):
+        # FIXME - handle bad args better.
+        lat = float(self.kwargs['lat'])
+        lon = float(self.kwargs['lon'])
+
+        location = Point(lon, lat)
+
+        areas = mapit.models.Area.objects.by_location(location)
+
+        # FIXME - Handle not finding a province or getting more than one.
+        province = models.Place.objects.get(mapit_area__in=areas, kind__slug='province')
+
+        return province
 
 def latlon(request, lat, lon):
     lat = float(lat)
@@ -30,10 +46,11 @@ def latlon(request, lat, lon):
     #     position__organisation__slug='ncop',
     #     )
 
-    nearest_offices = (models.Place.objects
-                       .filter(kind__slug='constituency-office').distance(location)
-                       .order_by('distance')
-                       )
+    nearest_offices = (
+        models.Place.objects
+        .filter(kind__slug='constituency-office').distance(location)
+        .order_by('distance')
+        )
 
     parties = models.Organisation.objects.all().active_parties()
 
