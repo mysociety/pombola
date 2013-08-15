@@ -1,0 +1,13 @@
+{% extends 'core/place_detail.html' %}
+
+{% block subcontent %}
+  <h2>Nearest Party Offices</h2>
+
+  <ul class="listing">
+    {% for object in nearest_offices %}
+      {% include 'core/generic_list_item.html' %}
+    {% endfor %}
+  </ul>  
+  
+  {{ block.super }}
+{% endblock %}
