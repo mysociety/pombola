@@ -48,7 +48,7 @@ class Command(NoArgsCommand):
                 convertEntities=BeautifulStoneSoup.HTML_ENTITIES
             )
 
-            spans = soup.findAll( 'span', 'contenttype-repositoryitem')
+            spans = soup.findAll( 'span', 'contenttype-repositoryitem summary')
 
             links = [ span.a for span in spans ]
 
