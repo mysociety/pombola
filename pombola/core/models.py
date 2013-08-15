@@ -451,16 +451,13 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
         active_politician_positions = Position.objects.all().current_politician_positions()
         active_member_positions = Position.objects.all().filter(title__slug='member').currently_active()
 
-        current_politicians = Person.objects.all().filter(position__in=active_politician_positions).distinct()
-        current_members = Person.objects.all().filter(position__in=active_member_positions).distinct()
-
         return (
             self
                 .parties()
-                .filter(position__person__in=current_politicians)
-                .filter(position__person__in=current_members)
-                .distinct()                
-        )
+                .filter(position__in=active_politician_positions)
+                .filter(position__in=active_member_positions)
+                .distinct()
+            )
 
 
 class OrganisationManager(ManagerBase):
