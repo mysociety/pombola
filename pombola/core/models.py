@@ -601,7 +601,6 @@ class Place(ModelBase, ScorecardMixin):
         parents = self.parent_places()        
         ids     = [ x.id for x in parents ]
         ids.append(self.id)
-        print ids
         return Place.objects.filter(pk__in=ids)
     
 

@@ -23,7 +23,7 @@ TMP_PDF_FILE=`ssh $REMOTE tempfile -s .pdf`
 
 scp $FILE $REMOTE:$TMP_PDF_FILE
 
-ssh $REMOTE pdftohtml -noframes -stdout $TMP_PDF_FILE
+ssh $REMOTE pdftohtml -enc UTF-8 -noframes -stdout $TMP_PDF_FILE
 
 ssh $REMOTE rm $TMP_PDF_FILE
 

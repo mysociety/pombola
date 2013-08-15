@@ -57,3 +57,5 @@ requests
 
 ## votematch
 django-model-utils
+
+parsedatetime

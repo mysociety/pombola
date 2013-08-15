@@ -27,9 +27,15 @@ class KenyaParser():
         remote_host = settings.KENYA_PARSER_PDF_TO_HTML_HOST
         
         if remote_host:
-            return cls.convert_pdf_to_html_remote_machine(pdf_file, remote_host)
+            output = cls.convert_pdf_to_html_remote_machine(pdf_file, remote_host)
         else:
-            return cls.convert_pdf_to_html_local_machine( pdf_file )
+            output = cls.convert_pdf_to_html_local_machine( pdf_file )
+
+        # cleanup some known bad chars in the output
+        output = re.sub("\xfe\xff", "", output)  # BOM
+        output = re.sub("\u201a\xc4\xf4", "\xe2\x80\x99", output) # smart quote
+        
+        return output
 
 
     @classmethod
@@ -118,6 +124,7 @@ class KenyaParser():
                 continue
             
             
+            # For Assembly
             # check for something that looks like the page number - when found
             # delete it and the two lines that follow
             if tag_name == 'b':
@@ -129,6 +136,20 @@ class KenyaParser():
                     while len(contents):
                         item = contents.pop(0)
                         if type(item) == Tag and item.name == 'hr': break
+                    continue
+
+            # For Senate
+            # check for something that looks like the page number
+            if tag_name == 'b':
+                page_number_match = re.search( r'\s{10,}(\d+)', line.text )
+                if page_number_match:
+                    # set the page number - the match is the page that we are on
+                    page_number = int(page_number_match.group(0))
+                    continue
+
+            if tag_name == 'b':
+                if re.search( r'\s*Disclaimer:', line.text ):
+                    # This is a disclaimer line that we can skip
                     continue
 
             # if br_count > 0:
@@ -278,19 +299,33 @@ class KenyaParser():
 
     @classmethod
     def extract_meta_from_transcript(cls, transcript):
-        reg = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
 
-        # FIXME - should not hardcode this - but for Kenya it there is
-        # currently only one venue and it is not clear how others would be
-        # indentified
-
-        # Make sure it exists
-        venue, created = Venue.objects.get_or_create(
+        # create the two venues
+        national_assembly, created = Venue.objects.get_or_create(
             slug = 'national_assembly',
-            defaults = dict(
-                name = 'National Assembly'
-            )
+            defaults = {"name": "National Assembly"},
         )
+        senate, created = Venue.objects.get_or_create(
+            slug = 'senate',
+            defaults = {"name": "Senate"},
+        )
+
+        # regexps to capture the times
+        na_reg  = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
+        sen_reg = re.compile(r"The Senate (?P<action>met|rose).* at (?P<time>\d+\.\d+ [ap].m.)")
+        reg     = None
+
+        # work out which one we should use
+        for line in transcript:
+            text = line.get('text', '')
+            if na_reg.search(text):
+                reg = na_reg
+                venue = national_assembly
+                break
+            elif sen_reg.search(text):
+                reg = sen_reg
+                venue = senate
+                break
 
         results = {
             'venue': venue.slug,

@@ -10,6 +10,7 @@ import httplib2
 import re
 import datetime
 import sys
+import parsedatetime as pdt
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 
@@ -30,60 +31,60 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
-        url = 'http://www.parliament.go.ke/plone/national-assembly/business/hansard'
-
-        h = httplib2.Http( settings.HTTPLIB2_CACHE_DIR )
-        response, content = h.request(url)
-        # print content
-
-        # parse content
-        soup = BeautifulSoup(
-            content,
-            convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+        urls = (
+            'http://www.parliament.go.ke/plone/senate/business/hansard',
+            'http://www.parliament.go.ke/plone/national-assembly/business/hansard',
         )
 
-        spans = soup.findAll( 'span', 'contenttype-repositoryitem')
+        for url in urls:
 
-        links = [ span.a for span in spans ]
+            h = httplib2.Http( settings.HTTPLIB2_CACHE_DIR )
+            response, content = h.request(url)
+            # print content
 
-        for link in links:
-
-
-            # print '==============='
-            # # print dir(link)
-            # print link
-
-            href = link['href'].strip()
-            # print "href: " + href
-
-            name = ' '.join(link.contents).strip()
-            # print "name: " + name
-
-            date_string = re.search('(\d.*\d)', name).group()
-            date_string = re.sub(r'(\d)[a-z]+', r'\1', date_string)
-            date_string = re.sub(r'[^\w\s]',    r'',   date_string)
-            date_string = re.sub(r'\s+',        r' ',  date_string).strip()
-            # print "date_string: " + date_string
-
-            source_date = datetime.datetime.strptime(date_string, '%d %B %Y')
-            # print "source_date: " + str(source_date)
-
-
-            # I don't trust that we can accurately create the download link url with the
-            # details that we have. Instead fetche the page and extract the url.
-            download_response, download_content = h.request(href)
-            download_soup = BeautifulSoup(
-                download_content,
+            # parse content
+            soup = BeautifulSoup(
+                content,
                 convertEntities=BeautifulStoneSoup.HTML_ENTITIES
             )
-            download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
-            # print download_url
-            
-            # create/update the source entry
-            Source.objects.get_or_create(
-                name = name,
-                defaults = dict(
-                    url = download_url,
-                    date = source_date,
-                )
-            )
+
+            spans = soup.findAll( 'span', 'contenttype-repositoryitem')
+
+            links = [ span.a for span in spans ]
+
+            for link in links:
+
+
+                # print '==============='
+                # print link
+
+                href = link['href'].strip()
+                # print "href: " + href
+
+                name = ' '.join(link.contents).strip()
+                # print "name: " + name
+
+                if not Source.objects.filter(name=name).exists():
+
+                    cal = pdt.Calendar()
+                    result = cal.parseDateText(name)
+                    source_date = datetime.date(*result[:3])
+                    # print "source_date: " + str(source_date)
+                    
+                    
+                    # I don't trust that we can accurately create the download link url with the
+                    # details that we have. Instead fetche the page and extract the url.
+                    download_response, download_content = h.request(href)
+                    download_soup = BeautifulSoup(
+                        download_content,
+                        convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+                    )
+                    download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
+                    # print download_url
+                    
+                    # create the source entry
+                    Source.objects.create(
+                        name = name,
+                        url = download_url,
+                        date = source_date,
+                    )
