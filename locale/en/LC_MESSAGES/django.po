@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-14 16:14+0100\n"
+"POT-Creation-Date: 2013-08-16 16:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,6 +62,18 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#: pombola/templates/500.html:4
+msgid "Internal Server Error"
+msgstr ""
+
+#: pombola/templates/500.html:8
+msgid "Internal Server Error - 50<"
+msgstr ""
+
+#: pombola/templates/500.html:10
+msgid "Something went wrong on the server. Please try again later..."
+msgstr ""
+
 #: pombola/templates/default_base.html:112
 #, python-format
 msgid ""
@@ -71,8 +83,63 @@ msgid ""
 "                "
 msgstr ""
 
+#: pombola/templates/disqus_comments.html:4
+msgid "Comments"
+msgstr ""
+
+#: pombola/templates/disqus_comments.html:14
+msgid "(For <strong>newest</strong> comments first please choose "
+msgstr ""
+
+#: pombola/templates/disqus_comments.html:19
+#, python-format
+msgid ""
+"\n"
+"            Please enable JavaScript to view the <a href=\"%(disqus_url)s"
+"\">comments powered by Disqus.</a>\n"
+"          "
+msgstr ""
+
+#: pombola/templates/disqus_comments.html:24
+msgid "comments powered by Disqus"
+msgstr ""
+
+#: pombola/templates/disqus_comments.html:27
+msgid "Comments have not been enabled on this site. See "
+msgstr ""
+
 #: pombola/templates/language_selector.html:7
 msgid "Change language:"
+msgstr ""
+
+#: pombola/templates/site_header.html:10
+msgid "menu"
+msgstr ""
+
+#: pombola/templates/site_header.html:11
+msgid "search"
+msgstr ""
+
+#: pombola/templates/site_header.html:16
+msgid "name, place, party&hellip;"
+msgstr ""
+
+#: pombola/templates/site_header.html:17
+msgid "Submit"
+msgstr ""
+
+#: pombola/templates/staging_header.html:4
+msgid ""
+"This is a staging site - any data saved here <strong>may be deleted</strong>."
+msgstr ""
+
+#: pombola/templates/wikipedia_attribution.html:6
+#, python-format
+msgid ""
+"\n"
+"  Some content on this page may come from <a href=\"%(wikipedia_url)s"
+"\">Wikipedia</a> under a <a href=\"%(cc3_url)s\">CC BY-SA 3.0 License</a>.\n"
+"  "
 msgstr ""
 
 #: pombola/templates/pagination/pagination.html:5

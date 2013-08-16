@@ -1,7 +1,9 @@
+{% i18n %}
+
 {# See http://en.wikipedia.org/wiki/Wikipedia:Reusing_Wikipedia_content for more details #}
 <p>
-  Some content on this page may come from
-  <a href="http://en.wikipedia.org/wiki/Main_Page">Wikipedia</a>
-  under a
-  <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 License</a>.
+
+  {% blocktrans with wikipedia_url="http://en.wikipedia.org/wiki/Main_Page" cc3_url="http://creativecommons.org/licenses/by-sa/3.0/" %}
+  Some content on this page may come from <a href="{{ wikipedia_url }}">Wikipedia</a> under a <a href="{{ cc3_url }}">CC BY-SA 3.0 License</a>.
+  {% endblocktrans %}
 </p>

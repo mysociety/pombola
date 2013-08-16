@@ -1,6 +1,7 @@
+{% i18n %}
 
 {% if settings.STAGING %}
 <div id="staging_header">
-    This is a staging site - any data saved here <strong>may be deleted</strong>.
+    {% trans 'This is a staging site - any data saved here <strong>may be deleted</strong>.' %}
 </div>
 {% endif %}

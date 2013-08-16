@@ -1,5 +1,7 @@
+{% load i18n %}
+
 {% if settings.DISQUS_SHORTNAME %}
-    <h2>Comments</h2>
+    <h2>{% trans 'Comments' %}</h2>
 
 
     {# This relies on the higher up templates including disqus_javascript #}
@@ -9,12 +11,18 @@
 
     <div>
         <div class="disqus_help">
-          (For <strong>newest</strong> comments first please choose 'Newest' from the 'Discussion' tab below.)
+          {% trans '(For <strong>newest</strong> comments first please choose 'Newest' from the 'Discussion' tab below.)' %}
         </div>
         <div id="disqus_thread"></div>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        <noscript>
+          {% blocktrans with disqus_url="http://disqus.com/?ref_noscript" %}
+            Please enable JavaScript to view the <a href="{{ disqus_url }}">comments powered by Disqus.</a>
+          {% endblocktrans %}
+        </noscript>
+
+        <a href="http://disqus.com" class="dsq-brlink">{% trans 'comments powered by Disqus' %}</a>
     </div>
 {% else %}
-  Comments have not been enabled on this site. See 'DISQUS_SHORTNAME' in your settings.
+  {% trans 'Comments have not been enabled on this site. See 'DISQUS_SHORTNAME' in your settings.' %}
 {% endif %}
