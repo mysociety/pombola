@@ -7,7 +7,9 @@
     pombola_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js' );
 
     var mapDrilldownSettings = {
-      mapitAreaType: 'con',
+      {% if settings.COUNTRY_APP == 'kenya' %}
+        mapitAreaType: 'con'
+      {% endif %}
     };
 
     pombola_settings.extra_js.push( 'js/map-drilldown.js' );
