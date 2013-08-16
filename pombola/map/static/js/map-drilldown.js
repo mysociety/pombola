@@ -173,8 +173,13 @@
     this.fetchAreas = function ( lat, lng ) {
       var self = this;
 
-      // FIXME - change to CON after #495 closed.
-      var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat + '?type=con';
+      var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat;
+
+      // Add the con
+      if (mapDrilldownSettings.mapitAreaType) {
+        mapitPointURL += "?type=" + mapDrilldownSettings.mapitAreaType;
+      }
+
       // console.log(lat, lng, mapitPointURL);
 
       // Check that we are not at the current location already
