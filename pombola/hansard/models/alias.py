@@ -66,6 +66,7 @@ class Alias(HansardModelBase):
     def clean_up_name(cls, name):
         name = name.strip()
         name = re.sub( r'\s+',                    r' ',    name )
+        name = re.sub( r'^Sen\.\s+\((.*?)\)',     r'\1',   name )
         name = re.sub( r'^\(\s*(.*)\s*\)$',       r'\1',   name )
         name = re.sub( r'^\[\s*(.*)\s*\]$',       r'\1',   name )
         name = re.sub( r'\s*,+$',                 r'',     name )

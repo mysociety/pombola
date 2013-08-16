@@ -22,6 +22,10 @@ class HansardAliasTest(TestCase):
 
             ( 'Mr A.N. Other', 'Mr. A. N. Other' ),
 
+            # Senators
+            ('Hon. Ethuro',             'Hon. Ethuro'      ),
+            ('Sen. (Prof.) Lonyagapuo', 'Prof. Lonyagapuo' ),
+
         ]
 
         for dirty, clean in tests:
