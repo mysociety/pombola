@@ -25,13 +25,6 @@
       var map_element = document.getElementById("map-drilldown-canvas");
       if (!map_element) return false;
 
-      var map_bounds = {
-        north: window.pombola_settings.map_bounds.north,
-        east:  window.pombola_settings.map_bounds.east,
-        south: window.pombola_settings.map_bounds.south,
-        west:  window.pombola_settings.map_bounds.west
-      };
-
       var myOptions = {
 
         // Choose a map type that is clear
@@ -76,7 +69,7 @@
         }
       );
 
-      map.fitBounds( this.make_bounds( map_bounds ) );
+      map.fitBounds( this.make_bounds() );
 
       return map;
     };
@@ -259,7 +252,15 @@
 
 
 
-    this.make_bounds = function ( bounds ) {
+    this.make_bounds = function () {
+
+        var bounds = {
+          north: window.pombola_settings.map_bounds.north,
+          east:  window.pombola_settings.map_bounds.east,
+          south: window.pombola_settings.map_bounds.south,
+          west:  window.pombola_settings.map_bounds.west
+        };
+
         var sw = new google.maps.LatLng( bounds.south, bounds.west );
         var ne = new google.maps.LatLng( bounds.north, bounds.east );
         return new google.maps.LatLngBounds( sw, ne );
