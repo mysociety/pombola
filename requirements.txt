@@ -14,7 +14,7 @@ psycopg2
 ### Django related
 Django>=1.4,<1.5
 django-pagination
-South
+South>=0.8
 
 
 ### Pombola dependencies
