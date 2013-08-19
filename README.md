@@ -38,7 +38,7 @@ Please see [docs/TROUBLESHOOTING.txt](https://github.com/mysociety/pombola/blob/
 
 The Pombola codebase was originally written for the Kenyan site
 [mzalendo.com](http://info.mzalendo.com). It has since been modified to support
-other sites - notably one in Nigeria.
+other sites around the world, notably several in Africa.
 
 We want the code to be easy to use for other installations, but currently there are some rough edges.
 
