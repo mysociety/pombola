@@ -6,7 +6,7 @@
       // Opera Mini
       if ( /Opera Mini/.test(navigator.userAgent) ) {
         $(".map-drilldown")
-          .html('<div class="error">Your browser does not support Google Maps. Please <a href="/search/">search</a> for your constituency instead.</div>');
+          .html('<div class="error">' + this.toMessage("browser not supported") + '</div>');
         return;
       }
 
@@ -244,16 +244,8 @@
     };
 
 
-    this.messages = {
-      "drag to find": 'Drag map to your location or <a href="/search">search by name</a>.',
-      'geolocating':  "Trying to find your current location&hellip;",
-      'could not geolocate': "There was a problem finding your current location.",
-      'location found':      "Map has been centred on your current location.",
-      'area not found':      "No matching areas were found.",
-    };
-
     this.toMessage = function ( key ) {
-      return this.messages[key] || key;
+      return mapDrilldownSettings.i18n[key] || key;
     }
 
 
