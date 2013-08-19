@@ -5,6 +5,13 @@
 {% block extra_js_to_load %}
     pombola_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo-min.js' );
     pombola_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js' );
+
+    var mapDrilldownSettings = {
+      {% if settings.COUNTRY_APP == 'kenya' %}
+        mapitAreaType: 'con'
+      {% endif %}
+    };
+
     pombola_settings.extra_js.push( 'js/map-drilldown.js' );
 {% endblock %}
 
@@ -26,14 +33,14 @@
     width: 100%;
     height: 400px;
   }
-  
+
   .gmap-control {
     display: none;
     background-color: white;
     margin: 5px;
     padding: 5px;
     border: 2px solid black;
-    text-align: center;    
+    text-align: center;
     cursor: pointer;
     font-family: Arial, sans-serif;
     font-size: 12px;
@@ -42,13 +49,13 @@
   #map-drilldown-message {
     margin-top: 30px;
     width: 80%;
-    font-size: 16px;    
+    font-size: 16px;
   }
-  
+
   #map-drilldown-message div.location {
     margin-top: 0.5em;
   }
-  
+
 </style>
 
 
@@ -62,7 +69,7 @@
     <div class="instruction">loading&hellip;</div>
     <div class="location"></div>
   </div>
-  
+
 </div>
 
 
