@@ -1,7 +1,7 @@
 (function () {
 
   var MzMap = function () {
-    
+
     this.init = function() {
       // Opera Mini
       if ( /Opera Mini/.test(navigator.userAgent) ) {
@@ -15,12 +15,12 @@
       this.addMessageControlToMap();
       this.addCrosshairs();
 
-      this.trackMapMovements();   
+      this.trackMapMovements();
       this.maintainMapCenterOnResize();
 
       this.enableGeoLocation();
     };
-    
+
     this.createMap = function () {
       var map_element = document.getElementById("map-drilldown-canvas");
       if (!map_element) return false;
@@ -67,14 +67,14 @@
             400 // max delay between two clicks
           );
         }
-      ); 
+      );
       google.maps.event.addListener(
         map,
         'dblclick',
         function () {
           clearTimeout(clickTimeoutId);
         }
-      ); 
+      );
 
       map.fitBounds( this.make_bounds( map_bounds ) );
 
@@ -83,8 +83,8 @@
 
     this.enableGeoLocation = function () {
       var self = this;
-      var map = this.map; 
-      if ( geo_position_js.init() ) {      
+      var map = this.map;
+      if ( geo_position_js.init() ) {
         self.messageHolderHTMLInstruction('geolocating');
         geo_position_js.getCurrentPosition(
           function (data) { // success
@@ -93,24 +93,24 @@
             map.setZoom( 10 ); // feels about right for locating a big area
             self.messageHolderHTMLInstruction('location found');
             setTimeout(function() {
-              self.messageHolderHTMLInstruction('drag to find');              
+              self.messageHolderHTMLInstruction('drag to find');
             }, 2000);
           },
           function () { // failure or error
             self.messageHolderHTMLInstruction('could not geolocate');
             setTimeout(function() {
-              self.messageHolderHTMLInstruction('drag to find');              
+              self.messageHolderHTMLInstruction('drag to find');
             }, 2000);
           }
         );
-      }    
+      }
     };
 
-    // Add crosshairs at the center - see merging of answers at 
+    // Add crosshairs at the center - see merging of answers at
     // http://stackoverflow.com/questions/4130237
     this.addCrosshairs = function () {
-      var map = this.map; 
-      var crosshairs_path = window.pombola_settings.static_url + 'images/crosshairs.png?' + window.pombola_settings.static_generation_number 
+      var map = this.map;
+      var crosshairs_path = window.pombola_settings.static_url + 'images/crosshairs.png?' + window.pombola_settings.static_generation_number
 
       var crosshairsImage = new google.maps.MarkerImage(
          crosshairs_path,                 // marker image
@@ -144,12 +144,12 @@
 
     this.trackMapMovements = function () {
       var self = this;
-      var map = this.map; 
+      var map = this.map;
       google.maps.event.addListener(
         map,
         'center_changed',
         function () { self.updateLocation( map.getCenter() ); }
-      ); 
+      );
     };
 
 
@@ -173,8 +173,13 @@
     this.fetchAreas = function ( lat, lng ) {
       var self = this;
 
-      // FIXME - change to CON after #495 closed.
-      var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat + '?type=con';
+      var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat;
+
+      // Add the con
+      if (mapDrilldownSettings.mapitAreaType) {
+        mapitPointURL += "?type=" + mapDrilldownSettings.mapitAreaType;
+      }
+
       // console.log(lat, lng, mapitPointURL);
 
       // Check that we are not at the current location already
@@ -203,10 +208,10 @@
           self.fetchAreasCurrentRequest = $.getJSON( mapitPointURL, function (data) {
             self.fetchAreasCache[mapitPointURL] = data;
             self.displayAreas(data);
-          } );         
+          } );
         },
         1000
-      );  
+      );
     };
 
 
@@ -218,18 +223,18 @@
 
       _.each( areas, function (area, area_id ) {
         // console.log(area);
-        if (area_descriptions) { area_descriptions += ', '; } 
+        if (area_descriptions) { area_descriptions += ', '; }
         area_descriptions += '<a href="/place/mapit_area/' + area_id + '">' + area.name + ' (' + area.type_name + ')</a>';
       });
 
       this.messageHolderHTMLLocation(
         area_descriptions || default_message
-      );    
+      );
     };
 
 
     this.addMessageControlToMap = function () {
-      var map = this.map; 
+      var map = this.map;
       var control = $('#map-drilldown-message').get(0);
       control.index = 1;
       map
@@ -253,11 +258,11 @@
 
 
     this.messageHolderHTMLInstruction = function (html) {
-      $('#map-drilldown-message div.instruction').html( this.toMessage(html) );        
+      $('#map-drilldown-message div.instruction').html( this.toMessage(html) );
     };
 
     this.messageHolderHTMLLocation = function (html) {
-      $('#map-drilldown-message div.location').html( this.toMessage(html) );        
+      $('#map-drilldown-message div.location').html( this.toMessage(html) );
     };
 
 
@@ -270,7 +275,7 @@
 
 
     this.centerMapInWindow = function (loc) {
-      var map = this.map; 
+      var map = this.map;
 
       // Make the map the same height as the window, and then scroll to the top
       // of it to fill the window
@@ -287,7 +292,7 @@
 
     this.maintainMapCenterOnResize = function () {
       var self = this;
-      var map = this.map; 
+      var map = this.map;
 
       this.centerMapInWindow();
 
@@ -305,7 +310,7 @@
         _.debounce(
           function () {
             var center = map.getCenter();
-            currentMapCenter = new google.maps.LatLng( center.lat(), center.lng() );        
+            currentMapCenter = new google.maps.LatLng( center.lat(), center.lng() );
           },
           400
         )
@@ -318,14 +323,14 @@
         },
         200
       );
-      google.maps.event.addDomListener( window, 'resize',            eventHandler);    
-      google.maps.event.addDomListener( window, 'orientationchange', eventHandler);    
+      google.maps.event.addDomListener( window, 'resize',            eventHandler);
+      google.maps.event.addDomListener( window, 'orientationchange', eventHandler);
     };
-    
+
   };
-  
-  
-  
+
+
+
   pombola_run_when_document_ready(
       function () {
           google.load(
