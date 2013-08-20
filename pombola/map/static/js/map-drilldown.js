@@ -380,6 +380,11 @@
                     position: result.geometry.location,
                     title: result.formatted_address,
                   });
+                  
+                  google.maps.event.addListener(marker, "click", function(event) {
+                      alert("Should go to url for coords: " + event.latLng);
+                  });
+                  
                   self.markers.push(marker);
                   bounds.extend(marker.getPosition());
                 });
