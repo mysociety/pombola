@@ -334,17 +334,20 @@
       $search_form.submit(
         function (event) {
 
-          self.messageHolderHTMLLocation("geocoder searching");
-
+          // There is nowhere else for the form to submit to
           event.preventDefault();
 
-          var current_value = $search_input.attr("value");
+          // Tell the user that we are searching, it's a remote call so may take
+          // a while to come back
+          self.messageHolderHTMLLocation("geocoder searching");
 
+          // construct the search arguments, including country bounds.
           var geocoder_args = {
-            address: current_value,
+            address: $search_input.attr("value"),
             bounds: self.make_bounds()
           };
 
+          // start the geocoding request
           geocoder.geocode(
             geocoder_args,
             function (results, status) {
@@ -354,41 +357,58 @@
               var desired_bounds = self.make_bounds();
               results = _.filter(results, function (result) {
                 return desired_bounds.contains(result.geometry.location);
-              });                
+              });
 
-              // found no matches
+              // found no matches (or no matches that are within our bounds)
               if (status == google.maps.GeocoderStatus.ZERO_RESULTS || (status == google.maps.GeocoderStatus.OK && results.length == 0) ) {
                 self.messageHolderHTMLLocation( "zero geocoder results");
               }
 
-              // found one or several matches
+              // found some matches
               else if (status == google.maps.GeocoderStatus.OK) {
-                var map = self.map;
-                var bounds = new google.maps.LatLngBounds();
 
+                var map = self.map;
+
+                // handler for marker clicks - go to latlng view
+                var marker_click_handler = function(event) {
+                  var loc = event.latLng;
+                  var path = "/place/latlon/" + loc.lat()  + "," + loc.lng() + "/";
+                  document.location = path;
+                };
+
+                // Remove all the existing markers from the map
                 _.each(self.markers, function (marker) {
                   marker.setMap(null);
                 });
                 self.markers = [];
 
+                // for each result...
                 _.each( results, function (result) {
+
+                  // ...create a marker and add it to the map
                   var marker = new google.maps.Marker({
                     map: map,
                     position: result.geometry.location,
                     title: result.formatted_address,
                   });
-                  
-                  google.maps.event.addListener(marker, "click", function(event) {
-                    var loc = event.latLng;
-                    var path = "/place/latlon/" + loc.lat()  + "," + loc.lng() + "/";
-                    document.location = path;
-                  });
-                  
+
+                  // ...set the click handler
+                  google.maps.event.addListener(marker, "click", marker_click_handler);
+
+                  // ...add to marker array for later reference
                   self.markers.push(marker);
-                  bounds.extend(marker.getPosition());
                 });
 
-                map.fitBounds(bounds);
+                // Once all the pins are on we want to make sure they are
+                // visible on the map. Use a bounds to cover them all and then
+                // fit the map to it.
+                var marker_bounds = new google.maps.LatLngBounds();
+                _.each( self.markers, function (marker) {
+                  marker_bounds.extend(marker.getPosition());
+                });
+                map.fitBounds(marker_bounds);
+
+                // All done, display a message to the user
                 self.messageHolderHTMLLocation( "geocoder results displayed");
               }
 
