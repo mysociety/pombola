@@ -376,7 +376,9 @@
                   });
                   
                   google.maps.event.addListener(marker, "click", function(event) {
-                      alert("Should go to url for coords: " + event.latLng);
+                    var loc = event.latLng;
+                    var path = "/place/latlon/" + loc.lat()  + "," + loc.lng() + "/";
+                    document.location = path;
                   });
                   
                   self.markers.push(marker);
