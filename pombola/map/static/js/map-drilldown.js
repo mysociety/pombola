@@ -333,6 +333,9 @@
 
       $search_form.submit(
         function (event) {
+
+          self.messageHolderHTMLLocation("geocoder searching");
+
           event.preventDefault();
 
           var current_value = $search_input.attr("value");
@@ -386,7 +389,7 @@
                 });
 
                 map.fitBounds(bounds);
-                self.messageHolderHTMLLocation( "geocoder results displayed on map");
+                self.messageHolderHTMLLocation( "geocoder results displayed");
               }
 
               // other (most likely an error)
