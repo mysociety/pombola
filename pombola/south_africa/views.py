@@ -47,8 +47,11 @@ class LatLonDetailView(PlaceDetailView):
         # I don't really want to add a method onto the Organisation object just to
         # get the postal address of these when it's so nice and general.
         # Tacking on an attribute like this is not lovely, but it does get it there
-        # without having to modify core for the sake of ZA.
+        # without having to modify core for the sake of ZA. Another possibility
+        # would be to use a proxy model, but then we couldn't get it as an attribute
+        # of the place above.
         for office in context['nearest_offices']:
             office.postal_addresses = office.contacts.filter(kind__slug='address')
+            office.related_positions = models.Position.objects.filter(organisation=office)
 
         return context

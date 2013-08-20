@@ -21,6 +21,12 @@
     {% endfor %}
     </ul>
 
+    <ul>
+    {% for object in object.related_positions %}
+      {% include 'core/generic_list_item.html' %}
+    {% endfor %}
+    </ul>
+
     {% if object.num_positions %}
     <p class="meta">{{ object.num_positions }} related positions</p>
     {% endif %}
