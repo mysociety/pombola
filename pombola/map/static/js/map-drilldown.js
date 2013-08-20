@@ -357,7 +357,7 @@
               });                
 
               // found no matches
-              if (status == google.maps.GeocoderStatus.ZERO_RESULTS || results.length == 0) {
+              if (status == google.maps.GeocoderStatus.ZERO_RESULTS || (status == google.maps.GeocoderStatus.OK && results.length == 0) ) {
                 self.messageHolderHTMLLocation( "zero geocoder results");
               }
 
