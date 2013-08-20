@@ -2,6 +2,8 @@
 
   var MzMap = function () {
 
+    this.markers = [];
+
     this.init = function() {
       // Opera Mini
       if ( /Opera Mini/.test(navigator.userAgent) ) {
@@ -19,6 +21,8 @@
       this.maintainMapCenterOnResize();
 
       this.enableGeoLocation();
+
+      this.enableGeocoder();
     };
 
     this.createMap = function () {
@@ -318,6 +322,82 @@
       );
       google.maps.event.addDomListener( window, 'resize',            eventHandler);
       google.maps.event.addDomListener( window, 'orientationchange', eventHandler);
+    };
+
+    this.enableGeocoder = function () {
+      var self = this;
+      var geocoder = new google.maps.Geocoder();
+
+      var $search_form  = $('#map-drilldown-message form.search');
+      var $search_input = $search_form.find('input[type="search"]');
+
+      $search_form.submit(
+        function (event) {
+          console.log('here');
+          event.preventDefault();
+
+          var current_value = $search_input.attr("value");
+
+          var geocoder_args = {
+            address: current_value,
+            bounds: self.make_bounds()
+          };
+
+          geocoder.geocode(
+            geocoder_args,
+            function (results, status) {
+
+              console.log(results, status);
+
+              // filter out results that are not in the area we're interested in (we hint to
+              // google where to search, but they sometimes ignore the hint).
+              var desired_bounds = self.make_bounds();
+              results = _.filter(results, function (result) {
+                return desired_bounds.contains(result.geometry.location);
+              });                
+
+              // found no matches
+              if (status == google.maps.GeocoderStatus.ZERO_RESULTS || results.length == 0) {
+                self.messageHolderHTMLLocation( "zero geocoder results");
+              }
+
+              // found one or several matches
+              else if (status == google.maps.GeocoderStatus.OK) {
+                console.log(_.pluck(results, "formatted_address") );
+
+                var map = self.map;
+                var bounds = new google.maps.LatLngBounds();
+
+                _.each(self.markers, function (marker) {
+                  marker.setMap(null);
+                });
+                self.markers = [];
+
+                _.each( results, function (result) {
+                  console.log(result);
+                  var marker = new google.maps.Marker({
+                    map: map,
+                    position: result.geometry.location,
+                    title: result.formatted_address,
+                  });
+                  self.markers.push(marker);
+                  bounds.extend(marker.getPosition());
+                });
+
+                map.fitBounds(bounds);
+                self.messageHolderHTMLLocation( "geocoder results displayed on map");
+              }
+
+              // other (most likely an error)
+              else {
+                self.messageHolderHTMLLocation( "geocoder error");
+              }
+
+            }
+          );
+        }
+      );
+
     };
 
   };
