@@ -2,7 +2,9 @@
 
   var MzMap = function () {
 
+
     this.markers = [];
+
 
     this.init = function() {
       // Opera Mini
@@ -13,17 +15,11 @@
       }
 
       this.createMap();
-
       this.addMessageControlToMap();
-      this.addCrosshairs();
-
-      this.trackMapMovements();
       this.maintainMapCenterOnResize();
-
-      this.enableGeoLocation();
-
       this.enableGeocoder();
     };
+
 
     this.createMap = function () {
       var map_element = document.getElementById("map-drilldown-canvas");
@@ -50,183 +46,9 @@
 
       var map = this.map = new google.maps.Map(map_element, myOptions);
 
-      // We want a single click/tap to position the map where it was tapped. Add
-      // smarts to wait and be sure that we didn't just trigger on the start of a
-      // double tap, used to zoom. Could instead handle the zoom on dblclick
-      // ourselves, but that could get tricky...
-      var clickTimeoutId = null;
-      google.maps.event.addListener(
-        map,
-        'click',
-        function (event) {
-          clickTimeoutId = setTimeout(
-            function () { map.panTo(event.latLng); },
-            400 // max delay between two clicks
-          );
-        }
-      );
-      google.maps.event.addListener(
-        map,
-        'dblclick',
-        function () {
-          clearTimeout(clickTimeoutId);
-        }
-      );
-
       map.fitBounds( this.make_bounds() );
 
       return map;
-    };
-
-    this.enableGeoLocation = function () {
-      var self = this;
-      var map = this.map;
-      if ( geo_position_js.init() ) {
-        self.messageHolderHTMLInstruction('geolocating');
-        geo_position_js.getCurrentPosition(
-          function (data) { // success
-            var coords = new google.maps.LatLng( data.coords.latitude, data.coords.longitude );
-            map.setCenter( coords );
-            map.setZoom( 10 ); // feels about right for locating a big area
-            self.messageHolderHTMLInstruction('location found');
-            setTimeout(function() {
-              self.messageHolderHTMLInstruction('drag to find');
-            }, 2000);
-          },
-          function () { // failure or error
-            self.messageHolderHTMLInstruction('could not geolocate');
-            setTimeout(function() {
-              self.messageHolderHTMLInstruction('drag to find');
-            }, 2000);
-          }
-        );
-      }
-    };
-
-    // Add crosshairs at the center - see merging of answers at
-    // http://stackoverflow.com/questions/4130237
-    this.addCrosshairs = function () {
-      var map = this.map;
-      var crosshairs_path = window.pombola_settings.static_url + 'images/crosshairs.png?' + window.pombola_settings.static_generation_number
-
-      var crosshairsImage = new google.maps.MarkerImage(
-         crosshairs_path,                 // marker image
-         new google.maps.Size(63, 63),    // marker size
-         new google.maps.Point(0,0),      // marker origin
-         new google.maps.Point(32, 32)    // marker anchor point
-      );
-
-      var crosshairsShape = {
-        coords: [32,32,32,32],           // 1px
-        type: 'rect'                     // rectangle
-      };
-
-      var crosshairsMarker = new google.maps.Marker({
-        map: map,
-        icon: crosshairsImage,
-        position: map.getCenter(),
-        clickable: false,
-        draggable: false,
-        visible:   true
-      });
-
-      crosshairsMarker.bindTo('position', map, 'center');
-
-    };
-
-    this.reducePrecision = function (val) {
-      var precision = 100;
-      return Math.round(val * precision ) / precision;
-    };
-
-    this.trackMapMovements = function () {
-      var self = this;
-      var map = this.map;
-      google.maps.event.addListener(
-        map,
-        'center_changed',
-        function () { self.updateLocation( map.getCenter() ); }
-      );
-    };
-
-
-    this.updateLocation = function (latlng) {
-
-        var lat = this.reducePrecision( latlng.lat() );
-        var lng = this.reducePrecision( latlng.lng() );
-
-        this.fetchAreas( lat, lng );
-    };
-
-
-    // Get the areas hash from the server, or the local cache. Debounce as well
-    // so that we don't issue too many requests during map movements.
-
-    this.fetchAreasCurrentRequest  = null;
-    this.fetchAreasDebounceTimeout = null;
-    this.fetchAreasCurrentURL      = null;
-    this.fetchAreasCache           = {};
-
-    this.fetchAreas = function ( lat, lng ) {
-      var self = this;
-
-      var mapitPointURL = '/mapit/point/4326/' + lng + ',' + lat;
-
-      // Add the con
-      if (mapDrilldownSettings.mapitAreaType) {
-        mapitPointURL += "?type=" + mapDrilldownSettings.mapitAreaType;
-      }
-
-      // console.log(lat, lng, mapitPointURL);
-
-      // Check that we are not at the current location already
-      if (mapitPointURL == self.fetchAreasCurrentURL) {
-        return;
-      }
-      self.fetchAreasCurrentURL = mapitPointURL;
-
-      // clear current request and timeout
-      clearTimeout(self.fetchAreasDebounceTimeout);
-      if (self.fetchAreasCurrentRequest) {
-        self.fetchAreasCurrentRequest.abort();
-      }
-
-      // Check to see if we have this result in cache already
-      if (self.fetchAreasCache[mapitPointURL]) {
-        self.displayAreas( self.fetchAreasCache[mapitPointURL] );
-        return;
-      }
-
-      // Not in cache - fetch from server
-      self.fetchAreasDebounceTimeout = setTimeout(
-        function () {
-          // TODO - catch errors here and display them (ignoring aborts)
-          self.messageHolderHTMLLocation("Fetching area from server&hellip;");
-          self.fetchAreasCurrentRequest = $.getJSON( mapitPointURL, function (data) {
-            self.fetchAreasCache[mapitPointURL] = data;
-            self.displayAreas(data);
-          } );
-        },
-        1000
-      );
-    };
-
-
-    this.displayAreas = function (data) {
-
-      var areas = _.omit( data, ['debug_db_queries'] );
-      var default_message   = 'area not found';
-      var area_descriptions = '';
-
-      _.each( areas, function (area, area_id ) {
-        // console.log(area);
-        if (area_descriptions) { area_descriptions += ', '; }
-        area_descriptions += '<a href="/place/mapit_area/' + area_id + '">' + area.name + ' (' + area.type_name + ')</a>';
-      });
-
-      this.messageHolderHTMLLocation(
-        area_descriptions || default_message
-      );
     };
 
 
@@ -250,10 +72,10 @@
       $('#map-drilldown-message div.instruction').html( this.toMessage(html) );
     };
 
+
     this.messageHolderHTMLLocation = function (html) {
       $('#map-drilldown-message div.location').html( this.toMessage(html) );
     };
-
 
 
     this.make_bounds = function () {
@@ -323,6 +145,7 @@
       google.maps.event.addDomListener( window, 'resize',            eventHandler);
       google.maps.event.addDomListener( window, 'orientationchange', eventHandler);
     };
+
 
     this.enableGeocoder = function () {
       var self = this;

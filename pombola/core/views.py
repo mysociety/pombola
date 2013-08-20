@@ -148,15 +148,6 @@ class PlaceKindList(ListView):
         )
         return context
 
-def place_mapit_area(request, mapit_id):
-
-    place = get_object_or_404(
-        models.Place,
-        mapit_area=mapit_id
-    )
-
-    return redirect('place_election', slug=place.slug)
-
 def position_pt(request, pt_slug):
     """Show current positions with a given PositionTitle"""
     return position(request, pt_slug)
