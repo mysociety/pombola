@@ -333,7 +333,6 @@
 
       $search_form.submit(
         function (event) {
-          console.log('here');
           event.preventDefault();
 
           var current_value = $search_input.attr("value");
@@ -346,8 +345,6 @@
           geocoder.geocode(
             geocoder_args,
             function (results, status) {
-
-              console.log(results, status);
 
               // filter out results that are not in the area we're interested in (we hint to
               // google where to search, but they sometimes ignore the hint).
@@ -363,8 +360,6 @@
 
               // found one or several matches
               else if (status == google.maps.GeocoderStatus.OK) {
-                console.log(_.pluck(results, "formatted_address") );
-
                 var map = self.map;
                 var bounds = new google.maps.LatLngBounds();
 
@@ -374,7 +369,6 @@
                 self.markers = [];
 
                 _.each( results, function (result) {
-                  console.log(result);
                   var marker = new google.maps.Marker({
                     map: map,
                     position: result.geometry.location,
