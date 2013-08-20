@@ -14,7 +14,12 @@
   <section>
     <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
 
-    <div class="kind">{{ object.kind.name }}</div>
+    <ul>
+    {# I imagine we'll only get the one postal address per office... #}
+    {% for address in object.postal_addresses %}
+      <li>{{ address.value }}</li>
+    {% endfor %}
+    </ul>
 
     {% if object.num_positions %}
     <p class="meta">{{ object.num_positions }} related positions</p>
