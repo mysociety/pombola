@@ -2,11 +2,13 @@
 
   var MzMap = function () {
 
+    this.markers = [];
+
     this.init = function() {
       // Opera Mini
       if ( /Opera Mini/.test(navigator.userAgent) ) {
         $(".map-drilldown")
-          .html('<div class="error">Your browser does not support Google Maps. Please <a href="/search/">search</a> for your constituency instead.</div>');
+          .html('<div class="error">' + this.toMessage("browser not supported") + '</div>');
         return;
       }
 
@@ -19,18 +21,13 @@
       this.maintainMapCenterOnResize();
 
       this.enableGeoLocation();
+
+      this.enableGeocoder();
     };
 
     this.createMap = function () {
       var map_element = document.getElementById("map-drilldown-canvas");
       if (!map_element) return false;
-
-      var map_bounds = {
-        north: window.pombola_settings.map_bounds.north,
-        east:  window.pombola_settings.map_bounds.east,
-        south: window.pombola_settings.map_bounds.south,
-        west:  window.pombola_settings.map_bounds.west
-      };
 
       var myOptions = {
 
@@ -76,7 +73,7 @@
         }
       );
 
-      map.fitBounds( this.make_bounds( map_bounds ) );
+      map.fitBounds( this.make_bounds() );
 
       return map;
     };
@@ -244,16 +241,8 @@
     };
 
 
-    this.messages = {
-      "drag to find": 'Drag map to your location or <a href="/search">search by name</a>.',
-      'geolocating':  "Trying to find your current location&hellip;",
-      'could not geolocate': "There was a problem finding your current location.",
-      'location found':      "Map has been centred on your current location.",
-      'area not found':      "No matching areas were found.",
-    };
-
     this.toMessage = function ( key ) {
-      return this.messages[key] || key;
+      return mapDrilldownSettings.i18n[key] || key;
     }
 
 
@@ -267,7 +256,15 @@
 
 
 
-    this.make_bounds = function ( bounds ) {
+    this.make_bounds = function () {
+
+        var bounds = {
+          north: window.pombola_settings.map_bounds.north,
+          east:  window.pombola_settings.map_bounds.east,
+          south: window.pombola_settings.map_bounds.south,
+          west:  window.pombola_settings.map_bounds.west
+        };
+
         var sw = new google.maps.LatLng( bounds.south, bounds.west );
         var ne = new google.maps.LatLng( bounds.north, bounds.east );
         return new google.maps.LatLngBounds( sw, ne );
@@ -325,6 +322,106 @@
       );
       google.maps.event.addDomListener( window, 'resize',            eventHandler);
       google.maps.event.addDomListener( window, 'orientationchange', eventHandler);
+    };
+
+    this.enableGeocoder = function () {
+      var self = this;
+      var geocoder = new google.maps.Geocoder();
+
+      var $search_form  = $('#map-drilldown-message form.search');
+      var $search_input = $search_form.find('input[type="search"]');
+
+      $search_form.submit(
+        function (event) {
+
+          // There is nowhere else for the form to submit to
+          event.preventDefault();
+
+          // Tell the user that we are searching, it's a remote call so may take
+          // a while to come back
+          self.messageHolderHTMLLocation("geocoder searching");
+
+          // construct the search arguments, including country bounds.
+          var geocoder_args = {
+            address: $search_input.attr("value"),
+            bounds: self.make_bounds()
+          };
+
+          // start the geocoding request
+          geocoder.geocode(
+            geocoder_args,
+            function (results, status) {
+
+              // filter out results that are not in the area we're interested in (we hint to
+              // google where to search, but they sometimes ignore the hint).
+              var desired_bounds = self.make_bounds();
+              results = _.filter(results, function (result) {
+                return desired_bounds.contains(result.geometry.location);
+              });
+
+              // found no matches (or no matches that are within our bounds)
+              if (status == google.maps.GeocoderStatus.ZERO_RESULTS || (status == google.maps.GeocoderStatus.OK && results.length == 0) ) {
+                self.messageHolderHTMLLocation( "zero geocoder results");
+              }
+
+              // found some matches
+              else if (status == google.maps.GeocoderStatus.OK) {
+
+                var map = self.map;
+
+                // handler for marker clicks - go to latlng view
+                var marker_click_handler = function(event) {
+                  var loc = event.latLng;
+                  var path = "/place/latlon/" + loc.lat()  + "," + loc.lng() + "/";
+                  document.location = path;
+                };
+
+                // Remove all the existing markers from the map
+                _.each(self.markers, function (marker) {
+                  marker.setMap(null);
+                });
+                self.markers = [];
+
+                // for each result...
+                _.each( results, function (result) {
+
+                  // ...create a marker and add it to the map
+                  var marker = new google.maps.Marker({
+                    map: map,
+                    position: result.geometry.location,
+                    title: result.formatted_address,
+                  });
+
+                  // ...set the click handler
+                  google.maps.event.addListener(marker, "click", marker_click_handler);
+
+                  // ...add to marker array for later reference
+                  self.markers.push(marker);
+                });
+
+                // Once all the pins are on we want to make sure they are
+                // visible on the map. Use a bounds to cover them all and then
+                // fit the map to it.
+                var marker_bounds = new google.maps.LatLngBounds();
+                _.each( self.markers, function (marker) {
+                  marker_bounds.extend(marker.getPosition());
+                });
+                map.fitBounds(marker_bounds);
+
+                // All done, display a message to the user
+                self.messageHolderHTMLLocation( "geocoder results displayed");
+              }
+
+              // other (most likely an error)
+              else {
+                self.messageHolderHTMLLocation( "geocoder error");
+              }
+
+            }
+          );
+        }
+      );
+
     };
 
   };
