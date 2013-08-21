@@ -18,6 +18,8 @@
       this.addMessageControlToMap();
       this.maintainMapCenterOnResize();
       this.enableGeocoder();
+      
+      this.messageHolderHTMLLocation("ready to search");
     };
 
 
