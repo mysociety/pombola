@@ -33,6 +33,10 @@
         // Choose a map type that is clear
         mapTypeId: google.maps.MapTypeId.TERRAIN,
 
+        // use the pointer, to indicate that a click is expected (can still
+        // drag and dbl-click to zoom though, so this is not ideal)
+        draggableCursor: "pointer",
+
         // Use default controls (ie show or hide depending on device) and then
         // switch off irrelevant ones.
         disableDefaultUI:   false,
@@ -40,7 +44,6 @@
         scaleControl:       false,
         streetViewControl:  false,
         overviewMapControl: false
-
       };
 
       var map = this.map = new google.maps.Map(map_element, myOptions);
