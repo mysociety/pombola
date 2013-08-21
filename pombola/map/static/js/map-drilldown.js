@@ -247,11 +247,17 @@
 
                 // Once all the pins are on we want to make sure they are
                 // visible on the map. Use a bounds to cover them all and then
-                // fit the map to it.
-                var marker_bounds = new google.maps.LatLngBounds();
-                _.each( self.markers, function (marker) {
-                  marker_bounds.extend(marker.getPosition());
-                });
+                // fit the map to it. If there is only one result use the viewport
+                // that the API provides (eg someone map have searched for their province)
+                var marker_bounds = null;
+                if (self.markers.length == 1) {
+                  marker_bounds = results[0].geometry.viewport;
+                } else {
+                  marker_bounds = new google.maps.LatLngBounds();
+                  _.each( self.markers, function (marker) {
+                    marker_bounds.extend(marker.getPosition());
+                  });
+                }
                 map.fitBounds(marker_bounds);
 
                 // All done, display a message to the user
