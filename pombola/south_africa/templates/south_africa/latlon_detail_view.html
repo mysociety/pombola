@@ -1,7 +1,17 @@
 {% extends 'core/place_detail.html' %}
 
+{% block object_title %}
+  <h1>Your location is in {{ object.name }}</h1>
+{% endblock %}
+
+{% block object_tagline %}
+{% endblock %}
+
+{% block object_menu %}{% endblock %}
+
 {% block subcontent %}
-  <h2>Constituency Offices nearest to your selected location</h2>
+
+  <h2>Closest Constituency Offices</h2>
 
   <ul class="listing">
     {% for object in nearest_offices %}
