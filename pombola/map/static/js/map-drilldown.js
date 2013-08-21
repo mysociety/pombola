@@ -18,12 +18,13 @@
       this.addMessageControlToMap();
       this.maintainMapCenterOnResize();
       this.enableGeocoder();
-      
+
       this.messageHolderHTMLLocation("ready to search");
     };
 
 
     this.createMap = function () {
+      var self = this;
       var map_element = document.getElementById("map-drilldown-canvas");
       if (!map_element) return false;
 
@@ -47,6 +48,29 @@
       };
 
       var map = this.map = new google.maps.Map(map_element, myOptions);
+
+      // We want a single click/tap to position the map where it was tapped. Add
+      // smarts to wait and be sure that we didn't just trigger on the start of a
+      // double tap, used to zoom. Could instead handle the zoom on dblclick
+      // ourselves, but that could get tricky...
+      var clickTimeoutId = null;
+      google.maps.event.addListener(
+        map,
+        'click',
+        function (event) {
+          clickTimeoutId = setTimeout(
+            function () { self.clickEventHandler(event) },
+            400 // max delay between two clicks
+          );
+        }
+      );
+      google.maps.event.addListener(
+        map,
+        'dblclick',
+        function () {
+          clearTimeout(clickTimeoutId);
+        }
+      );
 
       map.fitBounds( this.make_bounds() );
 
@@ -144,6 +168,15 @@
     };
 
 
+    // redirect to the location of the click
+    this.clickEventHandler = function(event) {
+      var loc = event.latLng;
+      var path = "/place/latlon/" + loc.lat()  + "," + loc.lng() + "/";
+      document.location = path;
+    };
+
+
+
     this.enableGeocoder = function () {
       var self = this;
       var geocoder = new google.maps.Geocoder();
@@ -189,13 +222,6 @@
 
                 var map = self.map;
 
-                // handler for marker clicks - go to latlng view
-                var marker_click_handler = function(event) {
-                  var loc = event.latLng;
-                  var path = "/place/latlon/" + loc.lat()  + "," + loc.lng() + "/";
-                  document.location = path;
-                };
-
                 // Remove all the existing markers from the map
                 _.each(self.markers, function (marker) {
                   marker.setMap(null);
@@ -213,7 +239,7 @@
                   });
 
                   // ...set the click handler
-                  google.maps.event.addListener(marker, "click", marker_click_handler);
+                  google.maps.event.addListener(marker, "click", self.clickEventHandler);
 
                   // ...add to marker array for later reference
                   self.markers.push(marker);
