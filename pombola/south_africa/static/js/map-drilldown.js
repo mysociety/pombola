@@ -33,9 +33,9 @@
         // Choose a map type that is clear
         mapTypeId: google.maps.MapTypeId.TERRAIN,
 
-        // no point letting users zoom in too far for the purposes of finding a
-        // constituency - adds server load and is not helpful to them.
-        maxZoom: 12,
+        // use the pointer, to indicate that a click is expected (can still
+        // drag and dbl-click to zoom though, so this is not ideal)
+        draggableCursor: "pointer",
 
         // Use default controls (ie show or hide depending on device) and then
         // switch off irrelevant ones.
@@ -44,7 +44,6 @@
         scaleControl:       false,
         streetViewControl:  false,
         overviewMapControl: false
-
       };
 
       var map = this.map = new google.maps.Map(map_element, myOptions);
@@ -170,11 +169,10 @@
 
     // redirect to the location of the click
     this.clickEventHandler = function(event) {
-      var loc = event.latLng;
-      var path = "/place/latlon/" + loc.lat()  + "," + loc.lng() + "/";
+      var precision = 3; // suitable for the max zoom we allow
+      var path = "/place/latlon/" + event.latLng.toUrlValue(precision) + "/";
       document.location = path;
     };
-
 
 
     this.enableGeocoder = function () {
@@ -247,18 +245,12 @@
 
                 // Once all the pins are on we want to make sure they are
                 // visible on the map. Use a bounds to cover them all and then
-                // fit the map to it. If there is only one result use the viewport
-                // that the API provides (eg someone map have searched for their province)
-                var marker_bounds = null;
-                if (self.markers.length == 1) {
-                  marker_bounds = results[0].geometry.viewport;
-                } else {
-                  marker_bounds = new google.maps.LatLngBounds();
-                  _.each( self.markers, function (marker) {
-                    marker_bounds.extend(marker.getPosition());
-                  });
-                }
-                map.fitBounds(marker_bounds);
+                // fit the map to it. Use the viewport to create the bounds.
+                var viewport_bounds = new google.maps.LatLngBounds();
+                _.each( results, function (result) {
+                  viewport_bounds.union(result.geometry.viewport);
+                });
+                map.fitBounds(viewport_bounds);
 
                 // All done, display a message to the user
                 self.messageHolderHTMLLocation( "geocoder results displayed");
