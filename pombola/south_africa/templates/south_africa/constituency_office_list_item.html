@@ -1,36 +1,22 @@
-{% load thumbnail %}
+<section>
+  <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
 
-<li class="{{ object.css_class }}{% if not object.show_active %} inactive{% endif %}">
-  {% thumbnail object.primary_image "90x90" crop="center" as im %}
-  <a href="{{ object.get_absolute_url }}">
-    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-  </a>
-  {% empty %}
-  <a href="{{ object.get_absolute_url }}">
-    <img src="{{STATIC_URL}}images/organisation-90x90.jpg" />
-  </a>
-  {% endthumbnail %}
-
-  <section>
-    <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
-
-    <ul>
+  <ul>
     {# I imagine we'll only get the one postal address per office... #}
     {% for address in object.postal_addresses %}
       <li>{{ address.value }}</li>
     {% endfor %}
-    </ul>
+  </ul>
 
-    <ul>
-    {% for object in object.related_positions %}
-      {% include 'core/generic_list_item.html' %}
+  <ul>
+    {% for position in object.related_positions %}
+      {% with object=position.person %}
+        {% include 'core/generic_list_item.html' %}
+      {% endwith %}
     {% endfor %}
-    </ul>
+  </ul>
 
-    {% if object.num_positions %}
+  {% if object.num_positions %}
     <p class="meta">{{ object.num_positions }} related positions</p>
-    {% endif %}
-
-    <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
-  </section>
-</li>
+  {% endif %}
+</section>
