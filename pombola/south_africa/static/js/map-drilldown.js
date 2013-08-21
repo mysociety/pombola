@@ -170,11 +170,10 @@
 
     // redirect to the location of the click
     this.clickEventHandler = function(event) {
-      var loc = event.latLng;
-      var path = "/place/latlon/" + loc.lat()  + "," + loc.lng() + "/";
+      var precision = 3; // suitable for the max zoom we allow
+      var path = "/place/latlon/" + event.latLng.toUrlValue(precision) + "/";
       document.location = path;
     };
-
 
 
     this.enableGeocoder = function () {
