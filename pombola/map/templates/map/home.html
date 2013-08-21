@@ -12,11 +12,6 @@
 
       i18n: {
         "browser not supported": "Your browser does not support Google Maps. Please <a href=\"/search/\">search</a> for your constituency instead.",
-        "drag to find":          "Drag map to your location or search by full place name below.",
-        "geolocating":           "Trying to find your current location&hellip;",
-        "could not geolocate":   "There was a problem finding your current location.",
-        "location found":        "Map has been centred on your current location.",
-        "area not found":        "No matching areas were found.",
 
         "zero geocoder results":      "Place name not found, please try another",
         "geocoder error":             "There was a problem searching for that place name",
@@ -65,10 +60,6 @@
     font-size: 16px;
   }
 
-  #map-drilldown-message div.location {
-    margin-top: 0.5em;
-  }
-
 </style>
 
 
@@ -79,8 +70,7 @@
   </div>
 
   <div id="map-drilldown-message" class="gmap-control">
-    <div class="instruction">loading&hellip;</div>
-    <div class="location">&nbsp;</div>
+    <div class="location">loading&hellip;</div>
     <form action="#" class="search">
       <input type="search" placeholder="Full place name" />
       <input type="submit" value="Search" />

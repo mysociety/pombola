@@ -68,11 +68,6 @@
     }
 
 
-    this.messageHolderHTMLInstruction = function (html) {
-      $('#map-drilldown-message div.instruction').html( this.toMessage(html) );
-    };
-
-
     this.messageHolderHTMLLocation = function (html) {
       $('#map-drilldown-message div.location').html( this.toMessage(html) );
     };
