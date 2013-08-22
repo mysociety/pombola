@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Map
+            :: Pombola South Africa
+        </title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <meta http-equiv="cleartype" content="on">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+
+        <link href="/css/jquery-ui-1.8.17.custom.css?36" rel="stylesheet" type="text/css" />
+
+
+        <link rel="stylesheet" type="text/css" href="/css/south-africa.css?36" />
+
+
+            <script type="text/javascript" charset="utf-8">
+                window.pombola_settings = {
+                    google_analytics_account : '',
+                    static_url:                '/',
+                    static_generation_number:  '36',
+                    extra_js: [],
+                    map_bounds: {
+                        north: -22.06,
+                        east:  32.95,
+                        south: -35.0,
+                        west:  16.3
+                    }
+                }
+                    ;
+
+
+                pombola_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js' );
+
+                var mapDrilldownSettings = {
+
+
+                    i18n: {
+                        "browser not supported": "Your browser does not support Google Maps. Please <a href=\"/search/\">search</a> for your constituency instead.",
+                        "ready to search": "Please search for a place name, or click on the map",
+
+                        "zero geocoder results":      "Place name not found, please try another",
+                        "geocoder error":             "There was a problem searching for that place name",
+                        "geocoder results displayed": "Click on a pin to see your nearest constituency offices",
+                        "geocoder searching":         "Searching &hellip;"
+                    }
+                }
+                        ;
+
+                pombola_settings.extra_js.push( 'js/map-drilldown.js' );
+
+
+            </script>
+
+
+            <!--[if (lt IE 9) & (!IEMobile)]>
+<script src="/js/respond.v1.1.0.min.js">
+</script>
+<![endif]-->
+
+            <script src="/js/libs/modernizr-2.0.6.custom.js">
+            </script>
+            <script src="/js/loader.js?36">
+            </script>
+
+            <link rel="icon" type="image/png" href="/images/favicon.png">
+
+
+
+
+    </head>
+    <body >
+
+
+
+
+        <div id="staging_header">
+            This is a staging site - any data saved here
+            <strong>
+                may be deleted
+            </strong>
+            .
+        </div>
+
+        <div id="header-top" class="clearfix">
+            <div class=" ">
+
+                <div id="primary-menu-search" class="">
+
+                    <div id="header-menu">
+
+                        <div class="block block-nice_menus block-first block-last" id="block-nice_menus-3">
+                            <h2 class="title">
+                            </h2>
+                            <div class="content">
+                                <ul class="nice-menu nice-menu-down" id="nice-menu-3">
+                                    <li class="menu-92 menu-path-front active-trail first  odd ">
+                                        <a href="/" class="active">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <li class="menu-100 menu-path-node-10006 even ">
+                                        <a href="/free-email-alerts" title="">
+                                            Free Alerts
+                                        </a>
+                                    </li>
+                                    <li class="menu-99 menu-path-node-10005 odd ">
+                                        <a href="/subscription" title="">
+                                            Subscription
+                                        </a>
+                                    </li>
+                                    <li class="menu-109 menuparent menu-path-node-10002 even ">
+                                        <a href="/what-is-pmg" title="">
+                                            About
+                                        </a>
+                                        <ul>
+                                            <li class="menu-9085 menu-path-node-10002 first  odd ">
+                                                <a href="/what-is-pmg" title="What is the PMG?">
+                                                    What is the PMG?
+                                                </a>
+                                            </li>
+                                            <li class="menu-9073 menu-path-node-35888 even ">
+                                                <a href="/what-we-do" title="What We Do">
+                                                    What We Do
+                                                </a>
+                                            </li>
+                                            <li class="menu-9075 menu-path-node-35890 odd ">
+                                                <a href="/board-members-staff" title="Board members &amp; Staff">
+                                                    Board members &amp; Staff
+                                                </a>
+                                            </li>
+                                            <li class="menu-9076 menu-path-node-35891 even ">
+                                                <a href="/who-are-our-funders" title="Who are our funders?">
+                                                    Who are our funders?
+                                                </a>
+                                            </li>
+                                            <li class="menu-9077 menu-path-node-35892 odd ">
+                                                <a href="/who-are-our-monitors" title="Who are our monitors?">
+                                                    Who are our monitors?
+                                                </a>
+                                            </li>
+                                            <li class="menu-9078 menu-path-node-35893 even ">
+                                                <a href="/disclaimer-copyright" title="Disclaimer &amp; Copyright">
+                                                    Disclaimer &amp; Copyright
+                                                </a>
+                                            </li>
+                                            <li class="menu-6919 menu-path-faq odd  last ">
+                                                <a href="/faq" title="Frequently Asked Questions">
+                                                    FAQ
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-91 menu-path-node-10044 odd ">
+                                        <a href="/contact-pmg" title="">
+                                            Contact
+                                        </a>
+                                    </li>
+                                    <li class="menu-8970 menu-path-user-register even ">
+                                        <a href="/user/register" title="Register">
+                                            Register
+                                        </a>
+                                    </li>
+                                    <li class="menu-7112 menu-path-user-login odd  last ">
+                                        <a href="/user/login" title="">
+                                            Login
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/"  accept-charset="UTF-8" method="post" id="search-theme-form">
+                        <div>
+                            <div id="search" class="container-inline">
+                                <div class="form-item" id="edit-search-theme-form-1-wrapper">
+                                    <label for="edit-search-theme-form-1">
+                                        Search this site:
+                                    </label>
+                                    <input type="text" maxlength="128" name="search_theme_form" id="edit-search-theme-form-1" size="15" value="" title="Enter the terms you wish to search for." class="form-text" />
+                                </div>
+                                <input type="submit" name="op" id="edit-submit" value="Search"  class="form-submit" />
+                                <input type="hidden" name="form_build_id" id="form-8c727c015984e6ffa39a42790c7b1b5c" value="form-8c727c015984e6ffa39a42790c7b1b5c"  />
+                                <input type="hidden" name="form_id" id="edit-search-theme-form" value="search_theme_form"  />
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div id="logo-top" class="">
+                    <a href="/" title="Home">
+                        <img src="http://d2zmx6mlqh7g3a.cloudfront.net/cdn/farfuture/13ddm3-f450levjxu2QnIcaALXqVSCgq_CoI2lFZHgw/mtime:1328092081/sites/all/themes/pmg_2012/logo.png" alt="Home" />
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="header-navigation">
+            <div class=" ">
+                <div id="nav" class="">
+                    <div id="yuimenu">
+                        <!-- YUI Menu div-->
+                        <div id="navigation" class="yuimenubar yuimenubarnav">
+                            <div class="bd">
+                                <ul  class="first-of-type">
+                                    <li class="yuimenubaritem">
+                                        <a href="/committee-meeting-information" class="yuimenubaritemlabel">
+                                            Committee Meetings
+                                        </a>
+                                        <div id="Committee Meetings" class="yuimenu">
+                                            <div class="bd">
+                                                <ul>
+                                                    <li class="">
+                                                        <a href="/minutes" class="">
+                                                            Recent Reports
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/committees" class="">
+                                                            All Committee Reports
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="/audio" class="">
+                                                            Audio Recordings
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="/programmes/commem" class="">
+                                                            Committee Membership
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="/schedule" class="">
+                                                            Daily Schedule
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="yuimenubaritem">
+                                        <a href="/legislation" class="yuimenubaritemlabel">
+                                            Legislation
+                                        </a>
+                                        <div id="Legislation" class="yuimenu">
+                                            <div class="bd">
+                                                <ul>
+                                                    <li class="">
+                                                        <a href="/bill" class="">
+                                                            Bills
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="/bills-status" class="">
+                                                            Bills Status
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="yuimenubaritem">
+                                        <a href="http://www.pmg.org.za/node/30328" class="yuimenubaritemlabel">
+                                            MP
+                                        </a>
+                                        <div id="MP" class="yuimenu">
+                                            <div class="bd">
+                                                <ul>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30335" class="">
+                                                            Contact an MP
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30336" class="">
+                                                            Members of the National Assembly
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30337" class="">
+                                                            Members of the NCOP
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30338" class="">
+                                                            Committee Chairpersons &amp; Support Staff
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="/mp-corner" class="">
+                                                            MP Corner Blogs
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="yuimenubaritem">
+                                        <a href="/parliament-info" class="yuimenubaritemlabel">
+                                            Parliament Info
+                                        </a>
+                                        <div id="Parliament Info" class="yuimenu">
+                                            <div class="bd">
+                                                <ul>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30322" class="">
+                                                            Programmes &amp; Schedules
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30331" class="">
+                                                            Political Party Representation
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30326" class="">
+                                                            Rules of Parliament
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30330" class="">
+                                                            Legislative Process / Links
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="http://www.pmg.org.za/node/30329" class="">
+                                                            Code of Conduct
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="/policy_docs" class="">
+                                                            Relevant Docs
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="/programmes/comreports" class="">
+                                                            Tabled Committee Reports
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="/hansard" class="">
+                                                            Hansard
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="yuimenubaritem">
+                                        <a href="/programmes/hearings" class="yuimenubaritemlabel">
+                                            Call for Comment
+                                        </a>
+                                    </li>
+                                    <li class="yuimenubaritem">
+                                        <a href="/questions_replies" class="yuimenubaritemlabel">
+                                            MP Questions
+                                        </a>
+                                    </li>
+                                    <li class="yuimenubaritem">
+                                        <a href="/briefings" class="yuimenubaritemlabel">
+                                            Minister Briefings
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="social-links" class="">
+                    <div id="twitter-button" class="social-button">
+                        <a class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" href="https://twitter.com/PMG_SA">
+                            @PMG_SA
+                        </a>
+
+                        <script>
+                            !function(d,s,id){
+                                var js,fjs=d.getElementsByTagName(s)[0];
+                                if(!d.getElementById(id)){
+                                    js=d.createElement(s);
+                                    js.id=id;
+                                    js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+                        </script>
+                    </div>
+                    <div class="social-button" id="facebook-button">
+                        <a href="http://www.facebook.com/pmgsouthafrica" title="Find PMG on Facebook" rel="nofollow" target="_blank">
+                            <img src="http://d2zmx6mlqh7g3a.cloudfront.net/cdn/farfuture/pLN7BkzPkqaoYNC97mk_wI8TxpOurV4d5Fb_2WZ5I5I/mtime:1364050698/sites/all/themes/pmg_2012/images/PMG-on-facebook.png" alt="Find PMG on Facebook" >
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+            <div id="page">
+                <div class="page-wrapper wrapper" id="hfWrap">
+
+
+
+                    <style type="text/css">
+                        #map-drilldown-canvas {
+                            background-color: #ccc;
+                            width: 100%;
+                            height: 400px;
+                        }
+
+                        .gmap-control {
+                            display: none;
+                            background-color: white;
+                            margin: 5px;
+                            padding: 5px;
+                            border: 2px solid black;
+                            text-align: center;
+                            cursor: pointer;
+                            font-family: Arial, sans-serif;
+                            font-size: 12px;
+                        }
+
+                        #map-drilldown-message {
+                            margin-top: 30px;
+                            width: 80%;
+                            font-size: 16px;
+                            background: rgb(255, 255, 255);
+                            background: rgba(255, 255, 255, 0.7);
+                        }
+
+                    </style>
+
+
+                    <div class="map-drilldown">
+
+                        <div id="map-drilldown-canvas">
+                            loading&hellip;
+                        </div>
+
+                        <div id="map-drilldown-message" class="gmap-control">
+                            <div class="location">
+                                loading&hellip;
+                            </div>
+                            <form action="#" class="search">
+                                <input type="search" placeholder="Full place name" />
+                                <input type="submit" value="Search" />
+                            </form>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <br clear="both">
+
+                </div>
+
+            </div>
+            <script>
+                // Make sure the wrapper has a minimum height of the
+                // absolutely-positioned sidebar within it.
+                var pro_h = document.getElementById('hfProfileInfo').offsetHeight + 210;
+                document.getElementById('hfWrap').style.minHeight = pro_h + 'px';
+            </script>
+
+            <footer id="site-footer">
+                <div class="wrapper">
+
+                    <div id="footer-menu" class="footer-section">
+                        <h4>
+                            Pombola South Africa
+                        </h4>
+                        <ul class="nav">
+
+
+
+
+                            <li>
+                                <a href="/">
+                                    Home
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/">
+                                    Organisations
+                                </a>
+
+                            </li>
+
+                            <li>
+                                <a href="/">
+                                    People
+                                </a>
+
+                            </li>
+
+                            <li>
+                                <a href="/info/about">
+                                    About
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>
+                            About
+                        </h4>
+                        <ul class="utilities">
+                            <li>
+                                <a href="/info/policies">
+                                    Privacy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/feedback/?url=http://za-pombola.staging.mysociety.org/map/" class="feedback_link">
+                                    Give us feedback
+                                </a>
+                            </li>
+
+
+
+
+                            <li>
+                                current_user_id:
+                                <span id="current_user_id">
+                                    0
+                                </span>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="attribution">
+
+                    <p>
+                        This site runs on
+                        <a href="https://github.com/mysociety/pombola">
+                            open source code
+                        </a>
+                        written by
+                        <a href="http://www.mysociety.org">
+                            mySociety
+                        </a>
+                        .
+                    </p>
+
+
+
+
+                </div>
+            </footer>
+            <div id="fb-root">
+            </div>
+    </body>
+</html>

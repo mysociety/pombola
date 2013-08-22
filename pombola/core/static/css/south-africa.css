@@ -3112,6 +3112,18 @@ ul.social-buttons li {
   padding: 4px;
 }
 
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #fff;
+  font: 76% Verdana,Arial,Helvetica,sans-serif;
+}
+
 #logo {
   background: url("//placehold.it/147x23") 0 center no-repeat;
 }
@@ -3124,4 +3136,153 @@ ul.social-buttons li {
 #main-menu {
   background: #E23D28;
   /*is this working?*/
+}
+
+#header-top {
+  background-color: #fff;
+}
+
+.yuimenubaritem .bd,
+#nice-menu-3 ul {
+  display: none;
+}
+
+#search {
+  display: none;
+}
+@media (min-width: 755px) {
+  #search {
+    display: block;
+  }
+}
+
+#logo-top {
+  width: 100%;
+  text-align: center;
+}
+@media (min-width: 755px) {
+  #logo-top {
+    width: 50%;
+    text-align: left;
+  }
+}
+#logo-top img {
+  max-width: 100%;
+  padding: 0.5em 1em;
+}
+
+#primary-menu-search {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+@media (min-width: 755px) {
+  #primary-menu-search {
+    text-align: right;
+    width: 50%;
+    float: right;
+    margin-top: -1em;
+  }
+}
+
+#nice-menu-3,
+#header-navigation {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+#nice-menu-3 li,
+#header-navigation li {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+#nice-menu-3 li a,
+#header-navigation li a {
+  display: block;
+  font-weight: bold;
+  font-size: 0.65em;
+  padding: 0.3em 0.5em 0.3em 0;
+  color: #2a4d75;
+  border-right: 1px solid #99ccff;
+}
+@media (min-width: 950px) {
+  #nice-menu-3 li a,
+  #header-navigation li a {
+    font-size: 0.8em;
+    padding: 0.3em 5px;
+  }
+}
+#nice-menu-3 li.menu-path-user-login a,
+#header-navigation li.menu-path-user-login a {
+  border-right: none;
+}
+
+#header-navigation {
+  text-align: center;
+}
+#header-navigation ul {
+  padding-left: 0;
+  margin-left: 0;
+}
+#header-navigation li a {
+  color: #000;
+  padding: 0.5em 1em;
+  border: none;
+}
+#header-navigation li a:hover {
+  text-decoration: none;
+  background-color: #bad8fb;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#bad8fb), to(#e6f2fe));
+  /* Chrome, Safari 4+ */
+  background-image: -webkit-linear-gradient(top, #bad8fb, #e6f2fe);
+  /* Chrome 10-25, iOS 5+, Safari 5.1+ */
+  background-image: -moz-linear-gradient(top, #bad8fb, #e6f2fe);
+  /* Firefox 3.6-15 */
+  background-image: -o-linear-gradient(top, #bad8fb, #e6f2fe);
+  /* Opera 11.10-12.00 */
+  background-image: linear-gradient(to bottom, #bad8fb, #e6f2fe);
+  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
+#social-links {
+  display: none;
+}
+
+#header-top {
+  display: block;
+  width: 100%;
+  clear: both;
+  padding: 0.5em 0.25em;
+}
+@media (min-width: 640px) {
+  #header-top {
+    padding: 1em 2em;
+  }
+}
+
+#header-navigation {
+  background-color: #0178d8;
+}
+
+#search {
+  font-size: 1.3em;
+  text-align: right;
+}
+#search .form-text {
+  width: 10em;
+  padding: 0px 0.5em;
+}
+#search .form-text,
+#search .form-submit {
+  border: 1px solid #336699;
+  font-size: 1.1em;
+  height: 1.5em;
+  vertical-align: middle;
+}
+
+.container-inline div,
+.container-inline label {
+  display: inline;
 }

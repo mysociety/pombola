@@ -1,3 +1,13 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
+html,
+body
+{
+    background-color: #fff;
+    font: 76% Verdana,Arial,Helvetica,sans-serif;
+}
 #logo {
   background: url('//placehold.it/147x23') 0 center no-repeat;
   @media only all and (min-width: 640px), print {
@@ -7,4 +17,151 @@
 
 #main-menu {
     background: #E23D28; /*is this working?*/
+}
+
+
+
+//
+//  Recreated responsive PMG header
+//
+
+#header-top{
+    background-color: #fff;
+}
+
+//Hide dropdown menus
+.yuimenubaritem .bd,
+#nice-menu-3 ul
+{ display:none; }
+
+// Hide search form on small screen
+#search{
+    display: none;
+    @media (min-width: 755px) {
+        display: block;
+    }
+}
+
+#logo-top{
+    // Logo full width on small screen
+    width: 100%;
+    text-align: center;
+    @media (min-width: 755px) {
+        // logo half width on large screen
+        width:50%;
+        text-align: left;
+    }
+
+    img{
+        // logo max width container
+        max-width: 100%;
+        padding: 0.5em 1em;
+    }
+}
+
+#primary-menu-search{
+    width:100%;
+    margin: auto;
+    text-align: center;
+    @media (min-width: 755px) {
+        text-align: right;
+        width: 50%;
+        float:right;
+        margin-top: -1em;
+    }
+}
+#nice-menu-3,
+#header-navigation
+{
+    list-style: none;
+    padding-left:0;
+    margin-left:0;
+    li{
+        list-style: none;
+        display: inline-block;
+        padding:0;
+        margin: 0;
+
+        a{
+            display: block;
+            font-weight: bold;
+            font-size: 0.65em;
+            padding: 0.3em 0.5em 0.3em 0;
+            @media (min-width: 950px) {
+                font-size: 0.8em;
+                padding: 0.3em 5px;
+            }
+
+            color: rgb(42, 77, 117);
+            border-right: 1px solid rgb(153, 204, 255);
+        }
+        &.menu-path-user-login{
+            a{
+                border-right: none;
+            }
+        }
+    }
+}
+
+#header-navigation{
+    text-align: center;
+    ul{
+        padding-left:0;
+        margin-left:0;
+    }
+
+    li a{
+        color:#000;
+        padding: 0.5em 1em;
+        border: none;
+
+        &:hover{
+            text-decoration: none;
+            background-color: #bad8fb;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#bad8fb), to(#e6f2fe)); /* Chrome, Safari 4+ */
+            background-image: -webkit-linear-gradient(top, #bad8fb, #e6f2fe); /* Chrome 10-25, iOS 5+, Safari 5.1+ */
+            background-image:    -moz-linear-gradient(top, #bad8fb, #e6f2fe); /* Firefox 3.6-15 */
+            background-image:      -o-linear-gradient(top, #bad8fb, #e6f2fe); /* Opera 11.10-12.00 */
+            background-image:         linear-gradient(to bottom, #bad8fb, #e6f2fe); /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+        }
+    }
+}
+#social-links{
+    display:none;
+}
+
+#header-top{
+    display:block;
+    width:100%;
+    clear:both;
+    padding: 0.5em 0.25em;
+    @media (min-width: 640px) {
+        padding: 1em 2em;
+    }
+}
+
+#header-navigation{
+    background-color: rgb(1, 120, 216);
+}
+
+#search{
+    font-size: 1.3em;
+    text-align: right;
+     .form-text {
+        width: 10em;
+        padding: 0px 0.5em;
+    }
+    .form-text,
+    .form-submit
+    {
+        border: 1px solid rgb(51, 102, 153);
+        font-size: 1.1em;
+        height: 1.5em;
+        vertical-align: middle;
+    }
+}
+.container-inline div,
+.container-inline label
+{
+    display: inline;
 }
