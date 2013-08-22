@@ -10,25 +10,183 @@
 
 {% endcomment %}
 
-<li><a href="{% url "home" %}">Home</a></li>
-
-<li><a href="{% url "home" %}">Organisations</a>
-  {% if include_sub_menu_entries %}
-    <ul id="organisations-overview">
-      <li><a href="{% url "organisation_kind" slug='party' %}">Political Parties</a></li>
-      <li><a href="{% url "organisation_kind" slug='committee' %}">Committees</a></li>
+<li>
+    <a href="/committee-meeting-information">
+        Committee Meetings
+    </a>
+    {% if include_sub_menu_entries %}
+    <ul>
+        <li class="">
+            <a href="/minutes" class="">
+                Recent Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="http://www.pmg.org.za/committees" class="">
+                All Committee Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="/audio" class="">
+                Audio Recordings
+            </a>
+        </li>
+        <li class="">
+            <a href="/programmes/commem" class="">
+                Committee Membership
+            </a>
+        </li>
+        <li class="">
+            <a href="/schedule" class="">
+                Daily Schedule
+            </a>
+        </li>
     </ul>
-  {% endif %}
+    {% endif %}
 </li>
 
-<li><a href="{% url "home" %}">People</a>
-  {% if include_sub_menu_entries %}
-    <ul id="people-overview">
-      <li><a href="{% url "position_pt_ok_o" pt_slug='member' ok_slug='house' o_slug='national-assembly' %}?order=name">NA Members</a></li>
-      <li><a href="{% url "position_pt_ok_o" pt_slug='delegate' ok_slug='house' o_slug='ncop' %}?order=name">NCOP Delegates</a></li>
-      <li><a href="{% url "organisation_people" slug='national-executive' %}">National Executive</a></li>
+<li>
+    <a href="/legislation">
+        Legislation
+    </a>
+    {% if include_sub_menu_entries %}
+    <ul>
+        <li class="">
+            <a href="/bill" class="">
+                Bills
+            </a>
+        </li>
+        <li class="">
+            <a href="/bills-status" class="">
+                Bills Status
+            </a>
+        </li>
     </ul>
-  {% endif %}
+    {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug='about' %}">About</a></li>
+<li>
+    <a href="http://www.pmg.org.za/node/30328">
+        MP
+    </a>
+    {% if include_sub_menu_entries %}
+    <ul>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30335" class="">
+                Contact an MP
+            </a>
+        </li>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30336" class="">
+                Members of the National Assembly
+            </a>
+        </li>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30337" class="">
+                Members of the NCOP
+            </a>
+        </li>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30338" class="">
+                Committee Chairpersons &amp; Support Staff
+            </a>
+        </li>
+        <li class="">
+            <a href="/mp-corner" class="">
+                MP Corner Blogs
+            </a>
+        </li>
+    </ul>
+    {% endif %}
+</li>
+
+<li>
+    <a href="/parliament-info">
+        Parliament Info
+    </a>
+    {% if include_sub_menu_entries %}
+    <ul>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30322" class="">
+                Programmes &amp; Schedules
+            </a>
+        </li>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30331" class="">
+                Political Party Representation
+            </a>
+        </li>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30326" class="">
+                Rules of Parliament
+            </a>
+        </li>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30330" class="">
+                Legislative Process / Links
+            </a>
+        </li>
+        <li class="">
+            <a href="http://www.pmg.org.za/node/30329" class="">
+                Code of Conduct
+            </a>
+        </li>
+        <li class="">
+            <a href="/policy_docs" class="">
+                Relevant Docs
+            </a>
+        </li>
+        <li class="">
+            <a href="/programmes/comreports" class="">
+                Tabled Committee Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="/hansard" class="">
+                Hansard
+            </a>
+        </li>
+    </ul>
+    {% endif %}
+</li>
+
+<li>
+    <a href="/programmes/hearings">
+        Call for Comment
+    </a>
+</li>
+
+<li>
+    <a href="/questions_replies">
+        MP Questions
+    </a>
+</li>
+
+<li>
+    <a href="/briefings">
+        Minister Briefings
+    </a>
+</li>
+
+
+
+<li>
+    <a class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" href="https://twitter.com/PMG_SA">
+        @PMG_SA
+    </a>
+    
+    <script>
+        !function(d,s,id){
+            var js,fjs=d.getElementsByTagName(s)[0];
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    </script>
+</li>
+
+<li>
+    <a href="http://www.facebook.com/pmgsouthafrica" title="Find PMG on Facebook" rel="nofollow" target="_blank">
+        <img src="http://d2zmx6mlqh7g3a.cloudfront.net/cdn/farfuture/pLN7BkzPkqaoYNC97mk_wI8TxpOurV4d5Fb_2WZ5I5I/mtime:1364050698/sites/all/themes/pmg_2012/images/PMG-on-facebook.png" alt="Find PMG on Facebook" >
+    </a>
+</li>
