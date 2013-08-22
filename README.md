@@ -29,6 +29,8 @@ similarly):
 
 Please see [docs/INSTALL.txt](https://github.com/mysociety/pombola/blob/master/docs/INSTALL.txt)
 
+To change your site's look and feel please see the [styling notes](https://github.com/mysociety/pombola/blob/master/docs/STYLING_NOTES.md).
+
 
 ## Troubleshooting
 
