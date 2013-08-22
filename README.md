@@ -6,7 +6,7 @@ especially politicians.
 Please see the [Operations Manual](http://goo.gl/uaXup) which covers all aspects of running a Pombola site.
 
 For an overview of the system please see the files in docs/ - especially
-[OVERVIEW.txt](https://github.com/mysociety/pombola/blob/master/docs/OVERVIEW.txt)
+[OVERVIEW.md](https://github.com/mysociety/pombola/blob/master/docs/OVERVIEW.md)
 
 
 ## Community
