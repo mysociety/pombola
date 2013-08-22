@@ -71,7 +71,7 @@ body
     }
 }
 #nice-menu-3,
-#header-navigation
+#main-menu
 {
     list-style: none;
     padding-left:0;
@@ -81,6 +81,14 @@ body
         display: inline-block;
         padding:0;
         margin: 0;
+
+        iframe{ // Twitter button
+            margin-top: 0.8em;
+        }
+        img{ // Facebook button - may need to add a class if too broad
+            position: relative;
+            top: 0.5em;
+        }
 
         a{
             display: block;
@@ -102,30 +110,71 @@ body
         }
     }
 }
+#main-menu nav ul li a // this specific to overide base styles
+{
+    background:none;
+    display: block;
+    color:#000;
+    padding: 0.5em 1em;
+    border: none;
+    font-weight: bold;
+    font-size: 0.65em;
+    height: auto;
+    padding: 0.3em 0.5em 0.3em 0;
+    line-height: 3em;
+    @media (min-width: 950px) {
+        font-size: 0.8em;
+        padding: 0.5em 1em;
+    }
 
-#header-navigation{
+    &:hover,
+    &.active{
+        text-decoration: none;
+        background-color: #bad8fb;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#bad8fb), to(#e6f2fe)); /* Chrome, Safari 4+ */
+        background-image: -webkit-linear-gradient(top, #bad8fb, #e6f2fe); /* Chrome 10-25, iOS 5+, Safari 5.1+ */
+        background-image:    -moz-linear-gradient(top, #bad8fb, #e6f2fe); /* Firefox 3.6-15 */
+        background-image:      -o-linear-gradient(top, #bad8fb, #e6f2fe); /* Opera 11.10-12.00 */
+        background-image:         linear-gradient(to bottom, #bad8fb, #e6f2fe); /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+    }
+}
+#main-menu nav ul li:hover ul li a{ // Submenu - this specific to override
+    background-color: #e6f2fe;
+    font-size: 0.65em;
+    &:hover{
+        background-color: #bad8fb;
+    }
+}
+#main-menu nav ul li.active > a{ // this specific to override
+    background-color: #bad8fb;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#bad8fb), to(#e6f2fe)); /* Chrome, Safari 4+ */
+    background-image: -webkit-linear-gradient(top, #bad8fb, #e6f2fe); /* Chrome 10-25, iOS 5+, Safari 5.1+ */
+    background-image:    -moz-linear-gradient(top, #bad8fb, #e6f2fe); /* Firefox 3.6-15 */
+    background-image:      -o-linear-gradient(top, #bad8fb, #e6f2fe); /* Opera 11.10-12.00 */
+    background-image:         linear-gradient(to bottom, #bad8fb, #e6f2fe);
+}
+
+#main-menu{
+    background-color: rgb(1, 120, 216);
     text-align: center;
     ul{
         padding-left:0;
         margin-left:0;
     }
-
-    li a{
-        color:#000;
+}
+#main-menu nav ul li {
+    display: inline;
+    height: auto;
+    border-right: none;
+}
+#main-menu nav ul li.active > a{
+    padding: 0.3em 0.5em 0.3em 0;
+    border:none !important;
+    @media (min-width: 950px) {
         padding: 0.5em 1em;
-        border: none;
-
-        &:hover{
-            text-decoration: none;
-            background-color: #bad8fb;
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#bad8fb), to(#e6f2fe)); /* Chrome, Safari 4+ */
-            background-image: -webkit-linear-gradient(top, #bad8fb, #e6f2fe); /* Chrome 10-25, iOS 5+, Safari 5.1+ */
-            background-image:    -moz-linear-gradient(top, #bad8fb, #e6f2fe); /* Firefox 3.6-15 */
-            background-image:      -o-linear-gradient(top, #bad8fb, #e6f2fe); /* Opera 11.10-12.00 */
-            background-image:         linear-gradient(to bottom, #bad8fb, #e6f2fe); /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-        }
     }
 }
+
 #social-links{
     display:none;
 }
@@ -138,10 +187,6 @@ body
     @media (min-width: 640px) {
         padding: 1em 2em;
     }
-}
-
-#header-navigation{
-    background-color: rgb(1, 120, 216);
 }
 
 #search{
