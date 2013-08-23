@@ -14,7 +14,7 @@ psycopg2
 ### Django related
 Django>=1.4,<1.5
 django-pagination
-South
+South>=0.8
 
 
 ### Pombola dependencies
@@ -27,11 +27,8 @@ Markdown
 ### Use a fork of django-markitup so that we get correct truthiness
 -e hg+https://bitbucket.org/evdb/django-markitup/@fe49ef12c614#egg=django-markitup
 
-xapian-haystack==1.1.5beta
-django-haystack==1.2.7
-# note that this might not be a complete install. You my also need to install the bindings.
-# see http://www.epicserve.com/blog/2010/oct/16/installing-xapian-osx-python-bindings/
-# or if using homebrew do `brew install xapian --python`
+pyelasticsearch
+django-haystack>=2.1.0
 
 # Testing helpers 
 httplib2

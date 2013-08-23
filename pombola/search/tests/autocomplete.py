@@ -83,7 +83,7 @@ class AutocompleteTest(unittest.TestCase):
                              for i in actual_output ]
             
             self.assertEqual(
-                actual_names,
-                expected_output,
+                set(actual_names),
+                set(expected_output),
                 msg="\n\nTesting input: '%s'" % test_input
             )

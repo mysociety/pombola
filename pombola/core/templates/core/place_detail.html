@@ -80,6 +80,8 @@
     {% endwith %}
   {% endif %}
 
-  {% include 'disqus_comments.html' %}
+  {% block disqus_comments %}
+    {% include 'disqus_comments.html' %}
+  {% endblock %}
 
 {% endblock %}

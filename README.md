@@ -6,7 +6,7 @@ especially politicians.
 Please see the [Operations Manual](http://goo.gl/uaXup) which covers all aspects of running a Pombola site.
 
 For an overview of the system please see the files in docs/ - especially
-[OVERVIEW.txt](https://github.com/mysociety/pombola/blob/master/docs/OVERVIEW.txt)
+[OVERVIEW.md](https://github.com/mysociety/pombola/blob/master/docs/OVERVIEW.md)
 
 
 ## Community
@@ -28,6 +28,8 @@ similarly):
 ## Installing
 
 Please see [docs/INSTALL.txt](https://github.com/mysociety/pombola/blob/master/docs/INSTALL.txt)
+
+To change your site's look and feel please see the [styling notes](https://github.com/mysociety/pombola/blob/master/docs/STYLING_NOTES.md).
 
 
 ## Troubleshooting

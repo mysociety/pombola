@@ -8,25 +8,29 @@
     {% include "disqus_javascript.html" %}
   {% endif %}
 
-    <div class="title-space">
+    {% block title_space %}
+      <div class="title-space">
 
-      <h1>{{ object.title }} {{ object.name }}</h1>
-      
-      {% block object_tagline %}
-      {% endblock %}
+        {% block object_title %}
+          <h1>{{ object.title }} {{ object.name }}</h1>
+        {% endblock %}
         
-      {% block object_menu %}
-      <div class="object_menu">
-        <nav>
-          <ul>
-            {% block object_menu_links %}
-            {% endblock %}
-          </ul>
-        </nav>
+        {% block object_tagline %}
+        {% endblock %}
+        
+        {% block object_menu %}
+        <div class="object_menu">
+          <nav>
+            <ul>
+              {% block object_menu_links %}
+              {% endblock %}
+            </ul>
+          </nav>
+        </div>
+        {% endblock %}
+        
       </div>
-      {% endblock %}
-
-    </div>
+    {% endblock %}
     
     {% block profile_pic %}
       <div class="profile-pic">

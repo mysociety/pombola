@@ -451,16 +451,13 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
         active_politician_positions = Position.objects.all().current_politician_positions()
         active_member_positions = Position.objects.all().filter(title__slug='member').currently_active()
 
-        current_politicians = Person.objects.all().filter(position__in=active_politician_positions).distinct()
-        current_members = Person.objects.all().filter(position__in=active_member_positions).distinct()
-
         return (
             self
                 .parties()
-                .filter(position__person__in=current_politicians)
-                .filter(position__person__in=current_members)
-                .distinct()                
-        )
+                .filter(position__in=active_politician_positions)
+                .filter(position__in=active_member_positions)
+                .distinct()
+            )
 
 
 class OrganisationManager(ManagerBase):
@@ -573,7 +570,10 @@ class Place(ModelBase, ScorecardMixin):
         return self.kind.slug == 'constituency'
     
     def current_politician_position(self):
-        """Return the current politician position, or None"""
+        """Return the current politician position, or None.
+
+        FIXME - This just returns a random position from what could be a set.
+        """
         qs = self.position_set.all().current_politician_positions()
         try:
             return qs[0]
@@ -878,7 +878,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter down to only positions which are one of the two kinds of
         politician (those with constituencies, and nominated ones).
         """
-        return self.filter(title__slug__in=settings.POLITICIAN_TITLE_SLUGS)
+        return self.filter(category='political')
 
     def current_politician_positions(self, when=None):
         """Filter down to only positions which are those of current politicians."""
