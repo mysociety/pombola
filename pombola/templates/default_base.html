@@ -66,6 +66,7 @@
     </head>
     <body {% block body_attributes %}{% endblock %}>
 
+      <div id="all-headers">
         {% block header %}
           {% include 'header.html' %}
         {% endblock %}
@@ -81,6 +82,7 @@
             </nav>
         </div>
         {% endblock %}
+      </div>
 
         <div id="page">
             <div class="page-wrapper wrapper" id="hfWrap">
