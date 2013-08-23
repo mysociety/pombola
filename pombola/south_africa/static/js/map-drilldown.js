@@ -119,9 +119,11 @@
       // Make the map the same height as the window, and then scroll to the top
       // of it to fill the window
       var $canvas = $('#map-drilldown-canvas');
-      $canvas.height( $(window).height() );
+
+      var headers_height = $('#all-headers').height() + $('#breadcrumb-replacement').height();
+
+      $canvas.height( $(window).height() - headers_height );
       google.maps.event.trigger(map, 'resize');
-      window.scrollTo( 0, $canvas.offset().top );
 
       if ( loc ) {
         map.setCenter( loc );
