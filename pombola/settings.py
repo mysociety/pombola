@@ -329,10 +329,15 @@ PAGINATION_DEFAULT_ORPHANS         = 2
 PAGINATION_INVALID_PAGE_RAISES_404 = True
 
 
-# haystack config - interface to Xapian search engine
-HAYSTACK_SITECONF      = 'pombola.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'xapian'
-HAYSTACK_XAPIAN_PATH   = os.path.join( root_dir, "pombola_xapian" )
+# haystack config - interface to search engine
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': config.get('POMBOLA_DB_NAME'),
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # Admin autocomplete
 AJAX_LOOKUP_CHANNELS = {

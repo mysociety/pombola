@@ -15,9 +15,8 @@ libpq-dev
 libgdal1-1.6.0 | libgdal1-1.5.0
 python-gdal
 
-# Search Index - Xapian http://xapian.org/
-libxapian22
-
+# Search (this is not in stock debian)
+elasticsearch
 
 # Python - the language that the site is written in, and additional tools needed
 # to build the virtualenv - may already be included with your python install
@@ -32,8 +31,6 @@ bcrypt
 # libjpeg - needed on non-debian. On debian installed as a requirement for others so no need to list seperately
 
 
-
-
 ############################################################
 # The following can be installed by Python's pip into the virtual environment.
 # If you are not on Debian let pip do the installing for you.
@@ -46,7 +43,6 @@ mercurial
 python-docutils
 python-bcrypt
 python-markdown
-python-xapian
 python-yaml
 python-openid
 python-beautifulsoup
