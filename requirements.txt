@@ -27,6 +27,7 @@ Markdown
 ### Use a fork of django-markitup so that we get correct truthiness
 -e hg+https://bitbucket.org/evdb/django-markitup/@fe49ef12c614#egg=django-markitup
 
+requests>=1.0
 pyelasticsearch
 django-haystack>=2.1.0
 
@@ -50,8 +51,6 @@ python-memcached
 python-dateutil
 
 coverage>=3
-
-requests
 
 ## votematch
 django-model-utils
