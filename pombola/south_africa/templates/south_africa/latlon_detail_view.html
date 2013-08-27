@@ -11,11 +11,15 @@
 
 {% block subcontent %}
 
-  <h2>Closest Constituency Offices</h2>
+  <h2>Constituency Offices within {{ office_search_radius }}kms</h2>
 
   <ul class="listing">
     {% for object in nearest_offices %}
       {% include 'south_africa/constituency_office_list_item.html' %}
+    {% empty %}
+      <section>
+        <p>No local offices found.</p>
+      </section>
     {% endfor %}
   </ul>  
   
