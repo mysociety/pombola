@@ -30,11 +30,17 @@ class LatLonDetailView(PlaceDetailView):
         context = super(LatLonDetailView, self).get_context_data(**kwargs)
         context['location'] = self.location
 
+        # Select the place kinds that are appropriate for this query
+        place_kind_slugs = (
+            'constituency-office',
+            'constituency-area', # specific to DA party
+        )
+
         context['office_search_radius'] = self.constituency_office_search_radius
 
         context['nearest_offices'] = nearest_offices = (
             models.Place.objects
-            .filter(kind__slug='constituency-office')
+            .filter(kind__slug__in=place_kind_slugs)
             .distance(self.location)
             .filter(location__distance_lte=(self.location, D(km=self.constituency_office_search_radius)))
             .order_by('distance')
