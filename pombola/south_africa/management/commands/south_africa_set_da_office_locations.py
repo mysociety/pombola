@@ -129,7 +129,7 @@ class Command(LabelCommand):
                 place = places[0]
                 
                 lon, lat = map(float, lonlat.split(","))
-                point = Point(lat, lon, srid=4326)
+                point = Point(x=lon, y=lat, srid=4326)
 
                 
 
