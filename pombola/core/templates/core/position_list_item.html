@@ -1,0 +1,24 @@
+{% load thumbnail %}
+
+{% thumbnail object.person.primary_image "90x90" crop="center" as im %}
+  <a href="{{ object.person.get_absolute_url }}">
+    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+  </a>
+{% empty %}
+  <a href="{{ object.person.get_absolute_url }}">
+    <img src="{{STATIC_URL}}images/person-90x90.jpg" />
+  </a>
+{% endthumbnail %}
+
+<section>
+  <h4><a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a></h4>
+  {% if object.place %}
+    <p>Member for {{ object.place.name }}</p>
+  {% else %}
+    {# Bring on the elif clause! #}
+    {% if object.is_nominated_politician %} 
+      <p>Nominated Member</p>
+    {% endif %}
+  {% endif %}
+  <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
+</section>
