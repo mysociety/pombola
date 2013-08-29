@@ -26,12 +26,23 @@ class InfoPage(models.Model):
     The page with the slug 'index' is special - it is used as the index page to all the other info pages, and so should probably be a table of contents or similar.
     """
 
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
+    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
+    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now )
 
     slug    = models.SlugField(unique=True)
     title   = models.CharField(max_length=300, unique=True)
     content = MarkupField( help_text="When linking to other pages use their slugs as the address (note that these links do not work in the preview, but will on the real site)")
+
+    KIND_CHOICES = (
+        ('blog', 'blog'),
+        ('page', 'page')
+    )
+    kind = models.CharField(max_length=10, choices=KIND_CHOICES, default='page')
+
+    # When was this page/post published. Could use updated or created but it
+    # makes sense to make this seperate now as it will facilitate queing up
+    # posts to be published in future easier.
+    publication_date = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
 
     def __unicode__(self):
         return self.title
