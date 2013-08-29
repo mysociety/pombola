@@ -28,6 +28,10 @@
         {% if query %}
             <h3>Results</h3>
 
+            {% if geocoder_results %}
+              {% include "search/geocoder_results.html" %}
+            {% endif %}
+
             <ul class="listing">        
             {% for result in page.object_list %}
                 {% include 'core/generic_list_item.html' with object=result.object %}

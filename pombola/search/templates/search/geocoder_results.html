@@ -1,0 +1,86 @@
+<div>
+
+  <div id="map_canvas">Map goes here</div>
+
+
+  <script>
+    var markers_to_add = [];
+  </script>
+
+  <ul>
+    {% for result in geocoder_results %}
+      <li>
+        <a href="/place/latlon/{{ result.latitude }},{{result.longitude }}/">
+          {{ result.address }}
+        </a>
+      </li>
+      <script>
+        markers_to_add.push({
+          lat: {{ result.latitude }},
+          lng: {{ result.longitude }},
+          url: "/place/latlon/{{ result.latitude }},{{result.longitude }}/",
+          title: "{{ result.address }}"
+        });
+      </script>
+    {% endfor %}
+  </ul>
+
+  {{ geocoder_results }}
+
+</div>
+
+<script>
+
+  var create_search_result_map = function () {
+    var map_element = document.getElementById("map_canvas")
+
+    var myOptions = {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true,
+      maxZoom: 10
+    };
+
+    var map = new google.maps.Map(map_element, myOptions);
+
+    if (markers_to_add.length) {
+
+      var bounds = new google.maps.LatLngBounds();
+
+      while ( args = markers_to_add.shift() ) {
+
+          var position = new google.maps.LatLng(args.lat, args.lng );
+
+          var marker_opts = {
+              position: position,
+              title: args.title,
+              map: map,
+          };
+
+          bounds.extend(position);
+
+          var marker = new google.maps.Marker( marker_opts );
+
+          if ( args.url ) {
+            var url = args.url;
+            google.maps.event.addListener(marker, "click", function () { document.location = url });
+          }
+      }
+
+      map.fitBounds( bounds );
+    }
+  };
+
+  pombola_run_when_document_ready(
+      function () {
+          google.load(
+              'maps', '3',
+              {
+                  callback: create_search_result_map,
+                  other_params:'sensor=true'
+              }
+          );
+      }
+  );
+
+
+</script>
