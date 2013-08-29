@@ -1,4 +1,4 @@
-<section>
+<section id="constituency-office-{{ object.id }}">
   <h3><a href="{{ object.get_absolute_url }}">{{ object.organisation.name }}</a> ({{ object.distance.km|floatformat:1 }}km)</h3>
 
   <ul>
@@ -15,4 +15,13 @@
       {% endwith %}
     {% endfor %}
   </ul>
+  
+  <script>
+    add_marker_to_map({
+      lat: {{ object.location.y }}, 
+      lng: {{ object.location.x }},
+      name: "{{object.organisation.name }}",
+      url: "#constituency-office-{{ object.id }}"
+    });
+  </script>
 </section>
