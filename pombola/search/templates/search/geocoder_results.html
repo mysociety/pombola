@@ -1,10 +1,10 @@
 <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
+<h3>Location results</h3>
+
 <div class="geocoded_results">
 
   <div id="map_canvas">&nbsp;</div>
-
-  <h3>Location results</h3>
 
   <ul>
     {% for result in geocoder_results %}
