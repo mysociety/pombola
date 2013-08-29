@@ -10,8 +10,15 @@ from django.utils import simplejson
 from pombola.core import models
 
 from haystack.query import SearchQuerySet
+from haystack.views import SearchView
 
 from sorl.thumbnail import get_thumbnail
+
+
+
+class SearchViewWithGeocoder(SearchView):
+    pass
+
 
 # def location_search(request):
 #     
