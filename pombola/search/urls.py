@@ -8,6 +8,16 @@ from haystack.views import SearchView
 from pombola.core    import models as core_models
 from pombola.hansard import models as hansard_models
 
+search_models = (
+    core_models.Person,
+    core_models.Organisation,
+    core_models.Place,
+    core_models.PositionTitle
+)
+if settings.ENABLED_FEATURES['speeches']:
+    from speeches.models import Speech
+    search_models += ( Speech, )
+
 urlpatterns = patterns('pombola.search.views',
 
     # Haystack and other searches
@@ -18,12 +28,7 @@ urlpatterns = patterns('pombola.search.views',
     url(
         r'^$',
         SearchView(
-            searchqueryset = SearchQuerySet().models(
-                core_models.Person,
-                core_models.Organisation,
-                core_models.Place,
-                core_models.PositionTitle
-            ),
+            searchqueryset = SearchQuerySet().models( *search_models ).highlight(),
             form_class=SearchForm,            
         ),
         name='core_search'
