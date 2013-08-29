@@ -1,7 +1,8 @@
 {% load switch %}
 
-{% if contacts %}    
-    <h3>Contact Details</h3>
+{% if contacts %}
+  <section>
+    <h1>Contact Details</h1>
     
     <ul class="vcard">
         {% for c in contacts %}
@@ -39,4 +40,5 @@
             </li>
         {% endfor %}
     </ul>
+  </section>
 {% endif %}
