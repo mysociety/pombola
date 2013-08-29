@@ -1,9 +1,10 @@
 <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
-<div>
+<div class="geocoded_results">
 
-  <div id="map_canvas">Map goes here</div>
+  <div id="map_canvas">&nbsp;</div>
 
+  <h3>Location results</h3>
 
   <ul>
     {% for result in geocoder_results %}
@@ -23,7 +24,7 @@
     {% endfor %}
   </ul>
 
-  {{ geocoder_results }}
+  <br style="clear: both;">
 
 </div>
 
