@@ -3,30 +3,32 @@
 {% block title %}{{ object.name }} Experience{% endblock %}
 
 {% block subcontent %}
-  <h2>Experience</h2>
-  <div>
+  <section>
+    <h1>Experience</h1>
+    <div>
       <div class="left-col">
-          <section>
-              <h3>Current Political Positions</h3>
-              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
-          </section>
+        <section>
+          <h1>Current Political Positions</h1>
+          {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
+        </section>
 
-          <section>
-              <h3>Previous Political Positions</h3>
-              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
-          </section>
+        <section>
+          <h1>Previous Political Positions</h1>
+          {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
+        </section>
       </div>
       
       <div class="right-col">
-          <section>
-              <h3>Job History</h3>
-              {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
-          </section>
+        <section>
+          <h1>Job History</h1>
+          {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
+        </section>
 
-          <section>
-              <h3>Education</h3>
-              {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
-          </section>
+        <section>
+          <h1>Education</h1>
+          {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
+        </section>
       </div>
-  </div>
+    </div>
+  </section>
 {% endblock %}

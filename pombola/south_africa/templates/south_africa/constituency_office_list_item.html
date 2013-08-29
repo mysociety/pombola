@@ -1,5 +1,5 @@
 <section>
-  <h3><a href="{{ object.get_absolute_url }}">{{ object.organisation.name }}</a> ({{ object.distance.km|floatformat:1 }}km)</h3>
+  <h1><a href="{{ object.get_absolute_url }}">{{ object.organisation.name }}</a> ({{ object.distance.km|floatformat:1 }}km)</h1>
 
   <ul>
     {# I imagine we'll only get the one postal address per office... #}
@@ -10,7 +10,7 @@
 
   <ul>
     {% for position in object.related_positions %}
-      {% with object=position.person %}
+      {% with object=position %}
         {% include 'core/generic_list_item.html' %}
       {% endwith %}
     {% endfor %}

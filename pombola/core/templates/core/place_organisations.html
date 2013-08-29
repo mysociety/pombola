@@ -22,7 +22,7 @@
                     </a>
 
                     <section>
-                        <h4><a href="{{ organisation_url }}">{{ organisation.name }}</a></h4>
+                        <h1><a href="{{ organisation_url }}">{{ organisation.name }}</a></h1>
                         <p class="meta">{{ position.person.name }}: {{ position.title.name }}, {{ position.display_dates|safe }}</p>
                         {% if organisation.kind.slug != 'unknown' %}
                             <div class="kind">{{ organisation.kind.name }}</div>

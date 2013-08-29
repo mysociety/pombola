@@ -11,7 +11,7 @@
 {% endthumbnail %}
 
 <section>
-  <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+  <h1><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h1>
   
   {% if object.parent_place %}
     <p>Parent place: <a href="{{ object.parent_place.get_absolute_url }}">{{ object.parent_place.name }}</a></p>
