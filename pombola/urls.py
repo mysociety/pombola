@@ -30,13 +30,14 @@ urlpatterns += patterns('',
 
 
 # mapit
-urlpatterns += patterns('',    
+urlpatterns += patterns('',
     (r'^mapit/', include('mapit.urls')),
 )
 
 # Info pages
 urlpatterns += patterns('',
     (r'^info/', include('pombola.info.urls.pages')),
+    (r'^blog/', include('pombola.info.urls.blog')),
 )
 
 # File archive
@@ -92,7 +93,7 @@ urlpatterns += patterns('',
 
 # votematch
 if settings.ENABLED_FEATURES['votematch']:
-    urlpatterns += patterns('',    
+    urlpatterns += patterns('',
         (r'^votematch/', include('pombola.votematch.urls')),
     )
 
