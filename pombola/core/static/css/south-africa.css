@@ -1619,7 +1619,6 @@ div.object_menu ul li a {
 }
 .geocoded_results #map_canvas {
   float: right;
-  margin: 1em;
 }
 
 .vcard {
