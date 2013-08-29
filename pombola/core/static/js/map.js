@@ -33,13 +33,13 @@ function initialize_map() {
         };
 
         while ( args = markers_to_add.shift() ) {
-        
+
             var marker_opts = {
                 position: new google.maps.LatLng(args.lat, args.lng ) ,
                 title: args.name,
                 map: map,
             };
-        
+
             // set the bounds to accomodate this marker
             if (map_bounds.north < args.lat) map_bounds.north = args.lat;
             if (map_bounds.south > args.lat) map_bounds.south = args.lat;
@@ -47,13 +47,13 @@ function initialize_map() {
             if (map_bounds.west > args.lng)  map_bounds.west  = args.lng;
 
             var marker = new google.maps.Marker( marker_opts );
-        
-            if ( args.url ) {                
+
+            if ( args.url ) {
                 set_marker_click_url( marker, args.url );
             }
         }
     }
-    
+
     // Add all the kml
     while ( kml_url = kml_urls_to_add.shift() ) {
         map.setOptions({ maxZoom: 16 }); // allow zooming on kml
@@ -79,7 +79,7 @@ function set_marker_click_url ( marker, url) {
         marker,
         'click',
         function() { window.location = url; }
-    );    
+    );
 }
 
 function make_bounds ( bounds ) {
@@ -88,7 +88,7 @@ function make_bounds ( bounds ) {
     return new google.maps.LatLngBounds( sw, ne );
 }
 
-function add_kml_to_map( kml_url ) {    
+function add_kml_to_map( kml_url ) {
     kml_urls_to_add.push( kml_url );
 }
 
