@@ -7,12 +7,12 @@ function initialize_map() {
     var map_element = document.getElementById("map_canvas")
     if (!map_element) return false;
 
-    var map_bounds = {
-      north: window.pombola_settings.map_bounds.north,
-      east:  window.pombola_settings.map_bounds.east,
-      south: window.pombola_settings.map_bounds.south,
-      west:  window.pombola_settings.map_bounds.west
-    };
+
+    var bound_coords = window.pombola_settings.map_bounds;
+    var map_bounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng( bound_coords.south, bound_coords.west ),
+      new google.maps.LatLng( bound_coords.north, bound_coords.east )
+    );
 
     var map_has_been_located = false;
 
@@ -27,24 +27,20 @@ function initialize_map() {
     if (markers_to_add.length) {
 
         // clear the bounds so that they are set from markers
-        map_bounds = {
-            north: -80, south: 80,
-            east: -179, west: 179,
-        };
+        var map_bounds = new google.maps.LatLngBounds();
 
         while ( args = markers_to_add.shift() ) {
 
+            var position = new google.maps.LatLng(args.lat, args.lng );
+
             var marker_opts = {
-                position: new google.maps.LatLng(args.lat, args.lng ) ,
+                position: position,
                 title: args.name,
                 map: map,
             };
 
             // set the bounds to accomodate this marker
-            if (map_bounds.north < args.lat) map_bounds.north = args.lat;
-            if (map_bounds.south > args.lat) map_bounds.south = args.lat;
-            if (map_bounds.east < args.lng)  map_bounds.east  = args.lng;
-            if (map_bounds.west > args.lng)  map_bounds.west  = args.lng;
+            map_bounds.extend(position);
 
             var marker = new google.maps.Marker( marker_opts );
 
@@ -68,7 +64,7 @@ function initialize_map() {
     }
 
     if ( ! map_has_been_located ) {
-        map.fitBounds( make_bounds( map_bounds ) );
+        map.fitBounds( map_bounds );
     }
 
 }
@@ -80,12 +76,6 @@ function set_marker_click_url ( marker, url) {
         'click',
         function() { window.location = url; }
     );
-}
-
-function make_bounds ( bounds ) {
-    var sw = new google.maps.LatLng( bounds.south, bounds.west );
-    var ne = new google.maps.LatLng( bounds.north, bounds.east );
-    return new google.maps.LatLngBounds( sw, ne );
 }
 
 function add_kml_to_map( kml_url ) {
