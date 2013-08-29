@@ -36,7 +36,7 @@ urlpatterns += patterns('',
 
 # Info pages
 urlpatterns += patterns('',
-    (r'^info/', include('pombola.info.urls')),
+    (r'^info/', include('pombola.info.urls.pages')),
 )
 
 # File archive
