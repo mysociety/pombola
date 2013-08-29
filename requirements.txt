@@ -25,7 +25,7 @@ django-ajax-selects
 Markdown
 
 ### Use a fork of django-markitup so that we get correct truthiness
--e hg+https://bitbucket.org/evdb/django-markitup/@fe49ef12c614#egg=django-markitup
+hg+https://bitbucket.org/evdb/django-markitup/@fe49ef12c614#egg=django-markitup
 
 requests>=1.0
 pyelasticsearch
@@ -35,7 +35,7 @@ django-haystack>=2.1.0
 httplib2
 WebTest>=1.3.2
 django-webtest
--e git://github.com/nathforge/django-mechanize.git#egg=django-mechanize
+git+git://github.com/nathforge/django-mechanize.git#egg=django-mechanize
 selenium
 django-selenium
 
@@ -46,10 +46,10 @@ unidecode
 python-memcached
 
 # django-mapit
--e git://github.com/mysociety/mapit.git@master#egg=django-mapit
+git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
 
 # SayIt
-git://github.com/mysociety/sayit.git@master#egg=django-sayit
+git+git://github.com/mysociety/sayit.git@master#egg=django-sayit
 
 python-dateutil
 
