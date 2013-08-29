@@ -40,17 +40,17 @@ class InfoPage(models.Model):
         return str(self)
 
     def content_with_anchors(self):
-        """ Returns content with an anchor tag <a> inserted above every heading element 
+        """ Returns content with an anchor tag <a> inserted above every heading element
             (the anchor name is the slugified heading text). For example:
             <h2>Halt! Who goes there?"</h2>
             becomes
             <a name="halt-who-goes-there">
-            <h2>Halt! Who goes there?"</h2>""" 
+            <h2>Halt! Who goes there?"</h2>"""
         def prepend_anchor_tag( match ):
             return '<a name="%s"></a>%s%s' % (slugify(match.group(2)), match.group(1), match.group(2))
         headings_regexp = re.compile( '(<h\d+[^>]*>)([^<]*)')
         return headings_regexp.sub( prepend_anchor_tag, self.content.rendered)
-         
+
     @models.permalink
     def get_absolute_url(self):
         return ( 'info_page', [ self.slug ] )
@@ -61,6 +61,6 @@ class InfoPage(models.Model):
             args=[self.id]
         )
         return url
-        
+
     class Meta:
-        ordering = ['title']      
+        ordering = ['title']
