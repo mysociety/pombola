@@ -33,11 +33,13 @@ class InfoPage(models.Model):
     title   = models.CharField(max_length=300, unique=True)
     content = MarkupField( help_text="When linking to other pages use their slugs as the address (note that these links do not work in the preview, but will on the real site)")
 
+    KIND_PAGE = 'page'
+    KIND_BLOG = 'blog'
     KIND_CHOICES = (
-        ('blog', 'blog'),
-        ('page', 'page')
+        (KIND_BLOG, 'Blog'),
+        (KIND_PAGE, 'Page')
     )
-    kind = models.CharField(max_length=10, choices=KIND_CHOICES, default='page')
+    kind = models.CharField(max_length=10, choices=KIND_CHOICES, default=KIND_PAGE)
 
     # When was this page/post published. Could use updated or created but it
     # makes sense to make this seperate now as it will facilitate queing up
