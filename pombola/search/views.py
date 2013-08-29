@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.utils import simplejson
+from django.conf import settings
 
 # from pombola.helpers import geocode
 
@@ -13,10 +14,23 @@ from haystack.query import SearchQuerySet
 from haystack.views import SearchView
 
 from sorl.thumbnail import get_thumbnail
+from .geocoder import geocoder
 
 
 class SearchViewWithGeocoder(SearchView):
-    pass
+
+    def extra_context(self):
+        # Call the base implementation first to get a context
+        context = super(SearchViewWithGeocoder, self).extra_context()
+
+        # This only applies to the ZA Pombola
+        if settings.COUNTRY_APP != 'south_africa':
+            return context
+
+        context['geocoder_results'] = geocoder(country="za", q=self.query)
+
+        return context
+
 
 
 # def location_search(request):
