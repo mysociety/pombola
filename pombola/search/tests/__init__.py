@@ -1,1 +1,2 @@
-from autocomplete      import *
+from .autocomplete      import *
+from .geocoder          import *
