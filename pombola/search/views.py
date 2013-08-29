@@ -15,24 +15,23 @@ from haystack.views import SearchView
 from sorl.thumbnail import get_thumbnail
 
 
-
 class SearchViewWithGeocoder(SearchView):
     pass
 
 
 # def location_search(request):
-#     
+#
 #     loc = request.GET.get('loc', '')
-# 
+#
 #     results = geocode.find(loc) if loc else []
-#     
+#
 #     # If there is one result find that matching areas for it
 #     if len(results) == 1:
 #         mapit_areas = geocode.coord_to_areas( results[0]['lat'], results[0]['lng'] )
 #         areas = [ models.Place.objects.get(mapit_id=area['mapit_id']) for area in mapit_areas.values() ]
 #     else:
 #         areas = None
-#         
+#
 #     return render_to_response(
 #         'search/location.html',
 #         {
@@ -40,7 +39,7 @@ class SearchViewWithGeocoder(SearchView):
 #             'results': results,
 #             'areas': areas,
 #         },
-#         context_instance = RequestContext( request ),        
+#         context_instance = RequestContext( request ),
 #     )
 
 
@@ -93,7 +92,7 @@ def remove_duplicate_places(response_data):
 
 def autocomplete(request):
     """Return autocomplete JSON results"""
-    
+
     term = request.GET.get('term','').strip()
     response_data = []
 
@@ -107,7 +106,7 @@ def autocomplete(request):
         terms = re.split(r'\s+', term)
 
         # Build up a query based on the bits
-        sqs = SearchQuerySet()        
+        sqs = SearchQuerySet()
         for bit in terms:
             # print "Adding '%s' to the '%s' query" % (bit,term)
             sqs = sqs.filter_and(
@@ -155,10 +154,10 @@ def autocomplete(request):
     # Remove the 'object' elements before returning the response:
     for d in response_data:
         del d['object']
-    
+
     # send back the results as JSON
     return HttpResponse(
         simplejson.dumps(response_data),
         mimetype='application/json'
     )
-    
+
