@@ -10,7 +10,7 @@ from markitup.fields import MarkupField
 class InfoPage(models.Model):
     """
     InfoPage - store static pages in the database so they can be edited in the
-    admin.
+    admin. Also simple blog posts.
 
     There are several pages on a site that are static - ie they don't change
     very often. However sometimes they need to change and it is conveniant to do
@@ -33,6 +33,9 @@ class InfoPage(models.Model):
     The page with the slug 'index' is special - it is used as the index page to
     all the other info pages, and so should probably be a table of contents or
     similar.
+
+    Pages can also be marked as 'blog' in which case they are presented in
+    newest first order on the '/blog' page, and on their own blog page.
     """
 
     created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
