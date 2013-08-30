@@ -66,7 +66,15 @@ class InfoPage(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ( 'info_page', [ self.slug ] )
+
+        if self.kind == self.KIND_PAGE:
+            url_name = 'info_page'
+        elif self.kind == self.KIND_BLOG:
+            url_name = 'info_blog'
+        else:
+            raise Exception("Unexpected kind '{0}'".format(self.kind))
+
+        return ( url_name, [ self.slug ] )
 
     def get_admin_url(self):
         url = reverse(
