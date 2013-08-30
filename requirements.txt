@@ -51,7 +51,7 @@ git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
 # SayIt
 git+git://github.com/mysociety/sayit.git@master#egg=django-sayit
 
-python-dateutil
+python-dateutil>=1.5,!=2.0
 
 coverage>=3
 
