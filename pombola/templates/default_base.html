@@ -13,6 +13,9 @@
         <meta http-equiv="cleartype" content="on">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
+        {% block extra_head_meta %}
+        {% endblock%}
+
         {% comment %}
 
             The 'STATIC_GENERATION_NUMBER' is used to force the caches to fetch
