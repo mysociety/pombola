@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load url from future %}
 
 {% block title %}
     {{ object.title }}
@@ -12,5 +13,8 @@
   <div>{{ object.publication_date|date }} ({{ object.publication_date|timesince }} ago)</div>
 
   {{ object.content }}
+
+  <p>(<a href="{% url "info_blog_feed" %}">RSS Feed</a>)</p>
+
 
 {% endblock %}

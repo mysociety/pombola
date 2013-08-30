@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load pagination_tags %}
+{% load url from future %}
 
 {% block title %}
     Blog Posts
@@ -12,6 +13,8 @@
 {% block content %}
 
   <h1>Blog Posts</h1>
+
+  <p><a href="{% url "info_blog_feed" %}">RSS Feed</a></p>
 
   {% for object in object_list %}
     <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
