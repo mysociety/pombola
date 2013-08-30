@@ -56,7 +56,7 @@ class InfoPage(models.Model):
     # When was this page/post published. Could use updated or created but it
     # makes sense to make this seperate now as it will facilitate queing up
     # posts to be published in future easier.
-    publication_date = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
+    publication_date = models.DateTimeField( default=datetime.datetime.now )
 
     def __unicode__(self):
         return self.title
