@@ -9,21 +9,30 @@ from markitup.fields import MarkupField
 
 class InfoPage(models.Model):
     """
-    InfoPage - store static pages in the database so they can be edited in the admin.
+    InfoPage - store static pages in the database so they can be edited in the
+    admin.
 
-    There are several pages on a site that are static - ie they don't change very often. However sometimes they need to change and it is conveniant to do this via the admin, rather than editing the html on disk.
+    There are several pages on a site that are static - ie they don't change
+    very often. However sometimes they need to change and it is conveniant to do
+    this via the admin, rather than editing the html on disk.
 
     This module allows you to do that.
 
-    Each page has a slug - which is used to identify it in the url. So for example if you had a site FAQ the slug might be 'faq' and its url would become something like http://example.com/info/faq - where 'info' is where these pages are stored.
+    Each page has a slug - which is used to identify it in the url. So for
+    example if you had a site FAQ the slug might be 'faq' and its url would
+    become something like http://example.com/info/faq - where 'info' is where
+    these pages are stored.
 
     Pages also have titles - which are shown at the top of the page.
 
     Both slugs and titles must be unique to each page.
 
-    The content of the page is formatted using 'markdown' - which allows you to include bulleted lists, headings, styling and links.
+    The content of the page is formatted using 'markdown' - which allows you to
+    include bulleted lists, headings, styling and links.
 
-    The page with the slug 'index' is special - it is used as the index page to all the other info pages, and so should probably be a table of contents or similar.
+    The page with the slug 'index' is special - it is used as the index page to
+    all the other info pages, and so should probably be a table of contents or
+    similar.
     """
 
     created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
