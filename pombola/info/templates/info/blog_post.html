@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ object.title }}
+{% endblock %}
+
+{% block content %}
+
+
+  <h1>{{ object.title }}</h1>
+
+  <div>{{ object.publication_date|date }} ({{ object.publication_date|timesince }} ago)</div>
+
+  {{ object.content }}
+
+{% endblock %}
