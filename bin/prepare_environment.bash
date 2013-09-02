@@ -12,12 +12,15 @@ cd "$(dirname $BASH_SOURCE)"/..
 PYTHONDONTWRITEBYTECODE=""
 
 
-# create the virtual environment, we always want system packages
+# virtualenv >= 1.7 changed the default behaviour to --no-site-packages,
+# which causes problems on wheezy where gdal is hard to build.
 virtualenv_version="$(virtualenv --version)"
 virtualenv_args=""
 if [ "$(echo -e '1.7\n'$virtualenv_version | sort -V | head -1)" = '1.7' ]; then
     virtualenv_args="--system-site-packages"
 fi
+
+# create the virtual environment, install/update required packages
 virtualenv $virtualenv_args ../pombola-virtualenv
 source ../pombola-virtualenv/bin/activate
 
@@ -35,7 +38,7 @@ pip install -r requirements.txt
 MAPIT_PATH="$(python -c 'import mapit; print mapit.__file__,')"
 "$(dirname $MAPIT_PATH)"/../bin/make_css || echo "Generating MapIt CSS failed"
 
-# make sure that there is no old code (the .py files may have been git deleted) 
+# make sure that there is no old code (the .py files may have been git deleted)
 find . -name '*.pyc' -delete
 
 # get the database up to speed
