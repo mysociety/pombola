@@ -61,4 +61,4 @@ django-model-utils
 parsedatetime
 
 # TODO - change to pypi package 'pygeocoder' link once https://bitbucket.org/xster/pygeocoder/pull-request/5 merged and published.
-hg+https://evdb@bitbucket.org/evdb/pygeocoder@add-components#egg=pygeocoder
+-e hg+https://evdb@bitbucket.org/evdb/pygeocoder@add-components#egg=pygeocoder
