@@ -50,3 +50,16 @@ $inactive-place-color: #cccccc;
 
 #search-hansard-instead {
   padding-left: 0.5em; }
+
+
+.geocoded_results {
+
+  background: $colour_lighter_grey;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  #map_canvas {
+    float: right;
+  }
+  
+}

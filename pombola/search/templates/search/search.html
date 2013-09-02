@@ -26,6 +26,10 @@
         </div>
         
         {% if query %}
+            {% if geocoder_results %}
+              {% include "search/geocoder_results.html" %}
+            {% endif %}
+
             <h3>Results</h3>
 
             <ul class="listing">        
