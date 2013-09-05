@@ -11,6 +11,17 @@ def parse(data):
             no_house += 1
     assert no_house == 3
 
+    na_manual = {
+        'Cassel Charlie Mathale': { 'start_date': '2013-07-15' },
+        'Wayne Maxim Thring': { 'start_date': '2013-06-21' },
+        'Masenyani Richard Baloyi': { 'end_date': '2013-07-10' },
+        'Letlapa Moroatshoge Mphahlele': { 'end_date': '2013-07-11', 'end_reason': 'Ceased to be a member under section 47(3)(c) of the Constitution (changed party)' },
+        # 'Mpethi': { 'start_date': ? },
+        'Ntopile Marcel Kganyago': { 'end_date': '2013-07-17', 'end_reason': 'Died' },
+        'Nqabayomzi Lawrence Kwankwa': { 'start_date': '2013-08-06' },
+        'Loretta Jacobus': { 'end_date': '2013-08-01' },
+    }
+
     ncop_manual = {
         'Rory Dean MacPherson': { 'party': 'DA', 'end_date': '2009-05-29', 'province': 'KwaZulu-Natal' },
             'Robert Alfred Lees': { 'start_date': '2009-06-11' },
@@ -24,6 +35,7 @@ def parse(data):
         'Tlhalefi Andries Mashamaite': { 'party': 'ANC', 'end_date': '2012-05-08', 'province': 'Limpopo' },
             'Thabo Lucas Makunyane': { 'start_date': '2012-05-22' },
         'Zukisa Cheryl Faku': { 'start_date': '2013-04-25' },
+        'Mokoane Collen Maine': { 'end_date': '2013-08-01' }, # XXX
     }
 
     for person in data['persons'].values():
@@ -31,10 +43,13 @@ def parse(data):
         mships = person['memberships']
         mship = [ x for x in mships if 'ncop' in x['organization_id'] and x['role'] == 'Delegate' ]
         if mship:
-            # Present, and has NCOP membership entry. Set a start date.
+            # Present, and has NCOP membership entry. Set a start and possibly end date.
             mship = mship[0]
             assert 'start_date' not in mship
-            mship['start_date'] = ncop_manual.pop(name, {}).get('start_date', '2009-05-07')
+            n = ncop_manual.pop(name, {})
+            mship['start_date'] = n.get('start_date', '2009-05-07')
+            if 'end_date' in n and 'end_date' not in mship:
+                mship['end_date'] = n['end_date']
         elif name in ncop_manual:
             # Present, but has no NCOP membership entry
             n = ncop_manual.pop(name)
@@ -46,8 +61,17 @@ def parse(data):
                 'end_reason': n.get('end_reason', 'Resigned'),
             })
         mship = [ x for x in mships if 'house/na' in x['organization_id'] and x['role'] == 'Member' ]
-        if mship and 'start_date' not in mship[0]:
-            mship[0]['start_date'] = '2009-05-06'
+        if mship:
+            mship = mship[0]
+            n = na_manual.pop(name, {})
+            if 'start_date' not in mship:
+                mship['start_date'] = n.pop('start_date', '2009-05-06')
+            if n:
+                assert 'end_date' not in mship
+                mship['end_date'] = n['end_date']
+                mship['end_reason'] = n.get('end_reason', 'Resigned')
+        elif name in na_manual:
+            raise Exception
 
     # The ones left have no person entry at all.
     for name, d in ncop_manual.items():

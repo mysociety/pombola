@@ -95,6 +95,9 @@ class Person:
             province = m.pop('Province')
             label = 'Member'
 
+        if self.data['name'] in ('Nqabayomzi Lawrence Kwankwa', 'Cassel Charlie Mathale', 'Wayne Maxim Thring'):
+            label = 'Member'
+
         existing_house = [ x for x in self.data['memberships'] if 'house' in x['organization_id'] ]
         if existing_house:
             assert existing_house[0]['organization_id'] == house
@@ -108,13 +111,16 @@ class Person:
                     existing_house[0]['label'] = label + ' for ' + province
         else:
             # Faku
-            add_membership(self.data, {
+            dat = {
                 'person_id': self.data['id'],
                 'organization_id': house,
                 'role': label,
-                'label': label + ' for ' + province,
-                'area': { 'id': 'org.mysociety.za/mapit/code/p/' + PROVINCES[province], 'name': province },
-            })
+                'label': label
+            }
+            if province:
+                dat['label'] = label + ' for ' + province
+                dat['area'] = { 'id': 'org.mysociety.za/mapit/code/p/' + PROVINCES[province], 'name': province }
+            add_membership(self.data, dat)
 
         if 'Position(s)' in m:
             posns = [ { 'role': x.strip() } for x in m.pop('Position(s)').split('<br />') if x.strip() != 'Delegate' ]
@@ -164,7 +170,7 @@ def parse(data):
         if row['given_names'] == 'Ximbi':
             row.update(given_names='Dumsani Livingstone', family_name='Ximbi')
         name = '%s %s' % (row['given_names'], row['family_name'])
-        if 'Faku' in name:
+        if 'Faku' in name or name in ('Kesenkamang Veronica Kekesi', 'Nqabayomzi Lawrence Kwankwa', 'Cassel Charlie Mathale', 'Wayne Maxim Thring'):
             data['persons'][name] = {}
         person = Person(data['persons'][name], data['organizations'])
         person.parse_parl(row)
