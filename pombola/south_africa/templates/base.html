@@ -10,11 +10,7 @@
 
 {% block page %}
 <div id="page">
-    <div id="front_intro">
-        <div class="page-wrapper wrapper">
-            {% block intro_content %}{% endblock %}
-        </div>
-    </div>
+    {% block intro_content %}{% endblock %}
 
     <div class="page-wrapper wrapper" id="hfWrap">
         {% block content %}{% endblock %}
