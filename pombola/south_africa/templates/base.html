@@ -7,3 +7,22 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/south-africa.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}speeches/css/speeches.css?{{ settings.STATIC_GENERATION_NUMBER }}" />
 {% endblock %}
+
+{% block page %}
+<div id="page">
+    <div id="front_intro">
+        <div class="page-wrapper wrapper">
+            {% block intro_content %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="page-wrapper wrapper" id="hfWrap">
+        {% block content %}{% endblock %}
+        {% block after_content %}{% endblock %}
+
+        <br clear="both">
+
+    </div>
+
+</div>
+{% endblock %}
