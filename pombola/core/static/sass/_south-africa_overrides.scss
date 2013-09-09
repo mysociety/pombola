@@ -1,10 +1,298 @@
+
+$border_radius: 5px;
+
+@font-face {
+    font-family: 'latobold';
+    src: url('/static/fonts/lato-bold-webfont.eot');
+    src: url('/static/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-bold-webfont.woff') format('woff'),
+         url('/static/fonts/lato-bold-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-bold-webfont.svg#latobold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'latoitalic';
+    src: url('/static/fonts/lato-italic-webfont.eot');
+    src: url('/static/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-italic-webfont.woff') format('woff'),
+         url('/static/fonts/lato-italic-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'latoregular';
+    src: url('/static/fonts/lato-regular-webfont.eot');
+    src: url('/static/fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-regular-webfont.woff') format('woff'),
+         url('/static/fonts/lato-regular-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-regular-webfont.svg#latoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+#staging_header {
+    background-color: #555;
+    color: #ccc;
+    padding: 10px;
+    strong{
+        color: #ddd;
+    }
+}
+
+
+html{
+    background-image: none;
+    background: $colour_footer_background;
+}
+body
+{
+    background-image: none;
+    background: $colour_main_background;
+}
+#page,
+#breadcrumb-replacement
+{
+    background: $colour_main_background;
+}
+a {
+    color: $colour_secondary;
+    &:hover{
+        color: mix($colour_secondary, #fff, 80%);
+    }
+}
+
+
+/*
+
+HEADER
+
+*/
+
+#site-header{
+    height: 110px;
+    background-image: none;
+    background: $colour_main_background;
+}
+
 #logo {
-  background: url('//placehold.it/147x23') 0 center no-repeat;
-  @media only all and (min-width: 640px), print {
-    background: url('//placehold.it/418x34') 0 center no-repeat;
-  }
+    width: 540px;
+    max-width: 100%;
+    height: 84px;
+    background: url('/static/images/za-logo.png') 0 center no-repeat;
+    @media only all and (min-width: 640px), print {
+      background: url('/static/images/za-logo.png') 0 center no-repeat;
+    }
 }
 
 #main-menu {
-    background: #E23D28; /*is this working?*/
+    background: $colour_primary;
+}
+#main-menu nav{
+    text-align: left;
+    ul{
+        border: none;
+        width: 100%;
+        li{
+            border: none;
+            &.header-search{
+                float: right;
+            }
+            a{
+                background: $colour_primary;
+                font-family: 'latoregular';
+                &:hover{
+                    background: mix($colour_primary, #000, 80%);
+                }
+            }
+            &.active a,
+            &.active a:hover
+            {
+                color: #fff;
+                border:none;
+                padding:8px 10px;
+                margin:0;
+                background: mix($colour_primary, #000, 80%);
+            }
+            ul{
+                a,
+                a:hover
+                {
+                    background-color: #444;
+                }
+            }
+        }
+    }
+}
+#header-search{
+    border: 1px solid mix($colour_primary, #000, 75%);
+    background: #fff;
+    input,button{
+        border:none;
+        background: transparent;
+    }
+    button{
+        background-image: url(/static/images/header_search.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        border-radius: 0;
+        &:hover{
+            background-color: #eee;
+        }
+    }
+}
+
+
+/*
+
+HOME PAGE INTRO BOX
+
+*/
+#front_intro{
+    background-color: #027857;
+    padding: 2em 0;
+    font-family: 'latoregular';
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-image: url(/static/images/intro-bg.jpg);
+}
+#front_intro .btn-text-green{
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    -moz-box-sizing: border-box;
+          box-sizing: border-box;
+    padding: 1em 0.5em;
+    box-shadow: 0px 3px 0px #af201a;
+}
+#home-search{
+    background: transparent;
+    margin: 0;
+    margin-top: 30px;
+    padding: 0;
+    overflow: visible;
+
+    label{
+        font-family: 'latoregular';
+        font-size: 0.96em;
+        font-weight: normal;
+        text-shadow: 0px 1px 2px rgba(2, 111, 82, 1);
+    }
+    input{
+        width: 78%;
+        margin-right: 1%;
+        -moz-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+    button{
+        width:20%;
+        box-shadow: 0px 2px 0px #af201a;
+        &:hover{
+            background-color: rgb(251, 67, 44);
+        }
+    }
+}
+
+#home-featured-person,
+.featured-person
+{
+    margin-bottom: 0;
+    border-radius: $border_radius;
+    border-color: rgba(255,255,255,0.3)
+}
+.featured-person.featured-person-placeholder{
+    background-color: transparent;
+}
+
+#page .home-left h2#home-intro,
+#page .home-right h2#home-intro
+{
+    display: block;
+}
+
+#front_intro .home-left{
+    width: 550px;
+}
+
+#front_intro .home-right{
+    width: 304px;
+    float: right;
+}
+
+#front_intro .home-right h2{
+    color: #fff;
+    text-transform: none;
+    line-height: 1.4;
+    font-family: 'latoregular';
+    font-weight: normal;
+    text-shadow: 0px 1px 4px rgba(2, 111, 82, 1);
+}
+#page .home-left h2{
+    display:none;
+}
+
+
+
+/*
+
+NEWS & POLL
+
+*/
+
+#news,
+#poll
+{
+    padding: 2em 0;
+    float:left;
+    width:656px;
+    max-width: 100%;
+    h2{
+        font-family: 'latoregular';
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+    h3 a,
+    a.readmore
+    {
+        color: $colour_primary;
+        font-family: 'latobold';
+        font-weight: normal;
+    }
+}
+#poll{
+    float:left;
+    width: 304px;
+}
+ul#home-news-list{
+    border:none;
+    padding:0;
+    margin-top: 0;
+    li{
+        border:none;
+        width: 304px;
+        float: left;
+        padding-right: 24px;
+    }
+}
+
+
+
+
+/*
+
+FOOTER
+
+*/
+#site-footer{
+    background: $colour_footer_background;
+    border-top: mix($colour_footer_background, #000, 70%) 2px solid;
 }

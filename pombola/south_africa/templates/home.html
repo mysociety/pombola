@@ -56,9 +56,15 @@
     <div id="news">
         <h2>Latest News</h2>
         <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project. ...</p><p><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project. ...</p><p><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most <a href="#">famous</a> being the one-laptop per child project. However the Jubilee government also made promises with regards to security, maternal health care and youth unemployment among a whole gamut&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project. However the Jubilee government also made promises with regards to security, maternal health care and youth unemployment among a whole gamut&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
         </ul>
+
+    </div>
+
+    {# Temporary Static poll items to build styles from - Remove when done #}
+    <div id="poll">
+        <h2>Survey</h2>
         <style>
             .pds-box { width: 100% !important; }
             #polldaddy { margin-bottom: 30px; width: 304px; float: left; }
@@ -79,19 +85,22 @@
                     Loading news&hellip;
                 </li>
             </ul>
-            {% if settings.POLLDADDY_WIDGET_ID %}
-                <style>
-                    .pds-box { width: 100% !important; }
-                    #polldaddy { margin-bottom: 30px; }
-                </style>
-
-                <div id="polldaddy">
-                    <h2>Latest Poll</h2>
-                    <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
-                    <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
-                </div>
-            {% endif %}
         </div>
+    {% endif %}
+    {% if settings.POLLDADDY_WIDGET_ID %}
+        <div id="poll">
+            <h2>Survey</h2>
+            <style>
+                .pds-box { width: 100% !important; }
+                #polldaddy { margin-bottom: 30px; width: 304px; float: left; }
+            </style>
+
+            <div id="polldaddy">
+                <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
+                <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
+            </div>
+        </div>
+
     {% endif %}
 
     {% if settings.TWITTER_ACCOUNT_NAME %}
