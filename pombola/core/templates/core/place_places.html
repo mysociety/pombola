@@ -21,9 +21,8 @@
         {% endif %}
     {% endif %}
     
-    {% with child_places=object.child_places.all.order_by_parliamentary_session %}
-      {% if object.child_places.count %}
-
+    {% with child_places=child_places|default:object.child_places.all.order_by_parliamentary_session %}
+      {% if child_places.count %}
         {% regroup child_places by parliamentary_session as child_places_regrouped %}
 
         {% for cp in child_places_regrouped %}
