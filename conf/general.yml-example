@@ -91,8 +91,8 @@ MAP_BOUNDING_BOX_WEST:  33.83
 
 # some apps are optional
 OPTIONAL_APPS:
-  - hansard
-  - projects
-  - place_data
-  # - votematch
+  - pombola.hansard
+  - pombola.projects
+  - pombola.place_data
+  # - pombola.votematch
 
