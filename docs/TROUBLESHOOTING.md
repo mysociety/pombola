@@ -202,3 +202,63 @@ Then, do the following steps:
 The build should then succeed, and if you rerun
 prepare_environment.bash then the installation should complete
 successfully.
+
+
+## You need to merge two people together
+
+This happens fairly often, and at the moment the simplest thing to do is to run
+some SQL to move related records from one person to the other. Once that is done
+you can use the admin to tidy the entries up and then delete the redundant one.
+
+It is helpful to open the admin pages for the two people side by side and it may
+be possible to delete several entries related to them directly if it is clear
+that they are duplicated.
+
+Connect to the database by going to the project dir, activating the virtual env
+and then `./manage.py dbshell`.
+
+In the following examples `$TO_KEEP` and `$TO_DELETE` are the ids of the people
+being merged.
+
+``` sql
+-- update tables linked directly to the person table
+
+update core_position              set person_id = $TO_KEEP where person_id = $TO_DELETE;
+update core_alternativepersonname set person_id = $TO_KEEP where person_id = $TO_DELETE;
+
+update hansard_entry set speaker_id = $TO_KEEP where speaker_id = $TO_DELETE;
+update hansard_alias set person_id  = $TO_KEEP where person_id  = $TO_DELETE;
+
+-- the following tables are linked to several other tables using the
+-- content-type framework so the object_id may match an org etc. This is
+-- unlikely though, so you can do a test search for the object_id and if the
+-- results match what you expect from the admin it is safe to do the simpler
+-- update. If there are more then update them one at a time using
+-- 'where id = ...'
+
+select * from core_informationsource where object_id = $TO_DELETE;
+update core_informationsource set object_id = $TO_KEEP where object_id = $TO_DELETE;
+
+select * from core_identifier where object_id = $TO_DELETE;
+update core_identifier set object_id = $TO_KEEP where object_id = $TO_DELETE;
+
+select * from core_contact where object_id = $TO_DELETE;
+update core_contact set object_id = $TO_KEEP where object_id = $TO_DELETE;
+
+select * from images_image where object_id = $TO_DELETE;
+update images_image set object_id = $TO_KEEP where object_id = $TO_DELETE;
+```
+
+You can now delete the redundant person using the admin. It will show you
+related records that will also be deleted, check these to see if any need to be
+transferred (and then add SQL above). Note that some entries (like the scorecard
+ones) can be safely deleted as they will be regenerated if needed.
+
+It is best to delete the person via the admin as that will also lead to them
+being deleted from the search index.
+
+You should also look at the retained person in the admin to check that there are
+no duplicated entries and to ensure that only one of the images is marked as
+`is_primary`. Searching for the person's name on the position list admin page is
+also a good way to spot duplicates.
+
