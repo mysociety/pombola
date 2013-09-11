@@ -1,6 +1,6 @@
 # TROUBLESHOOTING
 
-If something goes wrong please check the following for help. 
+If something goes wrong please check the following for help.
 If your problem is not listed please add it after fixing.
 
 ## Remember to set up the environment!
@@ -20,12 +20,12 @@ See the VIRTUALENV section in INSTALL.txt.
 If you see errors like this...
 
     Error: No module named XXXX
-  
+
 ...then you might need to make sure your modules are up to date. Run:
 
     pip install -r ../requirements.txt
 
-...to get all the modules that Pombola needs. This may be necessary 
+...to get all the modules that Pombola needs. This may be necessary
 ifyou have updated your Pombola by pulling from the git repository
 since your initial installation and the requirements have changed.
 
@@ -35,12 +35,12 @@ since your initial installation and the requirements have changed.
 If you see error like this...
 
     DatabaseError while rendering: column XXX does not exist
-  
+
 ...then you may need to run a database migration. Run:
 
     ./manage.py migrate
 
-...to make sure your database is up-to-date with your current installation. This may 
+...to make sure your database is up-to-date with your current installation. This may
 be necessary if you have updated your Pombola by pulling from the git repository
 since your initial installation. It's safe to run even if there have been no changes.
 
@@ -73,8 +73,8 @@ cookie - both of which will cause caches to fetch you new content.
 
 ## No featured people on the home page: just a big Pombola logo
 
-The home page displays a random featured person (typically an MP) provided there is at least 
-one in the database with can_be_featured set to true. To choose people to feature, log into 
+The home page displays a random featured person (typically an MP) provided there is at least
+one in the database with can_be_featured set to true. To choose people to feature, log into
 the admin and choose people from Core > Persons. Select the individuals you want to feature
 by the checkbox "can be featured" for each one.
 
