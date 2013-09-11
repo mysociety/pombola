@@ -19,7 +19,7 @@ See the VIRTUALENV section in INSTALL.txt.
 
 If you see errors like this...
 
-  Error: No module named XXXX
+    Error: No module named XXXX
   
 ...then you might need to make sure your modules are up to date. Run:
 
@@ -58,12 +58,12 @@ not hanging.
 
 ## Location searches return old/bad data
 
-Try deleting the cached search in 'httplib2_cache'
+Try deleting the cached search in `httplib2_cache`
 
 
 ## Caching does not appear to be working
 
-Point your browser at '/status/memcached/' - first hit should save a val to
+Point your browser at `/status/memcached/` - first hit should save a val to
 cache and subsequent ones should show that it is in the cache until the ttl
 expires.
 
@@ -103,7 +103,7 @@ prepare_environment.bash is using your system Python packages
 depends on the version of virtualenv on your system,
 unfortunately.  To test this, run:
 
-   find pombola-virtualenv -name no-global-site-packages.txt
+    find pombola-virtualenv -name no-global-site-packages.txt
 
 If no file is found, then the system packages are accessible,
 and you should be able to rerun prepare_environment.bash without
@@ -113,11 +113,11 @@ If that file is found, then you have a recent version of
 virtualenv, and you should edit prepare_environment.bash
 to change the line:
 
-   virtualenv ../pombola-virtualenv
+    virtualenv ../pombola-virtualenv
 
 ... to:
 
-   virtualenv --system-site-packages ../pombola-virtualenv
+    virtualenv --system-site-packages ../pombola-virtualenv
 
 If you then rerun prepare_environment.bash, everything should be
 fine - pip will find that the system python-gdal installation
@@ -149,7 +149,7 @@ the system I'm testing on, this command shows that I'm using
     dpkg --status libgdal1-dev
 
 That version is incompatible with 1.9.1, and will produce the
-error "‘VSILFILE’ has not been declared" when building GDAL,
+error `‘VSILFILE’ has not been declared` when building GDAL,
 even if you've fixed the other problems below.
 
 From the listing at http://pypi.python.org/simple/GDAL/ I can
@@ -185,7 +185,7 @@ For example, in my test case that is:
 
     -L/usr/lib -lgdal1.7.0
 
-So I should edit pombola-virtualenv/build/GDAL/setup.py and
+So I should edit `pombola-virtualenv/build/GDAL/setup.py` and
 change the line:
 
     libraries = ['gdal']
