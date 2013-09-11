@@ -4,7 +4,14 @@ from django.contrib.gis.measure import D
 import mapit
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView
+from pombola.core.views import PlaceDetailView, PlaceDetailSub
+
+# In the short term, until we have a list of constituency offices and
+# addresses from DA, let's bundle these together.
+CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
+    'constituency-office',
+    'constituency-area', # specific to DA party
+)
 
 class LatLonDetailView(PlaceDetailView):
     template_name = 'south_africa/latlon_detail_view.html'
@@ -30,17 +37,11 @@ class LatLonDetailView(PlaceDetailView):
         context = super(LatLonDetailView, self).get_context_data(**kwargs)
         context['location'] = self.location
 
-        # Select the place kinds that are appropriate for this query
-        place_kind_slugs = (
-            'constituency-office',
-            'constituency-area', # specific to DA party
-        )
-
         context['office_search_radius'] = self.constituency_office_search_radius
 
         context['nearest_offices'] = nearest_offices = (
             models.Place.objects
-            .filter(kind__slug__in=place_kind_slugs)
+            .filter(kind__slug__in=CONSTINUENCY_OFFICE_PLACE_KIND_SLUGS)
             .distance(self.location)
             .filter(location__distance_lte=(self.location, D(km=self.constituency_office_search_radius)))
             .order_by('distance')
@@ -56,4 +57,17 @@ class LatLonDetailView(PlaceDetailView):
             office.postal_addresses = office.organisation.contacts.filter(kind__slug='address')
             office.related_positions = models.Position.objects.filter(organisation=office.organisation)
 
+        return context
+
+class SAPlaceDetailSub(PlaceDetailSub):
+    def get_context_data(self, **kwargs):
+        context = super(SAPlaceDetailSub, self).get_context_data(**kwargs)
+
+        if self.object.kind.slug == 'province':
+            context['child_places'] = (
+                models.Place.objects
+                .filter(kind__slug__in=CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS)
+                .filter(location__coveredby=self.object.mapit_area.polygons.collect())
+                )
+            
         return context
