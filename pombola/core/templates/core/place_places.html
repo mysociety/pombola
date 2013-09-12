@@ -31,10 +31,7 @@
             
             <ul class="listing">
               {% for child in cp.list %}
-                <li>
-                  <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
-                  ({{child.parliamentary_session.relative_time}} {{ child.kind.name }})
-                </li>
+                {% include child_place_template|default:"core/place_places_child.html" with object=child %}
               {% endfor %}
             </ul>            
           </div>
