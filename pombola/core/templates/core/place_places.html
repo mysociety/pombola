@@ -23,7 +23,7 @@
     
     {% with child_places=child_places|default:object.child_places.all.order_by_parliamentary_session %}
       {% if child_places.count %}
-        {% regroup child_places by parliamentary_session as child_places_regrouped %}
+        {% regroup child_places by child_place_grouper as child_places_regrouped %}
 
         {% for cp in child_places_regrouped %}
           <div class="content_box">
@@ -36,7 +36,6 @@
             </ul>            
           </div>
         {% endfor %}
-
       {% endif %}
     {% endwith %}
 
