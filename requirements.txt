@@ -19,7 +19,7 @@ South>=0.8
 
 ### Pombola dependencies
 sorl-thumbnail
-django_date_extensions
+django_date_extensions==0.1dev
 django-ajax-selects
 
 Markdown

@@ -12,9 +12,19 @@ cd "$(dirname $BASH_SOURCE)"/..
 PYTHONDONTWRITEBYTECODE=""
 
 
-# create the virtual environment, install/update required packages
-virtualenv ../pombola-virtualenv
+# create the virtual environment, we always want system packages
+virtualenv_version="$(virtualenv --version)"
+virtualenv_args=""
+if [ "$(echo -e '1.7\n'$virtualenv_version | sort -V | head -1)" = '1.7' ]; then
+    virtualenv_args="--system-site-packages"
+fi
+virtualenv $virtualenv_args ../pombola-virtualenv
 source ../pombola-virtualenv/bin/activate
+
+# Upgrade pip to a secure version
+curl -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+
+# Install all the packages
 pip install Mercurial
 pip install -r requirements.txt
 
