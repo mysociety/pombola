@@ -3398,4 +3398,106 @@ FOOTER
 #site-footer {
   background: #152425;
   border-top: #0e1919 2px solid;
+  font-size: 12px;
+  line-height: 18px;
+  color: #b3b3b3;
+}
+@media all and (min-width: 640px) {
+  #site-footer div.footer-section {
+    margin: 0 0 1em 0;
+    padding: 0;
+    width: 31.666666667%;
+    margin-left: 2.5%;
+    max-width: none;
+  }
+  #site-footer div.footer-section:first-child {
+    margin-left: 0;
+  }
+}
+#site-footer p {
+  font-style: normal;
+  color: inherit;
+  font-size: inherit;
+}
+#site-footer ul li {
+  font-size: inherit;
+}
+#site-footer h4 {
+  font-family: 'latobold';
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #b3b3b3;
+}
+#site-footer a:link,
+#site-footer a:visited {
+  color: #5bafb9;
+}
+#site-footer a:hover,
+#site-footer a:focus,
+#site-footer a:active,
+#site-footer ul li a:hover {
+  color: #e23d28;
+  text-decoration: underline;
+}
+#site-footer .social-links-list li {
+  display: inline;
+}
+#site-footer .social-links-list li a {
+  display: inline-block;
+  text-indent: -9999px;
+  height: 38px;
+  width: 38px;
+  background-image: url("/static/images/social-icons.png");
+  background-position: 0 -1px;
+  background-repeat: none;
+  margin-right: 8px;
+}
+#site-footer .social-links-list li a:hover {
+  background-position-y: -41px;
+}
+#site-footer .social-links-list .facebook-social-icon {
+  background-position-x: 0;
+}
+#site-footer .social-links-list .twitter-social-icon {
+  background-position-x: -51px;
+}
+#site-footer .social-links-list .youtube-social-icon {
+  background-position-x: -101px;
+}
+#site-footer .social-links-list .rss-social-icon {
+  background-position-x: -150px;
+}
+#site-footer .contact-details {
+  line-height: 16px;
+}
+#site-footer .contact-details h5 {
+  margin-top: 1em;
+  font-weight: bold;
+  margin-bottom: .5em;
+}
+#site-footer .contact-details .block {
+  display: block;
+  margin-bottom: 0.1em;
+}
+#site-footer .contact-details .col-one,
+#site-footer .contact-details .col-two {
+  width: 46.0526316%;
+  float: left;
+}
+#site-footer .contact-details .col-two {
+  margin-left: 7.8947368%;
+}
+#site-footer .utilities {
+  text-align: right;
+  margin: 0;
+}
+#site-footer .utilities li {
+  display: inline-block;
+  margin-left: 12px;
+}
+#site-footer div.attribution {
+  max-width: 960px;
+  margin: .5em auto;
+  text-align: right;
+  font-size: inherit;
 }
