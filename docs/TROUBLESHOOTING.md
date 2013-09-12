@@ -214,6 +214,12 @@ It is helpful to open the admin pages for the two people side by side and it may
 be possible to delete several entries related to them directly if it is clear
 that they are duplicated.
 
+You'll need to decide which of the two records will remain, usually the one with
+the lower id is a good bet.
+
+Any details that are fields directly on the entry should be manually copied over
+(such as date of birth, summary , etc).
+
 Connect to the database by going to the project dir, activating the virtual env
 and then `./manage.py dbshell`.
 
@@ -246,7 +252,7 @@ select * from core_contact where object_id = $TO_DELETE;
 update core_contact set object_id = $TO_KEEP where object_id = $TO_DELETE;
 
 select * from images_image where object_id = $TO_DELETE;
-update images_image set object_id = $TO_KEEP where object_id = $TO_DELETE;
+update images_image set object_id = $TO_KEEP, is_primary = false where object_id = $TO_DELETE;
 ```
 
 You can now delete the redundant person using the admin. It will show you
