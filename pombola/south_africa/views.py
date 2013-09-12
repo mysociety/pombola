@@ -58,6 +58,7 @@ class SAPlaceDetailSub(PlaceDetailSub):
         context = super(SAPlaceDetailSub, self).get_context_data(**kwargs)
 
         context['child_place_template'] = self.child_place_template
+        context['subcontent_title'] = 'Constituency Offices'
 
         if self.object.kind.slug == 'province':
             context['child_places'] = (
