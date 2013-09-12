@@ -12,7 +12,111 @@
 
 <li><a href="{% url "home" %}">Home</a></li>
 
-<li><a href="{% url "home" %}">Menu items TBC</a></li>
+<li><a href="{% url "home" %}">Democracy Resources</a>
+  {% if include_sub_menu_entries %}
+  <ul>
+    <li>
+      <a href="{% url "info_page" slug='citizens-rights-freedoms' %}"> Citizens Rights and Freedoms </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='how-our-democracy-works' %}"> How Our Democracy Works </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='constitution--zimbabwe-2013' %}"> The Constitution of Zimbabwe 2013 </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='electoral-law-and-legislation' %}"> Electoral Law and Legislation </a>
+    </li>
+  </ul>
+  {% endif %}
+</li>
+ 
 
 
-<li><a href="{% url "info_page" slug='about' %}">About</a></li>
+<li><a href="{% url "home" %}">National Assembly</a></li>
+  {% if include_sub_menu_entries %}
+  <ul>
+    <li>
+      <a href="{% url "info_page" slug='political-parties' %}"> The Main Political Parties in Zimbabwe </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='senators' %}"> Senators </a>
+    </li>
+  </ul>
+  {% endif %}
+</li>
+ 
+
+
+<li><a href="{% url "home" %}">Parliament</a></li>
+  {% if include_sub_menu_entries %}
+  <ul>
+    <li>
+      <a href="{% url "info_page" slug='senators' %}"> Senators </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='parliament-overview' %}"> Parliament Overview </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='ministry-overview' %}"> Zimbabwean Ministries and their functions </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='committee-overview' %}"> Committee Overview </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='women-caucus' %}"> Women Caucus </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='bills-overview' %}"> Bills Overview </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='hansard' %}"> Hansard </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='political-parties' %}"> The Main Political Parties in Zimbabwe </a>
+    </li>
+
+  </ul>
+  {% endif %}
+</li>
+ 
+<li><a href="{% url "home" %}">Blogs</a></li>
+
+<li><a href="{% url "home" %}">News</a></li>b
+  {% if include_sub_menu_entries %}
+  <ul>
+    <li>
+      <a href="{% url "info_page" slug='newspapers' %}"> Newspapers </a>
+    </li>
+  </ul>
+  {% endif %}
+</li>
+ 
+<li><a href="{% url "home" %}">About</a></li>
+  {% if include_sub_menu_entries %}
+  <ul>
+    <li>
+      <a href="{% url "info_page" slug='about' %}"> About Us </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='kuvakazim-overview' %}"> How Our Democracy Works </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='our-history' %}"> The Constitution of Zimbabwe 2013 </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='get-involved' %}"> Get Involved </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='scorecards' %}"> Scorecard FAQs </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='privacy-policy' %}"> Privacy Policy </a>
+    </li>
+    <li>
+      <a href="{% url "info_page" slug='contact' %}"> Contact Us </a>
+    </li>
+  </ul>
+  {% endif %}
+</li>
+ 
