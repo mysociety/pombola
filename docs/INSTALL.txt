@@ -60,7 +60,7 @@ nano conf/general.yml
 # then set up the database
 bin/prepare_environment.bash
 
-If this step fails, please consult TROUBLESHOOTING.txt
+If this step fails, please consult TROUBLESHOOTING.md
 
 # VIRTUALENV
 

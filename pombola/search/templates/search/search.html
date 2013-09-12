@@ -26,11 +26,19 @@
         </div>
         
         {% if query %}
+            {% if geocoder_results %}
+              {% include "search/geocoder_results.html" %}
+            {% endif %}
+
             <h3>Results</h3>
 
             <ul class="listing">        
             {% for result in page.object_list %}
-                {% include 'core/generic_list_item.html' with object=result.object %}
+                {% if result.app_label == 'speeches' %}
+                    {% include 'search/speech_item.html' %}
+                {% else %}
+                    {% include 'core/generic_list_item.html' with object=result.object %}
+                {% endif %}
             {% empty %}
                 <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
             {% endfor %}

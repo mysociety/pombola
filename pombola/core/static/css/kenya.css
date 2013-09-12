@@ -1612,6 +1612,15 @@ div.object_menu ul li a {
   padding-left: 0.5em;
 }
 
+.geocoded_results {
+  background: #f7f7f7;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+.geocoded_results #map_canvas {
+  float: right;
+}
+
 .vcard {
   list-style-type: none;
   padding: 0;

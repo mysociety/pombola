@@ -8,6 +8,18 @@ from haystack.views import SearchView
 from pombola.core    import models as core_models
 from pombola.hansard import models as hansard_models
 
+from .views import SearchViewWithGeocoder
+
+search_models = (
+    core_models.Person,
+    core_models.Organisation,
+    core_models.Place,
+    core_models.PositionTitle
+)
+if settings.ENABLED_FEATURES['speeches']:
+    from speeches.models import Speech
+    search_models += ( Speech, )
+
 urlpatterns = patterns('pombola.search.views',
 
     # Haystack and other searches
@@ -17,14 +29,9 @@ urlpatterns = patterns('pombola.search.views',
     # General search - just intended for the core app
     url(
         r'^$',
-        SearchView(
-            searchqueryset = SearchQuerySet().models(
-                core_models.Person,
-                core_models.Organisation,
-                core_models.Place,
-                core_models.PositionTitle
-            ),
-            form_class=SearchForm,            
+        SearchViewWithGeocoder(
+            searchqueryset = SearchQuerySet().models( *search_models ).highlight(),
+            form_class=SearchForm,
         ),
         name='core_search'
     ),
@@ -36,7 +43,7 @@ urlpatterns = patterns('pombola.search.views',
             searchqueryset = SearchQuerySet().models(
                 core_models.Person
             ),
-            form_class=SearchForm,            
+            form_class=SearchForm,
         ),
         name='core_person_search'
     ),
@@ -48,7 +55,7 @@ urlpatterns = patterns('pombola.search.views',
             searchqueryset = SearchQuerySet().models(
                 core_models.Place,
             ),
-            form_class=SearchForm,            
+            form_class=SearchForm,
         ),
         name='core_place_search'
     ),
@@ -65,7 +72,7 @@ if settings.ENABLED_FEATURES['hansard']:
                     hansard_models.Entry,
                 ),
                 form_class=SearchForm,
-                template="search/hansard.html",            
+                template="search/hansard.html",
             ),
             name='hansard_search',
         ),

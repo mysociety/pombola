@@ -116,13 +116,17 @@
     this.centerMapInWindow = function (loc) {
       var map = this.map;
 
-      // Make the map the same height as the window, and then scroll to the top
-      // of it to fill the window
       var $canvas = $('#map-drilldown-canvas');
 
-      var headers_height = $('#all-headers').height() + $('#breadcrumb-replacement').height();
+      // Slightly annoying that what is a small window (less than 640 pixels wide)
+      // is being set independently of the css.
+      var window_is_large = $(window).width() >= 640;
+      var canvas_offset = $canvas.offset().top;
 
-      $canvas.height( $(window).height() - headers_height );
+      $canvas.height( $(window).height() - (window_is_large ? canvas_offset : 0) );
+
+      window.scrollTo(0, window_is_large ? 0 : canvas_offset);
+
       google.maps.event.trigger(map, 'resize');
 
       if ( loc ) {

@@ -13,6 +13,9 @@
         <meta http-equiv="cleartype" content="on">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
+        {% block extra_head_meta %}
+        {% endblock%}
+
         {% comment %}
 
             The 'STATIC_GENERATION_NUMBER' is used to force the caches to fetch
@@ -22,7 +25,7 @@
             becomes available in the next version of Django.
 
             https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/
-        
+
         {% endcomment %}
 
         <link href="{{ STATIC_URL }}css/jquery-ui-1.8.17.custom.css?{{ settings.STATIC_GENERATION_NUMBER }}" rel="stylesheet" type="text/css" />
@@ -37,7 +40,7 @@
                 static_url:                '{{ STATIC_URL }}',
                 static_generation_number:  '{{ settings.STATIC_GENERATION_NUMBER }}',
                 extra_js: [],
-                map_bounds: { 
+                map_bounds: {
                   north: {{ settings.MAP_BOUNDING_BOX_NORTH }},
                   east:  {{ settings.MAP_BOUNDING_BOX_EAST  }},
                   south: {{ settings.MAP_BOUNDING_BOX_SOUTH }},
@@ -50,7 +53,7 @@
             {% endblock %}
 
         </script>
-        
+
 
         <!--[if (lt IE 9) & (!IEMobile)]>
             <script src="{{ STATIC_URL }}js/respond.v1.1.0.min.js"></script>
@@ -60,13 +63,12 @@
         <script src="{{ STATIC_URL }}js/loader.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
         <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
-        
+
         {% block extra_headers %}{% endblock %}
-        
+
     </head>
     <body {% block body_attributes %}{% endblock %}>
 
-      <div id="all-headers">
         {% block header %}
           {% include 'header.html' %}
         {% endblock %}
@@ -82,8 +84,8 @@
             </nav>
         </div>
         {% endblock %}
-      </div>
 
+        {% block page %}
         <div id="page">
             <div class="page-wrapper wrapper" id="hfWrap">
                 {% block content %}{% endblock %}
@@ -94,6 +96,8 @@
             </div>
 
         </div>
+        {% endblock %}
+
         <script>
             // Make sure the wrapper has a minimum height of the
             // absolutely-positioned sidebar within it.

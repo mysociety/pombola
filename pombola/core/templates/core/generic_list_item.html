@@ -1,132 +1,19 @@
-{% load thumbnail %}
 {% load switch %}
 
 <li class="{{ object.css_class }}{% if not object.show_active %} inactive{% endif %}">
 
     {% switch object.css_class %}
-
         {% case 'position' %}
-            {% thumbnail object.person.primary_image "90x90" crop="center" as im %}
-                <a href="{{ object.person.get_absolute_url }}">
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                </a>
-            {% empty %}
-                <a href="{{ object.person.get_absolute_url }}">
-                    <img src="{{STATIC_URL}}images/person-90x90.jpg" />
-                </a>
-            {% endthumbnail %}
-
-            <section>
-                <h4><a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a></h4>
-		{% if object.place %}
-                    <p>Member for {{ object.place.name }}</p>
-                {% else %}
-		    {# Bring on the elif clause! #}
-                    {% if object.is_nominated_politician %} 
-                        <p>Nominated Member</p>
-                    {% endif %}
-                {% endif %}
-
-                <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
-            </section>
-
+            {% include "core/position_list_item.html" %}
         {% case 'positiontitle' %}
-            <section>
-                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
-
-                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
-            </section>
-
+            {% include "core/positiontitle_list_item.html" %}
         {% case 'person' %}
-            {% thumbnail object.primary_image "90x90" crop="center" as im %}
-                <a href="{{ object.get_absolute_url }}">
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                </a>
-            {% empty %}
-                <a href="{{ object.get_absolute_url }}">
-                    <img src="{{STATIC_URL}}images/person-90x90.jpg" />
-                </a>
-            {% endthumbnail %}
-            
-            <section>
-                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
-                
-                {% with pos_set=object.position_set.all.currently_active %}
-                <p>
-
-                {% for position in pos_set|slice:":4" %}
-                    <strong>{{ position.title.name }}</strong> of {{ position.organisation.name }}
-                    <span class="meta">({{ position.display_dates|safe }})</span>;
-                {% empty %}
-                    No currently active positions found.
-                {% endfor %}
-
-                {% with remaining=pos_set.count|add:'-4' %}
-                    {% if remaining > 0 %}
-                        and {{ remaining }} more&hellip;
-                    {% endif %}
-                {% endwith %}
-
-                </p>
-                {% endwith %}
-                
-                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
-            </section>
-
+            {% include "core/person_list_item.html" %}
         {% case 'organisation' %}
-            {% thumbnail object.primary_image "90x90" crop="center" as im %}
-                <a href="{{ object.get_absolute_url }}">
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                </a>
-            {% empty %}
-                <a href="{{ object.get_absolute_url }}">
-                    <img src="{{STATIC_URL}}images/organisation-90x90.jpg" />
-                </a>
-            {% endthumbnail %}
-
-            <section>
-                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
-
-                <div class="kind">{{ object.kind.name }}</div>
-
-                {% if object.num_positions %}
-                    <p class="meta">{{ object.num_positions }} related positions</p>
-                {% endif %}
-
-                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
-            </section>
-        
+            {% include "core/organisation_list_item.html" %}
         {% case 'place' %}
-            {% thumbnail object.primary_image "90x90" crop="center" as im %}
-                <a href="{{ object.get_absolute_url }}">
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-                </a>
-            {% empty %}
-                <a href="{{ object.get_absolute_url }}">
-                    <img src="{{STATIC_URL}}images/place-90x90.jpg" />
-                </a>
-            {% endthumbnail %}
-        
-            <section>
-                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
-                
-		        {% if object.parent_place %}
-                    <p>Parent place: <a href="{{ object.parent_place.get_absolute_url }}">{{ object.parent_place.name }}</a></p>
-                {% endif %}
-
-                <p class="meta">{{ object.summary }}</p>
-
-                <div class="kind">{{ object.kind.name }}<br>{{ object.parliamentary_session|default:"" }}</div>
-
-                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
-            </section>
-
+            {% include "core/place_list_item.html" %}
         {% else %}
-            <section>
-                <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
-
-                <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
-            </section>
-
+            {% include "core/unknown_list_item.html" %}
     {% endswitch %}
 </li>

@@ -1,6 +1,6 @@
 # TROUBLESHOOTING
 
-If something goes wrong please check the following for help. 
+If something goes wrong please check the following for help.
 If your problem is not listed please add it after fixing.
 
 ## Remember to set up the environment!
@@ -19,13 +19,13 @@ See the VIRTUALENV section in INSTALL.txt.
 
 If you see errors like this...
 
-  Error: No module named XXXX
-  
+    Error: No module named XXXX
+
 ...then you might need to make sure your modules are up to date. Run:
 
     pip install -r ../requirements.txt
 
-...to get all the modules that Pombola needs. This may be necessary 
+...to get all the modules that Pombola needs. This may be necessary
 ifyou have updated your Pombola by pulling from the git repository
 since your initial installation and the requirements have changed.
 
@@ -35,12 +35,12 @@ since your initial installation and the requirements have changed.
 If you see error like this...
 
     DatabaseError while rendering: column XXX does not exist
-  
+
 ...then you may need to run a database migration. Run:
 
     ./manage.py migrate
 
-...to make sure your database is up-to-date with your current installation. This may 
+...to make sure your database is up-to-date with your current installation. This may
 be necessary if you have updated your Pombola by pulling from the git repository
 since your initial installation. It's safe to run even if there have been no changes.
 
@@ -58,12 +58,12 @@ not hanging.
 
 ## Location searches return old/bad data
 
-Try deleting the cached search in 'httplib2_cache'
+Try deleting the cached search in `httplib2_cache`
 
 
 ## Caching does not appear to be working
 
-Point your browser at '/status/memcached/' - first hit should save a val to
+Point your browser at `/status/memcached/` - first hit should save a val to
 cache and subsequent ones should show that it is in the cache until the ttl
 expires.
 
@@ -73,8 +73,8 @@ cookie - both of which will cause caches to fetch you new content.
 
 ## No featured people on the home page: just a big Pombola logo
 
-The home page displays a random featured person (typically an MP) provided there is at least 
-one in the database with can_be_featured set to true. To choose people to feature, log into 
+The home page displays a random featured person (typically an MP) provided there is at least
+one in the database with can_be_featured set to true. To choose people to feature, log into
 the admin and choose people from Core > Persons. Select the individuals you want to feature
 by the checkbox "can be featured" for each one.
 
@@ -103,7 +103,7 @@ prepare_environment.bash is using your system Python packages
 depends on the version of virtualenv on your system,
 unfortunately.  To test this, run:
 
-   find pombola-virtualenv -name no-global-site-packages.txt
+    find pombola-virtualenv -name no-global-site-packages.txt
 
 If no file is found, then the system packages are accessible,
 and you should be able to rerun prepare_environment.bash without
@@ -113,11 +113,11 @@ If that file is found, then you have a recent version of
 virtualenv, and you should edit prepare_environment.bash
 to change the line:
 
-   virtualenv ../pombola-virtualenv
+    virtualenv ../pombola-virtualenv
 
 ... to:
 
-   virtualenv --system-site-packages ../pombola-virtualenv
+    virtualenv --system-site-packages ../pombola-virtualenv
 
 If you then rerun prepare_environment.bash, everything should be
 fine - pip will find that the system python-gdal installation
@@ -149,7 +149,7 @@ the system I'm testing on, this command shows that I'm using
     dpkg --status libgdal1-dev
 
 That version is incompatible with 1.9.1, and will produce the
-error "‘VSILFILE’ has not been declared" when building GDAL,
+error `‘VSILFILE’ has not been declared` when building GDAL,
 even if you've fixed the other problems below.
 
 From the listing at http://pypi.python.org/simple/GDAL/ I can
@@ -185,7 +185,7 @@ For example, in my test case that is:
 
     -L/usr/lib -lgdal1.7.0
 
-So I should edit pombola-virtualenv/build/GDAL/setup.py and
+So I should edit `pombola-virtualenv/build/GDAL/setup.py` and
 change the line:
 
     libraries = ['gdal']
@@ -203,36 +203,68 @@ The build should then succeed, and if you rerun
 prepare_environment.bash then the installation should complete
 successfully.
 
-## Installing the Python xapian bindings
 
-If you get the following error when running
-prepare_environment.bash:
+## You need to merge two people together
 
-   haystack.exceptions.MissingDependency: The 'xapian' backend requires the installation of 'xapian'. Please refer to the documentation.
+This happens fairly often, and at the moment the simplest thing to do is to run
+some SQL to move related records from one person to the other. Once that is done
+you can use the admin to tidy the entries up and then delete the redundant one.
 
-... then the Python xapian bindings cannot be found.  If you're
-using Mac OS, then there are some suggestions in
-requirements.txt.  If you're using a Debian-based GNU/Linux
-distribution, then the following steps may help.
+It is helpful to open the admin pages for the two people side by side and it may
+be possible to delete several entries related to them directly if it is clear
+that they are duplicated.
 
-The problem here is that xapian-bindings isn't installable with
-pip, so probably the easiest way to get around this is to
-install your distribution's python-xapian, and then make the
-virtualenv able to use it:
+You'll need to decide which of the two records will remain, usually the one with
+the lower id is a good bet.
 
-    sudo apt-get install python-xapian
+Any details that are fields directly on the entry should be manually copied over
+(such as date of birth, summary , etc).
 
-If your virtualenv uses the system Python packages, this should
-be sufficient, and running the prepare_environment.bash script
-again should work.  If your virtualenv was created with
---no-site-packages, on the other hand, the suggestion here:
+Connect to the database by going to the project dir, activating the virtual env
+and then `./manage.py dbshell`.
 
-    https://groups.google.com/forum/?fromgroups=#!msg/python-virtualenv/f-0m7d_PQKQ/wE3yyskhjvUJ
+In the following examples `$TO_KEEP` and `$TO_DELETE` are the ids of the people
+being merged.
 
-... is to symlink in your system's Python xapian bindings.  On
-my test machine, that can be done with:
+``` sql
+-- update tables linked directly to the person table
 
-    cd pombola-virtualenv/lib/python2.7/site-packages
-    ln -s /usr/lib/python2.7/dist-packages/xapian/
+update core_position              set person_id = $TO_KEEP where person_id = $TO_DELETE;
+update core_alternativepersonname set person_id = $TO_KEEP where person_id = $TO_DELETE;
 
-Re-running prepare_environment.bash should then work.
+update hansard_entry set speaker_id = $TO_KEEP where speaker_id = $TO_DELETE;
+update hansard_alias set person_id  = $TO_KEEP where person_id  = $TO_DELETE;
+
+-- the following tables are linked to several other tables using the
+-- content-type framework so the object_id may match an org etc. This is
+-- unlikely though, so you can do a test search for the object_id and if the
+-- results match what you expect from the admin it is safe to do the simpler
+-- update. If there are more then update them one at a time using
+-- 'where id = ...'
+
+select * from core_informationsource where object_id = $TO_DELETE;
+update core_informationsource set object_id = $TO_KEEP where object_id = $TO_DELETE;
+
+select * from core_identifier where object_id = $TO_DELETE;
+update core_identifier set object_id = $TO_KEEP where object_id = $TO_DELETE;
+
+select * from core_contact where object_id = $TO_DELETE;
+update core_contact set object_id = $TO_KEEP where object_id = $TO_DELETE;
+
+select * from images_image where object_id = $TO_DELETE;
+update images_image set object_id = $TO_KEEP, is_primary = false where object_id = $TO_DELETE;
+```
+
+You can now delete the redundant person using the admin. It will show you
+related records that will also be deleted, check these to see if any need to be
+transferred (and then add SQL above). Note that some entries (like the scorecard
+ones) can be safely deleted as they will be regenerated if needed.
+
+It is best to delete the person via the admin as that will also lead to them
+being deleted from the search index.
+
+You should also look at the retained person in the admin to check that there are
+no duplicated entries and to ensure that only one of the images is marked as
+`is_primary`. Searching for the person's name on the position list admin page is
+also a good way to spot duplicates.
+

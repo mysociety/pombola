@@ -1,212 +1,298 @@
-*, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
- }
 
-html,
+$border_radius: 5px;
+
+@font-face {
+    font-family: 'latobold';
+    src: url('/static/fonts/lato-bold-webfont.eot');
+    src: url('/static/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-bold-webfont.woff') format('woff'),
+         url('/static/fonts/lato-bold-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-bold-webfont.svg#latobold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'latoitalic';
+    src: url('/static/fonts/lato-italic-webfont.eot');
+    src: url('/static/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-italic-webfont.woff') format('woff'),
+         url('/static/fonts/lato-italic-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'latoregular';
+    src: url('/static/fonts/lato-regular-webfont.eot');
+    src: url('/static/fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-regular-webfont.woff') format('woff'),
+         url('/static/fonts/lato-regular-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-regular-webfont.svg#latoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+#staging_header {
+    background-color: #555;
+    color: #ccc;
+    padding: 10px;
+    strong{
+        color: #ddd;
+    }
+}
+
+
+html{
+    background-image: none;
+    background: $colour_footer_background;
+}
 body
 {
-    background-color: #fff;
-    font: 76% Verdana,Arial,Helvetica,sans-serif;
+    background-image: none;
+    background: $colour_main_background;
 }
+#page,
+#breadcrumb-replacement
+{
+    background: $colour_main_background;
+}
+a {
+    color: $colour_secondary;
+    &:hover{
+        color: mix($colour_secondary, #fff, 80%);
+    }
+}
+
+
+/*
+
+HEADER
+
+*/
+
+#site-header{
+    height: 110px;
+    background-image: none;
+    background: $colour_main_background;
+}
+
 #logo {
-  background: url('//placehold.it/147x23') 0 center no-repeat;
-  @media only all and (min-width: 640px), print {
-    background: url('//placehold.it/418x34') 0 center no-repeat;
-  }
+    width: 540px;
+    max-width: 100%;
+    height: 84px;
+    background: url('/static/images/za-logo.png') 0 center no-repeat;
+    @media only all and (min-width: 640px), print {
+      background: url('/static/images/za-logo.png') 0 center no-repeat;
+    }
 }
 
 #main-menu {
-    background: #E23D28; /*is this working?*/
+    background: $colour_primary;
 }
-
-
-
-//
-//  Recreated responsive PMG header
-//
-
-#header-top{
-    background-color: #fff;
-}
-
-//Hide dropdown menus
-.yuimenubaritem .bd,
-#nice-menu-3 ul
-{ display:none; }
-
-// Hide search form on small screen
-#search{
-    display: none;
-    @media (min-width: 755px) {
-        display: block;
-    }
-}
-
-#logo-top{
-    // Logo full width on small screen
-    width: 100%;
-    text-align: center;
-    @media (min-width: 755px) {
-        // logo half width on large screen
-        width:50%;
-        text-align: left;
-    }
-
-    img{
-        // logo max width container
-        max-width: 100%;
-        padding: 0.5em 1em;
-    }
-}
-
-#primary-menu-search{
-    width:100%;
-    margin: auto;
-    text-align: center;
-    @media (min-width: 755px) {
-        text-align: right;
-        width: 50%;
-        float:right;
-        margin-top: -1em;
-    }
-}
-#nice-menu-3,
-#main-menu
-{
-    list-style: none;
-    padding-left:0;
-    margin-left:0;
-    li{
-        list-style: none;
-        display: inline-block;
-        padding:0;
-        margin: 0;
-
-        iframe{ // Twitter button
-            margin-top: 0.8em;
-        }
-        img{ // Facebook button - may need to add a class if too broad
-            position: relative;
-            top: 0.5em;
-        }
-
-        a{
-            display: block;
-            font-weight: bold;
-            font-size: 0.65em;
-            padding: 0.3em 0.5em 0.3em 0;
-            @media (min-width: 950px) {
-                font-size: 0.8em;
-                padding: 0.3em 5px;
-            }
-
-            color: rgb(42, 77, 117);
-            border-right: 1px solid rgb(153, 204, 255);
-        }
-        &.menu-path-user-login{
-            a{
-                border-right: none;
-            }
-        }
-    }
-}
-#main-menu nav ul li a // this specific to overide base styles
-{
-    background:none;
-    display: block;
-    color:#000;
-    padding: 0.5em 1em;
-    border: none;
-    font-weight: bold;
-    font-size: 0.65em;
-    height: auto;
-    padding: 0.3em 0.5em 0.3em 0;
-    line-height: 3em;
-    @media (min-width: 950px) {
-        font-size: 0.8em;
-        padding: 0.5em 1em;
-    }
-
-    &:hover,
-    &.active{
-        text-decoration: none;
-        background-color: #bad8fb;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#bad8fb), to(#e6f2fe)); /* Chrome, Safari 4+ */
-        background-image: -webkit-linear-gradient(top, #bad8fb, #e6f2fe); /* Chrome 10-25, iOS 5+, Safari 5.1+ */
-        background-image:    -moz-linear-gradient(top, #bad8fb, #e6f2fe); /* Firefox 3.6-15 */
-        background-image:      -o-linear-gradient(top, #bad8fb, #e6f2fe); /* Opera 11.10-12.00 */
-        background-image:         linear-gradient(to bottom, #bad8fb, #e6f2fe); /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-    }
-}
-#main-menu nav ul li:hover ul li a{ // Submenu - this specific to override
-    background-color: #e6f2fe;
-    font-size: 0.65em;
-    &:hover{
-        background-color: #bad8fb;
-    }
-}
-#main-menu nav ul li.active > a{ // this specific to override
-    background-color: #bad8fb;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#bad8fb), to(#e6f2fe)); /* Chrome, Safari 4+ */
-    background-image: -webkit-linear-gradient(top, #bad8fb, #e6f2fe); /* Chrome 10-25, iOS 5+, Safari 5.1+ */
-    background-image:    -moz-linear-gradient(top, #bad8fb, #e6f2fe); /* Firefox 3.6-15 */
-    background-image:      -o-linear-gradient(top, #bad8fb, #e6f2fe); /* Opera 11.10-12.00 */
-    background-image:         linear-gradient(to bottom, #bad8fb, #e6f2fe);
-}
-
-#main-menu{
-    background-color: rgb(1, 120, 216);
-    text-align: center;
+#main-menu nav{
+    text-align: left;
     ul{
-        padding-left:0;
-        margin-left:0;
+        border: none;
+        width: 100%;
+        li{
+            border: none;
+            &.header-search{
+                float: right;
+            }
+            a{
+                background: $colour_primary;
+                font-family: 'latoregular';
+                &:hover{
+                    background: mix($colour_primary, #000, 80%);
+                }
+            }
+            &.active a,
+            &.active a:hover
+            {
+                color: #fff;
+                border:none;
+                padding:8px 10px;
+                margin:0;
+                background: mix($colour_primary, #000, 80%);
+            }
+            ul{
+                a,
+                a:hover
+                {
+                    background-color: #444;
+                }
+            }
+        }
     }
 }
-#main-menu nav ul li {
-    display: inline;
-    height: auto;
-    border-right: none;
-}
-#main-menu nav ul li.active > a{
-    padding: 0.3em 0.5em 0.3em 0;
-    border:none !important;
-    @media (min-width: 950px) {
-        padding: 0.5em 1em;
+#header-search{
+    border: 1px solid mix($colour_primary, #000, 75%);
+    background: #fff;
+    input,button{
+        border:none;
+        background: transparent;
+    }
+    button{
+        background-image: url(/static/images/header_search.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        border-radius: 0;
+        &:hover{
+            background-color: #eee;
+        }
     }
 }
 
-#social-links{
+
+/*
+
+HOME PAGE INTRO BOX
+
+*/
+#front_intro{
+    background-color: #027857;
+    padding: 2em 0;
+    font-family: 'latoregular';
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-image: url(/static/images/intro-bg.jpg);
+}
+#front_intro .btn-text-green{
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    -moz-box-sizing: border-box;
+          box-sizing: border-box;
+    padding: 1em 0.5em;
+    box-shadow: 0px 3px 0px #af201a;
+}
+#home-search{
+    background: transparent;
+    margin: 0;
+    margin-top: 30px;
+    padding: 0;
+    overflow: visible;
+
+    label{
+        font-family: 'latoregular';
+        font-size: 0.96em;
+        font-weight: normal;
+        text-shadow: 0px 1px 2px rgba(2, 111, 82, 1);
+    }
+    input{
+        width: 78%;
+        margin-right: 1%;
+        -moz-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+    button{
+        width:20%;
+        box-shadow: 0px 2px 0px #af201a;
+        &:hover{
+            background-color: rgb(251, 67, 44);
+        }
+    }
+}
+
+#home-featured-person,
+.featured-person
+{
+    margin-bottom: 0;
+    border-radius: $border_radius;
+    border-color: rgba(255,255,255,0.3)
+}
+.featured-person.featured-person-placeholder{
+    background-color: transparent;
+}
+
+#page .home-left h2#home-intro,
+#page .home-right h2#home-intro
+{
+    display: block;
+}
+
+#front_intro .home-left{
+    width: 550px;
+}
+
+#front_intro .home-right{
+    width: 304px;
+    float: right;
+}
+
+#front_intro .home-right h2{
+    color: #fff;
+    text-transform: none;
+    line-height: 1.4;
+    font-family: 'latoregular';
+    font-weight: normal;
+    text-shadow: 0px 1px 4px rgba(2, 111, 82, 1);
+}
+#page .home-left h2{
     display:none;
 }
 
-#header-top{
-    display:block;
-    width:100%;
-    clear:both;
-    padding: 0.5em 0.25em;
-    @media (min-width: 640px) {
-        padding: 1em 2em;
+
+
+/*
+
+NEWS & POLL
+
+*/
+
+#news,
+#poll
+{
+    padding: 2em 0;
+    float:left;
+    width:656px;
+    max-width: 100%;
+    h2{
+        font-family: 'latoregular';
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+    h3 a,
+    a.readmore
+    {
+        color: $colour_primary;
+        font-family: 'latobold';
+        font-weight: normal;
+    }
+}
+#poll{
+    float:left;
+    width: 304px;
+}
+ul#home-news-list{
+    border:none;
+    padding:0;
+    margin-top: 0;
+    li{
+        border:none;
+        width: 304px;
+        float: left;
+        padding-right: 24px;
     }
 }
 
-#search{
-    font-size: 1.3em;
-    text-align: right;
-     .form-text {
-        width: 10em;
-        padding: 0px 0.5em;
-    }
-    .form-text,
-    .form-submit
-    {
-        border: 1px solid rgb(51, 102, 153);
-        font-size: 1.1em;
-        height: 1.5em;
-        vertical-align: middle;
-    }
-}
-.container-inline div,
-.container-inline label
-{
-    display: inline;
+
+
+
+/*
+
+FOOTER
+
+*/
+#site-footer{
+    background: $colour_footer_background;
+    border-top: mix($colour_footer_background, #000, 70%) 2px solid;
 }

@@ -34,7 +34,7 @@ To change your site's look and feel please see the [styling notes](https://githu
 
 ## Troubleshooting
 
-Please see [docs/TROUBLESHOOTING.txt](https://github.com/mysociety/pombola/blob/master/docs/TROUBLESHOOTING.txt) file
+Please see [docs/TROUBLESHOOTING.md](https://github.com/mysociety/pombola/blob/master/docs/TROUBLESHOOTING.md) file
 
 ## Future
 

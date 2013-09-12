@@ -30,19 +30,26 @@ urlpatterns += patterns('',
 
 
 # mapit
-urlpatterns += patterns('',    
+urlpatterns += patterns('',
     (r'^mapit/', include('mapit.urls')),
 )
 
 # Info pages
 urlpatterns += patterns('',
-    (r'^info/', include('pombola.info.urls')),
+    (r'^info/', include('pombola.info.urls.pages')),
+    (r'^blog/', include('pombola.info.urls.blog')),
 )
 
 # File archive
 urlpatterns += patterns('',
     (r'^file_archive/', include('pombola.file_archive.urls')),
 )
+
+# SayIt - speeches
+if settings.ENABLED_FEATURES['speeches']:
+    urlpatterns += patterns('',
+        (r'^speeches/', include('speeches.urls')),
+    )
 
 # Hansard pages
 if settings.ENABLED_FEATURES['hansard']:
@@ -86,7 +93,7 @@ urlpatterns += patterns('',
 
 # votematch
 if settings.ENABLED_FEATURES['votematch']:
-    urlpatterns += patterns('',    
+    urlpatterns += patterns('',
         (r'^votematch/', include('pombola.votematch.urls')),
     )
 

@@ -56,7 +56,7 @@ class ModelBase(models.Model):
         return url
 
     @property
-    def show_active():
+    def show_active(self):
         """Used to indicate whether results in search should be greyed out"""
         return True
 

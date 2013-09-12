@@ -41,6 +41,12 @@ if IN_TEST_MODE:
 config_file = os.path.join( base_dir, 'conf', 'general.yml' )
 config = yaml.load( open(config_file, 'r') )
 
+# Configure the optional apps
+ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch', 'speeches' )
+OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
+if 'speeches' in OPTIONAL_APPS: # Add its dependent apps
+    OPTIONAL_APPS = ('django_select2', 'django_bleach', 'popit', 'instances') + OPTIONAL_APPS
+
 if int(config.get('STAGING')):
     STAGING = True
 else:
@@ -197,6 +203,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
 )
+if 'speeches' in OPTIONAL_APPS:
+    MIDDLEWARE_CLASSES += ( 'pombola.middleware.FakeInstanceMiddleware', )
 
 ROOT_URLCONF = 'pombola.urls'
 
@@ -262,10 +270,6 @@ INSTALLED_APPS = (
     'pombola.file_archive',
     'pombola.map',
 )
-
-# add the optional apps
-ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch' )
-OPTIONAL_APPS = tuple( [ 'pombola.' + a for a in config.get( 'OPTIONAL_APPS', [] ) ] )
 INSTALLED_APPS += OPTIONAL_APPS
 
 # mapit related settings
@@ -392,7 +396,7 @@ BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 # create the ENABLED_FEATURES hash that is used to toggle features on and off.
 ENABLED_FEATURES = {}
 for key in ALL_OPTIONAL_APPS: # add in the optional apps
-    ENABLED_FEATURES[key] = 'pombola.' + key in INSTALLED_APPS
+    ENABLED_FEATURES[key] = ('pombola.' + key in INSTALLED_APPS) or (key in INSTALLED_APPS)
 
 
 # map boundaries
