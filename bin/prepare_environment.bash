@@ -26,6 +26,7 @@ curl -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
 
 # Install all the packages
 pip install Mercurial
+pip uninstall PIL || true
 pip install -r requirements.txt
 
 # Try to make sure that the MapIt CSS has been generated.

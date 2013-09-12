@@ -6,7 +6,7 @@
 py-bcrypt
 PyYAML
 Mercurial
-PIL >= 1.1.7
+Pillow
 
 ### Database drivers
 psycopg2
