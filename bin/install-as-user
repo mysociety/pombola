@@ -1,0 +1,107 @@
+#!/bin/sh
+
+set -e
+error_msg() { printf "\033[31m%s\033[0m\n" "$*"; }
+notice_msg() { printf "\033[33m%s\033[0m " "$*"; }
+done_msg() { printf "\033[32m%s\033[0m\n" "$*"; }
+DONE_MSG=$(done_msg done)
+
+if [ $# -ne 4 ]
+then
+    cat >&2 <<EOUSAGE
+Usage: $0 <UNIX-USER> <HOST> <INSTALLATION-DIRECTORY> <DEVELOPMENT-INSTALL>
+EOUSAGE
+    exit 1
+fi
+
+UNIX_USER="$1"
+HOST="$2"
+DIRECTORY="$3"
+DEVELOPMENT_INSTALL="$4"
+DB_NAME="pombola"
+
+# Check that the arguments we've been passed are sensible:
+
+IP_ADDRESS_FOR_HOST="$(dig +short $HOST)"
+
+if [ x = x"$IP_ADDRESS_FOR_HOST" ]
+then
+    error_msg "The hostname $HOST didn't resolve to an IP address"
+    exit 1
+fi
+
+if ! id "$UNIX_USER" 2> /dev/null > /dev/null
+then
+    error_msg "The user '$UNIX_USER' didn't exist."
+    exit 1
+fi
+
+if [ "$(whoami)" != "$UNIX_USER" ]
+then
+    error_msg "This script should be run by the user '$UNIX_USER'."
+    exit 1
+fi
+
+REPOSITORY="$DIRECTORY/pombola"
+LINK_DESTINATION="$HOME/pombola"
+
+ln -sfn "$REPOSITORY" $LINK_DESTINATION
+cd "$REPOSITORY"
+
+# Install the compass gem locally - it's required for generating the
+# CSS:
+echo "Setting up CSS... "
+export GEM_HOME="$DIRECTORY/gems"
+mkdir -p "$GEM_HOME"
+export GEM_PATH=
+export PATH="$GEM_HOME/bin:$PATH"
+
+if ! grep -q 'Set up local gem directory for Pombola' $HOME/.bashrc; then
+    cat >>$HOME/.bashrc <<EOBRC
+
+# Set up local gem directory for Pombola
+export GEM_HOME="$DIRECTORY/gems"
+export GEM_PATH=
+export PATH="\$GEM_HOME/bin:\$PATH"
+EOBRC
+fi
+
+gem install --no-ri --no-rdoc compass
+echo $DONE_MSG
+
+# Write sensible values into the config file, if it doesn't already exist
+if [ ! -f conf/general.yml ]; then
+    echo -n "Setting up default conf/general.yml file... "
+    RANDOM_STRING=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c32)
+    sed -r \
+        -e "s,^( *POMBOLA_DB_HOST:).*,\\1 ''," \
+        -e "s,^( *POMBOLA_DB_NAME:).*,\\1 '$DB_NAME'," \
+        -e "s,^( *POMBOLA_DB_USER:).*,\\1 '$UNIX_USER'," \
+        -e "s,^( *DJANGO_SECRET_KEY:).*,\\1 '$RANDOM_STRING'," \
+        conf/general.yml-example > conf/general.yml
+    echo $DONE_MSG
+fi
+
+# Create the database if it doesn't exist:
+echo -n "Setting up database... "
+if ! psql -l | egrep "^ *$DB_NAME *\|" > /dev/null
+then
+    createdb -T template_postgis --owner "$UNIX_USER" "$DB_NAME"
+else
+    notice_msg already
+fi
+echo $DONE_MSG
+
+echo "Installing any needed python packages, migrating db, setting up static content..."
+cd "$REPOSITORY"
+bin/prepare_environment.bash
+echo $DONE_MSG
+
+# Set up virtualenv activation on login
+if ! grep -q 'Set up virtualenv activation for Pombola' $HOME/.bashrc; then
+    cat >>$HOME/.bashrc <<EOBRC
+
+# Set up virtualenv activation for Pombola
+source /vagrant/pombola-virtualenv/bin/activate
+EOBRC
+fi
