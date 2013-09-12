@@ -6,6 +6,8 @@ import mapit
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub
 
+from pombola.south_africa.models import ZAPlace
+
 # In the short term, until we have a list of constituency offices and
 # addresses from DA, let's bundle these together.
 CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
@@ -40,32 +42,26 @@ class LatLonDetailView(PlaceDetailView):
         context['office_search_radius'] = self.constituency_office_search_radius
 
         context['nearest_offices'] = nearest_offices = (
-            models.Place.objects
-            .filter(kind__slug__in=CONSTINUENCY_OFFICE_PLACE_KIND_SLUGS)
+            ZAPlace.objects
+            .filter(kind__slug__in=CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS)
             .distance(self.location)
             .filter(location__distance_lte=(self.location, D(km=self.constituency_office_search_radius)))
             .order_by('distance')
             )
 
-        # I don't really want to add a method onto the Place object just to
-        # get the postal address of these when it's so nice and general.
-        # Tacking on an attribute like this is not lovely, but it does get it there
-        # without having to modify core for the sake of ZA. Another possibility
-        # would be to use a proxy model.
-
-        for office in nearest_offices:
-            office.postal_addresses = office.organisation.contacts.filter(kind__slug='address')
-            office.related_positions = models.Position.objects.filter(organisation=office.organisation)
-
         return context
 
 class SAPlaceDetailSub(PlaceDetailSub):
+    child_place_template = "south_africa/constituency_office_list_item.html"
+
     def get_context_data(self, **kwargs):
         context = super(SAPlaceDetailSub, self).get_context_data(**kwargs)
 
+        context['child_place_template'] = self.child_place_template
+
         if self.object.kind.slug == 'province':
             context['child_places'] = (
-                models.Place.objects
+                ZAPlace.objects
                 .filter(kind__slug__in=CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS)
                 .filter(location__coveredby=self.object.mapit_area.polygons.collect())
                 )
