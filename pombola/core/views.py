@@ -91,6 +91,12 @@ class PlaceDetailView(DetailView):
 
 class PlaceDetailSub(DetailView):
     model = models.Place
+    child_place_grouper = 'parliamentary_session'
+
+    def get_context_data(self, **kwargs):
+        context = super(PlaceDetailSub, self).get_context_data(**kwargs)
+        context['child_place_grouper'] = self.child_place_grouper
+        return context
 
     def get_template_names(self):
         return [ "core/place_%s.html" % self.kwargs['sub_page'] ]
