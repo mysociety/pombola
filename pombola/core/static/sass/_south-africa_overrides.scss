@@ -296,7 +296,25 @@ FOOTER
     background: $colour_footer_background;
     border-top: mix($colour_footer_background, #000, 70%) 2px solid;
     font-size: 12px;
+    line-height: 18px;
     color: $colour_middling_grey;
+    div.footer-section {
+        @media all and (min-width: 640px) {
+            margin: 0 0 1em 0;
+            padding: 0;
+            width: 31.666666667%;
+            margin-left: 2.5%;
+            max-width: none;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+    p {
+        font-style: normal;
+        color: inherit;
+        font-size: inherit;
+    }
     ul li {
         font-size: inherit;
     }
@@ -316,5 +334,73 @@ FOOTER
     ul li a:hover {
         color: $colour_primary;
         text-decoration: underline;
+    }
+
+    .social-links-list {
+        li {
+            display: inline;
+        }
+        li a {
+            display: inline-block;
+            text-indent: -9999px;
+            height: 38px;
+            width: 38px;
+            background-image: url('/static/images/social-icons.png');
+            background-position: 0 -1px;
+            background-repeat: none;
+            margin-right: 8px;
+            &:hover {
+                background-position-y: -41px;
+            }
+        }
+
+        .facebook-social-icon {
+            background-position-x: 0;
+        }
+        .twitter-social-icon {
+            background-position-x: -51px;
+        }
+        .youtube-social-icon {
+            background-position-x: -101px;
+        }
+        .rss-social-icon {
+            background-position-x: -150px;
+        }
+    }
+
+    .contact-details {
+        line-height: 16px;
+        h5 {
+            margin-top: 1em;
+            font-weight: bold;
+            margin-bottom: .5em;
+        }
+        .block {
+            display: block;
+            margin-bottom: 0.1em;
+        }
+        .col-one,
+        .col-two {
+            width: 46.0526316%;
+            float: left;
+        }
+        .col-two {
+            margin-left: 7.8947368%;
+        }
+    }
+
+    .utilities {
+        text-align: right;
+        margin: 0;
+        li {
+            display: inline-block;
+            margin-left: 12px;
+        }
+    }
+    div.attribution {
+        max-width: 960px;
+        margin: .5em auto;
+        text-align: right;
+        font-size: inherit;
     }
 }
