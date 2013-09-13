@@ -1,0 +1,18 @@
+
+    {% with child_places=child_places|default:object.child_places.all.order_by_parliamentary_session %}
+      {% if child_places.count %}
+        {% regroup child_places by parliamentary_session as child_places_regrouped %}
+
+        {% for cp in child_places_regrouped %}
+          <div class="content_box">
+            <h3>"{{ cp.grouper.name }}" areas within {{ object.name }}</h3>
+            
+            <ul class="listing">
+              {% for child in cp.list %}
+                {% include child_place_template|default:"core/place_places_child.html" with object=child %}
+              {% endfor %}
+            </ul>            
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}

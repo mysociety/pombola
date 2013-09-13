@@ -53,11 +53,13 @@ class LatLonDetailView(PlaceDetailView):
 
 class SAPlaceDetailSub(PlaceDetailSub):
     child_place_template = "south_africa/constituency_office_list_item.html"
+    child_place_list_template = "south_africa/constituency_office_list.html"
 
     def get_context_data(self, **kwargs):
         context = super(SAPlaceDetailSub, self).get_context_data(**kwargs)
 
         context['child_place_template'] = self.child_place_template
+        context['child_place_list_template'] = self.child_place_list_template
         context['subcontent_title'] = 'Constituency Offices'
 
         if self.object.kind.slug == 'province':
