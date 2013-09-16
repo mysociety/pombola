@@ -9,13 +9,15 @@ libapache2-mod-wsgi
 # Database - we use postgres with the postgis addons
 postgresql
 postgis
+postgresql-9.1-postgis | postgresql-8.4-postgis
 libpq-dev
 
 # For mapit
 libgdal1-1.6.0 | libgdal1-1.5.0
 python-gdal
 
-# Search (this is not in stock debian)
+# Search (elasticsearch is not in stock debian, note)
+openjdk-7-jre-headless | openjdk-6-jre-headless
 elasticsearch
 
 # Python - the language that the site is written in, and additional tools needed
@@ -24,12 +26,10 @@ python-dev
 python-pip
 python-virtualenv
 
-
 # Various miscellaneous tools - needed for the python libraries to be built.
-bcrypt
-
-# libjpeg - needed on non-debian. On debian installed as a requirement for others so no need to list seperately
-
+libxml2-dev
+libxslt1-dev
+libjpeg-dev
 
 ############################################################
 # The following can be installed by Python's pip into the virtual environment.

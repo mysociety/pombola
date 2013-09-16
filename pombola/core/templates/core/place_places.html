@@ -7,7 +7,7 @@
 
 {% block subcontent %}
 
-  <h2>Related Places</h2>
+  <h2>{{ subcontent_title|default:"Related Places" }}</h2>
 
   <div>
 
@@ -21,28 +21,7 @@
         {% endif %}
     {% endif %}
     
-    {% with child_places=object.child_places.all.order_by_parliamentary_session %}
-      {% if object.child_places.count %}
-
-        {% regroup child_places by parliamentary_session as child_places_regrouped %}
-
-        {% for cp in child_places_regrouped %}
-          <div class="content_box">
-            <h3>"{{ cp.grouper.name }}" areas within {{ object.name }}</h3>
-            
-            <ul class="listing">
-              {% for child in cp.list %}
-                <li>
-                  <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
-                  ({{child.parliamentary_session.relative_time}} {{ child.kind.name }})
-                </li>
-              {% endfor %}
-            </ul>            
-          </div>
-        {% endfor %}
-
-      {% endif %}
-    {% endwith %}
+    {% include child_place_list_template|default:"core/place_places_child_list.html" %}
 
     {% with boundary_changes=object.get_boundary_changes %}
       {% if boundary_changes.previous or boundary_changes.next %}

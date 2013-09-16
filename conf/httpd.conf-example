@@ -39,7 +39,7 @@ WSGIDaemonProcess example.pombola.mysociety.org \
     
 WSGIProcessGroup example.pombola.mysociety.org
 
-WSGIScriptAlias / /data/vhost/example.pombola.mysociety.org/pombola/wsgi/django.wsgi
+WSGIScriptAlias / /data/vhost/example.pombola.mysociety.org/pombola/pombola/wsgi.py
 
 
 # Performance things - all css and js should either have a version number in
