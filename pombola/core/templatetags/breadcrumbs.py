@@ -50,6 +50,10 @@ def breadcrumbs(url):
                 bread.append(link)
                 if link in url_name_mappings:
                     (sub_link, this_url) = url_name_mappings[link]
+                if re.match(r'^[\d\-\.,]+$', link):
+                    # eg '-1.23,4.56'
+                    sub_link = link
+                    sub_link = re.sub(r',\s*', ', ', sub_link)
                 else:
                     sub_link = re.sub('[_\-]', ' ', link).title()
                     sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
