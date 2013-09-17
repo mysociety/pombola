@@ -12,9 +12,9 @@
 
 <li><a href="{% url "home" %}">Home</a></li>
 
-<li><a href="{% url "home" %}">Democracy Resources</a>
+<li><a href="{% url "info_page" slug='m-democracy-resources' %}">Democracy Resources</a>
   {% if include_sub_menu_entries %}
-  <ul>
+  <ul id="m-democracy-resources">
     <li>
       <a href="{% url "info_page" slug='citizens-rights-freedoms' %}"> Citizens Rights and Freedoms </a>
     </li>
@@ -48,9 +48,9 @@
  
 
 
-<li><a href="{% url "home" %}">Parliament</a></li>
+<li><a href="{% url "info_page" slug='m-parliament' %}">Parliament</a></li>
   {% if include_sub_menu_entries %}
-  <ul>
+  <ul id="m-parliament">
     <li>
       <a href="{% url "info_page" slug='senators' %}"> Senators </a>
     </li>
@@ -92,23 +92,23 @@
   {% endif %}
 </li>
  
-<li><a href="{% url "home" %}">About</a></li>
+<li><a href="{% url "info_page" slug='about' %}">About</a></li>
   {% if include_sub_menu_entries %}
-  <ul>
+  <ul id="about">
     <li>
       <a href="{% url "info_page" slug='about' %}"> About Us </a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='kuvakazim-overview' %}"> How Our Democracy Works </a>
+      <a href="{% url "info_page" slug='kuvakazim-overview' %}"> Kuvakazim Overview </a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='our-history' %}"> The Constitution of Zimbabwe 2013 </a>
+      <a href="{% url "info_page" slug='our-history' %}"> Our History </a>
     </li>
     <li>
       <a href="{% url "info_page" slug='get-involved' %}"> Get Involved </a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='scorecards' %}"> Scorecard FAQs </a>
+      <a href="{% url "info_page" slug='scorecard' %}"> Scorecard FAQs </a>
     </li>
     <li>
       <a href="{% url "info_page" slug='privacy-policy' %}"> Privacy Policy </a>
