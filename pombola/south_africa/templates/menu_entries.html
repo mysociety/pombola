@@ -12,26 +12,70 @@
 
 <li><a href="{% url "home" %}">Home</a></li>
 
-<li><a href="{% url "home" %}">Organisations</a>
+<li><a href="{% url "parties" %}">Parliament</a>
   {% if include_sub_menu_entries %}
-    <ul id="organisations-overview">
-      <li><a href="{% url "organisation_kind" slug='party' %}">Political Parties</a></li>
+    <ul id="parliament-overview">
+      <li><a href="">National Assembly</a></li>
+      <li><a href="">National Council of Provinces</a></li>
+      <li><a href="">Legislation</a></li>
       <li><a href="{% url "organisation_kind" slug='committee' %}">Committees</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "home" %}">People</a>
+<li><a href="">Provinces</a>
   {% if include_sub_menu_entries %}
-    <ul id="people-overview">
-      <li><a href="{% url "position_pt_ok_o" pt_slug='member' ok_slug='house' o_slug='national-assembly' %}?order=name">NA Members</a></li>
-      <li><a href="{% url "position_pt_ok_o" pt_slug='delegate' ok_slug='house' o_slug='ncop' %}?order=name">NCOP Delegates</a></li>
-      <li><a href="{% url "organisation_people" slug='national-executive' %}">National Executive</a></li>
+    <ul id="provinces-overview">
+      <li><a href="">Eastern Cape</a></li>
+      <li><a href="">Free State</a></li>
+      <li><a href="">Gauteng</a></li>
+      <li><a href="">KwaZulu-Natal</a></li>
+      <li><a href="">Limpopo</a></li>
+      <li><a href="">Mpumalanga</a></li>
+      <li><a href="">Northern Cape</a></li>
+      <li><a href="">North West</a></li>
+      <li><a href="">Western Cape</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug='about' %}">About</a></li>
+<li><a href="{% url "info_blog_list" %}">Blog</a>
+  {% if include_sub_menu_entries %}
+    <ul id="blog-overview">
+      <li><a href="">That Week In Parliament</a></li>
+      <li><a href="">PMG Monitor Blog Snippets</a></li>
+      <li><a href="">NGO articles</a></li>
+      <li><a href="">Thought Pieces/Commentary</a></li>
+      <li><a href="">MP Corner</a></li>
+    </ul>
+  {% endif %}
+</li>
+
+<li><a href="{% url "core_place_search" %}">Places</a></li>
+
+<li><a href="">Democracy Resources</a>
+  {% if include_sub_menu_entries %}
+    <ul id="democracy-resources-overview">
+      <li><a href="">Documents</a></li>
+      <li><a href="">Links</a></li>
+      <li><a href="">Newsletter</a></li>
+    </ul>
+  {% endif %}
+</li>
+
+<li><a href="">Public Participation</a></li>
+
+<li><a href="">Extras</a>
+  {% if include_sub_menu_entries %}
+    <ul id="extras-overview">
+      <li><a href="">Questions</a></li>
+      <li><a href="">Voting Decisions</a></li>
+      <li><a href="">Statistics/Data</a></li>
+      <li><a href="">Survey Archive</a></li>
+    </ul>
+  {% endif %}
+</li>
+
 <li class="header-search">
   <form action="{% url "core_search" %}" method="get" id="header-search">
       <input class="search-autocomplete-name" type="text" name="q" placeholder="name, place, party&hellip;" />
