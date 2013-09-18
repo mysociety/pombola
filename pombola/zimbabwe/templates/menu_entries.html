@@ -16,13 +16,13 @@
   {% if include_sub_menu_entries %}
   <ul id="m-democracy-resources">
     <li>
-      <a href="{% url "info_page" slug='citizens-rights-freedoms' %}"> Citizens Rights and Freedoms </a>
+      <a href="{% url "info_page" slug='citizens-rights-freedoms' %}"> Citizens Rights &amp; Freedoms </a>
     </li>
     <li>
       <a href="{% url "info_page" slug='how-our-democracy-works' %}"> How Our Democracy Works </a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='constitution--zimbabwe-2013' %}"> The Constitution of Zimbabwe 2013 </a>
+      <a href="{% url "info_page" slug='constitution--zimbabwe-2013' %}"> Constitution 2013 </a>
     </li>
     <li>
       <a href="{% url "info_page" slug='electoral-law-and-legislation' %}"> Electoral Law and Legislation </a>
@@ -33,11 +33,11 @@
  
 
 
-<li><a href="{% url "home" %}">National Assembly</a>
+<li><a href="{% url "info_page" slug='m-national-assembly' %}">National Assembly</a>
   {% if include_sub_menu_entries %}
   <ul>
     <li>
-      <a href="{% url "info_page" slug='political-parties' %}"> The Main Political Parties in Zimbabwe </a>
+      <a href="{% url "info_page" slug='political-parties' %}">  Political Parties  </a>
     </li>
     <li>
       <a href="{% url "info_page" slug='senators' %}"> Senators </a>
@@ -58,7 +58,7 @@
       <a href="{% url "info_page" slug='parliament-overview' %}"> Parliament Overview </a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='ministry-overview' %}"> Zimbabwean Ministries and their functions </a>
+      <a href="{% url "info_page" slug='ministry-overview' %}">  Ministry Overview  </a>
     </li>
     <li>
       <a href="{% url "info_page" slug='committee-overview' %}"> Committee Overview </a>
@@ -73,26 +73,29 @@
       <a href="{% url "info_page" slug='hansard' %}"> Hansard </a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='political-parties' %}"> The Main Political Parties in Zimbabwe </a>
+      <a href="{% url "info_page" slug='political-parties' %}">  Political Parties  </a>
     </li>
 
   </ul>
   {% endif %}
 </li>
  
-<li><a href="{% url "home" %}">Blogs</a></li>
+<li><a href="http://www.kuvakazim.com/blog/">Blog</a></li>
 
-<li><a href="{% url "home" %}">News</a>
+<li><a href="{% url "info_page" slug='m-news' %}">News</a>
   {% if include_sub_menu_entries %}
   <ul>
     <li>
       <a href="{% url "info_page" slug='newspapers' %}"> Newspapers </a>
     </li>
+    <li>
+      <a href="{% url "info_page" slug='newsletter' %}"> Newletter </a>
+    </li>
   </ul>
   {% endif %}
 </li>
  
-<li><a href="{% url "info_page" slug='about' %}">About</a>
+<li><a href="{% url "info_page" slug='m-about' %}">About</a>
   {% if include_sub_menu_entries %}
   <ul id="about">
     <li>
