@@ -12,7 +12,7 @@
 
 <li><a href="{% url "home" %}">Home</a></li>
 
-<li><a href="{% url "home" %}">Parliament</a>
+<li><a href="{% url "parties" %}">Parliament</a>
   {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
       <li><a href="">National Assembly</a></li>
@@ -23,7 +23,7 @@
   {% endif %}
 </li>
 
-<li><a href="{% url "home" %}">Provinces</a>
+<li><a href="">Provinces</a>
   {% if include_sub_menu_entries %}
     <ul id="provinces-overview">
       <li><a href="">Eastern Cape</a></li>
@@ -51,7 +51,7 @@
   {% endif %}
 </li>
 
-<li><a href="">Places</a></li>
+<li><a href="{% url "core_place_search" %}">Places</a></li>
 
 <li><a href="">Democracy Resources</a>
   {% if include_sub_menu_entries %}
