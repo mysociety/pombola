@@ -68,7 +68,8 @@
 <li><a href="">Extras</a>
   {% if include_sub_menu_entries %}
     <ul id="extras-overview">
-      <li><a href="">Questions</a></li>
+      <!-- TODO: Change this link once the questions data has been loaded in. -->
+      <li><a href="{% url "section-view" pk=108 %}">Questions</a></li>
       <li><a href="{% url "info_page" slug="voting-decisions" %}">Voting Decisions</a></li>
       <li><a href="{% url "info_page" slug="statistics-data" %}">Statistics/Data</a></li>
       <li><a href="{% url "info_page" slug="survey-archive" %}">Survey Archive</a></li>
