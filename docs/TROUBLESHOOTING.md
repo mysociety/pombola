@@ -220,6 +220,10 @@ the lower id is a good bet.
 Any details that are fields directly on the entry should be manually copied over
 (such as date of birth, summary , etc).
 
+If the legal name of the person you're going to delete isn't the same
+as the one you'll retain, and that name isn't listed as an alternative
+name on the record you're going to retain, add it as an alternative name.
+
 Connect to the database by going to the project dir, activating the virtual env
 and then `./manage.py dbshell`.
 
