@@ -12,29 +12,29 @@
 
 <li><a href="{% url "home" %}">Home</a></li>
 
-<li><a href="{% url "parties" %}">Parliament</a>
+<li><a href="{% url "organisation_kind" slug="house" %}">Parliament</a>
   {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
-      <li><a href="">National Assembly</a></li>
-      <li><a href="">National Council of Provinces</a></li>
-      <li><a href="">Legislation</a></li>
-      <li><a href="{% url "organisation_kind" slug='committee' %}">Committees</a></li>
+      <li><a href="{% url "organisation" slug="national-assembly" %}">National Assembly</a></li>
+      <li><a href="{% url "organisation" slug="ncop" %}">National Council of Provinces</a></li>
+      <li><a href="http://www.pmg.org.za/bill">Legislation</a></li>
+      <li><a href="http://www.pmg.org.za/committees">Committees</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="">Provinces</a>
+<li><a href="{% url "place_kind" slug="province" %}">Provinces</a>
   {% if include_sub_menu_entries %}
     <ul id="provinces-overview">
-      <li><a href="">Eastern Cape</a></li>
-      <li><a href="">Free State</a></li>
-      <li><a href="">Gauteng</a></li>
-      <li><a href="">KwaZulu-Natal</a></li>
-      <li><a href="">Limpopo</a></li>
-      <li><a href="">Mpumalanga</a></li>
-      <li><a href="">Northern Cape</a></li>
-      <li><a href="">North West</a></li>
-      <li><a href="">Western Cape</a></li>
+      <li><a href="{% url "place" slug="eastern-cape" %}">Eastern Cape</a></li>
+      <li><a href="{% url "place" slug="free-state" %}">Free State</a></li>
+      <li><a href="{% url "place" slug="gauteng" %}">Gauteng</a></li>
+      <li><a href="{% url "place" slug="kwazulu-natal" %}">KwaZulu-Natal</a></li>
+      <li><a href="{% url "place" slug="limpopo" %}">Limpopo</a></li>
+      <li><a href="{% url "place" slug="mpumalanga" %}">Mpumalanga</a></li>
+      <li><a href="{% url "place" slug="northern-cape" %}">Northern Cape</a></li>
+      <li><a href="{% url "place" slug="north-west" %}">North West</a></li>
+      <li><a href="{% url "place" slug="western-cape" %}">Western Cape</a></li>
     </ul>
   {% endif %}
 </li>
@@ -51,27 +51,27 @@
   {% endif %}
 </li>
 
-<li><a href="{% url "core_place_search" %}">Places</a></li>
+<li><a href="{% url "map-home" %}">Places</a></li>
 
 <li><a href="">Democracy Resources</a>
   {% if include_sub_menu_entries %}
     <ul id="democracy-resources-overview">
-      <li><a href="">Documents</a></li>
-      <li><a href="">Links</a></li>
-      <li><a href="">Newsletter</a></li>
+      <li><a href="{% url "info_page" slug="documents" %}">Documents</a></li>
+      <li><a href="{% url "info_page" slug="links" %}">Links</a></li>
+      <li><a href="{% url "info_page" slug="newsletter" %}">Newsletter</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="">Public Participation</a></li>
+<li><a href="{% url "info_page" slug="public-participation" %}">Public Participation</a></li>
 
 <li><a href="">Extras</a>
   {% if include_sub_menu_entries %}
     <ul id="extras-overview">
       <li><a href="">Questions</a></li>
-      <li><a href="">Voting Decisions</a></li>
-      <li><a href="">Statistics/Data</a></li>
-      <li><a href="">Survey Archive</a></li>
+      <li><a href="{% url "info_page" slug="voting-decisions" %}">Voting Decisions</a></li>
+      <li><a href="{% url "info_page" slug="statistics-data" %}">Statistics/Data</a></li>
+      <li><a href="{% url "info_page" slug="survey-archive" %}">Survey Archive</a></li>
     </ul>
   {% endif %}
 </li>
