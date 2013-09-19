@@ -66,6 +66,13 @@ body {
     #site-header {
       background-color: transparent;
     }
+
+    ul.position-listing li {
+        &:nth-child(even) {
+          background-color: $colour_muted;
+        }
+    }
+
   }
 }
 
