@@ -4,7 +4,7 @@
     Menu entries - for both desktop and mobile.
 
     We use the same menu structure twice - once in the header and once in the
-    footer. However the footer does not require the drill down so there is a way
+    footer. However the footer does not require the drill down, nor the search box, so there is a way
     to specifically request it. This is all here in a separate file so that we
     won't forget to keep the two in sync when doing edits.
 
@@ -12,29 +12,76 @@
 
 <li><a href="{% url "home" %}">Home</a></li>
 
-<li><a href="{% url "home" %}">Organisations</a>
+<li><a href="{% url "organisation_kind" slug="house" %}">Parliament</a>
   {% if include_sub_menu_entries %}
-    <ul id="organisations-overview">
-      <li><a href="{% url "organisation_kind" slug='party' %}">Political Parties</a></li>
-      <li><a href="{% url "organisation_kind" slug='committee' %}">Committees</a></li>
+    <ul id="parliament-overview">
+      <li><a href="{% url "organisation" slug="national-assembly" %}">National Assembly</a></li>
+      <li><a href="{% url "organisation" slug="ncop" %}">National Council of Provinces</a></li>
+      <li><a href="http://www.pmg.org.za/bill">Legislation</a></li>
+      <li><a href="http://www.pmg.org.za/committees">Committees</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "home" %}">People</a>
+<li><a href="{% url "place_kind" slug="province" %}">Provinces</a>
   {% if include_sub_menu_entries %}
-    <ul id="people-overview">
-      <li><a href="{% url "position_pt_ok_o" pt_slug='member' ok_slug='house' o_slug='national-assembly' %}?order=name">NA Members</a></li>
-      <li><a href="{% url "position_pt_ok_o" pt_slug='delegate' ok_slug='house' o_slug='ncop' %}?order=name">NCOP Delegates</a></li>
-      <li><a href="{% url "organisation_people" slug='national-executive' %}">National Executive</a></li>
+    <ul id="provinces-overview">
+      <li><a href="{% url "place" slug="eastern-cape" %}">Eastern Cape</a></li>
+      <li><a href="{% url "place" slug="free-state" %}">Free State</a></li>
+      <li><a href="{% url "place" slug="gauteng" %}">Gauteng</a></li>
+      <li><a href="{% url "place" slug="kwazulu-natal" %}">KwaZulu-Natal</a></li>
+      <li><a href="{% url "place" slug="limpopo" %}">Limpopo</a></li>
+      <li><a href="{% url "place" slug="mpumalanga" %}">Mpumalanga</a></li>
+      <li><a href="{% url "place" slug="northern-cape" %}">Northern Cape</a></li>
+      <li><a href="{% url "place" slug="north-west" %}">North West</a></li>
+      <li><a href="{% url "place" slug="western-cape" %}">Western Cape</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug='about' %}">About</a></li>
+<li><a href="{% url "info_blog_list" %}">Blog</a>
+  {% if include_sub_menu_entries %}
+    <ul id="blog-overview">
+      <li><a href="">That Week In Parliament</a></li>
+      <li><a href="">PMG Monitor Blog Snippets</a></li>
+      <li><a href="">NGO articles</a></li>
+      <li><a href="">Thought Pieces/Commentary</a></li>
+      <li><a href="">MP Corner</a></li>
+    </ul>
+  {% endif %}
+</li>
+
+<li><a href="{% url "map-home" %}">Places</a></li>
+
+<li><a href="">Democracy Resources</a>
+  {% if include_sub_menu_entries %}
+    <ul id="democracy-resources-overview">
+      <li><a href="{% url "info_page" slug="documents" %}">Documents</a></li>
+      <li><a href="{% url "info_page" slug="links" %}">Links</a></li>
+      <li><a href="{% url "info_page" slug="newsletter" %}">Newsletter</a></li>
+    </ul>
+  {% endif %}
+</li>
+
+<li><a href="{% url "info_page" slug="public-participation" %}">Public Participation</a></li>
+
+<li><a href="">Extras</a>
+  {% if include_sub_menu_entries %}
+    <ul id="extras-overview">
+      <!-- TODO: Change this link once the questions data has been loaded in. -->
+      <li><a href="{% url "section-view" pk=108 %}">Questions</a></li>
+      <li><a href="{% url "info_page" slug="voting-decisions" %}">Voting Decisions</a></li>
+      <li><a href="{% url "info_page" slug="statistics-data" %}">Statistics/Data</a></li>
+      <li><a href="{% url "info_page" slug="survey-archive" %}">Survey Archive</a></li>
+    </ul>
+  {% endif %}
+</li>
+
+{% if include_sub_menu_entries %}
 <li class="header-search">
   <form action="{% url "core_search" %}" method="get" id="header-search">
       <input class="search-autocomplete-name" type="text" name="q" placeholder="name, place, party&hellip;" />
       <button type="submit">Submit</button>
   </form>
 </li>
+{% endif %}

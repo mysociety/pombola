@@ -220,6 +220,10 @@ the lower id is a good bet.
 Any details that are fields directly on the entry should be manually copied over
 (such as date of birth, summary , etc).
 
+If the legal name of the person you're going to delete isn't the same
+as the one you'll retain, and that name isn't listed as an alternative
+name on the record you're going to retain, add it as an alternative name.
+
 Connect to the database by going to the project dir, activating the virtual env
 and then `./manage.py dbshell`.
 
@@ -254,6 +258,15 @@ update core_contact set object_id = $TO_KEEP where object_id = $TO_DELETE;
 select * from images_image where object_id = $TO_DELETE;
 update images_image set object_id = $TO_KEEP, is_primary = false where object_id = $TO_DELETE;
 ```
+
+Now you should make sure that the slug for the person you're going to
+delete redirects correctly to the person you're going to keep.  If
+`$TO_DELETE_SLUG` is the old slug you would do:
+
+    INSERT INTO core_slugredirect \
+        (content_type_id, old_object_slug, new_object_id, updated, created) \
+        SELECT id, $TO_DELETE_SLUG, $TO_KEEP, now(), now() \
+        FROM django_content_type WHERE model = 'person';
 
 You can now delete the redundant person using the admin. It will show you
 related records that will also be deleted, check these to see if any need to be

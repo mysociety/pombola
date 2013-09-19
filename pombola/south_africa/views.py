@@ -1,5 +1,6 @@
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
+from django.http import Http404
 
 import mapit
 
@@ -30,8 +31,11 @@ class LatLonDetailView(PlaceDetailView):
 
         areas = mapit.models.Area.objects.by_location(self.location)
 
-        # FIXME - Handle not finding a province or getting more than one.
-        province = models.Place.objects.get(mapit_area__in=areas, kind__slug='province')
+        try:
+            # FIXME - Handle getting more than one province.
+            province = models.Place.objects.get(mapit_area__in=areas, kind__slug='province')
+        except models.Place.DoesNotExist:
+            raise Http404
 
         return province
 

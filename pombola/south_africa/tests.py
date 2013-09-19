@@ -1,4 +1,6 @@
 from django.contrib.gis.geos import Polygon, Point
+from django.test import TestCase
+from django.core.urlresolvers import reverse
 
 from django_webtest import WebTest
 
@@ -124,3 +126,9 @@ class ConstituencyOfficesTestCase(WebTest):
     def tearDown(self):
         settings.MAPIT_AREA_SRID = self.old_srid
         settings.HAYSTACK_SIGNAL_PROCESSOR = self.old_HAYSTACK_SIGNAL_PROCESSOR
+
+
+class LatLonDetailViewTest(TestCase):
+    def test_404_for_incorrect_province_lat_lon(self):
+        res = self.client.get(reverse('latlon', kwargs={'lat': '0', 'lon': '0'}))
+        self.assertEquals(404, res.status_code)

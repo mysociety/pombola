@@ -87,7 +87,7 @@ def geocode(address_string, geocode_cache=None):
         result = geocode_cache['google'][url]
     else:
         r = requests.get(url)
-        result = r.json
+        result = r.json()
         geocode_cache['google'][url] = result
         time.sleep(1.5)
     status = result['status']

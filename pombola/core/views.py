@@ -270,7 +270,16 @@ class OrganisationDetailSub(DetailView):
         # of an organisation to be controlled with the 'order' query
         # parameter:
         if self.kwargs['sub_page'] == 'people':
-            positions = self.object.position_set.all()
+            all_positions = self.object.position_set.all()
+
+            # Limit to those currently active, or inactive
+            if self.request.GET.get('historic'):
+                context['historic'] = True
+                positions = all_positions.currently_inactive()
+            else:
+                context['historic'] = False
+                positions = all_positions.currently_active()
+
             if self.request.GET.get('order') == 'place':
                 context['sorted_positions'] = positions.order_by_place()
             else:
