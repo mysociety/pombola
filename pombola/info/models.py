@@ -7,6 +7,26 @@ from django.template.defaultfilters import slugify
 
 from markitup.fields import MarkupField
 
+class Category(models.Model):
+    """
+    Category - simple categorisation of pages and posts.
+
+    A InfoPage object can be related to several categories
+    """
+    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
+    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now )
+
+    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=300, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta():
+        ordering = ( 'name', )
+        verbose_name_plural = 'categories'
+
+
 class InfoPage(models.Model):
     """
     InfoPage - store static pages in the database so they can be edited in the
@@ -57,6 +77,11 @@ class InfoPage(models.Model):
     # makes sense to make this seperate now as it will facilitate queing up
     # posts to be published in future easier.
     publication_date = models.DateTimeField( default=datetime.datetime.now )
+
+    # Link to the categories, use a custom related_name as this model represents
+    # both pages and posts.
+    categories = models.ManyToManyField(Category, related_name="entries", blank=True)
+
 
     def __unicode__(self):
         return self.title
