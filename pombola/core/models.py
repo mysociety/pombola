@@ -251,8 +251,14 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         else:
             return self.legal_name
     
-    def additional_names(self):
-        return [an.alternative_name for an in self.alternative_names.filter(name_to_use=False)]
+    def additional_names(self, include_name_to_use=False):
+        filter_args = {}
+        if not include_name_to_use:
+            filter_args['name_to_use'] = False
+        return [an.alternative_name
+                for an in
+                self.alternative_names.filter(**filter_args)]
+
 
     @transaction.commit_on_success
     def add_alternative_name(self, alternative_name, name_to_use=False):
