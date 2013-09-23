@@ -147,6 +147,9 @@ class PersonNamesTest( unittest.TestCase ):
         self.assertEqual(set(self.person.additional_names(include_name_to_use=True)),
                          set(("John Q. Public", "John Doe")))
 
+        self.assertEqual(self.person.all_names_set(),
+                         set(("John Q. Public", "John Doe", "John Smith")))
+
     def tearDown(self):
         self.person.delete()
 

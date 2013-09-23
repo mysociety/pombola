@@ -259,6 +259,11 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
                 for an in
                 self.alternative_names.filter(**filter_args)]
 
+    def all_names_set(self):
+        """Return a set of all known names for this Person"""
+        result = set(self.additional_names(include_name_to_use=True))
+        result.add(self.legal_name)
+        return result
 
     @transaction.commit_on_success
     def add_alternative_name(self, alternative_name, name_to_use=False):
