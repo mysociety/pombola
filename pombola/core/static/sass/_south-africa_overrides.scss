@@ -62,7 +62,7 @@ html{
 body
 {
     background-image: none;
-    background: $colour_main_background;
+    background: #fff;
 }
 #page,
 #breadcrumb-replacement
@@ -70,12 +70,52 @@ body
     background: $colour_main_background;
 }
 a {
-    color: $colour_secondary;
+    color: $colour_primary;
+    text-decoration: underline;
     &:hover{
-        color: mix($colour_secondary, #fff, 80%);
+        color: mix($colour_primary, #fff, 80%);
     }
 }
 
+/*
+
+Base typography
+
+*/
+
+h1 {
+    @include lato-bold;
+    font-size: 1.875em; /* 30px */
+    color: $colour_black;
+    letter-spacing: 0.05em;
+}
+
+h2 {
+    @include lato-bold;
+    font-size: 1.5em; /* 24px */
+    color: $colour_black;
+    letter-spacing: 0.05em;
+}
+
+h3 {
+    @include lato-bold;
+    font-size: 0.875em; /* 14px */
+    color: $colour_black;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+ul, ol {
+    li {
+        font-size: 1em;
+    }
+}
+
+.meta {
+    font-style: normal;
+    font-size: .75em; /* 12px */
+    color: $colour_blackish;
+}
 
 /*
 
@@ -279,17 +319,17 @@ NEWS & POLL
     float:left;
     width:656px;
     max-width: 100%;
-    h2{
-        @include lato-regular;
-        font-weight: normal;
-        text-transform: uppercase;
-    }
-    h3 a,
-    a.readmore
+    h2
     {
-        color: $colour_primary;
-        @include lato-bold;
-        font-weight: normal;
+        text-transform: uppercase;
+        font-size: .875em;
+    }
+    h3
+    {
+        font-size: 1em; /* 16px */
+        text-transform: none;
+        line-height: 1.3125em; /* 21px */
+
     }
 }
 #poll{
@@ -305,7 +345,12 @@ ul#home-news-list{
         width: 304px;
         float: left;
         padding-right: 24px;
+        p.meta {
+            font-style: normal;
+            font-size: .75em;
+        }
     }
+
 }
 
 
@@ -351,6 +396,7 @@ FOOTER
     a:link,
     a:visited {
         color: $colour_secondary;
+        text-decoration: none;
     }
     a:hover,
     a:focus,
