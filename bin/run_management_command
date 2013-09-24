@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# This is a simple script that can be used from the crontab to run a management
+# command in the correct environment.
+
+# abort on any errors
+set -e
+
+# check that we are in the expected directory
+cd `dirname $0`/..
+
+source ../pombola-virtualenv/bin/activate
+
+./manage.py $1
