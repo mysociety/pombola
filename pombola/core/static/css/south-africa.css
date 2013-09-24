@@ -3185,6 +3185,7 @@ Base typography
 */
 h1 {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
   font-size: 1.875em;
   /* 30px */
   color: #222222;
@@ -3193,6 +3194,7 @@ h1 {
 
 h2 {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
   font-size: 1.5em;
   /* 24px */
   color: #222222;
@@ -3201,6 +3203,7 @@ h2 {
 
 h3 {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
   font-size: 0.875em;
   /* 14px */
   color: #222222;
@@ -3262,6 +3265,7 @@ HEADER
 #main-menu nav ul li a {
   background: #e23d28;
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
 }
 #main-menu nav ul li a:hover, #main-menu nav ul li a:focus {
   background: #b43020;
@@ -3317,23 +3321,37 @@ HOME PAGE INTRO BOX
   background-color: #027857;
   padding: 2em 0;
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
-  background-image: url(/static/images/intro-bg.jpg);
+  background-image: url("/static/images/intro-bg.jpg");
 }
 
-#front_intro .btn-text-green {
-  font-size: 14px;
+#front_intro .location-button {
+  font-size: 0.75em;
   text-align: center;
   width: 100%;
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 1em 0.5em;
   box-shadow: 0px 3px 0px #af201a;
+  font-weight: normal;
+  position: relative;
+}
+#front_intro .location-button .location-icon {
+  background: transparent url("/static/images/location.png") left center no-repeat;
+  display: inline-block;
+  height: 17px;
+  width: 10px;
+  margin-right: 10px;
+  position: absolute;
+  left: 21%;
+  top: 10px;
 }
 
 #home-search {
@@ -3345,22 +3363,36 @@ HOME PAGE INTRO BOX
 }
 #home-search label {
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
   font-size: 0.96em;
   font-weight: normal;
   text-shadow: 0px 1px 2px #026f52;
 }
-#home-search input {
-  width: 78%;
+#home-search input[type="text"] {
+  width: 83%;
   margin-right: 1%;
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  font-size: 1em;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  border: 1px solid #00674a;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 0.66em;
 }
 #home-search button {
-  width: 20%;
+  width: 16%;
   box-shadow: 0px 2px 0px #af201a;
+  padding: 1.745em;
+  background-color: #e23d28;
 }
 #home-search button:hover, #home-search button:focus {
-  background-color: #fb432c;
+  color: #b43020;
 }
 
 #home-featured-person,
@@ -3391,10 +3423,11 @@ HOME PAGE INTRO BOX
 #front_intro .home-right h2 {
   color: #fff;
   text-transform: none;
-  line-height: 1.4;
+  line-height: 1.375em;
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
   font-weight: normal;
-  text-shadow: 0px 1px 4px #026f52;
+  text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
 }
 
 #page .home-left h2 {
@@ -3505,6 +3538,7 @@ FOOTER
 }
 #site-footer h4 {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
   text-transform: uppercase;
   font-size: 12px;
   color: #b3b3b3;
