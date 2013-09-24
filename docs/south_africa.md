@@ -15,7 +15,7 @@ activate the generation. Hopefully something like this:
 
 Then, to load in some people and organisation data:
 
-    $ python manage.py core_import_popolo pombola/south_africa/data/sa.json  --commit
+    $ python manage.py core_import_popolo pombola/south_africa/data/south-africa-popolo.json  --commit
 
 To load in some example SayIt data, fetch the speeches/fixtures/test_inputs/
 
