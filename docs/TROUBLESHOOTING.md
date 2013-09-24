@@ -259,6 +259,15 @@ select * from images_image where object_id = $TO_DELETE;
 update images_image set object_id = $TO_KEEP, is_primary = false where object_id = $TO_DELETE;
 ```
 
+Now you should make sure that the slug for the person you're going to
+delete redirects correctly to the person you're going to keep.  If
+`$TO_DELETE_SLUG` is the old slug you would do:
+
+    INSERT INTO core_slugredirect \
+        (content_type_id, old_object_slug, new_object_id, updated, created) \
+        SELECT id, $TO_DELETE_SLUG, $TO_KEEP, now(), now() \
+        FROM django_content_type WHERE model = 'person';
+
 You can now delete the redundant person using the admin. It will show you
 related records that will also be deleted, check these to see if any need to be
 transferred (and then add SQL above). Note that some entries (like the scorecard

@@ -10,19 +10,19 @@
   {% if object.has_scorecards %}
     <li><a href="{% url "person_scorecard" slug=object.slug %}">Scorecard</a></li>
   {% endif %}
-  <li><a href="{% url "person_experience" slug=object.slug %}">Experience</a></li>      
-  
-  {% if settings.ENABLED_FEATURES.hansard %}            
+  <li><a href="{% url "person_experience" slug=object.slug %}">Experience</a></li>
+
+  {% if settings.ENABLED_FEATURES.hansard %}
     {% with hansard_count=object.hansard_entries.count %}
       <li>
         <a href="{% url "person_appearances" slug=object.slug %}">
           Appearances {% if hansard_count %}({{ hansard_count }}){% endif %}
         </a>
-      </li>     
+      </li>
     {% endwith %}
   {% endif %}
-  
-  <li><a href="{% url "person_contact_details" slug=object.slug %}">Contact details</a></li> 
+
+  <li><a href="{% url "person_contact_details" slug=object.slug %}">Contact details</a></li>
 
   {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}
   {% if settings.DISQUS_SHORTNAME %}
@@ -39,7 +39,7 @@
   {% if object.is_politician %}
       <p>Politician Profile Page</p>
   {% endif %}
-  
+
   {% if object.is_aspirant %}
       <p>
           Aspirant in the upcoming elections:
@@ -60,7 +60,7 @@
 
 {% block profile_info %}
   <div class="constituency-party">
-  
+
       {% if object.aspirant_constituencies.count %}
           <h3>Aspirant for</h3>
           <ul>
@@ -68,7 +68,7 @@
                   <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
               {% endfor %}
       {% endif %}
-  
+
       <h3>Constituency</h3>
       <ul>
           {% for constituency in object.constituencies %}
@@ -77,7 +77,7 @@
               <li>Not an MP for any constituencies</li>
           {% endfor %}
       </ul>
-  
+
       <h3>{% if settings.COUNTRY_APP == 'kenya' %}
         Party &amp; Coalition
       {% else %}
