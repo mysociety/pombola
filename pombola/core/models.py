@@ -32,7 +32,7 @@ from pombola.scorecards.models import ScorecardMixin
 
 from mapit import models as mapit_models
 
-# tell South how to handle the custom fields 
+# tell South how to handle the custom fields
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateField"])
 add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointField"])
@@ -41,7 +41,7 @@ date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or '
 
 
 
-class ModelBase(models.Model):    
+class ModelBase(models.Model):
     created = models.DateTimeField( auto_now_add=True )
     updated = models.DateTimeField( auto_now=True )
 
@@ -61,14 +61,14 @@ class ModelBase(models.Model):
         return True
 
     class Meta:
-       abstract = True      
+       abstract = True
 
 
 class ManagerBase(models.GeoManager):
     def update_or_create(self, filter_attrs, attrs):
         """Given unique look-up attributes, and extra data attributes, either
         updates the entry referred to if it exists, or creates it if it doesn't.
-        
+
         Returns the object updated or created, having saved the changes.
         """
         try:
@@ -84,7 +84,7 @@ class ManagerBase(models.GeoManager):
             attrs.update(filter_attrs)
             obj = self.create(**attrs)
             obj.save()
-        
+
         return obj
 
 
@@ -98,7 +98,7 @@ class ContactKind(ModelBase):
         return self.name
 
     class Meta:
-       ordering = ["slug"]      
+       ordering = ["slug"]
 
 
 class Contact(ModelBase):
@@ -111,7 +111,7 @@ class Contact(ModelBase):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    
+
     objects = ManagerBase()
 
     def __unicode__(self):
@@ -123,7 +123,7 @@ class Contact(ModelBase):
         return []
 
     class Meta:
-       ordering = ["content_type", "object_id", "kind"]      
+       ordering = ["content_type", "object_id", "kind"]
 
 
 class InformationSource(ModelBase):
@@ -135,30 +135,30 @@ class InformationSource(ModelBase):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    
+
     objects = ManagerBase()
 
     def __unicode__(self):
         return "%s: %s" % (self.source, self.content_object)
 
     class Meta:
-       ordering = ["content_type", "object_id", "source"]      
+       ordering = ["content_type", "object_id", "source"]
 
 
 class PersonQuerySet(models.query.GeoQuerySet):
     def is_politician(self, when=None):
         # FIXME - Don't like the look of this, rather a big subquery.
         return self.filter(position__in=Position.objects.all().current_politician_positions(when))
-        
+
 class PersonManager(ManagerBase):
     def get_query_set(self):
         return PersonQuerySet(self.model)
-    
+
     def loose_match_name(self, name):
         """Search for a loose match on a name. May not be too reliable"""
 
         # import here to avoid creating an import loop
-        from haystack.query import SearchQuerySet    
+        from haystack.query import SearchQuerySet
 
         # Try matching all the bits
         results = SearchQuerySet().filter_and(content=name).models(self.model)
@@ -174,23 +174,23 @@ class PersonManager(ManagerBase):
             return results[0].object
         else:
             return None
-    
+
     def get_featured(self):
         # select all the presidential aspirants
-        return self.filter(can_be_featured=True) 
-    
+        return self.filter(can_be_featured=True)
+
     def get_next_featured(self, current_slug, want_previous=False):
         """ Returns the next featured person, in slug order: using slug order because it's unique and easy to
             exclude the current person.
-            
+
             If no slug is provided, returns a random person.
-            If the slug is purely numeric (n), this consistently returns a person (actually the nth wrapping around 
+            If the slug is purely numeric (n), this consistently returns a person (actually the nth wrapping around
             where necessary): this allows js to generate random calls that can nonetheless be served from the cache.\
         """
 
         # original code that selects based on the can_be_featured flag
-        # all_results = self.filter(can_be_featured=True) 
-        
+        # all_results = self.filter(can_be_featured=True)
+
         # select all the presidential aspirants
         all_results = self.get_featured()
 
@@ -242,7 +242,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     objects = PersonManager()
 
     can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
-    
+
     @property
     def name(self):
         alternative_names_to_use = self.alternative_names.filter(name_to_use=True)
@@ -250,9 +250,20 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
             return alternative_names_to_use[0].alternative_name
         else:
             return self.legal_name
-    
-    def additional_names(self):
-        return [an.alternative_name for an in self.alternative_names.filter(name_to_use=False)]
+
+    def additional_names(self, include_name_to_use=False):
+        filter_args = {}
+        if not include_name_to_use:
+            filter_args['name_to_use'] = False
+        return [an.alternative_name
+                for an in
+                self.alternative_names.filter(**filter_args)]
+
+    def all_names_set(self):
+        """Return a set of all known names for this Person"""
+        result = set(self.additional_names(include_name_to_use=True))
+        result.add(self.legal_name)
+        return result
 
     @transaction.commit_on_success
     def add_alternative_name(self, alternative_name, name_to_use=False):
@@ -319,10 +330,10 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
               # select the coalition memberships
               | Q(title__slug='coalition-member')
-            )            
+            )
         )
         return Organisation.objects.filter(position__in=party_memberships).distinct()
-    
+
     def constituencies(self):
         """Return list of constituencies that this person is currently an politician for"""
         return Place.objects.filter(position__in=self.politician_positions())
@@ -337,17 +348,17 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('person', [self.slug])
-    
+
     def generate_tasks(self):
         """Generate tasks for missing contact details etc"""
         task_slugs = []
-        
+
         wanted_contact_slugs = ['phone','email','address']
         have_contact_slugs = [c.kind.slug for c in self.contacts.all()]
         for wanted in wanted_contact_slugs:
             if wanted not in have_contact_slugs:
                 task_slugs.append("find-missing-" + wanted)
-        
+
         return task_slugs
 
     def scorecard_overall(self):
@@ -378,7 +389,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
         # We're only showing scorecards for current MPs
         if self.is_politician():
             return super(Person, self).has_scorecards() or any([x.has_scorecards() for x in self.constituencies()])
-        
+
     @property
     def show_overall_score(self):
         """Should we show an overall score? Yes if applicable and there are active scorecards and we have the CDF category"""
@@ -386,13 +397,13 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
             # We could show the scorecard. Check that there is a CDF report in there.
             for constituency in self.constituencies():
                 if constituency.active_scorecards().filter(category__slug='cdf-performance').exists():
-                    return True        
+                    return True
 
         # fall through to here
         return False
 
     class Meta:
-       ordering = ["slug"]      
+       ordering = ["slug"]
 
 
 class AlternativePersonName(ModelBase):
@@ -439,7 +450,7 @@ class OrganisationKind(ModelBase):
         return self.name
 
     class Meta:
-       ordering = ["slug"]      
+       ordering = ["slug"]
 
 
 class OrganisationQuerySet(models.query.GeoQuerySet):
@@ -475,7 +486,7 @@ class Organisation(ModelBase):
 
     objects = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
-    
+
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.kind)
 
@@ -484,7 +495,7 @@ class Organisation(ModelBase):
         return ('organisation', [self.slug])
 
     class Meta:
-       ordering = ["slug"]      
+       ordering = ["slug"]
 
 
 class PlaceKind(ModelBase):
@@ -499,7 +510,7 @@ class PlaceKind(ModelBase):
         return self.name
 
     class Meta:
-       ordering = ["slug"]      
+       ordering = ["slug"]
 
     def parliamentary_sessions(self):
         """Return a list of any associated parliamentary sessions"""
@@ -527,7 +538,7 @@ class PlaceQuerySet(models.query.GeoQuerySet):
 
     def counties(self):
         return self.filter(kind__slug='county')
-        
+
     def order_by_parliamentary_session(self):
         """This is a helper for use in the place_places.html template"""
         return self.order_by('-parliamentary_session__start_date', 'name')
@@ -568,7 +579,7 @@ class Place(ModelBase, ScorecardMixin):
 
     def is_constituency(self):
         return self.kind.slug == 'constituency'
-    
+
     def current_politician_position(self):
         """Return the current politician position, or None.
 
@@ -585,7 +596,7 @@ class Place(ModelBase, ScorecardMixin):
         # because that ruins the distinct.
         return Person.objects.filter(position__place=self).distinct()#.order_by('-position__sorting_end_date_high')
 
-    
+
     def parent_places(self):
         """Return an array of all the parent places."""
         if self.parent_place:
@@ -595,14 +606,14 @@ class Place(ModelBase, ScorecardMixin):
             return parents
         else:
             return []
-        
+
     def self_and_parents(self):
         """Return a query set that matches this place and all parents."""
-        parents = self.parent_places()        
+        parents = self.parent_places()
         ids     = [ x.id for x in parents ]
         ids.append(self.id)
         return Place.objects.filter(pk__in=ids)
-    
+
 
     def all_related_current_politicians(self):
         """Return a query set of all the politicians for this place, and all parent places."""
@@ -632,7 +643,7 @@ class Place(ModelBase, ScorecardMixin):
         return ('place', [self.slug])
 
     class Meta:
-       ordering = ["slug"]      
+       ordering = ["slug"]
 
     def get_boundary_changes(self):
         """Return a dictionary representing previous and next boundary changes
@@ -799,11 +810,11 @@ class PositionTitle(ModelBase):
 
     def __unicode__(self):
         return self.name
-    
+
     @models.permalink
     def get_absolute_url(self):
         return ('position_pt', [self.slug])
-    
+
     def organisations(self):
         """
         Return a qs of organisations, with the most frequently related first.
@@ -827,7 +838,7 @@ class PositionTitle(ModelBase):
 
 
     class Meta:
-       ordering = ["slug"]      
+       ordering = ["slug"]
 
 
 class PositionQuerySet(models.query.GeoQuerySet):
@@ -849,15 +860,15 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
     def currently_inactive(self, when=None):
         """Filter on start and end dates to limit to currently inactive positions"""
-    
+
         if when == None:
             when = datetime.date.today()
 
         now_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
-    
+
         start_criteria = Q(start_date__gt=now_approx)
         end_criteria = Q(sorting_end_date_high__lt=now_approx) & ~Q(end_date='')
-        
+
         qs = self.filter(start_criteria | end_criteria)
 
         return qs
@@ -895,7 +906,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
     def other(self):
         """Filter down to only the other category"""
         return self.filter(category='other')
-    
+
     def order_by_place(self):
         """Sort by the place name"""
         return self.select_related('place').order_by('place__name')
@@ -929,20 +940,20 @@ class Position(ModelBase):
 
     # hidden fields that are only used to do sorting. Filled in by code.
     #
-    # These sort dates are here to enable the expected sorting. Ascending is 
-    # quite straight forward as the string stored (eg '2011-03-00') will sort as 
-    # expected. But for descending sorts they will not, as '2011-03-00' would 
-    # come after '2011-03-15'. To fix this the *_high dates below replace '00' 
+    # These sort dates are here to enable the expected sorting. Ascending is
+    # quite straight forward as the string stored (eg '2011-03-00') will sort as
+    # expected. But for descending sorts they will not, as '2011-03-00' would
+    # come after '2011-03-15'. To fix this the *_high dates below replace '00'
     # with '99' so that the desc sort can be carried out in SQL as expected.
     #
-    # For 'future' dates there are also some special tweaks that makes them sort 
+    # For 'future' dates there are also some special tweaks that makes them sort
     # as expeced. See the '_set_sorting_dates' method below for implementation.
     #
     sorting_start_date = models.CharField(editable=True, default='', max_length=10)
     sorting_end_date = models.CharField(editable=True, default='', max_length=10)
     sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
     sorting_end_date_high = models.CharField(editable=True, default='', max_length=10)
-    
+
     objects = PositionManager()
 
     def clean(self):
@@ -1027,7 +1038,7 @@ class Position(ModelBase):
         if self.start_date:
             return str(self.start_date)
         return '?'
-    
+
     def display_end_date(self):
         """Return text that represents the end date"""
         if self.end_date:
@@ -1049,7 +1060,7 @@ class Position(ModelBase):
     def has_known_dates(self):
         """Is there at least one known (not future) date?"""
         return (self.start_date and not self.start_date.future) or (self.end_date and not self.end_date.future)
-    
+
     def _set_sorting_dates(self):
         """Set the sorting dates from the actual dates (does not call save())"""
 
@@ -1059,27 +1070,27 @@ class Position(ModelBase):
         # value can be yyyy-mm-dd, future or None
         start = repr(self.start_date) if self.start_date else None
         end   = repr(self.end_date)   if self.end_date   else None
-        
+
         # set the value or default to something sane
         sorting_start_date =        start or none_repr
         sorting_end_date   = end or start or none_repr
         if not end and start == 'past': sorting_end_date = none_repr
-        
+
         # chaange entries to have the past_repr
         if start              == 'past': start              = past_repr
         if end                == 'past': end                = past_repr
         if sorting_start_date == 'past': sorting_start_date = past_repr
         if sorting_end_date   == 'past': sorting_end_date   = past_repr
-        
+
         # To make the sorting consistent special case some parts
         if not end and start == 'future':
             sorting_start_date = 'a-future' # come after 'future'
 
         self.sorting_start_date = sorting_start_date
         self.sorting_end_date   = sorting_end_date
-        
+
         self.sorting_start_date_high = re.sub('-00', '-99', sorting_start_date)
-        self.sorting_end_date_high   = re.sub('-00', '-99', sorting_end_date)     
+        self.sorting_end_date_high   = re.sub('-00', '-99', sorting_end_date)
 
     def is_nominated_politician(self):
         return self.title.slug == 'nominated-member-parliament'
@@ -1099,7 +1110,7 @@ class Position(ModelBase):
         return "%s (%s at %s)" % ( self.person.legal_name, title, organisation)
 
     class Meta:
-        ordering = ['-sorting_end_date', '-sorting_start_date']  
+        ordering = ['-sorting_end_date', '-sorting_start_date']
 
 class ParliamentarySession(ModelBase):
     start_date = DateField(blank=True, null=True)

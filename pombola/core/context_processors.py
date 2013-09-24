@@ -4,7 +4,7 @@ import logging
 def add_settings( request ):
     """Add some selected settings values to the context"""
     return {
-        'settings': {            
+        'settings': {
             'STAGING':                      settings.STAGING,
             'STATIC_GENERATION_NUMBER':     settings.STATIC_GENERATION_NUMBER,
             'GOOGLE_ANALYTICS_ACCOUNT':     settings.GOOGLE_ANALYTICS_ACCOUNT,
@@ -19,5 +19,5 @@ def add_settings( request ):
             'MAP_BOUNDING_BOX_EAST':        settings.MAP_BOUNDING_BOX_EAST,
             'MAP_BOUNDING_BOX_SOUTH':       settings.MAP_BOUNDING_BOX_SOUTH,
             'MAP_BOUNDING_BOX_WEST':        settings.MAP_BOUNDING_BOX_WEST,
-        }        
+        }
     }
