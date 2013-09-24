@@ -3423,7 +3423,7 @@ HOME PAGE INTRO BOX
 #front_intro .home-right h2 {
   color: #fff;
   text-transform: none;
-  line-height: 1.375em;
+  line-height: 1.25em;
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
   font-weight: normal !important;
   font-weight: normal;
@@ -3439,19 +3439,15 @@ HOME PAGE INTRO BOX
 NEWS & POLL
 
 */
-#news,
-#poll {
-  padding: 2em 0;
-  float: left;
-  width: 656px;
-  max-width: 100%;
-}
 #news h2,
+#twitter h2,
 #poll h2 {
   text-transform: uppercase;
   font-size: .875em;
+  color: #222222;
 }
 #news h3,
+#twitter h3,
 #poll h3 {
   font-size: 1em;
   /* 16px */
@@ -3460,14 +3456,28 @@ NEWS & POLL
   /* 21px */
 }
 
-#poll {
+#news {
+  padding: 2em 0 1em;
   float: left;
-  width: 304px;
+  width: 632px;
+  max-width: 100%;
+  margin-right: 24px;
+  margin-bottom: 2em;
+  border-bottom: 1px solid #ccc;
 }
 
-#news {
-  border-bottom: 1px solid #ccc;
+#twitter {
   padding: 2em 0 1em;
+  width: 304px;
+  float: right;
+  padding: 2em 0;
+}
+
+#poll {
+  float: left;
+  width: 632px;
+  max-width: 100%;
+  margin-right: 24px;
 }
 
 ul#home-news-list {
@@ -3479,9 +3489,11 @@ ul#home-news-list li {
   border: none;
   width: 304px;
   float: left;
-  padding-right: 24px;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+ul#home-news-list li:first-child {
+  padding-right: 24px;
 }
 ul#home-news-list li p {
   margin-bottom: 0.5em;
@@ -3555,6 +3567,12 @@ FOOTER
 #site-footer ul li a:focus {
   color: #e23d28;
   text-decoration: underline;
+}
+#site-footer .nav {
+  -moz-column-count: 2;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 20px;
 }
 #site-footer .social-links-list li {
   display: inline;

@@ -333,7 +333,7 @@ HOME PAGE INTRO BOX
 {
     color: #fff;
     text-transform: none;
-    line-height: 1.375em;
+    line-height: 1.25em;
     @include lato-regular;
     font-weight: normal;
     text-shadow: 0px 2px 1px rgba(0, 0, 0, .25);
@@ -350,35 +350,46 @@ HOME PAGE INTRO BOX
 NEWS & POLL
 
 */
-
 #news,
-#poll
-{
-    padding: 2em 0;
-    float:left;
-    width:656px;
-    max-width: 100%;
+#twitter,
+#poll {
     h2
     {
         text-transform: uppercase;
         font-size: .875em;
+        color: $colour-black;
     }
     h3
     {
         font-size: 1em; /* 16px */
         text-transform: none;
         line-height: 1.3125em; /* 21px */
-
     }
+}
+
+#news {
+    padding: 2em 0 1em;
+    float: left;
+    width: 632px;
+    max-width: 100%;
+    margin-right: 24px;
+    margin-bottom: 2em;
+    border-bottom: 1px solid #ccc;
+
+}
+
+#twitter {
+    padding: 2em 0 1em;
+    width: 304px;
+    float: right;
+    padding: 2em 0;
 }
 
 #poll {
     float:left;
-    width: 304px;
-}
-#news {
-    border-bottom: 1px solid #ccc;
-    padding: 2em 0 1em;
+    width: 632px;
+    max-width: 100%;
+    margin-right: 24px;
 }
 
 ul#home-news-list {
@@ -389,9 +400,12 @@ ul#home-news-list {
         border:none;
         width: 304px;
         float: left;
-        padding-right: 24px;
+
         margin-bottom: 0;
         padding-bottom: 0;
+        &:first-child {
+            padding-right: 24px;
+        }
         p {
             margin-bottom: 0.5em;
             &.meta {
@@ -468,6 +482,13 @@ FOOTER
     ul li a:focus {
         color: $colour_primary;
         text-decoration: underline;
+    }
+
+    .nav {
+        -moz-column-count: 2;
+       -moz-column-gap: 20px;
+       -webkit-column-count: 2;
+       -webkit-column-gap: 20px;
     }
 
     .social-links-list {
