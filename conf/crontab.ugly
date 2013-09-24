@@ -19,6 +19,10 @@ PYTHONPATH=/data/vhost/!!(*= $vhost *)!!/pombola
 PYTHONIOENCODING=utf-8
 
 
+# check that no bad slugs have been stored in the database
+0 23 * * * !!(*= $user *)!! run_management_command core_list_malformed_slugs
+
+
 # Several sites use the Pombola codebase. They don't all have the same requirements
 # or apps. Use the conditionals below to run the correct cron jobs, and make
 # sure that they don't clash timewise.
