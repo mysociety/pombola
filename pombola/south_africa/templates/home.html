@@ -26,8 +26,24 @@
                         {% if featured_person != None %}
                             {% include 'core/person_feature.html' %}
                         {% else %}
-                            <div class="featured-person featured-person-placeholder"><img style="max-width: 100%;
-            padding: 25px 20px;" src="/static/images/carousel-placeholder.png" alt=""></div>
+
+                        <!--
+                        Example carousel content -
+                        Each div.featured-person is a separate slide in the carousel.
+                        -->
+                        <div class="featured-person featured-person-placeholder">
+                          <img style="max-width: 100%; padding: 25px 20px;" src="/static/images/carousel-placeholder.png" alt="">
+                        </div>
+
+                        <div class="featured-person featured-person-placeholder">
+                          <h3>Slide 2</h3>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet orci id augue bibendum egestas eu vitae nibh. Cras vel massa imperdiet, scelerisque lectus in, sagittis urna. Maecenas interdum rhoncus elementum. Suspendisse in orci congue, lacinia lectus non, vulputate mauris. Sed sed nisl eu mauris sollicitudin aliquam. Nulla consequat gravida risus quis bibendum. Pellentesque ornare mi felis, non imperdiet erat laoreet non.</p>
+                        </div>
+
+                        <div class="featured-person featured-person-placeholder">
+                          <h3>Slide 3</h3>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet orci id augue bibendum egestas eu vitae nibh. Cras vel massa imperdiet, scelerisque lectus in, sagittis urna. Maecenas interdum rhoncus elementum. Suspendisse in orci congue, lacinia lectus non, vulputate mauris. Sed sed nisl eu mauris sollicitudin aliquam. Nulla consequat gravida risus quis bibendum. Pellentesque ornare mi felis, non imperdiet erat laoreet non.</p>
+                        </div>
                         {% endif %}
                     </div>
 
