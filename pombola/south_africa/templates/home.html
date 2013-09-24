@@ -3,8 +3,14 @@
 
 {% block title %}Home{% endblock %}
 
+{% block css_headers %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.css" />
+{% endblock %}
+
 {% block extra_js_to_load %}
     pombola_settings.extra_js.push( 'js/feeds.js' );
+    pombola_settings.extra_js.push( 'js/libs/responsive-carousel.js' );
 {% endblock %}
 
 {% block breadcrumbs %}
