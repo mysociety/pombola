@@ -21,29 +21,58 @@
     <div id="front_intro">
         <div class="page-wrapper wrapper">
                 <div class="home-left">
-                    <h2>Focus On</h2>
-                    <div id="home-featured-person" class="carousel">
+                    <h2>This week's focus</h2>
+                    <div id="home-carousel" class="carousel">
                         {% if featured_person != None %}
                             {% include 'core/person_feature.html' %}
                         {% else %}
 
                         <!--
                         Example carousel content -
-                        Each div.featured-person is a separate slide in the carousel.
+                        Each div.carousel-item is a separate slide in the carousel.
                         -->
-                        <div class="featured-person featured-person-placeholder">
-                          <img style="max-width: 100%; padding: 25px 20px;" src="/static/images/carousel-placeholder.png" alt="">
+
+                        <div class="featured-person carousel-item">
+                        <img src="/static/images/faceholder.jpg" alt="" />
+                          <h3 class="name"><a href="#">Mr Andricus Pieter Van der Westhuizen</a></h3>
+                          <h4 class="subtitle">Politician</h4>
+                          <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet orci id augue bibendum egestas eu vitae nibh.</p>
                         </div>
 
-                        <div class="featured-person featured-person-placeholder">
-                          <h3>Slide 2</h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet orci id augue bibendum egestas eu vitae nibh. Cras vel massa imperdiet, scelerisque lectus in, sagittis urna. Maecenas interdum rhoncus elementum. Suspendisse in orci congue, lacinia lectus non, vulputate mauris. Sed sed nisl eu mauris sollicitudin aliquam. Nulla consequat gravida risus quis bibendum. Pellentesque ornare mi felis, non imperdiet erat laoreet non.</p>
+                        <div class="featured-quote carousel-item">
+                            <h3 class="subtitle">From Parliament</h3>
+                            <a href="#">
+
+                              <q>That the House debates the shocking state of South Africas roads, recent studies having indicated that the lack of maintenance of our roads over the past 16 years has led to a complete deterioration and that billions of rands are needed for repairs countrywide.</q>
+                              <cite>
+                                &ndash;
+                                <span class="name">Mr R N Cebekhulu</span>
+
+                                <span class="date">10 Aug 2010</span>
+                            </cite>
+                            </a>
                         </div>
 
-                        <div class="featured-person featured-person-placeholder">
-                          <h3>Slide 3</h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet orci id augue bibendum egestas eu vitae nibh. Cras vel massa imperdiet, scelerisque lectus in, sagittis urna. Maecenas interdum rhoncus elementum. Suspendisse in orci congue, lacinia lectus non, vulputate mauris. Sed sed nisl eu mauris sollicitudin aliquam. Nulla consequat gravida risus quis bibendum. Pellentesque ornare mi felis, non imperdiet erat laoreet non.</p>
+                        <div class="featured-person carousel-item">
+                        <img src="/static/images/faceholder.jpg" alt="" />
+                          <h3 class="name"><a href="#">Arthur Roy Ainslie</a></h3>
+                          <h4 class="subtitle">Politician</h4>
+                          <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet orci id augue bibendum egestas eu vitae nibh.</p>
                         </div>
+
+                        <div class="featured-quote carousel-item">
+                            <h3 class="subtitle">From Parliament</h3>
+                           <a href="#">
+
+                             <q>&hellip;three-quarters of Chinas provinces have been hit by flooding with record-high water levels, and that flooding has destroyed houses, killed and displaced hundreds of people and caused billions of rands worth of damage</q>
+                             <cite>
+                               &ndash;
+                               <span class="name">Ms H N Makhuba</span>
+
+                               <span class="date">10 Aug 2010</span>
+                           </cite>
+                           </a>
+                       </div>
                         {% endif %}
                     </div>
 

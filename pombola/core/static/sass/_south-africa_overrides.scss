@@ -233,7 +233,6 @@ HOME PAGE INTRO BOX
 {
     background-color: #027857;
     padding: 2em 0;
-    @include lato-regular;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -250,7 +249,7 @@ HOME PAGE INTRO BOX
        -moz-box-sizing: border-box;
             box-sizing: border-box;
     padding: 1em 0.5em;
-    box-shadow: 0px 3px 0px #af201a;
+    @include box-shadow(0px 3px 0px #af201a);
     font-weight: normal;
     position: relative;
     .location-icon {
@@ -302,21 +301,107 @@ HOME PAGE INTRO BOX
     }
 }
 
-#home-featured-person,
-.featured-person
-{
-    margin-bottom: 0;
-    border-radius: $border_radius;
-    border-color: rgba(255,255,255,0.3)
-}
-.featured-person.featured-person-placeholder
-{
+#home-carousel {
     background-color: transparent;
 }
 
+.carousel {
+    position: relative;
+}
+
+.carousel-nav {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    z-index: 10;
+    a {
+        display: inline-block;
+        text-indent: -9999px;
+        height: 13px;
+        width: 13px;
+        background: transparent url('/static/images/lr-carousel-arrows.png') top left no-repeat;
+    }
+    .prev {
+
+    }
+    .next {
+        background-position-x: -13px;
+        margin-left: 10px;
+    }
+}
+
+.carousel-item {
+   background-color: rgba(0, 0, 0, 0.2);
+    border-radius: $border_radius;
+    border: 1px solid rgba(255,255,255,0.3);
+    text-align: left;
+    color: #fff;
+    position: relative;
+    padding: 1em;
+    min-height: 242px;
+    @include text-shadow(0px 1px 1px rgba(0, 0, 0, .25));
+    a {
+        color: #fff;
+        text-decoration: none;
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+    .subtitle {
+        color: #fff;
+        opacity: 0.8;
+        text-transform: none;
+        @include lato-regular;
+        font-size: 0.875em;
+    }
+}
+
+.featured-person {
+    margin: 0;
+    img {
+        margin-right: 1em;
+    }
+    .name {
+        font-size: 1.75em;
+        text-transform: none;
+        color: #fff;
+        line-height: 1.3em;
+        @include text-shadow(0px 2px 1px rgba(0, 0, 0, .25));
+        margin-bottom: 0.25em;
+    }
+    .subtitle {
+        margin-bottom: 0.5em;
+    }
+}
+
+.featured-quote {
+
+    q {
+        line-height: 1.45em;
+        display: block;
+        margin-bottom: 1em;
+        font-size: 1.125em;
+        @include lato-regular;
+    }
+    cite {
+        display: block;
+        font-size: .875em;
+        margin-left: 1em;
+        .name {
+            @include lato-bold;
+            text-transform: uppercase;
+        }
+        .date {
+            opacity: 0.8;
+        }
+
+    }
+}
+
+
 #page .home-left h2#home-intro,
-#page .home-right h2#home-intro
-{
+#page .home-right h2#home-intro {
     display: block;
 }
 
@@ -328,6 +413,7 @@ HOME PAGE INTRO BOX
 {
     width: 304px;
     float: right;
+    @include lato-regular;
 }
 
 #front_intro .home-right h2
@@ -337,11 +423,13 @@ HOME PAGE INTRO BOX
     line-height: 1.25em;
     @include lato-regular;
     font-weight: normal;
-    text-shadow: 0px 2px 1px rgba(0, 0, 0, .25);
+    @include text-shadow(0px 2px 1px rgba(0, 0, 0, .25));
 }
-#page .home-left h2
-{
-    display:none;
+#page .home-left h2 {
+    font-size: .875em;
+    color: #fff;
+    letter-spacing: 0.075em;
+    @include text-shadow(0px 1px 1px rgba(0, 0, 0, .25));
 }
 
 

@@ -3319,8 +3319,6 @@ HOME PAGE INTRO BOX
 #front_intro {
   background-color: #027857;
   padding: 2em 0;
-  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-  font-weight: normal !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -3338,6 +3336,8 @@ HOME PAGE INTRO BOX
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 1em 0.5em;
+  -webkit-box-shadow: 0px 3px 0px #af201a;
+  -moz-box-shadow: 0px 3px 0px #af201a;
   box-shadow: 0px 3px 0px #af201a;
   font-weight: normal;
   position: relative;
@@ -3394,15 +3394,97 @@ HOME PAGE INTRO BOX
   color: #b43020;
 }
 
-#home-featured-person,
-.featured-person {
-  margin-bottom: 0;
-  border-radius: 5px;
-  border-color: rgba(255, 255, 255, 0.3);
+#home-carousel {
+  background-color: transparent;
 }
 
-.featured-person.featured-person-placeholder {
-  background-color: transparent;
+.carousel {
+  position: relative;
+}
+
+.carousel-nav {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  z-index: 10;
+}
+.carousel-nav a {
+  display: inline-block;
+  text-indent: -9999px;
+  height: 13px;
+  width: 13px;
+  background: transparent url("/static/images/lr-carousel-arrows.png") top left no-repeat;
+}
+.carousel-nav .next {
+  background-position-x: -13px;
+  margin-left: 10px;
+}
+
+.carousel-item {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: left;
+  color: #fff;
+  position: relative;
+  padding: 1em;
+  min-height: 242px;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+}
+.carousel-item a {
+  color: #fff;
+  text-decoration: none;
+}
+.carousel-item a:hover, .carousel-item a:focus {
+  text-decoration: underline;
+}
+.carousel-item .subtitle {
+  color: #fff;
+  opacity: 0.8;
+  text-transform: none;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  font-size: 0.875em;
+}
+
+.featured-person {
+  margin: 0;
+}
+.featured-person img {
+  margin-right: 1em;
+}
+.featured-person .name {
+  font-size: 1.75em;
+  text-transform: none;
+  color: #fff;
+  line-height: 1.3em;
+  text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
+  margin-bottom: 0.25em;
+}
+.featured-person .subtitle {
+  margin-bottom: 0.5em;
+}
+
+.featured-quote q {
+  line-height: 1.45em;
+  display: block;
+  margin-bottom: 1em;
+  font-size: 1.125em;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+}
+.featured-quote cite {
+  display: block;
+  font-size: .875em;
+  margin-left: 1em;
+}
+.featured-quote cite .name {
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  text-transform: uppercase;
+}
+.featured-quote cite .date {
+  opacity: 0.8;
 }
 
 #page .home-left h2#home-intro,
@@ -3417,6 +3499,8 @@ HOME PAGE INTRO BOX
 #front_intro .home-right {
   width: 304px;
   float: right;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
 }
 
 #front_intro .home-right h2 {
@@ -3430,7 +3514,10 @@ HOME PAGE INTRO BOX
 }
 
 #page .home-left h2 {
-  display: none;
+  font-size: .875em;
+  color: #fff;
+  letter-spacing: 0.075em;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 /*
