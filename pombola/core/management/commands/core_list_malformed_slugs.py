@@ -1,3 +1,5 @@
+from optparse import make_option
+
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.template.defaultfilters import slugify
@@ -6,19 +8,36 @@ from django.template.defaultfilters import slugify
 class Command(BaseCommand):
     help = 'List slugs that are not correctly formed'
 
+    option_list = BaseCommand.option_list + (
+        make_option('--correct', action='store_true', dest='correct', help='Correct bad slugs'),
+    )
+
     def handle(self, **options):
         """For each model check all the slugs are as expected"""
 
         models_to_check = self.get_list_of_models_to_check()
+        bad_slug_count = 0
 
         for model in models_to_check:
             for row in model.objects.only('id', 'slug').all():
                 raw_slug = row.slug
                 correct_slug = slugify(raw_slug)
                 if raw_slug != correct_slug:
+                    bad_slug_count += 1
                     kwargs = dict(model=model, raw=raw_slug, correct=correct_slug, id=row.id)
-                    template = u"Bad slug in {model} (id {id}): '{raw}' should be '{correct}'"
+
+                    if options['correct']:
+                        template = u"Corrected {model} (id {id}): '{raw}' is now '{correct}'"
+                        row.slug = correct_slug
+                        row.save()
+                    else:
+                        template = u"Bad slug in {model} (id {id}): '{raw}' should be '{correct}'"
+
                     print template.format(**kwargs)
+
+        if bad_slug_count and not options['correct']:
+            print
+            print "You can auto correct these slugs with the '--correct' flag"
 
     def get_list_of_models_to_check(self):
         """
