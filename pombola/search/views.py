@@ -6,6 +6,8 @@ from django.template   import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 
+from django.views.generic import TemplateView
+
 from pombola.core import models
 
 from haystack.query import SearchQuerySet
@@ -26,6 +28,25 @@ class SearchViewWithGeocoder(SearchView):
             return context
 
         context['geocoder_results'] = geocoder(country="za", q=self.query)
+
+        return context
+
+
+class GeocoderView(TemplateView):
+    template_name = "search/location.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(GeocoderView, self).get_context_data()
+
+        # This only applies to the ZA Pombola
+        if settings.COUNTRY_APP != 'south_africa':
+            return context
+
+        query = self.request.GET.get('q')
+        if query:
+            context['query'] = query
+            context['geocoder_results'] = geocoder(country="za", q=query)
 
         return context
 
