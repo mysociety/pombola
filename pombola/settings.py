@@ -260,7 +260,6 @@ INSTALLED_APPS = (
 
     'haystack',
 
-    'pombola.helpers',
     'pombola.info',
     'pombola.tasks',
     'pombola.core',

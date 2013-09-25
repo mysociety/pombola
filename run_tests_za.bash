@@ -10,7 +10,6 @@ find . -name '*.pyc' -delete
     south_africa   \
     core           \
 #     hansard        \
-    helpers        \
     images         \
     scorecards     \
     search         \

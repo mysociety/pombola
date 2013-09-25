@@ -10,7 +10,6 @@ coverage run --omit=$OMIT ./manage.py test   \
     core           \
     feedback       \
     hansard        \
-    helpers        \
     images         \
     scorecards     \
     search         \

@@ -6,8 +6,6 @@ from django.template   import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 
-# from pombola.helpers import geocode
-
 from pombola.core import models
 
 from haystack.query import SearchQuerySet
