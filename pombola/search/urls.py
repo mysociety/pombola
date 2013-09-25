@@ -8,7 +8,7 @@ from haystack.views import SearchView
 from pombola.core    import models as core_models
 from pombola.hansard import models as hansard_models
 
-from .views import SearchViewWithGeocoder, GeocoderView
+from .views import GeocoderView
 
 search_models = (
     core_models.Person,
@@ -28,7 +28,7 @@ urlpatterns = patterns('pombola.search.views',
     # General search - just intended for the core app
     url(
         r'^$',
-        SearchViewWithGeocoder(
+        SearchView(
             searchqueryset = SearchQuerySet().models( *search_models ).highlight(),
             form_class=SearchForm,
         ),

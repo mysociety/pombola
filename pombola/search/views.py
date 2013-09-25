@@ -11,25 +11,9 @@ from django.views.generic import TemplateView
 from pombola.core import models
 
 from haystack.query import SearchQuerySet
-from haystack.views import SearchView
 
 from sorl.thumbnail import get_thumbnail
 from .geocoder import geocoder
-
-
-class SearchViewWithGeocoder(SearchView):
-
-    def extra_context(self):
-        # Call the base implementation first to get a context
-        context = super(SearchViewWithGeocoder, self).extra_context()
-
-        # This only applies to the ZA Pombola
-        if settings.COUNTRY_APP != 'south_africa':
-            return context
-
-        context['geocoder_results'] = geocoder(country="za", q=self.query)
-
-        return context
 
 
 class GeocoderView(TemplateView):
