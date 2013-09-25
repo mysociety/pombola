@@ -175,9 +175,22 @@
 
     // redirect to the location of the click
     this.clickEventHandler = function(event) {
+      var self = this;
       var precision = 3; // suitable for the max zoom we allow
       var path = "/place/latlon/" + event.latLng.toUrlValue(precision) + "/";
-      document.location = path;
+
+      var xhr = $.ajax({
+        url: path
+      });
+
+      xhr.success(function() {
+        document.location = path;
+      }).error(function() {
+        self.messageHolderHTMLLocation("outside map bounds");
+        setTimeout(function() {
+          self.messageHolderHTMLLocation("ready to search");
+        }, 3000);
+      });
     };
 
 

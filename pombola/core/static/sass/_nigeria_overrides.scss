@@ -28,8 +28,6 @@
   }
 }
 
-
-
 html{
   background-color: $colour_white;
 }
@@ -38,6 +36,45 @@ body {
   background: $colour_white;
 }
 
+/* Add the background image only when the width is over 900px */
+
+@media only all and (min-width: 640px), print {
+  body {
+    color: $colour_black;
+    background-color: transparent;
+    background-image: url(/static/images/mz-nigeria-background-watermark.jpg);
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+
+    div#page {
+      background-color: transparent;
+    }
+
+    div#main-menu {
+      background-image: none;
+      background-color: transparent;
+      padding-top: 0px;
+      margin-top: 0px;
+    }
+
+    #breadcrumb-replacement {
+      background-color: transparent;
+    }
+
+    #site-header {
+      background-color: transparent;
+    }
+
+    ul.position-listing li {
+        &:nth-child(even) {
+          background-color: $colour_muted;
+        }
+    }
+
+  }
+}
 
 #site-header {
   clear: both;
