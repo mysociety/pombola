@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This is a simple script that can be used from the crontab to run a management
+# command in the correct environment.
+
 # abort on any errors
 set -e
 
@@ -8,5 +11,4 @@ cd `dirname $0`/..
 
 source ../pombola-virtualenv/bin/activate
 
-./manage.py scorecard_update_person_contact_scores
-
+./manage.py $1
