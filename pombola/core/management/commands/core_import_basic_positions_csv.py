@@ -9,6 +9,15 @@
 #
 # The various person etc entries will be created if needed (ie if there is no
 # exact match).
+#
+# GOTCHAS
+#
+#   * If the organisation or place already exist the associated place_kind will
+#     not be used, but will be created.
+#
+# TODO
+#
+#   * Add tests
 
 
 import csv
