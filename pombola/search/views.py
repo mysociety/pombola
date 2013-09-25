@@ -32,31 +32,6 @@ class SearchViewWithGeocoder(SearchView):
         return context
 
 
-
-# def location_search(request):
-#
-#     loc = request.GET.get('loc', '')
-#
-#     results = geocode.find(loc) if loc else []
-#
-#     # If there is one result find that matching areas for it
-#     if len(results) == 1:
-#         mapit_areas = geocode.coord_to_areas( results[0]['lat'], results[0]['lng'] )
-#         areas = [ models.Place.objects.get(mapit_id=area['mapit_id']) for area in mapit_areas.values() ]
-#     else:
-#         areas = None
-#
-#     return render_to_response(
-#         'search/location.html',
-#         {
-#             'loc': loc,
-#             'results': results,
-#             'areas': areas,
-#         },
-#         context_instance = RequestContext( request ),
-#     )
-
-
 known_kinds = {
     'person': models.Person,
     'place':  models.Place,

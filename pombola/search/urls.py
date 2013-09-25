@@ -23,7 +23,6 @@ if settings.ENABLED_FEATURES['speeches']:
 urlpatterns = patterns('pombola.search.views',
 
     # Haystack and other searches
-    # url( r'^location/',    'location_search',        name="location_search"     ),
     url( r'^autocomplete/', 'autocomplete',           name="autocomplete"        ),
 
     # General search - just intended for the core app
