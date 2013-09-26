@@ -1,6 +1,6 @@
 {% load url from future %}
 
-<li><a href="{% url "person_experience" slug=object.slug %}">Experience</a></li>
+<li><a href="{% url "person" slug=object.slug %}">Experience</a></li>
 <li><a href="{% url "person_appearances" slug=object.slug %}">Appearances</a></li>
 
 {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}
