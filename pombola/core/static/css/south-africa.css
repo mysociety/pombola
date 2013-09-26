@@ -3210,8 +3210,71 @@ h3 {
   text-transform: uppercase;
 }
 
+ul, ol {
+  margin-bottom: 1em;
+}
 ul li, ol li {
   font-size: 1em;
+  line-height: 1.4em;
+  margin-bottom: 0;
+}
+
+p {
+  font-size: inherit;
+  line-height: 1.4em;
+  margin-bottom: 1em;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  font-size: 0.875em;
+}
+
+td, th {
+  border-bottom: 1px solid #d2d2ce;
+  padding: 0.33em .6em;
+  text-align: left;
+}
+
+th {
+  background: inherit;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  font-size: 0.875em;
+}
+
+th[scope="row"] {
+  color: #5bafb9;
+}
+
+tbody tr:hover {
+  background-color: #f4f4f4;
+}
+tbody tr:hover th[scope="row"] {
+  color: #222222;
+}
+
+caption {
+  margin: 0;
+  padding: 0.5em 0;
+  font-size: 1.3125em;
+  text-align: left;
+  color: #555555;
+}
+
+tfoot {
+  font-size: 0.875em;
+  font-weight: normal;
+}
+tfoot td {
+  text-align: right;
+  border: none;
 }
 
 .meta {
@@ -3721,4 +3784,12 @@ FOOTER
   margin: .5em auto;
   text-align: right;
   font-size: inherit;
+}
+
+.infopage {
+  max-width: 632px;
+}
+.infopage ol,
+.infopage ul {
+  margin-bottom: 1em;
 }
