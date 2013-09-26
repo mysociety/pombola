@@ -3356,6 +3356,11 @@ a:focus {
   background: #e23d28;
   color: #fff;
 }
+#main-menu nav a[href*="http://www.pmg.org.za/"] {
+  background-image: url("/static/images/pmg-white-icon.png") !important;
+  background-position: 95% center !important;
+  background-repeat: no-repeat !important;
+}
 
 #header-search {
   border: 1px solid #a92d1e;

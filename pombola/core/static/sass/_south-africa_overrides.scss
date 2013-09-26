@@ -78,7 +78,10 @@ a {
         color: mix($colour_primary, #000, 80%);
         text-decoration: underline;
     }
+
 }
+
+
 
 /*
 
@@ -225,7 +228,7 @@ HEADER
             &.header-search{
                 float: right;
             }
-            a{
+            a {
                 background: $colour_primary;
                 @include lato-regular;
                 &:hover,
@@ -233,6 +236,7 @@ HEADER
                     background: mix($colour_primary, #000, 80%);
                 }
             }
+
             &.active a,
             &.active a:hover,
             &.active a:focus
@@ -250,6 +254,7 @@ HEADER
                 {
                     background: mix($colour_primary, #000, 80%);
                 }
+
             }
             &:hover,
             &:focus {
@@ -269,6 +274,11 @@ HEADER
                 }
             }
         }
+    }
+    a[href*="http://www.pmg.org.za/"] {
+        background-image: url('/static/images/pmg-white-icon.png') !important;
+        background-position: 95% center !important;
+        background-repeat: no-repeat !important;
     }
 }
 #header-search{
