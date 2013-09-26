@@ -1,4 +1,5 @@
 import re
+import sys
 
 from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
@@ -19,18 +20,31 @@ from .geocoder import geocoder
 class GeocoderView(TemplateView):
     template_name = "search/location.html"
 
+    # This should really be set somewhere is the app's config.
+    # See https://github.com/mysociety/pombola/issues/829
+    country_app_to_alpha2_mapping = {
+        # http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+        "south_africa": "za",
+        "kenya":        "ke",
+        "zimbabwe":     "zw",
+        "nigeria":      "ng",
+        "libya":        "ly",
+    }
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(GeocoderView, self).get_context_data()
 
-        # This only applies to the ZA Pombola
-        if settings.COUNTRY_APP != 'south_africa':
-            return context
+        country_alpha2 = self.country_app_to_alpha2_mapping.get(settings.COUNTRY_APP)
+
+        if not country_alpha2:
+            # search can still go ahead, but it will not be restricted to the country expected
+            sys.stderr.write("Need to add country code for {0} to 'search.views.GeocoderView'".format(settings.COUNTRY_APP))
 
         query = self.request.GET.get('q')
         if query:
             context['query'] = query
-            context['geocoder_results'] = geocoder(country="za", q=query)
+            context['geocoder_results'] = geocoder(country=country_alpha2, q=query)
 
         return context
 
