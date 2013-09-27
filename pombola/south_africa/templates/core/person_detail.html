@@ -67,3 +67,31 @@
   {% endif  %}
 
 {% endblock %}
+
+{% block profile_info_extra %}
+  <h3>Email</h3>
+
+  {% for contact in object.contacts.all %}
+    {% if contact.kind.slug == 'email' %}
+      <p>{{ contact.value|urlizetrunc:50 }}</p>
+    {% endif %}
+  {% endfor %}
+
+  <h3>Phone</h3>
+
+  {% for contact in object.contacts.all %}
+    {% if contact.kind.slug == 'phone' %}
+      <p><a href="tel:{{ contact.value }}">{{ contact.value }}</a></p>
+    {% endif %}
+  {% endfor %}
+
+  <h3>Twitter</h3>
+
+  {% for contact in object.contacts.all %}
+    {% if contact.kind.slug == 'twitter' %}
+      <p><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</p>
+    {% endif %}
+  {% endfor %}
+
+
+{% endblock %}
