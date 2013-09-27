@@ -1,5 +1,5 @@
 {# For South Africa the default person section is the experience tab #}
-{% extends 'core/person_experience.html' %}
+{% extends 'core/person_base.html' %}
 
 {% load url from future %}
 
@@ -17,7 +17,32 @@
 {% endblock %}
 
 {% block subcontent %}
-  {{ block.super }}
+  <h2>Experience</h2>
+  <div>
+      <div class="left-col">
+          <section>
+              <h3>Currently</h3>
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
+          </section>
+
+          <section>
+              <h3>Formerly</h3>
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
+          </section>
+      </div>
+
+      <div class="right-col">
+          <section>
+              <h3>Job History</h3>
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
+          </section>
+
+          <section>
+              <h3>Education</h3>
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
+          </section>
+      </div>
+  </div>
 
   {% if settings.ENABLED_FEATURES.hansard %}
 
