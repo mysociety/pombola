@@ -45,6 +45,7 @@
   </div>
 
   {% if settings.ENABLED_FEATURES.hansard %}
+      <h2>Appearances</h2>
 
       {% with hansard_count=object.hansard_entries.count %}
             {% if hansard_count %}
