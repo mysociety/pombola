@@ -17,8 +17,9 @@
 {% endblock %}
 
 {% block subcontent %}
-  <h2>Experience</h2>
-  <div>
+<div class="tabs">
+  <h2 class="tab-title">Experience</h2>
+  <div class="tab-content">
       <div class="left-col">
           <section>
               <h3>Currently</h3>
@@ -47,15 +48,15 @@
   </div>
 
   {% if settings.ENABLED_FEATURES.hansard %}
-      <h2>Appearances</h2>
+      <h2 class="tab-title">Appearances</h2>
 
       {% with hansard_count=object.hansard_entries.count %}
             {% if hansard_count %}
-              <div id="appearances" data-url="{% url "hansard:person_summary" slug=object.slug %}">
+              <div id="appearances" data-url="{% url "hansard:person_summary" slug=object.slug %}" class="tab-content">
                 Loading&hellip;
               </div>
             {% else %}
-              <div>
+              <div class="tab-content">
                 <p>{{ object.name }} has never spoken in Parliament.</p>
               </div>
             {% endif %}
@@ -65,7 +66,7 @@
 
     No appearances were found.
   {% endif  %}
-
+</div>
 {% endblock %}
 
 {% block profile_info_extra %}
