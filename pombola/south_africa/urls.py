@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 
-from pombola.core.views import PersonDetailSub
 from pombola.south_africa.views import LatLonDetailView,SAPlaceDetailSub
 
 urlpatterns = patterns('pombola.south_africa.views',
