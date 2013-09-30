@@ -191,6 +191,35 @@ tfoot {
     color: $colour_blackish;
 }
 
+
+
+#page-wrapper {
+    position: relative;
+}
+
+.feedback-button {
+    position: absolute;
+    bottom: .66em;
+    right: 0;
+    display: inline-block;
+    background: $colour_main_background;
+    padding: 0.66em;
+    @include border_radius(3px);
+    @include lato-bold;
+    text-transform: uppercase;
+    color: $colour_black;
+    text-decoration: none;
+    font-size: 0.75em;
+    letter-spacing: 0.075em;
+    &:hover,
+    &:focus {
+        color: #fff;
+        background-color: $colour_primary;
+        text-decoration: none;
+    }
+
+}
+
 /*
 
 HEADER
@@ -337,28 +366,7 @@ HEADER
 }
 
 
-.feedback-button {
-    position: absolute;
-    top: .66em;
-    right: 0;
-    display: inline-block;
-    background: $colour_main_background;
-    padding: 0.66em;
-    @include border_radius(3px);
-    @include lato-bold;
-    text-transform: uppercase;
-    color: $colour_black;
-    text-decoration: none;
-    font-size: 0.75em;
-    letter-spacing: 0.075em;
-    &:hover,
-    &:focus {
-        color: #fff;
-        background-color: $colour_primary;
-        text-decoration: none;
-    }
 
-}
 
 /*
 
