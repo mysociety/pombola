@@ -132,6 +132,28 @@ class PersonAndContactTasksTest( unittest.TestCase ):
         )
 
 
+class PersonNamesTest( unittest.TestCase ):
+
+    def setUp(self):
+        self.person, _ = models.Person.objects.get_or_create(
+            legal_name = "John Smith",
+            slug = "john-smith")
+        self.person.add_alternative_name("John Q. Public", name_to_use=True)
+        self.person.add_alternative_name("John Doe", name_to_use=False)
+
+    def test_alternative_names(self):
+        self.assertEqual(self.person.name, "John Q. Public")
+
+        self.assertEqual(set(self.person.additional_names(include_name_to_use=True)),
+                         set(("John Q. Public", "John Doe")))
+
+        self.assertEqual(self.person.all_names_set(),
+                         set(("John Q. Public", "John Doe", "John Smith")))
+
+    def tearDown(self):
+        self.person.delete()
+
+
 class SummaryTest( unittest.TestCase ):
     def setUp(self):
         pass
