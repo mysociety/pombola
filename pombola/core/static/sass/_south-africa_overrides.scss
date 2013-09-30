@@ -199,7 +199,7 @@ tfoot {
 
 .feedback-button {
     position: absolute;
-    bottom: .66em;
+    bottom: 0;
     right: 0;
     display: inline-block;
     background: $colour_main_background;
@@ -499,6 +499,9 @@ HOME PAGE INTRO BOX
         @include lato-regular;
         font-size: 0.875em;
     }
+    .caption {
+        font-size: 0.875em;
+    }
 }
 
 .featured-person {
@@ -640,6 +643,7 @@ ul#home-news-list {
             padding-right: 24px;
         }
         p {
+            font-size: 0.875em;
             margin-bottom: 0.5em;
             &.meta {
                 font-style: normal;

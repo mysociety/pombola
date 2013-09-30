@@ -3291,7 +3291,7 @@ tfoot td {
 
 .feedback-button {
   position: absolute;
-  bottom: .66em;
+  bottom: 0;
   right: 0;
   display: inline-block;
   background: #f1f0ec;
@@ -3573,6 +3573,9 @@ HOME PAGE INTRO BOX
   font-weight: normal !important;
   font-size: 0.875em;
 }
+.carousel-item .caption {
+  font-size: 0.875em;
+}
 
 .featured-person {
   margin: 0;
@@ -3709,6 +3712,7 @@ ul#home-news-list li:first-child {
   padding-right: 24px;
 }
 ul#home-news-list li p {
+  font-size: 0.875em;
   margin-bottom: 0.5em;
 }
 ul#home-news-list li p.meta {
