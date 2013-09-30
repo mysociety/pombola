@@ -6,7 +6,7 @@
 <div class="search-filters">
     <form method="get">
         Where:
-        
+
         <select name="place_slug">
             <option value="">All</option>
             {% for place in places  %}
@@ -16,7 +16,7 @@
                 >{{ place.name }} ({{ place.kind.name }})</option>
             {% endfor %}
         </select>
-        
+
         <input type="submit" value="Search" />
     </form>
 </div>
@@ -28,7 +28,7 @@
 <ul class="position-listing">
 {% for position in positions %}
     <li class="position">
-        
+
         <a href="{{ position.person.get_absolute_url }}">
             {% thumbnail position.person.primary_image "50x50" crop="center" as im %}
                 <img src="{{ im.url }}" alt="{{ position.person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
@@ -40,10 +40,10 @@
 
             <span class="more">more&hellip;</span>
         </a>
-        
+
         <div>
             {{ object.name }}
-        
+
             {% if position.place %}
                 for
                 <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
@@ -56,7 +56,7 @@
 
             {% endif %}
 
-            
+
             {% if position.person.parties %}
 
                 Member of
@@ -72,9 +72,9 @@
                 {% endfor %}.
 
             {% endif %}
-            
+
         </div>
-                
+
     </li>
 {% empty %}
     <li>No records found.</li>
