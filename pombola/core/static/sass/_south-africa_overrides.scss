@@ -226,24 +226,63 @@ HEADER
 
 */
 
-
-
 #site-header{
-    height: 110px;
+    height: auto;
     background-image: none;
     background: $colour_main_background;
-}
-
-#logo {
-    width: 540px;
-    max-width: 100%;
-    height: 84px;
-    background: url('/static/images/za-logo.png') 0 center no-repeat;
+    padding: .5em 0 0;
     @media only all and (min-width: 640px), print {
-      background: url('/static/images/za-logo.png') 0 center no-repeat;
+        padding: 0;
+        height: 114px;
     }
 }
 
+#logo {
+    width: 100%;
+    max-width: 100%;
+    height: 78px;
+    background: url('/static/images/za-logo-mobile.png') left center no-repeat;
+    text-align: left;
+    @include background-size(160.5px 76.5px);
+    margin-bottom: 0.5em;
+    @media only all and (min-width: 640px), print {
+      background: url('/static/images/za-logo.png') 0 center no-repeat;
+      width: 550px;
+      height: 102px;
+    }
+}
+
+menu#mobile-top-tools {
+    width: 100%;
+    float: left;
+    text-align: right;
+    a {
+       background: $colour_primary;
+       padding: 0.5em;
+       display: inline-block;
+       height: 100%;
+       text-decoration: none;
+       @include lato-regular;
+       font-size: 0.875em;
+       line-height: 26px;
+       &:hover,
+       &:focus {
+           background: mix($colour_primary, #000, 80%);
+       }
+    }
+    ul {
+        float: right;
+        li {
+                padding: 0;
+            }
+    }
+    img {
+        height: 24px;
+        width: 24px;
+    }
+}
+
+menu#mobile-top-tools,
 #main-menu {
     background: $colour_primary;
 }
@@ -331,6 +370,14 @@ HEADER
 }
 
 .tertiary-menu {
+    width: 100%;
+    float: left;
+    display: none;
+    visibility: hidden;
+    @media only all and (min-width: 640px), print {
+        display: block;
+        visibility: visible;
+    }
     a {
         font-size: .75em;
         &:link {

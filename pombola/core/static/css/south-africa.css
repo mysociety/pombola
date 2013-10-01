@@ -3321,23 +3321,69 @@ HEADER
 
 */
 #site-header {
-  height: 110px;
+  height: auto;
   background-image: none;
   background: #f1f0ec;
+  padding: .5em 0 0;
+}
+@media only all and (min-width: 640px), print {
+  #site-header {
+    padding: 0;
+    height: 114px;
+  }
 }
 
 #logo {
-  width: 540px;
+  width: 100%;
   max-width: 100%;
-  height: 84px;
-  background: url("/static/images/za-logo.png") 0 center no-repeat;
+  height: 78px;
+  background: url("/static/images/za-logo-mobile.png") left center no-repeat;
+  text-align: left;
+  -webkit-background-size: 160.5px 76.5px;
+  -moz-background-size: 160.5px 76.5px;
+  -o-background-size: 160.5px 76.5px;
+  background-size: 160.5px 76.5px;
+  margin-bottom: 0.5em;
 }
 @media only all and (min-width: 640px), print {
   #logo {
     background: url("/static/images/za-logo.png") 0 center no-repeat;
+    width: 550px;
+    height: 102px;
   }
 }
 
+menu#mobile-top-tools {
+  width: 100%;
+  float: left;
+  text-align: right;
+}
+menu#mobile-top-tools a {
+  background: #e23d28;
+  padding: 0.5em;
+  display: inline-block;
+  height: 100%;
+  text-decoration: none;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  font-size: 0.875em;
+  line-height: 26px;
+}
+menu#mobile-top-tools a:hover, menu#mobile-top-tools a:focus {
+  background: #b43020;
+}
+menu#mobile-top-tools ul {
+  float: right;
+}
+menu#mobile-top-tools ul li {
+  padding: 0;
+}
+menu#mobile-top-tools img {
+  height: 24px;
+  width: 24px;
+}
+
+menu#mobile-top-tools,
 #main-menu {
   background: #e23d28;
 }
@@ -3411,6 +3457,18 @@ a:focus {
   background-color: #eee;
 }
 
+.tertiary-menu {
+  width: 100%;
+  float: left;
+  display: none;
+  visibility: hidden;
+}
+@media only all and (min-width: 640px), print {
+  .tertiary-menu {
+    display: block;
+    visibility: visible;
+  }
+}
 .tertiary-menu a {
   font-size: .75em;
 }
