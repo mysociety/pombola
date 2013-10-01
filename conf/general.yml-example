@@ -89,6 +89,12 @@ MAP_BOUNDING_BOX_SOUTH: -4.73
 MAP_BOUNDING_BOX_WEST:  33.83
 
 
+# ZA Hansard Parsing config (can be left blank on for other instances)
+# Username and password for pmg_scraper command
+PMG_COMMITTEE_USER: ''
+PMG_COMMITTEE_PASS: ''
+
+
 # some apps are optional
 OPTIONAL_APPS:
   - pombola.hansard
