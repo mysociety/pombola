@@ -729,6 +729,7 @@ FOOTER
     line-height: 18px;
     color: $colour_middling_grey;
     div.footer-section {
+        border: none;
         @media all and (min-width: 640px) {
             margin: 0 0 1em 0;
             padding: 0;
@@ -745,9 +746,26 @@ FOOTER
         color: inherit;
         font-size: inherit;
     }
+
+    ul {
+        margin: 1em 0 0;
+    }
+
     ul li {
         font-size: inherit;
+        margin-bottom: 0.25em;
     }
+
+    #footer-menu li > ul {
+        margin-top: 0.25em;
+    }
+
+    #footer-menu li > ul li {
+        display: block;
+        margin-bottom: 0;
+        padding: 0;
+    }
+
     h4 {
         @include lato-bold;
         text-transform: uppercase;
@@ -830,7 +848,10 @@ FOOTER
     }
 
     .utilities {
-        text-align: right;
+        @media only all and (min-width: 640px), print {
+           text-align: right;
+        }
+
         margin: 0;
         li {
             display: inline-block;
@@ -840,8 +861,14 @@ FOOTER
     div.attribution {
         max-width: 960px;
         margin: .5em auto;
-        text-align: right;
+        @media only all and (min-width: 640px), print {
+           text-align: right;
+        }
         font-size: inherit;
+    }
+    .header-search {
+        display: none;
+        visibility: hdden;
     }
 }
 
