@@ -3207,6 +3207,12 @@ h3 {
   text-transform: uppercase;
 }
 
+#page h2, #page h3 {
+  border-top: none;
+  background: transparent;
+  padding: 0;
+}
+
 ul, ol {
   margin-bottom: 1em;
 }
