@@ -1,84 +1,9 @@
-{% load thumbnail %}
 {% load pagination_tags %}
 
 {% autopaginate positions %}
 
-<div class="search-filters">
-    <form method="get">
-        Where:
-
-        <select name="place_slug">
-            <option value="">All</option>
-            {% for place in places  %}
-                <option
-                    {% if place_slug = place.slug %}selected="selected"{% endif %}
-                    value="{{ place.slug }}"
-                >{{ place.name }} ({{ place.kind.name }})</option>
-            {% endfor %}
-        </select>
-
-        <input type="submit" value="Search" />
-    </form>
-</div>
-
-<div class="search-pagination">
-    Showing <strong>{{ page_obj.start_index }}</strong> to <strong>{{ page_obj.end_index }}</strong> of <strong>{{ paginator.count }}</strong>.
-</div>
-
-<ul class="position-listing">
-{% for position in positions %}
-    <li class="position">
-
-        <a href="{{ position.person.get_absolute_url }}">
-            {% thumbnail position.person.primary_image "50x50" crop="center" as im %}
-                <img src="{{ im.url }}" alt="{{ position.person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% empty %}
-                <img src="{{STATIC_URL}}images/person-90x90.jpg" height="50" width="50"/>
-            {% endthumbnail %}
-
-            <span class="name">{{ position.person.name }}</span>
-
-            <span class="more">more&hellip;</span>
-        </a>
-
-        <div>
-            {{ object.name }}
-
-            {% if position.place %}
-                for
-                <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
-
-                {% if position.place.parent_place %}
-                    (in
-                    <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
-                    {{ position.place.parent_place.kind.name }}).
-                {% endif %}
-
-            {% endif %}
-
-
-            {% if position.person.parties %}
-
-                Member of
-                {% for party in position.person.parties %}
-                    {% if forloop.revcounter0 %}
-                        {% if forloop.last %}
-                            and
-                        {% else %}
-                            ,
-                        {% endif %}
-                    {% endif %}
-                    <a href="{{ party.get_absolute_url }}">{{ party.name }}</a>
-                {% endfor %}.
-
-            {% endif %}
-
-        </div>
-
-    </li>
-{% empty %}
-    <li>No records found.</li>
-{% endfor %}
-</ul>
+{% include "core/_place_search_filters.html" %}
+{% include "core/_search_pagination_text.html" %}
+{% include "core/_position_listing.html" %}
 
 {% paginate %}
