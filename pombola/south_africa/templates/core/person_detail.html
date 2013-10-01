@@ -1,0 +1,98 @@
+{# For South Africa the default person section is the experience tab #}
+{% extends 'core/person_base.html' %}
+
+{% load url from future %}
+
+
+
+{% comment %}
+  The appearances are loaded using js because that was how it was done using
+  the tabs. Ideally we'd put the content straight into the HTML here, but that
+  would mean a fair bit of moving code around between apps which is not
+  something I want to tackle right now.
+{% endcomment %}
+
+{% block extra_js_to_load %}
+    pombola_settings.extra_js.push( 'js/load_appearances.js' );
+{% endblock %}
+
+{% block subcontent %}
+<div class="tabs">
+  <h2 class="tab-title">Experience</h2>
+  <div class="tab-content">
+      <div class="left-col">
+          <section>
+              <h3>Currently</h3>
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
+          </section>
+
+          <section>
+              <h3>Formerly</h3>
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
+          </section>
+      </div>
+
+      <!--
+      <div class="right-col">
+          <section>
+              <h3>Job History</h3>
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.other %}
+          </section>
+
+          <section>
+              <h3>Education</h3>
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.education %}
+          </section>
+      </div>
+      -->
+  </div>
+
+  {% if settings.ENABLED_FEATURES.hansard %}
+      <h2 class="tab-title">Appearances</h2>
+
+      {% with hansard_count=object.hansard_entries.count %}
+            {% if hansard_count %}
+              <div id="appearances" data-url="{% url "hansard:person_summary" slug=object.slug %}" class="tab-content">
+                Loading&hellip;
+              </div>
+            {% else %}
+              <div class="tab-content">
+                <p>{{ object.name }} has never spoken in Parliament.</p>
+              </div>
+            {% endif %}
+
+      {% endwith %}
+  {% else %}
+
+    No appearances were found.
+  {% endif  %}
+</div>
+{% endblock %}
+
+{% block profile_info_extra %}
+  <h3>Email</h3>
+
+  {% for contact in object.contacts.all %}
+    {% if contact.kind.slug == 'email' %}
+      <p>{{ contact.value|urlizetrunc:50 }}</p>
+    {% endif %}
+  {% endfor %}
+
+  <h3>Phone</h3>
+
+  {% for contact in object.contacts.all %}
+    {% if contact.kind.slug == 'phone' %}
+      <p><a href="tel:{{ contact.value }}">{{ contact.value }}</a></p>
+    {% endif %}
+  {% endfor %}
+
+  <h3>Twitter</h3>
+
+  {% for contact in object.contacts.all %}
+    {% if contact.kind.slug == 'twitter' %}
+      <p><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</p>
+    {% endif %}
+  {% endfor %}
+
+
+{% endblock %}
