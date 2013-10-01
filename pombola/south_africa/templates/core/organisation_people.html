@@ -21,8 +21,6 @@
 
 
   <div>
-
-    <ul class="listing">
       {% autopaginate sorted_positions %}
 
       {# pombola/south_africa/templates/core/_position_listing.html #}
@@ -32,7 +30,6 @@
       {% include "core/_search_pagination_text.html" %}
 
       {% paginate %}
-    </ul>
   </div>
 
 {% endblock content %}
