@@ -1,9 +1,9 @@
-{% extends 'core/organisation_base.html' %}
+{% extends 'base.html' %}
 {% load pagination_tags %}
 
 {% block title %}{{ object.name }} People{% endblock %}
 
-{% block subcontent %}
+{% block content %}
 
   <h2>Members of {{ object.name }}</h2>
 
@@ -35,4 +35,4 @@
     </ul>
   </div>
 
-{% endblock %}
+{% endblock content %}
