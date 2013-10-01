@@ -5,13 +5,20 @@
 
 {% block subcontent %}
 
-  <h2>Related People</h2>
+  <h2>Members of {{ object.name }}</h2>
 
-  {% if historic %}
-    <p>Showing historic positions (switch to <a href="?historic=">current positions</a>).</p>
-  {% else %}
-    <p>Showing current positions (switch to <a href="?historic=1">past positions</a>).</p>
-  {% endif %}
+  <div class="filters">
+    <h3>Show</h3>
+    <p><a href="?historic=">Current members (x)</a></p>
+    <p><a href="?historic=1">Past members (x)</a></p>
+    <p><a href="?all=1">All members (x)</a></p>
+
+    <h3>Sort by</h3>
+    <p><a href="?sort=alphabetical">Alphabetical</a></p>
+    <p><a href="?sort=party">Party</a></p>
+    <p><a href="?sort=location">Location</a></p>
+  </div>
+
 
   <div>
 
