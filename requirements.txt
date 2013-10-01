@@ -53,6 +53,7 @@ git+git://github.com/mysociety/sayit.git@master#egg=django-sayit
 
 # ZA hansard scrapers - need to be made available to be added as an optional app
 git+git://github.com/mysociety/za-hansard.git@master#egg=zah
+git+git://github.com/mysociety/popit-resolver#egg=popit-resolver
 
 python-dateutil>=1.5,!=2.0
 
