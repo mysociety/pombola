@@ -9,7 +9,6 @@ find . -name '*.pyc' -delete
 ./manage.py test   \
     south_africa   \
     core           \
-#     hansard        \
     images         \
     scorecards     \
     search         \

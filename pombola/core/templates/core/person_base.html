@@ -69,14 +69,29 @@
               {% endfor %}
       {% endif %}
 
-      <h3>Constituency</h3>
+
+      {% regroup object.constituencies|dictsort:"kind" by kind as constituency_groups %}
+      {% for entry in constituency_groups %}
+      <h3>{{ entry.grouper }}</h3>
       <ul>
-          {% for constituency in object.constituencies %}
-              <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
-          {% empty %}
-              <li>Not an MP for any constituencies</li>
+          {% for area in entry.list %}
+              <li><a href="{{ area.get_absolute_url }}">{{ area.name }}</a></li>
           {% endfor %}
       </ul>
+      {% endfor %}
+
+
+
+      {% if settings.COUNTRY_APP == 'south_africa' %}
+      <h3>Constituency Offices</h3>
+      <ul>
+          {% for office in object.constituency_offices %}
+              <li><a href="{{ office.get_absolute_url }}">{{ office.name }}</a></li>
+          {% empty %}
+              <li>Not associated with any constituency offices</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
 
       <h3>{% if settings.COUNTRY_APP == 'kenya' %}
         Party &amp; Coalition
