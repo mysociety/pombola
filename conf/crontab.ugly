@@ -40,5 +40,14 @@ PYTHONIOENCODING=utf-8
 
 !!(* } elsif ($vhost eq 'nigeria.mzalendo.mysociety.org') { *)!!
 10 7 * * * !!(*= $user *)!! run_management_command feedback_report_pending
+
+
+!!(* } elsif ($vhost eq 'south_africa.mzalendo.mysociety.org') { *)!!
+
+# NOTE - this is not the correct domain for the host. It will need to be changed
+# once the domain has been decided. See
+# https://github.com/mysociety/pombola/issues/701
+7 7 * * * !!(*= $user *)!! update_za_hansard.bash
+
 !!(* } else { *)!!
 !!(* } *)!!
