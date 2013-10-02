@@ -211,6 +211,14 @@ tfoot {
     }
 }
 
+.unstyled-list {
+    padding-left: 0;
+    margin-bottom: 0;
+    li {
+        list-style: none outside none;
+    }
+}
+
 .meta {
     font-style: normal;
     font-size: .75em; /* 12px */
@@ -930,11 +938,79 @@ FOOTER
     a:link {
         text-decoration: none;
     }
+    a:hover,
+    a:active,
+    a:focus {
+        text-decoration: underline;
+    }
 }
 
 /* Generic listing styles */
 
+.list-of-things {
+    img {
+        max-width: 100%;
+    }
+}
 
+.list-of-things-item {
+    border-bottom: 1px solid #d2d2ce;
+    padding: 12px;
+    @include clearfix;
+    a:link,
+    a:visited {
+        color: $colour_black;
+        text-decoration: none;
+    }
+    a:hover,
+    a:active,
+    a:focus {
+        color: $colour_primary;
+        text-decoration: underline;
+    }
+}
+
+/* People listings */
+.person-list-item {
+    img {
+        float: left;
+        margin-right: 12px;
+        overflow: hidden;
+    }
+    .name {
+        font-weight: bold;
+        display: block;
+    }
+    .position-parties,
+    .position-place {
+        display: inline-block;
+        font-size: 0.875em;
+        a:link,
+        a:visited {
+            color: #555;
+        }
+        a:hover,
+        a:active,
+        a:focus {
+            color: $colour_primary;
+        }
+    }
+
+    .position-parties {
+        a {
+            background: transparent url('/static/images/organisation-16x16.jpg') left center no-repeat;
+            padding-left: 20px;
+        }
+    }
+
+    .position-place{
+        a {
+            background: transparent url('/static/images/place-16x16.jpg') left center no-repeat;
+            padding-left: 20px;
+            margin-right: 20px;
+        }
+    }
+}
 
 /* Generic layouts */
 

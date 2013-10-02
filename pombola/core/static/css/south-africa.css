@@ -3284,6 +3284,14 @@ tfoot td {
   border: none;
 }
 
+.unstyled-list {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.unstyled-list li {
+  list-style: none outside none;
+}
+
 .meta {
   font-style: normal;
   font-size: .75em;
@@ -3985,8 +3993,88 @@ FOOTER
 .sidebar a:link {
   text-decoration: none;
 }
+.sidebar a:hover,
+.sidebar a:active,
+.sidebar a:focus {
+  text-decoration: underline;
+}
 
 /* Generic listing styles */
+.list-of-things img {
+  max-width: 100%;
+}
+
+.list-of-things-item {
+  border-bottom: 1px solid #d2d2ce;
+  padding: 12px;
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+}
+.list-of-things-item:before, .list-of-things-item:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.list-of-things-item:after {
+  clear: both;
+}
+.list-of-things-item {
+  *zoom: 1;
+}
+.list-of-things-item a:link,
+.list-of-things-item a:visited {
+  color: #222222;
+  text-decoration: none;
+}
+.list-of-things-item a:hover,
+.list-of-things-item a:active,
+.list-of-things-item a:focus {
+  color: #e23d28;
+  text-decoration: underline;
+}
+
+/* People listings */
+.person-list-item img {
+  float: left;
+  margin-right: 12px;
+  overflow: hidden;
+}
+.person-list-item .name {
+  font-weight: bold;
+  display: block;
+}
+.person-list-item .position-parties,
+.person-list-item .position-place {
+  display: inline-block;
+  font-size: 0.875em;
+}
+.person-list-item .position-parties a:link,
+.person-list-item .position-parties a:visited,
+.person-list-item .position-place a:link,
+.person-list-item .position-place a:visited {
+  color: #555;
+}
+.person-list-item .position-parties a:hover,
+.person-list-item .position-parties a:active,
+.person-list-item .position-parties a:focus,
+.person-list-item .position-place a:hover,
+.person-list-item .position-place a:active,
+.person-list-item .position-place a:focus {
+  color: #e23d28;
+}
+.person-list-item .position-parties a {
+  background: transparent url("/static/images/organisation-16x16.jpg") left center no-repeat;
+  padding-left: 20px;
+}
+.person-list-item .position-place a {
+  background: transparent url("/static/images/place-16x16.jpg") left center no-repeat;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
 /* Generic layouts */
 .layout {
   /**
