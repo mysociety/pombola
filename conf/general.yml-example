@@ -94,6 +94,9 @@ MAP_BOUNDING_BOX_WEST:  33.83
 PMG_COMMITTEE_USER: ''
 PMG_COMMITTEE_PASS: ''
 
+# Popit API URL
+# For ZA development you can use 'http://sa-test.matthew.popit.dev.mysociety.org/api/v0.1/'
+POPIT_API_URL: 'http://popit.example.com/api/v0.1/'
 
 # some apps are optional
 OPTIONAL_APPS:
