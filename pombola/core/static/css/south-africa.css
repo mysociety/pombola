@@ -3957,6 +3957,36 @@ FOOTER
   margin-bottom: 1em;
 }
 
+.sidebar {
+  background-color: #f1f0ec;
+  padding: 12px;
+}
+@media only all and (min-width: 640px), print {
+  .sidebar {
+    padding: 24px;
+  }
+}
+.sidebar h3 {
+  font-size: .75em;
+  /* 12px */
+  line-height: 1.75em;
+  /* 21px */
+  margin-bottom: 0;
+}
+.sidebar p {
+  font-size: 0.875em;
+  line-height: 1.5em;
+  /* 21px */
+  margin-bottom: 0;
+}
+.sidebar p + h3 {
+  margin-top: 1.5em;
+}
+.sidebar a:link {
+  text-decoration: none;
+}
+
+/* Generic listing styles */
 /* Generic layouts */
 .layout {
   /**
@@ -3979,12 +4009,14 @@ FOOTER
 .layout .column {
   float: left;
   width: 100%;
+  margin-bottom: 24px;
 }
 
 @media only all and (min-width: 640px), print {
   .layout-major-minor .major-column {
     width: 74.375%;
     margin-right: 2.5%;
+    /* 24px @ 960px */
   }
   .layout-major-minor .minor-column {
     width: 23.125%;
