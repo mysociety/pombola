@@ -47,6 +47,25 @@ $border_radius: 5px;
     font-weight: normal !important;
 }
 
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+
+    &:after {
+        clear: both;
+    }
+
+    /**
+     * For IE 6/7 only
+     * Include this rule to trigger hasLayout and contain floats.
+     */
+    & {
+        *zoom: 1;
+    }
+}
 
 #staging_header {
     background-color: #555;
@@ -192,13 +211,23 @@ tfoot {
     }
 }
 
+.unstyled-list {
+    padding-left: 0;
+    margin-bottom: 0;
+    li {
+        list-style: none outside none;
+    }
+}
+
 .meta {
     font-style: normal;
     font-size: .75em; /* 12px */
     color: $colour_blackish;
 }
 
-
+#page {
+    padding: 10px;
+}
 
 #page-wrapper {
     position: relative;
@@ -886,3 +915,183 @@ FOOTER
         margin-bottom: 1em;
     }
 }
+
+.sidebar {
+    background-color: #f1f0ec;
+    padding: 12px;
+    @media only all and (min-width: 640px), print {
+        padding: 24px;
+    }
+    h3 {
+        font-size: .75em; /* 12px */
+        line-height: 1.75em; /* 21px */
+        margin-bottom: 0;
+    }
+    p {
+        font-size: 0.875em;
+        line-height: 1.5em; /* 21px */
+        margin-bottom: 0;
+    }
+    p + h3 {
+        margin-top: 1.5em;
+    }
+    a:link {
+        text-decoration: none;
+    }
+    a:hover,
+    a:active,
+    a:focus {
+        text-decoration: underline;
+    }
+}
+
+/* Generic listing styles */
+
+.list-of-things {
+    img {
+        max-width: 100%;
+    }
+}
+
+.list-of-things-item {
+    border-bottom: 1px solid #d2d2ce;
+    padding: 12px;
+    @include clearfix;
+    a:link,
+    a:visited {
+        color: $colour_black;
+        text-decoration: none;
+    }
+    a:hover,
+    a:active,
+    a:focus {
+        color: $colour_primary;
+        text-decoration: underline;
+    }
+}
+
+/* People listings */
+.person-list-item {
+    img {
+        float: left;
+        margin-right: 12px;
+        overflow: hidden;
+    }
+    .name {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.25em;
+    }
+    .position-parties,
+    .position-place {
+        display: inline-block;
+        font-size: 0.875em;
+        a:link,
+        a:visited {
+            color: #555;
+        }
+        a:hover,
+        a:active,
+        a:focus {
+            color: $colour_primary;
+        }
+    }
+
+    .position-parties {
+        a {
+            background: transparent url('/static/images/organisation-16x16.jpg') left center no-repeat;
+            padding-left: 20px;
+        }
+    }
+
+    .position-place{
+        a {
+            background: transparent url('/static/images/place-16x16.jpg') left center no-repeat;
+            padding-left: 20px;
+            margin-right: 20px;
+        }
+    }
+}
+
+/* Pagination controls */
+.pagination {
+    @include lato-bold;
+    a,
+    .current {
+        background: transparent;
+        border: 1px solid #d2d2ce;
+        @include border-radius(3px);
+        text-transform: uppercase;
+        font-size: 0.75em;
+        padding: 1em;
+        min-width: 17px;
+        text-align: center;
+        margin-bottom: 0.5em;
+    }
+    .current:hover {
+        background: transparent;
+        border: 1px solid #d2d2ce;
+    }
+    a:hover,
+    a:focus,
+    span:hover {
+        border: 1px solid mix($colour_primary, #000, 80%);
+        background-color: $colour_primary;
+        color: #fff;
+        text-decoration: none;
+    }
+    a.prev,
+    span.prev,
+    a.next,
+    span.next {
+        background: none;
+        padding: 1em;
+        min-width: 17px;
+        &:hover {
+            background-color: $colour_primary;
+        }
+    }
+}
+
+div.search-pagination {
+    background: transparent;
+    color: $colour_black;
+    padding: 0.5111em 0;
+    font-size: 0.87em;
+}
+
+/* Generic layouts */
+
+.layout {
+    @include clearfix;
+    .column {
+        float: left;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 24px;
+    }
+}
+
+@media only all and (min-width: 640px), print {
+   .layout-major-minor {
+       .major-column {
+           width: 74.375%;
+           margin-right: 2.5%; /* 24px @ 960px */
+       }
+       .minor-column {
+           width: 23.125%;
+           float: right;
+       }
+       &.reverse {
+            .minor-column {
+                float: left;
+            }
+       }
+   }
+}
+
+
+
+
+
+

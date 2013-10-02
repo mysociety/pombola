@@ -3284,11 +3284,23 @@ tfoot td {
   border: none;
 }
 
+.unstyled-list {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.unstyled-list li {
+  list-style: none outside none;
+}
+
 .meta {
   font-style: normal;
   font-size: .75em;
   /* 12px */
   color: #555555;
+}
+
+#page {
+  padding: 10px;
 }
 
 #page-wrapper {
@@ -3951,4 +3963,211 @@ FOOTER
 .infopage ol,
 .infopage ul {
   margin-bottom: 1em;
+}
+
+.sidebar {
+  background-color: #f1f0ec;
+  padding: 12px;
+}
+@media only all and (min-width: 640px), print {
+  .sidebar {
+    padding: 24px;
+  }
+}
+.sidebar h3 {
+  font-size: .75em;
+  /* 12px */
+  line-height: 1.75em;
+  /* 21px */
+  margin-bottom: 0;
+}
+.sidebar p {
+  font-size: 0.875em;
+  line-height: 1.5em;
+  /* 21px */
+  margin-bottom: 0;
+}
+.sidebar p + h3 {
+  margin-top: 1.5em;
+}
+.sidebar a:link {
+  text-decoration: none;
+}
+.sidebar a:hover,
+.sidebar a:active,
+.sidebar a:focus {
+  text-decoration: underline;
+}
+
+/* Generic listing styles */
+.list-of-things img {
+  max-width: 100%;
+}
+
+.list-of-things-item {
+  border-bottom: 1px solid #d2d2ce;
+  padding: 12px;
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+}
+.list-of-things-item:before, .list-of-things-item:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.list-of-things-item:after {
+  clear: both;
+}
+.list-of-things-item {
+  *zoom: 1;
+}
+.list-of-things-item a:link,
+.list-of-things-item a:visited {
+  color: #222222;
+  text-decoration: none;
+}
+.list-of-things-item a:hover,
+.list-of-things-item a:active,
+.list-of-things-item a:focus {
+  color: #e23d28;
+  text-decoration: underline;
+}
+
+/* People listings */
+.person-list-item img {
+  float: left;
+  margin-right: 12px;
+  overflow: hidden;
+}
+.person-list-item .name {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.25em;
+}
+.person-list-item .position-parties,
+.person-list-item .position-place {
+  display: inline-block;
+  font-size: 0.875em;
+}
+.person-list-item .position-parties a:link,
+.person-list-item .position-parties a:visited,
+.person-list-item .position-place a:link,
+.person-list-item .position-place a:visited {
+  color: #555;
+}
+.person-list-item .position-parties a:hover,
+.person-list-item .position-parties a:active,
+.person-list-item .position-parties a:focus,
+.person-list-item .position-place a:hover,
+.person-list-item .position-place a:active,
+.person-list-item .position-place a:focus {
+  color: #e23d28;
+}
+.person-list-item .position-parties a {
+  background: transparent url("/static/images/organisation-16x16.jpg") left center no-repeat;
+  padding-left: 20px;
+}
+.person-list-item .position-place a {
+  background: transparent url("/static/images/place-16x16.jpg") left center no-repeat;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
+/* Pagination controls */
+.pagination {
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+}
+.pagination a,
+.pagination .current {
+  background: transparent;
+  border: 1px solid #d2d2ce;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding: 1em;
+  min-width: 17px;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+.pagination .current:hover {
+  background: transparent;
+  border: 1px solid #d2d2ce;
+}
+.pagination a:hover,
+.pagination a:focus,
+.pagination span:hover {
+  border: 1px solid #b43020;
+  background-color: #e23d28;
+  color: #fff;
+  text-decoration: none;
+}
+.pagination a.prev,
+.pagination span.prev,
+.pagination a.next,
+.pagination span.next {
+  background: none;
+  padding: 1em;
+  min-width: 17px;
+}
+.pagination a.prev:hover,
+.pagination span.prev:hover,
+.pagination a.next:hover,
+.pagination span.next:hover {
+  background-color: #e23d28;
+}
+
+div.search-pagination {
+  background: transparent;
+  color: #222222;
+  padding: 0.5111em 0;
+  font-size: 0.87em;
+}
+
+/* Generic layouts */
+.layout {
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+}
+.layout:before, .layout:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.layout:after {
+  clear: both;
+}
+.layout {
+  *zoom: 1;
+}
+.layout .column {
+  float: left;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 24px;
+}
+
+@media only all and (min-width: 640px), print {
+  .layout-major-minor .major-column {
+    width: 74.375%;
+    margin-right: 2.5%;
+    /* 24px @ 960px */
+  }
+  .layout-major-minor .minor-column {
+    width: 23.125%;
+    float: right;
+  }
+  .layout-major-minor.reverse .minor-column {
+    float: left;
+  }
 }
