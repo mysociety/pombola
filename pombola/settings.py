@@ -409,8 +409,8 @@ THUMBNAIL_DEBUG = True
 
 
 # ZA Hansard settings
-HANSARD_CACHE = 'hansard_cache/'
-COMMITTEE_CACHE = 'hansard_cache/committee/'
+HANSARD_CACHE   = os.path.join( root_dir, 'hansard_cache' )
+COMMITTEE_CACHE = os.path.join( HANSARD_CACHE, 'committee' )
 PMG_COMMITTEE_USER = config.get('PMG_COMMITTEE_USER', '')
 PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
 
