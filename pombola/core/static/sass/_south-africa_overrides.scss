@@ -980,6 +980,7 @@ FOOTER
     .name {
         font-weight: bold;
         display: block;
+        margin-bottom: 0.25em;
     }
     .position-parties,
     .position-place {
@@ -1012,6 +1013,53 @@ FOOTER
     }
 }
 
+/* Pagination controls */
+.pagination {
+    @include lato-bold;
+    a,
+    .current {
+        background: transparent;
+        border: 1px solid #d2d2ce;
+        @include border-radius(3px);
+        text-transform: uppercase;
+        font-size: 0.75em;
+        padding: 1em;
+        min-width: 17px;
+        text-align: center;
+        margin-bottom: 0.5em;
+    }
+    .current:hover {
+        background: transparent;
+        border: 1px solid #d2d2ce;
+    }
+    a:hover,
+    a:focus,
+    span:hover {
+        border: 1px solid mix($colour_primary, #000, 80%);
+        background-color: $colour_primary;
+        color: #fff;
+        text-decoration: none;
+    }
+    a.prev,
+    span.prev,
+    a.next,
+    span.next {
+        background: none;
+        padding: 1em;
+        min-width: 17px;
+        &:hover {
+            background-color: $colour_primary;
+        }
+    }
+}
+
+div.search-pagination {
+    background: transparent;
+    color: $colour_black;
+    padding: 0.5em 0;
+    font-size: 0.87em;
+}
+
 /* Generic layouts */
 
 .layout {
@@ -1019,6 +1067,7 @@ FOOTER
     .column {
         float: left;
         width: 100%;
+        max-width: 100%;
         margin-bottom: 24px;
     }
 }
