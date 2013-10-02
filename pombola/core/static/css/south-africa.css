@@ -3291,6 +3291,10 @@ tfoot td {
   color: #555555;
 }
 
+#page {
+  padding: 10px;
+}
+
 #page-wrapper {
   position: relative;
 }
@@ -3951,4 +3955,42 @@ FOOTER
 .infopage ol,
 .infopage ul {
   margin-bottom: 1em;
+}
+
+/* Generic layouts */
+.layout {
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+}
+.layout:before, .layout:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.layout:after {
+  clear: both;
+}
+.layout {
+  *zoom: 1;
+}
+.layout .column {
+  float: left;
+  width: 100%;
+}
+
+@media only all and (min-width: 640px), print {
+  .layout-major-minor .major-column {
+    width: 74.375%;
+    margin-right: 2.5%;
+  }
+  .layout-major-minor .minor-column {
+    width: 23.125%;
+    float: right;
+  }
+  .layout-major-minor.reverse .minor-column {
+    float: left;
+  }
 }

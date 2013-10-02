@@ -47,6 +47,25 @@ $border_radius: 5px;
     font-weight: normal !important;
 }
 
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+
+    &:after {
+        clear: both;
+    }
+
+    /**
+     * For IE 6/7 only
+     * Include this rule to trigger hasLayout and contain floats.
+     */
+    & {
+        *zoom: 1;
+    }
+}
 
 #staging_header {
     background-color: #555;
@@ -198,7 +217,9 @@ tfoot {
     color: $colour_blackish;
 }
 
-
+#page {
+    padding: 10px;
+}
 
 #page-wrapper {
     position: relative;
@@ -886,3 +907,39 @@ FOOTER
         margin-bottom: 1em;
     }
 }
+
+
+/* Generic layouts */
+
+
+.layout {
+    @include clearfix;
+    .column {
+        float: left;
+        width: 100%;
+    }
+}
+
+@media only all and (min-width: 640px), print {
+   .layout-major-minor {
+       .major-column {
+           width: 74.375%;
+           margin-right: 2.5%;
+       }
+       .minor-column {
+           width: 23.125%;
+           float: right;
+       }
+       &.reverse {
+            .minor-column {
+                float: left;
+            }
+       }
+   }
+}
+
+
+
+
+
+
