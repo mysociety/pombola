@@ -6,30 +6,35 @@
 {% block content %}
 
   <h2>Members of {{ object.name }}</h2>
+  <div class="layout layout-major-minor">
 
-  <div class="filters">
-    <h3>Show</h3>
-    <p><a href="?historic=">Current members (x)</a></p>
-    <p><a href="?historic=1">Past members (x)</a></p>
-    <p><a href="?all=1">All members (x)</a></p>
+    <div class="column minor-column">
+      <div class="filters sidebar">
+        <h3>Show</h3>
+        <p><a href="?historic=">Current members (x)</a></p>
+        <p><a href="?historic=1">Past members (x)</a></p>
+        <p><a href="?all=1">All members (x)</a></p>
 
-    <h3>Sort by</h3>
-    <p><a href="?sort=alphabetical">Alphabetical</a></p>
-    <p><a href="?sort=party">Party</a></p>
-    <p><a href="?sort=location">Location</a></p>
-  </div>
+        <h3>Sort by</h3>
+        <p><a href="?sort=alphabetical">Alphabetical</a></p>
+        <p><a href="?sort=party">Party</a></p>
+        <p><a href="?sort=location">Location</a></p>
+      </div>
+    </div>
 
+    <div class="column major-column">
+      <div class="list-of-things list-of-people">
+          {% autopaginate sorted_positions %}
 
-  <div>
-      {% autopaginate sorted_positions %}
+          {# pombola/south_africa/templates/core/_position_listing.html #}
+          {% include "core/_position_listing.html" with positions=sorted_positions %}
 
-      {# pombola/south_africa/templates/core/_position_listing.html #}
-      {% include "core/_position_listing.html" with positions=sorted_positions %}
+          {# pombola/south_africa/templates/core/_search_pagination_text.html #}
+          {% include "core/_search_pagination_text.html" %}
 
-      {# pombola/south_africa/templates/core/_search_pagination_text.html #}
-      {% include "core/_search_pagination_text.html" %}
-
-      {% paginate %}
+          {% paginate %}
+      </div>
+    </div>
   </div>
 
 {% endblock content %}
