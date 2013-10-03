@@ -14,7 +14,7 @@ find . -name '*.pyc' -delete
     scorecards     \
     search         \
     tasks          \
-    zah
+    za_hansard
 
 # This is a very ugly solution to running all the tests just for our own code.
 # running './manage.py test' will cause all the django etc tests to run as well
