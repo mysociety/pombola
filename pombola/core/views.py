@@ -243,20 +243,14 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
     )
 
 
-def organisation(request, slug):
-    org = get_object_or_404(
-        models.Organisation,
-        slug=slug
-    )
+class OrganisationDetailView(DetailView):
+    model = models.Organisation
 
-    return render_to_response(
-        'core/organisation_detail.html',
-        {
-            'object': org,
-            'positions': org.position_set.all().order_by('person__legal_name'),
-        },
-        context_instance=RequestContext(request)
-    )
+    def get_context_data(self, **kwargs):
+        context = super(OrganisationDetailView, self).get_context_data(**kwargs)
+        context['positions'] = self.object.position_set.all().order_by('person__legal_name')
+        return context
+
 
 class OrganisationDetailSub(DetailView):
     model = models.Organisation

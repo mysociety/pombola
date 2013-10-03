@@ -3,7 +3,8 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView, ListView, RedirectView
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView, OrganisationList, OrganisationKindList, PlaceKindList, PersonDetail, PersonDetailSub, PlaceDetailSub, OrganisationDetailSub
+from pombola.core.views import PlaceDetailView, OrganisationList, OrganisationKindList, \
+    PlaceKindList, PersonDetail, PersonDetailSub, PlaceDetailSub, OrganisationDetailSub, OrganisationDetailView
 
 person_patterns = patterns('pombola.core.views',
     url(r'^all/',
@@ -80,7 +81,7 @@ for sub_page in ['aspirants', 'election', 'scorecard', 'comments', 'people', 'pl
 organisation_patterns = patterns('pombola.core.views',
     url(r'^all/', OrganisationList.as_view(), name='organisation_list'),
     url(r'^is/(?P<slug>[-\w]+)/', OrganisationKindList.as_view(), name='organisation_kind'),
-    url(r'^(?P<slug>[-\w]+)/$',   'organisation',      name='organisation'),
+    url(r'^(?P<slug>[-\w]+)/$', OrganisationDetailView.as_view(), name='organisation'),
 )    
 
 # ugly, must be a better way
