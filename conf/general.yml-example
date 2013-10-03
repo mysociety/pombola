@@ -98,11 +98,13 @@ PMG_COMMITTEE_PASS: ''
 # For ZA development you can use 'http://sa-test.matthew.popit.dev.mysociety.org/api/v0.1/'
 POPIT_API_URL: 'http://popit.example.com/api/v0.1/'
 
-# some apps are optional
+# some apps are optional (see trailing comment for the country they most likely apply to)
 OPTIONAL_APPS:
-  # - hansard
-  # - projects
-  # - place_data
+  # - hansard    # KE
+  # - projects   # KE
+  # - place_data # KE
+  # - speeches   # ZA
+  # - za_hansard # ZA
   # - votematch
   
 
