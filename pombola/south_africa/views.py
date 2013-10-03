@@ -5,7 +5,7 @@ from django.http import Http404
 import mapit
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView, PlaceDetailSub
+from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView
 
 from pombola.south_africa.models import ZAPlace
 
@@ -74,3 +74,7 @@ class SAPlaceDetailSub(PlaceDetailSub):
                 )
             
         return context
+
+
+class SAOrganisationDetailView(OrganisationDetailView):
+    pass
