@@ -100,8 +100,9 @@ POPIT_API_URL: 'http://popit.example.com/api/v0.1/'
 
 # some apps are optional
 OPTIONAL_APPS:
-  - pombola.hansard
-  - pombola.projects
-  - pombola.place_data
-  # - pombola.votematch
+  # - hansard
+  # - projects
+  # - place_data
+  # - votematch
+  
 
