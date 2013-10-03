@@ -270,7 +270,7 @@ class OrganisationDetailSub(DetailView):
         # of an organisation to be controlled with the 'order' query
         # parameter:
         if self.kwargs['sub_page'] == 'people':
-            all_positions = self.object.position_set.all()
+            all_positions = context['all_positions'] = self.object.position_set.all()
 
             if self.request.GET.get('all'):
                 positions = all_positions
