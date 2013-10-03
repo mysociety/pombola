@@ -113,6 +113,7 @@ h1 {
     font-size: 1.875em; /* 30px */
     color: $colour_black;
     letter-spacing: 0.05em;
+    line-height: 1.25em;
 }
 
 h2 {
@@ -211,6 +212,11 @@ tfoot {
     }
 }
 
+small {
+    font-size: 0.875em;
+}
+
+.unstyled,
 .unstyled-list {
     padding-left: 0;
     margin-bottom: 0;
@@ -1058,6 +1064,58 @@ div.search-pagination {
     color: $colour_black;
     padding: 0.5111em 0;
     font-size: 0.87em;
+}
+
+/* Questions, Hansard, Speeches */
+body {
+    .breadcrumbs {
+        margin-bottom: 0;
+        /* this is a terrible thing to do to override the specificity */
+    }
+}
+
+
+li.speech {
+    margin-bottom: 2em;
+    padding-bottom: .5em;
+
+    -ms-word-break: break-all;
+         word-break: break-all;
+
+         // Non standard for webkit
+         word-break: break-word;
+
+    -webkit-hyphens: auto;
+       -moz-hyphens: auto;
+            hyphens: auto;
+    br {
+        display: none;
+    }
+    .hov {
+        font-size: 0.75em;
+        text-decoration: none;
+        i {
+            font-style: normal;
+        }
+        &:hover {
+            color: $colour_black;
+        }
+    }
+    .off-screen {
+        opacity: 1;
+    }
+    &:after {
+        width: 100%;
+        left: 0;
+        bottom: 0;
+    }
+}
+
+.speech-speaker {
+    .speaker-img {
+        height: 44px;
+        width: 44px;
+    }
 }
 
 /* Generic layouts */
