@@ -104,9 +104,9 @@ class Command(LabelCommand):
                 name = re.sub(r'(?ms)\s+', ' ', name)
 
                 if party_code:
-                    organisation_name = "%s office (%s): %s" % (party, party_code, name)
+                    organisation_name = "%s Constituency Area (%s): %s" % (party, party_code, name)
                 else:
-                    organisation_name = "%s office: %s" % (party, name)
+                    organisation_name = "%s Constituency Area: %s" % (party, name)
                 organisation_slug = slugify(organisation_name)
 
                 # Search for the area in the database via the constituency area organisation kind
