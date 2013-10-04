@@ -4166,6 +4166,7 @@ li.speech .hov i {
 }
 li.speech .hov:hover {
   color: #222222;
+  text-decoration: underline;
 }
 li.speech .off-screen {
   opacity: 1;
@@ -4179,6 +4180,36 @@ li.speech:after {
 .speech-speaker .speaker-img {
   height: 44px;
   width: 44px;
+}
+
+ul.pager {
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-bottom: 1em;
+  background: transparent;
+}
+ul.pager li {
+  list-style: none outside none;
+}
+ul.pager li.previous,
+ul.pager li.next {
+  display: inline-block;
+  width: 50%;
+}
+ul.pager li.previous a,
+ul.pager li.next a {
+  background: transparent;
+  font-size: 0.875em;
+  text-decoration: none;
+  color: #555555;
+}
+ul.pager li.previous a:hover,
+ul.pager li.next a:hover {
+  text-decoration: underline;
+  color: #e23d28;
+}
+ul.pager li.next {
+  text-align: right;
 }
 
 /* Generic layouts */
