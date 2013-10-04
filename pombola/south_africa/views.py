@@ -77,4 +77,8 @@ class SAPlaceDetailSub(PlaceDetailSub):
 
 
 class SAOrganisationDetailView(OrganisationDetailView):
-    pass
+    def get_template_names(self):
+        if self.object.kind.slug == 'house':
+            return [ 'south_africa/organisation_house.html' ]
+        else:
+            return super(SAOrganisationDetailView, self).get_template_names()
