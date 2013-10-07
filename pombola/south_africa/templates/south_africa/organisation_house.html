@@ -6,6 +6,11 @@ the National Assembly or NCOP. All other organisation kinds are rendered using
 the organisation detail page.
 {% endcomment %}
 
-{% block subcontent %}
 
-{% endblock subcontent %}
+{% block content %}
+  <h1>{{ object.title }} {{ object.name }}</h1>
+  {% if object.kind.slug != 'unknown' %}
+    <p>{{ object.kind.name }}</p>
+  {% endif %}
+
+{% endblock content %}
