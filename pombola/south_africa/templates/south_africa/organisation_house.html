@@ -1,4 +1,5 @@
 {% extends "core/organisation_base.html" %}
+{% load url from future %}
 
 {% comment %}
 This template is specifically for organisations that have a kind = "house", i.e.
@@ -12,5 +13,34 @@ the organisation detail page.
   {% if object.kind.slug != 'unknown' %}
     <p>{{ object.kind.name }}</p>
   {% endif %}
+
+  <div>
+    {{ object.summary }}
+  </div>
+
+  <h2>People</h2>
+
+  <div>
+    <ul>
+      <li><a href="">National executive ({{ organisation.position_set.count }})</a></li>
+      <li><a href="">Office bearers ({{ organisation.position_set.count }})</a></li>
+      <li><a href="">All members ({{ organisation.position_set.count }})</a></li>
+    </ul>
+  </div>
+
+  <h2>Parties</h2>
+
+  <div>
+    {% for party in parties %}
+    <ul>
+      <li>
+      <a href="{% url "organisation" slug=party.slug %}">
+        {{ party.name }}
+        <span>(x%)</span>
+      </a>
+      </li>
+    </ul>
+    {% endfor %}
+  </div>
 
 {% endblock content %}
