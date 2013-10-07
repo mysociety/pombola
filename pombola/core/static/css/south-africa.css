@@ -4272,6 +4272,13 @@ ul.pager li.next {
   margin-bottom: 24px;
 }
 
+.pull-right {
+  float: right;
+  overflow: hidden;
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
 @media only all and (min-width: 640px), print {
   .layout-major-minor .major-column {
     width: 74.375%;

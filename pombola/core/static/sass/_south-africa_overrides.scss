@@ -1193,6 +1193,13 @@ ul.pager {
     }
 }
 
+.pull-right {
+    float: right;
+    overflow: hidden;
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
 
 @media only all and (min-width: 640px), print {
    .layout-major-minor {
