@@ -77,6 +77,12 @@ class SAPlaceDetailSub(PlaceDetailSub):
 
 
 class SAOrganisationDetailView(OrganisationDetailView):
+
+    def get_context_data(self, **kwargs):
+        context = super(SAOrganisationDetailView, self).get_context_data(**kwargs)
+        context['parties'] = models.Organisation.objects.all().active_parties()
+        return context
+
     def get_template_names(self):
         if self.object.kind.slug == 'house':
             return [ 'south_africa/organisation_house.html' ]
