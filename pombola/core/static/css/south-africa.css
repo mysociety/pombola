@@ -4084,11 +4084,39 @@ FOOTER
 }
 
 /* Pagination controls */
+.step-pagination,
 .pagination {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
   font-weight: normal !important;
 }
-.pagination a,
+.step-pagination a,
+.pagination a {
+  background: transparent;
+  border: 1px solid #d2d2ce;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  padding: 1em;
+  min-width: 17px;
+  text-align: center;
+  margin-bottom: 0.5em;
+  text-decoration: none;
+}
+.step-pagination a:hover,
+.step-pagination a:focus,
+.pagination a:hover,
+.pagination a:focus {
+  border: 1px solid #b43020;
+  background-color: #e23d28;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* PMO pagination */
 .pagination .current {
   background: transparent;
   border: 1px solid #d2d2ce;
@@ -4108,8 +4136,6 @@ FOOTER
   background: transparent;
   border: 1px solid #d2d2ce;
 }
-.pagination a:hover,
-.pagination a:focus,
 .pagination span:hover {
   border: 1px solid #b43020;
   background-color: #e23d28;
@@ -4129,6 +4155,13 @@ FOOTER
 .pagination a.next:hover,
 .pagination span.next:hover {
   background-color: #e23d28;
+}
+
+/* SayIt pagination */
+.step-pagination .current {
+  font-size: 0.875em;
+  display: inline-block;
+  padding: 0 0.5em;
 }
 
 div.search-pagination {
