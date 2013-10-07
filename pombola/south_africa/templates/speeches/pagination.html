@@ -9,7 +9,7 @@
 
         <span class="current">
           {% blocktrans with num=page_obj.number pages=paginator.num_pages %}
-            Page {{ num }} of {{ pages }}
+            Page <strong>{{ num }}</strong> of <strong>{{ pages }}</strong>
           {% endblocktrans %}
         </span>
 

@@ -1027,7 +1027,7 @@ FOOTER
 /* Pagination controls */
 .step-pagination,
 .pagination {
-    @include lato-bold;
+
     a {
         background: transparent;
         border: 1px solid #d2d2ce;
@@ -1039,6 +1039,7 @@ FOOTER
         text-align: center;
         margin-bottom: 0.5em;
         text-decoration: none;
+        @include lato-bold;
     }
     a:hover,
     a:focus {
@@ -1051,6 +1052,7 @@ FOOTER
 
 /* PMO pagination */
 .pagination {
+    @include lato-bold;
     .current {
         background: transparent;
         border: 1px solid #d2d2ce;

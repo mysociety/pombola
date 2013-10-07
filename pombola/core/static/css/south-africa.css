@@ -4084,11 +4084,6 @@ FOOTER
 }
 
 /* Pagination controls */
-.step-pagination,
-.pagination {
-  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-  font-weight: normal !important;
-}
 .step-pagination a,
 .pagination a {
   background: transparent;
@@ -4105,6 +4100,8 @@ FOOTER
   text-align: center;
   margin-bottom: 0.5em;
   text-decoration: none;
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
 }
 .step-pagination a:hover,
 .step-pagination a:focus,
@@ -4117,6 +4114,10 @@ FOOTER
 }
 
 /* PMO pagination */
+.pagination {
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+}
 .pagination .current {
   background: transparent;
   border: 1px solid #d2d2ce;
