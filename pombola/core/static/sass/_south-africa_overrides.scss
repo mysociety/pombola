@@ -492,6 +492,11 @@ HOME PAGE INTRO BOX
         display: none;
         visibility: hidden;
     }
+
+    .page-wrapper {
+        width: 96%;
+        margin: 0 auto;
+    }
 }
 
 
@@ -527,43 +532,6 @@ HOME PAGE INTRO BOX
         position: absolute;
         left: 21%;
         top: 10px;
-    }
-}
-#home-search
-{
-    background: transparent;
-    margin: 0;
-    margin-top: 30px;
-    padding: 0;
-    overflow: visible;
-
-    label{
-        @include lato-regular;
-        font-size: 0.96em;
-        font-weight: normal;
-        text-shadow: 0px 1px 2px rgba(2, 111, 82, 1);
-    }
-    input[type="text"]{
-        width: 83%;
-        margin-right: 1%;
-        -webkit-box-sizing: border-box;
-           -moz-box-sizing: border-box;
-                box-sizing: border-box;
-        font-size: 1em;
-        @include lato-regular;
-        border: 1px solid #00674a;
-        @include border-radius(3px);
-        padding: 0.66em;
-    }
-    button{
-        width:16%;
-        box-shadow: 0px 2px 0px #af201a;
-        padding: 1.745em;
-        background-color: $colour_primary;
-        &:hover,
-        &:focus{
-            color: mix($colour_primary, #000, 80%);
-        }
     }
 }
 
@@ -675,13 +643,12 @@ HOME PAGE INTRO BOX
 }
 
 #front_intro .home-left{
-    width: 550px;
+
 }
 
 #front_intro .home-right
 {
-    width: 304px;
-    float: right;
+
     @include lato-regular;
 }
 
@@ -693,6 +660,8 @@ HOME PAGE INTRO BOX
     @include lato-regular;
     font-weight: normal;
     @include text-shadow(0px 2px 1px rgba(0, 0, 0, .25));
+    font-size: 32px;
+    margin-top: 1em;
 }
 #page .home-left h2 {
     font-size: .875em;
@@ -701,6 +670,58 @@ HOME PAGE INTRO BOX
     @include text-shadow(0px 1px 1px rgba(0, 0, 0, .25));
 }
 
+.home-rep-search {
+        #home-search {
+            background: transparent;
+            margin: 0;
+            margin-top: 30px;
+            padding: 0;
+            overflow: visible;
+            input[type="text"]{
+                width: 83%;
+                margin-right: 1%;
+                -webkit-box-sizing: border-box;
+                   -moz-box-sizing: border-box;
+                        box-sizing: border-box;
+                font-size: 1em;
+                @include lato-regular;
+                border: 1px solid #ccc;
+                @include border-radius(3px);
+                padding: 0.66em;
+            }
+            button{
+                width:16%;
+                box-shadow: 0px 2px 0px #af201a;
+                padding: 1.745em;
+                background-color: $colour_primary;
+                &:hover,
+                &:focus {
+                    color: mix($colour_primary, #000, 80%);
+                }
+            }
+            label {
+            display: none;
+            }
+        }
+
+    .wrapper {
+        border-bottom: 1px solid #ccc;
+        overflow: hidden;
+        padding-bottom: 40px;
+        padding-top: 15px;
+        h2,
+        form {
+            width: 50%;
+            float: left;
+        }
+        h2 {
+            margin-top: 40px;
+            text-align: right;
+            margin-right: 2.5%;
+            width: 47.5%;
+        }
+    }
+}
 
 
 /*
@@ -728,26 +749,22 @@ NEWS & POLL
 #news {
     padding: 2em 0 1em;
     float: left;
-    width: 632px;
+    width: 65.8333333%;
     max-width: 100%;
-    margin-right: 24px;
-    margin-bottom: 2em;
-    border-bottom: 1px solid #ccc;
-
+    margin-right: 2.5%;
 }
 
 #twitter {
-    padding: 2em 0 1em;
-    width: 304px;
-    float: right;
-    padding: 2em 0;
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ccc;
 }
 
-#poll {
-    float:left;
-    width: 632px;
-    max-width: 100%;
-    margin-right: 24px;
+.col-2 {
+    padding: 2em 0 1em;
+    width: 31.666666667%;
+    float: right;
+    padding: 2em 0;
 }
 
 ul#home-news-list {
@@ -756,13 +773,12 @@ ul#home-news-list {
     margin-top: 0;
     li {
         border:none;
-        width: 304px;
+        width: 48.1012658%;
         float: left;
-
-        margin-bottom: 0;
+        margin-bottom: 1.5em;
         padding-bottom: 0;
-        &:first-child {
-            padding-right: 24px;
+        &:nth-child(odd) {
+            padding-right: 3.7974684%
         }
         p {
             font-size: 0.875em;
@@ -1248,6 +1264,22 @@ ul.pager {
 
 
 @media only all and (min-width: 640px), print {
+    #front_intro .home-left {
+        width: 65.8333333%;
+        margin-right: 2.5%; /* 24px @ 960px */
+    }
+
+    #front_intro .home-right {
+        width: 31.66666666%;
+        float: right;
+        margin-right: 0;
+    }
+
+    #twitter {
+        width: 100%;
+        max-width: 100%;
+    }
+
    .layout-major-minor {
        .major-column {
            width: 74.375%;
