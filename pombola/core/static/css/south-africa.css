@@ -3174,6 +3174,26 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
+.button {
+  display: inline-block;
+  background-color: #e23d28;
+  font-size: 0.875em;
+  text-align: center;
+  padding: 1em 1.33em;
+  font-weight: normal;
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  border: none;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  -webkit-appearance: none;
+}
+.button:hover, .button:focus {
+  background: #b43020;
+}
+
 /*
 
 Base typography
@@ -3526,6 +3546,14 @@ a:focus {
 HOME PAGE INTRO BOX
 
 */
+.home #page {
+  padding: 0 0 10px;
+}
+.home .feedback-button {
+  display: none;
+  visibility: hidden;
+}
+
 #front_intro {
   background-color: #027857;
   padding: 2em 0;
@@ -3962,6 +3990,27 @@ FOOTER
 #site-footer .header-search {
   display: none;
   visibility: hdden;
+}
+
+.email-signup {
+  margin-top: 1em;
+}
+.email-signup .mailing-list-button {
+  -webkit-border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  -ms-border-radius: 0 3px 3px 0;
+  -o-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+  margin: 0;
+}
+.email-signup input[type=text] {
+  font-size: 1em;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  padding: 0.815em;
+  border: none;
+  margin: 0;
+  min-width: 16em;
 }
 
 .infopage {

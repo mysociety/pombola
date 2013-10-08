@@ -108,7 +108,25 @@ a {
 
 }
 
-
+.button {
+    display: inline-block;
+    background-color: $colour_primary;
+    font-size: 0.875em;
+    text-align: center;
+    padding: 1em 1.33em;
+    font-weight: normal;
+    @include lato-bold;
+    border: none;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    -webkit-appearance: none;
+    &:hover,
+    &:focus {
+        background: mix($colour_primary, #000, 80%);
+    }
+}
 
 /*
 
@@ -466,6 +484,17 @@ menu#mobile-top-tools,
 HOME PAGE INTRO BOX
 
 */
+.home {
+    #page {
+        padding: 0 0 10px;
+    }
+    .feedback-button {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+
 #front_intro
 {
     background-color: #027857;
@@ -915,6 +944,23 @@ FOOTER
     .header-search {
         display: none;
         visibility: hdden;
+    }
+}
+
+.email-signup {
+    margin-top: 1em;
+    .mailing-list-button {
+        @include border-radius(0 3px 3px 0);
+        margin: 0;
+    }
+    input[type=text] {
+        font-size: 1em;
+        font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+        font-weight: normal !important;
+        padding: 0.815em;
+        border: none;
+        margin: 0;
+        min-width: 16em;
     }
 }
 
