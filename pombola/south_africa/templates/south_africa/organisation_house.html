@@ -22,9 +22,9 @@ the organisation detail page.
 
   <div>
     <ul>
-      <li><a href="">National executive ({{ organisation.position_set.count }})</a></li>
-      <li><a href="">Office bearers ({{ organisation.position_set.count }})</a></li>
-      <li><a href="">All members ({{ organisation.position_set.count }})</a></li>
+      <li><a href="{% url 'organisation_people' slug=object.slug %}">National executive ({{ organisation.position_set.count }})</a></li>
+      <li><a href="{% url 'organisation_people' slug=object.slug %}">Office bearers ({{ organisation.position_set.count }})</a></li>
+      <li><a href="{% url 'organisation_people' slug=object.slug %}?all=1">All members ({{ organisation.position_set.count }})</a></li>
     </ul>
   </div>
 
