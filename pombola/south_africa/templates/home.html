@@ -21,7 +21,14 @@
 
 {% block intro_content %}
     <div id="front_intro">
-        <div class="page-wrapper wrapper">
+        <div class="page-wrapper wrapper ">
+            <div class="home-right">
+                                <h2 id="home-intro">
+                                  People’s Assembly is intro text porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.
+                                </h2>
+
+
+                            </div>
                 <div class="home-left">
                     <h2>This week's focus</h2>
                     <div id="home-carousel" class="carousel">
@@ -80,26 +87,19 @@
 
                 </div>
 
-                <div class="home-right">
-                    <h2 id="home-intro">
-                      People’s Assembly is intro text porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.
-                    </h2>
-                    <a href="#" class="btn-text-green location-button"><i class="location-icon"></i> Find your MP on a map</a>
-                    <form action="{% url "core_search" %}" id="home-search">
-                        <label for="core-search">Or search people, places and organisations</label>
-                        <input class="search-autocomplete-name" autofocus id="core-search" type="text" name="q" value="" placeholder="e.g. Place, name">
-                        <button type="submit">Search</button>
 
-                        {% if settings.ENABLED_FEATURES.hansard %}
-                            <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Search Hansard instead</a>
-                        {% endif %}
-
-                    </form>
-
-                </div>
         </div>
     </div>
-
+    <div class="home-rep-search">
+        <div class="wrapper">
+            <h2>Find your representatives</h2>
+            <form action="{% url "core_search" %}" id="home-search">
+                <label for="rep-search">Your location</label>
+                <input class="search-autocomplete-name" autofocus id="rep-search" type="text" name="rep-search" value="" placeholder="Your location">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}
 
@@ -109,15 +109,23 @@
     <div id="news">
         <h2>Editorial</h2>
         <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most <a href="#">famous</a> being the one-laptop per child project&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+
         </ul>
 
     </div>
+    <div class="col-2">
     <div id="twitter">
         <h2>Twitter</h2>
 
-        <a class="twitter-timeline" href="https://twitter.com/mysociety" data-widget-id="379532458342879232" data-chrome="nofooter transparent noheader noborders" height="540">Tweets by @mysociety</a>
+        <a class="twitter-timeline" href="https://twitter.com/mysociety" data-widget-id="379532458342879232" data-chrome="nofooter transparent noheader noborders" height="375">Tweets by @mysociety</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
     </div>
@@ -135,7 +143,7 @@
             <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
         </div>
     </div>
-
+    </div>
     {% if settings.BLOG_RSS_FEED %}
         <div id="news">
             <h2>Latest News</h2>
