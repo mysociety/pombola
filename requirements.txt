@@ -2,6 +2,11 @@
 #
 # more details: http://www.pip-installer.org/en/latest/requirements.html
 
+# Note that several of the git repos have bogus egg names. This is to force pip
+# to fetch and install the latest code. These bogus egg names all start
+# 'force-pip-fetch-' to try to make this clearer.
+
+
 ### General useful bits
 py-bcrypt
 PyYAML
@@ -49,7 +54,11 @@ python-memcached
 git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
 
 # SayIt
-git+git://github.com/mysociety/sayit.git@master#egg=django-sayit
+git+git://github.com/mysociety/sayit.git@master#egg=force-pip-fetch-django-sayit
+
+# ZA hansard scrapers - need to be made available to be added as an optional app
+git+git://github.com/mysociety/za-hansard.git@master#egg=force-pip-fetch-za_hansard
+git+git://github.com/mysociety/popit-resolver@master#egg=force-pip-fetch-popit-resolver
 
 python-dateutil>=1.5,!=2.0
 

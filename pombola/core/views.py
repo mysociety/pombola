@@ -271,8 +271,10 @@ class OrganisationDetailSub(DetailView):
         if self.kwargs['sub_page'] == 'people':
             all_positions = self.object.position_set.all()
 
+            if self.request.GET.get('all'):
+                positions = all_positions
             # Limit to those currently active, or inactive
-            if self.request.GET.get('historic'):
+            elif self.request.GET.get('historic'):
                 context['historic'] = True
                 positions = all_positions.currently_inactive()
             else:

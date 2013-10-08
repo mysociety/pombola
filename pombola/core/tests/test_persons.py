@@ -49,8 +49,7 @@ class PersonTest(WebTest):
         )
         person.save()
         resp = self.app.get('/person/alfred-smith/')
-        resp = resp.click('Experience')
-        resp = resp.click('Contact details')
+        self.assertContains(resp, person.legal_name)
 
 class PersonScorecardTest(TestCase):
     def setUp(self):    

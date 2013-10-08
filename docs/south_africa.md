@@ -17,6 +17,11 @@ Then, to load in some people and organisation data:
 
     $ python manage.py core_import_popolo pombola/south_africa/data/south-africa-popolo.json  --commit
 
+To load in constituency offices, download a CSV from the below, and run the following.
+https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE
+
+    $ python manage.py south_africa_import_constituency_offices <file.csv>
+
 To load in some example SayIt data, fetch the speeches/fixtures/test_inputs/
 
     $ python manage.py load_akomantoso --dir <speeches/fixtures/test_inputs/> --commit
