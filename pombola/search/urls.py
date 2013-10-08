@@ -8,7 +8,7 @@ from haystack.views import SearchView
 from pombola.core    import models as core_models
 from pombola.hansard import models as hansard_models
 
-from .views import SearchViewWithGeocoder
+from .views import GeocoderView
 
 search_models = (
     core_models.Person,
@@ -23,17 +23,23 @@ if settings.ENABLED_FEATURES['speeches']:
 urlpatterns = patterns('pombola.search.views',
 
     # Haystack and other searches
-    # url( r'^location/',    'location_search',        name="location_search"     ),
     url( r'^autocomplete/', 'autocomplete',           name="autocomplete"        ),
 
     # General search - just intended for the core app
     url(
         r'^$',
-        SearchViewWithGeocoder(
+        SearchView(
             searchqueryset = SearchQuerySet().models( *search_models ).highlight(),
             form_class=SearchForm,
         ),
         name='core_search'
+    ),
+
+    # Location search
+    url(
+        r'^location/$',
+        GeocoderView.as_view(),
+        name='core_geocoder_search'
     ),
 
     # Person search

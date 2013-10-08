@@ -91,7 +91,11 @@
                         {% if settings.ENABLED_FEATURES.hansard %}
                             <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Search Hansard instead</a>
                         {% endif %}
-
+                    </form>
+                    <form action="{% url "core_geocoder_search" %}" id="geocoder-search">
+                        <label for="geocoder-search">Or search by location</label>
+                        <input id="geocoder-search" type="text" name="q" value="" placeholder="Location name">
+                        <button type="submit">Search</button>
                     </form>
 
                 </div>

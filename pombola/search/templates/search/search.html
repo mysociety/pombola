@@ -1,59 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'search/search_base.html' %}
 {% load url from future %}
 
-{% load thumbnail %}
-{% load pagination_tags %}
+{% block search_results %}
 
-{% block title %}
-    {% if query %}
-        "{{ query }}"
+<ul class="listing">        
+{% for result in page.object_list %}
+    {% if result.app_label == 'speeches' %}
+        {% include 'search/speech_item.html' %}
     {% else %}
-        Search
+        {% include 'core/generic_list_item.html' with object=result.object %}
     {% endif %}
-{% endblock %}
+{% empty %}
+    <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
+{% endfor %}
+</ul>
 
-{% block content %}
-    <h2>Search</h2>
+{% if page.has_previous or page.has_next %}
+    <div>
+        {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+        |
+        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+    </div>
+{% endif %}
 
-    <form method="get" action="." class="search-wrap">
-        {% if settings.ENABLED_FEATURES.hansard %}
-            <p>Alternatively, <a href="{% url "hansard_search"  %}" id="search-hansard-instead">search Hansard transcripts</a> instead.</p>
-        {% endif %}
-
-        <div class="search-box">
-            {{ form.q }}
-            <input type="submit" value="Search" class="button">
-        </div>
-        
-        {% if query %}
-            {% if geocoder_results %}
-              {% include "search/geocoder_results.html" %}
-            {% endif %}
-
-            <h3>Results</h3>
-
-            <ul class="listing">        
-            {% for result in page.object_list %}
-                {% if result.app_label == 'speeches' %}
-                    {% include 'search/speech_item.html' %}
-                {% else %}
-                    {% include 'core/generic_list_item.html' with object=result.object %}
-                {% endif %}
-            {% empty %}
-                <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
-            {% endfor %}
-            </ul>
-
-            {% if page.has_previous or page.has_next %}
-                <div>
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                    |
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                </div>
-            {% endif %}
-        {% else %}
-            {# Show some example queries to run, maybe query syntax, something else? #}
-            <p>Example searches: <i>Nairobi</i>, <i>Uhuru Kenyatta</i></p>
-        {% endif %}
-    </form>
 {% endblock %}

@@ -343,9 +343,9 @@ class Command(LabelCommand):
                     mz_party = Organisation.objects.get(name=party)
 
                     if party_code:
-                        organisation_name = "%s office (%s): %s" % (party, party_code, name)
+                        organisation_name = "%s Constituency Area (%s): %s" % (party, party_code, name)
                     else:
-                        organisation_name = "%s office: %s" % (party, name)
+                        organisation_name = "%s Constituency Area: %s" % (party, name)
                     organisation_slug = slugify(organisation_name)
 
                     places_to_add = []
