@@ -50,3 +50,6 @@ python-dateutil
 
 # For hansard parsing - need pdftohtml
 poppler-utils
+
+# For ZA hansard parsing
+antiword
