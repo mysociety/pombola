@@ -36,12 +36,10 @@ the organisation detail page.
       <li>
       <a href="{% url "organisation" slug=party.slug %}">
         {{ party.name }}
-        {# TODO: This should be a percentage of the party in this organisation, currently it's a count of all the people in the party. #}
         <span>({{ party.percentage }}%)</span>
       </a>
       </li>
       {% endfor %}
-      <li>Total: {{ total_people }}</li>
     </ul>
   </div>
 
