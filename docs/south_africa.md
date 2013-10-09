@@ -22,7 +22,9 @@ Run the command to clean up imported slugs:
     $ python manage.py core_list_malformed_slugs --correct
 
 To load in constituency offices, download a CSV from the below, and run the following.
-https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE
+https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE.
+If you run into any issues with this you might need to remove the
+geocode cache at `pombola/south_africa/management/commands/.geocode-request-cache`.
 
     $ python manage.py south_africa_import_constituency_offices <file.csv>
 
