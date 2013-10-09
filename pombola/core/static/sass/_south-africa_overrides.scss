@@ -208,7 +208,7 @@ th {
 }
 
 th[scope="row"] {
-    color: $colour_secondary;
+    color: $colour_green;
 }
 
 tbody {
@@ -771,7 +771,7 @@ NEWS & POLL
         width: 31.666666667%;
         float: right;
     }
-    padding: 2em 0;
+
 }
 
 ul#home-news-list {
@@ -1253,6 +1253,53 @@ ul.pager {
     li.next {
         text-align: right;
     }
+}
+
+/* Organisation pages */
+.kind-of-subtitle {
+    @include lato-bold;
+    color: $colour_green;
+    margin-top: -0.5em;
+}
+
+.house-intro {
+    font-size: 0.875em;
+    color: colour_blackish;
+    max-width: 714px;
+    margin-bottom: 2em;
+}
+.house-page-list {
+    @include unstyled-list;
+    margin-bottom: 2em;
+    max-width: 714px;
+    width: 100%;
+    li {
+        border-bottom: 1px solid #d2d2ce;
+        &:hover {
+        }
+    }
+    a {
+        display: block;
+        padding: 0.33em;
+        &:link,
+        &:visited {
+            text-decoration: none;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: underline;
+            background-color: $colour_main_background;
+        }
+    }
+    .percent {
+        color: $colour_blackish;
+        font-size: 0.75em;
+        float: right;
+        display: inline-block;
+    }
+
+
 }
 
 /* Generic layouts */

@@ -11,17 +11,18 @@ the organisation detail page.
 {% block content %}
   <h1>{{ object.title }} {{ object.name }}</h1>
   {% if object.kind.slug != 'unknown' %}
-    <p>{{ object.kind.name }}</p>
+    <p class="kind-of-subtitle">{{ object.kind.name }}</p>
   {% endif %}
 
-  <div>
+  <div class="house-intro">
     {{ object.summary }}
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue felis, tempor gravida feugiat vitae, egestas non eros. Nulla ac mi aliquam, malesuada eros lobortis, vulputate tortor. Mauris hendrerit placerat leo, et sollicitudin est bibendum sed. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin erat augue, adipiscing at dui in, tincidunt dignissim magna.</p>
   </div>
 
   <h2>People</h2>
 
   <div>
-    <ul>
+    <ul class="house-page-list">
       <li><a href="{% url 'organisation_people' slug=object.slug %}">National executive ({{ organisation.position_set.count }})</a></li>
       <li><a href="{% url 'organisation_people' slug=object.slug %}">Office bearers ({{ organisation.position_set.count }})</a></li>
       <li><a href="{% url 'organisation_people' slug=object.slug %}?all=1">All members ({{ organisation.position_set.count }})</a></li>
@@ -31,12 +32,12 @@ the organisation detail page.
   <h2>Parties</h2>
 
   <div>
-    <ul>
+    <ul class="house-page-list">
       {% for party in parties %}
       <li>
       <a href="{% url "organisation" slug=party.slug %}">
         {{ party.name }}
-        <span>({{ party.percentage }}%)</span>
+        <span class="percent">{{ party.percentage }}%</span>
       </a>
       </li>
       {% endfor %}

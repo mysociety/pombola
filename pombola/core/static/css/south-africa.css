@@ -3278,7 +3278,7 @@ th {
 }
 
 th[scope="row"] {
-  color: #5bafb9;
+  color: #017b58;
 }
 
 tbody tr:hover {
@@ -3828,7 +3828,6 @@ NEWS & POLL
 
 .col-2 {
   padding: 2em 0 1em;
-  padding: 2em 0;
 }
 @media only all and (min-width: 640px), print {
   .col-2 {
@@ -4328,6 +4327,52 @@ ul.pager li.next a:hover {
 }
 ul.pager li.next {
   text-align: right;
+}
+
+/* Organisation pages */
+.kind-of-subtitle {
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  color: #017b58;
+  margin-top: -0.5em;
+}
+
+.house-intro {
+  font-size: 0.875em;
+  color: colour_blackish;
+  max-width: 714px;
+  margin-bottom: 2em;
+}
+
+.house-page-list {
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-bottom: 2em;
+  max-width: 714px;
+  width: 100%;
+}
+.house-page-list li {
+  list-style: none outside none;
+}
+.house-page-list li {
+  border-bottom: 1px solid #d2d2ce;
+}
+.house-page-list a {
+  display: block;
+  padding: 0.33em;
+}
+.house-page-list a:link, .house-page-list a:visited {
+  text-decoration: none;
+}
+.house-page-list a:hover, .house-page-list a:focus, .house-page-list a:active {
+  text-decoration: underline;
+  background-color: #f1f0ec;
+}
+.house-page-list .percent {
+  color: #555555;
+  font-size: 0.75em;
+  float: right;
+  display: inline-block;
 }
 
 /* Generic layouts */
