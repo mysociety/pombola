@@ -17,6 +17,10 @@ Then, to load in some people and organisation data:
 
     $ python manage.py core_import_popolo pombola/south_africa/data/south-africa-popolo.json  --commit
 
+Run the command to clean up imported slugs:
+
+    $ python manage.py core_list_malformed_slugs --correct
+
 To load in constituency offices, download a CSV from the below, and run the following.
 https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE
 
