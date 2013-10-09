@@ -20,7 +20,6 @@ from django.contrib.contenttypes.models import ContentType
 
 from pombola.core import models
 from pombola.info.models import InfoPage
-from pombola.helpers import geocode
 
 
 def home(request):

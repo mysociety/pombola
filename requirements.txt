@@ -2,6 +2,11 @@
 #
 # more details: http://www.pip-installer.org/en/latest/requirements.html
 
+# Note that several of the git repos have bogus egg names. This is to force pip
+# to fetch and install the latest code. These bogus egg names all start
+# 'force-pip-fetch-' to try to make this clearer.
+
+
 ### General useful bits
 py-bcrypt
 PyYAML
@@ -31,7 +36,7 @@ requests>=1.0
 pyelasticsearch
 django-haystack>=2.1.0
 
-# Testing helpers 
+# Testing helpers
 httplib2
 WebTest>=1.3.2
 django-webtest
@@ -49,7 +54,11 @@ python-memcached
 git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
 
 # SayIt
-git+git://github.com/mysociety/sayit.git@master#egg=django-sayit
+git+git://github.com/mysociety/sayit.git@master#egg=force-pip-fetch-django-sayit
+
+# ZA hansard scrapers - need to be made available to be added as an optional app
+git+git://github.com/mysociety/za-hansard.git@master#egg=force-pip-fetch-za_hansard
+git+git://github.com/mysociety/popit-resolver@master#egg=force-pip-fetch-popit-resolver
 
 python-dateutil>=1.5,!=2.0
 
@@ -60,5 +69,8 @@ django-model-utils
 
 parsedatetime
 
-# TODO - change to pypi package 'pygeocoder' link once https://bitbucket.org/xster/pygeocoder/pull-request/5 merged and published.
+# TODO - change to pypi package 'pygeocoder' link once
+# https://bitbucket.org/xster/pygeocoder/pull-request/5 published. The version on
+# pypi (https://pypi.python.org/pypi/pygeocoder) should be greater than 1.2.1.1
 -e hg+https://evdb@bitbucket.org/evdb/pygeocoder@add-components#egg=pygeocoder
+# pygeocoder

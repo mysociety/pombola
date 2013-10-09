@@ -1,4 +1,5 @@
 import re
+import sys
 
 from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
@@ -6,55 +7,46 @@ from django.template   import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 
-# from pombola.helpers import geocode
+from django.views.generic import TemplateView
 
 from pombola.core import models
 
 from haystack.query import SearchQuerySet
-from haystack.views import SearchView
 
 from sorl.thumbnail import get_thumbnail
 from .geocoder import geocoder
 
 
-class SearchViewWithGeocoder(SearchView):
+class GeocoderView(TemplateView):
+    template_name = "search/location.html"
 
-    def extra_context(self):
+    # This should really be set somewhere is the app's config.
+    # See https://github.com/mysociety/pombola/issues/829
+    country_app_to_alpha2_mapping = {
+        # http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+        "south_africa": "za",
+        "kenya":        "ke",
+        "zimbabwe":     "zw",
+        "nigeria":      "ng",
+        "libya":        "ly",
+    }
+
+    def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
-        context = super(SearchViewWithGeocoder, self).extra_context()
+        context = super(GeocoderView, self).get_context_data()
 
-        # This only applies to the ZA Pombola
-        if settings.COUNTRY_APP != 'south_africa':
-            return context
+        country_alpha2 = self.country_app_to_alpha2_mapping.get(settings.COUNTRY_APP)
 
-        context['geocoder_results'] = geocoder(country="za", q=self.query)
+        if not country_alpha2:
+            # search can still go ahead, but it will not be restricted to the country expected
+            sys.stderr.write("Need to add country code for {0} to 'search.views.GeocoderView'".format(settings.COUNTRY_APP))
+
+        query = self.request.GET.get('q')
+        if query:
+            context['query'] = query
+            context['geocoder_results'] = geocoder(country=country_alpha2, q=query)
 
         return context
-
-
-
-# def location_search(request):
-#
-#     loc = request.GET.get('loc', '')
-#
-#     results = geocode.find(loc) if loc else []
-#
-#     # If there is one result find that matching areas for it
-#     if len(results) == 1:
-#         mapit_areas = geocode.coord_to_areas( results[0]['lat'], results[0]['lng'] )
-#         areas = [ models.Place.objects.get(mapit_id=area['mapit_id']) for area in mapit_areas.values() ]
-#     else:
-#         areas = None
-#
-#     return render_to_response(
-#         'search/location.html',
-#         {
-#             'loc': loc,
-#             'results': results,
-#             'areas': areas,
-#         },
-#         context_instance = RequestContext( request ),
-#     )
 
 
 known_kinds = {

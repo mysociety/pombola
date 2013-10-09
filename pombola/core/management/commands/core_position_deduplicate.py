@@ -5,7 +5,6 @@ from django.core.management.base import BaseCommand
 from django.template.defaultfilters import slugify
 from django.conf import settings
 
-from pombola.helpers import geocode
 from pombola.core import models
 
 

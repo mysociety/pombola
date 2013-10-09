@@ -87,16 +87,14 @@
 
                 </div>
 
-
         </div>
     </div>
     <div class="home-rep-search">
         <div class="wrapper">
             <h2>Find your representatives</h2>
-            <form action="{% url "core_search" %}" id="home-search">
-                <label for="rep-search">Your location</label>
-                <input class="search-autocomplete-name" autofocus id="rep-search" type="text" name="rep-search" value="" placeholder="Your location">
-                <button type="submit">Search</button>
+            <form action="{% url "core_geocoder_search" %}" class="geocoder-search-form">
+                <label for="geocoder-search">Or search by location</label>
+                <input id="geocoder-search" type="text" name="q" value="" placeholder="Location name"><button type="submit" class="button">Search</button>
             </form>
         </div>
     </div>
