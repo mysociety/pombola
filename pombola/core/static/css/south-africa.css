@@ -3722,10 +3722,8 @@ HOME PAGE INTRO BOX
 
 .home-rep-search #home-search {
   background: transparent;
-  margin: 0;
   margin-top: 30px;
   padding: 0;
-  overflow: visible;
 }
 .home-rep-search #home-search input[type="text"] {
   width: 83%;
@@ -3762,16 +3760,15 @@ HOME PAGE INTRO BOX
   padding-bottom: 40px;
   padding-top: 15px;
 }
-.home-rep-search .wrapper h2,
-.home-rep-search .wrapper form {
-  width: 50%;
-  float: left;
-}
 .home-rep-search .wrapper h2 {
   margin-top: 40px;
-  text-align: right;
-  margin-right: 2.5%;
-  width: 47.5%;
+  text-align: center;
+}
+.home-rep-search .wrapper form {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
 }
 
 /*
@@ -4349,6 +4346,17 @@ ul.pager li.next {
     width: 31.66666666%;
     float: right;
     margin-right: 0;
+  }
+
+  .home-rep-search .wrapper form {
+    width: 50%;
+    float: left;
+  }
+  .home-rep-search .wrapper h2 {
+    margin-right: 2.5%;
+    width: 47.5%;
+    float: left;
+    text-align: right;
   }
 
   #twitter {
