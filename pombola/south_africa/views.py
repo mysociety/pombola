@@ -81,15 +81,22 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SAOrganisationDetailView, self).get_context_data(**kwargs)
+
+        # Get all the parties represented in this house.
         people_in_house = models.Person.objects.filter(position__organisation=self.object)
         parties = models.Organisation.objects.filter(
             kind__slug='party',
             position__person__in=people_in_house,
         ).annotate(person_count=Count('position__person'))
-        context['parties'] = parties
-        context['total_people'] = total_people = sum(map(lambda x: x.person_count, parties))
+        total_people = sum(map(lambda x: x.person_count, parties))
+
+        # Calculate the % of the house each party occupies.
         for party in parties:
             party.percentage = round((float(party.person_count) / total_people) * 100, 2)
+
+        context['parties'] = parties
+        context['total_people'] =  total_people
+
         return context
 
     def get_template_names(self):
