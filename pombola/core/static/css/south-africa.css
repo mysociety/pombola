@@ -3709,8 +3709,15 @@ HOME PAGE INTRO BOX
   font-weight: normal !important;
   font-weight: normal;
   text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
-  font-size: 32px;
-  margin-top: 1em;
+  font-size: 21px;
+  margin-bottom: 1em;
+}
+@media only all and (min-width: 640px), print {
+  #front_intro .home-right h2 {
+    font-size: 32px;
+    margin-top: 1em;
+    margin-bottom: 0;
+  }
 }
 
 #page .home-left h2 {
@@ -3720,13 +3727,13 @@ HOME PAGE INTRO BOX
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
 }
 
-.home-rep-search #home-search {
+.home-rep-search .geocoder-search-form {
   background: transparent;
   margin-top: 30px;
   padding: 0;
 }
-.home-rep-search #home-search input[type="text"] {
-  width: 83%;
+.home-rep-search .geocoder-search-form input[type="text"] {
+  width: 82%;
   margin-right: 1%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3742,16 +3749,23 @@ HOME PAGE INTRO BOX
   border-radius: 3px;
   padding: 0.66em;
 }
-.home-rep-search #home-search button {
+.home-rep-search .geocoder-search-form button {
   width: 16%;
   box-shadow: 0px 2px 0px #af201a;
-  padding: 1.745em;
-  background-color: #e23d28;
+  background: #e23d28 url(../images/search-icon.png) center no-repeat;
+  text-indent: -9999px;
+  padding: 0;
+  height: 40px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
 }
-.home-rep-search #home-search button:hover, .home-rep-search #home-search button:focus {
+.home-rep-search .geocoder-search-form button:hover, .home-rep-search .geocoder-search-form button:focus {
   color: #b43020;
 }
-.home-rep-search #home-search label {
+.home-rep-search .geocoder-search-form label {
   display: none;
 }
 .home-rep-search .wrapper {
@@ -3768,7 +3782,7 @@ HOME PAGE INTRO BOX
   width: 95%;
   margin-left: auto;
   margin-right: auto;
-  overflow: hidden;
+  max-width: 370px;
 }
 
 /*
@@ -3796,9 +3810,14 @@ NEWS & POLL
 #news {
   padding: 2em 0 1em;
   float: left;
-  width: 65.8333333%;
+  width: 100%;
   max-width: 100%;
-  margin-right: 2.5%;
+}
+@media only all and (min-width: 640px), print {
+  #news {
+    width: 65.8333333%;
+    margin-right: 2.5%;
+  }
 }
 
 #twitter {
@@ -3809,9 +3828,13 @@ NEWS & POLL
 
 .col-2 {
   padding: 2em 0 1em;
-  width: 31.666666667%;
-  float: right;
   padding: 2em 0;
+}
+@media only all and (min-width: 640px), print {
+  .col-2 {
+    width: 31.666666667%;
+    float: right;
+  }
 }
 
 ul#home-news-list {
@@ -3821,13 +3844,18 @@ ul#home-news-list {
 }
 ul#home-news-list li {
   border: none;
-  width: 48.1012658%;
+  width: 100%;
   float: left;
   margin-bottom: 1.5em;
   padding-bottom: 0;
 }
-ul#home-news-list li:nth-child(odd) {
-  padding-right: 3.79747%;
+@media only all and (min-width: 940px), print {
+  ul#home-news-list li {
+    width: 48.1012658%;
+  }
+  ul#home-news-list li:nth-child(odd) {
+    padding-right: 3.79747%;
+  }
 }
 ul#home-news-list li p {
   font-size: 0.875em;

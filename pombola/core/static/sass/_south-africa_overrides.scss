@@ -653,8 +653,15 @@ HOME PAGE INTRO BOX
     @include lato-regular;
     font-weight: normal;
     @include text-shadow(0px 2px 1px rgba(0, 0, 0, .25));
-    font-size: 32px;
-    margin-top: 1em;
+    font-size: 21px;
+    margin-bottom: 1em;
+    @media only all and (min-width: 640px), print {
+        font-size: 32px;
+        margin-top: 1em;
+        margin-bottom: 0;
+    }
+
+
 }
 #page .home-left h2 {
     font-size: .875em;
@@ -664,12 +671,12 @@ HOME PAGE INTRO BOX
 }
 
 .home-rep-search {
-    #home-search {
+    .geocoder-search-form {
         background: transparent;
         margin-top: 30px;
         padding: 0;
         input[type="text"]{
-            width: 83%;
+            width: 82%;
             margin-right: 1%;
             -webkit-box-sizing: border-box;
                -moz-box-sizing: border-box;
@@ -680,18 +687,22 @@ HOME PAGE INTRO BOX
             @include border-radius(3px);
             padding: 0.66em;
         }
-        button{
+
+        button {
             width:16%;
             box-shadow: 0px 2px 0px #af201a;
-            padding: 1.745em;
-            background-color: $colour_primary;
+            background: $colour_primary url(../images/search-icon.png) center no-repeat;
+            text-indent: -9999px;
+            padding: 0;
+            height: 40px;
+            @include border-radius(3px);
             &:hover,
             &:focus {
                 color: mix($colour_primary, #000, 80%);
             }
         }
         label {
-        display: none;
+            display: none;
         }
     }
 
@@ -708,7 +719,7 @@ HOME PAGE INTRO BOX
             width: 95%;
             margin-left: auto;
             margin-right: auto;
-            overflow: hidden;
+            max-width: 370px;
         }
     }
 }
@@ -739,9 +750,13 @@ NEWS & POLL
 #news {
     padding: 2em 0 1em;
     float: left;
-    width: 65.8333333%;
+    width: 100%;
+    @media only all and (min-width: 640px), print {
+        width: 65.8333333%;
+        margin-right: 2.5%;
+    }
     max-width: 100%;
-    margin-right: 2.5%;
+
 }
 
 #twitter {
@@ -752,8 +767,10 @@ NEWS & POLL
 
 .col-2 {
     padding: 2em 0 1em;
-    width: 31.666666667%;
-    float: right;
+    @media only all and (min-width: 640px), print {
+        width: 31.666666667%;
+        float: right;
+    }
     padding: 2em 0;
 }
 
@@ -763,13 +780,18 @@ ul#home-news-list {
     margin-top: 0;
     li {
         border:none;
-        width: 48.1012658%;
+        width: 100%;
+        @media only all and (min-width: 940px), print {
+            width: 48.1012658%;
+            &:nth-child(odd) {
+                padding-right: 3.7974684%
+            }
+        }
+
         float: left;
         margin-bottom: 1.5em;
         padding-bottom: 0;
-        &:nth-child(odd) {
-            padding-right: 3.7974684%
-        }
+
         p {
             font-size: 0.875em;
             margin-bottom: 0.5em;
