@@ -12,3 +12,6 @@ cd `dirname $0`/..
 
 # Run the ZA Hansard questions importer (all steps)
 ./bin/run_management_command_capture_stdout za_hansard_q_and_a_scraper --run-all-steps
+
+# Run the committee minutes scraper and imports
+./bin/run_management_command_capture_stdout za_hansard_pmg_scraper --scrape --save-json --import-to-sayit
