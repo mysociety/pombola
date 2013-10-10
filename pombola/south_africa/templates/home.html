@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load url from future %}
+{% load thumbnail %}
 
 {% block title %}Home{% endblock %}
 
@@ -32,43 +33,13 @@
                 <div class="home-left">
                     <h2>This week's focus</h2>
                     <div id="home-carousel" class="carousel">
-                        {% if featured_person != None %}
-                            {% include 'core/person_feature.html' %}
-                        {% else %}
 
-                        <!--
-                        Example carousel content -
-                        Each div.carousel-item is a separate slide in the carousel.
-                        -->
+                        {% for person in featured_persons %}
+                          {% include "core/person_feature.html" %}
+                        {% endfor %}
 
-                        <div class="featured-person carousel-item">
-                        <img src="/static/images/faceholder.jpg" alt="" />
-                          <h3 class="name"><a href="#">Mr Andricus Pieter Van der Westhuizen</a></h3>
-                          <h4 class="subtitle">Politician</h4>
-                          <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet orci id augue bibendum egestas eu vitae nibh.</p>
-                        </div>
-
-                        <div class="featured-quote carousel-item">
-                            <h3 class="subtitle">From Parliament</h3>
-                            <a href="#">
-
-                              <q>That the House debates the shocking state of South Africas roads, recent studies having indicated that the lack of maintenance of our roads over the past 16 years has led to a complete deterioration and that billions of rands are needed for repairs countrywide.</q>
-                              <cite>
-                                &ndash;
-                                <span class="name">Mr R N Cebekhulu</span>
-
-                                <span class="date">10 Aug 2010</span>
-                            </cite>
-                            </a>
-                        </div>
-
-                        <div class="featured-person carousel-item">
-                        <img src="/static/images/faceholder.jpg" alt="" />
-                          <h3 class="name"><a href="#">Arthur Roy Ainslie</a></h3>
-                          <h4 class="subtitle">Politician</h4>
-                          <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet orci id augue bibendum egestas eu vitae nibh.</p>
-                        </div>
-
+                        {% comment %}
+                        <!-- Featured quote -->
                         <div class="featured-quote carousel-item">
                             <h3 class="subtitle">From Parliament</h3>
                            <a href="#">
@@ -82,7 +53,8 @@
                            </cite>
                            </a>
                        </div>
-                        {% endif %}
+                       {% endcomment %}
+
                     </div>
 
                 </div>
@@ -107,15 +79,16 @@
     <div id="news">
         <h2>Editorial</h2>
         <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project during its campaigns the Jubilee coalition made&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-
+          {% for article in featured_articles %}
+          <li>
+            <h3>
+              <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+            </h3>
+            <p class="meta">{{ article.publication_date|date }}</p>
+            <p>{{ article.content|truncatewords_html:32 }}</p>
+            <p><a class="readmore" href="{{ article.get_absolute_url }}">Read more</a></p>
+          </li>
+          {% endfor %}
         </ul>
 
     </div>
