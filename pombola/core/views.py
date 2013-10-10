@@ -46,12 +46,19 @@ def home(request):
         except InfoPage.DoesNotExist:
             pass
 
+    # Only SA uses featured news articles currently, as above, if this changes
+    # then this should become a config flag or similar.
+    featured_articles = None
+    if settings.COUNTRY_APP == 'south_africa':
+        featured_articles = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG).order_by("-publication_date")[:8]
+
     return render_to_response(
         'home.html',
         {
           'featured_person':  featured_person,
           'featured_persons': featured_persons,
           'editable_content': editable_content,
+          'featured_articles': featured_articles,
         },
         context_instance=RequestContext(request)
     )
