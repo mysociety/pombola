@@ -3329,6 +3329,12 @@ small {
 #page {
   padding: 10px;
 }
+#page .title-space p {
+  font-style: normal;
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  color: #017b58;
+}
 
 #page-wrapper {
   position: relative;
@@ -4058,10 +4064,12 @@ FOOTER
 .sidebar {
   background-color: #f1f0ec;
   padding: 12px;
+  margin-bottom: 2em;
 }
 @media only all and (min-width: 640px), print {
   .sidebar {
     padding: 24px;
+    margin-bottom: 0;
   }
 }
 .sidebar h3 {
@@ -4087,6 +4095,17 @@ FOOTER
 .sidebar a:active,
 .sidebar a:focus {
   text-decoration: underline;
+}
+.sidebar .vcard li .label {
+  display: block;
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  width: 100%;
+  color: #555555;
+}
+.sidebar .vcard li p {
+  padding: 0;
+  margin-bottom: 1em;
 }
 
 /* Generic listing styles */
@@ -4124,6 +4143,12 @@ FOOTER
 .list-of-things-item a:focus {
   color: #e23d28;
   text-decoration: underline;
+}
+.list-of-things-item:first-child {
+  border-top: 1px solid #d2d2ce;
+}
+.list-of-things-item:last-child {
+  margin-bottom: 2em;
 }
 
 /* People listings */
@@ -4375,6 +4400,13 @@ ul.pager li.next {
   display: inline-block;
 }
 
+@media only all and (min-width: 640px), print {
+  #page #map_canvas {
+    height: 210px;
+    width: 210px;
+  }
+}
+
 /* Generic layouts */
 .layout {
   /**
@@ -4435,6 +4467,10 @@ ul.pager li.next {
   #twitter {
     width: 100%;
     max-width: 100%;
+  }
+
+  .social-and-tools {
+    display: none;
   }
 
   .layout-major-minor .major-column {

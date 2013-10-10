@@ -26,50 +26,53 @@
 
 {% endblock %}
 
-{# Put a map in the profile_pic block #}
-{% block profile_pic %}
 
-<script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
-<div class="profile-map">
-  <div id="map_canvas" width="200" height="200"></div>
-</div>
-{% endblock profile_pic %}
+  {# Put a map in the profile_pic block #}
+  {% block profile_pic %}
 
-{% block profile_info %}
-  <ul class="vcard">
-    {% for c in object.contacts.all %}
-    <li class="{{ c.kind.slug }}">
+  <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+  <div class="profile-map">
+    <div id="map_canvas" width="210" height="210"></div>
+  </div>
+  {% endblock profile_pic %}
 
-    {% switch c.kind.slug %}
+  {% block profile_info %}
+  <div class="sidebar">
+    <ul class="vcard">
+      {% for c in object.contacts.all %}
+      <li class="{{ c.kind.slug }}">
 
-    {% case 'phone' %}
-    <span class="label">Tel:</span>
-    <p><a href="tel:{{ c.value }}">{{ c.value }}</a></p>
+      {% switch c.kind.slug %}
 
-    {% case 'facebook' %}
-    <span class="label">Link:</span>
-    <p><a href="{{ c.value }}">{{ c.kind.name }}</a></p>
+      {% case 'phone' %}
+      <span class="label">Telephone</span>
+      <p><a href="tel:{{ c.value }}">{{ c.value }}</a></p>
 
-    {% case 'twitter' %}
-    <span class="label">Link:</span>
-    <p><a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter</p>
+      {% case 'facebook' %}
+      <span class="label">Facebook</span>
+      <p><a href="{{ c.value }}">{{ c.kind.name }}</a></p>
 
-    {% case 'address' %}
-    <span class="label">Post:</span>
-    <p>{{ c.value|urlizetrunc:50 }}</p>
+      {% case 'twitter' %}
+      <span class="label">Twitter</span>
+      <p><a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter</p>
 
-    {% case 'parliament_url' %}
-    {# Suppress these as requested in issue #444 #}
+      {% case 'address' %}
+      <span class="label">Post</span>
+      <p>{{ c.value|urlizetrunc:50 }}</p>
 
-    {% else %}
-    <span class="label">{{ c.kind.name }}:</span>
-    <p>{{ c.value|urlizetrunc:50 }}</p>
+      {% case 'parliament_url' %}
+      {# Suppress these as requested in issue #444 #}
 
-    {% endswitch %}
+      {% else %}
+      <span class="label">{{ c.kind.name }}</span>
+      <p>{{ c.value|urlizetrunc:50 }}</p>
 
-    {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
+      {% endswitch %}
 
-    </li>
-    {% endfor %}
-  </ul>
-{% endblock profile_info %}
+      {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
+
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endblock profile_info %}

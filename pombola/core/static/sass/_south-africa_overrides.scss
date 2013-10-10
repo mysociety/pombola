@@ -255,6 +255,13 @@ small {
 
 #page {
     padding: 10px;
+    .title-space {
+        p {
+            font-style: normal;
+            @include lato-bold;
+            color: $colour_green;
+        }
+    }
 }
 
 #page-wrapper {
@@ -1003,8 +1010,10 @@ FOOTER
 .sidebar {
     background-color: #f1f0ec;
     padding: 12px;
+    margin-bottom: 2em;
     @media only all and (min-width: 640px), print {
         padding: 24px;
+        margin-bottom: 0;
     }
     h3 {
         font-size: .75em; /* 12px */
@@ -1027,6 +1036,20 @@ FOOTER
     a:focus {
         text-decoration: underline;
     }
+
+    .vcard li {
+        .label {
+            display: block;
+            @include lato-bold;
+            width: 100%;
+            color: $colour_blackish;
+        }
+        p {
+            padding: 0;
+            margin-bottom: 1em;
+        }
+    }
+
 }
 
 /* Generic listing styles */
@@ -1051,6 +1074,12 @@ FOOTER
     a:focus {
         color: $colour_primary;
         text-decoration: underline;
+    }
+    &:first-child {
+        border-top: 1px solid #d2d2ce;
+    }
+    &:last-child {
+        margin-bottom: 2em;
     }
 }
 
@@ -1302,6 +1331,13 @@ ul.pager {
 
 }
 
+#page #map_canvas {
+    @media only all and (min-width: 640px), print {
+        height: 210px;
+        width: 210px;
+    }
+}
+
 /* Generic layouts */
 
 .layout {
@@ -1351,6 +1387,9 @@ ul.pager {
     #twitter {
         width: 100%;
         max-width: 100%;
+    }
+    .social-and-tools {
+        display: none;
     }
 
    .layout-major-minor {
