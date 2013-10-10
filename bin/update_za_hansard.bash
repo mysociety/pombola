@@ -9,3 +9,6 @@ cd `dirname $0`/..
 ./bin/run_management_command_capture_stdout hansard_check_for_new_sources
 ./bin/run_management_command_capture_stdout hansard_run_parsing
 ./bin/run_management_command_capture_stdout hansard_load_into_sayit
+
+# Run the ZA Hansard questions importer (all steps)
+./bin/run_management_command_capture_stdout questions --run-all-steps
