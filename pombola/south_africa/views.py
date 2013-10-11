@@ -6,7 +6,7 @@ from django.db.models import Count
 import mapit
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView
+from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
 
 from pombola.south_africa.models import ZAPlace
 
@@ -104,3 +104,15 @@ class SAOrganisationDetailView(OrganisationDetailView):
             return [ 'south_africa/organisation_house.html' ]
         else:
             return super(SAOrganisationDetailView, self).get_template_names()
+
+
+class SAPersonDetail(PersonDetail):
+
+    def get_context_data(self, **kwargs):
+        context = super(SAPersonDetail, self).get_context_data(**kwargs)
+        context['twitter_contacts'] = self.object.contacts.filter(kind__slug='twitter')
+        context['email_contacts'] = self.object.contacts.filter(kind__slug='email')
+        context['phone_contacts'] = self.object.contacts.filter(kind__slug__in=('cell', 'voice'))
+        context['fax_contacts'] = self.object.contacts.filter(kind__slug='fax')
+        context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
+        return context
