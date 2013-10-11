@@ -69,30 +69,81 @@
 </div>
 {% endblock %}
 
-{% block profile_info_extra %}
-  <h3>Email</h3>
+{% block profile_info %}
+  <div class="constituency-party">
 
-  {% for contact in object.contacts.all %}
-    {% if contact.kind.slug == 'email' %}
-      <p>{{ contact.value|urlizetrunc:50 }}</p>
-    {% endif %}
-  {% endfor %}
-
-  <h3>Phone</h3>
-
-  {% for contact in object.contacts.all %}
-    {% if contact.kind.slug == 'phone' %}
-      <p><a href="tel:{{ contact.value }}">{{ contact.value }}</a></p>
-    {% endif %}
-  {% endfor %}
-
-  <h3>Twitter</h3>
-
-  {% for contact in object.contacts.all %}
-    {% if contact.kind.slug == 'twitter' %}
-      <p><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</p>
-    {% endif %}
-  {% endfor %}
+      {% if object.aspirant_constituencies.count %}
+          <h3>Aspirant for</h3>
+          <ul>
+              {% for constituency in object.aspirant_constituencies %}
+                  <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
+              {% endfor %}
+      {% endif %}
 
 
+      {% regroup object.constituencies|dictsort:"kind" by kind as constituency_groups %}
+      {% for entry in constituency_groups %}
+      <h3>{{ entry.grouper }}</h3>
+      <ul>
+          {% for area in entry.list %}
+              <li><a href="{{ area.get_absolute_url }}">{{ area.name }}</a></li>
+          {% endfor %}
+      </ul>
+      {% endfor %}
+
+
+
+      {% if settings.COUNTRY_APP == 'south_africa' %}
+      <h3>Constituency Offices</h3>
+      <ul>
+          {% for office in object.constituency_offices %}
+              <li><a href="{{ office.get_absolute_url }}">{{ office.name }}</a></li>
+          {% empty %}
+              <li>Not associated with any constituency offices</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+
+      <h3>{% if settings.COUNTRY_APP == 'kenya' %}
+        Party &amp; Coalition
+      {% else %}
+        Party
+      {% endif %}</h3>
+      <ul>
+          {% for party in object.parties_and_coalitions %}
+              <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+          {% empty %}
+              <li>{% if settings.COUNTRY_APP == 'kenya' %}
+                Not a member of any parties or coalitions
+              {% else %}
+                Not a member of any party
+              {% endif %}</li>
+          {% endfor %}
+      </ul>
+
+      <h3>Email</h3>
+
+      {% for contact in object.contacts.all %}
+        {% if contact.kind.slug == 'email' %}
+          <p>{{ contact.value|urlizetrunc:50 }}</p>
+        {% endif %}
+      {% endfor %}
+
+      <h3>Phone</h3>
+
+      {% for contact in object.contacts.all %}
+        {% if contact.kind.slug == 'phone' %}
+          <p><a href="tel:{{ contact.value }}">{{ contact.value }}</a></p>
+        {% endif %}
+      {% endfor %}
+
+      <h3>Twitter</h3>
+
+      {% for contact in object.contacts.all %}
+        {% if contact.kind.slug == 'twitter' %}
+          <p><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</p>
+        {% endif %}
+      {% endfor %}
+
+  </div>
 {% endblock %}
