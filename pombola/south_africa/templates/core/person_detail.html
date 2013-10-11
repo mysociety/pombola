@@ -1,11 +1,10 @@
 {# For South Africa the default person section is the experience tab #}
 {% extends 'core/person_base.html' %}
 {% load url from future %}
-{% load static %}
 
-{% block extra_headers %}
-<script src="{% static "js/tabulous.js" %}"></script>
-{% endblock extra_headers %}
+{% block extra_js_to_load %}
+pombola_settings.extra_js.push('js/tabs.js')
+{% endblock extra_js_to_load %}
 
 {% block object_tagline %}
   <p>
@@ -80,14 +79,32 @@
   </div>
 {% endblock %}
 
+{% block extra_headers %}
+<style>
+  /*
+  Example CSS for showing and hiding the tabs. This needs to be moved to a proper
+  stylesheet and, most likely, improved upon :)
+  */
+  .tab-links .active {
+    background: gray;
+  }
+  .tab-content {
+    display: none;
+  }
+  .tab-content.tab-active {
+    display: block;
+  }
+</style>
+{% endblock extra_headers %}
+
 {% block subcontent %}
 <div class="tabs">
   <ul class="tab-links">
-    <li><a href="#appearances">Appearances</a></li>
+    <li><a class="active" href="#appearances">Appearances</a></li>
     <li><a href="#profile">Profile</a></li>
   </ul>
 
-  <div id="appearances" class="tab-content">
+  <div id="appearances" class="tab-content tab-active">
     <section>
       <h3>Plenary appearances</h3>
     </section>
