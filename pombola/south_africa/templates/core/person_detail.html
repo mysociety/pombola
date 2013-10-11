@@ -16,6 +16,15 @@
     pombola_settings.extra_js.push( 'js/load_appearances.js' );
 {% endblock %}
 
+{% block object_tagline %}
+  <p>
+  {% for position in object.position_set.all %}
+    <span class="position-title">{{ position.title }} at {{ position.organisation }}</span>
+    {% if not forloop.last %}|{% endif %}
+  {% endfor %}
+  </p>
+{% endblock object_tagline %}
+
 {% block subcontent %}
 <div class="tabs">
   <h2 class="tab-title">Experience</h2>
