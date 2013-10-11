@@ -1,7 +1,11 @@
 {# For South Africa the default person section is the experience tab #}
 {% extends 'core/person_base.html' %}
-
 {% load url from future %}
+{% load static %}
+
+{% block extra_headers %}
+<script src="{% static "js/tabulous.js" %}"></script>
+{% endblock extra_headers %}
 
 {% block object_tagline %}
   <p>
@@ -78,39 +82,52 @@
 
 {% block subcontent %}
 <div class="tabs">
-  <h2 class="tab-title">Experience</h2>
-  <div class="tab-content">
-      <div class="left-col">
-          <section>
-              <h3>Currently</h3>
-              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_active %}
-          </section>
+  <ul class="tab-links">
+    <li><a href="#appearances">Appearances</a></li>
+    <li><a href="#profile">Profile</a></li>
+  </ul>
 
-          <section>
-              <h3>Formerly</h3>
-              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
-          </section>
-      </div>
+  <div id="appearances" class="tab-content">
+    <section>
+      <h3>Plenary appearances</h3>
+    </section>
+    <section>
+      <h3>Committee appearances</h3>
+    </section>
   </div>
 
-  {% if settings.ENABLED_FEATURES.hansard %}
-      <h2 class="tab-title">Appearances</h2>
+  <div id="profile" class="tab-content">
+    <div class="person-summary">
+      {{ person.summary }}
+    </div>
 
-      {% with hansard_count=object.hansard_entries.count %}
-            {% if hansard_count %}
-              <div id="appearances" data-url="{% url "hansard:person_summary" slug=object.slug %}" class="tab-content">
-                Loading&hellip;
-              </div>
-            {% else %}
-              <div class="tab-content">
-                <p>{{ object.name }} has never spoken in Parliament.</p>
-              </div>
-            {% endif %}
+    <div class="person-experience">
+      <h2>Experience</h2>
 
+      {% with current_positions=person.position_set.all.political.currently_active %}
+        {% if current_positions %}
+          <h3>Currently</h3>
+          {% for position in current_positions %}
+          <p>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></p>
+          {% endfor %}
+        {% endif %}
       {% endwith %}
-  {% else %}
 
-    No appearances were found.
-  {% endif  %}
+      {% with past_positions=person.position_set.all.political.currently_inactive %}
+        {% if past_positions %}
+          <h3>Formerly</h3>
+          {% for position in past_positions %}
+          <p>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+    </div>
+
+    <div class="person-interests">
+      <h2>Register of interests</h2>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
