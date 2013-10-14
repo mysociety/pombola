@@ -1,38 +1,32 @@
 {% load thumbnail %}
 
-{% thumbnail object.primary_image "90x90" crop="center" as im %}
-  <a href="{{ object.get_absolute_url }}">
-    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-  </a>
-{% empty %}
-  <a href="{{ object.get_absolute_url }}">
-    <img src="{{STATIC_URL}}images/person-90x90.jpg" />
-  </a>
-{% endthumbnail %}
-
-<section>
-  <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
-  
-  {% with pos_set=object.position_set.all.currently_active %}
-  <p>
-
-    {% for position in pos_set|slice:":4" %}
-      <strong>{{ position.title.name }}</strong> of {{ position.organisation.name }}
-      <span class="meta">({{ position.display_dates|safe }})</span>;
+<a href="{{ object.get_absolute_url }}">
+    {% thumbnail object.primary_image "58x78" crop="center" as im %}
+    <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
     {% empty %}
-      No currently active positions found.
+    <img src="{{STATIC_URL}}images/person-90x90.jpg" height="58" width="58"/>
+    {% endthumbnail %}
+
+    <span class="name">{{ object.name }}</span>
+</a>
+
+{% for position in object.position_set.all.currently_active %}
+{% if position.place %}
+<div class="position-place">
+    <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
+
+    {% if position.place.parent_place %}
+    <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
+    {{ position.place.parent_place.kind.name }}
+    {% endif %}
+</div>
+{% endif %}
+{% endfor %}
+
+{% if object.parties %}
+<div class="position-parties">
+    {% for party in object.parties %}
+    <a class="position-party" href="{{ party.get_absolute_url }}">{{ party.name }}</a>
     {% endfor %}
-
-    {% with remaining=pos_set.count|add:'-4' %}
-      {% if remaining > 0 %}
-        and {{ remaining }} more&hellip;
-      {% endif %}
-    {% endwith %}
-
-  </p>
-  {% endwith %}
-
-  {% include "core/contact_list.html" with contacts=object.contacts.all %}
-
-</section>
-
+</div>
+{% endif %}
