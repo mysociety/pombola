@@ -107,7 +107,7 @@
         </div>
     {% endif %}
 
-    {# Temporary Static poll items to build styles from - Remove when done #}
+    {% if settings.POLLDADDY_WIDGET_ID %}
     <div id="poll">
         <h2>Survey</h2>
         <style>
@@ -117,10 +117,12 @@
 
         <div id="polldaddy">
             <!-- <h2>Latest Poll</h2> -->
-            <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/53255.js"></script>
-            <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
+            <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
+            <noscript><a href="http://polldaddy.com/w.php?p={{ settings.POLLDADDY_WIDGET_ID }}/">Take Our Poll</a></noscript>
         </div>
     </div>
+    {% endif %}
+
     </div>
     {% if settings.BLOG_RSS_FEED %}
         <div id="news">
@@ -132,31 +134,6 @@
             </ul>
         </div>
     {% endif %}
-
-
-
-
-
-    {% if settings.POLLDADDY_WIDGET_ID %}
-        <div id="poll">
-            <h2>Survey</h2>
-            <style>
-                .pds-box { width: 100% !important; }
-                #polldaddy { margin-bottom: 30px; width: 304px; float: left; }
-            </style>
-
-            <div id="polldaddy">
-                <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
-                <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
-            </div>
-        </div>
-
-    {% endif %}
-
-
-
-
-
 
 
 {% endblock %}
