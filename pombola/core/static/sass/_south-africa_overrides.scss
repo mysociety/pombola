@@ -76,7 +76,7 @@ $border_radius: 5px;
 }
 
 #staging_header {
-    background-color: #555;
+    background-color: $colour_blackish;
     color: #ccc;
     padding: 10px;
     strong{
@@ -1384,17 +1384,56 @@ ul.pager {
     .large-container {
         h3 {
             border: none;
-            padding: none;
+            padding: 0;
             color: $colour_blackish;
+            margin: .25em 0 .5em;
+        }
+        p {
+            margin: 0 0 1em;
         }
     }
 }
 
+.tab-links {
+    border-bottom: 1px solid #d2d2ce;
+    @include unstyled-list;
+    margin-bottom: 1em;
+    li {
+        display: inline-block;
+        margin-right: 1em;
+        a {
+            display: inline-block;
+            background: #fff;
+            margin-bottom: 3px;
+            text-decoration: none;
+            font-size: 0.875em;
+            &.active {
+                border-bottom: 3px solid #d2d2ce;
+                margin-bottom: 0;
+                color: $colour_black;
+            }
+        }
+    }
+}
 
+.tab-content {
+    display: none;
+    ul, p {
+        font-size: 0.875em;
+    }
+    &.tab-active {
+        display: block;
+    }
+}
+
+.positions {
+    @include unstyled-list;
+    margin-bottom: 1.5em;
+
+}
 
 
 /* Generic layouts */
-
 .layout {
     @include clearfix;
     .column {

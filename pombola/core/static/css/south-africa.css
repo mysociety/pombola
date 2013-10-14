@@ -3146,7 +3146,7 @@ ul.social-buttons li {
 }
 
 #staging_header {
-  background-color: #555;
+  background-color: #555555;
   color: #ccc;
   padding: 10px;
 }
@@ -4452,8 +4452,57 @@ ul.pager li.next {
 }
 #page .large-container h3 {
   border: none;
-  padding: none;
+  padding: 0;
   color: #555555;
+  margin: .25em 0 .5em;
+}
+#page .large-container p {
+  margin: 0 0 1em;
+}
+
+.tab-links {
+  border-bottom: 1px solid #d2d2ce;
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-bottom: 1em;
+}
+.tab-links li {
+  list-style: none outside none;
+}
+.tab-links li {
+  display: inline-block;
+  margin-right: 1em;
+}
+.tab-links li a {
+  display: inline-block;
+  background: #fff;
+  margin-bottom: 3px;
+  text-decoration: none;
+  font-size: 0.875em;
+}
+.tab-links li a.active {
+  border-bottom: 3px solid #d2d2ce;
+  margin-bottom: 0;
+  color: #222222;
+}
+
+.tab-content {
+  display: none;
+}
+.tab-content ul, .tab-content p {
+  font-size: 0.875em;
+}
+.tab-content.tab-active {
+  display: block;
+}
+
+.positions {
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-bottom: 1.5em;
+}
+.positions li {
+  list-style: none outside none;
 }
 
 /* Generic layouts */
