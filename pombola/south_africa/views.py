@@ -108,6 +108,8 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
 class SAPersonDetail(PersonDetail):
 
+    important_organisations = ('ncop', 'national-assembly', 'national-executive')
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.object.contacts.filter(kind__slug='twitter')
@@ -115,5 +117,5 @@ class SAPersonDetail(PersonDetail):
         context['phone_contacts'] = self.object.contacts.filter(kind__slug__in=('cell', 'voice'))
         context['fax_contacts'] = self.object.contacts.filter(kind__slug='fax')
         context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
-        context['positions'] = self.object.politician_positions().filter(organisation__slug__in=('ncop', 'national-assembly'))
+        context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
         return context
