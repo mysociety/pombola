@@ -93,13 +93,20 @@
 
     </div>
     <div class="col-2">
-    <div id="twitter">
-        <h2>Twitter</h2>
 
-        <a class="twitter-timeline" href="https://twitter.com/mysociety" data-widget-id="379532458342879232" data-chrome="nofooter transparent noheader noborders" height="375">Tweets by @mysociety</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
+        <div id="twitter">
+            <h2>Twitter</h2>
+            
+            <a class="twitter-timeline"
+              data-chrome="nofooter transparent noheader noborders"
+              height="375"
+              href="https://twitter.com/{{ settings.TWITTER_USERNAME }}"
+              data-widget-id="{{ settings.TWITTER_WIDGET_ID }}"
+            >Tweets by @{{ settings.TWITTER_USERNAME }}</a>
+        </div>
+    {% endif %}
 
-    </div>
     {# Temporary Static poll items to build styles from - Remove when done #}
     <div id="poll">
         <h2>Survey</h2>
