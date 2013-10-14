@@ -2,43 +2,7 @@
 
 <ul class="unstyled-list">
 {% for position in positions %}
-    <li class="list-of-things-item person-list-item">
-
-        <a href="{{ position.person.get_absolute_url }}">
-            {% thumbnail position.person.primary_image "58x78" crop="center" as im %}
-                <img src="{{ im.url }}" alt="{{ position.person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% empty %}
-                <img src="{{STATIC_URL}}images/person-90x90.jpg" height="58" width="58"/>
-            {% endthumbnail %}
-
-            <span class="name">{{ position.person.name }}</span>
-        </a>
-
-
-        {% if position.place %}
-            <div class="position-place">
-                <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
-
-                {% if position.place.parent_place %}
-                    <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
-                    {{ position.place.parent_place.kind.name }}
-                {% endif %}
-            </div>
-        {% endif %}
-
-
-
-
-        {% if position.person.parties %}
-            <div class="position-parties">
-                {% for party in position.person.parties %}
-                    <a class="position-party" href="{{ party.get_absolute_url }}">{{ party.name }}</a>
-                {% endfor %}
-            </div>
-        {% endif %}
-
-
-    </li>
+    {% include "core/generic_list_item.html" with object=position.person %}
 {% empty %}
     <li>No records found.</li>
 {% endfor %}
