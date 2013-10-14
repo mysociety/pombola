@@ -11,13 +11,13 @@ source ../pombola-virtualenv/bin/activate
 set +e
 
 # run the command
-output="`./manage.py $1`"
+output="`./manage.py $@`"
 
 # suppress output unless we got a non-zero exit status
 if [ "$?" -ne 0 ]
 then
   echo ""
-  echo "### output captured before '$1' exited ###"
+  echo "### output captured before '$@' exited ###"
   echo ""
   echo "$output"
   exit 1
