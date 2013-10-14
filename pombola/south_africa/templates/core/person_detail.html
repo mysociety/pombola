@@ -16,6 +16,7 @@ pombola_settings.extra_js.push('js/tabs.js')
 {% endblock object_tagline %}
 
 {% block profile_info %}
+<div class="sidebar">
   <div class="constituency-party">
 
     <h3>Party</h3>
@@ -77,25 +78,8 @@ pombola_settings.extra_js.push('js/tabs.js')
     {% endif %}
 
   </div>
+</div>
 {% endblock %}
-
-{% block extra_headers %}
-<style>
-  /*
-  Example CSS for showing and hiding the tabs. This needs to be moved to a proper
-  stylesheet and, most likely, improved upon :)
-  */
-  .tab-links .active {
-    background: gray;
-  }
-  .tab-content {
-    display: none;
-  }
-  .tab-content.tab-active {
-    display: block;
-  }
-</style>
-{% endblock extra_headers %}
 
 {% block subcontent %}
 <div class="tabs">
@@ -105,6 +89,7 @@ pombola_settings.extra_js.push('js/tabs.js')
   </ul>
 
   <div id="appearances" class="tab-content tab-active">
+    <h2>Appearances</h2>
     <section>
       <h3>Plenary appearances</h3>
     </section>
@@ -124,18 +109,22 @@ pombola_settings.extra_js.push('js/tabs.js')
       {% with current_positions=person.position_set.all.political.currently_active %}
         {% if current_positions %}
           <h3>Currently</h3>
-          {% for position in current_positions %}
-          <p>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></p>
+          <ul class="current-positions positions">
+            {% for position in current_positions %}
+            <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
           {% endfor %}
+          </ul>
         {% endif %}
       {% endwith %}
 
       {% with past_positions=person.position_set.all.political.currently_inactive %}
         {% if past_positions %}
           <h3>Formerly</h3>
+          <ul class="former-positions positions">
           {% for position in past_positions %}
-          <p>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></p>
+          <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
           {% endfor %}
+          </ul>
         {% endif %}
       {% endwith %}
 

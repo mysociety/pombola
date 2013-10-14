@@ -76,7 +76,7 @@ $border_radius: 5px;
 }
 
 #staging_header {
-    background-color: #555;
+    background-color: $colour_blackish;
     color: #ccc;
     padding: 10px;
     strong{
@@ -1012,7 +1012,7 @@ FOOTER
     padding: 12px;
     margin-bottom: 2em;
     @media only all and (min-width: 640px), print {
-        padding: 24px;
+        padding: 18px;
         margin-bottom: 0;
     }
     h3 {
@@ -1030,6 +1030,7 @@ FOOTER
     }
     a:link {
         text-decoration: none;
+        word-break: break-all;
     }
     a:hover,
     a:active,
@@ -1043,6 +1044,7 @@ FOOTER
             @include lato-bold;
             width: 100%;
             color: $colour_blackish;
+            letter-spacing: 0.05em;
         }
         p {
             padding: 0;
@@ -1338,8 +1340,100 @@ ul.pager {
     }
 }
 
-/* Generic layouts */
+/* Person page */
+#page {
+    .profile-info {
+        .constituency-party {
+            margin: 0;
+            p + h3 {
+                margin-top: 1.5em;
+            }
+            ul li {
+                border-top: none;
+                a {
+                    font-size: 0.875em;
+                    display: inline;
+                    background: transparent none right center no-repeat;
+                    color: $colour_primary;
+                    text-decoration: none;
+                    padding: 0;
+                    @media only all and (min-width: 640px), print {
+                        background: transparent;
+                        color: $colour_primary;
+                        padding:0;
+                        @include border-radius(0);
+                    }
+                    &:hover,
+                    &:focus {
+                        background: transparent;
+                        color: $colour_black;
+                        text-decoration: underline;
+                    }
+                }
+            }
+            }
 
+        h3 {
+            display: block;
+            width: 100%;
+            color: $colour_blackish;
+            font-size: 11px;
+        }
+
+    }
+    .large-container {
+        h3 {
+            border: none;
+            padding: 0;
+            color: $colour_blackish;
+            margin: .25em 0 .5em;
+        }
+        p {
+            margin: 0 0 1em;
+        }
+    }
+}
+
+.tab-links {
+    border-bottom: 1px solid #d2d2ce;
+    @include unstyled-list;
+    margin-bottom: 1em;
+    li {
+        display: inline-block;
+        margin-right: 1em;
+        a {
+            display: inline-block;
+            background: #fff;
+            margin-bottom: 3px;
+            text-decoration: none;
+            font-size: 0.875em;
+            &.active {
+                border-bottom: 3px solid #d2d2ce;
+                margin-bottom: 0;
+                color: $colour_black;
+            }
+        }
+    }
+}
+
+.tab-content {
+    display: none;
+    ul, p {
+        font-size: 0.875em;
+    }
+    &.tab-active {
+        display: block;
+    }
+}
+
+.positions {
+    @include unstyled-list;
+    margin-bottom: 1.5em;
+
+}
+
+
+/* Generic layouts */
 .layout {
     @include clearfix;
     .column {
