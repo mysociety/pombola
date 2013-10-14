@@ -8,7 +8,7 @@ pombola_settings.extra_js.push('js/tabs.js')
 
 {% block object_tagline %}
   <p>
-  {% for position in object.position_set.all %}
+  {% for position in positions %}
     <span class="position-title">{{ position.title }} at {{ position.organisation }}</span>
     {% if not forloop.last %}|{% endif %}
   {% endfor %}

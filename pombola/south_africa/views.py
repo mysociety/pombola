@@ -115,4 +115,5 @@ class SAPersonDetail(PersonDetail):
         context['phone_contacts'] = self.object.contacts.filter(kind__slug__in=('cell', 'voice'))
         context['fax_contacts'] = self.object.contacts.filter(kind__slug='fax')
         context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
+        context['positions'] = self.object.politician_positions().filter(organisation__slug__in=('ncop', 'national-assembly'))
         return context
