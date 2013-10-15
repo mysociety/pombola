@@ -1,9 +1,12 @@
+import warnings
+
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count
 
 import mapit
+from speeches.models import Section, Speech
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -110,6 +113,26 @@ class SAPersonDetail(PersonDetail):
 
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
+    def get_recent_speeches_for_section(self, section_title):
+        pombola_person = self.object
+        sayit_speaker = None # TODO - add mapping logic here
+
+        if not sayit_speaker:
+            # Without a speaker we can't find any speeches
+            return Speech.objects.none()
+
+        try:
+            # Add parent=None as the title is not unique, hopefully the top level will be.
+            sayit_section = Section.objects.get(title=section_title, parent=None)
+        except Section.DoesNotExist:
+            # No match. Don't raise exception but do produce a warning and then return an empty queryset
+            warnings.warn("Could not find top level sayit section '{0}'".format(section_title))
+            return Speech.objects.none()
+
+        speeches = sayit_section.descendant_speeches().filter(speaker=sayit_speaker).order_by('-start_date', '-start_time')
+        return speeches
+
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.object.contacts.filter(kind__slug='twitter')
@@ -118,4 +141,9 @@ class SAPersonDetail(PersonDetail):
         context['fax_contacts'] = self.object.contacts.filter(kind__slug='fax')
         context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
+
+        # FIXME - the titles used here will need to be checked and fixed.
+        context['plenary_appearances']   = self.get_recent_speeches_for_section("PROCEEDINGS OF THE NATIONAL ASSEMBLY")
+        context['committee_appearances'] = self.get_recent_speeches_for_section("Committee Minutes")
+
         return context
