@@ -7,6 +7,7 @@ import mapit
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
+from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
 
@@ -119,3 +120,7 @@ class SAPersonDetail(PersonDetail):
         context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
         return context
+
+
+class SANewsletterPage(InfoPageView):
+    template_name = 'south_africa/info_newsletter.html'
