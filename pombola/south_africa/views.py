@@ -4,6 +4,7 @@ from django.http import Http404
 from django.db.models import Count
 
 import mapit
+from haystack.views import SearchView
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -119,3 +120,7 @@ class SAPersonDetail(PersonDetail):
         context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
         return context
+
+
+class SASearchView(SearchView):
+    pass
