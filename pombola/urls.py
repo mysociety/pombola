@@ -1,3 +1,5 @@
+import re
+
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
@@ -68,12 +70,16 @@ urlpatterns += patterns('',
     url(r'^markitup/', include('markitup.urls'))
 )
 
+urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # needed for the selenium tests.
-if settings.SERVE_STATIC_FILES:
+if settings.IN_TEST_MODE:
+    static_url = re.escape(settings.STATIC_URL.lstrip('/'))
     urlpatterns += patterns('',
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+        url(r'^%s(?P<path>.*)$' % static_url, 'django.views.static.serve', {
+            'document_root': settings.STATIC_ROOT,
+        }),
     )
 
 # search
