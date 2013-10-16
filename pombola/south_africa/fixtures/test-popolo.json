@@ -1,0 +1,24 @@
+{
+    "organizations": [
+    ],
+    "memberships": [
+    ],
+    "persons": [
+        {
+            "family_name": "Finn",
+            "given_names": "Moomin",
+            "honorific_prefix": "Mr",
+            "id": "org.mysociety.test/person/1",
+            "name": "Moomin Finn",
+            "slug": "moomin-finn"
+        },
+        {
+            "family_name": "My",
+            "given_names": "Little",
+            "honorific_prefix": "Ms",
+            "id": "org.mysociety.test/person/2",
+            "name": "Little My",
+            "slug": "little-my"
+        },
+   ],
+}
