@@ -136,7 +136,8 @@ def get_or_create(model, **kwargs):
             o.save()
         else:
             verbose(" (not saving)")
-    return o
+        return o
+    raise Exception("Failed get_or_create")
 
 class Command(LabelCommand):
     help = 'Import people, organisations and positions from Popolo JSON'
@@ -144,7 +145,7 @@ class Command(LabelCommand):
 
     option_list = LabelCommand.option_list + (
         make_option('--commit', action='store_true', dest='commit', help='Actually update the database'),
-        make_option('--delete-old', action='store_true', dest='delete_old', help='Delete old positions and contacts, assuming we have complete information to recreate them'),
+        make_option('--delete-old', action='store_true', dest='delete_old', help='Delete old positions, contacts, and alternative names and identifiers, assuming we have complete information to recreate them'),
         )
 
     def handle_label(self,  input_filename, **options):
@@ -222,6 +223,12 @@ class Command(LabelCommand):
                               commit=options['commit'],
                               slug=slug,
                               defaults=defaults)
+
+            if options['commit'] and options['delete_old']:
+                Identifier.objects.filter(
+                    content_type=ContentType.objects.get_for_model(Person),
+                    object_id=p.id,
+                ).delete()
 
             create_identifiers(person, p, options['commit'])
 
