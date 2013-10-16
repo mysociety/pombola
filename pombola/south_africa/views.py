@@ -113,9 +113,13 @@ class SAPersonDetail(PersonDetail):
 
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
+    def get_sayit_speaker(self):
+        pombola_person = self.object
+        return None
+
     def get_recent_speeches_for_section(self, section_title):
         pombola_person = self.object
-        sayit_speaker = None # TODO - add mapping logic here
+        sayit_speaker = self.get_sayit_speaker()
 
         if not sayit_speaker:
             # Without a speaker we can't find any speeches
