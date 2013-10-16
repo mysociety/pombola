@@ -4,9 +4,11 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count
+from django.core.exceptions import ObjectDoesNotExist
 
 import mapit
-from speeches.models import Section, Speech
+from speeches.models import Section, Speech, Speaker
+from popit.models import Person as PopitPerson
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -114,8 +116,20 @@ class SAPersonDetail(PersonDetail):
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
     def get_sayit_speaker(self):
+
         pombola_person = self.object
-        return None
+
+        try:
+            i = models.Identifier.objects.get(
+                content_type = models.ContentType.objects.get_for_model(models.Person),
+                object_id = pombola_person.id,
+                scheme = 'org.mysociety.za'
+            )
+            speaker = Speaker.objects.get(person__popit_id = i.scheme + i.identifier)
+            return speaker
+
+        except ObjectDoesNotExist:
+            return None
 
     def get_recent_speeches_for_section(self, section_title):
         pombola_person = self.object
