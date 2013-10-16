@@ -120,8 +120,8 @@ class ConstituencyOfficesTestCase(WebTest):
         content_boxes = response.html.findAll('div', {'class': 'content_box'})
 
         assert len(content_boxes) == 2, 'We should be seeing two groups of offices.'
-        assert len(content_boxes[0].findAll('section')) == 2, 'Box 0 should contain two sections, each with a party office.'
-        assert len(content_boxes[1].findAll('section')) == 1, 'Box 1 should contain one sections, as the other party office is outside the box.'
+        assert len(content_boxes[0].findAll('li')) == 2, 'Box 0 should contain two sections, each with a party office.'
+        assert len(content_boxes[1].findAll('li')) == 1, 'Box 1 should contain one sections, as the other party office is outside the box.'
 
     def tearDown(self):
         settings.MAPIT_AREA_SRID = self.old_srid
