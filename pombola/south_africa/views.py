@@ -139,6 +139,8 @@ class SASearchView(SearchView):
         return super(SASearchView, self).__init__(*args, **kwargs)
 
     def extra_context(self):
+        if not self.query:
+            return {}
         query = SearchQuerySet().highlight()
         return {
             'person_results': query.models(models.Person).filter(content=AutoQuery(self.request.GET['q'])),
