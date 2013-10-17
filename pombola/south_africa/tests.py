@@ -1,8 +1,10 @@
 import sys
+import os
+
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-
+from django.core.management import call_command
 from django_webtest import WebTest
 
 from mapit.models import Type, Area, Geometry, Generation
@@ -13,6 +15,7 @@ import json
 
 from popit.models import Person, ApiInstance
 from speeches.models import Speaker
+from pombola import south_africa
 
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
@@ -140,7 +143,7 @@ class LatLonDetailViewTest(TestCase):
 
 class SAPersonDetailViewTest(TestCase):
     def setUp(self):
-        fixtures = os.path.join(os.path.abspath(pombola.south_africa.__path__[0]), 'fixtures')
+        fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
         popolo_path = os.path.join(fixtures, 'test-popolo.json')
         call_command('core_import_popolo', popolo_path)
         
@@ -148,15 +151,17 @@ class SAPersonDetailViewTest(TestCase):
         popolo_io = open(popolo_path, 'r')
         popolo_json = json.load(popolo_io)
         collection_url = 'http://popit.example.com/api/v0.1/'
-        ai = ApiInstance(url = collection_url)
 
-        for doc in popolo_json.persons:
+        api_instance = ApiInstance(url = collection_url)
+        api_instance.save()
+
+        for doc in popolo_json['persons']:
             # Add id and url to the doc
             doc['popit_id']  = doc['id']
             url = collection_url + '/' + doc['id']
             doc['popit_url'] = url
 
-            person = Person.update_from_api_results(instance=instance, doc=doc)
+            person = Person.update_from_api_results(instance=api_instance, doc=doc)
 
             s = Speaker.objects.create(
                 name = doc['name'],
