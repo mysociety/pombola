@@ -45,7 +45,7 @@
                     {% include 'core/generic_list_item.html' with object=result.object %}
                 {% endif %}
             {% empty %}
-                <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
+                <li>There are no people matching "<strong>{{ query }}</strong>"</li>
             {% endfor %}
             </ul>
 
@@ -59,7 +59,7 @@
                     {% include 'core/generic_list_item.html' with object=result.object %}
                 {% endif %}
             {% empty %}
-                <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
+                <li>There are no organisations matching "<strong>{{ query }}</strong>"</li>
             {% endfor %}
             </ul>
 
