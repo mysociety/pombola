@@ -90,11 +90,20 @@ pombola_settings.extra_js.push('js/tabs.js')
 
   <div id="appearances" class="tab-content tab-active">
     <h2>Appearances</h2>
+
     <section>
       <h3>Plenary appearances</h3>
+      {% include "core/speech_list.html" with speechlist=hansard %}
     </section>
+
     <section>
       <h3>Committee appearances</h3>
+      {% include "core/speech_list.html" with speechlist=committee %}
+    </section>
+
+    <section>
+      <h3>Questions </h3>
+      {% include "core/speech_list.html" with speechlist=questions %}
     </section>
   </div>
 

@@ -1,13 +1,23 @@
+import sys
+import os
+
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-
+from django.core.management import call_command
 from django_webtest import WebTest
 
 from mapit.models import Type, Area, Geometry, Generation
 
 from pombola import settings
 from pombola.core import models
+import json
+
+from popit.models import Person as PopitPerson, ApiInstance
+from speeches.models import Speaker
+from pombola import south_africa
+from pombola.south_africa.views import SAPersonDetail
+from instances.models import Instance
 
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
@@ -132,3 +142,45 @@ class LatLonDetailViewTest(TestCase):
     def test_404_for_incorrect_province_lat_lon(self):
         res = self.client.get(reverse('latlon', kwargs={'lat': '0', 'lon': '0'}))
         self.assertEquals(404, res.status_code)
+
+class SAPersonDetailViewTest(TestCase):
+    def setUp(self):
+        fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
+        popolo_path = os.path.join(fixtures, 'test-popolo.json')
+        call_command('core_import_popolo', 
+            popolo_path,
+            commit=True)
+        
+        # TODO rewrite this kludge, pending https://github.com/mysociety/popit-django/issues/19
+        popolo_io = open(popolo_path, 'r')
+        popolo_json = json.load(popolo_io)
+        collection_url = 'http://popit.example.com/api/v0.1/'
+
+        api_instance = ApiInstance(url = collection_url)
+        api_instance.save()
+
+        for doc in popolo_json['persons']:
+            # Add id and url to the doc
+            doc['popit_id']  = doc['id']
+            url = collection_url + doc['id']
+            doc['popit_url'] = url
+
+            person = PopitPerson.update_from_api_results(instance=api_instance, doc=doc)
+
+            instance, _ = Instance.objects.get_or_create( 
+                label='default',
+                defaults = {
+                    'title': 'An instance'
+                })
+
+            s = Speaker.objects.create(
+                instance = instance,
+                name = doc['name'],
+                person = person)
+
+    def test_person_to_speaker_resolution(self):
+        person = models.Person.objects.get(slug='moomin-finn')
+        detail = SAPersonDetail( object=person )
+        speaker = detail.get_sayit_speaker()
+        self.assertEqual( speaker.name, 'Moomin Finn' )
+
