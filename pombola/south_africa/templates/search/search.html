@@ -1,56 +1,93 @@
-{% extends 'search/search_base.html' %}
+{% extends 'base.html' %}
 {% load url from future %}
 
-{% block search_results %}
+{% load thumbnail %}
+{% load pagination_tags %}
 
-<p>People matching &ldquo;{{ query }}&rdquo;</p>
-
-<ul class="unstyled-list">
-{% for result in person_results %}
-    {% if result.app_label == 'speeches' %}
-        {% include 'search/speech_item.html' %}
-    {% else %}
-        {% include 'core/generic_list_item.html' with object=result.object %}
+{% block title %}
+    {% if query %}
+        "{{ query }}" ::
     {% endif %}
-{% empty %}
-    <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
-{% endfor %}
-</ul>
+    Search
+{% endblock %}
 
-<p>Organisations matching &ldquo;{{ query }}&rdquo;</p>
+{% block content %}
+    <h2>Search</h2>
 
-<ul class="unstyled-list">
-{% for result in organisation_results %}
-    {% if result.app_label == 'speeches' %}
-        {% include 'search/speech_item.html' %}
-    {% else %}
-        {% include 'core/generic_list_item.html' with object=result.object %}
-    {% endif %}
-{% empty %}
-    <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
-{% endfor %}
-</ul>
+    <form method="get" action="." class="search-wrap">
+        <p>
+          Alternatively search
+          {% block alternative_search %}
+          <a href="{% url "core_geocoder_search" %}">for a location</a>
+          {% endblock %}
+          {% if settings.ENABLED_FEATURES.hansard %}
+            or <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Hansard transcripts</a>
+          {% endif %}
+          instead.
+        </p>
 
-<p>Results <strong>{{ page.start_index }}</strong> - <strong>{{ page.end_index }}</strong> of <strong>{{ paginator.count }}</strong> for &ldquo;{{ query }}&rdquo;</p>
+        <div class="search-box">
+          {% block search_form %}
+            {{ form.q }}
+          {% endblock %}
+            <input type="submit" value="Search" class="button">
+        </div>
 
-<ul class="unstyled-list">
-{% for result in page.object_list %}
-    {% if result.app_label == 'speeches' %}
-        {% include 'search/speech_item.html' %}
-    {% else %}
-        {% include 'core/generic_list_item.html' with object=result.object %}
-    {% endif %}
-{% empty %}
-    <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
-{% endfor %}
-</ul>
+        {% if query %}
 
-{% if page.has_previous or page.has_next %}
-    <div>
-        {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-        |
-        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-    </div>
-{% endif %}
+            <p>People matching &ldquo;{{ query }}&rdquo;</p>
 
+            <ul class="unstyled-list">
+            {% for result in person_results %}
+                {% if result.app_label == 'speeches' %}
+                    {% include 'search/speech_item.html' %}
+                {% else %}
+                    {% include 'core/generic_list_item.html' with object=result.object %}
+                {% endif %}
+            {% empty %}
+                <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
+            {% endfor %}
+            </ul>
+
+            <p>Organisations matching &ldquo;{{ query }}&rdquo;</p>
+
+            <ul class="unstyled-list">
+            {% for result in organisation_results %}
+                {% if result.app_label == 'speeches' %}
+                    {% include 'search/speech_item.html' %}
+                {% else %}
+                    {% include 'core/generic_list_item.html' with object=result.object %}
+                {% endif %}
+            {% empty %}
+                <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
+            {% endfor %}
+            </ul>
+
+            <p>Results <strong>{{ page.start_index }}</strong> - <strong>{{ page.end_index }}</strong> of <strong>{{ paginator.count }}</strong> for &ldquo;{{ query }}&rdquo;</p>
+
+            <ul class="unstyled-list">
+            {% for result in page.object_list %}
+                {% if result.app_label == 'speeches' %}
+                    {% include 'search/speech_item.html' %}
+                {% else %}
+                    {% include 'core/generic_list_item.html' with object=result.object %}
+                {% endif %}
+            {% empty %}
+                <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
+            {% endfor %}
+            </ul>
+
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+
+        {% else %}
+            {# Show some example queries to run, maybe query syntax, something else? #}
+            <p>Please enter a search term in the form above.</p>
+        {% endif %}
+    </form>
 {% endblock %}

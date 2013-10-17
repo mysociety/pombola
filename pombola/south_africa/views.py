@@ -124,6 +124,7 @@ class SAPersonDetail(PersonDetail):
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
         return context
 
+
 search_models = (
     models.Place,
     models.PositionTitle,
@@ -131,6 +132,7 @@ search_models = (
 if settings.ENABLED_FEATURES['speeches']:
     from speeches.models import Speech
     search_models += ( Speech, )
+
 
 class SASearchView(SearchView):
 
