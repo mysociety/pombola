@@ -2,9 +2,12 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count
+from django.conf import settings
 
 import mapit
 from haystack.views import SearchView
+from haystack.query import SearchQuerySet
+from haystack.inputs import AutoQuery
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -121,6 +124,23 @@ class SAPersonDetail(PersonDetail):
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
         return context
 
+search_models = (
+    models.Place,
+    models.PositionTitle,
+)
+if settings.ENABLED_FEATURES['speeches']:
+    from speeches.models import Speech
+    search_models += ( Speech, )
 
 class SASearchView(SearchView):
-    pass
+
+    def __init__(self, *args, **kwargs):
+        kwargs['searchqueryset'] = SearchQuerySet().models(*search_models).highlight()
+        return super(SASearchView, self).__init__(*args, **kwargs)
+
+    def extra_context(self):
+        query = SearchQuerySet().highlight()
+        return {
+            'person_results': query.models(models.Person).filter(content=AutoQuery(self.request.GET['q'])),
+            'organisation_results': query.models(models.Organisation).filter(content=AutoQuery(self.request.GET['q'])),
+        }
