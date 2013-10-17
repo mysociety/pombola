@@ -1,0 +1,20 @@
+<ul class="unstyled">
+    {% for speech in speechlist %}
+    <li>
+        <p>
+            <span class="speech-title">
+                <a href="{{ speech.get_absolute_url }}">
+                    {{ speech.section.title }}
+                </a>
+            </span>
+            &mdash;
+            {{ speech.start_date }}
+        </p>
+        <p>
+            {{ speech.text|truncatewords:50 }}
+        </p>
+    </li>
+    {% empty %}
+        No speeches found
+    {% endfor %}
+</ul>

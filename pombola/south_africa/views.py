@@ -147,7 +147,11 @@ class SAPersonDetail(PersonDetail):
             warnings.warn("Could not find top level sayit section '{0}'".format(section_title))
             return Speech.objects.none()
 
-        speeches = sayit_section.descendant_speeches().filter(speaker=sayit_speaker).order_by('-start_date', '-start_time')
+        speeches = (
+            sayit_section.descendant_speeches()
+                .filter(speaker=sayit_speaker)
+                .order_by('-start_date', '-start_time'))
+
         return speeches
 
 
@@ -161,7 +165,8 @@ class SAPersonDetail(PersonDetail):
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
 
         # FIXME - the titles used here will need to be checked and fixed.
-        context['plenary_appearances']   = self.get_recent_speeches_for_section("PROCEEDINGS OF THE NATIONAL ASSEMBLY")
-        context['committee_appearances'] = self.get_recent_speeches_for_section("Committee Minutes")
+        context['hansard']   = self.get_recent_speeches_for_section("Hansard")
+        context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
+        context['questions'] = self.get_recent_speeches_for_section("Questions")
 
         return context
