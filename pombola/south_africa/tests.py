@@ -132,3 +132,9 @@ class LatLonDetailViewTest(TestCase):
     def test_404_for_incorrect_province_lat_lon(self):
         res = self.client.get(reverse('latlon', kwargs={'lat': '0', 'lon': '0'}))
         self.assertEquals(404, res.status_code)
+
+
+class SASearchViewTest(TestCase):
+    def test_search_page_returns_success(self):
+        res = self.client.get(reverse('core_search'))
+        self.assertEquals(200, res.status_code)
