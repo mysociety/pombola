@@ -98,6 +98,12 @@ PMG_COMMITTEE_PASS: ''
 # For ZA development you can use 'http://sa-test.matthew.popit.dev.mysociety.org/api/v0.1/'
 POPIT_API_URL: 'http://popit.example.com/api/v0.1/'
 
+# List any indexes that you want to exclude from this install. This
+# allows you to override an index in a country app. See the example
+# in `pombola/south_africa/search_indexes.py`
+# HAYSTACK_EXCLUDED_INDEXES:
+#   - pombola.search.search_indexes.PlaceIndex
+
 # some apps are optional (see trailing comment for the country they most likely apply to)
 OPTIONAL_APPS:
   # - hansard    # KE
