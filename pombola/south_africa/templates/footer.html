@@ -1,13 +1,6 @@
 {% load url from future %}
 <div class="footer-section">
-    <h4>Sign up to our mailing list</h4>
-    <div class="email-signup">
-
-        <form method="post" name="SubscribeForm" action="http://www.graphicmail.co.za/RWCode/subscribe.asp?SiteID=45864&Mode=subscribe&resize=0" target="_blank" >
-          <input type="text" name="Email" /><input type="submit" value="Sign up" class="button mailing-list-button">
-          <input type="hidden" name="628173" value="on">
-        </form>
-    </div>
+    {% include "south_africa/_newsletter_signup.html" %}
 
     <h4>Follow us</h4>
     <ul class="social-links-list">

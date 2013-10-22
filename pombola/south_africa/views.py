@@ -12,6 +12,7 @@ from popit.models import Person as PopitPerson
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
+from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
 
@@ -170,3 +171,7 @@ class SAPersonDetail(PersonDetail):
         context['questions'] = self.get_recent_speeches_for_section("Questions")
 
         return context
+
+
+class SANewsletterPage(InfoPageView):
+    template_name = 'south_africa/info_newsletter.html'
