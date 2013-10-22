@@ -1,7 +1,4 @@
-<li class="speech">
-    <section>
-        <h4><a href="{{ result.object.get_absolute_url }}">{{ result.object.section|default:"Result" }}</a></h4>
-        <div class="read-more-wrap"><a href="{{ result.object.get_absolute_url }}" class="read-more">read more</a></div>
-        {{ result.highlighted.0|safe }}
-    </section>
+<li class="speech-list-item list-of-things-item">
+        <span class="name"><a href="{{ result.object.get_absolute_url }}">{{ result.object.section|default:"Result" }}</a></span>
+        <span class="description">{{ result.highlighted.0|safe }}</span>
 </li>
