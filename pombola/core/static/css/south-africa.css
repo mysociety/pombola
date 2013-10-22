@@ -3401,6 +3401,10 @@ HEADER
     background: url("/static/images/za-logo.png") 0 center no-repeat;
     width: 550px;
     height: 102px;
+    -webkit-background-size: 550px 102px;
+    -moz-background-size: 550px 102px;
+    -o-background-size: 550px 102px;
+    background-size: 550px 102px;
   }
 }
 
