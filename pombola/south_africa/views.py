@@ -1,13 +1,19 @@
+import warnings
+
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 import mapit
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery
+
+from speeches.models import Section, Speech, Speaker
+from popit.models import Person as PopitPerson
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -114,6 +120,46 @@ class SAPersonDetail(PersonDetail):
 
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
+    def get_sayit_speaker(self):
+
+        pombola_person = self.object
+
+        try:
+            i = models.Identifier.objects.get(
+                content_type = models.ContentType.objects.get_for_model(models.Person),
+                object_id = pombola_person.id,
+                scheme = 'org.mysociety.za'
+            )
+            speaker = Speaker.objects.get(person__popit_id = i.scheme + i.identifier)
+            return speaker
+
+        except ObjectDoesNotExist:
+            return None
+
+    def get_recent_speeches_for_section(self, section_title):
+        pombola_person = self.object
+        sayit_speaker = self.get_sayit_speaker()
+
+        if not sayit_speaker:
+            # Without a speaker we can't find any speeches
+            return Speech.objects.none()
+
+        try:
+            # Add parent=None as the title is not unique, hopefully the top level will be.
+            sayit_section = Section.objects.get(title=section_title, parent=None)
+        except Section.DoesNotExist:
+            # No match. Don't raise exception but do produce a warning and then return an empty queryset
+            warnings.warn("Could not find top level sayit section '{0}'".format(section_title))
+            return Speech.objects.none()
+
+        speeches = (
+            sayit_section.descendant_speeches()
+                .filter(speaker=sayit_speaker)
+                .order_by('-start_date', '-start_time'))
+
+        return speeches
+
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.object.contacts.filter(kind__slug='twitter')
@@ -122,6 +168,12 @@ class SAPersonDetail(PersonDetail):
         context['fax_contacts'] = self.object.contacts.filter(kind__slug='fax')
         context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
+
+        # FIXME - the titles used here will need to be checked and fixed.
+        context['hansard']   = self.get_recent_speeches_for_section("Hansard")
+        context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
+        context['questions'] = self.get_recent_speeches_for_section("Questions")
+
         return context
 
 
