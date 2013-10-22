@@ -4409,6 +4409,13 @@ ul.pager li.next {
   }
 }
 
+/* Newsletter page */
+.page-wrapper .email-signup input[type="text"] {
+  border: 1px solid #b3b3b3;
+  border-right: none;
+  padding: 0.74em;
+}
+
 /* Person page */
 #page .profile-info .constituency-party {
   margin: 0;
