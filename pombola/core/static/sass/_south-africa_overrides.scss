@@ -108,6 +108,7 @@ a {
 
 }
 
+.search-box input.button,
 .button {
     display: inline-block;
     background-color: $colour_primary;
@@ -122,9 +123,11 @@ a {
     cursor: pointer;
     letter-spacing: 0.05em;
     -webkit-appearance: none;
+    text-decoration: none;
     &:hover,
     &:focus {
-        background: mix($colour_primary, #000, 80%);
+        color: #fff;
+        background-color: mix($colour_primary, #000, 80%);
     }
 }
 
@@ -825,7 +828,25 @@ ul#home-news-list {
     }
 }
 
+/* General search results page */
+.search-box input#id_q {
+    border: 1px solid $colour_middling_grey;
+    padding: 6px 4px;
+}
+.search-box input.button {
+    background-image: url('../images/search-icon.png');
+    &:hover {
+        background-image: url('../images/search-icon.png');
+    }
+}
+.results-group {
+    margin: 1.5em 0;
 
+    h2 {
+        font-size: 1em;
+        color: $colour_green;
+    }
+}
 
 
 /*
@@ -1064,9 +1085,15 @@ FOOTER
 }
 
 .list-of-things-item {
-    border-bottom: 1px solid #d2d2ce;
     padding: 12px;
+    border-bottom: 1px solid #d2d2ce;
     @include clearfix;
+    img {
+        float: left;
+        margin-right: 12px;
+        max-width: 58px;
+        overflow: hidden;
+    }
     a:link,
     a:visited {
         color: $colour_black;
@@ -1084,20 +1111,22 @@ FOOTER
     &:last-child {
         margin-bottom: 2em;
     }
-}
 
-/* People listings */
-.person-list-item {
-    img {
-        float: left;
-        margin-right: 12px;
-        overflow: hidden;
-    }
     .name {
         font-weight: bold;
         display: block;
         margin-bottom: 0.25em;
     }
+
+    .description {
+        color: $colour_blackish;
+        font-size: 0.875em;
+    }
+}
+
+/* People listings */
+.person-list-item {
+
     .position-parties,
     .position-place {
         display: inline-block;
@@ -1129,7 +1158,13 @@ FOOTER
     }
 }
 
-
+/* Organisation listings */
+.organisation-list-item {
+    .kind {
+        font-size: 0.875em;
+        color: $colour_blackish;
+    }
+}
 /* Pagination controls */
 .step-pagination,
 .pagination {
