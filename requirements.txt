@@ -59,6 +59,7 @@ git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
 -e git+git://github.com/mysociety/sayit.git@master#egg=django-sayit  # NOTE - when changing remember to remove the repo from virtualenv!
 -e git+git://github.com/mysociety/za-hansard.git@master#egg=za_hansard  # NOTE - when changing remember to remove the repo from virtualenv!
 -e git+git://github.com/mysociety/popit-resolver@master#egg=popit-resolver  # NOTE - when changing remember to remove the repo from virtualenv!
+-e git+git://github.com/mysociety/popit-django@master#egg=popit-django  # NOTE - when changing remember to remove the repo from virtualenv!
 
 python-dateutil>=1.5,!=2.0
 
