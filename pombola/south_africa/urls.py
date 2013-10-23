@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
-    SAOrganisationDetailView, SAPersonDetail, SANewsletterPage
+    SAOrganisationDetailView, SAPersonDetail, SANewsletterPage, SAHansardIndex
 from pombola.core.urls import organisation_patterns, person_patterns
 
 # Override the organisation url so we can vary it depending on the organisation type.
@@ -21,4 +21,7 @@ urlpatterns = patterns('pombola.south_africa.views',
     # Catch the newsletter info page to change the template used so that the signup form is injected.
     # NOTE - you still need to create an InfoPage with the slug 'newsletter' for this not to 404.
     url(r'^info/newsletter', SANewsletterPage.as_view(), {'slug': 'newsletter'}, name='info_page_newsletter'),
+
+    # Create a special Hansard index page that provides listing of the hansard sessions that contain speeches.
+    url(r'^hansard', SAHansardIndex.as_view(), name='za_hansard_index'),
 )

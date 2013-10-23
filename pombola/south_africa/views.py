@@ -5,6 +5,7 @@ from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.generic import TemplateView
 
 import mapit
 from speeches.models import Section, Speech, Speaker
@@ -175,3 +176,7 @@ class SAPersonDetail(PersonDetail):
 
 class SANewsletterPage(InfoPageView):
     template_name = 'south_africa/info_newsletter.html'
+
+
+class SAHansardIndex(TemplateView):
+    template_name = 'south_africa/hansard_index.html'

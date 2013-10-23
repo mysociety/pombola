@@ -3,6 +3,7 @@ import os
 
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
+from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django_webtest import WebTest
@@ -184,3 +185,8 @@ class SAPersonDetailViewTest(TestCase):
         speaker = detail.get_sayit_speaker()
         self.assertEqual( speaker.name, 'Moomin Finn' )
 
+
+class SAHansardIndexViewTest(TestCase):
+    def test_pages_is_200(self):
+        c = Client()
+        self.assertEqual(c.get('/hansard').status_code, 200)
