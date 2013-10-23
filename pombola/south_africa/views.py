@@ -17,6 +17,7 @@ from popit.models import Person as PopitPerson
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
+from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
 
@@ -200,3 +201,7 @@ class SASearchView(SearchView):
             'person_results': query.models(models.Person).filter(content=AutoQuery(self.request.GET['q'])),
             'organisation_results': query.models(models.Organisation).filter(content=AutoQuery(self.request.GET['q'])),
         }
+
+
+class SANewsletterPage(InfoPageView):
+    template_name = 'south_africa/info_newsletter.html'
