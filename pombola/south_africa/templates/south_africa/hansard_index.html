@@ -2,6 +2,12 @@
 
 {% block content %}
 
-    Blah.
+
+{% for section in sections %}
+
+    <p>{{ section.title }}</p>
+
+{% endfor %}
+
 
 {% endblock %}

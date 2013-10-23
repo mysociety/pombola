@@ -6,6 +6,7 @@ from django.http import Http404
 from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import TemplateView
+from django.shortcuts import get_object_or_404
 
 import mapit
 from speeches.models import Section, Speech, Speaker
@@ -180,3 +181,18 @@ class SANewsletterPage(InfoPageView):
 
 class SAHansardIndex(TemplateView):
     template_name = 'south_africa/hansard_index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SAHansardIndex, self).get_context_data(**kwargs)
+
+        hansard_section = get_object_or_404(Section, title="Hansard", parent=None)
+
+        all_sections = hansard_section.get_descendants
+        speech_only_sections = filter(lambda s: s.speech_set.exists(), all_sections)
+
+        context['sections'] = speech_only_sections
+
+        return context
+
+
+

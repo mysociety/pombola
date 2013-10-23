@@ -1,5 +1,6 @@
 import sys
 import os
+from datetime import date, time
 
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
@@ -16,6 +17,7 @@ import json
 
 from popit.models import Person as PopitPerson, ApiInstance
 from speeches.models import Speaker
+from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.south_africa.views import SAPersonDetail
 from instances.models import Instance
@@ -187,6 +189,53 @@ class SAPersonDetailViewTest(TestCase):
 
 
 class SAHansardIndexViewTest(TestCase):
-    def test_pages_is_200(self):
+
+    def setUp(self):
+        create_sections([
+            {
+                'title': "Hansard",
+                'subsections': [
+                    {   'title': "2013",
+                        'subsections': [
+                            {   'title': "02",
+                                'subsections': [
+                                    {   'title': "16",
+                                        'subsections': [
+                                            {   'title': "Proceedings of Foo",
+                                                'speeches': [ 4, date(2013, 2, 16), time(9, 0) ],
+                                            },
+                                            {   'title': "Bill on Silly Walks",
+                                                'speeches': [ 2, date(2013, 2, 16), time(12, 0) ],
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        'title': "18",
+                                        'subsections': [
+                                            {   'title': "Budget Report",
+                                                'speeches': [ 3, date(2013, 2, 18), time(9, 0) ],
+                                            },
+                                            {   'title': "Bill on Comedy Mustaches",
+                                                'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                            {
+                                'title': "Empty section",
+                            }
+                        ],
+                    },
+                ],
+            },
+        ])
+
+    def test_index_page(self):
         c = Client()
-        self.assertEqual(c.get('/hansard').status_code, 200)
+        response = c.get('/hansard')
+        self.assertEqual(response.status_code, 200)
+
+        # Check that we can see the titles of sections containing speeches only
+        self.assertContains(response, "Proceedings of Foo")
+        self.assertNotContains(response, "Empty section")
