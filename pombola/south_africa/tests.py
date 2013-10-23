@@ -55,7 +55,7 @@ class ConstituencyOfficesTestCase(WebTest):
             name='Province',
             slug='province',
             )
-        
+
         province = models.Place.objects.create(
             name='Test Province',
             slug='test_province',
@@ -83,13 +83,13 @@ class ConstituencyOfficesTestCase(WebTest):
             (party2, p2_office1),
             (party2, p2_office2),
             )
-        
+
         for party, office in office_relationships:
             models.OrganisationRelationship.objects.create(organisation_a=party, organisation_b=office, kind=orgrelkind_has_office)
 
         place_kind_constituency_office = models.PlaceKind.objects.create(name='Constituency Office', slug='constituency-office')
         place_kind_constituency_area = models.PlaceKind.objects.create(name='Constituency Area', slug='constituency-area')
-            
+
 
         # Offices inside the province
         models.Place.objects.create(
@@ -123,7 +123,7 @@ class ConstituencyOfficesTestCase(WebTest):
             organisation=p2_office2,
             )
 
-            
+
     def test_subplaces_page(self):
         response = self.app.get('/place/test_province/places/')
 
@@ -147,10 +147,10 @@ class SAPersonDetailViewTest(TestCase):
     def setUp(self):
         fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
         popolo_path = os.path.join(fixtures, 'test-popolo.json')
-        call_command('core_import_popolo', 
+        call_command('core_import_popolo',
             popolo_path,
             commit=True)
-        
+
         # TODO rewrite this kludge, pending https://github.com/mysociety/popit-django/issues/19
         popolo_io = open(popolo_path, 'r')
         popolo_json = json.load(popolo_io)
@@ -167,7 +167,7 @@ class SAPersonDetailViewTest(TestCase):
 
             person = PopitPerson.update_from_api_results(instance=api_instance, doc=doc)
 
-            instance, _ = Instance.objects.get_or_create( 
+            instance, _ = Instance.objects.get_or_create(
                 label='default',
                 defaults = {
                     'title': 'An instance'

@@ -79,7 +79,7 @@ class SAPlaceDetailSub(PlaceDetailSub):
                 .filter(kind__slug__in=CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS)
                 .filter(location__coveredby=self.object.mapit_area.polygons.collect())
                 )
-            
+
         return context
 
 
