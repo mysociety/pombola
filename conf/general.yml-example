@@ -103,6 +103,7 @@ POPIT_API_URL: 'http://popit.example.com/api/v0.1/'
 # in `pombola/south_africa/search_indexes.py`
 # HAYSTACK_EXCLUDED_INDEXES:
 #   - pombola.search.search_indexes.PlaceIndex
+HAYSTACK_EXCLUDED_INDEXES: []
 
 # some apps are optional (see trailing comment for the country they most likely apply to)
 OPTIONAL_APPS:
