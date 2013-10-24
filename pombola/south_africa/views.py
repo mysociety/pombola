@@ -187,10 +187,24 @@ class SAHansardIndex(TemplateView):
 
         hansard_section = get_object_or_404(Section, title="Hansard", parent=None)
 
-        all_sections = hansard_section.get_descendants
-        speech_only_sections = filter(lambda s: s.speech_set.exists(), all_sections)
+        # TODO - this is very inefficient, should either add caching or change the approach to do fewer queries.
 
-        context['sections'] = speech_only_sections
+        # Get all the sections from "Hansard" down a set number of levels. This
+        # should cause us to select all sections down to the "Foo" level of
+        # "Hansard" -> YYYY -> MM -> DD -> "Foo".
+        upper_sections = hansard_section._get_descendants( max_depth=4 )
+
+        # Go through all these sections filtering out any who are parents to ones that we've already seen.
+        upper_parents = set([s.parent.id for s in upper_sections])
+        bottom_level = [s for s in upper_sections if s.id not in upper_parents]
+
+        # Need to filter out empty sections (neither they nor their children contain any speeches)
+        have_speeches = [s for s in bottom_level if s.descendant_speeches().exists()]
+
+        # Now need to sort all the sections so that those containing the latest speeches come first
+        # FIXME
+
+        context['sections'] = have_speeches
 
         return context
 

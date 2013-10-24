@@ -201,22 +201,30 @@ class SAHansardIndexViewTest(TestCase):
                                 'subsections': [
                                     {   'title': "16",
                                         'subsections': [
-                                            {   'title': "Proceedings of Foo",
-                                                'speeches': [ 4, date(2013, 2, 16), time(9, 0) ],
-                                            },
-                                            {   'title': "Bill on Silly Walks",
-                                                'speeches': [ 2, date(2013, 2, 16), time(12, 0) ],
+                                            {   'title': "Proceedings of the National Assembly (2012/2/16)",
+                                                'subsections': [
+                                                    {   'title': "Proceedings of Foo",
+                                                        'speeches': [ 4, date(2013, 2, 16), time(9, 0) ],
+                                                    },
+                                                    {   'title': "Bill on Silly Walks",
+                                                        'speeches': [ 2, date(2013, 2, 16), time(12, 0) ],
+                                                    },
+                                                ],
                                             },
                                         ],
                                     },
                                     {
                                         'title': "18",
                                         'subsections': [
-                                            {   'title': "Budget Report",
-                                                'speeches': [ 3, date(2013, 2, 18), time(9, 0) ],
-                                            },
-                                            {   'title': "Bill on Comedy Mustaches",
-                                                'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
+                                            {   'title': "Proceedings of the National Assembly (2012/2/18)",
+                                                'subsections': [
+                                                    {   'title': "Budget Report",
+                                                        'speeches': [ 3, date(2013, 2, 18), time(9, 0) ],
+                                                    },
+                                                    {   'title': "Bill on Comedy Mustaches",
+                                                        'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
+                                                    },
+                                                ],
                                             },
                                         ],
                                     },
@@ -237,5 +245,5 @@ class SAHansardIndexViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Check that we can see the titles of sections containing speeches only
-        self.assertContains(response, "Proceedings of Foo")
+        self.assertContains(response, "Proceedings of the National Assembly (2012/2/16)")
         self.assertNotContains(response, "Empty section")
