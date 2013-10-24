@@ -1,0 +1,106 @@
+{% extends 'core/object_base.html' %}
+{% load thumbnail %}
+{% load humanize %}
+{% load url from future %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block object_menu_links %}
+  <li><a href="{% url "place" slug=object.slug %}">Overview</a></li>
+
+  {% if object.has_scorecards %}
+    <li><a href="{% url "place_scorecard" slug=object.slug %}">Scorecard</a></li>
+  {% endif %}
+
+  <li><a href="{% url "place_people" slug=object.slug %}">People</a></li>
+  <li><a href="{% url "place_places" slug=object.slug %}">Places</a></li>
+
+  {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
+    <li><a href="{% url "place_data" slug=object.slug %}">Data</a></li>
+  {% endif %}
+
+  {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
+    <li><a href="{% url "place_projects" slug=object.slug %}">CDF Projects ({{ object.project_set.count }})</a></li>
+  {% endif %}
+
+  {% comment %}
+    <!-- Not showing organisations for the moment as the list isn't very good. -->
+    <li><a href="{% url "place_organisations" slug=object.slug %}">Organisations</a></li>
+  {% endcomment %}
+
+  {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}
+  {% if settings.DISQUS_SHORTNAME %}
+    {% comment %}
+    <li><a href="{% url "place" slug=object.slug %}#disqus_thread" data-disqus-identifier="{{ object.css_class }}-{{ object.id }}">Comments</a></li>
+    {% endcomment %}
+    <script type="text/javascript" charset="utf-8">
+      addDisqusScriptTag('count');
+    </script>
+  {% endif %}
+{% endblock %}
+
+
+{% block object_tagline %}
+
+  {% with session=object.parliamentary_session %}
+
+      <p class="object-kind">{{ object.kind.name }}{% if session %} ({{ session.house.name }}){% endif %}</p>
+
+      {% if session %}
+        <p>{{ session.relative_time }} {{ object.kind.name }}: {{ session.readable_date_range }}</p>
+      {% endif %}
+
+      {% if object.organisation %}
+        <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
+      {% endif %}
+
+  {% endwith %}
+
+{% endblock %}
+
+{% block profile_pic %}
+  {% if object.mapit_area %}
+    <div class="profile-map">
+      <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+
+      <div id="map_canvas" width="300" height="300"></div>
+
+      {% block "add_place_kml_to_map" %}
+        <script type="text/javascript" charset="utf-8">
+          add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url "mapit_index" %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
+        </script>
+      {% endblock %}
+
+    </div>
+  {% else %}
+    <div class="profile-pic">
+      <img src="{{STATIC_URL}}images/place-200x200.jpg" />
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block profile_info %}
+  {% with politician_pos=object.current_politician_position %}
+    {% if politician_pos %}
+      <div class="constituency-party">
+        <h3>Key figure</h3>
+        <ul>
+          <li><a href="{{ politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }} <span>[{{ politician_pos.title.name }}]</span></a></li>
+        </ul>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% with aspirant_positions=object.position_set.all.current_aspirant_positions %}
+    {% if aspirant_positions %}
+      <div class="constituency-party">
+        <h3>Aspirant(s)</h3>
+        <ul>
+          {% for aspirant_pos in aspirant_positions %}
+            <li><a href="{{ aspirant_pos.person.get_absolute_url }}">{{ aspirant_pos.person.name }} <span>[{{ aspirant_pos.title.name }}]</span></a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  {% endwith %}
+{% endblock %}
