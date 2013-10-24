@@ -1,90 +1,75 @@
 {% extends 'core/place_base.html' %}
-{% load thumbnail %}
-{% load humanize %}
 {% load url from future %}
-
-{% block title %}{{ object.name }}{% endblock %}
-
-{% block profile_info %}
-
-{% comment %}
-<div class="sidebar">
-    <p>Sidebar content goes here, if necessary.</p>
-</div>
-{% endcomment %}
-
-{% endblock profile_info %}
 
 {% block subcontent %}
 
+{% if object.summary %}
+<h2>Summary</h2>
 
-  {% if object.summary %}
-  <h2>Summary</h2>
+<div class="markdown">
+    {{ object.summary }}
+</div>
+{% endif %}
 
-    <div class="markdown">
-     {{ object.summary }}
-    </div>
-  {% endif %}
+{% if object.has_scorecards %}
+<h2>Scorecards</h2>
 
-  {% if object.has_scorecards %}
-    <h2>Scorecards</h2>
-
-    <p>
-      The past performance of {{ object.name }} can be seen in its
-      <a href="{% url "place_scorecard" slug=object.slug %}">scorecard</a>.
-    </p>
-  {% endif %}
+<p>
+    The past performance of {{ object.name }} can be seen in its
+    <a href="{% url "place_scorecard" slug=object.slug %}">scorecard</a>.
+</p>
+{% endif %}
 
 
-  <h2>Current Politicians Representing {{ object.name }}</h2>
+        <h2>Current Politicians Representing {{ object.name }}</h2>
 
-  {% include "core/_people_listing.html" with people=object.all_related_current_politicians %}
+        {% include "core/_people_listing.html" with people=object.all_related_current_politicians %}
 
-  {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
-  {% with people_related=object.related_people %}
+        {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
+        {% with people_related=object.related_people %}
 
-    {% if people_related|length %}
-      <h2>People</h2>
+        {% if people_related|length %}
+        <h2>People</h2>
 
-      <p>
+        <p>
         There
         {{ people_related|length|pluralize:"is,are"}}
         <a href="{% url "place_people" slug=object.slug %}">
-          {{ people_related|length }}
-          {{ people_related|length|pluralize:"person,people"}}
+            {{ people_related|length }}
+            {{ people_related|length|pluralize:"person,people"}}
         </a>
         related to {{ object.name }}.
-      </p>
-    {% endif %}
-  {% endwith %}
+        </p>
+        {% endif %}
+        {% endwith %}
 
 
-  {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
-    <h2>Data</h2>
-    <p>
-      There is some
-      <a href="{% url "place_data" slug=object.slug %}">data</a>
-      on {{ object.name }}.
-    </p>
-  {% endif %}
+        {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
+        <h2>Data</h2>
+        <p>
+            There is some
+            <a href="{% url "place_data" slug=object.slug %}">data</a>
+            on {{ object.name }}.
+        </p>
+        {% endif %}
 
 
-  {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
-    {% with project_count=object.project_set.count %}
-      <h2>CDF Projects</h2>
+        {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
+            {% with project_count=object.project_set.count %}
+                <h2>CDF Projects</h2>
 
-      <p>
-        We have information on
-        <a href="{% url "place_projects" slug=object.slug %}">
-          {{ project_count}} CDF Projects
-        </a>
-        in {{ object.name }}.
-      </p>
-    {% endwith %}
-  {% endif %}
+                <p>
+                We have information on
+                <a href="{% url "place_projects" slug=object.slug %}">
+                    {{ project_count}} CDF Projects
+                </a>
+                in {{ object.name }}.
+                </p>
+            {% endwith %}
+        {% endif %}
 
-  {% block disqus_comments %}
-    {% include 'disqus_comments.html' %}
-  {% endblock %}
+        {% block disqus_comments %}
+            {% include 'disqus_comments.html' %}
+        {% endblock %}
 
 {% endblock %}

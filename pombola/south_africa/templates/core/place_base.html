@@ -1,50 +1,15 @@
 {% extends 'core/object_base.html' %}
-{% load thumbnail %}
-{% load humanize %}
 {% load url from future %}
 
-{% block title %}{{ object.name }}{% endblock %}
-
-{% block object_menu_links %}
-  <li><a href="{% url "place" slug=object.slug %}">Overview</a></li>
-
-  {% if object.has_scorecards %}
-    <li><a href="{% url "place_scorecard" slug=object.slug %}">Scorecard</a></li>
-  {% endif %}
-
-  <li><a href="{% url "place_people" slug=object.slug %}">People</a></li>
-  <li><a href="{% url "place_places" slug=object.slug %}">Places</a></li>
-
-  {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
-    <li><a href="{% url "place_data" slug=object.slug %}">Data</a></li>
-  {% endif %}
-
-  {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
-    <li><a href="{% url "place_projects" slug=object.slug %}">CDF Projects ({{ object.project_set.count }})</a></li>
-  {% endif %}
-
-  {% comment %}
-    <!-- Not showing organisations for the moment as the list isn't very good. -->
-    <li><a href="{% url "place_organisations" slug=object.slug %}">Organisations</a></li>
-  {% endcomment %}
-
-  {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}
-  {% if settings.DISQUS_SHORTNAME %}
-    {% comment %}
-    <li><a href="{% url "place" slug=object.slug %}#disqus_thread" data-disqus-identifier="{{ object.css_class }}-{{ object.id }}">Comments</a></li>
-    {% endcomment %}
-    <script type="text/javascript" charset="utf-8">
-      addDisqusScriptTag('count');
-    </script>
-  {% endif %}
+{% block object_menu %}
+    {% include 'south_africa/_place_tabs.html' %}
 {% endblock %}
-
 
 {% block object_tagline %}
 
   {% with session=object.parliamentary_session %}
 
-      <p class="object-kind">{{ object.kind.name }}{% if session %} ({{ session.house.name }}){% endif %}</p>
+      <p>{{ object.kind.name }}{% if session %} ({{ session.house.name }}){% endif %}</p>
 
       {% if session %}
         <p>{{ session.relative_time }} {{ object.kind.name }}: {{ session.readable_date_range }}</p>
@@ -77,30 +42,4 @@
       <img src="{{STATIC_URL}}images/place-200x200.jpg" />
     </div>
   {% endif %}
-{% endblock %}
-
-{% block profile_info %}
-  {% with politician_pos=object.current_politician_position %}
-    {% if politician_pos %}
-      <div class="constituency-party">
-        <h3>Key figure</h3>
-        <ul>
-          <li><a href="{{ politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }} <span>[{{ politician_pos.title.name }}]</span></a></li>
-        </ul>
-      </div>
-    {% endif %}
-  {% endwith %}
-
-  {% with aspirant_positions=object.position_set.all.current_aspirant_positions %}
-    {% if aspirant_positions %}
-      <div class="constituency-party">
-        <h3>Aspirant(s)</h3>
-        <ul>
-          {% for aspirant_pos in aspirant_positions %}
-            <li><a href="{{ aspirant_pos.person.get_absolute_url }}">{{ aspirant_pos.person.name }} <span>[{{ aspirant_pos.title.name }}]</span></a></li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-  {% endwith %}
 {% endblock %}
