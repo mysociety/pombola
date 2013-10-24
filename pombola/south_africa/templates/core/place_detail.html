@@ -20,15 +20,9 @@
         </p>
     {% endif %}
 
-    <h2>Current Politicians Representing {{ object.name }}</h2>
-
-    {% include "core/_people_listing.html" with people=object.all_related_current_politicians %}
-
     {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
     {% with people_related=object.related_people %}
         {% if people_related|length %}
-            <h2>People</h2>
-
             <p>
             There
             {{ people_related|length|pluralize:"is,are"}}
@@ -40,6 +34,16 @@
             </p>
         {% endif %}
     {% endwith %}
+
+    <h2>Members of the National Assembly</h2>
+
+    {{ national_assembly_people }}
+
+    {% include "core/_people_listing.html" with people=national_assembly_people %}
+
+    <h2>Other people</h2>
+
+    {% include "core/_people_listing.html" with people=object.all_related_current_politicians %}
 
     {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
         <h2>Data</h2>
