@@ -3502,6 +3502,13 @@ a:focus {
   background-position: 95% center !important;
   background-repeat: no-repeat !important;
 }
+#main-menu nav .has-dropdown,
+#main-menu nav .has-dropdown:hover {
+  padding-right: 17px !important;
+  background-image: url("../images/has-dropdown.png") !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+}
 
 #header-search {
   border: 1px solid #a92d1e;
