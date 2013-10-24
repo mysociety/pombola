@@ -204,6 +204,9 @@ class SAHansardIndex(TemplateView):
         # Now need to sort all the sections so that those containing the latest speeches come first
         # FIXME
 
+        # Now need to add pagination
+        # FIXME
+
         context['sections'] = have_speeches
 
         return context
