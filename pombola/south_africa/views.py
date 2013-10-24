@@ -16,7 +16,8 @@ from speeches.models import Section, Speech, Speaker
 from popit.models import Person as PopitPerson
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
+from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
+    OrganisationDetailView, PersonDetail, PlaceDetailView
 from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
@@ -66,6 +67,14 @@ class LatLonDetailView(PlaceDetailView):
             )
 
         return context
+
+
+class SAPlaceDetailView(PlaceDetailView):
+    def get_context_data(self, **kwargs):
+        context = super(SAPlaceDetailView, self).get_context_data(**kwargs)
+        context['national_assembly_people'] = self.object.all_related_current_politicians.filter(position__organisation__slug='national-assembly')
+        return context
+
 
 class SAPlaceDetailSub(PlaceDetailSub):
     child_place_template = "south_africa/constituency_office_list_item.html"
