@@ -195,7 +195,7 @@ class SAHansardIndex(TemplateView):
         entries = Speech \
             .objects \
             .filter(section__parent__parent__parent__parent__parent=hansard_section) \
-            .values('section__id', 'start_date') \
+            .values('section_id', 'start_date') \
             .annotate(speech_count=Count('id')) \
             .order_by('-start_date') \
             [:25]
@@ -203,7 +203,7 @@ class SAHansardIndex(TemplateView):
         # loop through and add all the section objects. This is not efficient,
         # but makes the templates easier as we can (for example) use get_absolute_url.
         for entry in entries:
-            entry['section'] = Section.objects.get(pk=entry['section__id'])
+            entry['section'] = Section.objects.get(pk=entry['section_id'])
 
         # PAGINATION NOTE - it would be possible to add pagination to this by simply
         # removing the `[25]` from the query and then finding a more efficiont way to
