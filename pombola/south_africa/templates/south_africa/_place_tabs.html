@@ -1,0 +1,22 @@
+{% load url from future %}
+
+<ul class="tab-links">
+
+    <li><a href="{% url "place" slug=object.slug %}">Overview</a></li>
+
+    {% if object.has_scorecards %}
+    <li><a href="{% url "place_scorecard" slug=object.slug %}">Scorecard</a></li>
+    {% endif %}
+
+    <li><a href="{% url "place_people" slug=object.slug %}">People</a></li>
+    <li><a href="{% url "place_places" slug=object.slug %}">Places</a></li>
+
+    {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
+    <li><a href="{% url "place_data" slug=object.slug %}">Data</a></li>
+    {% endif %}
+
+    {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
+    <li><a href="{% url "place_projects" slug=object.slug %}">CDF Projects ({{ object.project_set.count }})</a></li>
+    {% endif %}
+
+</ul>
