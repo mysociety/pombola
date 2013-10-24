@@ -205,5 +205,11 @@ class SAHansardIndex(TemplateView):
         for entry in entries:
             entry['section'] = Section.objects.get(pk=entry['section__id'])
 
+        # PAGINATION NOTE - it would be possible to add pagination to this by simply
+        # removing the `[25]` from the query and then finding a more efficiont way to
+        # inflate the sections (perhaps using an embedded lambda, or a custom
+        # templatetag). However paginating this page may not be as useful as creating an
+        # easy to use drill down based on date, or indeed using search.
+
         context['entries'] = entries
         return context
