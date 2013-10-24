@@ -3492,9 +3492,30 @@ a:focus {
   background: #e23d28;
   color: #fff;
 }
+#main-menu nav ul ul li ul a {
+  background: #711e14;
+  text-indent: 1em;
+  font-size: 11px !important;
+  padding: 5px 10px !important;
+}
+#main-menu nav ul ul li ul a:hover, #main-menu nav ul ul li ul a:focus {
+  background: #e23d28;
+  color: #fff;
+}
+#main-menu nav ul li:hover ul ul {
+  position: relative;
+  top: 0;
+}
 #main-menu nav a[href*="http://www.pmg.org.za/"] {
   background-image: url("/static/images/pmg-white-icon.png") !important;
   background-position: 95% center !important;
+  background-repeat: no-repeat !important;
+}
+#main-menu nav .has-dropdown,
+#main-menu nav .has-dropdown:hover {
+  padding-right: 17px !important;
+  background-image: url("../images/has-dropdown.png") !important;
+  background-position: right center !important;
   background-repeat: no-repeat !important;
 }
 

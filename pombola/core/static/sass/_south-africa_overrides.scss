@@ -417,10 +417,34 @@ menu#mobile-top-tools,
                 }
             }
         }
+        ul li ul {
+            a {
+                background: mix($colour_primary, #000, 50%);
+                text-indent: 1em;
+                font-size: 11px !important;
+                padding: 5px 10px !important;
+                &:hover,
+                &:focus {
+                    background: $colour_primary;
+                    color: #fff;
+                }
+            }
+        }
+    }
+    ul li:hover ul ul {
+        position: relative;
+        top: 0;
     }
     a[href*="http://www.pmg.org.za/"] {
         background-image: url('/static/images/pmg-white-icon.png') !important;
         background-position: 95% center !important;
+        background-repeat: no-repeat !important;
+    }
+    .has-dropdown,
+    .has-dropdown:hover  {
+        padding-right: 17px !important;
+        background-image: url('../images/has-dropdown.png') !important;
+        background-position: right center !important;
         background-repeat: no-repeat !important;
     }
 }
