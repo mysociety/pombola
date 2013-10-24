@@ -6,18 +6,16 @@
 {% block content %}
 
 
-{% for section in sections %}
+{% for entry in entries %}
 
-    <h2>{{ section.title }}</h2>
+    {% ifchanged entry.section.parent.title %}
+        <h2>{{ entry.section.parent.title }}</h2>
+    {% endifchanged %}
 
-    {% for subsection in section.get_children %}
-
-        <p>
-            <a href="{{ subsection.get_absolute_url }}">{{ subsection.title }}</a>
-            ({{ subsection.speech_set.count }})
-        </p>
-
-    {% endfor %}
+    <p>
+        <a href="{{ entry.section.get_absolute_url }}">{{ entry.section.title }}</a>
+        ({{ entry.speech_count }})
+    </p>
 
 
 {% endfor %}

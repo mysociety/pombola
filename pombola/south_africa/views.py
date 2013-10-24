@@ -185,31 +185,25 @@ class SAHansardIndex(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SAHansardIndex, self).get_context_data(**kwargs)
 
+        # Get the "Hansard" top level section, or 404
         hansard_section = get_object_or_404(Section, title="Hansard", parent=None)
 
-        # TODO - this is very inefficient, should either add caching or change the approach to do fewer queries.
+        # As we know that the hansard section structure is
+        # "Hansard" -> yyyy -> mm -> dd -> section -> subsection -> [speeches]
+        # we can create a very specific query to drill up to the top level one
+        # that we want.
+        entries = Speech \
+            .objects \
+            .filter(section__parent__parent__parent__parent__parent=hansard_section) \
+            .values('section__id', 'start_date') \
+            .annotate(speech_count=Count('id')) \
+            .order_by('-start_date') \
+            [:25]
 
-        # Get all the sections from "Hansard" down a set number of levels. This
-        # should cause us to select all sections down to the "Foo" level of
-        # "Hansard" -> YYYY -> MM -> DD -> "Foo".
-        upper_sections = hansard_section._get_descendants( max_depth=4 )
+        # loop through and add all the section objects. This is not efficient,
+        # but makes the templates easier as we can (for example) use get_absolute_url.
+        for entry in entries:
+            entry['section'] = Section.objects.get(pk=entry['section__id'])
 
-        # Go through all these sections filtering out any who are parents to ones that we've already seen.
-        upper_parents = set([s.parent.id for s in upper_sections])
-        bottom_level = [s for s in upper_sections if s.id not in upper_parents]
-
-        # Need to filter out empty sections (neither they nor their children contain any speeches)
-        have_speeches = [s for s in bottom_level if s.descendant_speeches().exists()]
-
-        # Now need to sort all the sections so that those containing the latest speeches come first
-        # FIXME
-
-        # Now need to add pagination
-        # FIXME
-
-        context['sections'] = have_speeches
-
+        context['entries'] = entries
         return context
-
-
-
