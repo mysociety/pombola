@@ -1,0 +1,4 @@
+<li class="speech-list-item list-of-things-item">
+        <span class="name"><a href="{{ result.object.get_absolute_url }}">{{ result.object.section|default:"Result" }}</a></span>
+        <span class="description">{{ result.highlighted.0|safe }}</span>
+</li>

@@ -4,9 +4,14 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 
 import mapit
+from haystack.views import SearchView
+from haystack.query import SearchQuerySet
+from haystack.inputs import AutoQuery
+
 from speeches.models import Section, Speech, Speaker
 from popit.models import Person as PopitPerson
 
@@ -171,6 +176,31 @@ class SAPersonDetail(PersonDetail):
         context['questions'] = self.get_recent_speeches_for_section("Questions")
 
         return context
+
+
+search_models = (
+    models.Place,
+    models.PositionTitle,
+)
+if settings.ENABLED_FEATURES['speeches']:
+    from speeches.models import Speech
+    search_models += ( Speech, )
+
+
+class SASearchView(SearchView):
+
+    def __init__(self, *args, **kwargs):
+        kwargs['searchqueryset'] = SearchQuerySet().models(*search_models).highlight()
+        return super(SASearchView, self).__init__(*args, **kwargs)
+
+    def extra_context(self):
+        if not self.query:
+            return {}
+        query = SearchQuerySet().highlight()
+        return {
+            'person_results': query.models(models.Person).filter(content=AutoQuery(self.request.GET['q'])),
+            'organisation_results': query.models(models.Organisation).filter(content=AutoQuery(self.request.GET['q'])),
+        }
 
 
 class SANewsletterPage(InfoPageView):

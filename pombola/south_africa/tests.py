@@ -143,6 +143,13 @@ class LatLonDetailViewTest(TestCase):
         res = self.client.get(reverse('latlon', kwargs={'lat': '0', 'lon': '0'}))
         self.assertEquals(404, res.status_code)
 
+
+class SASearchViewTest(TestCase):
+    def test_search_page_returns_success(self):
+        res = self.client.get(reverse('core_search'))
+        self.assertEquals(200, res.status_code)
+
+
 class SAPersonDetailViewTest(TestCase):
     def setUp(self):
         fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
@@ -183,4 +190,3 @@ class SAPersonDetailViewTest(TestCase):
         detail = SAPersonDetail( object=person )
         speaker = detail.get_sayit_speaker()
         self.assertEqual( speaker.name, 'Moomin Finn' )
-

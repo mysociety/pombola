@@ -3174,6 +3174,7 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
+.search-box input.button,
 .button {
   display: inline-block;
   background-color: #e23d28;
@@ -3189,9 +3190,13 @@ a:hover, a:focus {
   cursor: pointer;
   letter-spacing: 0.05em;
   -webkit-appearance: none;
+  text-decoration: none;
 }
-.button:hover, .button:focus {
-  background: #b43020;
+.search-box input.button:hover, .search-box input.button:focus,
+.button:hover,
+.button:focus {
+  color: #fff;
+  background-color: #b43020;
 }
 
 /*
@@ -3401,6 +3406,10 @@ HEADER
     background: url("/static/images/za-logo.png") 0 center no-repeat;
     width: 550px;
     height: 102px;
+    -webkit-background-size: 550px 102px;
+    -moz-background-size: 550px 102px;
+    -o-background-size: 550px 102px;
+    background-size: 550px 102px;
   }
 }
 
@@ -3884,6 +3893,27 @@ ul#home-news-list li h3 a:focus {
   text-decoration: underline;
 }
 
+/* General search results page */
+.search-box input#id_q {
+  border: 1px solid #b3b3b3;
+  padding: 6px 4px;
+}
+
+.search-box input.button {
+  background-image: url("../images/search-icon.png");
+}
+.search-box input.button:hover {
+  background-image: url("../images/search-icon.png");
+}
+
+.results-group {
+  margin: 1.5em 0;
+}
+.results-group h2 {
+  font-size: 1em;
+  color: #017b58;
+}
+
 /*
 
 FOOTER
@@ -4116,8 +4146,8 @@ FOOTER
 }
 
 .list-of-things-item {
-  border-bottom: 1px solid #d2d2ce;
   padding: 12px;
+  border-bottom: 1px solid #d2d2ce;
   /**
    * For IE 6/7 only
    * Include this rule to trigger hasLayout and contain floats.
@@ -4134,6 +4164,12 @@ FOOTER
 }
 .list-of-things-item {
   *zoom: 1;
+}
+.list-of-things-item img {
+  float: left;
+  margin-right: 12px;
+  max-width: 58px;
+  overflow: hidden;
 }
 .list-of-things-item a:link,
 .list-of-things-item a:visited {
@@ -4152,18 +4188,17 @@ FOOTER
 .list-of-things-item:last-child {
   margin-bottom: 2em;
 }
-
-/* People listings */
-.person-list-item img {
-  float: left;
-  margin-right: 12px;
-  overflow: hidden;
-}
-.person-list-item .name {
+.list-of-things-item .name {
   font-weight: bold;
   display: block;
   margin-bottom: 0.25em;
 }
+.list-of-things-item .description {
+  color: #555555;
+  font-size: 0.875em;
+}
+
+/* People listings */
 .person-list-item .position-parties,
 .person-list-item .position-place {
   display: inline-block;
@@ -4191,6 +4226,12 @@ FOOTER
   background: transparent url("/static/images/place-16x16.jpg") left center no-repeat;
   padding-left: 20px;
   margin-right: 20px;
+}
+
+/* Organisation listings */
+.organisation-list-item .kind {
+  font-size: 0.875em;
+  color: #555555;
 }
 
 /* Pagination controls */
