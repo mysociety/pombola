@@ -12,8 +12,9 @@ from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery
 
-from speeches.models import Section, Speech, Speaker
 from popit.models import Person as PopitPerson
+from speeches.models import Section, Speech, Speaker
+from speeches.views import SectionView
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -205,3 +206,6 @@ class SASearchView(SearchView):
 
 class SANewsletterPage(InfoPageView):
     template_name = 'south_africa/info_newsletter.html'
+
+class SASectionView(SectionView):
+    pass

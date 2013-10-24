@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 
 from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
-    SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage
+    SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
+    SASectionView
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
 
@@ -26,4 +27,7 @@ urlpatterns = patterns('pombola.south_africa.views',
     # Catch the newsletter info page to change the template used so that the signup form is injected.
     # NOTE - you still need to create an InfoPage with the slug 'newsletter' for this not to 404.
     url(r'^info/newsletter', SANewsletterPage.as_view(), {'slug': 'newsletter'}, name='info_page_newsletter'),
+
+    # Hansard views
+    url(r'^hansard/(?P<pk>\d+)$', SASectionView.as_view(), name='section-view'),
 )
