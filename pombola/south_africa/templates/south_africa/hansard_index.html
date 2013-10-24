@@ -1,11 +1,24 @@
 {% extends "base.html" %}
 
+{% block title %}Hansard{% endblock %}
+
+
 {% block content %}
 
 
 {% for section in sections %}
 
-    <p>{{ section.title }}</p>
+    <h2>{{ section.title }}</h2>
+
+    {% for subsection in section.get_children %}
+
+        <p>
+            <a href="{{ subsection.get_absolute_url }}">{{ subsection.title }}</a>
+            ({{ subsection.speech_set.count }})
+        </p>
+
+    {% endfor %}
+
 
 {% endfor %}
 
