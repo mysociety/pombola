@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with title=section.title %}View Section: {{ title }}{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <ul class="breadcrumbs">
+    {% for n in section.get_ancestors %}
+    {% if not n.parent_id %}
+        <li>
+            <a href="/{{ speechlist_name }}"> {% trans speechlist_name %} </a>
+            <span class="divider">&rarr;</span>
+        </li>
+    {% elif n.id != section.id %}
+        <li>
+            <a href="{% url "sa-section-view" n.id %}">{{ n.title }}</a> 
+            <span class="divider">&rarr;</span>
+        </li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+
+    <!--
+    {% if user.is_authenticated %}
+    <div class="btn-group pull-right">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        {% trans "Actions" %}
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="{{ section.get_edit_url }}">{% trans "Edit section" %}</a>
+        <li><a href="{{ section.get_delete_url }}">{% trans "Delete section" %}</a>
+        <li><a href="{% url "section-add" %}?section={{ section.id }}">{% trans "Add a new subsection" %}</a>
+        <li><a href="{% url "speech-add" %}?section={{ section.id }}">{% trans "Add a new speech" %}</a>
+      </ul>
+    </div>
+    {% endif %}
+    -->
+
+    <h1>{{ section.title }}</h1>
+
+</div>
+
+{% with next=section.get_next_node previous=section.get_previous_node %}
+  {% if previous or next %}
+    <ul class="pager">
+      {% if previous %}
+        <li class="previous"><a href="{% url "sa-section-view" previous.id %}">&larr; {{ previous.title }}</a>
+      {% endif %}
+      {% if next %}
+        <li class="next"><a href="{% url "sa-section-view" next.id %}">{{ next.title }} &rarr;</a>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    {% for node, structure in section_tree %}
+      {% if structure.new_level %}<ul>{% else %}</li>{% endif %}
+      {% if structure.speech %}
+        <li id="s{{ node.id }}" class="speech speech-border"{% if node.speaker.colour %} style="border-left-color: #{{ node.speaker.colour }};"{% endif %}>
+        {% include "speeches/speech.html" with speech=node nosection="1" noli=1 %}
+      {% else %}
+        <li><span class="section-title"><a href="{{ node.get_absolute_url }}">{{ node.title }}</a></span>
+        {% if node.is_leaf_node %}({{ node.speech_count }}){% endif %}
+      {% endif %}
+      {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+    {% endfor %}
+
+{% with next=section.get_next_node previous=section.get_previous_node %}
+  {% if previous or next %}
+    <ul class="pager">
+      {% if previous %}
+        <li class="previous"><a href="{% url "sa-section-view" previous.id %}">&larr; {{ previous.title }}</a>
+      {% endif %}
+      {% if next %}
+        <li class="next"><a href="{% url "sa-section-view" next.id %}">{{ next.title }} &rarr;</a>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% endblock %}
+

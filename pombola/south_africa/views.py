@@ -14,7 +14,7 @@ from haystack.inputs import AutoQuery
 
 from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker
-from speeches.views import SectionView
+from speeches.views import SectionView, SpeakerView
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -123,6 +123,7 @@ class SAPersonDetail(PersonDetail):
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
     def get_sayit_speaker(self):
+        # see also templatetags/pombola_speech_tags.py
 
         pombola_person = self.object
 
@@ -208,4 +209,11 @@ class SANewsletterPage(InfoPageView):
     template_name = 'south_africa/info_newsletter.html'
 
 class SASectionView(SectionView):
+    def get_context_data(self, **kwargs):
+        context = super(SASectionView, self).get_context_data(**kwargs)
+
+        context['speechlist_name'] = 'hansard' # TODO parametrize this based on section parent
+        return context
+
+class SASpeakerView(SpeakerView):
     pass
