@@ -14,7 +14,7 @@ from haystack.inputs import AutoQuery
 
 from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker
-from speeches.views import SectionView, SpeakerView
+from speeches.views import SectionView, SpeakerView, SpeechView
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -214,6 +214,9 @@ class SASectionView(SectionView):
 
         context['speechlist_name'] = 'hansard' # TODO parametrize this based on section parent
         return context
+
+class SASpeechView(SpeechView):
+    pass
 
 class SASpeakerView(SpeakerView):
     pass

@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
-    SASectionView, SASpeakerView
+    SASectionView, SASpeakerView, SASpeechView
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
 
@@ -30,5 +30,6 @@ urlpatterns = patterns('pombola.south_africa.views',
 
     # Hansard views
     url(r'^hansard/(?P<pk>\d+)$', SASectionView.as_view(), name='sa-section-view'),
+    url(r'^hansard/speech/(?P<pk>\d+)$', SASpeechView.as_view(), name='sa-speech-view'),
     url(r'^za-speaker/(?P<pk>\d+)$', SASpeakerView.as_view(), name='sa-speaker-view'),
 )
