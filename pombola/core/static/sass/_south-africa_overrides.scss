@@ -1056,6 +1056,11 @@ FOOTER
     p + h3 {
         margin-top: 1.5em;
     }
+    ul {
+        @include unstyled-list;
+        font-size: 0.875em;
+        margin-bottom: 1em;
+    }
     a:link {
         text-decoration: none;
         word-break: break-all;
