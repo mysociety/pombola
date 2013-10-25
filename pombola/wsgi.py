@@ -17,6 +17,11 @@ import os
 import sys
 import yaml
 
+# Add the path to the project root manually here. Ideally it could be added via
+# python-path in the httpd.conf WSGI config, but I'm not changing that due to
+# the large number of sites running under that config (although it shouldn't
+# make a difference, as we just be duplicating the entry for older code that
+# does not have this change in).
 file_dir = os.path.abspath(os.path.realpath(os.path.dirname(__file__)))
 sys.path.insert(
     0, # insert at the very start
