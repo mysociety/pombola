@@ -1477,7 +1477,41 @@ ul.pager {
 }
 
 /* Hansard index page */
+.hansard-section-title {
+    cursor: pointer;
+    border-top: 1px solid #d2d2ce;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    display: block;
+    text-decoration: none;
+    color: $colour_black;
+    h2 {
+        font-size: 1em;
+    }
+    p {
+        font-size: 0.875em;
+        margin-bottom: 0;
+    }
+    &:focus,
+    &:hover {
+        text-decoration: none;
+        h2 {
+            color: $colour_primary;
+            text-decoration: underline;
+        }
+        p {
+            color: $colour_black;
+        }
+    }
+}
 
+.hansard-section {
+    padding-bottom: 1em;
+    p {
+        font-size: 0.875em;
+        margin-bottom: 0.5em;
+    }
+}
 
 /* Generic layouts */
 .layout {

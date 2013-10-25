@@ -4543,6 +4543,41 @@ ul.pager li.next {
 }
 
 /* Hansard index page */
+.hansard-section-title {
+  cursor: pointer;
+  border-top: 1px solid #d2d2ce;
+  margin-bottom: 1em;
+  padding-top: 1em;
+  display: block;
+  text-decoration: none;
+  color: #222222;
+}
+.hansard-section-title h2 {
+  font-size: 1em;
+}
+.hansard-section-title p {
+  font-size: 0.875em;
+  margin-bottom: 0;
+}
+.hansard-section-title:focus, .hansard-section-title:hover {
+  text-decoration: none;
+}
+.hansard-section-title:focus h2, .hansard-section-title:hover h2 {
+  color: #e23d28;
+  text-decoration: underline;
+}
+.hansard-section-title:focus p, .hansard-section-title:hover p {
+  color: #222222;
+}
+
+.hansard-section {
+  padding-bottom: 1em;
+}
+.hansard-section p {
+  font-size: 0.875em;
+  margin-bottom: 0.5em;
+}
+
 /* Generic layouts */
 .layout {
   /**

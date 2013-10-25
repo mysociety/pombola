@@ -18,10 +18,10 @@
     {% endifchanged %}
 
     {% ifchanged entry.section.parent.title %}
-    <div class="js-hansard-section-title">
-        <h2 >{{ entry.section.parent.title }}</h2>
+    <a class="js-hansard-section-title hansard-section-title" href="#">
+        <h2>{{ entry.section.parent.title }}</h2>
         <p>{{ entry.start_date }}</p>
-    </div>
+    </a>
     {% endifchanged %}
 
     {% ifchanged entry.start_date %}
