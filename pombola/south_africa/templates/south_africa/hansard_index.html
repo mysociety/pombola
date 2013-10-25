@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block extra_js_to_load %}
+    pombola_settings.extra_js.push( 'js/hansard-hide-reveal.js' );
+{% endblock %}
+
 {% block title %}Hansard{% endblock %}
 
 
@@ -14,12 +18,14 @@
     {% endifchanged %}
 
     {% ifchanged entry.section.parent.title %}
-        <h2>{{ entry.section.parent.title }}</h2>
+    <div class="js-hansard-section-title">
+        <h2 >{{ entry.section.parent.title }}</h2>
         <p>{{ entry.start_date }}</p>
+    </div>
     {% endifchanged %}
 
     {% ifchanged entry.start_date %}
-        <div class="js-hansard-day" style="border:4px solid red;">
+        <div class="js-hansard-section hansard-section">
     {% endifchanged %}
     <p>
         <a href="{{ entry.section.get_absolute_url }}">{{ entry.section.title }}</a>
@@ -30,6 +36,4 @@
     {% endif %}
 
 {% endfor %}
-
-
 {% endblock %}

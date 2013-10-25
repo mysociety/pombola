@@ -264,6 +264,16 @@ small {
     }
 }
 
+#page .large-container section ul li  {
+    border-bottom-color: #d2d2ce;
+    margin-bottom: 1em;
+    p {
+            font-style: normal;
+            font-size: 1em;
+    }
+}
+
+
 #page-wrapper {
     position: relative;
 }
@@ -413,10 +423,34 @@ menu#mobile-top-tools,
                 }
             }
         }
+        ul li ul {
+            a {
+                background: mix($colour_primary, #000, 50%);
+                text-indent: 1em;
+                font-size: 11px !important;
+                padding: 5px 10px !important;
+                &:hover,
+                &:focus {
+                    background: $colour_primary;
+                    color: #fff;
+                }
+            }
+        }
+    }
+    ul li:hover ul ul {
+        position: relative;
+        top: 0;
     }
     a[href*="http://www.pmg.org.za/"] {
         background-image: url('/static/images/pmg-white-icon.png') !important;
         background-position: 95% center !important;
+        background-repeat: no-repeat !important;
+    }
+    .has-dropdown,
+    .has-dropdown:hover  {
+        padding-right: 17px !important;
+        background-image: url('../images/has-dropdown.png') !important;
+        background-position: right center !important;
         background-repeat: no-repeat !important;
     }
 }
@@ -1340,18 +1374,6 @@ ul.pager {
     }
 }
 
-/* Newsletter page */
-.page-wrapper {
-    .email-signup {
-        input[type="text"] {
-            border: 1px solid $colour_middling_grey;
-            border-right: none;
-            padding: 0.74em;
-        }
-    }
-}
-
-
 /* Person page */
 #page {
     .profile-info {
@@ -1404,6 +1426,16 @@ ul.pager {
             margin: 0 0 1em;
         }
     }
+
+    .person-appearances {
+        .speech-title {
+            font-weight: bold;
+            font-size: 1.142857143em;
+        }
+        li {
+            margin-bottom: 1em;
+        }
+    }
 }
 
 .tab-links {
@@ -1443,6 +1475,8 @@ ul.pager {
     margin-bottom: 1.5em;
 
 }
+
+/* Hansard index page */
 
 
 /* Generic layouts */
