@@ -70,7 +70,12 @@ class LatLonDetailView(PlaceDetailView):
 
 
 class SAPlaceDetailView(PlaceDetailView):
+
     def get_context_data(self, **kwargs):
+        """
+        Get back the people for this place in 3 separate lists so they can
+        be displayed separatly on the place detail page.
+        """
         context = super(SAPlaceDetailView, self).get_context_data(**kwargs)
         context['national_assembly_people'] = self.object.all_related_current_politicians().filter(position__organisation__slug='national-assembly')
         context['ncop_people'] = self.object.all_related_current_politicians().filter(position__organisation__slug='ncop')
