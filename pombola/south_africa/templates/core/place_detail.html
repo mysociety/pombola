@@ -35,13 +35,17 @@
         {% endif %}
     {% endwith %}
 
-    <h2>Members of the National Assembly</h2>
+    <h2>Members of the National Assembly ({{ national_assembly_people.count }})</h2>
 
     {% include "core/_people_listing.html" with people=national_assembly_people %}
 
-    <h2>Other people</h2>
+    <h2>Members of the National Council of Provinces ({{ ncop_people.count }})</h2>
 
-    {% include "core/_people_listing.html" with people=object.all_related_current_politicians %}
+    {% include "core/_people_listing.html" with people=ncop_people %}
+
+    <h2>Other people ({{ other_people.count }})</h2>
+
+    {% include "core/_people_listing.html" with people=other_people %}
 
     {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
         <h2>Data</h2>
