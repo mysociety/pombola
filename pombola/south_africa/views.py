@@ -181,6 +181,7 @@ class SANewsletterPage(InfoPageView):
 
 class SAHansardIndex(TemplateView):
     template_name = 'south_africa/hansard_index.html'
+    sections_to_show = 25
 
     def get_context_data(self, **kwargs):
         context = super(SAHansardIndex, self).get_context_data(**kwargs)
@@ -197,19 +198,28 @@ class SAHansardIndex(TemplateView):
             .filter(section__parent__parent__parent__parent__parent=hansard_section) \
             .values('section_id', 'start_date') \
             .annotate(speech_count=Count('id')) \
-            .order_by('-start_date') \
-            [:25]
+            .order_by('-start_date')
 
         # loop through and add all the section objects. This is not efficient,
         # but makes the templates easier as we can (for example) use get_absolute_url.
+        # Also lets us retrieve the last N parent sections which is what we need for the
+        # display.
+        parent_sections = set()
+        display_entries = []
         for entry in entries:
-            entry['section'] = Section.objects.get(pk=entry['section_id'])
+            section = Section.objects.get(pk=entry['section_id'])
+            parent_sections.add(section.parent.id)
+            if len(parent_sections) > self.sections_to_show:
+                break
+            display_entries.append(entry)
+            display_entries[-1]['section'] = section
 
         # PAGINATION NOTE - it would be possible to add pagination to this by simply
-        # removing the `[25]` from the query and then finding a more efficiont way to
-        # inflate the sections (perhaps using an embedded lambda, or a custom
-        # templatetag). However paginating this page may not be as useful as creating an
-        # easy to use drill down based on date, or indeed using search.
+        # removing the `break` after self.sections_to_show has been reached and then
+        # finding a more efficient way to inflate the sections (perhaps using an
+        # embedded lambda, or a custom templatetag). However paginating this page may
+        # not be as useful as creating an easy to use drill down based on date, or
+        # indeed using search.
 
-        context['entries'] = entries
+        context['entries'] = display_entries
         return context
