@@ -2,7 +2,8 @@ from django.conf.urls import patterns, include, url
 
 from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
-    SASectionView, SASpeakerView, SASpeechView
+    SASpeakerRedirectView
+from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
 
@@ -28,8 +29,20 @@ urlpatterns = patterns('pombola.south_africa.views',
     # NOTE - you still need to create an InfoPage with the slug 'newsletter' for this not to 404.
     url(r'^info/newsletter', SANewsletterPage.as_view(), {'slug': 'newsletter'}, name='info_page_newsletter'),
 
-    # Hansard views
-    url(r'^hansard/(?P<pk>\d+)$', SASectionView.as_view(), name='sa-section-view'),
-    url(r'^hansard/speech/(?P<pk>\d+)$', SASpeechView.as_view(), name='sa-speech-view'),
-    url(r'^za-speaker/(?P<pk>\d+)$', SASpeakerView.as_view(), name='sa-speaker-view'),
+)
+
+sayit_patterns = patterns('',
+
+    # Exposed endpoints
+    url(r'^(?P<pk>\d+)$',        SectionView.as_view(), name='section-view'),
+    url(r'^speech/(?P<pk>\d+)$', SpeechView.as_view(),  name='speech-view'),
+
+    # Fake endpoint to redirect
+    url(r'^speaker/(?P<pk>\d+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
+
+    # don't actually want to expose these
+    url(r'^sections$',           SectionList.as_view(), name='section-list'),
+)
+urlpatterns += patterns('',
+    url(r'^hansard/', include(sayit_patterns, namespace='hansard', app_name='speeches')),
 )

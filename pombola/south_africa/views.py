@@ -1,4 +1,5 @@
 import warnings
+import re
 
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
@@ -6,6 +7,8 @@ from django.http import Http404
 from django.db.models import Count
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 import mapit
 from haystack.views import SearchView
@@ -14,7 +17,7 @@ from haystack.inputs import AutoQuery
 
 from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker
-from speeches.views import SectionView, SpeakerView, SpeechView
+from speeches.views import SpeakerView
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
@@ -208,15 +211,19 @@ class SASearchView(SearchView):
 class SANewsletterPage(InfoPageView):
     template_name = 'south_africa/info_newsletter.html'
 
-class SASectionView(SectionView):
-    def get_context_data(self, **kwargs):
-        context = super(SASectionView, self).get_context_data(**kwargs)
-
-        context['speechlist_name'] = 'hansard' # TODO parametrize this based on section parent
-        return context
-
-class SASpeechView(SpeechView):
-    pass
-
-class SASpeakerView(SpeakerView):
-    pass
+class SASpeakerRedirectView(SpeakerView):
+    def render_to_response(self, *args, **kwargs):
+        try:
+            speaker = self.get_object(Speaker.objects)
+            popit_id = speaker.person.popit_id
+            [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
+            i = models.Identifier.objects.get(
+                content_type = models.ContentType.objects.get_for_model(models.Person),
+                scheme = scheme,
+                identifier = identifier,
+            )
+            person = models.Person.objects.get(id=i.object_id)
+            return redirect(reverse('person', args=(person.slug,)))
+        except Exception as e:
+            raise e
+            raise Http404
