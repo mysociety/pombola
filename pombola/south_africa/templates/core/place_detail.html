@@ -35,17 +35,23 @@
         {% endif %}
     {% endwith %}
 
-    <h2>Members of the National Assembly ({{ national_assembly_people.count }})</h2>
+    <h2><a href="#national-assembly-people" data-toggle="dropdown">Members of the National Assembly ({{ national_assembly_people.count }})</a></h2>
 
-    {% include "core/_people_listing.html" with people=national_assembly_people %}
+    <div id="national-assembly-people" class="person-panel" style="display: none">
+        {% include "core/_people_listing.html" with people=national_assembly_people %}
+    </div>
 
-    <h2>Members of the National Council of Provinces ({{ ncop_people.count }})</h2>
+    <h2><a href="#ncop-people" data-toggle="dropdown">Members of the National Council of Provinces ({{ ncop_people.count }})</a></h2>
 
-    {% include "core/_people_listing.html" with people=ncop_people %}
+    <div id="ncop-people" class="person-panel" style="display: none">
+        {% include "core/_people_listing.html" with people=ncop_people %}
+    </div>
 
-    <h2>Other people ({{ other_people.count }})</h2>
+    <h2><a href="#other-people" data-toggle="dropdown">Other people ({{ other_people.count }})</a></h2>
 
-    {% include "core/_people_listing.html" with people=other_people %}
+    <div id="other-people" class="person-panel" style="display: none">
+        {% include "core/_people_listing.html" with people=other_people %}
+    </div>
 
     {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
         <h2>Data</h2>

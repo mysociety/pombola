@@ -193,3 +193,15 @@ $(function(){
     location.href="/search?q=" + escape($('#id_q,#loc').first().val());
   });
 });
+
+/* Any link with a data-toggle="dropdown" attribute will automatically
+ * toggle the div with an id matching the links href attribute.
+ *
+ * This is currently used on the South Africa places page for toggling
+ * the people lists.
+ */
+$('[data-toggle="dropdown"]').on('click', function(e) {
+  var $this = $(this);
+  e.preventDefault();
+  hideShow($($this.attr('href')), $this);
+});
