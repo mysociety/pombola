@@ -73,6 +73,11 @@ class SAPlaceDetailView(PlaceDetailView):
     def get_context_data(self, **kwargs):
         context = super(SAPlaceDetailView, self).get_context_data(**kwargs)
         context['national_assembly_people'] = self.object.all_related_current_politicians().filter(position__organisation__slug='national-assembly')
+        context['ncop_people'] = self.object.all_related_current_politicians().filter(position__organisation__slug='ncop')
+        context['other_people'] = (models.Person.objects
+            .filter(position__place=self.object)
+            .exclude(id__in=context['national_assembly_people'])
+            .exclude(id__in=context['ncop_people']))
         return context
 
 
