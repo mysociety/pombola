@@ -2,6 +2,8 @@
 from django.test import TestCase
 
 from ..templatetags.breadcrumbs import breadcrumbs
+from ..templatetags.active_class import active_class
+
 
 class BreadcrumbTest(TestCase):
 
@@ -27,3 +29,19 @@ class BreadcrumbTest(TestCase):
             actual = breadcrumbs(url)
             self.assertEqual(actual, expected)
 
+
+class ActiveClassTest(TestCase):
+
+    def test_active(self):
+        """Check that active is returned when the url matches the input"""
+
+        tests = (
+                ('/', 'home', {}),
+                ('/place/foo/', 'place', {'slug': 'foo'}),
+        )
+
+        for current_url, route_name, kwargs in tests:
+            actual = active_class(current_url, route_name, **kwargs)
+            self.assertEqual(' active ', actual)
+
+        self.assertEqual(active_class('/foo', 'home'), '')
