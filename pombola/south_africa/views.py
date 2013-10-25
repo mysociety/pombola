@@ -72,7 +72,7 @@ class LatLonDetailView(PlaceDetailView):
 class SAPlaceDetailView(PlaceDetailView):
     def get_context_data(self, **kwargs):
         context = super(SAPlaceDetailView, self).get_context_data(**kwargs)
-        context['national_assembly_people'] = self.object.all_related_current_politicians.filter(position__organisation__slug='national-assembly')
+        context['national_assembly_people'] = self.object.all_related_current_politicians().filter(position__organisation__slug='national-assembly')
         return context
 
 

@@ -22,7 +22,7 @@ for index, pattern in enumerate(search_urlpatterns):
 
 urlpatterns = patterns('pombola.south_africa.views',
     url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/', LatLonDetailView.as_view(), name='latlon'),
-    url(r'^(?P<slug>[-\w]+)/$', SAPlaceDetailView.as_view(), name='place'),
+    url(r'^place/(?P<slug>[-\w]+)/$', SAPlaceDetailView.as_view(), name='place'),
 
     url(r'^place/(?P<slug>[-\w]+)/places/', SAPlaceDetailSub.as_view(), {'sub_page': 'places'}, name='place_places'),
 
