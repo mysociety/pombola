@@ -23,5 +23,5 @@ urlpatterns = patterns('pombola.south_africa.views',
     url(r'^info/newsletter', SANewsletterPage.as_view(), {'slug': 'newsletter'}, name='info_page_newsletter'),
 
     # Create a special Hansard index page that provides listing of the hansard sessions that contain speeches.
-    url(r'^hansard', SAHansardIndex.as_view(), name='za_hansard_index'),
+    url(r'^hansard/$', SAHansardIndex.as_view(), name='za_hansard_index'),
 )

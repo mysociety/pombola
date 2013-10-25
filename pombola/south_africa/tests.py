@@ -241,7 +241,7 @@ class SAHansardIndexViewTest(TestCase):
 
     def test_index_page(self):
         c = Client()
-        response = c.get('/hansard')
+        response = c.get('/hansard/')
         self.assertEqual(response.status_code, 200)
 
         # Check that we can see the titles of sections containing speeches only
