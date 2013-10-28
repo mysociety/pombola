@@ -127,7 +127,7 @@ class SAPersonDetail(PersonDetail):
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
     def get_sayit_speaker(self):
-        # see also templatetags/pombola_speech_tags.py
+        # see also SASpeakerRedirectView for mapping in opposite direction
 
         pombola_person = self.object
 
@@ -213,6 +213,8 @@ class SANewsletterPage(InfoPageView):
     template_name = 'south_africa/info_newsletter.html'
 
 class SASpeakerRedirectView(RedirectView):
+
+    # see also SAPersonDetail for mapping in opposite direction
     def get_redirect_url(self, **kwargs):
         try:
             id = int( kwargs['pk'] )
