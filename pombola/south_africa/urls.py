@@ -37,13 +37,10 @@ sayit_patterns = patterns('',
     url(r'^speech/(?P<pk>\d+)$', SpeechView.as_view(),  name='speech-view'),
 
     # special Hansard index page that provides listing of the hansard sessions that contain speeches.
-    url(r'^$', SAHansardIndex.as_view(), name='za_hansard_index'),
+    url(r'^$', SAHansardIndex.as_view(), name='section-list'),
 
     # Fake endpoint to redirect
     url(r'^speaker/(?P<pk>\d+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
-
-    # don't actually want to expose these
-    url(r'^sections$',           SectionList.as_view(), name='section-list'),
 )
 urlpatterns += patterns('',
     url(r'^hansard/', include(sayit_patterns, namespace='hansard', app_name='speeches')),
