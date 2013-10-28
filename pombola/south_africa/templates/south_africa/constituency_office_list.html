@@ -10,7 +10,7 @@
     {% for cp in child_places_regrouped %}
       <div class="content_box">
         <h3>{{ cp.grouper.name }} offices in {{ object.name }}</h3>
-            
+
         <ul class="unstyled-list">
           {% for child in cp.list %}
             {% include child_place_template|default:"core/place_places_child.html" with object=child %}
