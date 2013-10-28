@@ -1,8 +1,10 @@
 import sys
 import os
+from datetime import date, time
 
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
+from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django_webtest import WebTest
@@ -15,6 +17,7 @@ import json
 
 from popit.models import Person as PopitPerson, ApiInstance
 from speeches.models import Speaker
+from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.south_africa.views import SAPersonDetail
 from instances.models import Instance
@@ -55,7 +58,7 @@ class ConstituencyOfficesTestCase(WebTest):
             name='Province',
             slug='province',
             )
-        
+
         province = models.Place.objects.create(
             name='Test Province',
             slug='test_province',
@@ -83,13 +86,13 @@ class ConstituencyOfficesTestCase(WebTest):
             (party2, p2_office1),
             (party2, p2_office2),
             )
-        
+
         for party, office in office_relationships:
             models.OrganisationRelationship.objects.create(organisation_a=party, organisation_b=office, kind=orgrelkind_has_office)
 
         place_kind_constituency_office = models.PlaceKind.objects.create(name='Constituency Office', slug='constituency-office')
         place_kind_constituency_area = models.PlaceKind.objects.create(name='Constituency Area', slug='constituency-area')
-            
+
 
         # Offices inside the province
         models.Place.objects.create(
@@ -123,7 +126,7 @@ class ConstituencyOfficesTestCase(WebTest):
             organisation=p2_office2,
             )
 
-            
+
     def test_subplaces_page(self):
         response = self.app.get('/place/test_province/places/')
 
@@ -154,10 +157,10 @@ class SAPersonDetailViewTest(TestCase):
     def setUp(self):
         fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
         popolo_path = os.path.join(fixtures, 'test-popolo.json')
-        call_command('core_import_popolo', 
+        call_command('core_import_popolo',
             popolo_path,
             commit=True)
-        
+
         # TODO rewrite this kludge, pending https://github.com/mysociety/popit-django/issues/19
         popolo_io = open(popolo_path, 'r')
         popolo_json = json.load(popolo_io)
@@ -174,7 +177,7 @@ class SAPersonDetailViewTest(TestCase):
 
             person = PopitPerson.update_from_api_results(instance=api_instance, doc=doc)
 
-            instance, _ = Instance.objects.get_or_create( 
+            instance, _ = Instance.objects.get_or_create(
                 label='default',
                 defaults = {
                     'title': 'An instance'
@@ -190,3 +193,63 @@ class SAPersonDetailViewTest(TestCase):
         detail = SAPersonDetail( object=person )
         speaker = detail.get_sayit_speaker()
         self.assertEqual( speaker.name, 'Moomin Finn' )
+
+class SAHansardIndexViewTest(TestCase):
+
+    def setUp(self):
+        create_sections([
+            {
+                'title': "Hansard",
+                'subsections': [
+                    {   'title': "2013",
+                        'subsections': [
+                            {   'title': "02",
+                                'subsections': [
+                                    {   'title': "16",
+                                        'subsections': [
+                                            {   'title': "Proceedings of the National Assembly (2012/2/16)",
+                                                'subsections': [
+                                                    {   'title': "Proceedings of Foo",
+                                                        'speeches': [ 4, date(2013, 2, 16), time(9, 0) ],
+                                                    },
+                                                    {   'title': "Bill on Silly Walks",
+                                                        'speeches': [ 2, date(2013, 2, 16), time(12, 0) ],
+                                                    },
+                                                ],
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        'title': "18",
+                                        'subsections': [
+                                            {   'title': "Proceedings of the National Assembly (2012/2/18)",
+                                                'subsections': [
+                                                    {   'title': "Budget Report",
+                                                        'speeches': [ 3, date(2013, 2, 18), time(9, 0) ],
+                                                    },
+                                                    {   'title': "Bill on Comedy Mustaches",
+                                                        'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
+                                                    },
+                                                ],
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                            {
+                                'title': "Empty section",
+                            }
+                        ],
+                    },
+                ],
+            },
+        ])
+
+    def test_index_page(self):
+        c = Client()
+        response = c.get('/hansard/')
+        self.assertEqual(response.status_code, 200)
+
+        # Check that we can see the titles of sections containing speeches only
+        self.assertContains(response, "Proceedings of the National Assembly (2012/2/16)")
+        self.assertNotContains(response, "Empty section")

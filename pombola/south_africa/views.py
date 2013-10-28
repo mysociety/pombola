@@ -9,7 +9,8 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
+from django.shortcuts import get_object_or_404
 
 import mapit
 from haystack.views import SearchView
@@ -89,7 +90,7 @@ class SAPlaceDetailSub(PlaceDetailSub):
                 .filter(kind__slug__in=CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS)
                 .filter(location__coveredby=self.object.mapit_area.polygons.collect())
                 )
-            
+
         return context
 
 
@@ -230,3 +231,48 @@ class SASpeakerRedirectView(RedirectView):
             return reverse('person', args=(person.slug,))
         except Exception as e:
             raise Http404
+
+class SAHansardIndex(TemplateView):
+    template_name = 'south_africa/hansard_index.html'
+    sections_to_show = 25
+
+    def get_context_data(self, **kwargs):
+        context = super(SAHansardIndex, self).get_context_data(**kwargs)
+
+        # Get the "Hansard" top level section, or 404
+        hansard_section = get_object_or_404(Section, title="Hansard", parent=None)
+
+        # As we know that the hansard section structure is
+        # "Hansard" -> yyyy -> mm -> dd -> section -> subsection -> [speeches]
+        # we can create a very specific query to drill up to the top level one
+        # that we want.
+        entries = Speech \
+            .objects \
+            .filter(section__parent__parent__parent__parent__parent=hansard_section) \
+            .values('section_id', 'start_date') \
+            .annotate(speech_count=Count('id')) \
+            .order_by('-start_date')
+
+        # loop through and add all the section objects. This is not efficient,
+        # but makes the templates easier as we can (for example) use get_absolute_url.
+        # Also lets us retrieve the last N parent sections which is what we need for the
+        # display.
+        parent_sections = set()
+        display_entries = []
+        for entry in entries:
+            section = Section.objects.get(pk=entry['section_id'])
+            parent_sections.add(section.parent.id)
+            if len(parent_sections) > self.sections_to_show:
+                break
+            display_entries.append(entry)
+            display_entries[-1]['section'] = section
+
+        # PAGINATION NOTE - it would be possible to add pagination to this by simply
+        # removing the `break` after self.sections_to_show has been reached and then
+        # finding a more efficient way to inflate the sections (perhaps using an
+        # embedded lambda, or a custom templatetag). However paginating this page may
+        # not be as useful as creating an easy to use drill down based on date, or
+        # indeed using search.
+
+        context['entries'] = display_entries
+        return context

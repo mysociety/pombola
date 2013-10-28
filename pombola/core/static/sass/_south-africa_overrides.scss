@@ -267,6 +267,16 @@ small {
     }
 }
 
+#page .large-container section ul li  {
+    border-bottom-color: #d2d2ce;
+    margin-bottom: 1em;
+    p {
+            font-style: normal;
+            font-size: 1em;
+    }
+}
+
+
 #page-wrapper {
     position: relative;
 }
@@ -1400,18 +1410,6 @@ ul.pager {
     }
 }
 
-/* Newsletter page */
-.page-wrapper {
-    .email-signup {
-        input[type="text"] {
-            border: 1px solid $colour_middling_grey;
-            border-right: none;
-            padding: 0.74em;
-        }
-    }
-}
-
-
 /* Person page */
 #page {
     .profile-info {
@@ -1464,6 +1462,16 @@ ul.pager {
             margin: 0 0 1em;
         }
     }
+
+    .person-appearances {
+        .speech-title {
+            font-weight: bold;
+            font-size: 1.142857143em;
+        }
+        li {
+            margin-bottom: 1em;
+        }
+    }
 }
 
 .tab-links {
@@ -1504,6 +1512,42 @@ ul.pager {
 
 }
 
+/* Hansard index page */
+.hansard-section-title {
+    cursor: pointer;
+    border-top: 1px solid #d2d2ce;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    display: block;
+    text-decoration: none;
+    color: $colour_black;
+    h2 {
+        font-size: 1em;
+    }
+    p {
+        font-size: 0.875em;
+        margin-bottom: 0;
+    }
+    &:focus,
+    &:hover {
+        text-decoration: none;
+        h2 {
+            color: $colour_primary;
+            text-decoration: underline;
+        }
+        p {
+            color: $colour_black;
+        }
+    }
+}
+
+.hansard-section {
+    padding-bottom: 1em;
+    p {
+        font-size: 0.875em;
+        margin-bottom: 0.5em;
+    }
+}
 
 /* Generic layouts */
 .layout {
