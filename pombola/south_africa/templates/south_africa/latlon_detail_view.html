@@ -1,4 +1,7 @@
-{% extends 'core/place_detail.html' %}
+{% extends 'base.html' %}
+{% load url from future %}
+
+{% block title %}{{ object.name }}{% endblock %}
 
 {% block object_title %}
   <h1>Your location is in {{ object.name }}</h1>
@@ -9,9 +12,13 @@
 
 {% block object_menu %}{% endblock %}
 
-{% block subcontent %}
+{% block content %}
 
-  <h2>Constituency Offices within {{ office_search_radius }}kms</h2>
+  <h1>Find your representatives</h1>
+
+  <form action="{% url "core_geocoder_search" %}">
+    {% include "south_africa/_search_box.html" %}
+  </form>
 
   <ul class="listing">
     {% for object in nearest_offices %}
