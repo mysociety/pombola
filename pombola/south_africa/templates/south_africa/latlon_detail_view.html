@@ -3,15 +3,6 @@
 
 {% block title %}{{ object.name }}{% endblock %}
 
-{% block object_title %}
-  <h1>Your location is in {{ object.name }}</h1>
-{% endblock %}
-
-{% block object_tagline %}
-{% endblock %}
-
-{% block object_menu %}{% endblock %}
-
 {% block content %}
 
   <h1>Find your representatives</h1>
@@ -19,6 +10,8 @@
   <form action="{% url "core_geocoder_search" %}">
     {% include "south_africa/_search_box.html" %}
   </form>
+
+  <div id="map_canvas"></div>
 
   <ul class="listing">
     {% for object in nearest_offices %}
@@ -28,17 +21,6 @@
         <p>No local offices found.</p>
       </section>
     {% endfor %}
-  </ul>  
-  
-  {{ block.super }}
-{% endblock %}
+  </ul>
 
-{% block profile_info %}
-{% endblock %}
-
-{% block "add_place_kml_to_map" %}
-  {# blank to prevent kml being loaded #}
-{% endblock %}
-
-{% block disqus_comments %}
 {% endblock %}
