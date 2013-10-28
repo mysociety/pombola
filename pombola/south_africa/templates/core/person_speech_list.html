@@ -1,9 +1,10 @@
+{% load url from future %}
 <ul class="unstyled">
     {% for speech in speechlist %}
     <li>
         <p>
             <span class="speech-title">
-                <a href="{{ speech.get_absolute_url }}">
+                <a href="{% url section_url speech.section_id %}#s{{ speech.id }}">
                     {{ speech.section.title }}
                 </a>
             </span>
