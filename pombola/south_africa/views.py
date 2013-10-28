@@ -9,6 +9,7 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
+from django.views.generic import RedirectView
 
 import mapit
 from haystack.views import SearchView
@@ -211,10 +212,11 @@ class SASearchView(SearchView):
 class SANewsletterPage(InfoPageView):
     template_name = 'south_africa/info_newsletter.html'
 
-class SASpeakerRedirectView(SpeakerView):
-    def render_to_response(self, *args, **kwargs):
+class SASpeakerRedirectView(RedirectView):
+    def get_redirect_url(self, **kwargs):
         try:
-            speaker = self.get_object(Speaker.objects)
+            id = int( kwargs['pk'] )
+            speaker = Speaker.objects.get( id=id )
             popit_id = speaker.person.popit_id
             [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
             i = models.Identifier.objects.get(
@@ -223,7 +225,6 @@ class SASpeakerRedirectView(SpeakerView):
                 identifier = identifier,
             )
             person = models.Person.objects.get(id=i.object_id)
-            return redirect(reverse('person', args=(person.slug,)))
+            return reverse('person', args=(person.slug,))
         except Exception as e:
-            raise e
             raise Http404
