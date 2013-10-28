@@ -16,6 +16,7 @@ import mapit
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery
+from haystack.forms import SearchForm
 
 from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker
@@ -71,6 +72,8 @@ class LatLonDetailView(PlaceDetailView):
             .filter(location__distance_lte=(self.location, D(km=self.constituency_office_search_radius)))
             .order_by('distance')
             )
+
+        context['form'] = SearchForm()
 
         return context
 
