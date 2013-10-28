@@ -1411,6 +1411,48 @@ ul.pager {
     }
 }
 
+/* Place page */
+.list-of-constituency-offices {
+    ul {
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+    > li {
+        border-bottom: 1px solid #d2d2ce;
+        padding-top: 1em
+    }
+    a {
+        color: $colour-black;
+        text-decoration: none;
+        &:hover,
+        &:focus {
+            color: $colour-primary;
+            text-decoration: underline;
+        }
+    }
+    .name {
+        font-weight: bold;
+    }
+    .constituency-office-address {
+        font-size: 0.875em;
+        color: $colour_blackish;
+    }
+
+    .tiny-list-of-people {
+        .person-list-item {
+            border: none;
+            padding: 0;
+            margin-bottom: .5em;
+            img {
+                height: 29px;
+                width: 29px;
+            }
+            .name {
+                font-size: 0.75em;
+            }
+        }
+    }
+}
 
 /* Person page */
 #page {

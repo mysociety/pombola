@@ -4478,6 +4478,43 @@ ul.pager li.next {
   padding: 0.74em;
 }
 
+/* Place page */
+.list-of-constituency-offices ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.list-of-constituency-offices > li {
+  border-bottom: 1px solid #d2d2ce;
+  padding-top: 1em;
+}
+.list-of-constituency-offices a {
+  color: #222222;
+  text-decoration: none;
+}
+.list-of-constituency-offices a:hover, .list-of-constituency-offices a:focus {
+  color: #e23d28;
+  text-decoration: underline;
+}
+.list-of-constituency-offices .name {
+  font-weight: bold;
+}
+.list-of-constituency-offices .constituency-office-address {
+  font-size: 0.875em;
+  color: #555555;
+}
+.list-of-constituency-offices .tiny-list-of-people .person-list-item {
+  border: none;
+  padding: 0;
+  margin-bottom: .5em;
+}
+.list-of-constituency-offices .tiny-list-of-people .person-list-item img {
+  height: 29px;
+  width: 29px;
+}
+.list-of-constituency-offices .tiny-list-of-people .person-list-item .name {
+  font-size: 0.75em;
+}
+
 /* Person page */
 #page .profile-info .constituency-party {
   margin: 0;

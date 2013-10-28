@@ -1,29 +1,29 @@
 <li id="constituency-office-{{ object.id }}">
-  <h3>
+  <span class="name">
     <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a>
     {% if object.distance != None %}
       ({{ object.distance.km|floatformat:1 }}km)
     {% endif %}
-  </h3>
+  </span>
 
   <ul>
     {# I imagine we'll only get the one postal address per office... #}
     {% for address in object.postal_addresses %}
-      <li>{{ address.value }}</li>
+      <li class="constituency-office-address">{{ address.value }}</li>
     {% endfor %}
   </ul>
 
-  <ul class="unstyled-list">
+  <ul class="unstyled-list tiny-list-of-people">
     {% for position in object.related_positions %}
       {% with object=position.person %}
         {% include 'core/generic_list_item.html' %}
       {% endwith %}
     {% endfor %}
   </ul>
-  
+
   <script>
     add_marker_to_map({
-      lat: {{ object.location.y }}, 
+      lat: {{ object.location.y }},
       lng: {{ object.location.x }},
       name: "{{object.organisation.name }}",
       url: "#constituency-office-{{ object.id }}"

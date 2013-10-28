@@ -11,7 +11,7 @@
       <div class="content_box">
         <h3>{{ cp.grouper.name }} offices in {{ object.name }}</h3>
 
-        <ul class="unstyled-list">
+        <ul class="unstyled-list list-of-constituency-offices">
           {% for child in cp.list %}
             {% include child_place_template|default:"core/place_places_child.html" with object=child %}
           {% endfor %}
