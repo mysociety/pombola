@@ -26,13 +26,7 @@
           instead.
         </p>
 
-        <div class="search-box">
-          {% block search_form %}
-            {{ form.q }}
-          {% endblock %}
-            <input type="submit" value="Search" class="button">
-        </div>
-
+        {% include "south_africa/_search_box.html" %}
 
         {% if query %}
             {% if person_results %}
