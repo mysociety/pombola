@@ -22,7 +22,8 @@ from speeches.models import Section, Speech, Speaker
 from speeches.views import SpeakerView
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
+from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
+    OrganisationDetailView, PersonDetail, PlaceDetailView
 from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
@@ -72,6 +73,30 @@ class LatLonDetailView(PlaceDetailView):
             )
 
         return context
+
+
+class SAPlaceDetailView(PlaceDetailView):
+
+    def get_context_data(self, **kwargs):
+        """
+        Get back the people for this place in 3 separate lists so they can
+        be displayed separatly on the place detail page.
+        """
+        context = super(SAPlaceDetailView, self).get_context_data(**kwargs)
+        context['national_assembly_people_count'] = self.object.all_related_politicians().filter(position__organisation__slug='national-assembly').count()
+        context['ncop_people_count'] = self.object.all_related_politicians().filter(position__organisation__slug='ncop').count()
+        context['national_assembly_people'] = self.object.all_related_current_politicians().filter(position__organisation__slug='national-assembly')
+        context['former_national_assembly_people'] = self.object.all_related_former_politicians().filter(position__organisation__slug='national-assembly')
+        context['ncop_people'] = self.object.all_related_current_politicians().filter(position__organisation__slug='ncop')
+        context['former_ncop_people'] = self.object.all_related_former_politicians().filter(position__organisation__slug='ncop')
+        context['other_people'] = (models.Person.objects
+            .filter(position__place=self.object)
+            .exclude(id__in=context['national_assembly_people'])
+            .exclude(id__in=context['former_national_assembly_people'])
+            .exclude(id__in=context['ncop_people'])
+            .exclude(id__in=context['former_ncop_people']))
+        return context
+
 
 class SAPlaceDetailSub(PlaceDetailSub):
     child_place_template = "south_africa/constituency_office_list_item.html"

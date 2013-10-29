@@ -1,0 +1,94 @@
+{% extends 'core/place_base.html' %}
+{% load url from future %}
+
+{% block extra_js_to_load %}
+    pombola_settings.extra_js.push( 'js/hide-reveal.js' );
+{% endblock %}
+
+{% block subcontent %}
+    {% include 'south_africa/_place_tabs.html' %}
+
+    {% if object.summary %}
+        <h2>Summary</h2>
+
+        <div class="markdown">
+            {{ object.summary }}
+        </div>
+    {% endif %}
+
+    {% if object.has_scorecards %}
+        <h2>Scorecards</h2>
+
+        <p>
+            The past performance of {{ object.name }} can be seen in its
+            <a href="{% url "place_scorecard" slug=object.slug %}">scorecard</a>.
+        </p>
+    {% endif %}
+
+    {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
+    {% with people_related=object.related_people %}
+        {% if people_related|length %}
+            <p>
+            There
+            {{ people_related|length|pluralize:"is,are"}}
+
+                {{ people_related|length }}
+                {{ people_related|length|pluralize:"person,people"}}
+
+            related to {{ object.name }}.
+            </p>
+        {% endif %}
+    {% endwith %}
+
+    <p><a class="js-hide-reveal-link" href="#national-assembly-people">Members of the National Assembly ({{ national_assembly_people_count }})</a></p>
+
+    <div id="national-assembly-people" class="person-panel js-hide-reveal">
+        {% include "core/_people_listing.html" with people=national_assembly_people %}
+        {% if former_national_assembly_people %}
+        <p>Former members</p>
+        {% include "core/_people_listing.html" with people=former_national_assembly_people %}
+        {% endif %}
+    </div>
+
+    <p><a class="js-hide-reveal-link" href="#ncop-people">Members of the National Council of Provinces ({{ ncop_people_count }})</a></p>
+
+    <div id="ncop-people" class="person-panel js-hide-reveal">
+        {% include "core/_people_listing.html" with people=ncop_people %}
+        {% if former_ncop_people %}
+        <p>Former members</p>
+        {% include "core/_people_listing.html" with people=former_ncop_people %}
+        {% endif %}
+    </div>
+
+    {% if other_people %}
+    <p><a class="js-hide-reveal-link" href="#other-people">Other people ({{ other_people.count }})</a></p>
+
+    <div id="other-people" class="person-panel js-hide-reveal">
+        {% include "core/_people_listing.html" with people=other_people %}
+    </div>
+    {% endif %}
+
+    {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
+        <h2>Data</h2>
+        <p>
+            There is some
+            <a href="{% url "place_data" slug=object.slug %}">data</a>
+            on {{ object.name }}.
+        </p>
+    {% endif %}
+
+    {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
+        {% with project_count=object.project_set.count %}
+            <h2>CDF Projects</h2>
+
+            <p>
+            We have information on
+            <a href="{% url "place_projects" slug=object.slug %}">
+                {{ project_count}} CDF Projects
+            </a>
+            in {{ object.name }}.
+            </p>
+        {% endwith %}
+    {% endif %}
+
+{% endblock %}
