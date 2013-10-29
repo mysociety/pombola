@@ -2,7 +2,7 @@
   <span class="name">
     <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a>
     {% if object.distance != None %}
-      ({{ object.distance.km|floatformat:1 }}km)
+      <span class="distance">{{ object.distance.km|floatformat:1 }}km</span>
     {% endif %}
   </span>
 
