@@ -75,6 +75,11 @@ class LatLonDetailView(PlaceDetailView):
 
         context['form'] = SearchForm()
 
+        context['politicians'] = (self.object
+            .all_related_current_politicians()
+            .filter(position__organisation__slug='national-assembly')
+        )
+
         return context
 
 

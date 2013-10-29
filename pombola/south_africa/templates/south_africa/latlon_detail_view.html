@@ -25,4 +25,16 @@
     {% endfor %}
   </ul>
 
+  <h2>National politicians</h2>
+
+  <ul class="unstyled-list">
+      {% for politician in politicians %}
+        {% include "core/generic_list_item.html" with object=politician %}
+      {% empty %}
+        <li>
+          <p>No politicians found</p>
+        </li>
+      {% endfor %}
+  </ul>
+
 {% endblock %}
