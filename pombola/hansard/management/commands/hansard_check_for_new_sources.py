@@ -11,6 +11,7 @@ import re
 import datetime
 import sys
 import parsedatetime as pdt
+from warnings import warn
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 
@@ -52,8 +53,14 @@ class Command(NoArgsCommand):
 
             links = [ span.a for span in spans ]
 
-            for link in links:
+            # Check that we found some links. This is to detect when the page changes or our
+            # scraper breaks (see issue #905 for example). Checking that the most recent
+            # source is not more that X weeks old might also be a good idea, but could lead
+            # to lots of false positives as there is often a long hiatus.
+            if not len(links):
+                warn("Could not find any Hansard sources on '%s'" % url)
 
+            for link in links:
 
                 # print '==============='
                 # print link
