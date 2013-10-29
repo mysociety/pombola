@@ -15,13 +15,15 @@
 
   <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
-  <ul class="listing">
+  <h2>Constituency offices</h2>
+
+  <ul class="unstyled-list">
     {% for object in nearest_offices %}
-      {% include 'south_africa/constituency_office_list_item.html' %}
+      {% include 'south_africa/constituency_office_list_item.html' with skip_positions=1 %}
     {% empty %}
-      <section>
+      <li>
         <p>No local offices found.</p>
-      </section>
+      </li>
     {% endfor %}
   </ul>
 
