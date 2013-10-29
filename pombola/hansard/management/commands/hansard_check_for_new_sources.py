@@ -70,8 +70,8 @@ class Command(NoArgsCommand):
                     result = cal.parseDateText(name)
                     source_date = datetime.date(*result[:3])
                     # print "source_date: " + str(source_date)
-                    
-                    
+
+
                     # I don't trust that we can accurately create the download link url with the
                     # details that we have. Instead fetche the page and extract the url.
                     download_response, download_content = h.request(href)
@@ -81,7 +81,7 @@ class Command(NoArgsCommand):
                     )
                     download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
                     # print download_url
-                    
+
                     # create the source entry
                     Source.objects.create(
                         name = name,
