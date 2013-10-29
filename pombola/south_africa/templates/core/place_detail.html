@@ -1,6 +1,10 @@
 {% extends 'core/place_base.html' %}
 {% load url from future %}
 
+{% block extra_js_to_load %}
+    pombola_settings.extra_js.push( 'js/hide-reveal.js' );
+{% endblock %}
+
 {% block subcontent %}
     {% include 'south_africa/_place_tabs.html' %}
 
@@ -36,21 +40,21 @@
         {% endif %}
     {% endwith %}
 
-    <p><a href="#national-assembly-people" data-toggle="dropdown">Members of the National Assembly ({{ national_assembly_people.count }})</a></p>
+    <p><a class="js-hide-reveal-link" href="#national-assembly-people">Members of the National Assembly ({{ national_assembly_people.count }})</a></p>
 
-    <div id="national-assembly-people" class="person-panel" style="display: none">
+    <div id="national-assembly-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=national_assembly_people %}
     </div>
 
-    <p><a href="#ncop-people" data-toggle="dropdown">Members of the National Council of Provinces ({{ ncop_people.count }})</a></p>
+    <p><a class="js-hide-reveal-link" href="#ncop-people">Members of the National Council of Provinces ({{ ncop_people.count }})</a></p>
 
-    <div id="ncop-people" class="person-panel" style="display: none">
+    <div id="ncop-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=ncop_people %}
     </div>
 
-    <p><a href="#other-people" data-toggle="dropdown">Other people ({{ other_people.count }})</a></p>
+    <p><a class="js-hide-reveal-link" href="#other-people">Other people ({{ other_people.count }})</a></p>
 
-    <div id="other-people" class="person-panel" style="display: none">
+    <div id="other-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=other_people %}
     </div>
 
