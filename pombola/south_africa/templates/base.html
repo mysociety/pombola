@@ -1,4 +1,5 @@
 {% extends "default_base.html" %}
+{% load url from future %}
 
 
 {% block title_suffix %} :: Pombola South Africa {% endblock %}
@@ -17,7 +18,7 @@
         {% block after_content %}{% endblock %}
 
         <br clear="both">
-
+        <a class="feedback-button button feedback_link" href="{% url "feedback_add" %}?url={{ request.build_absolute_uri }}">Correct this page</a>
     </div>
 
 </div>

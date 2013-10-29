@@ -20,7 +20,6 @@ from django.contrib.contenttypes.models import ContentType
 
 from pombola.core import models
 from pombola.info.models import InfoPage
-from pombola.helpers import geocode
 
 
 def home(request):
@@ -47,12 +46,19 @@ def home(request):
         except InfoPage.DoesNotExist:
             pass
 
+    # Only SA uses featured news articles currently, as above, if this changes
+    # then this should become a config flag or similar.
+    featured_articles = None
+    if settings.COUNTRY_APP == 'south_africa':
+        featured_articles = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG).order_by("-publication_date")[:8]
+
     return render_to_response(
         'home.html',
         {
           'featured_person':  featured_person,
           'featured_persons': featured_persons,
           'editable_content': editable_content,
+          'featured_articles': featured_articles,
         },
         context_instance=RequestContext(request)
     )
@@ -243,20 +249,14 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
     )
 
 
-def organisation(request, slug):
-    org = get_object_or_404(
-        models.Organisation,
-        slug=slug
-    )
+class OrganisationDetailView(DetailView):
+    model = models.Organisation
 
-    return render_to_response(
-        'core/organisation_detail.html',
-        {
-            'object': org,
-            'positions': org.position_set.all().order_by('person__legal_name'),
-        },
-        context_instance=RequestContext(request)
-    )
+    def get_context_data(self, **kwargs):
+        context = super(OrganisationDetailView, self).get_context_data(**kwargs)
+        context['positions'] = self.object.position_set.all().order_by('person__legal_name')
+        return context
+
 
 class OrganisationDetailSub(DetailView):
     model = models.Organisation
@@ -270,10 +270,12 @@ class OrganisationDetailSub(DetailView):
         # of an organisation to be controlled with the 'order' query
         # parameter:
         if self.kwargs['sub_page'] == 'people':
-            all_positions = self.object.position_set.all()
+            all_positions = context['all_positions'] = self.object.position_set.all()
 
+            if self.request.GET.get('all'):
+                positions = all_positions
             # Limit to those currently active, or inactive
-            if self.request.GET.get('historic'):
+            elif self.request.GET.get('historic'):
                 context['historic'] = True
                 positions = all_positions.currently_inactive()
             else:

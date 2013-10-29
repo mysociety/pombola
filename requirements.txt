@@ -31,7 +31,7 @@ requests>=1.0
 pyelasticsearch
 django-haystack>=2.1.0
 
-# Testing helpers 
+# Testing helpers
 httplib2
 WebTest>=1.3.2
 django-webtest
@@ -48,8 +48,18 @@ python-memcached
 # django-mapit
 git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
 
-# SayIt
-git+git://github.com/mysociety/sayit.git@master#egg=django-sayit
+# SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
+#
+# "-e" note: This is needed so that the latest code is used. In time we can
+# specify versions or release to pypi. These repos will need to be manually
+# removed from the virtualenv when -e is no longer used as otherwise they'll
+# remain and take precedence over other install methods. Adding a 'rm' line to
+# the prepare_environment script in the same commit as changing the line here is
+# one possible approach.
+-e git+git://github.com/mysociety/sayit.git@master#egg=django-sayit  # NOTE - when changing remember to remove the repo from virtualenv!
+-e git+git://github.com/mysociety/za-hansard.git@master#egg=za_hansard  # NOTE - when changing remember to remove the repo from virtualenv!
+-e git+git://github.com/mysociety/popit-resolver@master#egg=popit-resolver  # NOTE - when changing remember to remove the repo from virtualenv!
+-e git+git://github.com/mysociety/popit-django@master#egg=popit-django  # NOTE - when changing remember to remove the repo from virtualenv!
 
 python-dateutil>=1.5,!=2.0
 
@@ -60,5 +70,8 @@ django-model-utils
 
 parsedatetime
 
-# TODO - change to pypi package 'pygeocoder' link once https://bitbucket.org/xster/pygeocoder/pull-request/5 merged and published.
+# TODO - change to pypi package 'pygeocoder' link once
+# https://bitbucket.org/xster/pygeocoder/pull-request/5 published. The version on
+# pypi (https://pypi.python.org/pypi/pygeocoder) should be greater than 1.2.1.1
 -e hg+https://evdb@bitbucket.org/evdb/pygeocoder@add-components#egg=pygeocoder
+# pygeocoder

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block extra_js_to_load %}
+    pombola_settings.extra_js.push( 'js/hansard-hide-reveal.js' );
+{% endblock %}
+
+{% block title %}Hansard{% endblock %}
+
+
+{% block content %}
+
+
+{% for entry in entries %}
+    {% ifchanged entry.section.parent.title %}
+        {% if not forloop.first %}
+            </div>
+        {% endif %}
+    {% endifchanged %}
+
+    {% ifchanged entry.section.parent.title %}
+    <a class="js-hansard-section-title hansard-section-title" href="#">
+        <h2>{{ entry.section.parent.title }}</h2>
+        <p>{{ entry.start_date }}</p>
+    </a>
+    {% endifchanged %}
+
+    {% ifchanged entry.start_date %}
+        <div class="js-hansard-section hansard-section">
+    {% endifchanged %}
+    <p>
+        <a href="{{ entry.section.get_absolute_url }}">{{ entry.section.title }}</a>
+        ({{ entry.speech_count }})
+    </p>
+    {% if forloop.last %}
+        </div>
+    {% endif %}
+
+{% endfor %}
+{% endblock %}

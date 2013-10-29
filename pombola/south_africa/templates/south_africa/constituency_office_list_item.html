@@ -1,6 +1,6 @@
-<section id="constituency-office-{{ object.id }}">
+<li id="constituency-office-{{ object.id }}">
   <h3>
-    <a href="{{ object.get_absolute_url }}">{{ object.organisation.name }}</a>
+    <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a>
     {% if object.distance != None %}
       ({{ object.distance.km|floatformat:1 }}km)
     {% endif %}
@@ -13,7 +13,7 @@
     {% endfor %}
   </ul>
 
-  <ul>
+  <ul class="unstyled-list">
     {% for position in object.related_positions %}
       {% with object=position.person %}
         {% include 'core/generic_list_item.html' %}
@@ -29,4 +29,4 @@
       url: "#constituency-office-{{ object.id }}"
     });
   </script>
-</section>
+</li>

@@ -89,10 +89,29 @@ MAP_BOUNDING_BOX_SOUTH: -4.73
 MAP_BOUNDING_BOX_WEST:  33.83
 
 
-# some apps are optional
+# ZA Hansard Parsing config (can be left blank on for other instances)
+# Username and password for pmg_scraper command
+PMG_COMMITTEE_USER: ''
+PMG_COMMITTEE_PASS: ''
+
+# Popit API URL
+# For ZA development you can use 'http://sa-test.matthew.popit.dev.mysociety.org/api/v0.1/'
+POPIT_API_URL: 'http://popit.example.com/api/v0.1/'
+
+# List any indexes that you want to exclude from this install. This
+# allows you to override an index in a country app. See the example
+# in `pombola/south_africa/search_indexes.py`
+# HAYSTACK_EXCLUDED_INDEXES:
+#   - pombola.search.search_indexes.PlaceIndex
+HAYSTACK_EXCLUDED_INDEXES: []
+
+# some apps are optional (see trailing comment for the country they most likely apply to)
 OPTIONAL_APPS:
-  - pombola.hansard
-  - pombola.projects
-  - pombola.place_data
-  # - pombola.votematch
+  # - hansard    # KE
+  # - projects   # KE
+  # - place_data # KE
+  # - speeches   # ZA
+  # - za_hansard # ZA
+  # - votematch
+  
 

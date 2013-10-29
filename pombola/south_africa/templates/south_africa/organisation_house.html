@@ -1,0 +1,46 @@
+{% extends "core/organisation_base.html" %}
+{% load url from future %}
+
+{% comment %}
+This template is specifically for organisations that have a kind = "house", i.e.
+the National Assembly or NCOP. All other organisation kinds are rendered using
+the organisation detail page.
+{% endcomment %}
+
+
+{% block content %}
+  <h1>{{ object.title }} {{ object.name }}</h1>
+  {% if object.kind.slug != 'unknown' %}
+    <p class="kind-of-subtitle">{{ object.kind.name }}</p>
+  {% endif %}
+
+  <div class="house-intro">
+    {{ object.summary }}
+  </div>
+
+  <h2>People</h2>
+
+  <div>
+    <ul class="house-page-list">
+      <li><a href="{% url 'organisation_people' slug=object.slug %}">National executive ({{ organisation.position_set.count }})</a></li>
+      <li><a href="{% url 'organisation_people' slug=object.slug %}">Office bearers ({{ organisation.position_set.count }})</a></li>
+      <li><a href="{% url 'organisation_people' slug=object.slug %}?all=1">All members ({{ organisation.position_set.count }})</a></li>
+    </ul>
+  </div>
+
+  <h2>Parties</h2>
+
+  <div>
+    <ul class="house-page-list">
+      {% for party in parties %}
+      <li>
+      <a href="{% url "organisation" slug=party.slug %}">
+        {{ party.name }}
+        <span class="percent">{{ party.percentage }}%</span>
+      </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock content %}

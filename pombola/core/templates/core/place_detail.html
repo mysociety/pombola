@@ -28,14 +28,7 @@
 
   <h2>Current Politicians Representing {{ object.name }}</h2>
 
-  {% with politicians=object.all_related_current_politicians %}
-    <ul class="listing">
-    {% for object in politicians %}
-        {% include 'core/generic_list_item.html' %}
-    {% endfor %}
-    </ul>  
-  {% endwith %}
-
+  {% include "core/_people_listing.html" with people=object.all_related_current_politicians %}
 
   {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
   {% with people_related=object.related_people %}

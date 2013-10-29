@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 {% load url from future %}
+{% load thumbnail %}
 
 {% block title %}Home{% endblock %}
 
+{% block css_headers %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.css" />
+{% endblock %}
+
 {% block extra_js_to_load %}
     pombola_settings.extra_js.push( 'js/feeds.js' );
+    pombola_settings.extra_js.push( 'js/libs/responsive-carousel.js' );
 {% endblock %}
+
+{% block body_attributes %} class="home" {% endblock %}
 
 {% block breadcrumbs %}
     {# Hide bread crumbs on the home page. #}
@@ -13,40 +22,54 @@
 
 {% block intro_content %}
     <div id="front_intro">
-        <div class="page-wrapper wrapper">
+        <div class="page-wrapper wrapper ">
+            <div class="home-right">
+                                <h2 id="home-intro">
+                                  People’s Assembly is intro text porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.
+                                </h2>
+
+
+                            </div>
                 <div class="home-left">
-                    <h2>Focus On</h2>
-                    <div id="home-featured-person">
-                        {% if featured_person != None %}
-                            {% include 'core/person_feature.html' %}
-                        {% else %}
-                            <div class="featured-person featured-person-placeholder"><img style="max-width: 100%;
-            padding: 25px 20px;" src="/static/images/carousel-placeholder.png" alt=""></div>
-                        {% endif %}
+                    <h2>This week's focus</h2>
+                    <div id="home-carousel" class="carousel">
+
+                        {% for person in featured_persons %}
+                          {% include "core/person_feature.html" %}
+                        {% endfor %}
+
+                        {% comment %}
+                        <!-- Featured quote -->
+                        <div class="featured-quote carousel-item">
+                            <h3 class="subtitle">From Parliament</h3>
+                           <a href="#">
+
+                             <q>&hellip;three-quarters of Chinas provinces have been hit by flooding with record-high water levels, and that flooding has destroyed houses, killed and displaced hundreds of people and caused billions of rands worth of damage</q>
+                             <cite>
+                               &ndash;
+                               <span class="name">Ms H N Makhuba</span>
+
+                               <span class="date">10 Aug 2010</span>
+                           </cite>
+                           </a>
+                       </div>
+                       {% endcomment %}
+
                     </div>
 
                 </div>
 
-                <div class="home-right">
-                    <h2 id="home-intro">
-                      People’s Assembly is intro text porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.
-                    </h2>
-                    <a href="#" class="btn-text-green">Find your MP on a map</a>
-                    <form action="{% url "core_search" %}" id="home-search">
-                        <label for="core-search">Or search people, places and organisations</label>
-                        <input class="search-autocomplete-name" autofocus id="core-search" type="text" name="q" value="" placeholder="e.g. Place, name">
-                        <button type="submit">Search</button>
-
-                        {% if settings.ENABLED_FEATURES.hansard %}
-                            <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Search Hansard instead</a>
-                        {% endif %}
-
-                    </form>
-
-                </div>
         </div>
     </div>
-
+    <div class="home-rep-search">
+        <div class="wrapper">
+            <h2>Find your representatives</h2>
+            <form action="{% url "core_geocoder_search" %}" class="geocoder-search-form">
+                <label for="geocoder-search">Or search by location</label>
+                <input id="geocoder-search" type="text" name="q" value="" placeholder="Location name"><button type="submit" class="button">Search</button>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}
 
@@ -54,15 +77,37 @@
 
     {# Temporary Static news items to build styles from - Remove when done #}
     <div id="news">
-        <h2>Latest News</h2>
+        <h2>Editorial</h2>
         <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most <a href="#">famous</a> being the one-laptop per child project. However the Jubilee government also made promises with regards to security, maternal health care and youth unemployment among a whole gamut&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
-            <li><h3><a href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Jubilee’s Govt’s first 100 days in Office a Statement from MP Aden Duale (Leader of the Majority)</a></h3><p class="meta">Thu Jul 04 2013</p><p>During its campaigns the Jubilee coalition made several promises, the most famous being the one-laptop per child project. However the Jubilee government also made promises with regards to security, maternal health care and youth unemployment among a whole gamut&hellip;</p><p><a class="readmore" href="http://www.mzalendo.com/blog/2013/07/04/jubilees-govts-first-100-days-in-office-a-statement-from-mp-aden-duale-leader-of-the-majority/">Read more</a></p></li>
+          {% for article in featured_articles %}
+          <li>
+            <h3>
+              <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+            </h3>
+            <p class="meta">{{ article.publication_date|date }}</p>
+            <p>{{ article.content|truncatewords_html:32 }}</p>
+            <p><a class="readmore" href="{{ article.get_absolute_url }}">Read more</a></p>
+          </li>
+          {% endfor %}
         </ul>
 
     </div>
+    <div class="col-2">
 
-    {# Temporary Static poll items to build styles from - Remove when done #}
+    {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
+        <div id="twitter">
+            <h2>Twitter</h2>
+            
+            <a class="twitter-timeline"
+              data-chrome="nofooter transparent noheader noborders"
+              height="375"
+              href="https://twitter.com/{{ settings.TWITTER_USERNAME }}"
+              data-widget-id="{{ settings.TWITTER_WIDGET_ID }}"
+            >Tweets by @{{ settings.TWITTER_USERNAME }}</a>
+        </div>
+    {% endif %}
+
+    {% if settings.POLLDADDY_WIDGET_ID %}
     <div id="poll">
         <h2>Survey</h2>
         <style>
@@ -72,11 +117,13 @@
 
         <div id="polldaddy">
             <!-- <h2>Latest Poll</h2> -->
-            <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/53255.js"></script>
-            <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
+            <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
+            <noscript><a href="http://polldaddy.com/w.php?p={{ settings.POLLDADDY_WIDGET_ID }}/">Take Our Poll</a></noscript>
         </div>
     </div>
+    {% endif %}
 
+    </div>
     {% if settings.BLOG_RSS_FEED %}
         <div id="news">
             <h2>Latest News</h2>
@@ -87,40 +134,6 @@
             </ul>
         </div>
     {% endif %}
-    {% if settings.POLLDADDY_WIDGET_ID %}
-        <div id="poll">
-            <h2>Survey</h2>
-            <style>
-                .pds-box { width: 100% !important; }
-                #polldaddy { margin-bottom: 30px; width: 304px; float: left; }
-            </style>
 
-            <div id="polldaddy">
-                <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
-                <noscript><a href="http://polldaddy.com/w.php?p=53255/">Take Our Poll</a></noscript>
-            </div>
-        </div>
-
-    {% endif %}
-
-    {% if settings.TWITTER_ACCOUNT_NAME %}
-        <div id="twitter">
-            <h2>Twitter</h2>
-
-            <div class="twitter-feed" data-twitter-username="{{ settings.TWITTER_ACCOUNT_NAME }}" data-feed-url="{% url "twitter_feed" %}">
-                Loading tweets &hellip;
-            </div>
-        </div>
-
-        <div class="social-and-tools">
-            <ul class="tools">
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t=Pombola" target="_blank" class="big-btn-text-fb">Facebook</a>
-                <li><a href="https://twitter.com/share?via={{ settings.TWITTER_ACCOUNT_NAME }}&amp;text=Pombola&amp;url={{ request.build_absolute_uri }}" target="_blank" class="big-btn-text-tw">Twitter</a></li>
-            </ul>
-
-            <span class="tw-nub"></span>
-            <a href="http://twitter.com/{{ settings.TWITTER_ACCOUNT_NAME }}" class="btn-text-green tw-follow" target="_blank">Follow</a>
-        </div>
-    {% endif %}
 
 {% endblock %}

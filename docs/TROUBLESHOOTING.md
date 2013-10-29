@@ -204,6 +204,13 @@ prepare_environment.bash then the installation should complete
 successfully.
 
 
+### You get an error like `django.contrib.gis.geos.error.GEOSException: Could not parse version info string "3.4.2-CAPI-1.8.2 r3921"`
+
+Your GDAL install is returning a version string that Django's GIS code can not
+parse. See this discussion on StackOverflow for possible solutions:
+http://stackoverflow.com/questions/18643998/geodjango-eosexception-error
+
+
 ## You need to merge two people together
 
 There is a management command `core_merge_people` that can do this for you.

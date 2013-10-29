@@ -15,7 +15,18 @@ activate the generation. Hopefully something like this:
 
 Then, to load in some people and organisation data:
 
-    $ python manage.py core_import_popolo pombola/south_africa/data/sa.json  --commit
+    $ python manage.py core_import_popolo pombola/south_africa/data/south-africa-popolo.json  --commit
+
+Run the command to clean up imported slugs:
+
+    $ python manage.py core_list_malformed_slugs --correct
+
+To load in constituency offices, download a CSV from the below, and run the following.
+https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE.
+If you run into any issues with this you might need to remove the
+geocode cache at `pombola/south_africa/management/commands/.geocode-request-cache`.
+
+    $ python manage.py south_africa_import_constituency_offices <file.csv>
 
 To load in some example SayIt data, fetch the speeches/fixtures/test_inputs/
 

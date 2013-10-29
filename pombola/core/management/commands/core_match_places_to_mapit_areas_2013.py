@@ -7,7 +7,6 @@ from django.core.management.base import NoArgsCommand
 from django.template.defaultfilters import slugify
 from django.conf import settings
 
-# from pombola.helpers import geocode
 from pombola.core import models
 from mapit import models as mapit_models
 

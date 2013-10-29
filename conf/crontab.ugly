@@ -19,22 +19,35 @@ PYTHONPATH=/data/vhost/!!(*= $vhost *)!!/pombola
 PYTHONIOENCODING=utf-8
 
 
+# check that no bad slugs have been stored in the database
+0 23 * * * !!(*= $user *)!! run_management_command core_list_malformed_slugs
+
+
 # Several sites use the Pombola codebase. They don't all have the same requirements
 # or apps. Use the conditionals below to run the correct cron jobs, and make
 # sure that they don't clash timewise.
 !!(* if ($vhost eq 'mzalendo.mysociety.org') { *)!!
-0 7 * * * !!(*= $user *)!! check_user_contributions.bash
-6 7 * * * !!(*= $user *)!! update_hansard.bash
-3 10 * * * !!(*= $user *)!! update_coalition_memberships.bash
+0 7 * * *  !!(*= $user *)!! run_management_command feedback_report_pending
+6 7 * * *  !!(*= $user *)!! update_hansard.bash
+3 10 * * * !!(*= $user *)!! run_management_command kenya_assign_aspirants_to_coalitions
 
 # disabling the scorcard updating to remove them from the site temporarily. This
 # is an interim measure, but much simpler than doing it properly by making the
 # scorecard app optional, or adding some feature flip for them. See #629
 
-# 0 1 * * * !!(*= $user *)!! update_scorecards.bash
+# 0 1 * * * !!(*= $user *)!! run_management_command scorecard_update_person_contact_scores
 
 
 !!(* } elsif ($vhost eq 'nigeria.mzalendo.mysociety.org') { *)!!
-10 7 * * * !!(*= $user *)!! check_user_contributions.bash
+10 7 * * * !!(*= $user *)!! run_management_command feedback_report_pending
+
+
+!!(* } elsif ($vhost eq 'south_africa.mzalendo.mysociety.org') { *)!!
+
+# NOTE - this is not the correct domain for the host. It will need to be changed
+# once the domain has been decided. See
+# https://github.com/mysociety/pombola/issues/701
+7 7 * * * !!(*= $user *)!! update_za_hansard.bash
+
 !!(* } else { *)!!
 !!(* } *)!!

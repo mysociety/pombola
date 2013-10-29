@@ -1,17 +1,19 @@
 {% load url from future %}
 <div class="footer-section">
+    {% include "south_africa/_newsletter_signup.html" %}
+
     <h4>Follow us</h4>
     <ul class="social-links-list">
        <li><a href="#" class="facebook-social-icon">Facebook</a></li>
        <li><a href="#" class="twitter-social-icon">Twitter</a></li>
-       <li><a href="#" class="youtube-social-icon">YouTube</a></li>
-       <li><a href="#" class="rss-social-icon">RSS</a></li>
+       <!--<li><a href="#" class="youtube-social-icon">YouTube</a></li>
+       <li><a href="#" class="rss-social-icon">RSS</a></li> -->
     </ul>
 </div>
 <div id="footer-menu" class="footer-section">
     <h4>Sitemap</h4>
     <ul class="nav">
-        {% with include_sub_menu_entries=0 %}
+        {% with include_sub_menu_entries=1 %}
             {% include 'menu_entries.html' %}
         {% endwith %}
     </ul>

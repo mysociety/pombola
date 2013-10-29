@@ -56,9 +56,6 @@ else:
 DEBUG          = STAGING
 TEMPLATE_DEBUG = STAGING
 
-# TODO - should we delegate this to web server (issues with admin css etc)?
-SERVE_STATIC_FILES = STAGING
-
 ADMINS = (
     (config.get('ERRORS_NAME'), config.get('ERRORS_EMAIL')),
 )
@@ -223,7 +220,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    "pombola.core.context_processors.add_settings",    
+    "pombola.core.context_processors.add_settings",
 )
 
 COUNTRY_APP = config.get('COUNTRY_APP')
@@ -260,7 +257,6 @@ INSTALLED_APPS = (
 
     'haystack',
 
-    'pombola.helpers',
     'pombola.info',
     'pombola.tasks',
     'pombola.core',
@@ -339,6 +335,7 @@ HAYSTACK_CONNECTIONS = {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': 'http://127.0.0.1:9200/',
         'INDEX_NAME': config.get('POMBOLA_DB_NAME'),
+        'EXCLUDED_INDEXES': config.get('HAYSTACK_EXCLUDED_INDEXES', []),
     },
 }
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
@@ -406,3 +403,15 @@ MAP_BOUNDING_BOX_SOUTH = config.get('MAP_BOUNDING_BOX_SOUTH')
 MAP_BOUNDING_BOX_WEST  = config.get('MAP_BOUNDING_BOX_WEST' )
 
 THUMBNAIL_DEBUG = True
+
+
+# ZA Hansard settings
+HANSARD_CACHE   = os.path.join( root_dir, 'hansard_cache' )
+COMMITTEE_CACHE = os.path.join( HANSARD_CACHE, 'committee' )
+ANSWER_CACHE    = os.path.join( HANSARD_CACHE, 'answers' )
+
+PMG_COMMITTEE_USER = config.get('PMG_COMMITTEE_USER', '')
+PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
+
+# Which popit instance to use
+POPIT_API_URL = config.get('POPIT_API_URL')

@@ -4,9 +4,7 @@
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
-  {% if settings.DISQUS_SHORTNAME %}
     {% include "disqus_javascript.html" %}
-  {% endif %}
 
     {% block title_space %}
       <div class="title-space">

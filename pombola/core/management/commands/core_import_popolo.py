@@ -136,7 +136,8 @@ def get_or_create(model, **kwargs):
             o.save()
         else:
             verbose(" (not saving)")
-    return o
+        return o
+    raise Exception("Failed get_or_create")
 
 class Command(LabelCommand):
     help = 'Import people, organisations and positions from Popolo JSON'
@@ -144,7 +145,7 @@ class Command(LabelCommand):
 
     option_list = LabelCommand.option_list + (
         make_option('--commit', action='store_true', dest='commit', help='Actually update the database'),
-        make_option('--delete-old', action='store_true', dest='delete_old', help='Delete old positions and contacts, assuming we have complete information to recreate them'),
+        make_option('--delete-old', action='store_true', dest='delete_old', help='Delete old positions, contacts, and alternative names and identifiers, assuming we have complete information to recreate them'),
         )
 
     def handle_label(self,  input_filename, **options):
@@ -154,6 +155,12 @@ class Command(LabelCommand):
         # have stable IDs for the South African data.  For other
         # purposes this assumption will likely not be true, and the
         # script will need to be changed.
+        #
+        # Note that this may be further complicated because we use 'slugify' to
+        # ensure that the slugs created in the database are correct, which might
+        # mean that they differ from the data boing imported. Also this
+        # slugification may lead to slug that were unique in the raw data being
+        # the same in the database.
 
         global VERBOSE
         VERBOSE = int(options['verbosity']) > 1
@@ -176,12 +183,12 @@ class Command(LabelCommand):
 
             o_kind = get_or_create(OrganisationKind,
                                    commit=options['commit'],
-                                   slug=classification,
+                                   slug=slugify(classification),
                                    defaults={'name': classification.title()})
 
             o = get_or_create(Organisation,
                               commit=options['commit'],
-                              slug=organisation['slug'],
+                              slug=slugify(organisation['slug']),
                               kind=o_kind,
                               defaults={'name': organisation['name']})
             if options['commit']:
@@ -210,12 +217,18 @@ class Command(LabelCommand):
             if title:
                 defaults['title'] = title
 
-            slug = person['slug']
+            slug = slugify(person['slug'])
 
             p = get_or_create(Person,
                               commit=options['commit'],
                               slug=slug,
                               defaults=defaults)
+
+            if options['commit'] and options['delete_old']:
+                Identifier.objects.filter(
+                    content_type=ContentType.objects.get_for_model(Person),
+                    object_id=p.id,
+                ).delete()
 
             create_identifiers(person, p, options['commit'])
 
@@ -273,7 +286,7 @@ class Command(LabelCommand):
                 contact_type = contact['type']
                 c_kind = get_or_create(ContactKind,
                                        commit=options['commit'],
-                                       slug=contact_type,
+                                       slug=slugify(contact_type),
                                        defaults={'name': contact_type.title()})
                 defaults = {'value': contact['value']}
                 if 'note' in contact:
