@@ -4698,3 +4698,8 @@ ul.pager li.next {
     float: left;
   }
 }
+
+/* for speeches breadcrumb */
+ul.breadcrumbs li:nth-child(2) {
+    display: none;
+}
