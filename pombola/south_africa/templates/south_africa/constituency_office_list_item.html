@@ -13,13 +13,15 @@
     {% endfor %}
   </ul>
 
-  <ul class="unstyled-list tiny-list-of-people">
+  {% if not skip_positions %}
+    <ul class="unstyled-list tiny-list-of-people">
     {% for position in object.related_positions %}
       {% with object=position.person %}
         {% include 'core/generic_list_item.html' %}
       {% endwith %}
     {% endfor %}
-  </ul>
+    </ul>
+  {% endif %}
 
   <script>
     add_marker_to_map({
