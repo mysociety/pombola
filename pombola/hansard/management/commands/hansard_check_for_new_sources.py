@@ -22,6 +22,9 @@ from django.core.management.base import NoArgsCommand
 
 from pombola.hansard.models import Source
 
+class NoSourcesFoundError(Exception):
+    pass
+
 class Command(NoArgsCommand):
     help = 'Check for new sources'
 
@@ -38,60 +41,72 @@ class Command(NoArgsCommand):
         )
 
         for url in urls:
-
-            h = httplib2.Http( settings.HTTPLIB2_CACHE_DIR )
-            response, content = h.request(url)
-            # print content
-
-            # parse content
-            soup = BeautifulSoup(
-                content,
-                convertEntities=BeautifulStoneSoup.HTML_ENTITIES
-            )
-
-            spans = soup.findAll( 'span', 'contenttype-repositoryitem summary')
-
-            links = [ span.a for span in spans ]
-
-            # Check that we found some links. This is to detect when the page changes or our
-            # scraper breaks (see issue #905 for example). Checking that the most recent
-            # source is not more that X weeks old might also be a good idea, but could lead
-            # to lots of false positives as there is often a long hiatus.
-            if not len(links):
+            try:
+                self.process_url(url)
+            except NoSourcesFoundError:
                 warn("Could not find any Hansard sources on '%s'" % url)
 
-            for link in links:
 
-                # print '==============='
-                # print link
+    def process_url(self, url):
+        """
+        For the given url find or create an entry for each source in the database.
 
-                href = link['href'].strip()
-                # print "href: " + href
+        If no sources found raise an exception.
+        """
 
-                name = ' '.join(link.contents).strip()
-                # print "name: " + name
+        h = httplib2.Http( settings.HTTPLIB2_CACHE_DIR )
+        response, content = h.request(url)
+        # print content
 
-                if not Source.objects.filter(name=name).exists():
+        # parse content
+        soup = BeautifulSoup(
+            content,
+            convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+        )
 
-                    cal = pdt.Calendar()
-                    result = cal.parseDateText(name)
-                    source_date = datetime.date(*result[:3])
-                    # print "source_date: " + str(source_date)
+        spans = soup.findAll( 'span', 'contenttype-repositoryitem summary')
+
+        links = [ span.a for span in spans ]
+
+        # Check that we found some links. This is to detect when the page changes or our
+        # scraper breaks (see issue #905 for example). Checking that the most recent
+        # source is not more that X weeks old might also be a good idea, but could lead
+        # to lots of false positives as there is often a long hiatus.
+        if not len(links):
+            raise NoSourcesFoundError()
+
+        for link in links:
+
+            # print '==============='
+            # print link
+
+            href = link['href'].strip()
+            # print "href: " + href
+
+            name = ' '.join(link.contents).strip()
+            # print "name: " + name
+
+            if not Source.objects.filter(name=name).exists():
+
+                cal = pdt.Calendar()
+                result = cal.parseDateText(name)
+                source_date = datetime.date(*result[:3])
+                # print "source_date: " + str(source_date)
 
 
-                    # I don't trust that we can accurately create the download link url with the
-                    # details that we have. Instead fetche the page and extract the url.
-                    download_response, download_content = h.request(href)
-                    download_soup = BeautifulSoup(
-                        download_content,
-                        convertEntities=BeautifulStoneSoup.HTML_ENTITIES
-                    )
-                    download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
-                    # print download_url
+                # I don't trust that we can accurately create the download link url with the
+                # details that we have. Instead fetche the page and extract the url.
+                download_response, download_content = h.request(href)
+                download_soup = BeautifulSoup(
+                    download_content,
+                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+                )
+                download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
+                # print download_url
 
-                    # create the source entry
-                    Source.objects.create(
-                        name = name,
-                        url = download_url,
-                        date = source_date,
-                    )
+                # create the source entry
+                Source.objects.create(
+                    name = name,
+                    url = download_url,
+                    date = source_date,
+                )
