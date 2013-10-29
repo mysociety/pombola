@@ -40,23 +40,33 @@
         {% endif %}
     {% endwith %}
 
-    <p><a class="js-hide-reveal-link" href="#national-assembly-people">Members of the National Assembly ({{ national_assembly_people.count }})</a></p>
+    <p><a class="js-hide-reveal-link" href="#national-assembly-people">Members of the National Assembly ({{ national_assembly_people_count }})</a></p>
 
     <div id="national-assembly-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=national_assembly_people %}
+        {% if former_national_assembly_people %}
+        <p>Former members</p>
+        {% include "core/_people_listing.html" with people=former_national_assembly_people %}
+        {% endif %}
     </div>
 
-    <p><a class="js-hide-reveal-link" href="#ncop-people">Members of the National Council of Provinces ({{ ncop_people.count }})</a></p>
+    <p><a class="js-hide-reveal-link" href="#ncop-people">Members of the National Council of Provinces ({{ ncop_people_count }})</a></p>
 
     <div id="ncop-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=ncop_people %}
+        {% if former_ncop_people %}
+        <p>Former members</p>
+        {% include "core/_people_listing.html" with people=former_ncop_people %}
+        {% endif %}
     </div>
 
+    {% if other_people %}
     <p><a class="js-hide-reveal-link" href="#other-people">Other people ({{ other_people.count }})</a></p>
 
     <div id="other-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=other_people %}
     </div>
+    {% endif %}
 
     {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
         <h2>Data</h2>
