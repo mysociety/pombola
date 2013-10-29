@@ -48,10 +48,10 @@ urlpatterns += patterns('',
 )
 
 # SayIt - speeches
-if settings.ENABLED_FEATURES['speeches']:
-    urlpatterns += patterns('',
-        (r'^speeches/', include('speeches.urls')),
-    )
+#if settings.ENABLED_FEATURES['speeches']:
+#    urlpatterns += patterns('',
+#        (r'^speeches/', include('speeches.urls', namespace='speeches', app_name='speeches-default')),
+#    )
 
 # Hansard pages
 if settings.ENABLED_FEATURES['hansard']:

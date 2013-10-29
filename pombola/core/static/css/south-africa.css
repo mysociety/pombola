@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -3341,6 +3342,15 @@ small {
   color: #017b58;
 }
 
+#page .large-container section ul li {
+  border-bottom-color: #d2d2ce;
+  margin-bottom: 1em;
+}
+#page .large-container section ul li p {
+  font-style: normal;
+  font-size: 1em;
+}
+
 #page-wrapper {
   position: relative;
 }
@@ -4565,6 +4575,13 @@ ul.pager li.next {
 #page .large-container p {
   margin: 0 0 1em;
 }
+#page .person-appearances .speech-title {
+  font-weight: bold;
+  font-size: 1.142857143em;
+}
+#page .person-appearances li {
+  margin-bottom: 1em;
+}
 
 .tab-links {
   border-bottom: 1px solid #d2d2ce;
@@ -4609,6 +4626,42 @@ ul.pager li.next {
 }
 .positions li {
   list-style: none outside none;
+}
+
+/* Hansard index page */
+.hansard-section-title {
+  cursor: pointer;
+  border-top: 1px solid #d2d2ce;
+  margin-bottom: 1em;
+  padding-top: 1em;
+  display: block;
+  text-decoration: none;
+  color: #222222;
+}
+.hansard-section-title h2 {
+  font-size: 1em;
+}
+.hansard-section-title p {
+  font-size: 0.875em;
+  margin-bottom: 0;
+}
+.hansard-section-title:focus, .hansard-section-title:hover {
+  text-decoration: none;
+}
+.hansard-section-title:focus h2, .hansard-section-title:hover h2 {
+  color: #e23d28;
+  text-decoration: underline;
+}
+.hansard-section-title:focus p, .hansard-section-title:hover p {
+  color: #222222;
+}
+
+.hansard-section {
+  padding-bottom: 1em;
+}
+.hansard-section p {
+  font-size: 0.875em;
+  margin-bottom: 0.5em;
 }
 
 /* Generic layouts */
