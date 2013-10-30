@@ -11,6 +11,8 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView, TemplateView
 from django.shortcuts import get_object_or_404
+from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 import mapit
 from haystack.views import SearchView
@@ -35,6 +37,9 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-office',
     'constituency-area', # specific to DA party
 )
+
+class LocationSearchForm(SearchForm):
+    q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))
 
 class LatLonDetailView(PlaceDetailView):
     template_name = 'south_africa/latlon_detail_view.html'
@@ -73,7 +78,7 @@ class LatLonDetailView(PlaceDetailView):
             .order_by('distance')
             )
 
-        context['form'] = SearchForm()
+        context['form'] = LocationSearchForm()
 
         context['politicians'] = (self.object
             .all_related_current_politicians()
