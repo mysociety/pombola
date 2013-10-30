@@ -1252,6 +1252,14 @@ body {
     .breadcrumbs {
         margin-bottom: 0;
         /* this is a terrible thing to do to override the specificity */
+        a {
+            color: $colour_blackish;
+            font-size: 12px;
+            text-decoration: none;
+            &:hover {
+                color: $colour_primary;
+            }
+        }
     }
 }
 
