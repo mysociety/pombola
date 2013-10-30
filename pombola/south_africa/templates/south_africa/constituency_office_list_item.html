@@ -23,6 +23,10 @@
     </ul>
   {% endif %}
 
+  {% if show_local_mp and object.mp %}
+    <p class="constituency-office-mp-name">MP: {{ object.mp }}</p>
+  {% endif %}
+
   <script>
     add_marker_to_map({
       lat: {{ object.location.y }},

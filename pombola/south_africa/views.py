@@ -78,6 +78,13 @@ class LatLonDetailView(PlaceDetailView):
             .order_by('distance')
             )
 
+        # FIXME - There must be a cleaner way/place to do this.
+        for office in nearest_offices:
+            try:
+                office.mp = models.Person.objects.get(position__in=office.organisation.position_set.filter(person__position__organisation__slug='national-assembly'))
+            except models.Person.DoesNotExist:
+                warnings.warn("{0} has no MPs".format(office.organisation))
+
         context['form'] = LocationSearchForm()
 
         context['politicians'] = (self.object

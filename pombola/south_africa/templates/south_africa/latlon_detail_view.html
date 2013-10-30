@@ -26,7 +26,7 @@
 
   <ul class="unstyled-list list-of-constituency-offices">
     {% for object in nearest_offices %}
-      {% include 'south_africa/constituency_office_list_item.html' with skip_positions=1 %}
+      {% include 'south_africa/constituency_office_list_item.html' with skip_positions=1 show_local_mp=1 %}
     {% empty %}
       <li>
         <p>No local offices found.</p>
