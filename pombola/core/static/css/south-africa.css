@@ -3573,8 +3573,16 @@ a:focus {
   background: #f1f0ec;
 }
 
+#breadcrumb {
+  background: #f1f0ec;
+  border-bottom: 1px solid #d2d2ce;
+}
 #breadcrumb .wrapper {
   position: relative;
+}
+#breadcrumb nav ul li a:hover {
+  color: #e23d28;
+  text-decoration: underline;
 }
 
 /*
@@ -4324,8 +4332,17 @@ div.search-pagination {
 
 /* Questions, Hansard, Speeches */
 body .breadcrumbs {
-  margin-bottom: 0;
+  margin-bottom: 0.5em;
   /* this is a terrible thing to do to override the specificity */
+}
+body .breadcrumbs a {
+  color: gray;
+  font-size: 12px;
+  text-decoration: none;
+}
+body .breadcrumbs a:hover {
+  color: #e23d28;
+  text-decoration: underline;
 }
 
 li.speech {
@@ -4394,6 +4411,14 @@ ul.pager li.next a:hover {
 }
 ul.pager li.next {
   text-align: right;
+}
+
+.page-header + .pager {
+  display: none;
+}
+
+.pager + ul {
+  padding-left: 0;
 }
 
 /* Organisation pages */

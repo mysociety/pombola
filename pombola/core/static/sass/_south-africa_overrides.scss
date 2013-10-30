@@ -512,8 +512,16 @@ menu#mobile-top-tools,
 }
 
 #breadcrumb {
+    background: $colour_main_background;
+    border-bottom: 1px solid #d2d2ce;
     .wrapper {
          position: relative;
+    }
+    nav ul li a {
+        &:hover {
+            color: $colour_primary;
+            text-decoration: underline;
+        }
     }
 }
 
@@ -1250,8 +1258,17 @@ div.search-pagination {
 /* Questions, Hansard, Speeches */
 body {
     .breadcrumbs {
-        margin-bottom: 0;
+        margin-bottom: 0.5em;
         /* this is a terrible thing to do to override the specificity */
+        a {
+            color: $colour_grey;
+            font-size: 12px;
+            text-decoration: none;
+            &:hover {
+                color: $colour_primary;
+                text-decoration: underline;
+            }
+        }
     }
 }
 
@@ -1323,6 +1340,14 @@ ul.pager {
     li.next {
         text-align: right;
     }
+}
+
+.page-header + .pager {
+    display: none;
+}
+
+.pager + ul {
+    padding-left: 0;
 }
 
 /* Organisation pages */
