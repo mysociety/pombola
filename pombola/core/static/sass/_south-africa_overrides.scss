@@ -1342,6 +1342,14 @@ ul.pager {
     }
 }
 
+.page-header + .pager {
+    display: none;
+}
+
+.pager + ul {
+    padding-left: 0;
+}
+
 /* Organisation pages */
 .kind-of-subtitle {
     @include lato-bold;
