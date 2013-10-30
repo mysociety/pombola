@@ -1,4 +1,3 @@
-@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -3574,8 +3573,16 @@ a:focus {
   background: #f1f0ec;
 }
 
+#breadcrumb {
+  background: #f1f0ec;
+  border-bottom: 1px solid #d2d2ce;
+}
 #breadcrumb .wrapper {
   position: relative;
+}
+#breadcrumb nav ul li a:hover {
+  color: #e23d28;
+  text-decoration: underline;
 }
 
 /*
@@ -3915,6 +3922,35 @@ ul#home-news-list li h3 a:focus {
   text-decoration: underline;
 }
 
+.social-links-list li {
+  display: inline;
+}
+.social-links-list li a {
+  display: inline-block;
+  text-indent: -9999px;
+  height: 38px;
+  width: 38px;
+  background-image: url("/static/images/social-icons.png");
+  background-position: 0 -1px;
+  background-repeat: none;
+  margin-right: 8px;
+}
+.social-links-list li a:hover, .social-links-list li a:focus {
+  background-position-y: -41px;
+}
+.social-links-list .facebook-social-icon {
+  background-position-x: 0;
+}
+.social-links-list .twitter-social-icon {
+  background-position-x: -51px;
+}
+.social-links-list .youtube-social-icon {
+  background-position-x: -101px;
+}
+.social-links-list .rss-social-icon {
+  background-position-x: -150px;
+}
+
 /*
 
 FOOTER
@@ -3987,34 +4023,6 @@ FOOTER
   -moz-column-gap: 20px;
   -webkit-column-count: 2;
   -webkit-column-gap: 20px;
-}
-#site-footer .social-links-list li {
-  display: inline;
-}
-#site-footer .social-links-list li a {
-  display: inline-block;
-  text-indent: -9999px;
-  height: 38px;
-  width: 38px;
-  background-image: url("/static/images/social-icons.png");
-  background-position: 0 -1px;
-  background-repeat: none;
-  margin-right: 8px;
-}
-#site-footer .social-links-list li a:hover, #site-footer .social-links-list li a:focus {
-  background-position-y: -41px;
-}
-#site-footer .social-links-list .facebook-social-icon {
-  background-position-x: 0;
-}
-#site-footer .social-links-list .twitter-social-icon {
-  background-position-x: -51px;
-}
-#site-footer .social-links-list .youtube-social-icon {
-  background-position-x: -101px;
-}
-#site-footer .social-links-list .rss-social-icon {
-  background-position-x: -150px;
 }
 #site-footer .contact-details {
   line-height: 16px;
@@ -4118,6 +4126,15 @@ FOOTER
 }
 .sidebar p + h3 {
   margin-top: 1.5em;
+}
+.sidebar ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  font-size: 0.875em;
+  margin-bottom: 1em;
+}
+.sidebar ul li {
+  list-style: none outside none;
 }
 .sidebar a:link {
   text-decoration: none;
@@ -4315,8 +4332,17 @@ div.search-pagination {
 
 /* Questions, Hansard, Speeches */
 body .breadcrumbs {
-  margin-bottom: 0;
+  margin-bottom: 0.5em;
   /* this is a terrible thing to do to override the specificity */
+}
+body .breadcrumbs a {
+  color: gray;
+  font-size: 12px;
+  text-decoration: none;
+}
+body .breadcrumbs a:hover {
+  color: #e23d28;
+  text-decoration: underline;
 }
 
 li.speech {
@@ -4385,6 +4411,14 @@ ul.pager li.next a:hover {
 }
 ul.pager li.next {
   text-align: right;
+}
+
+.page-header + .pager {
+  display: none;
+}
+
+.pager + ul {
+  padding-left: 0;
 }
 
 /* Organisation pages */
@@ -4623,6 +4657,16 @@ ul.pager li.next {
   margin-bottom: 0.5em;
 }
 
+/* Blog styles */
+.blog-post ul, .blog-post p {
+  max-width: 580px;
+}
+
+.blog-list .blog-in-a-list {
+  border-bottom: 1px solid #d2d2ce;
+  margin-bottom: 2em;
+}
+
 /* Generic layouts */
 .layout {
   /**
@@ -4693,9 +4737,13 @@ ul.pager li.next {
     width: 74.375%;
     margin-right: 2.5%;
     /* 24px @ 960px */
+    float: left;
   }
   .layout-major-minor .minor-column {
     width: 23.125%;
+    float: right;
+  }
+  .layout-major-minor.reverse .major-column {
     float: right;
   }
   .layout-major-minor.reverse .minor-column {
