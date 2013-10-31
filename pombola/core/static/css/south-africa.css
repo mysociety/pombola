@@ -4703,6 +4703,11 @@ ul.pager li.next {
   margin-bottom: 2em;
 }
 
+.hide-reveal-link {
+  display: block;
+  padding: 0.5em 0;
+}
+
 .has-dropdown-dark {
   background-image: url("/static/images/has-dropdown-dark.png");
   background-position: 100% 1em;
