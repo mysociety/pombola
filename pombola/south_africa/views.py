@@ -277,23 +277,27 @@ class SASpeakerRedirectView(RedirectView):
         except Exception as e:
             raise Http404
 
-class SAHansardIndex(TemplateView):
+class SASpeechesIndex(TemplateView):
     template_name = 'south_africa/hansard_index.html'
+    top_section_name='Hansard'
     sections_to_show = 25
+    section_parent_field = 'section__parent__parent__parent__parent__parent'
 
     def get_context_data(self, **kwargs):
-        context = super(SAHansardIndex, self).get_context_data(**kwargs)
+        context = super(SASpeechesIndex, self).get_context_data(**kwargs)
 
-        # Get the "Hansard" top level section, or 404
-        hansard_section = get_object_or_404(Section, title="Hansard", parent=None)
+        # Get the top level section, or 404
+        top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
 
         # As we know that the hansard section structure is
         # "Hansard" -> yyyy -> mm -> dd -> section -> subsection -> [speeches]
         # we can create a very specific query to drill up to the top level one
         # that we want.
+
+        section_parent_filter = { self.section_parent_field : top_section }
         entries = Speech \
             .objects \
-            .filter(section__parent__parent__parent__parent__parent=hansard_section) \
+            .filter(**section_parent_filter) \
             .values('section_id', 'start_date') \
             .annotate(speech_count=Count('id')) \
             .order_by('-start_date')
@@ -321,3 +325,15 @@ class SAHansardIndex(TemplateView):
 
         context['entries'] = display_entries
         return context
+
+class SAHansardIndex(SASpeechesIndex):
+    template_name = 'south_africa/hansard_index.html'
+    top_section_name='Hansard'
+    section_parent_field = 'section__parent__parent__parent__parent__parent'
+    sections_to_show = 25
+
+class SACommitteeIndex(SASpeechesIndex):
+    template_name = 'south_africa/hansard_index.html'
+    top_section_name='Committee Minutes'
+    section_parent_field = 'section__parent__parent__parent'
+    sections_to_show = 25
