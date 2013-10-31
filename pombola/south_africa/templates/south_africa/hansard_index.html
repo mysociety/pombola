@@ -2,7 +2,7 @@
 {% load url from future %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/hansard-hide-reveal.js' );
+    pombola_settings.extra_js.push( 'js/hide-reveal.js' );
 {% endblock %}
 
 {% block title %}Hansard{% endblock %}
@@ -19,14 +19,14 @@
     {% endifchanged %}
 
     {% ifchanged entry.section.parent.title %}
-    <a class="js-hansard-section-title hansard-section-title has-dropdown-dark" href="#">
+    <a class="js-hide-reveal-link hansard-section-title has-dropdown-dark" href="#{{ entry.section.parent.title|slugify }}">
         <h2>{{ entry.section.parent.title }}</h2>
         <p>{{ entry.start_date }}</p>
     </a>
     {% endifchanged %}
 
     {% ifchanged entry.start_date %}
-        <div class="js-hansard-section hansard-section">
+        <div class="js-hide-reveal hansard-section" id="{{ entry.section.parent.title|slugify }}">
     {% endifchanged %}
     <p>
         <a href="{% url 'speeches:section-view' entry.section.id %}">{{ entry.section.title }}</a>
