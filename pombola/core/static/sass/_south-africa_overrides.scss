@@ -273,6 +273,9 @@ small {
     }
 }
 
+#page .page-wrapper {
+    padding-bottom: 2em; /* this will give us space for the feedback button */
+}
 
 #page-wrapper {
     position: relative;
