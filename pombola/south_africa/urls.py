@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
-    SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex
+    SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
@@ -49,7 +49,7 @@ hansard_patterns = sayit_patterns + patterns('',
 )
 committee_patterns = sayit_patterns + patterns('',
     # TODO, this is wrong
-    url(r'^$', SAHansardIndex.as_view(), name='section-list'),
+    url(r'^$', SACommitteeIndex.as_view(), name='section-list'),
 )
 urlpatterns += patterns('',
     url(r'^hansard/',   include(hansard_patterns,   namespace='hansard',   app_name='speeches')),
