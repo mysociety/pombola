@@ -1639,6 +1639,12 @@ ul.pager {
     }
 }
 
+.has-dropdown-dark {
+    background-image: url('/static/images/has-dropdown-dark.png');
+    background-position: 100% 1em;
+    background-repeat: no-repeat;
+}
+
 @media only all and (min-width: 640px), print {
     #front_intro .home-left {
         width: 65.8333333%;
