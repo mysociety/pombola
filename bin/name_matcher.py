@@ -19,6 +19,7 @@
 # for the intended purpose (matching LGA names in Nigeria) so development
 # stopped.
 
+from collections import defaultdict
 import csv
 import re
 import sys
@@ -126,6 +127,41 @@ def match_pairs( list_one, list_two):
             if is_exact_match(x,y):
                 output(0, x, y)
                 continue
+
+    # For some matching scenarios it is appropriate to match on whole words - for
+    # example matching "John Smith" to "Smith, Mr J". The following code does that,
+    # but is left commented out as it may not be the desired approach as it does not
+    # deal well with slight mispellings.
+    #
+    # word_matches = defaultdict(list)
+    # for x in list_one:
+    #     for y in list_two:
+    #         split_words = lambda word: re.split(r'\W+', word)
+    #         match_count = len(set(split_words(x)) & set(split_words(y)))
+    #         if match_count:
+    #             word_matches[match_count].append((x,y))
+    #             word_matches[(x,y)] = match_count
+    #             word_matches[x].append(y)
+    #             word_matches[y].append(x)
+    #
+    # for match_count in sorted( range(1,10), reverse=True):
+    #     # print "---- %s ----" % match_count
+    #     for x,y in word_matches[match_count]:
+    #
+    #         if x not in list_one or y not in list_two: continue
+    #
+    #         # generate all the pairings that we need to compare to
+    #         pairings = []
+    #         pairings += [ (x,matched_y) for matched_y in word_matches[x]]
+    #         pairings += [ (matched_x,y) for matched_x in word_matches[y]]
+    #         scores = [word_matches[pair] for pair in pairings if pair != (x,y)]
+    #
+    #         if len(scores) and max(scores) >= match_count: continue
+    #
+    #         del word_matches[x]
+    #         del word_matches[y]
+    #
+    #         output(0, x, y)
 
     # print "# remaining list_one: %d, list_two: %d" % ( len(list_one), len(list_two) )
 
