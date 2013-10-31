@@ -3990,11 +3990,17 @@ FOOTER
 }
 #site-footer #footer-menu li > ul {
   margin-top: 0.25em;
+  margin-left: 0.5em;
+  margin-bottom: 0.5em;
 }
 #site-footer #footer-menu li > ul li {
   display: block;
   margin-bottom: 0;
   padding: 0;
+}
+#site-footer #footer-menu li > ul li:before {
+  content: '- ';
+  opacity: 0.5;
 }
 #site-footer h4 {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;

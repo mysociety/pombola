@@ -938,13 +938,20 @@ FOOTER
 
     #footer-menu li > ul {
         margin-top: 0.25em;
+        margin-left: 0.5em;
+        margin-bottom: 0.5em;
     }
 
     #footer-menu li > ul li {
         display: block;
         margin-bottom: 0;
         padding: 0;
+        &:before {
+            content: '- ';
+            opacity: 0.5;
+        }
     }
+
 
     h4 {
         @include lato-bold;
