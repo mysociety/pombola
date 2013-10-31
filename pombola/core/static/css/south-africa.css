@@ -3410,6 +3410,7 @@ HEADER
     background: url("/static/images/za-logo.png") 0 center no-repeat;
     width: 550px;
     height: 102px;
+    top: 5px;
   }
 }
 
@@ -3573,16 +3574,8 @@ a:focus {
   background: #f1f0ec;
 }
 
-#breadcrumb {
-  background: #f1f0ec;
-  border-bottom: 1px solid #d2d2ce;
-}
 #breadcrumb .wrapper {
   position: relative;
-}
-#breadcrumb nav ul li a:hover {
-  color: #e23d28;
-  text-decoration: underline;
 }
 
 /*
@@ -4332,17 +4325,8 @@ div.search-pagination {
 
 /* Questions, Hansard, Speeches */
 body .breadcrumbs {
-  margin-bottom: 0.5em;
+  margin-bottom: 0;
   /* this is a terrible thing to do to override the specificity */
-}
-body .breadcrumbs a {
-  color: gray;
-  font-size: 12px;
-  text-decoration: none;
-}
-body .breadcrumbs a:hover {
-  color: #e23d28;
-  text-decoration: underline;
 }
 
 li.speech {
@@ -4413,14 +4397,6 @@ ul.pager li.next {
   text-align: right;
 }
 
-.page-header + .pager {
-  display: none;
-}
-
-.pager + ul {
-  padding-left: 0;
-}
-
 /* Organisation pages */
 .kind-of-subtitle {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
@@ -4489,6 +4465,7 @@ ul.pager li.next {
 .list-of-constituency-offices > li {
   border-bottom: 1px solid #d2d2ce;
   padding-top: 1em;
+  position: relative;
 }
 .list-of-constituency-offices a {
   color: #222222;
@@ -4504,6 +4481,16 @@ ul.pager li.next {
 .list-of-constituency-offices .constituency-office-address {
   font-size: 0.875em;
   color: #555555;
+}
+.list-of-constituency-offices .constituency-office-mp-name {
+  font-size: 0.875em;
+  color: #222222;
+}
+.list-of-constituency-offices .distance {
+  color: #b3b3b3;
+  position: absolute;
+  top: 1em;
+  right: 0;
 }
 .list-of-constituency-offices .tiny-list-of-people .person-list-item {
   border: none;
@@ -4657,6 +4644,18 @@ ul.pager li.next {
   margin-bottom: 0.5em;
 }
 
+/* Place search results */
+#map_canvas {
+  margin-bottom: 2em;
+}
+
+.politicians-results h2 {
+  margin-bottom: .6em;
+}
+.politicians-results .list-of-things-item:first-child {
+  border-top: none;
+}
+
 /* Blog styles */
 .blog-post ul, .blog-post p {
   max-width: 580px;
@@ -4698,6 +4697,16 @@ ul.pager li.next {
   overflow: hidden;
   margin-bottom: 1em;
   margin-left: 1em;
+}
+
+.fifty-fifty-layout .column:first-child {
+  margin-bottom: 2em;
+}
+
+.has-dropdown-dark {
+  background-image: url("/static/images/has-dropdown-dark.png");
+  background-position: 100% 1em;
+  background-repeat: no-repeat;
 }
 
 @media only all and (min-width: 640px), print {
@@ -4748,5 +4757,13 @@ ul.pager li.next {
   }
   .layout-major-minor.reverse .minor-column {
     float: left;
+  }
+
+  .fifty-fifty-layout .column {
+    width: 48%;
+    float: left;
+  }
+  .fifty-fifty-layout .column:first-child {
+    margin-right: 4%;
   }
 }
