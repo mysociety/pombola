@@ -14,6 +14,8 @@ from pombola.core.models import Person
 #     },
 #     ....
 # ]
+#
+# ``name`` should match the Person's ``legal_name`` and ``bio`` is stored in their summary field.
 
 
 
