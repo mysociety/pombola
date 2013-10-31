@@ -330,6 +330,7 @@ HEADER
       background: url('/static/images/za-logo.png') 0 center no-repeat;
       width: 550px;
       height: 102px;
+      top: 5px;
     }
 }
 
@@ -512,16 +513,8 @@ menu#mobile-top-tools,
 }
 
 #breadcrumb {
-    background: $colour_main_background;
-    border-bottom: 1px solid #d2d2ce;
     .wrapper {
          position: relative;
-    }
-    nav ul li a {
-        &:hover {
-            color: $colour_primary;
-            text-decoration: underline;
-        }
     }
 }
 
@@ -1258,17 +1251,8 @@ div.search-pagination {
 /* Questions, Hansard, Speeches */
 body {
     .breadcrumbs {
-        margin-bottom: 0.5em;
+        margin-bottom: 0;
         /* this is a terrible thing to do to override the specificity */
-        a {
-            color: $colour_grey;
-            font-size: 12px;
-            text-decoration: none;
-            &:hover {
-                color: $colour_primary;
-                text-decoration: underline;
-            }
-        }
     }
 }
 
@@ -1340,14 +1324,6 @@ ul.pager {
     li.next {
         text-align: right;
     }
-}
-
-.page-header + .pager {
-    display: none;
-}
-
-.pager + ul {
-    padding-left: 0;
 }
 
 /* Organisation pages */
@@ -1423,7 +1399,8 @@ ul.pager {
     }
     > li {
         border-bottom: 1px solid #d2d2ce;
-        padding-top: 1em
+        padding-top: 1em;
+        position: relative;
     }
     a {
         color: $colour-black;
@@ -1440,6 +1417,17 @@ ul.pager {
     .constituency-office-address {
         font-size: 0.875em;
         color: $colour_blackish;
+    }
+    .constituency-office-mp-name {
+        font-size: 0.875em;
+        color: $colour_black;
+    }
+
+    .distance {
+        color: $colour_middling_grey;
+        position: absolute;
+        top: 1em;
+        right: 0;
     }
 
     .tiny-list-of-people {
@@ -1597,6 +1585,21 @@ ul.pager {
     }
 }
 
+/* Place search results */
+
+#map_canvas {
+    margin-bottom: 2em;
+}
+
+.politicians-results {
+    h2 {
+        margin-bottom: .6em;
+    }
+    .list-of-things-item:first-child {
+        border-top: none;
+    }
+}
+
 /* Blog styles */
 .blog-post {
     ul, p {
@@ -1628,7 +1631,13 @@ ul.pager {
     margin-bottom: 1em;
     margin-left: 1em;
 }
-
+.fifty-fifty-layout {
+    .column {
+        &:first-child {
+            margin-bottom: 2em;
+        }
+    }
+}
 
 @media only all and (min-width: 640px), print {
     #front_intro .home-left {
@@ -1682,6 +1691,15 @@ ul.pager {
             float: left;
         }
        }
+   }
+   .fifty-fifty-layout {
+        .column {
+            width: 48%;
+            float: left;
+            &:first-child {
+                margin-right: 4%;
+            }
+        }
    }
 }
 
