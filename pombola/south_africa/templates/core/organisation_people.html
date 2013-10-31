@@ -11,14 +11,14 @@
     <div class="column minor-column">
       <div class="filters sidebar">
         <h3>Show</h3>
-        <p><a href="?historic=">Current members ({{ all_positions.currently_active.count }})</a></p>
-        <p><a href="?historic=1">Past members ({{ all_positions.currently_inactive.count }})</a></p>
-        <p><a href="?all=1">All members ({{ all_positions.count }})</a></p>
+        <p><a href="?historic=" class="{% if not request.GET.historic and not request.GET.all %}active{% endif %}">Current members ({{ all_positions.currently_active.count }})</a></p>
+        <p><a href="?historic=1" class="{% if request.GET.historic %}active{% endif %}">Past members ({{ all_positions.currently_inactive.count }})</a></p>
+        <p><a href="?all=1" class="{% if request.GET.all %}active{% endif %}">All members ({{ all_positions.count }})</a></p>
 
         <h3>Sort by</h3>
-        <p><a href="?order=name">Alphabetical</a></p>
-        <p><a href="?order=party">Party</a></p>
-        <p><a href="?order=place">Location</a></p>
+        <p><a href="?order=name" class="{% if request.GET.order == "name" %}active{% endif %}">Alphabetical</a></p>
+        <p><a href="?order=party" class="{% if request.GET.order == "party" %}active{% endif %}">Party</a></p>
+        <p><a href="?order=place" class="{% if request.GET.order == "place" %}active{% endif %}">Location</a></p>
       </div>
     </div>
 
