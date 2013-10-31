@@ -40,7 +40,7 @@
         {% endif %}
     {% endwith %}
 
-    <p><a class="js-hide-reveal-link" href="#national-assembly-people">Members of the National Assembly ({{ national_assembly_people_count }})</a></p>
+    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#national-assembly-people">Members of the National Assembly ({{ national_assembly_people_count }})</a>
 
     <div id="national-assembly-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=national_assembly_people %}
@@ -50,7 +50,7 @@
         {% endif %}
     </div>
 
-    <p><a class="js-hide-reveal-link" href="#ncop-people">Members of the National Council of Provinces ({{ ncop_people_count }})</a></p>
+    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#ncop-people">Members of the National Council of Provinces ({{ ncop_people_count }})</a>
 
     <div id="ncop-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=ncop_people %}
