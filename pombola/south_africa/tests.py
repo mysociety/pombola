@@ -253,3 +253,39 @@ class SAHansardIndexViewTest(TestCase):
         # Check that we can see the titles of sections containing speeches only
         self.assertContains(response, "Proceedings of the National Assembly (2012/2/16)")
         self.assertNotContains(response, "Empty section")
+
+class SACommitteeIndexViewTest(TestCase):
+
+    def setUp(self):
+        create_sections([
+            {
+                'title': "Committee Minutes",
+                'subsections': [
+                    {   'title': "Agriculture, Forestry and Fisheries",
+                        'subsections': [
+                            {   'title': "16 November 2012",
+                                'subsections': [
+                                    {   'title': "Oh fishy fishy fishy fishy fishy fish",
+                                        'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
+                                    },
+                                    {
+                                        'title': "Empty section",
+                                    }
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ])
+
+
+    def test_committee_index_page(self):
+        c = Client()
+        response = c.get('/committee/')
+        self.assertEqual(response.status_code, 200)
+
+        # Check that we can see the titles of sections containing speeches only
+        self.assertContains(response, "16 November 2012")
+        self.assertContains(response, "Oh fishy fishy fishy fishy fishy fish")
+        self.assertNotContains(response, "Empty section")
