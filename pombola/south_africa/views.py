@@ -11,11 +11,14 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView, TemplateView
 from django.shortcuts import get_object_or_404
+from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 import mapit
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery
+from haystack.forms import SearchForm
 
 from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker
@@ -34,6 +37,9 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-office',
     'constituency-area', # specific to DA party
 )
+
+class LocationSearchForm(SearchForm):
+    q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))
 
 class LatLonDetailView(PlaceDetailView):
     template_name = 'south_africa/latlon_detail_view.html'
@@ -71,6 +77,20 @@ class LatLonDetailView(PlaceDetailView):
             .filter(location__distance_lte=(self.location, D(km=self.constituency_office_search_radius)))
             .order_by('distance')
             )
+
+        # FIXME - There must be a cleaner way/place to do this.
+        for office in nearest_offices:
+            try:
+                office.mp = models.Person.objects.get(position__in=office.organisation.position_set.filter(person__position__organisation__slug='national-assembly'))
+            except models.Person.DoesNotExist:
+                warnings.warn("{0} has no MPs".format(office.organisation))
+
+        context['form'] = LocationSearchForm()
+
+        context['politicians'] = (self.object
+            .all_related_current_politicians()
+            .filter(position__organisation__slug='national-assembly')
+        )
 
         return context
 

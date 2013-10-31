@@ -2,7 +2,7 @@
   <span class="name">
     <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a>
     {% if object.distance != None %}
-      ({{ object.distance.km|floatformat:1 }}km)
+      <span class="distance">{{ object.distance.km|floatformat:1 }}km</span>
     {% endif %}
   </span>
 
@@ -13,14 +13,19 @@
     {% endfor %}
   </ul>
 
-  <ul class="unstyled-list tiny-list-of-people">
+  {% if not skip_positions %}
+    <ul class="unstyled-list tiny-list-of-people">
     {% for position in object.related_positions %}
       {% with object=position.person %}
         {% include 'core/generic_list_item.html' %}
       {% endwith %}
     {% endfor %}
-  </ul>
+    </ul>
+  {% endif %}
 
+  {% if object.mp %}
+    <p class="constituency-office-mp-name">MP: {{ object.mp }}</p>
+  {% endif %}
   <script>
     add_marker_to_map({
       lat: {{ object.location.y }},
