@@ -1,7 +1,7 @@
 
 from django.test import TestCase
 
-from ..templatetags.breadcrumbs import breadcrumbs
+from ..templatetags.breadcrumbs import breadcrumbs, url_name_mappings
 from ..templatetags.active_class import active_class
 
 
@@ -28,6 +28,13 @@ class BreadcrumbTest(TestCase):
         for url, expected in tests:
             actual = breadcrumbs(url)
             self.assertEqual(actual, expected)
+
+    def test_breadcrumb_url_name_mappings(self):
+        for name, title_url in url_name_mappings.iteritems():
+            title, url = title_url
+            actual = breadcrumbs(name + '/foo')
+            self.assertTrue(title in actual, "Expected {0} to be in {1}".format(title, actual))
+            self.assertTrue(url in actual, "Expected {0} to be in {1}".format(url, actual))
 
 
 class ActiveClassTest(TestCase):
