@@ -2,7 +2,8 @@ from django.conf.urls import patterns, include, url
 
 from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
-    SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex
+    SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex, \
+    SACommitteeSectionRedirectView, SACommitteeSpeechRedirectView
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
@@ -40,15 +41,21 @@ sayit_patterns = patterns('',
 
     # Fake endpoint to redirect
     url(r'^speaker/(?P<pk>\d+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
-
 )
 
 hansard_patterns = sayit_patterns + patterns('',
     # special Hansard index page that provides listing of the hansard sessions that contain speeches.
     url(r'^$', SAHansardIndex.as_view(), name='section-list'),
 )
-committee_patterns = sayit_patterns + patterns('',
-    # TODO, this is wrong
+
+committee_patterns = patterns('',
+    # Exposed endpoints
+    url(r'^(?P<pk>\d+)$',        SACommitteeSectionRedirectView.as_view(), name='section-view'),
+    url(r'^speech/(?P<pk>\d+)$', SACommitteeSpeechRedirectView.as_view(),  name='speech-view'),
+
+    # Fake endpoint to redirect
+    url(r'^speaker/(?P<pk>\d+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
+
     url(r'^$', SACommitteeIndex.as_view(), name='section-list'),
 )
 urlpatterns += patterns('',

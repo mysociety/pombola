@@ -337,3 +337,32 @@ class SACommitteeIndex(SASpeechesIndex):
     top_section_name='Committee Minutes'
     section_parent_field = 'section__parent__parent__parent'
     sections_to_show = 25
+
+class SACommitteeSpeechRedirectView(RedirectView):
+
+    def get_redirect_url(self, **kwargs):
+        try:
+            id = int( kwargs['pk'] )
+            speech = Speech.objects.get( id=id )
+            source_url = speech.source_url
+            if source_url:
+                return source_url
+        except Exception as e:
+            raise Http404
+
+        raise Http404("No source URL for this content")
+
+class SACommitteeSectionRedirectView(RedirectView):
+
+    def get_redirect_url(self, **kwargs):
+        try:
+            id = int( kwargs['pk'] )
+            section = Section.objects.get( id=id )
+            for speech in section.speech_set.all():
+                source_url = speech.source_url
+                if source_url:
+                    return source_url
+        except Exception as e:
+            raise Http404
+
+        raise Http404("No source URL for this content")
