@@ -16,7 +16,7 @@ from pombola.core import models
 import json
 
 from popit.models import Person as PopitPerson, ApiInstance
-from speeches.models import Speaker
+from speeches.models import Speaker, Section
 from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.south_africa.views import SAPersonDetail
@@ -250,8 +250,12 @@ class SAHansardIndexViewTest(TestCase):
         response = c.get('/hansard/')
         self.assertEqual(response.status_code, 200)
 
+        section_name = "Proceedings of the National Assembly (2012/2/16)"
+        section = Section.objects.get(title=section_name)
+
         # Check that we can see the titles of sections containing speeches only
-        self.assertContains(response, "Proceedings of the National Assembly (2012/2/16)")
+        self.assertContains(response, section_name)
+        self.assertContains(response, '<a href="/hansard/%d">%s</a>' % (section.id, section_name), html=True)
         self.assertNotContains(response, "Empty section")
 
 class SACommitteeIndexViewTest(TestCase):
@@ -285,7 +289,11 @@ class SACommitteeIndexViewTest(TestCase):
         response = c.get('/committee/')
         self.assertEqual(response.status_code, 200)
 
+        section_name = "Oh fishy fishy fishy fishy fishy fish"
+        section = Section.objects.get(title=section_name)
+
         # Check that we can see the titles of sections containing speeches only
         self.assertContains(response, "16 November 2012")
-        self.assertContains(response, "Oh fishy fishy fishy fishy fishy fish")
+        self.assertContains(response, section_name)
+        self.assertContains(response, '<a href="/committee/%d">%s</a>' % (section.id, section_name), html=True)
         self.assertNotContains(response, "Empty section")
