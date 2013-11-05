@@ -31,8 +31,3 @@ geocode cache at `pombola/south_africa/management/commands/.geocode-request-cach
 To load in some example SayIt data, fetch the speeches/fixtures/test_inputs/
 
     $ python manage.py load_akomantoso --dir <speeches/fixtures/test_inputs/> --commit
-
-Load in the MP profiles scraped off others sites:
-
-    $ python manage.py south_africa_import_bios_from_json pombola/south_africa/data/mp_bios/mpbios.json
-
