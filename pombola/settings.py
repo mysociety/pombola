@@ -340,6 +340,10 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+# Use a different elasticsearch index if running in test mode.
+if 'test' in sys.argv:
+    HAYSTACK_CONNECTIONS['default']['INDEX_NAME'] = config.get('POMBOLA_DB_NAME') + '_test'
+
 # Admin autocomplete
 AJAX_LOOKUP_CHANNELS = {
     'person_name'       : dict(model='core.person',        search_field='legal_name'),
