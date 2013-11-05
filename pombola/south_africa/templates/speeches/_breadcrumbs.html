@@ -4,7 +4,7 @@
     <li><a href="{% url 'speeches:section-list' %}">Hansard</a> <span class="divider">&rarr;</span></li>
 {% for n in section.get_ancestors %}
 {% if n.id != section.id and forloop.counter != 1 %}
-    <li><a href="{{ n.get_absolute_url }}">{{ n.title }}</a> <span class="divider">&rarr;</span></li>
+    <li><a href="{% url 'speeches:section-view' n.id %}">{{ n.title }}</a> <span class="divider">&rarr;</span></li>
 {% endif %}
 {% endfor %}
 </ul>

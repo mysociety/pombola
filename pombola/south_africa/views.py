@@ -22,7 +22,7 @@ from haystack.forms import SearchForm
 
 from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker
-from speeches.views import SpeakerView
+from speeches.views import AddCurrentAppMixin
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
@@ -277,7 +277,7 @@ class SASpeakerRedirectView(RedirectView):
         except Exception as e:
             raise Http404
 
-class SASpeechesIndex(TemplateView):
+class SASpeechesIndex(AddCurrentAppMixin, TemplateView):
     template_name = 'south_africa/hansard_index.html'
     top_section_name='Hansard'
     sections_to_show = 25
