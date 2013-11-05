@@ -189,7 +189,7 @@ class SAPersonDetail(PersonDetail):
         except ObjectDoesNotExist:
             return None
 
-    def get_recent_speeches_for_section(self, section_title):
+    def get_recent_speeches_for_section(self, section_title, limit=5):
         pombola_person = self.object
         sayit_speaker = self.get_sayit_speaker()
 
@@ -209,6 +209,9 @@ class SAPersonDetail(PersonDetail):
             sayit_section.descendant_speeches()
                 .filter(speaker=sayit_speaker)
                 .order_by('-start_date', '-start_time'))
+
+        if limit:
+            speeches = speeches[:limit]
 
         return speeches
 
