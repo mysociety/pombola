@@ -168,19 +168,12 @@ class SAOrganisationDetailView(OrganisationDetailView):
             return super(SAOrganisationDetailView, self).get_template_names()
 
 
-class SAPersonDetail(PersonDetail):
-
-    important_organisations = ('ncop', 'national-assembly', 'national-executive')
-
-    def get_sayit_speaker(self):
-        # see also SASpeakerRedirectView for mapping in opposite direction
-
-        pombola_person = self.object
-
+class PersonSpeakerMappings(object):
+    def pombola_person_to_sayit_speaker(self, person):
         try:
             i = models.Identifier.objects.get(
                 content_type = models.ContentType.objects.get_for_model(models.Person),
-                object_id = pombola_person.id,
+                object_id = person.id,
                 scheme = 'org.mysociety.za'
             )
             speaker = Speaker.objects.get(person__popit_id = i.scheme + i.identifier)
@@ -189,9 +182,14 @@ class SAPersonDetail(PersonDetail):
         except ObjectDoesNotExist:
             return None
 
+
+class SAPersonDetail(PersonDetail):
+
+    important_organisations = ('ncop', 'national-assembly', 'national-executive')
+
     def get_recent_speeches_for_section(self, section_title, limit=5):
         pombola_person = self.object
-        sayit_speaker = self.get_sayit_speaker()
+        sayit_speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(pombola_person)
 
         if not sayit_speaker:
             # Without a speaker we can't find any speeches
