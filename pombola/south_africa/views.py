@@ -367,3 +367,45 @@ class SACommitteeSectionRedirectView(RedirectView):
             raise Http404
 
         raise Http404("No source URL for this content")
+
+
+class SAPersonAppearanceView(TemplateView):
+
+    template_name = 'south_africa/person_appearances.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SAPersonAppearanceView, self).get_context_data(**kwargs)
+
+        person_slug  = self.kwargs['person_slug']
+        section_slug = self.kwargs['section_slug']
+
+        print person_slug
+        print section_slug
+
+        person = get_object_or_404(models.Person, slug=person_slug)
+        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
+
+        section_id = 41273 # fake for now
+
+        sqs = SearchQuerySet() \
+            .models(Speech) \
+            .filter(speaker=speaker.id) \
+            .filter(sections=section_id)
+
+        context['results'] = sqs
+
+        print sqs.count()
+
+        return context
+
+
+
+
+
+
+
+
+
+
+
+

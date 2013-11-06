@@ -1,0 +1,20 @@
+{# For South Africa the default person section is the experience tab #}
+{% extends 'core/person_base.html' %}
+{% load url from future %}
+
+
+{% block subcontent %}
+
+<h2>Appearances</h2>
+
+{% for result in results %}
+  {% with entry=result.object %}
+    <p>
+        <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
+        <div>{{ entry.start_date }}</div>
+        <div>{{ entry.text }}</div>
+    </p>
+  {% endwith %}
+{% endfor %}
+
+{% endblock %}
