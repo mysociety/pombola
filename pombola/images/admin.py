@@ -15,8 +15,11 @@ class ImageAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = [ 'thumbnail', 'content_object', 'is_primary', 'source',  ]
 
     def thumbnail(self, obj):
-        im = get_thumbnail(obj.image, '100x100')
-        return '<img src="%s" />' % ( im.url )
+        if obj.image:
+            im = get_thumbnail(obj.image, '100x100')
+            return '<img src="%s" />' % ( im.url )
+        else:
+            return "NO IMAGE FOUND"
     thumbnail.allow_tags = True
 
 
