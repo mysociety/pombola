@@ -13,6 +13,7 @@ from pombola.images import models
 
 class ImageAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = [ 'thumbnail', 'content_object', 'is_primary', 'source',  ]
+    search_fields = ['person__legal_name', 'id', 'source']
 
     def thumbnail(self, obj):
         if obj.image:
