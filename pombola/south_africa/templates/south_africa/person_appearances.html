@@ -12,7 +12,7 @@
 
   {% autopaginate speeches %}
 
-  {% include "core/person_speech_list.html" with speechlist=speeches %}
+  {% include "core/person_speech_list.html" with speechlist=speeches section_url=section_url %}
 
   {% paginate %}
 

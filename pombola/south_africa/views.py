@@ -402,6 +402,17 @@ class SAPersonAppearanceView(TemplateView):
         context['object']  = person
         context['speeches'] = speeches
 
+        # Add a hardcoded section-view url name to use for the speeches. Would
+        # rather this was not hardcoded here but seems hard to avoid.
+        if (speech_tag == 'hansard'):
+            context['section_url'] = 'hansard:section-view'
+        elif (speech_tag == 'committee-minutes'):
+            context['section_url'] = 'committee:section-view'
+        else:
+            # speech_tag not know. Use 'None' for template default instead
+            context['section_url'] = None
+
+
         return context
 
 
