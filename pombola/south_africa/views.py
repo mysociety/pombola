@@ -376,21 +376,24 @@ class SAPersonAppearanceView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SAPersonAppearanceView, self).get_context_data(**kwargs)
 
-        person_slug  = self.kwargs['person_slug']
-        speech_tag = self.kwargs['speech_tag']
+        # Extract slug and tag provided on url
+        person_slug = self.kwargs['person_slug']
+        speech_tag  = self.kwargs['speech_tag']
 
-        print person_slug
-        print speech_tag
-
+        # Find (or 404) matching objects
         person = get_object_or_404(models.Person, slug=person_slug)
         tag    = get_object_or_404(Tag, name=speech_tag)
 
+        # SayIt speaker is different to core.Person, Load the speaker
         speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
 
-        speeches = Speech.objects.filter(tags=tag, speaker=speaker).order_by('-start_date', '-start_time')
+        # Load the speeches. Pagination is done in the template
+        speeches = Speech.objects \
+            .filter(tags=tag, speaker=speaker) \
+            .order_by('-start_date', '-start_time')
 
-        context['object'] = person
-        print speeches.count()
+        # Store person as 'object' for the person_base.html template
+        context['object']  = person
         context['speeches'] = speeches
 
         return context
