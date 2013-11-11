@@ -6,7 +6,6 @@ from haystack.query import SearchQuerySet
 from haystack.views import SearchView
 
 from pombola.core    import models as core_models
-from pombola.hansard import models as hansard_models
 
 from .views import GeocoderView
 
@@ -70,6 +69,7 @@ urlpatterns = patterns('pombola.search.views',
 
 # Hansard search - only loaded if hansard is enabled
 if settings.ENABLED_FEATURES['hansard']:
+    from pombola.hansard import models as hansard_models
     urlpatterns += patterns('pombola.search.views',
         url(
             r'^hansard/$',

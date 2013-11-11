@@ -2,16 +2,17 @@
 
 from django.template import Library
 from django.utils.safestring import mark_safe
+from django.core.urlresolvers import resolve, Resolver404
 import re
 
 register = Library()
 
 url_name_mappings = {
-  'info'   : ('Information', '/info'),
-  'organisation' : ('Organisations', '/organisation/all'),
-  'person' : ('Politicians', '/person/all'),
-  'place' : ('Places', '/place/all'),
-  'search' : ('Search', '/search')
+  'info'   : ('Information', '/info/'),
+  'organisation' : ('Organisations', '/organisation/all/'),
+  'person' : ('Politicians', '/person/all/'),
+  'place' : ('Places', '/place/all/'),
+  'search' : ('Search', '/search/')
 }
 
 separator = ' <span class="sep">&raquo;</span> ';
@@ -50,16 +51,21 @@ def breadcrumbs(url):
                 bread.append(link)
                 if link in url_name_mappings:
                     (sub_link, this_url) = url_name_mappings[link]
-                if re.match(r'^[\d\-\.,]+$', link):
+                elif re.match(r'^[\d\-\.,]+$', link):
                     # eg '-1.23,4.56'
                     sub_link = link
                     sub_link = re.sub(r',\s*', ', ', sub_link)
                 else:
                     sub_link = re.sub('[_\-]', ' ', link).title()
                     sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
-                    this_url = "/".join(bread)
+                    this_url = "/{0}/".format("/".join(bread))
                 if not i == total:
-                    tlink = '<li><a href="%s/" title="Breadcrumb link to %s">%s</a> %s</li>' % (this_url, sub_link, sub_link, separator)
+                    try:
+                        resolve(this_url)
+                        tlink = '<li><a href="%s" title="Breadcrumb link to %s">%s</a> %s</li>' % (this_url, sub_link, sub_link, separator)
+                    except Resolver404:
+                        tlink = '<li>%s %s</li>' % (sub_link, separator)
+
                 else:
                     tlink = '<li>%s</li>' % sub_link
                 home.append(tlink)
