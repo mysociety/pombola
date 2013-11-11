@@ -4,7 +4,7 @@ from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
     SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex, \
     SACommitteeSectionRedirectView, SACommitteeSpeechRedirectView, \
-    SAPersonAppearanceView
+    SAPersonAppearanceView, SAQuestionIndex
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
@@ -74,7 +74,14 @@ committee_patterns = patterns('',
 
     url(r'^$', SACommitteeIndex.as_view(), name='section-list'),
 )
+
+question_patterns = sayit_patterns + patterns('',
+    # special Hansard index page that provides listing of the hansard sessions that contain speeches.
+    url(r'^$', SAQuestionIndex.as_view(), name='section-list'),
+)
+
 urlpatterns += patterns('',
     url(r'^hansard/',   include(hansard_patterns,   namespace='hansard',   app_name='speeches')),
     url(r'^committee/', include(committee_patterns, namespace='committee', app_name='speeches')),
+    url(r'^question/',  include(question_patterns,  namespace='question',  app_name='speeches')),
 )
