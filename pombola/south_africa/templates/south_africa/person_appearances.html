@@ -1,4 +1,3 @@
-{# For South Africa the default person section is the experience tab #}
 {% extends 'core/person_base.html' %}
 {% load url from future %}
 {% load pagination_tags %}
@@ -13,13 +12,7 @@
 
   {% autopaginate speeches %}
 
-  {% for speech in speeches %}
-      <p>
-          <a href="{{ speech.get_absolute_url }}">{{ speech.title }}</a>
-          <div>{{ speech.start_date }}</div>
-          <div>{{ speech.text|truncatewords:100 }}</div>
-      </p>
-  {% endfor %}
+  {% include "core/person_speech_list.html" with speechlist=speeches %}
 
   {% paginate %}
 
