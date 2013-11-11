@@ -21,7 +21,7 @@ from haystack.inputs import AutoQuery
 from haystack.forms import SearchForm
 
 from popit.models import Person as PopitPerson
-from speeches.models import Section, Speech, Speaker
+from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import SpeakerView
 
 from pombola.core import models
@@ -377,24 +377,20 @@ class SAPersonAppearanceView(TemplateView):
         context = super(SAPersonAppearanceView, self).get_context_data(**kwargs)
 
         person_slug  = self.kwargs['person_slug']
-        section_slug = self.kwargs['section_slug']
+        speech_tag = self.kwargs['speech_tag']
 
         print person_slug
-        print section_slug
+        print speech_tag
 
         person = get_object_or_404(models.Person, slug=person_slug)
+        tag    = get_object_or_404(Tag, name=speech_tag)
+
         speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
 
-        section_id = 41273 # fake for now
+        speeches = Speech.objects.filter(tags=tag, speaker=speaker).order_by('-start_date', '-start_time')
 
-        sqs = SearchQuerySet() \
-            .models(Speech) \
-            .filter(speaker=speaker.id) \
-            .filter(sections=section_id)
-
-        context['results'] = sqs
-
-        print sqs.count()
+        context['results'] = speeches
+        print speeches.count()
 
         return context
 

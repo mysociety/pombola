@@ -7,14 +7,12 @@
 
 <h2>Appearances</h2>
 
-{% for result in results %}
-  {% with entry=result.object %}
+{% for entry in results %}
     <p>
         <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
         <div>{{ entry.start_date }}</div>
-        <div>{{ entry.text }}</div>
+        <div>{{ entry.text|truncatewords:100 }}</div>
     </p>
-  {% endwith %}
 {% endfor %}
 
 {% endblock %}
