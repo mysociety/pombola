@@ -19,7 +19,7 @@ for index, pattern in enumerate(person_patterns):
     if pattern.name == 'person':
         person_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAPersonDetail.as_view(), name='person')
 
-# Catch /person/{person_slug}/appearances/{section_slug} urls and serve the
+# Catch /person/{person_slug}/appearances/{speech_tag} urls and serve the
 # appropriate content.
 urlpatterns = patterns('',
 
@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     # url(r'^person/(?P<person_slug>[-\w]+)/appearances/$', ........ ),
 
     url(
-        r'^person/(?P<person_slug>[-\w]+)/appearances/(?P<section_slug>[-\w]+)/$',
+        r'^person/(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
         SAPersonAppearanceView.as_view(),
         name='sa-person-appearance'
     ),
