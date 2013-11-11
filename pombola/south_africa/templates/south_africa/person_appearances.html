@@ -3,22 +3,24 @@
 {% load url from future %}
 {% load pagination_tags %}
 
+
 {% block title %}{{ object.name }} Appearances{% endblock %}
+
 
 {% block subcontent %}
 
-<h2>Appearances</h2>
+  <h2>Appearances</h2>
 
-{% autopaginate results %}
+  {% autopaginate speeches %}
 
-{% for entry in results %}
-    <p>
-        <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
-        <div>{{ entry.start_date }}</div>
-        <div>{{ entry.text|truncatewords:100 }}</div>
-    </p>
-{% endfor %}
+  {% for speech in speeches %}
+      <p>
+          <a href="{{ speech.get_absolute_url }}">{{ speech.title }}</a>
+          <div>{{ speech.start_date }}</div>
+          <div>{{ speech.text|truncatewords:100 }}</div>
+      </p>
+  {% endfor %}
 
-{% paginate %}
+  {% paginate %}
 
 {% endblock %}
