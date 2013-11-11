@@ -389,6 +389,7 @@ class SAPersonAppearanceView(TemplateView):
 
         speeches = Speech.objects.filter(tags=tag, speaker=speaker).order_by('-start_date', '-start_time')
 
+        context['object'] = person
         context['results'] = speeches
         print speeches.count()
 
