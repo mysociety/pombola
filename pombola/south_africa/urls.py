@@ -3,7 +3,8 @@ from django.conf.urls import patterns, include, url
 from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
     SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex, \
-    SACommitteeSectionRedirectView, SACommitteeSpeechRedirectView
+    SACommitteeSectionRedirectView, SACommitteeSpeechRedirectView, \
+    SAPersonAppearanceView
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
@@ -18,11 +19,26 @@ for index, pattern in enumerate(person_patterns):
     if pattern.name == 'person':
         person_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAPersonDetail.as_view(), name='person')
 
+# Catch /person/{person_slug}/appearances/{speech_tag} urls and serve the
+# appropriate content.
+urlpatterns = patterns('',
+
+    # FIXME - implement a redirect to /persons/joe-bloggs#appearances when #930
+    # done
+    # url(r'^person/(?P<person_slug>[-\w]+)/appearances/$', ........ ),
+
+    url(
+        r'^person/(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
+        SAPersonAppearanceView.as_view(),
+        name='sa-person-appearance'
+    ),
+)
+
 for index, pattern in enumerate(search_urlpatterns):
     if pattern.name == 'core_search':
         search_urlpatterns[index] = url(r'^$', SASearchView(), name='core_search')
 
-urlpatterns = patterns('pombola.south_africa.views',
+urlpatterns += patterns('pombola.south_africa.views',
     url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/', LatLonDetailView.as_view(), name='latlon'),
     url(r'^place/(?P<slug>[-\w]+)/$', SAPlaceDetailView.as_view(), name='place'),
 
