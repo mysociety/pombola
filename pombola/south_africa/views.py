@@ -406,7 +406,7 @@ class SAPersonAppearanceView(TemplateView):
         # rather this was not hardcoded here but seems hard to avoid.
         if (speech_tag == 'hansard'):
             context['section_url'] = 'hansard:section-view'
-        elif (speech_tag == 'committee-minutes'):
+        elif (speech_tag == 'committee'):
             context['section_url'] = 'committee:section-view'
         else:
             # speech_tag not know. Use 'None' for template default instead
