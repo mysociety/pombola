@@ -249,7 +249,7 @@ class SAHansardIndexViewTest(TestCase):
         response = c.get('/hansard/')
         self.assertEqual(response.status_code, 200)
 
-        section_name = "Proceedings of the National Assembly (2012/2/16)"
+        section_name = "Proceedings of Foo"
         section = Section.objects.get(title=section_name)
 
         # Check that we can see the titles of sections containing speeches only
