@@ -102,16 +102,18 @@ pombola_settings.extra_js.push('js/tabs.js')
     <section class="person-appearances">
       <h3>Committee appearances</h3>
 
-      <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee-minutes' %}">All Committee Appearances</a></p>
+      <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
 
       {% include "core/person_speech_list.html" with speechlist=committee section_url='committee:section-view' %}
     </section>
 
-    <!--
     <section class="person-appearances">
       <h3>Questions </h3>
+
+      <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
+
+      {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' %}
     </section>
-    -->
 
   </div>
 
