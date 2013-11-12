@@ -226,7 +226,7 @@ class SAPersonDetail(PersonDetail):
         # FIXME - the titles used here will need to be checked and fixed.
         context['hansard']   = self.get_recent_speeches_for_section("Hansard")
         context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
-        context['questions'] = self.get_recent_speeches_for_section("Questions")
+        context['question']  = self.get_recent_speeches_for_section("Questions")
 
         return context
 
