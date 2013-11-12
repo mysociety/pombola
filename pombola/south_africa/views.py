@@ -404,10 +404,8 @@ class SAPersonAppearanceView(TemplateView):
 
         # Add a hardcoded section-view url name to use for the speeches. Would
         # rather this was not hardcoded here but seems hard to avoid.
-        if (speech_tag == 'hansard'):
-            context['section_url'] = 'hansard:section-view'
-        elif (speech_tag == 'committee'):
-            context['section_url'] = 'committee:section-view'
+        if (speech_tag in ['hansard', 'committee', 'question']):
+            context['section_url'] = '%s:section-view' % speech_tag
         else:
             # speech_tag not know. Use 'None' for template default instead
             context['section_url'] = None
