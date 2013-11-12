@@ -19,7 +19,7 @@ from popit.models import Person as PopitPerson, ApiInstance
 from speeches.models import Speaker, Section
 from speeches.tests import create_sections
 from pombola import south_africa
-from pombola.south_africa.views import SAPersonDetail
+from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
 
 class ConstituencyOfficesTestCase(WebTest):
@@ -190,8 +190,7 @@ class SAPersonDetailViewTest(TestCase):
 
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
-        detail = SAPersonDetail( object=person )
-        speaker = detail.get_sayit_speaker()
+        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
         self.assertEqual( speaker.name, 'Moomin Finn' )
 
 class SAHansardIndexViewTest(TestCase):
