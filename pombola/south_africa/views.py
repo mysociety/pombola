@@ -410,17 +410,4 @@ class SAPersonAppearanceView(TemplateView):
             # speech_tag not know. Use 'None' for template default instead
             context['section_url'] = None
 
-
         return context
-
-
-
-
-
-
-
-
-
-
-
-
