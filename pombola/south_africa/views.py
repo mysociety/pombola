@@ -342,7 +342,7 @@ class SACommitteeIndex(SASpeechesIndex):
 class SAQuestionIndex(SASpeechesIndex):
     template_name = 'south_africa/hansard_index.html'
     top_section_name='Questions'
-    section_parent_field = 'section__parent__parent__parent'
+    section_parent_field = 'section__parent__parent'
     sections_to_show = 25
 
 class SACommitteeSpeechRedirectView(RedirectView):
