@@ -694,16 +694,20 @@ HOME PAGE INTRO BOX
 #front_intro .home-right h2 {
     color: #fff;
     text-transform: none;
-    line-height: 1.25em;
+    line-height: 1.35em;
     @include lato-regular;
     font-weight: normal;
     @include text-shadow(0px 2px 1px rgba(0, 0, 0, .25));
     font-size: 21px;
     margin-bottom: 1em;
     @media only all and (min-width: 640px), print {
-        font-size: 32px;
         margin-top: 1em;
         margin-bottom: 0;
+    }
+    small {
+        display: block;
+        opacity: 0.8;
+        font-size: 16px;
     }
 
 

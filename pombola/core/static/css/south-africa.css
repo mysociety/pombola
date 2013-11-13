@@ -3746,7 +3746,7 @@ HOME PAGE INTRO BOX
 #front_intro .home-right h2 {
   color: #fff;
   text-transform: none;
-  line-height: 1.25em;
+  line-height: 1.35em;
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
   font-weight: normal !important;
   font-weight: normal;
@@ -3756,10 +3756,14 @@ HOME PAGE INTRO BOX
 }
 @media only all and (min-width: 640px), print {
   #front_intro .home-right h2 {
-    font-size: 32px;
     margin-top: 1em;
     margin-bottom: 0;
   }
+}
+#front_intro .home-right h2 small {
+  display: block;
+  opacity: 0.8;
+  font-size: 16px;
 }
 
 #page .home-left h2 {
