@@ -21,7 +21,7 @@ from haystack.inputs import AutoQuery
 from haystack.forms import SearchForm
 
 from popit.models import Person as PopitPerson
-from speeches.models import Section, Speech, Speaker
+from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import NamespaceMixin
 
 from pombola.core import models
@@ -168,19 +168,12 @@ class SAOrganisationDetailView(OrganisationDetailView):
             return super(SAOrganisationDetailView, self).get_template_names()
 
 
-class SAPersonDetail(PersonDetail):
-
-    important_organisations = ('ncop', 'national-assembly', 'national-executive')
-
-    def get_sayit_speaker(self):
-        # see also SASpeakerRedirectView for mapping in opposite direction
-
-        pombola_person = self.object
-
+class PersonSpeakerMappings(object):
+    def pombola_person_to_sayit_speaker(self, person):
         try:
             i = models.Identifier.objects.get(
                 content_type = models.ContentType.objects.get_for_model(models.Person),
-                object_id = pombola_person.id,
+                object_id = person.id,
                 scheme = 'org.mysociety.za'
             )
             speaker = Speaker.objects.get(person__popit_id = i.scheme + i.identifier)
@@ -189,9 +182,14 @@ class SAPersonDetail(PersonDetail):
         except ObjectDoesNotExist:
             return None
 
-    def get_recent_speeches_for_section(self, section_title):
+
+class SAPersonDetail(PersonDetail):
+
+    important_organisations = ('ncop', 'national-assembly', 'national-executive')
+
+    def get_recent_speeches_for_section(self, section_title, limit=5):
         pombola_person = self.object
-        sayit_speaker = self.get_sayit_speaker()
+        sayit_speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(pombola_person)
 
         if not sayit_speaker:
             # Without a speaker we can't find any speeches
@@ -210,6 +208,9 @@ class SAPersonDetail(PersonDetail):
                 .filter(speaker=sayit_speaker)
                 .order_by('-start_date', '-start_time'))
 
+        if limit:
+            speeches = speeches[:limit]
+
         return speeches
 
 
@@ -225,7 +226,7 @@ class SAPersonDetail(PersonDetail):
         # FIXME - the titles used here will need to be checked and fixed.
         context['hansard']   = self.get_recent_speeches_for_section("Hansard")
         context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
-        context['questions'] = self.get_recent_speeches_for_section("Questions")
+        context['question']  = self.get_recent_speeches_for_section("Questions")
 
         return context
 
@@ -341,7 +342,7 @@ class SACommitteeIndex(SASpeechesIndex):
 class SAQuestionIndex(SASpeechesIndex):
     template_name = 'south_africa/hansard_index.html'
     top_section_name='Questions'
-    section_parent_field = 'section__parent__parent__parent'
+    section_parent_field = 'section__parent__parent'
     sections_to_show = 25
 
 class SACommitteeSpeechRedirectView(RedirectView):
@@ -372,3 +373,41 @@ class SACommitteeSectionRedirectView(RedirectView):
             raise Http404
 
         raise Http404("No source URL for this content")
+
+
+class SAPersonAppearanceView(TemplateView):
+
+    template_name = 'south_africa/person_appearances.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SAPersonAppearanceView, self).get_context_data(**kwargs)
+
+        # Extract slug and tag provided on url
+        person_slug = self.kwargs['person_slug']
+        speech_tag  = self.kwargs['speech_tag']
+
+        # Find (or 404) matching objects
+        person = get_object_or_404(models.Person, slug=person_slug)
+        tag    = get_object_or_404(Tag, name=speech_tag)
+
+        # SayIt speaker is different to core.Person, Load the speaker
+        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
+
+        # Load the speeches. Pagination is done in the template
+        speeches = Speech.objects \
+            .filter(tags=tag, speaker=speaker) \
+            .order_by('-start_date', '-start_time')
+
+        # Store person as 'object' for the person_base.html template
+        context['object']  = person
+        context['speeches'] = speeches
+
+        # Add a hardcoded section-view url name to use for the speeches. Would
+        # rather this was not hardcoded here but seems hard to avoid.
+        if (speech_tag in ['hansard', 'committee', 'question']):
+            context['section_url'] = '%s:section-view' % speech_tag
+        else:
+            # speech_tag not know. Use 'None' for template default instead
+            context['section_url'] = None
+
+        return context

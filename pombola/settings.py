@@ -43,9 +43,9 @@ config = yaml.load( open(config_file, 'r') )
 
 # Configure the optional apps
 ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch', 'speeches' )
-OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
+OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS' ) or [] )
 if 'speeches' in OPTIONAL_APPS: # Add its dependent apps
-    OPTIONAL_APPS = ('django_select2', 'django_bleach', 'popit', 'instances') + OPTIONAL_APPS
+    OPTIONAL_APPS = ('django_select2', 'django_bleach', 'popit', 'instances', 'popit_resolver') + OPTIONAL_APPS
 
 if int(config.get('STAGING')):
     STAGING = True
