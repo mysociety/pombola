@@ -11,30 +11,26 @@
 {% block content %}
 
 
-{% for entry in entries %}
-    {% ifchanged entry.section.parent.title %}
-        {% if not forloop.first %}
-            </div>
-        {% endif %}
-    {% endifchanged %}
+{% regroup entries by section.parent.title.strip as by_title %}
+{% for t in by_title %}
+    {% regroup t.list by start_date as by_date %}
+    <div>
+        <a class="js-hide-reveal-link hansard-section-title has-dropdown-dark" href="#{{ t.grouper|slugify }}">
+            <h2> {{ t.grouper }} </h2>
+            {% for d in by_date %}
+                {{ d.grouper }} {% if not forloop.last %},{% endif %}
+            {% endfor %}
+        </a>
 
-    {% ifchanged entry.section.parent.title %}
-    <a class="js-hide-reveal-link hansard-section-title has-dropdown-dark" href="#{{ entry.section.parent.title|slugify }}">
-        <h2>{{ entry.section.parent.title }}</h2>
-        <p>{{ entry.start_date }}</p>
-    </a>
-    {% endifchanged %}
-
-    {% ifchanged entry.start_date %}
-        <div class="js-hide-reveal hansard-section" id="{{ entry.section.parent.title|slugify }}">
-    {% endifchanged %}
-    <p>
-        <a href="{% url 'speeches:section-view' entry.section.id %}">{{ entry.section.title }}</a>
-        ({{ entry.speech_count }})
-    </p>
-    {% if forloop.last %}
+        <div class="js-hide-reveal hansard-section" id="{{ t.grouper|slugify }}">
+            {% for item in t.list %}
+            <p>
+                <a href="{% url 'speeches:section-view' item.section.id %}">{{ item.section.title }}</a>
+                ({{ item.speech_count }})
+            </p>
+            {% endfor %}
         </div>
-    {% endif %}
 
+    </div>
 {% endfor %}
 {% endblock %}
