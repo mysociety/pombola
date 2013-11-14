@@ -13,9 +13,9 @@
     <div class="column minor-column">
       <div class="filters sidebar">
         <h3>Show</h3>
-        <p><a href="?historic=" class="{% if not request.GET.historic and not request.GET.all %}active{% endif %}">Current members ({{ all_positions.currently_active.count }})</a></p>
-        <p><a href="?historic=1" class="{% if request.GET.historic %}active{% endif %}">Past members ({{ all_positions.currently_inactive.count }})</a></p>
-        <p><a href="?all=1" class="{% if request.GET.all %}active{% endif %}">All members ({{ all_positions.count }})</a></p>
+        <p><a href="?historic=" class="{% if not request.GET.historic and not request.GET.all %}active{% endif %}">Current members</a></p>
+        <p><a href="?historic=1" class="{% if request.GET.historic %}active{% endif %}">Past members</a></p>
+        <p><a href="?all=1" class="{% if request.GET.all %}active{% endif %}">All members</a></p>
 
         <h3>Sort by</h3>
         <p><a href="?order=name" class="{% if request.GET.order == "name" %}active{% endif %}">Alphabetical</a></p>
@@ -24,46 +24,35 @@
       </div>
     </div>
 
+    {% regroup sorted_positions by person as regroup_on_person_list %}
+
     <div class="column major-column">
       <div class="list-of-things list-of-people">
-          {% autopaginate sorted_positions %}
+          {% autopaginate regroup_on_person_list %}
 
           <ul class="unstyled-list">
-          {% for position in positions %}
-              {% with object=position.person %}
+          {% for regroup_item in regroup_on_person_list %}
+              {% with person=regroup_item.grouper positions=regroup_item.list %}
 
-                <li class="list-of-things-item {{ object.css_class }}-list-item{% if not object.show_active %} inactive{% endif %}">
+                <li class="list-of-things-item {{ person.css_class }}-list-item{% if not person.show_active %} inactive{% endif %}">
 
-                  <a href="{{ object.get_absolute_url }}">
-                      {% thumbnail object.primary_image "58x78" crop="center" as im %}
-                      <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                  <a href="{{ person.get_absolute_url }}">
+                      {% thumbnail person.primary_image "58x78" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
                       {% empty %}
                       <img src="{{STATIC_URL}}images/person-90x90.jpg" height="58" width="58"/>
                       {% endthumbnail %}
 
-                      <span class="name">{{ object.name }}</span>
+                      <span class="name">{{ person.name }}</span>
                   </a>
 
-                  {% for position in object.position_set.all.currently_active %}
-                  {% if position.place %}
-                  <div class="position-place">
-                      <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
-
-                      {% if position.place.parent_place %}
-                      <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
-                      {{ position.place.parent_place.kind.name }}
+                  {% for position in positions %}
+                      {{ position.title }}
+                      {% if position.place %}
+                          (<a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>)
                       {% endif %}
-                  </div>
-                  {% endif %}
+                      <br/>
                   {% endfor %}
-
-                  {% if object.parties %}
-                  <div class="position-parties">
-                      {% for party in object.parties %}
-                      <a class="position-party" href="{{ party.get_absolute_url }}">{{ party.name }}</a>
-                      {% endfor %}
-                  </div>
-                  {% endif %}
 
                 </li>
 
