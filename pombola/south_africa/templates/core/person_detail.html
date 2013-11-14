@@ -112,7 +112,7 @@ pombola_settings.extra_js.push('js/tabs.js')
 
       <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
 
-      {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' %}
+      {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' parent_title=1 %}
     </section>
 
   </div>
