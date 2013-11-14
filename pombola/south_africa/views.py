@@ -112,6 +112,10 @@ class SAPlaceDetailView(PlaceDetailView):
         context['ncop_people']        = self.object.all_related_current_politicians().filter(position__organisation__slug='ncop')
         context['former_ncop_people'] = self.object.all_related_former_politicians().filter(position__organisation__slug='ncop')
 
+        context['legislature_people_count']  = self.object.all_related_politicians().filter(position__organisation__kind__slug='provincial-legislature').count()
+        context['legislature_people']        = self.object.all_related_current_politicians().filter(position__organisation__kind__slug='provincial-legislature')
+        context['former_legislature_people'] = self.object.all_related_former_politicians().filter(position__organisation__kind__slug='provincial-legislature')
+
         context['other_people'] = (
             models.Person.objects
               .filter(position__place=self.object)
@@ -119,6 +123,8 @@ class SAPlaceDetailView(PlaceDetailView):
               .exclude(id__in=context['former_national_assembly_people'])
               .exclude(id__in=context['ncop_people'])
               .exclude(id__in=context['former_ncop_people'])
+              .exclude(id__in=context['legislature_people'])
+              .exclude(id__in=context['former_legislature_people'])
         )
         return context
 
