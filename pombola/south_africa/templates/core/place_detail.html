@@ -60,6 +60,16 @@
         {% endif %}
     </div>
 
+    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#provinicial-legislature-people">Members of the Provincial Legislature ({{ legislature_people_count }})</a>
+
+    <div id="provinicial-legislature-people" class="person-panel js-hide-reveal">
+        {% include "core/_people_listing.html" with people=legislature_people %}
+        {% if former_legislature_people %}
+        <p>Former members</p>
+        {% include "core/_people_listing.html" with people=former_legislature_people %}
+        {% endif %}
+    </div>
+
     {% if other_people %}
     <p><a class="js-hide-reveal-link" href="#other-people">Other people ({{ other_people.count }})</a></p>
 
