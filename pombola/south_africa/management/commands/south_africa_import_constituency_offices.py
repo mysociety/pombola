@@ -7,6 +7,10 @@
 # in different tables.  I strongly suggest this is only used for the
 # initial import on the 'all constituencies2.csv', or that file with
 # fixes manually applied to it.
+#
+# The CSV can be downloaded from:
+# https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE#gid=0
+#
 
 # Things still to do and other notes:
 #
