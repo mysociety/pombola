@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load pagination_tags %}
+{% load thumbnail %}
+
 
 {% block title %}{{ object.name }} People{% endblock %}
 
@@ -26,8 +28,50 @@
       <div class="list-of-things list-of-people">
           {% autopaginate sorted_positions %}
 
-          {# pombola/south_africa/templates/core/_position_listing.html #}
-          {% include "core/_position_listing.html" with positions=sorted_positions %}
+          <ul class="unstyled-list">
+          {% for position in positions %}
+              {% with object=position.person %}
+
+                <li class="list-of-things-item {{ object.css_class }}-list-item{% if not object.show_active %} inactive{% endif %}">
+
+                  <a href="{{ object.get_absolute_url }}">
+                      {% thumbnail object.primary_image "58x78" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                      {% empty %}
+                      <img src="{{STATIC_URL}}images/person-90x90.jpg" height="58" width="58"/>
+                      {% endthumbnail %}
+
+                      <span class="name">{{ object.name }}</span>
+                  </a>
+
+                  {% for position in object.position_set.all.currently_active %}
+                  {% if position.place %}
+                  <div class="position-place">
+                      <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
+
+                      {% if position.place.parent_place %}
+                      <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
+                      {{ position.place.parent_place.kind.name }}
+                      {% endif %}
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+
+                  {% if object.parties %}
+                  <div class="position-parties">
+                      {% for party in object.parties %}
+                      <a class="position-party" href="{{ party.get_absolute_url }}">{{ party.name }}</a>
+                      {% endfor %}
+                  </div>
+                  {% endif %}
+
+                </li>
+
+              {% endwith %}
+          {% empty %}
+              <li>No records found.</li>
+          {% endfor %}
+          </ul>
 
           {# pombola/south_africa/templates/core/_search_pagination_text.html #}
           {% include "core/_search_pagination_text.html" %}
