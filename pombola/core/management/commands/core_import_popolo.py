@@ -32,6 +32,7 @@ known_fields = {
                             'identifiers',
                             'contact_details',
                             'other_names',
+                            'biography',
                             'memberships',)),
                'ignored': set(('family_name',
                                'initials_alt',
