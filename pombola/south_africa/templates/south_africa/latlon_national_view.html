@@ -5,10 +5,14 @@
 
 {% block subcontent %}
 
-  <a href="{% url 'latlon' lat=location.y lon=location.x %}">View local representatives</a>
+  <ul class="tab-links">
+      <li><a href="{% url 'latlon' lat=location.y lon=location.x %}">Constituency offices</a></li>
+      <li><a href="{% url 'latlon-national' lat=location.y lon=location.x %}" class="active">National representatives</a></li>
+    </ul>
+
 
   <div class="column politicians-results">
-    <h2>National politicians</h2>
+    <h2>National representatives</h2>
 
     <ul class="unstyled-list">
         {% for politician in politicians %}
