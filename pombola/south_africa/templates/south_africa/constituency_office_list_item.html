@@ -17,7 +17,7 @@
     </div>
     <div class="column">
       {% if not skip_positions %}
-        <ul class="unstyled-list tiny-list-of-people">
+        <ul class="unstyled-list">
         {% for position in object.related_positions %}
           {% with object=position.person %}
             {% include 'core/generic_list_item.html' %}
