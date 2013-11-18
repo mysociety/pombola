@@ -4482,6 +4482,9 @@ ul.pager li.next {
   padding-top: 1em;
   position: relative;
 }
+.list-of-constituency-offices li {
+  overflow: hidden;
+}
 .list-of-constituency-offices a {
   color: #222222;
   text-decoration: none;

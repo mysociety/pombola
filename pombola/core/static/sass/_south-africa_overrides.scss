@@ -1416,6 +1416,9 @@ ul.pager {
         padding-top: 1em;
         position: relative;
     }
+    li {
+        overflow: hidden;
+    }
     a {
         color: $colour-black;
         text-decoration: none;
