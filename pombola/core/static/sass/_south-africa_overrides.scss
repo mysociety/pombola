@@ -1092,6 +1092,10 @@ FOOTER
         text-decoration: underline;
     }
 
+    a.active {
+        color: $colour_blackish;
+    }
+
     .vcard li {
         .label {
             display: block;

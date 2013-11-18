@@ -4153,6 +4153,9 @@ FOOTER
 .sidebar a:focus {
   text-decoration: underline;
 }
+.sidebar a.active {
+  color: #555555;
+}
 .sidebar .vcard li .label {
   display: block;
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
