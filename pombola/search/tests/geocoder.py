@@ -44,7 +44,6 @@ class GeocoderTests(unittest.TestCase):
         # These are well known results that should be in those returned
         expected_results = [
             {'address': u'Cape Town, South Africa', 'latitude': -33.925, 'longitude': 18.424},
-            {'address': u'Cape Town, South Africa', 'latitude': -33.925, 'longitude': 18.424}
         ]
 
         # These are how many we expect
