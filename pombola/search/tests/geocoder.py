@@ -38,3 +38,15 @@ class GeocoderTests(unittest.TestCase):
         # These are how many we expect
         self.assertEqual(len(results), 10)
 
+    def test_dedupe_matches(self):
+        results = geocoder(country=self.country, q="Cape Town")
+
+        # These are well known results that should be in those returned
+        expected_results = [
+            {'address': u'Cape Town, South Africa', 'latitude': -33.925, 'longitude': 18.424},
+            {'address': u'Cape Town, South Africa', 'latitude': -33.925, 'longitude': 18.424}
+        ]
+
+        # These are how many we expect
+        self.assertEqual(results, expected_results)
+
