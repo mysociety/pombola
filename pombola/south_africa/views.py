@@ -41,8 +41,7 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
 class LocationSearchForm(SearchForm):
     q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))
 
-class LatLonDetailView(PlaceDetailView):
-    template_name = 'south_africa/latlon_detail_view.html'
+class LatLonDetailBaseView(PlaceDetailView):
 
     # Using 25km as the default, as that's what's used on MyReps.
     constituency_office_search_radius = 25
@@ -65,7 +64,7 @@ class LatLonDetailView(PlaceDetailView):
         return province
 
     def get_context_data(self, **kwargs):
-        context = super(LatLonDetailView, self).get_context_data(**kwargs)
+        context = super(LatLonDetailBaseView, self).get_context_data(**kwargs)
         context['location'] = self.location
 
         context['office_search_radius'] = self.constituency_office_search_radius
@@ -93,6 +92,15 @@ class LatLonDetailView(PlaceDetailView):
         )
 
         return context
+
+
+class LatLonDetailNationalView(LatLonDetailBaseView):
+    template_name = 'south_africa/latlon_national_view.html'
+
+
+class LatLonDetailLocalView(LatLonDetailBaseView):
+    template_name = 'south_africa/latlon_local_view.html'
+
 
 
 class SAPlaceDetailView(PlaceDetailView):

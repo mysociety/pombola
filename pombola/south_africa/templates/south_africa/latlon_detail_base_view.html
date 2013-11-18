@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load url from future %}
+
+{% block content %}
+
+  <h1>Find your representatives</h1>
+
+  <form action="{% url "core_geocoder_search" %}">
+    {% include "south_africa/_search_box.html" %}
+    <p>
+        E.g.
+        <a href="{% url "core_geocoder_search" %}?q=Long+Street">Long Street</a>,
+        <a href="{% url "core_geocoder_search" %}?q=Cape+Town">Cape Town</a>,
+        <a href="{% url "core_geocoder_search" %}?q=Soweto">Soweto</a>
+
+    </p>
+  </form>
+
+  <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+
+  <div id="map_canvas" style="width: 100%; height: 400px;"></div>
+
+  <div class="fifty-fifty-layout">
+
+    {% block subcontent %}
+    {% endblock %}
+
+  </div>
+{% endblock %}
