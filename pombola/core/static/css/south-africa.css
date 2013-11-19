@@ -4503,6 +4503,18 @@ ul.pager li.next {
 .list-of-constituency-offices .constituency-office-mp-name {
   font-size: 0.875em;
   color: #222222;
+  margin-bottom: 0;
+}
+.list-of-constituency-offices .constituency-office-mp-title {
+  font-size: 0.875em;
+  color: #555555;
+}
+.list-of-constituency-offices .constituency-office-mp-photo {
+  height: 58px;
+  width: 58px;
+  float: left;
+  margin-right: 16px;
+  margin-bottom: 1em;
 }
 .list-of-constituency-offices .distance {
   color: #b3b3b3;
