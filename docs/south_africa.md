@@ -38,6 +38,9 @@ First, initialise the resolver
 
     $ python manage.py  popit_resolver_init --popit-api-url=http://za-peoples-assembly.popit.mysociety.org/api/v0.1
 
+This will load data from popit (an instance with the same data used to populate
+the pombola person DB above!) and initialise the Elasticsearch index.
+
 ### Just load some sample data:
 
 To load in some example SayIt data, fetch the speeches/fixtures/test_inputs/
