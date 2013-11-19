@@ -4549,6 +4549,7 @@ ul.pager li.next {
 .list-of-constituency-offices .constituency-office-mp-title {
   font-size: 0.875em;
   color: #555555;
+  margin-bottom: 0;
 }
 .list-of-constituency-offices .constituency-office-mp-photo {
   height: 58px;
