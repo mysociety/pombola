@@ -239,6 +239,20 @@ class PersonSpeakerMappings(object):
         except ObjectDoesNotExist:
             return None
 
+    def sayit_speaker_to_pombola_person(self, speaker):
+        try:
+            popit_id = speaker.person.popit_id
+            [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
+            i = models.Identifier.objects.get(
+                content_type = models.ContentType.objects.get_for_model(models.Person),
+                scheme = scheme,
+                identifier = identifier,
+            )
+            person = models.Person.objects.get(id=i.object_id)
+            return person
+
+        except ObjectDoesNotExist:
+            return None
 
 class SAPersonDetail(PersonDetail):
 
@@ -318,19 +332,14 @@ class SANewsletterPage(InfoPageView):
 
 class SASpeakerRedirectView(RedirectView):
 
-    # see also SAPersonDetail for mapping in opposite direction
     def get_redirect_url(self, **kwargs):
         try:
             id = int( kwargs['pk'] )
+
             speaker = Speaker.objects.get( id=id )
-            popit_id = speaker.person.popit_id
-            [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
-            i = models.Identifier.objects.get(
-                content_type = models.ContentType.objects.get_for_model(models.Person),
-                scheme = scheme,
-                identifier = identifier,
-            )
-            person = models.Person.objects.get(id=i.object_id)
+            # SayIt speaker is different to core.Person, Load the person
+            person = PersonSpeakerMappings().sayit_speaker_to_pombola_person(speaker)
+
             return reverse('person', args=(person.slug,))
         except Exception as e:
             raise Http404

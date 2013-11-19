@@ -191,7 +191,8 @@ class SAPersonDetailViewTest(TestCase):
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
         speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
-        self.assertEqual( speaker.name, 'Moomin Finn' )
+        person2 = PersonSpeakerMappings().sayit_speaker_to_pombola_person(speaker)
+        self.assertEqual( person, person2 )
 
 class SAHansardIndexViewTest(TestCase):
 
