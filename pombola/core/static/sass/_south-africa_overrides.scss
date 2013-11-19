@@ -1404,6 +1404,38 @@ ul.pager {
         }
     }
 }
+@-webkit-keyframes target-fade {
+    0% {
+          background-color: $colour_main_background;
+          color: $colour-primary
+      }
+      100% {
+          background-color: rgba(0,0,0,0);
+          color: $colour_black;
+      }
+}
+@-moz-keyframes target-fade {
+    0% {
+          background-color: $colour_main_background;
+          color: $colour-primary
+      }
+      100% {
+          background-color: rgba(0,0,0,0);
+          color: $colour_black;
+      }
+}
+
+@keyframes target-fade {
+    0% {
+        background-color: $colour_main_background;
+        color: $colour-primary
+    }
+    100% {
+        background-color: rgba(0,0,0,0);
+        color: $colour_black;
+    }
+}
+
 
 /* Place page */
 .list-of-constituency-offices {
@@ -1419,6 +1451,14 @@ ul.pager {
     li {
         overflow: hidden;
     }
+    :target {
+        a {
+            -webkit-animation: target-fade 3s 1;
+            -moz-animation: target-fade 3s 1;
+            animation: target-fade 3s 1;
+        }
+    }
+
     a {
         color: $colour-black;
         text-decoration: none;
