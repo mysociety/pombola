@@ -4423,6 +4423,41 @@ ul.pager li.next {
   margin-top: -0.5em;
 }
 
+.house-splash {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+@media only all and (min-width: 640px), print {
+  .house-splash {
+    height: 15.5em;
+    background-color: #e23d28;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top left;
+  }
+  .house-splash.assembly {
+    background-image: url("/static/images/national-assembly.jpg");
+  }
+  .house-splash.council {
+    background-image: url("/static/images/national-council-of-provinces.jpg");
+  }
+}
+
+@media only all and (min-width: 640px), print {
+  .house-title {
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+  }
+  .house-title h1, .house-title p {
+    color: #fff;
+  }
+  .house-title h1 {
+    font-size: 36px;
+  }
+}
+
 .house-intro {
   font-size: 0.875em;
   color: colour_blackish;

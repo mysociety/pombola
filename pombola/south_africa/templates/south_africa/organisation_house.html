@@ -9,11 +9,14 @@ the organisation detail page.
 
 
 {% block content %}
-  <h1>{{ object.title }} {{ object.name }}</h1>
-  {% if object.kind.slug != 'unknown' %}
-    <p class="kind-of-subtitle">{{ object.kind.name }}</p>
-  {% endif %}
-
+<div class="house-splash assembly">
+  <div class="house-title">
+    <h1>{{ object.title }} {{ object.name }}</h1>
+    {% if object.kind.slug != 'unknown' %}
+      <p class="kind-of-subtitle">{{ object.kind.name }}</p>
+    {% endif %}
+  </div>
+</div>
   <div class="house-intro">
     {{ object.summary }}
   </div>
