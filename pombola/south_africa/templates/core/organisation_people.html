@@ -15,8 +15,8 @@
         <h3>Show</h3>
         <p><a href="?historic=" class="{% if not request.GET.historic and not request.GET.all %}active{% endif %}">Current people</a></p>
         <p><a href="?historic=1" class="{% if request.GET.historic %}active{% endif %}">Past people</a></p>
-        <p><a href="?member=1" class="{% if request.GET.all %}active{% endif %}">All members</a></p>
         <p><a href="?office=1" class="{% if request.GET.all %}active{% endif %}">Office bearers</a></p>
+        <p><a href="?member=1" class="{% if request.GET.all %}active{% endif %}">All members</a></p>
       </div>
     </div>
 
