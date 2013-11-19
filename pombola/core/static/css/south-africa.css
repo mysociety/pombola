@@ -4516,6 +4516,42 @@ ul.pager li.next {
   padding: 0.74em;
 }
 
+@-webkit-keyframes target-fade {
+  0% {
+    background-color: #f1f0ec;
+    color: #e23d28;
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+    color: #222222;
+  }
+}
+
+@-moz-keyframes target-fade {
+  0% {
+    background-color: #f1f0ec;
+    color: #e23d28;
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+    color: #222222;
+  }
+}
+
+@keyframes target-fade {
+  0% {
+    background-color: #f1f0ec;
+    color: #e23d28;
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+    color: #222222;
+  }
+}
+
 /* Place page */
 .list-of-constituency-offices ul {
   padding-left: 0;
@@ -4525,6 +4561,14 @@ ul.pager li.next {
   border-bottom: 1px solid #d2d2ce;
   padding-top: 1em;
   position: relative;
+}
+.list-of-constituency-offices li {
+  overflow: hidden;
+}
+.list-of-constituency-offices :target a {
+  -webkit-animation: target-fade 3s 1;
+  -moz-animation: target-fade 3s 1;
+  animation: target-fade 3s 1;
 }
 .list-of-constituency-offices a {
   color: #222222;
@@ -4544,6 +4588,19 @@ ul.pager li.next {
 .list-of-constituency-offices .constituency-office-mp-name {
   font-size: 0.875em;
   color: #222222;
+  margin-bottom: 0;
+}
+.list-of-constituency-offices .constituency-office-mp-title {
+  font-size: 0.875em;
+  color: #555555;
+  margin-bottom: 0;
+}
+.list-of-constituency-offices .constituency-office-mp-photo {
+  height: 58px;
+  width: 58px;
+  float: left;
+  margin-right: 16px;
+  margin-bottom: 1em;
 }
 .list-of-constituency-offices .distance {
   color: #b3b3b3;
