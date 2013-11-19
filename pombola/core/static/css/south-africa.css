@@ -3602,14 +3602,17 @@ HOME PAGE INTRO BOX
 
 #front_intro {
   background-color: #027857;
-  padding: 2em 0;
+  padding: 1em 0;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center top;
+  background-repeat: no-repeat;
   background-image: url("/static/images/intro-bg.jpg");
+}
+#front_intro .page-wrapper {
+  padding-bottom: 0;
 }
 
 #front_intro .location-button {
@@ -3671,7 +3674,7 @@ HOME PAGE INTRO BOX
   color: #fff;
   position: relative;
   padding: 1em;
-  min-height: 242px;
+  min-height: 182px;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
 }
 .carousel-item a {
@@ -3763,7 +3766,7 @@ HOME PAGE INTRO BOX
 #front_intro .home-right h2 small {
   display: block;
   opacity: 0.8;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 #page .home-left h2 {
@@ -3775,7 +3778,7 @@ HOME PAGE INTRO BOX
 
 .home-rep-search .geocoder-search-form {
   background: transparent;
-  margin-top: 30px;
+  margin-top: 13px;
   padding: 0;
 }
 .home-rep-search .geocoder-search-form input[type="text"] {
@@ -3817,11 +3820,11 @@ HOME PAGE INTRO BOX
 .home-rep-search .wrapper {
   border-bottom: 1px solid #ccc;
   overflow: hidden;
-  padding-bottom: 40px;
-  padding-top: 15px;
+  padding-top: 10px;
+  padding-bottom: 25px;
 }
 .home-rep-search .wrapper h2 {
-  margin-top: 40px;
+  margin-top: 25px;
   text-align: center;
 }
 .home-rep-search .wrapper form {
@@ -4432,6 +4435,9 @@ ul.pager li.next {
   .house-splash {
     height: 15.5em;
     background-color: #e23d28;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top left;

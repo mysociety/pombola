@@ -548,14 +548,17 @@ HOME PAGE INTRO BOX
 #front_intro
 {
     background-color: #027857;
-    padding: 2em 0;
+    padding: 1em 0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center top;
+    background-repeat: no-repeat;
     background-image: url('/static/images/intro-bg.jpg');
+   .page-wrapper {
+        padding-bottom: 0;
+    }
 }
 #front_intro .location-button {
     font-size: 0.75em;
@@ -617,7 +620,7 @@ HOME PAGE INTRO BOX
     color: #fff;
     position: relative;
     padding: 1em;
-    min-height: 242px;
+    min-height: 182px;
     @include text-shadow(0px 1px 1px rgba(0, 0, 0, .25));
     a {
         color: #fff;
@@ -707,7 +710,7 @@ HOME PAGE INTRO BOX
     small {
         display: block;
         opacity: 0.8;
-        font-size: 16px;
+        font-size: 13px;
     }
 
 
@@ -722,7 +725,7 @@ HOME PAGE INTRO BOX
 .home-rep-search {
     .geocoder-search-form {
         background: transparent;
-        margin-top: 30px;
+        margin-top: 13px;
         padding: 0;
         input[type="text"]{
             width: 82%;
@@ -758,10 +761,10 @@ HOME PAGE INTRO BOX
     .wrapper {
         border-bottom: 1px solid #ccc;
         overflow: hidden;
-        padding-bottom: 40px;
-        padding-top: 15px;
+        padding-top: 10px;
+        padding-bottom: 25px;
         h2 {
-            margin-top: 40px;
+            margin-top: 25px;
             text-align: center;
         }
         form {
@@ -1359,6 +1362,9 @@ ul.pager {
     @media only all and (min-width: 640px), print {
         height: 15.5em;
         background-color: $colour_primary;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: top left;
