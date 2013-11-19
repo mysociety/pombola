@@ -564,7 +564,7 @@ class Place(ModelBase, ScorecardMixin):
     shape_url = models.URLField(blank=True)
     location = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
-    parliamentary_session = models.ForeignKey('ParliamentarySession', null=True)
+    parliamentary_session = models.ForeignKey('ParliamentarySession', null=True, blank=True)
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
