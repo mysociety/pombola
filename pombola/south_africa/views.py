@@ -26,7 +26,7 @@ from speeches.views import NamespaceMixin
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
-    OrganisationDetailView, PersonDetail, PlaceDetailView
+    OrganisationDetailView, PersonDetail, PlaceDetailView, OrganisationDetailSub
 from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
@@ -423,5 +423,24 @@ class SAPersonAppearanceView(TemplateView):
         else:
             # speech_tag not know. Use 'None' for template default instead
             context['section_url'] = None
+
+        return context
+
+
+class SAOrganisationDetailSub(OrganisationDetailSub):
+    def get_context_data(self, *args, **kwargs):
+        context = super(SAOrganisationDetailSub, self).get_context_data(*args, **kwargs)
+
+        if self.kwargs['sub_page'] == 'people':
+            all_positions = context['all_positions'] = self.object.position_set.all()
+            if self.request.GET.get('member'):
+                positions = all_positions.filter(title__slug='member')
+            elif self.request.GET.get('office'):
+                positions = all_positions.exclude(title__slug='member')
+
+            if self.request.GET.get('order') == 'place':
+                context['sorted_positions'] = positions.order_by_place()
+            else:
+                context['sorted_positions'] = positions.order_by_person_name()
 
         return context
