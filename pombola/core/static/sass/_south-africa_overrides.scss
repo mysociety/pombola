@@ -1368,10 +1368,10 @@ ul.pager {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: top left;
-        &.assembly {
+        &.national-assembly {
             background-image: url('/static/images/national-assembly.jpg');
         }
-        &.council {
+        &.ncop {
             background-image: url('/static/images/national-council-of-provinces.jpg');
         }
     }

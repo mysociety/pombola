@@ -9,7 +9,7 @@ the organisation detail page.
 
 
 {% block content %}
-<div class="house-splash assembly">
+<div class="house-splash {{ object.slug }}">
   <div class="house-title">
     <h1>{{ object.title }} {{ object.name }}</h1>
     {% if object.kind.slug != 'unknown' %}

@@ -4442,10 +4442,10 @@ ul.pager li.next {
     background-repeat: no-repeat;
     background-position: top left;
   }
-  .house-splash.assembly {
+  .house-splash.national-assembly {
     background-image: url("/static/images/national-assembly.jpg");
   }
-  .house-splash.council {
+  .house-splash.ncop {
     background-image: url("/static/images/national-council-of-provinces.jpg");
   }
 }
