@@ -92,9 +92,11 @@ class LatLonDetailBaseView(PlaceDetailView):
                     .position_set \
                     .filter(
                         person__position__organisation__slug='national-assembly',
+                        person__position__title__slug='member',
                     )
 
                 office.mp = models.Person.objects.get(position__in=na_positions)
+                office.mp_positions = office.mp.position_set.filter(organisation__slug='national-assembly')
 
             except models.Person.DoesNotExist:
                 warnings.warn("{0} has no MPs".format(office.organisation))

@@ -39,7 +39,12 @@
         </a>
 
         <p class="constituency-office-mp-name">{{ object.mp }}</p>
-        <p class="constituency-office-mp-title">Member at National Assembly (House)</p>
+
+        {% for pos in object.mp_positions %}
+          <p class="constituency-office-mp-title">
+            {{ pos.title }} ({{ pos.organisation.name }})
+          </p>
+        {% endfor %}
 
       {% endif %}
 
