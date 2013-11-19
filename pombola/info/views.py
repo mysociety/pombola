@@ -2,10 +2,26 @@ from django.views.generic import DetailView, ListView
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
 
-from models import InfoPage
+from models import InfoPage, Category
 
 
-class InfoBlogList(ListView):
+class BlogMixin(object):
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogMixin, self).get_context_data(**kwargs)
+
+        context['all_categories'] = Category.objects.all().order_by('name')
+
+        context['recent_posts'] = InfoPage.objects \
+            .filter(kind=InfoPage.KIND_BLOG) \
+            .order_by("-publication_date") \
+            [:5]
+
+        return context
+
+
+
+class InfoBlogList(BlogMixin, ListView):
     """Show list of blog posts"""
     model = InfoPage
     queryset = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG).order_by("-publication_date")
@@ -13,7 +29,7 @@ class InfoBlogList(ListView):
     template_name = 'info/blog_list.html'
 
 
-class InfoBlogView(DetailView):
+class InfoBlogView(BlogMixin, DetailView):
     """Show the blog post for the given slug"""
     model = InfoPage
     queryset = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG)

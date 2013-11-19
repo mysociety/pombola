@@ -6,18 +6,18 @@
     </ul>
     <h3>Recent posts</h3>
     <ul>
-        <li><a href="#">Post title</a></li>
-        <li><a href="#">Post title</a></li>
-        <li><a href="#">Post title</a></li>
-        <li><a href="#">Post title</a></li>
-        <li><a href="#">Post title</a></li>
+      {% for post in recent_posts %}
+        <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
+      {% empty %}
+        <li>There are no recent posts.</li>
+      {% endfor %}
     </ul>
     <h3>Categories</h3>
     <ul>
-        <li><a href="#">Category</a></li>
-        <li><a href="#">Category</a></li>
-        <li><a href="#">Category</a></li>
-        <li><a href="#">Category</a></li>
-        <li><a href="#">Category</a></li>
+      {% for category in all_categories %}
+        <li><a href="#">{{ category.name }}</a></li>
+      {% empty %}
+        <li>There are no recent categories.</li>
+      {% endfor %}
     </ul>
 </div>
