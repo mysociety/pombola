@@ -170,6 +170,9 @@ class SAOrganisationDetailView(OrganisationDetailView):
         context['parties'] = parties
         context['total_people'] =  total_people
 
+        context['all_members'] = self.object.position_set.filter(title__slug='member')
+        context['office_bearers'] = self.object.position_set.exclude(title__slug='member')
+
         return context
 
     def get_template_names(self):
