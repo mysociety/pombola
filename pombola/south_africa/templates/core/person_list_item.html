@@ -10,18 +10,20 @@
     <span class="name">{{ object.name }}</span>
 </a>
 
-{% for position in object.position_set.all.currently_active %}
-{% if position.place %}
-<div class="position-place">
-    <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
+{% if not skip_positions %}
+  {% for position in object.position_set.all.currently_active %}
+    {% if position.place %}
+      <div class="position-place">
+        <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
 
-    {% if position.place.parent_place %}
-    <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
-    {{ position.place.parent_place.kind.name }}
+        {% if position.place.parent_place %}
+          <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
+          {{ position.place.parent_place.kind.name }}
+        {% endif %}
+      </div>
     {% endif %}
-</div>
+  {% endfor %}
 {% endif %}
-{% endfor %}
 
 {% if object.parties %}
 <div class="position-parties">
