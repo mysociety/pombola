@@ -87,7 +87,15 @@ class LatLonDetailBaseView(PlaceDetailView):
         # FIXME - There must be a cleaner way/place to do this.
         for office in nearest_offices:
             try:
-                office.mp = models.Person.objects.get(position__in=office.organisation.position_set.filter(person__position__organisation__slug='national-assembly'))
+                na_positions = office \
+                    .organisation \
+                    .position_set \
+                    .filter(
+                        person__position__organisation__slug='national-assembly',
+                    )
+
+                office.mp = models.Person.objects.get(position__in=na_positions)
+
             except models.Person.DoesNotExist:
                 warnings.warn("{0} has no MPs".format(office.organisation))
 
