@@ -46,6 +46,13 @@ class LatLonDetailBaseView(PlaceDetailView):
     # Using 25km as the default, as that's what's used on MyReps.
     constituency_office_search_radius = 25
 
+    # The codes used here should match the party slugs, and the names of the
+    # icon files in .../static/images/party-map-icons/
+    party_slugs_that_have_logos = set((
+        'adcp', 'anc', 'apc', 'azapo', 'cope', 'da', 'ff', 'id', 'ifp', 'mf',
+        'pac', 'sacp', 'ucdp', 'udm'
+    ));
+
     def get_object(self):
         # FIXME - handle bad args better.
         lat = float(self.kwargs['lat'])
@@ -83,6 +90,17 @@ class LatLonDetailBaseView(PlaceDetailView):
                 office.mp = models.Person.objects.get(position__in=office.organisation.position_set.filter(person__position__organisation__slug='national-assembly'))
             except models.Person.DoesNotExist:
                 warnings.warn("{0} has no MPs".format(office.organisation))
+
+            # Try to extract the political membership of this person and store
+            # it next to the office. TODO - deal with several parties sharing
+            # an office (should this happen?) and MPs with no party connection.
+            if hasattr(office, 'mp'):
+                try:
+                    party_slug = office.mp.position_set.filter(title__slug="member", organisation__kind__slug="party")[0].organisation.slug
+                    if party_slug in self.party_slugs_that_have_logos:
+                        office.party_slug_for_icon = party_slug
+                except IndexError:
+                    warnings.warn("{0} has no party membership".format(office.mp))
 
         context['form'] = LocationSearchForm()
 

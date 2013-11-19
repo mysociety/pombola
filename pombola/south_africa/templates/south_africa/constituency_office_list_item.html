@@ -36,6 +36,9 @@
           lat: {{ object.location.y }},
           lng: {{ object.location.x }},
           name: "{{object.organisation.name }}",
+          {% if object.mp and object.party_slug_for_icon %}
+          marker_icon: "{{ STATIC_URL }}images/party-map-icons/{{ object.party_slug_for_icon }}.png",
+          {% endif %}
           url: "#constituency-office-{{ object.id }}"
         });
       </script>
