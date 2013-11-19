@@ -39,6 +39,10 @@ function initialize_map() {
                 map: map,
             };
 
+            if (args.marker_icon) {
+              marker_opts.icon = args.marker_icon;
+            }
+
             // set the bounds to accomodate this marker
             map_bounds.extend(position);
 

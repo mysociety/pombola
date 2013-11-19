@@ -41,11 +41,17 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
 class LocationSearchForm(SearchForm):
     q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))
 
-class LatLonDetailView(PlaceDetailView):
-    template_name = 'south_africa/latlon_detail_view.html'
+class LatLonDetailBaseView(PlaceDetailView):
 
     # Using 25km as the default, as that's what's used on MyReps.
     constituency_office_search_radius = 25
+
+    # The codes used here should match the party slugs, and the names of the
+    # icon files in .../static/images/party-map-icons/
+    party_slugs_that_have_logos = set((
+        'adcp', 'anc', 'apc', 'azapo', 'cope', 'da', 'ff', 'id', 'ifp', 'mf',
+        'pac', 'sacp', 'ucdp', 'udm'
+    ));
 
     def get_object(self):
         # FIXME - handle bad args better.
@@ -65,7 +71,7 @@ class LatLonDetailView(PlaceDetailView):
         return province
 
     def get_context_data(self, **kwargs):
-        context = super(LatLonDetailView, self).get_context_data(**kwargs)
+        context = super(LatLonDetailBaseView, self).get_context_data(**kwargs)
         context['location'] = self.location
 
         context['office_search_radius'] = self.constituency_office_search_radius
@@ -81,9 +87,40 @@ class LatLonDetailView(PlaceDetailView):
         # FIXME - There must be a cleaner way/place to do this.
         for office in nearest_offices:
             try:
-                office.mp = models.Person.objects.get(position__in=office.organisation.position_set.filter(person__position__organisation__slug='national-assembly'))
+                na_positions = office \
+                    .organisation \
+                    .position_set \
+                    .filter(
+                        person__position__organisation__slug='national-assembly',
+                        person__position__title__slug='member',
+                    )
+
+                mps = models.Person.objects.filter(position__in=na_positions)
+                mp_entries = []
+
+                for mp in mps:
+                    mp_entries.append({
+                        'mp': mp,
+                        'positions': mp.position_set.filter(organisation__slug='national-assembly'),
+                    })
+
+                if len(mp_entries):
+                    office.mp_entries = mp_entries
+
             except models.Person.DoesNotExist:
                 warnings.warn("{0} has no MPs".format(office.organisation))
+
+            # Try to extract the political membership of this person and store
+            # it next to the office. TODO - deal with several parties sharing
+            # an office (should this happen?) and MPs with no party connection.
+            if hasattr(office, 'mp_entries'):
+                for entry in office.mp_entries:
+                    try:
+                        party_slug = entry['mp'].position_set.filter(title__slug="member", organisation__kind__slug="party")[0].organisation.slug
+                        if party_slug in self.party_slugs_that_have_logos:
+                            office.party_slug_for_icon = party_slug
+                    except IndexError:
+                        warnings.warn("{0} has no party membership".format(entry.mp))
 
         context['form'] = LocationSearchForm()
 
@@ -93,6 +130,15 @@ class LatLonDetailView(PlaceDetailView):
         )
 
         return context
+
+
+class LatLonDetailNationalView(LatLonDetailBaseView):
+    template_name = 'south_africa/latlon_national_view.html'
+
+
+class LatLonDetailLocalView(LatLonDetailBaseView):
+    template_name = 'south_africa/latlon_local_view.html'
+
 
 
 class SAPlaceDetailView(PlaceDetailView):

@@ -1,0 +1,28 @@
+{% extends 'south_africa/latlon_detail_base_view.html' %}
+{% load url from future %}
+
+{% block title %}{{ object.name }} - National Politicians{% endblock %}
+
+{% block subcontent %}
+
+  <ul class="tab-links">
+      <li><a href="{% url 'latlon' lat=location.y lon=location.x %}">Constituency offices</a></li>
+      <li><a href="{% url 'latlon-national' lat=location.y lon=location.x %}" class="active">National representatives</a></li>
+    </ul>
+
+
+  <div class="column politicians-results">
+    <h2>National representatives</h2>
+
+    <ul class="unstyled-list">
+        {% for politician in politicians %}
+          {% include "core/generic_list_item.html" with object=politician %}
+        {% empty %}
+          <li>
+            <p>No politicians found</p>
+          </li>
+        {% endfor %}
+    </ul>
+  </div>
+
+{% endblock %}

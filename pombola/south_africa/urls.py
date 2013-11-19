@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from pombola.south_africa.views import LatLonDetailView, SAPlaceDetailSub, \
+from pombola.south_africa.views import LatLonDetailNationalView, LatLonDetailLocalView, SAPlaceDetailSub, \
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
     SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex, \
     SACommitteeSectionRedirectView, SACommitteeSpeechRedirectView, \
@@ -39,7 +39,8 @@ for index, pattern in enumerate(search_urlpatterns):
         search_urlpatterns[index] = url(r'^$', SASearchView(), name='core_search')
 
 urlpatterns += patterns('pombola.south_africa.views',
-    url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/', LatLonDetailView.as_view(), name='latlon'),
+    url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/national/$', LatLonDetailNationalView.as_view(), name='latlon-national'),
+    url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/$', LatLonDetailLocalView.as_view(), name='latlon'),
     url(r'^place/(?P<slug>[-\w]+)/$', SAPlaceDetailView.as_view(), name='place'),
 
     url(r'^place/(?P<slug>[-\w]+)/places/', SAPlaceDetailSub.as_view(), {'sub_page': 'places'}, name='place_places'),

@@ -1404,6 +1404,38 @@ ul.pager {
         }
     }
 }
+@-webkit-keyframes target-fade {
+    0% {
+          background-color: $colour_main_background;
+          color: $colour-primary
+      }
+      100% {
+          background-color: rgba(0,0,0,0);
+          color: $colour_black;
+      }
+}
+@-moz-keyframes target-fade {
+    0% {
+          background-color: $colour_main_background;
+          color: $colour-primary
+      }
+      100% {
+          background-color: rgba(0,0,0,0);
+          color: $colour_black;
+      }
+}
+
+@keyframes target-fade {
+    0% {
+        background-color: $colour_main_background;
+        color: $colour-primary
+    }
+    100% {
+        background-color: rgba(0,0,0,0);
+        color: $colour_black;
+    }
+}
+
 
 /* Place page */
 .list-of-constituency-offices {
@@ -1416,6 +1448,17 @@ ul.pager {
         padding-top: 1em;
         position: relative;
     }
+    li {
+        overflow: hidden;
+    }
+    :target {
+        a {
+            -webkit-animation: target-fade 3s 1;
+            -moz-animation: target-fade 3s 1;
+            animation: target-fade 3s 1;
+        }
+    }
+
     a {
         color: $colour-black;
         text-decoration: none;
@@ -1435,8 +1478,20 @@ ul.pager {
     .constituency-office-mp-name {
         font-size: 0.875em;
         color: $colour_black;
+        margin-bottom: 0;
     }
-
+    .constituency-office-mp-title {
+        font-size: 0.875em;
+        color: $colour_blackish;
+        margin-bottom: 0;
+    }
+    .constituency-office-mp-photo {
+        height: 58px;
+        width: 58px;
+        float: left;
+        margin-right: 16px;
+        margin-bottom: 1em;
+    }
     .distance {
         color: $colour_middling_grey;
         position: absolute;
