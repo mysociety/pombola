@@ -28,32 +28,34 @@
         </ul>
       {% endif %}
 
-      {% if object.mp %}
+      {% for mp_entry in object.mp_entries %}
 
-        <a href="{{ object.mp.get_absolute_url }}">
-          {% thumbnail object.mp.primary_image "58x58" crop="center" as im %}
+        <a href="{{ mp_entry.mp.get_absolute_url }}">
+          {% thumbnail mp_entry.mp.primary_image "58x58" crop="center" as im %}
             <img class="constituency-office-mp-photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
           {% empty %}
             <img class="constituency-office-mp-photo" src="{{STATIC_URL}}images/person-90x90.jpg" width="58" height="58" />
           {% endthumbnail %}
         </a>
 
-        <p class="constituency-office-mp-name">{{ object.mp }}</p>
+        <p class="constituency-office-mp-name">{{ mp_entry.mp }}</p>
 
-        {% for pos in object.mp_positions %}
+        {% for pos in mp_entry.positions %}
           <p class="constituency-office-mp-title">
             {{ pos.title }} ({{ pos.organisation.name }})
           </p>
         {% endfor %}
 
-      {% endif %}
+        <br clear="both" />
+
+      {% endfor %}
 
       <script>
         add_marker_to_map({
           lat: {{ object.location.y }},
           lng: {{ object.location.x }},
           name: "{{object.organisation.name }}",
-          {% if object.mp and object.party_slug_for_icon %}
+          {% if object.party_slug_for_icon %}
           marker_icon: "{{ STATIC_URL }}images/party-map-icons/{{ object.party_slug_for_icon }}.png",
           {% endif %}
           url: "#constituency-office-{{ object.id }}"
