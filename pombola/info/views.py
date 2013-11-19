@@ -29,6 +29,14 @@ class InfoBlogList(BlogMixin, ListView):
     template_name = 'info/blog_list.html'
 
 
+class InfoBlogCategory(InfoBlogList):
+
+    def get_queryset(self):
+        category_slug = self.kwargs['slug']
+        queryset = super(InfoBlogCategory, self).get_queryset()
+        return queryset.filter(categories__slug=category_slug)
+
+
 class InfoBlogView(BlogMixin, DetailView):
     """Show the blog post for the given slug"""
     model = InfoPage

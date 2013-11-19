@@ -15,7 +15,7 @@
     <h3>Categories</h3>
     <ul>
       {% for category in all_categories %}
-        <li><a href="#">{{ category.name }}</a></li>
+        <li><a href="{% url 'info_blog_category' slug=category.slug %}">{{ category.name }}</a></li>
       {% empty %}
         <li>There are no recent categories.</li>
       {% endfor %}
