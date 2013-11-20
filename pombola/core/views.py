@@ -48,9 +48,12 @@ def home(request):
 
     # Only SA uses featured news articles currently, as above, if this changes
     # then this should become a config flag or similar.
-    featured_articles = None
+    that_week_in_parliament = None
+    impressions = None
     if settings.COUNTRY_APP == 'south_africa':
-        featured_articles = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG).order_by("-publication_date")[:8]
+        articles = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG).order_by("-publication_date")
+        that_week_in_parliament = articles.filter(categories__slug='week-parliament')[:4]
+        impressions = articles.filter(categories__slug='impressions')[:4]
 
     return render_to_response(
         'home.html',
@@ -58,7 +61,8 @@ def home(request):
           'featured_person':  featured_person,
           'featured_persons': featured_persons,
           'editable_content': editable_content,
-          'featured_articles': featured_articles,
+          'that_week_in_parliament': that_week_in_parliament,
+          'impressions': impressions,
         },
         context_instance=RequestContext(request)
     )
