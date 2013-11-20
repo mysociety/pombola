@@ -485,7 +485,7 @@ class OrganisationManager(ManagerBase):
         return OrganisationQuerySet(self.model)
 
 
-class Organisation(ModelBase):
+class Organisation(ModelBase, HasImageMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
@@ -495,6 +495,7 @@ class Organisation(ModelBase):
 
     objects = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
+    images = generic.GenericRelation(Image)
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.kind)

@@ -165,7 +165,7 @@ class PlaceInlineAdmin(admin.TabularInline):
 
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, IdentifierInlineAdmin]
+    inlines       = [ PlaceInlineAdmin, PositionInlineAdmin, ContactInlineAdmin, InformationSourceInlineAdmin, IdentifierInlineAdmin, ImageAdminInline]
     list_display  = [ 'slug', 'name', 'kind', ]
     list_filter   = [ 'kind', ]
     search_fields = [ 'name' ]
