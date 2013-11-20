@@ -826,7 +826,17 @@ NEWS & POLL
 
 }
 
-ul#home-news-list {
+.home-news {
+    float: left;
+
+    @media only all and (min-width: 940px), print {
+        width: 48%;
+        margin-right: 2%;
+    }
+}
+
+ul.home-news-list {
+    @extend ul#home-news-list;
     border:none;
     padding:0;
     margin-top: 0;
@@ -834,7 +844,6 @@ ul#home-news-list {
         border:none;
         width: 100%;
         @media only all and (min-width: 940px), print {
-            width: 48.1012658%;
             &:nth-child(odd) {
                 padding-right: 3.7974684%
             }
