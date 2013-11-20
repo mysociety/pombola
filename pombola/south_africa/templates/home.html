@@ -78,7 +78,7 @@
     <div id="news">
 
         <div>
-            <h2>THAT WEEK IN PARLIAMENT</h2>
+            <h2><a href="{% url 'info_blog_category' slug='week-parliament' %}">THAT WEEK IN PARLIAMENT</a></h2>
             <ul id="home-news-list">
             {% for article in that_week_in_parliament %}
             <li>
@@ -94,7 +94,7 @@
         </div>
 
         <div>
-            <h2>IMPRESSIONS</h2>
+            <h2><a href="{% url 'info_blog_category' slug='impressions' %}">IMPRESSIONS</a></h2>
             <ul id="home-news-list">
             {% for article in impressions %}
             <li>
