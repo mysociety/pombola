@@ -87,7 +87,7 @@
                 </h3>
                 <p class="meta">{{ article.publication_date|date }}</p>
                 <p>{{ article.content|truncatewords_html:32 }}</p>
-                <p><a class="readmore" href="{{ article.get_absolute_url }}">Read more</a></p>
+                <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p>
             </li>
             {% endfor %}
             </ul>
@@ -103,7 +103,7 @@
                 </h3>
                 <p class="meta">{{ article.publication_date|date }}</p>
                 <p>{{ article.content|truncatewords_html:32 }}</p>
-                <p><a class="readmore" href="{{ article.get_absolute_url }}">Read more</a></p>
+                <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p>
             </li>
             {% endfor %}
             </ul>
