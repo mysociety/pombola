@@ -94,19 +94,6 @@
     </div>
     <div class="col-2">
 
-    {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
-        <div id="twitter">
-            <h2>Twitter</h2>
-
-            <a class="twitter-timeline"
-              data-chrome="nofooter transparent noheader noborders"
-              height="375"
-              href="https://twitter.com/{{ settings.TWITTER_USERNAME }}"
-              data-widget-id="{{ settings.TWITTER_WIDGET_ID }}"
-            >Tweets by @{{ settings.TWITTER_USERNAME }}</a>
-        </div>
-    {% endif %}
-
     {% if settings.POLLDADDY_WIDGET_ID %}
     <div id="poll">
         <h2>Survey</h2>
@@ -121,6 +108,19 @@
             <noscript><a href="http://polldaddy.com/w.php?p={{ settings.POLLDADDY_WIDGET_ID }}/">Take Our Poll</a></noscript>
         </div>
     </div>
+    {% endif %}
+
+    {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
+        <div id="twitter">
+            <h2>Twitter</h2>
+
+            <a class="twitter-timeline"
+              data-chrome="nofooter transparent noheader noborders"
+              height="375"
+              href="https://twitter.com/{{ settings.TWITTER_USERNAME }}"
+              data-widget-id="{{ settings.TWITTER_WIDGET_ID }}"
+            >Tweets by @{{ settings.TWITTER_USERNAME }}</a>
+        </div>
     {% endif %}
 
     </div>
