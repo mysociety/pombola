@@ -43,11 +43,12 @@
 <li><a href="{% url "info_blog_list" %}" class="has-dropdown">Blog</a>
   {% if include_sub_menu_entries %}
     <ul id="blog-overview">
-      <li><a href="">That Week In Parliament</a></li>
-      <li><a href="">PMG Monitor Blog Snippets</a></li>
-      <li><a href="">NGO articles</a></li>
-      <li><a href="">Thought Pieces/Commentary</a></li>
-      <li><a href="">MP Corner</a></li>
+      <li><a href="{% url 'info_blog_list' %}">Recent Posts</a></li>
+      <li><a href="{% url 'info_blog_category' slug='mp-corner' %}">MP Corner</a></li>
+      <li><a href="{% url 'info_blog_category' slug='ngo-articles' %}">NGO articles</a></li>
+      <li><a href="{% url 'info_blog_category' slug='pmg-blog-monitor-snippets' %}">PMG Monitor Blog Snippets</a></li>
+      <li><a href="{% url 'info_blog_category' slug='week-parliament' %}">That Week In Parliament</a></li>
+      <li><a href="{% url 'info_blog_category' slug='thought-pieces' %}">Thought Pieces/Commentary</a></li>
     </ul>
   {% endif %}
 </li>
