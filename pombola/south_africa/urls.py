@@ -4,13 +4,15 @@ from pombola.south_africa.views import LatLonDetailNationalView, LatLonDetailLoc
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
     SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex, \
     SACommitteeSectionRedirectView, SACommitteeSpeechRedirectView, \
-    SAPersonAppearanceView, SAQuestionIndex
+    SAPersonAppearanceView, SAQuestionIndex, SAOrganisationDetailSub
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
 
 # Override the organisation url so we can vary it depending on the organisation type.
 for index, pattern in enumerate(organisation_patterns):
+    if pattern.name == 'organisation_people':
+        organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/people/', SAOrganisationDetailSub.as_view(), {'sub_page': 'people'}, 'organisation_people')
     if pattern.name == 'organisation':
         organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAOrganisationDetailView.as_view(), name='organisation')
 
