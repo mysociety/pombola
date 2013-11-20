@@ -76,19 +76,39 @@
 {% block content %}
 
     <div id="news">
-        <h2>Editorial</h2>
-        <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-          {% for article in featured_articles %}
-          <li>
-            <h3>
-              <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-            </h3>
-            <p class="meta">{{ article.publication_date|date }}</p>
-            <p>{{ article.content|truncatewords_html:32 }}</p>
-            <p><a class="readmore" href="{{ article.get_absolute_url }}">Read more</a></p>
-          </li>
-          {% endfor %}
-        </ul>
+
+        <div>
+            <h2>THAT WEEK IN PARLIAMENT</h2>
+            <ul id="home-news-list">
+            {% for article in that_week_in_parliament %}
+            <li>
+                <h3>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                </h3>
+                <p class="meta">{{ article.publication_date|date }}</p>
+                <p>{{ article.content|truncatewords_html:32 }}</p>
+                <p><a class="readmore" href="{{ article.get_absolute_url }}">Read more</a></p>
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <h2>IMPRESSIONS</h2>
+            <ul id="home-news-list">
+            {% for article in impressions %}
+            <li>
+                <h3>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                </h3>
+                <p class="meta">{{ article.publication_date|date }}</p>
+                <p>{{ article.content|truncatewords_html:32 }}</p>
+                <p><a class="readmore" href="{{ article.get_absolute_url }}">Read more</a></p>
+            </li>
+            {% endfor %}
+            </ul>
+
+        </div>
 
     </div>
     <div class="col-2">
