@@ -3,7 +3,8 @@
 {% load url from future %}
 
 {% block title %}
-    Blog Posts
+  {% if category %}&ldquo;{{ category.name }}&rdquo;{% endif %}
+  Blog Posts
 {% endblock %}
 
 {% block extra_head_meta %}
@@ -13,7 +14,10 @@
 {% block content %}
 <div class="layout-major-minor blog-post blog-list">
   <div class="major-column">
-  <h1>Blog Posts</h1>
+  <h1>
+    {% if category %}&ldquo;{{ category.name }}&rdquo;{% endif %}
+    Blog Posts
+  </h1>
 
 
 

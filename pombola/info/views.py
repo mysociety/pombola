@@ -1,6 +1,7 @@
 from django.views.generic import DetailView, ListView
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import get_object_or_404
 
 from models import InfoPage, Category
 
@@ -35,6 +36,13 @@ class InfoBlogCategory(InfoBlogList):
         category_slug = self.kwargs['slug']
         queryset = super(InfoBlogCategory, self).get_queryset()
         return queryset.filter(categories__slug=category_slug)
+
+    def get_context_data(self, **kwargs):
+        context = super(InfoBlogCategory, self).get_context_data(**kwargs)
+
+        context['category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
+
+        return context
 
 
 class InfoBlogView(BlogMixin, DetailView):
