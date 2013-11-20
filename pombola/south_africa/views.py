@@ -87,7 +87,7 @@ class LatLonDetailBaseView(PlaceDetailView):
         # FIXME - There must be a cleaner way/place to do this.
         for office in nearest_offices:
             try:
-                na_positions = office \
+                cc_positions = office \
                     .organisation \
                     .position_set \
                     .filter(
@@ -95,17 +95,17 @@ class LatLonDetailBaseView(PlaceDetailView):
                         person__position__title__slug='member',
                     )
 
-                mps = models.Person.objects.filter(position__in=na_positions)
-                mp_entries = []
+                constituency_contacts = models.Person.objects.filter(position__in=cc_positions)
+                office_people_entries = []
 
-                for mp in mps:
-                    mp_entries.append({
-                        'mp': mp,
-                        'positions': mp.position_set.filter(organisation__slug='national-assembly'),
+                for constituency_contact in constituency_contacts:
+                    office_people_entries.append({
+                        'person': constituency_contact,
+                        'positions': constituency_contact.position_set.filter(organisation__slug='national-assembly'),
                     })
 
-                if len(mp_entries):
-                    office.mp_entries = mp_entries
+                if len(office_people_entries):
+                    office.office_people_entries = office_people_entries
 
             except models.Person.DoesNotExist:
                 warnings.warn("{0} has no MPs".format(office.organisation))
@@ -113,14 +113,14 @@ class LatLonDetailBaseView(PlaceDetailView):
             # Try to extract the political membership of this person and store
             # it next to the office. TODO - deal with several parties sharing
             # an office (should this happen?) and MPs with no party connection.
-            if hasattr(office, 'mp_entries'):
-                for entry in office.mp_entries:
+            if hasattr(office, 'office_people_entries'):
+                for entry in office.office_people_entries:
                     try:
-                        party_slug = entry['mp'].position_set.filter(title__slug="member", organisation__kind__slug="party")[0].organisation.slug
+                        party_slug = entry['person'].position_set.filter(title__slug="member", organisation__kind__slug="party")[0].organisation.slug
                         if party_slug in self.party_slugs_that_have_logos:
                             office.party_slug_for_icon = party_slug
                     except IndexError:
-                        warnings.warn("{0} has no party membership".format(entry.mp))
+                        warnings.warn("{0} has no party membership".format(entry['person']))
 
         context['form'] = LocationSearchForm()
 
