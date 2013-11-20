@@ -31,6 +31,13 @@
 {# Put a map in the profile_pic block #}
 {% block profile_pic %}
 
+  {% thumbnail object.primary_image "210x210" crop="center" as im %}
+    <div class="profile-pic">
+      <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+    </div>
+  {% empty %}
+  {% endthumbnail %}
+
 {% with place=object.place_set.all.0 %}
   {% if place.location %}
     <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
