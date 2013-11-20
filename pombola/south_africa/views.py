@@ -84,8 +84,6 @@ class LatLonDetailBaseView(PlaceDetailView):
             .order_by('distance')
             )
 
-        national_assembly = models.Organisation.objects.get(slug="national-assembly")
-
         # FIXME - There must be a cleaner way/place to do this.
         for office in nearest_offices:
             try:
@@ -100,9 +98,19 @@ class LatLonDetailBaseView(PlaceDetailView):
                 office_people_entries = []
 
                 for constituency_contact in constituency_contacts:
+
+                    # Find positions for this person that are relevant to the office.
+                    positions = constituency_contact.position_set \
+                        .filter(
+                            organisation__slug__in = [
+                                "national-assembly",
+                                office.organisation.slug,
+                            ]
+                        )
+
                     office_people_entries.append({
                         'person': constituency_contact,
-                        'positions': constituency_contact.position_set.filter(organisation__in=[national_assembly, office.organisation]),
+                        'positions': positions
                     })
 
                 if len(office_people_entries):
