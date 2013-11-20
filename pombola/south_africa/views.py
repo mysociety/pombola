@@ -489,13 +489,13 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
         if self.kwargs['sub_page'] == 'people':
             all_positions = context['all_positions'] = self.object.position_set.all()
             if self.request.GET.get('member'):
-                positions = all_positions.filter(title__slug='member')
+                context['sorted_positions'] = all_positions.filter(title__slug='member')
             elif self.request.GET.get('office'):
-                positions = all_positions.exclude(title__slug='member')
+                context['sorted_positions'] = all_positions.exclude(title__slug='member')
 
             if self.request.GET.get('order') == 'place':
-                context['sorted_positions'] = positions.order_by_place()
+                context['sorted_positions'] = context['sorted_positions'].order_by_place()
             else:
-                context['sorted_positions'] = positions.order_by_person_name()
+                context['sorted_positions'] = context['sorted_positions'].order_by_person_name()
 
         return context
