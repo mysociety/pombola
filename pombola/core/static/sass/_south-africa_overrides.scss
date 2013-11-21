@@ -828,7 +828,17 @@ NEWS & POLL
 
 .home-news {
     float: left;
-
+    h2 {
+        a:link{
+            text-decoration: none;
+            color: $colour_black;
+        }
+        a:hover,
+        a:focus {
+            text-decoration: underline;
+            color: $colour_primary;
+        }
+    }
     @media only all and (min-width: 940px), print {
         width: 48%;
         margin-right: 2%;
