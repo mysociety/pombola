@@ -50,10 +50,14 @@ class Command (BaseCommand):
     def update_popit(self, collection, collection_name, auth):
         for item in collection:
             print >> sys.stderr, json.dumps(item)
-            r = requests.post('http://za-peoples-assembly.popit.mysociety.org/api/v0.1/%s'
-                % collection_name, 
+            r = requests.post(
+                'http://za-peoples-assembly.popit.mysociety.org/api/v0.1/%s'
+                    % collection_name, 
+                data=json.dumps(item),
                 auth=auth,
-                data=item,
+                headers={
+                    'Content-Type': 'application/json; charset=utf8',
+                },
                 )
             if not r.status_code == 200:
                 raise Exception("Error %d (%s)" % (r.status_code, r.text) )
