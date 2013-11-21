@@ -60,7 +60,10 @@
 
 {% endblock profile_pic %}
 
-  {% block profile_info %}
+{% block profile_info %}
+
+  {% if object.contacts.count %}
+
   <div class="sidebar">
     <ul class="vcard">
       {% for c in object.contacts.all %}
@@ -99,4 +102,6 @@
       {% endfor %}
     </ul>
   </div>
-  {% endblock profile_info %}
+
+  {% endif %}
+{% endblock profile_info %}
