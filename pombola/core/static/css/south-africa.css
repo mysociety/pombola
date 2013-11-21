@@ -3888,6 +3888,15 @@ NEWS & POLL
 .home-news {
   float: left;
 }
+.home-news h2 a:link {
+  text-decoration: none;
+  color: #222222;
+}
+.home-news h2 a:hover,
+.home-news h2 a:focus {
+  text-decoration: underline;
+  color: #e23d28;
+}
 @media only all and (min-width: 940px), print {
   .home-news {
     width: 48%;
