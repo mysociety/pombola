@@ -86,6 +86,9 @@ class InfoPage(models.Model):
     def __unicode__(self):
         return self.title
 
+    def css_class(self):
+        return self._meta.module_name
+
     def name(self):
         return str(self)
 
