@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with title=section.title %}View Section: {{ title }}{% endblocktrans %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include "speeches/_breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    {% include "speeches/_section_user_actions.html" %}
+
+    <h1>{{ section.title }}</h1>
+
+</div>
+
+{% with next=section.get_next_node previous=section.get_previous_node %}
+  {% if previous or next %}
+    <ul class="pager">
+      {% if previous %}
+        <li class="previous"><a href="{% url "speeches:section-view" previous.id %}">&larr; {{ previous.title }}</a>
+      {% endif %}
+      {% if next %}
+        <li class="next"><a href="{% url "speeches:section-view" next.id %}">{{ next.title }} &rarr;</a>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    {% for node, structure in section_tree %}
+      {% if structure.new_level %}<ul>{% else %}</li>{% endif %}
+      {% if structure.speech %}
+        <li id="s{{ node.id }}" class="speech speech-border"{% if node.speaker.colour %} style="border-left-color: #{{ node.speaker.colour }};"{% endif %}>
+        {% include "speeches/speech.html" with speech=node nosection="1" noli=1 %}
+      {% else %}
+        <li><span class="section-title"><a href="{% url 'speeches:section-view' node.id %}">{{ node.title }}</a></span>
+        {% if node.is_leaf_node %}({{ node.speech_count }}){% endif %}
+      {% endif %}
+      {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+    {% endfor %}
+
+{% with next=section.get_next_node previous=section.get_previous_node %}
+  {% if previous or next %}
+    <ul class="pager">
+      {% if previous %}
+        <li class="previous"><a href="{% url "speeches:section-view" previous.id %}">&larr; {{ previous.title }}</a>
+      {% endif %}
+      {% if next %}
+        <li class="next"><a href="{% url "speeches:section-view" next.id %}">{{ next.title }} &rarr;</a>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% endblock %}
+
