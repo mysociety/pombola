@@ -28,8 +28,7 @@ def breadcrumbs(url):
     if total == 0 and links[0] == "":
         bcrumb = '<li>Home</li>'
     else:
-
-        if links[1] == 'is': 
+        if total > 1 and links[1] == 'is': 
           # (Organisation|Place|etc.)Kind links like /organization/is/house/
           # (drop it)
           links[1:2] = []
