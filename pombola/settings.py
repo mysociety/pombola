@@ -419,3 +419,12 @@ PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
 
 # Which popit instance to use
 POPIT_API_URL = config.get('POPIT_API_URL')
+
+BREADCRUMB_URL_NAME_MAPPINGS = config.get('BREADCRUMB_URL_NAME_MAPPINGS', 
+    {
+      'info'   : ('Information', '/info/'),
+      'organisation' : ('Organisations', '/organisation/all/'),
+      'person' : ('Politicians', '/person/all/'),
+      'place' : ('Places', '/place/all/'),
+      'search' : ('Search', '/search/')
+    })

@@ -3,17 +3,12 @@
 from django.template import Library
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import resolve, Resolver404
+from django.conf import settings
 import re
 
 register = Library()
 
-url_name_mappings = {
-  'info'   : ('Information', '/info/'),
-  'organisation' : ('Organisations', '/organisation/all/'),
-  'person' : ('Politicians', '/person/all/'),
-  'place' : ('Places', '/place/all/'),
-  'search' : ('Search', '/search/')
-}
+url_name_mappings = settings.BREADCRUMB_URL_NAME_MAPPINGS
 
 separator = ' <span class="sep">&raquo;</span> ';
 hansard_part = 'hansard/'
