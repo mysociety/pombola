@@ -1,19 +1,9 @@
 {% extends 'base.html' %}
-{% load breadcrumbs %}
 {% load url from future %}
 
-{% block breadcrumbs %}
-    {# dummy suppressing the latlong part for now #}
-        <div id="breadcrumb">
-            <nav class="wrapper">
-                <ul>
-                    {{ '/places/'|breadcrumbs }}
-                </ul>
-            </nav>
-        </div>
-{% endblock %}
-
 {% block content %}
+
+  {% include 'core/override_breadcrumb.html' with override_path='/places/' %}
 
   <h1>Find your representatives</h1>
 
