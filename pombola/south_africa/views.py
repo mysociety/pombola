@@ -220,7 +220,7 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
         # Calculate the % of the house each party occupies.
         for party in parties:
-            party.percentage = round((float(party.person_count) / total_people) * 100, 2)
+            party.percentage = float(party.person_count) / total_people * 100
 
         context['parties'] = parties
         context['total_people'] =  total_people

@@ -38,7 +38,7 @@ the organisation detail page.
       <li>
       <a href="{% url "organisation" slug=party.slug %}">
         {{ party.name }}
-        <span class="percent">{{ party.percentage }}%</span>
+        <span class="percent">{{ party.percentage|floatformat:"-1" }}%</span>
       </a>
       </li>
       {% endfor %}
