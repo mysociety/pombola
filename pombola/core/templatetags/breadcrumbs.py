@@ -28,9 +28,16 @@ def breadcrumbs(url):
     if total == 0 and links[0] == "":
         bcrumb = '<li>Home</li>'
     else:
+
+        if links[1] == 'is': 
+          # (Organisation|Place|etc.)Kind links like /organization/is/house/
+          # (drop it)
+          links[1:2] = []
+          total -= 1     
         if links[total] == 'all': # if links ends with 'all', drop it
           links = links[0:total]
           total -= 1     
+
         home = ['<li><a href="/" title="Breadcrumb link to the homepage.">Home</a> %s </li>' % separator]
 
         seen_links = {}
