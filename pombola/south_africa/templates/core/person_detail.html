@@ -41,7 +41,7 @@ pombola_settings.extra_js.push('js/tabs.js')
     {% if email_contacts %}
       <h3>Email</h3>
       {% for contact in email_contacts %}
-      <p>{{ contact.value|urlizetrunc:50 }}</p>
+      <p class="word-break-all">{{ contact.value|urlizetrunc:50 }}</p>
       {% endfor %}
     {% endif %}
 

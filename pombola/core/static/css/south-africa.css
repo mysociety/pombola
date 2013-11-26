@@ -4160,6 +4160,9 @@ FOOTER
 .sidebar p + h3 {
   margin-top: 1.5em;
 }
+.sidebar .word-break-all {
+  word-break: break-all;
+}
 .sidebar ul {
   padding-left: 0;
   margin-bottom: 0;
@@ -4169,9 +4172,11 @@ FOOTER
 .sidebar ul li {
   list-style: none outside none;
 }
+.sidebar li + li {
+  margin-top: 0.5em;
+}
 .sidebar a:link {
   text-decoration: none;
-  word-break: break-all;
 }
 .sidebar a:hover,
 .sidebar a:active,
