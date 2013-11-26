@@ -29,6 +29,20 @@
   tr:last-child td {
     border-bottom: none; } }
 
+.infopage-tag-list {
+  li {
+    float: left;
+    display: inline;
+
+    padding: 0.5em 1em;
+    margin-right: 0.5em;
+
+    background-color: $colour_lighter_grey;
+    border: 1px solid $colour_muted;
+    @include border-radius(0.25em);
+  }
+}
+
 @media only all and (min-width: 640px), print {
   .infopage {
     margin: 0;

@@ -7,14 +7,20 @@ from django.template.defaultfilters import slugify
 
 from markitup.fields import MarkupField
 
-class Category(models.Model):
-    """
-    Category - simple categorisation of pages and posts.
-
-    A InfoPage object can be related to several categories
-    """
+class ModelBase(models.Model):
     created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
     updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now )
+
+    class Meta:
+        abstract = True
+
+
+class LabelModelBase(ModelBase):
+
+    """
+    The tags and categories are essentially the same thing in the database. Use
+    a common model for most of the fields etc.
+    """
 
     slug = models.SlugField(unique=True)
     name = models.CharField(max_length=300, unique=True)
@@ -23,11 +29,20 @@ class Category(models.Model):
         return self.name
 
     class Meta():
+        abstract = True
         ordering = ( 'name', )
+
+
+class Category(LabelModelBase):
+    class Meta():
         verbose_name_plural = 'categories'
 
 
-class InfoPage(models.Model):
+class Tag(LabelModelBase):
+    pass
+
+
+class InfoPage(ModelBase):
     """
     InfoPage - store static pages in the database so they can be edited in the
     admin. Also simple blog posts.
@@ -58,9 +73,6 @@ class InfoPage(models.Model):
     newest first order on the '/blog' page, and on their own blog page.
     """
 
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now )
-
     slug    = models.SlugField(unique=True)
     title   = models.CharField(max_length=300, unique=True)
     content = MarkupField( help_text="When linking to other pages use their slugs as the address (note that these links do not work in the preview, but will on the real site)")
@@ -78,9 +90,10 @@ class InfoPage(models.Model):
     # posts to be published in future easier.
     publication_date = models.DateTimeField( default=datetime.datetime.now )
 
-    # Link to the categories, use a custom related_name as this model represents
-    # both pages and posts.
+    # Link to the categories and tags, use a custom related_name as this model
+    # can represent both pages and posts.
     categories = models.ManyToManyField(Category, related_name="entries", blank=True)
+    tags       = models.ManyToManyField(Tag,      related_name="entries", blank=True)
 
 
     def __unicode__(self):
