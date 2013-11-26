@@ -5,6 +5,7 @@
 {% block title %}
   {% if category %}&ldquo;{{ category.name }}&rdquo;{% endif %}
   Blog Posts
+  {% if tag %}tagged &ldquo;{{ tag.name }}&rdquo;{% endif %}
 {% endblock %}
 
 {% block extra_head_meta %}
@@ -17,6 +18,7 @@
   <h1>
     {% if category %}&ldquo;{{ category.name }}&rdquo;{% endif %}
     Blog Posts
+    {% if tag %}tagged &ldquo;{{ tag.name }}&rdquo;{% endif %}
   </h1>
 
 
