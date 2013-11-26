@@ -21,7 +21,6 @@ class BlogMixin(object):
         return context
 
 
-
 class InfoBlogList(BlogMixin, ListView):
     """Show list of blog posts"""
     model = InfoPage
@@ -41,6 +40,9 @@ class InfoBlogCategory(InfoBlogList):
         context = super(InfoBlogCategory, self).get_context_data(**kwargs)
 
         context['category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
+
+        # Filter the recent posts to be specific to this category
+        context['recent_posts'] = context['recent_posts'].filter(categories=context['category'])
 
         return context
 
