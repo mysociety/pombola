@@ -61,8 +61,6 @@ place_patterns = patterns('pombola.core.views',
         r'^(?P<slug>[-\w]+)/candidates/$',
         RedirectView.as_view(url='/place/%(slug)s/aspirants', permanent=True),
     ),
-
-    
 )
 
 # ugly, must be a better way
