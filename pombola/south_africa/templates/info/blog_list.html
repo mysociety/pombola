@@ -21,6 +21,12 @@
   </h1>
 
 
+  {% if category and category.summary %}
+    <div class="infopage-category-summary">
+      {{ category.summary }}
+    </div>
+  {% endif %}
+
 
   {% for object in object_list %}
     <div class="blog-in-a-list">

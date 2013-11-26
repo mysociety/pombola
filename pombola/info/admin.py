@@ -5,8 +5,8 @@ class LabelAdmin(admin.ModelAdmin):
     search_fields = [ 'name' ]
     list_display  = [ 'name', 'slug' ]
 
-    fields = ('name', 'slug')
     prepopulated_fields = {'slug': ['name']}
+
 
 class InfoPageAdmin(admin.ModelAdmin):
     search_fields = [ 'title', 'content' ]

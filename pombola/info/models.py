@@ -34,6 +34,9 @@ class LabelModelBase(ModelBase):
 
 
 class Category(LabelModelBase):
+
+    summary = MarkupField(blank=True)
+
     class Meta():
         verbose_name_plural = 'categories'
 

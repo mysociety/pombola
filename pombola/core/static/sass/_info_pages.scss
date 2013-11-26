@@ -43,6 +43,15 @@
   }
 }
 
+.infopage-category-summary {
+  position: relative;
+  left: -1em;
+  margin-bottom: 1em;
+  padding: 0.5em 1em;
+  background-color: $colour_lighter_grey;
+  @include border-radius(1em);
+}
+
 @media only all and (min-width: 640px), print {
   .infopage {
     margin: 0;
