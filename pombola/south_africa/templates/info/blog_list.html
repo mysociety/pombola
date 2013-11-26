@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load pagination_tags %}
 {% load url from future %}
 
 {% block title %}
@@ -41,7 +40,8 @@
 
   {% endfor %}
 
-  {% paginate %}
+  {% include "info/_pagination.html" %}
+
   </div>
   <div class="minor-column">
 
