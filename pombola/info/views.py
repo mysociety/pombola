@@ -3,7 +3,7 @@ from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404
 
-from models import InfoPage, Category
+from models import InfoPage, Category, Tag
 
 
 class BlogMixin(object):
@@ -53,6 +53,10 @@ class InfoBlogCategory(InfoBlogLabelBase):
     filter_field = 'categories__slug'
 
 
+class InfoBlogTag(InfoBlogLabelBase):
+    context_key  = 'tag'
+    context_filter_model = Tag
+    filter_field = 'tags__slug'
 
 
 class InfoBlogView(BlogMixin, DetailView):
