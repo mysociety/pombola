@@ -34,6 +34,9 @@
       </p>
 
       {{ object.content|truncatewords_html:50 }}
+
+      <p><a href="{{ object.get_absolute_url }}">Read more &hellip;</a></p>
+
     </div>
 
   {% endfor %}
