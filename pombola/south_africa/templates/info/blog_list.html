@@ -33,7 +33,7 @@
         {% endif %}
       </p>
 
-      {{ object.content }}
+      {{ object.content|truncatewords_html:50 }}
     </div>
 
   {% endfor %}
