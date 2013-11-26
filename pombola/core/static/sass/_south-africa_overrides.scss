@@ -1094,6 +1094,9 @@ FOOTER
         font-size: 0.875em;
         margin-bottom: 1em;
     }
+    li + li {
+      margin-top: 0.5em;
+    }
     a:link {
         text-decoration: none;
         word-break: break-all;

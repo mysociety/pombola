@@ -4154,6 +4154,9 @@ FOOTER
 .sidebar ul li {
   list-style: none outside none;
 }
+.sidebar li + li {
+  margin-top: 0.5em;
+}
 .sidebar a:link {
   text-decoration: none;
   word-break: break-all;
