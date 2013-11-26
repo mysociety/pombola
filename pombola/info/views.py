@@ -2,6 +2,7 @@ from django.views.generic import DetailView, ListView
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 
 from models import InfoPage, Category
 
@@ -26,7 +27,7 @@ class InfoBlogList(BlogMixin, ListView):
     """Show list of blog posts"""
     model = InfoPage
     queryset = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG).order_by("-publication_date")
-    paginate_by = 10
+    paginate_by = settings.INFO_POSTS_PER_LIST_PAGE
     template_name = 'info/blog_list.html'
 
 

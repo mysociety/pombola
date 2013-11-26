@@ -428,3 +428,12 @@ BREADCRUMB_URL_NAME_MAPPINGS = config.get('BREADCRUMB_URL_NAME_MAPPINGS',
       'place' : ('Places', '/place/all/'),
       'search' : ('Search', '/search/')
     })
+
+# Info page settings
+INFO_POSTS_PER_LIST_PAGE = 10
+
+# overrides for ZA, should be somewhere better - see
+# https://github.com/mysociety/pombola/issues/829
+if COUNTRY_APP == 'south_africa':
+    INFO_POSTS_PER_LIST_PAGE = 4
+
