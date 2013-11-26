@@ -25,7 +25,13 @@
     <div class="blog-in-a-list">
       <h2><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h2>
 
-      <p class="meta">{{ object.publication_date|date }} ({{ object.publication_date|timesince }} ago)</p>
+      <p class="meta">
+        {{ object.publication_date|date }} ({{ object.publication_date|timesince }} ago)
+        {% if settings.DISQUS_SHORTNAME %}
+          &mdash;
+          <a href="{{ object.get_absolute_url }}#disqus_thread">Comments</a>
+        {% endif %}
+      </p>
 
       {{ object.content }}
     </div>
