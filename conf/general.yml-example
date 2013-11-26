@@ -115,21 +115,20 @@ OPTIONAL_APPS:
   # - votematch
   
 
-## Uncomment if you want to specialise the breadcrumb mappings
-# BREADCRUMB_URL_NAME_MAPPINGS:
-#     info: 
-#         - Information
-#         - /info/
-#     organisation:
-#         - People
-#         - /organisation/all/
-#     person: 
-#         - Politicians
-#         - /person/all/
-#     place: 
-#         - Places
-#         - /place/all/
-#     search: 
-#         - Search
-#         - /search/
+BREADCRUMB_URL_NAME_MAPPINGS:
+    info: 
+        - Information
+        - /info/
+    organisation:
+        - Organisation
+        - /organisation/all/
+    person: 
+        - Politicians
+        - /person/all/
+    place: 
+        - Places
+        - /place/all/
+    search: 
+        - Search
+        - /search/
 
