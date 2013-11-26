@@ -15,7 +15,12 @@ class ModelBase(models.Model):
         abstract = True
 
 
-class Category(ModelBase):
+class LabelModelBase(ModelBase):
+
+    """
+    The tags and categories are essentially the same thing in the database. Use
+    a common model for most of the fields etc.
+    """
 
     slug = models.SlugField(unique=True)
     name = models.CharField(max_length=300, unique=True)
@@ -24,8 +29,17 @@ class Category(ModelBase):
         return self.name
 
     class Meta():
+        abstract = True
         ordering = ( 'name', )
+
+
+class Category(LabelModelBase):
+    class Meta():
         verbose_name_plural = 'categories'
+
+
+class Tag(LabelModelBase):
+    pass
 
 
 class InfoPage(ModelBase):
@@ -76,9 +90,10 @@ class InfoPage(ModelBase):
     # posts to be published in future easier.
     publication_date = models.DateTimeField( default=datetime.datetime.now )
 
-    # Link to the categories, use a custom related_name as this model represents
-    # both pages and posts.
+    # Link to the categories and tags, use a custom related_name as this model
+    # can represent both pages and posts.
     categories = models.ManyToManyField(Category, related_name="entries", blank=True)
+    tags       = models.ManyToManyField(Tag,      related_name="entries", blank=True)
 
 
     def __unicode__(self):
