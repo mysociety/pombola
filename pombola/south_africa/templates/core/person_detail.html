@@ -40,30 +40,38 @@ pombola_settings.extra_js.push('js/tabs.js')
 
     {% if email_contacts %}
       <h3>Email</h3>
-      {% for contact in email_contacts %}
-      <p class="word-break-all">{{ contact.value|urlizetrunc:50 }}</p>
-      {% endfor %}
+      <ul>
+        {% for contact in email_contacts %}
+          <li class="word-break-all">{{ contact.value|urlizetrunc:50 }}</li>
+        {% endfor %}
+      </ul>
     {% endif %}
 
     {% if phone_contacts %}
       <h3>Phone</h3>
-      {% for contact in phone_contacts %}
-        <p><a href="tel:{{ contact.value }}">{{ contact.value }}</a></p>
-      {% endfor %}
+      <ul>
+        {% for contact in phone_contacts %}
+          <li><a href="tel:{{ contact.value }}">{{ contact.value }}</a></li>
+        {% endfor %}
+      </ul>
     {% endif %}
 
     {% if fax_contacts %}
       <h3>Fax</h3>
-      {% for contact in fax_contacts %}
-        <p>{{ contact.value }}</p>
+      <ul>
+        {% for contact in fax_contacts %}
+        <li>{{ contact.value }}</li>
       {% endfor %}
+      </ul>
     {% endif %}
 
     {% if twitter_contacts %}
       <h3>Twitter</h3>
-      {% for contact in twitter_contacts %}
-        <p><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</p>
-      {% endfor %}
+      <ul>
+        {% for contact in twitter_contacts %}
+          <li><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</li>
+        {% endfor %}
+      </ul>
     {% endif %}
 
     {% if object.constituency_offices %}
