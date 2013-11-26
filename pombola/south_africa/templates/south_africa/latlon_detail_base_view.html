@@ -3,6 +3,8 @@
 
 {% block content %}
 
+  {% include 'core/override_breadcrumb.html' with override_path='/places/' %}
+
   <h1>Find your representatives</h1>
 
   <form action="{% url "core_geocoder_search" %}">
