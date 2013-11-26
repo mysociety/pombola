@@ -1089,6 +1089,9 @@ FOOTER
     p + h3 {
         margin-top: 1.5em;
     }
+    .word-break-all {
+        word-break: break-all;
+    }
     ul {
         @include unstyled-list;
         font-size: 0.875em;
@@ -1099,7 +1102,6 @@ FOOTER
     }
     a:link {
         text-decoration: none;
-        word-break: break-all;
     }
     a:hover,
     a:active,
