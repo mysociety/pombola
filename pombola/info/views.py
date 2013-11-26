@@ -30,19 +30,29 @@ class InfoBlogList(BlogMixin, ListView):
     template_name = 'info/blog_list.html'
 
 
-class InfoBlogCategory(InfoBlogList):
+class InfoBlogLabelBase(InfoBlogList):
 
     def get_queryset(self):
-        category_slug = self.kwargs['slug']
-        queryset = super(InfoBlogCategory, self).get_queryset()
-        return queryset.filter(categories__slug=category_slug)
+        slug = self.kwargs['slug']
+        queryset = super(InfoBlogLabelBase, self).get_queryset()
+        filter_args = { self.filter_field: slug}
+        return queryset.filter(**filter_args)
 
     def get_context_data(self, **kwargs):
-        context = super(InfoBlogCategory, self).get_context_data(**kwargs)
+        context = super(InfoBlogLabelBase, self).get_context_data(**kwargs)
 
-        context['category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
+        slug = self.kwargs['slug']
+        context[self.context_key] = get_object_or_404(self.context_filter_model, slug=slug)
 
         return context
+
+
+class InfoBlogCategory(InfoBlogLabelBase):
+    context_key  = 'category'
+    context_filter_model = Category
+    filter_field = 'categories__slug'
+
+
 
 
 class InfoBlogView(BlogMixin, DetailView):
