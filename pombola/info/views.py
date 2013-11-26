@@ -16,8 +16,7 @@ class BlogMixin(object):
 
         context['recent_posts'] = InfoPage.objects \
             .filter(kind=InfoPage.KIND_BLOG) \
-            .order_by("-publication_date") \
-            [:5]
+            .order_by("-publication_date")
 
         return context
 

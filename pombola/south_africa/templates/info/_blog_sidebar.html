@@ -9,7 +9,7 @@
     <h3>Recent posts</h3>
 
     <ul>
-      {% for post in recent_posts %}
+      {% for post in recent_posts|slice:":5" %}
         <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
       {% empty %}
         <li>There are no recent posts.</li>
