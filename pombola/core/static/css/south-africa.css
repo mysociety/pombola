@@ -3090,11 +3090,10 @@ h2 a.appearances-trigger.active {
   margin-right: 0.5em;
   background-color: #f7f7f7;
   border: 1px solid #e6e6e6;
-  -moz-border-radius: 0.25em;
   -webkit-border-radius: 0.25em;
-  -o-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
   -ms-border-radius: 0.25em;
-  -khtml-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
   border-radius: 0.25em;
 }
 
@@ -3104,11 +3103,10 @@ h2 a.appearances-trigger.active {
   margin-bottom: 1em;
   padding: 0.5em 1em;
   background-color: #f7f7f7;
-  -moz-border-radius: 1em;
   -webkit-border-radius: 1em;
-  -o-border-radius: 1em;
+  -moz-border-radius: 1em;
   -ms-border-radius: 1em;
-  -khtml-border-radius: 1em;
+  -o-border-radius: 1em;
   border-radius: 1em;
 }
 
@@ -3419,6 +3417,7 @@ HEADER
   background-image: none;
   background: #f1f0ec;
   padding: .5em 0 0;
+  position: relative;
 }
 @media only all and (min-width: 640px), print {
   #site-header {
@@ -3552,6 +3551,41 @@ a:focus {
   background-image: url("../images/has-dropdown.png") !important;
   background-position: right center !important;
   background-repeat: no-repeat !important;
+}
+
+.about-this-site-menu {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+@media only all and (min-width: 640px), print {
+  .about-this-site-menu {
+    top: .5em;
+    right: 0;
+  }
+}
+.about-this-site-menu ul {
+  padding-left: 0;
+}
+.about-this-site-menu li {
+  list-style: none outside none;
+  line-height: 1.1em;
+  text-align: right;
+}
+@media only all and (min-width: 640px), print {
+  .about-this-site-menu li {
+    display: inline-block;
+    margin-left: .5em;
+  }
+}
+.about-this-site-menu a {
+  font-size: 0.75em;
+  color: #555555;
+  text-decoration: none;
+}
+.about-this-site-menu a:hover {
+  color: #e23d28;
+  text-decoration: underline;
 }
 
 #header-search {
