@@ -6,7 +6,14 @@
 {% endblock %}
 
 {% block search_title %}
+
+  {# suggested styling, for clean-up #}
+  <div style="float: right; right:0; position: absolute;">
+      <a href="{% url "info_page" slug="constituency-offices" %}" class="button">About Constituency Offices</a>
+  </div>
+
 <h1> Find Your Representative </h1>
+
 {% endblock %}
 
 {% block search_instructions %}
@@ -16,6 +23,7 @@
 
 {% block search_form %}
   <input type="text" name="q" value="{{ query }}" id="id_q" placeholder="Enter your location&hellip;"/>
+
 {% endblock %}
 
 {% block search_results %}
