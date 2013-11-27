@@ -45,12 +45,11 @@
 <li><a href="{% url "info_blog_list" %}" class="has-dropdown">Blog</a>
   {% if include_sub_menu_entries %}
     <ul id="blog-overview">
-      <li><a href="{% url 'info_blog_list' %}">Recent Posts</a></li>
-      <li><a href="{% url 'info_blog_category' slug='mp-corner' %}">MP Corner</a></li>
-      <li><a href="{% url 'info_blog_category' slug='ngo-articles' %}">NGO articles</a></li>
-      <li><a href="{% url 'info_blog_category' slug='impressions' %}">IMPRESSIONS</a></li>
       <li><a href="{% url 'info_blog_category' slug='week-parliament' %}">That Week In Parliament</a></li>
-      <li><a href="{% url 'info_blog_category' slug='thought-pieces' %}">Thought Pieces/Commentary</a></li>
+      <li><a href="{% url 'info_blog_category' slug='impressions' %}">Impressions</a></li>
+      <li><a href="{% url 'info_blog_category' slug='advocacy-campaigns' %}">Advocacy Campaigns</a></li>
+      <li><a href="{% url 'info_blog_category' slug='commentary' %}">Commentary</a></li>
+      <li><a href="{% url 'info_blog_category' slug='mp-corner' %}">MP Corner</a></li>
     </ul>
   {% endif %}
 </li>
@@ -64,7 +63,6 @@
       <li><a href="{% url "info_page" slug="documents" %}">Documents</a></li>
       <li><a href="{% url "info_page" slug="links" %}">Links</a></li>
       <li><a href="{% url "info_page" slug="newsletter" %}">Newsletter</a></li>
-      <li><a href="{% url "info_page" slug="constituency-offices" %}">Constituency Offices</a></li>
     </ul>
   {% endif %}
 </li>
