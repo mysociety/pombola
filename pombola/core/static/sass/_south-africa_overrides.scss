@@ -122,9 +122,23 @@ a {
     cursor: pointer;
     letter-spacing: 0.05em;
     -webkit-appearance: none;
+    text-decoration: none;
     &:hover,
     &:focus {
         background: mix($colour_primary, #000, 80%);
+        color: #fff;
+        text-decoration: none;
+    }
+    &.secondary-button {
+        background-color: #f1f0ec;
+        color: $colour_black;
+        &:hover,
+        &:focus {
+            background: $colour_primary;
+            color: #fff;
+            text-decoration: none;
+
+        }
     }
 }
 
@@ -1725,6 +1739,17 @@ ul.pager {
 }
 
 /* Place search results */
+
+.about-constituency-office {
+    font-size: 0.75em;
+    margin-bottom: 1em;
+    @media only all and (min-width: 640px), print {
+        margin-bottom: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
 
 #map_canvas {
     margin-bottom: 2em;
