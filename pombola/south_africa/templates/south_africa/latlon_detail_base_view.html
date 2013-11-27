@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load url from future %}
 
+{% block breadcrumbs %}
+{% include 'core/override_breadcrumb.html' with override_path='/places/' %}
+{% endblock %}
+
 {% block content %}
 
-  {% include 'core/override_breadcrumb.html' with override_path='/places/' %}
 
   <h1>Find your representatives</h1>
 
