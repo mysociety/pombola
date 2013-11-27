@@ -220,7 +220,7 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
         # Calculate the % of the house each party occupies.
         for party in parties:
-            party.percentage = round((float(party.person_count) / total_people) * 100, 2)
+            party.percentage = float(party.person_count) / total_people * 100
 
         context['parties'] = parties
         context['total_people'] =  total_people
@@ -231,7 +231,7 @@ class SAOrganisationDetailView(OrganisationDetailView):
         return context
 
     def get_template_names(self):
-        if self.object.kind.slug == 'house':
+        if self.object.kind.slug == 'parliament':
             return [ 'south_africa/organisation_house.html' ]
         else:
             return super(SAOrganisationDetailView, self).get_template_names()

@@ -1,10 +1,19 @@
 {% load url from future %}
 
-<ul class="breadcrumbs">
-    <li><a href="{% url 'speeches:section-list' %}">Hansard</a> <span class="divider">&rarr;</span></li>
-{% for n in section.get_ancestors %}
-{% if n.id != section.id and forloop.counter != 1 %}
-    <li><a href="{% url 'speeches:section-view' n.id %}">{{ n.title }}</a> <span class="divider">&rarr;</span></li>
-{% endif %}
-{% endfor %}
-</ul>
+<div id="breadcrumb">
+    <nav class="wrapper">
+        <ul>
+            <li><a href="/">Home</a> 
+        {% for n in section.get_ancestors %}
+            {% if n.id != section.id %}
+                <span class="sep">&raquo;</span>
+                {% if forloop.counter == 1 %}
+                    <li><a href="{% url 'speeches:section-list' %}">{{ n.title }}</a> 
+                {% else %}
+                    <li><a href="{% url 'speeches:section-view' n.id %}">{{ n.title }}</a> 
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </nav>
+</div>

@@ -1,23 +1,29 @@
 {% load url from  future %}
 
-  <div class="sidebar">
+<div class="sidebar">
+
     <ul class="social-links-list">
-       <li><a href="{% url "info_blog_feed" %}" class="rss-social-icon">RSS</a></li>
+       <li><a href="{% url 'info_blog_feed' %}" class="rss-social-icon">RSS</a></li>
     </ul>
-    <h3>Recent posts</h3>
+
+    <h3>Recent {% if category %}&ldquo;{{ category.name }}&rdquo;{% endif %} posts</h3>
+
     <ul>
-      {% for post in recent_posts %}
+      {% for post in recent_posts|slice:":5" %}
         <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
       {% empty %}
-        <li>There are no recent posts.</li>
+        <li>There are no recent posts{% if category %} in &ldquo;{{ category.name }}&rdquo;{% endif %}.</li>
       {% endfor %}
     </ul>
+
     <h3>Categories</h3>
+
     <ul>
       {% for category in all_categories %}
         <li><a href="{% url 'info_blog_category' slug=category.slug %}">{{ category.name }}</a></li>
       {% empty %}
-        <li>There are no recent categories.</li>
+        <li>There are no categories.</li>
       {% endfor %}
     </ul>
+
 </div>

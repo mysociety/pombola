@@ -12,10 +12,12 @@
 
 <li><a href="{% url "home" %}">Home</a></li>
 
+<li><a href="{% url "core_geocoder_search" %}">Rep Locator</a></li>
+
 <li><a href="{% url "person_list" %}" class="has-dropdown">People</a>
   {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
-      <li><a href="{% url "organisation_kind" slug="house" %}">Parliament</a>
+      <li><a href="{% url "organisation_kind" slug="parliament" %}">Parliament</a>
         <ul>
           <li><a href="{% url "organisation" slug="national-assembly" %}">National Assembly</a></li>
           <li><a href="{% url "organisation" slug="ncop" %}">National Council of Provinces</a></li>
@@ -58,6 +60,7 @@
     <ul id="democracy-resources-overview">
       <li><a href="http://www.pmg.org.za/bill">Legislation</a></li>
       <li><a href="http://www.pmg.org.za/committees">Committees</a></li>
+      <li><a href="{% url "hansard:section-list" %}">Hansard</a></li>
       <li><a href="{% url "info_page" slug="documents" %}">Documents</a></li>
       <li><a href="{% url "info_page" slug="links" %}">Links</a></li>
       <li><a href="{% url "info_page" slug="newsletter" %}">Newsletter</a></li>

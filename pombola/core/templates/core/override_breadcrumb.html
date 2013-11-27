@@ -1,0 +1,11 @@
+{% load breadcrumbs %}
+{% block breadcrumbs %}
+    {# dummy suppressing the latlong part for now #}
+        <div id="breadcrumb">
+            <nav class="wrapper">
+                <ul>
+                    {{ override_path|breadcrumbs }}
+                </ul>
+            </nav>
+        </div>
+{% endblock %}

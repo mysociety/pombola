@@ -8,6 +8,7 @@ from pombola.south_africa.views import LatLonDetailNationalView, LatLonDetailLoc
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
+from pombola.core.views import PlaceKindList
 
 # Override the organisation url so we can vary it depending on the organisation type.
 for index, pattern in enumerate(organisation_patterns):
@@ -43,6 +44,11 @@ for index, pattern in enumerate(search_urlpatterns):
 urlpatterns += patterns('pombola.south_africa.views',
     url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/national/$', LatLonDetailNationalView.as_view(), name='latlon-national'),
     url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/$', LatLonDetailLocalView.as_view(), name='latlon'),
+
+    # because the following slug matches override this definition in the core
+    # place_patterns, we reinstate it here
+    url( r'^place/all/', PlaceKindList.as_view(), name='place_kind_all' ),
+
     url(r'^place/(?P<slug>[-\w]+)/$', SAPlaceDetailView.as_view(), name='place'),
 
     url(r'^place/(?P<slug>[-\w]+)/places/', SAPlaceDetailSub.as_view(), {'sub_page': 'places'}, name='place_places'),

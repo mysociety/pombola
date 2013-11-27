@@ -1,0 +1,17 @@
+{% if page_obj %}
+  <div class="pagination">
+      {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}" class="prev">&laquo; newer posts</a>
+      {% else %}
+          <span class="disabled prev">previous</span>
+      {% endif %}
+
+      <span class="current page">Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class="next">older posts &raquo;</a>
+      {% else %}
+          <span class="disabled next">next</span>
+      {% endif %}
+  </div>
+{% endif %}

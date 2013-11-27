@@ -9,7 +9,7 @@ pombola_settings.extra_js.push('js/tabs.js')
 {% block object_tagline %}
   <p>
   {% for position in positions %}
-    <span class="position-title">{{ position.title }} at {{ position.organisation }}</span>
+    <span class="position-title">{{ position.title }}: {{ position.organisation }}</span>
     {% if not forloop.last %}|{% endif %}
   {% endfor %}
   </p>
@@ -40,30 +40,38 @@ pombola_settings.extra_js.push('js/tabs.js')
 
     {% if email_contacts %}
       <h3>Email</h3>
-      {% for contact in email_contacts %}
-      <p>{{ contact.value|urlizetrunc:50 }}</p>
-      {% endfor %}
+      <ul>
+        {% for contact in email_contacts %}
+          <li class="word-break-all">{{ contact.value|urlizetrunc:50 }}</li>
+        {% endfor %}
+      </ul>
     {% endif %}
 
     {% if phone_contacts %}
       <h3>Phone</h3>
-      {% for contact in phone_contacts %}
-        <p><a href="tel:{{ contact.value }}">{{ contact.value }}</a></p>
-      {% endfor %}
+      <ul>
+        {% for contact in phone_contacts %}
+          <li><a href="tel:{{ contact.value }}">{{ contact.value }}</a></li>
+        {% endfor %}
+      </ul>
     {% endif %}
 
     {% if fax_contacts %}
       <h3>Fax</h3>
-      {% for contact in fax_contacts %}
-        <p>{{ contact.value }}</p>
+      <ul>
+        {% for contact in fax_contacts %}
+        <li>{{ contact.value }}</li>
       {% endfor %}
+      </ul>
     {% endif %}
 
     {% if twitter_contacts %}
       <h3>Twitter</h3>
-      {% for contact in twitter_contacts %}
-        <p><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</p>
-      {% endfor %}
+      <ul>
+        {% for contact in twitter_contacts %}
+          <li><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</li>
+        {% endfor %}
+      </ul>
     {% endif %}
 
     {% if object.constituency_offices %}
@@ -92,25 +100,31 @@ pombola_settings.extra_js.push('js/tabs.js')
     <h2>Appearances</h2>
 
     <section class="person-appearances">
-      <h3>Plenary appearances</h3>
-
-      <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
-
-      {% include "core/person_speech_list.html" with speechlist=hansard section_url='hansard:section-view' %}
-    </section>
-
-    <section class="person-appearances">
       <h3>Committee appearances</h3>
 
-      <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
+      {% if committee.count %}
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
+      {% endif %}
 
       {% include "core/person_speech_list.html" with speechlist=committee section_url='committee:section-view' %}
     </section>
 
     <section class="person-appearances">
+      <h3>Plenary appearances</h3>
+
+      {% if hansard.count %}
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
+      {% endif %}
+
+      {% include "core/person_speech_list.html" with speechlist=hansard section_url='hansard:section-view' %}
+    </section>
+
+    <section class="person-appearances">
       <h3>Questions </h3>
 
-      <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
+      {% if question.count %}
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
+      {% endif %}
 
       {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' parent_title=1 %}
     </section>
@@ -149,6 +163,10 @@ pombola_settings.extra_js.push('js/tabs.js')
 
     </div>
 
+    {% comment %}
+
+    Commented out as design has been done and currently we're waiting on real data to populate. See #912.
+
     <div class="person-interests">
       <h2>Register of interests</h2>
 
@@ -163,6 +181,8 @@ pombola_settings.extra_js.push('js/tabs.js')
       Donor status: Individual<br>
       (Registered 12 July 2012)</p>
     </div>
+    {% endcomment %}
+
   </div>
 
 </div>

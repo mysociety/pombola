@@ -1099,14 +1099,19 @@ FOOTER
     p + h3 {
         margin-top: 1.5em;
     }
+    .word-break-all {
+        word-break: break-all;
+    }
     ul {
         @include unstyled-list;
         font-size: 0.875em;
         margin-bottom: 1em;
     }
+    li + li {
+      margin-top: 0.5em;
+    }
     a:link {
         text-decoration: none;
-        word-break: break-all;
     }
     a:hover,
     a:active,
