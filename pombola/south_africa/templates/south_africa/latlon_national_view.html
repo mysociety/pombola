@@ -25,4 +25,8 @@
     </ul>
   </div>
 
+  <script type="text/javascript" charset="utf-8">
+    add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url "mapit_index" %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
+  </script>
+
 {% endblock %}
