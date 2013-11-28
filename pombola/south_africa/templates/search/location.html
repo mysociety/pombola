@@ -2,7 +2,7 @@
 {% load url from future %}
 
 {% block alternative_search %}
-  <a href="{% url "core_search" %}">for a person or organisation</a>
+  <a href="{% url 'core_search' %}?q={{ query|urlencode }}">for a person or organisation</a>
 {% endblock %}
 
 {% block search_title %}
