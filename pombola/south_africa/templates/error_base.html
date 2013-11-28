@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load url from future %}
+{% load thumbnail %}
+
+{% block body_attributes %} class="error" {% endblock %}
+
+{% block breadcrumbs %}
+    {# Hide bread crumbs on the home page. #}
+{% endblock %}
+
+{% block intro_content %}
+
+    <style type="text/css" media="screen">
+
+    .error-page-content {
+      min-height: 500px;
+    }
+
+    .error-page-content h1,
+    .error-page-content p {
+      color: #fff;
+      text-align: center;
+      margin: auto;
+      margin-bottom: 1em;
+    }
+    .error-page-content h1 {
+      padding-top: 2em;
+      font-size: 48px;
+    }
+    .error-page-content p {
+      max-width: 30em;
+    }
+    .error-page-content a {
+      color: inherit;
+    }
+    </style>
+
+    <div id="front_intro">
+        <div class="page-wrapper wrapper ">
+
+          <div class="error-page-content">
+            {% block error_content %}
+            {% endblock %}
+          </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
