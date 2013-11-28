@@ -11,8 +11,9 @@
 
 {% block page %}
 <div id="page">
-    {% block intro_content %}{% endblock %}
+  {% block intro_content %}{% endblock %}
 
+  {% block page_wrapper %}
     <div class="page-wrapper wrapper" id="hfWrap">
         {% block content %}{% endblock %}
         {% block after_content %}{% endblock %}
@@ -20,6 +21,7 @@
         <br clear="both">
         <a class="feedback-button button feedback_link" href="{% url "feedback_add" %}?url={{ request.build_absolute_uri }}">Correct this page</a>
     </div>
+  {% endblock %}
 
 </div>
 {% endblock %}
