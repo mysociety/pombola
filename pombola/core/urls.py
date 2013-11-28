@@ -117,8 +117,12 @@ urlpatterns += patterns('pombola.core.views',
     url(r'^status/memcached/',       'memcached_status', name='memcached_status'),
 )
 
+# Make it easy to see the various error pages without having to fiddle with the
+# STAGING settings.
 urlpatterns += patterns('',
     url(r'^status/down/', TemplateView.as_view(template_name='down.html') ),
+    url(r'^status/404/',  TemplateView.as_view(template_name='404.html') ),
+    url(r'^status/500/',  TemplateView.as_view(template_name='500.html') ),
 )
 
 
