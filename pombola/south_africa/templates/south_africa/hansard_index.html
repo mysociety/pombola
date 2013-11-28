@@ -10,6 +10,12 @@
 
 {% block content %}
 
+<div class="clearfix">
+  <p style="float: right;">
+    <a class="js-reveal-all-link" href="#">Expand all subsections</a>
+  </p>
+</div>
+
 
 {% regroup entries by section.parent.title.strip as by_title %}
 {% for t in by_title %}
