@@ -4823,6 +4823,32 @@ ul.pager li.next {
   margin-bottom: 2em;
 }
 
+/* Error and status pages */
+.error-page-content {
+  min-height: 500px;
+}
+
+.error-page-content h1,
+.error-page-content p {
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+.error-page-content h1 {
+  padding-top: 2em;
+  font-size: 48px;
+}
+
+.error-page-content p {
+  max-width: 30em;
+}
+
+.error-page-content a {
+  color: inherit;
+}
+
 /* Generic layouts */
 .layout {
   /**
