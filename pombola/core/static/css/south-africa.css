@@ -3090,11 +3090,10 @@ h2 a.appearances-trigger.active {
   margin-right: 0.5em;
   background-color: #f7f7f7;
   border: 1px solid #e6e6e6;
-  -moz-border-radius: 0.25em;
   -webkit-border-radius: 0.25em;
-  -o-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
   -ms-border-radius: 0.25em;
-  -khtml-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
   border-radius: 0.25em;
 }
 
@@ -3104,11 +3103,10 @@ h2 a.appearances-trigger.active {
   margin-bottom: 1em;
   padding: 0.5em 1em;
   background-color: #f7f7f7;
-  -moz-border-radius: 1em;
   -webkit-border-radius: 1em;
-  -o-border-radius: 1em;
+  -moz-border-radius: 1em;
   -ms-border-radius: 1em;
-  -khtml-border-radius: 1em;
+  -o-border-radius: 1em;
   border-radius: 1em;
 }
 
@@ -3218,9 +3216,21 @@ a:hover, a:focus {
   cursor: pointer;
   letter-spacing: 0.05em;
   -webkit-appearance: none;
+  text-decoration: none;
 }
 .button:hover, .button:focus {
   background: #b43020;
+  color: #fff;
+  text-decoration: none;
+}
+.button.secondary-button {
+  background-color: #f1f0ec;
+  color: #222222;
+}
+.button.secondary-button:hover, .button.secondary-button:focus {
+  background: #e23d28;
+  color: #fff;
+  text-decoration: none;
 }
 
 /*
@@ -3917,6 +3927,15 @@ NEWS & POLL
 .home-news {
   float: left;
 }
+.home-news h2 a:link {
+  text-decoration: none;
+  color: #222222;
+}
+.home-news h2 a:hover,
+.home-news h2 a:focus {
+  text-decoration: underline;
+  color: #e23d28;
+}
 @media only all and (min-width: 940px), print {
   .home-news {
     width: 48%;
@@ -4402,7 +4421,8 @@ li.speech {
   hyphens: auto;
 }
 li.speech br {
-  display: none;
+  content: ' ';
+  display: inline;
 }
 li.speech .hov {
   font-size: 0.75em;
@@ -4802,6 +4822,19 @@ ul.pager li.next {
 }
 
 /* Place search results */
+.about-constituency-office {
+  font-size: 0.75em;
+  margin-bottom: 1em;
+}
+@media only all and (min-width: 640px), print {
+  .about-constituency-office {
+    margin-bottom: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
 #map_canvas {
   margin-bottom: 2em;
 }

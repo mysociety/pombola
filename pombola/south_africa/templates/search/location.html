@@ -2,17 +2,13 @@
 {% load url from future %}
 
 {% block alternative_search %}
-  <a href="{% url "core_search" %}">for a person or organisation</a>
+  <a href="{% url 'core_search' %}?q={{ query|urlencode }}">for a person or organisation</a>
 {% endblock %}
 
 {% block search_title %}
 
-  {# suggested styling, for clean-up #}
-  <div style="float: right; right:0; position: absolute;">
-      <a href="{% url "info_page" slug="constituency-offices" %}" class="button">About Constituency Offices</a>
-  </div>
-
 <h1> Find Your Representative </h1>
+<a href="{% url "info_page" slug="constituency-offices" %}" class="button secondary-button about-constituency-office">About Constituency Offices</a>
 
 {% endblock %}
 
@@ -28,11 +24,11 @@
 
 {% block search_results %}
   <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
-  
+
   <div class="geocoded_results">
-  
+
     <div id="map_canvas">&nbsp;</div>
-  
+
     <ul>
       {% for result in geocoder_results %}
         <li>
@@ -50,8 +46,8 @@
         </script>
       {% endfor %}
     </ul>
-  
+
     <br style="clear: both;">
-  
+
   </div>
 {% endblock %}

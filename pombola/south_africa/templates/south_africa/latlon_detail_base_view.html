@@ -9,6 +9,7 @@
 
 
   <h1>Find your representatives</h1>
+  <a href="{% url "info_page" slug="constituency-offices" %}" class="button secondary-button about-constituency-office">About Constituency Offices</a>
 
   <form action="{% url "core_geocoder_search" %}">
     {% include "south_africa/_search_box.html" %}

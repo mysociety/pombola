@@ -102,31 +102,31 @@ pombola_settings.extra_js.push('js/tabs.js')
     <section class="person-appearances">
       <h3>Committee appearances</h3>
 
+      {% include "core/person_speech_list.html" with speechlist=committee section_url='committee:section-view' %}
+
       {% if committee.count %}
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
       {% endif %}
-
-      {% include "core/person_speech_list.html" with speechlist=committee section_url='committee:section-view' %}
     </section>
 
     <section class="person-appearances">
       <h3>Plenary appearances</h3>
 
+      {% include "core/person_speech_list.html" with speechlist=hansard section_url='hansard:section-view' %}
+
       {% if hansard.count %}
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
       {% endif %}
-
-      {% include "core/person_speech_list.html" with speechlist=hansard section_url='hansard:section-view' %}
     </section>
 
     <section class="person-appearances">
       <h3>Questions </h3>
 
+      {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' parent_title=1 %}
+
       {% if question.count %}
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
       {% endif %}
-
-      {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' parent_title=1 %}
     </section>
 
   </div>

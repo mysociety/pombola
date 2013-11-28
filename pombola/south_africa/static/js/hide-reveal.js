@@ -20,9 +20,15 @@
         $($this.attr('href')).slideToggle(200);
     };
 
+    var revealAllHref = function (e) {
+      e.preventDefault();
+      $('.js-hide-reveal').show();
+    };
+
     $(document).ready(function() {
         $('.js-hide-reveal').hide();
         $('.js-hide-reveal-link').click(hideOrRevealHref);
+        $('.js-reveal-all-link').click(revealAllHref);
     });
 
 })(jQuery);

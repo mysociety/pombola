@@ -122,9 +122,23 @@ a {
     cursor: pointer;
     letter-spacing: 0.05em;
     -webkit-appearance: none;
+    text-decoration: none;
     &:hover,
     &:focus {
         background: mix($colour_primary, #000, 80%);
+        color: #fff;
+        text-decoration: none;
+    }
+    &.secondary-button {
+        background-color: #f1f0ec;
+        color: $colour_black;
+        &:hover,
+        &:focus {
+            background: $colour_primary;
+            color: #fff;
+            text-decoration: none;
+
+        }
     }
 }
 
@@ -828,7 +842,17 @@ NEWS & POLL
 
 .home-news {
     float: left;
-
+    h2 {
+        a:link{
+            text-decoration: none;
+            color: $colour_black;
+        }
+        a:hover,
+        a:focus {
+            text-decoration: underline;
+            color: $colour_primary;
+        }
+    }
     @media only all and (min-width: 940px), print {
         width: 48%;
         margin-right: 2%;
@@ -1306,7 +1330,8 @@ li.speech {
        -moz-hyphens: auto;
             hyphens: auto;
     br {
-        display: none;
+        content: ' ';
+        display: inline;
     }
     .hov {
         font-size: 0.75em;
@@ -1715,6 +1740,17 @@ ul.pager {
 }
 
 /* Place search results */
+
+.about-constituency-office {
+    font-size: 0.75em;
+    margin-bottom: 1em;
+    @media only all and (min-width: 640px), print {
+        margin-bottom: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
 
 #map_canvas {
     margin-bottom: 2em;
