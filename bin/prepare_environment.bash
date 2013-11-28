@@ -47,3 +47,6 @@ find . -name '*.pyc' -delete
 
 # gather all the static files in one place
 ./manage.py collectstatic --noinput
+
+# Generate the down.html from the template, ensures it stay up to date.
+./manage.py core_render_template down.html > web/down.default.html
