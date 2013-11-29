@@ -30,23 +30,27 @@ class Command(LabelCommand):
         # create all the places as needed for all mapit areas of that type
         for area in mapit_type.areas.all():
 
+            slug = slugify(area.name)
+
             # There may be a slug clash as several areas have the same name but
             # are different placekinds. Create the slug and then check to see
             # if the slug is already in use for a placekind other than ours. If
             # it is append the placekind to the slug.
-            slug = slugify(area.name)
-
             if Place.objects.filter(slug=slug).exclude(kind=placekind).exists():
                 slug = slug + '-' + placekind.slug
+
+            # There are several local municipalites with the same name. Eg
+            # Emalahleni (in Eastern Cape and Mpumalanga)
+            if Place.objects.filter(slug=slug).exclude(mapit_area=area).exists():
+                slug = slug + '-2'
+
 
             print "'%s' (%s)" % (area.name, slug)
             place, created = Place.objects.get_or_create(
                 name=area.name,
                 kind=placekind,
+                mapit_area = area,
                 defaults={
                     'slug': slug,
                 }
             )
-
-            place.mapit_area = area
-            place.save()
