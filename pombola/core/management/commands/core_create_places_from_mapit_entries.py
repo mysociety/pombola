@@ -40,17 +40,19 @@ class Command(LabelCommand):
                 slug = slug + '-' + placekind.slug
 
             # There are several local municipalites with the same name. Eg
-            # Emalahleni (in Eastern Cape and Mpumalanga)
-            if Place.objects.filter(slug=slug).exclude(mapit_area=area).exists():
+            # Emalahleni (in Eastern Cape and Mpumalanga). Does not apply to
+            # places that have not been liked to mapit areas yet.
+            if Place.objects.filter(slug=slug, mapit_area__isnull=False).exclude(mapit_area=area).exists():
                 slug = slug + '-2'
-
 
             print "'%s' (%s)" % (area.name, slug)
             place, created = Place.objects.get_or_create(
                 name=area.name,
                 kind=placekind,
-                mapit_area = area,
-                defaults={
-                    'slug': slug,
-                }
+                slug=slug,
             )
+
+            # Check that the mapit area is correctly set
+            if place.mapit_area != area:
+                place.mapit_area = area
+                place.save()
