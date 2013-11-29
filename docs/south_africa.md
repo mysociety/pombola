@@ -31,3 +31,24 @@ geocode cache at `pombola/south_africa/management/commands/.geocode-request-cach
 To load in some example SayIt data, fetch the speeches/fixtures/test_inputs/
 
     $ python manage.py load_akomantoso --dir <speeches/fixtures/test_inputs/> --commit
+
+Places can be created to match all those in the mapit database.
+
+    $ ./manage.py core_create_places_from_mapit_entries PRV
+    $ ./manage.py core_create_places_from_mapit_entries DMN
+    $ ./manage.py core_create_places_from_mapit_entries LMN
+    $ ./manage.py core_create_places_from_mapit_entries WRD
+
+Once created they can then be structured into a hierarchy.
+
+    $ ./manage.py core_set_area_parents wards:local-municipality
+    $ ./manage.py core_set_area_parents local-municipality:district-municipality
+    $ ./manage.py core_set_area_parents district-municipality:province
+
+Currently the data for the metropolitan municipalites is in a funny place - see
+https://github.com/mysociety/pombola/issues/695. Once fixed though these
+commands should add the data for them:
+
+    !!TODO!! ./manage.py core_create_places_from_mapit_entries MMN
+    !!TODO!! ./manage.py core_set_area_parents wards:metropolitan-municipality
+    !!TODO!! ./manage.py core_set_area_parents metropolitan-municipality:province
