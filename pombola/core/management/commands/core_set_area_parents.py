@@ -85,8 +85,22 @@ def recalculate_parents(child_placekind, child_type, parent_placekind, parent_ty
         else:
             parent_area = list(parent_areas)[0]
             print "  Exactly one parent found, setting the parent:", parent_area
-            parent_place = Place.objects.get(mapit_area=parent_area)
-            place.parent_place = parent_place
+            print "  filter(mapit_area=%s, kind=%s)" % (parent_area.id, parent_placekind.id)
+            parent_places = Place.objects.filter(mapit_area=parent_area, kind=parent_placekind)
+            if parent_places.count() > 1:
+                print "------ found multiple matching places -------"
+                for pp in parent_places:
+                    print pp
+                print "---------------------------------------------"
+                raise Exception("multiple places found")
+
+            if len(parent_places):
+                place.parent_place = parent_places[0]
+            else:
+                print parent_places
+                raise Exception("no parent place found")
+                place.parent_place = None
+
             place.save()
 
 class Command(BaseCommand):
