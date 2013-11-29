@@ -7,7 +7,7 @@
 from django.core.management.base import LabelCommand
 
 from mapit.models import Type
-from core.models import Place, PlaceKind
+from pombola.core.models import Place, PlaceKind
 from django.template.defaultfilters import slugify
 
 class Command(LabelCommand):
