@@ -28,7 +28,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/acdp.png",
-            "name": "ACDP",
+            "name": "African Christian Democratic Party (ACDP)",
             "slug": "acdp"
         },
         {
@@ -41,7 +41,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/anc.png",
-            "name": "ANC",
+            "name": "African National Congress (ANC)",
             "slug": "anc"
         },
         {
@@ -54,7 +54,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/apc.png",
-            "name": "APC",
+            "name": "African Peoples' Convention (APC)",
             "slug": "apc"
         },
         {
@@ -67,7 +67,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/azapo.png",
-            "name": "AZAPO",
+            "name": "Azanian People's Organisation (AZAPO)",
             "slug": "azapo"
         },
         {
@@ -254,7 +254,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/cope.png",
-            "name": "COPE",
+            "name": "Congress of the People (COPE)",
             "slug": "cope"
         },
         {
@@ -339,7 +339,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/da.png",
-            "name": "DA",
+            "name": "Democratic Alliance (DA)",
             "slug": "da"
         },
         {
@@ -382,7 +382,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/ff.png",
-            "name": "FF+",
+            "name": "Freedom Front + (Vryheidsfront+, FF+)",
             "slug": "ff+"
         },
         {
@@ -431,7 +431,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/id.png",
-            "name": "ID",
+            "name": "Independent Democrats (ID)",
             "slug": "id"
         },
         {
@@ -444,7 +444,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/ifp.png",
-            "name": "IFP",
+            "name": "Inkatha Freedom Party (IFP)",
             "slug": "ifp"
         },
         {
@@ -559,7 +559,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/mf.png",
-            "name": "MF",
+            "name": "Minority Front (MF)",
             "slug": "mf"
         },
         {
@@ -692,7 +692,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/pac.png",
-            "name": "PAC",
+            "name": "Pan Africanist Congress (PAC)",
             "slug": "pac"
         },
         {
@@ -1443,7 +1443,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/ucdp.png",
-            "name": "UCDP",
+            "name": "United Christian Democratic Party (UCDP)",
             "slug": "ucdp"
         },
         {
@@ -1456,7 +1456,7 @@
                 }
             ],
             "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/udm.png",
-            "name": "UDM",
+            "name": "United Democratic Movement (UDM)",
             "slug": "udm"
         },
         {
@@ -1690,7 +1690,7 @@
         {
             "classification": "party",
             "id": "org.mysociety.za/political-party/aic",
-            "name": "AIC",
+            "name": "African Independent Congress (AIC)",
             "slug": "aic"
         },
         {
