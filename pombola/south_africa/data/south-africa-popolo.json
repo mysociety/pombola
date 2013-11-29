@@ -1688,7 +1688,7 @@
             "slug": "standing-committee-on-cultural-affairs-and-sport"
         },
         {
-            "classification": "political-party",
+            "classification": "party",
             "id": "org.mysociety.za/political-party/aic",
             "name": "AIC",
             "slug": "aic"
