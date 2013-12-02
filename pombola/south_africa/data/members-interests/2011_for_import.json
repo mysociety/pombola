@@ -1,0 +1,70 @@
+[
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": "9"
+        },
+        "entries": [
+            {
+                "Description": "House ",
+                "Extent": "Normal ",
+                "Location": "Eldorado Park "
+            }
+        ],
+        "person": {
+            "slug": "abrahams-beverley-lynnette-da-ncop"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS ",
+            "sort_order": "1"
+        },
+        "entries": [
+            {
+                "Name of Company": "Vodacom ",
+                "No ": "100 ",
+                "Nominal Value ": "R2 000 "
+            },
+            {
+                "Name of Company": "Telkom ",
+                "No ": "30 ",
+                "Nominal Value ": "R1 000 "
+            }
+        ],
+        "person": {
+            "slug": "abrahams-beverley-lynnette-da-ncop"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": "3"
+        },
+        "entries": [
+            {
+                "Directorship/Partnership ": "Bev ",
+                "Type of Business": "Dormant "
+            },
+            {
+                "Directorship/Partnership ": "Kup-Eldos Arts ",
+                "Type of Business": "Dormant "
+            }
+        ],
+        "person": {
+            "slug": "abrahams-beverley-lynnette-da-ncop"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    }
+]
