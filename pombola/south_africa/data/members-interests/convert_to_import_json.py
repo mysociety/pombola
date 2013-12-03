@@ -26,7 +26,123 @@ class Converter(object):
     groupings = []
 
     slug_corrections = {
-        'beverley-lynnette-abrahams': 'beverley-lynette-abrahams',
+        "amos-matila": "amos-gerald-matila",
+        "andre-gaum": "andre-hurtley-gaum",
+        "anton-alberts": "anton-de-waal-alberts",
+        "archibold-mzuvukile-figlan": "a-m-figlan",
+        "archibold-nyambi": "archibold-jomo-nyambi",
+        "arthur-ainslie": "arthur-roy-ainslie",
+        "bafunani-aaron-mnguni": "bafumani-aaron-mnguni",
+        "bertha-mabe": "bertha-peace-mabe",
+        "beverley-lynnette-abrahams": "beverley-lynette-abrahams",
+        "bhekizizwe-abram-radebe": "bhekiziswe-abram-radebe",
+        "bonisile-alfred-nesi": "bonisile-nesi",
+        "busisiwe-mncube": "busisiwe-veronica-mncube",
+        "charel-de-beer": "charel-jacobus-de-beer",
+        "cq-madlopha": "celiwe-qhamkile-madlopha",
+        "crosby-mpozo-moni": "crosby-mpoxo-moni",
+        "dalitha-boshigo": "dalitha-fiki-boshigo",
+        "danny-montsitsi": "sediane-danny-montsitsi",
+        "dennis-bloem": "dennis-victor-bloem",
+        "dennis-gamede": "dumisani-dennis-gamede",
+        "dirk-feldman": "dirk-benjamin-feldman",
+        "dj-stubbe": "dirk-jan-stubbe",
+        "doris-nompendlko-ngcengwane": "nompendlko-doris-ngcengwane",
+        "ebrahim-ebrahim": "ebrahim-ismail-ebrahim",
+        "elza-van-lingen": "elizabeth-christina-van-lingen",
+        "enoch-godongwana": "e-godongwana",
+        "faith-bikani": "faith-claudine-bikani",
+        "geolatlhe-godfrey-oliphant": "gaolatlhe-godfrey-oliphant",
+        "george-boinamo": "george-gaolatlhe-boinamo",
+        "gloria-borman": "gloria-mary-borman",
+        "gratitude-bulelani-magwanishe": "gratitude-magwanishe",
+        "gregory-krumbock": "gregory-rudy-krumbock",
+        "gwedoline-lindiwe-mahlangu-nkabinde": "g-l-mahlangu-nkabinde",
+        "hendrietta-bogopane-zulu": "hendrietta-ipeleng-bogopane-zulu",
+        "herman-groenewald": "hermanus-bernadus-groenewald",
+        "hildah-sizakele-msweli": "hilda-sizakele-msweli",
+        "jac-bekker": "jacobus-marthinus-g-bekker",
+        "james-lorimer": "james-robert-bourne-lorimer",
+        "jan-gunda": "jan-johannes-gunda",
+        "jf-smalle": "jacobus-frederik-smalle",
+        "johanna-fredrika-terblanche": "johanna-fredrika-juanita-terblanche",
+        "joseph-job-mc-gluwa": "joseph-job-mcgluwa",
+        "keith-muntuwenkosi-zondi": "k-m-zondi",
+        "kenneth-raselabe-meshoe": "kenneth-raselabe-joseph-meshoe",
+        "kennett-andrew-sinclair": "kenneth-andrew-sinclair",
+        "lemias-buoang-mashile": "budang-lemias-mashile",
+        "lulama-mary-theresa-xingwana": "lulama-marytheresa-xingwana",
+        "lusizo-makhubela-mashele": "lusizo-sharon-makhubela-mashele",
+        "lydia-sindiswe-chikunga": "lydia-sindisiwe-chikunga",
+        "mafemane-makhubela": "mafemane-wilson-makhubela",
+        "maite-emely-nkoana-mashabane": "maite-emily-nkoana-mashabane",
+        "makone-collen-maine": "mokoane-collen-maine",
+        "mandlenkosi-enock-mbili": "m-e-mbili",
+        "mark-harvey-steele": "m-h-steele",
+        "mary-anne-lindelwa-dunjwa": "mary-ann-lindelwa-dunjwa",
+        "matome-mokgobi": "matome-humphrey-mokgobi",
+        "mavis-nontsikelelo-magazi": "n-m-magazi",
+        "mavis-ntebaleng-matladi": "m-n-matladi",
+        "mbuyiselo-jacobs": "mbuyiselo-patrick-jacobs",
+        "meriam-phaliso": "meriam-nozibonelo-phaliso",
+        "michael-de-villiers": "michael-jacobs-roland-de-villiers",
+        "michael-james-ellis": "m-j-ellis",
+        "mmatlala-boroto": "mmatlala-grace-boroto",
+        "mninwa-mahlangu": "mninwa-johannes-mahlangu",
+        "mogi-lydia-moshodi": "moji-lydia-moshodi",
+        "mosie-anthony-cele": "mosie-antony-cele",
+        "nomzamo-winnie-madikizela-mandela": "nomzamo-winfred-madikizela-mandela",
+        "obed-bapela": "kopeng-obed-bapela",
+        "onel-de-beer": "onell-de-beer",
+        "pakishe-motsoaledi": "pakishe-aaron-motsoaledi",
+        "paul-mashatile": "shipokasa-paulus-mashatile",
+        "petronella-catharine-duncan": "petronella-catherine-duncan",
+        "petrus-johannes-christiaan-pretorius": "p-j-c-pretorius",
+        "phillip-david-dexter": "p-d-dexter",
+        "rachel-rasmeni": "rachel-nomonde-rasmeni",
+        "radhakrishna-lutchmana-padayachie": "r-l-padayachie",
+        "raseriti-tau": "raseriti-johannes-tau",
+        "rebecca-m-motsepe": "rebecca-mmakosha-motsepe",
+        "refilwe-junior-mashigo": "refilwe-modikanalo-mashigo",
+        "rejoice-thizwilondi-mabudafhasi": "thizwilondi-rejoyce-mabudafhasi",
+        "richard-baloyi": "masenyani-richard-baloyi",
+        "robert-lees": "robert-alfred-lees",
+        "royith-bhoola": "royith-baloo-bhoola",
+        "salamuddi-abram": "salamuddi-salam-abram",
+        "sam-mazosiwe": "siphiwo-sam-mazosiwe",
+        "seeng-patricia-lebenya-ntanzi": "s-p-lebenya-ntanzi",
+        "sicelo-shiceka": "s-shiceka",
+        "siyabonga-cwele": "siyabonga-cyprian-cwele",
+        "suhla-james-masango": "s-j-masango",
+        "swaphi-plaatjie": "swaphi-hendrick-plaatjie",
+        "teboho-chaane": "teboho-edwin-chaane",
+        "thembalani-waltemade-nxesi": "thembelani-waltermade-nxesi",
+        "tim-harris": "timothy-duncan-harris",
+        "tjheta-mofokeng": "tjheta-makwa-harry-mofokeng",
+        "tlp-nwamitwa-shilubana": "tinyiko-lwandlamuni-phillia-nwamitwa-shilubana",
+        "tshiwela-elidah-lishivha": "tshiwela-elida-lishivha",
+        "willem-faber": "willem-frederik-faber",
+        "zisiwe-balindlela": "zisiwe-beauty-nosimo-balindlela",
+        "zoliswa-kota-fredericks": "zoliswa-albertina-kota-fredericks",
+        "zukiswa-rantho": "daphne-zukiswa-rantho",
+
+
+        # FIXME - manually match these
+        'buyiswa-blaai': None,
+        'masefako-dikgale': None,
+        'zephroma-sizani-dlamini-dubazana': None,
+        'helen-line': None,
+        'graham-peter-dalziel-mackenzie': None,
+        'gbd-mcintosh': None,
+        'sanna-keikantseeng-molao-now-plaatjie': None,
+        'n-d-ntwanambi': None,
+        'mntombizodwa-florence-nyanda': None,
+        'pearl-petersen-maduna': None,
+        'leonard-ramatlakana': None,
+        'ntombikhayise-nomawisile-sibhidla': None,
+        'thandi-vivian-tobias-pokolo': None,
+        'lekaba-jack-tolo': None,
+        'roland-athol-trollip': None,
     }
 
     def __init__(self, filename):
@@ -78,26 +194,48 @@ class Converter(object):
                 }
 
                 # Work out who the person is
+                person_slug = self.mp_to_person_slug(register_entry['mp'])
+                if not person_slug:
+                    continue # skip if no slug
                 grouping['person'] = {
-                    "slug": self.mp_to_person_slug(register_entry['mp'])
+                    "slug": person_slug
                 }
+
 
                 self.groupings.append(grouping)
 
-            break # just for during dev
+            # break # just for during dev
 
     def mp_to_person_slug(self, mp):
-        muddled_name, party = re.search(r'^(.*)\s\(+(.+?)\)+', mp).groups()
+        muddled_name, party = re.search(r'^(.*)\s\(+(.*?)\)+', mp).groups()
         name = re.sub(r'(.*?), (.*)', r'\2 \1', muddled_name)
         slug = slugify(name)
 
         # Check if there is a known correction for this slug
         slug = self.slug_corrections.get(slug, slug)
 
+        # Sometimes we know we can't resolve the person
+        if slug is None:
+            return None
+
         try:
             person = Person.objects.get(slug=slug)
             return person.slug
         except Person.DoesNotExist:
+            last_name = name.split(' ')[-1]
+
+            possible_persons = Person.objects.filter(legal_name__icontains=last_name)
+
+            # if possible_persons.count() == 1:
+            #     possible_slug = possible_persons.all()[0].slug
+            #     self.slug_corrections[slug] = possible_slug
+            #     return possible_slug
+
+            for person in possible_persons:
+                print "perhaps: '{}': '{}',".format(slug, person.slug)
+            else:
+                print "no possible matches for {}".format(slug)
+
             raise Exception("Slug {} not found, please find matching slug and add it to the slug_corrections".format(slug))
 
     def produce_json(self):
@@ -113,4 +251,5 @@ class Converter(object):
 if __name__ == "__main__":
     converter = Converter(sys.argv[1])
     output = converter.convert()
+    # print json.dumps(converter.slug_corrections, indent=4, sort_keys=True)
     print output
