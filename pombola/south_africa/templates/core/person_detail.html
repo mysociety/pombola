@@ -163,25 +163,30 @@ pombola_settings.extra_js.push('js/tabs.js')
 
     </div>
 
-    {% comment %}
+    {% if object.interests_register_entries.exists %}
+      <div class="person-interests">
+        <h2>Register of interests</h2>
 
-    Commented out as design has been done and currently we're waiting on real data to populate. See #912.
+        {% with entries=object.interests_register_entries.all %}
+          {% for entry in entries %}
+            {% ifchanged entry.release %}
+              <h3>{{ entry.release.name }}</h3>
+            {% endifchanged %}
 
-    <div class="person-interests">
-      <h2>Register of interests</h2>
+            {% ifchanged entry.category %}
+              <h4>{{ entry.category.name }}</h4>
+            {% endifchanged %}
 
-      <p><strong>FIXME</strong> - this is static text in the template atm<br>
-      Support in the capacity as an MP:<br>
-      Name of donor: Mr Richard France<br>
-      Address of donor: private<br>
-      Amount of donation or nature and value of donation in kind: £1,520. Donation towards tickets for clay pigeon shoot<br>
-      event and auction items purchased at event<br>
-      Date of receipt: 22 June 2012<br>
-      Date of acceptance: 29 June 2012<br>
-      Donor status: Individual<br>
-      (Registered 12 July 2012)</p>
-    </div>
-    {% endcomment %}
+            <p>
+              {% for line in entry.line_items.all %}
+                <strong>{{ line.key }}:</strong> {{ line.value }}<br/>
+              {% endfor %}
+            </p>
+          {% endfor %}
+        {% endwith %}
+
+      </div>
+    {% endif %}
 
   </div>
 
