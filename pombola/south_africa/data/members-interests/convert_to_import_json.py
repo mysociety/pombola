@@ -73,7 +73,11 @@ class Converter(object):
             break # just for during dev
 
     def mp_to_person_slug(self, mp):
-        return slugify(mp)
+        muddled_name, party = re.search(r'^(.*)\s\(+(.+?)\)+', mp).groups()
+        name = re.sub(r'(.*?), (.*)', r'\2 \1', muddled_name)
+        slug = slugify(name)
+
+        return slug
 
     def produce_json(self):
         data = self.groupings
