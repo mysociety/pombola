@@ -58,7 +58,7 @@ class Entry(models.Model):
         return u'Entry for {} in {} ({})'.format(self.person, self.category, self.release)
 
     class Meta(object):
-        ordering = ('person__legal_name', 'category__sort_order', 'category__name', 'sort_order')
+        ordering = ('person__legal_name', '-release__date', 'category__sort_order', 'category__name', 'sort_order')
         verbose_name_plural = 'entries'
 
 
