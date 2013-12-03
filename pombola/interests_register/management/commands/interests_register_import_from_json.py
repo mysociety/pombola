@@ -19,7 +19,7 @@ class Command(LabelCommand):
                 self.handle_grouping(grouping)
 
     def handle_grouping(self, grouping):
-        print grouping
+        # print grouping
 
         person = Person.objects.get(**grouping['person'])
 
@@ -38,6 +38,6 @@ class Command(LabelCommand):
         for lines in grouping['entries']:
             sort_order += 1
             entry = Entry.objects.create(sort_order=sort_order, **entry_args)
-            print entry
+            # print entry
             for key, value in lines.items():
                 line_item = EntryLineItem.objects.create(entry=entry, key=key, value=value)
