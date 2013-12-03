@@ -37,7 +37,7 @@
   {% if include_sub_menu_entries %}
   <ul id="m-parliament">
     <li>
-      <a href="{% url "position_pt" pt_slug='member-of-parliament' %}">House of Assembly</a>
+      <a href="{% url "position_pt" pt_slug='member-of-parliament' %}">Members of the National Assembly</a>
     </li>
     <li>
       <a href="{% url "position_pt" pt_slug='senator' %}">Senators</a>
@@ -57,9 +57,6 @@
     <li>
       <a href="{% url "info_page" slug='hansard' %}"> Hansard </a>
     </li>
-    <li>
-      <a href="{% url "info_page" slug='political-parties' %}">  Political Parties  </a>
-    </li>
 
   </ul>
   {% endif %}
@@ -75,6 +72,12 @@
     </li>
     <li>
       <a href="{% url "info_page" slug='newsletter' %}"> Newletter </a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/kuvakazim"> Facebook </a>
+    </li>
+    <li>
+      <a href="https://twitter.com/kuvakazim"> Facebook </a>
     </li>
   </ul>
   {% endif %}
