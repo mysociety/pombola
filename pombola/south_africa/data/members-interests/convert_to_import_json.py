@@ -5,10 +5,18 @@
 # unneeded entries too.
 
 import sys
+import os
 import json
 import re
 import urllib
 
+script_dir = os.path.basename(__file__)
+base_dir = os.path.join(script_dir, "../../../../..")
+app_path = os.path.abspath(base_dir)
+sys.path.append(app_path)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
+
+from django.conf import settings
 from django.template.defaultfilters import slugify
 
 class Converter(object):
