@@ -1775,8 +1775,7 @@
                 "Description": "Trust\"",
                 "Extent": "1 279ha",
                 "Location": "Ermelo District"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "lourens-lemmer-bosman"
@@ -2659,8 +2658,7 @@
             {
                 "Name of Company": "Sanlam",
                 "Nature": "\""
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "yunus-ismail-carrim"
@@ -5113,8 +5111,7 @@
                 "Description": "Residential House",
                 "Extent": "Normal",
                 "Location": "Pietermaritzburg"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "bathabile-olive-dlamini"
@@ -8134,8 +8131,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Special Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "christopher-lancaster-gololo"
@@ -10046,8 +10042,7 @@
             {
                 "Description": "MPs",
                 "Sponsor": "UNDP"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "john-harold-jeffery"
@@ -10348,8 +10343,7 @@
             {
                 "Name of Company": "ABSA Bank",
                 "Nature": "Investment"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "mlungisi-johnson"
@@ -12029,8 +12023,7 @@
                 "Description": "USA",
                 "Extent": "ground transport at USA",
                 "Source": "USA Embassy"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "mmamoloko-tryphosa-kubayi"
@@ -13424,8 +13417,7 @@
                 "Description": "Free metered day parking",
                 "Source": "KZNRU",
                 "Value": "R1 000"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "graham-peter-dalziel-mac-kenzie"
@@ -13778,8 +13770,7 @@
             {
                 "Public/Private": "Private",
                 "Source": "Old Mutual"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "nosilivere-winnifred-magadla"
@@ -14055,8 +14046,7 @@
                 "Nature": "Ordinary",
                 "No": "50%",
                 "Nominal Value": "R00.00"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "gratitude-magwanishe"
@@ -14160,8 +14150,7 @@
                 "Description": "White &amp; Gold vase",
                 "Source": "The President of India",
                 "Value": "\""
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "mninwa-johannes-mahlangu"
@@ -14927,8 +14916,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Special Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "sampson-phathakge-makwetla"
@@ -15819,8 +15807,7 @@
             {
                 "Name of Company": "Old Mutual",
                 "No": "300"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "nosiviwe-noluthando-mapisa-nqakula"
@@ -16051,8 +16038,7 @@
         "entries": [
             {
                 "Description": "iPad"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "benedict-anthony-duke-martins"
@@ -17079,8 +17065,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "GEPF"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "lennit-hendry-max"
@@ -17444,8 +17429,7 @@
             {
                 "Name of Company": "Nokwanda Housing",
                 "Nature": "Not for gain"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "alpheus-mokabhe-maziya"
@@ -17792,22 +17776,6 @@
         ],
         "person": {
             "slug": "graham-brian-douglas-mc-intosh"
-        },
-        "source": {
-            "date": "2012-01-01",
-            "name": "Ethics_Full_Report_2012"
-        }
-    },
-    {
-        "category": {
-            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
-            "sort_order": 1
-        },
-        "entries": [
-            {}
-        ],
-        "person": {
-            "slug": "nomakhaya-mavis-mdaka"
         },
         "source": {
             "date": "2012-01-01",
@@ -19297,22 +19265,6 @@
             "sort_order": 1
         },
         "entries": [
-            {}
-        ],
-        "person": {
-            "slug": "masizole-mnqasela"
-        },
-        "source": {
-            "date": "2012-01-01",
-            "name": "Ethics_Full_Report_2012"
-        }
-    },
-    {
-        "category": {
-            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
-            "sort_order": 1
-        },
-        "entries": [
             {
                 "Name of Company": "Old Mutual",
                 "No": "300"
@@ -19416,8 +19368,7 @@
                 "Description": "Residential House",
                 "Extent": "Normal",
                 "Location": "Modjadji"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "mankwana-christinah-mohale"
@@ -20849,8 +20800,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Special Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "malusi-stanley-motimele"
@@ -20915,8 +20865,7 @@
                 "Description": "Residential",
                 "Extent": "2 288sq.m.",
                 "Location": "Johannesburg"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "kgalema-petrus-motlanthe"
@@ -22046,8 +21995,7 @@
             {
                 "Description": "Fields for cultivation [livestock]",
                 "Location": "Mvutshini Area"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "hilda-sizakele-msweli"
@@ -22920,8 +22868,7 @@
             {
                 "Public/Private": "Private",
                 "Source": "Closed Pension Fund"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "pieter-willem-adriaan-mulder"
@@ -23563,8 +23510,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Parliament"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "alexia-zintle-ndlazi"
@@ -24777,8 +24723,7 @@
                 "Description": "Rugby tickets",
                 "Source": "Transnet",
                 "Value": "R2 500"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "mlindi-advent-nhanha"
@@ -27578,8 +27523,7 @@
                 "Name of Company": "Nedbank",
                 "Nature": "Rain Makers",
                 "Nominal Value": "R32 000.00"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "grace-naledi-mandisa-pandor"
@@ -29143,8 +29087,7 @@
                 "Description": "House",
                 "Extent": "Normal",
                 "Location": "Mpumalanga"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "goodwill-sbusiso-radebe"
@@ -29478,8 +29421,7 @@
                 "Description": "Plot with house",
                 "Extent": "17,5ha",
                 "Location": "Limpopo"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "ngoako-abel-ramatlhodi"
@@ -31861,8 +31803,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Closed Pension Fund"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "narend-singh"
@@ -32670,8 +32611,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "IDP"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "phumelele-stone-sizani"
@@ -34065,8 +34005,7 @@
         "entries": [
             {
                 "Directorship/Partnership": "Ebrahim Sulliman Farm Enterprise  Farming"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "ebrahim-mohammed-sulliman"
@@ -34431,8 +34370,7 @@
             {
                 "Description": "Rental Income",
                 "Source": "Atlantica 303"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "marius-swart"
@@ -35035,8 +34973,7 @@
                 "Description": "House",
                 "Extent": "Normal",
                 "Location": "Guguletu"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "bulelwa-tinto"
@@ -35894,8 +35831,7 @@
                 "Description": "Farm",
                 "Extent": "2 100ha",
                 "Location": "Beaufort West"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "jacob-jeffrey-van-der-linde"
@@ -36214,8 +36150,7 @@
                 "Description": "Residential land",
                 "Extent": "+-1 000sq.m.",
                 "Location": "Stellenbosch"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "andricus-pieter-van-der-westhuizen"
@@ -36957,8 +36892,7 @@
                 "Description": "Residential",
                 "Extent": "120sq.m.",
                 "Location": "Century City"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "marta-wenger"
@@ -37053,8 +36987,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Special Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "sophia-theresa-williams-de-bruyn"
@@ -37425,8 +37358,7 @@
                 "Description": "House",
                 "Extent": "1 000sq.m.",
                 "Location": "Garsfontein"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "lulama-marytheresa-xingwana"
@@ -37653,8 +37585,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "KwaZulu Legislative Assembly"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "constance-ntombikayise-zerish-zikalala"

@@ -205,8 +205,11 @@ class Converter(object):
                     for key in entry.keys():
                         entry[key.strip()] = entry.pop(key).strip()
 
-                # Filter out known bad entries
-                entries = [ e for e in entries if not (e.get('No') == 'Nothing to disclose') ]
+
+                    if entry.get('No') == 'Nothing to disclose':
+                        del entry['No']
+
+                entries = [ e for e in entries if len(e) ]
 
                 if len(entries) == 0:
                     continue

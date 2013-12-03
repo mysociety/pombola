@@ -337,8 +337,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Gratuity [Dept of Education]"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "patricia-emily-adams"
@@ -3579,8 +3578,7 @@
             {
                 "Directorship/Partnership": "Sparax",
                 "Type of Business": "Dormant"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "elsie-mmathulare-coleman"
@@ -4492,8 +4490,7 @@
             {
                 "Directorship/Partnership": "Onayo Trading",
                 "Type of Business": "CC"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "onell-de-beer"
@@ -4569,8 +4566,7 @@
             {
                 "Public/Private": "Private",
                 "Source": "Preservation Pension Fund - Investec"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "manuel-simao-franca-de-freitas"
@@ -4825,8 +4821,7 @@
             {
                 "Description": "public generally",
                 "Source": "Al Baraka Bank"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "johannes-hendrik-de-lange"
@@ -5129,8 +5124,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Special Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "letsau-nelson-diale"
@@ -5954,8 +5948,7 @@
                 "Description": "Memorabilia gifts",
                 "Source": "FIFA",
                 "Value": "\""
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "nkosazana-clarice-dlamini-zuma"
@@ -6401,8 +6394,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Special Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "molebogeng-christina-dube"
@@ -8005,22 +7997,6 @@
     },
     {
         "category": {
-            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
-            "sort_order": 1
-        },
-        "entries": [
-            {}
-        ],
-        "person": {
-            "slug": "tshoganetso-mpho-adolphina-gasebonwe"
-        },
-        "source": {
-            "date": "2011-01-01",
-            "name": "2011_2012 MI Full List"
-        }
-    },
-    {
-        "category": {
             "name": "LAND AND PROPERTY",
             "sort_order": 9
         },
@@ -9171,8 +9147,7 @@
             {
                 "Public/Private": "Openbaar",
                 "Source": "Openbare Ampsbekleer"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "petrus-johannes-groenewald"
@@ -9387,8 +9362,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Special Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "derek-andre-hanekom"
@@ -9858,8 +9832,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Parliament Pension Fund"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "mohammed-haniff-hoosen"
@@ -11296,8 +11269,7 @@
             {
                 "Description": "Townhouse [50%]",
                 "Location": "Randburg"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "juliana-danielle-kilian"
@@ -11815,8 +11787,7 @@
             {
                 "Description": "SA - EU Meeting in Brussels",
                 "Sponsor": "Parliament"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "nicolaas-jacobus-janse-van-rensburg-koornhof"
@@ -12395,8 +12366,7 @@
                 "Description": "House",
                 "Extent": "Normal",
                 "Location": "Protea North"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "mmamoloko-tryphosa-kubayi"
@@ -12643,8 +12613,7 @@
                 "Description": "Farm",
                 "Extent": "+-20ha",
                 "Location": "Kleinfontein, Hankey"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "trevor-donald-lee"
@@ -13113,8 +13082,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Parliament"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "tshiwela-elida-lishivha"
@@ -15053,8 +15021,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Special Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "xoliswa-caroline-makasi"
@@ -15278,8 +15245,7 @@
                 "Description": "House",
                 "Extent": "3 Bedroom",
                 "Location": "Hoyi Trust"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "lusizo-sharon-makhubela-mashele"
@@ -17688,8 +17654,7 @@
             {
                 "Directorship/Partnership": "If Not Trading CC",
                 "Type of Business": "Corporate Co."
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "divili-wilson-mavunda"
@@ -17972,8 +17937,7 @@
             {
                 "Public/Private": "Private",
                 "Source": "Momentum"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "alpheus-mokabhe-maziya"
@@ -19035,8 +18999,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "SAPS"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "emmanuel-musawenkosi-mlambo"
@@ -20226,8 +20189,7 @@
                 "Description": "Picture frame",
                 "Source": "Foundation",
                 "Value": "R1 500"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "bomo-edna-edith-molewa"
@@ -20591,8 +20553,7 @@
             {
                 "Directorship/Partnership": "Motsamai's and Tumi Building",
                 "Type of Business": "Construction"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "emma-more"
@@ -22413,8 +22374,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "UNISA REtirement Fund"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "kenneth-sililo-mubu"
@@ -22798,8 +22758,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "Closed Pension Fund"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "cornelius-petrus-mulder"
@@ -24057,8 +24016,7 @@
             {
                 "Description": "Business Travel to Cuba",
                 "Sponsor": "Progressive Business Forum [PBF]"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "nhlanhla-musa-nene"
@@ -24383,8 +24341,7 @@
         "entries": [
             {
                 "Name of Company": "Methold"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "beatrice-thembekile-ngcobo"
@@ -24541,8 +24498,7 @@
                 "Description": "House",
                 "Extent": "3 Bedroom",
                 "Location": "King Williams Town"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "lulama-smuts-ngonyama"
@@ -25098,8 +25054,7 @@
             {
                 "Directorship/Partnership": "Gondisa Printing",
                 "Type of Business": "Private Co."
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "sisa-james-njikelana"
@@ -26705,8 +26660,7 @@
             },
             {
                 "Name of Company": "Trust"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "gaolatlhe-godfrey-oliphant"
@@ -30127,8 +30081,7 @@
             {
                 "Directorship/Partnership": "Council",
                 "Type of Business": "FET College [Receive transport reimbursement]"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "deborah-anne-schafer"
@@ -30153,8 +30106,7 @@
                 "Description": "Family Trust] [Trustee]",
                 "Extent": "4 Bedrooms",
                 "Location": "Newlands"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "hendrik-cornelius-schmidt"
@@ -32671,8 +32623,7 @@
             {
                 "Description": "R1 200 rental per month",
                 "Source": "Letting of dwelling house"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "donald-cecil-smiles"
@@ -32815,8 +32766,7 @@
             {
                 "Directorship/Partnership": "Ilima Lesizwe Inv.",
                 "Type of Business": "Property Developers"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "vincent-george-smith"
@@ -32856,8 +32806,7 @@
                 "Description": "Vase",
                 "Source": "MIH",
                 "Value": "Unknown"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "mudene-smuts"
@@ -34434,8 +34383,7 @@
             {
                 "Public/Private": "Public",
                 "Source": "State Pension"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "jerry-dimotana-thibedi"
@@ -35932,8 +35880,7 @@
                 "Description": "Erf 5385",
                 "Extent": "-",
                 "Location": "Gordonsbay"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "salomon-maritz-van-dyk"
@@ -37102,8 +37049,7 @@
                 "Description": "Sheep",
                 "Source": "Mr MB Gwala",
                 "Value": "+-R1 000"
-            },
-            {}
+            }
         ],
         "person": {
             "slug": "k-m-zondi"
