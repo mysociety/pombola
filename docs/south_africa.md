@@ -52,3 +52,9 @@ commands should add the data for them:
     !!TODO!! ./manage.py core_create_places_from_mapit_entries MMN
     !!TODO!! ./manage.py core_set_area_parents wards:metropolitan-municipality
     !!TODO!! ./manage.py core_set_area_parents metropolitan-municipality:province
+
+Load in the Members' Interests data:
+
+    $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2011_for_import.json
+    $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2012_for_import.json
+
