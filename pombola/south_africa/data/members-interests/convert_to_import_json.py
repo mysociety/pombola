@@ -180,19 +180,19 @@ class Converter(object):
     def convert(self):
         data = self.extract_data_from_json()
 
-        self.extract_source(data)
+        self.extract_release(data)
         self.extract_entries(data)
 
         return self.produce_json()
 
-    def extract_source(self, data):
+    def extract_release(self, data):
         source_url = data['source']
         year = data['year']
 
         source_filename = re.sub(r'.*/(.*?)\.pdf', r'\1', source_url)
         source_name = urllib.unquote(source_filename).strip()
 
-        self.source = {
+        self.release = {
             "name": source_name,
             "date": year + "-01-01",
         }
@@ -237,7 +237,7 @@ class Converter(object):
                     continue
 
                 grouping = {
-                    "source": self.source,
+                    "release": self.release,
                     "entries": entries,
                 }
 
