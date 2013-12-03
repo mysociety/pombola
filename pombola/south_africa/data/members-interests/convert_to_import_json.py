@@ -59,7 +59,7 @@ class Converter(object):
                 # Break up the name into sort_order and proper name
                 sort_order, category_name = raw_category_name.strip().split('. ')
                 grouping['category'] = {
-                    "sort_order": sort_order,
+                    "sort_order": int(sort_order),
                     "name": category_name,
                 }
 

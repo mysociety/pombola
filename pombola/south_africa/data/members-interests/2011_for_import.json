@@ -2,7 +2,7 @@
     {
         "category": {
             "name": "LAND AND PROPERTY",
-            "sort_order": "9"
+            "sort_order": 9
         },
         "entries": [
             {
@@ -22,7 +22,7 @@
     {
         "category": {
             "name": "SHARES AND OTHER FINANCIAL INTERESTS",
-            "sort_order": "1"
+            "sort_order": 1
         },
         "entries": [
             {
@@ -47,7 +47,7 @@
     {
         "category": {
             "name": "DIRECTORSHIP AND PARTNERSHIPS",
-            "sort_order": "3"
+            "sort_order": 3
         },
         "entries": [
             {
