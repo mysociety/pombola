@@ -19,9 +19,15 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
+from pombola.core.models import Person
+
 class Converter(object):
 
     groupings = []
+
+    slug_corrections = {
+        'beverley-lynnette-abrahams': 'beverley-lynette-abrahams',
+    }
 
     def __init__(self, filename):
         self.filename = filename
@@ -85,7 +91,14 @@ class Converter(object):
         name = re.sub(r'(.*?), (.*)', r'\2 \1', muddled_name)
         slug = slugify(name)
 
-        return slug
+        # Check if there is a known correction for this slug
+        slug = self.slug_corrections.get(slug, slug)
+
+        try:
+            person = Person.objects.get(slug=slug)
+            return person.slug
+        except Person.DoesNotExist:
+            raise Exception("Slug {} not found, please find matching slug and add it to the slug_corrections".format(slug))
 
     def produce_json(self):
         data = self.groupings
