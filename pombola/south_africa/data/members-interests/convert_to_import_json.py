@@ -190,7 +190,7 @@ class Converter(object):
         year = data['year']
 
         source_filename = re.sub(r'.*/(.*?)\.pdf', r'\1', source_url)
-        source_name = urllib.unquote(source_filename).strip()
+        source_name = urllib.unquote(source_filename).replace('_', ' ').strip()
 
         self.release = {
             "name": source_name,
