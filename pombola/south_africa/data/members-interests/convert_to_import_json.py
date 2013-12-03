@@ -196,7 +196,7 @@ class Converter(object):
         for register_entry in data['register']:
             for raw_category_name, entries in register_entry.items():
                 # we only care about entries that are arrays
-                if type(entries) != list or len(entries) == 0:
+                if type(entries) != list:
                     continue
 
                 # go through all entries stripping off extra whitespace from
@@ -204,6 +204,12 @@ class Converter(object):
                 for entry in entries:
                     for key in entry.keys():
                         entry[key.strip()] = entry.pop(key).strip()
+
+                # Filter out known bad entries
+                entries = [ e for e in entries if not (e.get('No') == 'Nothing to disclose') ]
+
+                if len(entries) == 0:
+                    continue
 
                 grouping = {
                     "source": self.source,
