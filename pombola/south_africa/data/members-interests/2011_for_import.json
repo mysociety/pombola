@@ -5355,6 +5355,103 @@
         "entries": [
             {
                 "Description": "House",
+                "Extent": "16 Roomed",
+                "Location": "Ga-Dikgale"
+            },
+            {
+                "Description": "House",
+                "Extent": "8 Roomed",
+                "Location": "Ivy park"
+            },
+            {
+                "Description": "Saltic Lodge",
+                "Extent": "1050sq.m.",
+                "Location": "Bendor"
+            }
+        ],
+        "person": {
+            "slug": "masefako-clarah-digkale"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Launtho Coal",
+                "Nature": "Shares",
+                "No": "15",
+                "Nominal Value": "R25 000"
+            }
+        ],
+        "person": {
+            "slug": "masefako-clarah-digkale"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "BENEFITS",
+            "sort_order": 7
+        },
+        "entries": [
+            {
+                "Description": "Receive money to cover costs",
+                "Source": "Son's company [Dormant at moment]"
+            }
+        ],
+        "person": {
+            "slug": "masefako-clarah-digkale"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Kgwerano @ Elite",
+                "Type of Business": "NGO"
+            },
+            {
+                "Directorship/Partnership": "Morare Nkuke",
+                "Type of Business": "NGO"
+            },
+            {
+                "Directorship/Partnership": "Kgwerano E Tlile Agricultural",
+                "Type of Business": "Primary Cooperative"
+            }
+        ],
+        "person": {
+            "slug": "masefako-clarah-digkale"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
                 "Extent": "+-200 sq.m.",
                 "Location": "Seshego"
             }
@@ -5652,6 +5749,90 @@
         ],
         "person": {
             "slug": "bathabile-olive-dlamini"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "Domestic",
+                "Extent": "3,8sq.m.",
+                "Location": "Oaklands"
+            },
+            {
+                "Description": "2 Stands",
+                "Extent": "1,200sq.m.",
+                "Location": "Pennyville"
+            }
+        ],
+        "person": {
+            "slug": "zephroma-sizani-dubazana"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Sanlam",
+                "Nature": "Ordinary",
+                "No": "1 000",
+                "Nominal Value": "R5 000"
+            }
+        ],
+        "person": {
+            "slug": "zephroma-sizani-dubazana"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "PENSIONS",
+            "sort_order": 10
+        },
+        "entries": [
+            {
+                "Public/Private": "Private",
+                "Source": "Hola Recruitment"
+            }
+        ],
+        "person": {
+            "slug": "zephroma-sizani-dubazana"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Forum SA [Director]",
+                "Type of Business": "Electrical distribution [Dormant]"
+            }
+        ],
+        "person": {
+            "slug": "zephroma-sizani-dubazana"
         },
         "source": {
             "date": "2011-01-01",
@@ -12944,6 +13125,26 @@
     },
     {
         "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Spring Green Trading 55",
+                "Nature": "Ordinary",
+                "No": "100%"
+            }
+        ],
+        "person": {
+            "slug": "helen-line-hendriks"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
             "name": "LAND AND PROPERTY",
             "sort_order": 9
         },
@@ -13805,6 +14006,96 @@
         ],
         "person": {
             "slug": "manana-catherine-mabuza"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "Residential House",
+                "Extent": "321sq.m.",
+                "Location": "Umhlanga Rocks"
+            },
+            {
+                "Description": "Mackenzie Trust]",
+                "Extent": "350sq.m.",
+                "Location": "Marima Beach, KZN"
+            }
+        ],
+        "person": {
+            "slug": "graham-peter-dalziel-mac-kenzie"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "GIFTS AND HOSPITALITY",
+            "sort_order": 6
+        },
+        "entries": [
+            {
+                "Description": "Rugby tickets",
+                "Source": "KZN Rugby Union",
+                "Value": "R3 500"
+            },
+            {
+                "Description": "Free metred day parking",
+                "Value": "R500.00"
+            }
+        ],
+        "person": {
+            "slug": "graham-peter-dalziel-mac-kenzie"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Triponra Trading 448CC",
+                "No": "35%"
+            }
+        ],
+        "person": {
+            "slug": "graham-peter-dalziel-mac-kenzie"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Triponra Trading 448CC",
+                "Type of Business": "Commercial Real Estate"
+            },
+            {
+                "Directorship/Partnership": "(Pty) Ltd"
+            }
+        ],
+        "person": {
+            "slug": "graham-peter-dalziel-mac-kenzie"
         },
         "source": {
             "date": "2011-01-01",
@@ -18148,6 +18439,109 @@
         },
         "entries": [
             {
+                "Name of Company": "Douglas Trust",
+                "Nature": "Beneficiary",
+                "No": "Trustee"
+            },
+            {
+                "Name of Company": "Testamentary Trust",
+                "Nature": "Beneficiary",
+                "No": "Trustee"
+            }
+        ],
+        "person": {
+            "slug": "graham-brian-douglas-mc-intosh"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "PENSIONS",
+            "sort_order": 10
+        },
+        "entries": [
+            {
+                "Public/Private": "Public",
+                "Source": "Closed Pension fund"
+            }
+        ],
+        "person": {
+            "slug": "graham-brian-douglas-mc-intosh"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Moy Hall P/L (Pty) Ltd",
+                "Type of Business": "Property Investment"
+            },
+            {
+                "Directorship/Partnership": "Rigel P/L",
+                "Type of Business": "\""
+            },
+            {
+                "Directorship/Partnership": "Jozi Housing P/L",
+                "Type of Business": "Property Investment"
+            },
+            {
+                "Directorship/Partnership": "Macest P/L",
+                "Type of Business": "Property Investment"
+            },
+            {
+                "Directorship/Partnership": "Mayborn Investments P/L",
+                "Type of Business": "Property Investment"
+            },
+            {
+                "Directorship/Partnership": "Geevee P/L",
+                "Type of Business": "\""
+            },
+            {
+                "Directorship/Partnership": "Mngwenya Farms P/L",
+                "Type of Business": "\""
+            },
+            {
+                "Directorship/Partnership": "Kainos Estates P/L",
+                "Type of Business": "\""
+            },
+            {
+                "Directorship/Partnership": "Paper Bark Properties P/L",
+                "Type of Business": "\""
+            },
+            {
+                "Directorship/Partnership": "NSIMBI P/L",
+                "Type of Business": "Trading in steel products"
+            },
+            {
+                "Directorship/Partnership": "Kruisvallei Hydro P/L",
+                "Type of Business": "Hydro power"
+            }
+        ],
+        "person": {
+            "slug": "graham-brian-douglas-mc-intosh"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
                 "No": "Nothing to disclose"
             }
         ],
@@ -19837,6 +20231,84 @@
         ],
         "person": {
             "slug": "aubrey-dundubala-mokoena"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
+                "Extent": "4 Bedroom",
+                "Location": "Tlhakalatlou"
+            }
+        ],
+        "person": {
+            "slug": "sanna-keikantseeng-plaatjie"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "SASA Construction",
+                "No": "50%"
+            },
+            {
+                "Name of Company": "Iketseng [Dormant]"
+            },
+            {
+                "Name of Company": "[Dormant]"
+            },
+            {
+                "Name of Company": "M&amp;M D/K Traders",
+                "No": "60%"
+            }
+        ],
+        "person": {
+            "slug": "sanna-keikantseeng-plaatjie"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "SASA Construction"
+            },
+            {
+                "Directorship/Partnership": "Iketseng",
+                "Type of Business": "[Dormant]"
+            },
+            {
+                "Directorship/Partnership": "Tlkakalotlou Restaurant",
+                "Type of Business": "[Dormant]"
+            },
+            {
+                "Directorship/Partnership": "M&amp;M D/K Traders"
+            }
+        ],
+        "person": {
+            "slug": "sanna-keikantseeng-plaatjie"
         },
         "source": {
             "date": "2011-01-01",
@@ -25728,6 +26200,45 @@
         },
         "entries": [
             {
+                "Description": "House",
+                "Extent": "4 Bedroomed",
+                "Location": "Charlesville"
+            }
+        ],
+        "person": {
+            "slug": "nosipho-dorothy-ntwanambi"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Trust",
+                "Type of Business": "Trust to empower previously disadvantaged communities"
+            }
+        ],
+        "person": {
+            "slug": "nosipho-dorothy-ntwanambi"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
                 "Description": "Ezekhaya Farm",
                 "Extent": "33ha",
                 "Location": "Ritavi, Limpopo"
@@ -25966,6 +26477,69 @@
         ],
         "person": {
             "slug": "archibold-jomo-nyambi"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
+                "Extent": "4 Bedrooms",
+                "Location": "KaNyamazane"
+            }
+        ],
+        "person": {
+            "slug": "n-f-nyanda"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Diamon MPL SA",
+                "Nature": "Investment"
+            },
+            {
+                "Name of Company": "Unit Trust",
+                "Nature": "Investment"
+            },
+            {
+                "Name of Company": "Stanlib",
+                "Nature": "Investment"
+            },
+            {
+                "Name of Company": "Telecom",
+                "Nature": "Investment"
+            },
+            {
+                "Name of Company": "Thandi Vivi",
+                "Nature": "Shares"
+            },
+            {
+                "Name of Company": "Sasol",
+                "Nature": "Shares"
+            },
+            {
+                "Name of Company": "Media 24",
+                "Nature": "Shares"
+            }
+        ],
+        "person": {
+            "slug": "n-f-nyanda"
         },
         "source": {
             "date": "2011-01-01",
@@ -27910,6 +28484,43 @@
     },
     {
         "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "No": "Nothing to disclose"
+            }
+        ],
+        "person": {
+            "slug": "pearl-maduna"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "The Aged",
+                "Type of Business": "NGO [No knowledge of this]"
+            }
+        ],
+        "person": {
+            "slug": "pearl-maduna"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
             "name": "LAND AND PROPERTY",
             "sort_order": 9
         },
@@ -28841,6 +29452,103 @@
         ],
         "person": {
             "slug": "jeffrey-thamsanqa-radebe"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "Erf 399 [50%]",
+                "Extent": "Normal",
+                "Location": "Monte Vista"
+            },
+            {
+                "Description": "B617",
+                "Extent": "Normal",
+                "Location": "Khayelitsha"
+            },
+            {
+                "Description": "Residential",
+                "Extent": "Normal",
+                "Location": "Bloemfontein"
+            }
+        ],
+        "person": {
+            "slug": "leonard-ramatlakane"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Grand Parade Inv.",
+                "Nature": "Ordinary",
+                "No": "6 152",
+                "Nominal Value": "+-R40 000"
+            },
+            {
+                "Name of Company": "NEF [Asonge]",
+                "Nature": "\"",
+                "No": "744",
+                "Nominal Value": "+-R59 520"
+            },
+            {
+                "Name of Company": "Golf Resort Club",
+                "Nature": "\"",
+                "No": "80 Units Time shared",
+                "Nominal Value": "R182 400"
+            },
+            {
+                "Name of Company": "MTN Zakhele",
+                "Nature": "Shares",
+                "No": "200"
+            },
+            {
+                "Name of Company": "MTN Zakhele",
+                "Nature": "Shares",
+                "No": "200"
+            },
+            {
+                "Name of Company": "MTN Sakhele",
+                "Nature": "Shares",
+                "No": "100"
+            }
+        ],
+        "person": {
+            "slug": "leonard-ramatlakane"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "PENSIONS",
+            "sort_order": 10
+        },
+        "entries": [
+            {
+                "Public/Private": "Private",
+                "Source": "Momentum"
+            }
+        ],
+        "person": {
+            "slug": "leonard-ramatlakane"
         },
         "source": {
             "date": "2011-01-01",
@@ -30964,6 +31672,45 @@
         ],
         "person": {
             "slug": "jonas-ben-sibanyoni"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "Land",
+                "Extent": "410sq.m.",
+                "Location": "New Germany"
+            }
+        ],
+        "person": {
+            "slug": "ntombikayise-nomawisile-sibhida"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "PENSIONS",
+            "sort_order": 10
+        },
+        "entries": [
+            {
+                "Public/Private": "Private",
+                "Source": "Old Mutual"
+            }
+        ],
+        "person": {
+            "slug": "ntombikayise-nomawisile-sibhida"
         },
         "source": {
             "date": "2011-01-01",
@@ -34295,6 +35042,183 @@
         ],
         "person": {
             "slug": "manana-florence-tlake"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "GIFTS AND HOSPITALITY",
+            "sort_order": 6
+        },
+        "entries": [
+            {
+                "Description": "Handbag",
+                "Source": "M Manana, MP",
+                "Value": "Unknown"
+            },
+            {
+                "Description": "Map",
+                "Source": "Sugar Industry",
+                "Value": "\""
+            },
+            {
+                "Description": "Clutch bag",
+                "Source": "Dti - Egypt",
+                "Value": "\""
+            },
+            {
+                "Description": "Document bag",
+                "Source": "Dti Agency",
+                "Value": "\""
+            }
+        ],
+        "person": {
+            "slug": "thandi-vivian-tobias"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
+                "Extent": "5 Bedroom",
+                "Location": "Ngwabe"
+            },
+            {
+                "Description": "House",
+                "Extent": "5 Bedroom",
+                "Location": "Parklands"
+            }
+        ],
+        "person": {
+            "slug": "l-j-tolo"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Kubane Motor Spares",
+                "Nature": "Family Business"
+            },
+            {
+                "Name of Company": "LM Tolo Supermarket",
+                "Nature": "\""
+            },
+            {
+                "Name of Company": "Sedibeng Cafe",
+                "Nature": "\""
+            },
+            {
+                "Name of Company": "Morwakubane Wholesalers",
+                "Nature": "\""
+            },
+            {
+                "Name of Company": "1/2 Price Store",
+                "Nature": "\""
+            }
+        ],
+        "person": {
+            "slug": "l-j-tolo"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "PENSIONS",
+            "sort_order": 10
+        },
+        "entries": [
+            {
+                "Public/Private": "Private",
+                "Source": "Sanlam"
+            }
+        ],
+        "person": {
+            "slug": "l-j-tolo"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "BENEFITS",
+            "sort_order": 7
+        },
+        "entries": [
+            {
+                "Description": "Voyager miles",
+                "Source": "SAA"
+            }
+        ],
+        "person": {
+            "slug": "l-j-tolo"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "Townhouse",
+                "Extent": "3 Bedroom",
+                "Location": "East London"
+            },
+            {
+                "Description": "Holiday Residence [50%]",
+                "Extent": "5 Bedrooms",
+                "Location": "Eastern Cape"
+            }
+        ],
+        "person": {
+            "slug": "roland-athol-price-trollip"
+        },
+        "source": {
+            "date": "2011-01-01",
+            "name": "2011_2012 MI Full List"
+        }
+    },
+    {
+        "category": {
+            "name": "BENEFITS",
+            "sort_order": 7
+        },
+        "entries": [
+            {
+                "Description": "Annual subscription on DSTV VIP programme",
+                "Source": "DSTV"
+            }
+        ],
+        "person": {
+            "slug": "roland-athol-price-trollip"
         },
         "source": {
             "date": "2011-01-01",
