@@ -45,6 +45,12 @@ class Converter(object):
                 if type(entries) != list or len(entries) == 0:
                     continue
 
+                # go through all entries stripping off extra whitespace from
+                # keys and values
+                for entry in entries:
+                    for key in entry.keys():
+                        entry[key.strip()] = entry.pop(key).strip()
+
                 grouping = {
                     "source": self.source,
                     "entries": entries,

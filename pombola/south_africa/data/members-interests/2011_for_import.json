@@ -6,9 +6,9 @@
         },
         "entries": [
             {
-                "Description": "House ",
-                "Extent": "Normal ",
-                "Location": "Eldorado Park "
+                "Description": "House",
+                "Extent": "Normal",
+                "Location": "Eldorado Park"
             }
         ],
         "person": {
@@ -26,14 +26,14 @@
         },
         "entries": [
             {
-                "Name of Company": "Vodacom ",
-                "No ": "100 ",
-                "Nominal Value ": "R2 000 "
+                "Name of Company": "Vodacom",
+                "No": "100",
+                "Nominal Value": "R2 000"
             },
             {
-                "Name of Company": "Telkom ",
-                "No ": "30 ",
-                "Nominal Value ": "R1 000 "
+                "Name of Company": "Telkom",
+                "No": "30",
+                "Nominal Value": "R1 000"
             }
         ],
         "person": {
@@ -51,12 +51,12 @@
         },
         "entries": [
             {
-                "Directorship/Partnership ": "Bev ",
-                "Type of Business": "Dormant "
+                "Directorship/Partnership": "Bev",
+                "Type of Business": "Dormant"
             },
             {
-                "Directorship/Partnership ": "Kup-Eldos Arts ",
-                "Type of Business": "Dormant "
+                "Directorship/Partnership": "Kup-Eldos Arts",
+                "Type of Business": "Dormant"
             }
         ],
         "person": {
