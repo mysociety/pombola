@@ -34,11 +34,14 @@ class Converter(object):
         "arthur-ainslie": "arthur-roy-ainslie",
         "bafunani-aaron-mnguni": "bafumani-aaron-mnguni",
         "bertha-mabe": "bertha-peace-mabe",
+        "beryl-ferguson": "beryl-delores-ferguson",
         "beverley-lynnette-abrahams": "beverley-lynette-abrahams",
         "bhekizizwe-abram-radebe": "bhekiziswe-abram-radebe",
         "bonisile-alfred-nesi": "bonisile-nesi",
         "busisiwe-mncube": "busisiwe-veronica-mncube",
+        "buyiswa-diemu": "buyiswa-cornelia-diemu",
         "charel-de-beer": "charel-jacobus-de-beer",
+        "constance-mosimane": "constance-kedibone-kelekegile-mosimane",
         "cq-madlopha": "celiwe-qhamkile-madlopha",
         "crosby-mpozo-moni": "crosby-mpoxo-moni",
         "dalitha-boshigo": "dalitha-fiki-boshigo",
@@ -48,12 +51,17 @@ class Converter(object):
         "dirk-feldman": "dirk-benjamin-feldman",
         "dj-stubbe": "dirk-jan-stubbe",
         "doris-nompendlko-ngcengwane": "nompendlko-doris-ngcengwane",
+        "dudu-chili": "dudu-olive-chili",
+        "dumisani-ximbi": "dumsani-livingstone-ximbi",
         "ebrahim-ebrahim": "ebrahim-ismail-ebrahim",
         "elza-van-lingen": "elizabeth-christina-van-lingen",
         "enoch-godongwana": "e-godongwana",
+        "ernst-eloff": "ernst-hendrik-eloff",
         "faith-bikani": "faith-claudine-bikani",
         "gbd-mcintosh": "graham-brian-douglas-mc-intosh",
+        "gelana-sindane": "gelana-sarian-sindane",
         "geolatlhe-godfrey-oliphant": "gaolatlhe-godfrey-oliphant",
+        "geordin-hill-lewis": "geordin-gwyn-hill-lewis",
         "george-boinamo": "george-gaolatlhe-boinamo",
         "gloria-borman": "gloria-mary-borman",
         "graham-peter-dalziel-mackenzie": "graham-peter-dalziel-mac-kenzie",
@@ -64,11 +72,13 @@ class Converter(object):
         "hendrietta-bogopane-zulu": "hendrietta-ipeleng-bogopane-zulu",
         "herman-groenewald": "hermanus-bernadus-groenewald",
         "hildah-sizakele-msweli": "hilda-sizakele-msweli",
+        "isaac-mfundisi": "isaac-sipho-mfundisi",
         "jac-bekker": "jacobus-marthinus-g-bekker",
         "james-lorimer": "james-robert-bourne-lorimer",
         "jan-gunda": "jan-johannes-gunda",
         "jf-smalle": "jacobus-frederik-smalle",
         "johanna-fredrika-terblanche": "johanna-fredrika-juanita-terblanche",
+        "john-moepeng": "john-kabelo-moepeng",
         "joseph-job-mc-gluwa": "joseph-job-mcgluwa",
         "keith-muntuwenkosi-zondi": "k-m-zondi",
         "kenneth-raselabe-meshoe": "kenneth-raselabe-joseph-meshoe",
@@ -76,6 +86,7 @@ class Converter(object):
         "lekaba-jack-tolo": "l-j-tolo",
         "lemias-buoang-mashile": "budang-lemias-mashile",
         "leonard-ramatlakana": "leonard-ramatlakane",
+        "liezl-van-der-merwe": "liezl-linda-van-der-merwe",
         "lulama-mary-theresa-xingwana": "lulama-marytheresa-xingwana",
         "lusizo-makhubela-mashele": "lusizo-sharon-makhubela-mashele",
         "lydia-sindiswe-chikunga": "lydia-sindisiwe-chikunga",
@@ -97,7 +108,9 @@ class Converter(object):
         "mninwa-mahlangu": "mninwa-johannes-mahlangu",
         "mntombizodwa-florence-nyanda": "n-f-nyanda",
         "mogi-lydia-moshodi": "moji-lydia-moshodi",
+        "mohammed-sayedali-shah": "mohammed-rafeek-sayedali-shah",
         "mosie-anthony-cele": "mosie-antony-cele",
+        "mpane-mohorosi": "mpane-martha-mohorosi",
         "n-d-ntwanambi": "nosipho-dorothy-ntwanambi",
         "nomzamo-winnie-madikizela-mandela": "nomzamo-winfred-madikizela-mandela",
         "ntombikhayise-nomawisile-sibhidla": "ntombikayise-nomawisile-sibhida",
@@ -114,6 +127,7 @@ class Converter(object):
         "raseriti-tau": "raseriti-johannes-tau",
         "rebecca-m-motsepe": "rebecca-mmakosha-motsepe",
         "refilwe-junior-mashigo": "refilwe-modikanalo-mashigo",
+        "regina-lesoma": "regina-mina-mpontseng-lesoma",
         "rejoice-thizwilondi-mabudafhasi": "thizwilondi-rejoyce-mabudafhasi",
         "richard-baloyi": "masenyani-richard-baloyi",
         "robert-lees": "robert-alfred-lees",
@@ -123,25 +137,35 @@ class Converter(object):
         "sam-mazosiwe": "siphiwo-sam-mazosiwe",
         "sanna-keikantseeng-molao-now-plaatjie": "sanna-keikantseeng-plaatjie",
         "seeng-patricia-lebenya-ntanzi": "s-p-lebenya-ntanzi",
+        "sherphed-mayatula": "shepherd-malusi-mayatula",
         "sicelo-shiceka": "s-shiceka",
         "siyabonga-cwele": "siyabonga-cyprian-cwele",
         "suhla-james-masango": "s-j-masango",
+        "swaphi-h-plaatjie": "swaphi-hendrick-plaatjie",
         "swaphi-plaatjie": "swaphi-hendrick-plaatjie",
         "teboho-chaane": "teboho-edwin-chaane",
+        "thabo-makunyane": "thabo-lucas-makunyane",
         "thandi-vivian-tobias-pokolo": "thandi-vivian-tobias",
         "thembalani-waltemade-nxesi": "thembelani-waltermade-nxesi",
         "tim-harris": "timothy-duncan-harris",
         "tjheta-mofokeng": "tjheta-makwa-harry-mofokeng",
         "tlp-nwamitwa-shilubana": "tinyiko-lwandlamuni-phillia-nwamitwa-shilubana",
         "tshiwela-elidah-lishivha": "tshiwela-elida-lishivha",
+        "velly-manzini": "velly-makasana-manzini",
         "willem-faber": "willem-frederik-faber",
+        "zephroma-dubazana": "zephroma-sizani-dubazana",
         "zephroma-sizani-dlamini-dubazana": "zephroma-sizani-dubazana",
         "zisiwe-balindlela": "zisiwe-beauty-nosimo-balindlela",
         "zoliswa-kota-fredericks": "zoliswa-albertina-kota-fredericks",
         "zukiswa-rantho": "daphne-zukiswa-rantho",
 
-
         # FIXME - need to manually match these
+        "trevor-john-bonhomme": None,
+        "makgathatso-pilane-majake": None,
+        "sanna-plaatjie": None,
+        "duduzile-sibiya": None,
+
+        # FIXME - can't seem to find a match for these
         "buyiswa-blaai": None,
     }
 
@@ -232,7 +256,7 @@ class Converter(object):
             #     return possible_slug
 
             for person in possible_persons:
-                print "perhaps: '{}': '{}',".format(slug, person.slug)
+                print 'perhaps: "{}": "{}",'.format(slug, person.slug)
             else:
                 print "no possible matches for {}".format(slug)
 
