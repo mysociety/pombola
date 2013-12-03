@@ -31,7 +31,7 @@ class Converter(object):
         year = data['year']
 
         source_filename = re.sub(r'.*/(.*?)\.pdf', r'\1', source_url)
-        source_name = urllib.unquote(source_filename)
+        source_name = urllib.unquote(source_filename).strip()
 
         self.source = {
             "name": source_name,
@@ -51,7 +51,7 @@ class Converter(object):
                 }
 
                 # Break up the name into sort_order and proper name
-                sort_order, category_name = raw_category_name.split('. ')
+                sort_order, category_name = raw_category_name.strip().split('. ')
                 grouping['category'] = {
                     "sort_order": sort_order,
                     "name": category_name,
@@ -59,7 +59,7 @@ class Converter(object):
 
                 # Work out who the person is
                 grouping['person'] = {
-                    "slug": self.mp_to_person_slug( register_entry['mp'])
+                    "slug": self.mp_to_person_slug(register_entry['mp'])
                 }
 
                 self.groupings.append(grouping)
