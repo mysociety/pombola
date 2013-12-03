@@ -30,6 +30,10 @@ class Converter(object):
         "\" \"",
     ]
 
+    # Change this to True to enable little bits of helper code for finding new
+    # slug corrections:
+    finding_slug_corrections = False
+
     slug_corrections = {
         "amos-matila": "amos-gerald-matila",
         "andre-gaum": "andre-hurtley-gaum",
@@ -281,10 +285,10 @@ class Converter(object):
 
             possible_persons = Person.objects.filter(legal_name__icontains=last_name)
 
-            # if possible_persons.count() == 1:
-            #     possible_slug = possible_persons.all()[0].slug
-            #     self.slug_corrections[slug] = possible_slug
-            #     return possible_slug
+            if self.finding_slug_corrections and possible_persons.count() == 1:
+                possible_slug = possible_persons.all()[0].slug
+                self.slug_corrections[slug] = possible_slug
+                return possible_slug
 
             for person in possible_persons:
                 print 'perhaps: "{}": "{}",'.format(slug, person.slug)
@@ -306,5 +310,11 @@ class Converter(object):
 if __name__ == "__main__":
     converter = Converter(sys.argv[1])
     output = converter.convert()
-    # print json.dumps(converter.slug_corrections, indent=4, sort_keys=True)
     print output
+
+    if self.finding_slug_corrections:
+        print "\n\n"
+        print "#### COPY THIS TO slug_corrections and s/null/None/ :) ####"
+        print "\n\n"
+        print json.dumps(converter.slug_corrections, indent=4, sort_keys=True)
+        print "\n\n"
