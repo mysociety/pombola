@@ -31,27 +31,17 @@
   {% endif %}
 </li>
  
+<li><a href="http://www.kuvakazim.com/info/political-parties">Political Parties</a></li>
 
-
-<li><a href="{% url "info_page" slug='m-national-assembly' %}">National Assembly</a>
+<li><a href="{% url "info_page" slug='m-parliament' %}">Parliament</a>
   {% if include_sub_menu_entries %}
-  <ul>
-    {# TODO point to the right people #}
+  <ul id="m-parliament">
     <li>
       <a href="{% url "position_pt" pt_slug='member-of-parliament' %}">House of Assembly</a>
     </li>
     <li>
       <a href="{% url "position_pt" pt_slug='senator' %}">Senators</a>
     </li>
-  </ul>
-  {% endif %}
-</li>
- 
-
-
-<li><a href="{% url "info_page" slug='m-parliament' %}">Parliament</a>
-  {% if include_sub_menu_entries %}
-  <ul id="m-parliament">
     <li>
       <a href="{% url "info_page" slug='ministry-overview' %}">  Ministry Overview  </a>
     </li>
