@@ -1535,6 +1535,63 @@
     },
     {
         "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House - Portion 50 of erf 432 = 210sq.m.  KwaZulu Natal",
+                "Extent": "3 Bedroom"
+            }
+        ],
+        "person": {
+            "slug": "trevor-bonhomme"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "PENSIONS",
+            "sort_order": 10
+        },
+        "entries": [
+            {
+                "Public/Private": "Private",
+                "Source": "Building Pension Fund"
+            }
+        ],
+        "person": {
+            "slug": "trevor-bonhomme"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Development Centre",
+                "Type of Business": "Permaculture"
+            }
+        ],
+        "person": {
+            "slug": "trevor-bonhomme"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
             "name": "SHARES AND OTHER FINANCIAL INTERESTS",
             "sort_order": 1
         },
@@ -28620,6 +28677,131 @@
         },
         "entries": [
             {
+                "Description": "Flat",
+                "Extent": "27sq.m.",
+                "Location": "Durban"
+            },
+            {
+                "Description": "Farm",
+                "Extent": "40ha",
+                "Location": "Hammanskraal"
+            },
+            {
+                "Description": "House",
+                "Extent": "+-250sq.m.",
+                "Location": "Waterkloofridge Pretoria"
+            },
+            {
+                "Description": "House [Mom's]",
+                "Extent": "+-80sq.m.",
+                "Location": "Atteridgeville"
+            },
+            {
+                "Description": "House",
+                "Extent": "40sq.m.",
+                "Location": "Kadube, Hammanskraal"
+            },
+            {
+                "Description": "House [Daughter's]",
+                "Extent": "189sq.m.",
+                "Location": "Waterkloof Rdige"
+            }
+        ],
+        "person": {
+            "slug": "makgathatso-charlotte-chana-pilane-majake"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "MTN",
+                "Nature": "Asonge",
+                "No": "774",
+                "Nominal Value": "+-R120.00 p/s"
+            },
+            {
+                "Name of Company": "ABSA",
+                "Nature": "Investment",
+                "Nominal Value": "+-R850 000.00"
+            },
+            {
+                "Name of Company": "FUNDISA",
+                "Nature": "R200pm",
+                "Nominal Value": "R20 000.00"
+            },
+            {
+                "Name of Company": "Momentum",
+                "No": "Once off",
+                "Nominal Value": "R20 000.00"
+            },
+            {
+                "Name of Company": "Momentum",
+                "Nature": "R1 300.00pm",
+                "Nominal Value": "R200 000.00"
+            },
+            {
+                "Name of Company": "Momentum",
+                "Nature": "R500pm",
+                "Nominal Value": "R150 000.00"
+            }
+        ],
+        "person": {
+            "slug": "makgathatso-charlotte-chana-pilane-majake"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Member of the Board",
+                "Type of Business": "Moral Regenation Movement"
+            },
+            {
+                "Directorship/Partnership": "Trustee",
+                "Type of Business": "Bertha Gxowa Foundation"
+            },
+            {
+                "Directorship/Partnership": "Committee",
+                "Type of Business": "African National Congress"
+            },
+            {
+                "Directorship/Partnership": "Member [Resigned]"
+            },
+            {
+                "Directorship/Partnership": "Consultants",
+                "Type of Business": "[Dormant]"
+            }
+        ],
+        "person": {
+            "slug": "makgathatso-charlotte-chana-pilane-majake"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
                 "Description": "House",
                 "Extent": "4 Bedroom",
                 "Location": "Limpopo"
@@ -28656,6 +28838,91 @@
         ],
         "person": {
             "slug": "maropeng-elizabeth-pilusa-mosoane"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
+                "Extent": "4 Roomed",
+                "Location": "Tlhakalatlou"
+            }
+        ],
+        "person": {
+            "slug": "sanna-keikantseeng-plaatjie"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "M &amp; M D/K Traders",
+                "Nature": "\"",
+                "No": "50%"
+            },
+            {
+                "Name of Company": "SH &amp; SK PMG Traders",
+                "Nature": "\"",
+                "No": "50%"
+            },
+            {
+                "Name of Company": "Iketseng [Dormant]",
+                "Nature": "Shares",
+                "No": "50%"
+            },
+            {
+                "Name of Company": "Tlhakalatlou [Dormant]",
+                "Nature": "\"",
+                "No": "50%"
+            }
+        ],
+        "person": {
+            "slug": "sanna-keikantseeng-plaatjie"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Iketseng Restaurant",
+                "Type of Business": "Restaurant [Dormant]"
+            },
+            {
+                "Directorship/Partnership": "Tlhkalatlou",
+                "Type of Business": "Restaurant [Dormant]"
+            },
+            {
+                "Directorship/Partnership": "M &amp; M D/K Traders"
+            },
+            {
+                "Directorship/Partnership": "SH &amp; SK PMG Traders",
+                "Type of Business": "Construction"
+            }
+        ],
+        "person": {
+            "slug": "sanna-keikantseeng-plaatjie"
         },
         "source": {
             "date": "2012-01-01",
@@ -31555,6 +31822,24 @@
         ],
         "person": {
             "slug": "jonas-ben-sibanyoni"
+        },
+        "source": {
+            "date": "2012-01-01",
+            "name": "Ethics_Full_Report_2012"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "No": "Nothing to disclose"
+            }
+        ],
+        "person": {
+            "slug": "dudu-sibiya"
         },
         "source": {
             "date": "2012-01-01",

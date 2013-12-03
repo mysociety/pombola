@@ -52,6 +52,7 @@ class Converter(object):
         "dj-stubbe": "dirk-jan-stubbe",
         "doris-nompendlko-ngcengwane": "nompendlko-doris-ngcengwane",
         "dudu-chili": "dudu-olive-chili",
+        "duduzile-sibiya": "dudu-sibiya",
         "dumisani-ximbi": "dumsani-livingstone-ximbi",
         "ebrahim-ebrahim": "ebrahim-ismail-ebrahim",
         "elza-van-lingen": "elizabeth-christina-van-lingen",
@@ -92,6 +93,7 @@ class Converter(object):
         "lydia-sindiswe-chikunga": "lydia-sindisiwe-chikunga",
         "mafemane-makhubela": "mafemane-wilson-makhubela",
         "maite-emely-nkoana-mashabane": "maite-emily-nkoana-mashabane",
+        "makgathatso-pilane-majake": "makgathatso-charlotte-chana-pilane-majake",
         "makone-collen-maine": "mokoane-collen-maine",
         "mandlenkosi-enock-mbili": "m-e-mbili",
         "mark-harvey-steele": "m-h-steele",
@@ -136,6 +138,7 @@ class Converter(object):
         "salamuddi-abram": "salamuddi-salam-abram",
         "sam-mazosiwe": "siphiwo-sam-mazosiwe",
         "sanna-keikantseeng-molao-now-plaatjie": "sanna-keikantseeng-plaatjie",
+        "sanna-plaatjie": "sanna-keikantseeng-plaatjie",
         "seeng-patricia-lebenya-ntanzi": "s-p-lebenya-ntanzi",
         "sherphed-mayatula": "shepherd-malusi-mayatula",
         "sicelo-shiceka": "s-shiceka",
@@ -150,6 +153,7 @@ class Converter(object):
         "tim-harris": "timothy-duncan-harris",
         "tjheta-mofokeng": "tjheta-makwa-harry-mofokeng",
         "tlp-nwamitwa-shilubana": "tinyiko-lwandlamuni-phillia-nwamitwa-shilubana",
+        "trevor-john-bonhomme": "trevor-bonhomme",
         "tshiwela-elidah-lishivha": "tshiwela-elida-lishivha",
         "velly-manzini": "velly-makasana-manzini",
         "willem-faber": "willem-frederik-faber",
@@ -160,10 +164,6 @@ class Converter(object):
         "zukiswa-rantho": "daphne-zukiswa-rantho",
 
         # FIXME - need to manually match these
-        "trevor-john-bonhomme": None,
-        "makgathatso-pilane-majake": None,
-        "sanna-plaatjie": None,
-        "duduzile-sibiya": None,
 
         # FIXME - can't seem to find a match for these
         "buyiswa-blaai": None,
