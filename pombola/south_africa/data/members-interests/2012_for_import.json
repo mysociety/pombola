@@ -178,7 +178,7 @@
             },
             {
                 "Name of Company": "Old Mutual",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "1 300"
             },
             {
@@ -295,7 +295,7 @@
             },
             {
                 "Name of Company": "Naspers",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1 102",
                 "Nominal Value": "R180 000"
             },
@@ -959,22 +959,22 @@
             {
                 "Description": "Blanket",
                 "Source": "Son-in-law",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Scarf",
                 "Source": "Sister-in-law",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Books x 3",
                 "Source": "Mdubuzi Brian Mnyandu",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Necklace",
                 "Source": "Mduduzi Manana",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Bathroom suite",
@@ -994,7 +994,7 @@
             {
                 "Description": "Handbag",
                 "Source": "Phumlani Njilo",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -1229,7 +1229,7 @@
             {
                 "Description": "Saudi Heritage Janandria",
                 "Source": "Architects",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Live stock (1 sheep)",
@@ -1332,7 +1332,7 @@
             },
             {
                 "Name of Company": "MTN",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "677",
                 "Nominal Value": "R50 000"
             },
@@ -1356,7 +1356,7 @@
             },
             {
                 "Name of Company": "Welkom Yizani",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "430",
                 "Nominal Value": "R4 400"
             },
@@ -1368,7 +1368,7 @@
             },
             {
                 "Name of Company": "Metropolitan",
-                "Nature": "\"",
+                "Nature": "Investors",
                 "No": "196"
             },
             {
@@ -1720,17 +1720,17 @@
             },
             {
                 "Name of Company": "Moramadi B [Dormant]",
-                "Nature": "\"",
+                "Nature": "CC",
                 "No": "60%"
             },
             {
                 "Name of Company": "Elpsis B Trading [Dormant]",
-                "Nature": "\"",
+                "Nature": "CC",
                 "No": "10%"
             },
             {
                 "Name of Company": "[Dormant]",
-                "Nature": "\"",
+                "Nature": "CC",
                 "No": "50%"
             },
             {
@@ -2642,7 +2642,7 @@
             },
             {
                 "Name of Company": "MTN",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "Nominal Value": "R5 000"
             },
             {
@@ -2657,7 +2657,7 @@
             },
             {
                 "Name of Company": "Sanlam",
-                "Nature": "\""
+                "Nature": "Shares"
             }
         ],
         "person": {
@@ -3077,17 +3077,17 @@
             },
             {
                 "Name of Company": "Pels Construction",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "50%"
             },
             {
                 "Name of Company": "Fixtrade",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "40%"
             },
             {
                 "Name of Company": "Quadratic Trading",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100%"
             }
         ],
@@ -3344,13 +3344,13 @@
             },
             {
                 "Name of Company": "Old Mutual",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1 188",
                 "Nominal Value": "R20.00 p/s"
             },
             {
                 "Name of Company": "Sasol Inzalo",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "396",
                 "Nominal Value": "R251.00 p/s"
             },
@@ -3863,92 +3863,92 @@
             {
                 "Description": "Flashdisk",
                 "Source": "Finance",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Teas, Souvenir",
                 "Source": "Organisers - Korea Expo",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Book",
                 "Source": "Gordon Institute of Business",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Flashdisk, Pen",
                 "Source": "SACU Regional Conference",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Souvenir - book",
                 "Source": "Cape Chamber",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Gift pen set",
                 "Source": "Zealand",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Package of dates",
                 "Source": "Amb. of Saudi Arabia",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Bottle of wine, souvenir",
                 "Source": "Wesgro",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Souvenirs",
                 "Source": "JHB Motor Show",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Paper folder",
                 "Source": "SABS",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Souvenir",
                 "Source": "Trade",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Watch",
                 "Source": "[President of UAE]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Watch",
                 "Source": "Sultan of Oman",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "2 Night stay at Chobe Lodge",
                 "Source": "Commerce",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Pen set",
                 "Source": "UN COP17 [Unido]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Slow Cooker",
                 "Source": "UN COP17 [Unilever]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Set of pots",
                 "Source": "Unilever factory]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Book - Tutu",
                 "Source": "Xmas gift from Aspen",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "4 DVDs, book Tutu",
@@ -3957,7 +3957,7 @@
             {
                 "Description": "Golf umbrella",
                 "Source": "Group Five [Xmas gift]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Bott. of wine - JEM 2007",
@@ -3966,32 +3966,32 @@
             {
                 "Description": "Thai silk",
                 "Source": "Deputy PM Thailand",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Souvenir",
                 "Source": "programme]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Shirt",
                 "Source": "Cuban Ambassador",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "grader\"",
                 "Source": "Anant Singh [Videovision]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Souvenir",
                 "Source": "Commerce",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Souvenir decorated box",
                 "Source": "[Min. Sharma]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Goods related to IDC projects [Gift pack]  \"",
@@ -4000,42 +4000,42 @@
             {
                 "Description": "Souvenir",
                 "Source": "Commerce",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Swiss chocolates and pocket knife",
                 "Source": "Swiss Chamber organisers",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Pen &amp; business card holder",
                 "Source": "CathSSeta [Xmas gift]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Pen &amp; chocolates",
                 "Source": "WTO Ministerial Geneva",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Table napkin holders &amp; chocolates",
                 "Source": "Nestle [Xmas gift]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Ceramic Vase",
                 "Source": "Safal",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Souvenir",
                 "Source": "Saudi Arabia",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Souvenir",
                 "Source": "Resources - Turkey",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -4178,7 +4178,7 @@
             {
                 "Description": "Complimentary ticket",
                 "Source": "SAA",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -4290,17 +4290,17 @@
             },
             {
                 "Name of Company": "Investec",
-                "Nature": "\"",
+                "Nature": "Preservation Pension Fund  R638 659.08",
                 "Nominal Value": "R81 011.46"
             },
             {
                 "Name of Company": "Investec",
-                "Nature": "\"",
+                "Nature": "Preservation Pension Fund  R638 659.08",
                 "Nominal Value": "R220 571.33"
             },
             {
                 "Name of Company": "Investec",
-                "Nature": "\"",
+                "Nature": "Preservation Pension Fund  R638 659.08",
                 "Nominal Value": "R303 650.89"
             }
         ],
@@ -4365,27 +4365,27 @@
             {
                 "Description": "paraphernalia",
                 "Source": "Administration",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "paraphernalia",
                 "Source": "Brimstone",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Attend 13th Cape Town Jazz Festival",
                 "Source": "Telkom",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "flights",
                 "Source": "PWC",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "fees, golf cart, golf paraphernalia, flight",
                 "Source": "MTN",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -5160,7 +5160,7 @@
             },
             {
                 "Name of Company": "Vodacom",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "71 @ R101",
                 "Nominal Value": "R7 171"
             }
@@ -5230,42 +5230,42 @@
             {
                 "Description": "Mooncake",
                 "Source": "Embassy of China",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "2 Golf shirts",
                 "Source": "Ethekwini Municipality",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "peanuts",
                 "Source": "Embassy of China",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "CD",
                 "Source": "of the Socialist International",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "to Nelson Mandela by Peter Magubane",
                 "Source": "Team",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "photos [Minister]",
                 "Source": "Embassy of Cuba",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Brooch",
                 "Source": "Amb Sego Lena Ryal",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Box of white and dark chocolates",
                 "Source": "Minister Roy Padayachee",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -5290,7 +5290,7 @@
             },
             {
                 "Name of Company": "Sasol",
-                "Nature": "\"",
+                "Nature": "BEE shares",
                 "No": "233",
                 "Nominal Value": "R81 550"
             },
@@ -6021,85 +6021,85 @@
             },
             {
                 "Name of Company": "Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "385",
                 "Nominal Value": "R4 808.00"
             },
             {
                 "Name of Company": "Nutritional Holdings Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "200 000",
                 "Nominal Value": "R10 000.00"
             },
             {
                 "Name of Company": "Cape Empowerment Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "60 000",
                 "Nominal Value": "R17 400.00"
             },
             {
                 "Name of Company": "Grand Parade Inv. Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "15 100",
                 "Nominal Value": "R39 565.00"
             },
             {
                 "Name of Company": "Curro Holdings Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "4 000",
                 "Nominal Value": "R72 720.00"
             },
             {
                 "Name of Company": "Peregrine Holdings Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "11 000",
                 "Nominal Value": "R124 300.00"
             },
             {
                 "Name of Company": "Brait SA",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "5 000",
                 "Nominal Value": "R142 500.00"
             },
             {
                 "Name of Company": "Compagnie Fin Richemont",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "3 900",
                 "Nominal Value": "R186 500.00"
             },
             {
                 "Name of Company": "Exxaro Resources Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "1 662",
                 "Nominal Value": "R285 864.00"
             },
             {
                 "Name of Company": "ABSA Group Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "2 100",
                 "Nominal Value": "R290 640.00"
             },
             {
                 "Name of Company": "Lonmin PLC",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "3 859",
                 "Nominal Value": "R353 638.00"
             },
             {
                 "Name of Company": "Merafe Resources Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "710 650",
                 "Nominal Value": "R575 626.00"
             },
             {
                 "Name of Company": "ARB Holdings Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "37 290",
                 "Nominal Value": "R145 431.00"
             },
             {
                 "Name of Company": "Old Mutual PLC",
-                "Nature": "\"",
+                "Nature": "Ordinary on JSE",
                 "No": "80 709",
                 "Nominal Value": "R1 661 798.00"
             }
@@ -6747,7 +6747,7 @@
             },
             {
                 "Directorship/Partnership": "Samcord Property [Dormant]",
-                "Type of Business": "\""
+                "Type of Business": "In process of resigning"
             },
             {
                 "Directorship/Partnership": "Lehumo Resources",
@@ -7138,7 +7138,7 @@
             {
                 "Description": "Town for 2",
                 "Source": "Dimension Data",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "iPad",
@@ -7168,19 +7168,19 @@
             },
             {
                 "Name of Company": "Sasol",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "50",
                 "Nominal Value": "+-R340 p/s"
             },
             {
                 "Name of Company": "Vodacom",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100",
                 "Nominal Value": "+-R90 p/s"
             },
             {
                 "Name of Company": "MTN",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "480 +48",
                 "Nominal Value": "-R140 p/s"
             }
@@ -7389,15 +7389,15 @@
             },
             {
                 "Name of Company": "Ocean Side Trading",
-                "Nature": "\""
+                "Nature": "Resigned"
             },
             {
                 "Name of Company": "Ditabo Med. Supplies",
-                "Nature": "\""
+                "Nature": "Resigned"
             },
             {
                 "Name of Company": "Rea Time Inv.",
-                "Nature": "\""
+                "Nature": "Resigned"
             },
             {
                 "Name of Company": "RZT Selpy",
@@ -7405,7 +7405,7 @@
             },
             {
                 "Name of Company": "Shampula Earth Moving",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Sondelani Trans.",
@@ -7413,7 +7413,7 @@
             },
             {
                 "Name of Company": "Umkhono Trading",
-                "Nature": "\""
+                "Nature": "Resigned"
             },
             {
                 "Name of Company": "Tinashe Clinic",
@@ -7429,39 +7429,39 @@
             },
             {
                 "Name of Company": "Bostz Trading",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Central Route Trading",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Dabula Construction",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Expan Trade Thirty Six",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Fountain Square Trading",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Hissa Hissa Trading",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Kaito Construction",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Kusile Investments",
-                "Nature": "\""
+                "Nature": "Dormant"
             },
             {
                 "Name of Company": "Subway Trading",
-                "Nature": "\""
+                "Nature": "Dormant"
             }
         ],
         "person": {
@@ -7675,7 +7675,7 @@
             },
             {
                 "Directorship/Partnership": "Fountain Square CC",
-                "Type of Business": "\""
+                "Type of Business": "Dormant"
             },
             {
                 "Directorship/Partnership": "Mantella Trading 544",
@@ -7683,7 +7683,7 @@
             },
             {
                 "Directorship/Partnership": "op",
-                "Type of Business": "\""
+                "Type of Business": "Dormant"
             }
         ],
         "person": {
@@ -8016,12 +8016,12 @@
             {
                 "Description": "Jewelery box",
                 "Source": "Japanese Ambassador",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Model kettle, T-shirt and a pen",
                 "Source": "University of Cambridge",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Book 'Wisdom\" by Andreq Zuckerman",
@@ -8337,7 +8337,7 @@
             },
             {
                 "Name of Company": "Remgro Ltd",
-                "Nature": "\"",
+                "Nature": "Diversified industries",
                 "No": "75",
                 "Nominal Value": "R9 825"
             },
@@ -8531,7 +8531,7 @@
             },
             {
                 "Name of Company": "Old Mutual",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "400",
                 "Nominal Value": "+-R19 p/s"
             }
@@ -8885,19 +8885,19 @@
             },
             {
                 "Name of Company": "Telkom",
-                "Nature": "\"",
+                "Nature": "Ordinary shares",
                 "No": "113",
                 "Nominal Value": "R2 044"
             },
             {
                 "Name of Company": "Arcelor Mittal SA",
-                "Nature": "\"",
+                "Nature": "Ordinary shares",
                 "No": "66",
                 "Nominal Value": "R2 970"
             },
             {
                 "Name of Company": "Kumba",
-                "Nature": "\"",
+                "Nature": "Ordinary shares",
                 "No": "66",
                 "Nominal Value": "R34 386"
             }
@@ -9355,27 +9355,27 @@
                 "Location": "JHB"
             },
             {
-                "Description": "\"",
+                "Description": "Residential",
                 "Extent": "614sq.m.",
                 "Location": "JHB"
             },
             {
-                "Description": "\"",
+                "Description": "Residential",
                 "Extent": "128sq.m.",
                 "Location": "JHB"
             },
             {
-                "Description": "\"",
+                "Description": "Residential",
                 "Extent": "92sq.m.",
                 "Location": "JHB"
             },
             {
-                "Description": "\"",
+                "Description": "Residential",
                 "Extent": "116sq.m.",
                 "Location": "JHB"
             },
             {
-                "Description": "\"",
+                "Description": "Residential",
                 "Extent": "92sq.m.",
                 "Location": "JHB"
             }
@@ -9658,12 +9658,12 @@
             {
                 "Description": "House",
                 "Extent": "470sq.m.",
-                "Location": "\""
+                "Location": "Bethlehu"
             },
             {
                 "Description": "House",
                 "Extent": "480sq.m.",
-                "Location": "\""
+                "Location": "Bethlehu"
             },
             {
                 "Description": "House",
@@ -9886,13 +9886,13 @@
             },
             {
                 "Name of Company": "Ubuntu-Botho [Sanlam]",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "6 142",
                 "Nominal Value": "R220 p/s"
             },
             {
                 "Name of Company": "Fynbos Holdings",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "90",
                 "Nominal Value": "R12 000 p/s"
             }
@@ -10155,13 +10155,13 @@
             },
             {
                 "Name of Company": "Phutuma Nathi",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "1 500",
                 "Nominal Value": "R15 000"
             },
             {
                 "Name of Company": "Telkom",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "500",
                 "Nominal Value": "R30 000"
             }
@@ -10735,7 +10735,7 @@
             },
             {
                 "Name of Company": "Sanlam",
-                "Nature": "\"",
+                "Nature": "'",
                 "No": "100",
                 "Nominal Value": "R20.00"
             }
@@ -11108,19 +11108,19 @@
             },
             {
                 "Name of Company": "Malbak",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "7 370",
                 "Nominal Value": "+-R37 000"
             },
             {
                 "Name of Company": "Highpine",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "998",
                 "Nominal Value": "+-R110 000"
             },
             {
                 "Name of Company": "Board Syndicate Two",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "30",
                 "Nominal Value": "+-R10 000"
             }
@@ -11389,19 +11389,19 @@
             },
             {
                 "Name of Company": "Old Mutual",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "900",
                 "Nominal Value": "Listed JSE"
             },
             {
                 "Name of Company": "Grincourt Trust",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1",
                 "Nominal Value": "R100"
             },
             {
                 "Name of Company": "NTK Bpk",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "16",
                 "Nominal Value": "+-R300"
             },
@@ -11741,112 +11741,112 @@
             {
                 "Name of Company": "Avgold",
                 "No": "194",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "ISCOR",
                 "No": "12",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "options",
                 "No": "1",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Bidvest",
                 "No": "29.25",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Profurn",
                 "No": "25",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Marriot Props",
                 "No": "324",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "SISA",
                 "No": "205",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Waltons",
                 "No": "3",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Hartebeesfontein",
                 "No": "100",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Centrecity Property Fund",
                 "No": "500",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Libvest",
                 "No": "4",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Liberty International",
                 "No": "1",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Stanbic",
                 "No": "6",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Pepkor",
                 "No": "562",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Tradehold",
                 "No": "281",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Metro",
                 "No": "6",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Pepgro",
                 "No": "1 000",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Group",
                 "No": "1",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Properties PLC",
                 "No": "1",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Capital Property Fund",
                 "No": "116",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Hyprop Investments",
                 "No": "77",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Name of Company": "Standard Bank Group",
                 "No": "5",
-                "Nominal Value": "\""
+                "Nominal Value": "As per JSE ruling"
             },
             {
                 "Nature": "over",
@@ -11860,24 +11860,24 @@
             },
             {
                 "Name of Company": "Temeraire Investments",
-                "Nature": "\"",
+                "Nature": "% CC share",
                 "No": "100",
                 "Nominal Value": "Break even"
             },
             {
                 "Name of Company": "Lezmin 1221 CC",
-                "Nature": "\"",
+                "Nature": "% CC share",
                 "No": "100",
                 "Nominal Value": "R1 500 000"
             },
             {
                 "Name of Company": "Rupersash Surveys",
-                "Nature": "\"",
+                "Nature": "% CC share",
                 "No": "100"
             },
             {
                 "Name of Company": "Rudann Investments",
-                "Nature": "\"",
+                "Nature": "% CC share",
                 "No": "50",
                 "Nominal Value": "R250 000"
             }
@@ -11925,15 +11925,15 @@
             },
             {
                 "Directorship/Partnership": "Temeraire Investments",
-                "Type of Business": "\""
+                "Type of Business": "Property development"
             },
             {
                 "Directorship/Partnership": "Lezmin 1221 CC",
-                "Type of Business": "\""
+                "Type of Business": "Property development"
             },
             {
                 "Directorship/Partnership": "Rudann Investments",
-                "Type of Business": "\""
+                "Type of Business": "Property development"
             }
         ],
         "person": {
@@ -12823,19 +12823,19 @@
             },
             {
                 "Directorship/Partnership": "Jabulana Spares",
-                "Type of Business": "\""
+                "Type of Business": "[In process of resigning]"
             },
             {
                 "Directorship/Partnership": "Jill Business Consultancies",
-                "Type of Business": "\""
+                "Type of Business": "[In process of resigning]"
             },
             {
                 "Directorship/Partnership": "Marketing Envisable",
-                "Type of Business": "\""
+                "Type of Business": "[In process of resigning]"
             },
             {
                 "Directorship/Partnership": "Vusani Mining Resources",
-                "Type of Business": "\""
+                "Type of Business": "[In process of resigning]"
             },
             {
                 "Directorship/Partnership": "Bona Tours",
@@ -12879,15 +12879,15 @@
             },
             {
                 "Directorship/Partnership": "Huntleigh Africa Provincial Sales",
-                "Type of Business": "\""
+                "Type of Business": "In process of resigning"
             },
             {
                 "Directorship/Partnership": "Inkululeko Investments",
-                "Type of Business": "\""
+                "Type of Business": "In process of resigning"
             },
             {
                 "Directorship/Partnership": "Inkululeko Leisures",
-                "Type of Business": "\""
+                "Type of Business": "In process of resigning"
             }
         ],
         "person": {
@@ -14124,32 +14124,32 @@
             {
                 "Description": "Gold Coin with a stand",
                 "Source": "of the Russian Federation",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Wooden frame of Moscow City, Duma",
                 "Source": "of the Russian Federation",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Gold Coin of Russian Parliament",
                 "Source": "of the Russian Federation",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Bott. of wine and box of chocolates",
                 "Source": "of China",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Chinese scroll; Green tea; Coffee mug",
                 "Source": "China",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "White &amp; Gold vase",
                 "Source": "The President of India",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -14174,13 +14174,13 @@
             },
             {
                 "Name of Company": "Sanlam",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "300",
                 "Nominal Value": "R5 076"
             },
             {
                 "Name of Company": "Alas [Dormant]",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "Nominal Value": "R5 000"
             },
             {
@@ -14189,7 +14189,7 @@
             },
             {
                 "Name of Company": "OBEEC",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "+-10",
                 "Nominal Value": "R10 000"
             }
@@ -14376,31 +14376,31 @@
             },
             {
                 "Name of Company": "Sekunjalo Investment",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "500",
                 "Nominal Value": "0,0002"
             },
             {
                 "Name of Company": "Sekunjalo Investment",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "2 000",
                 "Nominal Value": "o,0002"
             },
             {
                 "Name of Company": "Sekunjalo Investment",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "200",
                 "Nominal Value": "0.0002"
             },
             {
                 "Name of Company": "Investment Limited",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "11 000",
                 "Nominal Value": "R0.0000001"
             },
             {
                 "Name of Company": "Limited",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100",
                 "Nominal Value": "R0.0000001"
             }
@@ -14886,17 +14886,17 @@
             {
                 "Description": "Invitation to Hunting Expedition",
                 "Source": "DENEL",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Manchester",
                 "Source": "Mr S Rasethaba [Friend]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Music show tickets",
                 "Source": "Mr Attie van Wyk",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -15569,27 +15569,27 @@
             {
                 "Description": "Bott. of Black Label Whiskey",
                 "Source": "Travel with Flair",
-                "Value": "\""
+                "Value": "Unknown - under R1 500"
             },
             {
                 "Description": "4 DVD CDs",
                 "Source": "Anant Singh",
-                "Value": "\""
+                "Value": "Unknown - under R1 500"
             },
             {
                 "Description": "Bott. of Meerlust and Fruit Basket",
                 "Source": "ABSA Bank",
-                "Value": "\""
+                "Value": "Unknown - under R1 500"
             },
             {
                 "Description": "Pens",
                 "Source": "Regenessys",
-                "Value": "\""
+                "Value": "Unknown - under R1 500"
             },
             {
                 "Description": "Book: Born to Succeed",
                 "Source": "Bala Gangiah",
-                "Value": "\""
+                "Value": "Unknown - under R1 500"
             },
             {
                 "Description": "with myself",
@@ -15619,7 +15619,7 @@
             {
                 "Description": "Photo frame",
                 "Source": "CNN International",
-                "Value": "\""
+                "Value": "Unknown - under R1 500"
             },
             {
                 "Description": "R500 Book Voucher",
@@ -15634,7 +15634,7 @@
             {
                 "Description": "Dressing",
                 "Source": "Business UCT",
-                "Value": "\""
+                "Value": "Unknown - under R1 500"
             },
             {
                 "Description": "links?",
@@ -15649,12 +15649,12 @@
             {
                 "Description": "day",
                 "Source": "Netherlands",
-                "Value": "\""
+                "Value": "Under R1 500"
             },
             {
                 "Description": "Chinese Blue &amp; White vase",
                 "Source": "[Shandong]",
-                "Value": "\""
+                "Value": "Under R1 500"
             }
         ],
         "person": {
@@ -15754,32 +15754,32 @@
             {
                 "Description": "MTN gift pack and Spa voucher",
                 "Source": "MTN",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Paintings",
                 "Source": "Inmates",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Paintings",
                 "Source": "Management of DCS",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Artifacts",
                 "Source": "Management of DCS",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Leather file folder + Red Wine",
                 "Source": "Ministry staff",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Tea set",
                 "Source": "SAHARA",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Laptop at a discounted price",
@@ -16062,27 +16062,27 @@
             },
             {
                 "Name of Company": "Media 24 Holdings",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "430",
-                "Nominal Value": "\""
+                "Nominal Value": "Unknown"
             },
             {
                 "Name of Company": "Multichoice Investments Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1 000",
-                "Nominal Value": "\""
+                "Nominal Value": "Unknown"
             },
             {
                 "Name of Company": "MTN Group Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "744",
-                "Nominal Value": "\""
+                "Nominal Value": "Unknown"
             },
             {
                 "Name of Company": "Sasol Inzalo",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "61",
-                "Nominal Value": "\""
+                "Nominal Value": "Unknown"
             }
         ],
         "person": {
@@ -16336,20 +16336,20 @@
             },
             {
                 "Name of Company": "Old Mutual",
-                "Nature": "\""
+                "Nature": "Ordinary shares"
             },
             {
                 "Name of Company": "Allan Gray",
-                "Nature": "\"",
+                "Nature": "Ordinary shares",
                 "Nominal Value": "R500.00"
             },
             {
                 "Name of Company": "A Mittal",
-                "Nature": "\""
+                "Nature": "Ordinary shares"
             },
             {
                 "Name of Company": "Kumba Resources",
-                "Nature": "\""
+                "Nature": "Ordinary shares"
             }
         ],
         "person": {
@@ -17113,17 +17113,17 @@
             },
             {
                 "Name of Company": "Old Mutual",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "2 500"
             },
             {
                 "Name of Company": "Telkom",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "223"
             },
             {
                 "Name of Company": "Eyomhlaba - African Bank",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1 250"
             }
         ],
@@ -17258,22 +17258,22 @@
             {
                 "Description": "Framed cartoon",
                 "Source": "Cape Town Press Club",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Polo bag; Golf shirt; T-shirt and Cap",
                 "Source": "SA Breweries (SAB)",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Red cedarwood carving of a kangaroo",
                 "Source": "Parliament",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Parker pen",
                 "Source": "Assembly of SA",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Polokwane]",
@@ -17329,42 +17329,42 @@
                 "Source": "Sandy Liddle"
             },
             {
-                "Description": "\"",
+                "Description": "Caucus Election - Sept-Oct. 2011",
                 "Extent": "R5 000",
                 "Source": "Rui Esteves"
             },
             {
-                "Description": "\"",
+                "Description": "Caucus Election - Sept-Oct. 2011",
                 "Extent": "R5 000",
                 "Source": "Manny Esteves"
             },
             {
-                "Description": "\"",
+                "Description": "Caucus Election - Sept-Oct. 2011",
                 "Extent": "R5 000",
                 "Source": "Wilmot James"
             },
             {
-                "Description": "\"",
+                "Description": "Caucus Election - Sept-Oct. 2011",
                 "Extent": "R2 000",
                 "Source": "Watty Watson"
             },
             {
-                "Description": "\"",
+                "Description": "Caucus Election - Sept-Oct. 2011",
                 "Extent": "R1 000",
                 "Source": "Marti Wenger"
             },
             {
-                "Description": "\"",
+                "Description": "Caucus Election - Sept-Oct. 2011",
                 "Extent": "R1 500",
                 "Source": "Geordin Hill-Lewis"
             },
             {
-                "Description": "\"",
+                "Description": "Caucus Election - Sept-Oct. 2011",
                 "Extent": "R1 000",
                 "Source": "DavidMaynier"
             },
             {
-                "Description": "\"",
+                "Description": "Caucus Election - Sept-Oct. 2011",
                 "Extent": "R1 000",
                 "Source": "Gareth Morgan"
             }
@@ -17413,17 +17413,17 @@
             },
             {
                 "Name of Company": "Ratakuwa",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "5%"
             },
             {
                 "Name of Company": "Scip Engineering",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "25%"
             },
             {
                 "Name of Company": "Phoebus Apollo",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "10%"
             },
             {
@@ -17735,35 +17735,35 @@
             },
             {
                 "Directorship/Partnership": "Rigel P/L",
-                "Type of Business": "\""
+                "Type of Business": "Property Investment"
             },
             {
                 "Directorship/Partnership": "Jozi Housing P/L",
-                "Type of Business": "\""
+                "Type of Business": "Property Investment"
             },
             {
                 "Directorship/Partnership": "MACEST P/L",
-                "Type of Business": "\""
+                "Type of Business": "Property Investment"
             },
             {
                 "Directorship/Partnership": "Mayborn Investments P/L",
-                "Type of Business": "\""
+                "Type of Business": "Property Investment"
             },
             {
                 "Directorship/Partnership": "Geevee P/L",
-                "Type of Business": "\""
+                "Type of Business": "Property Investment"
             },
             {
                 "Directorship/Partnership": "Mngwenya Farms P/L",
-                "Type of Business": "\""
+                "Type of Business": "Property Investment"
             },
             {
                 "Directorship/Partnership": "Kairos Estates P/L",
-                "Type of Business": "\""
+                "Type of Business": "Property Investment"
             },
             {
                 "Directorship/Partnership": "paper Bank Properties P/L",
-                "Type of Business": "\""
+                "Type of Business": "Property Investment"
             },
             {
                 "Directorship/Partnership": "NSIMBI P/L",
@@ -17816,12 +17816,12 @@
             {
                 "Description": "Walka",
                 "Source": "Sports International",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Braai fork",
                 "Source": "Sports International",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Tie",
@@ -18239,7 +18239,7 @@
             {
                 "Description": "1 Led Flat TV Konika",
                 "Source": "- China",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -18263,7 +18263,7 @@
             },
             {
                 "Name of Company": "Ken Mfeketo Trust",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "50%"
             }
         ],
@@ -18804,13 +18804,13 @@
             },
             {
                 "Name of Company": "Nampak Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1 800",
                 "Nominal Value": "R25 850"
             },
             {
                 "Name of Company": "White Water Resources Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "81 000",
                 "Nominal Value": "R15 880"
             }
@@ -19114,17 +19114,17 @@
             {
                 "Description": "1 Tie",
                 "Source": "Parliament - India",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "1 Briefcase",
                 "Source": "Parliament - India",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Box of tea",
                 "Source": "Minister of Defence - India",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -19441,7 +19441,7 @@
             },
             {
                 "Name of Company": "MTN Asonge",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "2 500"
             }
         ],
@@ -19708,13 +19708,13 @@
             },
             {
                 "Name of Company": "Alas (Pty)td",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "26%",
                 "Nominal Value": "R1.00 each"
             },
             {
                 "Name of Company": "The Blue Pages",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "26%"
             },
             {
@@ -20692,27 +20692,27 @@
             },
             {
                 "Name of Company": "Sasol Ltd",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "4 000"
             },
             {
                 "Name of Company": "Old Mutual PLC",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "1 600"
             },
             {
                 "Name of Company": "Metropolitan Holdings",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "1 239"
             },
             {
                 "Name of Company": "MTN Group Ltd",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "677"
             },
             {
                 "Name of Company": "New Africa Investment Ltd",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "424"
             }
         ],
@@ -21033,17 +21033,17 @@
             {
                 "Description": "Hand blown glass bird",
                 "Source": "President of Finland",
-                "Value": "\""
+                "Value": "\"\""
             },
             {
                 "Description": "Square snack bowl - white",
                 "Source": "Finland - Ms Erkki Tuomioja",
-                "Value": "\""
+                "Value": "\"\""
             },
             {
                 "Description": "Glassworks",
                 "Source": "Republic of Finland",
-                "Value": "\""
+                "Value": "\"\""
             },
             {
                 "Description": "Square white snack bowl with 4 divisions  \"",
@@ -21052,27 +21052,27 @@
             {
                 "Description": "Classical Music\"",
                 "Source": "Spouse",
-                "Value": "\""
+                "Value": "\"\""
             },
             {
                 "Description": "Library of Turkey",
                 "Source": "Toursim of Turkey",
-                "Value": "\""
+                "Value": "\"\""
             },
             {
                 "Description": "Silver braai utensils",
                 "Source": "Act. Director - Marketing",
-                "Value": "\""
+                "Value": "\"\""
             },
             {
                 "Description": "Parker ballpoint [Silver]; Digital disc",
                 "Source": "Business JONRAS KOTSI",
-                "Value": "\""
+                "Value": "\"\""
             },
             {
                 "Description": "Book \"The Fox Trilogy\"",
                 "Source": "Chntel Libury",
-                "Value": "\""
+                "Value": "\"\""
             },
             {
                 "Description": "Dates",
@@ -21082,37 +21082,37 @@
             {
                 "Description": "Snack basket [B-day gift]",
                 "Source": "Stavros Nicolaou",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Magubane",
                 "Source": "Anne Pratt, Totsie Mamela",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Cuflinks with USA logo",
                 "Source": "conference]",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "White oval platter",
                 "Source": "Katainen",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Struggle 1982-2012]",
                 "Source": "Workers",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "COHIBA MADURO 5, 25 Secretos",
                 "Source": "Vice President of Cuba",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "and PM Erdogan; 1 Clay pot with gold",
                 "Source": "Spouse",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Learning abour yourself and others",
@@ -21122,17 +21122,17 @@
             {
                 "Description": "avocado cooking oil, juices &amp; avocados",
                 "Source": "Corporation - IDC",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Blue &amp; white mug",
                 "Source": "NBC]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Rupert &amp; Rothchild",
                 "Source": "of China to SA",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Bank Corporate Art Collection",
@@ -21152,16 +21152,16 @@
             {
                 "Description": "Statue of a mine-worker",
                 "Source": "Workers - NUM",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Day",
                 "Source": "GCIS",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Gleisweiler Holle",
-                "Source": "\"",
+                "Source": "GCIS",
                 "Value": "Unknown"
             }
         ],
@@ -21682,22 +21682,22 @@
             },
             {
                 "Description": "3 Books",
-                "Source": "\"",
+                "Source": "Susi",
                 "Value": "R551"
             },
             {
                 "Description": "Chess set",
-                "Source": "\"",
+                "Source": "Susi",
                 "Value": "R500"
             },
             {
                 "Description": "Herbal supplements",
-                "Source": "\"",
+                "Source": "Susi",
                 "Value": "R350"
             },
             {
                 "Description": "Walnut seeds",
-                "Source": "\"",
+                "Source": "Susi",
                 "Value": "R120"
             },
             {
@@ -21901,13 +21901,13 @@
             },
             {
                 "Name of Company": "Welkom Yizani",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "430",
                 "Nominal Value": "R100 each"
             },
             {
                 "Name of Company": "Bard Publishers",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "2 000",
                 "Nominal Value": "R10 each"
             }
@@ -22150,42 +22150,42 @@
             {
                 "Description": "Cow Leather mats; Wooden sculpture",
                 "Source": "Garankuwa",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "1 Blanket",
                 "Source": "Cradock in East London",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "one hand back",
                 "Source": "in East London",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "2 Paintings [big]",
                 "Source": "Vietnam",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "1 Memory stick",
                 "Source": "impact on business",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "1 Ndebele blanket",
                 "Source": "Limpopo",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "3 African cups",
                 "Source": "Province (SAPS)",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Big framed photo",
                 "Source": "SAPS",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -22378,12 +22378,12 @@
             },
             {
                 "Name of Company": "Vibrant Veterans Diamond",
-                "Nature": "\"",
+                "Nature": "Mineral Rights",
                 "No": "30%"
             },
             {
                 "Name of Company": "Vibrant Veterans Base",
-                "Nature": "\"",
+                "Nature": "Mineral Rights",
                 "No": "30%"
             },
             {
@@ -22581,31 +22581,31 @@
             },
             {
                 "Name of Company": "Anglogold",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "28",
                 "Nominal Value": "R7 921"
             },
             {
                 "Name of Company": "British American Tobacco",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "778",
                 "Nominal Value": "R341 363"
             },
             {
                 "Name of Company": "Richemont CFR",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "13 250",
                 "Nominal Value": "R617 318"
             },
             {
                 "Name of Company": "DRD Gold",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1 000",
                 "Nominal Value": "R5 060"
             },
             {
                 "Name of Company": "Goldfields",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "250",
                 "Nominal Value": "R26 785"
             },
@@ -22617,43 +22617,43 @@
             },
             {
                 "Name of Company": "Naspers",
-                "Nature": "\"",
+                "Nature": "'",
                 "No": "452",
                 "Nominal Value": "R203 355"
             },
             {
                 "Name of Company": "Reinet",
-                "Nature": "\"",
+                "Nature": "'",
                 "No": "5 200",
                 "Nominal Value": "R79 352"
             },
             {
                 "Name of Company": "Mittal",
-                "Nature": "\"",
+                "Nature": "'",
                 "No": "168",
                 "Nominal Value": "R7 510"
             },
             {
                 "Name of Company": "Exxaro",
-                "Nature": "\"",
+                "Nature": "'",
                 "No": "15",
                 "Nominal Value": "R2 532"
             },
             {
                 "Name of Company": "Sovereign Food",
-                "Nature": "\"",
+                "Nature": "'",
                 "No": "216",
                 "Nominal Value": "R875"
             },
             {
                 "Name of Company": "Sappi",
-                "Nature": "\"",
+                "Nature": "'",
                 "No": "125",
                 "Nominal Value": "R3 106"
             },
             {
                 "Name of Company": "Satrix Divi",
-                "Nature": "\"",
+                "Nature": "'",
                 "No": "2 000",
                 "Nominal Value": "R3 940"
             }
@@ -22744,7 +22744,7 @@
             {
                 "Description": "Bott. of wine",
                 "Source": "MEC van Rensburg",
-                "Value": "\""
+                "Value": "R150 [Approx]"
             },
             {
                 "Description": "Decorative gift",
@@ -23597,22 +23597,22 @@
             {
                 "Description": "1 Night accommodation [Official trip]",
                 "Source": "Washington USA",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Wall clock",
                 "Source": "Mr W Britz",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Jazz Festival tickets",
                 "Source": "Millionsure",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "3 Nights accommodation [Official trip]",
                 "Source": "Rome, Italy",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -23940,52 +23940,52 @@
             {
                 "Description": "Hotel stay during Congress [WFD]",
                 "Source": "DEAFSA",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Jazz Festival tickets [2]",
                 "Source": "Telkom",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Rugby tickets [2]",
                 "Source": "Telkom",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Coffee cup set [2]",
                 "Source": "Columbia Deaf Association",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "China doll",
                 "Source": "Deaf",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Clock",
                 "Source": "Pakistan Deaf Association",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Clock",
                 "Source": "Malaysia Deaf Association",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "DSTV Decoder",
                 "Source": "Multichoice",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Turkey plate plaque",
                 "Source": "Deaf",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Silver/Gold spoon",
                 "Source": "Deaf",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -24586,13 +24586,13 @@
             },
             {
                 "Name of Company": "MTN",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100",
                 "Nominal Value": "+-R3 000"
             },
             {
                 "Name of Company": "Eyethu Nedbank",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "90",
                 "Nominal Value": "+-R10 000"
             },
@@ -25143,7 +25143,7 @@
             },
             {
                 "Description": "Thai silk scarf",
-                "Source": "\"",
+                "Source": "Indonesia",
                 "Value": "+-R180"
             },
             {
@@ -25394,31 +25394,31 @@
             },
             {
                 "Name of Company": "Nedbank Eyethu",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "Lumpsum",
                 "Nominal Value": "R20 000"
             },
             {
                 "Name of Company": "Phuthuma Nati",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "250",
                 "Nominal Value": "R2 500"
             },
             {
                 "Name of Company": "Yetani",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "250",
                 "Nominal Value": "R2 500"
             },
             {
                 "Name of Company": "Sawima",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "Lumpsum",
                 "Nominal Value": "R5 000"
             },
             {
                 "Name of Company": "Investment",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "60",
                 "Nominal Value": "Unknown"
             }
@@ -25562,22 +25562,22 @@
             },
             {
                 "Description": "Residence",
-                "Extent": "\"",
+                "Extent": "Normal",
                 "Location": "Margate"
             },
             {
                 "Description": "Site",
-                "Extent": "\"",
+                "Extent": "Normal",
                 "Location": "Flagstaff"
             },
             {
                 "Description": "Sites",
-                "Extent": "\"",
+                "Extent": "Normal",
                 "Location": "Maluti"
             },
             {
                 "Description": "Royal Residence",
-                "Extent": "\"",
+                "Extent": "Normal",
                 "Location": "Kwa-Bhala, Flagstaff"
             }
         ],
@@ -26452,23 +26452,23 @@
             },
             {
                 "Name of Company": "Old Mutual",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "300"
             },
             {
                 "Name of Company": "Sanlam",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "270"
             },
             {
                 "Name of Company": "Mphepetwa Trust",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100",
                 "Nominal Value": "R1 000"
             },
             {
                 "Name of Company": "Anjuscene",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "35",
                 "Nominal Value": "R1"
             }
@@ -26793,7 +26793,7 @@
             },
             {
                 "Name of Company": "Welkom Yizani",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "200",
                 "Nominal Value": "R5 000"
             }
@@ -27505,7 +27505,7 @@
             },
             {
                 "Name of Company": "Sanlam",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "342",
                 "Nominal Value": "R6 000.00"
             },
@@ -27889,31 +27889,31 @@
             {
                 "Description": "Tissue box",
                 "Source": "Amb. of South Africa to Iran",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Consol Solar Light",
                 "Source": "Exxaro",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Gift basket",
                 "Source": "NERSA",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Business card holder",
                 "Source": "Rosatom",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "holder",
                 "Source": "Global Gold",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "plate",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Gemstone necklace Handmade tapestry  \"",
@@ -27922,47 +27922,47 @@
             {
                 "Description": "Scarf",
                 "Source": "India",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Indian silk scarf",
                 "Source": "Co-Chairman of Cll - India",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "AG Centenary gift",
                 "Source": "Auditor-General's office",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Plaque: First Women in Parliament",
                 "Source": "Foundation",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Project; Modietsane [Basotho hat]",
                 "Source": "Resources, Lesotho",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "chips, mineral water &amp; sweets",
                 "Source": "Resources, Lesotho",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "computer mouse and mouse pad",
                 "Source": "Administration of China",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Brand\" by Adam Lashnisky &amp; Scarf",
                 "Source": "Engen",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "Dried figs [fruit] and scarf",
                 "Source": "President of Turkey",
-                "Value": "\""
+                "Value": "'"
             },
             {
                 "Description": "small silver bowl",
@@ -27991,17 +27991,17 @@
             },
             {
                 "Name of Company": "Nathi]",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "2 543"
             },
             {
                 "Name of Company": "Vodacom [Yebo Yethu]",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "200"
             },
             {
                 "Name of Company": "Sasol [Inzalo]",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "243"
             }
         ],
@@ -28555,7 +28555,7 @@
             },
             {
                 "Name of Company": "Tlhakalatlou [Dormant]",
-                "Nature": "\"",
+                "Nature": "Shares",
                 "No": "50%"
             }
         ],
@@ -29173,37 +29173,37 @@
             {
                 "Description": "Pens",
                 "Source": "in PE",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Practice",
                 "Source": "BUSA",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Clark",
                 "Source": "Free State",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Whisky",
                 "Source": "Travel with Flair",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "2012 Diary",
                 "Source": "Mr Pickey Dass",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Jim Carrey and the Bangbang Club]",
                 "Source": "Videovision",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Leather cover for passport",
                 "Source": "Chinese Delegation",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -29368,7 +29368,7 @@
             },
             {
                 "Name of Company": "MTN Zakhele",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100"
             },
             {
@@ -29764,25 +29764,25 @@
             },
             {
                 "Name of Company": "Telkom",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "+-100",
                 "Nominal Value": "+-R10 000"
             },
             {
                 "Name of Company": "Sasol",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "+-240",
                 "Nominal Value": "+-R14 000"
             },
             {
                 "Name of Company": "Old Mutual",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "+-100",
                 "Nominal Value": "+-R500"
             },
             {
                 "Name of Company": "Sanlam",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "+-320",
                 "Nominal Value": "+-R1 000"
             }
@@ -30449,13 +30449,13 @@
             },
             {
                 "Name of Company": "Goldfields",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "35",
                 "Nominal Value": "R3 000"
             },
             {
                 "Name of Company": "Urone",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "144",
                 "Nominal Value": "R2000"
             },
@@ -30808,17 +30808,17 @@
             {
                 "Description": "Book in IT",
                 "Source": "Dr Ali",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Tickets - Jazz Festival",
                 "Source": "SAA &amp; Jeremy",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Champagne",
                 "Source": "Engel &amp; Volker",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -30984,12 +30984,12 @@
             {
                 "Description": "Leadership [A legend in his life time]",
                 "Source": "and Daryl Swanepoel",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "and Rural Development",
                 "Source": "University of Fort Hare",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "silver vuvuzela shaped pen"
@@ -31013,32 +31013,32 @@
             {
                 "Description": "Writing pad, silver pen, keyring",
                 "Source": "Anglo American",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Umbrella, calendar, memory stick",
                 "Source": "Group 5",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Chocolates",
                 "Source": "Travel with Flair",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Calendar 2012",
                 "Source": "Sappi",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Videovision and Entertainment",
                 "Source": "Anant Singh - DVD's",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Cooler and Logo",
                 "Source": "Northern Cape COGHSTA",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Wine gift set of 3",
@@ -31053,7 +31053,7 @@
             {
                 "Description": "Red &amp; Black box containing tea",
                 "Source": "Chinese delegation",
-                "Value": "\""
+                "Value": "R239"
             },
             {
                 "Description": "Johnny Walker black label",
@@ -31335,7 +31335,7 @@
             },
             {
                 "Name of Company": "Sanlam",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "Nominal Value": "R1 650.00"
             },
             {
@@ -31471,28 +31471,28 @@
             },
             {
                 "Description": "House",
-                "Extent": "\"",
-                "Location": "\""
+                "Extent": "Normal",
+                "Location": "Kimberley"
             },
             {
                 "Description": "House",
-                "Extent": "\"",
-                "Location": "\""
+                "Extent": "Normal",
+                "Location": "Kimberley"
             },
             {
                 "Description": "House",
-                "Extent": "\"",
-                "Location": "\""
+                "Extent": "Normal",
+                "Location": "Kimberley"
             },
             {
                 "Description": "House",
-                "Extent": "\"",
-                "Location": "\""
+                "Extent": "Normal",
+                "Location": "Kimberley"
             },
             {
                 "Description": "House",
-                "Extent": "\"",
-                "Location": "\""
+                "Extent": "Normal",
+                "Location": "Kimberley"
             },
             {
                 "Description": "Erf 834",
@@ -31944,7 +31944,7 @@
             {
                 "Description": "B-day gifts",
                 "Source": "Dr A Stander",
-                "Value": "\""
+                "Value": "Less than R350"
             },
             {
                 "Description": "Gibran",
@@ -31954,42 +31954,42 @@
             {
                 "Description": "1 Zakumi tie",
                 "Source": "Mr ED Shavtu",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Book \"In Pas met Passie\"",
                 "Source": "Ms A Smit",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Small desktop planner",
                 "Source": "Group",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Glass blowl",
                 "Source": "Amb of the Slovak Republic",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Shawl",
                 "Source": "Pakistan",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "of Justice",
                 "Source": "Speaker of Panama",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Sketch of Walter and Albertina Sisulu",
                 "Source": "Artist - Mr Cul Ning",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Offical platter",
                 "Source": "Amb. of Iraq",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Maharashtra",
@@ -31999,12 +31999,12 @@
             {
                 "Description": "Karnataka\"",
                 "Source": "Official visit to Indian",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Book \"The State of India- Mararahtra\"",
                 "Source": "Official visit to India",
-                "Value": "\""
+                "Value": "Unknown"
             }
         ],
         "person": {
@@ -32039,11 +32039,11 @@
             },
             {
                 "Name of Company": "MTN",
-                "Nature": "\""
+                "Nature": "Ordinary"
             },
             {
                 "Name of Company": "Firstrand Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "450",
                 "Nominal Value": "R19 280"
             },
@@ -32053,26 +32053,26 @@
             },
             {
                 "Name of Company": "Stanlib Multi-Manager Equity",
-                "Nature": "\""
+                "Nature": "Investment"
             },
             {
                 "Name of Company": "Fairbain Capital",
-                "Nature": "\""
+                "Nature": "Investment"
             },
             {
                 "Name of Company": "Fund A"
             },
             {
                 "Name of Company": "Market Fund",
-                "Nature": "\""
+                "Nature": "Investment"
             },
             {
                 "Name of Company": "BOE",
-                "Nature": "\""
+                "Nature": "Investment"
             },
             {
                 "Name of Company": "Investec PLC",
-                "Nature": "\""
+                "Nature": "Investment"
             },
             {
                 "Name of Company": "Companies",
@@ -32187,22 +32187,22 @@
             {
                 "Description": "Painting",
                 "Source": "Mozambique",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Watch",
                 "Source": "Minister of Defence - Oman",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Watch",
                 "Source": "Dhabi",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Painting",
                 "Source": "Brazzaville",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Bronze springbok in glass frame",
@@ -32217,12 +32217,12 @@
             {
                 "Description": "1 Bottle of wine",
                 "Source": "Minister of Agriculture",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Dress",
                 "Source": "Cuban Embassy",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Wooden plaque",
@@ -32671,15 +32671,15 @@
             },
             {
                 "Directorship/Partnership": "Blignaut Cagwe and Jones",
-                "Type of Business": "\""
+                "Type of Business": "Private Co."
             },
             {
                 "Directorship/Partnership": "Afroserv Maintenance",
-                "Type of Business": "\""
+                "Type of Business": "Private Co."
             },
             {
                 "Directorship/Partnership": "Burdett properties",
-                "Type of Business": "\""
+                "Type of Business": "Private Co."
             },
             {
                 "Directorship/Partnership": "Consultative Council",
@@ -32699,27 +32699,27 @@
             },
             {
                 "Directorship/Partnership": "Menzies Aviation [SA] [Cargo]",
-                "Type of Business": "\""
+                "Type of Business": "Private co."
             },
             {
                 "Directorship/Partnership": "Mottingham Traders",
-                "Type of Business": "\""
+                "Type of Business": "Private co."
             },
             {
                 "Directorship/Partnership": "Rapitrade 644",
-                "Type of Business": "\""
+                "Type of Business": "Private co."
             },
             {
                 "Directorship/Partnership": "Sizani AH KEE Holdings",
-                "Type of Business": "\""
+                "Type of Business": "Private co."
             },
             {
                 "Directorship/Partnership": "[Eastern Cape]",
-                "Type of Business": "\""
+                "Type of Business": "Private co."
             },
             {
                 "Directorship/Partnership": "SS Management Services",
-                "Type of Business": "\""
+                "Type of Business": "Private co."
             },
             {
                 "Directorship/Partnership": "Fuelmax Logistics",
@@ -33403,7 +33403,7 @@
             },
             {
                 "Name of Company": "9Pty) Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "5"
             }
         ],
@@ -34118,19 +34118,19 @@
             },
             {
                 "Name of Company": "African Bank (Theba)",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "200",
                 "Nominal Value": "R2 000.00"
             },
             {
                 "Name of Company": "Safari Centre (Pty) Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "300",
                 "Nominal Value": "R300.00"
             },
             {
                 "Name of Company": "Casbah Cinema (Pty) Ltd",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "30",
                 "Nominal Value": "R30.00"
             },
@@ -34165,19 +34165,19 @@
             },
             {
                 "Name of Company": "Sasol Limited",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "25",
                 "Nominal Value": "R9 150.00"
             },
             {
                 "Name of Company": "Yebo Yethu Limited",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100",
                 "Nominal Value": "R2 500.00"
             },
             {
                 "Name of Company": "Yarningdale Share Block",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "3"
             },
             {
@@ -34299,37 +34299,37 @@
             },
             {
                 "Name of Company": "MMI Holdings",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "312",
                 "Nominal Value": "R17.90ps"
             },
             {
                 "Name of Company": "Firstrand",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1 848",
                 "Nominal Value": "R27.85ps"
             },
             {
                 "Name of Company": "Discovery Health",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "104",
                 "Nominal Value": "R52.18ps"
             },
             {
                 "Name of Company": "Scarlet Ibis Investments 282",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "1",
                 "Nominal Value": "R500 000.00ps"
             },
             {
                 "Name of Company": "Outeniqua Plantations",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100",
                 "Nominal Value": "R1.00ps"
             },
             {
                 "Name of Company": "Outeniqua Promotions",
-                "Nature": "\"",
+                "Nature": "Ordinary",
                 "No": "100",
                 "Nominal Value": "R1.00ps"
             }
@@ -34631,17 +34631,17 @@
             {
                 "Description": "Royal gown",
                 "Source": "[Cameroon]",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Scarf x 2",
                 "Source": "Amb. in India",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Honorary Award",
                 "Source": "Indian Government",
-                "Value": "\""
+                "Value": "Unknown"
             },
             {
                 "Description": "Crafted ashtray",
@@ -34651,7 +34651,7 @@
             {
                 "Description": "Cradle of human kind gift",
                 "Source": "MEC Mahlangu",
-                "Value": "\""
+                "Value": "R250"
             }
         ],
         "person": {
@@ -35439,7 +35439,7 @@
             },
             {
                 "Directorship/Partnership": "Melody Hills Trading 196",
-                "Type of Business": "\""
+                "Type of Business": "Deregistered"
             },
             {
                 "Directorship/Partnership": "Nkonka Energy Resources"
@@ -35450,7 +35450,7 @@
             },
             {
                 "Directorship/Partnership": "uncedo Lwamakhusikizi Trading",
-                "Type of Business": "\""
+                "Type of Business": "Deregistered"
             },
             {
                 "Directorship/Partnership": "V &amp; P Investment"

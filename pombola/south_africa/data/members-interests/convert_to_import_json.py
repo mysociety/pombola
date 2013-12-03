@@ -25,6 +25,11 @@ class Converter(object):
 
     groupings = []
 
+    ditto_marks = [
+        "\"",
+        "\" \"",
+    ]
+
     slug_corrections = {
         "amos-matila": "amos-gerald-matila",
         "andre-gaum": "andre-hurtley-gaum",
@@ -205,10 +210,27 @@ class Converter(object):
                     for key in entry.keys():
                         entry[key.strip()] = entry.pop(key).strip()
 
-
                     if entry.get('No') == 'Nothing to disclose':
                         del entry['No']
 
+                # Need to be smart about values that are just '"' as these are dittos of the previous entries.
+                previous_entries = []
+                for entry in entries:
+                    if len(previous_entries):
+                        for key in entry.keys():
+                            if entry[key] in self.ditto_marks:
+                                for previous in reversed(previous_entries):
+                                    if key in previous:
+                                        entry[key] = previous[key]
+                                        break
+                                if entry[key] in self.ditto_marks:
+                                    # data is messed up, move on.
+                                    sys.stderr.write("----------- Could not find previous entry for ditto mark of '{}'\n".format(key))
+                                    sys.stderr.write(str(previous_entries) + "\n")
+                                    sys.stderr.write(str(entry) + "\n")
+                    previous_entries.append(entry)
+
+                # Filter out entries that are empty
                 entries = [ e for e in entries if len(e) ]
 
                 if len(entries) == 0:
