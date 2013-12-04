@@ -6,6 +6,11 @@ from sorl.thumbnail.admin import AdminImageMixin
 from . import models
 
 
+class SlideAdmin(admin.ModelAdmin):
+    list_display = ('id', 'content_object', 'content_type', 'sort_order', 'is_active')
+    list_filter = ('is_active', )
+
+
 class ImageContentAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('thumbnail', 'caption')
     search_fields = ('caption', )
@@ -20,4 +25,5 @@ class ImageContentAdmin(AdminImageMixin, admin.ModelAdmin):
 
 
 # Add these to the admin
+admin.site.register( models.Slide, SlideAdmin)
 admin.site.register( models.ImageContent, ImageContentAdmin)
