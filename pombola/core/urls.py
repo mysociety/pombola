@@ -19,12 +19,12 @@ person_patterns = patterns('pombola.core.views',
         # 'url': reverse('position', kwargs={'slug':'mp'}),
         RedirectView.as_view(url='/position/mp', permanent=True),
     ),
-                           
+
     # featured person ajax load
     url(r'^featured/((?P<direction>(before|after))/)?(?P<current_slug>[-\w]+)',
-        'featured_person', 
+        'featured_person',
         name='featured_person'),
-    
+
     url(r'^(?P<slug>[-\w]+)/$', PersonDetail.as_view(), name='person'),
 
   )
@@ -50,7 +50,7 @@ place_patterns = patterns('pombola.core.views',
     url( r'^is/(?P<slug>[-\w]+)/(?P<session_slug>[-\w]+)/?', PlaceKindList.as_view(), name='place_kind'     ),
 
     url(r'^(?P<slug>[-\w]+)/$',
-        PlaceDetailView.as_view(),      
+        PlaceDetailView.as_view(),
         name='place'),
 
     # redirect .../candidates to .../aspirants so that the URL wording matches
@@ -80,7 +80,7 @@ organisation_patterns = patterns('pombola.core.views',
     url(r'^all/', OrganisationList.as_view(), name='organisation_list'),
     url(r'^is/(?P<slug>[-\w]+)/', OrganisationKindList.as_view(), name='organisation_kind'),
     url(r'^(?P<slug>[-\w]+)/$', OrganisationDetailView.as_view(), name='organisation'),
-)    
+)
 
 # ugly, must be a better way
 for sub_page in ['comments', 'contact_details', 'people']:
@@ -117,8 +117,12 @@ urlpatterns += patterns('pombola.core.views',
     url(r'^status/memcached/',       'memcached_status', name='memcached_status'),
 )
 
+# Make it easy to see the various error pages without having to fiddle with the
+# STAGING settings.
 urlpatterns += patterns('',
     url(r'^status/down/', TemplateView.as_view(template_name='down.html') ),
+    url(r'^status/404/',  TemplateView.as_view(template_name='404.html') ),
+    url(r'^status/500/',  TemplateView.as_view(template_name='500.html') ),
 )
 
 
