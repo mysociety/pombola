@@ -227,8 +227,8 @@ class Converter(object):
                                     if key in previous:
                                         entry[key] = previous[key]
                                         break
+                                # Replacement may not have been found, warn
                                 if entry[key] in self.ditto_marks:
-                                    # data is messed up, move on.
                                     sys.stderr.write("----------- Could not find previous entry for ditto mark of '{}'\n".format(key))
                                     sys.stderr.write(str(previous_entries) + "\n")
                                     sys.stderr.write(str(entry) + "\n")
