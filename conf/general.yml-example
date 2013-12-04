@@ -113,6 +113,7 @@ OPTIONAL_APPS:
   # - speeches   # ZA
   # - za_hansard # ZA
   # - pombola.interests_register # ZA
+  # - pombola.spinner # ZA
   # - votematch
   
 
