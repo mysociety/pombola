@@ -152,7 +152,7 @@ class LatLonDetailLocalView(LatLonDetailBaseView):
 
 class SAPlaceDetailView(PlaceDetailView):
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self,**kwargs):
         """
         Get back the people for this place in separate lists so they can
         be displayed separately on the place detail page.
@@ -211,12 +211,21 @@ class SAOrganisationDetailView(OrganisationDetailView):
         context = super(SAOrganisationDetailView, self).get_context_data(**kwargs)
 
         # Get all the parties represented in this house.
-        people_in_house = models.Person.objects.filter(position__organisation=self.object)
-        parties = models.Organisation.objects.filter(
-            kind__slug='party',
-            position__person__in=people_in_house,
-        ).annotate(person_count=Count('position__person'))
+        people_in_house = (
+            models.Person.objects
+            .filter(position__organisation=self.object)
+            .prefetch_related('position_set', 'organization', 'images', 'parties')
+            )
+        parties = (
+            models.Organisation.objects.filter(
+                kind__slug='party',
+                position__person__in=people_in_house,
+            )
+            .annotate(person_count=Count('position__person'))
+            )
         total_people = sum(map(lambda x: x.person_count, parties))
+
+        parties = parties.prefetch_related('position_set', 'position_set__person', 'position_set__person__images', 'place_set')
 
         # Calculate the % of the house each party occupies.
         for party in parties:
