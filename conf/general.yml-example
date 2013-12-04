@@ -112,6 +112,7 @@ OPTIONAL_APPS:
   # - place_data # KE
   # - speeches   # ZA
   # - za_hansard # ZA
+  # - pombola.interests_register # ZA
   # - votematch
   
 
