@@ -19,7 +19,11 @@ class SlideManager(models.Manager):
         return SlideQuerySet(self.model, using=self._db)
 
     def random_slide(self):
-        return self.all().active().order_by('?')[0]
+        try:
+            return self.all().active().order_by('?')[0]
+        except IndexError:
+            # There are no slides to can be returned.
+            return None
 
 
 class Slide(models.Model):

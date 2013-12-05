@@ -38,3 +38,12 @@ class ModelTest(TestCase):
             self.assertTrue(slide.id in seen_slide_ids)
         for slide in Slide.objects.all().inactive():
             self.assertFalse(slide.id in seen_slide_ids)
+
+
+        # Delete all the slides and then check that random_slide returns None
+        Slide.objects.all().delete()
+
+        self.assertEqual(
+            Slide.objects.random_slide(),
+            None
+        )
