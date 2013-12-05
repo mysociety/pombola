@@ -3,6 +3,9 @@ from django.db import models
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 
+from django.template.loader import get_template, TemplateDoesNotExist
+from django.template.defaultfilters import slugify
+
 from sorl.thumbnail import ImageField
 
 
@@ -27,6 +30,9 @@ class SlideManager(models.Manager):
 
 
 class Slide(models.Model):
+
+    template_name_str_template = "spinner/slides/%s.html"
+
     sort_order = models.IntegerField()
     is_active = models.BooleanField(default=True)
 
@@ -39,6 +45,22 @@ class Slide(models.Model):
 
     def __unicode__(self):
         return u"Slide of '{}'".format( self.content_object )
+
+    @property
+    def required_template_name(self):
+        return self.template_name_str_template % slugify(self.content_type)
+
+    @property
+    def template_name(self):
+        template_name = self.required_template_name
+
+        try:
+            # Use the following line to check that there is a template that can be used, otherwise use the default template.
+            get_template(template_name)
+            return template_name
+        except TemplateDoesNotExist:
+            return self.template_name_str_template % "default"
+
 
     class Meta(object):
         ordering = ( 'sort_order', 'id' )
