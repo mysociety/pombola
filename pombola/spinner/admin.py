@@ -24,6 +24,12 @@ class ImageContentAdmin(AdminImageMixin, admin.ModelAdmin):
     thumbnail.allow_tags = True
 
 
+class QuoteContentAdmin(admin.ModelAdmin):
+    search_fields = ('quote', 'attribution')
+    list_display = ('id', 'quote', 'attribution')
+
+
 # Add these to the admin
 admin.site.register( models.Slide, SlideAdmin)
 admin.site.register( models.ImageContent, ImageContentAdmin)
+admin.site.register( models.QuoteContent, QuoteContentAdmin)

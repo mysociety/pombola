@@ -35,3 +35,19 @@ class ImageContent(models.Model):
 
     class Meta(object):
         verbose_name_plural = 'images'
+
+
+class QuoteContent(models.Model):
+    """
+    Model for image content for the spinner.
+    """
+    quote = models.TextField()
+    attribution = models.CharField(max_length=300)
+    url = models.URLField()
+
+    def __unicode__(self):
+        return self.quote
+
+    class Meta(object):
+        verbose_name_plural = 'quotes'
+
