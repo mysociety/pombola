@@ -6,6 +6,22 @@ from django.contrib.contenttypes.models import ContentType
 from sorl.thumbnail import ImageField
 
 
+class SlideQuerySet(models.query.QuerySet):
+    def active(self):
+        return self.filter(is_active=True)
+
+    def inactive(self):
+        return self.filter(is_active=False)
+
+
+class SlideManager(models.Manager):
+    def get_query_set(self):
+        return SlideQuerySet(self.model, using=self._db)
+
+    def random_slide(self):
+        return self.all().active().order_by('?')[0]
+
+
 class Slide(models.Model):
     sort_order = models.IntegerField()
     is_active = models.BooleanField(default=True)
@@ -15,8 +31,10 @@ class Slide(models.Model):
     object_id      = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
+    objects = SlideManager()
+
     def __unicode__(self):
-        return u"Slide of '{}'".format(str(self.content_object))
+        return u"Slide of '{}'".format( self.content_object )
 
     class Meta(object):
         ordering = ( 'sort_order', 'id' )

@@ -1,16 +1,40 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
 
+from .models import Slide
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class ModelTest(TestCase):
+
+    fixtures = ['test_data.json']
+
+    def test_active(self):
+        self.assertEqual(
+            set(
+                Slide.objects.all().active().values_list('id', flat=True)
+            ),
+            set([1, 3])
+        )
+
+    def test_inactive(self):
+        self.assertEqual(
+            set(
+                Slide.objects.all().inactive().values_list('id', flat=True)
+            ),
+            set([2])
+        )
+
+    def test_random_slide(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Test that we get back a random active slide. Do this by running many
+        times and then checking that all activo slides are in the returned data.
         """
-        self.assertEqual(1 + 1, 2)
+
+        seen_slide_ids = set()
+
+        for i in range(100):
+            slide = Slide.objects.random_slide()
+            seen_slide_ids.add(slide.id)
+
+        for slide in Slide.objects.all().active():
+            self.assertTrue(slide.id in seen_slide_ids)
+        for slide in Slide.objects.all().inactive():
+            self.assertFalse(slide.id in seen_slide_ids)
