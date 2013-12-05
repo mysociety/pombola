@@ -72,3 +72,29 @@ class ModelTest(TestCase):
             'spinner/slides/default.html'
         )
 
+    def test_after(self):
+
+        # get the two active slides
+        slide_1 = Slide.objects.all().active()[0]
+        slide_2 = Slide.objects.all().active()[1]
+
+        # Check that after returns the next one
+        self.assertEqual(Slide.objects.after(slide_1), slide_2)
+        self.assertEqual(Slide.objects.after(slide_2), slide_1)
+
+        # Remove one slide and check that the return is same as given.
+        slide_1.is_active = False
+        slide_1.save()
+        self.assertEqual(Slide.objects.after(slide_1), slide_2)
+        self.assertEqual(Slide.objects.after(slide_2), slide_2)
+
+        # Check that passing None in leads to a slide being returned
+        self.assertEqual(Slide.objects.after(None), slide_2)
+
+        # Make all the slides inactive and check that none are returned.
+        Slide.objects.all().active().update(is_active=False)
+        self.assertEqual(Slide.objects.after(slide_1), None)
+        self.assertEqual(Slide.objects.after(slide_2), None)
+        self.assertEqual(Slide.objects.after(None), None)
+
+
