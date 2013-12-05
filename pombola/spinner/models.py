@@ -28,7 +28,7 @@ class SlideManager(models.Manager):
             # There are no slides to can be returned.
             return None
 
-    def after(self, slide=None):
+    def slide_after(self, slide=None):
         """
         Return the slide after this one, or first slide if None, or None if no
         slides active. Handles looping at the end.
