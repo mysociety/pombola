@@ -104,6 +104,13 @@ if settings.ENABLED_FEATURES['votematch']:
     )
 
 
+# spinner
+if settings.ENABLED_FEATURES['spinner']:
+    urlpatterns += patterns('',
+        (r'^spinner/', include('pombola.spinner.urls')),
+    )
+
+
 # Everything else goes to core
 urlpatterns += patterns('',
     (r'^', include('pombola.core.urls')),

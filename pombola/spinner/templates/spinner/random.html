@@ -1,0 +1,5 @@
+{% load spinner %}
+
+{% spinner_random_slide as slide %}
+
+{% include "spinner/display.html" with slide=slide only %}

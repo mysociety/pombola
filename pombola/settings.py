@@ -42,7 +42,7 @@ config_file = os.path.join( base_dir, 'conf', 'general.yml' )
 config = yaml.load( open(config_file, 'r') )
 
 # Configure the optional apps
-ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch', 'speeches' )
+ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch', 'speeches', 'spinner' )
 OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS' ) or [] )
 if 'speeches' in OPTIONAL_APPS: # Add its dependent apps
     OPTIONAL_APPS = ('django_select2', 'django_bleach', 'popit', 'instances', 'popit_resolver') + OPTIONAL_APPS
