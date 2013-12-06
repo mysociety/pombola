@@ -21,43 +21,45 @@ class SlideManager(models.Manager):
     def get_query_set(self):
         return SlideQuerySet(self.model, using=self._db)
 
-    def random_slide(self):
-        try:
-            return self.all().active().order_by('?')[0]
-        except IndexError:
-            # There are no slides to can be returned.
-            return None
+    # Commented out as unused, but possibly useful in future
 
-    def slide_after(self, slide=None):
-        """
-        Return the slide after this one, or first slide if None, or None if no
-        slides active. Handles looping at the end.
-        """
-
-        # We only care about the active slides.
-        all_active = self.all().active().order_by('sort_order', 'id')
-
-        # If there is no slide to compare to just return the first one, or None
-        if slide:
-
-            # Filter for those of equal or greater sort_order.
-            slides = all_active.filter(sort_order__gte=slide.sort_order)
-
-            # If the first one has a higher sort_order return it
-            if slides.count():
-                if slides[0].sort_order != slide.sort_order:
-                    return slides[0]
-                else:
-                    id_filtered = slides.filter(id__gt=slide.id)
-                    if id_filtered.count():
-                        # We have a slide of equal sort_order, but greater id.
-                        return id_filtered[0]
-
-        # Could not find a slide above. Return first one we can find, or None.
-        try:
-            return all_active[0]
-        except IndexError:
-            return None
+    # def random_slide(self):
+    #     try:
+    #         return self.all().active().order_by('?')[0]
+    #     except IndexError:
+    #         # There are no slides to can be returned.
+    #         return None
+    #
+    # def slide_after(self, slide=None):
+    #     """
+    #     Return the slide after this one, or first slide if None, or None if no
+    #     slides active. Handles looping at the end.
+    #     """
+    #
+    #     # We only care about the active slides.
+    #     all_active = self.all().active().order_by('sort_order', 'id')
+    #
+    #     # If there is no slide to compare to just return the first one, or None
+    #     if slide:
+    #
+    #         # Filter for those of equal or greater sort_order.
+    #         slides = all_active.filter(sort_order__gte=slide.sort_order)
+    #
+    #         # If the first one has a higher sort_order return it
+    #         if slides.count():
+    #             if slides[0].sort_order != slide.sort_order:
+    #                 return slides[0]
+    #             else:
+    #                 id_filtered = slides.filter(id__gt=slide.id)
+    #                 if id_filtered.count():
+    #                     # We have a slide of equal sort_order, but greater id.
+    #                     return id_filtered[0]
+    #
+    #     # Could not find a slide above. Return first one we can find, or None.
+    #     try:
+    #         return all_active[0]
+    #     except IndexError:
+    #         return None
 
 
 class Slide(models.Model):

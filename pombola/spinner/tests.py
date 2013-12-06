@@ -22,31 +22,33 @@ class ModelTest(TestCase):
             set([2])
         )
 
-    def test_random_slide(self):
-        """
-        Test that we get back a random active slide. Do this by running many
-        times and then checking that all activo slides are in the returned data.
-        """
+    # Commented out as unused, but possibly useful in future
 
-        seen_slide_ids = set()
-
-        for i in range(100):
-            slide = Slide.objects.random_slide()
-            seen_slide_ids.add(slide.id)
-
-        for slide in Slide.objects.all().active():
-            self.assertTrue(slide.id in seen_slide_ids)
-        for slide in Slide.objects.all().inactive():
-            self.assertFalse(slide.id in seen_slide_ids)
-
-
-        # Delete all the slides and then check that random_slide returns None
-        Slide.objects.all().delete()
-
-        self.assertEqual(
-            Slide.objects.random_slide(),
-            None
-        )
+    # def test_random_slide(self):
+    #     """
+    #     Test that we get back a random active slide. Do this by running many
+    #     times and then checking that all activo slides are in the returned data.
+    #     """
+    #
+    #     seen_slide_ids = set()
+    #
+    #     for i in range(100):
+    #         slide = Slide.objects.random_slide()
+    #         seen_slide_ids.add(slide.id)
+    #
+    #     for slide in Slide.objects.all().active():
+    #         self.assertTrue(slide.id in seen_slide_ids)
+    #     for slide in Slide.objects.all().inactive():
+    #         self.assertFalse(slide.id in seen_slide_ids)
+    #
+    #
+    #     # Delete all the slides and then check that random_slide returns None
+    #     Slide.objects.all().delete()
+    #
+    #     self.assertEqual(
+    #         Slide.objects.random_slide(),
+    #         None
+    #     )
 
     def test_template_name(self):
         # create a slide that is for a content_type that would never be used in a spinner. A slide of a slide should be suitable :)
@@ -72,29 +74,31 @@ class ModelTest(TestCase):
             'spinner/slides/spinner_quote-content.html'
         )
 
-    def test_slide_after(self):
 
-        # get the two active slides
-        slide_1 = Slide.objects.all().active()[0]
-        slide_2 = Slide.objects.all().active()[1]
+    # Commented out as unused, but possibly useful in future
 
-        # Check that slide_after returns the next one
-        self.assertEqual(Slide.objects.slide_after(slide_1), slide_2)
-        self.assertEqual(Slide.objects.slide_after(slide_2), slide_1)
-
-        # Remove one slide and check that the return is same as given.
-        slide_1.is_active = False
-        slide_1.save()
-        self.assertEqual(Slide.objects.slide_after(slide_1), slide_2)
-        self.assertEqual(Slide.objects.slide_after(slide_2), slide_2)
-
-        # Check that passing None in leads to a slide being returned
-        self.assertEqual(Slide.objects.slide_after(None), slide_2)
-
-        # Make all the slides inactive and check that none are returned.
-        Slide.objects.all().active().update(is_active=False)
-        self.assertEqual(Slide.objects.slide_after(slide_1), None)
-        self.assertEqual(Slide.objects.slide_after(slide_2), None)
-        self.assertEqual(Slide.objects.slide_after(None), None)
-
+    # def test_slide_after(self):
+    #
+    #     # get the two active slides
+    #     slide_1 = Slide.objects.all().active()[0]
+    #     slide_2 = Slide.objects.all().active()[1]
+    #
+    #     # Check that slide_after returns the next one
+    #     self.assertEqual(Slide.objects.slide_after(slide_1), slide_2)
+    #     self.assertEqual(Slide.objects.slide_after(slide_2), slide_1)
+    #
+    #     # Remove one slide and check that the return is same as given.
+    #     slide_1.is_active = False
+    #     slide_1.save()
+    #     self.assertEqual(Slide.objects.slide_after(slide_1), slide_2)
+    #     self.assertEqual(Slide.objects.slide_after(slide_2), slide_2)
+    #
+    #     # Check that passing None in leads to a slide being returned
+    #     self.assertEqual(Slide.objects.slide_after(None), slide_2)
+    #
+    #     # Make all the slides inactive and check that none are returned.
+    #     Slide.objects.all().active().update(is_active=False)
+    #     self.assertEqual(Slide.objects.slide_after(slide_1), None)
+    #     self.assertEqual(Slide.objects.slide_after(slide_2), None)
+    #     self.assertEqual(Slide.objects.slide_after(None), None)
 
