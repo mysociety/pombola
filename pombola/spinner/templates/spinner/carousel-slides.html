@@ -14,5 +14,7 @@
 {% spinner_active_slides as slides %}
 
 {% for slide in slides %}
-  {% include "spinner/display-slide.html" %}
+  <div class="carousel-item slide-{{ slide.template_class }}">
+    {% include "spinner/display-slide.html" %}
+  </div>
 {% endfor %}
