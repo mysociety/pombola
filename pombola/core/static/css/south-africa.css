@@ -2497,7 +2497,7 @@ ul.scorecard li article header .details .source a {
   margin-bottom: 30px;
 }
 
-.featured-person {
+.featured-person, .slide-core_person {
   color: #2e2e2e;
   margin: 0 0 30px 0;
   border-top: 3px solid #b3b3b3;
@@ -2505,81 +2505,81 @@ ul.scorecard li article header .details .source a {
   background: #f6f6f6;
   overflow: hidden;
 }
-.featured-person img {
+.featured-person img, .slide-core_person img {
   float: left;
   max-width: 90px;
   height: auto;
 }
-.featured-person .featured-person-info {
+.featured-person .featured-person-info, .slide-core_person .featured-person-info {
   position: relative;
   margin-left: 110px;
   min-height: 130px;
 }
-.featured-person .featured-person-info .feature-nav {
+.featured-person .featured-person-info .feature-nav, .slide-core_person .featured-person-info .feature-nav {
   display: none;
 }
-.featured-person .featured-person-info h2 {
+.featured-person .featured-person-info h2, .slide-core_person .featured-person-info h2 {
   padding-left: 0 !important;
   margin-bottom: 0 !important;
 }
-.featured-person .featured-person-info h2 a {
+.featured-person .featured-person-info h2 a, .slide-core_person .featured-person-info h2 a {
   font-size: 18px;
   text-transform: none;
 }
-.featured-person .featured-person-info h2 a:hover {
+.featured-person .featured-person-info h2 a:hover, .slide-core_person .featured-person-info h2 a:hover {
   text-decoration: none;
 }
-.featured-person .featured-person-info .feature-person-role {
+.featured-person .featured-person-info .feature-person-role, .slide-core_person .featured-person-info .feature-person-role {
   color: gray;
   font-style: italic;
 }
-.featured-person .featured-person-info .feature-person-summary {
+.featured-person .featured-person-info .feature-person-summary, .slide-core_person .featured-person-info .feature-person-summary {
   display: none;
 }
-.featured-person .featured-person-info .rating-container {
+.featured-person .featured-person-info .rating-container, .slide-core_person .featured-person-info .rating-container {
   position: absolute;
   bottom: 0;
   right: 10px;
   margin: 0;
 }
-.featured-person .featured-person-info .rating-container .rating {
+.featured-person .featured-person-info .rating-container .rating, .slide-core_person .featured-person-info .rating-container .rating {
   max-width: 300px;
   margin: 0 40px 7px 0;
   font-size: 17px;
 }
-.featured-person .featured-person-info .rating-container .rating a {
+.featured-person .featured-person-info .rating-container .rating a, .slide-core_person .featured-person-info .rating-container .rating a {
   color: #2e2e2e;
 }
-.featured-person .featured-person-info .rating-container .rating a:hover {
+.featured-person .featured-person-info .rating-container .rating a:hover, .slide-core_person .featured-person-info .rating-container .rating a:hover {
   text-decoration: none;
   color: #222222;
 }
-.featured-person .featured-person-info .rating-container .rating-img {
+.featured-person .featured-person-info .rating-container .rating-img, .slide-core_person .featured-person-info .rating-container .rating-img {
   position: absolute;
   right: 0;
   bottom: 0;
   height: 32px;
   width: 32px;
 }
-.featured-person .featured-person-info .rating-container .rating-img.bad {
+.featured-person .featured-person-info .rating-container .rating-img.bad, .slide-core_person .featured-person-info .rating-container .rating-img.bad {
   background: url(/static/images/d-smiley-sprite.png) -78px -82px no-repeat;
 }
-.featured-person .featured-person-info .rating-container .rating-img.average {
+.featured-person .featured-person-info .rating-container .rating-img.average, .slide-core_person .featured-person-info .rating-container .rating-img.average {
   background: url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat;
 }
-.featured-person .featured-person-info .rating-container .rating-img.good {
+.featured-person .featured-person-info .rating-container .rating-img.good, .slide-core_person .featured-person-info .rating-container .rating-img.good {
   background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
 }
-.featured-person.featured-person-placeholder {
+.featured-person.featured-person-placeholder, .featured-person-placeholder.slide-core_person {
   text-align: center;
   height: 250px;
   background: #e23d28 url(/static/images/logo-450-x-150.png) center center no-repeat;
 }
-.featured-person.featured-person-loading {
+.featured-person.featured-person-loading, .featured-person-loading.slide-core_person {
   height: 250px;
   text-align: center;
 }
-.featured-person.featured-person-loading p {
+.featured-person.featured-person-loading p, .featured-person-loading.slide-core_person p {
   margin: 30px 0;
   color: gray;
 }
@@ -2892,22 +2892,22 @@ ul#home-news-list li img, ul.home-news-list li img {
     background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#e23d28, #fb432c);
   }
 
-  .featured-person {
+  .featured-person, .slide-core_person {
     border: 1px solid #b3b3b3;
   }
-  .featured-person img {
+  .featured-person img, .slide-core_person img {
     max-width: 180px;
   }
-  .featured-person .featured-person-info {
+  .featured-person .featured-person-info, .slide-core_person .featured-person-info {
     margin-left: 200px;
     max-width: 300px;
     min-height: 180px;
   }
-  .featured-person .featured-person-info .feature-nav {
+  .featured-person .featured-person-info .feature-nav, .slide-core_person .featured-person-info .feature-nav {
     display: block;
     float: right;
   }
-  .featured-person .featured-person-info .feature-nav a {
+  .featured-person .featured-person-info .feature-nav a, .slide-core_person .featured-person-info .feature-nav a {
     cursor: pointer;
     display: block;
     border: none;
@@ -2928,42 +2928,42 @@ ul#home-news-list li img, ul.home-news-list li img {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
     opacity: 0.7;
   }
-  .featured-person .featured-person-info .feature-nav .feature-prev {
+  .featured-person .featured-person-info .feature-nav .feature-prev, .slide-core_person .featured-person-info .feature-nav .feature-prev {
     background: transparent url(../images/chevron-left-alt.png) center no-repeat;
     margin-right: 10px;
   }
-  .featured-person .featured-person-info .feature-nav .feature-prev:hover {
+  .featured-person .featured-person-info .feature-nav .feature-prev:hover, .slide-core_person .featured-person-info .feature-nav .feature-prev:hover {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     opacity: 1;
   }
-  .featured-person .featured-person-info .feature-nav .feature-next {
+  .featured-person .featured-person-info .feature-nav .feature-next, .slide-core_person .featured-person-info .feature-nav .feature-next {
     background: transparent url(../images/chevron-right-alt.png) center no-repeat;
   }
-  .featured-person .featured-person-info .feature-nav .feature-next:hover {
+  .featured-person .featured-person-info .feature-nav .feature-next:hover, .slide-core_person .featured-person-info .feature-nav .feature-next:hover {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     opacity: 1;
   }
-  .featured-person .featured-person-info h2 {
+  .featured-person .featured-person-info h2, .slide-core_person .featured-person-info h2 {
     margin: 15px 0 0 0 !important;
     line-height: 30px;
   }
-  .featured-person .featured-person-info h2 a {
+  .featured-person .featured-person-info h2 a, .slide-core_person .featured-person-info h2 a {
     font-size: 24px;
   }
-  .featured-person .featured-person-info .feature-person-summary {
+  .featured-person .featured-person-info .feature-person-summary, .slide-core_person .featured-person-info .feature-person-summary {
     display: block;
     padding: 0 0 40px 0;
   }
-  .featured-person .featured-person-info .feature-person-summary p {
+  .featured-person .featured-person-info .feature-person-summary p, .slide-core_person .featured-person-info .feature-person-summary p {
     font-size: 12px;
   }
-  .featured-person .featured-person-info .rating-container {
+  .featured-person .featured-person-info .rating-container, .slide-core_person .featured-person-info .rating-container {
     bottom: 10px;
   }
-  .featured-person .featured-person-info .rating-container .rating {
+  .featured-person .featured-person-info .rating-container .rating, .slide-core_person .featured-person-info .rating-container .rating {
     margin: 0 40px 15px 0;
   }
-  .featured-person .featured-person-info .rating-container .rating-img {
+  .featured-person .featured-person-info .rating-container .rating-img, .slide-core_person .featured-person-info .rating-container .rating-img {
     bottom: 10px;
   }
 }
@@ -3735,13 +3735,13 @@ HOME PAGE INTRO BOX
   font-size: 0.875em;
 }
 
-.featured-person {
+.slide-core_person {
   margin: 0;
 }
-.featured-person img {
+.slide-core_person img {
   margin-right: 1em;
 }
-.featured-person .name {
+.slide-core_person .name {
   font-size: 1.75em;
   text-transform: none;
   color: #fff;
@@ -3749,7 +3749,7 @@ HOME PAGE INTRO BOX
   text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
   margin-bottom: 0.25em;
 }
-.featured-person .subtitle {
+.slide-core_person .subtitle {
   margin-bottom: 0.5em;
 }
 

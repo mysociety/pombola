@@ -1,0 +1,23 @@
+{% load thumbnail %}
+
+<a href="{{ object.get_absolute_url }}">
+  {% thumbnail object.primary_image "180x240" crop="center" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ object.name }}"/>
+  {% empty %}
+    <img src="{{STATIC_URL}}images/person-200x200.jpg" width="180" height="240"/>
+  {% endthumbnail %}
+</a>
+
+<h3 class="name">
+  <a href="{{ object.get_absolute_url }}">
+    {{ object.title }} {{ object.name }}
+  </a>
+</h3>
+
+{% if object.is_politician %}
+  <h4 class="subtitle">Politician</h4>
+{% endif %}
+
+<p class="caption">
+  {{ object.summary|truncatewords_html:35 }}
+</p>

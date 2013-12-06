@@ -656,7 +656,8 @@ HOME PAGE INTRO BOX
     }
 }
 
-.featured-person {
+.slide-core_person {
+  @extend .featured-person;
     margin: 0;
     img {
         margin-right: 1em;
