@@ -1,5 +1,5 @@
-<a href="/spinner/after?id={{ slide.id }}">Next ({{ slide.id }})</a>
-
 {% with object=slide.content_object %}
-  {% include slide.template_name %}
+  <div class="carousel-item">
+    {% include slide.template_name %}
+  </div>
 {% endwith %}

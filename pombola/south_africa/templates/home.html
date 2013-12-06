@@ -33,9 +33,7 @@
             <div class="home-left">
                 <h2>Spotlight</h2>
                 <div id="home-carousel" class="carousel">
-                    {% for person in featured_persons %}
-                      {% include "core/person_feature.html" %}
-                    {% endfor %}
+                  {% include "spinner/carousel-slides.html" %}
                 </div>
             </div>
 

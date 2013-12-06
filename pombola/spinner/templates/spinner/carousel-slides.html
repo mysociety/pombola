@@ -1,0 +1,18 @@
+{% comment %}
+
+  This template assumes that you've loaded the CSS and JS needed to make the
+  carousel work - see https://github.com/filamentgroup/responsive-carousel for
+  details.
+
+  There is no need to provide the active slides in the template context, they
+  are loaded using the spinner_active_slides templatetag.
+
+{% endcomment %}
+
+{% load spinner %}
+
+{% spinner_active_slides as slides %}
+
+{% for slide in slides %}
+  {% include "spinner/display.html" %}
+{% endfor %}
