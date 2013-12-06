@@ -6,7 +6,7 @@ from .models import Slide
 class SlideAfterView(DetailView):
 
     model = Slide
-    template_name = 'spinner/display.html'
+    template_name = 'spinner/display-slide.html'
     context_object_name = 'slide'
 
     def get_object(self):
