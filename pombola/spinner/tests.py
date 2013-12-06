@@ -49,12 +49,6 @@ class ModelTest(TestCase):
         )
 
     def test_template_name(self):
-        # test a known slide
-        self.assertEqual(
-            Slide.objects.get(id=1).template_name,
-            'spinner/slides/quote-content.html'
-        )
-
         # create a slide that is for a content_type that would never be used in a spinner. A slide of a slide should be suitable :)
         slide = Slide.objects.all()[0]
         slide_of_slide = Slide.objects.create(sort_order=0, content_object=slide)
@@ -63,13 +57,19 @@ class ModelTest(TestCase):
         # (used in default.html template to tell template outhors what to do)
         self.assertEqual(
             slide_of_slide.required_template_name,
-            'spinner/slides/slide.html'
+            'spinner/slides/spinner_slide.html'
         )
 
         # Test that the default is returned
         self.assertEqual(
             slide_of_slide.template_name,
             'spinner/slides/default.html'
+        )
+
+        # test a known slide
+        self.assertEqual(
+            Slide.objects.get(id=1).template_name,
+            'spinner/slides/spinner_quote-content.html'
         )
 
     def test_slide_after(self):

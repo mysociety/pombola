@@ -79,7 +79,9 @@ class Slide(models.Model):
 
     @property
     def required_template_name(self):
-        return self.template_name_str_template % slugify(self.content_type)
+        content_type = self.content_type
+        filename = slugify("%s_%s" % (content_type.app_label, self.content_type))
+        return self.template_name_str_template % filename
 
     @property
     def template_name(self):
