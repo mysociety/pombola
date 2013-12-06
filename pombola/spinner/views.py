@@ -13,20 +13,18 @@ class SlideAfterView(DetailView):
         last_slide_id = self.request.GET.get('id', None)
         last_slide = None
 
+        # If we were given an id try to load it
         if last_slide_id:
             try:
                 last_slide = Slide.objects.get(pk=last_slide_id)
             except Slide.DoesNotExist:
-                print 'not found'
                 pass
 
-        print last_slide_id
-        print last_slide
-        if last_slide:
-            print last_slide.id
-
+        # Get the next slide
         next_slide = Slide.objects.slide_after(last_slide)
 
+        # 404 if there is no next slide (which means that there are no active
+        # slides)
         if not next_slide:
             raise Http404()
 
