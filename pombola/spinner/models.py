@@ -78,10 +78,13 @@ class Slide(models.Model):
         return u"Slide of '{}'".format( self.content_object )
 
     @property
-    def required_template_name(self):
+    def template_class(self):
         content_type = self.content_type
-        filename = slugify("%s_%s" % (content_type.app_label, self.content_type))
-        return self.template_name_str_template % filename
+        return slugify("%s_%s" % (content_type.app_label, self.content_type))
+
+    @property
+    def required_template_name(self):
+        return self.template_name_str_template % self.template_class
 
     @property
     def template_name(self):

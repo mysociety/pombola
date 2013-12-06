@@ -1,5 +1,5 @@
 {% with object=slide.content_object %}
-  <div class="carousel-item">
+  <div class="carousel-item slide-{{ slide.template_class }}">
     {% include slide.template_name %}
   </div>
 {% endwith %}
