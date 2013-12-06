@@ -3753,28 +3753,6 @@ HOME PAGE INTRO BOX
   margin-bottom: 0.5em;
 }
 
-.featured-quote q {
-  line-height: 1.45em;
-  display: block;
-  margin-bottom: 1em;
-  font-size: 1.125em;
-  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-  font-weight: normal !important;
-}
-.featured-quote cite {
-  display: block;
-  font-size: .875em;
-  margin-left: 1em;
-}
-.featured-quote cite .name {
-  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-  font-weight: normal !important;
-  text-transform: uppercase;
-}
-.featured-quote cite .date {
-  opacity: 0.8;
-}
-
 #page .home-left h2#home-intro,
 #page .home-right h2#home-intro {
   display: block;

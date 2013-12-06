@@ -674,29 +674,29 @@ HOME PAGE INTRO BOX
     }
 }
 
-.featured-quote {
-
-    q {
-        line-height: 1.45em;
-        display: block;
-        margin-bottom: 1em;
-        font-size: 1.125em;
-        @include lato-regular;
-    }
-    cite {
-        display: block;
-        font-size: .875em;
-        margin-left: 1em;
-        .name {
-            @include lato-bold;
-            text-transform: uppercase;
-        }
-        .date {
-            opacity: 0.8;
-        }
-
-    }
-}
+//.featured-quote {
+//
+//    q {
+//        line-height: 1.45em;
+//        display: block;
+//        margin-bottom: 1em;
+//        font-size: 1.125em;
+//        @include lato-regular;
+//    }
+//    cite {
+//        display: block;
+//        font-size: .875em;
+//        margin-left: 1em;
+//        .name {
+//            @include lato-bold;
+//            text-transform: uppercase;
+//        }
+//        .date {
+//            opacity: 0.8;
+//        }
+//
+//    }
+//}
 
 
 #page .home-left h2#home-intro,
