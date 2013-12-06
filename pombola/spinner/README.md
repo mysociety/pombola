@@ -91,4 +91,11 @@ the content object.
 
 ## Present, but unused code
 
+Initially I didn't realise that the carousel code for ZA would do much of the
+heavy lifting so added code to do it. This is all commented out now but left in
+case a non-carousel spinner is desired at some point so the code will be useful.
+
+All the commenting out was done in 8cd43619430d91e896c39b2e2f0178f1a25000af for
+easy reverting :)
+
 ## Replacing featured person code
