@@ -99,3 +99,12 @@ All the commenting out was done in 8cd43619430d91e896c39b2e2f0178f1a25000af for
 easy reverting :)
 
 ## Replacing featured person code
+
+The existing featured persons code could be entirely replaced by the spinner app. Steps would be something like:
+
+- create a data migration to create slides for all the featured people.
+- move the featured person templates to `spinner/slides/core_person.html`.
+- use the spinner on the country's homepage rather than the featured person.
+- drop related featured person code from models, views, js, css and templates.
+- drop the `can_be_featured` field from `core.models.Person`
+
