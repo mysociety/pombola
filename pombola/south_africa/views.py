@@ -210,6 +210,12 @@ class SAOrganisationDetailView(OrganisationDetailView):
     def get_context_data(self, **kwargs):
         context = super(SAOrganisationDetailView, self).get_context_data(**kwargs)
 
+        if self.object.kind.slug == 'parliament':
+            self.add_parliament_counts_to_context_data(context)
+
+        return context
+
+    def add_parliament_counts_to_context_data(self, context):
         # Get all the parties represented in this house.
         people_in_house = models.Person.objects.filter(position__organisation=self.object)
         parties = models.Organisation.objects.filter(
@@ -227,8 +233,6 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
         context['all_members'] = self.object.position_set.filter(title__slug='member')
         context['office_bearers'] = self.object.position_set.exclude(title__slug='member')
-
-        return context
 
     def get_template_names(self):
         if self.object.kind.slug == 'parliament':
