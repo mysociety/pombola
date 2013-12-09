@@ -249,6 +249,8 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
             all_positions = context['all_positions'] = self.object.position_set.all()
             if self.request.GET.get('member'):
                 context['sorted_positions'] = all_positions.filter(title__slug='member')
+            elif self.request.GET.get('delegates'):
+                context['sorted_positions'] = all_positions.filter(title__slug='delegate')
             elif self.request.GET.get('office'):
                 context['sorted_positions'] = all_positions.exclude(title__slug='member')
 
