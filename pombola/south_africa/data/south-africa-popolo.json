@@ -1814,12 +1814,6 @@
             "slug": "sports-and-recreation-committee"
         },
         {
-            "classification": "political-party",
-            "id": "org.mysociety.za/political-party/ff",
-            "name": "FF+",
-            "slug": "ff"
-        },
-        {
             "classification": "kwazulu-natal-provincial-legislature-committee",
             "id": "org.mysociety.za/kwazulu-natal-provincial-legislature-committee/education-committee",
             "name": "Education Committee",
