@@ -7,13 +7,13 @@
             "slug": "national-executive"
         },
         {
-            "classification": "house",
+            "classification": "parliament",
             "id": "org.mysociety.za/house/national-assembly",
             "name": "National Assembly",
             "slug": "national-assembly"
         },
         {
-            "classification": "house",
+            "classification": "parliament",
             "id": "org.mysociety.za/house/ncop",
             "name": "National Council of Provinces",
             "slug": "ncop"
