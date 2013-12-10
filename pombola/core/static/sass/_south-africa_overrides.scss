@@ -329,6 +329,7 @@ HEADER
     background-image: none;
     background: $colour_main_background;
     padding: .5em 0 0;
+    position: relative;
     @media only all and (min-width: 640px), print {
         padding: 0;
         height: 114px;
@@ -472,7 +473,39 @@ menu#mobile-top-tools,
         background-repeat: no-repeat !important;
     }
 }
-#header-search{
+
+.about-this-site-menu {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    @media only all and (min-width: 640px), print {
+       top: .5em;
+       right: 0;
+    }
+    ul {
+        padding-left: 0;
+    }
+    li {
+        list-style: none outside none;
+        line-height: 1.1em;
+        text-align: right;
+        @media only all and (min-width: 640px), print {
+           display: inline-block;
+           margin-left: .5em;
+        }
+    }
+    a {
+        font-size: 0.75em;
+        color: $colour_blackish;
+        text-decoration: none;
+        &:hover {
+            color: $colour-primary;
+            text-decoration: underline;
+        }
+    }
+}
+
+#header-search {
     border: 1px solid mix($colour_primary, #000, 75%);
     background: #fff;
     margin-right: 0;
@@ -480,7 +513,7 @@ menu#mobile-top-tools,
         border:none;
         background: transparent;
     }
-    button{
+    button {
         background-image: url(/static/images/header_search.png);
         background-position: center center;
         background-repeat: no-repeat;

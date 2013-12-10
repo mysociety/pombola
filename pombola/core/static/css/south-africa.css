@@ -3429,6 +3429,7 @@ HEADER
   background-image: none;
   background: #f1f0ec;
   padding: .5em 0 0;
+  position: relative;
 }
 @media only all and (min-width: 640px), print {
   #site-header {
@@ -3562,6 +3563,41 @@ a:focus {
   background-image: url("../images/has-dropdown.png") !important;
   background-position: right center !important;
   background-repeat: no-repeat !important;
+}
+
+.about-this-site-menu {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+@media only all and (min-width: 640px), print {
+  .about-this-site-menu {
+    top: .5em;
+    right: 0;
+  }
+}
+.about-this-site-menu ul {
+  padding-left: 0;
+}
+.about-this-site-menu li {
+  list-style: none outside none;
+  line-height: 1.1em;
+  text-align: right;
+}
+@media only all and (min-width: 640px), print {
+  .about-this-site-menu li {
+    display: inline-block;
+    margin-left: .5em;
+  }
+}
+.about-this-site-menu a {
+  font-size: 0.75em;
+  color: #555555;
+  text-decoration: none;
+}
+.about-this-site-menu a:hover {
+  color: #e23d28;
+  text-decoration: underline;
 }
 
 #header-search {
