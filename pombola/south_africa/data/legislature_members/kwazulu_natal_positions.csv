@@ -1,4 +1,3 @@
-legal_name,place_kind,place_name,organisation_kind,organisation_name,position_title
 Bebee L.C.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Conservation and Environment Committee,Committee Member
 Bebee L.C.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Coop Gov & Trad Affairs,Committee Member
 Bebee L.C.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Quality of Life Committee,Committee Member
@@ -131,6 +130,7 @@ Govender M.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committe
 Govender M.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,SCOPA Committee,Committee Member
 Govender M.,Province,KwaZulu-Natal,Political Party,African National Congress (ANC),Party Member
 Govender M.,Province,KwaZulu-Natal,Provincial Legislature,KwaZulu-Natal Provincial Legislature,Member of the Provincial Legislature
+Govender M.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Health Committee,Committee Member
 Govender P,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Economic Development and Tourism Committee,Committee Member
 Govender P,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Education Committee,Alternate Member
 Govender P,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Finance Committee,Alternate Member
@@ -194,6 +194,7 @@ Krog Johann,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committe
 Krog Johann,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Finance Committee,Committee Member
 Krog Johann,Province,KwaZulu-Natal,Political Party,Democratic Alliance (DA),Party Member
 Krog Johann,Province,KwaZulu-Natal,Provincial Legislature,KwaZulu-Natal Provincial Legislature,Member of the Provincial Legislature
+legal_name,place_kind,place_name,organisation_kind,organisation_name,position_title
 Ludidi Z.M.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Education Committee,Alternate Member
 Ludidi Z.M.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,PMLPPP Committee,Committee Member
 Ludidi Z.M.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Sports and Recreation Committee,Chair
@@ -201,7 +202,6 @@ Ludidi Z.M.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committe
 Ludidi Z.M.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Transport Committee,Committee Member
 Ludidi Z.M.,Province,KwaZulu-Natal,Political Party,African National Congress (ANC),Party Member
 Ludidi Z.M.,Province,KwaZulu-Natal,Provincial Legislature,KwaZulu-Natal Provincial Legislature,Member of the Provincial Legislature
-M Govender,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Health Committee,Committee Member
 Mabuyakhulu M.,Province,KwaZulu-Natal,Political Party,African National Congress (ANC),Party Member
 Mabuyakhulu M.,Province,KwaZulu-Natal,Provincial Legislature,KwaZulu-Natal Provincial Legislature,Member of the Provincial Legislature
 Madlala M.Z.N.,Province,KwaZulu-Natal,KwaZulu-Natal Provincial Legislature Committee,Agriculture and Rural Development Committee,Committee Member
