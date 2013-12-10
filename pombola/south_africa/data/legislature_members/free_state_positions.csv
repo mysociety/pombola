@@ -1,12 +1,12 @@
 legal_name,place_kind,place_name,organisation_kind,organisation_name,position_title
 A Oosthuizen,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Chair of the  Agriculture Committee
 A Oosthuizen,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
-B Alexander,,,Political Party,DA,Party Member
+B Alexander,,,Political Party,Democratic Alliance (DA),Party Member
 B Alexander,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 B Khompela,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Executive Committee: Safety
 B Khompela,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 C Mokitlane,,,Political Party,COPE,Party Leader of Provincial Legislature
-C Mokitlane,,,Political Party,COPE,Party Member
+C Mokitlane,,,Political Party,Congress of the People (COPE),Party Member
 C Mokitlane,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 CJ van Rooyen,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Deputy Chief Whip
 CJ van Rooyen,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
@@ -18,11 +18,11 @@ E Rockman,Province,Free State,Provincial Legislature,Free State Provincial Legis
 E Rockman,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 ES Magashule,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 ES Magashule,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Premier
-G Mothupi,,,Political Party,COPE,Party Member
+G Mothupi,,,Political Party,Congress of the People (COPE),Party Member
 G Mothupi,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
-Lala,,,Political Party,COPE,Party Member
+Lala,,,Political Party,Congress of the People (COPE),Party Member
 Lala,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
-M Hleko,,,Political Party,COPE,Party Member
+M Hleko,,,Political Party,Congress of the People (COPE),Party Member
 M Hleko,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 M Scheepers,Province,Free State,Provincial Legislature,Free State Provincial Legislature,"Chair of the  Police, Road & Transport Committee"
 M Scheepers,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
@@ -37,7 +37,7 @@ Ms O Mlamleli,Province,Free State,Provincial Legislature,Free State Provincial L
 Ms O Mlamleli,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 Ms Qabathe,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Executive Committee: Agriculture
 Ms Qabathe,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
-P Frewen,,,Political Party,DA,Party Member
+P Frewen,,,Political Party,Democratic Alliance (DA),Party Member
 P Frewen,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 P Parkies,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Chief Whip
 P Parkies,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
@@ -46,7 +46,7 @@ P.N Maloka,Province,Free State,Provincial Legislature,Free State Provincial Legi
 PHI Makgoe,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Executive Committee: Education
 PHI Makgoe,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 R Jankielsohn,,,Political Party,DA,Party Leader of Provincial Legislature
-R Jankielsohn,,,Political Party,DA,Party Member
+R Jankielsohn,,,Political Party,Democratic Alliance (DA),Party Member
 R Jankielsohn,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
 S Mabe,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Executive Committee: Works
 S Mabe,Province,Free State,Provincial Legislature,Free State Provincial Legislature,Member of the Provincial Legislature
