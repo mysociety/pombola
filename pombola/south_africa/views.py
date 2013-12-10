@@ -210,6 +210,12 @@ class SAOrganisationDetailView(OrganisationDetailView):
     def get_context_data(self, **kwargs):
         context = super(SAOrganisationDetailView, self).get_context_data(**kwargs)
 
+        if self.object.kind.slug == 'parliament':
+            self.add_parliament_counts_to_context_data(context)
+
+        return context
+
+    def add_parliament_counts_to_context_data(self, context):
         # Get all the parties represented in this house.
         people_in_house = models.Person.objects.filter(position__organisation=self.object)
         parties = models.Organisation.objects.filter(
@@ -228,13 +234,32 @@ class SAOrganisationDetailView(OrganisationDetailView):
         context['all_members'] = self.object.position_set.filter(title__slug='member')
         context['office_bearers'] = self.object.position_set.exclude(title__slug='member')
 
-        return context
-
     def get_template_names(self):
         if self.object.kind.slug == 'parliament':
             return [ 'south_africa/organisation_house.html' ]
         else:
             return super(SAOrganisationDetailView, self).get_template_names()
+
+
+class SAOrganisationDetailSub(OrganisationDetailSub):
+    def get_context_data(self, *args, **kwargs):
+        context = super(SAOrganisationDetailSub, self).get_context_data(*args, **kwargs)
+
+        if self.kwargs['sub_page'] == 'people':
+            all_positions = context['all_positions'] = self.object.position_set.all()
+            if self.request.GET.get('member'):
+                context['sorted_positions'] = all_positions.filter(title__slug='member')
+            elif self.request.GET.get('delegates'):
+                context['sorted_positions'] = all_positions.filter(title__slug='delegate')
+            elif self.request.GET.get('office'):
+                context['sorted_positions'] = all_positions.exclude(title__slug='member')
+
+            if self.request.GET.get('order') == 'place':
+                context['sorted_positions'] = context['sorted_positions'].order_by_place()
+            else:
+                context['sorted_positions'] = context['sorted_positions'].order_by_person_name()
+
+        return context
 
 
 class PersonSpeakerMappings(object):
@@ -478,24 +503,5 @@ class SAPersonAppearanceView(TemplateView):
         else:
             # speech_tag not know. Use 'None' for template default instead
             context['section_url'] = None
-
-        return context
-
-
-class SAOrganisationDetailSub(OrganisationDetailSub):
-    def get_context_data(self, *args, **kwargs):
-        context = super(SAOrganisationDetailSub, self).get_context_data(*args, **kwargs)
-
-        if self.kwargs['sub_page'] == 'people':
-            all_positions = context['all_positions'] = self.object.position_set.all()
-            if self.request.GET.get('member'):
-                context['sorted_positions'] = all_positions.filter(title__slug='member')
-            elif self.request.GET.get('office'):
-                context['sorted_positions'] = all_positions.exclude(title__slug='member')
-
-            if self.request.GET.get('order') == 'place':
-                context['sorted_positions'] = context['sorted_positions'].order_by_place()
-            else:
-                context['sorted_positions'] = context['sorted_positions'].order_by_person_name()
 
         return context
