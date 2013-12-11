@@ -43,9 +43,6 @@ class InfoBlogLabelBase(InfoBlogList):
         slug = self.kwargs['slug']
         context[self.context_key] = get_object_or_404(self.context_filter_model, slug=slug)
 
-        # Filter the recent posts to be specific to this category
-        context['recent_posts'] = context['recent_posts'].filter(categories=context['category'])
-
         return context
 
 
@@ -53,6 +50,15 @@ class InfoBlogCategory(InfoBlogLabelBase):
     context_key  = 'category'
     context_filter_model = Category
     filter_field = 'categories__slug'
+
+    def get_context_data(self, **kwargs):
+        context = super(InfoBlogCategory, self).get_context_data(**kwargs)
+
+        # Filter the recent posts to be specific to this category
+        context['recent_posts'] = context['recent_posts'].filter(categories=context['category'])
+
+        return context
+
 
 
 class InfoBlogTag(InfoBlogLabelBase):
