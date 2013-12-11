@@ -77,7 +77,7 @@ class Slide(models.Model):
     objects = SlideManager()
 
     def __unicode__(self):
-        return u"Slide of '{}'".format( self.content_object )
+        return u"Slide of '{0}'".format( self.content_object )
 
     @property
     def template_class(self):

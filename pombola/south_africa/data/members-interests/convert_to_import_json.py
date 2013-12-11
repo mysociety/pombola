@@ -229,7 +229,7 @@ class Converter(object):
                                         break
                                 # Replacement may not have been found, warn
                                 if entry[key] in self.ditto_marks:
-                                    sys.stderr.write("----------- Could not find previous entry for ditto mark of '{}'\n".format(key))
+                                    sys.stderr.write("----------- Could not find previous entry for ditto mark of '{0}'\n".format(key))
                                     sys.stderr.write(str(previous_entries) + "\n")
                                     sys.stderr.write(str(entry) + "\n")
                     previous_entries.append(entry)
@@ -291,11 +291,11 @@ class Converter(object):
                 return possible_slug
 
             for person in possible_persons:
-                print 'perhaps: "{}": "{}",'.format(slug, person.slug)
+                print 'perhaps: "{0}": "{1}",'.format(slug, person.slug)
             else:
-                print "no possible matches for {}".format(slug)
+                print "no possible matches for {0}".format(slug)
 
-            raise Exception("Slug {} not found, please find matching slug and add it to the slug_corrections".format(slug))
+            raise Exception("Slug {0} not found, please find matching slug and add it to the slug_corrections".format(slug))
 
     def produce_json(self):
         data = self.groupings
