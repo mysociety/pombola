@@ -1,0 +1,126 @@
+[
+    {
+        "fields": {
+            "_summary_rendered": "",
+            "created": "2013-12-11T10:04:45.833",
+            "name": "Category 1",
+            "slug": "category-1",
+            "summary": "",
+            "updated": "2013-12-11T10:04:45.833"
+        },
+        "model": "info.category",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "_summary_rendered": "",
+            "created": "2013-12-11T10:05:05.728",
+            "name": "Category 2",
+            "slug": "category-2",
+            "summary": "",
+            "updated": "2013-12-11T10:05:05.728"
+        },
+        "model": "info.category",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "created": "2013-12-11T10:05:12.617",
+            "name": "Birds",
+            "slug": "birds",
+            "updated": "2013-12-11T10:05:12.617"
+        },
+        "model": "info.tag",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "created": "2013-12-11T10:01:07.849",
+            "name": "Mammals",
+            "slug": "mammals",
+            "updated": "2013-12-11T10:01:07.849"
+        },
+        "model": "info.tag",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "_content_rendered": "<p>Blah Black Panther blah.</p>",
+            "categories": [
+                8
+            ],
+            "content": "Blah Black Panther blah.",
+            "created": "2013-12-11T10:05:47.458",
+            "kind": "blog",
+            "publication_date": "2013-12-11T10:05:16",
+            "slug": "black-panther",
+            "tags": [
+                2
+            ],
+            "title": "Black Panther",
+            "updated": "2013-12-11T10:05:47.458"
+        },
+        "model": "info.infopage",
+        "pk": 28
+    },
+    {
+        "fields": {
+            "_content_rendered": "<p>Blah Polar Bear blah.</p>",
+            "categories": [
+                7
+            ],
+            "content": "Blah Polar Bear blah.",
+            "created": "2013-12-11T10:04:49.534",
+            "kind": "blog",
+            "publication_date": "2013-12-11T10:00:02",
+            "slug": "polar-bear",
+            "tags": [
+                2
+            ],
+            "title": "Polar Bear",
+            "updated": "2013-12-11T10:06:22.446"
+        },
+        "model": "info.infopage",
+        "pk": 26
+    },
+    {
+        "fields": {
+            "_content_rendered": "<p>Blah Raven blah.</p>",
+            "categories": [
+                7
+            ],
+            "content": "Blah Raven blah.",
+            "created": "2013-12-11T10:06:06.394",
+            "kind": "blog",
+            "publication_date": "2013-12-11T10:05:47",
+            "slug": "raven",
+            "tags": [
+                3
+            ],
+            "title": "Raven",
+            "updated": "2013-12-11T10:07:10.858"
+        },
+        "model": "info.infopage",
+        "pk": 29
+    },
+    {
+        "fields": {
+            "_content_rendered": "<p>Blah Swan blah</p>",
+            "categories": [
+                8
+            ],
+            "content": "Blah Swan blah",
+            "created": "2013-12-11T10:05:16.667",
+            "kind": "blog",
+            "publication_date": "2013-12-11T10:04:49",
+            "slug": "swan",
+            "tags": [
+                3
+            ],
+            "title": "Swan",
+            "updated": "2013-12-11T10:06:45.355"
+        },
+        "model": "info.infopage",
+        "pk": 27
+    }
+]

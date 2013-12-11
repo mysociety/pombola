@@ -1,7 +1,9 @@
+import itertools
+
 from django.conf import settings
 from django.utils import unittest
 from django.test.client import Client
-from django.test import TestCase
+from django.test import TestCase, Client
 
 from .models import InfoPage
 
@@ -29,4 +31,53 @@ class InfoTest(TestCase):
         response = c.get('/info/newsletter')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "south_africa/info_newsletter.html")
+
+
+class InfoBlogClientTests(TestCase):
+    fixtures = ['sample_blog_posts.json']
+
+    # def test_show_loaded_pages(self):
+    #     pages = InfoPage.objects.all()
+    #     if len(pages):
+    #         for page in pages:
+    #             print page
+    #     else:
+    #         print "no pages found"
+
+    def _test_label(self, tests, url_base):
+        c = Client()
+
+        all_contents = list( itertools.chain( *tests.values() ) )
+        # print all_contents
+
+        for label, expected_contents in tests.items():
+            url = url_base + label
+            # print '------------------', url
+            response = c.get(url)
+            for content in expected_contents:
+                # print label, "should contain", content
+                self.assertContains(response, content)
+
+            for content in all_contents:
+                if content in expected_contents: continue
+                # print label, "should not contain", content
+                self.assertNotContains(response, content)
+
+    def test_tags(self):
+        self._test_label(
+            tests = {
+                "birds":   ["Blah Raven blah", "Blah Swan blah"],
+                "mammals": ["Blah Black Panther blah", "Blah Polar Bear blah"],
+            },
+            url_base = '/blog/tag/'
+        )
+
+    def test_categories(self):
+        self._test_label(
+            tests = {
+                "category-1": ["Blah Raven blah", "Blah Polar Bear blah"],
+                "category-2": ["Blah Black Panther blah", "Blah Swan blah"],
+            },
+            url_base = '/blog/category/'
+        )
 
