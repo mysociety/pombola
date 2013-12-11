@@ -1,6 +1,6 @@
 {% load thumbnail %}
 
-<a href="{{ object.get_absolute_url }}" title="{{ object.caption }}">
+<a href="{{ object.url }}" title="{{ object.caption }}">
   {% thumbnail object.image "598x200" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ object.caption }}" />
   {% endthumbnail %}
