@@ -63,6 +63,7 @@ class InfoBlogClientTests(TestCase):
                 # print label, "should not contain", content
                 self.assertNotContains(response, content)
 
+    @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
     def test_tags(self):
         self._test_label(
             tests = {
@@ -72,6 +73,7 @@ class InfoBlogClientTests(TestCase):
             url_base = '/blog/tag/'
         )
 
+    @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
     def test_categories(self):
         self._test_label(
             tests = {
