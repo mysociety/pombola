@@ -133,8 +133,8 @@ def get_or_create(model, **kwargs):
                 print "  " + k + ": " + unicode(v).encode('utf-8')
         o = model(**params)
         if commit:
-            verbose(" (saved)")
             o.save()
+            verbose(" (saved)")
         else:
             verbose(" (not saving)")
         return o
