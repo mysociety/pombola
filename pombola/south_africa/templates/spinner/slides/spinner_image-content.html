@@ -1,8 +1,22 @@
 {% load thumbnail %}
 
+<style>
+  div.caption {
+    background-color: rgba(0, 0, 0, 0.39);
+    color: #D8D8D8;
+    float: right;
+    position: relative;
+    padding: 2px 4px;
+    margin-top: -1.4em;
+  }
+</style>
+
 <a href="{{ object.url }}" title="{{ object.caption }}">
   {% thumbnail object.image "598x200" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ object.caption }}" />
   {% endthumbnail %}
+  <div class="caption">
+    {{ object.caption }}
+  </div>
 </a>
 
