@@ -27,13 +27,14 @@ autocomplete_light.autodiscover()
 # Admin section
 from django.contrib import admin
 admin.autodiscover()
+
 from ajax_select import urls as ajax_select_urls
 urlpatterns += patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/lookups/', include(ajax_select_urls)),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^autocomplete_light/', include('autocomplete_light.urls')),
 )
-
 
 # mapit
 urlpatterns += patterns('',
