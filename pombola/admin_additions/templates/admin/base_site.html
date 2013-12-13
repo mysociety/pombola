@@ -17,23 +17,17 @@
         super.block in 'extrahead' did not work.
     {% endcomment %}
 
-    <!-- for the admin autocomplete -->
+    {% comment %}
+      'jQuery' and '$' at this point are jQuery v2.0.3 which is loaded by the
+      markdown plugin. Django's own jQuery (v1.6.4) is available as
+      django.jQuery.
+    {% endcomment %}
 
-    <!-- Use the admin jquery, if available, or load one off Google's CDN. Same for jQuery UI -->
+    <!-- for the admin autocomplete -->
     <script type="text/javascript">//<![CDATA[
-    if (typeof jQuery == 'undefined') {
-    	try { // use django admins
-    		jQuery=django.jQuery;
-    	} catch(err) {
-    		document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"><\/script>');
-    	}
-    }
-    //]]>
-    </script>
-    <script type="text/javascript">//<![CDATA[
-    if(!jQuery || (typeof jQuery.ui == 'undefined')) {
-    	document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"><\/script>');
-    	document.write('<link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />');
+    if(!jQuery.ui || (typeof jQuery.ui == 'undefined')) {
+      document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"><\/script>');
+      document.write('<link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />');
     }
     //]]>
     </script>

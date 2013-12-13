@@ -24,9 +24,7 @@ django-ajax-selects
 django-autocomplete-light>=2.0.0a6
 
 Markdown
-
-### Use a fork of django-markitup so that we get correct truthiness
-hg+https://bitbucket.org/evdb/django-markitup/@fe49ef12c614#egg=django-markitup
+django-markitup>=2.1
 
 requests>=1.0
 pyelasticsearch
