@@ -10,8 +10,10 @@ class LabelAdmin(admin.ModelAdmin):
 
 class InfoPageAdmin(admin.ModelAdmin):
     search_fields = [ 'title', 'content' ]
-    list_display  = [ 'slug', 'title', 'kind' ]
+    list_display  = [ 'slug', 'title', 'kind', 'publication_date' ]
     list_filter   = [ 'kind', 'categories', 'tags' ]
+    date_hierarchy = 'publication_date'
+    ordering = ('-publication_date', 'title')
 
     fields = ('title', 'slug', 'publication_date', 'kind', 'content', 'categories', 'tags')
     prepopulated_fields = {'slug': ['title']}
