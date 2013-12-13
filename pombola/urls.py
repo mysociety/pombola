@@ -20,6 +20,10 @@ urlpatterns += patterns('',
 )
 
 
+# Needs to occur _before_ admin.autodiscover()
+import autocomplete_light
+autocomplete_light.autodiscover()
+
 # Admin section
 from django.contrib import admin
 admin.autodiscover()

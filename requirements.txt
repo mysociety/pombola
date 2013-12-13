@@ -21,6 +21,7 @@ South>=0.8
 sorl-thumbnail
 django_date_extensions==0.1dev
 django-ajax-selects
+django-autocomplete-light>=2.0.0a6
 
 Markdown
 

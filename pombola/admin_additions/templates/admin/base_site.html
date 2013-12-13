@@ -4,7 +4,7 @@
 
 {% block extrastyle %}
     <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
-    <link href="{{ STATIC_URL }}css/admin.css" rel="stylesheet" type="text/css" /> 
+    <link href="{{ STATIC_URL }}css/admin.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block blockbots %}
@@ -22,7 +22,7 @@
     <!-- Use the admin jquery, if available, or load one off Google's CDN. Same for jQuery UI -->
     <script type="text/javascript">//<![CDATA[
     if (typeof jQuery == 'undefined') {
-    	try { // use django admins 
+    	try { // use django admins
     		jQuery=django.jQuery;
     	} catch(err) {
     		document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"><\/script>');
@@ -40,8 +40,7 @@
 
 
     <script src="{{ STATIC_URL }}js/ajax_select.js" type="text/javascript" charset="utf-8"></script>
-    <link href="{{ STATIC_URL }}css/ajax_select.css" rel="stylesheet" type="text/css" /> 
-
+    <link href="{{ STATIC_URL }}css/ajax_select.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" charset="utf-8">
         /*
@@ -69,6 +68,8 @@
         //     )
         // })
     </script>
+
+    {% include 'autocomplete_light/static.html' %}
 
 {% endblock %}
 
