@@ -22,8 +22,8 @@ class LabelModelBase(ModelBase):
     a common model for most of the fields etc.
     """
 
-    slug = models.SlugField(unique=True)
     name = models.CharField(max_length=300, unique=True)
+    slug = models.SlugField(unique=True)
 
     def __unicode__(self):
         return self.name
@@ -76,8 +76,8 @@ class InfoPage(ModelBase):
     newest first order on the '/blog' page, and on their own blog page.
     """
 
-    slug    = models.SlugField(unique=True)
     title   = models.CharField(max_length=300, unique=True)
+    slug    = models.SlugField(unique=True)
     content = MarkupField( help_text="When linking to other pages use their slugs as the address (note that these links do not work in the preview, but will on the real site)")
 
     KIND_PAGE = 'page'
