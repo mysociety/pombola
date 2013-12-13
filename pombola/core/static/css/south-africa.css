@@ -4870,6 +4870,10 @@ ul.pager li.next {
   margin-bottom: 2em;
 }
 
+.sidebar .blog-categories li {
+  text-transform: uppercase;
+}
+
 /* Error and status pages */
 .error #page {
   padding: 0;
