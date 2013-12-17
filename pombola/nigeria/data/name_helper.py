@@ -30,10 +30,21 @@ class LgaNameChecker(object):
 
     def process(self, filename):
         print "Looking at '{0}'".format(filename)
+        self.setup()
         self.load_lgas(filename)
+        self.check_states_are_all_matched()
         self.find_duplicates_in_csv()
         self.set_name_for_unmatched()
         self.list_unmatched()
+
+
+    def setup(self):
+        self.name_type, created = models.NameType.objects.get_or_create(
+            code = 'poll_unit',
+            defaults = {
+                'description': "The name given in the data set of Polling Unit Numbers"
+            }
+        )
 
 
     def load_lgas(self, filename):
@@ -44,6 +55,18 @@ class LgaNameChecker(object):
                     (row['LGA NAME'], row['STATE NAME'])
                 )
 
+
+    def check_states_are_all_matched(self):
+        seen_states = set()
+        for lga_name, state_name in self.all_lgas:
+            if state_name in seen_states: continue
+
+            try:
+                models.Area.objects.get(names__name__iexact=state_name, type__code='STA')
+            except ObjectDoesNotExist:
+                raise Exception("Could not find area matching state '%s'" % state_name)
+
+            seen_states.add(state_name)
 
     def find_duplicates_in_csv(self):
         # lga_name => state
@@ -110,13 +133,6 @@ class LgaNameChecker(object):
 
     def match_lga_to_area(self, match_text, lga_name):
 
-        name_type, created = models.NameType.objects.get_or_create(
-            code = 'poll_unit',
-            defaults = {
-                'description': "The name given in the data set of Polling Unit Numbers"
-            }
-        )
-
         all_possibles = list(models.Area.objects.filter(names__name__icontains=match_text, type__code='LGA').order_by('name'))
         possibles = [x for x in all_possibles if x.id not in self.matched_area_ids]
 
@@ -133,7 +149,7 @@ class LgaNameChecker(object):
 
         if counter_chosen:
             choice = possibles[int(counter_chosen) - 1]
-            choice.names.create(type=name_type, name=lga_name)
+            choice.names.create(type=self.name_type, name=lga_name)
             self.matched_area_ids.add(choice.id)
 
     def list_unmatched(self):
