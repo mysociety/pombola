@@ -33,7 +33,7 @@ class LgaNameChecker(object):
         self.setup()
         self.load_lgas(filename)
         self.check_states_are_all_matched()
-        self.find_duplicates_in_csv()
+        self.check_all_duplicates_exactly_matched()
         self.set_name_for_unmatched()
         self.list_unmatched()
 
@@ -68,29 +68,42 @@ class LgaNameChecker(object):
 
             seen_states.add(state_name)
 
-    def find_duplicates_in_csv(self):
-        # lga_name => state
-        seen = {}
+    def check_all_duplicates_exactly_matched(self):
+        self.partition_lgas()
 
-        for lga_name, state_name in self.all_lgas:
-            if lga_name in seen and seen[lga_name] != state_name:
-                print "Duplicate: LGA {0} is also in states {1} and {2}".format(lga_name, seen[lga_name], state_name)
-                self.duplicate_lga_names.add(lga_name)
-            seen[lga_name] = state_name
-
+        if len(self.duplicates):
+            # duplicates are printed out by partition_lgas above
+            raise Exception("Please exactly match all duplicates listed above before proceeding")
 
     def partition_lgas(self):
         self.matched.clear()
         self.unmatched.clear()
         self.matched_area_ids.clear()
+        self.duplicate_lga_names.clear()
+
+        seen = {}
+        for lga_name, state_name in self.all_lgas:
+            if lga_name in seen and seen[lga_name] != state_name:
+                self.duplicate_lga_names.add(lga_name)
+            seen[lga_name] = state_name
 
         for lga_name, state_name in self.all_lgas:
 
             entry = (lga_name, state_name)
 
-            # Handle duplicates later
+            # If it is a potential duplicate check the state is correct as well.
             if lga_name in self.duplicate_lga_names:
-                self.duplicates.add(entry)
+                try:
+                    lga_area = models.Area.objects.get(
+                        names__name__iexact=lga_name,
+                        type__code='LGA',
+                        parent_area__type__code='STA',
+                        parent_area__names__name__iexact=state_name,
+                    )
+                    self.matched.add(entry)
+                except ObjectDoesNotExist:
+                    print "Duplicate: LGA {0} in state {1}".format(lga_name, state_name)
+                    self.duplicates.add(entry)
                 continue
 
             try:
