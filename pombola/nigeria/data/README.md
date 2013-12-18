@@ -33,7 +33,7 @@ Create new Ifelodun with parent Kwara (25)
 update mapit_area set name = 'Ifelodun' where name = '';
 
 existing Nasarawa (594) gets parent Nassarawa (27)
-new Nasarawa gets parent KANO (21)
+existing Nassarawa gets parent KANO (21)
 update mapit_area set name = 'Nasarawa' where name = '';
 
 existing BASSA (40) gets parent Plateau (33)
@@ -53,3 +53,17 @@ new SURULERE in LAGOS (26)
 update mapit_area set name = 'SURULERE' where name = '';
 ```
 
+## Match up non-exact matches
+
+The script will now go through all the LGA entries that it cannot get an exact
+match for and suggest suitable matches. Select them using the number assigned.
+If no sure just let it go, and it will come around again later. The search is
+not terribly elegant so at the end all available matches will be listed.
+
+Each time you select an option a `names` entry is created.
+
+This continues until all LGAs are matched.
+
+Some less obvious matches:
+
+    'KOGI K. K.' is 'Kotonkar'

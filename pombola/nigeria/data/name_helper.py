@@ -101,6 +101,7 @@ class LgaNameChecker(object):
                         parent_area__names__name__iexact=state_name,
                     )
                     self.matched.add(entry)
+                    self.matched_area_ids.add(lga_area.id)
                 except ObjectDoesNotExist:
                     print "Duplicate: LGA {0} in state {1}".format(lga_name, state_name)
                     self.duplicates.add(entry)
@@ -125,7 +126,15 @@ class LgaNameChecker(object):
 
 
     def set_name_for_unmatched(self):
-        for match_length in [4,3,2]:
+
+        lengths_to_try_matching = [4,3,2]
+
+        # If there are not that many to try then just list them all
+        self.partition_lgas()
+        if len(self.unmatched) <= 20:
+            lengths_to_try_matching = [0] # zero length string matches all
+
+        for match_length in lengths_to_try_matching:
 
             self.partition_lgas()
 
