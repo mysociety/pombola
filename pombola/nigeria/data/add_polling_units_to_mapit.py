@@ -24,6 +24,7 @@ class PollUnitImporter(object):
     cached_wards = {}
 
     cached_poll_unit_code_type = None
+    cached_poll_name_code_type = None
     cached_ward_type = None
     cached_nigeria = None
     cached_current_generation = None
@@ -41,16 +42,23 @@ class PollUnitImporter(object):
         return rows
 
 
+    def get_area(self, **kwargs):
+        all = models.Area.objects.filter(**kwargs).distinct('id').order_by('id')
+        if all.count() == 0:
+            raise ObjectDoesNotExist()
+        elif all.count() > 1:
+            raise Exception("Multiple matches for %s" % str(kwargs))
+        else:
+            return all[0]
+
+
     def process_row(self, row):
 
         # print row
 
-        try:
-            state = self.process_state_for_row(row)
-            lga   = self.process_lga_for_row(row, state=state)
-            ward  = self.process_ward_for_row(row, lga=lga)
-        except ObjectDoesNotExist:
-            sys.stderr.write(str(row) + "\n")
+        state = self.process_state_for_row(row)
+        lga   = self.process_lga_for_row(row, state=state)
+        ward  = self.process_ward_for_row(row, lga=lga)
 
 
     def process_state_for_row(self, row):
@@ -63,7 +71,7 @@ class PollUnitImporter(object):
         print "Loading %s" % name
 
         # Should find all of these
-        state = models.Area.objects.get(name__iexact=name, type__code='STA')
+        state = self.get_area(names__name__iexact=name, type__code='STA')
 
         # Check that the code has been added
         state.codes.get_or_create(
@@ -85,7 +93,7 @@ class PollUnitImporter(object):
         print "  Loading %s" % name
 
         # Should find all of these
-        lga = models.Area.objects.get(name__iexact=name, type__code='LGA')
+        lga = self.get_area(names__name__iexact=name, type__code='LGA', parent_area=state)
 
         # Check that the code has been added
         lga.codes.get_or_create(
@@ -108,11 +116,12 @@ class PollUnitImporter(object):
 
         # Create if needed, not expected to exist already
         ward, created = models.Area.objects.get_or_create(
-            name=name,
+            names__name=name,
             type=self.ward_type,
             parent_area=lga,
             country=self.nigeria,
             defaults={
+                "name": name,
                 "generation_low": self.current_generation,
                 "generation_high": self.current_generation,
             }
@@ -122,6 +131,11 @@ class PollUnitImporter(object):
         ward.codes.get_or_create(
             type=self.poll_unit_code_type,
             code=code,
+        )
+
+        ward.names.get_or_create(
+            type=self.poll_unit_name_type,
+            name=name,
         )
 
         self.cached_wards[code] = ward
@@ -151,6 +165,19 @@ class PollUnitImporter(object):
             )
 
         return self.cached_poll_unit_code_type
+
+
+    @property
+    def poll_unit_name_type(self):
+        if not self.cached_poll_name_code_type:
+            self.cached_poll_name_code_type, created = models.NameType.objects.get_or_create(
+                code = 'poll_unit',
+                defaults = {
+                    'description': "The name given in the data set of Polling Unit Numbers"
+                }
+            )
+
+        return self.cached_poll_name_code_type
 
 
     @property

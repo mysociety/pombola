@@ -13,14 +13,18 @@ There is a script `name_helper.py` that you can run several times to correctly
 set up the names. The following steps all require running the script, it will
 not let you proceed until the previous step has been completed.
 
+Run it as:
+
+    ./name_helper.py polling_unit_wards.csv
+
 This script is not efficient, but quite effective :)
 
-## Check that all the state names are correct.
+### Check that all the state names are correct.
 
 There are a couple of states that do not have matching names. Use the admin to
 find them and then create an alternative name.
 
-## Deal with the duplicated LGAs
+### Deal with the duplicated LGAs
 
 This is a mostly manual step. The code will list all the LGAs that have
 duplicated names and that cannot be exactly matched to an LGA area (including
@@ -55,7 +59,7 @@ new SURULERE in LAGOS (26)
 update mapit_area set name = 'SURULERE' where name = '';
 ```
 
-## Match up non-exact matches
+### Match up non-exact matches
 
 The script will now go through all the LGA entries that it cannot get an exact
 match for and suggest suitable matches. Select them using the number assigned.
@@ -72,3 +76,12 @@ Some less obvious matches:
 
 If at the end there are still unmatched areas use the admin to sort them out
 (deleting mischosen names and rerunning script works well).
+
+## Import the DUN codes and create the wards
+
+There is a second script that can be used once `name_helper.py` is happy. Run
+it as:
+
+    ./add_polling_units_to_mapit.py polling_unit_wards.csv
+
+
