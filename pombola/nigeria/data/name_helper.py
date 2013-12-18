@@ -62,10 +62,11 @@ class LgaNameChecker(object):
             if state_name in seen_states: continue
 
             try:
-                self.get_area(names__name__iexact=state_name, type__code='STA')
+                state = self.get_area(names__name__iexact=state_name, type__code='STA')
             except ObjectDoesNotExist:
                 raise Exception("Could not find area matching state '%s'" % state_name)
 
+            models.Name.objects.get_or_create(area=state, type=self.name_type, name=state_name)
             seen_states.add(state_name)
 
     def check_all_duplicates_exactly_matched(self):
@@ -127,7 +128,7 @@ class LgaNameChecker(object):
         if all.count() == 0:
             raise ObjectDoesNotExist()
         elif all.count() > 1:
-            raise Exception("Multiple matches")
+            raise Exception("Multiple matches for %s" % str(kwargs))
         else:
             return all[0]
 
@@ -137,8 +138,24 @@ class LgaNameChecker(object):
         self.matched_area_ids.add(lga_area.id)
 
         # TODO
-        # * if no state check that geometry are inside state_name
-        # * set the state
+        if not lga_area.parent_area:
+            state = self.get_area(names__name__iexact=state_name, type__code='STA')
+
+            # check that geometry are inside state_name
+            if lga_area.polygons.exists():
+                lga_polygons = lga_area.polygons.collect()
+                state_polygons = state.polygons.collect()
+
+                intersection = lga_polygons.intersection(state_polygons)
+                proportion_overlap = intersection.area / lga_polygons.area
+                print "proportion overlap was %0.2f for %s in %s" % (proportion_overlap, lga_name, state_name)
+
+                if proportion_overlap < 0.95:
+                    raise Exception("Won't set %s as parent of %s as overlap too small (%0.2f)" % (state_name, lga_name, proportion_overlap))
+
+            # set the state as parent
+            lga_area.parent_area = state
+            lga_area.save()
 
         models.Name.objects.get_or_create(area=lga_area, type=self.name_type, name=lga_name)
 
@@ -161,6 +178,7 @@ class LgaNameChecker(object):
 
             for lga_name, state_name in self.unmatched:
                 done_count += 1
+                os.system('clear')
                 print "--- {0} in {1} ({2} of {3})---".format(lga_name, state_name, done_count, total_count)
 
 
@@ -195,11 +213,11 @@ class LgaNameChecker(object):
         self.partition_lgas()
 
         for lga_name, state_name in self.unmatched:
-            print lga_name
+            print "Unmatched DUN area:", lga_name
 
         for area in models.Area.objects.filter(type__code='LGA').order_by('name'):
             if area.id in self.matched_area_ids: continue
-            print area.name
+            print "Unmatched mapit area:", area.name
 
 
 

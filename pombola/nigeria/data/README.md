@@ -13,6 +13,8 @@ There is a script `name_helper.py` that you can run several times to correctly
 set up the names. The following steps all require running the script, it will
 not let you proceed until the previous step has been completed.
 
+This script is not efficient, but quite effective :)
+
 ## Check that all the state names are correct.
 
 There are a couple of states that do not have matching names. Use the admin to
@@ -67,3 +69,6 @@ This continues until all LGAs are matched.
 Some less obvious matches:
 
     'KOGI K. K.' is 'Kotonkar'
+
+If at the end there are still unmatched areas use the admin to sort them out
+(deleting mischosen names and rerunning script works well).
