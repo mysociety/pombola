@@ -64,7 +64,16 @@ class SearchPollUnitNumberView(TemplateView):
 
 
     def convert_areas_to_places(self, areas):
-        return [ self.convert_area_to_place(a) for a in areas ]
+        places = []
+        for area in areas:
+            place = self.convert_area_to_place(area)
+            if place:
+                places.append(place)
+
+        return places
 
     def convert_area_to_place(self, area):
-        return Place.objects.get(mapit_area=area)
+        try:
+            return Place.objects.get(mapit_area=area)
+        except Place.DoesNotExist:
+            return None
