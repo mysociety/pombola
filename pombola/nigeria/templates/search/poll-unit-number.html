@@ -1,11 +1,15 @@
 {% extends "search/search_base.html" %}
 
 {% block title %}
-  Search for places using your poll unit number
+  {% if query %}
+  {{ query }} results
+  {% else %}
+    Search for places using your poll unit number
+  {% endif %}
 {% endblock %}
 
 {% block search_form %}
-  <input type="text" id="id_q" name="q" value="" placeholder="Your poll unit number"/>
+  <input type="text" id="id_q" name="q" value="{{ query }}" placeholder="Your poll unit number"/>
 {% endblock %}
 
 {% block search_instructions %}
@@ -13,5 +17,30 @@
 {% endblock %}
 
 {% block search_results %}
-  FIXME - add results here
+  {% if area %}
+    <p>Best match is "{{ area_pun_name }}" with poll unit number '{{ area_pun_code }}'</p>
+
+    <h3>Overlapping Federal Constituencies</h3>
+
+    <ul>
+      {% for place in federal_constutencies %}
+        <li>{{ place }}</li>
+      {% empty %}
+        <li>No overlapping Federal Constituencies</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Overlapping Senatorial Districts</h3>
+
+    <ul>
+      {% for place in senatorial_districts %}
+        <li>{{ place }}</li>
+      {% empty %}
+        <li>No overlapping Senatorial Districts</li>
+      {% endfor %}
+    </ul>
+
+  {% else %}
+    <p>No results were found for the poll unit number {{ query }}.</p>
+  {% endif %}
 {% endblock %}
