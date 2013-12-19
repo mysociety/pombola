@@ -1,2 +1,17 @@
-{% extends "base.html" %}
+{% extends "search/search_base.html" %}
 
+{% block title %}
+  Search for places using your poll unit number
+{% endblock %}
+
+{% block search_form %}
+  <input type="text" id="id_q" name="q" value="" placeholder="Your poll unit number"/>
+{% endblock %}
+
+{% block search_instructions %}
+  <p>Your Poll Unit Number will look something like "LA:02:04" - please enter it into the search box above.</p>
+{% endblock %}
+
+{% block search_results %}
+  FIXME - add results here
+{% endblock %}
