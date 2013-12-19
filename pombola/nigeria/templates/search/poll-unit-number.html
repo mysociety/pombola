@@ -24,7 +24,7 @@
 
     <ul>
       {% for place in federal_constutencies %}
-        <li>{{ place }}</li>
+        <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
       {% empty %}
         <li>No overlapping Federal Constituencies</li>
       {% endfor %}
@@ -34,7 +34,7 @@
 
     <ul>
       {% for place in senatorial_districts %}
-        <li>{{ place }}</li>
+      <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
       {% empty %}
         <li>No overlapping Senatorial Districts</li>
       {% endfor %}
