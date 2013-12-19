@@ -104,6 +104,14 @@ if settings.ENABLED_FEATURES['votematch']:
     )
 
 
+# # spinner - uncomment if needed. Not needed just to display spinner on the
+# # homepage using carousel.
+# if settings.ENABLED_FEATURES['spinner']:
+#     urlpatterns += patterns('',
+#         (r'^spinner/', include('pombola.spinner.urls')),
+#     )
+
+
 # Everything else goes to core
 urlpatterns += patterns('',
     (r'^', include('pombola.core.urls')),

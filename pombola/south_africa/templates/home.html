@@ -23,41 +23,19 @@
 {% block intro_content %}
     <div id="front_intro">
         <div class="page-wrapper wrapper ">
+
             <div class="home-right">
-                                <h2 id="home-intro">
-                                  People’s Assembly is intro text porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.
-                                </h2>
+                <h2 id="home-intro">
+                    We would never want a dull society. We would never want a civil society that only sucks up to the ruling party. South Africa is not a dull society and it should not have a dull Parliament <small> &ndash; Mr M Booi (ANC MP), 11th October 2013</small>
+                </h2>
+            </div>
 
-
-                            </div>
-                <div class="home-left">
-                    <h2>This week's focus</h2>
-                    <div id="home-carousel" class="carousel">
-
-                        {% for person in featured_persons %}
-                          {% include "core/person_feature.html" %}
-                        {% endfor %}
-
-                        {% comment %}
-                        <!-- Featured quote -->
-                        <div class="featured-quote carousel-item">
-                            <h3 class="subtitle">From Parliament</h3>
-                           <a href="#">
-
-                             <q>&hellip;three-quarters of Chinas provinces have been hit by flooding with record-high water levels, and that flooding has destroyed houses, killed and displaced hundreds of people and caused billions of rands worth of damage</q>
-                             <cite>
-                               &ndash;
-                               <span class="name">Ms H N Makhuba</span>
-
-                               <span class="date">10 Aug 2010</span>
-                           </cite>
-                           </a>
-                       </div>
-                       {% endcomment %}
-
-                    </div>
-
+            <div class="home-left">
+                <h2>Spotlight</h2>
+                <div id="home-carousel" class="carousel">
+                  {% include "spinner/carousel-slides.html" %}
                 </div>
+            </div>
 
         </div>
     </div>
@@ -66,7 +44,7 @@
             <h2>Find your representatives</h2>
             <form action="{% url "core_geocoder_search" %}" class="geocoder-search-form">
                 <label for="geocoder-search">Or search by location</label>
-                <input id="geocoder-search" type="text" name="q" value="" placeholder="Location name"><button type="submit" class="button">Search</button>
+                <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your location"><button type="submit" class="button">Search</button>
             </form>
         </div>
     </div>
@@ -75,37 +53,43 @@
 
 {% block content %}
 
-    {# Temporary Static news items to build styles from - Remove when done #}
     <div id="news">
-        <h2>Editorial</h2>
-        <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-          {% for article in featured_articles %}
-          <li>
-            <h3>
-              <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-            </h3>
-            <p class="meta">{{ article.publication_date|date }}</p>
-            <p>{{ article.content|truncatewords_html:32 }}</p>
-            <p><a class="readmore" href="{{ article.get_absolute_url }}">Read more</a></p>
-          </li>
-          {% endfor %}
-        </ul>
+
+        <div class="home-news">
+            <h2><a href="{% url 'info_blog_category' slug='week-parliament' %}">THAT WEEK IN PARLIAMENT</a></h2>
+            <ul class="home-news-list">
+            {% for article in that_week_in_parliament %}
+            <li>
+                <h3>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                </h3>
+                <p class="meta">{{ article.publication_date|date }}</p>
+                <p>{{ article.content|truncatewords_html:32 }}</p>
+                <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p>
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div class="home-news">
+            <h2><a href="{% url 'info_blog_category' slug='impressions' %}">IMPRESSIONS</a></h2>
+            <ul class="home-news-list">
+            {% for article in impressions %}
+            <li>
+                <h3>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                </h3>
+                <p class="meta">{{ article.publication_date|date }}</p>
+                <p>{{ article.content|truncatewords_html:32 }}</p>
+                <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p>
+            </li>
+            {% endfor %}
+            </ul>
+
+        </div>
 
     </div>
     <div class="col-2">
-
-    {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
-        <div id="twitter">
-            <h2>Twitter</h2>
-            
-            <a class="twitter-timeline"
-              data-chrome="nofooter transparent noheader noborders"
-              height="375"
-              href="https://twitter.com/{{ settings.TWITTER_USERNAME }}"
-              data-widget-id="{{ settings.TWITTER_WIDGET_ID }}"
-            >Tweets by @{{ settings.TWITTER_USERNAME }}</a>
-        </div>
-    {% endif %}
 
     {% if settings.POLLDADDY_WIDGET_ID %}
     <div id="poll">
@@ -123,17 +107,20 @@
     </div>
     {% endif %}
 
-    </div>
-    {% if settings.BLOG_RSS_FEED %}
-        <div id="news">
-            <h2>Latest News</h2>
-            <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-                <li>
-                    Loading news&hellip;
-                </li>
-            </ul>
+    {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
+        <div id="twitter">
+            <h2>Twitter</h2>
+
+            <a class="twitter-timeline"
+              data-chrome="nofooter transparent noheader noborders"
+              height="375"
+              href="https://twitter.com/{{ settings.TWITTER_USERNAME }}"
+              data-widget-id="{{ settings.TWITTER_WIDGET_ID }}"
+            >Tweets by @{{ settings.TWITTER_USERNAME }}</a>
         </div>
     {% endif %}
+
+    </div>
 
 
 {% endblock %}

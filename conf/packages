@@ -13,7 +13,7 @@ postgresql-9.1-postgis | postgresql-8.4-postgis
 libpq-dev
 
 # For mapit
-libgdal1-1.6.0 | libgdal1-1.5.0
+libgdal1-1.6.0 | libgdal1-1.5.0 | libgdal1
 python-gdal
 
 # Search (elasticsearch is not in stock debian, note)
@@ -31,6 +31,9 @@ libxml2-dev
 libxslt1-dev
 libjpeg-dev
 
+# libjpeg - needed on non-debian. On debian installed as a requirement for others so no need to list seperately
+
+
 ############################################################
 # The following can be installed by Python's pip into the virtual environment.
 # If you are not on Debian let pip do the installing for you.
@@ -41,7 +44,6 @@ mercurial
 
 # May as well use the Debian maintained versions.
 python-docutils
-python-bcrypt
 python-markdown
 python-yaml
 python-openid

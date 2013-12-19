@@ -122,9 +122,23 @@ a {
     cursor: pointer;
     letter-spacing: 0.05em;
     -webkit-appearance: none;
+    text-decoration: none;
     &:hover,
     &:focus {
         background: mix($colour_primary, #000, 80%);
+        color: #fff;
+        text-decoration: none;
+    }
+    &.secondary-button {
+        background-color: #f1f0ec;
+        color: $colour_black;
+        &:hover,
+        &:focus {
+            background: $colour_primary;
+            color: #fff;
+            text-decoration: none;
+
+        }
     }
 }
 
@@ -273,6 +287,9 @@ small {
     }
 }
 
+#page .page-wrapper {
+    padding-bottom: 2em; /* this will give us space for the feedback button */
+}
 
 #page-wrapper {
     position: relative;
@@ -312,6 +329,7 @@ HEADER
     background-image: none;
     background: $colour_main_background;
     padding: .5em 0 0;
+    position: relative;
     @media only all and (min-width: 640px), print {
         padding: 0;
         height: 114px;
@@ -330,6 +348,7 @@ HEADER
       background: url('/static/images/za-logo.png') 0 center no-repeat;
       width: 550px;
       height: 102px;
+      top: 5px;
     }
 }
 
@@ -454,7 +473,39 @@ menu#mobile-top-tools,
         background-repeat: no-repeat !important;
     }
 }
-#header-search{
+
+.about-this-site-menu {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    @media only all and (min-width: 640px), print {
+       top: .5em;
+       right: 0;
+    }
+    ul {
+        padding-left: 0;
+    }
+    li {
+        list-style: none outside none;
+        line-height: 1.1em;
+        text-align: right;
+        @media only all and (min-width: 640px), print {
+           display: inline-block;
+           margin-left: .5em;
+        }
+    }
+    a {
+        font-size: 0.75em;
+        color: $colour_blackish;
+        text-decoration: none;
+        &:hover {
+            color: $colour-primary;
+            text-decoration: underline;
+        }
+    }
+}
+
+#header-search {
     border: 1px solid mix($colour_primary, #000, 75%);
     background: #fff;
     margin-right: 0;
@@ -462,7 +513,7 @@ menu#mobile-top-tools,
         border:none;
         background: transparent;
     }
-    button{
+    button {
         background-image: url(/static/images/header_search.png);
         background-position: center center;
         background-repeat: no-repeat;
@@ -544,14 +595,17 @@ HOME PAGE INTRO BOX
 #front_intro
 {
     background-color: #027857;
-    padding: 2em 0;
+    padding: 1em 0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center top;
+    background-repeat: no-repeat;
     background-image: url('/static/images/intro-bg.jpg');
+   .page-wrapper {
+        padding-bottom: 0;
+    }
 }
 #front_intro .location-button {
     font-size: 0.75em;
@@ -613,7 +667,7 @@ HOME PAGE INTRO BOX
     color: #fff;
     position: relative;
     padding: 1em;
-    min-height: 242px;
+    min-height: 182px;
     @include text-shadow(0px 1px 1px rgba(0, 0, 0, .25));
     a {
         color: #fff;
@@ -635,7 +689,8 @@ HOME PAGE INTRO BOX
     }
 }
 
-.featured-person {
+.slide-core_person {
+  @extend .featured-person;
     margin: 0;
     img {
         margin-right: 1em;
@@ -653,29 +708,29 @@ HOME PAGE INTRO BOX
     }
 }
 
-.featured-quote {
-
-    q {
-        line-height: 1.45em;
-        display: block;
-        margin-bottom: 1em;
-        font-size: 1.125em;
-        @include lato-regular;
-    }
-    cite {
-        display: block;
-        font-size: .875em;
-        margin-left: 1em;
-        .name {
-            @include lato-bold;
-            text-transform: uppercase;
-        }
-        .date {
-            opacity: 0.8;
-        }
-
-    }
-}
+//.featured-quote {
+//
+//    q {
+//        line-height: 1.45em;
+//        display: block;
+//        margin-bottom: 1em;
+//        font-size: 1.125em;
+//        @include lato-regular;
+//    }
+//    cite {
+//        display: block;
+//        font-size: .875em;
+//        margin-left: 1em;
+//        .name {
+//            @include lato-bold;
+//            text-transform: uppercase;
+//        }
+//        .date {
+//            opacity: 0.8;
+//        }
+//
+//    }
+//}
 
 
 #page .home-left h2#home-intro,
@@ -690,16 +745,20 @@ HOME PAGE INTRO BOX
 #front_intro .home-right h2 {
     color: #fff;
     text-transform: none;
-    line-height: 1.25em;
+    line-height: 1.35em;
     @include lato-regular;
     font-weight: normal;
     @include text-shadow(0px 2px 1px rgba(0, 0, 0, .25));
     font-size: 21px;
     margin-bottom: 1em;
     @media only all and (min-width: 640px), print {
-        font-size: 32px;
         margin-top: 1em;
         margin-bottom: 0;
+    }
+    small {
+        display: block;
+        opacity: 0.8;
+        font-size: 13px;
     }
 
 
@@ -714,7 +773,7 @@ HOME PAGE INTRO BOX
 .home-rep-search {
     .geocoder-search-form {
         background: transparent;
-        margin-top: 30px;
+        margin-top: 13px;
         padding: 0;
         input[type="text"]{
             width: 82%;
@@ -750,10 +809,10 @@ HOME PAGE INTRO BOX
     .wrapper {
         border-bottom: 1px solid #ccc;
         overflow: hidden;
-        padding-bottom: 40px;
-        padding-top: 15px;
+        padding-top: 10px;
+        padding-bottom: 25px;
         h2 {
-            margin-top: 40px;
+            margin-top: 25px;
             text-align: center;
         }
         form {
@@ -815,7 +874,27 @@ NEWS & POLL
 
 }
 
-ul#home-news-list {
+.home-news {
+    float: left;
+    h2 {
+        a:link{
+            text-decoration: none;
+            color: $colour_black;
+        }
+        a:hover,
+        a:focus {
+            text-decoration: underline;
+            color: $colour_primary;
+        }
+    }
+    @media only all and (min-width: 940px), print {
+        width: 48%;
+        margin-right: 2%;
+    }
+}
+
+ul.home-news-list {
+    @extend ul#home-news-list;
     border:none;
     padding:0;
     margin-top: 0;
@@ -823,7 +902,6 @@ ul#home-news-list {
         border:none;
         width: 100%;
         @media only all and (min-width: 940px), print {
-            width: 48.1012658%;
             &:nth-child(odd) {
                 padding-right: 3.7974684%
             }
@@ -934,13 +1012,20 @@ FOOTER
 
     #footer-menu li > ul {
         margin-top: 0.25em;
+        margin-left: 0.5em;
+        margin-bottom: 0.5em;
     }
 
     #footer-menu li > ul li {
         display: block;
         margin-bottom: 0;
         padding: 0;
+        &:before {
+            content: '- ';
+            opacity: 0.5;
+        }
     }
+
 
     h4 {
         @include lato-bold;
@@ -1062,19 +1147,28 @@ FOOTER
     p + h3 {
         margin-top: 1.5em;
     }
+    .word-break-all {
+        word-break: break-all;
+    }
     ul {
         @include unstyled-list;
         font-size: 0.875em;
         margin-bottom: 1em;
     }
+    li + li {
+      margin-top: 0.5em;
+    }
     a:link {
         text-decoration: none;
-        word-break: break-all;
     }
     a:hover,
     a:active,
     a:focus {
         text-decoration: underline;
+    }
+
+    a.active {
+        color: $colour_blackish;
     }
 
     .vcard li {
@@ -1270,7 +1364,8 @@ li.speech {
        -moz-hyphens: auto;
             hyphens: auto;
     br {
-        display: none;
+        content: ' ';
+        display: inline;
     }
     .hov {
         font-size: 0.75em;
@@ -1332,6 +1427,45 @@ ul.pager {
     margin-top: -0.5em;
 }
 
+.house-splash {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    @media only all and (min-width: 640px), print {
+        height: 15.5em;
+        background-color: $colour_primary;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top left;
+        &.national-assembly {
+            background-image: url('/static/images/national-assembly.jpg');
+        }
+        &.ncop {
+            background-image: url('/static/images/national-council-of-provinces.jpg');
+        }
+    }
+
+}
+
+.house-title {
+    @media only all and (min-width: 640px), print {
+        position: absolute;
+        bottom: 0;
+        left: 2%;
+        h1, p {
+            color: #fff;
+        }
+        h1 {
+            font-size: 36px;
+        }
+    }
+
+}
+
 .house-intro {
     font-size: 0.875em;
     color: colour_blackish;
@@ -1376,6 +1510,127 @@ ul.pager {
     @media only all and (min-width: 640px), print {
         height: 210px;
         width: 210px;
+    }
+}
+
+/* Newsletter page */
+.page-wrapper {
+    .email-signup {
+        input[type="text"] {
+            border: 1px solid $colour_middling_grey;
+            border-right: none;
+            padding: 0.74em;
+        }
+    }
+}
+@-webkit-keyframes target-fade {
+    0% {
+          background-color: $colour_main_background;
+          color: $colour-primary
+      }
+      100% {
+          background-color: rgba(0,0,0,0);
+          color: $colour_black;
+      }
+}
+@-moz-keyframes target-fade {
+    0% {
+          background-color: $colour_main_background;
+          color: $colour-primary
+      }
+      100% {
+          background-color: rgba(0,0,0,0);
+          color: $colour_black;
+      }
+}
+
+@keyframes target-fade {
+    0% {
+        background-color: $colour_main_background;
+        color: $colour-primary
+    }
+    100% {
+        background-color: rgba(0,0,0,0);
+        color: $colour_black;
+    }
+}
+
+
+/* Place page */
+.list-of-constituency-offices {
+    ul {
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+    > li {
+        border-bottom: 1px solid #d2d2ce;
+        padding-top: 1em;
+        position: relative;
+    }
+    li {
+        overflow: hidden;
+    }
+    :target {
+        a {
+            -webkit-animation: target-fade 3s 1;
+            -moz-animation: target-fade 3s 1;
+            animation: target-fade 3s 1;
+        }
+    }
+
+    a {
+        color: $colour-black;
+        text-decoration: none;
+        &:hover,
+        &:focus {
+            color: $colour-primary;
+            text-decoration: underline;
+        }
+    }
+    .name {
+        font-weight: bold;
+    }
+    .constituency-office-address {
+        font-size: 0.875em;
+        color: $colour_blackish;
+    }
+    .constituency-office-mp-name {
+        font-size: 0.875em;
+        color: $colour_black;
+        margin-bottom: 0;
+    }
+    .constituency-office-mp-title {
+        font-size: 0.875em;
+        color: $colour_blackish;
+        margin-bottom: 0;
+    }
+    .constituency-office-mp-photo {
+        height: 58px;
+        width: 58px;
+        float: left;
+        margin-right: 16px;
+        margin-bottom: 1em;
+    }
+    .distance {
+        color: $colour_middling_grey;
+        position: absolute;
+        top: 1em;
+        right: 0;
+    }
+
+    .tiny-list-of-people {
+        .person-list-item {
+            border: none;
+            padding: 0;
+            margin-bottom: .5em;
+            img {
+                height: 29px;
+                width: 29px;
+            }
+            .name {
+                font-size: 0.75em;
+            }
+        }
     }
 }
 
@@ -1518,6 +1773,32 @@ ul.pager {
     }
 }
 
+/* Place search results */
+
+.about-constituency-office {
+    font-size: 0.75em;
+    margin-bottom: 1em;
+    @media only all and (min-width: 640px), print {
+        margin-bottom: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
+
+#map_canvas {
+    margin-bottom: 2em;
+}
+
+.politicians-results {
+    h2 {
+        margin-bottom: .6em;
+    }
+    .list-of-things-item:first-child {
+        border-top: none;
+    }
+}
+
 /* Blog styles */
 .blog-post {
     ul, p {
@@ -1530,6 +1811,38 @@ ul.pager {
         border-bottom: 1px solid #d2d2ce;
         margin-bottom: 2em;
     }
+}
+
+/* Error and status pages */
+
+.error {
+    #page {
+        padding: 0;
+    }
+}
+.error-page-content {
+  min-height: 500px;
+}
+
+.error-page-content h1,
+.error-page-content p {
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 1em;
+
+}
+.error-page-content h1 {
+  padding-top: 2em;
+  font-size: 48px;
+  @include text-shadow(0px 1px 1px rgba(0, 0, 0, .25));
+}
+.error-page-content p {
+  max-width: 30em;
+  @include text-shadow(0px 1px 1px rgba(0, 0, 0, .5));
+}
+.error-page-content a {
+  color: inherit;
 }
 
 /* Generic layouts */
@@ -1549,7 +1862,25 @@ ul.pager {
     margin-bottom: 1em;
     margin-left: 1em;
 }
+.fifty-fifty-layout {
+    .column {
+        &:first-child {
+            margin-bottom: 2em;
+        }
+    }
+}
 
+.hide-reveal-link {
+    display: block;
+    padding: 0.5em 0;
+}
+
+.has-dropdown-dark {
+    background-image: url('/static/images/has-dropdown-dark.png');
+    background-position: 100% 1em;
+    background-repeat: no-repeat;
+
+}
 
 @media only all and (min-width: 640px), print {
     #front_intro .home-left {
@@ -1603,6 +1934,15 @@ ul.pager {
             float: left;
         }
        }
+   }
+   .fifty-fifty-layout {
+        .column {
+            width: 48%;
+            float: left;
+            &:first-child {
+                margin-right: 4%;
+            }
+        }
    }
 }
 

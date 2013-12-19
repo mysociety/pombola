@@ -112,6 +112,25 @@ OPTIONAL_APPS:
   # - place_data # KE
   # - speeches   # ZA
   # - za_hansard # ZA
+  # - pombola.interests_register # ZA
+  # - pombola.spinner # ZA
   # - votematch
   
+
+BREADCRUMB_URL_NAME_MAPPINGS:
+    info: 
+        - Information
+        - /info/
+    organisation:
+        - Organisation
+        - /organisation/all/
+    person: 
+        - Politicians
+        - /person/all/
+    place: 
+        - Places
+        - /place/all/
+    search: 
+        - Search
+        - /search/
 

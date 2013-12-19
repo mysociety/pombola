@@ -42,10 +42,10 @@ config_file = os.path.join( base_dir, 'conf', 'general.yml' )
 config = yaml.load( open(config_file, 'r') )
 
 # Configure the optional apps
-ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch', 'speeches' )
-OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS', [] ) )
+ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch', 'speeches', 'spinner' )
+OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS' ) or [] )
 if 'speeches' in OPTIONAL_APPS: # Add its dependent apps
-    OPTIONAL_APPS = ('django_select2', 'django_bleach', 'popit', 'instances') + OPTIONAL_APPS
+    OPTIONAL_APPS = ('django_select2', 'django_bleach', 'popit', 'instances', 'popit_resolver') + OPTIONAL_APPS
 
 if int(config.get('STAGING')):
     STAGING = True
@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 
 # integer which when updated causes the caches to fetch new content. See note in
 # 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 36
+STATIC_GENERATION_NUMBER = 37
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -340,6 +340,10 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+# Use a different elasticsearch index if running in test mode.
+if 'test' in sys.argv:
+    HAYSTACK_CONNECTIONS['default']['INDEX_NAME'] = config.get('POMBOLA_DB_NAME') + '_test'
+
 # Admin autocomplete
 AJAX_LOOKUP_CHANNELS = {
     'person_name'       : dict(model='core.person',        search_field='legal_name'),
@@ -415,3 +419,21 @@ PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
 
 # Which popit instance to use
 POPIT_API_URL = config.get('POPIT_API_URL')
+
+BREADCRUMB_URL_NAME_MAPPINGS = config.get('BREADCRUMB_URL_NAME_MAPPINGS',
+    {
+      'info'   : ('Information', '/info/'),
+      'organisation' : ('Organisations', '/organisation/all/'),
+      'person' : ('Politicians', '/person/all/'),
+      'place' : ('Places', '/place/all/'),
+      'search' : ('Search', '/search/')
+    })
+
+# Info page settings
+INFO_POSTS_PER_LIST_PAGE = 10
+
+# overrides for ZA, should be somewhere better - see
+# https://github.com/mysociety/pombola/issues/829
+if COUNTRY_APP == 'south_africa':
+    INFO_POSTS_PER_LIST_PAGE = 4
+

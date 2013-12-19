@@ -1,0 +1,71 @@
+[
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Telkom",
+                "No": "100",
+                "Nominal Value": "R1 000"
+            },
+            {
+                "Name of Company": "Vodacom",
+                "No": "100",
+                "Nominal Value": "R2 000"
+            }
+        ],
+        "person": {
+            "slug": "beverley-lynette-abrahams"
+        },
+        "release": {
+            "date": "2012-01-01",
+            "name": "Ethics Full Report 2012"
+        }
+    },
+    {
+        "category": {
+            "name": "DIRECTORSHIP AND PARTNERSHIPS",
+            "sort_order": 3
+        },
+        "entries": [
+            {
+                "Directorship/Partnership": "Klip Eldo's Arts",
+                "Type of Business": "Arts & Culture Organisation [Dormant]"
+            }
+        ],
+        "person": {
+            "slug": "beverley-lynette-abrahams"
+        },
+        "release": {
+            "date": "2012-01-01",
+            "name": "Ethics Full Report 2012"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
+                "Extent": "Normal",
+                "Location": "Eldorado Park"
+            },
+            {
+                "Description": "House",
+                "Extent": "Normal",
+                "Location": "Pringle Bay"
+            }
+        ],
+        "person": {
+            "slug": "beverley-lynette-abrahams"
+        },
+        "release": {
+            "date": "2012-01-01",
+            "name": "Ethics Full Report 2012"
+        }
+    }
+]

@@ -1,0 +1,8 @@
+{% load thumbnail %}
+
+<a href="{{ object.url }}" title="{{ object.caption }}">
+  {% thumbnail object.image "598x200" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ object.caption }}" />
+  {% endthumbnail %}
+</a>
+

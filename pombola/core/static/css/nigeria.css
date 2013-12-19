@@ -3083,6 +3083,35 @@ h2 a.appearances-trigger.active {
   border-bottom: none;
 }
 
+.infopage-tag-list li {
+  float: left;
+  display: inline;
+  padding: 0.5em 1em;
+  margin-right: 0.5em;
+  background-color: #f7f7f7;
+  border: 1px solid #e6e6e6;
+  -moz-border-radius: 0.25em;
+  -webkit-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
+  -ms-border-radius: 0.25em;
+  -khtml-border-radius: 0.25em;
+  border-radius: 0.25em;
+}
+
+.infopage-category-summary {
+  position: relative;
+  left: -1em;
+  margin-bottom: 1em;
+  padding: 0.5em 1em;
+  background-color: #f7f7f7;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -o-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+}
+
 @media only all and (min-width: 640px), print {
   .infopage {
     margin: 0;

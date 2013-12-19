@@ -11,18 +11,22 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView, TemplateView
 from django.shortcuts import get_object_or_404
+from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 import mapit
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery
+from haystack.forms import SearchForm
 
 from popit.models import Person as PopitPerson
-from speeches.models import Section, Speech, Speaker
-from speeches.views import SpeakerView
+from speeches.models import Section, Speech, Speaker, Tag
+from speeches.views import NamespaceMixin
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView, PlaceDetailSub, OrganisationDetailView, PersonDetail
+from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
+    OrganisationDetailView, PersonDetail, PlaceDetailView, OrganisationDetailSub
 from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
@@ -34,11 +38,20 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-area', # specific to DA party
 )
 
-class LatLonDetailView(PlaceDetailView):
-    template_name = 'south_africa/latlon_detail_view.html'
+class LocationSearchForm(SearchForm):
+    q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))
+
+class LatLonDetailBaseView(PlaceDetailView):
 
     # Using 25km as the default, as that's what's used on MyReps.
     constituency_office_search_radius = 25
+
+    # The codes used here should match the party slugs, and the names of the
+    # icon files in .../static/images/party-map-icons/
+    party_slugs_that_have_logos = set((
+        'adcp', 'anc', 'apc', 'azapo', 'cope', 'da', 'ff', 'id', 'ifp', 'mf',
+        'pac', 'sacp', 'ucdp', 'udm'
+    ));
 
     def get_object(self):
         # FIXME - handle bad args better.
@@ -58,7 +71,7 @@ class LatLonDetailView(PlaceDetailView):
         return province
 
     def get_context_data(self, **kwargs):
-        context = super(LatLonDetailView, self).get_context_data(**kwargs)
+        context = super(LatLonDetailBaseView, self).get_context_data(**kwargs)
         context['location'] = self.location
 
         context['office_search_radius'] = self.constituency_office_search_radius
@@ -71,7 +84,105 @@ class LatLonDetailView(PlaceDetailView):
             .order_by('distance')
             )
 
+        # FIXME - There must be a cleaner way/place to do this.
+        for office in nearest_offices:
+            try:
+                cc_positions = office \
+                    .organisation \
+                    .position_set \
+                    .filter(
+                        person__position__title__slug='constituency-contact',
+                    )
+
+                constituency_contacts = models.Person.objects.filter(position__in=cc_positions)
+                office_people_entries = []
+
+                for constituency_contact in constituency_contacts:
+
+                    # Find positions for this person that are relevant to the office.
+                    positions = constituency_contact.position_set \
+                        .filter(
+                            organisation__slug__in = [
+                                "national-assembly",
+                                office.organisation.slug,
+                            ]
+                        )
+
+                    office_people_entries.append({
+                        'person': constituency_contact,
+                        'positions': positions
+                    })
+
+                if len(office_people_entries):
+                    office.office_people_entries = office_people_entries
+
+            except models.Person.DoesNotExist:
+                warnings.warn("{0} has no MPs".format(office.organisation))
+
+            # Try to extract the political membership of this person and store
+            # it next to the office. TODO - deal with several parties sharing
+            # an office (should this happen?) and MPs with no party connection.
+            if hasattr(office, 'office_people_entries'):
+                for entry in office.office_people_entries:
+                    try:
+                        party_slug = entry['person'].position_set.filter(title__slug="member", organisation__kind__slug="party")[0].organisation.slug
+                        if party_slug in self.party_slugs_that_have_logos:
+                            office.party_slug_for_icon = party_slug
+                    except IndexError:
+                        warnings.warn("{0} has no party membership".format(entry['person']))
+
+        context['form'] = LocationSearchForm()
+
+        context['politicians'] = (self.object
+            .all_related_current_politicians()
+            .filter(position__organisation__slug='national-assembly')
+        )
+
         return context
+
+
+class LatLonDetailNationalView(LatLonDetailBaseView):
+    template_name = 'south_africa/latlon_national_view.html'
+
+
+class LatLonDetailLocalView(LatLonDetailBaseView):
+    template_name = 'south_africa/latlon_local_view.html'
+
+
+
+class SAPlaceDetailView(PlaceDetailView):
+
+    def get_context_data(self, **kwargs):
+        """
+        Get back the people for this place in separate lists so they can
+        be displayed separately on the place detail page.
+        """
+        context = super(SAPlaceDetailView, self).get_context_data(**kwargs)
+
+        context['national_assembly_people_count']  = self.object.all_related_politicians().filter(position__organisation__slug='national-assembly').count()
+        context['national_assembly_people']        = self.object.all_related_current_politicians().filter(position__organisation__slug='national-assembly')
+        context['former_national_assembly_people'] = self.object.all_related_former_politicians().filter(position__organisation__slug='national-assembly')
+
+        context['ncop_people_count']  = self.object.all_related_politicians().filter(position__organisation__slug='ncop').count()
+        context['ncop_people']        = self.object.all_related_current_politicians().filter(position__organisation__slug='ncop')
+        context['former_ncop_people'] = self.object.all_related_former_politicians().filter(position__organisation__slug='ncop')
+
+        context['legislature_people_count']  = self.object.all_related_politicians().filter(position__organisation__kind__slug='provincial-legislature').count()
+        context['legislature_people']        = self.object.all_related_current_politicians().filter(position__organisation__kind__slug='provincial-legislature')
+        context['former_legislature_people'] = self.object.all_related_former_politicians().filter(position__organisation__kind__slug='provincial-legislature')
+
+        context['other_people'] = (
+            models.Person.objects
+              .filter(position__place=self.object)
+              .exclude(id__in=context['national_assembly_people'])
+              .exclude(id__in=context['former_national_assembly_people'])
+              .exclude(id__in=context['ncop_people'])
+              .exclude(id__in=context['former_ncop_people'])
+              .exclude(id__in=context['legislature_people'])
+              .exclude(id__in=context['former_legislature_people'])
+        )
+        return context
+
 
 class SAPlaceDetailSub(PlaceDetailSub):
     child_place_template = "south_africa/constituency_office_list_item.html"
@@ -99,6 +210,12 @@ class SAOrganisationDetailView(OrganisationDetailView):
     def get_context_data(self, **kwargs):
         context = super(SAOrganisationDetailView, self).get_context_data(**kwargs)
 
+        if self.object.kind.slug == 'parliament':
+            self.add_parliament_counts_to_context_data(context)
+
+        return context
+
+    def add_parliament_counts_to_context_data(self, context):
         # Get all the parties represented in this house.
         people_in_house = models.Person.objects.filter(position__organisation=self.object)
         parties = models.Organisation.objects.filter(
@@ -109,33 +226,48 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
         # Calculate the % of the house each party occupies.
         for party in parties:
-            party.percentage = round((float(party.person_count) / total_people) * 100, 2)
+            party.percentage = float(party.person_count) / total_people * 100
 
         context['parties'] = parties
         context['total_people'] =  total_people
 
-        return context
+        context['all_members'] = self.object.position_set.filter(title__slug='member')
+        context['office_bearers'] = self.object.position_set.exclude(title__slug='member')
 
     def get_template_names(self):
-        if self.object.kind.slug == 'house':
+        if self.object.kind.slug == 'parliament':
             return [ 'south_africa/organisation_house.html' ]
         else:
             return super(SAOrganisationDetailView, self).get_template_names()
 
 
-class SAPersonDetail(PersonDetail):
+class SAOrganisationDetailSub(OrganisationDetailSub):
+    def get_context_data(self, *args, **kwargs):
+        context = super(SAOrganisationDetailSub, self).get_context_data(*args, **kwargs)
 
-    important_organisations = ('ncop', 'national-assembly', 'national-executive')
+        if self.kwargs['sub_page'] == 'people':
+            all_positions = context['all_positions'] = self.object.position_set.all()
+            if self.request.GET.get('member'):
+                context['sorted_positions'] = all_positions.filter(title__slug='member')
+            elif self.request.GET.get('delegates'):
+                context['sorted_positions'] = all_positions.filter(title__slug='delegate')
+            elif self.request.GET.get('office'):
+                context['sorted_positions'] = all_positions.exclude(title__slug='member')
 
-    def get_sayit_speaker(self):
-        # see also SASpeakerRedirectView for mapping in opposite direction
+            if self.request.GET.get('order') == 'place':
+                context['sorted_positions'] = context['sorted_positions'].order_by_place()
+            else:
+                context['sorted_positions'] = context['sorted_positions'].order_by_person_name()
 
-        pombola_person = self.object
+        return context
 
+
+class PersonSpeakerMappings(object):
+    def pombola_person_to_sayit_speaker(self, person):
         try:
             i = models.Identifier.objects.get(
                 content_type = models.ContentType.objects.get_for_model(models.Person),
-                object_id = pombola_person.id,
+                object_id = person.id,
                 scheme = 'org.mysociety.za'
             )
             speaker = Speaker.objects.get(person__popit_id = i.scheme + i.identifier)
@@ -144,9 +276,14 @@ class SAPersonDetail(PersonDetail):
         except ObjectDoesNotExist:
             return None
 
-    def get_recent_speeches_for_section(self, section_title):
+
+class SAPersonDetail(PersonDetail):
+
+    important_organisations = ('ncop', 'national-assembly', 'national-executive')
+
+    def get_recent_speeches_for_section(self, section_title, limit=5):
         pombola_person = self.object
-        sayit_speaker = self.get_sayit_speaker()
+        sayit_speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(pombola_person)
 
         if not sayit_speaker:
             # Without a speaker we can't find any speeches
@@ -165,6 +302,9 @@ class SAPersonDetail(PersonDetail):
                 .filter(speaker=sayit_speaker)
                 .order_by('-start_date', '-start_time'))
 
+        if limit:
+            speeches = speeches[:limit]
+
         return speeches
 
 
@@ -180,7 +320,7 @@ class SAPersonDetail(PersonDetail):
         # FIXME - the titles used here will need to be checked and fixed.
         context['hansard']   = self.get_recent_speeches_for_section("Hansard")
         context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
-        context['questions'] = self.get_recent_speeches_for_section("Questions")
+        context['question']  = self.get_recent_speeches_for_section("Questions")
 
         return context
 
@@ -232,23 +372,27 @@ class SASpeakerRedirectView(RedirectView):
         except Exception as e:
             raise Http404
 
-class SAHansardIndex(TemplateView):
+class SASpeechesIndex(NamespaceMixin, TemplateView):
     template_name = 'south_africa/hansard_index.html'
+    top_section_name='Hansard'
     sections_to_show = 25
+    section_parent_field = 'section__parent__parent__parent__parent__parent'
 
     def get_context_data(self, **kwargs):
-        context = super(SAHansardIndex, self).get_context_data(**kwargs)
+        context = super(SASpeechesIndex, self).get_context_data(**kwargs)
 
-        # Get the "Hansard" top level section, or 404
-        hansard_section = get_object_or_404(Section, title="Hansard", parent=None)
+        # Get the top level section, or 404
+        top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
 
         # As we know that the hansard section structure is
         # "Hansard" -> yyyy -> mm -> dd -> section -> subsection -> [speeches]
         # we can create a very specific query to drill up to the top level one
         # that we want.
+
+        section_parent_filter = { self.section_parent_field : top_section }
         entries = Speech \
             .objects \
-            .filter(section__parent__parent__parent__parent__parent=hansard_section) \
+            .filter(**section_parent_filter) \
             .values('section_id', 'start_date') \
             .annotate(speech_count=Count('id')) \
             .order_by('-start_date')
@@ -275,4 +419,89 @@ class SAHansardIndex(TemplateView):
         # indeed using search.
 
         context['entries'] = display_entries
+        return context
+
+class SAHansardIndex(SASpeechesIndex):
+    template_name = 'south_africa/hansard_index.html'
+    top_section_name='Hansard'
+    section_parent_field = 'section__parent__parent__parent__parent__parent'
+    sections_to_show = 25
+
+class SACommitteeIndex(SASpeechesIndex):
+    template_name = 'south_africa/hansard_index.html'
+    top_section_name='Committee Minutes'
+    section_parent_field = 'section__parent__parent__parent'
+    sections_to_show = 25
+
+class SAQuestionIndex(SASpeechesIndex):
+    template_name = 'south_africa/hansard_index.html'
+    top_section_name='Questions'
+    section_parent_field = 'section__parent__parent'
+    sections_to_show = 25
+
+class SACommitteeSpeechRedirectView(RedirectView):
+
+    def get_redirect_url(self, **kwargs):
+        try:
+            id = int( kwargs['pk'] )
+            speech = Speech.objects.get( id=id )
+            source_url = speech.source_url
+            if source_url:
+                return source_url
+        except Exception as e:
+            raise Http404
+
+        raise Http404("No source URL for this content")
+
+class SACommitteeSectionRedirectView(RedirectView):
+
+    def get_redirect_url(self, **kwargs):
+        try:
+            id = int( kwargs['pk'] )
+            section = Section.objects.get( id=id )
+            for speech in section.speech_set.all():
+                source_url = speech.source_url
+                if source_url:
+                    return source_url
+        except Exception as e:
+            raise Http404
+
+        raise Http404("No source URL for this content")
+
+
+class SAPersonAppearanceView(TemplateView):
+
+    template_name = 'south_africa/person_appearances.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SAPersonAppearanceView, self).get_context_data(**kwargs)
+
+        # Extract slug and tag provided on url
+        person_slug = self.kwargs['person_slug']
+        speech_tag  = self.kwargs['speech_tag']
+
+        # Find (or 404) matching objects
+        person = get_object_or_404(models.Person, slug=person_slug)
+        tag    = get_object_or_404(Tag, name=speech_tag)
+
+        # SayIt speaker is different to core.Person, Load the speaker
+        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
+
+        # Load the speeches. Pagination is done in the template
+        speeches = Speech.objects \
+            .filter(tags=tag, speaker=speaker) \
+            .order_by('-start_date', '-start_time')
+
+        # Store person as 'object' for the person_base.html template
+        context['object']  = person
+        context['speeches'] = speeches
+
+        # Add a hardcoded section-view url name to use for the speeches. Would
+        # rather this was not hardcoded here but seems hard to avoid.
+        if (speech_tag in ['hansard', 'committee', 'question']):
+            context['section_url'] = '%s:section-view' % speech_tag
+        else:
+            # speech_tag not know. Use 'None' for template default instead
+            context['section_url'] = None
+
         return context

@@ -18,7 +18,7 @@
         <p>
           Alternatively search
           {% block alternative_search %}
-          <a href="{% url "core_geocoder_search" %}">for a location</a>
+          <a href="{% url 'core_geocoder_search' %}?q={{ query|urlencode }}">for a location</a>
           {% endblock %}
           {% if settings.ENABLED_FEATURES.hansard %}
             or <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Hansard transcripts</a>
@@ -26,13 +26,7 @@
           instead.
         </p>
 
-        <div class="search-box">
-          {% block search_form %}
-            {{ form.q }}
-          {% endblock %}
-            <input type="submit" value="Search" class="button">
-        </div>
-
+        {% include "south_africa/_search_box.html" %}
 
         {% if query %}
             {% if person_results %}

@@ -24,7 +24,11 @@ def geocoder(country, q, decimal_places=3):
         # round to the require precision
         for key in ['latitude','longitude']:
             result[key] = round(result[key], decimal_places)
-        
-        results.append( result )
+
+        # Check that the result has not already been added. This is possible
+        # when several different areas evaluate to the same one (eg various
+        # instances of South Africa's "Cape Town").
+        if result not in results:
+            results.append( result )
 
     return results

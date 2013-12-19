@@ -2497,7 +2497,7 @@ ul.scorecard li article header .details .source a {
   margin-bottom: 30px;
 }
 
-.featured-person {
+.featured-person, .slide-core_person {
   color: #2e2e2e;
   margin: 0 0 30px 0;
   border-top: 3px solid #b3b3b3;
@@ -2505,119 +2505,119 @@ ul.scorecard li article header .details .source a {
   background: #f6f6f6;
   overflow: hidden;
 }
-.featured-person img {
+.featured-person img, .slide-core_person img {
   float: left;
   max-width: 90px;
   height: auto;
 }
-.featured-person .featured-person-info {
+.featured-person .featured-person-info, .slide-core_person .featured-person-info {
   position: relative;
   margin-left: 110px;
   min-height: 130px;
 }
-.featured-person .featured-person-info .feature-nav {
+.featured-person .featured-person-info .feature-nav, .slide-core_person .featured-person-info .feature-nav {
   display: none;
 }
-.featured-person .featured-person-info h2 {
+.featured-person .featured-person-info h2, .slide-core_person .featured-person-info h2 {
   padding-left: 0 !important;
   margin-bottom: 0 !important;
 }
-.featured-person .featured-person-info h2 a {
+.featured-person .featured-person-info h2 a, .slide-core_person .featured-person-info h2 a {
   font-size: 18px;
   text-transform: none;
 }
-.featured-person .featured-person-info h2 a:hover {
+.featured-person .featured-person-info h2 a:hover, .slide-core_person .featured-person-info h2 a:hover {
   text-decoration: none;
 }
-.featured-person .featured-person-info .feature-person-role {
+.featured-person .featured-person-info .feature-person-role, .slide-core_person .featured-person-info .feature-person-role {
   color: gray;
   font-style: italic;
 }
-.featured-person .featured-person-info .feature-person-summary {
+.featured-person .featured-person-info .feature-person-summary, .slide-core_person .featured-person-info .feature-person-summary {
   display: none;
 }
-.featured-person .featured-person-info .rating-container {
+.featured-person .featured-person-info .rating-container, .slide-core_person .featured-person-info .rating-container {
   position: absolute;
   bottom: 0;
   right: 10px;
   margin: 0;
 }
-.featured-person .featured-person-info .rating-container .rating {
+.featured-person .featured-person-info .rating-container .rating, .slide-core_person .featured-person-info .rating-container .rating {
   max-width: 300px;
   margin: 0 40px 7px 0;
   font-size: 17px;
 }
-.featured-person .featured-person-info .rating-container .rating a {
+.featured-person .featured-person-info .rating-container .rating a, .slide-core_person .featured-person-info .rating-container .rating a {
   color: #2e2e2e;
 }
-.featured-person .featured-person-info .rating-container .rating a:hover {
+.featured-person .featured-person-info .rating-container .rating a:hover, .slide-core_person .featured-person-info .rating-container .rating a:hover {
   text-decoration: none;
   color: #222222;
 }
-.featured-person .featured-person-info .rating-container .rating-img {
+.featured-person .featured-person-info .rating-container .rating-img, .slide-core_person .featured-person-info .rating-container .rating-img {
   position: absolute;
   right: 0;
   bottom: 0;
   height: 32px;
   width: 32px;
 }
-.featured-person .featured-person-info .rating-container .rating-img.bad {
+.featured-person .featured-person-info .rating-container .rating-img.bad, .slide-core_person .featured-person-info .rating-container .rating-img.bad {
   background: url(/static/images/d-smiley-sprite.png) -78px -82px no-repeat;
 }
-.featured-person .featured-person-info .rating-container .rating-img.average {
+.featured-person .featured-person-info .rating-container .rating-img.average, .slide-core_person .featured-person-info .rating-container .rating-img.average {
   background: url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat;
 }
-.featured-person .featured-person-info .rating-container .rating-img.good {
+.featured-person .featured-person-info .rating-container .rating-img.good, .slide-core_person .featured-person-info .rating-container .rating-img.good {
   background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat;
 }
-.featured-person.featured-person-placeholder {
+.featured-person.featured-person-placeholder, .featured-person-placeholder.slide-core_person {
   text-align: center;
   height: 250px;
   background: #e23d28 url(/static/images/logo-450-x-150.png) center center no-repeat;
 }
-.featured-person.featured-person-loading {
+.featured-person.featured-person-loading, .featured-person-loading.slide-core_person {
   height: 250px;
   text-align: center;
 }
-.featured-person.featured-person-loading p {
+.featured-person.featured-person-loading p, .featured-person-loading.slide-core_person p {
   margin: 30px 0;
   color: gray;
 }
 
-ul#home-news-list {
+ul#home-news-list, ul.home-news-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
   border-top: 5px solid #f6f6f6;
   padding-top: 15px;
 }
-ul#home-news-list li {
+ul#home-news-list li, ul.home-news-list li {
   list-style-type: none;
   padding: 0;
   margin: 0;
   border: 0;
 }
-ul#home-news-list li {
+ul#home-news-list li, ul.home-news-list li {
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 3px solid #f6f6f6;
 }
-ul#home-news-list li:last-child {
+ul#home-news-list li:last-child, ul.home-news-list li:last-child {
   border-bottom: 0;
 }
-ul#home-news-list li h3, ul#home-news-list li p {
+ul#home-news-list li h3, ul.home-news-list li h3, ul#home-news-list li p, ul.home-news-list li p {
   padding: 0 10px;
   margin: 0;
 }
-ul#home-news-list li h3 a, ul#home-news-list li p a {
+ul#home-news-list li h3 a, ul.home-news-list li h3 a, ul#home-news-list li p a, ul.home-news-list li p a {
   text-decoration: none;
 }
-ul#home-news-list li p.meta {
+ul#home-news-list li p.meta, ul.home-news-list li p.meta {
   font-style: italic;
   font-size: 13px;
   margin-bottom: 10px;
 }
-ul#home-news-list li img {
+ul#home-news-list li img, ul.home-news-list li img {
   float: right;
   margin: 0 10px;
 }
@@ -2754,13 +2754,13 @@ ul#home-news-list li img {
     color: gray;
   }
 
-  ul#home-news-list {
+  ul#home-news-list, ul.home-news-list {
     margin-top: 15px;
   }
-  ul#home-news-list li h3, ul#home-news-list li p {
+  ul#home-news-list li h3, ul.home-news-list li h3, ul#home-news-list li p, ul.home-news-list li p {
     padding: 0;
   }
-  ul#home-news-list li img {
+  ul#home-news-list li img, ul.home-news-list li img {
     margin-right: 0;
   }
 
@@ -2892,22 +2892,22 @@ ul#home-news-list li img {
     background: url(../images/big-chevron.png) 180px center no-repeat, linear-gradient(#e23d28, #fb432c);
   }
 
-  .featured-person {
+  .featured-person, .slide-core_person {
     border: 1px solid #b3b3b3;
   }
-  .featured-person img {
+  .featured-person img, .slide-core_person img {
     max-width: 180px;
   }
-  .featured-person .featured-person-info {
+  .featured-person .featured-person-info, .slide-core_person .featured-person-info {
     margin-left: 200px;
     max-width: 300px;
     min-height: 180px;
   }
-  .featured-person .featured-person-info .feature-nav {
+  .featured-person .featured-person-info .feature-nav, .slide-core_person .featured-person-info .feature-nav {
     display: block;
     float: right;
   }
-  .featured-person .featured-person-info .feature-nav a {
+  .featured-person .featured-person-info .feature-nav a, .slide-core_person .featured-person-info .feature-nav a {
     cursor: pointer;
     display: block;
     border: none;
@@ -2928,42 +2928,42 @@ ul#home-news-list li img {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
     opacity: 0.7;
   }
-  .featured-person .featured-person-info .feature-nav .feature-prev {
+  .featured-person .featured-person-info .feature-nav .feature-prev, .slide-core_person .featured-person-info .feature-nav .feature-prev {
     background: transparent url(../images/chevron-left-alt.png) center no-repeat;
     margin-right: 10px;
   }
-  .featured-person .featured-person-info .feature-nav .feature-prev:hover {
+  .featured-person .featured-person-info .feature-nav .feature-prev:hover, .slide-core_person .featured-person-info .feature-nav .feature-prev:hover {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     opacity: 1;
   }
-  .featured-person .featured-person-info .feature-nav .feature-next {
+  .featured-person .featured-person-info .feature-nav .feature-next, .slide-core_person .featured-person-info .feature-nav .feature-next {
     background: transparent url(../images/chevron-right-alt.png) center no-repeat;
   }
-  .featured-person .featured-person-info .feature-nav .feature-next:hover {
+  .featured-person .featured-person-info .feature-nav .feature-next:hover, .slide-core_person .featured-person-info .feature-nav .feature-next:hover {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     opacity: 1;
   }
-  .featured-person .featured-person-info h2 {
+  .featured-person .featured-person-info h2, .slide-core_person .featured-person-info h2 {
     margin: 15px 0 0 0 !important;
     line-height: 30px;
   }
-  .featured-person .featured-person-info h2 a {
+  .featured-person .featured-person-info h2 a, .slide-core_person .featured-person-info h2 a {
     font-size: 24px;
   }
-  .featured-person .featured-person-info .feature-person-summary {
+  .featured-person .featured-person-info .feature-person-summary, .slide-core_person .featured-person-info .feature-person-summary {
     display: block;
     padding: 0 0 40px 0;
   }
-  .featured-person .featured-person-info .feature-person-summary p {
+  .featured-person .featured-person-info .feature-person-summary p, .slide-core_person .featured-person-info .feature-person-summary p {
     font-size: 12px;
   }
-  .featured-person .featured-person-info .rating-container {
+  .featured-person .featured-person-info .rating-container, .slide-core_person .featured-person-info .rating-container {
     bottom: 10px;
   }
-  .featured-person .featured-person-info .rating-container .rating {
+  .featured-person .featured-person-info .rating-container .rating, .slide-core_person .featured-person-info .rating-container .rating {
     margin: 0 40px 15px 0;
   }
-  .featured-person .featured-person-info .rating-container .rating-img {
+  .featured-person .featured-person-info .rating-container .rating-img, .slide-core_person .featured-person-info .rating-container .rating-img {
     bottom: 10px;
   }
 }
@@ -3083,6 +3083,33 @@ h2 a.appearances-trigger.active {
   border-bottom: none;
 }
 
+.infopage-tag-list li {
+  float: left;
+  display: inline;
+  padding: 0.5em 1em;
+  margin-right: 0.5em;
+  background-color: #f7f7f7;
+  border: 1px solid #e6e6e6;
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  -ms-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
+  border-radius: 0.25em;
+}
+
+.infopage-category-summary {
+  position: relative;
+  left: -1em;
+  margin-bottom: 1em;
+  padding: 0.5em 1em;
+  background-color: #f7f7f7;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
+  border-radius: 1em;
+}
+
 @media only all and (min-width: 640px), print {
   .infopage {
     margin: 0;
@@ -3189,9 +3216,21 @@ a:hover, a:focus {
   cursor: pointer;
   letter-spacing: 0.05em;
   -webkit-appearance: none;
+  text-decoration: none;
 }
 .button:hover, .button:focus {
   background: #b43020;
+  color: #fff;
+  text-decoration: none;
+}
+.button.secondary-button {
+  background-color: #f1f0ec;
+  color: #222222;
+}
+.button.secondary-button:hover, .button.secondary-button:focus {
+  background: #e23d28;
+  color: #fff;
+  text-decoration: none;
 }
 
 /*
@@ -3345,6 +3384,11 @@ small {
   font-size: 1em;
 }
 
+#page .page-wrapper {
+  padding-bottom: 2em;
+  /* this will give us space for the feedback button */
+}
+
 #page-wrapper {
   position: relative;
 }
@@ -3385,6 +3429,7 @@ HEADER
   background-image: none;
   background: #f1f0ec;
   padding: .5em 0 0;
+  position: relative;
 }
 @media only all and (min-width: 640px), print {
   #site-header {
@@ -3410,6 +3455,7 @@ HEADER
     background: url("/static/images/za-logo.png") 0 center no-repeat;
     width: 550px;
     height: 102px;
+    top: 5px;
   }
 }
 
@@ -3519,6 +3565,41 @@ a:focus {
   background-repeat: no-repeat !important;
 }
 
+.about-this-site-menu {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+@media only all and (min-width: 640px), print {
+  .about-this-site-menu {
+    top: .5em;
+    right: 0;
+  }
+}
+.about-this-site-menu ul {
+  padding-left: 0;
+}
+.about-this-site-menu li {
+  list-style: none outside none;
+  line-height: 1.1em;
+  text-align: right;
+}
+@media only all and (min-width: 640px), print {
+  .about-this-site-menu li {
+    display: inline-block;
+    margin-left: .5em;
+  }
+}
+.about-this-site-menu a {
+  font-size: 0.75em;
+  color: #555555;
+  text-decoration: none;
+}
+.about-this-site-menu a:hover {
+  color: #e23d28;
+  text-decoration: underline;
+}
+
 #header-search {
   border: 1px solid #a92d1e;
   background: #fff;
@@ -3596,14 +3677,17 @@ HOME PAGE INTRO BOX
 
 #front_intro {
   background-color: #027857;
-  padding: 2em 0;
+  padding: 1em 0;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center top;
+  background-repeat: no-repeat;
   background-image: url("/static/images/intro-bg.jpg");
+}
+#front_intro .page-wrapper {
+  padding-bottom: 0;
 }
 
 #front_intro .location-button {
@@ -3665,7 +3749,7 @@ HOME PAGE INTRO BOX
   color: #fff;
   position: relative;
   padding: 1em;
-  min-height: 242px;
+  min-height: 182px;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
 }
 .carousel-item a {
@@ -3687,13 +3771,13 @@ HOME PAGE INTRO BOX
   font-size: 0.875em;
 }
 
-.featured-person {
+.slide-core_person {
   margin: 0;
 }
-.featured-person img {
+.slide-core_person img {
   margin-right: 1em;
 }
-.featured-person .name {
+.slide-core_person .name {
   font-size: 1.75em;
   text-transform: none;
   color: #fff;
@@ -3701,30 +3785,8 @@ HOME PAGE INTRO BOX
   text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
   margin-bottom: 0.25em;
 }
-.featured-person .subtitle {
+.slide-core_person .subtitle {
   margin-bottom: 0.5em;
-}
-
-.featured-quote q {
-  line-height: 1.45em;
-  display: block;
-  margin-bottom: 1em;
-  font-size: 1.125em;
-  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-  font-weight: normal !important;
-}
-.featured-quote cite {
-  display: block;
-  font-size: .875em;
-  margin-left: 1em;
-}
-.featured-quote cite .name {
-  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-  font-weight: normal !important;
-  text-transform: uppercase;
-}
-.featured-quote cite .date {
-  opacity: 0.8;
 }
 
 #page .home-left h2#home-intro,
@@ -3740,7 +3802,7 @@ HOME PAGE INTRO BOX
 #front_intro .home-right h2 {
   color: #fff;
   text-transform: none;
-  line-height: 1.25em;
+  line-height: 1.35em;
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
   font-weight: normal !important;
   font-weight: normal;
@@ -3750,10 +3812,14 @@ HOME PAGE INTRO BOX
 }
 @media only all and (min-width: 640px), print {
   #front_intro .home-right h2 {
-    font-size: 32px;
     margin-top: 1em;
     margin-bottom: 0;
   }
+}
+#front_intro .home-right h2 small {
+  display: block;
+  opacity: 0.8;
+  font-size: 13px;
 }
 
 #page .home-left h2 {
@@ -3765,7 +3831,7 @@ HOME PAGE INTRO BOX
 
 .home-rep-search .geocoder-search-form {
   background: transparent;
-  margin-top: 30px;
+  margin-top: 13px;
   padding: 0;
 }
 .home-rep-search .geocoder-search-form input[type="text"] {
@@ -3807,11 +3873,11 @@ HOME PAGE INTRO BOX
 .home-rep-search .wrapper {
   border-bottom: 1px solid #ccc;
   overflow: hidden;
-  padding-bottom: 40px;
-  padding-top: 15px;
+  padding-top: 10px;
+  padding-bottom: 25px;
 }
 .home-rep-search .wrapper h2 {
-  margin-top: 40px;
+  margin-top: 25px;
   text-align: center;
 }
 .home-rep-search .wrapper form {
@@ -3872,12 +3938,31 @@ NEWS & POLL
   }
 }
 
-ul#home-news-list {
+.home-news {
+  float: left;
+}
+.home-news h2 a:link {
+  text-decoration: none;
+  color: #222222;
+}
+.home-news h2 a:hover,
+.home-news h2 a:focus {
+  text-decoration: underline;
+  color: #e23d28;
+}
+@media only all and (min-width: 940px), print {
+  .home-news {
+    width: 48%;
+    margin-right: 2%;
+  }
+}
+
+ul.home-news-list {
   border: none;
   padding: 0;
   margin-top: 0;
 }
-ul#home-news-list li {
+ul.home-news-list li {
   border: none;
   width: 100%;
   float: left;
@@ -3885,33 +3970,59 @@ ul#home-news-list li {
   padding-bottom: 0;
 }
 @media only all and (min-width: 940px), print {
-  ul#home-news-list li {
-    width: 48.1012658%;
-  }
-  ul#home-news-list li:nth-child(odd) {
+  ul.home-news-list li:nth-child(odd) {
     padding-right: 3.79747%;
   }
 }
-ul#home-news-list li p {
+ul.home-news-list li p {
   font-size: 0.875em;
   margin-bottom: 0.5em;
 }
-ul#home-news-list li p.meta {
+ul.home-news-list li p.meta {
   font-style: normal;
   font-size: .75em;
 }
-ul#home-news-list li p a:link {
+ul.home-news-list li p a:link {
   text-decoration: underline;
 }
-ul#home-news-list li h3 {
+ul.home-news-list li h3 {
   margin-bottom: 0.25em;
 }
-ul#home-news-list li h3 a:link {
+ul.home-news-list li h3 a:link {
   text-decoration: none;
 }
-ul#home-news-list li h3 a:hover,
-ul#home-news-list li h3 a:focus {
+ul.home-news-list li h3 a:hover,
+ul.home-news-list li h3 a:focus {
   text-decoration: underline;
+}
+
+.social-links-list li {
+  display: inline;
+}
+.social-links-list li a {
+  display: inline-block;
+  text-indent: -9999px;
+  height: 38px;
+  width: 38px;
+  background-image: url("/static/images/social-icons.png");
+  background-position: 0 -1px;
+  background-repeat: none;
+  margin-right: 8px;
+}
+.social-links-list li a:hover, .social-links-list li a:focus {
+  background-position-y: -41px;
+}
+.social-links-list .facebook-social-icon {
+  background-position-x: 0;
+}
+.social-links-list .twitter-social-icon {
+  background-position-x: -51px;
+}
+.social-links-list .youtube-social-icon {
+  background-position-x: -101px;
+}
+.social-links-list .rss-social-icon {
+  background-position-x: -150px;
 }
 
 /*
@@ -3955,11 +4066,17 @@ FOOTER
 }
 #site-footer #footer-menu li > ul {
   margin-top: 0.25em;
+  margin-left: 0.5em;
+  margin-bottom: 0.5em;
 }
 #site-footer #footer-menu li > ul li {
   display: block;
   margin-bottom: 0;
   padding: 0;
+}
+#site-footer #footer-menu li > ul li:before {
+  content: '- ';
+  opacity: 0.5;
 }
 #site-footer h4 {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
@@ -3986,34 +4103,6 @@ FOOTER
   -moz-column-gap: 20px;
   -webkit-column-count: 2;
   -webkit-column-gap: 20px;
-}
-#site-footer .social-links-list li {
-  display: inline;
-}
-#site-footer .social-links-list li a {
-  display: inline-block;
-  text-indent: -9999px;
-  height: 38px;
-  width: 38px;
-  background-image: url("/static/images/social-icons.png");
-  background-position: 0 -1px;
-  background-repeat: none;
-  margin-right: 8px;
-}
-#site-footer .social-links-list li a:hover, #site-footer .social-links-list li a:focus {
-  background-position-y: -41px;
-}
-#site-footer .social-links-list .facebook-social-icon {
-  background-position-x: 0;
-}
-#site-footer .social-links-list .twitter-social-icon {
-  background-position-x: -51px;
-}
-#site-footer .social-links-list .youtube-social-icon {
-  background-position-x: -101px;
-}
-#site-footer .social-links-list .rss-social-icon {
-  background-position-x: -150px;
 }
 #site-footer .contact-details {
   line-height: 16px;
@@ -4118,14 +4207,31 @@ FOOTER
 .sidebar p + h3 {
   margin-top: 1.5em;
 }
+.sidebar .word-break-all {
+  word-break: break-all;
+}
+.sidebar ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  font-size: 0.875em;
+  margin-bottom: 1em;
+}
+.sidebar ul li {
+  list-style: none outside none;
+}
+.sidebar li + li {
+  margin-top: 0.5em;
+}
 .sidebar a:link {
   text-decoration: none;
-  word-break: break-all;
 }
 .sidebar a:hover,
 .sidebar a:active,
 .sidebar a:focus {
   text-decoration: underline;
+}
+.sidebar a.active {
+  color: #555555;
 }
 .sidebar .vcard li .label {
   display: block;
@@ -4329,7 +4435,8 @@ li.speech {
   hyphens: auto;
 }
 li.speech br {
-  display: none;
+  content: ' ';
+  display: inline;
 }
 li.speech .hov {
   font-size: 0.75em;
@@ -4394,6 +4501,44 @@ ul.pager li.next {
   margin-top: -0.5em;
 }
 
+.house-splash {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+@media only all and (min-width: 640px), print {
+  .house-splash {
+    height: 15.5em;
+    background-color: #e23d28;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top left;
+  }
+  .house-splash.national-assembly {
+    background-image: url("/static/images/national-assembly.jpg");
+  }
+  .house-splash.ncop {
+    background-image: url("/static/images/national-council-of-provinces.jpg");
+  }
+}
+
+@media only all and (min-width: 640px), print {
+  .house-title {
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+  }
+  .house-title h1, .house-title p {
+    color: #fff;
+  }
+  .house-title h1 {
+    font-size: 36px;
+  }
+}
+
 .house-intro {
   font-size: 0.875em;
   color: colour_blackish;
@@ -4437,6 +4582,118 @@ ul.pager li.next {
     height: 210px;
     width: 210px;
   }
+}
+
+/* Newsletter page */
+.page-wrapper .email-signup input[type="text"] {
+  border: 1px solid #b3b3b3;
+  border-right: none;
+  padding: 0.74em;
+}
+
+@-webkit-keyframes target-fade {
+  0% {
+    background-color: #f1f0ec;
+    color: #e23d28;
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+    color: #222222;
+  }
+}
+
+@-moz-keyframes target-fade {
+  0% {
+    background-color: #f1f0ec;
+    color: #e23d28;
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+    color: #222222;
+  }
+}
+
+@keyframes target-fade {
+  0% {
+    background-color: #f1f0ec;
+    color: #e23d28;
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+    color: #222222;
+  }
+}
+
+/* Place page */
+.list-of-constituency-offices ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.list-of-constituency-offices > li {
+  border-bottom: 1px solid #d2d2ce;
+  padding-top: 1em;
+  position: relative;
+}
+.list-of-constituency-offices li {
+  overflow: hidden;
+}
+.list-of-constituency-offices :target a {
+  -webkit-animation: target-fade 3s 1;
+  -moz-animation: target-fade 3s 1;
+  animation: target-fade 3s 1;
+}
+.list-of-constituency-offices a {
+  color: #222222;
+  text-decoration: none;
+}
+.list-of-constituency-offices a:hover, .list-of-constituency-offices a:focus {
+  color: #e23d28;
+  text-decoration: underline;
+}
+.list-of-constituency-offices .name {
+  font-weight: bold;
+}
+.list-of-constituency-offices .constituency-office-address {
+  font-size: 0.875em;
+  color: #555555;
+}
+.list-of-constituency-offices .constituency-office-mp-name {
+  font-size: 0.875em;
+  color: #222222;
+  margin-bottom: 0;
+}
+.list-of-constituency-offices .constituency-office-mp-title {
+  font-size: 0.875em;
+  color: #555555;
+  margin-bottom: 0;
+}
+.list-of-constituency-offices .constituency-office-mp-photo {
+  height: 58px;
+  width: 58px;
+  float: left;
+  margin-right: 16px;
+  margin-bottom: 1em;
+}
+.list-of-constituency-offices .distance {
+  color: #b3b3b3;
+  position: absolute;
+  top: 1em;
+  right: 0;
+}
+.list-of-constituency-offices .tiny-list-of-people .person-list-item {
+  border: none;
+  padding: 0;
+  margin-bottom: .5em;
+}
+.list-of-constituency-offices .tiny-list-of-people .person-list-item img {
+  height: 29px;
+  width: 29px;
+}
+.list-of-constituency-offices .tiny-list-of-people .person-list-item .name {
+  font-size: 0.75em;
 }
 
 /* Person page */
@@ -4578,6 +4835,73 @@ ul.pager li.next {
   margin-bottom: 0.5em;
 }
 
+/* Place search results */
+.about-constituency-office {
+  font-size: 0.75em;
+  margin-bottom: 1em;
+}
+@media only all and (min-width: 640px), print {
+  .about-constituency-office {
+    margin-bottom: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+#map_canvas {
+  margin-bottom: 2em;
+}
+
+.politicians-results h2 {
+  margin-bottom: .6em;
+}
+.politicians-results .list-of-things-item:first-child {
+  border-top: none;
+}
+
+/* Blog styles */
+.blog-post ul, .blog-post p {
+  max-width: 580px;
+}
+
+.blog-list .blog-in-a-list {
+  border-bottom: 1px solid #d2d2ce;
+  margin-bottom: 2em;
+}
+
+/* Error and status pages */
+.error #page {
+  padding: 0;
+}
+
+.error-page-content {
+  min-height: 500px;
+}
+
+.error-page-content h1,
+.error-page-content p {
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+.error-page-content h1 {
+  padding-top: 2em;
+  font-size: 48px;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.error-page-content p {
+  max-width: 30em;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.error-page-content a {
+  color: inherit;
+}
+
 /* Generic layouts */
 .layout {
   /**
@@ -4609,6 +4933,21 @@ ul.pager li.next {
   overflow: hidden;
   margin-bottom: 1em;
   margin-left: 1em;
+}
+
+.fifty-fifty-layout .column:first-child {
+  margin-bottom: 2em;
+}
+
+.hide-reveal-link {
+  display: block;
+  padding: 0.5em 0;
+}
+
+.has-dropdown-dark {
+  background-image: url("/static/images/has-dropdown-dark.png");
+  background-position: 100% 1em;
+  background-repeat: no-repeat;
 }
 
 @media only all and (min-width: 640px), print {
@@ -4648,17 +4987,24 @@ ul.pager li.next {
     width: 74.375%;
     margin-right: 2.5%;
     /* 24px @ 960px */
+    float: left;
   }
   .layout-major-minor .minor-column {
     width: 23.125%;
     float: right;
   }
+  .layout-major-minor.reverse .major-column {
+    float: right;
+  }
   .layout-major-minor.reverse .minor-column {
     float: left;
   }
-}
 
-/* for speeches breadcrumb */
-ul.breadcrumbs li:nth-child(2) {
-    display: none;
+  .fifty-fifty-layout .column {
+    width: 48%;
+    float: left;
+  }
+  .fifty-fifty-layout .column:first-child {
+    margin-right: 4%;
+  }
 }

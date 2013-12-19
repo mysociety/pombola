@@ -9,11 +9,14 @@ the organisation detail page.
 
 
 {% block content %}
-  <h1>{{ object.title }} {{ object.name }}</h1>
-  {% if object.kind.slug != 'unknown' %}
-    <p class="kind-of-subtitle">{{ object.kind.name }}</p>
-  {% endif %}
-
+<div class="house-splash {{ object.slug }}">
+  <div class="house-title">
+    <h1>{{ object.title }} {{ object.name }}</h1>
+    {% if object.kind.slug != 'unknown' %}
+      <p class="kind-of-subtitle">{{ object.kind.name }}</p>
+    {% endif %}
+  </div>
+</div>
   <div class="house-intro">
     {{ object.summary }}
   </div>
@@ -22,9 +25,8 @@ the organisation detail page.
 
   <div>
     <ul class="house-page-list">
-      <li><a href="{% url 'organisation_people' slug=object.slug %}">National executive ({{ organisation.position_set.count }})</a></li>
-      <li><a href="{% url 'organisation_people' slug=object.slug %}">Office bearers ({{ organisation.position_set.count }})</a></li>
-      <li><a href="{% url 'organisation_people' slug=object.slug %}?all=1">All members ({{ organisation.position_set.count }})</a></li>
+      <li><a href="{% url 'organisation_people' slug=object.slug %}?office=1">Office bearers ({{ office_bearers.count }})</a></li>
+      <li><a href="{% url 'organisation_people' slug=object.slug %}?member=1">All members ({{ all_members.count }})</a></li>
     </ul>
   </div>
 
@@ -36,7 +38,7 @@ the organisation detail page.
       <li>
       <a href="{% url "organisation" slug=party.slug %}">
         {{ party.name }}
-        <span class="percent">{{ party.percentage }}%</span>
+        <span class="percent">{{ party.percentage|floatformat:"-1" }}%</span>
       </a>
       </li>
       {% endfor %}

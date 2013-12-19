@@ -32,6 +32,7 @@ known_fields = {
                             'identifiers',
                             'contact_details',
                             'other_names',
+                            'biography',
                             'memberships',)),
                'ignored': set(('family_name',
                                'initials_alt',
@@ -132,12 +133,43 @@ def get_or_create(model, **kwargs):
                 print "  " + k + ": " + unicode(v).encode('utf-8')
         o = model(**params)
         if commit:
-            verbose(" (saved)")
             o.save()
+            verbose(" (saved)")
         else:
             verbose(" (not saving)")
         return o
     raise Exception("Failed get_or_create")
+
+
+def add_image_to_object(image_url, obj, commit):
+    source = "Downloaded from: %s" % (image_url,)
+    if Image.objects.filter(source=source).count() > 0:
+        if VERBOSE:
+            print "  (image already imported)"
+    else:
+        person_image = get_or_create(Image,
+                                     commit=commit,
+                                     source=source,
+                                     defaults={'content_object': obj})
+        if commit:
+            print "  (downloading %s)" % (image_url,)
+            response = urllib.urlopen(image_url)
+            status_code = response.getcode()
+            if status_code < 200 or status_code >= 300:
+                message = "Unexpected HTTP status %d on downloading '%s'"
+                raise RuntimeError, message % (status_code, image_url)
+            content = ContentFile(response.read())
+            time.sleep(2)
+            # The image name is used to generate its
+            # filename, and if it contains non-ASCII
+            # characters that can cause unpredictable
+            # locale-dependent problems, so remove any
+            # accents:
+            normalized_name = unicodedata.normalize("NFKD", obj.name).encode("ascii", "ignore")
+            person_image.image.save(
+                name = 'Picture of ' + normalized_name,
+                content=content)
+
 
 class Command(LabelCommand):
     help = 'Import people, organisations and positions from Popolo JSON'
@@ -194,6 +226,10 @@ class Command(LabelCommand):
             if options['commit']:
                 o.save()
 
+            if 'image' in organisation:
+                add_image_to_object(image_url=organisation['image'], obj=o, commit=options['commit'])
+
+
             id_to_organisation[o_id] = o
 
             create_identifiers(organisation, o, options['commit'])
@@ -243,34 +279,7 @@ class Command(LabelCommand):
                     p.add_alternative_name(other_name['name'])
 
             if 'image' in person:
-                image_url = person['image']
-                source = "Downloaded from: %s" % (image_url,)
-                if Image.objects.filter(source=source).count() > 0:
-                    if VERBOSE:
-                        print "  (image already imported)"
-                else:
-                    person_image = get_or_create(Image,
-                                                 commit=options['commit'],
-                                                 source=source,
-                                                 defaults={'content_object': p})
-                    if options['commit']:
-                        print "  (downloading %s)" % (image_url,)
-                        response = urllib.urlopen(image_url)
-                        status_code = response.getcode()
-                        if status_code < 200 or status_code >= 300:
-                            message = "Unexpected HTTP status %d on downloading '%s'"
-                            raise RuntimeError, message % (status_code, image_url)
-                        content = ContentFile(response.read())
-                        time.sleep(2)
-                        # The image name is used to generate its
-                        # filename, and if it contains non-ASCII
-                        # characters that can cause unpredictable
-                        # locale-dependent problems, so remove any
-                        # accents:
-                        normalized_name = unicodedata.normalize("NFKD", p.name).encode("ascii", "ignore")
-                        person_image.image.save(
-                            name = 'Picture of ' + normalized_name,
-                            content=content)
+                add_image_to_object(image_url=person['image'], obj=p, commit=options['commit'])
 
             # Create a Contact object for each contact in the JSON:
 

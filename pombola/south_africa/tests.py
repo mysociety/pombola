@@ -16,10 +16,10 @@ from pombola.core import models
 import json
 
 from popit.models import Person as PopitPerson, ApiInstance
-from speeches.models import Speaker
+from speeches.models import Speaker, Section
 from speeches.tests import create_sections
 from pombola import south_africa
-from pombola.south_africa.views import SAPersonDetail
+from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
 
 class ConstituencyOfficesTestCase(WebTest):
@@ -190,8 +190,7 @@ class SAPersonDetailViewTest(TestCase):
 
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
-        detail = SAPersonDetail( object=person )
-        speaker = detail.get_sayit_speaker()
+        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
         self.assertEqual( speaker.name, 'Moomin Finn' )
 
 class SAHansardIndexViewTest(TestCase):
@@ -250,6 +249,50 @@ class SAHansardIndexViewTest(TestCase):
         response = c.get('/hansard/')
         self.assertEqual(response.status_code, 200)
 
+        section_name = "Proceedings of Foo"
+        section = Section.objects.get(title=section_name)
+
         # Check that we can see the titles of sections containing speeches only
-        self.assertContains(response, "Proceedings of the National Assembly (2012/2/16)")
+        self.assertContains(response, section_name)
+        self.assertContains(response, '<a href="/hansard/%d">%s</a>' % (section.id, section_name), html=True)
+        self.assertNotContains(response, "Empty section")
+
+class SACommitteeIndexViewTest(TestCase):
+
+    def setUp(self):
+        create_sections([
+            {
+                'title': "Committee Minutes",
+                'subsections': [
+                    {   'title': "Agriculture, Forestry and Fisheries",
+                        'subsections': [
+                            {   'title': "16 November 2012",
+                                'subsections': [
+                                    {   'title': "Oh fishy fishy fishy fishy fishy fish",
+                                        'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
+                                    },
+                                    {
+                                        'title': "Empty section",
+                                    }
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ])
+
+
+    def test_committee_index_page(self):
+        c = Client()
+        response = c.get('/committee/')
+        self.assertEqual(response.status_code, 200)
+
+        section_name = "Oh fishy fishy fishy fishy fishy fish"
+        section = Section.objects.get(title=section_name)
+
+        # Check that we can see the titles of sections containing speeches only
+        self.assertContains(response, "16 November 2012")
+        self.assertContains(response, section_name)
+        self.assertContains(response, '<a href="/committee/%d">%s</a>' % (section.id, section_name), html=True)
         self.assertNotContains(response, "Empty section")

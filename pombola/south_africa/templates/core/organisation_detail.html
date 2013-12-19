@@ -22,10 +22,21 @@
   <h2>People</h2>
   {% include "core/_position_listing.html" with positions=object.position_set.all %}
 
+  {% if object.kind.slug == 'constituency-office' %}
+    {% include 'disqus_comments.html' %}
+  {% endif %}
+
 {% endblock %}
 
 {# Put a map in the profile_pic block #}
 {% block profile_pic %}
+
+  {% thumbnail object.primary_image "210x210" crop="center" as im %}
+    <div class="profile-pic">
+      <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+    </div>
+  {% empty %}
+  {% endthumbnail %}
 
 {% with place=object.place_set.all.0 %}
   {% if place.location %}
@@ -49,7 +60,10 @@
 
 {% endblock profile_pic %}
 
-  {% block profile_info %}
+{% block profile_info %}
+
+  {% if object.contacts.count %}
+
   <div class="sidebar">
     <ul class="vcard">
       {% for c in object.contacts.all %}
@@ -88,4 +102,6 @@
       {% endfor %}
     </ul>
   </div>
-  {% endblock profile_info %}
+
+  {% endif %}
+{% endblock profile_info %}

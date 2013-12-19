@@ -485,7 +485,7 @@ class OrganisationManager(ManagerBase):
         return OrganisationQuerySet(self.model)
 
 
-class Organisation(ModelBase):
+class Organisation(ModelBase, HasImageMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
@@ -495,6 +495,7 @@ class Organisation(ModelBase):
 
     objects = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
+    images = generic.GenericRelation(Image)
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.kind)
@@ -564,7 +565,7 @@ class Place(ModelBase, ScorecardMixin):
     shape_url = models.URLField(blank=True)
     location = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
-    parliamentary_session = models.ForeignKey('ParliamentarySession', null=True)
+    parliamentary_session = models.ForeignKey('ParliamentarySession', null=True, blank=True)
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
@@ -624,9 +625,22 @@ class Place(ModelBase, ScorecardMixin):
         return Place.objects.filter(pk__in=ids)
 
 
-    def all_related_current_politicians(self):
+    def all_related_positions(self):
+        """Return a query set of all the positions for this place, and all parent places."""
+        return Position.objects.filter(place__in=self.self_and_parents())
+
+    def all_related_politicians(self):
         """Return a query set of all the politicians for this place, and all parent places."""
-        positions = Position.objects.filter(place__in=self.self_and_parents()).current_politician_positions()
+        return Person.objects.filter(position__in=self.all_related_positions().politician_positions()).distinct()
+
+    def all_related_current_politicians(self):
+        """Return a query set of all the current politicians for this place, and all parent places."""
+        positions = self.all_related_positions().current_politician_positions()
+        return Person.objects.filter(position__in=positions).distinct()
+
+    def all_related_former_politicians(self):
+        """Return a query set of all the former politicians for this place, and all parent places."""
+        positions = self.all_related_positions().former_politician_positions()
         return Person.objects.filter(position__in=positions).distinct()
 
     def child_places_by_kind(self):
@@ -903,6 +917,10 @@ class PositionQuerySet(models.query.GeoQuerySet):
     def current_politician_positions(self, when=None):
         """Filter down to only positions which are those of current politicians."""
         return self.politician_positions().currently_active(when)
+
+    def former_politician_positions(self, when=None):
+        """Filter down to only positions which are those of former politicians."""
+        return self.politician_positions().currently_inactive(when)
 
     def political(self):
         """Filter down to only the political category"""

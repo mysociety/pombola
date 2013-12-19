@@ -25,37 +25,22 @@
       <a href="{% url "info_page" slug='constitution--zimbabwe-2013' %}"> Constitution 2013 </a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='electoral-law-and-legislation' %}"> Electoral Law and Legislation </a>
+      <a href="{% url "info_page" slug='electoral-law-and-legislation' %}"> Electoral Law &amp; Legislation </a>
     </li>
   </ul>
   {% endif %}
 </li>
  
-
-
-<li><a href="{% url "info_page" slug='m-national-assembly' %}">National Assembly</a>
-  {% if include_sub_menu_entries %}
-  <ul>
-    <li>
-      <a href="{% url "info_page" slug='political-parties' %}">  Political Parties  </a>
-    </li>
-    <li>
-      <a href="{% url "info_page" slug='senators' %}"> Senators </a>
-    </li>
-  </ul>
-  {% endif %}
-</li>
- 
-
+<li><a href="http://www.kuvakazim.com/info/political-parties">Political Parties</a></li>
 
 <li><a href="{% url "info_page" slug='m-parliament' %}">Parliament</a>
   {% if include_sub_menu_entries %}
   <ul id="m-parliament">
     <li>
-      <a href="{% url "info_page" slug='senators' %}"> Senators </a>
+      <a href="{% url "position_pt" pt_slug='member-of-parliament' %}">Members of the National Assembly</a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='parliament-overview' %}"> Parliament Overview </a>
+      <a href="{% url "position_pt" pt_slug='senator' %}">Senators</a>
     </li>
     <li>
       <a href="{% url "info_page" slug='ministry-overview' %}">  Ministry Overview  </a>
@@ -72,9 +57,6 @@
     <li>
       <a href="{% url "info_page" slug='hansard' %}"> Hansard </a>
     </li>
-    <li>
-      <a href="{% url "info_page" slug='political-parties' %}">  Political Parties  </a>
-    </li>
 
   </ul>
   {% endif %}
@@ -89,7 +71,13 @@
       <a href="{% url "info_page" slug='newspapers' %}"> Newspapers </a>
     </li>
     <li>
-      <a href="{% url "info_page" slug='newsletter' %}"> Newletter </a>
+      <a href="{% url "info_page" slug='newsletter' %}"> Newsletter </a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/kuvakazim"> Facebook </a>
+    </li>
+    <li>
+      <a href="https://twitter.com/kuvakazim"> Twitter </a>
     </li>
   </ul>
   {% endif %}
