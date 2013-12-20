@@ -1,4 +1,5 @@
 {% extends "search/search_base.html" %}
+{% load url from future %}
 
 {% block title %}
   {% if query %}
@@ -6,6 +7,14 @@
   {% else %}
     Search for places using your poll unit number
   {% endif %}
+{% endblock %}
+
+{% block alternative_search_section %}
+    <p>
+      Alternatively search
+      <a href="{% url "core_search" %}?q={{ query|urlencode }}">for a person or organisation</a>
+      instead.
+    </p>
 {% endblock %}
 
 {% block search_form %}
