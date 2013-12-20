@@ -1,4 +1,7 @@
 from django.contrib import admin
+
+import autocomplete_light
+
 import models
 
 class LabelAdmin(admin.ModelAdmin):
@@ -14,6 +17,8 @@ class InfoPageAdmin(admin.ModelAdmin):
     list_filter   = [ 'kind', 'categories', 'tags' ]
     date_hierarchy = 'publication_date'
     ordering = ('-publication_date', 'title')
+
+    form = autocomplete_light.modelform_factory(models.InfoPage)
 
     fields = ('title', 'slug', 'publication_date', 'kind', 'content', 'categories', 'tags')
     prepopulated_fields = {'slug': ['title']}
