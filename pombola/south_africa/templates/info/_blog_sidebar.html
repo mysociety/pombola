@@ -18,7 +18,7 @@
 
     <h3>Categories</h3>
 
-    <ul>
+    <ul class="blog-categories">
       {% for category in all_categories %}
         <li><a href="{% url 'info_blog_category' slug=category.slug %}">{{ category.name }}</a></li>
       {% empty %}
