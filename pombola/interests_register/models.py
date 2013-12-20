@@ -22,8 +22,8 @@ class CreateSlugOnSaveIfNeededModel(models.Model):
 
 
 class Category(CreateSlugOnSaveIfNeededModel):
-    slug = models.SlugField(unique=True)
     name = models.CharField(max_length=300, unique=True)
+    slug = models.SlugField(unique=True)
 
     sort_order = models.IntegerField()
 
@@ -36,8 +36,8 @@ class Category(CreateSlugOnSaveIfNeededModel):
 
 
 class Release(CreateSlugOnSaveIfNeededModel):
-    slug = models.SlugField(unique=True)
     name = models.CharField(max_length=300, unique=True)
+    slug = models.SlugField(unique=True)
     date = models.DateField()
 
     def __unicode__(self):
