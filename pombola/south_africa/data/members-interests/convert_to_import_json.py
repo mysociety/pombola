@@ -312,7 +312,7 @@ if __name__ == "__main__":
     output = converter.convert()
     print output
 
-    if self.finding_slug_corrections:
+    if converter.finding_slug_corrections:
         print "\n\n"
         print "#### COPY THIS TO slug_corrections and s/null/None/ :) ####"
         print "\n\n"
