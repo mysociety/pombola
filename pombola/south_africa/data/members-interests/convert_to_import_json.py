@@ -32,7 +32,7 @@ class Converter(object):
 
     # Change this to True to enable little bits of helper code for finding new
     # slug corrections:
-    finding_slug_corrections = True
+    finding_slug_corrections = False
 
     slug_corrections = {
         "albert-theo-fritz": "albert-fritz",
@@ -57,11 +57,11 @@ class Converter(object):
         "busisiwe-mncube": "busisiwe-veronica-mncube",
         "butana-moses-komphela": "b-m-komphela",
         "buyelwa-patience-sonjica": "b-p-sonjica",
-        "buyiswa-blaai": None,
         "buyiswa-diemu": "buyiswa-cornelia-diemu",
+        "buyiswa-diemublaai": "buyiswa-cornelia-diemu",
+        "cassel-mathale": "cassel-charlie-mathale",
         "charel-de-beer": "charel-jacobus-de-beer",
         "constance-mosimane": "constance-kedibone-kelekegile-mosimane",
-        "control-flag-ict": None,
         "cq-madlopha": "celiwe-qhamkile-madlopha",
         "crosby-mpozo-moni": "crosby-mpoxo-moni",
         "dalitha-boshigo": "dalitha-fiki-boshigo",
@@ -173,7 +173,6 @@ class Converter(object):
         "royith-bhoola": "royith-baloo-bhoola",
         "salamuddi-abram": "salamuddi-salam-abram",
         "sam-mazosiwe": "siphiwo-sam-mazosiwe",
-        "sanna-keikantseeng-molao": None,
         "sanna-keikantseeng-molao-now-plaatjie": "sanna-keikantseeng-plaatjie",
         "sanna-plaatjie": "sanna-keikantseeng-plaatjie",
         "seeng-patricia-lebenya-ntanzi": "s-p-lebenya-ntanzi",
@@ -181,6 +180,7 @@ class Converter(object):
         "sherry-chen": "sheery-su-huei-cheng",
         "sicelo-shiceka": "s-shiceka",
         "siyabonga-cwele": "siyabonga-cyprian-cwele",
+        "stella-tembisa-ndabeni-abrahams": "stella-tembisa-ndabeni",
         "suhla-james-masango": "s-j-masango",
         "swaphi-h-plaatjie": "swaphi-hendrick-plaatjie",
         "swaphi-plaatjie": "swaphi-hendrick-plaatjie",
@@ -203,6 +203,7 @@ class Converter(object):
         "zisiwe-balindlela": "zisiwe-beauty-nosimo-balindlela",
         "zoliswa-kota-fredericks": "zoliswa-albertina-kota-fredericks",
         "zukiswa-rantho": "daphne-zukiswa-rantho",
+        "seiso-mohai": "seiso-joel-mohai",
 
         # FIXME - need to manually match these
 
