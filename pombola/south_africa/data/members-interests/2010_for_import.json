@@ -5738,22 +5738,7 @@
                 "Description": "Apartment",
                 "Extent": "Normal",
                 "Location": "Nelspruit"
-            }
-        ],
-        "person": {
-            "slug": "dina-deliwe-pule"
-        },
-        "release": {
-            "date": "2010-01-01",
-            "name": "2010Disclosure"
-        }
-    },
-    {
-        "category": {
-            "name": "LAND AND PROPERTY",
-            "sort_order": 9
-        },
-        "entries": [
+            },
             {
                 "Description": "Apartment",
                 "Extent": "Normal",

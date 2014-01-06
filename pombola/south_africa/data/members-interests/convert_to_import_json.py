@@ -352,16 +352,39 @@ class Converter(object):
     def produce_json(self):
         data = self.groupings
 
-        # To make the data diff-able we need to sort not only the keys as part
-        # of the json export below, but also the content of the data. Sort by
-        # mp, then by category name.
+        combined_data = self.combine_data(data)
+
+        out = json.dumps(combined_data, indent=4, sort_keys=True)
+        return re.sub(r' *$', '', out, flags=re.M)
+
+    def combine_data(self, data):
+        """
+        Manipulate the data so that there are no duplicates of person and
+        category, and sort data so that it is diff-able.
+        """
         sorted_data = sorted(
             data,
             key = lambda x: x['person']['slug'] + ':' + x['category']['name']
         )
 
-        out = json.dumps(sorted_data, indent=4, sort_keys=True)
-        return re.sub(r' *$', '', out, flags=re.M)
+        combined_data = []
+
+        for entry in sorted_data:
+            # check if the last entry of combined_data has same person and
+            # category. If so add entries to that, otherwise append whole thing.
+
+            if len(combined_data):
+                last_entry = combined_data[-1]
+            else:
+                last_entry = None
+
+            if last_entry and last_entry['person']['slug'] == entry['person']['slug'] and last_entry['category']['name'] == entry['category']['name']:
+                last_entry['entries'].extend(entry['entries'])
+            else:
+                combined_data.append(entry)
+
+        return combined_data
+
 
     def extract_data_from_json(self):
         with open(self.filename) as fh:
