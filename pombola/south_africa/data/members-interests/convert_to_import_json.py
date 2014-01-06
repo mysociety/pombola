@@ -176,6 +176,20 @@ class Converter(object):
 
         # FIXME - can't seem to find a match for these
         "buyiswa-blaai": None,
+
+    }
+
+    category_sort_orders = {
+        "SHARES AND OTHER FINANCIAL INTERESTS": 1,
+        "REMUNERATED EMPLOYMENT OUTSIDE PARLIAMENT": 2,
+        "DIRECTORSHIP AND PARTNERSHIPS": 3,
+        "CONSULTANCIES OR RETAINERSHIPS": 4,
+        "SPONSORSHIPS": 5,
+        "GIFTS AND HOSPITALITY": 6,
+        "BENEFITS": 7,
+        "TRAVEL": 8,
+        "LAND AND PROPERTY": 9,
+        "PENSIONS": 10,
     }
 
     def __init__(self, filename):
@@ -245,10 +259,12 @@ class Converter(object):
                     "entries": entries,
                 }
 
-                # Break up the name into sort_order and proper name
-                sort_order, category_name = raw_category_name.strip().split('. ')
+                # Extract the category name we are interested in
+                category_name = raw_category_name.strip()
+                category_name = re.sub(r'^\d+\.\s*', '', category_name)
+
                 grouping['category'] = {
-                    "sort_order": int(sort_order),
+                    "sort_order": self.category_sort_orders[category_name],
                     "name": category_name,
                 }
 
@@ -299,7 +315,16 @@ class Converter(object):
 
     def produce_json(self):
         data = self.groupings
-        out = json.dumps(data, indent=4, sort_keys=True)
+
+        # To make the data diff-able we need to sort not only the keys as part
+        # of the json export below, but also the content of the data. Sort by
+        # mp, then by category name.
+        sorted_data = sorted(
+            data,
+            key = lambda x: x['person']['slug'] + ':' + x['category']['name']
+        )
+
+        out = json.dumps(sorted_data, indent=4, sort_keys=True)
         return re.sub(r' *$', '', out, flags=re.M)
 
     def extract_data_from_json(self):
