@@ -32,31 +32,44 @@ class Converter(object):
 
     # Change this to True to enable little bits of helper code for finding new
     # slug corrections:
-    finding_slug_corrections = False
+    finding_slug_corrections = True
 
     slug_corrections = {
+        "albert-theo-fritz": "albert-fritz",
+        "albertinah-nomathuli-luthuli": "a-n-luthuli",
         "amos-matila": "amos-gerald-matila",
         "andre-gaum": "andre-hurtley-gaum",
+        "andrew-louw": "a-louw",
+        "anele-mda": "a-mda",
         "anton-alberts": "anton-de-waal-alberts",
         "archibold-mzuvukile-figlan": "a-m-figlan",
         "archibold-nyambi": "archibold-jomo-nyambi",
         "arthur-ainslie": "arthur-roy-ainslie",
         "bafunani-aaron-mnguni": "bafumani-aaron-mnguni",
+        "barbara-anne-hogan": "b-a-hogan",
+        "barbara-thompson": "barbara-thomson",
         "bertha-mabe": "bertha-peace-mabe",
         "beryl-ferguson": "beryl-delores-ferguson",
         "beverley-lynnette-abrahams": "beverley-lynette-abrahams",
         "bhekizizwe-abram-radebe": "bhekiziswe-abram-radebe",
+        "bonginkosi-dhlamini": "bonginkosi-dlamini",
         "bonisile-alfred-nesi": "bonisile-nesi",
         "busisiwe-mncube": "busisiwe-veronica-mncube",
+        "butana-moses-komphela": "b-m-komphela",
+        "buyelwa-patience-sonjica": "b-p-sonjica",
+        "buyiswa-blaai": None,
         "buyiswa-diemu": "buyiswa-cornelia-diemu",
         "charel-de-beer": "charel-jacobus-de-beer",
         "constance-mosimane": "constance-kedibone-kelekegile-mosimane",
+        "control-flag-ict": None,
         "cq-madlopha": "celiwe-qhamkile-madlopha",
         "crosby-mpozo-moni": "crosby-mpoxo-moni",
         "dalitha-boshigo": "dalitha-fiki-boshigo",
         "danny-montsitsi": "sediane-danny-montsitsi",
         "dennis-bloem": "dennis-victor-bloem",
         "dennis-gamede": "dumisani-dennis-gamede",
+        "desiree-van-der-walt": "ms-desiree-van-der-walt",
+        "dina-deliwa-pule": "dina-deliwe-pule",
         "dirk-feldman": "dirk-benjamin-feldman",
         "dj-stubbe": "dirk-jan-stubbe",
         "doris-nompendlko-ngcengwane": "nompendlko-doris-ngcengwane",
@@ -65,11 +78,13 @@ class Converter(object):
         "dumisani-ximbi": "dumsani-livingstone-ximbi",
         "ebrahim-ebrahim": "ebrahim-ismail-ebrahim",
         "elza-van-lingen": "elizabeth-christina-van-lingen",
+        "emmanuel-nkosinathi-mandlenkosi-mthethwa": "emmanuel-nkosinathi-mthethwa",
         "enoch-godongwana": "e-godongwana",
         "ernst-eloff": "ernst-hendrik-eloff",
         "faith-bikani": "faith-claudine-bikani",
         "gbd-mcintosh": "graham-brian-douglas-mc-intosh",
         "gelana-sindane": "gelana-sarian-sindane",
+        "geoffery-quinton-mitchell-doidge": "g-q-m-doidge",
         "geolatlhe-godfrey-oliphant": "gaolatlhe-godfrey-oliphant",
         "geordin-hill-lewis": "geordin-gwyn-hill-lewis",
         "george-boinamo": "george-gaolatlhe-boinamo",
@@ -83,6 +98,7 @@ class Converter(object):
         "herman-groenewald": "hermanus-bernadus-groenewald",
         "hildah-sizakele-msweli": "hilda-sizakele-msweli",
         "isaac-mfundisi": "isaac-sipho-mfundisi",
+        "ismail-vadi": "i-vadi",
         "jac-bekker": "jacobus-marthinus-g-bekker",
         "james-lorimer": "james-robert-bourne-lorimer",
         "jan-gunda": "jan-johannes-gunda",
@@ -100,9 +116,11 @@ class Converter(object):
         "lulama-mary-theresa-xingwana": "lulama-marytheresa-xingwana",
         "lusizo-makhubela-mashele": "lusizo-sharon-makhubela-mashele",
         "lydia-sindiswe-chikunga": "lydia-sindisiwe-chikunga",
+        "machejane-alina-rantsolase": "m-a-rantsolase",
         "mafemane-makhubela": "mafemane-wilson-makhubela",
         "maite-emely-nkoana-mashabane": "maite-emily-nkoana-mashabane",
         "makgathatso-pilane-majake": "makgathatso-charlotte-chana-pilane-majake",
+        "makhenkezi-arnold-stofile": "m-a-stofile",
         "makone-collen-maine": "mokoane-collen-maine",
         "mandlenkosi-enock-mbili": "m-e-mbili",
         "mark-harvey-steele": "m-h-steele",
@@ -111,7 +129,10 @@ class Converter(object):
         "matome-mokgobi": "matome-humphrey-mokgobi",
         "mavis-nontsikelelo-magazi": "n-m-magazi",
         "mavis-ntebaleng-matladi": "m-n-matladi",
+        "max-vuyisile-sisuslu": "max-vuyisile-sisulu",
+        "mbhazima-samuel-shilowa": "m-s-shilowa",
         "mbuyiselo-jacobs": "mbuyiselo-patrick-jacobs",
+        "membathisi-mphumzi-shepherd-mdladlana": "m-m-s-mdladlana",
         "meriam-phaliso": "meriam-nozibonelo-phaliso",
         "michael-de-villiers": "michael-jacobs-roland-de-villiers",
         "michael-james-ellis": "m-j-ellis",
@@ -120,14 +141,20 @@ class Converter(object):
         "mntombizodwa-florence-nyanda": "n-f-nyanda",
         "mogi-lydia-moshodi": "moji-lydia-moshodi",
         "mohammed-sayedali-shah": "mohammed-rafeek-sayedali-shah",
+        "mondli-gungubele": "m-gungubele",
         "mosie-anthony-cele": "mosie-antony-cele",
         "mpane-mohorosi": "mpane-martha-mohorosi",
         "n-d-ntwanambi": "nosipho-dorothy-ntwanambi",
+        "nolitha-yvonne-vukuza-linda": "n-y-vukuza-linda",
+        "noluthando-agatha-mayende-sibiya": "n-a-mayende-sibiya",
         "nomzamo-winnie-madikizela-mandela": "nomzamo-winfred-madikizela-mandela",
+        "nonkumbi-bertha-gxowa": "n-b-gxowa",
+        "ntombikhayise-nomawisile-sibhida": "ntombikayise-nomawisile-sibhida",
         "ntombikhayise-nomawisile-sibhidla": "ntombikayise-nomawisile-sibhida",
         "obed-bapela": "kopeng-obed-bapela",
         "onel-de-beer": "onell-de-beer",
         "pakishe-motsoaledi": "pakishe-aaron-motsoaledi",
+        "patrick-chauke": "h-p-chauke",
         "paul-mashatile": "shipokasa-paulus-mashatile",
         "pearl-petersen-maduna": "pearl-maduna",
         "petronella-catharine-duncan": "petronella-catherine-duncan",
@@ -146,10 +173,12 @@ class Converter(object):
         "royith-bhoola": "royith-baloo-bhoola",
         "salamuddi-abram": "salamuddi-salam-abram",
         "sam-mazosiwe": "siphiwo-sam-mazosiwe",
+        "sanna-keikantseeng-molao": None,
         "sanna-keikantseeng-molao-now-plaatjie": "sanna-keikantseeng-plaatjie",
         "sanna-plaatjie": "sanna-keikantseeng-plaatjie",
         "seeng-patricia-lebenya-ntanzi": "s-p-lebenya-ntanzi",
         "sherphed-mayatula": "shepherd-malusi-mayatula",
+        "sherry-chen": "sheery-su-huei-cheng",
         "sicelo-shiceka": "s-shiceka",
         "siyabonga-cwele": "siyabonga-cyprian-cwele",
         "suhla-james-masango": "s-j-masango",
@@ -162,10 +191,13 @@ class Converter(object):
         "tim-harris": "timothy-duncan-harris",
         "tjheta-mofokeng": "tjheta-makwa-harry-mofokeng",
         "tlp-nwamitwa-shilubana": "tinyiko-lwandlamuni-phillia-nwamitwa-shilubana",
+        "tovhowani-josephine-tshivhase": "t-j-tshivhase",
         "trevor-john-bonhomme": "trevor-bonhomme",
+        "tshenuwani-simon-farisani": "t-s-farisani",
         "tshiwela-elidah-lishivha": "tshiwela-elida-lishivha",
         "velly-manzini": "velly-makasana-manzini",
         "willem-faber": "willem-frederik-faber",
+        "willem-phillips-doman": "w-p-doman",
         "zephroma-dubazana": "zephroma-sizani-dubazana",
         "zephroma-sizani-dlamini-dubazana": "zephroma-sizani-dubazana",
         "zisiwe-balindlela": "zisiwe-beauty-nosimo-balindlela",
@@ -176,7 +208,10 @@ class Converter(object):
 
         # FIXME - can't seem to find a match for these
         "buyiswa-blaai": None,
+        "sanna-keikantseeng-molao": None, # perhaps "sanna-keikantseeng-plaatjie"?
 
+        # Garbage entries
+        "control-flag-ict": None,
     }
 
     category_sort_orders = {
@@ -242,10 +277,10 @@ class Converter(object):
                                         entry[key] = previous[key]
                                         break
                                 # Replacement may not have been found, warn
-                                if entry[key] in self.ditto_marks:
-                                    sys.stderr.write("----------- Could not find previous entry for ditto mark of '{0}'\n".format(key))
-                                    sys.stderr.write(str(previous_entries) + "\n")
-                                    sys.stderr.write(str(entry) + "\n")
+                                # if entry[key] in self.ditto_marks:
+                                #     sys.stderr.write("----------- Could not find previous entry for ditto mark of '{0}'\n".format(key))
+                                #     sys.stderr.write(str(previous_entries) + "\n")
+                                #     sys.stderr.write(str(entry) + "\n")
                     previous_entries.append(entry)
 
                 # Filter out entries that are empty
