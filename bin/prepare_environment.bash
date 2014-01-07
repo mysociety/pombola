@@ -25,7 +25,10 @@ virtualenv $virtualenv_args ../pombola-virtualenv
 source ../pombola-virtualenv/bin/activate
 
 # Upgrade pip to a secure version
-curl -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+# curl -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+# Revert to the line above once we can get a newer setuptools from Debian, or
+# pip ceases to need such a recent one.
+curl -s https://raw.github.com/mysociety/commonlib/master/bin/get_pip.bash | bash
 
 # Install all the packages
 pip install Mercurial
