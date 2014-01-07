@@ -5,20 +5,36 @@ from django.views.generic import ListView, TemplateView
 from mapit.models import Area
 from pombola.core.models import Place
 
+def tidy_up_pun(pun):
+    """ Tidy up the query into something that looks like PUNs we are expecting
+
+    garble
+
+    >>> tidy_up_pun(None)
+    ''
+    >>> tidy_up_pun("AB:01:23:45")
+    'AB:1:23:45'
+
+
+    """
+
+    if not pun:
+        pun = ""
+
+    pun = pun.upper()
+    pun = re.sub(r'[^A-Z\d]+', ':', pun ) # separators to ':'
+    pun = re.sub(r':0+', ':', pun ) # trim leading zeros
+
+    return pun
+
 class SearchPollUnitNumberView(TemplateView):
     template_name = 'search/poll-unit-number.html'
 
     def get_context_data(self, **kwargs):
         context = super(SearchPollUnitNumberView, self).get_context_data(**kwargs)
 
-        query = self.request.GET.get('q')
+        query = tidy_up_pun(self.request.GET.get('q'))
         context['raw_query'] = query
-
-        # tidy up the query into something that looks like PUNs we are expecting
-        if query:
-            query = query.upper()
-            query = re.sub(r'[^A-Z\d]+', ':', query ) # separators to ':'
-            query = re.sub(r':0+', ':', query ) # trim leading zeros
 
         context['query'] = query
         context['area'] = None
