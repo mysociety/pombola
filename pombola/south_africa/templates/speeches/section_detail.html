@@ -20,6 +20,7 @@
 </div>
 
 {% with next=section.get_next_node previous=section.get_previous_node %}
+
   {% if previous or next %}
     <ul class="pager">
       {% if previous %}
@@ -30,7 +31,6 @@
       {% endif %}
     </ul>
   {% endif %}
-{% endwith %}
 
     {% for node, structure in section_tree %}
       {% if structure.new_level %}<ul>{% else %}</li>{% endif %}
@@ -44,7 +44,6 @@
       {% for level in structure.closed_levels %}</li></ul>{% endfor %}
     {% endfor %}
 
-{% with next=section.get_next_node previous=section.get_previous_node %}
   {% if previous or next %}
     <ul class="pager">
       {% if previous %}
@@ -55,6 +54,7 @@
       {% endif %}
     </ul>
   {% endif %}
+
 {% endwith %}
 
 {% endblock %}
