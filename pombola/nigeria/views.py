@@ -16,13 +16,15 @@ def tidy_up_pun(pun):
     'AB:1:23:45'
     >>> tidy_up_pun("AB--01::23 45")
     'AB:1:23:45'
+    >>> tidy_up_pun("  AB--01::23 45  ")
+    'AB:1:23:45'
 
     """
 
     if not pun:
         pun = ""
 
-    pun = pun.upper()
+    pun = pun.strip().upper()
     pun = re.sub(r'[^A-Z\d]+', ':', pun ) # separators to ':'
     pun = re.sub(r':0+', ':', pun ) # trim leading zeros
 
