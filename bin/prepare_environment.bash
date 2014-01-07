@@ -20,12 +20,22 @@ if [ "$(echo -e '1.7\n'$virtualenv_version | sort -V | head -1)" = '1.7' ]; then
     virtualenv_args="--system-site-packages"
 fi
 
+virtualenv_dir='../pombola-virtualenv'
+virtualenv_activate="$virtualenv_dir/bin/activate"
+
 # create the virtual environment, install/update required packages
-virtualenv $virtualenv_args ../pombola-virtualenv
-source ../pombola-virtualenv/bin/activate
+if [ ! -f "$virtualenv_activate" ]
+then
+    virtualenv $virtualenv_args $virtualenv_dir
+fi
+
+source $virtualenv_activate
 
 # Upgrade pip to a secure version
-curl -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+# curl -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+# Revert to the line above once we can get a newer setuptools from Debian, or
+# pip ceases to need such a recent one.
+curl -s https://raw.github.com/mysociety/commonlib/master/bin/get_pip.bash | bash
 
 # Install all the packages
 pip install Mercurial
