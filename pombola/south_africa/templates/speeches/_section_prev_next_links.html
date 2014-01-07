@@ -1,3 +1,11 @@
+{% comment %}
+
+This include should not be used directly - use it via the special template tag instead:
+
+  {% section_prev_next_links section %}
+
+{% endcomment %}
+
 {% load url from future %}
 
 {% if previous or next %}

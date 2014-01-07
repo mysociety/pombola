@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load url from future %}
 {% load i18n %}
+{% load za_speeches %}
 
 {% block title %}{% blocktrans with title=section.title %}View Section: {{ title }}{% endblocktrans %}{% endblock %}
 
@@ -19,25 +20,21 @@
 
 </div>
 
-{% with next=section.get_next_node previous=section.get_previous_node %}
+{% section_prev_next_links section %}
 
-    {% include "speeches/_section_prev_next_links.html" %}
+{% for node, structure in section_tree %}
+  {% if structure.new_level %}<ul>{% else %}</li>{% endif %}
+  {% if structure.speech %}
+    <li id="s{{ node.id }}" class="speech speech-border"{% if node.speaker.colour %} style="border-left-color: #{{ node.speaker.colour }};"{% endif %}>
+    {% include "speeches/speech.html" with speech=node nosection="1" noli=1 %}
+  {% else %}
+    <li><span class="section-title"><a href="{% url 'speeches:section-view' node.id %}">{{ node.title }}</a></span>
+    {% if node.is_leaf_node %}({{ node.speech_count }}){% endif %}
+  {% endif %}
+  {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+{% endfor %}
 
-    {% for node, structure in section_tree %}
-      {% if structure.new_level %}<ul>{% else %}</li>{% endif %}
-      {% if structure.speech %}
-        <li id="s{{ node.id }}" class="speech speech-border"{% if node.speaker.colour %} style="border-left-color: #{{ node.speaker.colour }};"{% endif %}>
-        {% include "speeches/speech.html" with speech=node nosection="1" noli=1 %}
-      {% else %}
-        <li><span class="section-title"><a href="{% url 'speeches:section-view' node.id %}">{{ node.title }}</a></span>
-        {% if node.is_leaf_node %}({{ node.speech_count }}){% endif %}
-      {% endif %}
-      {% for level in structure.closed_levels %}</li></ul>{% endfor %}
-    {% endfor %}
-
-    {% include "speeches/_section_prev_next_links.html" %}
-
-{% endwith %}
+{% section_prev_next_links section %}
 
 {% endblock %}
 
