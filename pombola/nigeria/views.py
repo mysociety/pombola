@@ -5,13 +5,58 @@ from django.views.generic import ListView, TemplateView
 from mapit.models import Area
 from pombola.core.models import Place
 
+# These are hardcoded here rather than being introduced into the database to
+# avoid having a huge number of duplicated codes in MapIt. As it is largely a
+# presentation thing though I don't think it is too big an issue.
+state_number_to_letter_mappings = {
+     "1":  "AB",
+     "2":  "AD",
+     "3":  "AK",
+     "4":  "AN",
+     "5":  "BA",
+     "6":  "BY",
+     "7":  "BN",
+     "8":  "BO",
+     "9":  "CR",
+     "10": "DT",
+     "11": "EB",
+     "12": "ED",
+     "13": "EK",
+     "14": "EN",
+     "15": "FC",
+     "16": "GM",
+     "17": "IM",
+     "18": "JG",
+     "19": "KD",
+     "20": "KN",
+     "21": "KT",
+     "22": "KB",
+     "23": "KG",
+     "24": "KW",
+     "25": "LA",
+     "26": "NW",
+     "27": "NG",
+     "28": "OG",
+     "29": "OD",
+     "30": "OS",
+     "31": "OY",
+     "32": "PL",
+     "33": "RV",
+     "34": "SO",
+     "35": "TR",
+     "36": "YB",
+     "37": "ZF",
+}
+
 def tidy_up_pun(pun):
-    """ Tidy up the query into something that looks like PUNs we are expecting
+    """
+    Tidy up the query into something that looks like PUNs we are expecting
 
-    garble
-
+    # None returns empty string
     >>> tidy_up_pun(None)
     ''
+
+    # Tidy up and strip as expected
     >>> tidy_up_pun("AB:01:23:45")
     'AB:1:23:45'
     >>> tidy_up_pun("AB--01::23 45")
@@ -19,6 +64,13 @@ def tidy_up_pun(pun):
     >>> tidy_up_pun("  AB--01::23 45  ")
     'AB:1:23:45'
 
+    # Convert state numbers to state code, if found
+    >>> tidy_up_pun("01:01:23:45")
+    'AB:1:23:45'
+    >>> tidy_up_pun("01")
+    'AB'
+    >>> tidy_up_pun("99:01:23:45")
+    '99:1:23:45'
     """
 
     if not pun:
@@ -26,7 +78,14 @@ def tidy_up_pun(pun):
 
     pun = pun.strip().upper()
     pun = re.sub(r'[^A-Z\d]+', ':', pun ) # separators to ':'
-    pun = re.sub(r':0+', ':', pun ) # trim leading zeros
+    pun = re.sub(r'^0+', '',  pun ) # trim leading zeros at start of string
+    pun = re.sub(r':0+', ':', pun ) # trim leading zeros for each component
+
+    # PUNs starting with a number shoud be converted to start with a state code
+    if re.match(r'^\d', pun):
+        state_number = pun.split(':')[0]
+        state_code = state_number_to_letter_mappings.get(state_number, state_number)
+        pun = re.sub(r'^' + state_number, state_code, pun)
 
     return pun
 
