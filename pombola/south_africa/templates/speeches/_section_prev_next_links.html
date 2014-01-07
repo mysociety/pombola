@@ -1,0 +1,12 @@
+{% load url from future %}
+
+{% if previous or next %}
+  <ul class="pager">
+    {% if previous %}
+      <li class="previous"><a href="{% url 'speeches:section-view' previous.id %}">&larr; {{ previous.title }}</a>
+    {% endif %}
+    {% if next %}
+      <li class="next"><a href="{% url 'speeches:section-view' next.id %}">{{ next.title }} &rarr;</a>
+    {% endif %}
+  </ul>
+{% endif %}

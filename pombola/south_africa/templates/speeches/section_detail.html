@@ -21,16 +21,7 @@
 
 {% with next=section.get_next_node previous=section.get_previous_node %}
 
-  {% if previous or next %}
-    <ul class="pager">
-      {% if previous %}
-        <li class="previous"><a href="{% url "speeches:section-view" previous.id %}">&larr; {{ previous.title }}</a>
-      {% endif %}
-      {% if next %}
-        <li class="next"><a href="{% url "speeches:section-view" next.id %}">{{ next.title }} &rarr;</a>
-      {% endif %}
-    </ul>
-  {% endif %}
+    {% include "speeches/_section_prev_next_links.html" %}
 
     {% for node, structure in section_tree %}
       {% if structure.new_level %}<ul>{% else %}</li>{% endif %}
@@ -44,16 +35,7 @@
       {% for level in structure.closed_levels %}</li></ul>{% endfor %}
     {% endfor %}
 
-  {% if previous or next %}
-    <ul class="pager">
-      {% if previous %}
-        <li class="previous"><a href="{% url "speeches:section-view" previous.id %}">&larr; {{ previous.title }}</a>
-      {% endif %}
-      {% if next %}
-        <li class="next"><a href="{% url "speeches:section-view" next.id %}">{{ next.title }} &rarr;</a>
-      {% endif %}
-    </ul>
-  {% endif %}
+    {% include "speeches/_section_prev_next_links.html" %}
 
 {% endwith %}
 
