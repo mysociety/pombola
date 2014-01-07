@@ -14,7 +14,8 @@ def tidy_up_pun(pun):
     ''
     >>> tidy_up_pun("AB:01:23:45")
     'AB:1:23:45'
-
+    >>> tidy_up_pun("AB--01::23 45")
+    'AB:1:23:45'
 
     """
 
