@@ -434,10 +434,30 @@ class SACommitteeIndex(SASpeechesIndex):
     sections_to_show = 25
 
 class SAQuestionIndex(SASpeechesIndex):
-    template_name = 'south_africa/hansard_index.html'
+    template_name = 'south_africa/question_index.html'
     top_section_name='Questions'
-    section_parent_field = 'section__parent__parent'
-    sections_to_show = 25
+
+    def get_context_data(self, **kwargs):
+        context = super(SASpeechesIndex, self).get_context_data(**kwargs)
+
+        # Get the top level section, or 404
+        top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
+
+        # the question section structure is
+        # "Questions" -> "Questions asked to Minister for X" -> "Date" ...
+        
+        # Alphabetical, except first President and then "Minister in the Presidency"
+        normalise_ministry = "CASE WHEN speeches_section.title like '%%President%%' THEN 'AAA' WHEN speeches_section.title like '%%Presidency%%' THEN 'AAB' ELSE regexp_replace(speeches_section.title, 'Questions asked to Minister (of|for) ', '') END"
+
+        entries = Section \
+            .objects \
+            .filter(parent=top_section) \
+            .annotate(speech_count=Count('children__speech__id')) \
+            .extra( select={ 'ministry': normalise_ministry } ) \
+            .order_by('ministry', 'title')
+
+        context['entries'] = entries
+        return context
 
 class SACommitteeSpeechRedirectView(RedirectView):
 

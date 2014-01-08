@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block extra_js_to_load %}
+    pombola_settings.extra_js.push( 'js/hide-reveal.js' );
+{% endblock %}
+
+{% block title %}Hansard{% endblock %}
+
+
+{% block content %}
+
+{% for entry in entries %}
+    <div>
+        <a class="hansard-section-title has-dropdown-dark" 
+            href="{% url 'speeches:section-view' entry.id %}">
+            <h2> {{ entry.title }} ({{ entry.speech_count }}) </h2>
+        </a>
+    </div>
+{% endfor %}
+{% endblock %}
