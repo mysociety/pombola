@@ -2,7 +2,13 @@
 
 This include should not be used directly - use it via the special template tag instead:
 
-  {% section_prev_next_links section %}
+    {% section_prev_next_links section as captured_section_prev_next_links %}
+
+    {{ captured_section_prev_next_links }}
+
+    ... blah blah ...
+
+    {{ captured_section_prev_next_links }}
 
 {% endcomment %}
 

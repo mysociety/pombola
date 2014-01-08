@@ -20,7 +20,9 @@
 
 </div>
 
-{% section_prev_next_links section %}
+{% section_prev_next_links section as captured_section_prev_next_links %}
+
+{{ captured_section_prev_next_links }}
 
 {% for node, structure in section_tree %}
   {% if structure.new_level %}<ul>{% else %}</li>{% endif %}
@@ -34,7 +36,7 @@
   {% for level in structure.closed_levels %}</li></ul>{% endfor %}
 {% endfor %}
 
-{% section_prev_next_links section %}
+{{ captured_section_prev_next_links }}
 
 {% endblock %}
 

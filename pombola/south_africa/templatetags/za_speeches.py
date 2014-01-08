@@ -1,24 +1,23 @@
 import datetime
 
 from django import template
+from django.template import loader, Context
+
 from speeches.models import Section
 
 register = template.Library()
 
-# NOTE: this code is far from ideal. Sharing it with others in a pull request
-# to get opinions about how to improve.
+@register.assignment_tag()
+def section_prev_next_links(section, *args):
 
-# TODO:
-# - cache results of min_speech_datetime and section_prev_next_links (both of
-#   which will be called multiple times with same input)
-
-@register.inclusion_tag('speeches/_section_prev_next_links.html')
-def section_prev_next_links(section):
-
-    return {
+    context = Context({
         "next":     get_neighboring_section(section, +1),
         "previous": get_neighboring_section(section, -1),
-    }
+    })
+
+    t = loader.get_template('speeches/_section_prev_next_links.html')
+    return t.render(context)
+
 
 def get_neighboring_section(section, direction):
     """
