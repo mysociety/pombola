@@ -246,6 +246,7 @@ INSTALLED_APPS = (
     'south',
     'pagination',
     'ajax_select',
+    'autocomplete_light',
     'markitup',
 
     'pombola.' + COUNTRY_APP,

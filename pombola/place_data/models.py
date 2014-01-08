@@ -42,8 +42,8 @@ class Entry(models.Model):
 #         ('value_decimal', 'Decimal'),
 #         )
 
-#     slug = models.SlugField(max_length=100, unique=True)
 #     name = models.CharField(max_length=100)
+#     slug = models.SlugField(max_length=100, unique=True)
 #     data_type = models.SlugField(choices=DATA_TYPE_CHOICES)
 
 # class DataEntry(models.Model):
