@@ -447,7 +447,7 @@ class SAQuestionIndex(SASpeechesIndex):
         # "Questions" -> "Questions asked to Minister for X" -> "Date" ...
         
         # Alphabetical, except first President and then "Minister in the Presidency"
-        normalise_ministry = "CASE WHEN speeches_section.title like '%%President%%' THEN 'AAA' WHEN speeches_section.title like '%%Presidency%%' THEN 'AAB' ELSE regexp_replace(speeches_section.title, 'Questions asked to Minister (of|for) ', '') END"
+        normalise_ministry = "CASE WHEN speeches_section.title like '%%President%%' THEN 'AAA' WHEN speeches_section.title like '%%Presidency%%' THEN 'AAB' ELSE regexp_replace(speeches_section.title, 'Questions asked to the Minister (of|for) ', '') END"
 
         entries = Section \
             .objects \
