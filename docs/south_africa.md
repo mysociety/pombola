@@ -53,8 +53,10 @@ commands should add the data for them:
     !!TODO!! ./manage.py core_set_area_parents wards:metropolitan-municipality
     !!TODO!! ./manage.py core_set_area_parents metropolitan-municipality:province
 
-Load in the Members' Interests data:
+Load in the Members' Interests data (if there are already some entries you should delete them all usig nthe admin):
 
+    $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2010_for_import.json
     $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2011_for_import.json
     $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2012_for_import.json
+    $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2013_for_import.json
 
