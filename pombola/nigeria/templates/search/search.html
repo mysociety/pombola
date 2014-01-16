@@ -1,0 +1,14 @@
+{% extends 'search/search_base.html' %}
+{% load url from future %}
+
+{% block alternative_search_section %}
+    <p>
+      Alternatively search
+      <a href="{% url 'search-poll-unit-number' %}?q={{ query|urlencode }}">by your poll unit number</a>
+      instead.
+    </p>
+{% endblock %}
+
+{% block search_results %}
+  {% include "search/_search_results.html" %}
+{% endblock %}
