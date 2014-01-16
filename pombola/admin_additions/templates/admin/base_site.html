@@ -36,33 +36,6 @@
     <script src="{{ STATIC_URL }}js/ajax_select.js" type="text/javascript" charset="utf-8"></script>
     <link href="{{ STATIC_URL }}css/ajax_select.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" charset="utf-8">
-        /*
-
-            This is a hack to deal with the poor support for autocomplete in
-            inlines. There are some suggested patches but they did not work when
-            tried.
-
-            http://code.google.com/p/django-ajax-selects/issues/detail?id=50
-
-            The below code simply replaces the 'add more ...' link with a
-            message regarding a workaround. The setTimeout is there as the link
-            itself is created by javascript and we want to be sure that we run
-            after that has run.
-
-        */
-
-        // $( function () {
-        //     setTimeout(
-        //         function () {
-        //             $("a:contains('Add another Position')")
-        //                 .replaceWith( 'To create more positions save the page and then come back to fill in the additional rows');
-        //         },
-        //         2000
-        //     )
-        // })
-    </script>
-
     {% include 'autocomplete_light/static.html' %}
 
 {% endblock %}
