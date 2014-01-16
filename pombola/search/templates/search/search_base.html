@@ -17,27 +17,29 @@
     {% endblock %}
 
     <form method="get" action="." class="search-wrap">
-      {% if settings.COUNTRY_APP == 'south_africa' or settings.ENABLED_FEATURES.hansard %}
-        <p>
-          Alternatively search
+      {% block alternative_search_section %}
+        {% if settings.COUNTRY_APP == 'south_africa' or settings.ENABLED_FEATURES.hansard %}
+          <p>
+            Alternatively search
 
-          {% if settings.COUNTRY_APP == 'south_africa' %}
-            {% block alternative_search %}
-              <a href="{% url "core_geocoder_search" %}">for a location</a>
-            {% endblock %}
-          {% endif %}
+            {% if settings.COUNTRY_APP == 'south_africa' %}
+              {% block alternative_search %}
+                <a href="{% url "core_geocoder_search" %}">for a location</a>
+              {% endblock %}
+            {% endif %}
 
-          {% if settings.COUNTRY_APP == 'south_africa' and settings.ENABLED_FEATURES.hansard %}
-            or
-          {% endif %}
+            {% if settings.COUNTRY_APP == 'south_africa' and settings.ENABLED_FEATURES.hansard %}
+              or
+            {% endif %}
 
-          {% if settings.ENABLED_FEATURES.hansard %}
-            <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Hansard transcripts</a>
-          {% endif %}
+            {% if settings.ENABLED_FEATURES.hansard %}
+              <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Hansard transcripts</a>
+            {% endif %}
 
-          instead.
-        </p>
-      {% endif %}
+            instead.
+          </p>
+        {% endif %}
+      {% endblock %}
 
         <div class="search-box">
           {% block search_form %}

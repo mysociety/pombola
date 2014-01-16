@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 
+from .views import SearchPollUnitNumberView
+
 urlpatterns = patterns('',
-    # There are no overridden urls for Nigeria, yet....
+    url(r'^search/poll-unit-number/', SearchPollUnitNumberView.as_view(), name='search-poll-unit-number' )
 )

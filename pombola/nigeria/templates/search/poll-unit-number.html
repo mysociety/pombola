@@ -1,0 +1,55 @@
+{% extends "search/search_base.html" %}
+{% load url from future %}
+
+{% block title %}
+  {% if query %}
+  {{ query }} results
+  {% else %}
+    Search for places using your poll unit number
+  {% endif %}
+{% endblock %}
+
+{% block alternative_search_section %}
+    <p>
+      Alternatively search
+      <a href="{% url "core_search" %}?q={{ query|urlencode }}">for a person or organisation</a>
+      instead.
+    </p>
+{% endblock %}
+
+{% block search_form %}
+  <input type="text" id="id_q" name="q" value="{{ query }}" placeholder="Your poll unit number"/>
+{% endblock %}
+
+{% block search_instructions %}
+  <p>Your Poll Unit Number will look something like "LA:02:04" - please enter it into the search box above.</p>
+{% endblock %}
+
+{% block search_results %}
+  {% if area %}
+    <p>Best match is "{{ area_pun_name }}" with poll unit number '{{ area_pun_code }}'</p>
+
+    <h3>Overlapping Federal Constituencies</h3>
+
+    <ul>
+      {% for place in federal_constutencies %}
+        <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
+      {% empty %}
+        <li>No overlapping Federal Constituencies</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Overlapping Senatorial Districts</h3>
+
+    <ul>
+      {% for place in senatorial_districts %}
+      <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
+      {% empty %}
+        <li>No overlapping Senatorial Districts</li>
+      {% endfor %}
+    </ul>
+
+  {% else %}
+    <p>No results were found for the poll unit number {{ query }}.</p>
+  {% endif %}
+{% endblock %}
