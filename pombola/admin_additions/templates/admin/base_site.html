@@ -18,10 +18,22 @@
     {% endcomment %}
 
     {% comment %}
-      'jQuery' and '$' at this point are jQuery v2.0.3 which is loaded by the
-      markdown plugin. Django's own jQuery (v1.6.4) is available as
-      django.jQuery.
+      On pages that use the MarkItUpWidget from django-markitup,
+      'jQuery' and '$' at this point will be jQuery v2.0.3,
+      which is loaded by the markdown plugin. That version
+      doesn't work with the autocomplete plugin, however, which
+      needs an earlier version. Django's own jQuery (v1.6.4) is
+      available as django.jQuery, but that version is too old
+      for the AJAX libraries. So, this condition looks to see
+      whether the Javascript for MarkItUp! would have been
+      added, and if not, loads a version of jQuery that it known
+      to work with django-autocomplete-light and
+      django-ajax-selects.
     {% endcomment %}
+
+    {% if 'markitup' not in media|stringformat:"s" %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    {% endif %}
 
     <!-- for the admin autocomplete -->
     <script type="text/javascript">//<![CDATA[
