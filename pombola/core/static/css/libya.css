@@ -3068,16 +3068,26 @@ h2 a.appearances-trigger.active {
   background: #239e46;
   height: 2px;
 }
-.infopage th {
-  font-weight: bold;
+.infopage table {
+  border: 2px solid #e6e6e6;
 }
 .infopage th, .infopage td {
-  padding: 0.25em;
-  border-bottom: 1px solid #e6e6e6;
-  border-right: 1px solid #e6e6e6;
+  padding: 0.5em 1em;
+  border-width: 0;
+  border-right-width: 1px;
+  border-style: solid;
+  border-color: #e6e6e6;
 }
 .infopage th:last-child, .infopage td:last-child {
   border-right: none;
+}
+.infopage th {
+  font-weight: bold;
+  background-color: #f7f7f7;
+  border-bottom-width: 2px;
+}
+.infopage td {
+  border-bottom-width: 1px;
 }
 .infopage tr:last-child td {
   border-bottom: none;
