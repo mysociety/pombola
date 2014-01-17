@@ -134,3 +134,4 @@ BREADCRUMB_URL_NAME_MAPPINGS:
         - Search
         - /search/
 
+DEBUG_TOOLBAR: True

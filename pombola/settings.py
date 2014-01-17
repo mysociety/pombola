@@ -202,6 +202,8 @@ MIDDLEWARE_CLASSES = (
 )
 if 'speeches' in OPTIONAL_APPS:
     MIDDLEWARE_CLASSES += ( 'pombola.middleware.FakeInstanceMiddleware', )
+if config.get('DEBUG_TOOLBAR', True):
+    MIDDLEWARE_CLASSES += ( 'debug_toolbar.middleware.DebugToolbarMiddleware', )
 
 ROOT_URLCONF = 'pombola.urls'
 
@@ -267,6 +269,8 @@ INSTALLED_APPS = (
     'pombola.file_archive',
     'pombola.map',
 )
+if config.get('DEBUG_TOOLBAR', True):
+    INSTALLED_APPS += ('debug_toolbar',)
 INSTALLED_APPS += OPTIONAL_APPS
 
 # mapit related settings
