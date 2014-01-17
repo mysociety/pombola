@@ -18,16 +18,28 @@
     {% endcomment %}
 
     {% comment %}
-      'jQuery' and '$' at this point are jQuery v2.0.3 which is loaded by the
-      markdown plugin. Django's own jQuery (v1.6.4) is available as
-      django.jQuery.
+      On pages that use the MarkItUpWidget from django-markitup,
+      'jQuery' and '$' at this point will be jQuery v2.0.3,
+      which is loaded by the markdown plugin. That version
+      doesn't work with the autocomplete plugin, however, which
+      needs an earlier version. Django's own jQuery (v1.6.4) is
+      available as django.jQuery, but that version is too old
+      for the AJAX libraries. So, this condition looks to see
+      whether the Javascript for MarkItUp! would have been
+      added, and if not, loads a version of jQuery that it known
+      to work with django-autocomplete-light and
+      django-ajax-selects.
     {% endcomment %}
+
+    {% if 'markitup' not in media|stringformat:"s" %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    {% endif %}
 
     <!-- for the admin autocomplete -->
     <script type="text/javascript">//<![CDATA[
     if(!jQuery.ui || (typeof jQuery.ui == 'undefined')) {
-      document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"><\/script>');
-      document.write('<link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />');
+      document.write('<script type="text/javascript"  src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"><\/script>');
+      document.write('<link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/smoothness/jquery-ui.css" />');
     }
     //]]>
     </script>
@@ -35,33 +47,6 @@
 
     <script src="{{ STATIC_URL }}js/ajax_select.js" type="text/javascript" charset="utf-8"></script>
     <link href="{{ STATIC_URL }}css/ajax_select.css" rel="stylesheet" type="text/css" />
-
-    <script type="text/javascript" charset="utf-8">
-        /*
-
-            This is a hack to deal with the poor support for autocomplete in
-            inlines. There are some suggested patches but they did not work when
-            tried.
-
-            http://code.google.com/p/django-ajax-selects/issues/detail?id=50
-
-            The below code simply replaces the 'add more ...' link with a
-            message regarding a workaround. The setTimeout is there as the link
-            itself is created by javascript and we want to be sure that we run
-            after that has run.
-
-        */
-
-        // $( function () {
-        //     setTimeout(
-        //         function () {
-        //             $("a:contains('Add another Position')")
-        //                 .replaceWith( 'To create more positions save the page and then come back to fill in the additional rows');
-        //         },
-        //         2000
-        //     )
-        // })
-    </script>
 
     {% include 'autocomplete_light/static.html' %}
 
