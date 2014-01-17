@@ -18,14 +18,23 @@
     border: none;
     background: $colour_primary;
     height: 2px; }
-  th {
-    font-weight: bold; }
+  table {
+    border: 2px solid $colour_muted;
+  }
   th, td {
-    padding: 0.25em;
-    border-bottom: 1px solid $colour_muted;
-    border-right:  1px solid $colour_muted;
+    padding: 0.5em 1em;
+    border-width: 0;
+    border-right-width: 1px;
+    border-style:  solid;
+    border-color:  $colour_muted;
     &:last-child {
       border-right: none; } }
+  th {
+    font-weight: bold;
+    background-color: $colour_lighter_grey;
+    border-bottom-width: 2px; }
+  td {
+    border-bottom-width: 1px; }
   tr:last-child td {
     border-bottom: none; } }
 

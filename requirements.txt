@@ -69,7 +69,9 @@ git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
 
 python-dateutil>=1.5,!=2.0
 
+# Packages that are helpful for development:
 coverage>=3
+django-debug-toolbar
 
 ## votematch
 django-model-utils
