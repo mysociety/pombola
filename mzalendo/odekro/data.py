@@ -5,6 +5,7 @@ import sys
 import time
 import base64
 import json
+from datetime import datetime
 
 from django.core.files.base import ContentFile
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
@@ -30,8 +31,8 @@ KINDS = ((PlaceKind, 'constituency'),
          (OrganisationKind, 'national'))
 
 constituency_kind, mp_job_title, member_job_title, party_kind, national = \
-    [clz.objects.get_or_create(name=s.title(), slug=s)[0] for clz, s in KINDS]
-
+    [clz.objects.get_or_create(slug=s, defaults=dict(name=s.title()))[0] for clz, s in KINDS]
+    #[clz.objects.get_or_create(name=s.title(), slug=s)[0] for clz, s in KINDS]
 parliament, _ = Organisation.objects.get_or_create(name='Ghana Parliament',
                                                    slug='parliament',
                                                    kind=national)
@@ -54,7 +55,7 @@ parliament, _ = Organisation.objects.get_or_create(name='Ghana Parliament',
 MP_FIELDS = ['Party', 'Occupation/Profession', 'Name', 'Date of Birth',
              'Votes Obtained', 'Image', 'Marital Status', 'Religion',
              'Hometown', 'Last Employment', 'Constituency', 'Region',
-             'Highest Education', 'Gender', 'Summary']
+             'Highest Education', 'Gender', 'Summary', 'Term Start Date', 'Term End Date']
 
 PERSON_FIELDS = ['Name', 'Date of Birth', 'Gender', 'Image', 'Summary']
 
@@ -66,35 +67,44 @@ def add_mps_from_json(content):
 def add_mp(obj):
     party, occupation, name, dob, votes, image, \
     marital_status, religion, hometown, last_employment, constituency, \
-    region, education, gender, summary = [obj.get(k, '') for k in MP_FIELDS]
+    region, education, gender, summary, term_start, term_end = [obj.get(k, '') for k in MP_FIELDS]
 
     try:
         last, first, middle, title = split_name(name)
     except:
-        print ">>> Error splitting name:", name
+        print ">>> Error splitting name:", name ,"=> ", title, first, middle, last
         return
     
     person = add_person(name=legal_name(last, first, middle), 
                         gender=gender, title=title, dob=dob, 
                         image=image, summary=summary)
 
-    constituency, _ = Place.objects.get_or_create(name=constituency, 
-                                                  slug=slugify(constituency), 
-                                                  kind=constituency_kind)
+    print constituency, slugify(constituency),constituency_kind
+    constituency, _ = Place.objects.get_or_create(slug=slugify(constituency),    
+                                                  defaults={'name':constituency, 
+                                                            'kind':constituency_kind})
 
-    party, _ = Organisation.objects.get_or_create(name=party,
-                                                  slug=slugify(party),
-                                                  kind=party_kind)
+    party, _ = Organisation.objects.get_or_create(slug=slugify(party),
+                                                  defaults={'name':party,
+                                                            'kind':party_kind})
 
     # add to party
     party_position, _ = Position.objects.get_or_create(person=person,
                                    title=member_job_title,
                                    organisation=party)
-    # add to parliament (as mp)
+    # add to parliament (as mp)                            
+    if(term_start):
+        term_start = datetime.strptime(term_start, '%B %d %Y').strftime("%Y-%m-%d")
+        
+    if(term_end):
+        term_end = datetime.strptime(term_end,'%B %d %Y').strftime("%Y-%m-%d")
+
     mp_position, _ = Position.objects.get_or_create(person=person,
                                    title=mp_job_title,
                                    organisation=parliament,
-                                   place=constituency)
+                                   place=constituency,
+                                   start_date=term_start,
+                                   end_date=term_end)
     
     mp, _ = MP.objects.get_or_create(person=person,
                                   party_position=party_position,
@@ -109,7 +119,7 @@ def add_mp(obj):
     mp.education = education
     mp.religion = religion
     mp.last_employment = last_employment[:150]
-    mp.votes_obtained = votes
+    mp.votes_obtained = votes[:150]
     
     mp.save()
 
