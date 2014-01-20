@@ -58,5 +58,5 @@ def get_neighboring_section(section, direction):
 
     try:
        return same_level[idx+direction]
-    except:
+    except IndexError:
        return None
