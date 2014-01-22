@@ -17,6 +17,17 @@ for index, pattern in enumerate(organisation_patterns):
     if pattern.name == 'organisation':
         organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAOrganisationDetailView.as_view(), name='organisation')
 
+#add organisation party sub-page
+organisation_patterns += patterns(
+    'pombola.south_africa.views',
+    url(
+        '^(?P<slug>[-\w]+)/party/(?P<sub_page_identifier>[-\w]+)/$',  #url regex
+        SAOrganisationDetailSub.as_view(),                              #view function
+        { 'sub_page': 'party' },                                      #pass in the 'sub_page' arg
+        'organisation_party'                                          #url name
+    )
+)
+
 # Override the person url so we can add some extra data
 for index, pattern in enumerate(person_patterns):
     if pattern.name == 'person':

@@ -48,6 +48,16 @@
 
 
 
+    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#provinicial-legislature-people">Members of the Provincial Legislature ({{ legislature_people_count }})</a>
+
+    <div id="provinicial-legislature-people" class="person-panel js-hide-reveal">
+        {% include "core/_people_listing.html" with people=legislature_people skip_positions=1 %}
+        {% if former_legislature_people %}
+        <p>Former members</p>
+        {% include "core/_people_listing.html" with people=former_legislature_people skip_positions=1 %}
+        {% endif %}
+    </div>
+
     <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#national-assembly-people">Members of the National Assembly ({{ national_assembly_people_count }})</a>
 
     <div id="national-assembly-people" class="person-panel js-hide-reveal">
@@ -65,16 +75,6 @@
         {% if former_ncop_people %}
         <p>Former members</p>
         {% include "core/_people_listing.html" with people=former_ncop_people skip_positions=1 %}
-        {% endif %}
-    </div>
-
-    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#provinicial-legislature-people">Members of the Provincial Legislature ({{ legislature_people_count }})</a>
-
-    <div id="provinicial-legislature-people" class="person-panel js-hide-reveal">
-        {% include "core/_people_listing.html" with people=legislature_people skip_positions=1 %}
-        {% if former_legislature_people %}
-        <p>Former members</p>
-        {% include "core/_people_listing.html" with people=former_legislature_people skip_positions=1 %}
         {% endif %}
     </div>
 
