@@ -433,6 +433,47 @@ class SACommitteeIndex(SASpeechesIndex):
     section_parent_field = 'section__parent__parent__parent'
     sections_to_show = 25
 
+def questions_section_sort_key(section):
+    """This function helps to sort question sections
+
+    The intention is to have questions for the President first, then
+    Deputy President, then offices associated with the presidency,
+    then questions to ministers sorted by the name of the ministry,
+    and finally anything else sorted just on the title.
+
+    >>> questions_section_sort_key(Section(title="for the President"))
+    'AAAfor the President'
+    >>> questions_section_sort_key(Section(title="ask the deputy president"))
+    'BBBask the deputy president'
+    >>> questions_section_sort_key(Section(title="about the Presidency"))
+    'CCCabout the Presidency'
+    >>> questions_section_sort_key(Section(title="Questions asked to Minister for Foo"))
+    'DDDFoo'
+    >>> questions_section_sort_key(Section(title="Questions asked to the Minister for Bar"))
+    'DDDBar'
+    >>> questions_section_sort_key(Section(title="Questions asked to Minister of Baz"))
+    'DDDBaz'
+    >>> questions_section_sort_key(Section(title="Minister of Quux"))
+    'DDDQuux'
+    >>> questions_section_sort_key(Section(title="Random"))
+    'MMMRandom'
+    """
+    title = section.title
+    if re.search(r'(?i)Deputy\s+President', title):
+        return "BBB" + title
+    if re.search(r'(?i)President', title):
+        return "AAA" + title
+    if re.search(r'(?i)Presidency', title):
+        return "CCC" + title
+    stripped_title = title
+    for regexp in (r'^(?i)Questions\s+asked\s+to\s+(the\s+)?Minister\s+(of|for(\s+the)?)\s+',
+                   r'^(?i)Minister\s+(of|for(\s+the)?)\s+'):
+        stripped_title = re.sub(regexp, '', stripped_title)
+    if stripped_title == title:
+        # i.e. it wasn't questions for a minister
+        return "MMM" + title
+    return "DDD" + stripped_title
+
 class SAQuestionIndex(SASpeechesIndex):
     template_name = 'south_africa/question_index.html'
     top_section_name='Questions'
@@ -446,17 +487,13 @@ class SAQuestionIndex(SASpeechesIndex):
         # the question section structure is
         # "Questions" -> "Questions asked to Minister for X" -> "Date" ...
         
-        # Alphabetical, except first President and then "Minister in the Presidency"
-        normalise_ministry = "CASE WHEN speeches_section.title like '%%President%%' THEN 'AAA' WHEN speeches_section.title like '%%Presidency%%' THEN 'AAB' ELSE regexp_replace(speeches_section.title, 'Questions asked to the Minister (of|for) ', '') END"
-
-        entries = Section \
+        sections = Section \
             .objects \
             .filter(parent=top_section) \
-            .annotate(speech_count=Count('children__speech__id')) \
-            .extra( select={ 'ministry': normalise_ministry } ) \
-            .order_by('ministry', 'title')
+            .annotate(speech_count=Count('children__speech__id'))
 
-        context['entries'] = entries
+        context['entries'] = sorted(sections,
+                                    key=questions_section_sort_key)
         return context
 
 class SACommitteeSpeechRedirectView(RedirectView):
