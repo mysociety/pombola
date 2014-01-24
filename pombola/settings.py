@@ -268,6 +268,8 @@ INSTALLED_APPS = (
     'pombola.search',
     'pombola.file_archive',
     'pombola.map',
+
+    'django_nose',
 )
 if config.get('DEBUG_TOOLBAR', True):
     INSTALLED_APPS += ('debug_toolbar',)
@@ -375,10 +377,9 @@ MARKITUP_SET = 'markitup/sets/markdown'
 # the South migrations.
 SOUTH_TESTS_MIGRATE = False
 
-
-# Settings for the selenium tests
-TEST_RUNNER   = 'django_selenium.selenium_runner.SeleniumTestRunner'
-SELENIUM_DRIVER = 'Firefox'
+# Use nose as the test runner
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['--with-doctest']
 
 # For the disqus comments
 DISQUS_SHORTNAME       = config.get( 'DISQUS_SHORTNAME', None )
