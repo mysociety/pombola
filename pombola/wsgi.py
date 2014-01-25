@@ -36,7 +36,7 @@ if int(config.get('STAGING')) and sys.argv[1:2] != ['runserver']:
     pombola.wsgi_monitor.start(interval=1.0)
     pombola.wsgi_monitor.track(config_path)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pombola.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pombola.settings.base")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION

@@ -20,7 +20,7 @@ import yaml
 IN_TEST_MODE = sys.argv[1:2] == ['test']
 
 # Work out where we are to set up the paths correctly and load config
-base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..' ) )
+base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..', '..' ) )
 root_dir = os.path.abspath( os.path.join( base_dir, '..' ) )
 
 # print "base_dir: " + base_dir
@@ -42,10 +42,22 @@ config_file = os.path.join( base_dir, 'conf', 'general.yml' )
 config = yaml.load( open(config_file, 'r') )
 
 # Configure the optional apps
-ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch', 'speeches', 'spinner' )
+ALL_OPTIONAL_APPS = ('hansard',
+                     'projects',
+                     'place_data',
+                     'votematch',
+                     'speeches',
+                     'spinner' )
+
+APPS_REQUIRED_BY_SPEECHES = ('django_select2',
+                             'django_bleach',
+                             'popit',
+                             'instances',
+                             'popit_resolver')
+
 OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS' ) or [] )
 if 'speeches' in OPTIONAL_APPS: # Add its dependent apps
-    OPTIONAL_APPS = ('django_select2', 'django_bleach', 'popit', 'instances', 'popit_resolver') + OPTIONAL_APPS
+    OPTIONAL_APPS = APPS_REQUIRED_BY_SPEECHES + OPTIONAL_APPS
 
 if int(config.get('STAGING')):
     STAGING = True
@@ -399,12 +411,10 @@ POLLDADDY_WIDGET_ID = config.get( 'POLLDADDY_WIDGET_ID', None );
 # News' to appear on the homepage.
 BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 
-
 # create the ENABLED_FEATURES hash that is used to toggle features on and off.
 ENABLED_FEATURES = {}
 for key in ALL_OPTIONAL_APPS: # add in the optional apps
     ENABLED_FEATURES[key] = ('pombola.' + key in INSTALLED_APPS) or (key in INSTALLED_APPS)
-
 
 # map boundaries
 MAP_BOUNDING_BOX_NORTH = config.get('MAP_BOUNDING_BOX_NORTH')
