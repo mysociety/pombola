@@ -39,6 +39,7 @@ django-haystack==2.1.0
 
 # Testing helpers
 django-nose==1.1
+yanc==0.2.4
 httplib2==0.8
 WebTest==2.0.14
 django-webtest==1.7.6

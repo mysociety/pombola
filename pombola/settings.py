@@ -379,7 +379,7 @@ SOUTH_TESTS_MIGRATE = False
 
 # Use nose as the test runner
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ['--with-doctest']
+NOSE_ARGS = ['--with-doctest', '--with-yanc']
 
 # For the disqus comments
 DISQUS_SHORTNAME       = config.get( 'DISQUS_SHORTNAME', None )
