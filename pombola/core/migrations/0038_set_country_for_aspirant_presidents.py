@@ -6,7 +6,7 @@ from south.v2 import DataMigration
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
-from pombola.settings import COUNTRY_APP
+from django.conf import settings
 from pombola.core.models import Place, PlaceKind, Organisation, Position
 
 class Migration(DataMigration):
@@ -18,7 +18,7 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Set place=<Place: Country(Country)> for each 'Aspirant President' Position"
 
-        if COUNTRY_APP == 'kenya':
+        if settings.COUNTRY_APP == 'kenya':
             try:
                 pk_country = orm.PlaceKind.objects.get(name='Country')
                 place_country = orm.Place.objects.get(name='Kenya', kind=pk_country)
@@ -34,7 +34,7 @@ class Migration(DataMigration):
     def backwards(self, orm):
         "Set place=None for each 'Aspirant President' Position"
 
-        if COUNTRY_APP == 'kenya':
+        if settings.COUNTRY_APP == 'kenya':
             for p in self.presidential_aspirants(orm, orm.Organisation.objects.get(name='REPUBLIC OF KENYA')):
                 p.place = None
                 p.save()

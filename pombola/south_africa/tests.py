@@ -12,7 +12,7 @@ from django_webtest import WebTest
 
 from mapit.models import Type, Area, Geometry, Generation
 
-from pombola import settings
+from django.conf import settings
 from pombola.core import models
 import json
 
