@@ -7,10 +7,13 @@ from django.contrib.contenttypes.models import ContentType
 
 from models import Image
 
+from nose.tools import nottest
+
 from sorl.thumbnail import get_thumbnail
 
 class ImageTest(TestCase):
-    
+
+    @nottest
     def get_test_file_content(self, filename):
         """
         Open the given file an dreturn it
