@@ -8,7 +8,8 @@ INSTALLED_APPS = INSTALLED_APPS + \
                   'pombola.place_data',
                   'pombola.votematch',
                   'speeches',
-                  'pombola.spinner' ) + \
+                  'pombola.spinner',
+                  'pombola.interests_register') + \
                  APPS_REQUIRED_BY_SPEECHES
 
 # create the ENABLED_FEATURES hash that is used to toggle features on and off.
