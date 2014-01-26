@@ -30,8 +30,6 @@ with open(os.path.join(data_directory, 'wards-names-matched.csv')) as fp:
     reader = csv.reader(fp)
     for api_name, db_name in reader:
         if api_name and db_name:
-            if api_name.startswith("ENT"):
-                print "api_name is:", api_name
             place_name_corrections[api_name] = db_name
 
 
