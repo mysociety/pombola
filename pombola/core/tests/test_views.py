@@ -3,55 +3,66 @@ from django_webtest import WebTest
 from pombola.core import models
 
 class PositionTest(WebTest):
+    def tearDown(self):
+        self.position.delete()
+        self.position2.delete()
+        self.person.delete()
+        self.organisation.delete()
+        self.organisation_kind.delete()
+        self.title.delete()
+        self.title2.delete()
+        self.bobs_place.delete()
+        self.place_kind_constituency.delete()
+
     def setUp(self):
-        person = models.Person.objects.create(
+        self.person = models.Person.objects.create(
             legal_name = 'Test Person',
             slug       = 'test-person',
         )
-
-        organisation_kind = models.OrganisationKind.objects.create(
+        
+        self.organisation_kind = models.OrganisationKind.objects.create(
             name = 'Foo',
             slug = 'foo',
         )
-        organisation_kind.save()
+        self.organisation_kind.save()
 
-        organisation = models.Organisation.objects.create(
+        self.organisation = models.Organisation.objects.create(
             name = 'Test Org',
             slug = 'test-org',
-            kind = organisation_kind,
+            kind = self.organisation_kind,
         )
-
-        title = models.PositionTitle.objects.create(
+        
+        self.title = models.PositionTitle.objects.create(
             name = 'Test title',
             slug = 'test-title',
         )
-        title2 = models.PositionTitle.objects.create(
+        self.title2 = models.PositionTitle.objects.create(
             name = 'Test position with place',
             slug = 'test-position-with-place',
         )
 
-        models.Position.objects.create(
-            person = person,
-            title  = title,
-            organisation = organisation,
+        self.position = models.Position.objects.create(
+            person = self.person,
+            title  = self.title,
+            organisation = self.organisation,
         )
 
-        place_kind_constituency = models.PlaceKind.objects.create(
+        self.place_kind_constituency = models.PlaceKind.objects.create(
             name='Constituency',
             slug='constituency',
         )
 
-        bobs_place = models.Place.objects.create(
+        self.bobs_place = models.Place.objects.create(
             name="Bob's Place",
             slug='bobs_place',
-            kind=place_kind_constituency,
+            kind=self.place_kind_constituency,
         )
 
-        models.Position.objects.create(
-            person = person,
-            title  = title2,
-            organisation = organisation,
-            place = bobs_place,
+        self.position2 = models.Position.objects.create(
+            person = self.person,
+            title  = self.title2,
+            organisation = self.organisation,
+            place = self.bobs_place,
         )
 
     def test_position_page(self):
