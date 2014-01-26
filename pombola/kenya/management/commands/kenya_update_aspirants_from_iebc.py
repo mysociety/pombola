@@ -31,7 +31,7 @@ before_import_date = datetime.date(2013, 2, 7)
 
 future_approximate_date = ApproximateDate(future=True)
 
-data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
+data_directory = os.path.join(sys.path[0], 'pombola', 'kenya', '2013-election-data')
 
 # Calling these 'corrections' may not be quite right.  There are
 # naming discrepancies between the documents published by the IEBC and
