@@ -93,7 +93,11 @@ pombola_settings.extra_js.push('js/tabs.js')
 <div class="tabs">
   <ul class="tab-links">
     <li><a class="active" href="#profile">Profile</a></li>
+    {% with past_positions=person.position_set.all.political.currently_inactive %}
+    {% if past_positions %}
     <li><a href="#experience">Experience</a></li>
+    {% endif %}
+    <li><a href="#appearances">Appearances</a></li>
     <li><a href="#membersinterests">Register of Interests</a></li>
   </ul>
 
@@ -114,8 +118,74 @@ pombola_settings.extra_js.push('js/tabs.js')
 		{% endif %}
 	{% endwith %}
 	  
-    <h2>Recent Appearances</h2>
+	  <h2>Recent Appearances</h2>
+	  
+        <section class="person-appearances">
+      <h3>Plenary appearances</h3>
 
+      {% include "core/person_speech_list.html" with speechlist=hansard|slice:":3" section_url='hansard:section-view' %}
+
+      {% if hansard.count %}
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
+      {% endif %}
+    </section>
+
+    <section class="person-appearances">
+      <h3>Questions </h3>
+
+      {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' parent_title=1 %}
+
+      {% if question.count %}
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
+      {% endif %}
+    </section>
+    
+    <section class="person-appearances">
+      <h3>Committee appearances</h3>
+
+      {% include "core/person_speech_list.html" with speechlist=committee section_url='committee:section-view' %}
+
+      {% if committee.count %}
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
+      {% endif %}
+    </section>
+
+  </div>
+  
+  {% if past_positions %}
+  <div id="experience" class="tab-content">
+    
+
+    <div class="person-experience">
+      {% with current_positions=person.position_set.all.political.currently_active %}
+        {% if current_positions %}
+          <h3>Currently</h3>
+          <ul class="current-positions positions">
+            {% for position in current_positions %}
+            <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      
+        <h3>Formerly</h3>
+          <ul class="former-positions positions">
+          {% if past_positions %}
+            {% for position in past_positions %}
+              <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
+            {% endfor %}
+          {% else %}
+		    <li>No former positions recorded.</li>
+        {% endif %}
+        </ul>
+      
+
+    </div>
+  </div>
+  {% endif %}{% endwith %}
+  
+  <div id="appearances" class="tab-content">
     <section class="person-appearances">
       <h3>Committee appearances</h3>
 
@@ -145,38 +215,6 @@ pombola_settings.extra_js.push('js/tabs.js')
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
       {% endif %}
     </section>
-
-  </div>
-
-  <div id="experience" class="tab-content">
-    
-
-    <div class="person-experience">
-      {% with current_positions=person.position_set.all.political.currently_active %}
-        {% if current_positions %}
-          <h3>Currently</h3>
-          <ul class="current-positions positions">
-            {% for position in current_positions %}
-            <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
-
-      {% with past_positions=person.position_set.all.political.currently_inactive %}
-        <h3>Formerly</h3>
-          <ul class="former-positions positions">
-          {% if past_positions %}
-            {% for position in past_positions %}
-              <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
-            {% endfor %}
-          {% else %}
-		    <li>No former positions recorded.</li>
-        {% endif %}
-        </ul>
-      {% endwith %}
-
-    </div>
   </div>
       
   <div id="membersinterests" class="tab-content">

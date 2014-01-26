@@ -5103,3 +5103,20 @@ ul.pager li.next {
     margin-right: 4%;
   }
 }
+
+#profile h2 {
+	font-size:1em;
+}
+.person-appearances {
+	font-size:0.9em;
+}
+#appearances li {
+	margin-bottom:0.5em;
+}
+
+#profile section {
+	display:block;
+	float:left;
+	width:49%;
+	margin-right:1%;
+}
