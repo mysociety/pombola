@@ -1,5 +1,7 @@
 from .base import *
 
+NOSE_ARGS += ['-a', '!country']
+
 COUNTRY_APP = None
 
 INSTALLED_APPS = INSTALLED_APPS + \

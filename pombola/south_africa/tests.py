@@ -25,6 +25,9 @@ from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
+from nose.plugins.attrib import attr
+
+@attr(country='south_africa')
 @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
@@ -145,6 +148,7 @@ class ConstituencyOfficesTestCase(WebTest):
         settings.HAYSTACK_SIGNAL_PROCESSOR = self.old_HAYSTACK_SIGNAL_PROCESSOR
 
 
+@attr(country='south_africa')
 @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class LatLonDetailViewTest(TestCase):
     def test_404_for_incorrect_province_lat_lon(self):
@@ -152,6 +156,7 @@ class LatLonDetailViewTest(TestCase):
         self.assertEquals(404, res.status_code)
 
 
+@attr(country='south_africa')
 @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SASearchViewTest(TestCase):
     def test_search_page_returns_success(self):
@@ -159,6 +164,7 @@ class SASearchViewTest(TestCase):
         self.assertEquals(200, res.status_code)
 
 
+@attr(country='south_africa')
 @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SAPersonDetailViewTest(TestCase):
     def setUp(self):
@@ -284,6 +290,7 @@ class SAPersonDetailViewTest(TestCase):
         self.assertEqual(len(context['interests'][1]['categories'][2]['entries'][0]), len(expected[1]['categories'][2]['entries'][0]))
 
 
+@attr(country='south_africa')
 class SAOrganisationPartySubPageTest(TestCase):
 
     def setUp(self):
@@ -360,6 +367,7 @@ class SAOrganisationPartySubPageTest(TestCase):
         self.assertEqual(context2['sorted_positions'][1].person.slug, 'person4')
 
 
+@attr(country='south_africa')
 @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SAHansardIndexViewTest(TestCase):
 
@@ -425,6 +433,7 @@ class SAHansardIndexViewTest(TestCase):
         self.assertContains(response, '<a href="/hansard/%d">%s</a>' % (section.id, section_name), html=True)
         self.assertNotContains(response, "Empty section")
 
+@attr(country='south_africa')
 @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SACommitteeIndexViewTest(TestCase):
 
@@ -467,6 +476,7 @@ class SACommitteeIndexViewTest(TestCase):
         self.assertNotContains(response, "Empty section")
 
 
+@attr(country='south_africa')
 class SAOrganisationDetailViewTest(WebTest):
 
     def setUp(self):
@@ -518,7 +528,7 @@ class SAOrganisationDetailViewTest(WebTest):
         self.assertEqual(positions[0].person.legal_name, "Zest ABCPerson")
         self.assertEqual(positions[1].person.legal_name, "Test Person")
 
-
+@attr(country='south_africa')
 class FixPositionTitlesCommandTests(TestCase):
     """Test the south_africa_fix_position_title command"""
 

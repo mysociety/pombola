@@ -5,6 +5,8 @@ from django.utils import unittest
 from django.test.client import Client
 from django.test import TestCase, Client
 
+from nose.plugins.attrib import attr
+
 from .models import InfoPage
 
 class InfoTest(TestCase):
@@ -20,6 +22,7 @@ class InfoTest(TestCase):
         self.assertEqual(post.get_absolute_url(), "/blog/post")
 
 
+    @attr(country='south_africa')
     @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
     def test_info_newsletter_uses_custom_template(self):
 
@@ -63,6 +66,7 @@ class InfoBlogClientTests(TestCase):
                 # print label, "should not contain", content
                 self.assertNotContains(response, content)
 
+    @attr(country='south_africa')
     @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
     def test_tags(self):
         self._test_label(
@@ -73,6 +77,7 @@ class InfoBlogClientTests(TestCase):
             url_base = '/blog/tag/'
         )
 
+    @attr(country='south_africa')
     @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
     def test_categories(self):
         self._test_label(
