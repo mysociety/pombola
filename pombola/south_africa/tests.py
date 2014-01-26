@@ -8,6 +8,7 @@ from django.test import TestCase
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
+from django.utils import unittest
 from django_webtest import WebTest
 
 from mapit.models import Type, Area, Geometry, Generation
@@ -24,6 +25,7 @@ from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
+@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
         self.old_HAYSTACK_SIGNAL_PROCESSOR = settings.HAYSTACK_SIGNAL_PROCESSOR
@@ -143,18 +145,21 @@ class ConstituencyOfficesTestCase(WebTest):
         settings.HAYSTACK_SIGNAL_PROCESSOR = self.old_HAYSTACK_SIGNAL_PROCESSOR
 
 
+@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class LatLonDetailViewTest(TestCase):
     def test_404_for_incorrect_province_lat_lon(self):
         res = self.client.get(reverse('latlon', kwargs={'lat': '0', 'lon': '0'}))
         self.assertEquals(404, res.status_code)
 
 
+@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SASearchViewTest(TestCase):
     def test_search_page_returns_success(self):
         res = self.client.get(reverse('core_search'))
         self.assertEquals(200, res.status_code)
 
 
+@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SAPersonDetailViewTest(TestCase):
     def setUp(self):
         fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
@@ -355,6 +360,7 @@ class SAOrganisationPartySubPageTest(TestCase):
         self.assertEqual(context2['sorted_positions'][1].person.slug, 'person4')
 
 
+@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SAHansardIndexViewTest(TestCase):
 
     def setUp(self):
@@ -419,6 +425,7 @@ class SAHansardIndexViewTest(TestCase):
         self.assertContains(response, '<a href="/hansard/%d">%s</a>' % (section.id, section_name), html=True)
         self.assertNotContains(response, "Empty section")
 
+@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SACommitteeIndexViewTest(TestCase):
 
     def setUp(self):
