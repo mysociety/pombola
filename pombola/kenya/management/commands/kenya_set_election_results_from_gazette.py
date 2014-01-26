@@ -93,26 +93,27 @@ PositionData = namedtuple('PositionData',
                            'aspirant_position_title',
                            'row_to_name'])
 
-ward_representative_position_data = PositionData(
-    placekind=PlaceKind.objects.get(name='Ward'),
-    csv_filename=os.path.join(gazette_directory, 'ward-results.csv'),
-    place_name_column='Ward Name',
-    slugify_place_name=lambda pn: 'ward-' + slugify(pn),
-    position_title=PositionTitle.objects.get_or_create(
-            name='Ward Representative',
-            slug='ward-representative',
-            requires_place=True)[0],
-    aspirant_position_title=PositionTitle.objects.get(name='Aspirant Ward Representative'),
-    row_to_name=lambda row: row['Full Names A'] + ' ' + row['Full Names B'])
+if settings.COUNTRY_APP == 'kenya':
+    ward_representative_position_data = PositionData(
+        placekind=PlaceKind.objects.get(name='Ward'),
+        csv_filename=os.path.join(gazette_directory, 'ward-results.csv'),
+        place_name_column='Ward Name',
+        slugify_place_name=lambda pn: 'ward-' + slugify(pn),
+        position_title=PositionTitle.objects.get_or_create(
+                name='Ward Representative',
+                slug='ward-representative',
+                requires_place=True)[0],
+        aspirant_position_title=PositionTitle.objects.get(name='Aspirant Ward Representative'),
+        row_to_name=lambda row: row['Full Names A'] + ' ' + row['Full Names B'])
 
-governor_position_data = PositionData(
-    placekind=PlaceKind.objects.get(name='County'),
-    csv_filename=os.path.join(gazette_directory, 'governors-results.csv'),
-    place_name_column='County',
-    slugify_place_name=lambda pn: slugify(pn) + '-county',
-    position_title=PositionTitle.objects.get(name='Governor'),
-    aspirant_position_title=PositionTitle.objects.get(name='Aspirant Governor'),
-    row_to_name=lambda row: row['Governor'])
+    governor_position_data = PositionData(
+        placekind=PlaceKind.objects.get(name='County'),
+        csv_filename=os.path.join(gazette_directory, 'governors-results.csv'),
+        place_name_column='County',
+        slugify_place_name=lambda pn: slugify(pn) + '-county',
+        position_title=PositionTitle.objects.get(name='Governor'),
+        aspirant_position_title=PositionTitle.objects.get(name='Aspirant Governor'),
+        row_to_name=lambda row: row['Governor'])
 
 class Command(NoArgsCommand):
     help = 'Set the elected ward representatives and governors'
