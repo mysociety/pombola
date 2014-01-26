@@ -24,8 +24,10 @@ def no_stderr():
     class DevNull(object):
         def write(self, _): pass
     sys.stderr = DevNull()
-    yield
-    sys.stderr = save_stderr
+    try:
+        yield
+    finally:
+        sys.stderr = save_stderr
 
 
 class MergePeopleCommandTest(unittest.TestCase):
