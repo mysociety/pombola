@@ -133,17 +133,17 @@ pombola_settings.extra_js.push('js/tabs.js')
     <section class="person-appearances">
       <h3>Questions </h3>
 
-      {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' parent_title=1 %}
+      {% include "core/person_speech_list.html" with speechlist=question|slice:":3" section_url='question:section-view' parent_title=1 %}
 
       {% if question.count %}
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
       {% endif %}
     </section>
-    
+    <div style="clear:both;"></div>
     <section class="person-appearances">
       <h3>Committee appearances</h3>
 
-      {% include "core/person_speech_list.html" with speechlist=committee section_url='committee:section-view' %}
+      {% include "core/person_speech_list.html" with speechlist=committee|slice:":3" section_url='committee:section-view' %}
 
       {% if committee.count %}
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
