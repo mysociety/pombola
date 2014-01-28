@@ -324,7 +324,6 @@ class Command(LabelCommand):
                     office_or_area = row['Type']
                     party = row['Party']
                     member_of_provincial_legislature = row['MPL']
-                    member_of_provincial_legislature = row['MPL']
                     administrator = row['Administrator']
                     telephone = row['Tel']
                     fax = row['Fax']
