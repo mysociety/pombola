@@ -3747,7 +3747,7 @@ HOME PAGE INTRO BOX
   background: transparent url("/static/images/lr-carousel-arrows.png") top left no-repeat;
 }
 .carousel-nav .next {
-  background-position-x: -13px;
+  background-position: -13px 0;
   margin-left: 10px;
 }
 
