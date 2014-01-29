@@ -951,21 +951,37 @@ ul.home-news-list {
         margin-right: 8px;
         &:hover,
         &:focus {
-            background-position-y: -41px;
+            background-position: 0 -41px;
         }
     }
 
     .facebook-social-icon {
-        background-position-x: 0;
+        background-position: 0 -1px;
+        &:hover,
+        &:focus {
+            background-position: 0 -41px;
+        }
     }
     .twitter-social-icon {
-        background-position-x: -51px;
+        background-position: -51px -1px;
+        &:hover,
+        &:focus {
+            background-position: -51px -41px;
+        }
     }
     .youtube-social-icon {
-        background-position-x: -101px;
+        background-position: -101px -1px;
+        &:hover,
+        &:focus {
+            background-position: -101px -41px;
+        }
     }
     .rss-social-icon {
-        background-position-x: -150px;
+        background-position: -150px -1px;
+        &:hover,
+        &:focus {
+            background-position: -150px -41px;
+        }
     }
 }
 

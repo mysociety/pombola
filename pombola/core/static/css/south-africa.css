@@ -4020,19 +4020,31 @@ ul.home-news-list li h3 a:focus {
   margin-right: 8px;
 }
 .social-links-list li a:hover, .social-links-list li a:focus {
-  background-position-y: -41px;
+  background-position: 0 -41px;
 }
 .social-links-list .facebook-social-icon {
-  background-position-x: 0;
+  background-position: 0 -1px;
+}
+.social-links-list .facebook-social-icon:hover, .social-links-list .facebook-social-icon:focus {
+  background-position: 0 -41px;
 }
 .social-links-list .twitter-social-icon {
-  background-position-x: -51px;
+  background-position: -51px -1px;
+}
+.social-links-list .twitter-social-icon:hover, .social-links-list .twitter-social-icon:focus {
+  background-position: -51px -41px;
 }
 .social-links-list .youtube-social-icon {
-  background-position-x: -101px;
+  background-position: -101px -1px;
+}
+.social-links-list .youtube-social-icon:hover, .social-links-list .youtube-social-icon:focus {
+  background-position: -101px -41px;
 }
 .social-links-list .rss-social-icon {
-  background-position-x: -150px;
+  background-position: -150px -1px;
+}
+.social-links-list .rss-social-icon:hover, .social-links-list .rss-social-icon:focus {
+  background-position: -150px -41px;
 }
 
 /*
