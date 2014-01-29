@@ -3298,6 +3298,11 @@ p {
   margin-bottom: 1em;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Tables */
 table {
   width: 100%;
@@ -3403,6 +3408,17 @@ small {
   position: relative;
 }
 
+@media only all and (max-width: 1024px), print {
+  .page-title {
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+  }
+}
+
 .feedback-button {
   position: absolute;
   bottom: 0;
@@ -3427,6 +3443,19 @@ small {
   color: #fff;
   background-color: #e23d28;
   text-decoration: none;
+}
+
+#ajax_dialog_subcontent {
+  width: 100%;
+  max-width: 300px;
+}
+#ajax_dialog_subcontent textarea {
+  width: 100%;
+}
+@media only all and (max-width: 640px), print {
+  #ajax_dialog_subcontent textarea {
+    max-width: 268px;
+  }
 }
 
 /*
