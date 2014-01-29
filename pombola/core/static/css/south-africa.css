@@ -3298,6 +3298,11 @@ p {
   margin-bottom: 1em;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Tables */
 table {
   width: 100%;
