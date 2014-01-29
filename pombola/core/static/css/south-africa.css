@@ -3445,6 +3445,19 @@ small {
   text-decoration: none;
 }
 
+#ajax_dialog_subcontent {
+  width: 100%;
+  max-width: 300px;
+}
+#ajax_dialog_subcontent textarea {
+  width: 100%;
+}
+@media only all and (max-width: 640px), print {
+  #ajax_dialog_subcontent textarea {
+    max-width: 268px;
+  }
+}
+
 /*
 
 HEADER

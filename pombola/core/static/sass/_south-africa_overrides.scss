@@ -334,7 +334,17 @@ small {
         background-color: $colour_primary;
         text-decoration: none;
     }
+}
 
+#ajax_dialog_subcontent {
+    width: 100%;
+    max-width: 300px;
+    textarea {
+        width: 100%;
+        @media only all and (max-width: 640px), print {
+            max-width: 268px;
+        }
+    }
 }
 
 /*
