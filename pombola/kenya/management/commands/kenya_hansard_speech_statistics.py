@@ -87,7 +87,7 @@ class Command(BaseCommand):
                     # The spelling of the subtitle 'Women's representative' varies:
                     subtitle__regex="omen.*epresentative",
                     place__kind__name='County'):
-                    county_associated_positions.append(("Women's representative", p.place.name))
+                    county_associated_positions.append((p.title.name, p.place.name))
 
                 if len(county_associated_positions) > 1:
                     raise Exception, "Warning: found multiple county-associated positions for {0}: {1}".format(
