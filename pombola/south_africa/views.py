@@ -213,6 +213,13 @@ class SAOrganisationDetailView(OrganisationDetailView):
         if self.object.kind.slug == 'parliament':
             self.add_parliament_counts_to_context_data(context)
 
+        # Sort the list of positions in an organisation by an approximation
+        # of their holder's last name.
+        context['positions'] = sorted(
+            context['positions'],
+            key=lambda position: position.person.legal_name.split()[-1]
+            )
+
         return context
 
     def add_parliament_counts_to_context_data(self, context):
@@ -486,7 +493,7 @@ class SAQuestionIndex(SASpeechesIndex):
 
         # the question section structure is
         # "Questions" -> "Questions asked to Minister for X" -> "Date" ...
-        
+
         sections = Section \
             .objects \
             .filter(parent=top_section) \

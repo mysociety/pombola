@@ -1,5 +1,3 @@
-import re
-import urllib2
 import time
 import calendar
 import datetime
@@ -15,7 +13,6 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 from django.core.cache import cache
 from django.conf import settings
-from django.http import Http404
 from django.contrib.contenttypes.models import ContentType
 
 from pombola.core import models

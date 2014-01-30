@@ -296,3 +296,55 @@ class SACommitteeIndexViewTest(TestCase):
         self.assertContains(response, section_name)
         self.assertContains(response, '<a href="/committee/%d">%s</a>' % (section.id, section_name), html=True)
         self.assertNotContains(response, "Empty section")
+
+
+class SAOrganisationDetailViewTest(WebTest):
+
+    def setUp(self):
+        # Create a test organisation and some associated models
+        person = models.Person.objects.create(
+            legal_name = 'Test Person',
+            slug       = 'test-person',
+        )
+
+        person2 = models.Person.objects.create(
+            legal_name = 'Zest ABCPerson',
+            slug       = 'zest-abcperson',
+        )
+
+        organisation_kind = models.OrganisationKind.objects.create(
+            name = 'Foo',
+            slug = 'foo',
+        )
+        organisation_kind.save()
+
+        organisation = models.Organisation.objects.create(
+            name = 'Test Org',
+            slug = 'test-org',
+            kind = organisation_kind,
+        )
+
+        title = models.PositionTitle.objects.create(
+            name = 'Test title',
+            slug = 'test-title',
+        )
+
+        models.Position.objects.create(
+            person = person,
+            title  = title,
+            organisation = organisation,
+        )
+
+        models.Position.objects.create(
+            person = person2,
+            title  = title,
+            organisation = organisation,
+        )
+
+    def test_ordering_of_positions(self):
+        # We expect the positions to be sorted by the "last name" of the
+        # people in them.
+        resp = self.app.get('/organisation/test-org/')
+        positions = resp.context['positions']
+        self.assertEqual(positions[0].person.legal_name, "Zest ABCPerson")
+        self.assertEqual(positions[1].person.legal_name, "Test Person")
