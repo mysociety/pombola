@@ -20,7 +20,7 @@
   {% endif %}
 
   <h2>People</h2>
-  {% include "core/_position_listing.html" with positions=object.position_set.all %}
+  {% include "core/_position_listing.html" with positions=positions %}
 
   {% if object.kind.slug == 'constituency-office' %}
     {% include 'disqus_comments.html' %}
