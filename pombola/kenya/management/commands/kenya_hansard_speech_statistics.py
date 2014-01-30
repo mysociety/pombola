@@ -1,12 +1,15 @@
 from collections import defaultdict
 import csv
+import datetime
 from dateutil import parser
 from optparse import make_option
 import re
 import sys
 
 from django.core.management.base import BaseCommand, CommandError
+from django.db.models import Count
 
+from pombola.core.models import Person
 from pombola.hansard.models import Entry, Venue
 
 class Command(BaseCommand):
@@ -24,6 +27,67 @@ class Command(BaseCommand):
 
     help = 'Output statistics on speeches from Hansard for a date range'
 
+    def position_data(self, speaker, date):
+
+        results = {
+            'county_associated': [],
+            'party_membership': [],
+            'coalition_membership': []
+        }
+
+        positions = speaker.position_set.all(). \
+            current_politician_positions(date)
+
+        # Find positions associated with counties:
+
+        for p in positions.filter(
+            title__name__in=('Senator', 'Governor'),
+            place__kind__name='County'):
+            results['county_associated'].append((p.title.name, p.place.name))
+
+        for p in positions.filter(
+            title__name='Member of the National Assembly',
+            place__kind__name='Constituency',
+            place__parent_place__kind__name='County'):
+            results['county_associated'].append((p.title.name, p.place.parent_place.name))
+
+        for p in positions.filter(
+            title__name='Member of the National Assembly',
+            # The spelling of the subtitle 'Women's representative' varies:
+            subtitle__regex="omen.*epresentative",
+            place__kind__name='County'):
+            results['county_associated'].append((p.title.name, p.place.name))
+
+        # Now find party and coalition memberships:
+
+        party_memberships = positions. \
+            filter(title__name='Member'). \
+            filter(organisation__kind__name='Political Party')
+        coalition_memberships = positions. \
+            filter(title__name='Coalition Member'). \
+            filter(organisation__kind__name='Coalition')
+
+        for mtype, memberships in (
+                ("party", party_memberships),
+                ("coalition", coalition_memberships)):
+
+            for m in memberships:
+                results[mtype + '_membership'].append(m.organisation.name)
+
+        for k, v in results.items():
+            count = len(v)
+            if count > 1:
+                fmt = "Multiple {0} memberships found for {1}: {2}"
+                message = fmt.format(k, speaker, v)
+                raise Exception, message
+            elif count == 1:
+                results[k] = v[0]
+            else:
+                results[k] = ('', '') if k == 'county_associated' else ''
+
+        return results
+
+
     def handle(self, **options):
         if not options['date_from']:
             raise CommandError("You must specify --date-from")
@@ -31,6 +95,44 @@ class Command(BaseCommand):
             raise CommandError("You must specify --date-to")
         date_from = parser.parse(options['date_from']).date()
         date_to = parser.parse(options['date_to']).date()
+
+        date_difference = date_to - date_from
+        date_midpoint = date_from + (date_difference / 2)
+
+        with open('all-speakers.csv', 'w') as fp:
+            writer = csv.writer(fp)
+            writer.writerow(['Name',
+                             'Gender',
+                             'Position',
+                             'County',
+                             'Party',
+                             'Coalition',
+                             'Appearances'])
+
+            for d in Entry.objects. \
+                filter(sitting__start_date__gte=date_from,
+                       sitting__start_date__lte=date_to,
+                       speaker__isnull=False). \
+                values('speaker'). \
+                annotate(Count('speaker')). \
+                order_by('speaker'):
+                speaker = Person.objects.get(pk=d['speaker'])
+                speeches = d['speaker__count']
+
+                print "speaker:", speaker, "speeches:", speeches
+
+                # Look for political positions occupied mid-way through
+                # the date range:
+
+                position_results = self.position_data(speaker, date_midpoint)
+
+                writer.writerow([speaker.legal_name,
+                                 speaker.gender,
+                                 position_results['county_associated'][0],
+                                 position_results['county_associated'][1],
+                                 position_results['party_membership'],
+                                 position_results['coalition_membership'],
+                                 speeches])
 
         for venue in Venue.objects.all():
 
@@ -64,61 +166,10 @@ class Command(BaseCommand):
             for e in all_speaker_entries:
                 sitting_date = e.sitting.start_date
                 speaker = e.speaker
-                positions = speaker.position_set.all(). \
-                    current_politician_positions(sitting_date)
-
-                # Find positions associated with counties:
-
-                county_associated_positions = []
-
-                for p in positions.filter(
-                    title__name__in=('Senator', 'Governor'),
-                    place__kind__name='County'):
-                    county_associated_positions.append((p.title.name, p.place.name))
-
-                for p in positions.filter(
-                    title__name='Member of the National Assembly',
-                    place__kind__name='Constituency',
-                    place__parent_place__kind__name='County'):
-                    county_associated_positions.append((p.title.name, p.place.parent_place.name))
-
-                for p in positions.filter(
-                    title__name='Member of the National Assembly',
-                    # The spelling of the subtitle 'Women's representative' varies:
-                    subtitle__regex="omen.*epresentative",
-                    place__kind__name='County'):
-                    county_associated_positions.append((p.title.name, p.place.name))
-
-                if len(county_associated_positions) > 1:
-                    raise Exception, "Warning: found multiple county-associated positions for {0}: {1}".format(
-                        speaker,
-                        county_associated_positions)
-                if len(county_associated_positions) == 1:
-                    county_associated[county_associated_positions[0]] += 1
-
-                # Now find party and coalition memberships:
-
-                party_memberships = positions. \
-                    filter(title__name='Member'). \
-                    filter(organisation__kind__name='Political Party')
-                coalition_memberships = positions. \
-                    filter(title__name='Coalition Member'). \
-                    filter(organisation__kind__name='Coalition')
-
-                for mtype, counts, memberships in (
-                        ("party", party_counts, party_memberships),
-                        ("coalition", coalition_counts, coalition_memberships)):
-
-                    count = memberships.count()
-
-                    if count > 1:
-                        print >> sys.stderr, "Multiple {0} memberships found for {1}: {2}".format(
-                            mtype, speaker, memberships)
-                    elif count == 1:
-                        name = memberships[0].organisation.name
-                        counts[name] += 1
-                    else:
-                        counts['Unknown'] += 1
+                positions = self.position_data(speaker, e.sitting.start_date)
+                party_counts[positions['party_membership']] += 1
+                coalition_counts[positions['coalition_membership']] += 1
+                county_associated[positions['county_associated']] += 1
 
             # Write out those results:
 
