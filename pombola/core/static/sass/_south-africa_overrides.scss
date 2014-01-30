@@ -1991,6 +1991,14 @@ ul.pager {
             float: left;
         }
        }
+       &.thirds {
+            .major-column {
+                width: 64.5%;
+            }
+            .minor-column {
+                width: 33%
+            }
+       }
    }
    .fifty-fifty-layout {
         .column {

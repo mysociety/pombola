@@ -5064,6 +5064,12 @@ ul.pager li.next {
   .layout-major-minor.reverse .minor-column {
     float: left;
   }
+  .layout-major-minor.thirds .major-column {
+    width: 64.5%;
+  }
+  .layout-major-minor.thirds .minor-column {
+    width: 33%;
+  }
 
   .fifty-fifty-layout .column {
     width: 48%;
