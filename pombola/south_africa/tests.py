@@ -1,6 +1,7 @@
 import sys
 import os
 from datetime import date, time
+from StringIO import StringIO
 
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
@@ -348,3 +349,131 @@ class SAOrganisationDetailViewTest(WebTest):
         positions = resp.context['positions']
         self.assertEqual(positions[0].person.legal_name, "Zest ABCPerson")
         self.assertEqual(positions[1].person.legal_name, "Test Person")
+
+
+class FixPositionTitlesCommandTests(TestCase):
+    """Test the south_africa_fix_position_title command"""
+
+    def setUp(self):
+        # Create some organisations with some people in various positions,
+        # with various titles
+        self.person_a = models.Person.objects.create(
+            name="Person A",
+            slug="person-a")
+        self.person_b = models.Person.objects.create(
+            name="Person B",
+            slug="person-b")
+        self.person_c = models.Person.objects.create(
+            name="Person C",
+            slug="person-c")
+        self.person_d = models.Person.objects.create(
+            name="Person D",
+            slug="person-d")
+
+        self.party_kind = models.OrganisationKind.objects.create(
+            name="Party",
+            slug="party")
+        self.other_kind = models.OrganisationKind.objects.create(
+            name="Other Org",
+            slug="other-org")
+
+        self.organisation_a = models.Organisation.objects.create(
+            name="Organisation A",
+            kind=self.party_kind,
+            slug="organisation-a")
+        self.organisation_b = models.Organisation.objects.create(
+            name="Organisation B",
+            kind=self.party_kind,
+            slug="organisation-b")
+        self.organisation_c = models.Organisation.objects.create(
+            name="Organisation C",
+            kind=self.other_kind,
+            slug="organisation-c")
+
+        self.party_member_position_title = models.PositionTitle.objects.create(
+            name="Party Member",
+            slug="party-member")
+        self.member_position_title = models.PositionTitle.objects.create(
+            name="Member",
+            slug="member")
+        self.other_position_title = models.PositionTitle.objects.create(
+            name="Other Title",
+            slug="other-title")
+
+        self.position_a = models.Position.objects.create(
+            title=self.party_member_position_title,
+            person=self.person_a,
+            category="other",
+            organisation=self.organisation_a)
+        self.position_b = models.Position.objects.create(
+            title=self.party_member_position_title,
+            person=self.person_b,
+            category="other",
+            organisation=self.organisation_b)
+        self.position_c = models.Position.objects.create(
+            title=self.member_position_title,
+            person=self.person_c,
+            category="other",
+            organisation=self.organisation_a)
+        self.position_d = models.Position.objects.create(
+            title=self.other_position_title,
+            person=self.person_d,
+            category="other",
+            organisation=self.organisation_b)
+
+    def test_updates_titles_and_deletes_position(self):
+        self.assertEquals(
+            models.Position.objects.filter(title=self.party_member_position_title).count(),
+            2)
+        self.assertEquals(
+            models.Position.objects.filter(title=self.member_position_title).count(),
+            1)
+
+        call_command(
+            'south_africa_fix_position_titles',
+            stderr=StringIO(),
+            stdout=StringIO())
+
+        # Check things are re-assigned correctly
+        self.assertEquals(
+            models.Position.objects.filter(title=self.party_member_position_title).count(),
+            0)
+        self.assertEquals(
+            models.Position.objects.filter(title=self.member_position_title).count(),
+            3)
+        self.assertEquals(
+            models.Position.objects.get(id=self.position_a.id).title,
+            self.member_position_title)
+        self.assertEquals(
+            models.Position.objects.get(id=self.position_b.id).title,
+            self.member_position_title)
+
+        # Check that the old PositionTitle is deleted
+        self.assertEqual(
+            models.PositionTitle.objects.filter(name="Party Member").count(),
+            0)
+
+        # Check that nothing else got clobbered
+        self.assertEquals(
+            models.Position.objects.get(id=self.position_c.id).title,
+            self.member_position_title)
+        self.assertEquals(
+            models.Position.objects.get(id=self.position_d.id).title,
+            self.other_position_title)
+
+
+    def test_errors_if_position_titles_not_on_parties(self):
+        self.person_e = models.Person.objects.create(
+            name="Person E",
+            slug="person-e")
+        models.Position.objects.create(
+            title=self.party_member_position_title,
+            person=self.person_e,
+            category="other",
+            organisation=self.organisation_c)
+
+        with self.assertRaises(AssertionError):
+            call_command(
+                'south_africa_fix_position_titles',
+                stderr=StringIO(),
+                stdout=StringIO())
