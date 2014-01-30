@@ -936,11 +936,11 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
     def order_by_place(self):
         """Sort by the place name"""
-        return self.select_related('place').order_by('place__name')
+        return self.order_by('place__name')
 
     def order_by_person_name(self):
         """Sort by the place name"""
-        return self.select_related('person').order_by('person__legal_name')
+        return self.order_by('person__legal_name')
 
 class PositionManager(ManagerBase):
     def get_query_set(self):
