@@ -3380,6 +3380,17 @@ small {
   color: #555555;
 }
 
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
 #page {
   padding: 10px;
 }
@@ -4636,10 +4647,20 @@ ul.pager li.next {
 }
 
 /* Newsletter page */
+.newsletter-sidebar {
+  margin: 1.5em 0;
+}
+
 .page-wrapper .email-signup input[type="text"] {
   border: 1px solid #b3b3b3;
-  border-right: none;
-  padding: 0.74em;
+  margin-bottom: 0.5em;
+}
+.page-wrapper .email-signup .button {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
 }
 
 @-webkit-keyframes target-fade {
@@ -5063,6 +5084,12 @@ ul.pager li.next {
   }
   .layout-major-minor.reverse .minor-column {
     float: left;
+  }
+  .layout-major-minor.thirds .major-column {
+    width: 64.5%;
+  }
+  .layout-major-minor.thirds .minor-column {
+    width: 33%;
   }
 
   .fifty-fifty-layout .column {
