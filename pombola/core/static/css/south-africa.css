@@ -4202,15 +4202,43 @@ FOOTER
   max-width: 960px;
   margin: .5em auto;
   font-size: inherit;
-}
-@media only all and (min-width: 640px), print {
-  #site-footer div.attribution {
-    text-align: right;
-  }
+  text-align: left;
 }
 #site-footer .header-search {
   display: none;
   visibility: hdden;
+}
+
+.footer-full-width {
+  width: 100%;
+  border-top: 1px solid #1e3435;
+  padding-top: 1.5em;
+  margin-top: 0.5em;
+  float: left;
+}
+@media only all and (max-width: 640px), print {
+  .footer-full-width .layout-major-minor {
+    padding: 0 10px;
+  }
+}
+@media only all and (min-width: 640px), print {
+  .footer-full-width .major-column {
+    margin-bottom: 0 !important;
+  }
+}
+
+#site-footer .disclaimer p {
+  font-size: 11px;
+  color: #808080;
+}
+
+#site-footer .utilities li:first-child {
+  margin-left: 0px;
+}
+@media only all and (min-width: 640px), print {
+  #site-footer .utilities li:first-child {
+    margin-left: 12px;
+  }
 }
 
 .email-signup {

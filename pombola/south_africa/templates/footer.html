@@ -38,17 +38,23 @@
     </div>
 </div>
 
-<div>
-    <ul class="utilities">
-        <li><a href="{% url "info_page" slug='policies' %}">Privacy</a></li>
-        <li><a href="{% url "feedback_add" %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
+<div class="footer-full-width">
+    <div class="layout-major-minor thirds">
+        <div class="disclaimer major-column">
+        <h4>Disclaimer</h4 >
+    <p>The data for this site has been sourced form a range of organisations and websites and often received in formats that are hard to process. As a result, errors can occur - if you see something that you think is an error, please click on the "Correct This Page" button and let us know so that we can investigate.</p>
+        </div>
+        <ul class="utilities minor-column">
+            <li><a href="{% url "info_page" slug='policies' %}">Privacy</a></li>
+            <li><a href="{% url "feedback_add" %}?url={{ request.build_absolute_uri }}" class="feedback_link">Give us feedback</a></li>
 
-        {% if object and request.user.is_staff %}
-            <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
-        {% endif %}
+            {% if object and request.user.is_staff %}
+                <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
+            {% endif %}
 
-        {% if settings.STAGING %}
-            <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
-        {% endif %}
-    </ul>
+            {% if settings.STAGING %}
+                <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+            {% endif %}
+        </ul>
+    </div>
 </div>
