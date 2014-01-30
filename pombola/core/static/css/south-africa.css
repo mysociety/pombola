@@ -4307,6 +4307,9 @@ FOOTER
   padding: 0;
   margin-bottom: 1em;
 }
+.sidebar .constituency-office-feedback {
+  font-size: 0.875em;
+}
 
 /* Generic listing styles */
 .list-of-things img {

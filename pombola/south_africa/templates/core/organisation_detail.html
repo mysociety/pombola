@@ -101,6 +101,11 @@
       </li>
       {% endfor %}
     </ul>
+    {% if object.kind.slug == 'constituency-office' %}
+      <div class="constituency-office-feedback">
+        <p>Give feedback on your visit to your constituency office. Take a photo of your office and send it to <a href="mailto:contact@pa.org.za">contact@pa.org.za</a>.</p>
+      </div>
+    {% endif %}
   </div>
 
   {% endif %}
