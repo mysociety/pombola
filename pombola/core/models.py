@@ -245,7 +245,13 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
     @property
     def name(self):
-        alternative_names_to_use = self.alternative_names.filter(name_to_use=True)
+        # n.b. we're deliberately not using
+        # self.alternative_names.filter(name_to_use=True) here, since
+        # that would do a new query per person, even if the
+        # alternative names had been loaded by prefetch_related.  See:
+        #   http://stackoverflow.com/a/12974801/223092
+        alternative_names_to_use = [an for an in self.alternative_names.all()
+                                    if an.name_to_use]
         if alternative_names_to_use:
             return alternative_names_to_use[0].alternative_name
         else:
