@@ -4636,10 +4636,20 @@ ul.pager li.next {
 }
 
 /* Newsletter page */
+.newsletter-sidebar {
+  margin: 1.5em 0;
+}
+
 .page-wrapper .email-signup input[type="text"] {
   border: 1px solid #b3b3b3;
-  border-right: none;
-  padding: 0.74em;
+  margin-bottom: 0.5em;
+}
+.page-wrapper .email-signup .button {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
 }
 
 @-webkit-keyframes target-fade {

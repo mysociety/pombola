@@ -1559,12 +1559,17 @@ ul.pager {
 }
 
 /* Newsletter page */
+.newsletter-sidebar {
+    margin: 1.5em 0;
+}
 .page-wrapper {
     .email-signup {
         input[type="text"] {
             border: 1px solid $colour_middling_grey;
-            border-right: none;
-            padding: 0.74em;
+            margin-bottom: 0.5em;
+        }
+        .button {
+            @include border_radius(3px);
         }
     }
 }

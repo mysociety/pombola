@@ -6,7 +6,9 @@
              {{ block.super }}
         </div>
         <div class="minor-column">
-            {% include "south_africa/_newsletter_signup.html" %}
+            <div class="sidebar newsletter-sidebar">
+                {% include "south_africa/_newsletter_signup.html" %}
+            </div>
         </div>
     </div>
 {% endblock %}
