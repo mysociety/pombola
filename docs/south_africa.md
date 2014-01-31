@@ -17,10 +17,6 @@ Then, to load in some people and organisation data:
 
     $ python manage.py core_import_popolo pombola/south_africa/data/south-africa-popolo.json  --commit
 
-Run the command to clean up imported slugs:
-
-    $ python manage.py core_list_malformed_slugs --correct
-
 To load in constituency offices run the following.
 If you run into any issues with this you might need to remove the
 geocode cache at `pombola/south_africa/management/commands/.geocode-request-cache`.
