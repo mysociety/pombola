@@ -412,14 +412,16 @@ class Command(LabelCommand):
                             # Deal with the different formats of MP
                             # and MPL names for different parties:
                             for representative_type in ('MP', 'MPL'):
-                                if party in ('ANC', 'ACDP'):
+                                if party in ('African National Congress (ANC)',
+                                             'African Christian Democratic Party (ACDP)'):
                                     name_strings = re.split(r'\s{4,}',row[representative_type])
                                     for name_string in name_strings:
                                         person = find_pombola_person(name_string,
                                                                       representative_type)
                                         if person:
                                             people_to_add.append(person)
-                                elif party in ('COPE', 'FF+'):
+                                elif party in ('Congress of the People (COPE)',
+                                               'Freedom Front + (Vryheidsfront+, FF+)'):
                                     for contact in re.split(r'\s*;\s*', row[representative_type]):
                                         # Strip off the phone number
                                         # and email address before
@@ -481,7 +483,7 @@ class Command(LabelCommand):
                     elif office_or_area == 'Area':
                         # At the moment it's only for DA that these
                         # Constituency Areas exist, so check that assumption:
-                        if party != 'DA':
+                        if party != 'Democratic Alliance (DA)':
                             raise Exception, "Unexpected party %s with Area" % (party)
                         constituency_kind = ok_constituency_area
                         province = fix_province_name(province)
