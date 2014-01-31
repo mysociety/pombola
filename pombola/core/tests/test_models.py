@@ -1,11 +1,10 @@
-from django.conf import settings
-
 from django.utils import unittest
-from pombola.core import models
-from pombola.tasks.models import Task
-
+from django.test.utils import override_settings
 from django_date_extensions.fields import ApproximateDate
 from django.contrib.contenttypes.models import ContentType
+
+from pombola.core import models
+from pombola.tasks.models import Task
 
 class PositionTestCase(unittest.TestCase):
     def setUp(self):
@@ -31,14 +30,12 @@ class PositionTestCase(unittest.TestCase):
             slug = "place",
             kind = place_kind,
         )
-        
+
         self.position_title = models.PositionTitle.objects.create(
             name        = 'Job Title',
             slug        = 'job-title',
         )
-        
-        
-    
+
     def tearDown(self):
         """Clean up after the tests"""
         self.person.delete()
@@ -57,13 +54,13 @@ class PositionTestCase(unittest.TestCase):
         )
 
     def testDisplayDates(self):
-        
+
         # get the test dates
         start_date      = ApproximateDate(year=2000, month=01, day=01)
         future_end_date = ApproximateDate(year=2100, month=01, day=01)
         past_end_date   = ApproximateDate(year=2000, month=01, day=02)
         future          = ApproximateDate(future=True)
-        
+
 
         # load the object
         pos = self.getPos()
@@ -79,7 +76,7 @@ class PositionTestCase(unittest.TestCase):
         self.assertEqual( pos.display_start_date(), '?' )
         self.assertEqual( pos.display_end_date(),   'future' )
         self.assertTrue( pos.is_ongoing() )
-        
+
         # give the position some dates (still ongoing)
         pos.start_date = start_date
         pos.end_date   = future_end_date # far in future
@@ -87,7 +84,7 @@ class PositionTestCase(unittest.TestCase):
         self.assertEqual( pos.display_start_date(), '1st January 2000' )
         self.assertEqual( pos.display_end_date(),   '1st January 2100' )
         self.assertTrue( pos.is_ongoing() )
-        
+
         # set end date in the past
         pos.end_date = past_end_date
         pos.save()
@@ -98,7 +95,7 @@ class PositionTestCase(unittest.TestCase):
 
 class PersonAndContactTasksTest( unittest.TestCase ):
     def setUp(self):
-        pass    
+        pass
 
     def test_missing_contacts(self):
         person = models.Person(
@@ -106,7 +103,7 @@ class PersonAndContactTasksTest( unittest.TestCase ):
             slug       = 'test-person'
         )
         person.save()
-        
+
         self.assertItemsEqual(
             [ i.category.slug for i in Task.objects_for(person) ],
             ['find-missing-phone', 'find-missing-email', 'find-missing-address'],
@@ -130,6 +127,8 @@ class PersonAndContactTasksTest( unittest.TestCase ):
             [ i.category.slug for i in Task.objects_for(person) ],
             ['find-missing-email', 'find-missing-address'],
         )
+
+        person.delete()
 
 
 class PersonNamesTest( unittest.TestCase ):
@@ -157,7 +156,7 @@ class PersonNamesTest( unittest.TestCase ):
 class SummaryTest( unittest.TestCase ):
     def setUp(self):
         pass
-            
+
     def test_empty_summary_is_false(self):
         person, created = models.Person.objects.get_or_create(
             legal_name = "Test Person",
