@@ -153,6 +153,145 @@ class PersonNamesTest( unittest.TestCase ):
         self.person.delete()
 
 
+class PersonPlaceTest(unittest.TestCase):
+
+    def setUp(self):
+        # Make a person, with some positions, titles and some places to be
+        # associated with them.
+        self.person = models.Person.objects.create(
+            legal_name="Test Person",
+            slug='test-person'
+        )
+
+        self.organisation_kind = models.OrganisationKind.objects.create(
+            name = "Test Org",
+            slug = "test-org",
+        )
+        self.organisation = models.Organisation.objects.create(
+            slug = "org",
+            name = "The Org",
+            kind = self.organisation_kind,
+        )
+
+        self.place_kind = models.PlaceKind.objects.create(
+            name = "Test Place",
+            slug = "test-place",
+        )
+        self.place_a = models.Place.objects.create(
+            name = "The Place",
+            slug = "place",
+            kind = self.place_kind,
+        )
+        self.place_b = models.Place.objects.create(
+            name = "The Other Place",
+            slug = "other-place",
+            kind = self.place_kind,
+        )
+        self.place_c = models.Place.objects.create(
+            name = "The Third Place",
+            slug = "third-place",
+            kind = self.place_kind,
+        )
+        self.place_d = models.Place.objects.create(
+            name = "The Third Place",
+            slug = "fourth-place",
+            kind = self.place_kind,
+        )
+
+        self.position_title_a = models.PositionTitle.objects.create(
+            name = 'Job Title',
+            slug = 'job-title',
+        )
+        self.position_title_b = models.PositionTitle.objects.create(
+            name = 'Other Job Title',
+            slug = 'other-job-title',
+        )
+        self.position_title_c = models.PositionTitle.objects.create(
+            name = 'Third Job Title',
+            slug = 'third-job-title',
+        )
+
+        # Create positions held by the same person at all the different places
+
+        # "Job Title"
+        self.position_a = models.Position.objects.create(
+            person = self.person,
+            organisation = self.organisation,
+            place = self.place_a,
+            title = self.position_title_a,
+            start_date = '',
+            end_date = '',
+            category = 'political',
+        )
+        self.position_b = models.Position.objects.create(
+            person = self.person,
+            organisation = self.organisation,
+            place = self.place_d,
+            title = self.position_title_b,
+            start_date = '',
+            end_date = '',
+            category = 'education', # Not political, to test choice of positions
+        )
+
+        # "Other Job Title"
+        self.position_c = models.Position.objects.create(
+            person = self.person,
+            organisation = self.organisation,
+            place = self.place_a,
+            title = self.position_title_b,
+            start_date = '',
+            end_date = '',
+            category = 'political',
+        )
+        self.position_d = models.Position.objects.create(
+            person = self.person,
+            organisation = self.organisation,
+            place = self.place_b,
+            title = self.position_title_b,
+            start_date = '',
+            end_date = '',
+            category = 'political',
+        )
+
+        # "Third Job Title"
+        self.position_e = models.Position.objects.create(
+            person = self.person,
+            organisation = self.organisation,
+            place = self.place_c,
+            title = self.position_title_c,
+            start_date = '',
+            end_date = '',
+            category = 'political',
+        )
+
+    def tearDown(self):
+        self.person.delete()
+        self.organisation.delete()
+        self.organisation_kind.delete()
+        self.place_a.delete()
+        self.place_b.delete()
+        self.place_c.delete()
+        self.place_kind.delete()
+        self.position_title_a.delete()
+        self.position_title_b.delete()
+        self.position_title_c.delete()
+        self.position_a.delete()
+        self.position_b.delete()
+        self.position_c.delete()
+        self.position_d.delete()
+        self.position_e.delete()
+
+    def test_constituencies_are_distinct(self):
+        self.assertEqual(len(self.person.constituencies()), 3)
+        self.assertTrue(self.place_a in self.person.constituencies())
+        self.assertTrue(self.place_b in self.person.constituencies())
+        self.assertTrue(self.place_c in self.person.constituencies())
+
+    def test_constituencies_comes_from_political_positions(self):
+        self.assertTrue(self.place_d not in self.person.constituencies())
+
+
+
 class SummaryTest( unittest.TestCase ):
     def setUp(self):
         pass

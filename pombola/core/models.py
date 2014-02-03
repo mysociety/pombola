@@ -336,7 +336,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
     def constituencies(self):
         """Return list of constituencies that this person is currently an politician for"""
-        return Place.objects.filter(position__in=self.politician_positions())
+        return Place.objects.filter(position__in=self.politician_positions()).distinct()
 
     def constituency_offices(self):
         """
