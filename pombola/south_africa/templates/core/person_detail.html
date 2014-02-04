@@ -171,7 +171,7 @@ pombola_settings.extra_js.push('js/tabs.js')
           <h3>Currently</h3>
           <ul class="current-positions positions">
             {% for position in current_positions %}
-            <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a> since {{ position.start_date }}</li>
+            <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a>{% if position.start_date %} since {{ position.start_date }}{% endif %}</li>
           {% endfor %}
           </ul>
         {% endif %}
@@ -181,7 +181,7 @@ pombola_settings.extra_js.push('js/tabs.js')
           <ul class="former-positions positions">
           {% if past_positions %}
             {% for position in past_positions %}
-              <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a> until {{ position.end_date }}</li>
+              <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a>{% if position.start_date %} from {{ position.start_date }}{% endif %} until {{ position.end_date }}</li>
             {% endfor %}
           {% else %}
 		    <li>No former positions recorded.</li>
