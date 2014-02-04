@@ -156,20 +156,31 @@ na_member_lookup = {}
 
 nonexistent_phone_number = '000 000 0000'
 
-for position in chain(Position.objects.all().filter(title__slug='member',
-                                                    organisation__slug='national-assembly').currently_active(),
-                      Position.objects.all().filter(title__slug='delegate',
-                                                    organisation__slug='ncop').currently_active()):
+title_slugs = ('provincial-legislature-member',
+               'committee-member',
+               'alternate-member')
+
+for position in chain(Position.objects.filter(title__slug='member',
+                                              organisation__slug='national-assembly').currently_active(),
+                      Position.objects.filter(title__slug__in=title_slugs).currently_active(),
+                      Position.objects.filter(title__slug__startswith='minister').currently_active(),
+                      Position.objects.filter(title__slug='delegate',
+                                              organisation__slug='ncop').currently_active()):
+    people_done = set()
     person = position.person
-    full_name = position.person.legal_name.lower()
-    # Always leave the last name, but generate all combinations of initials
-    for name_form in chain(all_initial_forms(full_name),
-                           all_initial_forms(full_name, squash_initials=True)):
-        if name_form in na_member_lookup:
-            message = "Tried to add '%s' => %s, but there was already '%s' => %s" % (
-                name_form, person, name_form, na_member_lookup[name_form])
-        else:
-            na_member_lookup[name_form] = person
+    if person in people_done:
+        continue
+    for name in person.all_names_set():
+        name = name.lower().strip()
+        # print u"name is '{0}'".format(name).encode('utf-8')
+        # Always leave the last name, but generate all combinations of initials
+        for name_form in chain(all_initial_forms(name),
+                               all_initial_forms(name, squash_initials=True)):
+            if name_form in na_member_lookup:
+                message = "Tried to add '%s' => %s, but there was already '%s' => %s" % (
+                    name_form, person, name_form, na_member_lookup[name_form])
+            else:
+                na_member_lookup[name_form] = person
 
 unknown_people = set()
 
