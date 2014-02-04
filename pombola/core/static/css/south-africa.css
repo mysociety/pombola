@@ -5108,15 +5108,31 @@ ul.pager li.next {
 	font-size:1em;
 }
 .person-appearances {
-	font-size:0.9em;
+	font-size: 0.9em;
+}
+.person-appearances-summary {
+	font-size: 1em;
 }
 #appearances li {
 	margin-bottom:0.5em;
 }
+#page .large-container .person-appearances-summary ul li p {
+	margin: 0px 0px 5px;
+}
+@media only all and (min-width: 550px), print {
+	.person-appearances-summary {
+		display:block;
+		float:left;
+		width:49%;
+		margin-right:1%;
+	}
+	.one-appearance {
+		float:none;
+		width:100%;
+		margin-right:0px;
+	}
+}
 
-#profile section {
-	display:block;
-	float:left;
-	width:49%;
-	margin-right:1%;
+#appearance-summary-title h2 {
+	display:inline-block;
 }
