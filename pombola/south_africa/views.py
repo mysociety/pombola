@@ -316,25 +316,45 @@ class SAPersonDetail(PersonDetail):
 
 
     def get_tabulated_interests(self):
-		interests = self.object.interests_register_entries.all()
-		tabulated = {}
-		
-		for entry in interests:
-			if entry.release.id not in tabulated:
-				tabulated[entry.release.id] = {'name':entry.release.name, 'categories':{}}
-			if entry.category.id not in tabulated[entry.release.id]['categories']:
-				tabulated[entry.release.id]['categories'][entry.category.id]={'name':entry.category.name,'headings':[],'headingindex':{},'headingcount':1,'entries':[]}
-			#create row list
-			tabulated[entry.release.id]['categories'][entry.category.id]['entries'].append(['']*(tabulated[entry.release.id]['categories'][entry.category.id]['headingcount']-1))
-			for entrylistitem in entry.line_items.all():
-				if entrylistitem.key not in tabulated[entry.release.id]['categories'][entry.category.id]['headingindex']:
-					tabulated[entry.release.id]['categories'][entry.category.id]['headingindex'][entrylistitem.key]=tabulated[entry.release.id]['categories'][entry.category.id]['headingcount']-1
-					tabulated[entry.release.id]['categories'][entry.category.id]['headingcount']+=1
-					tabulated[entry.release.id]['categories'][entry.category.id]['headings'].append(entrylistitem.key)
-					for (key, line) in enumerate(tabulated[entry.release.id]['categories'][entry.category.id]['entries']):
-						tabulated[entry.release.id]['categories'][entry.category.id]['entries'][key].append('')
-				tabulated[entry.release.id]['categories'][entry.category.id]['entries'][-1][tabulated[entry.release.id]['categories'][entry.category.id]['headingindex'][entrylistitem.key]]=entrylistitem.value
-		return tabulated
+        interests = self.object.interests_register_entries.all()
+        tabulated = {}
+        
+        for entry in interests:
+            release = entry.release
+            category = entry.category
+
+            if release.id not in tabulated:
+                tabulated[release.id] = {'name': release.name, 'categories':{}}
+
+            tabulated_release = tabulated[release.id]
+                
+            if entry.category.id not in tabulated[release.id]['categories']:
+                tabulated_release['categories'][category.id] = {
+                    'name': category.name,
+                    'headings': [],
+                    'headingindex': {},
+                    'headingcount': 1,
+                    'entries': []
+                }
+
+            #create row list
+            tabulated_category = tabulated_release['categories'][category.id]
+            tabulated_entries = tabulated_category['entries']
+            tabulated_entries.append(
+                [''] * (tabulated_category['headingcount']-1)
+            )
+
+            for entrylistitem in entry.line_items.all():
+                if entrylistitem.key not in tabulated_category['headingindex']:
+                    tabulated_category['headingindex'][entrylistitem.key]=tabulated_category['headingcount']-1
+                    tabulated_category['headingcount']+=1
+                    tabulated_category['headings'].append(entrylistitem.key)
+
+                    for (key, line) in enumerate(tabulated_entries):
+                        tabulated_entries[key].append('')
+                        tab_key = tabulated_category['headingindex'][entrylistitem.key]
+                tabulated_entries[-1][tab_key]=entrylistitem.value
+        return tabulated
     
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
