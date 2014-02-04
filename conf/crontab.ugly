@@ -44,9 +44,12 @@ PYTHONIOENCODING=utf-8
 
 !!(* } elsif ($vhost eq 'za-pombola.staging.mysociety.org') { *)!!
 
-# NOTE - this is probably not the correct domain for the host. It will need to be changed
-# once the domain has been decided. For now treating staging as pre-production. See
-# https://github.com/mysociety/pombola/issues/701
+# NOTE - this should probably be removed once the live site is launched
+7 7 * * * !!(*= $user *)!! update_za_hansard.bash
+
+!!(* } elsif ($vhost eq 'www.pa.org.za') { *)!!
+
+# NOTE - until the live site is launched, crons are turned off in vhosts.pl
 7 7 * * * !!(*= $user *)!! update_za_hansard.bash
 
 !!(* } else { *)!!
