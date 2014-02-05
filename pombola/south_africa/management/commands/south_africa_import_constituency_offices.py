@@ -162,6 +162,8 @@ title_slugs = ('provincial-legislature-member',
 
 for position in chain(Position.objects.filter(title__slug='member',
                                               organisation__slug='national-assembly').currently_active(),
+                      Position.objects.filter(title__slug='member',
+                                              organisation__kind__slug='provincial-legislature').currently_active(),
                       Position.objects.filter(title__slug__in=title_slugs).currently_active(),
                       Position.objects.filter(title__slug__startswith='minister').currently_active(),
                       Position.objects.filter(title__slug='delegate',
