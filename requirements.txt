@@ -55,17 +55,10 @@ python-memcached
 git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
 
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
-#
-# "-e" note: This is needed so that the latest code is used. In time we can
-# specify versions or release to pypi. These repos will need to be manually
-# removed from the virtualenv when -e is no longer used as otherwise they'll
-# remain and take precedence over other install methods. Adding a 'rm' line to
-# the prepare_environment script in the same commit as changing the line here is
-# one possible approach.
--e git+git://github.com/mysociety/sayit.git@pombola#egg=django-sayit  # NOTE - when changing remember to remove the repo from virtualenv!
--e git+git://github.com/mysociety/za-hansard.git@master#egg=za_hansard  # NOTE - when changing remember to remove the repo from virtualenv!
--e git+git://github.com/mysociety/popit-resolver@master#egg=popit-resolver  # NOTE - when changing remember to remove the repo from virtualenv!
--e git+git://github.com/mysociety/popit-django@master#egg=popit-django  # NOTE - when changing remember to remove the repo from virtualenv!
+git+git://github.com/mysociety/sayit.git@24428b51033e1b569eec10c057d9349700cd05e5
+git+git://github.com/mysociety/za-hansard.git@f7bb072aecfc978689757fc416f4bd7758d66342
+git+git://github.com/mysociety/popit-resolver@d8552244d956a5f8915d3f15027e409cd15abd16
+git+git://github.com/mysociety/popit-django@61bc32b67f76262d08339e00dd83bda9def92279
 
 python-dateutil>=1.5,!=2.0
 
