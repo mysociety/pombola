@@ -1143,14 +1143,44 @@ FOOTER
     div.attribution {
         max-width: 960px;
         margin: .5em auto;
-        @media only all and (min-width: 640px), print {
-           text-align: right;
-        }
         font-size: inherit;
+        text-align: left;
     }
     .header-search {
         display: none;
         visibility: hdden;
+    }
+}
+
+.footer-full-width {
+    width: 100%;
+    border-top: 1px solid lighten($colour_footer_background, 5%);
+    padding-top: 1.5em;
+    margin-top: 0.5em;
+    float: left;
+    .layout-major-minor {
+        @media only all and (max-width: 640px), print {
+           padding: 0 10px;
+        }
+    }
+    .major-column {
+        @media only all and (min-width: 640px), print {
+           margin-bottom: 0 !important;
+        }
+    }
+}
+#site-footer .disclaimer {
+    p {
+        font-size: 11px;
+        color: #808080;
+    }
+}
+#site-footer .utilities {
+    li:first-child {
+        margin-left: 0px;
+        @media only all and (min-width: 640px), print {
+           margin-left:12px;
+        }
     }
 }
 
