@@ -152,7 +152,7 @@ def all_initial_forms(name, squash_initials=False):
 # member of the National Assembly and delegate of the National Coucil
 # of Provinces:
 
-na_member_lookup = {}
+na_member_lookup = defaultdict(set)
 
 nonexistent_phone_number = '000 000 0000'
 
@@ -160,6 +160,12 @@ title_slugs = ('provincial-legislature-member',
                'committee-member',
                'alternate-member')
 
+def warn_duplicate_name(name_form, person):
+    message = "Tried to add '%s' => %s, but there were already '%s' => %s" % (
+        name_form, person, name_form, na_member_lookup[name_form])
+    print message
+
+people_done = set()
 for position in chain(Position.objects.filter(title__slug='member',
                                               organisation__slug='national-assembly').currently_active(),
                       Position.objects.filter(title__slug='member',
@@ -168,21 +174,26 @@ for position in chain(Position.objects.filter(title__slug='member',
                       Position.objects.filter(title__slug__startswith='minister').currently_active(),
                       Position.objects.filter(title__slug='delegate',
                                               organisation__slug='ncop').currently_active()):
-    people_done = set()
+
     person = position.person
     if person in people_done:
         continue
+    else:
+        people_done.add(person)
     for name in person.all_names_set():
         name = name.lower().strip()
-        # print u"name is '{0}'".format(name).encode('utf-8')
         # Always leave the last name, but generate all combinations of initials
-        for name_form in chain(all_initial_forms(name),
-                               all_initial_forms(name, squash_initials=True)):
+        name_forms = set(chain(all_initial_forms(name),
+                               all_initial_forms(name, squash_initials=True)))
+        # If it looks as if there are three full names, try just
+        # taking the first and last names:
+        m = re.search(r'^(\S{4,})\s+\S.*\s+(\S{4,})$', name)
+        if m:
+            name_forms.add(u"{0} {1}".format(*m.groups()))
+        for name_form in name_forms:
             if name_form in na_member_lookup:
-                message = "Tried to add '%s' => %s, but there was already '%s' => %s" % (
-                    name_form, person, name_form, na_member_lookup[name_form])
-            else:
-                na_member_lookup[name_form] = person
+                warn_duplicate_name(name_form, person)
+            na_member_lookup[name_form].add(person)
 
 unknown_people = set()
 
@@ -202,11 +213,13 @@ def find_pombola_person(name_string, representative_type):
         name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
         name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
         # Score the similarity of name_string with each person:
-        scored_names = [(SequenceMatcher(None, name_string, actual_name).ratio(),
-                         actual_name,
-                         person)
-                        for actual_name, person in na_member_lookup.items()]
-
+        scored_names = []
+        for actual_name, people in na_member_lookup.items():
+            for person in people:
+                t = (SequenceMatcher(None, name_string, actual_name).ratio(),
+                     actual_name,
+                     person)
+                scored_names.append(t)
         scored_names.sort(reverse=True, key=lambda n: n[0])
         # If the top score is over 90%, it's very likely to be the
         # same person with the current set of MPs - this leave a
