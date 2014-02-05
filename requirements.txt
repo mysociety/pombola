@@ -41,7 +41,7 @@ django-haystack>=2.1.0
 httplib2
 WebTest>=1.3.2
 django-webtest
-git+git://github.com/nathforge/django-mechanize.git#egg=django-mechanize
+git+git://github.com/nathforge/django-mechanize.git@d9537ccf8cc66bc7913df0c95fd532699ec88fdc
 selenium
 django-selenium
 
