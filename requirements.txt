@@ -52,7 +52,7 @@ unidecode
 python-memcached
 
 # django-mapit
-git+git://github.com/mysociety/mapit.git@master#egg=django-mapit
+django-mapit==1.0.3
 
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
 git+git://github.com/mysociety/sayit.git@24428b51033e1b569eec10c057d9349700cd05e5
