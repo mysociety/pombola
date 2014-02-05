@@ -57,27 +57,36 @@
 <li><a href="" class="has-dropdown">Democracy Resources</a>
   {% if include_sub_menu_entries %}
     <ul id="democracy-resources-overview">
+      <!-- TODO: Change this link once the questions data has been loaded in. -->
+      <li><a href="{% url "question:section-list" %}">Questions</a></li>
       <li><a href="http://www.pmg.org.za/bill">Legislation</a></li>
       <li><a href="http://www.pmg.org.za/committees">Committees</a></li>
       <li><a href="{% url "hansard:section-list" %}">Hansard</a></li>
-      <li><a href="{% url "info_page" slug="documents" %}">Documents</a></li>
-      <li><a href="{% url "info_page" slug="links" %}">Links</a></li>
-      <li><a href="{% url "info_page" slug="newsletter" %}">Newsletter</a></li>
+
+
+
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug="public-participation" %}">Public Participation</a></li>
+<li><a href="{% url "info_page" slug="public-participation" %}">Public Participation</a>
+  {% if include_sub_menu_entries %}
+    <ul id="extras-overview">
+      <li><a href="{% url "info_page" slug="make-yourself-heard" %}">Make yourself heard</a></li>
+      <li><a href="{% url "info_page" slug="elections" %}">Elections</a></li>
+      <li><a href="{% url "info_page" slug="petitions" %}">Petitions</a></li>
+    </ul>
+  {% endif %}
+</li>
 
 <li><a href="" class="has-dropdown">Extras</a>
   {% if include_sub_menu_entries %}
     <ul id="extras-overview">
-      <!-- TODO: Change this link once the questions data has been loaded in. -->
-      <li><a href="{% url "question:section-list" %}">Questions</a></li>
-      <li><a href="{% url "info_page" slug="about" %}">About</a></li>
-      <li><a href="{% url "info_page" slug="voting-decisions" %}">Voting Decisions</a></li>
-      <li><a href="{% url "info_page" slug="statistics-data" %}">Statistics/Data</a></li>
+      <li><a href="{% url "info_page" slug="newsletter" %}">Newsletter</a></li>
+      <li><a href="{% url "info_page" slug="links" %}">Links</a></li>
+      <li><a href="{% url "info_page" slug="documents" %}">Documents</a></li>
       <li><a href="{% url "info_page" slug="survey-archive" %}">Survey Archive</a></li>
+      <li><a href="{% url "info_page" slug="statistics-data" %}">Statistics/Data</a></li>
     </ul>
   {% endif %}
 </li>
