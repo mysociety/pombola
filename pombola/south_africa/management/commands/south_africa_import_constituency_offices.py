@@ -489,7 +489,7 @@ class Command(LabelCommand):
                                         elif 'Ndaka' in row['MP']:
                                             mapit_municipality = Code.objects.get(type__code='l', code='EC136').area
                                         else:
-                                            raise Exception, "Unknown Emalahleni row"
+                                            raise Exception, "Unknown Emalahleni row with MP: '{0}'".format(row['MP'])
                                     elif municipality == 'Naledi':
                                         if 'Mmusi' in row['MP']:
                                             mapit_municipality = Code.objects.get(type__code='l', code='NW392').area
