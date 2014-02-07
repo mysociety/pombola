@@ -59,7 +59,7 @@
                         {% if result.app_label == 'speeches' %}
                             {% include 'search/speech_item.html' %}
                         {% else %}
-                            {% include 'core/generic_list_item.html' with object=result.object %}
+                            {% include 'search/search_list_item.html' with object=result.object %}
                         {% endif %}
                     {% empty %}
                         <li>There are no organisations matching "<strong>{{ query }}</strong>"</li>
@@ -77,7 +77,7 @@
                     {% if result.app_label == 'speeches' %}
                         {% include 'search/speech_item.html' %}
                     {% else %}
-                        {% include 'core/generic_list_item.html' with object=result.object %}
+                        {% include 'search/search_list_item.html' with object=result.object %}
                     {% endif %}
                 {% empty %}
                     <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
