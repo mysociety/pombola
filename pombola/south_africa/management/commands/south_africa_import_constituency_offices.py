@@ -552,9 +552,10 @@ class Command(LabelCommand):
                         raise Exception, "Unknown type %s" % (office_or_area,)
 
                     # The Administrator column might have multiple
-                    # administrators, each followed by their phone
-                    # number.  Names and phone numbers are always
-                    # split by multiple spaces, except in one case:
+                    # administrator contacts, separated by
+                    # semi-colons.  Each contact may have notes about
+                    # them in brackets, and may be followed by more
+                    # than one phone number, separated by slashes.
                     if administrator and administrator.lower() != 'vacant':
                         fields = re.split(r'\s{4,}', administrator)
                         for administrator_name, administrator_numbers in group_in_pairs(fields):
