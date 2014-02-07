@@ -198,6 +198,13 @@ for position in chain(Position.objects.filter(title__slug='member',
 
 unknown_people = set()
 
+# Given a name string, try to find a person from the Pombola database
+# that matches that as closely as possible.  Note that if the form of
+# the name supplied matches more than one person, it's arbitrary which
+# one you'll get back.  This doesn't happen in the South Africa data
+# at the moment, but that's still a FIXME (probably by replacing this
+# with PopIt's name resolution).
+
 def find_pombola_person(name_string):
 
     # Strip off any phone number at the end, which sometimes include
