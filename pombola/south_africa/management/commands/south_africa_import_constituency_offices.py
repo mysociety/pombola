@@ -556,29 +556,16 @@ class Command(LabelCommand):
                     # number.  Names and phone numbers are always
                     # split by multiple spaces, except in one case:
                     if administrator and administrator.lower() != 'vacant':
-                        if administrator.startswith('Nkwenkwezi Nonbuyekezo 083 210 4811'):
-                            administrators_to_add.append(('Nkwenkwezi Nonbuyekezo', ('083 210 4811',)))
-                        else:
-                            # This person is missing a phone number:
-                            administrator = re.sub(r'(2. Mbetse Selby)',
-                                                   '\\1       ' + nonexistent_phone_number,
-                                                   administrator)
-                            # Add a missing slash:
-                            administrator = re.sub(r'073 265 0391 072 762 5013',
-                                                   '073 265 0391 / 072 762 5013',
-                                                   administrator)
-                            # Remove this stray phone number prefix:
-                            administrator = re.sub(r'Mothsekga-', '', administrator)
-                            fields = re.split(r'\s{4,}', administrator)
-                            for administrator_name, administrator_numbers in group_in_pairs(fields):
-                                # Some names begin with "1.", "2.", etc.
-                                administrator_name = re.sub(r'^[\s\d\.]+', '', administrator_name)
-                                split_phone_numbers = re.split(r'\s*/\s*', administrator_numbers)
-                                tuple_to_add = (administrator_name,
-                                                tuple(s for s in split_phone_numbers
-                                                      if s != nonexistent_phone_number))
-                                verbose("administrator name '%s', numbers '%s'" % tuple_to_add)
-                                administrators_to_add.append(tuple_to_add)
+                        fields = re.split(r'\s{4,}', administrator)
+                        for administrator_name, administrator_numbers in group_in_pairs(fields):
+                            # Some names begin with "1.", "2.", etc.
+                            administrator_name = re.sub(r'^[\s\d\.]+', '', administrator_name)
+                            split_phone_numbers = re.split(r'\s*/\s*', administrator_numbers)
+                            tuple_to_add = (administrator_name,
+                                            tuple(s for s in split_phone_numbers
+                                                  if s != nonexistent_phone_number))
+                            verbose("administrator name '%s', numbers '%s'" % tuple_to_add)
+                            administrators_to_add.append(tuple_to_add)
 
                     organisation_kwargs = {
                         'name': organisation_name,
