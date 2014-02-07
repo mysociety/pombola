@@ -4598,6 +4598,7 @@ ul.pager li.next {
   width: 100%;
   overflow: hidden;
   position: relative;
+  margin-bottom: 2em;
 }
 @media only all and (min-width: 640px), print {
   .house-splash {

@@ -17,9 +17,11 @@ the organisation detail page.
     {% endif %}
   </div>
 </div>
-  <div class="house-intro">
-    {{ object.summary }}
-  </div>
+  {% if object.summary %}
+    <div class="house-intro">
+      {{ object.summary }}
+    </div>
+  {% endif %}
 
   <h2>People</h2>
 
