@@ -374,11 +374,25 @@ class Command(LabelCommand):
 
                     mz_party = Organisation.objects.get(name=party)
 
+                    # At various points, constituency office or areas
+                    # have been created with the wrong terminology, so
+                    # look for any variant of the names:
+                    title_data = {'party': abbreviated_party,
+                                  'type': office_or_area,
+                                  'party_code': party_code,
+                                  'name': name}
+                    possible_formats = [
+                        u'{party} Constituency Area ({party_code}): {name}',
+                        u'{party} Constituency Office ({party_code}): {name}',
+                        u'{party} Constituency Area: {name}',
+                        u'{party} Constituency Office: {name}']
+                    org_slug_possibilities = [slugify(fmt.format(**title_data))
+                                              for fmt in possible_formats]
+
                     if party_code:
-                        organisation_name = "%s Constituency Area (%s): %s" % (party, party_code, name)
+                        organisation_name = u"{party} Constituency {type} ({party_code}): {name}".format(**title_data)
                     else:
-                        organisation_name = "%s Constituency Area: %s" % (party, name)
-                    organisation_slug = slugify(organisation_name)
+                        organisation_name = u"{party} Constituency {type}: {name}".format(**title_data)
 
                     places_to_add = []
                     contacts_to_add = []
@@ -587,7 +601,7 @@ class Command(LabelCommand):
                         else:
                             # Otherwise use the slug we intend to use, and
                             # look for an existing organisation:
-                            org = Organisation.objects.get(slug=organisation_slug,
+                            org = Organisation.objects.get(slug__in=org_slug_possibilities,
                                                            kind=constituency_kind)
                     except ObjectDoesNotExist:
                         org = Organisation()
