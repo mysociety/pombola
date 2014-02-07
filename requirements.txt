@@ -57,7 +57,7 @@ django-mapit==1.0.3
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
 git+git://github.com/mysociety/sayit.git@24428b51033e1b569eec10c057d9349700cd05e5
 git+git://github.com/mysociety/za-hansard.git@f7bb072aecfc978689757fc416f4bd7758d66342
-git+git://github.com/mysociety/popit-resolver@d8552244d956a5f8915d3f15027e409cd15abd16
+git+git://github.com/mysociety/popit-resolver@abcfc79d787c8ca054560a4911352fed8aa8c40d
 git+git://github.com/mysociety/popit-django@61bc32b67f76262d08339e00dd83bda9def92279
 
 python-dateutil==2.2
