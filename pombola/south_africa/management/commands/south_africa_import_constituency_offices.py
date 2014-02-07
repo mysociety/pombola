@@ -487,7 +487,7 @@ class Command(LabelCommand):
                                     if municipality == 'Emalahleni':
                                         if 'Pule' in row['MP']:
                                             mapit_municipality = Code.objects.get(type__code='l', code='MP312').area
-                                        elif 'Ndaka' in row['MP']:
+                                        elif 'Mdaka' in row['MP']:
                                             mapit_municipality = Code.objects.get(type__code='l', code='EC136').area
                                         else:
                                             raise Exception, "Unknown Emalahleni row with MP: '{0}'".format(row['MP'])
