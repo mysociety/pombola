@@ -27,7 +27,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/acdp.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/acdp.png",
             "name": "African Christian Democratic Party (ACDP)",
             "slug": "acdp"
         },
@@ -40,7 +40,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/anc.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/anc.png",
             "name": "African National Congress (ANC)",
             "slug": "anc"
         },
@@ -53,7 +53,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/apc.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/apc.png",
             "name": "African Peoples' Convention (APC)",
             "slug": "apc"
         },
@@ -66,7 +66,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/azapo.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/azapo.png",
             "name": "Azanian People's Organisation (AZAPO)",
             "slug": "azapo"
         },
@@ -253,7 +253,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/cope.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/cope.png",
             "name": "Congress of the People (COPE)",
             "slug": "cope"
         },
@@ -338,7 +338,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/da.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/da.png",
             "name": "Democratic Alliance (DA)",
             "slug": "da"
         },
@@ -381,7 +381,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/ff.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/ff.png",
             "name": "Freedom Front + (Vryheidsfront+, FF+)",
             "slug": "ff+"
         },
@@ -430,7 +430,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/id.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/id.png",
             "name": "Independent Democrats (ID)",
             "slug": "id"
         },
@@ -443,7 +443,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/ifp.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/ifp.png",
             "name": "Inkatha Freedom Party (IFP)",
             "slug": "ifp"
         },
@@ -558,7 +558,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/mf.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/mf.png",
             "name": "Minority Front (MF)",
             "slug": "mf"
         },
@@ -691,7 +691,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/pac.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/pac.png",
             "name": "Pan Africanist Congress (PAC)",
             "slug": "pac"
         },
@@ -1442,7 +1442,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/ucdp.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/ucdp.png",
             "name": "United Christian Democratic Party (UCDP)",
             "slug": "ucdp"
         },
@@ -1455,7 +1455,7 @@
                     "scheme": "za.gov.parliament/party"
                 }
             ],
-            "image": "http://za-pombola.staging.mysociety.org/static/images/party-logos/udm.png",
+            "image": "http://www.pa.org.za/static/images/party-logos/udm.png",
             "name": "United Democratic Movement (UDM)",
             "slug": "udm"
         },
