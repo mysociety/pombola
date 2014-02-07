@@ -197,7 +197,7 @@ for position in chain(Position.objects.filter(title__slug='member',
 
 unknown_people = set()
 
-def find_pombola_person(name_string, representative_type):
+def find_pombola_person(name_string):
 
     # Strip off any phone number at the end, which sometimes include
     # NO-BREAK SPACE or a / for multiple numbers.
@@ -209,30 +209,27 @@ def find_pombola_person(name_string, representative_type):
     name_string = name_string.strip()
     if not name_string:
         return None
-    if representative_type in ('MPL', 'MP'):
-        # Move any initials to the front of the name:
-        name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
-        name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
-        # Score the similarity of name_string with each person:
-        scored_names = []
-        for actual_name, people in na_member_lookup.items():
-            for person in people:
-                t = (SequenceMatcher(None, name_string, actual_name).ratio(),
-                     actual_name,
-                     person)
-                scored_names.append(t)
-        scored_names.sort(reverse=True, key=lambda n: n[0])
-        # If the top score is over 90%, it's very likely to be the
-        # same person with the current set of MPs - this leave a
-        # number of false negatives from misspellings in the CSV file,
-        # though.
-        if scored_names[0][0] >= 0.9:
-            return scored_names[0][2]
-        else:
-            verbose("Failed to find a match for " + name_string.encode('utf-8'))
-            return None
+    # Move any initials to the front of the name:
+    name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
+    name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
+    # Score the similarity of name_string with each person:
+    scored_names = []
+    for actual_name, people in na_member_lookup.items():
+        for person in people:
+            t = (SequenceMatcher(None, name_string, actual_name).ratio(),
+                 actual_name,
+                 person)
+            scored_names.append(t)
+    scored_names.sort(reverse=True, key=lambda n: n[0])
+    # If the top score is over 90%, it's very likely to be the
+    # same person with the current set of MPs - this leave a
+    # number of false negatives from misspellings in the CSV file,
+    # though.
+    if scored_names[0][0] >= 0.9:
+        return scored_names[0][2]
     else:
-        raise Exception, "Unknown representative_type '%s'" % (representative_type,)
+        verbose("Failed to find a match for " + name_string.encode('utf-8'))
+        return None
 
 VERBOSE = False
 
@@ -442,8 +439,7 @@ class Command(LabelCommand):
                                              'African Christian Democratic Party (ACDP)'):
                                     name_strings = re.split(r'\s{4,}',row[representative_type])
                                     for name_string in name_strings:
-                                        person = find_pombola_person(name_string,
-                                                                      representative_type)
+                                        person = find_pombola_person(name_string)
                                         if person:
                                             people_to_add.append(person)
                                 elif party in ('Congress of the People (COPE)',
@@ -453,8 +449,7 @@ class Command(LabelCommand):
                                         # and email address before
                                         # resolving:
                                         person = find_pombola_person(
-                                            re.sub(r'(?ms)\s*\d.*', '', contact),
-                                            representative_type)
+                                            re.sub(r'(?ms)\s*\d.*', '', contact))
                                         if person:
                                             people_to_add.append(person)
                                 else:
@@ -529,8 +524,7 @@ class Command(LabelCommand):
 
                         for representative_type in ('MP', 'MPL'):
                             for contact in re.split(r'(?ms)\s*;\s*', row[representative_type]):
-                                person = find_pombola_person(contact,
-                                                              representative_type)
+                                person = find_pombola_person(contact)
                                 if person:
                                     people_to_add.append(person)
 
