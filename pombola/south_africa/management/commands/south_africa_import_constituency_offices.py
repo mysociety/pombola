@@ -357,6 +357,11 @@ class Command(LabelCommand):
                     municipality = row['Municipality']
                     wards = row['Wards']
 
+                    abbreviated_party = party
+                    m = re.search(r'\((?:|.*, )([A-Z\+]+)\)', party)
+                    if m:
+                        abbreviated_party = m.group(1)
+
                     unique_row_id = (party_code, name, party)
 
                     if unique_row_id in rows_already_done:
@@ -569,7 +574,7 @@ class Command(LabelCommand):
                     # Check if this office appears to exist already:
 
                     identifier = None
-                    identifier_scheme = "constituency-office/%s/" % (party,)
+                    identifier_scheme = "constituency-office/%s/" % (abbreviated_party,)
 
                     try:
                         if party_code:
