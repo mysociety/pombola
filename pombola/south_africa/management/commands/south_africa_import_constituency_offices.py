@@ -5,12 +5,12 @@
 # inconsistently, etc. etc. and to represent all these relationships
 # in the Pombola database schema we need to create a lot of new rows
 # in different tables.  I strongly suggest this is only used for the
-# initial import on the 'all constituencies2.csv', or that file with
+# initial import on the 'all_constituencies.csv', or that file with
 # fixes manually applied to it.
 #
-# The CSV can be downloaded from:
-# https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE#gid=0
+# That file is in the repository at:
 #
+#   pombola/south_africa/data/constituencies_and_offices/all_constituencies.csv
 
 # Things still to do and other notes:
 #
@@ -20,19 +20,12 @@
 #    contact number from the original import, so that would need to be
 #    checked.)
 #
-#  * At the moment only 211 out of 282 physical addresses geolocate
+#  * At the moment only about 80% of the physical addresses geolocate
 #    correctly. More work could be put into this, resolving them
-#    manually or trying other geocoders.  The unresolved addresses are:
-#    https://gist.github.com/mhl/c3a3ad3bf6cce357bb93
+#    manually or trying other geocoders.
 #
-#  * Fix some of the unmatched member of NA / NCOP delegate names
-#    should be manually fixed:
-#    https://gist.github.com/mhl/830a290fa50e2395b17d
-#
-#  * We don't have data for all the MPLs, so I'm only importing those
-#    that we can resolve the names of.  (In contrast, won't have any
-#    administrators of these offices in the database already, so I'm
-#    just creating a new person record for each.)
+#  * There are still various unmatched names that should be found in
+#    the Pombola database.
 
 from collections import defaultdict, namedtuple
 import csv
