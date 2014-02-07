@@ -17,16 +17,11 @@ Then, to load in some people and organisation data:
 
     $ python manage.py core_import_popolo pombola/south_africa/data/south-africa-popolo.json  --commit
 
-Run the command to clean up imported slugs:
-
-    $ python manage.py core_list_malformed_slugs --correct
-
-To load in constituency offices, download a CSV from the below, and run the following.
-https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE.
+To load in constituency offices run the following.
 If you run into any issues with this you might need to remove the
 geocode cache at `pombola/south_africa/management/commands/.geocode-request-cache`.
 
-    $ python manage.py south_africa_import_constituency_offices --commit --verbose <file.csv>
+    $ python manage.py south_africa_import_constituency_offices --commit --verbose pombola/south_africa/data/constituencies_and_offices/all_constituencies.csv
 
 To load in some example SayIt data, fetch the speeches/fixtures/test_inputs/
 

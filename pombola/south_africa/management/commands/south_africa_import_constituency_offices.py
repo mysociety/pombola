@@ -5,12 +5,12 @@
 # inconsistently, etc. etc. and to represent all these relationships
 # in the Pombola database schema we need to create a lot of new rows
 # in different tables.  I strongly suggest this is only used for the
-# initial import on the 'all constituencies2.csv', or that file with
+# initial import on the 'all_constituencies.csv', or that file with
 # fixes manually applied to it.
 #
-# The CSV can be downloaded from:
-# https://docs.google.com/spreadsheet/ccc?key=0Am9Hd8ELMkEsdHpOUjBvNVRzYlN4alRORklDajZwQlE#gid=0
+# That file is in the repository at:
 #
+#   pombola/south_africa/data/constituencies_and_offices/all_constituencies.csv
 
 # Things still to do and other notes:
 #
@@ -20,19 +20,12 @@
 #    contact number from the original import, so that would need to be
 #    checked.)
 #
-#  * At the moment only 211 out of 282 physical addresses geolocate
+#  * At the moment only about 80% of the physical addresses geolocate
 #    correctly. More work could be put into this, resolving them
-#    manually or trying other geocoders.  The unresolved addresses are:
-#    https://gist.github.com/mhl/c3a3ad3bf6cce357bb93
+#    manually or trying other geocoders.
 #
-#  * Fix some of the unmatched member of NA / NCOP delegate names
-#    should be manually fixed:
-#    https://gist.github.com/mhl/830a290fa50e2395b17d
-#
-#  * We don't have data for all the MPLs, so I'm only importing those
-#    that we can resolve the names of.  (In contrast, won't have any
-#    administrators of these offices in the database already, so I'm
-#    just creating a new person record for each.)
+#  * There are still various unmatched names that should be found in
+#    the Pombola database.
 
 from collections import defaultdict, namedtuple
 import csv
@@ -152,31 +145,64 @@ def all_initial_forms(name, squash_initials=False):
 # member of the National Assembly and delegate of the National Coucil
 # of Provinces:
 
-na_member_lookup = {}
+na_member_lookup = defaultdict(set)
 
 nonexistent_phone_number = '000 000 0000'
 
-for position in chain(Position.objects.all().filter(title__slug='member',
-                                                    organisation__slug='national-assembly').currently_active(),
-                      Position.objects.all().filter(title__slug='delegate',
-                                                    organisation__slug='ncop').currently_active()):
+title_slugs = ('provincial-legislature-member',
+               'committee-member',
+               'alternate-member')
+
+def warn_duplicate_name(name_form, person):
+    message = "Tried to add '%s' => %s, but there were already '%s' => %s" % (
+        name_form, person, name_form, na_member_lookup[name_form])
+    print message
+
+people_done = set()
+for position in chain(Position.objects.filter(title__slug='member',
+                                              organisation__slug='national-assembly'),
+                      Position.objects.filter(title__slug='member-of-the-provincial-legislature').currently_active(),
+                      Position.objects.filter(title__slug='member',
+                                              organisation__kind__slug='provincial-legislature').currently_active(),
+                      Position.objects.filter(title__slug__in=title_slugs).currently_active(),
+                      Position.objects.filter(title__slug__startswith='minister').currently_active(),
+                      Position.objects.filter(title__slug='delegate',
+                                              organisation__slug='ncop').currently_active()):
+
     person = position.person
-    full_name = position.person.legal_name.lower()
-    # Always leave the last name, but generate all combinations of initials
-    for name_form in chain(all_initial_forms(full_name),
-                           all_initial_forms(full_name, squash_initials=True)):
-        if name_form in na_member_lookup:
-            message = "Tried to add '%s' => %s, but there was already '%s' => %s" % (
-                name_form, person, name_form, na_member_lookup[name_form])
-        else:
-            na_member_lookup[name_form] = person
+    if person in people_done:
+        continue
+    else:
+        people_done.add(person)
+    for name in person.all_names_set():
+        name = name.lower().strip()
+        # Always leave the last name, but generate all combinations of initials
+        name_forms = set(chain(all_initial_forms(name),
+                               all_initial_forms(name, squash_initials=True)))
+        # If it looks as if there are three full names, try just
+        # taking the first and last names:
+        m = re.search(r'^(\S{4,})\s+\S.*\s+(\S{4,})$', name)
+        if m:
+            name_forms.add(u"{0} {1}".format(*m.groups()))
+        for name_form in name_forms:
+            if name_form in na_member_lookup:
+                warn_duplicate_name(name_form, person)
+            na_member_lookup[name_form].add(person)
 
 unknown_people = set()
 
-def find_pombola_person(name_string, representative_type):
+# Given a name string, try to find a person from the Pombola database
+# that matches that as closely as possible.  Note that if the form of
+# the name supplied matches more than one person, it's arbitrary which
+# one you'll get back.  This doesn't happen in the South Africa data
+# at the moment, but that's still a FIXME (probably by replacing this
+# with PopIt's name resolution).
 
-    # Strip off any phone number at the end:
-    name_string = re.sub(r'[\s\d]+$', '', name_string).strip()
+def find_pombola_person(name_string):
+
+    # Strip off any phone number at the end, which sometimes include
+    # NO-BREAK SPACE or a / for multiple numbers.
+    name_string = re.sub(r'[\s\d/]+$', '', name_string, flags=re.UNICODE).strip()
     # And trim any list numbers from the beginning:
     name_string = re.sub(r'^[\s\d\.]+', '', name_string)
     # Strip off some titles:
@@ -184,28 +210,27 @@ def find_pombola_person(name_string, representative_type):
     name_string = name_string.strip()
     if not name_string:
         return None
-    if representative_type in ('MPL', 'MP'):
-        # Move any initials to the front of the name:
-        name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
-        name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
-        # Score the similarity of name_string with each person:
-        scored_names = [(SequenceMatcher(None, name_string, actual_name).ratio(),
-                         actual_name,
-                         person)
-                        for actual_name, person in na_member_lookup.items()]
-
-        scored_names.sort(reverse=True, key=lambda n: n[0])
-        # If the top score is over 90%, it's very likely to be the
-        # same person with the current set of MPs - this leave a
-        # number of false negatives from misspellings in the CSV file,
-        # though.
-        if scored_names[0][0] >= 0.9:
-            return scored_names[0][2]
-        else:
-            verbose("Failed to find a match for " + name_string.encode('utf-8'))
-            return None
+    # Move any initials to the front of the name:
+    name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
+    name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
+    # Score the similarity of name_string with each person:
+    scored_names = []
+    for actual_name, people in na_member_lookup.items():
+        for person in people:
+            t = (SequenceMatcher(None, name_string, actual_name).ratio(),
+                 actual_name,
+                 person)
+            scored_names.append(t)
+    scored_names.sort(reverse=True, key=lambda n: n[0])
+    # If the top score is over 90%, it's very likely to be the
+    # same person with the current set of MPs - this leave a
+    # number of false negatives from misspellings in the CSV file,
+    # though.
+    if scored_names[0][0] >= 0.9:
+        return scored_names[0][2]
     else:
-        raise Exception, "Unknown representative_type '%s'" % (representative_type,)
+        verbose("Failed to find a match for " + name_string.encode('utf-8'))
+        return None
 
 VERBOSE = False
 
@@ -323,8 +348,6 @@ class Command(LabelCommand):
                     province = row['Province']
                     office_or_area = row['Type']
                     party = row['Party']
-                    member_of_provincial_legislature = row['MPL']
-                    member_of_provincial_legislature = row['MPL']
                     administrator = row['Administrator']
                     telephone = row['Tel']
                     fax = row['Fax']
@@ -333,6 +356,11 @@ class Command(LabelCommand):
                     email = row['E-mail']
                     municipality = row['Municipality']
                     wards = row['Wards']
+
+                    abbreviated_party = party
+                    m = re.search(r'\((?:|.*, )([A-Z\+]+)\)', party)
+                    if m:
+                        abbreviated_party = m.group(1)
 
                     unique_row_id = (party_code, name, party)
 
@@ -346,11 +374,25 @@ class Command(LabelCommand):
 
                     mz_party = Organisation.objects.get(name=party)
 
+                    # At various points, constituency office or areas
+                    # have been created with the wrong terminology, so
+                    # look for any variant of the names:
+                    title_data = {'party': abbreviated_party,
+                                  'type': office_or_area,
+                                  'party_code': party_code,
+                                  'name': name}
+                    possible_formats = [
+                        u'{party} Constituency Area ({party_code}): {name}',
+                        u'{party} Constituency Office ({party_code}): {name}',
+                        u'{party} Constituency Area: {name}',
+                        u'{party} Constituency Office: {name}']
+                    org_slug_possibilities = [slugify(fmt.format(**title_data))
+                                              for fmt in possible_formats]
+
                     if party_code:
-                        organisation_name = "%s Constituency Area (%s): %s" % (party, party_code, name)
+                        organisation_name = u"{party} Constituency {type} ({party_code}): {name}".format(**title_data)
                     else:
-                        organisation_name = "%s Constituency Area: %s" % (party, name)
-                    organisation_slug = slugify(organisation_name)
+                        organisation_name = u"{party} Constituency {type}: {name}".format(**title_data)
 
                     places_to_add = []
                     contacts_to_add = []
@@ -413,21 +455,21 @@ class Command(LabelCommand):
                             # Deal with the different formats of MP
                             # and MPL names for different parties:
                             for representative_type in ('MP', 'MPL'):
-                                if party in ('ANC', 'ACDP'):
+                                if party in ('African National Congress (ANC)',
+                                             'African Christian Democratic Party (ACDP)'):
                                     name_strings = re.split(r'\s{4,}',row[representative_type])
                                     for name_string in name_strings:
-                                        person = find_pombola_person(name_string,
-                                                                      representative_type)
+                                        person = find_pombola_person(name_string)
                                         if person:
                                             people_to_add.append(person)
-                                elif party in ('COPE', 'FF+'):
+                                elif party in ('Congress of the People (COPE)',
+                                               'Freedom Front + (Vryheidsfront+, FF+)'):
                                     for contact in re.split(r'\s*;\s*', row[representative_type]):
                                         # Strip off the phone number
                                         # and email address before
                                         # resolving:
                                         person = find_pombola_person(
-                                            re.sub(r'(?ms)\s*\d.*', '', contact),
-                                            representative_type)
+                                            re.sub(r'(?ms)\s*\d.*', '', contact))
                                         if person:
                                             people_to_add.append(person)
                                 else:
@@ -459,10 +501,10 @@ class Command(LabelCommand):
                                     if municipality == 'Emalahleni':
                                         if 'Pule' in row['MP']:
                                             mapit_municipality = Code.objects.get(type__code='l', code='MP312').area
-                                        elif 'Ndaka' in row['MP']:
+                                        elif 'Mdaka' in row['MP']:
                                             mapit_municipality = Code.objects.get(type__code='l', code='EC136').area
                                         else:
-                                            raise Exception, "Unknown Emalahleni row"
+                                            raise Exception, "Unknown Emalahleni row with MP: '{0}'".format(row['MP'])
                                     elif municipality == 'Naledi':
                                         if 'Mmusi' in row['MP']:
                                             mapit_municipality = Code.objects.get(type__code='l', code='NW392').area
@@ -482,7 +524,7 @@ class Command(LabelCommand):
                     elif office_or_area == 'Area':
                         # At the moment it's only for DA that these
                         # Constituency Areas exist, so check that assumption:
-                        if party != 'DA':
+                        if party != 'Democratic Alliance (DA)':
                             raise Exception, "Unexpected party %s with Area" % (party)
                         constituency_kind = ok_constituency_area
                         province = fix_province_name(province)
@@ -502,8 +544,7 @@ class Command(LabelCommand):
 
                         for representative_type in ('MP', 'MPL'):
                             for contact in re.split(r'(?ms)\s*;\s*', row[representative_type]):
-                                person = find_pombola_person(contact,
-                                                              representative_type)
+                                person = find_pombola_person(contact)
                                 if person:
                                     people_to_add.append(person)
 
@@ -511,33 +552,30 @@ class Command(LabelCommand):
                         raise Exception, "Unknown type %s" % (office_or_area,)
 
                     # The Administrator column might have multiple
-                    # administrators, each followed by their phone
-                    # number.  Names and phone numbers are always
-                    # split by multiple spaces, except in one case:
+                    # administrator contacts, separated by
+                    # semi-colons.  Each contact may have notes about
+                    # them in brackets, and may be followed by more
+                    # than one phone number, separated by slashes.
                     if administrator and administrator.lower() != 'vacant':
-                        if administrator.startswith('Nkwenkwezi Nonbuyekezo 083 210 4811'):
-                            administrators_to_add.append(('Nkwenkwezi Nonbuyekezo', ('083 210 4811',)))
-                        else:
-                            # This person is missing a phone number:
-                            administrator = re.sub(r'(2. Mbetse Selby)',
-                                                   '\\1       ' + nonexistent_phone_number,
-                                                   administrator)
-                            # Add a missing slash:
-                            administrator = re.sub(r'073 265 0391 072 762 5013',
-                                                   '073 265 0391 / 072 762 5013',
-                                                   administrator)
-                            # Remove this stray phone number prefix:
-                            administrator = re.sub(r'Mothsekga-', '', administrator)
-                            fields = re.split(r'\s{4,}', administrator)
-                            for administrator_name, administrator_numbers in group_in_pairs(fields):
-                                # Some names begin with "1.", "2.", etc.
-                                administrator_name = re.sub(r'^[\s\d\.]+', '', administrator_name)
-                                split_phone_numbers = re.split(r'\s*/\s*', administrator_numbers)
-                                tuple_to_add = (administrator_name,
-                                                tuple(s for s in split_phone_numbers
-                                                      if s != nonexistent_phone_number))
-                                verbose("administrator name '%s', numbers '%s'" % tuple_to_add)
-                                administrators_to_add.append(tuple_to_add)
+                        for administrator_contact in re.split(r'\s*;\s*', administrator):
+                            # Strip out any bracketed notes:
+                            administrator_contact = re.sub(r'\([^\)]*\)', '', administrator_contact)
+                            # Extract any phone number at the end:
+                            m = re.search(r'^([^0-9]*)([0-9\s/]*)$', administrator_contact)
+                            phone_numbers = []
+                            if m:
+                                administrator_contact, phones = m.groups()
+                                phone_numbers = [s.strip() for s in re.split(r'\s*/\s*', phones)]
+                            administrator_contact = administrator_contact.strip()
+                            # If there's no name after that, just skip this contact
+                            if not administrator_contact:
+                                continue
+                            administrator_contact = re.sub(r'\s+', ' ', administrator_contact)
+                            tuple_to_add = (administrator_contact,
+                                            tuple(s for s in phone_numbers
+                                                  if s and s != nonexistent_phone_number))
+                            verbose("administrator name '%s', numbers '%s'" % tuple_to_add)
+                            administrators_to_add.append(tuple_to_add)
 
                     organisation_kwargs = {
                         'name': organisation_name,
@@ -547,7 +585,7 @@ class Command(LabelCommand):
                     # Check if this office appears to exist already:
 
                     identifier = None
-                    identifier_scheme = "constituency-office/%s/" % (party,)
+                    identifier_scheme = "constituency-office/%s/" % (abbreviated_party,)
 
                     try:
                         if party_code:
@@ -560,7 +598,7 @@ class Command(LabelCommand):
                         else:
                             # Otherwise use the slug we intend to use, and
                             # look for an existing organisation:
-                            org = Organisation.objects.get(slug=organisation_slug,
+                            org = Organisation.objects.get(slug__in=org_slug_possibilities,
                                                            kind=constituency_kind)
                     except ObjectDoesNotExist:
                         org = Organisation()
