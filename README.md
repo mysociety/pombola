@@ -15,14 +15,14 @@ Please join the Mzalendo Users Google group for discussion about running Pombola
 
     https://groups.google.com/forum/?fromgroups=#!forum/mzalendo-users
 
-There is also the Components mailing list for some of the code used to make the
+There is also the Poplus mailing list for some of the code used to make the
 site. This includes [MapIt](https://github.com/mysociety/mapit) (for the
 boundaries), [PopIt](https://github.com/mysociety/popit) (a person data storage
 engine that Pombola will be changed to use in the future), and
 [SayIt](https://github.com/mysociety/sayit) (a speech data storage system,
 similarly):
 
-    https://secure.mysociety.org/admin/lists/mailman/listinfo/components
+    https://groups.google.com/forum/#!forum/poplus
 
 
 ## Installing
