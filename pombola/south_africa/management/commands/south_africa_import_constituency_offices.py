@@ -202,7 +202,7 @@ def find_pombola_person(name_string):
 
     # Strip off any phone number at the end, which sometimes include
     # NO-BREAK SPACE or a / for multiple numbers.
-    name_string = re.sub(r'[\s\d/]+$', '', name_string, flags=re.UNICODE).strip()
+    name_string = re.sub(r'(?u)[\s\d/]+$', '', name_string).strip()
     # And trim any list numbers from the beginning:
     name_string = re.sub(r'^[\s\d\.]+', '', name_string)
     # Strip off some titles:
