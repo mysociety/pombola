@@ -10,15 +10,15 @@
     position:relative;
     z-index:2;
     float:right;
-    
+
     ul {
       li {
         border-right: 2px solid $colour_white;
-      
+
          a {
           color: $colour_black;
           background-image: none;
-      
+
           &:hover {
             background: #d4d4d4;
           }
@@ -46,7 +46,7 @@ body {
   background-repeat: repeat-x;
   background-position: bottom center;
 }
- 
+
 @media only all and (min-width: 640px), print {
   #site-header {
     height: 100px;
@@ -55,7 +55,7 @@ body {
 
 
 #logo {
-  
+
   background: url(/static/images/mz-nigeria-logo-text-small.png) 0 center no-repeat;
   background-position: left 20%;
 
@@ -75,7 +75,7 @@ body {
     }
   }
 }
- 
+
 
 #header-search {
   margin: 15px 5px 5px 15px;
@@ -96,4 +96,11 @@ div.search-filters {
 }
 div.search-pagination {
   @include background(linear-gradient(#333132, #4C4C4E));
+}
+
+.embedded-video {
+  margin-bottom: 1em;
+  iframe {
+    max-width: 100%;
+  }
 }
