@@ -557,14 +557,23 @@ class Command(LabelCommand):
                     # them in brackets, and may be followed by more
                     # than one phone number, separated by slashes.
                     if administrator and administrator.lower() != 'vacant':
-                        fields = re.split(r'\s{4,}', administrator)
-                        for administrator_name, administrator_numbers in group_in_pairs(fields):
-                            # Some names begin with "1.", "2.", etc.
-                            administrator_name = re.sub(r'^[\s\d\.]+', '', administrator_name)
-                            split_phone_numbers = re.split(r'\s*/\s*', administrator_numbers)
-                            tuple_to_add = (administrator_name,
-                                            tuple(s for s in split_phone_numbers
-                                                  if s != nonexistent_phone_number))
+                        for administrator_contact in re.split(r'\s*;\s*', administrator):
+                            # Strip out any bracketed notes:
+                            administrator_contact = re.sub(r'\([^\)]*\)', '', administrator_contact)
+                            # Extract any phone number at the end:
+                            m = re.search(r'^([^0-9]*)([0-9\s/]*)$', administrator_contact)
+                            phone_numbers = []
+                            if m:
+                                administrator_contact, phones = m.groups()
+                                phone_numbers = [s.strip() for s in re.split(r'\s*/\s*', phones)]
+                            administrator_contact = administrator_contact.strip()
+                            # If there's no name after that, just skip this contact
+                            if not administrator_contact:
+                                continue
+                            administrator_contact = re.sub(r'\s+', ' ', administrator_contact)
+                            tuple_to_add = (administrator_contact,
+                                            tuple(s for s in phone_numbers
+                                                  if s and s != nonexistent_phone_number))
                             verbose("administrator name '%s', numbers '%s'" % tuple_to_add)
                             administrators_to_add.append(tuple_to_add)
 
