@@ -167,7 +167,7 @@ def warn_duplicate_name(name_form, person):
 
 people_done = set()
 for position in chain(Position.objects.filter(title__slug='member',
-                                              organisation__slug='national-assembly').currently_active(),
+                                              organisation__slug='national-assembly'),
                       Position.objects.filter(title__slug='member-of-the-provincial-legislature').currently_active(),
                       Position.objects.filter(title__slug='member',
                                               organisation__kind__slug='provincial-legislature').currently_active(),
