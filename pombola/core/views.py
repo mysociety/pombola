@@ -323,7 +323,7 @@ class OrganisationDetailSub(SubSlugRedirectMixin, DetailView):
             all_positions = context['all_positions'] = \
                 self.object.position_set.filter(person__hidden=False). \
                     select_related('person', 'title', 'place'). \
-                    prefetch_related('person__alternative_names')
+                    prefetch_related('person__alternative_names', 'person__images')
 
             if self.request.GET.get('all'):
                 positions = all_positions
