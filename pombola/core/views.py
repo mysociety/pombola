@@ -255,7 +255,10 @@ class OrganisationDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(OrganisationDetailView, self).get_context_data(**kwargs)
-        context['positions'] = self.object.position_set.all().order_by('person__legal_name')
+        context['positions'] = self.object.position_set.all(). \
+            select_related('person', 'title', 'place'). \
+            prefetch_related('person__alternative_names', 'person__images'). \
+            order_by('person__legal_name')
         return context
 
 
