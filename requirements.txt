@@ -83,7 +83,7 @@ audioread==1.0.1
 billiard==3.3.0.14
 bleach==1.4
 celery==3.1.8
-chardet==2.0.1
+chardet==2.2.1
 cssselect==0.9.1
 django-bleach==0.1.5
 django-celery==3.1.1
