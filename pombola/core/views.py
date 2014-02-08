@@ -301,7 +301,8 @@ class OrganisationDetailView(SlugRedirectMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(OrganisationDetailView, self).get_context_data(**kwargs)
         context['positions'] = self.object.position_set. \
-            select_related('person', 'title'). \
+            select_related('person', 'title', 'place'). \
+            prefetch_related('person__alternative_names', 'person__images'). \
             order_by('person__legal_name')
         return context
 
