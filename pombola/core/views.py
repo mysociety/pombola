@@ -68,7 +68,7 @@ class OrganisationList(ListView):
     model = models.Organisation
 
 class PersonDetail(DetailView):
-    model = models.Person
+    queryset = models.Person.objects.prefetch_related('alternative_names')
 
     def get(self, request, *args, **kwargs):
         # Check if this is old slug for redirection:
