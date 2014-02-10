@@ -418,6 +418,7 @@ THUMBNAIL_DEBUG = True
 HANSARD_CACHE   = os.path.join( root_dir, 'hansard_cache' )
 COMMITTEE_CACHE = os.path.join( HANSARD_CACHE, 'committee' )
 ANSWER_CACHE    = os.path.join( HANSARD_CACHE, 'answers' )
+QUESTION_CACHE  = os.path.join( HANSARD_CACHE, 'questions' )
 
 PMG_COMMITTEE_USER = config.get('PMG_COMMITTEE_USER', '')
 PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
