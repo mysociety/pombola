@@ -19,7 +19,11 @@ function initialize_map() {
     var myOptions = {
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       disableDefaultUI: true,
-      maxZoom: 16
+      maxZoom: 16,
+      zoomControl: true,
+      zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL
+      }
     };
 
     map = new google.maps.Map(map_element, myOptions);

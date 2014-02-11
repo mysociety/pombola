@@ -4979,6 +4979,9 @@ ul.pager li.next {
 #map_canvas {
   margin-bottom: 2em;
 }
+#map_canvas img {
+  max-width: none;
+}
 
 .politicians-results h2 {
   margin-bottom: .6em;

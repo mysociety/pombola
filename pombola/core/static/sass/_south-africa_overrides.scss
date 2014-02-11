@@ -1899,6 +1899,9 @@ ul.pager {
 
 #map_canvas {
     margin-bottom: 2em;
+    img {
+        max-width: none
+    }
 }
 
 .politicians-results {
