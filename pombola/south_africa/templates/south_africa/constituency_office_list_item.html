@@ -36,9 +36,9 @@
           {% empty %}
             <img class="constituency-office-mp-photo" src="{{STATIC_URL}}images/person-90x90.jpg" width="58" height="58" />
           {% endthumbnail %}
-        </a>
 
-        <p class="constituency-office-mp-name">{{ person_entry.person.name }}</p>
+          <p class="constituency-office-mp-name">{{ person_entry.person.name }}</p>
+        </a>
 
         {% for pos in person_entry.positions %}
           <p class="constituency-office-mp-title">
