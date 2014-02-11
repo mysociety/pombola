@@ -19,7 +19,7 @@ function initialize_map() {
     var myOptions = {
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       disableDefaultUI: true,
-      maxZoom: 10
+      maxZoom: 16
     };
 
     map = new google.maps.Map(map_element, myOptions);
