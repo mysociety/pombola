@@ -942,6 +942,14 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Sort by the place name"""
         return self.select_related('person').order_by('person__legal_name')
 
+    def current_unique_places(self):
+        """Return the list of places associated with current positions"""
+        result = sorted(set(position.place for position in self.currently_active()
+                          if position.place),
+                      key=lambda p: p.name)
+        return result
+
+
 class PositionManager(ManagerBase):
     def get_query_set(self):
         return PositionQuerySet(self.model)
