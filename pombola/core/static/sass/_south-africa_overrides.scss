@@ -1316,7 +1316,9 @@ FOOTER
         margin-bottom: 0.25em;
     }
     .position-parties,
-    .position-place {
+    .position-place,
+    .person-contact,
+    .position-title {
         display: inline-block;
         font-size: 0.875em;
         a:link,
@@ -1343,6 +1345,32 @@ FOOTER
             padding-left: 20px;
             margin-right: 20px;
         }
+    }
+
+    .person-contact {
+        margin-right:5px;
+
+        .contact-kind {
+            @include lato-bold;
+            color: $colour_blackish;
+            letter-spacing: 0.05em;
+            text-transform:uppercase;
+            font-size:0.9em;
+        }
+    }
+}
+
+.constituency-positions {
+    .position-parties,
+    .position-place,
+    .position-title {
+        display: block;
+    }
+
+    .position-title {
+        background: transparent url('/static/images/person-16x16.jpg') left center no-repeat;
+        padding-left: 20px;
+        margin-left:70px;
     }
 }
 
