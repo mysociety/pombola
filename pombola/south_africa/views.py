@@ -344,7 +344,16 @@ if settings.ENABLED_FEATURES['speeches']:
 class SASearchView(SearchView):
 
     def __init__(self, *args, **kwargs):
-        kwargs['searchqueryset'] = SearchQuerySet().models(*search_models).highlight()
+        # We can't just order by -start_date, since that will put any
+        # Place and PositionTitle results (where there is no
+        # start_date in the index) at the very end, after potentially
+        # thousands of Speech results.  We can get around this by
+        # ordering on django_ct first, since places and positiontitles
+        # have content types that just happen to come earlier in the
+        # alphabet than that of speeches.
+        kwargs['searchqueryset'] = SearchQuerySet().models(*search_models). \
+            order_by('django_ct', '-start_date'). \
+            highlight()
         return super(SASearchView, self).__init__(*args, **kwargs)
 
     def extra_context(self):
