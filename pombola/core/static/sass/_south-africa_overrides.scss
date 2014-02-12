@@ -1793,6 +1793,29 @@ ul.pager {
         p {
             margin: 0 0 1em;
         }
+        .person-appearances-summary {
+            ul li p {
+                margin-bottom: 0.5em;
+            }
+            @media only all and (min-width: 550px), print {
+                float: left;
+                width: 49%;
+                margin-right: 1%;
+
+                .one-appearance {
+                    float: none;
+                    width: 100%;
+                    margin-right: 0px;
+                }
+            }
+        }
+        @media only all and (min-width: 550px), print {
+            .one-appearance {
+                float: none;
+                width: 100%;
+                margin-right: 0px;
+            }
+        }
     }
 
     .person-appearances {
@@ -1801,10 +1824,18 @@ ul.pager {
             font-size: 1.142857143em;
         }
         li {
-            margin-bottom: 1em;
+            margin-bottom: 0.5em;
         }
+        font-size: 0.9em;
     }
 }
+
+#profile {
+    h2 {
+        font-size: 1em;
+    }
+}
+
 
 .tab-links {
     border-bottom: 1px solid #d2d2ce;
@@ -2073,9 +2104,3 @@ ul.pager {
         }
    }
 }
-
-
-
-
-
-

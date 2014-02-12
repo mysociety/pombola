@@ -22,6 +22,7 @@ from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
+from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
@@ -193,6 +194,89 @@ class SAPersonDetailViewTest(TestCase):
         person = models.Person.objects.get(slug='moomin-finn')
         speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
         self.assertEqual( speaker.name, 'Moomin Finn' )
+
+    def test_generation_of_interests_table(self):
+        #create data for the test
+        person = models.Person.objects.get(slug='moomin-finn')
+
+        category1 = Category.objects.create(name="Test Category", sort_order=1)
+        category2 = Category.objects.create(name="Test Category 2", sort_order=2)
+
+        release1 = Release.objects.create(name='2013', date=date(2013, 2, 16))
+        release2 = Release.objects.create(name='2012', date=date(2012, 2, 24))
+
+        entry1 = Entry.objects.create(person=person,release=release1,category=category1, sort_order=1)
+        entry2 = Entry.objects.create(person=person,release=release1,category=category1, sort_order=2)
+        entry3 = Entry.objects.create(person=person,release=release1,category=category2, sort_order=3)
+
+        line1 = EntryLineItem.objects.create(entry=entry1,key='Field1',value='Value1')
+        line2 = EntryLineItem.objects.create(entry=entry1,key='Field2',value='Value2')
+        line3 = EntryLineItem.objects.create(entry=entry2,key='Field1',value='Value3')
+        line4 = EntryLineItem.objects.create(entry=entry2,key='Field3',value='Value4')
+        line5 = EntryLineItem.objects.create(entry=entry3,key='Field4',value='Value5')
+
+        #actual output
+        context = self.client.get(reverse('person', args=('moomin-finn',))).context
+
+        #expected output
+        expected = {
+            1: {
+                'name': u'2013',
+                'categories': {
+                    1: {
+                        'name': u'Test Category',
+                        'headings': [
+                            u'Field1',
+                            u'Field2',
+                            u'Field3'
+                        ],
+                        'headingindex': {
+                            u'Field1': 0,
+                            u'Field2': 1,
+                            u'Field3': 2
+                        },
+                        'headingcount': 4,
+                        'entries': [
+                            [
+                                u'Value1',
+                                u'Value2',
+                                ''
+                            ],
+                            [
+                                u'Value3',
+                                '',
+                                u'Value4'
+                            ]
+                        ]
+                    },
+                    2: {
+                        'name': u'Test Category 2',
+                        'headings': [
+                            u'Field4'
+                        ],
+                        'headingindex': {
+                            u'Field4': 0
+                        },
+                        'headingcount': 2,
+                        'entries': [
+                            [
+                                u'Value5'
+                            ]
+                        ]
+                    }
+                }
+            }
+        }
+
+        #ideally the following test would be run - however the ordering of entrylineitems appears to be somewhat unpredictable
+        #self.assertEqual(context['interests'],expected)
+
+        self.assertEqual(len(context['interests'][1]['categories'][1]['headings']), len(expected[1]['categories'][1]['headings']))
+        self.assertEqual(len(context['interests'][1]['categories'][1]['entries']), len(expected[1]['categories'][1]['entries']))
+        self.assertEqual(len(context['interests'][1]['categories'][1]['entries'][0]), len(expected[1]['categories'][1]['entries'][0]))
+        self.assertEqual(len(context['interests'][1]['categories'][2]['headings']), len(expected[1]['categories'][2]['headings']))
+        self.assertEqual(len(context['interests'][1]['categories'][2]['entries']), len(expected[1]['categories'][2]['entries']))
+        self.assertEqual(len(context['interests'][1]['categories'][2]['entries'][0]), len(expected[1]['categories'][2]['entries'][0]))
 
 class SAHansardIndexViewTest(TestCase):
 

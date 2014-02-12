@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -4868,12 +4869,41 @@ ul.pager li.next {
 #page .large-container p {
   margin: 0 0 1em;
 }
+#page .large-container .person-appearances-summary ul li p {
+  margin-bottom: 0.5em;
+}
+@media only all and (min-width: 550px), print {
+  #page .large-container .person-appearances-summary {
+    float: left;
+    width: 49%;
+    margin-right: 1%;
+  }
+  #page .large-container .person-appearances-summary .one-appearance {
+    float: none;
+    width: 100%;
+    margin-right: 0px;
+  }
+}
+@media only all and (min-width: 550px), print {
+  #page .large-container .one-appearance {
+    float: none;
+    width: 100%;
+    margin-right: 0px;
+  }
+}
+#page .person-appearances {
+  font-size: 0.9em;
+}
 #page .person-appearances .speech-title {
   font-weight: bold;
   font-size: 1.142857143em;
 }
 #page .person-appearances li {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
+}
+
+#profile h2 {
+  font-size: 1em;
 }
 
 .tab-links {

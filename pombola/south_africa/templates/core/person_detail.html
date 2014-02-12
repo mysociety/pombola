@@ -92,13 +92,108 @@ pombola_settings.extra_js.push('js/tabs.js')
 {% block subcontent %}
 <div class="tabs">
   <ul class="tab-links">
-    <li><a class="active" href="#appearances">Appearances</a></li>
-    <li><a href="#profile">Profile</a></li>
+    <li><a class="active" href="#profile">Profile</a></li>
+    {% with past_positions=person.position_set.all.political.currently_inactive %}
+    {% if past_positions %}
+    <li><a href="#experience">Experience</a></li>
+    {% endif %}
+    {% if hansard.count or question.count or committee.count %}
+    <li><a href="#appearances">Appearances</a></li>
+    {% endif %}
+    {% if object.interests_register_entries.exists %}
+    <li><a href="#membersinterests">Register of Interests</a></li>
+    {% endif %}
   </ul>
 
-  <div id="appearances" class="tab-content tab-active">
-    <h2>Appearances</h2>
+  <div id="profile" class="tab-content tab-active">
 
+    <div class="person-summary">
+      {{ person.summary }}
+    </div>
+
+    {% with current_positions=person.position_set.all.political.currently_active %}
+        {% if current_positions %}
+          <h3>Current Positions</h3>
+          <ul class="current-positions positions">
+            {% for position in current_positions %}
+            <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% if hansard.count or question.count or committee.count %}<h2>Recent Appearances</h2> {% endif %}
+
+    {% if committee.count %}
+    <div class="person-appearances-summary">
+      <h3>Committee appearances</h3>
+
+      {% include "core/person_speech_list.html" with speechlist=committee|slice:":3" section_url='committee:section-view' %}
+
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
+
+    </div>
+    {% endif %}
+
+    {% if hansard.count %}
+    <div class="person-appearances-summary{% if not question.count and not committee.count %} one-appearance{% endif %}">
+      <h3>Plenary appearances</h3>
+
+      {% include "core/person_speech_list.html" with speechlist=hansard|slice:":3" section_url='hansard:section-view' %}
+
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
+
+    </div>
+    {% endif %}
+    {% if committee.count and hansard.count %}<div style="clear:both;"></div>{% endif %}
+    {% if question.count %}
+    <div class="person-appearances-summary">
+      <h3>Questions </h3>
+
+      {% include "core/person_speech_list.html" with speechlist=question|slice:":3" section_url='question:section-view' parent_title=1 %}
+
+        <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
+
+    </div>
+    {% endif %}
+
+
+
+  </div>
+
+  {% if past_positions %}
+  <div id="experience" class="tab-content">
+
+
+    <div class="person-experience">
+      {% with current_positions=person.position_set.all.political.currently_active %}
+        {% if current_positions %}
+          <h3>Currently</h3>
+          <ul class="current-positions positions">
+            {% for position in current_positions %}
+            <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a>{% if position.start_date %} since {{ position.start_date }}{% endif %}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+        <h3>Formerly</h3>
+          <ul class="former-positions positions">
+          {% if past_positions %}
+            {% for position in past_positions %}
+              <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a>{% if position.start_date %} from {{ position.start_date }}{% endif %} until {{ position.end_date }}</li>
+            {% endfor %}
+          {% else %}
+            <li>No former positions recorded.</li>
+        {% endif %}
+        </ul>
+
+    </div>
+  </div>
+  {% endif %}{% endwith %}
+
+  {% if hansard.count or question.count or committee.count %}
+  <div id="appearances" class="tab-content">
     <section class="person-appearances">
       <h3>Committee appearances</h3>
 
@@ -128,67 +223,40 @@ pombola_settings.extra_js.push('js/tabs.js')
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
       {% endif %}
     </section>
-
   </div>
+  {% endif %}
 
-  <div id="profile" class="tab-content">
-    <div class="person-summary">
-      {{ person.summary }}
-    </div>
+  {% if object.interests_register_entries.exists %}
+  <div id="membersinterests" class="tab-content">
 
-    <div class="person-experience">
-      <h2>Experience</h2>
-
-      {% with current_positions=person.position_set.all.political.currently_active %}
-        {% if current_positions %}
-          <h3>Currently</h3>
-          <ul class="current-positions positions">
-            {% for position in current_positions %}
-            <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
-
-      {% with past_positions=person.position_set.all.political.currently_inactive %}
-        {% if past_positions %}
-          <h3>Formerly</h3>
-          <ul class="former-positions positions">
-          {% for position in past_positions %}
-          <li>{{ position.title }} at <a href="{% url "organisation" slug=position.organisation.slug %}">{{ position.organisation }}</a></li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
-
-    </div>
-
-    {% if object.interests_register_entries.exists %}
       <div class="person-interests">
-        <h2>Register of interests</h2>
 
-        {% with entries=object.interests_register_entries.all %}
-          {% for entry in entries %}
-            {% ifchanged entry.release %}
-              <h3>{{ entry.release.name }}</h3>
-            {% endifchanged %}
+        {% for key, release in interests.items %}
+            <h3>{{ release.name }}</h3>
+            {% for ckey, category in release.categories.items %}
+                <h4>{{ category.name }}</h4>
+                <table>
+                    <tr>
+                        {% for heading in category.headings %}
+                            <th>{{ heading }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for line in category.entries %}
+                        <tr>
+                            {% for cell in line %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        {% endfor %}
 
-            {% ifchanged entry.category %}
-              <h4>{{ entry.category.name }}</h4>
-            {% endifchanged %}
-
-            <p>
-              {% for line in entry.line_items.all %}
-                <strong>{{ line.key }}:</strong> {{ line.value }}<br/>
-              {% endfor %}
-            </p>
-          {% endfor %}
-        {% endwith %}
 
       </div>
-    {% endif %}
 
-  </div>
+
+  </div>{% endif %}
 
 </div>
 {% endblock %}

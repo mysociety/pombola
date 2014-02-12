@@ -315,6 +315,48 @@ class SAPersonDetail(PersonDetail):
         return speeches
 
 
+    def get_tabulated_interests(self):
+        interests = self.object.interests_register_entries.all()
+        tabulated = {}
+
+        for entry in interests:
+            release = entry.release
+            category = entry.category
+
+            if release.id not in tabulated:
+                tabulated[release.id] = {'name':release.name, 'categories':{}}
+
+            if category.id not in tabulated[release.id]['categories']:
+                tabulated[release.id]['categories'][category.id] = {
+                    'name': category.name,
+                    'headings': [],
+                    'headingindex': {},
+                    'headingcount': 1,
+                    'entries': []
+                }
+
+            #create row list
+            tabulated[release.id]['categories'][category.id]['entries'].append(
+                ['']*(tabulated[entry.release.id]['categories'][entry.category.id]['headingcount']-1)
+            )
+
+            #loop through each 'cell' in the row
+            for entrylistitem in entry.line_items.all():
+                #if the heading for the column does not yet exist, create it
+                if entrylistitem.key not in tabulated[entry.release.id]['categories'][entry.category.id]['headingindex']:
+                    tabulated[release.id]['categories'][category.id]['headingindex'][entrylistitem.key] = tabulated[entry.release.id]['categories'][entry.category.id]['headingcount']-1
+                    tabulated[release.id]['categories'][category.id]['headingcount']+=1
+                    tabulated[release.id]['categories'][category.id]['headings'].append(entrylistitem.key)
+
+                    #loop through each row that already exists to ensure lists are the same size
+                    for (key, line) in enumerate(tabulated[release.id]['categories'][category.id]['entries']):
+                        tabulated[entry.release.id]['categories'][entry.category.id]['entries'][key].append('')
+
+                #record the 'cell' in the correct position in the row list
+                tabulated[release.id]['categories'][category.id]['entries'][-1][tabulated[release.id]['categories'][category.id]['headingindex'][entrylistitem.key]] = entrylistitem.value
+
+        return tabulated
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.object.contacts.filter(kind__slug='twitter')
@@ -328,6 +370,8 @@ class SAPersonDetail(PersonDetail):
         context['hansard']   = self.get_recent_speeches_for_section("Hansard")
         context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
         context['question']  = self.get_recent_speeches_for_section("Questions")
+
+        context['interests'] = self.get_tabulated_interests()
 
         return context
 
