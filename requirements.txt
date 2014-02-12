@@ -55,8 +55,9 @@ python-memcached==1.53
 django-mapit==1.0.3
 
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
-git+git://github.com/mysociety/sayit.git@24428b51033e1b569eec10c057d9349700cd05e5
-git+git://github.com/mysociety/za-hansard.git@ab9607bdedad889f2d613c5de840180044c9ab89
+# Note, if the subsequent -e are ever removed, please remove manually from virtualenv/src !
+-e git+git://github.com/mysociety/sayit.git@pombola#egg=django-sayit
+-e git+git://github.com/mysociety/za-hansard.git@master#egg=za-hansard
 git+git://github.com/mysociety/popit-resolver@abcfc79d787c8ca054560a4911352fed8aa8c40d
 git+git://github.com/mysociety/popit-django@61bc32b67f76262d08339e00dd83bda9def92279
 
