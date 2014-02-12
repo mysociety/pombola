@@ -465,6 +465,7 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
 
         # Get the top level section, or 404
         top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
+        context['show_lateness_warning'] = (self.top_section_name == 'Hansard')
 
         # As we know that the hansard section structure is
         # "Hansard" -> yyyy -> mm -> dd -> section -> subsection -> [speeches]
