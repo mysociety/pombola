@@ -13,6 +13,7 @@ from django.views.generic import RedirectView, TemplateView
 from django.shortcuts import get_object_or_404
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Q
 
 import mapit
 from haystack.views import SearchView
@@ -260,6 +261,27 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
                 context['sorted_positions'] = all_positions.filter(title__slug='delegate')
             elif self.request.GET.get('office'):
                 context['sorted_positions'] = all_positions.exclude(title__slug='member')
+
+            if self.request.GET.get('order') == 'place':
+                context['sorted_positions'] = context['sorted_positions'].order_by_place()
+            else:
+                context['sorted_positions'] = context['sorted_positions'].order_by_person_name()
+
+        if self.kwargs['sub_page'] == 'party':
+            context['party'] = get_object_or_404(models.Organisation,slug=self.kwargs['sub_page_identifier'])
+
+            context['sorted_positions'] = context['all_positions'] = self.object.position_set.filter(person__position__organisation__slug=self.kwargs['sub_page_identifier'])
+
+            if self.request.GET.get('all'):
+                context['sorted_positions'] = context['sorted_positions']
+            elif self.request.GET.get('historic'):
+                context['historic'] = True
+                #FIXME - limited to members and delegates so that current members who are no longer officials are not displayed, but this
+                #means that if a former member was an official this is not shown
+                context['sorted_positions'] = context['sorted_positions'].filter(Q(title__slug='member') | Q(title__slug='delegate')).currently_inactive()
+            else:
+                context['historic'] = True
+                context['sorted_positions'] = context['sorted_positions'].currently_active()
 
             if self.request.GET.get('order') == 'place':
                 context['sorted_positions'] = context['sorted_positions'].order_by_place()

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load pagination_tags %}
+{% load thumbnail %}
+
+
+{% block title %}{{ object.name }} {{ party.slug.upper }} members{% endblock %}
+
+{% block content %}
+
+  <h2>{{ party.name }} members of the {{ object.name }}</h2>
+  <div class="layout layout-major-minor">
+
+    <div class="column minor-column">
+      <div class="filters sidebar">
+        <h3>Show</h3>
+        <p><a href="?historic=" class="{% if not request.GET.historic and not request.GET.office and not request.GET.all %}active{% endif %}">Current members</a></p>
+        <p><a href="?historic=1" class="{% if request.GET.historic %}active{% endif %}">Past members</a></p>
+
+        {% if object.slug == 'national-assembly' %}
+          {% comment %}
+            Exclude for now - need to decide how to handle past office bearers, etc. TODO - fix.
+            <p><a href="?office=1" class="{% if request.GET.office %}active{% endif %}">Office bearers</a></p>
+          {% endcomment %}
+        {% endif %}
+        <p><a href="?all=1" class="{% if request.GET.all %}active{% endif %}">All members</a></p>
+
+        {% comment %}
+            Exclude. All NCOP members are delegates? TODO - fix.
+        {% if object.slug == 'ncop' %}
+          <p><a href="?delegates=1" class="{% if request.GET.delegate %}active{% endif %}">Delegates</a></p>
+        {% endif %}
+        {% endcomment %}
+
+
+      </div>
+    </div>
+
+    {% regroup sorted_positions by person as regroup_on_person_list %}
+
+    <div class="column major-column">
+      <div class="list-of-things list-of-people">
+          {% autopaginate regroup_on_person_list %}
+
+          <ul class="unstyled-list">
+          {% for regroup_item in regroup_on_person_list %}
+              {% with person=regroup_item.grouper positions=regroup_item.list %}
+
+                <li class="list-of-things-item {{ person.css_class }}-list-item{% if not person.show_active %} inactive{% endif %}">
+
+                  <a href="{{ person.get_absolute_url }}">
+                      {% thumbnail person.primary_image "58x78" crop="center" as im %}
+                      <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                      {% empty %}
+                      <img src="{{STATIC_URL}}images/person-90x90.jpg" height="58" width="58"/>
+                      {% endthumbnail %}
+
+                      <span class="name">{{ person.name }}</span>
+                  </a>
+
+                  {% for position in positions %}
+                      {{ position.title }}
+                      {% if position.place %}
+                          (<a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>)
+                      {% endif %}
+                      <br/>
+                  {% endfor %}
+
+                </li>
+
+              {% endwith %}
+          {% empty %}
+              <li>No records found.</li>
+          {% endfor %}
+          </ul>
+
+          {# pombola/south_africa/templates/core/_search_pagination_text.html #}
+          {% include "core/_search_pagination_text.html" %}
+
+          {% paginate %}
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

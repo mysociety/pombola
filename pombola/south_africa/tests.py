@@ -278,6 +278,83 @@ class SAPersonDetailViewTest(TestCase):
         self.assertEqual(len(context['interests'][1]['categories'][2]['entries']), len(expected[1]['categories'][2]['entries']))
         self.assertEqual(len(context['interests'][1]['categories'][2]['entries'][0]), len(expected[1]['categories'][2]['entries'][0]))
 
+
+class SAOrganisationPartySubPageTest(TestCase):
+
+    def setUp(self):
+        org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
+        org_kind_parliament = models.OrganisationKind.objects.create(name='Parliament', slug='parliament')
+
+        party1 = models.Organisation.objects.create(name='Party1', slug='party1', kind=org_kind_party)
+        party2 = models.Organisation.objects.create(name='Party2', slug='party2', kind=org_kind_party)
+        house1 = models.Organisation.objects.create(name='House1', slug='house1', kind=org_kind_parliament)
+
+        positiontitle1 = models.PositionTitle.objects.create(name='Member', slug='member')
+        positiontitle2 = models.PositionTitle.objects.create(name='Delegate', slug='delegate')
+        positiontitle3 = models.PositionTitle.objects.create(name='Whip', slug='whip')
+
+        person1 = models.Person.objects.create(name='Person1', slug='person1')
+        person2 = models.Person.objects.create(name='Person2', slug='person2')
+        person3 = models.Person.objects.create(name='Person3', slug='person3')
+        person4 = models.Person.objects.create(name='Person4', slug='person4')
+        person5 = models.Person.objects.create(name='Person5', slug='person5')
+
+        position1 = models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
+        position2 = models.Position.objects.create(person=person2, organisation=party1, title=positiontitle1)
+        position3 = models.Position.objects.create(person=person3, organisation=party1, title=positiontitle1)
+        position4 = models.Position.objects.create(person=person4, organisation=party2, title=positiontitle1)
+        position5 = models.Position.objects.create(person=person5, organisation=party2, title=positiontitle2)
+
+        position6 = models.Position.objects.create(person=person1, organisation=house1, title=positiontitle1)
+        position7 = models.Position.objects.create(person=person2, organisation=house1, title=positiontitle1)
+        position8 = models.Position.objects.create(person=person3, organisation=house1, title=positiontitle1, end_date='2013-02-16')
+        position9 = models.Position.objects.create(person=person4, organisation=house1, title=positiontitle1)
+        position10 = models.Position.objects.create(person=person5, organisation=house1, title=positiontitle1, end_date='2013-02-16')
+
+        #check for person who is no longer an official, but still a member
+        position11 = models.Position.objects.create(person=person1, organisation=house1, title=positiontitle3, end_date='2013-02-16')
+
+    def test_display_current_members(self):
+        context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1'))).context
+        context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2'))).context
+
+        expected1 = ['<Position:  (Member at House1)>', '<Position:  (Member at House1)>']
+        expected2 = ['<Position:  (Member at House1)>']
+
+        self.assertQuerysetEqual(context1['sorted_positions'], expected1)
+        self.assertQuerysetEqual(context2['sorted_positions'], expected2)
+        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person1')
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person2')
+        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person4')
+
+    def test_display_past_members(self):
+        context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1')), {'historic': '1'}).context
+        context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2')), {'historic': '1'}).context
+
+        expected1 = ['<Position:  (Member at House1)>']
+        expected2 = ['<Position:  (Member at House1)>']
+
+        self.assertQuerysetEqual(context1['sorted_positions'], expected1)
+        self.assertQuerysetEqual(context2['sorted_positions'], expected2)
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person3')
+        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person5')
+
+    def test_display_all_members(self):
+        context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1')), {'all': '1'}).context
+        context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2')), {'all': '1'}).context
+
+        expected1 = ['<Position:  (Member at House1)>','<Position:  (Member at House1)>','<Position:  (Whip at House1)>','<Position:  (Member at House1)>']
+        expected2 = ['<Position:  (Member at House1)>','<Position:  (Member at House1)>']
+
+        self.assertQuerysetEqual(context1['sorted_positions'], expected1)
+        self.assertQuerysetEqual(context2['sorted_positions'], expected2)
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person3')
+        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person2')
+        self.assertEqual(context1['sorted_positions'][2].person.slug, 'person1')
+        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person5')
+        self.assertEqual(context2['sorted_positions'][1].person.slug, 'person4')
+
+
 class SAHansardIndexViewTest(TestCase):
 
     def setUp(self):

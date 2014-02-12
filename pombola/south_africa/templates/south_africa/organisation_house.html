@@ -38,7 +38,7 @@ the organisation detail page.
     <ul class="house-page-list">
       {% for party in parties %}
       <li>
-      <a href="{% url "organisation" slug=party.slug %}">
+      <a href="{% url 'organisation_party' slug=object.slug sub_page_identifier=party.slug %}">
         {{ party.name }}
         <span class="percent">{{ party.percentage|floatformat:"-1" }}%</span>
       </a>
