@@ -4395,14 +4395,20 @@ FOOTER
   margin-bottom: 0.25em;
 }
 .person-list-item .position-parties,
-.person-list-item .position-place {
+.person-list-item .position-place,
+.person-list-item .person-contact,
+.person-list-item .position-title {
   display: inline-block;
   font-size: 0.875em;
 }
 .person-list-item .position-parties a:link,
 .person-list-item .position-parties a:visited,
 .person-list-item .position-place a:link,
-.person-list-item .position-place a:visited {
+.person-list-item .position-place a:visited,
+.person-list-item .person-contact a:link,
+.person-list-item .person-contact a:visited,
+.person-list-item .position-title a:link,
+.person-list-item .position-title a:visited {
   color: #555;
 }
 .person-list-item .position-parties a:hover,
@@ -4410,7 +4416,13 @@ FOOTER
 .person-list-item .position-parties a:focus,
 .person-list-item .position-place a:hover,
 .person-list-item .position-place a:active,
-.person-list-item .position-place a:focus {
+.person-list-item .position-place a:focus,
+.person-list-item .person-contact a:hover,
+.person-list-item .person-contact a:active,
+.person-list-item .person-contact a:focus,
+.person-list-item .position-title a:hover,
+.person-list-item .position-title a:active,
+.person-list-item .position-title a:focus {
   color: #e23d28;
 }
 .person-list-item .position-parties a {
@@ -4421,6 +4433,28 @@ FOOTER
   background: transparent url("/static/images/place-16x16.jpg") left center no-repeat;
   padding-left: 20px;
   margin-right: 20px;
+}
+.person-list-item .person-contact {
+  margin-right: 5px;
+}
+.person-list-item .person-contact .contact-kind {
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  color: #555555;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.constituency-positions .position-parties,
+.constituency-positions .position-place,
+.constituency-positions .position-title {
+  display: block;
+}
+.constituency-positions .position-title {
+  background: transparent url("/static/images/person-16x16.jpg") left center no-repeat;
+  padding-left: 20px;
+  margin-left: 70px;
 }
 
 /* Search page */

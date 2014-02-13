@@ -20,10 +20,12 @@
   {% endif %}
 
   <h2>People</h2>
-  {% include "core/_position_listing.html" with positions=positions %}
 
-  {% if object.kind.slug == 'constituency-office' %}
+  {% if object.kind.slug == 'constituency-office' or object.kind.slug == 'constituency-area' %}
+    {% include "south_africa/_position_listing_constituency.html" with positions=positions %}
     {% include 'disqus_comments.html' %}
+  {% else %}
+    {% include "core/_position_listing.html" with positions=positions %}
   {% endif %}
 
 {% endblock %}
