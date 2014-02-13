@@ -23,16 +23,17 @@
 
 {% regroup entries by section.parent.title.strip as by_title %}
 {% for t in by_title %}
+  {% with first_section_id=t.list.0.section_id %}
     {% regroup t.list by start_date as by_date %}
     <div>
-        <a class="js-hide-reveal-link hansard-section-title has-dropdown-dark" href="#{{ t.grouper|slugify }}">
+        <a class="js-hide-reveal-link hansard-section-title has-dropdown-dark" href="#{{ t.grouper|slugify }}-{{ first_section_id }}">
             <h2> {{ t.grouper }} </h2>
             {% for d in by_date %}
                 {{ d.grouper }} {% if not forloop.last %},{% endif %}
             {% endfor %}
         </a>
 
-        <div class="js-hide-reveal hansard-section" id="{{ t.grouper|slugify }}">
+        <div class="js-hide-reveal hansard-section" id="{{ t.grouper|slugify }}-{{ first_section_id }}">
             {% for item in t.list %}
             <p>
                 <a href="{% url 'speeches:section-view' item.section.get_path %}">{{ item.section.title }}</a>
@@ -42,5 +43,6 @@
         </div>
 
     </div>
+  {% endwith %}
 {% endfor %}
 {% endblock %}
