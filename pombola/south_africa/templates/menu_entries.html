@@ -54,7 +54,7 @@
   {% endif %}
 </li>
 
-<li><a href="" class="has-dropdown">Democracy Resources</a>
+<li><a href="{% url "info_page" slug="democracy-resources" %}" class="has-dropdown">Democracy Resources</a>
   {% if include_sub_menu_entries %}
     <ul id="democracy-resources-overview">
       <!-- TODO: Change this link once the questions data has been loaded in. -->
@@ -79,7 +79,7 @@
   {% endif %}
 </li>
 
-<li><a href="" class="has-dropdown">Extras</a>
+<li><a href="{% url "info_page" slug="extras" %}" class="has-dropdown">Extras</a>
   {% if include_sub_menu_entries %}
     <ul id="extras-overview">
       <li><a href="{% url "info_page" slug="newsletter" %}">Newsletter</a></li>
