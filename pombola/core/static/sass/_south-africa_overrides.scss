@@ -913,6 +913,8 @@ NEWS & POLL
 
 .home-news {
     float: left;
+    width: 100%;
+    max-width: 100%;
     h2 {
         a:link{
             text-decoration: none;
@@ -969,6 +971,9 @@ ul.home-news-list {
             a:focus {
                 text-decoration: underline;
             }
+        }
+        img {
+            width: 100%;
         }
     }
 }
