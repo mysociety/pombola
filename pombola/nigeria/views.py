@@ -161,10 +161,7 @@ class SearchPollUnitNumberView(TemplateView):
                            key=lambda a: size_of_overlap[a])
 
         # get the most overlapping ones
-        likely_areas = filter(
-            lambda x: size_of_overlap[x] > 0.5,
-            all_areas
-        )
+        likely_areas = [a for a in all_areas if size_of_overlap[a] > 0.5]
 
         # If there are none display first five (better than nothing...)
         if not len(likely_areas):
