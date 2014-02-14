@@ -156,10 +156,8 @@ class SearchPollUnitNumberView(TemplateView):
             size_of_overlap[area] = intersection_fraction_of_smallest_area
 
         # Sort the results by the overlap size
-        all_areas = sorted(
-            all_areas,
-            cmp=lambda x,y: cmp(size_of_overlap[x], size_of_overlap[y])
-        )
+        all_areas = sorted(all_areas,
+                           key=lambda a: size_of_overlap[a])
 
         # get the most overlapping ones
         likely_areas = filter(
