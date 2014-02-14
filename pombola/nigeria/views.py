@@ -142,6 +142,8 @@ class SearchPollUnitNumberView(TemplateView):
 
         all_areas = Area.objects.filter(type__code=code, polygons__polygon__intersects=polygons).distinct()
 
+        area_of_original = polygons.area
+
         size_of_overlap = {}
 
         # calculate the overlap
@@ -149,11 +151,7 @@ class SearchPollUnitNumberView(TemplateView):
             area_polygons = area.polygons.collect()
             intersection = polygons.intersection(area_polygons)
 
-            # choose the smallest area
-            smallest_area = min(polygons.area, area_polygons.area)
-
-            intersection_fraction_of_smallest_area = intersection.area / smallest_area
-            size_of_overlap[area] = intersection_fraction_of_smallest_area
+            size_of_overlap[area] = intersection.area / area_of_original
 
         # Sort the results by the overlap size; largest overlap first
         all_areas = sorted(all_areas,
