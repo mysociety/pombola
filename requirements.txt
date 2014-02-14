@@ -125,3 +125,10 @@ GDAL
 
 # This comes as standard in Python 2.7+ anyway
 argparse
+
+# An old migration in za-hansard requires django-sluggable to be installed.
+# at some point in the future we should stop this being needed, perhaps by
+# editing the migrations to remove it.
+# In an ideal world, this should be pulled in by sayit, but it isn't.
+# See https://github.com/mysociety/sayit/issues/161
+-e git+https://github.com/mysociety/django-sluggable@with_unique_with#egg=django-sluggable
