@@ -75,6 +75,11 @@
           <p>{{ object.date_of_birth }}</p>
       {% endif %}
 
+      {% if object.date_of_death %}
+          <h3>Died</h3>
+          <p>{{ object.date_of_death }}</p>
+      {% endif %}
+
       {# Simplified version of core/templates/core/contact_list.html #}
       {% if object.contacts.count %}
       {% for c in object.contacts.all %}

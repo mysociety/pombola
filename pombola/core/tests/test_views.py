@@ -1,3 +1,4 @@
+from BeautifulSoup import Tag, NavigableString
 from contextlib import contextmanager
 from django_webtest import WebTest
 from django.contrib.auth.models import User
@@ -198,6 +199,13 @@ class TestPersonView(WebTest):
         self.alf = models.Person.objects.create(
             legal_name="Alfred Smith",
             slug='alfred-smith',
+            date_of_birth='1960-04-01',
+        )
+        self.deceased = models.Person.objects.create(
+            legal_name="Deceased Person",
+            slug='deceased-person',
+            date_of_birth='1965-12-31',
+            date_of_death='2010-01-01',
         )
         self.superuser = User.objects.create(
             username='admin',
@@ -252,3 +260,47 @@ class TestPersonView(WebTest):
         with self.with_hidden_person():
             resp = self.app.get('/person/alfred-smith/', user=self.superuser)
             self.assertTrue(resp)
+
+    def get_next_sibling(self, original_element, tag_name_to_find):
+        current = original_element
+        while True:
+            current = current.next_sibling
+            self.assertIsNotNone(current)
+            if type(current) == NavigableString:
+                continue
+            if current.name == tag_name_to_find:
+                return current
+        return None
+
+    def get_personal_details(self, soup):
+        heading = soup.find('h2', text='Personal Details')
+        dl = self.get_next_sibling(heading, 'dl')
+        terms = [dt.text.strip() for dt in dl.find_all('dt')]
+        definitions = [dd.text.strip() for dd in dl.find_all('dd')]
+        return dict(zip(terms, definitions))
+
+    def test_person_birth_date_no_death_date(self):
+        resp = self.app.get('/person/alfred-smith/')
+        personal_details = self.get_personal_details(resp.html)
+        keys = personal_details.keys()
+        self.assertIn('Born', keys)
+        self.assertNotIn('Died', keys)
+        self.assertEqual(
+            '1st April 1960',
+            personal_details['Born'],
+        )
+
+    def test_person_birth_date_and_death_date(self):
+        resp = self.app.get('/person/deceased-person/')
+        personal_details = self.get_personal_details(resp.html)
+        keys = personal_details.keys()
+        self.assertIn('Born', keys)
+        self.assertIn('Died', keys)
+        self.assertEqual(
+            '31st December 1965',
+            personal_details['Born'],
+        )
+        self.assertEqual(
+            '1st January 2010',
+            personal_details['Died'],
+        )

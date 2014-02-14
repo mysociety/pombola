@@ -97,7 +97,13 @@
         </dd>
     {% endif %}
 
-    {# TODO - add death date too if it exists #}
+    {% if object.date_of_death %}
+        <dt>Died</dt>
+        <dd>
+          {{ object.date_of_death }}
+        </dd>
+    {% endif %}
+
   </dl>
 
   {% include 'disqus_comments.html' %}
