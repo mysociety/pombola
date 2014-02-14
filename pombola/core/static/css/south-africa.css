@@ -1,4 +1,3 @@
-@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -3991,6 +3990,8 @@ NEWS & POLL
 
 .home-news {
   float: left;
+  width: 100%;
+  max-width: 100%;
 }
 .home-news h2 a:link {
   text-decoration: none;
@@ -4045,6 +4046,9 @@ ul.home-news-list li h3 a:link {
 ul.home-news-list li h3 a:hover,
 ul.home-news-list li h3 a:focus {
   text-decoration: underline;
+}
+ul.home-news-list li img {
+  width: 100%;
 }
 
 .social-links-list li {
