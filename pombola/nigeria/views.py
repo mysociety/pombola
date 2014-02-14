@@ -164,7 +164,7 @@ class SearchPollUnitNumberView(TemplateView):
         likely_areas = [a for a in all_areas if size_of_overlap[a] > 0.5]
 
         # If there are none display first five (better than nothing...)
-        if not len(likely_areas):
+        if not likely_areas:
             likely_areas = all_areas[:5]
 
         return self.convert_areas_to_places(likely_areas)
