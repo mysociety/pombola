@@ -1,0 +1,38 @@
+MapItCodeType,MapItAreaID,MapItAreaName,PombolaPlaceKindName,PombolaPlaceID,PombolaPlaceName
+FED,1041,Abeokuta North / Obafemi Owode & Odeda Fed. Const.,Federal Constituency,738,Abeokuta North/ Obafemi- Owode/Odeda
+FED,1203,AdoOdo/Ota / Otta,Federal Constituency,541,Ado-Odo/Ota
+FED,1105,Aliero,Federal Constituency,802,Aleiro/Gwandu/Jega
+FED,1117,Bogoro/Dass/Tafawa-B,Federal Constituency,814,Bogoro/Dass/Tafawa Balewa
+FED,1231,Ehime-Mb/Ihitte/U/OBONO,Federal Constituency,569,Ehime Mbano/Ihite-Uboma/ Obowo
+FED,1167,Isin/Irepodun/Ekiti & Oke-Ero,Federal Constituency,505,Ekiti/Isin/Irepodun/Oke-Ero
+FED,1048,Esan Central,Federal Constituency,745,Esan Central/Esan South/ Igueben
+FED,949,Gwagwala/Kuje,Federal Constituency,646,Abaji/Gwagwalada/Kwali/Kuje
+,,,Federal Constituency,988,Furore/Song
+FED,928,Hadejia/KafinHau,Federal Constituency,625,Hadejia/Kafin Hausa
+FED,1224,Idemili North/Idemili South,Federal Constituency,562,Idemili North/Idemili South
+FED,1174,Ikot Abasi,Federal Constituency,512,Ikot Abasi/Mkpat Enin/Eastern Obolo
+FED,1076,Ikot Ekpene,Federal Constituency,773,Ikot Ekpene/Essien Udim/Obot Akara
+FED,1023,Isuikwua/Umunneochi,Federal Constituency,720,Isuikwuato/Umunneochi
+FED,945,Kukawa/Guzamala Abadam/Mobbar,Federal Constituency,642,Kukawa/Mobbar/Abadam/Guzamali
+FED,1004,Kura/Madobi/Garum Mallam,Federal Constituency,701,Kura/Madobi/Garun Mallam
+FED,1038,LagosIsland I Federal Constituency,Federal Constituency,735,Lagos Island I
+,,,Federal Constituency,989,Lagos Mainland
+FED,1123,MalamMad/Kaugama,Federal Constituency,820,Mallam Madori/Kaugama
+FED,994,Marte & Monhuno & Nganzai,Federal Constituency,691,Monguno/Nganzai/Marte
+FED,1227,NnewiNort / South & Ekwusigo,Federal Constituency,565,Nnewi North/Nnewi South/Ekwusigo
+FED,1265,Obanliku/OBUDU/BEKWARRA,Federal Constituency,603,Obanliku/Obudu/Bekwarra
+FED,1005,Ogbomosho North & South/Orire,Federal Constituency,702,Ogbomoso North/Ogbomoso South/Orire
+FED,1074,Rano/Bunkure/Kibiya Constituency,Federal Constituency,771,Rano/Bunkure/Kibiya
+FED,965,Saki East/West/Atisbo,Federal Constituency,662,Saki East/Saki West/Atigbo
+,,,,,
+,,,,,
+,,,,,
+SEN,835,CROSS RIVER SOUTH,Senatorial District,987,CROSS RIVER SOUTH
+SEN,837,DELTA NORTH,Senatorial District,991,DELTA NORTH
+SEN,847,Ekiti NORTH,Senatorial District,992,EKITI NORTH
+SEN,851,FEDERAL CAPITAL TERRITORY,Senatorial District,832,FCT
+SEN,873,Kuje CENTRAL,Senatorial District,824,Kogi Central
+SEN,914,YOBE SOUTH,Senatorial District,881,Yobe South
+SEN,915,ZAMFARA CENTRAL,Senatorial District,893,Zamfara Central
+SEN,916,ZAMFARA NORTH,Senatorial District,924,Zamfara North
+SEN,917,ZAMFARA WEST,Senatorial District,841,Zamfara West
