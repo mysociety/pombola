@@ -139,6 +139,13 @@ class SearchPollUnitNumberView(TemplateView):
 
 
     def find_matching_places(self, code, polygons):
+        """Find MapIt areas of 'code' type that overlap with 'polygons'
+
+        Return every MapIt area of the specifiedE type such that at
+        least 50% of polygons (a MultiPolygon) overlaps it; if there
+        are no such areas, just return the 5 MapIt areas of the right
+        type with the largest overlap
+        """
 
         all_areas = Area.objects.filter(type__code=code, polygons__polygon__intersects=polygons).distinct()
 
