@@ -1,6 +1,7 @@
 import sys
 import os
 from datetime import date, time
+from StringIO import StringIO
 
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
@@ -21,6 +22,7 @@ from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
+from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
@@ -193,6 +195,166 @@ class SAPersonDetailViewTest(TestCase):
         speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
         self.assertEqual( speaker.name, 'Moomin Finn' )
 
+    def test_generation_of_interests_table(self):
+        #create data for the test
+        person = models.Person.objects.get(slug='moomin-finn')
+
+        category1 = Category.objects.create(name="Test Category", sort_order=1)
+        category2 = Category.objects.create(name="Test Category 2", sort_order=2)
+
+        release1 = Release.objects.create(name='2013', date=date(2013, 2, 16))
+        release2 = Release.objects.create(name='2012', date=date(2012, 2, 24))
+
+        entry1 = Entry.objects.create(person=person,release=release1,category=category1, sort_order=1)
+        entry2 = Entry.objects.create(person=person,release=release1,category=category1, sort_order=2)
+        entry3 = Entry.objects.create(person=person,release=release1,category=category2, sort_order=3)
+
+        line1 = EntryLineItem.objects.create(entry=entry1,key='Field1',value='Value1')
+        line2 = EntryLineItem.objects.create(entry=entry1,key='Field2',value='Value2')
+        line3 = EntryLineItem.objects.create(entry=entry2,key='Field1',value='Value3')
+        line4 = EntryLineItem.objects.create(entry=entry2,key='Field3',value='Value4')
+        line5 = EntryLineItem.objects.create(entry=entry3,key='Field4',value='Value5')
+
+        #actual output
+        context = self.client.get(reverse('person', args=('moomin-finn',))).context
+
+        #expected output
+        expected = {
+            1: {
+                'name': u'2013',
+                'categories': {
+                    1: {
+                        'name': u'Test Category',
+                        'headings': [
+                            u'Field1',
+                            u'Field2',
+                            u'Field3'
+                        ],
+                        'headingindex': {
+                            u'Field1': 0,
+                            u'Field2': 1,
+                            u'Field3': 2
+                        },
+                        'headingcount': 4,
+                        'entries': [
+                            [
+                                u'Value1',
+                                u'Value2',
+                                ''
+                            ],
+                            [
+                                u'Value3',
+                                '',
+                                u'Value4'
+                            ]
+                        ]
+                    },
+                    2: {
+                        'name': u'Test Category 2',
+                        'headings': [
+                            u'Field4'
+                        ],
+                        'headingindex': {
+                            u'Field4': 0
+                        },
+                        'headingcount': 2,
+                        'entries': [
+                            [
+                                u'Value5'
+                            ]
+                        ]
+                    }
+                }
+            }
+        }
+
+        #ideally the following test would be run - however the ordering of entrylineitems appears to be somewhat unpredictable
+        #self.assertEqual(context['interests'],expected)
+
+        self.assertEqual(len(context['interests'][1]['categories'][1]['headings']), len(expected[1]['categories'][1]['headings']))
+        self.assertEqual(len(context['interests'][1]['categories'][1]['entries']), len(expected[1]['categories'][1]['entries']))
+        self.assertEqual(len(context['interests'][1]['categories'][1]['entries'][0]), len(expected[1]['categories'][1]['entries'][0]))
+        self.assertEqual(len(context['interests'][1]['categories'][2]['headings']), len(expected[1]['categories'][2]['headings']))
+        self.assertEqual(len(context['interests'][1]['categories'][2]['entries']), len(expected[1]['categories'][2]['entries']))
+        self.assertEqual(len(context['interests'][1]['categories'][2]['entries'][0]), len(expected[1]['categories'][2]['entries'][0]))
+
+
+class SAOrganisationPartySubPageTest(TestCase):
+
+    def setUp(self):
+        org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
+        org_kind_parliament = models.OrganisationKind.objects.create(name='Parliament', slug='parliament')
+
+        party1 = models.Organisation.objects.create(name='Party1', slug='party1', kind=org_kind_party)
+        party2 = models.Organisation.objects.create(name='Party2', slug='party2', kind=org_kind_party)
+        house1 = models.Organisation.objects.create(name='House1', slug='house1', kind=org_kind_parliament)
+
+        positiontitle1 = models.PositionTitle.objects.create(name='Member', slug='member')
+        positiontitle2 = models.PositionTitle.objects.create(name='Delegate', slug='delegate')
+        positiontitle3 = models.PositionTitle.objects.create(name='Whip', slug='whip')
+
+        person1 = models.Person.objects.create(name='Person1', slug='person1')
+        person2 = models.Person.objects.create(name='Person2', slug='person2')
+        person3 = models.Person.objects.create(name='Person3', slug='person3')
+        person4 = models.Person.objects.create(name='Person4', slug='person4')
+        person5 = models.Person.objects.create(name='Person5', slug='person5')
+
+        position1 = models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
+        position2 = models.Position.objects.create(person=person2, organisation=party1, title=positiontitle1)
+        position3 = models.Position.objects.create(person=person3, organisation=party1, title=positiontitle1)
+        position4 = models.Position.objects.create(person=person4, organisation=party2, title=positiontitle1)
+        position5 = models.Position.objects.create(person=person5, organisation=party2, title=positiontitle2)
+
+        position6 = models.Position.objects.create(person=person1, organisation=house1, title=positiontitle1)
+        position7 = models.Position.objects.create(person=person2, organisation=house1, title=positiontitle1)
+        position8 = models.Position.objects.create(person=person3, organisation=house1, title=positiontitle1, end_date='2013-02-16')
+        position9 = models.Position.objects.create(person=person4, organisation=house1, title=positiontitle1)
+        position10 = models.Position.objects.create(person=person5, organisation=house1, title=positiontitle1, end_date='2013-02-16')
+
+        #check for person who is no longer an official, but still a member
+        position11 = models.Position.objects.create(person=person1, organisation=house1, title=positiontitle3, end_date='2013-02-16')
+
+    def test_display_current_members(self):
+        context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1'))).context
+        context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2'))).context
+
+        expected1 = ['<Position:  (Member at House1)>', '<Position:  (Member at House1)>']
+        expected2 = ['<Position:  (Member at House1)>']
+
+        self.assertQuerysetEqual(context1['sorted_positions'], expected1)
+        self.assertQuerysetEqual(context2['sorted_positions'], expected2)
+        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person1')
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person2')
+        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person4')
+
+    def test_display_past_members(self):
+        context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1')), {'historic': '1'}).context
+        context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2')), {'historic': '1'}).context
+
+        expected1 = ['<Position:  (Member at House1)>']
+        expected2 = ['<Position:  (Member at House1)>']
+
+        self.assertQuerysetEqual(context1['sorted_positions'], expected1)
+        self.assertQuerysetEqual(context2['sorted_positions'], expected2)
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person3')
+        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person5')
+
+    def test_display_all_members(self):
+        context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1')), {'all': '1'}).context
+        context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2')), {'all': '1'}).context
+
+        expected1 = ['<Position:  (Member at House1)>','<Position:  (Member at House1)>','<Position:  (Whip at House1)>','<Position:  (Member at House1)>']
+        expected2 = ['<Position:  (Member at House1)>','<Position:  (Member at House1)>']
+
+        self.assertQuerysetEqual(context1['sorted_positions'], expected1)
+        self.assertQuerysetEqual(context2['sorted_positions'], expected2)
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person3')
+        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person2')
+        self.assertEqual(context1['sorted_positions'][2].person.slug, 'person1')
+        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person5')
+        self.assertEqual(context2['sorted_positions'][1].person.slug, 'person4')
+
+
 class SAHansardIndexViewTest(TestCase):
 
     def setUp(self):
@@ -296,3 +458,183 @@ class SACommitteeIndexViewTest(TestCase):
         self.assertContains(response, section_name)
         self.assertContains(response, '<a href="/committee/%d">%s</a>' % (section.id, section_name), html=True)
         self.assertNotContains(response, "Empty section")
+
+
+class SAOrganisationDetailViewTest(WebTest):
+
+    def setUp(self):
+        # Create a test organisation and some associated models
+        person = models.Person.objects.create(
+            legal_name = 'Test Person',
+            slug       = 'test-person',
+        )
+
+        person2 = models.Person.objects.create(
+            legal_name = 'Zest ABCPerson',
+            slug       = 'zest-abcperson',
+        )
+
+        organisation_kind = models.OrganisationKind.objects.create(
+            name = 'Foo',
+            slug = 'foo',
+        )
+        organisation_kind.save()
+
+        organisation = models.Organisation.objects.create(
+            name = 'Test Org',
+            slug = 'test-org',
+            kind = organisation_kind,
+        )
+
+        title = models.PositionTitle.objects.create(
+            name = 'Test title',
+            slug = 'test-title',
+        )
+
+        models.Position.objects.create(
+            person = person,
+            title  = title,
+            organisation = organisation,
+        )
+
+        models.Position.objects.create(
+            person = person2,
+            title  = title,
+            organisation = organisation,
+        )
+
+    def test_ordering_of_positions(self):
+        # We expect the positions to be sorted by the "last name" of the
+        # people in them.
+        resp = self.app.get('/organisation/test-org/')
+        positions = resp.context['positions']
+        self.assertEqual(positions[0].person.legal_name, "Zest ABCPerson")
+        self.assertEqual(positions[1].person.legal_name, "Test Person")
+
+
+class FixPositionTitlesCommandTests(TestCase):
+    """Test the south_africa_fix_position_title command"""
+
+    def setUp(self):
+        # Create some organisations with some people in various positions,
+        # with various titles
+        self.person_a = models.Person.objects.create(
+            name="Person A",
+            slug="person-a")
+        self.person_b = models.Person.objects.create(
+            name="Person B",
+            slug="person-b")
+        self.person_c = models.Person.objects.create(
+            name="Person C",
+            slug="person-c")
+        self.person_d = models.Person.objects.create(
+            name="Person D",
+            slug="person-d")
+
+        self.party_kind = models.OrganisationKind.objects.create(
+            name="Party",
+            slug="party")
+        self.other_kind = models.OrganisationKind.objects.create(
+            name="Other Org",
+            slug="other-org")
+
+        self.organisation_a = models.Organisation.objects.create(
+            name="Organisation A",
+            kind=self.party_kind,
+            slug="organisation-a")
+        self.organisation_b = models.Organisation.objects.create(
+            name="Organisation B",
+            kind=self.party_kind,
+            slug="organisation-b")
+        self.organisation_c = models.Organisation.objects.create(
+            name="Organisation C",
+            kind=self.other_kind,
+            slug="organisation-c")
+
+        self.party_member_position_title = models.PositionTitle.objects.create(
+            name="Party Member",
+            slug="party-member")
+        self.member_position_title = models.PositionTitle.objects.create(
+            name="Member",
+            slug="member")
+        self.other_position_title = models.PositionTitle.objects.create(
+            name="Other Title",
+            slug="other-title")
+
+        self.position_a = models.Position.objects.create(
+            title=self.party_member_position_title,
+            person=self.person_a,
+            category="other",
+            organisation=self.organisation_a)
+        self.position_b = models.Position.objects.create(
+            title=self.party_member_position_title,
+            person=self.person_b,
+            category="other",
+            organisation=self.organisation_b)
+        self.position_c = models.Position.objects.create(
+            title=self.member_position_title,
+            person=self.person_c,
+            category="other",
+            organisation=self.organisation_a)
+        self.position_d = models.Position.objects.create(
+            title=self.other_position_title,
+            person=self.person_d,
+            category="other",
+            organisation=self.organisation_b)
+
+    def test_updates_titles_and_deletes_position(self):
+        self.assertEquals(
+            models.Position.objects.filter(title=self.party_member_position_title).count(),
+            2)
+        self.assertEquals(
+            models.Position.objects.filter(title=self.member_position_title).count(),
+            1)
+
+        call_command(
+            'south_africa_fix_position_titles',
+            stderr=StringIO(),
+            stdout=StringIO())
+
+        # Check things are re-assigned correctly
+        self.assertEquals(
+            models.Position.objects.filter(title=self.party_member_position_title).count(),
+            0)
+        self.assertEquals(
+            models.Position.objects.filter(title=self.member_position_title).count(),
+            3)
+        self.assertEquals(
+            models.Position.objects.get(id=self.position_a.id).title,
+            self.member_position_title)
+        self.assertEquals(
+            models.Position.objects.get(id=self.position_b.id).title,
+            self.member_position_title)
+
+        # Check that the old PositionTitle is deleted
+        self.assertEqual(
+            models.PositionTitle.objects.filter(name="Party Member").count(),
+            0)
+
+        # Check that nothing else got clobbered
+        self.assertEquals(
+            models.Position.objects.get(id=self.position_c.id).title,
+            self.member_position_title)
+        self.assertEquals(
+            models.Position.objects.get(id=self.position_d.id).title,
+            self.other_position_title)
+
+
+    def test_errors_if_position_titles_not_on_parties(self):
+        self.person_e = models.Person.objects.create(
+            name="Person E",
+            slug="person-e")
+        models.Position.objects.create(
+            title=self.party_member_position_title,
+            person=self.person_e,
+            category="other",
+            organisation=self.organisation_c)
+
+        with self.assertRaises(AssertionError):
+            call_command(
+                'south_africa_fix_position_titles',
+                stderr=StringIO(),
+                stdout=StringIO())

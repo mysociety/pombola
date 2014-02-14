@@ -336,7 +336,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
 
     def constituencies(self):
         """Return list of constituencies that this person is currently an politician for"""
-        return Place.objects.filter(position__in=self.politician_positions())
+        return Place.objects.filter(position__in=self.politician_positions()).distinct()
 
     def constituency_offices(self):
         """
@@ -941,6 +941,14 @@ class PositionQuerySet(models.query.GeoQuerySet):
     def order_by_person_name(self):
         """Sort by the place name"""
         return self.select_related('person').order_by('person__legal_name')
+
+    def current_unique_places(self):
+        """Return the list of places associated with current positions"""
+        result = sorted(set(position.place for position in self.currently_active()
+                          if position.place),
+                      key=lambda p: p.name)
+        return result
+
 
 class PositionManager(ManagerBase):
     def get_query_set(self):

@@ -18,7 +18,9 @@
           Shine your eye is an sms and web platform that facilitates engagement
           with National Assembly members and other elected officials.
         </h2>
-
+        <div class="embedded-video">
+            <iframe width="420" height="315" src="//www.youtube.com/embed/fKUeuGJ7xgs?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
         {% if editable_content %}
           <div class="infopage">
             {{ editable_content }}
@@ -37,7 +39,7 @@
 
         </form>
 
-                
+
         {% if settings.BLOG_RSS_FEED %}
             <h2>Latest News</h2>
             <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
@@ -57,15 +59,15 @@
             {% endif %}
         </div>
 
-                
+
         {% if settings.POLLDADDY_WIDGET_ID %}
             <style>
                 .pds-box { width: 100% !important; }
                 #polldaddy { margin-bottom: 30px; }
             </style>
-            
+
             <div id="polldaddy">
-                <h2>Latest Poll</h2>            
+                <h2>Latest Poll</h2>
                 <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
                 <noscript><a href="http://polldaddy.com/w.php?p={{ settings.POLLDADDY_WIDGET_ID }}">Take Our Poll</a></noscript>
             </div>
@@ -81,8 +83,8 @@
 
             <div class="social-and-tools">
                 <ul class="tools">
-                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t=Mzalendo" target="_blank" class="big-btn-text-fb">Facebook</a>
-                    <li><a href="https://twitter.com/share?via={{ settings.TWITTER_USERNAME }}&amp;text=Mzalendo&amp;url={{ request.build_absolute_uri }}" target="_blank" class="big-btn-text-tw">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}&amp;t=ShineYourEye" target="_blank" class="big-btn-text-fb">Facebook</a>
+                    <li><a href="https://twitter.com/share?via={{ settings.TWITTER_USERNAME }}&amp;text=ShineYourEye&amp;url={{ request.build_absolute_uri }}" target="_blank" class="big-btn-text-tw">Twitter</a></li>
                 </ul>            
             
                 <span class="tw-nub"></span>

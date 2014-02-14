@@ -1,9 +1,4 @@
-import random
-import datetime
-
-from django.core import exceptions
 from django_webtest import WebTest
-from django_date_extensions.fields import ApproximateDate
 
 from pombola.core import models
 
@@ -13,7 +8,7 @@ class PositionTest(WebTest):
             legal_name = 'Test Person',
             slug       = 'test-person',
         )
-        
+
         organisation_kind = models.OrganisationKind.objects.create(
             name = 'Foo',
             slug = 'foo',
@@ -25,7 +20,7 @@ class PositionTest(WebTest):
             slug = 'test-org',
             kind = organisation_kind,
         )
-        
+
         title = models.PositionTitle.objects.create(
             name = 'Test title',
             slug = 'test-title',

@@ -100,13 +100,18 @@ class Command(LabelCommand):
                 if not lonlat:
                     continue
 
+                abbreviated_party = party
+                m = re.search(r'\((?:|.*, )([A-Z\+]+)\)', party)
+                if m:
+                    abbreviated_party = m.group(1)
+
                 # Collapse whitespace in the name to a single space:
                 name = re.sub(r'(?ms)\s+', ' ', name)
 
                 if party_code:
-                    organisation_name = "%s Constituency Area (%s): %s" % (party, party_code, name)
+                    organisation_name = "%s Constituency Area (%s): %s" % (abbreviated_party, party_code, name)
                 else:
-                    organisation_name = "%s Constituency Area: %s" % (party, name)
+                    organisation_name = "%s Constituency Area: %s" % (abbreviated_party, name)
                 organisation_slug = slugify(organisation_name)
 
                 # Search for the area in the database via the constituency area organisation kind

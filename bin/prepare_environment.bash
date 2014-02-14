@@ -31,6 +31,13 @@ fi
 
 source $virtualenv_activate
 
+# Remove old pip packages installed with the -e switch
+rm -rf $virtualenv_dir/src/django-sayit
+rm -rf $virtualenv_dir/src/za-hansard
+rm -rf $virtualenv_dir/src/popit-resolver
+rm -rf $virtualenv_dir/src/popit-django
+rm -rf $virtualenv_dir/src/pygeocoder
+
 # Upgrade pip to a secure version
 # curl -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
 # Revert to the line above once we can get a newer setuptools from Debian, or

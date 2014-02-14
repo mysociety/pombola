@@ -11,17 +11,15 @@
 </a>
 
 {% if not skip_positions %}
-  {% for position in object.position_set.all.currently_active %}
-    {% if position.place %}
+  {% for place in object.position_set.all.current_unique_places %}
       <div class="position-place">
-        <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
+        <a href="{{ place.get_absolute_url }}">{{ place.name }}</a>
 
-        {% if position.place.parent_place %}
-          <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
-          {{ position.place.parent_place.kind.name }}
+        {% if place.parent_place %}
+          <a href="{{ place.parent_place.get_absolute_url }}">{{ place.parent_place.name }}</a>
+          {{ place.parent_place.kind.name }}
         {% endif %}
       </div>
-    {% endif %}
   {% endfor %}
 {% endif %}
 

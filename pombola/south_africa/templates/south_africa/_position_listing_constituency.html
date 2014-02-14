@@ -1,0 +1,33 @@
+{% load thumbnail %}
+
+<ul class="unstyled-list constituency-positions">
+{% for position in positions %}
+<li class="list-of-things-item person-list-item">
+    <a href="{{ position.person.get_absolute_url }}">
+        {% thumbnail position.person.primary_image "58x78" crop="center" as im %}
+        <img src="{{ im.url }}" alt="{{ position.person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% empty %}
+        <img src="{{STATIC_URL}}images/person-90x90.jpg" height="58" width="58"/>
+        {% endthumbnail %}
+
+        <span class="name">{{ position.person.name }}</span>
+    </a>
+
+    <div class="position-title">{{ position.title }}</div>
+
+    {% if position.person.parties %}
+      <div class="position-parties">
+          {% for party in position.person.parties %}
+            <a class="position-party" href="{{ party.get_absolute_url }}">{{ party.name }}</a>
+          {% endfor %}
+      </div>
+    {% endif %}
+
+    {% for contact in position.person.contacts.all %}
+      <div class="person-contact {{ contact.kind.slug }}"><span class="contact-kind">{{ contact.kind }}: </span>{{ contact.value }}</div>
+    {% endfor %}
+</li>
+{% empty %}
+    <li>No records found.</li>
+{% endfor %}
+</ul>

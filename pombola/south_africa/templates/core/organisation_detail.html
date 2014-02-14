@@ -20,10 +20,12 @@
   {% endif %}
 
   <h2>People</h2>
-  {% include "core/_position_listing.html" with positions=object.position_set.all %}
 
-  {% if object.kind.slug == 'constituency-office' %}
+  {% if object.kind.slug == 'constituency-office' or object.kind.slug == 'constituency-area' %}
+    {% include "south_africa/_position_listing_constituency.html" with positions=positions %}
     {% include 'disqus_comments.html' %}
+  {% else %}
+    {% include "core/_position_listing.html" with positions=positions %}
   {% endif %}
 
 {% endblock %}
@@ -101,6 +103,11 @@
       </li>
       {% endfor %}
     </ul>
+    {% if object.kind.slug == 'constituency-office' %}
+      <div class="constituency-office-feedback">
+        <p>Give feedback on your visit to your constituency office. Take a photo of your office and send it to <a href="mailto:contact@pa.org.za">contact@pa.org.za</a>.</p>
+      </div>
+    {% endif %}
   </div>
 
   {% endif %}

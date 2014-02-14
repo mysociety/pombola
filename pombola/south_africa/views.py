@@ -13,6 +13,7 @@ from django.views.generic import RedirectView, TemplateView
 from django.shortcuts import get_object_or_404
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Q
 
 import mapit
 from haystack.views import SearchView
@@ -213,6 +214,13 @@ class SAOrganisationDetailView(OrganisationDetailView):
         if self.object.kind.slug == 'parliament':
             self.add_parliament_counts_to_context_data(context)
 
+        # Sort the list of positions in an organisation by an approximation
+        # of their holder's last name.
+        context['positions'] = sorted(
+            context['positions'],
+            key=lambda position: position.person.legal_name.split()[-1]
+            )
+
         return context
 
     def add_parliament_counts_to_context_data(self, context):
@@ -253,6 +261,27 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
                 context['sorted_positions'] = all_positions.filter(title__slug='delegate')
             elif self.request.GET.get('office'):
                 context['sorted_positions'] = all_positions.exclude(title__slug='member')
+
+            if self.request.GET.get('order') == 'place':
+                context['sorted_positions'] = context['sorted_positions'].order_by_place()
+            else:
+                context['sorted_positions'] = context['sorted_positions'].order_by_person_name()
+
+        if self.kwargs['sub_page'] == 'party':
+            context['party'] = get_object_or_404(models.Organisation,slug=self.kwargs['sub_page_identifier'])
+
+            context['sorted_positions'] = context['all_positions'] = self.object.position_set.filter(person__position__organisation__slug=self.kwargs['sub_page_identifier'])
+
+            if self.request.GET.get('all'):
+                context['sorted_positions'] = context['sorted_positions']
+            elif self.request.GET.get('historic'):
+                context['historic'] = True
+                #FIXME - limited to members and delegates so that current members who are no longer officials are not displayed, but this
+                #means that if a former member was an official this is not shown
+                context['sorted_positions'] = context['sorted_positions'].filter(Q(title__slug='member') | Q(title__slug='delegate')).currently_inactive()
+            else:
+                context['historic'] = True
+                context['sorted_positions'] = context['sorted_positions'].currently_active()
 
             if self.request.GET.get('order') == 'place':
                 context['sorted_positions'] = context['sorted_positions'].order_by_place()
@@ -308,6 +337,48 @@ class SAPersonDetail(PersonDetail):
         return speeches
 
 
+    def get_tabulated_interests(self):
+        interests = self.object.interests_register_entries.all()
+        tabulated = {}
+
+        for entry in interests:
+            release = entry.release
+            category = entry.category
+
+            if release.id not in tabulated:
+                tabulated[release.id] = {'name':release.name, 'categories':{}}
+
+            if category.id not in tabulated[release.id]['categories']:
+                tabulated[release.id]['categories'][category.id] = {
+                    'name': category.name,
+                    'headings': [],
+                    'headingindex': {},
+                    'headingcount': 1,
+                    'entries': []
+                }
+
+            #create row list
+            tabulated[release.id]['categories'][category.id]['entries'].append(
+                ['']*(tabulated[entry.release.id]['categories'][entry.category.id]['headingcount']-1)
+            )
+
+            #loop through each 'cell' in the row
+            for entrylistitem in entry.line_items.all():
+                #if the heading for the column does not yet exist, create it
+                if entrylistitem.key not in tabulated[entry.release.id]['categories'][entry.category.id]['headingindex']:
+                    tabulated[release.id]['categories'][category.id]['headingindex'][entrylistitem.key] = tabulated[entry.release.id]['categories'][entry.category.id]['headingcount']-1
+                    tabulated[release.id]['categories'][category.id]['headingcount']+=1
+                    tabulated[release.id]['categories'][category.id]['headings'].append(entrylistitem.key)
+
+                    #loop through each row that already exists to ensure lists are the same size
+                    for (key, line) in enumerate(tabulated[release.id]['categories'][category.id]['entries']):
+                        tabulated[entry.release.id]['categories'][entry.category.id]['entries'][key].append('')
+
+                #record the 'cell' in the correct position in the row list
+                tabulated[release.id]['categories'][category.id]['entries'][-1][tabulated[release.id]['categories'][category.id]['headingindex'][entrylistitem.key]] = entrylistitem.value
+
+        return tabulated
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.object.contacts.filter(kind__slug='twitter')
@@ -321,6 +392,8 @@ class SAPersonDetail(PersonDetail):
         context['hansard']   = self.get_recent_speeches_for_section("Hansard")
         context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
         context['question']  = self.get_recent_speeches_for_section("Questions")
+
+        context['interests'] = self.get_tabulated_interests()
 
         return context
 
@@ -337,7 +410,16 @@ if settings.ENABLED_FEATURES['speeches']:
 class SASearchView(SearchView):
 
     def __init__(self, *args, **kwargs):
-        kwargs['searchqueryset'] = SearchQuerySet().models(*search_models).highlight()
+        # We can't just order by -start_date, since that will put any
+        # Place and PositionTitle results (where there is no
+        # start_date in the index) at the very end, after potentially
+        # thousands of Speech results.  We can get around this by
+        # ordering on django_ct first, since places and positiontitles
+        # have content types that just happen to come earlier in the
+        # alphabet than that of speeches.
+        kwargs['searchqueryset'] = SearchQuerySet().models(*search_models). \
+            order_by('django_ct', '-start_date'). \
+            highlight()
         return super(SASearchView, self).__init__(*args, **kwargs)
 
     def extra_context(self):
@@ -383,6 +465,7 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
 
         # Get the top level section, or 404
         top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
+        context['show_lateness_warning'] = (self.top_section_name == 'Hansard')
 
         # As we know that the hansard section structure is
         # "Hansard" -> yyyy -> mm -> dd -> section -> subsection -> [speeches]
@@ -433,11 +516,68 @@ class SACommitteeIndex(SASpeechesIndex):
     section_parent_field = 'section__parent__parent__parent'
     sections_to_show = 25
 
+def questions_section_sort_key(section):
+    """This function helps to sort question sections
+
+    The intention is to have questions for the President first, then
+    Deputy President, then offices associated with the presidency,
+    then questions to ministers sorted by the name of the ministry,
+    and finally anything else sorted just on the title.
+
+    >>> questions_section_sort_key(Section(title="for the President"))
+    'AAAfor the President'
+    >>> questions_section_sort_key(Section(title="ask the deputy president"))
+    'BBBask the deputy president'
+    >>> questions_section_sort_key(Section(title="about the Presidency"))
+    'CCCabout the Presidency'
+    >>> questions_section_sort_key(Section(title="Questions asked to Minister for Foo"))
+    'DDDFoo'
+    >>> questions_section_sort_key(Section(title="Questions asked to the Minister for Bar"))
+    'DDDBar'
+    >>> questions_section_sort_key(Section(title="Questions asked to Minister of Baz"))
+    'DDDBaz'
+    >>> questions_section_sort_key(Section(title="Minister of Quux"))
+    'DDDQuux'
+    >>> questions_section_sort_key(Section(title="Random"))
+    'MMMRandom'
+    """
+    title = section.title
+    if re.search(r'(?i)Deputy\s+President', title):
+        return "BBB" + title
+    if re.search(r'(?i)President', title):
+        return "AAA" + title
+    if re.search(r'(?i)Presidency', title):
+        return "CCC" + title
+    stripped_title = title
+    for regexp in (r'^(?i)Questions\s+asked\s+to\s+(the\s+)?Minister\s+(of|for(\s+the)?)\s+',
+                   r'^(?i)Minister\s+(of|for(\s+the)?)\s+'):
+        stripped_title = re.sub(regexp, '', stripped_title)
+    if stripped_title == title:
+        # i.e. it wasn't questions for a minister
+        return "MMM" + title
+    return "DDD" + stripped_title
+
 class SAQuestionIndex(SASpeechesIndex):
-    template_name = 'south_africa/hansard_index.html'
+    template_name = 'south_africa/question_index.html'
     top_section_name='Questions'
-    section_parent_field = 'section__parent__parent'
-    sections_to_show = 25
+
+    def get_context_data(self, **kwargs):
+        context = super(SASpeechesIndex, self).get_context_data(**kwargs)
+
+        # Get the top level section, or 404
+        top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
+
+        # the question section structure is
+        # "Questions" -> "Questions asked to Minister for X" -> "Date" ...
+
+        sections = Section \
+            .objects \
+            .filter(parent=top_section) \
+            .annotate(speech_count=Count('children__speech__id'))
+
+        context['entries'] = sorted(sections,
+                                    key=questions_section_sort_key)
+        return context
 
 class SACommitteeSpeechRedirectView(RedirectView):
 

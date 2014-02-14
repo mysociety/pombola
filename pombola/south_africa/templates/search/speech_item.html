@@ -1,4 +1,19 @@
 <li class="speech-list-item list-of-things-item">
-        <span class="name"><a href="{{ result.object.get_absolute_url }}">{{ result.object.section|default:"Result" }}</a></span>
+  {% if result.object.section.get_ancestors %}
+    <h3>
+        {{ result.object.section.get_ancestors.0.title }}&nbsp;
+        <span class="meta">
+          {% for section in result.object.section.get_ancestors %}
+            {% if not forloop.first %}
+                {{ section.title }}
+                {% if not forloop.last %}&nbsp;&gt;&nbsp;{% endif %}
+            {% endif %}
+          {% endfor %}
+        </span>
+    </h3>
+  {% endif %}
+    <a href="{{ result.object.get_absolute_url }}">
+        <span class="name"><strong>{{ result.object.speaker }}: </strong></span>
         <span class="description">{{ result.highlighted.0|safe }}</span>
+    </a>
 </li>

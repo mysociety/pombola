@@ -10,6 +10,10 @@
 
 {% block content %}
 
+{% if show_lateness_warning %}
+  <p>Note: There is a delay in the release of Hansard transcripts of about six months</p>
+{% endif %}
+
 <div class="clearfix">
   <p style="float: right;">
     <a class="js-reveal-all-link" href="#">Expand all subsections</a>

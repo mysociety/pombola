@@ -193,6 +193,11 @@ p {
     margin-bottom: 1em;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* Tables */
 table {
     width: 100%;
@@ -267,6 +272,14 @@ small {
     color: $colour_blackish;
 }
 
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
+
 #page {
     padding: 10px;
     .title-space {
@@ -295,6 +308,20 @@ small {
     position: relative;
 }
 
+.page-title {
+    @media only all and (max-width: 1024px), print {
+        -ms-word-break: break-all;
+         word-break: break-all;
+
+         // Non standard for webkit
+         word-break: break-word;
+            -webkit-hyphens: auto;
+               -moz-hyphens: auto;
+                    hyphens: auto;
+    }
+
+}
+
 .feedback-button {
     position: absolute;
     bottom: 0;
@@ -315,7 +342,17 @@ small {
         background-color: $colour_primary;
         text-decoration: none;
     }
+}
 
+#ajax_dialog_subcontent {
+    width: 100%;
+    max-width: 300px;
+    textarea {
+        width: 100%;
+        @media only all and (max-width: 640px), print {
+            max-width: 268px;
+        }
+    }
 }
 
 /*
@@ -654,7 +691,7 @@ HOME PAGE INTRO BOX
 
     }
     .next {
-        background-position-x: -13px;
+        background-position: -13px 0;
         margin-left: 10px;
     }
 }
@@ -951,21 +988,37 @@ ul.home-news-list {
         margin-right: 8px;
         &:hover,
         &:focus {
-            background-position-y: -41px;
+            background-position: 0 -41px;
         }
     }
 
     .facebook-social-icon {
-        background-position-x: 0;
+        background-position: 0 -1px;
+        &:hover,
+        &:focus {
+            background-position: 0 -41px;
+        }
     }
     .twitter-social-icon {
-        background-position-x: -51px;
+        background-position: -51px -1px;
+        &:hover,
+        &:focus {
+            background-position: -51px -41px;
+        }
     }
     .youtube-social-icon {
-        background-position-x: -101px;
+        background-position: -101px -1px;
+        &:hover,
+        &:focus {
+            background-position: -101px -41px;
+        }
     }
     .rss-social-icon {
-        background-position-x: -150px;
+        background-position: -150px -1px;
+        &:hover,
+        &:focus {
+            background-position: -150px -41px;
+        }
     }
 }
 
@@ -1090,14 +1143,44 @@ FOOTER
     div.attribution {
         max-width: 960px;
         margin: .5em auto;
-        @media only all and (min-width: 640px), print {
-           text-align: right;
-        }
         font-size: inherit;
+        text-align: left;
     }
     .header-search {
         display: none;
         visibility: hdden;
+    }
+}
+
+.footer-full-width {
+    width: 100%;
+    border-top: 1px solid lighten($colour_footer_background, 5%);
+    padding-top: 1.5em;
+    margin-top: 0.5em;
+    float: left;
+    .layout-major-minor {
+        @media only all and (max-width: 640px), print {
+           padding: 0 10px;
+        }
+    }
+    .major-column {
+        @media only all and (min-width: 640px), print {
+           margin-bottom: 0 !important;
+        }
+    }
+}
+#site-footer .disclaimer {
+    p {
+        font-size: 11px;
+        color: #808080;
+    }
+}
+#site-footer .utilities {
+    li:first-child {
+        margin-left: 0px;
+        @media only all and (min-width: 640px), print {
+           margin-left:12px;
+        }
     }
 }
 
@@ -1184,7 +1267,9 @@ FOOTER
             margin-bottom: 1em;
         }
     }
-
+    .constituency-office-feedback {
+        font-size: 0.875em;
+    }
 }
 
 /* Generic listing styles */
@@ -1231,7 +1316,9 @@ FOOTER
         margin-bottom: 0.25em;
     }
     .position-parties,
-    .position-place {
+    .position-place,
+    .person-contact,
+    .position-title {
         display: inline-block;
         font-size: 0.875em;
         a:link,
@@ -1259,6 +1346,46 @@ FOOTER
             margin-right: 20px;
         }
     }
+
+    .person-contact {
+        margin-right:5px;
+
+        .contact-kind {
+            @include lato-bold;
+            color: $colour_blackish;
+            letter-spacing: 0.05em;
+            text-transform:uppercase;
+            font-size:0.9em;
+        }
+    }
+}
+
+.constituency-positions {
+    .position-parties,
+    .position-place,
+    .position-title {
+        display: block;
+    }
+
+    .position-title {
+        background: transparent url('/static/images/person-16x16.jpg') left center no-repeat;
+        padding-left: 20px;
+        margin-left:70px;
+    }
+}
+
+
+/* Search page */
+.search-box {
+    margin-bottom: 1.5em;
+}
+
+#page .search-wrap {
+    padding-bottom: 10px;
+}
+
+.results-group {
+    margin-bottom: 1.5em;
 }
 
 
@@ -1431,6 +1558,7 @@ ul.pager {
     width: 100%;
     overflow: hidden;
     position: relative;
+    margin-bottom: 2em;
 
     @media only all and (min-width: 640px), print {
         height: 15.5em;
@@ -1514,12 +1642,17 @@ ul.pager {
 }
 
 /* Newsletter page */
+.newsletter-sidebar {
+    margin: 1.5em 0;
+}
 .page-wrapper {
     .email-signup {
         input[type="text"] {
             border: 1px solid $colour_middling_grey;
-            border-right: none;
-            padding: 0.74em;
+            margin-bottom: 0.5em;
+        }
+        .button {
+            @include border_radius(3px);
         }
     }
 }
@@ -1581,6 +1714,9 @@ ul.pager {
     a {
         color: $colour-black;
         text-decoration: none;
+        @media only all and (max-width: 640px), print {
+            margin-right: 5em;
+        }
         &:hover,
         &:focus {
             color: $colour-primary;
@@ -1685,6 +1821,29 @@ ul.pager {
         p {
             margin: 0 0 1em;
         }
+        .person-appearances-summary {
+            ul li p {
+                margin-bottom: 0.5em;
+            }
+            @media only all and (min-width: 550px), print {
+                float: left;
+                width: 49%;
+                margin-right: 1%;
+
+                .one-appearance {
+                    float: none;
+                    width: 100%;
+                    margin-right: 0px;
+                }
+            }
+        }
+        @media only all and (min-width: 550px), print {
+            .one-appearance {
+                float: none;
+                width: 100%;
+                margin-right: 0px;
+            }
+        }
     }
 
     .person-appearances {
@@ -1693,10 +1852,18 @@ ul.pager {
             font-size: 1.142857143em;
         }
         li {
-            margin-bottom: 1em;
+            margin-bottom: 0.5em;
         }
+        font-size: 0.9em;
     }
 }
+
+#profile {
+    h2 {
+        font-size: 1em;
+    }
+}
+
 
 .tab-links {
     border-bottom: 1px solid #d2d2ce;
@@ -1710,7 +1877,10 @@ ul.pager {
             background: #fff;
             margin-bottom: 3px;
             text-decoration: none;
-            font-size: 0.875em;
+            font-size: 0.75em;
+            @media only all and (min-width: 640px), print {
+                font-size: 0.875em;
+            }
             &.active {
                 border-bottom: 3px solid #d2d2ce;
                 margin-bottom: 0;
@@ -1788,6 +1958,9 @@ ul.pager {
 
 #map_canvas {
     margin-bottom: 2em;
+    img {
+        max-width: none
+    }
 }
 
 .politicians-results {
@@ -1940,6 +2113,14 @@ ul.pager {
             float: left;
         }
        }
+       &.thirds {
+            .major-column {
+                width: 64.5%;
+            }
+            .minor-column {
+                width: 33%
+            }
+       }
    }
    .fifty-fifty-layout {
         .column {
@@ -1951,9 +2132,3 @@ ul.pager {
         }
    }
 }
-
-
-
-
-
-
