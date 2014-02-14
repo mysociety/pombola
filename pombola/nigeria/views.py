@@ -155,8 +155,9 @@ class SearchPollUnitNumberView(TemplateView):
             intersection_fraction_of_smallest_area = intersection.area / smallest_area
             size_of_overlap[area] = intersection_fraction_of_smallest_area
 
-        # Sort the results by the overlap size
+        # Sort the results by the overlap size; largest overlap first
         all_areas = sorted(all_areas,
+                           reverse=True,
                            key=lambda a: size_of_overlap[a])
 
         # get the most overlapping ones
