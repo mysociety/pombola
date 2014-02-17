@@ -1,8 +1,8 @@
 """Change party of everyone currently in ACN, ANPP and CPP to APC.
 
 Update Positions of every current member of ACN, ANPP, and CPP to
-have an end_date of 2013-07-31, and for each of them, make a new
-Position with that as the start date, no end date, and organisation
+have an end_date of 2013-07-30, and for each of them, make a new
+Position with start_date 2013-07-31, no end date, and organisation
 APC.
 
 This is all very hard-coded, but might be useful as the bones of
@@ -24,7 +24,8 @@ class Command(NoArgsCommand):
             'congress-for-progressive-change',
             )
 
-        change_date = ApproximateDate(2013, 7, 31)
+        old_party_end = ApproximateDate(2013, 7, 30)
+        new_party_start = ApproximateDate(2013, 7, 31)
 
         new_party_slug = 'all-progressives-congress-apc'
         new_organisation = Organisation.objects.get(slug=new_party_slug)
@@ -39,13 +40,13 @@ class Command(NoArgsCommand):
         # Not using a bulk update because we want to the save
         # method of the Positions to be called
         for position in positions:
-            position.end_date = change_date
+            position.end_date = old_party_end
             position.save()
 
             # Blank the primary key of the Position so that it will
             # get a new one when saved.
             position.pk = None
-            position.start_date = change_date
+            position.start_date = new_party_start
             position.end_date = None
             position.organisation = new_organisation
             position.save()
