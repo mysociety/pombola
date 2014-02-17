@@ -8,6 +8,7 @@ APC.
 This is all very hard-coded, but might be useful as the bones of
 a change party command later on.
 """
+import datetime
 
 from django.core.management.base import NoArgsCommand
 
@@ -24,6 +25,7 @@ class Command(NoArgsCommand):
             'congress-for-progressive-change',
             )
 
+        change_date = datetime.date(2013, 7, 31)
         old_party_end = ApproximateDate(2013, 7, 30)
         new_party_start = ApproximateDate(2013, 7, 31)
 
@@ -34,7 +36,7 @@ class Command(NoArgsCommand):
                          title__slug='member',
                          organisation__slug__in=old_party_slugs,
                          )
-                     .currently_active()
+                     .currently_active(when=change_date)
                      )
 
         # Not using a bulk update because we want to the save
