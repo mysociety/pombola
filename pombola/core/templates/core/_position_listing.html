@@ -36,12 +36,9 @@
 
                 Member of
                 {% for party in position.person.parties %}
-                    {% if forloop.revcounter0 %}
-                        {% if forloop.last %}
-                            and
-                        {% else %}
-                            ,
-                        {% endif %}
+                    {% if forloop.first %}
+                    {% else %}
+                        {% if forloop.last %} and {% else %}, {% endif %}
                     {% endif %}
                     <a href="{{ party.get_absolute_url }}">{{ party.name }}</a>
                 {% endfor %}.
