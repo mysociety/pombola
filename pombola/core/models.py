@@ -602,10 +602,14 @@ class Place(ModelBase, ScorecardMixin):
             return None
 
     def related_people(self):
-        # Can't order by the sorting_end_date_high of position
-        # because that ruins the distinct.
-        return Person.objects.filter(position__place=self).distinct()#.order_by('-position__sorting_end_date_high')
-
+        return (Person.objects
+                    .filter(
+                        position__in=self.position_set.all()
+                            .currently_active()
+                            .distinct('person')
+                        )
+                    .order_by('-position__sorting_end_date_high')
+                )
 
     def parent_places(self):
         """Return an array of all the parent places."""
