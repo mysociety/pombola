@@ -380,7 +380,8 @@ HEADER
     background: url('/static/images/za-logo-mobile.png') left center no-repeat;
     text-align: left;
     @include background-size(160.5px 76.5px);
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
+    margin-top: 1em;
     @media only all and (min-width: 640px), print {
       background: url('/static/images/za-logo.png') 0 center no-repeat;
       width: 550px;
