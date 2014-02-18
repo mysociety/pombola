@@ -45,12 +45,12 @@ PYTHONIOENCODING=utf-8
 !!(* } elsif ($vhost eq 'za-pombola.staging.mysociety.org') { *)!!
 
 # NOTE - this should probably be removed once the live site is launched
-7 7 * * * !!(*= $user *)!! update_za_hansard.bash
+13 0 * * * !!(*= $user *)!! update_za_hansard.bash
 
 !!(* } elsif ($vhost eq 'www.pa.org.za') { *)!!
 
 # NOTE - until the live site is launched, crons are turned off in vhosts.pl
-7 7 * * * !!(*= $user *)!! update_za_hansard.bash
+13 1 * * * !!(*= $user *)!! update_za_hansard.bash
 
 !!(* } else { *)!!
 !!(* } *)!!
