@@ -27,7 +27,11 @@
                 </section>
             </li>
         {% endfor %}
+    </ul>
 
+    <h3>People Related to Smaller Places in {{ object.name }}</h3>
+
+    <ul class="listing">
         {% for child_place in object.child_places.all %}
             {% with position=child_place.current_politician_position %}
                 {% with person=position.person %}
