@@ -219,8 +219,8 @@ class PersonPlaceTest(unittest.TestCase):
             organisation = self.organisation,
             place = self.place_a,
             title = self.position_title_a,
-            start_date = '',
-            end_date = '',
+            start_date = '2000-01-01',
+            end_date = 'future',
             category = 'political',
         )
         self.position_b = models.Position.objects.create(
@@ -239,8 +239,8 @@ class PersonPlaceTest(unittest.TestCase):
             organisation = self.organisation,
             place = self.place_a,
             title = self.position_title_b,
-            start_date = '',
-            end_date = '',
+            start_date = '2000-01-01',
+            end_date = 'future',
             category = 'political',
         )
         self.position_d = models.Position.objects.create(
@@ -261,6 +261,17 @@ class PersonPlaceTest(unittest.TestCase):
             title = self.position_title_c,
             start_date = '',
             end_date = '',
+            category = 'political',
+        )
+
+        # A non-current position associated with place_a
+        self.position_f = models.Position.objects.create(
+            person = self.person,
+            organisation = self.organisation,
+            place = self.place_a,
+            title = self.position_title_b,
+            start_date = '2000-01-01',
+            end_date = '2001-12-31',
             category = 'political',
         )
 
@@ -290,6 +301,23 @@ class PersonPlaceTest(unittest.TestCase):
     def test_constituencies_comes_from_political_positions(self):
         self.assertTrue(self.place_d not in self.person.constituencies())
 
+    def test_place_related_people_no_filter(self):
+        related_people = self.place_a.related_people(
+            positions_filter=lambda qs: qs)
+        self.assertEqual(1, len(related_people))
+        self.assertEqual(related_people[0][0],
+                         self.person)
+        self.assertEqual(set(related_people[0][1]),
+                         set([self.position_a, self.position_c]))
+
+    def test_place_related_people_with_filter(self):
+        related_people = self.place_a.related_people(
+            positions_filter=lambda qs: qs.filter(title__slug='job-title'))
+        self.assertEqual(1, len(related_people))
+        self.assertEqual(related_people[0][0],
+                         self.person)
+        self.assertEqual(set(related_people[0][1]),
+                         set([self.position_a]))
 
 
 class SummaryTest( unittest.TestCase ):
