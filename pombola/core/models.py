@@ -622,6 +622,16 @@ class Place(ModelBase, ScorecardMixin):
         return sorted(result_dict.items(),
                       key=lambda t: t[0].legal_name.split()[-1])
 
+    def related_people_child_places(self, positions_filter=significant_positions_filter):
+        """Find significant people associated with child places"""
+
+        results = []
+        for child_place in self.child_places.all():
+            people_and_positions = child_place.related_people(positions_filter)
+            if people_and_positions:
+                results.append((child_place, people_and_positions))
+        return results
+
     def parent_places(self):
         """Return an array of all the parent places."""
         if self.parent_place:

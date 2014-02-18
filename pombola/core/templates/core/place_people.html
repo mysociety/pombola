@@ -18,19 +18,28 @@
         {% endfor %}
     </ul>
 
-    <h3>People Related to Smaller Places in {{ object.name }}</h3>
+    {% with child_places=object.related_people_child_places %}
+      {% if child_places %}
 
-    <ul class="listing">
-        {% for child_place in object.child_places.all %}
-            {% for person_and_position in child_place.related_people %}
-              {% with person=person_and_position.0 positions=person_and_position.1 %}
-                    {% if person %}
-                       {% include "core/_place_people_position.html" %}
-                    {% endif %}
-                {% endwith %}
+        <h3>People Related to Smaller Places in {{ object.name }}</h3>
+
+        <ul class="listing">
+            {% for cpt in child_places %}
+                {% with child_place=cpt.0 all_people=cpt.1 %}
+                  {% for person_and_positions in all_people %}
+                      {% with person=person_and_positions.0 positions=person_and_positions.1 %}
+                            {% if person %}
+                               {% include "core/_place_people_position.html" %}
+                            {% endif %}
+                      {% endwith %}
+                  {% endfor %}
+               {% endwith %}
             {% endfor %}
-        {% endfor %}
-    </ul>
+        </ul>
+
+      {% endif %}
+    {% endwith %}
+
   </div>
 
 {% endblock %}
