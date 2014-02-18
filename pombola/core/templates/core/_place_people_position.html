@@ -1,0 +1,21 @@
+{% load thumbnail %}
+
+<li>
+    <a href="{{ person.get_absolute_url }}">
+        {% thumbnail person.primary_image "90x90" as im %}
+        <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% empty %}
+        <img src="{{STATIC_URL}}images/person-90x90.jpg" />
+        {% endthumbnail %}
+    </a>
+
+    <section>
+        <h4><a href="{{ person.get_absolute_url }}">{{ person.name }}</a></h4>
+          <ul>
+            {% for position in positions %}
+                {{ position.title }} of <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}
+            {% endfor %}
+          </ul>
+        <div class="read-more-wrap"><a href="{{ person.get_absolute_url }}" class="read-more">read more</a></div>
+    </section>
+</li>
