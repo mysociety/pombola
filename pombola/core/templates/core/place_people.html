@@ -40,10 +40,10 @@
 
     <ul class="listing">
         {% for child_place in object.child_places.all %}
-            {% with position=child_place.current_politician_position %}
-                {% with person=position.person %}
+            {% for person_and_position in child_place.related_people %}
+              {% with person=person_and_position.0 positions=person_and_position.1 %}
                     {% if person %}
-                        <li>                
+                        <li>
                             <a href="{{ person.get_absolute_url }}">
                                 {% thumbnail person.primary_image "90x90" as im %}
                                     <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
@@ -54,13 +54,17 @@
 
                             <section>
                                 <h4><a href="{{ person.get_absolute_url }}">{{ person.name }}</a></h4>
-                                <p>{{ position.title }} of <a href="{{ child_place.get_absolute_url }}">{{ child_place.name }}</a></p>
+                                <ul>
+                                  {% for position in positions %}
+                                      {{ position.title }} of <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}
+                                  {% endfor %}
+                                </ul>
                                 <div class="read-more-wrap"><a href="{{ person.get_absolute_url }}" class="read-more">read more</a></div>
                             </section>
                         </li>
                     {% endif %}
                 {% endwith %}
-            {% endwith %}
+            {% endfor %}
         {% endfor %}
     </ul>
   </div>
