@@ -2,8 +2,14 @@
 
 {% block title %}Home{% endblock %}
 
+{% block css_headers %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.css" />
+{% endblock %}
+
 {% block extra_js_to_load %}
     pombola_settings.extra_js.push( 'js/feeds.js' );
+    pombola_settings.extra_js.push( 'js/libs/responsive-carousel.js' );
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -51,12 +57,8 @@
     </div>
     <div class="home-right">
         <h2>Focus On</h2>
-        <div id="home-featured-person">
-            {% if featured_person != None %}
-                {% include 'core/person_feature.html' %}
-            {% else %}
-                <div class="featured-person featured-person-placeholder"></div>
-            {% endif %}
+        <div id="home-carousel" class="carousel">
+            {% include "spinner/carousel-slides.html" %}
         </div>
 
 
