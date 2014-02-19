@@ -28,25 +28,22 @@
 
   <h2>Current Politicians Representing {{ object.name }}</h2>
 
-  {% include "core/_people_listing.html" with people=object.all_related_current_politicians %}
+    <ul class="listing">
+        {% for person_and_position in related_people %}
+            {% with person=person_and_position.0 positions=person_and_position.1 %}
+                {% include "core/_place_people_position.html" %}
+            {% endwith %}
+        {% endfor %}
+    </ul>
 
-  {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
-  {% with people_related=object.related_people %}
+  <h2>People</h2>
 
-    {% if people_related|length %}
-      <h2>People</h2>
-
-      <p>
-        There
-        {{ people_related|length|pluralize:"is,are"}}
-        <a href="{% url "place_people" slug=object.slug %}">
-          {{ people_related|length }}
-          {{ people_related|length|pluralize:"person,people"}}
-        </a>
-        related to {{ object.name }}.
-      </p>
-    {% endif %}
-  {% endwith %}
+  <p>
+    To see all people associated with {{ object.name }} and
+    smaller regions, go to the
+    <a href="{% url "place_people" slug=object.slug %}">people
+    page for {{ object.name }}</a>.
+  </p>
 
 
   {% if settings.ENABLED_FEATURES.place_data and object.placedata %}    
