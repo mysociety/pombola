@@ -36,6 +36,21 @@
         {% endfor %}
     </ul>
 
+  {% for parent_place in object.parent_places %}
+    {% with people_and_positions=parent_place.related_people %}
+      {% if people_and_positions %}
+        <h3>Current Politicians representing <a href="{% url 'place' slug=parent_place.slug %}">{{ parent_place }}</a></h3>
+        <ul class="listing">
+          {% for person_and_position in people_and_positions %}
+            {% with person=person_and_position.0 positions=person_and_position.1 %}
+              {% include "core/_place_people_position.html" %}
+            {% endwith %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  {% endfor %}
+
   <h2>People</h2>
 
   <p>
