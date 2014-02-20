@@ -13,6 +13,7 @@
         <h4><a href="{{ person.get_absolute_url }}">{{ person.name }}</a></h4>
           <ul>
             {% for position in positions %}
+                {{ position.title }} for <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
                 {{ position.title }} of <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}
             {% endfor %}
           </ul>
