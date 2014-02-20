@@ -93,7 +93,7 @@ PositionData = namedtuple('PositionData',
                            'aspirant_position_title',
                            'row_to_name'])
 
-if settings.COUNTRY_APP == 'kenya':
+try:
     ward_representative_position_data = PositionData(
         placekind=PlaceKind.objects.get(name='Ward'),
         csv_filename=os.path.join(gazette_directory, 'ward-results.csv'),
@@ -114,6 +114,16 @@ if settings.COUNTRY_APP == 'kenya':
         position_title=PositionTitle.objects.get(name='Governor'),
         aspirant_position_title=PositionTitle.objects.get(name='Aspirant Governor'),
         row_to_name=lambda row: row['Governor'])
+
+except (PlaceKind.DoesNotExist, PositionTitle.DoesNotExist):
+    # This should only happen if this isn't a Kenya database, but this
+    # file will be imported when running tests when you might have the
+    # database for any country.  FIXME: switch this to be a function
+    # that returns the mapping; this is just a temporary workaround
+    # since we're not sure this script will ever be used again, so
+    # it's not worth the time to test a better fix.
+    ward_representative_position_data = None
+    governor_position_data = None
 
 class Command(NoArgsCommand):
     help = 'Set the elected ward representatives and governors'
