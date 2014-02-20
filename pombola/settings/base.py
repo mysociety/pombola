@@ -47,6 +47,7 @@ ALL_OPTIONAL_APPS = ('hansard',
                      'place_data',
                      'votematch',
                      'speeches',
+                     'interests_register',
                      'spinner' )
 
 APPS_REQUIRED_BY_SPEECHES = ('django_select2',
