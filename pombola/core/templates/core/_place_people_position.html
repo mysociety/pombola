@@ -14,7 +14,9 @@
           <ul>
             {% for position in positions %}
                 {{ position.title }} for <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
-                {{ position.title }} of <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}
+                {% if position.organisation %}
+                   of <a href="{{ position.organisation.get_absolute_url }}">{{ position.organisation.name }}</a>
+                {% endif %}
             {% endfor %}
           </ul>
         <div class="read-more-wrap"><a href="{{ person.get_absolute_url }}" class="read-more">read more</a></div>
