@@ -32,6 +32,8 @@ from pombola.scorecards.models import ScorecardMixin
 
 from mapit import models as mapit_models
 
+from pombola.country import significant_positions_filter
+
 # tell South how to handle the custom fields
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateField"])
@@ -601,15 +603,34 @@ class Place(ModelBase, ScorecardMixin):
         except IndexError:
             return None
 
-    def related_people(self):
-        return (Person.objects
-                    .filter(
-                        position__in=self.position_set.all()
-                            .currently_active()
-                            .distinct('person')
-                        )
-                    .order_by('-position__sorting_end_date_high')
-                )
+    def related_people(self, positions_filter=significant_positions_filter):
+        """Find significant people associated with this place"""
+
+        positions = Position.objects.filter(place=self).currently_active()
+        positions = positions_filter(positions)
+
+        # Group all the positions by person:
+        result_dict = defaultdict(list)
+        for position in positions:
+            result_dict[position.person].append(position)
+        # Sort each list of positions ordered with the latest ending
+        # positions first:
+        for position_list in result_dict.values():
+            position_list.sort(key=lambda p: p.sorting_end_date_high,
+                               reverse=True)
+        # Order the people by last name:
+        return sorted(result_dict.items(),
+                      key=lambda t: t[0].legal_name.split()[-1])
+
+    def related_people_child_places(self, positions_filter=significant_positions_filter):
+        """Find significant people associated with child places"""
+
+        results = []
+        for child_place in self.child_places.all():
+            people_and_positions = child_place.related_people(positions_filter)
+            if people_and_positions:
+                results.append((child_place, people_and_positions))
+        return results
 
     def parent_places(self):
         """Return an array of all the parent places."""

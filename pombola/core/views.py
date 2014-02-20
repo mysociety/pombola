@@ -94,6 +94,7 @@ class PlaceDetailView(DetailView):
         # Call the base implementation first to get a context
         context = super(PlaceDetailView, self).get_context_data(**kwargs)
         context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
+        context['related_people'] = self.object.related_people()
         return context
 
 class PlaceDetailSub(DetailView):

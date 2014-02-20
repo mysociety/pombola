@@ -11,47 +11,35 @@
   <div>
 
     <ul class="listing">
-        {% for person in object.related_people %}
-            <li>
-                <a href="{{ person.get_absolute_url }}">
-                    {% thumbnail person.primary_image "90x90" as im %}
-                    <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-                    {% empty %}
-                    <img src="{{STATIC_URL}}images/person-90x90.jpg" />
-                    {% endthumbnail %}
-                </a>
-
-                <section>
-                    <h4><a href="{{ person.get_absolute_url }}">{{ person.name }}</a></h4>
-                    <div class="read-more-wrap"><a href="{{ person.get_absolute_url }}" class="read-more">read more</a></div>
-                </section>
-            </li>
-        {% endfor %}
-
-        {% for child_place in object.child_places.all %}
-            {% with position=child_place.current_politician_position %}
-                {% with person=position.person %}
-                    {% if person %}
-                        <li>                
-                            <a href="{{ person.get_absolute_url }}">
-                                {% thumbnail person.primary_image "90x90" as im %}
-                                    <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-                                {% empty %}
-                                    <img src="{{STATIC_URL}}images/person-90x90.jpg" />
-                                {% endthumbnail %}
-                            </a>
-
-                            <section>
-                                <h4><a href="{{ person.get_absolute_url }}">{{ person.name }}</a></h4>
-                                <p>{{ position.title }} of <a href="{{ child_place.get_absolute_url }}">{{ child_place.name }}</a></p>
-                                <div class="read-more-wrap"><a href="{{ person.get_absolute_url }}" class="read-more">read more</a></div>
-                            </section>
-                        </li>
-                    {% endif %}
-                {% endwith %}
+        {% for person_and_position in object.related_people %}
+            {% with person=person_and_position.0 positions=person_and_position.1 %}
+                {% include "core/_place_people_position.html" %}
             {% endwith %}
         {% endfor %}
     </ul>
+
+    {% with child_places=object.related_people_child_places %}
+      {% if child_places %}
+
+        <h3>People Related to Smaller Places in {{ object.name }}</h3>
+
+        <ul class="listing">
+            {% for cpt in child_places %}
+                {% with child_place=cpt.0 all_people=cpt.1 %}
+                  {% for person_and_positions in all_people %}
+                      {% with person=person_and_positions.0 positions=person_and_positions.1 %}
+                            {% if person %}
+                               {% include "core/_place_people_position.html" %}
+                            {% endif %}
+                      {% endwith %}
+                  {% endfor %}
+               {% endwith %}
+            {% endfor %}
+        </ul>
+
+      {% endif %}
+    {% endwith %}
+
   </div>
 
 {% endblock %}
