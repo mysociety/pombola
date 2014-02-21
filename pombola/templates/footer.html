@@ -1,0 +1,21 @@
+{% load url from future %}
+<div id="footer-menu" class="footer-section">
+    <h4>Generic Pombola Site</h4>
+    <ul class="nav">
+        {% with include_sub_menu_entries=0 %}
+            {% include 'menu_entries.html' %}
+        {% endwith %}
+    </ul>
+</div>
+
+<div class="footer-section">
+    <h4>About</h4>
+        {% if object and request.user.is_staff %}
+            <li><a href="{{ object.get_admin_url }}">Edit '{{ object.name }}' in admin</a></li>
+        {% endif %}
+
+        {% if settings.STAGING %}
+            <li>current_user_id: <span id="current_user_id">{% firstof request.user.id '0' %}</span></li>
+        {% endif %}
+    </ul>
+</div>
