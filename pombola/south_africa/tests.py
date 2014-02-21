@@ -28,7 +28,6 @@ from pombola.interests_register.models import Category, Release, Entry, EntryLin
 from nose.plugins.attrib import attr
 
 @attr(country='south_africa')
-@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
         self.old_HAYSTACK_SIGNAL_PROCESSOR = settings.HAYSTACK_SIGNAL_PROCESSOR
@@ -149,7 +148,6 @@ class ConstituencyOfficesTestCase(WebTest):
 
 
 @attr(country='south_africa')
-@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class LatLonDetailViewTest(TestCase):
     def test_404_for_incorrect_province_lat_lon(self):
         res = self.client.get(reverse('latlon', kwargs={'lat': '0', 'lon': '0'}))
@@ -157,7 +155,6 @@ class LatLonDetailViewTest(TestCase):
 
 
 @attr(country='south_africa')
-@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SASearchViewTest(TestCase):
     def test_search_page_returns_success(self):
         res = self.client.get(reverse('core_search'))
@@ -165,7 +162,6 @@ class SASearchViewTest(TestCase):
 
 
 @attr(country='south_africa')
-@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SAPersonDetailViewTest(TestCase):
     def setUp(self):
         fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
@@ -368,7 +364,6 @@ class SAOrganisationPartySubPageTest(TestCase):
 
 
 @attr(country='south_africa')
-@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SAHansardIndexViewTest(TestCase):
 
     def setUp(self):
@@ -434,7 +429,6 @@ class SAHansardIndexViewTest(TestCase):
         self.assertNotContains(response, "Empty section")
 
 @attr(country='south_africa')
-@unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
 class SACommitteeIndexViewTest(TestCase):
 
     def setUp(self):

@@ -23,7 +23,6 @@ class InfoTest(TestCase):
 
 
     @attr(country='south_africa')
-    @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
     def test_info_newsletter_uses_custom_template(self):
 
         # Create the page entry so that we don't just get a 404
@@ -67,7 +66,6 @@ class InfoBlogClientTests(TestCase):
                 self.assertNotContains(response, content)
 
     @attr(country='south_africa')
-    @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
     def test_tags(self):
         self._test_label(
             tests = {
@@ -78,7 +76,6 @@ class InfoBlogClientTests(TestCase):
         )
 
     @attr(country='south_africa')
-    @unittest.skipUnless(settings.COUNTRY_APP == 'south_africa', "Only applies to South Africa")
     def test_categories(self):
         self._test_label(
             tests = {
