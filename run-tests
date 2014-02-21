@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Since we have to invoke the country-specific tests with new
+# invocations of ./manage.py test, make sure that we exit after any
+# test run - this is to avoid you missing, say, that the generic tests
+# failed if your terminal's just showing the last country-specific
+# tests passing:
+set -ex
+
+cd $(dirname "$BASH_SOURCE")
+
+./manage.py test --settings=pombola.settings.tests
+
+./manage.py test --settings=pombola.settings.tests_kenya
+./manage.py test --settings=pombola.settings.tests_libya
+./manage.py test --settings=pombola.settings.tests_nigeria
+./manage.py test --settings=pombola.settings.tests_south_africa
+./manage.py test --settings=pombola.settings.tests_zimbabwe
