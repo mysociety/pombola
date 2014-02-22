@@ -5,7 +5,7 @@ IN_TEST_MODE = True
 
 base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..', '..' ) )
 # Change the root dir in testing, and delete it to ensure that we have a clean
-# slate. Also rint out a little warning - adds clutter to the test output but
+# slate. Also print out a little warning - adds clutter to the test output but
 # better than letting a site go live and not notice that the test mode has been
 # detected by mistake
 root_dir = os.path.abspath( os.path.join( base_dir, '..', 'testing' ) )
