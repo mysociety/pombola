@@ -60,34 +60,11 @@ DISQUS_USE_IDENTIFIERS: 1
 # Widget id for polls to be embedded on the site.
 POLLDADDY_WIDGET_ID: ''
 
-# The name of the Twitter account. If your account is '@foobar' then use
-# 'foobar'
-TWITTER_USERNAME: ''
-
-# If you want to show tweets on the front page, you need to create a
-# widget for the TWITTER_USERNAME account at
-# https://twitter.com/settings/widgets/ and dig the widget ID out of
-# the generated HTML - it'll be in there as a data-widget-id attribute.
-TWITTER_WIDGET_ID: ''
-
-# Blog feed url - used to create the latest news on homepage.
-# eg 'http://foo.com/feed/'
-BLOG_RSS_FEED: ''
-
-
 # The country app is loaded early so that its templates take priority over those
 # from other apps.  Note that we also use this setting in a command
 # (core_create_parliamentary_sessions) to determine the country that this
 # instance of Pombola is set up for.
 COUNTRY_APP: kenya
-
-# The coordinates of the bounding box that should be used when maps are loaded.
-# These example ones are for Kenya
-MAP_BOUNDING_BOX_NORTH: 5.06
-MAP_BOUNDING_BOX_EAST:  41.91
-MAP_BOUNDING_BOX_SOUTH: -4.73
-MAP_BOUNDING_BOX_WEST:  33.83
-
 
 # ZA Hansard Parsing config (can be left blank on for other instances)
 # Username and password for pmg_scraper command
@@ -97,41 +74,5 @@ PMG_COMMITTEE_PASS: ''
 # Popit API URL
 # For ZA development you can use 'http://sa-test.matthew.popit.dev.mysociety.org/api/v0.1/'
 POPIT_API_URL: 'http://popit.example.com/api/v0.1/'
-
-# List any indexes that you want to exclude from this install. This
-# allows you to override an index in a country app. See the example
-# in `pombola/south_africa/search_indexes.py`
-# HAYSTACK_EXCLUDED_INDEXES:
-#   - pombola.search.search_indexes.PlaceIndex
-HAYSTACK_EXCLUDED_INDEXES: []
-
-# some apps are optional (see trailing comment for the country they most likely apply to)
-OPTIONAL_APPS:
-  # - hansard    # KE
-  # - projects   # KE
-  # - place_data # KE
-  # - speeches   # ZA
-  # - za_hansard # ZA
-  # - pombola.interests_register # ZA
-  # - pombola.spinner # ZA
-  # - votematch
-  
-
-BREADCRUMB_URL_NAME_MAPPINGS:
-    info: 
-        - Information
-        - /info/
-    organisation:
-        - Organisation
-        - /organisation/all/
-    person: 
-        - Politicians
-        - /person/all/
-    place: 
-        - Places
-        - /place/all/
-    search: 
-        - Search
-        - /search/
 
 DEBUG_TOOLBAR: True
