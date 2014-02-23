@@ -11,4 +11,4 @@ cd `dirname $0`/..
 
 source ../pombola-virtualenv/bin/activate
 
-./manage.py $1
+./manage.py "$@"
