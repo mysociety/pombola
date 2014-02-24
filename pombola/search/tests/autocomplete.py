@@ -36,7 +36,7 @@ class AutocompleteTest(unittest.TestCase):
         # so that other changes cannot affect these tests. Have added a note to
         # a HayStack issue regarding this:
         #   https://github.com/toastdriven/django-haystack/issues/226
-        call_command('rebuild_index', interactive=False)
+        call_command('rebuild_index', interactive=False, verbosity=0)
         
 
     def test_autocomplete_requests(self):

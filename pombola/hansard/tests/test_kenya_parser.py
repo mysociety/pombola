@@ -9,6 +9,8 @@ import subprocess
 from django.test import TestCase
 from django.utils import unittest
 
+from nose.plugins.attrib import attr
+
 from pombola.hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
 from pombola.hansard.models import Source, Sitting, Entry, Venue, Alias
 
@@ -17,6 +19,7 @@ from pombola.core.models import Person, PositionTitle, Position
 from django_date_extensions.fields import ApproximateDate
 from django.conf import settings
 
+@attr(country='kenya')
 class KenyaParserVenueSpecificTestBase(object):
 
     def setUp(self):
@@ -66,6 +69,7 @@ class KenyaParserVenueSpecificTestBase(object):
         self.assertEqual( data['meta'], expected['meta'] )
 
 
+@attr(country='kenya')
 @unittest.skipUnless(settings.KENYA_PARSER_PDF_TO_HTML_HOST, "setting 'KENYA_PARSER_PDF_TO_HTML_HOST' not set")
 class KenyaParserSenateTest(KenyaParserVenueSpecificTestBase, TestCase):
 
@@ -74,6 +78,7 @@ class KenyaParserSenateTest(KenyaParserVenueSpecificTestBase, TestCase):
     sample_html        = os.path.join( local_dir, '2013-07-31-senate-sample.html' )
     expected_data_json = os.path.join( local_dir, '2013-07-31-senate-sample.json' )
 
+@attr(country='kenya')
 @unittest.skipUnless(settings.KENYA_PARSER_PDF_TO_HTML_HOST, "setting 'KENYA_PARSER_PDF_TO_HTML_HOST' not set")
 class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
 

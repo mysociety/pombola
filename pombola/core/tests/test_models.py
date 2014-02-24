@@ -10,17 +10,17 @@ class PositionTestCase(unittest.TestCase):
     def setUp(self):
         self.person       = models.Person.objects.create(legal_name="Bob Smith", slug="bob-smith")
 
-        organisation_kind = models.OrganisationKind.objects.create(
+        self.organisation_kind = models.OrganisationKind.objects.create(
             name        = "Test Org",
             slug        = "test-org",
         )
         self.organisation = models.Organisation.objects.create(
             slug = "org",
             name = "The Org",
-            kind = organisation_kind,
+            kind = self.organisation_kind,
         )
 
-        place_kind = models.PlaceKind.objects.create(
+        self.place_kind = models.PlaceKind.objects.create(
             name       = "Test Place",
             slug       = "test-place",
         )
@@ -28,7 +28,7 @@ class PositionTestCase(unittest.TestCase):
         self.place = models.Place.objects.create(
             name = "The Place",
             slug = "place",
-            kind = place_kind,
+            kind = self.place_kind,
         )
 
         self.position_title = models.PositionTitle.objects.create(
@@ -40,7 +40,9 @@ class PositionTestCase(unittest.TestCase):
         """Clean up after the tests"""
         self.person.delete()
         self.organisation.delete()
+        self.organisation_kind.delete()
         self.place.delete()
+        self.place_kind.delete()
         self.position_title.delete()
 
     def getPos(self, **kwargs):
@@ -95,40 +97,41 @@ class PositionTestCase(unittest.TestCase):
 
 class PersonAndContactTasksTest( unittest.TestCase ):
     def setUp(self):
-        pass
-
-    def test_missing_contacts(self):
-        person = models.Person(
+        self.person = models.Person(
             legal_name = "Test Person",
             slug       = 'test-person'
         )
-        person.save()
+        self.person.save()
+        self.phone = models.ContactKind(
+            slug='phone', name='Phone',
+        )
+        self.phone.save()
+
+    def tearDown(self):
+        self.person.delete()
+        self.phone.delete()
+
+    def test_missing_contacts(self):
 
         self.assertItemsEqual(
-            [ i.category.slug for i in Task.objects_for(person) ],
+            [ i.category.slug for i in Task.objects_for(self.person) ],
             ['find-missing-phone', 'find-missing-email', 'find-missing-address'],
         )
 
         # add a phone number and check that the tasks get updated
-        phone = models.ContactKind(
-            slug='phone', name='Phone',
-        )
-        phone.save()
 
         contact = models.Contact(
-            content_type = ContentType.objects.get_for_model(person),
-            object_id    = person.id,
-            kind         = phone,
+            content_type = ContentType.objects.get_for_model(self.person),
+            object_id    = self.person.id,
+            kind         = self.phone,
             value        = '07891 234 567',
         )
         contact.save()
 
         self.assertItemsEqual(
-            [ i.category.slug for i in Task.objects_for(person) ],
+            [ i.category.slug for i in Task.objects_for(self.person) ],
             ['find-missing-email', 'find-missing-address'],
         )
-
-        person.delete()
 
 
 class PersonNamesTest( unittest.TestCase ):
@@ -321,20 +324,22 @@ class PersonPlaceTest(unittest.TestCase):
 
 
 class SummaryTest( unittest.TestCase ):
-    def setUp(self):
-        pass
 
-    def test_empty_summary_is_false(self):
-        person, created = models.Person.objects.get_or_create(
+    def setUp(self):
+        self.person, _ = models.Person.objects.get_or_create(
             legal_name = "Test Person",
             slug       = 'test-person'
         )
-        person.save()
+        self.person.save()
 
+    def tearDown(self):
+        self.person.delete()
+
+    def test_empty_summary_is_false(self):
         # An empty markitup field should be false and have no length so that in
         # the templates its truthiness is correct.
-        self.assertFalse( person.summary )
-        self.assertEqual( len(person.summary), 0 )
+        self.assertFalse( self.person.summary )
+        self.assertEqual( len(self.person.summary), 0 )
 
 
 class RelatedOrganisationTest(unittest.TestCase):
@@ -364,3 +369,10 @@ class RelatedOrganisationTest(unittest.TestCase):
             organisation_a=office,
             organisation_b=party,
             kind=rel_kind)
+
+        rel.delete()
+        rel_kind.delete()
+        office.delete()
+        party.delete()
+        party_office_kind.delete()
+        party_kind.delete()

@@ -6,7 +6,7 @@ from south.v2 import DataMigration
 from django.db import models
 from django.core.management import call_command
 
-from pombola.settings import COUNTRY_APP
+from django.conf import settings
 
 
 class Migration(DataMigration):
@@ -24,7 +24,7 @@ class Migration(DataMigration):
         house = None
 
         if 0 == orm.ParliamentarySession.objects.count():
-            if COUNTRY_APP == 'kenya':
+            if settings.COUNTRY_APP == 'kenya':
 
                 governmental, _ = orm.OrganisationKind.objects.get_or_create(
                     name='Governmental',
@@ -58,7 +58,7 @@ class Migration(DataMigration):
                                               mapit_generation=3,
                                               house=ok_senate)
                 senate.save()
-            elif COUNTRY_APP == 'nigeria':
+            elif settings.COUNTRY_APP == 'nigeria':
                 political, _ = orm.OrganisationKind.objects.get_or_create(
                     name='Political',
                     slug='political')
@@ -84,14 +84,14 @@ class Migration(DataMigration):
                 house.save()
             else:
                 # There's nothing to do:
-                print >> sys.stderr, "Unknown COUNTRY_APP (%s) - not creating parliamentary sessions" % (COUNTRY_APP,)
+                print >> sys.stderr, "Unknown COUNTRY_APP (%s) - not creating parliamentary sessions" % (settings.COUNTRY_APP,)
         else:
             # There's nothing to do:
             print >> sys.stderr, "There were already ParliamentarySessions - skipping their creation"
 
         # Now link each Place to the right ParliamentarySession:
 
-        if COUNTRY_APP == 'kenya':
+        if settings.COUNTRY_APP == 'kenya':
 
             pk_constituency, _ = orm.PlaceKind.objects.get_or_create(slug='constituency',
                                                                      name='Constituency',
@@ -129,7 +129,7 @@ class Migration(DataMigration):
             # more, so remove it:
             pk_2013_constituency.delete()
 
-        elif COUNTRY_APP == 'nigeria':
+        elif settings.COUNTRY_APP == 'nigeria':
 
             if not house:
                 house = orm.ParliamentarySession.objects.get(name="House of Representatives 2011-")
@@ -153,7 +153,7 @@ class Migration(DataMigration):
 
         else:
             # There's nothing to do:
-            print >> sys.stderr, "Unknown COUNTRY_APP (%s) - not linking sessions to places" % (COUNTRY_APP,)
+            print >> sys.stderr, "Unknown COUNTRY_APP (%s) - not linking sessions to places" % (settings.COUNTRY_APP,)
 
 
     def backwards(self, orm):

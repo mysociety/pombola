@@ -15,10 +15,9 @@ urlpatterns = []
 # Note that anything the country app catches it has to actually process, Django
 # does not appear to support fallthrough from controllers:
 # http://stackoverflow.com/questions/4495763/fallthrough-in-django-urlconf
-urlpatterns += patterns('',
-    (r'^', include( 'pombola.' + settings.COUNTRY_APP + '.urls' ) ),
-)
-
+if settings.COUNTRY_APP:
+    urlpatterns += patterns('',
+        (r'^', include('pombola.' + settings.COUNTRY_APP + '.urls')),)
 
 # Needs to occur _before_ admin.autodiscover()
 import autocomplete_light

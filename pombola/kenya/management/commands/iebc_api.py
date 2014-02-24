@@ -10,6 +10,7 @@ import requests
 import sys
 import time
 
+from django.conf import settings
 from django.template.defaultfilters import slugify
 
 from django_date_extensions.fields import ApproximateDate
@@ -135,28 +136,37 @@ def update_picture_for_candidate(candidate_data, cache_directory, **options):
 # Set up a mapping between the race names and the
 # corresponding PlaceKind and Position title:
 
-known_race_type_mapping = {
-    "2": (PlaceKind.objects.get(slug='county'),
-          ParliamentarySession.objects.get(slug='s2013'),
-          PositionTitle.objects.get(slug__startswith='aspirant-governor'),
-          "Governor"),
-    "3": (PlaceKind.objects.get(slug='county'),
-          ParliamentarySession.objects.get(slug='s2013'),
-          PositionTitle.objects.get(slug__startswith='aspirant-senator'),
-          "Senator"),
-    "5": (PlaceKind.objects.get(slug='county'),
-          ParliamentarySession.objects.get(slug='s2013'),
-          PositionTitle.objects.get(slug__startswith='aspirant-women-representative'),
-          "Women Representative"),
-    "4": (PlaceKind.objects.get(slug='constituency'),
-          ParliamentarySession.objects.get(slug='na2013'),
-          PositionTitle.objects.get(slug__startswith='aspirant-mp'),
-          "National Assembly Rep."),
-    "6": (PlaceKind.objects.get(slug='ward'),
-          ParliamentarySession.objects.get(slug='na2013'),
-          PositionTitle.objects.get(slug__startswith='aspirant-ward-representative'),
-          "County Assembly Rep."),
-    }
+try:
+    known_race_type_mapping = {
+        "2": (PlaceKind.objects.get(slug='county'),
+              ParliamentarySession.objects.get(slug='s2013'),
+              PositionTitle.objects.get(slug__startswith='aspirant-governor'),
+              "Governor"),
+        "3": (PlaceKind.objects.get(slug='county'),
+              ParliamentarySession.objects.get(slug='s2013'),
+              PositionTitle.objects.get(slug__startswith='aspirant-senator'),
+              "Senator"),
+        "5": (PlaceKind.objects.get(slug='county'),
+              ParliamentarySession.objects.get(slug='s2013'),
+              PositionTitle.objects.get(slug__startswith='aspirant-women-representative'),
+              "Women Representative"),
+        "4": (PlaceKind.objects.get(slug='constituency'),
+              ParliamentarySession.objects.get(slug='na2013'),
+              PositionTitle.objects.get(slug__startswith='aspirant-mp'),
+              "National Assembly Rep."),
+        "6": (PlaceKind.objects.get(slug='ward'),
+              ParliamentarySession.objects.get(slug='na2013'),
+              PositionTitle.objects.get(slug__startswith='aspirant-ward-representative'),
+              "County Assembly Rep."),
+        }
+except PlaceKind.DoesNotExist:
+    # This should only happen if this isn't a Kenya database, but this
+    # file will be imported when running tests when you might have the
+    # database for any country.  FIXME: switch this to be a function
+    # that returns the mapping; this is just a temporary workaround
+    # since we're not sure this script will ever be used again, so
+    # it's not worth the time to test a better fix.
+    known_race_type_mapping = None
 
 def parse_race_name(race_name):
     types_alternation = "|".join(re.escape(krt) for krt in known_race_types)

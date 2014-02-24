@@ -33,6 +33,12 @@ class PositionTest(TestCase):
             slug = 'test-title',
         )
 
+    def tearDown(self):
+        self.person.delete()
+        self.organisation.delete()
+        self.organisation_kind.delete()
+        self.title.delete()
+
 
     def test_unicode(self):
         """Check that missing attributes don't crash"""

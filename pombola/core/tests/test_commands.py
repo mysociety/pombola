@@ -6,7 +6,7 @@ import sys
 
 from pombola.core.models import (
     Contact, ContactKind, Organisation, OrganisationKind, Person,
-    Position, PositionTitle
+    Position, PositionTitle, SlugRedirect
 )
 
 from django.contrib.contenttypes.models import ContentType
@@ -24,8 +24,10 @@ def no_stderr():
     class DevNull(object):
         def write(self, _): pass
     sys.stderr = DevNull()
-    yield
-    sys.stderr = save_stderr
+    try:
+        yield
+    finally:
+        sys.stderr = save_stderr
 
 
 class MergePeopleCommandTest(unittest.TestCase):
@@ -87,12 +89,13 @@ class MergePeopleCommandTest(unittest.TestCase):
         )
         self.contact_b.save()
 
-    def test_merge_people(self):
+        self.options = {
+            'keep_person': self.person_a.id,
+            'delete_person': self.person_b.id,
+            'quiet': True
+        }
 
-        options = {'keep_person': self.person_a.id,
-                   'delete_person': self.person_b.id,
-                   'quiet': True}
-
+    def test_conflicting_dob(self):
         self.person_a.date_of_birth = "1908-05-20"
         self.person_a.save()
 
@@ -103,8 +106,9 @@ class MergePeopleCommandTest(unittest.TestCase):
         # the date of birth:
         with self.assertRaises(SystemExit):
             with no_stderr():
-                call_command('core_merge_people', **options)
+                call_command('core_merge_people', **self.options)
 
+    def test_losing_summary(self):
         self.person_a.summary = ""
         self.person_a.date_of_birth = "1908-05-20"
         self.person_a.save()
@@ -114,16 +118,14 @@ class MergePeopleCommandTest(unittest.TestCase):
         self.person_b.save()
 
         # This should also error - it would lose the B version of the
-        # date of birth:
+        # summary field:
         with self.assertRaises(SystemExit):
             with no_stderr():
-                call_command('core_merge_people', **options)
+                call_command('core_merge_people', **self.options)
 
-        self.person_b.summary = ""
-        self.person_b.save()
-
+    def test_merge_people(self):
         # This one should succeed:
-        call_command('core_merge_people', **options)
+        call_command('core_merge_people', **self.options)
 
         # Check that only person_a exists any more:
         Person.objects.get(pk=self.person_a.id)
@@ -150,9 +152,21 @@ class MergePeopleCommandTest(unittest.TestCase):
 
     def tearDown(self):
         self.person_a.delete()
+        # Only delete person_b if it still exists, to avoid an
+        # elasticsearch 404:
+        Person.objects.filter(slug='james-stewart').delete()
         self.organisation_a.delete()
         self.organisation_b.delete()
         self.organisation_kind.delete()
         self.position_a.delete()
         self.position_b.delete()
         self.position_title.delete()
+        self.phone_kind.delete()
+        self.email_kind.delete()
+        # The test runner might be be using a transaction to rollback
+        # the test's changes, in which case we need to remove the
+        # redirect manually because core_merge_people uses a
+        # transaction which PostgreSQL regards as the same as the
+        # outer one because that's how it (doesn't) deal with nested
+        # transactions.
+        SlugRedirect.objects.filter(old_object_slug='james-stewart').delete()

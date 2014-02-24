@@ -1,0 +1,13 @@
+{% load url from future %}
+{% comment %}
+
+    Menu entries - for both desktop and mobile.
+
+    We use the same menu structure twice - once in the header and once in the
+    footer. However the footer does not require the drill down so there is a way
+    to specifically request it. This is all here in a separate file so that we
+    won't forget to keep the two in sync when doing edits.
+
+{% endcomment %}
+
+<li><a href="{% url "home" %}">Home</a></li>

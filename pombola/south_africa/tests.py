@@ -8,11 +8,12 @@ from django.test import TestCase
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
+from django.utils import unittest
 from django_webtest import WebTest
 
 from mapit.models import Type, Area, Geometry, Generation
 
-from pombola import settings
+from django.conf import settings
 from pombola.core import models
 import json
 
@@ -24,6 +25,9 @@ from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
+from nose.plugins.attrib import attr
+
+@attr(country='south_africa')
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
         self.old_HAYSTACK_SIGNAL_PROCESSOR = settings.HAYSTACK_SIGNAL_PROCESSOR
@@ -143,18 +147,21 @@ class ConstituencyOfficesTestCase(WebTest):
         settings.HAYSTACK_SIGNAL_PROCESSOR = self.old_HAYSTACK_SIGNAL_PROCESSOR
 
 
+@attr(country='south_africa')
 class LatLonDetailViewTest(TestCase):
     def test_404_for_incorrect_province_lat_lon(self):
         res = self.client.get(reverse('latlon', kwargs={'lat': '0', 'lon': '0'}))
         self.assertEquals(404, res.status_code)
 
 
+@attr(country='south_africa')
 class SASearchViewTest(TestCase):
     def test_search_page_returns_success(self):
         res = self.client.get(reverse('core_search'))
         self.assertEquals(200, res.status_code)
 
 
+@attr(country='south_africa')
 class SAPersonDetailViewTest(TestCase):
     def setUp(self):
         fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
@@ -279,6 +286,7 @@ class SAPersonDetailViewTest(TestCase):
         self.assertEqual(len(context['interests'][1]['categories'][2]['entries'][0]), len(expected[1]['categories'][2]['entries'][0]))
 
 
+@attr(country='south_africa')
 class SAOrganisationPartySubPageTest(TestCase):
 
     def setUp(self):
@@ -355,6 +363,7 @@ class SAOrganisationPartySubPageTest(TestCase):
         self.assertEqual(context2['sorted_positions'][1].person.slug, 'person4')
 
 
+@attr(country='south_africa')
 class SAHansardIndexViewTest(TestCase):
 
     def setUp(self):
@@ -419,6 +428,7 @@ class SAHansardIndexViewTest(TestCase):
         self.assertContains(response, '<a href="/hansard/%d">%s</a>' % (section.id, section_name), html=True)
         self.assertNotContains(response, "Empty section")
 
+@attr(country='south_africa')
 class SACommitteeIndexViewTest(TestCase):
 
     def setUp(self):
@@ -460,6 +470,7 @@ class SACommitteeIndexViewTest(TestCase):
         self.assertNotContains(response, "Empty section")
 
 
+@attr(country='south_africa')
 class SAOrganisationDetailViewTest(WebTest):
 
     def setUp(self):
@@ -511,7 +522,7 @@ class SAOrganisationDetailViewTest(WebTest):
         self.assertEqual(positions[0].person.legal_name, "Zest ABCPerson")
         self.assertEqual(positions[1].person.legal_name, "Test Person")
 
-
+@attr(country='south_africa')
 class FixPositionTitlesCommandTests(TestCase):
     """Test the south_africa_fix_position_title command"""
 

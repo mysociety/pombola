@@ -17,7 +17,11 @@ from django_date_extensions.fields import ApproximateDate
 
 from pombola.core.models import Person, Organisation, Position
 
-from popit import PopIt
+# n.b. We no longer have the old PopIt API in requirements.txt, so
+# comment this out; the script is largely here for reference at the
+# moment, to be replaced by a Popolo JSON export.
+
+# from popit import PopIt
 
 from optparse import make_option
 

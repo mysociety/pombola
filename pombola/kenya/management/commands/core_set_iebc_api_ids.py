@@ -21,7 +21,7 @@ from django.template.defaultfilters import slugify
 
 from django_date_extensions.fields import ApproximateDate
 
-from pombola.settings import IEBC_API_ID, IEBC_API_SECRET
+from django.conf import settings
 from optparse import make_option
 
 from pombola.core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
@@ -33,7 +33,7 @@ new_data_approximate_date = ApproximateDate(new_data_date.year,
                                             new_data_date.month,
                                             new_data_date.day)
 
-data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
+data_directory = os.path.join(sys.path[0], 'pombola', 'kenya', '2013-election-data')
 
 # Calling these 'corrections' may not be quite right.  There are
 # naming discrepancies between the documents published by the IEBC and
@@ -192,16 +192,16 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
-        api_key = hmac.new(IEBC_API_SECRET,
-                           "appid=%s" % (IEBC_API_ID,),
+        api_key = hmac.new(settings.IEBC_API_SECRET,
+                           "appid=%s" % (settings.IEBC_API_ID,),
                            hashlib.sha256).hexdigest()
 
-        token_data = get_data(make_api_token_url(IEBC_API_ID, api_key))
+        token_data = get_data(make_api_token_url(settings.IEBC_API_ID, api_key))
         token = token_data['token']
 
         def url(path, query_filter=None):
             """A closure to avoid repeating parameters"""
-            return make_api_url(path, IEBC_API_SECRET, token, query_filter)
+            return make_api_url(path, settings.IEBC_API_SECRET, token, query_filter)
 
         # To get all the candidates, we iterate over each county,
         # constituency and ward, and request the candidates for each.

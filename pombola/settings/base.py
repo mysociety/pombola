@@ -1,51 +1,19 @@
-# Django settings for pombola project.
-
 import os
+import re
 import shutil
-import sys
-import logging
 import yaml
 
-# We need to work out if we are in test mode so that the various directories can
-# be changed so that the tests do not clobber the dev environment (eg media
-# files, xapian search index, cached hansard downloads).
+from .apps import *
 
-# Tried various suggestions but most did not work. Eg detecting the 'outbox'
-# attribute on django.core.mail does not work as it is created after settings.py
-# is read.
-
-# This is absolutely horrid code - assumes that you only ever run tests via
-# './manage.py test'. It does work though...
-# TODO - replace this with something much more robust
-IN_TEST_MODE = sys.argv[1:2] == ['test']
+IN_TEST_MODE = False
 
 # Work out where we are to set up the paths correctly and load config
-base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..' ) )
+base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..', '..' ) )
 root_dir = os.path.abspath( os.path.join( base_dir, '..' ) )
-
-# print "base_dir: " + base_dir
-# print "root_dir: " + root_dir
-
-# Change the root dir in testing, and delete it to ensure that we have a clean
-# slate. Also rint out a little warning - adds clutter to the test output but
-# better than letting a site go live and not notice that the test mode has been
-# detected by mistake
-if IN_TEST_MODE:
-    root_dir += '/testing'
-    if os.path.exists( root_dir ):
-        shutil.rmtree( root_dir )
-    print "Running in test mode! (testing root_dir is '%s')" % root_dir
-
 
 # load the mySociety config
 config_file = os.path.join( base_dir, 'conf', 'general.yml' )
 config = yaml.load( open(config_file, 'r') )
-
-# Configure the optional apps
-ALL_OPTIONAL_APPS = ( 'hansard', 'projects', 'place_data', 'votematch', 'speeches', 'spinner' )
-OPTIONAL_APPS = tuple( config.get( 'OPTIONAL_APPS' ) or [] )
-if 'speeches' in OPTIONAL_APPS: # Add its dependent apps
-    OPTIONAL_APPS = ('django_select2', 'django_bleach', 'popit', 'instances', 'popit_resolver') + OPTIONAL_APPS
 
 if int(config.get('STAGING')):
     STAGING = True
@@ -200,8 +168,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
 )
-if 'speeches' in OPTIONAL_APPS:
-    MIDDLEWARE_CLASSES += ( 'pombola.middleware.FakeInstanceMiddleware', )
 if config.get('DEBUG_TOOLBAR', True):
     MIDDLEWARE_CLASSES += ( 'debug_toolbar.middleware.DebugToolbarMiddleware', )
 
@@ -225,59 +191,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "pombola.core.context_processors.add_settings",
 )
 
-COUNTRY_APP = config.get('COUNTRY_APP')
-if not COUNTRY_APP:
-    raise Exception("You need to set 'COUNTRY_APP' in your config")
-
-
-
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.humanize',
-    'django.contrib.gis',
-
-    'pombola.admin_additions',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
-
-    'south',
-    'pagination',
-    'ajax_select',
-    'autocomplete_light',
-    'markitup',
-
-    'pombola.' + COUNTRY_APP,
-
-    'mapit',
-
-    'pombola.images',
-    'sorl.thumbnail',
-
-    'haystack',
-
-    'pombola.info',
-    'pombola.tasks',
-    'pombola.core',
-    'pombola.feedback',
-    'pombola.scorecards',
-    'pombola.search',
-    'pombola.file_archive',
-    'pombola.map',
-)
-if config.get('DEBUG_TOOLBAR', True):
-    INSTALLED_APPS += ('debug_toolbar',)
-INSTALLED_APPS += OPTIONAL_APPS
-
-# mapit related settings
 MAPIT_AREA_SRID = 4326
-MAPIT_COUNTRY = 'KE'
 MAPIT_RATE_LIMIT = ['127.0.0.1']
-
+# MAPIT_COUNTRY should be set in the country-specific file
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -333,21 +249,17 @@ PAGINATION_DEFAULT_WINDOW          = 2
 PAGINATION_DEFAULT_ORPHANS         = 2
 PAGINATION_INVALID_PAGE_RAISES_404 = True
 
-
 # haystack config - interface to search engine
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': 'http://127.0.0.1:9200/',
         'INDEX_NAME': config.get('POMBOLA_DB_NAME'),
-        'EXCLUDED_INDEXES': config.get('HAYSTACK_EXCLUDED_INDEXES', []),
+        'EXCLUDED_INDEXES': [],
     },
 }
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
-# Use a different elasticsearch index if running in test mode.
-if 'test' in sys.argv:
-    HAYSTACK_CONNECTIONS['default']['INDEX_NAME'] = config.get('POMBOLA_DB_NAME') + '_test'
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # Admin autocomplete
 AJAX_LOOKUP_CHANNELS = {
@@ -375,10 +287,9 @@ MARKITUP_SET = 'markitup/sets/markdown'
 # the South migrations.
 SOUTH_TESTS_MIGRATE = False
 
-
-# Settings for the selenium tests
-TEST_RUNNER   = 'django_selenium.selenium_runner.SeleniumTestRunner'
-SELENIUM_DRIVER = 'Firefox'
+# Use nose as the test runner
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['--with-doctest', '--with-yanc']
 
 # For the disqus comments
 DISQUS_SHORTNAME       = config.get( 'DISQUS_SHORTNAME', None )
@@ -398,21 +309,7 @@ POLLDADDY_WIDGET_ID = config.get( 'POLLDADDY_WIDGET_ID', None );
 # News' to appear on the homepage.
 BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 
-
-# create the ENABLED_FEATURES hash that is used to toggle features on and off.
-ENABLED_FEATURES = {}
-for key in ALL_OPTIONAL_APPS: # add in the optional apps
-    ENABLED_FEATURES[key] = ('pombola.' + key in INSTALLED_APPS) or (key in INSTALLED_APPS)
-
-
-# map boundaries
-MAP_BOUNDING_BOX_NORTH = config.get('MAP_BOUNDING_BOX_NORTH')
-MAP_BOUNDING_BOX_EAST  = config.get('MAP_BOUNDING_BOX_EAST' )
-MAP_BOUNDING_BOX_SOUTH = config.get('MAP_BOUNDING_BOX_SOUTH')
-MAP_BOUNDING_BOX_WEST  = config.get('MAP_BOUNDING_BOX_WEST' )
-
 THUMBNAIL_DEBUG = True
-
 
 # ZA Hansard settings
 HANSARD_CACHE   = os.path.join( root_dir, 'hansard_cache' )
@@ -426,20 +323,74 @@ PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
 # Which popit instance to use
 POPIT_API_URL = config.get('POPIT_API_URL')
 
-BREADCRUMB_URL_NAME_MAPPINGS = config.get('BREADCRUMB_URL_NAME_MAPPINGS',
-    {
-      'info'   : ('Information', '/info/'),
-      'organisation' : ('Organisations', '/organisation/all/'),
-      'person' : ('Politicians', '/person/all/'),
-      'place' : ('Places', '/place/all/'),
-      'search' : ('Search', '/search/')
-    })
+BREADCRUMB_URL_NAME_MAPPINGS = {
+    'info'   : ('Information', '/info/'),
+    'organisation' : ('Organisations', '/organisation/all/'),
+    'person' : ('Politicians', '/person/all/'),
+    'place' : ('Places', '/place/all/'),
+    'search' : ('Search', '/search/')
+}
 
 # Info page settings
 INFO_POSTS_PER_LIST_PAGE = 10
 
-# overrides for ZA, should be somewhere better - see
-# https://github.com/mysociety/pombola/issues/829
-if COUNTRY_APP == 'south_africa':
-    INFO_POSTS_PER_LIST_PAGE = 4
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'django.contrib.gis',
 
+    'pombola.admin_additions',
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+
+    'south',
+    'pagination',
+    'ajax_select',
+    'autocomplete_light',
+    'markitup',
+
+    'mapit',
+
+    'pombola.images',
+    'sorl.thumbnail',
+
+    'haystack',
+
+    'pombola.info',
+    'pombola.tasks',
+    'pombola.core',
+    'pombola.feedback',
+    'pombola.scorecards',
+    'pombola.search',
+    'pombola.file_archive',
+    'pombola.map',
+
+    'django_nose',
+)
+if config.get('DEBUG_TOOLBAR', True):
+     INSTALLED_APPS += ('debug_toolbar',)
+
+def insert_after(sequence, existing_item, item_to_put_after):
+    """A helper method for inserting an item after another in a sequence
+
+    This returns a new list with 'item_to_put_after' inserted after
+    'existing_item' in 'sequence'; this is useful for putting items
+    into the expected position in INSTALLED_APPS.  Note that this will
+    return a list even if sequence is a tuple, but Django doesn't mind
+    if INSTALLED_APPS is a list."""
+    l = list(sequence)
+    i = l.index(existing_item)
+    l.insert(i + 1, item_to_put_after)
+    return l
+
+def make_enabled_features(installed_apps, all_optional_apps):
+    result = {}
+    for key in all_optional_apps:
+        key = re.sub(r'^pombola\.', '', key)
+        result[key] = ('pombola.' + key in installed_apps) or (key in installed_apps)
+    return result

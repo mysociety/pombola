@@ -12,6 +12,7 @@ import sys
 
 from optparse import make_option
 
+from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import NoArgsCommand, CommandError
 from django.template.defaultfilters import slugify
@@ -20,7 +21,7 @@ from pombola.core.models import (
     AlternativePersonName, Organisation, Person, Place, PlaceKind, Position,
     PositionTitle)
 
-data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
+data_directory = os.path.join(sys.path[0], 'pombola', 'kenya', '2013-election-data')
 gazette_directory = os.path.join(data_directory, 'gazette-results')
 
 place_name_corrections = {}
@@ -29,8 +30,6 @@ with open(os.path.join(data_directory, 'wards-names-matched.csv')) as fp:
     reader = csv.reader(fp)
     for api_name, db_name in reader:
         if api_name and db_name:
-            if api_name.startswith("ENT"):
-                print "api_name is:", api_name
             place_name_corrections[api_name] = db_name
 
 
@@ -94,26 +93,37 @@ PositionData = namedtuple('PositionData',
                            'aspirant_position_title',
                            'row_to_name'])
 
-ward_representative_position_data = PositionData(
-    placekind=PlaceKind.objects.get(name='Ward'),
-    csv_filename=os.path.join(gazette_directory, 'ward-results.csv'),
-    place_name_column='Ward Name',
-    slugify_place_name=lambda pn: 'ward-' + slugify(pn),
-    position_title=PositionTitle.objects.get_or_create(
-            name='Ward Representative',
-            slug='ward-representative',
-            requires_place=True)[0],
-    aspirant_position_title=PositionTitle.objects.get(name='Aspirant Ward Representative'),
-    row_to_name=lambda row: row['Full Names A'] + ' ' + row['Full Names B'])
+try:
+    ward_representative_position_data = PositionData(
+        placekind=PlaceKind.objects.get(name='Ward'),
+        csv_filename=os.path.join(gazette_directory, 'ward-results.csv'),
+        place_name_column='Ward Name',
+        slugify_place_name=lambda pn: 'ward-' + slugify(pn),
+        position_title=PositionTitle.objects.get_or_create(
+                name='Ward Representative',
+                slug='ward-representative',
+                requires_place=True)[0],
+        aspirant_position_title=PositionTitle.objects.get(name='Aspirant Ward Representative'),
+        row_to_name=lambda row: row['Full Names A'] + ' ' + row['Full Names B'])
 
-governor_position_data = PositionData(
-    placekind=PlaceKind.objects.get(name='County'),
-    csv_filename=os.path.join(gazette_directory, 'governors-results.csv'),
-    place_name_column='County',
-    slugify_place_name=lambda pn: slugify(pn) + '-county',
-    position_title=PositionTitle.objects.get(name='Governor'),
-    aspirant_position_title=PositionTitle.objects.get(name='Aspirant Governor'),
-    row_to_name=lambda row: row['Governor'])
+    governor_position_data = PositionData(
+        placekind=PlaceKind.objects.get(name='County'),
+        csv_filename=os.path.join(gazette_directory, 'governors-results.csv'),
+        place_name_column='County',
+        slugify_place_name=lambda pn: slugify(pn) + '-county',
+        position_title=PositionTitle.objects.get(name='Governor'),
+        aspirant_position_title=PositionTitle.objects.get(name='Aspirant Governor'),
+        row_to_name=lambda row: row['Governor'])
+
+except (PlaceKind.DoesNotExist, PositionTitle.DoesNotExist):
+    # This should only happen if this isn't a Kenya database, but this
+    # file will be imported when running tests when you might have the
+    # database for any country.  FIXME: switch this to be a function
+    # that returns the mapping; this is just a temporary workaround
+    # since we're not sure this script will ever be used again, so
+    # it's not worth the time to test a better fix.
+    ward_representative_position_data = None
+    governor_position_data = None
 
 class Command(NoArgsCommand):
     help = 'Set the elected ward representatives and governors'

@@ -10,7 +10,7 @@ standard Python packages but some are repositories.
 Other dependencies are listed in 'conf/packages'. If you are on a Debian like
 system these are the packages you'll need to install.
 
-Configuration is done by editing the values in 'pombola/settings.py'.
+Configuration is done by editing the values in 'pombola/settings/base.py'.
 Values which change between installations (eg dev and production) are set in the
 file 'conf/general.yml' (use the 'conf/general.yml-example' to get started).
 There is also a sample Apache2 config in 'conf/httpd.conf-example' which might
