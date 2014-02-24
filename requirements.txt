@@ -90,7 +90,6 @@ chardet==2.2.1
 cssselect==0.9.1
 django-bleach==0.1.5
 django-celery==3.1.1
-django-nose==1.1
 django-qmethod==0.0.3
 django-subdomain-instances==0.1
 django-tastypie==0.9.16
@@ -113,7 +112,6 @@ virtualenv==1.7.1.2
 waitress==0.8.8
 wsgi-intercept==0.6.1
 wsgiref==0.1.2
-yanc==0.2.4
 
 # We cannot pin these to specific versions, because they're OS/Python version
 # dependant, and there's no single version which will work for the variety of
