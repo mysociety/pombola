@@ -3478,12 +3478,12 @@ HEADER
   height: auto;
   background-image: none;
   background: #f1f0ec;
-  padding: .5em 0 0;
+  padding: .5em 0 1.5em;
   position: relative;
 }
 @media only all and (min-width: 640px), print {
   #site-header {
-    padding: 0;
+    padding: 0 0 1.5em;
     height: 114px;
   }
 }

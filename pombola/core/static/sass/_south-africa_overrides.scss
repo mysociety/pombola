@@ -365,10 +365,10 @@ HEADER
     height: auto;
     background-image: none;
     background: $colour_main_background;
-    padding: .5em 0 0;
+    padding: .5em 0 1.5em;
     position: relative;
     @media only all and (min-width: 640px), print {
-        padding: 0;
+        padding: 0 0 1.5em;
         height: 114px;
     }
 }
