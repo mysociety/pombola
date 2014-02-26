@@ -262,11 +262,6 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
             elif self.request.GET.get('office'):
                 context['sorted_positions'] = all_positions.exclude(title__slug='member')
 
-            if self.request.GET.get('order') == 'place':
-                context['sorted_positions'] = context['sorted_positions'].order_by_place()
-            else:
-                context['sorted_positions'] = context['sorted_positions'].order_by_person_name()
-
         if self.kwargs['sub_page'] == 'party':
             context['party'] = get_object_or_404(models.Organisation,slug=self.kwargs['sub_page_identifier'])
 
@@ -283,10 +278,9 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
                 context['historic'] = True
                 context['sorted_positions'] = context['sorted_positions'].currently_active()
 
-            if self.request.GET.get('order') == 'place':
-                context['sorted_positions'] = context['sorted_positions'].order_by_place()
-            else:
-                context['sorted_positions'] = context['sorted_positions'].order_by_person_name()
+        context['sorted_positions'] = sorted(
+                context['sorted_positions'],
+                key=lambda p: p.person.legal_name.split()[-1])
 
         return context
 
