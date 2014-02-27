@@ -104,7 +104,7 @@ class MergePeopleCommandTest(unittest.TestCase):
 
         # There should be an error - this would lose the B version of
         # the date of birth:
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(CommandError):
             with no_stderr():
                 call_command('core_merge_people', **self.options)
 
@@ -119,7 +119,7 @@ class MergePeopleCommandTest(unittest.TestCase):
 
         # This should also error - it would lose the B version of the
         # summary field:
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(CommandError):
             with no_stderr():
                 call_command('core_merge_people', **self.options)
 
