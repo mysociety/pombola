@@ -1737,6 +1737,10 @@ div.object_menu ul li a {
   background-color: transparent;
   margin-bottom: 1.5em;
 }
+#home-carousel img {
+  max-width: 100%;
+  height: auto;
+}
 
 .carousel {
   position: relative;
