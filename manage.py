@@ -33,7 +33,7 @@ except:
     # again shortly anyway.
     args = None
 
-run_default_tests = (args and args[1] == 'test' and not options.settings)
+run_default_tests = (len(args) >= 2 and args[1] == 'test' and not options.settings)
 
 if __name__ == "__main__":
 
