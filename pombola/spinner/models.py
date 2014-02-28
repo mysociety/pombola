@@ -4,7 +4,7 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 
 from django.template.loader import get_template, TemplateDoesNotExist
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from sorl.thumbnail import ImageField
 

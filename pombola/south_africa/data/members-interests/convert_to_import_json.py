@@ -17,7 +17,7 @@ sys.path.append(app_path)
 os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
 
 from django.conf import settings
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from pombola.core.models import Person
 

@@ -14,7 +14,9 @@ sys.path.append(
 
 import simplejson
 from pprint import pprint
-from django.template.defaultfilters import slugify
+
+from django.utils.text import slugify
+
 from pombola.core import models
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 
