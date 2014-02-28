@@ -1,5 +1,3 @@
-{% load url from future %}
-
 <li><a href="{% url "person" slug=object.slug %}">Overview</a></li>
 {% if object.has_scorecards %}
   <li><a href="{% url "person_scorecard" slug=object.slug %}">Scorecard</a></li>
