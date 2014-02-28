@@ -1,10 +1,10 @@
 import re
 import sys
+import simplejson
 
 from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
-from django.utils import simplejson
 from django.conf import settings
 
 from django.views.generic import TemplateView
