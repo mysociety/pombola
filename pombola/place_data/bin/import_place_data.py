@@ -33,7 +33,7 @@ for row in csv_reader:
         # If we needed this to work for constituencies, we'd have to not add
         # -constituency on the end as they don't have that.
         place_slug = slugify(row['name'].strip()) + '-' + place_kind_slug
-    
+
     # Check place with this slug exists and is of the right kind.
     try:
         place = Place.objects.get(slug=place_slug, kind__slug=place_kind_slug)

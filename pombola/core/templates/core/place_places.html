@@ -20,7 +20,7 @@
             {{ object.parent_place.kind.name }}.
         {% endif %}
     {% endif %}
-    
+
     {% include child_place_list_template|default:"core/place_places_child_list.html" %}
 
     {% with boundary_changes=object.get_boundary_changes %}

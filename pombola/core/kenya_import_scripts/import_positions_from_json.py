@@ -42,12 +42,12 @@ place_lookup = {}
 
 for key in sorted(objects['organisations'].keys()):
     obj = objects['organisations'][key]
-    
+
     defaults = {}
     defaults['name'] = key
 
-    defaults['kind'] = models.OrganisationKind.objects.get(name='Educational') 
-        
+    defaults['kind'] = models.OrganisationKind.objects.get(name='Educational')
+
     print key
     org_lookup[ key ], created = models.Organisation.objects.get_or_create(
         slug = obj['slug'],
@@ -57,7 +57,7 @@ for key in sorted(objects['organisations'].keys()):
 
 for key in sorted(objects['titles'].keys()):
     obj = objects['titles'][key]
-    
+
     defaults = {
         'name': key,
     }
@@ -70,7 +70,7 @@ for key in sorted(objects['titles'].keys()):
 
 for key in sorted(objects['places'].keys()):
     obj = objects['places'][key]
-    
+
     defaults = {
         'name': key,
         'kind': models.PlaceKind.objects.get(name='Unknown'),
@@ -105,7 +105,7 @@ for obj in objects['positions']:
             }
     else:
         organisation = None
-    
+
     # Load the job title
     if obj['title']:
         title_name = obj['title']
@@ -128,28 +128,28 @@ for obj in objects['positions']:
             }
     else:
         place = None
-    
+
     def tidy_date(date):
         if not date:
             return None
-            
+
         if date == 'future':
             return ApproximateDate(future=True)
-        
+
         if re.match( r'^\d{4}$', date):
             return ApproximateDate(year=int(date))
-        
+
         month_year = re.match( r'^(\d{2})-(\d{4})$', date)
         if month_year:
             month, year = month_year.groups()
             return ApproximateDate(month=int(month), year=int(year))
 
         print 'bad date: %s' % date
-        
-    
+
+
     start_date = tidy_date( obj['start'])
     end_date   = tidy_date( obj['end'])
-    
+
     try:
         person = models.Person.objects.get( original_id=obj['person_id'] )
     except models.Person.DoesNotExist:
@@ -157,7 +157,7 @@ for obj in objects['positions']:
         continue
 
     # continue
-    
+
     # create the position
     models.Position.objects.get_or_create(
         person=       person,

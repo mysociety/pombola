@@ -175,7 +175,7 @@ def update_candidates_for_place(place_name,
     place = get_matching_place(place_name, place_kind, parliamentary_session)
 
     current_aspirants = Position.objects.filter(place=place, title=title).currently_active()
-    
+
     print "%s %s %s %s %s" % (place_name,
                               place_kind,
                               parliamentary_session,
@@ -298,7 +298,7 @@ def get_contest_type(candidates):
     return contest_type
 
 #     old_aspirants.sort(key=lambda x: x.lower())
-# 
+#
 #     print "%s %s %s %s %s %d" % (place_name,
 #                                  place_kind,
 #                                  parliamentary_session,

@@ -15,10 +15,10 @@
 
 {% block content %}
     <h2>Search in Hansard</h2>
-    
+
     <form method="get" action="." class="search-wrap">
         <p>Alternatively, <a href="{% url "core_search"  %}" id="search-core-instead">search Mzalendo's data</a> instead.</p>
-        
+
         <div class="search-box">
             {{ form.q }}
             <input type="submit" value="Search" class="button">
@@ -33,15 +33,15 @@
                 }
             </style>
 
-            <ul class="listing">        
+            <ul class="listing">
             {% for result in page.object_list %}
                 <li>
                     <strong>{{ result.object.sitting.name }}</strong>
                     <a href="{{ result.object.get_absolute_url }}">view</a>
                     <br>
-                    
+
                     {% highlight result.object.content with request.GET.q %}
-                    
+
                 </li>
             {% empty %}
                 <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
@@ -58,7 +58,7 @@
         {% else %}
             {# Show some example queries to run, maybe query syntax, something else? #}
             <p>Example searches: <i>Nairobi Stock Exchange</i>, <i>"Thika Road"</i></p>
-            
+
         {% endif %}
     </form>
 {% endblock %}
