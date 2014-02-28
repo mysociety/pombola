@@ -5,10 +5,10 @@
 # import re
 # import sys
 from django.core.management.base import LabelCommand
+from django.utils.text import slugify
 
 from mapit.models import Type
 from pombola.core.models import Place, PlaceKind
-from django.template.defaultfilters import slugify
 
 class Command(LabelCommand):
     help = 'Copy mapit.areas to core.places'

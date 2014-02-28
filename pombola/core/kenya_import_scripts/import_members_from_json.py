@@ -15,10 +15,13 @@ sys.path.append(
 
 import simplejson
 from pprint import pprint
-from django.template.defaultfilters import slugify
-from pombola.core import models
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+
+from django.utils.text import slugify
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
+
+from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+
+from pombola.core import models
 
 import name_to_first_last
 

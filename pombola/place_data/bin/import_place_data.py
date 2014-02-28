@@ -9,7 +9,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
 sys.path.append('../../../')
 sys.path.append('../../')
 
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from pombola.core.models import Place
 from pombola.place_data.models import Entry

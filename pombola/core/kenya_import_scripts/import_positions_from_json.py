@@ -15,10 +15,13 @@ sys.path.append(
 
 import simplejson
 from pprint import pprint
-from pombola.core import models
-from django_date_extensions.fields import ApproximateDate
 from warnings import warn
-from django.template.defaultfilters import slugify
+
+from django.utils.text import slugify
+
+from django_date_extensions.fields import ApproximateDate
+
+from pombola.core import models
 
 json_filename = '/home/evdb/Mzalendo_Educational_Positions.json'
 

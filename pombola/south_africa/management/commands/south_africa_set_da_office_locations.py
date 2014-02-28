@@ -38,7 +38,7 @@ from django.contrib.gis.geos import Point
 # from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import LabelCommand, CommandError
 # from django.db.models import Q
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 #
 from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
                          ContactKind, OrganisationRelationshipKind,

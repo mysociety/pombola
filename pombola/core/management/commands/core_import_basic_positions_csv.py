@@ -24,7 +24,7 @@ import csv
 
 from django.core.management.base import LabelCommand, CommandError
 
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from pombola.core.models import (Organisation, OrganisationKind, Identifier,
                          PlaceKind, Person,

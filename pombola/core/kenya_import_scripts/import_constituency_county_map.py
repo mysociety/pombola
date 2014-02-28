@@ -8,7 +8,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
 
 import csv
 
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 # Horrible boilerplate - there must be a better way :)
 sys.path.append(

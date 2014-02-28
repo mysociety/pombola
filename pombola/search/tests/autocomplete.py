@@ -4,7 +4,7 @@ import re
 from django.conf import settings
 from django.test.client import Client
 from django.utils import unittest
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 
@@ -18,12 +18,12 @@ class AutocompleteTest(unittest.TestCase):
         
         # create a load of test people in the database
         names = [
-            'Adam Ant',
-            'Bobby Smith',
-            'Fred Jones',
-            'Joe Bloggs',
-            'Joe Smith',
-            'Josepth Smyth',
+            u'Adam Ant',
+            u'Bobby Smith',
+            u'Fred Jones',
+            u'Joe Bloggs',
+            u'Joe Smith',
+            u'Josepth Smyth',
         ]
         for name in names:
             Person(

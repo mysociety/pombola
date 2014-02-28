@@ -10,9 +10,9 @@ from .models import Category, Release
 
 class InterestsRegisterModelTests(TestCase):
     def test_category_creates_own_slug(self):
-        cat = Category.objects.create(name="Foo Bar", sort_order=1)
+        cat = Category.objects.create(name=u"Foo Bar", sort_order=1)
         self.assertEqual(cat.slug, 'foo-bar')
 
     def test_release_creates_own_slug(self):
-        rel = Release.objects.create(name="Foo Bar", date="2013-12-04")
+        rel = Release.objects.create(name=u"Foo Bar", date="2013-12-04")
         self.assertEqual(rel.slug, 'foo-bar')

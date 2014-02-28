@@ -19,7 +19,7 @@ from pombola.core.models import Person
 
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from comments2.models import Comment
 
