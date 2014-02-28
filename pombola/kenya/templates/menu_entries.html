@@ -109,7 +109,26 @@
 </li>
 
 <li><a href="http://mzalendo.com/blog/">Blog</a></li>
-<li><a href="{% url "info_page" slug='newsletter' %}">Newsletter</a></li>
+
+<li><a href="{% url "info_page" slug='news' %}">News</a>
+    {% if include_sub_menu_entries %}
+    <ul id="news-overview">
+        <li>
+            <a href="{% url "info_page" slug='press' %}">Press</a>
+        </li>
+        <li>
+            <a href="{% url "info_page" slug='infographics' %}">Infographics</a>
+        </li>
+        <li>
+            <a href="{% url "info_page" slug='data' %}">Data</a>
+        </li>
+        <li>
+            <a href="{% url "info_page" slug='newsletter' %}">Newsletter</a>
+        </li>
+    </ul>
+    {% endif %}
+</li>
+
 <li><a href="{% url "info_page" slug='mzalendo-overview' %}">About</a>
     {% if include_sub_menu_entries %}
     <ul id="mzalendo-overview">
