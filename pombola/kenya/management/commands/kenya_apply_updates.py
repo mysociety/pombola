@@ -10,13 +10,12 @@ import os
 import re
 import requests
 import sys
+from optparse import make_option
 
 from django.core.management.base import NoArgsCommand, CommandError
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from django_date_extensions.fields import ApproximateDate
-
-from optparse import make_option
 
 from pombola.core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
 

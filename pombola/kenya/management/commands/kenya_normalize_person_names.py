@@ -13,7 +13,7 @@ import sys
 from optparse import make_option
 
 from django.core.management.base import NoArgsCommand, CommandError
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from iebc_api import *
 

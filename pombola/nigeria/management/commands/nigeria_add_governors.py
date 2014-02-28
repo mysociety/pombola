@@ -5,7 +5,8 @@ import re
 from optparse import make_option
 
 from django.core.management.base import NoArgsCommand
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
+
 from django_date_extensions.fields import ApproximateDate
 
 from pombola.core.models import (

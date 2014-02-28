@@ -6,7 +6,7 @@ from south.db import db
 from south.v2 import DataMigration
 
 from django.db import models
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 class Migration(DataMigration):
 

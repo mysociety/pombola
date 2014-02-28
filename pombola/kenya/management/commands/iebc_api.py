@@ -11,7 +11,7 @@ import sys
 import time
 
 from django.conf import settings
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from django_date_extensions.fields import ApproximateDate
 

@@ -10,7 +10,7 @@ from optparse import make_option
 from django.contrib.contenttypes.models import ContentType
 from django.core.files.base import ContentFile
 from django.core.management.base import LabelCommand, CommandError
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 from pombola.core.models import (Organisation, OrganisationKind, Identifier,
                          PlaceKind, Person, Contact, ContactKind, Position,
