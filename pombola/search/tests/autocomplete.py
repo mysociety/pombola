@@ -9,13 +9,13 @@ from django.core.urlresolvers import reverse
 from django.core.management import call_command
 
 from pombola.core.models import Person
-        
+
 class AutocompleteTest(unittest.TestCase):
-    
+
     longMessage = True
-    
+
     def setUp(self):
-        
+
         # create a load of test people in the database
         names = [
             u'Adam Ant',
@@ -27,9 +27,9 @@ class AutocompleteTest(unittest.TestCase):
         ]
         for name in names:
             Person(
-                slug       = slugify( name ),
-                legal_name = name,
-                gender     = 'm',
+                slug=slugify(name),
+                legal_name=name,
+                gender='m',
             ).save()
 
         # Haystack indexes are not touched when fixtures are dumped. Run this
@@ -37,11 +37,11 @@ class AutocompleteTest(unittest.TestCase):
         # a HayStack issue regarding this:
         #   https://github.com/toastdriven/django-haystack/issues/226
         call_command('rebuild_index', interactive=False, verbosity=0)
-        
+
 
     def test_autocomplete_requests(self):
         c = Client()
-        
+
         tests = {
             # input : expected names in response
 
@@ -58,7 +58,7 @@ class AutocompleteTest(unittest.TestCase):
 
             # partial names
             'jo': [ 'Fred Jones', 'Joe Bloggs', 'Joe Smith', 'Josepth Smyth' ],
-            'sm': [ 'Bobby Smith', 'Joe Smith', 'Josepth Smyth', ],            
+            'sm': [ 'Bobby Smith', 'Joe Smith', 'Josepth Smyth', ],
 
             # no matches
             'foo': [],
@@ -77,11 +77,11 @@ class AutocompleteTest(unittest.TestCase):
             response = c.get( autocomplete_url, { 'term': test_input } )
 
             self.assertEqual( response.status_code, 200 )
-            
+
             actual_output = json.loads( response.content )
             actual_names = [ strip_leading_image(i['label'])
                              for i in actual_output ]
-            
+
             self.assertEqual(
                 set(actual_names),
                 set(expected_output),

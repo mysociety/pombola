@@ -11,11 +11,11 @@
 
 {% block search_results %}
   <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
-  
+
   <div class="geocoded_results">
-  
+
     <div id="map_canvas">&nbsp;</div>
-  
+
     <ul>
       {% for result in geocoder_results %}
         <li>
@@ -33,8 +33,8 @@
         </script>
       {% endfor %}
     </ul>
-  
+
     <br style="clear: both;">
-  
+
   </div>
 {% endblock %}

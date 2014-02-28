@@ -33,7 +33,7 @@ class Command(NoArgsCommand):
             slug = slugify( area.name )
             if suffix:
                 slug += '-' + place_kind_slug
-            
+
             # find it and update, or print out an error for a human to follow up
             try:
                 place = models.Place.objects.get(slug=slug, kind__slug=place_kind_slug)

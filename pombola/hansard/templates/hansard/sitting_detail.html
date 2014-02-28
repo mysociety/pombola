@@ -26,14 +26,14 @@
                 {% case 'heading' %}
                     <h2>{{ entry.content }}</h2>
                 {% case 'speech' %}
-                    
+
                     {% if entry.speaker %}
                         <strong><a href="{{ entry.speaker.get_absolute_url }}">{{ entry.speaker.name }}</a></strong>
                     {% else %}
                         <strong>{{ entry.speaker_name }}</strong>
                     {% endif %}
 
-                    {% if entry.speaker_title %}({{ entry.speaker_title }}){% endif %}                    
+                    {% if entry.speaker_title %}({{ entry.speaker_title }}){% endif %}
                     <br>
 
                     <p>{{ entry.content|linebreaksbr }}</p>
@@ -45,11 +45,11 @@
             {% endswitch %}
         </li>
     {% endfor %}
-    
+
     {% if sitting.entry_set.all %}
         <li class="search_hansard"><a href="{% url "hansard_search" %}">search Hansard</a></li>
     {% endif %}
-    
+
     </ul>
 
     {% endwith %}
