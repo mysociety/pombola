@@ -24,13 +24,13 @@
         {{ form.as_p }}
         <input type="submit" value="Submit" />
     </form>
-    
+
     {% if results.file_error %}
         <div class="error">{{ results.file_error }}</div>
     {% endif %}
-    
+
     {% if results.error_count %}
-        <div class="error">Found {{ results.error_count }} error(s) in the entries below.</div>        
+        <div class="error">Found {{ results.error_count }} error(s) in the entries below.</div>
     {% endif %}
 
     {% if results.entries %}

@@ -29,19 +29,19 @@
             {% endif %}
           </div>
         </div>
-        
+
         <div class="votematch-spectrum {% if result.score >= 0 %}positive{% else %}negative{% endif %}">
 
           <div class="score-bar-side">
-            <div class="score-bar" style="width: {{ result.score_percentage }}%;"></div>            
+            <div class="score-bar" style="width: {{ result.score_percentage }}%;"></div>
           </div>
 
           <div class="score-side">
             <div class="score">{{ result.score }}</div>
           </div>
-          
+
         </div>
-        
+
       </div>
       {% endfor %}
 
@@ -61,5 +61,5 @@
 
     <p><small><a href="/votematch/scoring/">How scoring is calculated</a></small></p>
 
-  
+
 {% endblock %}

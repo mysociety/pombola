@@ -17,7 +17,7 @@
           {% for place_kind in all_kinds %}
               {% for session in place_kind.parliamentary_sessions_for_iteration %}
                 <li>
-                  
+
                   {% if session %}
                      <a href="{% url "place_kind" slug=place_kind.slug session_slug=session.slug %}">{% firstof place_kind.plural_name place_kind.name %} {% if session %}({{session.relative_time}}){% endif %}</a>
                   {% else %}
@@ -26,7 +26,7 @@
                 </li>
               {% endfor %}
           {% endfor %}
-          
+
         </ul>
       </nav>
     </div>
@@ -42,23 +42,23 @@
           {% for place_kind in all_kinds %}
               {% for session in place_kind.parliamentary_sessions_for_iteration %}
                 {% if kind == place_kind and session == selected_session %}
-        
+
                     <h2>
                         {% firstof place_kind.plural_name place_kind.name %}
                         {% if session %}({{session.relative_time}}){% endif %}
                     </h2>
-        
+
                     {% if kind.summary %}
                         <p>{{ kind.summary }}</p>
                     {% endif %}
-                    
+
                     {% include 'core/generic_list.html' %}
-        
+
                 {% endif %}
               {% endfor %}
           {% endfor %}
-          
+
         {% endif %}
-    </div>    
-    
+    </div>
+
 {% endblock %}

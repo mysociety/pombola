@@ -12,14 +12,14 @@
     </div>
 
     <h1 class="page-title">{{ page_title }}</h1>
-    
+
     {% if object.summary %}
         <div class="summary markdown">
             {{ object.summary }}
         </div>
     {% endif %}
-    
-    
+
+
     <div class="content_box">
         <h3>Current Position Holders</h3>
 
@@ -31,7 +31,7 @@
                     {% empty %}
                         <img src="{{STATIC_URL}}images/person-210x210.jpg" />
                     {% endthumbnail %}
-                    
+
                     <span class="name">
                         {{ position.person.name }}
                     </span>

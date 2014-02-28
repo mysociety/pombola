@@ -23,7 +23,7 @@
 
 {% block content %}
     <div id="content-main">
-        
+
         {% if task.log %}
         <style type="text/css">
             #task_log {
@@ -33,11 +33,11 @@
                 padding: 1em;
             }
         </style>
-        <pre id="task_log">{{ task.log }}</pre>        
+        <pre id="task_log">{{ task.log }}</pre>
         {% endif %}
 
         <h1>{{ task.category }} for <a href="{{ object_admin_url }}">{{ task.content_object }}</a></h1>
-        
+
         <p>Please go to <a href="{{ object_admin_url }}">{{ task.content_object }}</a> and complete the <stronght>{{ task.category }}</stronght> task.</p>
 
         <p>Task was created <strong>{{ task.created|timesince }} ago</strong>, has priority <strong>{{ task.priority }}</strong> and has been attempted <strong>{{ task.attempt_count }} times</strong>.</p>

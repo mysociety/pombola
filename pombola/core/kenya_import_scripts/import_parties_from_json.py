@@ -22,11 +22,11 @@ from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from pombola.core import models
 
 party_kind = models.OrganisationKind.objects.get(slug="party")
-parties    = simplejson.loads( sys.stdin.read() )
+parties = simplejson.loads(sys.stdin.read())
 
 for party in parties:
-    pprint( party )
-    
+    pprint(party)
+
     try:
         org = models.Organisation.objects.get(
             slug = slugify(party['Acronym'])
@@ -35,10 +35,10 @@ for party in parties:
         org = models.Organisation(
             slug = slugify(party['Acronym'])
         )
-        
-    org.kind        = party_kind  
+
+    org.kind = party_kind
     org.original_id = party['PartyID']
-    org.name        = party['Name']
+    org.name = party['Name']
 
     if party.get('FoundationYear'):
         org.started = ApproximateDate(year=int(party['FoundationYear']))

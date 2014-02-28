@@ -11,14 +11,14 @@
       {{ object.summary }}
     </div>
   {% endif %}
-  
+
 
   {% if object.has_scorecards %}
     <span class="score-overall-{{ object.scorecard_overall_as_word }} scorecard-single-smiley">
     </span>
 
     <h2>Scorecards</h2>
-    
+
 
     <p>
       The
@@ -40,7 +40,7 @@
   </p>
 
 
-  {% if settings.ENABLED_FEATURES.hansard %}            
+  {% if settings.ENABLED_FEATURES.hansard %}
     {% with hansard_count=object.hansard_entries.count %}
       {% if hansard_count %}
         <h2>Parliamentary appearanes</h2>
@@ -57,7 +57,7 @@
   {% with contact_detail_count=object.contacts.all.count %}
     {% if contact_detail_count %}
       <h2>Contact Details</h2>
-      
+
       <p>
         There
         {{ contact_detail_count|pluralize:"is,are" }}
@@ -65,7 +65,7 @@
         way{{ contact_detail_count|pluralize }} to
         <a href="{% url "person_contact_details" slug=object.slug %}">get in touch</a>
         with {{ object.name }}.
-      </p> 
+      </p>
     {% endif %}
   {% endwith %}
 
@@ -77,7 +77,7 @@
         <dt>Full name</dt>
         <dd>{{ object.legal_name }}</dd>
     {% endif %}
-    
+
     {% if object.additional_names %}
         <dt>Also known as</dt>
         <dd>
@@ -89,7 +89,7 @@
           {% endfor %}
         </dd>
     {% endif %}
-    
+
     {% if object.date_of_birth %}
         <dt>Born</dt>
         <dd>
@@ -97,10 +97,10 @@
           {# TODO - add age in years #}
         </dd>
     {% endif %}
-    
+
     {# TODO - add death date too if it exists #}
   </dl>
-  
+
   {% include 'disqus_comments.html' %}
 
 {% endblock %}

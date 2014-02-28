@@ -10,8 +10,6 @@ sys.path.append(
     )
 )
 
-
-
 import simplejson
 from pprint import pprint
 
@@ -21,10 +19,10 @@ from pombola.core import models
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 
 constituency_kind = models.PlaceKind.objects.get(slug="constituency")
-objects    = simplejson.loads( sys.stdin.read() )
+objects = simplejson.loads(sys.stdin.read())
 
 for obj in objects:
-    pprint( obj )
+    pprint(obj)
 
     # {'Code': '001',
     #  'ConstituencyID': '1',
@@ -33,7 +31,7 @@ for obj in objects:
     #  'Name': 'Makadara',
     #  'Population': '0',
     #  'RegisteredVoters': '132630'}
-         
+
     try:
         db_obj = models.Place.objects.get(
             slug = slugify(obj['Name'])
@@ -42,10 +40,10 @@ for obj in objects:
         db_obj = models.Place(
             slug = slugify(obj['Name'])
         )
-        
-    db_obj.kind        = constituency_kind  
+
+    db_obj.kind = constituency_kind
     db_obj.original_id = obj['ConstituencyID']
-    db_obj.name        = obj['Name']
+    db_obj.name = obj['Name']
 
     db_obj.save()
 
