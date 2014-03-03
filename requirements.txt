@@ -12,7 +12,7 @@ Pillow==2.3.0
 psycopg2==2.5.2
 
 ### Django related
-Django==1.5.5
+Django==1.6.2
 django-pagination==1.0.7
 South==0.8.4
 
@@ -38,7 +38,7 @@ pyelasticsearch==0.6.1
 django-haystack==2.1.0
 
 # Testing helpers
-django-nose==1.1
+django-nose==1.2
 yanc==0.2.4
 httplib2==0.8
 WebTest==2.0.14
