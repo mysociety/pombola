@@ -3299,3 +3299,7 @@ div.search-pagination {
 .embedded-video iframe {
   max-width: 100%;
 }
+
+.carousel-item {
+  background-color: #56a3da;
+}
