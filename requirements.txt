@@ -132,3 +132,10 @@ argparse==1.2.1
 # In an ideal world, this should be pulled in by sayit, but it isn't.
 # See https://github.com/mysociety/sayit/issues/161
 -e git+https://github.com/mysociety/django-sluggable@with_unique_with#egg=django-sluggable
+
+# Used for keeping an eye on this file.
+pip-tools==0.3.4
+
+# Other things presumably installed as dependencies of stuff above
+distribute==0.7.3
+python-mimeparse==0.1.4
