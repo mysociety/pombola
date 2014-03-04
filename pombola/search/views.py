@@ -164,6 +164,6 @@ def autocomplete(request):
     # send back the results as JSON
     return HttpResponse(
         simplejson.dumps(response_data),
-        mimetype='application/json'
+        content_type='application/json',
     )
 
