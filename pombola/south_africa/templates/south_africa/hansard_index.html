@@ -35,7 +35,7 @@
         <div class="js-hide-reveal hansard-section" id="{{ t.grouper|slugify }}">
             {% for item in t.list %}
             <p>
-                <a href="{% url 'speeches:section-view' item.section.id %}">{{ item.section.title }}</a>
+                <a href="{% url 'speeches:section-view' item.section.get_path %}">{{ item.section.title }}</a>
                 ({{ item.speech_count }})
             </p>
             {% endfor %}

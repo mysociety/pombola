@@ -72,11 +72,11 @@ urlpatterns += patterns('pombola.south_africa.views',
 sayit_patterns = patterns('',
 
     # Exposed endpoints
-    url(r'^(?P<pk>\d+)$',        SectionView.as_view(), name='section-view'),
-    url(r'^speech/(?P<pk>\d+)$', SpeechView.as_view(),  name='speech-view'),
-
+    url(r'^speech/(?P<pk>\d+)$', SpeechView.as_view(), name='speech-view'),
     # Fake endpoint to redirect
-    url(r'^speaker/(?P<pk>\d+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
+    url(r'^speaker/(?P<slug>[-\w]+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
+    url(r'^(?P<full_slug>.+)$', SectionView.as_view(), name='section-view'),
+
 )
 
 hansard_patterns = sayit_patterns + patterns('',

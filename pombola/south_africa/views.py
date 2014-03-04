@@ -450,8 +450,8 @@ class SASpeakerRedirectView(RedirectView):
     # see also SAPersonDetail for mapping in opposite direction
     def get_redirect_url(self, **kwargs):
         try:
-            id = int( kwargs['pk'] )
-            speaker = Speaker.objects.get( id=id )
+            slug = kwargs['slug']
+            speaker = Speaker.objects.get(slug=slug)
             popit_id = speaker.person.popit_id
             [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
             i = models.Identifier.objects.get(
