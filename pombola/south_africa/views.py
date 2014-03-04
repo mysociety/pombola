@@ -438,16 +438,16 @@ class SANewsletterPage(InfoPageView):
 class SASpeakerRedirectView(RedirectView):
 
     # see also SAPersonDetail for mapping in opposite direction
-    def get_redirect_url(self, **kwargs):
+    def get_redirect_url(self, *args, **kwargs):
         try:
             slug = kwargs['slug']
             speaker = Speaker.objects.get( slug=slug )
             popit_id = speaker.person.popit_id
             [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
             i = models.Identifier.objects.get(
-                content_type = models.ContentType.objects.get_for_model(models.Person),
-                scheme = scheme,
-                identifier = identifier,
+                content_type=models.ContentType.objects.get_for_model(models.Person),
+                scheme=scheme,
+                identifier=identifier,
             )
             person = models.Person.objects.get(id=i.object_id)
             return reverse('person', args=(person.slug,))
@@ -584,7 +584,7 @@ class OldSpeechRedirect(RedirectView):
 
     """Redirects from an old speech URL to the current one"""
 
-    def get_redirect_url(self, **kwargs):
+    def get_redirect_url(self, *args, **kwargs):
         try:
             speech_id = int(kwargs['pk'])
             speech = Speech.objects.get(pk=speech_id)
@@ -599,7 +599,7 @@ class OldSectionRedirect(RedirectView):
 
     """Redirects from an old section URL to the current one"""
 
-    def get_redirect_url(self, **kwargs):
+    def get_redirect_url(self, *args, **kwargs):
         try:
             section_id = int(kwargs['pk'])
             print "XXX: got section_id", section_id
