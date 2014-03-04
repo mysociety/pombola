@@ -10,7 +10,7 @@
                 {% if forloop.counter == 1 %}
                     <li><a href="{% url 'speeches:section-list' %}">{{ n.title }}</a> 
                 {% else %}
-                    <li><a href="{% url 'speeches:section-view' n.id %}">{{ n.title }}</a> 
+                    <li><a href="{% url 'speeches:section-view' n.get_path %}">{{ n.title }}</a>
                 {% endif %}
             {% endif %}
         {% endfor %}
