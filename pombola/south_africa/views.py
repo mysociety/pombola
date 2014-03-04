@@ -438,16 +438,16 @@ class SANewsletterPage(InfoPageView):
 class SASpeakerRedirectView(RedirectView):
 
     # see also SAPersonDetail for mapping in opposite direction
-    def get_redirect_url(self, **kwargs):
+    def get_redirect_url(self, *args, **kwargs):
         try:
-            id = int( kwargs['pk'] )
-            speaker = Speaker.objects.get( id=id )
+            id = int(kwargs['pk'])
+            speaker = Speaker.objects.get(id=id)
             popit_id = speaker.person.popit_id
             [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
             i = models.Identifier.objects.get(
-                content_type = models.ContentType.objects.get_for_model(models.Person),
-                scheme = scheme,
-                identifier = identifier,
+                content_type=models.ContentType.objects.get_for_model(models.Person),
+                scheme=scheme,
+                identifier=identifier,
             )
             person = models.Person.objects.get(id=i.object_id)
             return reverse('person', args=(person.slug,))
@@ -581,10 +581,10 @@ class SAQuestionIndex(SASpeechesIndex):
 
 class SACommitteeSpeechRedirectView(RedirectView):
 
-    def get_redirect_url(self, **kwargs):
+    def get_redirect_url(self, *args, **kwargs):
         try:
-            id = int( kwargs['pk'] )
-            speech = Speech.objects.get( id=id )
+            id = int(kwargs['pk'])
+            speech = Speech.objects.get(id=id)
             source_url = speech.source_url
             if source_url:
                 return source_url
@@ -595,10 +595,10 @@ class SACommitteeSpeechRedirectView(RedirectView):
 
 class SACommitteeSectionRedirectView(RedirectView):
 
-    def get_redirect_url(self, **kwargs):
+    def get_redirect_url(self, *args, **kwargs):
         try:
-            id = int( kwargs['pk'] )
-            section = Section.objects.get( id=id )
+            id = int(kwargs['pk'])
+            section = Section.objects.get(id=id)
             for speech in section.speech_set.all():
                 source_url = speech.source_url
                 if source_url:
