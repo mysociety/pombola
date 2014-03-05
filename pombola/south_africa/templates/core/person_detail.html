@@ -128,7 +128,7 @@ pombola_settings.extra_js.push('js/tabs.js')
     <div class="person-appearances-summary">
       <h3>Committee appearances</h3>
 
-      {% include "core/person_speech_list.html" with speechlist=committee|slice:":3" section_url='committee:section-view' %}
+      {% include "core/person_speech_list.html" with speechlist=committee|slice:":3" %}
 
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
 
@@ -139,7 +139,7 @@ pombola_settings.extra_js.push('js/tabs.js')
     <div class="person-appearances-summary{% if not question.count and not committee.count %} one-appearance{% endif %}">
       <h3>Plenary appearances</h3>
 
-      {% include "core/person_speech_list.html" with speechlist=hansard|slice:":3" section_url='hansard:section-view' %}
+      {% include "core/person_speech_list.html" with speechlist=hansard|slice:":3" %}
 
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
 
@@ -150,7 +150,7 @@ pombola_settings.extra_js.push('js/tabs.js')
     <div class="person-appearances-summary">
       <h3>Questions </h3>
 
-      {% include "core/person_speech_list.html" with speechlist=question|slice:":3" section_url='question:section-view' parent_title=1 %}
+      {% include "core/person_speech_list.html" with speechlist=question|slice:":3" parent_title=1 %}
 
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
 
@@ -197,7 +197,7 @@ pombola_settings.extra_js.push('js/tabs.js')
     <section class="person-appearances">
       <h3>Committee appearances</h3>
 
-      {% include "core/person_speech_list.html" with speechlist=committee section_url='committee:section-view' %}
+      {% include "core/person_speech_list.html" with speechlist=committee %}
 
       {% if committee.count %}
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
@@ -207,7 +207,7 @@ pombola_settings.extra_js.push('js/tabs.js')
     <section class="person-appearances">
       <h3>Plenary appearances</h3>
 
-      {% include "core/person_speech_list.html" with speechlist=hansard section_url='hansard:section-view' %}
+      {% include "core/person_speech_list.html" with speechlist=hansard %}
 
       {% if hansard.count %}
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
@@ -217,7 +217,7 @@ pombola_settings.extra_js.push('js/tabs.js')
     <section class="person-appearances">
       <h3>Questions </h3>
 
-      {% include "core/person_speech_list.html" with speechlist=question section_url='question:section-view' parent_title=1 %}
+      {% include "core/person_speech_list.html" with speechlist=question parent_title=1 %}
 
       {% if question.count %}
         <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>

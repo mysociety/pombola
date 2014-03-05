@@ -19,7 +19,7 @@
     <li>
         <p>
             <span class="speech-title">
-                <a href="{% url section_url|default:'speeches:section-view' speech.section_id %}#s{{ speech.id }}">
+                <a href="{% url 'speeches:section-view' speech.section.get_path %}#s{{ speech.id }}">
                     {% if parent_title %}
                         {{ speech.section.parent.title }}
                     {% else %}
