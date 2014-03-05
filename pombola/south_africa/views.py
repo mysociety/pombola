@@ -672,6 +672,8 @@ class SASpeechView(SpeechView):
         context = self.get_context_data(object=speech)
         return self.render_to_response(context)
 
+    def get_queryset(self):
+        return Speech.objects.all()
 
 class SASectionView(SectionView):
 

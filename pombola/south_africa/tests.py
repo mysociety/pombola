@@ -1,3 +1,4 @@
+import re
 import sys
 import os
 from datetime import date, time
@@ -18,7 +19,7 @@ from pombola.core import models
 import json
 
 from popit.models import Person as PopitPerson, ApiInstance
-from speeches.models import Speaker, Section
+from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.south_africa.views import PersonSpeakerMappings
@@ -496,6 +497,28 @@ class SACommitteeIndexViewTest(WebTest):
                                                       self.fish_section_title),
                             html=True)
         self.assertNotContains(response, "Empty section")
+
+    def test_public_speech(self):
+        # Find the section that contains private speeches:
+        section = Section.objects.get(title=self.fish_section_title)
+        # Pick an arbitrary speech in that section:
+        speech = Speech.objects.filter(section=section)[0]
+        speech_url = reverse('speeches:speech-view', args=(speech.id,))
+        response = self.app.get(speech_url)
+        self.assertContains(response, "rhubarb rhubarb")
+
+    def test_private_speech_redirects(self):
+        # Find the section that contains private speeches:
+        section = Section.objects.get(title=self.forest_section_title)
+        # Pick an arbitrary speech in that section:
+        speech = Speech.objects.filter(section=section)[0]
+        speech_url = reverse('speeches:speech-view', args=(speech.id,))
+        # Get that URL, and expect to see a redirect to the source_url:
+        response = self.app.get(speech_url)
+        self.assertEqual(response.status_code, 302)
+        url_match = re.search(r'http://somewhere.or.other/\d+',
+                              response.location)
+        self.assertTrue(url_match)
 
 
 @attr(country='south_africa')
