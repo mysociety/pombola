@@ -12,7 +12,4 @@ cd $(dirname "$BASH_SOURCE")
 ./manage.py test --settings=pombola.settings.tests
 
 ./manage.py test --settings=pombola.settings.tests_kenya
-./manage.py test --settings=pombola.settings.tests_libya
-./manage.py test --settings=pombola.settings.tests_nigeria
 ./manage.py test --settings=pombola.settings.tests_south_africa
-./manage.py test --settings=pombola.settings.tests_zimbabwe
