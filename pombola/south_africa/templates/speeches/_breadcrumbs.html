@@ -8,7 +8,14 @@
             {% if n.id != section.id %}
                 <span class="sep">&raquo;</span>
                 {% if forloop.counter == 1 %}
-                    <li><a href="{% url 'speeches:section-list' %}">{{ n.title }}</a> 
+                  <li><b>foo</b>
+                    {% if n.slug == 'questions' %}
+                      <a href="{% url 'section-list-question' %}">{{ n.title }}</a>
+                    {% elif n.slug == 'committee-minutes' %}
+                      <a href="{% url 'section-list-committee-minutes' %}">{{ n.title }}</a>
+                    {% elif n.slug == 'hansard' %}
+                      <a href="{% url 'section-list-hansard' %}">{{ n.title }}</a>
+                    {% endif %}
                 {% else %}
                     <li><a href="{% url 'speeches:section-view' n.get_path %}">{{ n.title }}</a>
                 {% endif %}

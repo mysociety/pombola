@@ -23,7 +23,7 @@ from haystack.forms import SearchForm
 
 from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker, Tag
-from speeches.views import NamespaceMixin
+from speeches.views import NamespaceMixin, SpeechView, SectionView
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
@@ -579,34 +579,37 @@ class SAQuestionIndex(SASpeechesIndex):
                                     key=questions_section_sort_key)
         return context
 
-class SACommitteeSpeechRedirectView(RedirectView):
+
+class OldSpeechRedirect(RedirectView):
+
+    """Redirects from an old speech URL to the current one"""
 
     def get_redirect_url(self, **kwargs):
         try:
-            id = int( kwargs['pk'] )
-            speech = Speech.objects.get( id=id )
-            source_url = speech.source_url
-            if source_url:
-                return source_url
-        except Exception as e:
+            speech_id = int(kwargs['pk'])
+            speech = Speech.objects.get(pk=speech_id)
+            return reverse(
+                'speeches:speech-view',
+                args=[speech_id])
+        except (ValueError, Speech.DoesNotExist):
             raise Http404
 
-        raise Http404("No source URL for this content")
 
-class SACommitteeSectionRedirectView(RedirectView):
+class OldSectionRedirect(RedirectView):
+
+    """Redirects from an old section URL to the current one"""
 
     def get_redirect_url(self, **kwargs):
         try:
-            id = int( kwargs['pk'] )
-            section = Section.objects.get( id=id )
-            for speech in section.speech_set.all():
-                source_url = speech.source_url
-                if source_url:
-                    return source_url
-        except Exception as e:
+            section_id = int(kwargs['pk'])
+            print "XXX: got section_id", section_id
+            section = Section.objects.get(pk=section_id)
+            print "XXX: got section:", section
+            return reverse(
+                'speeches:section-view',
+                args=[section.get_path])
+        except (ValueError, Section.DoesNotExist):
             raise Http404
-
-        raise Http404("No source URL for this content")
 
 
 class SAPersonAppearanceView(TemplateView):
@@ -638,10 +641,43 @@ class SAPersonAppearanceView(TemplateView):
 
         # Add a hardcoded section-view url name to use for the speeches. Would
         # rather this was not hardcoded here but seems hard to avoid.
-        if (speech_tag in ['hansard', 'committee', 'question']):
-            context['section_url'] = '%s:section-view' % speech_tag
-        else:
-            # speech_tag not know. Use 'None' for template default instead
-            context['section_url'] = None
+        # speech_tag not know. Use 'None' for template default instead
+        context['section_url'] = None
 
         return context
+
+
+def redirect_to_source(section):
+    # If this committee is descended from the Committee Minutes
+    # section, redirect to the source transcript on the PMG website:
+    root_section = section.get_ancestors[0]
+    return root_section.slug == 'committee-minutes'
+
+
+class SASpeechView(SpeechView):
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        try_redirect = redirect_to_source(self.object.section)
+        if try_redirect and self.object.source_url:
+            return redirect(self.object.source_url)
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+
+
+class SASectionView(SectionView):
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if redirect_to_source(self.object):
+            # Find a URL to redirect to:
+            redirect_url = None
+            for speech in self.object.speech_set.all():
+                source_url = speech.source_url
+                if source_url:
+                    redirect_url = source_url
+                    break
+            if redirect_url:
+                return redirect(source_url)
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)

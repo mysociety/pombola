@@ -425,7 +425,7 @@ class SAHansardIndexViewTest(TestCase):
 
         # Check that we can see the titles of sections containing speeches only
         self.assertContains(response, section_name)
-        self.assertContains(response, '<a href="/hansard/%d">%s</a>' % (section.id, section_name), html=True)
+        self.assertContains(response, '<a href="/%s">%s</a>' % (section.get_path, section_name), html=True)
         self.assertNotContains(response, "Empty section")
 
 @attr(country='south_africa')
@@ -457,7 +457,7 @@ class SACommitteeIndexViewTest(TestCase):
 
     def test_committee_index_page(self):
         c = Client()
-        response = c.get('/committee/')
+        response = c.get('/committee-minutes/')
         self.assertEqual(response.status_code, 200)
 
         section_name = "Oh fishy fishy fishy fishy fishy fish"
@@ -466,7 +466,7 @@ class SACommitteeIndexViewTest(TestCase):
         # Check that we can see the titles of sections containing speeches only
         self.assertContains(response, "16 November 2012")
         self.assertContains(response, section_name)
-        self.assertContains(response, '<a href="/committee/%d">%s</a>' % (section.id, section_name), html=True)
+        self.assertContains(response, '<a href="/%s">%s</a>' % (section.get_path, section_name), html=True)
         self.assertNotContains(response, "Empty section")
 
 
