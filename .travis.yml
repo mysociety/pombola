@@ -1,0 +1,53 @@
+notifications:
+  email: false
+  irc:
+    channels:
+      - "irc.mysociety.org#pmo"
+    use_notice: true
+
+language: python
+
+env:
+  - MODULES="Django>=1.4,<1.5"
+
+services:
+  - elasticsearch
+
+install:
+  - sudo apt-get update -qq
+  # The following steps are taken from MapIt's travis.yml, to make
+  # sure that the system python-gdal is used - installing it with pip
+  # will fail due to build errors.
+  - sudo apt-get install -qq libgdal1-dev libgdal1-1.7.0 python-gdal gdal-bin binutils
+  - ln -s /usr/lib/python2.7/dist-packages/osgeo ~/virtualenv/python2.7/lib/python2.7/site-packages/
+  - ln -s /usr/lib/python2.7/dist-packages/GDAL-1.7.3.egg-info ~/virtualenv/python2.7/lib/python2.7/site-packages/
+  # Install the environment-specific Python packages:
+  - pip install $MODULES --use-mirrors
+  # Now install the rest of the required Python packages:
+  - pip install -r requirements.txt --use-mirrors
+  # Create the PostGIS template database:
+  - createdb -E UTF8 template_postgis &&
+    ( createlang -d template_postgis -l | grep plpgsql || createlang -d template_postgis plpgsql ) &&
+    psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis';" &&
+    psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-2.1/postgis.sql &&
+    psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-2.1/spatial_ref_sys.sql &&
+    psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-2.1/legacy_gist.sql &&
+    psql -d template_postgis -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&
+    psql -d template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&
+    psql -d template_postgis -c "GRANT ALL ON geography_columns TO PUBLIC;"
+  - sudo /etc/init.d/postgresql reload
+  # Create a basic general.yml file:
+  - sed -r
+    -e "s,(POMBOLA_DB_USER:) 'sayit',\\1 'postgres',"
+    -e "s,(POMBOLA_DB_NAME:) '',\\1 'pombola',"
+    -e "s,(DJANGO_SECRET_KEY:) '',\\1 'notatallsecret',"
+    conf/general.yml-example > conf/general.yml
+
+before_script:
+  - createdb -U postgres -T template_postgis pombola
+  - ./manage.py syncdb --noinput
+  - ./manage.py migrate --noinput
+  - ./manage.py collectstatic --noinput
+
+script:
+  - ./run-tests
