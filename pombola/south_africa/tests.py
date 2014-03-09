@@ -301,11 +301,11 @@ class SAOrganisationPartySubPageTest(TestCase):
         positiontitle2 = models.PositionTitle.objects.create(name='Delegate', slug='delegate')
         positiontitle3 = models.PositionTitle.objects.create(name='Whip', slug='whip')
 
-        person1 = models.Person.objects.create(name='Person1', slug='person1')
-        person2 = models.Person.objects.create(name='Person2', slug='person2')
-        person3 = models.Person.objects.create(name='Person3', slug='person3')
-        person4 = models.Person.objects.create(name='Person4', slug='person4')
-        person5 = models.Person.objects.create(name='Person5', slug='person5')
+        person1 = models.Person.objects.create(legal_name='Person1', slug='person1')
+        person2 = models.Person.objects.create(legal_name='Person2', slug='person2')
+        person3 = models.Person.objects.create(legal_name='Person3', slug='person3')
+        person4 = models.Person.objects.create(legal_name='Person4', slug='person4')
+        person5 = models.Person.objects.create(legal_name='Person5', slug='person5')
 
         position1 = models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
         position2 = models.Position.objects.create(person=person2, organisation=party1, title=positiontitle1)
@@ -326,21 +326,21 @@ class SAOrganisationPartySubPageTest(TestCase):
         context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1'))).context
         context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2'))).context
 
-        expected1 = ['<Position:  (Member at House1)>', '<Position:  (Member at House1)>']
-        expected2 = ['<Position:  (Member at House1)>']
+        expected1 = ['<Position: Person1 (Member at House1)>', '<Position: Person2 (Member at House1)>']
+        expected2 = ['<Position: Person4 (Member at House1)>']
 
         self.assertQuerysetEqual(context1['sorted_positions'], expected1)
         self.assertQuerysetEqual(context2['sorted_positions'], expected2)
-        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person1')
-        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person2')
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person1')
+        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person2')
         self.assertEqual(context2['sorted_positions'][0].person.slug, 'person4')
 
     def test_display_past_members(self):
         context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1')), {'historic': '1'}).context
         context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2')), {'historic': '1'}).context
 
-        expected1 = ['<Position:  (Member at House1)>']
-        expected2 = ['<Position:  (Member at House1)>']
+        expected1 = ['<Position: Person3 (Member at House1)>']
+        expected2 = ['<Position: Person5 (Member at House1)>']
 
         self.assertQuerysetEqual(context1['sorted_positions'], expected1)
         self.assertQuerysetEqual(context2['sorted_positions'], expected2)
@@ -351,16 +351,17 @@ class SAOrganisationPartySubPageTest(TestCase):
         context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1')), {'all': '1'}).context
         context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2')), {'all': '1'}).context
 
-        expected1 = ['<Position:  (Member at House1)>','<Position:  (Member at House1)>','<Position:  (Whip at House1)>','<Position:  (Member at House1)>']
-        expected2 = ['<Position:  (Member at House1)>','<Position:  (Member at House1)>']
+        expected1 = ['<Position: Person1 (Member at House1)>','<Position: Person1 (Whip at House1)>','<Position: Person2 (Member at House1)>','<Position: Person3 (Member at House1)>']
+        expected2 = ['<Position: Person4 (Member at House1)>','<Position: Person5 (Member at House1)>']
 
         self.assertQuerysetEqual(context1['sorted_positions'], expected1)
         self.assertQuerysetEqual(context2['sorted_positions'], expected2)
-        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person3')
-        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person2')
-        self.assertEqual(context1['sorted_positions'][2].person.slug, 'person1')
-        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person5')
-        self.assertEqual(context2['sorted_positions'][1].person.slug, 'person4')
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person1')
+        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person1')
+        self.assertEqual(context1['sorted_positions'][2].person.slug, 'person2')
+        self.assertEqual(context1['sorted_positions'][3].person.slug, 'person3')
+        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person4')
+        self.assertEqual(context2['sorted_positions'][1].person.slug, 'person5')
 
 
 @attr(country='south_africa')
