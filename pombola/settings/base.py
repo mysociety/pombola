@@ -268,8 +268,6 @@ AJAX_LOOKUP_CHANNELS = {
     'place_name'        : dict(model='core.place',         search_field='name'),
     'title_name'        : dict(model='core.positiontitle', search_field='name'),
 }
-AJAX_SELECT_BOOTSTRAP = False
-AJAX_SELECT_INLINES   = None # we add the js and css ourselves in the header
 
 # misc settings
 HTTPLIB2_CACHE_DIR = os.path.join( root_dir, 'httplib2_cache' )
