@@ -378,20 +378,20 @@ class SAHansardIndexViewTest(TestCase):
     def setUp(self):
         create_sections([
             {
-                'title': "Hansard",
+                'title': u"Hansard",
                 'subsections': [
-                    {   'title': "2013",
+                    {   'title': u"2013",
                         'subsections': [
-                            {   'title': "02",
+                            {   'title': u"02",
                                 'subsections': [
-                                    {   'title': "16",
+                                    {   'title': u"16",
                                         'subsections': [
-                                            {   'title': "Proceedings of the National Assembly (2012/2/16)",
+                                            {   'title': u"Proceedings of the National Assembly (2012/2/16)",
                                                 'subsections': [
-                                                    {   'title': "Proceedings of Foo",
+                                                    {   'title': u"Proceedings of Foo",
                                                         'speeches': [ 4, date(2013, 2, 16), time(9, 0) ],
                                                     },
-                                                    {   'title': "Bill on Silly Walks",
+                                                    {   'title': u"Bill on Silly Walks",
                                                         'speeches': [ 2, date(2013, 2, 16), time(12, 0) ],
                                                     },
                                                 ],
@@ -399,14 +399,14 @@ class SAHansardIndexViewTest(TestCase):
                                         ],
                                     },
                                     {
-                                        'title': "18",
+                                        'title': u"18",
                                         'subsections': [
-                                            {   'title': "Proceedings of the National Assembly (2012/2/18)",
+                                            {   'title': u"Proceedings of the National Assembly (2012/2/18)",
                                                 'subsections': [
-                                                    {   'title': "Budget Report",
+                                                    {   'title': u"Budget Report",
                                                         'speeches': [ 3, date(2013, 2, 18), time(9, 0) ],
                                                     },
-                                                    {   'title': "Bill on Comedy Mustaches",
+                                                    {   'title': u"Bill on Comedy Mustaches",
                                                         'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
                                                     },
                                                 ],
@@ -416,7 +416,7 @@ class SAHansardIndexViewTest(TestCase):
                                 ],
                             },
                             {
-                                'title': "Empty section",
+                                'title': u"Empty section",
                             }
                         ],
                     },
@@ -443,17 +443,17 @@ class SACommitteeIndexViewTest(TestCase):
     def setUp(self):
         create_sections([
             {
-                'title': "Committee Minutes",
+                'title': u"Committee Minutes",
                 'subsections': [
-                    {   'title': "Agriculture, Forestry and Fisheries",
+                    {   'title': u"Agriculture, Forestry and Fisheries",
                         'subsections': [
-                            {   'title': "16 November 2012",
+                            {   'title': u"16 November 2012",
                                 'subsections': [
-                                    {   'title': "Oh fishy fishy fishy fishy fishy fish",
+                                    {   'title': u"Oh fishy fishy fishy fishy fishy fish",
                                         'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
                                     },
                                     {
-                                        'title': "Empty section",
+                                        'title': u"Empty section",
                                     }
                                 ],
                             },
