@@ -197,6 +197,12 @@ class SAPersonDetailViewTest(TestCase):
                 name = doc['name'],
                 person = person)
 
+        # Create the top level SayIt sections, so that there's no
+        # warning when getting the person page:
+        create_sections([{'title': u"Hansard"},
+                         {'title': u"Committee Minutes"},
+                         {'title': u"Questions"}])
+
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
         speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
