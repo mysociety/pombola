@@ -206,6 +206,23 @@ class SAPlaceDetailSub(PlaceDetailSub):
         return context
 
 
+def key_position_sort_last_name(position):
+    """Take a position and return its person's last name
+
+    This is intended for use as the key attribute of .sort() or
+    sorted() when sorting positions, so that the positions are sorted
+    by the last name of the associated person.  It's possible with the
+    current code for a person to have an empty legal name (although
+    presumably this is an error) in which case return an empty string
+    so that these broken cases are obvious at the beginning of the
+    sort."""
+
+    if position.person.legal_name:
+        return position.person.legal_name.split()[-1]
+    else:
+        return ''
+
+
 class SAOrganisationDetailView(OrganisationDetailView):
 
     def get_context_data(self, **kwargs):
@@ -218,8 +235,7 @@ class SAOrganisationDetailView(OrganisationDetailView):
         # of their holder's last name.
         context['positions'] = sorted(
             context['positions'],
-            key=lambda position: position.person.legal_name.split()[-1]
-            )
+            key=key_position_sort_last_name)
 
         return context
 
@@ -280,7 +296,7 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
 
         context['sorted_positions'] = sorted(
                 context['sorted_positions'],
-                key=lambda p: p.person.legal_name.split()[-1])
+                key=key_position_sort_last_name)
 
         return context
 

@@ -197,6 +197,12 @@ class SAPersonDetailViewTest(TestCase):
                 name = doc['name'],
                 person = person)
 
+        # Create the top level SayIt sections, so that there's no
+        # warning when getting the person page:
+        create_sections([{'title': u"Hansard"},
+                         {'title': u"Committee Minutes"},
+                         {'title': u"Questions"}])
+
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
         speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
@@ -301,11 +307,12 @@ class SAOrganisationPartySubPageTest(TestCase):
         positiontitle2 = models.PositionTitle.objects.create(name='Delegate', slug='delegate')
         positiontitle3 = models.PositionTitle.objects.create(name='Whip', slug='whip')
 
-        person1 = models.Person.objects.create(name='Person1', slug='person1')
-        person2 = models.Person.objects.create(name='Person2', slug='person2')
-        person3 = models.Person.objects.create(name='Person3', slug='person3')
-        person4 = models.Person.objects.create(name='Person4', slug='person4')
-        person5 = models.Person.objects.create(name='Person5', slug='person5')
+        person1 = models.Person.objects.create(legal_name='Person1', slug='person1')
+        person2 = models.Person.objects.create(legal_name='Person2', slug='person2')
+        person3 = models.Person.objects.create(legal_name='Person3', slug='person3')
+        person4 = models.Person.objects.create(legal_name='Person4', slug='person4')
+        person5 = models.Person.objects.create(legal_name='Person5', slug='person5')
+        person6 = models.Person.objects.create(legal_name='', slug='empty-legal-name')
 
         position1 = models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
         position2 = models.Position.objects.create(person=person2, organisation=party1, title=positiontitle1)
@@ -319,6 +326,11 @@ class SAOrganisationPartySubPageTest(TestCase):
         position9 = models.Position.objects.create(person=person4, organisation=house1, title=positiontitle1)
         position10 = models.Position.objects.create(person=person5, organisation=house1, title=positiontitle1, end_date='2013-02-16')
 
+        # Add a position for the person with an empty legal name,
+        # since this isn't prevented by any validation:
+        position11 = models.Position.objects.create(person=person6, organisation=party1, title=positiontitle1)
+        position12 = models.Position.objects.create(person=person6, organisation=house1, title=positiontitle1)
+
         #check for person who is no longer an official, but still a member
         position11 = models.Position.objects.create(person=person1, organisation=house1, title=positiontitle3, end_date='2013-02-16')
 
@@ -326,21 +338,22 @@ class SAOrganisationPartySubPageTest(TestCase):
         context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1'))).context
         context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2'))).context
 
-        expected1 = ['<Position:  (Member at House1)>', '<Position:  (Member at House1)>']
-        expected2 = ['<Position:  (Member at House1)>']
+        expected1 = ['<Position:  (Member at House1)>', '<Position: Person1 (Member at House1)>', '<Position: Person2 (Member at House1)>']
+        expected2 = ['<Position: Person4 (Member at House1)>']
 
         self.assertQuerysetEqual(context1['sorted_positions'], expected1)
         self.assertQuerysetEqual(context2['sorted_positions'], expected2)
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'empty-legal-name')
         self.assertEqual(context1['sorted_positions'][1].person.slug, 'person1')
-        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person2')
+        self.assertEqual(context1['sorted_positions'][2].person.slug, 'person2')
         self.assertEqual(context2['sorted_positions'][0].person.slug, 'person4')
 
     def test_display_past_members(self):
         context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1')), {'historic': '1'}).context
         context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2')), {'historic': '1'}).context
 
-        expected1 = ['<Position:  (Member at House1)>']
-        expected2 = ['<Position:  (Member at House1)>']
+        expected1 = ['<Position: Person3 (Member at House1)>']
+        expected2 = ['<Position: Person5 (Member at House1)>']
 
         self.assertQuerysetEqual(context1['sorted_positions'], expected1)
         self.assertQuerysetEqual(context2['sorted_positions'], expected2)
@@ -351,16 +364,18 @@ class SAOrganisationPartySubPageTest(TestCase):
         context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1')), {'all': '1'}).context
         context2 = self.client.get(reverse('organisation_party', args=('house1', 'party2')), {'all': '1'}).context
 
-        expected1 = ['<Position:  (Member at House1)>','<Position:  (Member at House1)>','<Position:  (Whip at House1)>','<Position:  (Member at House1)>']
-        expected2 = ['<Position:  (Member at House1)>','<Position:  (Member at House1)>']
+        expected1 = ['<Position:  (Member at House1)>','<Position: Person1 (Member at House1)>','<Position: Person1 (Whip at House1)>','<Position: Person2 (Member at House1)>','<Position: Person3 (Member at House1)>']
+        expected2 = ['<Position: Person4 (Member at House1)>','<Position: Person5 (Member at House1)>']
 
         self.assertQuerysetEqual(context1['sorted_positions'], expected1)
         self.assertQuerysetEqual(context2['sorted_positions'], expected2)
-        self.assertEqual(context1['sorted_positions'][0].person.slug, 'person3')
-        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person2')
+        self.assertEqual(context1['sorted_positions'][0].person.slug, 'empty-legal-name')
+        self.assertEqual(context1['sorted_positions'][1].person.slug, 'person1')
         self.assertEqual(context1['sorted_positions'][2].person.slug, 'person1')
-        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person5')
-        self.assertEqual(context2['sorted_positions'][1].person.slug, 'person4')
+        self.assertEqual(context1['sorted_positions'][3].person.slug, 'person2')
+        self.assertEqual(context1['sorted_positions'][4].person.slug, 'person3')
+        self.assertEqual(context2['sorted_positions'][0].person.slug, 'person4')
+        self.assertEqual(context2['sorted_positions'][1].person.slug, 'person5')
 
 
 @attr(country='south_africa')
@@ -369,20 +384,20 @@ class SAHansardIndexViewTest(TestCase):
     def setUp(self):
         create_sections([
             {
-                'title': "Hansard",
+                'title': u"Hansard",
                 'subsections': [
-                    {   'title': "2013",
+                    {   'title': u"2013",
                         'subsections': [
-                            {   'title': "02",
+                            {   'title': u"02",
                                 'subsections': [
-                                    {   'title': "16",
+                                    {   'title': u"16",
                                         'subsections': [
-                                            {   'title': "Proceedings of the National Assembly (2012/2/16)",
+                                            {   'title': u"Proceedings of the National Assembly (2012/2/16)",
                                                 'subsections': [
-                                                    {   'title': "Proceedings of Foo",
+                                                    {   'title': u"Proceedings of Foo",
                                                         'speeches': [ 4, date(2013, 2, 16), time(9, 0) ],
                                                     },
-                                                    {   'title': "Bill on Silly Walks",
+                                                    {   'title': u"Bill on Silly Walks",
                                                         'speeches': [ 2, date(2013, 2, 16), time(12, 0) ],
                                                     },
                                                 ],
@@ -390,14 +405,14 @@ class SAHansardIndexViewTest(TestCase):
                                         ],
                                     },
                                     {
-                                        'title': "18",
+                                        'title': u"18",
                                         'subsections': [
-                                            {   'title': "Proceedings of the National Assembly (2012/2/18)",
+                                            {   'title': u"Proceedings of the National Assembly (2012/2/18)",
                                                 'subsections': [
-                                                    {   'title': "Budget Report",
+                                                    {   'title': u"Budget Report",
                                                         'speeches': [ 3, date(2013, 2, 18), time(9, 0) ],
                                                     },
-                                                    {   'title': "Bill on Comedy Mustaches",
+                                                    {   'title': u"Bill on Comedy Mustaches",
                                                         'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
                                                     },
                                                 ],
@@ -407,7 +422,7 @@ class SAHansardIndexViewTest(TestCase):
                                 ],
                             },
                             {
-                                'title': "Empty section",
+                                'title': u"Empty section",
                             }
                         ],
                     },
@@ -434,17 +449,17 @@ class SACommitteeIndexViewTest(TestCase):
     def setUp(self):
         create_sections([
             {
-                'title': "Committee Minutes",
+                'title': u"Committee Minutes",
                 'subsections': [
-                    {   'title': "Agriculture, Forestry and Fisheries",
+                    {   'title': u"Agriculture, Forestry and Fisheries",
                         'subsections': [
-                            {   'title': "16 November 2012",
+                            {   'title': u"16 November 2012",
                                 'subsections': [
-                                    {   'title': "Oh fishy fishy fishy fishy fishy fish",
+                                    {   'title': u"Oh fishy fishy fishy fishy fishy fish",
                                         'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
                                     },
                                     {
-                                        'title': "Empty section",
+                                        'title': u"Empty section",
                                     }
                                 ],
                             },
