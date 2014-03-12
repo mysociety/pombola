@@ -456,6 +456,11 @@ class Command(LabelCommand):
                             # and MPL names for different parties:
                             for representative_type in ('MP', 'MPL'):
                                 if party in ('African National Congress (ANC)',
+                                             "African Peoples' Convention (APC)",
+                                             "Azanian People's Organisation (AZAPO)",
+                                             'Minority Front (MF)',
+                                             'United Christian Democratic Party (UCDP)',
+                                             'United Democratic Movement (UDM)',
                                              'African Christian Democratic Party (ACDP)'):
                                     name_strings = re.split(r'\s{4,}',row[representative_type])
                                     for name_string in name_strings:
