@@ -345,6 +345,7 @@ class Command(LabelCommand):
                     # Extract each column:
                     party_code = row['Party Code']
                     name = row['Name']
+                    manual_lonlat = row['Manually Geocoded LonLat']
                     province = row['Province']
                     office_or_area = row['Type']
                     party = row['Party']
@@ -426,9 +427,13 @@ class Command(LabelCommand):
                             physical_address = physical_address.rstrip(',') + ", South Africa"
                             try:
                                 verbose("physical_address: " + physical_address.encode('UTF-8'))
-                                lon, lat, geocode_cache = geocode(physical_address, geocode_cache)
-                                verbose("maps to:")
-                                verbose("http://maps.google.com/maps?q=%f,%f" % (lat, lon))
+                                if manual_lonlat:
+                                    verbose("using manually specified location: " + manual_lonlat)
+                                    lon, lat = map(float, manual_lonlat.split(","))
+                                else:
+                                    lon, lat, geocode_cache = geocode(physical_address, geocode_cache)
+                                    verbose("maps to:")
+                                    verbose("http://maps.google.com/maps?q=%f,%f" % (lat, lon))
                                 geolocated += 1
 
                                 place_name = u'Approximate position of ' + organisation_name
