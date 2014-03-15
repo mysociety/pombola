@@ -447,6 +447,8 @@ class SAHansardIndexViewTest(TestCase):
 class SACommitteeIndexViewTest(WebTest):
 
     def setUp(self):
+        self.fish_section_title = u"Oh fishy fishy fishy fishy fishy fish"
+        self.forest_section_title = u"Forests are totes awesome"
         create_sections([
             {
                 'title': u"Committee Minutes",
@@ -455,11 +457,21 @@ class SACommitteeIndexViewTest(WebTest):
                         'subsections': [
                             {   'title': u"16 November 2012",
                                 'subsections': [
-                                    {   'title': u"Oh fishy fishy fishy fishy fishy fish",
+                                    {   'title': self.fish_section_title,
                                         'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
                                     },
                                     {
                                         'title': u"Empty section",
+                                    }
+                                ],
+                            },
+                            {   'title': "17 November 2012",
+                                'subsections': [
+                                    {   'title': self.forest_section_title,
+                                        'speeches': [ 7, date(2013, 2, 19), time(9, 0), False ],
+                                    },
+                                    {
+                                        'title': "Empty section",
                                     }
                                 ],
                             },
@@ -474,13 +486,15 @@ class SACommitteeIndexViewTest(WebTest):
         response = self.app.get('/committee-minutes/')
         self.assertEqual(response.status_code, 200)
 
-        section_name = "Oh fishy fishy fishy fishy fishy fish"
-        section = Section.objects.get(title=section_name)
+        section = Section.objects.get(title=self.fish_section_title)
 
         # Check that we can see the titles of sections containing speeches only
         self.assertContains(response, "16 November 2012")
-        self.assertContains(response, section_name)
-        self.assertContains(response, '<a href="/%s">%s</a>' % (section.get_path, section_name), html=True)
+        self.assertContains(response, self.fish_section_title)
+        self.assertContains(response,
+                            '<a href="/%s">%s</a>' % (section.get_path,
+                                                      self.fish_section_title),
+                            html=True)
         self.assertNotContains(response, "Empty section")
 
 
