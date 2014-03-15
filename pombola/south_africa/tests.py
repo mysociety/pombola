@@ -444,7 +444,7 @@ class SAHansardIndexViewTest(TestCase):
         self.assertNotContains(response, "Empty section")
 
 @attr(country='south_africa')
-class SACommitteeIndexViewTest(TestCase):
+class SACommitteeIndexViewTest(WebTest):
 
     def setUp(self):
         create_sections([
@@ -471,8 +471,7 @@ class SACommitteeIndexViewTest(TestCase):
 
 
     def test_committee_index_page(self):
-        c = Client()
-        response = c.get('/committee-minutes/')
+        response = self.app.get('/committee-minutes/')
         self.assertEqual(response.status_code, 200)
 
         section_name = "Oh fishy fishy fishy fishy fishy fish"
