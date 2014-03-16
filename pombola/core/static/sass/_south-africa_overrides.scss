@@ -1483,53 +1483,6 @@ body {
     }
 }
 
-
-li.speech {
-    margin-bottom: 2em;
-    padding-bottom: .5em;
-
-    -ms-word-break: break-all;
-         word-break: break-all;
-
-         // Non standard for webkit
-         word-break: break-word;
-
-    -webkit-hyphens: auto;
-       -moz-hyphens: auto;
-            hyphens: auto;
-    br {
-        content: ' ';
-        display: inline;
-    }
-    .hov {
-        font-size: 0.75em;
-        text-decoration: none;
-        i {
-            font-style: normal;
-        }
-        &:hover {
-            color: $colour_black;
-            text-decoration: underline;
-        }
-    }
-    .off-screen {
-        opacity: 1;
-    }
-    &:after {
-        width: 100%;
-        left: 0;
-        bottom: 0;
-    }
-}
-
-.speech-speaker {
-    .speaker-img {
-        height: 44px;
-        width: 44px;
-    }
-}
-
-
 ul.pager {
     @include unstyled-list;
     margin-bottom: 1em;

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -3158,6 +3159,116 @@ ul.social-buttons li {
   padding: 4px;
 }
 
+/* Formatting for SayIt speeches */
+.speaker-portrait-wrapper {
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+  float: left;
+  padding-left: 0;
+  padding-right: 0;
+  width: 8.33333%;
+}
+
+.speech-wrapper {
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+  float: left;
+  /* padding-left: 0.75em; */
+  padding-left: 1.5em;
+  padding-right: 0.75em;
+  width: 91.666%;
+}
+
+.speech.speech-border .label {
+  display: none;
+}
+
+.speech__content {
+  clear: both;
+}
+
+.speech {
+  padding-top: 1em;
+  position: relative;
+  overflow: hidden;
+  *zoom: 1;
+}
+
+li.speech.speech-border {
+  list-style-type: none;
+}
+
+ul li.speech {
+  line-height: 1.6;
+}
+
+.speech__content {
+  clear: both;
+  margin-top: 0;
+  padding-bottom: 2.5em;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.speech__links {
+  position: absolute;
+  bottom: -0.25em;
+  right: 0;
+  padding: .5em 1em 1em 0;
+  z-index: 300;
+}
+.speech__links a {
+  color: #2e2e2e;
+  font-size: emCalc(14);
+  margin-left: 1.5em;
+  padding-left: 1em;
+  display: inline-block;
+  position: relative;
+}
+.speech__links a:hover, .speech__links a:active, .speech__links a:focus {
+  color: #e23d28;
+}
+
+/* Icons for speech links */
+.speech-icon {
+  height: 21px;
+  width: 21px;
+  display: inline-block;
+  -webkit-background-size: 60px 20px;
+  -moz-background-size: 60px 20px;
+  -o-background-size: 60px 20px;
+  background-size: 60px 20px;
+  /* This is to render the @2 size sprite correctly, change this if more sprites are added to the .png */
+  background-image: url("/static/images/link-icons.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0.1em;
+  left: -0.75em;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .speech-icon {
+    background-image: url("/static/images/link-icons@2.png");
+  }
+}
+.speech-icon.icon-link {
+  background-position-x: -40px;
+}
+.speech-icon.icon-link-in-context {
+  background-position-x: -20px;
+}
+
+.speech:target {
+  background-color: #ffc;
+}
+
 @font-face {
   font-family: 'latobold';
   src: url("/static/fonts/lato-bold-webfont.eot");
@@ -4569,45 +4680,6 @@ div.search-pagination {
 body .breadcrumbs {
   margin-bottom: 0;
   /* this is a terrible thing to do to override the specificity */
-}
-
-li.speech {
-  margin-bottom: 2em;
-  padding-bottom: .5em;
-  -ms-word-break: break-all;
-  word-break: break-all;
-  word-break: break-word;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  hyphens: auto;
-}
-li.speech br {
-  content: ' ';
-  display: inline;
-}
-li.speech .hov {
-  font-size: 0.75em;
-  text-decoration: none;
-}
-li.speech .hov i {
-  font-style: normal;
-}
-li.speech .hov:hover {
-  color: #222222;
-  text-decoration: underline;
-}
-li.speech .off-screen {
-  opacity: 1;
-}
-li.speech:after {
-  width: 100%;
-  left: 0;
-  bottom: 0;
-}
-
-.speech-speaker .speaker-img {
-  height: 44px;
-  width: 44px;
 }
 
 ul.pager {
