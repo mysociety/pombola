@@ -5,7 +5,7 @@
         <ul>
             <li><a href="/">Home</a> 
         {% for n in section.get_ancestors %}
-            {% if n.id != section.id %}
+            {% if includethis or n.id != section.id %}
                 <span class="sep">&raquo;</span>
                 {% if forloop.counter == 1 %}
                   <li>
