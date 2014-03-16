@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    {% include "speeches/_breadcrumbs.html" with section=object.section %}
+    {% include "speeches/_breadcrumbs.html" with section=object.section includethis=1 %}
 {% endblock %}
 
 {% block content %}
