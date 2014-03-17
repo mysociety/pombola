@@ -13,18 +13,10 @@
     <div class="column minor-column">
       <div class="filters sidebar">
         <h3>Show</h3>
-        <p><a href="?historic=" class="{% if not request.GET.historic and not request.GET.office and not request.GET.member %}active{% endif %}">Current people</a></p>
-        <p><a href="?historic=1" class="{% if request.GET.historic %}active{% endif %}">Past people</a></p>
-
-        {% if object.slug == 'national-assembly' %}
-          <p><a href="?office=1" class="{% if request.GET.office %}active{% endif %}">Office bearers</a></p>
-          <p><a href="?member=1" class="{% if request.GET.member %}active{% endif %}">All members</a></p>
-        {% endif %}
-
-        {% if object.slug == 'ncop' %}
-          <p><a href="?delegates=1" class="{% if request.GET.delegate %}active{% endif %}">Delegates</a></p>
-        {% endif %}
-
+        <p><a href="?historic=" class="{% if current_filter %}active{% endif %}">Current {{ membertitle }}s</a></p>
+        <p><a href="?historic=1" class="{% if historic_filter %}active{% endif %}">Former {{ membertitle }}s</a></p>
+        <p><a href="?office=1" class="{% if office_filter %}active{% endif %}">Office bearers</a></p>
+        <p><a href="?all=1" class="{% if all_filter %}active{% endif %}">All {{ membertitle }}s</a></p>
 
       </div>
     </div>
