@@ -21,7 +21,7 @@ from pombola.core.models import Person, Organisation, Position
 # comment this out; the script is largely here for reference at the
 # moment, to be replaced by a Popolo JSON export.
 
-# from popit import PopIt
+from popit_api import PopIt
 
 from optparse import make_option
 
