@@ -147,7 +147,7 @@ def create_organisations(popit):
     for o in Organisation.objects.all():
         if o.slug in oslug_to_category:
             print >> sys.stderr, "creating the organisation:", o.name
-            new_organisation = popit.organisation.post({'slug': o.slug,
+            new_organisation = popit.organisations.post({'slug': o.slug,
                                                         'name': o.name,
                                                         'category': oslug_to_category[o.slug]})
             slug_to_id[o.slug] = new_organisation['result']['id']
@@ -209,17 +209,17 @@ class Command(BaseCommand):
             # objects from PopIt.  Currently there's no command to
             # delete all in one go, so we have to do it one-by-one.
 
-            for p in popit.person.get()['results']:
+            for p in popit.persons.get()['result']:
                 print >> sys.stderr, "deleting the person:", p
-                popit.person(p['id']).delete()
+                popit.persons(p['id']).delete()
 
-            for o in popit.organisation.get()['results']:
+            for o in popit.organisations.get()['result']:
                 print >> sys.stderr, "deleting the organisation:", o
-                popit.organisation(o['id']).delete()
+                popit.organisations(o['id']).delete()
 
-            for p in popit.membership.get()['result']:
+            for p in popit.memberships.get()['result']:
                 print >> sys.stderr, "deleting the membership:", p
-                popit.membership(p['id']).delete()
+                popit.memberships(p['id']).delete()
 
             # Create all the organisations found in Pombola, and get
             # back a dictionary mapping the Pombola organisation slug
@@ -232,13 +232,13 @@ class Command(BaseCommand):
             for person in Person.objects.all():
                 name = person.legal_name
                 print >> sys.stderr, "creating the person:", name
-                new_person = popit.person.post({'name': name})
+                new_person = popit.persons.post({'name': name})
                 person_id = new_person['result']['id']
                 properties = {"personal_details": make_personal_details(person.date_of_birth,
                                                                         person.date_of_death)}
                 if person.primary_image():
                     properties['images' ] = [{'url': base_url + person.primary_image().url}]
-                result = popit.person(person_id).put(properties)
+                result = popit.persons(person_id).put(properties)
                 for position in person.position_set.all():
                     if not (position.title and position.title.name):
                         continue
@@ -251,7 +251,7 @@ class Command(BaseCommand):
                         organisation_id = org_slug_to_id[oslug]
                         properties['organisation'] = organisation_id
                     print >> sys.stderr, "  creating the membership:", position
-                    new_membership = popit.membership.post(properties)
+                    new_membership = popit.memberships.post(properties)
 
         except slumber.exceptions.HttpClientError, e:
             print "Exception is:", e
