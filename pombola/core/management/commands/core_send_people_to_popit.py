@@ -183,7 +183,7 @@ class Command(BaseCommand):
 
         popit_option_keys = ('instance', 'hostname', 'user', 'password', 'port')
         popit_options = dict((k, options[k]) for k in popit_option_keys if options[k] is not None)
-        popit_options['api_version'] = 'v1'
+        popit_options['api_version'] = 'v0.1'
 
         if len(args) != 1:
             raise CommandError, "You must provide the base URL of the public Pombola site"
