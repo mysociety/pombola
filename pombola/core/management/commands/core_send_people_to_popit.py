@@ -147,7 +147,7 @@ def create_organisations(popit):
     for o in Organisation.objects.all():
         if o.slug in oslug_to_category:
             print >> sys.stderr, "creating the organisation:", o.name
-            new_organisation = popit.organisations.post({'slug': o.slug,
+            new_organisation = popit.organizations.post({'slug': o.slug,
                                                         'name': o.name,
                                                         'category': oslug_to_category[o.slug]})
             slug_to_id[o.slug] = new_organisation['result']['id']
@@ -213,9 +213,9 @@ class Command(BaseCommand):
                 print >> sys.stderr, "deleting the person:", p
                 popit.persons(p['id']).delete()
 
-            for o in popit.organisations.get()['result']:
+            for o in popit.organizations.get()['result']:
                 print >> sys.stderr, "deleting the organisation:", o
-                popit.organisations(o['id']).delete()
+                popit.organizations(o['id']).delete()
 
             for p in popit.memberships.get()['result']:
                 print >> sys.stderr, "deleting the membership:", p
