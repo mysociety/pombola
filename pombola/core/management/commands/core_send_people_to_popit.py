@@ -110,9 +110,9 @@ def make_personal_details(dob, dod):
             'date_of_death': date_to_popit_partial_date(dod)}
 
 def create_organisations(popit):
-    """Create organisations in PopIt based on those used in positions in Pombola
+    """Create organisations in PopIt based on those used in memberships in Pombola
 
-    Look through all positions in PopIt and find add the organisation
+    Look through all memberships in PopIt and find add the organisation
     that each refers to to PopIt.  Returns a dictionary where each key
     is a slug for an organisations in Pombola, and the value is the
     corresponding ID for the organisation in PopIt.
@@ -205,7 +205,7 @@ class Command(BaseCommand):
             if parsed_url.path or parsed_url.params or parsed_url.query or parsed_url.fragment:
                 raise CommandError, "You must only provide the base URL"
 
-            # Remove all the "person", "organisation" and "position"
+            # Remove all the "person", "organisation" and "membership"
             # objects from PopIt.  Currently there's no command to
             # delete all in one go, so we have to do it one-by-one.
 
@@ -217,9 +217,9 @@ class Command(BaseCommand):
                 print >> sys.stderr, "deleting the organisation:", o
                 popit.organisation(o['id']).delete()
 
-            for p in popit.position.get()['results']:
-                print >> sys.stderr, "deleting the position:", p
-                popit.position(p['id']).delete()
+            for p in popit.membership.get()['result']:
+                print >> sys.stderr, "deleting the membership:", p
+                popit.membership(p['id']).delete()
 
             # Create all the organisations found in Pombola, and get
             # back a dictionary mapping the Pombola organisation slug
@@ -250,8 +250,8 @@ class Command(BaseCommand):
                         oslug = position.organisation.slug
                         organisation_id = org_slug_to_id[oslug]
                         properties['organisation'] = organisation_id
-                    print >> sys.stderr, "  creating the position:", position
-                    new_position = popit.position.post(properties)
+                    print >> sys.stderr, "  creating the membership:", position
+                    new_membership = popit.membership.post(properties)
 
         except slumber.exceptions.HttpClientError, e:
             print "Exception is:", e
