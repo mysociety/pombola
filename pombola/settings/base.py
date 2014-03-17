@@ -5,6 +5,8 @@ import yaml
 
 from .apps import *
 
+from django.template.defaultfilters import slugify
+
 IN_TEST_MODE = False
 
 # Work out where we are to set up the paths correctly and load config
@@ -27,6 +29,8 @@ TEMPLATE_DEBUG = STAGING
 ADMINS = (
     (config.get('ERRORS_NAME'), config.get('ERRORS_EMAIL')),
 )
+
+SLUGGABLE_SLUGIFY_FUNCTION = slugify
 
 DEFAULT_FROM_EMAIL = config.get('FROM_EMAIL')
 

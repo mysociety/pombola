@@ -1,3 +1,4 @@
+import re
 import sys
 import os
 from datetime import date, time
@@ -18,7 +19,7 @@ from pombola.core import models
 import json
 
 from popit.models import Person as PopitPerson, ApiInstance
-from speeches.models import Speaker, Section
+from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.south_africa.views import PersonSpeakerMappings
@@ -440,13 +441,15 @@ class SAHansardIndexViewTest(TestCase):
 
         # Check that we can see the titles of sections containing speeches only
         self.assertContains(response, section_name)
-        self.assertContains(response, '<a href="/hansard/%d">%s</a>' % (section.id, section_name), html=True)
+        self.assertContains(response, '<a href="/%s">%s</a>' % (section.get_path, section_name), html=True)
         self.assertNotContains(response, "Empty section")
 
 @attr(country='south_africa')
-class SACommitteeIndexViewTest(TestCase):
+class SACommitteeIndexViewTest(WebTest):
 
     def setUp(self):
+        self.fish_section_title = u"Oh fishy fishy fishy fishy fishy fish"
+        self.forest_section_title = u"Forests are totes awesome"
         create_sections([
             {
                 'title': u"Committee Minutes",
@@ -455,11 +458,21 @@ class SACommitteeIndexViewTest(TestCase):
                         'subsections': [
                             {   'title': u"16 November 2012",
                                 'subsections': [
-                                    {   'title': u"Oh fishy fishy fishy fishy fishy fish",
+                                    {   'title': self.fish_section_title,
                                         'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
                                     },
                                     {
                                         'title': u"Empty section",
+                                    }
+                                ],
+                            },
+                            {   'title': "17 November 2012",
+                                'subsections': [
+                                    {   'title': self.forest_section_title,
+                                        'speeches': [ 7, date(2013, 2, 19), time(9, 0), False ],
+                                    },
+                                    {
+                                        'title': "Empty section",
                                     }
                                 ],
                             },
@@ -471,18 +484,41 @@ class SACommitteeIndexViewTest(TestCase):
 
 
     def test_committee_index_page(self):
-        c = Client()
-        response = c.get('/committee/')
+        response = self.app.get('/committee-minutes/')
         self.assertEqual(response.status_code, 200)
 
-        section_name = "Oh fishy fishy fishy fishy fishy fish"
-        section = Section.objects.get(title=section_name)
+        section = Section.objects.get(title=self.fish_section_title)
 
         # Check that we can see the titles of sections containing speeches only
         self.assertContains(response, "16 November 2012")
-        self.assertContains(response, section_name)
-        self.assertContains(response, '<a href="/committee/%d">%s</a>' % (section.id, section_name), html=True)
+        self.assertContains(response, self.fish_section_title)
+        self.assertContains(response,
+                            '<a href="/%s">%s</a>' % (section.get_path,
+                                                      self.fish_section_title),
+                            html=True)
         self.assertNotContains(response, "Empty section")
+
+    def test_public_speech(self):
+        # Find the section that contains private speeches:
+        section = Section.objects.get(title=self.fish_section_title)
+        # Pick an arbitrary speech in that section:
+        speech = Speech.objects.filter(section=section)[0]
+        speech_url = reverse('speeches:speech-view', args=(speech.id,))
+        response = self.app.get(speech_url)
+        self.assertContains(response, "rhubarb rhubarb")
+
+    def test_private_speech_redirects(self):
+        # Find the section that contains private speeches:
+        section = Section.objects.get(title=self.forest_section_title)
+        # Pick an arbitrary speech in that section:
+        speech = Speech.objects.filter(section=section)[0]
+        speech_url = reverse('speeches:speech-view', args=(speech.id,))
+        # Get that URL, and expect to see a redirect to the source_url:
+        response = self.app.get(speech_url)
+        self.assertEqual(response.status_code, 302)
+        url_match = re.search(r'http://somewhere.or.other/\d+',
+                              response.location)
+        self.assertTrue(url_match)
 
 
 @attr(country='south_africa')

@@ -3,8 +3,8 @@ from django.conf.urls import patterns, include, url
 from pombola.south_africa.views import LatLonDetailNationalView, LatLonDetailLocalView, SAPlaceDetailSub, \
     SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
     SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex, \
-    SACommitteeSectionRedirectView, SACommitteeSpeechRedirectView, \
-    SAPersonAppearanceView, SAQuestionIndex, SAOrganisationDetailSub
+    SAPersonAppearanceView, SAQuestionIndex, SAOrganisationDetailSub, \
+    OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
@@ -67,41 +67,4 @@ urlpatterns += patterns('pombola.south_africa.views',
     # Catch the newsletter info page to change the template used so that the signup form is injected.
     # NOTE - you still need to create an InfoPage with the slug 'newsletter' for this not to 404.
     url(r'^info/newsletter', SANewsletterPage.as_view(), {'slug': 'newsletter'}, name='info_page_newsletter'),
-)
-
-sayit_patterns = patterns('',
-
-    # Exposed endpoints
-    url(r'^(?P<pk>\d+)$',        SectionView.as_view(), name='section-view'),
-    url(r'^speech/(?P<pk>\d+)$', SpeechView.as_view(),  name='speech-view'),
-
-    # Fake endpoint to redirect
-    url(r'^speaker/(?P<pk>\d+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
-)
-
-hansard_patterns = sayit_patterns + patterns('',
-    # special Hansard index page that provides listing of the hansard sessions that contain speeches.
-    url(r'^$', SAHansardIndex.as_view(), name='section-list'),
-)
-
-committee_patterns = patterns('',
-    # Exposed endpoints
-    url(r'^(?P<pk>\d+)$',        SACommitteeSectionRedirectView.as_view(), name='section-view'),
-    url(r'^speech/(?P<pk>\d+)$', SACommitteeSpeechRedirectView.as_view(),  name='speech-view'),
-
-    # Fake endpoint to redirect
-    url(r'^speaker/(?P<pk>\d+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
-
-    url(r'^$', SACommitteeIndex.as_view(), name='section-list'),
-)
-
-question_patterns = sayit_patterns + patterns('',
-    # special Hansard index page that provides listing of the hansard sessions that contain speeches.
-    url(r'^$', SAQuestionIndex.as_view(), name='section-list'),
-)
-
-urlpatterns += patterns('',
-    url(r'^hansard/',   include(hansard_patterns,   namespace='hansard',   app_name='speeches')),
-    url(r'^committee/', include(committee_patterns, namespace='committee', app_name='speeches')),
-    url(r'^question/',  include(question_patterns,  namespace='question',  app_name='speeches')),
 )

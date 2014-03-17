@@ -13,7 +13,7 @@
 {% for entry in entries %}
     <div>
         <a class="hansard-section-title has-dropdown-dark" 
-            href="{% url 'speeches:section-view' entry.id %}">
+            href="{% url 'speeches:section-view' entry.get_path %}">
             <h2> {{ entry.title }} ({{ entry.speech_count }}) </h2>
         </a>
     </div>

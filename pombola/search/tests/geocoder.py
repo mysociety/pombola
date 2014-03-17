@@ -30,7 +30,7 @@ class GeocoderTests(unittest.TestCase):
         # These are well known results that should be in those returned
         expected_results = [
             {'latitude': -26.195, 'longitude': 28.0,   'address': u'High Street, Johannesburg 2092, South Africa'},
-            {'latitude': -33.642, 'longitude': 19.449, 'address': u'High Street, Worcester 6850, South Africa'},
+            {'latitude': -33.642, 'longitude': 19.449, 'address': u'High Street, Worcester 6849, South Africa'}
         ]
         for expected in expected_results:
             self.assertIn(expected, results)
