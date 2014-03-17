@@ -150,7 +150,7 @@ def create_organisations(popit):
             new_organisation = popit.organisation.post({'slug': o.slug,
                                                         'name': o.name,
                                                         'category': oslug_to_category[o.slug]})
-            slug_to_id[o.slug] = new_organisation['result']['_id']
+            slug_to_id[o.slug] = new_organisation['result']['id']
     return slug_to_id
 
 class Command(BaseCommand):
@@ -211,15 +211,15 @@ class Command(BaseCommand):
 
             for p in popit.person.get()['results']:
                 print >> sys.stderr, "deleting the person:", p
-                popit.person(p['_id']).delete()
+                popit.person(p['id']).delete()
 
             for o in popit.organisation.get()['results']:
                 print >> sys.stderr, "deleting the organisation:", o
-                popit.organisation(o['_id']).delete()
+                popit.organisation(o['id']).delete()
 
             for p in popit.position.get()['results']:
                 print >> sys.stderr, "deleting the position:", p
-                popit.position(p['_id']).delete()
+                popit.position(p['id']).delete()
 
             # Create all the organisations found in Pombola, and get
             # back a dictionary mapping the Pombola organisation slug
@@ -233,7 +233,7 @@ class Command(BaseCommand):
                 name = person.legal_name
                 print >> sys.stderr, "creating the person:", name
                 new_person = popit.person.post({'name': name})
-                person_id = new_person['result']['_id']
+                person_id = new_person['result']['id']
                 properties = {"personal_details": make_personal_details(person.date_of_birth,
                                                                         person.date_of_death)}
                 if person.primary_image():
