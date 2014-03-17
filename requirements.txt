@@ -63,6 +63,9 @@ django-mapit==1.0.3
 git+git://github.com/mysociety/popit-resolver@abcfc79d787c8ca054560a4911352fed8aa8c40d
 git+git://github.com/mysociety/popit-django@61bc32b67f76262d08339e00dd83bda9def92279
 
+# popit-python is needed by the core_send_people_to_popit command
+-e git+git://github.com/mysociety/popit-python.git@88f2c6b3b8c122d4bd4bd4b4edf9afe87df0bd08#egg=popit-python
+
 python-dateutil==2.2
 
 # Packages that are helpful for development:
