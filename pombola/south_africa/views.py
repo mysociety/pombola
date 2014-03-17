@@ -649,7 +649,7 @@ class SAPersonAppearanceView(TemplateView):
 
         # Add a hardcoded section-view url name to use for the speeches. Would
         # rather this was not hardcoded here but seems hard to avoid.
-        # speech_tag not know. Use 'None' for template default instead
+        # speech_tag not known. Use 'None' for template default instead
         context['section_url'] = None
 
         return context
