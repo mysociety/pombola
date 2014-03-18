@@ -148,8 +148,9 @@ def create_organisations(popit):
         if o.slug in oslug_to_category:
             print >> sys.stderr, "creating the organisation:", o.name
             new_organisation = popit.organizations.post({'slug': o.slug,
-                                                        'name': o.name,
-                                                        'category': oslug_to_category[o.slug]})
+                                                         'name': o.name,
+                                                         'classification': o.kind.name,
+                                                         'category': oslug_to_category[o.slug]})
             slug_to_id[o.slug] = new_organisation['result']['id']
     return slug_to_id
 
