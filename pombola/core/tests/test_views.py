@@ -2,7 +2,7 @@ from django_webtest import WebTest
 
 from pombola.core import models
 
-class PositionTest(WebTest):
+class PositionViewTest(WebTest):
     def tearDown(self):
         self.position.delete()
         self.position2.delete()
