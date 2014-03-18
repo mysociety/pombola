@@ -4,7 +4,8 @@ from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     LatLonDetailLocalView, SAPlaceDetailSub, SAOrganisationDetailView,
     SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
     SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex,
-    SAPersonAppearanceView, SAQuestionIndex, SAOrganisationDetailSub,
+    SAPersonAppearanceView, SAQuestionIndex,
+    SAOrganisationDetailSubPeople, SAOrganisationDetailSubParty,
     OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView,
     SAGeocoderView)
 from speeches.views import SectionView, SpeechView, SectionList
@@ -15,7 +16,7 @@ from pombola.core.views import PlaceKindList
 # Override the organisation url so we can vary it depending on the organisation type.
 for index, pattern in enumerate(organisation_patterns):
     if pattern.name == 'organisation_people':
-        organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/people/', SAOrganisationDetailSub.as_view(), {'sub_page': 'people'}, 'organisation_people')
+        organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/people/', SAOrganisationDetailSubPeople.as_view(), {'sub_page': 'people'}, 'organisation_people')
     if pattern.name == 'organisation':
         organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAOrganisationDetailView.as_view(), name='organisation')
 
@@ -24,7 +25,7 @@ organisation_patterns += patterns(
     'pombola.south_africa.views',
     url(
         '^(?P<slug>[-\w]+)/party/(?P<sub_page_identifier>[-\w]+)/$',  #url regex
-        SAOrganisationDetailSub.as_view(),                              #view function
+        SAOrganisationDetailSubParty.as_view(),                              #view function
         { 'sub_page': 'party' },                                      #pass in the 'sub_page' arg
         'organisation_party'                                          #url name
     )

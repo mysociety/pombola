@@ -293,62 +293,69 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
 
 class SAOrganisationDetailSub(OrganisationDetailSub):
+    def add_sub_page_context(self, context):
+        pass
+
     def get_context_data(self, *args, **kwargs):
         context = super(SAOrganisationDetailSub, self).get_context_data(*args, **kwargs)
 
-        if self.kwargs['sub_page'] == 'people':
-            all_positions = self.object.position_set.all()
-            context['office_filter'] = False
-            context['historic_filter'] = False
-            context['all_filter'] = False
-            context['current_filter'] = False
-
-            if self.request.GET.get('all'):
-                context['all_filter'] = True
-                context['sorted_positions'] = all_positions
-            elif self.request.GET.get('historic') and not self.request.GET.get('office'):
-                context['historic_filter'] = True
-                #FIXME - limited to members and delegates so that current members who are no longer officials are not displayed, but this
-                #means that if a former member was an official this is not shown
-                context['sorted_positions'] = all_positions.filter(Q(title__slug='member') | Q(title__slug='delegate')).currently_inactive()
-            elif self.request.GET.get('historic'):
-                context['historic_filter'] = True
-                context['sorted_positions'] = all_positions.currently_inactive()
-            else:
-                context['current_filter'] = True
-                context['sorted_positions'] = all_positions.currently_active()
-
-            if self.request.GET.get('office'):
-                context['office_filter'] = True
-                context['current_filter'] = False
-                context['sorted_positions'] = context['sorted_positions'].exclude(title__slug='member').exclude(title__slug='delegate')
-
-            if self.object.slug=='ncop':
-                context['membertitle'] = 'delegate'
-            else:
-                context['membertitle'] = 'member'
-
-        if self.kwargs['sub_page'] == 'party':
-            context['party'] = get_object_or_404(models.Organisation,slug=self.kwargs['sub_page_identifier'])
-
-            context['sorted_positions'] = context['all_positions'] = self.object.position_set.filter(person__position__organisation__slug=self.kwargs['sub_page_identifier'])
-
-            if self.request.GET.get('all'):
-                context['sorted_positions'] = context['sorted_positions']
-            elif self.request.GET.get('historic'):
-                context['historic'] = True
-                #FIXME - limited to members and delegates so that current members who are no longer officials are not displayed, but this
-                #means that if a former member was an official this is not shown
-                context['sorted_positions'] = context['sorted_positions'].filter(Q(title__slug='member') | Q(title__slug='delegate')).currently_inactive()
-            else:
-                context['historic'] = True
-                context['sorted_positions'] = context['sorted_positions'].currently_active()
+        self.add_sub_page_context(context)
 
         context['sorted_positions'] = sorted(
                 context['sorted_positions'],
                 key=lambda p: p.person.sort_name)
 
         return context
+
+class SAOrganisationDetailSubParty(SAOrganisationDetailSub):
+    def add_sub_page_context(self, context):
+        context['party'] = get_object_or_404(models.Organisation,slug=self.kwargs['sub_page_identifier'])
+
+        context['sorted_positions'] = context['all_positions'] = self.object.position_set.filter(person__position__organisation__slug=self.kwargs['sub_page_identifier'])
+
+        if self.request.GET.get('all'):
+            context['sorted_positions'] = context['sorted_positions']
+        elif self.request.GET.get('historic'):
+            context['historic'] = True
+            #FIXME - limited to members and delegates so that current members who are no longer officials are not displayed, but this
+            #means that if a former member was an official this is not shown
+            context['sorted_positions'] = context['sorted_positions'].filter(Q(title__slug='member') | Q(title__slug='delegate')).currently_inactive()
+        else:
+            context['historic'] = True
+            context['sorted_positions'] = context['sorted_positions'].currently_active()
+
+class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
+    def add_sub_page_context(self, context):
+        all_positions = self.object.position_set.all()
+        context['office_filter'] = False
+        context['historic_filter'] = False
+        context['all_filter'] = False
+        context['current_filter'] = False
+
+        if self.request.GET.get('all'):
+            context['all_filter'] = True
+            context['sorted_positions'] = all_positions
+        elif self.request.GET.get('historic') and not self.request.GET.get('office'):
+            context['historic_filter'] = True
+            #FIXME - limited to members and delegates so that current members who are no longer officials are not displayed, but this
+            #means that if a former member was an official this is not shown
+            context['sorted_positions'] = all_positions.filter(Q(title__slug='member') | Q(title__slug='delegate')).currently_inactive()
+        elif self.request.GET.get('historic'):
+            context['historic_filter'] = True
+            context['sorted_positions'] = all_positions.currently_inactive()
+        else:
+            context['current_filter'] = True
+            context['sorted_positions'] = all_positions.currently_active()
+
+        if self.request.GET.get('office'):
+            context['office_filter'] = True
+            context['current_filter'] = False
+            context['sorted_positions'] = context['sorted_positions'].exclude(title__slug='member').exclude(title__slug='delegate')
+
+        if self.object.slug=='ncop':
+            context['membertitle'] = 'delegate'
+        else:
+            context['membertitle'] = 'member'
 
 
 class PersonSpeakerMappings(object):
