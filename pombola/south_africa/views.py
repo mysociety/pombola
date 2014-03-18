@@ -293,6 +293,8 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
 
 class SAOrganisationDetailSub(OrganisationDetailSub):
+    sub_page = None
+
     def add_sub_page_context(self, context):
         pass
 
@@ -308,6 +310,8 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
         return context
 
 class SAOrganisationDetailSubParty(SAOrganisationDetailSub):
+    sub_page = 'party'
+
     def add_sub_page_context(self, context):
         context['party'] = get_object_or_404(models.Organisation,slug=self.kwargs['sub_page_identifier'])
 
@@ -325,6 +329,8 @@ class SAOrganisationDetailSubParty(SAOrganisationDetailSub):
             context['sorted_positions'] = context['sorted_positions'].currently_active()
 
 class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
+    sub_page = 'people'
+
     def add_sub_page_context(self, context):
         all_positions = self.object.position_set.all()
         context['office_filter'] = False

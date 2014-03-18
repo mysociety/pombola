@@ -16,7 +16,11 @@ from pombola.core.views import PlaceKindList
 # Override the organisation url so we can vary it depending on the organisation type.
 for index, pattern in enumerate(organisation_patterns):
     if pattern.name == 'organisation_people':
-        organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/people/', SAOrganisationDetailSubPeople.as_view(), {'sub_page': 'people'}, 'organisation_people')
+        organisation_patterns[index] = url(
+            r'^(?P<slug>[-\w]+)/people/',
+            SAOrganisationDetailSubPeople.as_view(sub_page='people'),
+            name='organisation_people',
+            )
     if pattern.name == 'organisation':
         organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAOrganisationDetailView.as_view(), name='organisation')
 
@@ -24,10 +28,9 @@ for index, pattern in enumerate(organisation_patterns):
 organisation_patterns += patterns(
     'pombola.south_africa.views',
     url(
-        '^(?P<slug>[-\w]+)/party/(?P<sub_page_identifier>[-\w]+)/$',  #url regex
-        SAOrganisationDetailSubParty.as_view(),                              #view function
-        { 'sub_page': 'party' },                                      #pass in the 'sub_page' arg
-        'organisation_party'                                          #url name
+        '^(?P<slug>[-\w]+)/party/(?P<sub_page_identifier>[-\w]+)/$',
+        SAOrganisationDetailSubParty.as_view(),
+        name='organisation_party',
     )
 )
 
@@ -75,7 +78,9 @@ urlpatterns += patterns('pombola.south_africa.views',
 
     url(r'^place/(?P<slug>[-\w]+)/$', SAPlaceDetailView.as_view(), name='place'),
 
-    url(r'^place/(?P<slug>[-\w]+)/places/', SAPlaceDetailSub.as_view(), {'sub_page': 'places'}, name='place_places'),
+    url(r'^place/(?P<slug>[-\w]+)/places/',
+        SAPlaceDetailSub.as_view(sub_page='places'),
+        name='place_places'),
 
     # Catch the newsletter info page to change the template used so that the signup form is injected.
     # NOTE - you still need to create an InfoPage with the slug 'newsletter' for this not to 404.
