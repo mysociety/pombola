@@ -110,12 +110,12 @@ def make_personal_details(dob, dod):
             'date_of_death': date_to_popit_partial_date(dod)}
 
 def create_organisations(popit):
-    """Create organisations in PopIt based on those used in memberships in Pombola
+    """Create organizations in PopIt based on those used in memberships in Pombola
 
-    Look through all memberships in PopIt and find add the organisation
+    Look through all memberships in PopIt and find add the organization
     that each refers to to PopIt.  Returns a dictionary where each key
-    is a slug for an organisations in Pombola, and the value is the
-    corresponding ID for the organisation in PopIt.
+    is a slug for an organisation in Pombola, and the value is the
+    corresponding ID for the organization in PopIt.
     """
 
     oslug_to_categories = defaultdict(set)
@@ -206,7 +206,7 @@ class Command(BaseCommand):
             if parsed_url.path or parsed_url.params or parsed_url.query or parsed_url.fragment:
                 raise CommandError, "You must only provide the base URL"
 
-            # Remove all the "person", "organisation" and "membership"
+            # Remove all the "person", "organization" and "membership"
             # objects from PopIt.  Currently there's no command to
             # delete all in one go, so we have to do it one-by-one.
 
@@ -249,8 +249,8 @@ class Command(BaseCommand):
                                   'end_date': date_to_popit_partial_date(position.end_date)}
                     if position.organisation:
                         oslug = position.organisation.slug
-                        organisation_id = org_slug_to_id[oslug]
-                        properties['organisation'] = organisation_id
+                        organization_id = org_slug_to_id[oslug]
+                        properties['organization_id'] = organization_id
                     print >> sys.stderr, "  creating the membership:", position
                     new_membership = popit.memberships.post(properties)
 
