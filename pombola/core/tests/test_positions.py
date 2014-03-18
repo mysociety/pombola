@@ -1,6 +1,7 @@
 import random
 import datetime
 
+from django.contrib.contenttypes.models import ContentType
 from django.core import exceptions
 from django.test import TestCase
 from django_date_extensions.fields import ApproximateDate
@@ -282,6 +283,25 @@ class PositionTest(TestCase):
         # put it back
         self.title.requires_place = False
             
+    def test_position_identifier(self):
+
+        position = models.Position.objects.create(
+            person = self.person,
+            title = self.title,
+            organisation = self.organisation)
+
+        self.id_a = models.Identifier.objects.create(
+            identifier="/positions/1",
+            scheme="org.mysociety.za",
+            object_id=position.id,
+            content_type=ContentType.objects.get_for_model(models.Position))
+
+        position_mysociety_id = position.get_identifier('org.mysociety.za')
+
+        self.assertEqual(position_mysociety_id, '/positions/1')
+
+        self.id_a.delete()
+        position.delete()
 
     def test_currently_active(self):
         """Test that the currently active filter warks"""

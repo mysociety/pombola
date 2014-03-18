@@ -90,6 +90,26 @@ class ManagerBase(models.GeoManager):
         return obj
 
 
+class IdentifierMixin(object):
+
+    """Useful methods for objects that may be referred to by an Indentifier"""
+
+    def get_identifier(self, scheme):
+        """Returns the identifier in a particular scheme for this object
+
+        If there is no identifier for this object in that scheme, then
+        None is returned. If there is more than one identifier found,
+        then an exception is thrown."""
+        try:
+            identifier = Identifier.objects.get(
+                content_type = ContentType.objects.get_for_model(self),
+                scheme=scheme,
+                object_id=self.id)
+            return identifier.identifier
+        except exceptions.ObjectDoesNotExist:
+            return None
+
+
 class ContactKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
@@ -227,8 +247,7 @@ class PersonManager(ManagerBase):
                 return None
 
 
-
-class Person(ModelBase, HasImageMixin, ScorecardMixin):
+class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     title = models.CharField(max_length=100, blank=True)
     legal_name = models.CharField(max_length=300)
     slug = models.SlugField(max_length=200, unique=True, help_text="auto-created from first name and last name")
@@ -487,7 +506,7 @@ class OrganisationManager(ManagerBase):
         return OrganisationQuerySet(self.model)
 
 
-class Organisation(ModelBase, HasImageMixin):
+class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
@@ -980,7 +999,7 @@ class PositionManager(ManagerBase):
         return PositionQuerySet(self.model)
 
 
-class Position(ModelBase):
+class Position(ModelBase, IdentifierMixin):
     category_choices = (
         ('political', 'Political'),
         ('education', 'Education (as a learner)'),

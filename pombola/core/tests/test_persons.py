@@ -8,6 +8,7 @@ from django.test.client import Client
 from django.test import TestCase
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 
 from pombola.core import models
 import pombola.scorecards.models
@@ -169,3 +170,50 @@ class PersonScorecardTest(TestCase):
         assert self.bob.is_politician()
         assert not self.alf.is_politician()
         assert self.charlie.is_politician()
+
+class PersonIdentifierTest(TestCase):
+
+    def setUp(self):
+
+        self.alf = models.Person.objects.create(
+            legal_name="Alfred Smith",
+            slug='alfred_smith',
+        )
+
+        # Create two identifiers for Alf:
+        self.id_a = models.Identifier.objects.create(
+            identifier="/alf",
+            scheme="org.mysociety.za",
+            object_id=self.alf.id,
+            content_type=ContentType.objects.get_for_model(models.Person))
+
+        self.id_a = models.Identifier.objects.create(
+            identifier="/alf-buggy-duplicate",
+            scheme="org.mysociety.za",
+            object_id=self.alf.id,
+            content_type=ContentType.objects.get_for_model(models.Person))
+
+        self.id_b = models.Identifier.objects.create(
+            identifier="/persons/alfred-smith-2983",
+            scheme="org.example",
+            object_id=self.alf.id,
+            content_type=ContentType.objects.get_for_model(models.Person))
+
+        # Create another person with no identifiers:
+        self.bob = models.Person.objects.create(
+            legal_name="Bob Jones",
+            slug='bob_jones',
+        )
+
+    def tearDown(self):
+        self.id_a.delete()
+        self.id_b.delete()
+        self.alf.delete()
+
+    def testGetIdentifier(self):
+        alf_mysociety_id = self.alf.get_identifier('org.example')
+        self.assertEqual(alf_mysociety_id, "/persons/alfred-smith-2983")
+
+    def testGetAmbiguousIdentifier(self):
+        with self.assertRaises(models.Identifier.MultipleObjectsReturned):
+            self.alf.get_identifier('org.mysociety.za')
