@@ -22,7 +22,8 @@ for index, pattern in enumerate(organisation_patterns):
             name='organisation_people',
             )
     if pattern.name == 'organisation':
-        organisation_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAOrganisationDetailView.as_view(), name='organisation')
+        organisation_patterns[index] = url(
+            r'^(?P<slug>[-\w]+)/$', SAOrganisationDetailView.as_view(), name='organisation')
 
 #add organisation party sub-page
 organisation_patterns += patterns(

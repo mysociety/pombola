@@ -358,7 +358,7 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
             context['current_filter'] = False
             context['sorted_positions'] = context['sorted_positions'].exclude(title__slug='member').exclude(title__slug='delegate')
 
-        if self.object.slug=='ncop':
+        if self.object.slug == 'ncop':
             context['membertitle'] = 'delegate'
         else:
             context['membertitle'] = 'member'

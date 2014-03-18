@@ -12,8 +12,8 @@ from pombola.core.models import Person
 # import models
 # from django.shortcuts  import render_to_response, redirect
 # from django.template   import RequestContext
-# 
-# 
+#
+#
 # def default(request):
 #     return render_to_response(
 #         'hansard/default.html',
@@ -22,9 +22,9 @@ from pombola.core.models import Person
 #         },
 #         context_instance=RequestContext(request)
 #     )
-# 
+#
 # #   /hansard/venue/yyyy/mm/dd/hh:mm
-# 
+#
 
 """
 Hansard views - possible url structure:
@@ -62,7 +62,7 @@ class IndexView(TemplateView):
 
 class SittingView(DetailView):
     model = Sitting
-    
+
     def get_object(self):
         """Get the object based on venue and start date and time"""
 
@@ -90,16 +90,16 @@ class SittingView(DetailView):
 
         # get all matching sittings
         sittings = Sitting.objects.filter( **query_args ).order_by('start_time')
-        
+
         if not len(sittings):
             raise Http404
-        
+
         return sittings[0]
 
 
 # class BaseView ( View ):
 #     pass
-# 
+#
 # class VenueMixin( object ):
 #
 #     def get_venue(self):
@@ -108,26 +108,26 @@ class SittingView(DetailView):
 #
 # class IndexView( BaseView ):
 #     pass
-# 
+#
 # class VenueView( VenueMixin, BaseView ):
 #     pass
-# 
+#
 # class YearView( YearMixin, VenueView ):
 #     pass
-# 
+#
 
 
 
 
-# TODO - change to class based views. 
+# TODO - change to class based views.
 
 # TODO - implement a view of all of a persons speeches
 #
 # def person_entries(request, slug):
 #     """Display entries for a person"""
-# 
+#
 #     person = get_object_or_404( Person, slug=slug )
-# 
+#
 #     return render_to_response(
 #         'hansard/person_entries.html',
 #         {
@@ -135,7 +135,7 @@ class SittingView(DetailView):
 #         },
 #         context_instance=RequestContext(request)
 #     )
-    
+
 
 def person_summary(request, slug):
     """Display summary of a person's contributions to Hansard"""
@@ -151,7 +151,7 @@ def person_summary(request, slug):
     return render_to_response(
         'hansard/person_summary.html',
         {
-            'person':           person,            
+            'person':           person,
             'entry_count':      entries_qs.count(),
             'recent_entries':   entries_qs.all().order_by('-sitting__start_date')[0:5],
             'lifetime_summary': lifetime_summary,
