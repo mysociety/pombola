@@ -243,7 +243,7 @@ class Command(BaseCommand):
                 for position in person.position_set.all():
                     if not (position.title and position.title.name):
                         continue
-                    properties = {'title': position.title.name,
+                    properties = {'role': position.title.name,
                                   'person': person_id,
                                   'start_date': date_to_popit_partial_date(position.start_date),
                                   'end_date': date_to_popit_partial_date(position.end_date)}
