@@ -25,85 +25,28 @@ from popit_api import PopIt
 
 from optparse import make_option
 
-def date_to_iso_datetime(passed_date):
-    """Convert a date to a datetime and return an ISO-8601 representation
+def date_to_partial_iso8601(approx_date):
+    """Get a (possibly partial) ISO 8601 representation of an ApproximateDate
 
-    >>> date_to_iso_datetime(datetime.date(2011, 4, 5))
-    '2011-04-05T00:00:00'
+    >>> date_to_partial_iso8601(ApproximateDate(2012, 6, 2))
+    '2012-06-02'
+    >>> date_to_partial_iso8601(ApproximateDate(2010))
+    '2010'
+    >>> date_to_partial_iso8601(ApproximateDate(2012, 2))
+    '2012-02'
     """
-
-    return datetime.datetime.combine(passed_date, datetime.time()).isoformat()
-
-def date_to_popit_partial_date(approx_date):
-    """Return a PopIt partial date from a Django approximate date
-
-    A full date returns 00:00 at the beginning of that day as both the
-    start and end date:
-
-    >>> date_to_popit_partial_date(ApproximateDate(2012, 6, 2))
-    {'start': '2012-06-02T00:00:00', 'end': '2012-06-02T00:00:00', 'formatted': '02 June 2012'}
-
-    Just a year returns 00:00 on the 1st of January as the start, and
-    00:00 on the 31st of December as the end date:
-
-    >>> date_to_popit_partial_date(ApproximateDate(2010))
-    {'start': '2010-01-01T00:00:00', 'end': '2010-12-31T00:00:00', 'formatted': '2010'}
-
-    Just a year and a month returns 00:00 on the first day of the
-    month as the start, and 00:00 on the final day of the month as the
-    end date:
-
-    >>> date_to_popit_partial_date(ApproximateDate(2012, 2))
-    {'start': '2012-02-01T00:00:00', 'end': '2012-02-29T00:00:00', 'formatted': '2/2012'}
-
-    If the approx_date is 'future' or falsy, just return the null date:
-
-    >>> date_to_popit_partial_date(ApproximateDate(future=True))
-    {'start': None, 'end': None, 'formatted': ''}
-    >>> date_to_popit_partial_date(None)
-    {'start': None, 'end': None, 'formatted': ''}
-
-    """
-
-    if approx_date:
-        year = approx_date.year
-        month = approx_date.month
-        day = approx_date.day
-        if year and month and day:
-            d = datetime.date(year, month, day)
-            iso = date_to_iso_datetime(d)
-            return {'start': iso,
-                    'end': iso,
-                    'formatted': d.strftime("%d %B %Y")}
-        elif year and month and not day:
-            start_d = datetime.date(year, month, 1)
-            if month == 12:
-                new_year = year + 1
-                new_month = 1
-            else:
-                new_year = year
-                new_month = month + 1
-            end_d = datetime.date(new_year, new_month, 1)
-            end_d -= datetime.timedelta(days=1)
-            return {'start': date_to_iso_datetime(start_d),
-                    'end': date_to_iso_datetime(end_d),
-                    'formatted': str(month) + "/" + str(year)}
-        elif year and not month and not day:
-            start_d = datetime.date(year, 1, 1)
-            end_d = datetime.date(year + 1, 1, 1)
-            end_d -= datetime.timedelta(days=1)
-            return {'start': date_to_iso_datetime(start_d),
-                    'end': date_to_iso_datetime(end_d),
-                    'formatted': str(year)}
-        else:
-            # print >> sys.stderr, "Unknown missing date values: year='%s', month='%s', day='%s' from approximate date: %s" % (year, month, day, approx_date)
-            return {'start': None,
-                    'end': None,
-                    'formatted': ''}
-    else:
-        return {'start': None,
-                'end': None,
-                'formatted': ''}
+    year = approx_date.year
+    month = approx_date.month
+    day = approx_date.day
+    if year and month and day:
+        d = datetime.date(year, month, day)
+        return d.strftime("%Y-%m-%d")
+    elif year and month and not day:
+        d = datetime.date(year, month, 1)
+        return d.strftime("%Y-%m")
+    elif year and not month and not day:
+        d = datetime.date(year, 1, 1)
+        return d.strftime("%Y")
 
 def add_identifier_to_properties(o, properties):
     scheme = 'org.mysociety.za'
@@ -111,7 +54,6 @@ def add_identifier_to_properties(o, properties):
     if org_ids:
         properties['id'] = scheme + org_ids[0]
     return properties
-
 
 def create_organisations(popit):
     """Create organizations in PopIt based on those used in memberships in Pombola
@@ -242,7 +184,7 @@ class Command(BaseCommand):
                 for date, key in ((person.date_of_birth, 'birth_date'),
                                   (person.date_of_death, 'death_date')):
                     if date:
-                        person_properties[key] = date_to_popit_partial_date(date)
+                        person_properties[key] = date_to_partial_iso8601(date)
                 primary_image = person.primary_image()
                 if primary_image:
                     person_properties['images' ] = [{'url': base_url + primary_image.url}]
@@ -252,9 +194,11 @@ class Command(BaseCommand):
                     if not (position.title and position.title.name):
                         continue
                     properties = {'role': position.title.name,
-                                  'person': person_id,
-                                  'start_date': date_to_popit_partial_date(position.start_date),
-                                  'end_date': date_to_popit_partial_date(position.end_date)}
+                                  'person_id': person_id}
+                    if position.start_date and not position.start_date.past:
+                        properties['start_date'] = date_to_partial_iso8601(position.start_date)
+                    if position.end_date and not position.end_date.future:
+                        properties['end_date'] = date_to_partial_iso8601(position.end_date)
                     add_identifier_to_properties(position, properties)
                     if position.organisation:
                         oslug = position.organisation.slug
