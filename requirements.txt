@@ -61,7 +61,7 @@ django-mapit==1.0.3
 -e git+git://github.com/mysociety/sayit.git@52c4445d1b206d4c4ea2c30c7f129b85b64cac00#egg=django-sayit
 -e git+git://github.com/mysociety/za-hansard.git@master#egg=za-hansard
 git+git://github.com/mysociety/popit-resolver@abcfc79d787c8ca054560a4911352fed8aa8c40d
-git+git://github.com/mysociety/popit-django@61bc32b67f76262d08339e00dd83bda9def92279
+-e git+git://github.com/mysociety/popit-django@a11ef97919f2ae35ef1ef1e2a3f0553ad1ba1e6d#egg=popit-django
 
 # popit-python is needed by the core_send_people_to_popit command
 -e git+git://github.com/mysociety/popit-python.git@88f2c6b3b8c122d4bd4bd4b4edf9afe87df0bd08#egg=popit-python
