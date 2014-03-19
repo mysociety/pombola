@@ -105,9 +105,13 @@ def date_to_popit_partial_date(approx_date):
                 'end': None,
                 'formatted': ''}
 
-def make_personal_details(dob, dod):
-    return {'date_of_birth': date_to_popit_partial_date(dob),
-            'date_of_death': date_to_popit_partial_date(dod)}
+def add_identifier_to_properties(o, properties):
+    scheme = 'org.mysociety.za'
+    org_id = o.get_identifier(scheme)
+    if org_id:
+        properties['id'] = scheme + org_id
+    return properties
+
 
 def create_organisations(popit):
     """Create organizations in PopIt based on those used in memberships in Pombola
@@ -147,10 +151,12 @@ def create_organisations(popit):
     for o in Organisation.objects.all():
         if o.slug in oslug_to_category:
             print >> sys.stderr, "creating the organisation:", o.name
-            new_organisation = popit.organizations.post({'slug': o.slug,
-                                                         'name': o.name,
-                                                         'classification': o.kind.name,
-                                                         'category': oslug_to_category[o.slug]})
+            properties = {'slug': o.slug,
+                          'name': o.name,
+                          'classification': o.kind.name,
+                          'category': oslug_to_category[o.slug]}
+            add_identifier_to_properties(o, properties)
+            new_organisation = popit.organizations.post(properties)
             slug_to_id[o.slug] = new_organisation['result']['id']
     return slug_to_id
 
@@ -233,12 +239,15 @@ class Command(BaseCommand):
             for person in Person.objects.all():
                 name = person.legal_name
                 print >> sys.stderr, "creating the person:", name
-                new_person = popit.persons.post({'name': name})
-                person_id = new_person['result']['id']
-                properties = {"personal_details": make_personal_details(person.date_of_birth,
-                                                                        person.date_of_death)}
-                if person.primary_image():
-                    properties['images' ] = [{'url': base_url + person.primary_image().url}]
+                person_properties = {'name': name}
+                for date, key in ((person.date_of_birth, 'birth_date'),
+                                  (person.date_of_death, 'death_date')):
+                    if date:
+                        person_properties[key] = date_to_popit_partial_date(date)
+                primary_image = person.primary_image()
+                if primary_image:
+                    person_properties['images' ] = [{'url': base_url + primary_image.url}]
+                add_identifier_to_properties(person, person_properties)
                 result = popit.persons(person_id).put(properties)
                 for position in person.position_set.all():
                     if not (position.title and position.title.name):
@@ -247,6 +256,7 @@ class Command(BaseCommand):
                                   'person': person_id,
                                   'start_date': date_to_popit_partial_date(position.start_date),
                                   'end_date': date_to_popit_partial_date(position.end_date)}
+                    add_identifier_to_properties(position, properties)
                     if position.organisation:
                         oslug = position.organisation.slug
                         organization_id = org_slug_to_id[oslug]
