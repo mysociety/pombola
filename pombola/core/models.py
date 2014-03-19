@@ -109,6 +109,14 @@ class IdentifierMixin(object):
         except exceptions.ObjectDoesNotExist:
             return None
 
+    def get_identifiers(self, scheme):
+        """Returns all identifiers in a particular scheme for this object"""
+
+        return Identifier.objects.filter(
+            content_type=ContentType.objects.get_for_model(self),
+            scheme=scheme,
+            object_id=self.id).values_list('identifier', flat=True)
+
 
 class ContactKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)

@@ -217,3 +217,9 @@ class PersonIdentifierTest(TestCase):
     def testGetAmbiguousIdentifier(self):
         with self.assertRaises(models.Identifier.MultipleObjectsReturned):
             self.alf.get_identifier('org.mysociety.za')
+
+    def testGetIdentifiers(self):
+        alf_mysociety_ids = self.alf.get_identifiers('org.mysociety.za')
+        self.assertEqual(
+            sorted(alf_mysociety_ids),
+            ['/alf', '/alf-buggy-duplicate'])
