@@ -216,17 +216,16 @@ class Command(BaseCommand):
             # objects from PopIt.  Currently there's no command to
             # delete all in one go, so we have to do it one-by-one.
 
-            for p in popit.persons.get()['result']:
-                print >> sys.stderr, "deleting the person:", p
-                popit.persons(p['id']).delete()
-
-            for o in popit.organizations.get()['result']:
-                print >> sys.stderr, "deleting the organisation:", o
-                popit.organizations(o['id']).delete()
-
-            for p in popit.memberships.get()['result']:
-                print >> sys.stderr, "deleting the membership:", p
-                popit.memberships(p['id']).delete()
+            for schema_singular in ('person', 'organization', 'membership'):
+                while True:
+                    plural = schema_singular + 's'
+                    response = getattr(popit, plural).get()
+                    for o in response['result']:
+                        print >> sys.stderr, "deleting the {0}: {1}".format(
+                            schema_singular, o)
+                        getattr(popit, plural)(o['id']).delete()
+                    if not response.get('has_more', False):
+                        break
 
             # Create all the organisations found in Pombola, and get
             # back a dictionary mapping the Pombola organisation slug
