@@ -107,9 +107,9 @@ def date_to_popit_partial_date(approx_date):
 
 def add_identifier_to_properties(o, properties):
     scheme = 'org.mysociety.za'
-    org_id = o.get_identifier(scheme)
-    if org_id:
-        properties['id'] = scheme + org_id
+    org_ids = sorted(o.get_identifiers(scheme))
+    if org_ids:
+        properties['id'] = scheme + org_ids[0]
     return properties
 
 
