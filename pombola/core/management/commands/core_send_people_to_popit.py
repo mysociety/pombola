@@ -62,6 +62,19 @@ def add_identifiers_to_properties(o, properties):
             })
     properties['identifiers'] = secondary_identifiers
 
+def add_contact_details_to_properties(o, properties):
+    contacts = []
+    for c in o.contacts.all():
+        if not c.value:
+            continue
+        contact = {
+            'type': c.kind.slug,
+            'value': c.value}
+        if c.note:
+            contact['note'] = c.note
+        contacts.append(contact)
+    properties['contact_details'] = contacts
+
 def create_organisations(popit):
     """Create organizations in PopIt based on those used in memberships in Pombola
 
@@ -105,6 +118,7 @@ def create_organisations(popit):
                           'classification': o.kind.name,
                           'category': oslug_to_category[o.slug]}
             add_identifiers_to_properties(o, properties)
+            add_contact_details_to_properties(o, properties)
             new_organisation = popit.organizations.post(properties)
             slug_to_id[o.slug] = new_organisation['result']['id']
     return slug_to_id
@@ -196,6 +210,7 @@ class Command(BaseCommand):
                 if primary_image:
                     person_properties['images' ] = [{'url': base_url + primary_image.url}]
                 add_identifiers_to_properties(person, person_properties)
+                add_contact_details_to_properties(person, person_properties)
                 person_id = popit.persons.post(person_properties)['result']['id']
                 for position in person.position_set.all():
                     if not (position.title and position.title.name):
