@@ -117,6 +117,17 @@ class IdentifierMixin(object):
             scheme=scheme,
             object_id=self.id).values_list('identifier', flat=True)
 
+    def get_all_identifiers(self):
+        """Return all identifiers for this object in any scheme
+
+        This returns a dict which maps a scheme to a set of
+        identifiers."""
+        results = defaultdict(set)
+        for scheme, identifier in Identifier.objects.filter(
+                content_type=ContentType.objects.get_for_model(self),
+                object_id=self.id).values_list('scheme', 'identifier'):
+            results[scheme].add(identifier)
+        return results
 
 class ContactKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)

@@ -223,3 +223,14 @@ class PersonIdentifierTest(TestCase):
         self.assertEqual(
             sorted(alf_mysociety_ids),
             ['/alf', '/alf-buggy-duplicate'])
+
+    def testGetAllIdentifiers(self):
+        d = self.alf.get_all_identifiers()
+        self.assertEqual(
+            sorted(d.keys()),
+            ['org.example', 'org.mysociety.za'])
+        self.assertEqual(
+            d['org.example'], set(['/persons/alfred-smith-2983']))
+        self.assertEqual(
+            sorted(d['org.mysociety.za']),
+            ['/alf', '/alf-buggy-duplicate'])
