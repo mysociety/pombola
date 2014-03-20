@@ -1,0 +1,78 @@
+[
+    {
+        "geometry": {
+            "location_type": "APPROXIMATE",
+            "bounds": {
+                "northeast": {
+                    "lat": -32.8363609,
+                    "lng": 28.0353449
+                },
+                "southwest": {
+                    "lat": -33.0749089,
+                    "lng": 27.5258429
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -32.8363609,
+                    "lng": 28.0353449
+                },
+                "southwest": {
+                    "lat": -33.0749089,
+                    "lng": 27.5258429
+                }
+            },
+            "location": {
+                "lat": -32.9833333,
+                "lng": 27.8666667
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "East London",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "East London"
+            },
+            {
+                "long_name": "East London",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "East London"
+            },
+            {
+                "long_name": "Amatole",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Amatole"
+            },
+            {
+                "long_name": "Eastern Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "EC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            }
+        ],
+        "formatted_address": "East London, South Africa",
+        "types": [
+            "locality",
+            "political"
+        ]
+    }
+]

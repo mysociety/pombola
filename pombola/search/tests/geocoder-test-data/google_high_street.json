@@ -1,0 +1,2741 @@
+[
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.6351699,
+                    "lng": 19.4629366
+                },
+                "southwest": {
+                    "lat": -33.6489384,
+                    "lng": 19.435202
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.6351699,
+                    "lng": 19.4629366
+                },
+                "southwest": {
+                    "lat": -33.6489384,
+                    "lng": 19.435202
+                }
+            },
+            "location": {
+                "lat": -33.6420525,
+                "lng": 19.4491011
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Worcester",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Worcester"
+            },
+            {
+                "long_name": "Worcester",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Worcester"
+            },
+            {
+                "long_name": "Breede River DC",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Breede River DC"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6849",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6849"
+            }
+        ],
+        "formatted_address": "High Street, Worcester 6850, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.19052,
+                    "lng": 28.0076539
+                },
+                "southwest": {
+                    "lat": -26.204672,
+                    "lng": 27.9895674
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.19052,
+                    "lng": 28.0076539
+                },
+                "southwest": {
+                    "lat": -26.204672,
+                    "lng": 27.9895674
+                }
+            },
+            "location": {
+                "lat": -26.1947646,
+                "lng": 28.0001374
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Johannesburg",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Johannesburg"
+            },
+            {
+                "long_name": "City of Johannesburg Metropolitan Municipality",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "City of Johannesburg Metropolitan Municipality"
+            },
+            {
+                "long_name": "Gauteng",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "GP"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "2092",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "2092"
+            }
+        ],
+        "formatted_address": "High Street, Johannesburg 2092, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.3073634,
+                    "lng": 26.5321496
+                },
+                "southwest": {
+                    "lat": -33.312723,
+                    "lng": 26.5218811
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.3073634,
+                    "lng": 26.5321496
+                },
+                "southwest": {
+                    "lat": -33.312723,
+                    "lng": 26.5218811
+                }
+            },
+            "location": {
+                "lat": -33.3099275,
+                "lng": 26.5274697
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Grahamstown",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Grahamstown"
+            },
+            {
+                "long_name": "Grahamstown",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Grahamstown"
+            },
+            {
+                "long_name": "Grahamstown",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Grahamstown"
+            },
+            {
+                "long_name": "Western District",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Western District"
+            },
+            {
+                "long_name": "Eastern Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "EC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6139",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6139"
+            }
+        ],
+        "formatted_address": "High Street, Grahamstown 6139, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.2291013,
+                    "lng": 28.3675
+                },
+                "southwest": {
+                    "lat": -26.24654,
+                    "lng": 28.358327
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.2291013,
+                    "lng": 28.3675
+                },
+                "southwest": {
+                    "lat": -26.24654,
+                    "lng": 28.358327
+                }
+            },
+            "location": {
+                "lat": -26.238152,
+                "lng": 28.363052
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Brakpan",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Brakpan"
+            },
+            {
+                "long_name": "Brakpan",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Brakpan"
+            },
+            {
+                "long_name": "East Rand",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "East Rand"
+            },
+            {
+                "long_name": "East Rand",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "East Rand"
+            },
+            {
+                "long_name": "Gauteng",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "GP"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "1540",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "1540"
+            }
+        ],
+        "formatted_address": "High Street, Brakpan 1540, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -31.29275329999999,
+                    "lng": 25.8298286
+                },
+                "southwest": {
+                    "lat": -31.2964481,
+                    "lng": 25.8288022
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -31.29275329999999,
+                    "lng": 25.8306643802915
+                },
+                "southwest": {
+                    "lat": -31.2964481,
+                    "lng": 25.8279664197085
+                }
+            },
+            "location": {
+                "lat": -31.2949245,
+                "lng": 25.8293954
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Steynsburg",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Steynsburg"
+            },
+            {
+                "long_name": "Steynsburg",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Steynsburg"
+            },
+            {
+                "long_name": "Burgersdorp",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Burgersdorp"
+            },
+            {
+                "long_name": "Drakensberg District",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Drakensberg District"
+            },
+            {
+                "long_name": "Eastern Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "EC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "5920",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "5920"
+            }
+        ],
+        "formatted_address": "High Street, Steynsburg 5920, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.241521,
+                    "lng": 28.060112
+                },
+                "southwest": {
+                    "lat": -26.2658989,
+                    "lng": 28.05544
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.241521,
+                    "lng": 28.060112
+                },
+                "southwest": {
+                    "lat": -26.2658989,
+                    "lng": 28.05544
+                }
+            },
+            "location": {
+                "lat": -26.253711,
+                "lng": 28.058308
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Johannesburg South",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Johannesburg South"
+            },
+            {
+                "long_name": "Johannesburg",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Johannesburg"
+            },
+            {
+                "long_name": "City of Johannesburg Metropolitan Municipality",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "City of Johannesburg Metropolitan Municipality"
+            },
+            {
+                "long_name": "Gauteng",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "GP"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            }
+        ],
+        "formatted_address": "High Street, Johannesburg South, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -28.226227,
+                    "lng": 28.30899
+                },
+                "southwest": {
+                    "lat": -28.24356,
+                    "lng": 28.306629
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -28.226227,
+                    "lng": 28.3091584802915
+                },
+                "southwest": {
+                    "lat": -28.24356,
+                    "lng": 28.30646051970849
+                }
+            },
+            "location": {
+                "lat": -28.2346974,
+                "lng": 28.3077713
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Bethlehem",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Bethlehem"
+            },
+            {
+                "long_name": "Bethlehem",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Bethlehem"
+            },
+            {
+                "long_name": "Bethlehem",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Bethlehem"
+            },
+            {
+                "long_name": "Thabo Mofutsanyane",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Thabo Mofutsanyane"
+            },
+            {
+                "long_name": "Free State",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "FS"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "9701",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "9701"
+            }
+        ],
+        "formatted_address": "High Street, Bethlehem 9701, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.73450700000001,
+                    "lng": 23.3546619
+                },
+                "southwest": {
+                    "lat": -33.735932,
+                    "lng": 23.338065
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.7338705197085,
+                    "lng": 23.3546619
+                },
+                "southwest": {
+                    "lat": -33.7365684802915,
+                    "lng": 23.338065
+                }
+            },
+            "location": {
+                "lat": -33.7353619,
+                "lng": 23.3470349
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Haarlem",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Haarlem"
+            },
+            {
+                "long_name": "Haarlem",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Haarlem"
+            },
+            {
+                "long_name": "South Cape DC",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "South Cape DC"
+            },
+            {
+                "long_name": "South Cape DC",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "South Cape DC"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6467",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6467"
+            }
+        ],
+        "formatted_address": "High Street, Haarlem 6467, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.5855674,
+                    "lng": 26.9101528
+                },
+                "southwest": {
+                    "lat": -33.5920137,
+                    "lng": 26.8988265
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.5855674,
+                    "lng": 26.9101528
+                },
+                "southwest": {
+                    "lat": -33.5920137,
+                    "lng": 26.8988265
+                }
+            },
+            "location": {
+                "lat": -33.5891812,
+                "lng": 26.9050143
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Port Alfred",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Port Alfred"
+            },
+            {
+                "long_name": "Port Alfred",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Port Alfred"
+            },
+            {
+                "long_name": "Western District",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Western District"
+            },
+            {
+                "long_name": "Eastern Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "EC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6170",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6170"
+            }
+        ],
+        "formatted_address": "High Street, Port Alfred 6170, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -29.7206995,
+                    "lng": 31.0713655
+                },
+                "southwest": {
+                    "lat": -29.7289907,
+                    "lng": 31.0638202
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -29.7206995,
+                    "lng": 31.0713655
+                },
+                "southwest": {
+                    "lat": -29.7289907,
+                    "lng": 31.0638202
+                }
+            },
+            "location": {
+                "lat": -29.7223236,
+                "lng": 31.0697507
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Umhlanga",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Umhlanga"
+            },
+            {
+                "long_name": "Durban Metro",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Durban Metro"
+            },
+            {
+                "long_name": "Durban Metro",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Durban Metro"
+            },
+            {
+                "long_name": "KwaZulu-Natal",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "KZN"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            }
+        ],
+        "formatted_address": "High Street, Umhlanga, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.895057,
+                    "lng": 28.103
+                },
+                "southwest": {
+                    "lat": -26.905896,
+                    "lng": 28.09731
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.895057,
+                    "lng": 28.103
+                },
+                "southwest": {
+                    "lat": -26.905896,
+                    "lng": 28.09731
+                }
+            },
+            "location": {
+                "lat": -26.900713,
+                "lng": 28.100022
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Deneysville",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Deneysville"
+            },
+            {
+                "long_name": "Deneysville",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Deneysville"
+            },
+            {
+                "long_name": "Sasolburg",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Sasolburg"
+            },
+            {
+                "long_name": "Northern Free State",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Northern Free State"
+            },
+            {
+                "long_name": "Free State",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "FS"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "1932",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "1932"
+            }
+        ],
+        "formatted_address": "High Street, Deneysville 1932, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.7543189,
+                    "lng": 25.4046145
+                },
+                "southwest": {
+                    "lat": -33.7608241,
+                    "lng": 25.3944899
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.7543189,
+                    "lng": 25.4046145
+                },
+                "southwest": {
+                    "lat": -33.7608241,
+                    "lng": 25.3944899
+                }
+            },
+            "location": {
+                "lat": -33.7577674,
+                "lng": 25.3998729
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Uitenhage",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Uitenhage"
+            },
+            {
+                "long_name": "Port Elizabeth",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Port Elizabeth"
+            },
+            {
+                "long_name": "Port Elizabeth",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Port Elizabeth"
+            },
+            {
+                "long_name": "Eastern Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "EC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            }
+        ],
+        "formatted_address": "High Street, Uitenhage, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.030387,
+                    "lng": 27.91067
+                },
+                "southwest": {
+                    "lat": -33.038477,
+                    "lng": 27.9036
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.030387,
+                    "lng": 27.91067
+                },
+                "southwest": {
+                    "lat": -33.038477,
+                    "lng": 27.9036
+                }
+            },
+            "location": {
+                "lat": -33.03395500000001,
+                "lng": 27.907568
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "West Bank Village",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "West Bank Village"
+            },
+            {
+                "long_name": "East London",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "East London"
+            },
+            {
+                "long_name": "East London",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "East London"
+            },
+            {
+                "long_name": "Amatole",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Amatole"
+            },
+            {
+                "long_name": "Eastern Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "EC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "5201",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "5201"
+            }
+        ],
+        "formatted_address": "High Street, East London 5201, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -34.470434,
+                    "lng": 19.9022634
+                },
+                "southwest": {
+                    "lat": -34.47582,
+                    "lng": 19.8932185
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -34.470434,
+                    "lng": 19.9022634
+                },
+                "southwest": {
+                    "lat": -34.47582,
+                    "lng": 19.8932185
+                }
+            },
+            "location": {
+                "lat": -34.4729695,
+                "lng": 19.8987467
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Napier",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Napier"
+            },
+            {
+                "long_name": "Napier",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Napier"
+            },
+            {
+                "long_name": "Bredasdorp",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Bredasdorp"
+            },
+            {
+                "long_name": "Overberg DC",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Overberg DC"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "7270",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "7270"
+            }
+        ],
+        "formatted_address": "High Street, Napier 7270, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.0912699,
+                    "lng": 28.163838
+                },
+                "southwest": {
+                    "lat": -26.096497,
+                    "lng": 28.1568685
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.0912699,
+                    "lng": 28.163838
+                },
+                "southwest": {
+                    "lat": -26.096497,
+                    "lng": 28.1568685
+                }
+            },
+            "location": {
+                "lat": -26.0941319,
+                "lng": 28.16061
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Lethabong",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Lethabong"
+            },
+            {
+                "long_name": "City of Johannesburg Metropolitan Municipality",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "City of Johannesburg Metropolitan Municipality"
+            },
+            {
+                "long_name": "Gauteng",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "GP"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            }
+        ],
+        "formatted_address": "High Street, Lethabong, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -30.1477325,
+                    "lng": 30.0620504
+                },
+                "southwest": {
+                    "lat": -30.15704,
+                    "lng": 30.0602718
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -30.1477325,
+                    "lng": 30.0625100802915
+                },
+                "southwest": {
+                    "lat": -30.15704,
+                    "lng": 30.0598121197085
+                }
+            },
+            "location": {
+                "lat": -30.152911,
+                "lng": 30.0610998
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Ixopo",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Ixopo"
+            },
+            {
+                "long_name": "Ixopo",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Ixopo"
+            },
+            {
+                "long_name": "Ixopo",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Ixopo"
+            },
+            {
+                "long_name": "East Griqualand",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "East Griqualand"
+            },
+            {
+                "long_name": "KwaZulu-Natal",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "KZN"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "3276",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "3276"
+            }
+        ],
+        "formatted_address": "High Street, Ixopo 3276, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.3382378,
+                    "lng": 20.0428159
+                },
+                "southwest": {
+                    "lat": -33.3449529,
+                    "lng": 20.0372826
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.3382378,
+                    "lng": 20.0428159
+                },
+                "southwest": {
+                    "lat": -33.3449529,
+                    "lng": 20.0372826
+                }
+            },
+            "location": {
+                "lat": -33.342154,
+                "lng": 20.0401
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Touws River",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Touws River"
+            },
+            {
+                "long_name": "Touws River",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Touws River"
+            },
+            {
+                "long_name": "Breede River DC",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Breede River DC"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6880",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6880"
+            }
+        ],
+        "formatted_address": "High Street, Touws River 6880, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -28.5804862,
+                    "lng": 31.3925542
+                },
+                "southwest": {
+                    "lat": -28.5907509,
+                    "lng": 31.3915666
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -28.5804862,
+                    "lng": 31.3934093802915
+                },
+                "southwest": {
+                    "lat": -28.5907509,
+                    "lng": 31.3907114197085
+                }
+            },
+            "location": {
+                "lat": -28.585518,
+                "lng": 31.392016
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Melmoth",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Melmoth"
+            },
+            {
+                "long_name": "Melmoth",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Melmoth"
+            },
+            {
+                "long_name": "Melmoth",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Melmoth"
+            },
+            {
+                "long_name": "(South) Uthungulu DC",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "(South) Uthungulu DC"
+            },
+            {
+                "long_name": "KwaZulu-Natal",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "KZN"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "3835",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "3835"
+            }
+        ],
+        "formatted_address": "High Street, Melmoth 3835, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -34.183936,
+                    "lng": 22.151248
+                },
+                "southwest": {
+                    "lat": -34.184924,
+                    "lng": 22.140431
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -34.1830810197085,
+                    "lng": 22.151248
+                },
+                "southwest": {
+                    "lat": -34.1857789802915,
+                    "lng": 22.140431
+                }
+            },
+            "location": {
+                "lat": -34.184323,
+                "lng": 22.144375
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Mossel Bay",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Mossel Bay"
+            },
+            {
+                "long_name": "South Cape DC",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "South Cape DC"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6500",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6500"
+            }
+        ],
+        "formatted_address": "High Street, Mossel Bay 6500, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.2404947,
+                    "lng": 28.04234
+                },
+                "southwest": {
+                    "lat": -26.2500739,
+                    "lng": 28.03745
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.2404947,
+                    "lng": 28.04234
+                },
+                "southwest": {
+                    "lat": -26.2500739,
+                    "lng": 28.03745
+                }
+            },
+            "location": {
+                "lat": -26.2453026,
+                "lng": 28.039844
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Turffontein",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Turffontein"
+            },
+            {
+                "long_name": "Johannesburg South",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Johannesburg South"
+            },
+            {
+                "long_name": "Johannesburg",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Johannesburg"
+            },
+            {
+                "long_name": "City of Johannesburg Metropolitan Municipality",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "City of Johannesburg Metropolitan Municipality"
+            },
+            {
+                "long_name": "Gauteng",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "GP"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "2140",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "2140"
+            }
+        ],
+        "formatted_address": "High Street, Johannesburg South 2140, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.9944817,
+                    "lng": 25.5369
+                },
+                "southwest": {
+                    "lat": -34.00474,
+                    "lng": 25.53513
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.9944817,
+                    "lng": 25.5373639802915
+                },
+                "southwest": {
+                    "lat": -34.00474,
+                    "lng": 25.5346660197085
+                }
+            },
+            "location": {
+                "lat": -33.999438,
+                "lng": 25.536074
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Port Elizabeth",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Port Elizabeth"
+            },
+            {
+                "long_name": "Port Elizabeth",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Port Elizabeth"
+            },
+            {
+                "long_name": "Port Elizabeth",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Port Elizabeth"
+            },
+            {
+                "long_name": "Eastern Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "EC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6070",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6070"
+            }
+        ],
+        "formatted_address": "High Street, Port Elizabeth 6070, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -29.5712409,
+                    "lng": 31.120633
+                },
+                "southwest": {
+                    "lat": -29.577938,
+                    "lng": 31.115232
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -29.5712409,
+                    "lng": 31.120633
+                },
+                "southwest": {
+                    "lat": -29.577938,
+                    "lng": 31.115232
+                }
+            },
+            "location": {
+                "lat": -29.574701,
+                "lng": 31.117552
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Tongaat",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Tongaat"
+            },
+            {
+                "long_name": "Durban Metro",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Durban Metro"
+            },
+            {
+                "long_name": "Durban Metro",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Durban Metro"
+            },
+            {
+                "long_name": "KwaZulu-Natal",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "KZN"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "4399",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "4399"
+            }
+        ],
+        "formatted_address": "High Street, Tongaat 4399, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -34.095267,
+                    "lng": 20.966597
+                },
+                "southwest": {
+                    "lat": -34.101526,
+                    "lng": 20.9548469
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -34.095267,
+                    "lng": 20.966597
+                },
+                "southwest": {
+                    "lat": -34.101526,
+                    "lng": 20.9548469
+                }
+            },
+            "location": {
+                "lat": -34.0989535,
+                "lng": 20.9617997
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Heidelberg - Wc",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Heidelberg - Wc"
+            },
+            {
+                "long_name": "Heidelberg",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Heidelberg"
+            },
+            {
+                "long_name": "South Cape DC",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "South Cape DC"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6665",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6665"
+            }
+        ],
+        "formatted_address": "High Street, Heidelberg 6665, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.18176,
+                    "lng": 28.05769
+                },
+                "southwest": {
+                    "lat": -26.18393,
+                    "lng": 28.0496564
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.1814960197085,
+                    "lng": 28.05769
+                },
+                "southwest": {
+                    "lat": -26.1841939802915,
+                    "lng": 28.0496564
+                }
+            },
+            "location": {
+                "lat": -26.1828305,
+                "lng": 28.0531849
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Berea",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Berea"
+            },
+            {
+                "long_name": "Johannesburg",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Johannesburg"
+            },
+            {
+                "long_name": "Johannesburg",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Johannesburg"
+            },
+            {
+                "long_name": "City of Johannesburg Metropolitan Municipality",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "City of Johannesburg Metropolitan Municipality"
+            },
+            {
+                "long_name": "Gauteng",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "GP"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "2198",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "2198"
+            }
+        ],
+        "formatted_address": "High Street, Johannesburg 2198, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.2100588,
+                    "lng": 28.17287
+                },
+                "southwest": {
+                    "lat": -26.21725,
+                    "lng": 28.165369
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.2100588,
+                    "lng": 28.17287
+                },
+                "southwest": {
+                    "lat": -26.21725,
+                    "lng": 28.165369
+                }
+            },
+            "location": {
+                "lat": -26.2137299,
+                "lng": 28.169142
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Germiston",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Germiston"
+            },
+            {
+                "long_name": "East Rand",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "East Rand"
+            },
+            {
+                "long_name": "East Rand",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "East Rand"
+            },
+            {
+                "long_name": "Gauteng",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "GP"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "1401",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "1401"
+            }
+        ],
+        "formatted_address": "High Street, Germiston 1401, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -34.05192,
+                    "lng": 23.3711626
+                },
+                "southwest": {
+                    "lat": -34.05765,
+                    "lng": 23.36997
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -34.05192,
+                    "lng": 23.3719152802915
+                },
+                "southwest": {
+                    "lat": -34.05765,
+                    "lng": 23.3692173197085
+                }
+            },
+            "location": {
+                "lat": -34.05471780000001,
+                "lng": 23.3705252
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Plettenberg Bay",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Plettenberg Bay"
+            },
+            {
+                "long_name": "Plettenberg Bay",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Plettenberg Bay"
+            },
+            {
+                "long_name": "Greater Plettenberg Bay",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Greater Plettenberg Bay"
+            },
+            {
+                "long_name": "South Cape DC",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "South Cape DC"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "6600",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "6600"
+            }
+        ],
+        "formatted_address": "High Street, Plettenberg Bay 6600, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -26.2042039,
+                    "lng": 28.023769
+                },
+                "southwest": {
+                    "lat": -26.208982,
+                    "lng": 28.022979
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -26.2042039,
+                    "lng": 28.0247229802915
+                },
+                "southwest": {
+                    "lat": -26.208982,
+                    "lng": 28.0220250197085
+                }
+            },
+            "location": {
+                "lat": -26.206532,
+                "lng": 28.023384
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Johannesburg",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Johannesburg"
+            },
+            {
+                "long_name": "Johannesburg",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Johannesburg"
+            },
+            {
+                "long_name": "City of Johannesburg Metropolitan Municipality",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "City of Johannesburg Metropolitan Municipality"
+            },
+            {
+                "long_name": "Gauteng",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "GP"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            }
+        ],
+        "formatted_address": "High Street, Johannesburg, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -29.637594,
+                    "lng": 31.040422
+                },
+                "southwest": {
+                    "lat": -29.64311799999999,
+                    "lng": 31.038203
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -29.637594,
+                    "lng": 31.0406614802915
+                },
+                "southwest": {
+                    "lat": -29.64311799999999,
+                    "lng": 31.0379635197085
+                }
+            },
+            "location": {
+                "lat": -29.64059,
+                "lng": 31.0392719
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Grangetown",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Grangetown"
+            },
+            {
+                "long_name": "Verulam",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Verulam"
+            },
+            {
+                "long_name": "Durban Metro",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Durban Metro"
+            },
+            {
+                "long_name": "Durban Metro",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Durban Metro"
+            },
+            {
+                "long_name": "KwaZulu-Natal",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "KZN"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "4339",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "4339"
+            }
+        ],
+        "formatted_address": "High Street, Verulam 4339, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -29.7929449,
+                    "lng": 30.869078
+                },
+                "southwest": {
+                    "lat": -29.7980425,
+                    "lng": 30.865261
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -29.7929449,
+                    "lng": 30.869078
+                },
+                "southwest": {
+                    "lat": -29.7980425,
+                    "lng": 30.865261
+                }
+            },
+            "location": {
+                "lat": -29.7963419,
+                "lng": 30.8665411
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "The Wolds",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "The Wolds"
+            },
+            {
+                "long_name": "New Germany",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "New Germany"
+            },
+            {
+                "long_name": "Durban Metro",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Durban Metro"
+            },
+            {
+                "long_name": "Durban Metro",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Durban Metro"
+            },
+            {
+                "long_name": "KwaZulu-Natal",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "KZN"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "3610",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "3610"
+            }
+        ],
+        "formatted_address": "High Street, New Germany 3610, South Africa",
+        "types": [
+            "route"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "GEOMETRIC_CENTER",
+            "bounds": {
+                "northeast": {
+                    "lat": -28.846311,
+                    "lng": 23.2582013
+                },
+                "southwest": {
+                    "lat": -28.8473625,
+                    "lng": 23.2532846
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -28.8454877697085,
+                    "lng": 23.2582013
+                },
+                "southwest": {
+                    "lat": -28.8481857302915,
+                    "lng": 23.2532846
+                }
+            },
+            "location": {
+                "lat": -28.846968,
+                "lng": 23.2557116
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "High Street",
+                "types": [
+                    "route"
+                ],
+                "short_name": "High St"
+            },
+            {
+                "long_name": "Griekwastad",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Griekwastad"
+            },
+            {
+                "long_name": "Griekwastad",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Griekwastad"
+            },
+            {
+                "long_name": "Griekwastad",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Griekwastad"
+            },
+            {
+                "long_name": "Bo-Karoo",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Bo-Karoo"
+            },
+            {
+                "long_name": "Northern Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "NC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            },
+            {
+                "long_name": "8365",
+                "types": [
+                    "postal_code"
+                ],
+                "short_name": "8365"
+            }
+        ],
+        "formatted_address": "High Street, Griekwastad 8365, South Africa",
+        "types": [
+            "route"
+        ]
+    }
+]
