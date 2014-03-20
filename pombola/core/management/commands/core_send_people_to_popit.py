@@ -75,6 +75,11 @@ def add_contact_details_to_properties(o, properties):
         contacts.append(contact)
     properties['contact_details'] = contacts
 
+def add_other_names(person, properties):
+    properties['other_names'] = [
+        {'name': an.alternative_name} for an in
+        person.alternative_names.all()]
+
 def create_organisations(popit):
     """Create organizations in PopIt based on those used in memberships in Pombola
 
@@ -211,6 +216,7 @@ class Command(BaseCommand):
                     person_properties['images' ] = [{'url': base_url + primary_image.url}]
                 add_identifiers_to_properties(person, person_properties)
                 add_contact_details_to_properties(person, person_properties)
+                add_other_names(person, person_properties)
                 person_id = popit.persons.post(person_properties)['result']['id']
                 for position in person.position_set.all():
                     if not (position.title and position.title.name):
