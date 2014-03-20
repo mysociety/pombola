@@ -48,12 +48,19 @@ def date_to_partial_iso8601(approx_date):
         d = datetime.date(year, 1, 1)
         return d.strftime("%Y")
 
-def add_identifier_to_properties(o, properties):
-    scheme = 'org.mysociety.za'
-    org_ids = sorted(o.get_identifiers(scheme))
-    if org_ids:
-        properties['id'] = scheme + org_ids[0]
-    return properties
+def add_identifiers_to_properties(o, properties):
+    primary_id_scheme = 'org.mysociety.za'
+    secondary_identifiers = []
+    for scheme, identifiers in o.get_all_identifiers().items():
+        sorted_identifiers = sorted(identifiers)
+        if scheme == primary_id_scheme:
+            properties['id'] = scheme + sorted_identifiers[0]
+        else:
+            secondary_identifiers.append({
+                'scheme': scheme,
+                'identifier': sorted_identifiers[0]
+            })
+    properties['identifiers'] = secondary_identifiers
 
 def create_organisations(popit):
     """Create organizations in PopIt based on those used in memberships in Pombola
@@ -97,7 +104,7 @@ def create_organisations(popit):
                           'name': o.name,
                           'classification': o.kind.name,
                           'category': oslug_to_category[o.slug]}
-            add_identifier_to_properties(o, properties)
+            add_identifiers_to_properties(o, properties)
             new_organisation = popit.organizations.post(properties)
             slug_to_id[o.slug] = new_organisation['result']['id']
     return slug_to_id
@@ -188,8 +195,8 @@ class Command(BaseCommand):
                 primary_image = person.primary_image()
                 if primary_image:
                     person_properties['images' ] = [{'url': base_url + primary_image.url}]
-                add_identifier_to_properties(person, person_properties)
-                result = popit.persons(person_id).put(properties)
+                add_identifiers_to_properties(person, person_properties)
+                person_id = popit.persons.post(person_properties)['result']['id']
                 for position in person.position_set.all():
                     if not (position.title and position.title.name):
                         continue
@@ -199,7 +206,7 @@ class Command(BaseCommand):
                         properties['start_date'] = date_to_partial_iso8601(position.start_date)
                     if position.end_date and not position.end_date.future:
                         properties['end_date'] = date_to_partial_iso8601(position.end_date)
-                    add_identifier_to_properties(position, properties)
+                    add_identifiers_to_properties(position, properties)
                     if position.organisation:
                         oslug = position.organisation.slug
                         organization_id = org_slug_to_id[oslug]
