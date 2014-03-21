@@ -706,8 +706,10 @@ class SASectionView(SectionView):
             # Find a URL to redirect to; try to get any speech in the
             # section with a non-blank source URL:
             speeches = self.object.speech_set.exclude(source_url='')[:1]
-            redirect_url = speeches[0] if speeches else None
-            if redirect_url and not speech.public:
-                return redirect(redirect_url)
+            if speeches:
+                speech = speeches[0]
+                redirect_url = speech.source_url
+                if redirect_url and not speech.public:
+                    return redirect(redirect_url)
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
