@@ -29,6 +29,7 @@ from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
     OrganisationDetailView, PersonDetail, PlaceDetailView, OrganisationDetailSub
 from pombola.info.views import InfoPageView
+from pombola.search.views import GeocoderView
 
 from pombola.south_africa.models import ZAPlace
 
@@ -38,6 +39,20 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-office',
     'constituency-area', # specific to DA party
 )
+
+class SAGeocoderView(GeocoderView):
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        results = context.get('geocoder_results')
+        if results is not None and len(results) == 1:
+            result = results[0]
+            redirect_url = reverse('latlon', kwargs={
+                'lat': result['latitude'],
+                'lon': result['longitude']})
+            return redirect(redirect_url)
+        else:
+            return self.render_to_response(context)
 
 class LocationSearchForm(SearchForm):
     q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))

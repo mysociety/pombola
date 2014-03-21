@@ -3,6 +3,9 @@ import sys
 import os
 from datetime import date, time
 from StringIO import StringIO
+from urlparse import urlparse
+
+import mock
 
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
@@ -25,6 +28,10 @@ from pombola import south_africa
 from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
+from pombola.search.tests.views import fake_geocoder
+
+import pombola.search.geocoder
+pombola.search.geocoder.geocoder = mock.Mock(side_effect=fake_geocoder)
 
 from nose.plugins.attrib import attr
 
@@ -156,10 +163,40 @@ class LatLonDetailViewTest(TestCase):
 
 
 @attr(country='south_africa')
-class SASearchViewTest(TestCase):
+class SASearchViewTest(WebTest):
+
+    def setUp(self):
+        self.search_location_url = reverse('core_geocoder_search')
+
     def test_search_page_returns_success(self):
-        res = self.client.get(reverse('core_search'))
+        res = self.app.get(reverse('core_search'))
         self.assertEquals(200, res.status_code)
+
+    def get_search_result_list_items(self, query_string):
+        response = self.app.get(
+            "{0}?q={1}".format(self.search_location_url, query_string))
+        results_div = response.html.find('div', class_='geocoded_results')
+        return results_div.find('ul').findAll('li')
+
+    def test_unknown_place(self):
+        lis = self.get_search_result_list_items('anywhere')
+        self.assertEqual(len(lis), 0)
+
+    def test_single_result_place(self):
+        response = self.app.get(
+            "{0}?q={1}".format(self.search_location_url, 'Cape Town'))
+        # If there's only a single result (as with Cape Town) we
+        # should redirect straight there:
+        self.assertEqual(response.status_code, 302)
+        path = urlparse(response.location).path
+        self.assertEqual(path, '/place/latlon/-33.925,18.424/')
+
+    def test_multiple_result_place(self):
+        lis = self.get_search_result_list_items('Trafford Road')
+        self.assertEqual(len(lis), 3)
+        self.assertEqual(lis[0].a['href'], '/place/latlon/-29.814,30.839/')
+        self.assertEqual(lis[1].a['href'], '/place/latlon/-33.969,18.703/')
+        self.assertEqual(lis[2].a['href'], '/place/latlon/-32.982,27.868/')
 
 
 @attr(country='south_africa')
