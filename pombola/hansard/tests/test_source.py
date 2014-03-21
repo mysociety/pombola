@@ -1,13 +1,8 @@
 import datetime
 import os
-import time
-import json
-import tempfile
 from collections import namedtuple
-import subprocess
 
 from django.test import TestCase
-from django.utils import unittest
 
 from pombola.hansard.models import Source, SourceUrlCouldNotBeRetrieved
 
