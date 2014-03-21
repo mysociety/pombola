@@ -1,0 +1,162 @@
+[
+    {
+        "geometry": {
+            "location_type": "APPROXIMATE",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.47127,
+                    "lng": 19.00467
+                },
+                "southwest": {
+                    "lat": -34.3587022,
+                    "lng": 18.3074488
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.47127,
+                    "lng": 19.00467
+                },
+                "southwest": {
+                    "lat": -34.3587022,
+                    "lng": 18.3074488
+                }
+            },
+            "location": {
+                "lat": -33.9248685,
+                "lng": 18.4240553
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "Cape Town",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Cape Town"
+            },
+            {
+                "long_name": "Cape Town",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Cape Town"
+            },
+            {
+                "long_name": "Cape Town",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Cape Town"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            }
+        ],
+        "formatted_address": "Cape Town, South Africa",
+        "types": [
+            "locality",
+            "political"
+        ]
+    },
+    {
+        "geometry": {
+            "location_type": "APPROXIMATE",
+            "bounds": {
+                "northeast": {
+                    "lat": -33.8899498,
+                    "lng": 18.5413949
+                },
+                "southwest": {
+                    "lat": -33.969091,
+                    "lng": 18.3690399
+                }
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": -33.8899498,
+                    "lng": 18.5413949
+                },
+                "southwest": {
+                    "lat": -33.969091,
+                    "lng": 18.3690399
+                }
+            },
+            "location": {
+                "lat": -33.924741,
+                "lng": 18.4241074
+            }
+        },
+        "address_components": [
+            {
+                "long_name": "Cape Town",
+                "types": [
+                    "sublocality",
+                    "political"
+                ],
+                "short_name": "Cape Town"
+            },
+            {
+                "long_name": "Cape Town",
+                "types": [
+                    "locality",
+                    "political"
+                ],
+                "short_name": "Cape Town"
+            },
+            {
+                "long_name": "Cape Town",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ],
+                "short_name": "Cape Town"
+            },
+            {
+                "long_name": "Cape Town",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ],
+                "short_name": "Cape Town"
+            },
+            {
+                "long_name": "Western Cape",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ],
+                "short_name": "WC"
+            },
+            {
+                "long_name": "South Africa",
+                "types": [
+                    "country",
+                    "political"
+                ],
+                "short_name": "ZA"
+            }
+        ],
+        "formatted_address": "Cape Town, South Africa",
+        "types": [
+            "sublocality",
+            "political"
+        ]
+    }
+]
