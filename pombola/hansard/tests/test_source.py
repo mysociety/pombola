@@ -3,6 +3,7 @@ import os
 import time
 import json
 import tempfile
+from collections import namedtuple
 import subprocess
 
 from django.test import TestCase
@@ -10,13 +11,35 @@ from django.utils import unittest
 
 from pombola.hansard.models import Source, SourceUrlCouldNotBeRetrieved
 
+
+class FakeHttp(object):
+
+    def __init__(self, status_code=200):
+        self.status_code = status_code
+
+    def request(self, _):
+        FakeResponse = namedtuple('FakeResponse', ['status'])
+        # With the tests as they are at the moment, the response could
+        # actually be any data, but might as well make it HTML:
+        return FakeResponse(self.status_code), """<!doctype html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <title>Example Document</title>
+  </head>
+  <body>
+    <p>Some text here...</p>
+  </body>
+</html>"""
+
+
 class HansardSourceTest(TestCase):
 
     def setUp(self):
-        """Create a test source (easier than fixture for now)"""
+        """Create a test source"""
         source = Source(
             name = 'Test Source',
-            url  = 'http://www.mysociety.org/',
+            url  = 'http://example.com/whatever',
             date = datetime.date( 2011, 11, 14),
         )
         source.save()
@@ -37,16 +60,16 @@ class HansardSourceTest(TestCase):
         self.assertFalse( os.path.exists( cache_file_path ))
 
         # retrieve and check it does
-        self.assertTrue( len( source.file().read() ) )
+        self.assertTrue( len( source.file(http_object=FakeHttp()).read() ) )
         self.assertTrue( os.path.exists( cache_file_path ))
 
         # change file, retrieve again and check we get cached version
         self.assertTrue( os.path.exists( cache_file_path ))
         added_text = "some random testing nonsense"
-        self.assertFalse( added_text in source.file().read() )
+        self.assertFalse( added_text in source.file(http_object=FakeHttp()).read() )
         with open(cache_file_path, "a") as append_to_me:
             append_to_me.write("\n\n" + added_text + "\n\n")        
-        self.assertTrue( added_text in source.file().read() )
+        self.assertTrue( added_text in source.file(http_object=FakeHttp()).read() )
         
         # delete the object - check cache file gone to
         source.delete()
@@ -63,8 +86,8 @@ class HansardSourceTest(TestCase):
         self.assertRaises(
             SourceUrlCouldNotBeRetrieved,
             Source.file,
-            source
-        )
+            source,
+            http_object=FakeHttp(404))
         self.assertFalse( os.path.exists( source.cache_file_path() ))
 
 

@@ -71,7 +71,7 @@ class Source(HansardModelBase):
             os.remove( cache_file_path )
         
         
-    def file(self):
+    def file(self, http_object=None):
         """
         Return as a file object the resource that the url is pointing to.
         
@@ -80,6 +80,10 @@ class Source(HansardModelBase):
         
         Raises a SourceUrlCouldNotBeRetrieved exception if URL could not be
         retrieved.
+
+        The http_object parameter is primarily to aid testing; you can pass
+        in a mock object that will be used in place of httplib2.Http() for
+        fetching data from URL.
         """
         cache_file_path = self.cache_file_path()
         
@@ -90,7 +94,7 @@ class Source(HansardModelBase):
             pass # ignore
         
         # If not fetch the file, save to cache and then return fh
-        h = httplib2.Http()
+        h = httplib2.Http() if (http_object is None) else http_object
         response, content = h.request(self.url)
 
         # Crude handling of response - is there an is_success method?
