@@ -38803,8 +38803,13 @@
                     "role": "Speaker"
                 }
             ],
-            "name": "M.B Sesele",
-            "slug": "mb-sesele"
+            "name": "M.A. Tsopo",
+            "other_names": [
+                {
+                    "name": "Ouma Tsopo"
+                }
+            ],
+            "slug": "ma-tsopo"
         },
         {
             "contact_details": [
