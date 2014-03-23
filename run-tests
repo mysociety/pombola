@@ -1,15 +1,41 @@
 #!/bin/bash
 
-# Since we have to invoke the country-specific tests with new
-# invocations of ./manage.py test, make sure that we exit after any
-# test run - this is to avoid you missing, say, that the generic tests
-# failed if your terminal's just showing the last country-specific
-# tests passing:
-set -ex
+EXIT_CODE=0
 
 cd $(dirname "$BASH_SOURCE")
 
-./manage.py test --settings=pombola.settings.tests
+update_exit_code() {
+    LAST_EXIT_CODE=$?
+    if [ $LAST_EXIT_CODE != 0 ]
+    then
+        EXIT_CODE=$LAST_EXIT_CODE
+    fi
+}
 
-./manage.py test --settings=pombola.settings.tests_kenya
-./manage.py test --settings=pombola.settings.tests_south_africa
+TEST_SETTINGS_MODULES=(
+    'pombola.settings.tests'
+    'pombola.settings.tests_kenya'
+    'pombola.settings.tests_south_africa'
+)
+
+for TEST_SETTINGS_MODULE in "${TEST_SETTINGS_MODULES[@]}"
+do
+    COMMAND="./manage.py test --settings=$TEST_SETTINGS_MODULE"
+    echo Running: $COMMAND
+    $COMMAND
+    update_exit_code
+done
+
+# If any test failed, make sure we output an error message in red at
+# the end of the test run, just in case the test failures from the
+# core tests went off the top of the terminal:
+
+if [ $EXIT_CODE != 0 ]
+then
+    echo "$(tput setaf 1)Tests failed.$(tput sgr0)"
+fi
+
+# And now exit with 0 if all tests succeeded, or otherwise with the
+# last non-zero exit code:
+
+exit $EXIT_CODE
