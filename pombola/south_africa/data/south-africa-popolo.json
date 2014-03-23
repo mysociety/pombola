@@ -54290,25 +54290,6 @@
             "slug": "sizwe-mchunu"
         },
         {
-            "contact_details": [],
-            "id": "org.mysociety.za/person/954",
-            "memberships": [
-                {
-                    "area": {
-                        "id": "org.mysociety.za/mapit/code/p/KZN",
-                        "name": "KwaZulu-Natal"
-                    },
-                    "id": "org.mysociety.za/membership/4509",
-                    "label": "Alternate Member for KwaZulu-Natal",
-                    "organization_id": "org.mysociety.za/kwazulu-natal-provincial-legislature-committee/scopa-committee",
-                    "person_id": "org.mysociety.za/person/954",
-                    "role": "Alternate Member"
-                }
-            ],
-            "name": "T.M. Kaunda",
-            "slug": "tm-kaunda"
-        },
-        {
             "contact_details": [
                 {
                     "type": "phone",
@@ -54382,6 +54363,17 @@
                     "organization_id": "org.mysociety.za/provincial-legislature/kwazulu-natal-provincial-legislature",
                     "person_id": "org.mysociety.za/person/955",
                     "role": "Member of the Provincial Legislature"
+                },
+                {
+                    "area": {
+                        "id": "org.mysociety.za/mapit/code/p/KZN",
+                        "name": "KwaZulu-Natal"
+                    },
+                    "id": "org.mysociety.za/membership/4509",
+                    "label": "Alternate Member for KwaZulu-Natal",
+                    "organization_id": "org.mysociety.za/kwazulu-natal-provincial-legislature-committee/scopa-committee",
+                    "person_id": "org.mysociety.za/person/955",
+                    "role": "Alternate Member"
                 }
             ],
             "name": "T.M. Kaunda",
