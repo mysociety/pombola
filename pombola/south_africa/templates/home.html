@@ -65,15 +65,34 @@
                 <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                 </h3>
                 <p class="meta">{{ article.publication_date|date }}</p>
-                <p>{{ article.content|truncatewords_html:32 }}</p>
-                <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p>
+                <div class="summary">{{ article.content|truncatewords_html:32 }} <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p></div>
             </li>
             {% endfor %}
             </ul>
-            <a href="{% url 'info_blog_category' slug=category.slug %}">see all posts</a>
+            <p><a class="readmore" href="{% url 'info_blog_category' slug=category.slug %}">See All &#187;</a></p>
         </div>
 
       {% endfor %}
+
+
+
+        <div class="home-news-bottom">
+
+          {% for category, articles in other_news_categories %}
+
+            <div class="item">
+                <h2><a href="{% url 'info_blog_category' slug=category.slug %}">{{ category.name }}</a></h2>
+                {% for article in articles %}
+                    <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+                    <p class="meta">{{ article.publication_date|date }}</p>
+                    <div class="summary">{{ article.content|truncatewords_html:32 }} <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p></div>
+                {% endfor %}
+                <p><a class="readmore" href="{% url 'info_blog_category' slug=category.slug %}">See All &#187;</a></p>
+            </div>
+
+          {% endfor %}
+
+        </div>
 
     </div>
     <div class="col-2">

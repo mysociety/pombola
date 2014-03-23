@@ -930,21 +930,56 @@ NEWS & POLL
     float: left;
     width: 100%;
     max-width: 100%;
-    margin-bottom: 3em;
+    margin-bottom:0em;
+    @media only all and (min-width: 940px), print {
+        width: 48%;
+        margin-right: 2%;
+    }
+    .summary .readmore a {
+        font-size:0.9em;
+    }
+}
+
+.home-news, .home-news-bottom {
     h2 {
-        a:link{
+        a:link,
+        a:visited {
             text-decoration: none;
             color: $colour_black;
         }
         a:hover,
-        a:focus {
+        a:focus,
+        a:visited:hover {
             text-decoration: underline;
-            color: $colour_primary;
+            color: $colour_primary!important;
         }
     }
+    .summary {
+        line-height:1.3em;
+        margin-bottom:1em;
+        p {
+            display:inline;
+        }
+    }
+}
+
+.home-news-bottom {
+    clear: both;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
     @media only all and (min-width: 940px), print {
-        width: 48%;
-        margin-right: 2%;
+        .item {
+            font-size: 0.9em;
+            width: 32%;
+            float: left;
+            padding-right: 2%;
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+    }
+    p {
+        font-size: 0.9em;
     }
 }
 

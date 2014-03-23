@@ -4126,22 +4126,58 @@ NEWS & POLL
   float: left;
   width: 100%;
   max-width: 100%;
-  margin-bottom: 3em;
-}
-.home-news h2 a:link {
-  text-decoration: none;
-  color: #222222;
-}
-.home-news h2 a:hover,
-.home-news h2 a:focus {
-  text-decoration: underline;
-  color: #e23d28;
+  margin-bottom: 0em;
 }
 @media only all and (min-width: 940px), print {
   .home-news {
     width: 48%;
     margin-right: 2%;
   }
+}
+.home-news .summary .readmore a {
+  font-size: 0.9em;
+}
+
+.home-news h2 a:link,
+.home-news h2 a:visited, .home-news-bottom h2 a:link,
+.home-news-bottom h2 a:visited {
+  text-decoration: none;
+  color: #222222;
+}
+.home-news h2 a:hover,
+.home-news h2 a:focus,
+.home-news h2 a:visited:hover, .home-news-bottom h2 a:hover,
+.home-news-bottom h2 a:focus,
+.home-news-bottom h2 a:visited:hover {
+  text-decoration: underline;
+  color: #e23d28 !important;
+}
+.home-news .summary, .home-news-bottom .summary {
+  line-height: 1.3em;
+  margin-bottom: 1em;
+}
+.home-news .summary p, .home-news-bottom .summary p {
+  display: inline;
+}
+
+.home-news-bottom {
+  clear: both;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+@media only all and (min-width: 940px), print {
+  .home-news-bottom .item {
+    font-size: 0.9em;
+    width: 32%;
+    float: left;
+    padding-right: 2%;
+  }
+  .home-news-bottom .item:last-child {
+    padding-right: 0;
+  }
+}
+.home-news-bottom p {
+  font-size: 0.9em;
 }
 
 ul.home-news-list {
