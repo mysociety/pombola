@@ -54,9 +54,19 @@ class SAHomeView(HomeView):
             try:
                 c = Category.objects.get(slug=slug)
                 context['news_categories'].append(
-                    (c, articles.filter(categories=c)[:4]))
+                    (c, articles.filter(categories=c)[:3]))
             except Category.DoesNotExist:
                 pass
+
+        context['other_news_categories'] = []
+        for slug in ('advocacy-campaigns', 'commentary', 'mp-corner'):
+            try:
+                c = Category.objects.get(slug=slug)
+                context['other_news_categories'].append(
+                    (c, articles.filter(categories=c)[:1]))
+            except Category.DoesNotExist:
+                pass
+
         return context
 
 class SAGeocoderView(GeocoderView):
