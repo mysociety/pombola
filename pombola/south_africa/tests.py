@@ -424,6 +424,53 @@ class SAOrganisationPartySubPageTest(TestCase):
 
 
 @attr(country='south_africa')
+class SAOrganisationPeopleSubPageTest(TestCase):
+
+    def setUp(self):
+        org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
+        org_kind_parliament = models.OrganisationKind.objects.create(name='Parliament', slug='parliament')
+
+        ncop = models.Organisation.objects.create(name='NCOP', slug='ncop', kind=org_kind_parliament)
+
+        whip = models.PositionTitle.objects.create(name='Whip', slug='whip')
+        delegate = models.PositionTitle.objects.create(name='Delegate', slug='delegate')
+
+        aardvark = models.Person.objects.create(legal_name='Anthony Aardvark', slug='aaardvark')
+        alice = models.Person.objects.create(legal_name='Alice Smith', slug='asmith')
+        bob = models.Person.objects.create(legal_name='Bob Smith', slug='bsmith')
+        zebra = models.Person.objects.create(legal_name='Zoe Zebra', slug='zzebra')
+        anon = models.Person.objects.create(legal_name='', slug='anon')
+
+        self.aardvark_ncop = aardvark_ncop= models.Position.objects.create(person=aardvark, organisation=ncop, title=delegate)
+        self.alice_ncop = alice_ncop = models.Position.objects.create(person=alice, organisation=ncop, title=delegate)
+        self.bob_ncop = bob_ncop = models.Position.objects.create(person=bob, organisation=ncop, title=delegate)
+        self.alice_ncop_whip = alice_ncop_whip = models.Position.objects.create(person=alice, organisation=ncop, title=whip)
+        self.zebra_ncop = zebra_ncop = models.Position.objects.create(person=zebra, organisation=ncop, title=delegate)
+        self.anon_ncop = models.Position.objects.create(person=anon, organisation=ncop, title=delegate)
+
+    def test_members_with_same_surname(self):
+        context = self.client.get(reverse('organisation_people', kwargs={'slug': 'ncop'})).context
+
+        expected = [
+            x.id for x in
+            (
+                # First any positions of people with blank legal_name
+                self.anon_ncop,
+                # Then alphabetical order by 'surname'
+                self.aardvark_ncop,
+                # Inside alphabetical order, positions for the same person should be grouped
+                # by person with the parliamentary membership first
+                self.alice_ncop, self.alice_ncop_whip,
+                self.bob_ncop,
+                # Surnames beginning with Z should be at the end
+                self.zebra_ncop,
+                )
+            ]
+
+        self.assertEqual([x.id for x in context['sorted_positions']], expected)
+
+
+@attr(country='south_africa')
 class SAHansardIndexViewTest(TestCase):
 
     def setUp(self):

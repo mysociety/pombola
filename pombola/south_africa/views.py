@@ -249,6 +249,30 @@ class SAPlaceDetailSub(PlaceDetailSub):
 
         return context
 
+def key_position_sort_last_name(position):
+    """Take a position and return a tuple for sorting it with.
+
+    This is intended for use as the key attribute of .sort() or
+    sorted() when sorting positions, so that the positions are sorted
+    by the appropriate name of the associated person. It also needs to sort by
+    the person's id so as to avoid mixing up people with the similar names,
+    and additionally, it puts positions which are membership
+    of a parliament at the top of the group of positions for a single
+    person.
+    """
+
+    org_kind_slug = position.organisation.kind.slug
+    title_slug = position.title.slug
+    is_parliamentary = org_kind_slug == 'parliament'
+    is_member = title_slug in ('member', 'delegate')
+
+    return (
+        position.person.sort_name,
+        position.person.id,
+        # False if the position is member or delegate to a parliament
+        # (False sorts to before True)
+        not(is_parliamentary and is_member),
+        )
 
 class SAOrganisationDetailView(OrganisationDetailView):
 
@@ -262,7 +286,8 @@ class SAOrganisationDetailView(OrganisationDetailView):
         # of their holder's last name.
         context['positions'] = sorted(
             context['positions'],
-            key=lambda p: p.person.sort_name)
+            key=key_position_sort_last_name,
+            )
 
         return context
 
@@ -305,7 +330,7 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
 
         context['sorted_positions'] = sorted(
                 context['sorted_positions'],
-                key=lambda p: p.person.sort_name)
+                key=key_position_sort_last_name)
 
         return context
 
