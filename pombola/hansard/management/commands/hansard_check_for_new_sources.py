@@ -115,7 +115,13 @@ class Command(NoArgsCommand):
             if not Source.objects.filter(name=name).exists():
 
                 cal = pdt.Calendar()
-                result = cal.parseDateText(name)
+                # Sometimes the space is missing between before the
+                # month, so insert that if it appears to be missing:
+                tidied_name = re.sub(r'(\d+(st|nd|rd|th))(?=[^ ])', '\\1 ', name)
+                # Commas in the name confuse parsedatetime, so strip
+                # them out too:
+                tidied_name = re.sub(r',', '', tidied_name)
+                result = cal.parseDateText(tidied_name)
                 source_date = datetime.date(*result[:3])
                 # print "source_date: " + str(source_date)
 
