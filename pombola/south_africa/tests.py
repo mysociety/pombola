@@ -211,23 +211,23 @@ class SAPersonDetailViewTest(TestCase):
 
     def test_generation_of_interests_table(self):
         #create data for the test
-        person = models.Person.objects.get(slug='moomin-finn')
+        person = models.Person.objects.get(slug=u'moomin-finn')
 
-        category1 = Category.objects.create(name="Test Category", sort_order=1)
-        category2 = Category.objects.create(name="Test Category 2", sort_order=2)
+        category1 = Category.objects.create(name=u"Test Category", sort_order=1)
+        category2 = Category.objects.create(name=u"Test Category 2", sort_order=2)
 
-        release1 = Release.objects.create(name='2013', date=date(2013, 2, 16))
-        release2 = Release.objects.create(name='2012', date=date(2012, 2, 24))
+        release1 = Release.objects.create(name=u'2013', date=date(2013, 2, 16))
+        release2 = Release.objects.create(name=u'2012', date=date(2012, 2, 24))
 
         entry1 = Entry.objects.create(person=person,release=release1,category=category1, sort_order=1)
         entry2 = Entry.objects.create(person=person,release=release1,category=category1, sort_order=2)
         entry3 = Entry.objects.create(person=person,release=release1,category=category2, sort_order=3)
 
-        line1 = EntryLineItem.objects.create(entry=entry1,key='Field1',value='Value1')
-        line2 = EntryLineItem.objects.create(entry=entry1,key='Field2',value='Value2')
-        line3 = EntryLineItem.objects.create(entry=entry2,key='Field1',value='Value3')
-        line4 = EntryLineItem.objects.create(entry=entry2,key='Field3',value='Value4')
-        line5 = EntryLineItem.objects.create(entry=entry3,key='Field4',value='Value5')
+        line1 = EntryLineItem.objects.create(entry=entry1,key=u'Field1',value=u'Value1')
+        line2 = EntryLineItem.objects.create(entry=entry1,key=u'Field2',value=u'Value2')
+        line3 = EntryLineItem.objects.create(entry=entry2,key=u'Field1',value=u'Value3')
+        line4 = EntryLineItem.objects.create(entry=entry2,key=u'Field3',value=u'Value4')
+        line5 = EntryLineItem.objects.create(entry=entry3,key=u'Field4',value=u'Value5')
 
         #actual output
         context = self.client.get(reverse('person', args=('moomin-finn',))).context
