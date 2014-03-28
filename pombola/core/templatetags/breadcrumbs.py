@@ -83,8 +83,9 @@ def breadcrumbs(url):
             seen_links.add(link)
 
         bread.append(link)
+
         if link in url_name_mappings:
-            (sub_link, this_url) = url_name_mappings[link]
+            sub_link, this_url = url_name_mappings[link]
         elif re.match(r'^[\d\-\.,]+$', link):
             # eg '-1.23,4.56'
             sub_link = link
