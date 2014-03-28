@@ -40,6 +40,14 @@ def assemble_list_items(links_html, in_li_separator=''):
     with_separators.append(links_html[-1])
     return "".join('<li>{0}</li>'.format(p) for p in with_separators)
 
+def linkify(sub_link, this_url):
+    try:
+        # Check that this_url can be found in the URLconf:
+        resolve(this_url)
+        return '<a href="%s" title="Breadcrumb link to %s">%s</a>' % (this_url, sub_link, sub_link)
+    except Resolver404:
+        return sub_link
+
 @register.filter
 def breadcrumbs(url):
     bare_url = slash_stripped_path_from_url(url)
@@ -85,11 +93,7 @@ def breadcrumbs(url):
         if i == len(links) - 1:
             tlink = sub_link
         else:
-            try:
-                resolve(this_url)
-                tlink = '<a href="%s" title="Breadcrumb link to %s">%s</a>' % (this_url, sub_link, sub_link)
-            except Resolver404:
-                tlink = sub_link
+            tlink = linkify(sub_link, this_url)
 
         links_html.append(tlink)
     return mark_safe(assemble_list_items(links_html, separator))
