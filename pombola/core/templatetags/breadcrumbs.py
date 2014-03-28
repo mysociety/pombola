@@ -62,14 +62,14 @@ def breadcrumbs(url):
 
     links_html = ['<a href="/" title="Breadcrumb link to the homepage.">Home</a>']
 
-    seen_links = {}
+    seen_links = set()
 
     for i, link in enumerate(links):
 
-        if seen_links.get(link):
+        if link in seen_links:
             continue
         else:
-            seen_links[link] = True
+            seen_links.add(link)
 
         bread.append(link)
         if link in url_name_mappings:
