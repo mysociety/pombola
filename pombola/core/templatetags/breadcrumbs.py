@@ -105,6 +105,8 @@ def breadcrumbs(url):
         if link in url_name_mappings:
             sub_link, this_url = url_name_mappings[link]
         else:
+            # We construct the URL for this element by recomposing all
+            # the elements so far into a path:
             this_url = "/{0}/".format("/".join(links[:(i + 1)]))
             if re.match(r'^[\d\-\.,]+$', link):
                 # e.g. a coordinate like '-1.23,4.56'
