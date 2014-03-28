@@ -28,26 +28,26 @@ def breadcrumbs(url):
     if total == 0 and links[0] == "":
         bcrumb = '<li>Home</li>'
     else:
-        if total > 1 and links[1] == 'is': 
+        if total > 1 and links[1] == 'is':
           # (Organisation|Place|etc.)Kind links like /organization/is/house/
           # (drop it)
           links[1:2] = []
-          total -= 1     
+          total -= 1
         if links[total] == 'all': # if links ends with 'all', drop it
           links = links[0:total]
-          total -= 1     
+          total -= 1
 
         home = ['<li><a href="/" title="Breadcrumb link to the homepage.">Home</a> %s </li>' % separator]
 
         seen_links = {}
 
         for i, link in enumerate(links):
-            
+
             if seen_links.get(link):
                 continue
             else:
                 seen_links[link] = True
-            
+
             if not link == '':
                 bread.append(link)
                 if link in url_name_mappings:
@@ -72,7 +72,3 @@ def breadcrumbs(url):
                 home.append(tlink)
         bcrumb = "".join(home)
     return mark_safe(bcrumb)
-
-
-
-
