@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 from django.core.urlresolvers import resolve, Resolver404
 from django.conf import settings
 import re
+from urlparse import urlparse
 
 register = Library()
 
@@ -13,13 +14,17 @@ url_name_mappings = settings.BREADCRUMB_URL_NAME_MAPPINGS
 separator = ' <span class="sep">&raquo;</span> ';
 hansard_part = 'hansard/'
 
+def slash_stripped_path_from_url(url):
+    '''Extract the path from the URL, with leading and trailing / stripped
+
+    >>> slash_stripped_path_from_url('http://localhost:8000/hansard/sitting/whatever/?foo=bar')
+    'hansard/sitting/whatever'
+    '''
+    return urlparse(url).path.strip('/')
+
 @register.filter
 def breadcrumbs(url):
-    query_pos = url.find("?")
-    bare_url = url
-    if query_pos >= 0:
-        bare_url = bare_url[0:query_pos]
-    bare_url = bare_url.strip('/')
+    bare_url = slash_stripped_path_from_url(url)
     if bare_url.startswith(hansard_part):
         bare_url = hansard_part + bare_url[len(hansard_part):].replace('/',' : ')
     links = bare_url.split('/')
