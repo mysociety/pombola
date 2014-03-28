@@ -50,15 +50,12 @@ def breadcrumbs(url):
         bare_url = hansard_part + bare_url[len(hansard_part):].replace('/',' : ')
     links = [l for l in bare_url.split('/') if l]
     bread = []
-    total = len(links)-1
-    if total > 1 and links[1] == 'is':
+    if len(links) > 2 and links[1] == 'is':
       # (Organisation|Place|etc.)Kind links like /organization/is/house/
       # (drop it)
       links[1:2] = []
-      total -= 1
-    if links[total] == 'all': # if links ends with 'all', drop it
-      links = links[0:total]
-      total -= 1
+    if links[-1] == 'all': # if links ends with 'all', drop it
+      links = links[:-1]
 
     links_html = ['<a href="/" title="Breadcrumb link to the homepage.">Home</a>']
 
@@ -82,7 +79,7 @@ def breadcrumbs(url):
             sub_link = re.sub('[_\-]', ' ', link).title()
             sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
             this_url = "/{0}/".format("/".join(bread))
-        if not i == total:
+        if not i == len(links) - 1:
             try:
                 resolve(this_url)
                 tlink = '<a href="%s" title="Breadcrumb link to %s">%s</a>' % (this_url, sub_link, sub_link)
