@@ -107,15 +107,14 @@ def breadcrumbs(url):
 
         if link in url_name_mappings:
             sub_link, this_url = url_name_mappings[link]
-        elif re.match(r'^[\d\-\.,]+$', link):
-            # eg '-1.23,4.56'
-            sub_link = link
-            sub_link = re.sub(r',\s*', ', ', sub_link)
-            this_url = "/{0}/".format("/".join(bread))
         else:
-            sub_link = re.sub('[_\-]', ' ', link).title()
-            sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
             this_url = "/{0}/".format("/".join(bread))
+            if re.match(r'^[\d\-\.,]+$', link):
+                # e.g. a coordinate like '-1.23,4.56'
+                sub_link = re.sub(r',\s*', ', ', link)
+            else:
+                sub_link = re.sub('[_\-]', ' ', link).title()
+                sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
 
         # Never try to link the last element, since it should
         # represent the current page:
