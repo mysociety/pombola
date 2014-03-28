@@ -111,6 +111,7 @@ def breadcrumbs(url):
             # eg '-1.23,4.56'
             sub_link = link
             sub_link = re.sub(r',\s*', ', ', sub_link)
+            this_url = "/{0}/".format("/".join(bread))
         else:
             sub_link = re.sub('[_\-]', ' ', link).title()
             sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
