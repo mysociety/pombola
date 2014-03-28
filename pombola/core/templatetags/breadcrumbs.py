@@ -81,7 +81,6 @@ def breadcrumbs(url):
         return '<li>Home</li>'
     if bare_url.startswith(hansard_part):
         bare_url = hansard_part + bare_url[len(hansard_part):].replace('/',' : ')
-    bread = []
     links = [l for l in bare_url.split('/') if l]
 
     links = remove_unneeded_elements(links)
@@ -103,12 +102,10 @@ def breadcrumbs(url):
         else:
             seen_links.add(link)
 
-        bread.append(link)
-
         if link in url_name_mappings:
             sub_link, this_url = url_name_mappings[link]
         else:
-            this_url = "/{0}/".format("/".join(bread))
+            this_url = "/{0}/".format("/".join(links[:(i + 1)]))
             if re.match(r'^[\d\-\.,]+$', link):
                 # e.g. a coordinate like '-1.23,4.56'
                 sub_link = re.sub(r',\s*', ', ', link)
