@@ -48,6 +48,31 @@ def linkify(sub_link, this_url):
     except Resolver404:
         return sub_link
 
+def remove_unneeded_elements(links):
+    """Return a copy of 'links', but with some unwanted breadcrumb elements removed
+
+    We want to remove the 'is' in *Kind URLs, and any trailing 'all':
+
+    >>> remove_unneeded_elements(['foo', 'bar', 'baz'])
+    ['foo', 'bar', 'baz']
+    >>> remove_unneeded_elements(['foo', 'is', 'baz'])
+    ['foo', 'baz']
+    >>> remove_unneeded_elements(['foo', 'bar', 'all'])
+    ['foo', 'bar']
+    >>> remove_unneeded_elements(['foo', 'is', 'bar', 'all'])
+    ['foo', 'bar']
+    """
+    # If there's an 'is' as the second element (for listing objects of
+    # a particular OrganisationKind, PlaceKind, etc.) remove the 'is'.
+    # These URLs look like: /organization/is/house/
+    result = links[:]
+    if len(links) > 2 and links[1] == 'is':
+        result.pop(1)
+    # If the final element is 'all', then drop it
+    if result[-1] == 'all':
+        result = result[:-1]
+    return result
+
 @register.filter
 def breadcrumbs(url):
     bare_url = slash_stripped_path_from_url(url)
@@ -56,14 +81,10 @@ def breadcrumbs(url):
         return '<li>Home</li>'
     if bare_url.startswith(hansard_part):
         bare_url = hansard_part + bare_url[len(hansard_part):].replace('/',' : ')
-    links = [l for l in bare_url.split('/') if l]
     bread = []
-    if len(links) > 2 and links[1] == 'is':
-      # (Organisation|Place|etc.)Kind links like /organization/is/house/
-      # (drop it)
-      links[1:2] = []
-    if links[-1] == 'all': # if links ends with 'all', drop it
-      links = links[:-1]
+    links = [l for l in bare_url.split('/') if l]
+
+    links = remove_unneeded_elements(links)
 
     links_html = ['<a href="/" title="Breadcrumb link to the homepage.">Home</a>']
 
