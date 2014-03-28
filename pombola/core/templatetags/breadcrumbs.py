@@ -71,6 +71,12 @@ def breadcrumbs(url):
 
     for i, link in enumerate(links):
 
+        # FIXME: Why is this required? In what situations do we end up
+        # with repeated path elements where we'd want to remove them?
+        # If this is important there should be a test that covers it.
+        # It was introduced in ee8aa752 referencing #354, but neither
+        # gives an example.  n.b. if it is still needed, then from
+        # Python 2.7 onwards we could just use collections.OrderedDict
         if link in seen_links:
             continue
         else:
