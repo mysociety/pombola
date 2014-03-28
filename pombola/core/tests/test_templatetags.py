@@ -29,6 +29,10 @@ class BreadcrumbTest(TestCase):
             # (don't drop '-', put space after ',')
             # See issue #762
             ( '/-1.23,4.56', home_li + '<li>-1.23, 4.56</li>'),
+
+            # Test pombola hansard URLs:
+            ( '/hansard/sitting/national_assembly/2013-12-04-09-00-00',
+              home_li + '<li><a href="/hansard/" title="Breadcrumb link to Hansard">Hansard</a>  <span class="sep">&raquo;</span> </li><li>Sitting : National Assembly : 2013 12 04 09 00 00</li>'),
         )
 
         for url, expected in tests:
