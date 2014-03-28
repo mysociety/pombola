@@ -110,8 +110,13 @@ def breadcrumbs(url):
     # If that's empty, immediately return just the home link:
     if not bare_url:
         return '<li>Home</li>'
+
+    # This essentially says "for /hansard" URLs, treat everything
+    # after /hansard/ in the path as a single breadcrumb.
     if bare_url.startswith(hansard_part):
         bare_url = hansard_part + bare_url[len(hansard_part):].replace('/',' : ')
+
+    # Split the path on slashes, and remove any empty components:
     links = [l for l in bare_url.split('/') if l]
 
     links = remove_unneeded_elements(links)
@@ -133,6 +138,7 @@ def breadcrumbs(url):
         else:
             seen_links.add(link)
 
+        # This may be a special case that can be looked up:
         if link in url_name_mappings:
             sub_link, this_url = url_name_mappings[link]
         else:
