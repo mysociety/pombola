@@ -79,14 +79,17 @@ def breadcrumbs(url):
             sub_link = re.sub('[_\-]', ' ', link).title()
             sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
             this_url = "/{0}/".format("/".join(bread))
-        if not i == len(links) - 1:
+
+        # Never try to link the last element, since it should
+        # represent the current page:
+        if i == len(links) - 1:
+            tlink = sub_link
+        else:
             try:
                 resolve(this_url)
                 tlink = '<a href="%s" title="Breadcrumb link to %s">%s</a>' % (this_url, sub_link, sub_link)
             except Resolver404:
                 tlink = sub_link
 
-        else:
-            tlink = sub_link
         links_html.append(tlink)
     return mark_safe(assemble_list_items(links_html, separator))
