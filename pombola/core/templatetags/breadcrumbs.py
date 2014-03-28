@@ -73,6 +73,37 @@ def remove_unneeded_elements(links):
         result = result[:-1]
     return result
 
+def prettify_element(element):
+    """Given a breadcrumb element, prettify it for display in the page
+
+    This produces odd results in a number of cases, particularly
+    because of the title-casing - e.g. the party "anc" in South Africa
+    ends up as "Anc".  This whole breadcrumb-construction is flawed in
+    that respect - really it should be the responsibility of each view
+    to contruct appropriate breadcrumbs.
+
+    >>> prettify_element('-23.4241,5.2341')
+    '-23.4241, 5.2341'
+    >>> prettify_element('10,-20.000')
+    '10, -20.000'
+    >>> prettify_element('hello')
+    'Hello'
+    >>> prettify_element('Faq')
+    'FAQ'
+    >>> prettify_element('good_morning,_everyone')
+    'Good Morning, Everyone'
+    """
+
+    # If this looks like a coordinate, make sure there's exactly one
+    # space after each comma:
+    if re.match(r'^[\d\-\.,]+$', element):
+        return re.sub(r',\s*', ', ', element)
+    # Otherwise, introduce plausible spaces, title-case and upcase
+    # 'Faq' as a special case:
+    else:
+        with_spaces = re.sub('[_\-]', ' ', element).title()
+        return re.sub('\\bFaq\\b', 'FAQ', with_spaces)
+
 @register.filter
 def breadcrumbs(url):
     bare_url = slash_stripped_path_from_url(url)
@@ -108,12 +139,7 @@ def breadcrumbs(url):
             # We construct the URL for this element by recomposing all
             # the elements so far into a path:
             this_url = "/{0}/".format("/".join(links[:(i + 1)]))
-            if re.match(r'^[\d\-\.,]+$', link):
-                # e.g. a coordinate like '-1.23,4.56'
-                sub_link = re.sub(r',\s*', ', ', link)
-            else:
-                sub_link = re.sub('[_\-]', ' ', link).title()
-                sub_link = re.sub('\\bFaq\\b', 'FAQ', sub_link)
+            sub_link = prettify_element(link)
 
         # Never try to link the last element, since it should
         # represent the current page:
