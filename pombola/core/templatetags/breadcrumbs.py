@@ -11,7 +11,7 @@ register = Library()
 
 url_name_mappings = settings.BREADCRUMB_URL_NAME_MAPPINGS
 
-separator = ' <span class="sep">&raquo;</span> ';
+separator = '  <span class="sep">&raquo;</span> ';
 hansard_part = 'hansard/'
 
 def slash_stripped_path_from_url(url):
@@ -21,6 +21,24 @@ def slash_stripped_path_from_url(url):
     'hansard/sitting/whatever'
     '''
     return urlparse(url).path.strip('/')
+
+def assemble_list_items(links_html, in_li_separator=''):
+    '''Take an array strings and wrap them in <li>s with internal separators
+
+    The "internal separator" (in_li_separator) shouldn't appear in the
+    last <li>, but should be the last thing in any prevous one.
+
+    >>> assemble_list_items(['hello', '<a href="foo">bar</a>', 'bye'], ' AND')
+    '<li>hello AND</li><li><a href="foo">bar</a> AND</li><li>bye</li>'
+    >>> assemble_list_items(['baz', 'quux'], ',')
+    '<li>baz,</li><li>quux</li>'
+    >>> assemble_list_items(['something'], ' AND')
+    '<li>something</li>'
+    '''
+    # The separator shouldn't be added to the last item:
+    with_separators = [l + in_li_separator for l in links_html[:-1]]
+    with_separators.append(links_html[-1])
+    return "".join('<li>{0}</li>'.format(p) for p in with_separators)
 
 @register.filter
 def breadcrumbs(url):
@@ -42,7 +60,7 @@ def breadcrumbs(url):
       links = links[0:total]
       total -= 1
 
-    home = ['<li><a href="/" title="Breadcrumb link to the homepage.">Home</a> %s </li>' % separator]
+    links_html = ['<a href="/" title="Breadcrumb link to the homepage.">Home</a>']
 
     seen_links = {}
 
@@ -67,11 +85,11 @@ def breadcrumbs(url):
         if not i == total:
             try:
                 resolve(this_url)
-                tlink = '<li><a href="%s" title="Breadcrumb link to %s">%s</a> %s</li>' % (this_url, sub_link, sub_link, separator)
+                tlink = '<a href="%s" title="Breadcrumb link to %s">%s</a>' % (this_url, sub_link, sub_link)
             except Resolver404:
-                tlink = '<li>%s %s</li>' % (sub_link, separator)
+                tlink = sub_link
 
         else:
-            tlink = '<li>%s</li>' % sub_link
-        home.append(tlink)
-    return mark_safe("".join(home))
+            tlink = sub_link
+        links_html.append(tlink)
+    return mark_safe(assemble_list_items(links_html, separator))

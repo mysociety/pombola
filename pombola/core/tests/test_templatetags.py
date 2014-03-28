@@ -11,7 +11,7 @@ class BreadcrumbTest(TestCase):
     def test_breadcrumbs(self):
         """Check that the breadcrumbs are generated as expected"""
 
-        home_li = '<li><a href="/" title="Breadcrumb link to the homepage.">Home</a>  <span class="sep">&raquo;</span>  </li>'
+        home_li = '<li><a href="/" title="Breadcrumb link to the homepage.">Home</a>  <span class="sep">&raquo;</span> </li>'
 
         tests = (
             # input, expected output
