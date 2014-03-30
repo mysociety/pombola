@@ -110,6 +110,7 @@ class ImageContent(models.Model):
     """
     image = ImageField(upload_to="spinner_images")
     caption = models.CharField(max_length=300)
+    description = models.CharField(max_length=250, blank=True)
     url = models.URLField()
 
     def __unicode__(self):
