@@ -3912,6 +3912,11 @@ HOME PAGE INTRO BOX
   margin-left: 10px;
 }
 
+.carousel-fade .carousel-item {
+  width: auto !important;
+  /* override responsive-carousel.fade.css style */
+}
+
 .carousel-item {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -3926,6 +3931,7 @@ HOME PAGE INTRO BOX
 .carousel-item a {
   color: #fff;
   text-decoration: none;
+  line-height: 17px;
 }
 .carousel-item a:hover, .carousel-item a:focus {
   text-decoration: underline;
@@ -3940,6 +3946,44 @@ HOME PAGE INTRO BOX
 }
 .carousel-item .caption {
   font-size: 0.875em;
+  height: 90px;
+  width: 100%;
+  margin-top: -93px;
+  position: relative;
+}
+@media only all and (max-width: 640px), print {
+  .carousel-item .caption {
+    height: 60px;
+    margin-top: -62px;
+  }
+}
+.carousel-item .caption h2 {
+  padding-left: 15px !important;
+  padding-top: 15px !important;
+  font-size: 18px !important;
+  position: relative;
+  z-index: 2;
+}
+.carousel-item .caption p {
+  padding-left: 15px;
+  font-size: 11px;
+  position: relative;
+  z-index: 2;
+}
+@media only all and (max-width: 640px), print {
+  .carousel-item .caption p {
+    display: none;
+  }
+}
+.carousel-item .caption .background {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  background-color: black;
+  opacity: 0.6;
+  z-index: 1;
 }
 
 .slide-core_person {

@@ -6,6 +6,7 @@
 {% block css_headers %}
   {{ block.super }}
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.fade.css" />
 {% endblock %}
 
 {% block extra_js_to_load %}
@@ -31,7 +32,7 @@
 
             <div class="home-left">
                 <h2>Spotlight</h2>
-                <div id="home-carousel" class="carousel">
+                <div id="home-carousel" class="carousel" data-transition="fade" data-autoplay>
                   {% include "spinner/carousel-slides.html" %}
                 </div>
             </div>

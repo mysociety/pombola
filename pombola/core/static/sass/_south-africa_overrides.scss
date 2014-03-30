@@ -698,6 +698,10 @@ HOME PAGE INTRO BOX
     }
 }
 
+.carousel-fade .carousel-item {
+    width:auto!important; /* override responsive-carousel.fade.css style */
+}
+
 .carousel-item {
    background-color: rgba(0, 0, 0, 0.2);
     border-radius: $border_radius;
@@ -711,6 +715,7 @@ HOME PAGE INTRO BOX
     a {
         color: #fff;
         text-decoration: none;
+        line-height:17px;
         &:hover,
         &:focus {
             text-decoration: underline;
@@ -725,6 +730,45 @@ HOME PAGE INTRO BOX
     }
     .caption {
         font-size: 0.875em;
+        height:90px;
+        width:100%;
+        margin-top:-93px;
+        position:relative;
+
+        @media only all and (max-width: 640px), print {
+            height:60px;
+            margin-top:-62px;
+        }
+
+        h2 {
+            padding-left:15px!important;
+            padding-top:15px!important;
+            font-size:18px!important;
+            position:relative;
+            z-index:2;
+        }
+
+        p {
+            padding-left:15px;
+            font-size:11px;
+            position:relative;
+            z-index:2;
+
+            @media only all and (max-width: 640px), print {
+                display:none;
+            }
+        }
+
+        .background {
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            position:absolute;
+            background-color:black;
+            opacity:0.6;
+            z-index:1;
+        }
     }
 }
 
