@@ -1,4 +1,18 @@
-# modified from http://djangosnippets.org/snippets/656/
+# This is code for the breadcrumb template tag, which is used to
+# generate the HTML for the "breadcrumb" links at the top of the
+# page.  This code was originally based on:
+#
+#   http://djangosnippets.org/snippets/656/
+#
+# We've tried to make this a bit more robust through refactoring,
+# adding doctests and adding some new functional tests, but this still
+# seems like fundamentally the wrong approach to generating
+# breadcrumbs: for example, replacing '-' with spaces and then
+# title-casing frequently won't produce a sensible result - you need
+# some information about what each element of the path represents, and
+# it would be very convoluted to look that up in this template tag.  A
+# better approach would just be to generate the breadcrumbs in each
+# view.
 
 from django.template import Library
 from django.utils.html import escape
