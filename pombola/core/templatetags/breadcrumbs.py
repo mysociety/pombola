@@ -1,6 +1,7 @@
 # modified from http://djangosnippets.org/snippets/656/
 
 from django.template import Library
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import resolve, Resolver404
 from django.conf import settings
@@ -147,12 +148,14 @@ def breadcrumbs(url):
             this_url = "/{0}/".format("/".join(links[:(i + 1)]))
             sub_link = prettify_element(link)
 
+        link_text_html_escaped = escape(sub_link)
+
         # Never try to link the last element, since it should
         # represent the current page:
         if i == len(links) - 1:
-            tlink = sub_link
+            tlink = link_text_html_escaped
         else:
-            tlink = linkify(sub_link, this_url)
+            tlink = linkify(link_text_html_escaped, this_url)
 
         links_html.append(tlink)
     return mark_safe(assemble_list_items(links_html, separator))

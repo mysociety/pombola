@@ -33,6 +33,10 @@ class BreadcrumbTest(TestCase):
             # Test pombola hansard URLs:
             ( '/hansard/sitting/national_assembly/2013-12-04-09-00-00',
               home_li + '<li><a href="/hansard/" title="Breadcrumb link to Hansard">Hansard</a>  <span class="sep">&raquo;</span> </li><li>Sitting : National Assembly : 2013 12 04 09 00 00</li>'),
+
+            # Test a URL that contains unsafe characters:
+            ( '/"foo"<b>bar-baz&others',
+              home_li + '<li>&quot;Foo&quot;&lt;B&gt;Bar Baz&amp;Others</li>'),
         )
 
         for url, expected in tests:
