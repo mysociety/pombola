@@ -2,6 +2,7 @@
 
 from django.template import Library
 from django.utils.html import escape
+from django.utils.http import urlquote
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import resolve, Resolver404
 from django.conf import settings
@@ -41,8 +42,9 @@ def assemble_list_items(links_html, in_li_separator=''):
     with_separators.append(links_html[-1])
     return "".join('<li>{0}</li>'.format(p) for p in with_separators)
 
-def linkify(sub_link, this_url):
+def linkify(sub_link, unicode_url):
     try:
+        this_url = urlquote(unicode_url)
         # Check that this_url can be found in the URLconf:
         resolve(this_url)
         return '<a href="%s" title="Breadcrumb link to %s">%s</a>' % (this_url, sub_link, sub_link)
@@ -105,6 +107,16 @@ def prettify_element(element):
         with_spaces = re.sub('[_\-]', ' ', element).title()
         return re.sub('\\bFaq\\b', 'FAQ', with_spaces)
 
+def escape_link_text_for_html(s):
+    """Safely escape for HTML and convert Unicode characters to entities
+
+    >>> escape_link_text_for_html('"foo"<b>bar-baz</b>&others')
+    '&quot;foo&quot;&lt;b&gt;bar-baz&lt;/b&gt;&amp;others'
+    >>> escape_link_text_for_html(u'a unicode snowman \u2603 and a hot beverage \u2615')
+    'a unicode snowman &#9731; and a hot beverage &#9749;'
+    """
+    return escape(s).encode('ascii', 'xmlcharrefreplace')
+
 @register.filter
 def breadcrumbs(url):
     bare_url = slash_stripped_path_from_url(url)
@@ -145,10 +157,10 @@ def breadcrumbs(url):
         else:
             # We construct the URL for this element by recomposing all
             # the elements so far into a path:
-            this_url = "/{0}/".format("/".join(links[:(i + 1)]))
+            this_url = u"/{0}/".format(u"/".join(links[:(i + 1)]))
             sub_link = prettify_element(link)
 
-        link_text_html_escaped = escape(sub_link)
+        link_text_html_escaped = escape_link_text_for_html(sub_link)
 
         # Never try to link the last element, since it should
         # represent the current page:

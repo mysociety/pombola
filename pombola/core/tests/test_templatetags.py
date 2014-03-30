@@ -1,3 +1,4 @@
+# coding=UTF-8
 
 from django.test import TestCase
 
@@ -37,6 +38,10 @@ class BreadcrumbTest(TestCase):
             # Test a URL that contains unsafe characters:
             ( '/"foo"<b>bar-baz&others',
               home_li + '<li>&quot;Foo&quot;&lt;B&gt;Bar Baz&amp;Others</li>'),
+
+            # Test a path that includes a unicode character:
+            ( u'/person/boss-smiley-☺/',
+              home_li + '<li><a href="/person/all/" title="Breadcrumb link to Politicians">Politicians</a>  <span class="sep">&raquo;</span> </li><li>Boss Smiley &#9786;</li>'),
         )
 
         for url, expected in tests:
