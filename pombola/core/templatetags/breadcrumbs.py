@@ -25,7 +25,7 @@ from urlparse import urlparse
 
 register = Library()
 
-url_name_mappings = settings.BREADCRUMB_URL_NAME_MAPPINGS
+path_element_overrides = settings.BREADCRUMB_URL_NAME_MAPPINGS
 
 separator = '  <span class="sep">&raquo;</span> ';
 hansard_part = 'hansard/'
@@ -56,14 +56,16 @@ def assemble_list_items(links_html, in_li_separator=''):
     with_separators.append(links_html[-1])
     return "".join('<li>{0}</li>'.format(p) for p in with_separators)
 
-def linkify(sub_link, unicode_url):
+def linkify(link_text, unicode_url):
+    """If unicode_url can be resolved by URLconf, wrap link_text in an <a> tag"""
+
     try:
-        this_url = urlquote(unicode_url)
-        # Check that this_url can be found in the URLconf:
-        resolve(this_url)
-        return '<a href="%s" title="Breadcrumb link to %s">%s</a>' % (this_url, sub_link, sub_link)
+        url = urlquote(unicode_url)
+        # Check that url can be found in the URLconf:
+        resolve(url)
+        return '<a href="%s" title="Breadcrumb link to %s">%s</a>' % (url, link_text, link_text)
     except Resolver404:
-        return sub_link
+        return link_text
 
 def remove_unneeded_elements(links):
     """Return a copy of 'links', but with some unwanted breadcrumb elements removed
@@ -94,10 +96,11 @@ def prettify_element(element):
     """Given a breadcrumb element, prettify it for display in the page
 
     This produces odd results in a number of cases, particularly
-    because of the title-casing - e.g. the party "anc" in South Africa
-    ends up as "Anc".  This whole breadcrumb-construction is flawed in
-    that respect - really it should be the responsibility of each view
-    to contruct appropriate breadcrumbs.
+    because of the title-casing - e.g. the party "ANC" in South Africa
+    is slugified to "anc" and ends up as "Anc".  This whole
+    breadcrumb-construction is flawed in that respect - really it
+    should be the responsibility of each view to contruct appropriate
+    breadcrumbs.
 
     >>> prettify_element('-23.4241,5.2341')
     '-23.4241, 5.2341'
@@ -133,26 +136,27 @@ def escape_link_text_for_html(s):
 
 @register.filter
 def breadcrumbs(url):
-    bare_url = slash_stripped_path_from_url(url)
-    # If that's empty, immediately return just the home link:
-    if not bare_url:
+    stripped_path = slash_stripped_path_from_url(url)
+    # If that's empty, assume we're just at the home page:
+    if not stripped_path:
         return '<li>Home</li>'
 
-    # This essentially says "for /hansard" URLs, treat everything
-    # after /hansard/ in the path as a single breadcrumb.
-    if bare_url.startswith(hansard_part):
-        bare_url = hansard_part + bare_url[len(hansard_part):].replace('/',' : ')
+    # This means: "for /hansard URLs, treat everything after /hansard/
+    # in the path as a single breadcrumb"
+    if stripped_path.startswith(hansard_part):
+        stripped_path = hansard_part + stripped_path[len(hansard_part):].replace('/',' : ')
 
     # Split the path on slashes, and remove any empty components:
-    links = [l for l in bare_url.split('/') if l]
+    elements = [l for l in stripped_path.split('/') if l]
 
-    links = remove_unneeded_elements(links)
+    elements = remove_unneeded_elements(elements)
 
-    links_html = ['<a href="/" title="Breadcrumb link to the homepage.">Home</a>']
+    # Always begin with a link to the home page:
+    elements_html = ['<a href="/" title="Breadcrumb link to the homepage.">Home</a>']
 
-    seen_links = set()
+    seen_elements = set()
 
-    for i, link in enumerate(links):
+    for i, element in enumerate(elements):
 
         # FIXME: Why is this required? In what situations do we end up
         # with repeated path elements where we'd want to remove them?
@@ -160,28 +164,29 @@ def breadcrumbs(url):
         # It was introduced in ee8aa752 referencing #354, but neither
         # gives an example.  n.b. if it is still needed, then from
         # Python 2.7 onwards we could just use collections.OrderedDict
-        if link in seen_links:
+        if element in seen_elements:
             continue
         else:
-            seen_links.add(link)
+            seen_elements.add(element)
 
         # This may be a special case that can be looked up:
-        if link in url_name_mappings:
-            sub_link, this_url = url_name_mappings[link]
+        if element in path_element_overrides:
+            link_text, element_url = path_element_overrides[element]
         else:
             # We construct the URL for this element by recomposing all
             # the elements so far into a path:
-            this_url = u"/{0}/".format(u"/".join(links[:(i + 1)]))
-            sub_link = prettify_element(link)
+            element_url = u"/{0}/".format(u"/".join(elements[:(i + 1)]))
+            link_text = prettify_element(element)
 
-        link_text_html_escaped = escape_link_text_for_html(sub_link)
+        link_text_html_escaped = escape_link_text_for_html(link_text)
 
         # Never try to link the last element, since it should
         # represent the current page:
-        if i == len(links) - 1:
-            tlink = link_text_html_escaped
+        if i == len(elements) - 1:
+            element_html = link_text_html_escaped
         else:
-            tlink = linkify(link_text_html_escaped, this_url)
+            element_html = linkify(link_text_html_escaped, element_url)
 
-        links_html.append(tlink)
-    return mark_safe(assemble_list_items(links_html, separator))
+        elements_html.append(element_html)
+
+    return mark_safe(assemble_list_items(elements_html, separator))
