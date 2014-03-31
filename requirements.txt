@@ -6,7 +6,7 @@
 py-bcrypt==0.4
 PyYAML==3.10
 Mercurial==2.9
-Pillow==2.3.0
+Pillow==2.3.1
 
 ### Database drivers
 psycopg2==2.5.2
