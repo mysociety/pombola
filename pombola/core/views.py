@@ -27,15 +27,12 @@ class HomeView(TemplateView):
 
         context = super(HomeView, self).get_context_data(**kwargs)
 
-        current_slug = False
-        if self.request.GET.get('after'):
-            current_slug = self.request.GET.get('after')
-        elif self.request.GET.get('before'):
-            current_slug = self.request.GET.get('before')
+        before, after = (self.request.GET.get(k) for k in ('before', 'after'))
+        current_slug = before or after
 
         context['featured_person'] = \
             models.Person.objects.get_next_featured(current_slug,
-                                                    self.request.GET.get('before'))
+                                                    want_previous=before)
 
         # For the election homepage produce a list of all the featured people.
         # Shuffle it each time to avoid any bias.
