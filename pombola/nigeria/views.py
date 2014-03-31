@@ -14,12 +14,11 @@ class NGHomeView(HomeView):
         # If there is editable homepage content make it available to the templates.
         # Currently only Nigeria uses this, if more countries want it we should
         # probably add a feature flip boolean to the config.
-        context['editable_content'] = None
         try:
             page = InfoPage.objects.get(slug="homepage")
             context['editable_content'] = page.content
         except InfoPage.DoesNotExist:
-            pass
+            context['editable_content'] = None
         return context
 
 # These are hardcoded here rather than being introduced into the database to
