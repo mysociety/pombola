@@ -49,7 +49,7 @@ class SAHomeView(HomeView):
             kind=InfoPage.KIND_BLOG).order_by("-publication_date")
 
         context['news_categories'] = []
-        for slug in ('week-parliament', 'impressions'):
+        for slug in ('elections-2014', 'impressions'):
             try:
                 c = Category.objects.get(slug=slug)
                 context['news_categories'].append(
