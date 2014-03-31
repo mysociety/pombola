@@ -39,17 +39,6 @@ class HomeView(TemplateView):
         context['featured_persons'] = list(models.Person.objects.get_featured())
         random.shuffle(context['featured_persons'])
 
-        # If there is editable homepage content make it available to the templates.
-        # Currently only Nigeria uses this, if more countries want it we should
-        # probably add a feature flip boolean to the config.
-        context['editable_content'] = None
-        if settings.COUNTRY_APP == 'nigeria':
-            try:
-                page = InfoPage.objects.get(slug="homepage")
-                context['editable_content'] = page.content
-            except InfoPage.DoesNotExist:
-                pass
-
         return context
 
 

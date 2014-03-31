@@ -4,6 +4,23 @@ from django.views.generic import ListView, TemplateView
 
 from mapit.models import Area
 from pombola.core.models import Place
+from pombola.core.views import HomeView
+from pombola.info.models import InfoPage
+
+class NGHomeView(HomeView):
+
+    def get_context_data(self, **kwargs):
+        context = super(NGHomeView, self).get_context_data(**kwargs)
+        # If there is editable homepage content make it available to the templates.
+        # Currently only Nigeria uses this, if more countries want it we should
+        # probably add a feature flip boolean to the config.
+        context['editable_content'] = None
+        try:
+            page = InfoPage.objects.get(slug="homepage")
+            context['editable_content'] = page.content
+        except InfoPage.DoesNotExist:
+            pass
+        return context
 
 # These are hardcoded here rather than being introduced into the database to
 # avoid having a huge number of duplicated codes in MapIt. As it is largely a
