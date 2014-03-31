@@ -29,7 +29,7 @@ from pombola.core import models
 from pombola.core.views import (HomeView, PlaceDetailView, PlaceDetailSub,
     OrganisationDetailView, PersonDetail, PlaceDetailView,
     OrganisationDetailSub)
-from pombola.info.models import InfoPage
+from pombola.info.models import InfoPage, Category
 from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
@@ -47,10 +47,15 @@ class SAHomeView(HomeView):
         context = super(SAHomeView, self).get_context_data(**kwargs)
         articles = InfoPage.objects.filter(
             kind=InfoPage.KIND_BLOG).order_by("-publication_date")
-        context['that_week_in_parliament'] = articles. \
-            filter(categories__slug='week-parliament')[:4]
-        context['impressions'] = articles. \
-            filter(categories__slug='impressions')[:4]
+
+        context['news_categories'] = []
+        for slug in ('week-parliament', 'impressions'):
+            try:
+                c = Category.objects.get(slug=slug)
+                context['news_categories'].append(
+                    (c, articles.filter(categories=c)[:4]))
+            except Category.DoesNotExist:
+                pass
         return context
 
 class LocationSearchForm(SearchForm):
