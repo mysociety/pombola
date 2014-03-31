@@ -50,18 +50,6 @@ class HomeView(TemplateView):
             except InfoPage.DoesNotExist:
                 pass
 
-        # Only SA uses featured news articles currently, as above, if this changes
-        # then this should become a config flag or similar.
-        context['that_week_in_parliament'] = None
-        context['impressions'] = None
-        if settings.COUNTRY_APP == 'south_africa':
-            articles = InfoPage.objects.filter(
-                kind=InfoPage.KIND_BLOG).order_by("-publication_date")
-            context['that_week_in_parliament'] = articles. \
-                filter(categories__slug='week-parliament')[:4]
-            context['impressions'] = articles. \
-                filter(categories__slug='impressions')[:4]
-
         return context
 
 

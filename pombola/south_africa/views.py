@@ -26,8 +26,10 @@ from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import NamespaceMixin, SpeechView, SectionView
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
-    OrganisationDetailView, PersonDetail, PlaceDetailView, OrganisationDetailSub
+from pombola.core.views import (HomeView, PlaceDetailView, PlaceDetailSub,
+    OrganisationDetailView, PersonDetail, PlaceDetailView,
+    OrganisationDetailSub)
+from pombola.info.models import InfoPage
 from pombola.info.views import InfoPageView
 
 from pombola.south_africa.models import ZAPlace
@@ -38,6 +40,18 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-office',
     'constituency-area', # specific to DA party
 )
+
+class SAHomeView(HomeView):
+
+    def get_context_data(self, **kwargs):
+        context = super(SAHomeView, self).get_context_data(**kwargs)
+        articles = InfoPage.objects.filter(
+            kind=InfoPage.KIND_BLOG).order_by("-publication_date")
+        context['that_week_in_parliament'] = articles. \
+            filter(categories__slug='week-parliament')[:4]
+        context['impressions'] = articles. \
+            filter(categories__slug='impressions')[:4]
+        return context
 
 class LocationSearchForm(SearchForm):
     q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))
