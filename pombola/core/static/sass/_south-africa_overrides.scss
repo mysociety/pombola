@@ -875,7 +875,6 @@ NEWS & POLL
     h2
     {
         text-transform: uppercase;
-        font-size: .875em;
         color: $colour-black;
     }
     h3
@@ -886,7 +885,18 @@ NEWS & POLL
     }
 }
 
+#twitter,
+#poll {
+    h2 {
+        font-size: .875em;
+    }
+}
+
 #news {
+    h2 {
+        font-size: 1.3em;
+        margin-bottom: 1.5em;
+    }
     padding: 2em 0 1em;
     float: left;
     width: 100%;
