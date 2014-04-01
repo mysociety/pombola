@@ -268,4 +268,14 @@ $section-verical-padding: 40px;
 
   }
 
+  @media only all and (max-width: 639px) {
+
+    #page h2 {
+      border-top: none;
+      background: transparent;
+      padding: 0;
+    }
+
+  }
+
 }
