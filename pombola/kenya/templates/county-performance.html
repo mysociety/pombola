@@ -7,19 +7,119 @@
 
 {% endcomment %}
 
-{% block title %}How are our county governments performing?{% endblock %}
+{% block title %}How are our taxpayer shillings really being spent?{% endblock %}
+
+{% block body_attributes %}class="country-performance"{% endblock %}
 
 {% block breadcrumbs %}
-    {# Hide bread crumbs on this page. Insert blank div to add padding #}
-    <div id="breadcrumb-replacement">&nbsp;</div>
+    {# Hide bread crumbs on this page. #}
+    <div id="breadcrumb-replacement"></div>
 {% endblock %}
 
 {% block content %}
 
-  <h1>How are our county governments performing?</h1>
+  <h1>How are our taxpayer shillings really being spent?</h1>
 
-  <p>
-  Content to be added....
-  </p>
+  <p>A recent report by Kenya&rsquo;s Controller of Budget highlights questionable spending practices in our counties. Over 50% of our counties spent NO money on development!</p>
+
+  <div id="report">
+
+    <div id="report-header">
+
+      <p>The report reveals that of the total spending, 55% went towards personnel emoluments (including salaries, domestic and foreign travel, conferences, and training), 38% for operations and maintenance, and <strong>only 7% towards development programmes.</strong></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="county">County title</th>
+            <th class="personnel">Personnel<br>Emoulements</th>
+            <th class="operational">Operational<br>&amp; Maintenance</th>
+            <th class="development">Development<br>Expenditure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="county">Kisumu</td>
+            <td class="personnel">79%</td>
+            <td class="operational">21%</td>
+            <td class="development">0</td>
+          </tr>
+          <tr>
+            <td class="county">Mombasa</td>
+            <td class="personnel">74%</td>
+            <td class="operational">23%</td>
+            <td class="development">0</td>
+          </tr>
+          <tr>
+            <td class="county">Nairobi City</td>
+            <td class="personnel">65%</td>
+            <td class="operational">16%</td>
+            <td class="development">16%</td>
+          </tr>
+          <tr>
+            <td class="county">Nandi</td>
+            <td class="personnel">44%</td>
+            <td class="operational">56%</td>
+            <td class="development">0</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="county">All counties</td>
+            <td class="personnel">55%</td>
+            <td class="operational">38%</td>
+            <td class="development">7%</td>
+          </tr>
+        </tfoot>
+      </table>
+
+    </div>
+
+    <p id="quote">Over 50% of our counties spent NO money on development. Our taxpayer money that is supposed to be spent towards building roads and water systems as well as equipping and staffing health centres and schools, has instead been spent on &ldquo;construction of mansions, entertainment allowances and buying of luxurious vehicles for Governors and their executives&rdquo; <a class="source" href="http://www.standardmedia.co.ke/?articleID=2000102659&story_title=no-end-to-senators-governors-turf-wars&pageNo=2">(source)</a></p>
+
+    <div id="threat">
+      <h2>Threat</h2>
+      <p>Despite this misspending of county government funds, powerful Parliamentarians are working to oppose legislation to increase the county government budget rules from 30 percent to 60 percent to be spent on development. This threat is real! We could lose county funds for development such as infrastructure, water, health, and education projects.</p>
+    </div>
+
+    <div id="opportunity">
+      <h2>Opportunity</h2>
+      <p>To rectify this misspending of county government funds, powerful Parliamentarians are working to enact legislation to increase the county government budget rules from 30 percent to 60 percent to be spent on development. This opportunity is real! You could gain additional county funds for development such as infrastructure, water, health, and education projects.</p>
+    </div>
+
+    <div id="share-petition">
+      <p>Share this petition with other Kenyans and allow your voice to be heard.</p>
+      <p>
+        <a href="#" id="share-facebook">Share this article on Facebook</a>
+      </p>
+      <p>
+        <a href="#" id="share-twitter">Share this article on Twitter</a>
+      </p>
+    </div>
+
+    <form id="petition" method="post">
+      <h2>
+        <label for="name">If you believe that Country Budgets need to be spent responsibly, then add your name to our petition asking for greater government accountability</label>
+      </h2>
+      <p>
+        <input id="name" placeholder="Your name" />
+        <input id="email" placeholder="Your email address" />
+        <button type="submit">Send</button>
+      </p>
+    </form>
+
+    <form id="senate" method="post">
+      <h2><label for="comments">Tell the senate what you think</label></h2>
+      <p>We will also send any comments through to the Senate Majority Leader</p>
+      <textarea id="comments" placeholder="Add any comments here" rows="5" cols="60"></textarea>
+      <p class="last"><button type="submit">Comment</button>
+    </form>
+
+    <div id="survey">
+      <p>Help us know our visitors by taking our 5 minute survey</p>
+      <a href="#" id="take-survey">Take Survey</a>
+    </div>
+
+  </div>
 
 {% endblock %}

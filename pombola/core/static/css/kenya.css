@@ -3136,11 +3136,10 @@ h2 a.appearances-trigger.active {
   margin-right: 0.5em;
   background-color: #f7f7f7;
   border: 1px solid #e6e6e6;
-  -moz-border-radius: 0.25em;
   -webkit-border-radius: 0.25em;
-  -o-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
   -ms-border-radius: 0.25em;
-  -khtml-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
   border-radius: 0.25em;
 }
 
@@ -3150,11 +3149,10 @@ h2 a.appearances-trigger.active {
   margin-bottom: 1em;
   padding: 0.5em 1em;
   background-color: #f7f7f7;
-  -moz-border-radius: 1em;
   -webkit-border-radius: 1em;
-  -o-border-radius: 1em;
+  -moz-border-radius: 1em;
   -ms-border-radius: 1em;
-  -khtml-border-radius: 1em;
+  -o-border-radius: 1em;
   border-radius: 1em;
 }
 
@@ -3233,6 +3231,229 @@ h2 a.appearances-trigger.active {
     margin-right: 0;
   }
 }
+.country-performance #breadcrumb-replacement {
+  display: none;
+}
+.country-performance #page {
+  background-color: #f2f2f2;
+  text-align: center;
+}
+.country-performance #report {
+  margin-top: 30px;
+  padding: 40px;
+  background-color: #fff;
+}
+.country-performance h1 {
+  margin-top: 50px;
+  font-size: 2.3em;
+  line-height: 1.2em;
+  color: #36a74d;
+  text-shadow: 0 1px 0 #fff;
+}
+.country-performance h1 + p {
+  margin-top: 30px;
+  font-size: 1.3em;
+  line-height: 1.4em;
+  color: #333;
+  font-weight: bold;
+}
+.country-performance #report p {
+  font-size: 1.1em;
+  line-height: 1.4em;
+}
+.country-performance #report-header {
+  padding: 0 40px;
+}
+.country-performance #report table {
+  width: 100%;
+  margin-top: 30px;
+}
+.country-performance #report table td, .country-performance #report table th {
+  text-align: center;
+  border: 1px solid #fff;
+  padding: 15px 20px;
+}
+.country-performance #report table th {
+  color: #999;
+  line-height: 1.3em;
+}
+.country-performance #report table td {
+  background-color: #f2f2f2;
+}
+.country-performance #report table tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+.country-performance #report table tfoot td {
+  background-color: #48bb60;
+  color: #fff;
+  font-weight: bold;
+}
+.country-performance #report table .county {
+  text-align: left;
+}
+.country-performance #report table td.county {
+  font-weight: bold;
+}
+.country-performance #quote {
+  margin-top: 40px;
+  margin-bottom: 0;
+  border-top: 1px solid #ebebeb;
+  padding: 40px 15px;
+  color: #36a74d;
+  font-weight: bold;
+}
+.country-performance #quote .source {
+  font-size: 0.7em;
+  font-weight: normal;
+  color: #bbb;
+}
+.country-performance #threat, .country-performance #opportunity, .country-performance #share-petition {
+  border-top: 1px solid #ebebeb;
+  padding: 40px 15px;
+}
+.country-performance h2 {
+  font-size: 1.5em;
+  line-height: 1.4em;
+  color: #36a74d;
+  margin-bottom: 1em;
+}
+.country-performance #share-petition p:first-child {
+  font-size: 1.3em;
+  color: #666;
+  margin-bottom: 40px;
+}
+.country-performance #share-petition a {
+  display: block;
+  width: 40%;
+  background-color: #3c5a96;
+  color: #fff;
+  font-weight: bold;
+  margin: 20px auto;
+  padding: 10px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+.country-performance #share-petition a:hover {
+  text-decoration: none;
+  background-color: #2d4472;
+}
+.country-performance a#share-twitter {
+  background-color: #59adeb;
+}
+.country-performance a#share-twitter:hover {
+  background-color: #2b97e6;
+}
+.country-performance #petition {
+  background-color: #48bb60;
+  padding: 30px 20px;
+}
+.country-performance #petition h2 {
+  color: #fff;
+  font-size: 1.3em;
+  line-height: 1.2em;
+}
+.country-performance #petition input, .country-performance #petition button {
+  width: 35%;
+  font-size: 1.2em;
+  line-height: 30px;
+  margin-right: 10px;
+  padding: 5px 10px;
+}
+.country-performance #petition button {
+  width: 15%;
+  color: #fff;
+  background-color: #333;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.country-performance #petition button:hover {
+  background-color: #4d4d4d;
+}
+.country-performance #petition p:last-child {
+  margin-bottom: 0;
+}
+.country-performance #senate {
+  background-color: #f2f2f2;
+  padding: 30px 20px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+.country-performance #senate h2 {
+  margin-bottom: 5px;
+}
+.country-performance #senate h2 + p {
+  color: #999;
+}
+.country-performance #senate textarea {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.2em;
+  line-height: 30px;
+  padding: 5px 10px;
+}
+.country-performance #senate button {
+  width: 15%;
+  margin: 15px auto 0 auto;
+  font-size: 1em;
+  line-height: 30px;
+  padding: 5px 10px;
+  color: #fff;
+  background-color: #333;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.country-performance #senate button:hover {
+  background-color: #4d4d4d;
+}
+.country-performance #senate p:last-child {
+  margin-bottom: 0;
+}
+.country-performance #survey {
+  margin-top: 50px;
+  padding-bottom: 20px;
+  /* so it doesn't look like it's falling off the page */
+}
+.country-performance #survey p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #777;
+}
+.country-performance #survey #take-survey {
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 30px;
+  padding: 5px 20px;
+  color: #fff;
+  background-color: #48bb60;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  text-shadow: 0 1px 0 #38984c;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+.country-performance #survey #take-survey:hover {
+  background-color: #38984c;
+}
+
 @media print {
   body {
     width: 1000px;
