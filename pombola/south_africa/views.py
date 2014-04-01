@@ -690,7 +690,7 @@ class SASpeechView(SpeechView):
     def get(self, request, *args, **kwargs):
         speech = self.object = self.get_object()
         try_redirect = should_redirect_to_source(speech.section)
-        if try_redirect and speech.source_url and not speech.public:
+        if try_redirect and speech.source_url:
             return redirect(speech.source_url)
         context = self.get_context_data(object=speech)
         return self.render_to_response(context)
@@ -709,7 +709,7 @@ class SASectionView(SectionView):
             if speeches:
                 speech = speeches[0]
                 redirect_url = speech.source_url
-                if redirect_url and not speech.public:
+                if redirect_url:
                     return redirect(redirect_url)
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)

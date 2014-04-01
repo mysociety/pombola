@@ -450,6 +450,9 @@ class SACommitteeIndexViewTest(WebTest):
     def setUp(self):
         self.fish_section_title = u"Oh fishy fishy fishy fishy fishy fish"
         self.forest_section_title = u"Forests are totes awesome"
+        # Make sure that the default SayIt instance exists, since when
+        # testing it won't be created because of SOUTH_TESTS_MIGRATE = False
+        default_instance, _ = Instance.objects.get_or_create(label='default')
         create_sections([
             {
                 'title': u"Committee Minutes",
@@ -480,7 +483,7 @@ class SACommitteeIndexViewTest(WebTest):
                     },
                 ],
             },
-        ])
+        ], instance=default_instance)
 
 
     def test_committee_index_page(self):
@@ -498,18 +501,18 @@ class SACommitteeIndexViewTest(WebTest):
                             html=True)
         self.assertNotContains(response, "Empty section")
 
-    def test_public_speech(self):
-        # Find the section that contains private speeches:
+    def test_committee_section_redirects(self):
+        # Get the section URL:
         section = Section.objects.get(title=self.fish_section_title)
-        # Pick an arbitrary speech in that section:
-        speech = Speech.objects.filter(section=section)[0]
-        speech_url = reverse('speeches:speech-view', args=(speech.id,))
-        response = self.app.get(speech_url)
-        self.assertContains(response, "rhubarb rhubarb")
+        section_url = reverse('speeches:section-view', args=(section.get_path,))
+        response = self.app.get(section_url)
+        self.assertEqual(response.status_code, 302)
+        url_match = re.search(r'http://somewhere.or.other/\d+',
+                              response.location)
+        self.assertTrue(url_match)
 
-    def test_private_speech_redirects(self):
-        # Find the section that contains private speeches:
-        section = Section.objects.get(title=self.forest_section_title)
+    def view_speech_in_section(self, section_title):
+        section = Section.objects.get(title=section_title)
         # Pick an arbitrary speech in that section:
         speech = Speech.objects.filter(section=section)[0]
         speech_url = reverse('speeches:speech-view', args=(speech.id,))
@@ -519,6 +522,14 @@ class SACommitteeIndexViewTest(WebTest):
         url_match = re.search(r'http://somewhere.or.other/\d+',
                               response.location)
         self.assertTrue(url_match)
+
+    def test_public_committee_speech_redirects(self):
+        # Try a speech in a section that contains private speeches:
+        self.view_speech_in_section(self.fish_section_title)
+
+    def test_private_committee_speech_redirects(self):
+        # Try a speech in a section that contains public speeches:
+        self.view_speech_in_section(self.forest_section_title)
 
 
 @attr(country='south_africa')
