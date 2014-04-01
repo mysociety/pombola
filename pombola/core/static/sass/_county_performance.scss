@@ -215,11 +215,10 @@ $section-verical-padding: 40px;
     }
 
     button {
-      width: 15%;
       margin: 15px auto 0 auto;
+      padding: 5px 20px;
       font-size: 1em;
       line-height: 30px;
-      padding: 5px 10px;
       color: #fff;
       background-color: #333;
       @include border-radius(2px);

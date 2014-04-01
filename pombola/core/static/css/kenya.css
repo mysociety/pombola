@@ -3411,11 +3411,10 @@ h2 a.appearances-trigger.active {
   padding: 5px 10px;
 }
 .county-performance #senate button {
-  width: 15%;
   margin: 15px auto 0 auto;
+  padding: 5px 20px;
   font-size: 1em;
   line-height: 30px;
-  padding: 5px 10px;
   color: #fff;
   background-color: #333;
   -webkit-border-radius: 2px;
