@@ -3374,6 +3374,7 @@ h2 a.appearances-trigger.active {
 }
 .county-performance #petition button {
   width: 15%;
+  min-width: 100px;
   color: #fff;
   background-color: #333;
   -webkit-border-radius: 2px;
@@ -3467,6 +3468,29 @@ h2 a.appearances-trigger.active {
     border-top: none;
     background: transparent;
     padding: 0;
+  }
+  .county-performance #report table {
+    font-size: 0.8em;
+    line-height: 1.2em;
+  }
+  .county-performance #report table td, .county-performance #report table th {
+    padding: 10px;
+  }
+  .county-performance #report-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .county-performance #report {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media only all and (max-width: 439px) {
+  .county-performance #report table {
+    font-size: 0.7em;
+  }
+  .county-performance #report table td, .county-performance #report table th {
+    padding: 5px;
   }
 }
 
