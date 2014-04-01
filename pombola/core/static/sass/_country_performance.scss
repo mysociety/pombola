@@ -82,6 +82,18 @@ $section-verical-padding: 40px;
       font-weight: bold;
     }
 
+    td.development {
+      background-color: #F7E1E1;
+    }
+
+    tr:nth-child(even) td.development {
+      background-color: #FAF0F0;
+    }
+
+    tfoot td.development {
+      background-color: #E96F6F;
+    }
+
   }
 
   #quote {

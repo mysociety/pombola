@@ -3294,6 +3294,15 @@ h2 a.appearances-trigger.active {
 .country-performance #report table td.county {
   font-weight: bold;
 }
+.country-performance #report table td.development {
+  background-color: #F7E1E1;
+}
+.country-performance #report table tr:nth-child(even) td.development {
+  background-color: #FAF0F0;
+}
+.country-performance #report table tfoot td.development {
+  background-color: #E96F6F;
+}
 .country-performance #quote {
   margin-top: 40px;
   margin-bottom: 0;
