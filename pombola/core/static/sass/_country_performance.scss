@@ -119,12 +119,12 @@ $section-verical-padding: 40px;
 
   #share-petition a {
     display: block;
-    width: 40%;
-    background-color: #3c5a96;
+    width: 34%;
+    margin: 20px auto;
+    padding: 10px 10px 10px 40px;
+    background: #3c5a96 url(../images/county-perf-facebook.png) 10px 50% no-repeat;
     color: #fff;
     font-weight: bold;
-    margin: 20px auto;
-    padding: 10px;
     @include border-radius(2px);
   }
 
@@ -135,6 +135,7 @@ $section-verical-padding: 40px;
 
   a#share-twitter {
     background-color: #59adeb;
+    background-image: url(../images/county-perf-twitter.png);
   }
 
   a#share-twitter:hover {
