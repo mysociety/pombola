@@ -1,6 +1,14 @@
 from django_webtest import WebTest
+from django.test import TestCase
 
 from pombola.core import models
+
+class HomeViewTest(TestCase):
+
+    def test_homepage_context(self):
+        response = self.client.get('/')
+        self.assertIn('featured_person', response.context)
+        self.assertIn('featured_persons', response.context)
 
 class PositionViewTest(WebTest):
     def tearDown(self):
