@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import os
 import sys
 import re
@@ -13,7 +14,6 @@ sys.path.append(
 
 
 
-import simplejson
 from pprint import pprint
 from django.template.defaultfilters import slugify
 from pombola.core import models
@@ -29,7 +29,7 @@ phone_kind   = models.ContactKind.objects.get(slug='phone')
 address_kind = models.ContactKind.objects.get(slug='address')
 email_kind   = models.ContactKind.objects.get(slug='email')
 
-objects           = simplejson.loads( sys.stdin.read() )
+objects           = json.loads( sys.stdin.read() )
 
 for obj in objects:
 

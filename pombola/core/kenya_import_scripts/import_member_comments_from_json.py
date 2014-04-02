@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import os
 import sys
 import re
@@ -13,7 +14,6 @@ sys.path.append(
 
 
 
-import simplejson
 from pprint import pprint
 from pombola.core.models import Person
 
@@ -23,7 +23,7 @@ from django.template.defaultfilters import slugify
 
 from comments2.models import Comment
 
-comments = simplejson.loads( sys.stdin.read() )
+comments = json.loads( sys.stdin.read() )
 
 for old_comment in comments:
     pprint( old_comment )

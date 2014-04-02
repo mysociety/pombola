@@ -107,7 +107,6 @@ numpy==1.6.1
 parslepy==0.2.0
 python-magic==0.4.6
 pytz==2013.9
-simplejson==3.3.2
 six==1.5.2
 slumber==0.6.0
 sqlparse==0.1.10

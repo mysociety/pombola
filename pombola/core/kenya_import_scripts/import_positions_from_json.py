@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import os
 import sys
 import re
@@ -13,7 +14,6 @@ sys.path.append(
 
 
 
-import simplejson
 from pprint import pprint
 from pombola.core import models
 from django_date_extensions.fields import ApproximateDate
@@ -24,10 +24,10 @@ json_filename = '/home/evdb/Mzalendo_Educational_Positions.json'
 
 # python 2.6
 # with open(json_filename) as json_file:
-#     objects = simplejson.loads( json_file.read() )
+#     objects = json.loads( json_file.read() )
 
 # python 2.5
-objects = simplejson.loads( open(json_filename).read() )
+objects = json.loads( open(json_filename).read() )
 
 org_lookup   = {}
 title_lookup = {}
@@ -169,4 +169,4 @@ for obj in objects['positions']:
     )
 
 with open(json_filename, 'w') as json_file:
-    simplejson.dump( objects, json_file, sort_keys=True, indent=4, ensure_ascii=False, )
+    json.dump( objects, json_file, sort_keys=True, indent=4, ensure_ascii=False, )

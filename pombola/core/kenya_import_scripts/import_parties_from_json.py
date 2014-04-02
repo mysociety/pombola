@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import os
 import sys
 
@@ -12,14 +13,13 @@ sys.path.append(
 
 
 
-import simplejson
 from pprint import pprint
 from django.template.defaultfilters import slugify
 from pombola.core import models
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 
 party_kind = models.OrganisationKind.objects.get(slug="party")
-parties    = simplejson.loads( sys.stdin.read() )
+parties    = json.loads( sys.stdin.read() )
 
 for party in parties:
     pprint( party )

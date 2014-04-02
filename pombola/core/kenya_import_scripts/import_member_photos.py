@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import os
 import sys
 
@@ -12,7 +13,6 @@ sys.path.append(
 
 
 
-import simplejson
 import time
 import urllib
 
@@ -23,7 +23,7 @@ from pombola.images.models import Image
 
 constituency_kind = models.PlaceKind.objects.get(slug="constituency")
 
-objects    = simplejson.loads( sys.stdin.read() )
+objects    = json.loads( sys.stdin.read() )
 
 for obj in objects:
     

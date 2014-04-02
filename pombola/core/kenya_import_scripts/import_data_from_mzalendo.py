@@ -12,12 +12,12 @@ sys.path.append(
 
 
 
-import simplejson
+import json
 from pprint import pprint
 from django.template.defaultfilters import slugify
 from pombola.core import models
 
-mps = simplejson.loads( sys.stdin.read() )
+mps = json.loads( sys.stdin.read() )
 
 constituency_kind = models.PlaceKind.objects.get(slug="constituency")
 party_kind        = models.OrganisationKind.objects.get(slug="party")
