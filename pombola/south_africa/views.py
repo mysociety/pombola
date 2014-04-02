@@ -704,7 +704,8 @@ class SASectionView(SectionView):
         self.object = self.get_object()
         if should_redirect_to_source(self.object):
             # Find a URL to redirect to; try to get any speech in the
-            # section with a non-blank source URL:
+            # section with a non-blank source URL. FIXME: after
+            # switching to Django 1.6, .first() will make this simpler.
             speeches = self.object.speech_set.exclude(source_url='')[:1]
             if speeches:
                 speech = speeches[0]
