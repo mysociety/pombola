@@ -4069,6 +4069,11 @@ NEWS & POLL
   text-transform: uppercase;
   color: #222222;
 }
+#news h2 a:visited,
+#twitter h2 a:visited,
+#poll h2 a:visited {
+  color: #222222;
+}
 #news h3,
 #twitter h3,
 #poll h3 {

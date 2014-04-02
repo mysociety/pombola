@@ -876,6 +876,9 @@ NEWS & POLL
     {
         text-transform: uppercase;
         color: $colour-black;
+        a:visited {
+            color: $colour-black;
+        }
     }
     h3
     {
