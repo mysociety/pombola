@@ -494,6 +494,7 @@ class SACommitteeIndexViewTest(WebTest):
     def setUp(self):
         self.fish_section_title = u"Oh fishy fishy fishy fishy fishy fish"
         self.forest_section_title = u"Forests are totes awesome"
+        self.pmq_section_title = "Questions on 20 June 2014"
         # Make sure that the default SayIt instance exists, since when
         # testing it won't be created because of SOUTH_TESTS_MIGRATE = False
         default_instance, _ = Instance.objects.get_or_create(label='default')
@@ -527,8 +528,19 @@ class SACommitteeIndexViewTest(WebTest):
                     },
                 ],
             },
+            {
+                'title': u"Hansard",
+                'subsections': [
+                    {   'title': u"Prime Minister's Questions",
+                        'subsections': [
+                            {   'title': self.pmq_section_title,
+                                'speeches': [ 7, date(2013, 2, 18), time(12, 0) ],
+                            },
+                        ],
+                    },
+                ],
+            },
         ], instance=default_instance)
-
 
     def test_committee_index_page(self):
         response = self.app.get('/committee-minutes/')
@@ -561,7 +573,9 @@ class SACommitteeIndexViewTest(WebTest):
         speech = Speech.objects.filter(section=section)[0]
         speech_url = reverse('speeches:speech-view', args=(speech.id,))
         # Get that URL, and expect to see a redirect to the source_url:
-        response = self.app.get(speech_url)
+        return self.app.get(speech_url)
+
+    def check_redirect(self, response):
         self.assertEqual(response.status_code, 302)
         url_match = re.search(r'http://somewhere.or.other/\d+',
                               response.location)
@@ -569,12 +583,16 @@ class SACommitteeIndexViewTest(WebTest):
 
     def test_public_committee_speech_redirects(self):
         # Try a speech in a section that contains private speeches:
-        self.view_speech_in_section(self.fish_section_title)
+        self.check_redirect(self.view_speech_in_section(self.fish_section_title))
 
     def test_private_committee_speech_redirects(self):
         # Try a speech in a section that contains public speeches:
-        self.view_speech_in_section(self.forest_section_title)
+        self.check_redirect(self.view_speech_in_section(self.forest_section_title))
 
+    def test_hansard_speech_returned(self):
+        response = self.view_speech_in_section(self.pmq_section_title)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('rhubarb rhubarb', response)
 
 @attr(country='south_africa')
 class SAOrganisationDetailViewTest(WebTest):
