@@ -55,27 +55,12 @@
 
     <div id="news">
 
-        <div class="home-news">
-            <h2><a href="{% url 'info_blog_category' slug='week-parliament' %}">THAT WEEK IN PARLIAMENT</a></h2>
-            <ul class="home-news-list">
-            {% for article in that_week_in_parliament %}
-            <li>
-                <h3>
-                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                </h3>
-                <p class="meta">{{ article.publication_date|date }}</p>
-                <p>{{ article.content|truncatewords_html:32 }}</p>
-                <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p>
-            </li>
-            {% endfor %}
-            </ul>
-            <a href="{% url 'info_blog_category' slug='week-parliament' %}">see all posts</a>
-        </div>
+      {% for category, articles in news_categories %}
 
         <div class="home-news">
-            <h2><a href="{% url 'info_blog_category' slug='impressions' %}">IMPRESSIONS</a></h2>
+            <h2><a href="{% url 'info_blog_category' slug=category.slug %}">{{ category.name }}</a></h2>
             <ul class="home-news-list">
-            {% for article in impressions %}
+            {% for article in articles %}
             <li>
                 <h3>
                 <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
@@ -86,8 +71,10 @@
             </li>
             {% endfor %}
             </ul>
-            <a href="{% url 'info_blog_category' slug='impressions' %}">see all posts</a>
+            <a href="{% url 'info_blog_category' slug=category.slug %}">see all posts</a>
         </div>
+
+      {% endfor %}
 
     </div>
     <div class="col-2">

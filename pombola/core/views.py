@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.views.decorators.cache import cache_control, never_cache
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 from django.core.cache import cache
 from django.conf import settings
@@ -19,50 +19,28 @@ from pombola.core import models
 from pombola.info.models import InfoPage
 
 
-def home(request):
-    """Homepage"""
-    current_slug = False
-    if request.GET.get('after'):
-        current_slug = request.GET.get('after')
-    elif request.GET.get('before'):
-        current_slug = request.GET.get('before')
-    featured_person = models.Person.objects.get_next_featured(current_slug, request.GET.get('before'))
+class HomeView(TemplateView):
 
-    # for the eletion homepage produce a list of all the featured people. Shuffle it each time to avoid any bias.
-    featured_persons = list(models.Person.objects.get_featured())
-    random.shuffle(featured_persons)
+    template_name = 'home.html'
 
-    # If there is editable homepage content make it available to the templates.
-    # Currently only Nigeria uses this, if more countries want it we should
-    # probably add a feature flip boolean to the config.
-    editable_content = None
-    if settings.COUNTRY_APP == 'nigeria':
-        try:
-            page = InfoPage.objects.get(slug="homepage")
-            editable_content = page.content
-        except InfoPage.DoesNotExist:
-            pass
+    def get_context_data(self, **kwargs):
 
-    # Only SA uses featured news articles currently, as above, if this changes
-    # then this should become a config flag or similar.
-    that_week_in_parliament = None
-    impressions = None
-    if settings.COUNTRY_APP == 'south_africa':
-        articles = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG).order_by("-publication_date")
-        that_week_in_parliament = articles.filter(categories__slug='week-parliament')[:4]
-        impressions = articles.filter(categories__slug='impressions')[:4]
+        context = super(HomeView, self).get_context_data(**kwargs)
 
-    return render_to_response(
-        'home.html',
-        {
-          'featured_person':  featured_person,
-          'featured_persons': featured_persons,
-          'editable_content': editable_content,
-          'that_week_in_parliament': that_week_in_parliament,
-          'impressions': impressions,
-        },
-        context_instance=RequestContext(request)
-    )
+        before, after = (self.request.GET.get(k) for k in ('before', 'after'))
+        current_slug = before or after
+
+        context['featured_person'] = \
+            models.Person.objects.get_next_featured(current_slug,
+                                                    want_previous=before)
+
+        # For the election homepage produce a list of all the featured people.
+        # Shuffle it each time to avoid any bias.
+        context['featured_persons'] = list(models.Person.objects.get_featured())
+        random.shuffle(context['featured_persons'])
+
+        return context
+
 
 class OrganisationList(ListView):
     model = models.Organisation

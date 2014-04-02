@@ -3,8 +3,10 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView, ListView, RedirectView
 
 from pombola.core import models
-from pombola.core.views import PlaceDetailView, OrganisationList, OrganisationKindList, \
-    PlaceKindList, PersonDetail, PersonDetailSub, PlaceDetailSub, OrganisationDetailSub, OrganisationDetailView
+from pombola.core.views import (HomeView, PlaceDetailView,
+    OrganisationList, OrganisationKindList, PlaceKindList, PersonDetail,
+    PersonDetailSub, PlaceDetailSub, OrganisationDetailSub,
+    OrganisationDetailView)
 
 person_patterns = patterns('pombola.core.views',
     url(r'^all/',
@@ -96,7 +98,7 @@ for sub_page in ['comments', 'contact_details', 'people']:
 
 urlpatterns = patterns('pombola.core.views',
     # Homepage
-    url(r'^$', 'home', name='home'),
+    url(r'^$', HomeView.as_view(), name='home'),
 
     (r'^person/', include(person_patterns)),
     (r'^place/', include(place_patterns)),

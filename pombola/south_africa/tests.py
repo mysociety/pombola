@@ -29,6 +29,15 @@ from pombola.interests_register.models import Category, Release, Entry, EntryLin
 from nose.plugins.attrib import attr
 
 @attr(country='south_africa')
+class HomeViewTest(TestCase):
+
+    def test_homepage_context(self):
+        response = self.client.get('/')
+        self.assertIn('featured_person', response.context)
+        self.assertIn('featured_persons', response.context)
+        self.assertIn('news_categories', response.context)
+
+@attr(country='south_africa')
 class ConstituencyOfficesTestCase(WebTest):
     def setUp(self):
         self.old_HAYSTACK_SIGNAL_PROCESSOR = settings.HAYSTACK_SIGNAL_PROCESSOR

@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, include, url
 
-from pombola.south_africa.views import LatLonDetailNationalView, LatLonDetailLocalView, SAPlaceDetailSub, \
-    SAOrganisationDetailView, SAPersonDetail, SASearchView, SANewsletterPage, \
-    SAPlaceDetailView, SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex, \
-    SAPersonAppearanceView, SAQuestionIndex, SAOrganisationDetailSub, \
-    OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView
+from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
+    LatLonDetailLocalView, SAPlaceDetailSub, SAOrganisationDetailView,
+    SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
+    SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex,
+    SAPersonAppearanceView, SAQuestionIndex, SAOrganisationDetailSub,
+    OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView)
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
@@ -33,9 +34,14 @@ for index, pattern in enumerate(person_patterns):
     if pattern.name == 'person':
         person_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAPersonDetail.as_view(), name='person')
 
+# Override the home view:
+urlpatterns = patterns('',
+    url(r'^$', SAHomeView.as_view(), name='home'),
+)
+
 # Catch /person/{person_slug}/appearances/{speech_tag} urls and serve the
 # appropriate content.
-urlpatterns = patterns('',
+urlpatterns += patterns('',
 
     # FIXME - implement a redirect to /persons/joe-bloggs#appearances when #930
     # done
