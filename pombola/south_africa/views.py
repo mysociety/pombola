@@ -31,6 +31,7 @@ from pombola.core.views import (HomeView, PlaceDetailView, PlaceDetailSub,
     OrganisationDetailSub)
 from pombola.info.models import InfoPage, Category
 from pombola.info.views import InfoPageView
+from pombola.search.views import GeocoderView
 
 from pombola.south_africa.models import ZAPlace
 
@@ -57,6 +58,20 @@ class SAHomeView(HomeView):
             except Category.DoesNotExist:
                 pass
         return context
+
+class SAGeocoderView(GeocoderView):
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        results = context.get('geocoder_results')
+        if results is not None and len(results) == 1:
+            result = results[0]
+            redirect_url = reverse('latlon', kwargs={
+                'lat': result['latitude'],
+                'lon': result['longitude']})
+            return redirect(redirect_url)
+        else:
+            return self.render_to_response(context)
 
 class LocationSearchForm(SearchForm):
     q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))

@@ -5,7 +5,8 @@ from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
     SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex,
     SAPersonAppearanceView, SAQuestionIndex, SAOrganisationDetailSub,
-    OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView)
+    OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView,
+    SAGeocoderView)
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
@@ -61,6 +62,11 @@ for index, pattern in enumerate(search_urlpatterns):
 urlpatterns += patterns('pombola.south_africa.views',
     url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/national/$', LatLonDetailNationalView.as_view(), name='latlon-national'),
     url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/$', LatLonDetailLocalView.as_view(), name='latlon'),
+
+    # We want to override the location search view, so that we can
+    # redirect straight to the results page if there's a unique result
+    # returned.
+    url(r'^search/location/$', SAGeocoderView.as_view(), name='core_geocoder_search'),
 
     # because the following slug matches override this definition in the core
     # place_patterns, we reinstate it here

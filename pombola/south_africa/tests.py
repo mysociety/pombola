@@ -1,15 +1,16 @@
 import re
-import sys
 import os
 from datetime import date, time
 from StringIO import StringIO
+from urlparse import urlparse
+
+import mock
 
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
-from django.utils import unittest
 from django_webtest import WebTest
 
 from mapit.models import Type, Area, Geometry, Generation
@@ -25,6 +26,10 @@ from pombola import south_africa
 from pombola.south_africa.views import PersonSpeakerMappings
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
+from pombola.search.tests.views import fake_geocoder
+
+import pombola.search.geocoder
+pombola.search.geocoder.geocoder = mock.Mock(side_effect=fake_geocoder)
 
 from nose.plugins.attrib import attr
 
@@ -75,7 +80,7 @@ class ConstituencyOfficesTestCase(WebTest):
             slug='province',
             )
 
-        province = models.Place.objects.create(
+        models.Place.objects.create(
             name='Test Province',
             slug='test_province',
             kind=place_kind_province,
@@ -84,7 +89,7 @@ class ConstituencyOfficesTestCase(WebTest):
 
         org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
         org_kind_constituency_office = models.OrganisationKind.objects.create(name='Constituency Office', slug='constituency-office')
-        org_kind_constituency_area = models.OrganisationKind.objects.create(name='Constituency Area', slug='constituency-area')
+        models.OrganisationKind.objects.create(name='Constituency Area', slug='constituency-area')
 
         party1 = models.Organisation.objects.create(name='Party1', slug='party1', kind=org_kind_party)
         party2 = models.Organisation.objects.create(name='Party2', slug='party2', kind=org_kind_party)
@@ -107,7 +112,7 @@ class ConstituencyOfficesTestCase(WebTest):
             models.OrganisationRelationship.objects.create(organisation_a=party, organisation_b=office, kind=orgrelkind_has_office)
 
         place_kind_constituency_office = models.PlaceKind.objects.create(name='Constituency Office', slug='constituency-office')
-        place_kind_constituency_area = models.PlaceKind.objects.create(name='Constituency Area', slug='constituency-area')
+        models.PlaceKind.objects.create(name='Constituency Area', slug='constituency-area')
 
 
         # Offices inside the province
@@ -165,10 +170,40 @@ class LatLonDetailViewTest(TestCase):
 
 
 @attr(country='south_africa')
-class SASearchViewTest(TestCase):
+class SASearchViewTest(WebTest):
+
+    def setUp(self):
+        self.search_location_url = reverse('core_geocoder_search')
+
     def test_search_page_returns_success(self):
-        res = self.client.get(reverse('core_search'))
+        res = self.app.get(reverse('core_search'))
         self.assertEquals(200, res.status_code)
+
+    def get_search_result_list_items(self, query_string):
+        response = self.app.get(
+            "{0}?q={1}".format(self.search_location_url, query_string))
+        results_div = response.html.find('div', class_='geocoded_results')
+        return results_div.find('ul').findAll('li')
+
+    def test_unknown_place(self):
+        lis = self.get_search_result_list_items('anywhere')
+        self.assertEqual(len(lis), 0)
+
+    def test_single_result_place(self):
+        response = self.app.get(
+            "{0}?q={1}".format(self.search_location_url, 'Cape Town'))
+        # If there's only a single result (as with Cape Town) we
+        # should redirect straight there:
+        self.assertEqual(response.status_code, 302)
+        path = urlparse(response.location).path
+        self.assertEqual(path, '/place/latlon/-33.925,18.424/')
+
+    def test_multiple_result_place(self):
+        lis = self.get_search_result_list_items('Trafford Road')
+        self.assertEqual(len(lis), 3)
+        self.assertEqual(lis[0].a['href'], '/place/latlon/-29.814,30.839/')
+        self.assertEqual(lis[1].a['href'], '/place/latlon/-33.969,18.703/')
+        self.assertEqual(lis[2].a['href'], '/place/latlon/-32.982,27.868/')
 
 
 @attr(country='south_africa')
@@ -202,7 +237,7 @@ class SAPersonDetailViewTest(TestCase):
                     'title': 'An instance'
                 })
 
-            s = Speaker.objects.create(
+            Speaker.objects.create(
                 instance = instance,
                 name = doc['name'],
                 person = person)
@@ -226,17 +261,17 @@ class SAPersonDetailViewTest(TestCase):
         category2 = Category.objects.create(name="Test Category 2", sort_order=2)
 
         release1 = Release.objects.create(name='2013', date=date(2013, 2, 16))
-        release2 = Release.objects.create(name='2012', date=date(2012, 2, 24))
+        Release.objects.create(name='2012', date=date(2012, 2, 24))
 
         entry1 = Entry.objects.create(person=person,release=release1,category=category1, sort_order=1)
         entry2 = Entry.objects.create(person=person,release=release1,category=category1, sort_order=2)
         entry3 = Entry.objects.create(person=person,release=release1,category=category2, sort_order=3)
 
-        line1 = EntryLineItem.objects.create(entry=entry1,key='Field1',value='Value1')
-        line2 = EntryLineItem.objects.create(entry=entry1,key='Field2',value='Value2')
-        line3 = EntryLineItem.objects.create(entry=entry2,key='Field1',value='Value3')
-        line4 = EntryLineItem.objects.create(entry=entry2,key='Field3',value='Value4')
-        line5 = EntryLineItem.objects.create(entry=entry3,key='Field4',value='Value5')
+        EntryLineItem.objects.create(entry=entry1,key='Field1',value='Value1')
+        EntryLineItem.objects.create(entry=entry1,key='Field2',value='Value2')
+        EntryLineItem.objects.create(entry=entry2,key='Field1',value='Value3')
+        EntryLineItem.objects.create(entry=entry2,key='Field3',value='Value4')
+        EntryLineItem.objects.create(entry=entry3,key='Field4',value='Value5')
 
         #actual output
         context = self.client.get(reverse('person', args=('moomin-finn',))).context
@@ -324,25 +359,25 @@ class SAOrganisationPartySubPageTest(TestCase):
         person5 = models.Person.objects.create(legal_name='Person5', slug='person5')
         person6 = models.Person.objects.create(legal_name='', slug='empty-legal-name')
 
-        position1 = models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
-        position2 = models.Position.objects.create(person=person2, organisation=party1, title=positiontitle1)
-        position3 = models.Position.objects.create(person=person3, organisation=party1, title=positiontitle1)
-        position4 = models.Position.objects.create(person=person4, organisation=party2, title=positiontitle1)
-        position5 = models.Position.objects.create(person=person5, organisation=party2, title=positiontitle2)
+        models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
+        models.Position.objects.create(person=person2, organisation=party1, title=positiontitle1)
+        models.Position.objects.create(person=person3, organisation=party1, title=positiontitle1)
+        models.Position.objects.create(person=person4, organisation=party2, title=positiontitle1)
+        models.Position.objects.create(person=person5, organisation=party2, title=positiontitle2)
 
-        position6 = models.Position.objects.create(person=person1, organisation=house1, title=positiontitle1)
-        position7 = models.Position.objects.create(person=person2, organisation=house1, title=positiontitle1)
-        position8 = models.Position.objects.create(person=person3, organisation=house1, title=positiontitle1, end_date='2013-02-16')
-        position9 = models.Position.objects.create(person=person4, organisation=house1, title=positiontitle1)
-        position10 = models.Position.objects.create(person=person5, organisation=house1, title=positiontitle1, end_date='2013-02-16')
+        models.Position.objects.create(person=person1, organisation=house1, title=positiontitle1)
+        models.Position.objects.create(person=person2, organisation=house1, title=positiontitle1)
+        models.Position.objects.create(person=person3, organisation=house1, title=positiontitle1, end_date='2013-02-16')
+        models.Position.objects.create(person=person4, organisation=house1, title=positiontitle1)
+        models.Position.objects.create(person=person5, organisation=house1, title=positiontitle1, end_date='2013-02-16')
 
         # Add a position for the person with an empty legal name,
         # since this isn't prevented by any validation:
-        position11 = models.Position.objects.create(person=person6, organisation=party1, title=positiontitle1)
-        position12 = models.Position.objects.create(person=person6, organisation=house1, title=positiontitle1)
+        models.Position.objects.create(person=person6, organisation=party1, title=positiontitle1)
+        models.Position.objects.create(person=person6, organisation=house1, title=positiontitle1)
 
         #check for person who is no longer an official, but still a member
-        position11 = models.Position.objects.create(person=person1, organisation=house1, title=positiontitle3, end_date='2013-02-16')
+        models.Position.objects.create(person=person1, organisation=house1, title=positiontitle3, end_date='2013-02-16')
 
     def test_display_current_members(self):
         context1 = self.client.get(reverse('organisation_party', args=('house1', 'party1'))).context
