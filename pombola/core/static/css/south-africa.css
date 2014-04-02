@@ -3159,7 +3159,14 @@ ul.social-buttons li {
   padding: 4px;
 }
 
-/* Formatting for SayIt speeches */
+/* Formatting for SayIt speeches, within the South African
+   installation of Pombola.  Much of this is copied, with minor
+   changes, from Martin Wright's work in SayIt, in particular from
+   web/sass/speeches.scss
+
+   This couldn't easily be included and used verbatim, because it's
+   based on Foundation CSS, which the Pombola front-end doesn't use.
+*/
 .speaker-portrait-wrapper {
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
@@ -3265,6 +3272,7 @@ ul li.speech {
   background-position-x: -20px;
 }
 
+/* Highlight the speech which is specified in the fragment */
 .speech:target {
   background-color: #ffc;
 }
