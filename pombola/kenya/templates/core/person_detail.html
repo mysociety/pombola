@@ -1,0 +1,26 @@
+{% extends 'core/person_base.html' %}
+{% load url from future %}
+
+{% block title %}{{ object.name }} Overview{% endblock %}
+
+{% block subcontent %}
+
+  <div class="person-detail-experience">
+    <h2><a href="{% url "person_experience" slug=object.slug %}">Experience</a></h2>
+    {% include 'core/person_detail_experience_list.html' with positions=object.position_set.all.political.currently_active %}
+    <a href="{% url "person_experience" slug=object.slug %}">See full experience</a>
+  </div>
+
+  {% if settings.ENABLED_FEATURES.hansard %}
+    {% with hansard_count=object.hansard_entries.count %}
+      {% if hansard_count %}
+      <div class="person-detail-hansard">
+        <h2><a href="{% url "person_appearances" slug=object.slug %}">Parliamentary appearanes</a></h2>
+        {% include 'core/person_detail_appearance_list.html' %}
+        <a href="{% url "person_appearances" slug=object.slug %}">See all {{ hansard_count }} appearances</a>
+      </div>
+      {% endif %}
+    {% endwith %}
+  {% endif %}
+
+{% endblock %}

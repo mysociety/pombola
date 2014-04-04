@@ -32,30 +32,18 @@ $(function(){
           }
       });
     });
-    
-    
-    // hide/show home intro
-    $('.home-read-more').on('click', function(e){
-      e.preventDefault();
-      hideShow($('#home-intro span.details'), $(this));
-      if($('.home-read-more.active').length !== 0){
-        $(this).text('less');
-      }else{
-        $(this).text('more');
-      }
-    });
-    
+
     // auto-advance cycles through featured MPs; it also immediately replaces the
     // featured MP in the page (since we assume that has been frozen by caching)
     var auto_advance_enabled = false;
     var auto_advance_delay = 12000; // milliseconds
     var auto_advance_timeout = false;
-        
+
     function transitionDiv(height) {
       return '<div class="featured-person featured-person-loading" style="height:'
-        + $('#home-featured-person').height() + 'px"><p>loading...</p></div>';      
+        + $('#home-featured-person').height() + 'px"><p>loading...</p></div>';
     }
-    
+
     // important to delegate this (with on()) because the contents change each auto-advance
     $('#home-featured-person').on("click", '.feature-nav > a',
         function(e, is_auto_advancing){
@@ -83,7 +71,7 @@ $(function(){
           }
         }
     );
-    
+
     if (auto_advance_enabled) {
       $('#home-featured-person').html(transitionDiv()).load(
           'person/featured/' + Math.floor(Math.random()*100) // some random index of featured person
@@ -96,7 +84,7 @@ $(function(){
       }
       auto_advance_timeout = window.setTimeout(auto_advance, auto_advance_delay);
     }
-    
+
     /*
      * enable dialog based feedback links
      */
@@ -108,16 +96,16 @@ $(function(){
                 // we'd be on a mobile and it might be better just to send them to
                 // the feedback page. Not done as this js should only be loaded on
                 // a desktop.
-    
+
                 // don't follow the link to the feedback page.
                 event.preventDefault();
-    
+
                 // create a div to use in the dialog
                 var dialog_div = $('<div>Loading...</div>');
-    
+
                 // Load the initial content for the dialog
                 dialog_div.load( event.target.href + ' #ajax_dialog_subcontent' );
-    
+
                 // Form subission should be done using ajax, and only the ajax_dialog_subcontent should be shown.
                 var handle_form_submission = function( form_submit_event ) {
                     form_submit_event.preventDefault();
@@ -128,10 +116,10 @@ $(function(){
                         }
                     });
                 };
-                
+
                 // catch all form submissions and do them using ajax
                 dialog_div.on( 'submit', 'form', handle_form_submission );
-            
+
                 // Show the dialog
                 dialog_div.dialog({
                   modal: true,
@@ -139,7 +127,7 @@ $(function(){
                   width: 500,
                   title: 'Leave Feedback'
                 });
-    
+
             }
         );
 
@@ -182,7 +170,7 @@ $(function(){
             // TODO - some how cancel the menu - atm it'll stay up now until you navigate away from page or click on another menu heading
         }
     });
-  
+
   /* carry search terms across when switching between search pages */
   $("#search-hansard-instead").click(function(e){
     e.preventDefault();

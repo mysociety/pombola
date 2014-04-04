@@ -11,7 +11,7 @@
 
 
 <li><a href="{% url "home" %}">Home</a></li>
-<li><a href="{% url "info_page" slug='democracy-resources' %}">Democracy Resources</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='democracy-resources' %}">Democracy Resources</a>
     {% if include_sub_menu_entries %}
     <ul id="democracy-resources">
         <li>
@@ -37,7 +37,7 @@
 </li>
 
 
-<li>
+<li class="has-submenu">
   <a href="{% url "position_pt" pt_slug='member-national-assembly' %}">NA Members</a>
   {% if include_sub_menu_entries %}
   <ul id="parliament-overview">
@@ -51,7 +51,7 @@
   <a href="{% url "position_pt" pt_slug='senator' %}">Senators</a>
 </li>
 
-<li><a href="{% url "info_page" slug='parliament-overview' %}">Parliament</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='parliament-overview' %}">Parliament</a>
     {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
         <li>
@@ -85,7 +85,7 @@
     </ul>
     {% endif %}
 </li>
-<li><a href="{% url "info_page" slug='places-overview' %}">Places</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='places-overview' %}">Places</a>
     {% if include_sub_menu_entries %}
     <ul id="places-overview">
         <li>
@@ -109,7 +109,7 @@
 
 <li><a href="http://mzalendo.com/blog/">Blog</a></li>
 
-<li><a href="{% url "info_page" slug='news' %}">News</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='news' %}">News</a>
     {% if include_sub_menu_entries %}
     <ul id="news-overview">
         <li>
@@ -128,7 +128,7 @@
     {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug='mzalendo-overview' %}">About</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='mzalendo-overview' %}">About</a>
     {% if include_sub_menu_entries %}
     <ul id="mzalendo-overview">
         <li>
