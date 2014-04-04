@@ -7,11 +7,11 @@
   text-align: center; }
 
 .notice {
-  @media print { display: none; }  
+  @media print { display: none; }
   text-align: center;
   padding: 0.5em;
   background-color: #f7f7f7; }
-  
+
 div.error {
   border: 2px solid #f00;
   background-color: #fcc;
@@ -41,7 +41,7 @@ ul.ui-autocomplete {
         display: block;
         height: 2.5em;
         overflow: hidden;
-    }    
+    }
 
     @include box-shadow(rgba(0, 0, 0, 0.3) 1px 1px 12px);
 }

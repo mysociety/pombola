@@ -68,10 +68,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 #staging_header {
-  background-color: #faa;
-  color: #000;
+  background-color: #f8dbdb;
+  color: #903233;
   font-size: 12px;
-  padding: 5px;
+  line-height: 14px;
+  padding: 10px;
   text-align: center;
 }
 
