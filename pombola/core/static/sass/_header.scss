@@ -71,33 +71,102 @@ menu#mobile-top-tools {
 
 #header-search {
   display: none;
-
-  @media only all and (min-width: 640px), print {
-    display: block; }
-
-  @media print { display: none; }
-
-  float: right;
-  background: transparent;
-  margin: 5px 5px 5px 15px;
+  position: absolute;
+  top: 15px;
+  right: 0;
   height: auto;
   border: none;
+
+  @media only all and (min-width: 640px), print {
+    display: block;
+  }
+
+  @media print {
+    display: none;
+  }
+
   input {
-    padding: 1px 4px 1px 8px;
-    border: 1px solid $colour_grey;
-    height: 22px;
-    @include border-radius(5px 0 0 5px);
-    float: left;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 50px 0 7px;
+    margin: 0;
     width: 10em;
-    border: 1px solid $colour_black;
-    font-size: 14px; }
-  button {
-    float: left;
-    @include button-reset;
-    background: $colour_black url(../images/search-icon.png) center no-repeat;
-    width: 26px;
     height: 26px;
-    margin: 0 0 0 0;
-    @include border-radius(0 5px 5px 0);
+    font-size: 14px;
+    line-height: 16px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    -webkit-appearance: none;
+    color: #fff;
+
+    -webkit-transition: border 100ms linear;
+    -moz-transition: border 100ms linear;
+    -ms-transition: border 100ms linear;
+    -o-transition: border 100ms linear;
+    transition: border 100ms linear;
+
+    &::-webkit-input-placeholder {
+      color: #fff;
+    }
+
+    &:-moz-placeholder {
+      color: #fff;
+    }
+
+    &::-moz-placeholder {
+      color: #fff;
+    }
+
+    &:-ms-input-placeholder {
+      color: #fff;
+    }
+
     &:hover {
-      background-color: $colour_blackish; } } }
+      border-color: mix($colour_primary_mid, #fff, 60%);
+    }
+
+    &:focus, &:hover:focus {
+      background-color: transparent;
+      border-color: #fff;
+      outline: none;
+      -webkit-box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
+      box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
+    }
+
+  }
+
+  button {
+    @include button-reset;
+    @include border-radius(0);
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 28px;
+    background: transparent url(../images/search-icon.png) center no-repeat;
+
+    -webkit-transition: background 100ms linear;
+    -moz-transition: background 100ms linear;
+    -ms-transition: background 100ms linear;
+    -o-transition: background 100ms linear;
+    transition: background 100ms linear;
+
+    &:hover {
+      background-color: mix($colour_primary_mid, #fff, 60%);
+    }
+
+    &:focus {
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+  }
+
+  &:hover input {
+    border-color: mix($colour_primary_mid, #fff, 60%);
+  }
+
+}

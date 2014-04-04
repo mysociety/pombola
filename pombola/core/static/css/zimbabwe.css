@@ -619,9 +619,9 @@ menu#mobile-top-tools ul li a img {
 
 #header-search {
   display: none;
-  float: right;
-  background: transparent;
-  margin: 5px 5px 5px 15px;
+  position: absolute;
+  top: 15px;
+  right: 0;
   height: auto;
   border: none;
 }
@@ -636,21 +636,48 @@ menu#mobile-top-tools ul li a img {
   }
 }
 #header-search input {
-  padding: 1px 4px 1px 8px;
-  border: 1px solid gray;
-  height: 22px;
-  -webkit-border-radius: 5px 0 0 5px;
-  -moz-border-radius: 5px 0 0 5px;
-  -ms-border-radius: 5px 0 0 5px;
-  -o-border-radius: 5px 0 0 5px;
-  border-radius: 5px 0 0 5px;
-  float: left;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 50px 0 7px;
+  margin: 0;
   width: 10em;
-  border: 1px solid black;
+  height: 26px;
   font-size: 14px;
+  line-height: 16px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  -webkit-appearance: none;
+  color: #fff;
+  -webkit-transition: border 100ms linear;
+  -moz-transition: border 100ms linear;
+  -ms-transition: border 100ms linear;
+  -o-transition: border 100ms linear;
+  transition: border 100ms linear;
+}
+#header-search input::-webkit-input-placeholder {
+  color: #fff;
+}
+#header-search input:-moz-placeholder {
+  color: #fff;
+}
+#header-search input::-moz-placeholder {
+  color: #fff;
+}
+#header-search input:-ms-input-placeholder {
+  color: #fff;
+}
+#header-search input:hover {
+  border-color: #91d69f;
+}
+#header-search input:focus, #header-search input:hover:focus {
+  background-color: transparent;
+  border-color: #fff;
+  outline: none;
+  -webkit-box-shadow: 0 0 3px 0 #a3ddaf;
+  box-shadow: 0 0 3px 0 #a3ddaf;
 }
 #header-search button {
-  float: left;
   cursor: pointer;
   display: block;
   border: none;
@@ -664,18 +691,33 @@ menu#mobile-top-tools ul li a img {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-  background: black url(../images/search-icon.png) center no-repeat;
-  width: 26px;
-  height: 26px;
-  margin: 0 0 0 0;
-  -webkit-border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -ms-border-radius: 0 5px 5px 0;
-  -o-border-radius: 0 5px 5px 0;
-  border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 28px;
+  background: transparent url(../images/search-icon.png) center no-repeat;
+  -webkit-transition: background 100ms linear;
+  -moz-transition: background 100ms linear;
+  -ms-transition: background 100ms linear;
+  -o-transition: background 100ms linear;
+  transition: background 100ms linear;
 }
 #header-search button:hover {
-  background-color: #777777;
+  background-color: #91d69f;
+}
+#header-search button:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+#header-search:hover input {
+  border-color: #91d69f;
 }
 
 #main-menu {
