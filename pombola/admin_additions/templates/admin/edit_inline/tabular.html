@@ -1,3 +1,4 @@
+{% load cycle from future %}
 {% load i18n admin_modify static %}
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}">
@@ -30,7 +31,7 @@
             (<a href="{{ inline_admin_form.original.get_admin_url }}">Edit in admin</a>)
           {% endif %}
             </p>{% endif %}
-          {% if inline_admin_form.has_auto_field %}{{ inline_admin_form.pk_field.field }}{% endif %}
+          {% if inline_admin_form.needs_explicit_pk_field %}{{ inline_admin_form.pk_field.field }}{% endif %}
           {{ inline_admin_form.fk_field.field }}
           {% spaceless %}
           {% for fieldset in inline_admin_form %}

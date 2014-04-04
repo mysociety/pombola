@@ -10,7 +10,8 @@
 import csv, re, sys
 from pombola.core.models import Place, PlaceKind, ParliamentarySession
 from django.core.management.base import LabelCommand
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
+
 from optparse import make_option
 
 class Command(LabelCommand):

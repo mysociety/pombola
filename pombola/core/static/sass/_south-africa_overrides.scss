@@ -1211,7 +1211,7 @@ FOOTER
         @include border-radius(0 3px 3px 0);
         margin: 0;
     }
-    input[type=text] {
+    input[type="email"] {
         font-size: 1em;
         font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
         font-weight: normal !important;
@@ -1621,7 +1621,7 @@ ul.pager {
 }
 .page-wrapper {
     .email-signup {
-        input[type="text"] {
+        input[type="email"] {
             border: 1px solid $colour_middling_grey;
             margin-bottom: 0.5em;
         }

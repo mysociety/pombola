@@ -15,10 +15,13 @@ sys.path.append(
 
 import simplejson
 from pprint import pprint
-from django.template.defaultfilters import slugify
-from pombola.core import models
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+
+from django.utils.text import slugify
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
+
+from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+
+from pombola.core import models
 
 import name_to_first_last
 
@@ -36,7 +39,7 @@ for obj in objects:
     # pprint( obj )
 
     # break
-         
+
     # {'Active': 'true',
     #  'DateOfBirth': '1961-10-26',
     #  'Duties': 'Leader Of The Official Opposition',
@@ -54,14 +57,14 @@ for obj in objects:
     #  'SecondaryEducation': u'1979: A-Level St Mary\xe2\x80\x99s School 1985 B.A.',
     #  'StatusID': '2',
     #  'UniversityEducation': 'Economics and Political Science Amhrest College,USA '}
-    
+
 
     try:
         (last, first, middle) = name_to_first_last.conversions[obj['Fullnames']]
     except:
         print obj['Fullnames']
         continue
-    
+
     slug = slugify(first + ' ' + last)
 
     try:
@@ -77,18 +80,18 @@ for obj in objects:
         (year, month, day) = re.split( '-', dob )
         if int(year):
             db_obj.date_of_birth = ApproximateDate( year=int(year), month=int(month), day=int(day) )
-        
+
     db_obj.original_id = obj['MemberID']
 
     db_obj.first_name  = first
     db_obj.middle_name = middle
     db_obj.last_name   = last
-    
+
     db_obj.gender = obj['Gender'].lower()
 
     db_obj.save()
-    
-    
+
+
     # do the contact details
     #  'Phone': '221291',
     #  'PhysicalAddress': '',

@@ -13,7 +13,8 @@ sys.path.append(
 
 
 from pprint import pprint
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
+
 from pombola.core import models
 
 
@@ -31,7 +32,7 @@ constituency_renames = [
 
 for from_to in constituency_renames:
     ( from_name, to_name ) = from_to
-    
+
     try:
         place = models.Place.objects.get(name=from_name)
     except models.Place.DoesNotExist:
@@ -252,15 +253,15 @@ for from_to in constituency_renames:
 #     ("Wajir South", "Abdirahman", "Ali", "Hassan" ),
 #     ("Wajir West", "Adan", "Keynan", "Wehliye" ),
 # ]
-# 
-# 
+#
+#
 # for name in names:
 #     (constituency, first, middle, last ) = name
-#     
+#
 #     place = models.Place.objects.get(name=constituency)
-# 
+#
 #     mps = [ i.person for i in place.position_set.filter( title__slug='mp' )]
-# 
+#
 #     for mp in mps:
 #         print ( constituency, mp.id, mp.name, first, middle, last )
 

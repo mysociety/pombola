@@ -38,7 +38,7 @@ from django.contrib.gis.geos import Point
 # from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import LabelCommand, CommandError
 # from django.db.models import Q
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 #
 from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
                          ContactKind, OrganisationRelationshipKind,
@@ -126,17 +126,17 @@ class Command(LabelCommand):
 
                 # get the place associated
                 places = org.place_set.all()
-                
+
                 # check that we have exactly one place to work with
                 if not places.count() == 1:
                     raise "Got wrong number of places, expected 1"
 
                 place = places[0]
-                
+
                 lon, lat = map(float, lonlat.split(","))
                 point = Point(x=lon, y=lat, srid=4326)
 
-                
+
 
                 if options['commit']:
                     place.location = point

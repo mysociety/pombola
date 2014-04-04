@@ -4,7 +4,7 @@ from optparse import make_option
 from pprint import pprint
 
 from django.core.management.base import NoArgsCommand
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 from django.conf import settings
 
 from pombola.core import models

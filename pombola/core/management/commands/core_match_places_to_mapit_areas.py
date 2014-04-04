@@ -2,7 +2,7 @@ from optparse import make_option
 from pprint import pprint
 
 from django.core.management.base import NoArgsCommand
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 from django.conf import settings
 
 from pombola.core import models
@@ -33,7 +33,7 @@ class Command(NoArgsCommand):
             slug = slugify( area.name )
             if suffix:
                 slug += '-' + place_kind_slug
-            
+
             # find it and update, or print out an error for a human to follow up
             try:
                 place = models.Place.objects.get(slug=slug, kind__slug=place_kind_slug)

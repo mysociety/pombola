@@ -3,8 +3,7 @@ import json
 import re
 import sys
 
-from django.template.defaultfilters import slugify
-
+from django.utils.text import slugify
 
 
 class ChangeApplier(object):

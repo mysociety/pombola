@@ -2,7 +2,7 @@ from optparse import make_option
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 
 class Command(BaseCommand):

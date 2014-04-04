@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load firstof from future %}
 {% load switch %}
 {% load humanize %}
 
@@ -20,7 +21,7 @@
         <div class="project_detail" id="project-{{ p.cdf_index }}">
 
             {% comment %}
-            
+
             ### Available fields
 
             created                         {{ p.created             }}
@@ -42,17 +43,17 @@
             location                        {{ p.location            }}
             first_funding_year              {{ p.first_funding_year  }}
 
-            
+
             {% endcomment %}
 
             <h3>{{ p.project_name }}</h3>
-            
+
             <style type="text/css">
                 dt {
                     float: left;
                     width: 12em;
                 }
-                
+
                 dl {
                     margin-bottom: 2em;
                 }
@@ -74,14 +75,14 @@
                     <dd>{{ p.activity_to_be_done }}</dd>
                 <dt>output</dt>
                     <dd>{% firstof p.expected_output '-' %}</dd>
-            
+
                 <dt>implementation status</dt>
                     <dd>{% firstof p.status p.remarks 'not known' %}</dd>
-                
+
                 <dt>total cost</dt>
                     <dd>Ksh {{ p.total_cost|floatformat:0|intcomma }}</dd>
                 <dt>estimate</dt>
-                    <dd>Ksh {{ p.estimated_cost|floatformat:0|intcomma }}</dd>                
+                    <dd>Ksh {{ p.estimated_cost|floatformat:0|intcomma }}</dd>
             </dl>
         </div>
     {% empty %}

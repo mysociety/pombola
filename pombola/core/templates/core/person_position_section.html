@@ -1,5 +1,4 @@
 {% load switch %}
-{% load url from future %}
 
 <ul>
 {% for position in positions %}
@@ -33,7 +32,7 @@
                 {% endif %}
             {% endif %}
         </p>
-            
+
         {% if position.note %}
             <p><small>{{ position.note }}</small></p>
         {% endif %}

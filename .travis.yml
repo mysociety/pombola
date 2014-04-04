@@ -8,7 +8,7 @@ notifications:
 language: python
 
 env:
-  - MODULES="Django>=1.4,<1.5"
+  - MODULES="Django>=1.6,<1.7"
 
 services:
   - elasticsearch

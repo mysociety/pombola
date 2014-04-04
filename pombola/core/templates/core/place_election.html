@@ -1,7 +1,6 @@
 {% extends 'core/object_base.html' %}
 {% load thumbnail %}
 {% load humanize %}
-{% load url from future %}
 
 {% block content %}
 
@@ -15,7 +14,7 @@
 
         <div id="map_canvas"></div>
         <script type="text/javascript" charset="utf-8">
-          add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url "mapit_index" %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
+          add_kml_to_map( 'http://{{ request.get_host }}{% url "mapit_index" %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
         </script>
       </div>
     {% endif %}
@@ -29,9 +28,9 @@
           and is contained within the {{ object.parent_place.kind.name }} <a href="{% url "place_election" slug=object.parent_place.slug %}">{{ object.parent_place.name }}.</a>
       {% else %}.{% endif %}
       </div>
-      
+
       <p><a href="{% url "place" object.slug %}">More details</a> about {{ object.name }}.</p>
-      
+
     </hgroup>
 
   </header>

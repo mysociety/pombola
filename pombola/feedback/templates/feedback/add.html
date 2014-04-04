@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load url from future %}
 
 {% comment %}
     'form':               form,
@@ -16,7 +15,7 @@
 
 {% block content %}
 
-    
+
     <h1 class="page-title">
         Leave feedback
         {% if form.url.value %}
@@ -29,7 +28,7 @@
 
         <div id="ajax_dialog_subcontent">
             <div class="success">
-                Thank you for your feedback!            
+                Thank you for your feedback!
             </div>
         </div>
 
@@ -51,7 +50,7 @@
 
             <form method="post" action="{% url "feedback_add" %}" id="add_feedback">
                 {% csrf_token %}
-                
+
                 {{ form.as_p }}
                 <input type="submit" class="submit" value="Send feedback">
             </form>

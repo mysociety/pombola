@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
-{% load url from future %}
 
 {% block title %}Home{% endblock %}
 
@@ -12,7 +11,7 @@
 
 {% block css_headers %}
     {{ block.super }}
-    
+
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kenya/election-homepage/base.css" />
 {% endblock %}
 
@@ -34,7 +33,7 @@
               <input type="submit" value="Search" class="search-btn">
           </form>
       </div>
-  
+
       <form class="callout-search" action="{% url "core_person_search" %}">
           <h2>Check out a specific representative:</h2>
           <p>Enter their name in the box below to find them</p>
@@ -43,7 +42,7 @@
               <input type="submit" value="Search" class="search-btn">
           </div>
       </form>
-  
+
 
       {% comment %}
 
@@ -68,7 +67,7 @@
 
   </div>
   <div class="election-home-right">
-    
+
   {% if settings.BLOG_RSS_FEED %}
       <h2 class="static">Editorial</h2>
       <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
@@ -78,6 +77,6 @@
       </ul>
   {% endif %}
 
-  
+
   </div>
 {% endblock %}

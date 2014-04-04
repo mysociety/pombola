@@ -14,7 +14,8 @@ sys.path.append(
 
 import simplejson
 from pprint import pprint
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
+
 from pombola.core import models
 
 mps = simplejson.loads( sys.stdin.read() )
