@@ -127,7 +127,8 @@ wsgiref==0.1.2
 GDAL
 
 # This comes as standard in Python 2.7+ anyway
-argparse==1.2.1
+# Pinned to 1.1 rather than 1.2.1 to save us having to use --allow-all-external
+argparse==1.1
 
 # An old migration in za-hansard requires django-sluggable to be installed.
 # at some point in the future we should stop this being needed, perhaps by
