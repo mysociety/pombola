@@ -170,3 +170,31 @@ menu#mobile-top-tools {
   }
 
 }
+
+
+@media only all and (min-width: 640px), print {
+
+  #main-menu {
+    background: #333;
+
+    nav {
+      display: table;
+
+      & > ul {
+        display: table-row;
+
+        li {
+          display: table-cell;
+          float: none;
+          border-right: none;
+
+          a {
+            float: none;
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+
+}
