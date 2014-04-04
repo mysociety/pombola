@@ -19,12 +19,12 @@
       display: table-row;
       width: auto;
 
-      li {
+      & > li {
         position: relative;
         display: table-cell;
         height: 36px;
 
-        a {
+        & > a {
           display: block;
           width: 100%;
           font-size: 12px;
@@ -38,7 +38,7 @@
             font-size: 14px;
           }
 
-          &:hover {
+          &:hover, &:focus {
             background: #666;
           }
         }
@@ -54,13 +54,10 @@
           padding-left: 0;
         }
 
+        /* list items are given class="active" on hover */
         &.active > a {
           background: #f6f6f6;
           color: #444;
-          border-left: 1px solid #d4d4d4;
-          border-right: 1px solid #d4d4d4;
-          border-top: 1px solid #d4d4d4;
-          padding: 9px 6px 10px 6px;
         }
 
         &:hover {
@@ -68,27 +65,24 @@
           ul {
             left: 0;
             top: 36px;
-            text-align: left;
-            width: 193px;
-            border-left: 1px solid #d4d4d4;
-            border-right: 1px solid #d4d4d4;
-            border-bottom: 1px solid #d4d4d4;
+            width: 100%;
+            @include box-shadow(rgba(0,0,0,0.3) 0 2px 2px);
 
             li {
               display: block;
-              float: none;
               height: auto;
-              border: none;
 
               a {
+                display: block;
+                padding: 8px;
                 font-size: 13px;
                 color: #444;
                 background: #f6f6f6;
                 height: auto;
-                float: none;
 
-                &:hover {
+                &:hover, &:focus {
                   background: #d4d4d4;
+                  text-decoration: none;
                 }
               }
             }

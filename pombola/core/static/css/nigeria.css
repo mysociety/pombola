@@ -767,12 +767,13 @@ menu#mobile-top-tools ul li a img {
   margin: 0;
   border: 0;
 }
-#main-menu nav > ul li {
+#main-menu nav > ul > li {
   position: relative;
   display: table-cell;
   height: 36px;
+  /* list items are given class="active" on hover */
 }
-#main-menu nav > ul li a {
+#main-menu nav > ul > li > a {
   display: block;
   width: 100%;
   font-size: 12px;
@@ -783,54 +784,49 @@ menu#mobile-top-tools ul li a img {
   border-bottom: 0;
 }
 @media only all and (min-width: 720px), print {
-  #main-menu nav > ul li a {
+  #main-menu nav > ul > li > a {
     font-size: 14px;
   }
 }
-#main-menu nav > ul li a:hover {
+#main-menu nav > ul > li > a:hover, #main-menu nav > ul > li > a:focus {
   background: #666;
 }
-#main-menu nav > ul li:last-child {
+#main-menu nav > ul > li:last-child {
   border-right: 0;
 }
-#main-menu nav > ul li ul {
+#main-menu nav > ul > li ul {
   position: absolute;
   z-index: 20;
   left: -999999px;
   padding-left: 0;
 }
-#main-menu nav > ul li.active > a {
+#main-menu nav > ul > li.active > a {
   background: #f6f6f6;
   color: #444;
-  border-left: 1px solid #d4d4d4;
-  border-right: 1px solid #d4d4d4;
-  border-top: 1px solid #d4d4d4;
-  padding: 9px 6px 10px 6px;
 }
-#main-menu nav > ul li:hover ul {
+#main-menu nav > ul > li:hover ul {
   left: 0;
   top: 36px;
-  text-align: left;
-  width: 193px;
-  border-left: 1px solid #d4d4d4;
-  border-right: 1px solid #d4d4d4;
-  border-bottom: 1px solid #d4d4d4;
+  width: 100%;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 2px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 2px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 2px;
 }
-#main-menu nav > ul li:hover ul li {
+#main-menu nav > ul > li:hover ul li {
   display: block;
-  float: none;
   height: auto;
-  border: none;
 }
-#main-menu nav > ul li:hover ul li a {
+#main-menu nav > ul > li:hover ul li a {
+  display: block;
+  padding: 8px;
   font-size: 13px;
   color: #444;
   background: #f6f6f6;
   height: auto;
-  float: none;
 }
-#main-menu nav > ul li:hover ul li a:hover {
+#main-menu nav > ul > li:hover ul li a:hover, #main-menu nav > ul > li:hover ul li a:focus {
   background: #d4d4d4;
+  text-decoration: none;
 }
 
 .m-sub-menu {
