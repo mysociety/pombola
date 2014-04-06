@@ -4110,6 +4110,7 @@ NEWS & POLL
 #news h2,
 #twitter h2,
 #poll h2 {
+  font-size: .875em;
   text-transform: uppercase;
   color: #222222;
 }
@@ -4128,20 +4129,11 @@ NEWS & POLL
   /* 21px */
 }
 
-#twitter h2,
-#poll h2 {
-  font-size: .875em;
-}
-
 #news {
   padding: 2em 0 1em;
   float: left;
   width: 100%;
   max-width: 100%;
-}
-#news h2 {
-  font-size: 1.3em;
-  margin-bottom: 1.5em;
 }
 @media only all and (min-width: 640px), print {
   #news {
