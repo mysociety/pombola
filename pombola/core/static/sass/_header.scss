@@ -89,9 +89,9 @@ menu#mobile-top-tools {
     position: absolute;
     right: 0;
     top: 0;
-    padding: 0 50px 0 7px;
+    padding: 0 40px 0 7px;
     margin: 0;
-    width: 10em;
+    width: 5em;
     height: 26px;
     font-size: 14px;
     line-height: 16px;
@@ -100,11 +100,11 @@ menu#mobile-top-tools {
     -webkit-appearance: none;
     color: #fff;
 
-    -webkit-transition: border 100ms linear;
-    -moz-transition: border 100ms linear;
-    -ms-transition: border 100ms linear;
-    -o-transition: border 100ms linear;
-    transition: border 100ms linear;
+    -webkit-transition: border 100ms linear, width 100ms linear;
+    -moz-transition: border 100ms linear, width 100ms linear;
+    -ms-transition: border 100ms linear, width 100ms linear;
+    -o-transition: border 100ms linear, width 100ms linear;
+    transition: border 100ms linear, width 100ms linear;
 
     &::-webkit-input-placeholder {
       color: #fff;
@@ -127,6 +127,7 @@ menu#mobile-top-tools {
     }
 
     &:focus, &:hover:focus {
+      width: 10em;
       background-color: transparent;
       border-color: #fff;
       outline: none;
