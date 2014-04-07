@@ -1,69 +1,109 @@
-/* 5. PAGE SPECIFIC
--------------------------------------------------------------- */
-/* HOME */
-#page {
-  .home-left,
-  .home-right {
-    h2 {
-      margin: 0 0 10px 0;
-      background: none;
-      border-top: none;
-      color: $colour_grey;
-      font-size: 24px;
-      text-transform: uppercase;
-      &#home-intro {
-        display: none; } }
-    h3 {
-      background: none;
-      border-top: none; } }
-  .home-right {
-    .social-and-tools {
-      float: right;
-      display: block; } } }
-
-@media only all and (max-width: 640px), print {
-  #home-search #header-search-hansard-instead {
-    padding-left: 0.5em; } }
-
-#home-search {
+#home-hero {
   background: $colour_light_grey;
-  padding: 10px;
-  overflow: hidden;
-  label {
-    display: block;
-    margin-bottom: 10px;
-    color: $colour_grey;
-    font: {
-      weight: bold;
-      size: 17px; }; }
-  input {
-    border: none;
-    font-size: 15px;
-    padding: 6px 8px;
-    float: left;
-    margin: 0;
-    width: 200px; }
-  button {
-    @include button-reset;
-    float: left;
-    width: 50px;
-    height: 30px;
-    background: $colour_primary_light url(../images/search-icon.png) center no-repeat;
-    @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_primary_light, $colour_primary));
-    &:hover {
-      background: $colour_primary url(../images/search-icon.png) center no-repeat;
-      @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_primary, $colour_primary_light)); } }
-  >a {
-    float: left;
-    margin: 10px 0 0 0;
-    color: $colour_grey;
-    font-size: 14px;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline; } } }
+  @include border-radius(3px);
+  padding: 40px;
+  border: 1px solid darken($colour_light_grey, 10%);
+  margin-bottom: 30px;
 
-#home-featured-person {
-  margin-bottom: 30px; }
+  @media only screen and (max-width: 640px) {
+    padding: 20px;
+    @include border-radius(0);
+  }
+}
+
+#home-quote {
+  margin: 0 auto 40px auto;
+  width: 60%;
+
+  @media only screen and (max-width: 800px) {
+    width: 80%;
+  }
+
+  @media only screen and (max-width: 640px) {
+    width: auto;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  footer {
+    color: #999;
+  }
+}
+
+#home-cta {
+  display: table;
+  width: 70%;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 800px) {
+    width: 80%;
+  }
+
+  @media only screen and (max-width: 640px) {
+    width: auto;
+  }
+
+  a {
+    display: table-cell;
+    width: 50%;
+    background: darken($colour_primary_mid, 10%) url(../images/search-50px.png) 10px 50% no-repeat;
+    padding: 10px 10px 10px 70px;
+    color: #fff;
+    @include border-top-left-radius(4px);
+    @include border-bottom-left-radius(4px);
+    text-align: left;
+    font-size: 16px;
+    line-height: 21px;
+
+    @media only screen and (max-width: 640px) {
+      padding-left: 10px;
+      background-image: none;
+    }
+
+    strong {
+      display: block;
+    }
+
+    &:hover, &:focus {
+      text-decoration: none;
+      background-color: darken($colour_primary_mid, 15%);;
+    }
+  }
+
+  a + a {
+    background-color: $colour_primary_mid;
+    background-image: url(../images/hansard-50px.png);
+    border-left: 2px solid $colour_light_grey;
+    @include border-radius(0);
+    @include border-top-right-radius(4px);
+    @include border-bottom-right-radius(4px);
+
+    @media only screen and (max-width: 640px) {
+      background-image: none;
+    }
+
+    &:hover, &:focus {
+      background-color: darken($colour_primary_mid, 5%);
+    }
+  }
+}
+
+#home-intro p {
+  text-align: center;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 40px;
+}
+
+
+
 
 .featured-person {
   color: $colour_dark_grey;
@@ -157,96 +197,13 @@ ul#home-news-list {
       float: right;
       margin: 0 10px; } } }
 
-#home-mpratings {
-  border-top: 5px solid $colour_light_grey;
-  padding: 15px 10px 10px 10px;
-  img {
-    float: left;
-    width: 60px;
-    margin-right: 10px; }
-  h3.scorecard-overall {
-    padding: 0 0 0 70px;
-    margin: 0; } }
-
 #twitter,
 .tw-nub,
 .tw-follow {
-  display: none; }
-
-#home-links {
-  margin-bottom: 30px;
-  a {
-    &.aspirants {
-      @include border-radius(5px 5px 0 0);
-      color: $colour_white;
-      display: block;
-      margin: 10px 10px 3px 10px;
-      padding: 10px;
-      background: $colour_primary;
-      @include background(linear-gradient($colour_primary / 0.9, $colour_primary));
-      &:hover {
-        text-decoration: none;
-        background: $colour_primary / 0.9;
-        @include background(linear-gradient($colour_primary, $colour_primary / 0.9)); } }
-    &.citizens {
-      @include border-radius(0 0 5px 5px);
-      color: $colour_white;
-      display: block;
-      margin: 0 10px 10px 10px;
-      padding: 10px;
-      background: $colour_primary_light;
-      @include background(linear-gradient($colour_primary_light / 0.9, $colour_primary_light));
-      &:hover {
-        text-decoration: none;
-        background: $colour_primary_light / 0.9;
-        @include background(linear-gradient($colour_primary_light, $colour_primary_light / 0.9)); } } } }
+  display: none;
+}
 
 @media only all and (min-width: 640px), print {
-  #page {
-    .home-left {
-      float: left;
-      clear: left;
-      width: 420px;
-      margin-right: 30px;
-      h2#home-intro {
-        display: block;
-        text-transform: none;
-        color: $colour_primary;
-        margin-top: 15px;
-        line-height: 25px;
-        padding: 6px;
-        font: {
-          weight: normal;
-          size: 16px; };
-        .details {
-          display: none; }
-        .home-read-more {
-          text-transform: uppercase;
-          font-size: 12px;
-          color: $colour_middling_grey;
-          padding-right: 18px;
-          background: url(../images/chevron-down-sml.png) right 2px no-repeat;
-          &:hover {
-            color: $colour_middling_grey / 1.1;
-            text-decoration: none; }
-          &.active {
-            background: url(../images/chevron-up-sml.png) right 2px no-repeat; } } } }
-    .home-right {
-      float: left;
-      width: 510px; } } }
-
-@media only all and (min-width: 640px), print {
-  #home-search {
-    background: $colour_dark_grey;
-    margin: 30px 0;
-    padding: 20px;
-    label {
-      color: $colour_white; }
-    input {
-      max-width: 260px;
-      margin-right: 10px; }
-    >a {
-      color: $colour_grey; } }
   ul#home-news-list {
     margin-top: 15px;
     li {
@@ -254,13 +211,6 @@ ul#home-news-list {
         padding: 0; }
       img {
         margin-right: 0; } } }
-  #home-mpratings {
-    margin: 15px 0 30px 0;
-    padding: 0;
-    background: url(../images/ex-home.png) 0 0 no-repeat;
-    height: 224px;
-    img, h3 {
-      display: none; } }
   #twitter {
     display: block;
     float: left;
@@ -286,52 +236,7 @@ ul#home-news-list {
     .btn-text-green {
       margin-top: 10px;
       float: right; } }
-  #page .home-right .social-and-tools {
-    margin-top: 30px;
-    width: 110px;
-    position: relative;
-    padding: 0 0 20px 25px;
-    background: #dddddd;
-    ul {
-      margin: 20px 0; }
-    .tw-nub {
-      display: block;
-      width: 23px;
-      height: 26px;
-      position: absolute;
-      bottom: 17px;
-      left: -4px;
-      background: url(../images/nub.png) 0 0 no-repeat; }
-    .tw-follow {
-      @include inline-block; } }
-  #home-links {
-    overflow: hidden;
-    a {
-      width: 213px;
-      height: 60px;
-      float: left;
-      line-height: 30px;
-      font: {
-        size: 22px;
-        weight: bold; };
-      &.aspirants {
-        @include border-radius(5px 0 0 5px);
-        margin: 0 3px 0 0;
-        padding: 20px;
-        background: $colour_primary url(../images/big-chevron.png) 180px center no-repeat;
-        @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary / 0.9, $colour_primary));
-        &:hover {
-          background: $colour_primary / 0.9 url(../images/big-chevron.png) 180px center no-repeat;
-          @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary, $colour_primary / 0.9)); } }
-      &.citizens {
-        @include border-radius(0 5px 5px 0);
-        margin: 0;
-        padding: 20px;
-        background: $colour_primary_light url(../images/big-chevron.png) 180px center no-repeat;
-        @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary_light / 0.9, $colour_primary_light));
-        &:hover {
-          background: $colour_primary_light / 0.9 url(../images/big-chevron.png) 180px center no-repeat;
-          @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary_light, $colour_primary_light / 0.9)); } } } }
+
   .featured-person {
     border: 1px solid $colour_middling_grey;
     img {
@@ -376,56 +281,3 @@ ul#home-news-list {
         .rating-img {
           bottom: 10px; } } } } }
 
-@media only all and (min-width: 640px) and (max-width: 960px), print {
-  #page {
-    padding: 0 10px;
-    .home-left {
-      width: 320px; }
-    .home-right {
-      width: 45%;
-      float: right;
-      .social-and-tools {
-        position: relative;
-        right: auto;
-        top: auto;
-        float: left;
-        ul {
-          float: none;
-          li {
-            display: block; } } } } } }
-
-@media only all and (min-width: 640px) and (max-width: 880px) {
-  #page .home-right {
-    width: 380px;
-    .social-and-tools {
-      width: 355px;
-      margin: 0 0 20px 0;
-      padding: 10px;
-      .tw-nub {
-        display: none; }
-      ul {
-        float: right;
-        margin: 0;
-        li {
-          float: left; } }
-      .tw-follow {
-        float: left;
-        margin: 8px 0 0 10px; } } }
-  #home-links a {
-    width: 168px;
-    font-size: 18px;
-    line-height: 22px;
-    &.aspirants,
-    &.citizens,
-    &:hover.aspirants,
-    &:hover.citizens {
-      padding: 10px 10px 15px 10px;
-      background-position: 120px center; } } }
-
-@media only all and (min-width: 640px) and (max-width: 760px) {
-  #page .home-left {
-    width: 100%; }
-  #page .home-right {
-    float: left;
-    width: 510px;
-    margin-bottom: 20px; } }
