@@ -1,0 +1,8 @@
+<form id="senate" method="post">
+  {{ senate_form.non_field_errors }}
+  <h2><label for="comments">Tell the senate what you think</label></h2>
+  <p>We will also send any comments through to the Senate Majority Leader</p>
+  {{ senate_form.comments.errors }}
+  {{ senate_form.comments }}
+  <p class="last"><button type="submit">Comment</button>
+</form>
