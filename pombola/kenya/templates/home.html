@@ -40,6 +40,8 @@
         <p>Mzalendo (‘Patriot’ in Swahili) is a non-partisan project started in 2005 whose mission is to “keep an eye on the Kenyan parliament”. Mzalendo seeks to promote a stronger public voice and to enhance public participation in politics by providing relevant information about Parliament specifically about Senators and MPs activities.</p>
     </div>
 
+    <div id="home-primary">
+
     {% if settings.BLOG_RSS_FEED %}
         <h2>Editorial</h2>
         <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
@@ -48,6 +50,10 @@
             </li>
         </ul>
     {% endif %}
+
+    </div>
+
+    <div id="home-secondary">
 
     {% if featured_person != None %}
     <div id="home-featured-person">
@@ -79,5 +85,9 @@
             </div>
         {% endif %}
     {% endif %}
+
+    </div>
+
+    <div class="clearfix"></div>
 
 {% endblock %}

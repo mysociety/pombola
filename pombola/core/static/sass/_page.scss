@@ -113,11 +113,9 @@
         display: none; } }
     ul.comments li section {
       // max-width:590px;
-    } }
-  h2, h3 {
-    border-top: 4px solid $colour_primary;
-    background: $colour_muted;
-    padding: 10px; } }
+    }
+  }
+}
 
 @media only all and (min-width: 640px), print {
   #page {
@@ -287,14 +285,13 @@
         @include inline-block; }
       h3 {
         clear: both; } }
-    h2, h3 {
-      border-top: none;
-      background: none;
-      padding: 0; }
     .search-wrap {
       margin: 0; }
     .pagination .disabled {
-      display: none; } } }
+      display: none;
+    }
+  }
+}
 
 .page-title {
   display: block;
@@ -322,4 +319,6 @@
   .page-title {
     display: block;
     background: none;
-    padding: 0; } }
+    padding: 0;
+  }
+}
