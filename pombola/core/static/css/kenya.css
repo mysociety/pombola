@@ -558,6 +558,7 @@ pre {
     top: 13px;
     height: 34px;
     width: 180px;
+    margin-left: 0;
     background: url(../images/d-logo.png) 0 center no-repeat;
   }
   #logo.down {
@@ -608,19 +609,23 @@ menu#mobile-top-tools ul li a {
   display: block;
 }
 menu#mobile-top-tools ul li {
-  padding: 0.5em 1em 0 0;
+  padding: 0 10px;
 }
 menu#mobile-top-tools ul li a {
   color: white;
+  display: block;
+  line-height: 42px;
+  /* to match #site-wrapper */
+  text-transform: uppercase;
 }
 menu#mobile-top-tools ul li a img {
-  vertical-align: middle;
+  vertical-align: -3px;
 }
 
 #header-search {
   display: none;
   position: absolute;
-  top: 15px;
+  top: 17px;
   right: 0;
   height: auto;
   border: none;
@@ -732,7 +737,8 @@ menu#mobile-top-tools ul li a img {
 }
 #main-menu nav {
   width: 100%;
-  /* set to a max-width of 960px for large screens later on */
+  max-width: 980px;
+  /* override default 960px, to account for padding on list items */
   text-align: center;
   /* styles for top level menu */
 }
@@ -1145,7 +1151,7 @@ menu#mobile-top-tools ul li a img {
 
 #page {
   background: white;
-  padding-bottom: 30px;
+  padding: 30px 0;
 }
 #page.down {
   padding: 10px;

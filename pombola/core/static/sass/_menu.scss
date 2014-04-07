@@ -12,7 +12,8 @@ $no-menu-breakpoint: 640px;
   background: #444;
 
   nav {
-    width: 100%; /* set to a max-width of 960px for large screens later on */
+    width: 100%;
+    max-width: 980px; /* override default 960px, to account for padding on list items */
     text-align: center;
 
     ul {

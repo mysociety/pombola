@@ -30,6 +30,7 @@
     top: 13px;
     height: 34px;
     width: 180px;
+    margin-left: 0;
     background: url(../images/d-logo.png) 0 center no-repeat;
 
     &.down {
@@ -61,18 +62,21 @@ menu#mobile-top-tools {
   ul {
     @include list-reset;
     li {
-      padding: 0.5em 1em 0 0;
+      padding: 0 10px;
       a {
         color: $colour_white;
+        display: block;
+        line-height: 42px; /* to match #site-wrapper */
+        text-transform: uppercase;
         img {
-          vertical-align: middle; } } } } }
+          vertical-align: -3px; } } } } }
 
 // ------------------------------------------------------
 
 #header-search {
   display: none;
   position: absolute;
-  top: 15px;
+  top: 17px;
   right: 0;
   height: auto;
   border: none;
