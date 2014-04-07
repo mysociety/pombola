@@ -1,3 +1,18 @@
+@mixin input-placeholder-color($color){
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {
+    color: $color;
+  }
+  &::-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
 #site-header {
   clear: both;
   background-color: $colour_primary_mid;
@@ -104,27 +119,8 @@ menu#mobile-top-tools {
     -webkit-appearance: none;
     color: #fff;
 
-    -webkit-transition: border 100ms linear, width 100ms linear;
-    -moz-transition: border 100ms linear, width 100ms linear;
-    -ms-transition: border 100ms linear, width 100ms linear;
-    -o-transition: border 100ms linear, width 100ms linear;
-    transition: border 100ms linear, width 100ms linear;
-
-    &::-webkit-input-placeholder {
-      color: #fff;
-    }
-
-    &:-moz-placeholder {
-      color: #fff;
-    }
-
-    &::-moz-placeholder {
-      color: #fff;
-    }
-
-    &:-ms-input-placeholder {
-      color: #fff;
-    }
+    @include transition(border 100ms linear, width 100ms linear);
+    @include input-placeholder-color(#fff);
 
     &:hover {
       border-color: mix($colour_primary_mid, #fff, 60%);
@@ -137,6 +133,7 @@ menu#mobile-top-tools {
       outline: none;
       -webkit-box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
       box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
+      @include input-placeholder-color(mix($colour_primary_mid, #fff, 50%));
     }
 
   }
