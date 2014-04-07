@@ -32,4 +32,11 @@ class CountyPerformanceView(TemplateView):
         ]
         shuffle(context['share_partials'])
 
+        context['major_partials'] = [
+            '_county_share.html',
+            '_county_petition.html',
+            '_county_senate.html',
+        ]
+        shuffle(context['major_partials'])
+
         return context
