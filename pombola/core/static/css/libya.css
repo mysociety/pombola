@@ -128,7 +128,7 @@ body {
   font-family: 'Arial', sans-serif;
   color: #444;
   font-size: 100%;
-  background: #e6e6e6;
+  background: #444444;
 }
 
 p, h1, h2, h3 {
@@ -899,7 +899,9 @@ menu#mobile-top-tools ul li a img {
 @media only all and (min-width: 640px), print {
   #breadcrumb {
     display: block;
-    height: 40px;
+    height: 34px;
+    /* to match nav bar */
+    background-color: #e6e6e6;
   }
   #breadcrumb nav ul {
     list-style-type: none;
@@ -907,7 +909,9 @@ menu#mobile-top-tools ul li a img {
     margin: 0;
     display: block;
     width: 100%;
-    padding: 10px 0;
+    padding: 0;
+    line-height: 34px;
+    /* to match nav bar */
     margin-bottom: 10px;
     float: left;
   }
@@ -955,8 +959,8 @@ menu#mobile-top-tools ul li a img {
 }
 #site-footer {
   clear: both;
-  border-top: 4px solid #239e46;
-  background: #e6e6e6;
+  border-top: 4px solid #48bb60;
+  background: #444;
   overflow: hidden;
 }
 #site-footer > .wrapper {
@@ -965,28 +969,34 @@ menu#mobile-top-tools ul li a img {
   position: relative;
   padding-top: 5px;
 }
-#site-footer div.footer-section {
-  border-top: 2px solid #239e46;
+#site-footer .footer-section {
+  border-top: 2px solid #48bb60;
   padding: 10px;
 }
 @media print {
-  #site-footer div.footer-section {
+  #site-footer .footer-section {
     display: none;
   }
 }
-#site-footer div.footer-section:first-child {
+#site-footer .footer-section:first-child {
   border: none;
 }
 #site-footer h4 {
   font-size: 120%;
-  color: #239e46;
+  color: #ccc;
 }
-#site-footer div.footer-section > h4 {
+#site-footer a {
+  color: #aaa;
+}
+#site-footer a:hover, #site-footer a:focus {
+  color: #eee;
+}
+#site-footer .footer-section > h4 {
   margin-top: 1em;
 }
 #site-footer p {
-  font-style: italic;
-  color: #777777;
+  color: #888;
+  margin-bottom: 5px;
 }
 #site-footer ul {
   list-style-type: none;
@@ -1007,9 +1017,10 @@ menu#mobile-top-tools ul li a img {
   text-decoration: none;
 }
 #site-footer .subscribe-box {
+  float: left;
   display: table-caption;
   padding: 20px;
-  background: #239e46;
+  background: #48bb60;
 }
 @media print {
   #site-footer .subscribe-box {
@@ -1090,7 +1101,7 @@ menu#mobile-top-tools ul li a img {
     display: block;
     padding: 0;
   }
-  #site-footer div.footer-section {
+  #site-footer .footer-section {
     border: none;
     float: left;
     max-width: 250px;
