@@ -1,3 +1,5 @@
+from random import shuffle
+
 from django.views.generic.base import TemplateView
 
 from .forms import CountyPerformancePetitionForm, CountyPerformanceSenateForm
@@ -5,8 +7,9 @@ from .forms import CountyPerformancePetitionForm, CountyPerformanceSenateForm
 class CountyPerformanceView(TemplateView):
     """This view displays a page about county performance with calls to action
 
-    There are three major variants of the page that include different
-    information."""
+    There are some elements of the page that are supposed to be
+    randomly ordered.  There are also three major variants of the
+    page that include different information."""
 
     template_name = 'county-performance.html'
 
@@ -22,5 +25,11 @@ class CountyPerformanceView(TemplateView):
             'n': (False, False),
             None: (False, False),
         }[self.request.GET.get('variant')]
+
+        context['share_partials'] = [
+            '_share_twitter.html',
+            '_share_facebook.html',
+        ]
+        shuffle(context['share_partials'])
 
         return context

@@ -93,12 +93,11 @@
 
     <div id="share-petition">
       <p>Share this petition with other Kenyans and allow your voice to be heard.</p>
+      {% for share_partial in share_partials %}
       <p>
-        <a href="#" id="share-facebook">Share this article on Facebook</a>
+        {% include share_partial %}
       </p>
-      <p>
-        <a href="#" id="share-twitter">Share this article on Twitter</a>
-      </p>
+      {% endfor %}
     </div>
 
     <form id="petition">
