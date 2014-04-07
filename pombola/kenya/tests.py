@@ -12,3 +12,5 @@ class CountyPerformancePageTests(WebTest):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.html.get('a', {'id': 'share-facebook'}))
         self.assertTrue(response.html.get('a', {'id': 'share-twitter'}))
+        self.assertFalse(
+            response.html.findAll('div', {'id': 'surveyPromoBanner'}))
