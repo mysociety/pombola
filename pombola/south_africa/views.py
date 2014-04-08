@@ -429,13 +429,17 @@ class SAPersonDetail(PersonDetail):
 
         return tabulated
 
+    def list_contacts(self, kind_slugs):
+        return self.object.contacts.filter(kind__slug__in=kind_slugs).values_list(
+            'value', flat=True)
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
-        context['twitter_contacts'] = self.object.contacts.filter(kind__slug='twitter')
-        context['email_contacts'] = self.object.contacts.filter(kind__slug='email')
-        context['phone_contacts'] = self.object.contacts.filter(kind__slug__in=('cell', 'voice'))
-        context['fax_contacts'] = self.object.contacts.filter(kind__slug='fax')
-        context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
+        context['twitter_contacts'] = self.list_contacts(('twitter',))
+        context['email_contacts'] = self.list_contacts(('email',))
+        context['phone_contacts'] = self.list_contacts(('cell', 'voice'))
+        context['fax_contacts'] = self.list_contacts(('fax',))
+        context['address_contacts'] = self.list_contacts(('address',))
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
 
         # FIXME - the titles used here will need to be checked and fixed.
