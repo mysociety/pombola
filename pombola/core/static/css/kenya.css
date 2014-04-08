@@ -3113,6 +3113,30 @@ ul.social-buttons li {
   height: 30px;
   padding: 0;
 }
+.object-titles .big-btn-text-fb {
+  background: #3b5998 url(../images/facebook-16px.png) 50% 50% no-repeat;
+}
+.object-titles .big-btn-text-fb:hover {
+  background-color: #344e86;
+}
+.object-titles .big-btn-text-tw {
+  background: #55acee url(../images/twitter-16px.png) 50% 50% no-repeat;
+}
+.object-titles .big-btn-text-tw:hover {
+  background-color: #3ea1ec;
+}
+.object-titles .big-btn-text-red {
+  background: #c32310 url(../images/pencil-16px.png) 50% 50% no-repeat;
+}
+.object-titles .big-btn-text-red:hover {
+  background-color: #ab1f0e;
+}
+.object-titles .big-btn-text-green {
+  background: #009f57 url(../images/comment-16px.png) 50% 50% no-repeat;
+}
+.object-titles .big-btn-text-green:hover {
+  background-color: #008649;
+}
 
 #page .object-sidebar .profile-pic {
   background: #fff;
