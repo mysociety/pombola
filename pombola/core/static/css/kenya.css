@@ -3041,3 +3041,151 @@ ul.social-buttons li {
   float: left;
   padding: 4px;
 }
+
+#page.object-base {
+  padding-bottom: 0;
+}
+
+.object-header {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.object-sidebar {
+  float: left;
+  width: 240px;
+}
+
+#page .profile-pic,
+#page .profile-map,
+#page .profile-info {
+  position: static;
+  /* override position:absolute */
+  overflow: visible;
+  /* override overflow:hidden */
+  width: auto;
+}
+
+.object-titles {
+  position: relative;
+  margin-left: 270px;
+  /* to clear the floating sidebar */
+}
+.object-titles h1 {
+  font-size: 34px;
+  line-height: 34px;
+  margin-bottom: 5px;
+}
+.object-titles p {
+  font-size: 21px;
+  line-height: 24px;
+  margin-bottom: 0;
+  color: #999;
+}
+.object-titles p + p {
+  margin-top: 5px;
+}
+.object-titles .object_menu {
+  /* this isn't shown on the Person page, but _is_ shown on Place and Organisation pages */
+  margin-top: 20px;
+}
+.object-titles .tools {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.object-titles .tools li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.object-titles .tools li {
+  float: left;
+  margin-left: 10px;
+}
+.object-titles .tools a {
+  text-indent: -9999px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+#page .object-sidebar .profile-pic {
+  background: #fff;
+  border: 1px solid #ddd;
+  height: auto;
+}
+#page .object-sidebar .profile-pic img {
+  max-height: none;
+  max-width: 230px;
+  width: 230px;
+  margin: 4px 4px 1px 4px;
+}
+#page .object-sidebar .profile-map {
+  background: #fff;
+  border: 1px solid #ddd;
+  height: 240px;
+}
+#page .object-sidebar .profile-map #map_canvas {
+  width: 230px;
+  height: 230px;
+  margin: 4px 0 0 4px;
+}
+.object-sidebar .constituency-party,
+.object-sidebar .contact-details {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+#page .object-sidebar .constituency-party ul, .object-sidebar .constituency-party p, #page
+.object-sidebar .contact-details ul,
+.object-sidebar .contact-details p {
+  margin-bottom: 0;
+}
+#page .object-sidebar .constituency-party ul + h3, #page .object-sidebar .constituency-party p + h3, #page
+.object-sidebar .contact-details ul + h3, #page
+.object-sidebar .contact-details p + h3 {
+  margin-top: 15px;
+}
+
+/* clear old party link formatting */
+#page .profile-info .constituency-party ul li a {
+  background: transparent;
+  padding: 0;
+  color: #009245;
+  font-size: inherit;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+}
+#page .profile-info .constituency-party ul li a:hover {
+  background: transparent;
+  color: #004422;
+  /* this comes from _html_elements.scss */
+}
+
+.object-detail {
+  background-color: #f2f2f2;
+  border-top: 1px solid #ebebeb;
+  margin-top: 30px;
+  padding: 30px 0;
+}
+.object-detail .object-detail-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+#page .object-detail .large-container {
+  clear: none;
+  margin-left: 270px;
+}
+.object-detail .large-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+}

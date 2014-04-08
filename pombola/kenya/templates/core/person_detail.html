@@ -1,0 +1,106 @@
+{% extends 'core/person_base.html' %}
+{% load url from future %}
+
+{% block title %}{{ object.name }} Overview{% endblock %}
+
+{% block subcontent %}
+
+  {% if object.summary %}
+    <h2>Summary</h2>
+    <div class="markdown">
+      {{ object.summary }}
+    </div>
+  {% endif %}
+
+
+  {% if object.has_scorecards %}
+    <span class="score-overall-{{ object.scorecard_overall_as_word }} scorecard-single-smiley">
+    </span>
+
+    <h2>Scorecards</h2>
+
+
+    <p>
+      The
+      {{ object.scorecard_overall_as_word }}
+      past performance of {{ object.name }} can be seen in their
+      <a href="{% url "person_scorecard" slug=object.slug %}">scorecard</a>.
+    </p>
+  {% endif %}
+
+
+  <h2>Experience</h2>
+
+  <p>
+    We have records of
+    {{ object.position_set.all.political.count }} political,
+    {{ object.position_set.all.education.count }} educational and
+    {{ object.position_set.all.other.count     }} other
+    positions held. See <a href="{% url "person_experience" slug=object.slug %}">the full list</a>.
+  </p>
+
+
+  {% if settings.ENABLED_FEATURES.hansard %}
+    {% with hansard_count=object.hansard_entries.count %}
+      {% if hansard_count %}
+        <h2>Parliamentary appearanes</h2>
+
+        <p>
+          {{ object.name }} has spoken {{ hansard_count }}
+          time{{ hansard_count|pluralize }} in Parliament. Read <a href="{% url "person_appearances" slug=object.slug %}">what they had to say</a>.
+        <p>
+      {% endif %}
+    {% endwith %}
+  {% endif %}
+
+
+  {% with contact_detail_count=object.contacts.all.count %}
+    {% if contact_detail_count %}
+      <h2>Contact Details</h2>
+
+      <p>
+        There
+        {{ contact_detail_count|pluralize:"is,are" }}
+        {{ contact_detail_count }}
+        way{{ contact_detail_count|pluralize }} to
+        <a href="{% url "person_contact_details" slug=object.slug %}">get in touch</a>
+        with {{ object.name }}.
+      </p>
+    {% endif %}
+  {% endwith %}
+
+
+  <h2>Personal Details</h2>
+
+  <dl>
+    {% if object.name != object.legal_name %}
+        <dt>Full name</dt>
+        <dd>{{ object.legal_name }}</dd>
+    {% endif %}
+
+    {% if object.additional_names %}
+        <dt>Also known as</dt>
+        <dd>
+          {% for name in object.additional_names %}
+            {% if not forloop.first %}
+                {% if forloop.last %}or{% else %},{% endif %}
+            {% endif %}
+            {{ name }}
+          {% endfor %}
+        </dd>
+    {% endif %}
+
+    {% if object.date_of_birth %}
+        <dt>Born</dt>
+        <dd>
+          {{ object.date_of_birth }}
+          {# TODO - add age in years #}
+        </dd>
+    {% endif %}
+
+    {# TODO - add death date too if it exists #}
+  </dl>
+
+  {% include 'disqus_comments.html' %}
+
+{% endblock %}
