@@ -3213,12 +3213,36 @@ ul.social-buttons li {
   margin-left: 270px;
 }
 .object-detail .large-container {
+  overflow: hidden;
+  /* clears floats */
   background: #fff;
   border: 1px solid #ddd;
   padding: 20px;
 }
 .object-detail .large-container + .large-container {
   margin-top: 30px;
+}
+
+.person-detail-experience,
+.person-detail-hansard {
+  width: 48%;
+  float: left;
+}
+
+.person-detail-hansard {
+  margin-left: 4%;
+}
+
+@media only screen and (max-width: 800px) {
+  .person-detail-experience,
+  .person-detail-hansard {
+    width: auto;
+    float: none;
+    margin-left: 0;
+  }
+}
+.object-clear {
+  clear: left;
 }
 
 @media only screen and (max-width: 639px) {
