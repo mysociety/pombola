@@ -283,6 +283,23 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
 
     can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
 
+    # Additional fields added largely for Popolo spec compliance:
+    biography = MarkupField(blank=True, default='')
+    national_identity = models.CharField(max_length=100, blank=True)
+    family_name = models.CharField(max_length=300, blank=True)
+    given_name = models.CharField(max_length=300, blank=True)
+    additional_name = models.CharField(max_length=300, blank=True)
+    honorific_prefix = models.CharField(max_length=300, blank=True)
+    honorific_suffix = models.CharField(max_length=300, blank=True)
+    sort_name = models.CharField(max_length=300, blank=True)
+
+    def __init__(self, *args, **kwargs):
+        super(Person, self).__init__(*args, **kwargs)
+        # If there hasn't been a sort name explicitly specified, use
+        # the last whitespace-separated part of the full name:
+        if self.legal_name and not self.sort_name:
+            self.sort_name = self.legal_name.strip().split()[-1]
+
     @property
     def name(self):
         alternative_names_to_use = self.alternative_names.filter(name_to_use=True)
@@ -459,6 +476,16 @@ class AlternativePersonName(ModelBase):
     person = models.ForeignKey(Person, related_name='alternative_names')
     alternative_name = models.CharField(max_length=300)
     name_to_use = models.BooleanField(default=False)
+
+    start_date = ApproximateDateField(blank=True, help_text=date_help_text)
+    end_date = ApproximateDateField(blank=True, help_text=date_help_text)
+    note = ApproximateDateField(blank=True, help_text=date_help_text)
+
+    family_name = models.CharField(max_length=300, blank=True)
+    given_name = models.CharField(max_length=300, blank=True)
+    additional_name = models.CharField(max_length=300, blank=True)
+    honorific_prefix = models.CharField(max_length=300, blank=True)
+    honorific_suffix = models.CharField(max_length=300, blank=True)
 
     objects = ManagerBase()
 
@@ -658,7 +685,7 @@ class Place(ModelBase, ScorecardMixin):
                                reverse=True)
         # Order the people by last name:
         return sorted(result_dict.items(),
-                      key=lambda t: t[0].legal_name.split()[-1])
+                      key=lambda t: t[0].sort_name)
 
     def related_people_child_places(self, positions_filter=significant_positions_filter):
         """Find significant people associated with child places"""
