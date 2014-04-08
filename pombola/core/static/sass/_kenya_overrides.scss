@@ -149,6 +149,16 @@ $comment-color: #009f57;
       margin-top: 15px;
     }
   }
+
+  .contact-details {
+    p {
+      word-break: break-all; /* stops really long email addresses breaking out of sidebar */
+    }
+    .contact-details-address {
+      word-break: normal;
+      white-space: pre; /* addresses are often formatted with line breaks, so preserve them */
+    }
+  }
 }
 
 /* clear old party link formatting */

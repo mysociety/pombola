@@ -3170,6 +3170,15 @@ ul.social-buttons li {
 .object-sidebar .contact-details p + h3 {
   margin-top: 15px;
 }
+.object-sidebar .contact-details p {
+  word-break: break-all;
+  /* stops really long email addresses breaking out of sidebar */
+}
+.object-sidebar .contact-details .contact-details-address {
+  word-break: normal;
+  white-space: pre;
+  /* addresses are often formatted with line breaks, so preserve them */
+}
 
 /* clear old party link formatting */
 #page .profile-info .constituency-party ul li a {
