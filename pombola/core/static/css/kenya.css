@@ -3083,6 +3083,8 @@ ul.social-buttons li {
   line-height: 24px;
   margin-bottom: 0;
   color: #999;
+  margin-right: 180px;
+  /* stops long paragraphs interferring with share buttons */
 }
 .object-titles p + p {
   margin-top: 5px;
@@ -3217,4 +3219,48 @@ ul.social-buttons li {
 }
 .object-detail .large-container + .large-container {
   margin-top: 30px;
+}
+
+@media only screen and (max-width: 640px) {
+  .object-sidebar {
+    float: none;
+    width: auto;
+    margin-top: -30px;
+    padding: 20px 10px;
+    background: #f2f2f2;
+    border-bottom: 1px solid #ebebeb;
+  }
+  #page .object-sidebar .profile-pic {
+    width: 240px;
+    margin: 0 auto;
+  }
+
+  #page .profile-info h3 {
+    text-transform: uppercase;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+
+  .object-titles {
+    margin-left: 0;
+    padding: 20px 20px 0 20px;
+  }
+  .object-titles p {
+    margin-right: 0;
+  }
+  .object-titles .tools {
+    position: static;
+    margin: 20px 0;
+  }
+  .object-titles .tools li {
+    float: none;
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 0;
+  }
+
+  #page .object-detail .large-container {
+    margin-left: 0;
+  }
 }
