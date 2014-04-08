@@ -242,3 +242,19 @@ $comment-color: #009f57;
   }
 
 }
+
+@media only screen and (min-width: 640px) and (max-width: 979px) {
+
+  .wrapper,
+  #site-header .wrapper,
+  .object-header,
+  .object-detail .object-detail-inner {
+    margin: 0 10px;
+  }
+
+  .wrapper,
+  #main-menu nav {
+    width: auto;
+  }
+
+}
