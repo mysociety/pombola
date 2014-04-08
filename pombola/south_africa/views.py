@@ -436,7 +436,12 @@ class SAPersonDetail(PersonDetail):
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.list_contacts(('twitter',))
-        context['email_contacts'] = self.list_contacts(('email',))
+        # The email attribute of the person might also be duplicated
+        # in a contact of type email, so create a set of email
+        # addresses:
+        context['email_contacts'] = set(self.list_contacts(('email',)))
+        if self.object.email:
+            context['email_contacts'].add(self.object.email)
         context['phone_contacts'] = self.list_contacts(('cell', 'voice'))
         context['fax_contacts'] = self.list_contacts(('fax',))
         context['address_contacts'] = self.list_contacts(('address',))

@@ -277,6 +277,10 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     # tribe
     summary = MarkupField(blank=True, default='')
 
+    # The "primary" email address in some sense - there may be others
+    # (or this one) in contacts.
+    email = models.EmailField(blank=True)
+
     contacts = generic.GenericRelation(Contact)
     images = generic.GenericRelation(Image)
     objects = PersonManager()
