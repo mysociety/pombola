@@ -6,7 +6,7 @@
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block subcontent %}
-  
+
 
   {% if object.summary %}
   <h2>Summary</h2>
@@ -18,7 +18,7 @@
 
   {% if object.has_scorecards %}
     <h2>Scorecards</h2>
-    
+
     <p>
       The past performance of {{ object.name }} can be seen in its
       <a href="{% url "place_scorecard" slug=object.slug %}">scorecard</a>.
@@ -61,7 +61,7 @@
   </p>
 
 
-  {% if settings.ENABLED_FEATURES.place_data and object.placedata %}    
+  {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
     <h2>Data</h2>
     <p>
       There is some
@@ -74,7 +74,7 @@
   {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
     {% with project_count=object.project_set.count %}
       <h2>CDF Projects</h2>
-      
+
       <p>
         We have information on
         <a href="{% url "place_projects" slug=object.slug %}">
@@ -86,7 +86,10 @@
   {% endif %}
 
   {% block disqus_comments %}
-    {% include 'disqus_comments.html' %}
+    {% if settings.COUNTRY_APP != 'kenya' %}
+      {# Kenyan comments are looked after by pombola/kenya/templates/core/object_base.html #}
+      {% include 'disqus_comments.html' %}
+    {% endif %}
   {% endblock %}
 
 {% endblock %}

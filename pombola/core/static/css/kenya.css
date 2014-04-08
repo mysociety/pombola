@@ -3070,6 +3070,8 @@ ul.social-buttons li {
   position: relative;
   margin-left: 270px;
   /* to clear the floating sidebar */
+  padding-top: 5px;
+  /* visually balance sidebar photo against top of h1 */
 }
 .object-titles h1 {
   font-size: 34px;
@@ -3212,4 +3214,7 @@ ul.social-buttons li {
   background: #fff;
   border: 1px solid #ddd;
   padding: 20px;
+}
+.object-detail .large-container + .large-container {
+  margin-top: 30px;
 }

@@ -29,6 +29,7 @@ $comment-color: #009f57;
 .object-titles {
   position: relative;
   margin-left: $sidebar-width + 30px; /* to clear the floating sidebar */
+  padding-top: 5px; /* visually balance sidebar photo against top of h1 */
 
   h1 {
     font-size: 34px;
@@ -183,6 +184,10 @@ $comment-color: #009f57;
     background: #fff;
     border: 1px solid #ddd;
     padding: 20px;
+  }
+
+  .large-container + .large-container {
+    margin-top: 30px;
   }
 
 }
