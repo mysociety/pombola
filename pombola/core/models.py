@@ -270,7 +270,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     title = models.CharField(max_length=100, blank=True)
     legal_name = models.CharField(max_length=300)
     slug = models.SlugField(max_length=200, unique=True, help_text="auto-created from first name and last name")
-    gender = models.CharField(max_length=1, choices=(('m','Male'),('f','Female')) )
+    gender = models.CharField(max_length=20, help_text="this is typically, but not restricted to, 'male' or 'female'")
     date_of_birth = ApproximateDateField(blank=True, help_text=date_help_text)
     date_of_death = ApproximateDateField(blank=True, help_text=date_help_text)
     # religion
