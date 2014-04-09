@@ -26,7 +26,9 @@ from pombola.hansard.views import HansardPersonMixin
 class KEPersonDetail(HansardPersonMixin, PersonDetail):
 
     def get_context_data(self, **kwargs):
-        return super(KEPersonDetail, self).get_context_data(**kwargs)
+        context = super(KEPersonDetail, self).get_context_data(**kwargs)
+        context['hansard_entries_to_show'] = ":3"
+        return context
 
 
 def sanitize_parameter(key, parameters, allowed_values, default_value=None):
