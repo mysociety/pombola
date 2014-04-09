@@ -232,8 +232,9 @@ $comment-color: #009f57;
       margin-bottom: 0;
     }
 
-    #page & .ongoing h4 {
-      font-weight: bold;
+    #page & .ongoing h4,
+    #page & .appearance h4 {
+      font-weight: bold; /* don't want old positions to be emboldened */
     }
 
     p {

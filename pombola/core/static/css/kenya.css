@@ -3261,9 +3261,11 @@ ul.social-buttons li {
   color: #777;
   margin-bottom: 0;
 }
-#page .person-detail-experience > ul .ongoing h4, #page
-.person-detail-hansard > ul .ongoing h4 {
+#page .person-detail-experience > ul .ongoing h4, #page .person-detail-experience > ul .appearance h4, #page
+.person-detail-hansard > ul .ongoing h4, #page
+.person-detail-hansard > ul .appearance h4 {
   font-weight: bold;
+  /* don't want old positions to be emboldened */
 }
 .person-detail-experience > ul p,
 .person-detail-hansard > ul p {

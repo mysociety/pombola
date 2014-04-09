@@ -16,11 +16,21 @@
       {% if hansard_count %}
       <div class="person-detail-hansard">
         <h2><a href="{% url "person_appearances" slug=object.slug %}">Parliamentary appearanes</a></h2>
-        <p>
-          {{ object.name }} has spoken {{ hansard_count }}
-          time{{ hansard_count|pluralize }} in Parliament. Read <a href="{% url "person_appearances" slug=object.slug %}">what they had to say</a>.
-        <p>
-        <a href="{% url "person_appearances" slug=object.slug %}">See full experience</a>
+        <ul>
+          <li class="appearance">
+            <h4>This is a placeholder appearance made by {{ object.name }} in a parliamentary debate.</h4>
+            <p class="appearance-date">10th March 2014</p>
+          </li>
+          <li class="appearance">
+            <h4>This is a placeholder appearance made by {{ object.name }} in a parliamentary debate.</h4>
+            <p class="appearance-date">10th March 2014</p>
+          </li>
+          <li class="appearance">
+            <h4>This is a placeholder appearance made by {{ object.name }} in a parliamentary debate.</h4>
+            <p class="appearance-date">10th March 2014</p>
+          </li>
+        </ul>
+        <a href="{% url "person_appearances" slug=object.slug %}">See all {{ hansard_count }} appearances</a>
       </div>
       {% endif %}
     {% endwith %}
