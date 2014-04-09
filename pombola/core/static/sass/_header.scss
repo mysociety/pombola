@@ -1,21 +1,7 @@
-@mixin input-placeholder-color($color){
-  &::-webkit-input-placeholder {
-    color: $color;
-  }
-  &:-moz-placeholder {
-    color: $color;
-  }
-  &::-moz-placeholder {
-    color: $color;
-  }
-  &:-ms-input-placeholder {
-    color: $color;
-  }
-}
-
 #site-header {
   clear: both;
-  background-color: $colour_primary_mid;
+  background: $colour_primary;
+  @include background(linear-gradient($colour_primary / 0.75, $colour_primary));
   .wrapper {
     overflow: hidden; } }
 
@@ -38,35 +24,17 @@
   text-indent: -999999em;
   width: 147px;
   background: url(../images/m-logo.png) 0 center no-repeat;
-
   @media only all and (min-width: 640px), print {
     position: absolute;
     left: 0;
-    top: 13px;
+    top: 10px;
     height: 34px;
-    width: 180px;
-    margin-left: 0;
+    width: 418px;
     background: url(../images/d-logo.png) 0 center no-repeat;
-
     &.down {
       width: 600px;
       height: 50px;
       background: url(../images/down-logo.png) 0 center no-repeat; } } }
-
-#tagline {
-  display: block;
-  position: absolute;
-  top: 15px;
-  left: -999px;
-  height: 34px;
-  line-height: 34px;
-  color: mix($colour_primary_mid, #fff, 30%);
-
-  @media only all and (min-width: 640px), print {
-    left: 200px;
-  }
-
-}
 
 // ------------------------------------------------------
 
@@ -77,98 +45,43 @@ menu#mobile-top-tools {
   ul {
     @include list-reset;
     li {
-      padding: 0 10px;
+      padding: 0.5em 1em 0 0;
       a {
         color: $colour_white;
-        display: block;
-        margin-top: 10px;
-        text-transform: uppercase;
         img {
-          vertical-align: -3px; } } } } }
+          vertical-align: middle; } } } } }
 
 // ------------------------------------------------------
 
 #header-search {
   display: none;
-  position: absolute;
-  top: 17px;
-  right: 0;
-  height: auto;
-  border: none;
 
   @media only all and (min-width: 640px), print {
-    display: block;
-  }
+    display: block; }
 
-  @media print {
-    display: none;
-  }
+  @media print { display: none; }
 
+  float: right;
+  background: transparent;
+  margin: 5px 5px 5px 15px;
+  height: auto;
+  border: none;
   input {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0 40px 0 7px;
-    margin: 0;
-    width: 5em;
-    height: 26px;
-    font-size: 14px;
-    line-height: 16px;
-    border: 1px solid transparent;
-    background-color: transparent;
-    -webkit-appearance: none;
-    color: #fff;
-
-    @include transition(border 100ms linear, width 100ms linear);
-    @include input-placeholder-color(#fff);
-
-    &:hover {
-      border-color: mix($colour_primary_mid, #fff, 60%);
-    }
-
-    &:focus, &:hover:focus {
-      width: 10em;
-      background-color: transparent;
-      border-color: #fff;
-      outline: none;
-      -webkit-box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
-      box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
-      @include input-placeholder-color(mix($colour_primary_mid, #fff, 50%));
-    }
-
-  }
-
+    padding: 1px 4px 1px 8px;
+    border: 1px solid $colour_grey;
+    height: 22px;
+    @include border-radius(5px 0 0 5px);
+    float: left;
+    width: 10em;
+    border: 1px solid $colour_black;
+    font-size: 14px; }
   button {
+    float: left;
     @include button-reset;
-    @include border-radius(0);
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 32px;
-    height: 28px;
-    background: transparent url(../images/search-icon.png) center no-repeat;
-
-    -webkit-transition: background 100ms linear;
-    -moz-transition: background 100ms linear;
-    -ms-transition: background 100ms linear;
-    -o-transition: background 100ms linear;
-    transition: background 100ms linear;
-
+    background: $colour_black url(../images/search-icon.png) center no-repeat;
+    width: 26px;
+    height: 26px;
+    margin: 0 0 0 0;
+    @include border-radius(0 5px 5px 0);
     &:hover {
-      background-color: mix($colour_primary_mid, #fff, 60%);
-    }
-
-    &:focus {
-      outline: none;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-    }
-
-  }
-
-  &:hover input {
-    border-color: mix($colour_primary_mid, #fff, 60%);
-  }
-
-}
+      background-color: $colour_blackish; } } }
