@@ -3267,6 +3267,11 @@ ul.social-buttons li {
   font-weight: bold;
   /* don't want old positions to be emboldened */
 }
+.person-detail-experience > ul .appearance h4 a,
+.person-detail-hansard > ul .appearance h4 a {
+  display: block;
+  /* stops flicker as cursor moves between lines */
+}
 .person-detail-experience > ul p,
 .person-detail-hansard > ul p {
   color: #999;

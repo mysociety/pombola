@@ -237,6 +237,10 @@ $comment-color: #009f57;
       font-weight: bold; /* don't want old positions to be emboldened */
     }
 
+    .appearance h4 a {
+      display: block; /* stops flicker as cursor moves between lines */
+    }
+
     p {
       color: #999;
       font-style: italic;
