@@ -208,13 +208,13 @@ $comment-color: #009f57;
 .person-detail-hansard {
   width: 48%;
   float: left;
+  background: transparent url(../images/mz-person-detail-appearances.png) 0 0 no-repeat;
 
   & > * {
     margin-left: 30px;
   }
 
   & > h2 {
-    padding-top: 5px;
     margin-bottom: 0;
   }
 
@@ -253,13 +253,13 @@ $comment-color: #009f57;
     font-size: 14px;
     line-height: 14px;
     text-align: center;
-    color: $colour_primary;
   }
 
 }
 
 .person-detail-hansard {
   margin-left: 4%;
+  background-image: url(../images/mz-person-detail-hansard.png);
 }
 
 @media only screen and (max-width: 800px) {

@@ -3227,6 +3227,7 @@ ul.social-buttons li {
 .person-detail-hansard {
   width: 48%;
   float: left;
+  background: transparent url(../images/mz-person-detail-appearances.png) 0 0 no-repeat;
 }
 .person-detail-experience > *,
 .person-detail-hansard > * {
@@ -3234,7 +3235,6 @@ ul.social-buttons li {
 }
 .person-detail-experience > h2,
 .person-detail-hansard > h2 {
-  padding-top: 5px;
   margin-bottom: 0;
 }
 .person-detail-experience > ul,
@@ -3282,11 +3282,11 @@ ul.social-buttons li {
   font-size: 14px;
   line-height: 14px;
   text-align: center;
-  color: #009245;
 }
 
 .person-detail-hansard {
   margin-left: 4%;
+  background-image: url(../images/mz-person-detail-hansard.png);
 }
 
 @media only screen and (max-width: 800px) {
