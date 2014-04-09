@@ -3227,7 +3227,7 @@ ul.social-buttons li {
 .person-detail-hansard {
   width: 48%;
   float: left;
-  background: transparent url(../images/mz-person-detail-appearances.png) 0 0 no-repeat;
+  background: transparent url(../images/mz-person-detail-experience.png) 0 0 no-repeat;
 }
 .person-detail-experience > *,
 .person-detail-hansard > * {
@@ -3286,7 +3286,7 @@ ul.social-buttons li {
 
 .person-detail-hansard {
   margin-left: 4%;
-  background-image: url(../images/mz-person-detail-hansard.png);
+  background-image: url(../images/mz-person-detail-appearances.png);
 }
 
 @media only screen and (max-width: 800px) {

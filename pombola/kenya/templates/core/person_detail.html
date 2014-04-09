@@ -20,6 +20,7 @@
           {{ object.name }} has spoken {{ hansard_count }}
           time{{ hansard_count|pluralize }} in Parliament. Read <a href="{% url "person_appearances" slug=object.slug %}">what they had to say</a>.
         <p>
+        <a href="{% url "person_appearances" slug=object.slug %}">See full experience</a>
       </div>
       {% endif %}
     {% endwith %}
