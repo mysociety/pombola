@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
-from pombola.kenya.views import KEPersonDetail
+from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
 
 urlpatterns = patterns('',
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
@@ -8,4 +8,8 @@ urlpatterns = patterns('',
     url(r'^find-polling-station$', TemplateView.as_view(template_name='find-polling-station.html') ),
     url(r'^person/(?P<slug>[-\w]+)/$',
         KEPersonDetail.as_view(), name='person'),
+    url(r'^person/(?P<slug>[-\w]+)/appearances/$',
+        KEPersonDetailAppearances.as_view(),
+        {'sub_page': 'appearances'},
+        name='person'),
 )
