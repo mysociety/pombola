@@ -17,18 +17,14 @@
       <div class="person-detail-hansard">
         <h2><a href="{% url "person_appearances" slug=object.slug %}">Parliamentary appearanes</a></h2>
         <ul>
-          <li class="appearance">
-            <h4>This is a placeholder appearance made by {{ object.name }} in a parliamentary debate.</h4>
-            <p class="appearance-date">10th March 2014</p>
-          </li>
-          <li class="appearance">
-            <h4>This is a placeholder appearance made by {{ object.name }} in a parliamentary debate.</h4>
-            <p class="appearance-date">10th March 2014</p>
-          </li>
-          <li class="appearance">
-            <h4>This is a placeholder appearance made by {{ object.name }} in a parliamentary debate.</h4>
-            <p class="appearance-date">10th March 2014</p>
-          </li>
+          {% for entry in hansard_entries|slice:":3" %}
+            <li class="appearance">
+              <h4>Speech in <strong>{{ entry.sitting.venue.name }}</h4>
+              <p>{{ entry.content|truncatewords:40 }}</p>
+              <a href="{{ entry.get_absolute_url }}">view</a>
+              <p class="appearance-date">{{ entry.sitting.start_date}}</p>
+            </li>
+          {% endfor %}
         </ul>
         <a href="{% url "person_appearances" slug=object.slug %}">See all {{ hansard_count }} appearances</a>
       </div>
