@@ -915,9 +915,7 @@ menu#mobile-top-tools ul li a img {
 @media only all and (min-width: 640px), print {
   #breadcrumb {
     display: block;
-    height: 34px;
-    /* to match nav bar */
-    background-color: #e6e6e6;
+    height: 40px;
   }
   #breadcrumb nav ul {
     list-style-type: none;
@@ -925,9 +923,7 @@ menu#mobile-top-tools ul li a img {
     margin: 0;
     display: block;
     width: 100%;
-    padding: 0;
-    line-height: 34px;
-    /* to match nav bar */
+    padding: 10px 0;
     margin-bottom: 10px;
     float: left;
   }
@@ -3034,6 +3030,18 @@ ul.social-buttons li {
   padding: 4px;
 }
 
+@media only all and (min-width: 640px), print {
+  #breadcrumb {
+    height: 34px;
+    /* to match nav bar */
+    background-color: #e6e6e6;
+  }
+  #breadcrumb nav ul {
+    padding: 0;
+    line-height: 34px;
+    /* to match nav bar */
+  }
+}
 #page.object-base {
   padding-bottom: 0;
 }

@@ -6,18 +6,15 @@
   #breadcrumb {
 
     @media print { display: none; }
-
+    
     display: block;
-    height: 34px; /* to match nav bar */
-    background-color: $colour_muted;
-
+    height: 40px;
     nav {
       ul {
         @include list-reset-soft;
         display: block;
         width: 100%;
-        padding: 0;
-        line-height: 34px; /* to match nav bar */
+        padding: 10px 0;
         margin-bottom: 10px;
         float: left;
         li,
