@@ -263,6 +263,16 @@ $comment-color: #009f57;
   background-image: url(../images/mz-person-detail-appearances.png);
 }
 
+/* used by old code on the /person/name/experience page */
+#page.object-base .large-container .left-col,
+#page.object-base .large-container .right-col {
+  width: 48%;
+}
+
+#page.object-base .large-container .left-col {
+  margin-right: 4%;
+}
+
 @media only screen and (max-width: 800px) {
   .person-detail-experience,
   .person-detail-hansard {
@@ -273,6 +283,13 @@ $comment-color: #009f57;
 
   .person-detail-hansard {
     margin-top: 20px;
+  }
+
+  #page.object-base .large-container .left-col,
+  #page.object-base .large-container .right-col {
+    width: auto;
+    float: none;
+    margin: 0 0 20px 0;
   }
 }
 
