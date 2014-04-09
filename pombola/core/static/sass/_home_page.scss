@@ -319,6 +319,7 @@ ul#home-news-list {
   display: block;
   width: 100%;
   height: 300px;
+  overflow: hidden; /* fixes bug in Opera Mini where twitter widget overflows into footer */
 
   iframe {
     height: 250px;

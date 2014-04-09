@@ -614,8 +614,7 @@ menu#mobile-top-tools ul li {
 menu#mobile-top-tools ul li a {
   color: white;
   display: block;
-  line-height: 42px;
-  /* to match #site-wrapper */
+  margin-top: 10px;
   text-transform: uppercase;
 }
 menu#mobile-top-tools ul li a img {
@@ -2618,7 +2617,7 @@ ul.scorecard li article header .details .source a {
     width: 47%;
   }
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 639px) {
   #home-primary, #home-secondary {
     float: none;
     width: auto;
@@ -2812,6 +2811,8 @@ ul#home-news-list li img, ul.home-news-list li img {
   display: block;
   width: 100%;
   height: 300px;
+  overflow: hidden;
+  /* fixes bug in Opera Mini where twitter widget overflows into footer */
 }
 #twitter iframe {
   height: 250px;
