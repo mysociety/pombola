@@ -1,0 +1,44 @@
+#site-footer {
+  border-top-color: $colour_primary_mid;
+  background: #444;
+
+  .footer-section {
+    border-top-color: $colour_primary_mid;
+  }
+
+  h4 {
+    color: #ccc;
+  }
+
+  a {
+    color: #aaa;
+
+    &:hover, &:focus {
+      color: #eee;
+    }
+  }
+
+  p {
+    font-style: normal;
+    color: #888;
+    margin-bottom: 5px;
+  }
+
+  ul {
+    @include list-reset-soft;
+    clear: both;
+
+    li {
+      padding: 5px 0;
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .subscribe-box {
+    float: left;
+    background: $colour_primary_mid;
+  }
+}
