@@ -1,223 +1,118 @@
-$pull-out-background: #f2f0e7;
-$serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+/* 5. PAGE SPECIFIC
+-------------------------------------------------------------- */
+/* HOME */
+#page {
+  .home-left,
+  .home-right {
+    h2 {
+      margin: 0 0 10px 0;
+      background: none;
+      border-top: none;
+      color: $colour_grey;
+      font-size: 24px;
+      text-transform: uppercase;
+      &#home-intro {
+        display: none; } }
+    h3 {
+      background: none;
+      border-top: none; } }
+  .home-right {
+    .social-and-tools {
+      float: right;
+      display: block; } } }
 
-#home-hero {
-  background: $pull-out-background;
-  @include border-radius(3px);
-  padding: 40px;
-  border: 1px solid darken($pull-out-background, 10%);
+@media only all and (max-width: 640px), print {
+  #home-search #header-search-hansard-instead {
+    padding-left: 0.5em; } }
 
-  @media only screen and (max-width: 640px) {
-    padding: 20px;
-    @include border-radius(0);
-  }
-}
-
-#home-quote {
-  margin: 0 auto 40px auto;
-  width: 60%;
-
-  @media only screen and (max-width: 800px) {
-    width: 80%;
-  }
-
-  @media only screen and (max-width: 640px) {
-    width: auto;
-    margin-bottom: 20px;
-  }
-
-  p {
-    font-family: $serif-font-family;
-    font-weight: bold;
-    font-style: italic;
-    font-size: 24px;
-    line-height: 28px;
-  }
-
-  footer {
-    color: #999;
-  }
-}
-
-#home-cta {
-  display: table;
-  width: 70%;
-  margin: 0 auto;
-
-  @media only screen and (max-width: 800px) {
-    width: 80%;
-  }
-
-  @media only screen and (max-width: 640px) {
-    width: auto;
-  }
-
-  a {
-    display: table-cell;
-    width: 50%;
-    background: darken($colour_primary_mid, 10%) url(../images/search-50px.png) 10px 50% no-repeat;
-    padding: 10px 10px 10px 70px;
-    color: #fff;
-    @include border-top-left-radius(4px);
-    @include border-bottom-left-radius(4px);
-    text-align: left;
-    font-size: 16px;
-    line-height: 21px;
-
-    @media only screen and (max-width: 640px) {
-      padding-left: 10px;
-      background-image: none;
-    }
-
-    strong {
-      display: block;
-    }
-
-    &:hover, &:focus {
-      text-decoration: none;
-      background-color: darken($colour_primary_mid, 15%);;
-    }
-  }
-
-  a + a {
-    background-color: $colour_primary_mid;
-    background-image: url(../images/hansard-50px.png);
-    border-left: 2px solid $pull-out-background;
-    @include border-radius(0);
-    @include border-top-right-radius(4px);
-    @include border-bottom-right-radius(4px);
-
-    @media only screen and (max-width: 640px) {
-      background-image: none;
-    }
-
-    &:hover, &:focus {
-      background-color: darken($colour_primary_mid, 5%);
-    }
-  }
-}
-
-#home-intro p {
-  text-align: center;
-  font-size: 19px;
-  line-height: 28px;
-  margin: 40px;
-}
-
-#home-primary {
-  float: left;
-  width: 56%;
-}
-
-#home-secondary {
-  float: right;
-  width: 38%;
-}
-
-@media only screen and (max-width: 800px) {
-  #home-primary, #home-secondary {
-    width: 47%;
-  }
-}
-
-#home-primary, #home-secondary {
-
-  @media only screen and (max-width: 639px) {
-    float: none;
-    width: auto;
-    margin: 0 10px;
-  }
-
-  h2 {
-    color: #b5b2a5;
-    text-align: center;
-    border-bottom: 3px solid $pull-out-background;
-    padding-bottom: 10px;
-    font-size: 21px;
-    line-height: 28px;
-  }
-}
+#home-search {
+  background: $colour_light_grey;
+  padding: 10px;
+  overflow: hidden;
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: $colour_grey;
+    font: {
+      weight: bold;
+      size: 17px; }; }
+  input {
+    border: none;
+    font-size: 15px;
+    padding: 6px 8px;
+    float: left;
+    margin: 0;
+    width: 200px; }
+  button {
+    @include button-reset;
+    float: left;
+    width: 50px;
+    height: 30px;
+    background: $colour_primary_light url(../images/search-icon.png) center no-repeat;
+    @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_primary_light, $colour_primary));
+    &:hover {
+      background: $colour_primary url(../images/search-icon.png) center no-repeat;
+      @include background(url(../images/search-icon.png) center no-repeat, linear-gradient($colour_primary, $colour_primary_light)); } }
+  >a {
+    float: left;
+    margin: 10px 0 0 0;
+    color: $colour_grey;
+    font-size: 14px;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline; } } }
 
 #home-featured-person {
-  background: $pull-out-background;
-  padding: 20px;
-  margin-bottom: 40px;
-}
+  margin-bottom: 30px; }
 
 .featured-person {
-
+  color: $colour_dark_grey;
+  margin: 0 0 30px 0;
+  border-top: 3px solid $colour_middling_grey;
+  border-bottom: 3px solid $colour_middling_grey;
+  background: $colour_light_grey;
+  overflow: hidden;
   img {
     float: left;
-    max-width: 100px;
-    height: auto;
-  }
-
-  #home-secondary & h2 {
-    text-align: left;
-    padding-bottom: 0;
-    margin-bottom: 5px;
-    border-bottom: none;
-    line-height: 21px;
-  }
-
+    max-width: 90px;
+    height: auto; }
   .featured-person-info {
-    margin-left: 120px;
-
+    position: relative;
+    margin-left: 110px;
+    min-height: 130px;
     .feature-nav {
-      margin-left: -5px;
-
+      display: none; }
+    h2 {
+      padding-left: 0 !important;
+      margin-bottom: 0 !important;
       a {
-        @include button-reset;
-        display: block;
-        width: 20px;
-        height: 22px;
-        float: left;
-        @include opacity(0.7);
-      }
-
-      .feature-prev {
-        background: transparent url(../images/chevron-left-alt.png) center no-repeat;
-        margin-right: 10px;
-
+        font-size: 18px;
+        text-transform: none;
         &:hover {
-          @include opacity(1);
-        }
-      }
-
-      .feature-next {
-        background: transparent url(../images/chevron-right-alt.png) center no-repeat;
-
-        &:hover {
-          @include opacity(1);
-        }
-      }
-    }
-
+          text-decoration: none; } } }
     .feature-person-role {
       color: $colour_grey;
-      margin-bottom: 5px;
-    }
-
+      font-style: italic; }
+    .feature-person-summary {
+      display: none; }
     .rating-container {
+      position: absolute;
+      bottom: 0;
+      right: 10px;
       margin: 0;
-
       .rating {
         max-width: 300px;
-        margin: 0 40px 15px 0;
+        margin: 0 40px 7px 0;
         font-size: 17px;
         a {
           color: $colour_dark_grey;
           &:hover {
             text-decoration: none;
-            color: $colour_black;
-          }
-        }
-      }
-
+            color: $colour_black; } } }
       .rating-img {
         position: absolute;
         right: 0;
-        bottom: 10px;
+        bottom: 0;
         height: 32px;
         width: 32px;
         &.bad {
@@ -225,104 +120,312 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
         &.average {
           background: url(/static/images/d-smiley-sprite.png) -40px -42px no-repeat; }
         &.good {
-          background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat; }
-      }
-    }
-  }
-
+          background: url(/static/images/d-smiley-sprite.png) -1px 0 no-repeat; } } } }
   &.featured-person-placeholder {
     text-align: center;
     height: 250px;
-    background: $colour_primary url(/static/images/logo-450-x-150.png) center center no-repeat;
-  }
-
+    background: $colour_primary url(/static/images/logo-450-x-150.png) center center no-repeat; }
   &.featured-person-loading {
     height: 250px;
     text-align: center;
-
     p {
       margin: 30px 0;
-      color: $colour_grey;
-    }
-  }
-}
+      color: $colour_grey; } } }
 
 ul#home-news-list {
   @include list-reset-soft;
-
+  border-top: 5px solid $colour_light_grey;
+  padding-top: 15px;
   li {
-    position: relative;
-    padding: 30px 10px 30px 90px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
     border-bottom: 3px solid $colour_light_grey;
-
-    &:first-child {
-      margin-top: -10px; /* compensate for margin-bottom on h2 above */
-    }
-
-    h3 {
-      padding: 0;
-      margin: 0 0 10px 0;
-      font-size: 18px;
-      line-height: 21px;
-
-      a {
-        text-decoration: none;
-      }
-    }
-
-    p {
+    &:last-child {
+      border-bottom: 0; }
+    h3, p {
+      padding: 0 10px;
       margin: 0;
-    }
-
-    p.meta {
-      position: absolute;
-      top: 50%;
-      left: 20px;
-      width: 40px;
-      text-align: center;
-      font-family: $serif-font-family;
-      color: #b5b2a5;
-      margin-top: -2.3em;
-
-      span {
-        display: block;
-
-        &.day {
-          display: none;
-        }
-
-        &.month {
-          text-transform: uppercase;
-        }
-
-        &.date {
-          font-size: 2em;
-          line-height: 0.5em;
-          margin: 0.1em 0 0.3em 0;
-        }
-
-        &.year {
-          font-size: 1.2em;
-          line-height: 1em;
-        }
-      }
-    }
-
+      a {
+        text-decoration: none; } }
+    p {
+      &.meta {
+        font: {
+          style: italic;
+          size: 13px; };
+        margin-bottom: 10px; } }
     img {
       float: right;
-      margin: 0 10px;
-    }
-  }
-}
+      margin: 0 10px; } } }
 
-#twitter {
-  display: block;
-  width: 100%;
-  height: 300px;
-  overflow: hidden; /* fixes bug in Opera Mini where twitter widget overflows into footer */
+#home-mpratings {
+  border-top: 5px solid $colour_light_grey;
+  padding: 15px 10px 10px 10px;
+  img {
+    float: left;
+    width: 60px;
+    margin-right: 10px; }
+  h3.scorecard-overall {
+    padding: 0 0 0 70px;
+    margin: 0; } }
 
-  iframe {
-    height: 250px;
-  }
-}
+#twitter,
+.tw-nub,
+.tw-follow {
+  display: none; }
 
+#home-links {
+  margin-bottom: 30px;
+  a {
+    &.aspirants {
+      @include border-radius(5px 5px 0 0);
+      color: $colour_white;
+      display: block;
+      margin: 10px 10px 3px 10px;
+      padding: 10px;
+      background: $colour_primary;
+      @include background(linear-gradient($colour_primary / 0.9, $colour_primary));
+      &:hover {
+        text-decoration: none;
+        background: $colour_primary / 0.9;
+        @include background(linear-gradient($colour_primary, $colour_primary / 0.9)); } }
+    &.citizens {
+      @include border-radius(0 0 5px 5px);
+      color: $colour_white;
+      display: block;
+      margin: 0 10px 10px 10px;
+      padding: 10px;
+      background: $colour_primary_light;
+      @include background(linear-gradient($colour_primary_light / 0.9, $colour_primary_light));
+      &:hover {
+        text-decoration: none;
+        background: $colour_primary_light / 0.9;
+        @include background(linear-gradient($colour_primary_light, $colour_primary_light / 0.9)); } } } }
+
+@media only all and (min-width: 640px), print {
+  #page {
+    .home-left {
+      float: left;
+      clear: left;
+      width: 420px;
+      margin-right: 30px;
+      h2#home-intro {
+        display: block;
+        text-transform: none;
+        color: $colour_primary;
+        margin-top: 15px;
+        line-height: 25px;
+        padding: 6px;
+        font: {
+          weight: normal;
+          size: 16px; };
+        .details {
+          display: none; }
+        .home-read-more {
+          text-transform: uppercase;
+          font-size: 12px;
+          color: $colour_middling_grey;
+          padding-right: 18px;
+          background: url(../images/chevron-down-sml.png) right 2px no-repeat;
+          &:hover {
+            color: $colour_middling_grey / 1.1;
+            text-decoration: none; }
+          &.active {
+            background: url(../images/chevron-up-sml.png) right 2px no-repeat; } } } }
+    .home-right {
+      float: left;
+      width: 510px; } } }
+
+@media only all and (min-width: 640px), print {
+  #home-search {
+    background: $colour_dark_grey;
+    margin: 30px 0;
+    padding: 20px;
+    label {
+      color: $colour_white; }
+    input {
+      max-width: 260px;
+      margin-right: 10px; }
+    >a {
+      color: $colour_grey; } }
+  ul#home-news-list {
+    margin-top: 15px;
+    li {
+      h3, p {
+        padding: 0; }
+      img {
+        margin-right: 0; } } }
+  #home-mpratings {
+    margin: 15px 0 30px 0;
+    padding: 0;
+    background: url(../images/ex-home.png) 0 0 no-repeat;
+    height: 224px;
+    img, h3 {
+      display: none; } }
+  #twitter {
+    display: block;
+    float: left;
+    width: 375px;
+    h2 {
+      color: $colour_grey;
+      font-size: 18px;
+      text-transform: uppercase; }
+    .twitter-feed {
+      border: 4px solid #dddddd; }
+    .tw-wrap {
+      padding: 20px;
+      min-height: 58px;
+      background: url(../images/quotes.png) 10px 10px no-repeat; }
+    p {
+      margin: 0;
+      &.meta {
+        color: $colour_grey;
+        margin-top: 10px;
+        font: {
+          size: 13px;
+          style: italic; }; } }
+    .btn-text-green {
+      margin-top: 10px;
+      float: right; } }
+  #page .home-right .social-and-tools {
+    margin-top: 30px;
+    width: 110px;
+    position: relative;
+    padding: 0 0 20px 25px;
+    background: #dddddd;
+    ul {
+      margin: 20px 0; }
+    .tw-nub {
+      display: block;
+      width: 23px;
+      height: 26px;
+      position: absolute;
+      bottom: 17px;
+      left: -4px;
+      background: url(../images/nub.png) 0 0 no-repeat; }
+    .tw-follow {
+      @include inline-block; } }
+  #home-links {
+    overflow: hidden;
+    a {
+      width: 213px;
+      height: 60px;
+      float: left;
+      line-height: 30px;
+      font: {
+        size: 22px;
+        weight: bold; };
+      &.aspirants {
+        @include border-radius(5px 0 0 5px);
+        margin: 0 3px 0 0;
+        padding: 20px;
+        background: $colour_primary url(../images/big-chevron.png) 180px center no-repeat;
+        @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary / 0.9, $colour_primary));
+        &:hover {
+          background: $colour_primary / 0.9 url(../images/big-chevron.png) 180px center no-repeat;
+          @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary, $colour_primary / 0.9)); } }
+      &.citizens {
+        @include border-radius(0 5px 5px 0);
+        margin: 0;
+        padding: 20px;
+        background: $colour_primary_light url(../images/big-chevron.png) 180px center no-repeat;
+        @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary_light / 0.9, $colour_primary_light));
+        &:hover {
+          background: $colour_primary_light / 0.9 url(../images/big-chevron.png) 180px center no-repeat;
+          @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary_light, $colour_primary_light / 0.9)); } } } }
+  .featured-person {
+    border: 1px solid $colour_middling_grey;
+    img {
+      max-width: 180px; }
+    .featured-person-info {
+      margin-left: 200px;
+      max-width: 300px;
+      min-height: 180px;
+      .feature-nav {
+        display: block;
+        float: right;
+        a {
+          @include button-reset;
+          display: block;
+          width: 20px;
+          height: 22px;
+          float: left;
+          @include opacity(0.7); }
+        .feature-prev {
+          background: transparent url(../images/chevron-left-alt.png) center no-repeat;
+          margin-right: 10px;
+          &:hover {
+            @include opacity(1); } }
+        .feature-next {
+          background: transparent url(../images/chevron-right-alt.png) center no-repeat;
+          &:hover {
+            @include opacity(1); } } }
+      h2 {
+        margin: 15px 0 0 0 !important;
+        line-height: 30px;
+        a {
+          font-size: 24px; } }
+      .feature-person-summary {
+        display: block;
+        padding: 0 0 40px 0;
+        p {
+          font-size: 12px; } }
+      .rating-container {
+        bottom: 10px;
+        .rating {
+          margin: 0 40px 15px 0; }
+        .rating-img {
+          bottom: 10px; } } } } }
+
+@media only all and (min-width: 640px) and (max-width: 960px), print {
+  #page {
+    padding: 0 10px;
+    .home-left {
+      width: 320px; }
+    .home-right {
+      width: 45%;
+      float: right;
+      .social-and-tools {
+        position: relative;
+        right: auto;
+        top: auto;
+        float: left;
+        ul {
+          float: none;
+          li {
+            display: block; } } } } } }
+
+@media only all and (min-width: 640px) and (max-width: 880px) {
+  #page .home-right {
+    width: 380px;
+    .social-and-tools {
+      width: 355px;
+      margin: 0 0 20px 0;
+      padding: 10px;
+      .tw-nub {
+        display: none; }
+      ul {
+        float: right;
+        margin: 0;
+        li {
+          float: left; } }
+      .tw-follow {
+        float: left;
+        margin: 8px 0 0 10px; } } }
+  #home-links a {
+    width: 168px;
+    font-size: 18px;
+    line-height: 22px;
+    &.aspirants,
+    &.citizens,
+    &:hover.aspirants,
+    &:hover.citizens {
+      padding: 10px 10px 15px 10px;
+      background-position: 120px center; } } }
+
+@media only all and (min-width: 640px) and (max-width: 760px) {
+  #page .home-left {
+    width: 100%; }
+  #page .home-right {
+    float: left;
+    width: 510px;
+    margin-bottom: 20px; } }
