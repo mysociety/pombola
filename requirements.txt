@@ -58,7 +58,7 @@ django-mapit==1.0.3
 
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
 # Note, if the subsequent -e are ever removed, please remove manually from virtualenv/src !
--e git+git://github.com/mysociety/sayit.git@52c4445d1b206d4c4ea2c30c7f129b85b64cac00#egg=django-sayit
+-e git+git://github.com/mysociety/sayit.git@55a4bba537ada6b822c1b01a904c9452e86de13d#egg=django-sayit
 -e git+git://github.com/mysociety/za-hansard.git@master#egg=za-hansard
 git+git://github.com/mysociety/popit-resolver@abcfc79d787c8ca054560a4911352fed8aa8c40d
 -e git+git://github.com/mysociety/popit-django@a11ef97919f2ae35ef1ef1e2a3f0553ad1ba1e6d#egg=popit-django
@@ -129,13 +129,6 @@ GDAL
 # This comes as standard in Python 2.7+ anyway
 # Pinned to 1.1 rather than 1.2.1 to save us having to use --allow-all-external
 argparse==1.1
-
-# An old migration in za-hansard requires django-sluggable to be installed.
-# at some point in the future we should stop this being needed, perhaps by
-# editing the migrations to remove it.
-# In an ideal world, this should be pulled in by sayit, but it isn't.
-# See https://github.com/mysociety/sayit/issues/161
--e git+https://github.com/mysociety/django-sluggable@with_unique_with#egg=django-sluggable
 
 # Used for keeping an eye on this file.
 pip-tools==0.3.4
