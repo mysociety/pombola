@@ -1,49 +1,30 @@
 #site-footer {
   clear: both;
-  border-top: 4px solid $colour_primary_mid;
-  background: #444;
+  border-top: 4px solid $colour_primary;
+  background: $colour_muted;
   overflow: hidden;
-
-  > .wrapper {
+  >.wrapper {
     display: table;
     caption-side: top;
     position: relative;
-    padding-top: 5px;
-  }
+    padding-top: 5px; }
+    div.footer-section {
+      @media print { display: none; }      
+      border-top: 2px solid $colour_primary;
+      &:first-child {
+        border: none; }
+      padding: 10px; }
+    h4 {
+      font-size: 120%;
+      color: $colour_primary; }
 
-  .footer-section {
-    border-top: 2px solid $colour_primary_mid;
-    padding: 10px;
-
-    @media print { display: none; }
-
-    &:first-child {
-      border: none;
+    div.footer-section > h4 {
+      margin-top: 1em;
     }
-  }
-
-  h4 {
-    font-size: 120%;
-    color: #ccc;
-  }
-
-  a {
-    color: #aaa;
-
-    &:hover, &:focus {
-      color: #eee;
-    }
-  }
-
-  .footer-section > h4 {
-    margin-top: 1em;
-  }
 
   p {
-    color: #888;
-    margin-bottom: 5px;
-  }
-
+    font-style: italic;
+    color: $colour_blackish; }
   ul {
     @include list-reset-soft;
     clear: both;
@@ -52,11 +33,10 @@
       a:hover {
         text-decoration: none; } } }
   .subscribe-box {
-    @media print { display: none; }
-    float: left;
+    @media print { display: none; }    
     display: table-caption;
     padding: 20px;
-    background: $colour_primary_mid;
+    background: $colour_primary;
     h2 {
       color: $colour_white;
       margin: 0;
@@ -112,7 +92,7 @@
     >.wrapper {
       display: block;
       padding: 0; }
-    .footer-section {
+    div.footer-section {
       border: none;
       float: left;
       max-width: 250px;
