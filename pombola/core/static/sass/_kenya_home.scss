@@ -133,7 +133,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
     color: #b5b2a5;
     text-align: center;
     border-bottom: 3px solid $pull-out-background;
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
     font-size: 21px;
     line-height: 28px;
   }
