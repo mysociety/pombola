@@ -4,5 +4,5 @@
   {% thumbnail object.image "598x200" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ object.caption }}" />
   {% endthumbnail %}
+  <div class="caption"><div class="background"></div><h2>{{ object.caption }}</h2><p>{{ object.description }}</p></div>
 </a>
-

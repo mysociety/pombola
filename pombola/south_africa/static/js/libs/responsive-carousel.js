@@ -309,7 +309,7 @@
  */
 
 (function($) {
-	
+
 	var pluginName = "carousel",
 		initSelector = "." + pluginName,
 		activeClass = pluginName + "-active",
@@ -323,14 +323,14 @@
 				forward = deltaX < 0,
 				nextNum = activeNum + (forward ? 1 : -1),
 				$to = $carousel.find( "." + itemClass ).eq( nextNum - 1 );
-				
+
 			if( !$to.length ){
 				$to = $carousel.find( "." + itemClass )[ forward ? "first" : "last" ]();
 			}
-			
+
 			return [ $from, $to, nextNum-1 ];
 		};
-		
+
 	// Touch handling
 	$( document )
 		.on( "touch.dragmove", initSelector, function( e, data ){
@@ -339,7 +339,7 @@
 				return;
 			}
 			var activeSlides = getActiveSlides( $( this ), data.deltaX );
-			
+
 			activeSlides[ 0 ].css( "left", data.deltaX + "px" );
 			activeSlides[ 1 ].css( "left", data.deltaX < 0 ? data.w + data.deltaX + "px" : -data.w + data.deltaX + "px" );
 		} )
@@ -349,22 +349,22 @@
 			}
 			var activeSlides = getActiveSlides( $( this ), data.deltaX ),
 				newSlide = Math.abs( data.deltaX ) > 45;
-			
+
 			$( this ).one( navigator.userAgent.indexOf( "AppleWebKit" ) ? "webkitTransitionEnd" : "transitionEnd", function(){
 				activeSlides[ 0 ].add( activeSlides[ 1 ] ).css( "left", "" );
 				$( this ).trigger( "goto." + pluginName, [ activeSlides[ 1 ], activeSlides[ 2 ] ] );
 			});
-				
+
 			if( newSlide ){
 				activeSlides[ 0 ].removeClass( activeClass ).css( "left", data.deltaX > 0 ? data.w  + "px" : -data.w  + "px" );
 				activeSlides[ 1 ].addClass( activeClass ).css( "left", 0 );
 			}
 			else {
 				activeSlides[ 0 ].css( "left", 0);
-				activeSlides[ 1 ].css( "left", data.deltaX > 0 ? -data.w  + "px" : data.w  + "px" );	
+				activeSlides[ 1 ].css( "left", data.deltaX > 0 ? -data.w  + "px" : data.w  + "px" );
 			}
 		} );
-		
+
 }(jQuery));
 
 /*
@@ -419,7 +419,7 @@
 
 						pagLink = pagLink.closest( "a" );
 						var href = pagLink.attr( "href" );
-						
+
 						if( pagLink.closest( "." + paginationClass ).length && href ){
 							$( this )[ pluginName ]( "goTo", parseFloat( href.split( "#" )[ 1 ] ) );
 							e.preventDefault();
@@ -437,10 +437,10 @@
 					.trigger( "goto." + pluginName );
 			}
 		};
-			
+
 	// add methods
-	$.extend( $.fn[ pluginName ].prototype, paginationMethods ); 
-	
+	$.extend( $.fn[ pluginName ].prototype, paginationMethods );
+
 	// create pagination on create and update
 	$( document )
 		.on( "create." + pluginName, initSelector, function(){
@@ -451,6 +451,61 @@
 		.on( "update." + pluginName, initSelector, function(){
 			$( this )[ pluginName ]( "_createPagination" );
 		} );
+
+}(jQuery));
+/*
+ * responsive-carousel autoplay extension
+ * https://github.com/filamentgroup/responsive-carousel
+ *
+ * Copyright (c) 2012 Filament Group, Inc.
+ * Licensed under the MIT, GPL licenses.
+ */
+
+(function( $, undefined ) {
+	var pluginName = "carousel",
+		initSelector = "." + pluginName,
+		interval = 4000,
+		autoPlayMethods = {
+			play: function(){
+				var $self = $( this ),
+					intAttr = $self.attr( "data-interval" ),
+					thisInt = parseFloat( intAttr ) || interval;
+				return $self.data(
+					"timer",
+					setInterval( function(){
+						$self[ pluginName ]( "next" );
+					},
+					thisInt )
+				);
+			},
+
+			stop: function(){
+				clearTimeout( $( this ).data( "timer" ) );
+			},
+
+			_bindStopListener: function(){
+				return $(this).bind( "mousedown", function(){
+					$( this )[ pluginName ]( "stop" );
+				} );
+			},
+
+			_initAutoPlay: function(){
+				var autoplay = $( this ).attr( "data-autoplay");
+				if( autoplay === true || ( autoplay !== null && autoplay !== false ) ){
+					$( this )
+						[ pluginName ]( "_bindStopListener" )
+						[ pluginName ]( "play" );
+				}
+			}
+		};
+
+	// add methods
+	$.extend( $.fn[ pluginName ].prototype, autoPlayMethods );
+
+	// DOM-ready auto-init
+	$( document ).on( "create." + pluginName, initSelector, function(){
+		$( this )[ pluginName ]( "_initAutoPlay" );
+	} );
 
 }(jQuery));
 /*
