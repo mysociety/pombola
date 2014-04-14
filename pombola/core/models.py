@@ -496,6 +496,9 @@ class AlternativePersonName(ModelBase):
     def __unicode__(self):
         return self.alternative_name + (" [*]" if self.name_to_use else "")
 
+    def get_admin_url(self):
+        return False
+
     class Meta:
         unique_together = ("person", "alternative_name")
 
