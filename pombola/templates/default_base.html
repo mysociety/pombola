@@ -101,8 +101,15 @@
         <script>
             // Make sure the wrapper has a minimum height of the
             // absolutely-positioned sidebar within it.
-            var pro_h = document.getElementById('hfProfileInfo').offsetHeight + 210;
-            document.getElementById('hfWrap').style.minHeight = pro_h + 'px';
+            var profileElement = document.getElementById('hfProfileInfo'),
+                contentWrapper = document.getElementById('hfWrap'),
+                profileHeight;
+            if (profileElement) {
+                profileHeight = profileElement.offsetHeight + 210;
+                if (contentWrapper) {
+                    contentWrapper.style.minHeight = profileHeight + 'px';
+                }
+            }
         </script>
 
         <footer id="site-footer">
