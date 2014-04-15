@@ -1,4 +1,5 @@
-<form id="senate" method="post">
+<form id="senate" method="post" action="{% url 'county-performance-senate-submission' %}">
+  {% csrf_token %}
   {{ senate_form.non_field_errors }}
   <h2><label for="comments">Tell the senate what you think</label></h2>
   <p>We will also send any comments through to the Senate Majority Leader</p>

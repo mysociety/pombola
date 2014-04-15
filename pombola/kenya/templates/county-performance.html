@@ -18,6 +18,8 @@
 
 {% block content %}
 
+  {% if not correct_errors %}
+
   <h1>How are our taxpayer shillings really being spent?</h1>
 
   <p>A recent report by Kenya&rsquo;s Controller of Budget highlights questionable spending practices in our counties. Over 50% of our counties spent NO money on development!</p>
@@ -91,14 +93,20 @@
     </div>
     {% endif %}
 
+  {% endif %}
+
     {% for partial in major_partials %}
       {% include partial %}
     {% endfor %}
+
+  {% if not correct_errors %}
 
     <div id="survey">
       <p>Help us know our visitors by taking our 5 minute survey</p>
       <a href="#" id="take-survey">Take Survey</a>
     </div>
+
+  {% endif %}
 
   </div>
 

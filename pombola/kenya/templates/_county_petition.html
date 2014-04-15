@@ -1,4 +1,5 @@
-<form id="petition">
+<form id="petition" method="post" action="{% url 'county-performance-petition-submission' %}">
+  {% csrf_token %}
   <h2>
     <label for="name">If you believe that Country Budgets need to be spent responsibly, then add your name to our petition asking for greater government accountability</label>
   </h2>
