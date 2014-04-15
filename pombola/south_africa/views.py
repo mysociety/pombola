@@ -250,23 +250,6 @@ class SAPlaceDetailSub(PlaceDetailSub):
         return context
 
 
-def key_position_sort_last_name(position):
-    """Take a position and return its person's last name
-
-    This is intended for use as the key attribute of .sort() or
-    sorted() when sorting positions, so that the positions are sorted
-    by the last name of the associated person.  It's possible with the
-    current code for a person to have an empty legal name (although
-    presumably this is an error) in which case return an empty string
-    so that these broken cases are obvious at the beginning of the
-    sort."""
-
-    if position.person.legal_name:
-        return position.person.legal_name.split()[-1]
-    else:
-        return ''
-
-
 class SAOrganisationDetailView(OrganisationDetailView):
 
     def get_context_data(self, **kwargs):
@@ -279,7 +262,7 @@ class SAOrganisationDetailView(OrganisationDetailView):
         # of their holder's last name.
         context['positions'] = sorted(
             context['positions'],
-            key=key_position_sort_last_name)
+            key=lambda p: p.person.sort_name)
 
         return context
 
@@ -363,7 +346,7 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
 
         context['sorted_positions'] = sorted(
                 context['sorted_positions'],
-                key=key_position_sort_last_name)
+                key=lambda p: p.person.sort_name)
 
         return context
 
@@ -456,13 +439,22 @@ class SAPersonDetail(PersonDetail):
 
         return tabulated
 
+    def list_contacts(self, kind_slugs):
+        return self.object.contacts.filter(kind__slug__in=kind_slugs).values_list(
+            'value', flat=True)
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
-        context['twitter_contacts'] = self.object.contacts.filter(kind__slug='twitter')
-        context['email_contacts'] = self.object.contacts.filter(kind__slug='email')
-        context['phone_contacts'] = self.object.contacts.filter(kind__slug__in=('cell', 'voice'))
-        context['fax_contacts'] = self.object.contacts.filter(kind__slug='fax')
-        context['address_contacts'] = self.object.contacts.filter(kind__slug='address')
+        context['twitter_contacts'] = self.list_contacts(('twitter',))
+        # The email attribute of the person might also be duplicated
+        # in a contact of type email, so create a set of email
+        # addresses:
+        context['email_contacts'] = set(self.list_contacts(('email',)))
+        if self.object.email:
+            context['email_contacts'].add(self.object.email)
+        context['phone_contacts'] = self.list_contacts(('cell', 'voice'))
+        context['fax_contacts'] = self.list_contacts(('fax',))
+        context['address_contacts'] = self.list_contacts(('address',))
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
 
         # FIXME - the titles used here will need to be checked and fixed.

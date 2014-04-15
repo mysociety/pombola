@@ -22,6 +22,7 @@ class PersonTest(WebTest):
         person.save()
         self.assertEqual( person.name, "Alfred Smith" )
         self.assertEqual( person.additional_names(), [] )
+        self.assertEqual( person.sort_name, "Smith" )
 
         # Add an alternative name
         person.add_alternative_name("Freddy Smith", name_to_use=True)
@@ -42,6 +43,13 @@ class PersonTest(WebTest):
         person.add_alternative_name("\n\nFred Smith\n\n", name_to_use=True)
         self.assertEqual( person.name, "Fred Smith" )
         self.assertEqual( person.additional_names(), ['Freddy Smith'] )
+
+    def test_explicit_sort_name(self):
+        person = models.Person(
+            legal_name='Ralph Vaughan Williams',
+            sort_name='Vaughan Williams')
+        person.save()
+        self.assertEqual(person.sort_name, 'Vaughan Williams')
 
     def test_urls(self):
         person = models.Person(

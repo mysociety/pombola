@@ -40,8 +40,8 @@ pombola_settings.extra_js.push('js/tabs.js')
     {% if email_contacts %}
       <h3>Email</h3>
       <ul>
-        {% for contact in email_contacts %}
-          <li class="word-break-all">{{ contact.value|urlizetrunc:50 }}</li>
+        {% for email in email_contacts %}
+          <li class="word-break-all">{{ email|urlizetrunc:50 }}</li>
         {% endfor %}
       </ul>
     {% endif %}
@@ -49,8 +49,8 @@ pombola_settings.extra_js.push('js/tabs.js')
     {% if phone_contacts %}
       <h3>Phone</h3>
       <ul>
-        {% for contact in phone_contacts %}
-          <li><a href="tel:{{ contact.value }}">{{ contact.value }}</a></li>
+        {% for phone in phone_contacts %}
+          <li><a href="tel:{{ phone }}">{{ phone }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
@@ -58,8 +58,8 @@ pombola_settings.extra_js.push('js/tabs.js')
     {% if fax_contacts %}
       <h3>Fax</h3>
       <ul>
-        {% for contact in fax_contacts %}
-        <li>{{ contact.value }}</li>
+        {% for fax in fax_contacts %}
+        <li>{{ fax }}</li>
       {% endfor %}
       </ul>
     {% endif %}
@@ -67,8 +67,8 @@ pombola_settings.extra_js.push('js/tabs.js')
     {% if twitter_contacts %}
       <h3>Twitter</h3>
       <ul>
-        {% for contact in twitter_contacts %}
-          <li><a href="http://twitter.com/{{ contact.value }}">@{{ contact.value }}</a> on Twitter</li>
+        {% for twitter in twitter_contacts %}
+          <li><a href="http://twitter.com/{{ twitter }}">@{{ twitter }}</a> on Twitter</li>
         {% endfor %}
       </ul>
     {% endif %}
