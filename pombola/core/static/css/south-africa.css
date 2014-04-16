@@ -5229,6 +5229,7 @@ ul.pager li.next {
 /* Blog styles */
 .blog-post ul, .blog-post p {
   max-width: 580px;
+  font-size: 0.9rem;
 }
 
 .blog-list .blog-in-a-list {
