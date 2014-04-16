@@ -2,7 +2,7 @@
   {% csrf_token %}
   <h2><label for="comments">Tell the senate what you think</label></h2>
   <p>We will also send any comments through to the Senate Majority Leader</p>
-  <p>
+  <p class="all-form-errors">
     {% include "_all_form_errors.html" with form=senate_form %}
   </p>
   {{ senate_form.comments }}
