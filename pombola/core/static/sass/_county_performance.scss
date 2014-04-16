@@ -191,6 +191,15 @@ $section-verical-padding: 40px;
       margin-bottom: 0;
     }
 
+    .all-form-errors {
+      color: #fff;
+      font-size: 1.2em;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding: 1em 0;
+      margin: 1em;
+    }
+
   }
 
   #senate {
@@ -234,6 +243,15 @@ $section-verical-padding: 40px;
 
     p:last-child {
       margin-bottom: 0;
+    }
+
+    .all-form-errors {
+      color: #cf0000;
+      font-size: 1.2em;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 1em 0;
+      margin: 1em 7em;
     }
 
   }
