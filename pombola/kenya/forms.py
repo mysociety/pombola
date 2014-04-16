@@ -6,11 +6,13 @@ class CountyPerformancePetitionForm(forms.Form):
         error_messages={'required': 'You must enter a name'},
         widget=forms.TextInput(
             attrs={
+                'required': 'required',
                 'placeholder': 'Your name'}))
     email = forms.EmailField(
         error_messages={'required': 'You must enter a valid email address'},
         widget=forms.TextInput(
             attrs={
+                'required': 'required',
                 'placeholder': 'Your email address'}))
 
     def clean(self):
@@ -32,4 +34,5 @@ class CountyPerformanceSenateForm(forms.Form):
             attrs={
                 'rows': 5,
                 'cols': 60,
+                'required': 'required',
                 'placeholder': 'Add any comments here'}))
