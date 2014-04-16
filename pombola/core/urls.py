@@ -31,15 +31,13 @@ person_patterns = patterns('pombola.core.views',
 
   )
 
-# ugly, must be a better way
 for sub_page in ['scorecard', 'comments', 'experience', 'appearances', 'contact_details']:
     person_patterns += patterns(
         'pombola.core.views',
         url(
-            '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
-            PersonDetailSub.as_view(),           # view function
-            { 'sub_page': sub_page },            # pass in the 'sub_page' arg
-            'person_%s' % sub_page               # url name for {% url ... %} tags
+            '^(?P<slug>[-\w]+)/%s/' % sub_page,
+            PersonDetailSub.as_view(sub_page=sub_page),
+            name='person_%s' % sub_page,
         )
     )
 
@@ -65,15 +63,13 @@ place_patterns = patterns('pombola.core.views',
     ),
 )
 
-# ugly, must be a better way
 for sub_page in ['aspirants', 'election', 'scorecard', 'comments', 'people', 'places', 'organisations', 'data', 'projects']:
     place_patterns += patterns(
         'pombola.core.views',
         url(
-            '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
-            PlaceDetailSub.as_view(),            # view function
-            { 'sub_page': sub_page },            # pass in the 'sub_page' arg
-            'place_%s' % sub_page                # url name for {% url ... %} tags
+            '^(?P<slug>[-\w]+)/%s/' % sub_page,
+            PlaceDetailSub.as_view(sub_page=sub_page),
+            name='place_%s' % sub_page,
         )
     )
 
@@ -84,15 +80,13 @@ organisation_patterns = patterns('pombola.core.views',
     url(r'^(?P<slug>[-\w]+)/$', OrganisationDetailView.as_view(), name='organisation'),
 )
 
-# ugly, must be a better way
 for sub_page in ['comments', 'contact_details', 'people']:
     organisation_patterns += patterns(
         'pombola.core.views',
         url(
-            '^(?P<slug>[-\w]+)/%s/' % sub_page,  # url regex
-            OrganisationDetailSub.as_view(),     # view function
-            { 'sub_page': sub_page },            # pass in the 'sub_page' arg
-            'organisation_%s' % sub_page         # url name for {% url ... %} tags
+            '^(?P<slug>[-\w]+)/%s/' % sub_page,
+            OrganisationDetailSub.as_view(sub_page=sub_page),
+            name='organisation_%s' % sub_page,
         )
     )
 

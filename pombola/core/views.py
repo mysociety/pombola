@@ -61,9 +61,10 @@ class PersonDetail(DetailView):
 
 class PersonDetailSub(DetailView):
     model = models.Person
+    sub_page = None
 
     def get_template_names(self):
-        return [ "core/person_%s.html" % self.kwargs['sub_page'] ]
+        return ["core/person_%s.html" % self.sub_page]
 
 class PlaceDetailView(DetailView):
     model = models.Place
@@ -78,6 +79,7 @@ class PlaceDetailView(DetailView):
 class PlaceDetailSub(DetailView):
     model = models.Place
     child_place_grouper = 'parliamentary_session'
+    sub_page = None
 
     def get_context_data(self, **kwargs):
         context = super(PlaceDetailSub, self).get_context_data(**kwargs)
@@ -85,7 +87,7 @@ class PlaceDetailSub(DetailView):
         return context
 
     def get_template_names(self):
-        return [ "core/place_%s.html" % self.kwargs['sub_page'] ]
+        return ["core/place_%s.html" % self.sub_page]
 
 class PlaceKindList(ListView):
     def get_queryset(self):
@@ -240,16 +242,18 @@ class OrganisationDetailView(DetailView):
 
 class OrganisationDetailSub(DetailView):
     model = models.Organisation
+    sub_page = None
 
     def get_template_names(self):
-        return [ "core/organisation_%s.html" % self.kwargs['sub_page'] ]
+        return ["core/organisation_%s.html" % self.sub_page]
 
     def get_context_data(self, **kwargs):
         context = super(OrganisationDetailSub, self).get_context_data(**kwargs)
         # Allow the order that people are listed on the 'people' sub-page
         # of an organisation to be controlled with the 'order' query
         # parameter:
-        if self.kwargs['sub_page'] == 'people':
+
+        if self.sub_page == 'people':
             all_positions = context['all_positions'] = self.object.position_set.all()
 
             if self.request.GET.get('all'):
