@@ -59,7 +59,6 @@ class Command(BaseCommand):
             core.models.Place,
             core.models.PositionTitle,
             core.models.ParliamentarySession,
-            file_archive.models.File,
             info.models.InfoPage,
             tasks.models.TaskCategory,
         )
