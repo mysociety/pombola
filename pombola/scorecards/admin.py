@@ -4,8 +4,9 @@ from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 
 from pombola.scorecards import models
+from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"] }
 
 class EntryAdminCSVUploadForm(forms.Form):

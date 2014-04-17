@@ -14,6 +14,8 @@ from django.template   import RequestContext
 import models
 from pprint import pprint
 
+from pombola.slug_helpers.admin import StricterSlugFieldMixin
+
 def create_admin_url_for(obj):
     return reverse(
         'admin:%s_%s_change' % ( obj._meta.app_label, obj._meta.module_name),
@@ -117,7 +119,7 @@ class TaskAdmin(admin.ModelAdmin):
             
 
 
-class TaskCategoryAdmin(admin.ModelAdmin):
+class TaskCategoryAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     list_display  = [ 'slug', 'priority', ]
 
 
