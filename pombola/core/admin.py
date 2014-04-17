@@ -1,7 +1,10 @@
+import re
+
 from django import forms
 from django.contrib import admin
 from django.contrib.gis import db
 from django.contrib.contenttypes.generic import GenericTabularInline
+from django.core.exceptions import ValidationError
 
 from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
@@ -13,6 +16,20 @@ from pombola.images.admin import ImageAdminInline
 def create_admin_link_for(obj, link_text):
     return u'<a href="%s">%s</a>' % (obj.get_admin_url(), link_text)
 
+def stricter_validate_slug(slug):
+    if not re.match(r'^[-a-z0-9_]+$', slug):
+        raise ValidationError(
+            "Enter a valid 'slug' consisting of only lowercase letters, numbers, underscores or hyphens.")
+    return True
+
+
+class StricterSlugFieldMixin(object):
+    formfield_overrides = {
+        db.models.SlugField: {
+            'validators': [stricter_validate_slug]
+        }
+    }
+
 class ContentTypeModelAdmin(admin.ModelAdmin):
 
     def show_foreign(self, obj):
@@ -22,7 +39,7 @@ class ContentTypeModelAdmin(admin.ModelAdmin):
     show_foreign.allow_tags = True
 
 
-class ContactKindAdmin(admin.ModelAdmin):
+class ContactKindAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ['name']
 
@@ -156,7 +173,7 @@ class ScorecardInlineAdmin(GenericTabularInline):
     can_delete = False
 
 
-class PersonAdmin(admin.ModelAdmin):
+class PersonAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["legal_name"]}
     inlines = [
         AlternativePersonNameInlineAdmin,
@@ -172,7 +189,7 @@ class PersonAdmin(admin.ModelAdmin):
     search_fields = ['legal_name']
 
 
-class PlaceAdmin(admin.ModelAdmin):
+class PlaceAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('slug', 'name', 'kind', 'show_organisation')
     list_filter = ('kind',)
@@ -199,7 +216,7 @@ class PlaceInlineAdmin(admin.TabularInline):
     fields = ['name', 'slug', 'kind']
 
 
-class OrganisationAdmin(admin.ModelAdmin):
+class OrganisationAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [
         PlaceInlineAdmin,
@@ -214,18 +231,18 @@ class OrganisationAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
-class OrganisationKindAdmin(admin.ModelAdmin):
+class OrganisationKindAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name']
 
 
-class PlaceKindAdmin(admin.ModelAdmin):
+class PlaceKindAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['slug', 'name']
     search_fields = ['name']
 
 
-class PositionTitleAdmin(admin.ModelAdmin):
+class PositionTitleAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name']
 
