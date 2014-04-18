@@ -1319,27 +1319,6 @@ class ParliamentarySession(ModelBase):
     class Meta:
         ordering = ['start_date']
 
-# This is based on
-# https://github.com/dracos/Theatricalia/blob/master/merged/models.py
-# but adapted for redirecting from an old slug rather than ID.
-
-class SlugRedirect(ModelBase):
-    """A model to represent a redirect from an old slug
-
-    This is particular useful when we merge two candidates, but don't
-    want the old URL to break"""
-
-    content_type = models.ForeignKey(ContentType)
-    old_object_slug = models.CharField(max_length=200)
-    new_object_id = models.PositiveIntegerField()
-    new_object = generic.GenericForeignKey('content_type', 'new_object_id')
-
-    def __unicode__(self):
-        return u'slug "%s" -> %s' % (self.old_object_slug, self.new_object)
-
-    class Meta:
-        unique_together = ("content_type", "old_object_slug")
-
 
 class OrganisationRelationshipKind(ModelBase):
     """This represent a kind of relationship two organisations can be in

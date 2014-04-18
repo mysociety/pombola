@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 
 from pombola.core import models
+from pombola.slug_helpers.models import SlugRedirect
 
 class HomeViewTest(TestCase):
 
@@ -54,7 +55,7 @@ class PositionViewTest(WebTest):
             kind = self.organisation_kind,
         )
 
-        self.org_slug_redirect = models.SlugRedirect.objects.create(
+        self.org_slug_redirect = SlugRedirect.objects.create(
             old_object_slug='test-Blah-org',
             new_object=self.organisation,
         )
@@ -85,7 +86,7 @@ class PositionViewTest(WebTest):
             kind=self.place_kind_constituency,
         )
 
-        self.place_slug_redirect = models.SlugRedirect.objects.create(
+        self.place_slug_redirect = SlugRedirect.objects.create(
             old_object_slug='old_bobs_place',
             new_object=self.bobs_place,
         )
@@ -202,7 +203,7 @@ class TestPersonView(WebTest):
             username='admin',
             is_superuser=True
         )
-        self.slug_redirect = models.SlugRedirect.objects.create(
+        self.slug_redirect = SlugRedirect.objects.create(
             old_object_slug='Alfred--Smith',
             new_object=self.alf,
         )

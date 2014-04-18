@@ -11,6 +11,7 @@ from django.db import transaction
 import pombola.core.models as core_models
 from pombola.images.models import Image
 from pombola.core.views import PersonSpeakerMappingsMixin
+from pombola.slug_helpers.models import SlugRedirect
 
 from django.conf import settings
 
@@ -161,7 +162,7 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
                 .update(is_primary=False,
                         object_id=to_keep.id)
         # Make sure the old slug redirects to the person to keep:
-        core_models.SlugRedirect.objects.create(new_object=to_keep,
+        SlugRedirect.objects.create(new_object=to_keep,
                                                 old_object_slug=to_delete.slug)
         # Finally delete the now unnecessary person:
         to_delete.delete()

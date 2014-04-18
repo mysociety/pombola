@@ -6,8 +6,9 @@ import sys
 
 from pombola.core.models import (
     Contact, ContactKind, Organisation, OrganisationKind, Person,
-    Position, PositionTitle, SlugRedirect
+    Position, PositionTitle
 )
+from pombola.slug_helpers.models import SlugRedirect
 
 from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command

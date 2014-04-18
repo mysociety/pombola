@@ -23,6 +23,8 @@ from speeches.views import NamespaceMixin, SpeechView, SectionView
 
 from pombola.core import models
 from pombola.info.models import InfoPage
+from pombola.slug_helpers.models import SlugRedirect
+from pombola.slug_helpers.views import SlugRedirectMixin
 
 
 class HomeView(TemplateView):
@@ -63,8 +65,8 @@ class SkipHidden(object):
         return qs.filter(hidden=False)
 
 
-class SlugRedirectMixin(object):
-    """Adds SlugRedirect redirection for DetailView-derived classes"""
+class SubSlugRedirectMixin(SlugRedirectMixin):
+    """This customization of SlugRedirectMixin understands sub pages"""
 
     def object_to_detail_url_pattern_name(self, o):
         url_pattern_name = o.__class__.__name__.lower()
@@ -74,27 +76,17 @@ class SlugRedirectMixin(object):
             pass
         return url_pattern_name
 
-    def get(self, request, *args, **kwargs):
-        # Check if this is old slug for redirection:
-        slug = kwargs['slug']
-        try:
-            sr = models.SlugRedirect.objects.get(
-                content_type=ContentType.objects.get_for_model(self.model),
-                old_object_slug=slug
-            )
-            pattern = self.object_to_detail_url_pattern_name(sr.new_object)
-            url = reverse(pattern, args=[sr.new_object.slug])
-            return redirect(url)
-        # Otherwise look up the slug as normal:
-        except models.SlugRedirect.DoesNotExist:
-            return super(SlugRedirectMixin, self).get(request, *args, **kwargs)
+    def redirect_to(self, correct_object):
+        pattern = self.object_to_detail_url_pattern_name(correct_object)
+        url = reverse(pattern, args=[correct_object.slug])
+        return redirect(url)
 
 
 class PersonDetail(SlugRedirectMixin, SkipHidden, DetailView):
     model = models.Person
 
 
-class PersonDetailSub(SlugRedirectMixin, SkipHidden, DetailView):
+class PersonDetailSub(SubSlugRedirectMixin, SkipHidden, DetailView):
     model = models.Person
     sub_page = None
 
@@ -131,7 +123,7 @@ class PlaceDetailView(SlugRedirectMixin, BasePlaceDetailView):
     pass
 
 
-class PlaceDetailSub(SlugRedirectMixin, DetailView):
+class PlaceDetailSub(SubSlugRedirectMixin, DetailView):
     model = models.Place
     child_place_grouper = 'parliamentary_session'
     sub_page = None
@@ -297,7 +289,7 @@ class OrganisationDetailView(SlugRedirectMixin, DetailView):
         return context
 
 
-class OrganisationDetailSub(SlugRedirectMixin, DetailView):
+class OrganisationDetailSub(SubSlugRedirectMixin, DetailView):
     model = models.Organisation
     sub_page = None
 
