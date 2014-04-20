@@ -26,3 +26,9 @@ def add_extra_popolo_data_for_person(person, popolo_object, base_url):
 
 def add_extra_popolo_data_for_organization(organisation, popolo_object, base_url):
     popolo_object['pa_url'] = make_pa_url(organisation, base_url)
+    if organisation.kind.slug in ('constituency-office', 'constituency-area'):
+        #assume constituency offices have only one linked location
+        places = organisation.place_set.all()
+        if places and places[0].location:
+            popolo_object['lat'] = places[0].location.y
+            popolo_object['lng'] = places[0].location.x
