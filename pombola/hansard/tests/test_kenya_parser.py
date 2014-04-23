@@ -160,6 +160,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
             title      = mp,
             start_date = ApproximateDate( year=2011, month=1, day = 1 ),
             end_date   = ApproximateDate( future=True ),
+            category = 'political',
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
@@ -182,6 +183,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
             title = nominated_politician,
             start_date = ApproximateDate( year=2011, month=1, day = 1 ),
             end_date   = ApproximateDate( future=True ),
+            category = 'political',
             )
 
         Entry.assign_speakers()
@@ -198,6 +200,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
             title      = mp,
             start_date = ApproximateDate( year=2007, month=1, day = 1 ),
             end_date   = ApproximateDate( year=2009, month=1, day = 1 ),
+            category = 'political',
         )
         Entry.assign_speakers()
         self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )

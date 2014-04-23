@@ -52,7 +52,7 @@ class KenyaParser():
             shell = False,
             stderr = subprocess.PIPE,
         ).communicate()
-        wanted_version = 'pdftohtml version 0.12.4'
+        wanted_version = 'pdftohtml version 0.18.4'
         if wanted_version not in version_error:
             raise Exception( "Bad pdftohtml version - got '%s' but want '%s'" % (version_error, wanted_version) )
 
@@ -87,6 +87,7 @@ class KenyaParser():
 
         # Clean out all the &nbsp; now. pdftohtml puts them to preserve the lines
         html = re.sub( r'&nbsp;', ' ', html )
+        html = re.sub( r'&#160;', ' ', html )
 
         # create a soup out of the html
         soup = BeautifulSoup(
@@ -314,6 +315,7 @@ class KenyaParser():
         na_reg  = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
         sen_reg = re.compile(r"The Senate (?P<action>met|rose).* at (?P<time>\d+\.\d+ [ap].m.)")
         reg     = None
+        venue = None
 
         # work out which one we should use
         for line in transcript:
@@ -326,6 +328,9 @@ class KenyaParser():
                 reg = sen_reg
                 venue = senate
                 break
+
+        if venue is None:
+            raise Exception, "Failed to find the Venue"
 
         results = {
             'venue': venue.slug,
