@@ -87,6 +87,7 @@ class KenyaParser():
 
         # Clean out all the &nbsp; now. pdftohtml puts them to preserve the lines
         html = re.sub( r'&nbsp;', ' ', html )
+        html = re.sub( r'&#160;', ' ', html )
 
         # create a soup out of the html
         soup = BeautifulSoup(
