@@ -315,6 +315,7 @@ class KenyaParser():
         na_reg  = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
         sen_reg = re.compile(r"The Senate (?P<action>met|rose).* at (?P<time>\d+\.\d+ [ap].m.)")
         reg     = None
+        venue = None
 
         # work out which one we should use
         for line in transcript:
@@ -327,6 +328,9 @@ class KenyaParser():
                 reg = sen_reg
                 venue = senate
                 break
+
+        if venue is None:
+            raise Exception, "Failed to find the Venue"
 
         results = {
             'venue': venue.slug,
