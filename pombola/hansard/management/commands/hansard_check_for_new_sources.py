@@ -35,38 +35,12 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
-        preferred_urls = (
+        urls = (
             'http://www.parliament.go.ke/plone/senate/business/hansard',
             'http://www.parliament.go.ke/plone/national-assembly/business/hansard',
         )
 
-        for url in preferred_urls:
-            try:
-                self.process_url(url)
-            except NoSourcesFoundError:
-                # We expect this error so don't do anything
-                pass
-            else:
-                # We don't expect to get here, so produce a warning. Hopefully this is good news
-                # and the preferred_urls can be the only ones we look at
-                warn("Previously broken url '%s' now has sources - consider reverting #905 related changes" % url)
-
-        # The above www.parliament.go.ke urls broke seemingly on the 29 Sept 2013
-        # - instead of returning the expected list of hansard sources they return
-        # "Welcome to nginx!" with a status code of 200. This was issue #905.
-        #
-        # Going to http://www.parliament.go.ke/ and then clicking on the "Parliamentary
-        # Website" menu item takes you to http://212.49.91.136/ which appears to be the
-        # site as it should be (is the nginx proxying not working?). For now we'll use
-        # these links so that we continue to display recent Hansard entries and
-        # hopefully if they stop working the code will warn us (either no links found,
-        # or bad status code returned).
-        fallback_urls = (
-            'http://212.49.91.136/plone/senate/business/hansard',
-            'http://212.49.91.136/plone/national-assembly/business/hansard',
-        )
-
-        for url in fallback_urls:
+        for url in urls:
             try:
                 self.process_url(url)
             except NoSourcesFoundError:
