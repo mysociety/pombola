@@ -107,7 +107,12 @@ class Command(NoArgsCommand):
                     download_content,
                     convertEntities=BeautifulStoneSoup.HTML_ENTITIES
                 )
-                download_url = download_soup.find( id="archetypes-fieldname-item_files" ).a['href']
+                download_div = download_soup.find( id="archetypes-fieldname-item_files" )
+                if not download_div:
+                    warn("Failed to find the download div on {0}".format(href))
+                    continue
+
+                download_url = download_div.a['href']
                 # print download_url
 
                 # create the source entry
