@@ -66,8 +66,8 @@ class SittingView(DetailView):
     def get_object(self):
         """Get the object based on venue and start date and time"""
 
-        venue_slug = self.venue_slug
-        start_date_and_time = self.start_date_and_time
+        venue_slug = self.kwargs['venue_slug']
+        start_date_and_time = self.kwargs['start_date_and_time']
 
         query_args = {
             'venue__slug':     venue_slug,
@@ -104,7 +104,7 @@ class SittingView(DetailView):
 #
 #     def get_venue(self):
 #         "Return the venue that should be searched for. 404s if not found."
-#         return get_object_or_404(Venue, slug=self.slug)
+#         return get_object_or_404(Venue, slug=self.kwargs['slug'])
 #
 # class IndexView( BaseView ):
 #     pass
