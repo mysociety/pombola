@@ -20,7 +20,10 @@ class Command(NoArgsCommand):
             source.save()
 
             pdf = source.file()
-            html = KenyaParser.convert_pdf_to_html( pdf )
-            data = KenyaParser.convert_html_to_data( html )
-            KenyaParser.create_entries_from_data_and_source( data, source )
-
+            try:
+                html = KenyaParser.convert_pdf_to_html( pdf )
+                data = KenyaParser.convert_html_to_data( html )
+                KenyaParser.create_entries_from_data_and_source( data, source )
+            except Exception as e:
+                print "There was an exception when parsing {0}".format(pdf)
+                raise
