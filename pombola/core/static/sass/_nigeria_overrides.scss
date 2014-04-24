@@ -119,3 +119,14 @@ div.search-pagination {
         }
     }
 }
+
+.blog-list {
+    .blog-in-a-list {
+        border-bottom: 1px solid #d2d2ce;
+        margin-bottom: 2em;
+    }
+
+    img {
+      max-width: 100%;
+    }
+}
