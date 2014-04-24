@@ -3260,3 +3260,17 @@ div.search-pagination {
 .embedded-video iframe {
   max-width: 100%;
 }
+
+.home-news .meta {
+  font-style: normal;
+  font-size: .75em;
+  /* 12px */
+  color: #777777;
+}
+.home-news .summary {
+  line-height: 1.3em;
+  margin-bottom: 1em;
+}
+.home-news .summary p {
+  display: inline;
+}

@@ -104,3 +104,18 @@ div.search-pagination {
     max-width: 100%;
   }
 }
+
+.home-news {
+    .meta {
+      font-style: normal;
+      font-size: .75em; /* 12px */
+      color: $colour_blackish;
+    }
+    .summary {
+        line-height:1.3em;
+        margin-bottom:1em;
+        p {
+            display:inline;
+        }
+    }
+}
