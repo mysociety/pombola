@@ -3182,3 +3182,11 @@ ul.social-buttons li {
     height: 120px;
   }
 }
+
+.blog-list .blog-in-a-list {
+  border-bottom: 1px solid #d2d2ce;
+  margin-bottom: 2em;
+}
+.blog-list img {
+  max-width: 100%;
+}
