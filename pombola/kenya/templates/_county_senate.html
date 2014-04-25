@@ -6,5 +6,9 @@
     {% include "_all_form_errors.html" with form=senate_form %}
   </p>
   {{ senate_form.comments }}
+  <input type="hidden" name="user_key" value="{{ user_key }}">
+  <input type="hidden" name="variant" value="{{ variant }}">
+  <input type="hidden" name="g" value="{{ g }}">
+  <input type="hidden" name="agroup" value="{{ agroup }}">
   <p class="last"><button type="submit">Comment</button>
 </form>

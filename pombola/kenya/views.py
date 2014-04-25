@@ -1,5 +1,9 @@
-from random import shuffle
+import hashlib
+import json
+from random import randint, shuffle
+import sys
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
@@ -10,6 +14,36 @@ from .forms import CountyPerformancePetitionForm, CountyPerformanceSenateForm
 from django.shortcuts import redirect
 
 from pombola.feedback.models import Feedback
+from pombola.experiments.models import Experiment, Event
+
+
+def sanitize_parameter(key, parameters, allowed_values, default_value=None):
+    value = parameters.get(key)
+    if value not in allowed_values:
+        if default_value is None:
+            message = "An allowed value for '{0}' must be provided"
+            raise ValueError(message.format(key))
+        value = default_value
+    return value
+
+def sanitize_data_parameters(request, parameters):
+    result = {}
+    result['variant'] = sanitize_parameter(
+        key='variant',
+        parameters=parameters,
+        allowed_values=('o', 't', 'n'),
+        default_value='n')
+    result['g'] = sanitize_parameter(
+        key='g',
+        parameters=parameters,
+        allowed_values=('m', 'f'),
+        default_value='?')
+    result['agroup'] = sanitize_parameter(
+        key='agroup',
+        parameters=parameters,
+        allowed_values=('under', 'over'),
+        default_value='?')
+    return result
 
 
 class CountyPerformanceView(TemplateView):
@@ -24,15 +58,18 @@ class CountyPerformanceView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(CountyPerformanceView, self).get_context_data(**kwargs)
         context['suppress_banner'] = True
+        context['user_key'] = str(randint(0, sys.maxint))
         context['petition_form'] = CountyPerformancePetitionForm()
         context['senate_form'] = CountyPerformanceSenateForm()
+
+        context.update(sanitize_data_parameters(self.request, self.request.GET))
 
         context['show_opportunity'], context['show_threat'] = {
             'o': (True, False),
             't': (False, True),
             'n': (False, False),
             None: (False, False),
-        }[self.request.GET.get('variant')]
+        }[context['variant']]
 
         context['share_partials'] = [
             '_share_twitter.html',
@@ -50,19 +87,45 @@ class CountyPerformanceView(TemplateView):
         return context
 
 
-class CountyPerformanceSubmissionMixin(object):
-    """A mixin useful for handling senate comment and petition emails"""
+class CountyPerformanceDataMixin(object):
 
-    def create_feedback(self, comment='', email=''):
+    def get_extra_data(self, sanitized_data):
+        return {
+            'gender': sanitized_data['g'],
+            'age_group': sanitized_data['agroup']
+        }
+
+    def get_event_parameters(self, sanitized_data):
+        return {
+            'user_key': sanitized_data['user_key'],
+            'variant': sanitized_data['variant'],
+        }
+
+    def create_feedback(self, form, comment='', email=''):
         """A helper method for adding feedback to the database"""
         feedback = Feedback()
         feedback.status = 'non-actionable'
-        feedback.comment = comment
+        prefix_data = self.get_extra_data(form.cleaned_data)
+        prefix_data.update(self.get_event_parameters(form.cleaned_data))
+        comment_prefix = json.dumps(prefix_data)
+        feedback.comment = comment_prefix + ' ' + comment
         feedback.email = email
         feedback.url = self.request.build_absolute_uri()
         if self.request.user.is_authenticated():
             feedback.user = self.request.user
         feedback.save()
+
+    def create_event(self, data, event_parameters=None):
+        event_kwargs = self.get_event_parameters(data)
+        if event_parameters is not None:
+            event_kwargs.update(event_parameters)
+        event_kwargs['extra_data'] = json.dumps(self.get_extra_data(data))
+        experiment = Experiment.objects.get(slug='mit-county')
+        experiment.event_set.create(**event_kwargs)
+
+
+class CountyPerformanceSubmissionMixin(CountyPerformanceDataMixin):
+    """A mixin useful for handling senate comment and petition emails"""
 
     def form_invalid(self, form):
         """Redirect back to a reduced version of the page from either form"""
@@ -74,6 +137,15 @@ class CountyPerformanceSubmissionMixin(object):
         context = self.get_context_data(**extra_context)
         return self.render_to_response(context)
 
+    def form_valid(self, form):
+        self.create_feedback_from_form(form)
+        self.create_event(form.cleaned_data,
+                          {'category': 'form',
+                           'action': 'submit',
+                           'label': self.form_key})
+        return super(CountyPerformanceSubmissionMixin,
+                     self).form_valid(form)
+
 
 class CountyPerformanceSenateSubmission(CountyPerformanceSubmissionMixin,
                                         FormView):
@@ -84,12 +156,9 @@ class CountyPerformanceSenateSubmission(CountyPerformanceSubmissionMixin,
     form_class = CountyPerformanceSenateForm
     form_key = 'senate'
 
-    def form_valid(self, form):
-        new_comment = u"senate feedback: "
-        new_comment += form.cleaned_data.get('comments', '').strip()
-        self.create_feedback(comment=new_comment)
-        return super(CountyPerformanceSenateSubmission,
-                     self).form_valid(form)
+    def create_feedback_from_form(self, form):
+        new_comment = form.cleaned_data.get('comments', '').strip()
+        self.create_feedback(form, comment=new_comment)
 
 
 class CountyPerformancePetitionSubmission(CountyPerformanceSubmissionMixin,
@@ -101,10 +170,10 @@ class CountyPerformancePetitionSubmission(CountyPerformanceSubmissionMixin,
     form_class = CountyPerformancePetitionForm
     form_key = 'petition'
 
-    def form_valid(self, form):
-        new_comment = u"petition signature from: "
-        new_comment += form.cleaned_data.get('name', '').strip()
-        self.create_feedback(comment=new_comment,
+    def create_feedback_from_form(self, form):
+        new_comment = form.cleaned_data.get('name', '').strip()
+        self.create_feedback(form,
+                             comment=new_comment,
                              email=form.cleaned_data.get('email'))
         return super(CountyPerformancePetitionSubmission,
                      self).form_valid(form)

@@ -7,9 +7,13 @@
     {% include "_all_form_errors.html" with form=petition_form %}
   </p>
   <p>
-    {% for field in petition_form %}
+    {% for field in petition_form.visible_fields %}
       {{ field }}
     {% endfor %}
+    <input type="hidden" name="user_key" value="{{ user_key }}">
+    <input type="hidden" name="variant" value="{{ variant }}">
+    <input type="hidden" name="g" value="{{ g }}">
+    <input type="hidden" name="agroup" value="{{ agroup }}">
     <button type="submit">Send</button>
   </p>
 </form>
