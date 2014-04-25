@@ -262,7 +262,7 @@ def key_position_sort_last_name(position):
     """
 
     org_kind_slug = position.organisation.kind.slug
-    title_slug = position.title.slug
+    title_slug = position.title and position.title.slug
     is_parliamentary = org_kind_slug == 'parliament'
     is_member = title_slug in ('member', 'delegate')
 
