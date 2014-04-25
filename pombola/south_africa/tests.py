@@ -441,6 +441,7 @@ class SAOrganisationPeopleSubPageTest(TestCase):
         aardvark = models.Person.objects.create(legal_name='Anthony Aardvark', slug='aaardvark')
         alice = models.Person.objects.create(legal_name='Alice Smith', slug='asmith')
         bob = models.Person.objects.create(legal_name='Bob Smith', slug='bsmith')
+        charlie = models.Person.objects.create(legal_name='Charlie Bucket', slug='cbucket')
         zebra = models.Person.objects.create(legal_name='Zoe Zebra', slug='zzebra')
         anon = models.Person.objects.create(legal_name='', slug='anon')
 
@@ -450,6 +451,8 @@ class SAOrganisationPeopleSubPageTest(TestCase):
         self.alice_ncop_whip = alice_ncop_whip = models.Position.objects.create(person=alice, organisation=ncop, title=whip)
         self.zebra_ncop = zebra_ncop = models.Position.objects.create(person=zebra, organisation=ncop, title=delegate)
         self.anon_ncop = models.Position.objects.create(person=anon, organisation=ncop, title=delegate)
+
+        self.charlie_ncop = models.Position.objects.create(person=charlie, organisation=ncop, title=None)
 
     def test_members_with_same_surname(self):
         context = self.client.get(reverse('organisation_people', kwargs={'slug': 'ncop'})).context
@@ -461,6 +464,8 @@ class SAOrganisationPeopleSubPageTest(TestCase):
                 self.anon_ncop,
                 # Then alphabetical order by 'surname'
                 self.aardvark_ncop,
+                # This should happen even if the person has a missing title
+                self.charlie_ncop,
                 # Inside alphabetical order, positions for the same person should be grouped
                 # by person with the parliamentary membership first
                 self.alice_ncop, self.alice_ncop_whip,
