@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
 
 from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
-    CountyPerformancePetitionSubmission)
+    CountyPerformancePetitionSubmission, CountyPerformanceShare)
 
 urlpatterns = patterns('',
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
@@ -23,3 +23,9 @@ for name, view in (
             TemplateView.as_view(
                 template_name='county-performance-{0}-submission.html'.format(name))),
     )
+
+urlpatterns += (
+    url(r'county-performance/share',
+        CountyPerformanceShare.as_view(),
+        name='county-performance-share'),
+)

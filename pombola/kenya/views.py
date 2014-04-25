@@ -1,12 +1,14 @@
 import hashlib
 import json
 from random import randint, shuffle
+import re
 import sys
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.views.generic.base import TemplateView
+from django.utils.http import urlquote
+from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import FormView
 
 from .forms import CountyPerformancePetitionForm, CountyPerformanceSenateForm
@@ -26,6 +28,13 @@ def sanitize_parameter(key, parameters, allowed_values, default_value=None):
         value = default_value
     return value
 
+user_key_re = re.compile(r'^[a-zA-Z0-9]+$')
+
+def sanitize_user_key(parameters):
+    if 'user_key' in parameters and user_key_re.search(parameters['user_key']):
+        return parameters['user_key']
+    return '?'
+
 def sanitize_data_parameters(request, parameters):
     result = {}
     result['variant'] = sanitize_parameter(
@@ -43,6 +52,7 @@ def sanitize_data_parameters(request, parameters):
         parameters=parameters,
         allowed_values=('under', 'over'),
         default_value='?')
+    result['user_key'] = sanitize_user_key(parameters)
     return result
 
 
@@ -58,11 +68,13 @@ class CountyPerformanceView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(CountyPerformanceView, self).get_context_data(**kwargs)
         context['suppress_banner'] = True
-        context['user_key'] = str(randint(0, sys.maxint))
         context['petition_form'] = CountyPerformancePetitionForm()
         context['senate_form'] = CountyPerformanceSenateForm()
 
         context.update(sanitize_data_parameters(self.request, self.request.GET))
+
+        # Note that this has to come after updating the context:
+        context['user_key'] = str(randint(0, sys.maxint))
 
         context['show_opportunity'], context['show_threat'] = {
             'o': (True, False),
@@ -175,5 +187,25 @@ class CountyPerformancePetitionSubmission(CountyPerformanceSubmissionMixin,
         self.create_feedback(form,
                              comment=new_comment,
                              email=form.cleaned_data.get('email'))
-        return super(CountyPerformancePetitionSubmission,
-                     self).form_valid(form)
+
+
+class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
+    """For recording & enacting Facebook / Twitter share actions"""
+
+    def get_redirect_url(self, *args, **kwargs):
+        social_network = sanitize_parameter(
+            key='n',
+            parameters=self.request.GET,
+            allowed_values=('facebook', 'twitter'))
+        data = sanitize_data_parameters(self.request, self.request.GET)
+        self.create_event(data,
+                          {'category': 'share-click',
+                           'action': 'click',
+                           'label': social_network})
+        path = reverse('county-performance')
+        built = self.request.build_absolute_uri(path)
+        url_parameter = urlquote(built, safe='')
+        url_formats = {
+            'facebook': "https://www.facebook.com/sharer/sharer.php?u={0}",
+            'twitter': "http://twitter.com/share?url={0}"}
+        return url_formats[social_network].format(url_parameter)

@@ -11,6 +11,10 @@
 
 {% block body_attributes %}class="county-performance"{% endblock %}
 
+{% block extra_js_to_load %}
+  pombola_settings.extra_js.push( 'js/click-tracking.js' );
+{% endblock %}
+
 {% block breadcrumbs %}
     {# Hide bread crumbs on this page. #}
     <div id="breadcrumb-replacement"></div>
