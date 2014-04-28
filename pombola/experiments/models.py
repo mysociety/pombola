@@ -27,4 +27,7 @@ class Event(models.Model):
     label = models.CharField(
         max_length=128,
         help_text='Following GA, "Useful for categorizing events (e.g. nav buttons)"')
+    extra_data = models.TextField(
+        blank=True,
+        help_text='For arbitrary additional data, which should be valid JSON or empty')
     created = models.DateTimeField(auto_now_add=True)
