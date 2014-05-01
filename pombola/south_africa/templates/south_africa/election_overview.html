@@ -5,33 +5,45 @@
 {% block body_attributes %} class="election" {% endblock %}
 
 {% block intro_content %}
-
+    <div class="election-header">
         <div class="wrapper">
-            <h2>This is an ELECTION OVERVIEW</h2>
+            <h1>Elections 2014</h1>
+            <div class="navigation-tabs">
+                <nav role="navigation">
+                    <ul>
+                        <li><a href="#" class="current">Home</a></li>
+                        <li><a href="#">National election</a></li>
+                        <li><a href="#">Provincial election</a></li>
+                        <li><a href="#">Statistics</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-
+    </div>
+    <div class="election-body">
 {% endblock %}
+
 
 {% block content %}
 
-	<h3>Parties</h3>
+        <h3>Parties</h3>
 
-    <ul>
-		{% for party in party_list %}
-			<li>
-				{{ party.name }}
-			</li>
-		{% endfor %}
-	</ul>
+        <ul>
+            {% for party in party_list %}
+                <li>
+                    {{ party.name }}
+                </li>
+            {% endfor %}
+        </ul>
 
-	<h3>Provinces</h3>
+        <h3>Provinces</h3>
 
-	<ul>
-		{% for province in province_list %}
-			<li>
-				{{ province.name }}
-			</li>
-		{% endfor %}
-	</ul>
-
+        <ul>
+            {% for province in province_list %}
+                <li>
+                    {{ province.name }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

@@ -5487,3 +5487,78 @@ ul.pager li.next {
   font-weight: normal !important;
   font-size: 0.875em;
 }
+
+/* Elections templates */
+/*body*/
+.election {
+  background-color: #f1f0ec;
+}
+.election #page {
+  background-color: #f1f0ec;
+  padding: 0;
+  /* removing this global padding on the elections pages as it adds a border of dark grey, as we've changed the global background colour. Added it to .election-header and .election-body instead */
+}
+
+.election-header {
+  padding: 0 1em;
+}
+
+.navigation-tabs ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  margin: 0;
+  padding: 0;
+}
+.navigation-tabs ul li {
+  list-style: none outside none;
+}
+@media only all and (min-width: 640px), print {
+  .navigation-tabs li {
+    display: inline-block;
+  }
+}
+.navigation-tabs a {
+  display: block;
+  background-color: #e2e1dd;
+  color: #222222;
+  text-decoration: none;
+  padding: 0.8em 1em;
+  margin-right: 0.33em;
+  font-size: 0.875em;
+  margin-bottom: 1px;
+}
+@media only all and (min-width: 640px), print {
+  .navigation-tabs a {
+    margin-bottom: 0;
+  }
+}
+.navigation-tabs a:hover, .navigation-tabs a:active, .navigation-tabs a:focus {
+  background-color: #d6d5cf;
+}
+.navigation-tabs a.current {
+  background-color: #fff;
+}
+.navigation-tabs a.current:hover, .navigation-tabs a.current:active, .navigation-tabs a.current:focus {
+  background-color: #fff;
+}
+
+.election-body {
+  background-color: #fff;
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  padding: 2em 1em 0;
+}
+.election-body:before, .election-body:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.election-body:after {
+  clear: both;
+}
+.election-body {
+  *zoom: 1;
+}

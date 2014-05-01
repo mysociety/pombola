@@ -2276,3 +2276,65 @@ ul.pager {
     @include lato-regular;
     font-size: 0.875em;
 }
+
+
+/* Elections templates */
+
+/*body*/.election {
+    background-color: $colour_main_background;
+    #page {
+        background-color: $colour_main_background;
+        padding: 0; /* removing this global padding on the elections pages as it adds a border of dark grey, as we've changed the global background colour. Added it to .election-header and .election-body instead */
+    }
+}
+
+.election-header {
+    padding: 0 1em;
+}
+
+.navigation-tabs {
+    ul {
+        @include unstyled-list;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        @media only all and (min-width: 640px), print {
+            display: inline-block;
+        }
+    }
+    a {
+        display: block;
+        background-color: #e2e1dd;
+        color: $colour_black;
+        text-decoration: none;
+        padding: 0.8em 1em;
+        margin-right: 0.33em;
+        font-size: 0.875em;
+        margin-bottom: 1px;
+        @media only all and (min-width: 640px), print {
+            margin-bottom: 0;
+        }
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: darken(#e2e1dd, 5%);
+        }
+        &.current {
+            background-color: #fff;
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: #fff;
+            }
+        }
+
+    }
+}
+
+.election-body {
+    background-color: #fff;
+    @include clearfix;
+    padding: 2em 1em 0;
+}
