@@ -807,6 +807,45 @@ class SAElectionOverviewMixin(TemplateView):
 class SAElectionOverviewView(SAElectionOverviewMixin):
     template_name = 'south_africa/election/overview.html'
 
+class SAElectionStatisticsView(SAElectionOverviewMixin):
+    template_name = 'south_africa/election/statistics.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SAElectionStatisticsView, self).get_context_data(**kwargs)
+
+        context['current_mps'] = {'all': {}, 'byparty': []}
+
+        context['current_mps']['all']['current'] = models.Organisation.objects.get(slug='national-assembly').position_set.all().currently_active().distinct('person__id').count()
+        context['current_mps']['all']['rerunning'] = models.Organisation.objects.get(slug='national-assembly').position_set.all().currently_active().filter(Q(person__position__organisation__slug__contains='national-election-list-2014') | (Q(person__position__organisation__slug__contains='election-list-2014') & Q(person__position__organisation__slug__contains='regional'))).distinct('person__id').count()
+        context['current_mps']['all']['percent_rerunning'] = 100 * context['current_mps']['all']['rerunning'] / context['current_mps']['all']['current']
+
+        #find the number of current MPs running for office per party
+        for p in context['party_list']:
+            party = models.Organisation.objects.get(slug=p.slug)
+            current = models.Organisation.objects.get(slug='national-assembly').position_set.all().currently_active().filter(person__position__organisation__slug=p.slug).distinct('person__id').count()
+            rerunning = models.Organisation.objects.get(slug='national-assembly').position_set.all().currently_active().filter(person__position__organisation__slug=p.slug).filter(Q(person__position__organisation__slug__contains='national-election-list-2014') | (Q(person__position__organisation__slug__contains='election-list-2014') & Q(person__position__organisation__slug__contains='regional'))).distinct('person__id').count()
+            if current:
+                percent = 100 * rerunning / current
+                context['current_mps']['byparty'].append({'party': party, 'current': current, 'rerunning': rerunning, 'percent_rerunning': percent})
+
+
+        #find individuals who appear to have switched party
+        context['people_new_party'] = []
+        people = models.Person.objects.filter(position__organisation__kind__slug='party', position__title__slug='member').annotate(num_parties=Count('position')).filter(num_parties__gt=1)
+
+        for person in people:
+            #check whether the person is a candidate - there is probably be a cleaner way to do this in the initial query
+            person_list = person.position_set.all().filter(organisation__slug__contains='election-list-2014')
+            if person_list:
+                context['people_new_party'].append({
+                    'person': person,
+                    'current_positions': person.position_set.all().filter(organisation__kind__slug='party').currently_active(),
+                    'former_positions': person.position_set.all().filter(organisation__kind__slug='party').currently_inactive(),
+                    'person_list': person_list
+                })
+
+        return context
+
 class SAElectionNationalView(SAElectionOverviewMixin):
     template_name = 'south_africa/election/national.html'
 

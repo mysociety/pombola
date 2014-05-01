@@ -75,6 +75,11 @@ urlpatterns += patterns('',
         name='sa-election-overview-year'
     ),
     url(
+        r'^election/(?P<election_year>[0-9]{4})/statistics/$',
+        views.SAElectionStatisticsView.as_view(),
+        name='sa-election-statistics-year'
+    ),
+    url(
         r'^election/(?P<election_year>[0-9]{4})/national/$',
         views.SAElectionNationalView.as_view(),
         name='sa-election-overview-national'

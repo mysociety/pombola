@@ -1,0 +1,83 @@
+{% extends 'south_africa/election_base.html' %}
+
+{% block extra_js_to_load %}
+    pombola_settings.extra_js.push( 'js/election_countdown.js' );
+{% endblock %}
+
+{% block content %}
+<div class="election-page-header" id="top">
+        <h2>South African General Election {{ election_year }}: Statistics</h2>
+    </div>
+<div class="general-election-information">
+  <div class="election-introduction">
+      <p>General information etc here.</p>
+      <ul>
+        <li><a href="#rerunning-candidates">MPs Running for Re-Election</a></li>
+        <li><a href="#people-new-party">Candidates Standing for a New Party</a></li>
+      </ul>
+  </div>
+  </div>
+<div class="rerunning-candidates">
+    <h2 id="rerunning-candidates">MPs Running for Re-Election</h2>
+    Number of members of the National Assembly running for re-election
+    per party party currently represented in Parliament and contesting
+    the {{ election_year }} elections.
+    <table>
+    <tr>
+        <th>Party</th>
+        <th>Current MPs</th>
+        <th>Running for Re-Election</th>
+        <th>Percentage</th>
+    </tr>
+    {% for party in current_mps.byparty %}
+    <tr>
+        <td><a href="{% url "sa-election-candidates-national-party" election_year=election_year party_name=party.party.slug %}">{{ party.party.name }}</a></td>
+        <td>{{ party.current }}</td>
+        <td>{{ party.rerunning }}</td>
+        <td>{{ party.percent_rerunning }}&#37;</td>
+    </tr>
+    {% endfor %}
+    <tr class="total">
+        <td>Total</td>
+        <td>{{ current_mps.all.current }}</td>
+        <td>{{ current_mps.all.rerunning }}</td>
+        <td>{{ current_mps.all.percent_rerunning }}&#37;</td>
+    </tr>
+    </table>
+</div>
+<div class="people-new-party">
+    <h2 id="people-new-party">Candidates Standing for a New Party</h2>
+    Candidates standing in the {{ election_year }} elections who are
+    known to have have been a member another party in the past.
+    <table>
+        <tr>
+            <th>Person</th>
+            <th>List(s)</th>
+            <th>Current Party</th>
+            <th>Former Party</th>
+        </tr>
+        {% for person in people_new_party %}
+        <tr>
+            <td><a href="{{ person.person.get_absolute_url }}">{{ person.person.name }}</a></td>
+            <td>
+                {% for list in person.person_list %}
+                    {{ list.organisation.name }}
+                {% endfor %}
+            </td>
+            <td>
+                {% for position in person.current_positions %}
+                    {{ position.organisation.name }}
+                {% endfor %}
+            </td>
+            <td>
+                {% for position in person.former_positions %}
+                    {{ position.organisation.name }}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+
