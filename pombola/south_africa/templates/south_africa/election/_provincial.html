@@ -1,9 +1,11 @@
-<h3>View candidates by province</h3>
+<div class="overview-section">
+    <h3>View candidates by province</h3>
 
-<ul>
-    {% for province in province_list %}
-        <li>
-            <a href="{% url "sa-election-candidates-provincial" election_year=2014 province_name=province.slug %}">{{ province.name }}</a>
-        </li>
-    {% endfor %}
-</ul>
+    <ul class="overview-list">
+        {% for province in province_list %}
+            <li>
+                <a href="{% url "sa-election-candidates-provincial" election_year=2014 province_name=province.slug %}">{{ province.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,19 +1,22 @@
-<h3>View candidates by party</h3>
+<div class="overview-section">
+    <h3>View candidates by party</h3>
+    <ul class="overview-list">
+        {% for party in party_list %}
+            <li>
+                <a href="{% url "sa-election-candidates-national-party" election_year=2014 party_name=party.slug %}">{{ party.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
 
-<ul>
-    {% for party in party_list %}
-        <li>
-            <a href="{% url "sa-election-candidates-national-party" election_year=2014 party_name=party.slug %}">{{ party.name }}</a>
-        </li>
-    {% endfor %}
-</ul>
+<div class="overview-section">
+    <h3>View candidates by province</h3>
 
-<h3>View candidates by province</h3>
-
-<ul>
-    {% for province in province_list %}
-        <li>
-            <a href="{% url "sa-election-candidates-national-province" election_year=2014 province_name=province.slug %}">{{ province.name }}</a>
-        </li>
-    {% endfor %}
-</ul>
+    <ul class="overview-list">
+        {% for province in province_list %}
+            <li>
+                <a href="{% url "sa-election-candidates-national-province" election_year=2014 province_name=province.slug %}">{{ province.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

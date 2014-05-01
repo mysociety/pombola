@@ -5563,37 +5563,162 @@ ul.pager li.next {
   *zoom: 1;
 }
 
-.province-header {
+/* Shared election page header */
+.election-page-header {
   border-bottom: 1px solid #ccc;
   padding-bottom: 1em;
   margin-bottom: 2em;
 }
-.province-header h2 {
+.election-page-header h2 {
   font-size: 2.375em;
   margin-bottom: 0.5em;
   line-height: 1.2em;
 }
-.province-header .province-subtitle a {
+
+.election-page-subtitle {
   color: #017b58;
   font-size: 1.5em;
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
   font-weight: normal !important;
-  text-transform: capitalize;
+}
+.election-page-subtitle a {
+  color: #017b58;
   text-decoration: none;
 }
-.province-header .province-subtitle a .change-province {
+.election-page-subtitle a .change-province {
   font-size: 0.583333333em;
   text-decoration: none;
   color: #777;
 }
-.province-header .province-subtitle a:hover, .province-header .province-subtitle a:active, .province-header .province-subtitle a:focus {
+.election-page-subtitle a:hover, .election-page-subtitle a:active, .election-page-subtitle a:focus {
   color: #e23d28;
   text-decoration: underline;
 }
-.province-header .province-subtitle a:hover .change-province, .province-header .province-subtitle a:active .change-province, .province-header .province-subtitle a:focus .change-province {
+.election-page-subtitle a:hover .change-province, .election-page-subtitle a:active .change-province, .election-page-subtitle a:focus .change-province {
   color: #e23d28;
 }
 
+/* Overview page */
+.general-election-information {
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  padding: 0 0 2em;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 2em;
+}
+.general-election-information:before, .general-election-information:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.general-election-information:after {
+  clear: both;
+}
+.general-election-information {
+  *zoom: 1;
+}
+@media only all and (min-width: 640px), print {
+  .general-election-information #election_countdown {
+    float: right;
+    width: 38%;
+  }
+  .general-election-information #election_countdown .countdown_row {
+    float: right;
+  }
+}
+.general-election-information .countdown_row {
+  color: #fff;
+  background-color: #e23d28;
+  padding: 1.5em 2.5em;
+  position: static;
+  right: auto;
+  float: left;
+}
+
+@media only all and (min-width: 640px), print {
+  .election-introduction {
+    float: left;
+    width: 59%;
+    margin-right: 3%;
+  }
+}
+
+.overview-section {
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  margin: 0 0 2em;
+}
+.overview-section:before, .overview-section:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.overview-section:after {
+  clear: both;
+}
+.overview-section {
+  *zoom: 1;
+}
+
+.election-candidates {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 3em;
+  padding-bottom: 1em;
+}
+.election-candidates:last-child {
+  border-bottom: none;
+}
+.election-candidates h2 {
+  margin-bottom: 1em;
+  font-size: 1.875em;
+}
+.election-candidates h3 {
+  color: #555;
+}
+
+.overview-list {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.overview-list li {
+  list-style: none outside none;
+}
+@media only all and (min-width: 640px), print {
+  .overview-list {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    -o-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 2em;
+    -moz-column-gap: 2em;
+    -o-column-gap: 2em;
+    column-gap: 2em;
+  }
+}
+.overview-list li {
+  padding: 0.5em 0.25em;
+  border-bottom: 1px solid #ccc;
+}
+.overview-list li:first-child {
+  border-top: 1px solid #ccc;
+}
+.overview-list a {
+  text-decoration: none;
+}
+
+/* Province pages */
+.party-list {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}
 .party-list h3 {
   text-transform: none;
   font-size: 1.875em;
@@ -5601,9 +5726,42 @@ ul.pager li.next {
   font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
   font-weight: normal !important;
 }
+@media only all and (min-width: 640px), print {
+  .party-list h3 {
+    margin-right: 5em;
+  }
+}
 .party-list .for-province {
   font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
   font-weight: normal !important;
   color: #777;
   font-size: 0.7em;
+}
+.party-list ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  -o-column-count: 2;
+  column-count: 2;
+  margin-bottom: 1em;
+}
+.party-list ul li {
+  list-style: none outside none;
+}
+.party-list .back-to-top {
+  color: #777;
+  text-decoration: none;
+  font-size: 0.875em;
+}
+.party-list .back-to-top:hover, .party-list .back-to-top:active, .party-list .back-to-top:focus {
+  text-decoration: underline;
+  color: #e23d28;
+}
+@media only all and (min-width: 640px), print {
+  .party-list .back-to-top {
+    position: absolute;
+    top: 0.5em;
+    right: 0;
+  }
 }

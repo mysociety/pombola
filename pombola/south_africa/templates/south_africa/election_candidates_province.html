@@ -1,19 +1,21 @@
 {% extends 'south_africa/election_base.html' %}
 
 {% block content %}
-    <div class="province-header">
+    <div class="election-page-header" id="top">
         <h2>Candidates for the {{ election_year }} {{ election_type }} election</h2>
-        <p class="province-subtitle"> <a href="#">{{ province_name }} <span class="change-province">change</span></a></p>
+        <p class="election-page-subtitle"> <a href="#">{{ province_name }} <span class="change-province">change</span></a></p>
     </div>
 
 		{% for party in province_election_lists %}
 			<div class="party-list">
+                <a href="#top" class="back-to-top">Back to top</a>
 				<h3>{{ party.name }} <span class="for-province">for {{ province_name }}</span></h3>
 				<ul>
 					{% for candidate in party.position_set.all %}
 						<li>{{ candidate.person.name }}</li>
 					{% endfor %}
 				</ul>
+                <a href="#">View all</a>
 			</div>
 		{% endfor %}
 

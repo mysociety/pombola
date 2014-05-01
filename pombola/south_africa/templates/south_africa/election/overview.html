@@ -5,9 +5,14 @@
 {% endblock %}
 
 {% block content %}
-
-    <p>General information etc here.</p>
-
+<div class="election-page-header" id="top">
+        <h2>South African General Election 2014</h2>
+        <p class="election-page-subtitle">7 May 2014</p>
+    </div>
+<div class="general-election-information">
+  <div class="election-introduction">
+      <p>General information etc here.</p>
+  </div>
     <div id="election_countdown" data-until="2014/5/7 07:00:00 UTC+0200">
       <span class="countdown_row countdown_show5">
           <span class="countdown_section countdown_icon"><span></span></span>
@@ -17,13 +22,15 @@
           <span class="countdown_section countdown_second"><span class="countdown_amount last">--</span><span class="countdown_label">Seconds</span></span>
       </span>
     </div>
-
+  </div>
+<div class="election-candidates">
     <h2>National Election</h2>
     {% include "south_africa/election/_national.html" %}
-
+</div>
+<div class="election-candidates">
     <h2>Provincial Election</h2>
     {% include "south_africa/election/_provincial.html" %}
-
+</div>
 {% endblock %}
 
 
