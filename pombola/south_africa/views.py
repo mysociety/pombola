@@ -890,10 +890,8 @@ class SAElectionProvinceCandidatesView(TemplateView):
         else:
             party_name = None
 
-        if 'province_name' in self.kwargs:
-            province_name = self.kwargs['province_name']
-        else:
-            province_name = None
+        # The province name should always exist
+        province_name = self.kwargs['province_name']
 
         # All lists of candidates share this kind
         election_list = models.OrganisationKind.objects.get(slug='election-list')
@@ -915,5 +913,11 @@ class SAElectionProvinceCandidatesView(TemplateView):
         context['province_election_lists'] = models.Organisation.objects.filter(
             slug__endswith=election_list_name
         ).order_by('name')
+
+        # Get the province object, so we can use its details
+        province_kind = models.PlaceKind.objects.get(slug='province')
+        context['province'] = models.Place.objects.get(
+            kind=province_kind,
+            slug=province_name)
 
         return context
