@@ -14,9 +14,9 @@ import urllib2
 import json
 import string
 from optparse import make_option
-from pombola.core.models import (Organisation, OrganisationKind, Identifier,
-                         PlaceKind, Person, Contact, ContactKind, Position,
-                         PositionTitle, Place, PlaceKind, AlternativePersonName)
+from pombola.core.models import (Organisation, OrganisationKind,
+                         Person, Position,
+                         PositionTitle, AlternativePersonName)
 from django.core.management import call_command
 from django.core.management.base import NoArgsCommand, CommandError
 from django.utils import encoding
@@ -285,8 +285,8 @@ class Command(NoArgsCommand):
         if options['apiurl']:
             API_URL = options['apiurl']
 
-        if not os.path.exists(options['candidates']):
-            print >> sys.stderr, "The candidates file doesn't exist",
+        if not options['candidates'] or not os.path.exists(options['candidates']):
+            print >> sys.stderr, "The candidates file doesn't exist"
             sys.exit(1)
 
         #check all the parties exist
