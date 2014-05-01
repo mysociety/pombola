@@ -96,33 +96,21 @@ urlpatterns += patterns('',
     # National election, party list
     url(
         r'^election/(?P<election_year>[-\w]+)/national/party/(?P<party_name>[-\w]+)/$',
-        views.SAElectionCandidatesView.as_view(),
-        {
-            'election_type': 'national',
-            'template_type': 'party'
-        },
+        views.SAElectionPartyCandidatesView.as_view(election_type='national'),
         name='sa-election-candidates-national-party',
     ),
 
     # National election, provincial list
     url(
         r'^election/(?P<election_year>[-\w]+)/national/province/(?P<province_name>[-\w]+)/$',
-        views.SAElectionCandidatesView.as_view(),
-        {
-            'election_type': 'national',
-            'template_type': 'province'
-        },
+        views.SAElectionProvinceCandidatesView.as_view(election_type='national'),
         name='sa-election-candidates-national-province',
     ),
 
     # Provincial election, provincial list (ie all candidates in province)
     url(
         r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/$',
-        views.SAElectionCandidatesView.as_view(),
-        {
-            'election_type': 'provincial',
-            'template_type': 'province'
-        },
+        views.SAElectionProvinceCandidatesView.as_view(election_type='provincial'),
         name='sa-election-candidates-provincial',
     ),
     url(
@@ -133,11 +121,7 @@ urlpatterns += patterns('',
     # Provincial election, party list
     url(
         r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/party/(?P<party_name>[-\w]+)/$',
-        views.SAElectionCandidatesView.as_view(),
-        {
-            'election_type': 'provincial',
-            'template_type': 'party'
-        },
+        views.SAElectionPartyCandidatesView.as_view(election_type='provincial'),
         name='sa-election-candidates-provincial-party',
     ),
 )
