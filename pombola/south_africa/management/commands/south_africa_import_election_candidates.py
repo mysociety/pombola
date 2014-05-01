@@ -1,16 +1,11 @@
 '''
 Imports ZA provincial and national election candidates using the 2014
 IEC spreadsheet format.
-
-Note that this script currently uses the PopIt API as it has been
-converted from a non-Django script. Ideally it should perform searches
-internally.
 '''
 
 import os
 import sys
 import unicodecsv
-import urllib2
 import json
 import string
 from optparse import make_option
@@ -25,10 +20,11 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 
+from haystack.query import SearchQuerySet
+
 party_to_object = {}
 list_to_object = {}
 position_to_object = {}
-API_URL = 'http://za-new-import.popit.mysociety.org/api/v0.1'
 YEAR=''
 
 def check_or_create_positions():
@@ -73,7 +69,7 @@ def get_party(partyname):
     else:
         return False
 
-def save_match(person_name, party_name, list_position, import_list_name, person_list_firstnames, person_list_surname):
+def save_match(person, party_name, list_position, import_list_name, person_list_firstnames, person_list_surname):
     '''Save imported details about a person who already exists'''
     #get the list to add the person to
     import_list_name = string.replace(import_list_name, ':', '')
@@ -85,16 +81,6 @@ def save_match(person_name, party_name, list_position, import_list_name, person_
 
     #get the position title
     positiontitle = position_to_object[list_position]
-
-    #get the person. currently the API does not return the Pombola id
-    #(this needn't actually use the API - see above) so the script needs
-    #to use the exact person name to identify the person
-    try:
-        person = Person.objects.get(legal_name=person_name)
-    except ObjectDoesNotExist:
-        #assume script failed and we are rerunning bit a person name
-        #has been updated
-        person = Person.objects.get(legal_name=(person_list_firstnames+' '+person_list_surname).title())
 
     #get the person's current party to compare whether these have changed
     #we assume that a person on an election list should not be a member
@@ -191,30 +177,29 @@ def add_new_person(party_name, list_position, import_list_name, person_list_firs
 
 def process_search(firstnames, surname, party, list_position, list_name, url):
     '''Process a search based on the search string passed via url'''
-    search = urllib2.urlopen(encoding.iri_to_uri(API_URL + url))
-    searchresult = json.load(search)
-    if len(searchresult['result'])==1:
-        save_match(searchresult['result'][0]['name'], party, list_position, list_name, firstnames, surname)
-        print 'match', searchresult['result'][0]['name']
+    search = SearchQuerySet().models(Person).filter(text=url)
+    if len(search) == 1 and search[0].object:
+        print 'match', search[0].object.name
+        save_match(search[0].object, party, list_position, list_name, firstnames, surname)
         return True
     else:
         return False
 
 #Search 1
 def search_full_name(firstnames, surname, party, list_position, list_name):
-    searchurl = '/search/persons?q=name:"'+(firstnames+' '+surname).replace(' ','+')+'"'
+    searchurl = '"'+(firstnames+' '+surname)+'"'
     return process_search(firstnames, surname, party, list_position, list_name, searchurl)
 
 #Search 2
 def search_reordered(firstnames, surname, party, list_position, list_name):
-    searchurl = '/search/persons?q=name:"'+(firstnames+' '+surname).replace(' ','+')+'"~4'
+    searchurl = '"'+(firstnames+' '+surname)+'"~4'
     return process_search(firstnames, surname, party, list_position, list_name, searchurl)
 
 #Search 3
 def search_first_names(firstnames, surname, party, list_position, list_name):
     names = firstnames.split(" ")
     for name in names:
-        searchurl = '/search/persons?q=name:"'+(name+' '+surname).replace(' ','+')+'"'
+        searchurl = '"'+(name+' '+surname)+'"'
         if process_search(firstnames, surname, party, list_position, list_name, searchurl):
             return True
     return False
@@ -225,7 +210,7 @@ def search_initials(firstnames, surname, party, list_position, list_name):
     initials=''
     for name in names:
         initials+=name[:1]+'. '
-    searchurl = '/search/persons?q=name:"'+(initials+surname).replace(' ','+')+'"'
+    searchurl = '"'+(initials+surname)+'"'
     return process_search(firstnames, surname, party, list_position, list_name, searchurl)
 
 #Search 5
@@ -234,7 +219,7 @@ def search_initials_alt(firstnames, surname, party, list_position, list_name):
     initials=''
     for name in names:
         initials+=name[:1]+'.'
-    searchurl = '/search/persons?q=name:"'+(initials+' '+surname).replace(' ','+')+'"'
+    searchurl = '"'+(initials+' '+surname)+'"'
     return process_search(firstnames, surname, party, list_position, list_name, searchurl)
 
 #Search 6
@@ -243,7 +228,7 @@ def search_misspellings(firstnames, surname, party, list_position, list_name):
     first=''
     for name in names:
         first+=name+'~ AND '
-    searchurl = '/search/persons?q=name:'+(first+surname).replace(' ','+')
+    searchurl = first+surname
     return process_search(firstnames, surname, party, list_position, list_name, searchurl)
 
 def search(firstnames, surname, party, list_position, list_name):
@@ -268,22 +253,13 @@ class Command(NoArgsCommand):
     help = 'Import csv file of South African national and provincial election candidates'
 
     option_list = NoArgsCommand.option_list + (
-        make_option(
-            '--candidates', '-c',
-            help="The candidates csv file"),
-        make_option(
-            '--year','-y',
-            help="The year of the election"),
-        make_option(
-            '--apiurl','-u',
-            help="The API url."),)
+        make_option( '--candidates', '-c', help="The candidates csv file" ),
+        make_option( '--year', '-y', help="The year of the election" ),
+    )
 
     def handle_noargs(self, **options):
         global YEAR
-        global API_URL
         YEAR = options['year']
-        if options['apiurl']:
-            API_URL = options['apiurl']
 
         if not options['candidates'] or not os.path.exists(options['candidates']):
             print >> sys.stderr, "The candidates file doesn't exist"
