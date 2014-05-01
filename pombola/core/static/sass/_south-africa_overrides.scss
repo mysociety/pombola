@@ -2176,3 +2176,103 @@ ul.pager {
         }
    }
 }
+
+
+/* 2014 Elections styles */
+#front_intro {
+    padding-bottom: 0; /* turn this off while the elections styles are active */
+}
+
+.elections-home {
+    color: #fff;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.25);
+    background-color: darken($colour_green, 5%);
+    background-color: rgba(0,0,0,0.2);
+    padding: 2em 0;
+    margin-top: 2em;
+    text-align: center;
+    @media only all and (min-width: 640px), print {
+        text-align: left;
+    }
+    h2 {
+        font-size: 2.25em;
+        line-height: 1.2em;
+        color: #fff;
+    }
+    a {
+        color: #fff;
+    }
+}
+.elections-home-intro {
+    position: relative;
+    @media only all and (min-width: 640px), print {
+        background-image: url('/static/images/elections-icon.png');
+        background-position: left center;
+        background-repeat: no-repeat;
+        float: left;
+        width: 67%;
+        h2, p {
+            margin-left: 120px;
+        }
+        p {
+            @include lato-regular;
+            font-size: 1.125em;
+        }
+        a {
+            text-decoration: none;
+            &:hover,
+            &:active,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+
+#election_countdown {
+    position: relative;
+    @media only all and (min-width: 640px), print {
+        float: left;
+        width: 33%;
+    }
+}
+
+
+.countdown_row {
+    @media only all and (min-width: 640px), print {
+        position: absolute;
+        right: 0;
+    }
+}
+
+/* Countdown */
+@import url('http://fonts.googleapis.com/css?family=Oswald&text=0123456789');
+.countdown_section {
+    display: inline-block;
+    text-align: center;
+}
+
+.countdown_amount {
+    display: block;
+    font-family: 'Oswald', 'Arial Narrow', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans sans-serif;
+    font-size: 3.75em;
+    @media (min-width: 640px) and (max-width: 880px) {
+        font-size: 2.5em;
+    }
+
+    &:after {
+        content: ":";
+    }
+    &.last {
+        &:after {
+            content: "";
+        }
+    }
+}
+
+.countdown_label {
+    display: block;
+    @include lato-regular;
+    font-size: 0.875em;
+}

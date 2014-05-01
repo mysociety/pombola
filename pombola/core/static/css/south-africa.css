@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@import url("http://fonts.googleapis.com/css?family=Oswald&text=0123456789");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -5384,4 +5384,106 @@ ul.pager li.next {
   .fifty-fifty-layout .column:first-child {
     margin-right: 4%;
   }
+}
+/* 2014 Elections styles */
+#front_intro {
+  padding-bottom: 0;
+  /* turn this off while the elections styles are active */
+}
+
+.elections-home {
+  color: #fff;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.25);
+  background-color: #016246;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 2em 0;
+  margin-top: 2em;
+  text-align: center;
+}
+@media only all and (min-width: 640px), print {
+  .elections-home {
+    text-align: left;
+  }
+}
+.elections-home h2 {
+  font-size: 2.25em;
+  line-height: 1.2em;
+  color: #fff;
+}
+.elections-home a {
+  color: #fff;
+}
+
+.elections-home-intro {
+  position: relative;
+}
+@media only all and (min-width: 640px), print {
+  .elections-home-intro {
+    background-image: url("/static/images/elections-icon.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+    float: left;
+    width: 67%;
+  }
+  .elections-home-intro h2, .elections-home-intro p {
+    margin-left: 120px;
+  }
+  .elections-home-intro p {
+    font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+    font-weight: normal !important;
+    font-size: 1.125em;
+  }
+  .elections-home-intro a {
+    text-decoration: none;
+  }
+  .elections-home-intro a:hover, .elections-home-intro a:active, .elections-home-intro a:focus {
+    text-decoration: underline;
+  }
+}
+
+#election_countdown {
+  position: relative;
+}
+@media only all and (min-width: 640px), print {
+  #election_countdown {
+    float: left;
+    width: 33%;
+  }
+}
+
+@media only all and (min-width: 640px), print {
+  .countdown_row {
+    position: absolute;
+    right: 0;
+  }
+}
+
+/* Countdown */
+.countdown_section {
+  display: inline-block;
+  text-align: center;
+}
+
+.countdown_amount {
+  display: block;
+  font-family: 'Oswald', 'Arial Narrow', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans sans-serif;
+  font-size: 3.75em;
+}
+@media (min-width: 640px) and (max-width: 880px) {
+  .countdown_amount {
+    font-size: 2.5em;
+  }
+}
+.countdown_amount:after {
+  content: ":";
+}
+.countdown_amount.last:after {
+  content: "";
+}
+
+.countdown_label {
+  display: block;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  font-size: 0.875em;
 }
