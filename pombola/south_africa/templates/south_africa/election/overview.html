@@ -1,8 +1,22 @@
 {% extends 'south_africa/election_base.html' %}
 
+{% block extra_js_to_load %}
+    pombola_settings.extra_js.push( 'js/election_countdown.js' );
+{% endblock %}
+
 {% block content %}
 
-    <p>General information etc here. Countdown clock</p>
+    <p>General information etc here.</p>
+
+    <div id="election_countdown" data-until="2014/5/7 07:00:00 UTC+0200">
+      <span class="countdown_row countdown_show5">
+          <span class="countdown_section countdown_icon"><span></span></span>
+          <span class="countdown_section countdown_day"><span class="countdown_amount">--</span><span class="countdown_label">Days</span></span>
+          <span class="countdown_section countdown_hour"><span class="countdown_amount">--</span><span class="countdown_label">Hours</span></span>
+          <span class="countdown_section countdown_minute"><span class="countdown_amount">--</span><span class="countdown_label">Minutes</span></span>
+          <span class="countdown_section countdown_second"><span class="countdown_amount last">--</span><span class="countdown_label">Seconds</span></span>
+      </span>
+    </div>
 
     <h2>National Election</h2>
     {% include "south_africa/election/_national.html" %}
