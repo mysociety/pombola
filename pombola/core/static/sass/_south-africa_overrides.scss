@@ -2338,3 +2338,51 @@ ul.pager {
     @include clearfix;
     padding: 2em 1em 0;
 }
+
+.province-header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1em;
+    margin-bottom: 2em;
+    h2 {
+        font-size: 2.375em;
+        margin-bottom: 0.5em;
+    }
+    .province-subtitle {
+        a {
+            color: $colour_green;
+            font-size: 1.5em;
+            @include lato-regular;
+            text-transform: capitalize;
+            text-decoration: none;
+            .change-province {
+                font-size: 0.583333333em;
+                text-decoration: none;
+                color: $colour_middling_grey;
+            }
+            &:hover,
+            &:active,
+            &:focus {
+                color: $colour_primary;
+                text-decoration: underline;
+                .change-province {
+                    color: $colour_primary;
+                }
+            }
+        }
+
+    }
+}
+
+.party-list {
+    h3 {
+        text-transform: none;
+        font-size: 1.875em;
+        line-height: 1.2em;
+        @include lato-bold;
+    }
+    .for-province {
+        @include lato-regular;
+        color: #777;
+        font-size: 0.7em;
+    }
+}

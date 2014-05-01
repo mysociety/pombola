@@ -5562,3 +5562,47 @@ ul.pager li.next {
 .election-body {
   *zoom: 1;
 }
+
+.province-header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+}
+.province-header h2 {
+  font-size: 2.375em;
+  margin-bottom: 0.5em;
+}
+.province-header .province-subtitle a {
+  color: #017b58;
+  font-size: 1.5em;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+.province-header .province-subtitle a .change-province {
+  font-size: 0.583333333em;
+  text-decoration: none;
+  color: #b3b3b3;
+}
+.province-header .province-subtitle a:hover, .province-header .province-subtitle a:active, .province-header .province-subtitle a:focus {
+  color: #e23d28;
+  text-decoration: underline;
+}
+.province-header .province-subtitle a:hover .change-province, .province-header .province-subtitle a:active .change-province, .province-header .province-subtitle a:focus .change-province {
+  color: #e23d28;
+}
+
+.party-list h3 {
+  text-transform: none;
+  font-size: 1.875em;
+  line-height: 1.2em;
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+}
+.party-list .for-province {
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  color: #777;
+  font-size: 0.7em;
+}
