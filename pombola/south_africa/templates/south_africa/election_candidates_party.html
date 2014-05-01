@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Election{% endblock %}
+
+{% block body_attributes %} class="election" {% endblock %}
+
+{% block intro_content %}
+
+    <div class="wrapper">
+        <h2>Candidates for party {{ party.name }} in the {{ election_year }} {{ election_type }} election {% if province_name %} in the {{ province_name }} province {% endif %}.</h2>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    <ul>
+		{% for candidate in party_election_list.position_set.all %}
+			<li>{{ candidate.person }}</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}

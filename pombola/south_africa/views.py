@@ -788,3 +788,99 @@ class SASectionView(SectionView):
                     return redirect(redirect_url)
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
+class SAElectionOverviewView(TemplateView):
+
+    template_name = 'south_africa/election_overview.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SAElectionOverviewView, self).get_context_data(**kwargs)
+
+        party_kind = models.OrganisationKind.objects.get(slug='party')
+        context['party_list'] = models.Organisation.objects.filter(
+            kind=party_kind).order_by('name')
+
+        province_kind = models.PlaceKind.objects.get(slug='province')
+        context['province_list'] = models.Place.objects.filter(
+            kind=province_kind).order_by('name')
+
+        return context
+
+class SAElectionCandidatesView(TemplateView):
+
+    def get_template_names(self):
+        template_type = self.kwargs['template_type']
+        return ['south_africa/election_candidates_%s.html' % template_type]
+
+    def get_context_data(self, **kwargs):
+        context = super(SAElectionCandidatesView, self).get_context_data(**kwargs)
+
+        # These are common bits
+        election_year = self.kwargs['election_year']
+        election_type = self.kwargs['election_type']
+        template_type = self.kwargs['template_type']
+
+        context['election_year'] = election_year
+        context['election_type'] = election_type
+
+        # Details from the URI
+        if 'party_name' in self.kwargs:
+            party_name = self.kwargs['party_name']
+        else:
+            party_name = None
+
+        if 'province_name' in self.kwargs:
+            province_name = self.kwargs['province_name']
+        else:
+            province_name = None
+
+        # All lists of candidates share this kind
+        election_list = models.OrganisationKind.objects.get(slug='election-list')
+
+        # The data passed to the template varies on if we approach from a party or province context
+        if template_type == 'party':
+
+            # Build the right election list name
+            election_list_name = party_name
+
+            if election_type == 'provincial':
+                election_list_name += '-provincial'
+                election_list_name += '-' + province_name
+            elif election_type == 'national' and province_name is not None:
+                election_list_name += '-regional'
+                election_list_name += '-' + province_name
+            else:
+                election_list_name += '-national'
+
+            election_list_name += '-election-list'
+            election_list_name += '-' + election_year
+
+            # This is a party template, so get the party
+            context['party'] = get_object_or_404(models.Organisation, slug=party_name)
+
+            # Now go get the party's election list (assuming it exists)
+            context['party_election_list'] = models.Organisation.objects.get(
+                slug=election_list_name
+            )
+
+        if template_type == 'province':
+
+            # Build the right election list name
+            election_list_name = ''
+
+            if election_type == 'provincial':
+                election_list_name += '-provincial'
+                election_list_name += '-' + province_name
+            elif election_type == 'national' and province_name is not None:
+                election_list_name += '-regional'
+                election_list_name += '-' + province_name
+
+            election_list_name += '-election-list'
+            election_list_name += '-' + election_year
+
+            # Go get all the election lists!
+            context['province_election_lists'] = models.Organisation.objects.filter(
+                slug__endswith=election_list_name
+            ).order_by('name')
+
+        return context
