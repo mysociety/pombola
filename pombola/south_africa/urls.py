@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import RedirectView
 
+from pombola.south_africa import views
 from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     LatLonDetailLocalView, SAPlaceDetailSub, SAOrganisationDetailView,
     SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
@@ -8,7 +9,7 @@ from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     SAPersonAppearanceView, SAQuestionIndex,
     SAOrganisationDetailSubPeople, SAOrganisationDetailSubParty,
     OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView,
-    SAGeocoderView, SAElectionOverviewView, SAElectionCandidatesView)
+    SAGeocoderView)
 from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import organisation_patterns, person_patterns
 from pombola.search.urls import urlpatterns as search_urlpatterns
@@ -64,19 +65,22 @@ urlpatterns += patterns('',
 # Routing for election pages
 urlpatterns += patterns('',
 
+    # Overview pages
     url(r'^election/$', RedirectView.as_view(pattern_name='sa-election-overview-year'), { 'election_year': 2014 }),
-
     url(
         r'^election/(?P<election_year>[0-9]{4})/$',
-        SAElectionOverviewView.as_view(),
+        views.SAElectionOverviewView.as_view(),
         name='sa-election-overview-year'
     ),
-
-    # These URLs make no real sense, so show the overview
     url(
         r'^election/(?P<election_year>[0-9]{4})/national/$',
-        SAElectionOverviewView.as_view(),
+        views.SAElectionNationalView.as_view(),
         name='sa-election-overview-national'
+    ),
+    url(
+        r'^election/(?P<election_year>[0-9]{4})/provincial/$',
+        views.SAElectionProvincialView.as_view(),
+        name='sa-election-overview-provincial'
     ),
     url(
         r'^election/(?P<election_year>[0-9]{4})/national/party/$',
@@ -86,16 +90,11 @@ urlpatterns += patterns('',
         r'^election/(?P<election_year>[0-9]{4})/national/province/$',
         RedirectView.as_view(pattern_name='sa-election-overview-national', permanent=True),
     ),
-    url(
-        r'^election/(?P<election_year>[0-9]{4})/provincial/$',
-        SAElectionOverviewView.as_view(),
-        name='sa-election-overview-provincial'
-    ),
 
     # National election, party list
     url(
         r'^election/(?P<election_year>[-\w]+)/national/party/(?P<party_name>[-\w]+)/$',
-        SAElectionCandidatesView.as_view(),
+        views.SAElectionCandidatesView.as_view(),
         {
             'election_type': 'national',
             'template_type': 'party'
@@ -106,7 +105,7 @@ urlpatterns += patterns('',
     # National election, provincial list
     url(
         r'^election/(?P<election_year>[-\w]+)/national/province/(?P<province_name>[-\w]+)/$',
-        SAElectionCandidatesView.as_view(),
+        views.SAElectionCandidatesView.as_view(),
         {
             'election_type': 'national',
             'template_type': 'province'
@@ -117,7 +116,7 @@ urlpatterns += patterns('',
     # Provincial election, provincial list (ie all candidates in province)
     url(
         r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/$',
-        SAElectionCandidatesView.as_view(),
+        views.SAElectionCandidatesView.as_view(),
         {
             'election_type': 'provincial',
             'template_type': 'province'
@@ -132,7 +131,7 @@ urlpatterns += patterns('',
     # Provincial election, party list
     url(
         r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/party/(?P<party_name>[-\w]+)/$',
-        SAElectionCandidatesView.as_view(),
+        views.SAElectionCandidatesView.as_view(),
         {
             'election_type': 'provincial',
             'template_type': 'party'

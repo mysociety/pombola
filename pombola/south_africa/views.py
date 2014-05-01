@@ -789,13 +789,11 @@ class SASectionView(SectionView):
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
 
-class SAElectionOverviewView(TemplateView):
-
-    template_name = 'south_africa/election_overview.html'
-
+class SAElectionOverviewMixin(TemplateView):
     def get_context_data(self, **kwargs):
-        context = super(SAElectionOverviewView, self).get_context_data(**kwargs)
+        context = super(SAElectionOverviewMixin, self).get_context_data(**kwargs)
 
+        # XXX Does this need to only be parties standing in the election?
         party_kind = models.OrganisationKind.objects.get(slug='party')
         context['party_list'] = models.Organisation.objects.filter(
             kind=party_kind).order_by('name')
@@ -805,6 +803,15 @@ class SAElectionOverviewView(TemplateView):
             kind=province_kind).order_by('name')
 
         return context
+
+class SAElectionOverviewView(SAElectionOverviewMixin):
+    template_name = 'south_africa/election/overview.html'
+
+class SAElectionNationalView(SAElectionOverviewMixin):
+    template_name = 'south_africa/election/national.html'
+
+class SAElectionProvincialView(SAElectionOverviewMixin):
+    template_name = 'south_africa/election/provincial.html'
 
 class SAElectionCandidatesView(TemplateView):
 

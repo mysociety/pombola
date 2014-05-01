@@ -1,0 +1,15 @@
+{% extends 'south_africa/election_base.html' %}
+
+{% block content %}
+
+    <p>General information etc here. Countdown clock</p>
+
+    <h2>National Election</h2>
+    {% include "south_africa/election/_national.html" %}
+
+    <h2>Provincial Election</h2>
+    {% include "south_africa/election/_provincial.html" %}
+
+{% endblock %}
+
+

@@ -11,9 +11,9 @@
             <div class="navigation-tabs">
                 <nav role="navigation">
                     <ul>
-                        <li><a href="#" class="current">Home</a></li>
-                        <li><a href="#">National election</a></li>
-                        <li><a href="#">Provincial election</a></li>
+                        <li><a href="{% url "sa-election-overview-year" election_year=2014 %}" class="current">Home</a></li>
+                        <li><a href="{% url "sa-election-overview-national" election_year=2014 %}">National election</a></li>
+                        <li><a href="{% url "sa-election-overview-provincial" election_year=2014 %}">Provincial election</a></li>
                         <li><a href="#">Statistics</a></li>
                     </ul>
                 </nav>
