@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.views.generic.base import RedirectView
 
 from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     LatLonDetailLocalView, SAPlaceDetailSub, SAOrganisationDetailView,
@@ -63,92 +64,80 @@ urlpatterns += patterns('',
 # Routing for election pages
 urlpatterns += patterns('',
 
-    url(
-        r'^election/?$',
-        SAElectionOverviewView.as_view(),
-        name='sa-election-overview'
-    ),
+    url(r'^election/$', RedirectView.as_view(pattern_name='sa-election-overview-year'), { 'election_year': 2014 }),
 
     url(
-        r'^election/(?P<election_year>[0-9]{4})/?$',
+        r'^election/(?P<election_year>[0-9]{4})/$',
         SAElectionOverviewView.as_view(),
         name='sa-election-overview-year'
     ),
 
     # These URLs make no real sense, so show the overview
     url(
-        r'^election/(?P<election_year>[0-9]{4})/national/?$',
+        r'^election/(?P<election_year>[0-9]{4})/national/$',
         SAElectionOverviewView.as_view(),
-        name='sa-election-overview-year'
+        name='sa-election-overview-national'
     ),
     url(
-        r'^election/(?P<election_year>[0-9]{4})/national/party/?$',
-        SAElectionOverviewView.as_view(),
-        name='sa-election-overview-year'
+        r'^election/(?P<election_year>[0-9]{4})/national/party/$',
+        RedirectView.as_view(pattern_name='sa-election-overview-national', permanent=True),
     ),
     url(
-        r'^election/(?P<election_year>[0-9]{4})/national/province/?$',
-        SAElectionOverviewView.as_view(),
-        name='sa-election-overview-year'
+        r'^election/(?P<election_year>[0-9]{4})/national/province/$',
+        RedirectView.as_view(pattern_name='sa-election-overview-national', permanent=True),
     ),
     url(
-        r'^election/(?P<election_year>[0-9]{4})/provincial/?$',
+        r'^election/(?P<election_year>[0-9]{4})/provincial/$',
         SAElectionOverviewView.as_view(),
-        name='sa-election-overview-year'
+        name='sa-election-overview-provincial'
     ),
 
     # National election, party list
     url(
-        r'^election/(?P<election_year>[-\w]+)/national/party/(?P<party_name>[-\w]+)/?$',
+        r'^election/(?P<election_year>[-\w]+)/national/party/(?P<party_name>[-\w]+)/$',
         SAElectionCandidatesView.as_view(),
         {
-            'name': 'sa-election-candidates-national-party',
             'election_type': 'national',
             'template_type': 'party'
-        }
-
+        },
+        name='sa-election-candidates-national-party',
     ),
 
     # National election, provincial list
     url(
-        r'^election/(?P<election_year>[-\w]+)/national/province/(?P<province_name>[-\w]+)/?$',
+        r'^election/(?P<election_year>[-\w]+)/national/province/(?P<province_name>[-\w]+)/$',
         SAElectionCandidatesView.as_view(),
         {
-            'name': 'sa-election-candidates-national-province',
             'election_type': 'national',
             'template_type': 'province'
-        }
+        },
+        name='sa-election-candidates-national-province',
     ),
 
     # Provincial election, provincial list (ie all candidates in province)
     url(
-        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/?$',
+        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/$',
         SAElectionCandidatesView.as_view(),
         {
-            'name': 'sa-election-candidates-provincial',
             'election_type': 'provincial',
             'template_type': 'province'
-        }
+        },
+        name='sa-election-candidates-provincial',
     ),
     url(
-        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/party/?$',
-        SAElectionCandidatesView.as_view(),
-        {
-            'name': 'sa-election-candidates-provincial',
-            'election_type': 'provincial',
-            'template_type': 'province'
-        }
+        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/party/$',
+        RedirectView.as_view(pattern_name='sa-election-candidates-provincial', permanent=True),
     ),
 
     # Provincial election, party list
     url(
-        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/party/(?P<party_name>[-\w]+)/?$',
+        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/party/(?P<party_name>[-\w]+)/$',
         SAElectionCandidatesView.as_view(),
         {
-            'name': 'sa-election-candidates-provincial',
             'election_type': 'provincial',
             'template_type': 'party'
-        }
+        },
+        name='sa-election-candidates-provincial-party',
     ),
 )
 
