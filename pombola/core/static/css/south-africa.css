@@ -5623,7 +5623,7 @@ ul.pager li.next {
 @media only all and (min-width: 640px), print {
   .general-election-information #election_countdown {
     float: right;
-    width: 38%;
+    width: 40%;
   }
   .general-election-information #election_countdown .countdown_row {
     float: right;
@@ -5632,7 +5632,7 @@ ul.pager li.next {
 .general-election-information .countdown_row {
   color: #fff;
   background-color: #e23d28;
-  padding: 1.5em 2.5em;
+  padding: 1.5em 2.2em;
   position: static;
   right: auto;
   float: left;
@@ -5641,7 +5641,7 @@ ul.pager li.next {
 @media only all and (min-width: 640px), print {
   .election-introduction {
     float: left;
-    width: 59%;
+    width: 57%;
     margin-right: 3%;
   }
 }

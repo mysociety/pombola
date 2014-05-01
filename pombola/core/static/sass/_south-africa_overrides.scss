@@ -2384,7 +2384,7 @@ ul.pager {
     #election_countdown {
         @media only all and (min-width: 640px), print {
             float: right;
-            width: 38%;
+            width: 40%;
             .countdown_row {
                 float: right;
             }
@@ -2393,7 +2393,7 @@ ul.pager {
     .countdown_row {
         color: #fff;
         background-color: $colour-primary;
-        padding: 1.5em 2.5em;
+        padding: 1.5em 2.2em;
         position: static;
         right: auto;
         float: left;
@@ -2403,7 +2403,7 @@ ul.pager {
 .election-introduction {
     @media only all and (min-width: 640px), print {
         float: left;
-        width: 59%;
+        width: 57%;
         margin-right: 3%;
     }
 }
