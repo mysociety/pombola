@@ -2346,6 +2346,7 @@ ul.pager {
     h2 {
         font-size: 2.375em;
         margin-bottom: 0.5em;
+        line-height: 1.2em;
     }
     .province-subtitle {
         a {
@@ -2357,7 +2358,7 @@ ul.pager {
             .change-province {
                 font-size: 0.583333333em;
                 text-decoration: none;
-                color: $colour_middling_grey;
+                color: #777;
             }
             &:hover,
             &:active,

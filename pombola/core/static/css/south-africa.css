@@ -5571,6 +5571,7 @@ ul.pager li.next {
 .province-header h2 {
   font-size: 2.375em;
   margin-bottom: 0.5em;
+  line-height: 1.2em;
 }
 .province-header .province-subtitle a {
   color: #017b58;
@@ -5583,7 +5584,7 @@ ul.pager li.next {
 .province-header .province-subtitle a .change-province {
   font-size: 0.583333333em;
   text-decoration: none;
-  color: #b3b3b3;
+  color: #777;
 }
 .province-header .province-subtitle a:hover, .province-header .province-subtitle a:active, .province-header .province-subtitle a:focus {
   color: #e23d28;
