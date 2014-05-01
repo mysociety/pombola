@@ -114,6 +114,10 @@ $section-verical-padding: 40px;
   #threat, #opportunity, #share-petition {
     border-top: $section-border-top;
     padding: $section-verical-padding 15px;
+    p {
+      font-weight: bold;
+      color: $header-green;
+    }
   }
 
   h2 {
