@@ -5751,14 +5751,18 @@ ul.pager li.next {
 .party-list ul {
   padding-left: 0;
   margin-bottom: 0;
-  -webkit-column-count: 2;
-  -moz-column-count: 2;
-  -o-column-count: 2;
-  column-count: 2;
   margin-bottom: 1em;
 }
 .party-list ul li {
   list-style: none outside none;
+}
+@media only all and (min-width: 640px), print {
+  .party-list ul {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    -o-column-count: 2;
+    column-count: 2;
+  }
 }
 .party-list li {
   line-height: 1.7em;
