@@ -5703,10 +5703,10 @@ ul.pager li.next {
 }
 .overview-list li {
   padding: 0.5em 0.25em;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #e9e9e9;
 }
 .overview-list li:first-child {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #e9e9e9;
 }
 .overview-list a {
   text-decoration: none;
