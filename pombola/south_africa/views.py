@@ -790,6 +790,8 @@ class SASectionView(SectionView):
         return self.render_to_response(context)
 
 class SAElectionOverviewMixin(TemplateView):
+    election_type = ''
+
     def get_context_data(self, **kwargs):
         context = super(SAElectionOverviewMixin, self).get_context_data(**kwargs)
 
@@ -839,6 +841,7 @@ class SAElectionOverviewView(SAElectionOverviewMixin):
 
 class SAElectionStatisticsView(SAElectionOverviewMixin):
     template_name = 'south_africa/election/statistics.html'
+    election_type = 'statistics'
 
     def get_context_data(self, **kwargs):
         context = super(SAElectionStatisticsView, self).get_context_data(**kwargs)
@@ -878,9 +881,11 @@ class SAElectionStatisticsView(SAElectionOverviewMixin):
 
 class SAElectionNationalView(SAElectionOverviewMixin):
     template_name = 'south_africa/election/national.html'
+    election_type = 'national'
 
 class SAElectionProvincialView(SAElectionOverviewMixin):
     template_name = 'south_africa/election/provincial.html'
+    election_type = 'provincial'
 
 class SAElectionPartyCandidatesView(TemplateView):
 
