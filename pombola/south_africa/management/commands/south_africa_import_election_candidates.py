@@ -28,6 +28,7 @@ party_to_object = {}
 list_to_object = {}
 position_to_object = {}
 YEAR=''
+COMMIT = False
 
 def check_or_create_positions():
     '''Checks whether positions exist, otherwise create them'''
@@ -90,8 +91,13 @@ def save_match(person, party_name, list_position, import_list_name, person_list_
     if person.given_name == '' and person.family_name == '':
         person.given_name = person_list_firstnames.title()
         person.family_name = person_list_surname.title()
-        person.save()
+        if COMMIT:
+            print '- updating given_name/family_name'
+            person.save()
+        else:
+            print '* would update blank given_name/family_name'
     elif person_list_firstnames.lower() != person.given_name.lower() or person_list_surname.lower() != person.family_name.lower():
+        print '- but names do not match existing given_name/family_name, ignoring'
         return False
 
     #get the person's current party to compare whether these have changed
@@ -109,9 +115,14 @@ def save_match(person, party_name, list_position, import_list_name, person_list_
             now_approx = repr(ApproximateDate(year=now.year, month=now.month, day=now.day))
             position = Position.objects.get(Q(person = person), Q(organisation = p), Q(title__slug = 'member'), Q(start_date__lte = now_approx), (Q(sorting_end_date_high__gte = now_approx) | Q(end_date = '')))
             position.end_date = ApproximateDate(year=2014, month=3)
-            position.save()
+            if COMMIT:
+                print '- ending %s party position' % position.organisation
+                position.save()
+            else:
+                print '* would end %s party position' % position.organisation
 
-    if not foundcorrectparty:
+    if COMMIT and not foundcorrectparty:
+        print '- creating %s party position' % party
         #get the member title
         member = PositionTitle.objects.get(name='Member')
         #add the correct membership
@@ -126,26 +137,38 @@ def save_match(person, party_name, list_position, import_list_name, person_list_
     if (person_list_firstnames+' '+person_list_surname).lower() != person.legal_name.lower():
         #set the new name as the person name and record the old as an
         #alternative name
-        AlternativePersonName.objects.get_or_create(person = person, alternative_name = person.name)
-        person.legal_name = (person_list_firstnames+' '+person_list_surname).title()
-        person.save()
+        new_name = (person_list_firstnames+' '+person_list_surname).title()
+        if COMMIT:
+            print '- updating person name from %s to %s' % (person.legal_name, new_name)
+            AlternativePersonName.objects.get_or_create(person = person, alternative_name = person.name)
+            person.legal_name = new_name
+            person.save()
+        else:
+            print '* would update person legal_name from %s to %s' % (person.legal_name, new_name)
 
     #add the actual membership of the list organisation. Note no end date
     #is set at this point. This should probably be the date of the election
     #but it is unclear whether setting this immediately would cause issues
     #if viewed on the election date or immediately afterwards
-    position = Position.objects.get_or_create(
-        person = person,
-        organisation = list_object,
-        start_date = ApproximateDate(year=2014, month=4, day=22), #set to the date of release of the final candidate lists. TODO - update for subsequent years
-        title = positiontitle,
-        category = 'political')
+    if COMMIT:
+        print '- creating candidate position'
+        position = Position.objects.get_or_create(
+            person = person,
+            organisation = list_object,
+            start_date = ApproximateDate(year=2014, month=4, day=22), #set to the date of release of the final candidate lists. TODO - update for subsequent years
+            title = positiontitle,
+            category = 'political')
 
     return True
 
 def add_new_person(party_name, list_position, import_list_name, person_list_firstnames, person_list_surname):
     '''Create a new person with appropriate positions'''
-    print 'Creating', person_list_firstnames, person_list_surname
+
+    if not COMMIT:
+        print 'would create new entry'
+        return
+
+    print 'creating'
     #get the list to add the person to
     import_list_name = string.replace(import_list_name, ':', '')
     party = get_party(party_name)
@@ -205,6 +228,9 @@ def search_reordered(firstnames, surname, party, list_position, list_name):
 #Search 3
 def search_first_names(firstnames, surname, party, list_position, list_name):
     names = firstnames.split(" ")
+    if len(names) == 1:
+        # Already covered by search 1
+        return False
     for name in names:
         searchurl = '"'+(name+' '+surname)+'"'
         if process_search(firstnames, surname, party, list_position, list_name, searchurl):
@@ -240,6 +266,7 @@ def search_misspellings(firstnames, surname, party, list_position, list_name):
 
 def search(firstnames, surname, party, list_position, list_name):
     '''Attempt varius approaches to matching names'''
+    print 'Looking at %s %s:' % (firstnames, surname),
     if search_full_name(firstnames, surname, party, list_position, list_name):
         return True
     if search_reordered(firstnames, surname, party, list_position, list_name):
@@ -262,14 +289,20 @@ class Command(NoArgsCommand):
     option_list = NoArgsCommand.option_list + (
         make_option( '--candidates', '-c', help="The candidates csv file" ),
         make_option( '--year', '-y', help="The year of the election" ),
+        make_option( '--commit', action='store_true',
+            help="Actually commit person changes to the database (new positions/orgs always created)" ),
     )
 
     def handle_noargs(self, **options):
-        global YEAR
+        global YEAR, COMMIT
         YEAR = options['year']
+        COMMIT = options['commit']
 
         if not options['candidates'] or not os.path.exists(options['candidates']):
             print >> sys.stderr, "The candidates file doesn't exist"
+            sys.exit(1)
+        if not YEAR:
+            print >> sys.stderr, "You must specify a year"
             sys.exit(1)
 
         #check all the parties exist
