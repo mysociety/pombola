@@ -2450,15 +2450,12 @@ ul.pager {
     }
     li {
         padding: 0.5em 0.25em;
-        border-bottom: 1px solid #e9e9e9;
+        border-top: 1px solid #e9e9e9;
         -webkit-column-break-inside:avoid;
         -moz-column-break-inside:avoid;
         -o-column-break-inside:avoid;
         -ms-column-break-inside:avoid;
         column-break-inside:avoid;
-        &:first-child {
-            border-top: 1px solid #e9e9e9;
-        }
     }
     a {
         text-decoration: none;
