@@ -876,6 +876,11 @@ class SAElectionPartyCandidatesView(TemplateView):
 
         if 'province_name' in self.kwargs:
             province_name = self.kwargs['province_name']
+            # Also get the province object, so we can use its details
+            province_kind = models.PlaceKind.objects.get(slug='province')
+            context['province'] = models.Place.objects.get(
+                kind=province_kind,
+                slug=province_name)
         else:
             province_name = None
 
