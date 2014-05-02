@@ -10,7 +10,7 @@
     </div>
 <div class="party-list">
     <ul>
-        {% for candidate in party_election_list|slice:":10" %}
+        {% for candidate in party_election_list %}
             <li>{{ candidate.person }}<span class="candidate-title">{{ candidate.title }}</span></li>
         {% endfor %}
     </ul>
