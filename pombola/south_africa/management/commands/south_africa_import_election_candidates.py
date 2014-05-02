@@ -8,6 +8,7 @@ import sys
 import unicodecsv
 import json
 import string
+import datetime
 from optparse import make_option
 from pombola.core.models import (Organisation, OrganisationKind,
                          Person, Position,
@@ -15,6 +16,7 @@ from pombola.core.models import (Organisation, OrganisationKind,
 from django.core.management import call_command
 from django.core.management.base import NoArgsCommand, CommandError
 from django.utils import encoding
+from django.db.models import Q
 
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -82,6 +84,16 @@ def save_match(person, party_name, list_position, import_list_name, person_list_
     #get the position title
     positiontitle = position_to_object[list_position]
 
+    #check if we have distinct family/given names on record - if we do
+    #we assume these are absolutely correct and so if they do not match
+    #the import values the match is considered incorrect
+    if person.given_name == '' and person.family_name == '':
+        person.given_name = person_list_firstnames.title()
+        person.family_name = person_list_surname.title()
+        person.save()
+    elif person_list_firstnames.lower() != person.given_name.lower() or person_list_surname.lower() != person.family_name.lower():
+        return False
+
     #get the person's current party to compare whether these have changed
     #we assume that a person on an election list should not be a member
     #more than one party - so we end memberships that do not match the list
@@ -93,7 +105,9 @@ def save_match(person, party_name, list_position, import_list_name, person_list_
             foundcorrectparty = True
         else:
             #end the membership
-            position = Position.objects.get(person = person, organisation = p)
+            now = datetime.date.today()
+            now_approx = repr(ApproximateDate(year=now.year, month=now.month, day=now.day))
+            position = Position.objects.get(Q(person = person), Q(organisation = p), Q(title__slug = 'member'), Q(start_date__lte = now_approx), (Q(sorting_end_date_high__gte = now_approx) | Q(end_date = '')))
             position.end_date = ApproximateDate(year=2014, month=3)
             position.save()
 
@@ -116,14 +130,6 @@ def save_match(person, party_name, list_position, import_list_name, person_list_
         person.legal_name = (person_list_firstnames+' '+person_list_surname).title()
         person.save()
 
-    #check if we have distinct family/given names on record
-    if person_list_firstnames.lower() != person.given_name.lower():
-        person.given_name = person_list_firstnames.title()
-        person.save()
-    if person_list_surname.lower() != person.family_name.lower():
-        person.family_name = person_list_surname.title()
-        person.save()
-
     #add the actual membership of the list organisation. Note no end date
     #is set at this point. This should probably be the date of the election
     #but it is unclear whether setting this immediately would cause issues
@@ -134,6 +140,8 @@ def save_match(person, party_name, list_position, import_list_name, person_list_
         start_date = ApproximateDate(year=2014, month=4, day=22), #set to the date of release of the final candidate lists. TODO - update for subsequent years
         title = positiontitle,
         category = 'political')
+
+    return True
 
 def add_new_person(party_name, list_position, import_list_name, person_list_firstnames, person_list_surname):
     '''Create a new person with appropriate positions'''
@@ -180,8 +188,7 @@ def process_search(firstnames, surname, party, list_position, list_name, url):
     search = SearchQuerySet().models(Person).filter(text=url)
     if len(search) == 1 and search[0].object:
         print 'match', search[0].object.name
-        save_match(search[0].object, party, list_position, list_name, firstnames, surname)
-        return True
+        return save_match(search[0].object, party, list_position, list_name, firstnames, surname)
     else:
         return False
 
