@@ -3373,7 +3373,6 @@ h1 {
   font-size: 1.875em;
   /* 30px */
   color: #222222;
-  letter-spacing: 0.05em;
   line-height: 1.25em;
 }
 
@@ -3383,7 +3382,6 @@ h2 {
   font-size: 1.5em;
   /* 24px */
   color: #222222;
-  letter-spacing: 0.05em;
 }
 
 h3 {
@@ -3392,7 +3390,6 @@ h3 {
   font-size: 0.875em;
   /* 14px */
   color: #222222;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -4040,7 +4037,6 @@ HOME PAGE INTRO BOX
 #page .home-left h2 {
   font-size: .875em;
   color: #fff;
-  letter-spacing: 0.075em;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
 }
 
