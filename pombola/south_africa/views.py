@@ -906,8 +906,14 @@ class SAElectionPartyCandidatesView(TemplateView):
         context['party'] = get_object_or_404(models.Organisation, slug=party_name)
 
         # Now go get the party's election list (assuming it exists)
-        context['party_election_list'] = models.Organisation.objects.get(
+        election_list = models.Organisation.objects.get(
             slug=election_list_name
+        )
+
+        candidates = election_list.position_set.select_related('title').all()
+
+        context['party_election_list'] = sorted(candidates,key=lambda x:
+            int(re.match('\d+', x.title.name).group())
         )
 
         return context
@@ -969,7 +975,11 @@ class SAElectionProvinceCandidatesView(TemplateView):
             )
 
             # Get the candidates data for that list
-            candidates = election_list.position_set.all()
+            candidates = election_list.position_set.select_related('title').all()
+
+            candidates.sort(key=lambda x:
+                int(re.match('\d+', x.title.name).group())
+            )
 
             context['province_election_lists'].append({
                 'party': party,
