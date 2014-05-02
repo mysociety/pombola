@@ -951,6 +951,10 @@ class SAElectionPartyCandidatesView(TemplateView):
             int(re.match('\d+', x.title.name).group())
         )
 
+        province_kind = models.PlaceKind.objects.get(slug='province')
+        context['province_list'] = models.Place.objects.filter(
+            kind=province_kind).order_by('name')
+
         return context
 
 class SAElectionProvinceCandidatesView(TemplateView):
