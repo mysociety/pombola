@@ -949,9 +949,27 @@ class SAElectionProvinceCandidatesView(TemplateView):
         election_list_name += '-' + election_year
 
         # Go get all the election lists!
-        context['province_election_lists'] = models.Organisation.objects.filter(
+        election_lists = models.Organisation.objects.filter(
             slug__endswith=election_list_name
         ).order_by('name')
+
+        # Loop round each election list so we can go do other necessary queries
+        context['province_election_lists'] = []
+
+        for election_list in election_lists:
+
+            # Get the party data, finding the raw party slug from the list name
+            party = models.Organisation.objects.get(
+                slug=election_list.slug.replace(election_list_name, '')
+            )
+
+            # Get the candidates data for that list
+            candidates = election_list.position_set.all()
+
+            context['province_election_lists'].append({
+                'party': party,
+                'candidates': candidates
+            })
 
         # Get the province object, so we can use its details
         province_kind = models.PlaceKind.objects.get(slug='province')

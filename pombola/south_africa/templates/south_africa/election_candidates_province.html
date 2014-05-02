@@ -3,19 +3,23 @@
 {% block content %}
     <div class="election-page-header" id="top">
         <h2>Candidates for the {{ election_year }} {{ election_type }} election</h2>
-        <p class="election-page-subtitle"> <a href="#">{{ province_name }} <span class="change-province">change</span></a></p>
+        <p class="election-page-subtitle"> <a href="#">{{ province.name }} <span class="change-province">change</span></a></p>
     </div>
 
-		{% for party in province_election_lists %}
+		{% for election_list in province_election_lists %}
 			<div class="party-list">
                 <a href="#top" class="back-to-top">Back to top</a>
-				<h3>{{ party.name }} <span class="for-province">for {{ province_name }}</span></h3>
+				<h3>{{ election_list.party.name }} <span class="for-province">for {{ province.name }}</span></h3>
 				<ul>
-					{% for candidate in party.position_set.all %}
-						<li>{{ candidate.person.name }}</li>
+					{% for candidate in election_list.candidates %}
+						<li>{{ candidate.person.name }}, {{ candidate.title }}</li>
 					{% endfor %}
 				</ul>
-                <a href="#">View all</a>
+				{% if election_type == 'provincial' %}
+	                <a href="{% url "sa-election-candidates-provincial-party" election_year=2014 province_name=province.slug party_name=election_list.party.slug %}">View all</a>
+                {% elif election_type == 'national' %}
+	                <a href="{% url "sa-election-candidates-national-province-party" election_year=2014 province_name=province.slug party_name=election_list.party.slug %}">View all</a>
+                {% endif %}
 			</div>
 		{% endfor %}
 

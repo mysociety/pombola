@@ -112,6 +112,13 @@ urlpatterns += patterns('',
         name='sa-election-candidates-national-province',
     ),
 
+    # Natinonal election, party list for a province
+    url(
+        r'^election/(?P<election_year>[-\w]+)/national/(?P<province_name>[-\w]+)/(?P<party_name>[-\w]+)/$',
+        views.SAElectionPartyCandidatesView.as_view(election_type='national'),
+        name='sa-election-candidates-national-province-party',
+    ),
+
     # Provincial election, provincial list (ie all candidates in province)
     url(
         r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/$',
