@@ -11,12 +11,12 @@
 
 {% if election_type == 'national' %}
 {% if province_name %}
-<h3><a href="{% url "sa-election-candidates-national-party" election_year=election_year party_name=party.slug %}">National candidates</a></h3>
-<h3>Provincial candidates</h3>
+<div class="view-national"><h3><a href="{% url "sa-election-candidates-national-party" election_year=election_year party_name=party.slug %}">National candidates</a></h3></div>
+<h3>Provincial to national candidates</h3>
 {% else %}
 <div class="overview-section" id="provincial">
-    <h3>Provincial candidates</h3>
-    <ul class="overview-list">
+    <h3>Provincial to national candidates</h3>
+    <ul class="overview-list overview-list--on-party-page">
         {% for province in province_list %}
             <li>
                 <a href="{% url "sa-election-candidates-national-province-party" election_year=election_year province_name=province.slug party_name=party.slug %}">{{ province.name }}</a>

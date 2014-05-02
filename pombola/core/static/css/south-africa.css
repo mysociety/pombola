@@ -5728,7 +5728,16 @@ ul.pager li.next {
   text-decoration: underline;
 }
 
+.overview-list--on-party-page {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1em;
+}
+
 /* Province pages */
+.view-national {
+  margin-bottom: 2em;
+}
+
 .party-list {
   position: relative;
   border-bottom: 1px solid #ccc;
