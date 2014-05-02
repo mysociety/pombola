@@ -5713,7 +5713,7 @@ ul.pager li.next {
   }
 }
 .overview-list li {
-  padding: 0.5em 0.25em;
+  padding: 0.66em 0.25em;
   border-top: 1px solid #e9e9e9;
   -webkit-column-break-inside: avoid;
   -moz-column-break-inside: avoid;
@@ -5723,6 +5723,9 @@ ul.pager li.next {
 }
 .overview-list a {
   text-decoration: none;
+}
+.overview-list a:hover, .overview-list a:active, .overview-list a:focus {
+  text-decoration: underline;
 }
 
 /* Province pages */

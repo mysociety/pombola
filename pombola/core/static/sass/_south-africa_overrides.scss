@@ -2449,7 +2449,7 @@ ul.pager {
         column-gap: 2em;
     }
     li {
-        padding: 0.5em 0.25em;
+        padding: 0.66em 0.25em;
         border-top: 1px solid #e9e9e9;
         -webkit-column-break-inside:avoid;
         -moz-column-break-inside:avoid;
@@ -2459,6 +2459,11 @@ ul.pager {
     }
     a {
         text-decoration: none;
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: underline;
+        }
     }
 }
 
