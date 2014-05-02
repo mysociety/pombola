@@ -5758,6 +5758,9 @@ ul.pager li.next {
 .party-list ul li {
   list-style: none outside none;
 }
+.party-list li {
+  line-height: 1.7em;
+}
 .party-list .back-to-top {
   color: #777;
   text-decoration: none;
