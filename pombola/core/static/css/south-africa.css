@@ -5555,7 +5555,7 @@ ul.pager li.next {
    * For IE 6/7 only
    * Include this rule to trigger hasLayout and contain floats.
    */
-  padding: 2em 1em 0;
+  padding: 2em 1em 2em;
 }
 .election-body:before, .election-body:after {
   content: " ";
