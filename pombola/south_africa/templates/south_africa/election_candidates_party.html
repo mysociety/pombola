@@ -1,19 +1,13 @@
-{% extends 'base.html' %}
-
-{% block title %}Election{% endblock %}
-
-{% block body_attributes %} class="election" {% endblock %}
-
-{% block intro_content %}
-
-    <div class="wrapper">
-        <h2>Candidates for party {{ party.name }} in the {{ election_year }} {{ election_type }} election {% if province_name %} in the {{ province_name }} province {% endif %}.</h2>
-    </div>
-
-{% endblock %}
+{% extends 'south_africa/election_base.html' %}
 
 {% block content %}
-
+    <div class="election-page-header" id="top">
+        <h2>{{ party.name }}</h2>
+        <h3>Candidates for the {{ election_year }} {{ election_type }} election </h3>
+        {% if province_name %}
+          <p class="election-page-subtitle"> <a href="#">{{ province_name }} <span class="change-province">change</span></a></p>
+        {% endif %}
+    </div>
     <ul>
 		{% for candidate in party_election_list.position_set.all %}
 			<li>{{ candidate.person }}</li>

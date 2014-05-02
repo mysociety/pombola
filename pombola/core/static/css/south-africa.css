@@ -5574,6 +5574,10 @@ ul.pager li.next {
   margin-bottom: 0.5em;
   line-height: 1.2em;
 }
+.election-page-header h3 {
+  text-transform: none;
+  font-size: 1.75em;
+}
 
 .election-page-subtitle {
   color: #017b58;
