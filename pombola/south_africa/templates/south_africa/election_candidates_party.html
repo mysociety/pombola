@@ -8,10 +8,11 @@
           <p class="election-page-subtitle"> <a href="#">{{ province.name }} <span class="change-province">change</span></a></p>
         {% endif %}
     </div>
+<div class="party-list">
     <ul>
-		{% for candidate in party_election_list.position_set.all %}
-			<li>{{ candidate.person }}</li>
-		{% endfor %}
-	</ul>
-
+        {% for candidate in party_election_list.position_set.all %}
+            <li>{{ candidate.person }}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
