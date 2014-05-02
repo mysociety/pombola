@@ -159,6 +159,7 @@ h2 {
     @include lato-bold;
     font-size: 1.5em; /* 24px */
     color: $colour_black;
+    line-height: 1.25em;
 }
 
 h3 {
@@ -166,6 +167,7 @@ h3 {
     font-size: 0.875em; /* 14px */
     color: $colour_black;
     text-transform: uppercase;
+    line-height: 1.25em;
 }
 
 #page h2, #page h3 {
