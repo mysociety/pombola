@@ -975,9 +975,9 @@ class SAElectionProvinceCandidatesView(TemplateView):
             )
 
             # Get the candidates data for that list
-            candidates = election_list.position_set.select_related('title').all()
+            candidate_list = election_list.position_set.select_related('title').all()
 
-            candidates.sort(key=lambda x:
+            candidates = sorted(candidate_list, key=lambda x:
                 int(re.match('\d+', x.title.name).group())
             )
 
