@@ -242,7 +242,9 @@ def search_initials(firstnames, surname, party, list_position, list_name):
     names = firstnames.split(" ")
     initials=''
     for name in names:
+        if name[:1] == 'A': continue
         initials+=name[:1]+'. '
+    if not initials: return False
     searchurl = '"'+(initials+surname)+'"'
     return process_search(firstnames, surname, party, list_position, list_name, searchurl)
 
@@ -251,7 +253,9 @@ def search_initials_alt(firstnames, surname, party, list_position, list_name):
     names = firstnames.split(" ")
     initials=''
     for name in names:
+        if name[:1] == 'A': continue
         initials+=name[:1]+'.'
+    if not initials: return False
     searchurl = '"'+(initials+' '+surname)+'"'
     return process_search(firstnames, surname, party, list_position, list_name, searchurl)
 
