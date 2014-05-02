@@ -5715,6 +5715,11 @@ ul.pager li.next {
 .overview-list li {
   padding: 0.5em 0.25em;
   border-bottom: 1px solid #e9e9e9;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
 }
 .overview-list li:first-child {
   border-top: 1px solid #e9e9e9;
@@ -5765,6 +5770,11 @@ ul.pager li.next {
   }
 }
 .party-list li {
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
   line-height: 1.7em;
 }
 .party-list li:hover .candidate-title {
