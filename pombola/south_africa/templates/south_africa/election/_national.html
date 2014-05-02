@@ -1,7 +1,7 @@
 <div class="overview-section" id="national">
     <h3>View candidates by party</h3>
     <ul class="overview-list">
-        {% for party in party_list %}
+        {% for party in running_party_list %}
             <li>
                 <a href="{% url "sa-election-candidates-national-party" election_year=2014 party_name=party.slug %}">{{ party.name }}</a>
             </li>

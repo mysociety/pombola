@@ -802,6 +802,36 @@ class SAElectionOverviewMixin(TemplateView):
         context['province_list'] = models.Place.objects.filter(
             kind=province_kind).order_by('name')
 
+        election_year = self.kwargs['election_year']
+
+        # All lists of candidates share this kind
+        election_list = models.OrganisationKind.objects.get(slug='election-list')
+
+        context['election_year'] = election_year
+
+        # Build the right election list names
+        election_list_suffix = '-national-election-list-' + election_year
+
+        # All the running parties live in this list
+        running_parties = []
+
+        # Find the slugs of all parties taking part in the national election
+        national_running_party_lists = models.Organisation.objects.filter(
+            kind=election_list,
+            slug__endswith=election_list_suffix
+        ).order_by('name')
+
+        # Loop through national sets and extract slugs
+        for l in national_running_party_lists:
+            party_slug = l.slug.replace(election_list_suffix, '')
+            if not party_slug in running_parties:
+                running_parties.append(party_slug)
+
+        # I am so sorry for this.
+        context['running_party_list'] = []
+        for running_party in running_parties:
+            context['running_party_list'].append(models.Organisation.objects.get(slug=running_party))
+
         return context
 
 class SAElectionOverviewView(SAElectionOverviewMixin):
