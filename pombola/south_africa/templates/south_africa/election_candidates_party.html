@@ -9,18 +9,26 @@
         {% endif %}
     </div>
 
+{% if election_type == 'national' %}
+{% if province_name %}
+<h3><a href="{% url "sa-election-candidates-national-party" election_year=election_year party_name=party.slug %}">National candidates</a></h3>
+<h3>Provincial candidates</h3>
+{% else %}
 <div class="overview-section" id="provincial">
     <h3>Provincial candidates</h3>
     <ul class="overview-list">
         {% for province in province_list %}
             <li>
-                <a href="{% url "sa-election-candidates-national-province-party" election_year=2014 province_name=province.slug party_name=party.slug %}">{{ province.name }}</a>
+                <a href="{% url "sa-election-candidates-national-province-party" election_year=election_year province_name=province.slug party_name=party.slug %}">{{ province.name }}</a>
             </li>
         {% endfor %}
     </ul>
 </div>
 
 <h3>National candidates</h3>
+{% endif %}
+{% endif %}
+
 <div class="party-list">
     <ul>
         {% for candidate in party_election_list %}
