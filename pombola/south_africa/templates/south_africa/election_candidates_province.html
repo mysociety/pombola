@@ -3,7 +3,7 @@
 {% block content %}
     <div class="election-page-header" id="top">
         <h2>Candidates for the {{ election_year }} {{ election_type }} election</h2>
-        <p class="election-page-subtitle"> <a href="#">{{ province.name }} <span class="change-province">change</span></a></p>
+        <p class="election-page-subtitle"> <a href="{% url "sa-election-overview-"|add:election_type election_year=election_year %}#provincial">{{ province.name }} <span class="change-province">change</span></a></p>
     </div>
 
         {% for election_list in province_election_lists %}
@@ -12,7 +12,7 @@
                 <h3>{{ election_list.party.name }} <span class="for-province">for {{ province.name }}</span></h3>
                 <ul>
                     {% for candidate in election_list.candidates|slice:":10" %}
-                        <li>{{ candidate.person }}<span class="candidate-title">{{ candidate.title }}</span></li>
+                        <li><a href="{{ candidate.person.get_absolute_url }}">{{ candidate.person }}</a> <span class="candidate-title">{{ candidate.title }}</span></li>
                     {% endfor %}
                 </ul>
                 {% if election_list.candidates|length > 10 %}
