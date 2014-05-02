@@ -11,7 +11,7 @@
                 <a href="#top" class="back-to-top">Back to top</a>
 				<h3>{{ election_list.party.name }} <span class="for-province">for {{ province.name }}</span></h3>
 				<ul>
-					{% for candidate in election_list.candidates %}
+					{% for candidate in election_list.candidates|slice:":10" %}
 						 <li>{{ candidate.person }}<span class="candidate-title">{{ candidate.title }}</span></li>
 					{% endfor %}
 				</ul>
