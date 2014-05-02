@@ -70,6 +70,7 @@ class CountyPerformanceView(TemplateView):
         context['suppress_banner'] = True
         context['petition_form'] = CountyPerformancePetitionForm()
         context['senate_form'] = CountyPerformanceSenateForm()
+        context['experiment_key'] = settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY
 
         context.update(sanitize_data_parameters(self.request, self.request.GET))
 

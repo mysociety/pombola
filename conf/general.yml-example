@@ -21,6 +21,10 @@ DJANGO_SECRET_KEY: 'abcabc'
 # create an account and then put the 'UA-123456-1' bit here
 GOOGLE_ANALYTICS_ACCOUNT: ''
 
+# If you're running the experiment with the county performance page
+# test for Kenya, then put the experiment key here
+COUNTY_PERFORMANCE_EXPERIMENT_KEY: ''
+
 # The IEBC API credentials for fetching aspirant data:
 IEBC_API_ID: ''
 IEBC_API_SECRET: ''

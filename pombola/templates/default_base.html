@@ -2,6 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+{% comment %}
+
+  The Google Analytics documentation says that the experiment
+  code has to come right after the <head> tag.
+
+{% endcomment %}
+{% block ga_experiment %}
+{% endblock %}
         <meta charset="utf-8">
         <title>
             {% block title %}{% endblock %}
