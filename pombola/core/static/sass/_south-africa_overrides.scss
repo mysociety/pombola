@@ -2236,9 +2236,14 @@ ul.pager {
 
 
 .countdown_row {
+    /* min-width stops the timer from jumping around when the time is ticking down */
+    @media (min-width: 640px) and (max-width: 880px) {
+        min-width: 13.1875em;
+    }
     @media only all and (min-width: 640px), print {
         position: absolute;
         right: 0;
+        min-width: 18.375em;
     }
 }
 
