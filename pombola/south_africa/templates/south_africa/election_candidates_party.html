@@ -10,9 +10,9 @@
     </div>
 <div class="party-list">
     <ul>
-		{% for candidate in party_election_list %}
-			<li>{{ candidate.person }}, {{ candidate.title }}</li>
-		{% endfor %}
-	</ul>
-
+        {% for candidate in party_election_list %}
+            <li>{{ candidate.person }}<span class="candidate-title">{{ candidate.title }}</span></li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

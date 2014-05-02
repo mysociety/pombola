@@ -2397,7 +2397,7 @@ ul.pager {
     }
     .countdown_row {
         color: #fff;
-        background-color: $colour-primary;
+        background-color: $colour-green;
         padding: 1.5em 2.2em;
         position: static;
         right: auto;
@@ -2491,6 +2491,11 @@ ul.pager {
     }
     li {
         line-height: 1.7em;
+        &:hover {
+            .candidate-title {
+                color: $colour-black;
+            }
+        }
     }
     .back-to-top {
         color: #777;
@@ -2508,6 +2513,15 @@ ul.pager {
             right: 0;
         }
     }
+}
+
+.candidate-title {
+    display: block;
+    color: #999;
+    margin-bottom: 0.33em;
+    font-size: 0.875em;
+    position: relative;
+    top: -0.3em;
 }
 
 /* Statistics page */

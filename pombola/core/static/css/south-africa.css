@@ -5640,7 +5640,7 @@ ul.pager li.next {
 }
 .general-election-information .countdown_row {
   color: #fff;
-  background-color: #e23d28;
+  background-color: #017b58;
   padding: 1.5em 2.2em;
   position: static;
   right: auto;
@@ -5761,6 +5761,9 @@ ul.pager li.next {
 .party-list li {
   line-height: 1.7em;
 }
+.party-list li:hover .candidate-title {
+  color: #222222;
+}
 .party-list .back-to-top {
   color: #777;
   text-decoration: none;
@@ -5776,6 +5779,15 @@ ul.pager li.next {
     top: 0.5em;
     right: 0;
   }
+}
+
+.candidate-title {
+  display: block;
+  color: #999;
+  margin-bottom: 0.33em;
+  font-size: 0.875em;
+  position: relative;
+  top: -0.3em;
 }
 
 /* Statistics page */

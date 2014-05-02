@@ -12,7 +12,7 @@
 				<h3>{{ election_list.party.name }} <span class="for-province">for {{ province.name }}</span></h3>
 				<ul>
 					{% for candidate in election_list.candidates %}
-						<li>{{ candidate.person.name }}, {{ candidate.title }}</li>
+						 <li>{{ candidate.person }}<span class="candidate-title">{{ candidate.title }}</span></li>
 					{% endfor %}
 				</ul>
 				{% if election_type == 'provincial' %}
