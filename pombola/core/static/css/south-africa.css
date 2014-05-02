@@ -5769,3 +5769,8 @@ ul.pager li.next {
     right: 0;
   }
 }
+
+/* Statistics page */
+.rerunning-candidates {
+  margin-bottom: 4em;
+}
