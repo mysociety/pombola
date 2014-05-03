@@ -90,11 +90,7 @@ urlpatterns += patterns('',
         name='sa-election-overview-provincial'
     ),
     url(
-        r'^election/(?P<election_year>[0-9]{4})/national/party/$',
-        RedirectView.as_view(pattern_name='sa-election-overview-national', permanent=True),
-    ),
-    url(
-        r'^election/(?P<election_year>[0-9]{4})/national/province/$',
+        r'^election/(?P<election_year>[0-9]{4})/national/(party|province)/$',
         RedirectView.as_view(pattern_name='sa-election-overview-national', permanent=True),
     ),
 
@@ -112,7 +108,7 @@ urlpatterns += patterns('',
         name='sa-election-candidates-national-province',
     ),
 
-    # Natinonal election, party list for a province
+    # National election, party list for a province
     url(
         r'^election/(?P<election_year>[-\w]+)/national/(?P<province_name>[-\w]+)/(?P<party_name>[-\w]+)/$',
         views.SAElectionPartyCandidatesView.as_view(election_type='national'),
@@ -125,14 +121,9 @@ urlpatterns += patterns('',
         views.SAElectionProvinceCandidatesView.as_view(election_type='provincial'),
         name='sa-election-candidates-provincial',
     ),
-    url(
-        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/party/$',
-        RedirectView.as_view(pattern_name='sa-election-candidates-provincial', permanent=True),
-    ),
-
     # Provincial election, party list
     url(
-        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/party/(?P<party_name>[-\w]+)/$',
+        r'^election/(?P<election_year>[-\w]+)/provincial/(?P<province_name>[-\w]+)/(?P<party_name>[-\w]+)/$',
         views.SAElectionPartyCandidatesView.as_view(election_type='provincial'),
         name='sa-election-candidates-provincial-party',
     ),
