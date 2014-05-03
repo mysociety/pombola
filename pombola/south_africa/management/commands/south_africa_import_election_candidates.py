@@ -209,6 +209,9 @@ def add_new_person(party_name, list_position, import_list_name, person_list_firs
 def process_search(firstnames, surname, party, list_position, list_name, url):
     '''Process a search based on the search string passed via url'''
     search = SearchQuerySet().models(Person).filter(text=url)
+    if len(search) > 1:
+        name = (firstnames + ' ' + surname).title()
+        search = [ s for s in search if s.object and s.object.legal_name == name ]
     if len(search) == 1 and search[0].object:
         print 'match', search[0].object.name
         return save_match(search[0].object, party, list_position, list_name, firstnames, surname)
@@ -271,6 +274,13 @@ def search_misspellings(firstnames, surname, party, list_position, list_name):
 def search(firstnames, surname, party, list_position, list_name):
     '''Attempt varius approaches to matching names'''
     print 'Looking at %s %s:' % (firstnames, surname),
+
+    existing = Person.objects.filter(given_name=firstnames.title(), family_name=surname.title())
+    if len(existing) == 1:
+        print 'match existing', existing[0].name
+        if save_match(existing[0], party, list_position, list_name, firstnames, surname):
+            return True
+
     if search_full_name(firstnames, surname, party, list_position, list_name):
         return True
     if search_reordered(firstnames, surname, party, list_position, list_name):
