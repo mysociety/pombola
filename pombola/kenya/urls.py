@@ -2,7 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
 
 from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
-    CountyPerformancePetitionSubmission, CountyPerformanceShare)
+    CountyPerformancePetitionSubmission, CountyPerformanceShare,
+    CountyPerformanceSurvey)
 
 urlpatterns = patterns('',
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
@@ -28,4 +29,7 @@ urlpatterns += (
     url(r'county-performance/share',
         CountyPerformanceShare.as_view(),
         name='county-performance-share'),
+    url(r'county-performance/survey',
+        CountyPerformanceSurvey.as_view(),
+        name='county-performance-survey'),
 )

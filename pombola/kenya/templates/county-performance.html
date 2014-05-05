@@ -146,7 +146,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
       <div id="survey">
         <p>Help us know our visitors by taking our 5 minute survey</p>
-        <a href="http://survey.az1.qualtrics.com/SE/?SID=SV_5hhE4mOfYG1eaOh&user_key={{ user_key }}&variant={{ variant }}" id="take-survey">Take Survey</a>
+        <a href="{% url 'county-performance-survey' %}?user_key={{ user_key }}&variant={{ variant }}&g={{ g }}&agroup={{ agroup }}" id="take-survey">Take Survey</a>
       </div>
 
   {% endif %}

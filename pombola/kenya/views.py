@@ -210,3 +210,17 @@ class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
             'facebook': "https://www.facebook.com/sharer/sharer.php?u={0}",
             'twitter': "http://twitter.com/share?url={0}"}
         return url_formats[social_network].format(url_parameter)
+
+class CountyPerformanceSurvey(CountyPerformanceDataMixin, RedirectView):
+    """For redirecting to the Qualtrics survey"""
+
+    def get_redirect_url(self, *args, **kwargs):
+        data = sanitize_data_parameters(self.request, self.request.GET)
+        self.create_event(data,
+                          {'category': 'take-survey',
+                           'action': 'click',
+                           'label': 'take-survey'})
+        url_format = "http://survey.az1.qualtrics.com/SE/?SID=SV_5hhE4mOfYG1eaOh&user_key={0}&variant={1}"
+        return url_format.format(
+            urlquote(data['user_key']),
+            urlquote(data['variant']))
