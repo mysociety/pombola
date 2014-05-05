@@ -1,16 +1,16 @@
 (function () {
-    $('.share-link').click(function(e) {
-        var match = this.id.match(/^share-(.*)$/), url = this.href;
-        e.preventDefault();
-        if (match)  {
-            ga('send', 'event', {
-                'eventCategory': 'share-link',
-                'eventAction': 'click',
-                'eventLabel': match[1],
-                'hitCallback': function () {
-                    document.location = url;
-                }
-            });
+  $.each(['.share-link', '#take-survey'], function(_, cssSelector) {
+    $(cssSelector).click(function(e) {
+      var label = this.id, url = this.href;
+      e.preventDefault();
+      ga('send', 'event', {
+        'eventCategory': cssSelector.substring(1),
+        'eventAction': 'click',
+        'eventLabel': label,
+        'hitCallback': function () {
+          document.location = url;
         }
+      });
     });
+  });
 })();
