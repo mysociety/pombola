@@ -56,50 +56,6 @@ def sanitize_data_parameters(request, parameters):
     return result
 
 
-class CountyPerformanceView(TemplateView):
-    """This view displays a page about county performance with calls to action
-
-    There are some elements of the page that are supposed to be
-    randomly ordered.  There are also three major variants of the
-    page that include different information."""
-
-    template_name = 'county-performance.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CountyPerformanceView, self).get_context_data(**kwargs)
-        context['suppress_banner'] = True
-        context['petition_form'] = CountyPerformancePetitionForm()
-        context['senate_form'] = CountyPerformanceSenateForm()
-        context['experiment_key'] = settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY
-
-        context.update(sanitize_data_parameters(self.request, self.request.GET))
-
-        # Note that this has to come after updating the context:
-        context['user_key'] = str(randint(0, sys.maxint))
-
-        context['show_opportunity'], context['show_threat'] = {
-            'o': (True, False),
-            't': (False, True),
-            'n': (False, False),
-            None: (False, False),
-        }[context['variant']]
-
-        context['share_partials'] = [
-            '_share_twitter.html',
-            '_share_facebook.html',
-        ]
-        shuffle(context['share_partials'])
-
-        context['major_partials'] = [
-            '_county_share.html',
-            '_county_petition.html',
-            '_county_senate.html',
-        ]
-        shuffle(context['major_partials'])
-
-        return context
-
-
 class CountyPerformanceDataMixin(object):
 
     def get_extra_data(self, sanitized_data):
@@ -135,6 +91,55 @@ class CountyPerformanceDataMixin(object):
         event_kwargs['extra_data'] = json.dumps(self.get_extra_data(data))
         experiment = Experiment.objects.get(slug='mit-county')
         experiment.event_set.create(**event_kwargs)
+
+
+class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
+    """This view displays a page about county performance with calls to action
+
+    There are some elements of the page that are supposed to be
+    randomly ordered.  There are also three major variants of the
+    page that include different information."""
+
+    template_name = 'county-performance.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CountyPerformanceView, self).get_context_data(**kwargs)
+        context['suppress_banner'] = True
+        context['petition_form'] = CountyPerformancePetitionForm()
+        context['senate_form'] = CountyPerformanceSenateForm()
+        context['experiment_key'] = settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY
+
+        context.update(sanitize_data_parameters(self.request, self.request.GET))
+
+        # Note that this has to come after updating the context:
+        context['user_key'] = str(randint(0, sys.maxint))
+
+        self.create_event(context,
+                          {'category': 'page',
+                           'action': 'view',
+                           'label': 'county-performance'})
+
+        context['show_opportunity'], context['show_threat'] = {
+            'o': (True, False),
+            't': (False, True),
+            'n': (False, False),
+            None: (False, False),
+        }[context['variant']]
+
+        context['share_partials'] = [
+            '_share_twitter.html',
+            '_share_facebook.html',
+        ]
+        shuffle(context['share_partials'])
+
+        context['major_partials'] = [
+            '_county_share.html',
+            '_county_petition.html',
+            '_county_senate.html',
+        ]
+        shuffle(context['major_partials'])
+
+        return context
 
 
 class CountyPerformanceSubmissionMixin(CountyPerformanceDataMixin):
