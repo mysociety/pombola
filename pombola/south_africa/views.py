@@ -941,7 +941,7 @@ class SAElectionPartyCandidatesView(TemplateView):
         context['party'] = get_object_or_404(models.Organisation, slug=party_name)
 
         # Now go get the party's election list (assuming it exists)
-        election_list = models.Organisation.objects.get(
+        election_list = get_object_or_404(models.Organisation,
             slug=election_list_name
         )
 
