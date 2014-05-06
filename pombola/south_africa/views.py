@@ -951,9 +951,30 @@ class SAElectionPartyCandidatesView(TemplateView):
             int(re.match('\d+', x.title.name).group())
         )
 
-        province_kind = models.PlaceKind.objects.get(slug='province')
-        context['province_list'] = models.Place.objects.filter(
-            kind=province_kind).order_by('name')
+        # Grab a list of provinces in which the party is actually running
+        # Only relevant for national election non-province party lists
+        if election_type == 'national' and province_name is None:
+
+            # Find the lists of regional candidates for this party
+            party_election_lists_startwith = party_name + '-regional-'
+            party_election_lists_endwith = '-election-list-' + election_year
+
+            party_election_lists = models.Organisation.objects.filter(
+                slug__startswith=party_election_lists_startwith,
+                slug__endswith=party_election_lists_endwith
+            ).order_by('name')
+
+            # Loop through lists and extract province slugs
+            party_provinces = []
+            for l in party_election_lists:
+                province_slug = l.slug.replace(party_election_lists_startwith, '')
+                province_slug = province_slug.replace(party_election_lists_endwith, '')
+                party_provinces.append(province_slug)
+
+            context['province_list'] = models.Place.objects.filter(
+                kind__slug='province',
+                slug__in=party_provinces
+            )
 
         return context
 
