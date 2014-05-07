@@ -3262,7 +3262,7 @@ h2 a.appearances-trigger.active {
   line-height: 1.4em;
 }
 .county-performance #report-header {
-  padding: 0 40px;
+  padding: 40px 40px;
 }
 .county-performance #report table {
   width: 100%;
@@ -3499,6 +3499,7 @@ h2 a.appearances-trigger.active {
   .county-performance #report-header {
     padding-left: 0;
     padding-right: 0;
+    padding-bottom: 40px;
   }
   .county-performance #report {
     padding-left: 20px;
