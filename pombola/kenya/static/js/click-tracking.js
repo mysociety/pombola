@@ -25,7 +25,7 @@
     var label = this.id, url = this.href;
     e.preventDefault();
     ga('send', 'event', {
-      'eventCategory': cssSelector.substring(1),
+      'eventCategory': 'take-survey',
       'eventAction': 'click',
       'eventLabel': label,
       'hitCallback': function () {
