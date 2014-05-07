@@ -121,10 +121,14 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
         # Note that this has to come after updating the context:
         context['user_key'] = str(randint(0, sys.maxint))
 
-        self.create_event(context,
-                          {'category': 'page',
-                           'action': 'view',
-                           'label': 'county-performance'})
+        # Only record a page view event if this was a page picked by
+        # Google Analytic's randomization - otherwise we get a
+        # spurious page view before a particular variant is reloaded:
+        if 'utm_expid' in self.request.GET:
+            self.create_event(context,
+                              {'category': 'page',
+                               'action': 'view',
+                               'label': 'county-performance'})
 
         context['show_opportunity'], context['show_threat'] = {
             'o': (True, False),
