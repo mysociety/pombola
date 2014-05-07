@@ -3465,23 +3465,23 @@ h2 a.appearances-trigger.active {
 }
 .county-performance #survey #take-survey {
   display: inline-block;
-  font-size: 1.2em;
+  font-size: 1.6em;
   line-height: 30px;
-  padding: 5px 20px;
+  padding: 10px 40px;
   color: #fff;
-  background-color: #48bb60;
+  background-color: #fb5e5e;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-  text-shadow: 0 1px 0 #38984c;
+  text-shadow: 0 1px 0 black;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
 }
 .county-performance #survey #take-survey:hover {
-  background-color: #38984c;
+  background-color: #911313;
 }
 @media only all and (max-width: 639px) {
   .county-performance #page h2 {

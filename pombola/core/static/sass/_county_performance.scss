@@ -2,6 +2,8 @@ $header-green: #36A74D;
 $fill-green: #48bb60;
 $section-border-top: 1px solid #ebebeb;
 $section-verical-padding: 40px;
+$light-red: #fb5e5e;
+$dark-red: #be1919;
 
 .county-performance {
 
@@ -272,20 +274,20 @@ $section-verical-padding: 40px;
 
     #take-survey {
       display: inline-block;
-      font-size: 1.2em;
+      font-size: 1.6em;
       line-height: 30px;
-      padding: 5px 20px;
+      padding: 10px 40px;
       color: #fff;
-      background-color: $fill-green;
+      background-color: $light-red;
       @include border-radius(2px);
-      text-shadow: 0 1px 0 darken($fill-green, 10%);
+      text-shadow: 0 1px 0 darken(black, 10%);
       font-weight: bold;
       cursor: pointer;
       text-decoration: none;
     }
 
     #take-survey:hover {
-      background-color: darken($fill-green, 10%);
+      background-color: darken($dark-red, 10%);
     }
 
   }
