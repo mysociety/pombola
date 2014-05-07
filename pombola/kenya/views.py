@@ -59,10 +59,14 @@ def sanitize_data_parameters(request, parameters):
 class CountyPerformanceDataMixin(object):
 
     def get_extra_data(self, sanitized_data):
-        return {
-            'gender': sanitized_data['g'],
-            'age_group': sanitized_data['agroup']
-        }
+        key_mapping = [
+            ('g', 'gender'),
+            ('agroup', 'age_group'),
+        ]
+        return dict(
+            (readable_name, sanitized_data[key])
+            for key, readable_name in key_mapping
+            if sanitized_data.get(key, '?') != '?')
 
     def get_event_parameters(self, sanitized_data):
         return {
