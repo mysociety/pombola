@@ -53,6 +53,7 @@ def sanitize_data_parameters(request, parameters):
         allowed_values=('under', 'over'),
         default_value='?')
     result['user_key'] = sanitize_random_key('user_key', parameters)
+    result['via'] = sanitize_random_key('via', parameters)
     return result
 
 
@@ -62,6 +63,8 @@ class CountyPerformanceDataMixin(object):
         key_mapping = [
             ('g', 'gender'),
             ('agroup', 'age_group'),
+            ('via', 'via_share'),
+            ('share_key', 'share_key'),
         ]
         return dict(
             (readable_name, sanitized_data[key])
@@ -208,12 +211,15 @@ class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
             parameters=self.request.GET,
             allowed_values=('facebook', 'twitter'))
         data = sanitize_data_parameters(self.request, self.request.GET)
+        share_key = "{0:x}".format(randint(0, sys.maxint))
+        data['share_key'] = share_key
         self.create_event(data,
                           {'category': 'share-click',
                            'action': 'click',
                            'label': social_network})
         path = reverse('county-performance')
         built = self.request.build_absolute_uri(path)
+        built += '?via=' + share_key
         url_parameter = urlquote(built, safe='')
         url_formats = {
             'facebook': "https://www.facebook.com/sharer/sharer.php?u={0}",
