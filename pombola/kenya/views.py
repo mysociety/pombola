@@ -28,11 +28,11 @@ def sanitize_parameter(key, parameters, allowed_values, default_value=None):
         value = default_value
     return value
 
-user_key_re = re.compile(r'^[a-zA-Z0-9]+$')
+random_key_re = re.compile(r'^[a-zA-Z0-9]+$')
 
-def sanitize_user_key(parameters):
-    if 'user_key' in parameters and user_key_re.search(parameters['user_key']):
-        return parameters['user_key']
+def sanitize_random_key(key, parameters):
+    if key in parameters and random_key_re.search(parameters[key]):
+        return parameters[key]
     return '?'
 
 def sanitize_data_parameters(request, parameters):
@@ -52,7 +52,7 @@ def sanitize_data_parameters(request, parameters):
         parameters=parameters,
         allowed_values=('under', 'over'),
         default_value='?')
-    result['user_key'] = sanitize_user_key(parameters)
+    result['user_key'] = sanitize_random_key('user_key', parameters)
     return result
 
 
