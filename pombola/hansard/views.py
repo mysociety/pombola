@@ -4,7 +4,7 @@ import datetime
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.http import Http404
 from django.template   import RequestContext
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, ListView
 
 from pombola.hansard.models import Sitting, Entry
 from pombola.core.models import Person
@@ -158,4 +158,22 @@ def person_summary(request, slug):
         },
         context_instance=RequestContext(request)
     )
+
+class PersonAllAppearancesView(ListView):
+
+    def get_context_data(self, **kwargs):
+        context = super(PersonAllAppearancesView, self).get_context_data(**kwargs)
+        context['object'] = self.person
+        return context
+
+    def get_queryset(self):
+
+        # Extract the person slug from the URL
+        person_slug = self.kwargs['slug']
+
+        # Find (or 404) the person
+        self.person = get_object_or_404(Person, slug=person_slug)
+
+        # Specify the filter for the list of entries
+        return Entry.objects.filter(speaker=self.person).select_related('sitting__venue')
 

@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from pombola.hansard.views import IndexView, SittingView
+from pombola.hansard.views import IndexView, SittingView, PersonAllAppearancesView
 
 urlpatterns = patterns('pombola.hansard.views',
     url( r'^$', IndexView.as_view(), name="index" ),
@@ -17,10 +17,17 @@ urlpatterns = patterns('pombola.hansard.views',
         name="sitting_view"
     ),
 
-    
-    
+
+
     # views for a specific person
     url( r'^person/(?P<slug>[\w\-]+)/summary/', 'person_summary', name='person_summary' ),
     # url( r'^person/(?P<slug>[\w\-]+)/',         'person_entries', name='person_entries' ),
+
+    # 'Show All' page for a specific person
+    url(
+        r'^person/(?P<slug>[\w\-]+)/appearances/',
+        PersonAllAppearancesView.as_view(),
+        name='person_appearances_all',
+    )
 
 )

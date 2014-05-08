@@ -11,7 +11,7 @@
 
 <h2>Parliamentary appearances</h2>
 
-<p>{{ person.name }} has spoken {{ entry_count }} times in Parliament.</p>
+<p>{{ person.name }} has spoken <a href="{% url "hansard:person_appearances_all" slug=person.slug %}">{{ entry_count }} times</a> in Parliament.</p>
 
 <h3>Recent Appearances</h3>
 
@@ -26,6 +26,8 @@
     {% endfor %}
 
 </ul>
+
+<p><a href="{% url "hansard:person_appearances_all" slug=person.slug %}">View all</a></p>
 
 <h3>Lifetime summary</h3>
 
