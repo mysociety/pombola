@@ -12,7 +12,6 @@
 {% block extra_js_to_load %}
     pombola_settings.extra_js.push( 'js/feeds.js' );
     pombola_settings.extra_js.push( 'js/libs/responsive-carousel.js' );
-    pombola_settings.extra_js.push( 'js/election_countdown.js' );
 {% endblock %}
 
 {% block body_attributes %} class="home" {% endblock %}
@@ -43,16 +42,7 @@
         <div class="page-wrapper wrapper">
             <div class="elections-home-intro">
                 <h2>General election 2014</h2>
-                <p><a href="{% url "sa-election-overview" %}">Meet your candidates &raquo;</a></p>
-            </div>
-            <div id="election_countdown" data-until="2014/5/7 07:00:00 UTC+0200">
-              <span class="countdown_row countdown_show5">
-                  <span class="countdown_section countdown_icon"><span></span></span>
-                  <span class="countdown_section countdown_day"><span class="countdown_amount">--</span><span class="countdown_label">Days</span></span>
-                  <span class="countdown_section countdown_hour"><span class="countdown_amount">--</span><span class="countdown_label">Hours</span></span>
-                  <span class="countdown_section countdown_minute"><span class="countdown_amount">--</span><span class="countdown_label">Minutes</span></span>
-                  <span class="countdown_section countdown_second"><span class="countdown_amount last">--</span><span class="countdown_label">Seconds</span></span>
-              </span>
+                <p>See <a href="http://www.elections.org.za/resultsNPE2014/">the results</a> or <a href="{% url "sa-election-overview" %}">the candidate lists</a></p>
             </div>
         </div>
     </div>
