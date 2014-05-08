@@ -810,6 +810,12 @@ class Place(ModelBase, ScorecardMixin):
 
         result = {}
 
+        # Occasionally a place will not have a MapIt area associated
+        # with it; in these cases we can't find which boundaries it
+        # overlaps with, so just return an empty dictionary.
+        if self.mapit_area is None:
+            return result
+
         for key, session in (('previous', previous_session),
                              ('next', next_session)):
             if not session:
