@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% comment %}
+
+  This page is for the tests of effectiveness of various calls
+  to action suggested by our MIT collaborators.
+
+{% endcomment %}
+
+{% block ga_experiment %}
+{% if experiment_key %}
+<!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+k='{{ experiment_key }}',d=document,l=d.location,c=d.cookie;
+if(l.search.indexOf('utm_expid='+k)>0)return;
+function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+</script><script>utmx('url','A/B');</script>
+<!-- End of Google Analytics Content Experiment code -->
+{% endif %}
+{% endblock %}
+
+{% block title %}How are our taxpayer shillings really being spent?{% endblock %}
+
+{% block body_attributes %}class="county-performance"{% endblock %}
+
+{% block extra_js_to_load %}
+  pombola_settings.extra_js.push( 'js/click-tracking.js' );
+{% endblock %}
+
+{% block breadcrumbs %}
+    {# Hide bread crumbs on this page. #}
+    <div id="breadcrumb-replacement"></div>
+{% endblock %}
+
+{% block content %}
+
+  {% if not correct_errors %}
+
+    <h1>How are our taxpayer shillings really being spent?</h1>
+
+    <p>A recent report by Kenya&rsquo;s Controller of Budget highlights questionable spending practices in our counties. Over 50% of our counties spent NO money on development!</p>
+
+    <div id="report">
+
+      <div id="report-header">
+
+        <p>The report reveals that our taxpayer money which is supposed
+        to be spent on building roads and water
+        systems as well as equipping and staffing health centres
+        and schools, has instead been spent on &ldquo;construction of
+        mansions, entertainment allowances and buying of
+        luxurious vehicles for Governors and their executives&rdquo;
+        <a class="source"
+           target="_blank"
+           href="http://www.standardmedia.co.ke/?articleID=2000102659&story_title=no-end-to-senators-governors-turf-wars&pageNo=2"
+           title="Standard Digital News, January 2014">(source)</a>.
+        <strong>Only 7% of county government budgets was spent
+        on development programmes!</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th class="county">County title</th>
+              <th class="personnel">Personnel<br>Emoulements</th>
+              <th class="operational">Operational<br>&amp; Maintenance</th>
+              <th class="development">Development<br>Expenditure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="county">Kisumu</td>
+              <td class="personnel">79%</td>
+              <td class="operational">21%</td>
+              <td class="development">0</td>
+            </tr>
+            <tr>
+              <td class="county">Mombasa</td>
+              <td class="personnel">74%</td>
+              <td class="operational">23%</td>
+              <td class="development">0</td>
+            </tr>
+            <tr>
+              <td class="county">Nairobi City</td>
+              <td class="personnel">65%</td>
+              <td class="operational">16%</td>
+              <td class="development">16%</td>
+            </tr>
+            <tr>
+              <td class="county">Nandi</td>
+              <td class="personnel">44%</td>
+              <td class="operational">56%</td>
+              <td class="development">0</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="county">All counties</td>
+              <td class="personnel">55%</td>
+              <td class="operational">38%</td>
+              <td class="development">7%</td>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+
+      {% if show_threat %}
+      <div id="threat">
+        <h2>Threat</h2>
+        <p>Despite this misspending of county government funds,
+        powerful Parliamentarians are working to block
+        legislation that increases the amount county governments
+        must spend on development from 30 percent to 60
+        percent. This threat is real! You could lose county
+        funds for development such as infrastructure, water,
+        health, and education projects.</p>
+      </div>
+      {% endif %}
+
+      {% if show_opportunity %}
+      <div id="opportunity">
+        <h2>Opportunity</h2>
+        <p>To rectify this misspending of county government
+        funds, powerful Parliamentarians are working to enact
+        legislation that increases the amount county governments
+        must spend on development from 30 percent to 60
+        percent. This opportunity is real! You could gain
+        additional county funds for development such as
+        infrastructure, water, health, and education projects.</p>
+      </div>
+      {% endif %}
+
+  {% endif %}
+
+    {% for partial in major_partials %}
+      {% include partial %}
+    {% endfor %}
+
+  {% if not correct_errors %}
+
+      <div id="survey">
+        <p>Take our 5 minute survey and enter to win $100 in airtime!</p>
+        <a href="{% url 'county-performance-survey' %}?user_key={{ user_key }}&variant={{ variant }}&g={{ g }}&agroup={{ agroup }}" id="take-survey">Take Survey</a>
+      </div>
+
+  {% endif %}
+
+  </div>
+
+{% endblock %}

@@ -3136,11 +3136,10 @@ h2 a.appearances-trigger.active {
   margin-right: 0.5em;
   background-color: #f7f7f7;
   border: 1px solid #e6e6e6;
-  -moz-border-radius: 0.25em;
   -webkit-border-radius: 0.25em;
-  -o-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
   -ms-border-radius: 0.25em;
-  -khtml-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
   border-radius: 0.25em;
 }
 
@@ -3150,11 +3149,10 @@ h2 a.appearances-trigger.active {
   margin-bottom: 1em;
   padding: 0.5em 1em;
   background-color: #f7f7f7;
-  -moz-border-radius: 1em;
   -webkit-border-radius: 1em;
-  -o-border-radius: 1em;
+  -moz-border-radius: 1em;
   -ms-border-radius: 1em;
-  -khtml-border-radius: 1em;
+  -o-border-radius: 1em;
   border-radius: 1em;
 }
 
@@ -3233,6 +3231,290 @@ h2 a.appearances-trigger.active {
     margin-right: 0;
   }
 }
+.county-performance #breadcrumb-replacement {
+  display: none;
+}
+.county-performance #page {
+  background-color: #f2f2f2;
+  text-align: center;
+}
+.county-performance #report {
+  margin-top: 30px;
+  padding: 40px;
+  background-color: #fff;
+}
+.county-performance h1 {
+  margin-top: 50px;
+  font-size: 2.3em;
+  line-height: 1.2em;
+  color: #36a74d;
+  text-shadow: 0 1px 0 #fff;
+}
+.county-performance h1 + p {
+  margin-top: 30px;
+  font-size: 1.3em;
+  line-height: 1.4em;
+  color: #333;
+  font-weight: bold;
+}
+.county-performance #report p {
+  font-size: 1.1em;
+  line-height: 1.4em;
+}
+.county-performance #report-header {
+  padding: 40px 40px;
+}
+.county-performance #report table {
+  width: 100%;
+  margin-top: 30px;
+}
+.county-performance #report table td, .county-performance #report table th {
+  text-align: center;
+  border: 1px solid #fff;
+  padding: 15px 20px;
+}
+.county-performance #report table th {
+  color: #999;
+  line-height: 1.3em;
+}
+.county-performance #report table td {
+  background-color: #f2f2f2;
+}
+.county-performance #report table tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+.county-performance #report table tfoot td {
+  background-color: #48bb60;
+  color: #fff;
+  font-weight: bold;
+}
+.county-performance #report table .county {
+  text-align: left;
+}
+.county-performance #report table td.county {
+  font-weight: bold;
+}
+.county-performance #report table td.development {
+  background-color: #F7E1E1;
+}
+.county-performance #report table tr:nth-child(even) td.development {
+  background-color: #FAF0F0;
+}
+.county-performance #report table tfoot td.development {
+  background-color: #E96F6F;
+}
+.county-performance #quote {
+  margin-top: 40px;
+  margin-bottom: 0;
+  border-top: 1px solid #ebebeb;
+  padding: 40px 15px;
+  color: #36a74d;
+  font-weight: bold;
+}
+.county-performance #quote .source {
+  font-size: 0.7em;
+  font-weight: normal;
+  color: #bbb;
+}
+.county-performance #threat, .county-performance #opportunity, .county-performance #share-petition {
+  border-top: 1px solid #ebebeb;
+  padding: 40px 15px;
+}
+.county-performance #threat p, .county-performance #opportunity p, .county-performance #share-petition p {
+  font-weight: bold;
+  color: #36a74d;
+}
+.county-performance h2 {
+  font-size: 1.5em;
+  line-height: 1.4em;
+  color: #36a74d;
+  margin-bottom: 1em;
+}
+.county-performance #share-petition p:first-child {
+  font-size: 1.3em;
+  color: #666;
+  margin-bottom: 40px;
+}
+.county-performance #share-petition a {
+  display: block;
+  width: 34%;
+  margin: 20px auto;
+  padding: 10px 10px 10px 40px;
+  background: #3c5a96 url(../images/county-perf-facebook.png) 10px 50% no-repeat;
+  color: #fff;
+  font-weight: bold;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+.county-performance #share-petition a:hover {
+  text-decoration: none;
+  background-color: #2d4472;
+}
+.county-performance a#share-twitter {
+  background-color: #59adeb;
+  background-image: url(../images/county-perf-twitter.png);
+}
+.county-performance a#share-twitter:hover {
+  background-color: #2b97e6;
+}
+.county-performance #petition {
+  background-color: #48bb60;
+  padding: 30px 20px;
+}
+.county-performance #petition h2 {
+  color: #fff;
+  font-size: 1.3em;
+  line-height: 1.2em;
+}
+.county-performance #petition input, .county-performance #petition button {
+  width: 35%;
+  font-size: 1.2em;
+  line-height: 30px;
+  margin-right: 10px;
+  padding: 5px 10px;
+}
+.county-performance #petition button {
+  width: 15%;
+  min-width: 100px;
+  color: #fff;
+  background-color: #333;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.county-performance #petition button:hover {
+  background-color: #4d4d4d;
+}
+.county-performance #petition p:last-child {
+  margin-bottom: 0;
+}
+.county-performance #petition .all-form-errors {
+  color: #fff;
+  font-size: 1.2em;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1em 0;
+  margin: 1em;
+}
+.county-performance #senate {
+  background-color: #f2f2f2;
+  padding: 30px 20px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+.county-performance #senate h2 {
+  margin-bottom: 5px;
+}
+.county-performance #senate h2 + p {
+  color: #999;
+}
+.county-performance #senate textarea {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.2em;
+  line-height: 30px;
+  padding: 5px 10px;
+}
+.county-performance #senate button {
+  margin: 15px auto 0 auto;
+  padding: 5px 20px;
+  font-size: 1em;
+  line-height: 30px;
+  color: #fff;
+  background-color: #333;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.county-performance #senate button:hover {
+  background-color: #4d4d4d;
+}
+.county-performance #senate p:last-child {
+  margin-bottom: 0;
+}
+.county-performance #senate .all-form-errors {
+  color: #cf0000;
+  font-size: 1.2em;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 1em 0;
+  margin: 1em 7em;
+}
+.county-performance #survey {
+  margin-top: 50px;
+  padding-bottom: 20px;
+  /* so it doesn't look like it's falling off the page */
+}
+.county-performance #survey p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #777;
+}
+.county-performance #survey #take-survey {
+  display: inline-block;
+  font-size: 1.6em;
+  line-height: 30px;
+  padding: 10px 40px;
+  color: #fff;
+  background-color: #fb5e5e;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  text-shadow: 0 1px 0 black;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+.county-performance #survey #take-survey:hover {
+  background-color: #911313;
+}
+@media only all and (max-width: 639px) {
+  .county-performance #page h2 {
+    border-top: none;
+    background: transparent;
+    padding: 0;
+  }
+  .county-performance #report table {
+    font-size: 0.8em;
+    line-height: 1.2em;
+  }
+  .county-performance #report table td, .county-performance #report table th {
+    padding: 10px;
+  }
+  .county-performance #report-header {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 40px;
+  }
+  .county-performance #report {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media only all and (max-width: 439px) {
+  .county-performance #report table {
+    font-size: 0.7em;
+  }
+  .county-performance #report table td, .county-performance #report table th {
+    padding: 5px;
+  }
+}
+
 @media print {
   body {
     width: 1000px;

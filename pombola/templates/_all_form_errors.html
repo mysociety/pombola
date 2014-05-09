@@ -1,0 +1,7 @@
+{% if form.non_field_errors %}
+  {{ form.non_field_errors.as_text|cut:"* " }}
+{% else %}
+  {% for field in form %}
+    {{ field.errors.as_text|cut:"* " }}
+  {% endfor %}
+{% endif %}

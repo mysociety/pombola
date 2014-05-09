@@ -104,7 +104,7 @@ STATIC_URL = '/static/'
 
 # integer which when updated causes the caches to fetch new content. See note in
 # 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 39
+STATIC_GENERATION_NUMBER = 40
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -284,6 +284,7 @@ AJAX_LOOKUP_CHANNELS = {
 # misc settings
 HTTPLIB2_CACHE_DIR = os.path.join( root_dir, 'httplib2_cache' )
 GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
+COUNTY_PERFORMANCE_EXPERIMENT_KEY = config.get('COUNTY_PERFORMANCE_EXPERIMENT_KEY')
 
 IEBC_API_ID = config.get('IEBC_API_ID')
 IEBC_API_SECRET = config.get('IEBC_API_SECRET')
@@ -379,6 +380,7 @@ INSTALLED_APPS = (
     'pombola.search',
     'pombola.file_archive',
     'pombola.map',
+    'pombola.experiments',
 
     'django_nose',
 )
