@@ -111,7 +111,6 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(CountyPerformanceView, self).get_context_data(**kwargs)
-        context['suppress_banner'] = True
         context['petition_form'] = CountyPerformancePetitionForm()
         context['senate_form'] = CountyPerformanceSenateForm()
         context['experiment_key'] = settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY
@@ -161,7 +160,6 @@ class CountyPerformanceSubmissionMixin(CountyPerformanceDataMixin):
         extra_context = {
             '{0}_form'.format(self.form_key): form,
             'major_partials': ['_county_{0}.html'.format(self.form_key)],
-            'suppress_banner': True,
             'correct_errors': True}
         context = self.get_context_data(**extra_context)
         return self.render_to_response(context)
