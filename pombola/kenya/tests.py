@@ -56,7 +56,7 @@ class CountyPerformancePageTests(WebTest):
 
     def test_petition_submission(self):
         Event.objects.all().delete()
-        response = self.app.get('/county-performance?variant=o&g=f&agroup=over')
+        response = self.app.get('/county-performance?variant=o&g=f&agroup=over&utm_expid=1234')
         event = Event.objects.get(
             variant='o',
             category='page',
@@ -88,7 +88,7 @@ class CountyPerformancePageTests(WebTest):
     def test_senate_submission(self):
         Event.objects.all().delete()
         test_comment = "Some comment to submit"
-        response = self.app.get('/county-performance?variant=t&g=m&agroup=over')
+        response = self.app.get('/county-performance?variant=t&g=m&agroup=over&utm_expid=1234')
         event = Event.objects.get(
             variant='t',
             category='page',
