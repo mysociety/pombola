@@ -20,6 +20,12 @@ from pombola.experiments.models import Experiment, Event
 
 
 def sanitize_parameter(key, parameters, allowed_values, default_value=None):
+    """Check that the value for key in parameters is in allowed_values
+
+    If it's an allowed value, return that.  If it's not an allowed
+    value, and there's a default_value supplied, return the
+    default_value.  Otherwise (an unknown key, and no default_value)
+    raise a ValueError."""
     value = parameters.get(key)
     if value not in allowed_values:
         if default_value is None:
@@ -28,14 +34,18 @@ def sanitize_parameter(key, parameters, allowed_values, default_value=None):
         value = default_value
     return value
 
+# A regular expression that the random keys we generate must match in
+# order to be valid:
 random_key_re = re.compile(r'^[a-zA-Z0-9]+$')
 
 def sanitize_random_key(key, parameters):
+    """Return parameters[key] if it's valid or '?' otherwise"""
     if key in parameters and random_key_re.search(parameters[key]):
         return parameters[key]
     return '?'
 
 def sanitize_data_parameters(request, parameters):
+    """Return a cleaned version of known experiment parameters"""
     result = {}
     result['variant'] = sanitize_parameter(
         key='variant',
@@ -58,6 +68,7 @@ def sanitize_data_parameters(request, parameters):
 
 
 class CountyPerformanceDataMixin(object):
+    """A mixin with helper methods for creating events and feedback"""
 
     session_key_prefix = 'MIT'
 
