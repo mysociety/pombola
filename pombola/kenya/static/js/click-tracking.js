@@ -29,7 +29,7 @@
       'eventAction': 'click',
       'eventLabel': label,
       'hitCallback': function () {
-        document.location = url;
+        $('#survey-form').submit()
       }
     });
   });

@@ -133,7 +133,9 @@ class CountyPerformancePageTests(WebTest):
         extra_data = json.loads(event.extra_data)
         self.assertEqual('f', extra_data['g'])
         self.assertEqual('under', extra_data['agroup'])
-        survey_url = response.html.find('a', {'id': 'take-survey'})['href']
+
+        form = response.forms.get('survey-form')
+        survey_url = form.action
         parsed_url = urlparse.urlparse(survey_url)
         self.assertEqual(parsed_url.path,
                          reverse('county-performance-survey'))
