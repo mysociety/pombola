@@ -59,30 +59,16 @@ def sanitize_data_parameters(request, parameters):
 
 class CountyPerformanceDataMixin(object):
 
-    def get_extra_data(self, sanitized_data):
-        key_mapping = [
-            ('g', 'gender'),
-            ('agroup', 'age_group'),
-            ('via', 'via_share'),
-            ('share_key', 'share_key'),
-        ]
-        return dict(
-            (readable_name, sanitized_data[key])
-            for key, readable_name in key_mapping
-            if sanitized_data.get(key, '?') != '?')
+    session_key_prefix = 'MIT'
 
-    def get_event_parameters(self, sanitized_data):
-        return {
-            'user_key': sanitized_data['user_key'],
-            'variant': sanitized_data['variant'],
-        }
+    def qualify_key(self, key):
+        return self.session_key_prefix + ':' + key
 
     def create_feedback(self, form, comment='', email=''):
         """A helper method for adding feedback to the database"""
         feedback = Feedback()
         feedback.status = 'non-actionable'
-        prefix_data = self.get_extra_data(form.cleaned_data)
-        prefix_data.update(self.get_event_parameters(form.cleaned_data))
+        prefix_data = self.get_session_data()
         comment_prefix = json.dumps(prefix_data)
         feedback.comment = comment_prefix + ' ' + comment
         feedback.email = email
@@ -91,11 +77,28 @@ class CountyPerformanceDataMixin(object):
             feedback.user = self.request.user
         feedback.save()
 
-    def create_event(self, data, event_parameters=None):
-        event_kwargs = self.get_event_parameters(data)
-        if event_parameters is not None:
-            event_kwargs.update(event_parameters)
-        event_kwargs['extra_data'] = json.dumps(self.get_extra_data(data))
+    def get_session_data(self):
+        result = {}
+        for key in ('user_key', 'variant', 'g', 'agroup', 'via'):
+            full_key = self.qualify_key(key)
+            value = self.request.session.get(full_key)
+            if value is not None:
+                result[key] = value
+        return result
+
+    def create_event(self, data):
+        data.update(self.get_session_data())
+        standard_cols = ('user_key', 'variant', 'category', 'action', 'label')
+        event_kwargs = {}
+        extra_data = data.copy()
+        for column in standard_cols:
+            if column in data:
+                value = data.get(column, '?')
+                if value != '?':
+                    event_kwargs[column] = value
+                del extra_data[column]
+        extra_data_json = json.dumps(extra_data)
+        event_kwargs['extra_data'] = extra_data_json
         experiment = Experiment.objects.get(slug='mit-county')
         experiment.event_set.create(**event_kwargs)
 
@@ -115,17 +118,29 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
         context['senate_form'] = CountyPerformanceSenateForm()
         context['experiment_key'] = settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY
 
-        context.update(sanitize_data_parameters(self.request, self.request.GET))
+        data = sanitize_data_parameters(self.request, self.request.GET)
 
-        # Note that this has to come after updating the context:
-        context['user_key'] = str(randint(0, sys.maxint))
+        # If there's no user key in the session, this is the first
+        # page view, so record any parameters indicating where the
+        # user came from (Facebook demographics or the 'via' parameter
+        # from a social share):
+        if self.qualify_key('user_key') not in self.request.session:
+            self.request.session[self.qualify_key('user_key')] = str(randint(0, sys.maxint))
+            for k in ('variant', 'via', 'g', 'agroup'):
+                self.request.session[self.qualify_key(k)] = data[k]
 
-        # Only record a page view event if this was a page picked by
-        # Google Analytic's randomization - otherwise we get a
-        # spurious page view before a particular variant is reloaded:
+        # Add those session parameters to the context for building the
+        # Qualtrics survey URL
+        context.update(self.get_session_data())
+
+        # Only record a page view event (and set the variant) if this
+        # was a page picked by Google Analytics's randomization -
+        # otherwise we'd get a spurious page view before a particular
+        # variant is reloaded:
         if 'utm_expid' in self.request.GET:
-            self.create_event(context,
-                              {'category': 'page',
+            self.request.session[self.qualify_key('variant')] = data['variant']
+            # Now create the page view event:
+            self.create_event({'category': 'page',
                                'action': 'view',
                                'label': 'county-performance'})
 
@@ -134,7 +149,7 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
             't': (False, True),
             'n': (False, False),
             None: (False, False),
-        }[context['variant']]
+        }[data['variant']]
 
         context['share_partials'] = [
             '_share_twitter.html',
@@ -166,8 +181,7 @@ class CountyPerformanceSubmissionMixin(CountyPerformanceDataMixin):
 
     def form_valid(self, form):
         self.create_feedback_from_form(form)
-        self.create_event(form.cleaned_data,
-                          {'category': 'form',
+        self.create_event({'category': 'form',
                            'action': 'submit',
                            'label': self.form_key})
         return super(CountyPerformanceSubmissionMixin,
@@ -212,13 +226,11 @@ class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
             key='n',
             parameters=self.request.GET,
             allowed_values=('facebook', 'twitter'))
-        data = sanitize_data_parameters(self.request, self.request.GET)
         share_key = "{0:x}".format(randint(0, sys.maxint))
-        data['share_key'] = share_key
-        self.create_event(data,
-                          {'category': 'share-click',
+        self.create_event({'category': 'share-click',
                            'action': 'click',
-                           'label': social_network})
+                           'label': social_network,
+                           'share_key': share_key})
         path = reverse('county-performance')
         built = self.request.build_absolute_uri(path)
         built += '?via=' + share_key
@@ -228,16 +240,15 @@ class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
             'twitter': "http://twitter.com/share?url={0}"}
         return url_formats[social_network].format(url_parameter)
 
+
 class CountyPerformanceSurvey(CountyPerformanceDataMixin, RedirectView):
     """For redirecting to the Qualtrics survey"""
 
     def get_redirect_url(self, *args, **kwargs):
-        data = sanitize_data_parameters(self.request, self.request.GET)
-        self.create_event(data,
-                          {'category': 'take-survey',
+        self.create_event({'category': 'take-survey',
                            'action': 'click',
                            'label': 'take-survey'})
         url_format = "http://survey.az1.qualtrics.com/SE/?SID=SV_5hhE4mOfYG1eaOh&user_key={0}&variant={1}"
         return url_format.format(
-            urlquote(data['user_key']),
-            urlquote(data['variant']))
+            urlquote(self.request.session.get('MIT:user_key', '?')),
+            urlquote(self.request.session.get('MIT:variant', '?')))

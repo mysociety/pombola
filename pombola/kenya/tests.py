@@ -64,8 +64,8 @@ class CountyPerformancePageTests(WebTest):
             label='county-performance')
         user_key = re.search(r'^\d+$', event.user_key).group()
         extra_data = json.loads(event.extra_data)
-        self.assertEqual('f', extra_data['gender'])
-        self.assertEqual('over', extra_data['age_group'])
+        self.assertEqual('f', extra_data['g'])
+        self.assertEqual('over', extra_data['agroup'])
         form = response.forms.get('petition')
         form['name'] = 'Joe Bloggs'
         form['email'] = 'hello@example.org'
@@ -83,7 +83,7 @@ class CountyPerformancePageTests(WebTest):
             label='petition')
         self.assertEqual(user_key, event.user_key)
         extra_data = json.loads(event.extra_data)
-        self.assertEqual('f', extra_data['gender'])
+        self.assertEqual('f', extra_data['g'])
 
     def test_senate_submission(self):
         Event.objects.all().delete()
@@ -96,8 +96,8 @@ class CountyPerformancePageTests(WebTest):
             label='county-performance')
         user_key = re.search(r'^\d+$', event.user_key).group()
         extra_data = json.loads(event.extra_data)
-        self.assertEqual('m', extra_data['gender'])
-        self.assertEqual('over', extra_data['age_group'])
+        self.assertEqual('m', extra_data['g'])
+        self.assertEqual('over', extra_data['agroup'])
         form = response.forms.get('senate')
         form['comments'] = test_comment
         form.submit()
@@ -113,4 +113,4 @@ class CountyPerformancePageTests(WebTest):
             label='senate')
         self.assertEqual(user_key, event.user_key)
         extra_data = json.loads(event.extra_data)
-        self.assertEqual('m', extra_data['gender'])
+        self.assertEqual('m', extra_data['g'])
