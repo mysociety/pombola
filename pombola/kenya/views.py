@@ -232,6 +232,8 @@ class CountyPerformancePetitionSubmission(CountyPerformanceSubmissionMixin,
 class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
     """For recording & enacting Facebook / Twitter share actions"""
 
+    permanent = False
+
     def get_redirect_url(self, *args, **kwargs):
         social_network = sanitize_parameter(
             key='n',
@@ -254,6 +256,8 @@ class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
 
 class CountyPerformanceSurvey(CountyPerformanceDataMixin, RedirectView):
     """For redirecting to the Qualtrics survey"""
+
+    permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
         self.create_event({'category': 'take-survey',
