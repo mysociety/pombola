@@ -98,6 +98,54 @@ div.search-pagination {
   @include background(linear-gradient(#333132, #4C4C4E));
 }
 
+.home-intro {
+  border-bottom: 1px solid #94C1E0;
+  margin-bottom: 40px;
+
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    color: #55a4da;
+    line-height: 32px;
+
+    #page & {
+      padding: 40px 0;
+    }
+  }
+}
+
+#page .home-left, #page .home-right {
+  h2 {
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+}
+
+#home-focus-on {
+  float: left;
+  width: 46%;
+}
+
+#polldaddy {
+  float: right;
+  width: 46%;
+
+  #page & .pds-box {
+    @include border-radius(0);
+    border: 4px solid #dddddd;
+  }
+
+  #page & .pds-vote {
+    padding-bottom: 0;
+  }
+
+  .pds-answer label {
+    display: inline;
+    float: none;
+  }
+}
+
 .embedded-video {
   margin-bottom: 1em;
   iframe {
@@ -106,14 +154,24 @@ div.search-pagination {
 }
 
 .carousel-item {
-  background-color: #56a3da;
+  padding: 4px;
+  background-color: #dddddd;
 }
 
 .home-news {
+    .home-news-article {
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
     .meta {
       font-style: normal;
       font-size: .75em; /* 12px */
       color: $colour_blackish;
+      margin-bottom: 10px;
     }
     .summary {
         line-height:1.3em;
@@ -121,6 +179,12 @@ div.search-pagination {
         p {
             display:inline;
         }
+    }
+}
+
+@media only all and (min-width: 640px), print {
+    #page .home-right .social-and-tools {
+      margin-top: 40px;
     }
 }
 
