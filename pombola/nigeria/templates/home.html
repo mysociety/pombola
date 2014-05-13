@@ -45,15 +45,21 @@
 
         </form>
 
+        <div class="home-news">
 
-        {% if settings.BLOG_RSS_FEED %}
             <h2>Latest News</h2>
-            <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-                <li>
-                    Loading news&hellip;
-                </li>
-            </ul>
-        {% endif %}
+
+            {% for blog_post in blog_posts %}
+              <h3><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h3>
+
+              <p class="meta">{{ blog_post.publication_date|date }}</p>
+
+              <div class="summary">{{ blog_post.content|truncatewords_html:32 }} <p><a class="readmore" href="{{ blog_post.get_absolute_url }}">More &#187;</a></p></div>
+
+            {% endfor %}
+
+        </div>
+
     </div>
     <div class="home-right">
         <h2>Focus On</h2>

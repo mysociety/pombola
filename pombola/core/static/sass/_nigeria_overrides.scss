@@ -108,3 +108,29 @@ div.search-pagination {
 .carousel-item {
   background-color: #56a3da;
 }
+
+.home-news {
+    .meta {
+      font-style: normal;
+      font-size: .75em; /* 12px */
+      color: $colour_blackish;
+    }
+    .summary {
+        line-height:1.3em;
+        margin-bottom:1em;
+        p {
+            display:inline;
+        }
+    }
+}
+
+.blog-list {
+    .blog-in-a-list {
+        border-bottom: 1px solid #d2d2ce;
+        margin-bottom: 2em;
+    }
+
+    img {
+      max-width: 100%;
+    }
+}

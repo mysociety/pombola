@@ -11,6 +11,12 @@ class NGHomeView(HomeView):
 
     def get_context_data(self, **kwargs):
         context = super(NGHomeView, self).get_context_data(**kwargs)
+
+        context['blog_posts'] = InfoPage.objects.filter(
+            categories__slug="latest-news",
+            kind=InfoPage.KIND_BLOG
+        ).order_by("-publication_date")
+
         # If there is editable homepage content make it available to the templates.
         # Currently only Nigeria uses this, if more countries want it we should
         # probably add a feature flip boolean to the config.
