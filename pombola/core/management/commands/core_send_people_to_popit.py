@@ -133,6 +133,8 @@ def create_organisations(popit):
     oslug_to_categories['university-of-nairobi'] = set([u'education'])
     oslug_to_categories['parliament'] = set([u'political'])
 
+    errors = []
+
     for slug, categories in oslug_to_categories.items():
         if len(categories) > 1 and 'other' in categories:
             categories.discard('other')
@@ -140,9 +142,13 @@ def create_organisations(popit):
             oslug_to_category[slug] = list(categories)[0]
         else:
             message = "There were %d for organisation %s: %s" % (len(categories), slug, categories)
-            # print >> sys.stderr, message
-            raise Exception, message
+            errors.append(message)
         all_categories = all_categories | categories
+
+    if errors:
+        for error in errors:
+            print >> sys.stderr, error
+        raise Exception, "Found organisations with multiple categories other than 'other'"
 
     slug_to_id = {}
 
