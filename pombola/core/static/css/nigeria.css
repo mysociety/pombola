@@ -3329,7 +3329,7 @@ div.search-pagination {
 @media only all and (min-width: 760px), print {
   #page .home-left {
     width: 400px;
-    margin-right: 0px;
+    margin-right: 0;
   }
 }
 @media only all and (min-width: 865px), print {
@@ -3402,9 +3402,27 @@ div.search-pagination {
     margin-top: 40px;
   }
 }
+.blog-list {
+  padding-top: 1em;
+}
 .blog-list .blog-in-a-list {
   border-bottom: 1px solid #d2d2ce;
   margin-bottom: 2em;
+  padding-bottom: 1em;
+}
+.blog-list h2 {
+  font-size: 1.5em;
+  line-height: 1.2em;
+  margin-bottom: 5px;
+}
+.blog-list .meta {
+  color: #999;
+  font-size: 1em;
+}
+#page .blog-list h2 {
+  background: transparent;
+  border: 0;
+  padding: 0;
 }
 .blog-list img {
   max-width: 100%;

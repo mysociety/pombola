@@ -219,9 +219,29 @@ div.search-pagination {
 }
 
 .blog-list {
+  padding-top: 1em;
+
     .blog-in-a-list {
         border-bottom: 1px solid #d2d2ce;
         margin-bottom: 2em;
+        padding-bottom: 1em;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      line-height: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .meta {
+      color: #999;
+      font-size: 1em;
+    }
+
+    #page & h2 {
+      background: transparent;
+      border: 0;
+      padding: 0;
     }
 
     img {
