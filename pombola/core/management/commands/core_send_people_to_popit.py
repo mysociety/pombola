@@ -25,6 +25,8 @@ from popit_api import PopIt
 
 from optparse import make_option
 
+primary_id_scheme = 'za.org.pa'
+
 extra_popolo_person_fields = (
     'email',
     'summary',
@@ -63,17 +65,16 @@ def date_to_partial_iso8601(approx_date):
         return d.strftime("%Y")
 
 def add_identifiers_to_properties(o, properties):
-    primary_id_scheme = 'org.mysociety.za'
+    table_name = o._meta.db_table
+    properties['id'] = '{0}/{1}/{2}'.format(
+        primary_id_scheme, table_name, o.id)
     secondary_identifiers = []
     for scheme, identifiers in o.get_all_identifiers().items():
         sorted_identifiers = sorted(identifiers)
-        if scheme == primary_id_scheme:
-            properties['id'] = scheme + sorted_identifiers[0]
-        else:
-            secondary_identifiers.append({
-                'scheme': scheme,
-                'identifier': sorted_identifiers[0]
-            })
+        secondary_identifiers.append({
+            'scheme': scheme,
+            'identifier': sorted_identifiers[0]
+        })
     properties['identifiers'] = secondary_identifiers
 
 def add_contact_details_to_properties(o, properties):
