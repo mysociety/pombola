@@ -3427,3 +3427,11 @@ div.search-pagination {
 .blog-list img {
   max-width: 100%;
 }
+
+.blog-post h1 {
+  margin-bottom: 5px;
+}
+.blog-post .meta {
+  color: #999;
+  font-size: 1em;
+}
