@@ -9,7 +9,7 @@
   nav {
     position:relative;
     z-index:2;
-    float:right;
+    text-align: right;
 
     ul {
       li {
@@ -100,17 +100,32 @@ div.search-pagination {
 
 .home-intro {
   border-bottom: 1px solid #94C1E0;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  padding: 20px;
 
   h2 {
     text-align: center;
-    font-size: 24px;
+    font-size: 21px;
+    line-height: 28px;
     font-weight: normal;
     color: #55a4da;
-    line-height: 32px;
+    margin: 0;
+    padding: 2em 2em;
 
     #page & {
-      padding: 40px 0;
+      padding: 0;
+      border-top: 0;
+      background: transparent;
+    }
+  }
+
+  @media only all and (min-width: 640px), print {
+    margin-bottom: 40px;
+    padding: 2em 4em 2.5em 4em;
+
+    h2 {
+      font-size: 24px;
+      line-height: 32px;
     }
   }
 }
