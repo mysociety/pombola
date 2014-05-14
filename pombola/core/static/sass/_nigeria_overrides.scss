@@ -137,6 +137,21 @@ div.search-pagination {
   }
 }
 
+
+@media only all and (min-width: 760px), print {
+  #page .home-left {
+    width: 400px;
+    margin-right: 0;
+  }
+}
+
+@media only all and (min-width: 865px), print {
+  #page .home-left {
+    width: 400px;
+    margin-right: 50px;
+  }
+}
+
 #home-focus-on {
   float: left;
   width: 46%;
