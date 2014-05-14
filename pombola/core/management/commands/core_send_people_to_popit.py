@@ -163,7 +163,7 @@ def create_organisations(popit):
         if o.slug in oslug_to_category:
             print >> sys.stderr, "creating the organisation:", o.name
             properties = {'slug': o.slug,
-                          'name': o.name,
+                          'name': o.name.strip(),
                           'classification': o.kind.name,
                           'category': oslug_to_category[o.slug]}
             add_start_and_end_date(
