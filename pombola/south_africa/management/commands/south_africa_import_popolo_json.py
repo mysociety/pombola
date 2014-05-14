@@ -51,18 +51,6 @@ class Command(LabelCommand):
         with open(filename) as f:
             data = json.load(f)
 
-        # Get the common identifier types to save hammering the DB
-
-        content_type_org = ContentType.objects.get_for_model(Organisation)
-        content_type_person = ContentType.objects.get_for_model(Person)
-
-        contact_kind_email = ContactKind.objects.get(slug='email')
-        contact_kind_voice = ContactKind.objects.get(slug='voice')
-        contact_kind_cell = ContactKind.objects.get(slug='cell')
-        contact_kind_phone = ContactKind.objects.get(slug='phone')
-        contact_kind_fax = ContactKind.objects.get(slug='fax')
-        contact_kind_address = ContactKind.objects.get(slug='address')
-
         # Handle the organisations...
 
         for json_org in data['organizations']:
@@ -84,28 +72,6 @@ class Command(LabelCommand):
                 pombola_org.ended = parse_approximate_date(json_org['dissolution_date'])
 
             pombola_org.save()
-
-            # # Slice up the identifier
-            identifier_scheme, _, identifier_identifier = json_org['id'].rpartition('/')
-
-            # Pop the identifier back in the database. Use get_or_create so this is idempotent.
-            Identifier.objects.get_or_create(
-                scheme = identifier_scheme,
-                identifier = identifier_identifier,
-                object_id = pombola_org.id,
-                content_type = content_type_org,
-            )
-
-            # If the Organisation has any more identifiers, iterate over those and insert as well.
-
-            if 'identifiers' in json_org:
-                for org_identifier in json_org['identifiers']:
-                    Identifier.objects.get_or_create(
-                        scheme = org_identifier['scheme'],
-                        identifier = org_identifier['identifier'],
-                        object_id = pombola_org.id,
-                        content_type = content_type_org,
-                    )
 
         # Handle the people
 
@@ -158,84 +124,3 @@ class Command(LabelCommand):
 
             # Save the changes to the person!
             pombola_person.save()
-
-            # Look to see if there are any new contact details we can insert
-            if 'contact_details' in json_person:
-                for contact_detail in json_person['contact_details']:
-
-                    # These are done separately in case we ever need to do manipulation
-
-                    if contact_detail['type'] == 'email':
-                        Contact.objects.get_or_create(
-                            kind = contact_kind_email,
-                            value = contact_detail['value'],
-                            object_id = pombola_person.id,
-                            content_type = content_type_person,
-                        )
-                        # We *could* do this, but no way of determining primary.
-                        # pombola_person.email = contact_detail['value']
-
-                    elif contact_detail['type'] == 'voice':
-                        Contact.objects.get_or_create(
-                            kind = contact_kind_voice,
-                            value = contact_detail['value'],
-                            object_id = pombola_person.id,
-                            content_type = content_type_person,
-                        )
-
-                    elif contact_detail['type'] == 'cell':
-                        Contact.objects.get_or_create(
-                            kind = contact_kind_cell,
-                            value = contact_detail['value'],
-                            object_id = pombola_person.id,
-                            content_type = content_type_person,
-                        )
-
-                    elif contact_detail['type'] == 'phone':
-                        Contact.objects.get_or_create(
-                            kind = contact_kind_phone,
-                            value = contact_detail['value'],
-                            object_id = pombola_person.id,
-                            content_type = content_type_person,
-                        )
-
-                    elif contact_detail['type'] == 'fax':
-                        Contact.objects.get_or_create(
-                            kind = contact_kind_fax,
-                            value = contact_detail['value'],
-                            object_id = pombola_person.id,
-                            content_type = content_type_person,
-                        )
-
-                    elif contact_detail['type'] == 'address':
-                        Contact.objects.get_or_create(
-                            kind = contact_kind_address,
-                            value = contact_detail['value'],
-                            object_id = pombola_person.id,
-                            content_type = content_type_person,
-                        )
-
-                    else:
-                        print >> sys.stderr, 'Unmatched contact type "' + contact_detail['type'] + '".'
-
-            # Slice up the identifier
-            identifier_scheme, _, identifier_identifier = json_person['id'].rpartition('/')
-
-            # Pop the identifier back in the database. Use get_or_create so this is idempotent.
-            Identifier.objects.get_or_create(
-                scheme = identifier_scheme,
-                identifier = identifier_identifier,
-                object_id = pombola_person.id,
-                content_type = content_type_person,
-            )
-
-            # If the Person has any more identifiers, iterate over those and insert as well.
-
-            if 'identifiers' in json_person:
-                for person_identifier in json_person['identifiers']:
-                    Identifier.objects.get_or_create(
-                        scheme = person_identifier['scheme'],
-                        identifier = person_identifier['identifier'],
-                        object_id = pombola_person.id,
-                        content_type = content_type_person,
-                    )
