@@ -89,20 +89,26 @@ def add_contact_details_to_properties(o, properties):
         contacts.append(contact)
     properties['contact_details'] = contacts
 
-def add_start_and_end_date(o, properties):
-    if o.start_date and not o.start_date.past:
-        properties['start_date'] = date_to_partial_iso8601(o.start_date)
-    if o.end_date and not o.end_date.future:
-        properties['end_date'] = date_to_partial_iso8601(o.end_date)
+def add_start_and_end_date(o, properties, start_key_map=None, end_key_map=None):
+    if start_key_map is None:
+        start_key_map = ('start_date', 'start_date')
+    if end_key_map is None:
+        end_key_map = ('end_date', 'end_date')
+    start_value = getattr(o, start_key_map[0])
+    end_value = getattr(o, end_key_map[0])
+    if start_value and not start_value.past:
+        properties[start_key_map[1]] = date_to_partial_iso8601(start_value)
+    if end_value and not end_value.future:
+        properties[end_key_map[1]] = date_to_partial_iso8601(end_value)
 
 def add_other_names(person, properties):
     properties['other_names'] = []
     for an in person.alternative_names.all():
-        properties = {'name': an.alternative_name}
-        add_start_and_end_date(an, properties)
-        properties['other_names'].append(properties)
+        an_properties = {'name': an.alternative_name}
+        add_start_and_end_date(an, an_properties)
         if an.note:
-            properties['note'] = an.note
+            an_properties['note'] = an.note
+        properties['other_names'].append(an_properties)
 
 def create_organisations(popit):
     """Create organizations in PopIt based on those used in memberships in Pombola
@@ -146,6 +152,11 @@ def create_organisations(popit):
                           'name': o.name,
                           'classification': o.kind.name,
                           'category': oslug_to_category[o.slug]}
+            add_start_and_end_date(
+                o,
+                properties,
+                start_key_map=('started', 'founding_date'),
+                end_key_map=('ended', 'dissolution_date'))
             add_identifiers_to_properties(o, properties)
             add_contact_details_to_properties(o, properties)
             new_organisation = popit.organizations.post(properties)
