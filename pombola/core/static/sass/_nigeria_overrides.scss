@@ -190,6 +190,14 @@ div.search-pagination {
 .carousel-item {
   padding: 4px;
   background-color: #dddddd;
+  display: block;
+  font-size: 0; // avoid space below child img elements
+}
+
+.carousel-nav {
+  bottom: -24px;
+  right: 50%;
+  margin-right: -18px;
 }
 
 .home-news {
