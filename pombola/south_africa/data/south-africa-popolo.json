@@ -74,7 +74,7 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/62",
             "name": "Ad Hoc Commitee on Commission for Gender Equality (CGE) Forensic Investigation",
-            "slug": "ad-hoc-commitee-on-commission-for-gender-equality-(cge)-forensic-investigation"
+            "slug": "ad-hoc-commitee-on-commission-for-gender-equality-cge-forensic-investigation"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -92,13 +92,13 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/64",
             "name": "Ad Hoc Committee on Code of Judicial Conduct on Disclosure of Interests (NA)",
-            "slug": "ad-hoc-committee-on-code-of-judicial-conduct-on-disclosure-of-interests-(na)"
+            "slug": "ad-hoc-committee-on-code-of-judicial-conduct-on-disclosure-of-interests-na"
         },
         {
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/66",
             "name": "Ad Hoc Committee on Code of Judicial Conduct on Disclosure of Interests (NCOP)",
-            "slug": "ad-hoc-committee-on-code-of-judicial-conduct-on-disclosure-of-interests-(ncop)"
+            "slug": "ad-hoc-committee-on-code-of-judicial-conduct-on-disclosure-of-interests-ncop"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -110,19 +110,19 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/68",
             "name": "Ad Hoc Committee on Criminal Law (Forensic Procedures) Amendment Bill",
-            "slug": "ad-hoc-committee-on-criminal-law-(forensic-procedures)-amendment-bill"
+            "slug": "ad-hoc-committee-on-criminal-law-forensic-procedures-amendment-bill"
         },
         {
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/69",
             "name": "Ad Hoc Committee on General Intelligence Laws Amendment Bill (NA)",
-            "slug": "ad-hoc-committee-on-general-intelligence-laws-amendment-bill-(na)"
+            "slug": "ad-hoc-committee-on-general-intelligence-laws-amendment-bill-na"
         },
         {
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/70",
             "name": "Ad Hoc Committee on General Intelligence Laws Amendment Bill (NCOP)",
-            "slug": "ad-hoc-committee-on-general-intelligence-laws-amendment-bill-(ncop)"
+            "slug": "ad-hoc-committee-on-general-intelligence-laws-amendment-bill-ncop"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -140,13 +140,13 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/73",
             "name": "Ad Hoc Committee on Protection of State Information Bill (NA)",
-            "slug": "ad-hoc-committee-on-protection-of-state-information-bill-(na)"
+            "slug": "ad-hoc-committee-on-protection-of-state-information-bill-na"
         },
         {
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/74",
             "name": "Ad Hoc Committee on Protection of State Information Bill (NCOP)",
-            "slug": "ad-hoc-committee-on-protection-of-state-information-bill-(ncop)"
+            "slug": "ad-hoc-committee-on-protection-of-state-information-bill-ncop"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -158,7 +158,7 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/76",
             "name": "Ad Hoc Joint Committee to Consider Matters ito Section 12 of National Prosecuting Authority Act (Pikoli)",
-            "slug": "ad-hoc-joint-committee-to-consider-matters-ito-section-12-of-national-prosecuting-authority-act-(pikoli)"
+            "slug": "ad-hoc-joint-committee-to-consider-matters-ito-section-12-of-national-prosecuting-authority-act-pikoli"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -170,13 +170,13 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/78",
             "name": "African Peer Review Mechanism (APRM)",
-            "slug": "african-peer-review-mechanism-(aprm)"
+            "slug": "african-peer-review-mechanism-aprm"
         },
         {
             "classification": "National Assembly Committees",
             "id": "org.mysociety.za/committee_pmg/1",
             "name": "Agriculture, Forestry and Fisheries",
-            "slug": "agriculture,-forestry-and-fisheries"
+            "slug": "agriculture-forestry-and-fisheries"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -285,7 +285,7 @@
                 }
             ],
             "name": "Committee On Petitions and Members' Legislative Proposals",
-            "slug": "committee-on-petitions-and-members'-legislative-proposals"
+            "slug": "committee-on-petitions-and-members-legislative-proposals"
         },
         {
             "classification": "committee",
@@ -297,7 +297,7 @@
                 }
             ],
             "name": "Committee On Private Members' Legislative Proposals And Special Petitions",
-            "slug": "committee-on-private-members'-legislative-proposals-and-special-petitions"
+            "slug": "committee-on-private-members-legislative-proposals-and-special-petitions"
         },
         {
             "classification": "Joint Committees",
@@ -370,7 +370,7 @@
             "classification": "Joint Committees",
             "id": "org.mysociety.za/committee_pmg/55",
             "name": "Ethics and Members' Interest",
-            "slug": "ethics-and-members'-interest"
+            "slug": "ethics-and-members-interest"
         },
         {
             "classification": "party",
@@ -383,7 +383,7 @@
             ],
             "image": "http://www.pa.org.za/static/images/party-logos/ff.png",
             "name": "Freedom Front + (Vryheidsfront+, FF+)",
-            "slug": "ff+"
+            "slug": "ff"
         },
         {
             "classification": "National Assembly Committees",
@@ -493,7 +493,7 @@
                 }
             ],
             "name": "Joint Committee on Ethics and Members' Interests",
-            "slug": "joint-committee-on-ethics-and-members'-interests"
+            "slug": "joint-committee-on-ethics-and-members-interests"
         },
         {
             "classification": "Joint Committees",
@@ -511,7 +511,7 @@
             "classification": "Joint Committees",
             "id": "org.mysociety.za/committee_pmg/58",
             "name": "Joint Monitoring Committee on Children, Youth and Persons with Disabilities",
-            "slug": "joint-monitoring-committee-on-children,-youth-and-persons-with-disabilities"
+            "slug": "joint-monitoring-committee-on-children-youth-and-persons-with-disabilities"
         },
         {
             "classification": "Joint Committees",
@@ -662,7 +662,7 @@
             "classification": "NCOP Committees",
             "id": "org.mysociety.za/committee_pmg/50",
             "name": "NCOP Women, Children and People with Disabilities",
-            "slug": "ncop-women,-children-and-people-with-disabilities"
+            "slug": "ncop-women-children-and-people-with-disabilities"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -680,7 +680,7 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/95",
             "name": "Oversight & Accountability",
-            "slug": "oversight-&-accountability"
+            "slug": "oversight-accountability"
         },
         {
             "classification": "party",
@@ -699,7 +699,7 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/96",
             "name": "Pan-African Parliament (NA)",
-            "slug": "pan-african-parliament-(na)"
+            "slug": "pan-african-parliament-na"
         },
         {
             "classification": "National Assembly Committees",
@@ -717,7 +717,7 @@
                 }
             ],
             "name": "Portfolio Committee On Agriculture, Forestry and Fisheries",
-            "slug": "portfolio-committee-on-agriculture,-forestry-and-fisheries"
+            "slug": "portfolio-committee-on-agriculture-forestry-and-fisheries"
         },
         {
             "classification": "committee",
@@ -1053,7 +1053,7 @@
                 }
             ],
             "name": "Portfolio Committee On Women, Youth, Children and People with Disabilities",
-            "slug": "portfolio-committee-on-women,-youth,-children-and-people-with-disabilities"
+            "slug": "portfolio-committee-on-women-youth-children-and-people-with-disabilities"
         },
         {
             "classification": "committee",
@@ -1095,13 +1095,13 @@
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/99",
             "name": "Presidency - National Planning Commission",
-            "slug": "presidency---national-planning-commission"
+            "slug": "presidency-national-planning-commission"
         },
         {
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/100",
             "name": "Presidency - Performance Monitoring and Evaluation",
-            "slug": "presidency---performance-monitoring-and-evaluation"
+            "slug": "presidency-performance-monitoring-and-evaluation"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -1113,13 +1113,13 @@
             "classification": "National Assembly Committees",
             "id": "org.mysociety.za/committee_pmg/20",
             "name": "Private Members' Legislative Proposals and Special Petitions",
-            "slug": "private-members'-legislative-proposals-and-special-petitions"
+            "slug": "private-members-legislative-proposals-and-special-petitions"
         },
         {
             "classification": "Ad Hoc Committees",
             "id": "org.mysociety.za/committee_pmg/102",
             "name": "Promotion of Access to Information Bill (Open Democracy Bill)",
-            "slug": "promotion-of-access-to-information-bill-(open-democracy-bill)"
+            "slug": "promotion-of-access-to-information-bill-open-democracy-bill"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -1347,7 +1347,7 @@
                 }
             ],
             "name": "Select Committee on Women, Children and People with Disabilities",
-            "slug": "select-committee-on-women,-children-and-people-with-disabilities"
+            "slug": "select-committee-on-women-children-and-people-with-disabilities"
         },
         {
             "classification": "National Assembly Committees",
@@ -1469,7 +1469,7 @@
             "classification": "National Assembly Committees",
             "id": "org.mysociety.za/committee_pmg/36",
             "name": "Women, Youth, Children and People with Disability",
-            "slug": "women,-youth,-children-and-people-with-disability"
+            "slug": "women-youth-children-and-people-with-disability"
         },
         {
             "classification": "Ad Hoc Committees",
@@ -1953,7 +1953,7 @@
                 }
             ],
             "name": "Salamuddi (Salam) Abram",
-            "slug": "salamuddi-(salam)-abram"
+            "slug": "salamuddi-salam-abram"
         },
         {
             "contact_details": [
@@ -4777,7 +4777,7 @@
                 }
             ],
             "name": "Manuel Sim\u00e3o Franca De Freitas",
-            "slug": "manuel-sim\u00e3o-franca-de-freitas"
+            "slug": "manuel-simao-franca-de-freitas"
         },
         {
             "biography": "Mr De Lange was born on 15 January 1958. He obtained his BA in Law from the University of Stellenbosch (1978) and his LLB from University of Cape Town (1983). Mr De Lange was the former Deputy Minister for Justice and Constitutional Development (2004-09), was the Head of the Office of Criminal Justice Review (2006-09) and was Commissioner on the Judicial Service Commission (1996-04). He is currently a member of the Subcommittee on Social Transformation and the Subcommittee on Economic Transformation. ",
@@ -6937,7 +6937,7 @@
                 }
             ],
             "name": "Andr\u00e9 Hurtley Gaum",
-            "slug": "andr\u00e9-hurtley-gaum"
+            "slug": "andre-hurtley-gaum"
         },
         {
             "contact_details": [
@@ -14686,7 +14686,7 @@
                 }
             ],
             "name": "Lindiwe Desir\u00e9 Mazibuko",
-            "slug": "lindiwe-desir\u00e9-mazibuko"
+            "slug": "lindiwe-desire-mazibuko"
         },
         {
             "contact_details": [
@@ -23074,7 +23074,7 @@
                     "name": "Schafer"
                 }
             ],
-            "slug": "deborah-anne-sch\u00e4fer"
+            "slug": "deborah-anne-schafer"
         },
         {
             "family_name": "Sefularo",
@@ -25891,7 +25891,7 @@
                 }
             ],
             "name": "Johanna Fredrika (Juanita) Terblanche",
-            "slug": "johanna-fredrika-(juanita)-terblanche"
+            "slug": "johanna-fredrika-juanita-terblanche"
         },
         {
             "biography": "Deputy Minister Thabethe was born on 26 September 1959 and had been a Member of Parliament since 1994. She completed a Certificate in Economics with University of South Africa (UNISA) and an Advanced Diploma in Economics in 2008. She was a Co-coordinator of the East Rand Women\u2019s League RTT structure, a member of ANC National Parliamentary Caucus, Gauteng Provincial Whip and a House Whip from 1996 to 2004. She Chaired the Portfolio Committee on Environmental Affairs and Tourism between 2004 and June 2005, but also was a Member of the Committees on Labour and Trade and Industry. Source: (info.gov.za) ",
@@ -28611,7 +28611,7 @@
                 }
             ],
             "name": "Anneliz\u00e9 van Wyk",
-            "slug": "anneliz\u00e9-van-wyk"
+            "slug": "annelize-van-wyk"
         },
         {
             "contact_details": [
@@ -38809,7 +38809,7 @@
                     "name": "Ouma Tsopo"
                 }
             ],
-            "slug": "ma-tsopo"
+            "slug": "m-tsopo"
         },
         {
             "contact_details": [
