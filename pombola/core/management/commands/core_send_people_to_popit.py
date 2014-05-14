@@ -25,6 +25,20 @@ from popit_api import PopIt
 
 from optparse import make_option
 
+extra_popolo_person_fields = (
+    'email',
+    'summary',
+    'biography',
+    'national_identity',
+    'family_name',
+    'given_name',
+    'additional_name',
+    'honorific_prefix',
+    'honorific_suffix',
+    'sort_name',
+    'gender',
+)
+
 def date_to_partial_iso8601(approx_date):
     """Get a (possibly partial) ISO 8601 representation of an ApproximateDate
 
@@ -227,6 +241,16 @@ class Command(BaseCommand):
                 add_identifiers_to_properties(person, person_properties)
                 add_contact_details_to_properties(person, person_properties)
                 add_other_names(person, person_properties)
+                for key in extra_popolo_person_fields:
+                    value = getattr(person, key)
+                    # This might be a markitup.fields.Markup field, in
+                    # which case we need to call raw on it:
+                    try:
+                        value = value.raw
+                    except AttributeError:
+                        pass
+                    if value:
+                        person_properties[key] = value
                 person_id = popit.persons.post(person_properties)['result']['id']
                 for position in person.position_set.all():
                     if not (position.title and position.title.name):
