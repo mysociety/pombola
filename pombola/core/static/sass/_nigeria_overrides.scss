@@ -161,9 +161,13 @@ div.search-pagination {
   float: right;
   width: 46%;
 
+  .PDS_Poll {
+    border: 4px solid #dddddd;
+  }
+
   #page & .pds-box {
     @include border-radius(0);
-    border: 4px solid #dddddd;
+    border: none;
   }
 
   #page & .pds-vote {
