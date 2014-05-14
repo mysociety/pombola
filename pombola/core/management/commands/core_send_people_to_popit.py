@@ -82,9 +82,11 @@ def add_start_and_end_date(o, properties):
         properties['end_date'] = date_to_partial_iso8601(o.end_date)
 
 def add_other_names(person, properties):
-    properties['other_names'] = [
-        {'name': an.alternative_name} for an in
-        person.alternative_names.all()]
+    properties['other_names'] = []
+    for an in person.alternative_names.all():
+        properties = {'name': an.alternative_name}
+        add_start_and_end_date(an, properties)
+        properties['other_names'].append(properties)
 
 def create_organisations(popit):
     """Create organizations in PopIt based on those used in memberships in Pombola
