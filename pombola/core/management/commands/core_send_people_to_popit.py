@@ -87,6 +87,8 @@ def add_other_names(person, properties):
         properties = {'name': an.alternative_name}
         add_start_and_end_date(an, properties)
         properties['other_names'].append(properties)
+        if an.note:
+            properties['note'] = an.note
 
 def create_organisations(popit):
     """Create organizations in PopIt based on those used in memberships in Pombola
