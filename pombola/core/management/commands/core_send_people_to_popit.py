@@ -75,6 +75,12 @@ def add_contact_details_to_properties(o, properties):
         contacts.append(contact)
     properties['contact_details'] = contacts
 
+def add_start_and_end_date(o, properties):
+    if o.start_date and not o.start_date.past:
+        properties['start_date'] = date_to_partial_iso8601(o.start_date)
+    if o.end_date and not o.end_date.future:
+        properties['end_date'] = date_to_partial_iso8601(o.end_date)
+
 def add_other_names(person, properties):
     properties['other_names'] = [
         {'name': an.alternative_name} for an in
@@ -223,10 +229,7 @@ class Command(BaseCommand):
                         continue
                     properties = {'role': position.title.name,
                                   'person_id': person_id}
-                    if position.start_date and not position.start_date.past:
-                        properties['start_date'] = date_to_partial_iso8601(position.start_date)
-                    if position.end_date and not position.end_date.future:
-                        properties['end_date'] = date_to_partial_iso8601(position.end_date)
+                    add_start_and_end_date(position, properties)
                     add_identifiers_to_properties(position, properties)
                     if position.organisation:
                         oslug = position.organisation.slug
