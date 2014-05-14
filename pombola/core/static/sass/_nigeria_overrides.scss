@@ -1,10 +1,6 @@
 #main-menu {
-  background: $colour_white;
-  padding-top: 20px;
-  margin-top: 10px;
-  background-image: url(/static/images/header_top.png);
-  background-repeat: repeat-x;
-  background-position: top center;
+  background: #8DC5EB; // light blue
+  border-bottom: 2px solid #4082AF; // rich, dark blue
 
   nav {
     position:relative;
@@ -13,15 +9,19 @@
 
     ul {
       li {
-        border-right: 2px solid $colour_white;
+        border-right: 2px solid transparent;
 
          a {
           color: $colour_black;
           background-image: none;
 
           &:hover {
-            background: #d4d4d4;
+            background: #C3E3F8;
           }
+        }
+
+        &:hover ul li a:hover {
+          background: #C3E3F8;
         }
       }
     }
@@ -49,7 +49,7 @@ body {
 
 @media only all and (min-width: 640px), print {
   #site-header {
-    height: 100px;
+    height: 120px;
   }
 }
 
@@ -60,7 +60,7 @@ body {
   background-position: left 20%;
 
   @media only all and (min-width: 640px), print {
-    top: -20px;
+    top: -15px;
     height: 130px;
     width: 630px;
     background: url(/static/images/mz-nigeria-logo-text.png) 0 center no-repeat;
