@@ -131,7 +131,14 @@ def create_organisations(popit):
     oslug_to_category = {}
 
     oslug_to_categories['university-of-nairobi'] = set([u'education'])
+    oslug_to_categories['kenyatta-university'] = set([u'education'])
+    oslug_to_categories['kenya-school-of-law'] = set([u'education'])
+    oslug_to_categories['alliance-high-school'] = set([u'education'])
+    oslug_to_categories['jomo-kenyatta-university-of-agriculture-technology-jkuat'] = set([u'education'])
+    oslug_to_categories['moi-high-school-kabarak'] = set([u'education'])
+    oslug_to_categories['nairobi-school'] = set([u'education'])
     oslug_to_categories['parliament'] = set([u'political'])
+    oslug_to_categories['national-assembly'] = set([u'political'])
 
     errors = []
 
