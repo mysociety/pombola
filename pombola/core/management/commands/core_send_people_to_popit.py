@@ -183,9 +183,13 @@ def create_organisations(popit, primary_id_scheme):
             print >> sys.stderr, json.dumps(organization, indent=4)
             raise
 
-def get_people(primary_id_scheme, base_url):
+def get_people(primary_id_scheme, base_url, inline_memberships=True):
 
-    result = []
+    result = {
+        'persons': []
+    }
+    if not inline_memberships:
+        result['memberships'] = []
 
     for person in Person.objects.all():
         name = person.legal_name
@@ -211,7 +215,8 @@ def get_people(primary_id_scheme, base_url):
             if value:
                 person_properties[key] = value
 
-        person_properties['memberships'] = []
+        if inline_memberships:
+            person_properties['memberships'] = []
 
         for position in person.position_set.all():
             if not (position.title and position.title.name):
@@ -224,13 +229,22 @@ def get_people(primary_id_scheme, base_url):
                 oslug = position.organisation.slug
                 organization_id = position.organisation.get_popolo_id(primary_id_scheme)
                 properties['organization_id'] = organization_id
-            person_properties['memberships'].append(properties)
+            if inline_memberships:
+                person_properties['memberships'].append(properties)
+            else:
+                result['memberships'].append(properties)
 
-        result.append(person_properties)
+        result['persons'].append(person_properties)
+    return result
+
+def get_popolo_data(primary_id_scheme, base_url, inline_memberships=True):
+    result = get_people(primary_id_scheme, base_url, inline_memberships)
+    result['organizations'] = get_organizations(primary_id_scheme)
     return result
 
 def create_people(popit, primary_id_scheme, base_url):
-    for person in get_people(primary_id_scheme, base_url):
+    people = get_people(primary_id_scheme, base_url, inline_memberships=True)
+    for person in people['persons']:
         print >> sys.stderr, "creating the person:", person['name']
         try:
             popit.persons.post(person)
