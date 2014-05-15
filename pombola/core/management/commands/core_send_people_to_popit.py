@@ -173,7 +173,12 @@ def create_organisations(popit):
                 end_key_map=('ended', 'dissolution_date'))
             add_identifiers_to_properties(o, properties)
             add_contact_details_to_properties(o, properties)
-            new_organisation = popit.organizations.post(properties)
+            try:
+                new_organisation = popit.organizations.post(properties)
+            except slumber.exceptions.HttpServerError:
+                print >> sys.stderr, "Failed POSTing the organisation:"
+                print >> sys.stderr, json.dumps(properties, indent=4)
+                raise
             slug_to_id[o.slug] = new_organisation['result']['id']
     return slug_to_id
 
@@ -276,7 +281,13 @@ class Command(BaseCommand):
                         pass
                     if value:
                         person_properties[key] = value
-                person_id = popit.persons.post(person_properties)['result']['id']
+                try:
+                    person_id = popit.persons.post(person_properties)['result']['id']
+                except slumber.exceptions.HttpServerError:
+                    print >> sys.stderr, "Failed POSTing the person:"
+                    print >> sys.stderr, json.dumps(person_properties, indent=4)
+                    raise
+
                 for position in person.position_set.all():
                     if not (position.title and position.title.name):
                         continue
@@ -289,7 +300,12 @@ class Command(BaseCommand):
                         organization_id = org_slug_to_id[oslug]
                         properties['organization_id'] = organization_id
                     print >> sys.stderr, "  creating the membership:", position
-                    new_membership = popit.memberships.post(properties)
+                    try:
+                        new_membership = popit.memberships.post(properties)
+                    except slumber.exceptions.HttpServerError:
+                        print >> sys.stderr, "Failed POSTing the membership:"
+                        print >> sys.stderr, json.dumps(properties, indent=4)
+                        raise
 
         except slumber.exceptions.HttpClientError, e:
             print "Exception is:", e
