@@ -153,8 +153,6 @@ def create_organisations(popit, primary_id_scheme):
             print >> sys.stderr, error
         raise Exception, "Found organisations with multiple categories other than 'other'"
 
-    slug_to_id = {}
-
     for o in Organisation.objects.all():
         if o.slug in oslug_to_category:
             print >> sys.stderr, "creating the organisation:", o.name
@@ -175,8 +173,6 @@ def create_organisations(popit, primary_id_scheme):
                 print >> sys.stderr, "Failed POSTing the organisation:"
                 print >> sys.stderr, json.dumps(properties, indent=4)
                 raise
-            slug_to_id[o.slug] = new_organisation['result']['id']
-    return slug_to_id
 
 class Command(BaseCommand):
     args = 'MZALENDO-URL'
@@ -295,7 +291,7 @@ class Command(BaseCommand):
                     add_identifiers_to_properties(position, properties, primary_id_scheme)
                     if position.organisation:
                         oslug = position.organisation.slug
-                        organization_id = org_slug_to_id[oslug]
+                        organization_id = position.organisation.get_popolo_id(primary_id_scheme)
                         properties['organization_id'] = organization_id
                     print >> sys.stderr, "  creating the membership:", position
                     try:
