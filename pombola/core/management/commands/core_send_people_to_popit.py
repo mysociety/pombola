@@ -107,14 +107,10 @@ def add_other_names(person, properties):
             an_properties['note'] = an.note
         properties['other_names'].append(an_properties)
 
-def create_organisations(popit, primary_id_scheme):
-    """Create organizations in PopIt based on those used in memberships in Pombola
+def get_organizations(primary_id_scheme):
+    """Return a list of Popolo organization objects"""
 
-    Look through all memberships in PopIt and find add the organization
-    that each refers to to PopIt.  Returns a dictionary where each key
-    is a slug for an organisation in Pombola, and the value is the
-    corresponding ID for the organization in PopIt.
-    """
+    result = []
 
     oslug_to_categories = defaultdict(set)
 
@@ -155,7 +151,6 @@ def create_organisations(popit, primary_id_scheme):
 
     for o in Organisation.objects.all():
         if o.slug in oslug_to_category:
-            print >> sys.stderr, "creating the organisation:", o.name
             properties = {'slug': o.slug,
                           'name': o.name.strip(),
                           'classification': o.kind.name,
@@ -167,12 +162,27 @@ def create_organisations(popit, primary_id_scheme):
                 end_key_map=('ended', 'dissolution_date'))
             add_identifiers_to_properties(o, properties, primary_id_scheme)
             add_contact_details_to_properties(o, properties)
-            try:
-                new_organisation = popit.organizations.post(properties)
-            except slumber.exceptions.HttpServerError:
-                print >> sys.stderr, "Failed POSTing the organisation:"
-                print >> sys.stderr, json.dumps(properties, indent=4)
-                raise
+            result.append(properties)
+    return result
+
+def create_organisations(popit, primary_id_scheme):
+    """Create organizations in PopIt based on those used in memberships in Pombola
+
+    Look through all memberships in PopIt and find add the organization
+    that each refers to to PopIt.  Returns a dictionary where each key
+    is a slug for an organisation in Pombola, and the value is the
+    corresponding ID for the organization in PopIt.
+    """
+
+    for organization in get_organizations(primary_id_scheme):
+        print >> sys.stderr, "creating the organisation:", organization['name']
+        try:
+            new_organisation = popit.organizations.post(organization)
+        except slumber.exceptions.HttpServerError:
+            print >> sys.stderr, "Failed POSTing the organisation:"
+            print >> sys.stderr, json.dumps(organization, indent=4)
+            raise
+
 
 class Command(BaseCommand):
     args = 'MZALENDO-URL'
