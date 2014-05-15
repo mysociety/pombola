@@ -183,6 +183,62 @@ def create_organisations(popit, primary_id_scheme):
             print >> sys.stderr, json.dumps(organization, indent=4)
             raise
 
+def get_people(primary_id_scheme, base_url):
+
+    result = []
+
+    for person in Person.objects.all():
+        name = person.legal_name
+        person_properties = {'name': name}
+        for date, key in ((person.date_of_birth, 'birth_date'),
+                          (person.date_of_death, 'death_date')):
+            if date:
+                person_properties[key] = date_to_partial_iso8601(date)
+        primary_image = person.primary_image()
+        if primary_image:
+            person_properties['images' ] = [{'url': base_url + primary_image.url}]
+        add_identifiers_to_properties(person, person_properties, primary_id_scheme)
+        add_contact_details_to_properties(person, person_properties)
+        add_other_names(person, person_properties)
+        for key in extra_popolo_person_fields:
+            value = getattr(person, key)
+            # This might be a markitup.fields.Markup field, in
+            # which case we need to call raw on it:
+            try:
+                value = value.raw
+            except AttributeError:
+                pass
+            if value:
+                person_properties[key] = value
+
+        person_properties['memberships'] = []
+
+        for position in person.position_set.all():
+            if not (position.title and position.title.name):
+                continue
+            properties = {'role': position.title.name,
+                          'person_id': person.get_popolo_id(primary_id_scheme)}
+            add_start_and_end_date(position, properties)
+            add_identifiers_to_properties(position, properties, primary_id_scheme)
+            if position.organisation:
+                oslug = position.organisation.slug
+                organization_id = position.organisation.get_popolo_id(primary_id_scheme)
+                properties['organization_id'] = organization_id
+            person_properties['memberships'].append(properties)
+
+        result.append(person_properties)
+    return result
+
+def create_people(popit, primary_id_scheme, base_url):
+    for person in get_people(primary_id_scheme, base_url):
+        print >> sys.stderr, "creating the person:", person['name']
+        try:
+            popit.persons.post(person)
+        except slumber.exceptions.HttpServerError:
+            print >> sys.stderr, "Failed POSTing the person:"
+            print >> sys.stderr, json.dumps(person, indent=4)
+            raise
+
 
 class Command(BaseCommand):
     args = 'MZALENDO-URL'
@@ -260,56 +316,8 @@ class Command(BaseCommand):
             create_organisations(popit, primary_id_scheme)
 
             # Create a person in PopIt for each Person in Pombola:
+            create_people(popit, primary_id_scheme, base_url)
 
-            for person in Person.objects.all():
-                name = person.legal_name
-                print >> sys.stderr, "creating the person:", name
-                person_properties = {'name': name}
-                for date, key in ((person.date_of_birth, 'birth_date'),
-                                  (person.date_of_death, 'death_date')):
-                    if date:
-                        person_properties[key] = date_to_partial_iso8601(date)
-                primary_image = person.primary_image()
-                if primary_image:
-                    person_properties['images' ] = [{'url': base_url + primary_image.url}]
-                add_identifiers_to_properties(person, person_properties, primary_id_scheme)
-                add_contact_details_to_properties(person, person_properties)
-                add_other_names(person, person_properties)
-                for key in extra_popolo_person_fields:
-                    value = getattr(person, key)
-                    # This might be a markitup.fields.Markup field, in
-                    # which case we need to call raw on it:
-                    try:
-                        value = value.raw
-                    except AttributeError:
-                        pass
-                    if value:
-                        person_properties[key] = value
-                try:
-                    person_id = popit.persons.post(person_properties)['result']['id']
-                except slumber.exceptions.HttpServerError:
-                    print >> sys.stderr, "Failed POSTing the person:"
-                    print >> sys.stderr, json.dumps(person_properties, indent=4)
-                    raise
-
-                for position in person.position_set.all():
-                    if not (position.title and position.title.name):
-                        continue
-                    properties = {'role': position.title.name,
-                                  'person_id': person_id}
-                    add_start_and_end_date(position, properties)
-                    add_identifiers_to_properties(position, properties, primary_id_scheme)
-                    if position.organisation:
-                        oslug = position.organisation.slug
-                        organization_id = position.organisation.get_popolo_id(primary_id_scheme)
-                        properties['organization_id'] = organization_id
-                    print >> sys.stderr, "  creating the membership:", position
-                    try:
-                        new_membership = popit.memberships.post(properties)
-                    except slumber.exceptions.HttpServerError:
-                        print >> sys.stderr, "Failed POSTing the membership:"
-                        print >> sys.stderr, json.dumps(properties, indent=4)
-                        raise
 
         except slumber.exceptions.HttpClientError, e:
             print "Exception is:", e
