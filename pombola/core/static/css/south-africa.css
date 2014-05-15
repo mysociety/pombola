@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@import url("http://fonts.googleapis.com/css?family=Oswald&text=0123456789");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -3373,7 +3373,6 @@ h1 {
   font-size: 1.875em;
   /* 30px */
   color: #222222;
-  letter-spacing: 0.05em;
   line-height: 1.25em;
 }
 
@@ -3383,7 +3382,7 @@ h2 {
   font-size: 1.5em;
   /* 24px */
   color: #222222;
-  letter-spacing: 0.05em;
+  line-height: 1.25em;
 }
 
 h3 {
@@ -3392,8 +3391,8 @@ h3 {
   font-size: 0.875em;
   /* 14px */
   color: #222222;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
+  line-height: 1.25em;
 }
 
 #page h2, #page h3 {
@@ -4040,7 +4039,6 @@ HOME PAGE INTRO BOX
 #page .home-left h2 {
   font-size: .875em;
   color: #fff;
-  letter-spacing: 0.075em;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
 }
 
@@ -5384,4 +5382,440 @@ ul.pager li.next {
   .fifty-fifty-layout .column:first-child {
     margin-right: 4%;
   }
+}
+/* 2014 Elections styles */
+#front_intro {
+  padding-bottom: 0;
+  /* turn this off while the elections styles are active */
+}
+
+.elections-home {
+  color: #fff;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.25);
+  background-color: #016246;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 2em 0;
+  margin-top: 2em;
+  text-align: center;
+}
+@media only all and (min-width: 640px), print {
+  .elections-home {
+    text-align: left;
+  }
+}
+.elections-home h2 {
+  font-size: 2.25em;
+  line-height: 1.2em;
+  color: #fff;
+}
+.elections-home a {
+  color: #fff;
+}
+
+.elections-home-intro {
+  position: relative;
+}
+@media only all and (min-width: 640px), print {
+  .elections-home-intro {
+    background-image: url("/static/images/elections-icon.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+    float: left;
+    width: 67%;
+  }
+  .elections-home-intro h2, .elections-home-intro p {
+    margin-left: 120px;
+  }
+  .elections-home-intro p {
+    font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+    font-weight: normal !important;
+    font-size: 1.125em;
+  }
+  .elections-home-intro a {
+    text-decoration: none;
+  }
+  .elections-home-intro a:hover, .elections-home-intro a:active, .elections-home-intro a:focus {
+    text-decoration: underline;
+  }
+}
+
+#election_countdown {
+  position: relative;
+}
+@media only all and (min-width: 640px), print {
+  #election_countdown {
+    float: left;
+    width: 33%;
+  }
+}
+
+.countdown_row {
+  /* min-width stops the timer from jumping around when the time is ticking down */
+}
+@media (min-width: 640px) and (max-width: 880px) {
+  .countdown_row {
+    min-width: 13.1875em;
+  }
+}
+@media only all and (min-width: 640px), print {
+  .countdown_row {
+    position: absolute;
+    right: 0;
+    min-width: 18.375em;
+  }
+}
+
+/* Countdown */
+.countdown_section {
+  display: inline-block;
+  text-align: center;
+}
+
+.countdown_amount {
+  display: block;
+  font-family: 'Oswald', 'Arial Narrow', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans sans-serif;
+  font-size: 3.75em;
+}
+@media (min-width: 640px) and (max-width: 880px) {
+  .countdown_amount {
+    font-size: 2.5em;
+  }
+}
+.countdown_amount:after {
+  content: ":";
+}
+.countdown_amount.last:after {
+  content: "";
+}
+
+.countdown_label {
+  display: block;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  font-size: 0.875em;
+}
+
+/* Elections templates */
+/*body*/
+.election {
+  background-color: #f1f0ec;
+}
+.election #page {
+  background-color: #f1f0ec;
+  padding: 0;
+  /* removing this global padding on the elections pages as it adds a border of dark grey, as we've changed the global background colour. Added it to .election-header and .election-body instead */
+}
+
+.election-header {
+  padding: 0 1em;
+}
+
+.navigation-tabs ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  margin: 0;
+  padding: 0;
+}
+.navigation-tabs ul li {
+  list-style: none outside none;
+}
+@media only all and (min-width: 640px), print {
+  .navigation-tabs li {
+    display: inline-block;
+  }
+}
+.navigation-tabs a {
+  display: block;
+  background-color: #e2e1dd;
+  color: #222222;
+  text-decoration: none;
+  padding: 0.8em 1em;
+  margin-right: 0.33em;
+  font-size: 0.875em;
+  margin-bottom: 1px;
+}
+@media only all and (min-width: 640px), print {
+  .navigation-tabs a {
+    margin-bottom: 0;
+  }
+}
+.navigation-tabs a:hover, .navigation-tabs a:active, .navigation-tabs a:focus {
+  background-color: #d6d5cf;
+}
+.navigation-tabs a.current {
+  background-color: #fff;
+}
+.navigation-tabs a.current:hover, .navigation-tabs a.current:active, .navigation-tabs a.current:focus {
+  background-color: #fff;
+}
+
+.election-body {
+  background-color: #fff;
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  padding: 2em 1em 2em;
+}
+.election-body:before, .election-body:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.election-body:after {
+  clear: both;
+}
+.election-body {
+  *zoom: 1;
+}
+
+/* Shared election page header */
+.election-page-header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+}
+.election-page-header h2 {
+  font-size: 2.375em;
+  margin-bottom: 0.5em;
+  line-height: 1.2em;
+}
+.election-page-header h3 {
+  text-transform: none;
+  font-size: 1.75em;
+}
+
+.election-page-subtitle {
+  color: #017b58;
+  font-size: 1.5em;
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+}
+.election-page-subtitle a {
+  color: #017b58;
+  text-decoration: none;
+}
+.election-page-subtitle a .change-province {
+  font-size: 0.583333333em;
+  text-decoration: none;
+  color: #777;
+}
+.election-page-subtitle a:hover, .election-page-subtitle a:active, .election-page-subtitle a:focus {
+  color: #e23d28;
+  text-decoration: underline;
+}
+.election-page-subtitle a:hover .change-province, .election-page-subtitle a:active .change-province, .election-page-subtitle a:focus .change-province {
+  color: #e23d28;
+}
+
+/* Overview page */
+.general-election-information {
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  padding: 0 0 2em;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 2em;
+}
+.general-election-information:before, .general-election-information:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.general-election-information:after {
+  clear: both;
+}
+.general-election-information {
+  *zoom: 1;
+}
+@media only all and (min-width: 640px), print {
+  .general-election-information #election_countdown {
+    float: right;
+    width: 40%;
+  }
+  .general-election-information #election_countdown .countdown_row {
+    float: right;
+  }
+}
+.general-election-information .countdown_row {
+  color: #fff;
+  background-color: #017b58;
+  padding: 1.5em 2.2em;
+  position: static;
+  right: auto;
+  float: left;
+}
+
+@media only all and (min-width: 640px), print {
+  .election-introduction {
+    float: left;
+    width: 57%;
+    margin-right: 3%;
+  }
+}
+
+.overview-section {
+  /**
+   * For IE 6/7 only
+   * Include this rule to trigger hasLayout and contain floats.
+   */
+  margin: 0 0 2em;
+}
+.overview-section:before, .overview-section:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.overview-section:after {
+  clear: both;
+}
+.overview-section {
+  *zoom: 1;
+}
+
+.election-candidates {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 3em;
+  padding-bottom: 1em;
+}
+.election-candidates:last-child {
+  border-bottom: none;
+}
+.election-candidates h2 {
+  margin-bottom: 1em;
+  font-size: 1.875em;
+}
+.election-candidates h3 {
+  color: #555;
+}
+
+.overview-list {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.overview-list li {
+  list-style: none outside none;
+}
+@media only all and (min-width: 640px), print {
+  .overview-list {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    -o-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 2em;
+    -moz-column-gap: 2em;
+    -o-column-gap: 2em;
+    column-gap: 2em;
+  }
+}
+.overview-list li {
+  padding: 0.66em 0.25em;
+  border-top: 1px solid #e9e9e9;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
+}
+.overview-list a {
+  text-decoration: none;
+}
+.overview-list a:hover, .overview-list a:active, .overview-list a:focus {
+  text-decoration: underline;
+}
+
+.overview-list--on-party-page {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1em;
+}
+
+/* Province pages */
+.view-national {
+  margin-bottom: 2em;
+}
+
+.party-list {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}
+.party-list h3 {
+  text-transform: none;
+  font-size: 1.875em;
+  line-height: 1.2em;
+  font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+}
+@media only all and (min-width: 640px), print {
+  .party-list h3 {
+    margin-right: 5em;
+  }
+}
+.party-list .for-province {
+  font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+  font-weight: normal !important;
+  color: #777;
+  font-size: 0.7em;
+}
+.party-list ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-bottom: 1em;
+}
+.party-list ul li {
+  list-style: none outside none;
+}
+@media only all and (min-width: 640px), print {
+  .party-list ul {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    -o-column-count: 2;
+    column-count: 2;
+  }
+}
+.party-list li {
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
+  line-height: 1.7em;
+}
+.party-list li:hover .candidate-title {
+  color: #222222;
+}
+.party-list .back-to-top {
+  color: #777;
+  text-decoration: none;
+  font-size: 0.875em;
+}
+.party-list .back-to-top:hover, .party-list .back-to-top:active, .party-list .back-to-top:focus {
+  text-decoration: underline;
+  color: #e23d28;
+}
+@media only all and (min-width: 640px), print {
+  .party-list .back-to-top {
+    position: absolute;
+    top: 0.5em;
+    right: 0;
+  }
+}
+
+.candidate-title {
+  display: block;
+  color: #555;
+  margin-bottom: 0.33em;
+  font-size: 0.875em;
+  position: relative;
+  top: -0.3em;
+}
+
+/* Statistics page */
+.rerunning-candidates {
+  margin-bottom: 4em;
 }
