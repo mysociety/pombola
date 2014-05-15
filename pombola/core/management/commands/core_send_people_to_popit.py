@@ -309,10 +309,7 @@ class Command(BaseCommand):
                     if not response.get('has_more', False):
                         break
 
-            # Create all the organisations found in Pombola, and get
-            # back a dictionary mapping the Pombola organisation slug
-            # to the PopIt ID.
-
+            # Create all the organisations found in Pombola:
             create_organisations(popit, primary_id_scheme)
 
             # Create a person in PopIt for each Person in Pombola:
