@@ -25,8 +25,6 @@ from popit_api import PopIt
 
 from optparse import make_option
 
-primary_id_scheme = 'za.org.pa'
-
 extra_popolo_person_fields = (
     'email',
     'summary',
@@ -64,7 +62,7 @@ def date_to_partial_iso8601(approx_date):
         d = datetime.date(year, 1, 1)
         return d.strftime("%Y")
 
-def add_identifiers_to_properties(o, properties):
+def add_identifiers_to_properties(o, properties, primary_id_scheme):
     table_name = o._meta.db_table
     properties['id'] = '{0}/{1}/{2}'.format(
         primary_id_scheme, table_name, o.id)
@@ -111,7 +109,7 @@ def add_other_names(person, properties):
             an_properties['note'] = an.note
         properties['other_names'].append(an_properties)
 
-def create_organisations(popit):
+def create_organisations(popit, primary_id_scheme):
     """Create organizations in PopIt based on those used in memberships in Pombola
 
     Look through all memberships in PopIt and find add the organization
@@ -171,7 +169,7 @@ def create_organisations(popit):
                 properties,
                 start_key_map=('started', 'founding_date'),
                 end_key_map=('ended', 'dissolution_date'))
-            add_identifiers_to_properties(o, properties)
+            add_identifiers_to_properties(o, properties, primary_id_scheme)
             add_contact_details_to_properties(o, properties)
             try:
                 new_organisation = popit.organizations.post(properties)
@@ -223,6 +221,8 @@ class Command(BaseCommand):
             base_url = args[0]
             parsed_url = urlparse.urlparse(base_url)
 
+            primary_id_scheme = '.'.join(reversed(parsed_url.netloc.split('.')))
+
             message = "WARNING: this script will delete everything in the PopIt instance %s on %s.\n"
             message += "If you want to continue with this, type 'Yes': "
 
@@ -253,7 +253,7 @@ class Command(BaseCommand):
             # back a dictionary mapping the Pombola organisation slug
             # to the PopIt ID.
 
-            org_slug_to_id = create_organisations(popit)
+            create_organisations(popit, primary_id_scheme)
 
             # Create a person in PopIt for each Person in Pombola:
 
@@ -268,7 +268,7 @@ class Command(BaseCommand):
                 primary_image = person.primary_image()
                 if primary_image:
                     person_properties['images' ] = [{'url': base_url + primary_image.url}]
-                add_identifiers_to_properties(person, person_properties)
+                add_identifiers_to_properties(person, person_properties, primary_id_scheme)
                 add_contact_details_to_properties(person, person_properties)
                 add_other_names(person, person_properties)
                 for key in extra_popolo_person_fields:
@@ -294,7 +294,7 @@ class Command(BaseCommand):
                     properties = {'role': position.title.name,
                                   'person_id': person_id}
                     add_start_and_end_date(position, properties)
-                    add_identifiers_to_properties(position, properties)
+                    add_identifiers_to_properties(position, properties, primary_id_scheme)
                     if position.organisation:
                         oslug = position.organisation.slug
                         organization_id = org_slug_to_id[oslug]
