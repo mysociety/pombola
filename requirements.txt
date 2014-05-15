@@ -98,7 +98,7 @@ django-subdomain-instances==0.1
 django-tastypie==0.11.0
 html5lib==0.999
 kombu==3.0.13
-lxml==3.3.2
+lxml==3.3.5
 mechanize==0.2.5
 mimeparse==0.1.3
 mock==1.0.1
