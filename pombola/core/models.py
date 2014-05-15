@@ -57,6 +57,10 @@ class ModelBase(models.Model):
         )
         return url
 
+    def get_popolo_id(self, id_scheme):
+        table_name = self._meta.db_table
+        return '{0}/{1}/{2}'.format(id_scheme, table_name, self.id)
+
     @property
     def show_active(self):
         """Used to indicate whether results in search should be greyed out"""

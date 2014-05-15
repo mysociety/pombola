@@ -63,9 +63,7 @@ def date_to_partial_iso8601(approx_date):
         return d.strftime("%Y")
 
 def add_identifiers_to_properties(o, properties, primary_id_scheme):
-    table_name = o._meta.db_table
-    properties['id'] = '{0}/{1}/{2}'.format(
-        primary_id_scheme, table_name, o.id)
+    properties['id'] = o.get_popolo_id(primary_id_scheme)
     secondary_identifiers = []
     for scheme, identifiers in o.get_all_identifiers().items():
         sorted_identifiers = sorted(identifiers)
