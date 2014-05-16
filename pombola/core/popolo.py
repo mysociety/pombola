@@ -136,20 +136,20 @@ def get_organizations(primary_id_scheme, base_url):
         raise Exception, "Found organisations with multiple categories other than 'other'"
 
     for o in Organisation.objects.all():
+        properties = {'slug': o.slug,
+                      'name': o.name.strip(),
+                      'classification': o.kind.name}
         if o.slug in oslug_to_category:
-            properties = {'slug': o.slug,
-                          'name': o.name.strip(),
-                          'classification': o.kind.name,
-                          'category': oslug_to_category[o.slug]}
-            add_start_and_end_date(
-                o,
-                properties,
-                start_key_map=('started', 'founding_date'),
-                end_key_map=('ended', 'dissolution_date'))
-            add_identifiers_to_properties(o, properties, primary_id_scheme)
-            add_contact_details_to_properties(o, properties)
-            result.append(properties)
-            country.add_extra_popolo_data_for_organization(o, properties, base_url)
+            properties['category'] = oslug_to_category[o.slug]
+        add_start_and_end_date(
+            o,
+            properties,
+            start_key_map=('started', 'founding_date'),
+            end_key_map=('ended', 'dissolution_date'))
+        add_identifiers_to_properties(o, properties, primary_id_scheme)
+        add_contact_details_to_properties(o, properties)
+        result.append(properties)
+        country.add_extra_popolo_data_for_organization(o, properties, base_url)
     return result
 
 def create_organisations(popit, primary_id_scheme, base_url):
