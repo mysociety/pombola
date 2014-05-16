@@ -207,10 +207,9 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
             person_properties['memberships'] = []
 
         for position in person.position_set.all():
-            if not (position.title and position.title.name):
-                continue
-            properties = {'role': position.title.name,
-                          'person_id': person.get_popolo_id(primary_id_scheme)}
+            properties = {'person_id': person.get_popolo_id(primary_id_scheme)}
+            if position.title and position.title.name:
+                properties['role'] = position.title.name
             add_start_and_end_date(position, properties)
             add_identifiers_to_properties(position, properties, primary_id_scheme)
             if position.organisation:
