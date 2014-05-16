@@ -22,7 +22,7 @@ for name_to_import, default_value in imports_and_defaults:
                 getattr(__import__('pombola.' + settings.COUNTRY_APP + '.lib',
                            fromlist=[name_to_import]),
                         name_to_import)
-        except ImportError, AttributeError:
+        except (ImportError, AttributeError):
             globals()[name_to_import] = default_value
     else:
         globals()[name_to_import] = default_value
