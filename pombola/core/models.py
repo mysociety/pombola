@@ -331,7 +331,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         return result
 
     @transaction.commit_on_success
-    def add_alternative_name(self, alternative_name, name_to_use=False):
+    def add_alternative_name(self, alternative_name, name_to_use=False, note=''):
         if name_to_use:
             # Make sure that no other alternative names are set as
             # the name to use:
@@ -340,7 +340,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
                 an.save()
         alternative_name = re.sub(r'\s+', ' ', alternative_name).strip()
         AlternativePersonName.objects.update_or_create({'person': self,
-                                                        'alternative_name': alternative_name},
+                                                        'alternative_name': alternative_name,
+                                                        'note': note},
                                                        {'name_to_use': name_to_use})
         apn = AlternativePersonName(person=self,
                                     alternative_name=alternative_name,
