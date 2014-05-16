@@ -487,7 +487,7 @@ class AlternativePersonName(ModelBase):
 
     start_date = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date = ApproximateDateField(blank=True, help_text=date_help_text)
-    note = ApproximateDateField(blank=True, help_text=date_help_text)
+    note = models.CharField(max_length=300)
 
     family_name = models.CharField(max_length=300, blank=True)
     given_name = models.CharField(max_length=300, blank=True)
