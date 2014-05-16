@@ -9,6 +9,7 @@ from django.db import transaction
 from django_date_extensions.fields import ApproximateDate
 
 from pombola.core.models import Person, Organisation, Position
+from pombola import country
 
 extra_popolo_person_fields = (
     'email',
@@ -92,7 +93,7 @@ def add_other_names(person, properties):
             an_properties['note'] = an.note
         properties['other_names'].append(an_properties)
 
-def get_organizations(primary_id_scheme):
+def get_organizations(primary_id_scheme, base_url):
     """Return a list of Popolo organization objects"""
 
     result = []
@@ -148,9 +149,10 @@ def get_organizations(primary_id_scheme):
             add_identifiers_to_properties(o, properties, primary_id_scheme)
             add_contact_details_to_properties(o, properties)
             result.append(properties)
+            country.add_extra_popolo_data_for_organization(o, properties, base_url)
     return result
 
-def create_organisations(popit, primary_id_scheme):
+def create_organisations(popit, primary_id_scheme, base_url):
     """Create organizations in PopIt based on those used in memberships in Pombola
 
     Look through all memberships in PopIt and find add the organization
@@ -159,7 +161,7 @@ def create_organisations(popit, primary_id_scheme):
     corresponding ID for the organization in PopIt.
     """
 
-    for organization in get_organizations(primary_id_scheme):
+    for organization in get_organizations(primary_id_scheme, base_url):
         print >> sys.stderr, "creating the organisation:", organization['name']
         try:
             popit.organizations.post(organization)
@@ -199,6 +201,7 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
                 pass
             if value:
                 person_properties[key] = value
+        country.add_extra_popolo_data_for_person(person, person_properties, base_url)
 
         if inline_memberships:
             person_properties['memberships'] = []
@@ -224,7 +227,7 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
 
 def get_popolo_data(primary_id_scheme, base_url, inline_memberships=True):
     result = get_people(primary_id_scheme, base_url, inline_memberships)
-    result['organizations'] = get_organizations(primary_id_scheme)
+    result['organizations'] = get_organizations(primary_id_scheme, base_url)
     return result
 
 def create_people(popit, primary_id_scheme, base_url):

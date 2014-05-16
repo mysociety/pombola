@@ -78,7 +78,7 @@ class Command(BaseCommand):
                         break
 
             # Create all the organisations found in Pombola:
-            create_organisations(popit, primary_id_scheme)
+            create_organisations(popit, primary_id_scheme, base_url)
 
             # Create a person in PopIt for each Person in Pombola:
             create_people(popit, primary_id_scheme, base_url)
