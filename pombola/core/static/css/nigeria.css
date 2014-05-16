@@ -3266,7 +3266,50 @@ body {
 }
 
 #header-search {
-  margin: 15px 5px 5px 15px;
+  margin: 25px 5px 0 0;
+  text-align: right;
+}
+#header-search label {
+  display: block;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 1px #2972A5;
+  color: #fff;
+}
+#header-search input {
+  padding: 4px 8px;
+  border: 2px solid #444;
+  height: 22px;
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  -ms-border-radius: 4px 0 0 4px;
+  -o-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+  width: 15em;
+  font-size: 14px;
+  line-height: 20px;
+}
+#header-search input:focus {
+  position: relative;
+  z-index: 1;
+  border-color: #005D92;
+  -webkit-box-shadow: #ecfdff 0 0 20px 2px;
+  -moz-box-shadow: #ecfdff 0 0 20px 2px;
+  box-shadow: #ecfdff 0 0 20px 2px;
+}
+#header-search button {
+  border: 2px solid #444;
+  border-left: 0;
+  background: #66b191 url(../images/search-icon-dark.png) center no-repeat;
+  width: 34px;
+  height: 34px;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  -ms-border-radius: 0 4px 4px 0;
+  -o-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+#header-search button:hover {
+  background-color: #88c2a9;
 }
 
 .featured-person.featured-person-placeholder {

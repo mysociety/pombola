@@ -78,7 +78,45 @@ body {
 
 
 #header-search {
-  margin: 15px 5px 5px 15px;
+  margin: 25px 5px 0 0;
+  text-align: right;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 1px #2972A5; // a darker shade of the header background blue
+    color: #fff;
+  }
+
+  input {
+    padding: 4px 8px;
+    border: 2px solid #444;
+    height: 22px;
+    @include border-radius(4px 0 0 4px);
+    width: 15em;
+    font-size: 14px;
+    line-height: 20px;
+
+    &:focus {
+      position: relative;
+      z-index: 1;
+      border-color: #005D92;
+      @include box-shadow(#ECFDFF 0 0 20px 2px)
+    }
+  }
+
+  button {
+    border: 2px solid #444;
+    border-left: 0;
+    background: #66b191 url(../images/search-icon-dark.png) center no-repeat;
+    width: 34px;
+    height: 34px;
+    @include border-radius(0 4px 4px 0);
+
+    &:hover {
+      background-color: lighten(#66b191, 10%);
+    }
+  }
 }
 
 
