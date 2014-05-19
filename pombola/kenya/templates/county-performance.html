@@ -147,10 +147,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
       <div id="survey">
         <p>Take our 5 minute survey and enter to win $100 in airtime!</p>
-        <form action="{% url 'county-performance-survey' %}" method="post" id="survey-form">
-          {% csrf_token %}
-          <input type="submit" value="Take Survey" id="take-survey">
-        </form>
+        <a href="{% url 'county-performance-survey' %}" id="take-survey">Take Survey</a>
       </div>
 
   {% endif %}
