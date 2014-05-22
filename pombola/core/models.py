@@ -57,6 +57,10 @@ class ModelBase(models.Model):
         )
         return url
 
+    def get_popolo_id(self, id_scheme):
+        table_name = self._meta.db_table
+        return '{0}/{1}/{2}'.format(id_scheme, table_name, self.id)
+
     @property
     def show_active(self):
         """Used to indicate whether results in search should be greyed out"""
@@ -327,7 +331,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         return result
 
     @transaction.commit_on_success
-    def add_alternative_name(self, alternative_name, name_to_use=False):
+    def add_alternative_name(self, alternative_name, name_to_use=False, note=''):
         if name_to_use:
             # Make sure that no other alternative names are set as
             # the name to use:
@@ -336,7 +340,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
                 an.save()
         alternative_name = re.sub(r'\s+', ' ', alternative_name).strip()
         AlternativePersonName.objects.update_or_create({'person': self,
-                                                        'alternative_name': alternative_name},
+                                                        'alternative_name': alternative_name,
+                                                        'note': note},
                                                        {'name_to_use': name_to_use})
         apn = AlternativePersonName(person=self,
                                     alternative_name=alternative_name,
@@ -483,7 +488,7 @@ class AlternativePersonName(ModelBase):
 
     start_date = ApproximateDateField(blank=True, help_text=date_help_text)
     end_date = ApproximateDateField(blank=True, help_text=date_help_text)
-    note = ApproximateDateField(blank=True, help_text=date_help_text)
+    note = models.CharField(max_length=300)
 
     family_name = models.CharField(max_length=300, blank=True)
     given_name = models.CharField(max_length=300, blank=True)
