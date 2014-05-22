@@ -263,7 +263,8 @@ class CountyPerformanceSurvey(CountyPerformanceDataMixin, RedirectView):
         self.create_event({'category': 'take-survey',
                            'action': 'click',
                            'label': 'take-survey'})
-        url_format = "http://survey.az1.qualtrics.com/SE/?SID=SV_5hhE4mOfYG1eaOh&user_key={0}&variant={1}"
-        return url_format.format(
-            urlquote(self.request.session.get('MIT:user_key', '?')),
-            urlquote(self.request.session.get('MIT:variant', '?')))
+        url = "http://survey.az1.qualtrics.com/SE/?SID=SV_5hhE4mOfYG1eaOh&"
+        url += "&".join(
+            k + "=" + self.request.session.get('MIT:' + k, '?')
+            for k in ('user_key', 'variant', 'g', 'agroup'))
+        return url
