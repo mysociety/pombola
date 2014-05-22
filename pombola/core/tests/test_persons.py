@@ -51,6 +51,13 @@ class PersonTest(WebTest):
         person.save()
         self.assertEqual(person.sort_name, 'Vaughan Williams')
 
+    def test_only_query(self):
+        at_least_one_person = models.Person.objects.create(
+            legal_name='Ralph Vaughan Williams',
+            sort_name='Vaughan Williams')
+        all_people_id_and_slug = list(models.Person.objects.only('id', 'slug'))
+        at_least_one_person.delete()
+
     def test_urls(self):
         person = models.Person(
             legal_name="Alfred Smith",

@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 
 from django.db.models import Q
 from django.db import transaction
+from django.db.models.signals import post_init
 
 from django.utils.dateformat import DateFormat
 
@@ -301,13 +302,6 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     honorific_suffix = models.CharField(max_length=300, blank=True)
     sort_name = models.CharField(max_length=300, blank=True)
 
-    def __init__(self, *args, **kwargs):
-        super(Person, self).__init__(*args, **kwargs)
-        # If there hasn't been a sort name explicitly specified, use
-        # the last whitespace-separated part of the full name:
-        if self.legal_name and not self.sort_name:
-            self.sort_name = self.legal_name.strip().split()[-1]
-
     @property
     def name(self):
         alternative_names_to_use = self.alternative_names.filter(name_to_use=True)
@@ -479,6 +473,15 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
 
     class Meta:
        ordering = ["slug"]
+
+
+def update_sort_name(**kwargs):
+    """A signal handler function to set a default sort_name"""
+    person = kwargs.get('instance')
+    if person.legal_name and not person.sort_name:
+        person.sort_name = person.legal_name.strip().split()[-1]
+
+post_init.connect(update_sort_name, Person)
 
 
 class AlternativePersonName(ModelBase):
