@@ -39,10 +39,10 @@ rm -rf $virtualenv_dir/src/popit-django
 rm -rf $virtualenv_dir/src/pygeocoder
 
 # Upgrade pip to a secure version
-# curl -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+# curl -L -s https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
 # Revert to the line above once we can get a newer setuptools from Debian, or
 # pip ceases to need such a recent one.
-curl -s https://raw.github.com/mysociety/commonlib/master/bin/get_pip.bash | bash
+curl -L -s https://raw.github.com/mysociety/commonlib/master/bin/get_pip.bash | bash
 
 # Install all the packages
 pip install Mercurial
