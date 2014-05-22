@@ -4,7 +4,7 @@
 # command in the correct environment.
 
 # abort on any errors
-set -ex
+set -e
 
 # check that we are in the expected directory
 cd `dirname $0`/..
