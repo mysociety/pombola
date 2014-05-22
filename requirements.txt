@@ -134,7 +134,6 @@ argparse==1.1
 pip-tools==0.3.4
 
 # Other things presumably installed as dependencies of stuff above
-distribute==0.7.3
 python-mimeparse==0.1.4
 
 #necessary to process unicode csv files for ZA elections data
