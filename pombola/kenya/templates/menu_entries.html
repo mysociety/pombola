@@ -80,14 +80,14 @@
     {% endif %}
 </li>
 
-<li class="has-submenu"><a href="#">Public Participation</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='public-participation' %}">Public Participation</a>
     {% if include_sub_menu_entries %}
     <ul id="places-overview">
       <li>
-        <a href="#">Forum</a>
+        <a href="{% url "info_page" slug='forum' %}">Forum</a>
       </li>
       <li>
-        <a href="#">Polls</a>
+        <a href="{% url "info_page" slug='polls' %}">Polls</a>
       </li>
     </ul>
     {% endif %}
@@ -109,7 +109,7 @@
             <a href="{% url "info_page" slug='data' %}">Data</a>
         </li>
         <li>
-            <a href="#">MP Data</a>
+            <a href="{% url "info_page" slug='data' %}">MP Data</a>
         </li>
         <li>
             <a href="{% url "info_page" slug='newsletter' %}">Newsletter</a>
