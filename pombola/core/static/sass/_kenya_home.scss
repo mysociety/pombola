@@ -2,25 +2,58 @@ $pull-out-background: #f2f0e7;
 $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
 
 #home-hero {
-  background: $pull-out-background;
-  @include border-radius(3px);
-  padding: 40px;
-  border: 1px solid darken($pull-out-background, 10%);
+  position: relative;
 
   @media only screen and (max-width: 640px) {
-    padding: 20px;
-    @include border-radius(0);
+    padding: 0 20px;
+  }
+}
+
+#home-image {
+  // Ideally we'd use background-size here, but Opera Mini doesn't support it.
+  // So we emulate it using an <img> wrapped in an {overflow:hidden} container.
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 35%;
+  @include border-radius(4px);
+  overflow: hidden;
+
+  @media only screen and (max-width: 640px) {
+    position: static;
+    width: auto;
+    margin-top: 40px;
+  }
+
+  img {
+    position: relative;
+    left: -50%;
+    margin-left: 145px;
+    height: 100%;
+    width: auto;
+
+    @media only screen and (max-width: 900px) {
+      margin-left: 110px;
+    }
+
+    @media only screen and (max-width: 800px) {
+      margin-left: 0;
+    }
+
+    @media only screen and (max-width: 640px) {
+      position: static;
+      height: auto;
+      width: 100%;
+      margin-left: 0;
+      margin-top: -5px;
+    }
   }
 }
 
 #home-quote {
-  margin: 0 auto 40px auto;
+  margin-bottom: 40px;
   width: 60%;
-  text-align: center;
-
-  @media only screen and (max-width: 800px) {
-    width: 80%;
-  }
 
   @media only screen and (max-width: 640px) {
     width: auto;
@@ -42,12 +75,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 
 #home-cta {
   display: table;
-  width: 70%;
-  margin: 0 auto;
-
-  @media only screen and (max-width: 800px) {
-    width: 80%;
-  }
+  width: 60%;
 
   @media only screen and (max-width: 640px) {
     width: auto;
