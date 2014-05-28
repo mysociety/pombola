@@ -1,27 +1,27 @@
 #main-menu {
-  background: $colour_white;
-  padding-top: 20px;
-  margin-top: 10px;
-  background-image: url(/static/images/header_top.png);
-  background-repeat: repeat-x;
-  background-position: top center;
+  background: #8DC5EB; // light blue
+  border-bottom: 2px solid #4082AF; // rich, dark blue
 
   nav {
     position:relative;
     z-index:2;
-    float:right;
+    text-align: right;
 
     ul {
       li {
-        border-right: 2px solid $colour_white;
+        border-right: 2px solid transparent;
 
          a {
           color: $colour_black;
           background-image: none;
 
           &:hover {
-            background: #d4d4d4;
+            background: #C3E3F8;
           }
+        }
+
+        &:hover ul li a:hover {
+          background: #C3E3F8;
         }
       }
     }
@@ -49,7 +49,7 @@ body {
 
 @media only all and (min-width: 640px), print {
   #site-header {
-    height: 100px;
+    height: 120px;
   }
 }
 
@@ -60,7 +60,7 @@ body {
   background-position: left 20%;
 
   @media only all and (min-width: 640px), print {
-    top: -20px;
+    top: -15px;
     height: 130px;
     width: 630px;
     background: url(/static/images/mz-nigeria-logo-text.png) 0 center no-repeat;
@@ -78,7 +78,45 @@ body {
 
 
 #header-search {
-  margin: 15px 5px 5px 15px;
+  margin: 25px 5px 0 0;
+  text-align: right;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 1px #2972A5; // a darker shade of the header background blue
+    color: #fff;
+  }
+
+  input {
+    padding: 4px 8px;
+    border: 2px solid #444;
+    height: 22px;
+    @include border-radius(4px 0 0 4px);
+    width: 15em;
+    font-size: 14px;
+    line-height: 20px;
+
+    &:focus {
+      position: relative;
+      z-index: 1;
+      border-color: #005D92;
+      @include box-shadow(#ECFDFF 0 0 20px 2px)
+    }
+  }
+
+  button {
+    border: 2px solid #444;
+    border-left: 0;
+    background: #66b191 url(../images/search-icon-dark.png) center no-repeat;
+    width: 34px;
+    height: 34px;
+    @include border-radius(0 4px 4px 0);
+
+    &:hover {
+      background-color: lighten(#66b191, 10%);
+    }
+  }
 }
 
 
@@ -98,9 +136,176 @@ div.search-pagination {
   @include background(linear-gradient(#333132, #4C4C4E));
 }
 
+.home-intro {
+  border-bottom: 1px solid #94C1E0;
+  margin-bottom: 20px;
+  padding: 20px;
+
+  h2 {
+    text-align: center;
+    font-size: 21px;
+    line-height: 28px;
+    font-weight: normal;
+    color: #55a4da;
+    margin: 0;
+    padding: 2em 2em;
+
+    #page & {
+      padding: 0;
+      border-top: 0;
+      background: transparent;
+    }
+  }
+
+  @media only all and (min-width: 640px), print {
+    margin-bottom: 40px;
+    padding: 2em 4em 2.5em 4em;
+
+    h2 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+}
+
+#page .home-left, #page .home-right {
+  h2 {
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+}
+
+
+@media only all and (min-width: 760px), print {
+  #page .home-left {
+    width: 400px;
+    margin-right: 0;
+  }
+}
+
+@media only all and (min-width: 865px), print {
+  #page .home-left {
+    width: 400px;
+    margin-right: 50px;
+  }
+}
+
+#home-focus-on {
+  float: left;
+  width: 46%;
+}
+
+#polldaddy {
+  float: right;
+  width: 46%;
+
+  .PDS_Poll {
+    border: 4px solid #dddddd;
+  }
+
+  #page & .pds-box {
+    @include border-radius(0);
+    border: none;
+  }
+
+  #page & .pds-vote {
+    padding-bottom: 0;
+  }
+
+  .pds-answer label {
+    display: inline;
+    float: none;
+  }
+}
+
 .embedded-video {
   margin-bottom: 1em;
   iframe {
     max-width: 100%;
+  }
+}
+
+.carousel-item {
+  padding: 4px;
+  background-color: #dddddd;
+  display: block;
+  font-size: 0; // avoid space below child img elements
+}
+
+.carousel-nav {
+  bottom: -24px;
+  right: 50%;
+  margin-right: -18px;
+}
+
+.home-news {
+    .home-news-article {
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+    .meta {
+      font-style: normal;
+      font-size: .75em; /* 12px */
+      color: $colour_blackish;
+      margin-bottom: 10px;
+    }
+    .summary {
+        line-height:1.3em;
+        margin-bottom:1em;
+        p {
+            display:inline;
+        }
+    }
+}
+
+@media only all and (min-width: 640px), print {
+    #page .home-right .social-and-tools {
+      margin-top: 40px;
+    }
+}
+
+.blog-list {
+  padding-top: 1em;
+
+    .blog-in-a-list {
+        border-bottom: 1px solid #d2d2ce;
+        margin-bottom: 2em;
+        padding-bottom: 1em;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      line-height: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .meta {
+      color: #999;
+      font-size: 1em;
+    }
+
+    #page & h2 {
+      background: transparent;
+      border: 0;
+      padding: 0;
+    }
+
+    img {
+      max-width: 100%;
+    }
+}
+
+.blog-post {
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  .meta {
+    color: #999;
+    font-size: 1em;
   }
 }

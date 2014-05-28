@@ -1,0 +1,41 @@
+#home-carousel {
+    background-color: transparent;
+    margin-bottom: 1.5em;
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.carousel {
+    position: relative;
+}
+
+.carousel-nav {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    z-index: 10;
+    a {
+        display: inline-block;
+        text-indent: -9999px;
+        height: 13px;
+        width: 13px;
+        background: transparent url('/static/images/lr-carousel-arrows.png') top left no-repeat;
+    }
+    .prev {
+
+    }
+    .next {
+        background-position: -13px 0;
+        margin-left: 10px;
+    }
+}
+
+.carousel-item {
+    background-color: rgba(0, 0, 0, 0.15);
+    text-align: left;
+    position: relative;
+    padding: 1em;
+    min-height: 182px;
+}

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -3100,11 +3101,10 @@ h2 a.appearances-trigger.active {
   margin-right: 0.5em;
   background-color: #f7f7f7;
   border: 1px solid #e6e6e6;
-  -moz-border-radius: 0.25em;
   -webkit-border-radius: 0.25em;
-  -o-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
   -ms-border-radius: 0.25em;
-  -khtml-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
   border-radius: 0.25em;
 }
 
@@ -3114,11 +3114,10 @@ h2 a.appearances-trigger.active {
   margin-bottom: 1em;
   padding: 0.5em 1em;
   background-color: #f7f7f7;
-  -moz-border-radius: 1em;
   -webkit-border-radius: 1em;
-  -o-border-radius: 1em;
+  -moz-border-radius: 1em;
   -ms-border-radius: 1em;
-  -khtml-border-radius: 1em;
+  -o-border-radius: 1em;
   border-radius: 1em;
 }
 

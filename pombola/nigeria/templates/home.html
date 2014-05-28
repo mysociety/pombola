@@ -2,8 +2,14 @@
 
 {% block title %}Home{% endblock %}
 
+{% block css_headers %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.css" />
+{% endblock %}
+
 {% block extra_js_to_load %}
     pombola_settings.extra_js.push( 'js/feeds.js' );
+    pombola_settings.extra_js.push( 'js/libs/responsive-carousel.js' );
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -12,52 +18,43 @@
 {% endblock %}
 
 {% block content %}
+    <div class="home-intro">
+      <h2>
+        Shine your eye is an SMS and web platform that facilitates engagement
+        with&nbsp;National Assembly members and other elected&nbsp;officials.
+      </h2>
+    </div>
     <div class="home-left">
-        <h2 id="home-intro">
-          Shine your eye is an sms and web platform that facilitates engagement
-          with National Assembly members and other elected officials.
-        </h2>
-        <div class="embedded-video">
-            <iframe width="420" height="315" src="//www.youtube.com/embed/dl9JMlBYJhw?rel=0" frameborder="0" allowfullscreen></iframe>
+
+        <div class="home-news">
+            <h2>Latest News</h2>
+          {% for blog_post in blog_posts %}
+            <div class="home-news-article">
+                <h3><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h3>
+                <p class="meta">{{ blog_post.publication_date|date }}</p>
+                <div class="summary">{{ blog_post.content|truncatewords_html:32 }} <p><a class="readmore" href="{{ blog_post.get_absolute_url }}">More &#187;</a></p></div>
+            </div>
+          {% endfor %}
         </div>
+
         {% if editable_content %}
           <div class="infopage">
             {{ editable_content }}
           </div>
         {% endif %}
 
-
-        <form action="{% url "core_search" %}" id="home-search">
-            <label for="core-search">Search people, places and organisations</label>
-            <input class="search-autocomplete-name" id="core-search" type="text" name="q" value="" placeholder="e.g. Lagos, Goodluck Jonathan">
-            <button type="submit">Search</button>
-
-            {% if settings.ENABLED_FEATURES.hansard %}
-                <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Search Hansard instead</a>
-            {% endif %}
-
-        </form>
-
-
-        {% if settings.BLOG_RSS_FEED %}
-            <h2>Latest News</h2>
-            <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-                <li>
-                    Loading news&hellip;
-                </li>
-            </ul>
-        {% endif %}
-    </div>
-    <div class="home-right">
-        <h2>Focus On</h2>
-        <div id="home-featured-person">
-            {% if featured_person != None %}
-                {% include 'core/person_feature.html' %}
-            {% else %}
-                <div class="featured-person featured-person-placeholder"></div>
-            {% endif %}
+        <div class="embedded-video">
+            <iframe width="420" height="315" src="//www.youtube.com/embed/dl9JMlBYJhw?rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
 
+    </div>
+    <div class="home-right">
+        <div id="home-focus-on">
+            <h2>Focus On</h2>
+            <div id="home-carousel" class="carousel">
+                {% include "spinner/carousel-slides.html" %}
+            </div>
+        </div>
 
         {% if settings.POLLDADDY_WIDGET_ID %}
             <style>

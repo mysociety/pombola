@@ -1,6 +1,6 @@
 COUNTRY_APP = 'nigeria'
 
-OPTIONAL_APPS = []
+OPTIONAL_APPS = ['pombola.spinner']
 
 TWITTER_USERNAME = 'NGShineyoureye'
 TWITTER_WIDGET_ID = '354909651910918144'
