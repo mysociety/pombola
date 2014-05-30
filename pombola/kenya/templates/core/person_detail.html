@@ -15,7 +15,7 @@
     {% with hansard_count=object.hansard_entries.count %}
       {% if hansard_count %}
       <div class="person-detail-hansard">
-        <h2><a href="{% url "person_appearances" slug=object.slug %}">Parliamentary appearanes</a></h2>
+        <h2><a href="{% url "person_appearances" slug=object.slug %}">Parliamentary appearances</a></h2>
         {% include 'core/person_detail_appearance_list.html' %}
         <a href="{% url "person_appearances" slug=object.slug %}">See all {{ hansard_count }} appearances</a>
       </div>
