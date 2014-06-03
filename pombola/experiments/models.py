@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 
 class Experiment(models.Model):
@@ -8,6 +10,13 @@ class Experiment(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def extra_fields(self):
+        result = set()
+        for event in self.event_set.all():
+            result.update(json.loads(event.extra_data).keys())
+        return result
 
 class Event(models.Model):
     """A model to represent an event as part of an experiment, e.g. a button click"""
