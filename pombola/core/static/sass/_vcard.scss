@@ -1,5 +1,5 @@
 .vcard {
-  
+
   @include list-reset-soft;
   overflow: hidden;
 
@@ -16,15 +16,16 @@
       font-size: 11px;
       float: left;
       clear: left;
-      width: 40px;
+      min-width: 60px;
       margin-left: 10px;
+      margin-right: 10px;
     }
 
     p {
       padding-left: 45px;
     }
   }
-      
+
   a {
     text-decoration: none;
     font-size: 12px;

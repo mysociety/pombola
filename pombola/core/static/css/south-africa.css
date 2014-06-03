@@ -1644,8 +1644,9 @@ div.object_menu ul li a {
   font-size: 11px;
   float: left;
   clear: left;
-  width: 40px;
+  min-width: 60px;
   margin-left: 10px;
+  margin-right: 10px;
 }
 .vcard li p {
   padding-left: 45px;
