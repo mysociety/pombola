@@ -3964,7 +3964,7 @@ menu#mobile-top-tools ul li a img {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 35%;
+  width: 30%;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -3982,7 +3982,7 @@ menu#mobile-top-tools ul li a img {
 #home-image img {
   position: relative;
   left: -50%;
-  margin-left: 145px;
+  margin-left: 135px;
   height: 100%;
   width: auto;
 }
@@ -4030,7 +4030,7 @@ menu#mobile-top-tools ul li a img {
 
 #home-cta {
   display: table;
-  width: 60%;
+  width: 65%;
 }
 @media only screen and (max-width: 640px) {
   #home-cta {

@@ -16,7 +16,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   top: 0;
   right: 0;
   bottom: 0;
-  width: 35%;
+  width: 30%;
   @include border-radius(4px);
   overflow: hidden;
 
@@ -29,7 +29,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   img {
     position: relative;
     left: -50%;
-    margin-left: 145px;
+    margin-left: 135px;
     height: 100%;
     width: auto;
 
@@ -76,7 +76,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 
 #home-cta {
   display: table;
-  width: 60%;
+  width: 65%;
 
   @media only screen and (max-width: 640px) {
     width: auto;
