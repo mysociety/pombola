@@ -4020,11 +4020,12 @@ menu#mobile-top-tools ul li a img {
   font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   font-weight: bold;
   font-style: italic;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 24px;
 }
 #home-quote footer {
   color: #999;
+  font-size: 14px;
 }
 
 #home-cta {
