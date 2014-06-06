@@ -14,11 +14,13 @@ services:
   - elasticsearch
 
 install:
+  - sudo rm /etc/apt/sources.list.d/pgdg-source.list
+  - sudo rm /etc/apt/sources.list.d/ubuntugis-stable-source.list
   - sudo apt-get update -qq
   # The following steps are taken from MapIt's travis.yml, to make
   # sure that the system python-gdal is used - installing it with pip
   # will fail due to build errors.
-  - sudo apt-get install -qq libgdal1-dev libgdal1-1.7.0 python-gdal gdal-bin binutils
+  - sudo apt-get install python-gdal gdal-bin binutils
   - ln -s /usr/lib/python2.7/dist-packages/osgeo ~/virtualenv/python2.7/lib/python2.7/site-packages/
   - ln -s /usr/lib/python2.7/dist-packages/GDAL-1.7.3.egg-info ~/virtualenv/python2.7/lib/python2.7/site-packages/
   # Install the environment-specific Python packages:
