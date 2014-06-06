@@ -25,17 +25,6 @@ install:
   - pip install $MODULES --use-mirrors
   # Now install the rest of the required Python packages:
   - pip install -r requirements.txt --use-mirrors
-  # Create the PostGIS template database:
-  - createdb -E UTF8 template_postgis &&
-    ( createlang -d template_postgis -l | grep plpgsql || createlang -d template_postgis plpgsql ) &&
-    psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis';" &&
-    psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-2.1/postgis.sql &&
-    psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-2.1/spatial_ref_sys.sql &&
-    psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-2.1/legacy_gist.sql &&
-    psql -d template_postgis -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&
-    psql -d template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&
-    psql -d template_postgis -c "GRANT ALL ON geography_columns TO PUBLIC;"
-  - sudo /etc/init.d/postgresql reload
   # Create a basic general.yml file:
   - sed -r
     -e "s,(POMBOLA_DB_USER:) 'sayit',\\1 'postgres',"
@@ -44,7 +33,8 @@ install:
     conf/general.yml-example > conf/general.yml
 
 before_script:
-  - createdb -U postgres -T template_postgis pombola
+  - createdb -U postgres pombola
+  - psql -c 'CREATE EXTENSION postgis;' -U postgres -d pombola
   - ./manage.py syncdb --noinput
   - ./manage.py migrate --noinput
   - ./manage.py collectstatic --noinput
