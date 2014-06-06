@@ -1,3 +1,4 @@
+from collections import defaultdict
 import warnings
 import re
 
@@ -292,19 +293,28 @@ class SAOrganisationDetailView(OrganisationDetailView):
         return context
 
     def add_parliament_counts_to_context_data(self, context):
-        # Get all the parties represented in this house.
-        people_in_house = models.Person.objects.filter(position__organisation=self.object)
-        parties = models.Organisation.objects.filter(
-            kind__slug='party',
-            position__person__in=people_in_house,
-        ).annotate(person_count=Count('position__person'))
-        total_people = sum(map(lambda x: x.person_count, parties))
+        # Get all the currently active positions in the house:
+        positions_in_house = models.Position.objects.filter(
+            organisation=self.object). \
+            select_related('person').currently_active()
+        # Then find the distinct people who have those positions:
+        people_in_house = set(p.person for p in positions_in_house)
+        # Now find all the active party memberships for those people:
+        party_counts = defaultdict(int)
+        for current_party_position in models.Position.objects.filter(
+            title__slug='member',
+            organisation__kind__slug='party',
+            person__in=people_in_house).currently_active(). \
+            select_related('organisation'):
+            party_counts[current_party_position.organisation] += 1
+        parties = sorted(party_counts.keys(), key=lambda o: o.name)
+        total_people = len(people_in_house)
 
         # Calculate the % of the house each party occupies.
-        for party in parties:
-            party.percentage = float(party.person_count) / total_people * 100
+        context['parties_and_percentages'] = [
+            (party, (float(party_counts[party]) * 100) / total_people)
+            for party in parties]
 
-        context['parties'] = parties
         context['total_people'] =  total_people
 
         context['all_members'] = self.object.position_set.filter(title__slug='member').currently_active()
