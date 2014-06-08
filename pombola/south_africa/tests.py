@@ -669,7 +669,6 @@ class SAOrganisationDetailViewTest(WebTest):
             name = 'Foo',
             slug = 'foo',
         )
-        organisation_kind.save()
 
         organisation = models.Organisation.objects.create(
             name = 'Test Org',
