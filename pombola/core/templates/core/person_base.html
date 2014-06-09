@@ -9,6 +9,10 @@
 {% endblock %}
 
 {% block object_tagline %}
+  {% if object.hidden and user.is_superuser %}
+    <p class="hidden-to-non-superusers">This user's profile is hidden from non-admins</p>
+  {% endif %}
+
   {% if object.is_politician %}
       <p>Politician Profile Page</p>
   {% endif %}

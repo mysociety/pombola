@@ -1,4 +1,6 @@
+from contextlib import contextmanager
 from django_webtest import WebTest
+from django.contrib.auth.models import User
 from django.test import TestCase
 
 from pombola.core import models
@@ -107,3 +109,47 @@ class PositionViewTest(WebTest):
     def test_place_page(self):
         self.app.get('/place/is/constituency/')
         self.app.get('/place/bobs_place/')
+
+class TestPersonView(WebTest):
+
+    def setUp(self):
+        self.alf = models.Person.objects.create(
+            legal_name="Alfred Smith",
+            slug='alfred-smith',
+        )
+        self.superuser = User.objects.create(
+            username='admin',
+            is_superuser=True
+        )
+
+    def tearDown(self):
+        self.superuser.delete()
+        self.alf.delete()
+
+    def test_person_view_redirect(self):
+        resp = self.app.get('/person/alfred-smith')
+        self.assertRedirects(resp, '/person/alfred-smith/', status_code=301)
+
+    def test_person_smoke_test(self):
+        resp = self.app.get('/person/alfred-smith/')
+        self.assertTrue(resp)
+
+    @contextmanager
+    def with_hidden_person(self):
+        try:
+            self.alf.hidden = True
+            self.alf.save()
+            yield
+        finally:
+            self.alf.hidden = False
+            self.alf.save()
+
+    def test_person_hidden(self):
+        with self.with_hidden_person():
+            resp = self.app.get('/person/alfred-smith/', status=404)
+            self.assertEqual(resp.status_code, 404)
+
+    def test_person_hidden_superuser(self):
+        with self.with_hidden_person():
+            resp = self.app.get('/person/alfred-smith/', user=self.superuser)
+            self.assertTrue(resp)

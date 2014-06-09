@@ -45,7 +45,18 @@ class HomeView(TemplateView):
 class OrganisationList(ListView):
     model = models.Organisation
 
-class PersonDetail(DetailView):
+
+class SkipHidden(object):
+
+    def get_queryset(self):
+        qs = super(SkipHidden, self).get_queryset()
+        # Only display person pages for hidden people if the user is
+        # logged in and a superuser:
+        if self.request.user.is_superuser:
+            return qs
+        return qs.filter(hidden=False)
+
+class PersonDetail(SkipHidden, DetailView):
     model = models.Person
 
     def get(self, request, *args, **kwargs):
@@ -60,7 +71,7 @@ class PersonDetail(DetailView):
         except models.SlugRedirect.DoesNotExist:
             return super(PersonDetail, self).get(request, *args, **kwargs)
 
-class PersonDetailSub(DetailView):
+class PersonDetailSub(SkipHidden, DetailView):
     model = models.Person
     sub_page = None
 
