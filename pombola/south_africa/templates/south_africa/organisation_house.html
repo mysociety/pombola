@@ -35,11 +35,11 @@ the organisation detail page.
 
   <div>
     <ul class="house-page-list">
-      {% for party in parties %}
+      {% for party, percentage in parties_and_percentages %}
       <li>
       <a href="{% url 'organisation_party' slug=object.slug sub_page_identifier=party.slug %}">
         {{ party.name }}
-        <span class="percent">{{ party.percentage|floatformat:"-1" }}%</span>
+        <span class="percent">{{ percentage|floatformat:"-1" }}%</span>
       </a>
       </li>
       {% endfor %}

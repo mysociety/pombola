@@ -11,6 +11,7 @@ from django.test import TestCase
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
+from django_date_extensions.fields import ApproximateDate
 from django_webtest import WebTest
 
 from mapit.models import Type, Area, Geometry, Generation
@@ -668,7 +669,6 @@ class SAOrganisationDetailViewTest(WebTest):
             name = 'Foo',
             slug = 'foo',
         )
-        organisation_kind.save()
 
         organisation = models.Organisation.objects.create(
             name = 'Test Org',
@@ -700,6 +700,166 @@ class SAOrganisationDetailViewTest(WebTest):
         positions = resp.context['positions']
         self.assertEqual(positions[0].person.legal_name, "Zest ABCPerson")
         self.assertEqual(positions[1].person.legal_name, "Test Person")
+
+
+@attr(country='south_africa')
+class SAOrganisationDetailViewTestParliament(WebTest):
+
+    def setUp(self):
+        # We create a small model parliament here - this includes:
+        #  - Current Speaker Jane Doe (Random Party)
+        #  - Current MP Joe Bloggs (used to be in Now Defunct Party,
+        #    now in Another Random Party)
+        #  - Current MP John Smith (Another Random Party)
+        #  - Past MP Old MP (used to be in the Monster Raving Loony Party)
+        # This exercises a few awkward cases when calculating the
+        # proportions of each party within the parliament - this should
+        # be presented as 66% Another Random Party, 33% Random Party.
+        self.parliament_kind = models.OrganisationKind.objects.create(
+            name='Parliament',
+            slug='parliament')
+        self.party_kind = models.OrganisationKind.objects.create(
+            name='Party',
+            slug='party')
+        self.organisation = models.Organisation.objects.create(
+            kind=self.parliament_kind,
+            name='Model Parliament',
+            slug='model-parliament')
+        self.party_random = models.Organisation.objects.create(
+            kind=self.party_kind,
+            name='Random Party',
+            slug='random-party')
+        self.party_another_random = models.Organisation.objects.create(
+            kind=self.party_kind,
+            name='Another Random Party',
+            slug='another-random-party')
+        self.party_defunct = models.Organisation.objects.create(
+            kind=self.party_kind,
+            name='Now Defunct Party',
+            slug='now-defunct-party')
+        self.party_loony = models.Organisation.objects.create(
+            kind=self.party_kind,
+            name='Monster Raving Loony Party',
+            slug='monster-raving-loony-party')
+        self.person = models.Person.objects.create(
+            legal_name='Joe Bloggs',
+            slug='joe-bloggs')
+        self.member_title = models.PositionTitle.objects.create(
+            name='Member',
+            slug='member')
+        self.speaker_title = models.PositionTitle.objects.create(
+            name='Speaker',
+            slug='speaker')
+        self.position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.organisation,
+            title=self.member_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.old_party_position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.party_defunct,
+            title=self.member_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(2002, 12, 31),
+        )
+        self.party_position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.party_another_random,
+            title=self.member_title,
+            start_date=ApproximateDate(2003, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.person2 = models.Person.objects.create(
+            legal_name='John Smith',
+            slug='john-smith',
+        )
+        self.position2 = models.Position.objects.create(
+            person=self.person2,
+            organisation=self.organisation,
+            title=self.member_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.party_position2 = models.Position.objects.create(
+            person=self.person2,
+            organisation=self.party_another_random,
+            title=self.member_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.speaker = models.Person.objects.create(
+            legal_name='Jane Doe',
+            slug='jane-doe',
+        )
+        self.speaker_position = models.Position.objects.create(
+            person=self.speaker,
+            organisation=self.organisation,
+            title=self.speaker_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.speaker_party_position = models.Position.objects.create(
+            person=self.speaker,
+            organisation=self.party_random,
+            title=self.member_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.old_mp = models.Person.objects.create(
+            legal_name='Old MP',
+            slug='old-mp'
+        )
+        self.old_mp_position = models.Position.objects.create(
+            person=self.old_mp,
+            organisation=self.organisation,
+            title=self.member_title,
+            start_date=ApproximateDate(2001, 1, 1),
+            end_date=ApproximateDate(2002, 12, 31),
+        )
+        self.old_mp_party_position = models.Position.objects.create(
+            person=self.old_mp,
+            organisation=self.party_loony,
+            title=self.member_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(2005, 12, 31),
+        )
+
+    def test_percentages(self):
+        with self.assertNumQueries(11):
+            response = self.app.get('/organisation/model-parliament/')
+        ps_and_ps = response.context['parties_and_percentages']
+        self.assertEqual(2, len(ps_and_ps))
+        self.assertEqual(ps_and_ps[0][0], self.party_another_random)
+        self.assertAlmostEqual(ps_and_ps[0][1], 66.666666666666)
+        self.assertEqual(ps_and_ps[1][0], self.party_random)
+        self.assertAlmostEqual(ps_and_ps[1][1], 33.333333333333)
+
+    def tearDown(self):
+        self.old_mp_party_position.delete()
+        self.old_mp_position.delete()
+        self.old_mp.delete()
+        self.speaker_party_position.delete()
+        self.speaker_position.delete()
+        self.speaker.delete()
+        self.party_position2.delete()
+        self.position2.delete()
+        self.person2.delete()
+        self.party_position.delete()
+        self.old_party_position.delete()
+        self.position.delete()
+        self.speaker_title.delete()
+        self.member_title.delete()
+        self.person.delete()
+        self.party_loony.delete()
+        self.party_defunct.delete()
+        self.party_another_random.delete()
+        self.party_random.delete()
+        self.organisation.delete()
+        self.party_kind.delete()
+        self.parliament_kind.delete()
+
 
 @attr(country='south_africa')
 class FixPositionTitlesCommandTests(TestCase):
