@@ -52,8 +52,9 @@ class PersonDetail(DetailView):
         # Check if this is old slug for redirection:
         slug = kwargs['slug']
         try:
-            sr = models.SlugRedirect.objects.get(content_type=ContentType.objects.get_for_model(models.Person),
-                                                 old_object_slug=slug)
+            sr = models.SlugRedirect.objects.get(
+                content_type=ContentType.objects.get_for_model(models.Person),
+                old_object_slug=slug)
             return redirect(sr.new_object)
         # Otherwise look up the slug as normal:
         except models.SlugRedirect.DoesNotExist:

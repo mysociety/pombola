@@ -1,0 +1,47 @@
+{% extends 'core/person_base.html' %}
+{% load url from future %}
+
+{% block title %}{{ object.name }} Appearances{% endblock %}
+
+{% block subcontent %}
+
+  {% if settings.ENABLED_FEATURES.hansard %}
+
+      {% with hansard_count=object.hansard_entries.count %}
+            {% if hansard_count %}
+
+              <h2>Parliamentary appearances</h2>
+
+              <p>{{ person.name }} has spoken {{ hansard_entries.count }} times in Parliament.</p>
+
+              <h3>Recent Appearances</h3>
+
+              <div id="appearances" data-url="{% url "hansard:person_summary" slug=object.slug %}">
+                {% include 'core/person_detail_appearance_list.html' %}
+              </div>
+
+              <p>(<a href="{% url "hansard:person_appearances_all" slug=person.slug %}">View all speeches.</a>)</p>
+
+              <h3>Lifetime summary</h3>
+
+              <p>{{ person.name }} has month by month spoken in parliament this many times (if a month is missing there were no speeches found for that month):</p>
+
+              <ul>
+                {% for summary in lifetime_summary %}
+                  <li>{{ summary.date|date:"M Y" }}: {{ summary.count }} speeches</li>
+                {% endfor %}
+              </ul>
+
+            {% else %}
+              <div>
+                <p>{{ object.name }} has never spoken in Parliament.</p>
+              </div>
+            {% endif %}
+
+      {% endwith %}
+  {% else %}
+
+    No appearances were found.
+  {% endif  %}
+
+{% endblock %}

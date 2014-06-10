@@ -1,0 +1,112 @@
+{% extends 'core/object_base.html' %}
+{% load thumbnail %}
+{% load url from future %}
+{% load switch %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block object_menu_links %}{% endblock %}
+
+{% block object_tagline %}
+  {% if object.is_politician %}
+      {{ object.summary }}
+  {% endif %}
+
+  {% if object.is_aspirant %}
+      <p>
+          Aspirant in the upcoming elections:
+          {% for aspiration in object.aspirant_positions %}
+              {{ aspiration.title }}
+              {% if not forloop.last %}, {% endif %}
+          {% endfor %}
+      </p>
+
+      <p>
+        Have information to add to our site about this aspirant?
+        <a  href="{% url "feedback_add" %}?url={{ request.build_absolute_uri }}"
+            class="feedback_link"
+        >Tell us!</a>
+      </p>
+  {% endif %}
+{% endblock %}
+
+{% block profile_info %}
+
+  <div class="constituency-party">
+
+      {% if object.aspirant_constituencies.count %}
+          <h3>Aspirant for</h3>
+          <ul>
+              {% for constituency in object.aspirant_constituencies %}
+                  <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+
+      {% regroup object.constituencies|dictsort:"kind" by kind as constituency_groups %}
+      {% for entry in constituency_groups %}
+      <h3>{{ entry.grouper }}</h3>
+      <ul>
+          {% for area in entry.list %}
+              <li><a href="{{ area.get_absolute_url }}">{{ area.name }}</a></li>
+          {% endfor %}
+      </ul>
+      {% endfor %}
+
+      <h3>Parties &amp; Coalitions</h3>
+      <ul>
+          {% for party in object.parties_and_coalitions %}
+              <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+          {% empty %}
+              <li>Not a member of any parties or coalitions</li>
+          {% endfor %}
+      </ul>
+  </div>
+
+  {% if object.name != object.legal_name or object.contacts.count %}
+  <div class="contact-details">
+      {% if object.name != object.legal_name %}
+          <h3>Full name</h3>
+          <p>{{ object.legal_name }}</p>
+      {% endif %}
+
+      {% if object.date_of_birth %}
+          <h3>Born</h3>
+          <p>{{ object.date_of_birth }}</p>
+      {% endif %}
+
+      {# Simplified version of core/templates/core/contact_list.html #}
+      {% if object.contacts.count %}
+      {% for c in object.contacts.all %}
+          {% switch c.kind.slug %}
+
+              {% case 'phone' %}
+                  <h3>Telephone</h3>
+                  <p><a href="tel:{{ c.value }}">{{ c.value }}</a></p>
+
+              {% case 'facebook' %}
+                  <h3>Link</h3>
+                  <p><a href="{{ c.value }}">{{ c.kind.name }}</a></p>
+
+              {% case 'twitter' %}
+                  <h3>Link</h3>
+                  <p><a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter</p>
+
+              {% case 'address' %}
+                  <h3>Post</h3>
+                  <p class="contact-details-address">{{ c.value|urlizetrunc:50 }}</p>
+
+              {% else %}
+                  <h3>{{ c.kind.name }}</h3>
+                  <p>{{ c.value|urlizetrunc:50 }}</p>
+
+          {% endswitch %}
+          {% if c.notes %}
+              <p>({{ c.notes }})</p>
+          {% endif %}
+      {% endfor %}
+      {% endif %}
+  </div>
+  {% endif %}
+
+{% endblock %}

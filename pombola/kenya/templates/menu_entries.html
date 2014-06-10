@@ -11,7 +11,7 @@
 
 
 <li><a href="{% url "home" %}">Home</a></li>
-<li><a href="{% url "info_page" slug='democracy-resources' %}">Democracy Resources</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='democracy-resources' %}">Democracy Resources</a>
     {% if include_sub_menu_entries %}
     <ul id="democracy-resources">
         <li>
@@ -22,6 +22,9 @@
         </li>
         <li>
             <a href="{% url "info_page" slug='democracy-faq' %}">Democracy FAQs</a>
+        </li>
+        <li>
+            <a href="{% url "info_page" slug='ministry-overview' %}">Ministry Overview</a>
         </li>
         <li>
             <a href="{% url "info_page" slug='constitution-2010' %}">Constitution 2010</a>
@@ -37,7 +40,7 @@
 </li>
 
 
-<li>
+<li class="has-submenu">
   <a href="{% url "position_pt" pt_slug='member-national-assembly' %}">NA Members</a>
   {% if include_sub_menu_entries %}
   <ul id="parliament-overview">
@@ -51,20 +54,11 @@
   <a href="{% url "position_pt" pt_slug='senator' %}">Senators</a>
 </li>
 
-<li><a href="{% url "info_page" slug='parliament-overview' %}">Parliament</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='parliament-overview' %}">Parliament</a>
     {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
         <li>
-            <a href="{% url "position_pt" pt_slug='member-national-assembly' %}?order=name">Members of the National Assembly</a>
-        </li>
-        <li>
-            <a href="{% url "position_pt" pt_slug='senator' %}?order=name">Senators</a>
-        </li>
-        <li>
             <a href="{% url "info_page" slug='parliament-overview' %}">Parliament Overview</a>
-        </li>
-        <li>
-            <a href="{% url "info_page" slug='ministry-overview' %}">Ministry Overview</a>
         </li>
         <li>
             <a href="{% url "info_page" slug='committee-overview' %}">Committee Overview</a>
@@ -85,33 +79,26 @@
     </ul>
     {% endif %}
 </li>
-<li><a href="{% url "info_page" slug='places-overview' %}">Places</a>
+
+<li class="has-submenu"><a href="{% url "info_page" slug='public-participation' %}">Public Participation</a>
     {% if include_sub_menu_entries %}
     <ul id="places-overview">
-        <li>
-            <a href="{% url "map-home" %}">Find using map</a>
-        </li>
-        <li>
-            <a href="{% url "info_page" slug='places-overview' %}">Places Overview</a>
-        </li>
-        <li>
-            <a href="{% url "place_kind" slug='county' %}">Counties</a>
-        </li>
-        <li>
-            <a href="{% url "place_kind" slug='constituency' %}">Constituencies</a>
-        </li>
-        <li>
-            <a href="{% url "place_kind" slug='ward' %}">Wards</a>
-        </li>
+      <li>
+        <a href="{% url "info_page" slug='forum' %}">Forum</a>
+      </li>
+      <li>
+        <a href="{% url "info_page" slug='polls' %}">Polls</a>
+      </li>
     </ul>
     {% endif %}
 </li>
 
-<li><a href="http://mzalendo.com/blog/">Blog</a></li>
-
-<li><a href="{% url "info_page" slug='news' %}">News</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='news' %}">News</a>
     {% if include_sub_menu_entries %}
     <ul id="news-overview">
+        <li>
+          <a href="http://mzalendo.com/blog/">Blog</a>
+        </li>
         <li>
             <a href="{% url "info_page" slug='press' %}">Press</a>
         </li>
@@ -122,13 +109,16 @@
             <a href="{% url "info_page" slug='data' %}">Data</a>
         </li>
         <li>
+            <a href="{% url "info_page" slug='data' %}">MP Data</a>
+        </li>
+        <li>
             <a href="{% url "info_page" slug='newsletter' %}">Newsletter</a>
         </li>
     </ul>
     {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug='mzalendo-overview' %}">About</a>
+<li class="has-submenu"><a href="{% url "info_page" slug='mzalendo-overview' %}">About</a>
     {% if include_sub_menu_entries %}
     <ul id="mzalendo-overview">
         <li>

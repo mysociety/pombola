@@ -1,0 +1,144 @@
+@mixin input-placeholder-color($color){
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {
+    color: $color;
+  }
+  &::-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+#site-header {
+  background-image: none; /* remove gradient */
+  background-color: $colour_primary_mid;
+}
+
+#logo {
+  @media only all and (min-width: 640px), print {
+    top: 13px;
+    width: 180px;
+    margin-left: 0;
+  }
+}
+
+#tagline {
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: -999px;
+  height: 34px;
+  line-height: 34px;
+  color: mix($colour_primary_mid, #fff, 30%);
+
+  @media only all and (min-width: 640px), print {
+    left: 200px;
+  }
+
+}
+
+menu#mobile-top-tools {
+  ul {
+    li {
+      padding: 0 10px;
+      a {
+        display: block;
+        margin-top: 10px;
+        text-transform: uppercase;
+        img {
+          vertical-align: -3px; } } } } }
+
+#header-search {
+  position: absolute;
+  top: 17px;
+  right: 0;
+  height: auto;
+  border: none;
+  float: none;
+  border: none;
+  margin: 0;
+
+  @media only all and (min-width: 640px), print {
+    display: block;
+  }
+
+  @media print {
+    display: none;
+  }
+
+  input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 40px 0 7px;
+    margin: 0;
+    width: 5em;
+    height: 26px;
+    font-size: 14px;
+    line-height: 16px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    -webkit-appearance: none;
+    color: #fff;
+
+    float: none;
+
+    @include border-radius(0);
+    @include transition(border 100ms linear, width 100ms linear);
+    @include input-placeholder-color(#fff);
+
+    &:hover {
+      border-color: mix($colour_primary_mid, #fff, 60%);
+    }
+
+    &:focus, &:hover:focus {
+      width: 10em;
+      background-color: transparent;
+      border-color: #fff;
+      outline: none;
+      -webkit-box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
+      box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
+      @include input-placeholder-color(mix($colour_primary_mid, #fff, 50%));
+    }
+
+  }
+
+  button {
+    float: none;
+    margin: 0;
+    @include border-radius(0);
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 28px;
+    background: transparent url(../images/search-icon.png) center no-repeat;
+
+    -webkit-transition: background 100ms linear;
+    -moz-transition: background 100ms linear;
+    -ms-transition: background 100ms linear;
+    -o-transition: background 100ms linear;
+    transition: background 100ms linear;
+
+    &:hover {
+      background-color: mix($colour_primary_mid, #fff, 60%);
+    }
+
+    &:focus {
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+  }
+
+  &:hover input {
+    border-color: mix($colour_primary_mid, #fff, 60%);
+  }
+
+}

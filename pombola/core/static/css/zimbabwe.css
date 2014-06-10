@@ -69,10 +69,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 #staging_header {
-  background-color: #faa;
-  color: #000;
+  background-color: #f8dbdb;
+  color: #903233;
   font-size: 12px;
-  padding: 5px;
+  line-height: 14px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -903,23 +904,23 @@ menu#mobile-top-tools ul li a img {
   position: relative;
   padding-top: 5px;
 }
-#site-footer div.footer-section {
+#site-footer .footer-section {
   border-top: 2px solid #009245;
   padding: 10px;
 }
 @media print {
-  #site-footer div.footer-section {
+  #site-footer .footer-section {
     display: none;
   }
 }
-#site-footer div.footer-section:first-child {
+#site-footer .footer-section:first-child {
   border: none;
 }
 #site-footer h4 {
   font-size: 120%;
   color: #009245;
 }
-#site-footer div.footer-section > h4 {
+#site-footer .footer-section > h4 {
   margin-top: 1em;
 }
 #site-footer p {
@@ -1028,7 +1029,7 @@ menu#mobile-top-tools ul li a img {
     display: block;
     padding: 0;
   }
-  #site-footer div.footer-section {
+  #site-footer .footer-section {
     border: none;
     float: left;
     max-width: 250px;

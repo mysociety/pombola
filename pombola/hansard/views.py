@@ -159,6 +159,7 @@ def person_summary(request, slug):
         context_instance=RequestContext(request)
     )
 
+
 class PersonAllAppearancesView(ListView):
 
     def get_context_data(self, **kwargs):
@@ -177,3 +178,11 @@ class PersonAllAppearancesView(ListView):
         # Specify the filter for the list of entries
         return Entry.objects.filter(speaker=self.person).select_related('sitting__venue')
 
+
+class HansardPersonMixin(object):
+
+    def get_context_data(self, **kwargs):
+        context = super(HansardPersonMixin, self).get_context_data(**kwargs)
+        entries = Entry.objects.filter(speaker=self.object)
+        context['hansard_entries'] = entries.order_by('-sitting__start_date')
+        return context
