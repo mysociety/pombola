@@ -20,6 +20,8 @@
                 {% include 'core/person_detail_appearance_list.html' %}
               </div>
 
+              <p>(<a href="{% url "hansard:person_appearances_all" slug=person.slug %}">View all speeches.</a>)</p>
+
               <h3>Lifetime summary</h3>
 
               <p>{{ person.name }} has month by month spoken in parliament this many times (if a month is missing there were no speeches found for that month):</p>
