@@ -13,7 +13,11 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 from django.core.cache import cache
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
+
+from speeches.models import Section, Speech, Speaker, Tag
+from speeches.views import NamespaceMixin, SpeechView, SectionView
 
 from pombola.core import models
 from pombola.info.models import InfoPage
@@ -52,9 +56,8 @@ class PersonDetail(DetailView):
         # Check if this is old slug for redirection:
         slug = kwargs['slug']
         try:
-            sr = models.SlugRedirect.objects.get(
-                content_type=ContentType.objects.get_for_model(models.Person),
-                old_object_slug=slug)
+            sr = models.SlugRedirect.objects.get(content_type=ContentType.objects.get_for_model(models.Person),
+                                                 old_object_slug=slug)
             return redirect(sr.new_object)
         # Otherwise look up the slug as normal:
         except models.SlugRedirect.DoesNotExist:
@@ -66,6 +69,20 @@ class PersonDetailSub(DetailView):
 
     def get_template_names(self):
         return ["core/person_%s.html" % self.sub_page]
+
+class PersonSpeakerMappings(object):
+    def pombola_person_to_sayit_speaker(self, person, scheme):
+        try:
+            i = models.Identifier.objects.get(
+                content_type = models.ContentType.objects.get_for_model(models.Person),
+                object_id = person.id,
+                scheme = scheme
+            )
+            speaker = Speaker.objects.get(person__popit_id = i.scheme + i.identifier)
+            return speaker
+
+        except ObjectDoesNotExist:
+            return None
 
 class PlaceDetailView(DetailView):
     model = models.Place
