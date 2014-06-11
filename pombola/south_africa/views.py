@@ -138,7 +138,8 @@ class LatLonDetailBaseView(PlaceDetailView):
                     .position_set \
                     .filter(
                         person__position__title__slug='constituency-contact',
-                    )
+                    ) \
+                    .currently_active()
 
                 constituency_contacts = models.Person.objects.filter(position__in=cc_positions)
                 office_people_entries = []
@@ -152,7 +153,8 @@ class LatLonDetailBaseView(PlaceDetailView):
                                 "national-assembly",
                                 office.organisation.slug,
                             ]
-                        )
+                        ) \
+                        .currently_active()
 
                     office_people_entries.append({
                         'person': constituency_contact,
