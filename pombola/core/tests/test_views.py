@@ -12,7 +12,9 @@ class HomeViewTest(TestCase):
         self.assertIn('featured_person', response.context)
         self.assertIn('featured_persons', response.context)
 
+
 class PositionViewTest(WebTest):
+
     def tearDown(self):
         self.position.delete()
         self.position2.delete()
@@ -29,7 +31,7 @@ class PositionViewTest(WebTest):
             legal_name = 'Test Person',
             slug       = 'test-person',
         )
-        
+
         self.organisation_kind = models.OrganisationKind.objects.create(
             name = 'Foo',
             slug = 'foo',
@@ -41,7 +43,7 @@ class PositionViewTest(WebTest):
             slug = 'test-org',
             kind = self.organisation_kind,
         )
-        
+
         self.title = models.PositionTitle.objects.create(
             name = 'Test title',
             slug = 'test-title',
@@ -109,6 +111,7 @@ class PositionViewTest(WebTest):
     def test_place_page(self):
         self.app.get('/place/is/constituency/')
         self.app.get('/place/bobs_place/')
+
 
 class TestPersonView(WebTest):
 
