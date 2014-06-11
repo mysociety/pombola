@@ -29,7 +29,7 @@ from speeches.views import NamespaceMixin, SpeechView, SectionView
 from pombola.core import models
 from pombola.core.views import (HomeView, PlaceDetailView, PlaceDetailSub,
     OrganisationDetailView, PersonDetail, PlaceDetailView,
-    OrganisationDetailSub)
+    OrganisationDetailSub, PersonSpeakerMappingsMixin)
 from pombola.info.models import InfoPage, Category
 from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView
@@ -400,29 +400,16 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
         else:
             context['membertitle'] = 'member'
 
-
-class PersonSpeakerMappings(object):
-    def pombola_person_to_sayit_speaker(self, person):
-        try:
-            i = models.Identifier.objects.get(
-                content_type = models.ContentType.objects.get_for_model(models.Person),
-                object_id = person.id,
-                scheme = 'org.mysociety.za'
-            )
-            speaker = Speaker.objects.get(person__popit_id = i.scheme + i.identifier)
-            return speaker
-
-        except ObjectDoesNotExist:
-            return None
-
-
-class SAPersonDetail(PersonDetail):
+class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
     def get_recent_speeches_for_section(self, section_title, limit=5):
         pombola_person = self.object
-        sayit_speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(pombola_person)
+        sayit_speaker = self.pombola_person_to_sayit_speaker(
+            pombola_person,
+            'org.mysociety.za'
+        )
 
         if not sayit_speaker:
             # Without a speaker we can't find any speeches
@@ -729,7 +716,7 @@ class OldSectionRedirect(RedirectView):
             raise Http404
 
 
-class SAPersonAppearanceView(TemplateView):
+class SAPersonAppearanceView(PersonSpeakerMappingsMixin, TemplateView):
 
     template_name = 'south_africa/person_appearances.html'
 
@@ -745,7 +732,10 @@ class SAPersonAppearanceView(TemplateView):
         tag    = get_object_or_404(Tag, name=speech_tag)
 
         # SayIt speaker is different to core.Person, Load the speaker
-        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
+        speaker = self.pombola_person_to_sayit_speaker(
+            person,
+            'org.mysociety.za'
+        )
 
         # Load the speeches. Pagination is done in the template
         speeches = Speech.objects \

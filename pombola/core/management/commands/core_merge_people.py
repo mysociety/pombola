@@ -10,11 +10,13 @@ from django.db import transaction
 
 import pombola.core.models as core_models
 from pombola.images.models import Image
+from pombola.core.views import PersonSpeakerMappingsMixin
 
 from django.conf import settings
 
 from optparse import make_option
 
+from django.core.exceptions import ObjectDoesNotExist
 
 def check_basic_fields(basic_fields, to_keep, to_delete):
     """Return False if any data might be lost on merging"""
@@ -35,7 +37,7 @@ def check_basic_fields(basic_fields, to_keep, to_delete):
     return safe_to_delete
 
 
-class Command(BaseCommand):
+class Command(PersonSpeakerMappingsMixin, BaseCommand):
 
     help = "Merge two Person records into one, deleting one of the originals"
     option_list = BaseCommand.option_list + (
@@ -45,6 +47,8 @@ class Command(BaseCommand):
         make_option("--delete-person", dest="delete_person", type="int",
                     help="The ID of the person to delete",
                     metavar="PERSON-ID"),
+        make_option("--sayit-id-scheme", dest="sayit_id_scheme", type="string",
+                    help="The name of the SayIt ID schema (if used)"),
         make_option("--quiet", dest="quiet",
                     help="Suppress progress output",
                     default=False, action='store_true'))
@@ -88,6 +92,45 @@ class Command(BaseCommand):
         names_to_add = to_delete.all_names_set() - to_keep.all_names_set()
         for name in names_to_add:
             to_keep.add_alternative_name(name)
+
+        # If a SayIt ID scheme is specified, move speeches from deleted person
+        if 'speeches' in settings.INSTALLED_APPS:
+
+            if not options['sayit_id_scheme']:
+                raise CommandError("You must specify --sayit-id-scheme")
+
+            from speeches.models import Speech
+
+            try:
+
+                delete_sayit_speaker = self.pombola_person_to_sayit_speaker(
+                    to_delete,
+                    options['sayit_id_scheme']
+                )
+
+                keep_sayit_speaker = self.pombola_person_to_sayit_speaker(
+                    to_keep,
+                    options['sayit_id_scheme']
+                )
+
+                Speech.objects.filter(
+                    speaker=delete_sayit_speaker
+                ).update(
+                    speaker=keep_sayit_speaker
+                )
+
+                # Delete the identifier from the losing side, as all speeches are now the new one
+                core_models.Identifier.objects.get(
+                    content_type=core_models.ContentType.objects.get_for_model(core_models.Person),
+                    object_id=to_delete.id,
+                    scheme=options['sayit_id_scheme']
+                ).delete()
+
+            except ObjectDoesNotExist:
+                if not options['quiet']:
+                    print "One or both of the people does not have a SayIt speaker. Not moving speeches."
+
+
         # Switch the person or speaker model on all affected
         # models in core:
         #    core_models.Position
