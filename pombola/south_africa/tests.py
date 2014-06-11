@@ -254,7 +254,7 @@ class SAPersonDetailViewTest(TestCase):
 
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
-        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person)
+        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person, 'org.mysociety.za')
         self.assertEqual( speaker.name, 'Moomin Finn' )
 
     def test_generation_of_interests_table(self):

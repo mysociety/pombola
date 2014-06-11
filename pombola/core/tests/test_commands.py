@@ -92,6 +92,7 @@ class MergePeopleCommandTest(unittest.TestCase):
         self.options = {
             'keep_person': self.person_a.id,
             'delete_person': self.person_b.id,
+            'sayit_id_scheme': 'org.mysociety.pombolatest',
             'quiet': True
         }
 
