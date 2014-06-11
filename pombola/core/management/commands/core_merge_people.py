@@ -10,7 +10,7 @@ from django.db import transaction
 
 import pombola.core.models as core_models
 from pombola.images.models import Image
-from pombola.core.views import PersonSpeakerMappings
+from pombola.core.views import PersonSpeakerMappingsMixin
 
 from django.conf import settings
 
@@ -37,7 +37,7 @@ def check_basic_fields(basic_fields, to_keep, to_delete):
     return safe_to_delete
 
 
-class Command(BaseCommand):
+class Command(PersonSpeakerMappingsMixin, BaseCommand):
 
     help = "Merge two Person records into one, deleting one of the originals"
     option_list = BaseCommand.option_list + (
@@ -103,12 +103,12 @@ class Command(BaseCommand):
 
             try:
 
-                delete_sayit_speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(
+                delete_sayit_speaker = self.pombola_person_to_sayit_speaker(
                     to_delete,
                     options['sayit_id_scheme']
                 )
 
-                keep_sayit_speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(
+                keep_sayit_speaker = self.pombola_person_to_sayit_speaker(
                     to_keep,
                     options['sayit_id_scheme']
                 )

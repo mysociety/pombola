@@ -24,7 +24,7 @@ from popit.models import Person as PopitPerson, ApiInstance
 from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
-from pombola.south_africa.views import PersonSpeakerMappings
+from pombola.south_africa.views import PersonSpeakerMappingsMixin
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 from pombola.search.tests.views import fake_geocoder
@@ -211,7 +211,7 @@ class SASearchViewTest(WebTest):
 
 
 @attr(country='south_africa')
-class SAPersonDetailViewTest(TestCase):
+class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
     def setUp(self):
         fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
         popolo_path = os.path.join(fixtures, 'test-popolo.json')
@@ -254,7 +254,7 @@ class SAPersonDetailViewTest(TestCase):
 
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
-        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(person, 'org.mysociety.za')
+        speaker = self.pombola_person_to_sayit_speaker(person, 'org.mysociety.za')
         self.assertEqual( speaker.name, 'Moomin Finn' )
 
     def test_generation_of_interests_table(self):

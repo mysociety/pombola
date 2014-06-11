@@ -29,7 +29,7 @@ from speeches.views import NamespaceMixin, SpeechView, SectionView
 from pombola.core import models
 from pombola.core.views import (HomeView, PlaceDetailView, PlaceDetailSub,
     OrganisationDetailView, PersonDetail, PlaceDetailView,
-    OrganisationDetailSub, PersonSpeakerMappings)
+    OrganisationDetailSub, PersonSpeakerMappingsMixin)
 from pombola.info.models import InfoPage, Category
 from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView
@@ -400,13 +400,13 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
         else:
             context['membertitle'] = 'member'
 
-class SAPersonDetail(PersonDetail):
+class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
     def get_recent_speeches_for_section(self, section_title, limit=5):
         pombola_person = self.object
-        sayit_speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(
+        sayit_speaker = self.pombola_person_to_sayit_speaker(
             pombola_person,
             'org.mysociety.za'
         )
@@ -716,7 +716,7 @@ class OldSectionRedirect(RedirectView):
             raise Http404
 
 
-class SAPersonAppearanceView(TemplateView):
+class SAPersonAppearanceView(PersonSpeakerMappingsMixin, TemplateView):
 
     template_name = 'south_africa/person_appearances.html'
 
@@ -732,7 +732,7 @@ class SAPersonAppearanceView(TemplateView):
         tag    = get_object_or_404(Tag, name=speech_tag)
 
         # SayIt speaker is different to core.Person, Load the speaker
-        speaker = PersonSpeakerMappings().pombola_person_to_sayit_speaker(
+        speaker = self.pombola_person_to_sayit_speaker(
             person,
             'org.mysociety.za'
         )

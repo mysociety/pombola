@@ -70,7 +70,7 @@ class PersonDetailSub(DetailView):
     def get_template_names(self):
         return ["core/person_%s.html" % self.sub_page]
 
-class PersonSpeakerMappings(object):
+class PersonSpeakerMappingsMixin(object):
     def pombola_person_to_sayit_speaker(self, person, scheme):
         try:
             i = models.Identifier.objects.get(
