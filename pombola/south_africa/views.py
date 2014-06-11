@@ -286,9 +286,9 @@ class SAOrganisationDetailView(OrganisationDetailView):
         # Sort the list of positions in an organisation by an approximation
         # of their holder's last name.
         context['positions'] = sorted(
-            context['positions'],
+            context['positions'].currently_active(),
             key=key_position_sort_last_name,
-            )
+        )
 
         return context
 
