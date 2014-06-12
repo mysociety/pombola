@@ -28,7 +28,10 @@ urlpatterns = patterns('pombola.search.views',
     url(
         r'^$',
         SearchView(
-            searchqueryset = SearchQuerySet().models( *search_models ).highlight(),
+            searchqueryset = SearchQuerySet(). \
+                models(*search_models). \
+                exclude(hidden=True). \
+                highlight(),
             form_class=SearchForm,
         ),
         name='core_search'
@@ -47,7 +50,7 @@ urlpatterns = patterns('pombola.search.views',
         SearchView(
             searchqueryset = SearchQuerySet().models(
                 core_models.Person
-            ),
+            ).exclude(hidden=True),
             form_class=SearchForm,
         ),
         name='core_person_search'
