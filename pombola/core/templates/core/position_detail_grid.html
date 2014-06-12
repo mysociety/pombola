@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 {% load switch %}
+{% load hidden %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -24,7 +25,7 @@
 
         {% for position in positions %}
             <div class="grid-listing-item">
-                <a href="{{ position.person.get_absolute_url }}">
+                {% maybehidden position.person user %}
                     {% thumbnail position.person.primary_image "210x210" crop="center" as im %}
                         <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
                     {% empty %}
@@ -34,7 +35,7 @@
                     <span class="name">
                         {{ position.person.name }}
                     </span>
-                </a>
+                {% endmaybehidden %}
             </div>
         {% endfor %}
     </div>

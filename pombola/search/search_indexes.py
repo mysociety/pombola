@@ -21,6 +21,7 @@ class BaseIndex(indexes.SearchIndex):
 
 class PersonIndex(BaseIndex, indexes.Indexable):
     name_auto = indexes.EdgeNgramField(model_attr='name')
+    hidden = indexes.BooleanField(model_attr='hidden')
 
     def get_model(self):
         return core_models.Person

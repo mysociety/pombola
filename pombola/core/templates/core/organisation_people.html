@@ -1,6 +1,7 @@
 {% extends 'core/organisation_base.html' %}
 {% load thumbnail %}
 {% load humanize %}
+{% load hidden %}
 
 {% block title %}{{ object.name }} People{% endblock %}
 
@@ -9,7 +10,7 @@
   <h2>Related People</h2>
 
   {% if historic %}
-    <p>Showing historic positions (switch to <a href="?historic=">current positions</a>).</p>    
+    <p>Showing historic positions (switch to <a href="?historic=">current positions</a>).</p>
   {% else %}
     <p>Showing current positions (switch to <a href="?historic=1">past positions</a>).</p>
   {% endif %}
@@ -20,16 +21,16 @@
         {% for position in sorted_positions %}
             {% with person=position.person person_url=position.person.get_absolute_url %}
                 <li>
-                    <a href="{{ person_url }}">
+                    {% maybehidden person user %}
                         {% thumbnail person.primary_image "90x90" as im %}
                         <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
                         {% empty %}
                         <img src="{{STATIC_URL}}images/person-90x90.jpg" />
                         {% endthumbnail %}
-                    </a>
+                    {% endmaybehidden %}
 
                     <section>
-                        <h4><a href="{{ person_url }}">{{ person.name }}</a></h4>
+                        <h4>{% maybehidden person user %}{{ person.name }}{% endmaybehidden %}</h4>
                         <p>
                           {{ position.title.name }}
                         </p>
@@ -42,7 +43,9 @@
 
                         </p>
                         <p class="meta">{{ position.display_dates|safe }}</p>
-                        <div class="read-more-wrap"><a href="{{ person_url }}" class="read-more">read more</a></div>
+                        {% if not person.hidden %}
+                          <div class="read-more-wrap"><a href="{{ person_url }}" class="read-more">read more</a></div>
+                        {% endif %}
                     </section>
                 </li>
             {% endwith %}

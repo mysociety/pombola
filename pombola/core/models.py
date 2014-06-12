@@ -286,6 +286,10 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     # (or this one) in contacts.
     email = models.EmailField(blank=True)
 
+    hidden = models.BooleanField(
+        default=False,
+        help_text="hide this person's pages from normal users")
+
     contacts = generic.GenericRelation(Contact)
     images = generic.GenericRelation(Image)
     objects = PersonManager()

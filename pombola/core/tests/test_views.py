@@ -1,4 +1,6 @@
+from contextlib import contextmanager
 from django_webtest import WebTest
+from django.contrib.auth.models import User
 from django.test import TestCase
 
 from pombola.core import models
@@ -10,11 +12,15 @@ class HomeViewTest(TestCase):
         self.assertIn('featured_person', response.context)
         self.assertIn('featured_persons', response.context)
 
+
 class PositionViewTest(WebTest):
+
     def tearDown(self):
         self.position.delete()
         self.position2.delete()
+        self.position_hidden_person.delete()
         self.person.delete()
+        self.person_hidden.delete()
         self.organisation.delete()
         self.organisation_kind.delete()
         self.title.delete()
@@ -27,7 +33,13 @@ class PositionViewTest(WebTest):
             legal_name = 'Test Person',
             slug       = 'test-person',
         )
-        
+
+        self.person_hidden = models.Person.objects.create(
+            legal_name = 'Test Hidden Person',
+            slug       = 'test-hidden-person',
+            hidden     = True
+        )
+
         self.organisation_kind = models.OrganisationKind.objects.create(
             name = 'Foo',
             slug = 'foo',
@@ -39,7 +51,7 @@ class PositionViewTest(WebTest):
             slug = 'test-org',
             kind = self.organisation_kind,
         )
-        
+
         self.title = models.PositionTitle.objects.create(
             name = 'Test title',
             slug = 'test-title',
@@ -73,6 +85,14 @@ class PositionViewTest(WebTest):
             place = self.bobs_place,
         )
 
+        self.position_hidden_person = models.Position.objects.create(
+            person = self.person_hidden,
+            title  = self.title,
+            organisation = self.organisation,
+            place = self.bobs_place,
+        )
+
+
     def test_position_page(self):
         # List of people with position title
         self.app.get('/position/nonexistent-position-title/', status=404)
@@ -87,6 +107,25 @@ class PositionViewTest(WebTest):
         self.app.get('/position/test-title/foo/nonexistent-org/', status=404)
         resp = self.app.get('/position/test-title/foo/test-org/')
         resp.mustcontain('Test Person')
+
+    def get_links_to_people(self, soup):
+        def wanted_link(a):
+            if not a.has_attr('href'):
+                return False
+            url = a['href']
+            person_url = url.startswith('/person/')
+            disqush_fragment = url.endswith('#disqus_thread')
+            return person_url and not disqush_fragment
+        return set(a['href'] for a in soup.findAll('a') if wanted_link(a))
+
+    def test_position_page_hidden_person_not_linked(self):
+        resp = self.app.get('/position/test-title/')
+        resp.mustcontain('Test Person')
+        resp.mustcontain('Test Hidden Person')
+        self.assertEqual(
+            set([u'/person/test-person/']),
+            self.get_links_to_people(resp.html)
+        )
 
     def test_position_on_person_page(self):
         resp = self.app.get('/person/test-person/experience/')
@@ -107,3 +146,55 @@ class PositionViewTest(WebTest):
     def test_place_page(self):
         self.app.get('/place/is/constituency/')
         self.app.get('/place/bobs_place/')
+
+    def test_place_page_hidden_person_not_linked(self):
+        resp = self.app.get('/place/bobs_place/')
+        self.assertEqual(
+            set([u'/person/test-person/']),
+            self.get_links_to_people(resp.html)
+        )
+
+
+class TestPersonView(WebTest):
+
+    def setUp(self):
+        self.alf = models.Person.objects.create(
+            legal_name="Alfred Smith",
+            slug='alfred-smith',
+        )
+        self.superuser = User.objects.create(
+            username='admin',
+            is_superuser=True
+        )
+
+    def tearDown(self):
+        self.superuser.delete()
+        self.alf.delete()
+
+    def test_person_view_redirect(self):
+        resp = self.app.get('/person/alfred-smith')
+        self.assertRedirects(resp, '/person/alfred-smith/', status_code=301)
+
+    def test_person_smoke_test(self):
+        resp = self.app.get('/person/alfred-smith/')
+        self.assertTrue(resp)
+
+    @contextmanager
+    def with_hidden_person(self):
+        try:
+            self.alf.hidden = True
+            self.alf.save()
+            yield
+        finally:
+            self.alf.hidden = False
+            self.alf.save()
+
+    def test_person_hidden(self):
+        with self.with_hidden_person():
+            resp = self.app.get('/person/alfred-smith/', status=404)
+            self.assertEqual(resp.status_code, 404)
+
+    def test_person_hidden_superuser(self):
+        with self.with_hidden_person():
+            resp = self.app.get('/person/alfred-smith/', user=self.superuser)
+            self.assertTrue(resp)

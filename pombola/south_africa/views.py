@@ -524,6 +524,7 @@ class SASearchView(SearchView):
         # have content types that just happen to come earlier in the
         # alphabet than that of speeches.
         kwargs['searchqueryset'] = SearchQuerySet().models(*search_models). \
+            exclude(hidden=True). \
             order_by('django_ct', '-start_date'). \
             highlight()
         return super(SASearchView, self).__init__(*args, **kwargs)
@@ -533,7 +534,7 @@ class SASearchView(SearchView):
             return {}
         query = SearchQuerySet().highlight()
         return {
-            'person_results': query.models(models.Person).filter(content=AutoQuery(self.request.GET['q'])),
+            'person_results': query.models(models.Person).filter(content=AutoQuery(self.request.GET['q'])).exclude(hidden=True),
             'organisation_results': query.models(models.Organisation).filter(content=AutoQuery(self.request.GET['q'])),
         }
 

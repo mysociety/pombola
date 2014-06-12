@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load pagination_tags %}
 {% load thumbnail %}
+{% load hidden %}
 
 
 {% block title %}{{ object.name }} {{ party.slug.upper }} members{% endblock %}
@@ -47,7 +48,7 @@
 
                 <li class="list-of-things-item {{ person.css_class }}-list-item{% if not person.show_active %} inactive{% endif %}">
 
-                  <a href="{{ person.get_absolute_url }}">
+                  {% maybehidden person user %}
                       {% thumbnail person.primary_image "58x78" crop="center" as im %}
                       <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
                       {% empty %}
@@ -55,7 +56,7 @@
                       {% endthumbnail %}
 
                       <span class="name">{{ person.name }}</span>
-                  </a>
+                  {% endmaybehidden %}
 
                   {% for position in positions %}
                       {{ position.title }}

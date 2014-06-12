@@ -1,6 +1,7 @@
 {% extends 'core/object_base.html' %}
 {% load thumbnail %}
 {% load humanize %}
+{% load hidden %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -84,7 +85,7 @@
       <div class="constituency-party">
         <h3>Key figure</h3>
         <ul>
-          <li><a href="{{ politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }} <span>[{{ politician_pos.title.name }}]</span></a></li>
+          <li>{% maybehidden politician_pos.person user %}{{ politician_pos.person.name }} <span>[{{ politician_pos.title.name }}]</span>{% endmaybehidden %}</li>
         </ul>
       </div>
     {% endif %}
@@ -96,7 +97,7 @@
         <h3>Aspirant(s)</h3>
         <ul>
           {% for aspirant_pos in aspirant_positions %}
-            <li><a href="{{ aspirant_pos.person.get_absolute_url }}">{{ aspirant_pos.person.name }} <span>[{{ aspirant_pos.title.name }}]</span></a></li>
+            <li>{% maybehidden aspirant_pos.person user %}{{ aspirant_pos.person.name }} <span>[{{ aspirant_pos.title.name }}]</span>{% endmaybehidden %}</li>
           {% endfor %}
         </ul>
       </div>

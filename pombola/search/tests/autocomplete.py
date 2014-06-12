@@ -17,19 +17,20 @@ class AutocompleteTest(unittest.TestCase):
     def setUp(self):
 
         # create a load of test people in the database
-        names = [
-            u'Adam Ant',
-            u'Bobby Smith',
-            u'Fred Jones',
-            u'Joe Bloggs',
-            u'Joe Smith',
-            u'Josepth Smyth',
+        names_and_hidden = [
+            (u'Adam Ant', False),
+            (u'Bobby Smith', False),
+            (u'Fred Jones', False),
+            (u'Joe Bloggs', False),
+            (u'Joe Smith', False),
+            (u'Josepth Smyth', True),
         ]
-        for name in names:
+        for name, hidden in names_and_hidden:
             Person(
                 slug=slugify(name),
                 legal_name=name,
                 gender='m',
+                hidden=hidden,
             ).save()
 
         # Haystack indexes are not touched when fixtures are dumped. Run this
@@ -57,8 +58,8 @@ class AutocompleteTest(unittest.TestCase):
             'jones': [ 'Fred Jones' ],
 
             # partial names
-            'jo': [ 'Fred Jones', 'Joe Bloggs', 'Joe Smith', 'Josepth Smyth' ],
-            'sm': [ 'Bobby Smith', 'Joe Smith', 'Josepth Smyth', ],
+            'jo': [ 'Fred Jones', 'Joe Bloggs', 'Joe Smith' ],
+            'sm': [ 'Bobby Smith', 'Joe Smith' ],
 
             # no matches
             'foo': [],
