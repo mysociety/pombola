@@ -476,7 +476,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         return False
 
     class Meta:
-       ordering = ["slug"]
+       ordering = ["sort_name"]
 
 
 def update_sort_name(**kwargs):
