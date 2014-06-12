@@ -118,6 +118,7 @@ def autocomplete(request):
             sqs = sqs.filter_and(
                 name_auto__startswith = sqs.query.clean( bit )
             )
+        sqs = sqs.exclude(hidden=False)
 
         # If we have a kind then filter on that too
         model_kind = request.GET.get('model', None)
