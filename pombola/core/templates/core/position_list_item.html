@@ -1,17 +1,18 @@
 {% load thumbnail %}
+{% load hidden %}
 
 {% thumbnail object.person.primary_image "90x90" crop="center" as im %}
-  <a href="{{ object.person.get_absolute_url }}">
+  {% maybehidden object.person user %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-  </a>
+  {% endmaybehidden %}
 {% empty %}
-  <a href="{{ object.person.get_absolute_url }}">
+  {% maybehidden object.person user %}
     <img src="{{STATIC_URL}}images/person-90x90.jpg" />
-  </a>
+  {% endmaybehidden %}
 {% endthumbnail %}
 
 <section>
-  <h4><a href="{{ object.person.get_absolute_url }}">{{ object.person.name }}</a></h4>
+  <h4>{% maybehidden object.person user %}{{ object.person.name }}{% endmaybehidden %}</h4>
   {% if object.place %}
     <p>Member for {{ object.place.name }}</p>
   {% else %}
@@ -20,5 +21,7 @@
       <p>Nominated Member</p>
     {% endif %}
   {% endif %}
-  <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
+  {% if not object.person.hidden %}
+    <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
+  {% endif %}
 </section>

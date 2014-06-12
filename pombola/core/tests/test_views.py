@@ -18,7 +18,9 @@ class PositionViewTest(WebTest):
     def tearDown(self):
         self.position.delete()
         self.position2.delete()
+        self.position_hidden_person.delete()
         self.person.delete()
+        self.person_hidden.delete()
         self.organisation.delete()
         self.organisation_kind.delete()
         self.title.delete()
@@ -30,6 +32,12 @@ class PositionViewTest(WebTest):
         self.person = models.Person.objects.create(
             legal_name = 'Test Person',
             slug       = 'test-person',
+        )
+
+        self.person_hidden = models.Person.objects.create(
+            legal_name = 'Test Hidden Person',
+            slug       = 'test-hidden-person',
+            hidden     = True
         )
 
         self.organisation_kind = models.OrganisationKind.objects.create(
@@ -77,6 +85,14 @@ class PositionViewTest(WebTest):
             place = self.bobs_place,
         )
 
+        self.position_hidden_person = models.Position.objects.create(
+            person = self.person_hidden,
+            title  = self.title,
+            organisation = self.organisation,
+            place = self.bobs_place,
+        )
+
+
     def test_position_page(self):
         # List of people with position title
         self.app.get('/position/nonexistent-position-title/', status=404)
@@ -91,6 +107,25 @@ class PositionViewTest(WebTest):
         self.app.get('/position/test-title/foo/nonexistent-org/', status=404)
         resp = self.app.get('/position/test-title/foo/test-org/')
         resp.mustcontain('Test Person')
+
+    def get_links_to_people(self, soup):
+        def wanted_link(a):
+            if not a.has_attr('href'):
+                return False
+            url = a['href']
+            person_url = url.startswith('/person/')
+            disqush_fragment = url.endswith('#disqus_thread')
+            return person_url and not disqush_fragment
+        return set(a['href'] for a in soup.findAll('a') if wanted_link(a))
+
+    def test_position_page_hidden_person_not_linked(self):
+        resp = self.app.get('/position/test-title/')
+        resp.mustcontain('Test Person')
+        resp.mustcontain('Test Hidden Person')
+        self.assertEqual(
+            set([u'/person/test-person/']),
+            self.get_links_to_people(resp.html)
+        )
 
     def test_position_on_person_page(self):
         resp = self.app.get('/person/test-person/experience/')
@@ -111,6 +146,13 @@ class PositionViewTest(WebTest):
     def test_place_page(self):
         self.app.get('/place/is/constituency/')
         self.app.get('/place/bobs_place/')
+
+    def test_place_page_hidden_person_not_linked(self):
+        resp = self.app.get('/place/bobs_place/')
+        self.assertEqual(
+            set([u'/person/test-person/']),
+            self.get_links_to_people(resp.html)
+        )
 
 
 class TestPersonView(WebTest):

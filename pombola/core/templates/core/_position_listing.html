@@ -1,10 +1,11 @@
 {% load thumbnail %}
+{% load hidden %}
 
 <ul class="position-listing">
 {% for position in positions %}
     <li class="position">
 
-        <a href="{{ position.person.get_absolute_url }}">
+        {% maybehidden position.person user %}
             {% thumbnail position.person.primary_image "50x50" crop="center" as im %}
                 <img src="{{ im.url }}" alt="{{ position.person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
             {% empty %}
@@ -14,7 +15,7 @@
             <span class="name">{{ position.person.name }}</span>
 
             <span class="more">more&hellip;</span>
-        </a>
+        {% endmaybehidden %}
 
         <div>
             {{ object.name }}

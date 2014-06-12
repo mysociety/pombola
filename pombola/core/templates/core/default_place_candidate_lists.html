@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load hidden %}
 
 <div class="content_box">
 
@@ -43,7 +44,7 @@
            {% for person in people %}
 
                 <li>
-                  <a href="{{ person.get_absolute_url }}">
+                  {% maybehidden person user %}
 
                       {% thumbnail person.primary_image "210x210" crop="center" as im %}
                       <img src="{{ im.url }}" alt="{{ person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
@@ -51,7 +52,7 @@
                       <img src="{{STATIC_URL}}images/{{person.css_class}}-210x210.jpg" />
                       {% endthumbnail %}
                       <span class="name">{{ person.name }}</span>
-                  </a>
+                  {% endmaybehidden %}
                       <p><em>Parties:</em>
                            {% for party in person.parties %}
                              {% if forloop.first %}
