@@ -4957,6 +4957,10 @@ ul.pager li.next {
 }
 
 /* Place page */
+.rep-results-warning {
+  margin-bottom: 32px;
+}
+
 .list-of-constituency-offices ul {
   padding-left: 0;
   margin-bottom: 0;
