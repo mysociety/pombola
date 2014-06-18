@@ -21,6 +21,8 @@ class PositionViewTest(WebTest):
         self.position_hidden_person.delete()
         self.person.delete()
         self.person_hidden.delete()
+        self.place_slug_redirect.delete()
+        self.org_slug_redirect.delete()
         self.organisation.delete()
         self.organisation_kind.delete()
         self.title.delete()
@@ -52,6 +54,11 @@ class PositionViewTest(WebTest):
             kind = self.organisation_kind,
         )
 
+        self.org_slug_redirect = models.SlugRedirect.objects.create(
+            old_object_slug='test-Blah-org',
+            new_object=self.organisation,
+        )
+
         self.title = models.PositionTitle.objects.create(
             name = 'Test title',
             slug = 'test-title',
@@ -76,6 +83,11 @@ class PositionViewTest(WebTest):
             name="Bob's Place",
             slug='bobs_place',
             kind=self.place_kind_constituency,
+        )
+
+        self.place_slug_redirect = models.SlugRedirect.objects.create(
+            old_object_slug='old_bobs_place',
+            new_object=self.bobs_place,
         )
 
         self.position2 = models.Position.objects.create(
@@ -133,7 +145,7 @@ class PositionViewTest(WebTest):
 
     def test_organisation_page(self):
         self.app.get('/organisation/missing-org/', status=404)
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(8):
             resp = self.app.get('/organisation/test-org/')
         resp.mustcontain('Test Org')
         resp = self.app.get('/organisation/test-org/people/')
@@ -143,9 +155,17 @@ class PositionViewTest(WebTest):
         resp = self.app.get('/organisation/is/foo/?order=place')
         resp.mustcontain('Test Org')
 
+    def test_organisation_slug_redirects(self):
+        resp = self.app.get('/organisation/test-Blah-org/')
+        self.assertRedirects(resp, '/organisation/test-org/', status_code=302)
+
     def test_place_page(self):
         self.app.get('/place/is/constituency/')
         self.app.get('/place/bobs_place/')
+
+    def test_place_page_slug_redirects(self):
+        resp = self.app.get('/place/old_bobs_place/')
+        self.assertRedirects(resp, '/place/bobs_place/', status_code=302)
 
     def test_place_page_hidden_person_not_linked(self):
         resp = self.app.get('/place/bobs_place/')

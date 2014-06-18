@@ -104,15 +104,21 @@ class PersonSpeakerMappingsMixin(object):
         except ObjectDoesNotExist:
             return None
 
-class PlaceDetailView(DetailView):
+
+class BasePlaceDetailView(DetailView):
     model = models.Place
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
-        context = super(PlaceDetailView, self).get_context_data(**kwargs)
+        context = super(BasePlaceDetailView, self).get_context_data(**kwargs)
         context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
         context['related_people'] = self.object.related_people()
         return context
+
+
+class PlaceDetailView(SlugRedirectMixin, BasePlaceDetailView):
+    pass
+
 
 class PlaceDetailSub(DetailView):
     model = models.Place
@@ -269,7 +275,7 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
     )
 
 
-class OrganisationDetailView(DetailView):
+class OrganisationDetailView(SlugRedirectMixin, DetailView):
     model = models.Organisation
 
     def get_context_data(self, **kwargs):
