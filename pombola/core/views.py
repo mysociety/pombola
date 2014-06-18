@@ -1,6 +1,7 @@
 import time
 import calendar
 import datetime
+from functools import wraps
 import random
 
 from django.db.models import Count
@@ -60,19 +61,27 @@ class SkipHidden(object):
             return qs
         return qs.filter(hidden=False)
 
-class PersonDetail(SkipHidden, DetailView):
-    model = models.Person
+
+class SlugRedirectMixin(object):
+    """Adds SlugRedirect redirection for DetailView-derived classes"""
 
     def get(self, request, *args, **kwargs):
         # Check if this is old slug for redirection:
         slug = kwargs['slug']
         try:
-            sr = models.SlugRedirect.objects.get(content_type=ContentType.objects.get_for_model(models.Person),
-                                                 old_object_slug=slug)
+            sr = models.SlugRedirect.objects.get(
+                content_type=ContentType.objects.get_for_model(self.model),
+                old_object_slug=slug
+            )
             return redirect(sr.new_object)
         # Otherwise look up the slug as normal:
         except models.SlugRedirect.DoesNotExist:
-            return super(PersonDetail, self).get(request, *args, **kwargs)
+            return super(SlugRedirectMixin, self).get(request, *args, **kwargs)
+
+
+class PersonDetail(SlugRedirectMixin, SkipHidden, DetailView):
+    model = models.Person
+
 
 class PersonDetailSub(SkipHidden, DetailView):
     model = models.Person
