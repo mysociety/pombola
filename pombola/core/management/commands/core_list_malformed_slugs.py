@@ -3,7 +3,7 @@ from optparse import make_option
 
 from pombola.core.models import SlugRedirect
 
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.utils.text import slugify
@@ -31,7 +31,18 @@ class Command(BaseCommand):
                 if raw_slug != correct_slug:
                     bad_slug_count += 1
                     kwargs = dict(model=model, raw=raw_slug, correct=correct_slug, id=row.id)
-
+                    existing = model.objects.filter(slug=correct_slug)
+                    if existing:
+                        msg = u"Couldn't correct slug {bad_slug} to "
+                        msg += u"{good_slug}, because a {model} with slug "
+                        msg += u"{good_slug} already exists, with ID "
+                        msg += u"{object_id}"
+                        raise CommandError(msg.format(
+                            bad_slug=raw_slug,
+                            good_slug=correct_slug,
+                            model=model,
+                            object_id=existing[0].id
+                        ))
                     if options['correct']:
                         template = u"Corrected {model} (id {id}): '{raw}' is now '{correct}'"
                         row.slug = correct_slug
