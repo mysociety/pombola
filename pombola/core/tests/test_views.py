@@ -159,6 +159,14 @@ class PositionViewTest(WebTest):
         resp = self.app.get('/organisation/test-Blah-org/')
         self.assertRedirects(resp, '/organisation/test-org/', status_code=302)
 
+    def test_organisation_contact_details_slug_redirects(self):
+        resp = self.app.get('/organisation/test-Blah-org/contact_details/')
+        self.assertRedirects(resp, '/organisation/test-org/contact_details/', status_code=302)
+
+    def test_organisation_apperances_slug_redirects(self):
+        resp = self.app.get('/organisation/test-Blah-org/people/')
+        self.assertRedirects(resp, '/organisation/test-org/people/', status_code=302)
+
     def test_place_page(self):
         self.app.get('/place/is/constituency/')
         self.app.get('/place/bobs_place/')
@@ -166,6 +174,14 @@ class PositionViewTest(WebTest):
     def test_place_page_slug_redirects(self):
         resp = self.app.get('/place/old_bobs_place/')
         self.assertRedirects(resp, '/place/bobs_place/', status_code=302)
+
+    def test_place_page_people_slug_redirects(self):
+        resp = self.app.get('/place/old_bobs_place/people/')
+        self.assertRedirects(resp, '/place/bobs_place/people/', status_code=302)
+
+    def test_place_page_places_slug_redirects(self):
+        resp = self.app.get('/place/old_bobs_place/places/')
+        self.assertRedirects(resp, '/place/bobs_place/places/', status_code=302)
 
     def test_place_page_hidden_person_not_linked(self):
         resp = self.app.get('/place/bobs_place/')
@@ -207,6 +223,14 @@ class TestPersonView(WebTest):
     def test_person_slug_redirects(self):
         resp = self.app.get('/person/Alfred--Smith/')
         self.assertRedirects(resp, '/person/alfred-smith/', status_code=302)
+
+    def test_person_experience_slug_redirects(self):
+        resp = self.app.get('/person/Alfred--Smith/experience/')
+        self.assertRedirects(resp, '/person/alfred-smith/experience/', status_code=302)
+
+    def test_person_appearances_slug_redirects(self):
+        resp = self.app.get('/person/Alfred--Smith/appearances/')
+        self.assertRedirects(resp, '/person/alfred-smith/appearances/', status_code=302)
 
     @contextmanager
     def with_hidden_person(self):

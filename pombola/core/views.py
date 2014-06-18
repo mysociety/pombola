@@ -4,6 +4,7 @@ import datetime
 from functools import wraps
 import random
 
+from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.db.models import Q
 from django.http import HttpResponse
@@ -65,6 +66,14 @@ class SkipHidden(object):
 class SlugRedirectMixin(object):
     """Adds SlugRedirect redirection for DetailView-derived classes"""
 
+    def object_to_detail_url_pattern_name(self, o):
+        url_pattern_name = o.__class__.__name__.lower()
+        try:
+            url_pattern_name += '_' + self.sub_page
+        except AttributeError:
+            pass
+        return url_pattern_name
+
     def get(self, request, *args, **kwargs):
         # Check if this is old slug for redirection:
         slug = kwargs['slug']
@@ -73,7 +82,9 @@ class SlugRedirectMixin(object):
                 content_type=ContentType.objects.get_for_model(self.model),
                 old_object_slug=slug
             )
-            return redirect(sr.new_object)
+            pattern = self.object_to_detail_url_pattern_name(sr.new_object)
+            url = reverse(pattern, args=[sr.new_object.slug])
+            return redirect(url)
         # Otherwise look up the slug as normal:
         except models.SlugRedirect.DoesNotExist:
             return super(SlugRedirectMixin, self).get(request, *args, **kwargs)
@@ -83,7 +94,7 @@ class PersonDetail(SlugRedirectMixin, SkipHidden, DetailView):
     model = models.Person
 
 
-class PersonDetailSub(SkipHidden, DetailView):
+class PersonDetailSub(SlugRedirectMixin, SkipHidden, DetailView):
     model = models.Person
     sub_page = None
 
@@ -120,7 +131,7 @@ class PlaceDetailView(SlugRedirectMixin, BasePlaceDetailView):
     pass
 
 
-class PlaceDetailSub(DetailView):
+class PlaceDetailSub(SlugRedirectMixin, DetailView):
     model = models.Place
     child_place_grouper = 'parliamentary_session'
     sub_page = None
@@ -286,7 +297,7 @@ class OrganisationDetailView(SlugRedirectMixin, DetailView):
         return context
 
 
-class OrganisationDetailSub(DetailView):
+class OrganisationDetailSub(SlugRedirectMixin, DetailView):
     model = models.Organisation
     sub_page = None
 
