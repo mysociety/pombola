@@ -166,8 +166,13 @@ class TestPersonView(WebTest):
             username='admin',
             is_superuser=True
         )
+        self.slug_redirect = models.SlugRedirect.objects.create(
+            old_object_slug='Alfred--Smith',
+            new_object=self.alf,
+        )
 
     def tearDown(self):
+        self.slug_redirect.delete()
         self.superuser.delete()
         self.alf.delete()
 
@@ -178,6 +183,10 @@ class TestPersonView(WebTest):
     def test_person_smoke_test(self):
         resp = self.app.get('/person/alfred-smith/')
         self.assertTrue(resp)
+
+    def test_person_slug_redirects(self):
+        resp = self.app.get('/person/Alfred--Smith/')
+        self.assertRedirects(resp, '/person/alfred-smith/', status_code=302)
 
     @contextmanager
     def with_hidden_person(self):
