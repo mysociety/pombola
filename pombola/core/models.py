@@ -1,6 +1,7 @@
 from __future__ import division
 
 import datetime
+from functools import partial
 import re
 import itertools
 import random
@@ -30,6 +31,7 @@ from pombola.tasks.models import Task
 from pombola.images.models import HasImageMixin, Image
 
 from pombola.scorecards.models import ScorecardMixin
+from pombola.slug_helpers.models import validate_slug_not_redirecting
 
 from mapit import models as mapit_models
 
@@ -274,7 +276,12 @@ class PersonManager(ManagerBase):
 class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     title = models.CharField(max_length=100, blank=True)
     legal_name = models.CharField(max_length=300)
-    slug = models.SlugField(max_length=200, unique=True, help_text="auto-created from first name and last name")
+    slug = models.SlugField(
+        max_length=200,
+        unique=True,
+        help_text="auto-created from first name and last name",
+        validators=[partial(validate_slug_not_redirecting, 'core', 'Person')],
+    )
     gender = models.CharField(max_length=20, blank=True, help_text="this is typically, but not restricted to, 'male' or 'female'")
     date_of_birth = ApproximateDateField(blank=True, help_text=date_help_text)
     date_of_death = ApproximateDateField(blank=True, help_text=date_help_text)
@@ -573,7 +580,12 @@ class OrganisationManager(ManagerBase):
 
 class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
+    slug = models.SlugField(
+        max_length=200,
+        unique=True,
+        help_text="created from name",
+        validators=[partial(validate_slug_not_redirecting, 'core', 'Organisation')],
+    )
     summary = MarkupField(blank=True, default='')
     kind = models.ForeignKey('OrganisationKind')
     started = ApproximateDateField(blank=True, help_text=date_help_text)
@@ -645,7 +657,12 @@ class PlaceManager(ManagerBase):
 
 class Place(ModelBase, ScorecardMixin):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
+    slug = models.SlugField(
+        max_length=200,
+        unique=True,
+        help_text="created from name",
+        validators=[partial(validate_slug_not_redirecting, 'core', 'Place')],
+    )
     kind = models.ForeignKey('PlaceKind')
     summary = MarkupField(blank=True, default='')
     shape_url = models.URLField(blank=True)
