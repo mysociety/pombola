@@ -2,14 +2,16 @@ from django.contrib import admin
 
 from . import models
 
+from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
-class CategoryAdmin(admin.ModelAdmin):
+
+class CategoryAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['slug', 'name', 'sort_order']
     search_fields = ['name']
 
 
-class ReleaseAdmin(admin.ModelAdmin):
+class ReleaseAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['slug', 'name', 'date']
     search_fields = ['name']

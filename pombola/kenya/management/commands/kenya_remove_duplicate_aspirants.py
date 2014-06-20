@@ -24,7 +24,10 @@ from django_date_extensions.fields import ApproximateDate
 
 from django.conf import settings
 
-from pombola.core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind, SlugRedirect
+from pombola.core.models import (Place, PlaceKind, Person,
+    ParliamentarySession, Position, PositionTitle, Organisation,
+    OrganisationKind)
+from pombola.slug_helpers.models import SlugRedirect
 
 from iebc_api import *
 

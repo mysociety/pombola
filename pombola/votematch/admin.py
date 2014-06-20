@@ -1,7 +1,9 @@
 from django.contrib import admin
 import models 
 
-class QuizAdmin(admin.ModelAdmin):
+from pombola.slug_helpers.admin import StricterSlugFieldMixin
+
+class QuizAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
 
 class StatementAdmin(admin.ModelAdmin):

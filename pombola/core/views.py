@@ -1,8 +1,10 @@
 import time
 import calendar
 import datetime
+from functools import wraps
 import random
 
+from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.db.models import Q
 from django.http import HttpResponse
@@ -21,6 +23,8 @@ from speeches.views import NamespaceMixin, SpeechView, SectionView
 
 from pombola.core import models
 from pombola.info.models import InfoPage
+from pombola.slug_helpers.models import SlugRedirect
+from pombola.slug_helpers.views import SlugRedirectMixin
 
 
 class HomeView(TemplateView):
@@ -60,21 +64,29 @@ class SkipHidden(object):
             return qs
         return qs.filter(hidden=False)
 
-class PersonDetail(SkipHidden, DetailView):
+
+class SubSlugRedirectMixin(SlugRedirectMixin):
+    """This customization of SlugRedirectMixin understands sub pages"""
+
+    def object_to_detail_url_pattern_name(self, o):
+        url_pattern_name = o.__class__.__name__.lower()
+        try:
+            url_pattern_name += '_' + self.sub_page
+        except AttributeError:
+            pass
+        return url_pattern_name
+
+    def redirect_to(self, correct_object):
+        pattern = self.object_to_detail_url_pattern_name(correct_object)
+        url = reverse(pattern, args=[correct_object.slug])
+        return redirect(url)
+
+
+class PersonDetail(SlugRedirectMixin, SkipHidden, DetailView):
     model = models.Person
 
-    def get(self, request, *args, **kwargs):
-        # Check if this is old slug for redirection:
-        slug = kwargs['slug']
-        try:
-            sr = models.SlugRedirect.objects.get(content_type=ContentType.objects.get_for_model(models.Person),
-                                                 old_object_slug=slug)
-            return redirect(sr.new_object)
-        # Otherwise look up the slug as normal:
-        except models.SlugRedirect.DoesNotExist:
-            return super(PersonDetail, self).get(request, *args, **kwargs)
 
-class PersonDetailSub(SkipHidden, DetailView):
+class PersonDetailSub(SubSlugRedirectMixin, SkipHidden, DetailView):
     model = models.Person
     sub_page = None
 
@@ -95,17 +107,23 @@ class PersonSpeakerMappingsMixin(object):
         except ObjectDoesNotExist:
             return None
 
-class PlaceDetailView(DetailView):
+
+class BasePlaceDetailView(DetailView):
     model = models.Place
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
-        context = super(PlaceDetailView, self).get_context_data(**kwargs)
+        context = super(BasePlaceDetailView, self).get_context_data(**kwargs)
         context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
         context['related_people'] = self.object.related_people()
         return context
 
-class PlaceDetailSub(DetailView):
+
+class PlaceDetailView(SlugRedirectMixin, BasePlaceDetailView):
+    pass
+
+
+class PlaceDetailSub(SubSlugRedirectMixin, DetailView):
     model = models.Place
     child_place_grouper = 'parliamentary_session'
     sub_page = None
@@ -260,7 +278,7 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
     )
 
 
-class OrganisationDetailView(DetailView):
+class OrganisationDetailView(SlugRedirectMixin, DetailView):
     model = models.Organisation
 
     def get_context_data(self, **kwargs):
@@ -271,7 +289,7 @@ class OrganisationDetailView(DetailView):
         return context
 
 
-class OrganisationDetailSub(DetailView):
+class OrganisationDetailSub(SubSlugRedirectMixin, DetailView):
     model = models.Organisation
     sub_page = None
 

@@ -27,8 +27,8 @@ from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import NamespaceMixin, SpeechView, SectionView
 
 from pombola.core import models
-from pombola.core.views import (HomeView, PlaceDetailView, PlaceDetailSub,
-    OrganisationDetailView, PersonDetail, PlaceDetailView,
+from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
+    PlaceDetailSub, OrganisationDetailView, PersonDetail, PlaceDetailView,
     OrganisationDetailSub, PersonSpeakerMappingsMixin)
 from pombola.info.models import InfoPage, Category
 from pombola.info.views import InfoPageView
@@ -87,7 +87,7 @@ class SAGeocoderView(GeocoderView):
 class LocationSearchForm(SearchForm):
     q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))
 
-class LatLonDetailBaseView(PlaceDetailView):
+class LatLonDetailBaseView(BasePlaceDetailView):
 
     # Using 25km as the default, as that's what's used on MyReps.
     constituency_office_search_radius = 25

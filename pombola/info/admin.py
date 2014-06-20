@@ -4,6 +4,8 @@ import autocomplete_light
 
 import models
 
+from pombola.slug_helpers.admin import StricterSlugFieldMixin
+
 class LabelAdmin(admin.ModelAdmin):
     search_fields = [ 'name' ]
     list_display  = [ 'name', 'slug' ]
@@ -11,7 +13,7 @@ class LabelAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['name']}
 
 
-class InfoPageAdmin(admin.ModelAdmin):
+class InfoPageAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     search_fields = [ 'title', 'content' ]
     list_display  = [ 'slug', 'title', 'kind', 'publication_date' ]
     list_filter   = [ 'kind', 'categories', 'tags' ]

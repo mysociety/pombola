@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 
 from pombola.core import models
+from pombola.slug_helpers.models import SlugRedirect
 
 class HomeViewTest(TestCase):
 
@@ -21,6 +22,8 @@ class PositionViewTest(WebTest):
         self.position_hidden_person.delete()
         self.person.delete()
         self.person_hidden.delete()
+        self.place_slug_redirect.delete()
+        self.org_slug_redirect.delete()
         self.organisation.delete()
         self.organisation_kind.delete()
         self.title.delete()
@@ -52,6 +55,11 @@ class PositionViewTest(WebTest):
             kind = self.organisation_kind,
         )
 
+        self.org_slug_redirect = SlugRedirect.objects.create(
+            old_object_slug='test-Blah-org',
+            new_object=self.organisation,
+        )
+
         self.title = models.PositionTitle.objects.create(
             name = 'Test title',
             slug = 'test-title',
@@ -76,6 +84,11 @@ class PositionViewTest(WebTest):
             name="Bob's Place",
             slug='bobs_place',
             kind=self.place_kind_constituency,
+        )
+
+        self.place_slug_redirect = SlugRedirect.objects.create(
+            old_object_slug='old_bobs_place',
+            new_object=self.bobs_place,
         )
 
         self.position2 = models.Position.objects.create(
@@ -133,7 +146,7 @@ class PositionViewTest(WebTest):
 
     def test_organisation_page(self):
         self.app.get('/organisation/missing-org/', status=404)
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(8):
             resp = self.app.get('/organisation/test-org/')
         resp.mustcontain('Test Org')
         resp = self.app.get('/organisation/test-org/people/')
@@ -143,9 +156,33 @@ class PositionViewTest(WebTest):
         resp = self.app.get('/organisation/is/foo/?order=place')
         resp.mustcontain('Test Org')
 
+    def test_organisation_slug_redirects(self):
+        resp = self.app.get('/organisation/test-Blah-org/')
+        self.assertRedirects(resp, '/organisation/test-org/', status_code=302)
+
+    def test_organisation_contact_details_slug_redirects(self):
+        resp = self.app.get('/organisation/test-Blah-org/contact_details/')
+        self.assertRedirects(resp, '/organisation/test-org/contact_details/', status_code=302)
+
+    def test_organisation_apperances_slug_redirects(self):
+        resp = self.app.get('/organisation/test-Blah-org/people/')
+        self.assertRedirects(resp, '/organisation/test-org/people/', status_code=302)
+
     def test_place_page(self):
         self.app.get('/place/is/constituency/')
         self.app.get('/place/bobs_place/')
+
+    def test_place_page_slug_redirects(self):
+        resp = self.app.get('/place/old_bobs_place/')
+        self.assertRedirects(resp, '/place/bobs_place/', status_code=302)
+
+    def test_place_page_people_slug_redirects(self):
+        resp = self.app.get('/place/old_bobs_place/people/')
+        self.assertRedirects(resp, '/place/bobs_place/people/', status_code=302)
+
+    def test_place_page_places_slug_redirects(self):
+        resp = self.app.get('/place/old_bobs_place/places/')
+        self.assertRedirects(resp, '/place/bobs_place/places/', status_code=302)
 
     def test_place_page_hidden_person_not_linked(self):
         resp = self.app.get('/place/bobs_place/')
@@ -166,8 +203,13 @@ class TestPersonView(WebTest):
             username='admin',
             is_superuser=True
         )
+        self.slug_redirect = SlugRedirect.objects.create(
+            old_object_slug='Alfred--Smith',
+            new_object=self.alf,
+        )
 
     def tearDown(self):
+        self.slug_redirect.delete()
         self.superuser.delete()
         self.alf.delete()
 
@@ -178,6 +220,18 @@ class TestPersonView(WebTest):
     def test_person_smoke_test(self):
         resp = self.app.get('/person/alfred-smith/')
         self.assertTrue(resp)
+
+    def test_person_slug_redirects(self):
+        resp = self.app.get('/person/Alfred--Smith/')
+        self.assertRedirects(resp, '/person/alfred-smith/', status_code=302)
+
+    def test_person_experience_slug_redirects(self):
+        resp = self.app.get('/person/Alfred--Smith/experience/')
+        self.assertRedirects(resp, '/person/alfred-smith/experience/', status_code=302)
+
+    def test_person_appearances_slug_redirects(self):
+        resp = self.app.get('/person/Alfred--Smith/appearances/')
+        self.assertRedirects(resp, '/person/alfred-smith/appearances/', status_code=302)
 
     @contextmanager
     def with_hidden_person(self):

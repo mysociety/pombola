@@ -1,9 +1,11 @@
+from django.core.exceptions import ValidationError
 from django.utils import unittest
 from django.test.utils import override_settings
 from django_date_extensions.fields import ApproximateDate
 from django.contrib.contenttypes.models import ContentType
 
 from pombola.core import models
+from pombola.slug_helpers.models import SlugRedirect
 from pombola.tasks.models import Task
 
 class PositionTestCase(unittest.TestCase):
@@ -154,6 +156,87 @@ class PersonNamesTest( unittest.TestCase ):
 
     def tearDown(self):
         self.person.delete()
+
+
+class PersonRedirectUniquenessTest(unittest.TestCase):
+
+    def test_redirect_uniqueness_validation(self):
+        # Validation should stop someone changing a person slug to one
+        # that's redirecting via SlugRedirect.
+        redirectee = models.Person.objects.create(
+            legal_name='Johan Sebastian Bach',
+            slug='bach',
+        )
+        existing_redirect = SlugRedirect.objects.create(
+            new_object=redirectee,
+            old_object_slug='jsb',
+        )
+        other_person = models.Person(
+            legal_name='John Smith Bloggs',
+            slug='jsb'
+        )
+        with self.assertRaises(ValidationError):
+            other_person.clean_fields()
+
+
+class PlaceRedirectUniquenessTest(unittest.TestCase):
+
+    def test_redirect_uniqueness_validation(self):
+        # Validation should stop someone changing a place slug to one
+        # that's redirecting via SlugRedirect.
+        pkind = models.PlaceKind.objects.create(
+            name="Example Places",
+            slug="example-places",
+        )
+        place_redirected_to = models.Place.objects.create(
+            name='Echo Beach',
+            slug='echo-beach',
+            kind=pkind,
+        )
+        existing_redirect = SlugRedirect.objects.create(
+            new_object=place_redirected_to,
+            old_object_slug='eb',
+        )
+        other_place = models.Place(
+            name='Ethereal Boulevard',
+            slug='eb',
+            kind=pkind,
+        )
+        with self.assertRaises(ValidationError):
+            other_place.clean_fields()
+        existing_redirect.delete()
+        place_redirected_to.delete()
+        pkind.delete()
+
+
+class OrganisationRedirectUniquenessTest(unittest.TestCase):
+
+    def test_redirect_uniqueness_validation(self):
+        # Validation should stop someone changing an organisation slug
+        # to one that's redirecting via SlugRedirect.
+        okind = models.OrganisationKind.objects.create(
+            name="Example Organisations",
+            slug="example-organisations",
+        )
+        organisation_redirected_to = models.Organisation.objects.create(
+            name='The Ministry of Silly Walks',
+            slug='ms-walks',
+            kind=okind,
+        )
+        existing_redirect = SlugRedirect.objects.create(
+            new_object=organisation_redirected_to,
+            old_object_slug='msw',
+        )
+        other_organisation = models.Organisation(
+            name='Ministry of Sensible Walks',
+            slug='msw',
+            kind=okind,
+        )
+        with self.assertRaises(ValidationError):
+            other_organisation.clean_fields()
+        existing_redirect.delete()
+        organisation_redirected_to.delete()
+        okind.delete()
 
 
 class PersonPlaceTest(unittest.TestCase):
