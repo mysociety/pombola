@@ -1,5 +1,5 @@
 
-    {% with child_places=child_places|default:object.child_places.all.order_by_parliamentary_session %}
+    {% with child_places=child_places|default:object.child_places.all.order_by_parliamentary_session.order_by_kind %}
       {% if child_places.count %}
         {% regroup child_places by parliamentary_session as child_places_regrouped %}
 
