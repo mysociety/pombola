@@ -651,6 +651,10 @@ class PlaceQuerySet(models.query.GeoQuerySet):
         """This is a helper for use in the place_places.html template"""
         return self.order_by('-parliamentary_session__start_date', 'name')
 
+    def order_by_kind(self):
+        """This is a helper for use in the place_places.html template"""
+        return self.order_by('-kind__name', 'name')
+
 class PlaceManager(ManagerBase):
     def get_query_set(self):
         return PlaceQuerySet(self.model)
