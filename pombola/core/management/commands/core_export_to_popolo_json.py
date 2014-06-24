@@ -15,7 +15,7 @@ from popit_api import PopIt
 
 class Command(BaseCommand):
     args = 'FILENAME-PREFIX POMBOLA-URL'
-    help = 'Export all people, organisations and memberships to Popolo JSON'
+    help = 'Export all people, organisations and memberships to Popolo JSON and mongoexport format'
 
     def handle(self, *args, **options):
 
@@ -30,6 +30,16 @@ class Command(BaseCommand):
         for collection, data in get_popolo_data(primary_id_scheme,
                                                 pombola_url,
                                                 inline_memberships=False).items():
-            output_filename = filename_prefix + '-' + collection + ".json"
-            with open(output_filename, 'w') as f:
-                json.dump(data, f, indent=4, sort_keys=True)
+            for mongoexport_format in (True, False):
+                output_filename = filename_prefix + '-'
+                if mongoexport_format:
+                    output_filename += 'mongo-'
+                output_filename += collection + ".json"
+                with open(output_filename, 'w') as f:
+                    if mongoexport_format:
+                        for item in data:
+                            item['_id'] = item['id']
+                            json.dump(item, f, sort_keys=True)
+                            f.write("\n")
+                    else:
+                        json.dump(data, f, indent=4, sort_keys=True)
