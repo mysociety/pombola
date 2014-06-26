@@ -44,7 +44,7 @@ class Command(BaseCommand):
         'UDM':        'cord', # United Democratic Movement
         'CCM':        'cord', # Chama Cha Mwananchi
         'lpk':        'cord', # Labour Party Of Kenya
-        'FPK':        'cord', # Federal Party of Kenya
+        'federal-party-of-kenya': 'cord', # Federal Party of Kenya
 
         # Eagle
         'KNC': 'eagle', # Kenya National Congress
