@@ -125,11 +125,33 @@ class PositionCurrencyTest(unittest.TestCase):
         self.assertEqual([position], list(current_positions))
         position.delete()
 
+    def test_from_blank_past_still_current(self):
+        position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.organisation,
+            start_date='',
+            end_date=ApproximateDate(year=2200, month=1, day=1),
+        )
+        current_positions = models.Position.objects.all().currently_active()
+        self.assertEqual([position], list(current_positions))
+        position.delete()
+
     def test_from_past_not_current(self):
         position = models.Position.objects.create(
             person=self.person,
             organisation=self.organisation,
             start_date=ApproximateDate(past=True),
+            end_date=ApproximateDate(year=2010, month=1, day=1)
+        )
+        current_positions = models.Position.objects.all().currently_active()
+        self.assertEqual([], list(current_positions))
+        position.delete()
+
+    def test_from_blank_past_not_current(self):
+        position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.organisation,
+            start_date='',
             end_date=ApproximateDate(year=2010, month=1, day=1)
         )
         current_positions = models.Position.objects.all().currently_active()
@@ -147,12 +169,34 @@ class PositionCurrencyTest(unittest.TestCase):
         self.assertEqual([position], list(current_positions))
         position.delete()
 
+    def test_from_recent_to_blank_future(self):
+        position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.organisation,
+            start_date=ApproximateDate(year=2001, month=4, day=1),
+            end_date=''
+        )
+        current_positions = models.Position.objects.all().currently_active()
+        self.assertEqual([position], list(current_positions))
+        position.delete()
+
     def test_from_soon_to_future(self):
         position = models.Position.objects.create(
             person=self.person,
             organisation=self.organisation,
             start_date=ApproximateDate(year=2050, month=12, day=25),
             end_date=ApproximateDate(future=True)
+        )
+        current_positions = models.Position.objects.all().currently_active()
+        self.assertEqual([], list(current_positions))
+        position.delete()
+
+    def test_from_soon_to_blank_future(self):
+        position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.organisation,
+            start_date=ApproximateDate(year=2050, month=12, day=25),
+            end_date=''
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([], list(current_positions))
