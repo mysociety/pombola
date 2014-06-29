@@ -1011,7 +1011,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
         qs = (
             self
-                .filter(start_date__lte=now_approx)
+                .filter(sorting_start_date__lte=now_approx)
                 .filter(Q(sorting_end_date_high__gte=now_approx) | Q(end_date=''))
         )
 
