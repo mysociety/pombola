@@ -1,4 +1,5 @@
 from collections import defaultdict
+import datetime
 import warnings
 import re
 
@@ -346,24 +347,61 @@ class SAOrganisationDetailSub(OrganisationDetailSub):
 
         return context
 
+
 class SAOrganisationDetailSubParty(SAOrganisationDetailSub):
     sub_page = 'party'
 
     def add_sub_page_context(self, context):
+
         context['party'] = get_object_or_404(models.Organisation,slug=self.kwargs['sub_page_identifier'])
 
-        context['sorted_positions'] = context['all_positions'] = self.object.position_set.filter(person__position__organisation__slug=self.kwargs['sub_page_identifier'])
+        # We need to find any position where someone was a member
+        # of the organisation and that membership overlapped with
+        # their membership of the party, and mark whether that
+        # time includes the current date.
+        current_date = str(datetime.date.today())
+        params = [current_date, current_date, current_date, current_date,
+            self.object.id, context['party'].id]
+        # n.b. "hp" = "house position", "pp" = "party position"
+        all_positions = models.raw_query_with_prefetch(
+            models.Position,
+            '''
+SELECT
+    hp.*,
+    (hp.sorting_start_date <= %s AND
+     hp.sorting_end_date_high >= %s AND
+     pp.sorting_start_date <= %s AND
+     pp.sorting_end_date_high >= %s) AS current
+FROM core_position hp, core_position pp
+  WHERE hp.person_id = pp.person_id
+    AND hp.organisation_id = %s
+    AND pp.organisation_id = %s
+    AND hp.sorting_start_date <= pp.sorting_end_date_high
+    AND pp.sorting_start_date <= hp.sorting_end_date_high
+''',
+            params,
+            (('person', ('alternative_names', 'images')),
+             ('place', ()),
+             ('organisation', ()),
+             ('title', ())))
+
+        current_person_ids = set(p.person_id for p in all_positions if p.current)
 
         if self.request.GET.get('all'):
-            context['sorted_positions'] = context['sorted_positions']
+            context['sorted_positions'] = all_positions
+
         elif self.request.GET.get('historic'):
             context['historic'] = True
-            #FIXME - limited to members and delegates so that current members who are no longer officials are not displayed, but this
-            #means that if a former member was an official this is not shown
-            context['sorted_positions'] = context['sorted_positions'].filter(Q(title__slug='member') | Q(title__slug='delegate')).currently_inactive()
+            context['sorted_positions'] = [
+                p for p in all_positions if p.person_id not in current_person_ids
+            ]
         else:
+            # Otherwise we're looking current positions:
             context['historic'] = True
-            context['sorted_positions'] = context['sorted_positions'].currently_active()
+            context['sorted_positions'] = [
+                p for p in all_positions if p.current
+            ]
+
 
 class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
     sub_page = 'people'
