@@ -1367,3 +1367,64 @@ class OrganisationRelationship(ModelBase):
     organisation_a = models.ForeignKey(Organisation, related_name='org_rels_as_a')
     organisation_b = models.ForeignKey(Organisation, related_name='org_rels_as_b')
     kind = models.ForeignKey(OrganisationRelationshipKind)
+
+
+def raw_query_with_prefetch(query_model, query, params, fields_prefetches):
+    """A workaround not being able to do select_related on a RawQuerySet
+
+    Sometimes you may need to run a query that can't be expressed in
+    Django's ORM without using a RawQuerySet.  Unfortunately, you
+    can't use select_related on a RawQuerySet.  This wrapper for
+    Manager's raw method will do the raw query, then run a single
+    extra query (as prefetch_related does) for each of the ForeignKey
+    fields in fields_prefetches (those that we would want to do
+    select_related on) and fills in those fields on each of the
+    objects found from the raw query.  If the second element of each
+    tuple in fields_prefetches is a non-empty sequence, then those
+    fields on the related model will be prefetched as well.
+
+    Example:
+
+        all_positions = raw_query_with_prefetch(
+            models.Position,
+            'SELECT * FROM core_position WHERE ....',
+            (), # Any parameters for the raw query
+            (('person', ('alternative_names', 'images')),
+             ('organisation', ()))
+        )
+    """
+
+    # We need to iterate over every object repeatedly anyway, so
+    # evaluate the RawQuerySet at the start:
+    objects = list(query_model.objects.raw(query, params=params))
+    fields = [f for f, _ in fields_prefetches]
+    # Check that each field is really a ForeignKey, and get the mode it refers to:
+    name_to_field = {
+        f.name: f.rel.to for f in query_model._meta.fields
+        if f.get_internal_type() == 'ForeignKey'
+    }
+    for f in fields:
+        if f not in name_to_field:
+            raise Exception, "{0} was not a ForeignKey field".format(f)
+    # Find all IDs for each field:
+    field_ids = defaultdict(set)
+    for o in objects:
+        for field in fields:
+            related_id = getattr(o, field + '_id')
+            if related_id:
+                field_ids[field].add(related_id)
+    # For each field get all the objects with IDs that we just found,
+    # and set them on each of the original objects:
+    for field, prefetches in fields_prefetches:
+        field_id = field + '_id'
+        related_objects = name_to_field[field].objects.filter(
+            pk__in=field_ids[field]
+        )
+        if prefetches:
+            related_objects = related_objects.prefetch_related(*prefetches)
+        object_id_to_object = {o.id: o for o in related_objects}
+        for o in objects:
+            related_object = object_id_to_object.get(getattr(o, field_id))
+            if related_object:
+                setattr(o, field, related_object)
+    return objects
