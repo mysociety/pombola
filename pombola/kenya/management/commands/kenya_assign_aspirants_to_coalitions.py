@@ -23,45 +23,45 @@ class Command(BaseCommand):
     party_to_coalition_mapping = {
 
         # Amani
-        'KANU': 'amani', # Kenya African National Union        
-        'NFK':  'amani', # New Ford Kenya
-        'UDF':  'amani', # United Democratic Forum Party (UDFP)
+        'kanu': 'amani', # Kenya African National Union
+        'nfk':  'amani', # New Ford Kenya
+        'udf':  'amani', # United Democratic Forum Party (UDFP)
 
         # CORD
         'odm':        'cord', # Orange Democratic Movement
         'odm-k':      'cord', # Orange Democratic Movement Party Of Kenya
-        'WDM-K':      'cord', # Wiper democratic Movement Kenya
+        'wdm-k':      'cord', # Wiper democratic Movement Kenya
         'ford-kenya': 'cord', # Ford Kenya
         'ford':       'cord', # Forum For The Restoration Of Democracy
         'ford-k':     'cord', # Forum For The Restoration Of Democracy - Kenya
-        'KSC':        'cord', # Kenya Social Congress
-        'TIP':        'cord', # The Independent Party
+        'ksc':        'cord', # Kenya Social Congress
+        'tip':        'cord', # The Independent Party
         'kadu-asili': 'cord', # Kenya African Democratic Union - Asili
-        'P-D-P':      'cord', # People\'s Democratic Party (PDP)
+        'p-d-p':      'cord', # People\'s Democratic Party (PDP)
         'msm':        'cord', # Mkenya Solidarity Movement
-        'CCU':        'cord', # Chama Cha Uzalendo
-        'MDM':        'cord', # Muungano Development Movement Party of Kenya
-        'UDM':        'cord', # United Democratic Movement
-        'CCM':        'cord', # Chama Cha Mwananchi
+        'ccu':        'cord', # Chama Cha Uzalendo
+        'mdm':        'cord', # Muungano Development Movement Party of Kenya
+        'udm':        'cord', # United Democratic Movement
+        'cc-mwananchi': 'cord', # Chama Cha Mwananchi
         'lpk':        'cord', # Labour Party Of Kenya
         'federal-party-of-kenya': 'cord', # Federal Party of Kenya
 
         # Eagle
-        'KNC': 'eagle', # Kenya National Congress
-        'POA': 'eagle', # Party of Action
+        'knc': 'eagle', # Kenya National Congress
+        'poa': 'eagle', # Party of Action
 
         # jubilee
-        'TNA':  'jubilee', # The National Alliance (TNA)
-        'URP':  'jubilee', # United Republican Party (URP)
-        'NARC': 'jubilee', # National Rainbow Coalition
-        'RC':   'jubilee', # Republican Congress Party of Kenya
+        'tna':  'jubilee', # The National Alliance (TNA)
+        'urp':  'jubilee', # United Republican Party (URP)
+        'narc': 'jubilee', # National Rainbow Coalition
+        'rc':   'jubilee', # Republican Congress Party of Kenya
 
         # not in any coalition
         'adp': '', # Allied Democratic Party of Kenya
         'aford-k': '', # Alliance for the Restoration of Democracy in Kenya
         'agano': '', # AGANO Part
-        'AP': '', # Agano Party
-        'APK': '', # Alliance Party of Kenya (APK)
+        'ap': '', # Agano Party
+        'apk': '', # Alliance Party of Kenya (APK)
         'bdpk': '', # Bright Dawn Party of Kenya
         'ccm': '', # Chama Cha Majimbo na Mwangaza
         'ccumma': '', # Chama Cha Uma Party
@@ -69,7 +69,7 @@ class Command(BaseCommand):
         'cdpk': '', # Communal Democracy Party of Kenya
         'cdu': '', # Conquerors Democratic Union
         'commonwealth': '', # Commonwealth Development Party of Kenya
-        'CP': '', # Conservative Party
+        'cp': '', # Conservative Party
         'cplp': '', # Common Peoples Liberation Party
         'dap': '', # Democratic Assistance Party
         'dawa': '', # Daraja Ya Wakenya Political Party
@@ -77,7 +77,7 @@ class Command(BaseCommand):
         'ddp': '', # Democratic Development Party of Kenya
         'dlpk': '', # Democratic Labour Party of Kenya
         'dna': '', # Democratic National Alliance
-        'DP': '', # Democratic Party
+        'dp': '', # Democratic Party
         'drp': '', # Democratic Representative Party
         'drpk': '', # Democratic Reformation Party of Kenya
         'dwapk': '', # Development and Welfare Alliance Party of Kenya
@@ -85,14 +85,14 @@ class Command(BaseCommand):
         'ffr': '', # Forum for Republican Party
         'fodc': '', # Forum for Orange Democratic Change
         'ford-asili': '', # Ford Asili
-        'FORD-P': '', # Ford People
+        'ford-p': '', # Ford People
         'forum-restoration-and-democracy-people': '', # Forum for Restoration and Democracy- People
-        'FP': '', # Farmers Party
+        'fp': '', # Farmers Party
         'fpk': '', # Freedom Party of Kenya
         'gap': '', # Green African Party
         'gapk': '', # Generations Alliance Party of Kenya
         'gdp': '', # Growth and Development Party
-        'GNU': '', # Grand National Union
+        'gnu': '', # Grand National Union
         'grdp': '', # Grass Roots Development Party
         'independent': '', # Independent
         'jubile': '', # Jubilee Peoples Party of Kenya
@@ -119,30 +119,30 @@ class Command(BaseCommand):
         'makadara': '', # Madaraka Party
         'mass': '', # Mass Party of Kenya
         'mdapk': '', # Movement for Democratic Advancement Party of Kenya
-        'MDP': '', # Maendeleo Democratic Party (MDP)
+        'mdp': '', # Maendeleo Democratic Party (MDP)
         'me-katalili-revolutionary-movement-mekaremo': '', # Me Katalili revolutionary movement (MEKAREMO)
-        'MGPK': '', # Mazingira Greens Party of Kenya
+        'mgpk': '', # Mazingira Greens Party of Kenya
         'mip': '', # Moral Integrity Party
         'mwangaza-party-mp': '', # Mwangaza Party (MP)
         'nairobi-peoples-convention-party': '', # Nairobi People’s Convention Party
         'nak': '', # National Alliance Of Kenya
         'nap': '', # New Aspiration Party
-        'N-A-P': '', # National Alliance Party of Kenya (NAP)
-        'NAPK': '', # National Agenda Party of Kenya (NAPK)
-        'NAP-K': '', # National Agenda Party of Kenya
+        'n-a-p': '', # National Alliance Party of Kenya (NAP)
+        'napk': '', # National Agenda Party of Kenya (NAPK)
+        'nap-k': '', # National Agenda Party of Kenya
         'narc-k': '', # NARC - Kenya
         'national-development-party-ndp': '', # National Development Party (NDP)
-        'ND': '', # New Democrats
+        'nd': '', # New Democrats
         'nda': '', # National Democratic Alliance
         'ndc': '', # National Democratic Congress
-        'NDM': '', # National Democratic Movement
+        'ndm': '', # National Democratic Movement
         'ndp': '', # National Democratic Party
         'new-kanu': '', # New Kanu Alliance Party of Kenya
         'new-sisi': '', # New Sisi Kwa Sisi Kenya
         'nip': '', # National Integrity Party
         'nipk': '', # National Integration Party of Kenya
         'n-liberation': '', # National Liberation Party
-        'NLP': '', # National Labour Party
+        'nlp': '', # National Labour Party
         'none': '', # [None]
         'npdp': '', # New Peoples Democratic Party
         'npk': '', # National Party Of Kenya
@@ -160,30 +160,30 @@ class Command(BaseCommand):
         'parm': '', # Pan African Reparations Movement
         'pcdpk': '', # Peoples choice Democratic Party of Kenya
         'pdp': '', # Peoples Democratic Party Traditional
-        'PDU': '', # Party of Democratic Unity
+        'pdu': '', # Party of Democratic Unity
         'pduk': '', # Peoples Democratic Union of Kenya
         'pecd': '', # Party for Economic Change and Democracy
         'peda': '', # Patriotic Economic Democratic Alliance
         'pick': '', # Party of Independent Candidates of Kenya (PICK)
         'pndp': '', # Party for Negotiated Democracy and Philanthropy
-        'PNU': '', # Party of National Unity
-        'POH': '', # Party of Hope
+        'pnu': '', # Party of National Unity
+        'poh': '', # Party of Hope
         'ppfp': '', # Peoples Party for Progress
-        'PPK': '', # Peoples Party of Kenya
+        'ppk': '', # Peoples Party of Kenya
         'pppk': '', # Peoples Patriotic Party of Kenya
         'progressive': '', # Progressive Party of Kenya
         'psuk': '', # The Peoples Solidarity Union of Kenya
         'rainbow': '', # Rainbow Orange Alliance Party
         'rap': '', # Republican Alliance Party
         'rap-k': '', # Republican Party of Kenya
-        'RBK': '', # RESTORE AND BUILD KENYA (RBK)
+        'rbk': '', # RESTORE AND BUILD KENYA (RBK)
         'rdk': '', # Restoration Democrats of Kenya
         'rdp': '', # Rainbow Democratic Party
         'rlp': '', # Republican Liberty Party
         'rpk': '', # Reform Party of Kenya
         'saba-saba': '', # SabaSaba Asili Party
-        'SAFINA': '', # Safina Party Of Kenya
-        'SDP': '', # Social Democratic Party of Kenya
+        'safina': '', # Safina Party Of Kenya
+        'sdp': '', # Social Democratic Party of Kenya
         'sdp-k': '', # Social Democratic Party
         'sheda': '', # The Sheda Kenya Party
         'shirikisho': '', # Shirikisho Party Of Kenya
@@ -198,7 +198,7 @@ class Command(BaseCommand):
         'uod': '', # Union of Democrats
         'uodp': '', # Union of Democratic Party
         'upc': '', # United Peoples Congress
-        'UPK': '', # Unity Party of Kenya
+        'upk': '', # Unity Party of Kenya
         'upp': '', # United Peoples Party
         'uppk': '', # United Patriotic Party of Kenya
         'vipa': '', # VIPA Progressive Alliance
