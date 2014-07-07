@@ -1,0 +1,4 @@
+{% with o=position.organisation %}
+  {{ position.title }}
+    {% if o %} at <a href="{% url "organisation" slug=o.slug %}">{{ o }}</a>{% endif %}
+{% endwith %}
