@@ -126,6 +126,13 @@ def autocomplete(request):
             model = known_kinds.get(model_kind, None)
             if model:
                 sqs = sqs.models(model)
+        else:
+            sqs = sqs.models(
+                models.Person,
+                models.Organisation,
+                models.Place,
+                models.PositionTitle,
+            )
 
         # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
