@@ -92,6 +92,9 @@ MEDIA_ROOT = os.path.normpath( os.path.join( root_dir, "media_root/") )
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media_root/'
 
+# Use django-pipeline for handling static files
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -117,9 +120,10 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'pipeline.finders.FileSystemFinder',
+    'pipeline.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+    'pipeline.finders.CachedFileFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -365,6 +369,8 @@ INSTALLED_APPS = (
     'autocomplete_light',
     'markitup',
 
+    'pipeline',
+
     'mapit',
 
     'pombola.images',
@@ -407,3 +413,49 @@ def make_enabled_features(installed_apps, all_optional_apps):
         key = re.sub(r'^pombola\.', '', key)
         result[key] = ('pombola.' + key in installed_apps) or (key in installed_apps)
     return result
+
+# Set up the core CSS and JS files:
+
+PIPELINE_CSS = {
+    'core': {
+        'source_filenames': (
+            # .scss files from core:
+            'sass/admin.scss',
+            # .css files from core:
+            'css/jquery.countdown-v1.6.0.css',
+            'css/jquery-ui-1.8.17.custom.css',
+        ),
+        'output_filename': 'css/core.css',
+    }
+}
+
+PIPELINE_JS = {}
+# PIPELINE_JS = {
+#     'core': {
+#         'source_filenames': (
+#             'js/libs/modernizr-2.0.6.custom.js',
+#             'js/loader.js',
+#             'js/map.js',
+#             'js/mobile-functions.js',
+#             'js/feeds.js',
+#             'js/analytics.js',
+#             'js/load_appearances.js',
+#             'js/respond.v1.1.0.min.js',
+#             'js/desktop-functions.js',
+#             'js/twitter-embed.js',
+#             'js/both-functions.js',
+#             'js/libs/respond.1.0.1.min.js',
+#             'js/libs/jquery-ui-1.8.17.custom.min.js',
+#             'js/libs/jquery.countdown-v1.6.0.js',
+#             'js/libs/jquery.form-v2.94.js',
+#             'js/libs/jquery.ui.autocomplete.html.2010-10-25.js',
+#             # These should only be included if the application is:
+#             'js/map-drilldown.js', # from pombola/map
+#             'js/libs/responsive-carousel.js', # from pombola/spinner
+#         ),
+#         'output_filename': 'js/core.js',
+#     },
+# }
+
+# Only for debugging compression (the default is: not DEBUG which is fine when not playing with compression)
+# PIPELINE_ENABLED = True

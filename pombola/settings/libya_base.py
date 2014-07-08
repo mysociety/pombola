@@ -13,3 +13,13 @@ MAP_BOUNDING_BOX_SOUTH = 19.43
 MAP_BOUNDING_BOX_WEST = 9.22
 
 MAPIT_COUNTRY = 'LY'
+
+COUNTRY_CSS = {
+    'libya': {
+        'source_filenames': (
+            # .scss files for Libya
+            'sass/libya.scss',
+        ),
+        'output_filename': 'css/libya.css'
+    }
+}

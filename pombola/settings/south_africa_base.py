@@ -34,3 +34,25 @@ MAP_BOUNDING_BOX_SOUTH = -35.00
 MAP_BOUNDING_BOX_WEST = 16.30
 
 MAPIT_COUNTRY = 'ZA'
+
+COUNTRY_CSS = {
+    'south-africa': {
+        'source_filenames': (
+            'sass/south-africa.scss',
+        ),
+        'output_filename': 'css/south-africa.css'
+    }
+}
+
+COUNTRY_JS = {}
+# COUNTRY_JS = {
+#     'south-africa': {
+#         'source_filenames': (
+#             'js/tabs.js',
+#             'js/hide-reveal.js',
+#             'js/map-drilldown.js',
+#             'js/election_countdown.js',
+#         ),
+#         'output_filename': 'js/south-africa.js'
+#     }
+# }
