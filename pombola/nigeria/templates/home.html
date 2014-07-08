@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
+{% load compressed %}
 
 {% block title %}Home{% endblock %}
 
 {% block css_headers %}
   {{ block.super }}
+  <!-- sort out what to do about about carousel -->
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.css" />
 {% endblock %}
 

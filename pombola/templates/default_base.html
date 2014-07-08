@@ -1,4 +1,5 @@
 {% load breadcrumbs %}
+{% load compressed %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,7 +37,7 @@
 
         {% endcomment %}
 
-        <link href="{{ STATIC_URL }}css/jquery-ui-1.8.17.custom.css?{{ settings.STATIC_GENERATION_NUMBER }}" rel="stylesheet" type="text/css" />
+        {% compressed_css 'core' %}
 
         {% block css_headers %}
             <!-- Create a 'css_headers' block in your base.html and use it to include the correct CSS for you country -->

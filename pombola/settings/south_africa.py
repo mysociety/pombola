@@ -15,3 +15,6 @@ INSTALLED_APPS += OPTIONAL_APPS
 MIDDLEWARE_CLASSES += ( 'pombola.middleware.FakeInstanceMiddleware', )
 
 ENABLED_FEATURES = make_enabled_features(INSTALLED_APPS, ALL_OPTIONAL_APPS)
+
+PIPELINE_CSS.update(COUNTRY_CSS)
+PIPELINE_JS.update(COUNTRY_JS)
