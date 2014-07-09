@@ -312,8 +312,8 @@ class KenyaParser():
         )
 
         # regexps to capture the times
-        na_reg  = re.compile(r"The House (?P<action>met|rose) at (?P<time>\d+\.\d+ [ap].m.)")
-        sen_reg = re.compile(r"The Senate (?P<action>met|rose).* at (?P<time>\d+\.\d+ [ap].m.)")
+        na_reg  = re.compile(r"The House (?P<action>met|rose) (?:at )?(?P<time>\d+\.\d+ [ap].m.)")
+        sen_reg = re.compile(r"The Senate (?P<action>met|rose).* (?:at )?(?P<time>\d+\.\d+ [ap].m.)")
         reg     = None
         venue = None
 
