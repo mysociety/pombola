@@ -45,7 +45,10 @@ class Source(HansardModelBase):
     For example a PDF transcript.
     """
 
-    name           = models.CharField(max_length=200, unique=True)
+    class Meta:
+        unique_together = ('name', 'list_page')
+
+    name           = models.CharField(max_length=200)
     date           = models.DateField()
     url            = models.URLField(max_length=1000)
 
