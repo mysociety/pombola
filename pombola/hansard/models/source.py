@@ -49,6 +49,20 @@ class Source(HansardModelBase):
     date           = models.DateField()
     url            = models.URLField(max_length=1000)
 
+    # When checking whether a source is new, we need to be able to
+    # distinguish those with the same name which were found via
+    # different list pages. We don't want to use a foreign key to
+    # Venue for this, since in the future it's not guaranteed that
+    # there will be a one-to-one correspondence between list page and
+    # Venue.  Similarly, ther URLs for list pages have changed in the
+    # past, so we don't just want to store the list page URL.
+    list_page = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        help_text='A code describing the list page from which the source was found',
+    )
+
     last_processing_attempt = models.DateTimeField(blank=True, null=True)
     last_processing_success = models.DateTimeField(blank=True, null=True)
 
