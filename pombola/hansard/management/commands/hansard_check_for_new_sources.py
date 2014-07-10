@@ -35,6 +35,8 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
+        verbose = int(options.get('verbosity')) >= 2
+
         for list_page, url in (
             ('senate',
              'http://www.parliament.go.ke/plone/senate/business/hansard'),
@@ -42,12 +44,12 @@ class Command(NoArgsCommand):
              'http://www.parliament.go.ke/plone/national-assembly/business/hansard'),
         ):
             try:
-                self.process_url(list_page, url)
+                self.process_url(list_page, url, verbose)
             except NoSourcesFoundError:
                 warn("Could not find any Hansard sources on '%s'" % url)
 
 
-    def process_url(self, list_page, url):
+    def process_url(self, list_page, url, verbose):
         """
         For the given url find or create an entry for each source in the database.
 
@@ -86,10 +88,17 @@ class Command(NoArgsCommand):
             name = ' '.join(link.contents).strip()
             # print "name: " + name
 
-            if not Source.objects.filter(
+            if Source.objects.filter(
                 list_page=list_page,
                 name=name,
             ).exists():
+                if verbose:
+                    message = "{0}: Skipping page with name: {1}"
+                    print message.format(list_page, name)
+            else:
+                if verbose:
+                    message = "{0} Trying to add page with name {1} as a new source"
+                    print message.format(list_page, name)
 
                 cal = pdt.Calendar()
                 # Sometimes the space is missing between before the
