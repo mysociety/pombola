@@ -95,6 +95,8 @@ class KenyaParser():
             convertEntities=BeautifulStoneSoup.HTML_ENTITIES
         )
 
+        if not soup.body:
+            raise Exception, "No <body> was found - output probably isn't HTML"
         contents = soup.body.contents
 
         # counters to use in the loops below
