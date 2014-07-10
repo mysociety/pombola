@@ -11,10 +11,13 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
+        verbose = int(options.get('verbosity')) >= 2
+
         for source in Source.objects.all().requires_processing():
-            
-            if int(options.get('verbosity')) >= 2:
-                print "Looking at %s" % source
+
+            if verbose:
+                message = "{0}: Looking at {1}"
+                print message.format(source.list_page, source)
 
             source.last_processing_attempt = datetime.datetime.now()
             source.save()
