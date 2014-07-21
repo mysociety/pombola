@@ -208,17 +208,22 @@ class SAPlaceDetailView(PlaceDetailView):
         """
         context = super(SAPlaceDetailView, self).get_context_data(**kwargs)
 
-        context['national_assembly_people_count']  = self.object.all_related_politicians().filter(position__organisation__slug='national-assembly').count()
-        context['national_assembly_people']        = self.object.all_related_current_politicians().filter(position__organisation__slug='national-assembly')
-        context['former_national_assembly_people'] = self.object.all_related_former_politicians().filter(position__organisation__slug='national-assembly')
+        for context_string, position_filter in (
+                ('national_assembly_people', {'organisation__slug': 'national-assembly'}),
+                ('ncop_people', {'organisation__slug': 'ncop'}),
+                ('legislature_people', {'organisation__kind__slug': 'provincial-legislature'}),
+        ):
+            all_member_positions = self.object.all_related_positions(). \
+                filter(**position_filter).select_related('person')
+            current_positions = all_member_positions.currently_active()
+            current_people = models.Person.objects.filter(position__in=current_positions).distinct()
+            former_positions = all_member_positions.currently_inactive()
 
-        context['ncop_people_count']  = self.object.all_related_politicians().filter(position__organisation__slug='ncop').count()
-        context['ncop_people']        = self.object.all_related_current_politicians().filter(position__organisation__slug='ncop')
-        context['former_ncop_people'] = self.object.all_related_former_politicians().filter(position__organisation__slug='ncop')
-
-        context['legislature_people_count']  = self.object.all_related_politicians().filter(position__organisation__kind__slug='provincial-legislature').count()
-        context['legislature_people']        = self.object.all_related_current_politicians().filter(position__organisation__kind__slug='provincial-legislature')
-        context['former_legislature_people'] = self.object.all_related_former_politicians().filter(position__organisation__kind__slug='provincial-legislature')
+            context[context_string + '_count'] = current_people.count()
+            context[context_string] = current_people
+            context['former_' + context_string] = models.Person.objects.filter(
+                position__in=former_positions
+            ).distinct()
 
         context['other_people'] = (
             models.Person.objects
