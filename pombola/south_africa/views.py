@@ -214,7 +214,7 @@ class SAPlaceDetailView(PlaceDetailView):
                 ('legislature_people', {'organisation__kind__slug': 'provincial-legislature'}),
         ):
             all_member_positions = self.object.all_related_positions(). \
-                filter(**position_filter).select_related('person')
+                filter(title__slug='member', **position_filter).select_related('person')
             current_positions = all_member_positions.currently_active()
             current_people = models.Person.objects.filter(position__in=current_positions).distinct()
             former_positions = all_member_positions.currently_inactive()
