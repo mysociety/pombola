@@ -44,7 +44,7 @@ class CountyPerformancePageTests(WebTest):
         self.assertFalse(
             response.html.findAll('div', {'id': 'opportunity'}))
 
-    def test_threat_opportunity(self):
+    def test_opportunity_variant(self):
         response = self.app.get('/county-performance?variant=o')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
@@ -52,7 +52,7 @@ class CountyPerformancePageTests(WebTest):
         self.assertFalse(
             response.html.findAll('div', {'id': 'threat'}))
 
-    def test_threat_neither(self):
+    def test_neither_variant(self):
         response = self.app.get('/county-performance?variant=n')
         self.assertEqual(response.status_code, 200)
         self.assertFalse(
