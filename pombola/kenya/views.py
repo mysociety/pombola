@@ -132,7 +132,7 @@ class CountyPerformanceDataMixin(object):
                 del extra_data[column]
         extra_data_json = json.dumps(extra_data)
         event_kwargs['extra_data'] = extra_data_json
-        experiment = Experiment.objects.get(slug='mit-county')
+        experiment = Experiment.objects.get(slug='mit-county-larger')
         experiment.event_set.create(**event_kwargs)
 
 
