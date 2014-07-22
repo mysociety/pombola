@@ -43,6 +43,8 @@ class CountyPerformancePageTests(WebTest):
             1, len(response.html.findAll('div', {'id': 'threat'})))
         self.assertFalse(
             response.html.findAll('div', {'id': 'opportunity'}))
+        self.assertFalse(
+            response.html.findAll('div', {'id': 'social-context'}))
 
     def test_opportunity_variant(self):
         response = self.app.get('/county-performance?variant=o')
@@ -51,6 +53,8 @@ class CountyPerformancePageTests(WebTest):
             1, len(response.html.findAll('div', {'id': 'opportunity'})))
         self.assertFalse(
             response.html.findAll('div', {'id': 'threat'}))
+        self.assertFalse(
+            response.html.findAll('div', {'id': 'social-context'}))
 
     def test_neither_variant(self):
         response = self.app.get('/county-performance?variant=n')
@@ -59,6 +63,38 @@ class CountyPerformancePageTests(WebTest):
             response.html.findAll('div', {'id': 'opportunity'}))
         self.assertFalse(
             response.html.findAll('div', {'id': 'threat'}))
+        self.assertFalse(
+            response.html.findAll('div', {'id': 'social-context'}))
+
+    def test_threat_variant_with_social_context(self):
+        response = self.app.get('/county-performance?variant=ts')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            1, len(response.html.findAll('div', {'id': 'threat'})))
+        self.assertFalse(
+            response.html.findAll('div', {'id': 'opportunity'}))
+        self.assertEqual(
+            1, len(response.html.findAll('div', {'id': 'social-context'})))
+
+    def test_opportunity_variant_with_social_context(self):
+        response = self.app.get('/county-performance?variant=os')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            1, len(response.html.findAll('div', {'id': 'opportunity'})))
+        self.assertFalse(
+            response.html.findAll('div', {'id': 'threat'}))
+        self.assertEqual(
+            1, len(response.html.findAll('div', {'id': 'social-context'})))
+
+    def test_neither_variant_with_social_context(self):
+        response = self.app.get('/county-performance?variant=ns')
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(
+            response.html.findAll('div', {'id': 'opportunity'}))
+        self.assertFalse(
+            response.html.findAll('div', {'id': 'threat'}))
+        self.assertEqual(
+            1, len(response.html.findAll('div', {'id': 'social-context'})))
 
     def test_petition_submission(self):
         Event.objects.all().delete()

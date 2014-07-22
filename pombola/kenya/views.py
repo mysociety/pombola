@@ -72,7 +72,7 @@ def sanitize_data_parameters(request, parameters):
     result['variant'] = sanitize_parameter(
         key='variant',
         parameters=parameters,
-        allowed_values=('o', 't', 'n'),
+        allowed_values=('o', 't', 'n', 'os', 'ts', 'ns'),
         default_value='n')
     result['g'] = sanitize_parameter(
         key='g',
@@ -152,6 +152,7 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
         context['experiment_key'] = settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY
 
         data = sanitize_data_parameters(self.request, self.request.GET)
+        variant = data['variant']
 
         # If there's no user key in the session, this is the first
         # page view, so record any parameters indicating where the
@@ -171,18 +172,15 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
         # otherwise we'd get a spurious page view before a particular
         # variant is reloaded:
         if 'utm_expid' in self.request.GET:
-            self.request.session[self.qualify_key('variant')] = data['variant']
+            self.request.session[self.qualify_key('variant')] = variant
             # Now create the page view event:
             self.create_event({'category': 'page',
                                'action': 'view',
                                'label': 'county-performance'})
 
-        context['show_opportunity'], context['show_threat'] = {
-            'o': (True, False),
-            't': (False, True),
-            'n': (False, False),
-            None: (False, False),
-        }[data['variant']]
+        context['show_social_context'] = variant in ('ns', 'ts', 'os')
+        context['show_threat'] = (variant[0] == 't')
+        context['show_opportunity'] = (variant[0] == 'o')
 
         context['share_partials'] = [
             '_share_twitter.html',

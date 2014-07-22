@@ -3327,6 +3327,13 @@ h2 a.appearances-trigger.active {
   font-weight: bold;
   color: #36a74d;
 }
+.county-performance #social-context {
+  border-top: 1px solid #ebebeb;
+  padding: 40px 15px;
+}
+.county-performance #social-context p {
+  font-weight: bold;
+}
 .county-performance h2 {
   font-size: 1.5em;
   line-height: 1.4em;

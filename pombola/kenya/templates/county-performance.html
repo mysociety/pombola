@@ -137,6 +137,14 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
       </div>
       {% endif %}
 
+      {% if show_social_context %}
+      <div id="social-context">
+        <p>342 people joined us in just 3 days! Take action, as
+        more and more citizens hold their county governments
+        accountable.</p>
+      </div>
+      {% endif %}
+
   {% endif %}
 
     {% for partial in major_partials %}
