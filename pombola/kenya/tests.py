@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 
 from pombola.experiments.models import Event, Experiment
 from pombola.feedback.models import Feedback
+from .views import EXPERIMENT_DATA
 
 from django_webtest import WebTest
 
@@ -16,8 +17,12 @@ from nose.plugins.attrib import attr
 class CountyPerformancePageTests(WebTest):
 
     def setUp(self):
+        experiment_slug = 'mit-county-larger'
+        self.data = EXPERIMENT_DATA[experiment_slug]
+        self.url = '/' + self.data['base_view_name']
+        self.sid = self.data['qualtrics_sid']
         self.experiment = Experiment.objects.create(
-            slug='mit-county',
+            slug=experiment_slug,
             name='MIT County Performance experiment')
 
     def tearDown(self):
@@ -25,7 +30,7 @@ class CountyPerformancePageTests(WebTest):
         Feedback.objects.all().delete()
 
     def test_page_view(self):
-        response = self.app.get('/county-performance')
+        response = self.app.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.html.get('a', {'id': 'share-facebook'}))
         self.assertTrue(response.html.get('a', {'id': 'share-twitter'}))
@@ -37,7 +42,7 @@ class CountyPerformancePageTests(WebTest):
             response.html.findAll('div', {'id': 'threat'}))
 
     def test_threat_variant(self):
-        response = self.app.get('/county-performance?variant=t')
+        response = self.app.get(self.url + '?variant=t')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'threat'})))
@@ -47,7 +52,7 @@ class CountyPerformancePageTests(WebTest):
             response.html.findAll('div', {'id': 'social-context'}))
 
     def test_opportunity_variant(self):
-        response = self.app.get('/county-performance?variant=o')
+        response = self.app.get(self.url + '?variant=o')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'opportunity'})))
@@ -57,7 +62,7 @@ class CountyPerformancePageTests(WebTest):
             response.html.findAll('div', {'id': 'social-context'}))
 
     def test_neither_variant(self):
-        response = self.app.get('/county-performance?variant=n')
+        response = self.app.get(self.url + '?variant=n')
         self.assertEqual(response.status_code, 200)
         self.assertFalse(
             response.html.findAll('div', {'id': 'opportunity'}))
@@ -67,7 +72,7 @@ class CountyPerformancePageTests(WebTest):
             response.html.findAll('div', {'id': 'social-context'}))
 
     def test_threat_variant_with_social_context(self):
-        response = self.app.get('/county-performance?variant=ts')
+        response = self.app.get(self.url + '?variant=ts')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'threat'})))
@@ -77,7 +82,7 @@ class CountyPerformancePageTests(WebTest):
             1, len(response.html.findAll('div', {'id': 'social-context'})))
 
     def test_opportunity_variant_with_social_context(self):
-        response = self.app.get('/county-performance?variant=os')
+        response = self.app.get(self.url + '?variant=os')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'opportunity'})))
@@ -87,7 +92,7 @@ class CountyPerformancePageTests(WebTest):
             1, len(response.html.findAll('div', {'id': 'social-context'})))
 
     def test_neither_variant_with_social_context(self):
-        response = self.app.get('/county-performance?variant=ns')
+        response = self.app.get(self.url + '?variant=ns')
         self.assertEqual(response.status_code, 200)
         self.assertFalse(
             response.html.findAll('div', {'id': 'opportunity'}))
@@ -98,12 +103,12 @@ class CountyPerformancePageTests(WebTest):
 
     def test_petition_submission(self):
         Event.objects.all().delete()
-        response = self.app.get('/county-performance?variant=o&g=f&agroup=over&utm_expid=1234')
+        response = self.app.get(self.url + '?variant=o&g=f&agroup=over&utm_expid=1234')
         event = Event.objects.get(
             variant='o',
             category='page',
             action='view',
-            label='county-performance')
+            label=self.data['pageview_label'])
         user_key = re.search(r'^\d+$', event.user_key).group()
         extra_data = json.loads(event.extra_data)
         self.assertEqual('f', extra_data['g'])
@@ -130,12 +135,12 @@ class CountyPerformancePageTests(WebTest):
     def test_senate_submission(self):
         Event.objects.all().delete()
         test_comment = "Some comment to submit"
-        response = self.app.get('/county-performance?variant=t&g=m&agroup=over&utm_expid=1234')
+        response = self.app.get(self.url + '?variant=t&g=m&agroup=over&utm_expid=1234')
         event = Event.objects.get(
             variant='t',
             category='page',
             action='view',
-            label='county-performance')
+            label=self.data['pageview_label'])
         user_key = re.search(r'^\d+$', event.user_key).group()
         extra_data = json.loads(event.extra_data)
         self.assertEqual('m', extra_data['g'])
@@ -159,12 +164,12 @@ class CountyPerformancePageTests(WebTest):
 
     def test_survey_link(self):
         Event.objects.all().delete()
-        response = self.app.get('/county-performance?variant=n&g=f&agroup=under&utm_expid=1234')
+        response = self.app.get(self.url + '?variant=n&g=f&agroup=under&utm_expid=1234')
         event = Event.objects.get(
             variant='n',
             category='page',
             action='view',
-            label='county-performance')
+            label=self.data['pageview_label'])
         user_key = re.search(r'^\d+$', event.user_key).group()
         extra_data = json.loads(event.extra_data)
         self.assertEqual('f', extra_data['g'])
@@ -172,7 +177,7 @@ class CountyPerformancePageTests(WebTest):
         survey_url = response.html.find('a', {'id': 'take-survey'})['href']
         parsed_url = urlparse.urlparse(survey_url)
         self.assertEqual(parsed_url.path,
-                         reverse('county-performance-survey'))
+                         reverse(self.data['base_view_name'] + '-survey'))
         # Follow that link, but don't follow the redirect:
         response = self.app.get(survey_url)
         self.assertEqual(response.status_code, 302)
@@ -181,18 +186,18 @@ class CountyPerformancePageTests(WebTest):
         self.assertEqual(parsed_redirect_url.netloc, 'survey.az1.qualtrics.com')
         self.assertEqual(parsed_redirect_url.path, '/SE/')
         parsed_redirect_qs = urlparse.parse_qs(parsed_redirect_url.query)
-        self.assertEqual(parsed_redirect_qs['SID'], ['SV_5hhE4mOfYG1eaOh'])
+        self.assertEqual(parsed_redirect_qs['SID'], [self.sid])
         self.assertEqual(parsed_redirect_qs['user_key'], [user_key])
         self.assertEqual(parsed_redirect_qs['variant'], ['n'])
 
     def test_share_link(self):
         Event.objects.all().delete()
-        response = self.app.get('/county-performance?variant=n&g=f&agroup=over&utm_expid=56789')
+        response = self.app.get(self.url + '?variant=n&g=f&agroup=over&utm_expid=56789')
         event = Event.objects.get(
             variant='n',
             category='page',
             action='view',
-            label='county-performance')
+            label=self.data['pageview_label'])
         user_key = re.search(r'^\d+$', event.user_key).group()
         extra_data = json.loads(event.extra_data)
         self.assertEqual('f', extra_data['g'])
@@ -201,7 +206,7 @@ class CountyPerformancePageTests(WebTest):
         share_url = response.html.find('a', {'id': 'share-facebook'})['href']
         parsed_url = urlparse.urlparse(share_url)
         self.assertEqual(parsed_url.path,
-                         reverse('county-performance-share'))
+                         reverse(self.data['base_view_name'] + '-share'))
         self.assertEqual(parsed_url.query,
                          'n=facebook')
         # Now follow that link to find the redirect:
@@ -215,5 +220,5 @@ class CountyPerformancePageTests(WebTest):
 
         facebook_url = urllib.unquote(parsed_redirect_qs['u'][0])
         parsed_facebook_url = urlparse.urlparse(facebook_url)
-        self.assertEqual(parsed_facebook_url.path, '/county-performance')
+        self.assertEqual(parsed_facebook_url.path, self.url)
         self.assertTrue(re.search(r'^via=[a-f0-9]+$', parsed_facebook_url.query))

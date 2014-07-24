@@ -155,7 +155,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
       <div id="survey">
         <p>Take our 5 minute survey and enter to win $100 in airtime!</p>
-        <a href="{% url 'county-performance-survey' %}" id="take-survey">Take Survey</a>
+        <a href="{{ survey_url }}" id="take-survey">Take Survey</a>
       </div>
 
   {% endif %}
