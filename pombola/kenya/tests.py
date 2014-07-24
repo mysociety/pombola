@@ -17,7 +17,7 @@ class CountyPerformancePageTests(WebTest):
 
     def setUp(self):
         self.experiment = Experiment.objects.create(
-            slug='mit-county',
+            slug='mit-county-larger',
             name='MIT County Performance experiment')
 
     def tearDown(self):
