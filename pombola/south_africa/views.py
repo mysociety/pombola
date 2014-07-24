@@ -588,13 +588,8 @@ class SASpeakerRedirectView(RedirectView):
             slug = kwargs['slug']
             speaker = Speaker.objects.get(slug=slug)
             popit_id = speaker.person.popit_id
-            [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
-            i = models.Identifier.objects.get(
-                content_type=models.ContentType.objects.get_for_model(models.Person),
-                scheme=scheme,
-                identifier=identifier,
-            )
-            person = models.Person.objects.get(id=i.object_id)
+            scheme, primary_key = re.match('(.*?)/core_person/(\d+)$', popit_id).groups()
+            person = models.Person.objects.get(id=primary_key)
             return reverse('person', args=(person.slug,))
         except Exception as e:
             raise Http404
