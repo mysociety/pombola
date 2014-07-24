@@ -24,7 +24,7 @@ from popit.models import Person as PopitPerson, ApiInstance
 from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
-from pombola.south_africa.views import PersonSpeakerMappingsMixin
+from pombola.core.views import PersonSpeakerMappingsMixin
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 from pombola.search.tests.views import fake_geocoder
