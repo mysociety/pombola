@@ -446,7 +446,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         pombola_person = self.object
         sayit_speaker = self.pombola_person_to_sayit_speaker(
             pombola_person,
-            'org.mysociety.za'
+            'za.org.pa.www'
         )
 
         if not sayit_speaker:
@@ -773,7 +773,7 @@ class SAPersonAppearanceView(PersonSpeakerMappingsMixin, TemplateView):
         # SayIt speaker is different to core.Person, Load the speaker
         speaker = self.pombola_person_to_sayit_speaker(
             person,
-            'org.mysociety.za'
+            'za.org.pa.www'
         )
 
         # Load the speeches. Pagination is done in the template
