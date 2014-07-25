@@ -711,7 +711,10 @@ class Place(ModelBase, ScorecardMixin):
     def related_people(self, positions_filter=significant_positions_filter):
         """Find significant people associated with this place"""
 
-        positions = Position.objects.filter(place=self).currently_active()
+        positions = Position.objects.filter(
+            place=self,
+            person__hidden=False,
+        ).currently_active()
         positions = positions_filter(positions)
 
         # Group all the positions by person:
