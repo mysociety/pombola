@@ -1003,3 +1003,275 @@ class FixPositionTitlesCommandTests(TestCase):
                 'south_africa_fix_position_titles',
                 stderr=StringIO(),
                 stdout=StringIO())
+
+@attr(country='south_africa')
+class SAPlaceDetailViewTest(WebTest):
+
+    def setUp(self):
+
+        # Create a test place
+
+        placekind = models.PlaceKind.objects.create(
+            name='Test Place Kind',
+            slug='test-place-kind',
+        )
+
+        self.place = models.Place.objects.create(
+            name='Test Place',
+            slug='test-place',
+            kind=placekind,
+        )
+
+        # Create test organisation kinds
+
+        orgkind = models.OrganisationKind.objects.create(
+            name='Test OrganisationKind',
+            slug='test-orgkind',
+        )
+
+        orgkind_legislature = models.OrganisationKind.objects.create(
+            name='Test OrganisationKind Legislature',
+            slug='provincial-legislature',
+        )
+
+        # Create test organisations
+
+        self.org_assembly = models.Organisation.objects.create(
+            name='Test Organisation Assembly',
+            slug='national-assembly',
+            kind=orgkind,
+        )
+
+        self.org_ncop = models.Organisation.objects.create(
+            name='Test Organisation NCOP',
+            slug='ncop',
+            kind=orgkind,
+        )
+
+        self.org_legislature = models.Organisation.objects.create(
+            name='Test Organisation Legislature',
+            slug='test-org-legislature',
+            kind=orgkind_legislature,
+        )
+
+        self.org_other = models.Organisation.objects.create(
+            name='Test Organisation Other',
+            slug='test-org-other',
+            kind=orgkind,
+        )
+
+        # Create position titles
+
+        self.positiontitle_member = models.PositionTitle.objects.create(
+            name='Member',
+            slug='member',
+        )
+
+        self.positiontitle_other = models.PositionTitle.objects.create(
+            name='Other',
+            slug='other',
+        )
+
+    def test_related_positions(self):
+
+        # Related by Assembly, should be counted
+
+        person_related_assembly = models.Person.objects.create(
+            name='Test Person Related Assembly',
+            slug='test-person-related-assembly',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_assembly,
+            place=self.place,
+            title=self.positiontitle_member,
+            person=person_related_assembly,
+            category='political',
+            end_date='future',
+        )
+
+        # Related by NCOP, should be counted
+
+        person_related_ncop = models.Person.objects.create(
+            name='Test Person Related NCOP',
+            slug='test-person-related-ncop',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_ncop,
+            place=self.place,
+            title=self.positiontitle_member,
+            person=person_related_ncop,
+            category='political',
+            end_date='future',
+        )
+
+        # Related by Legislature, should be counted
+
+        person_related_legislature = models.Person.objects.create(
+            name='Test Person Related Legislature',
+            slug='test-person-related-legislature',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_legislature,
+            place=self.place,
+            title=self.positiontitle_member,
+            person=person_related_legislature,
+            category='political',
+            end_date='future',
+        )
+
+        resp = self.app.get('/place/test-place/')
+
+        self.assertEqual(1, resp.context['national_assembly_people_count'])
+        self.assertEqual(1, resp.context['ncop_people_count'])
+        self.assertEqual(1, resp.context['legislature_people_count'])
+
+        self.assertEqual(3, len(resp.context['related_people']))
+        self.assertContains(resp, "There are 3 people related to Test Place.")
+
+    def test_multiple_positions(self):
+
+        # Related by Assembly and NCOP, should be counted once
+
+        person_related_assembly_ncop = models.Person.objects.create(
+            name='Test Person Related Assembly and NCOP',
+            slug='test-person-related-assembly-ncop',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_assembly,
+            place=self.place,
+            title=self.positiontitle_member,
+            person=person_related_assembly_ncop,
+            category='political',
+            end_date=ApproximateDate(future=True),
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_ncop,
+            place=self.place,
+            title=self.positiontitle_member,
+            person=person_related_assembly_ncop,
+            category='political',
+            end_date=ApproximateDate(future=True),
+        )
+
+        resp = self.app.get('/place/test-place/')
+
+        self.assertEqual(1, resp.context['national_assembly_people_count'])
+        self.assertEqual(1, resp.context['ncop_people_count'])
+        self.assertEqual(0, resp.context['legislature_people_count'])
+
+        self.assertEqual(1, len(resp.context['related_people']))
+        self.assertContains(resp, "There is 1 person related to Test Place.")
+
+    def test_former_positions(self):
+
+        # Related by Assembly, but former member, should not be counted
+
+        person_related_assembly_former = models.Person.objects.create(
+            name='Test Person Related Former Assembly',
+            slug='test-person-related-assembly-former',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_assembly,
+            place=self.place,
+            title=self.positiontitle_member,
+            person=person_related_assembly_former,
+            category='political',
+            end_date=ApproximateDate(2000, 1, 1),
+        )
+
+        resp = self.app.get('/place/test-place/')
+
+        self.assertEqual(0, resp.context['national_assembly_people_count'])
+        self.assertEqual(0, resp.context['ncop_people_count'])
+        self.assertEqual(0, resp.context['legislature_people_count'])
+
+        self.assertEqual(0, len(resp.context['related_people']))
+
+    def test_unrelated_positions(self):
+
+        # Unrelated, should never be counted.
+
+        person_unrelated = models.Person.objects.create(
+            name='Test Person Unrelated',
+            slug='test-person-unrelated',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_assembly,
+            title=self.positiontitle_member,
+            person=person_unrelated,
+            category='political',
+            end_date=ApproximateDate(future=True),
+        )
+
+        resp = self.app.get('/place/test-place/')
+
+        self.assertEqual(0, resp.context['national_assembly_people_count'])
+        self.assertEqual(0, resp.context['ncop_people_count'])
+        self.assertEqual(0, resp.context['legislature_people_count'])
+
+        self.assertEqual(0, len(resp.context['related_people']))
+
+    def test_other_title_positions(self):
+
+        # Related by Other, should not be counted
+
+        person_related_other = models.Person.objects.create(
+            name='Test Person Related Other',
+            slug='test-person-related-other',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_other,
+            place=self.place,
+            title=self.positiontitle_member,
+            person=person_related_other,
+            category='political',
+            end_date=ApproximateDate(future=True),
+        )
+
+        resp = self.app.get('/place/test-place/')
+
+        self.assertEqual(0, resp.context['national_assembly_people_count'])
+        self.assertEqual(0, resp.context['ncop_people_count'])
+        self.assertEqual(0, resp.context['legislature_people_count'])
+
+        # It is included in the related_people count, however, since
+        # that doesn't care about which organisation the people are
+        # related by.
+        self.assertEqual(1, len(resp.context['related_people']))
+
+    def test_not_member_positions(self):
+
+        # Related by Assembly, but not a Member, should not be counted
+
+        person_related_assembly_not_member = models.Person.objects.create(
+            name='Test Person Related Assembly (Not Member)',
+            slug='test-person-related-assembly-not-member',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_assembly,
+            place=self.place,
+            title=self.positiontitle_other,
+            person=person_related_assembly_not_member,
+            category='political',
+            end_date=ApproximateDate(future=True),
+        )
+
+        resp = self.app.get('/place/test-place/')
+
+        self.assertEqual(0, resp.context['national_assembly_people_count'])
+        self.assertEqual(0, resp.context['ncop_people_count'])
+        self.assertEqual(0, resp.context['legislature_people_count'])
+
+        # It is included in the related_people count, however, since
+        # that doesn't care about which organisation the people are
+        # related by.
+        self.assertEqual(1, len(resp.context['related_people']))

@@ -33,13 +33,7 @@
             </p>
 
             <p>
-            There
-            {{ people_related|length|pluralize:"is,are"}}
-
-                {{ people_related|length }}
-                {{ people_related|length|pluralize:"person,people"}}
-
-            related to {{ object.name }}.
+            There {{ people_related|length|pluralize:"is,are"}} {{ people_related|length }} {{ people_related|length|pluralize:"person,people"}} related to {{ object.name }}.
             </p>
           </div>
         {% endif %}
