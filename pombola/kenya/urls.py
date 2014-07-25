@@ -4,7 +4,7 @@ from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
 
 from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
     CountyPerformancePetitionSubmission, CountyPerformanceShare,
-    CountyPerformanceSurvey)
+    CountyPerformanceSurvey, EXPERIMENT_DATA, ThanksTemplateView)
 
 urlpatterns = patterns('',
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
@@ -15,27 +15,40 @@ urlpatterns = patterns('',
     url(r'^person/(?P<slug>[-\w]+)/appearances/$',
         KEPersonDetailAppearances.as_view(sub_page='appearances'),
         name='person'),
-    url(r'^county-performance$', CountyPerformanceView.as_view(), name='county-performance'),
 )
 
-for name, view in (
+# Create the two County Performance pages:
+
+for experiment_slug in ('mit-county', 'mit-county-larger'):
+    base_name = EXPERIMENT_DATA[experiment_slug]['base_view_name']
+    base_path = r'^' + base_name
+    view_kwargs = {'experiment_slug': experiment_slug}
+    urlpatterns.append(
+        url(base_path + r'$',
+            CountyPerformanceView.as_view(**view_kwargs),
+            name=base_name)
+    )
+
+    for name, view in (
         ('senate', CountyPerformanceSenateSubmission),
         ('petition', CountyPerformancePetitionSubmission)):
 
-    urlpatterns += (
-        url(r'^county-performance/{0}$'.format(name),
-            view.as_view(),
-            name='county-performance-{0}-submission'.format(name)),
-        url(r'^county-performance/{0}/thanks$'.format(name),
-            TemplateView.as_view(
-                template_name='county-performance-{0}-submission.html'.format(name))),
-    )
+        urlpatterns += (
+            url(base_path + r'/{0}$'.format(name),
+                view.as_view(**view_kwargs),
+                name=(base_name + '-{0}-submission'.format(name))),
+            url(base_path + r'/{0}/thanks$'.format(name),
+                ThanksTemplateView.as_view(
+                    base_view_name=base_name,
+                    template_name=('county-performance-{0}-submission.html'.format(name))
+                )),
+        )
 
-urlpatterns += (
-    url(r'county-performance/share',
-        CountyPerformanceShare.as_view(),
-        name='county-performance-share'),
-    url(r'county-performance/survey',
-        CountyPerformanceSurvey.as_view(),
-        name='county-performance-survey'),
-)
+    urlpatterns += (
+        url(base_path + r'/share',
+            CountyPerformanceShare.as_view(**view_kwargs),
+            name=(base_name + '-share')),
+        url(base_path + r'/survey',
+            CountyPerformanceSurvey.as_view(**view_kwargs),
+            name=(base_name + '-survey')),
+    )
