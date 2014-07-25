@@ -96,12 +96,10 @@ class PersonDetailSub(SubSlugRedirectMixin, SkipHidden, DetailView):
 class PersonSpeakerMappingsMixin(object):
     def pombola_person_to_sayit_speaker(self, person, scheme):
         try:
-            i = models.Identifier.objects.get(
-                content_type = models.ContentType.objects.get_for_model(models.Person),
-                object_id = person.id,
-                scheme = scheme
+            expected_popit_id = '/core_person/{0}'.format(person.id)
+            speaker = Speaker.objects.get(
+                person__popit_id=(scheme + expected_popit_id)
             )
-            speaker = Speaker.objects.get(person__popit_id = i.scheme + i.identifier)
             return speaker
 
         except ObjectDoesNotExist:

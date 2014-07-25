@@ -2,6 +2,7 @@ import re
 import os
 from datetime import date, time
 from StringIO import StringIO
+from tempfile import mkdtemp
 from urlparse import urlparse
 
 from mock import patch
@@ -24,7 +25,7 @@ from popit.models import Person as PopitPerson, ApiInstance
 from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
-from pombola.south_africa.views import PersonSpeakerMappingsMixin
+from pombola.core.views import PersonSpeakerMappingsMixin
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 from pombola.search.tests.views import fake_geocoder
@@ -219,15 +220,29 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             popolo_path,
             commit=True)
 
+        # Make new Popolo JSON from the people in the database. (We now
+        # assume that our PopIt instances are exported from Pombola, so we
+        # need to do this step to generate Popolo JSON with IDs that are
+        # based on the primary keys in the Pombola database.)
+
+        popolo_directory = mkdtemp()
+        popolo_file_prefix = os.path.join(popolo_directory, 'popolo')
+        call_command(
+            'core_export_to_popolo_json',
+            popolo_file_prefix,
+            'http://www.pa.org.za/'
+        )
+
         # TODO rewrite this kludge, pending https://github.com/mysociety/popit-django/issues/19
-        popolo_io = open(popolo_path, 'r')
-        popolo_json = json.load(popolo_io)
+        with open(popolo_file_prefix + '-persons.json') as f:
+            popolo_person_json = json.load(f)
+
         collection_url = 'http://popit.example.com/api/v0.1/'
 
         api_instance = ApiInstance(url = collection_url)
         api_instance.save()
 
-        for doc in popolo_json['persons']:
+        for doc in popolo_person_json:
             # Add id and url to the doc
             doc['popit_id']  = doc['id']
             url = collection_url + doc['id']
@@ -254,7 +269,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
-        speaker = self.pombola_person_to_sayit_speaker(person, 'org.mysociety.za')
+        speaker = self.pombola_person_to_sayit_speaker(person, 'za.org.pa.www')
         self.assertEqual( speaker.name, 'Moomin Finn' )
 
     def test_generation_of_interests_table(self):

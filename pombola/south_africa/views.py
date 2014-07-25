@@ -446,7 +446,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         pombola_person = self.object
         sayit_speaker = self.pombola_person_to_sayit_speaker(
             pombola_person,
-            'org.mysociety.za'
+            'za.org.pa.www'
         )
 
         if not sayit_speaker:
@@ -588,13 +588,8 @@ class SASpeakerRedirectView(RedirectView):
             slug = kwargs['slug']
             speaker = Speaker.objects.get(slug=slug)
             popit_id = speaker.person.popit_id
-            [scheme, identifier] = re.match('(.*?)(/.*)$', popit_id).groups()
-            i = models.Identifier.objects.get(
-                content_type=models.ContentType.objects.get_for_model(models.Person),
-                scheme=scheme,
-                identifier=identifier,
-            )
-            person = models.Person.objects.get(id=i.object_id)
+            scheme, primary_key = re.match('(.*?)/core_person/(\d+)$', popit_id).groups()
+            person = models.Person.objects.get(id=primary_key)
             return reverse('person', args=(person.slug,))
         except Exception as e:
             raise Http404
@@ -773,7 +768,7 @@ class SAPersonAppearanceView(PersonSpeakerMappingsMixin, TemplateView):
         # SayIt speaker is different to core.Person, Load the speaker
         speaker = self.pombola_person_to_sayit_speaker(
             person,
-            'org.mysociety.za'
+            'za.org.pa.www'
         )
 
         # Load the speeches. Pagination is done in the template
