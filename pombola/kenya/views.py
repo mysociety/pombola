@@ -35,7 +35,7 @@ EXPERIMENT_DATA = {
         'base_view_name': 'county-performance-2',
         'pageview_label': 'county-performance-2',
         'experiment_key': settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY,
-        'qualtrics_sid': 'NOT-SUPPLIED-YET',
+        'qualtrics_sid': 'SV_5hhE4mOfYG1eaOh',
     }
 }
 
