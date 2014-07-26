@@ -457,5 +457,10 @@ PIPELINE_JS = {}
 #     },
 # }
 
-# Only for debugging compression (the default is: not DEBUG which is fine when not playing with compression)
+# Only for debugging compression (the default is: 'not DEBUG' which is
+# fine when not experimenting with compression)
 # PIPELINE_ENABLED = True
+
+PIPELINE_COMPILERS = (
+  'pipeline_compass.compass.CompassCompiler',
+)

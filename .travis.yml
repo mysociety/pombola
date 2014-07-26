@@ -21,6 +21,7 @@ install:
   # sure that the system python-gdal is used - installing it with pip
   # will fail due to build errors.
   - sudo apt-get install python-gdal gdal-bin binutils
+  - gem install --no-ri --no-rdoc compass -v 0.12.7
   - ln -s /usr/lib/python2.7/dist-packages/osgeo ~/virtualenv/python2.7/lib/python2.7/site-packages/
   - ln -s /usr/lib/python2.7/dist-packages/GDAL-1.7.3.egg-info ~/virtualenv/python2.7/lib/python2.7/site-packages/
   # Install the environment-specific Python packages:
