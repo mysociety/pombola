@@ -130,6 +130,14 @@ $dark-red: #be1919;
     }
   }
 
+  #post-table-encouragement {
+    border-top: $section-border-top;
+    padding: $section-verical-padding 15px;
+    p  {
+      font-weight: bold;
+    }
+  }
+
   h2 {
     font-size: 1.5em;
     line-height: 1.4em;

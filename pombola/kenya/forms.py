@@ -30,7 +30,7 @@ class CountyPerformancePetitionForm(forms.Form):
 
 class CountyPerformanceSenateForm(forms.Form):
     comments = forms.CharField(
-        label='Tell the senate what you think',
+        label='Tell the senate what would like to see in your county',
         error_messages={'required': "You didn't enter a comment"},
         widget=Textarea(
             attrs={

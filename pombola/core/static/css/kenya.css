@@ -3334,6 +3334,13 @@ h2 a.appearances-trigger.active {
 .county-performance #social-context p {
   font-weight: bold;
 }
+.county-performance #post-table-encouragement {
+  border-top: 1px solid #ebebeb;
+  padding: 40px 15px;
+}
+.county-performance #post-table-encouragement p {
+  font-weight: bold;
+}
 .county-performance h2 {
   font-size: 1.5em;
   line-height: 1.4em;
