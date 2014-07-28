@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import patterns, include, url
 
 from django.views.generic import TemplateView, ListView, RedirectView
@@ -6,7 +7,7 @@ from pombola.core import models
 from pombola.core.views import (HomeView, PlaceDetailView,
     OrganisationList, OrganisationKindList, PlaceKindList, PersonDetail,
     PersonDetailSub, PlaceDetailSub, OrganisationDetailSub,
-    OrganisationDetailView)
+    OrganisationDetailView, HelpApiView)
 
 person_patterns = patterns('pombola.core.views',
     url(r'^all/',
@@ -112,6 +113,12 @@ urlpatterns = patterns('pombola.core.views',
 urlpatterns += patterns('pombola.core.views',
     url(r'^status/memcached/',       'memcached_status', name='memcached_status'),
 )
+
+if settings.POPIT_API_URL:
+    # Add the dynamically generated API help page
+    urlpatterns.append(
+        url(r'^help/api', HelpApiView.as_view())
+    )
 
 # Make it easy to see the various error pages without having to fiddle with the
 # STAGING settings.

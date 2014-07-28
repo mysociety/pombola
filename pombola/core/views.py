@@ -3,6 +3,7 @@ import calendar
 import datetime
 from functools import wraps
 import random
+from urlparse import urlsplit, urlunsplit
 
 from django.core.urlresolvers import reverse
 from django.db.models import Count
@@ -47,6 +48,27 @@ class HomeView(TemplateView):
         context['featured_persons'] = list(models.Person.objects.get_featured())
         random.shuffle(context['featured_persons'])
 
+        return context
+
+class HelpApiView(TemplateView):
+
+    template_name = 'core/help_api.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HelpApiView, self).get_context_data(**kwargs)
+        # Generate the links to the PopIt API endpoint and the
+        # prettier web interface:
+        split_url = list(urlsplit(settings.POPIT_API_URL))
+        context['popit_api_url'] = urlunsplit(split_url)
+        # Remove the path and any query string:
+        for i in range(2, len(split_url)):
+            split_url[i] = ''
+        context['popit_url'] = urlunsplit(split_url)
+        # Set the URL path to the nightly JSON exports:
+        prefix = 'nightly'
+        if settings.COUNTRY_APP == 'south_africa':
+            prefix = 'za'
+        context['dump_base_path'] = '/media_root/popolo_json/' + prefix
         return context
 
 
