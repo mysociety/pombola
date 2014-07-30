@@ -18,6 +18,7 @@ class Command(NoArgsCommand):
             Q(position__title__slug__contains='aspirant') |
             Q(position__title__slug='ward-representative')):
             interesting_positions = possible_person.position_set.filter(
+                Q(title__slug='member-national-assembly', organisation__slug='parliament') |
                 Q(title__slug='mp', organisation__slug='parliament') |
                 Q(title__slug='aspirant-president', organisation__slug='republic-of-kenya') |
                 Q(title__slug='deputy-president-aspirant', organisation__slug='republic-of-kenya') |
