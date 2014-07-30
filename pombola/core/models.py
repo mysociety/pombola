@@ -1079,7 +1079,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
     def order_by_person_name(self):
         """Sort by the place name"""
-        return self.select_related('person').order_by('person__legal_name')
+        return self.select_related('person').order_by('person__sort_name')
 
     def current_unique_places(self):
         """Return the list of places associated with current positions"""
