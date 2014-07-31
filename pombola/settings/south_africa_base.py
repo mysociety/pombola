@@ -38,7 +38,7 @@ MAPIT_COUNTRY = 'ZA'
 COUNTRY_CSS = {
     'south-africa': {
         'source_filenames': (
-            'sass/south-africa.scss',
+            'scss/south-africa.scss',
         ),
         'output_filename': 'css/south-africa.css'
     }

@@ -18,7 +18,7 @@ COUNTRY_CSS = {
     'libya': {
         'source_filenames': (
             # .scss files for Libya
-            'sass/libya.scss',
+            'scss/libya.scss',
         ),
         'output_filename': 'css/libya.css'
     }

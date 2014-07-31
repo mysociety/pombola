@@ -18,7 +18,7 @@ COUNTRY_CSS = {
     'nigeria': {
         'source_filenames': (
             # .scss files for Nigeria
-            'sass/nigeria.scss',
+            'scss/nigeria.scss',
         ),
         'output_filename': 'css/nigeria.css'
     }

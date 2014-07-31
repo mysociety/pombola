@@ -16,7 +16,7 @@ MAPIT_COUNTRY = 'ZW'
 
 COUNTRY_CSS = {
     'source_filenames': (
-        'sass/zimbabwe.scss',
+        'scss/zimbabwe.scss',
     ),
     'output_filename': 'css/zimbabwe.css'
 }
