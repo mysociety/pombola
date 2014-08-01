@@ -1,3 +1,4 @@
+{% load staticfiles %}
 {% load thumbnail %}
 
 <li id="constituency-office-{{ object.id }}">
@@ -34,7 +35,7 @@
           {% thumbnail person_entry.person.primary_image "58x58" crop="center" as im %}
             <img class="constituency-office-mp-photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
           {% empty %}
-            <img class="constituency-office-mp-photo" src="{{STATIC_URL}}images/person-90x90.jpg" width="58" height="58" />
+            <img class="constituency-office-mp-photo" src="{% static 'images/person-90x90.jpg' %}" width="58" height="58" />
           {% endthumbnail %}
 
           <p class="constituency-office-mp-name">{{ person_entry.person.name }}</p>

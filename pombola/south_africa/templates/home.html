@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load thumbnail %}
 {% load compressed %}
 
@@ -6,8 +7,8 @@
 
 {% block css_headers %}
   {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.css" />
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/libs/responsive-carousel.fade.css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/libs/responsive-carousel.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/libs/responsive-carousel.fade.css' %}" />
 {% endblock %}
 
 {% block extra_js_to_load %}

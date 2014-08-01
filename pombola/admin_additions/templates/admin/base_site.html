@@ -1,10 +1,11 @@
 {% extends "admin/base.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 
 {% block extrastyle %}
-    <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
-    <link href="{{ STATIC_URL }}css/admin.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link href="{% static 'css/admin.css' %}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block blockbots %}
