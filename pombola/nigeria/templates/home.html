@@ -10,8 +10,14 @@
 {% endblock %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/feeds.js' );
-    pombola_settings.extra_js.push( 'js/libs/responsive-carousel.js' );
+    Array.prototype.push.apply(
+      pombola_settings.extra_js,
+      [
+        {% compressed_js 'feeds' %}
+        {% compressed_js 'responsive-carousel' %}
+        null
+      ]
+    );
 {% endblock %}
 
 {% block breadcrumbs %}

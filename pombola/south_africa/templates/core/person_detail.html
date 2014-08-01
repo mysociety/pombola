@@ -1,8 +1,12 @@
 {# For South Africa the default person section is the experience tab #}
 {% extends 'core/person_base.html' %}
+{% load compressed %}
 
 {% block extra_js_to_load %}
-pombola_settings.extra_js.push('js/tabs.js')
+    Array.prototype.push.apply(
+      pombola_settings.extra_js,
+      [ {% compressed_js 'tabs' %} null ]
+    );
 {% endblock extra_js_to_load %}
 
 {% block object_tagline %}

@@ -44,15 +44,33 @@ COUNTRY_CSS = {
     }
 }
 
-COUNTRY_JS = {}
-# COUNTRY_JS = {
-#     'south-africa': {
-#         'source_filenames': (
-#             'js/tabs.js',
-#             'js/hide-reveal.js',
-#             'js/map-drilldown.js',
-#             'js/election_countdown.js',
-#         ),
-#         'output_filename': 'js/south-africa.js'
-#     }
-# }
+COUNTRY_JS = {
+    'tabs': {
+        'source_filenames': (
+            'js/tabs.js',
+        ),
+        'output_filename': 'js/tabs.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'hide-reveal': {
+        'source_filenames': (
+            'js/hide-reveal.js',
+        ),
+        'output_filename': 'js/hide-reveal.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'za-map-drilldown': {
+        'source_filenames': (
+            'js/za-map-drilldown.js',
+        ),
+        'output_filename': 'js/za-map-drilldown.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'za-map-drilldown': {
+        'source_filenames': (
+            'js/election_countdown.js',
+        ),
+        'output_filename': 'js/election_countdown.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+}

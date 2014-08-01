@@ -7,7 +7,10 @@
 {% block body_attributes %} class="election-home" {% endblock %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/feeds.js' );
+    Array.prototype.push.apply(
+      pombola_settings.extra_js,
+      [ {% compressed_js 'feeds' %} null ]
+    );
 {% endblock %}
 
 {% block css_headers %}

@@ -1,7 +1,11 @@
 {% extends 'core/place_base.html' %}
+{% load compressed %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/hide-reveal.js' );
+    Array.prototype.push.apply(
+      pombola_settings.extra_js,
+      [ {% compressed_js 'hide-reveal' %} null ]
+    );
 {% endblock %}
 
 {% block subcontent %}

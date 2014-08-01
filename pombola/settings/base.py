@@ -431,33 +431,108 @@ PIPELINE_CSS = {
     }
 }
 
-PIPELINE_JS = {}
-# PIPELINE_JS = {
-#     'core': {
-#         'source_filenames': (
-#             'js/libs/modernizr-2.0.6.custom.js',
-#             'js/loader.js',
-#             'js/map.js',
-#             'js/mobile-functions.js',
-#             'js/feeds.js',
-#             'js/analytics.js',
-#             'js/load_appearances.js',
-#             'js/respond.v1.1.0.min.js',
-#             'js/desktop-functions.js',
-#             'js/twitter-embed.js',
-#             'js/both-functions.js',
-#             'js/libs/respond.1.0.1.min.js',
-#             'js/libs/jquery-ui-1.8.17.custom.min.js',
-#             'js/libs/jquery.countdown-v1.6.0.js',
-#             'js/libs/jquery.form-v2.94.js',
-#             'js/libs/jquery.ui.autocomplete.html.2010-10-25.js',
-#             # These should only be included if the application is:
-#             'js/map-drilldown.js', # from pombola/map
-#             'js/libs/responsive-carousel.js', # from pombola/spinner
-#         ),
-#         'output_filename': 'js/core.js',
-#     },
-# }
+# The packages in DYNAMICALLY_LOADED_PIPELINE_JS will all be loaded
+# dynamically, and the only way we can do that without making changes
+# to django-pipeline is to render the URLs that django-pipeline
+# generates as Javascript array elements. So, keep these separate so
+# that we can set a template that does that on each when including
+# them in PIPELINE_JS.
+
+DYNAMICALLY_LOADED_PIPELINE_JS = {
+   'desktop_only': {
+        'source_filenames': (
+            'js/libs/jquery-ui-1.8.17.custom.min.js',
+            'js/libs/jquery.ui.autocomplete.html.2010-10-25.js',
+            'js/libs/jquery.form-v2.94.js',
+            'js/desktop-functions.js',
+        ),
+        'output_filename': 'js/desktop_only.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'mobile_only': {
+        'source_filenames': (
+            'js/mobile-functions.js',
+        ),
+        'output_filename': 'js/mobile_only.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'desktop_and_mobile': {
+        'source_filenames': (
+            'js/both-functions.js',
+            'js/twitter-embed.js',
+        ),
+        'output_filename': 'js/desktop_and_mobile.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'analytics': {
+        'source_filenames': (
+            'js/analytics.js',
+        ),
+        'output_filename': 'js/analytics.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'load-appearances': {
+        'source_filenames': (
+            'js/load-appearances.html',
+        ),
+        'output_filename': 'js/load-appearances.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'feeds': {
+        'source_filenames': (
+            'js/feeds.js',
+        ),
+        'output_filename': 'js/feeds.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'countdown': {
+        'source_filenames': (
+            'js/libs/jquery.countdown-v1.6.0.js',
+        ),
+        'output_filename': 'js/countdown.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'responsive-carousel': {
+        'source_filenames': (
+            'js/libs/responsive-carousel.js',
+        ),
+        'output_filename': 'js/responsive-carousel.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'map': {
+        'source_filenames': (
+            'js/map-drilldown.js',
+        ),
+        'output_filename': 'js/map.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+}
+
+PIPELINE_JS = {
+    'google-map': {
+        'source_filenames': (
+            'js/map.js',
+        ),
+        'output_filename': 'js/google-map.js',
+    },
+    'respond': {
+        'source_filenames': (
+            'js/libs/respond.1.0.1.min.js',
+        ),
+        'output_filename': 'js/respond.js',
+    },
+    'modernizr_and_loader': {
+        'source_filenames': (
+            'js/libs/modernizr-2.0.6.custom.js',
+            'js/loader.js',
+        ),
+        'output_filename': 'js/modernizr_and_loader.js',
+    },
+}
+
+for package_name, package in DYNAMICALLY_LOADED_PIPELINE_JS.items():
+    package['template_name'] = 'pipeline/js-array.html'
+    PIPELINE_JS[package_name] = package
 
 # Only for debugging compression (the default is: 'not DEBUG' which is
 # fine when not experimenting with compression)

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load compressed %}
 
 {% block breadcrumbs %}
 {% include 'core/override_breadcrumb.html' with override_path='/places/' %}
@@ -21,7 +22,7 @@
     </p>
   </form>
 
-  <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+  {% compressed_js 'google-map' %}
 
   <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
