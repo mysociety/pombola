@@ -1,4 +1,5 @@
 {% extends 'core/object_base.html' %}
+{% load staticfiles %}
 {% load thumbnail %}
 {% load humanize %}
 {% load hidden %}
@@ -75,7 +76,7 @@
     </div>
   {% else %}
     <div class="profile-pic">
-      <img src="{{STATIC_URL}}images/place-200x200.jpg" />
+      <img src="{% static 'images/place-200x200.jpg' %}" />
     </div>
   {% endif %}
 {% endblock %}
