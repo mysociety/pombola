@@ -1,10 +1,11 @@
+{% load staticfiles %}
 {% load thumbnail %}
 
 <a href="{{ object.get_absolute_url }}">
   {% thumbnail object.primary_image "180x240" crop="center" as im %}
       <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ object.name }}"/>
   {% empty %}
-    <img src="{{STATIC_URL}}images/person-200x200.jpg" width="180" height="240"/>
+    <img src="{% static 'images/person-200x200.jpg' %}" width="180" height="240"/>
   {% endthumbnail %}
 </a>
 

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load compressed %}
+{% load staticfiles %}
 
 {% block title %}Home{% endblock %}
 
@@ -35,7 +36,7 @@
         </div>
 
         <div id="home-image">
-          <img src="/static/images/parliament.jpg">
+          <img src="{% static 'images/parliament.jpg' %}">
         </div>
 
     </div>

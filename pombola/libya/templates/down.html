@@ -1,4 +1,5 @@
 {% load compressed %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +13,7 @@
 
         {% compressed_css 'libya' %}
 
-        <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
+        <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
 
     </head>
     <body>

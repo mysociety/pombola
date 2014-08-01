@@ -1,5 +1,6 @@
 {% load breadcrumbs %}
 {% load compressed %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,7 +42,8 @@
                   east:  {{ settings.MAP_BOUNDING_BOX_EAST  }},
                   south: {{ settings.MAP_BOUNDING_BOX_SOUTH }},
                   west:  {{ settings.MAP_BOUNDING_BOX_WEST  }}
-                }
+                },
+                crosshairs_image: '{% static 'images/crosshairs.png' %}'
             };
 
             {% block extra_js_to_load %}
@@ -98,7 +100,7 @@
 
         {% compressed_js 'modernizr_and_loader' %}
 
-        <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
+        <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
 
         {% block extra_headers %}{% endblock %}
 

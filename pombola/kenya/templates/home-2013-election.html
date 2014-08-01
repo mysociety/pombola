@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load thumbnail %}
 {% load compressed %}
 
@@ -60,7 +61,7 @@
               {% thumbnail person.primary_image "122x140" crop="center" as im %}
                 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
               {% empty %}
-                <img src="{{STATIC_URL}}images/person-200x200.jpg" width="122" height="140"/>
+                <img src="{% static 'images/person-200x200.jpg' %}" width="122" height="140"/>
               {% endthumbnail %}
               <h4>{{ person.name }}</h4>
             </a>

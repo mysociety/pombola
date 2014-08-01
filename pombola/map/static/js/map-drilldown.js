@@ -110,10 +110,9 @@
     // http://stackoverflow.com/questions/4130237
     this.addCrosshairs = function () {
       var map = this.map;
-      var crosshairs_path = window.pombola_settings.static_url + 'images/crosshairs.png?' + window.pombola_settings.static_generation_number
 
       var crosshairsImage = new google.maps.MarkerImage(
-         crosshairs_path,                 // marker image
+         window.pombola_settings.crosshairs_image, // marker image
          new google.maps.Size(63, 63),    // marker size
          new google.maps.Point(0,0),      // marker origin
          new google.maps.Point(32, 32)    // marker anchor point
