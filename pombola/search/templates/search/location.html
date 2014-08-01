@@ -1,4 +1,5 @@
 {% extends 'search/search_base.html' %}
+{% load compressed %}
 
 {% block alternative_search %}
   <a href="{% url "core_search" %}">for a person or organisation</a>
@@ -9,7 +10,7 @@
 {% endblock %}
 
 {% block search_results %}
-  <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+  {% compressed_js 'google-map' %}
 
   <div class="geocoded_results">
 

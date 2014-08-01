@@ -46,12 +46,12 @@ COUNTRY_CSS = {
     }
 }
 
-COUNTRY_JS = {}
-# COUNTRY_JS = {
-#     'kenya': {
-#         'source_filenames': (
-#             'js/click-tracking.js',
-#         ),
-#         'output_filename': 'js/kenya.js'
-#     }
-# }
+COUNTRY_JS = {
+    'click-tracking': {
+        'source_filenames': (
+            'js/click-tracking.js',
+        ),
+        'output_filename': 'js/kenya.js',
+        'template_name': 'pipeline/js-array.html',
+    }
+}

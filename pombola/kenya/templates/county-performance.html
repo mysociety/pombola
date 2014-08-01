@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load compressed %}
 
 {% comment %}
 
@@ -31,7 +32,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block body_attributes %}class="county-performance"{% endblock %}
 
 {% block extra_js_to_load %}
-  pombola_settings.extra_js.push( 'js/click-tracking.js' );
+    addExtraJS([ {% compressed_js 'click-tracking' %} null ]);
 {% endblock %}
 
 {% block breadcrumbs %}

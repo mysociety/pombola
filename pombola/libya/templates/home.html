@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load compressed %}
 
 {% block title %}Home{% endblock %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/feeds.js' );
+    addExtraJS([ {% compressed_js 'feeds' %} null ]);
 {% endblock %}
 
 {% block breadcrumbs %}
