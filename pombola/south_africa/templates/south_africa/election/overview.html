@@ -1,7 +1,8 @@
 {% extends 'south_africa/election_base.html' %}
+{% load compressed %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/election_countdown.js' );
+    addExtraJS([ {% compressed_js 'election-countdown' %} null ]);
 {% endblock %}
 
 {% block content %}

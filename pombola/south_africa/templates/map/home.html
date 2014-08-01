@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load compressed %}
 
 {% block title %}Map{% endblock %}
 
@@ -22,7 +23,7 @@
       }
     };
 
-    pombola_settings.extra_js.push( 'js/map-drilldown.js' );
+    addExtraJS([ {% compressed_js 'za-map-drilldown' %} null ]);
 {% endblock %}
 
 {% block extra_headers %}

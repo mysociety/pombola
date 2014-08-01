@@ -1,6 +1,7 @@
 {% extends 'core/object_base.html' %}
 {% load thumbnail %}
 {% load humanize %}
+{% load compressed %}
 
 {% block content %}
 
@@ -10,7 +11,7 @@
 
     {% if object.mapit_area %}
       <div class="map-box example">
-        <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+        {% compressed_js 'google-map' %}
 
         <div id="map_canvas"></div>
         <script type="text/javascript" charset="utf-8">

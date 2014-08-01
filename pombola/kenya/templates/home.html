@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
+{% load compressed %}
 
 {% block title %}Home{% endblock %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/feeds.js' );
-    pombola_settings.extra_js.push( 'js/libs/jquery.countdown-v1.6.0.js' );
+    addExtraJS(
+      [
+        {% compressed_js 'feeds' %}
+        {% compressed_js 'countdown' %}
+        null
+      ]
+    );
 {% endblock %}
 
 {% block breadcrumbs %}

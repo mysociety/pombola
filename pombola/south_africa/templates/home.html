@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+{% load compressed %}
 
 {% block title %}Home{% endblock %}
 
@@ -10,8 +11,13 @@
 {% endblock %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/feeds.js' );
-    pombola_settings.extra_js.push( 'js/libs/responsive-carousel.js' );
+    addExtraJS(
+      [
+        {% compressed_js 'feeds' %}
+        {% compressed_js 'responsive-carousel' %}
+        null
+      ]
+    );
 {% endblock %}
 
 {% block body_attributes %} class="home" {% endblock %}
