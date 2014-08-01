@@ -6,7 +6,6 @@ def add_settings( request ):
     return {
         'settings': {
             'STAGING':                      settings.STAGING,
-            'STATIC_GENERATION_NUMBER':     settings.STATIC_GENERATION_NUMBER,
             'GOOGLE_ANALYTICS_ACCOUNT':     settings.GOOGLE_ANALYTICS_ACCOUNT,
             'POLLDADDY_WIDGET_ID':          settings.POLLDADDY_WIDGET_ID,
             'DISQUS_SHORTNAME':             settings.DISQUS_SHORTNAME,

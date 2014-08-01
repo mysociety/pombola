@@ -105,10 +105,6 @@ STATIC_ROOT = os.path.normpath( os.path.join( root_dir, "collected_static/") )
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-# integer which when updated causes the caches to fetch new content. See note in
-# 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 46
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
