@@ -62,6 +62,13 @@ find . -name '*.pyc' -delete
 ./manage.py syncdb --noinput
 ./manage.py migrate
 
+# Install gems in order to compile the CSS
+mkdir -p "../gems"
+export GEM_HOME="$(cd ../gems && pwd -P)"
+export PATH="$GEM_HOME/bin:$PATH"
+gem install --no-ri --no-rdoc sass -v 3.2.14
+gem install --no-ri --no-rdoc compass -v 0.12.2
+
 # gather all the static files in one place
 ./manage.py collectstatic --noinput
 
