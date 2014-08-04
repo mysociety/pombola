@@ -1,6 +1,3 @@
-{% load breadcrumbs %}
-{% load compressed %}
-{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,12 +23,14 @@
         {% block extra_head_meta %}
         {% endblock%}
 
+        {% load compressed %}
         {% compressed_css 'core' %}
 
         {% block css_headers %}
             <!-- Create a 'css_headers' block in your base.html and use it to include the correct CSS for you country -->
         {% endblock %}
 
+        {% load staticfiles %}
         <script type="text/javascript" charset="utf-8">
             window.pombola_settings = {
                 google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
@@ -113,6 +112,7 @@
 
         {% block site_wide_message %}{% endblock %}
 
+        {% load breadcrumbs %}
         {% block breadcrumbs %}
         <div id="breadcrumb">
             <nav class="wrapper">
