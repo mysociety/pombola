@@ -464,3 +464,8 @@ PIPELINE_JS = {}
 PIPELINE_COMPILERS = (
   'pipeline_compass.compass.CompassCompiler',
 )
+
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
+
+PIPELINE_YUI_BINARY = '/usr/bin/env yui-compressor'
