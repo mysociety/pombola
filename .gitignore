@@ -5,3 +5,5 @@
 .coverage
 .sass-cache
 web/down.default.html
+/pombola/kenya/static/scss/kenya.css
+/pombola/core/static/sass/admin.css
