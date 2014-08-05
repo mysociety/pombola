@@ -25,3 +25,8 @@ MAP_BOUNDING_BOX_NORTH = None
 MAP_BOUNDING_BOX_SOUTH = None
 MAP_BOUNDING_BOX_EAST = None
 MAP_BOUNDING_BOX_WEST = None
+
+# A workaround so that functional tests don't fail with missing
+# assets, as suggested here:
+#   https://github.com/cyberdelia/django-pipeline/issues/277
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
