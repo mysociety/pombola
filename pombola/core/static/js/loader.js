@@ -36,13 +36,3 @@
         }
     );
 })();
-
-var pombola_run_when_document_ready_array = [];
-
-function pombola_run_when_document_ready (func) {
-    if ( window.$ ) {
-        $(func);
-    } else {
-        pombola_run_when_document_ready_array.push( func );
-    }
-}

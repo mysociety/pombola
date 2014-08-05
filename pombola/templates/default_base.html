@@ -32,6 +32,17 @@
 
         {% load staticfiles %}
         <script type="text/javascript" charset="utf-8">
+
+            var pombola_run_when_document_ready_array = [];
+
+            function pombola_run_when_document_ready (func) {
+                if ( window.$ ) {
+                    $(func);
+                } else {
+                    pombola_run_when_document_ready_array.push( func );
+                }
+            }
+
             window.pombola_settings = {
                 google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
                 static_url:                '{{ STATIC_URL }}',
