@@ -92,6 +92,9 @@ MEDIA_ROOT = os.path.normpath( os.path.join( root_dir, "media_root/") )
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media_root/'
 
+# Use django-pipeline for handling static files
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -101,10 +104,6 @@ STATIC_ROOT = os.path.normpath( os.path.join( root_dir, "collected_static/") )
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
-
-# integer which when updated causes the caches to fetch new content. See note in
-# 'base.html' for a better alternative in Django 1.4
-STATIC_GENERATION_NUMBER = 46
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -119,7 +118,10 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'pipeline.finders.FileSystemFinder',
+    # 'pipeline.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+    'pipeline.finders.CachedFileFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -365,6 +367,8 @@ INSTALLED_APPS = (
     'autocomplete_light',
     'markitup',
 
+    'pipeline',
+
     'mapit',
 
     'pombola.images',
@@ -407,3 +411,134 @@ def make_enabled_features(installed_apps, all_optional_apps):
         key = re.sub(r'^pombola\.', '', key)
         result[key] = ('pombola.' + key in installed_apps) or (key in installed_apps)
     return result
+
+# Set up the core CSS and JS files:
+
+PIPELINE_CSS = {
+    'core': {
+        'source_filenames': (
+            # .scss files from core:
+            'sass/admin.scss',
+            # .css files from core:
+            'css/jquery.countdown-v1.6.0.css',
+            'css/jquery-ui-1.8.17.custom.css',
+        ),
+        'output_filename': 'css/core.css',
+    }
+}
+
+# The packages in DYNAMICALLY_LOADED_PIPELINE_JS will all be loaded
+# dynamically, and the only way we can do that without making changes
+# to django-pipeline is to render the URLs that django-pipeline
+# generates as Javascript array elements. So, keep these separate so
+# that we can set a template that does that on each when including
+# them in PIPELINE_JS.
+
+DYNAMICALLY_LOADED_PIPELINE_JS = {
+   'desktop_only': {
+        'source_filenames': (
+            'js/libs/jquery-ui-1.8.17.custom.min.js',
+            'js/libs/jquery.ui.autocomplete.html.2010-10-25.js',
+            'js/libs/jquery.form-v2.94.js',
+            'js/desktop-functions.js',
+        ),
+        'output_filename': 'js/desktop_only.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'mobile_only': {
+        'source_filenames': (
+            'js/mobile-functions.js',
+        ),
+        'output_filename': 'js/mobile_only.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'desktop_and_mobile': {
+        'source_filenames': (
+            'js/both-functions.js',
+            'js/twitter-embed.js',
+        ),
+        'output_filename': 'js/desktop_and_mobile.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'analytics': {
+        'source_filenames': (
+            'js/analytics.js',
+        ),
+        'output_filename': 'js/analytics.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'load-appearances': {
+        'source_filenames': (
+            'js/load-appearances.html',
+        ),
+        'output_filename': 'js/load-appearances.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'feeds': {
+        'source_filenames': (
+            'js/feeds.js',
+        ),
+        'output_filename': 'js/feeds.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'countdown': {
+        'source_filenames': (
+            'js/libs/jquery.countdown-v1.6.0.js',
+        ),
+        'output_filename': 'js/countdown.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'responsive-carousel': {
+        'source_filenames': (
+            'js/libs/responsive-carousel.js',
+        ),
+        'output_filename': 'js/responsive-carousel.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'map': {
+        'source_filenames': (
+            'js/map-drilldown.js',
+        ),
+        'output_filename': 'js/map.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+}
+
+PIPELINE_JS = {
+    'google-map': {
+        'source_filenames': (
+            'js/map.js',
+        ),
+        'output_filename': 'js/google-map.js',
+    },
+    'respond': {
+        'source_filenames': (
+            'js/libs/respond.1.0.1.min.js',
+        ),
+        'output_filename': 'js/respond.js',
+    },
+    'modernizr_and_loader': {
+        'source_filenames': (
+            'js/libs/modernizr-2.0.6.custom.js',
+            'js/loader.js',
+        ),
+        'output_filename': 'js/modernizr_and_loader.js',
+    },
+}
+
+for package_name, package in DYNAMICALLY_LOADED_PIPELINE_JS.items():
+    package['template_name'] = 'pipeline/js-array.html'
+    PIPELINE_JS[package_name] = package
+
+# Only for debugging compression (the default is: 'not DEBUG' which is
+# fine when not experimenting with compression)
+# PIPELINE_ENABLED = True
+
+PIPELINE_COMPILERS = (
+  'pipeline_compass.compass.CompassCompiler',
+)
+
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
+
+PIPELINE_YUI_BINARY = '/usr/bin/env yui-compressor'

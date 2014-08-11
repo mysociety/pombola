@@ -1,7 +1,9 @@
 {% extends 'core/object_base.html' %}
+{% load staticfiles %}
 {% load thumbnail %}
 {% load humanize %}
 {% load hidden %}
+{% load compressed %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -61,7 +63,7 @@
 {% block profile_pic %}
   {% if object.mapit_area %}
     <div class="profile-map">
-      <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+      {% compressed_js 'google-map' %}
 
       <div id="map_canvas" width="300" height="300"></div>
 
@@ -74,7 +76,7 @@
     </div>
   {% else %}
     <div class="profile-pic">
-      <img src="{{STATIC_URL}}images/place-200x200.jpg" />
+      <img src="{% static 'images/place-200x200.jpg' %}" />
     </div>
   {% endif %}
 {% endblock %}

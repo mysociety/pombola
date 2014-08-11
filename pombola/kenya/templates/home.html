@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
+{% load compressed %}
+{% load staticfiles %}
 
 {% block title %}Home{% endblock %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/feeds.js' );
-    pombola_settings.extra_js.push( 'js/libs/jquery.countdown-v1.6.0.js' );
+    addExtraJS(
+      [
+        {% compressed_js 'feeds' %}
+        {% compressed_js 'countdown' %}
+        null
+      ]
+    );
 {% endblock %}
-
-{% block css_headers %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.countdown-v1.6.0.css" />
-{% endblock %}
-
 
 {% block breadcrumbs %}
     {# Hide bread crumbs on the home page #}
@@ -34,7 +35,7 @@
         </div>
 
         <div id="home-image">
-          <img src="/static/images/parliament.jpg">
+          <img src="{% static 'images/parliament.jpg' %}">
         </div>
 
     </div>

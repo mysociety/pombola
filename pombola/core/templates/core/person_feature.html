@@ -1,3 +1,4 @@
+{% load staticfiles %}
 {% load thumbnail %}
 
 <div class="featured-person">
@@ -5,7 +6,7 @@
         {% thumbnail featured_person.primary_image "200x200" as im %}
             <img src="{{ im.url }}" alt="{{ featured_person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
         {% empty %}
-            <img src="{{STATIC_URL}}images/person-200x200.jpg" />
+            <img src="{% static 'images/person-200x200.jpg' %}" />
         {% endthumbnail %}
     </a>
     <div class="featured-person-info">

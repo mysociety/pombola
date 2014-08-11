@@ -1,4 +1,3 @@
-{% load breadcrumbs %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,37 +23,44 @@
         {% block extra_head_meta %}
         {% endblock%}
 
-        {% comment %}
-
-            The 'STATIC_GENERATION_NUMBER' is used to force the caches to fetch
-            new content. To update manually change the value in settings.py.
-
-            Much better will be to use the 'CachedStaticFilesStorage' when it
-            becomes available in the next version of Django.
-
-            https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/
-
-        {% endcomment %}
-
-        <link href="{{ STATIC_URL }}css/jquery-ui-1.8.17.custom.css?{{ settings.STATIC_GENERATION_NUMBER }}" rel="stylesheet" type="text/css" />
+        {% load compressed %}
+        {% compressed_css 'core' %}
 
         {% block css_headers %}
             <!-- Create a 'css_headers' block in your base.html and use it to include the correct CSS for you country -->
         {% endblock %}
 
+        {% load staticfiles %}
         <script type="text/javascript" charset="utf-8">
+
+            var pombola_run_when_document_ready_array = [];
+
+            function pombola_run_when_document_ready (func) {
+                if ( window.$ ) {
+                    $(func);
+                } else {
+                    pombola_run_when_document_ready_array.push( func );
+                }
+            }
+
             window.pombola_settings = {
                 google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
                 static_url:                '{{ STATIC_URL }}',
-                static_generation_number:  '{{ settings.STATIC_GENERATION_NUMBER }}',
                 extra_js: [],
                 map_bounds: {
                   north: {{ settings.MAP_BOUNDING_BOX_NORTH }},
                   east:  {{ settings.MAP_BOUNDING_BOX_EAST  }},
                   south: {{ settings.MAP_BOUNDING_BOX_SOUTH }},
                   west:  {{ settings.MAP_BOUNDING_BOX_WEST  }}
-                }
+                },
+                crosshairs_image: '{% static 'images/crosshairs.png' %}'
             };
+
+            function addExtraJS(jsURLs) {
+                Array.prototype.push.apply(
+                    pombola_settings.extra_js, jsURLs
+                );
+            }
 
             {% block extra_js_to_load %}
                 // no extra js added to be loaded
@@ -62,15 +68,55 @@
 
         </script>
 
-
         <!--[if (lt IE 9) & (!IEMobile)]>
-            <script src="{{ STATIC_URL }}js/respond.v1.1.0.min.js"></script>
+            {% compressed_js 'respond' %}
         <![endif]-->
 
-        <script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.custom.js"></script>
-        <script src="{{ STATIC_URL }}js/loader.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
-        <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
+        <script type="text/javascript" charset="utf-8">
+
+        /* We want to be able to use the Javascript assets
+        compressed and fingerprinted by django-pipeline from
+        loader.js, which dynamically decides what Javascript to
+        load. At the moment, the only easy (but rather ugly) way
+        of doing this is to specify a template for the
+        Javascript packages that outputs a quoted and
+        escaped-for-Javascript-strings version of the URL, with
+        a trailing comma.  Then we can wrap these into an array
+        in the code below.  Since some Javascript
+        implementations error on a trailing comma in an array,
+        we also have to add a null, which we then immediate
+        remove. */
+
+            var pipeline_desktop_only = [
+                {% compressed_js 'desktop_only' %}
+                null
+            ];
+            pipeline_desktop_only.pop();
+
+            var pipeline_mobile_only =  [
+                {% compressed_js 'mobile_only' %}
+                null
+            ];
+            pipeline_mobile_only.pop();
+
+            var pipeline_desktop_and_mobile =  [
+                {% compressed_js 'desktop_and_mobile' %}
+                null
+            ];
+            pipeline_desktop_and_mobile.pop();
+
+            var pipeline_analytics =  [
+                {% compressed_js 'analytics' %}
+                null
+            ];
+            pipeline_analytics.pop();
+
+        </script>
+
+        {% compressed_js 'modernizr_and_loader' %}
+
+        <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
 
         {% block extra_headers %}{% endblock %}
 
@@ -83,6 +129,7 @@
 
         {% block site_wide_message %}{% endblock %}
 
+        {% load breadcrumbs %}
         {% block breadcrumbs %}
         <div id="breadcrumb">
             <nav class="wrapper">

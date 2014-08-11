@@ -13,3 +13,13 @@ MAP_BOUNDING_BOX_SOUTH = 4
 MAP_BOUNDING_BOX_WEST = 2.5
 
 MAPIT_COUNTRY = 'NG'
+
+COUNTRY_CSS = {
+    'nigeria': {
+        'source_filenames': (
+            # .scss files for Nigeria
+            'sass/nigeria.scss',
+        ),
+        'output_filename': 'css/nigeria.css'
+    }
+}

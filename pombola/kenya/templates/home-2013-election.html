@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load thumbnail %}
+{% load compressed %}
 
 {% block title %}Home{% endblock %}
 
 {% block body_attributes %} class="election-home" {% endblock %}
 
 {% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/feeds.js' );
+    addExtraJS([ {% compressed_js 'feeds' %} null ]);
 {% endblock %}
 
 {% block css_headers %}
     {{ block.super }}
 
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kenya/election-homepage/base.css" />
+    {% compressed_css 'election-2013' %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -56,7 +58,7 @@
               {% thumbnail person.primary_image "122x140" crop="center" as im %}
                 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
               {% empty %}
-                <img src="{{STATIC_URL}}images/person-200x200.jpg" width="122" height="140"/>
+                <img src="{% static 'images/person-200x200.jpg' %}" width="122" height="140"/>
               {% endthumbnail %}
               <h4>{{ person.name }}</h4>
             </a>

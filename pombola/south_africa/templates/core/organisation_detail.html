@@ -1,6 +1,7 @@
 {% extends 'core/organisation_base.html' %}
 {% load thumbnail %}
 {% load switch %}
+{% load compressed %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -46,7 +47,7 @@
 
 {% with place=object.place_set.all.0 %}
   {% if place.location %}
-    <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+    {% compressed_js 'google-map' %}
     <div class="profile-map">
       <div id="map_canvas"></div>
 

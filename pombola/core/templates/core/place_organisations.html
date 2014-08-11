@@ -1,4 +1,5 @@
 {% extends 'core/place_base.html' %}
+{% load staticfiles %}
 {% load thumbnail %}
 {% load humanize %}
 
@@ -17,7 +18,7 @@
                         {% thumbnail organisation.primary_image "90x90" as im %}
                         <img src="{{ im.url }}" alt="{{ organisation.name }}" width="{{ im.width }}" height="{{ im.height }}" />
                         {% empty %}
-                        <img src="{{STATIC_URL}}images/organisation-90x90.jpg" />
+                        <img src="{% static 'images/organisation-90x90.jpg' %}" />
                         {% endthumbnail %}
                     </a>
 

@@ -13,3 +13,10 @@ MAP_BOUNDING_BOX_SOUTH = -22.425
 MAP_BOUNDING_BOX_WEST = 25.237
 
 MAPIT_COUNTRY = 'ZW'
+
+COUNTRY_CSS = {
+    'source_filenames': (
+        'sass/zimbabwe.scss',
+    ),
+    'output_filename': 'css/zimbabwe.css'
+}
