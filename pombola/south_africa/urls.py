@@ -131,7 +131,7 @@ urlpatterns += patterns('',
 
 for index, pattern in enumerate(search_urlpatterns):
     if pattern.name == 'core_search':
-        search_urlpatterns[index] = url(r'^$', SASearchView(), name='core_search')
+        search_urlpatterns[index] = url(r'^$', SASearchView.as_view(), name='core_search')
 
 urlpatterns += patterns('pombola.south_africa.views',
     url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/national/$', LatLonDetailNationalView.as_view(), name='latlon-national'),
