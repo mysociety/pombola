@@ -15,7 +15,7 @@
     <h2>Search</h2>
     {% endblock %}
 
-    <form method="get" action="." class="search-wrap">
+    <form method="get" action="{% url 'core_search' %}" class="search-wrap">
 
         <div class="search-box">
           {% block search_form %}
