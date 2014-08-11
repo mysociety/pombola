@@ -7,35 +7,16 @@ from haystack.views import SearchView
 
 from pombola.core    import models as core_models
 
-from .views import GeocoderView
-
-search_models = (
-    core_models.Person,
-    core_models.Organisation,
-    core_models.Place,
-    core_models.PositionTitle
-)
-if settings.ENABLED_FEATURES['speeches']:
-    from speeches.models import Speech
-    search_models += ( Speech, )
+from .views import SearchBaseView, GeocoderView
 
 urlpatterns = patterns('pombola.search.views',
 
     # Haystack and other searches
     url( r'^autocomplete/', 'autocomplete',           name="autocomplete"        ),
 
-    # General search - just intended for the core app
-    url(
-        r'^$',
-        SearchView(
-            searchqueryset = SearchQuerySet(). \
-                models(*search_models). \
-                exclude(hidden=True). \
-                highlight(),
-            form_class=SearchForm,
-        ),
-        name='core_search'
-    ),
+    url(r'^$',
+        SearchBaseView.as_view(),
+        name='core_search'),
 
     # Location search
     url(
@@ -44,7 +25,8 @@ urlpatterns = patterns('pombola.search.views',
         name='core_geocoder_search'
     ),
 
-    # Person search
+    # Person search - this is only used in the Kenyan 2013
+    # election-themed homepage
     url(
         r'^person/$',
         SearchView(
@@ -56,7 +38,8 @@ urlpatterns = patterns('pombola.search.views',
         name='core_person_search'
     ),
 
-    # Place search
+    # Place search - this is only used in the Kenyan 2013
+    # election-themed homepage
     url(
         r'^place/$',
         SearchView(

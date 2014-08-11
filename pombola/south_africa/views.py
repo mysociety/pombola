@@ -18,8 +18,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 
 import mapit
-from haystack.views import SearchView
-from haystack.query import SearchQuerySet
+from haystack.query import SearchQuerySet, SQ
 from haystack.inputs import AutoQuery
 from haystack.forms import SearchForm
 
@@ -33,7 +32,7 @@ from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
     OrganisationDetailSub, PersonSpeakerMappingsMixin)
 from pombola.info.models import InfoPage, Category
 from pombola.info.views import InfoPageView
-from pombola.search.views import GeocoderView
+from pombola.search.views import GeocoderView, SearchBaseView
 
 from pombola.south_africa.models import ZAPlace
 
@@ -551,39 +550,40 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         return context
 
 
-search_models = (
-    models.Place,
-    models.PositionTitle,
-)
-if settings.ENABLED_FEATURES['speeches']:
-    from speeches.models import Speech
-    search_models += ( Speech, )
-
-
-class SASearchView(SearchView):
+class SASearchView(SearchBaseView):
 
     def __init__(self, *args, **kwargs):
-        # We can't just order by -start_date, since that will put any
-        # Place and PositionTitle results (where there is no
-        # start_date in the index) at the very end, after potentially
-        # thousands of Speech results.  We can get around this by
-        # ordering on django_ct first, since places and positiontitles
-        # have content types that just happen to come earlier in the
-        # alphabet than that of speeches.
-        kwargs['searchqueryset'] = SearchQuerySet().models(*search_models). \
-            exclude(hidden=True). \
-            order_by('django_ct', '-start_date'). \
-            highlight()
-        return super(SASearchView, self).__init__(*args, **kwargs)
-
-    def extra_context(self):
-        if not self.query:
-            return {}
-        query = SearchQuerySet().highlight()
-        return {
-            'person_results': query.models(models.Person).filter(content=AutoQuery(self.request.GET['q'])).exclude(hidden=True),
-            'organisation_results': query.models(models.Organisation).filter(content=AutoQuery(self.request.GET['q'])),
+        super(SASearchView, self).__init__(*args, **kwargs)
+        del self.search_sections['speeches']
+        self.search_sections['questions'] = {
+            'model': Speech,
+            'title': 'Questions and Answers',
+            'filter': {
+                'args': [SQ(tags='question') | SQ(tags='answer')],
+            }
         }
+        self.search_sections['committee'] = {
+            'model': Speech,
+            'title': 'Committee',
+            'filter': {
+                'kwargs': {
+                    'tags': 'committee'
+                }
+            }
+        }
+        self.search_sections['hansard'] = {
+            'model': Speech,
+            'title': 'Hansard',
+            'filter': {
+                'kwargs': {
+                    'tags': 'hansard'
+                }
+            }
+        }
+        self.section_ordering.remove('speeches')
+        self.section_ordering += [
+            'questions', 'committee', 'hansard'
+        ]
 
 
 class SANewsletterPage(InfoPageView):

@@ -15,9 +15,10 @@
     <h2>Search</h2>
     {% endblock %}
 
-    <form method="get" action="." class="search-wrap">
+    <form method="get" action="." class="global-search-form">
+
       {% block alternative_search_section %}
-        {% if settings.COUNTRY_APP == 'south_africa' or settings.ENABLED_FEATURES.hansard %}
+        {% if settings.COUNTRY_APP == 'south_africa' %}
           <p>
             Alternatively search
 
@@ -27,37 +28,42 @@
               {% endblock %}
             {% endif %}
 
-            {% if settings.COUNTRY_APP == 'south_africa' and settings.ENABLED_FEATURES.hansard %}
-              or
-            {% endif %}
-
-            {% if settings.ENABLED_FEATURES.hansard %}
-              <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Hansard transcripts</a>
-            {% endif %}
-
             instead.
           </p>
         {% endif %}
       {% endblock %}
 
-        <div class="search-box">
-          {% block search_form %}
-            {{ form.q }}
-          {% endblock %}
+        <div class="search-section-box">
+            <h3>Search</h3>
+            {% block search_form %}
+            <input id="id_q" name="q" type="text" value="{{ query }}">
+            <div class="advanced-search-options">
+              {% for search_section, title, selected in form_options %}
+                  <input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label>
+              {% endfor %}
+              <div class="advanced-search-date-option">
+                <label for="advanced-search-order">Order results by</label>
+                <select name="order" id="advanced-search-order">
+                  <option value="relevance">Relevance</option>
+                  <option value="date">Date</option>
+                </select>
+              </div>
+            </div>
+            {% endblock %}
             <input type="submit" value="Search" class="button">
         </div>
 
-        {% if query %}
-
-            <h3>Results</h3>
-
-            {% block search_results %}
-            {% endblock %}
-        {% else %}
-            {% block search_instructions %}
-            {# Show some example queries to run, maybe query syntax, something else? #}
-            <p>Please enter a search term in the form above.</p>
-            {% endblock %}
-        {% endif %}
     </form>
+
+    {% if query %}
+
+        {% block search_results %}
+        {% endblock %}
+    {% else %}
+        {% block search_instructions %}
+        {# Show some example queries to run, maybe query syntax, something else? #}
+        <p>Please enter a search term in the form above.</p>
+        {% endblock %}
+    {% endif %}
+
 {% endblock %}

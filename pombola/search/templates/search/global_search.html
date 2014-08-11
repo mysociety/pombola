@@ -1,0 +1,50 @@
+{% extends 'search/search_base.html' %}
+
+{% block search_results %}
+
+  {% if top_hits %}
+    <div class="top-hits-results">
+      <h2>Top Hits</h2>
+      <ul class="unstyled-list">
+      {% for result in top_hits %}
+        {% if result.app_label == 'speeches' %}
+          {% include 'search/speech_item.html' %}
+        {% elif result.app_label == 'hansard' %}
+          {% include 'search/hansard_item.html' %}
+        {% else %}
+          {% include 'core/generic_list_item.html' with object=result.object %}
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <div "main-search-result">
+    <h3>Full Results</h3>
+    <ul class="unstyled-list">
+      {% for result in results %}
+
+        {% if result.app_label == 'speeches' %}
+          {% include 'search/speech_item.html' %}
+        {% elif result.app_label == 'hansard' %}
+          {% include 'search/hansard_item.html' %}
+        {% else %}
+          {% include 'core/generic_list_item.html' with object=result.object %}
+        {% endif %}
+
+      {% empty %}
+        <li>There were no results found for '{{ query }}'</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+
+  {% if results.has_previous or results.has_next %}
+    <div>
+        {% if results.has_previous %}<a href="?q={{ query }}&amp;page={{ results.previous_page_number }}">{% endif %}&laquo; Previous{% if results.has_previous %}</a>{% endif %}
+        |
+        {% if results.has_next %}<a href="?q={{ query }}&amp;page={{ results.next_page_number }}">{% endif %}Next &raquo;{% if results.has_next %}</a>{% endif %}
+    </div>
+  {% endif %}
+
+{% endblock %}

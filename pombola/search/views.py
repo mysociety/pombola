@@ -1,20 +1,214 @@
+from collections import namedtuple
+import json
 import re
 import sys
 import simplejson
 
-from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.conf import settings
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
 from pombola.core import models
 
 from haystack.query import SearchQuerySet
+from haystack.inputs import AutoQuery
 
 from sorl.thumbnail import get_thumbnail
 from .geocoder import geocoder
+
+
+class SearchBaseView(TemplateView):
+
+    top_hits_under = {
+        'persons': 2,
+        'blog_posts': 2,
+    }
+
+    results_per_page = 20
+
+    def __init__(self, *args, **kwargs):
+        super(SearchBaseView, self).__init__(*args, **kwargs)
+        self.section_ordering = ['persons', 'position_titles', 'organisations', 'places']
+        self.search_sections = {
+            'persons': {
+                'model': models.Person,
+                'title': 'People',
+                'exclude': {'hidden': True},
+            },
+            'position_titles': {
+                'model': models.PositionTitle,
+                'title': 'Positions',
+            },
+            'organisations': {
+                'model': models.Organisation,
+                'title': 'Organisations',
+            },
+            'places': {
+                'model': models.Place,
+                'title': 'Places',
+            },
+        }
+        if settings.ENABLED_FEATURES['speeches']:
+            from speeches.models import Speech
+            self.section_ordering.append('speeches')
+            self.search_sections['speeches'] = {
+                'model': Speech,
+                'title': 'Speeches',
+            }
+        if settings.ENABLED_FEATURES['hansard']:
+            from pombola.hansard.models import Entry
+            self.section_ordering.append('hansard')
+            self.search_sections['hansard'] = {
+                'model': Entry,
+                'title': 'Hansard',
+            }
+        if 'pombola.info' in settings.INSTALLED_APPS:
+            from pombola.info.models import InfoPage
+            self.section_ordering += ['blog_posts', 'info_pages']
+            self.search_sections['blog_posts'] = {
+                'model': InfoPage,
+                'title': 'Blog Posts',
+                'filter': {
+                    'kwargs': {
+                        'kind': 'blog'
+                    }
+                },
+            }
+            self.search_sections['info_pages'] = {
+                'model': InfoPage,
+                'title': 'Info Pages',
+                'filter': {
+                    'kwargs': {
+                        'kind': 'page'
+                    }
+                },
+            }
+
+    def parse_params(self):
+        # Check that the specified section is one we actually know
+        # about
+        self.section = self.request.GET.get('section')
+        if self.section == 'global':
+            self.section = None
+        self.query = self.request.GET.get('q', '')
+        self.order = self.request.GET.get('order')
+
+    def get(self, request, *args, **kwargs):
+        self.parse_params()
+        if self.section and (self.section not in self.search_sections):
+            message = 'The section {0} was not known'
+            return HttpResponseBadRequest(message.format(self.section))
+        return super(SearchBaseView, self).get(request, *args, **kwargs)
+
+    def get_template_names(self):
+        if self.section:
+            return ['search/section_search.html']
+        else:
+            return ['search/global_search.html']
+
+    def get_global_context(self, context):
+        # Find all the models to search over...
+        models = set(
+            self.search_sections[section]['model']
+            for section in self.search_sections
+        )
+
+        page = self.request.GET.get('page')
+        show_top_hits = (page == '1' or not page)
+
+        top_hits_ids = []
+
+        if show_top_hits:
+            context['top_hits'] = []
+            for section, max_for_top_hits in SearchBaseView.top_hits_under.items():
+                data = self.get_section_data(section)
+                if data['results_count'] <= max_for_top_hits:
+                    context['top_hits'] += data['results']
+            top_hits_ids = set(r.id for r in context['top_hits'])
+
+        sqs = SearchQuerySet().models(*list(models))
+        # Exclude anything that will already have been shown in the top hits:
+        for top_hit_id in top_hits_ids:
+            sqs = sqs.exclude(id=top_hit_id)
+        sqs = sqs. \
+            exclude(hidden=True). \
+            filter(content=AutoQuery(self.query)). \
+            highlight()
+
+        paginator = Paginator(sqs, self.results_per_page)
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
+        context['results'] = results
+
+        return context
+
+    def get_section_context(self, context, section):
+
+        data = self.get_section_data(section)
+
+        paginator = Paginator(data['results'], self.results_per_page)
+        page = self.request.GET.get('page')
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
+        context['results'] = results
+
+        return context
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchBaseView, self).get_context_data(**kwargs)
+        context['query'] = self.query
+        context['section'] = self.section
+        context['form_options'] = [('global', 'All', (not self.section))]
+        for section in self.section_ordering:
+            context['form_options'].append(
+                (section,
+                 self.search_sections[section]['title'],
+                 section == self.section)
+            )
+        if not self.query:
+            return context
+
+        if self.section:
+            return self.get_section_context(context, self.section)
+        else:
+            return self.get_global_context(context)
+
+    def get_section_data(self, section):
+        defaults = self.search_sections[section]
+        extra_filter = defaults.get('filter', {})
+        filter_args = extra_filter.get('args', [])
+        filter_kwargs = extra_filter.get('kwargs', {})
+        extra_exclude = defaults.get('exclude', {})
+        query = SearchQuerySet().models(defaults['model'])
+        if extra_exclude:
+            query = query.exclude(**extra_exclude)
+        query = query.filter(
+            content=AutoQuery(self.query),
+            *filter_args,
+            **filter_kwargs
+        )
+        if self.order == 'date':
+            query = query.order_by('-start_date')
+
+        result = defaults.copy()
+        result['results'] = query.highlight()
+        result['results_count'] = result['results'].count()
+        result['section'] = section
+        result['section_dashes'] = section.replace('_', '-')
+        return result
 
 
 class GeocoderView(TemplateView):
@@ -174,4 +368,3 @@ def autocomplete(request):
         simplejson.dumps(response_data),
         content_type='application/json',
     )
-
