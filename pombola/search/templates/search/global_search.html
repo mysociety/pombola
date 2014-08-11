@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if query %}
+        "{{ query }}" ::
+    {% endif %}
+    Search
+{% endblock %}
+
+{% block search_title %}
+  <h1>Search</h1>
+{% endblock %}
+
+{% block content %}
+
+  {% with count=persons_results.count %}
+    {% if count %}
+      <div "search-person-results">
+        <h2>People</h2>
+        <ul class="listing">
+        {% for person in persons_results|slice:":5" %}
+           {% include 'core/generic_list_item.html' with object=person.object %}
+        {% endfor %}
+        </ul>
+      </div>
+      <p>
+        {% if count > 5 %}
+          <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section=persons">Show more matching people ({{ count }} in total)</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endwith %}
+
+  {% with count=blog_posts_results.count %}
+    {% if count %}
+      <div "search-blog-posts-results">
+        <h2>Blog Posts</h2>
+        <ul class="listing">
+        {% for blog_post in blog_posts_results|slice:":5" %}
+           {% include 'core/generic_list_item.html' with object=blog_post.object %}
+        {% endfor %}
+        </ul>
+      </div>
+      <p>
+        {% if count > 5 %}
+          <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section=blog_posts">Show more matching blog posts ({{ count }} in total)</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endwith %}
+
+  {% with count=info_pages_results.count %}
+    {% if count %}
+      <div "search-info-pages-results">
+        <h2>Info Pages</h2>
+        <ul class="listing">
+        {% for info_page in info_pages_results|slice:":5" %}
+           {% include 'core/generic_list_item.html' with object=info_page.object %}
+        {% endfor %}
+        </ul>
+      </div>
+      <p>
+        {% if count > 5 %}
+          <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section=info_pages">Show more matching info pages ({{ count }} in total)</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endwith %}
+
+  {% with count=places_results.count %}
+    {% if count %}
+      <div "search-places-results">
+        <h2>Places</h2>
+        <ul class="listing">
+        {% for place in places_results|slice:":5" %}
+           {% include 'core/generic_list_item.html' with object=place.object %}
+        {% endfor %}
+        </ul>
+      </div>
+      <p>
+        {% if count > 5 %}
+          <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section=places">Show more matching places ({{ count }} in total)</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endwith %}
+
+  {% with count=organisations_results.count %}
+    {% if count %}
+      <div "search-organisations-results">
+        <h2>Organisations</h2>
+        <ul class="listing">
+        {% for place in organisations_results|slice:":5" %}
+           {% include 'core/generic_list_item.html' with object=place.object %}
+        {% endfor %}
+        </ul>
+      </div>
+      <p>
+        {% if count > 5 %}
+          <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section=organisations">Show more matching organisations ({{ count }} in total)</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endwith %}
+
+  {% with count=position_titles_results.count %}
+    {% if count %}
+      <div "search-position-titles-results">
+        <h2>Positions</h2>
+        <ul class="listing">
+        {% for position_title in position_titles_results|slice:":5" %}
+           {% include 'core/generic_list_item.html' with object=position_title.object %}
+        {% endfor %}
+        </ul>
+      </div>
+      <p>
+        {% if count > 5 %}
+          <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section=position_titles">Show more matching position titles ({{ count }} in total)</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endwith %}
+
+{% endblock %}

@@ -1,13 +1,16 @@
+from collections import namedtuple
+import json
 import re
 import sys
 import simplejson
 
-from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.conf import settings
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
 from pombola.core import models
 
@@ -15,6 +18,106 @@ from haystack.query import SearchQuerySet
 
 from sorl.thumbnail import get_thumbnail
 from .geocoder import geocoder
+
+
+class SearchBaseView(FormView):
+
+    def __init__(self, *args, **kwargs):
+        super(SearchBaseView, self).__init__(*args, **kwargs)
+        self.search_sections = {
+            'persons': {
+                'model': models.Person,
+                'title': 'People',
+                'exclude': {'hidden': True},
+            },
+            'position_titles': {
+                'model': models.PositionTitle,
+                'title': 'Positions',
+            },
+            'organisations': {
+                'model': models.Organisation,
+                'title': 'Organisations',
+            },
+            'places': {
+                'model': models.Place,
+                'title': 'Places',
+            },
+        }
+        if settings.ENABLED_FEATURES['speeches']:
+            from speeches.models import Speech
+            self.search_sections['speeches'] = {
+                'model': Speech,
+                'title': 'Speeches',
+            }
+        if 'pombola.info' in settings.INSTALLED_APPS:
+            from pombola.info.models import InfoPage
+            self.search_sections['blog_posts'] = {
+                'model': InfoPage,
+                'title': 'Info Pages',
+                'filter': {'kind': 'blog'},
+            }
+            self.search_sections['info_pages'] = {
+                'model': InfoPage,
+                'title': 'Blog Posts',
+                'filter': {'kind': 'page'},
+            }
+
+    def get(self, request, *args, **kwargs):
+        # Check that the specified section is one we actually know
+        # about
+        self.section = self.request.GET.get('section')
+        self.query_text = self.request.GET.get('q')
+        if self.section and self.section not in self.search_sections:
+            message = 'The section {0} was not known'
+            return HttpResponseBadRequest(message.format(message))
+        return super(SearchBaseView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchBaseView, self).get_context_data(**kwargs)
+        context['query_text'] = self.query_text
+        context['section'] = self.section
+        return context
+
+    def get_section_results(self, section):
+        defaults = self.search_sections[section]
+        extra_filter = defaults.get('filter', {})
+        extra_exclude = defaults.get('exclude', {})
+        query = SearchQuerySet().models(defaults['model'])
+        if extra_exclude:
+            query = query.exclude(**extra_exclude)
+        query = query.filter(content=AutoQuery(self.query_text), **extra_filter)
+        return query.highlight()
+
+
+class SearchGlobalView(SearchBaseView):
+    template_name = 'search/global_search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchGlobalView, self).get_context_data(**kwargs)
+        for section in self.search_sections:
+            context_key = section + '_results'
+            context[context_key] = self.get_section_results(section)
+        return context
+
+
+class SearchSectionView(SearchBaseView):
+    template_name = 'search/section_search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchSectionView, self).get_context_data(**kwargs)
+
+        context['title'] = self.search_sections[self.section]['title']
+        all_results = self.get_section_results(self.section)
+        paginator = Paginator(all_results, 10)
+        page = self.request.GET.get('page')
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
+        context['results'] = results
+        return context
 
 
 class GeocoderView(TemplateView):
@@ -174,4 +277,3 @@ def autocomplete(request):
         simplejson.dumps(response_data),
         content_type='application/json',
     )
-
