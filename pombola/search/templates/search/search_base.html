@@ -4,8 +4,8 @@
 {% load pagination_tags %}
 
 {% block title %}
-    {% if query %}
-        "{{ query }}" ::
+    {% if query_text %}
+        "{{ query_text }}" ::
     {% endif %}
     Search
 {% endblock %}
@@ -25,7 +25,7 @@
         </div>
 
     </form>
-        {% if query %}
+        {% if query_text %}
 
             <h3>Results</h3>
 

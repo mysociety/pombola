@@ -1,17 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'search/search_base.html' %}
 
-{% block title %}
-    {% if query %}
-        "{{ query }}" ::
-    {% endif %}
-    Search
-{% endblock %}
-
-{% block search_title %}
-  <h1>Search</h1>
-{% endblock %}
-
-{% block content %}
+{% block search_results %}
 
   {% with count=persons_results.count %}
     {% if count %}
