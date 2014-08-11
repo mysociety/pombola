@@ -34,6 +34,14 @@
 
             <ul class="listing">
             {% for result in page.object_list %}
+                {% comment %}
+                   FIXME: this next guard is only present because
+                   currently we have a not-properly-understood
+                   issue with Haystack letting Elasticsearch get
+                   out of sync with what's in the database:
+                   https://github.com/mysociety/pombola/issues/1424
+                {% endcomment %}
+                {% if result.object %}
                 <li>
                     <strong>{{ result.object.sitting.name }}</strong>
                     <a href="{{ result.object.get_absolute_url }}">view</a>
@@ -42,6 +50,7 @@
                     {% highlight result.object.content with request.GET.q %}
 
                 </li>
+                {% endif %}
             {% empty %}
                 <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
             {% endfor %}
