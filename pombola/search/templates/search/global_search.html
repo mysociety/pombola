@@ -110,4 +110,22 @@
     {% endif %}
   {% endwith %}
 
+  {% with count=speeches_results.count %}
+    {% if count %}
+      <div "search-position-titles-results">
+        <h2>Speeches</h2>
+        <ul class="listing">
+        {% for speech in speeches_results|slice:":5" %}
+           {% include 'core/generic_list_item.html' with object=speech.object %}
+        {% endfor %}
+        </ul>
+      </div>
+      <p>
+        {% if count > 5 %}
+          <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section=speeches">Show more matching speeches ({{ count }} in total)</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endwith %}
+
 {% endblock %}

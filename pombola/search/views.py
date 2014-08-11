@@ -15,12 +15,16 @@ from django.views.generic import TemplateView, FormView
 from pombola.core import models
 
 from haystack.query import SearchQuerySet
+from haystack.forms import ModelSearchForm
+from haystack.inputs import AutoQuery
 
 from sorl.thumbnail import get_thumbnail
 from .geocoder import geocoder
 
 
 class SearchBaseView(FormView):
+
+    form_class = ModelSearchForm
 
     def __init__(self, *args, **kwargs):
         super(SearchBaseView, self).__init__(*args, **kwargs)
