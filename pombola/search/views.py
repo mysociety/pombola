@@ -79,13 +79,16 @@ class SearchBaseView(TemplateView):
                 'filter': {'kind': 'page'},
             }
 
-    def get(self, request, *args, **kwargs):
+    def parse_params(self):
         # Check that the specified section is one we actually know
         # about
         self.section = self.request.GET.get('section')
         if self.section == 'global':
             self.section = None
         self.query = self.request.GET.get('q')
+
+    def get(self, request, *args, **kwargs):
+        self.parse_params()
         if self.section and (self.section not in self.search_sections):
             message = 'The section {0} was not known'
             return HttpResponseBadRequest(message.format(self.section))
