@@ -559,6 +559,15 @@ class SASearchView(SearchGlobalView):
 
     def __init__(self, *args, **kwargs):
         super(SASearchView, self).__init__(*args, **kwargs)
+        if False: # Or some option to use separate sections...
+            del self.search_sections['speeches']
+            self.search_sections['questions'] = {
+                'model': Speech,
+                'title': 'Questions',
+                'filter': {
+                    'tags': 'question'
+                }
+            }
 
 
 class SANewsletterPage(InfoPageView):
