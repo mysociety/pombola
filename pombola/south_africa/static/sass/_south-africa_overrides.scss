@@ -1439,6 +1439,11 @@ FOOTER
     margin-bottom: 1.5em;
 }
 
+.global-search-results {
+    .speech-name {
+        color: $colour_blackish;
+    }
+}
 
 /* Pagination controls */
 .step-pagination,
@@ -2505,4 +2510,11 @@ ul.pager {
 /* Statistics page */
 .rerunning-candidates {
     margin-bottom: 4em;
+}
+/* New Search page */
+.open-advanced-search {
+    padding-right: 17px;
+    background-image: url("../images/has-dropdown-dark.png");
+    background-position: right center;
+    background-repeat: no-repeat;
 }
