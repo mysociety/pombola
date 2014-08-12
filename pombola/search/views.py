@@ -78,7 +78,7 @@ class SearchBaseView(TemplateView):
         self.section = self.request.GET.get('section')
         if self.section == 'global':
             self.section = None
-        self.query_text = self.request.GET.get('q')
+        self.query = self.request.GET.get('q')
         if self.section and (self.section not in self.search_sections):
             message = 'The section {0} was not known'
             return HttpResponseBadRequest(message.format(self.section))
@@ -118,7 +118,7 @@ class SearchBaseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SearchBaseView, self).get_context_data(**kwargs)
-        context['query_text'] = self.query_text
+        context['query'] = self.query
         context['section'] = self.section
         context['results'] = [
             self.get_section_data(section) for section in self.section_ordering
@@ -142,7 +142,7 @@ class SearchBaseView(TemplateView):
         query = SearchQuerySet().models(defaults['model'])
         if extra_exclude:
             query = query.exclude(**extra_exclude)
-        query = query.filter(content=AutoQuery(self.query_text), **extra_filter)
+        query = query.filter(content=AutoQuery(self.query), **extra_filter)
         result = defaults.copy()
         result['results'] = query.highlight()
         result['results_count'] = result['results'].count()

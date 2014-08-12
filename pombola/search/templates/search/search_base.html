@@ -4,8 +4,8 @@
 {% load pagination_tags %}
 
 {% block title %}
-    {% if query_text %}
-        "{{ query_text }}" ::
+    {% if query %}
+        "{{ query }}" ::
     {% endif %}
     Search
 {% endblock %}
@@ -19,18 +19,20 @@
 
         <div class="search-section-box">
             <h3>Search</h3>
-            <input id="id_q" name="q" type="text" value="{{ query_text }}">
+            {% block search_form %}
+            <input id="id_q" name="q" type="text" value="{{ query }}">
             <div class="advanced-search-options">
               {% for search_section, title, selected in form_options %}
                   <input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label>
               {% endfor %}
             </div>
+            {% endblock %}
             <input type="submit" value="Search" class="button">
         </div>
 
     </form>
 
-    {% if query_text %}
+    {% if query %}
 
         <h2>Results</h2>
 
