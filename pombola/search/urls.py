@@ -26,10 +26,10 @@ urlpatterns = patterns('pombola.search.views',
     url( r'^autocomplete/', 'autocomplete',           name="autocomplete"        ),
 
     url(r'^$',
-        SearchGlobalView.as_view(form_class=SearchForm),
+        SearchGlobalView.as_view(),
         name='core_search'),
     url(r'^section/$',
-        SearchSectionView.as_view(form_class=SearchForm),
+        SearchSectionView.as_view(),
         name='core_search_section'),
 
     # Location search
