@@ -12,22 +12,26 @@
 
 {% block content %}
     {% block search_title %}
-    <h2>Search</h2>
+    <h1>Search</h1>
     {% endblock %}
 
     <form method="get" action="{% url 'core_search' %}" class="search-wrap">
 
         <div class="search-section-box">
-            <h3>Search</h3>
             {% block search_form %}
-            <input id="id_q" name="q" type="text" value="{{ query }}">
+            <div class="inline-search-box">
+                <label for="id_q">Search</label>
+                <input id="id_q" name="q" type="text" value="{{ query }}">
+                <input type="submit" value="Search" class="button">
+            </div>
+            <a href="#" class="js-open-advanced-search open-advanced-search">Advanced search</a>
             <div class="advanced-search-options">
               {% for search_section, title, selected in form_options %}
-                  <input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label>
+                  <div class="radio-button-columns"><input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label></div>
               {% endfor %}
             </div>
             {% endblock %}
-            <input type="submit" value="Search" class="button">
+
         </div>
 
     </form>
