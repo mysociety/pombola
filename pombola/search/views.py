@@ -80,9 +80,13 @@ class SearchBaseView(FormView):
         context = super(SearchBaseView, self).get_context_data(**kwargs)
         context['query_text'] = self.query_text
         context['section'] = self.section
-        context['form_options'] = [('global', 'All')]
-        for search_section, data in self.search_sections.items():
-            context['form_options'].append((search_section, data['title']))
+        context['form_options'] = [('global', 'All', (not self.section))]
+        for section in self.section_ordering:
+            context['form_options'].append(
+                (section,
+                 self.search_sections[section]['title'],
+                 section == self.section)
+            )
         return context
 
     def get_section_results(self, section):
