@@ -33,7 +33,7 @@
 
         {% if section_results.results_count > 5 %}
           <p>
-            <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section={{ section_results.section }}">Show more matching people ({{ section_results.title|lower }} in total)</a>
+            <a href="{% url 'core_search_section' %}?q={{ query_text|urlencode }}&section={{ section_results.section }}">Show more matching {{ section_results.title|lower }} ({{ section_results.results_count }} in total)</a>
           </p>
         {% endif %}
 
