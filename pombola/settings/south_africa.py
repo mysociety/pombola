@@ -3,7 +3,10 @@ import re
 from .base import *
 from .south_africa_base import *
 
-HAYSTACK_CONNECTIONS['default']['EXCLUDED_INDEXES'] = ['pombola.search.search_indexes.PlaceIndex']
+HAYSTACK_CONNECTIONS['default']['EXCLUDED_INDEXES'] = [
+    'pombola.search.search_indexes.PlaceIndex',
+    'speeches.search_indexes.SpeechIndex',
+]
 
 INSTALLED_APPS = insert_after(INSTALLED_APPS,
                               'markitup',
