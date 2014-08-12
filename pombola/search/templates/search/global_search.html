@@ -2,6 +2,17 @@
 
 {% block search_results %}
 
+  {% if top_hits %}
+    <div "top-hits-results">
+      <h2>Top Hits</h2>
+      <ul class="listing">
+      {% for result in top_hits %}
+         {% include 'core/generic_list_item.html' with object=result.object %}
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
   {% with count=persons_results.count %}
     {% if count %}
       <div "search-person-results">

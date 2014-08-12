@@ -99,11 +99,22 @@ class SearchBaseView(FormView):
 class SearchGlobalView(SearchBaseView):
     template_name = 'search/global_search.html'
 
+    top_hits_under = {
+        'persons': 2,
+        'blog_posts': 2,
+    }
+
     def get_context_data(self, **kwargs):
         context = super(SearchGlobalView, self).get_context_data(**kwargs)
+        context['top_hits'] = []
         for section in self.search_sections:
             context_key = section + '_results'
-            context[context_key] = self.get_section_results(section)
+            results = self.get_section_results(section)
+            max_for_top_hits = SearchGlobalView.top_hits_under.get(section, None)
+            if max_for_top_hits and results.count() <= max_for_top_hits:
+                context['top_hits'] += results
+            else:
+                context[context_key] = results
         return context
 
 
