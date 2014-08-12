@@ -63,12 +63,12 @@ class SearchBaseView(TemplateView):
             self.section_ordering += ['blog_posts', 'info_pages']
             self.search_sections['blog_posts'] = {
                 'model': InfoPage,
-                'title': 'Info Pages',
+                'title': 'Blog Posts',
                 'filter': {'kind': 'blog'},
             }
             self.search_sections['info_pages'] = {
                 'model': InfoPage,
-                'title': 'Blog Posts',
+                'title': 'Info Pages',
                 'filter': {'kind': 'page'},
             }
 
