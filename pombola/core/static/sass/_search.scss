@@ -64,3 +64,47 @@
 
 }
 */
+
+.search-section-box {
+
+}
+
+.open-advanced-search {
+  font-size: 0.875em;
+}
+
+.inline-search-box {
+  width: auto;
+  max-width: 640px;
+  margin-bottom: 1em;
+  label {
+    display: none;
+  }
+  input[type=text] {
+    font-size: 1em;
+    height: 2.75em;
+    line-height: 2.75em;
+    padding: 0 0.666em;
+    border: 1px solid $colour_muted;
+    width: 66%;
+    @media only all and (min-width: 640px) {
+       width: 75%;
+    }
+    display: inline-block;
+  }
+
+  .button {
+
+  }
+
+}
+
+.advanced-search-options {
+  padding: 1em;
+  background-color: $colour_lighter_grey;
+  margin-top: 1em;
+  .radio-button-columns {
+    width: 32%;
+    display: inline-block;
+  }
+}
