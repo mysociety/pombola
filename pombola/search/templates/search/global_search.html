@@ -9,6 +9,8 @@
       {% for result in top_hits %}
         {% if result.app_label == 'speeches' %}
           {% include 'search/speech_item.html' %}
+        {% elif result.app_label == 'hansard' %}
+          {% include 'search/hansard_item.html' %}
         {% else %}
           {% include 'core/generic_list_item.html' with object=result.object %}
         {% endif %}
@@ -25,6 +27,8 @@
           {% for result in section_results.results|slice:":5" %}
             {% if result.app_label == 'speeches' %}
               {% include 'search/speech_item.html' %}
+            {% elif result.app_label == 'hansard' %}
+              {% include 'search/hansard_item.html' %}
             {% else %}
               {% include 'core/generic_list_item.html' with object=result.object %}
             {% endif %}

@@ -58,6 +58,13 @@ class SearchBaseView(TemplateView):
                 'model': Speech,
                 'title': 'Speeches',
             }
+        if settings.ENABLED_FEATURES['hansard']:
+            from pombola.hansard.models import Entry
+            self.section_ordering.append('hansard')
+            self.search_sections['hansard'] = {
+                'model': Entry,
+                'title': 'Hansard',
+            }
         if 'pombola.info' in settings.INSTALLED_APPS:
             from pombola.info.models import InfoPage
             self.section_ordering += ['blog_posts', 'info_pages']
