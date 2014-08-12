@@ -76,6 +76,8 @@ class SearchBaseView(TemplateView):
         # Check that the specified section is one we actually know
         # about
         self.section = self.request.GET.get('section')
+        if self.section == 'global':
+            self.section = None
         self.query_text = self.request.GET.get('q')
         if self.section and (self.section not in self.search_sections):
             message = 'The section {0} was not known'
