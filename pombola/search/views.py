@@ -24,6 +24,11 @@ from .geocoder import geocoder
 
 class SearchBaseView(TemplateView):
 
+    top_hits_under = {
+        'persons': 2,
+        'blog_posts': 2,
+    }
+
     def __init__(self, *args, **kwargs):
         super(SearchBaseView, self).__init__(*args, **kwargs)
         self.section_ordering = ['persons', 'position_titles', 'organisations', 'places']
@@ -72,18 +77,42 @@ class SearchBaseView(TemplateView):
         # about
         self.section = self.request.GET.get('section')
         self.query_text = self.request.GET.get('q')
-        # If someone's requested the "global" section, redirect to the
-        # global search results:
-        if self.section:
-            if self.section == 'global':
-                url = reverse('core_search')
-                if self.query_text:
-                    url += "?q={0}".format(self.query_text)
-                return redirect(url)
-            elif self.section not in self.search_sections:
-                message = 'The section {0} was not known'
-                return HttpResponseBadRequest(message.format(self.section))
+        if self.section and (self.section not in self.search_sections):
+            message = 'The section {0} was not known'
+            return HttpResponseBadRequest(message.format(self.section))
         return super(SearchBaseView, self).get(request, *args, **kwargs)
+
+    def get_template_names(self):
+        if self.section:
+            return ['search/section_search.html']
+        else:
+            return ['search/global_search.html']
+
+    def get_global_context(self, context):
+        context['top_hits'] = []
+        results_without_top_hits = []
+        for data in context['results']:
+            max_for_top_hits = SearchBaseView.top_hits_under.get(data['section'], None)
+            if max_for_top_hits and data['results_count'] <= max_for_top_hits:
+                context['top_hits'] += data['results']
+            else:
+                results_without_top_hits.append(data)
+        context['results'] = results_without_top_hits
+        return context
+
+    def get_section_context(self, context):
+        context['title'] = self.search_sections[self.section]['title']
+        all_results = self.get_section_data(self.section)['results']
+        paginator = Paginator(all_results, 10)
+        page = self.request.GET.get('page')
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
+        context['results'] = results
+        return context
 
     def get_context_data(self, **kwargs):
         context = super(SearchBaseView, self).get_context_data(**kwargs)
@@ -99,7 +128,10 @@ class SearchBaseView(TemplateView):
                  self.search_sections[section]['title'],
                  section == self.section)
             )
-        return context
+        if self.section:
+            return self.get_section_context(context)
+        else:
+            return self.get_global_context(context)
 
     def get_section_data(self, section):
         defaults = self.search_sections[section]
@@ -115,48 +147,6 @@ class SearchBaseView(TemplateView):
         result['section'] = section
         result['section_dashes'] = section.replace('_', '-')
         return result
-
-
-class SearchGlobalView(SearchBaseView):
-    template_name = 'search/global_search.html'
-
-    top_hits_under = {
-        'persons': 2,
-        'blog_posts': 2,
-    }
-
-    def get_context_data(self, **kwargs):
-        context = super(SearchGlobalView, self).get_context_data(**kwargs)
-        context['top_hits'] = []
-        results_without_top_hits = []
-        for data in context['results']:
-            max_for_top_hits = SearchGlobalView.top_hits_under.get(data['section'], None)
-            if max_for_top_hits and data['results_count'] <= max_for_top_hits:
-                context['top_hits'] += data['results']
-            else:
-                results_without_top_hits.append(data)
-        context['results'] = results_without_top_hits
-        return context
-
-
-class SearchSectionView(SearchBaseView):
-    template_name = 'search/section_search.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(SearchSectionView, self).get_context_data(**kwargs)
-
-        context['title'] = self.search_sections[self.section]['title']
-        all_results = self.get_section_data(self.section)['results']
-        paginator = Paginator(all_results, 10)
-        page = self.request.GET.get('page')
-        try:
-            results = paginator.page(page)
-        except PageNotAnInteger:
-            results = paginator.page(1)
-        except EmptyPage:
-            results = paginator.page(paginator.num_pages)
-        context['results'] = results
-        return context
 
 
 class GeocoderView(TemplateView):

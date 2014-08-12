@@ -17,25 +17,14 @@
 
     <form method="get" action="{% url 'core_search' %}" class="search-wrap">
 
-        <div class="search-global-box">
-          {% block search_form %}
-            <input id="id_q" name="q" type="text" value="{{ query_text }}">
-          {% endblock %}
-            <input type="submit" value="Search" class="button">
-        </div>
-
-    </form>
-
-    <form method="get" action="{% url 'core_search_section' %}" class="advanced-search-wrap">
-
         <div class="search-section-box">
-            <h3>Advanced Search</h3>
+            <h3>Search</h3>
             <input id="id_q" name="q" type="text" value="{{ query_text }}">
-            <select>
-            {% for search_section, title, selected in form_options %}
-                <input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label>
-            {% endfor %}
-            </select>
+            <div class="advanced-search-options">
+              {% for search_section, title, selected in form_options %}
+                  <input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label>
+              {% endfor %}
+            </div>
             <input type="submit" value="Search" class="button">
         </div>
 

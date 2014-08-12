@@ -32,7 +32,7 @@ from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
     OrganisationDetailSub, PersonSpeakerMappingsMixin)
 from pombola.info.models import InfoPage, Category
 from pombola.info.views import InfoPageView
-from pombola.search.views import GeocoderView, SearchGlobalView
+from pombola.search.views import GeocoderView, SearchBaseView
 
 from pombola.south_africa.models import ZAPlace
 
@@ -555,7 +555,7 @@ if settings.ENABLED_FEATURES['speeches']:
     search_models += ( Speech, )
 
 
-class SASearchView(SearchGlobalView):
+class SASearchView(SearchBaseView):
 
     def __init__(self, *args, **kwargs):
         super(SASearchView, self).__init__(*args, **kwargs)

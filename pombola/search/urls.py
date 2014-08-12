@@ -7,8 +7,7 @@ from haystack.views import SearchView
 
 from pombola.core    import models as core_models
 
-from .views import (SearchGlobalView, SearchSectionView,
-   GeocoderView)
+from .views import SearchBaseView, GeocoderView
 
 search_models = (
     core_models.Person,
@@ -26,11 +25,8 @@ urlpatterns = patterns('pombola.search.views',
     url( r'^autocomplete/', 'autocomplete',           name="autocomplete"        ),
 
     url(r'^$',
-        SearchGlobalView.as_view(),
+        SearchBaseView.as_view(),
         name='core_search'),
-    url(r'^section/$',
-        SearchSectionView.as_view(),
-        name='core_search_section'),
 
     # Location search
     url(
