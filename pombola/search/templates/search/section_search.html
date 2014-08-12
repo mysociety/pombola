@@ -16,7 +16,11 @@
   <h2>{{ title }}</h2>
   <ul class="listing">
   {% for result in results %}
-    {% include 'core/generic_list_item.html' with object=result.object %}
+    {% if result.app_label == 'speeches' %}
+      {% include 'search/speech_item.html' %}
+    {% else %}
+      {% include 'core/generic_list_item.html' with object=result.object %}
+    {% endif %}
   {% empty %}
     <li>There were no results found for '{{ query_text }}'</li>
   {% endfor %}
