@@ -31,9 +31,11 @@
         <div class="search-section-box">
             <h3>Advanced Search</h3>
             <input id="id_q" name="q" type="text" value="{{ query_text }}">
+            <select>
             {% for search_section, title, selected in form_options %}
                 <input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label>
             {% endfor %}
+            </select>
             <input type="submit" value="Search" class="button">
         </div>
 
