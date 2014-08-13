@@ -52,13 +52,6 @@ COUNTRY_JS = {
         'output_filename': 'js/tabs.js',
         'template_name': 'pipeline/js-array.html',
     },
-    'hide-reveal': {
-        'source_filenames': (
-            'js/hide-reveal.js',
-        ),
-        'output_filename': 'js/hide-reveal.js',
-        'template_name': 'pipeline/js-array.html',
-    },
     'za-map-drilldown': {
         'source_filenames': (
             'js/za-map-drilldown.js',
