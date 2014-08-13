@@ -24,8 +24,8 @@
                 <input id="id_q" name="q" type="text" value="{{ query }}">
                 <input type="submit" value="Search" class="button">
             </div>
-            <a href="#" class="js-open-advanced-search open-advanced-search">Advanced search</a>
-            <div class="advanced-search-options">
+            <a href="#advanced-search-options" class="js-hide-reveal-link open-advanced-search">Advanced search</a>
+            <div class="advanced-search-options js-hide-reveal-panel" id="advanced-search-options">
               {% for search_section, title, selected in form_options %}
                   <div class="radio-button-columns"><input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label></div>
               {% endfor %}
