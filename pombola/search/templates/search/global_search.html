@@ -19,7 +19,7 @@
 
   {% for section_results in results %}
     {% if section_results.results_count %}
-      <div "search-{{ section_results.section_dashes }}-results">
+      <div class="search-{{ section_results.section_dashes }}-results">
         <h3>{{ section_results.title }}</h3>
         <ul class="listing">
           {% for result in section_results.results|slice:":5" %}
