@@ -14,7 +14,7 @@
 {% block search_results %}
 
   <h2>{{ title }}</h2>
-  <ul class="listing">
+  <ul class="unstyled-list">
   {% for result in results %}
     {% if result.app_label == 'speeches' %}
       {% include 'search/speech_item.html' %}

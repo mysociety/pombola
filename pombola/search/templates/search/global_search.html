@@ -3,9 +3,9 @@
 {% block search_results %}
 
   {% if top_hits %}
-    <div "top-hits-results">
-      <h3>Top Hits</h3>
-      <ul class="listing">
+    <div class="top-hits-results">
+      <h2>Top Hits</h2>
+      <ul class="unstyled-list">
       {% for result in top_hits %}
         {% if result.app_label == 'speeches' %}
           {% include 'search/speech_item.html' %}
@@ -22,8 +22,8 @@
   {% for section_results in results %}
     {% if section_results.results_count %}
       <div class="search-{{ section_results.section_dashes }}-results">
-        <h3>{{ section_results.title }}</h3>
-        <ul class="listing">
+        <h2>{{ section_results.title }}</h2>
+        <ul class="unstyled-list">
           {% for result in section_results.results|slice:":5" %}
             {% if result.app_label == 'speeches' %}
               {% include 'search/speech_item.html' %}
