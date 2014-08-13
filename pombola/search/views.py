@@ -96,6 +96,7 @@ class SearchBaseView(TemplateView):
         if self.section == 'global':
             self.section = None
         self.query = self.request.GET.get('q', '')
+        self.page = self.request.GET.get('page')
         self.order = self.request.GET.get('order')
 
     def get(self, request, *args, **kwargs):
@@ -111,6 +112,16 @@ class SearchBaseView(TemplateView):
         else:
             return ['search/global_search.html']
 
+    def get_paginated_results(self, sqs):
+        paginator = Paginator(sqs, self.results_per_page)
+        try:
+            results = paginator.page(self.page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
+        return results
+
     def get_global_context(self, context):
         # Find all the models to search over...
         models = set(
@@ -118,8 +129,7 @@ class SearchBaseView(TemplateView):
             for section in self.search_sections
         )
 
-        page = self.request.GET.get('page')
-        show_top_hits = (page == '1' or not page)
+        show_top_hits = (self.page == '1' or not self.page)
 
         top_hits_ids = []
 
@@ -139,32 +149,12 @@ class SearchBaseView(TemplateView):
             exclude(hidden=True). \
             filter(content=AutoQuery(self.query)). \
             highlight()
-
-        paginator = Paginator(sqs, self.results_per_page)
-        try:
-            results = paginator.page(page)
-        except PageNotAnInteger:
-            results = paginator.page(1)
-        except EmptyPage:
-            results = paginator.page(paginator.num_pages)
-        context['results'] = results
-
+        context['results'] = self.get_paginated_results(sqs)
         return context
 
     def get_section_context(self, context, section):
-
         data = self.get_section_data(section)
-
-        paginator = Paginator(data['results'], self.results_per_page)
-        page = self.request.GET.get('page')
-        try:
-            results = paginator.page(page)
-        except PageNotAnInteger:
-            results = paginator.page(1)
-        except EmptyPage:
-            results = paginator.page(paginator.num_pages)
-        context['results'] = results
-
+        context['results'] = self.get_paginated_results(data['results'])
         return context
 
     def get_context_data(self, **kwargs):
