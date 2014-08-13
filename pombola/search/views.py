@@ -58,27 +58,37 @@ class SearchBaseView(TemplateView):
                 'model': Speech,
                 'title': 'Speeches',
             }
+        if settings.ENABLED_FEATURES['hansard']:
+            from pombola.hansard.models import Entry
+            self.section_ordering.append('hansard')
+            self.search_sections['hansard'] = {
+                'model': Entry,
+                'title': 'Hansard',
+            }
         if 'pombola.info' in settings.INSTALLED_APPS:
             from pombola.info.models import InfoPage
             self.section_ordering += ['blog_posts', 'info_pages']
             self.search_sections['blog_posts'] = {
                 'model': InfoPage,
-                'title': 'Info Pages',
+                'title': 'Blog Posts',
                 'filter': {'kind': 'blog'},
             }
             self.search_sections['info_pages'] = {
                 'model': InfoPage,
-                'title': 'Blog Posts',
+                'title': 'Info Pages',
                 'filter': {'kind': 'page'},
             }
 
-    def get(self, request, *args, **kwargs):
+    def parse_params(self):
         # Check that the specified section is one we actually know
         # about
         self.section = self.request.GET.get('section')
         if self.section == 'global':
             self.section = None
         self.query = self.request.GET.get('q')
+
+    def get(self, request, *args, **kwargs):
+        self.parse_params()
         if self.section and (self.section not in self.search_sections):
             message = 'The section {0} was not known'
             return HttpResponseBadRequest(message.format(self.section))

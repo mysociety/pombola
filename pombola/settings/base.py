@@ -524,6 +524,13 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/modernizr_and_loader.js',
     },
+    'hide-reveal': {
+        'source_filenames': (
+            'js/hide-reveal.js',
+        ),
+        'output_filename': 'js/hide-reveal.js',
+        'template_name': 'pipeline/js-array.html',
+    },
 }
 
 for package_name, package in DYNAMICALLY_LOADED_PIPELINE_JS.items():

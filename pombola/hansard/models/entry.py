@@ -76,6 +76,8 @@ class Entry(HansardModelBase):
         sitting_url = self.sitting.get_absolute_url()
         return "%s#entry-%u" % (sitting_url, self.id)
 
+    def css_class(self):
+        return 'hansard_entry'
 
     class Meta:
         ordering = ['sitting', 'text_counter']
