@@ -4,11 +4,11 @@
 <li class="search-results-item search-results-{{ object.css_class }}-item{% if not object.show_active %} inactive{% endif %}">
 
   {% thumbnail object.primary_image "90x90" crop="center" as im %}
-    <a href="{{ object.get_absolute_url }}">
+    <a href="{{ object.get_absolute_url }}" class="search-image-thumbnail">
       <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
     </a>
   {% empty %}
-    <a href="{{ object.get_absolute_url }}">
+    <a href="{{ object.get_absolute_url }}" class="search-image-thumbnail">
       <img src="{% static 'images/organisation-90x90.jpg' %}" />
     </a>
   {% endthumbnail %}
