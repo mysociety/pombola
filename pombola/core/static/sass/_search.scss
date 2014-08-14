@@ -173,9 +173,21 @@
 
 .search-image-thumbnail {
   float: left;
+  img {
+    max-width: 45px;
+    @media only all and (min-width: 640px) {
+      max-width: 90px;
+    }
+    height: auto;
+  }
 }
 
 .search-result-body {
-  margin-left: 110px;
-  min-height: 90px; /* Same as the height of the image thumbnail */
+  margin-left: 65px;
+  min-height: 45px; /* Same as the height of the image thumbnail */
+  @media only all and (min-width: 640px) {
+    margin-left: 110px;
+    min-height: 90px; /* Same as the height of the image thumbnail */
+  }
+
 }
