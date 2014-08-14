@@ -16,24 +16,12 @@
   <h2>{{ title }}</h2>
   <ul class="unstyled-list">
   {% for result in results %}
-    {% if result.app_label == 'speeches' %}
-      {% include 'search/speech_item.html' %}
-    {% elif result.app_label == 'hansard' %}
-      {% include 'search/hansard_item.html' %}
-    {% else %}
-      {% include 'core/generic_list_item.html' with object=result.object %}
-    {% endif %}
+    {% include 'search/search_results_item.html' %}
   {% empty %}
-    <li>There were no results found for '{{ query }}'</li>
+    <li>There were no results found for '{{ query }}' in {{ title }}</li>
   {% endfor %}
   </ul>
 
-  {% if results.has_previous or results.has_next %}
-    <div>
-        {% if results.has_previous %}<a href="?q={{ query }}&amp;section={{ section }}&amp;page={{ results.previous_page_number }}">{% endif %}&laquo; Previous{% if results.has_previous %}</a>{% endif %}
-        |
-        {% if results.has_next %}<a href="?q={{ query }}&amp;section={{ section }}&amp;page={{ results.next_page_number }}">{% endif %}Next &raquo;{% if results.has_next %}</a>{% endif %}
-    </div>
-  {% endif %}
+  {% include 'search/_search_pagination.html' %}
 
 {% endblock %}

@@ -1,0 +1,41 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+<li class="search-results-item search-results-{{ object.css_class }}-item{% if not object.show_active %} inactive{% endif %}">
+
+  {% thumbnail object.primary_image "90x90" crop="center" as im %}
+    <a href="{{ object.get_absolute_url }}">
+      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+    </a>
+  {% empty %}
+    <a href="{{ object.get_absolute_url }}">
+      <img src="{% static 'images/person-90x90.jpg' %}" />
+    </a>
+  {% endthumbnail %}
+
+  <section>
+    <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+
+    {% with pos_set=object.position_set.all.currently_active %}
+    <p>
+
+      {% for position in pos_set|slice:":4" %}
+        <strong>{{ position.title.name }}</strong> of {{ position.organisation.name }}
+        <span class="meta">({{ position.display_dates|safe }})</span>;
+      {% empty %}
+        No currently active positions found.
+      {% endfor %}
+
+      {% with remaining=pos_set.count|add:'-4' %}
+        {% if remaining > 0 %}
+          and {{ remaining }} more&hellip;
+        {% endif %}
+      {% endwith %}
+
+    </p>
+    {% endwith %}
+
+    <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
+  </section>
+
+</li>

@@ -1,0 +1,24 @@
+{% load switch %}
+
+{% with object=result.object %}
+    {% if result.app_label == 'speeches' %}
+      {% include 'search/items/speech.html' %}
+    {% elif result.app_label == 'hansard' %}
+      {% include 'search/items/hansard.html' %}
+    {% else %}
+        {% switch object.css_class %}
+          {% case 'position' %}
+            {% include 'search/items/position.html' %}
+          {% case 'positiontitle' %}
+            {% include 'search/items/positiontitle.html' %}
+          {% case 'person' %}
+            {% include 'search/items/person.html' %}
+          {% case 'organisation' %}
+            {% include 'search/items/organisation.html' %}
+          {% case 'place' %}
+            {% include 'search/items/place.html' %}
+          {% else %}
+            {% include 'search/items/unknown.html' %}
+        {% endswitch %}
+    {% endif %}
+{% endwith %}

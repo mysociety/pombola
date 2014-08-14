@@ -1,0 +1,32 @@
+{% load staticfiles %}
+{% load thumbnail %}
+{% load hidden %}
+
+<li class="search-results-item search-results-{{ object.css_class }}-item{% if not object.show_active %} inactive{% endif %}">
+
+  {% thumbnail object.person.primary_image "90x90" crop="center" as im %}
+    {% maybehidden object.person user %}
+      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+    {% endmaybehidden %}
+  {% empty %}
+    {% maybehidden object.person user %}
+      <img src="{% static 'images/person-90x90.jpg' %}" />
+    {% endmaybehidden %}
+  {% endthumbnail %}
+
+  <section>
+    <h4>{% maybehidden object.person user %}{{ object.person.name }}{% endmaybehidden %}</h4>
+    {% if object.place %}
+      <p>Member for {{ object.place.name }}</p>
+    {% else %}
+      {# Bring on the elif clause! #}
+      {% if object.is_nominated_politician %}
+        <p>Nominated Member</p>
+      {% endif %}
+    {% endif %}
+    {% if not object.person.hidden %}
+      <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
+    {% endif %}
+  </section>
+
+</li>

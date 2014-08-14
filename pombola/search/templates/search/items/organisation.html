@@ -1,0 +1,28 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+<li class="search-results-item search-results-{{ object.css_class }}-item{% if not object.show_active %} inactive{% endif %}">
+
+  {% thumbnail object.primary_image "90x90" crop="center" as im %}
+    <a href="{{ object.get_absolute_url }}">
+      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+    </a>
+  {% empty %}
+    <a href="{{ object.get_absolute_url }}">
+      <img src="{% static 'images/organisation-90x90.jpg' %}" />
+    </a>
+  {% endthumbnail %}
+
+  <section>
+    <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+
+    <div class="kind">{{ object.kind.name }}</div>
+
+    {% if object.num_positions %}
+      <p class="meta">{{ object.num_positions }} related positions</p>
+    {% endif %}
+
+    <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
+  </section>
+
+</li>

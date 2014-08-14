@@ -1,0 +1,30 @@
+{% load thumbnail %}
+{% load staticfiles %}
+
+<li class="search-results-item search-results-{{ object.css_class }}-item{% if not object.show_active %} inactive{% endif %}">
+
+  {% thumbnail object.primary_image "90x90" crop="center" as im %}
+    <a href="{{ object.get_absolute_url }}">
+      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+    </a>
+  {% empty %}
+    <a href="{{ object.get_absolute_url }}">
+      <img src="{% static 'images/place-90x90.jpg' %}" />
+    </a>
+  {% endthumbnail %}
+
+  <section>
+    <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+
+    {% if object.parent_place %}
+      <p>Parent place: <a href="{{ object.parent_place.get_absolute_url }}">{{ object.parent_place.name }}</a></p>
+    {% endif %}
+
+    <p class="meta">{{ object.summary }}</p>
+
+    <div class="kind">{{ object.kind.name }}<br>{{ object.parliamentary_session|default:"" }}</div>
+
+    <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
+  </section>
+
+</li>
