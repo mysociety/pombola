@@ -50,13 +50,6 @@
               {% for search_section, title, selected in form_options %}
                   <div class="radio-button-columns"><input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label></div>
               {% endfor %}
-              <div class="advanced-search-date-option">
-                <label for="advanced-search-order">Order results by</label>
-                <select name="order" id="advanced-search-order">
-                  <option value="relevance">Relevance</option>
-                  <option value="date">Date</option>
-                </select>
-              </div>
             </div>
             {% endblock %}
 
@@ -65,7 +58,6 @@
     </form>
     <div class="global-search-results">
         {% if query %}
-
             {% block search_results %}
             {% endblock %}
         {% else %}
