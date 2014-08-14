@@ -2,9 +2,8 @@
 
 <li class="search-results-item search-results-hansard-item">
 
-  <strong>{{ result.object.sitting.name }}</strong>
-  <a href="{{ result.object.get_absolute_url }}">view</a>
-  <br>
-  {% highlight result.object.content with query %}
+  <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.sitting.name }}</a></h3>
+
+  <p>{% highlight result.object.content with query %}</p>
 
 </li>

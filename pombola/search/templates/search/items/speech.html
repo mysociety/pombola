@@ -1,9 +1,8 @@
 <li class="search-results-item search-results-speech-item">
 
     <section>
-        <h4><a href="{{ result.object.get_absolute_url }}">{{ result.object.section|default:"Result" }}</a></h4>
-        <div class="read-more-wrap"><a href="{{ result.object.get_absolute_url }}" class="read-more">read more</a></div>
-        {{ result.highlighted.0|safe }}
+        <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.section|default:"Result" }}</a></h3>
+        <p>{{ result.highlighted.0|safe }}</p>
     </section>
 
 </li>

@@ -15,7 +15,7 @@
   {% endthumbnail %}
 
   <section>
-    <h4>{% maybehidden object.person user %}{{ object.person.name }}{% endmaybehidden %}</h4>
+    <h3>{% maybehidden object.person user %}{{ object.person.name }}{% endmaybehidden %}</h3>
     {% if object.place %}
       <p>Member for {{ object.place.name }}</p>
     {% else %}
@@ -23,9 +23,6 @@
       {% if object.is_nominated_politician %}
         <p>Nominated Member</p>
       {% endif %}
-    {% endif %}
-    {% if not object.person.hidden %}
-      <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
     {% endif %}
   </section>
 

@@ -13,8 +13,8 @@
     </a>
   {% endthumbnail %}
 
-  <section>
-    <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+  <section class="search-result-body">
+    <h3><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h3>
 
     {% with pos_set=object.position_set.all.currently_active %}
     <p>
@@ -35,7 +35,6 @@
     </p>
     {% endwith %}
 
-    <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
   </section>
 
 </li>

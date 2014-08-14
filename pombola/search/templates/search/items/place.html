@@ -13,18 +13,13 @@
     </a>
   {% endthumbnail %}
 
-  <section>
-    <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
-
-    {% if object.parent_place %}
-      <p>Parent place: <a href="{{ object.parent_place.get_absolute_url }}">{{ object.parent_place.name }}</a></p>
-    {% endif %}
+  <section class="search-result-body">
+    <h3><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h3>
 
     <p class="meta">{{ object.summary }}</p>
 
     <div class="kind">{{ object.kind.name }}<br>{{ object.parliamentary_session|default:"" }}</div>
 
-    <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
   </section>
 
 </li>

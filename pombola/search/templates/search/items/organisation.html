@@ -13,16 +13,14 @@
     </a>
   {% endthumbnail %}
 
-  <section>
-    <h4><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h4>
+  <section class="search-result-body">
+    <h3><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h3>
 
     <div class="kind">{{ object.kind.name }}</div>
 
     {% if object.num_positions %}
       <p class="meta">{{ object.num_positions }} related positions</p>
     {% endif %}
-
-    <div class="read-more-wrap"><a href="{{ object.get_absolute_url }}" class="read-more">read more</a></div>
   </section>
 
 </li>

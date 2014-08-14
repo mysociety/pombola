@@ -148,3 +148,34 @@
     color: $colour_blackish;
   }
 }
+
+.search-results-item {
+  width: 100%;
+  margin: 1em 0 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid $colour_muted;
+  clear: both;
+  p:last-child {
+    margin-bottom: 0;
+  }
+  h3 {
+    font-size: 21px;
+    a {
+      text-decoration: none;
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.search-image-thumbnail {
+  float: left;
+}
+
+.search-result-body {
+  margin-left: 110px;
+  min-height: 90px; /* Same as the height of the image thumbnail */
+}
