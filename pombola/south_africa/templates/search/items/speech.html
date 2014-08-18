@@ -12,7 +12,7 @@
         </span>
     </h3>
   {% endif %}
-    <a href="{{ result.object.get_absolute_url }}">
+    <a href="{% url 'speeches:section-view' result.object.section.get_path %}#s{{ result.object.id }}">
         <span class="speech-name">{{ result.object.speaker }}:</span>
         <span class="speech-description">{{ result.highlighted.0|safe }}</span>
     </a>
