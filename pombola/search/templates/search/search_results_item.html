@@ -5,6 +5,8 @@
       {% include 'search/items/speech.html' %}
     {% elif result.app_label == 'hansard' %}
       {% include 'search/items/hansard.html' %}
+    {% elif object.css_class == 'infopage' and object.kind == 'blog' %}
+      {% include 'search/items/blog.html' %}
     {% else %}
         {% switch object.css_class %}
           {% case 'position' %}
