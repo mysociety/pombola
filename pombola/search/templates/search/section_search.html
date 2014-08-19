@@ -13,12 +13,12 @@
 
 {% block search_results %}
 
-  <h2>{{ title }}</h2>
+  <h2>{{ section_title }}</h2>
   <ul class="unstyled-list">
   {% for result in results %}
     {% include 'search/search_results_item.html' %}
   {% empty %}
-    <li>There were no results found for '{{ query }}' in {{ title }}</li>
+    <li>There were no results found for '{{ query }}' in {{ section_title }}</li>
   {% endfor %}
   </ul>
 
