@@ -15,14 +15,6 @@
 
   <div class="main-search-result">
     <h2>Results {{ results.start_index }}-{{ results.end_index }} of {{ results.paginator.count }} for "{{ query }}"</h2>
-    <div class="search-order-by-controls">
-      <!-- todo: needs an if statement. Only show if we can actually order by anything other than relevance. Also needs a submit event to change it? -->
-      <label for="search-results-order">Order by</label>
-      <select name="order" id="search-results-order">
-        <option value="relevance">Relevance</option>
-        <option value="date">Date</option>
-      </select>
-    </div>
     <ul class="unstyled-list">
       {% for result in results %}
         {% include 'search/search_results_item.html' %}

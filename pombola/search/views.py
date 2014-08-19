@@ -160,6 +160,7 @@ class SearchBaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SearchBaseView, self).get_context_data(**kwargs)
         context['query'] = self.query
+        context['order'] = self.order
         context['section'] = self.section
         context['form_options'] = [('global', 'All', (not self.section))]
         for section in self.section_ordering:

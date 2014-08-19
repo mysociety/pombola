@@ -125,6 +125,9 @@
     margin-bottom: 0.75em;
     font-size: 0.875em;
   }
+  .search-order-by-controls {
+    font-size: 0.875em;
+  }
 }
 
 .global-search-results {
@@ -195,12 +198,6 @@
 .main-search-result {
   position: relative;
   margin-top: 3em;
-}
-
-.search-order-by-controls {
-  position: absolute;
-  top: 0.5em;
-  right: 0;
 }
 
 .search-type-label {
