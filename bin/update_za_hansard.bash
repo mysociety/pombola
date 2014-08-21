@@ -6,6 +6,8 @@ set -e
 # check that we are in the expected directory
 cd `dirname $0`/..
 
+./bin/run_management_command popit_resolver_init --popit-api-url=http://za-new-import.popit.mysociety.org/api/v0.1/
+
 ./bin/run_management_command za_hansard_check_for_new_sources
 ./bin/run_management_command za_hansard_run_parsing
 ./bin/run_management_command za_hansard_load_into_sayit
