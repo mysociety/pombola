@@ -21,3 +21,5 @@ ENABLED_FEATURES = make_enabled_features(INSTALLED_APPS, ALL_OPTIONAL_APPS)
 
 PIPELINE_CSS.update(COUNTRY_CSS)
 PIPELINE_JS.update(COUNTRY_JS)
+
+EXCLUDE_FROM_SEARCH = ('places', 'info_pages');

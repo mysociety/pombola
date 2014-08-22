@@ -89,6 +89,13 @@ class SearchBaseView(TemplateView):
                 },
             }
 
+        # Remove any sections that are configured to be excluded
+        for section in settings.EXCLUDE_FROM_SEARCH:
+            if section in self.search_sections:
+                del self.search_sections[section]
+            if section in self.section_ordering:
+                self.section_ordering.remove(section)
+
     def parse_params(self):
         # Check that the specified section is one we actually know
         # about
