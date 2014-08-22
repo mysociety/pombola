@@ -165,6 +165,12 @@ class SearchBaseView(TemplateView):
         if self.section:
             context['section_title'] = self.search_sections[self.section]['title']
         context['form_options'] = [('global', 'All', (not self.section))]
+
+        query_dict = self.request.GET.copy()
+        if 'page' in query_dict:
+            del query_dict['page']
+        context['query_string'] = query_dict.urlencode()
+
         for section in self.section_ordering:
             context['form_options'].append(
                 (section,

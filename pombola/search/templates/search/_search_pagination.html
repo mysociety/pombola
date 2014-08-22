@@ -1,6 +1,6 @@
 {% if results.has_previous or results.has_next %}
   <div>
-      {% if results.has_previous %}<a href="?q={{ query }}&amp;page={{ results.previous_page_number }}" class="button">&laquo; Previous</a>{% endif %}
-      {% if results.has_next %}<a href="?q={{ query }}&amp;page={{ results.next_page_number }}" class="button">Next &raquo;</a>{% endif %}
+      {% if results.has_previous %}<a href="?{{ query_string }}&amp;page={{ results.previous_page_number }}" class="button">&laquo; Previous</a>{% endif %}
+      {% if results.has_next %}<a href="?{{ query_string }}&amp;page={{ results.next_page_number }}" class="button">Next &raquo;</a>{% endif %}
   </div>
 {% endif %}
