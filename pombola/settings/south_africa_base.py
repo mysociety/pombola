@@ -66,4 +66,11 @@ COUNTRY_JS = {
         'output_filename': 'js/election_countdown.js',
         'template_name': 'pipeline/js-array.html',
     },
+    'advanced-search': {
+        'source_filenames': (
+            'js/advanced-search.js',
+        ),
+        'output_filename': 'js/advanced-search.js',
+        'template_name': 'pipeline/js-array.html',
+    }
 }
