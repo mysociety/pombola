@@ -325,9 +325,6 @@ class SAOrganisationDetailView(OrganisationDetailView):
 
         context['total_people'] =  total_people
 
-        context['all_members'] = self.object.position_set.filter(title__slug='member').currently_active()
-        context['office_bearers'] = self.object.position_set.exclude(title__slug='member').currently_active()
-
     def get_template_names(self):
         if self.object.kind.slug == 'parliament':
             return [ 'south_africa/organisation_house.html' ]
