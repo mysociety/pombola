@@ -69,6 +69,13 @@ class SAHomeView(HomeView):
             except Category.DoesNotExist:
                 pass
 
+        # If there is editable homepage content make it available to the templates.
+        try:
+            page = InfoPage.objects.get(slug="homepage-quote")
+            context['quote_content'] = page.content
+        except InfoPage.DoesNotExist:
+            context['quote_content'] = None
+
         return context
 
 class SAGeocoderView(GeocoderView):
