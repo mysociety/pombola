@@ -54,7 +54,7 @@ class MaybeHiddenNode(Node):
         # Now wrap the output in a link to the person page if the user
         # is a super user or if not, only if the person is not hidden:
         if (user and user.is_superuser) or not person.hidden:
-            return u'<a href="{url}">{enclosed_html}</foo>'.format(
+            return u'<a href="{url}">{enclosed_html}</a>'.format(
                 url=person.get_absolute_url(),
                 enclosed_html=output)
         else:
