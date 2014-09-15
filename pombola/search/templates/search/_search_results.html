@@ -1,11 +1,7 @@
 
 <ul class="listing">
 {% for result in page.object_list %}
-    {% if result.app_label == 'speeches' %}
-        {% include 'search/speech_item.html' %}
-    {% else %}
-        {% include 'core/generic_list_item.html' with object=result.object %}
-    {% endif %}
+    {% include 'search/search_results_item.html' with object=result.object %}
 {% empty %}
     <li>There were no results for "<strong>{{ query }}</strong>" - please try a different search.</li>
 {% endfor %}

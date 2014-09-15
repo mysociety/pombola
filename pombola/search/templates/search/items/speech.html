@@ -1,0 +1,8 @@
+<li class="search-results-item search-results-speech-item">
+
+    <section>
+        <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.section|default:"Result" }}</a></h3>
+        <p>{{ result.highlighted.0|safe }}</p>
+    </section>
+
+</li>

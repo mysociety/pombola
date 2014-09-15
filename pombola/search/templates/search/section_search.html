@@ -1,0 +1,27 @@
+{% extends 'search/search_base.html' %}
+
+{% block title %}
+    {% if query %}
+        "{{ query }}" ::
+    {% endif %}
+    Search
+{% endblock %}
+
+{% block search_title %}
+  <h1>Search</h1>
+{% endblock %}
+
+{% block search_results %}
+
+  <h2>{{ section_title }}</h2>
+  <ul class="unstyled-list">
+  {% for result in results %}
+    {% include 'search/search_results_item.html' %}
+  {% empty %}
+    <li>There were no results found for '{{ query }}' in {{ section_title }}</li>
+  {% endfor %}
+  </ul>
+
+  {% include 'search/_search_pagination.html' %}
+
+{% endblock %}

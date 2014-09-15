@@ -2,6 +2,7 @@
 
 {% load thumbnail %}
 {% load pagination_tags %}
+{% load compressed %}
 
 {% block title %}
     {% if query %}
@@ -10,14 +11,22 @@
     Search
 {% endblock %}
 
+{% block extra_js_to_load %}
+    addExtraJS([ {% compressed_js 'hide-reveal' %} null ]);
+  {% if settings.COUNTRY_APP == 'south_africa' %}
+    addExtraJS([ {% compressed_js 'advanced-search' %} null ]);
+  {% endif %}
+{% endblock %}
+
 {% block content %}
     {% block search_title %}
-    <h2>Search</h2>
+    <h1>Search</h1>
     {% endblock %}
 
-    <form method="get" action="." class="search-wrap">
+    <form method="get" action="." class="global-search-form">
+
       {% block alternative_search_section %}
-        {% if settings.COUNTRY_APP == 'south_africa' or settings.ENABLED_FEATURES.hansard %}
+        {% if settings.COUNTRY_APP == 'south_africa' %}
           <p>
             Alternatively search
 
@@ -27,30 +36,38 @@
               {% endblock %}
             {% endif %}
 
-            {% if settings.COUNTRY_APP == 'south_africa' and settings.ENABLED_FEATURES.hansard %}
-              or
-            {% endif %}
-
-            {% if settings.ENABLED_FEATURES.hansard %}
-              <a href="{% url "hansard_search"  %}" id="search-hansard-instead">Hansard transcripts</a>
-            {% endif %}
-
             instead.
           </p>
         {% endif %}
       {% endblock %}
 
-        <div class="search-box">
-          {% block search_form %}
-            {{ form.q }}
-          {% endblock %}
-            <input type="submit" value="Search" class="button">
+        <div class="search-section-box">
+            {% block search_form %}
+            <div class="inline-search-box">
+                <label for="id_q">Search</label>
+                <input id="id_q" name="q" type="text" value="{{ query }}">
+                <input type="submit" value="Search" class="button">
+            </div>
+            <a href="#advanced-search-options" class="js-hide-reveal-link open-advanced-search">Advanced search</a>
+            <div class="advanced-search-options js-hide-reveal" id="advanced-search-options">
+              {% for search_section, title, selected in form_options %}
+                  <div class="radio-button-columns"><input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label></div>
+              {% endfor %}
+              <div class="search-order-by-controls">
+                <label for="search-results-order">Order by</label>
+                  <select name="order" id="search-results-order">
+                    <option value="relevance"{% if order == 'relevance' %} selected{% endif %}>Relevance</option>
+                    <option value="date"{% if order == 'date' %} selected{% endif %}>Date</option>
+                  </select>
+              </div>
+            </div>
+            {% endblock %}
+
         </div>
 
+    </form>
+    <div class="global-search-results">
         {% if query %}
-
-            <h3>Results</h3>
-
             {% block search_results %}
             {% endblock %}
         {% else %}
@@ -59,5 +76,5 @@
             <p>Please enter a search term in the form above.</p>
             {% endblock %}
         {% endif %}
-    </form>
+    </div>
 {% endblock %}

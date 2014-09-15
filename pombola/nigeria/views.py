@@ -6,6 +6,7 @@ from mapit.models import Area
 from pombola.core.models import Place
 from pombola.core.views import HomeView
 from pombola.info.models import InfoPage
+from pombola.search.views import SearchBaseView
 
 class NGHomeView(HomeView):
 
@@ -111,12 +112,31 @@ def tidy_up_pun(pun):
 
     return pun
 
-class SearchPollUnitNumberView(TemplateView):
-    template_name = 'search/poll-unit-number.html'
+# A regular expression to match any PUN after it's been tidied
+pun_re = re.compile('''
+    ^(
+       [A-Z]{2}|
+       [A-Z]{2}:\d+|
+       [A-Z]{2}:\d+:\d+
+    )$
+''', re.VERBOSE)
+
+
+class NGSearchView(SearchBaseView):
+
+    def get_template_names(self):
+        if self.pun:
+            return ['search/poll-unit-number.html']
+        else:
+            return super(NGSearchView, self).get_template_names()
 
     def get_context_data(self, **kwargs):
-        context = super(SearchPollUnitNumberView, self).get_context_data(**kwargs)
+        context = super(NGSearchView, self).get_context_data(**kwargs)
 
+        if self.pun is None:
+            return context
+
+        # So now we know that the query is a PUN:
         query = tidy_up_pun(self.request.GET.get('q'))
         context['raw_query'] = query
 
@@ -159,6 +179,18 @@ class SearchPollUnitNumberView(TemplateView):
 
         return context
 
+    def parse_params(self):
+        super(NGSearchView, self).parse_params()
+        tidied_as_if_pun = tidy_up_pun(self.query)
+        # Check if this is a known form of PUN:
+        if pun_re.search(self.query):
+            self.pun = tidied_as_if_pun
+        else:
+            self.pun = None
+
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('q')
+        return super(NGSearchView, self).get(request, *args, **kwargs)
 
     def find_matching_places(self, code, polygons):
         """Find MapIt areas of 'code' type that overlap with 'polygons'

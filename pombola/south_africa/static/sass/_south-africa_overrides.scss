@@ -1439,6 +1439,11 @@ FOOTER
     margin-bottom: 1.5em;
 }
 
+.global-search-results {
+    .speech-name {
+        color: $colour_blackish;
+    }
+}
 
 /* Pagination controls */
 .step-pagination,
@@ -2059,18 +2064,6 @@ ul.pager {
     }
 }
 
-.hide-reveal-link {
-    display: block;
-    padding: 0.5em 0;
-}
-
-.has-dropdown-dark {
-    background-image: url('/static/images/has-dropdown-dark.png');
-    background-position: 100% 1em;
-    background-repeat: no-repeat;
-
-}
-
 @media only all and (min-width: 640px), print {
     #front_intro .home-left {
         width: 65.8333333%;
@@ -2517,4 +2510,40 @@ ul.pager {
 /* Statistics page */
 .rerunning-candidates {
     margin-bottom: 4em;
+}
+
+/* New Search page */
+.open-advanced-search {
+    padding-right: 17px;
+    background-image: url("../images/has-dropdown-dark.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+.search-results-item {
+    h3 {
+        text-transform: none;
+    }
+}
+
+.search-results-speech-item {
+    h3 {
+        font-size: 17px;
+        color: #777;
+    }
+    a {
+        text-decoration: none;
+        color: $colour-black;
+        .speech-description {
+            color: $colour-primary;
+        }
+        &:hover,
+        &:active,
+        &:focus {
+            .speech-description {
+                color: $colour-black;
+                text-decoration: underline;
+            }
+        }
+    }
 }

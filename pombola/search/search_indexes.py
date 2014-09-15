@@ -50,3 +50,12 @@ if settings.ENABLED_FEATURES['hansard']:
     class HansardEntryIndex(BaseIndex, indexes.Indexable):
         def get_model(self):
             return hansard_models.Entry
+
+if 'pombola.info' in settings.INSTALLED_APPS:
+    from pombola.info.models import InfoPage
+
+    class InfoPageIndex(BaseIndex, indexes.Indexable):
+        kind = indexes.CharField(model_attr='kind')
+
+        def get_model(self):
+            return InfoPage

@@ -1,0 +1,30 @@
+{% extends 'search/search_base.html' %}
+
+{% block search_results %}
+
+  {% if top_hits %}
+    <div class="top-hits-results">
+      <h2>Top Hits</h2>
+      <ul class="unstyled-list">
+      {% for result in top_hits %}
+        {% include 'search/search_results_item.html' %}
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <div class="main-search-result">
+    <h2>Results {{ results.start_index }}-{{ results.end_index }} of {{ results.paginator.count }} for "{{ query }}"</h2>
+    <ul class="unstyled-list">
+      {% for result in results %}
+        {% include 'search/search_results_item.html' %}
+      {% empty %}
+        <li>There were no results found for '{{ query }}'</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+
+  {% include 'search/_search_pagination.html' %}
+
+{% endblock %}
