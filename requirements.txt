@@ -4,27 +4,27 @@
 
 ### General useful bits
 py-bcrypt==0.4
-PyYAML==3.10
-Mercurial==2.9
-Pillow==2.5.3
+PyYAML==3.11
+Mercurial==3.1.2
+Pillow==2.6.1
 
 ### Database drivers
-psycopg2==2.5.2
+psycopg2==2.5.4
 
 ### Django related
 Django==1.6.5
 django-pagination==1.0.7
-South==0.8.4
-django-pipeline==1.3.21
+South==1.0.1
+django-pipeline==1.3.25
 django-pipeline-compass-rubygem==0.1.8
 
 ### Pombola dependencies
-sorl-thumbnail==11.12
+sorl-thumbnail==12.1c
 django_date_extensions==0.1dev
-django-ajax-selects==1.3.3
-django-autocomplete-light==2.0.0a15
+django-ajax-selects==1.3.5
+django-autocomplete-light==2.0.2
 
-Markdown==2.4
+Markdown==2.5.1
 
 # Note that django-markitup (for v2.1 at least) adds a recent jQuery (v2.0.3) to
 # the admin pages, which other code then relies on, for example the
@@ -32,26 +32,26 @@ Markdown==2.4
 # that the behaviour is not altered. If you need to reintroduce jQuery manually
 # into the admin then commit c5fdf97df10782c098592e89503fce461840dcda may be
 # useful as a reference.
-django-markitup==2.1
+django-markitup==2.2.1
 
-requests==2.2.1
-pyelasticsearch==0.6.1
-django-haystack==2.1.0
+requests==2.5
+elasticsearch==1.2.0
+django-haystack==2.3.1
 
 # Testing helpers
-django-nose==1.2
+django-nose==1.3
 yanc==0.2.4
-httplib2==0.8
-WebTest==2.0.14
-django-webtest==1.7.6
+httplib2==0.9
+WebTest==2.0.15
+django-webtest==1.7.7
 git+git://github.com/nathforge/django-mechanize.git@d9537ccf8cc66bc7913df0c95fd532699ec88fdc
-selenium==2.40.0
-django-selenium==0.9.6
+selenium==2.44
+django-selenium==0.9.7
 
 # Hansard parsing is quite particular
 BeautifulSoup==3.2.1
 beautifulsoup4==4.3.2
-Unidecode==0.04.14
+Unidecode==0.04.16
 python-memcached==1.53
 
 # django-mapit
@@ -67,54 +67,54 @@ git+git://github.com/mysociety/popit-resolver@76c2e89dd673b601a295edbb0ccbde1feb
 # popit-python is needed by the core_send_people_to_popit command
 -e git+git://github.com/mysociety/popit-python.git@88f2c6b3b8c122d4bd4bd4b4edf9afe87df0bd08#egg=popit-python
 
-python-dateutil==2.2
+python-dateutil==2.3
 
 # Packages that are helpful for development:
 coverage==3.7.1
-django-debug-toolbar==1.0.1
+django-debug-toolbar==1.2.2
 
 ## votematch
-django-model-utils==2.0.2
+django-model-utils==2.2
 
-parsedatetime==1.2
+parsedatetime==1.4
 
-pygeocoder==1.2.2
+pygeocoder==1.2.5
 
 # Dependencies of our dependencies
 Django-Select2==4.2.2
-Shapely==1.3.0
-WebOb==1.3.1
-amqp==1.4.4
+Shapely==1.5
+WebOb==1.4
+amqp==1.4.6
 anyjson==0.3.3
-audioread==1.0.1
-billiard==3.3.0.16
+audioread==1.0.3
+billiard==3.3.0.19
 bleach==1.4
-celery==3.1.9
-chardet==2.2.1
+celery==3.1.17
+chardet==2.3
 cssselect==0.9.1
-django-bleach==0.2.0
-django-celery==3.1.9
+django-bleach==0.3
+django-celery==3.1.16
 django-qmethod==0.0.3
-django-subdomain-instances==0.1
-django-tastypie==0.11.0
+django-subdomain-instances==0.9
+django-tastypie==0.12.1
 html5lib==0.999
-kombu==3.0.13
-lxml==3.3.5
+kombu==3.0.24
+lxml==3.4
 mechanize==0.2.5
 mimeparse==0.1.3
 mock==1.0.1
-nose==1.3.0
-numpy==1.8.0
+nose==1.3.4
+numpy==1.9.1
 parslepy==0.2.0
 python-magic==0.4.6
-pytz==2013.9
-simplejson==3.3.3
-six==1.5.2
-slumber==0.6.0
-sqlparse==0.1.11
-virtualenv==1.11.4
-waitress==0.8.8
-wsgi-intercept==0.6.1
+pytz==2014.10
+simplejson==3.6.5
+six==1.8
+slumber==0.6.2
+sqlparse==0.1.14
+virtualenv==1.11.6
+waitress==0.8.9
+wsgi-intercept==0.8
 wsgiref==0.1.2
 
 # We cannot pin these to specific versions, because they're OS/Python version
@@ -132,10 +132,11 @@ GDAL
 argparse==1.1
 
 # Used for keeping an eye on this file.
-pip-tools==0.3.4
+pip-tools==0.3.5
 
 # Other things presumably installed as dependencies of stuff above
 python-mimeparse==0.1.4
+
 
 #necessary to process unicode csv files for ZA elections data
 unicodecsv==0.9.4
