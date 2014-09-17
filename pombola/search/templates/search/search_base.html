@@ -48,8 +48,12 @@
                 <input id="id_q" name="q" type="text" value="{{ query }}">
                 <input type="submit" value="Search" class="button">
             </div>
+            {% if settings.COUNTRY_APP == 'south_africa' %}
+            <h4>Advanced search</h4>
+            {% else %}
             <a href="#advanced-search-options" class="js-hide-reveal-link open-advanced-search">Advanced search</a>
-            <div class="advanced-search-options js-hide-reveal" id="advanced-search-options">
+            {% endif %}
+            <div class="advanced-search-options{% if settings.COUNTRY_APP != 'south_africa' %} js-hide-reveal{% endif %}" id="advanced-search-options">
               {% for search_section, title, selected in form_options %}
                   <div class="radio-button-columns"><input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label></div>
               {% endfor %}
