@@ -1,0 +1,49 @@
+{% load i18n %}
+
+{% for person in data %}
+    <h3>
+        <a href="{{ person.person.get_absolute_url }}">{{ person.person.name }}</a>
+         - {{ person.year }}
+    </h3>
+
+    {% for category in person.data %}
+      <h4>{{ category.category.name }}</h4>
+      <table>
+          <tr>
+              {% for header in category.headers %}
+                  <th>{{ header }}</th>
+              {% endfor %}
+          </tr>
+          {% for row in category.data %}
+            <tr>
+                {% for cell in row %}
+                  <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+          {% endfor %}
+      </table>
+    {% endfor %}
+{% endfor %}
+
+
+<div class="step-pagination">
+    <span class="step-links">
+        {% if paginator.has_previous %}
+          <a href="?display={{ display }}&category={{ category }}&party={{ party }}&organisation={{ organisation }}&release={{ release }}&page={{ paginator.previous_page_number }}">
+              {% trans "Previous" %}
+          </a>
+        {% endif %}
+
+        <span class="current">
+          {% blocktrans with num=paginator.number pages=paginator.paginator.num_pages %}
+            Page <strong>{{ num }}</strong> of <strong>{{ pages }}</strong>
+          {% endblocktrans %}
+        </span>
+
+        {% if paginator.has_next %}
+          <a href="?display={{ display }}&category={{ category }}&party={{ party }}&organisation={{ organisation }}&release={{ release }}&page={{ paginator.next_page_number }}">
+              {% trans "Next" %}
+          </a>
+        {% endif %}
+    </span>
+</div>

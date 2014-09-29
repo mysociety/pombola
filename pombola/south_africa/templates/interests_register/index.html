@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% load compressed %}
+
+{% block title %}Members' Interests{% endblock %}
+
+{% block extra_js_to_load %}
+    addExtraJS([ {% compressed_js 'interests-filter' %} null ]);
+{% endblock %}
+
+{% block body_attributes %} class="members-interests" {% endblock %}
+
+{% block content %}
+<div class="interests-header">
+    <div class="wrapper">
+        <h1>Members' Interests</h1>
+    </div>
+</div>
+
+<h3>Filter</h3>
+
+<div class="members-interests-filter">
+<form action="{% url 'sa-interests-index' %}" method="get">
+
+<div class="filter-option">
+    <label for="display">Display:</label>
+    <select name="display" id="display">
+        <option value="all"{% if display == "all" %} selected="selected"{% endif %}>
+            All Declarations
+        </option>
+        <option value="numberbyrepresentative"{% if display == "numberbyrepresentative" %} selected="selected"{% endif %}>
+            Number of Declarations per MP
+        </option>
+        <option value="numberbysource"{% if display == "numberbysource" %} selected="selected"{% endif %}>
+            Number of Declarations per Source (gifts, benefits, pensions, and sponsorships only)
+        </option>
+    </select>
+</div>
+
+<div class="filter-option">
+    <label for="category">Category:</label>
+    <select name="category">
+        <option value="all"{% if category == "all" %} selected="selected"{% endif %}>All</option>
+        {% for c in categories %}
+          <option value="{{ c.slug }}"{% if category == c.slug %} selected="selected"{% endif %}>
+              {{ c.name }}
+          </option>
+        {% endfor %}
+    </select>
+</div>
+
+<div class="filter-option">
+    <label for="party">Party:</label>
+    <select name="party" id="party">
+        <option value="all"{% if party == "all" %} selected="selected"{% endif %}>All</option>
+        {% for o in parties %}
+          <option value="{{ o.slug }}"{% if party == o.slug %} selected="selected"{% endif %}>
+              {{ o.name }}
+          </option>
+        {% endfor %}
+    </select>
+</div>
+
+<div class="filter-option">
+    <label for="organisation">Member of:</label>
+    <select name="organisation" id="organisation">
+        <option value="all"{% if organisation == "all" %} selected="selected"{% endif %}>All</option>
+        {% for o in organisations %}
+          {% ifchanged o.kind %}
+            {% if not forloop.first %}</optgroup>{% endif %}
+            <optgroup label="{{ o.kind.name }}">
+          {% endifchanged %}
+            <option value="{{ o.slug }}"{% if organisation == o.slug %} selected="selected"{% endif %}>{{ o.name }}</option>
+        {% endfor %}
+        </optgroup>
+    </select>
+</div>
+
+<div class="filter-option">
+    <label for="release">Year:</label>
+    <select name="release">
+        <option value="all"{% if release == "all" %} selected="selected"{% endif %}>All</option>
+        {% for r in releases %}
+          <option value="{{ r.slug }}"{% if release == r.slug %} selected="selected"{% endif %}>
+              {{ r.name }}
+          </option>
+        {% endfor %}
+    </select>
+</div>
+
+<input type="submit" value="Filter" class="button">
+
+</form>
+</div>
+
+{% if layout == "numberbyrepresentative" %}
+  {% include "interests_register/index_numberbyrepresentative.html" %}
+{% elif layout == "numberbysource" %}
+  {% include "interests_register/index_numberbysource.html" %}
+{% elif layout == "complete" %}
+  {% include "interests_register/index_complete.html" %}
+{% elif layout == "section" %}
+  {% include "interests_register/index_section.html" %}
+{% endif %}
+
+
+{% endblock %}

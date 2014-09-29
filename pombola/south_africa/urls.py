@@ -156,3 +156,18 @@ urlpatterns += patterns('pombola.south_africa.views',
     # NOTE - you still need to create an InfoPage with the slug 'newsletter' for this not to 404.
     url(r'^info/newsletter', SANewsletterPage.as_view(), {'slug': 'newsletter'}, name='info_page_newsletter'),
 )
+
+
+# Members' interests browser
+urlpatterns += patterns('',
+    url(
+        r'^interests/$',
+        views.SAMembersInterestsIndex.as_view(),
+        name='sa-interests-index'
+    ),
+    url(
+        r'^interests/source/$',
+        views.SAMembersInterestsSource.as_view(),
+        name='sa-interests-source'
+    ),
+)

@@ -2547,3 +2547,28 @@ ul.pager {
         }
     }
 }
+
+.members-interests {
+    .members-interests-filter {
+        padding: 1em;
+        background-color: $colour_lighter_grey;
+        vertical-align: top;
+
+        label {
+            width: 90px;
+            display: inline-block;
+        }
+
+        .filter-option {
+            height: 30px;
+        }
+
+        .button {
+            margin-top: 1em;
+        }
+
+        select, input[type="text"] {
+            vertical-align: top;
+        }
+    }
+}

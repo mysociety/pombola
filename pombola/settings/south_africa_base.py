@@ -72,5 +72,12 @@ COUNTRY_JS = {
         ),
         'output_filename': 'js/advanced-search.js',
         'template_name': 'pipeline/js-array.html',
+    },
+    'interests-filter': {
+        'source_filenames' : (
+            'js/interests-filter.js',
+        ),
+        'output_filename': 'js/interests-filter.js',
+        'template_name': 'pipeline/js-array.html',
     }
 }
