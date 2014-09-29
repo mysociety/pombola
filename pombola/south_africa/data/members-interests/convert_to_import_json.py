@@ -14,7 +14,7 @@ script_dir = os.path.basename(__file__)
 base_dir = os.path.join(script_dir, "../../../../..")
 app_path = os.path.abspath(base_dir)
 sys.path.append(app_path)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings.south_africa'
 
 from django.conf import settings
 from django.utils.text import slugify
