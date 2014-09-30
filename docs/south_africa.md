@@ -97,13 +97,22 @@ There are three management commands to be run for Hansard content.
         --instance        (only needed if you have renamed the sayit instance from Default)
         --limit
 
-Note that though we have a --redo option for the parsing, the sayit import will not run again
-if the database record for the za_hansard Source already has a `sayit_section_id`.
+#### Reparsing hansard
 
-As the import will always create a new section and speeches, this could lead to
-URLs changing.  Bearing this in mind, and with appropriate care, it is possible
-to (manually) null the appropriate sayit_section_id, delete the sayit sections/speeches,
-and then rerun the import.
+It's possible to do a full reparse of the hansards using the following commands.
+Please note that this will delete any existing sources and re-fetch them, though
+this is probably what you want as the sources might have been updated with
+spelling/grammar corrections. Also be aware that the
+`za_hansard_load_into_sayit` command with the `--delete-existing` flag will
+delete existing speeches that have been tagged as 'hansard', and will therefore
+break the permalinks to individual speeches.
+
+**WARNING: This is destructive and will take several hours to complete.**
+
+    $ python manage.py popit_resolver_init --popit-api-url=http://za-new-import.popit.mysociety.org/api/v0.1/
+    $ python manage.py za_hansard_check_for_new_sources --check-all --delete-existing
+    $ python manage.py za_hansard_run_parsing
+    $ python manage.py za_hansard_load_into_sayit --delete-existing
 
 ## Committee Minutes
 
