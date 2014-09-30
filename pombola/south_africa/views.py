@@ -50,14 +50,18 @@ class SAHomeView(HomeView):
         articles = InfoPage.objects.filter(
             kind=InfoPage.KIND_BLOG).order_by("-publication_date")
 
-        context['news_categories'] = []
-        for slug in ('week-parliament', 'impressions'):
-            try:
-                c = Category.objects.get(slug=slug)
-                context['news_categories'].append(
-                    (c, articles.filter(categories=c)[:3]))
-            except Category.DoesNotExist:
-                pass
+        articles_for_front_page = \
+            InfoPage.objects.filter(
+                categories__slug__in=(
+                    'week-parliament',
+                    'impressions'
+                )
+            ).order_by('-publication_date')
+
+        context['article_columns'] = [
+            articles_for_front_page[0:3],
+            articles_for_front_page[3:6],
+        ]
 
         context['other_news_categories'] = []
         for slug in ('advocacy-campaigns', 'commentary', 'mp-corner'):

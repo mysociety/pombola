@@ -62,10 +62,11 @@
 
     <div id="news">
 
-      {% for category, articles in news_categories %}
+      <h2 class="home-news-heading">That Week in Parliament</h2>
+
+      {% for articles in article_columns %}
 
         <div class="home-news">
-            <h2><a href="{% url 'info_blog_category' slug=category.slug %}">{{ category.name }}</a></h2>
             <ul class="home-news-list">
             {% for article in articles %}
             <li>
@@ -77,12 +78,11 @@
             </li>
             {% endfor %}
             </ul>
-            <p><a class="readmore" href="{% url 'info_blog_category' slug=category.slug %}">See All &#187;</a></p>
         </div>
 
       {% endfor %}
 
-
+      <p><a class="readmore" href="{% url 'info_blog_list' %}">See All &#187;</a></p>
 
         <div class="home-news-bottom">
 
