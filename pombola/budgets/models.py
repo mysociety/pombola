@@ -5,6 +5,9 @@ from django.contrib.contenttypes.models import ContentType
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
 from django.db import models
 
+import babel.numbers
+import decimal
+
 class BudgetSession(models.Model):
     created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)
     updated = models.DateTimeField(auto_now=True, default=datetime.datetime.now)
@@ -55,6 +58,12 @@ class Budget(models.Model):
 
     # The actual value of this budget
     value = models.IntegerField()
+
+    # A nice formatted value of this budget
+    @property
+    def formatted_value(self):
+        return babel.numbers.format_currency(decimal.Decimal(self.value), self.currency)
+
 
     # Every budget can have an external source.
     source_url = models.URLField(blank=True)
