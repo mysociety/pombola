@@ -8,21 +8,16 @@
     <h3>{{ session.grouper }}
 
     <table class="budgets">
-        <tr>
-            <th>Funder</th>
-            <th>Name</th>
-            <th>Amount</th>
-        </tr>
         {% for entry in session.list %}
         <tr>
-            <td>
+            <th scope="row">
                 {{ entry.organisation }}
-            </td>
+            </th>
             <td>
                 {{ entry.name }}
             </td>
             <td>
-                {{ entry.currency }} {{ entry.value }}
+                {{ entry.formatted_value }}
             </td>
         </li>
         {% endfor %}
