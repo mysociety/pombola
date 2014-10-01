@@ -14,6 +14,10 @@
     <li><a href="{% url "place_scorecard" slug=object.slug %}">Scorecard</a></li>
   {% endif %}
 
+  {% if object.has_budgets %}
+    <li><a href="{% url "place_budgets" slug=object.slug %}">Budgets</a></li>
+  {% endif %}
+
   <li><a href="{% url "place_people" slug=object.slug %}">People</a></li>
   <li><a href="{% url "place_places" slug=object.slug %}">Places</a></li>
 

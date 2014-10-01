@@ -1,0 +1,32 @@
+{% if object.has_budgets %}
+    <h2>Budgets</h2>
+
+    {% regroup object.budgets by budget_session.name as budgets_by_session %}
+
+    {% for session in budgets_by_session %}
+
+    <h3>{{ session.grouper }}
+
+    <table class="budgets">
+        <tr>
+            <th>Funder</th>
+            <th>Name</th>
+            <th>Amount</th>
+        </tr>
+        {% for entry in session.list %}
+        <tr>
+            <td>
+                {{ entry.organisation }}
+            </td>
+            <td>
+                {{ entry.name }}
+            </td>
+            <td>
+                {{ entry.currency }} {{ entry.value }}
+            </td>
+        </li>
+        {% endfor %}
+    </table>
+
+    {% endfor %}
+{% endif %}
