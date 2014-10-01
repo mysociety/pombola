@@ -31,6 +31,7 @@ from pombola.tasks.models import Task
 from pombola.images.models import HasImageMixin, Image
 
 from pombola.scorecards.models import ScorecardMixin
+from pombola.budgets.models import BudgetsMixin
 from pombola.slug_helpers.models import validate_slug_not_redirecting
 
 from mapit import models as mapit_models
@@ -659,7 +660,7 @@ class PlaceManager(ManagerBase):
     def get_query_set(self):
         return PlaceQuerySet(self.model)
 
-class Place(ModelBase, ScorecardMixin):
+class Place(ModelBase, ScorecardMixin, BudgetsMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(
         max_length=200,
