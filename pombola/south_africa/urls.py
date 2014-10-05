@@ -54,6 +54,9 @@ urlpatterns += patterns('',
     # FIXME - implement a redirect to /persons/joe-bloggs#appearances when #930
     # done
     # url(r'^person/(?P<person_slug>[-\w]+)/appearances/$', ........ ),
+    url(r'^person/(?P<slug>[-\w]+)/appearances/$',
+        RedirectView.as_view(pattern_name='person', permanent=False),
+        name='sa-person-appearances'),
 
     url(
         r'^person/(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
