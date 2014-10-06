@@ -1,3 +1,5 @@
+{% load speech_utils %}
+
 {% comment %}
 
   Arguments:
@@ -28,9 +30,9 @@
             &mdash;
             {{ speech.start_date }}
         </p>
-        <p>
-            {{ speech.text|truncatewords:50 }}
-        </p>
+        <div>
+            {{ speech.text|bleach|truncatewords_html:50 }}
+        </div>
     </li>
     {% empty %}
         No speeches found
