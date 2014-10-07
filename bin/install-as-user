@@ -99,6 +99,6 @@ if ! grep -q 'Set up virtualenv activation for Pombola' $HOME/.bashrc; then
     cat >>$HOME/.bashrc <<EOBRC
 
 # Set up virtualenv activation for Pombola
-source /vagrant/pombola-virtualenv/bin/activate
+source "$DIRECTORY/pombola-virtualenv/bin/activate"
 EOBRC
 fi
