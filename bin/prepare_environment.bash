@@ -66,6 +66,8 @@ find . -name '*.pyc' -delete
 mkdir -p "../gems"
 export GEM_HOME="$(cd ../gems && pwd -P)"
 export PATH="$GEM_HOME/bin:$PATH"
+
+gem install --no-ri --no-rdoc json
 gem install --no-ri --no-rdoc chunky_png -v 1.2.9
 gem install --no-ri --no-rdoc fssm -v 0.2.10
 gem install --no-ri --no-rdoc sass -v 3.2.19
