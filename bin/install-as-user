@@ -48,8 +48,7 @@ LINK_DESTINATION="$HOME/pombola"
 ln -sfn "$REPOSITORY" $LINK_DESTINATION
 cd "$REPOSITORY"
 
-# Install the compass gem locally - it's required for generating the
-# CSS:
+# Set up a GEM_HOME for site-local installation of compass and other gems:
 echo "Setting up CSS... "
 export GEM_HOME="$DIRECTORY/gems"
 mkdir -p "$GEM_HOME"
@@ -65,8 +64,6 @@ export GEM_PATH=
 export PATH="\$GEM_HOME/bin:\$PATH"
 EOBRC
 fi
-
-gem install --no-ri --no-rdoc compass
 echo $DONE_MSG
 
 # Write sensible values into the config file, if it doesn't already exist
