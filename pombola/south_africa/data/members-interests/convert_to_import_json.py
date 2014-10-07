@@ -18,6 +18,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings.south_africa'
 
 from django.conf import settings
 from django.utils.text import slugify
+from django.db.models import Q
 
 from pombola.core.models import Person
 
@@ -333,21 +334,26 @@ class Converter(object):
             person = Person.objects.get(slug=slug)
             return person.slug
         except Person.DoesNotExist:
-            last_name = name.split(' ')[-1]
+            try:
+                name_parts = re.findall(r'(.*?), (.*)', muddled_name)
+                person = Person.objects.get(Q(slug__contains=slugify(name_parts[0][0])) & Q(slug__contains=slugify(name_parts[0][1])))
+                return person.slug
+            except Person.DoesNotExist:
+                last_name = name.split(' ')[-1]
 
-            possible_persons = Person.objects.filter(legal_name__icontains=last_name)
+                possible_persons = Person.objects.filter(legal_name__icontains=last_name)
 
-            if self.finding_slug_corrections and possible_persons.count() == 1:
-                possible_slug = possible_persons.all()[0].slug
-                self.slug_corrections[slug] = possible_slug
-                return possible_slug
+                if self.finding_slug_corrections and possible_persons.count() == 1:
+                    possible_slug = possible_persons.all()[0].slug
+                    self.slug_corrections[slug] = possible_slug
+                    return possible_slug
 
-            for person in possible_persons:
-                print 'perhaps: "{0}": "{1}",'.format(slug, person.slug)
-            else:
-                print "no possible matches for {0}".format(slug)
+                for person in possible_persons:
+                    print 'perhaps: "{0}": "{1}",'.format(slug, person.slug)
+                else:
+                    print "no possible matches for {0}".format(slug)
 
-            raise Exception("Slug {0} not found, please find matching slug and add it to the slug_corrections".format(slug))
+                raise Exception("Slug {0} not found, please find matching slug and add it to the slug_corrections".format(slug))
 
     def produce_json(self):
         data = self.groupings
