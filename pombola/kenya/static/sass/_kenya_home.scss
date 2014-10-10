@@ -1,66 +1,56 @@
 $pull-out-background: #f2f0e7;
 $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
 
-#home-hero {
-  position: relative;
-
-  @media only screen and (max-width: 640px) {
-    padding: 0 20px;
-  }
+#home-quote,
+#home-cta,
+#home-featured-person,
+#home-blog,
+#home-facebook,
+#home-twitter,
+#home-background {
+  margin: 0 20px 20px 20px;
 }
 
-#home-image {
-  // Ideally we'd use background-size here, but Opera Mini doesn't support it.
-  // So we emulate it using an <img> wrapped in an {overflow:hidden} container.
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 30%;
-  @include border-radius(4px);
-  overflow: hidden;
-
-  @media only screen and (max-width: 640px) {
-    position: static;
-    width: auto;
-    margin-top: 40px;
+@media only screen and (min-width: 640px) {
+  #home-quote,
+  #home-cta,
+  #home-featured-person,
+  #home-blog,
+  #home-facebook,
+  #home-twitter,
+  #home-background {
+    margin: 0 0 30px 0;
   }
 
-  img {
-    position: relative;
-    left: -50%;
-    margin-left: 135px;
-    height: 100%;
-    width: auto;
+  #home-intro,
+  #home-promoted {
+    float: left;
+    clear: left;
+    width: 38%;
+  }
 
-    @media only screen and (max-width: 900px) {
-      margin-left: 110px;
-    }
+  #home-editorial {
+    float: right;
+    clear: right;
+    width: 56%;
+  }
 
-    @media only screen and (max-width: 800px) {
-      margin-left: 0;
-    }
-
-    @media only screen and (max-width: 640px) {
-      position: static;
-      height: auto;
-      width: 100%;
-      margin-left: 0;
-      margin-top: -5px;
-    }
+  #home-background {
+    clear: both;
   }
 }
 
 #home-quote {
-  margin-bottom: 40px;
-  width: 60%;
+  background: $pull-out-background;
 
-  @media only screen and (max-width: 640px) {
-    width: auto;
-    margin-bottom: 20px;
+  img {
+    width: 100%;
+    height: auto;
   }
 
   p {
+    padding: 20px;
+    margin: 0;
     font-family: $serif-font-family;
     font-weight: bold;
     font-style: italic;
@@ -69,35 +59,23 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 
   footer {
+    padding: 0 20px 20px 20px;
     color: #999;
     font-size: 14px;
   }
 }
 
 #home-cta {
-  display: table;
-  width: 65%;
-
-  @media only screen and (max-width: 640px) {
-    width: auto;
-  }
-
   a {
-    display: table-cell;
-    width: 50%;
-    background: darken($colour_primary_mid, 10%) url(../images/search-50px.png) 10px 50% no-repeat;
-    padding: 10px 10px 10px 70px;
+    display: block;
+    background: darken($colour_primary_mid, 10%) url(../images/search-50px.png) 15px 50% no-repeat;
+    padding: 15px 10px 15px 80px;
     color: #fff;
     @include border-top-left-radius(4px);
-    @include border-bottom-left-radius(4px);
+    @include border-top-right-radius(4px);
     text-align: left;
     font-size: 16px;
     line-height: 21px;
-
-    @media only screen and (max-width: 640px) {
-      padding-left: 10px;
-      background-image: none;
-    }
 
     strong {
       display: block;
@@ -110,16 +88,12 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 
   a + a {
+    margin-top: 1px;
     background-color: $colour_primary_mid;
     background-image: url(../images/hansard-50px.png);
-    border-left: 2px solid $pull-out-background;
     @include border-radius(0);
-    @include border-top-right-radius(4px);
+    @include border-bottom-left-radius(4px);
     @include border-bottom-right-radius(4px);
-
-    @media only screen and (max-width: 640px) {
-      background-image: none;
-    }
 
     &:hover, &:focus {
       background-color: darken($colour_primary_mid, 5%);
@@ -127,51 +101,19 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-#home-intro p {
-  text-align: center;
-  font-size: 19px;
-  line-height: 28px;
-  margin: 40px;
-}
-
-#home-primary {
-  float: left;
-  width: 56%;
-}
-
-#home-secondary {
-  float: right;
-  width: 38%;
-}
-
-@media only screen and (max-width: 800px) {
-  #home-primary, #home-secondary {
-    width: 47%;
-  }
-}
-
-#home-primary, #home-secondary {
-
-  @media only screen and (max-width: 639px) {
-    float: none;
-    width: auto;
-    margin: 0 10px;
-  }
-
-  h2 {
-    color: #b5b2a5;
-    text-align: center;
-    border-bottom: 3px solid $pull-out-background;
-    padding-bottom: 10px !important;
-    font-size: 21px;
-    line-height: 28px;
-  }
-}
-
-#home-featured-person {
+#home-featured-person,
+#home-facebook {
   background: $pull-out-background;
   padding: 20px;
-  margin-bottom: 40px;
+}
+
+#home-facebook {
+  iframe {
+    display: inline;
+    vertical-align: middle;
+    margin-left: 0.5em;
+    width: 150px;
+  }
 }
 
 .featured-person {
@@ -185,14 +127,6 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
     max-width: 100px;
   }
 
-  #home-secondary & h2 {
-    text-align: left;
-    padding-bottom: 0;
-    margin-bottom: 5px;
-    border-bottom: none;
-    line-height: 21px;
-  }
-
   .featured-person-info {
     position: static;
     margin-left: 120px;
@@ -200,6 +134,10 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 
     h2 {
       margin: 0 0 5px 0 !important;
+
+      a {
+        font-size: 18px;
+      }
     }
 
     .feature-nav {
@@ -271,12 +209,7 @@ ul#home-news-list {
   li {
     margin-bottom: 0;
     position: relative;
-    padding: 30px 10px 30px 90px;
-    border-bottom: 2px solid #f2f0e7;
-
-    &:last-child {
-      border-bottom: 2px solid #f2f0e7;
-    }
+    padding: 20px 0 20px 70px;
 
     &:first-child {
       margin-top: -10px; /* compensate for margin-bottom on h2 above */
@@ -284,7 +217,7 @@ ul#home-news-list {
 
     h3 {
       padding: 0;
-      margin: 0 0 10px 0;
+      margin: 0 0 5px 0;
       font-size: 18px;
       line-height: 21px;
     }
@@ -297,7 +230,7 @@ ul#home-news-list {
     p.meta {
       position: absolute;
       top: 50%;
-      left: 20px;
+      left: 5px;
       width: 40px;
       text-align: center;
       font-family: $serif-font-family;
@@ -333,29 +266,40 @@ ul#home-news-list {
   }
 }
 
-#twitter {
+#home-twitter {
   display: block;
-  float: none;
-  width: 100%;
-  height: 300px;
+  height: 400px;
   overflow: hidden; /* fixes bug in Opera Mini where twitter widget overflows into footer */
 
   iframe {
-    height: 250px;
+    height: 400px;
+    width: 100% !important; /* override the javascript-generated width */
+  }
+}
+
+#home-background {
+  padding-top: 30px;
+  border-top: 1px solid $pull-out-background;
+  text-align: center;
+
+  p {
+    font-size: 16px;
+    line-height: 28px;
   }
 
-  .twitter-feed {
-    border: none;
+  img {
+      margin-bottom: 1em;
+      width: 150px;
+      height: auto;
   }
 
-  .tw-wrap {
-    padding: 0;
-    min-height: none;
-    background: transparent;
-  }
+  @media only screen and (min-width: 450px) {
+    text-align: left;
 
-  h2 {
-    text-transform: none;
+    img {
+        float: right;
+        margin-left: 1em;
+    }
   }
 }
 
