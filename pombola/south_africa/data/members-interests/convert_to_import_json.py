@@ -281,13 +281,14 @@ class Converter(object):
     def extract_release(self, data):
         source_url = data['source']
         year = data['year']
+        date = data['date']
 
         source_filename = re.sub(r'.*/(.*?)\.pdf', r'\1', source_url)
         source_name = urllib.unquote(source_filename).replace('_', ' ').strip()
 
         self.release = {
-            "name": source_name,
-            "date": year + "-01-01",
+            "name": "Parliament Register of Members' Interests " + year,
+            "date": date,
         }
 
     def extract_entries(self, data):
