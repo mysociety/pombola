@@ -111,7 +111,7 @@ class Converter(object):
         "kenneth-raselabe-meshoe": "kenneth-raselabe-joseph-meshoe",
         "kennett-andrew-sinclair": "kenneth-andrew-sinclair",
         "lekaba-jack-tolo": "l-j-tolo",
-        "lemias-buoang-mashile": "budang-lemias-mashile",
+        "lemias-buoang-mashile": "buoang-lemias-mashile",
         "leonard-ramatlakana": "leonard-ramatlakane",
         "liezl-van-der-merwe": "liezl-linda-van-der-merwe",
         "lulama-mary-theresa-xingwana": "lulama-marytheresa-xingwana",
@@ -243,12 +243,11 @@ class Converter(object):
         "nomaindiya-mfeketo": "nomaindiya-cathleen-mfeketho",
         "claudia-ndaba": "ndaba-nonhlanhla",
         "maureen-scheepers": "m-scheepers",
+        "nomaindiya-cathleen-mfeketo": "nomaindiya-cathleen-mfeketho",
 
-        # FIXME - need to manually match these
-
-        # FIXME - can't seem to find a match for these
-        "buyiswa-blaai": None,
-        "sanna-keikantseeng-molao": None, # perhaps "sanna-keikantseeng-plaatjie"?
+        #name changes confirmed in National Assembly membership document
+        "buyiswa-blaai": "buyiswa-cornelia-diemu",
+        "sanna-keikantseeng-molao": "sanna-keikantseeng-plaatjie",
 
         # Garbage entries
         "control-flag-ict": None,
