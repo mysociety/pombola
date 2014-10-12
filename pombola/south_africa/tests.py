@@ -348,12 +348,34 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
         #ideally the following test would be run - however the ordering of entrylineitems appears to be somewhat unpredictable
         #self.assertEqual(context['interests'],expected)
 
-        self.assertEqual(len(context['interests'][1]['categories'][1]['headings']), len(expected[1]['categories'][1]['headings']))
-        self.assertEqual(len(context['interests'][1]['categories'][1]['entries']), len(expected[1]['categories'][1]['entries']))
-        self.assertEqual(len(context['interests'][1]['categories'][1]['entries'][0]), len(expected[1]['categories'][1]['entries'][0]))
-        self.assertEqual(len(context['interests'][1]['categories'][2]['headings']), len(expected[1]['categories'][2]['headings']))
-        self.assertEqual(len(context['interests'][1]['categories'][2]['entries']), len(expected[1]['categories'][2]['entries']))
-        self.assertEqual(len(context['interests'][1]['categories'][2]['entries'][0]), len(expected[1]['categories'][2]['entries'][0]))
+        #determine key offsets as other tests may have added data to the database
+        interest_offset = context['interests'].keys()[0]
+        category_offset = context['interests'][interest_offset]['categories'].keys()[0]
+
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset]['headings']),
+            len(expected[1]['categories'][1]['headings'])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset]['entries']),
+            len(expected[1]['categories'][1]['entries'])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset]['entries'][0]),
+            len(expected[1]['categories'][1]['entries'][0])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset+1]['headings']),
+            len(expected[1]['categories'][2]['headings'])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset+1]['entries']),
+            len(expected[1]['categories'][2]['entries'])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset+1]['entries'][0]),
+            len(expected[1]['categories'][2]['entries'][0])
+        )
 
 
 @attr(country='south_africa')
