@@ -1166,9 +1166,10 @@
         },
         "entries": [
             {
+                "Approved": "Yes",
                 "Employer": "Self - Advokaat",
                 "Name of Whip": "CP Mulder",
-                "Type of Business": "Regskonsultasie en litigasie  Yes"
+                "Type of Business": "Regskonsultasie en litigasie"
             }
         ],
         "person": {
@@ -3863,9 +3864,9 @@
         "entries": [
             {
                 "Approved": "Yes",
-                "Employer": "(Pty) Ltd",
+                "Employer": "Board of Directors for Sport Access Management (Pty) Ltd and Penny Farthing (Pty) Ltd",
                 "Name of Whip": "MsMotshekga",
-                "Type of Business": "- work as required"
+                "Type of Business": "Serve as Member on Board - work as required"
             }
         ],
         "person": {
@@ -14003,7 +14004,7 @@
                 "Approved": "Yes",
                 "Employer": "Sibanyonie (JB) Attorneys",
                 "Name of Whip": "MS Motshekga",
-                "Type of Business": "Practice"
+                "Type of Business": "Attorney's Law Firm/Legal Practice"
             }
         ],
         "person": {
@@ -35620,15 +35621,99 @@
     },
     {
         "category": {
-            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
-            "sort_order": 1
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
         },
         "entries": [
             {
-                "Name of Company": "Morvest Business Solutions",
-                "Nature": "Ordinary",
-                "No": "145,233",
-                "Nominal Value": "R24 689.91"
+                "Description": "Portion 259 plot",
+                "Extent": "5ha",
+                "Location": "Rietfontein"
+            },
+            {
+                "Description": "Portion 16 of plot",
+                "Extent": "80.90ha",
+                "Location": "Germullenhoeken West"
+            },
+            {
+                "Description": "Portion 12 plot",
+                "Extent": "5.13ha",
+                "Location": "Germullenhoeken West"
+            },
+            {
+                "Description": "Plot Ville D'Afrique",
+                "Extent": "Erf 78",
+                "Location": "North West"
+            },
+            {
+                "Description": "Portion 241 plot",
+                "Extent": "2.4ha",
+                "Location": "Rietfontein"
+            },
+            {
+                "Description": "Plot 1",
+                "Extent": "Portion 1 of 113",
+                "Location": "Gerhadsville"
+            },
+            {
+                "Description": "Portion No 17 2nd Ave",
+                "Extent": "Portion 1 of 153",
+                "Location": "Gerhadsville"
+            },
+            {
+                "Description": "Portion 145",
+                "Extent": "5.012ha",
+                "Location": "Vlaakplats"
+            },
+            {
+                "Description": "Plot 5700",
+                "Extent": "5.7",
+                "Location": "Port Elizabeth"
+            },
+            {
+                "Description": "Plot",
+                "Extent": "5.7ha",
+                "Location": "Breckenfell"
+            },
+            {
+                "Description": "Plot",
+                "Extent": "Erf 91",
+                "Location": "North West"
+            },
+            {
+                "Description": "Flat",
+                "Extent": "Erf 243",
+                "Location": "Sandhurst"
+            },
+            {
+                "Description": "Plot",
+                "Extent": "1.5ha",
+                "Location": "Remainder of farm - Alexandria"
+            },
+            {
+                "Description": "House",
+                "Extent": "Erf 754",
+                "Location": "Midrand"
+            },
+            {
+                "Description": "House",
+                "Extent": "Erf 16950, 16951, 16952",
+                "Location": "Quigney"
+            },
+            {
+                "Description": "Plot",
+                "Extent": "Portion 60 of Portion 2",
+                "Location": "Centurion"
+            },
+            {
+                "Description": "Plot",
+                "Extent": "2.194ha",
+                "Location": "Port Edward"
+            },
+            {
+                "Description": "Flat",
+                "Extent": "Sections 7,23,16,24,25,8,9,7,10,11,12,13,18,1,2,3,4,5,6",
+                "Location": "Langenhoff"
             }
         ],
         "person": {
@@ -35641,14 +35726,15 @@
     },
     {
         "category": {
-            "name": "TRAVEL",
-            "sort_order": 8
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
         },
         "entries": [
             {
-                "Gerhadsville": "Langenhoff",
-                "Plot 1": "Flat",
-                "Portion 1 of 113": "7,23,16,24,25,8,9,7,10,11,12,13,18,1,2,3,4,5,6"
+                "Name of Company": "Morvest Business Solutions",
+                "Nature": "Ordinary",
+                "No": "145,233",
+                "Nominal Value": "R24 689.91"
             }
         ],
         "person": {
@@ -36556,8 +36642,9 @@
             },
             {
                 "Approved": "Yes",
-                "Employer": "Africa Gnome Ed. Institute  Non-profit Education",
-                "Name of Whip": "IO Davidson"
+                "Employer": "Africa Gnome Ed. Institute",
+                "Name of Whip": "IO Davidson",
+                "Type of Business": "Non-profit Education"
             }
         ],
         "person": {

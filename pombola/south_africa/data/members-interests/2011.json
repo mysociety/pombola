@@ -329,9 +329,10 @@
    ], 
    "2. REMUNERATED EMPLOYMENT OUTSIDE PARLIAMENT ": [
     {
-     "Name of Whip ": "CP Mulder ", 
-     "Employer ": "Self - Advokaat ", 
-     "Type of Business": "Regskonsultasie en litigasie  Yes "
+     "Name of Whip ": "CP Mulder ",
+     "Employer ": "Self - Advokaat ",
+     "Type of Business": "Regskonsultasie en litigasie  ",
+     "Approved": "Yes "
     }
    ], 
    "6. GIFTS AND HOSPITALITY": "Nothing to disclose.", 
@@ -1442,17 +1443,103 @@
      "Name of Company": "Morvest Business Solutions ", 
      "Nature": "Ordinary "
     }
-   ], 
-   "8. TRAVEL": [
-    {
-     "Portion 1 of 113 ": "7,23,16,24,25,8,9,7,10,11,12,13,18,1,2,3,4,5,6", 
-     "  Plot 1 ": "  Flat ", 
-     "Gerhadsville ": "Langenhoff "
-    }
-   ], 
-   "4. CONSULTANCIES OR RETAINERSHIPS": "Nothing to disclose.", 
-   "7. BENEFITS": "Nothing to disclose.", 
-   "5. SPONSORSHIPS": "Nothing to disclose.", 
+   ],
+   "8. TRAVEL": "Nothing to disclose.",
+   "9. LAND AND PROPERTY": [
+   {
+    "Description": "Portion 259 plot ",
+    "Location": "Rietfontein",
+    "Extent": "5ha"
+   },
+   {
+    "Description": "Portion 16 of plot ",
+    "Location": "Germullenhoeken West ",
+    "Extent": "80.90ha "
+   },
+   {
+    "Description": "Portion 12 plot ",
+    "Location": "Germullenhoeken West ",
+    "Extent": "5.13ha "
+   },
+   {
+    "Description": "Plot Ville D'Afrique ",
+    "Location": "North West ",
+    "Extent": "Erf 78 "
+   },
+   {
+    "Description": "Portion 241 plot ",
+    "Location": "Rietfontein ",
+    "Extent": "2.4ha "
+   },
+   {
+    "Description": "Plot 1 ",
+    "Location": "Gerhadsville ",
+    "Extent": "Portion 1 of 113 "
+   },
+   {
+    "Description": "Portion No 17 2nd Ave ",
+    "Location": "Gerhadsville",
+    "Extent": "Portion 1 of 153 "
+   },
+   {
+    "Description": "Portion 145 ",
+    "Location": "Vlaakplats",
+    "Extent": "5.012ha "
+   },
+   {
+    "Description": "Plot 5700 ",
+    "Location": "Port Elizabeth ",
+    "Extent": "5.7 "
+   },
+   {
+    "Description": "Plot",
+    "Location": "Breckenfell",
+    "Extent": "5.7ha "
+   },
+   {
+    "Description": "Plot",
+    "Location": "North West ",
+    "Extent": "Erf 91 "
+   },
+   {
+    "Description": "Flat",
+    "Location": "Sandhurst",
+    "Extent": "Erf 243 "
+   },
+   {
+    "Description": "Plot",
+    "Location": "Remainder of farm - Alexandria ",
+    "Extent": "1.5ha "
+   },
+   {
+    "Description": "House",
+    "Location": "Midrand ",
+    "Extent": "Erf 754 "
+   },
+   {
+    "Description": "House",
+    "Location": "Quigney",
+    "Extent": "Erf 16950, 16951, 16952 "
+   },
+   {
+    "Description": "Plot",
+    "Location": "Centurion",
+    "Extent": "Portion 60 of Portion 2 "
+   },
+   {
+    "Description": "Plot",
+    "Location": "Port Edward ",
+    "Extent": "2.194ha "
+   },
+   {
+    "Description": "Flat",
+    "Location": "Langenhoff",
+    "Extent": "Sections 7,23,16,24,25,8,9,7,10,11,12,13,18,1,2,3,4,5,6"
+   }
+   ],
+   "4. CONSULTANCIES OR RETAINERSHIPS": "Nothing to disclose.",
+   "7. BENEFITS": "Nothing to disclose.",
+   "5. SPONSORSHIPS": "Nothing to disclose.",
    "3. DIRECTORSHIP AND PARTNERSHIPS": [
     {
      "Directorship/Partnership ": "Ikwezi Collection Services "
@@ -5397,10 +5484,10 @@
    ], 
    "2. REMUNERATED EMPLOYMENT OUTSIDE PARLIAMENT ": [
     {
-     "Name of Whip ": "MsMotshekga ", 
-     "Employer ": "(Pty) Ltd ", 
-     "Approved ": "Yes ", 
-     "Type of Business": "- work as required "
+     "Name of Whip ": "MsMotshekga ",
+     "Employer ": "Board of Directors for Sport Access Management (Pty) Ltd and Penny Farthing (Pty) Ltd ",
+     "Approved ": "Yes ",
+     "Type of Business": "Serve as Member on Board - work as required "
     }
    ], 
    "6. GIFTS AND HOSPITALITY": [
@@ -7164,9 +7251,10 @@
      "Type of Business": "Export "
     }, 
     {
-     "Employer ": "Africa Gnome Ed. Institute  Non-profit Education ", 
-     "Approved ": "Yes ", 
-     "Name of Whip ": "IO Davidson "
+     "Employer ": "Africa Gnome Ed. Institute ",
+     "Approved ": "Yes ",
+     "Name of Whip ": "IO Davidson ",
+     "Type of Business": "Non-profit Education "
     }
    ], 
    "6. GIFTS AND HOSPITALITY": "Nothing to disclose.", 
@@ -21433,10 +21521,10 @@
    ], 
    "2. REMUNERATED EMPLOYMENT OUTSIDE PARLIAMENT ": [
     {
-     "Name of Whip ": "MS Motshekga ", 
-     "Employer ": "Sibanyonie (JB) Attorneys ", 
-     "Approved ": "Yes ", 
-     "Type of Business": "Practice "
+     "Name of Whip ": "MS Motshekga ",
+     "Employer ": "Sibanyonie (JB) Attorneys ",
+     "Approved ": "Yes ",
+     "Type of Business": "Attorney's Law Firm/Legal Practice "
     }
    ], 
    "6. GIFTS AND HOSPITALITY": "Nothing to disclose.", 
