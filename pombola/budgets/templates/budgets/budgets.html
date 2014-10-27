@@ -5,7 +5,7 @@
 
     {% for session in budgets_by_session %}
 
-    <h3>{{ session.grouper }}
+    <h3>{{ session.grouper }}</h3>
 
     <table class="budgets">
         {% for entry in session.list %}
@@ -19,7 +19,7 @@
             <td>
                 {{ entry.formatted_value }}
             </td>
-        </li>
+        </tr>
         {% endfor %}
     </table>
 
