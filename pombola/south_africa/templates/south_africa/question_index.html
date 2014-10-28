@@ -1,21 +1,83 @@
 {% extends "base.html" %}
 {% load compressed %}
+{% load i18n %}
 
 {% block extra_js_to_load %}
     addExtraJS([ {% compressed_js 'hide-reveal' %} null ]);
 {% endblock %}
 
-{% block title %}Hansard{% endblock %}
+{% block title %}Questions{% endblock %}
 
 
 {% block content %}
 
-{% for entry in entries %}
-    <div>
-        <a class="hansard-section-title has-dropdown-dark"
-            href="{% url 'speeches:section-view' entry.get_path %}">
-            <h2> {{ entry.title }} ({{ entry.speech_count }}) </h2>
-        </a>
-    </div>
+<form action="{% url 'section-list-question' %}" method="get">
+
+<label for="orderby">Order by:</label>
+<select name="orderby">
+    <option value="recentquestions"{% if orderby == "recentquestions" %} selected="selected"{% endif %}>Recent Questions</option>
+    <option value="recentanswers"{% if orderby == "recentanswers" %} selected="selected"{% endif %}>Recently Answered</option>
+</select>
+<label for="minister">Minister:</label>
+<select name="minister">
+    <option value="all">All</option>
+    {% for filter_minister in ministers %}
+     <option value="{{ filter_minister.slug }}"{% if minister == filter_minister.slug %} selected="selected"{% endif %}>{{ filter_minister.title }}</option>
+    {% endfor %}
+</select>
+
+<input type="submit" value="Filter" class="button">
+
+</form>
+
+<table class="questions">
+{% for speech in speeches %}
+    <tr>
+        <td>
+            <span class="intro"><a href="{{ speech.speaker.get_absolute_url }}">{{ speech.speaker }}</a> to ask the <a href="{% url 'section-list-question' %}?orderby={{ orderby }}&minister={{ speech.questionto_slug }}">{{ speech.questionto }}</a></span>
+            <div class="question">{{ speech.text }}</div>
+            {% if speech.answer %}
+              <div class="reply">
+                  <span class="intro">Replied to on {{ speech.answer.start_date }}</span>
+                  <div class="question">
+                      {{ speech.answer.text|truncatewords:64 }} <a href="{{ speech.section.get_absolute_url }}">More &#187;</a>
+                    </div>
+              </div>
+            {% endif %}
+        </td>
+        <td class="details">
+            {{ speech.section.title }} <hr>
+            <a href="{{ speech.section.get_absolute_url }}" class="speech__content-link">
+                Link
+            </a><br />
+            <a href="{{ speech.source_url }}" class="speech__content-link">
+                Source
+            </a>
+        </td>
+    </tr>
 {% endfor %}
+</table>
+
+<div class="step-pagination">
+    <span class="step-links">
+        {% if paginator.has_previous %}
+          <a href="?orderby={{ orderby }}&minister={{ minister }}&page={{ paginator.previous_page_number }}">
+              {% trans "Previous" %}
+          </a>
+        {% endif %}
+
+        <span class="current">
+          {% blocktrans with num=paginator.number pages=paginator.paginator.num_pages %}
+            Page <strong>{{ num }}</strong> of <strong>{{ pages }}</strong>
+          {% endblocktrans %}
+        </span>
+
+        {% if paginator.has_next %}
+          <a href="?orderby={{ orderby }}&minister={{ minister }}&page={{ paginator.next_page_number }}">
+              {% trans "Next" %}
+          </a>
+        {% endif %}
+    </span>
+</div>
+
 {% endblock %}

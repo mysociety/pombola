@@ -6,7 +6,7 @@ import re
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
-from django.db.models import Count
+from django.db.models import Count, Min, Max
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
@@ -716,26 +716,98 @@ def questions_section_sort_key(section):
         return "MMM" + title
     return "DDD" + stripped_title
 
-class SAQuestionIndex(SASpeechesIndex):
+class SAQuestionIndex(TemplateView):
     template_name = 'south_africa/question_index.html'
-    top_section_name='Questions'
 
     def get_context_data(self, **kwargs):
-        context = super(SASpeechesIndex, self).get_context_data(**kwargs)
+        context = super(SAQuestionIndex, self).get_context_data(**kwargs)
 
-        # Get the top level section, or 404
-        top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
+        context['ministers'] = []
+        ministers = Section.objects.filter(parent__title='Questions')
+        ministers = sorted(ministers, key=questions_section_sort_key)
+        for minister in ministers:
+            context['ministers'].append({
+                'title': minister.title.replace('Questions asked to the ',''),
+                'slug': minister.slug
+                })
 
-        # the question section structure is
-        # "Questions" -> "Questions asked to Minister for X" -> "Date" ...
+        context['orderby'] = 'recentquestions'
+        context['minister'] = 'all'
+
+        #set filter values
+        for key in ('orderby', 'minister'):
+            if key in self.request.GET:
+                context[key] = self.request.GET[key]
+
+        if not context['orderby'] in ['recentquestions', 'recentanswers']:
+            context['orderby'] = 'recentquestions'
 
         sections = Section \
             .objects \
-            .filter(parent=top_section) \
-            .annotate(speech_count=Count('children__speech__id'))
+            .filter(
+                parent__parent__title='Questions'
+            ) \
+            .select_related('parent__name') \
+            .prefetch_related('speech_set') \
+            .annotate(
+                earliest_date=Min('speech__start_date'),
+                smallest_id=Min('speech__id'),
+                number_speeches=Count('speech'),
+                latest_date=Max('speech__start_date'),
+            )
 
-        context['entries'] = sorted(sections,
-                                    key=questions_section_sort_key)
+        if context['minister'] != 'all':
+            sections = sections.filter(parent__slug=context['minister'])
+
+        if context['orderby'] == 'recentanswers':
+            sections = sections.filter(number_speeches__gt=1).order_by(
+                '-latest_date',
+                '-smallest_id'
+            )
+        else:
+            sections = sections.order_by(
+                '-earliest_date',
+                '-smallest_id'
+            )
+
+        paginator = Paginator(sections, 10)
+        page = self.request.GET.get('page')
+
+        try:
+            sections = paginator.page(page)
+        except PageNotAnInteger:
+            sections = paginator.page(1)
+        except EmptyPage:
+            sections = paginator.page(paginator.num_pages)
+
+        context['paginator'] = sections
+
+        #format questions and answers for the template
+        questions = []
+        for section in sections:
+            question = section.speech_set.all()[0]
+            question.questionto = section.parent.title.replace('Questions asked to the ','')
+            question.questionto_slug = section.parent.slug
+
+            #assume if there is more than one speech that the question is answered
+            if len(section.speech_set.all())>1:
+                question.answer = section \
+                    .speech_set \
+                    .all()[len(section.speech_set.all())-1]
+
+                #extract the actual reply from the reply text (replies
+                #often include the original question and other text,
+                #such as a letterhead)
+                text = question.answer.text.split('REPLY')
+                if len(text)>1:
+                    question.answer.text = text[len(text)-1]
+                    if question.answer.text[0]==':':
+                        question.answer.text = question.answer.text[1:]
+
+            questions.append(question)
+
+        context['speeches'] = questions
+
         return context
 
 
