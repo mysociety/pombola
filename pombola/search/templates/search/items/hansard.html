@@ -1,5 +1,12 @@
 {% load highlight %}
 
+{% comment %}
+   FIXME: this next guard is only present because currently we
+   have a not-properly-understood issue with Haystack letting
+   Elasticsearch get out of sync with what's in the database:
+   https://github.com/mysociety/pombola/issues/1424
+{% endcomment %}
+{% if result.object %}
 <li class="search-results-item search-results-hansard-item">
 
   <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.sitting.name }}</a></h3>
@@ -7,3 +14,4 @@
   <p>{% highlight result.object.content with query %}</p>
 
 </li>
+{% endif %}
