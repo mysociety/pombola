@@ -25,33 +25,7 @@ urlpatterns = patterns('pombola.search.views',
         name='core_geocoder_search'
     ),
 
-    # Person search - this is only used in the Kenyan 2013
-    # election-themed homepage
-    url(
-        r'^person/$',
-        SearchView(
-            searchqueryset = SearchQuerySet().models(
-                core_models.Person
-            ).exclude(hidden=True),
-            form_class=SearchForm,
-        ),
-        name='core_person_search'
-    ),
-
-    # Place search - this is only used in the Kenyan 2013
-    # election-themed homepage
-    url(
-        r'^place/$',
-        SearchView(
-            searchqueryset = SearchQuerySet().models(
-                core_models.Place,
-            ),
-            form_class=SearchForm,
-        ),
-        name='core_place_search'
-    ),
 )
-
 
 # Hansard search - only loaded if hansard is enabled
 if settings.ENABLED_FEATURES['hansard']:
