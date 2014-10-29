@@ -5,6 +5,7 @@ import unicodecsv as csv
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.management.base import LabelCommand
+from django.db import IntegrityError
 
 from django.utils.text import slugify
 
@@ -36,12 +37,13 @@ class Command(LabelCommand):
 
         slug = slugify(name)
 
-        place, created = Place.objects.get_or_create(slug=slug, kind_id=1)
+        try:
 
-        if created:
-            place.name = name
-            place.save()
-            print 'Created new place ' + slug + " as " + name
+            place = Place.objects.get(slug=slug)
+
+        except ObjectDoesNotExist:
+            print 'Unable to match "%s" (%s) to a place. Please resolve in source data!' % (name, slug)
+            exit(1)
 
         return place
 
@@ -65,16 +67,20 @@ class Command(LabelCommand):
         # Find the place
         place = self.match_place(row['Place Name'].strip())
 
-        # Get the position if it already exists, if not create it
-        budget = Budget.objects.create(
-            content_type=self.content_type_place,
-            object_id=place.id,
-            budget_session=budget_session,
-            organisation=organisation,
-            name=row['Budget Name'],
-            value=row['Budget Value'],
-            currency=currency,
-        )
+        # Create the budget!
+        try:
+            budget = Budget.objects.create(
+                content_type=self.content_type_place,
+                object_id=place.id,
+                budget_session=budget_session,
+                organisation=organisation,
+                name=row['Budget Name'],
+                value=row['Budget Value'],
+                currency=currency,
+            )
+
+        except IntegrityError:
+            print 'Integrity Violation: Skipping "%s" for %s' % (row['Budget Name'], place.name)
 
     def handle(self, filename, budget_session, organisation, currency, *args, **options):
 
