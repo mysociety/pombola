@@ -16,6 +16,7 @@ from django.shortcuts import get_object_or_404
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
+from django.contrib.contenttypes.models import ContentType
 
 import mapit
 from haystack.query import SearchQuerySet, SQ
@@ -33,6 +34,7 @@ from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
 from pombola.info.models import InfoPage, Category
 from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView, SearchBaseView
+from pombola.slug_helpers.views import SlugRedirect
 
 from pombola.south_africa.models import ZAPlace
 
@@ -828,7 +830,34 @@ class SASpeechView(SpeechView):
 class SASectionView(SectionView):
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        try:
+            self.object = self.get_object()
+        except Http404:
+            #if not found check if any sections have been redirected by
+            #considering the deepest section first
+            full_slug = self.kwargs.get('full_slug', None)
+            slugs = full_slug.split('/')
+            for i in range(len(slugs), 0, -1):
+                print i
+                try:
+                    check_slug = '/'.join(slugs[:i])
+                    sr = SlugRedirect.objects.get(
+                        content_type=ContentType.objects.get_for_model(Section),
+                        old_object_slug=check_slug
+                    )
+                    new_url = '/' + full_slug.replace(
+                        check_slug,
+                        sr.new_object.get_path,
+                        1)
+                    break
+                except SlugRedirect.DoesNotExist:
+                    pass
+
+            try:
+                return redirect(new_url)
+            except NameError:
+                raise Http404
+
         if should_redirect_to_source(self.object):
             # Find a URL to redirect to; try to get any speech in the
             # section with a non-blank source URL. FIXME: after
