@@ -348,12 +348,34 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
         #ideally the following test would be run - however the ordering of entrylineitems appears to be somewhat unpredictable
         #self.assertEqual(context['interests'],expected)
 
-        self.assertEqual(len(context['interests'][1]['categories'][1]['headings']), len(expected[1]['categories'][1]['headings']))
-        self.assertEqual(len(context['interests'][1]['categories'][1]['entries']), len(expected[1]['categories'][1]['entries']))
-        self.assertEqual(len(context['interests'][1]['categories'][1]['entries'][0]), len(expected[1]['categories'][1]['entries'][0]))
-        self.assertEqual(len(context['interests'][1]['categories'][2]['headings']), len(expected[1]['categories'][2]['headings']))
-        self.assertEqual(len(context['interests'][1]['categories'][2]['entries']), len(expected[1]['categories'][2]['entries']))
-        self.assertEqual(len(context['interests'][1]['categories'][2]['entries'][0]), len(expected[1]['categories'][2]['entries'][0]))
+        #determine key offsets as other tests may have added data to the database
+        interest_offset = context['interests'].keys()[0]
+        category_offset = context['interests'][interest_offset]['categories'].keys()[0]
+
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset]['headings']),
+            len(expected[1]['categories'][1]['headings'])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset]['entries']),
+            len(expected[1]['categories'][1]['entries'])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset]['entries'][0]),
+            len(expected[1]['categories'][1]['entries'][0])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset+1]['headings']),
+            len(expected[1]['categories'][2]['headings'])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset+1]['entries']),
+            len(expected[1]['categories'][2]['entries'])
+        )
+        self.assertEqual(
+            len(context['interests'][interest_offset]['categories'][category_offset+1]['entries'][0]),
+            len(expected[1]['categories'][2]['entries'][0])
+        )
 
 
 @attr(country='south_africa')
@@ -1275,3 +1297,192 @@ class SAPlaceDetailViewTest(WebTest):
         # that doesn't care about which organisation the people are
         # related by.
         self.assertEqual(1, len(resp.context['related_people']))
+
+@attr(country='south_africa')
+class SAMembersInterestsBrowserTest(TestCase):
+    def setUp(self):
+        person = models.Person.objects.create(
+            legal_name='Alice Smith',
+            slug='asmith')
+
+        org_kind_party, created = models.OrganisationKind.objects.get_or_create(
+            name='Party',
+            slug='party')
+
+        org_kind_committee, created = models.OrganisationKind.objects.get_or_create(
+            name='Committee',
+            slug='committee')
+
+        party1, created = models.Organisation.objects.get_or_create(
+            name='Party1',
+            kind=org_kind_party,
+            slug='party1')
+        party2, created = models.Organisation.objects.get_or_create(
+            name='Party2',
+            kind=org_kind_party,
+            slug='party2')
+        other_org1, created = models.Organisation.objects.get_or_create(
+            name='Organisation1',
+            kind=org_kind_committee,
+            slug='organisation1')
+        other_org2, created = models.Organisation.objects.get_or_create(
+            name='Organisation2',
+            kind=org_kind_committee,
+            slug='organisation2')
+
+        models.Position.objects.create(person=person, organisation=party1)
+        models.Position.objects.create(person=person, organisation=other_org1)
+
+        category1 = Category.objects.create(name=u"Category A", sort_order=1)
+        category2 = Category.objects.create(name=u"Category B", sort_order=2)
+        category3 = Category.objects.create(name=u"Sponsorships", sort_order=3)
+
+        release1 = Release.objects.create(
+            name=u'2013 Data',
+            date=date(2013, 2, 16))
+        release2 = Release.objects.create(
+            name=u'2012 Data',
+            date=date(2012, 2, 24))
+
+        entry1 = Entry.objects.create(
+            person=person,
+            release=release1,
+            category=category1,
+            sort_order=1)
+        entry2 = Entry.objects.create(
+            person=person,
+            release=release1,
+            category=category1,
+            sort_order=2)
+        entry3 = Entry.objects.create(
+            person=person,
+            release=release1,
+            category=category2,
+            sort_order=3)
+        entry4 = Entry.objects.create(
+            person=person,
+            release=release2,
+            category=category2,
+            sort_order=3)
+
+        EntryLineItem.objects.create(entry=entry1,key=u'Field1',value=u'Value1')
+        EntryLineItem.objects.create(entry=entry1,key=u'Source',value=u'Source1')
+        EntryLineItem.objects.create(entry=entry2,key=u'Field1',value=u'Value3')
+        EntryLineItem.objects.create(entry=entry2,key=u'Source',value=u'Source1')
+        EntryLineItem.objects.create(entry=entry3,key=u'Source',value=u'Source2')
+        EntryLineItem.objects.create(entry=entry4,key=u'Source',value=u'Source2')
+
+    def test_members_interests_browser_complete_view(self):
+        context = self.client.get(reverse('sa-interests-index')).context
+
+        #one section for each year of declarations
+        self.assertEqual(len(context['data']), 2)
+        self.assertTrue('person' in context['data'][0])
+        self.assertTrue('data' in context['data'][0])
+        self.assertTrue('year' in context['data'][0])
+        self.assertTrue('category' in context['data'][0]['data'][0])
+        self.assertTrue('data' in context['data'][0]['data'][0])
+        self.assertTrue('headers' in context['data'][0]['data'][0])
+        self.assertEqual(
+            len(context['data'][0]['data'][0]['data'][len(context['data'][0]['data'][0]['data'])-1]),
+            len(context['data'][0]['data'][0]['headers']))
+
+        #test year filter
+        context = self.client.get(reverse('sa-interests-index')+'?release=2013-data').context
+        self.assertEqual(len(context['data']), 1)
+
+        #test party filter
+        context = self.client.get(
+            reverse('sa-interests-index')+'?party=party1'
+        ).context
+        self.assertEqual(len(context['data']), 2)
+        context = self.client.get(reverse('sa-interests-index')+'?party=party2').context
+        self.assertEqual(len(context['data']), 0)
+
+        #test membership filter
+        context = self.client.get(
+            reverse('sa-interests-index')+'?organisation=organisation1'
+        ).context
+        self.assertEqual(len(context['data']), 2)
+        context = self.client.get(
+            reverse('sa-interests-index')+'?organisation=organisation2'
+        ).context
+        self.assertEqual(len(context['data']), 0)
+
+    def test_members_interests_browser_section_view(self):
+        context = self.client.get(reverse('sa-interests-index')+'?category=category-a').context
+        self.assertEqual(len(context['data']), 2)
+        self.assertTrue('headers' in context)
+        self.assertEqual(len(context['data'][0]), len(context['headers']))
+
+        #party filter
+        context = self.client.get(
+            reverse('sa-interests-index')+'?category=category-a&party=party1'
+        ).context
+        self.assertEqual(len(context['data']), 2)
+        context = self.client.get(
+            reverse('sa-interests-index')+'?category=category-a&party=party2'
+        ).context
+        self.assertEqual(len(context['data']), 0)
+
+        #organisation filter
+        context = self.client.get(
+            reverse('sa-interests-index')+'?category=category-a&organisation=organisation1'
+        ).context
+        self.assertEqual(len(context['data']), 2)
+        context = self.client.get(
+            reverse('sa-interests-index')+'?category=category-a&organisation=organisation2'
+        ).context
+        self.assertEqual(len(context['data']), 0)
+
+        #release filter
+        context = self.client.get(
+            reverse('sa-interests-index')+'?category=category-b&release=2012-data'
+        ).context
+        self.assertEqual(len(context['data']), 1)
+
+    def test_members_interests_browser_numberbyrepresentative_view(self):
+        context = self.client.get(
+            reverse('sa-interests-index')+'?display=numberbyrepresentative'
+        ).context
+        self.assertEqual(len(context['data']), 3)
+        self.assertEqual(context['data'][0].c, 2)
+
+        #release filter
+        context = self.client.get(
+            reverse('sa-interests-index')+'?display=numberbyrepresentative&release=2013-data'
+        ).context
+        self.assertEqual(len(context['data']), 2)
+        self.assertEqual(context['data'][0].c, 2)
+
+    def test_members_interests_browser_numberbysource_view(self):
+        context = self.client.get(
+            reverse('sa-interests-index')+'?display=numberbysource'
+        ).context
+        self.assertEqual(len(context['data']), 3)
+        self.assertEqual(context['data'][0].c, 2)
+
+        #release filter
+        context = self.client.get(
+            reverse('sa-interests-index')+'?display=numberbyrepresentative&release=2013-data'
+        ).context
+        self.assertEqual(len(context['data']), 2)
+        self.assertEqual(context['data'][0].c, 2)
+
+    def test_members_interests_browser_sources_view(self):
+        context = self.client.get(
+            reverse('sa-interests-source')+'?release=all&category=category-a&match=absolute&source=Source1'
+        ).context
+        self.assertEqual(len(context['data']), 2)
+
+        #release filter
+        context = self.client.get(
+            reverse('sa-interests-source')+'?release=2012-data&category=category-b&match=absolute&source=Source2'
+        ).context
+        self.assertEqual(len(context['data']), 1)
+
+        #contains filter
+        context = self.client.get(
+            reverse('sa-interests-source')+'?release=all&category=category-a&match=contains&source=Source'
+        ).context
+        self.assertEqual(len(context['data']), 2)
