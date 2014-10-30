@@ -64,7 +64,7 @@ place_patterns = patterns('pombola.core.views',
     ),
 )
 
-for sub_page in ['aspirants', 'election', 'scorecard', 'comments', 'people', 'places', 'organisations', 'data', 'projects']:
+for sub_page in ['aspirants', 'election', 'scorecard', 'comments', 'people', 'places', 'organisations', 'data', 'projects', 'budgets']:
     place_patterns += patterns(
         'pombola.core.views',
         url(

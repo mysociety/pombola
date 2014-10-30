@@ -139,3 +139,6 @@ python-mimeparse==0.1.4
 
 #necessary to process unicode csv files for ZA elections data
 unicodecsv==0.9.4
+
+# Used to format budgetary things into local currency strings
+babel
