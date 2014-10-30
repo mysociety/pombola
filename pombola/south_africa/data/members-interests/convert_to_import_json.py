@@ -14,10 +14,11 @@ script_dir = os.path.basename(__file__)
 base_dir = os.path.join(script_dir, "../../../../..")
 app_path = os.path.abspath(base_dir)
 sys.path.append(app_path)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings.south_africa'
 
 from django.conf import settings
 from django.utils.text import slugify
+from django.db.models import Q
 
 from pombola.core.models import Person
 
@@ -68,7 +69,7 @@ class Converter(object):
         "danny-montsitsi": "sediane-danny-montsitsi",
         "dennis-bloem": "dennis-victor-bloem",
         "dennis-gamede": "dumisani-dennis-gamede",
-        "desiree-van-der-walt": "ms-desiree-van-der-walt",
+        "desiree-van-der-walt": "d-van-der-walt",
         "dina-deliwa-pule": "dina-deliwe-pule",
         "dirk-feldman": "dirk-benjamin-feldman",
         "dj-stubbe": "dirk-jan-stubbe",
@@ -110,7 +111,7 @@ class Converter(object):
         "kenneth-raselabe-meshoe": "kenneth-raselabe-joseph-meshoe",
         "kennett-andrew-sinclair": "kenneth-andrew-sinclair",
         "lekaba-jack-tolo": "l-j-tolo",
-        "lemias-buoang-mashile": "budang-lemias-mashile",
+        "lemias-buoang-mashile": "buoang-lemias-mashile",
         "leonard-ramatlakana": "leonard-ramatlakane",
         "liezl-van-der-merwe": "liezl-linda-van-der-merwe",
         "lulama-mary-theresa-xingwana": "lulama-marytheresa-xingwana",
@@ -204,12 +205,49 @@ class Converter(object):
         "zoliswa-kota-fredericks": "zoliswa-albertina-kota-fredericks",
         "zukiswa-rantho": "daphne-zukiswa-rantho",
         "seiso-mohai": "seiso-joel-mohai",
+        "belinda-bozzoli-van-onsellen": "belinda-bozzoli",
+        "micheal-cardo": "michael-john-cardo",
+        "zephroma-dlamini-dubazana": "zephroma-sizani-dubazana",
+        "pravin-jamnadas-gordhan": "pravin-gordhan",
+        "barnard-joseph": "bernard-daniel-joseph",
+        "diane-kohler": "dianne-kohler-barnard",
+        "dean-macpherson": "dean-william-macpherson",
+        "thembekile-majola": "richard-majola",
+        "edwin-makue": "eddie-makue",
+        "mmoba-malatsi-seshoka": "mmoba-solomon-seshoka",
+        "suhla-masango": "bridget-staff-masango",
+        "lindiwe-maseko": "maseko-lindiwe",
+        "shipokosa-mashatile": "shipokasa-paulus-mashatile",
+        "comely-maxegwana": "humphrey-maxegwana",
+        "lungi-mnganga-gcabashe": "lungi-annette-mnganga-gcabashe",
+        "pumzile-mnguni": "phumzile-justice-mnguni",
+        "mohapi-mohapi": "mohapi-jihad-mohapi",
+        "charles-nqakula": "c-nqakula",
+        "bhekiziwe-radebe": "bhekiziswe-abram-radebe",
+        "david-ross": "david-christie-ross",
+        "olifile-sefako": "olefile-sefako",
+        "sheila-shope-sithole": "sheila-coleen-nkhensani-sithole",
+        "christiaan-smit": "christiaan-frederik-beyers-smit",
+        "makhotso-magdaline-sotyu": "makhotso-magdeline-sotyu",
+        "johnna-terblanche": "johanna-fredrika-juanita-terblanche",
+        "thandi-tobias-pokolo": "thandi-vivian-tobias",
+        "tshoganetso-tongwane-gasebonwe": "tshoganetso-mpho-adolphina-tongwane",
+        "shiella-xego-sovita": "sheilla-tembalam-xego-sovita",
+        "winile-zondi": "wp-zondi",
+        "lindiwe-zulu": "l-d-zulu",
+        "lungelwa-zwane": "ll-zwane",
+        "mamonare-chueu": "chueu-patricia",
+        "stanford-gana": "makashule-gana",
+        "hendrik-kruger": "hendrik-christiaan-crafford-kruger",
+        "dipuo-letsatsi-duba": "ms-letsatsi-duba-db",
+        "nomaindiya-mfeketo": "nomaindiya-cathleen-mfeketho",
+        "claudia-ndaba": "ndaba-nonhlanhla",
+        "maureen-scheepers": "m-scheepers",
+        "nomaindiya-cathleen-mfeketo": "nomaindiya-cathleen-mfeketho",
 
-        # FIXME - need to manually match these
-
-        # FIXME - can't seem to find a match for these
-        "buyiswa-blaai": None,
-        "sanna-keikantseeng-molao": None, # perhaps "sanna-keikantseeng-plaatjie"?
+        #name changes confirmed in National Assembly membership document
+        "buyiswa-blaai": "buyiswa-cornelia-diemu",
+        "sanna-keikantseeng-molao": "sanna-keikantseeng-plaatjie",
 
         # Garbage entries
         "control-flag-ict": None,
@@ -242,13 +280,14 @@ class Converter(object):
     def extract_release(self, data):
         source_url = data['source']
         year = data['year']
+        date = data['date']
 
         source_filename = re.sub(r'.*/(.*?)\.pdf', r'\1', source_url)
         source_name = urllib.unquote(source_filename).replace('_', ' ').strip()
 
         self.release = {
-            "name": source_name,
-            "date": year + "-01-01",
+            "name": "Parliament Register of Members' Interests " + year,
+            "date": date,
         }
 
     def extract_entries(self, data):
@@ -333,21 +372,26 @@ class Converter(object):
             person = Person.objects.get(slug=slug)
             return person.slug
         except Person.DoesNotExist:
-            last_name = name.split(' ')[-1]
+            try:
+                name_parts = re.findall(r'(.*?), (.*)', muddled_name)
+                person = Person.objects.get(Q(slug__contains=slugify(name_parts[0][0])) & Q(slug__contains=slugify(name_parts[0][1])))
+                return person.slug
+            except Person.DoesNotExist:
+                last_name = name.split(' ')[-1]
 
-            possible_persons = Person.objects.filter(legal_name__icontains=last_name)
+                possible_persons = Person.objects.filter(legal_name__icontains=last_name)
 
-            if self.finding_slug_corrections and possible_persons.count() == 1:
-                possible_slug = possible_persons.all()[0].slug
-                self.slug_corrections[slug] = possible_slug
-                return possible_slug
+                if self.finding_slug_corrections and possible_persons.count() == 1:
+                    possible_slug = possible_persons.all()[0].slug
+                    self.slug_corrections[slug] = possible_slug
+                    return possible_slug
 
-            for person in possible_persons:
-                print 'perhaps: "{0}": "{1}",'.format(slug, person.slug)
-            else:
-                print "no possible matches for {0}".format(slug)
+                for person in possible_persons:
+                    print 'perhaps: "{0}": "{1}",'.format(slug, person.slug)
+                else:
+                    print "no possible matches for {0}".format(slug)
 
-            raise Exception("Slug {0} not found, please find matching slug and add it to the slug_corrections".format(slug))
+                raise Exception("Slug {0} not found, please find matching slug and add it to the slug_corrections".format(slug))
 
     def produce_json(self):
         data = self.groupings
