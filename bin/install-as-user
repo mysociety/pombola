@@ -53,19 +53,11 @@ fi
 cd "$REPOSITORY"
 
 # Set up a GEM_HOME for site-local installation of compass and other gems:
-echo "Setting up CSS... "
-export GEM_HOME="$DIRECTORY/gems"
-mkdir -p "$GEM_HOME"
-export GEM_PATH=
-export PATH="$GEM_HOME/bin:$PATH"
-
-if ! grep -q 'Set up local gem directory for Pombola' $HOME/.bashrc; then
+echo "Setting up local PATH... "
+if ! grep -q 'Set up local PATH for Pombola' $HOME/.bashrc; then
     cat >>$HOME/.bashrc <<EOBRC
-
-# Set up local gem directory for Pombola
-export GEM_HOME="$DIRECTORY/gems"
-export GEM_PATH=
-export PATH="\$GEM_HOME/bin:\$PATH"
+# Set up local PATH for Pombola
+export PATH="$DIRECTORY/gem-bin:\$PATH"
 EOBRC
 fi
 echo $DONE_MSG

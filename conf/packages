@@ -35,8 +35,9 @@ libjpeg-dev
 # libjpeg - needed on non-debian. On debian installed as a requirement for others so no need to list seperately
 
 # Install yui-compressor, which django-pipeline will need to do CSS
-# and Javascript minification
+# and Javascript minification, and bundler, to install compass.
 yui-compressor
+bundler
 
 ############################################################
 # The following can be installed by Python's pip into the virtual environment.

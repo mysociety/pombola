@@ -20,7 +20,7 @@ addons:
     - yui-compressor
 
 install:
-  - gem install --no-ri --no-rdoc compass -v 0.12.7
+  - bundle install --deployment --path ../gems --binstubs ../gem-bin
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt --use-mirrors
   # Create a basic general.yml file:

@@ -33,7 +33,7 @@ fi
 # XXX packages file e.g. asks for Apache and central script doesn't
 # like comments or alternatives at present
 #install_website_packages
-apt-get install -y -qq make postgresql postgis postgresql-9.3-postgis-2.1 libpq-dev python-gdal python-dev python-pip python-virtualenv libxml2-dev libxslt1-dev openjdk-7-jre-headless libjpeg-dev yui-compressor libffi-dev ruby1.9.1-dev >/dev/null
+apt-get install -y -qq make postgresql postgis postgresql-9.3-postgis-2.1 libpq-dev python-gdal python-dev python-pip python-virtualenv libxml2-dev libxslt1-dev openjdk-7-jre-headless libjpeg-dev yui-compressor libffi-dev ruby1.9.1-dev ruby-bundler >/dev/null
 
 if ! dpkg -l elasticsearch 2>/dev/null | grep -q ^.i; then
     echo "Installing elasticsearch..."
