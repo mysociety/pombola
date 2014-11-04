@@ -1490,6 +1490,9 @@ class SAMembersInterestsSource(TemplateView):
             if key in self.request.GET:
                 context[key] = self.request.GET[key]
 
+        if not context['match'] in ('absolute', 'contains'):
+            context['match'] = 'absolute'
+
         #if a source is specified perform the search
         if context['source']!='':
             if context['match']=='absolute':
