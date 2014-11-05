@@ -155,6 +155,12 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
         # (The scorecard application can be ignored, since those
         # results are regenerated automatically.)
 
+        # Then those in interests_register, if that application is installed:
+        #    interests_register_models.Entry
+        if 'interests_register' in settings.INSTALLED_APPS:
+            import pombola.interests_register.models as interests_register_models
+            interests_register_models.Entry.objects.filter(person=to_delete).update(person=to_keep)
+
         # Add any images for the person to delete as non-primary
         # images for the person to keep:
         Image.objects.filter(content_type=content_type_person,
