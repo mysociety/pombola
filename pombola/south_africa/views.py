@@ -1164,13 +1164,16 @@ class SAMembersInterestsIndex(TemplateView):
             if key in self.request.GET:
                 context[key] = self.request.GET[key]
 
-        if context['release']!='all':
-            release = Release.objects.get(slug=context['release'])
-            context['release_id'] = release.id
+        try:
+            if context['release']!='all':
+                release = Release.objects.get(slug=context['release'])
+                context['release_id'] = release.id
 
-        if context['category']!='all':
-            categorylookup = Category.objects.get(slug=self.request.GET['category'])
-            context['category_id'] = categorylookup.id
+            if context['category']!='all':
+                categorylookup = Category.objects.get(slug=self.request.GET['category'])
+                context['category_id'] = categorylookup.id
+        except ObjectDoesNotExist:
+            return context
 
         #complete view - declarations for multiple people in multiple categories
         if context['display']=='all' and context['category']=='all':
@@ -1486,6 +1489,9 @@ class SAMembersInterestsSource(TemplateView):
         for key in ('source', 'match', 'category', 'release'):
             if key in self.request.GET:
                 context[key] = self.request.GET[key]
+
+        if not context['match'] in ('absolute', 'contains'):
+            context['match'] = 'absolute'
 
         #if a source is specified perform the search
         if context['source']!='':
