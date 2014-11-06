@@ -101,6 +101,10 @@
         {% endif %}
     </span>
 </div>
+{% else %}
+  <table>
+      <tr><td colspan="{{ headers|length }}">No results found.</td></tr>
+  </table>
 {% endif %}
 
 {% endblock %}

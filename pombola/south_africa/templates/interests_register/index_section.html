@@ -22,6 +22,10 @@
     </tr>
 {% endfor %}
 
+{% if data|length == 0 %}
+  <tr><td colspan="{{ headers|length }}">No results found.</td></tr>
+{% endif %}
+
 </table>
 
 <div class="step-pagination">

@@ -19,6 +19,11 @@
       </td>
   </tr>
 {% endfor %}
+
+{% if data|length == 0 %}
+  <tr><td colspan="5">No results found.</td></tr>
+{% endif %}
+
 </table>
 
 <div class="step-pagination">
