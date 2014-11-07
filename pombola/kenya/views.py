@@ -45,6 +45,20 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
     def get_context_data(self, **kwargs):
         context = super(KEPersonDetail, self).get_context_data(**kwargs)
         context['hansard_entries_to_show'] = ":3"
+
+        constituencies = self.object.constituencies().filter(
+            budget_entries__organisation='CDF'
+        ).select_related()
+
+        # We only retrieve one budget because we only really care about the
+        # latest. budgets() are default sorted by date of the budget session.
+        cdf_budget_constituencies = [
+            {'constituency': c, 'budget': c.budgets()[0]}
+            for c in constituencies
+        ]
+
+        context['cdf_budget_constituencies'] = cdf_budget_constituencies
+
         return context
 
 
