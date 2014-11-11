@@ -47,7 +47,7 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
         context['hansard_entries_to_show'] = ":3"
 
         constituencies = self.object.constituencies().filter(
-            budget_entries__organisation='CDF'
+            budget_entries__organisation='Constituencies Development Fund'
         ).select_related()
 
         # We only retrieve one budget because we only really care about the
