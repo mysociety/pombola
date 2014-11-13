@@ -2573,18 +2573,72 @@ ul.pager {
     }
 }
 
-.questions {
-    .intro {
-        font-weight:bold;
-    }
-    .question {
-        padding-left: 10px;
-    }
-    td.details {
-        width:8em;
-        vertical-align: top;
-    }
-    .reply {
+.questions-filter {
+    padding: 1em;
+    background-color: $colour_lighter_grey;
 
+    select {
+        display: block;
+        max-width: 20em;
+        margin: 0.5em 0;
+    }
+
+    @media only all and (min-width: 640px) {
+        padding-right: 7em;
+        position: relative;
+
+        .button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        select {
+            display: inline-block;
+            margin: 0 0.5em;
+        }
+    }
+}
+
+.questions {
+
+    .question {
+        padding: 2em 0;
+    }
+
+    .question + .question {
+        border-top: 1px solid $colour_muted;
+    }
+
+    .speech-meta {
+        margin-bottom: 0.7em;
+
+        a {
+            text-transform: none;
+            text-decoration: none;
+            margin-left: 0.5em;
+
+            &:hover, &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .speech-text {
+        line-height: 1.4em;
+    }
+
+    .reply {
+        padding-top: 1em;
+        padding-left: 5%;
+    }
+
+    h2 a {
+        text-decoration: none;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
     }
 }

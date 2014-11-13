@@ -11,52 +11,45 @@
 
 {% block content %}
 
-<form action="{% url 'section-list-question' %}" method="get">
-
-<label for="orderby">Order by:</label>
-<select name="orderby">
-    <option value="recentquestions"{% if orderby == "recentquestions" %} selected="selected"{% endif %}>Recent Questions</option>
-    <option value="recentanswers"{% if orderby == "recentanswers" %} selected="selected"{% endif %}>Recently Answered</option>
-</select>
-<label for="minister">Minister:</label>
-<select name="minister">
-    <option value="all">All</option>
-    {% for filter_minister in ministers %}
-     <option value="{{ filter_minister.slug }}"{% if minister == filter_minister.slug %} selected="selected"{% endif %}>{{ filter_minister.title }}</option>
-    {% endfor %}
-</select>
-
-<input type="submit" value="Filter" class="button">
-
+<form class="questions-filter" action="{% url 'section-list-question' %}" method="get">
+    <label for="minister">Show questions to</label>
+    <select name="minister">
+        <option value="all">All ministers</option>
+        {% for filter_minister in ministers %}
+         <option value="{{ filter_minister.slug }}"{% if minister == filter_minister.slug %} selected="selected"{% endif %}>{{ filter_minister.title }}</option>
+        {% endfor %}
+    </select>
+    <label for="orderby">ordered by</label>
+    <select name="orderby">
+        <option value="recentquestions"{% if orderby == "recentquestions" %} selected="selected"{% endif %}>Recently Asked</option>
+        <option value="recentanswers"{% if orderby == "recentanswers" %} selected="selected"{% endif %}>Recently Answered</option>
+    </select>
+    <input type="submit" value="Filter" class="button">
 </form>
 
-<table class="questions">
-{% for speech in speeches %}
-    <tr>
-        <td>
-            <span class="intro"><a href="{{ speech.speaker.get_absolute_url }}">{{ speech.speaker }}</a> to ask the <a href="{% url 'section-list-question' %}?orderby={{ orderby }}&minister={{ speech.questionto_slug }}">{{ speech.questionto }}</a></span>
-            <div class="question">{{ speech.text }}</div>
-            {% if speech.answer %}
-              <div class="reply">
-                  <span class="intro">Replied to on {{ speech.answer.start_date }}</span>
-                  <div class="question">
-                      {{ speech.answer.text|truncatewords:64 }} <a href="{{ speech.section.get_absolute_url }}">More &#187;</a>
-                    </div>
-              </div>
-            {% endif %}
-        </td>
-        <td class="details">
-            {{ speech.section.title }} <hr>
-            <a href="{{ speech.section.get_absolute_url }}" class="speech__content-link">
-                Link
-            </a><br />
-            <a href="{{ speech.source_url }}" class="speech__content-link">
-                Source
-            </a>
-        </td>
-    </tr>
-{% endfor %}
-</table>
+<div class="questions">
+  {% for speech in speeches %}
+    <div class="question">
+        <h3 class="speech-meta">
+            {{ speech.section.title }}
+            <a href="{{ speech.source_url }}">(Show source)</a>
+        </h3>
+        <h2 class="speech-title">
+            <a href="{{ speech.section.get_absolute_url }}">{{ speech.speaker }} to ask the {{ speech.questionto }}</a>
+        </h2>
+        <div class="speech-text">{{ speech.text }}</div>
+      {% if speech.answer %}
+        <div class="reply">
+            <h2>
+                <a href="{{ speech.section.get_absolute_url }}">Reply from the {{ speech.questionto }} on {{ speech.answer.start_date }}</a>
+            </h2>
+            <div class="speech-text">{{ speech.answer.text|truncatewords:64 }} <a href="{{ speech.section.get_absolute_url }}">More &#187;</a></div>
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
 
 <div class="step-pagination">
     <span class="step-links">
