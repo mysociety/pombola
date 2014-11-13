@@ -36,6 +36,7 @@
 {% endblock %}
 
 {% block profile_info %}
+<div class="sidebar">
   <div class="constituency-party">
 
       {% if object.aspirant_constituencies.count %}
@@ -87,4 +88,5 @@
           {% endfor %}
       </ul>
   </div>
+</div>
 {% endblock %}
