@@ -13,6 +13,8 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
 
+        db.send_pending_create_signals()
+
         # First, create the ParliamentarySession objects.  (If there
         # are already parliamentary sessions, then don't try to create
         # any new ones.)
