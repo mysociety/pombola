@@ -27,7 +27,7 @@ install:
   # Install the environment-specific Python packages:
   - pip install $MODULES --use-mirrors
   # Now install the rest of the required Python packages:
-  - pip install -r requirements.txt --use-mirrors
+  - CFLAGS="-O0" pip install -r requirements.txt --use-mirrors
   # Create a basic general.yml file:
   - sed -r
     -e "s,(POMBOLA_DB_USER:) 'sayit',\\1 'postgres',"
