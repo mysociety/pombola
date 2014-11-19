@@ -7,6 +7,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ('core', '0043_auto__add_slugredirect'),
+    )
+
     # The forwards and backwards migrations here are following those
     # suggested in http://stackoverflow.com/a/1770138/223092
 
