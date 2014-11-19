@@ -81,3 +81,5 @@ COUNTRY_JS = {
         'template_name': 'pipeline/js-array.html',
     }
 }
+
+INFO_PAGES_ALLOW_RAW_HTML = True

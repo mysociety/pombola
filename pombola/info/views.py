@@ -87,7 +87,7 @@ class InfoBlogFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.content
+        return item.content_as_cleaned_html
 
 
 class InfoPageView(DetailView):

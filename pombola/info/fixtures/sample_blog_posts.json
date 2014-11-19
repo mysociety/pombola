@@ -45,11 +45,11 @@
     },
     {
         "fields": {
-            "_content_rendered": "<p>Blah Black Panther blah.</p>",
+            "_markdown_content_rendered": "<p>Blah Black Panther blah.</p>",
             "categories": [
                 8
             ],
-            "content": "Blah Black Panther blah.",
+            "markdown_content": "Blah Black Panther blah.",
             "created": "2013-12-11T10:05:47.458",
             "kind": "blog",
             "publication_date": "2013-12-11T10:05:16",
@@ -65,11 +65,11 @@
     },
     {
         "fields": {
-            "_content_rendered": "<p>Blah Polar Bear blah.</p>",
+            "_markdown_content_rendered": "<p>Blah Polar Bear blah.</p>",
             "categories": [
                 7
             ],
-            "content": "Blah Polar Bear blah.",
+            "markdown_content": "Blah Polar Bear blah.",
             "created": "2013-12-11T10:04:49.534",
             "kind": "blog",
             "publication_date": "2013-12-11T10:00:02",
@@ -85,11 +85,11 @@
     },
     {
         "fields": {
-            "_content_rendered": "<p>Blah Raven blah.</p>",
+            "_markdown_content_rendered": "<p>Blah Raven blah.</p>",
             "categories": [
                 7
             ],
-            "content": "Blah Raven blah.",
+            "markdown_content": "Blah Raven blah.",
             "created": "2013-12-11T10:06:06.394",
             "kind": "blog",
             "publication_date": "2013-12-11T10:05:47",
@@ -105,11 +105,11 @@
     },
     {
         "fields": {
-            "_content_rendered": "<p>Blah Swan blah</p>",
+            "_markdown_content_rendered": "<p>Blah Swan blah</p>",
             "categories": [
                 8
             ],
-            "content": "Blah Swan blah",
+            "markdown_content": "Blah Swan blah",
             "created": "2013-12-11T10:05:16.667",
             "kind": "blog",
             "publication_date": "2013-12-11T10:04:49",

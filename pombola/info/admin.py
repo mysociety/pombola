@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 
 import autocomplete_light
@@ -12,9 +13,21 @@ class LabelAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {'slug': ['name']}
 
+if settings.INFO_PAGES_ALLOW_RAW_HTML:
+    search_fields_to_use = ['title', 'markdown_content', 'raw_content']
+    fields_to_use = (
+        'title', 'slug', 'publication_date', 'kind', 'use_raw',
+        'markdown_content', 'raw_content', 'categories', 'tags'
+    )
+else:
+    search_fields_to_use = ['title', 'markdown_content']
+    fields_to_use = (
+        'title', 'slug', 'publication_date', 'kind',
+        'markdown_content', 'categories', 'tags'
+    )
 
 class InfoPageAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
-    search_fields = [ 'title', 'content' ]
+    search_fields = search_fields_to_use
     list_display  = [ 'slug', 'title', 'kind', 'publication_date' ]
     list_filter   = [ 'kind', 'categories', 'tags' ]
     date_hierarchy = 'publication_date'
@@ -22,8 +35,11 @@ class InfoPageAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
 
     form = autocomplete_light.modelform_factory(models.InfoPage)
 
-    fields = ('title', 'slug', 'publication_date', 'kind', 'content', 'categories', 'tags')
+    fields = fields_to_use
     prepopulated_fields = {'slug': ['title']}
+
+    class Media:
+        js = ("info/js/admin.js",)
 
 
 admin.site.register( models.Category, LabelAdmin )

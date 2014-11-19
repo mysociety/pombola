@@ -20,7 +20,7 @@
 
     <div>{{ object.publication_date|date }} ({{ object.publication_date|timesince }} ago)</div>
 
-    {{ object.content }}
+    {{ object.content_as_cleaned_html|safe }}
 
 
   {% endfor %}

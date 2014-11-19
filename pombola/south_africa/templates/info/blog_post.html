@@ -14,7 +14,7 @@
 
   <p class="meta">{{ object.publication_date|date }} ({{ object.publication_date|timesince }} ago)</p>
 
-  {{ object.content }}
+  {{ object.content_as_html|safe }}
 
   {% include "info/_blog_tags.html" %}
 

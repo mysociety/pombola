@@ -11,7 +11,7 @@
 
   <div>{{ object.publication_date|date }} ({{ object.publication_date|timesince }} ago)</div>
 
-  {{ object.content }}
+  {{ object.content_as_html|safe }}
 
   <p>(<a href="{% url "info_blog_feed" %}">RSS Feed</a>)</p>
 

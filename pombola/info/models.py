@@ -1,6 +1,9 @@
 import datetime
+import lxml
+from lxml.html.clean import Cleaner
 import re
 
+from django.conf import settings
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.text import slugify
@@ -78,7 +81,17 @@ class InfoPage(ModelBase):
 
     title   = models.CharField(max_length=300, unique=True)
     slug    = models.SlugField(unique=True)
-    content = MarkupField( help_text="When linking to other pages use their slugs as the address (note that these links do not work in the preview, but will on the real site)")
+    markdown_content = MarkupField( help_text="When linking to other pages use their slugs as the address (note that these links do not work in the preview, but will on the real site)")
+
+    raw_content = models.TextField(
+        "Raw HTML",
+        default='',
+        help_text="You can enter raw HTML into this box, and it will be used if 'Enter content as raw HTML' is selected"
+    )
+    use_raw = models.BooleanField(
+        'Enter content as raw HTML',
+        default=False,
+    )
 
     KIND_PAGE = 'page'
     KIND_BLOG = 'blog'
@@ -108,6 +121,33 @@ class InfoPage(ModelBase):
     def name(self):
         return str(self)
 
+    def _clean_html(self, html):
+        cleaner = Cleaner(style=True, scripts=True)
+        return cleaner.clean_html(html)
+
+    @property
+    def content_as_html(self):
+        if settings.INFO_PAGES_ALLOW_RAW_HTML and self.use_raw:
+            # Parsing the HTML with lxml and outputting it again
+            # should ensure that we have only well-formed HTML:
+            parsed = lxml.html.fromstring(self.raw_content)
+            return lxml.etree.tostring(parsed)
+        else:
+            # Since there seems to be some doubt about whether
+            # markdown's safe_mode is really safe, clean the rendered
+            # HTML to remove any potentially dangerous tags first
+            return self._clean_html(self.markdown_content.rendered or '')
+
+    @property
+    def content_as_cleaned_html(self):
+        return self._clean_html(self.content_as_html)
+
+    @property
+    def content_as_plain_text(self):
+        cleaned_html = self.content_as_cleaned_html
+        cleaned_text = lxml.html.fromstring(cleaned_html).text_content()
+        return re.sub(r'(?ms)\s+', ' ', cleaned_text).strip()
+
     def content_with_anchors(self):
         """ Returns content with an anchor tag <a> inserted above every heading element
             (the anchor name is the slugified heading text). For example:
@@ -118,7 +158,7 @@ class InfoPage(ModelBase):
         def prepend_anchor_tag( match ):
             return '<a name="%s"></a>%s%s' % (slugify(match.group(2)), match.group(1), match.group(2))
         headings_regexp = re.compile( '(<h\d+[^>]*>)([^<]*)')
-        return headings_regexp.sub( prepend_anchor_tag, self.content.rendered)
+        return headings_regexp.sub( prepend_anchor_tag, self.content_as_html)
 
     @models.permalink
     def get_absolute_url(self):

@@ -12,6 +12,6 @@
 
   <p class="meta">{{ object.publication_date|date }}</p>
 
-  {{ object.content }}
+  {{ object.content_as_html|safe }}
 
 {% endblock %}

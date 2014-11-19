@@ -74,7 +74,7 @@
                 <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                 </h3>
                 <p class="meta">{{ article.publication_date|date }}</p>
-                <div class="summary">{{ article.content|truncatewords_html:32 }} <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p></div>
+                <div class="summary">{{ article.content_as_plain_text|truncatewords:32 }} <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p></div>
             </li>
             {% endfor %}
             </ul>

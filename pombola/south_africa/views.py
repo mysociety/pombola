@@ -81,7 +81,7 @@ class SAHomeView(HomeView):
         # If there is editable homepage content make it available to the templates.
         try:
             page = InfoPage.objects.get(slug="homepage-quote")
-            context['quote_content'] = page.content
+            context['quote_content'] = page.content_as_plain_text
         except InfoPage.DoesNotExist:
             context['quote_content'] = None
 

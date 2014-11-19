@@ -19,7 +19,7 @@
         {{ object.publication_date|date }}
       </p>
 
-      {{ object.content|truncatewords_html:80 }}
+      {{ object.content_as_cleaned_html|truncatewords_html:80 }}
 
       <p><a href="{{ object.get_absolute_url }}">Read more &hellip;</a></p>
 

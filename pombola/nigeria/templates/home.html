@@ -40,14 +40,14 @@
             <div class="home-news-article">
                 <h3><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h3>
                 <p class="meta">{{ blog_post.publication_date|date }}</p>
-                <div class="summary">{{ blog_post.content|truncatewords_html:32 }} <p><a class="readmore" href="{{ blog_post.get_absolute_url }}">More &#187;</a></p></div>
+                <div class="summary">{{ blog_post.content_as_plain_text|truncatewords:32 }} <p><a class="readmore" href="{{ blog_post.get_absolute_url }}">More &#187;</a></p></div>
             </div>
           {% endfor %}
         </div>
 
         {% if editable_content %}
           <div class="infopage">
-            {{ editable_content }}
+            {{ editable_content|safe }}
           </div>
         {% endif %}
 

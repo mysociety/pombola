@@ -23,7 +23,7 @@ class NGHomeView(HomeView):
         # probably add a feature flip boolean to the config.
         try:
             page = InfoPage.objects.get(slug="homepage")
-            context['editable_content'] = page.content
+            context['editable_content'] = page.content_as_html
         except InfoPage.DoesNotExist:
             context['editable_content'] = None
         return context
