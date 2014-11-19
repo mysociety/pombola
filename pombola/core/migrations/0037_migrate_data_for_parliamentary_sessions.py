@@ -11,6 +11,10 @@ from django.conf import settings
 
 class Migration(DataMigration):
 
+    depends_on = (
+        ('tasks', '0001_initial.py'),
+    )
+
     def forwards(self, orm):
 
         db.send_pending_create_signals()
