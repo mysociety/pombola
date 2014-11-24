@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+{% load compressed %}
+    <head>
+        <meta charset="utf-8">
+        <title>People's Shujaaz Campaign</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% compressed_css 'kenya' %}
+        {% compressed_css 'shujaaz' %}
+    </head>
+
+    <body>
+
+<!-- header-10 -->
+        <header class="header-10">
+           {% include 'header.html' %}
+        </header>
+        <section class="header-10-sub v-center bg-midnight-blue">
+            <div class="background">&nbsp;</div>
+            <div>
+                <div class="container" id="leadercontainer">
+                    <img src="{% static 'shujaaz/img/peoples-logo.png' %}" alt="">
+                    <div class="hero-unit" id="textcontainer">
+                        <h4>Which Parliamentarians have raised motions, issued statements, made contributions or moved bills of great public interest in 2013-2014?</h4>
+                        <p>
+                           Mzalendo keeps an eye on Parliament and has selected nominees in 10 categories. Help us Celebrate them by voting for Your Choice. The Voting Period ends on 7th December 11.59pm.
+Finalists will be announced on 11th December.
+                        </p>
+						<br /><a class="btn btn-large btn-clear colorhack btn-txt scrolltonom" href="#">Scroll to see nominees</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+<!-- content-7  -->
+        <section class="content-7 v-center">
+        <div>
+                <div class="container" id="nominees">
+				<h3>Nominees</h3><a class="btn btn-large btn-clear colorhack btn-fr btn-txt" href="{% url 'shujaaz-voting' %}">Click to vote now</a>
+                    <div class="row v-center">
+                        <div class="span3">
+                            <div class="span5">
+                                <h6><i class="txt-cat">Category:</i>  Wanjiku’s Best Representative - Education (National Assembly) </h6>
+                                <a href="http://info.mzalendo.com/person/hassan-abdi-dukicha/">Hon. Hassan Dukicha </a><a href="http://info.mzalendo.com/person/boniface-gatobu-kinoti/">, Hon. Boniface Gatobu </a><a href="http://info.mzalendo.com/person/julius-kibiwott-melly/">, Hon. Julius Melly</a>
+                                <div class="hd6"></div>
+								<h6><i class="txt-cat">Category:</i>  Wanjiku’s Best Representative - Education (Senate) </h6>
+                                <a href="http://info.mzalendo.com/person/mohamed-yusuf-haji/">Sen. Yusuf Haji </a><a href="http://info.mzalendo.com/person/david-musila/">, Sen. David Musila </a><a href="http://info.mzalendo.com/person/bonny-khalwale/">, Sen. Boni Khalwale</a>
+                                <div class="hd6"></div>
+								<h6><i class="txt-cat">Category:</i>  Wanjiku’s Best Representative (water) </h6>
+                                <a href="http://info.mzalendo.com/person/amina-abdalla/">Hon. Amina Abdalla </a><a href="http://info.mzalendo.com/person/hassan-abdi-dukicha/">, Hon. Hassan Dukicha </a><a href="http://info.mzalendo.com/person/zipporah-jepchirchir-kittony/">, Sen. Zipporah Kittony</a>
+                                <div class="hd6"></div>
+								<h6><i class="txt-cat">Category:</i>  Wanjiku’s Best Representative - food) </h6>
+                                <a href="http://info.mzalendo.com/person/mohamed-yusuf-haji/">Sen. Yusuf Haji </a><a href="http://info.mzalendo.com/person/beatrice-elachi/">, Sen. Beatrice Elachi </a><a href="http://info.mzalendo.com/person/chrisantus-wamalwa-wakhungu/">, Hon. Chris Wamalwa</a>
+                                <div class="hd6"></div>
+								<h6><i class="txt-cat">Category:</i>  Wanjiku Best Representative – Health (National Assembly) </h6>
+                                <a href="http://info.mzalendo.com/person/james-nyikal/">Hon. James Nyikal </a><a href="http://info.mzalendo.com/person/joseph-gitari/">, Hon. Joseph Gitari </a><a href="http://info.mzalendo.com/person/susan-mbinya-musyoka/">, Hon. Dr. Susan Musyoka</a>
+                            </div>
+                        </div>
+
+                        <div class="span3">
+                            <div class="span5">
+                                <h6><i class="txt-cat">Category:</i>  Wanjiku’s Best Representative – Health (Senate)  </h6>
+                                <a href="http://info.mzalendo.com/person/judith-achieng-sijeny/">Sen. Judith Sijeny </a><a href="http://info.mzalendo.com/person/wilfred-machage/">, Sen. Dr. Wilfred Machage </a><a href="http://info.mzalendo.com/person/catherine-mukite-nobwola/">, Sen. Catherine Mukiite</a>
+                                <div class="hd6"></div>
+								<h6><i class="txt-cat">Category:</i>  Wanjiku’s Best Representative (Youth) </h6>
+                                <a href="http://info.mzalendo.com/person/beatrice-elachi/">Sen. Beatrice Elachi </a><a href="http://info.mzalendo.com/person/chrisantus-wamalwa-wakhungu/">, Hon. Chris Wamalwa </a><a href="http://info.mzalendo.com/person/jude-l-kangethe-njomo/">, Hon. Jude Njomo</a>
+                                <div class="hd6"></div>
+								<h6><i class="txt-cat">Category:</i>  Wanjiku’s Best Representative – Budgetary oversight </h6>
+                                <a href="http://info.mzalendo.com/person/john-mbadi/">Hon. John Mbadi </a><a href="#">, Hon. Agostinho Neto </a><a href="http://info.mzalendo.com/person/agnes-nzani/">, Sen. Agnes Zani</a>
+                                <div class="hd6"></div>
+								<h6><i class="txt-cat">Category:</i>  Wanjiku’s Best representative – oversight (progressive legislation) </h6>
+                                <a href="http://info.mzalendo.com/person/kabando-kabando/">Hon. Kabando wa Kabando </a><a href="http://info.mzalendo.com/person/johnson-arthur-sakaja/">, Hon. Johnston Sakaja </a><a href="http://info.mzalendo.com/person/stewart-mwachiru-shadrack-madzayo/">, Sen. Stewart Madzayo</a>
+                                <div class="hd6"></div>
+								<h6><i class="txt-cat">Category:</i>  Wanjiku’s Best Representative - Devolution </h6>
+                                <a href="http://info.mzalendo.com/person/kithure-kindiki/">Sen. Kithure Kindiki </a><a href="http://info.mzalendo.com/person/bonny-khalwale/">, Sen. Boni Khalwale </a><a href="http://info.mzalendo.com/person/hassan-omar-hassan-sarai/">, Sen. Hassan Omar</a>
+                            </div>
+                        </div>
+                    </div>
+					<div class="row v-center" id="sharetxt">
+						<div class="span10">
+							<div class="span7 mgauto">
+								<div id="wave-icon" class="fl"></div><h4 class="fl">Share this page on facebook</h4><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/MzalendoWatch"><div id="facebook-icon" class="fl"></div></a><h4 class="fl">or on twitter</h4><a href="https://twitter.com/home?status=Post%20this%20your%20own%20awesome%20timeline.%0Ahttps://twitter.com/MzalendoWatch"><div id="twitter-icon" class="fl"></div></a><div id="wave-icon" class="fl"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </section>
+
+<!-- footer-3 -->
+        <footer id="site-footer" class="footer-3">
+            <div class="wrapper">
+                {% include "footer.html" %}
+            </div>
+
+            <div class="attribution">
+
+              <p>This site runs on <a href="https://github.com/mysociety/pombola">open source code</a> written by <a href="http://www.mysociety.org">mySociety</a>.</p>
+
+              {% block extra_attribution %}
+              {% endblock %}
+
+            </div>
+        </footer>
+
+        <!--[if lt IE 8]>
+        {% compressed_css 'shujaaz-lt-ie8' %}
+        <![endif]-->
+        {% compressed_js 'shujaaz' %}
+
+    </body>
+</html>

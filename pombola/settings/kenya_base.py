@@ -39,11 +39,22 @@ COUNTRY_CSS = {
         'output_filename': 'css/election-2013.css'
     },
     'intro': {
-        'source_filenames': {
+        'source_filenames': (
             'kenya/intro/intro.css',
-        },
+        ),
         'output_filename': 'css/kenya-intro.css'
-    }
+    },
+    'shujaaz': {
+        'source_filenames': (
+            'shujaaz/css/bootstrap.css',
+            'shujaaz/css/bootstrap-responsive.css',
+            'shujaaz/css/flat-ui.css',
+            'shujaaz/css/icon-font.css',
+
+            'shujaaz/css/style.css',
+        ),
+        'output_filename': 'css/shujaaz.css',
+    },
 }
 
 COUNTRY_JS = {
@@ -53,5 +64,22 @@ COUNTRY_JS = {
         ),
         'output_filename': 'js/kenya.js',
         'template_name': 'pipeline/js-array.html',
+    },
+    'shujaaz-lt-ie8': {
+        'source_filenames': (
+            'shujaaz/js/icon-font-ie7.js',
+        ),
+        'output_filename': 'js/shujaaz-lt-ie8.js',
+    },
+    'shujaaz': {
+        'source_filenames': (
+            'shujaaz/js/jquery-1.8.3.min.js',
+            'shujaaz/js/bootstrap.min.js',
+            'shujaaz/js/jquery.scrollTo-1.4.3.1-min.js',
+            'shujaaz/js/jquery.parallax.min.js',
+            'shujaaz/js/startup-kit.js',
+            'shujaaz/js/script.js',
+        ),
+        'output_filename': 'js/shujaaz.js',
     }
 }

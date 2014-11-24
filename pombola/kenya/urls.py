@@ -7,6 +7,7 @@ from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
     CountyPerformanceSurvey, EXPERIMENT_DATA, ThanksTemplateView)
 
 urlpatterns = patterns('',
+    url(r'^shujaaz$', TemplateView.as_view(template_name='shujaaz.html') ),
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
     url(r'^register-to-vote$',     TemplateView.as_view(template_name='register-to-vote.html') ),
     url(r'^find-polling-station$', TemplateView.as_view(template_name='find-polling-station.html') ),
