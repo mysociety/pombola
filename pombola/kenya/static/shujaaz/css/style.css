@@ -83,10 +83,6 @@ h1,
 .h1 {
   font-size: 62.006px /* 64px */;
 }
-h2,
-.h2 {
-  font-size: 51.996px /* 52px */;
-}
 h3,
 .h3 {
   font-size: 39.998000000000005px /* 40px */;
@@ -469,8 +465,6 @@ button:active {
   border-top: 2px solid #ebedee;
 }
 header {
-  padding-top: 100px;
-  padding-bottom: 70px;
   z-index: 100;
 }
 header .brand {
