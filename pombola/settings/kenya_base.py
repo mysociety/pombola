@@ -73,10 +73,10 @@ COUNTRY_JS = {
     },
     'shujaaz': {
         'source_filenames': (
-            'shujaaz/js/jquery-1.8.3.min.js',
-            'shujaaz/js/bootstrap.min.js',
-            'shujaaz/js/jquery.scrollTo-1.4.3.1-min.js',
-            'shujaaz/js/jquery.parallax.min.js',
+            'shujaaz/js/jquery-1.8.3.js',
+            'shujaaz/js/bootstrap.js',
+            'shujaaz/js/jquery.scrollTo-1.4.3.1.js',
+            'shujaaz/js/jquery.parallax-1.1.3.js',
             'shujaaz/js/startup-kit.js',
             'shujaaz/js/script.js',
         ),
