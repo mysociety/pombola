@@ -21,7 +21,7 @@ from hansard.models import Venue, Source, Sitting, Entry
 
 
 
-from odekro.models  import MP, HansardEntry
+from pombola.ghana.models  import MP, HansardEntry
 from utils import split_name, convert_date, legal_name
 
 KINDS = ((PlaceKind, 'constituency'),

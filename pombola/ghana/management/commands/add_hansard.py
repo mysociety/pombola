@@ -2,8 +2,8 @@ import os
 
 from django.core.management.base import BaseCommand, CommandError
 
-from odekro.management.hansard_parser import parse
-from odekro import data
+from pombola.ghana.management.hansard_parser import parse
+from pombola.ghana import data
 
 
 class Command(BaseCommand):

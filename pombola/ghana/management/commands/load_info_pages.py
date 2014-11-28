@@ -1,8 +1,8 @@
 import os
 from django.core.management.base import BaseCommand, CommandError
 
-from odekro.management.hansard_parser import parse
-from odekro.management.commands import add_infopage
+from pombola.ghana.management.hansard_parser import parse
+from pombola.ghana.management.commands import add_infopage
 
 class Command(BaseCommand):
     """Import Hansard"""

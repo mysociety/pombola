@@ -9,6 +9,7 @@
 # .
 # ├── collected_static
 # ├── media_root
+# ├── media_root.ghana
 # ├── media_root.kenya -> media_root
 # ├── media_root.nigeria
 # ├── media_root.south-africa
@@ -17,6 +18,7 @@
 # │   ├── .git
 # │   ├── bin
 # │   ├── conf
+# │   │   ├── general-ghana.yml
 # │   │   ├── general-kenya.yml
 # │   │   ├── general-nigeria.yml
 # │   │   ├── general-south-africa.yml
@@ -42,7 +44,7 @@ script_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
 pombola_directory = os.path.join(script_directory, '..', '..')
 pombola_directory = os.path.normpath(pombola_directory)
 
-available_pombolas = ('nigeria', 'kenya', 'south-africa', 'zimbabwe')
+available_pombolas = ('ghana', 'nigeria', 'kenya', 'south-africa', 'zimbabwe')
 
 def usage_and_exit():
     print >> sys.stderr, "Usage: %s <COUNTRY>" % (sys.argv[0],)

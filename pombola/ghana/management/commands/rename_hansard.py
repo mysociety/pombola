@@ -6,10 +6,10 @@ import os
 from optparse import make_option
 
 from django.core.management.base import BaseCommand, CommandError
-from odekro.management.hansard_parser import normalised_lines, scan, \
+from pombola.ghana.management.hansard_parser import normalised_lines, scan, \
                                              parse_head, meta
 
-# from odekro import data
+# from pombola.ghana import data
 
 class Command(BaseCommand):
     """Rename hansard text files based on header information"""

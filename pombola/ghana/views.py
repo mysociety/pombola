@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 
-from odekro import forms
+from pombola.ghana import forms
 from info.models import InfoPage
 import data
 

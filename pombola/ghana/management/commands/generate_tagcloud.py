@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from odekro.management.tagcloud import tagcloud
+from pombola.ghana.management.tagcloud import tagcloud
 
 
 class Command(BaseCommand):

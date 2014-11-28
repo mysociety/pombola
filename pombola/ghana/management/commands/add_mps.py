@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from odekro import data
+from pombola.ghana import data
 
 
 class Command(BaseCommand):

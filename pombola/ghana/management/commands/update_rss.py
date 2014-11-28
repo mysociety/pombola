@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from odekro.management.aggregate_rss import aggregate_articles
+from pombola.ghana.management.aggregate_rss import aggregate_articles
 
 
 class Command(BaseCommand):

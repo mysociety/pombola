@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 
 import json
-from odekro import data
+from pombola.ghana import data
 
 
 class Command(BaseCommand):
