@@ -84,7 +84,7 @@ def autocomplete(request):
     )
   
 
-def latest(n=20):
+def latest(n=30):
     Entry = hansard_models.Entry
     # filter = dict(start_date=Entry.objects.order_by('-start_date')[0].s)
     i = max(len(Entry.objects.all()) - n, 0)
@@ -93,12 +93,14 @@ def latest(n=20):
     filter = dict(sitting__id__in=xs)
     return SearchQuerySet().models(Entry).all()
 
-def tagcloud(request,wks=4):
+def tagcloud(request, n=30):
     """ Return tag cloud JSON results"""
-    # Build a query based on duration default is 1 month
-    # cutoff = datetime.date.today() - datetime.timedelta(weeks=int(wks))
-    # sqs  = SearchQuerySet().models(Entry).filter(sitting__id__in=[])
-    sqs = latest(30)
+    # Build a query based on fetching the last n hansards
+    #cutoff = datetime.date.today() - datetime.timedelta(weeks=int(wks))
+    #sqs  = SearchQuerySet().models(hansard_models.Entry).filter(sitting_date__gte=cutoff)
+    
+    sqs  = SearchQuerySet().models(hansard_models.Entry).all() #filter(sitting__pk__gte=(int(cutoff.pk)-int(wks)))
+    sqs = latest(n)
 
 
     cloudlist =[]
