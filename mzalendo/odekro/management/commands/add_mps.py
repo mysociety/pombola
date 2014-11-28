@@ -4,7 +4,7 @@ from odekro import data
 
 
 class Command(BaseCommand):
-    """Read in an info page file and either create or update existing info"""
+    """Read in mps data and either create or update existing info"""
 
     help = 'Add MPs data'
     args = '<file>'
