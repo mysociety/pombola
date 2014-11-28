@@ -581,8 +581,7 @@ class Position(ModelBase):
 
     person = models.ForeignKey('Person')
     organisation = models.ForeignKey('Organisation', null=True, blank=True)
-    place = models.ForeignKey('Place', null=True, blank=True, 
-        help_text="use if needed to identify the position - eg add constituency for an 'MP'")
+    place = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for a politician" )
     title = models.ForeignKey('PositionTitle', null=True, blank=True)
     subtitle = models.CharField(max_length=200, blank=True, default='')
     category = models.CharField(max_length=20, choices=category_choices, default='other', 
