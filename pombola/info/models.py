@@ -81,10 +81,15 @@ class InfoPage(ModelBase):
 
     title   = models.CharField(max_length=300, unique=True)
     slug    = models.SlugField(unique=True)
-    markdown_content = MarkupField( help_text="When linking to other pages use their slugs as the address (note that these links do not work in the preview, but will on the real site)")
+    markdown_content = MarkupField(
+        blank=True,
+        default='',
+        help_text="When linking to other pages use their slugs as the address (note that these links do not work in the preview, but will on the real site)",
+    )
 
     raw_content = models.TextField(
         "Raw HTML",
+        blank=True,
         default='',
         help_text="You can enter raw HTML into this box, and it will be used if 'Enter content as raw HTML' is selected"
     )
