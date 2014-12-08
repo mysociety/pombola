@@ -226,15 +226,14 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
         # based on the primary keys in the Pombola database.)
 
         popolo_directory = mkdtemp()
-        popolo_file_prefix = os.path.join(popolo_directory, 'popolo')
         call_command(
             'core_export_to_popolo_json',
-            popolo_file_prefix,
+            popolo_directory,
             'http://www.pa.org.za/'
         )
 
         # TODO rewrite this kludge, pending https://github.com/mysociety/popit-django/issues/19
-        with open(popolo_file_prefix + '-persons.json') as f:
+        with open(os.path.join(popolo_directory, 'persons.json')) as f:
             popolo_person_json = json.load(f)
 
         collection_url = 'http://popit.example.com/api/v0.1/'

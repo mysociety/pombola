@@ -3,6 +3,7 @@
 
 import json
 from optparse import make_option
+from os.path import exists, isdir, join
 import slumber
 import sys
 import urlparse
@@ -16,7 +17,7 @@ from popit_api import PopIt
 ideal_collection_order = ('organizations', 'persons', 'posts', 'memberships')
 
 class Command(BaseCommand):
-    args = 'FILENAME-PREFIX POMBOLA-URL'
+    args = 'OUTPUT-DIRECTORY POMBOLA-URL'
     help = 'Export all people, organisations and memberships to Popolo JSON and mongoexport format'
 
     option_list = BaseCommand.option_list + (
@@ -33,7 +34,10 @@ class Command(BaseCommand):
         if len(args) != 2:
             raise CommandError, "You must provide a filename prefix and the Pombola instance URL"
 
-        filename_prefix, pombola_url = args
+        output_directory, pombola_url = args
+        if not (exists(output_directory) and isdir(output_directory)):
+            message = "'{0}' was not a directory"
+            raise CommandError(message.format(output_directory))
         parsed_url = urlparse.urlparse(pombola_url)
 
         primary_id_scheme = '.'.join(reversed(parsed_url.netloc.split('.')))
@@ -47,16 +51,16 @@ class Command(BaseCommand):
         )
 
         if options['pombola']:
-            output_filename = filename_prefix + '-pombola.json'
+            output_filename = join(output_directory, 'pombola.json')
             with open(output_filename, 'w') as f:
                 json.dump(popolo_data, f, indent=4, sort_keys=True)
         else:
             for collection, data in popolo_data.items():
                 for mongoexport_format in (True, False):
-                    output_filename = filename_prefix + '-'
+                    output_basename = collection + ".json"
                     if mongoexport_format:
-                        output_filename += 'mongo-'
-                    output_filename += collection + ".json"
+                        output_basename = 'mongo-' + output_basename
+                    output_filename = join(output_directory, output_basename)
                     with open(output_filename, 'w') as f:
                         if mongoexport_format:
                             for item in data:
