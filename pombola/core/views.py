@@ -65,10 +65,7 @@ class HelpApiView(TemplateView):
             split_url[i] = ''
         context['popit_url'] = urlunsplit(split_url)
         # Set the URL path to the nightly JSON exports:
-        prefix = 'nightly'
-        if settings.COUNTRY_APP == 'south_africa':
-            prefix = 'za'
-        context['dump_base_path'] = '/media_root/popolo_json/' + prefix
+        context['dump_base_path'] = settings.MEDIA_URL + 'popolo_json/'
         return context
 
 
