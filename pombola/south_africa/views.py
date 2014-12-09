@@ -838,7 +838,6 @@ class SASectionView(SectionView):
             full_slug = self.kwargs.get('full_slug', None)
             slugs = full_slug.split('/')
             for i in range(len(slugs), 0, -1):
-                print i
                 try:
                     check_slug = '/'.join(slugs[:i])
                     sr = SlugRedirect.objects.get(
