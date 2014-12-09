@@ -112,7 +112,7 @@ class PopoloTest(TestCase):
                 "sort_name": u"Person",
                 "images": [
                     {
-                        "url": "http://pombola.example.org//media_root/{image_name}"
+                        "url": "http://pombola.example.org/media_root/{image_name}"
                     }
                 ],
                 "birth_date": "1970-01-01",

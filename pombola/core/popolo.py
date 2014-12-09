@@ -3,6 +3,7 @@ import slumber
 import json
 import datetime
 from collections import defaultdict
+from urlparse import urljoin
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
@@ -187,7 +188,11 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
                 person_properties[key] = date_to_partial_iso8601(date)
         primary_image = person.primary_image()
         if primary_image:
-            person_properties['images' ] = [{'url': base_url + primary_image.url}]
+            person_properties['images' ] = [
+                {
+                    'url': urljoin(base_url, primary_image.url)
+                }
+            ]
         add_identifiers_to_properties(person, person_properties, primary_id_scheme)
         add_contact_details_to_properties(person, person_properties)
         add_other_names(person, person_properties)
