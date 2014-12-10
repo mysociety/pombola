@@ -569,8 +569,8 @@ section * {
 	height:1px;
 }
 
-.mgauto {
-	margin:0 18%;
+.social-links {
+  text-align: center;
 }
 
 #nominees {
