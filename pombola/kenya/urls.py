@@ -4,10 +4,12 @@ from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
 
 from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
     CountyPerformancePetitionSubmission, CountyPerformanceShare,
-    CountyPerformanceSurvey, EXPERIMENT_DATA, ThanksTemplateView)
+    CountyPerformanceSurvey, EXPERIMENT_DATA, ThanksTemplateView,
+    ShujaazFinalistsView
+)
 
 urlpatterns = patterns('',
-    url(r'^shujaaz$', TemplateView.as_view(template_name='shujaaz.html') ),
+    url(r'^shujaaz$', ShujaazFinalistsView.as_view(), name='shujaaz-finalists'),
     url(r'^shujaaz-voting$', TemplateView.as_view(template_name='shujaaz-voting.html'), name='shujaaz-voting'),
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
     url(r'^register-to-vote$',     TemplateView.as_view(template_name='register-to-vote.html') ),
