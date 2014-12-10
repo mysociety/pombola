@@ -30,6 +30,19 @@ function fadedEls(el, shift) {
 
 (function($) {
     $(function() {
+      $('.shujaaz-reasons').hide();
+      $('.toggle-show-reasons').click(function (event) {
+        var target = $(event.target),
+            reasonsDiv = target.next();
+        if (target.text().lastIndexOf('Show', 0) === 0) {
+          reasonsDiv.show();
+          target.text('Hide reasons for nomination...')
+        } else {
+          reasonsDiv.hide();
+          target.text('Show reasons for nomination...')
+        }
+      });
+
         // Sections height & scrolling
         $(window).resize(function() {
             var sH = $(window).height();

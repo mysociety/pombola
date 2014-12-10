@@ -1537,3 +1537,12 @@ body > section.v-center > div {
   background-color: #1B1F23;
   color: #7F8C8D;
 }
+
+.shujaaz-finalist-image-and-name {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.toggle-show-reasons:hover {
+  cursor: pointer;
+}
