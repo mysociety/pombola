@@ -569,12 +569,24 @@ section * {
 	height:1px;
 }
 
-.mgauto {
-	margin:0 18%;
+.social-links {
+  text-align: center;
 }
 
 #nominees {
 	width:940px;
+}
+
+@media (max-width: 940px) {
+    #nominees {
+      width: 768px;
+    }
+}
+
+@media (max-width: 768px) {
+    #nominees {
+      width: 100%;
+    }
 }
 
 #sharetxt {
@@ -1536,4 +1548,13 @@ body > section.v-center > div {
 .footer-3 {
   background-color: #1B1F23;
   color: #7F8C8D;
+}
+
+.shujaaz-finalist-image-and-name {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.toggle-show-reasons:hover {
+  cursor: pointer;
 }
