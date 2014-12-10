@@ -577,6 +577,18 @@ section * {
 	width:940px;
 }
 
+@media (max-width: 940px) {
+    #nominees {
+      width: 768px;
+    }
+}
+
+@media (max-width: 768px) {
+    #nominees {
+      width: 100%;
+    }
+}
+
 #sharetxt {
 	margin-top:100px;
 	margin-bottom:-130px;
