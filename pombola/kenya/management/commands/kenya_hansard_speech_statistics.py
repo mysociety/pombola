@@ -12,6 +12,9 @@ from django.db.models import Count
 from pombola.core.models import Person
 from pombola.hansard.models import Entry, Venue
 
+class MultipleMembershipsException(Exception):
+    pass
+
 class Command(BaseCommand):
     """Output statistics on speeches from Hansard for a date range"""
 
@@ -79,7 +82,7 @@ class Command(BaseCommand):
             if count > 1:
                 fmt = "Multiple {0} memberships found for {1}: {2}"
                 message = fmt.format(k, speaker, v)
-                raise Exception, message
+                raise MultipleMembershipsException, message
             elif count == 1:
                 results[k] = v[0]
             else:
