@@ -154,8 +154,8 @@ class Command(BaseCommand):
             # The gender split is easy to find, so do that first:
 
             gender_counts = {
-                'Male': all_speaker_entries.filter(speaker__gender='m').count(),
-                'Female': all_speaker_entries.filter(speaker__gender='f').count(),
+                'Male': all_speaker_entries.filter(speaker__gender='male').count(),
+                'Female': all_speaker_entries.filter(speaker__gender='female').count(),
                 'Unknown': all_speaker_entries.filter(speaker__gender='').count()
             }
 
