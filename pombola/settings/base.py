@@ -420,14 +420,19 @@ def make_enabled_features(installed_apps, all_optional_apps):
 PIPELINE_CSS = {
     'core': {
         'source_filenames': (
-            # .scss files from core:
-            'sass/admin.scss',
             # .css files from core:
             'css/jquery.countdown-v1.6.0.css',
             'css/jquery-ui-1.8.17.custom.css',
         ),
         'output_filename': 'css/core.css',
-    }
+    },
+    'admin': {
+        'source_filenames': (
+            # .scss files from core:
+            'sass/admin.scss',
+        ),
+        'output_filename': 'css/admin.css',
+    },
 }
 
 # The packages in DYNAMICALLY_LOADED_PIPELINE_JS will all be loaded
