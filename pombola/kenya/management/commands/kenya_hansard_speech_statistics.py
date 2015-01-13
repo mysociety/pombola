@@ -27,7 +27,11 @@ class Command(BaseCommand):
 
     help = 'Output statistics on speeches from Hansard for a date range'
 
-    def position_data(self, speaker, date):
+    def position_data(self, speaker, date, cached_position_data):
+
+        cache_key = (speaker, date)
+        if cache_key in cached_position_data:
+            return cached_position_data[cache_key]
 
         results = {
             'county_associated': [],
@@ -85,10 +89,14 @@ class Command(BaseCommand):
             else:
                 results[k] = ('', '') if k == 'county_associated' else ''
 
+        cached_position_data[cache_key] = results
+
         return results
 
 
     def handle(self, **options):
+        position_data_cache = {}
+
         if not options['date_from']:
             raise CommandError("You must specify --date-from")
         if not options['date_to']:
@@ -124,7 +132,7 @@ class Command(BaseCommand):
                 # Look for political positions occupied mid-way through
                 # the date range:
 
-                position_results = self.position_data(speaker, date_midpoint)
+                position_results = self.position_data(speaker, date_midpoint, position_data_cache)
 
                 writer.writerow([speaker.legal_name,
                                  speaker.gender,
@@ -166,7 +174,7 @@ class Command(BaseCommand):
             for e in all_speaker_entries:
                 sitting_date = e.sitting.start_date
                 speaker = e.speaker
-                positions = self.position_data(speaker, e.sitting.start_date)
+                positions = self.position_data(speaker, sitting_date, position_data_cache)
                 party_counts[positions['party_membership']] += 1
                 coalition_counts[positions['coalition_membership']] += 1
                 county_associated[positions['county_associated']] += 1
