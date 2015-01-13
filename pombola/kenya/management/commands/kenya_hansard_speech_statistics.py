@@ -197,6 +197,43 @@ class Command(BaseCommand):
                 for t, v in county_associated.items():
                     writer.writerow([t[0], t[1], str(v)])
 
+            if vslug == 'national_assembly':
+
+                print "  Writing women representative data"
+
+                with open(vslug + '-women-representatives.csv', 'w') as fp:
+                    writer = csv.writer(fp)
+                    writer.writerow(['Name',
+                                     'Gender',
+                                     'Position',
+                                     'County',
+                                     'Party',
+                                     'Coalition',
+                                     'Appearances'])
+
+                    all_women_representative_speaker_entries = \
+                        all_speaker_entries.filter(
+                            speaker__position__title__name='Member of the National Assembly',
+                            speaker__position__subtitle__regex="omen.*epresentative",
+                        )
+
+                    for d in all_women_representative_speaker_entries. \
+                        values('speaker'). \
+                        annotate(Count('speaker')). \
+                        order_by('speaker'):
+                        speaker = Person.objects.get(pk=d['speaker'])
+                        speeches = d['speaker__count']
+
+                        position_results = self.position_data(speaker, date_midpoint, position_data_cache)
+
+                        writer.writerow([speaker.legal_name,
+                                         speaker.gender,
+                                         position_results['county_associated'][0],
+                                         position_results['county_associated'][1],
+                                         position_results['party_membership'],
+                                         position_results['coalition_membership'],
+                                         speeches])
+
     def write_csv(self, filename, dictionary):
         with open(filename, 'w') as fp:
             writer = csv.writer(fp)
