@@ -32,7 +32,12 @@
 
 {% block profile_info %}
 
-  <div class="constituency-party">
+  <div class="object-sidebar__box awards">
+    <h3>People’s Shujaaz Awards</h3>
+    <p><a href="#">Finalist: Horses (Senate) 2014</a></p>
+  </div>
+
+  <div class="object-sidebar__box constituency-party">
 
       {% if object.aspirant_constituencies.count %}
           <h3>Aspirant for</h3>
@@ -64,7 +69,7 @@
   </div>
 
   {% if object.name != object.legal_name or object.contacts.count %}
-  <div class="contact-details">
+  <div class="object-sidebar__box contact-details">
       {% if object.name != object.legal_name %}
           <h3>Full name</h3>
           <p>{{ object.legal_name }}</p>

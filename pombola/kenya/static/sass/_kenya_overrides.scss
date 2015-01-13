@@ -148,34 +148,60 @@ body {
     }
   }
 
-  .constituency-party,
-  .contact-details {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 15px;
-
-    #page & ul, p {
-      margin-bottom: 0;
-    }
-
-    #page & ul + h3,
-    #page & p + h3 {
-      margin-top: 15px;
-    }
-  }
-
   .contact-details {
     p {
-      word-break: break-all; /* stops really long email addresses breaking out of sidebar */
+      word-break: break-all; // stops really long email addresses breaking out of sidebar
     }
     .contact-details-address {
       word-break: normal;
-      white-space: pre; /* addresses are often formatted with line breaks, so preserve them */
+      white-space: pre; // addresses are often formatted with line breaks, so preserve them
     }
   }
 }
 
-/* clear old party link formatting */
+.object-sidebar__box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px 0; // This gets overriden by core for .constituency-party
+
+  // Hideously overloaded selector because of #page in core styles
+  #page .profile-info & ul, p {
+    margin-bottom: 0;
+  }
+
+  #page .profile-info & ul + h3,
+  #page .profile-info & p + h3 {
+    margin-top: 15px;
+  }
+
+  #page .profile-info & ul li:last-child {
+    margin-bottom: 0;
+  }
+
+  &.awards {
+    background-color: #fbf6dd; // pale yellow
+    border-color: #e4dfc5; // slightly darker greyer yellow
+    padding-left: 52px;
+    background-image: url(../images/peoples-shujaaz-award-badge.png);
+    background-position: 11px center;
+    background-repeat: no-repeat;
+    font-size: 14px;
+    line-height: 18px;
+
+    #page & h3, p {
+      text-transform: none;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    #page & h3 {
+      margin-bottom: 2px;
+    }
+  }
+}
+
+// clear old party link formatting
 #page .profile-info .constituency-party ul li a {
   background: transparent;
   padding: 0;
@@ -185,7 +211,8 @@ body {
 
   &:hover {
     background: transparent;
-    color: #004422; /* this comes from _html_elements.scss */
+    color: #004422; // this comes from _html_elements.scss
+    text-decoration: underline;
   }
 }
 
