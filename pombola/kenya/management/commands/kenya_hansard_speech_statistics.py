@@ -107,6 +107,8 @@ class Command(BaseCommand):
         date_difference = date_to - date_from
         date_midpoint = date_from + (date_difference / 2)
 
+        print "Generating all-speakers.csv"
+
         with open('all-speakers.csv', 'w') as fp:
             writer = csv.writer(fp)
             writer.writerow(['Name',
@@ -146,6 +148,8 @@ class Command(BaseCommand):
 
             vslug = venue.slug
 
+            print "Generating data for " + vslug
+
             all_speaker_entries = Entry.objects. \
                 filter(sitting__start_date__gte=date_from,
                        sitting__start_date__lte=date_to,
@@ -158,6 +162,8 @@ class Command(BaseCommand):
 
             # The gender split is easy to find, so do that first:
 
+            print "  Writing gender data for " + vslug
+
             gender_counts = {
                 'Male': all_speaker_entries.filter(speaker__gender='male').count(),
                 'Female': all_speaker_entries.filter(speaker__gender='female').count(),
@@ -165,6 +171,8 @@ class Command(BaseCommand):
             }
 
             self.write_csv(vslug + '-gender.csv', gender_counts)
+
+            print "  Writing county, party and coalition data for " + vslug
 
             # These dictionaries are for storing the position-based results:
             county_associated = defaultdict(int)
