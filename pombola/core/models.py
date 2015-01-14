@@ -568,8 +568,10 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
         return (
             self
                 .parties()
-                .filter(position__in=active_politician_positions)
-                .filter(position__in=active_member_positions)
+                .filter(
+                    Q(position__in=active_politician_positions) |
+                    Q(position__in=active_member_positions)
+                )
                 .distinct()
             )
 
