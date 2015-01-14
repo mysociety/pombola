@@ -32,10 +32,12 @@
 
 {% block profile_info %}
 
+  {% if shujaaz_finalist %}
   <div class="object-sidebar__box awards">
     <h3>People’s Shujaaz Awards</h3>
-    <p><a href="#">Finalist: Horses (Senate) 2014</a></p>
+    <p><a href="{% url 'shujaaz-finalists' %}#nominees">Finalist: {{ shujaaz_finalist.category }}</a></p>
   </div>
+  {% endif %}
 
   <div class="object-sidebar__box constituency-party">
 

@@ -105,3 +105,5 @@ agreements with county government to transfer resources,
 functions and powers to county governments.</li></ul>''',
     },
 ]
+
+FINALISTS_DICT = {f['person']: f for f in FINALISTS}

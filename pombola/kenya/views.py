@@ -62,6 +62,10 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
 
         context['cdf_budget_constituencies'] = cdf_budget_constituencies
 
+        shujaaz_finalist = shujaaz.FINALISTS_DICT.get(self.object.pk)
+        if shujaaz_finalist:
+            context['shujaaz_finalist'] = shujaaz_finalist
+
         return context
 
 
