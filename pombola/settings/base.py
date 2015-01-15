@@ -519,12 +519,6 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/google-map.js',
     },
-    'respond': {
-        'source_filenames': (
-            'js/libs/respond.1.0.1.min.js',
-        ),
-        'output_filename': 'js/respond.js',
-    },
     'modernizr_and_loader': {
         'source_filenames': (
             'js/libs/modernizr-2.0.6.custom.js',
