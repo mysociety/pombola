@@ -10,115 +10,115 @@
 {% endcomment %}
 
 
-<li><a href="{% url home %}">Home</a></li>
-<li><a href="{% url info_page slug='democracy-resources' %}">Democracy Resources</a>
+<li><a href="{% url 'home' %}">Home</a></li>
+<li><a href="{% url 'info_page' slug='democracy-resources' %}">Democracy Resources</a>
     {% if include_sub_menu_entries %}
     <ul id="democracy-resources">
         <li>
-            <a href="{% url info_page slug='citizens-rights' %}">Citizens Rights &amp; Responsibilities</a>
+            <a href="{% url 'info_page' slug='citizens-rights' %}">Citizens Rights &amp; Responsibilities</a>
         </li>
         <li>
-            <a href="{% url info_page slug='how-democracy-works' %}">How Our Democracy Works</a>
+            <a href="{% url 'info_page' slug='how-democracy-works' %}">How Our Democracy Works</a>
         </li>
         <li>
-            <a href="{% url info_page slug='democracy-faq' %}">Democracy FAQs</a>
+            <a href="{% url 'info_page' slug='democracy-faq' %}">Democracy FAQs</a>
         </li>
         <li>
-            <a href="{% url info_page slug='constitution-2010' %}">Constitution 2010</a>
+            <a href="{% url 'info_page' slug='constitution-2010' %}">Constitution 2010</a>
         </li>
         <li>
-            <a href="{% url info_page slug='election-legislation' %}">Election Legislation</a>
+            <a href="{% url 'info_page' slug='election-legislation' %}">Election Legislation</a>
         </li>
         <li>
-            <a href="{% url info_page slug='democracy-documents' %}">Democracy Documents</a>
+            <a href="{% url 'info_page' slug='democracy-documents' %}">Democracy Documents</a>
         </li>
     </ul>
     {% endif %}
 </li>
 <li><a href="{% url position slug='mp' %}">Politicians</a></li>
-<li><a href="{% url info_page slug='parliament-overview' %}">Parliament</a>
+<li><a href="{% url 'info_page' slug='parliament-overview' %}">Parliament</a>
     {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
         <li>
-            <a href="{% url info_page slug='parliament-overview' %}">Parliament Overview</a>
+            <a href="{% url 'info_page' slug='parliament-overview' %}">Parliament Overview</a>
         </li>
         <li>
-            <a href="{% url info_page slug='ministry-overview' %}">Ministry Overview</a>
+            <a href="{% url 'info_page' slug='ministry-overview' %}">Ministry Overview</a>
         </li>
         <li>
-            <a href="{% url info_page slug='committee-overview' %}">Committee Overview</a>
+            <a href="{% url 'info_page' slug='committee-overview' %}">Committee Overview</a>
         </li>
         <li>
-            <a href="{% url info_page slug='bills-overview' %}">Bills Overview</a>
+            <a href="{% url 'info_page' slug='bills-overview' %}">Bills Overview</a>
         </li>
 
         {% if settings.ENABLED_FEATURES.hansard %}
             <li>
-                <a href="{% url hansard:index %}">Hansard</a>
+                <a href="{% url 'hansard:index' %}">Hansard</a>
             </li>
         {% endif %}
 
         <li>
-            <a href="{% url info_page slug='political-parties' %}">Political Parties</a>
+            <a href="{% url 'info_page' slug='political-parties' %}">Political Parties</a>
         </li>
     </ul>                    
     {% endif %}
 </li>
-<li><a href="{% url info_page slug='places-overview' %}">Places</a>
+<li><a href="{% url 'info_page' slug='places-overview' %}">Places</a>
     {% if include_sub_menu_entries %}
     <ul id="places-overview">
         <li>
-            <a href="{% url info_page slug='places-overview' %}">Places Overview</a>
+            <a href="{% url 'info_page' slug='places-overview' %}">Places Overview</a>
         </li>
         <li>
-            <a href="{% url place_kind slug='constituency' %}">Constituencies</a>
+            <a href="{% url 'place_kind' slug='constituency' %}">Constituencies</a>
         </li>
         <li>
-            <a href="{% url place_kind slug='county' %}">Counties</a>
+            <a href="{% url 'place_kind' slug='county' %}">Counties</a>
         </li>
     </ul>
     {% endif %}
 </li>
-<li><a href="{% url info_page slug='2012-overview' %}">Election</a>
+<li><a href="{% url 'info_page' slug='2012-overview' %}">Election</a>
     {% if include_sub_menu_entries %}
     <ul id="2012">
         <li>
-            <a href="{% url info_page slug='2012-overview' %}">Election Overview</a>
+            <a href="{% url 'info_page' slug='2012-overview' %}">Election Overview</a>
         </li>
 
-        <li><a href="{% url position slug='aspirant-president'            %}">Presidential Aspirants</a></li>
-        <li><a href="{% url position slug='aspirant-mp'                   %}">Aspirant MPs</a></li>
-        <li><a href="{% url position slug='aspirant-governor'             %}">Aspirant Governors</a></li>
-        <li><a href="{% url position slug='aspirant-senator'              %}">Aspirant Senators</a></li>
-        <li><a href="{% url position slug='aspirant-ward-representative'  %}">Aspirant Ward reps</a></li>
-        <li><a href="{% url position slug='aspirant-women-representative' %}">Aspirant Women reps</a></li>
+        <li><a href="{% url 'position' slug='aspirant-president'            %}">Presidential Aspirants</a></li>
+        <li><a href="{% url 'position' slug='aspirant-mp'                   %}">Aspirant MPs</a></li>
+        <li><a href="{% url 'position' slug='aspirant-governor'             %}">Aspirant Governors</a></li>
+        <li><a href="{% url 'position' slug='aspirant-senator'              %}">Aspirant Senators</a></li>
+        <li><a href="{% url 'position' slug='aspirant-ward-representative'  %}">Aspirant Ward reps</a></li>
+        <li><a href="{% url 'position' slug='aspirant-women-representative' %}">Aspirant Women reps</a></li>
 
 
     </ul>
     {% endif %}
 </li>
 <li><a href="http://mzalendo.com/blog/">Blog</a></li>
-<li><a href="{% url info_page slug='newsletter' %}">Newsletter</a></li>
-<li><a href="{% url info_page slug='mzalendo-overview' %}">About</a>
+<li><a href="{% url 'info_page' slug='newsletter' %}">Newsletter</a></li>
+<li><a href="{% url 'info_page' slug='mzalendo-overview' %}">About</a>
     {% if include_sub_menu_entries %}
     <ul id="mzalendo-overview">
         <li>
-            <a href="{% url info_page slug='mzalendo-overview' %}">Odekro Overview</a>
+            <a href="{% url 'info_page' slug='mzalendo-overview' %}">Odekro Overview</a>
         </li>
         <li>
-            <a href="{% url info_page slug='site-faq' %}">Site FAQs</a>
+            <a href="{% url 'info_page' slug='site-faq' %}">Site FAQs</a>
         </li>
         <li>
-            <a href="{% url info_page slug='policies' %}">Policies</a>
+            <a href="{% url 'info_page' slug='policies' %}">Policies</a>
         </li>
         <li>
-            <a href="{% url info_page slug='partners' %}">Partners</a>
+            <a href="{% url 'info_page' slug='partners' %}">Partners</a>
         </li>
         <li>
-            <a href="{% url info_page slug='scorecard-faq' %}">Scorecard FAQs</a>
+            <a href="{% url 'info_page' slug='scorecard-faq' %}">Scorecard FAQs</a>
         </li>
         <li>
-            <a href="{% url info_page slug='contact' %}">Contact</a>
+            <a href="{% url 'info_page' slug='contact' %}">Contact</a>
         </li>
     </ul>
     {% endif %}

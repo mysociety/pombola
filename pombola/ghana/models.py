@@ -1,7 +1,7 @@
 from django.db import models
 
-from core.models import Person, Position
-from hansard.models import Sitting, Entry
+from pombola.core.models import Person, Position
+from pombola.hansard.models import Sitting, Entry
 
 
 class UploadModel(models.Model):

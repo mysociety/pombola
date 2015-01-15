@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse, resolve
 
 from models import MP
-from core.models import Person
+from pombola.core.models import Person
 
 
 def process(request):

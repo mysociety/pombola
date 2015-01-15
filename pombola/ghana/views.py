@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 
 from pombola.ghana import forms
-from info.models import InfoPage
+from pombola.info.models import InfoPage
 import data
 
 def info_page_upload(request):
