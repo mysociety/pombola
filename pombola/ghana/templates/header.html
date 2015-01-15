@@ -17,7 +17,7 @@
         </ul>
 
         <ul class="header">
-            <a href="{% url position slug='mp' %}">Know
+            <a href="{% url 'position_pt' pt_slug='mp' %}">Know
                 <span>your MP's</span>
             </a>
         </ul>
@@ -72,12 +72,12 @@
                     </li>
 
                     <li>
-                        <a href="{% url position slug='aspirant-president' %}">
+                        <a href="{% url 'position_pt' pt_slug='aspirant-president' %}">
                             Presidential Aspirants
                         </a>
                     </li>
                     <li>
-                        <a href="{% url position slug='aspirant-mp' %}">
+                        <a href="{% url 'position_pt' pt_slug='aspirant-mp' %}">
                             Parliamentary Aspirants
                         </a>
                     </li>
@@ -101,7 +101,7 @@
                     </li>
                     {% endif %}
                     <li>
-                        <a href="{% url position slug='mp' %}">MPs</a>
+                        <a href="{% url 'position_pt' pt_slug='mp' %}">MPs</a>
                     </li>
                     <li>
                         <a href="{% url 'info_page' slug='parliament-overview' %}">
