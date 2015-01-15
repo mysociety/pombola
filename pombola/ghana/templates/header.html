@@ -1,17 +1,17 @@
 <div id="h_top"></div>
 <div id="h_mid">
     <div class="wrap">
-        <h1 id="logo"><a href="{% url home %}">Odekro Logo</a></h1>
+        <h1 id="logo"><a href="{% url 'home' %}">Odekro Logo</a></h1>
         
         {% comment %}
         <ul class="header" style="border:none;">
             <a class="topMenu" 
-               href="{% url info_page slug='odekro-overview' %}">What is <br />Odekro?
+               href="{% url 'info_page' slug='odekro-overview' %}">What is <br />Odekro?
             </a>
         </ul>
         
         <ul class="header">
-            <a href="{% url info_page slug='parliament-overview' %}">Discover
+            <a href="{% url 'info_page' slug='parliament-overview' %}">Discover
                 <span>your parliament</span>
             </a>
         </ul>
@@ -24,7 +24,7 @@
 
         {% if settings.ENABLED_FEATURES.hansard %}
         <ul class="header">
-            <a href="{% url hansard:index %}">Read
+            <a href="{% url 'hansard:index' %}">Read
                 <span>the Hansard</span>
             </a>
         </ul>
@@ -36,9 +36,9 @@
 
             {% comment %}
             {% if request.user.is_authenticated  %}
-                <a href="{% url django.contrib.auth.views.logout %}">logout</a>
+                <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
             {% else %}
-                <a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a>
+                <a href="{% url 'django.contrib.auth.views.login' %}?next={% firstof post_login_url request.path %}">login</a>
             {% endif %}
             {% endcomment %}
 
@@ -46,10 +46,9 @@
             <div id="account">
             {% if request.user.is_authenticated  %}
                 {{ request.user }} |
-                <a href="{% url django.contrib.auth.views.logout %}">logout</a>
+                <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
             {% else %}
-                    <a href="{% url django.contrib.auth.views.login %}?next={% firstof post_login_url request.path %}">login</a>
-                    <a href="{% url registration_register %}">register</a>
+                    <a href="{% url 'django.contrib.auth.views.login' %}?next={% firstof post_login_url request.path %}">login</a>
             {% endif %}
             </div>
         </div>
@@ -59,15 +58,15 @@
 <div id="main-menu">
     <nav class="wrapper">
         <ul class="menu" id="menu">
-            <li><a href="{% url home %}" class="menulink">Home</a></li>           
+            <li><a href="{% url 'home' %}" class="menulink">Home</a></li>
             {% comment %}
             <li>
-                <a href="{% url info_page slug='2012-overview' %}" class="menulink">
+                <a href="{% url 'info_page' slug='2012-overview' %}" class="menulink">
                     Elections 2012
                 </a>
                 <ul>
                     <li>
-                        <a href="{% url info_page slug='2012-overview' %}">
+                        <a href="{% url 'info_page' slug='2012-overview' %}">
                             Overview
                         </a>
                     </li>
@@ -83,7 +82,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url info_page slug='political-parties' %}">
+                        <a href="{% url 'info_page' slug='political-parties' %}">
                             Political Parties
                         </a>
                     </li>                    
@@ -92,31 +91,31 @@
             {% endcomment %}
 
             <li>
-                <a href="{% url info_page slug='parliament-overview' %}" class="menulink">
+                <a href="{% url 'info_page' slug='parliament-overview' %}" class="menulink">
                     Parliament
                 </a>
                 <ul id="parliament-overview">
                     {% if settings.ENABLED_FEATURES.hansard %}
                     <li>
-                        <a href="{% url hansard:index %}">Hansard</a>
+                        <a href="{% url 'hansard:index' %}">Hansard</a>
                     </li>
                     {% endif %}
                     <li>
                         <a href="{% url position slug='mp' %}">MPs</a>
                     </li>
                     <li>
-                        <a href="{% url info_page slug='parliament-overview' %}">
+                        <a href="{% url 'info_page' slug='parliament-overview' %}">
                             Parliament Overview
                         </a>
                     </li>
                     <li>
-                        <a href="{% url info_page slug='committee-overview' %}">
+                        <a href="{% url 'info_page' slug='committee-overview' %}">
                             Committee Overview
                         </a>
                     </li>
                     {% comment %}
                     <li>
-                        <a href="{% url info_page slug='bills-overview' %}">
+                        <a href="{% url 'info_page' slug='bills-overview' %}">
                             Bills Overview
                         </a>
                     </li>
@@ -125,18 +124,18 @@
             </li>
 
             <li>
-                <a href="{% url info_page slug='places-overview' %}" 
+                <a href="{% url 'info_page' slug='places-overview' %}"
                    class="menulink">
                     Places
                 </a>
                 <ul>
                     <li>
-                        <a href="{% url info_page slug='places-overview' %}">
+                        <a href="{% url 'info_page' slug='places-overview' %}">
                             Overview
                         </a>
                     </li>
                     <li>
-                        <a href="{% url place_kind slug='constituency' %}">
+                        <a href="{% url 'place_kind' slug='constituency' %}">
                             Constituencies
                         </a>
                     </li>
@@ -152,13 +151,13 @@
             {% endcomment %}
             
             <li>
-                <a href="{% url info_page slug='odekro-overview' %}" class="menulink">About</a>
+                <a href="{% url 'info_page' slug='odekro-overview' %}" class="menulink">About</a>
                 <ul>
-                    <li><a href="{% url info_page slug='odekro-overview' %}">Odekro Overview</a></li>
-                    <li><a href="{% url info_page slug='faqs' %}">FAQs</a></li>
-                    <li><a href="{% url info_page slug='policies' %}">Policies</a></li>
-                    <li><a href="{% url info_page slug='partners' %}">Partners</a></li>
-                    <li><a href="{% url info_page slug='contact-us' %}">Contact us</a></li>
+                    <li><a href="{% url 'info_page' slug='odekro-overview' %}">Odekro Overview</a></li>
+                    <li><a href="{% url 'info_page' slug='faqs' %}">FAQs</a></li>
+                    <li><a href="{% url 'info_page' slug='policies' %}">Policies</a></li>
+                    <li><a href="{% url 'info_page' slug='partners' %}">Partners</a></li>
+                    <li><a href="{% url 'info_page' slug='contact-us' %}">Contact us</a></li>
                 </ul>               
             </li>
         </ul>
@@ -166,12 +165,12 @@
         <ul class="mob-menu"> 
             <li><a href="#">Menu</a>
                 <ul>
-                    <li><a href="{% url home %}">Home</a></li>
-                    <li><a href="{% url info_page slug='places-overview' %}">Places</a></li>
-                    <li><a href="{% url info_page slug='parliament-overview' %}">Parliament</a></li>
-                    <li><a href="{% url position slug='mp' %}">MPs</a></li>
-                    <li><a href="{% url hansard:index %}">Hansard</a></li>
-                    <li><a href="{% url info_page slug='odekro-overview' %}">About</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'info_page' slug='places-overview' %}">Places</a></li>
+                    <li><a href="{% url 'info_page' slug='parliament-overview' %}">Parliament</a></li>
+                    <li><a href="{% url 'position_pt' pt_slug='mp' %}">MPs</a></li>
+                    <li><a href="{% url 'hansard:index' %}">Hansard</a></li>
+                    <li><a href="{% url 'info_page' slug='odekro-overview' %}">About</a></li>
                 </ul>
             </li>
         </ul>
@@ -182,7 +181,7 @@
         </script>
 
         <div id="search">
-            <form id="odekro_search" method="get" action="{% url core_search %}">
+            <form id="odekro_search" method="get" action="{% url 'core_search' %}">
                 <input type="text" value="Search" onblur="this.value=!this.value?'Search':this.value;" onfocus="this.select()" onclick="this.value='';" />
                 <button type="submit">Submit</button>
             </form>

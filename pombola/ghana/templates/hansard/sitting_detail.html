@@ -4,7 +4,9 @@
 {% load thumbnail %}
 
 {% block extra_scripts %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.truncate.js"></script>
+
+{% load compressed %}
+{% compressed_js 'hansard-extra' %}
 <script type="text/javascript">
     $(function() {
         $('.truncate').truncate({charLength: 50, perOT: true, fx: "easeOutBounce"})

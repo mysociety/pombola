@@ -12,31 +12,17 @@
     <link rel="shortcut icon" type="image/x-icon"
           href="{{ STATIC_URL }}images/favicon.ico" />
 
+    {% load compressed %}
+
     {% block styles %}
-    <link type="text/css" rel="stylesheet"
-          href="{{ STATIC_URL }}css/1140.css" />
-    <link type="text/css" rel="stylesheet"
-          href="{{ STATIC_URL }}css/ie.css" />
-    <link type="text/css" rel="stylesheet"
-          href="{{ STATIC_URL }}css/styles.css" />
+    {% compressed_css 'ghana-base' %}
     {% endblock %}
 
     {% block extra_styles %}
     {% endblock %}
 
     {% block scripts %}
-    <script type="text/javascript" 
-            src="{{ STATIC_URL }}js/script.js"></script>
-    <script type="text/javascript" 
-            src="{{ STATIC_URL }}js/css3-mediaqueries.js"></script>
-    <script type="text/javascript" 
-            src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" 
-            src="{{ STATIC_URL }}js/s3Slider.js"></script> 
-    <script type="text/javascript" 
-            src="{{ STATIC_URL }}js/jquery.jshowoff.min.js"></script>
-    <script type="text/javascript" 
-            src="{{ STATIC_URL }}js/jquery.animate.js"></script>
+    {% compressed_js 'ghana' %}
     
     {% comment %}
     <script type="text/javascript" 

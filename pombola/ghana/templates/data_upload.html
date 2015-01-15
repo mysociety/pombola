@@ -12,7 +12,7 @@
   {% if done %}
     <p>Done :)</p>
   {% else %}
-    <form enctype="multipart/form-data" method="post" action="{% url data_upload %}">
+    <form enctype="multipart/form-data" method="post" action="{% url 'data_upload' %}">
       {% csrf_token %}
       {{ form }}
       <br/>

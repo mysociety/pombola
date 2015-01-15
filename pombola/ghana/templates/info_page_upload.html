@@ -13,7 +13,7 @@
     <p>Done :)</p>
   {% else %}
     <form enctype="multipart/form-data" method="post" 
-          action="{% url info_page_upload %}">
+          action="{% url 'info_page_upload' %}">
       {% csrf_token %}
       {{ form }}
       <br/>

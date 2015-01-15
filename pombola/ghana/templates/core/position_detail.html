@@ -12,7 +12,8 @@
 
 {% block extra_scripts %}
     {% ifequal object.name|lower 'mp' %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/easypaginate.js"></script>
+    {% load compressed %}
+    {% compressed_js 'position-extra' %}
     <script type="text/javascript">
     jQuery(function($){
     $('ul.position-list').easyPaginate({
