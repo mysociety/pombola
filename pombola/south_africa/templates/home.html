@@ -8,7 +8,9 @@
 {% block css_headers %}
   {{ block.super }}
   <link rel="stylesheet" type="text/css" href="{% static 'css/libs/responsive-carousel.css' %}" />
+  <!--[if !IE]><!-->
   <link rel="stylesheet" type="text/css" href="{% static 'css/libs/responsive-carousel.fade.css' %}" />
+  <!--<![endif]-->
 {% endblock %}
 
 {% block extra_js_to_load %}
