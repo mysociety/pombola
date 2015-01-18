@@ -614,6 +614,18 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     class Meta:
        ordering = ["slug"]
 
+    def is_ongoing(self):
+        """Return True or False for whether the organisation is currently ongoing"""
+        if not self.ended:
+            return True
+        elif self.ended.future:
+            return True
+        else:
+            # turn today's date into an ApproximateDate object and cmp to that
+            now = datetime.date.today()
+            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+            return now_approx <= self.ended
+
 
 class PlaceKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
