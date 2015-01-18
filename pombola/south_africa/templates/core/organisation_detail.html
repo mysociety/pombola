@@ -19,6 +19,16 @@
     </div>
   {% endif %}
 
+  {% if object.kind.slug == 'constituency-office' or object.kind.slug == 'constituency-area' %}
+
+    {% if object.is_ongoing == False %}
+      <div class="rep-results-warning">
+          This {{ object.kind.name.lower }} ceased to exist from {{ object.ended }}.
+      </div>
+    {% endif %}
+
+  {% endif %}
+
   <h2>People</h2>
 
   {% if object.kind.slug == 'constituency-office' or object.kind.slug == 'constituency-area' %}
