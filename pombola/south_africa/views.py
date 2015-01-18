@@ -146,6 +146,13 @@ class LatLonDetailBaseView(BasePlaceDetailView):
             .order_by('distance')
             )
 
+        #exclude non-active offices
+        #FIXME - this can probably be better implemented by a
+        #organisation_currently_active() filter for places
+        for office in nearest_offices:
+            if not office.organisation.is_ongoing():
+                context['nearest_offices'] = nearest_offices = nearest_offices.exclude(id=office.id)
+
         # FIXME - There must be a cleaner way/place to do this.
         for office in nearest_offices:
             try:
