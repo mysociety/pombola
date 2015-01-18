@@ -23,10 +23,6 @@
 
   {% if object.kind.slug == 'constituency-office' or object.kind.slug == 'constituency-area' %}
 
-    <div class="rep-results-warning">Due to the 2014 elections, the
-    representative information may no longer be accurate. Please bear with
-    us while we try to obtain the updated information.</div>
-
     {% include "south_africa/_position_listing_constituency.html" with positions=positions %}
     {% include 'disqus_comments.html' %}
   {% else %}
