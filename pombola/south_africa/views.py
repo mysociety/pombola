@@ -112,7 +112,7 @@ class LatLonDetailBaseView(BasePlaceDetailView):
     # icon files in .../static/images/party-map-icons/
     party_slugs_that_have_logos = set((
         'adcp', 'anc', 'apc', 'azapo', 'cope', 'da', 'ff', 'id', 'ifp', 'mf',
-        'pac', 'sacp', 'ucdp', 'udm'
+        'pac', 'sacp', 'ucdp', 'udm', 'agang', 'aic', 'eff'
     ));
 
     def get_object(self):
