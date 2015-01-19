@@ -244,6 +244,16 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'elasticsearch': {
+            'handlers': ['stream_to_stderr'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'elasticsearch.trace': {
+            'handlers': ['stream_to_stderr'],
+            'level': 'INFO',
+            'propagate': True,
+        },
     }
 }
 
@@ -267,7 +277,7 @@ PAGINATION_INVALID_PAGE_RAISES_404 = True
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
+        'URL': '127.0.0.1:9200',
         'INDEX_NAME': config.get('POMBOLA_DB_NAME'),
         'EXCLUDED_INDEXES': [],
     },
