@@ -244,6 +244,16 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'elasticsearch': {
+            'handlers': ['stream_to_stderr'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'elasticsearch.trace': {
+            'handlers': ['stream_to_stderr'],
+            'level': 'INFO',
+            'propagate': True,
+        },
     }
 }
 
