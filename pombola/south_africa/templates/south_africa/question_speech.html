@@ -100,7 +100,7 @@
   {% endif %}
 {% endif %}
 
-<div class="speech__content">
+<div class="speech__content{% for tag in speech.tags.all %} tag-{{ tag }}{% endfor %}">
   {% if speech.title %}
     <h3>{{ speech.title }}</h3>
   {% endif %}

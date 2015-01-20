@@ -2646,3 +2646,10 @@ ul.pager {
         }
     }
 }
+
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
+.tag-answer {
+    white-space: pre-wrap;
+    font-family: 'Inconsolata', "Courier New", Courier, monospace;
+    font-size: 14px;
+}
