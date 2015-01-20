@@ -2604,7 +2604,7 @@ ul.pager {
 .questions {
 
     .question {
-        padding: 2em 0;
+        padding: 1em 0;
     }
 
     .question + .question {
@@ -2612,7 +2612,7 @@ ul.pager {
     }
 
     .speech-meta {
-        margin-bottom: 0.7em;
+        margin-bottom: 0;
 
         a {
             text-transform: none;
@@ -2630,15 +2630,19 @@ ul.pager {
     }
 
     .reply {
-        padding-top: 1em;
+        padding-top: 0.5em;
         padding-left: 5%;
     }
 
-    h2 a {
-        text-decoration: none;
+    h2 {
+        margin-bottom: 0;
+        a {
+            font-size: 0.8em;
+            text-decoration: none;
 
-        &:hover, &:focus {
-            text-decoration: underline;
+            &:hover, &:focus {
+                text-decoration: underline;
+            }
         }
     }
 }

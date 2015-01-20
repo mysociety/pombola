@@ -32,18 +32,17 @@
     <div class="question">
         <h3 class="speech-meta">
             {{ speech.section.title }}
-            <a href="{{ speech.source_url }}">(Show source)</a>
         </h3>
         <h2 class="speech-title">
-            <a href="{{ speech.section.get_absolute_url }}">{{ speech.speaker }} to ask the {{ speech.questionto }}</a>
+            <a href="{{ speech.section.get_absolute_url }}#s{{ speech.id }}">{{ speech.speaker }} to ask the {{ speech.questionto }}</a>
         </h2>
         <div class="speech-text">{{ speech.text }}</div>
       {% if speech.answer %}
         <div class="reply">
             <h2>
-                <a href="{{ speech.section.get_absolute_url }}">Reply from the {{ speech.questionto }} on {{ speech.answer.start_date }}</a>
+                <a href="{{ speech.section.get_absolute_url }}#s{{ speech.answer.id }}">Reply from the {{ speech.questionto }} on {{ speech.answer.start_date }}</a>
             </h2>
-            <div class="speech-text">{{ speech.answer.text|truncatewords:64 }} <a href="{{ speech.section.get_absolute_url }}">More &#187;</a></div>
+            <div class="speech-text">{{ speech.answer.text|truncatewords:64 }} <a href="{{ speech.section.get_absolute_url }}#s{{ speech.answer.id }}">More &#187;</a></div>
         </div>
       {% endif %}
     </div>
