@@ -1,6 +1,5 @@
 import os
 import re
-import shutil
 import yaml
 
 from .apps import *
