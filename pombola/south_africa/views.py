@@ -940,6 +940,10 @@ class SASectionView(SectionView):
                 redirect_url = speech.source_url
                 if redirect_url:
                     return redirect(redirect_url)
+
+        if self.object.get_ancestors[0].slug == 'questions':
+            self.template_name = 'south_africa/question_section_detail.html'
+
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
 
