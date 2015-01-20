@@ -944,6 +944,13 @@ class SASectionView(SectionView):
         if self.object.get_ancestors[0].slug == 'questions':
             self.template_name = 'south_africa/question_section_detail.html'
 
+            if len(self.object.get_ancestors) == 2:
+                #level two question sections are displayed on the
+                #landing page
+                redirect_url = '/question/?minister=%s&orderby=recentquestions' % \
+                    (self.object.slug)
+                return redirect(redirect_url)
+
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
 
