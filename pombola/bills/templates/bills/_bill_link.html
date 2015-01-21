@@ -1,0 +1,5 @@
+{% if bill.act_source_url and bill.act_title %}
+  <a href="{{ bill.act_source_url }}">{{ bill.act_title }}</a>
+{% else %}
+  <a href="{{ bill.source_url }}">{{ bill.title }}</a>
+{% endif %}

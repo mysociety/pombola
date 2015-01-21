@@ -16,7 +16,9 @@
           <h3>{{ bills.grouper.name }}</h3>
           <ul>
             {% for bill in bills.list %}
-              <li><a href="{{ bill.source_url }}">{{ bill.title }}</a></li>
+              <li>
+                {% include "bills/_bill_link.html" %}
+              </li>
             {% endfor %}
           </ul>
         {% endfor %}
