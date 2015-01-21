@@ -33,18 +33,21 @@
   {% endif %}
 
 
-  {% if settings.ENABLED_FEATURES.bills and object.bills_sponsored.exists %}
-    <div class="person-detail-bills">
+  {% if settings.ENABLED_FEATURES.bills %}
+    <div>
       <h3>Bills Sponsored</h3>
-      {% regroup object.bills_sponsored.all by parliamentary_session as bills_regrouped %}
-      {% for bills in bills_regrouped %}
-        <p>{{ bills.grouper.name }}</p>
-        <ul>
-          {% for bill in bills.list %}
-            <li><a href="{{ bill.source_url }}">{{ bill.title }}</a></li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
+      {% with object.bills_sponsored.count as bills_count %}
+        {% if bills_count %}
+          <p>The most recently sponsored bills include...</p>
+          <ul>
+            {% for bill in object.bills_sponsored.recent %}
+              <li><a href="{{ bill.source_url }}">{{ bill.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>{{ object.name }} has never sponsored a bill.</p>
+        {% endif %}
+      {% endwith %}
     </div>
   {% endif %}
 
