@@ -80,11 +80,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
 
-# haystack config - interface to Xapian search engine
-HAYSTACK_SITECONF      = 'mzalendo.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'xapian'
-HAYSTACK_XAPIAN_PATH   = os.path.join( root_dir, "mzalendo_xapian" )
-
 # These are social auth related settings; we've removed that for the
 # moment, but these should be reinstated if it's put back:
 
