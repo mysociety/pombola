@@ -582,3 +582,12 @@ BLEACH_ALLOWED_ATTRIBUTES = {
 BLEACH_STRIP_TAGS = True
 
 INFO_PAGES_ALLOW_RAW_HTML = False
+
+if config.get('EMAIL_SETTINGS', None):
+    EMAIL_HOST = config.get('EMAIL_HOST', '')
+    EMAIL_HOST_USER = config.get('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD', '')
+    port = config.get('EMAIL_PORT', None)
+    if port:
+        EMAIL_PORT = port
+    EMAIL_USE_TLS = config.get('EMAIL_USE_TLS', False)
