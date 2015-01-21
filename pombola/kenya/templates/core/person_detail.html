@@ -49,7 +49,7 @@
                 </ul>
                 <p><a href="{% url "person_bills" slug=object.slug %}">See all {{ bills_count }} bills</a></p>
             {% else %}
-              <p>{{ object.name }} has sponsored {{ bills_count }} bills.</p>
+              <p>{{ object.name }} has sponsored {{ bills_count }} bill{{ bills_count|pluralize }}.</p>
               {% regroup object.bills_sponsored.all by parliamentary_session as bills_regrouped %}
               {% for bills in bills_regrouped %}
                 <p><strong>{{ bills.grouper.name }}</strong></p>
@@ -61,24 +61,10 @@
                   {% endfor %}
                 </ul>
               {% endfor %}
-            </ul>
-            <p><a href="{% url "person_bills" slug=object.slug %}">See all {{ bills_count }} bills</a></p>
-        {% else %}
-          <p>{{ object.name }} has sponsored {{ bills_count }} bills.</p>
-          {% regroup object.bills_sponsored.all by parliamentary_session as bills_regrouped %}
-          {% for bills in bills_regrouped %}
-            <p><strong>{{ bills.grouper.name }}</strong></p>
-            <ul>
-              {% for bill in bills.list %}
-                <li>
-                  {% include "bills/includes/bill_link.html" %}
-                </li>
-              {% endfor %}
-            </ul>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
-    </div>
+            {% endif %}
+        </div>
+      {% endif %}
+    {% endwith %}
   {% endif %}
 
 {% endblock %}
