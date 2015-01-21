@@ -42,6 +42,16 @@ for sub_page in ['scorecard', 'comments', 'experience', 'appearances', 'contact_
         )
     )
 
+if settings.ENABLED_FEATURES['bills']:
+    person_patterns += patterns(
+        'pombola.core.views',
+        url(
+            '^(?P<slug>[-\w]+)/bills/',
+            PersonDetailSub.as_view(sub_page='bills'),
+            name='person_bills',
+        )
+    )
+
 
 
 place_patterns = patterns('pombola.core.views',
