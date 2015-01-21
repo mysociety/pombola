@@ -30,8 +30,9 @@ class Migration(SchemaMigration):
         }
         for venue in orm.Venue.objects.all():
             for source in orm.Source.objects.filter(sitting__venue=venue, list_page__isnull=True):
-                source.list_page = venue_slug_to_list_page[venue.slug]
-                source.save()
+                if venue.slug in venue_slug_to_list_page:
+                    source.list_page = venue_slug_to_list_page[venue.slug]
+                    source.save()
 
     def backwards(self, orm):
         # Deleting field 'Source.list_page'
