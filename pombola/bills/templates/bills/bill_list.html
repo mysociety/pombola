@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Bills - {{ view.parliamentary_session.name }}{% endblock %}
+
+{% block content %}
+  <div>
+    <h2>{{ view.parliamentary_session.name }}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Sponsor</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bill in object_list %}
+          <tr>
+            <td>
+              {% include "bills/_bill_link.html" %}
+            </td>
+            <td>
+              <a href="{{ bill.sponsor.get_absolute_url }}">{{ bill.sponsor.name }}</a>
+            </td>
+            <td>
+              {{ bill.date }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% include "bills/_pagination.html" %}
+  </div>
+{% endblock %}

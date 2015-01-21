@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Bills{% endblock %}
+
+{% block content %}
+  <div>
+    <p>View bills by parliamentary session:</p>
+    <ul>
+      {% for session in view.parliamentary_sessions %}
+        <li><a href="{% url "bills:list" session_slug=session.slug %}">{{ session.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
