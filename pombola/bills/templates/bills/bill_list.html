@@ -2,6 +2,8 @@
 
 {% block title %}Bills - {{ view.parliamentary_session.name }}{% endblock %}
 
+{% block body_attributes %}class="bills-list"{% endblock %}
+
 {% block content %}
   <div>
     <h2>{{ view.parliamentary_session.name }}</h2>
@@ -23,7 +25,7 @@
               <a href="{{ bill.sponsor.get_absolute_url }}">{{ bill.sponsor.name }}</a>
             </td>
             <td>
-              {{ bill.date }}
+              {{ bill.date|date:"d/m/Y" }}
             </td>
           </tr>
         {% endfor %}
