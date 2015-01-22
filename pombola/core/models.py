@@ -316,7 +316,13 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
 
     @property
     def name(self):
-        alternative_names_to_use = self.alternative_names.filter(name_to_use=True)
+        # n.b. we're deliberately not using
+        # self.alternative_names.filter(name_to_use=True) here, since
+        # that would do a new query per person, even if the
+        # alternative names had been loaded by prefetch_related.  See:
+        #   http://stackoverflow.com/a/12974801/223092
+        alternative_names_to_use = [an for an in self.alternative_names.all()
+                                    if an.name_to_use]
         if alternative_names_to_use:
             return alternative_names_to_use[0].alternative_name
         else:
@@ -1078,11 +1084,11 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
     def order_by_place(self):
         """Sort by the place name"""
-        return self.select_related('place').order_by('place__name')
+        return self.order_by('place__name')
 
     def order_by_person_name(self):
         """Sort by the place name"""
-        return self.select_related('person').order_by('person__sort_name')
+        return self.order_by('person__sort_name')
 
     def current_unique_places(self):
         """Return the list of places associated with current positions"""

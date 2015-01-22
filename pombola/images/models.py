@@ -52,7 +52,7 @@ class Image(models.Model):
 class HasImageMixin():
 
     def primary_image(self):
-        primary = self.images.filter(is_primary=True)
-        if primary.count():
+        primary = [i for i in self.images.all() if i.is_primary]
+        if primary:
             return primary[0].image
         return None

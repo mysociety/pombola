@@ -147,7 +147,7 @@ class PositionViewTest(WebTest):
 
     def test_organisation_page(self):
         self.app.get('/organisation/missing-org/', status=404)
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(10):
             resp = self.app.get('/organisation/test-org/')
         resp.mustcontain('Test Org')
         resp = self.app.get('/organisation/test-org/people/')
