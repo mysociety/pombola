@@ -530,7 +530,7 @@ PIPELINE_JS = {
     },
     'modernizr_and_loader': {
         'source_filenames': (
-            'js/libs/modernizr-2.0.6.custom.js',
+            'js/libs/modernizr.js',
             'js/loader.js',
         ),
         'output_filename': 'js/modernizr_and_loader.js',
