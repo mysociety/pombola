@@ -1318,8 +1318,11 @@ FOOTER
             margin-bottom: 1em;
         }
     }
-    .constituency-office-feedback {
+    .constituency-office-feedback, .sources {
         font-size: 0.875em;
+    }
+    .sources {
+        margin-top: 10px;
     }
 }
 

@@ -75,49 +75,63 @@
 
 {% block profile_info %}
 
-  {% if object.contacts.count %}
+  {% if object.contacts.count or object.informationsources.all %}
 
   <div class="sidebar">
-    <ul class="vcard">
-      {% for c in object.contacts.all %}
-      <li class="{{ c.kind.slug }}">
+    {% if object.contacts.count %}
+      <ul class="vcard">
+        {% for c in object.contacts.all %}
+        <li class="{{ c.kind.slug }}">
 
-      {% switch c.kind.slug %}
+        {% switch c.kind.slug %}
 
-      {% case 'phone' %}
-      <span class="label">Telephone</span>
-      <p><a href="tel:{{ c.value }}">{{ c.value }}</a></p>
+        {% case 'phone' %}
+        <span class="label">Telephone</span>
+        <p><a href="tel:{{ c.value }}">{{ c.value }}</a></p>
 
-      {% case 'facebook' %}
-      <span class="label">Facebook</span>
-      <p><a href="{{ c.value }}">{{ c.kind.name }}</a></p>
+        {% case 'facebook' %}
+        <span class="label">Facebook</span>
+        <p><a href="{{ c.value }}">{{ c.kind.name }}</a></p>
 
-      {% case 'twitter' %}
-      <span class="label">Twitter</span>
-      <p><a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter</p>
+        {% case 'twitter' %}
+        <span class="label">Twitter</span>
+        <p><a href="http://twitter.com/{{ c.value }}">@{{ c.value }}</a> on Twitter</p>
 
-      {% case 'address' %}
-      <span class="label">Post</span>
-      <p>{{ c.value|urlizetrunc:50 }}</p>
+        {% case 'address' %}
+        <span class="label">Post</span>
+        <p>{{ c.value|urlizetrunc:50 }}</p>
 
-      {% case 'parliament_url' %}
-      {# Suppress these as requested in issue #444 #}
+        {% case 'parliament_url' %}
+        {# Suppress these as requested in issue #444 #}
 
-      {% else %}
-      <span class="label">{{ c.kind.name }}</span>
-      <p>{{ c.value|urlizetrunc:50 }}</p>
+        {% else %}
+        <span class="label">{{ c.kind.name }}</span>
+        <p>{{ c.value|urlizetrunc:50 }}</p>
 
-      {% endswitch %}
+        {% endswitch %}
 
-      {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
+        {% if c.notes %}<small>({{ c.notes }})</small>{% endif %}
 
-      </li>
-      {% endfor %}
-    </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
     {% if object.kind.slug == 'constituency-office' %}
       <div class="constituency-office-feedback">
         <p>Give feedback on your visit to your constituency office. Take a photo of your office and send it to <a href="mailto:contact@pa.org.za">contact@pa.org.za</a>.</p>
       </div>
+    {% endif %}
+    {% if object.kind.slug == 'constituency-office' or object.kind.slug == 'constituency-area' %}
+      {% if object.informationsources.all %}
+        <div class="sources">
+            <h3>Sources</h3>
+          <ul>
+          {% for informationsource in object.informationsources.all %}
+            <li><a href="{{ informationsource.source }}" target="_blank">{{ informationsource.note }}</a></li>
+          {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
     {% endif %}
   </div>
 
