@@ -603,6 +603,7 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     objects = OrganisationManager()
     contacts = generic.GenericRelation(Contact)
     images = generic.GenericRelation(Image)
+    informationsources = generic.GenericRelation(InformationSource)
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.kind)
