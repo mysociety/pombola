@@ -34,37 +34,7 @@
 
 
   {% if settings.ENABLED_FEATURES.bills %}
-    {% with bills_count=object.bills_sponsored.count recent_count=object.bills_sponsored.recent.count  %}
-      {% if bills_count %}
-        <div>
-          <h3>Bills Sponsored</h3>
-            {% if bills_count > recent_count %}
-                <p>The most recently sponsored bills include...</p>
-                <ul>
-                  {% for bill in object.bills_sponsored.recent %}
-                    <li>
-                      {% include "bills/_bill_link.html" %}
-                    </li>
-                  {% endfor %}
-                </ul>
-                <p><a href="{% url "person_bills" slug=object.slug %}">See all {{ bills_count }} bills</a></p>
-            {% else %}
-              <p>{{ object.name }} has sponsored {{ bills_count }} bill{{ bills_count|pluralize }}.</p>
-              {% regroup object.bills_sponsored.all by parliamentary_session as bills_regrouped %}
-              {% for bills in bills_regrouped %}
-                <p><strong>{{ bills.grouper.name }}</strong></p>
-                <ul>
-                  {% for bill in bills.list %}
-                    <li>
-                      {% include "bills/_bill_link.html" %}
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endfor %}
-            {% endif %}
-        </div>
-      {% endif %}
-    {% endwith %}
+    {% include "bills/_person_recent_bills.html" %}
   {% endif %}
 
 {% endblock %}
