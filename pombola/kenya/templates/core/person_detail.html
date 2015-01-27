@@ -32,4 +32,9 @@
     </div>
   {% endif %}
 
+
+  {% if settings.ENABLED_FEATURES.bills %}
+    {% include "bills/_person_recent_bills.html" %}
+  {% endif %}
+
 {% endblock %}

@@ -67,6 +67,12 @@
             <a href="{% url "info_page" slug='bills-overview' %}">Bills Overview</a>
         </li>
 
+        {% if settings.ENABLED_FEATURES.bills %}
+            <li>
+                <a href="{% url "bills:index" %}">Bills List</a>
+            </li>
+        {% endif %}
+
         {% if settings.ENABLED_FEATURES.hansard %}
             <li>
                 <a href="{% url "hansard:index" %}">Hansard</a>

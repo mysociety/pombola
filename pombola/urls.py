@@ -63,7 +63,7 @@ if settings.ENABLED_FEATURES['hansard']:
         (r'^hansard/', include('pombola.hansard.urls', namespace='hansard', app_name='hansard')),
     )
 
-# oject pages
+# Project pages
 if settings.ENABLED_FEATURES['projects']:
     urlpatterns += patterns('',
         (r'^projects/', include('pombola.projects.urls')),
@@ -114,6 +114,12 @@ if settings.ENABLED_FEATURES['votematch']:
 #     urlpatterns += patterns('',
 #         (r'^spinner/', include('pombola.spinner.urls')),
 #     )
+
+# bills
+if settings.ENABLED_FEATURES['bills']:
+    urlpatterns += patterns('',
+        (r'^bills/', include('pombola.bills.urls', namespace='bills', app_name='bills')),
+    )
 
 
 # Everything else goes to core

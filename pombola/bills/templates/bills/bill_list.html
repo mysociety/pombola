@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Bills - {{ view.parliamentary_session.name }}{% endblock %}
+
+{% block body_attributes %}class="bills-list"{% endblock %}
+
+{% block breadcrumbs %}
+  <div id="breadcrumb">
+      <nav class="wrapper">
+          <ul>
+              <li>
+                <a href="{% url "home" %}" title="Breadcrumb link to the homepage.">Home</a>
+                <span class="sep">&raquo;</span>
+              </li>
+              <li>
+                <a href="{% url "bills:index" %}" title="Breadcrumb link to Bills List">Bills</a>
+                <span class="sep">&raquo;</span>
+              </li>
+              <li>{{ view.parliamentary_session.name }}</li>
+          </ul>
+      </nav>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+  <div>
+    <h2>{{ view.parliamentary_session.name }}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Sponsor</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bill in object_list %}
+          <tr>
+            <td>
+              {% include "bills/_bill_link.html" %}
+            </td>
+            <td>
+              <a href="{{ bill.sponsor.get_absolute_url }}">{{ bill.sponsor.name }}</a>
+            </td>
+            <td>
+              {{ bill.date|date:"d/m/Y" }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% include "bills/_pagination.html" %}
+  </div>
+{% endblock %}
