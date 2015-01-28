@@ -56,7 +56,7 @@ class InfoTest(TestCase):
             as_html = re.sub(r'</script><p>', '</script> <p>', as_html)
             self.assertEqual(
                 as_html,
-                "<div><h1 class=\"foo\">Hello there</h1> <script>alert('hi!');</script> <p>blah blah, unclosed paragraph <iframe/> </p><div>And then a div...</div></div>"
+                "<div><h1 class=\"foo\">Hello there</h1> <script>alert('hi!');</script> <p>blah blah, unclosed paragraph <iframe></iframe> </p><div>And then a div...</div></div>"
             )
             self.assertEqual(
                 re.sub(r'(?ms)\s+', ' ', danger_post.content_as_cleaned_html),
@@ -68,6 +68,26 @@ class InfoTest(TestCase):
             )
         finally:
             danger_post.delete()
+
+    @override_settings(INFO_PAGES_ALLOW_RAW_HTML=True)
+    def test_no_self_closing_tags(self):
+        example_post = InfoPage.objects.create(
+            slug="post-with-video",
+            title="Embedded YouTube Video",
+            raw_content='''<h1 class="foo">Hello there</h1>
+                <p>An introductory paragraph:
+                <iframe></iframe>
+                <p>And then a trailing paragraph...</p>''',
+            use_raw=True,
+            kind=InfoPage.KIND_BLOG,
+        )
+        self.assertEqual(
+            example_post.content_as_html,
+            '''<div><h1 class="foo">Hello there</h1>
+                <p>An introductory paragraph:
+                <iframe></iframe>
+                </p><p>And then a trailing paragraph...</p></div>'''
+        )
 
 
 class InfoBlogClientTests(TestCase):

@@ -136,7 +136,7 @@ class InfoPage(ModelBase):
             # Parsing the HTML with lxml and outputting it again
             # should ensure that we have only well-formed HTML:
             parsed = lxml.html.fromstring(self.raw_content)
-            return lxml.etree.tostring(parsed)
+            return lxml.etree.tostring(parsed, method='html')
         else:
             # Since there seems to be some doubt about whether
             # markdown's safe_mode is really safe, clean the rendered
