@@ -23,6 +23,7 @@ sorl-thumbnail==12.1c
 django_date_extensions==0.1dev
 django-ajax-selects==1.3.5
 django-autocomplete-light==2.0.2
+-e git+git://github.com/mysociety/django-popolo.git@7e1d79a6d54678bff02d554e4cc56da3d54dac13#egg=mysociety-django-popolo
 
 Markdown==2.5.1
 
