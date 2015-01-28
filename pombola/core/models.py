@@ -535,7 +535,7 @@ class Identifier(ModelBase):
     scheme = models.CharField(max_length=200)
     identifier = models.CharField(max_length=500)
 
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, related_name="core_identifier_set")
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 

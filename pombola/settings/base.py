@@ -379,6 +379,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'autocomplete_light',
     'markitup',
+    'popolo',
 
     'pipeline',
 
