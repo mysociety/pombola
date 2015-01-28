@@ -7,7 +7,7 @@ from django.test import TestCase
 from django_date_extensions.fields import ApproximateDate
 
 from pombola.core import models
-from pombola.core.popolo import get_popolo_data
+from pombola.core.popolo_helpers import get_popolo_data
 from pombola.images.models import Image
 
 class PopoloTest(TestCase):

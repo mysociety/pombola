@@ -8,7 +8,7 @@ import slumber
 import sys
 import urlparse
 
-from pombola.core.popolo import get_popolo_data
+from pombola.core.popolo_helpers import get_popolo_data
 
 from django.core.management.base import BaseCommand, CommandError
 
