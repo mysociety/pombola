@@ -36,6 +36,8 @@ from pombola.slug_helpers.models import validate_slug_not_redirecting
 
 from mapit import models as mapit_models
 
+from popolo import models as popolo_models
+
 from pombola.country import significant_positions_filter
 
 # tell South how to handle the custom fields
@@ -1465,3 +1467,72 @@ def raw_query_with_prefetch(query_model, query, params, fields_prefetches):
             if related_object:
                 setattr(o, field, related_object)
     return objects
+
+
+class PopoloOrganization(popolo_models.Organization):
+    slug = models.SlugField(
+        max_length=200,
+        unique=True,
+        help_text="created from name",
+        validators=[partial(validate_slug_not_redirecting, 'core', 'PopoloOrganization')],
+    )
+    summary = MarkupField(blank=True, default='')
+    kind = models.ForeignKey('OrganisationKind')
+
+    images = generic.GenericRelation(Image)
+
+
+class PopoloOtherName(popolo_models.OtherName):
+    name_to_use = models.BooleanField(default=False)
+    family_name = models.CharField(max_length=300, blank=True)
+    given_name = models.CharField(max_length=300, blank=True)
+    additional_name = models.CharField(max_length=300, blank=True)
+    honorific_prefix = models.CharField(max_length=300, blank=True)
+    honorific_suffix = models.CharField(max_length=300, blank=True)
+
+
+class PopoloPerson(popolo_models.Person):
+    slug = models.SlugField(
+        max_length=200,
+        unique=True,
+        help_text="auto-created from first name and last name",
+        validators=[partial(validate_slug_not_redirecting, 'core', 'Person')],
+    )
+
+    hidden = models.BooleanField(
+        default=False,
+        help_text="hide this person's pages from normal users")
+
+    can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
+
+    images = generic.GenericRelation(Image)
+
+
+class PopoloMembership(popolo_models.Membership):
+    place = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for a politician" )
+    title = models.ForeignKey('PositionTitle', null=True, blank=True)
+    subtitle = models.CharField(max_length=200, blank=True, default='')
+    note = models.CharField(max_length=300, blank=True, default='')
+
+    category_choices = (
+        ('political', 'Political'),
+        ('education', 'Education (as a learner)'),
+        ('other', 'Anything else'),
+    )
+    category = models.CharField(max_length=20, choices=category_choices, default='other', help_text="What sort of position was this?")
+
+    # hidden fields that are only used to do sorting. Filled in by code.
+    #
+    # These sort dates are here to enable the expected sorting. Ascending is
+    # quite straight forward as the string stored (eg '2011-03-00') will sort as
+    # expected. But for descending sorts they will not, as '2011-03-00' would
+    # come after '2011-03-15'. To fix this the *_high dates below replace '00'
+    # with '99' so that the desc sort can be carried out in SQL as expected.
+    #
+    # For 'future' dates there are also some special tweaks that makes them sort
+    # as expeced. See the '_set_sorting_dates' method below for implementation.
+    #
+    sorting_start_date = models.CharField(editable=True, default='', max_length=10)
+    sorting_end_date = models.CharField(editable=True, default='', max_length=10)
+    sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
+    sorting_end_date_high = models.CharField(editable=True, default='', max_length=10)
