@@ -2592,12 +2592,18 @@ ul.pager {
             top: 0;
             right: 0;
             bottom: 0;
+            width: 120px;
         }
 
         select {
             display: inline-block;
             margin: 0 0.5em;
         }
+    }
+
+    .search-filter {
+        display: block;
+        margin-top: 10px;
     }
 }
 

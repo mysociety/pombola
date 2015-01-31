@@ -19,7 +19,7 @@ from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
 
 import mapit
-from haystack.query import SearchQuerySet, SQ
+from haystack.query import RelatedSearchQuerySet, SearchQuerySet, SQ
 from haystack.inputs import AutoQuery
 from haystack.forms import SearchForm
 
@@ -733,14 +733,40 @@ class SAQuestionIndex(TemplateView):
 
         context['orderby'] = 'recentquestions'
         context['minister'] = 'all'
+        context['q'] = ''
 
         #set filter values
-        for key in ('orderby', 'minister'):
+        for key in ('orderby', 'minister', 'q'):
             if key in self.request.GET:
                 context[key] = self.request.GET[key]
 
         if not context['orderby'] in ['recentquestions', 'recentanswers']:
             context['orderby'] = 'recentquestions'
+
+        search_result_sections = []
+
+        if context['q'] != '':
+            #using a RelatedSearchQuerySet seems to result in fewer
+            #queries, although the same results can be achieved with a
+            #SearchQuerySet
+            query = RelatedSearchQuerySet().models(Speech)
+            query = query.filter(
+                tags__name__in = ['question', 'answer'],
+                content=AutoQuery(context['q']),
+                ).load_all()
+
+            all_speeches = Speech.objects.all().filter(
+                tags__name__in = ['question', 'answer'])
+
+            if context['minister'] != 'all':
+                all_speeches = all_speeches.filter(
+                    section__parent__slug=context['minister']
+                    )
+
+            query = query.load_all_queryset(Speech, all_speeches)
+
+            for result in query:
+                search_result_sections.append(result.object.section.id)
 
         sections = Section \
             .objects \
@@ -758,6 +784,9 @@ class SAQuestionIndex(TemplateView):
 
         if context['minister'] != 'all':
             sections = sections.filter(parent__slug=context['minister'])
+
+        if len(search_result_sections)>0:
+            sections = sections.filter(id__in=search_result_sections)
 
         if context['orderby'] == 'recentanswers':
             sections = sections.filter(number_speeches__gt=1).order_by(

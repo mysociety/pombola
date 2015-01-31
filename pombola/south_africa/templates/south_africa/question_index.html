@@ -12,18 +12,26 @@
 {% block content %}
 
 <form class="questions-filter" action="{% url 'section-list-question' %}" method="get">
+    <span class="minister-filter">
     <label for="minister">Show questions to</label>
-    <select name="minister">
-        <option value="all">All ministers</option>
-        {% for filter_minister in ministers %}
-         <option value="{{ filter_minister.slug }}"{% if minister == filter_minister.slug %} selected="selected"{% endif %}>{{ filter_minister.title }}</option>
-        {% endfor %}
-    </select>
-    <label for="orderby">ordered by</label>
-    <select name="orderby">
-        <option value="recentquestions"{% if orderby == "recentquestions" %} selected="selected"{% endif %}>Recently Asked</option>
-        <option value="recentanswers"{% if orderby == "recentanswers" %} selected="selected"{% endif %}>Recently Answered</option>
-    </select>
+        <select name="minister">
+            <option value="all">All ministers</option>
+            {% for filter_minister in ministers %}
+             <option value="{{ filter_minister.slug }}"{% if minister == filter_minister.slug %} selected="selected"{% endif %}>{{ filter_minister.title }}</option>
+            {% endfor %}
+        </select>
+    </span>
+    <span class="orderby-filter">
+        <label for="orderby">ordered by</label>
+        <select name="orderby">
+            <option value="recentquestions"{% if orderby == "recentquestions" %} selected="selected"{% endif %}>Recently Asked</option>
+            <option value="recentanswers"{% if orderby == "recentanswers" %} selected="selected"{% endif %}>Recently Answered</option>
+        </select>
+    </span>
+    <span class="search-filter">
+        <label for="q">and matching the search term</label>
+        <input type="text" name="q" value="{{ q }}" placeholder="Enter search term" />
+    </span>
     <input type="submit" value="Filter" class="button">
 </form>
 
