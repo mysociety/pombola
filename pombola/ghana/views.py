@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 
-from pombola.ghana import forms
+from . import forms
 from pombola.info.models import InfoPage
 import data
 

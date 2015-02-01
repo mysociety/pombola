@@ -1,7 +1,7 @@
 from django import forms
 from django.core.files.uploadedfile import UploadedFile
 
-from pombola.ghana import models
+from . import models
 
 class UploadForm(forms.ModelForm):
     name = forms.CharField(required=False, widget=forms.HiddenInput)
