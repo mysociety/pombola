@@ -11,6 +11,7 @@ OPTIONAL_APPS = (
     'pombola.hansard',
     'pombola.projects',
     'pombola.place_data',
+    'pombola.votematch',
 
     # Pombola has now dropped registration, so leave these out:
     # 'registration_defaults',
