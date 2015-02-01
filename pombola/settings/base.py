@@ -276,9 +276,14 @@ PAGINATION_INVALID_PAGE_RAISES_404 = True
 
 # haystack config - interface to search engine
 HAYSTACK_CONNECTIONS = {
+    #'default': {
+    #    'ENGINE': 'xapian_backend.XapianEngine',
+    #    'PATH': os.path.join( root_dir, "pombola_xapian" ),
+        #'PATH': os.path.join(os.path.dirname(__file__), 'xapian_index'),
+    #},
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': '127.0.0.1:9200',
+        'URL': 'http://192.168.1.39:9200/',
         'INDEX_NAME': config.get('POMBOLA_DB_NAME'),
         'EXCLUDED_INDEXES': [],
     },
