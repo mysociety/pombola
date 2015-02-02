@@ -97,7 +97,7 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
         # If a SayIt ID scheme is specified, move speeches from deleted person
         if 'speeches' in settings.INSTALLED_APPS:
 
-            if not options['sayit_id_scheme']:
+            if options['sayit_id_scheme'] is None:
                 raise CommandError("You must specify --sayit-id-scheme")
 
             from speeches.models import Speech
