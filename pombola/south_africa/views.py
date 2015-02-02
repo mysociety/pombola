@@ -23,7 +23,6 @@ from haystack.query import SearchQuerySet, SQ
 from haystack.inputs import AutoQuery
 from haystack.forms import SearchForm
 
-from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import NamespaceMixin, SpeechView, SectionView
 
