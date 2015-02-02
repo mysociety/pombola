@@ -1,4 +1,6 @@
+from collections import Counter
 import re
+import sys
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -115,10 +117,25 @@ def safely_delete(p):
     if all_deleted:
         p.delete()
 
+def check_for_duplicate_urls():
+    # Check that there are no duplicate popit_url entries:
+    popit_url_counter = Counter()
+    for p in PopItPerson.objects.all():
+        popit_url_counter[p.popit_url] += 1
+    duplicate_urls_found = False
+    for popit_url, count in popit_url_counter.items():
+        if count > 1:
+            print "There were multiple entries for " + popit_url
+            duplicate_urls_found = True
+    if duplicate_urls_found:
+        sys.exit(1)
+
 
 class Command(BaseCommand):
 
     def handle(*args, **options):
+
+        check_for_duplicate_urls()
 
         popit_url_to_pk = {p.popit_url: p.id for p in PopItPerson.objects.all()}
 
