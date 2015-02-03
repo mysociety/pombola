@@ -21,6 +21,8 @@ import re
 import json
 import csv
 
+from django.core.exceptions import ImproperlyConfigured
+
 
 def ensure_executable_found(name):
     if not distutils.spawn.find_executable(name):
