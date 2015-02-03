@@ -28,9 +28,7 @@
 #    the Pombola database.
 
 import csv
-import json
 from optparse import make_option
-import os
 import re
 import sys
 
@@ -49,7 +47,8 @@ from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
 
 from ..helpers import (
     fix_province_name, LocationNotFound,
-    geocode, get_na_member_lookup, find_pombola_person, get_mapit_municipality
+    geocode, get_na_member_lookup, find_pombola_person, get_mapit_municipality,
+    get_geocode_cache, write_geocode_cache
 )
 
 # Build an list of tuples of (mangled_mp_name, person_object) for each
@@ -100,15 +99,7 @@ class Command(LabelCommand):
         global VERBOSE
         VERBOSE = options['verbose']
 
-        geocode_cache_filename = os.path.join(
-            os.path.dirname(__file__),
-            '.geocode-request-cache')
-
-        try:
-            with open(geocode_cache_filename) as fp:
-                geocode_cache = json.load(fp)
-        except IOError:
-            geocode_cache = {}
+        geocode_cache = get_geocode_cache()
 
         # Ensure that all the required kinds and other objects exist:
 
@@ -480,7 +471,6 @@ class Command(LabelCommand):
                                                     category='political')
 
         finally:
-            with open(geocode_cache_filename, "w") as fp:
-                json.dump(geocode_cache, fp, indent=2)
+            write_geocode_cache(geocode_cache)
 
         verbose("Geolocated %d out of %d physical addresses" % (geolocated, with_physical_addresses))

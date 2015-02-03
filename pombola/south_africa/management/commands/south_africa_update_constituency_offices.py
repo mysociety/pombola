@@ -7,7 +7,6 @@
 
 import json
 from optparse import make_option
-import os
 import re
 import math
 
@@ -26,7 +25,8 @@ from pombola.core.models import (OrganisationKind, Organisation, Place, PlaceKin
 
 from ..helpers import (
     LocationNotFound,
-    geocode, get_na_member_lookup, get_mapit_municipality, find_pombola_person
+    geocode, get_na_member_lookup, get_mapit_municipality, find_pombola_person,
+    get_geocode_cache, write_geocode_cache
 )
 
 organisation_content_type = ContentType.objects.get_for_model(Organisation)
@@ -35,15 +35,7 @@ person_content_type = ContentType.objects.get_for_model(Person)
 
 position_content_type = ContentType.objects.get_for_model(Position)
 
-geocode_cache_filename = os.path.join(
-    os.path.dirname(__file__),
-    '.geocode-request-cache')
-
-try:
-    with open(geocode_cache_filename) as fp:
-        geocode_cache = json.load(fp)
-except IOError as e:
-    geocode_cache = {}
+geocode_cache = get_geocode_cache()
 test = 'yes'
 
 locationsnotfound = []
@@ -723,8 +715,7 @@ class Command(LabelCommand):
                         organisations_to_keep.append(organisation.id)
 
         finally:
-            with open(geocode_cache_filename, "w") as fp:
-                json.dump(geocode_cache, fp, indent=2)
+            write_geocode_cache(geocode_cache)
 
         #find the organisations to end
         organisations_to_end = Organisation.objects.filter(

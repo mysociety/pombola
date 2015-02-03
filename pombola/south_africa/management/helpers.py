@@ -1,6 +1,8 @@
 from collections import defaultdict
 from difflib import SequenceMatcher
 from itertools import chain
+import json
+import os
 import re
 import requests
 import time
@@ -232,3 +234,18 @@ def find_pombola_person(name_string, na_member_lookup, verbose=True):
         if verbose:
             print "Failed to find a match for " + name_string.encode('utf-8')
         return None
+
+geocode_cache_filename = os.path.join(
+    os.path.dirname(__file__),
+    '.geocode-request-cache')
+
+def get_geocode_cache():
+    try:
+        with open(geocode_cache_filename) as fp:
+            return json.load(fp)
+    except IOError:
+        return {}
+
+def write_geocode_cache(geocode_cache):
+    with open(geocode_cache_filename, "w") as fp:
+        json.dump(geocode_cache, fp, indent=2)
