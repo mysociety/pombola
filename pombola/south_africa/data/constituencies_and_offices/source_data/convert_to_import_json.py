@@ -1059,4 +1059,3 @@ json_output = {
 
 with open('2014.json', 'w') as output:
     json.dump(json_output, output, indent=4)
-
