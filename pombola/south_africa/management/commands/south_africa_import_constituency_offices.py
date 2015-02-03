@@ -27,24 +27,18 @@
 #  * There are still various unmatched names that should be found in
 #    the Pombola database.
 
-from collections import defaultdict, namedtuple
 import csv
 from difflib import SequenceMatcher
-from itertools import chain
 import json
 from optparse import make_option
 import os
 import re
-import requests
 import sys
-import time
-import urllib
 
-from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.management.base import LabelCommand, CommandError
+from django.core.management.base import LabelCommand
 from django.utils.text import slugify
 
 from mapit.models import Area, Generation
