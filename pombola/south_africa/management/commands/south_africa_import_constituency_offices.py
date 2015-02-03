@@ -55,7 +55,8 @@ from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
 
 from mapit.models import Generation, Area, Code
 from ..helpers import (
-    fix_province_name, fix_municipality_name, LocationNotFound
+    fix_province_name, fix_municipality_name, LocationNotFound,
+    all_initial_forms
 )
 
 def geocode(address_string, geocode_cache=None):
@@ -93,38 +94,6 @@ def geocode(address_string, geocode_cache=None):
         lon = float(geometry['location']['lng'])
         lat = float(geometry['location']['lat'])
         return lon, lat, geocode_cache
-
-def all_initial_forms(name, squash_initials=False):
-    '''Generate all initialized variants of first names
-
-    >>> for name in all_initial_forms('foo Bar baz quux', squash_initials=True):
-    ...     print name
-    foo Bar baz quux
-    f Bar baz quux
-    fB baz quux
-    fBb quux
-
-    >>> for name in all_initial_forms('foo Bar baz quux'):
-    ...     print name
-    foo Bar baz quux
-    f Bar baz quux
-    f B baz quux
-    f B b quux
-    '''
-    names = name.split(' ')
-    n = len(names)
-    if n == 0:
-        yield name
-    for i in range(0, n):
-        if i == 0:
-            yield ' '.join(names)
-            continue
-        initials = [name[0] for name in names[:i]]
-        if squash_initials:
-            result = [''.join(initials)]
-        else:
-            result = initials
-        yield ' '.join(result + names[i:])
 
 # Build an list of tuples of (mangled_mp_name, person_object) for each
 # member of the National Assembly and delegate of the National Coucil
