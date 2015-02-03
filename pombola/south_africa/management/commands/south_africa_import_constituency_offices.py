@@ -58,9 +58,6 @@ from mapit.models import Generation, Area, Code
 class LocationNotFound(Exception):
     pass
 
-def group_in_pairs(l):
-    return zip(l[0::2], l[1::2])
-
 def fix_province_name(province_name):
     if province_name == 'Kwa-Zulu Natal':
         return 'KwaZulu-Natal'

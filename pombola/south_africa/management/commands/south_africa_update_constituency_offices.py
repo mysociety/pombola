@@ -56,9 +56,6 @@ test = 'yes'
 locationsnotfound = []
 personnotfound = []
 
-def group_in_pairs(l):
-    return zip(l[0::2], l[1::2])
-
 
 def fix_province_name(province_name):
     if province_name == 'Kwa-Zulu Natal':
