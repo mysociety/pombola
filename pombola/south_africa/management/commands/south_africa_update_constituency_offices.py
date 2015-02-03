@@ -43,13 +43,11 @@ personnotfound = []
 
 nonexistent_phone_number = '000 000 0000'
 
-na_member_lookup = get_na_member_lookup()
-
 unknown_people = set()
 
 VERBOSE = False
 
-def process_office(office, commit, start_date, end_date):
+def process_office(office, commit, start_date, end_date, na_member_lookup):
     global geocode_cache, locationsnotfound, personnotfound
 
     # Ensure that all the required kinds and other objects exist:
@@ -698,12 +696,20 @@ class Command(LabelCommand):
 
         organisations_to_keep = []
 
+        na_member_lookup = get_na_member_lookup()
+
         try:
             with open(input_filename) as fp:
                 data = json.load(fp)
 
                 for office in data['offices']:
-                    organisation = process_office(office, commit, data['start_date'], data['end_date'])
+                    organisation = process_office(
+                        office,
+                        commit,
+                        data['start_date'],
+                        data['end_date'],
+                        na_member_lookup
+                    )
 
                     if organisation:
                         organisations_to_keep.append(organisation.id)

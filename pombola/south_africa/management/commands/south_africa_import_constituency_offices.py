@@ -55,8 +55,6 @@ from ..helpers import (
 # member of the National Assembly and delegate of the National Coucil
 # of Provinces:
 
-na_member_lookup = get_na_member_lookup()
-
 nonexistent_phone_number = '000 000 0000'
 
 unknown_people = set()
@@ -100,6 +98,8 @@ class Command(LabelCommand):
         VERBOSE = options['verbose']
 
         geocode_cache = get_geocode_cache()
+
+        na_member_lookup = get_na_member_lookup()
 
         # Ensure that all the required kinds and other objects exist:
 
