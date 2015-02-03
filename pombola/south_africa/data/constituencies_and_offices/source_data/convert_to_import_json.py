@@ -1033,19 +1033,14 @@ for province in provinces:
     text = check_output(['antiword', '2014/ANC/'+province+'.doc']).decode('unicode-escape')
     offices = offices + process_anc_province(text, province)
 
-offices = offices + process_da_areas('2014/DA_processed.csv')
-
-offices = offices + process_eff_offices('2014/EFF_processed.csv')
-
-offices = offices + process_aic_offices('2014/AIC_processed.csv')
-
-offices = offices + process_acdp_offices('2014/ACDP_processed.csv')
-
-offices = offices + process_ff_offices('2014/FFplus_processed.csv')
-
-offices = offices + process_apc_offices('2014/APC_processed.csv')
-
-offices = offices + process_udm_offices('2014/UDM_processed.csv')
+offices += \
+    process_da_areas('2014/DA_processed.csv') + \
+    process_eff_offices('2014/EFF_processed.csv') + \
+    process_aic_offices('2014/AIC_processed.csv') + \
+    process_acdp_offices('2014/ACDP_processed.csv') + \
+    process_ff_offices('2014/FFplus_processed.csv') + \
+    process_apc_offices('2014/APC_processed.csv') + \
+    process_udm_offices('2014/UDM_processed.csv')
 
 exclude = [
     'COPE'
