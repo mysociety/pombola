@@ -354,7 +354,7 @@ def process_office(office, commit, start_date, end_date):
                 print to_add
 
                 if commit:
-                    place_to_add = Place.create(
+                    Place.create(
                         name=to_add.name,
                         slug=to_add.slug,
                         kind=to_add.kind,
@@ -604,7 +604,7 @@ def process_office(office, commit, start_date, end_date):
                 #check alternative name
                 if 'Alternative Name' in person:
                     try:
-                        alternative_name = AlternativePersonName.objects.get(
+                        AlternativePersonName.objects.get(
                             person=pombola_person,
                             alternative_name=person['Alternative Name'])
                     except ObjectDoesNotExist:
