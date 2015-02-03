@@ -49,12 +49,6 @@ unknown_people = set()
 
 VERBOSE = False
 
-
-def verbose(message):
-    if VERBOSE:
-        print message
-
-
 def process_office(office, commit, start_date, end_date):
     global geocode_cache, locationsnotfound, personnotfound
 
