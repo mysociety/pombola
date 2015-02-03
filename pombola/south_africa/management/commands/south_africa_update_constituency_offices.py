@@ -5,7 +5,6 @@
 # offices and areas and defines parties to be ignored when ending old
 # (omitted) offices and areas.
 
-from difflib import SequenceMatcher
 import json
 from optparse import make_option
 import os
@@ -27,7 +26,7 @@ from pombola.core.models import (OrganisationKind, Organisation, Place, PlaceKin
 
 from ..helpers import (
     LocationNotFound,
-    geocode, get_na_member_lookup, get_mapit_municipality
+    geocode, get_na_member_lookup, get_mapit_municipality, find_pombola_person
 )
 
 organisation_content_type = ContentType.objects.get_for_model(Organisation)
@@ -55,47 +54,6 @@ nonexistent_phone_number = '000 000 0000'
 na_member_lookup = get_na_member_lookup()
 
 unknown_people = set()
-
-# Given a name string, try to find a person from the Pombola database
-# that matches that as closely as possible.  Note that if the form of
-# the name supplied matches more than one person, it's arbitrary which
-# one you'll get back.  This doesn't happen in the South Africa data
-# at the moment, but that's still a FIXME (probably by replacing this
-# with PopIt's name resolution).
-
-
-def find_pombola_person(name_string):
-    # Strip off any phone number at the end, which sometimes include
-    # NO-BREAK SPACE or a / for multiple numbers.
-    name_string = re.sub(r'(?u)[\s\d/]+$', '', name_string).strip()
-    # And trim any list numbers from the beginning:
-    name_string = re.sub(r'^[\s\d\.]+', '', name_string)
-    # Strip off some titles:
-    name_string = re.sub(r'(?i)^(Min|Dep Min|Dep President|President) ', '', name_string)
-    name_string = name_string.strip()
-    if not name_string:
-        return None
-    # Move any initials to the front of the name:
-    name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
-    name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
-    # Score the similarity of name_string with each person:
-    scored_names = []
-    for actual_name, people in na_member_lookup.items():
-        for person in people:
-            t = (SequenceMatcher(None, name_string, actual_name).ratio(),
-                 actual_name,
-                 person)
-            scored_names.append(t)
-    scored_names.sort(reverse=True, key=lambda n: n[0])
-    # If the top score is over 90%, it's very likely to be the
-    # same person with the current set of MPs - this leave a
-    # number of false negatives from misspellings in the CSV file,
-    # though.
-    if scored_names[0][0] >= 0.9:
-        return scored_names[0][2]
-    else:
-        verbose("Failed to find a match for " + name_string.encode('utf-8'))
-        return None
 
 VERBOSE = False
 
@@ -506,7 +464,7 @@ def process_office(office, commit, start_date, end_date):
             #find_pombola_person (from
             #south_africa_import_constituency_offices command) otherwise
             #direct match.
-            pombola_person = find_pombola_person(person['Name'])
+            pombola_person = find_pombola_person(person['Name'], na_member_lookup, VERBOSE)
             if not pombola_person:
                 #use filter().distinct() instead of get due to multiple
                 #rows being returned

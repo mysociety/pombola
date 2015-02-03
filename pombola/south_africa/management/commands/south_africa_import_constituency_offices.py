@@ -28,7 +28,6 @@
 #    the Pombola database.
 
 import csv
-from difflib import SequenceMatcher
 import json
 from optparse import make_option
 import os
@@ -50,7 +49,7 @@ from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
 
 from ..helpers import (
     fix_province_name, LocationNotFound,
-    geocode, get_na_member_lookup, get_mapit_municipality
+    geocode, get_na_member_lookup, find_pombola_person, get_mapit_municipality
 )
 
 # Build an list of tuples of (mangled_mp_name, person_object) for each
@@ -62,47 +61,6 @@ na_member_lookup = get_na_member_lookup()
 nonexistent_phone_number = '000 000 0000'
 
 unknown_people = set()
-
-# Given a name string, try to find a person from the Pombola database
-# that matches that as closely as possible.  Note that if the form of
-# the name supplied matches more than one person, it's arbitrary which
-# one you'll get back.  This doesn't happen in the South Africa data
-# at the moment, but that's still a FIXME (probably by replacing this
-# with PopIt's name resolution).
-
-def find_pombola_person(name_string):
-
-    # Strip off any phone number at the end, which sometimes include
-    # NO-BREAK SPACE or a / for multiple numbers.
-    name_string = re.sub(r'(?u)[\s\d/]+$', '', name_string).strip()
-    # And trim any list numbers from the beginning:
-    name_string = re.sub(r'^[\s\d\.]+', '', name_string)
-    # Strip off some titles:
-    name_string = re.sub(r'(?i)^(Min|Dep Min|Dep President|President) ', '', name_string)
-    name_string = name_string.strip()
-    if not name_string:
-        return None
-    # Move any initials to the front of the name:
-    name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
-    name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
-    # Score the similarity of name_string with each person:
-    scored_names = []
-    for actual_name, people in na_member_lookup.items():
-        for person in people:
-            t = (SequenceMatcher(None, name_string, actual_name).ratio(),
-                 actual_name,
-                 person)
-            scored_names.append(t)
-    scored_names.sort(reverse=True, key=lambda n: n[0])
-    # If the top score is over 90%, it's very likely to be the
-    # same person with the current set of MPs - this leave a
-    # number of false negatives from misspellings in the CSV file,
-    # though.
-    if scored_names[0][0] >= 0.9:
-        return scored_names[0][2]
-    else:
-        verbose("Failed to find a match for " + name_string.encode('utf-8'))
-        return None
 
 VERBOSE = False
 
@@ -341,7 +299,7 @@ class Command(LabelCommand):
                                              'African Christian Democratic Party (ACDP)'):
                                     name_strings = re.split(r'\s{4,}',row[representative_type])
                                     for name_string in name_strings:
-                                        person = find_pombola_person(name_string)
+                                        person = find_pombola_person(name_string, na_member_lookup, VERBOSE)
                                         if person:
                                             people_to_add.append(person)
                                 elif party in ('Congress of the People (COPE)',
@@ -351,7 +309,10 @@ class Command(LabelCommand):
                                         # and email address before
                                         # resolving:
                                         person = find_pombola_person(
-                                            re.sub(r'(?ms)\s*\d.*', '', contact))
+                                            re.sub(r'(?ms)\s*\d.*', '', contact),
+                                            na_member_lookup,
+                                            VERBOSE
+                                        )
                                         if person:
                                             people_to_add.append(person)
                                 else:
@@ -393,7 +354,7 @@ class Command(LabelCommand):
 
                         for representative_type in ('MP', 'MPL'):
                             for contact in re.split(r'(?ms)\s*;\s*', row[representative_type]):
-                                person = find_pombola_person(contact)
+                                person = find_pombola_person(contact, na_member_lookup, VERBOSE)
                                 if person:
                                     people_to_add.append(person)
 
