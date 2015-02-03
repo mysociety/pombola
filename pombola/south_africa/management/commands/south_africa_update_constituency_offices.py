@@ -35,7 +35,6 @@ person_content_type = ContentType.objects.get_for_model(Person)
 
 position_content_type = ContentType.objects.get_for_model(Position)
 
-geocode_cache = get_geocode_cache()
 test = 'yes'
 
 locationsnotfound = []
@@ -45,8 +44,8 @@ nonexistent_phone_number = '000 000 0000'
 
 VERBOSE = False
 
-def process_office(office, commit, start_date, end_date, na_member_lookup):
-    global geocode_cache, locationsnotfound, personnotfound
+def process_office(office, commit, start_date, end_date, na_member_lookup, geocode_cache):
+    global locationsnotfound, personnotfound
 
     # Ensure that all the required kinds and other objects exist:
     ok_constituency_office, _ = OrganisationKind.objects.get_or_create(
@@ -695,6 +694,7 @@ class Command(LabelCommand):
         organisations_to_keep = []
 
         na_member_lookup = get_na_member_lookup()
+        geocode_cache = get_geocode_cache()
 
         try:
             with open(input_filename) as fp:
@@ -706,7 +706,8 @@ class Command(LabelCommand):
                         commit,
                         data['start_date'],
                         data['end_date'],
-                        na_member_lookup
+                        na_member_lookup,
+                        geocode_cache
                     )
 
                     if organisation:
