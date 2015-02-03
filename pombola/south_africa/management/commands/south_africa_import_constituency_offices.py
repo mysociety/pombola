@@ -45,18 +45,18 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import LabelCommand, CommandError
-from django.db.models import Q
 from django.utils.text import slugify
+
+from mapit.models import Area, Generation
 
 from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
                          ContactKind, OrganisationRelationshipKind,
                          OrganisationRelationship, Identifier, Position,
                          PositionTitle, Person)
 
-from mapit.models import Generation, Area, Code
 from ..helpers import (
-    fix_province_name, fix_municipality_name, LocationNotFound,
-    geocode, get_na_member_lookup
+    fix_province_name, LocationNotFound,
+    geocode, get_na_member_lookup, get_mapit_municipality
 )
 
 # Build an list of tuples of (mangled_mp_name, person_object) for each
@@ -364,42 +364,9 @@ class Command(LabelCommand):
                                     raise Exception, "Unknown party '%s'" % (party,)
 
                         if municipality:
-                            municipality = fix_municipality_name(municipality)
-
-                            # If there's a municipality, try to add that as a place as well:
-                            mapit_municipalities = Area.objects.filter(
-                                Q(type__code='LMN') | Q(type__code='DMN'),
-                                generation_high__gte=mapit_current_generation,
-                                generation_low__lte=mapit_current_generation,
-                                name=municipality)
-
-                            mapit_municipality = None
-
-                            if len(mapit_municipalities) == 1:
-                                mapit_municipality = mapit_municipalities[0]
-                            elif len(mapit_municipalities) == 2:
-                                # This is probably a Metropolitan Municipality, which due to
-                                # https://github.com/mysociety/pombola/issues/695 will match
-                                # an LMN and a DMN; just pick the DMN:
-                                if set(m.type.code for m in mapit_municipalities) == set(('LMN', 'DMN')):
-                                    mapit_municipality = [m for m in mapit_municipalities if m.type.code == 'DMN'][0]
-                                else:
-                                    # Special cases for 'Emalahleni' and 'Naledi', which
-                                    # are in multiple provinces:
-                                    if municipality == 'Emalahleni':
-                                        if 'Pule' in row['MP']:
-                                            mapit_municipality = Code.objects.get(type__code='l', code='MP312').area
-                                        elif 'Mdaka' in row['MP']:
-                                            mapit_municipality = Code.objects.get(type__code='l', code='EC136').area
-                                        else:
-                                            raise Exception, "Unknown Emalahleni row with MP: '{0}'".format(row['MP'])
-                                    elif municipality == 'Naledi':
-                                        if 'Mmusi' in row['MP']:
-                                            mapit_municipality = Code.objects.get(type__code='l', code='NW392').area
-                                        else:
-                                            raise Exception, "Unknown Naledi row"
-                                    else:
-                                        raise Exception, "Ambiguous municipality name '%s'" % (municipality,)
+                            mapit_municipality = get_mapit_municipality(
+                                municipality, province
+                            )
 
                             if mapit_municipality:
                                 place_name = u'Municipality associated with ' + organisation_name

@@ -5,6 +5,10 @@ import requests
 import time
 import urllib
 
+from django.db.models import Q
+
+from mapit.models import Generation, Area, Code
+
 from pombola.core.models import Position
 
 def fix_province_name(province_name):
@@ -146,3 +150,43 @@ def get_na_member_lookup():
                 na_member_lookup[name_form].add(person)
 
     return na_member_lookup
+
+def get_mapit_municipality(municipality, province=''):
+    municipality = fix_municipality_name(municipality)
+    mapit_current_generation = Generation.objects.current()
+
+    # If there's a municipality, try to add that as a place as well:
+    mapit_municipalities = Area.objects.filter(
+        Q(type__code='LMN') | Q(type__code='DMN'),
+        generation_high__gte=mapit_current_generation,
+        generation_low__lte=mapit_current_generation,
+        name=municipality)
+
+    mapit_municipality = None
+
+    if len(mapit_municipalities) == 1:
+        mapit_municipality = mapit_municipalities[0]
+    elif len(mapit_municipalities) == 2:
+        # This is probably a Metropolitan Municipality, which due to
+        # https://github.com/mysociety/pombola/issues/695 will match
+        # an LMN and a DMN; just pick the DMN:
+        if set(m.type.code for m in mapit_municipalities) == set(('LMN', 'DMN')):
+            mapit_municipality = [m for m in mapit_municipalities if m.type.code == 'DMN'][0]
+        else:
+            # Special cases for 'Emalahleni' and 'Naledi', which
+            # are in multiple provinces:
+            if municipality == 'Emalahleni':
+                if province=='Mpumalanga':
+                    mapit_municipality = Code.objects.get(type__code='l', code='MP312').area
+                elif province=='Eastern Cape':
+                    mapit_municipality = Code.objects.get(type__code='l', code='EC136').area
+                else:
+                    raise Exception, "Unknown Emalahleni province %s" % (province)
+            elif municipality == 'Naledi':
+                if province=='Northern Cape':
+                    mapit_municipality = Code.objects.get(type__code='l', code='NW392').area
+                else:
+                    raise Exception, "Unknown Naledi province %s" % (province)
+            else:
+                raise Exception, "Ambiguous municipality name '%s'" % (municipality,)
+    return mapit_municipality
