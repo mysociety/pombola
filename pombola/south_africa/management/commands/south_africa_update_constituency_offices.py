@@ -224,13 +224,11 @@ def process_office(office, commit, start_date, end_date):
         source_url = office['Source URL']
         source_note = office['Source Note']
         infosources.append({
-            'source_url': office['Source URL'],
-            'source_note': office['Source Note']
+            'source_url': source_url,
+            'source_note': source_note
         })
-        print 'Adding InformationSource %s (%s)' % (
-            office['Source URL'],
-            office['Source Note']
-        )
+        print 'Adding InformationSource %s (%s)' % (source_url, source_note)
+
 
     if ('Physical Address' in office) and (not 'South Africa' in office['Physical Address']) and (office['Physical Address']!='TBA'):
         office['Physical Address'] = office['Physical Address'] + ', South Africa'
