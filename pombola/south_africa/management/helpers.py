@@ -80,7 +80,7 @@ def geocode(address_string, geocode_cache=None, verbose=True):
         geocode_cache['google'][url] = result
         time.sleep(1.5)
     status = result['status']
-    if status == "ZERO_RESULTS":
+    if status in ("ZERO_RESULTS", "UNKNOWN_ERROR"):
         raise LocationNotFound
     elif status == "OK":
         all_results = result['results']
