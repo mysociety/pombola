@@ -240,7 +240,7 @@ def process_office(office, commit, start_date, end_date):
     try:
         party = Organisation.objects.get(slug=office['Party'].lower())
 
-        organisation_relationships = OrganisationRelationship.objects.get(
+        OrganisationRelationship.objects.get(
             organisation_a=party,
             organisation_b=organisation,
             kind=ork_has_office
