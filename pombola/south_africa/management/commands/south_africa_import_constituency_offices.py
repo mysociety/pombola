@@ -54,21 +54,10 @@ from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
                          PositionTitle, Person)
 
 from mapit.models import Generation, Area, Code
+from ..helpers import fix_province_name, fix_municipality_name
 
 class LocationNotFound(Exception):
     pass
-
-def fix_province_name(province_name):
-    if province_name == 'Kwa-Zulu Natal':
-        return 'KwaZulu-Natal'
-    else:
-        return province_name
-
-def fix_municipality_name(municipality_name):
-    if municipality_name == 'Merafong':
-        return 'Merafong City'
-    else:
-        return municipality_name
 
 def geocode(address_string, geocode_cache=None):
     if geocode_cache is None:
