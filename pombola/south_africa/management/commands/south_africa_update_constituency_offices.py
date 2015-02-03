@@ -149,6 +149,7 @@ def get_mapit_municipality(municipality, province=''):
                     raise Exception, "Unknown Naledi province %s" % (province)
             else:
                 raise Exception, "Ambiguous municipality name '%s'" % (municipality,)
+    return mapit_municipality
 
 def process_office(office, commit, start_date, end_date):
     global geocode_cache, locationsnotfound, personnotfound
