@@ -249,7 +249,7 @@ def process_office(office, commit, start_date, end_date):
         #if the relationship exists nothing needs to change
         print 'Retaining relationship with %s' % (party)
 
-    except ObjectDoesNotExist, AttributeError:
+    except (ObjectDoesNotExist, AttributeError):
         print 'Adding relationship with %s' % (party)
 
         if commit:
