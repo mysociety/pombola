@@ -1027,11 +1027,16 @@ provinces = [
     'Western Cape'
 ]
 
-offices = []
-
-for province in provinces:
-    text = check_output(['antiword', '2014/ANC/'+province+'.doc']).decode('unicode-escape')
-    offices = offices + process_anc_province(text, province)
+offices = [
+    office
+    for province in provinces
+    for office in process_anc_province(
+        check_output(
+            ['antiword', '2014/ANC/'+province+'.doc']
+        ).decode('unicode-escape'),
+        province
+    )
+]
 
 offices += \
     process_da_areas('2014/DA_processed.csv') + \
