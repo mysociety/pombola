@@ -2,6 +2,7 @@ from collections import defaultdict
 from difflib import SequenceMatcher
 from itertools import chain
 import json
+import math
 import os
 import re
 import requests
@@ -249,3 +250,24 @@ def get_geocode_cache():
 def write_geocode_cache(geocode_cache):
     with open(geocode_cache_filename, "w") as fp:
         json.dump(geocode_cache, fp, indent=2)
+
+def debug_location_change(location_from, location_to):
+
+    #calculate the distance between the points to
+    #simplify determining whether the cause is a minor
+    #geocode change using the haversine formula
+    #http://www.movable-type.co.uk/scripts/latlong.html
+    r = 6371
+    lat1 = math.radians(location_from.y)
+    lat2 = math.radians(location_to.y)
+    delta_lat = math.radians(location_to.y-location_from.y)
+    delta_lon = math.radians(location_to.x-location_from.x)
+
+    a = math.sin(delta_lat/2)**2 + \
+        math.cos(lat1) * math.cos(lat2) * \
+        math.sin(delta_lon/2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a));
+
+    d = r * c;
+
+    print "%s km https://www.google.com/maps/dir/'%s,%s'/'%s,%s'/" % (d, location_from.y, location_from.x, location_to.y, location_to.x)

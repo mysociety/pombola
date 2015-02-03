@@ -8,7 +8,6 @@
 import json
 from optparse import make_option
 import re
-import math
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.geos import Point
@@ -26,7 +25,7 @@ from pombola.core.models import (OrganisationKind, Organisation, Place, PlaceKin
 from ..helpers import (
     LocationNotFound,
     geocode, get_na_member_lookup, get_mapit_municipality, find_pombola_person,
-    get_geocode_cache, write_geocode_cache
+    get_geocode_cache, write_geocode_cache, debug_location_change
 )
 
 organisation_content_type = ContentType.objects.get_for_model(Organisation)
@@ -387,24 +386,7 @@ def process_office(office, commit, start_date, end_date, na_member_lookup, geoco
                 if place.location != location:
                     print 'Changing location from %s to %s' % (place.location, location)
 
-                    #calculate the distance between the points to
-                    #simplify determining whether the cause is a minor
-                    #geocode change using the haversine formula
-                    #http://www.movable-type.co.uk/scripts/latlong.html
-                    r = 6371
-                    lat1 = math.radians(place.location.y)
-                    lat2 = math.radians(location.y)
-                    delta_lat = math.radians(location.y-place.location.y)
-                    delta_lon = math.radians(location.x-place.location.x)
-
-                    a = math.sin(delta_lat/2)**2 + \
-                        math.cos(lat1) * math.cos(lat2) * \
-                        math.sin(delta_lon/2)**2
-                    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a));
-
-                    d = r * c;
-
-                    print "%s km https://www.google.com/maps/dir/'%s,%s'/'%s,%s'/" % (d, place.location.y, place.location.x, location.y, location.x)
+                    debug_location_change(place.location, location)
 
                     if commit:
                         place.location = location
