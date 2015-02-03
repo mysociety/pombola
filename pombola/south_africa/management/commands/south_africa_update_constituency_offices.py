@@ -658,8 +658,7 @@ def process_office(office, commit, start_date, end_date, na_member_lookup, geoco
     #FIXME: check summary, kind, started, ended,
     #identifiers (not expected at present)
 
-    if organisation:
-        return organisation
+    return organisation
 
 
 class Command(LabelCommand):
