@@ -57,8 +57,6 @@ from ..helpers import (
 
 nonexistent_phone_number = '000 000 0000'
 
-unknown_people = set()
-
 VERBOSE = False
 
 def verbose(message):

@@ -43,8 +43,6 @@ personnotfound = []
 
 nonexistent_phone_number = '000 000 0000'
 
-unknown_people = set()
-
 VERBOSE = False
 
 def process_office(office, commit, start_date, end_date, na_member_lookup):
