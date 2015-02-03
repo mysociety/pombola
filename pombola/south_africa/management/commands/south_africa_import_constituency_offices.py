@@ -56,56 +56,16 @@ from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
 from mapit.models import Generation, Area, Code
 from ..helpers import (
     fix_province_name, fix_municipality_name, LocationNotFound,
-    all_initial_forms, geocode
+    geocode, get_na_member_lookup
 )
 
 # Build an list of tuples of (mangled_mp_name, person_object) for each
 # member of the National Assembly and delegate of the National Coucil
 # of Provinces:
 
-na_member_lookup = defaultdict(set)
+na_member_lookup = get_na_member_lookup()
 
 nonexistent_phone_number = '000 000 0000'
-
-title_slugs = ('provincial-legislature-member',
-               'committee-member',
-               'alternate-member')
-
-def warn_duplicate_name(name_form, person):
-    message = "Tried to add '%s' => %s, but there were already '%s' => %s" % (
-        name_form, person, name_form, na_member_lookup[name_form])
-    print message
-
-people_done = set()
-for position in chain(Position.objects.filter(title__slug='member',
-                                              organisation__slug='national-assembly'),
-                      Position.objects.filter(title__slug='member-of-the-provincial-legislature').currently_active(),
-                      Position.objects.filter(title__slug='member',
-                                              organisation__kind__slug='provincial-legislature').currently_active(),
-                      Position.objects.filter(title__slug__in=title_slugs).currently_active(),
-                      Position.objects.filter(title__slug__startswith='minister').currently_active(),
-                      Position.objects.filter(title__slug='delegate',
-                                              organisation__slug='ncop').currently_active()):
-
-    person = position.person
-    if person in people_done:
-        continue
-    else:
-        people_done.add(person)
-    for name in person.all_names_set():
-        name = name.lower().strip()
-        # Always leave the last name, but generate all combinations of initials
-        name_forms = set(chain(all_initial_forms(name),
-                               all_initial_forms(name, squash_initials=True)))
-        # If it looks as if there are three full names, try just
-        # taking the first and last names:
-        m = re.search(r'^(\S{4,})\s+\S.*\s+(\S{4,})$', name)
-        if m:
-            name_forms.add(u"{0} {1}".format(*m.groups()))
-        for name_form in name_forms:
-            if name_form in na_member_lookup:
-                warn_duplicate_name(name_form, person)
-            na_member_lookup[name_form].add(person)
 
 unknown_people = set()
 
