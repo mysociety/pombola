@@ -206,8 +206,8 @@ def process_office(office, commit, start_date, end_date):
         first = True
         for source in office['Sources']:
             print 'Adding InformationSource %s (%s)' % (
-                office['Sources'][0]['Source URL'],
-                office['Sources'][0]['Source Note']
+                source['Source URL'],
+                source['Source Note']
             )
 
             infosources.append({
