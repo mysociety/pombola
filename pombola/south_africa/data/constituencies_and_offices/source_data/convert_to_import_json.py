@@ -465,11 +465,7 @@ def process_da_areas(csv_file):
                 if row[3] != '':
                     areas[row[2].strip()]['Location'] = manual_location_corrections.get(row[3], row[3])
 
-    offices = []
-    for area_name, area in areas.items():
-        offices.append(area)
-
-    return offices
+    return areas.values()
 
 
 def process_eff_offices(csv_file):
@@ -539,11 +535,7 @@ def process_eff_offices(csv_file):
                     }
                     offices_to_add[row[0].strip()]['People'].append(administrator_to_append)
 
-    offices = []
-    for office_name, office in offices_to_add.items():
-        offices.append(office)
-
-    return offices
+    return offices_to_add.values()
 
 
 def process_aic_offices(csv_file):
@@ -651,11 +643,7 @@ def process_aic_offices(csv_file):
                     }
                     offices_to_add[row[0].strip()]['People'].append(administrator_to_append)
 
-    offices = []
-    for office_name, office in offices_to_add.items():
-        offices.append(office)
-
-    return offices
+    return offices_to_add.values()
 
 def process_acdp_offices(csv_file):
     offices_to_add = {}
@@ -740,11 +728,7 @@ def process_acdp_offices(csv_file):
                         administrator_to_append['Cell'] = row[9]
                     offices_to_add[row[0].strip()]['People'].append(administrator_to_append)
 
-    offices = []
-    for office_name, office in offices_to_add.items():
-        offices.append(office)
-
-    return offices
+    return offices_to_add.values()
 
 def process_ff_offices(csv_file):
     offices_to_add = {}
@@ -829,11 +813,7 @@ def process_ff_offices(csv_file):
                         administrator_to_append['Cell'] = row[9]
                     offices_to_add[row[0].strip()]['People'].append(administrator_to_append)
 
-    offices = []
-    for office_name, office in offices_to_add.items():
-        offices.append(office)
-
-    return offices
+    return offices_to_add.values()
 
 def process_apc_offices(csv_file):
     offices_to_add = {}
@@ -918,11 +898,7 @@ def process_apc_offices(csv_file):
                         administrator_to_append['Cell'] = row[9]
                     offices_to_add[row[0].strip()]['People'].append(administrator_to_append)
 
-    offices = []
-    for office_name, office in offices_to_add.items():
-        offices.append(office)
-
-    return offices
+    return offices_to_add.values()
 
 def process_udm_offices(csv_file):
     offices_to_add = {}
@@ -1007,11 +983,7 @@ def process_udm_offices(csv_file):
                         administrator_to_append['Cell'] = row[9]
                     offices_to_add[row[0].strip()]['People'].append(administrator_to_append)
 
-    offices = []
-    for office_name, office in offices_to_add.items():
-        offices.append(office)
-
-    return offices
+    return offices_to_add.values()
 
 ensure_executable_found("antiword")
 
