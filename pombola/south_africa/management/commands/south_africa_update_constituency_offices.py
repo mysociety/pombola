@@ -5,16 +5,11 @@
 # offices and areas and defines parties to be ignored when ending old
 # (omitted) offices and areas.
 
-from collections import defaultdict
 from difflib import SequenceMatcher
-from itertools import chain
 import json
 from optparse import make_option
 import os
 import re
-import requests
-import time
-import urllib
 import math
 
 from django.contrib.contenttypes.models import ContentType
