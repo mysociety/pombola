@@ -56,44 +56,8 @@ from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
 from mapit.models import Generation, Area, Code
 from ..helpers import (
     fix_province_name, fix_municipality_name, LocationNotFound,
-    all_initial_forms
+    all_initial_forms, geocode
 )
-
-def geocode(address_string, geocode_cache=None):
-    if geocode_cache is None:
-        geocode_cache = {}
-    # Try using Google's geocoder:
-    geocode_cache.setdefault('google', {})
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='
-    url += urllib.quote(address_string.encode('UTF-8'))
-    if url in geocode_cache['google']:
-        result = geocode_cache['google'][url]
-    else:
-        r = requests.get(url)
-        result = r.json()
-        geocode_cache['google'][url] = result
-        time.sleep(1.5)
-    status = result['status']
-    if status == "ZERO_RESULTS":
-        raise LocationNotFound
-    elif status == "OK":
-        all_results = result['results']
-        if len(all_results) > 1:
-            # The ambiguous results here typically seem to be much of
-            # a muchness - one just based on the postal code, on just
-            # based on the town name, etc.  As a simple heuristic for
-            # the moment, just pick the one with the longest
-            # formatted_address:
-            all_results.sort(key=lambda r: -len(r['formatted_address']))
-            message = u"Warning: disambiguating %s to %s" % (address_string,
-                                                             all_results[0]['formatted_address'])
-            verbose(message.encode('UTF-8'))
-        # FIXME: We should really check the accuracy information here, but
-        # for the moment just use the 'location' coordinate as is:
-        geometry = all_results[0]['geometry']
-        lon = float(geometry['location']['lng'])
-        lat = float(geometry['location']['lat'])
-        return lon, lat, geocode_cache
 
 # Build an list of tuples of (mangled_mp_name, person_object) for each
 # member of the National Assembly and delegate of the National Coucil
@@ -385,7 +349,7 @@ class Command(LabelCommand):
                                     verbose("using manually specified location: " + manual_lonlat)
                                     lon, lat = map(float, manual_lonlat.split(","))
                                 else:
-                                    lon, lat, geocode_cache = geocode(physical_address, geocode_cache)
+                                    lon, lat, geocode_cache = geocode(physical_address, geocode_cache, VERBOSE)
                                     verbose("maps to:")
                                     verbose("http://maps.google.com/maps?q=%f,%f" % (lat, lon))
                                 geolocated += 1
