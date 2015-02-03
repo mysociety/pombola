@@ -3,7 +3,7 @@
 
 # Offices and areas are imported from a JSON file that defines the
 # offices and areas and defines parties to be ignored when ending old
-# (ommited) offices and areas.
+# (omitted) offices and areas.
 
 from collections import defaultdict
 from difflib import SequenceMatcher
