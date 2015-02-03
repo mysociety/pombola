@@ -40,7 +40,7 @@ def all_initial_forms(name, squash_initials=False):
         if i == 0:
             yield ' '.join(names)
             continue
-        initials = [name[0] for name in names[:i]]
+        initials = [forename[0] for forename in names[:i]]
         if squash_initials:
             result = [''.join(initials)]
         else:
