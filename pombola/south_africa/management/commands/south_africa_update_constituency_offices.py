@@ -67,9 +67,6 @@ def process_office(office, commit, start_date, end_date):
     global geocode_cache, locationsnotfound, personnotfound
 
     # Ensure that all the required kinds and other objects exist:
-    ok_party = OrganisationKind.objects.get_or_create(
-        slug='party',
-        name='Party')
     ok_constituency_office, _ = OrganisationKind.objects.get_or_create(
         slug='constituency-office',
         name='Constituency Office')
