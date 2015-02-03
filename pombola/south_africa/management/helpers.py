@@ -4,9 +4,11 @@ def fix_province_name(province_name):
     else:
         return province_name
 
-
 def fix_municipality_name(municipality_name):
     if municipality_name == 'Merafong':
         return 'Merafong City'
     else:
         return municipality_name
+
+class LocationNotFound(Exception):
+    pass

@@ -54,10 +54,9 @@ from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
                          PositionTitle, Person)
 
 from mapit.models import Generation, Area, Code
-from ..helpers import fix_province_name, fix_municipality_name
-
-class LocationNotFound(Exception):
-    pass
+from ..helpers import (
+    fix_province_name, fix_municipality_name, LocationNotFound
+)
 
 def geocode(address_string, geocode_cache=None):
     if geocode_cache is None:

@@ -31,10 +31,7 @@ from pombola.core.models import (OrganisationKind, Organisation, Place, PlaceKin
                          InformationSource)
 
 from mapit.models import Generation, Area, Code
-from ..helpers import fix_municipality_name
-
-class LocationNotFound(Exception):
-    pass
+from ..helpers import fix_municipality_name, LocationNotFound
 
 organisation_content_type = ContentType.objects.get_for_model(Organisation)
 
