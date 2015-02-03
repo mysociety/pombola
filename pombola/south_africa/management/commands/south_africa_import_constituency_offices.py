@@ -107,12 +107,11 @@ class Command(LabelCommand):
         try:
             with open(geocode_cache_filename) as fp:
                 geocode_cache = json.load(fp)
-        except IOError as e:
+        except IOError:
             geocode_cache = {}
 
         # Ensure that all the required kinds and other objects exist:
 
-        ok_party = OrganisationKind.objects.get(slug='party')
         ok_constituency_office, _ = OrganisationKind.objects.get_or_create(
             slug='constituency-office',
             name='Constituency Office')
@@ -183,10 +182,8 @@ class Command(LabelCommand):
                     telephone = row['Tel']
                     fax = row['Fax']
                     physical_address = row['Physical Address']
-                    postal_address = row['Postal Address']
                     email = row['E-mail']
                     municipality = row['Municipality']
-                    wards = row['Wards']
 
                     abbreviated_party = party
                     m = re.search(r'\((?:|.*, )([A-Z\+]+)\)', party)
