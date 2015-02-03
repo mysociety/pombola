@@ -5,8 +5,7 @@
 # offices and areas and defines parties to be ignored when ending old
 # (ommited) offices and areas.
 
-from collections import defaultdict, namedtuple
-import csv
+from collections import defaultdict
 from difflib import SequenceMatcher
 from itertools import chain
 import json
@@ -14,16 +13,14 @@ from optparse import make_option
 import os
 import re
 import requests
-import sys
 import time
 import urllib
 import math
 
-from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.management.base import LabelCommand, CommandError
+from django.core.management.base import LabelCommand
 from django.db.models import Q
 from django.utils.text import slugify
 
