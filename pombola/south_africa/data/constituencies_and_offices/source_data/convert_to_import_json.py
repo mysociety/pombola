@@ -16,7 +16,7 @@
 # Last updated: January 2015.
 
 import distutils.spawn
-import subprocess
+from subprocess import check_output
 import re
 import json
 import csv
@@ -170,27 +170,6 @@ manual_location_corrections = {
     '45 main Street, Kirkwood, 6120': 'Kirkwood',
     '4 Thirteen Street Delaray, Roodepoort, 1724': 'No. 4 13th Street Delaray'
 }
-
-
-#from za-hansard
-#https://github.com/mysociety/za-hansard/blob/6dbf92e43bd6e69d328162927a665a8dabf66307/za_hansard/question_scraper.py#L66
-def check_output_wrapper(*args, **kwargs):
-
-    # Python 2.7
-    if hasattr(subprocess, 'check_output'):
-        return subprocess.check_output(*args)
-
-    # Backport to 2.6 from https://gist.github.com/edufelipe/1027906
-    else:
-        process = subprocess.Popen(stdout=subprocess.PIPE, *args, **kwargs)
-        output, unused_err = process.communicate()
-        retcode = process.poll()
-        if retcode:
-            cmd = kwargs.get('args', args[0])
-            error = subprocess.CalledProcessError(retcode, cmd)
-            error.output = output
-            raise error
-        return output
 
 
 def process_anc_province(text, province):
@@ -1049,7 +1028,7 @@ provinces = [
 offices = []
 
 for province in provinces:
-    text = check_output_wrapper(['antiword', '2014/ANC/'+province+'.doc']).decode('unicode-escape')
+    text = check_output(['antiword', '2014/ANC/'+province+'.doc']).decode('unicode-escape')
     offices = offices + process_anc_province(text, province)
 
 offices = offices + process_da_areas('2014/DA_processed.csv')
