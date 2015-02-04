@@ -39,6 +39,9 @@ class Command(BaseCommand):
             message = "'{0}' was not a directory"
             raise CommandError(message.format(output_directory))
         parsed_url = urlparse.urlparse(pombola_url)
+        if not parsed_url.netloc:
+            message = "The Pombola URL must begin http:// or https://"
+            raise CommandError(message)
 
         primary_id_scheme = '.'.join(reversed(parsed_url.netloc.split('.')))
 
