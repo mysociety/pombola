@@ -63,7 +63,7 @@ class ModelBase(models.Model):
 
     def get_popolo_id(self, id_scheme):
         table_name = self._meta.db_table
-        return '{0}/{1}/{2}'.format(id_scheme, table_name, self.id)
+        return '{1}:{2}'.format(id_scheme, table_name, self.id)
 
     @property
     def show_active(self):
