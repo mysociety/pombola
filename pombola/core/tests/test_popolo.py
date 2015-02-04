@@ -82,8 +82,8 @@ class PopoloTest(TestCase):
                 "identifiers": [],
                 "organization_id": "org.example/core_organisation/{organization_id}",
                 "role": u"Knight of the Realm",
-                "person_id": "org.example/core_person/{person_id}",
-                "id": "org.example/core_position/{position_id}"
+                "person_id": "core_person:{person_id}",
+                "id": "core_position:{position_id}"
             }
         ]
 
@@ -116,7 +116,7 @@ class PopoloTest(TestCase):
                     }
                 ],
                 "birth_date": "1970-01-01",
-                "id": "org.example/core_person/{person_id}"
+                "id": "core_person:{person_id}"
             }
         ]
 
@@ -129,7 +129,7 @@ class PopoloTest(TestCase):
                 "name": u"Test Organisation",
                 "classification": u"Example Org Kind",
                 "identifiers": [],
-                "id": "org.example/core_organisation/{organization_id}",
+                "id": "core_organisation:{organization_id}",
                 "slug": u"test-organisation"
             }
         ]
