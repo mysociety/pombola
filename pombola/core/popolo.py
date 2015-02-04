@@ -237,20 +237,20 @@ def get_popolo_data(primary_id_scheme, base_url, inline_memberships=True):
 
 def create_people(popit, primary_id_scheme, base_url):
     data = get_people(primary_id_scheme, base_url, inline_memberships=False)
-    try:
-        for singular in ('person', 'membership'):
-            collection = singular + 's'
-            popit_collection = getattr(popit, collection)
-            for properties in data[collection]:
-                if singular == 'person':
-                    message = "creating the person: " + properties['name']
-                else:
-                    fmt = "creating the membership {0} => {1}"
-                    message = fmt.format(properties['person_id'],
-                                         properties['organization_id'])
-                print >> sys.stderr, message
+    for singular in ('person', 'membership'):
+        collection = singular + 's'
+        popit_collection = getattr(popit, collection)
+        for properties in data[collection]:
+            if singular == 'person':
+                message = "creating the person: " + properties['name']
+            else:
+                fmt = "creating the membership {0} => {1}"
+                message = fmt.format(properties['person_id'],
+                                     properties['organization_id'])
+            print >> sys.stderr, message
+            try:
                 popit_collection.post(properties)
-    except slumber.exceptions.HttpServerError:
-        print >> sys.stderr, "Failed POSTing the {0}:".format(singular)
-        print >> sys.stderr, json.dumps(person, indent=4)
-        raise
+            except slumber.exceptions.HttpServerError:
+                print >> sys.stderr, "Failed POSTing the {0}:".format(singular)
+                print >> sys.stderr, json.dumps(properties, indent=4)
+                raise
