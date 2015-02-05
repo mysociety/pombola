@@ -53,8 +53,8 @@ PYTHONIOENCODING=utf-8
 13 1 * * * !!(*= $user *)!! output-on-error update_za_hansard.bash
 
 # Generate the Popolo JSON files
-13 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ www.pa.org.za
-30 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ www.pa.org.za
+13 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
+30 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
 
 !!(* } else { *)!!
 !!(* } *)!!
