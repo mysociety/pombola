@@ -115,7 +115,7 @@ class PersonDetailSub(SubSlugRedirectMixin, SkipHidden, DetailView):
 class PersonSpeakerMappingsMixin(object):
     def pombola_person_to_sayit_speaker(self, person, scheme):
         try:
-            expected_popit_id = '/core_person/{0}'.format(person.id)
+            expected_popit_id = 'core_person:{0}'.format(person.id)
             speaker = Speaker.objects.get(
                 person__popit_id=(scheme + expected_popit_id)
             )
