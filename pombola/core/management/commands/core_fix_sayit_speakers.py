@@ -27,8 +27,8 @@ current_popit_id_re = re.compile(
     )
 )
 
-# This matches any PopIt URLs that have the Pombola Person ID embedded
-# in them.
+# This matches any older PopIt URLs that have the Pombola Person ID
+# embedded in them.
 
 other_popit_id_re = re.compile('za-new-import.*core_person/(?P<pombola_id>\d+)$')
 
