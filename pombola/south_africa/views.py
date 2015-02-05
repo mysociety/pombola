@@ -606,7 +606,7 @@ class SASpeakerRedirectView(RedirectView):
             slug = kwargs['slug']
             speaker = Speaker.objects.get(slug=slug)
             popit_id = speaker.person.popit_id
-            scheme, primary_key = re.match('(.*?)/core_person/(\d+)$', popit_id).groups()
+            scheme, primary_key = re.match('(.*?)core_person:(\d+)$', popit_id).groups()
             person = models.Person.objects.get(id=primary_key)
             return reverse('person', args=(person.slug,))
         except Exception as e:
