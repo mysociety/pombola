@@ -22,7 +22,7 @@ current_popit_api_base_url = settings.POPIT_API_URL
 # This is the format of the URLs currently in PopIt:
 
 current_popit_id_re = re.compile(
-    r'^{0}persons//core_person/(?P<pombola_id>\d+)$'.format(
+    r'^{0}persons/core_person:(?P<pombola_id>\d+)$'.format(
         current_popit_api_base_url
     )
 )
