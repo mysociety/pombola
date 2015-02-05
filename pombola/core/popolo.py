@@ -232,6 +232,7 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
 def get_popolo_data(primary_id_scheme, base_url, inline_memberships=True):
     result = get_people(primary_id_scheme, base_url, inline_memberships)
     result['organizations'] = get_organizations(primary_id_scheme, base_url)
+    result['posts'] = []
     return result
 
 def create_people(popit, primary_id_scheme, base_url):
