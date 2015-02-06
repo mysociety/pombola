@@ -50,6 +50,12 @@ deployed.)
   such that `current_popit_id_re` only matches the new ID scheme
   and `other_popit_id_re` also matches the previous ID scheme.
 
+* Now run that script to apply those changes
+
+```
+./manage.py core_fix_sayit_speakers
+```
+
 * Change `expected_popit_id` in `pombola/core/views.py` to match
   the new ID scheme.
 
