@@ -342,11 +342,11 @@ def process_office(office, commit, start_date, end_date, na_member_lookup, geoco
                 print to_add
 
                 if commit:
-                    Place.create(
-                        name=to_add.name,
-                        slug=to_add.slug,
-                        kind=to_add.kind,
-                        mapit_area=to_add.mapit_area,
+                    Place.objects.create(
+                        name=to_add['name'],
+                        slug=to_add['slug'],
+                        kind=to_add['kind'],
+                        mapit_area=to_add['mapit_area'],
                         organisation=organisation)
 
     if 'manual_lonlat' in office or 'Physical Address' in office or 'Location' in office:
