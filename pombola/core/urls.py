@@ -127,7 +127,7 @@ urlpatterns += patterns('pombola.core.views',
 if settings.POPIT_API_URL:
     # Add the dynamically generated API help page
     urlpatterns.append(
-        url(r'^help/api', HelpApiView.as_view())
+        url(r'^help/api', HelpApiView.as_view(), name='help-api')
     )
 
 # Make it easy to see the various error pages without having to fiddle with the
