@@ -10560,6 +10560,22 @@
         {
             "Province": "Western Cape", 
             "Source URL": "http://sourceafrica.net/documents/15403-da-constituency-areas-2014.html", 
+            "Description": "Wards and municipalities in area: 13 19 20 106", 
+            "Title": "DA Constituency Area: Oostenberg South 1", 
+            "Party": "DA", 
+            "People": [
+                {
+                    "Position": "Constituency Contact", 
+                    "Name": "Lennit Hendry Max"
+                }
+            ], 
+            "Type": "area", 
+            "Source Note": "DA Constituency List 2014", 
+            "Location": "Oostenberg South 1"
+        }, 
+        {
+            "Province": "Western Cape", 
+            "Source URL": "http://sourceafrica.net/documents/15403-da-constituency-areas-2014.html", 
             "Description": "", 
             "Title": "DA Constituency Area: Breede Valley", 
             "Party": "DA", 
@@ -10800,18 +10816,18 @@
         {
             "Province": "Western Cape", 
             "Source URL": "http://sourceafrica.net/documents/15403-da-constituency-areas-2014.html", 
-            "Description": "Wards and municipalities in area: 13 19 20 106", 
-            "Title": "DA Constituency Area: Oostenberg South 1", 
+            "Description": "", 
+            "Title": "DA Constituency Area: Mosselbaai", 
             "Party": "DA", 
             "People": [
                 {
                     "Position": "Constituency Contact", 
-                    "Name": "Lennit Hendry Max"
+                    "Name": "Piet Pretorius"
                 }
             ], 
             "Type": "area", 
             "Source Note": "DA Constituency List 2014", 
-            "Location": "Oostenberg South 1"
+            "Location": "Mosselbaai"
         }, 
         {
             "Province": "Eastern Cape", 
@@ -12119,22 +12135,6 @@
             "Type": "area", 
             "Source Note": "DA Constituency List 2014", 
             "Location": "Naledi Municipality"
-        }, 
-        {
-            "Province": "Western Cape", 
-            "Source URL": "http://sourceafrica.net/documents/15403-da-constituency-areas-2014.html", 
-            "Description": "", 
-            "Title": "DA Constituency Area: Mosselbaai", 
-            "Party": "DA", 
-            "People": [
-                {
-                    "Position": "Constituency Contact", 
-                    "Name": "Piet Pretorius"
-                }
-            ], 
-            "Type": "area", 
-            "Source Note": "DA Constituency List 2014", 
-            "Location": "Mosselbaai"
         }, 
         {
             "Province": "Gauteng", 
