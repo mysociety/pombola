@@ -27,210 +27,35 @@
 #  * There are still various unmatched names that should be found in
 #    the Pombola database.
 
-from collections import defaultdict, namedtuple
 import csv
-from difflib import SequenceMatcher
-from itertools import chain
-import json
 from optparse import make_option
-import os
 import re
-import requests
 import sys
-import time
-import urllib
 
-from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.geos import Point
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.management.base import LabelCommand, CommandError
-from django.db.models import Q
+from django.core.management.base import LabelCommand
 from django.utils.text import slugify
+
+from mapit.models import Area, Generation
 
 from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
                          ContactKind, OrganisationRelationshipKind,
                          OrganisationRelationship, Identifier, Position,
                          PositionTitle, Person)
 
-from mapit.models import Generation, Area, Code
-
-class LocationNotFound(Exception):
-    pass
-
-def group_in_pairs(l):
-    return zip(l[0::2], l[1::2])
-
-def fix_province_name(province_name):
-    if province_name == 'Kwa-Zulu Natal':
-        return 'KwaZulu-Natal'
-    else:
-        return province_name
-
-def fix_municipality_name(municipality_name):
-    if municipality_name == 'Merafong':
-        return 'Merafong City'
-    else:
-        return municipality_name
-
-def geocode(address_string, geocode_cache=None):
-    if geocode_cache is None:
-        geocode_cache = {}
-    # Try using Google's geocoder:
-    geocode_cache.setdefault('google', {})
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='
-    url += urllib.quote(address_string.encode('UTF-8'))
-    if url in geocode_cache['google']:
-        result = geocode_cache['google'][url]
-    else:
-        r = requests.get(url)
-        result = r.json()
-        geocode_cache['google'][url] = result
-        time.sleep(1.5)
-    status = result['status']
-    if status == "ZERO_RESULTS":
-        raise LocationNotFound
-    elif status == "OK":
-        all_results = result['results']
-        if len(all_results) > 1:
-            # The ambiguous results here typically seem to be much of
-            # a muchness - one just based on the postal code, on just
-            # based on the town name, etc.  As a simple heuristic for
-            # the moment, just pick the one with the longest
-            # formatted_address:
-            all_results.sort(key=lambda r: -len(r['formatted_address']))
-            message = u"Warning: disambiguating %s to %s" % (address_string,
-                                                             all_results[0]['formatted_address'])
-            verbose(message.encode('UTF-8'))
-        # FIXME: We should really check the accuracy information here, but
-        # for the moment just use the 'location' coordinate as is:
-        geometry = all_results[0]['geometry']
-        lon = float(geometry['location']['lng'])
-        lat = float(geometry['location']['lat'])
-        return lon, lat, geocode_cache
-
-def all_initial_forms(name, squash_initials=False):
-    '''Generate all initialized variants of first names
-
-    >>> for name in all_initial_forms('foo Bar baz quux', squash_initials=True):
-    ...     print name
-    foo Bar baz quux
-    f Bar baz quux
-    fB baz quux
-    fBb quux
-
-    >>> for name in all_initial_forms('foo Bar baz quux'):
-    ...     print name
-    foo Bar baz quux
-    f Bar baz quux
-    f B baz quux
-    f B b quux
-    '''
-    names = name.split(' ')
-    n = len(names)
-    if n == 0:
-        yield name
-    for i in range(0, n):
-        if i == 0:
-            yield ' '.join(names)
-            continue
-        initials = [name[0] for name in names[:i]]
-        if squash_initials:
-            result = [''.join(initials)]
-        else:
-            result = initials
-        yield ' '.join(result + names[i:])
+from ..helpers import (
+    fix_province_name, LocationNotFound,
+    geocode, get_na_member_lookup, find_pombola_person, get_mapit_municipality,
+    get_geocode_cache, write_geocode_cache
+)
 
 # Build an list of tuples of (mangled_mp_name, person_object) for each
 # member of the National Assembly and delegate of the National Coucil
 # of Provinces:
 
-na_member_lookup = defaultdict(set)
-
 nonexistent_phone_number = '000 000 0000'
-
-title_slugs = ('provincial-legislature-member',
-               'committee-member',
-               'alternate-member')
-
-def warn_duplicate_name(name_form, person):
-    message = "Tried to add '%s' => %s, but there were already '%s' => %s" % (
-        name_form, person, name_form, na_member_lookup[name_form])
-    print message
-
-people_done = set()
-for position in chain(Position.objects.filter(title__slug='member',
-                                              organisation__slug='national-assembly'),
-                      Position.objects.filter(title__slug='member-of-the-provincial-legislature').currently_active(),
-                      Position.objects.filter(title__slug='member',
-                                              organisation__kind__slug='provincial-legislature').currently_active(),
-                      Position.objects.filter(title__slug__in=title_slugs).currently_active(),
-                      Position.objects.filter(title__slug__startswith='minister').currently_active(),
-                      Position.objects.filter(title__slug='delegate',
-                                              organisation__slug='ncop').currently_active()):
-
-    person = position.person
-    if person in people_done:
-        continue
-    else:
-        people_done.add(person)
-    for name in person.all_names_set():
-        name = name.lower().strip()
-        # Always leave the last name, but generate all combinations of initials
-        name_forms = set(chain(all_initial_forms(name),
-                               all_initial_forms(name, squash_initials=True)))
-        # If it looks as if there are three full names, try just
-        # taking the first and last names:
-        m = re.search(r'^(\S{4,})\s+\S.*\s+(\S{4,})$', name)
-        if m:
-            name_forms.add(u"{0} {1}".format(*m.groups()))
-        for name_form in name_forms:
-            if name_form in na_member_lookup:
-                warn_duplicate_name(name_form, person)
-            na_member_lookup[name_form].add(person)
-
-unknown_people = set()
-
-# Given a name string, try to find a person from the Pombola database
-# that matches that as closely as possible.  Note that if the form of
-# the name supplied matches more than one person, it's arbitrary which
-# one you'll get back.  This doesn't happen in the South Africa data
-# at the moment, but that's still a FIXME (probably by replacing this
-# with PopIt's name resolution).
-
-def find_pombola_person(name_string):
-
-    # Strip off any phone number at the end, which sometimes include
-    # NO-BREAK SPACE or a / for multiple numbers.
-    name_string = re.sub(r'(?u)[\s\d/]+$', '', name_string).strip()
-    # And trim any list numbers from the beginning:
-    name_string = re.sub(r'^[\s\d\.]+', '', name_string)
-    # Strip off some titles:
-    name_string = re.sub(r'(?i)^(Min|Dep Min|Dep President|President) ', '', name_string)
-    name_string = name_string.strip()
-    if not name_string:
-        return None
-    # Move any initials to the front of the name:
-    name_string = re.sub(r'^(.*?)(([A-Z] *)*)$', '\\2 \\1', name_string)
-    name_string = re.sub(r'(?ms)\s+', ' ', name_string).strip().lower()
-    # Score the similarity of name_string with each person:
-    scored_names = []
-    for actual_name, people in na_member_lookup.items():
-        for person in people:
-            t = (SequenceMatcher(None, name_string, actual_name).ratio(),
-                 actual_name,
-                 person)
-            scored_names.append(t)
-    scored_names.sort(reverse=True, key=lambda n: n[0])
-    # If the top score is over 90%, it's very likely to be the
-    # same person with the current set of MPs - this leave a
-    # number of false negatives from misspellings in the CSV file,
-    # though.
-    if scored_names[0][0] >= 0.9:
-        return scored_names[0][2]
-    else:
-        verbose("Failed to find a match for " + name_string.encode('utf-8'))
-        return None
 
 VERBOSE = False
 
@@ -270,19 +95,12 @@ class Command(LabelCommand):
         global VERBOSE
         VERBOSE = options['verbose']
 
-        geocode_cache_filename = os.path.join(
-            os.path.dirname(__file__),
-            '.geocode-request-cache')
+        geocode_cache = get_geocode_cache()
 
-        try:
-            with open(geocode_cache_filename) as fp:
-                geocode_cache = json.load(fp)
-        except IOError as e:
-            geocode_cache = {}
+        na_member_lookup = get_na_member_lookup()
 
         # Ensure that all the required kinds and other objects exist:
 
-        ok_party = OrganisationKind.objects.get(slug='party')
         ok_constituency_office, _ = OrganisationKind.objects.get_or_create(
             slug='constituency-office',
             name='Constituency Office')
@@ -353,10 +171,8 @@ class Command(LabelCommand):
                     telephone = row['Tel']
                     fax = row['Fax']
                     physical_address = row['Physical Address']
-                    postal_address = row['Postal Address']
                     email = row['E-mail']
                     municipality = row['Municipality']
-                    wards = row['Wards']
 
                     abbreviated_party = party
                     m = re.search(r'\((?:|.*, )([A-Z\+]+)\)', party)
@@ -431,7 +247,7 @@ class Command(LabelCommand):
                                     verbose("using manually specified location: " + manual_lonlat)
                                     lon, lat = map(float, manual_lonlat.split(","))
                                 else:
-                                    lon, lat, geocode_cache = geocode(physical_address, geocode_cache)
+                                    lon, lat, geocode_cache = geocode(physical_address, geocode_cache, VERBOSE)
                                     verbose("maps to:")
                                     verbose("http://maps.google.com/maps?q=%f,%f" % (lat, lon))
                                 geolocated += 1
@@ -469,7 +285,7 @@ class Command(LabelCommand):
                                              'African Christian Democratic Party (ACDP)'):
                                     name_strings = re.split(r'\s{4,}',row[representative_type])
                                     for name_string in name_strings:
-                                        person = find_pombola_person(name_string)
+                                        person = find_pombola_person(name_string, na_member_lookup, VERBOSE)
                                         if person:
                                             people_to_add.append(person)
                                 elif party in ('Congress of the People (COPE)',
@@ -479,49 +295,19 @@ class Command(LabelCommand):
                                         # and email address before
                                         # resolving:
                                         person = find_pombola_person(
-                                            re.sub(r'(?ms)\s*\d.*', '', contact))
+                                            re.sub(r'(?ms)\s*\d.*', '', contact),
+                                            na_member_lookup,
+                                            VERBOSE
+                                        )
                                         if person:
                                             people_to_add.append(person)
                                 else:
                                     raise Exception, "Unknown party '%s'" % (party,)
 
                         if municipality:
-                            municipality = fix_municipality_name(municipality)
-
-                            # If there's a municipality, try to add that as a place as well:
-                            mapit_municipalities = Area.objects.filter(
-                                Q(type__code='LMN') | Q(type__code='DMN'),
-                                generation_high__gte=mapit_current_generation,
-                                generation_low__lte=mapit_current_generation,
-                                name=municipality)
-
-                            mapit_municipality = None
-
-                            if len(mapit_municipalities) == 1:
-                                mapit_municipality = mapit_municipalities[0]
-                            elif len(mapit_municipalities) == 2:
-                                # This is probably a Metropolitan Municipality, which due to
-                                # https://github.com/mysociety/pombola/issues/695 will match
-                                # an LMN and a DMN; just pick the DMN:
-                                if set(m.type.code for m in mapit_municipalities) == set(('LMN', 'DMN')):
-                                    mapit_municipality = [m for m in mapit_municipalities if m.type.code == 'DMN'][0]
-                                else:
-                                    # Special cases for 'Emalahleni' and 'Naledi', which
-                                    # are in multiple provinces:
-                                    if municipality == 'Emalahleni':
-                                        if 'Pule' in row['MP']:
-                                            mapit_municipality = Code.objects.get(type__code='l', code='MP312').area
-                                        elif 'Mdaka' in row['MP']:
-                                            mapit_municipality = Code.objects.get(type__code='l', code='EC136').area
-                                        else:
-                                            raise Exception, "Unknown Emalahleni row with MP: '{0}'".format(row['MP'])
-                                    elif municipality == 'Naledi':
-                                        if 'Mmusi' in row['MP']:
-                                            mapit_municipality = Code.objects.get(type__code='l', code='NW392').area
-                                        else:
-                                            raise Exception, "Unknown Naledi row"
-                                    else:
-                                        raise Exception, "Ambiguous municipality name '%s'" % (municipality,)
+                            mapit_municipality = get_mapit_municipality(
+                                municipality, province
+                            )
 
                             if mapit_municipality:
                                 place_name = u'Municipality associated with ' + organisation_name
@@ -554,7 +340,7 @@ class Command(LabelCommand):
 
                         for representative_type in ('MP', 'MPL'):
                             for contact in re.split(r'(?ms)\s*;\s*', row[representative_type]):
-                                person = find_pombola_person(contact)
+                                person = find_pombola_person(contact, na_member_lookup, VERBOSE)
                                 if person:
                                     people_to_add.append(person)
 
@@ -683,7 +469,6 @@ class Command(LabelCommand):
                                                     category='political')
 
         finally:
-            with open(geocode_cache_filename, "w") as fp:
-                json.dump(geocode_cache, fp, indent=2)
+            write_geocode_cache(geocode_cache)
 
         verbose("Geolocated %d out of %d physical addresses" % (geolocated, with_physical_addresses))

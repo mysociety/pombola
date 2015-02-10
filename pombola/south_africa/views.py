@@ -112,7 +112,7 @@ class LatLonDetailBaseView(BasePlaceDetailView):
     # icon files in .../static/images/party-map-icons/
     party_slugs_that_have_logos = set((
         'adcp', 'anc', 'apc', 'azapo', 'cope', 'da', 'ff', 'id', 'ifp', 'mf',
-        'pac', 'sacp', 'ucdp', 'udm'
+        'pac', 'sacp', 'ucdp', 'udm', 'agang', 'aic', 'eff'
     ));
 
     def get_object(self):
@@ -138,6 +138,9 @@ class LatLonDetailBaseView(BasePlaceDetailView):
 
         context['office_search_radius'] = self.constituency_office_search_radius
 
+        ork_has_office, _ = models.OrganisationRelationshipKind.objects.get_or_create(
+            name='has_office')
+
         context['nearest_offices'] = nearest_offices = (
             ZAPlace.objects
             .filter(kind__slug__in=CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS)
@@ -145,6 +148,13 @@ class LatLonDetailBaseView(BasePlaceDetailView):
             .filter(location__distance_lte=(self.location, D(km=self.constituency_office_search_radius)))
             .order_by('distance')
             )
+
+        #exclude non-active offices
+        #FIXME - this can probably be better implemented by a
+        #organisation_currently_active() filter for places
+        for office in nearest_offices:
+            if not office.organisation.is_ongoing():
+                context['nearest_offices'] = nearest_offices = nearest_offices.exclude(id=office.id)
 
         # FIXME - There must be a cleaner way/place to do this.
         for office in nearest_offices:
@@ -183,17 +193,18 @@ class LatLonDetailBaseView(BasePlaceDetailView):
             except models.Person.DoesNotExist:
                 warnings.warn("{0} has no MPs".format(office.organisation))
 
-            # Try to extract the political membership of this person and store
-            # it next to the office. TODO - deal with several parties sharing
-            # an office (should this happen?) and MPs with no party connection.
-            if hasattr(office, 'office_people_entries'):
-                for entry in office.office_people_entries:
-                    try:
-                        party_slug = entry['person'].position_set.filter(title__slug="member", organisation__kind__slug="party")[0].organisation.slug
-                        if party_slug in self.party_slugs_that_have_logos:
-                            office.party_slug_for_icon = party_slug
-                    except IndexError:
-                        warnings.warn("{0} has no party membership".format(entry['person']))
+            #determine the party slug for the logo
+            try:
+                organisation_relationship = models.OrganisationRelationship.objects.get(
+                    organisation_b=office.organisation,
+                    kind=ork_has_office
+                )
+                party_slug = organisation_relationship.organisation_a.slug
+                if party_slug in self.party_slugs_that_have_logos:
+                    office.party_slug_for_icon = party_slug
+
+            except ObjectDoesNotExist:
+                warnings.warn("{0} has no related party".format(office.organisation))
 
         context['form'] = LocationSearchForm()
 
