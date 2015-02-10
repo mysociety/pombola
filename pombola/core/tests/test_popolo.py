@@ -80,7 +80,7 @@ class PopoloTest(TestCase):
             {
                 "end_date": "2013-06",
                 "identifiers": [],
-                "organization_id": "org.example/core_organisation/{organization_id}",
+                "organization_id": "core_organisation:{organization_id}",
                 "role": u"Knight of the Realm",
                 "person_id": "core_person:{person_id}",
                 "id": "core_position:{position_id}"
