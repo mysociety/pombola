@@ -64,8 +64,8 @@ class SAHomeView(HomeView):
             ).order_by('-publication_date')
 
         context['article_columns'] = [
-            articles_for_front_page[0:3],
-            articles_for_front_page[3:6],
+            articles_for_front_page[0:6:2],
+            articles_for_front_page[1:6:2]
         ]
 
         context['other_news_categories'] = []
