@@ -126,6 +126,7 @@ class InfoBlogClientTests(TestCase):
             tests = {
                 "birds":   ["Blah Raven blah", "Blah Swan blah"],
                 "mammals": ["Blah Black Panther blah", "Blah Polar Bear blah"],
+                "birds,mammals": ["Blah Raven blah", "Blah Swan blah", "Blah Black Panther blah", "Blah Polar Bear blah"],
             },
             url_base = '/blog/tag/'
         )
@@ -136,6 +137,7 @@ class InfoBlogClientTests(TestCase):
             tests = {
                 "category-1": ["Blah Raven blah", "Blah Polar Bear blah"],
                 "category-2": ["Blah Black Panther blah", "Blah Swan blah"],
+                "category-1,category-2": ["Blah Raven blah", "Blah Swan blah", "Blah Black Panther blah", "Blah Polar Bear blah"],
             },
             url_base = '/blog/category/'
         )

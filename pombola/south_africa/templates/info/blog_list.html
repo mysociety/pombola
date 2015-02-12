@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
+{% load blog_titles %}
+
 {% block title %}
-  {% if category %}&ldquo;{{ category.name }}&rdquo;{% endif %}
+  {% if categories %}
+    {{ categories|join_blog_post_titles }}
+  {% endif %}
   Blog Posts
-  {% if tag %}tagged &ldquo;{{ tag.name }}&rdquo;{% endif %}
+  {% if tags %}
+    tagged {{ tags|join_blog_post_titles }}
+  {% endif %}
 {% endblock %}
 
 {% block extra_head_meta %}
@@ -14,15 +20,19 @@
 <div class="layout-major-minor blog-post blog-list">
   <div class="major-column">
   <h1>
-    {% if category %}&ldquo;{{ category.name }}&rdquo;{% endif %}
+    {% if categories %}
+      {{ categories|join_blog_post_titles }}
+    {% endif %}
     Blog Posts
-    {% if tag %}tagged &ldquo;{{ tag.name }}&rdquo;{% endif %}
+    {% if tags %}
+      tagged {{ tags|join_blog_post_titles }}
+    {% endif %}
   </h1>
 
 
-  {% if category and category.summary %}
+  {% if categories and categories|length == 1 and categories.0.summary %}
     <div class="infopage-category-summary">
-      {{ category.summary }}
+      {{ categories.0.summary }}
     </div>
   {% endif %}
 

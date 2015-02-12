@@ -183,6 +183,12 @@ def breadcrumbs(url):
         # Never try to link the last element, since it should
         # represent the current page:
         if i == len(elements) - 1:
+            # if the previous element links to blog/category or blog/tag
+            # replace "tag,tag" with "tag, tag"
+            if 'href="/blog/category/"' in elements_html[-1] or 'href="/blog/tag/"' in elements_html[-1]:
+                if re.match(r'.+,[^\s].*', link_text):
+                    link_text = re.sub(r',', ', ', link_text)
+                    link_text_html_escaped = escape_link_text_for_html(link_text)
             element_html = link_text_html_escaped
         else:
             element_html = linkify(link_text_html_escaped, element_url)
