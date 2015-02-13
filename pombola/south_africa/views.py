@@ -30,7 +30,7 @@ from pombola.core import models
 from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
     PlaceDetailSub, OrganisationDetailView, PersonDetail, PlaceDetailView,
     OrganisationDetailSub, PersonSpeakerMappingsMixin)
-from pombola.info.models import InfoPage, Category
+from pombola.info.models import InfoPage, Category as BlogCategory
 from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView, SearchBaseView
 from pombola.slug_helpers.views import SlugRedirect
@@ -52,6 +52,7 @@ class SAHomeView(HomeView):
 
     def get_context_data(self, **kwargs):
         context = super(SAHomeView, self).get_context_data(**kwargs)
+
         articles = InfoPage.objects.filter(
             kind=InfoPage.KIND_BLOG).order_by("-publication_date")
 
@@ -71,11 +72,11 @@ class SAHomeView(HomeView):
         context['other_news_categories'] = []
         for slug in ('advocacy-campaigns', 'commentary', 'mp-corner'):
             try:
-                c = Category.objects.get(slug=slug)
+                c = BlogCategory.objects.get(slug=slug)
                 context['other_news_categories'].append(
                     (c, articles.filter(categories=c)[:1]))
-            except Category.DoesNotExist:
-                pass
+            except BlogCategory.DoesNotExist:
+               pass
 
         # If there is editable homepage content make it available to the templates.
         try:
