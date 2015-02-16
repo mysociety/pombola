@@ -325,6 +325,15 @@ class SAOrganisationDetailView(OrganisationDetailView):
             key=key_position_sort_last_name,
         )
 
+        paginator = Paginator(context['positions'], 20)
+        page = self.request.GET.get('page')
+        try:
+            context['positions'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['positions'] = paginator.page(1)
+        except EmptyPage:
+            context['positions'] = paginator.page(paginator.num_pages)
+
         return context
 
     def add_parliament_counts_to_context_data(self, context):

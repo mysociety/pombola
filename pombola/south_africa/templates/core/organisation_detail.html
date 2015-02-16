@@ -39,6 +39,20 @@
     {% include "core/_position_listing.html" with positions=positions %}
   {% endif %}
 
+  <div class="pagination">
+    {% if positions.has_previous %}
+      <a href="?page={{ positions.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ positions.number }} of {{ positions.paginator.num_pages }}
+    </span>
+
+     {% if positions.has_next %}
+      <a href="?page={{ positions.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+
 {% endblock %}
 
 {# Put a map in the profile_pic block #}
