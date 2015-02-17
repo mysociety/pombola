@@ -1,7 +1,7 @@
 from django.views.generic import DetailView, ListView
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_list_or_404
 from django.conf import settings
 
 from models import InfoPage, Category, Tag
@@ -32,39 +32,43 @@ class InfoBlogList(BlogMixin, ListView):
 class InfoBlogLabelBase(InfoBlogList):
 
     def get_queryset(self):
-        slug = self.kwargs['slug']
+        slugs = self.kwargs['slug'].split(',')
         queryset = super(InfoBlogLabelBase, self).get_queryset()
-        filter_args = { self.filter_field: slug}
+        filter_args = { self.filter_field: slugs }
         return queryset.filter(**filter_args)
 
     def get_context_data(self, **kwargs):
         context = super(InfoBlogLabelBase, self).get_context_data(**kwargs)
 
-        slug = self.kwargs['slug']
-        context[self.context_key] = get_object_or_404(self.context_filter_model, slug=slug)
+        slugs = self.kwargs['slug'].split(',')
+        context[self.context_key] = get_list_or_404(self.context_filter_model, slug__in=slugs)
 
         return context
 
 
 class InfoBlogCategory(InfoBlogLabelBase):
-    context_key  = 'category'
+    context_key  = 'categories'
     context_filter_model = Category
-    filter_field = 'categories__slug'
+    filter_field = 'categories__slug__in'
 
     def get_context_data(self, **kwargs):
         context = super(InfoBlogCategory, self).get_context_data(**kwargs)
 
         # Filter the recent posts to be specific to this category
-        context['recent_posts'] = context['recent_posts'].filter(categories=context['category'])
+        slugs = self.kwargs['slug'].split(',')
+        context['recent_posts'] = context['recent_posts'].filter(categories__slug__in=slugs)
+
+        context['category_names'] = []
+        for category in context['categories']:
+            context['category_names'].append(category.name)
 
         return context
 
 
-
 class InfoBlogTag(InfoBlogLabelBase):
-    context_key  = 'tag'
+    context_key  = 'tags'
     context_filter_model = Tag
-    filter_field = 'tags__slug'
+    filter_field = 'tags__slug__in'
 
 
 class InfoBlogView(BlogMixin, DetailView):
