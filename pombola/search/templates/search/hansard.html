@@ -19,11 +19,20 @@
         <p>Alternatively, <a href="{% url "core_search"  %}" id="search-core-instead">search Mzalendo's data</a> instead.</p>
 
         <div class="search-box">
-            {{ form.q }}
+            <input id="id_q" name="q" type="search" value="{{ query }}">
+
+            <label for="search-results-order">Order by</label>
+              <select name="order" id="search-results-order">
+                <option value="relevance"{% if order == 'relevance' %} selected{% endif %}>Relevance</option>
+                <option value="date"{% if order == 'date' %} selected{% endif %}>Newest first</option>
+                <option value="adate"{% if order == 'adate' %} selected{% endif %}>Oldest first</option>
+              </select>
+
             <input type="submit" value="Search" class="button">
         </div>
 
         {% if query %}
+            <br />
             <h3>Results</h3>
 
             <style type="text/css">
@@ -33,7 +42,7 @@
             </style>
 
             <ul class="listing">
-            {% for result in page.object_list %}
+            {% for result in results %}
                 {% comment %}
                    FIXME: this next guard is only present because
                    currently we have a not-properly-understood
@@ -56,11 +65,11 @@
             {% endfor %}
             </ul>
 
-            {% if page.has_previous or page.has_next %}
+            {% if results.has_previous or results.has_next %}
                 <div>
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    {% if results.has_previous %}<a href="?q={{ query }}&amp;page={{ results.previous_page_number }}">{% endif %}&laquo; Previous{% if results.has_previous %}</a>{% endif %}
                     |
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                    {% if results.has_next %}<a href="?q={{ query }}&amp;page={{ results.next_page_number }}">{% endif %}Next &raquo;{% if results.has_next %}</a>{% endif %}
                 </div>
             {% endif %}
         {% else %}
