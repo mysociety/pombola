@@ -48,8 +48,17 @@ if settings.ENABLED_FEATURES['hansard']:
     from pombola.hansard import models as hansard_models
 
     class HansardEntryIndex(BaseIndex, indexes.Indexable):
+        start_date = indexes.DateTimeField(null=True)
+
         def get_model(self):
             return hansard_models.Entry
+
+        def index_queryset(self, using=None):
+            """Used when the entire index for model is updated."""
+            return self.get_model().objects.select_related('sitting')
+
+        def prepare_start_date(self, obj):
+            return obj.sitting.start_date
 
 if 'pombola.info' in settings.INSTALLED_APPS:
     from pombola.info.models import InfoPage
