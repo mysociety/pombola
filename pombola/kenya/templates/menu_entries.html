@@ -154,6 +154,11 @@
         <li>
             <a href="{% url "info_page" slug='contact' %}">Contact</a>
         </li>
+        {% if settings.POPIT_API_URL %}
+        <li>
+            <a href="{% url 'help-api' %}">Get the data</a>
+        </li>
+        {% endif %}
     </ul>
     {% endif %}
 </li>
