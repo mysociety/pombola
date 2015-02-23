@@ -1,17 +1,12 @@
-from collections import namedtuple
-import json
 import re
 import sys
 import simplejson
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.shortcuts  import render_to_response, get_object_or_404, redirect
-from django.template   import RequestContext
 from django.conf import settings
 
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView
 
 from pombola.core import models
 
