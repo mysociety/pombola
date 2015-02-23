@@ -3,7 +3,7 @@ from django.conf import settings
 
 from pombola.core    import models as core_models
 
-from .views import SearchBaseView, GeocoderView, HansardSearchView
+from .views import SearchBaseView, GeocoderView
 
 urlpatterns = patterns('pombola.search.views',
 
@@ -26,6 +26,7 @@ urlpatterns = patterns('pombola.search.views',
 # Hansard search - only loaded if hansard is enabled
 if settings.ENABLED_FEATURES['hansard']:
     from pombola.hansard import models as hansard_models
+    from .views import HansardSearchView
     urlpatterns += patterns('pombola.search.views',
         url(
             r'^hansard/$',

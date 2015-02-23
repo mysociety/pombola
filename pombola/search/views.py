@@ -216,62 +216,62 @@ class SearchBaseView(TemplateView):
         result['section_dashes'] = section.replace('_', '-')
         return result
 
+if settings.ENABLED_FEATURES['hansard']:
+    class HansardSearchView(TemplateView):
+        template_name = "search/hansard.html"
+        results_per_page = 20
 
-class HansardSearchView(TemplateView):
-    template_name = "search/hansard.html"
-    results_per_page = 20
+        def parse_params(self):
+            self.query = self.request.GET.get('q', '')
+            self.page = self.request.GET.get('page')
+            self.order = self.request.GET.get('order')
 
-    def parse_params(self):
-        self.query = self.request.GET.get('q', '')
-        self.page = self.request.GET.get('page')
-        self.order = self.request.GET.get('order')
+        def get_data(self):
+            from pombola.hansard.models import Entry
+            defaults = {
+                'model': Entry,
+                'title': 'Hansard',
+            }
+            data_query = SearchQuerySet().models(defaults['model'])
+            data_query = data_query.filter(
+                content=AutoQuery(self.query)
+            )
+            if self.order == 'date':
+                data_query = data_query.order_by('-start_date')
+            if self.order == 'adate':
+                data_query = data_query.order_by('start_date')
 
-    def get_data(self):
-        from pombola.hansard.models import Entry
-        defaults = {
-            'model': Entry,
-            'title': 'Hansard',
-        }
-        data_query = SearchQuerySet().models(defaults['model'])
-        data_query = data_query.filter(
-            content=AutoQuery(self.query)
-        )
-        if self.order == 'date':
-            data_query = data_query.order_by('-start_date')
-        if self.order == 'adate':
-            data_query = data_query.order_by('start_date')
+            result = defaults.copy()
+            result['results'] = data_query.highlight()
+            result['results_count'] = result['results'].count()
+            return result
 
-        result = defaults.copy()
-        result['results'] = data_query.highlight()
-        result['results_count'] = result['results'].count()
-        return result
+        def get_paginated_results(self, sqs):
+            paginator = Paginator(sqs, self.results_per_page)
+            try:
+                results = paginator.page(self.page)
+            except PageNotAnInteger:
+                results = paginator.page(1)
+            except EmptyPage:
+                results = paginator.page(paginator.num_pages)
+            return results
 
-    def get_paginated_results(self, sqs):
-        paginator = Paginator(sqs, self.results_per_page)
-        try:
-            results = paginator.page(self.page)
-        except PageNotAnInteger:
-            results = paginator.page(1)
-        except EmptyPage:
-            results = paginator.page(paginator.num_pages)
-        return results
+        def get_context_data(self, **kwargs):
+            self.parse_params()
+            context = super(HansardSearchView, self).get_context_data(**kwargs)
+            context['query'] = self.query
+            context['order'] = self.order
 
-    def get_context_data(self, **kwargs):
-        self.parse_params()
-        context = super(HansardSearchView, self).get_context_data(**kwargs)
-        context['query'] = self.query
-        context['order'] = self.order
+            query_dict = self.request.GET.copy()
+            if 'page' in query_dict:
+                del query_dict['page']
+            context['query_string'] = query_dict.urlencode()
+            if not self.query:
+                return context
 
-        query_dict = self.request.GET.copy()
-        if 'page' in query_dict:
-            del query_dict['page']
-        context['query_string'] = query_dict.urlencode()
-        if not self.query:
+            data = self.get_data()
+            context['results'] = self.get_paginated_results(data['results'])
             return context
-
-        data = self.get_data()
-        context['results'] = self.get_paginated_results(data['results'])
-        return context
 
 
 class GeocoderView(TemplateView):
