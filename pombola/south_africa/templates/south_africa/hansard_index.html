@@ -21,9 +21,9 @@
 </div>
 
 
-{% regroup entries by section.parent.title.strip as by_title %}
+{% regroup entries by parent.title.strip as by_title %}
 {% for t in by_title %}
-  {% with first_section_id=t.list.0.section_id %}
+  {% with first_section_id=t.list.0.id %}
     {% regroup t.list by start_date as by_date %}
     <div>
         <a class="js-hide-reveal-link hansard-section-title has-dropdown-dark" href="#{{ t.grouper|slugify }}-{{ first_section_id }}">
@@ -36,7 +36,7 @@
         <div class="js-hide-reveal hansard-section" id="{{ t.grouper|slugify }}-{{ first_section_id }}">
             {% for item in t.list %}
             <p>
-                <a href="{% url 'speeches:section-view' item.section.get_path %}">{{ item.section.title }}</a>
+                <a href="{% url 'speeches:section-view' item.get_path %}">{{ item.title }}</a>
                 ({{ item.speech_count }})
             </p>
             {% endfor %}
@@ -45,4 +45,26 @@
     </div>
   {% endwith %}
 {% endfor %}
+
+<br ><br >
+<div class="step-pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}">
+              Previous
+          </a>
+        {% endif %}
+
+        <span class="current">
+          Page <strong>{{ page_obj.number }}</strong> of <strong>{{ page_obj.paginator.num_pages }}</strong>
+        </span>
+
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">
+              Next
+          </a>
+        {% endif %}
+    </span>
+</div>
+
 {% endblock %}
