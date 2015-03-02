@@ -81,5 +81,11 @@ COUNTRY_JS = {
             'shujaaz/js/script.js',
         ),
         'output_filename': 'js/shujaaz.js',
+    },
+    'survey': {
+        'source_filenames': (
+            'js/survey.js',
+        ),
+        'output_filename': 'js/survey.js',
     }
 }
