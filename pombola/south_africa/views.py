@@ -652,6 +652,9 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
         # we can create very specific queries to fetch the sections
         # then the subsections containing the speeches themselves.
         #
+        # The parent_sections form the headings which are expanded by javascript
+        # to reveal the debate_sections
+        #
         # FIXME ideally we'd have start_date for sections rather than
         # having to get MAX('start_date') from the speeches table
 
@@ -661,44 +664,55 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
             self.section_parent_field : top_section,
             'children__speech__id__isnull' : False,
             'children__id__isnull' : False
-         }
+        }
 
-        # get a list of all the sections
-        parent_sections = Section \
+        # get a list of all the section titles
+        all_parent_section_titles = Section \
               .objects \
               .filter(**section_filter) \
-              .values('id', 'title') \
+              .values('title') \
+              .distinct() \
               .annotate(latest_start_date=Max('children__speech__start_date')) \
               .order_by('-latest_start_date')
 
         # use Paginator to cut this down to the sections for the current page
-        paginator = Paginator(parent_sections, self.sections_to_show)
+        paginator = Paginator(all_parent_section_titles, self.sections_to_show)
         try:
-            top_level_sections = paginator.page(self.page)
+            parent_section_titles = paginator.page(self.page)
         except PageNotAnInteger:
-            top_level_sections = paginator.page(1)
+            parent_section_titles = paginator.page(1)
         except EmptyPage:
-            top_level_sections = paginator.page(paginator.num_pages)
+            parent_section_titles = paginator.page(paginator.num_pages)
+
+        # get the sections for the current page in date order
+        titles = list(section['title'] for section in parent_section_titles)
+        section_filter['title__in'] = titles
+        parent_sections = Section \
+              .objects \
+              .values('id', 'title') \
+              .filter(**section_filter) \
+              .annotate(latest_start_date=Max('children__speech__start_date')) \
+              .order_by('-latest_start_date', 'title')
 
         # get the subsections based on the relevant section ids
         # exclude those with blank titles as we have no way of linking to them
-        parent_ids = list(section['id'] for section in top_level_sections)
+        parent_ids = list(section['id'] for section in parent_sections)
         debate_sections = Section \
             .objects \
             .filter(parent_id__in=parent_ids, speech__id__isnull=False) \
             .annotate(start_order=Min('speech__id'), start_date=Max('speech__start_date'), speech_count=Count('speech__id')) \
             .exclude(title='') \
-            .order_by('-start_date', 'parent__id', 'start_order')
+            .order_by('-start_date', 'parent__title', 'start_order')
 
         context['entries'] = debate_sections
-        context['page_obj'] = top_level_sections
+        context['page_obj'] = parent_section_titles
         return context
 
 class SAHansardIndex(SASpeechesIndex):
     template_name = 'south_africa/hansard_index.html'
     top_section_name='Hansard'
     section_parent_field = 'parent__parent__parent__parent'
-    sections_to_show = 25
+    sections_to_show = 15
 
 class SACommitteeIndex(SASpeechesIndex):
     template_name = 'south_africa/hansard_index.html'
