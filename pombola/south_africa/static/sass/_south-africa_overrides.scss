@@ -2576,3 +2576,90 @@ ul.pager {
         }
     }
 }
+
+.questions-filter {
+    padding: 1em;
+    background-color: $colour_lighter_grey;
+
+    select {
+        display: block;
+        max-width: 20em;
+        margin: 0.5em 0;
+    }
+
+    @media only all and (min-width: 640px) {
+        padding-right: 7em;
+        position: relative;
+
+        .button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 120px;
+        }
+
+        select {
+            display: inline-block;
+            margin: 0 0.5em;
+        }
+    }
+
+    .search-filter {
+        display: block;
+        margin-top: 10px;
+    }
+}
+
+.questions {
+
+    .question {
+        padding: 1em 0;
+    }
+
+    .question + .question {
+        border-top: 1px solid $colour_muted;
+    }
+
+    .speech-meta {
+        margin-bottom: 0;
+
+        a {
+            text-transform: none;
+            text-decoration: none;
+            margin-left: 0.5em;
+
+            &:hover, &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .speech-text {
+        line-height: 1.4em;
+    }
+
+    .reply {
+        padding-top: 0.5em;
+        padding-left: 5%;
+    }
+
+    h2 {
+        margin-bottom: 0;
+        a {
+            font-size: 0.8em;
+            text-decoration: none;
+
+            &:hover, &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
+.tag-answer {
+    white-space: pre-wrap;
+    font-family: 'Inconsolata', "Courier New", Courier, monospace;
+    font-size: 14px;
+}
