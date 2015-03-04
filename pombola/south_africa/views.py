@@ -6,7 +6,7 @@ import re
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
-from django.db.models import Count
+from django.db.models import Count, Max, Min
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
@@ -637,10 +637,11 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
     template_name = 'south_africa/hansard_index.html'
     top_section_name='Hansard'
     sections_to_show = 25
-    section_parent_field = 'section__parent__parent__parent__parent__parent'
+    section_parent_field = 'parent__parent__parent__parent'
 
     def get_context_data(self, **kwargs):
         context = super(SASpeechesIndex, self).get_context_data(**kwargs)
+        self.page = self.request.GET.get('page')
 
         # Get the top level section, or 404
         top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
@@ -648,51 +649,75 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
 
         # As we know that the hansard section structure is
         # "Hansard" -> yyyy -> mm -> dd -> section -> subsection -> [speeches]
-        # we can create a very specific query to drill up to the top level one
-        # that we want.
+        # we can create very specific queries to fetch the sections
+        # then the subsections containing the speeches themselves.
+        #
+        # The parent_sections form the headings which are expanded by javascript
+        # to reveal the debate_sections
+        #
+        # FIXME ideally we'd have start_date for sections rather than
+        # having to get MAX('start_date') from the speeches table
 
-        section_parent_filter = { self.section_parent_field : top_section }
-        entries = Speech \
+        # exclude sections without subsections and
+        # with subsections that have no speeches
+        section_filter = {
+            self.section_parent_field : top_section,
+            'children__speech__id__isnull' : False,
+            'children__id__isnull' : False
+        }
+
+        # get a list of all the section titles
+        all_parent_section_titles = Section \
+              .objects \
+              .filter(**section_filter) \
+              .values('title') \
+              .distinct() \
+              .annotate(latest_start_date=Max('children__speech__start_date')) \
+              .order_by('-latest_start_date')
+
+        # use Paginator to cut this down to the sections for the current page
+        paginator = Paginator(all_parent_section_titles, self.sections_to_show)
+        try:
+            parent_section_titles = paginator.page(self.page)
+        except PageNotAnInteger:
+            parent_section_titles = paginator.page(1)
+        except EmptyPage:
+            parent_section_titles = paginator.page(paginator.num_pages)
+
+        # get the sections for the current page in date order
+        titles = list(section['title'] for section in parent_section_titles)
+        section_filter['title__in'] = titles
+        parent_sections = Section \
+              .objects \
+              .values('id', 'title') \
+              .filter(**section_filter) \
+              .annotate(latest_start_date=Max('children__speech__start_date')) \
+              .order_by('-latest_start_date', 'title')
+
+        # get the subsections based on the relevant section ids
+        # exclude those with blank titles as we have no way of linking to them
+        parent_ids = list(section['id'] for section in parent_sections)
+        debate_sections = Section \
             .objects \
-            .filter(**section_parent_filter) \
-            .values('section_id', 'start_date') \
-            .annotate(speech_count=Count('id')) \
-            .order_by('-start_date')
+            .filter(parent_id__in=parent_ids, speech__id__isnull=False) \
+            .annotate(start_order=Min('speech__id'), start_date=Max('speech__start_date'), speech_count=Count('speech__id')) \
+            .exclude(title='') \
+            .order_by('-start_date', 'parent__title', 'start_order')
 
-        # loop through and add all the section objects. This is not efficient,
-        # but makes the templates easier as we can (for example) use get_absolute_url.
-        # Also lets us retrieve the last N parent sections which is what we need for the
-        # display.
-        parent_sections = set()
-        display_entries = []
-        for entry in entries:
-            section = Section.objects.get(pk=entry['section_id'])
-            parent_sections.add(section.parent.id)
-            if len(parent_sections) > self.sections_to_show:
-                break
-            display_entries.append(entry)
-            display_entries[-1]['section'] = section
-
-        # PAGINATION NOTE - it would be possible to add pagination to this by simply
-        # removing the `break` after self.sections_to_show has been reached and then
-        # finding a more efficient way to inflate the sections (perhaps using an
-        # embedded lambda, or a custom templatetag). However paginating this page may
-        # not be as useful as creating an easy to use drill down based on date, or
-        # indeed using search.
-
-        context['entries'] = display_entries
+        context['entries'] = debate_sections
+        context['page_obj'] = parent_section_titles
         return context
 
 class SAHansardIndex(SASpeechesIndex):
     template_name = 'south_africa/hansard_index.html'
     top_section_name='Hansard'
-    section_parent_field = 'section__parent__parent__parent__parent__parent'
-    sections_to_show = 25
+    section_parent_field = 'parent__parent__parent__parent'
+    sections_to_show = 15
 
 class SACommitteeIndex(SASpeechesIndex):
     template_name = 'south_africa/hansard_index.html'
     top_section_name='Committee Minutes'
-    section_parent_field = 'section__parent__parent__parent'
+    section_parent_field = 'parent__parent'
     sections_to_show = 25
 
 def questions_section_sort_key(section):
