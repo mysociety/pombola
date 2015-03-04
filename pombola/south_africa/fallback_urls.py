@@ -34,9 +34,9 @@ urlpatterns = [
 # Make sure the top level custom indexes work:
 
 urlpatterns += patterns('',
-    url(r'^hansard/$', SAHansardIndex.as_view(), name='section-list-hansard'),
-    url(r'^committee-minutes/$', SACommitteeIndex.as_view(), name='section-list-committee-minutes'),
-    url(r'^question/$', SAQuestionIndex.as_view(), name='section-list-question'),
+    url(r'^hansard/?$', SAHansardIndex.as_view(), name='section-list-hansard'),
+    url(r'^committee-minutes/?$', SACommitteeIndex.as_view(), name='section-list-committee-minutes'),
+    url(r'^question/?$', SAQuestionIndex.as_view(), name='section-list-question'),
 )
 
 # Anything else unmatched we assume is dealt with by SayIt (which will
