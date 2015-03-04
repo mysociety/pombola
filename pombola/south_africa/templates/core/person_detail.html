@@ -55,6 +55,15 @@
       </ul>
     {% endif %}
 
+    {% if address_contacts %}
+      <h3>Address</h3>
+      <ul>
+        {% for address in address_contacts %}
+          <li>{{ address }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
     {% if phone_contacts %}
       <h3>Phone</h3>
       <ul>
