@@ -4,6 +4,7 @@ from datetime import date, time
 from StringIO import StringIO
 from tempfile import mkdtemp
 from urlparse import urlparse
+from BeautifulSoup import Tag, NavigableString
 
 from mock import patch
 
@@ -375,6 +376,32 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             len(context['interests'][interest_offset]['categories'][category_offset+1]['entries'][0]),
             len(expected[1]['categories'][2]['entries'][0])
         )
+
+
+@attr(country='south_africa')
+class SAPersonProfileSubPageTest(WebTest):
+    def setUp(self):
+        self.deceased = models.Person.objects.create(
+            legal_name="Deceased Person",
+            slug='deceased-person',
+            date_of_birth='1965-12-31',
+            date_of_death='2010-01-01',
+        )
+
+    def tearDown(self):
+        self.deceased.delete()
+
+    def get_profile_tab(self, soup):
+        return soup.find('div', id='profile')
+
+    def get_profile_info(self, soup):
+        return soup.find('div', id='hfProfileInfo')
+
+    def test_person_death_date(self):
+        response = self.app.get('/person/deceased-person/')
+        profile_tab = self.get_profile_tab(response.html)
+
+        self.assertEqual(profile_tab.findNext('div').p.contents[0], 'Died 1st January 2010')
 
 
 @attr(country='south_africa')

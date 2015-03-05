@@ -108,6 +108,9 @@
   <div id="profile" class="tab-content tab-active">
 
     <div class="person-summary">
+      {% if person.date_of_death %}
+        <p>Died {{ person.date_of_death }}</p>
+      {% endif %}
       {{ person.summary }}
     </div>
 
