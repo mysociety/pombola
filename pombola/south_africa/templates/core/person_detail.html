@@ -24,7 +24,15 @@
       {% for party in object.parties_and_coalitions %}
         <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
       {% empty %}
-        <li>Not a member of any party</li>
+        {% if former_parties %}
+          {% for party in former_parties %}
+            <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+          {% empty %}
+            <li>Not a member of any party</li>
+          {% endfor %}
+        {% else %}
+          <li>Not a member of any party</li>
+        {% endif %}
       {% endfor %}
     </ul>
 

@@ -381,15 +381,33 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 @attr(country='south_africa')
 class SAPersonProfileSubPageTest(WebTest):
     def setUp(self):
+        self.org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
+        self.membership = models.PositionTitle.objects.create(name='Member', slug='member')
+        self.party = models.Organisation(
+            name = 'Test Party',
+            slug = 'test-party',
+            kind = self.org_kind_party,
+        )
+        self.party.save()
+
         self.deceased = models.Person.objects.create(
             legal_name="Deceased Person",
             slug='deceased-person',
             date_of_birth='1965-12-31',
             date_of_death='2010-01-01',
         )
+        self.deceased.position_set.create(
+            title=self.membership,
+            organisation=self.party,
+            start_date='2008-12-12',
+            end_date='2010-01-01',
+        )
 
     def tearDown(self):
         self.deceased.delete()
+        self.party.delete()
+        self.org_kind_party.delete()
+        self.membership.delete()
 
     def get_profile_tab(self, soup):
         return soup.find('div', id='profile')
@@ -402,6 +420,14 @@ class SAPersonProfileSubPageTest(WebTest):
         profile_tab = self.get_profile_tab(response.html)
 
         self.assertEqual(profile_tab.findNext('div').p.contents[0], 'Died 1st January 2010')
+
+    def test_deceased_party_affiliation(self):
+        response = self.app.get('/person/deceased-person/')
+        sidebar = self.get_profile_info(response.html)
+        party_heading = sidebar.findNext('div', class_='constituency-party')
+        party_name = party_heading.findNext('h3', text='Party').findNextSibling('ul').text
+
+        self.assertEqual(party_name.strip(), 'Test Party')
 
 
 @attr(country='south_africa')

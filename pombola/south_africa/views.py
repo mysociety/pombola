@@ -556,6 +556,19 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         return self.object.contacts.filter(kind__slug__in=kind_slugs).values_list(
             'value', flat=True)
 
+    def get_former_parties(self, person):
+        former_party_memberships = (
+            person
+            .position_set
+            .all()
+            .filter(
+              # select the political party memberships
+              ( Q(title__slug='member') & Q(organisation__kind__slug='party') )
+            )
+            .order_by('-start_date')
+        )
+        return models.Organisation.objects.filter(position__in=former_party_memberships).distinct()
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.list_contacts(('twitter',))
@@ -576,6 +589,8 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['question']  = self.get_recent_speeches_for_section("Questions")
 
         context['interests'] = self.get_tabulated_interests()
+        if self.object.date_of_death != None:
+            context['former_parties'] = self.get_former_parties(self.object)
 
         return context
 
