@@ -133,6 +133,20 @@
         {% endif %}
     {% endwith %}
 
+    {% if former_positions %}
+      <h3>Former Positions</h3>
+      <ul class="former-positions positions">
+      {% for position in former_positions %}
+        <li>{% include "core/person_detail_position.html" %}
+          {% if position.start_date %}
+            from {{ position.start_date }}
+          {% endif %}
+          until {{ position.end_date }}
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
     {% if hansard.count or question.count or committee.count %}<h2>Recent Appearances</h2> {% endif %}
 
     {% if committee.count %}

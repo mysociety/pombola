@@ -382,13 +382,21 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 class SAPersonProfileSubPageTest(WebTest):
     def setUp(self):
         self.org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
+        self.org_kind_parliament = models.OrganisationKind.objects.create(name='Parliament', slug='parliament')
         self.membership = models.PositionTitle.objects.create(name='Member', slug='member')
+        self.post = models.PositionTitle.objects.create(name='Speaker', slug='speaker')
         self.party = models.Organisation(
             name = 'Test Party',
             slug = 'test-party',
             kind = self.org_kind_party,
         )
         self.party.save()
+        self.parliament = models.Organisation(
+            name = 'National Assembly',
+            slug = 'national-assembly',
+            kind = self.org_kind_parliament,
+        )
+        self.parliament.save()
 
         self.deceased = models.Person.objects.create(
             legal_name="Deceased Person",
@@ -399,14 +407,52 @@ class SAPersonProfileSubPageTest(WebTest):
         self.deceased.position_set.create(
             title=self.membership,
             organisation=self.party,
+            category='political',
             start_date='2008-12-12',
             end_date='2010-01-01',
+        )
+        self.deceased.position_set.create(
+            title=self.membership,
+            organisation=self.parliament,
+            category='political',
+            start_date='2008-04-01',
+            end_date='2010-01-01',
+        )
+        self.deceased.position_set.create(
+            title=self.post,
+            organisation=self.parliament,
+            category='political',
+            start_date='2008-04-01',
+            end_date='2010-01-01',
+        )
+
+        self.former_mp = models.Person.objects.create(
+            legal_name="Former MP",
+            slug='former-mp',
+        )
+        self.former_mp.position_set.create(
+            title=self.membership,
+            organisation=self.party,
+            category='political',
+            start_date='2010-01-02',
+            end_date='future',
+        )
+        self.former_mp.position_set.create(
+            title=self.membership,
+            organisation=self.parliament,
+            category='political',
+            start_date='2010-04-01',
+            end_date='2014-04-01',
         )
 
     def tearDown(self):
         self.deceased.delete()
+        self.former_mp.delete()
         self.party.delete()
+        self.parliament.delete()
         self.org_kind_party.delete()
+        self.org_kind_parliament.delete()
+        self.post.delete()
         self.membership.delete()
 
     def get_profile_tab(self, soup):
@@ -428,6 +474,32 @@ class SAPersonProfileSubPageTest(WebTest):
         party_name = party_heading.findNext('h3', text='Party').findNextSibling('ul').text
 
         self.assertEqual(party_name.strip(), 'Test Party')
+
+    def test_deceased_former_positions(self):
+        response = self.app.get('/person/deceased-person/')
+        profile_tab = self.get_profile_tab(response.html)
+
+        former_pos_heading = profile_tab.findNext('h3', text='Former Positions')
+        former_pos_list = former_pos_heading.findNextSibling('ul').text
+
+        self.assertNotEqual(former_pos_heading, None)
+
+        # should not report that they were a former party member
+        self.assertNotRegexpMatches(former_pos_list, r'Member\s+at Test Party')
+
+        # check for the former MP and Speaker positions
+        self.assertRegexpMatches(former_pos_list, r'Member\s+at National Assembly \(Parliament\)')
+        self.assertRegexpMatches(former_pos_list, r'Speaker\s+at National Assembly \(Parliament\)')
+
+    def test_former_mp(self):
+        response = self.app.get('/person/former-mp/')
+        profile_tab = self.get_profile_tab(response.html)
+        former_pos_heading = profile_tab.findNext('h3', text='Former Positions')
+        former_pos_list = former_pos_heading.findNextSibling('ul').text
+
+        self.assertNotEqual(former_pos_heading, None)
+
+        self.assertRegexpMatches(former_pos_list, r'Member\s+at National Assembly \(Parliament\)')
 
 
 @attr(country='south_africa')
