@@ -556,6 +556,39 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         return self.object.contacts.filter(kind__slug__in=kind_slugs).values_list(
             'value', flat=True)
 
+    def get_former_parties(self, person):
+        former_party_memberships = (
+            person
+            .position_set
+            .all()
+            .filter(
+              # select the political party memberships
+              ( Q(title__slug='member') & Q(organisation__kind__slug='party') )
+            )
+            .order_by('-start_date')
+        )
+        return models.Organisation.objects.filter(position__in=former_party_memberships).distinct()
+
+    def get_former_positions(self, person):
+        return (
+            person
+            .position_set
+            .all()
+            .political()
+            .currently_inactive()
+            .filter(
+                (
+                    # select positions within important organisations
+                    Q(organisation__slug__in=self.important_organisations)
+
+                    |
+                    # select election-list positions
+                    Q(organisation__kind__slug='election-list')
+                )
+            )
+            .order_by('-end_date','-start_date')
+        )
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.list_contacts(('twitter',))
@@ -570,12 +603,17 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['address_contacts'] = self.list_contacts(('address',))
         context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
 
+        if len(self.object.position_set.all().political().currently_active()) < 2:
+            context['former_positions'] = self.get_former_positions(self.object)
+
         # FIXME - the titles used here will need to be checked and fixed.
         context['hansard']   = self.get_recent_speeches_for_section("Hansard")
         context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
         context['question']  = self.get_recent_speeches_for_section("Questions")
 
         context['interests'] = self.get_tabulated_interests()
+        if self.object.date_of_death != None:
+            context['former_parties'] = self.get_former_parties(self.object)
 
         return context
 

@@ -24,7 +24,15 @@
       {% for party in object.parties_and_coalitions %}
         <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
       {% empty %}
-        <li>Not a member of any party</li>
+        {% if former_parties %}
+          {% for party in former_parties %}
+            <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+          {% empty %}
+            <li>Not a member of any party</li>
+          {% endfor %}
+        {% else %}
+          <li>Not a member of any party</li>
+        {% endif %}
       {% endfor %}
     </ul>
 
@@ -108,6 +116,9 @@
   <div id="profile" class="tab-content tab-active">
 
     <div class="person-summary">
+      {% if person.date_of_death %}
+        <p>Died {{ person.date_of_death }}</p>
+      {% endif %}
       {{ person.summary }}
     </div>
 
@@ -121,6 +132,20 @@
           </ul>
         {% endif %}
     {% endwith %}
+
+    {% if former_positions %}
+      <h3>Former Positions</h3>
+      <ul class="former-positions positions">
+      {% for position in former_positions %}
+        <li>{% include "core/person_detail_position.html" %}
+          {% if position.start_date %}
+            from {{ position.start_date }}
+          {% endif %}
+          until {{ position.end_date }}
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
 
     {% if hansard.count or question.count or committee.count %}<h2>Recent Appearances</h2> {% endif %}
 
