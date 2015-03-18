@@ -45,7 +45,11 @@ fi
 REPOSITORY="$DIRECTORY/pombola"
 LINK_DESTINATION="$HOME/pombola"
 
-ln -sfn "$REPOSITORY" $LINK_DESTINATION
+if [ x"$(readlink -f "$REPOSITORY")" != x"$(readlink -f "$LINK_DESTINATION")" ]
+then
+    ln -sfn "$REPOSITORY" $LINK_DESTINATION
+fi
+
 cd "$REPOSITORY"
 
 # Set up a GEM_HOME for site-local installation of compass and other gems:
