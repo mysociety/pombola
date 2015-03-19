@@ -1,7 +1,7 @@
 (function() {
 
     // Percentage of users to display the survey for
-    var percentage = 0.6,
+    var percentage = 1,
         cookie_time = null,
         cookie_array = document.cookie.split(';'),
         i, cookie, time, site_time, link, data, query_string;
