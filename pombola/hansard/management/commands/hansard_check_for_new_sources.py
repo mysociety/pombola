@@ -1,9 +1,17 @@
 
-# This script changed extensively when the Kenyan Parliament website changed after the 2013 Election.
+# This script was first changed extensively when the Kenyan Parliament website
+# changed after the 2013 Election.
+#
+# The pre-2013 Election version can be seen at:
+#
+#    https://github.com/mysociety/pombola/blob/7181e30519b140229e3817786e4a7440ac08288d/mzalendo/hansard/management/commands/hansard_check_for_new_sources.py
+#
+# It was then changed again after the Kenyan Parliament website was
+# given an overhaul during the Christmas 2014 break.
 #
 # The previous version can be seen at:
 #
-#    https://github.com/mysociety/pombola/blob/7181e30519b140229e3817786e4a7440ac08288d/mzalendo/hansard/management/commands/hansard_check_for_new_sources.py
+#    https://github.com/mysociety/pombola/blob/ec4a44f7d7e0743426aff87b59e4bfa54250ec1c/pombola/hansard/management/commands/hansard_check_for_new_sources.py
 
 import pprint
 import httplib2
@@ -12,6 +20,7 @@ import datetime
 import sys
 import parsedatetime as pdt
 from warnings import warn
+from urlparse import urlsplit, urlunsplit
 
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 
@@ -39,9 +48,9 @@ class Command(NoArgsCommand):
 
         for list_page, url in (
             ('senate',
-             'http://www.parliament.go.ke/plone/senate/business/hansard'),
+             'http://www.parliament.go.ke/index.php/the-senate/house-business/hansard'),
             ('national-assembly',
-             'http://www.parliament.go.ke/plone/national-assembly/business/hansard'),
+             'http://www.parliament.go.ke/index.php/the-national-assembly/house-business/hansard'),
         ):
             try:
                 self.process_url(list_page, url, verbose)
@@ -56,81 +65,128 @@ class Command(NoArgsCommand):
         If no sources found raise an exception.
         """
 
-        h = httplib2.Http( settings.HTTPLIB2_CACHE_DIR )
-        response, content = h.request(url)
-        # print content
+        # using the pagination links on the list pages themselves, iterate
+        # over all the list pages until we're up to date (hopefully needing
+        # to go beyond page 1 will be a rare occurence, mostly reserved for
+        # when the scraper hasn't run for a while such as a major update to
+        # the target site necessitating a adjustment to this script)
 
-        # parse content
-        soup = BeautifulSoup(
-            content,
-            convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+        for soup, base_url in self.get_index_pages(url, list_page, verbose):
+            # Grab each of the blocks on the current page which are supposed
+            # to contain a link to a PDF file.
+            link_sections = soup.findAll('div', 'catItemView groupPrimary')
+
+            links = [
+                section.find('div', 'catItemAttachmentsBlock').a
+                for section in link_sections
+            ]
+
+            # Check that we found some links. This is to detect when the page
+            # changes or our scraper breaks (see issue #905 for example).
+            # Checking that the most recent source is not more that X weeks
+            # old might also be a good idea, but could lead
+            # to lots of false positives as there is often a long hiatus.
+            if not len(links):
+                raise NoSourcesFoundError()
+
+            for idx, link in enumerate(links):
+                # print '==============='
+                # print link
+
+                href = link['href'].strip()
+                # print "href: " + href
+
+                name = ' '.join(link_sections[idx].find("h3", "catItemTitle").contents).strip()
+                # print "name: " + name
+
+                if Source.objects.filter(
+                    list_page=list_page,
+                    name=name,
+                ).exists():
+                    if verbose:
+                        message = "{0}: Skipping page with name: {1}"
+                        print message.format(list_page, name)
+                    get_next_page = False
+                else:
+                    if verbose:
+                        message = "{0} Trying to add page with name {1} as a new source"
+                        print message.format(list_page, name)
+                    get_next_page = True
+
+                    self.extract_source_from_html(href, name, list_page, links, link_sections, idx, base_url)
+
+            # Stop scraping list pages if the last source link on the page has
+            # already been processed (potentially fragile if we lose the link
+            # to the server part way through as this gives us no means of
+            # moving beyond the first page if, for example, page 1 has been
+            # processed but pages 2 and 3 have not)
+            if get_next_page == False:
+                break
+
+
+    def extract_source_from_html(self, href, name, list_page, links, link_sections, idx, base_url):
+        download_url = self.format_url(href.strip(), base_url)
+        # print download_url
+
+        cal = pdt.Calendar()
+        # Sometimes the space is missing between before the
+        # month, so insert that if it appears to be missing:
+        tidied_name = re.sub(r'(\d+(st|nd|rd|th))(?=[^ ])', '\\1 ', name)
+        # Commas in the name confuse parsedatetime, so strip
+        # them out too:
+        tidied_name = re.sub(r',', '', tidied_name)
+        # Sometimes there are extra spaces - which also
+        # confuse parsedatetime, so strip them out as well:
+        tidied_name = ' '.join(tidied_name.split())
+        result = cal.parseDateText(tidied_name)
+        source_date = datetime.date(*result[:3])
+        # print "source_date: " + str(source_date)
+
+        # create the source entry
+        Source.objects.create(
+            name = name,
+            url = download_url,
+            date = source_date,
+            list_page = list_page,
         )
 
-        spans = soup.findAll( 'span', 'contenttype-repositoryitem summary')
 
-        links = [ span.a for span in spans ]
+    def get_index_pages(self, url, list_page, verbose):
+        h = httplib2.Http( settings.HTTPLIB2_CACHE_DIR )
+        next_url = url
+        i = 0
 
-        # Check that we found some links. This is to detect when the page changes or our
-        # scraper breaks (see issue #905 for example). Checking that the most recent
-        # source is not more that X weeks old might also be a good idea, but could lead
-        # to lots of false positives as there is often a long hiatus.
-        if not len(links):
-            raise NoSourcesFoundError()
+        while next_url:
+            if verbose:
+                i+=1
+                message = "\nAttempting to get list page {0} for {1}"
+                print message.format(i, list_page)
+            response, content = h.request(next_url)
 
-        for link in links:
+            # parse content
+            soup = BeautifulSoup(
+                content,
+                convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+            )
 
-            # print '==============='
-            # print link
+            url_parts = urlsplit(next_url)
+            base_url = urlunsplit((url_parts.scheme, url_parts.netloc, '', '', ''))
 
-            href = link['href'].strip()
-            # print "href: " + href
+            next_url = self.get_next_url(soup, base_url)
 
-            name = ' '.join(link.contents).strip()
-            # print "name: " + name
-
-            if Source.objects.filter(
-                list_page=list_page,
-                name=name,
-            ).exists():
-                if verbose:
-                    message = "{0}: Skipping page with name: {1}"
-                    print message.format(list_page, name)
-            else:
-                if verbose:
-                    message = "{0} Trying to add page with name {1} as a new source"
-                    print message.format(list_page, name)
-
-                cal = pdt.Calendar()
-                # Sometimes the space is missing between before the
-                # month, so insert that if it appears to be missing:
-                tidied_name = re.sub(r'(\d+(st|nd|rd|th))(?=[^ ])', '\\1 ', name)
-                # Commas in the name confuse parsedatetime, so strip
-                # them out too:
-                tidied_name = re.sub(r',', '', tidied_name)
-                result = cal.parseDateText(tidied_name)
-                source_date = datetime.date(*result[:3])
-                # print "source_date: " + str(source_date)
+            yield soup, base_url
 
 
-                # I don't trust that we can accurately create the download link url with the
-                # details that we have. Instead fetche the page and extract the url.
-                download_response, download_content = h.request(href)
-                download_soup = BeautifulSoup(
-                    download_content,
-                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES
-                )
-                download_div = download_soup.find( id="archetypes-fieldname-item_files" )
-                if not download_div:
-                    warn("Failed to find the download div on {0}".format(href))
-                    continue
+    def format_url(self, url, base_url):
+        if url[0] == '/':
+            return base_url + url
+        else:
+            return url
 
-                download_url = download_div.a['href']
-                # print download_url
 
-                # create the source entry
-                Source.objects.create(
-                    name = name,
-                    url = download_url,
-                    date = source_date,
-                    list_page = list_page,
-                )
+    def get_next_url(self, soup, base_url):
+        next_page_button = soup.find('li', 'pagination-next')
+        if next_page_button.a:
+            return self.format_url(next_page_button.a['href'].strip(), base_url)
+        else:
+            return None
