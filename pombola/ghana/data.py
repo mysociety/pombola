@@ -106,8 +106,9 @@ def add_mp(obj):
                                    organisation=parliament,
                                    place=constituency,
                                    start_date=term_start,
-                                   end_date=term_end)
-    
+                                   end_date=term_end,
+                                   category=str('political'))
+
     mp, _ = MP.objects.get_or_create(person=person,
                                   party_position=party_position,
                                   parliament_position=mp_position)
@@ -175,7 +176,7 @@ def add_info_page(slug, title, content):
         page = InfoPage(slug=slug)
 
     page.title = title
-    page.content = unicode(content, 'utf-8')
+    page.markdown_content = unicode(content, 'utf-8')
     return page.save()
 
 

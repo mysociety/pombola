@@ -12,16 +12,18 @@
     <link rel="shortcut icon" type="image/x-icon"
           href="{{ STATIC_URL }}images/favicon.ico" />
 
-    {% load compressed %}
-
     {% block styles %}
+
+    {% load compressed %}
     {% compressed_css 'ghana-base' %}
+
     {% endblock %}
 
     {% block extra_styles %}
     {% endblock %}
 
     {% block scripts %}
+
     {% compressed_js 'ghana' %}
     
     {% comment %}

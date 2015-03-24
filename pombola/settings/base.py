@@ -283,7 +283,7 @@ HAYSTACK_CONNECTIONS = {
     #},
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://192.168.1.39:9200/',
+        'URL': 'http://pombola:9200/',
         'INDEX_NAME': config.get('POMBOLA_DB_NAME'),
         'EXCLUDED_INDEXES': [],
     },
@@ -563,8 +563,10 @@ PIPELINE_COMPILERS = (
   'pipeline_compass.compass.CompassCompiler',
 )
 
+
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
+
 
 PIPELINE_YUI_BINARY = '/usr/bin/env yui-compressor'
 
