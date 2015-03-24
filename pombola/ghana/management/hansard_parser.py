@@ -5,6 +5,9 @@ import datetime
 # Constants for various types of line that might be found in the transcript
 BLANK            = 'blank'
 SERIES_VOL_NO    = 'series volume number'
+SERIES_ONLY      = 'series'
+VOL_ONLY         = 'volume'
+NO_ONLY          = 'number'
 TIME             = 'time'
 DATE             = 'date'
 START_TIME       = 'start time'
@@ -23,6 +26,10 @@ ADJOURNMENT      = 'adjournment'
 PRINTED_BY_MARKER = 'printed by department of official report'
 
 SERIES_VOL_NO_PATTERN = r'^\s*([A-Z]+)\s+SERIES\s+VOL\.?\s*(\d+)\s*N(O|o|0)\.?\s*(\d+)\s*$'
+SERIES_ONLY_PATTERN   = r'^\s*([A-Z]+)\s+SERIES'
+VOL_ONLY_PATTERN      = r'^\s*VOL\.?\s*(\d+)'
+NO_ONLY_PATTERN       = r'^\s*N[oO0]\.?\s*(\d+)'
+
 DATE_PATTERN = r'^\s*([A-Za-z]+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d+)\s*$'
 
 TITLES_TEMPLATE = '(Mr|Mrs|Ms|Miss|Papa|Alhaji|Madam|Dr|Prof|Chairman|Chairperson|Minister|An Hon Mem|Some Hon Mem|Minority|Majority|Nana)'
@@ -54,7 +61,7 @@ CHAIR_PATTERN = r'^\[\s*(.*?)\s+IN\s+THE\s+CHAIR\s*\]$'
 #LONG_DATE_PATTERN = r'^%s[,]?\s+\d+%s\w+,\d{4}'%(WEEKDAY_TEMPLATE,DATE_SUFFIX_TEMPLATE)
 ADJOURNMENT_PATTERN = r'^The\s+House\s+was\s+(accordingly\s+)?adjourned\s+at\s+(%s)\s+till\s+(.*)\s+at\s+(%s).*\s*$'%(TIME_TEMPLATE,TIME_TEMPLATE)
 
-MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, 
+MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6,
               jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
 
 ORDINAL_WORDS = dict(first=1, second=2, third=3, fourth=4, fifth=5,
@@ -64,6 +71,9 @@ ORDINAL_WORDS = dict(first=1, second=2, third=3, fourth=4, fifth=5,
 HEADER_PATTERNS = (
     (DATE, DATE_PATTERN),
     (SERIES_VOL_NO, SERIES_VOL_NO_PATTERN),
+    (SERIES_ONLY, SERIES_ONLY_PATTERN),
+    (VOL_ONLY, VOL_ONLY_PATTERN),
+    (NO_ONLY, NO_ONLY_PATTERN),
     (TIME, START_TIME_PATTERN),
 )
 
@@ -86,7 +96,7 @@ PATTERNS = (
 def parse(content):
     lines = normalised_lines(content)
     lines = scan(lines)
-        
+
     head = parse_head(lines) # end_line
     entries = parse_body(body(lines)) # start_line
     return head, entries
@@ -102,7 +112,7 @@ def parse_head(lines):
     """
 
     series = volume = number = date = time = None
-    
+
     for i, row in enumerate(lines):
         # print row
         kind, line, match = row
@@ -110,9 +120,15 @@ def parse_head(lines):
             series = ORDINAL_WORDS[match.group(1).lower()]
             volume = int(match.group(2))
             number = int(match.group(4))
+        elif SERIES_ONLY == kind:
+            series = ORDINAL_WORDS[match.group(1).lower()]
+        elif VOL_ONLY == kind:
+            volume  = int(match.group(1))
+        elif NO_ONLY == kind:
+            number = int(match.group(1))
         elif DATE == kind and not date:
             date = datetime.date(int(match.group(4)),
-                                 MONTHS[match.group(3).lower()[:3]], 
+                                 MONTHS[match.group(3).lower()[:3]],
                                  int(match.group(2)))
         elif TIME == kind and not time:
             time = parse_time(''.join(match.groups()))
@@ -129,7 +145,7 @@ def parse_head(lines):
 
 def parse_body(lines):
     entries = []
-    
+
     time = None
     topic = None
     #page = None
@@ -139,11 +155,11 @@ def parse_body(lines):
 
     while len(lines):
 
-        kind, line, match = lines.pop(0)        
-        
+        kind, line, match = lines.pop(0)
+
         # store any entry details here. Later we'll add common fields as required
         entry = None
-        
+
         if kind is LINE:
             if len(entries) and entries[-1].get('name', None):
                     kind = SPEECH
@@ -165,7 +181,7 @@ def parse_body(lines):
             entry = dict(action=match.group(3), name=person.strip(), column=column)
         elif kind is PAGE_HEADER:
             # pages = '%s' % (match.group(1))
-            column = match.group(1) 
+            column = match.group(1)
             #title = '%s%s' % (match.group(2),match.group(4))
             #entries.append(dict(page=pages))
         elif kind is SCENE_START:
@@ -175,7 +191,7 @@ def parse_body(lines):
             m = re.match(CHAIR_PATTERN, entry['scene'])
             if m:
                 kind = CHAIR
-                entry = dict(chair=m.group(1), 
+                entry = dict(chair=m.group(1),
                              original=entry['original'], column=column)
             else:
                 kind = SCENE
@@ -188,7 +204,7 @@ def parse_body(lines):
                     speech = parse_speech(time, match, lines,name=prev_entry['name'])
                     entry = dict(speech.items() + \
                                  dict(section=section, column=column).items())
-        
+
         elif kind is CHAIR:
             entry = dict(chair=match.group(1), original=line, column=column)
         elif kind is ADJOURNMENT:
@@ -198,7 +214,7 @@ def parse_body(lines):
         else:
             # print "skipping '%s': '%s'" % ( kind, line )
             pass
-        
+
         if entry:
 
             entry['time']     = time
@@ -214,7 +230,7 @@ def parse_body(lines):
 
 
 def chair(match, line, column):
-    return dict(chair=match.group(1), original=line, column=column) 
+    return dict(chair=match.group(1), original=line, column=column)
 
 
 def parse_scene(time, match, lines, line=''):
@@ -223,9 +239,9 @@ def parse_scene(time, match, lines, line=''):
 
     while len(lines):
         kind, line, match = lines.pop(0)
-        
+
         original += '\n' + line.strip()
-        
+
         if kind == SCENE_END:
             scene += ' ' + line.strip()
             break
@@ -254,7 +270,7 @@ def parse_speech(time, match, lines, name=None):
 
     while len(lines):
         kind, line, match = lines.pop(0)
-        if kind == LINE: 
+        if kind == LINE:
             speech += ' ' + line
         elif kind == BLANK:
             speech = speech.strip() + '\n'
@@ -342,10 +358,10 @@ def normalise_line_breaks(content):
         ( r'\r',     '\n' ), # convert any vertical whitespace to '\n'
         ( r'[ \t]+', ' '  ), # horizontal whitespace becomes single space
         ( r' *\n *', '\n' ), # trim spaces from around newlines
-        
+
         # Add breaks around the column numbers
         ( r'\s*(\[\d+\])\s*', r"\n\n\1\n\n" ),
-        
+
         # Add breaks around anything that is all in CAPITALS
         ( r'^([^a-z]+?)$', r"\n\n\1\n\n" ),
         # not sure why the '+?' can't just be '+' - if it is just '+' the
@@ -357,13 +373,13 @@ def normalise_line_breaks(content):
         # Add breaks around timestamps
         ( r'^(%s)$' % TIME_TEMPLATE, r"\n\n\1\n\n"),
         # ( DATE_PATTERN, r"\n\n\1\n\n"),
-        
+
         (SERIES_VOL_NO_PATTERN, r'\n\n\1 SERIES VOL \2 No. \4\n\n'),
 
         # Add a break before anything that looks like it might be a person's
         # name at the start of a speech
         ( r'^(%s.+:)' % TITLES_TEMPLATE, r'\n\n\1' ),
-        
+
         # Finally normalise the whitespace
         ( r'(\S)\n(\S)', r'\1 \2' ), # wrap consecutive lines
         ( r'\n\n+', "\n\n" ),        # normalise line breaks
@@ -372,7 +388,7 @@ def normalise_line_breaks(content):
     # apply all the transformations above
     for pattern, replacement in transformations:
         content = re.sub( pattern, replacement, content, flags=re.M )
-    
+
     return content.strip()
 
 def preprocess(content):
@@ -382,12 +398,12 @@ def preprocess(content):
     # content = content.decode('utf8')
     content = ''.join(content.split(u'\xaf'))
     # content = content.decode('utf8')
-    for s, r in [(u'\u2013', '-'), (u'\ufeff', ''), 
-                 (u'O\ufb01icial', 'Official'), 
-                 (u'Of\ufb01cial', 'Official'), 
-                 (u'\ufb01', 'fi'), (u'\ufb02', 'ff'), 
+    for s, r in [(u'\u2013', '-'), (u'\ufeff', ''),
+                 (u'O\ufb01icial', 'Official'),
+                 (u'Of\ufb01cial', 'Official'),
+                 (u'\ufb01', 'fi'), (u'\ufb02', 'ff'),
                  (u'\u2019', "'"),
-                 ('~', '-'), 
+                 ('~', '-'),
                  ]:
         content = r.join(content.split(s))
     return content
