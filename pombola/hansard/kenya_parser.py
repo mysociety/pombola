@@ -311,10 +311,27 @@ class KenyaParser():
         )
 
         # regexps to capture the times
-        na_reg  = re.compile(r"The House (?P<action>met|rose) (?:at )?(?P<time>\d+\.\d+ [ap].m.)")
-        sen_reg = re.compile(r"The Senate (?P<action>met|rose).* (?:at )?(?P<time>\d+\.\d+ [ap].m.)")
-        reg     = None
+        na_reg  = re.compile(r"""
+            The\ House\s
+            (?P<action>met|rose)\s
+            (?:at\ )?
+            (?P<time>\d+\.\d+\ [ap].m.)""", re.VERBOSE)
+
+        # not ideal as this could accidentally match na_reg as well,
+        # relies on na_reg always being checked first
+        sen_reg = re.compile(r"""
+            The\ (?:House|Senate)\s
+            (?P<action>met|rose)\s
+            (?:at\ the\ Senate\ Chamber\ )?.*
+            (?:at\ )?
+            (?P<time>\d+\.\d+\ [ap].m.)""", re.VERBOSE)
+
+        reg   = None
         venue = None
+
+        # TODO - match Joint Sittings properly - should assign
+        # national_assembly as the venue, working out the time
+        # will not be trivial as it's written out in longhand
 
         # work out which one we should use
         for line in transcript:
