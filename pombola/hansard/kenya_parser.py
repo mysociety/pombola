@@ -19,6 +19,72 @@ class KenyaParserCouldNotParseTimeString(Exception):
 
 
 class KenyaParser():
+    """
+    # match National Assembly start and end times
+    >>> result = KenyaParser.na_reg.match("The House met at 10.15 a.m.")
+    >>> result.group('action')
+    'met'
+    >>> result.group('time')
+    '10.15 a.m.'
+    >>> result = KenyaParser.na_reg.match("The House rose at 6.45 p.m.")
+    >>> result.group('action')
+    'rose'
+
+    # match the Senate start and end times
+    >>> result = KenyaParser.sen_reg.match("The Senate met at 10.15 a.m.")
+    >>> result.group('action')
+    'met'
+    >>> result = KenyaParser.sen_reg.match("The House met at the Senate Chamber at 10.15 a.m.")
+    >>> result.group('time')
+    '10.15 a.m.'
+    >>> result = KenyaParser.sen_reg.match("The House met at the Senate Chamber, Parliament Buildings, at 10.15 a.m.")
+    >>> result.group('time')
+    '10.15 a.m.'
+    >>> result = KenyaParser.sen_reg.match("The House rose at 6.45 p.m.")
+    >>> result.group('action')
+    'rose'
+    >>> result = KenyaParser.sen_reg.match("The Senate rose at 6.45 p.m.")
+    >>> result.group('action')
+    'rose'
+
+    # match Joint Sitting start and end times
+    >>> result = KenyaParser.joint_reg.match("Parliament rose at 6.45 p.m.")
+    >>> result.groups()
+    ('rose', '6.45 p.m.')
+    >>> result = KenyaParser.joint_reg.match("Parliament met at Fifty eight minutes past Nine o'clock in the National Assembly Chamber")
+    >>> result.groups()
+    ('met', "Fifty eight minutes past Nine o'clock")
+    """
+
+    na_reg  = re.compile(r"""
+        The\ House\s
+        (?P<action>met|rose)\s
+        (?:at\ )?
+        (?P<time>\d+\.\d+\ [ap].m.)""", re.VERBOSE)
+
+    # not ideal as this could accidentally match na_reg as well,
+    # relies on na_reg always being checked first
+    sen_reg = re.compile(r"""
+        The\ (?:House|Senate)\s
+        (?P<action>met|rose)
+        (?:
+            \ at\ the\ Senate\ Chamber
+            (?:,\ Parliament\ Buildings,)?
+        )?
+        (?:\ at\ )?
+        (?P<time>\d+\.\d+\ [ap].m.)""", re.VERBOSE)
+
+    joint_reg = re.compile(r"""
+        Parliament\s
+        (?P<action>(?:met|rose))\s
+        at\s
+        (?P<time>
+            (?:(?:[A-Za-z\- ]+\ minutes?\ (?:past|to)\ )?[A-Za-z]+\ o'clock)
+            |
+            (?:\d+\.\d+\ [ap].m.)
+        )
+        (?:\ in\ the\ National\ Assembly\ Chamber)?""", re.VERBOSE)
+
 
     @classmethod
     def convert_pdf_to_html(cls, pdf_file):
@@ -310,28 +376,8 @@ class KenyaParser():
             defaults = {"name": "Senate"},
         )
 
-        # regexps to capture the times
-        na_reg  = re.compile(r"""
-            The\ House\s
-            (?P<action>met|rose)\s
-            (?:at\ )?
-            (?P<time>\d+\.\d+\ [ap].m.)""", re.VERBOSE)
-
-        # not ideal as this could accidentally match na_reg as well,
-        # relies on na_reg always being checked first
-        sen_reg = re.compile(r"""
-            The\ (?:House|Senate)\s
-            (?P<action>met|rose)\s
-            (?:at\ the\ Senate\ Chamber\ )?.*
-            (?:at\ )?
-            (?P<time>\d+\.\d+\ [ap].m.)""", re.VERBOSE)
-
         reg   = None
         venue = None
-
-        # TODO - match Joint Sittings properly - should assign
-        # national_assembly as the venue, working out the time
-        # will not be trivial as it's written out in longhand
 
         # work out which one we should use
         for line in transcript:
@@ -343,6 +389,10 @@ class KenyaParser():
             elif sen_reg.search(text):
                 reg = sen_reg
                 venue = senate
+                break
+            elif joint_reg.search(text):
+                reg = joint_reg
+                venue = national_assembly
                 break
 
         if venue is None:
@@ -378,20 +428,67 @@ class KenyaParser():
         # there must be one.
 
         time_regex = re.compile( r'(\d+)\.(\d+) (a|p)')
-        match = time_regex.match(time_string)
+        match_simple = time_regex.match(time_string)
 
-        if not match:
+        verbose_time_regex = re.compile(r"(?:(?:(?P<minutes>[A-Za-z\- ]+) minutes? (?P<qualifier>past|to) ))?(?P<hour>[tA-Za-z]+) o'clock")
+        match_verbose = verbose_time_regex.match(time_string)
+
+        if match_simple:
+            hour, minute, am_or_pm = match_simple.groups()
+
+            hour   = int(hour)
+            minute = int(minute)
+
+            if am_or_pm == 'p' and hour < 12:
+                hour += 12
+
+        elif match_verbose:
+            # attempt to translate words to numbers
+            hour   = cls.number_word_to_int(match_verbose.group('hour'))
+            minute = cls.number_word_to_int(match_verbose.group('minutes'))
+
+            # I don't think this phrasing is used, but just in case
+            if match_verbose.group('qualifier') == 'to':
+                minute = 60 - minute
+                hour = hour - 1
+
+            # make horrible assumption to get am/pm
+            if hour < 8:
+                hour += 12
+        else:
             raise KenyaParserCouldNotParseTimeString( "bad time string: '%s'" % time_string )
 
-        hour, minute, am_or_pm = match.groups()
-
-        hour   = int(hour)
-        minute = int(minute)
-
-        if am_or_pm == 'p' and hour < 12:
-            hour += 12
-
         return '%02u:%02u:00' % (hour,minute)
+
+
+    @classmethod
+    # adapted from http://stackoverflow.com/questions/493174/is-there-a-way-to-convert-number-words-to-integers-python#answer-493788
+    def number_word_to_int(cls, textnum):
+        if not textnum:
+            return 0
+
+        numwords = {}
+        units = [
+            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+            "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+            "sixteen", "seventeen", "eighteen", "nineteen",
+        ]
+
+        tens = ["", "", "twenty", "thirty", "forty", "fifty"]
+
+        for idx, word in enumerate(units):  numwords[word] = (1, idx)
+        for idx, word in enumerate(tens):   numwords[word] = (1, idx * 10)
+
+        textnum = textnum.replace('-', ' ').lower().strip()
+        current = 0
+        for word in textnum.split():
+            if word not in numwords:
+              raise Exception("Illegal word: " + word)
+
+            scale, increment = numwords[word]
+            current = current * scale + increment
+
+        return current
 
 
     @classmethod
@@ -399,6 +496,18 @@ class KenyaParser():
         """Create the needed sitting and entries"""
 
         venue = Venue.objects.get( slug=data['meta']['venue'] )
+
+        # Joint Sittings can be published by both Houses (identical documents)
+        # prevent the same Sitting being created twice
+        if 'Joint Sitting' in source.name \
+            and Sitting.objects.filter(
+                    venue=venue,
+                    source__name=source.name,
+                    start_date=source.date,
+                    start_time=data['meta'].get('start_time', None)
+                ).exists():
+            print "skipping duplicate source %s for %s" % (source.name, source.date)
+            return None
 
         sitting = Sitting(
             source     = source,

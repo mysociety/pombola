@@ -248,6 +248,10 @@ class KenyaParserTest(TestCase):
             '1.00 a.m.':  '01:00:00',
             '12.00 p.m.': '12:00:00', # am and pm make no sense at noon or midnight - but define what we want to happen
             '12.30 p.m.': '12:30:00',
+            "twenty-four minutes past Six o'clock" : '18:24:00',
+            "Fifteen minutes to two o'clock" : '13:45:00',
+            "Fifty five minutes past Nine o'clock" : '09:55:00',
+            "One minute past eight o'clock": '08:01:00'
         }
 
         for string, output in time_tests.items():
