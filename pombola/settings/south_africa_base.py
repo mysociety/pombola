@@ -79,6 +79,12 @@ COUNTRY_JS = {
         ),
         'output_filename': 'js/interests-filter.js',
         'template_name': 'pipeline/js-array.html',
+    },
+    'survey': {
+        'source_filenames': (
+            'js/survey.js',
+        ),
+        'output_filename': 'js/survey.js',
     }
 }
 

@@ -2663,3 +2663,20 @@ ul.pager {
     font-family: 'Inconsolata', "Courier New", Courier, monospace;
     font-size: 14px;
 }
+
+#ms_srv_wrapper {
+  background-color: #444;
+  color: #FFF;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 10px;
+  text-align: center;
+
+  a {
+    color: #EEE;
+
+    &:hover {
+      color: #FFF;
+    }
+  }
+}
