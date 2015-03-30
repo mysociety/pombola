@@ -19,10 +19,11 @@ class Command(NoArgsCommand):
                 message = "{0}: Looking at {1}"
                 print message.format(source.list_page, source)
 
+            pdf = source.file()
+
             source.last_processing_attempt = datetime.datetime.now()
             source.save()
 
-            pdf = source.file()
             try:
                 html = KenyaParser.convert_pdf_to_html( pdf )
                 data = KenyaParser.convert_html_to_data( html )
