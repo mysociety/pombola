@@ -16,13 +16,13 @@ class EntryQuerySet(models.query.QuerySet):
 
         dates = self.dates('sitting__start_date','month', 'DESC')
         counts = []
-        
+
         for d in dates:
             qs = self.filter(sitting__start_date__month=d.month, sitting__start_date__year=d.year)
             counts.append(dict(date=d, count=qs.count()))
 
         return counts
-        
+
     def unassigned_speeches(self):
         """All speeches that do not have a speaker assigned"""
         return self.filter(
@@ -35,7 +35,7 @@ class EntryQuerySet(models.query.QuerySet):
 class EntryManager(models.Manager):
     def get_query_set(self):
         return EntryQuerySet(self.model)
-    
+
 
 class Entry(HansardModelBase):
     """Model for representing an entry in Hansard - speeches, headings etc"""
@@ -52,9 +52,9 @@ class Entry(HansardModelBase):
 
     # page_number is the page that this appeared on in the source.
     page_number   = models.IntegerField( blank=True )
-    
+
     # Doesn't really mean anything - just a counter so that for each sitting we
-    # can display the entries in the correct order. 
+    # can display the entries in the correct order.
     text_counter  = models.IntegerField()
 
     # Speakers only apply to the 'speech' type. For those we should always have
@@ -71,7 +71,7 @@ class Entry(HansardModelBase):
 
     def __unicode__(self):
         return "%s: %s" % (self.type, self.content[:100])
-    
+
     def get_absolute_url(self):
         sitting_url = self.sitting.get_absolute_url()
         return "%s#entry-%u" % (sitting_url, self.id)
@@ -83,11 +83,11 @@ class Entry(HansardModelBase):
         ordering = ['sitting', 'text_counter']
         app_label = 'hansard'
         verbose_name_plural = 'entries'
-        
+
     @classmethod
     def assign_speakers(cls):
         """Go through all entries and assign speakers"""
-        
+
         entries = cls.objects.all().unassigned_speeches()
         # entries = entries.filter(speaker_name__icontains='Speaker')
         # create an in memory cache of speaker names and the sitting dates, to
@@ -105,8 +105,8 @@ class Entry(HansardModelBase):
             if speakers and len(speakers) == 1:
                 speaker = speakers[0]
                 entry.speaker = speaker
-                entry.save()                
-                    
+                entry.save()
+
     def possible_matching_speakers2(self):
         alias = Alias.objects.filter(alias=self.speaker_name)
         if len(alias):
@@ -119,6 +119,16 @@ class Entry(HansardModelBase):
                 return speakers
         return None
 
+    def alias_match_score(self, name_one, name_two):
+        """
+        Return a score based on the intersection of two names including titles
+        minus all punctuation.
+        """
+        set_one = set(filter(lambda item : len(item) > 1, re.sub('[^A-Za-z]',' ', name_one).split()))
+        set_two = set(filter(lambda item : len(item) > 1, re.sub('[^A-za-z]',' ', name_two).split()))
+        return len(set_one & set_two)
+
+
     def possible_matching_speakers(self, update_aliases=False):
         """
         Return array of person objects that might be the speaker.
@@ -130,11 +140,10 @@ class Entry(HansardModelBase):
 
         name = self.speaker_name
         name = Alias.clean_up_name( name )
-        
         # First check for a matching alias that is not ignored
         try:
             alias = Alias.objects.get( alias=name )
-            
+
             if alias.ignored:
                 # if the alias is ignored we should not match anything
                 return []
@@ -150,27 +159,33 @@ class Entry(HansardModelBase):
 
         except Alias.DoesNotExist:
             alias = None
-        
+
         # drop the prefix
         stripped_name = re.sub( r'^\w+\.\s', '', name )
-        
+
         person_search = (
             Person
             .objects
             .all()
             .is_politician( when=self.sitting.start_date )
-            .filter(legal_name__icontains=stripped_name)
+            #.filter(legal_name__icontains=stripped_name)
             .distinct()
         )
-        
+
+
         results = person_search.all()[0:]
-        
+        #removed filter and used this to match based on common name parts
+        results = sorted([ i for i in results  if self.alias_match_score('%s %s'%(i.title, i.legal_name), name) > 1 ],
+                          key = lambda x: self.alias_match_score('%s %s'%(x.title, x.legal_name), name),
+                          reverse=True
+                          )
+
         found_one_result = len(results) == 1
 
         # If there is a single matching speaker and an unassigned alias delete it
         if found_one_result and alias and alias.is_unassigned:
             alias.delete()
-            
+
         # create an entry in the aliases table if one is needed
         if not alias and update_aliases and not found_one_result and not Alias.can_ignore_name(name):
             Alias.objects.create(
@@ -178,7 +193,7 @@ class Entry(HansardModelBase):
                 ignored = False,
                 person  = None,
             )
-        
+
         return results
 
 
