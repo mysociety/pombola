@@ -17,6 +17,7 @@ SCENE            = 'scene'
 SPEECH           = 'speech'
 ACTION           = 'action'
 PAGE_HEADER      = 'page header'
+PAGE_HEADER2     = 'page header two'
 CONTINUED_SPEECH = 'continued speech'
 CHAIR            = 'chair'
 SCENE_START      = 'scene_start'
@@ -47,7 +48,8 @@ SCENE_END_PATTERN = r'^\s*([^\]]*\])\s*$'
 #POSSIBLE_SPEECH_PATTERN = r'^\s*%s(.+)\s*$' % TITLES_TEMPLATE
 #PAGE_HEADER_PATTERN =r'^(\d+)\s*(.*?)(\d{2}\s*\w*,\s*\d{4})(\s*.*?\s*)(\d+)\s*$'
 
-PAGE_HEADER_PATTERN = r'^\[(\d+)\]\s*$'
+PAGE_HEADER_PATTERN  = r'^\[(\d+)\]\s*$'
+PAGE_HEADER_PATTERN2 = r'^(\d+)\s+.*(?:[A-Za-z]+\s*,\s*)?(\d+)\w{0,2}\s+(\w+),?\s+(\d{4})\s*'
 
 ACTION_PATTERN = r'^\s*%s(.{3,50}\w)\s*[\-]+\s*([^-]+)\s*[\-]+\s*$' % TITLES_TEMPLATE
 
@@ -83,6 +85,7 @@ PATTERNS = (
     (TIME, TIME_PATTERN),
     (START_TIME, START_TIME_PATTERN),
     (PAGE_HEADER, PAGE_HEADER_PATTERN),
+    (PAGE_HEADER2, PAGE_HEADER_PATTERN2),
     (CHAIR, CHAIR_PATTERN),
     (CONTINUED_SPEECH, CONTINUED_SPEECH_PATTERN),
     (SCENE, SCENE_PATTERN),
@@ -149,7 +152,7 @@ def parse_body(lines):
     time = None
     topic = None
     #page = None
-    column = None
+    column = 0
     section = None
     kind, line, match = None, None, None
 
@@ -184,6 +187,8 @@ def parse_body(lines):
             column = match.group(1)
             #title = '%s%s' % (match.group(2),match.group(4))
             #entries.append(dict(page=pages))
+        elif kind is PAGE_HEADER2:
+            column = match.group(1)
         elif kind is SCENE_START:
             entry = parse_scene(time, match, lines, line)
             entry['column'] = column
@@ -219,7 +224,7 @@ def parse_body(lines):
 
             entry['time']     = time
             entry['kind']     = kind
-            # entry['column']   = column
+            entry['page_number']   = column
             if not entry.get('original', None):
                 entry['original'] = line.rstrip()
             elif entry['kind'] not in (SCENE, CHAIR):
