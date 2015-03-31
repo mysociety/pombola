@@ -18,14 +18,14 @@ class KenyaParserCouldNotParseTimeString(Exception):
     pass
 
 
-class KenyaParser():  
-    
+class KenyaParser():
+
     @classmethod
     def convert_pdf_to_html(cls, pdf_file):
         """Given a PDF parse it and return the HTML string representing it"""
 
         remote_host = settings.KENYA_PARSER_PDF_TO_HTML_HOST
-        
+
         if remote_host:
             output = cls.convert_pdf_to_html_remote_machine(pdf_file, remote_host)
         else:
@@ -34,7 +34,7 @@ class KenyaParser():
         # cleanup some known bad chars in the output
         output = re.sub("\xfe\xff", "", output)  # BOM
         output = re.sub("\u201a\xc4\xf4", "\xe2\x80\x99", output) # smart quote
-        
+
         return output
 
 
@@ -68,7 +68,7 @@ class KenyaParser():
     @classmethod
     def convert_pdf_to_html_remote_machine(cls, pdf_file, remote):
         """Convert pdf on a remote machine"""
-        
+
         bin_dir               = os.path.abspath( os.path.dirname( __file__ ) + '/bin' )
         remote_convert_script = os.path.join( bin_dir, 'convert_pdf_to_html_on_remote_machine.bash'  )
 
@@ -104,7 +104,7 @@ class KenyaParser():
         page_number = 1
 
         filtered_contents = []
-        
+
         while len(contents):
             line = contents.pop(0)
 
@@ -122,11 +122,11 @@ class KenyaParser():
                 text_content = unicode(line)
             else:
                 text_content = line.text
-            
+
             if re.match( r'\s*$', text_content ):
                 continue
-            
-            
+
+
             # For Assembly
             # check for something that looks like the page number - when found
             # delete it and the two lines that follow
@@ -161,11 +161,10 @@ class KenyaParser():
             # # if type(line) == Tag: print line.name
             # print "%s: >>>%s<<<" % (tag_name, text_content)
             # print '------------------------------------------------------'
-            
 
             text_content = text_content.strip()
             text_content = re.sub( r'\s+', ' ', text_content )
-            
+
             filtered_contents.append(dict(
                 tag_name     = tag_name,
                 text_content = text_content,
@@ -174,16 +173,16 @@ class KenyaParser():
             ))
 
             br_count = 0
-                    
+
         # go through all the filtered_content and using the br_count determine
         # when lines should be merged
         merged_contents = []
-        
+
         for line in filtered_contents:
 
-            # print line            
+            # print line
             br_count = line['br_count']
-            
+
             # Join lines that have the same tag_name and are not too far apart
             same_tag_name_test = (
                     br_count <= 1
@@ -198,7 +197,7 @@ class KenyaParser():
                 and line['tag_name'] == 'i'
                 and merged_contents[-1]['tag_name'] == None
             )
-            
+
             # Merge lines tha meet one of the above tests
             if ( same_tag_name_test or inline_italic_test ):
                 new_content = ' '.join( [ merged_contents[-1]['text_content'], line['text_content'] ] )
@@ -206,7 +205,7 @@ class KenyaParser():
                 merged_contents[-1]['text_content'] = new_content
             else:
                 merged_contents.append( line )
-        
+
         # now go through and create some meaningful chunks from what we see
         meaningful_content = []
         last_speaker_name  = ''
@@ -219,7 +218,6 @@ class KenyaParser():
 
             # print '----------------------------------------'
             # print line
-            
 
             # if the content is italic then it is a scene
             if line['tag_name'] == 'i':
@@ -229,7 +227,7 @@ class KenyaParser():
                     'page_number': line['page_number'],
                 })
                 continue
-            
+
             # if the content is all caps then it is a heading
             if line['text_content'] == line['text_content'].upper():
                 meaningful_content.append({
@@ -240,7 +238,7 @@ class KenyaParser():
                 last_speaker_name  = ''
                 last_speaker_title = ''
                 continue
-                
+
             # It is a speech if we have a speaker and it is not formatted
             if line['tag_name'] == None and last_speaker_name:
 
@@ -266,9 +264,9 @@ class KenyaParser():
                     'type': 'speech',
                     'page_number': line['page_number'],
                 })
-                
+
                 # print meaningful_content[-1]
-                
+
                 continue
 
             # If it is a bold line and the next line is 'None' and is no
@@ -297,7 +295,6 @@ class KenyaParser():
         }
 
         return hansard_data
-
 
 
     @classmethod
@@ -340,19 +337,19 @@ class KenyaParser():
 
         for line in transcript:
             text = line.get('text', '')
-            
+
             match = reg.match(text)
             if not match: continue
 
             groups = match.groupdict()
 
             hhmm = cls.parse_time_string( groups['time'] )
-                        
+
             if groups['action'] == 'met':
                 results['start_time'] = hhmm
             else:
                 results['end_time'] = hhmm
-            
+
         return results
 
 
@@ -365,21 +362,19 @@ class KenyaParser():
 
         time_regex = re.compile( r'(\d+)\.(\d+) (a|p)')
         match = time_regex.match(time_string)
-        
+
         if not match:
             raise KenyaParserCouldNotParseTimeString( "bad time string: '%s'" % time_string )
-        
+
         hour, minute, am_or_pm = match.groups()
 
         hour   = int(hour)
         minute = int(minute)
-        
 
         if am_or_pm == 'p' and hour < 12:
-            hour += 12 
+            hour += 12
 
         return '%02u:%02u:00' % (hour,minute)
-        
 
 
     @classmethod
@@ -397,14 +392,13 @@ class KenyaParser():
             end_time   = data['meta'].get('end_time', None),
         )
         sitting.save()
-        
 
         with transaction.commit_on_success():
             counter = 0
             for line in data['transcript']:
-                
+
                 counter += 1
-                
+
                 entry = Entry(
                     sitting       = sitting,
                     type          = line['type'],
@@ -418,9 +412,5 @@ class KenyaParser():
 
             source.last_processing_success = datetime.datetime.now()
             source.save()
-        
+
         return None
-
-
-
-
