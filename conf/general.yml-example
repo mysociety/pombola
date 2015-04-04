@@ -80,6 +80,10 @@ COUNTRY_APP: kenya
 PMG_COMMITTEE_USER: ''
 PMG_COMMITTEE_PASS: ''
 
+# An API key for the new PMG API - you can get one by following the
+# instructions here: https://github.com/Code4SA/pmg-cms-2#making-use-of-the-api
+PMG_API_KEY: ''
+
 # Popit API URL
 # For ZA development you can use 'http://sa-test.matthew.popit.dev.mysociety.org/api/v0.1/'
 POPIT_API_URL: 'http://popit.example.com/api/v0.1/'

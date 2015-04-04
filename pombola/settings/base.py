@@ -343,6 +343,7 @@ QUESTION_JSON_CACHE  = os.path.join( HANSARD_CACHE, 'questions_json' )
 
 PMG_COMMITTEE_USER = config.get('PMG_COMMITTEE_USER', '')
 PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
+PMG_API_KEY = config.get('PMG_API_KEY', '')
 
 # Which popit instance to use
 POPIT_API_URL = config.get('POPIT_API_URL')
