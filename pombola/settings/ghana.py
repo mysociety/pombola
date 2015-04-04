@@ -1,7 +1,23 @@
 import re
+import os
+import yaml
 
 from .base import *
 from .ghana_base import *
+
+# load the mySociety config
+config_file = os.path.join( base_dir, 'conf', 'general.yml' )
+config = yaml.load( open(config_file, 'r') )
+
+if settings.get('EMAIL_SETTINGS', None):
+    EMAIL_HOST = config.get('EMAIL_HOST', '')
+    EMAIL_HOST_USER = config.get('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD', '')
+    port = config.get('EMAIL_PORT', None)
+    if port:
+        EMAIL_PORT = port
+    EMAIL_USE_TLS = config.get('EMAIL_USE_TLS', False)
+
 
 INSTALLED_APPS = insert_after(INSTALLED_APPS,
                               'markitup',
