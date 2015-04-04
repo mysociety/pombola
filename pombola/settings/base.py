@@ -283,7 +283,7 @@ HAYSTACK_CONNECTIONS = {
     #},
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://pombola:9200/',
+        'URL': 'http://localhost:9200/',
         'INDEX_NAME': config.get('POMBOLA_DB_NAME'),
         'EXCLUDED_INDEXES': [],
     },
