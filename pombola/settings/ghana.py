@@ -9,7 +9,7 @@ from .ghana_base import *
 config_file = os.path.join( base_dir, 'conf', 'general.yml' )
 config = yaml.load( open(config_file, 'r') )
 
-if settings.get('EMAIL_SETTINGS', None):
+if config.get('EMAIL_SETTINGS', None):
     EMAIL_HOST = config.get('EMAIL_HOST', '')
     EMAIL_HOST_USER = config.get('EMAIL_HOST_USER', '')
     EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD', '')
