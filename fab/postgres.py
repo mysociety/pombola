@@ -24,42 +24,55 @@ def setup_postgis():
 
 def install_postgres():
     require('hosts')
-    sudo('aptitude install -y postgresql postgresql-server-dev-9.1')
+    #add repository to be able to install latest version
+    sudo('touch /etc/apt/sources.list.d/pgdg.list')
+    sudo('echo "deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main" > /etc/apt/sources.list.d/pgdg.list')
+    sudo('wget https://www.postgresql.org/media/keys/ACCC4CF8.asc')
+    sudo('apt-key add ACCC4CF8.asc; aptitude update')
+    sudo('rm ACCC4CF8.asc')
+    #sudo('aptitude install -y postgresql postgresql-server-dev-9.1')
+    sudo('aptitude install -y postgresql postgresql-client postgresql-contrib ')
 
 def install_postgis():
     require('hosts')
-    require('basedir')
+    #require('basedir')
 
-    VERSION = '1.5.7'
-    REP = 'http://download.osgeo.org/postgis/source'
-    pkg = 'postgis-%s' % VERSION
-    tar = '%s.tar.gz' % pkg
+    #VERSION = '1.5.7'
+    #REP = 'http://download.osgeo.org/postgis/source'
+    #pkg = 'postgis-%s' % VERSION
+    #tar = '%s.tar.gz' % pkg
 
     _install_postgis_deps()
 
-    with cd('%(basedir)s/packages' % env):
-        if not exists(tar):
-            _sudo('wget %s/%s' % (REP, tar))
-        if not exists(pkg):
-            _sudo('tar xzf %s' % tar)
-        with cd(pkg):
-            sudo('ldconfig')
-            _sudo('./configure && make')
-            sudo('make install')
+    #with cd('%(basedir)s/packages' % env):
+    #    if not exists(tar):
+    #        _sudo('wget %s/%s' % (REP, tar))
+    #    if not exists(pkg):
+    #        _sudo('tar xzf %s' % tar)
+    #    with cd(pkg):
+    #        sudo('ldconfig')
+    #        _sudo('./configure && make')
+    #        sudo('make install')
+    sudo('aptitude install -y postgis')
 
 def configure_postgis(password=None):
     v = postgres_version()
     if v:
-        gis_v = postgis_version(v)
-        contrib = '/usr/share/postgresql/%s/contrib/postgis-%s' % (v[:3], gis_v)
+        #gis_v = postgis_version(v)
+        #contrib = '/usr/share/postgresql/%s/contrib/postgis-%s' % (v[:3], gis_v)
         for cmd in (
             '''psql -c "CREATE ROLE gisgroup;"''',
-            '''createdb -E UTF8 template_postgis''',
-            '''psql -d template_postgis < %s/postgis.sql''' % contrib,
-            '''psql -d template_postgis < %s/spatial_ref_sys.sql''' % contrib,
-            '''psql -c "ALTER TABLE geometry_columns OWNER TO gisgroup;" template_postgis''',
-            '''psql -c "ALTER TABLE spatial_ref_sys OWNER TO gisgroup;" template_postgis'''):
+            '''psql -c "CREATE EXTENSION postgis;"''',
+            '''psql -c "CREATE EXTENSION postgis_topology;"''',
+            #'''createdb -E UTF8 template_postgis''',
+            #'''psql -d template_postgis < %s/postgis.sql''' % contrib,
+            #'''psql -d template_postgis < %s/spatial_ref_sys.sql''' % contrib,
+            #'''psql -c "ALTER TABLE geometry_columns OWNER TO gisgroup;" template_postgis''',
+            #'''psql -c "ALTER TABLE spatial_ref_sys OWNER TO gisgroup;" template_postgis''',
+            ):
+          try:
             _run(cmd, password)
+          except: pass
 
 def create_user(name, password, groups=None, encrypted=True):
     """
@@ -85,7 +98,7 @@ def create_user(name, password, groups=None, encrypted=True):
     _run('''psql -c "CREATE USER %(name)s %(with_password)s '%(password)s'%(groups)s;"''' % locals())
 
 
-def create_database(name, owner, template='template0', encoding='UTF8', locale='en_US.UTF-8'):
+def create_database(name, owner, template='template_postgis', encoding='UTF8', locale='en_US.UTF-8'):
     """
     Create a PostgreSQL database.
 
@@ -96,9 +109,11 @@ def create_database(name, owner, template='template0', encoding='UTF8', locale='
             create_database('myapp', owner='dbuser')
 
     """
-    _run('''createdb --owner %(owner)s --template %(template)s --encoding=%(encoding)s\
- --lc-ctype=%(locale)s --lc-collate=%(locale)s %(name)s''' % locals())
-
+    #_run('''createdb --owner %(owner)s --template %(template)s --encoding=%(encoding)s --lc-ctype=%(locale)s --lc-collate=%(locale)s %(name)s''' % locals())
+    #_run('''createdb --owner %(owner)s --encoding=%(encoding)s --lc-ctype=%(locale)s --lc-collate=%(locale)s %(name)s''' % locals())
+    _run('''createdb --owner %(owner)s  %(name)s''' % locals())
+    _run('''psql -d %(name)s -c "CREATE EXTENSION postgis;"''' % locals())
+    _run('''psql -d %(name)s -c "CREATE EXTENSION postgis_topology;"''' % locals())
 
 def user_exists(name):
     """
@@ -147,11 +162,12 @@ def postgres_version():
     s = out.split('\n')[0]
     m = re.match('.+(\d+)\.(\d+)\.(\d+).*', s)
     if m:
-        return '%s.%s.%s' % (m.group(1), m.group(2), m.group(3))
+        #return '%s.%s.%s' % (m.group(1), m.group(2), m.group(3))
+        return '%s.%s' % (m.group(1), m.group(2))
     return ''
 
 def warn_only():
-    return settings(hide('running', 'stdout', 'stderr', 'warnings'), 
+    return settings(hide('running', 'stdout', 'stderr', 'warnings'),
                     warn_only=True)
 
 def qrun(cmd):
@@ -159,7 +175,7 @@ def qrun(cmd):
         return run(cmd)
 
 def _install_postgis_deps():
-    sudo('aptitude install -y libproj-dev')
+    sudo('aptitude install -y libproj-dev libpq-dev')
 
 def _run(command, password=None):
     """
