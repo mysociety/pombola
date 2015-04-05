@@ -12,7 +12,7 @@ def add_ssh_key(path, password=None, user=None):
     authorized_keys2 = '$HOME/.ssh/authorized_keys2'
     put(path, tmp_key)
 
-    with settings(hide('running', 'stdout', 'stderr', 'warnings'), 
+    with settings(hide('running', 'stdout', 'stderr', 'warnings'),
                   warn_only=True):
         if not exists('$HOME/.ssh'):
             run(('mkdir $HOME/.ssh; '
@@ -29,48 +29,56 @@ def install_packages():
 
     python_essentials = (
         # python and build essensials
-        'build-essential',
-        'bcrypt',
+        #'build-essential',
+        #'bcrypt',
         'python-dev',
         'python-pip',
         'python-virtualenv',
         'python-software-properties',
-
     )
 
 
     packages = (
         # "supervisor",
-        'gdal-bin',
+        #'gdal-bin',
+
         'libgdal-dev',
         # 'libgdal1',
         # 'libgdal1-dev',
         'python-gdal',
 
         # probably installed as requirement for others
-        'libjpeg',
-        
+        'libjpeg-dev',
+        'libxml2-dev',
+        'libxslt1-dev',
+
         # Some dependencies in requirements.txt are listed as repos
         # so we need the various repo management tools to fetch them.
+        'openjdk-7-jre-headless',
         'mercurial',
         'git-core',
+        'yui-compressor',
+        'poppler-utils',
+        'antiword'
     )
 
     try:
         sudo('aptitude update')
     except: pass
     sudo('aptitude -y install %s' % ' '.join(python_essentials))
-    
+
+
     # for gdal
     # TODO: determine if repository already added
-    sudo('apt-add-repository -y ppa:ubuntugis/ubuntugis-unstable')
+    #sudo('apt-add-repository -y ppa:ubuntugis/ubuntugis-unstable')
     try:
         sudo('aptitude update')
     except: pass
 
-    
+
     sudo('aptitude -y install %s' % ' '.join(packages))
-    
+    install_elasticsearch()
+
 def create_webapp_user():
     """Create a user for gunicorn, celery, etc."""
     require('hosts')
@@ -79,4 +87,11 @@ def create_webapp_user():
         sudo('useradd --system %(webapp_user)s' % env)
     except: pass
 
-
+def install_elasticsearch():
+    """ Download and install elasticsearch """
+    require('hosts')
+    try:
+      sudo('wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.5.0.deb')
+      sudo('dpkg -i elasticsearch-1.5.0.deb')
+      sudo('rm elasticsearch-1.5.0.deb')
+    except:pass

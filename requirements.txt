@@ -3,10 +3,10 @@
 # more details: http://www.pip-installer.org/en/latest/requirements.html
 
 ### General useful bits
-py-bcrypt==0.4
-PyYAML==3.11
-Mercurial==3.1.2
-Pillow==2.6.1
+#py-bcrypt==0.4
+#PyYAML==3.11
+#Mercurial==3.1.2
+#Pillow==2.6.1
 
 ### Database drivers
 psycopg2==2.5.4

@@ -7,10 +7,10 @@ AVAILABLE = '/etc/nginx/sites-available'
 
 def install(start=True):
     # add nginx stable ppa
-    sudo("add-apt-repository -y ppa:nginx/stable")
+    #sudo("add-apt-repository -y ppa:nginx/stable")
     sudo('aptitude update')
     sudo('aptitude -y install nginx')
-    
+
     if start:
         ctl('start')
 
