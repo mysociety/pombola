@@ -64,7 +64,8 @@ def install(db=None, dbuser=None, dbpasswd=None):
     _install_requirements()
 
     _configure_gunicorn()
-    _configure_upstart()
+    _configure_supervisor()
+    #_configure_upstart()
     _configure_nginx()
 
     link_current_version()
@@ -77,7 +78,7 @@ def init():
     #with cd('%(basedir)s/releases/current/%(project)s' % env):
     with cd('%(basedir)s/releases/current' % env):
          with prefix('PATH=%(basedir)s/bin/:PATH' % env):
-            #_sudo('python manage.py syncdb --noinput --verbosity=1')
+            _sudo('python manage.py syncdb --noinput --verbosity=1')
             _sudo('python manage.py migrate --verbosity=1')
             _sudo('python manage.py collectstatic --noinput')
 
@@ -367,6 +368,23 @@ def _configure_gunicorn(user=None, group=None):
     _sed2(configs, dest)
     _sudo('chmod +x %(dest)s' % locals())
 
+def _configure_supervisor():
+    """Configure the supervisord script"""
+    require('version')
+    require('basedir')
+
+    dest = '%(basedir)s/releases/%(version)s/conf/supervisor.conf' % env
+    src = '%s-template' % dest
+    _sudo('cp %(src)s %(dest)s' % locals())
+
+    configs = (
+        ('%(project)s', '%(project)s' % env),
+        ('%(basedir)s', '%(basedir)s' % env),
+        ('%(version)s', '%(version)s' % env)
+    )
+    # s = ';'.join(["s|%s|%s|" % (s, r) for s, r in configs])
+    _sed2(configs, dest)
+    sudo('mv %(dest)s /etc/supervisor.d/odekro.conf' % locals())
 
 def _configure_upstart():
     """Configure the upstart script and copy to /etc/init."""
