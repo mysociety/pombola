@@ -480,7 +480,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
     important_organisations = ('ncop', 'national-assembly', 'national-executive')
 
-    def get_recent_speeches_for_section(self, section_title, limit=5):
+    def get_recent_speeches_for_section(self, tags, limit=5):
         pombola_person = self.object
         sayit_speaker = self.pombola_person_to_sayit_speaker(
             pombola_person,
@@ -491,18 +491,9 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             # Without a speaker we can't find any speeches
             return Speech.objects.none()
 
-        try:
-            # Add parent=None as the title is not unique, hopefully the top level will be.
-            sayit_section = Section.objects.get(title=section_title, parent=None)
-        except Section.DoesNotExist:
-            # No match. Don't raise exception but do produce a warning and then return an empty queryset
-            warnings.warn("Could not find top level sayit section '{0}'".format(section_title))
-            return Speech.objects.none()
-
-        speeches = (
-            sayit_section.descendant_speeches()
-                .filter(speaker=sayit_speaker)
-                .order_by('-start_date', '-start_time'))
+        speeches = Speech.objects \
+            .filter(tags__name__in=tags, speaker=sayit_speaker) \
+            .order_by('-start_date', '-start_time')
 
         if limit:
             speeches = speeches[:limit]
@@ -607,9 +598,9 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             context['former_positions'] = self.get_former_positions(self.object)
 
         # FIXME - the titles used here will need to be checked and fixed.
-        context['hansard']   = self.get_recent_speeches_for_section("Hansard")
-        context['committee'] = self.get_recent_speeches_for_section("Committee Minutes")
-        context['question']  = self.get_recent_speeches_for_section("Questions")
+        context['hansard']   = self.get_recent_speeches_for_section(('hansard',))
+        context['committee'] = self.get_recent_speeches_for_section(('committee',))
+        context['question']  = self.get_recent_speeches_for_section(('question', 'answer'))
 
         context['interests'] = self.get_tabulated_interests()
         if self.object.date_of_death != None:
