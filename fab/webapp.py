@@ -380,11 +380,13 @@ def _configure_supervisor():
     configs = (
         ('%(project)s', '%(project)s' % env),
         ('%(basedir)s', '%(basedir)s' % env),
-        ('%(version)s', '%(version)s' % env)
+        ('%(version)s', '%(version)s' % env),
+        ('%(webapp_user)s', '%(webapp_user)s' % env)
+
     )
     # s = ';'.join(["s|%s|%s|" % (s, r) for s, r in configs])
     _sed2(configs, dest)
-    sudo('mv %(dest)s /etc/supervisor.d/odekro.conf' % locals())
+    sudo('mv %(dest)s /etc/supervisor/conf.d/odekro.conf' % locals())
 
 def _configure_upstart():
     """Configure the upstart script and copy to /etc/init."""
