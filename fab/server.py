@@ -39,7 +39,7 @@ def install_packages():
 
 
     packages = (
-        # "supervisor",
+        "supervisor",
         #'gdal-bin',
 
         'libgdal-dev',
@@ -59,8 +59,15 @@ def install_packages():
         'git-core',
         'yui-compressor',
         'poppler-utils',
-        'antiword'
+        'antiword',
+        'rubygems',
     )
+
+    gems = (
+        'sass',
+        'compass',
+        'yui-compressor',
+        )
 
     try:
         sudo('aptitude update')
@@ -77,6 +84,7 @@ def install_packages():
 
 
     sudo('aptitude -y install %s' % ' '.join(packages))
+    sudo('gem install %s' % ' '.join(gems))
     install_elasticsearch()
 
 def create_webapp_user():
