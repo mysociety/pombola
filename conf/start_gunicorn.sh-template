@@ -12,7 +12,7 @@ GROUP=%(webapp_group)s
 cd %(project_home)s
 source %(virtualenv)s/bin/activate
 test -d $LOGDIR || mkdir -p $LOGDIR
-exec %(virtualenv)s/bin/gunicorn_django \
-  -b 0.0.0.0:8000 -w $NUM_WORKERS \
+exec gunicorn --bind 127.0.0.1:8000 --workers $NUM_WORKERS \
+  --env DJANGO_SETTINGS_MODULE='pombola.settings.%(country_app)s' \
   --user=$USER --group=$GROUP --log-level=$LOGLEVEL \
-  --log-file=$LOGFILE 2>>$LOGFILE 
+  --log-file=$LOGFILE pombola.wsgi 2>>$LOGFILE
