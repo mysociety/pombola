@@ -1,7 +1,6 @@
 # Create your views here.
 # -*- coding: utf-8 -*-
 
-import hashlib
 import json
 from random import randint, shuffle
 import re
@@ -9,18 +8,15 @@ import sys
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
 from django.utils.http import urlquote
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import FormView
 
 from .forms import CountyPerformancePetitionForm, CountyPerformanceSenateForm
 
-from django.shortcuts import redirect
-
 from pombola.core.models import Person
 from pombola.core.views import PersonDetail, PersonDetailSub
-from pombola.experiments.models import Experiment, Event
+from pombola.experiments.models import Experiment
 from pombola.feedback.models import Feedback
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
