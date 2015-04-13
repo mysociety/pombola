@@ -235,6 +235,7 @@ class CountyPerformanceSurvey(ExperimentViewDataMixin, RedirectView):
             for k in ('user_key', 'variant', 'g', 'agroup'))
         return url
 
+
 class ThanksTemplateView(TemplateView):
 
     base_view_name = None
