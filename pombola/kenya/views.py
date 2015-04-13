@@ -16,7 +16,7 @@ from pombola.core.models import Person
 from pombola.core.views import PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
     ExperimentViewDataMixin, ExperimentFormSubmissionMixin,
-    sanitize_parameter, sanitize_data_parameters
+    sanitize_parameter
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
@@ -28,6 +28,11 @@ EXPERIMENT_DATA = {
         'pageview_label': 'county-performance',
         'experiment_key': None,
         'qualtrics_sid': 'SV_5hhE4mOfYG1eaOh',
+        'variants': ('o', 't', 'n', 'os', 'ts', 'ns'),
+        'demographic_keys': {
+            'g': ('m', 'f'),
+            'agroup': ('under', 'over'),
+        },
     },
     'mit-county-larger': {
         'session_key_prefix': 'MIT2',
@@ -35,6 +40,11 @@ EXPERIMENT_DATA = {
         'pageview_label': 'county-performance-2',
         'experiment_key': settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY,
         'qualtrics_sid': 'SV_5hhE4mOfYG1eaOh',
+        'variants': ('o', 't', 'n', 'os', 'ts', 'ns'),
+        'demographic_keys': {
+            'g': ('m', 'f'),
+            'agroup': ('under', 'over'),
+        },
     }
 }
 
@@ -99,7 +109,10 @@ class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
             reverse(self.base_view_name + '-senate-submission')
         context['experiment_key'] = self.experiment_key
 
-        data = sanitize_data_parameters(self.request, self.request.GET)
+        data = self.sanitize_data_parameters(
+            self.request,
+            self.request.GET
+        )
         variant = data['variant']
 
         # If there's no user key in the session, this is the first

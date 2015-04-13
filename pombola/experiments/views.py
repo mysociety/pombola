@@ -76,6 +76,25 @@ class ExperimentViewDataMixin(object):
         experiment = Experiment.objects.get(slug=self.experiment_slug)
         experiment.event_set.create(**event_kwargs)
 
+    def sanitize_data_parameters(self, request, parameters):
+        """Return a cleaned version of known experiment parameters"""
+        result = {}
+        result['variant'] = sanitize_parameter(
+            key='variant',
+            parameters=parameters,
+            allowed_values=self.variants,
+            default_value='n')
+        for key, possible_values in self.demographic_keys.items():
+            result[key] = sanitize_parameter(
+                key=key,
+                parameters=parameters,
+                allowed_values=possible_values,
+                default_value='?'
+            )
+        result['user_key'] = sanitize_random_key('user_key', parameters)
+        result['via'] = sanitize_random_key('via', parameters)
+        return result
+
 
 class ExperimentFormSubmissionMixin(ExperimentViewDataMixin):
     """A mixin useful for handling form data posted from an experiment page"""
@@ -122,25 +141,3 @@ def sanitize_random_key(key, parameters):
     if key in parameters and random_key_re.search(parameters[key]):
         return parameters[key]
     return '?'
-
-def sanitize_data_parameters(request, parameters):
-    """Return a cleaned version of known experiment parameters"""
-    result = {}
-    result['variant'] = sanitize_parameter(
-        key='variant',
-        parameters=parameters,
-        allowed_values=('o', 't', 'n', 'os', 'ts', 'ns'),
-        default_value='n')
-    result['g'] = sanitize_parameter(
-        key='g',
-        parameters=parameters,
-        allowed_values=('m', 'f'),
-        default_value='?')
-    result['agroup'] = sanitize_parameter(
-        key='agroup',
-        parameters=parameters,
-        allowed_values=('under', 'over'),
-        default_value='?')
-    result['user_key'] = sanitize_random_key('user_key', parameters)
-    result['via'] = sanitize_random_key('via', parameters)
-    return result
