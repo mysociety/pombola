@@ -1,9 +1,7 @@
 # Create your views here.
 # -*- coding: utf-8 -*-
 
-import json
 from random import randint, shuffle
-import re
 import sys
 
 from django.conf import settings
@@ -16,8 +14,9 @@ from .forms import CountyPerformancePetitionForm, CountyPerformanceSenateForm
 
 from pombola.core.models import Person
 from pombola.core.views import PersonDetail, PersonDetailSub
-from pombola.experiments.models import Experiment
-from pombola.feedback.models import Feedback
+from pombola.experiments.views import (
+    ExperimentViewDataMixin, sanitize_parameter, sanitize_data_parameters
+)
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
 
@@ -75,102 +74,7 @@ class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub):
         return context
 
 
-def sanitize_parameter(key, parameters, allowed_values, default_value=None):
-    """Check that the value for key in parameters is in allowed_values
-
-    If it's an allowed value, return that.  If it's not an allowed
-    value, and there's a default_value supplied, return the
-    default_value.  Otherwise (an unknown key, and no default_value)
-    raise a ValueError."""
-    value = parameters.get(key)
-    if value not in allowed_values:
-        if default_value is None:
-            message = "An allowed value for '{0}' must be provided"
-            raise ValueError(message.format(key))
-        value = default_value
-    return value
-
-# A regular expression that the random keys we generate must match in
-# order to be valid:
-random_key_re = re.compile(r'^[a-zA-Z0-9]+$')
-
-def sanitize_random_key(key, parameters):
-    """Return parameters[key] if it's valid or '?' otherwise"""
-    if key in parameters and random_key_re.search(parameters[key]):
-        return parameters[key]
-    return '?'
-
-def sanitize_data_parameters(request, parameters):
-    """Return a cleaned version of known experiment parameters"""
-    result = {}
-    result['variant'] = sanitize_parameter(
-        key='variant',
-        parameters=parameters,
-        allowed_values=('o', 't', 'n', 'os', 'ts', 'ns'),
-        default_value='n')
-    result['g'] = sanitize_parameter(
-        key='g',
-        parameters=parameters,
-        allowed_values=('m', 'f'),
-        default_value='?')
-    result['agroup'] = sanitize_parameter(
-        key='agroup',
-        parameters=parameters,
-        allowed_values=('under', 'over'),
-        default_value='?')
-    result['user_key'] = sanitize_random_key('user_key', parameters)
-    result['via'] = sanitize_random_key('via', parameters)
-    return result
-
-
-class CountyPerformanceDataMixin(object):
-    """A mixin with helper methods for creating events and feedback"""
-
-    def qualify_key(self, key):
-        prefix = EXPERIMENT_DATA[self.experiment_slug]['session_key_prefix']
-        return prefix + ':' + key
-
-    def create_feedback(self, form, comment='', email=''):
-        """A helper method for adding feedback to the database"""
-        feedback = Feedback()
-        feedback.status = 'non-actionable'
-        prefix_data = self.get_session_data()
-        prefix_data['experiment_slug'] = self.experiment_slug
-        comment_prefix = json.dumps(prefix_data)
-        feedback.comment = comment_prefix + ' ' + comment
-        feedback.email = email
-        feedback.url = self.request.build_absolute_uri()
-        if self.request.user.is_authenticated():
-            feedback.user = self.request.user
-        feedback.save()
-
-    def get_session_data(self):
-        result = {}
-        for key in ('user_key', 'variant', 'g', 'agroup', 'via'):
-            full_key = self.qualify_key(key)
-            value = self.request.session.get(full_key)
-            if value is not None:
-                result[key] = value
-        return result
-
-    def create_event(self, data):
-        data.update(self.get_session_data())
-        standard_cols = ('user_key', 'variant', 'category', 'action', 'label')
-        event_kwargs = {}
-        extra_data = data.copy()
-        for column in standard_cols:
-            if column in data:
-                value = data.get(column, '?')
-                if value != '?':
-                    event_kwargs[column] = value
-                del extra_data[column]
-        extra_data_json = json.dumps(extra_data)
-        event_kwargs['extra_data'] = extra_data_json
-        experiment = Experiment.objects.get(slug=self.experiment_slug)
-        experiment.event_set.create(**event_kwargs)
-
-
-class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
+class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
     """This view displays a page about county performance with calls to action
 
     There are some elements of the page that are supposed to be
@@ -178,7 +82,6 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
     page that include different information."""
 
     template_name = 'county-performance.html'
-    experiment_slug = None
 
     def get_context_data(self, **kwargs):
         context = super(CountyPerformanceView, self).get_context_data(**kwargs)
@@ -186,16 +89,14 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
         context['senate_form'] = CountyPerformanceSenateForm()
 
         # Add URLs based on the experiment that's being run:
-        experiment_data = EXPERIMENT_DATA[self.experiment_slug]
-        base_view_name = experiment_data['base_view_name']
-        context['survey_url'] = reverse(base_view_name + '-survey')
-        context['base_url'] = reverse(base_view_name)
-        context['share_url'] = reverse(base_view_name + '-share')
+        context['survey_url'] = reverse(self.base_view_name + '-survey')
+        context['base_url'] = reverse(self.base_view_name)
+        context['share_url'] = reverse(self.base_view_name + '-share')
         context['petition_submission_url'] = \
-            reverse(base_view_name + '-petition-submission')
+            reverse(self.base_view_name + '-petition-submission')
         context['senate_submission_url'] = \
-            reverse(base_view_name + '-senate-submission')
-        context['experiment_key'] = experiment_data['experiment_key']
+            reverse(self.base_view_name + '-senate-submission')
+        context['experiment_key'] = self.experiment_key
 
         data = sanitize_data_parameters(self.request, self.request.GET)
         variant = data['variant']
@@ -220,10 +121,9 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
         if 'utm_expid' in self.request.GET:
             self.request.session[self.qualify_key('variant')] = variant
             # Now create the page view event:
-            label = EXPERIMENT_DATA[self.experiment_slug]['pageview_label']
             self.create_event({'category': 'page',
                                'action': 'view',
-                               'label': label})
+                               'label': self.pageview_label})
 
         context['show_social_context'] = variant in ('ns', 'ts', 'os')
         context['show_threat'] = (variant[0] == 't')
@@ -245,7 +145,7 @@ class CountyPerformanceView(CountyPerformanceDataMixin, TemplateView):
         return context
 
 
-class CountyPerformanceSubmissionMixin(CountyPerformanceDataMixin):
+class CountyPerformanceSubmissionMixin(ExperimentViewDataMixin):
     """A mixin useful for handling senate comment and petition emails"""
 
     def form_invalid(self, form):
@@ -273,11 +173,9 @@ class CountyPerformanceSenateSubmission(CountyPerformanceSubmissionMixin,
     template_name = 'county-performance.html'
     form_class = CountyPerformanceSenateForm
     form_key = 'senate'
-    experiment_slug = None
 
     def get_success_url(self):
-        base_view_name = EXPERIMENT_DATA[self.experiment_slug]['base_view_name']
-        return '/{0}/senate/thanks'.format(base_view_name)
+        return '/{0}/senate/thanks'.format(self.base_view_name)
 
     def create_feedback_from_form(self, form):
         new_comment = form.cleaned_data.get('comments', '').strip()
@@ -291,11 +189,9 @@ class CountyPerformancePetitionSubmission(CountyPerformanceSubmissionMixin,
     template_name = 'county-performance.html'
     form_class = CountyPerformancePetitionForm
     form_key = 'petition'
-    experiment_slug = None
 
     def get_success_url(self):
-        base_view_name = EXPERIMENT_DATA[self.experiment_slug]['base_view_name']
-        return '/{0}/petition/thanks'.format(base_view_name)
+        return '/{0}/petition/thanks'.format(self.base_view_name)
 
     def create_feedback_from_form(self, form):
         new_comment = form.cleaned_data.get('name', '').strip()
@@ -304,11 +200,10 @@ class CountyPerformancePetitionSubmission(CountyPerformanceSubmissionMixin,
                              email=form.cleaned_data.get('email'))
 
 
-class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
+class CountyPerformanceShare(ExperimentViewDataMixin, RedirectView):
     """For recording & enacting Facebook / Twitter share actions"""
 
     permanent = False
-    experiment_slug = None
 
     def get_redirect_url(self, *args, **kwargs):
         social_network = sanitize_parameter(
@@ -320,7 +215,7 @@ class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
                            'action': 'click',
                            'label': social_network,
                            'share_key': share_key})
-        path = reverse(EXPERIMENT_DATA[self.experiment_slug]['base_view_name'])
+        path = reverse(self.base_view_name)
         built = self.request.build_absolute_uri(path)
         built += '?via=' + share_key
         url_parameter = urlquote(built, safe='')
@@ -330,18 +225,17 @@ class CountyPerformanceShare(CountyPerformanceDataMixin, RedirectView):
         return url_formats[social_network].format(url_parameter)
 
 
-class CountyPerformanceSurvey(CountyPerformanceDataMixin, RedirectView):
+class CountyPerformanceSurvey(ExperimentViewDataMixin, RedirectView):
     """For redirecting to the Qualtrics survey"""
 
     permanent = False
-    experiment_slug = None
 
     def get_redirect_url(self, *args, **kwargs):
         self.create_event({'category': 'take-survey',
                            'action': 'click',
                            'label': 'take-survey'})
-        prefix = EXPERIMENT_DATA[self.experiment_slug]['session_key_prefix']
-        sid = EXPERIMENT_DATA[self.experiment_slug]['qualtrics_sid']
+        prefix = self.session_key_prefix
+        sid = self.qualtrics_sid
         url = "http://survey.az1.qualtrics.com/SE/?SID={0}&".format(sid)
         url += "&".join(
             k + "=" + self.request.session.get(prefix + ':' + k, '?')
