@@ -15,7 +15,8 @@ from .forms import CountyPerformancePetitionForm, CountyPerformanceSenateForm
 from pombola.core.models import Person
 from pombola.core.views import PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
-    ExperimentViewDataMixin, sanitize_parameter, sanitize_data_parameters
+    ExperimentViewDataMixin, ExperimentFormSubmissionMixin,
+    sanitize_parameter, sanitize_data_parameters
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
@@ -145,28 +146,7 @@ class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
         return context
 
 
-class CountyPerformanceSubmissionMixin(ExperimentViewDataMixin):
-    """A mixin useful for handling senate comment and petition emails"""
-
-    def form_invalid(self, form):
-        """Redirect back to a reduced version of the page from either form"""
-        extra_context = {
-            '{0}_form'.format(self.form_key): form,
-            'major_partials': ['_county_{0}.html'.format(self.form_key)],
-            'correct_errors': True}
-        context = self.get_context_data(**extra_context)
-        return self.render_to_response(context)
-
-    def form_valid(self, form):
-        self.create_feedback_from_form(form)
-        self.create_event({'category': 'form',
-                           'action': 'submit',
-                           'label': self.form_key})
-        return super(CountyPerformanceSubmissionMixin,
-                     self).form_valid(form)
-
-
-class CountyPerformanceSenateSubmission(CountyPerformanceSubmissionMixin,
+class CountyPerformanceSenateSubmission(ExperimentFormSubmissionMixin,
                                         FormView):
     """A view for handling submissions of comments for the senate"""
 
@@ -182,7 +162,7 @@ class CountyPerformanceSenateSubmission(CountyPerformanceSubmissionMixin,
         self.create_feedback(form, comment=new_comment)
 
 
-class CountyPerformancePetitionSubmission(CountyPerformanceSubmissionMixin,
+class CountyPerformancePetitionSubmission(ExperimentFormSubmissionMixin,
                                           FormView):
     """A view for handling a petition signature"""
 

@@ -76,6 +76,28 @@ class ExperimentViewDataMixin(object):
         experiment = Experiment.objects.get(slug=self.experiment_slug)
         experiment.event_set.create(**event_kwargs)
 
+
+class ExperimentFormSubmissionMixin(ExperimentViewDataMixin):
+    """A mixin useful for handling form data posted from an experiment page"""
+
+    def form_invalid(self, form):
+        """Redirect back to a reduced version of the page from either form"""
+        extra_context = {
+            '{0}_form'.format(self.form_key): form,
+            'major_partials': ['_county_{0}.html'.format(self.form_key)],
+            'correct_errors': True}
+        context = self.get_context_data(**extra_context)
+        return self.render_to_response(context)
+
+    def form_valid(self, form):
+        self.create_feedback_from_form(form)
+        self.create_event({'category': 'form',
+                           'action': 'submit',
+                           'label': self.form_key})
+        return super(ExperimentFormSubmissionMixin,
+                     self).form_valid(form)
+
+
 def sanitize_parameter(key, parameters, allowed_values, default_value=None):
     """Check that the value for key in parameters is in allowed_values
 
