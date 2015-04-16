@@ -1,1 +1,1 @@
-{{ object.title }} {{ object.content }}
+{{ object.title }} {{ object.markdown_content }} {{ object.raw_content|striptags }}
