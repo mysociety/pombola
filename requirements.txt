@@ -34,7 +34,7 @@ Markdown==2.5.1
 # useful as a reference.
 django-markitup==2.2.1
 
-requests==2.5
+requests==2.6.0
 elasticsearch==0.4.5
 django-haystack==2.3.1
 
