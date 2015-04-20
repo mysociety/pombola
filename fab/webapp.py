@@ -77,7 +77,7 @@ def init():
 
     #with cd('%(basedir)s/releases/current/%(project)s' % env):
     with cd('%(basedir)s/releases/current' % env):
-         with prefix('PATH=%(basedir)s/bin/:PATH' % env):
+         with prefix('PATH=%(basedir)s/bin/:/usr/bin:/usr/local/bin:/bin' % env):
             _sudo('python manage.py syncdb --noinput --verbosity=1')
             _sudo('python manage.py migrate --verbosity=1')
             _sudo('python manage.py collectstatic --noinput')
@@ -101,7 +101,7 @@ def restart():
 
 def ctl(cmd):
     if cmd in ['start', 'stop', 'status']:
-        sudo('%s odekro' % cmd)
+        sudo('supervisorctl %s odekro' % cmd)
 
 
 def link_current_version():
@@ -362,11 +362,18 @@ def _configure_gunicorn(user=None, group=None):
         ('%(webapp_group)s', group),
         ('%(project_home)s', project_home),
         ('%(virtualenv)s', env.basedir),
-        ('%(log_level)s', env.log_level or 'debug')
+        ('%(log_level)s', env.log_level or 'debug'),
+        ('%(country_app)s', env.country_app)
     )
     # s = ';'.join(["s|%s|%s|" % (s, r) for s, r in configs])
     _sed2(configs, dest)
     _sudo('chmod +x %(dest)s' % locals())
+
+    #try to make gunicorn log dir
+    try:
+      _sudo('mkdir /var/log/gunicorn')
+      _sudo('chown -R %(webapp_user)s:%(webapp_group)s /var/log/gunicorn' % env)
+    except: pass
 
 def _configure_supervisor():
     """Configure the supervisord script"""

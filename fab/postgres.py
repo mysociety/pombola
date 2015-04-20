@@ -140,6 +140,12 @@ def database_exists(name):
     with settings(hide('running', 'stdout', 'stderr', 'warnings'), warn_only=True):
         return _run('''psql -d %(name)s -c ""''' % locals()).succeeded
 
+def database_backup(name):
+    pass
+
+def database_restore():
+    pass
+
 def unconfigure_postgis(password=None):
     v = postgres_version()
     if v:

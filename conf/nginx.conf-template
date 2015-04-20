@@ -8,7 +8,7 @@ server {
 
 server {
     listen 80;
-    server_name %(domain)s;
+    server_name www.%(domain)s;
     root %(project_home)s;
 
 #   Serve directly - analogous for static/staticfiles
