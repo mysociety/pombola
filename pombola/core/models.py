@@ -1087,6 +1087,14 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter down to only the political category"""
         return self.filter(category='political')
 
+    def committees(self):
+        """Filter down to committee memberships"""
+        return self.filter(organisation__slug__contains='committee') \
+            .order_by('-end_date', '-start_date')
+
+    def exclude_committees(self):
+        return self.exclude(organisation__slug__contains='committee')
+
     def education(self):
         """Filter down to only the education category"""
         return self.filter(category='education')
