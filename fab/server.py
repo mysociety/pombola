@@ -85,6 +85,9 @@ def install_packages():
 
     sudo('aptitude -y install %s' % ' '.join(packages))
     sudo('gem install %s' % ' '.join(gems))
+    #symbolic links to sass and compass for env to work on debian
+    sudo("ln -s /usr/local/bin/sass /usr/bin/sass")
+    sudo("ln -s /usr/local/bin/compass /usr/bin/compass")
     install_elasticsearch()
 
 def create_webapp_user():
