@@ -17,6 +17,7 @@ import pprint
 import httplib2
 import re
 import datetime
+from optparse import make_option
 import sys
 import parsedatetime as pdt
 from warnings import warn
@@ -41,9 +42,14 @@ class Command(NoArgsCommand):
     # /plone/national-assembly/business/hansard/copy_of_official-report-28-march-2013-pm/at_multi_download/item_files
     # ?name=Hansard%20National%20Assembly%2028.03.2013P.pdf
 
+    option_list = NoArgsCommand.option_list + (
+        make_option('--check-all', action='store_true',
+                    help='Carry on to check sources on every page'),
+    )
 
     def handle_noargs(self, **options):
 
+        self.options = options
         verbose = int(options.get('verbosity')) >= 2
 
         for list_page, url in (
@@ -120,7 +126,7 @@ class Command(NoArgsCommand):
             # to the server part way through as this gives us no means of
             # moving beyond the first page if, for example, page 1 has been
             # processed but pages 2 and 3 have not)
-            if get_next_page == False:
+            if not (get_next_page or self.options['check_all']):
                 break
 
 
