@@ -52,6 +52,11 @@ class KenyaParser():
     >>> result.group('action')
     'met'
 
+    # it should cope with the word 'Main' appearing before 'Parliament Buildings'
+    >>> result = KenyaParser.sen_reg.match("The Senate met at the Senate Chamber, Main Parliament Buildings, at 2.30 p.m.")
+    >>> result.group('action')
+    'met'
+
     # match Joint Sitting start and end times
     >>> result = KenyaParser.joint_reg.match("Parliament rose at 6.45 p.m.")
     >>> result.groups()
@@ -74,7 +79,7 @@ class KenyaParser():
         (?P<action>met|rose)
         (?:
             \ at\ the\ Senate\ Chambers?
-            (?:,\ Parliament\ Buildings,)?
+            (?:,\ (?:Main\ )?Parliament\ Buildings,)?
         )?
         (?:\ at\ )?
         (?P<time>\d+\.\d+\ [ap].m.)""", re.VERBOSE)
