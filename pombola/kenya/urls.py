@@ -24,9 +24,10 @@ urlpatterns = patterns('',
 # Create the two County Performance pages:
 
 for experiment_slug in ('mit-county', 'mit-county-larger'):
-    base_name = EXPERIMENT_DATA[experiment_slug]['base_view_name']
-    base_path = r'^' + base_name
     view_kwargs = {'experiment_slug': experiment_slug}
+    view_kwargs.update(EXPERIMENT_DATA[experiment_slug])
+    base_name = view_kwargs['base_view_name']
+    base_path = r'^' + base_name
     urlpatterns.append(
         url(base_path + r'$',
             CountyPerformanceView.as_view(**view_kwargs),
