@@ -47,6 +47,11 @@ class KenyaParser():
     >>> result.group('action')
     'rose'
 
+    # it should cope with the plural form of 'Senate Chamber'
+    >>> result = KenyaParser.sen_reg.match("The House met at the Senate Chambers, Parliament Buildings, at 2.30 p.m. [The Speaker (Hon. Ethuro) in the Chair]")
+    >>> result.group('action')
+    'met'
+
     # match Joint Sitting start and end times
     >>> result = KenyaParser.joint_reg.match("Parliament rose at 6.45 p.m.")
     >>> result.groups()
@@ -68,7 +73,7 @@ class KenyaParser():
         The\ (?:House|Senate)\s
         (?P<action>met|rose)
         (?:
-            \ at\ the\ Senate\ Chamber
+            \ at\ the\ Senate\ Chambers?
             (?:,\ Parliament\ Buildings,)?
         )?
         (?:\ at\ )?
