@@ -392,15 +392,15 @@ class KenyaParser():
         # work out which one we should use
         for line in transcript:
             text = line.get('text', '')
-            if KenyaParser.na_reg.search(text):
+            if cls.na_reg.search(text):
                 reg = KenyaParser.na_reg
                 venue = national_assembly
                 break
-            elif KenyaParser.sen_reg.search(text):
+            elif cls.sen_reg.search(text):
                 reg = KenyaParser.sen_reg
                 venue = senate
                 break
-            elif KenyaParser.joint_reg.search(text):
+            elif cls.joint_reg.search(text):
                 reg = KenyaParser.joint_reg
                 venue = national_assembly
                 break
