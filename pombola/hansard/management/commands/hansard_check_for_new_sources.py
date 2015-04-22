@@ -32,6 +32,9 @@ from django.core.management.base import NoArgsCommand
 
 from pombola.hansard.models import Source
 
+def fix_date_text(date_text):
+    return re.sub(r'Octoer', 'October', date_text)
+
 class NoSourcesFoundError(Exception):
     pass
 
@@ -144,6 +147,7 @@ class Command(NoArgsCommand):
         # Sometimes there are extra spaces - which also
         # confuse parsedatetime, so strip them out as well:
         tidied_name = ' '.join(tidied_name.split())
+        tidied_name = fix_date_text(tidied_name)
         result = cal.parseDateText(tidied_name)
         source_date = datetime.date(*result[:3])
         # print "source_date: " + str(source_date)
