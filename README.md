@@ -27,7 +27,7 @@ similarly):
 
 ## Installing
 
-Please see [docs/INSTALL.txt](https://github.com/mysociety/pombola/blob/master/docs/INSTALL.txt)
+Please see [docs/INSTALL.md](https://github.com/mysociety/pombola/blob/master/docs/INSTALL.md)
 
 To change your site's look and feel please see the [styling notes](https://github.com/mysociety/pombola/blob/master/docs/STYLING_NOTES.md).
 
