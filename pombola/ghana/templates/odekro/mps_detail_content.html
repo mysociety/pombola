@@ -1,6 +1,6 @@
 {% load thumbnail %}
 
-{% with object.position_set.all.currently_active.order_by_place as positions %}
+{% with positions.currently_active.order_by_place as positions %}
 <div class="typo-left ninecol">
     <h1>Members of Parliament</h1>
     <p>
