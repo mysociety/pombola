@@ -28,6 +28,7 @@ class ExperimentViewDataMixin(object):
     session_key_prefix = None
     base_view_name = None
     pageview_label = None
+    template_prefix = None
     experiment_key = None
     qualtrics_sid = None
     variants = None
@@ -103,7 +104,7 @@ class ExperimentFormSubmissionMixin(ExperimentViewDataMixin):
         """Redirect back to a reduced version of the page from either form"""
         extra_context = {
             '{0}_form'.format(self.form_key): form,
-            'major_partials': ['_county_{0}.html'.format(self.form_key)],
+            'major_partials': ['_{0}_{1}.html'.format(self.template_prefix, self.form_key)],
             'correct_errors': True}
         context = self.get_context_data(**extra_context)
         return self.render_to_response(context)
