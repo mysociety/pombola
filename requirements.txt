@@ -57,6 +57,7 @@ python-openid
 oauth2==1.5.170
 django-social-auth==0.6.0
 Fabric==1.10.1
+django-bootstrap-pagination
 
 git+git://github.com/nathforge/django-mechanize.git@d9537ccf8cc66bc7913df0c95fd532699ec88fdc
 selenium==2.44
@@ -139,7 +140,8 @@ wsgiref==0.1.2
 # probably want version 1.9.0 or greater and this:
 # http://gis.stackexchange.com/a/74060 might be of use if you have compile
 # errors
-GDAL
+#GDAL
+pygdal
 
 # This comes as standard in Python 2.7+ anyway
 # Pinned to 1.1 rather than 1.2.1 to save us having to use --allow-all-external
