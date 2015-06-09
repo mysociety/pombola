@@ -48,21 +48,15 @@ django-haystack==2.3.1
 # Testing helpers
 django-nose==1.3
 yanc==0.2.4
-<<<<<<< HEAD
 httplib2==0.9
 WebTest==2.0.15
 django-webtest==1.7.7
-=======
-httplib2==0.8
-WebTest==2.0.14
-django-webtest==1.7.6
 
 # For Ghana:
 python-openid
 oauth2==1.5.170
 django-social-auth==0.6.0
 
->>>>>>> 09f0c75... Add requirements needed by Ghana
 git+git://github.com/nathforge/django-mechanize.git@d9537ccf8cc66bc7913df0c95fd532699ec88fdc
 selenium==2.44
 django-selenium==0.9.7
