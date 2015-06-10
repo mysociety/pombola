@@ -154,7 +154,7 @@ class GhanaParserRegressionTest(unittest.TestCase):
         """
         
         # change to True to update the test json files.
-        overwrite_known_good_files = True
+        overwrite_known_good_files = False
         
         # list of all the files that we should parse and compare (path should
         # be relative to this test file).
