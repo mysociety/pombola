@@ -140,8 +140,9 @@ wsgiref==0.1.2
 # probably want version 1.9.0 or greater and this:
 # http://gis.stackexchange.com/a/74060 might be of use if you have compile
 # errors
-#GDAL
+#you can also try a matching version of pygdal
 #pygdal==1.10.1
+GDAL
 
 # This comes as standard in Python 2.7+ anyway
 # Pinned to 1.1 rather than 1.2.1 to save us having to use --allow-all-external
