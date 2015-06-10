@@ -15,11 +15,11 @@
         {#<img width="250" height="270" src="#" />#}
 
         {% thumbnail object.primary_image "250x270" crop="center" as img %}
-            <img class="profile-avatar" src="{{ img.url }}" alt="{{ object.name }}" 
+            <img class="profile-avatar" src="{{ img.url }}" alt="{{ object.name }}"
                   width="{{ img.width }}" height="{{ img.height }}" />
         {% empty %}
             <img src="{{STATIC_URL}}images/avatar-210x210.jpg" />
-        {% endthumbnail %}  
+        {% endthumbnail %}
 
         <div class="bioData">
             <h4>Biography</h4>
@@ -35,7 +35,7 @@
     <div id="profileContent">
         <div class="titleSpace">
             <h2>Hon. {{ object.title }} {{ object.legal_name }}</h2>
-            <p>MP for 
+            <p>MP for
                 {% for constituency in object.constituencies %}
                     <a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a>
                 {% endfor %}
@@ -44,7 +44,7 @@
             <a class="{{ party.name|lower }}_tag" href="#"></a>
             {% endwith %}
         </div>
-        
+
         {% comment %}
         <h3>Scorecard</h3>
         <h4 class="scorecard-overall">Overall Rating <span class="score-overall-bad">Bad</span></h4>
@@ -53,106 +53,12 @@
             <li>jbjhjdksldkjas</li>
             <li>jbjhjdksldkjas</li>
         </ul>
-        {% endcomment %}
 
         <div id="profileAsset">
             {% include 'disqus_comments.html' %}
-            
-            {% comment %}
-            <ul class="menu">
-                <li id="comments" class="active">Comments</li>
-                <li id="overview">Overview</li>
-                <li id="experience">Experience</li>
-
-                <li id="appearances">Appearances (2290)</li>
-            </ul>
-            <span class="clear"></span>
-
-            <div class="content comments">
-                <a id="post-count" href="#"><h3>3 comments</h3></a>
-                <div class="userAvatar">
-                    <img src="#" />
-                </div>
-                <ul class="pcForm">
-                    <form action="">
-                        <textarea placeholder="Leave a message"></textarea>
-                    </form>
-                </ul>
-                <div class="postLists">
-                    <li>
-                        <a class="userAvatar" href="#">
-                            <img src="#" />
-                        </a>
-                        <div class="post-body">
-                            <strong><a href="#">Kuuku</a></strong>
-                            <span>- 2 months ago</span>
-                            <p>If you vote anyone as an MP he will soon find out that he can increase his salary at will. If you vote him out, someone else will come in and do the same thing. If you vote anyone as an MP he will soon find out that he can increase his salary at will. If you vote him out, someone else will come in and do the same thing. The MP has too much power, let us hope that the new constitution curtails this.</p>
-                            <ul class="postLink">
-                                <li><a href="#">reply</a></li>
-                                <li><a href="#">share</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="userAvatar" href="#">
-                            <img src="#" />
-                        </a>
-                        <div class="post-body">
-                            <strong><a href="#">Kuuku</a></strong>
-                            <span>- 2 months ago</span>
-                            <p>If you vote anyone as an MP he will soon find out that he can increase his salary at will. If you vote him out, someone else will come in and do the same thing. If you vote anyone as an MP he will soon find out that he can increase his salary at will. If you vote him out, someone else will come in and do the same thing. The MP has too much power, let us hope that the new constitution curtails this.</p>
-                            <ul class="postLink">
-                                <li><a href="#">reply</a></li>
-                                <li><a href="#">share</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="userAvatar" href="#">
-                            <img src="#" />
-                        </a>
-                        <div class="post-body">
-                            <strong><a href="#">Kuuku</a></strong>
-                            <span>- 2 months ago</span>
-                            <p>If you vote anyone as an MP he will soon find out that he can increase his salary at will. If you vote him out, someone else will come in and do the same thing. If you vote anyone as an MP he will soon find out that he can increase his salary at will. If you vote him out, someone else will come in and do the same thing. The MP has too much power, let us hope that the new constitution curtails this.</p>
-                            <ul class="postLink">
-                                <li><a href="#">reply</a></li>
-                                <li><a href="#">share</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </div>
-
-            </div>
-            <div class="content overview">
-                <ul>
-                    <li><img src="css/images/bullet.gif" alt="-" /> Top 10 free fonts for professional design</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> Create an amazing music player using mouse gestures & hotkeys</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> Boobles: First theme on Themeforest released!</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> Creating AJAX websites based on anchor navigation</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> Fast Tip: Create your personal blog to promote your self</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> How to make a brilliant mysql forum database from scratch</li>
-                </ul>
-            </div>
-            <div class="content experience">
-                <ul>
-                    <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.plusmusica.com">www.plusmusica.com</a> - Online jukebox!</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.cokidoo.com">www.cokidoo.com</a> - Awesome startup! :)</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.cokidoo.com">www.pixelartgames.com</a> - Do you want pixel art games? ;)</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.dmsconsulting.es">www.dmsconsulting.es</a> - Great guys</li>
-                </ul>
-            </div>
-            <div class="content appearances">
-                <ul>
-                    <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.plusmusica.com">www.plusmusica.com</a> - Online jukebox!</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.cokidoo.com">www.cokidoo.com</a> - Awesome startup! :)</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.cokidoo.com">www.pixelartgames.com</a> - Do you want pixel art games? ;)</li>
-                    <li><img src="css/images/bullet.gif" alt="-" /> <a href="http://www.dmsconsulting.es">www.dmsconsulting.es</a> - Great guys</li>
-                </ul>
-            </div>
-            {% endcomment %}
         </div>
-    </div>                
+        {% endcomment %}
+    </div>
 </div>
 
 <div class="index-right threecol">
@@ -171,48 +77,5 @@
         <span class='st_email_hcount' displayText='Email'></span>
         </li>
     </ul>
-
-    {% comment %}
-
-    <h3>Latest Post</h3>
-    <div class="featBox activity">
-        <ul>
-            <li>
-                <a class="activityAvatar" href="#"><img src="#" /></a>
-                <b><a href="#">Lorem Ipsum dolor test post elentum turpis accumsan</a></b>
-                <span>Nov 15, 2012</span>
-            </li>
-            <li>
-                <a class="activityAvatar" href="#"><img src="#" /></a>
-                <b><a href="#">Lorem Ipsum dolor test post elentum turpis accumsan</a></b>
-                <span>Nov 15, 2012</span>
-            </li>
-            <li>
-                <a class="activityAvatar" href="#"><img src="#" /></a>
-                <b><a href="#">Lorem Ipsum dolor test post elentum turpis accumsan</a></b>
-                <span>Nov 15, 2012</span>
-            </li>
-            <li>
-                <a class="activityAvatar" href="#"><img src="#" /></a>
-                <b><a href="#">Lorem Ipsum dolor test post elentum turpis accumsan</a></b>
-                <span>Nov 15, 2012</span>
-            </li>
-        </ul>
-    </div>
-    <h3>Tags</h3>
-    <div class="featBox categories-field">
-        <ul>
-            <a href="#">2008 Aspirants</a>
-            <a href="#">2008 Elections</a>
-            <a href="#">Bills</a>
-            <a href="#">Constituency News</a>
-            <a href="#">Political Parties</a>
-            <a href="#">Odekro News</a>
-            <a href="#">Uncategorized</a>
-            <a href="#">News</a>
-            <a href="#">MP's</a>
-        </ul>
-    </div>
-    {% endcomment %}
 </div>
 {% endblock %}

@@ -21,56 +21,28 @@ OPTIONAL_APPS = (
     # 'social_auth',
 
     'mapit',
+    'bootstrap_pagination',
 )
 
 COUNTRY_CSS = {
     'ghana-base': {
         'source_filenames': (
-            'css/1140.css',
-            'css/ie.css',
-            'css/styles.css',
+            'css/bootstrap.css',
+            'css/bootstrap-theme.css',
             'css/jqcloud.css',
         ),
         'output_filename': 'css/ghana.css',
     },
-    'home': {
-        'source_filenames': (
-            'css/jqcloud.css',
-        ),
-        'output_filename': 'css/home.css',
-    },
 }
 
 COUNTRY_JS = {
-    'ghana': {
+    'ghana-base': {
         'source_filenames': (
-            'js/script.js',
-            'js/css3-mediaqueries.js',
-            'js/jquery-1.8.3.min.js',
-            'js/s3Slider.js',
-            'js/jquery.jshowoff.min.js',
-            'js/jquery.animate.js',
+            'js/bootstrap.js',
+            'js/jquery-1.11.3.js',
+            'js/jqcloud-1.0.4.js',
         ),
         'output_filename': 'js/ghana.js',
-    },
-    'home': {
-        'source_filenames': (
-            'js/jqcloud-1.0.2.min.js',
-            'js/countdown.js',
-        ),
-        'output_filename': 'js/home.js',
-    },
-    'hansard-extra': {
-        'source_filenames': (
-            'js/jquery.truncate.js',
-        ),
-        'output_filename': 'js/hansard-extra.js',
-    },
-    'position-extra': {
-        'source_filenames': (
-            'js/easypaginate.js',
-        ),
-        'output_filename': 'js/position-extra.js',
     },
 }
 
@@ -116,3 +88,5 @@ LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
 #     # 'social_auth.backends.pipeline.user.update_user_details',
 #     'user_profile.pipeline.update_user_details',
 # )
+TWITTER_ACCOUNT_NAME = "odekro"
+FACEBOOK_ACCOUNT_NAME = "odekro"

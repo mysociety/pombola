@@ -1,103 +1,45 @@
-{% extends 'base.html' %}
+{%  extends "base.html" %}
 
-{% block title %}Home{% endblock %}
-{% block title_suffix %}| Odekro{% endblock %}
+{% block title %} Home {% endblock title %}
+{% block title_suffix %}| Odekro{% endblock title_suffix %}
 
 {% block extra_scripts %}
-  {% comment %}
-    Launch-specific scripts should be moved out after launch
-  {% endcomment %}
 
-  {% load compressed %}
-  {% compressed_js 'home' %}
-  {% compressed_css 'home' %}
+{% endblock extra_scripts %}
 
-  <script type = "text/javascript">
-    $(function() {
-        $.getJSON("search/tagcloud/", 
-        {},
-        function(data){
-            $("#wordcloud").jQCloud(data, {width: 525, height:345, shape: "rectangular"});
-        });
-      });
-    </script>
 
-    <!-- add news ticker functionality -->
-   <script type='text/javascript'>
-   $(function(){
-       $.get('{{ STATIC_URL }}news.html', 
-             function(data) {
-              $('#ticker').html(data);   
-             });
-   });
-    
-    function tick(){
-        try{
-            $('#ticker li:first')
-              .animate({'opacity':0}, 200, 
-              function () 
-                 { $(this).appendTo($('#ticker')).css('opacity', 1); });
-             } catch(err) {/*ignore*/}
-    }
-    
-    $(function() { 
-        setInterval(tick, 10000);
-     });
-    </script>
-    
-  <script type="text/javascript">
-        function diff(end, start) {
-            if (!start) {
-                start = new Date()
-            }
+{% block extra_styles %}
 
-            var ms = (end - start)
-            var s = Math.floor(ms / 1000)
-            var m = Math.floor(s / 60)
-            s %= 60
-            var h = Math.floor(m / 60)
-            m %= 60
-            var d = Math.floor(h / 24)
-            h %= 24
+{% endblock extra_styles %}
 
-            return [d, h, m, s]
-        }
-
-        $(function(){
-            $('#counter').countdown({
-                image: '{{ STATIC_URL }}images/digits.png',
-                startTime: diff(new Date(2012, 11, 7)).join(':')
-            });
-        });
-  </script>
-
-  <script type="text/javascript">     
-      $(function() { 
-          $('#personFeatures').jshowoff({ 
-             links: false,
-             controls: false,
-             effect: 'fade',
-             cssClass: 'personFeatures',
-             hoverPause: false,
-             speed: 20000
-         }) 
-      })
-  </script>
-
-  <script type="text/javascript">
-      $(function() {
-        try{
-        $('#slider1').s3Slider({
-              timeOut: 5000 
-          })
-          }catch(err) { /* slider1 does not exist - so ignore */ }
-      })
-  </script>
-{% endblock %}
-
-{% block custom-crumb-id %}-rep{% endblock %}
 
 {% block content %}
-    {# include 'home_content.html' #}
-    {% include 'home_content_launch.html' %}
-{% endblock %}
+
+ <div class="row">
+  <div class="col-xs-12 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+        <h3 class="panel-heading">What is Odekro?</h3>
+        <div class="panel-body" id="indexIntro">
+          <p>In the Akan chieftaincy hierarchy, the Odekro is the lowest sub-divisional chief responsible for ruling  a town and making sure the citizens are taken care of.</p>
+
+          <p>Members of Parliament (MPs) are elected to serve constituencies by representing the citizens in Parliament. Odekro monitors them by making parliamentary debate proceedings (<a href="#">Hansards</a>) freely accessible to the citizens of Ghana. </p>
+          <p>Our goal at Odekro is to promote transparency, provide online access to public records and empower citizens to keep an eye on public officials, especially parliament.</p>
+        </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-6 col-lg-6">
+       {% include 'odekro/featured_profile.html' %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8 col-lg-8">
+   {% include 'summary.html' %}
+  </div>
+
+  <div class="col-xs-12 col-md-4 col-lg-4">
+      {% include 'news.html' %}
+  </div>
+</div>
+
+{% endblock content %}

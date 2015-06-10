@@ -29,3 +29,6 @@ ENABLED_FEATURES = make_enabled_features(INSTALLED_APPS, ALL_OPTIONAL_APPS)
 
 PIPELINE_CSS.update(COUNTRY_CSS)
 PIPELINE_JS.update(COUNTRY_JS)
+
+#need this for funky reversematch error in prod
+DEBUG_TOOLBAR_PATCH_SETTINGS=False
