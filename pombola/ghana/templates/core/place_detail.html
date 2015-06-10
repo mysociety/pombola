@@ -1,61 +1,77 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 {% load thumbnail %}
 {% load humanize %}
 
-{% block title %}{{ object.name }}tttttt{% endblock %}
+{% block title %}{{ object.name }} {% endblock %}
 
 {% block content %}
 
-    <div class="title-space">
-        <p class="object-kind">{{ object.kind.name }}</p>
-        <h1>{{ object.name }}</h1>
+    <div class="panel panel-default">
 
+        <div class="panel-heading">
+            <h2> {{ object.name }} </h2>
+            <h4 class="label label-default"> {{ object.kind.name }} </h4>
+        </div>
+
+    <div class="panel-body">
+     <div>
         {% if object.organisation %}
         <p>part of <a href="{{ object.organisation.get_absolute_url }}">{{ object.organisation.name }}</a></p>
         {% endif %}
     </div>
+        <div class="row">
+            {% if object.mapit_area %}
+                <div class="col-xs-12 col-md-4 profile-map">
+                    <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
 
-    {% if object.mapit_area %}
-        <div class="profile-map">
-            <script src="{{ STATIC_URL }}js/map.js?{{ settings.STATIC_GENERATION_NUMBER }}"></script>
+                    <div id="map_canvas" width="300" height="300"></div>
+                    <script type="text/javascript" charset="utf-8">
+                        add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url mapit_index %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
+                    </script>
+                </div>
+            {% else %}
+                <div class="col-xs-12 col-md-4">
+                    {% thumbnail object.primary_image "200x200" as im %}
+                    <img  class="img-thumbnail img-circle img-responsive" src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+                    {% empty %}
+                    <img class="img-thumbnail img-circle img-responsive" src="{{STATIC_URL}}images/place-200x200.jpg" />
+                    {% endthumbnail %}
+                </div>
+            {% endif %}
 
-            <div id="map_canvas" width="300" height="300"></div>
-            <script type="text/javascript" charset="utf-8">
-                add_kml_to_map( 'http://{{ request.META.HTTP_HOST }}{% url mapit_index %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
-            </script>
+            <div class="col-xs-12 col-md-8">
+                <div class="social-and-tools">
+                    {% include 'core/social_tools.html' %}
+                </div>
+
+                <div class="panel small-container">
+                    {% include 'scorecards/scorecard.html' %}
+                </div>
+
+                <div class="profile-info">
+                    {% with politician_pos=object.current_politician_position %}
+                    {% if politician_pos %}
+                    <div class="panel panel-default constituency-party">
+                        <h4 class="panel-heading">Key Figure</h4>
+                        <span><a href="{{ politician_pos.person.get_absolute_url }}">
+                                {% thumbnail politician_pos.person.primary_image "48x48" as img %}
+                                    <img class="img-thumbnail img-responsive" src="{{ img.url }}" alt="{{ politician_pos.person.name }}" width="{{ img.width }}" height="{{ img.height }}" >
+
+                                    </img>
+                                {% empty %}
+                                    <img class="img-thumbnail img-responsive" src="{{STATIC_URL}}images/avatar.png" width="48" height="48"/>
+                                {% endthumbnail %}
+                                {{ politician_pos.person.name }} [MP]</a>
+                        </span>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
         </div>
-    {% else %}
-        <div class="profile-pic">
-            {% thumbnail object.primary_image "200x200" as im %}
-            <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% empty %}
-            <img src="{{STATIC_URL}}images/place-200x200.jpg" />
-            {% endthumbnail %}
-        </div>
-    {% endif %}
-
-    <div class="social-and-tools">
-        {% include 'core/social_tools.html' %}
     </div>
 
-    <div class="small-container">
-        {% include 'scorecards/scorecard.html' %}
-    </div>
-
-    <div class="profile-info">
-        {% with politician_pos=object.current_politician_position %}
-        {% if politician_pos %}
-        <div class="constituency-party">
-            <h3>Key figure</h3>
-            <ul>
-                <li><a href="{{ politician_pos.person.get_absolute_url }}">{{ politician_pos.person.name }} <span>[mp]</span></a></li>
-            </ul>
-        </div>
-        {% endif %}
-        {% endwith %}
-
-    </div>
-
+{% comment %}
     <div class="large-container">
         <div class="tab-wrapper">
 
@@ -65,18 +81,23 @@
                     {{ object.summary }}
                 </div>
             {% endif %}
+        </div>
+    </div>
+
+
+            <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
+            <div class="tab" id="related-people" data-tab-content-source-url="{% url 'place_related_person_tab' slug=object.slug %}">
+            </div>
+{% endcomment %}
 
 	    {% comment %}
-            <h2 class="tab-nav" rel="#related-people"><a href="/">Related People</a></h2>
-            <div class="tab" id="related-people" data-tab-content-source-url="{% url place_related_person_tab slug=object.slug %}">
-            </div>
-
 	    <!-- Not showing organisations for the moment as the list isn't very good. -->
             <h2 class="tab-nav" rel="#related-organisations"><a href="/">Related Organisations</a></h2>
             <div class="tab" id="related-organisations" data-tab-content-source-url="{% url place_related_organisation_tab slug=object.slug %}">
             </div>
 	    {% endcomment %}
 
+     {% comment %}
             <h2 class="tab-nav" rel="#related-places"><a href="/">Related Places</a></h2>
             <div class="tab" id="related-places">
 
@@ -108,7 +129,7 @@
             </div>
 
             {% include 'disqus_comments.html' %}
-
+    { endcomment %}
     {% comment %}
 
     <h1>{{ object.name }}</h1>
@@ -136,6 +157,7 @@
     {% endwith %}
     {% endcomment %}
 
+    {% comment %}
             {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
                 <h2 class="tab-nav" rel="#cdf-projects"><a href="/">CDF Projects ({{ object.project_set.count }})</a></h2>
                 <div class="tab" id="cdf-projects">
@@ -200,8 +222,6 @@
                     </dl>
                 </div>
             {% endif %}
-
-        </div>
-    </div>
+        {% endcomment %}
 
 {% endblock %}

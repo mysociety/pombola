@@ -11,18 +11,6 @@
 {% endblock %}
 
 {% block extra_scripts %}
-    {% ifequal object.name|lower 'mp' %}
-    {% load compressed %}
-    {% compressed_js 'position-extra' %}
-
-    <script type="text/javascript">
-    jQuery(function($){
-    $('ul.position-list').easyPaginate({
-            step:25
-        });
-    });    
-    </script>
-    {% endifequal %}
 {% endblock %}
 
 {% block content %}

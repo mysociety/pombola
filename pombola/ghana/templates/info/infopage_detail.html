@@ -1,98 +1,15 @@
 {% extends 'base.html' %}
 
-{% comment %}
-    <div id="breadcrumb">
-        <nav class="wrapper">
-            <ul>
-                <li>
-                    <a href="#">home</a><span class="sep">»</span>
-                </li>
-                <li>
-                    <a href="#">information</a><span class="sep">»</span>
-                </li>
-                <li>citizens rights</li>
-            </ul>
-        </nav>
-    </div>
-{% endcomment %}
-
 {% block content %}
-    <div class="typo-left ninecol">
-        <h1>{{ object.title }}</h1>
+    <div class="panel panel-default text-left">
+        <h3 class="panel-heading">{{ object.title }}</h3>
+        <div class="panel-body">
 
-        {{ object.content_with_anchors|safe }}
-    </div>
+                {{ object.content_with_anchors|safe }}
 
-    <div class="index-right threecol">
-        <h3>Follow Us</h3>
-        {% include 'odekro/social_links.html' %}
-
-        {% comment %}
-        <h3>Odekro News</h3>
-        <ul id="odekro-news-list">
-            <li>
-                <div class="meta-date">
-                    <strong class="month">Nov</strong>
-                    <span class="day">24</span>
-                </div>
-                <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
-                <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
-                <a href="#">more</a>
-            </li>
-            <li>
-                <div class="meta-date">
-                    <strong class="month">Nov</strong>
-                    <span class="day">24</span>
-                </div>
-                <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
-                <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
-                <a href="#">more</a>
-            </li>
-            <li>
-                <div class="meta-date">
-                    <strong class="month">Nov</strong>
-                    <span class="day">24</span>
-                </div>
-                <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
-                <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
-                <a href="#">more</a>
-            </li>
-            <li>
-                <div class="meta-date">
-                    <strong class="month">Nov</strong>
-                    <span class="day">24</span>
-                </div>
-                <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
-                <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
-                <a href="#">more</a>
-            </li>
-        </ul>
-        {% endcomment %}
-
-        {% comment %}
-        <h3>Have Your Say</h3>
-        <div class="featBox poll-field">
-            <h4 id="poll-question">Ipsum dolor sit met, consectetur adipiscing. Nullam feugiat dignissim metus, id suscipit vitae. Cras sapien ?</h4>
-            <div id="poll-answer">
-                <span class="answerGroup">
-                    <input type="radio" />
-                    <label>Yes</label>
-                </span>
-                <span class="answerGroup">
-                    <input type="radio" />
-                    <label>No</label>
-                </span>
-                <span class="answerGroup">
-                    <input type="radio" />
-                    <label>Not Sure</label>
-                </span>
-            </div>
-            <div id="pollVote">
-                <a id="voteBTN" href="#">Vote</a>
-                <a id="ryte" href="#">View Poll</a>
-            </div>
         </div>
-        {% endcomment %}
     </div>
+
+
 {% endblock %}
 

@@ -1,120 +1,79 @@
-{% extends 'base.html' %}
-{% load switch %}
+{% extends "page.html" %}
 
+{% load switch %}
 {% load thumbnail %}
 
-{% block extra_scripts %}
-
-{% load compressed %}
-{% compressed_js 'hansard-extra' %}
-<script type="text/javascript">
-    $(function() {
-        $('.truncate').truncate({charLength: 50, perOT: true, fx: "easeOutBounce"})
-    })
-</script>
-{% endblock %}
-
 {% block content %}
-<div class="hansardContainer elevencol">
-    <div id="hansardIntro">
-        <h1 class="hansardH1">Debates of {{ sitting.start_date }}</h1>
-        <p>
-        </p>
-        {% comment %}
-        <p>
-            When Parliament is in session, every word spoken by a member is faithfully transcribed, and published in a document called a Hansard. We have the Hansards of the Ghana Parliament dating back to {{ earliest_year }}. Browse through them below, or search via the box above.
-        </p>
-        {% endcomment %}
-    </div>
+<div class="panel panel-default hansardContainer">
+    <h1 class="panel-heading hansardH1">Debates of {{ sitting.start_date }}</h1>
 
-    {% if topics %}
-    <div class="hansardMeta">
-        <h2 id="title">Topics</h2>
-        <ul id="content">
-            <li><a href="#">Question Period</a></li>
-            <li><a href="#">Workforce Integration Organization</a></li>
-            <li><a href="#">Boys and Girls Club</a></li>
-            <li><a href="#">Brain Tumour Awareness Month</a></li>
-            <li><a href="#">The Economy</a></li>
-            <li><a href="#">Food Safety Question Period</a></li>
-            <li><a href="#">Queen's Diamond Jubilee</a></li>
-            <li><a href="#">Youth Criminal Justice</a></li>
-            <li><a href="#">Foreign Investment</a></li>
-            <li><a href="#">Member for New Town</a></li>
-            <li><a href="#">Jobs and Growth Act, 2012</a></li>
-        </ul>
-    </div>
-    {% endif %}
+  <div class="panel-body">
 
-    {% if sitting %}
-    <ul class="hansardEntries">
+  {% if sitting %}
+      <div class="hansardEntries">
         {% for entry in sitting.entry_set.all %}
-            {% with entry.hansardentry_set.all.0 as he %}
-
+          {% with entry.hansardentry_set.all.0 as he %}
             {% switch entry.type %}
-                {% case  'speech' %}
-                <li class="statement">
-                    <div class="context">
-                        <p><h6>{{ he.section }}</h6>
-                        {# <br />Statements By Members #}
-                        </p>
-                        <span>{{ entry.sitting.start_date }} / {{ he.time }}</span>
-                        
-                        {% with entry.speaker.parties.0 as party %}
-                        {% if party %}
+              {% case  'speech' %}
+                <div class="media statement">
+                  <div class="row context">
+                    {% with entry.speaker.parties.0 as party %}
+                      {% if party %}
                         <strong>
-                            <a class="patytag" 
-                               href="{{ party.get_absolute_url }}">
-                               {{ party.name }}
-                           </a>
+                          <a class="partytag" href="{{ party.get_absolute_url }}">
+                            {{ party.name }}
+                          </a>
                         </strong>
-                        {% endif %}
-                        {% endwith %}
-                    </div>
-                    
+                      {% endif %}
+                    {% endwith %}
+                  </div>
 
-                    <div class="focus">
-                        {% thumbnail entry.speaker.primary_image "200x200" as img %}
-                            <a class="hansardAvatar" 
-                               href="{{ he.get_absolute_url }}">
-                               <img src="{{ img.url }}" />
-                            </a>
-                        {% empty %}                          
-                        {% endthumbnail %}
-                        <p class="speaker">
-                            <a href="{{ entry.speaker.get_absolute_url }}">
-                                <strong>
-                                    {{ entry.speaker_name }}
-                                </strong>
-                            </a>
-                            {#<span>{{ entry.speaker.}}</span>#}
-                        </p>
-                        <p>
-                            {{ entry.content|linebreaksbr }}
-                        </p>
+
+                  <div class="media-left media-top">
+                    {% thumbnail entry.speaker.primary_image "64x64" as img %}
+                      <a class="media-object" href="{{ he.get_absolute_url }}">
+                        <img src="{{ img.url }}" />
+                      </a>
+                      {% empty %}
+                        <img class="media-object" src="{{ STATIC_URL }}images/avatar.png"
+                           width="64px" height="64px"></img>
+                    {% endthumbnail %}
                     </div>
-                </li> 
-                {% case 'heading' %}
-                    {% if entry.content %}
-                    <li>
-                        <div class="focus">
-                            <h4>{{ entry.content|linebreaksbr }}</h4>
+                    <div class="media-body well">
+                        <h5 class="media-heading speaker">
+                          <a href="{{ entry.speaker.get_absolute_url }}">
+                            <strong>
+                              {{ entry.speaker_name }}
+                            </strong>
+                          </a>
+                         <small class="pull-right"><span><i class="fa fa-clock-o"> {{ he.time }}</i></span></small>
+                        </h5>
+
+                        <div class="">
+                          {{ entry.content|linebreaksbr }}
                         </div>
-                    </li>
-                    {% endif %}
-                {% case 'other' %}
-                    <font col="red">{{ entry.content }}</font>
-                {% else %}
-                    <li>
-                        <div class="focus">
-                            <font>{{ entry.content }}</font>
-                        </div>
-                    </li>
+                    </div>
+
+                </div>
+
+              {% case 'heading' %}
+                {% if entry.content %}
+                      <h4>{{ entry.content|linebreaksbr }}<small class="pull-right"><span><i class="fa fa-clock-o"> {{ he.time }}</i></span></small></h4>
+                {% endif %}
+              {% case 'other' %}
+                <font col="red">{{ entry.content }}</font>
+              {% else %}
+                <li>
+                  <div class="focus">
+                    <font>{{ entry.content }}</font>
+                  </div>
+                </li>
             {% endswitch %}
 
-            {% endwith %}       
+          {% endwith %}
         {% endfor %}
+      </div>
     {% endif %}
-    </ul>
+</div>
 </div>
 {% endblock %}

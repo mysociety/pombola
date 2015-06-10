@@ -1,41 +1,17 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
 {% block content %}
-<div class="hansardContainer elevencol">
-    <div id="hansardIntro">
-        <h1 class="hansardH1">The Hansard</h1>
+<div class="panel panel-default hansardContainer">
+
+    <h2 class="panel-heading hansardH1">The Hansard</h2>
+    <div class="panel-body hansardMeta">
         <p>The transcript of the proceedings in the Parliament of Ghana is called the Hansard – named after the British publication of parliamentary proceedings.
         </p>
         <p> Browse through them below, or search via the box above.</p>
-        {% comment %}
-        <p>We have the Hansards of the Ghana Parliament dating back to 2008.
-        </p>
-        {% endcomment %}
-    </div>
-    
-    <div class="hansardMeta">
-        {% comment %}
-        <h2>[Latest Date]</h2>
-        
-        <ul id="content">
-            <li><a href="#">Question Period</a></li>
-            <li><a href="#">Workforce Integration Organization</a></li>
-            <li><a href="#">Boys and Girls Club</a></li>
-            <li><a href="#">Brain Tumour Awareness Month</a></li>
-            <li><a href="#">The Economy</a></li>
-            <li><a href="#">Food Safety Question Period</a></li>
-            <li><a href="#">Queen's Diamond Jubilee</a></li>
-            <li><a href="#">Youth Criminal Justice</a></li>
-            <li><a href="#">Foreign Investment</a></li>
-            <li><a href="#">Member for New Town</a></li>
-            <li><a href="#">Jobs and Growth Act, 2012</a></li>
-        </ul>
-        {% endcomment %}
 
-        <h2>Recent</h2>
-        <ul>
+        <h3>Recent</h3>
+        <ul class="list-group">
             {% for sitting in sittings %}
-                <li>
+                <li class="col-xs-3 list-group-item text-center ">
                     <a href="{{ sitting.get_absolute_url }}">
                         {{ sitting.start_date }}
                     </a>
@@ -44,14 +20,6 @@
                 <li>There are no transcripts</li>
             {% endfor %}
         </ul>
-        
-        <br />
-
-        {% comment %}
-        <h2>Past</h2>
-        <ul>
-        </ul>
-        {% endcomment %}
     </div>
 </div>
 {% endblock %}
