@@ -212,6 +212,35 @@ $dark-red: #be1919;
     background-color: darken(#59adeb, 10%);
   }
 
+  #id_constituencies,
+  #id_comments {
+    font-size: 1em; // make form element text bigger
+  }
+
+  #id_comments {
+    padding: 0.3em;
+    width: 100%; // fit to window width
+    max-width: 20em; // ...up to a sensible maximum
+  }
+
+  .embedded-video {
+      position: relative
+  }
+
+  .embedded-video .ratio-img {
+      display: block;
+      width: 100% !important;
+      height: auto !important;
+  }
+
+  .embedded-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+
   #petition {
     background-color: $fill-green;
     padding: 30px 20px;
