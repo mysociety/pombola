@@ -3,9 +3,6 @@ from django.utils import simplejson
 import datetime
 from operator import itemgetter
 
-
-from core import models
-
 from haystack.query import SearchQuerySet
 from mzalendo.hansard import models as hansard_models
 
