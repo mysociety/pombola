@@ -32,7 +32,7 @@ class Command(BaseCommand):
         
         src = args[0]
 
-        if not os.path.exists(src)
+        if not os.path.exists(src):
             sys.exit(1)
 
         if os.path.isfile(src):
