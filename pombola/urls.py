@@ -91,6 +91,12 @@ urlpatterns += patterns('',
     (r'^search/', include('pombola.search.urls')),
 )
 
+# tagcloud
+# FIXME - should make this an optional feature
+urlpatterns += patterns('',
+    (r'^tagcloud/', include('tag_cloud.urls')),
+)
+
 # feedback
 urlpatterns += patterns('',
     (r'^feedback/', include('pombola.feedback.urls')),
