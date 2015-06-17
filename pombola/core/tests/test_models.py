@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from django.utils import unittest
+from django.test import TestCase
 from django.test.utils import override_settings
 from django_date_extensions.fields import ApproximateDate
 from django.contrib.contenttypes.models import ContentType
@@ -8,7 +8,8 @@ from pombola.core import models
 from pombola.slug_helpers.models import SlugRedirect
 from pombola.tasks.models import Task
 
-class PositionTestCase(unittest.TestCase):
+
+class PositionTestCase(TestCase):
     def setUp(self):
         self.person       = models.Person.objects.create(legal_name="Bob Smith", slug="bob-smith")
 
@@ -37,15 +38,6 @@ class PositionTestCase(unittest.TestCase):
             name        = 'Job Title',
             slug        = 'job-title',
         )
-
-    def tearDown(self):
-        """Clean up after the tests"""
-        self.person.delete()
-        self.organisation.delete()
-        self.organisation_kind.delete()
-        self.place.delete()
-        self.place_kind.delete()
-        self.position_title.delete()
 
     def getPos(self, **kwargs):
         return models.Position.objects.create(
@@ -97,7 +89,7 @@ class PositionTestCase(unittest.TestCase):
         self.assertFalse( pos.is_ongoing() )
 
 
-class PositionCurrencyTest(unittest.TestCase):
+class PositionCurrencyTest(TestCase):
 
     def setUp(self):
         self.person = models.Person.objects.create(
@@ -123,7 +115,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([position], list(current_positions))
-        position.delete()
 
     def test_from_blank_past_still_current(self):
         position = models.Position.objects.create(
@@ -134,7 +125,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([position], list(current_positions))
-        position.delete()
 
     def test_from_past_not_current(self):
         position = models.Position.objects.create(
@@ -145,7 +135,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([], list(current_positions))
-        position.delete()
 
     def test_from_blank_past_not_current(self):
         position = models.Position.objects.create(
@@ -156,7 +145,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([], list(current_positions))
-        position.delete()
 
     def test_from_recent_to_future(self):
         position = models.Position.objects.create(
@@ -167,7 +155,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([position], list(current_positions))
-        position.delete()
 
     def test_from_recent_to_blank_future(self):
         position = models.Position.objects.create(
@@ -178,7 +165,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([position], list(current_positions))
-        position.delete()
 
     def test_from_soon_to_future(self):
         position = models.Position.objects.create(
@@ -189,7 +175,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([], list(current_positions))
-        position.delete()
 
     def test_from_soon_to_blank_future(self):
         position = models.Position.objects.create(
@@ -200,7 +185,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([], list(current_positions))
-        position.delete()
 
     def test_short_recent_past(self):
         position = models.Position.objects.create(
@@ -211,7 +195,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([], list(current_positions))
-        position.delete()
 
     def test_short_near_future(self):
         position = models.Position.objects.create(
@@ -222,7 +205,6 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([], list(current_positions))
-        position.delete()
 
     def test_normal_current(self):
         position = models.Position.objects.create(
@@ -233,15 +215,9 @@ class PositionCurrencyTest(unittest.TestCase):
         )
         current_positions = models.Position.objects.all().currently_active()
         self.assertEqual([position], list(current_positions))
-        position.delete()
-
-    def tearDown(self):
-        self.organisation.delete()
-        self.organisation_kind.delete()
-        self.person.delete()
 
 
-class PersonAndContactTasksTest( unittest.TestCase ):
+class PersonAndContactTasksTest(TestCase):
     def setUp(self):
         self.person = models.Person(
             legal_name = "Test Person",
@@ -252,10 +228,6 @@ class PersonAndContactTasksTest( unittest.TestCase ):
             slug='phone', name='Phone',
         )
         self.phone.save()
-
-    def tearDown(self):
-        self.person.delete()
-        self.phone.delete()
 
     def test_missing_contacts(self):
 
@@ -280,7 +252,7 @@ class PersonAndContactTasksTest( unittest.TestCase ):
         )
 
 
-class PersonNamesTest( unittest.TestCase ):
+class PersonNamesTest(TestCase):
 
     def setUp(self):
         self.person, _ = models.Person.objects.get_or_create(
@@ -298,11 +270,8 @@ class PersonNamesTest( unittest.TestCase ):
         self.assertEqual(self.person.all_names_set(),
                          set(("John Q. Public", "John Doe", "John Smith")))
 
-    def tearDown(self):
-        self.person.delete()
 
-
-class PersonRedirectUniquenessTest(unittest.TestCase):
+class PersonRedirectUniquenessTest(TestCase):
 
     def test_redirect_uniqueness_validation(self):
         # Validation should stop someone changing a person slug to one
@@ -323,7 +292,7 @@ class PersonRedirectUniquenessTest(unittest.TestCase):
             other_person.clean_fields()
 
 
-class PlaceRedirectUniquenessTest(unittest.TestCase):
+class PlaceRedirectUniquenessTest(TestCase):
 
     def test_redirect_uniqueness_validation(self):
         # Validation should stop someone changing a place slug to one
@@ -348,12 +317,9 @@ class PlaceRedirectUniquenessTest(unittest.TestCase):
         )
         with self.assertRaises(ValidationError):
             other_place.clean_fields()
-        existing_redirect.delete()
-        place_redirected_to.delete()
-        pkind.delete()
 
 
-class OrganisationRedirectUniquenessTest(unittest.TestCase):
+class OrganisationRedirectUniquenessTest(TestCase):
 
     def test_redirect_uniqueness_validation(self):
         # Validation should stop someone changing an organisation slug
@@ -378,12 +344,9 @@ class OrganisationRedirectUniquenessTest(unittest.TestCase):
         )
         with self.assertRaises(ValidationError):
             other_organisation.clean_fields()
-        existing_redirect.delete()
-        organisation_redirected_to.delete()
-        okind.delete()
 
 
-class PersonPlaceTest(unittest.TestCase):
+class PersonPlaceTest(TestCase):
 
     def setUp(self):
         # Make a person, with some positions, titles and some places to be
@@ -505,23 +468,6 @@ class PersonPlaceTest(unittest.TestCase):
             category = 'political',
         )
 
-    def tearDown(self):
-        self.person.delete()
-        self.organisation.delete()
-        self.organisation_kind.delete()
-        self.place_a.delete()
-        self.place_b.delete()
-        self.place_c.delete()
-        self.place_kind.delete()
-        self.position_title_a.delete()
-        self.position_title_b.delete()
-        self.position_title_c.delete()
-        self.position_a.delete()
-        self.position_b.delete()
-        self.position_c.delete()
-        self.position_d.delete()
-        self.position_e.delete()
-
     def test_constituencies_are_distinct(self):
         self.assertEqual(len(self.person.constituencies()), 3)
         self.assertTrue(self.place_a in self.person.constituencies())
@@ -550,7 +496,7 @@ class PersonPlaceTest(unittest.TestCase):
                          set([self.position_a]))
 
 
-class SummaryTest( unittest.TestCase ):
+class SummaryTest(TestCase):
 
     def setUp(self):
         self.person, _ = models.Person.objects.get_or_create(
@@ -559,9 +505,6 @@ class SummaryTest( unittest.TestCase ):
         )
         self.person.save()
 
-    def tearDown(self):
-        self.person.delete()
-
     def test_empty_summary_is_false(self):
         # An empty markitup field should be false and have no length so that in
         # the templates its truthiness is correct.
@@ -569,7 +512,7 @@ class SummaryTest( unittest.TestCase ):
         self.assertEqual( len(self.person.summary), 0 )
 
 
-class RelatedOrganisationTest(unittest.TestCase):
+class RelatedOrganisationTest(TestCase):
     def test_creation(self):
         """Check that it's possible to relate organisations
 
@@ -596,10 +539,3 @@ class RelatedOrganisationTest(unittest.TestCase):
             organisation_a=office,
             organisation_b=party,
             kind=rel_kind)
-
-        rel.delete()
-        rel_kind.delete()
-        office.delete()
-        party.delete()
-        party_office_kind.delete()
-        party_kind.delete()

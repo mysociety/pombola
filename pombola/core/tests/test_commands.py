@@ -13,8 +13,8 @@ from pombola.slug_helpers.models import SlugRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from django.core.management.base import CommandError
-from django.utils import unittest
-
+from django.test import TestCase
+\
 
 # A context manager to suppress standard output, as suggested in:
 # http://stackoverflow.com/a/1810086/223092
@@ -31,7 +31,7 @@ def no_stderr():
         sys.stderr = save_stderr
 
 
-class MergePeopleCommandTest(unittest.TestCase):
+class MergePeopleCommandTest(TestCase):
 
     def setUp(self):
         self.person_a = Person.objects.create(
@@ -152,23 +152,3 @@ class MergePeopleCommandTest(unittest.TestCase):
         self.assertEqual(contacts[0].value, '555 5555')
         self.assertEqual(contacts[1].value, 'jimmy@example.org')
 
-    def tearDown(self):
-        self.person_a.delete()
-        # Only delete person_b if it still exists, to avoid an
-        # elasticsearch 404:
-        Person.objects.filter(slug='james-stewart').delete()
-        self.organisation_a.delete()
-        self.organisation_b.delete()
-        self.organisation_kind.delete()
-        self.position_a.delete()
-        self.position_b.delete()
-        self.position_title.delete()
-        self.phone_kind.delete()
-        self.email_kind.delete()
-        # The test runner might be be using a transaction to rollback
-        # the test's changes, in which case we need to remove the
-        # redirect manually because core_merge_people uses a
-        # transaction which PostgreSQL regards as the same as the
-        # outer one because that's how it (doesn't) deal with nested
-        # transactions.
-        SlugRedirect.objects.filter(old_object_slug='james-stewart').delete()

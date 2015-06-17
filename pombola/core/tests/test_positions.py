@@ -34,13 +34,6 @@ class PositionTest(TestCase):
             slug = 'test-title',
         )
 
-    def tearDown(self):
-        self.person.delete()
-        self.organisation.delete()
-        self.organisation_kind.delete()
-        self.title.delete()
-
-
     def test_unicode(self):
         """Check that missing attributes don't crash"""
         
@@ -299,9 +292,6 @@ class PositionTest(TestCase):
         position_mysociety_id = position.get_identifier('org.mysociety.za')
 
         self.assertEqual(position_mysociety_id, '/positions/1')
-
-        self.id_a.delete()
-        position.delete()
 
     def test_currently_active(self):
         """Test that the currently active filter warks"""
