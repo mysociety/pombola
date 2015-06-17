@@ -1,6 +1,6 @@
 from BeautifulSoup import Tag, NavigableString
 from contextlib import contextmanager
-from django_webtest import WebTest
+from django_webtest import TransactionWebTest
 from django.contrib.auth.models import User
 from django.test import TestCase
 
@@ -15,22 +15,7 @@ class HomeViewTest(TestCase):
         self.assertIn('featured_persons', response.context)
 
 
-class PositionViewTest(WebTest):
-
-    def tearDown(self):
-        self.position.delete()
-        self.position2.delete()
-        self.position_hidden_person.delete()
-        self.person.delete()
-        self.person_hidden.delete()
-        self.place_slug_redirect.delete()
-        self.org_slug_redirect.delete()
-        self.organisation.delete()
-        self.organisation_kind.delete()
-        self.title.delete()
-        self.title2.delete()
-        self.bobs_place.delete()
-        self.place_kind_constituency.delete()
+class PositionViewTest(TransactionWebTest):
 
     def setUp(self):
         self.person = models.Person.objects.create(
@@ -193,7 +178,7 @@ class PositionViewTest(WebTest):
         )
 
 
-class TestPersonView(WebTest):
+class TestPersonView(TransactionWebTest):
 
     def setUp(self):
         self.alf = models.Person.objects.create(
@@ -215,11 +200,6 @@ class TestPersonView(WebTest):
             old_object_slug='Alfred--Smith',
             new_object=self.alf,
         )
-
-    def tearDown(self):
-        self.slug_redirect.delete()
-        self.superuser.delete()
-        self.alf.delete()
 
     def test_person_view_redirect(self):
         resp = self.app.get('/person/alfred-smith')
