@@ -4,8 +4,7 @@ import datetime
 from operator import itemgetter
 
 from haystack.query import SearchQuerySet
-from mzalendo.hansard import models as hansard_models
-
+from pombola.hansard import models as hansard_models
 
 BASEDIR = os.path.dirname(__file__)
 # normal english stop words and hansard-centric words to ignore
