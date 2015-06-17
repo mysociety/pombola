@@ -25,10 +25,11 @@ OPTIONAL_APPS = (
 )
 
 COUNTRY_CSS = {
-    'ghana-base': {
+    'ghana': {
         'source_filenames': (
             'css/bootstrap.css',
             'css/bootstrap-theme.css',
+            'css/bootstrap-select.css',
             'css/jqcloud.css',
         ),
         'output_filename': 'css/ghana.css',
@@ -36,10 +37,11 @@ COUNTRY_CSS = {
 }
 
 COUNTRY_JS = {
-    'ghana-base': {
+    'ghana': {
         'source_filenames': (
-            'js/bootstrap.js',
             'js/jquery-1.11.3.js',
+            'js/bootstrap.js',
+            'js/bootstrap-select.js',
             'js/jqcloud-1.0.4.js',
         ),
         'output_filename': 'js/ghana.js',

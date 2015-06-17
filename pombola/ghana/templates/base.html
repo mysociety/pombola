@@ -13,10 +13,6 @@
 <link rel="shortcut icon" href="{{ STATIC_URL}}images/favicon.ico" type="image/x-icon" />
 {% load compressed %}
 {% block styles %}
-  <link href="{{ STATIC_URL}}css/bootstrap.css" rel="stylesheet" type="text/css" />
-  <link href="{{ STATIC_URL}}css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
-  <link href="{{ STATIC_URL}}css/bootstrap-select.css" rel="stylesheet" type="text/css" />
-
   {% compressed_css 'ghana' %}
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,10 +28,6 @@
 
 {% block scripts %}
  {% compressed_js 'ghana' %}
-  <script type="text/javascript" src="{{ STATIC_URL}}js/jquery-1.11.3.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL}}js/bootstrap.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL}}js/bootstrap-select.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL}}js/jqcloud-1.0.4.js"></script>
 {% endblock %}
 
 {% block extra_scripts %}
