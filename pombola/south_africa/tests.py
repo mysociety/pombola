@@ -863,7 +863,7 @@ class SAOrganisationDetailViewTestParliament(TransactionWebTest):
         )
 
     def test_percentages(self):
-        with self.assertNumQueries(12):
+        with self.assertNumQueries(11):
             response = self.app.get('/organisation/model-parliament/')
         ps_and_ps = response.context['parties_and_percentages']
         self.assertEqual(2, len(ps_and_ps))
