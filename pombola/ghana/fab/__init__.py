@@ -1,4 +1,4 @@
-import fab.server
-import fab.postgres
-import fab.nginx
-import fab.webapp
+import server
+import postgres
+import nginx
+import webapp
