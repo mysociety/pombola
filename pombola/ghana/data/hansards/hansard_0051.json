@@ -571,18 +571,9 @@
             "column": "761", 
             "kind": "speech", 
             "name": "Mr Owusu-Aduomi", 
-            "original": "Mr Owusu-Aduomi: I thank the Hon Minister very much for the Answer.", 
+            "original": "Mr Owusu-Aduomi: I thank the Hon Minister very much for the Answer.\nwhether he is aware of this, and if not, what will he do for us? Because of that inadequate strength water is not being distributed that far to Ejisu.", 
             "section": "WORKS AND HOUSING", 
-            "speech": "I thank the Hon Minister very much for the Answer.", 
-            "time": "11:20:00"
-        }, 
-        {
-            "column": "761", 
-            "kind": "speech", 
-            "name": "Madam Speaker, for over 30 years now, not a single drop of pipe-borne water has run through the pipes laid in Ejisu and its environs. One of the reasons that the GWCL used to give us is the inadequate strength of the KNUST booster station", 
-            "original": "Madam Speaker, for over 30 years now, not a single drop of pipe-borne water has run through the pipes laid in Ejisu and its environs. One of the reasons that the GWCL used to give us is the inadequate strength of the KNUST booster station: I would want to know from the Hon Minister\nwhether he is aware of this, and if not, what will he do for us? Because of that inadequate strength water is not being distributed that far to Ejisu.", 
-            "section": "WORKS AND HOUSING", 
-            "speech": "I would want to know from the Hon Minister\n\nwhether he is aware of this, and if not, what will he do for us? Because of that inadequate strength water is not being distributed that far to Ejisu.", 
+            "speech": "I thank the Hon Minister very much for the Answer.\n Madam Speaker, for over 30 years now, not a single drop of pipe-borne water has run through the pipes laid in Ejisu and its environs. One of the reasons that the GWCL used to give us is the inadequate strength of the KNUST booster station: I would want to know from the Hon Minister\n\nwhether he is aware of this, and if not, what will he do for us? Because of that inadequate strength water is not being distributed that far to Ejisu.", 
             "time": "11:20:00"
         }, 
         {
@@ -1332,16 +1323,7 @@
             "name": "Mr Joseph B. Aidoo", 
             "original": "Mr Joseph B. Aidoo: Mr Speaker, I have no problem with the principle underlying this provision but I have difficulty with an aspect of the principle which seeks to suggest that a distribution utility cannot negotiate with a power generator.", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "Mr Speaker, I have no problem with the principle underlying this provision but I have difficulty with an aspect of the principle which seeks to suggest that a distribution utility cannot negotiate with a power generator.", 
-            "time": "12:30:00"
-        }, 
-        {
-            "column": "791", 
-            "kind": "speech", 
-            "name": "Mr Speaker, my difficulty is with the negotiation. I believe that a utility body can buy or cannot buy power from a generator? But then, it can on its own go and negotiate for whatever terms it wants to come with. So if the term \"negotiation\" can be removed from this provision and then we only have", 
-            "original": "Mr Speaker, my difficulty is with the negotiation. I believe that a utility body can buy or cannot buy power from a generator? But then, it can on its own go and negotiate for whatever terms it wants to come with. So if the term \"negotiation\" can be removed from this provision and then we only have: --", 
-            "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "--\n \"shall not buy a Power Purchase Agreement with a generator of electricity from renewable energy sources . . .\"\n Then I will be comfortable with this provision. But to say that it cannot negotiate with a generator of electricity, I think it is too extreme. [Interruptions.] Yes, \"the Power Purchase Agreement\", there should be flexibility -- [Interruption]", 
+            "speech": "Mr Speaker, I have no problem with the principle underlying this provision but I have difficulty with an aspect of the principle which seeks to suggest that a distribution utility cannot negotiate with a power generator.\n Mr Speaker, my difficulty is with the negotiation. I believe that a utility body can buy or cannot buy power from a generator? But then, it can on its own go and negotiate for whatever terms it wants to come with. So if the term \"negotiation\" can be removed from this provision and then we only have: --\n \"shall not buy a Power Purchase Agreement with a generator of electricity from renewable energy sources . . .\"\n Then I will be comfortable with this provision. But to say that it cannot negotiate with a generator of electricity, I think it is too extreme. [Interruptions.] Yes, \"the Power Purchase Agreement\", there should be flexibility -- [Interruption]", 
             "time": "12:30:00"
         }, 
         {
@@ -2407,7 +2389,7 @@
             "time": "13:30:00"
         }, 
         {
-            "action": "rose-", 
+            "action": "rose", 
             "column": "815", 
             "kind": "action", 
             "name": "Mr Gbediame", 
@@ -2456,8 +2438,15 @@
             "name": "Mr Second Deputy Speaker", 
             "original": "Mr Second Deputy Speaker: So Hon Majority Leader, Government Business must be propelled by the appropriate persons. So take note-", 
             "section": "BILLS -- CONSIDERATION STAGE", 
-            "speech": "So Hon Majority Leader, Government Business must be propelled by the appropriate persons. So take note-\n Question put and Motion agreed to.\n ADJOURNMENT .\n The House was accordingly adjourned at 1.35 p.m. till Wednesday, 9th December, 2011 at 10.00 a.m.", 
+            "speech": "So Hon Majority Leader, Government Business must be propelled by the appropriate persons. So take note-\n Question put and Motion agreed to.\n ADJOURNMENT .", 
             "time": "13:30:00"
+        }, 
+        {
+            "column": "815", 
+            "kind": "scene", 
+            "original": "The House was accordingly adjourned at 1.35 p.m. till Wednesday, 9th December, 2011 at 10.00 a.m.", 
+            "scene": "The House was accordingly adjourned at 1.35 p.m. till Wednesday, 9th December, 2011 at 10.00 a.m.", 
+            "time": "13:35:00"
         }
     ], 
     "head": {

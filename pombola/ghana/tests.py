@@ -201,7 +201,7 @@ class GhanaParserRegressionTest(unittest.TestCase):
             
             # check that the line splitting works as expected
             self.assertEqual(
-                open(normalised_abs_path, 'r').read(),
+                open(normalised_abs_path, 'r').read().strip(),
                 normalised_sample_content
             )
 
