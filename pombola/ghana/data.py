@@ -7,6 +7,7 @@ import base64
 import json
 from datetime import datetime
 
+from django.conf import settings
 from django.core.files.base import ContentFile
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.template.defaultfilters import slugify
@@ -30,12 +31,13 @@ KINDS = ((PlaceKind, 'constituency'),
          (OrganisationKind, 'party'),
          (OrganisationKind, 'national'))
 
-constituency_kind, mp_job_title, member_job_title, party_kind, national = \
-    [clz.objects.get_or_create(slug=s, defaults=dict(name=s.title()))[0] for clz, s in KINDS]
-    #[clz.objects.get_or_create(name=s.title(), slug=s)[0] for clz, s in KINDS]
-parliament, _ = Organisation.objects.get_or_create(name='Ghana Parliament',
-                                                   slug='parliament',
-                                                   kind=national)
+if settings.COUNTRY_APP == 'ghana':
+    constituency_kind, mp_job_title, member_job_title, party_kind, national = \
+        [clz.objects.get_or_create(slug=s, defaults=dict(name=s.title()))[0] for clz, s in KINDS]
+        #[clz.objects.get_or_create(name=s.title(), slug=s)[0] for clz, s in KINDS]
+    parliament, _ = Organisation.objects.get_or_create(name='Ghana Parliament',
+                                                       slug='parliament',
+                                                       kind=national)
 
 # "Party": "NPP", 
 # "Occupation/Profession": "Lawyers", 
