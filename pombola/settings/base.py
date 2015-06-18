@@ -51,8 +51,6 @@ DATABASES = {
     }
 }
 
-POSTGIS_VERSION = (2, 1, 3)
-
 # Numberof seconds to keep a database connection open for
 # in case it can be reused
 CONN_MAX_AGE = 0 if STAGING else 300
