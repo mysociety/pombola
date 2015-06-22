@@ -10,7 +10,7 @@ BASEDIR = os.path.dirname(__file__)
 STOP_WORDS = open(os.path.join(BASEDIR, 'stopwords.txt'), 'rU').read().splitlines()
 
 
-def popular_words(max_entries=20):
+def popular_words(max_entries=20, max_words=25):
     sqs = SearchQuerySet().models(hansard_models.Entry).order_by('-sitting_start_date')
 
     cloudlist = []
@@ -35,7 +35,7 @@ def popular_words(max_entries=20):
                     }
                 )
 
-        sortedlist = sorted(cloudlist, key=itemgetter('weight'), reverse=True)[:25]
+        sortedlist = sorted(cloudlist, key=itemgetter('weight'), reverse=True)[:max_words]
     except:
         sortedlist = []
 
