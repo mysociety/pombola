@@ -405,7 +405,7 @@ INSTALLED_APPS = (
     'pombola.budgets',
 
     # FIXME - make this optional based on a config
-    'tag_cloud',
+    'wordcloud',
 
     'django_nose',
 )

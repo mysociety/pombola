@@ -27,7 +27,13 @@ def popular_words(max_entries=20):
                     words[cleanx] = 1 + words.get(cleanx, 0)
 
         for word in words:
-            cloudlist.append({"text": word, "weight": words.get(word), "link": "/search/hansard/?q=%s" % word})
+            cloudlist.append(
+                {
+                    "text": word,
+                    "weight": words.get(word),
+                    "link": "/search/hansard/?q=%s" % word,
+                    }
+                )
 
         sortedlist = sorted(cloudlist, key=itemgetter('weight'), reverse=True)[:25]
     except:
