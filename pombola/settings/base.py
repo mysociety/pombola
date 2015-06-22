@@ -404,6 +404,9 @@ INSTALLED_APPS = (
     'pombola.experiments',
     'pombola.budgets',
 
+    # FIXME - make this optional based on a config
+    'tag_cloud',
+
     'django_nose',
 )
 if config.get('DEBUG_TOOLBAR', True):
