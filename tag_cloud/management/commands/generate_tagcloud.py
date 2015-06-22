@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from pombola.ghana.management.tagcloud import tagcloud
+from tag_cloud.management.tagcloud import tagcloud
 
 
 class Command(BaseCommand):
@@ -13,7 +13,7 @@ class Command(BaseCommand):
         # file = open(args[])
         if len(args) != 1:
             raise CommandError
-        
+
         path = args[0]
         outfile = open(path, 'w')
         content = tagcloud()
