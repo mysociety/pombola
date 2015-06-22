@@ -17,4 +17,4 @@ class Command(BaseCommand):
 
         path = args[0]
         with open(path, 'w') as outfile:
-            simplejson.dump(popular_words(), outfile)
+            simplejson.dump(popular_words(max_entries=30), outfile)
