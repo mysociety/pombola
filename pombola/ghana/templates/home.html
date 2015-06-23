@@ -15,31 +15,30 @@
 
 {% block content %}
 
- <div class="row">
-  <div class="col-xs-12 col-md-6 col-lg-6">
+
+
+<div class="col-sm-12">
     <div class="panel panel-default">
         <h3 class="panel-heading">What is Odekro?</h3>
         <div class="panel-body" id="indexIntro">
           <p>In the Akan chieftaincy hierarchy, the Odekro is the lowest sub-divisional chief responsible for ruling  a town and making sure the citizens are taken care of.</p>
 
-          <p>Members of Parliament (MPs) are elected to serve constituencies by representing the citizens in Parliament. Odekro monitors them by making parliamentary debate proceedings (<a href="#">Hansards</a>) freely accessible to the citizens of Ghana. </p>
+          <p>Members of Parliament (MPs) are elected to serve constituencies by representing the citizens in Parliament. Odekro monitors them by making parliamentary debate proceedings (<a href="{% url 'hansard:index' %}">Hansards</a>) freely accessible to the citizens of Ghana. </p>
           <p>Our goal at Odekro is to promote transparency, provide online access to public records and empower citizens to keep an eye on public officials, especially parliament.</p>
-        </div>
-    </div>
-  </div>
-  <div class="col-xs-12 col-md-6 col-lg-6">
-       {% include 'odekro/featured_profile.html' %}
+      </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12 col-md-8 col-lg-8">
+<div class="col-xs-12 col-sm-8">
    {% include 'summary.html' %}
-  </div>
+</div>
+<div class="col-xs-12 col-sm-4">
+ {% include 'odekro/featured_profile.html' %}
+</div>
 
-  <div class="col-xs-12 col-md-4 col-lg-4">
-      {% include 'news.html' %}
-  </div>
+
+<div class="col-sm-12">
+  {% include 'news.html' %}
 </div>
 
 {% endblock content %}
