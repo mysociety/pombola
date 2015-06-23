@@ -40,24 +40,26 @@
       {% block pre_header %}
       {% endblock %}
 
-        <div class="container" id="odekro-header">
+
         {% block header %}
             {% include 'header.html' %}
         {% endblock %}
+
+
+        <div class="row">
+            {% block content %}
+            {% endblock %}
         </div>
 
-        <div class="container" id="odekro-page">
-               {% block content %}
-                {% endblock %}
-         </div>
         {% comment %}
         {% include 'analytics.html' %}
         {% endcomment %}
-        <div class="container text-center" id="odekro-footer">
-           {% block footer %}
-             {% include 'footer.html' %}
-           {% endblock %}
-        </div>
+
+        <div class="row">
+       {% block footer %}
+         {% include 'footer.html' %}
+       {% endblock %}
+   </div>
     </div>
 </body>
 </html>
