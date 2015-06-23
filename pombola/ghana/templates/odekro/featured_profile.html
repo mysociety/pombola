@@ -3,13 +3,14 @@
 {% with featured_person as p %}
       <div class="panel panel-default">
         <h3 class="panel-heading">Featured Profile</h3>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-6 col-sm-4 text-center">
+        <div class="panel-body" style="height: 425px;">
+            <div class="col-xs-12 text-center">
                 {% thumbnail p.primary_image "200x200" as img %}
                     <img class="center-block img-thumbnail img-circle img-responsive" src="{{ img.url }}" alt="{{ p.name }}" width="{{ img.width }}" height="{{ img.height }}" >
 
                     </img>
+                    <!-- scorecard badge -->
+
                 {% empty %}
                     <img class="center-block img-thumbnail img-circle img-responsive" src="{{STATIC_URL}}images/avatar.png" width="{{ img.width }}" height="{{ img.height }}"/>
                 {% endthumbnail %}
@@ -17,35 +18,38 @@
               </ul>
             </div>
             <!--/col-->
-            <div class="col-xs-6 col-sm-8 text-center text-nowrap">
-              <div class="text-left">
-              <span>
-                <h3>Hon. {{ p.title }} {{ p.name }}</h3>
-              </span>
 
+           <div class="col-xs-12">
+            <div class="text-center text-responsive text-muted">
+                <h4>Hon. {{ p.title }} {{ p.name }}</h4>
 
-              {% for place in p.constituencies %}
-                <h4 class="muted-text">
-                    <i class="fa fa-globe">
-                        MP for <a href="{{ place.get_absoulte_url }}">{{ place.name }} </a>
-                    </i>
-                </h4>
-              {% endfor %}
-              {% for party in p.parties %}
-                <h4 class="muted-text">
-                    <i class="fa fa-institution" src="{{ party.primary_image.url }}">
-                    <a href="{{ party.get_absolute_url }}">
-                        <strong> {{ party.name }} </strong>
-                    </a>
-                    </i>
-                </h4>
-              {% endfor %}
+                <div class="col-xs-12">
+                  {% for place in p.constituencies %}
+                    <p class="muted-text">
+                        <i class="fa fa-globe">
+                           MP for  <a href="{{ place.get_absoulte_url }}">{{ place.name }} </a>
+                        </i>
+                    </p>
+                  {% endfor %}
+                </div>
+                <div class="col-xs-12">
+                  {% for party in p.parties %}
+                    <p class="muted-text">
+                        <i class="fa fa-institution" src="{{ party.primary_image.url }}">
+                        <a href="{{ party.get_absolute_url }}">
+                            <strong> {{ party.name }} </strong>
+                        </a>
+                        </i>
+                    </p>
+                  {% endfor %}
+                </div>
+            </div>
+          </div>
+          <div class="col-xs-12 text-center">
               <h4 class="muted-text">
                 <a class="label label-info"><span class="fa fa-user"> View Profile</span></a>
               </h4>
-              </div>
-
-             </div>
+            </div>
             <!--/col-->
             <div class="clearfix"></div>
           </div>
@@ -54,43 +58,5 @@
         <!--/panel-body-->
       </div>
       <!--/panel-->
-
-
-{% comment %}
-<div id="personFeatures">
-    <div class="panel panel-default featured-person">
-        <div class="panel-heading">
-            <h3 class="panel-title">Featured Profile</h3>
-        </div>
-        <div class="row">
-            <div>
-            <a href="{{ p.get_absolute_url }}">
-            {% thumbnail p.primary_image "200x200" as img %}
-                <img class="img-thumbnail" src="{{ img.url }}" alt="{{ p.name }}" width="{{ img.width }}" height="{{ img.height }}" />
-            {% empty %}
-                <img class="img-thumbnail" src="{{STATIC_URL}}images/avatar.png" width="{{ img.width }}" height="{{ img.height }}"/>
-            {% endthumbnail %}
-            </a>
-            </div>
-            <div class="well featured-person-info">
-                 <h2>
-                  <span class="label">
-                     <a href="{{ p.get_absolute_url }}">Hon. {{ p.title }} {{ p.name }}</a>
-                  </span>
-                 </h2>
-                <h3><a href="#" />Political Party</a></h2>
-                {% for place in p.constituencies %}
-                    <span>MP for {{ place.name }}</span>
-                {% endfor %}
-                <p>
-                    {% if p.summary %}
-                        {{ p.summary }}
-                    {% endif %}
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-{% endcomment %}
 
 {% endwith %}
