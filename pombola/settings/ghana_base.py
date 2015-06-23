@@ -31,6 +31,7 @@ COUNTRY_CSS = {
             'css/bootstrap-theme.css',
             'css/bootstrap-select.css',
             'css/jqcloud.css',
+            'css/odekro.css',
         ),
         'output_filename': 'css/ghana.css',
     },
@@ -64,7 +65,7 @@ LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
 #     'social_auth.backends.facebook.FacebookBackend',
 #     'django.contrib.auth.backends.ModelBackend',
 # )
-# 
+#
 # # This is empty by default and will be progressively filled if the required
 # # details are available in the external config
 # SOCIAL_AUTH_ENABLED_BACKENDS = []
@@ -73,12 +74,12 @@ LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
 # TWITTER_CONSUMER_SECRET      = config.get('TWITTER_CONSUMER_SECRET')
 # if TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET:
 #     SOCIAL_AUTH_ENABLED_BACKENDS.append('twitter')
-# 
+#
 # FACEBOOK_APP_ID              = config.get('FACEBOOK_APP_ID')
 # FACEBOOK_API_SECRET          = config.get('FACEBOOK_API_SECRET')
 # if FACEBOOK_APP_ID and FACEBOOK_API_SECRET:
 #     SOCIAL_AUTH_ENABLED_BACKENDS.append('facebook')
-# 
+#
 # SOCIAL_AUTH_CHANGE_SIGNAL_ONLY = True
 # SOCIAL_AUTH_PIPELINE = (
 #     'social_auth.backends.pipeline.social.social_auth_user',
