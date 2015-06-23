@@ -1,48 +1,11 @@
 {% load thumbnail %}
 {% load hidden %}
 
-{% comment %}
-
-{% with object.position_set.all as positions %}
-<div class="typo-left elevencol">
-    <h1>Members of Parliament</h1>
-    <p>
-        There are currently {{ positions.count }} MPs.
-    </p>
-
-    <ul class="position-list">
-        {% for position in positions %}
-        {% with position.person as person %}
-        <li class="positionArea">
-            <a href="{{ person.get_absolute_url }}">
-                {% thumbnail person.primary_image "60x60" as img %}
-                <img src="{{ img.url }}" alt="{{ person.name }}" class="avatar"
-                     width="{{ img.width }}" height="{{ img.height }}" />
-                {% empty %}
-                <img class="avatar" src="#" />
-                {% endthumbnail %}
-                <span class="name">{{ person.name }}</span>
-            </a>
-            <strong>Party:</strong>
-            <a href="{{ person.parties.0.get_absolute_url }}">{{ person.parties.0.name }}</a><br />
-            <strong>Constituency:</strong>
-            <a href="{{ person.constituencies.0.get_absolute_url }}">
-                {{ person.constituencies.0.name }}
-            </a><br />
-            <span class="more">
-                <a href="{{ person.get_absolute_url }}">more info</a>
-            </span>
-        </li>
-        {% endwith %}
-        {% endfor %}
-    </ul>
-</div>
-{% endwith %}
-{% endcomment %}
 
 {% load pagination_tags %}
 {% load bootstrap_pagination %}
 {% autopaginate positions %}
+<div class="col-lg-12">
 <div class="panel panel-default">
 <h3 class="panel-heading">Members of Parliament</h3>
 <div class="panel-body">
@@ -98,5 +61,6 @@
             {% bootstrap_paginate page_obj range=10 show_prev_next="true" show_first_last="true" %}
     </div>
     {% endif %}
+</div>
 </div>
 </div>
