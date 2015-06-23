@@ -404,9 +404,6 @@ INSTALLED_APPS = (
     'pombola.experiments',
     'pombola.budgets',
 
-    # FIXME - make this optional based on a config
-    'wordcloud',
-
     'django_nose',
 )
 if config.get('DEBUG_TOOLBAR', True):
@@ -592,9 +589,6 @@ BLEACH_ALLOWED_ATTRIBUTES = {
 BLEACH_STRIP_TAGS = True
 
 INFO_PAGES_ALLOW_RAW_HTML = False
-
-WORDCLOUD_CACHE_DIR = os.path.normpath(os.path.join(root_dir, 'wordcloud_cache'))
-WORDCLOUD_CACHE_PATH = os.path.join(WORDCLOUD_CACHE_DIR, 'wordcloud.json')
 
 if config.get('EMAIL_SETTINGS', None):
     EMAIL_HOST = config.get('EMAIL_HOST', '')

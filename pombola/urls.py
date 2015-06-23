@@ -92,10 +92,10 @@ urlpatterns += patterns('',
 )
 
 # wordcloud
-# FIXME - should make this an optional feature
-urlpatterns += patterns('',
-    (r'^wordcloud/', include('wordcloud.urls')),
-)
+if settings.ENABLED_FEATURES['wordcloud']:
+    urlpatterns += patterns('',
+        (r'^wordcloud/', include('wordcloud.urls')),
+    )
 
 # feedback
 urlpatterns += patterns('',

@@ -1,3 +1,6 @@
+import os
+from .base import root_dir
+
 COUNTRY_APP = 'ghana'
 
 MAPIT_COUNTRY = 'GH'
@@ -12,6 +15,8 @@ OPTIONAL_APPS = (
     'pombola.projects',
     'pombola.place_data',
     'pombola.votematch',
+
+    'wordcloud',
 
     # Pombola has now dropped registration, so leave these out:
     # 'registration_defaults',
@@ -93,3 +98,6 @@ LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
 # )
 TWITTER_ACCOUNT_NAME = "odekro"
 FACEBOOK_ACCOUNT_NAME = "odekro"
+
+WORDCLOUD_CACHE_DIR = os.path.normpath(os.path.join(root_dir, 'wordcloud_cache'))
+WORDCLOUD_CACHE_PATH = os.path.join(WORDCLOUD_CACHE_DIR, 'wordcloud.json')
