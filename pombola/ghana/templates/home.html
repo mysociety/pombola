@@ -7,16 +7,6 @@
 
 {% endblock extra_scripts %}
 
-  <script type = "text/javascript">
-    $(function() {
-        $.getJSON("wordcloud/wordcloud/",
-        {},
-        function(data){
-            $("#wordcloud").jQCloud(data, {width: 525, height:345, shape: "rectangular"});
-        });
-      });
-    </script>
-
 {% block extra_styles %}
 
 {% endblock extra_styles %}
