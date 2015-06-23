@@ -1,29 +1,26 @@
-<div class="panel panel-default">
-    <h3 class="panel-heading">Parliament in the News</h3>
-     <div class="panel-body">
-     <div class="">
-      <ul id="list-group odekro-news-list">
-        <li class="list-group-item">
-          <div class="meta-date">
-            <strong class="month">Nov</strong>
-            <span class="day">24</span>
-          </div>
-          <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
-          <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
-          <a href="#">more</a>
-        </li>
 
-        <li class="list-group-item">
-          <div class="meta-date">
-            <strong class="month">Nov</strong>
-            <span class="day">24</span>
-          </div>
-          <h4><a href="#">Dasellus ac nibh urna donec</a></h4>
-          <p>Lorem ipsum dolor sit met, consectetur , id vestibulum tellus suscipit vitae ...</p>
-          <a href="#">more</a>
-        </li>
-      </ul>
-    </div>
+<script>
+// When the DOM is ready, run this function
+$(document).ready(function() {
+  //Set the carousel options
+  $('#news-carousel').carousel({
+    pause: true,
+    interval: 5000,
+});
+});
+</script>
+<div class="">
+<h3 class="section-header">Parliament in the News</h3>
+<hr>
+<div class="carousel slide"  data-ride='news-carousel' id='news-carousel' style="height: 150px;">
+  <div class="carousel-inner">
+    {% include 'news-items.html' %}
+  </div>
 
-  </div>
-  </div>
+  <!-- Carousel Buttons Next/Prev -->
+  <a data-slide="prev" href="#news-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+  <a data-slide="next" href="#news-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+</div>
+
+</div>
+
