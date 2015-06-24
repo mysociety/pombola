@@ -1,5 +1,6 @@
 import os
 from operator import itemgetter
+import re
 
 from haystack.query import SearchQuerySet
 from pombola.hansard import models as hansard_models
@@ -10,33 +11,33 @@ BASEDIR = os.path.dirname(__file__)
 STOP_WORDS = open(os.path.join(BASEDIR, 'stopwords.txt'), 'rU').read().splitlines()
 
 
+def recent_entries(max_entries=20):
+    return SearchQuerySet().models(hansard_models.Entry).order_by('-sitting_start_date')[:max_entries]
+
+
 def popular_words(max_entries=20, max_words=25):
-    sqs = SearchQuerySet().models(hansard_models.Entry).order_by('-sitting_start_date')
+    sqs = recent_entries(max_entries)
 
-    cloudlist = []
+    # Generate tag cloud from content of returned entries
+    words = {}
+    for entry in sqs:
+        text = re.sub(ur'[^\w\s]', '', entry.object.content.lower())
 
-    try:
-        # Generate tag cloud from content of returned entries
-        words = {}
-        for entry in sqs[:max_entries]:
-            text = entry.object.content
+        for x in text.split():
+            if x not in STOP_WORDS:
+                words[x] = 1 + words.get(x, 0)
 
-            for x in text.lower().split():
-                cleanx = x.replace(',', '').replace('.', '').replace('"', '').strip()
-                if cleanx not in STOP_WORDS:  # and not cleanx in hansard_words:
-                    words[cleanx] = 1 + words.get(cleanx, 0)
+    wordlist = []
 
-        for word in words:
-            cloudlist.append(
-                {
-                    "text": word,
-                    "weight": words.get(word),
-                    "link": "/search/hansard/?q=%s" % word,
-                    }
-                )
+    for word in words:
+        wordlist.append(
+            {
+                "text": word,
+                "weight": words.get(word),
+                "link": "/search/hansard/?q=%s" % word,
+                }
+            )
 
-        sortedlist = sorted(cloudlist, key=itemgetter('weight'), reverse=True)[:max_words]
-    except:
-        sortedlist = []
+    wordlist.sort(key=itemgetter('weight'), reverse=True)
 
-    return sortedlist
+    return wordlist[:max_words]
