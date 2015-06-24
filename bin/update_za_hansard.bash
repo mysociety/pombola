@@ -16,6 +16,4 @@ cd `dirname $0`/..
 ./bin/run_management_command za_hansard_q_and_a_scraper --run-all-steps
 
 # Run the committee minutes scraper and imports
-# FIXME: disabled until a name resolution problem (speeches badly attributed
-# to Kai-lie Chen) is properly resolved.
-# ./bin/run_management_command za_hansard_pmg_api_scraper --scrape --save-json --import-to-sayit --commit
+./bin/run_management_command za_hansard_pmg_api_scraper --scrape --save-json --import-to-sayit --delete-existing --commit
