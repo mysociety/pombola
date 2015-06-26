@@ -25,6 +25,10 @@ GOOGLE_ANALYTICS_ACCOUNT: ''
 # test for Kenya, then put the experiment key here
 COUNTY_PERFORMANCE_EXPERIMENT_KEY: ''
 
+# If you're running the experiment with the youth employment bill page
+# test for Kenya, then put the experiment key here
+YOUTH_EMPLOYMENT_BILL_EXPERIMENT_KEY: ''
+
 # The IEBC API credentials for fetching aspirant data:
 IEBC_API_ID: ''
 IEBC_API_SECRET: ''

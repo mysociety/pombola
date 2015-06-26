@@ -32,7 +32,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block body_attributes %}class="county-performance"{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'click-tracking' %} null ]);
+    addExtraJS([ {% compressed_js 'experiments' %} null ]);
 {% endblock %}
 
 {% block breadcrumbs %}

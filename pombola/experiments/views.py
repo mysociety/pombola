@@ -1,5 +1,11 @@
 import json
+from random import randint
 import re
+import sys
+
+from django.core.urlresolvers import reverse
+from django.utils.http import urlquote
+from django.views.generic.base import RedirectView
 
 from pombola.experiments.models import Experiment
 from pombola.feedback.models import Feedback
@@ -16,8 +22,8 @@ class ExperimentViewDataMixin(object):
 
     Note that this mixin also assumes that you have the only keys you
     need to store in the session are those identifying the user
-    ('user_key'), their demographics ('g' and 'agroup'), the variant
-    they got ('variant') and whether they came from a particular
+    ('user_key'), their demographics (e.g. 'g', 'agroup' etc.), the
+    variant they got ('variant') and whether they came from a particular
     message shared on social media ('via').
     """
 
@@ -28,10 +34,12 @@ class ExperimentViewDataMixin(object):
     session_key_prefix = None
     base_view_name = None
     pageview_label = None
+    template_prefix = None
     experiment_key = None
     qualtrics_sid = None
     variants = None
-    demographic_keys= None
+    demographic_keys = None
+    major_partials = None
 
     def qualify_key(self, key):
         prefix = self.session_key_prefix
@@ -53,7 +61,9 @@ class ExperimentViewDataMixin(object):
 
     def get_session_data(self):
         result = {}
-        for key in ('user_key', 'variant', 'g', 'agroup', 'via'):
+        session_keys = ['user_key', 'variant', 'via']
+        session_keys += self.demographic_keys.keys()
+        for key in session_keys:
             full_key = self.qualify_key(key)
             value = self.request.session.get(full_key)
             if value is not None:
@@ -71,6 +81,7 @@ class ExperimentViewDataMixin(object):
                 if value != '?':
                     event_kwargs[column] = value
                 del extra_data[column]
+        extra_data['user_agent'] = self.request.META.get('HTTP_USER_AGENT', '')
         extra_data_json = json.dumps(extra_data)
         event_kwargs['extra_data'] = extra_data_json
         experiment = Experiment.objects.get(slug=self.experiment_slug)
@@ -103,18 +114,66 @@ class ExperimentFormSubmissionMixin(ExperimentViewDataMixin):
         """Redirect back to a reduced version of the page from either form"""
         extra_context = {
             '{0}_form'.format(self.form_key): form,
-            'major_partials': ['_county_{0}.html'.format(self.form_key)],
+            'major_partials': ['_{0}_{1}.html'.format(self.template_prefix, self.form_key)],
             'correct_errors': True}
         context = self.get_context_data(**extra_context)
         return self.render_to_response(context)
 
+    def get_event_data(self, form):
+        return {
+            'category': 'form',
+            'action': 'submit',
+            'label': self.form_key
+        }
+
     def form_valid(self, form):
         self.create_feedback_from_form(form)
-        self.create_event({'category': 'form',
-                           'action': 'submit',
-                           'label': self.form_key})
+        self.create_event(self.get_event_data(form))
         return super(ExperimentFormSubmissionMixin,
                      self).form_valid(form)
+
+class ExperimentShare(ExperimentViewDataMixin, RedirectView):
+    """For recording & enacting Facebook / Twitter share actions"""
+
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        social_network = sanitize_parameter(
+            key='n',
+            parameters=self.request.GET,
+            allowed_values=('facebook', 'twitter'))
+        share_key = "{0:x}".format(randint(0, sys.maxint))
+        self.create_event({'category': 'share-click',
+                           'action': 'click',
+                           'label': social_network,
+                           'share_key': share_key})
+        path = reverse(self.base_view_name)
+        built = self.request.build_absolute_uri(path)
+        built += '?via=' + share_key
+        url_parameter = urlquote(built, safe='')
+        url_formats = {
+            'facebook': "https://www.facebook.com/sharer/sharer.php?u={0}",
+            'twitter': "http://twitter.com/share?url={0}"}
+        return url_formats[social_network].format(url_parameter)
+
+
+class ExperimentSurvey(ExperimentViewDataMixin, RedirectView):
+    """For redirecting to the Qualtrics survey"""
+
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        self.create_event({'category': 'take-survey',
+                           'action': 'click',
+                           'label': 'take-survey'})
+        prefix = self.session_key_prefix
+        sid = self.qualtrics_sid
+        url = "http://survey.az1.qualtrics.com/SE/?SID={0}&".format(sid)
+        url += "&".join(
+            k + "=" + self.request.session.get(prefix + ':' + k, '?')
+            for k in ['user_key', 'variant'] + self.demographic_keys.keys()
+        )
+        return url
 
 
 def sanitize_parameter(key, parameters, allowed_values, default_value=None):

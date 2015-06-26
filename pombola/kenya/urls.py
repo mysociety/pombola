@@ -1,11 +1,15 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from django.views.generic.base import TemplateView
 from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
 
+from pombola.experiments.views import ExperimentShare, ExperimentSurvey
+
 from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
-    CountyPerformancePetitionSubmission, CountyPerformanceShare,
-    CountyPerformanceSurvey, EXPERIMENT_DATA, ThanksTemplateView,
-    ShujaazFinalistsView
+    CountyPerformancePetitionSubmission, ExperimentRecordTimeOnPage,
+    EXPERIMENT_DATA, ThanksTemplateView,
+    YouthEmploymentView, YouthEmploymentSupportSubmission,
+    YouthEmploymentCommentSubmission, ExperimentThanks,
+    YouthEmploymentInputSubmission, ShujaazFinalistsView
 )
 
 urlpatterns = patterns('',
@@ -51,9 +55,54 @@ for experiment_slug in ('mit-county', 'mit-county-larger'):
 
     urlpatterns += (
         url(base_path + r'/share',
-            CountyPerformanceShare.as_view(**view_kwargs),
+            ExperimentShare.as_view(**view_kwargs),
             name=(base_name + '-share')),
         url(base_path + r'/survey',
-            CountyPerformanceSurvey.as_view(**view_kwargs),
+            ExperimentSurvey.as_view(**view_kwargs),
             name=(base_name + '-survey')),
+    )
+
+
+# Create the Youth Employment Bill page:
+
+for experiment_slug in ('youth-employment-bill',):
+    view_kwargs = {'experiment_slug': experiment_slug}
+    view_kwargs.update(EXPERIMENT_DATA[experiment_slug])
+    base_name = view_kwargs['base_view_name']
+    base_path = r'^' + base_name
+    urlpatterns.append(
+        url(base_path + r'$',
+            YouthEmploymentView.as_view(**view_kwargs),
+            name=base_name)
+    )
+
+    for name, view in (
+        ('support', YouthEmploymentSupportSubmission),
+        ('input', YouthEmploymentInputSubmission),
+        ('comment', YouthEmploymentCommentSubmission)):
+
+        urlpatterns += (
+            url(base_path + r'/{0}$'.format(name),
+                view.as_view(**view_kwargs),
+                name=(base_name + '-{0}-submission'.format(name))),
+            url(base_path + r'/{0}/thanks$'.format(name),
+                ThanksTemplateView.as_view(
+                    base_view_name=base_name,
+                    template_name=('youth-employment-{0}-submission.html'.format(name))
+                )),
+        )
+
+    urlpatterns += (
+        url(base_path + r'/share',
+            ExperimentShare.as_view(**view_kwargs),
+            name=(base_name + '-share')),
+        url(base_path + r'/survey',
+            ExperimentSurvey.as_view(**view_kwargs),
+            name=(base_name + '-survey')),
+        url(base_path + r'/input',
+            ExperimentThanks.as_view(**view_kwargs),
+            name=(base_name + '-input')),
+        url(base_path + r'/time-on-page',
+            ExperimentRecordTimeOnPage.as_view(**view_kwargs),
+            name=(base_name + '-time-on-page')),
     )
