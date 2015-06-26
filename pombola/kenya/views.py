@@ -150,6 +150,13 @@ class MITExperimentView(ExperimentViewDataMixin, TemplateView):
             for k in session_keys:
                 self.request.session[self.qualify_key(k)] = data[k]
 
+        # However, the Google Analytics experiment may cause a
+        # subsequent reload (with user_key already set) to a different
+        # variant; since we're about to use the session variables to
+        # update the context, make sure the session's variant matches
+        # what was requested in the URL:
+        self.request.session[self.qualify_key('variant')] = variant
+
         # Add those session parameters to the context for building the
         # Qualtrics survey URL
         context.update(self.get_session_data())
