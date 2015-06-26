@@ -345,6 +345,19 @@ class YouthEmploymentSupportSubmission(ExperimentFormSubmissionMixin,
         new_comment = form.cleaned_data.get('constituencies', '').name
         self.create_feedback(form, comment=new_comment)
 
+    def get_event_data(self, form):
+        if 'submit-yes' in form.data:
+            action_value = 'click-yes'
+        elif 'submit-no' in form.data:
+            action_value = 'click-no'
+        else:
+            raise Exception('Neither click-yes nor click-no found in form data')
+        return {
+            'category': 'form',
+            'action': action_value,
+            'label': self.form_key
+        }
+
 
 class YouthEmploymentCommentSubmission(ExperimentFormSubmissionMixin,
                                           FormView):

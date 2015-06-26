@@ -118,18 +118,16 @@ class ExperimentFormSubmissionMixin(ExperimentViewDataMixin):
         context = self.get_context_data(**extra_context)
         return self.render_to_response(context)
 
+    def get_event_data(self, form):
+        return {
+            'category': 'form',
+            'action': 'submit',
+            'label': self.form_key
+        }
+
     def form_valid(self, form):
         self.create_feedback_from_form(form)
-        action_value = 'submit'
-        # tranform the Yes submit button to click-yes for recording purposes
-        if 'submit-yes' in form.data:
-            action_value = 'click-yes'
-        # tranform the No submit button to click-no for recording purposes
-        if 'submit-no' in form.data:
-            action_value = 'click-no'
-        self.create_event({'category': 'form',
-                           'action': action_value,
-                           'label': self.form_key})
+        self.create_event(self.get_event_data(form))
         return super(ExperimentFormSubmissionMixin,
                      self).form_valid(form)
 
