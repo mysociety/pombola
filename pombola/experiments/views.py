@@ -81,6 +81,7 @@ class ExperimentViewDataMixin(object):
                 if value != '?':
                     event_kwargs[column] = value
                 del extra_data[column]
+        extra_data['user_agent'] = self.request.META.get('HTTP_USER_AGENT', '')
         extra_data_json = json.dumps(extra_data)
         event_kwargs['extra_data'] = extra_data_json
         experiment = Experiment.objects.get(slug=self.experiment_slug)
