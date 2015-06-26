@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from django.views.generic.base import TemplateView
 from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
 
