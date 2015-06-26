@@ -1,7 +1,7 @@
 # Create your views here.
 # -*- coding: utf-8 -*-
 
-from random import randint, shuffle
+import random
 import json
 import sys
 
@@ -191,7 +191,8 @@ class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
         # user came from (Facebook demographics or the 'via' parameter
         # from a social share):
         if self.qualify_key('user_key') not in self.request.session:
-            self.request.session[self.qualify_key('user_key')] = str(randint(0, sys.maxint))
+            self.request.session[self.qualify_key('user_key')] = \
+                str(random.randint(0, sys.maxint))
             session_keys = ['variant', 'via'] + self.demographic_keys.keys()
             for k in session_keys:
                 self.request.session[self.qualify_key(k)] = data[k]
@@ -215,18 +216,26 @@ class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
         context['show_threat'] = (variant[0] == 't')
         context['show_opportunity'] = (variant[0] == 'o')
 
+        user_key = self.request.session[self.qualify_key('user_key')]
+        # Setting a seed with random.seed would not be thread-safe,
+        # and potentially unsafe if randint values (say) are used for
+        # anything with a security implication; instead create a
+        # Random object for shuffling the partials.
+        local_random = random.Random()
+        local_random.seed(user_key)
+
         context['share_partials'] = [
             '_share_twitter.html',
             '_share_facebook.html',
         ]
-        shuffle(context['share_partials'])
+        local_random.shuffle(context['share_partials'])
 
         context['major_partials'] = [
             '_county_share.html',
             '_county_petition.html',
             '_county_senate.html',
         ]
-        shuffle(context['major_partials'])
+        local_random.shuffle(context['major_partials'])
 
         return context
 
@@ -301,7 +310,8 @@ class YouthEmploymentView(ExperimentViewDataMixin, TemplateView):
         # user came from (Facebook demographics or the 'via' parameter
         # from a social share):
         if self.qualify_key('user_key') not in self.request.session:
-            self.request.session[self.qualify_key('user_key')] = str(randint(0, sys.maxint))
+            self.request.session[self.qualify_key('user_key')] = \
+                str(random.randint(0, sys.maxint))
             session_keys = ['variant', 'via'] + self.demographic_keys.keys()
             for k in session_keys:
                 self.request.session[self.qualify_key(k)] = data[k]
@@ -323,11 +333,19 @@ class YouthEmploymentView(ExperimentViewDataMixin, TemplateView):
 
         context['show_youth'] = (variant[0] == 'y')
 
+        user_key = self.request.session[self.qualify_key('user_key')]
+        # Setting a seed with random.seed would not be thread-safe,
+        # and potentially unsafe if randint values (say) are used for
+        # anything with a security implication; instead create a
+        # Random object for shuffling the partials.
+        local_random = random.Random()
+        local_random.seed(user_key)
+
         context['share_partials'] = [
             '_share_twitter.html',
             '_share_facebook.html',
         ]
-        shuffle(context['share_partials'])
+        local_random.shuffle(context['share_partials'])
 
         context['major_partials'] = [
             '_youth_share.html',
@@ -335,7 +353,7 @@ class YouthEmploymentView(ExperimentViewDataMixin, TemplateView):
             '_youth_support.html',
             '_youth_input.html'
         ]
-        shuffle(context['major_partials'])
+        local_random.shuffle(context['major_partials'])
 
         return context
 
