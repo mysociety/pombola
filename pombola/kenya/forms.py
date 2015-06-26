@@ -68,3 +68,6 @@ class YouthEmploymentSupportForm(forms.Form):
         empty_label = "Choose your constituency",
         error_messages={'required': "Please choose a constituency"}
     )
+
+class YouthEmploymentInputForm(forms.Form):
+    pass

@@ -13,7 +13,8 @@ from django.views.generic.edit import FormView
 
 from .forms import (
     CountyPerformancePetitionForm, CountyPerformanceSenateForm,
-    YouthEmploymentCommentForm, YouthEmploymentSupportForm
+    YouthEmploymentCommentForm, YouthEmploymentSupportForm,
+    YouthEmploymentInputForm
 )
 
 from pombola.core.models import Person
@@ -322,6 +323,8 @@ class YouthEmploymentView(MITExperimentView):
             reverse(self.base_view_name + '-comment-submission')
         context['support_submission_url'] = \
             reverse(self.base_view_name + '-support-submission')
+        context['input_submission_url'] = \
+            reverse(self.base_view_name + '-input-submission')
         context['comment_form'] = YouthEmploymentCommentForm()
         context['support_form'] = YouthEmploymentSupportForm()
 
@@ -351,7 +354,34 @@ class YouthEmploymentSupportSubmission(ExperimentFormSubmissionMixin,
         elif 'submit-no' in form.data:
             action_value = 'click-no'
         else:
-            raise Exception('Neither click-yes nor click-no found in form data')
+            raise Exception('Neither click-yes nor click-no found in support form data')
+        return {
+            'category': 'form',
+            'action': action_value,
+            'label': self.form_key
+        }
+
+
+class YouthEmploymentInputSubmission(ExperimentFormSubmissionMixin, FormView):
+    """A view for handling submission of whether the MP cares about the issue"""
+
+    template_name = 'youth-employment.html'
+    form_class = YouthEmploymentInputForm
+    form_key = 'input'
+
+    def get_success_url(self):
+        return '/{0}/input/thanks'.format(self.base_view_name)
+
+    def create_feedback_from_form(self, form):
+        pass
+
+    def get_event_data(self, form):
+        if 'submit-yes' in form.data:
+            action_value = 'click-yes'
+        elif 'submit-no' in form.data:
+            action_value = 'click-no'
+        else:
+            raise Exception('Neither click-yes nor click-no found in input form data')
         return {
             'category': 'form',
             'action': action_value,
