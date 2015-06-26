@@ -8,8 +8,7 @@ import sys
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.utils.http import urlquote
-from django.views.generic.base import View, TemplateView, RedirectView
+from django.views.generic.base import View, TemplateView
 from django.views.generic.edit import FormView
 
 from .forms import (
@@ -20,8 +19,7 @@ from .forms import (
 from pombola.core.models import Person
 from pombola.core.views import PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
-    ExperimentViewDataMixin, ExperimentFormSubmissionMixin,
-    sanitize_parameter
+    ExperimentViewDataMixin, ExperimentFormSubmissionMixin
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
@@ -155,50 +153,6 @@ class ExperimentThanks(ExperimentViewDataMixin, TemplateView):
 
         context['base_url'] = reverse(self.base_view_name)
         return context
-
-
-class ExperimentShare(ExperimentViewDataMixin, RedirectView):
-    """For recording & enacting Facebook / Twitter share actions"""
-
-    permanent = False
-
-    def get_redirect_url(self, *args, **kwargs):
-        social_network = sanitize_parameter(
-            key='n',
-            parameters=self.request.GET,
-            allowed_values=('facebook', 'twitter'))
-        share_key = "{0:x}".format(randint(0, sys.maxint))
-        self.create_event({'category': 'share-click',
-                           'action': 'click',
-                           'label': social_network,
-                           'share_key': share_key})
-        path = reverse(self.base_view_name)
-        built = self.request.build_absolute_uri(path)
-        built += '?via=' + share_key
-        url_parameter = urlquote(built, safe='')
-        url_formats = {
-            'facebook': "https://www.facebook.com/sharer/sharer.php?u={0}",
-            'twitter': "http://twitter.com/share?url={0}"}
-        return url_formats[social_network].format(url_parameter)
-
-
-class ExperimentSurvey(ExperimentViewDataMixin, RedirectView):
-    """For redirecting to the Qualtrics survey"""
-
-    permanent = False
-
-    def get_redirect_url(self, *args, **kwargs):
-        self.create_event({'category': 'take-survey',
-                           'action': 'click',
-                           'label': 'take-survey'})
-        prefix = self.session_key_prefix
-        sid = self.qualtrics_sid
-        url = "http://survey.az1.qualtrics.com/SE/?SID={0}&".format(sid)
-        url += "&".join(
-            k + "=" + self.request.session.get(prefix + ':' + k, '?')
-            for k in ['user_key', 'variant'] + self.demographic_keys.keys()
-        )
-        return url
 
 
 class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):

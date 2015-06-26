@@ -2,9 +2,11 @@ from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
 from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
 
+from pombola.experiments.views import ExperimentShare, ExperimentSurvey
+
 from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
     CountyPerformancePetitionSubmission, ExperimentRecordTimeOnPage,
-    ExperimentShare, ExperimentSurvey, EXPERIMENT_DATA, ThanksTemplateView,
+    EXPERIMENT_DATA, ThanksTemplateView,
     YouthEmploymentView, YouthEmploymentSupportSubmission,
     YouthEmploymentCommentSubmission, ExperimentThanks,
     ShujaazFinalistsView
