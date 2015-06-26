@@ -16,8 +16,8 @@ class ExperimentViewDataMixin(object):
 
     Note that this mixin also assumes that you have the only keys you
     need to store in the session are those identifying the user
-    ('user_key'), their demographics ('g' and 'agroup'), the variant
-    they got ('variant') and whether they came from a particular
+    ('user_key'), their demographics (e.g. 'g', 'agroup' etc.), the
+    variant they got ('variant') and whether they came from a particular
     message shared on social media ('via').
     """
 
@@ -32,7 +32,7 @@ class ExperimentViewDataMixin(object):
     experiment_key = None
     qualtrics_sid = None
     variants = None
-    demographic_keys= None
+    demographic_keys = None
 
     def qualify_key(self, key):
         prefix = self.session_key_prefix
@@ -54,7 +54,9 @@ class ExperimentViewDataMixin(object):
 
     def get_session_data(self):
         result = {}
-        for key in ('user_key', 'variant', 'g', 'agroup', 'via'):
+        session_keys = ['user_key', 'variant', 'via']
+        session_keys += self.demographic_keys.keys()
+        for key in session_keys:
             full_key = self.qualify_key(key)
             value = self.request.session.get(full_key)
             if value is not None:

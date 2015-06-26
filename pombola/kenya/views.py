@@ -196,7 +196,8 @@ class ExperimentSurvey(ExperimentViewDataMixin, RedirectView):
         url = "http://survey.az1.qualtrics.com/SE/?SID={0}&".format(sid)
         url += "&".join(
             k + "=" + self.request.session.get(prefix + ':' + k, '?')
-            for k in ('user_key', 'variant', 'g', 'agroup'))
+            for k in ['user_key', 'variant'] + self.demographic_keys.keys()
+        )
         return url
 
 
@@ -237,7 +238,8 @@ class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
         # from a social share):
         if self.qualify_key('user_key') not in self.request.session:
             self.request.session[self.qualify_key('user_key')] = str(randint(0, sys.maxint))
-            for k in ('variant', 'via', 'g', 'agroup'):
+            session_keys = ['variant', 'via'] + self.demographic_keys.keys()
+            for k in session_keys:
                 self.request.session[self.qualify_key(k)] = data[k]
 
         # Add those session parameters to the context for building the
@@ -346,7 +348,8 @@ class YouthEmploymentView(ExperimentViewDataMixin, TemplateView):
         # from a social share):
         if self.qualify_key('user_key') not in self.request.session:
             self.request.session[self.qualify_key('user_key')] = str(randint(0, sys.maxint))
-            for k in ('variant', 'via', 'g', 'agroup'):
+            session_keys = ['variant', 'via'] + self.demographic_keys.keys()
+            for k in session_keys:
                 self.request.session[self.qualify_key(k)] = data[k]
 
         # Add those session parameters to the context for building the
