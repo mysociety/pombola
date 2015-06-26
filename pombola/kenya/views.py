@@ -345,8 +345,9 @@ class YouthEmploymentSupportSubmission(ExperimentFormSubmissionMixin,
         return '/{0}/support/thanks'.format(self.base_view_name)
 
     def create_feedback_from_form(self, form):
-        new_comment = form.cleaned_data.get('constituencies', '').name
-        self.create_feedback(form, comment=new_comment)
+        # Instead of recording this data with feedback, add it to
+        # extra_data.
+        pass
 
     def get_event_data(self, form):
         if 'submit-yes' in form.data:
@@ -358,7 +359,8 @@ class YouthEmploymentSupportSubmission(ExperimentFormSubmissionMixin,
         return {
             'category': 'form',
             'action': action_value,
-            'label': self.form_key
+            'label': self.form_key,
+            'constituency': form.cleaned_data.get('constituencies').slug,
         }
 
 
