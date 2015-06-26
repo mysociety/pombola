@@ -58,11 +58,12 @@ COUNTRY_CSS = {
 }
 
 COUNTRY_JS = {
-    'click-tracking': {
+    'experiments': {
         'source_filenames': (
             'js/click-tracking.js',
+            'js/riveted.js',
         ),
-        'output_filename': 'js/kenya.js',
+        'output_filename': 'js/experiments.js',
         'template_name': 'pipeline/js-array.html',
     },
     'shujaaz-lt-ie8': {
@@ -87,5 +88,5 @@ COUNTRY_JS = {
             'js/survey.js',
         ),
         'output_filename': 'js/survey.js',
-    }
+    },
 }

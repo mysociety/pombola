@@ -3,8 +3,8 @@ from django.views.generic.base import TemplateView
 from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
 
 from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
-    CountyPerformancePetitionSubmission, ExperimentShare,
-    ExperimentSurvey, EXPERIMENT_DATA, ThanksTemplateView,
+    CountyPerformancePetitionSubmission, ExperimentRecordTimeOnPage,
+    ExperimentShare, ExperimentSurvey, EXPERIMENT_DATA, ThanksTemplateView,
     YouthEmploymentView, YouthEmploymentSupportSubmission,
     YouthEmploymentCommentSubmission, ExperimentThanks,
     ShujaazFinalistsView
@@ -99,4 +99,7 @@ for experiment_slug in ('youth-employment-bill',):
         url(base_path + r'/input',
             ExperimentThanks.as_view(**view_kwargs),
             name=(base_name + '-input')),
+        url(base_path + r'/time-on-page',
+            ExperimentRecordTimeOnPage.as_view(**view_kwargs),
+            name=(base_name + '-time-on-page')),
     )

@@ -32,7 +32,32 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block body_attributes %}class="exp-survey-form"{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'click-tracking' %} null ]);
+    addExtraJS([ {% compressed_js 'experiments' %} null ]);
+    {% comment %}
+      This code sends a 'heartbeat' to the server every 5 seconds
+      while the user is on the page using riveted.js.  It looks as
+      if you should add code like this with the
+      pombola_run_when_document_ready function, but I distrust its
+      implementation:
+         https://github.com/mysociety/pombola/issues/1686
+      So until that's resolved, I'm adding this code directly to
+      pombola_run_when_document_ready_array so it's sure to be run
+      after the both the 'experiments' JS is loaded and the document
+      is ready.
+    {% endcomment %}
+    pombola_run_when_document_ready_array.push(function() {
+      riveted.init({
+        eventHandler: function(data) {
+          $.post(
+            'youth-employment/time-on-page',
+            {
+              seconds: data,
+              csrfmiddlewaretoken: "{{ csrf_token|escapejs }}"
+            }
+          );
+        }
+      });
+    });
 {% endblock %}
 
 {% block breadcrumbs %}

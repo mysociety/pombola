@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from random import randint, shuffle
+import json
 import sys
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.utils.http import urlquote
-from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic.base import View, TemplateView, RedirectView
 from django.views.generic.edit import FormView
 
 from .forms import (
@@ -102,6 +104,33 @@ class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub):
         context['lifetime_summary'] = context['hansard_entries'] \
             .monthly_appearance_counts()
         return context
+
+
+class ExperimentRecordTimeOnPage(ExperimentViewDataMixin, View):
+
+    http_methods_names = [u'post']
+
+    def post(self, request, *args, **kwargs):
+        def get_response(status, message=None):
+            result = {'status': status}
+            if message is not None:
+                result['message'] = message
+            return HttpResponse(
+                json.dumps(result),
+                content_type='application/json',
+            )
+        if 'seconds' not in self.request.POST:
+            return get_response('error', 'No seconds parameter found')
+        try:
+            seconds = float(self.request.POST['seconds'])
+        except ValueError:
+            return get_response('error', 'Malformed seconds value')
+        self.create_event({
+            'category': 'time-on-page',
+            'action': 'ping',
+            'seconds_on_page': seconds,
+        })
+        return get_response('ok')
 
 
 class ExperimentThanks(ExperimentViewDataMixin, TemplateView):
