@@ -20,3 +20,62 @@
     });
   });
 })();
+
+// track clicks on links without leaving the page
+(function () {
+  $.each(['.inplace-link'], function(_, cssSelector) {
+    $(cssSelector).on('click.open', function(e) {
+      url = this.href;
+      e.preventDefault();
+      // call the thanks page in the background
+      $.ajax({
+        url: url,
+        type: 'get',
+      });
+      // hide the panel with the link buttons
+      // unhide the pre-prepared thankyou panel
+      panel = $(this).parent()[0];
+      $(panel).hide();
+      thanks = $('#' + panel.id + 'thanks');
+      $(thanks).show()
+      if (navigator.userAgent.indexOf('Opera Mini') > -1) {
+        $(document).scrollTop(thanks.offsetTop);
+      }
+    });
+  });
+})();
+
+// process form submits without leaving the page
+(function () {
+  $.each(['.inplace-form'], function(_, cssSelector) {
+    $(cssSelector).on('submit', function(e) {
+      data = $(this).serialize();
+      e.preventDefault();
+      url = this.action;
+      // post the form in the background
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: data
+      });
+      // hide the panel with the form
+      // unhide the pre-prepared thankyou panel
+      panel = $(this).parent()[0];
+      $(panel).hide();
+      thanks = $('#' + panel.id + 'thanks');
+      $(thanks).show();
+      if (navigator.userAgent.indexOf('Opera Mini') > -1) {
+        $(document).scrollTop(thanks.offsetTop);
+      }
+    });
+  });
+})();
+
+// Opera Mini specific fix for video scaling
+(function () {
+  $.each(['.embedded-video'], function(_, cssSelector) {
+    if (navigator.userAgent.indexOf('Opera Mini') > -1) {
+      $(cssSelector).find('.ratio-img').hide();
+    }
+  });
+})();

@@ -1,5 +1,7 @@
 from django import forms
-from django.forms.widgets import Textarea
+from django.forms.widgets import Textarea, Select
+import datetime
+from pombola.core.models import Place
 
 
 class CountyPerformancePetitionForm(forms.Form):
@@ -38,3 +40,31 @@ class CountyPerformanceSenateForm(forms.Form):
                 'cols': 60,
                 'required': 'required',
                 'placeholder': 'Add any comments here'}))
+
+
+class YouthEmploymentCommentForm(forms.Form):
+    comments = forms.CharField(
+        label='Give us your comments on the Bill',
+        error_messages={'required': "You didn't enter a comment"},
+        widget=Textarea(
+            attrs={
+                'rows': 5,
+                'cols': 60,
+                'required': 'required',
+                'placeholder': 'Add any comments here'}))
+
+
+class NamedModelChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.name
+
+class YouthEmploymentSupportForm(forms.Form):
+
+    constituencies = NamedModelChoiceField(
+        queryset = Place.objects.filter(
+                    kind__slug='constituency',
+                    parliamentary_session__end_date__gte=datetime.date.today()
+                   ).order_by('name'),
+        empty_label = "Choose your constituency",
+        error_messages={'required': "Please choose a constituency"}
+    )

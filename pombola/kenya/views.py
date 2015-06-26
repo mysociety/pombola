@@ -10,7 +10,10 @@ from django.utils.http import urlquote
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import FormView
 
-from .forms import CountyPerformancePetitionForm, CountyPerformanceSenateForm
+from .forms import (
+    CountyPerformancePetitionForm, CountyPerformanceSenateForm,
+    YouthEmploymentCommentForm, YouthEmploymentSupportForm
+)
 
 from pombola.core.models import Person
 from pombola.core.views import PersonDetail, PersonDetailSub
@@ -46,6 +49,20 @@ EXPERIMENT_DATA = {
         'demographic_keys': {
             'g': ('m', 'f'),
             'agroup': ('under', 'over'),
+        },
+    },
+    'youth-employment-bill': {
+        'session_key_prefix': 'MIT3',
+        'base_view_name': 'youth-employment',
+        'pageview_label': 'youth-employment',
+        'template_prefix': 'youth',
+        'experiment_key': settings.YOUTH_EMPLOYMENT_BILL_EXPERIMENT_KEY,
+        'qualtrics_sid': 'SV_ebVXgzAevcuo2sB',
+        'variants': ('y', 'n'),
+        'demographic_keys': {
+            'g': ('m', 'f'),
+            'agroup': ('under', 'over'),
+            'pint': ('hi', 'lo'),
         },
     }
 }
@@ -87,6 +104,73 @@ class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub):
         return context
 
 
+class ExperimentThanks(ExperimentViewDataMixin, TemplateView):
+    """For recording voting actions which do not redirect"""
+
+    template_name = 'vote-thanks.html'
+
+    def get_context_data(self, **kwargs):
+        context = {}
+        action_value = 'click'
+        category = 'form'
+
+        # override default values if supplied
+        if self.request.GET.get('val'):
+            action_value = self.request.GET.get('val')
+        if self.request.GET.get('cat'):
+            category = self.request.GET.get('cat')
+
+        self.create_event({'category': category,
+                           'action': action_value,
+                           'label': self.request.GET.get('label')})
+
+        context['base_url'] = reverse(self.base_view_name)
+        return context
+
+
+class ExperimentShare(ExperimentViewDataMixin, RedirectView):
+    """For recording & enacting Facebook / Twitter share actions"""
+
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        social_network = sanitize_parameter(
+            key='n',
+            parameters=self.request.GET,
+            allowed_values=('facebook', 'twitter'))
+        share_key = "{0:x}".format(randint(0, sys.maxint))
+        self.create_event({'category': 'share-click',
+                           'action': 'click',
+                           'label': social_network,
+                           'share_key': share_key})
+        path = reverse(self.base_view_name)
+        built = self.request.build_absolute_uri(path)
+        built += '?via=' + share_key
+        url_parameter = urlquote(built, safe='')
+        url_formats = {
+            'facebook': "https://www.facebook.com/sharer/sharer.php?u={0}",
+            'twitter': "http://twitter.com/share?url={0}"}
+        return url_formats[social_network].format(url_parameter)
+
+
+class ExperimentSurvey(ExperimentViewDataMixin, RedirectView):
+    """For redirecting to the Qualtrics survey"""
+
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        self.create_event({'category': 'take-survey',
+                           'action': 'click',
+                           'label': 'take-survey'})
+        prefix = self.session_key_prefix
+        sid = self.qualtrics_sid
+        url = "http://survey.az1.qualtrics.com/SE/?SID={0}&".format(sid)
+        url += "&".join(
+            k + "=" + self.request.session.get(prefix + ':' + k, '?')
+            for k in ('user_key', 'variant', 'g', 'agroup'))
+        return url
+
+
 class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
     """This view displays a page about county performance with calls to action
 
@@ -98,6 +182,7 @@ class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(CountyPerformanceView, self).get_context_data(**kwargs)
+
         context['petition_form'] = CountyPerformancePetitionForm()
         context['senate_form'] = CountyPerformanceSenateForm()
 
@@ -195,47 +280,110 @@ class CountyPerformancePetitionSubmission(ExperimentFormSubmissionMixin,
                              email=form.cleaned_data.get('email'))
 
 
-class CountyPerformanceShare(ExperimentViewDataMixin, RedirectView):
-    """For recording & enacting Facebook / Twitter share actions"""
+class YouthEmploymentView(ExperimentViewDataMixin, TemplateView):
+    """This view displays a page about youth employment with calls to action
 
-    permanent = False
+    There are some elements of the page that are supposed to be
+    randomly ordered.  There are also two major variants of the
+    page that include different information."""
 
-    def get_redirect_url(self, *args, **kwargs):
-        social_network = sanitize_parameter(
-            key='n',
-            parameters=self.request.GET,
-            allowed_values=('facebook', 'twitter'))
-        share_key = "{0:x}".format(randint(0, sys.maxint))
-        self.create_event({'category': 'share-click',
-                           'action': 'click',
-                           'label': social_network,
-                           'share_key': share_key})
-        path = reverse(self.base_view_name)
-        built = self.request.build_absolute_uri(path)
-        built += '?via=' + share_key
-        url_parameter = urlquote(built, safe='')
-        url_formats = {
-            'facebook': "https://www.facebook.com/sharer/sharer.php?u={0}",
-            'twitter': "http://twitter.com/share?url={0}"}
-        return url_formats[social_network].format(url_parameter)
+    template_name = 'youth-employment.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(YouthEmploymentView, self).get_context_data(**kwargs)
+
+        # Add URLs based on the experiment that's being run:
+        context['survey_url'] = reverse(self.base_view_name + '-survey')
+        context['base_url'] = reverse(self.base_view_name)
+        context['share_url'] = reverse(self.base_view_name + '-share')
+        context['input_url'] = reverse(self.base_view_name + '-input')
+        context['experiment_key'] = self.experiment_key
+        context['comment_submission_url'] = \
+            reverse(self.base_view_name + '-comment-submission')
+        context['support_submission_url'] = \
+            reverse(self.base_view_name + '-support-submission')
+        context['comment_form'] = YouthEmploymentCommentForm()
+        context['support_form'] = YouthEmploymentSupportForm()
+
+        data = self.sanitize_data_parameters(
+            self.request,
+            self.request.GET
+        )
+        variant = data['variant']
+
+        # If there's no user key in the session, this is the first
+        # page view, so record any parameters indicating where the
+        # user came from (Facebook demographics or the 'via' parameter
+        # from a social share):
+        if self.qualify_key('user_key') not in self.request.session:
+            self.request.session[self.qualify_key('user_key')] = str(randint(0, sys.maxint))
+            for k in ('variant', 'via', 'g', 'agroup'):
+                self.request.session[self.qualify_key(k)] = data[k]
+
+        # Add those session parameters to the context for building the
+        # Qualtrics survey URL
+        context.update(self.get_session_data())
+
+        # Only record a page view event (and set the variant) if this
+        # was a page picked by Google Analytics's randomization -
+        # otherwise we'd get a spurious page view before a particular
+        # variant is reloaded:
+        if 'utm_expid' in self.request.GET:
+            self.request.session[self.qualify_key('variant')] = variant
+            # Now create the page view event:
+            self.create_event({'category': 'page',
+                               'action': 'view',
+                               'label': self.pageview_label})
+
+        context['show_youth'] = (variant[0] == 'y')
+
+        context['share_partials'] = [
+            '_share_twitter.html',
+            '_share_facebook.html',
+        ]
+        shuffle(context['share_partials'])
+
+        context['major_partials'] = [
+            '_youth_share.html',
+            '_youth_comment.html',
+            '_youth_support.html',
+            '_youth_input.html'
+        ]
+        shuffle(context['major_partials'])
+
+        return context
 
 
-class CountyPerformanceSurvey(ExperimentViewDataMixin, RedirectView):
-    """For redirecting to the Qualtrics survey"""
+class YouthEmploymentSupportSubmission(ExperimentFormSubmissionMixin,
+                                        FormView):
+    """A view for handling submitted indications of support for a bill"""
 
-    permanent = False
+    template_name = 'youth-employment.html'
+    form_class = YouthEmploymentSupportForm
+    form_key = 'support'
 
-    def get_redirect_url(self, *args, **kwargs):
-        self.create_event({'category': 'take-survey',
-                           'action': 'click',
-                           'label': 'take-survey'})
-        prefix = self.session_key_prefix
-        sid = self.qualtrics_sid
-        url = "http://survey.az1.qualtrics.com/SE/?SID={0}&".format(sid)
-        url += "&".join(
-            k + "=" + self.request.session.get(prefix + ':' + k, '?')
-            for k in ('user_key', 'variant', 'g', 'agroup'))
-        return url
+    def get_success_url(self):
+        return '/{0}/support/thanks'.format(self.base_view_name)
+
+    def create_feedback_from_form(self, form):
+        new_comment = form.cleaned_data.get('constituencies', '').name
+        self.create_feedback(form, comment=new_comment)
+
+
+class YouthEmploymentCommentSubmission(ExperimentFormSubmissionMixin,
+                                          FormView):
+    """A view for handling submissions of comments"""
+
+    template_name = 'youth-employment.html'
+    form_class = YouthEmploymentCommentForm
+    form_key = 'comment'
+
+    def get_success_url(self):
+        return '/{0}/comment/thanks'.format(self.base_view_name)
+
+    def create_feedback_from_form(self, form):
+        new_comment = form.cleaned_data.get('comments', '').strip()
+        self.create_feedback(form, comment=new_comment)
 
 
 class ThanksTemplateView(TemplateView):

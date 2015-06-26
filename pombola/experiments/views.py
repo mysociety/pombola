@@ -111,8 +111,15 @@ class ExperimentFormSubmissionMixin(ExperimentViewDataMixin):
 
     def form_valid(self, form):
         self.create_feedback_from_form(form)
+        action_value = 'submit'
+        # tranform the Yes submit button to click-yes for recording purposes
+        if 'submit-yes' in form.data:
+            action_value = 'click-yes'
+        # tranform the No submit button to click-no for recording purposes
+        if 'submit-no' in form.data:
+            action_value = 'click-no'
         self.create_event({'category': 'form',
-                           'action': 'submit',
+                           'action': action_value,
                            'label': self.form_key})
         return super(ExperimentFormSubmissionMixin,
                      self).form_valid(form)

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load compressed %}
+
+{% comment %}
+
+  This page is for the tests of effectiveness of various calls
+  to action suggested by our MIT collaborators.
+
+{% endcomment %}
+
+{% block ga_experiment %}
+{% if experiment_key %}
+<!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+k='{{ experiment_key }}',d=document,l=d.location,c=d.cookie;
+if(l.search.indexOf('utm_expid='+k)>0)return;
+function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+</script><script>utmx('url','A/B');</script>
+<!-- End of Google Analytics Content Experiment code -->
+{% endif %}
+{% endblock %}
+
+{% block title %}What is our Government doing about unemployment?{% endblock %}
+
+{% block body_attributes %}class="exp-survey-form"{% endblock %}
+
+{% block extra_js_to_load %}
+    addExtraJS([ {% compressed_js 'click-tracking' %} null ]);
+{% endblock %}
+
+{% block breadcrumbs %}
+    {# Hide bread crumbs on this page. #}
+    <div id="breadcrumb-replacement"></div>
+{% endblock %}
+
+{% block content %}
+
+  {% if not correct_errors %}
+    {% if show_youth %}
+      <h1>What is our Government doing about youth unemployment?</h1>
+    {% else %}
+      <h1>What is our Government doing about unemployment?</h1>
+    {% endif %}
+
+    <div id="report">
+      {% if show_youth %}
+        <h2>70 percent of unemployed Kenyans are between the ages of 15 and 35. Are you one of them?</h2>
+
+        <iframe width="640" height="390" src="https://www.youtube.com/embed/RmgrwUUpS2s?start=42&end=66" frameborder="0" allowfullscreen></iframe>
+
+        <br /><br />
+
+        <iframe width="640" height="390" src="https://www.youtube.com/embed/flajx1xV87g?start=600&end=610" frameborder="0" allowfullscreen></iframe>
+
+        <br /><br />
+
+        <p>
+          <!-- the following text should be a link to the Bill once it is published -->
+          Read the national youth employment bill that proposes a new Government Authority to help people find jobs.
+          <br />
+          Give us your comments!
+        </p>
+
+      {% else %}
+
+        <h2>40 percent of Kenyans are unemployed. Are you one of them?</h2>
+
+        <iframe width="640" height="390" src="https://www.youtube.com/embed/RmgrwUUpS2s?start=42&end=66" frameborder="0" allowfullscreen></iframe>
+
+        <br /><br />
+
+        <iframe width="640" height="390" src="https://www.youtube.com/embed/flajx1xV87g?start=600&end=610" frameborder="0" allowfullscreen></iframe>
+        <br /><br />
+
+        <p>
+          <!-- the following text should be a link to the Bill once it is published -->
+          Read the new bill that proposes a new Government Authority to help people find jobs.
+          <br />
+          Give us your comments!
+        </p>
+      {% endif %}
+  {% endif %}
+
+  {% for partial in major_partials %}
+    {% include partial %}
+  {% endfor %}
+
+  {% if not correct_errors %}
+
+      <div id="survey">
+        <p>Take our 5 minute survey and enter to win $100 in airtime!</p>
+        <a href="{{ survey_url }}" id="take-survey">Take Survey</a>
+      </div>
+
+  {% endif %}
+
+  </div>
+
+{% endblock %}
