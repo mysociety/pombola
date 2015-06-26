@@ -39,6 +39,7 @@ class ExperimentViewDataMixin(object):
     qualtrics_sid = None
     variants = None
     demographic_keys = None
+    major_partials = None
 
     def qualify_key(self, key):
         prefix = self.session_key_prefix

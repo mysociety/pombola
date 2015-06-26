@@ -37,6 +37,11 @@ EXPERIMENT_DATA = {
             'g': ('m', 'f'),
             'agroup': ('under', 'over'),
         },
+        'major_partials': [
+            '_county_share.html',
+            '_county_petition.html',
+            '_county_senate.html',
+        ],
     },
     'mit-county-larger': {
         'session_key_prefix': 'MIT2',
@@ -50,6 +55,11 @@ EXPERIMENT_DATA = {
             'g': ('m', 'f'),
             'agroup': ('under', 'over'),
         },
+        'major_partials': [
+            '_county_share.html',
+            '_county_petition.html',
+            '_county_senate.html',
+        ],
     },
     'youth-employment-bill': {
         'session_key_prefix': 'MIT3',
@@ -64,6 +74,13 @@ EXPERIMENT_DATA = {
             'agroup': ('under', 'over'),
             'pint': ('hi', 'lo'),
         },
+        'major_partials': [
+            '_youth_share.html',
+            '_youth_comment.html',
+            '_youth_support.html',
+            '_youth_input.html'
+        ],
+
     }
 }
 
@@ -101,6 +118,68 @@ class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub):
         context['hansard_entries_to_show'] = ":5"
         context['lifetime_summary'] = context['hansard_entries'] \
             .monthly_appearance_counts()
+        return context
+
+
+class MITExperimentView(ExperimentViewDataMixin, TemplateView):
+
+    def get_context_data(self, **kwargs):
+        context = super(MITExperimentView, self).get_context_data(**kwargs)
+
+        context['experiment_key'] = self.experiment_key
+        context['base_url'] = reverse(self.base_view_name)
+        context['survey_url'] = reverse(self.base_view_name + '-survey')
+        context['share_url'] = reverse(self.base_view_name + '-share')
+
+        data = self.sanitize_data_parameters(
+            self.request,
+            self.request.GET
+        )
+        context['variant'] = variant = data['variant']
+
+        # If there's no user key in the session, this is the first
+        # page view, so record any parameters indicating where the
+        # user came from (Facebook demographics or the 'via' parameter
+        # from a social share):
+        if self.qualify_key('user_key') not in self.request.session:
+            self.request.session[self.qualify_key('user_key')] = \
+                str(random.randint(0, sys.maxint))
+            session_keys = ['variant', 'via'] + self.demographic_keys.keys()
+            for k in session_keys:
+                self.request.session[self.qualify_key(k)] = data[k]
+
+        # Add those session parameters to the context for building the
+        # Qualtrics survey URL
+        context.update(self.get_session_data())
+
+        # Only record a page view event (and set the variant) if this
+        # was a page picked by Google Analytics's randomization -
+        # otherwise we'd get a spurious page view before a particular
+        # variant is reloaded:
+        if 'utm_expid' in self.request.GET:
+            self.request.session[self.qualify_key('variant')] = variant
+            # Now create the page view event:
+            self.create_event({'category': 'page',
+                               'action': 'view',
+                               'label': self.pageview_label})
+
+        user_key = self.request.session[self.qualify_key('user_key')]
+        # Setting a seed with random.seed would not be thread-safe,
+        # and potentially unsafe if randint values (say) are used for
+        # anything with a security implication; instead create a
+        # Random object for shuffling the partials.
+        local_random = random.Random()
+        local_random.seed(user_key)
+
+        context['share_partials'] = [
+            '_share_twitter.html',
+            '_share_facebook.html',
+        ]
+        local_random.shuffle(context['share_partials'])
+
+        context['major_partials'] = self.major_partials[:]
+        local_random.shuffle(context['major_partials'])
+
         return context
 
 
@@ -155,7 +234,7 @@ class ExperimentThanks(ExperimentViewDataMixin, TemplateView):
         return context
 
 
-class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
+class CountyPerformanceView(MITExperimentView):
     """This view displays a page about county performance with calls to action
 
     There are some elements of the page that are supposed to be
@@ -167,75 +246,22 @@ class CountyPerformanceView(ExperimentViewDataMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(CountyPerformanceView, self).get_context_data(**kwargs)
 
+        # For convenience and readability, just assign this to a local
+        # variable.
+        variant = context['variant']
+
         context['petition_form'] = CountyPerformancePetitionForm()
         context['senate_form'] = CountyPerformanceSenateForm()
 
         # Add URLs based on the experiment that's being run:
-        context['survey_url'] = reverse(self.base_view_name + '-survey')
-        context['base_url'] = reverse(self.base_view_name)
-        context['share_url'] = reverse(self.base_view_name + '-share')
         context['petition_submission_url'] = \
             reverse(self.base_view_name + '-petition-submission')
         context['senate_submission_url'] = \
             reverse(self.base_view_name + '-senate-submission')
-        context['experiment_key'] = self.experiment_key
-
-        data = self.sanitize_data_parameters(
-            self.request,
-            self.request.GET
-        )
-        variant = data['variant']
-
-        # If there's no user key in the session, this is the first
-        # page view, so record any parameters indicating where the
-        # user came from (Facebook demographics or the 'via' parameter
-        # from a social share):
-        if self.qualify_key('user_key') not in self.request.session:
-            self.request.session[self.qualify_key('user_key')] = \
-                str(random.randint(0, sys.maxint))
-            session_keys = ['variant', 'via'] + self.demographic_keys.keys()
-            for k in session_keys:
-                self.request.session[self.qualify_key(k)] = data[k]
-
-        # Add those session parameters to the context for building the
-        # Qualtrics survey URL
-        context.update(self.get_session_data())
-
-        # Only record a page view event (and set the variant) if this
-        # was a page picked by Google Analytics's randomization -
-        # otherwise we'd get a spurious page view before a particular
-        # variant is reloaded:
-        if 'utm_expid' in self.request.GET:
-            self.request.session[self.qualify_key('variant')] = variant
-            # Now create the page view event:
-            self.create_event({'category': 'page',
-                               'action': 'view',
-                               'label': self.pageview_label})
 
         context['show_social_context'] = variant in ('ns', 'ts', 'os')
         context['show_threat'] = (variant[0] == 't')
         context['show_opportunity'] = (variant[0] == 'o')
-
-        user_key = self.request.session[self.qualify_key('user_key')]
-        # Setting a seed with random.seed would not be thread-safe,
-        # and potentially unsafe if randint values (say) are used for
-        # anything with a security implication; instead create a
-        # Random object for shuffling the partials.
-        local_random = random.Random()
-        local_random.seed(user_key)
-
-        context['share_partials'] = [
-            '_share_twitter.html',
-            '_share_facebook.html',
-        ]
-        local_random.shuffle(context['share_partials'])
-
-        context['major_partials'] = [
-            '_county_share.html',
-            '_county_petition.html',
-            '_county_senate.html',
-        ]
-        local_random.shuffle(context['major_partials'])
 
         return context
 
@@ -274,7 +300,7 @@ class CountyPerformancePetitionSubmission(ExperimentFormSubmissionMixin,
                              email=form.cleaned_data.get('email'))
 
 
-class YouthEmploymentView(ExperimentViewDataMixin, TemplateView):
+class YouthEmploymentView(MITExperimentView):
     """This view displays a page about youth employment with calls to action
 
     There are some elements of the page that are supposed to be
@@ -286,12 +312,12 @@ class YouthEmploymentView(ExperimentViewDataMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(YouthEmploymentView, self).get_context_data(**kwargs)
 
+        # For convenience and readability, just assign this to a local
+        # variable.
+        variant = context['variant']
+
         # Add URLs based on the experiment that's being run:
-        context['survey_url'] = reverse(self.base_view_name + '-survey')
-        context['base_url'] = reverse(self.base_view_name)
-        context['share_url'] = reverse(self.base_view_name + '-share')
         context['input_url'] = reverse(self.base_view_name + '-input')
-        context['experiment_key'] = self.experiment_key
         context['comment_submission_url'] = \
             reverse(self.base_view_name + '-comment-submission')
         context['support_submission_url'] = \
@@ -299,61 +325,7 @@ class YouthEmploymentView(ExperimentViewDataMixin, TemplateView):
         context['comment_form'] = YouthEmploymentCommentForm()
         context['support_form'] = YouthEmploymentSupportForm()
 
-        data = self.sanitize_data_parameters(
-            self.request,
-            self.request.GET
-        )
-        variant = data['variant']
-
-        # If there's no user key in the session, this is the first
-        # page view, so record any parameters indicating where the
-        # user came from (Facebook demographics or the 'via' parameter
-        # from a social share):
-        if self.qualify_key('user_key') not in self.request.session:
-            self.request.session[self.qualify_key('user_key')] = \
-                str(random.randint(0, sys.maxint))
-            session_keys = ['variant', 'via'] + self.demographic_keys.keys()
-            for k in session_keys:
-                self.request.session[self.qualify_key(k)] = data[k]
-
-        # Add those session parameters to the context for building the
-        # Qualtrics survey URL
-        context.update(self.get_session_data())
-
-        # Only record a page view event (and set the variant) if this
-        # was a page picked by Google Analytics's randomization -
-        # otherwise we'd get a spurious page view before a particular
-        # variant is reloaded:
-        if 'utm_expid' in self.request.GET:
-            self.request.session[self.qualify_key('variant')] = variant
-            # Now create the page view event:
-            self.create_event({'category': 'page',
-                               'action': 'view',
-                               'label': self.pageview_label})
-
         context['show_youth'] = (variant[0] == 'y')
-
-        user_key = self.request.session[self.qualify_key('user_key')]
-        # Setting a seed with random.seed would not be thread-safe,
-        # and potentially unsafe if randint values (say) are used for
-        # anything with a security implication; instead create a
-        # Random object for shuffling the partials.
-        local_random = random.Random()
-        local_random.seed(user_key)
-
-        context['share_partials'] = [
-            '_share_twitter.html',
-            '_share_facebook.html',
-        ]
-        local_random.shuffle(context['share_partials'])
-
-        context['major_partials'] = [
-            '_youth_share.html',
-            '_youth_comment.html',
-            '_youth_support.html',
-            '_youth_input.html'
-        ]
-        local_random.shuffle(context['major_partials'])
 
         return context
 
