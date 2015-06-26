@@ -141,7 +141,8 @@ class MITExperimentView(ExperimentViewDataMixin, TemplateView):
         # If there's no user key in the session, this is the first
         # page view, so record any parameters indicating where the
         # user came from (Facebook demographics or the 'via' parameter
-        # from a social share):
+        # from a social share) and a newly generated user_key in the
+        # session:
         if self.qualify_key('user_key') not in self.request.session:
             self.request.session[self.qualify_key('user_key')] = \
                 str(random.randint(0, sys.maxint))
