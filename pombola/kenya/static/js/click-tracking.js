@@ -23,7 +23,7 @@
 
 // process form submits without leaving the page
 (function () {
-  $.each(['.inplace-form'], function(_, cssSelector) {
+  $('.inplace-form').each(function (i) {
     var form = $(this);
     /* There doesn't seem to be any particularly nice way of finding
        which submit button was clicked from jQuery's submit event.
@@ -40,7 +40,7 @@
         );
       }
     });
-    $(cssSelector).on('submit', function(e) {
+    form.on('submit', function(e) {
       var data = $(this).serialize(),
         url = this.action,
         panel = $(this).parent()[0],
