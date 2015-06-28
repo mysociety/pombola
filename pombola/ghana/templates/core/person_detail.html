@@ -1,49 +1,52 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 
-{% block extra_scripts %}
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">
-    stLight.options({publisher: "5e003073-041c-4ff8-8b24-bf3e9f4315fb"});
-</script>
-{% endblock %}
-
 {% block content %}
-<div class="member-profile ninecol">
-    <div id="profileInfo">
-        {#<img width="250" height="270" src="#" />#}
+<div class="col-lg-12">
+<div class="panel panel-default">
 
-        {% thumbnail object.primary_image "250x270" crop="center" as img %}
-            <img class="profile-avatar" src="{{ img.url }}" alt="{{ object.name }}"
+    <div class="panel-body">
+        <div class="text-center">
+        {% thumbnail object.primary_image "250x250" crop="center" as img %}
+            <img class="img-thumbnail img-circle" src="{{ img.url }}" alt="{{ object.name }}"
                   width="{{ img.width }}" height="{{ img.height }}" />
         {% empty %}
-            <img src="{{STATIC_URL}}images/avatar-210x210.jpg" />
+            <img class="img-thumbnail img-circle" src="{{STATIC_URL}}images/avatar.png"
+                   width="250px" height="250px"/>
         {% endthumbnail %}
-
-        <div class="bioData">
-            <h4>Biography</h4>
-            <ul>
-                <li><strong>Hometown:</strong><span>{{ mp.hometown }}</span></li>
-                <li><strong>Religion:</strong><span>{{ mp.religion }}</span></li>
-                <li><strong>Birth:</strong><span>{{ object.date_of_birth }}</span></li>
-                <li><strong>Profession:</strong><span>{{ mp.occupation }}</span></li>
-                <li><strong>Education:</strong><span>{{ mp.education}}</span></li>
-            </ul>
-        </div>
-    </div>
-    <div id="profileContent">
-        <div class="titleSpace">
-            <h2>Hon. {{ object.title }} {{ object.legal_name }}</h2>
-            <p>MP for
-                {% for constituency in object.constituencies %}
-                    <a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a>
-                {% endfor %}
+       </div>
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+            <h2>
+                {% with object.parties.0 as party %}
+                <a href="{{ party.get_absolute_url }}" alt="{{ party.name }}">
+                    <img class="img img-thumbnail" width="50" height="50"
+                    src="{{ STATIC_URL}}/images/parties/{{ party.name.strip |lower}}.png"></img>
+                </a>
+                {% endwith %}
+                Hon. {{ object.title }} {{ object.legal_name }}
+            </h2>
+            <p class="fa fa-globe fa-2x"> MP for
+            {% for constituency in object.constituencies %}
+                <a href="{{ constituency.get_absolute_url }}">
+                {{ constituency.name }}
+                </a>
+            {% endfor %}
             </p>
-            {% with object.parties.0 as party %}
-            <a class="{{ party.name|lower }}_tag" href="#"></a>
+        <hr>
+        </div>
+        <div class="col-lg-8 col-lg-offset-2">
+            <h4>Biography <small class="pull-right"> {% include 'core/social_tools.html' %}</small></h4>
+            {% with object.mp_set.all.0 as mp %}
+            <ul class="list-group">
+                <li class="list-group-item"><h4>Hometown <small>{{ mp.hometown | default:'not available' }}</small></h4></li>
+                <li class="list-group-item"><h4>Religion <small>{{ mp.religion | default:'not available' }}</small></h4></li>
+                <li class="list-group-item"><h4>Birth <small>{{ object.date_of_birth | default:'not available' }}</small></h4></li>
+                <li class="list-group-item"><h4>Profession <small>{{ mp.occupation | default:'not available' }}</small></h4></li>
+                <li class="list-group-item"><h4>Education <small>{{ mp.education | default:'not available' }}</small></h4></li>
+            </ul>
             {% endwith %}
         </div>
+
 
         {% comment %}
         <h3>Scorecard</h3>
@@ -58,24 +61,8 @@
             {% include 'disqus_comments.html' %}
         </div>
         {% endcomment %}
-    </div>
-</div>
 
-<div class="index-right threecol">
-    <h3>Share</h3>
-    <ul class="socialShare">
-        <li>
-            <span class='st_facebook_hcount' displayText='Facebook'></span>
-        </li>
-        <li>
-        <span class='st_twitter_hcount' displayText='Tweet'></span>
-        </li>
-        <li>
-        <span class='st_googleplus_hcount' displayText='Google +'></span>
-        </li>
-        <li>
-        <span class='st_email_hcount' displayText='Email'></span>
-        </li>
-    </ul>
+</div>
+</div>
 </div>
 {% endblock %}
