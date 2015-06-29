@@ -224,7 +224,9 @@ $dark-red: #be1919;
   }
 
   .embedded-video {
-      position: relative
+      position: relative;
+      width: 77%;
+      margin: 0 auto;
   }
 
   .embedded-video .ratio-img {
