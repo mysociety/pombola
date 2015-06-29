@@ -9,7 +9,8 @@ from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
     EXPERIMENT_DATA, ThanksTemplateView,
     YouthEmploymentView, YouthEmploymentSupportSubmission,
     YouthEmploymentCommentSubmission, ExperimentThanks,
-    YouthEmploymentInputSubmission, ShujaazFinalistsView
+    YouthEmploymentInputSubmission, YouthEmploymentBillView,
+    ShujaazFinalistsView
 )
 
 urlpatterns = patterns('',
@@ -99,6 +100,9 @@ for experiment_slug in ('youth-employment-bill',):
         url(base_path + r'/survey',
             ExperimentSurvey.as_view(**view_kwargs),
             name=(base_name + '-survey')),
+        url(base_path + r'/bill',
+            YouthEmploymentBillView.as_view(**view_kwargs),
+            name=(base_name + '-bill')),
         url(base_path + r'/input',
             ExperimentThanks.as_view(**view_kwargs),
             name=(base_name + '-input')),

@@ -8,7 +8,7 @@ import sys
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.views.generic.base import View, TemplateView
+from django.views.generic.base import View, TemplateView, RedirectView
 from django.views.generic.edit import FormView
 
 from .forms import (
@@ -326,6 +326,7 @@ class YouthEmploymentView(MITExperimentView):
         variant = context['variant']
 
         # Add URLs based on the experiment that's being run:
+        context['bill_url'] = reverse(self.base_view_name + '-bill')
         context['input_url'] = reverse(self.base_view_name + '-input')
         context['comment_submission_url'] = \
             reverse(self.base_view_name + '-comment-submission')
@@ -413,6 +414,18 @@ class YouthEmploymentCommentSubmission(ExperimentFormSubmissionMixin,
     def create_feedback_from_form(self, form):
         new_comment = form.cleaned_data.get('comments', '').strip()
         self.create_feedback(form, comment=new_comment)
+
+
+class YouthEmploymentBillView(ExperimentViewDataMixin, RedirectView):
+    """A view to handle redirecting to the bill PDF"""
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        self.create_event({'category': 'read-bill',
+                           'action': 'click',
+                           'label': 'read-bill'})
+        url = "http://info.mzalendo.com/media_root/file_archive/NATIONAL_YOUTH_EMPLOYMENT_BUREAU_BILL_2015_-_Hon._Sakaja.pdf"
+        return url
 
 
 class ThanksTemplateView(TemplateView):
