@@ -7,7 +7,7 @@
     $(cssSelector).on('click.open', function(e) {
       var label = this.id, url = this.href, width, height;
       var windowFeatures = {
-        '#take-survey': 'chrome,width=800,height=600',
+        '#take-survey': 'chrome,width=800,height=623',
         '.share-link': 'chrome,width=600,height=300',
         '.read-link': 'chrome,width=800,height=920',
       }[cssSelector]
