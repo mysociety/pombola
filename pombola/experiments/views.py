@@ -45,6 +45,12 @@ class ExperimentViewDataMixin(object):
         prefix = self.session_key_prefix
         return prefix + ':' + key
 
+    def get_session_value(self, key):
+        return self.request.session.get(self.qualify_key(key))
+
+    def set_session_value(self, key, value):
+        self.request.session[self.qualify_key(key)] = value
+
     def create_feedback(self, form, comment='', email=''):
         """A helper method for adding feedback to the database"""
         feedback = Feedback()
@@ -64,8 +70,7 @@ class ExperimentViewDataMixin(object):
         session_keys = ['user_key', 'variant', 'via']
         session_keys += self.demographic_keys.keys()
         for key in session_keys:
-            full_key = self.qualify_key(key)
-            value = self.request.session.get(full_key)
+            value = self.get_session_value(key)
             if value is not None:
                 result[key] = value
         return result
