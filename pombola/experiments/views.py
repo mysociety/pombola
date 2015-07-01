@@ -1,5 +1,5 @@
 import json
-from random import randint
+from random import randint, choice
 import re
 import sys
 
@@ -45,6 +45,19 @@ class ExperimentViewDataMixin(object):
     def qualify_key(self, key):
         prefix = self.session_key_prefix
         return prefix + ':' + key
+
+    def get_random_variant(self, local_random=None):
+        if local_random is None:
+            return choice(self.variants)
+        return local_random.choice(self.variants)
+
+    def get_variant_from_session(self):
+        # If there's a variant in the session already, that's the one
+        # we'll use, so people get a consistent variant when they
+        # return to the page:
+        session_key = self.qualify_key('variant')
+        if session_key in self.request.session:
+            return self.request.session[session_key]
 
     def get_session_value(self, key):
         return self.request.session.get(self.qualify_key(key))

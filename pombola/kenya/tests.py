@@ -1,4 +1,5 @@
 import json
+from mock import patch
 import re
 import urllib
 import urlparse
@@ -7,7 +8,7 @@ from django.core.urlresolvers import reverse
 
 from pombola.experiments.models import Event, Experiment
 from pombola.feedback.models import Feedback
-from .views import EXPERIMENT_DATA
+from .views import EXPERIMENT_DATA, CountyPerformanceView
 
 from django_webtest import WebTest
 
@@ -29,6 +30,7 @@ class CountyPerformancePageTests(WebTest):
         self.experiment.delete()
         Feedback.objects.all().delete()
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'n')
     def test_page_view(self):
         response = self.app.get(self.url)
         self.assertEqual(response.status_code, 200)
@@ -41,8 +43,9 @@ class CountyPerformancePageTests(WebTest):
         self.assertFalse(
             response.html.findAll('div', {'id': 'threat'}))
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 't')
     def test_threat_variant(self):
-        response = self.app.get(self.url + '?variant=t')
+        response = self.app.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'threat'})))
@@ -51,8 +54,9 @@ class CountyPerformancePageTests(WebTest):
         self.assertFalse(
             response.html.findAll('div', {'id': 'social-context'}))
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'o')
     def test_opportunity_variant(self):
-        response = self.app.get(self.url + '?variant=o')
+        response = self.app.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'opportunity'})))
@@ -61,8 +65,9 @@ class CountyPerformancePageTests(WebTest):
         self.assertFalse(
             response.html.findAll('div', {'id': 'social-context'}))
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'n')
     def test_neither_variant(self):
-        response = self.app.get(self.url + '?variant=n')
+        response = self.app.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(
             response.html.findAll('div', {'id': 'opportunity'}))
@@ -71,8 +76,9 @@ class CountyPerformancePageTests(WebTest):
         self.assertFalse(
             response.html.findAll('div', {'id': 'social-context'}))
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'ts')
     def test_threat_variant_with_social_context(self):
-        response = self.app.get(self.url + '?variant=ts')
+        response = self.app.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'threat'})))
@@ -81,8 +87,9 @@ class CountyPerformancePageTests(WebTest):
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'social-context'})))
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'os')
     def test_opportunity_variant_with_social_context(self):
-        response = self.app.get(self.url + '?variant=os')
+        response = self.app.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'opportunity'})))
@@ -91,8 +98,9 @@ class CountyPerformancePageTests(WebTest):
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'social-context'})))
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'ns')
     def test_neither_variant_with_social_context(self):
-        response = self.app.get(self.url + '?variant=ns')
+        response = self.app.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(
             response.html.findAll('div', {'id': 'opportunity'}))
@@ -101,9 +109,10 @@ class CountyPerformancePageTests(WebTest):
         self.assertEqual(
             1, len(response.html.findAll('div', {'id': 'social-context'})))
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'o')
     def test_petition_submission(self):
         Event.objects.all().delete()
-        response = self.app.get(self.url + '?variant=o&g=f&agroup=over&utm_expid=1234')
+        response = self.app.get(self.url + '?g=f&agroup=over')
         event = Event.objects.get(
             variant='o',
             category='page',
@@ -132,10 +141,11 @@ class CountyPerformancePageTests(WebTest):
         extra_data = json.loads(event.extra_data)
         self.assertEqual('f', extra_data['g'])
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 't')
     def test_senate_submission(self):
         Event.objects.all().delete()
         test_comment = "Some comment to submit"
-        response = self.app.get(self.url + '?variant=t&g=m&agroup=over&utm_expid=1234')
+        response = self.app.get(self.url + '?g=m&agroup=over')
         event = Event.objects.get(
             variant='t',
             category='page',
@@ -162,9 +172,10 @@ class CountyPerformancePageTests(WebTest):
         extra_data = json.loads(event.extra_data)
         self.assertEqual('m', extra_data['g'])
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'n')
     def test_survey_link(self):
         Event.objects.all().delete()
-        response = self.app.get(self.url + '?variant=n&g=f&agroup=under&utm_expid=1234')
+        response = self.app.get(self.url + '?g=f&agroup=under')
         event = Event.objects.get(
             variant='n',
             category='page',
@@ -190,9 +201,10 @@ class CountyPerformancePageTests(WebTest):
         self.assertEqual(parsed_redirect_qs['user_key'], [user_key])
         self.assertEqual(parsed_redirect_qs['variant'], ['n'])
 
+    @patch.object(CountyPerformanceView, 'get_random_variant', lambda self, local_random: 'n')
     def test_share_link(self):
         Event.objects.all().delete()
-        response = self.app.get(self.url + '?variant=n&g=f&agroup=over&utm_expid=56789')
+        response = self.app.get(self.url + '?g=f&agroup=over')
         event = Event.objects.get(
             variant='n',
             category='page',

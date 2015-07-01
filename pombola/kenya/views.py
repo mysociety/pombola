@@ -20,7 +20,8 @@ from .forms import (
 from pombola.core.models import Person
 from pombola.core.views import PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
-    ExperimentViewDataMixin, ExperimentFormSubmissionMixin
+    ExperimentViewDataMixin, ExperimentFormSubmissionMixin,
+    sanitize_parameter
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
@@ -135,11 +136,11 @@ class MITExperimentView(ExperimentViewDataMixin, TemplateView):
         context['survey_url'] = reverse(self.base_view_name + '-survey')
         context['share_url'] = reverse(self.base_view_name + '-share')
 
+        # Sanitize all the GET parameters:
         data = self.sanitize_data_parameters(
             self.request,
             self.request.GET
         )
-        context['variant'] = variant = data['variant']
 
         # If there's no user key in the session, this is the first
         # page view, so record any parameters indicating where the
@@ -149,40 +150,52 @@ class MITExperimentView(ExperimentViewDataMixin, TemplateView):
         if self.qualify_key('user_key') not in self.request.session:
             self.request.session[self.qualify_key('user_key')] = \
                 str(random.randint(0, sys.maxint))
-            session_keys = ['variant', 'via'] + self.demographic_keys.keys()
+            session_keys = ['via'] + self.demographic_keys.keys()
             for k in session_keys:
-                self.request.session[self.qualify_key(k)] = data[k]
+                self.set_session_value(k, data[k])
 
-        # However, the Google Analytics experiment may cause a
-        # subsequent reload (with user_key already set) to a different
-        # variant; since we're about to use the session variables to
-        # update the context, make sure the session's variant matches
-        # what was requested in the URL:
-        self.request.session[self.qualify_key('variant')] = variant
+        user_key = self.get_session_value('user_key')
 
-        # Add those session parameters to the context for building the
-        # Qualtrics survey URL
-        context.update(self.get_session_data())
-
-        # Only record a page view event (and set the variant) if this
-        # was a page picked by Google Analytics's randomization -
-        # otherwise we'd get a spurious page view before a particular
-        # variant is reloaded:
-        if 'utm_expid' in self.request.GET:
-            self.request.session[self.qualify_key('variant')] = variant
-            # Now create the page view event:
-            self.create_event({'category': 'page',
-                               'action': 'view',
-                               'label': self.pageview_label})
-
-        user_key = self.request.session[self.qualify_key('user_key')]
         # Setting a seed with random.seed would not be thread-safe,
         # and potentially unsafe if randint values (say) are used for
         # anything with a security implication; instead create a
-        # Random object for shuffling the partials.
+        # Random object for picking the variant and shuffling the
+        # partials.
         local_random = random.Random()
         local_random.seed(user_key)
 
+        variant_to_use = self.get_variant_from_session()
+        if not variant_to_use:
+            # Then we should pick one at random, and store it in
+            # the session too:
+            variant_to_use = self.get_random_variant(local_random)
+            self.set_session_value('variant', variant_to_use)
+
+        # Add those session parameters to the context for building the
+        # Qualtrics survey URL, and to set the variant in the context:
+        context.update(self.get_session_data())
+
+        # Now create the page view event:
+        self.create_event({
+            'category': 'page',
+            'action': 'view',
+            'label': self.pageview_label,
+        })
+
+        # So that for testing we can see a particular variant, if
+        # force-variant is set, then use that for displaying the page,
+        # regardless of the variant stored in the session:
+        if 'force-variant' in self.request.GET:
+            sanitized_force_variant = sanitize_parameter(
+                'force-variant',
+                self.request.GET,
+                self.variants,
+                default_value=self.default_variant
+            )
+            context['variant'] = sanitized_force_variant
+
+        # Now make sure the elements of the page that have to come in
+        # random order are appropriately shuffled:
         context['share_partials'] = [
             '_share_twitter.html',
             '_share_facebook.html',
