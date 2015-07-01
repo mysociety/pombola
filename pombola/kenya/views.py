@@ -34,6 +34,7 @@ EXPERIMENT_DATA = {
         'experiment_key': None,
         'qualtrics_sid': 'SV_5hhE4mOfYG1eaOh',
         'variants': ('o', 't', 'n', 'os', 'ts', 'ns'),
+        'default_variant': 'n',
         'demographic_keys': {
             'g': ('m', 'f'),
             'agroup': ('under', 'over'),
@@ -52,6 +53,7 @@ EXPERIMENT_DATA = {
         'experiment_key': settings.COUNTY_PERFORMANCE_EXPERIMENT_KEY,
         'qualtrics_sid': 'SV_5hhE4mOfYG1eaOh',
         'variants': ('o', 't', 'n', 'os', 'ts', 'ns'),
+        'default_variant': 'n',
         'demographic_keys': {
             'g': ('m', 'f'),
             'agroup': ('under', 'over'),
@@ -70,6 +72,7 @@ EXPERIMENT_DATA = {
         'experiment_key': settings.YOUTH_EMPLOYMENT_BILL_EXPERIMENT_KEY,
         'qualtrics_sid': 'SV_ebVXgzAevcuo2sB',
         'variants': ('y', 'n'),
+        'default_variant': 'n',
         'demographic_keys': {
             'g': ('m', 'f'),
             'agroup': ('under', 'over'),

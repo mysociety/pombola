@@ -38,6 +38,7 @@ class ExperimentViewDataMixin(object):
     experiment_key = None
     qualtrics_sid = None
     variants = None
+    default_variant = None
     demographic_keys = None
     major_partials = None
 
@@ -99,7 +100,7 @@ class ExperimentViewDataMixin(object):
             key='variant',
             parameters=parameters,
             allowed_values=self.variants,
-            default_value='n')
+            default_value=self.default_variant)
         for key, possible_values in self.demographic_keys.items():
             result[key] = sanitize_parameter(
                 key=key,
