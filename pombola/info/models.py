@@ -186,3 +186,15 @@ class InfoPage(ModelBase):
 
     class Meta:
         ordering = ['title']
+
+
+class ViewCount(models.Model):
+    date = models.DateField()
+    page = models.ForeignKey(InfoPage)
+
+    # Keeping a normal integer here just in case we at some point want
+    # to manually insert a negative count to keep a post down.
+    count = models.IntegerField()
+
+    class Meta:
+        unique_together = ('date', 'page')

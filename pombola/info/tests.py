@@ -1,7 +1,10 @@
+from datetime import date
 import itertools
+import mock
 import re
 
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.utils import unittest
 from django.test.client import Client
 from django.test.utils import override_settings
@@ -9,7 +12,8 @@ from django.test import TestCase, Client
 
 from nose.plugins.attrib import attr
 
-from .models import InfoPage
+from .models import InfoPage, ViewCount
+
 
 class InfoTest(TestCase):
 
@@ -88,6 +92,69 @@ class InfoTest(TestCase):
                 <iframe></iframe>
                 </p><p>And then a trailing paragraph...</p></div>'''
         )
+
+    @mock.patch('pombola.info.views.date')
+    @override_settings(INFO_PAGES_ALLOW_RAW_HTML=True)
+    def test_blog_post_views_are_counted(self, mockdate=None):
+        example_post_1 = InfoPage.objects.create(
+            slug="post",
+            title="Example title",
+            raw_content="Example content",
+            use_raw=True,
+            kind=InfoPage.KIND_BLOG,
+        )
+
+        example_post_2 = InfoPage.objects.create(
+            slug="post2",
+            title="Example title 2",
+            raw_content="Example content 2",
+            use_raw=True,
+            kind=InfoPage.KIND_BLOG,
+        )
+
+        post_1_url = reverse('info_blog', kwargs={'slug': 'post'})
+        post_2_url = reverse('info_blog', kwargs={'slug': 'post2'})
+
+        day1 = date(2015, 01, 01)
+        day2 = date(2015, 01, 02)
+
+        mockdate.today.return_value = day1
+
+        # The view counts table should be empty.
+        self.assertFalse(ViewCount.objects.exists())
+
+        # View the first post once
+        self.client.get(post_1_url)
+
+        self.assertEqual(ViewCount.objects.get(page=example_post_1.id, date=day1).count, 1)
+        self.assertFalse(ViewCount.objects.filter(page=example_post_2.id).exists())
+
+        # View it a second time, as the logic is different.
+        self.client.get(post_1_url)
+
+        self.assertEqual(ViewCount.objects.get(page=example_post_1.id, date=day1).count, 2)
+        self.assertFalse(ViewCount.objects.filter(page=example_post_2.id).exists())
+
+        # Now view the other page
+        self.client.get(post_2_url)
+
+        self.assertEqual(ViewCount.objects.get(page=example_post_1.id, date=day1).count, 2)
+        self.assertEqual(ViewCount.objects.get(page=example_post_2.id, date=day1).count, 1)
+
+        # And view the first page again
+        self.client.get(post_1_url)
+
+        self.assertEqual(ViewCount.objects.get(page=example_post_1.id, date=day1).count, 3)
+        self.assertEqual(ViewCount.objects.get(page=example_post_2.id, date=day1).count, 1)
+
+        mockdate.today.return_value = day2
+
+        # And view the first page again
+        self.client.get(post_1_url)
+
+        self.assertEqual(ViewCount.objects.get(page=example_post_1.id, date=day1).count, 3)
+        self.assertEqual(ViewCount.objects.get(page=example_post_2.id, date=day1).count, 1)
+        self.assertEqual(ViewCount.objects.get(page=example_post_1.id, date=day2).count, 1)
 
 
 class InfoBlogClientTests(TestCase):
