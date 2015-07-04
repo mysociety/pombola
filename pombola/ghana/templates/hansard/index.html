@@ -9,18 +9,25 @@
         </p>
         <p> Browse through them below, or search via the box above.</p>
 
-        <h3>Recent</h3>
-        <ul class="list-group">
-            {% for sitting in sittings %}
+        {% regroup sittings by start_date|date:"Y" as sittings_by_year %}
+
+        {% for year in sittings_by_year %}
+        <div class="col-lg-12">
+        <h3>{{ year.grouper }}</h3>
+         <ul class="list-group">
+            {% for a_sitting in year.list %}
                 <li class="col-xs-3 list-group-item text-center ">
-                    <a href="{{ sitting.get_absolute_url }}">
-                        {{ sitting.start_date }}
+                    <a href="{{ a_sitting.get_absolute_url }}">
+                        {{ a_sitting.start_date }}
                     </a>
                 </li>
             {% empty %}
                 <li>There are no transcripts</li>
             {% endfor %}
         </ul>
+        </div>
+        {% endfor %}
+
     </div>
 </div>
 </div>
