@@ -1,9 +1,9 @@
-from datetime import date
+from datetime import date, timedelta
 
 from django.views.generic import DetailView, ListView
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
-from django.db.models import F
+from django.db.models import F, Sum
 from django.shortcuts import get_list_or_404
 from django.conf import settings
 
@@ -20,6 +20,15 @@ class BlogMixin(object):
         context['recent_posts'] = InfoPage.objects \
             .filter(kind=InfoPage.KIND_BLOG) \
             .order_by("-publication_date")
+
+        context['popular_posts'] = (
+            InfoPage.objects
+            .filter(kind=InfoPage.KIND_BLOG)
+            .filter(viewcount__count__gt=0)
+            .filter(viewcount__date__gte=date.today() - timedelta(days=28))
+            .annotate(Sum('viewcount__count'))
+            .order_by('-viewcount__count__sum', '?')
+            )
 
         return context
 

@@ -14,14 +14,14 @@
       {% endfor %}
     </ul>
 
-    <h3>Categories</h3>
+    {% if popular_posts.exists %}
+      <h3>Popular posts</h3>
 
-    <ul class="blog-categories">
-      {% for category in all_categories %}
-        <li><a href="{% url 'info_blog_category' slug=category.slug %}">{{ category.name }}</a></li>
-      {% empty %}
-        <li>There are no categories.</li>
-      {% endfor %}
-    </ul>
+      <ul>
+        {% for post in popular_posts|slice:":5" %}
+          <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
 </div>
