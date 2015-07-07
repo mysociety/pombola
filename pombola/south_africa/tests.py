@@ -187,8 +187,12 @@ class SASearchViewTest(WebTest):
 
     @patch('pombola.search.views.geocoder', side_effect=fake_geocoder)
     def test_unknown_place(self, mocked_geocoder):
-        lis = self.get_search_result_list_items('anywhere')
-        self.assertEqual(len(lis), 0)
+        response = self.app.get(
+            "{0}?q={1}".format(self.search_location_url, 'anywhere'))
+        self.assertIsNone(
+            response.html.find('div', class_='geocoded_results')
+        )
+        self.assertIn("No results for the location 'anywhere'", response)
         mocked_geocoder.assert_called_once_with(q='anywhere', country='za')
 
     @patch('pombola.search.views.geocoder', side_effect=fake_geocoder)
