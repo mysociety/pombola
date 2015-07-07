@@ -93,8 +93,11 @@ class InfoTest(TestCase):
                 </p><p>And then a trailing paragraph...</p></div>'''
         )
 
+
+@override_settings(INFO_PAGES_ALLOW_RAW_HTML=True)
+class ViewCountsTest(TestCase):
+
     @mock.patch('pombola.info.views.date')
-    @override_settings(INFO_PAGES_ALLOW_RAW_HTML=True)
     def test_blog_post_views_are_counted(self, mockdate=None):
         example_post_1 = InfoPage.objects.create(
             slug="post",
@@ -155,6 +158,60 @@ class InfoTest(TestCase):
         self.assertEqual(ViewCount.objects.get(page=example_post_1.id, date=day1).count, 3)
         self.assertEqual(ViewCount.objects.get(page=example_post_2.id, date=day1).count, 1)
         self.assertEqual(ViewCount.objects.get(page=example_post_1.id, date=day2).count, 1)
+
+    @mock.patch('pombola.info.views.date')
+    def test_blog_sidebar_popular_posts(self, mockdate=None):
+        from .views import BlogMixin
+
+        example_post_1 = InfoPage.objects.create(
+            slug="post",
+            title="Example title",
+            raw_content="Example content",
+            use_raw=True,
+            kind=InfoPage.KIND_BLOG,
+        )
+
+        example_post_2 = InfoPage.objects.create(
+            slug="post2",
+            title="Example title 2",
+            raw_content="Example content 2",
+            use_raw=True,
+            kind=InfoPage.KIND_BLOG,
+        )
+        old_post = InfoPage.objects.create(
+            slug="oldpost",
+            title="Example title 3",
+            raw_content="Example content 2",
+            use_raw=True,
+            kind=InfoPage.KIND_BLOG,
+        )
+
+        day1 = date(2015, 01, 01)
+
+        ViewCount.objects.create(
+            page=example_post_1,
+            count=10,
+            date=day1,
+            )
+        ViewCount.objects.create(
+            page=example_post_2,
+            count=5,
+            date=day1,
+            )
+        ViewCount.objects.create(
+            page=old_post,
+            count=100,
+            date=date(2000, 1, 1),
+            )
+
+        mockdate.today.return_value = day1
+
+        context = BlogMixin().get_context_data()
+
+        self.assertListEqual(
+            [x.slug for x in context['popular_posts']],
+            ['post', 'post2'],
+            )
 
 
 class InfoBlogClientTests(TestCase):

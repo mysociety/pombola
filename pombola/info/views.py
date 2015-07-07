@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 
 from django.views.generic import DetailView, ListView
+from django.views.generic.base import ContextMixin
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import F, Sum
@@ -10,7 +11,7 @@ from django.conf import settings
 from models import InfoPage, Category, Tag, ViewCount
 
 
-class BlogMixin(object):
+class BlogMixin(ContextMixin):
 
     def get_context_data(self, **kwargs):
         context = super(BlogMixin, self).get_context_data(**kwargs)
