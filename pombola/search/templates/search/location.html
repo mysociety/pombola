@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block search_form %}
-  <input type="text" name="q" value="{{ query }}" id="id_q" />
+  <div class="inline-search-box">
+    <input type="text" name="q" value="{{ query }}" id="id_q" placeholder="Enter your location&hellip;"/>
+    <input type="submit" value="Search" class="button">
+  </div>
 {% endblock %}
 
 {% block search_results %}
