@@ -117,7 +117,8 @@ pun_re = re.compile('''
     ^(
        [A-Z]{2}|
        [A-Z]{2}:\d+|
-       [A-Z]{2}:\d+:\d+
+       [A-Z]{2}:\d+:\d+|
+       [A-Z]{2}:\d+:\d+:\d+
     )$
 ''', re.VERBOSE)
 
@@ -183,7 +184,7 @@ class NGSearchView(SearchBaseView):
         super(NGSearchView, self).parse_params()
         tidied_as_if_pun = tidy_up_pun(self.query)
         # Check if this is a known form of PUN:
-        if pun_re.search(self.query):
+        if pun_re.search(tidied_as_if_pun):
             self.pun = tidied_as_if_pun
         else:
             self.pun = None
