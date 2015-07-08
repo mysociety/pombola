@@ -18,9 +18,9 @@
         <div class="col-lg-8 col-lg-offset-2 text-center">
             <h2>
                 {% with object.parties.0 as party %}
-                <a href="{{ party.get_absolute_url }}" alt="{{ party.name }}">
+                <a class="no-underline" href="{{ party.get_absolute_url }}" alt="{{ party.name }}">
                     <img class="img img-thumbnail" width="50" height="50"
-                    src="{{ STATIC_URL}}/images/parties/{{ party.name.strip |lower}}.png"></img>
+                    src="{{ STATIC_URL}}images/parties/{{ party.name.strip |lower}}.png"></img>
                 </a>
                 {% endwith %}
                 Hon. {{ object.title }} {{ object.legal_name }}

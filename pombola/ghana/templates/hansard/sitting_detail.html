@@ -17,6 +17,7 @@
             {% switch entry.type %}
               {% case  'speech' %}
                 <div class="media statement">
+                  {% comment %}
                   <div class="row context">
                     {% with entry.speaker.parties.0 as party %}
                       {% if party %}
@@ -28,12 +29,12 @@
                       {% endif %}
                     {% endwith %}
                   </div>
-
+                {% endcomment %}
 
                   <div class="media-left media-top">
                     {% thumbnail entry.speaker.primary_image "64x64" as img %}
-                      <a class="media-object" href="{{ he.get_absolute_url }}">
-                        <img src="{{ img.url }}" />
+                      <a class="media-object" href="{{ entry.speaker.get_absolute_url }}">
+                        <img class="img img-circle" src="{{ img.url }}" />
                       </a>
                       {% empty %}
                         <img class="media-object" src="{{ STATIC_URL }}images/avatar.png"
@@ -50,7 +51,7 @@
                          <small class="pull-right"><span><i class="fa fa-clock-o"> {{ he.time }}</i></span></small>
                         </h5>
 
-                        <div class="">
+                        <div>
                           {{ entry.content|linebreaksbr }}
                         </div>
                     </div>
@@ -59,7 +60,8 @@
 
               {% case 'heading' %}
                 {% if entry.content %}
-                      <h4>{{ entry.content|linebreaksbr }}<small class="pull-right"><span><i class="fa fa-clock-o"> {{ he.time }}</i></span></small></h4>
+                      <h5>{{ entry.content|linebreaksbr }}<small class="pull-right"><span><i class="fa fa-clock-o"> {{ he.time }}</i></span></small></h5>
+                      <hr>
                 {% endif %}
               {% case 'other' %}
                 <font col="red">{{ entry.content }}</font>

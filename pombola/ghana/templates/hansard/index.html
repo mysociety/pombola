@@ -16,10 +16,11 @@
         <h3>{{ year.grouper }}</h3>
          <ul class="list-group">
             {% for a_sitting in year.list %}
-                <li class="col-xs-3 list-group-item text-center ">
-                    <a href="{{ a_sitting.get_absolute_url }}">
-                        {{ a_sitting.start_date }}
-                    </a>
+                <li class="col-xs-4 list-group-item">
+                    <h4>
+                    <a class="fa fa-calendar" href="{{ a_sitting.get_absolute_url }}"> {{ a_sitting.start_date | date:"d F Y" }} </a>
+                    <small class="muted-text">{{ a_sitting.source | cut:"Bound Volume -"}}</small>
+                    </h4>
                 </li>
             {% empty %}
                 <li>There are no transcripts</li>
