@@ -1,4 +1,4 @@
-[program: %(project)s]
+[program:%(project)s]
 command=%(basedir)s/releases/%(version)s/bin/start_gunicorn.sh
 directory=%(basedir)s/releases/%(version)s
 user=%(webapp_user)s
