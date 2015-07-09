@@ -29,9 +29,32 @@ from pombola import south_africa
 from pombola.core.views import PersonSpeakerMappingsMixin
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
-from pombola.search.tests.views import fake_geocoder
 
 from nose.plugins.attrib import attr
+
+def fake_geocoder(country, q, decimal_places=3):
+    if q == 'anywhere':
+        return []
+    elif q == 'Cape Town':
+        return [
+            {'latitude': -33.925,
+             'longitude': 18.424,
+             'address': u'Cape Town, South Africa'}
+        ]
+    elif q == 'Trafford Road':
+        return [
+            {'latitude': -29.814,
+             'longitude': 30.839,
+             'address': u'Trafford Road, Pinetown 3610, South Africa'},
+            {'latitude': -33.969,
+             'longitude': 18.703,
+             'address': u'Trafford Road, Cape Town 7580, South Africa'},
+            {'latitude': -32.982,
+             'longitude': 27.868,
+             'address': u'Trafford Road, East London 5247, South Africa'}
+        ]
+    else:
+        raise Exception, u"Unexpected input to fake_geocoder: {}".format(q)
 
 @attr(country='south_africa')
 class HomeViewTest(TestCase):
@@ -187,8 +210,12 @@ class SASearchViewTest(WebTest):
 
     @patch('pombola.search.views.geocoder', side_effect=fake_geocoder)
     def test_unknown_place(self, mocked_geocoder):
-        lis = self.get_search_result_list_items('anywhere')
-        self.assertEqual(len(lis), 0)
+        response = self.app.get(
+            "{0}?q={1}".format(self.search_location_url, 'anywhere'))
+        self.assertIsNone(
+            response.html.find('div', class_='geocoded_results')
+        )
+        self.assertIn("No results for the location 'anywhere'", response)
         mocked_geocoder.assert_called_once_with(q='anywhere', country='za')
 
     @patch('pombola.search.views.geocoder', side_effect=fake_geocoder)

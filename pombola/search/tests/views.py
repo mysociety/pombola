@@ -7,31 +7,31 @@ from mock import patch
 def fake_geocoder(country, q, decimal_places=3):
     if q == 'anywhere':
         return []
-    elif q == 'Cape Town':
+    elif q == 'Garissa':
         return [
-            {'latitude': -33.925,
-             'longitude': 18.424,
-             'address': u'Cape Town, South Africa'}
+            {'latitude': -0.453,
+             'longitude': 39.646,
+             'address': u'Garissa, Kenya'}
         ]
-    elif q == 'Trafford Road':
+    elif q == 'Rift Valley':
         return [
-            {'latitude': -29.814,
-             'longitude': 30.839,
-             'address': u'Trafford Road, Pinetown 3610, South Africa'},
-            {'latitude': -33.969,
-             'longitude': 18.703,
-             'address': u'Trafford Road, Cape Town 7580, South Africa'},
-            {'latitude': -32.982,
-             'longitude': 27.868,
-             'address': u'Trafford Road, East London 5247, South Africa'}
+            {'latitude': 0.524,
+             'longitude': 35.273,
+             'address': u'Rift Valley Railways Eldoret, Eldoret, Kenya'},
+            {'latitude': -0.944,
+             'longitude': 36.596,
+             'address': u'Rift Valley Academy - AIM, Kijabe, Kenya'},
+            {'latitude': 0.0,
+             'longitude': 36.0,
+             'address': u'Eastern Rift Valley, Kenya'}
         ]
     else:
         raise Exception, u"Unexpected input to fake_geocoder: {}".format(q)
 
 # If there's no COUNTRY_APP set then the GeocodeView will fail, so use
-# south_africa for testing location search:
+# kenya for testing location search:
 
-@override_settings(COUNTRY_APP='south_africa')
+@override_settings(COUNTRY_APP='kenya')
 class SearchViewTest(WebTest):
 
     def setUp(self):
@@ -42,9 +42,8 @@ class SearchViewTest(WebTest):
         response = self.app.get(
             "{0}?q={1}".format(self.search_location_url, 'anywhere'))
         results_div = response.html.find('div', class_='geocoded_results')
-        lis = results_div.find('ul').findAll('li')
-        self.assertEqual(len(lis), 0)
-        mocked_geocoder.assert_called_once_with(q='anywhere', country='za')
+        self.assertIsNone(results_div)
+        mocked_geocoder.assert_called_once_with(q='anywhere', country='ke')
 
     def get_search_result_list_items(self, query_string):
         response = self.app.get(
@@ -54,16 +53,16 @@ class SearchViewTest(WebTest):
 
     @patch('pombola.search.views.geocoder', side_effect=fake_geocoder)
     def test_single_result_place(self, mocked_geocoder):
-        lis = self.get_search_result_list_items('Cape Town')
+        lis = self.get_search_result_list_items('Garissa')
         self.assertEqual(len(lis), 1)
-        self.assertEqual(lis[0].a['href'], '/place/latlon/-33.925,18.424/')
-        mocked_geocoder.assert_called_once_with(q='Cape Town', country='za')
+        self.assertEqual(lis[0].a['href'], '/place/latlon/-0.453,39.646/')
+        mocked_geocoder.assert_called_once_with(q='Garissa', country='ke')
 
     @patch('pombola.search.views.geocoder', side_effect=fake_geocoder)
     def test_multiple_result_place(self, mocked_geocoder):
-        lis = self.get_search_result_list_items('Trafford Road')
+        lis = self.get_search_result_list_items('Rift Valley')
         self.assertEqual(len(lis), 3)
-        self.assertEqual(lis[0].a['href'], '/place/latlon/-29.814,30.839/')
-        self.assertEqual(lis[1].a['href'], '/place/latlon/-33.969,18.703/')
-        self.assertEqual(lis[2].a['href'], '/place/latlon/-32.982,27.868/')
-        mocked_geocoder.assert_called_once_with(q='Trafford Road', country='za')
+        self.assertEqual(lis[0].a['href'], '/place/latlon/0.524,35.273/')
+        self.assertEqual(lis[1].a['href'], '/place/latlon/-0.944,36.596/')
+        self.assertEqual(lis[2].a['href'], '/place/latlon/0.0,36.0/')
+        mocked_geocoder.assert_called_once_with(q='Rift Valley', country='ke')

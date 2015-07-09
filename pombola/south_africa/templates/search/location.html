@@ -18,36 +18,42 @@
 {% endblock %}
 
 {% block search_form %}
-  <input type="text" name="q" value="{{ query }}" id="id_q" placeholder="Enter your location&hellip;"/>
-
+  <div class="inline-search-box">
+    <input type="text" name="q" value="{{ query }}" id="id_q" placeholder="Enter your location&hellip;"/>
+    <input type="submit" value="Search" class="button">
+  </div>
 {% endblock %}
 
 {% block search_results %}
-  {% compressed_js 'google-map' %}
+  {% if geocoder_results %}
+    {% compressed_js 'google-map' %}
 
-  <div class="geocoded_results">
+    <div class="geocoded_results">
 
-    <div id="map_canvas">&nbsp;</div>
+      <div id="map_canvas">&nbsp;</div>
 
-    <ul>
-      {% for result in geocoder_results %}
-        <li>
-          <a href="/place/latlon/{{ result.latitude }},{{result.longitude }}/">
-            {{ result.address }}
-          </a>
-        </li>
-        <script>
-          markers_to_add.push({
-            lat: {{ result.latitude }},
-            lng: {{ result.longitude }},
-            url: "/place/latlon/{{ result.latitude }},{{result.longitude }}/",
-            name: "{{ result.address }}"
-          });
-        </script>
-      {% endfor %}
-    </ul>
+      <ul>
+        {% for result in geocoder_results %}
+          <li>
+            <a href="/place/latlon/{{ result.latitude }},{{result.longitude }}/">
+              {{ result.address }}
+            </a>
+          </li>
+          <script>
+            markers_to_add.push({
+              lat: {{ result.latitude }},
+              lng: {{ result.longitude }},
+              url: "/place/latlon/{{ result.latitude }},{{result.longitude }}/",
+              name: "{{ result.address }}"
+            });
+          </script>
+        {% endfor %}
+      </ul>
 
-    <br style="clear: both;">
+      <br style="clear: both;">
 
-  </div>
+    </div>
+  {% else %}
+    No results for the location '{{ query }}'
+  {% endif %}
 {% endblock %}
