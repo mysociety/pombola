@@ -8,8 +8,8 @@ from pombola.hansard import models as hansard_models
 
 BASEDIR = os.path.dirname(__file__)
 # normal english stop words and hansard-centric words to ignore
-STOP_WORDS = open(os.path.join(BASEDIR, 'stopwords.txt'), 'rU').read().splitlines()
-
+with open(os.path.join(BASEDIR, 'stopwords.txt'), 'rU') as f:
+    STOP_WORDS = set(f.read().splitlines())
 
 def recent_entries(max_entries=20):
     return SearchQuerySet().models(hansard_models.Entry).order_by('-sitting_start_date')[:max_entries]
