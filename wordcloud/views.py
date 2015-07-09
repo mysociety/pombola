@@ -13,10 +13,12 @@ def wordcloud(request, max_entries=30):
     """ Return tag cloud JSON results"""
     cache_path = settings.WORDCLOUD_CACHE_PATH
     if os.path.exists(cache_path):
-        with open(cache_path) as cached_file:
-            content = cached_file.read()
-    else:
-        content = simplejson.dumps(popular_words(max_entries=max_entries))
+        response = HttpResponse()
+        response['Content-Type'] = 'application/json'
+        response['X-Sendfile'] = cache_path.encode('utf-8')
+        return response
+
+    content = simplejson.dumps(popular_words(max_entries=max_entries))
 
     return HttpResponse(
         content,
