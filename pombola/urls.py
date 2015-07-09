@@ -95,6 +95,9 @@ urlpatterns += patterns('',
 if settings.ENABLED_FEATURES['wordcloud']:
     urlpatterns += patterns('',
         (r'^wordcloud/', include('wordcloud.urls')),
+
+        # Temporarily keep tagcloud version of the url as well.
+        (r'^tagcloud/', include('wordcloud.urls')),
     )
 
 # feedback
