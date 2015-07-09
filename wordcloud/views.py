@@ -1,12 +1,14 @@
 import os
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.utils import simplejson
-from django.conf import settings
+from django.views.decorators.cache import cache_page
 
 from .wordcloud import popular_words
 
 
+@cache_page(60*60*4)
 def wordcloud(request, max_entries=30):
     """ Return tag cloud JSON results"""
     cache_path = settings.WORDCLOUD_CACHE_PATH
