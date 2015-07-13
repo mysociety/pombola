@@ -6,7 +6,7 @@ from .views import wordcloud
 urlpatterns = patterns(
     '',
     url(r'^wordcloud/$', wordcloud, name='wordcloud'),
-    url(r'^wordcloud/(?P<max_entries>\d+)/$', 'wordcloud', name='wordcloud'),
+    url(r'^wordcloud/(?P<max_entries>\d+)/$', wordcloud, name='wordcloud'),
 
     # Temporary redirects of old urls
     url(r'^tagcloud/$',
