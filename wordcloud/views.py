@@ -22,5 +22,5 @@ def wordcloud(request, max_entries=30):
 
     return HttpResponse(
         content,
-        mimetype='application/json',
-        )
+        content_type='application/json',
+    )
