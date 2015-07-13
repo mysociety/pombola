@@ -1,10 +1,10 @@
-import errno
 import os
 
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import simplejson
 from django.conf import settings
 
+from pombola.core.utils import mkdir_p
 from wordcloud.wordcloud import popular_words
 
 
@@ -27,14 +27,7 @@ class Command(BaseCommand):
                 "Usage: python manage.py generate_wordcloud [filepath]")
 
         cache_dir = settings.WORDCLOUD_CACHE_DIR
-        try:
-            os.mkdir(cache_dir)
-        except OSError as exc:
-            # Probably the directory exists already
-            if exc.errno == errno.EEXIST and os.path.isdir(cache_dir):
-                pass
-            else:
-                raise
+        mkdir_p(cache_dir)
 
         cache_path = os.path.join(cache_dir, args[0]) if args else settings.WORDCLOUD_CACHE_PATH
 
