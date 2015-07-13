@@ -1,8 +1,8 @@
+import json
 import os
 
 from django.conf import settings
 from django.http import HttpResponse
-from django.utils import simplejson
 from django.views.decorators.cache import cache_page
 
 from .wordcloud import popular_words
@@ -18,7 +18,7 @@ def wordcloud(request, max_entries=30):
         response['X-Sendfile'] = cache_path.encode('utf-8')
         return response
 
-    content = simplejson.dumps(popular_words(max_entries=max_entries))
+    content = json.dumps(popular_words(max_entries=max_entries))
 
     return HttpResponse(
         content,
