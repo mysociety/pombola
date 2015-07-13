@@ -98,6 +98,3 @@ LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
 # )
 TWITTER_ACCOUNT_NAME = "odekro"
 FACEBOOK_ACCOUNT_NAME = "odekro"
-
-WORDCLOUD_CACHE_DIR = os.path.normpath(os.path.join(root_dir, 'wordcloud_cache'))
-WORDCLOUD_CACHE_PATH = os.path.join(WORDCLOUD_CACHE_DIR, 'wordcloud.json')
