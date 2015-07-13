@@ -11,7 +11,10 @@ from .wordcloud import popular_words
 @cache_page(60*60*4)
 def wordcloud(request, max_entries=30):
     """ Return tag cloud JSON results"""
-    cache_path = settings.WORDCLOUD_CACHE_PATH
+
+    cache_path = os.path.join(
+        settings.MEDIA_ROOT, 'wordcloud_cache', 'wordcloud.json'
+    )
     if os.path.exists(cache_path):
         response = HttpResponse()
         response['Content-Type'] = 'application/json'

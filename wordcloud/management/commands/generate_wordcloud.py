@@ -11,11 +11,11 @@ from wordcloud.wordcloud import popular_words
 class Command(BaseCommand):
     """Generate json file for wordcloud.
 
-    A single argument, a file path, can be passed in. This will
-    be appended to settings.WORDCLOUD_CACHE_DIR to produce the location
-    to store the json. If no argument is passed, it defaults to
-    'wordcloud.json'. If the file path is absolute it will just be used
-    as is.
+    A single argument, a file path, can be passed in. This will be
+    appended to the 'wordcloud_cache' directory in the media root to
+    produce the location to store the json. If no argument is passed,
+    it defaults to 'wordcloud.json'. If the file path is
+    absolute it will just be used as is.
     """
 
     help = 'Generate wordcloud data'
@@ -26,10 +26,10 @@ class Command(BaseCommand):
             raise CommandError(
                 "Usage: python manage.py generate_wordcloud [filepath]")
 
-        cache_dir = settings.WORDCLOUD_CACHE_DIR
-        mkdir_p(cache_dir)
+        wordcloud_dir = os.path.join(settings.MEDIA_ROOT, 'wordcloud_cache')
+        mkdir_p(wordcloud_dir)
+        leaf_name = args[0] if args else 'wordcloud.json'
+        wordcloud_path = os.path.join(wordcloud_dir, leaf_name)
 
-        cache_path = os.path.join(cache_dir, args[0]) if args else settings.WORDCLOUD_CACHE_PATH
-
-        with open(cache_path, 'w') as cache_file:
+        with open(wordcloud_path, 'w') as cache_file:
             json.dump(popular_words(max_entries=30), cache_file)
