@@ -1,7 +1,7 @@
+import json
 import os
 
 from django.core.management.base import BaseCommand, CommandError
-from django.utils import simplejson
 from django.conf import settings
 
 from pombola.core.utils import mkdir_p
@@ -32,4 +32,4 @@ class Command(BaseCommand):
         cache_path = os.path.join(cache_dir, args[0]) if args else settings.WORDCLOUD_CACHE_PATH
 
         with open(cache_path, 'w') as cache_file:
-            simplejson.dump(popular_words(max_entries=30), cache_file)
+            json.dump(popular_words(max_entries=30), cache_file)
