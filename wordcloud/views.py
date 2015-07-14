@@ -12,8 +12,10 @@ from .wordcloud import popular_words
 def wordcloud(request, max_entries=30):
     """ Return tag cloud JSON results"""
 
+    max_entries = int(max_entries)
+    leaf_name = 'wordcloud-{0}.json'.format(max_entries)
     cache_path = os.path.join(
-        settings.MEDIA_ROOT, 'wordcloud_cache', 'wordcloud.json'
+        settings.MEDIA_ROOT, 'wordcloud_cache', leaf_name
     )
     if os.path.exists(cache_path):
         response = HttpResponse()
