@@ -3,14 +3,14 @@ from mock import patch, Mock
 
 from django.test import TestCase
 
-from wordcloud.wordcloud import popular_words
+from pombola.wordcloud.wordcloud import popular_words
 
 
 def debug_print():
     print 'DEBUGGING'
 
 
-@patch('wordcloud.wordcloud.recent_entries')
+@patch('pombola.wordcloud.wordcloud.recent_entries')
 class TestPopularWords(TestCase):
     def make_entries(self, recent_entries, text_entries):
         recent_entries.return_value = [

@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 
 from pombola.core.utils import mkdir_p
-from wordcloud.wordcloud import popular_words
+from pombola.wordcloud.wordcloud import popular_words
 
 MAX_ENTRIES = 30
 

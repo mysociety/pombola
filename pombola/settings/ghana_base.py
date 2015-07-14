@@ -15,8 +15,7 @@ OPTIONAL_APPS = (
     'pombola.projects',
     'pombola.place_data',
     'pombola.votematch',
-
-    'wordcloud',
+    'pombola.wordcloud',
 
     # Pombola has now dropped registration, so leave these out:
     # 'registration_defaults',
