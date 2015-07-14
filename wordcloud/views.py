@@ -18,7 +18,13 @@ def wordcloud(request, max_entries=30):
         settings.MEDIA_ROOT, 'wordcloud_cache', leaf_name
     )
     if os.path.exists(cache_path):
-        response = HttpResponse()
+        response = HttpResponse(json.dumps({
+            'error':
+            ("If you can see this, then X-SendFile isn't configured "
+             "correctly in your webserver. (If you're using Nginx, you'll "
+             "have to change the code to add a X-Accel-Redirect header - "
+             "this hasn't currently been tested.)")
+        }))
         response['Content-Type'] = 'application/json'
         response['X-Sendfile'] = cache_path.encode('utf-8')
         return response
