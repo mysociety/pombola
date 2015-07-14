@@ -94,10 +94,10 @@ urlpatterns += patterns('',
 # wordcloud
 if settings.ENABLED_FEATURES['wordcloud']:
     urlpatterns += patterns('',
-        (r'^wordcloud/', include('wordcloud.urls')),
+        (r'^wordcloud/', include('pombola.wordcloud.urls')),
 
         # Temporarily keep tagcloud version of the url as well.
-        (r'^tagcloud/', include('wordcloud.urls')),
+        (r'^tagcloud/', include('pombola.wordcloud.urls')),
     )
 
 # feedback
