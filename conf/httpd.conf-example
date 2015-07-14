@@ -29,6 +29,9 @@ Alias /static /data/vhost/example.pombola.mysociety.org/collected_static
 Alias /googlee8d580ff44c6001c.html /data/vhost/example.pombola.mysociety.org/docs/googlee8d580ff44c6001c.html
 Alias /favicon.ico /data/vhost/example.pombola.mysociety.org/docs/favicon.ico
 
+XSendFile on
+XSendFilePath /data/vhost/example.pombola.mysociety.org/media_root/wordcloud_cache/
+
 WSGIDaemonProcess example.pombola.mysociety.org \
     user=exampleuser \
     group=examplegroup \
