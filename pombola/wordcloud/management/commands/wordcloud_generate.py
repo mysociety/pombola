@@ -7,7 +7,7 @@ from django.conf import settings
 from pombola.core.utils import mkdir_p
 from pombola.wordcloud.wordcloud import popular_words
 
-MAX_ENTRIES = 30
+MAX_ENTRIES = 10
 
 class Command(BaseCommand):
     """Generate json file for wordcloud.

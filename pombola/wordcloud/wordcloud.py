@@ -11,11 +11,11 @@ BASEDIR = os.path.dirname(__file__)
 with open(os.path.join(BASEDIR, 'stopwords.txt'), 'rU') as f:
     STOP_WORDS = set(f.read().splitlines())
 
-def recent_entries(max_entries=20):
+def recent_entries(max_entries=10):
     return SearchQuerySet().models(hansard_models.Entry).order_by('-sitting_start_date')[:max_entries]
 
 
-def popular_words(max_entries=20, max_words=25):
+def popular_words(max_entries=10, max_words=50):
     sqs = recent_entries(max_entries)
 
     # Generate tag cloud from content of returned entries
