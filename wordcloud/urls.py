@@ -11,6 +11,6 @@ urlpatterns = patterns(
     # Temporary redirects of old urls
     url(r'^tagcloud/$',
         RedirectView.as_view(pattern_name='wordcloud', permanent=True)),
-    url(r'^tagcloud/(?P<max_entries>\d+)/$$',
+    url(r'^tagcloud/(?P<max_entries>\d+)/$',
         RedirectView.as_view(pattern_name='wordcloud', permanent=True)),
     )
