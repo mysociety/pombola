@@ -7,6 +7,7 @@ from django.conf import settings
 from pombola.core.utils import mkdir_p
 from wordcloud.wordcloud import popular_words
 
+MAX_ENTRIES = 30
 
 class Command(BaseCommand):
     """Generate json file for wordcloud.
@@ -28,8 +29,8 @@ class Command(BaseCommand):
 
         wordcloud_dir = os.path.join(settings.MEDIA_ROOT, 'wordcloud_cache')
         mkdir_p(wordcloud_dir)
-        leaf_name = args[0] if args else 'wordcloud.json'
+        leaf_name = args[0] if args else 'wordcloud-{0}.json'.format(MAX_ENTRIES)
         wordcloud_path = os.path.join(wordcloud_dir, leaf_name)
 
         with open(wordcloud_path, 'w') as cache_file:
-            json.dump(popular_words(max_entries=30), cache_file)
+            json.dump(popular_words(max_entries=MAX_ENTRIES), cache_file)
