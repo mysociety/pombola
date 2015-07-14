@@ -14,19 +14,22 @@ def wordcloud(request, max_entries=30):
 
     max_entries = int(max_entries)
     leaf_name = 'wordcloud-{0}.json'.format(max_entries)
+    subdir = 'wordcloud_cache'
     cache_path = os.path.join(
-        settings.MEDIA_ROOT, 'wordcloud_cache', leaf_name
+        settings.MEDIA_ROOT, subdir, leaf_name
     )
     if os.path.exists(cache_path):
         response = HttpResponse(json.dumps({
             'error':
-            ("If you can see this, then X-SendFile isn't configured "
-             "correctly in your webserver. (If you're using Nginx, you'll "
-             "have to change the code to add a X-Accel-Redirect header - "
-             "this hasn't currently been tested.)")
+            ("If you can see this, then X-SendFile (for Apache) or "
+             "X-Accel-Redirect (for Nginx) isn't set up correctly in "
+             "your webserver's configuration.")
         }))
         response['Content-Type'] = 'application/json'
         response['X-Sendfile'] = cache_path.encode('utf-8')
+        response['X-Accel-Redirect'] = '/media_root/{0}/{1}'.format(
+            subdir, leaf_name
+        )
         return response
 
     content = json.dumps(popular_words(max_entries=max_entries))
