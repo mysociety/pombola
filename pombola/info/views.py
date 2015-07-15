@@ -1,13 +1,17 @@
+from datetime import date, timedelta
+
 from django.views.generic import DetailView, ListView
+from django.views.generic.base import ContextMixin
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import F, Sum
 from django.shortcuts import get_list_or_404
 from django.conf import settings
 
-from models import InfoPage, Category, Tag
+from models import InfoPage, Category, Tag, ViewCount
 
 
-class BlogMixin(object):
+class BlogMixin(ContextMixin):
 
     def get_context_data(self, **kwargs):
         context = super(BlogMixin, self).get_context_data(**kwargs)
@@ -17,6 +21,15 @@ class BlogMixin(object):
         context['recent_posts'] = InfoPage.objects \
             .filter(kind=InfoPage.KIND_BLOG) \
             .order_by("-publication_date")
+
+        context['popular_posts'] = (
+            InfoPage.objects
+            .filter(kind=InfoPage.KIND_BLOG)
+            .filter(viewcount__count__gt=0)
+            .filter(viewcount__date__gte=date.today() - timedelta(days=28))
+            .annotate(Sum('viewcount__count'))
+            .order_by('-viewcount__count__sum', '?')
+            )
 
         return context
 
@@ -77,6 +90,21 @@ class InfoBlogView(BlogMixin, DetailView):
     queryset = InfoPage.objects.filter(kind=InfoPage.KIND_BLOG)
     template_name = 'info/blog_post.html'
 
+    def get(self, request, *args, **kwargs):
+        response = super(InfoBlogView, self).get(request, *args, **kwargs)
+
+        _, created = ViewCount.objects.get_or_create(
+            page=self.object,
+            date=date.today(),
+            defaults={'count': 1},
+            )
+
+        if not created:
+            (ViewCount.objects.filter(page=self.object, date=date.today())
+             .update(count=F('count')+1))
+
+        return response
+
 
 class InfoBlogFeed(Feed):
     """Create a feed with the latest 10 blog entries in"""
@@ -98,5 +126,3 @@ class InfoPageView(DetailView):
     """Show the page for the given slug"""
     model = InfoPage
     queryset = InfoPage.objects.filter(kind=InfoPage.KIND_PAGE)
-
-
