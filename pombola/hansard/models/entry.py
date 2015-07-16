@@ -1,7 +1,6 @@
 import re
 
 from django.db import models
-from django.core.urlresolvers import reverse
 
 from pombola.core.models import Person
 from pombola.hansard.models import Sitting, Alias
