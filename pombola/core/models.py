@@ -561,6 +561,10 @@ class OrganisationKind(ModelBase):
     class Meta:
        ordering = ["slug"]
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('organisation_kind', (self.slug,))
+
 
 class OrganisationQuerySet(models.query.GeoQuerySet):
     def parties(self):

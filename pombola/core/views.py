@@ -342,14 +342,11 @@ class OrganisationDetailSub(SubSlugRedirectMixin, DetailView):
                 context['sorted_positions'] = positions.order_by_person_name()
         return context
 
-class OrganisationKindList(SingleObjectMixin, ListView):
+class OrganisationKindList(SlugRedirectMixin, SingleObjectMixin, ListView):
     model = models.OrganisationKind
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=self.model.objects.all())
-        return super(OrganisationKindList, self).get(request, *args, **kwargs)
-
     def get_queryset(self):
+        self.object = self.get_object(queryset=self.model.objects.all())
         orgs = (
             self.object
                 .organisation_set
