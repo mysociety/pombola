@@ -107,18 +107,6 @@ class Entry(HansardModelBase):
                 entry.speaker = speaker
                 entry.save()
 
-    def possible_matching_speakers2(self):
-        alias = Alias.objects.filter(alias=self.speaker_name)
-        if len(alias):
-            alias = alias[0]
-
-            person = alias.person
-            if person:
-                speakers = Person.objects.filter(id=person.id)
-                cache[cache_key] = speakers
-                return speakers
-        return None
-
     def alias_match_score(self, name_one, name_two):
         """
         Return a score based on the intersection of two names including titles
