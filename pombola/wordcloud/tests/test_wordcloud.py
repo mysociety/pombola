@@ -71,6 +71,7 @@ class TestPopularWords(TestCase):
             {'text': 'evident', 'link': '/search/hansard/?q=evident', 'weight': 1},
             {'text': 'involved', 'link': '/search/hansard/?q=involved', 'weight': 1},
             {'text': 'failing', 'link': '/search/hansard/?q=failing', 'weight': 1},
+            {'text': 'constituency', 'link': '/search/hansard/?q=constituency', 'weight': 1},
             ]
 
         # I guess this is slightly fragile and relies on the ordering being preserved.
