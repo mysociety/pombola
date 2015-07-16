@@ -182,5 +182,3 @@ class Entry(HansardModelBase):
             )
 
         return results
-
-
