@@ -151,6 +151,10 @@ class SearchBaseView(TemplateView):
             exclude(hidden=True). \
             filter(content=AutoQuery(self.query)). \
             highlight()
+
+        if self.order == 'date':
+            sqs = sqs.order_by('-start_date')
+
         context['results'] = self.get_paginated_results(sqs)
         return context
 
