@@ -1,3 +1,4 @@
+from datetime import datetime
 import re
 import sys
 import simplejson
@@ -100,6 +101,20 @@ class SearchBaseView(TemplateView):
         self.query = self.request.GET.get('q', '')
         self.page = self.request.GET.get('page')
         self.order = self.request.GET.get('order')
+        self.start_date_range = self.request.GET.get('start')
+        self.start_date_range = self.format_search_date(self.start_date_range)
+        self.end_date_range = self.request.GET.get('end')
+        self.end_date_range = self.format_search_date(self.end_date_range)
+
+    def format_search_date(self, search_date):
+        if search_date:
+            try:
+                formatted_date = datetime.strptime(search_date, '%Y-%m-%d')
+                return formatted_date.date()
+            except ValueError:
+                return None
+        else:
+            return None
 
     def get(self, request, *args, **kwargs):
         self.parse_params()
@@ -152,6 +167,12 @@ class SearchBaseView(TemplateView):
             filter(content=AutoQuery(self.query)). \
             highlight()
 
+        if self.start_date_range:
+            sqs = sqs.filter(start_date__gte=self.start_date_range)
+
+        if self.end_date_range:
+            sqs = sqs.filter(start_date__lte=self.end_date_range)
+
         if self.order == 'date':
             sqs = sqs.order_by('-start_date')
 
@@ -163,15 +184,23 @@ class SearchBaseView(TemplateView):
         context['results'] = self.get_paginated_results(data['results'])
         return context
 
+    def get_date_range_context(self, context):
+        if self.start_date_range:
+            context['search_start_date_range'] = self.start_date_range.strftime("%Y-%m-%d")
+        if self.end_date_range:
+            context['search_end_date_range'] = self.end_date_range.strftime("%Y-%m-%d")
+
     def get_context_data(self, **kwargs):
         context = super(SearchBaseView, self).get_context_data(**kwargs)
         context['query'] = self.query
         context['order'] = self.order
         context['section'] = self.section
+
+        self.get_date_range_context(context)
+
         if self.section:
             context['section_title'] = self.search_sections[self.section]['title']
         context['form_options'] = [('global', 'All', (not self.section))]
-
         query_dict = self.request.GET.copy()
         if 'page' in query_dict:
             del query_dict['page']
@@ -205,6 +234,13 @@ class SearchBaseView(TemplateView):
             *filter_args,
             **filter_kwargs
         )
+
+        if self.start_date_range:
+            query = query.filter(start_date__gte=self.start_date_range)
+
+        if self.end_date_range:
+            query = query.filter(start_date__lte=self.end_date_range)
+
         if self.order == 'date':
             query = query.order_by('-start_date')
 
