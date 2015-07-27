@@ -106,7 +106,7 @@
 
               {% case 'address' %}
                   <h3>Post</h3>
-                  <p class="contact-details-address">{{ c.value|urlizetrunc:50 }}</p>
+                  <p class="contact-details-address">{{ c.value|urlizetrunc:50|linebreaksbr }}</p>
 
               {% else %}
                   <h3>{{ c.kind.name }}</h3>
