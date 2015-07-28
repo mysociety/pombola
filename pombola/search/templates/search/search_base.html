@@ -64,6 +64,15 @@
                     <option value="date"{% if order == 'date' %} selected{% endif %}>Date</option>
                   </select>
               </div>
+              {% if settings.COUNTRY_APP == 'south_africa' %}
+              <div class="search-range-controls">
+                <h4>Date range</h4>
+                <label for="search-range-start">Start date</label>
+                <input type="text" name="start" id="search-range-start" value="{{ search_start_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
+                <label for="search-range-end">End date</label>
+                <input type="text" name="end" id="search-range-end" value="{{ search_end_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
+              </div>
+              {% endif %}
             </div>
             {% endblock %}
 
