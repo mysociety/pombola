@@ -350,6 +350,8 @@ class YouthEmploymentView(MITExperimentView):
             reverse(self.base_view_name + '-support-submission')
         context['input_submission_url'] = \
             reverse(self.base_view_name + '-input-submission')
+        context['time_on_page_url'] = \
+            reverse(self.base_view_name + '-time-on-page')
         context['comment_form'] = YouthEmploymentCommentForm()
         context['support_form'] = YouthEmploymentSupportForm()
 

@@ -33,7 +33,7 @@
       riveted.init({
         eventHandler: function(data) {
           $.post(
-            'youth-employment/time-on-page',
+            '{{ time_on_page_url|escapejs }}',
             {
               seconds: data,
               csrfmiddlewaretoken: "{{ csrf_token|escapejs }}"
