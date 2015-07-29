@@ -66,7 +66,10 @@ for experiment_slug in ('mit-county', 'mit-county-larger'):
 
 # Create the Youth Employment Bill page:
 
-for experiment_slug in ('youth-employment-bill',):
+for experiment_slug in (
+        'youth-employment-bill',
+        'youth-employment-bill-generic-no-randomization',
+):
     view_kwargs = {'experiment_slug': experiment_slug}
     view_kwargs.update(EXPERIMENT_DATA[experiment_slug])
     base_name = view_kwargs['base_view_name']

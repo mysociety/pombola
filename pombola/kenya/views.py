@@ -85,8 +85,28 @@ EXPERIMENT_DATA = {
             '_youth_support.html',
             '_youth_input.html'
         ],
-
-    }
+    },
+    'youth-employment-bill-generic-no-randomization': {
+        'session_key_prefix': 'MIT4',
+        'base_view_name': 'youth-employment-n',
+        'pageview_label': 'youth-employment-n',
+        'template_prefix': 'youth',
+        'experiment_key': settings.YOUTH_EMPLOYMENT_BILL_EXPERIMENT_KEY,
+        'qualtrics_sid': 'SV_ebVXgzAevcuo2sB',
+        'variants': ('n',),
+        'default_variant': 'n',
+        'demographic_keys': {
+            'g': ('m', 'f'),
+            'agroup': ('under', 'over'),
+            'pint': ('hi', 'lo'),
+        },
+        'major_partials': [
+            '_youth_share.html',
+            '_youth_comment.html',
+            '_youth_support.html',
+            '_youth_input.html'
+        ],
+    },
 }
 
 
