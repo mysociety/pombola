@@ -1,7 +1,6 @@
 import time
 import calendar
 import datetime
-from functools import wraps
 import random
 from urlparse import urlsplit, urlunsplit
 
@@ -17,14 +16,10 @@ from django.views.generic.detail import SingleObjectMixin
 from django.core.cache import cache
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.contenttypes.models import ContentType
 
-from speeches.models import Section, Speech, Speaker, Tag
-from speeches.views import NamespaceMixin, SpeechView, SectionView
+from speeches.models import Speaker
 
 from pombola.core import models
-from pombola.info.models import InfoPage
-from pombola.slug_helpers.models import SlugRedirect
 from pombola.slug_helpers.views import SlugRedirectMixin
 
 
