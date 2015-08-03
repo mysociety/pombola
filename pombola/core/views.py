@@ -1,7 +1,6 @@
 import time
 import calendar
 import datetime
-from functools import wraps
 import random
 from urlparse import urlsplit, urlunsplit
 
@@ -17,15 +16,11 @@ from django.views.generic.detail import SingleObjectMixin
 from django.core.cache import cache
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.contenttypes.models import ContentType
 
-from speeches.models import Section, Speech, Speaker, Tag
-from speeches.views import NamespaceMixin, SpeechView, SectionView
+from speeches.models import Speaker
 
 from pombola.core import models
-from pombola.info.models import InfoPage
-from pombola.slug_helpers.models import SlugRedirect
-from pombola.slug_helpers.views import SlugRedirectMixin
+from pombola.slug_helpers.views import SlugRedirectMixin, get_slug_redirect
 
 
 class HomeView(TemplateView):
@@ -218,7 +213,26 @@ def position_pt_ok_o(request, pt_slug, ok_slug, o_slug):
     """Show current positions with a given PositionTitle, OrganisationKind and Organisation"""
     return position(request, pt_slug, ok_slug=ok_slug, o_slug=o_slug)
 
+def get_position_type_redirect(pt_slug, ok_slug=None, o_slug=None):
+    """If this position type URL should redirect, return the new URL"""
+    if ok_slug:
+        ok_redirect = get_slug_redirect(models.OrganisationKind, ok_slug)
+        if ok_redirect:
+            kwargs = {'pt_slug': pt_slug, 'ok_slug': ok_redirect.slug}
+            # Then this should be redirected, but to one of two
+            # possible views:
+            if o_slug:
+                kwargs['o_slug'] = o_slug
+                new_url = reverse('position_pt_ok_o', kwargs=kwargs)
+            else:
+                new_url = reverse('position_pt_ok', kwargs=kwargs)
+            return new_url
+
 def position(request, pt_slug, ok_slug=None, o_slug=None):
+    new_url = get_position_type_redirect(pt_slug, ok_slug, o_slug)
+    if new_url:
+        return redirect(new_url)
+
     title = get_object_or_404(
         models.PositionTitle,
         slug=pt_slug
@@ -342,14 +356,11 @@ class OrganisationDetailSub(SubSlugRedirectMixin, DetailView):
                 context['sorted_positions'] = positions.order_by_person_name()
         return context
 
-class OrganisationKindList(SingleObjectMixin, ListView):
+class OrganisationKindList(SlugRedirectMixin, SingleObjectMixin, ListView):
     model = models.OrganisationKind
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=self.model.objects.all())
-        return super(OrganisationKindList, self).get(request, *args, **kwargs)
-
     def get_queryset(self):
+        self.object = self.get_object(queryset=self.model.objects.all())
         orgs = (
             self.object
                 .organisation_set
