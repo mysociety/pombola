@@ -48,6 +48,8 @@ if settings.ENABLED_FEATURES['hansard']:
     from pombola.hansard import models as hansard_models
 
     class HansardEntryIndex(BaseIndex, indexes.Indexable):
+        sitting_start_date = indexes.DateField(model_attr='sitting__start_date')
+
         def get_model(self):
             return hansard_models.Entry
 

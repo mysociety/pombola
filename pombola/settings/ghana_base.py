@@ -1,3 +1,6 @@
+import os
+from .base import root_dir
+
 COUNTRY_APP = 'ghana'
 
 MAPIT_COUNTRY = 'GH'
@@ -12,6 +15,7 @@ OPTIONAL_APPS = (
     'pombola.projects',
     'pombola.place_data',
     'pombola.votematch',
+    'pombola.wordcloud',
 
     # Pombola has now dropped registration, so leave these out:
     # 'registration_defaults',
