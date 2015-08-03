@@ -20,7 +20,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from speeches.models import Speaker
 
 from pombola.core import models
-from pombola.slug_helpers.views import SlugRedirectMixin
+from pombola.slug_helpers.views import SlugRedirectMixin, get_slug_redirect
 
 
 class HomeView(TemplateView):
@@ -213,7 +213,26 @@ def position_pt_ok_o(request, pt_slug, ok_slug, o_slug):
     """Show current positions with a given PositionTitle, OrganisationKind and Organisation"""
     return position(request, pt_slug, ok_slug=ok_slug, o_slug=o_slug)
 
+def get_position_type_redirect(pt_slug, ok_slug=None, o_slug=None):
+    """If this position type URL should redirect, return the new URL"""
+    if ok_slug:
+        ok_redirect = get_slug_redirect(models.OrganisationKind, ok_slug)
+        if ok_redirect:
+            kwargs = {'pt_slug': pt_slug, 'ok_slug': ok_redirect.slug}
+            # Then this should be redirected, but to one of two
+            # possible views:
+            if o_slug:
+                kwargs['o_slug'] = o_slug
+                new_url = reverse('position_pt_ok_o', kwargs=kwargs)
+            else:
+                new_url = reverse('position_pt_ok', kwargs=kwargs)
+            return new_url
+
 def position(request, pt_slug, ok_slug=None, o_slug=None):
+    new_url = get_position_type_redirect(pt_slug, ok_slug, o_slug)
+    if new_url:
+        return redirect(new_url)
+
     title = get_object_or_404(
         models.PositionTitle,
         slug=pt_slug
