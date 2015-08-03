@@ -32,17 +32,6 @@ yesterday_approximate_date = ApproximateDate(yesterday_date.year,
                                              yesterday_date.month,
                                              yesterday_date.day)
 
-# From: http://stackoverflow.com/q/600268/223092
-
-def mkdir_p(path):
-    try:
-        os.makedirs(path)
-    except OSError as exc: # Python >2.5
-        if exc.errno == errno.EEXIST and os.path.isdir(path):
-            pass
-        else:
-            raise
-
 def file_mtime_iso8601(filename):
     return time.strftime('%Y-%m-%dT%H-%M-%S', time.localtime(os.path.getmtime(filename)))
 

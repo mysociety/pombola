@@ -1,6 +1,7 @@
 # Debian packages that we need.
 
 libapache2-mod-wsgi
+libapache2-mod-xsendfile
 
 # On non-debian systems you'll need to build these using the appropriate tools
 # (eg on Mac consider using Homebrew: http://mxcl.github.com/homebrew/).

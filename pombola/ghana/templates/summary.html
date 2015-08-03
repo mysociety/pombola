@@ -1,16 +1,4 @@
-<script type = "text/javascript">
-    $(function() {
-        $.getJSON("/static/tagcloud.json",
-        {},
-        function(data){
-            $("#wordcloud").jQCloud(data);
-        });
-      });
-    </script>
-
 <div class="panel panel-default">
     <h3 class="panel-heading">Last Session on Record</h3>
-    <div class=""  style="height: 425px;">
-        <div id="wordcloud" style="height: 425px;"></div>
-    </div>
+    {% include 'wordcloud/wordcloud.html' %}
 </div>
