@@ -197,10 +197,44 @@ class SASearchViewTest(WebTest):
 
     def setUp(self):
         self.search_location_url = reverse('core_geocoder_search')
+        self.search_url = reverse('core_search')
 
     def test_search_page_returns_success(self):
         res = self.app.get(reverse('core_search'))
         self.assertEquals(200, res.status_code)
+
+    def test_invalid_date_range_params(self):
+        response = self.app.get(
+            "{0}?q=qwerty&start=invalid".format(self.search_url))
+        range_controls = response.html.find(
+            'div',
+            class_='search-range-controls')
+        date_start = range_controls.find('input', attrs={"name" : "start"})
+        date_end = range_controls.find('input', attrs={"name" : "end"})
+        self.assertEquals("", date_start["value"])
+        self.assertEquals("", date_end["value"])
+
+    def test_valid_date_start_param(self):
+        response = self.app.get(
+            "{0}?q=qwerty&start=2015-05-01".format(self.search_url))
+        range_controls = response.html.find(
+            'div',
+            class_='search-range-controls')
+        date_start = range_controls.find('input', attrs={"name" : "start"})
+        date_end = range_controls.find('input', attrs={"name" : "end"})
+        self.assertEquals("2015-05-01", date_start["value"])
+        self.assertEquals("", date_end["value"])
+
+    def test_valid_date_end_param(self,):
+        response = self.app.get(
+            "{0}?q=qwerty&end=2015-05-01".format(self.search_url))
+        range_controls = response.html.find(
+            'div',
+            class_='search-range-controls')
+        date_start = range_controls.find('input', attrs={"name" : "start"})
+        date_end = range_controls.find('input', attrs={"name" : "end"})
+        self.assertEquals("", date_start["value"])
+        self.assertEquals("2015-05-01", date_end["value"])
 
     def get_search_result_list_items(self, query_string):
         response = self.app.get(
