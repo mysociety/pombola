@@ -140,11 +140,7 @@ class NGSearchView(SearchBaseView):
         # So now we know that the query is a PUN:
         query = tidy_up_pun(self.request.GET.get('q'))
         context['raw_query'] = query
-
         context['query'] = query
-        context['area'] = None
-        context['results'] = []
-
         context['area'] = self.get_area_from_pun(query)
 
         # If area found find places of interest
@@ -154,6 +150,12 @@ class NGSearchView(SearchBaseView):
             # Get the area PUN and name to store in context for template
             context['area_pun_code'] = area.codes.filter(type__code="poll_unit")[0].code
             context['area_pun_name'] = area.names.filter(type__code="poll_unit")[0].name
+
+            # Get the place object for the containing state
+            context['state'] = self.get_state(
+                context['area_pun_code'],
+                query[0:2],
+                area)
 
             # work out the polygons to match to, may need to go up tree to parents.
             area_for_polygons = area
@@ -250,3 +252,12 @@ class NGSearchView(SearchBaseView):
                 # strip off last component
                 pun = re.sub(r'[^:]+$', '', pun)
                 pun = re.sub(r':$', '', pun)
+
+    def get_state(self, matched_pun, state_code, area):
+        if ":" in matched_pun:
+            # look up state
+            state_area = self.get_area_from_pun(state_code)
+        else:
+            # matched area is the state, convert it to place data
+            state_area = area
+        return self.convert_area_to_place(state_area)

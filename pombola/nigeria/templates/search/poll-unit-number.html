@@ -28,6 +28,11 @@
   {% if area %}
     <p>Best match is "{{ area_pun_name }}" with poll unit number '{{ area_pun_code }}'</p>
 
+    {% if state %}
+      <h3>State</h3>
+      <a href="{{ state.get_absolute_url }}">{{ state.name }}</a>
+    {% endif %}
+
     <h3>Overlapping Federal Constituencies</h3>
 
     <ul>
