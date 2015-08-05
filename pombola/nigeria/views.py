@@ -145,18 +145,7 @@ class NGSearchView(SearchBaseView):
         context['area'] = None
         context['results'] = []
 
-        # Find mapit area that matches the PUN. If not found trim off
-        # components from the end until match or no more searches possible.
-        # Need this as we don't have the polling stations and want to be
-        # forgiving in case of input error.
-        while query:
-            try:
-                context['area'] = Area.objects.get(codes__code=query)
-                break
-            except Area.DoesNotExist:
-                # strip off last component
-                query = re.sub(r'[^:]+$', '', query)
-                query = re.sub(r':$', '', query)
+        context['area'] = self.get_area_from_pun(query)
 
         # If area found find places of interest
         if context['area']:
@@ -243,3 +232,21 @@ class NGSearchView(SearchBaseView):
             return Place.objects.get(mapit_area=area)
         except Place.DoesNotExist:
             return None
+
+    def get_area_from_pun(self, pun):
+        """Find MapIt area that matches the PUN.
+
+        If not found trim off components from the end until match
+        or no more searches possible.
+        Need this as we don't have the polling stations and want to be
+        forgiving in case of input error.
+        """
+
+        while pun:
+            try:
+                area = Area.objects.get(codes__code=pun)
+                return area
+            except Area.DoesNotExist:
+                # strip off last component
+                pun = re.sub(r'[^:]+$', '', pun)
+                pun = re.sub(r':$', '', pun)
