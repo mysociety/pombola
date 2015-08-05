@@ -125,13 +125,13 @@ class NGSearchViewTest(WebTest):
     def test_partial_match(self):
         response = self.app.get("/search/?q=28/04/09")
         self.assertIn(
-            'Best match is "AKOKO SOUTH WEST" with poll unit number \'OD:4\'',
+            'Best match is the local government area "AKOKO SOUTH WEST" with poll unit number \'OD:4\'',
             response.content
         )
 
     def test_complete_match(self):
         response = self.app.get("/search/?q=28/04/07")
         self.assertIn(
-            'Best match is "Test Ward" with poll unit number \'OD:4:7\'',
+            'Best match is the ward "Test Ward" with poll unit number \'OD:4:7\'',
             response.content
         )

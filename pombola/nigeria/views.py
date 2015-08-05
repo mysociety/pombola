@@ -157,6 +157,9 @@ class NGSearchView(SearchBaseView):
                 query[0:2],
                 area)
 
+            # work out what level of the PUN we've matched
+            context['area_pun_type'] = self.get_pun_type(context['area_pun_code'])
+
             # work out the polygons to match to, may need to go up tree to parents.
             area_for_polygons = area
             while area_for_polygons and not area_for_polygons.polygons.exists():
@@ -261,3 +264,15 @@ class NGSearchView(SearchBaseView):
             # matched area is the state, convert it to place data
             state_area = area
         return self.convert_area_to_place(state_area)
+
+    def get_pun_type(self, pun):
+        # use the length of the matched PUN to determine whether
+        # we've matched a ward, an lga or a state
+        # ref: http://www.inecnigeria.org/?page_id=20
+        pun_level = len(pun.split(':'))
+        if pun_level == 3:
+            return 'ward'
+        elif pun_level == 2:
+            return 'local government area'
+        else:
+            return 'state'
