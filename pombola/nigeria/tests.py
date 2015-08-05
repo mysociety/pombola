@@ -9,6 +9,8 @@ from django_webtest import WebTest
 from nose.plugins.attrib import attr
 
 from mapit.models import Area, CodeType, NameType, Type
+from pombola.core.models import (
+    Place, PlaceKind, Person, Position, PositionTitle)
 from pombola.info.models import InfoPage
 
 # Needed to run the doc tests in views.py
@@ -59,6 +61,51 @@ class NGSearchViewTest(WebTest):
             description='Polling Unit Number names',
             )
 
+        self.state_type = Type.objects.create(
+            code='STA',
+            description='State',
+            )
+
+        self.mapit_test_state = Area.objects.create(
+            name="Ondo",
+            type=self.state_type,
+            )
+
+        self.mapit_test_state.codes.get_or_create(
+            type=self.poll_unit_code_type,
+            code="OD",
+         )
+
+        self.mapit_test_state.names.get_or_create(
+            type=self.poll_unit_name_type,
+            name="ONDO"
+        )
+
+        self.place_kind = PlaceKind.objects.create(
+            slug='pk_test', name='PK Test')
+
+        self.place_state = Place.objects.create(
+            kind=self.place_kind,
+            slug="place_test",
+            name="Test State Name",
+            mapit_area=self.mapit_test_state
+        )
+
+        self.governor = Person.objects.create(
+            slug="governor_test",
+            legal_name="Test Gov",
+        )
+
+        self.gov_title = PositionTitle.objects.create(
+            slug="governor"
+        )
+
+        self.position = Position.objects.create(
+            title=self.gov_title,
+            place=self.place_state,
+            person=self.governor
+        )
+
         self.lga_type = Type.objects.create(
             code='LGA',
             description='LGA',
@@ -100,14 +147,6 @@ class NGSearchViewTest(WebTest):
             name="Test Ward"
         )
 
-    def tearDown(self):
-        self.mapit_test_ward.delete()
-        self.ward_type.delete()
-        self.mapit_test_lga.delete()
-        self.lga_type.delete()
-        self.poll_unit_name_type.delete()
-        self.poll_unit_code_type.delete()
-
     def test_four_part_pun_is_recognised(self):
         response = self.app.get("/search/?q=01:02:03:04")
         self.assertIn(
@@ -122,16 +161,30 @@ class NGSearchViewTest(WebTest):
             response.content
         )
 
-    def test_partial_match(self):
+    def test_matching_state(self):
+        response = self.app.get("/search/?q=28/04454/09")
+        self.assertIn(
+            'Best match is the state "ONDO" with poll unit number \'OD\'',
+            response.content
+        )
+
+    def test_matching_lga(self):
         response = self.app.get("/search/?q=28/04/09")
         self.assertIn(
             'Best match is the local government area "AKOKO SOUTH WEST" with poll unit number \'OD:4\'',
             response.content
         )
 
-    def test_complete_match(self):
+    def test_matching_ward(self):
         response = self.app.get("/search/?q=28/04/07")
         self.assertIn(
             'Best match is the ward "Test Ward" with poll unit number \'OD:4:7\'',
             response.content
+        )
+
+        self.assertTrue(
+            re.search(
+                r'<h3>State</h3>\s*<p>\s*<a href="/place/place_test/">Test State Name</a>,\s*current governor <a href="/person/governor_test/">Test Gov</a>',
+                response.content
+            )
         )

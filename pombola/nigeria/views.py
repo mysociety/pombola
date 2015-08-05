@@ -160,18 +160,23 @@ class NGSearchView(SearchBaseView):
             # work out what level of the PUN we've matched
             context['area_pun_type'] = self.get_pun_type(context['area_pun_code'])
 
-            # work out the polygons to match to, may need to go up tree to parents.
-            area_for_polygons = area
-            while area_for_polygons and not area_for_polygons.polygons.exists():
-                area_for_polygons = area_for_polygons.parent_area
+            # attempt to populate governor info
+            context['governor'] = self.find_governor(context['state'])
 
+            # work out the polygons to match to, may need to go up tree to parents.
+            area_for_polygons = self.find_containing_area(area)
             if area_for_polygons:
                 area_polygons = area_for_polygons.polygons.collect()
 
-                # get the overlapping senatorial districts
-                context['senatorial_districts']  = self.find_matching_places("SEN", area_polygons)
-                context['federal_constutencies'] = self.find_matching_places("FED", area_polygons)
+                context['federal_constituencies'] = self.get_district_data(
+                    self.find_matching_places("FED", area_polygons),
+                    "representative"
+                )
 
+                context['senatorial_districts']  = self.get_district_data(
+                    self.find_matching_places("SEN", area_polygons),
+                    "senator"
+                )
         return context
 
     def parse_params(self):
@@ -265,14 +270,43 @@ class NGSearchView(SearchBaseView):
             state_area = area
         return self.convert_area_to_place(state_area)
 
+    def find_governor(self, state):
+        if state:
+            governor = self.get_people(state, "governor")
+            if governor:
+                return governor[0][0]
+
+    def find_containing_area(self, area):
+        area_for_polygons = area
+        while area_for_polygons and not area_for_polygons.polygons.exists():
+            area_for_polygons = area_for_polygons.parent_area
+        return area_for_polygons
+
     def get_pun_type(self, pun):
         # use the length of the matched PUN to determine whether
         # we've matched a ward, an lga or a state
         # ref: http://www.inecnigeria.org/?page_id=20
-        pun_level = len(pun.split(':'))
-        if pun_level == 3:
+        pun_level = pun.count(':')
+        if pun_level == 2:
             return 'ward'
-        elif pun_level == 2:
+        elif pun_level == 1:
             return 'local government area'
         else:
             return 'state'
+
+    def get_district_data(self, districts, role):
+        district_list = []
+        for district in districts:
+            place = {}
+            place['district_name'] = district.name
+            place['district_url'] = district.get_absolute_url
+            people = self.get_people(district, role)
+            if people:
+                place['rep_name'] = people[0][0].name
+                place['rep_url'] = people[0][0].get_absolute_url
+            district_list.append(place)
+        return district_list
+
+    def get_people(self, place, role):
+        return place.related_people(
+            lambda qs: qs.filter(person__position__title__slug=role))
