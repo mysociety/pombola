@@ -1482,7 +1482,7 @@ class PopoloOrganization(popolo_models.Organization):
     images = generic.GenericRelation(Image)
 
 
-class PopoloOtherName(popolo_models.OtherName):
+class PopoloPersonOtherName(popolo_models.OtherName):
     name_to_use = models.BooleanField(default=False)
     family_name = models.CharField(max_length=300, blank=True)
     given_name = models.CharField(max_length=300, blank=True)
