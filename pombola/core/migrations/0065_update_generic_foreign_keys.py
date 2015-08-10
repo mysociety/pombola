@@ -1,61 +1,14 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models
+from ..migration_helpers import migrate_generic_foreign_key
 
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        # (old_app_label, old_model) -> (new_app_label, new_model)
-
-        model_map = {
-            ('core', 'organisation'): ('core', 'popoloorganization'),
-            ('core', 'alternativepersonname'): ('core', 'popolopersonothername'),
-            ('core', 'person'): ('core', 'popoloperson'),
-            ('core', 'position'): ('core', 'popolomembership'),
-        }
-
-        model_to_content_type_id = {
-            t: orm['contenttypes.ContentType'].objects.get(
-                app_label=t[0], model=t[1]).id
-            for t in model_map.keys() + model_map.values()
-        }
-
-        content_type_id_to_model = {
-            v: k for k, v in model_to_content_type_id.items()
-            }
-
-        for orm_label in ('images.Image', 'tasks.Task'):
-            print 'Working on {}'.format(orm_label)
-
-            for old_object in orm[orm_label].objects.all():
-                old_model = content_type_id_to_model.get(
-                    old_object.content_type_id)
-
-                if old_model and old_model in model_map:
-                    print 'Updating an object of content type {}'.format(old_model)
-
-                    new_model = model_map[old_model]
-                    new_content_type_id = model_to_content_type_id[new_model]
-
-                    old_object.content_type_id = new_content_type_id
-                    old_object.object_id = self._get_new_object_id(
-                        orm, old_object.object_id, old_model)
-                    old_object.save()
-
-        raise Exception()
-
-    def _get_new_object_id(self, orm, old_object_id, old_model):
-        """old_model should be a tuple of (app_label, model_name)."""
-
-        return orm['popolo.Identifier'].objects.get(
-            scheme='old_pombola_{}_id'.format(old_model[1]),
-            identifier=str(old_object_id),
-            ).object_id
+        migrate_generic_foreign_key(orm, 'core.InformationSource')
 
     def backwards(self, orm):
-        "Write your backwards methods here."
+        raise Exception("FIXME: write the backwards migration if needed")
 
     models = {
         u'contenttypes.contenttype': {
