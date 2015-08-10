@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
 from south.v2 import DataMigration
-from django.db import models
 from django.contrib.contenttypes.generic import GenericRelation
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
