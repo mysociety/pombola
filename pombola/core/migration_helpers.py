@@ -36,14 +36,14 @@ def migrate_generic_foreign_key(orm, orm_label, fk_field='object_id'):
             setattr(
                 old_object,
                 fk_field,
-                _get_new_object_id(
+                get_new_object_id(
                     orm, getattr(old_object, fk_field), old_model)
             )
 
             if getattr(old_object, fk_field) is not None:
                 old_object.save()
 
-def _get_new_object_id(orm, old_object_id, old_model):
+def get_new_object_id(orm, old_object_id, old_model):
     """old_model should be a tuple of (app_label, model_name)."""
 
     try:
