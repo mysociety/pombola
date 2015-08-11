@@ -699,7 +699,7 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
     summary = MarkupField(blank=True, default='')
     shape_url = models.URLField(blank=True)
     location = models.PointField(null=True, blank=True)
-    organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
+    organization = models.ForeignKey('PopoloOrganization', null=True, blank=True, help_text="use if the place uniquely belongs to an organization - eg a field office")
     parliamentary_session = models.ForeignKey('ParliamentarySession', null=True, blank=True)
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
@@ -1325,7 +1325,7 @@ class Position(ModelBase, IdentifierMixin):
 class ParliamentarySession(ModelBase):
     start_date = DateField(blank=True, null=True)
     end_date = DateField(blank=True, null=True)
-    house = models.ForeignKey('Organisation')
+    house = models.ForeignKey('PopoloOrganization')
     # It's not clear whether this field is a good idea or not - it
     # suggests that boundaries won't change within a
     # ParliamentarySession.  This assumption might well be untrue.
@@ -1403,8 +1403,8 @@ class OrganisationRelationshipKind(ModelBase):
 
 class OrganisationRelationship(ModelBase):
     """Represents a relationship between two organisations"""
-    organisation_a = models.ForeignKey(Organisation, related_name='org_rels_as_a')
-    organisation_b = models.ForeignKey(Organisation, related_name='org_rels_as_b')
+    organization_a = models.ForeignKey('PopoloOrganization', related_name='org_rels_as_a')
+    organization_b = models.ForeignKey('PopoloOrganization', related_name='org_rels_as_b')
     kind = models.ForeignKey(OrganisationRelationshipKind)
 
 
