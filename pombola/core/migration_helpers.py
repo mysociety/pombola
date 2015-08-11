@@ -3,7 +3,7 @@
 
 import sys
 
-def migrate_generic_foreign_key(orm, orm_label):
+def migrate_generic_foreign_key(orm, orm_label, fk_field='object_id'):
     """Update a generic foreign key the new django-popolo core models"""
 
     model_map = {
@@ -33,9 +33,14 @@ def migrate_generic_foreign_key(orm, orm_label):
             new_content_type_id = model_to_content_type_id[new_model]
 
             old_object.content_type_id = new_content_type_id
-            old_object.object_id = _get_new_object_id(
-                orm, old_object.object_id, old_model)
-            if old_object.object_id is not None:
+            setattr(
+                old_object,
+                fk_field,
+                _get_new_object_id(
+                    orm, getattr(old_object, fk_field), old_model)
+            )
+
+            if getattr(old_object, fk_field) is not None:
                 old_object.save()
 
 def _get_new_object_id(orm, old_object_id, old_model):
