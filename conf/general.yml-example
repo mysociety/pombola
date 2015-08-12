@@ -59,6 +59,10 @@ KENYA_PARSER_PDF_TO_HTML_HOST: ''
 # probably >= 2.15 is a good idea
 SELENIUM_PATH: ''
 
+# If comments are being handled by Facebook, we'll need an app id
+# omit the value rather than adding a blank string if not required
+FACEBOOK_APP_ID:
+
 # Comments are handled by Disqus - http://disqus.com/
 # The 'shortname' is the code that identifies the correct account to link to on # their site.
 DISQUS_SHORTNAME: ''

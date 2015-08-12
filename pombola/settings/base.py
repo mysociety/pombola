@@ -326,6 +326,7 @@ DISQUS_SHORTNAME       = config.get( 'DISQUS_SHORTNAME', None )
 # At some point we should deprecate this. For now it defaults to true so that
 # no entry in the config does the right thing.
 DISQUS_USE_IDENTIFIERS = config.get( 'DISQUS_USE_IDENTIFIERS', True )
+FACEBOOK_APP_ID = config.get( 'FACEBOOK_APP_ID', None )
 
 
 # Polldaddy widget ID - from http://polldaddy.com/

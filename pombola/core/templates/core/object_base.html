@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 
+{% block extra_head_meta %}
+{% if settings.FACEBOOK_APP_ID %}
+  <meta property="fb:app_id" content="{{ settings.FACEBOOK_APP_ID }}" />
+{% endif %}
+{% endblock %}
+
 {% block title %}{{ object.name }}{% endblock %}
 
 {% block content %}
