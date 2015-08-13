@@ -5,22 +5,8 @@
 
 {% block title %}Home{% endblock %}
 
-{% block css_headers %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/libs/responsive-carousel.css' %}" />
-  <!--[if !IE]><!-->
-  <link rel="stylesheet" type="text/css" href="{% static 'css/libs/responsive-carousel.fade.css' %}" />
-  <!--<![endif]-->
-{% endblock %}
-
 {% block extra_js_to_load %}
-    addExtraJS(
-      [
-        {% compressed_js 'feeds' %}
-        {% compressed_js 'responsive-carousel' %}
-        null
-      ]
-    );
+    addExtraJS([ {% compressed_js 'feeds' %} null ]);
 {% endblock %}
 
 {% block body_attributes %} class="home" {% endblock %}
@@ -29,114 +15,32 @@
     {# Hide bread crumbs on the home page. #}
 {% endblock %}
 
-{% block intro_content %}
-    <div id="front_intro">
-        <div class="page-wrapper wrapper ">
+{% block page_wrapper %}
 
-            <div class="home-right">
-                <h2 id="home-intro">
-                    {{ quote_content }}
-                </h2>
-            </div>
+<div class="wrapper ">
+    <p>News stories will go here</p>
+</div>
 
-            <div class="home-left">
-                <h2>Spotlight</h2>
-                <div id="home-carousel" class="carousel" data-transition="fade" data-autoplay>
-                  {% include "spinner/carousel-slides.html" %}
-                </div>
-            </div>
+<div class="wrapper">
+    <h2>Find your representatives</h2>
+    <form action="{% url "core_geocoder_search" %}">
+        <label for="geocoder-search">Or search by location</label>
+        <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your location">
+        <button type="submit" class="button">Search</button>
+    </form>
+    <h2>Subscribe for updates</h2>
+    <form>
+        <input type="text">
+        <button type="submit" class="button"></button>
+    </form>
+</div>
 
-        </div>
-    </div>
-    <div class="home-rep-search">
-        <div class="wrapper">
-            <h2>Find your representatives</h2>
-            <form action="{% url "core_geocoder_search" %}" class="geocoder-search-form">
-                <label for="geocoder-search">Or search by location</label>
-                <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your location"><button type="submit" class="button">Search</button>
-            </form>
-        </div>
-    </div>
+<div class="wrapper">
+    <p>Infographics will go here</p>
+</div>
 
-{% endblock %}
-
-{% block content %}
-
-    <div id="news">
-
-      <h2 class="home-news-heading">That Week in Parliament</h2>
-
-      {% for articles in article_columns %}
-
-        <div class="home-news">
-            <ul class="home-news-list">
-            {% for article in articles %}
-            <li>
-                <h3>
-                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                </h3>
-                <p class="meta">{{ article.publication_date|date }}</p>
-                <div class="summary">{{ article.content_as_plain_text|truncatewords:32 }} <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p></div>
-            </li>
-            {% endfor %}
-            </ul>
-        </div>
-
-      {% endfor %}
-
-      <p><a class="readmore" href="{% url 'info_blog_category' slug='week-parliament,impressions' %}">See All &#187;</a></p>
-
-        <div class="home-news-bottom">
-
-          {% for category, articles in other_news_categories %}
-
-            <div class="item">
-                <h2><a href="{% url 'info_blog_category' slug=category.slug %}">{{ category.name }}</a></h2>
-                {% for article in articles %}
-                    <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
-                    <p class="meta">{{ article.publication_date|date }}</p>
-                    <div class="summary">{{ article.content_as_plain_text|truncatewords_html:32 }} <p><a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a></p></div>
-                {% endfor %}
-                <p><a class="readmore" href="{% url 'info_blog_category' slug=category.slug %}">See All &#187;</a></p>
-            </div>
-
-          {% endfor %}
-
-        </div>
-
-    </div>
-    <div class="col-2">
-
-    {% if settings.POLLDADDY_WIDGET_ID %}
-    <div id="poll">
-        <h2>Survey</h2>
-        <style>
-            .pds-box { width: 100% !important; }
-            #polldaddy { margin-bottom: 30px; width: 304px; float: left; }
-        </style>
-
-        <div id="polldaddy">
-            <!-- <h2>Latest Poll</h2> -->
-            <script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/w/{{ settings.POLLDADDY_WIDGET_ID }}.js"></script>
-            <noscript><a href="http://polldaddy.com/w.php?p={{ settings.POLLDADDY_WIDGET_ID }}/">Take Our Poll</a></noscript>
-        </div>
-    </div>
-    {% endif %}
-
-    {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
-        <div id="twitter">
-            <h2>Twitter</h2>
-
-            <a class="twitter-timeline"
-              data-chrome="nofooter transparent noheader noborders"
-              height="375"
-              href="https://twitter.com/{{ settings.TWITTER_USERNAME }}"
-              data-widget-id="{{ settings.TWITTER_WIDGET_ID }}"
-            >Tweets by @{{ settings.TWITTER_USERNAME }}</a>
-        </div>
-    {% endif %}
-
-    </div>
-
+<div class="wrapper">
+    <p>Section buttons will go here</p>
+</div>
 
 {% endblock %}
