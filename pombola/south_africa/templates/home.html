@@ -17,30 +17,100 @@
 
 {% block page_wrapper %}
 
-<div class="wrapper ">
-    <p>News stories will go here</p>
+<div class="home__news">
+    <div class="wrapper">
+        <div class="home__news__articles">
+            <h3 class="home__section-header">
+                Latest news
+                <a href="{% url 'info_blog_category' slug='week-parliament,impressions' %}">Show more news &#187;</a>
+            </h3>
+          {% for article in news_articles %}
+            <div class="home__news__article">
+                <h2>
+                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                </h2>
+                <p class="meta">{{ article.publication_date|date }}</p>
+                <div class="summary">
+                    {{ article.content_as_plain_text|truncatewords:32 }}
+                    <a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a>
+                </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="home__news__mp">
+            <h3 class="home__section-header">
+                MP corner
+            </h3>
+            <div class="home__news__article">
+                <h2>
+                    <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
+                </h2>
+                <p class="meta">{{ mp_corner.publication_date|date }}</p>
+                <div class="summary">
+                    {{ mp_corner.content_as_plain_text|truncatewords:32 }}
+                    <a class="readmore" href="{{ mp_corner.get_absolute_url }}">More &#187;</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="wrapper">
-    <h2>Find your representatives</h2>
-    <form action="{% url "core_geocoder_search" %}">
-        <label for="geocoder-search">Or search by location</label>
-        <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your location">
-        <button type="submit" class="button">Search</button>
-    </form>
-    <h2>Subscribe for updates</h2>
-    <form>
-        <input type="text">
-        <button type="submit" class="button"></button>
-    </form>
+<div class="home__actions">
+    <div class="wrapper">
+        <div class="home__actions__primary">
+            <form action="{% url "core_geocoder_search" %}">
+                <h2>
+                    <small>Do you have a problem?</small>
+                    <label for="geocoder-search">Contact your representative</label>
+                </h2>
+                <p class="input-group">
+                    <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your location">
+                    <button type="submit" class="button">Search</button>
+                </p>
+            </form>
+            <p>
+                <a href="#">See how they can help &#187;</a>
+            </p>
+        </div>
+        <div class="home__actions__secondary">
+            <form method="post" name="SubscribeForm" action="http://www.graphicmail.co.za/RWCode/subscribe.asp?SiteID=45864&Mode=subscribe&resize=0" target="_blank">
+                <h2>
+                    <label for="email">Stay up to date</label>
+                    <small>Get convenient email updates from People’s Assembly</small>
+                </h2>
+                <p class="input-group">
+                    <input type="email" name="Email" id="email" placeholder="Your email">
+                    <button type="submit" class="button">Sign up</button>
+                </p>
+                <input type="hidden" name="628173" value="on">
+            </form>
+        </div>
+    </div>
 </div>
 
-<div class="wrapper">
-    <p>Infographics will go here</p>
+<div class="home__infographics">
+    <div class="wrapper">
+        <h3 class="home__section-header home__section-header--full-width">
+            Latest infographics
+            <a href="{% url "info_page" slug="infographics" %}">Infographics</a>
+        </h3>
+      {% for url in infographics %}
+        <a href="{{ url }}" class="home__infographics__article">
+            <img src="{{ url }}">
+        </a>
+      {% endfor %}
+    </div>
 </div>
 
-<div class="wrapper">
-    <p>Section buttons will go here</p>
+<div class="home__topics">
+    <div class="wrapper">
+        <h3 class="home__section-header">
+            Hot topics
+        </h3>
+      {% for name in hot_topics %}
+        <a href="#" class="button home__topics__topic">{{ name }}</a>
+      {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

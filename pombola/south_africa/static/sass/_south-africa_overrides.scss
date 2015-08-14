@@ -615,7 +615,30 @@ HOME PAGE
 
 */
 
+.home__news {
 
+}
+
+.home__actions {
+    background-color: $colour_green;
+    color: #fff;
+
+    a {
+        color: inherit;
+    }
+
+    h2 {
+        color: inherit;
+    }
+}
+
+.home__infographics {
+    background-color: $colour_main_background;
+}
+
+.home__topics {
+
+}
 
 
 /*

@@ -64,19 +64,26 @@ class SAHomeView(HomeView):
                 )
             ).order_by('-publication_date')
 
-        context['article_columns'] = [
-            articles_for_front_page[0:6:2],
-            articles_for_front_page[1:6:2]
-        ]
+        context['news_articles'] = articles_for_front_page[:2]
 
-        context['other_news_categories'] = []
-        for slug in ('advocacy-campaigns', 'commentary', 'mp-corner'):
-            try:
-                c = BlogCategory.objects.get(slug=slug)
-                context['other_news_categories'].append(
-                    (c, articles.filter(categories=c)[:1]))
-            except BlogCategory.DoesNotExist:
-               pass
+        c = BlogCategory.objects.get(slug='mp-corner')
+        context['mp_corner'] = articles.filter(categories=c)[1]
+
+        # TODO: Put real content into these lists
+        context['infographics'] = [
+            'http://www.pa.org.za/media_root/file_archive/School_safety_violence_4.jpeg',
+            'http://www.pa.org.za/media_root/file_archive/NDP__YD.jpeg',
+            'http://www.pa.org.za/media_root/file_archive/Employment_Equity_2.jpeg',
+            'http://www.pa.org.za/media_root/file_archive/constituency_info.jpeg'
+        ]
+        context['hot_topics'] = [
+            'Find your councillor',
+            'MP profiles',
+            'MP corner',
+            'MP attendance',
+            'MP assets',
+            'Campaigns'
+        ]
 
         return context
 
