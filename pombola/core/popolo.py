@@ -6,8 +6,11 @@ from collections import defaultdict
 from urlparse import urljoin
 
 from django.core.management.base import BaseCommand, CommandError
+from django.core.urlresolvers import reverse
 from django.db import transaction
 from django_date_extensions.fields import ApproximateDate
+
+from mapit.views.areas import area
 
 from pombola.core.models import Person, Organisation, Position
 from pombola import country
@@ -25,6 +28,39 @@ extra_popolo_person_fields = (
     'sort_name',
     'gender',
 )
+
+def get_area_information(place, base_url):
+    """Given a PopIt place, generate a Popolo area dictionary
+
+    The Popolo specification doesn't have much detail about how the
+    area attribute of a position or post should be constructed so this
+    just follows the convention in YourNextRepresentative's data but
+    with additional fields for the parliamentary session (if available)
+    and the MapIt area type."""
+    mapit_area = place.mapit_area
+    if mapit_area is None:
+        return None
+    mapit_id = mapit_area.id
+    mapit_type = mapit_area.type.code
+    path = reverse(area, kwargs={'area_id': mapit_id})
+    result = {
+        'id': 'mapit:{0}'.format(place.mapit_area.id),
+        'identifier': urljoin(base_url, path),
+        'area_type': mapit_type,
+        'name': place.name,
+    }
+    session = place.parliamentary_session
+    if session:
+        result['session'] = {
+            'id': session.id,
+            'name': session.name,
+            'start_date': str(session.start_date),
+            'end_date': str(session.end_date),
+            'mapit_generation': session.mapit_generation,
+            'house_id': session.house.id,
+            'house_name': session.house.name,
+        }
+    return result
 
 def date_to_partial_iso8601(approx_date):
     """Get a (possibly partial) ISO 8601 representation of an ApproximateDate
@@ -221,6 +257,10 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
                 position.organisation.slug
                 organization_id = position.organisation.get_popolo_id(primary_id_scheme)
                 properties['organization_id'] = organization_id
+            if position.place:
+                # If there's a place associated with the position, set that on
+                # the position as an area:
+                properties['area'] = get_area_information(position.place, base_url)
             if inline_memberships:
                 person_properties['memberships'].append(properties)
             else:

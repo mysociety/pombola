@@ -1,3 +1,4 @@
+from datetime import date
 import json
 
 from django.contrib.contenttypes.models import ContentType
@@ -5,6 +6,8 @@ from django.core.files.base import ContentFile
 from django.test import TestCase
 
 from django_date_extensions.fields import ApproximateDate
+
+from mapit.models import Generation, Area, Type
 
 from pombola.core import models
 from pombola.core.popolo import get_popolo_data
@@ -15,6 +18,33 @@ class PopoloTest(TestCase):
     def setUp(self):
         self.maxDiff = None
 
+        # Set up a place, MapIt area and parliamentary session:
+        self.generation = Generation.objects.create(
+            active=True,
+            description="Test generation",
+        )
+        self.province_type = Type.objects.create(
+            code='PRV',
+            description='Province',
+        )
+        self.mapit_test_province = Area.objects.create(
+            name="Test Province",
+            type=self.province_type,
+            generation_low=self.generation,
+            generation_high=self.generation,
+        )
+        (place_kind_province, _) = models.PlaceKind.objects.get_or_create(
+            name='Province',
+            slug='province',
+        )
+        self.place = models.Place.objects.create(
+            name='Test Province',
+            slug='test_province',
+            kind=place_kind_province,
+            mapit_area=self.mapit_test_province,
+        )
+
+        # Now a person, organisation and position:
         self.person = models.Person.objects.create(
             legal_name='Test Person',
             slug='test-person',
@@ -190,6 +220,89 @@ class PopoloTest(TestCase):
         self.assertEqual(data['persons'], [expected_person])
         self.assertEqual(data['organizations'], self.expected_organizations)
         self.assertNotIn('memberships', data)
+
+    def test_popolo_place_no_session(self):
+        self.position.place = self.place
+        self.position.save()
+        data = get_popolo_data('org.example',
+                               'http://pombola.example.org/',
+                               inline_memberships=False)
+
+        membership = data['memberships'][0]
+        self.assertTrue(membership['area'])
+        area = membership['area']
+        self.assertEqual(
+            set(area.keys()),
+            set(['area_type', 'id', 'identifier', 'name'])
+        )
+        self.assertEqual(area['area_type'], 'PRV')
+        self.assertEqual(area['name'], 'Test Province')
+        self.assertEqual(
+            area['id'],
+            'mapit:{0}'.format(self.mapit_test_province.id)
+        )
+        self.assertEqual(
+            area['identifier'],
+            "http://pombola.example.org/mapit/area/{0}".format(
+                self.mapit_test_province.id
+            )
+        )
+
+    def test_popolo_place_with_session(self):
+        example_assembly = models.Organisation.objects.create(
+            name='Example Assembly',
+            slug='example-assembly',
+            kind=models.OrganisationKind.objects.create(
+                name='Chamber', slug='chamber'
+            ),
+            started=ApproximateDate(2009),
+            ended=ApproximateDate(2011, 3, 20),
+        )
+        example_session = models.ParliamentarySession.objects.create(
+            name='Example Session',
+            start_date=date(1970, 7, 1),
+            end_date=date(1975, 12, 31),
+            mapit_generation=self.generation.id,
+            house=example_assembly,
+        )
+        self.place.parliamentary_session = example_session
+        self.place.save()
+        self.position.place = self.place
+        self.position.save()
+
+        data = get_popolo_data('org.example',
+                               'http://pombola.example.org/',
+                               inline_memberships=False)
+
+        membership = data['memberships'][0]
+
+        self.assertTrue(membership['area'])
+        area = membership['area']
+        self.assertEqual(
+            set(area.keys()),
+            set(['area_type', 'id', 'identifier', 'name', 'session'])
+        )
+        self.assertEqual(area['area_type'], 'PRV')
+        self.assertEqual(area['name'], 'Test Province')
+        self.assertEqual(
+            area['id'],
+            'mapit:{0}'.format(self.mapit_test_province.id)
+        )
+        self.assertEqual(
+            area['identifier'],
+            "http://pombola.example.org/mapit/area/{0}".format(
+                self.mapit_test_province.id
+            )
+        )
+        self.assertTrue(area['session'])
+        session = area['session']
+        self.assertEqual(session['start_date'], '1970-07-01')
+        self.assertEqual(session['end_date'], '1975-12-31')
+        self.assertEqual(session['house_name'], 'Example Assembly')
+        self.assertEqual(session['name'], 'Example Session')
+        self.assertEqual(session['house_id'], example_assembly.id)
+        self.assertEqual(session['id'], example_session.id)
+        self.assertEqual(session['mapit_generation'], self.generation.id)
 
 # FIXME: also mock out the PopIt API to test create_organisations and
 # create_people.
