@@ -29,7 +29,7 @@ from speeches.views import NamespaceMixin, SpeechView, SectionView
 from pombola.core import models
 from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
     PlaceDetailSub, OrganisationDetailView, PersonDetail, PlaceDetailView,
-    OrganisationDetailSub, PersonSpeakerMappingsMixin)
+    OrganisationDetailSub, CommentArchiveMixin, PersonSpeakerMappingsMixin)
 from pombola.info.models import (
     InfoPage, Category as BlogCategory, Tag as BlogTag
 )
@@ -49,6 +49,7 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-office',
     'constituency-area', # specific to DA party
 )
+
 
 class SAHomeView(HomeView):
 
@@ -305,7 +306,7 @@ def key_position_sort_last_name(position):
         not(is_parliamentary and is_member),
         )
 
-class SAOrganisationDetailView(OrganisationDetailView):
+class SAOrganisationDetailView(OrganisationDetailView, CommentArchiveMixin):
 
     def get_context_data(self, **kwargs):
         context = super(SAOrganisationDetailView, self).get_context_data(**kwargs)
@@ -328,6 +329,9 @@ class SAOrganisationDetailView(OrganisationDetailView):
             context['positions'] = paginator.page(1)
         except EmptyPage:
             context['positions'] = paginator.page(paginator.num_pages)
+
+        if settings.FACEBOOK_APP_ID:
+            context['archive_link'] = self.check_for_archive_link('/organisation/' + self.object.slug + '/')
 
         return context
 
