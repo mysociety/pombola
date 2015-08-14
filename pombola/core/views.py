@@ -1,7 +1,9 @@
 import time
 import calendar
 import datetime
+import os
 import random
+import json
 from urlparse import urlsplit, urlunsplit
 
 from django.core.urlresolvers import reverse
@@ -77,6 +79,35 @@ class SkipHidden(object):
         if self.request.user.is_superuser:
             return qs
         return qs.filter(hidden=False)
+
+
+class CommentArchiveMixin(object):
+    """This checks whether the current page has a matching Disqus
+       comment thread in the local /data/disqus.json file, which is a frozen
+       copy of the output of an non-admin call to the Disqus API at
+       https://disqus.com/api/3.0/forums/listPosts.json?forum=<DISQUS_SHORTNAME>&order=desc&related=thread&limit=100"""
+
+    def check_for_archive_link(self, page_slug):
+        if settings.COUNTRY_APP == None:
+            return
+
+        try:
+            archive_file = os.path.abspath( os.path.join(
+                                                settings.MEDIA_ROOT,
+                                                '../pombola/pombola',
+                                                settings.COUNTRY_APP,
+                                                'data/disqus.json'
+                                            ) )
+            with open(archive_file) as f:
+                archives = json.load(f)
+        except IOError:
+            return
+        for archive in archives['response']:
+            disqus_thread_link = archive['thread']['link']
+            groups = disqus_thread_link.split('?')[0].split('/')
+            disqus_page_slug = '/' + '/'.join(groups[3:])
+            if page_slug == disqus_page_slug:
+                return disqus_thread_link
 
 
 class SubSlugRedirectMixin(SlugRedirectMixin):

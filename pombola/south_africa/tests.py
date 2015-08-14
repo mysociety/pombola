@@ -11,6 +11,7 @@ from mock import patch
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
 from django.test.client import Client
+from django.test.utils import override_settings
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django_date_extensions.fields import ApproximateDate
@@ -27,6 +28,7 @@ from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.core.views import PersonSpeakerMappingsMixin
+from pombola.info.models import InfoPage
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
@@ -1636,3 +1638,42 @@ class SAMembersInterestsBrowserTest(TestCase):
             reverse('sa-interests-source')+'?release=all&category=category-a&match=contains&source=Source'
         ).context
         self.assertEqual(len(context['data']), 2)
+
+
+@attr(country='south_africa')
+class SACommentsArchiveTest(TransactionWebTest):
+    LOCAL_MEDIA_ROOT = os.path.normpath(
+        os.path.join(settings.MEDIA_ROOT, "../../media_root/")
+    )
+    def setUp(self):
+        blog_page1 = InfoPage.objects.create(
+            title='1',
+            slug='no-comments',
+            markdown_content="blah",
+            kind=InfoPage.KIND_BLOG
+        )
+
+        blog_page2 = InfoPage.objects.create(
+            title='2',
+            slug='infographic-decline-sa-tourism-2015',
+            markdown_content="blah",
+            kind=InfoPage.KIND_BLOG)
+
+    @override_settings(FACEBOOK_APP_ID='test')
+    @override_settings(MEDIA_ROOT=LOCAL_MEDIA_ROOT)
+    def test_matching_page(self):
+        slug = '/blog/infographic-decline-sa-tourism-2015'
+        context = self.app.get(slug).context
+        self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + slug)
+
+    @override_settings(FACEBOOK_APP_ID='test')
+    @override_settings(MEDIA_ROOT=LOCAL_MEDIA_ROOT)
+    def test_non_matching_page(self):
+        context = self.app.get('/blog/no-comments').context
+        self.assertEqual(context['archive_link'], None)
+
+    @override_settings(FACEBOOK_APP_ID=None)
+    def test_no_fb_app_id_no_archive_link(self):
+        slug = '/blog/infographic-decline-sa-tourism-2015'
+        context = self.app.get(slug).context
+        self.assertFalse('archive_link' in context)
