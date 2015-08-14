@@ -607,6 +607,16 @@ body.home {
 .home__section {
     padding: 1.25em 0.75em; // roughly 20px and 10px
 
+    @media (min-width: 640px) and (min-height: 700px) {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+
+    @media (min-width: 640px) and (min-height: 900px) {
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+    }
+
     a {
         text-decoration: none;
 
@@ -632,8 +642,46 @@ body.home {
     }
 }
 
+.home__news__row {
+    @media (min-width: 640px) {
+        overflow: auto; // quick clearfix
+    }
+}
+
 .home__news__articles {
     margin-bottom: 1em;
+
+    @media (min-width: 640px) {
+        margin-bottom: 0;
+        float: left;
+        width: 48%;
+    }
+
+    @media (min-width: 850px) {
+        width: 64%;
+
+        .home__news__article {
+            float: left;
+            width: 47%;
+        }
+
+        .home__news__article + .home__news__article {
+            margin-top: 0;
+            float: right;
+        }
+    }
+}
+
+
+.home__news__mp {
+    @media (min-width: 640px) {
+        float: right;
+        width: 47%;
+    }
+
+    @media (min-width: 850px) {
+        width: 30%;
+    }
 }
 
 .home__news__article {
@@ -661,6 +709,7 @@ body.home {
 .home__actions {
     background-color: $colour_green;
     color: #fff;
+    @include clearfix();
 
     a {
         color: inherit;
@@ -679,10 +728,54 @@ body.home {
     }
 }
 
+.home__actions__primary,
 .home__actions__secondary {
+    max-width: 30em;
+
+    @media (min-width: 850px) {
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+        max-width: none;
+    }
+
+    & > p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.home__actions__primary {
+    margin-bottom: 1.5em;
+
+    @media (min-width: 850px) {
+        margin-bottom: 0;
+        padding-right: 10px;
+    }
+
+    @media (min-width: 1000px) {
+        width: 55%;
+        padding-right: 30px;
+    }
+}
+
+.home__actions__secondary {
+    @media (min-width: 850px) {
+        padding-left: 10px;
+    }
+
+    @media (min-width: 1000px) {
+        width: 45%;
+        padding-left: 30px;
+    }
+
     .inline-search-box {
         .button {
             background-color: mix(#fff, $colour_green, 40%);
+
+            &:hover,
+            &:focus {
+                background-color: darken(mix(#fff, $colour_green, 40%), 10%);
+            }
         }
     }
 }
@@ -700,10 +793,17 @@ body.home {
     line-height: 0; // same hack
     margin: 0 (-16px * 0.75); // counteract parent padding
     padding: 0 (16px * 0.75); // reinstate padding, but inside the scrolling area
+
+    @media (min-width: 1000px) {
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .home__infographics__article {
     display: inline-block;
+    box-sizing: border-box;
     overflow: hidden;
     border: 1px solid mix($colour_main_background, #000, 90%);
     border-bottom: 0;
@@ -711,35 +811,87 @@ body.home {
     line-height: normal;
     width: 220px;
 
+    & + & {
+        margin-left: 0.75em;
+    }
+
+    @media (min-width: 640px) {
+        width: 225px;
+
+        & + & {
+            margin-left: 20px;
+        }
+    }
+
     img {
         width: 100%;
         height: auto;
     }
 
-    & + & {
-        margin-left: 0.75em;
-    }
-
     &:nth-child(4n + 1) {
         height: 220px;
+
+        &:hover {
+            height: 225px;
+        }
     }
 
     &:nth-child(4n + 2) {
         height: 240px;
+
+        &:hover {
+            height: 245px;
+            margin-top: -5px;
+        }
     }
 
     &:nth-child(4n + 3) {
         height: 200px;
+
+        &:hover {
+            height: 205px;
+        }
     }
 
     &:nth-child(4n + 4) {
         height: 220px;
+
+        &:hover {
+            height: 225px;
+        }
     }
+}
+
+.home__topics__list {
+    text-align: center;
+    margin: 0 -8px;
+
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -ms-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
 }
 
 .home__topics__topic {
     display: block;
-    margin-bottom: 0.5em;
+    text-transform: none;
+    margin: 8px;
+    width: 100%;
+
+    @media (min-width: 400px) {
+        display: inline-block; // in case flexbox isn't supported, revert to inline buttons
+        width: auto;
+        -ms-flex: 1 0 auto;
+        -webkit-flex: 1 0 auto;
+        flex: 1 0 auto;
+    }
 }
 
 .home__section-header {

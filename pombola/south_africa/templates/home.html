@@ -19,37 +19,39 @@
 
 <div class="home__section home__news">
     <div class="wrapper">
-        <div class="home__news__articles">
-            <h3 class="home__section-header">
-                Latest news
-                <a class="readmore" href="{% url 'info_blog_category' slug='week-parliament,impressions' %}">Show more news</a>
-            </h3>
-          {% for article in news_articles %}
-            <div class="home__news__article">
-                <h2>
-                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                </h2>
-                <p class="meta">{{ article.publication_date|date }}</p>
-                <p class="summary">
-                    {{ article.content_as_plain_text|truncatewords:32 }}
-                    <a class="readmore" href="{{ article.get_absolute_url }}">More</a>
-                </p>
+        <div class="home__news__row">
+            <div class="home__news__articles">
+                <h3 class="home__section-header">
+                    Latest news
+                    <a class="readmore" href="{% url 'info_blog_category' slug='week-parliament,impressions' %}">Show more news</a>
+                </h3>
+              {% for article in news_articles %}
+                <div class="home__news__article">
+                    <h2>
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                    </h2>
+                    <p class="meta">{{ article.publication_date|date }}</p>
+                    <p class="summary">
+                        {{ article.content_as_plain_text|truncatewords:32 }}
+                        <a class="readmore" href="{{ article.get_absolute_url }}">More</a>
+                    </p>
+                </div>
+              {% endfor %}
             </div>
-          {% endfor %}
-        </div>
-        <div class="home__news__mp">
-            <h3 class="home__section-header">
-                MP corner
-            </h3>
-            <div class="home__news__article">
-                <h2>
-                    <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
-                </h2>
-                <p class="meta">{{ mp_corner.publication_date|date }}</p>
-                <p class="summary">
-                    {{ mp_corner.content_as_plain_text|truncatewords:32 }}
-                    <a class="readmore" href="{{ mp_corner.get_absolute_url }}">More</a>
-                </p>
+            <div class="home__news__mp">
+                <h3 class="home__section-header">
+                    MP corner
+                </h3>
+                <div class="home__news__article">
+                    <h2>
+                        <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
+                    </h2>
+                    <p class="meta">{{ mp_corner.publication_date|date }}</p>
+                    <p class="summary">
+                        {{ mp_corner.content_as_plain_text|truncatewords:32 }}
+                        <a class="readmore" href="{{ mp_corner.get_absolute_url }}">More</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -109,9 +111,11 @@
         <h3 class="home__section-header">
             Hot topics
         </h3>
-      {% for name in hot_topics %}
-        <a href="#" class="button home__topics__topic">{{ name }}</a>
-      {% endfor %}
+        <div class="home__topics__list">
+          {% for name in hot_topics %}
+            <a href="#" class="button home__topics__topic">{{ name }}</a>
+          {% endfor %}
+        </div>
     </div>
 </div>
 
