@@ -77,35 +77,46 @@
   width: auto;
   max-width: 640px;
   margin-bottom: 1em;
+  @include clearfix();
+
   label {
     display: none;
   }
-  input[type=text] {
+
+  input {
+    box-sizing: border-box;
+    float: left;
+    width: 66%;
     font-size: 1em;
     height: 2.75em;
     line-height: 2.75em;
     padding: 0 0.666em;
     border: 1px solid $colour_muted;
-    width: 66%;
+
     @media only all and (min-width: 640px) {
       width: 75%;
     }
-    display: inline-block;
   }
 
   .button {
-    display: inline-block;
-    background-color: $colour_primary;
+    float: left;
+    width: 33%;
     font-size: 0.875em;
-    text-align: center;
-    padding: 1em 1.33em;
-    font-weight: normal;
-    font-weight: normal;
+    height: auto;
+    line-height: normal;
+    padding: 1em;
     border: none;
+
+    text-align: center;
     color: #fff;
+    background-color: $colour_primary;
     cursor: pointer;
     -webkit-appearance: none;
     text-decoration: none;
+
+    @media only all and (min-width: 640px) {
+      width: 25%;
+    }
   }
 
 }
