@@ -1,30 +1,8 @@
-
 $border_radius: 5px;
+$font_family_lato: Lato, 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
 
 @font-face {
-    font-family: 'latobold';
-    src: url('/static/fonts/lato-bold-webfont.eot');
-    src: url('/static/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/lato-bold-webfont.woff') format('woff'),
-         url('/static/fonts/lato-bold-webfont.ttf') format('truetype'),
-         url('/static/fonts/lato-bold-webfont.svg#latobold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'latoitalic';
-    src: url('/static/fonts/lato-italic-webfont.eot');
-    src: url('/static/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/lato-italic-webfont.woff') format('woff'),
-         url('/static/fonts/lato-italic-webfont.ttf') format('truetype'),
-         url('/static/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'latoregular';
+    font-family: 'Lato';
     src: url('/static/fonts/lato-regular-webfont.eot');
     src: url('/static/fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
          url('/static/fonts/lato-regular-webfont.woff') format('woff'),
@@ -34,34 +12,39 @@ $border_radius: 5px;
     font-style: normal;
 }
 
-@mixin lato-regular {
-    font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-    font-weight: normal !important;
+@font-face {
+    font-family: 'Lato';
+    src: url('/static/fonts/lato-bold-webfont.eot');
+    src: url('/static/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-bold-webfont.woff') format('woff'),
+         url('/static/fonts/lato-bold-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-bold-webfont.svg#latobold') format('svg');
+    font-weight: bold;
+    font-style: normal;
 }
-@mixin lato-bold {
-    font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-    font-weight: normal !important;
-}
-@mixin lato-italic {
-    font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-    font-weight: normal !important;
+
+@font-face {
+    font-family: 'Lato';
+    src: url('/static/fonts/lato-italic-webfont.eot');
+    src: url('/static/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-italic-webfont.woff') format('woff'),
+         url('/static/fonts/lato-italic-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
 }
 
 @mixin clearfix {
     &:before,
     &:after {
-        content: " "; /* 1 */
-        display: table; /* 2 */
+        content: " ";
+        display: table;
     }
 
     &:after {
         clear: both;
     }
 
-    /**
-     * For IE 6/7 only
-     * Include this rule to trigger hasLayout and contain floats.
-     */
     & {
         *zoom: 1;
     }
@@ -115,7 +98,8 @@ a {
     text-align: center;
     padding: 1em 1.33em;
     font-weight: normal;
-    @include lato-bold;
+    font-family: $font_family_lato;
+    font-weight: bold;
     border: none;
     text-transform: uppercase;
     color: #fff;
@@ -149,21 +133,21 @@ Base typography
 */
 
 h1 {
-    @include lato-bold;
+    font-family: $font_family_lato;
     font-size: 1.875em; /* 30px */
     color: $colour_black;
     line-height: 1.25em;
 }
 
 h2 {
-    @include lato-bold;
+    font-family: $font_family_lato;
     font-size: 1.5em; /* 24px */
     color: $colour_black;
     line-height: 1.25em;
 }
 
 h3 {
-    @include lato-bold;
+    font-family: $font_family_lato;
     font-size: 0.875em; /* 14px */
     color: $colour_black;
     text-transform: uppercase;
@@ -221,7 +205,7 @@ th {
     background: inherit;
     font-weight: normal;
     text-transform: uppercase;
-    @include lato-bold;
+    font-family: $font_family_lato;
     font-size: 0.875em;
 }
 
@@ -283,8 +267,9 @@ small {
     padding: 10px;
     .title-space {
         p {
+            font-family: $font_family_lato;
+            font-weight: bold;
             font-style: normal;
-            @include lato-bold;
             color: $colour_green;
         }
     }
@@ -329,7 +314,8 @@ small {
     background: $colour_main_background;
     padding: 0.66em;
     @include border_radius(3px);
-    @include lato-bold;
+    font-family: $font_family_lato;
+    font-weight: bold;
     text-transform: uppercase;
     color: $colour_black;
     text-decoration: none;
@@ -400,7 +386,7 @@ menu#mobile-top-tools {
        display: inline-block;
        height: 100%;
        text-decoration: none;
-       @include lato-regular;
+       font-family: $font_family_lato;
        font-size: 0.875em;
        line-height: 26px;
        &:hover,
@@ -436,7 +422,7 @@ menu#mobile-top-tools,
             }
             a {
                 background: $colour_primary;
-                @include lato-regular;
+                font-family: $font_family_lato;
                 &:hover,
                 &:focus {
                     background: mix($colour_primary, #000, 80%);
@@ -699,7 +685,7 @@ FOOTER
 
 
     h4 {
-        @include lato-bold;
+        font-family: $font_family_lato;
         text-transform: uppercase;
         font-size: 12px;
         color: $colour_middling_grey;
@@ -925,7 +911,8 @@ FOOTER
     .vcard li {
         .label {
             display: block;
-            @include lato-bold;
+            font-family: $font_family_lato;
+            font-weight: bold;
             width: 100%;
             color: $colour_blackish;
             letter-spacing: 0.05em;
@@ -1022,7 +1009,8 @@ FOOTER
         margin-right:5px;
 
         .contact-kind {
-            @include lato-bold;
+            font-family: $font_family_lato;
+            font-weight: bold;
             color: $colour_blackish;
             letter-spacing: 0.05em;
             text-transform:uppercase;
@@ -1080,7 +1068,8 @@ FOOTER
         text-align: center;
         margin-bottom: 0.5em;
         text-decoration: none;
-        @include lato-bold;
+        font-family: $font_family_lato;
+        font-weight: bold;
     }
     a:hover,
     a:focus {
@@ -1093,7 +1082,9 @@ FOOTER
 
 /* PMO pagination */
 .pagination {
-    @include lato-bold;
+    font-family: $font_family_lato;
+    font-weight: bold;
+
     .current {
         background: transparent;
         border: 1px solid #d2d2ce;
@@ -1178,7 +1169,8 @@ ul.pager {
 
 /* Organisation pages */
 .kind-of-subtitle {
-    @include lato-bold;
+    font-family: $font_family_lato;
+    font-weight: bold;
     color: $colour_green;
     margin-top: -0.5em;
 }
@@ -1788,7 +1780,7 @@ ul.pager {
             margin-left: 120px;
         }
         p {
-            @include lato-regular;
+            font-family: $font_family_lato;
             font-size: 1.125em;
         }
         a {
@@ -1851,7 +1843,7 @@ ul.pager {
 
 .countdown_label {
     display: block;
-    @include lato-regular;
+    font-family: $font_family_lato;
     font-size: 0.875em;
 }
 
@@ -1936,7 +1928,7 @@ ul.pager {
 .election-page-subtitle {
     color: $colour_green;
     font-size: 1.5em;
-    @include lato-regular;
+    font-family: $font_family_lato;
     a {
         color: $colour_green;
         text-decoration: none;
@@ -2060,14 +2052,14 @@ ul.pager {
         text-transform: none;
         font-size: 1.875em;
         line-height: 1.2em;
-        @include lato-bold;
+        font-family: $font_family_lato;
 
         @media only all and (min-width: 640px), print {
             margin-right: 5em;
         }
     }
     .for-province {
-        @include lato-regular;
+        font-family: $font_family_lato;
         color: #777;
         font-size: 0.7em;
     }
