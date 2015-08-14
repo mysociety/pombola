@@ -17,12 +17,12 @@
 
 {% block page_wrapper %}
 
-<div class="home__news">
+<div class="home__section home__news">
     <div class="wrapper">
         <div class="home__news__articles">
             <h3 class="home__section-header">
                 Latest news
-                <a href="{% url 'info_blog_category' slug='week-parliament,impressions' %}">Show more news &#187;</a>
+                <a class="readmore" href="{% url 'info_blog_category' slug='week-parliament,impressions' %}">Show more news</a>
             </h3>
           {% for article in news_articles %}
             <div class="home__news__article">
@@ -30,10 +30,10 @@
                     <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                 </h2>
                 <p class="meta">{{ article.publication_date|date }}</p>
-                <div class="summary">
+                <p class="summary">
                     {{ article.content_as_plain_text|truncatewords:32 }}
-                    <a class="readmore" href="{{ article.get_absolute_url }}">More &#187;</a>
-                </div>
+                    <a class="readmore" href="{{ article.get_absolute_url }}">More</a>
+                </p>
             </div>
           {% endfor %}
         </div>
@@ -46,16 +46,16 @@
                     <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
                 </h2>
                 <p class="meta">{{ mp_corner.publication_date|date }}</p>
-                <div class="summary">
+                <p class="summary">
                     {{ mp_corner.content_as_plain_text|truncatewords:32 }}
-                    <a class="readmore" href="{{ mp_corner.get_absolute_url }}">More &#187;</a>
-                </div>
+                    <a class="readmore" href="{{ mp_corner.get_absolute_url }}">More</a>
+                </p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="home__actions">
+<div class="home__section home__actions">
     <div class="wrapper">
         <div class="home__actions__primary">
             <form action="{% url "core_geocoder_search" %}">
@@ -63,13 +63,13 @@
                     <small>Do you have a problem?</small>
                     <label for="geocoder-search">Contact your representative</label>
                 </h2>
-                <p class="input-group">
+                <p class="inline-search-box">
                     <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your location">
                     <button type="submit" class="button">Search</button>
                 </p>
             </form>
             <p>
-                <a href="#">See how they can help &#187;</a>
+                <a class="readmore" href="#">See how they can help</a>
             </p>
         </div>
         <div class="home__actions__secondary">
@@ -78,7 +78,7 @@
                     <label for="email">Stay up to date</label>
                     <small>Get convenient email updates from People’s Assembly</small>
                 </h2>
-                <p class="input-group">
+                <p class="inline-search-box">
                     <input type="email" name="Email" id="email" placeholder="Your email">
                     <button type="submit" class="button">Sign up</button>
                 </p>
@@ -88,21 +88,23 @@
     </div>
 </div>
 
-<div class="home__infographics">
+<div class="home__section home__infographics">
     <div class="wrapper">
         <h3 class="home__section-header home__section-header--full-width">
             Latest infographics
-            <a href="{% url "info_page" slug="infographics" %}">Infographics</a>
+            <a class="readmore" href="{% url "info_page" slug="infographics" %}">Show all</a>
         </h3>
-      {% for url in infographics %}
-        <a href="{{ url }}" class="home__infographics__article">
-            <img src="{{ url }}">
-        </a>
-      {% endfor %}
+        <div class="home__infographics__articles">
+          {% for url in infographics %}
+            <a href="{{ url }}" class="home__infographics__article">
+                <img src="{{ url }}">
+            </a>
+          {% endfor %}
+        </div>
     </div>
 </div>
 
-<div class="home__topics">
+<div class="home__section home__topics">
     <div class="wrapper">
         <h3 class="home__section-header">
             Hot topics

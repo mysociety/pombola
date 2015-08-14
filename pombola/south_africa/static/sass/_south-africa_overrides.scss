@@ -1,4 +1,4 @@
-$border_radius: 5px;
+$border_radius: 3px;
 $font_family_lato: Lato, 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
 
 @font-face {
@@ -32,22 +32,6 @@ $font_family_lato: Lato, 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
          url('/static/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
     font-weight: normal;
     font-style: italic;
-}
-
-@mixin clearfix {
-    &:before,
-    &:after {
-        content: " ";
-        display: table;
-    }
-
-    &:after {
-        clear: both;
-    }
-
-    & {
-        *zoom: 1;
-    }
 }
 
 @mixin unstyled-list {
@@ -107,12 +91,15 @@ a {
     letter-spacing: 0.05em;
     -webkit-appearance: none;
     text-decoration: none;
+    border-radius: $border_radius;
+
     &:hover,
     &:focus {
         background: mix($colour_primary, #000, 80%);
         color: #fff;
         text-decoration: none;
     }
+
     &.secondary-button {
         background-color: #f1f0ec;
         color: $colour_black;
@@ -123,6 +110,16 @@ a {
             text-decoration: none;
 
         }
+    }
+}
+
+.inline-search-box {
+    input {
+        border-radius: $border_radius 0 0 $border_radius;
+    }
+
+    .button {
+        border-radius: 0 $border_radius $border_radius 0;
     }
 }
 
@@ -601,8 +598,64 @@ HOME PAGE
 
 */
 
-.home__news {
+body.home {
+    #page {
+        padding: 0;
+    }
+}
 
+.home__section {
+    padding: 1.25em 0.75em; // roughly 20px and 10px
+
+    a {
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+
+        &.button:hover,
+        &.button:focus {
+            text-decoration: none;
+        }
+    }
+
+    .readmore {
+        white-space: nowrap; // stop arrow breaking onto new line if limited space
+
+        &:after {
+            display: inline-block; // escape from parent's underline
+            content: "\2192"; // &rarr;
+            margin-left: 0.3em;
+        }
+    }
+}
+
+.home__news__articles {
+    margin-bottom: 1em;
+}
+
+.home__news__article {
+    h2 {
+        font-size: 1.2em; // down from default 1.5em
+
+        a {
+            display: block; // fill entire parent
+        }
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    p.meta {
+        margin-bottom: 0.75em;
+    }
+}
+
+.home__news__article + .home__news__article {
+    margin-top: 1em;
 }
 
 .home__actions {
@@ -615,15 +668,93 @@ HOME PAGE
 
     h2 {
         color: inherit;
+
+        small {
+            display: block; // break onto new line
+            color: mix(#fff, $colour_green, 60%);
+            font-size: (1em / 1.5); // get back to 1em, from 1.5em parent
+            line-height: 1.4em; // 1.4 of this element's ems
+            font-weight: normal;
+        }
+    }
+}
+
+.home__actions__secondary {
+    .inline-search-box {
+        .button {
+            background-color: mix(#fff, $colour_green, 40%);
+        }
     }
 }
 
 .home__infographics {
     background-color: $colour_main_background;
+    border-bottom: 1px solid mix($colour_main_background, #000, 90%);
+    padding-bottom: 0;
 }
 
-.home__topics {
+.home__infographics__articles {
+    white-space: nowrap;
+    overflow: auto;
+    font-size: 0; // hack to zero out spacing around inline child elements
+    line-height: 0; // same hack
+    margin: 0 (-16px * 0.75); // counteract parent padding
+    padding: 0 (16px * 0.75); // reinstate padding, but inside the scrolling area
+}
 
+.home__infographics__article {
+    display: inline-block;
+    overflow: hidden;
+    border: 1px solid mix($colour_main_background, #000, 90%);
+    border-bottom: 0;
+    font-size: 16px;
+    line-height: normal;
+    width: 220px;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    & + & {
+        margin-left: 0.75em;
+    }
+
+    &:nth-child(4n + 1) {
+        height: 220px;
+    }
+
+    &:nth-child(4n + 2) {
+        height: 240px;
+    }
+
+    &:nth-child(4n + 3) {
+        height: 200px;
+    }
+
+    &:nth-child(4n + 4) {
+        height: 220px;
+    }
+}
+
+.home__topics__topic {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.home__section-header {
+    .readmore {
+        text-transform: none;
+        margin-left: 1em;
+        font-weight: normal;
+    }
+}
+
+.home__section-header--full-width {
+    .readmore {
+        float: right;
+        margin-left: 0;
+    }
 }
 
 
