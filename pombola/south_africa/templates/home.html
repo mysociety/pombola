@@ -112,9 +112,12 @@
             Hot topics
         </h3>
         <div class="home__topics__list">
-          {% for name in hot_topics %}
-            <a href="#" class="button home__topics__topic">{{ name }}</a>
-          {% endfor %}
+            <span class="home__topics__topic">Find your councillor</span>
+            <a href="{% url 'person_list' %}" class="home__topics__topic">MP profiles</a>
+            <a href="{% url 'info_blog_category' slug='mp-corner' %}" class="home__topics__topic">MP corner</a>
+            <span class="home__topics__topic">MP attendance</span>
+            <a href="{% url 'sa-interests-index' %}" class="home__topics__topic">MP assets</a>
+            <a href="{% url 'info_blog_category' slug='advocacy-campaigns' %}" class="home__topics__topic">Campaigns</a>
         </div>
     </div>
 </div>

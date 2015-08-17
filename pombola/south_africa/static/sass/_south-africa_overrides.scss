@@ -881,9 +881,21 @@ body.home {
 
 .home__topics__topic {
     display: block;
-    text-transform: none;
     margin: 8px;
     width: 100%;
+
+    // The core .button styling but without colours
+    font-size: 0.875em;
+    padding: 1em 1.33em;
+    font-family: $font_family_lato;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    border-radius: $border_radius;
+
+    // default "disabled" styling
+    background-color: $colour_cream;
+    color: $colour_grey;
+    cursor: default;
 
     @media (min-width: 400px) {
         display: inline-block; // in case flexbox isn't supported, revert to inline buttons
@@ -891,6 +903,22 @@ body.home {
         -ms-flex: 1 0 auto;
         -webkit-flex: 1 0 auto;
         flex: 1 0 auto;
+    }
+}
+
+a.home__topics__topic {
+    // More button-like styling, since we know this is a link
+    background-color: $colour_primary;
+    color: #fff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        background: mix($colour_primary, #000, 80%);
+        color: #fff;
+        text-decoration: none;
     }
 }
 

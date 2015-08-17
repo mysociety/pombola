@@ -69,20 +69,12 @@ class SAHomeView(HomeView):
         c = BlogCategory.objects.get(slug='mp-corner')
         context['mp_corner'] = articles.filter(categories=c)[1]
 
-        # TODO: Put real content into these lists
+        # TODO: Put real content into this list
         context['infographics'] = [
             'http://www.pa.org.za/media_root/file_archive/School_safety_violence_4.jpeg',
             'http://www.pa.org.za/media_root/file_archive/NDP__YD.jpeg',
             'http://www.pa.org.za/media_root/file_archive/Employment_Equity_2.jpeg',
             'http://www.pa.org.za/media_root/file_archive/constituency_info.jpeg'
-        ]
-        context['hot_topics'] = [
-            'Find your councillor',
-            'MP profiles',
-            'MP corner',
-            'MP attendance',
-            'MP assets',
-            'Campaigns'
         ]
 
         return context
