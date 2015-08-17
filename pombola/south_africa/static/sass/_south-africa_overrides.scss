@@ -378,7 +378,7 @@ menu#mobile-top-tools {
     float: left;
     text-align: right;
     a {
-       background: $colour_primary;
+       background: $colour_green;
        padding: 0.5em;
        display: inline-block;
        height: 100%;
@@ -388,7 +388,7 @@ menu#mobile-top-tools {
        line-height: 26px;
        &:hover,
        &:focus {
-           background: mix($colour_primary, #000, 80%);
+           background: mix($colour_green, #000, 80%);
        }
     }
     ul {
@@ -405,7 +405,7 @@ menu#mobile-top-tools {
 
 menu#mobile-top-tools,
 #main-menu {
-    background: $colour_primary;
+    background: $colour_green;
 }
 #main-menu nav{
     text-align: left;
@@ -418,11 +418,11 @@ menu#mobile-top-tools,
                 float: right;
             }
             a {
-                background: $colour_primary;
+                background: $colour_green;
                 font-family: $font_family_lato;
                 &:hover,
                 &:focus {
-                    background: mix($colour_primary, #000, 80%);
+                    background: mix($colour_green, #000, 80%);
                 }
             }
 
@@ -434,14 +434,14 @@ menu#mobile-top-tools,
                 border:none;
                 padding:8px 10px;
                 margin:0;
-                background: mix($colour_primary, #000, 80%);
+                background: mix($colour_green, #000, 80%);
             }
             ul{
                 a,
                 a:hover
                 a:focus
                 {
-                    background: mix($colour_primary, #000, 80%);
+                    background: mix($colour_green, #000, 80%);
                 }
 
             }
@@ -451,11 +451,11 @@ menu#mobile-top-tools,
                     border: none;
                     li {
                         a {
-                            background: mix($colour_primary, #000, 80%);
+                            background: mix($colour_green, #000, 80%);
                             color: #fff;
                             &:hover,
                             &:focus {
-                                background: $colour_primary;
+                                background: $colour_green;
                                 color: #fff;
                             }
                         }
@@ -465,13 +465,13 @@ menu#mobile-top-tools,
         }
         ul li ul {
             a {
-                background: mix($colour_primary, #000, 50%);
+                background: mix($colour_green, #000, 50%);
                 text-indent: 1em;
                 font-size: 11px !important;
                 padding: 5px 10px !important;
                 &:hover,
                 &:focus {
-                    background: $colour_primary;
+                    background: $colour_green;
                     color: #fff;
                 }
             }
@@ -527,7 +527,6 @@ menu#mobile-top-tools,
 }
 
 #header-search {
-    border: 1px solid mix($colour_primary, #000, 75%);
     background: #fff;
     margin-right: 0;
     input,button {
