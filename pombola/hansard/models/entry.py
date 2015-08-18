@@ -7,6 +7,8 @@ from pombola.core.models import Person
 from pombola.hansard.models import Sitting, Alias
 from pombola.hansard.models.base import HansardModelBase
 
+from pombola.hansard.constants import NAME_SUBSTRING_MATCH, NAME_SET_INTERSECTION_MATCH
+
 
 class EntryQuerySet(models.query.QuerySet):
     def monthly_appearance_counts(self):
@@ -85,7 +87,7 @@ class Entry(HansardModelBase):
         verbose_name_plural = 'entries'
 
     @classmethod
-    def assign_speakers(cls):
+    def assign_speakers(cls, name_matching_algorithm=NAME_SET_INTERSECTION_MATCH):
         """Go through all entries and assign speakers"""
 
         entries = cls.objects.all().unassigned_speeches()
@@ -100,7 +102,10 @@ class Entry(HansardModelBase):
             if cache_key in cache:
                 speakers = cache[cache_key]
             else:
-                speakers = entry.possible_matching_speakers(update_aliases=True)
+                speakers = entry.possible_matching_speakers(
+                    update_aliases=True,
+                    name_matching_algorithm=name_matching_algorithm,
+                    )
 
             if speakers and len(speakers) == 1:
                 speaker = speakers[0]
@@ -129,7 +134,7 @@ class Entry(HansardModelBase):
         return len(set_one & set_two)
 
 
-    def possible_matching_speakers(self, update_aliases=False):
+    def possible_matching_speakers(self, update_aliases=False, name_matching_algorithm=NAME_SET_INTERSECTION_MATCH):
         """
         Return array of person objects that might be the speaker.
 
@@ -160,25 +165,28 @@ class Entry(HansardModelBase):
         except Alias.DoesNotExist:
             alias = None
 
-        # drop the prefix
-        stripped_name = re.sub( r'^\w+\.\s', '', name )
-
         person_search = (
             Person
             .objects
             .all()
-            .is_politician( when=self.sitting.start_date )
-            #.filter(legal_name__icontains=stripped_name)
-            .distinct()
-        )
+            .is_politician(when=self.sitting.start_date)
+            )
 
+        if name_matching_algorithm == NAME_SUBSTRING_MATCH:
+            # drop the prefix
+            stripped_name = re.sub(r'^\w+\.\s', '', name)
+            person_search = person_search.filter(legal_name__icontains=stripped_name)
+
+        person_search = person_search.distinct()
 
         results = person_search.all()[0:]
-        #removed filter and used this to match based on common name parts
-        results = sorted([ i for i in results  if self.alias_match_score('%s %s'%(i.title, i.legal_name), name) > 1 ],
-                          key = lambda x: self.alias_match_score('%s %s'%(x.title, x.legal_name), name),
-                          reverse=True
-                          )
+
+        if name_matching_algorithm == NAME_SET_INTERSECTION_MATCH:
+            results = sorted(
+                [i for i in results if self.alias_match_score('%s %s'%(i.title, i.legal_name), name) > 1],
+                key=lambda x: self.alias_match_score('%s %s'%(x.title, x.legal_name), name),
+                reverse=True,
+                )
 
         found_one_result = len(results) == 1
 
