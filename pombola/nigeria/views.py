@@ -140,23 +140,8 @@ class NGSearchView(SearchBaseView):
         # So now we know that the query is a PUN:
         query = tidy_up_pun(self.request.GET.get('q'))
         context['raw_query'] = query
-
         context['query'] = query
-        context['area'] = None
-        context['results'] = []
-
-        # Find mapit area that matches the PUN. If not found trim off
-        # components from the end until match or no more searches possible.
-        # Need this as we don't have the polling stations and want to be
-        # forgiving in case of input error.
-        while query:
-            try:
-                context['area'] = Area.objects.get(codes__code=query)
-                break
-            except Area.DoesNotExist:
-                # strip off last component
-                query = re.sub(r'[^:]+$', '', query)
-                query = re.sub(r':$', '', query)
+        context['area'] = self.get_area_from_pun(query)
 
         # If area found find places of interest
         if context['area']:
@@ -166,18 +151,32 @@ class NGSearchView(SearchBaseView):
             context['area_pun_code'] = area.codes.filter(type__code="poll_unit")[0].code
             context['area_pun_name'] = area.names.filter(type__code="poll_unit")[0].name
 
-            # work out the polygons to match to, may need to go up tree to parents.
-            area_for_polygons = area
-            while area_for_polygons and not area_for_polygons.polygons.exists():
-                area_for_polygons = area_for_polygons.parent_area
+            # Get the place object for the containing state
+            context['state'] = self.get_state(
+                context['area_pun_code'],
+                query[0:2],
+                area)
 
+            # work out what level of the PUN we've matched
+            context['area_pun_type'] = self.get_pun_type(context['area_pun_code'])
+
+            # attempt to populate governor info
+            context['governor'] = self.find_governor(context['state'])
+
+            # work out the polygons to match to, may need to go up tree to parents.
+            area_for_polygons = self.find_containing_area(area)
             if area_for_polygons:
                 area_polygons = area_for_polygons.polygons.collect()
 
-                # get the overlapping senatorial districts
-                context['senatorial_districts']  = self.find_matching_places("SEN", area_polygons)
-                context['federal_constutencies'] = self.find_matching_places("FED", area_polygons)
+                context['federal_constituencies'] = self.get_district_data(
+                    self.find_matching_places("FED", area_polygons),
+                    "representative"
+                )
 
+                context['senatorial_districts']  = self.get_district_data(
+                    self.find_matching_places("SEN", area_polygons),
+                    "senator"
+                )
         return context
 
     def parse_params(self):
@@ -243,3 +242,71 @@ class NGSearchView(SearchBaseView):
             return Place.objects.get(mapit_area=area)
         except Place.DoesNotExist:
             return None
+
+    def get_area_from_pun(self, pun):
+        """Find MapIt area that matches the PUN.
+
+        If not found trim off components from the end until match
+        or no more searches possible.
+        Need this as we don't have the polling stations and want to be
+        forgiving in case of input error.
+        """
+
+        while pun:
+            try:
+                area = Area.objects.get(codes__code=pun)
+                return area
+            except Area.DoesNotExist:
+                # strip off last component
+                pun = re.sub(r'[^:]+$', '', pun)
+                pun = re.sub(r':$', '', pun)
+
+    def get_state(self, matched_pun, state_code, area):
+        if ":" in matched_pun:
+            # look up state
+            state_area = self.get_area_from_pun(state_code)
+        else:
+            # matched area is the state, convert it to place data
+            state_area = area
+        return self.convert_area_to_place(state_area)
+
+    def find_governor(self, state):
+        if state:
+            governor = self.get_people(state, "governor")
+            if governor:
+                return governor[0][0]
+
+    def find_containing_area(self, area):
+        area_for_polygons = area
+        while area_for_polygons and not area_for_polygons.polygons.exists():
+            area_for_polygons = area_for_polygons.parent_area
+        return area_for_polygons
+
+    def get_pun_type(self, pun):
+        # use the length of the matched PUN to determine whether
+        # we've matched a ward, an lga or a state
+        # ref: http://www.inecnigeria.org/?page_id=20
+        pun_level = pun.count(':')
+        if pun_level == 2:
+            return 'ward'
+        elif pun_level == 1:
+            return 'local government area'
+        else:
+            return 'state'
+
+    def get_district_data(self, districts, role):
+        district_list = []
+        for district in districts:
+            place = {}
+            place['district_name'] = district.name
+            place['district_url'] = district.get_absolute_url
+            people = self.get_people(district, role)
+            if people:
+                place['rep_name'] = people[0][0].name
+                place['rep_url'] = people[0][0].get_absolute_url
+            district_list.append(place)
+        return district_list
+
+    def get_people(self, place, role):
+        return place.related_people(
+            lambda qs: qs.filter(person__position__title__slug=role))

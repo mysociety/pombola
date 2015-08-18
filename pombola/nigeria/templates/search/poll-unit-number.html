@@ -26,13 +26,31 @@
 
 {% block search_results %}
   {% if area %}
-    <p>Best match is "{{ area_pun_name }}" with poll unit number '{{ area_pun_code }}'</p>
+    <p>Best match is the {{ area_pun_type }} "{{ area_pun_name }}" with poll unit number '{{ area_pun_code }}'</p>
+
+    {% if state %}
+      <h3>State</h3>
+      <p>
+        <a href="{{ state.get_absolute_url }}">{{ state.name }}</a>,
+        {% if governor %}
+          current governor <a href="{{ governor.get_absolute_url }}">{{ governor.name }}</a>
+        {% else %}
+          no current governor
+        {% endif %}
+      </p>
+    {% endif %}
 
     <h3>Overlapping Federal Constituencies</h3>
 
     <ul>
-      {% for place in federal_constutencies %}
-        <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
+      {% for place in federal_constituencies %}
+        <li><a href="{{ place.district_url }}">{{ place.district_name }}</a>,
+          {% if place.rep_url %}
+            current representative <a href="{{ place.rep_url}}">{{ place.rep_name }}</a>
+          {% else %}
+            no current representative
+          {% endif %}
+        </li>
       {% empty %}
         <li>No overlapping Federal Constituencies</li>
       {% endfor %}
@@ -42,7 +60,13 @@
 
     <ul>
       {% for place in senatorial_districts %}
-      <li><a href="{{ place.get_absolute_url }}">{{ place.name }}</a></li>
+      <li><a href="{{ place.district_url }}">{{ place.district_name }}</a>,
+        {% if place.rep_url %}
+          current senator <a href="{{ place.rep_url}}">{{ place.rep_name }}</a>
+        {% else %}
+          no current senator
+        {% endif %}
+      </li>
       {% empty %}
         <li>No overlapping Senatorial Districts</li>
       {% endfor %}
