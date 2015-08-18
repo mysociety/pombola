@@ -24,6 +24,10 @@
 {% endblock %}
 
 {% block subcontent %}
+{% comment %}
+   Here we're closing the divs that constrain the site width to
+   allow us to insert a full width section. We reopen them below.
+{% endcomment %}
 </div> <!-- .large-container -->
 </div> <!-- page-wrapper -->
 <div class="about-person-intro-block">
@@ -127,10 +131,10 @@
   </div>
 </div>
 <div class="page-wrapper wrapper">
+  {% with past_positions=person.position_set.all.political.currently_inactive %}
   <div class="large-container">
     <div class="tabs">
       <ul class="tab-links">
-        {% with past_positions=person.position_set.all.political.currently_inactive %}
         {% if past_positions %}
         {% if hansard.count or question.count or committee.count %}
         <li><a href="#appearances" class="active">Appearances</a></li>
@@ -209,7 +213,8 @@
             </ul>
         </div>
       </div>
-      {% endif %}{% endwith %}
+      {% endif %}
+      {% endwith %}
 
       {% if object.interests_register_entries.exists %}
       <div id="membersinterests" class="tab-content">
