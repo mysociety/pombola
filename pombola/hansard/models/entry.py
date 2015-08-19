@@ -3,7 +3,7 @@ import re
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from pombola.core.models import Person
+from pombola.core.models import Person, PopoloPerson
 from pombola.hansard.models import Sitting, Alias
 from pombola.hansard.models.base import HansardModelBase
 
@@ -62,7 +62,7 @@ class Entry(HansardModelBase):
     # link the speech up to a person.
     speaker_name  = models.CharField( max_length=200, blank=True )
     speaker_title = models.CharField( max_length=200, blank=True )
-    speaker       = models.ForeignKey( Person, blank=True, null=True, related_name='hansard_entries' )
+    speaker = models.ForeignKey(PopoloPerson, blank=True, null=True, related_name='hansard_entries')
 
     # What was actually said
     content       = models.TextField()
