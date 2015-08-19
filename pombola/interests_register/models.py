@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 
-from pombola.core.models import Person
+from pombola.core.models import PopoloPerson
 
 
 # TODO
@@ -48,7 +48,7 @@ class Release(CreateSlugOnSaveIfNeededModel):
 
 
 class Entry(models.Model):
-    person   = models.ForeignKey(Person, related_name="interests_register_entries")
+    person = models.ForeignKey(PopoloPerson, related_name='interests_register_entries')
     category = models.ForeignKey(Category, related_name="entries")
     release  = models.ForeignKey(Release, related_name="entries")
 
