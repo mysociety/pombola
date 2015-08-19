@@ -2,6 +2,7 @@ from django.db import models
 
 from model_utils.managers import PassThroughManager
 
+from pombola.core.models import PopoloPerson
 
 class BillQuerySet(models.query.QuerySet):
     def recent(self):
@@ -21,7 +22,7 @@ class Bill(models.Model):
 
     date = models.DateField()
     parliamentary_session = models.ForeignKey('core.ParliamentarySession')
-    sponsor = models.ForeignKey('core.Person', related_name="bills_sponsored")
+    sponsor = models.ForeignKey(PopoloPerson, related_name='bills_sponsored')
 
     objects = PassThroughManager.for_queryset_class(BillQuerySet)()
 
