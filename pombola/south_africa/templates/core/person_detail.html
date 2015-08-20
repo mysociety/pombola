@@ -28,8 +28,8 @@
    Here we're closing the divs that constrain the site width to
    allow us to insert a full width section. We reopen them below.
 {% endcomment %}
-</div> <!-- .large-container -->
-</div> <!-- page-wrapper -->
+  </div> <!-- .large-container -->
+</div> <!-- .page-wrapper -->
 <div class="about-person-intro-block">
   <div class="page-wrapper wrapper">
     <div class="large-container">
@@ -44,82 +44,82 @@
 
         {% if twitter_contacts %}
           <div class="contact-actions__twitter">
-          {% for twitter in twitter_contacts %}
-            <a href="http://twitter.com/{{ twitter }}">@{{ twitter }}</a>
-          {% endfor %}
+            {% for twitter in twitter_contacts %}
+              <a href="http://twitter.com/{{ twitter }}">@{{ twitter }}</a>
+            {% endfor %}
           </div>
         {% endif %}
-        </div>
+      </div>
       <div class="constituency-party fifty-fifty-layout">
         <div class="column">
           {% if phone_contacts %}
-          <h3>Phone</h3>
-          <ul>
-            {% for phone in phone_contacts %}
-              <li><a href="tel:{{ phone }}">{{ phone }}</a></li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+            <h3>Phone</h3>
+            <ul>
+              {% for phone in phone_contacts %}
+                <li><a href="tel:{{ phone }}">{{ phone }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
 
-        {% if fax_contacts %}
-          <h3>Fax</h3>
-          <ul>
-            {% for fax in fax_contacts %}
-            <li>{{ fax }}</li>
-          {% endfor %}
-          </ul>
-        {% endif %}
+          {% if fax_contacts %}
+            <h3>Fax</h3>
+            <ul>
+              {% for fax in fax_contacts %}
+              <li>{{ fax }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
 
         </div>
         <div class="column">
           {% if address_contacts %}
-          <h3>Address</h3>
-          <ul>
-            {% for address in address_contacts %}
-              <li>{{ address }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
+            <h3>Address</h3>
+            <ul>
+              {% for address in address_contacts %}
+                <li>{{ address }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
 
-          {% if object.constituency_offices %}
-          <h3>Constituency Offices</h3>
-          <ul>
-            {% for office in object.constituency_offices %}
-              <li><a href="{{ office.get_absolute_url }}">{{ office.name }}</a></li>
-            {% empty %}
-              <li>Not associated with any constituency offices</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-          <h3>Party</h3>
-          <ul>
-            {% for party in object.parties_and_coalitions %}
-              <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
-            {% empty %}
-              {% if former_parties %}
-                {% for party in former_parties %}
-                  <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+            {% if object.constituency_offices %}
+              <h3>Constituency Offices</h3>
+              <ul>
+                {% for office in object.constituency_offices %}
+                  <li><a href="{{ office.get_absolute_url }}">{{ office.name }}</a></li>
                 {% empty %}
-                  <li>Not a member of any party</li>
+                  <li>Not associated with any constituency offices</li>
                 {% endfor %}
-              {% else %}
-                <li>Not a member of any party</li>
-              {% endif %}
-            {% endfor %}
-          </ul>
+              </ul>
+            {% endif %}
 
-          {% regroup object.constituencies|dictsort:"kind" by kind as constituency_groups %}
-          {% for entry in constituency_groups %}
-          <h3>{{ entry.grouper }}</h3>
-          <ul>
-            {% for area in entry.list %}
-              <li><a href="{{ area.get_absolute_url }}">{{ area.name }}</a></li>
-            {% endfor %}
-          </ul>
-          {% endfor %}
+            <h3>Party</h3>
+            <ul>
+              {% for party in object.parties_and_coalitions %}
+                <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+              {% empty %}
+                {% if former_parties %}
+                  {% for party in former_parties %}
+                    <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+                  {% empty %}
+                    <li>Not a member of any party</li>
+                  {% endfor %}
+                {% else %}
+                  <li>Not a member of any party</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
 
-        </div>
-      </div>
+            {% regroup object.constituencies|dictsort:"kind" by kind as constituency_groups %}
+            {% for entry in constituency_groups %}
+              <h3>{{ entry.grouper }}</h3>
+              <ul>
+                {% for area in entry.list %}
+                  <li><a href="{{ area.get_absolute_url }}">{{ area.name }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endfor %}
+        </div> <!-- .column -->
+      </div> <!-- .constituency-party.fifty-fifty-layout -->
       <div class="person-summary">
         <h3>About {{ object.name }}</h3>
           {% if person.date_of_death %}
@@ -127,121 +127,129 @@
           {% endif %}
           {{ person.summary }}
       </div>
-    </div>
-  </div>
-</div>
+    </div> <!-- .large-container -->
+  </div> <!-- .page-wrapper -->
+</div> <!-- .about-person-intro-block -->
 <div class="page-wrapper wrapper">
-  {% with past_positions=person.position_set.all.political.currently_inactive %}
   <div class="large-container">
-    <div class="tabs">
-      <ul class="tab-links">
-        {% if past_positions %}
+    {% with past_positions=person.position_set.all.political.currently_inactive %}
+      <div class="tabs">
+        <ul class="tab-links">
+          {% if hansard.count or question.count or committee.count %}
+            <li><a href="#appearances" class="active">Appearances</a></li>
+          {% endif %}
+          {% if past_positions %}
+            <li><a href="#experience">Positions held</a></li>
+          {% endif %}
+          {% if object.interests_register_entries.exists %}
+            <li><a href="#membersinterests">Register of Interests</a></li>
+          {% endif %}
+        </ul>
+
         {% if hansard.count or question.count or committee.count %}
-        <li><a href="#appearances" class="active">Appearances</a></li>
+          <div id="appearances" class="tab-content tab-active">
+            <section class="person-appearances">
+              <h3>Committee appearances</h3>
+
+              {% include "core/person_speech_list.html" with speechlist=committee %}
+
+              {% if committee.count %}
+                <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
+              {% endif %}
+            </section>
+
+            <section class="person-appearances">
+              <h3>Plenary appearances</h3>
+
+              {% include "core/person_speech_list.html" with speechlist=hansard %}
+
+              {% if hansard.count %}
+                <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
+              {% endif %}
+            </section>
+
+            <section class="person-appearances">
+              <h3>Questions </h3>
+
+              {% include "core/person_speech_list.html" with speechlist=question parent_title=1 %}
+
+              {% if question.count %}
+                <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
+              {% endif %}
+            </section>
+          </div>
         {% endif %}
-        <li><a href="#experience">Positions held</a></li>
-        {% endif %}
-        {% if object.interests_register_entries.exists %}
-        <li><a href="#membersinterests">Register of Interests</a></li>
-        {% endif %}
-      </ul>
 
-      {% if hansard.count or question.count or committee.count %}
-      <div id="appearances" class="tab-content tab-active">
-        <section class="person-appearances">
-          <h3>Committee appearances</h3>
+        {% if past_positions %}
+          <div id="experience" class="tab-content">
+            <div class="person-experience">
+              {% with current_positions=person.position_set.all.political.currently_active %}
+                {% if current_positions %}
+                  <h3>Currently</h3>
+                  <ul class="current-positions positions">
+                    {% for position in current_positions %}
+                      <li>{% include "core/person_detail_position.html" %}
+                        {% if position.start_date %} since {{ position.start_date }}{% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
 
-          {% include "core/person_speech_list.html" with speechlist=committee %}
-
-          {% if committee.count %}
-            <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
-          {% endif %}
-        </section>
-
-        <section class="person-appearances">
-          <h3>Plenary appearances</h3>
-
-          {% include "core/person_speech_list.html" with speechlist=hansard %}
-
-          {% if hansard.count %}
-            <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
-          {% endif %}
-        </section>
-
-        <section class="person-appearances">
-          <h3>Questions </h3>
-
-          {% include "core/person_speech_list.html" with speechlist=question parent_title=1 %}
-
-          {% if question.count %}
-            <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
-          {% endif %}
-        </section>
-      </div>
-      {% endif %}
-
-      {% if past_positions %}
-      <div id="experience" class="tab-content">
-        <div class="person-experience">
-          {% with current_positions=person.position_set.all.political.currently_active %}
-            {% if current_positions %}
-              <h3>Currently</h3>
-              <ul class="current-positions positions">
-                {% for position in current_positions %}
-                <li>{% include "core/person_detail_position.html" %}
-                  {% if position.start_date %} since {{ position.start_date }}{% endif %}
-                </li>
-              {% endfor %}
-              </ul>
-            {% endif %}
-          {% endwith %}
-
-            <h3>Formerly</h3>
+              <h3>Formerly</h3>
               <ul class="former-positions positions">
-              {% if past_positions %}
-                {% for position in past_positions %}
-                  <li>{% include "core/person_detail_position.html" %}
-                    {% if position.start_date %}
-                      from {{ position.start_date }}
-                    {% endif %}
-                    until {{ position.end_date }}
-                  </li>
-                {% endfor %}
-              {% else %}
-                <li>No former positions recorded.</li>
-            {% endif %}
-            </ul>
-        </div>
-      </div>
-      {% endif %}
-      {% endwith %}
+                {% if past_positions %}
+                  {% for position in past_positions %}
+                    <li>{% include "core/person_detail_position.html" %}
+                      {% if position.start_date %}
+                        from {{ position.start_date }}
+                      {% endif %}
+                      until {{ position.end_date }}
+                    </li>
+                  {% endfor %}
+                {% else %}
+                  <li>No former positions recorded.</li>
+                {% endif %}
+              </ul>
+            </div> <!-- .person-experience -->
+          </div> <!-- #experience -->
+        {% endif %}
 
-      {% if object.interests_register_entries.exists %}
-      <div id="membersinterests" class="tab-content">
+        {% if object.interests_register_entries.exists %}
+          <div id="membersinterests" class="tab-content">
 
-          <div class="person-interests">
+            <div class="person-interests">
 
-            {% for key, release in interests.items %}
+              {% for key, release in interests.items %}
                 <h3>{{ release.name }}</h3>
                 {% for ckey, category in release.categories.items %}
-                    <h4>{{ category.name }}</h4>
-                    <table>
-                        <tr>
-                            {% for heading in category.headings %}
-                                <th>{{ heading }}</th>
-                            {% endfor %}
-                        </tr>
-                        {% for line in category.entries %}
-                            <tr>
-                                {% for cell in line %}
-                                    <td>{{ cell }}</td>
-                                {% endfor %}
-                            </tr>
+                  <h4>{{ category.name }}</h4>
+                  <table>
+                    <tr>
+                      {% for heading in category.headings %}
+                        <th>{{ heading }}</th>
+                      {% endfor %}
+                    </tr>
+                    {% for line in category.entries %}
+                      <tr>
+                        {% for cell in line %}
+                          <td>{{ cell }}</td>
                         {% endfor %}
-                    </table>
+                      </tr>
+                    {% endfor %}
+                  </table>
                 {% endfor %}
-            {% endfor %}
-          </div>
-      </div>{% endif %}
-</div>
+              {% endfor %}
+
+            </div> <!-- .person-interests -->
+          </div> <!-- .membersinterests -->
+        {% endif %}
+      </div> <!-- tabs -->
+    {% endwith %}
+
+    {% comment %}
+       .large-container and .page-wrapper are left open since
+       they're closed in the enclosing template.
+    {% endcomment %}
+
 {% endblock %}
