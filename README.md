@@ -45,3 +45,15 @@ other sites around the world, notably several in Africa.
 We want the code to be easy to use for other installations, but currently there are some rough edges.
 
 We also intend to replace the `core` app's models with an external data store. This will be done using [PopIt](https://github.com/mysociety/popit) which is a project that we are currently working on.
+
+## Acknowledgements
+
+We are very grateful for the funding that has made development
+of Pombola possible, in particular the generous support from:
+
+* [The Indigo Trust](http://indigotrust.org.uk/)
+* [The Omidyar Network](https://www.omidyar.com/)
+
+Thanks also to [Browserstack](https://www.browserstack.com/) who
+let us use their web-based cross-browser testing tools for this
+project.
