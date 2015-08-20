@@ -2,8 +2,9 @@ notifications:
   email: false
   irc:
     channels:
-      - "irc.mysociety.org#pmo"
+      - "irc.mysociety.org#build"
     use_notice: true
+    skip_join: true
 
 language: python
 
