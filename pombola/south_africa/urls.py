@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, TemplateView
 
 from pombola.south_africa import views
 from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
@@ -62,6 +62,14 @@ urlpatterns += patterns('',
         r'^person/(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
         SAPersonAppearanceView.as_view(),
         name='sa-person-appearance'
+    ),
+)
+
+# This is for the Code4SA ward councillor widget lookup:
+urlpatterns += patterns('',
+    url(r'^ward-councillor-lookup/$',
+        TemplateView.as_view(template_name='south_africa/ward_councillor_lookup.html'),
+        name='ward-councillor-lookup'
     ),
 )
 
