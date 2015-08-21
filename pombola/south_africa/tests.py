@@ -515,17 +515,20 @@ class SAPersonProfileSubPageTest(WebTest):
         self.post.delete()
         self.membership.delete()
 
-    def get_profile_tab(self, soup):
-        return soup.find('div', id='profile')
+    def get_person_summary(self, soup):
+        return soup.find('div', class_='person-summary')
+
+    def get_positions_tab(self, soup):
+        return soup.find('div', id='experience')
 
     def get_profile_info(self, soup):
         return soup.find('div', id='hfProfileInfo')
 
     def test_person_death_date(self):
         response = self.app.get('/person/deceased-person/')
-        profile_tab = self.get_profile_tab(response.html)
+        summary = self.get_person_summary(response.html)
 
-        self.assertEqual(profile_tab.findNext('div').p.contents[0], 'Died 1st January 2010')
+        self.assertEqual(summary.findNext('p').contents[0], 'Died 1st January 2010')
 
     def test_deceased_party_affiliation(self):
         response = self.app.get('/person/deceased-person/')
@@ -537,9 +540,9 @@ class SAPersonProfileSubPageTest(WebTest):
 
     def test_deceased_former_positions(self):
         response = self.app.get('/person/deceased-person/')
-        profile_tab = self.get_profile_tab(response.html)
+        profile_tab = self.get_positions_tab(response.html)
 
-        former_pos_heading = profile_tab.findNext('h3', text='Former Positions')
+        former_pos_heading = profile_tab.findNext('h3', text='Formerly')
         former_pos_list = former_pos_heading.findNextSibling('ul').text
 
         self.assertNotEqual(former_pos_heading, None)
@@ -553,8 +556,8 @@ class SAPersonProfileSubPageTest(WebTest):
 
     def test_former_mp(self):
         response = self.app.get('/person/former-mp/')
-        profile_tab = self.get_profile_tab(response.html)
-        former_pos_heading = profile_tab.findNext('h3', text='Former Positions')
+        positions_tab = self.get_positions_tab(response.html)
+        former_pos_heading = positions_tab.findNext('h3', text='Formerly')
         former_pos_list = former_pos_heading.findNextSibling('ul').text
 
         self.assertNotEqual(former_pos_heading, None)
