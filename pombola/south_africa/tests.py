@@ -547,9 +547,6 @@ class SAPersonProfileSubPageTest(WebTest):
 
         self.assertNotEqual(former_pos_heading, None)
 
-        # should not report that they were a former party member
-        self.assertNotRegexpMatches(former_pos_list, r'Member\s+at Test Party')
-
         # check for the former MP and Speaker positions
         self.assertRegexpMatches(former_pos_list, r'Member\s+at National Assembly \(Parliament\)')
         self.assertRegexpMatches(former_pos_list, r'Speaker\s+at National Assembly \(Parliament\)')
