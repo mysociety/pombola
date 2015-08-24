@@ -1,17 +1,18 @@
 from datetime import date
 import itertools
 import mock
+from os.path import dirname, join
 import re
 
-from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
-from django.utils import unittest
-from django.test.client import Client
 from django.test.utils import override_settings
 from django.test import TestCase, Client
 
 from nose.plugins.attrib import attr
 
+from pombola.file_archive.models import File
+from .migration_helpers import get_first_image_file
 from .models import InfoPage, ViewCount
 
 
@@ -266,3 +267,70 @@ class InfoBlogClientTests(TestCase):
             url_base = '/blog/category/'
         )
 
+@override_settings(INFO_PAGES_ALLOW_RAW_HTML=True)
+class ExtractFirstImageTests(TestCase):
+
+    def setUp(self):
+        storage = FileSystemStorage()
+        with open(join(dirname(__file__), 'fixtures', 'bar.png'), 'rb') as f:
+            storage_file = storage.save('file_archive/bar.png', f)
+        self.uploaded_file = File.objects.create(
+            slug='bar2',
+            file=storage_file,
+        )
+
+    def tearDown(self):
+        self.uploaded_file.delete()
+
+    def test_extract_image_should_work(self):
+        markdown = "Here's our nice graphic: " \
+            "![Graphic](http://www.pa.org.za{0})".format(
+                self.uploaded_file.file.url
+            )
+        example_infographic = InfoPage.objects.create(
+            slug="fun-dataviz",
+            title="Some fun data visualization",
+            markdown_content=markdown,
+            use_raw=False,
+            kind=InfoPage.KIND_BLOG,
+        )
+        first_image = get_first_image_file(File, example_infographic)
+        self.assertEqual(first_image.id, self.uploaded_file.id)
+
+    def test_image_from_elsewhere(self):
+        markdown = "Here's someone else's graphic: " \
+            "![Another graphic](http://google.com/blah.png)"
+        example_infographic = InfoPage.objects.create(
+            slug="a-google-image",
+            title="An image from elsewhere",
+            markdown_content=markdown,
+            use_raw=False,
+            kind=InfoPage.KIND_BLOG,
+        )
+        first_image = get_first_image_file(File, example_infographic)
+        self.assertIsNone(first_image)
+
+    def test_extract_no_images(self):
+        markdown = "There's no graphic here."
+        example_infographic = InfoPage.objects.create(
+            slug="boring-text",
+            title="*Nothing* of interest here.",
+            markdown_content=markdown,
+            use_raw=False,
+            kind=InfoPage.KIND_BLOG,
+        )
+        first_image = get_first_image_file(File, example_infographic)
+        self.assertIsNone(first_image)
+
+    def test_extract_image_not_found(self):
+        markdown = "Here's our nice graphic: " \
+            "![Graphic](http://www.pa.org.za/media_root/file_archive/quux.png)"
+        example_infographic = InfoPage.objects.create(
+            slug="fun-dataviz",
+            title="An interesting visualization",
+            markdown_content=markdown,
+            use_raw=False,
+            kind=InfoPage.KIND_BLOG,
+        )
+        first_image = get_first_image_file(File, example_infographic)
+        self.assertIsNone(first_image)
