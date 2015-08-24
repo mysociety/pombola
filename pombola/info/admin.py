@@ -17,13 +17,15 @@ if settings.INFO_PAGES_ALLOW_RAW_HTML:
     search_fields_to_use = ['title', 'markdown_content', 'raw_content']
     fields_to_use = (
         'title', 'slug', 'publication_date', 'kind', 'use_raw',
-        'markdown_content', 'raw_content', 'categories', 'tags'
+        'markdown_content', 'raw_content', 'categories', 'tags',
+        'featured_image_file',
     )
 else:
     search_fields_to_use = ['title', 'markdown_content']
     fields_to_use = (
         'title', 'slug', 'publication_date', 'kind',
-        'markdown_content', 'categories', 'tags'
+        'markdown_content', 'categories', 'tags',
+        'featured_image_file',
     )
 
 class InfoPageAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
