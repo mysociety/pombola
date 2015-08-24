@@ -112,7 +112,7 @@
             Hot topics
         </h3>
         <div class="home__topics__list">
-            <span class="home__topics__topic">Find your councillor</span>
+            <a href="{% url 'ward-councillor-lookup' %}" class="home__topics__topic">Find your councillor</a>
             <a href="{% url 'person_list' %}" class="home__topics__topic">MP profiles</a>
             <a href="{% url 'info_blog_category' slug='mp-corner' %}" class="home__topics__topic">MP corner</a>
             <span class="home__topics__topic">MP attendance</span>
