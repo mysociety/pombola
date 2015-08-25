@@ -97,9 +97,11 @@
             <a class="readmore" href="{% url "info_page" slug="infographics" %}">Show all</a>
         </h3>
         <div class="home__infographics__articles">
-          {% for url in infographics %}
-            <a href="{{ url }}" class="home__infographics__article">
-                <img src="{{ url }}">
+          {% for infographic in infographics %}
+            <a href="{{ infographic.get_absolute_url }}" class="home__infographics__article">
+              {% thumbnail infographic.featured_image_file.file "220" as im %}
+                <img src="{{ im.url }}">
+              {% endthumbnail %}
             </a>
           {% endfor %}
         </div>

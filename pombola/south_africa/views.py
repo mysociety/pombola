@@ -30,7 +30,9 @@ from pombola.core import models
 from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
     PlaceDetailSub, OrganisationDetailView, PersonDetail, PlaceDetailView,
     OrganisationDetailSub, PersonSpeakerMappingsMixin)
-from pombola.info.models import InfoPage, Category as BlogCategory
+from pombola.info.models import (
+    InfoPage, Category as BlogCategory, Tag as BlogTag
+)
 from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView, SearchBaseView
 from pombola.slug_helpers.views import SlugRedirect
@@ -69,13 +71,8 @@ class SAHomeView(HomeView):
         c = BlogCategory.objects.get(slug='mp-corner')
         context['mp_corner'] = articles.filter(categories=c)[1]
 
-        # TODO: Put real content into this list
-        context['infographics'] = [
-            'http://www.pa.org.za/media_root/file_archive/School_safety_violence_4.jpeg',
-            'http://www.pa.org.za/media_root/file_archive/NDP__YD.jpeg',
-            'http://www.pa.org.za/media_root/file_archive/Employment_Equity_2.jpeg',
-            'http://www.pa.org.za/media_root/file_archive/constituency_info.jpeg'
-        ]
+        context['infographics'] = BlogTag.objects.get(name='infographic'). \
+            entries.order_by('-created')[0:4]
 
         return context
 
