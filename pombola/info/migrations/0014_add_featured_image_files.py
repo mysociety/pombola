@@ -11,7 +11,6 @@ class Migration(DataMigration):
         for info_page in orm.InfoPage.objects.all():
             image_file = get_first_image_file(orm['file_archive.File'], info_page)
             if image_file:
-                print "adding {0} to the page {1}".format(image_file, info_page)
                 info_page.featured_image_file = image_file
                 info_page.save()
 
