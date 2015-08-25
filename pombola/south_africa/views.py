@@ -68,11 +68,17 @@ class SAHomeView(HomeView):
 
         context['news_articles'] = articles_for_front_page[:2]
 
-        c = BlogCategory.objects.get(slug='mp-corner')
-        context['mp_corner'] = articles.filter(categories=c)[1]
+        try:
+            c = BlogCategory.objects.get(slug='mp-corner')
+            context['mp_corner'] = articles.filter(categories=c)[1]
+        except (BlogCategory.DoesNotExist, IndexError):
+            context['mp_corner'] = None
 
-        context['infographics'] = BlogTag.objects.get(name='infographic'). \
-            entries.order_by('-created')[0:4]
+        try:
+            context['infographics'] = BlogTag.objects.get(name='infographic'). \
+                entries.order_by('-created')[0:4]
+        except BlogTag.DoesNotExist:
+            context['infographics'] = []
 
         return context
 

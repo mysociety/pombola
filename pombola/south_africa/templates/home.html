@@ -43,14 +43,16 @@
                     MP corner
                 </h3>
                 <div class="home__news__article">
-                    <h2>
-                        <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
-                    </h2>
-                    <p class="meta">{{ mp_corner.publication_date|date }}</p>
-                    <p class="summary">
-                        {{ mp_corner.content_as_plain_text|truncatewords:32 }}
-                        <a class="readmore" href="{{ mp_corner.get_absolute_url }}">More</a>
-                    </p>
+                  {% if mp_corner %}
+                      <h2>
+                          <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
+                      </h2>
+                      <p class="meta">{{ mp_corner.publication_date|date }}</p>
+                      <p class="summary">
+                          {{ mp_corner.content_as_plain_text|truncatewords:32 }}
+                          <a class="readmore" href="{{ mp_corner.get_absolute_url }}">More</a>
+                      </p>
+                  {% endif %}
                 </div>
             </div>
         </div>
