@@ -10,6 +10,8 @@ from django.utils.text import slugify
 
 from markitup.fields import MarkupField
 
+from pombola.file_archive.models import File
+
 class ModelBase(models.Model):
     created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
     updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now )
@@ -97,6 +99,8 @@ class InfoPage(ModelBase):
         'Enter content as raw HTML',
         default=False,
     )
+
+    featured_image_file = models.ForeignKey(File, blank=True, null=True)
 
     KIND_PAGE = 'page'
     KIND_BLOG = 'blog'
