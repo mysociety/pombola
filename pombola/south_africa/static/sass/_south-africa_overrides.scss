@@ -1,30 +1,8 @@
-
-$border_radius: 5px;
-
-@font-face {
-    font-family: 'latobold';
-    src: url('/static/fonts/lato-bold-webfont.eot');
-    src: url('/static/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/lato-bold-webfont.woff') format('woff'),
-         url('/static/fonts/lato-bold-webfont.ttf') format('truetype'),
-         url('/static/fonts/lato-bold-webfont.svg#latobold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+$border_radius: 3px;
+$font_family_lato: Lato, 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
 
 @font-face {
-    font-family: 'latoitalic';
-    src: url('/static/fonts/lato-italic-webfont.eot');
-    src: url('/static/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/lato-italic-webfont.woff') format('woff'),
-         url('/static/fonts/lato-italic-webfont.ttf') format('truetype'),
-         url('/static/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'latoregular';
+    font-family: 'Lato';
     src: url('/static/fonts/lato-regular-webfont.eot');
     src: url('/static/fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
          url('/static/fonts/lato-regular-webfont.woff') format('woff'),
@@ -34,37 +12,26 @@ $border_radius: 5px;
     font-style: normal;
 }
 
-@mixin lato-regular {
-    font-family: 'latoregular', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-    font-weight: normal !important;
-}
-@mixin lato-bold {
-    font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-    font-weight: normal !important;
-}
-@mixin lato-italic {
-    font-family: 'latobold', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
-    font-weight: normal !important;
+@font-face {
+    font-family: 'Lato';
+    src: url('/static/fonts/lato-bold-webfont.eot');
+    src: url('/static/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-bold-webfont.woff') format('woff'),
+         url('/static/fonts/lato-bold-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-bold-webfont.svg#latobold') format('svg');
+    font-weight: bold;
+    font-style: normal;
 }
 
-@mixin clearfix {
-    &:before,
-    &:after {
-        content: " "; /* 1 */
-        display: table; /* 2 */
-    }
-
-    &:after {
-        clear: both;
-    }
-
-    /**
-     * For IE 6/7 only
-     * Include this rule to trigger hasLayout and contain floats.
-     */
-    & {
-        *zoom: 1;
-    }
+@font-face {
+    font-family: 'Lato';
+    src: url('/static/fonts/lato-italic-webfont.eot');
+    src: url('/static/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/lato-italic-webfont.woff') format('woff'),
+         url('/static/fonts/lato-italic-webfont.ttf') format('truetype'),
+         url('/static/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
 }
 
 @mixin unstyled-list {
@@ -115,7 +82,8 @@ a {
     text-align: center;
     padding: 1em 1.33em;
     font-weight: normal;
-    @include lato-bold;
+    font-family: $font_family_lato;
+    font-weight: bold;
     border: none;
     text-transform: uppercase;
     color: #fff;
@@ -123,12 +91,15 @@ a {
     letter-spacing: 0.05em;
     -webkit-appearance: none;
     text-decoration: none;
+    border-radius: $border_radius;
+
     &:hover,
     &:focus {
         background: mix($colour_primary, #000, 80%);
         color: #fff;
         text-decoration: none;
     }
+
     &.secondary-button {
         background-color: #f1f0ec;
         color: $colour_black;
@@ -142,6 +113,16 @@ a {
     }
 }
 
+.inline-search-box {
+    input {
+        border-radius: $border_radius 0 0 $border_radius;
+    }
+
+    .button {
+        border-radius: 0 $border_radius $border_radius 0;
+    }
+}
+
 /*
 
 Base typography
@@ -149,21 +130,21 @@ Base typography
 */
 
 h1 {
-    @include lato-bold;
+    font-family: $font_family_lato;
     font-size: 1.875em; /* 30px */
     color: $colour_black;
     line-height: 1.25em;
 }
 
 h2 {
-    @include lato-bold;
+    font-family: $font_family_lato;
     font-size: 1.5em; /* 24px */
     color: $colour_black;
     line-height: 1.25em;
 }
 
 h3 {
-    @include lato-bold;
+    font-family: $font_family_lato;
     font-size: 0.875em; /* 14px */
     color: $colour_black;
     text-transform: uppercase;
@@ -221,7 +202,7 @@ th {
     background: inherit;
     font-weight: normal;
     text-transform: uppercase;
-    @include lato-bold;
+    font-family: $font_family_lato;
     font-size: 0.875em;
 }
 
@@ -283,8 +264,9 @@ small {
     padding: 10px;
     .title-space {
         p {
+            font-family: $font_family_lato;
+            font-weight: bold;
             font-style: normal;
-            @include lato-bold;
             color: $colour_green;
         }
     }
@@ -329,7 +311,8 @@ small {
     background: $colour_main_background;
     padding: 0.66em;
     @include border_radius(3px);
-    @include lato-bold;
+    font-family: $font_family_lato;
+    font-weight: bold;
     text-transform: uppercase;
     color: $colour_black;
     text-decoration: none;
@@ -395,17 +378,17 @@ menu#mobile-top-tools {
     float: left;
     text-align: right;
     a {
-       background: $colour_primary;
+       background: $colour_green;
        padding: 0.5em;
        display: inline-block;
        height: 100%;
        text-decoration: none;
-       @include lato-regular;
+       font-family: $font_family_lato;
        font-size: 0.875em;
        line-height: 26px;
        &:hover,
        &:focus {
-           background: mix($colour_primary, #000, 80%);
+           background: mix($colour_green, #000, 80%);
        }
     }
     ul {
@@ -422,7 +405,7 @@ menu#mobile-top-tools {
 
 menu#mobile-top-tools,
 #main-menu {
-    background: $colour_primary;
+    background: $colour_green;
 }
 #main-menu nav{
     text-align: left;
@@ -435,11 +418,11 @@ menu#mobile-top-tools,
                 float: right;
             }
             a {
-                background: $colour_primary;
-                @include lato-regular;
+                background: $colour_green;
+                font-family: $font_family_lato;
                 &:hover,
                 &:focus {
-                    background: mix($colour_primary, #000, 80%);
+                    background: mix($colour_green, #000, 80%);
                 }
             }
 
@@ -451,14 +434,14 @@ menu#mobile-top-tools,
                 border:none;
                 padding:8px 10px;
                 margin:0;
-                background: mix($colour_primary, #000, 80%);
+                background: mix($colour_green, #000, 80%);
             }
             ul{
                 a,
                 a:hover
                 a:focus
                 {
-                    background: mix($colour_primary, #000, 80%);
+                    background: mix($colour_green, #000, 80%);
                 }
 
             }
@@ -468,11 +451,11 @@ menu#mobile-top-tools,
                     border: none;
                     li {
                         a {
-                            background: mix($colour_primary, #000, 80%);
+                            background: mix($colour_green, #000, 80%);
                             color: #fff;
                             &:hover,
                             &:focus {
-                                background: $colour_primary;
+                                background: $colour_green;
                                 color: #fff;
                             }
                         }
@@ -482,13 +465,13 @@ menu#mobile-top-tools,
         }
         ul li ul {
             a {
-                background: mix($colour_primary, #000, 50%);
+                background: mix($colour_green, #000, 50%);
                 text-indent: 1em;
                 font-size: 11px !important;
                 padding: 5px 10px !important;
                 &:hover,
                 &:focus {
-                    background: $colour_primary;
+                    background: $colour_green;
                     color: #fff;
                 }
             }
@@ -544,7 +527,6 @@ menu#mobile-top-tools,
 }
 
 #header-search {
-    border: 1px solid mix($colour_primary, #000, 75%);
     background: #fff;
     margin-right: 0;
     input,button {
@@ -611,469 +593,348 @@ menu#mobile-top-tools,
 
 /*
 
-HOME PAGE INTRO BOX
+HOME PAGE
 
 */
-.home {
+
+body.home {
     #page {
-        padding: 0 0 10px;
-    }
-    .feedback-button {
-        display: none;
-        visibility: hidden;
-    }
-
-    .page-wrapper {
-        width: 96%;
-        margin: 0 auto;
+        padding: 0;
     }
 }
 
+.home__section {
+    padding: 1.25em 0.75em; // roughly 20px and 10px
 
-#front_intro
-{
-    background-color: #027857;
-    padding: 1em 0;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-image: url('/static/images/intro-bg.jpg');
-   .page-wrapper {
-        padding-bottom: 0;
+    @media (min-width: 640px) and (min-height: 700px) {
+        padding-top: 2em;
+        padding-bottom: 2em;
     }
-}
-#front_intro .location-button {
-    font-size: 0.75em;
-    text-align: center;
-    width: 100%;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-    padding: 1em 0.5em;
-    @include box-shadow(0px 3px 0px #af201a);
-    font-weight: normal;
-    position: relative;
-    .location-icon {
-        background: transparent url('/static/images/location.png') left center no-repeat;
-        display: inline-block;
-        height: 17px;
-        width: 10px;
-        margin-right: 10px;
-        position: absolute;
-        left: 21%;
-        top: 10px;
-    }
-}
 
-.carousel-item {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: $border_radius;
-    border: 1px solid rgba(255,255,255,0.3);
-    color: #fff;
-    @include text-shadow(0px 1px 1px rgba(0, 0, 0, .25));
+    @media (min-width: 640px) and (min-height: 900px) {
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+    }
+
     a {
-        color: #fff;
         text-decoration: none;
-        line-height:17px;
+
         &:hover,
         &:focus {
             text-decoration: underline;
         }
+
+        &.button:hover,
+        &.button:focus {
+            text-decoration: none;
+        }
     }
-    .subtitle {
-        color: #fff;
-        opacity: 0.8;
-        text-transform: none;
-        @include lato-regular;
-        font-size: 0.875em;
-    }
-    .caption {
-        font-size: 0.875em;
-        height:90px;
-        width:100%;
-        margin-top:-93px;
-        position:relative;
 
-        @media only all and (max-width: 640px), print {
-            height:60px;
-            margin-top:-62px;
-        }
+    .readmore {
+        white-space: nowrap; // stop arrow breaking onto new line if limited space
 
-        h2 {
-            padding-left:15px!important;
-            padding-top:15px!important;
-            font-size:18px!important;
-            position:relative;
-            z-index:2;
-        }
-
-        p {
-            padding-left:15px;
-            font-size:11px;
-            position:relative;
-            z-index:2;
-
-            @media only all and (max-width: 640px), print {
-                display:none;
-            }
-        }
-
-        .background {
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-            position:absolute;
-            background-color:black;
-            opacity:0.6;
-            z-index:1;
+        &:after {
+            display: inline-block; // escape from parent's underline
+            content: "\2192"; // &rarr;
+            margin-left: 0.3em;
         }
     }
 }
 
-.slide-core_person {
-  @extend .featured-person;
-    margin: 0;
-    img {
-        margin-right: 1em;
-    }
-    .name {
-        font-size: 1.75em;
-        text-transform: none;
-        color: #fff;
-        line-height: 1.3em;
-        @include text-shadow(0px 2px 1px rgba(0, 0, 0, .25));
-        margin-bottom: 0.25em;
-    }
-    .subtitle {
-        margin-bottom: 0.5em;
+.home__news__row {
+    @media (min-width: 640px) {
+        overflow: auto; // quick clearfix
     }
 }
 
-//.featured-quote {
-//
-//    q {
-//        line-height: 1.45em;
-//        display: block;
-//        margin-bottom: 1em;
-//        font-size: 1.125em;
-//        @include lato-regular;
-//    }
-//    cite {
-//        display: block;
-//        font-size: .875em;
-//        margin-left: 1em;
-//        .name {
-//            @include lato-bold;
-//            text-transform: uppercase;
-//        }
-//        .date {
-//            opacity: 0.8;
-//        }
-//
-//    }
-//}
-
-
-#page .home-left h2#home-intro,
-#page .home-right h2#home-intro {
-    display: block;
-}
-
-#front_intro .home-right {
-    @include lato-regular;
-}
-
-#front_intro .home-right h2 {
-    color: #fff;
-    text-transform: none;
-    line-height: 1.35em;
-    @include lato-regular;
-    font-weight: normal;
-    @include text-shadow(0px 2px 1px rgba(0, 0, 0, .25));
-    font-size: 21px;
+.home__news__articles {
     margin-bottom: 1em;
-    @media only all and (min-width: 640px), print {
-        margin-top: 1em;
+
+    @media (min-width: 640px) {
+        margin-bottom: 0;
+        float: left;
+        width: 48%;
+    }
+
+    @media (min-width: 850px) {
+        width: 64%;
+
+        .home__news__article {
+            float: left;
+            width: 47%;
+        }
+
+        .home__news__article + .home__news__article {
+            margin-top: 0;
+            float: right;
+        }
+    }
+}
+
+
+.home__news__mp {
+    @media (min-width: 640px) {
+        float: right;
+        width: 47%;
+    }
+
+    @media (min-width: 850px) {
+        width: 30%;
+    }
+}
+
+.home__news__article {
+    h2 {
+        font-size: 1.2em; // down from default 1.5em
+
+        a {
+            display: block; // fill entire parent
+        }
+    }
+
+    p {
         margin-bottom: 0;
     }
-    small {
-        display: block;
-        opacity: 0.8;
-        font-size: 13px;
+
+    p.meta {
+        margin-bottom: 0.75em;
+    }
+}
+
+.home__news__article + .home__news__article {
+    margin-top: 1em;
+}
+
+.home__actions {
+    background-color: $colour_green;
+    color: #fff;
+    @include clearfix();
+
+    a {
+        color: inherit;
     }
 
+    h2 {
+        color: inherit;
 
-}
-#page .home-left h2 {
-    font-size: .875em;
-    color: #fff;
-    @include text-shadow(0px 1px 1px rgba(0, 0, 0, .25));
-}
-
-.home-rep-search {
-    .geocoder-search-form {
-        background: transparent;
-        margin-top: 13px;
-        padding: 0;
-        input[type="text"]{
-            width: 82%;
-            margin-right: 1%;
-            -webkit-box-sizing: border-box;
-               -moz-box-sizing: border-box;
-                    box-sizing: border-box;
-            font-size: 1em;
-            @include lato-regular;
-            border: 1px solid #ccc;
-            @include border-radius(3px);
-            padding: 0.66em;
+        small {
+            display: block; // break onto new line
+            color: mix(#fff, $colour_green, 60%);
+            font-size: (1em / 1.5); // get back to 1em, from 1.5em parent
+            line-height: 1.4em; // 1.4 of this element's ems
+            font-weight: normal;
         }
+    }
+}
 
-        button {
-            width:16%;
-            box-shadow: 0px 2px 0px #af201a;
-            background: $colour_primary url(../images/search-icon.png) center no-repeat;
-            text-indent: -9999px;
-            padding: 0;
-            height: 40px;
-            @include border-radius(3px);
+.home__actions__primary,
+.home__actions__secondary {
+    max-width: 30em;
+
+    @media (min-width: 850px) {
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+        max-width: none;
+    }
+
+    & > p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.home__actions__primary {
+    margin-bottom: 1.5em;
+
+    @media (min-width: 850px) {
+        margin-bottom: 0;
+        padding-right: 10px;
+    }
+
+    @media (min-width: 1000px) {
+        width: 55%;
+        padding-right: 30px;
+    }
+}
+
+.home__actions__secondary {
+    @media (min-width: 850px) {
+        padding-left: 10px;
+    }
+
+    @media (min-width: 1000px) {
+        width: 45%;
+        padding-left: 30px;
+    }
+
+    .inline-search-box {
+        .button {
+            background-color: mix(#fff, $colour_green, 40%);
+
             &:hover,
             &:focus {
-                color: mix($colour_primary, #000, 80%);
-            }
-        }
-        label {
-            display: none;
-        }
-    }
-
-    .wrapper {
-        border-bottom: 1px solid #ccc;
-        overflow: hidden;
-        padding-top: 10px;
-        padding-bottom: 25px;
-        h2 {
-            margin-top: 25px;
-            text-align: center;
-        }
-        form {
-            width: 95%;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 370px;
-        }
-    }
-}
-
-
-/*
-
-NEWS & POLL
-
-*/
-#news,
-#twitter,
-#poll {
-    h2
-    {
-        font-size: .875em;
-        text-transform: uppercase;
-        color: $colour-black;
-        a:visited {
-            color: $colour-black;
-        }
-    }
-    h3
-    {
-        font-size: 1em; /* 16px */
-        text-transform: none;
-        line-height: 1.3125em; /* 21px */
-    }
-}
-
-#news {
-    padding: 2em 0 1em;
-    float: left;
-    width: 100%;
-    @media only all and (min-width: 640px), print {
-        width: 65.8333333%;
-        margin-right: 2.5%;
-    }
-    max-width: 100%;
-
-}
-
-#twitter {
-    margin-bottom: 2em;
-    padding-bottom: 1em;
-    border-bottom: 1px solid #ccc;
-}
-
-.col-2 {
-    padding: 2em 0 1em;
-    @media only all and (min-width: 640px), print {
-        width: 31.666666667%;
-        float: right;
-    }
-
-}
-
-.home-news {
-    float: left;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom:0em;
-    @media only all and (min-width: 940px), print {
-        width: 48%;
-        margin-right: 2%;
-    }
-    .summary .readmore a {
-        font-size:0.9em;
-    }
-}
-
-.home-news, .home-news-bottom {
-    h2 {
-        a:link,
-        a:visited {
-            text-decoration: none;
-            color: $colour_black;
-        }
-        a:hover,
-        a:focus,
-        a:visited:hover {
-            text-decoration: underline;
-            color: $colour_primary!important;
-        }
-    }
-    .summary {
-        line-height:1.3em;
-        margin-bottom:1em;
-        p {
-            display:inline;
-        }
-    }
-}
-
-.home-news-bottom {
-    clear: both;
-    border-top: 1px solid #ccc;
-    padding-top: 20px;
-    @media only all and (min-width: 940px), print {
-        .item {
-            font-size: 0.9em;
-            width: 32%;
-            float: left;
-            padding-right: 2%;
-            &:last-child {
-                padding-right: 0;
+                background-color: darken(mix(#fff, $colour_green, 40%), 10%);
             }
         }
     }
-    p {
-        font-size: 0.9em;
+}
+
+.home__infographics {
+    background-color: $colour_main_background;
+    border-bottom: 1px solid mix($colour_main_background, #000, 90%);
+    padding-bottom: 0;
+}
+
+.home__infographics__articles {
+    white-space: nowrap;
+    overflow: auto;
+    font-size: 0; // hack to zero out spacing around inline child elements
+    line-height: 0; // same hack
+    margin: 0 (-16px * 0.75); // counteract parent padding
+    padding: 0 (16px * 0.75); // reinstate padding, but inside the scrolling area
+
+    @media (min-width: 1000px) {
+        overflow: visible;
+        margin: 0;
+        padding: 0;
     }
 }
 
-ul.home-news-list {
-    @extend ul#home-news-list;
-    border:none;
-    padding:0;
-    margin-top: 0;
-    li {
-        border:none;
+.home__infographics__article {
+    display: inline-block;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid mix($colour_main_background, #000, 90%);
+    border-bottom: 0;
+    font-size: 16px;
+    line-height: normal;
+    width: 220px;
+
+    & + & {
+        margin-left: 0.75em;
+    }
+
+    @media (min-width: 640px) {
+        width: 225px;
+
+        & + & {
+            margin-left: 20px;
+        }
+    }
+
+    img {
         width: 100%;
-        @media only all and (min-width: 940px), print {
-            &:nth-child(odd) {
-                padding-right: 3.7974684%
-            }
-            min-height: 13.4em;
-        }
+        height: auto;
+    }
 
-        float: left;
-        margin-bottom: 1.5em;
-        padding-bottom: 0;
+    &:nth-child(4n + 1) {
+        height: 220px;
 
-        p {
-            font-size: 0.875em;
-            margin-bottom: 0.5em;
-            &.meta {
-                font-style: normal;
-                font-size: .75em;
-            }
-            a:link{
-                text-decoration: underline;
-            }
+        &:hover {
+            height: 225px;
         }
+    }
 
-        h3 {
-            margin-bottom: 0.25em;
-            a:link{
-                text-decoration: none;
-            }
-            a:hover,
-            a:focus {
-                text-decoration: underline;
-            }
+    &:nth-child(4n + 2) {
+        height: 240px;
+
+        &:hover {
+            height: 245px;
+            margin-top: -5px;
         }
-        img {
-            width: 100%;
+    }
+
+    &:nth-child(4n + 3) {
+        height: 200px;
+
+        &:hover {
+            height: 205px;
+        }
+    }
+
+    &:nth-child(4n + 4) {
+        height: 220px;
+
+        &:hover {
+            height: 225px;
         }
     }
 }
 
-.social-links-list {
-    li {
-        display: inline;
-    }
-    li a {
-        display: inline-block;
-        text-indent: -9999px;
-        height: 38px;
-        width: 38px;
-        background-image: url('/static/images/social-icons.png');
-        background-position: 0 -1px;
-        background-repeat: none;
-        margin-right: 8px;
-        &:hover,
-        &:focus {
-            background-position: 0 -41px;
-        }
-    }
+.home__topics__list {
+    text-align: center;
+    margin: 0 -8px;
 
-    .facebook-social-icon {
-        background-position: 0 -1px;
-        &:hover,
-        &:focus {
-            background-position: 0 -41px;
-        }
-    }
-    .twitter-social-icon {
-        background-position: -51px -1px;
-        &:hover,
-        &:focus {
-            background-position: -51px -41px;
-        }
-    }
-    .youtube-social-icon {
-        background-position: -101px -1px;
-        &:hover,
-        &:focus {
-            background-position: -101px -41px;
-        }
-    }
-    .rss-social-icon {
-        background-position: -150px -1px;
-        &:hover,
-        &:focus {
-            background-position: -150px -41px;
-        }
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    -ms-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.home__topics__topic {
+    display: block;
+    margin: 8px;
+    width: 100%;
+
+    // The core .button styling but without colours
+    font-size: 0.875em;
+    padding: 1em 1.33em;
+    font-family: $font_family_lato;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    border-radius: $border_radius;
+
+    // default "disabled" styling
+    background-color: $colour_cream;
+    color: $colour_grey;
+    cursor: default;
+
+    @media (min-width: 400px) {
+        display: inline-block; // in case flexbox isn't supported, revert to inline buttons
+        width: auto;
+        -ms-flex: 1 0 auto;
+        -webkit-flex: 1 0 auto;
+        flex: 1 0 auto;
     }
 }
 
+a.home__topics__topic {
+    // More button-like styling, since we know this is a link
+    background-color: $colour_primary;
+    color: #fff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        background: mix($colour_primary, #000, 80%);
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+.home__section-header {
+    .readmore {
+        text-transform: none;
+        margin-left: 1em;
+        font-weight: normal;
+    }
+}
+
+.home__section-header--full-width {
+    .readmore {
+        float: right;
+        margin-left: 0;
+    }
+}
 
 
 /*
@@ -1081,6 +942,7 @@ ul.home-news-list {
 FOOTER
 
 */
+
 #site-footer{
     background: $colour_footer_background;
     border-top: mix($colour_footer_background, #000, 70%) 2px solid;
@@ -1133,7 +995,7 @@ FOOTER
 
 
     h4 {
-        @include lato-bold;
+        font-family: $font_family_lato;
         text-transform: uppercase;
         font-size: 12px;
         color: $colour_middling_grey;
@@ -1253,6 +1115,56 @@ FOOTER
     }
 }
 
+
+.social-links-list {
+    li {
+        display: inline;
+    }
+    li a {
+        display: inline-block;
+        text-indent: -9999px;
+        height: 38px;
+        width: 38px;
+        background-image: url('/static/images/social-icons.png');
+        background-position: 0 -1px;
+        background-repeat: none;
+        margin-right: 8px;
+        &:hover,
+        &:focus {
+            background-position: 0 -41px;
+        }
+    }
+
+    .facebook-social-icon {
+        background-position: 0 -1px;
+        &:hover,
+        &:focus {
+            background-position: 0 -41px;
+        }
+    }
+    .twitter-social-icon {
+        background-position: -51px -1px;
+        &:hover,
+        &:focus {
+            background-position: -51px -41px;
+        }
+    }
+    .youtube-social-icon {
+        background-position: -101px -1px;
+        &:hover,
+        &:focus {
+            background-position: -101px -41px;
+        }
+    }
+    .rss-social-icon {
+        background-position: -150px -1px;
+        &:hover,
+        &:focus {
+            background-position: -150px -41px;
+        }
+    }
+}
+
 .infopage {
     max-width: 632px;
     ol,
@@ -1309,7 +1221,8 @@ FOOTER
     .vcard li {
         .label {
             display: block;
-            @include lato-bold;
+            font-family: $font_family_lato;
+            font-weight: bold;
             width: 100%;
             color: $colour_blackish;
             letter-spacing: 0.05em;
@@ -1406,7 +1319,8 @@ FOOTER
         margin-right:5px;
 
         .contact-kind {
-            @include lato-bold;
+            font-family: $font_family_lato;
+            font-weight: bold;
             color: $colour_blackish;
             letter-spacing: 0.05em;
             text-transform:uppercase;
@@ -1464,7 +1378,8 @@ FOOTER
         text-align: center;
         margin-bottom: 0.5em;
         text-decoration: none;
-        @include lato-bold;
+        font-family: $font_family_lato;
+        font-weight: bold;
     }
     a:hover,
     a:focus {
@@ -1477,7 +1392,9 @@ FOOTER
 
 /* PMO pagination */
 .pagination {
-    @include lato-bold;
+    font-family: $font_family_lato;
+    font-weight: bold;
+
     .current {
         background: transparent;
         border: 1px solid #d2d2ce;
@@ -1562,7 +1479,8 @@ ul.pager {
 
 /* Organisation pages */
 .kind-of-subtitle {
-    @include lato-bold;
+    font-family: $font_family_lato;
+    font-weight: bold;
     color: $colour_green;
     margin-top: -0.5em;
 }
@@ -2172,7 +2090,7 @@ ul.pager {
             margin-left: 120px;
         }
         p {
-            @include lato-regular;
+            font-family: $font_family_lato;
             font-size: 1.125em;
         }
         a {
@@ -2235,7 +2153,7 @@ ul.pager {
 
 .countdown_label {
     display: block;
-    @include lato-regular;
+    font-family: $font_family_lato;
     font-size: 0.875em;
 }
 
@@ -2320,7 +2238,7 @@ ul.pager {
 .election-page-subtitle {
     color: $colour_green;
     font-size: 1.5em;
-    @include lato-regular;
+    font-family: $font_family_lato;
     a {
         color: $colour_green;
         text-decoration: none;
@@ -2444,14 +2362,14 @@ ul.pager {
         text-transform: none;
         font-size: 1.875em;
         line-height: 1.2em;
-        @include lato-bold;
+        font-family: $font_family_lato;
 
         @media only all and (min-width: 640px), print {
             margin-right: 5em;
         }
     }
     .for-province {
-        @include lato-regular;
+        font-family: $font_family_lato;
         color: #777;
         font-size: 0.7em;
     }

@@ -61,9 +61,8 @@ class HomeViewTest(TestCase):
 
     def test_homepage_context(self):
         response = self.client.get('/')
-        self.assertIn('featured_person', response.context)
-        self.assertIn('featured_persons', response.context)
-        self.assertIn('article_columns', response.context)
+        self.assertIn('mp_corner', response.context)
+        self.assertIn('news_articles', response.context)
 
 @attr(country='south_africa')
 class ConstituencyOfficesTestCase(WebTest):

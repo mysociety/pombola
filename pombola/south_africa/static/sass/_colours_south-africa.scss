@@ -1,47 +1,27 @@
-$colour_primary: #e23d28;
-$colour_primary_light: #e23d28;
-
-$colour_secondary: #5bafb9;
-$colour_secondary_light: #5bafb9;
-
-// Black ish
-$colour_blackish: #555;
-
-// Black
-$colour_black: #222222;
-
-// White
-$colour_white: white;
-
-// Grey
-$colour_muted: #e6e6e6;
-
-// Darker Grey
-$colour_grey: gray;
-
-// Lighter Grey
+$colour_white: #fff;
 $colour_light_grey: #f6f6f6;
-
-// Light Black
-$colour_dark_grey: #2e2e2e;
-
-// Red
-$colour_red: #d40000;
-
-// Lighterer Grey
-$colour_lighter_grey: #f7f7f7;
-
-// Middling grey
 $colour_middling_grey: #b3b3b3;
+$colour_grey: #808080;
+$colour_blackish: #555;
+$colour_dark_grey: #2e2e2e;
+$colour_black: #222;
 
-// average amber
+$colour_terracotta: #e23d28;
+$colour_teal: #5bafb9;
 $colour_amber: #f9a326;
-
-//Green
+$colour_red: #d40000;
 $colour_green: #017b58;
+$colour_ultra_dark_green: #152425;
+$colour_cream: #f1f0ec;
 
+$colour_muted: #e6e6e6; // light grey
+$colour_lighter_grey: $colour_light_grey;
 
-$colour_main_background: #f1f0ec;
-$colour_footer_background: #152425;
+$colour_primary: $colour_terracotta;
+$colour_primary_light: $colour_primary;
 
+$colour_secondary: $colour_teal;
+$colour_secondary_light: $colour_secondary;
 
+$colour_main_background: $colour_cream;
+$colour_footer_background: $colour_ultra_dark_green;

@@ -30,7 +30,9 @@ from pombola.core import models
 from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
     PlaceDetailSub, OrganisationDetailView, PersonDetail, PlaceDetailView,
     OrganisationDetailSub, PersonSpeakerMappingsMixin)
-from pombola.info.models import InfoPage, Category as BlogCategory
+from pombola.info.models import (
+    InfoPage, Category as BlogCategory, Tag as BlogTag
+)
 from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView, SearchBaseView
 from pombola.slug_helpers.views import SlugRedirect
@@ -64,26 +66,19 @@ class SAHomeView(HomeView):
                 )
             ).order_by('-publication_date')
 
-        context['article_columns'] = [
-            articles_for_front_page[0:6:2],
-            articles_for_front_page[1:6:2]
-        ]
+        context['news_articles'] = articles_for_front_page[:2]
 
-        context['other_news_categories'] = []
-        for slug in ('advocacy-campaigns', 'commentary', 'mp-corner'):
-            try:
-                c = BlogCategory.objects.get(slug=slug)
-                context['other_news_categories'].append(
-                    (c, articles.filter(categories=c)[:1]))
-            except BlogCategory.DoesNotExist:
-               pass
-
-        # If there is editable homepage content make it available to the templates.
         try:
-            page = InfoPage.objects.get(slug="homepage-quote")
-            context['quote_content'] = page.content_as_plain_text
-        except InfoPage.DoesNotExist:
-            context['quote_content'] = None
+            c = BlogCategory.objects.get(slug='mp-corner')
+            context['mp_corner'] = articles.filter(categories=c)[1]
+        except (BlogCategory.DoesNotExist, IndexError):
+            context['mp_corner'] = None
+
+        try:
+            context['infographics'] = BlogTag.objects.get(name='infographic'). \
+                entries.order_by('-created')[0:4]
+        except BlogTag.DoesNotExist:
+            context['infographics'] = []
 
         return context
 
