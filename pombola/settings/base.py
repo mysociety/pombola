@@ -455,7 +455,8 @@ PIPELINE_CSS = {
     'core': {
         'source_filenames': (
             # .css files from core:
-            'css/jquery-ui-1.8.17.custom.css',
+            'css/jquery-ui.structure.css',
+            'css/jquery-ui.theme.css',
         ),
         'output_filename': 'css/core.css',
     },
@@ -485,8 +486,7 @@ PIPELINE_CSS = {
 DYNAMICALLY_LOADED_PIPELINE_JS = {
    'desktop_only': {
         'source_filenames': (
-            'js/libs/jquery-ui-1.8.17.custom.min.js',
-            'js/libs/jquery.ui.autocomplete.html.2010-10-25.js',
+            'js/libs/jquery-ui.js',
             'js/libs/jquery.form-v2.94.js',
             'js/desktop-functions.js',
         ),

@@ -31,6 +31,17 @@ $(function(){
               if (ui.item) return window.location = ui.item.url;
           }
       });
+      element.data('uiAutocomplete')._renderItem = function(ul, item) {
+          var itemElement = $('<li>'), imageElement = $('<img>');
+          imageElement.attr('src', item.image_url);
+          imageElement.attr('width', '16');
+          imageElement.attr('height', '16');
+          itemElement.append(imageElement).append(' ' + item.name);
+          if (item.extra_data) {
+              itemElement.append(' ').append($('<i>').append(item.extra_data));
+          }
+          return itemElement.appendTo(ul);
+      };
     });
 
     // auto-advance cycles through featured MPs; it also immediately replaces the

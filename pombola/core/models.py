@@ -721,8 +721,8 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
         return self.position_set.filter(organisation__isnull=False)
 
     @property
-    def name_autocomplete_html(self):
-        return "%s <i>(%s)</i>" % (self.name, self.kind.name)
+    def extra_autocomplete_data(self):
+        return self.kind.name
 
     def __unicode__(self):
         session_suffix = ""

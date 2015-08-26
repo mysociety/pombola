@@ -375,7 +375,7 @@ def remove_duplicate_places(response_data):
     previous_label_index = {}
 
     for i, result in enumerate(response_data):
-        this_label = result['label']
+        this_label = (result['name'], result['extra_data'])
         this_object = result['object']
         if (this_label in previous_label_index) and type(this_object) == models.Place:
             previous_i = previous_label_index[this_label]
@@ -436,11 +436,9 @@ def autocomplete(request):
             o = result.object
             css_class = o.css_class()
 
-            # use the specific field if it has one
-            if hasattr(o, 'name_autocomplete_html'):
-                label = o.name_autocomplete_html
-            else:
-                label = o.name
+            extra_autocomplete_data = None
+            if hasattr(o, 'extra_autocomplete_data'):
+                extra_autocomplete_data = o.extra_autocomplete_data
 
             image_url = None
             if hasattr(o, 'primary_image'):
@@ -453,7 +451,9 @@ def autocomplete(request):
 
             response_data.append({
                 'url': o.get_absolute_url(),
-                'label': '<img height="16" width="16" src="%s" /> %s' % (image_url, label),
+                'name': o.name,
+                'image_url': image_url,
+                'extra_data': extra_autocomplete_data,
                 'type': css_class,
                 'value': o.name,
                 'object': o
