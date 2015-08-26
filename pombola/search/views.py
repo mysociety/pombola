@@ -433,18 +433,18 @@ def autocomplete(request):
         # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
 
-            object = result.object
-            css_class = object.css_class()
+            o = result.object
+            css_class = o.css_class()
 
             # use the specific field if it has one
-            if hasattr(object, 'name_autocomplete_html'):
-                label = object.name_autocomplete_html
+            if hasattr(o, 'name_autocomplete_html'):
+                label = o.name_autocomplete_html
             else:
-                label = object.name
+                label = o.name
 
             image_url = None
-            if hasattr(object, 'primary_image'):
-                image = object.primary_image()
+            if hasattr(o, 'primary_image'):
+                image = o.primary_image()
                 if image:
                     image_url = get_thumbnail(image, '16x16', crop="center").url
 
@@ -452,11 +452,11 @@ def autocomplete(request):
                 image_url = "/static/images/" + css_class + "-16x16.jpg"
 
             response_data.append({
-                'url':   object.get_absolute_url(),
+                'url': o.get_absolute_url(),
                 'label': '<img height="16" width="16" src="%s" /> %s' % (image_url, label),
-                'type':  css_class,
-                'value': object.name,
-                'object': object
+                'type': css_class,
+                'value': o.name,
+                'object': o
             })
 
     remove_duplicate_places(response_data)
