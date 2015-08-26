@@ -106,6 +106,7 @@ class Entry(HansardModelBase):
                     update_aliases=True,
                     name_matching_algorithm=name_matching_algorithm,
                     )
+                cache[cache_key] = speakers
 
             if speakers and len(speakers) == 1:
                 speaker = speakers[0]
