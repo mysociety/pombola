@@ -2,6 +2,7 @@
 # ./manage.py or django-admin.py).
 
 import contextlib
+from mock import patch
 import sys
 
 from pombola.core.models import (
@@ -94,7 +95,8 @@ class MergePeopleCommandTest(unittest.TestCase):
             'keep_person': self.person_a.id,
             'delete_person': self.person_b.id,
             'sayit_id_scheme': 'org.mysociety.pombolatest',
-            'quiet': True
+            'quiet': True,
+            'interactive': False,
         }
 
     def test_conflicting_dob(self):
@@ -151,6 +153,49 @@ class MergePeopleCommandTest(unittest.TestCase):
         self.assertEqual(2, contacts.count())
         self.assertEqual(contacts[0].value, '555 5555')
         self.assertEqual(contacts[1].value, 'jimmy@example.org')
+
+    def test_merge_with_slugs(self):
+        options = {
+            'keep_person': self.person_a.slug,
+            'delete_person': self.person_b.slug,
+            'sayit_id_scheme': 'org.mysociety.pombolatest',
+            'quiet': True,
+            'interactive': False
+        }
+        call_command('core_merge_people', **options)
+
+        # Check that only person_a exists any more:
+        Person.objects.get(pk=self.person_a.id)
+        with self.assertRaises(Person.DoesNotExist):
+            Person.objects.get(pk=self.person_b.id)
+
+    @patch('__builtin__.raw_input', return_value='n')
+    def test_no_continue(self, mock_input):
+        options = {
+            'keep_person': self.person_a.id,
+            'delete_person': self.person_b.id,
+            'sayit_id_scheme': 'org.mysociety.pombolatest',
+            'quiet': True
+        }
+        with self.assertRaises(CommandError):
+            with no_stderr():
+                call_command('core_merge_people', **options)
+
+        # Check that nothing was deleted:
+        Person.objects.get(pk=self.person_a.id)
+        Person.objects.get(pk=self.person_b.id)
+
+    def test_inputs_are_the_same(self):
+        options = {
+            'keep_person': self.person_a.id,
+            'delete_person': self.person_a.slug,
+            'sayit_id_scheme': 'org.mysociety.pombolatest',
+            'quiet': True
+        }
+
+        with self.assertRaises(CommandError):
+            with no_stderr():
+                call_command('core_merge_people', **options)
 
     def tearDown(self):
         self.person_a.delete()
