@@ -224,6 +224,16 @@ class PersonManager(ManagerBase):
         else:
             return None
 
+    def get_by_slug_or_id(self, identifier):
+        try:
+            return self.get(slug=identifier)
+        except self.model.DoesNotExist:
+            try:
+                person_id = int(identifier)
+            except ValueError:
+                raise self.model.DoesNotExist, "Person matching query does not exist."
+            return self.get(pk=person_id)
+
     def get_featured(self):
         # select all the presidential aspirants
         return self.filter(can_be_featured=True)
