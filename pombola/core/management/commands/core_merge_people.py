@@ -148,7 +148,7 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
         # Then those in hansard, if that application is installed:
         #    hansard_models.Alias
         #    hansard_models.Entry
-        if 'hansard' in settings.INSTALLED_APPS:
+        if 'pombola.hansard' in settings.INSTALLED_APPS:
             import pombola.hansard.models as hansard_models
             hansard_models.Alias.objects.filter(person=to_delete).update(person=to_keep)
             hansard_models.Entry.objects.filter(speaker=to_delete).update(speaker=to_keep)
@@ -157,7 +157,7 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
 
         # Then those in interests_register, if that application is installed:
         #    interests_register_models.Entry
-        if 'interests_register' in settings.INSTALLED_APPS:
+        if 'pombola.interests_register' in settings.INSTALLED_APPS:
             import pombola.interests_register.models as interests_register_models
             interests_register_models.Entry.objects.filter(person=to_delete).update(person=to_keep)
 
