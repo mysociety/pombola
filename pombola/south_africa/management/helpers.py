@@ -13,7 +13,8 @@ from django.db.models import Q
 
 from mapit.models import Generation, Area, Code
 
-from pombola.core.models import Position
+from pombola.core.models import PopoloMembership
+
 
 def fix_province_name(province_name):
     if province_name == 'Kwa-Zulu Natal':

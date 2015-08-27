@@ -8,7 +8,7 @@ from django.core.management.base import LabelCommand
 from django.utils.text import slugify
 
 from pombola.core.models import (
-    Person, Organisation, Place, PositionTitle, Contact, ContactKind, ContentType
+    PopoloPerson, PopoloOrganization, Place, PositionTitle, ContentType
 )
 
 class Command(LabelCommand):

@@ -65,7 +65,7 @@ class HelpApiView(TemplateView):
 
 
 class OrganisationList(ListView):
-    model = models.Organisation
+    model = models.PopoloOrganization
 
 
 class SkipHidden(object):
@@ -97,11 +97,11 @@ class SubSlugRedirectMixin(SlugRedirectMixin):
 
 
 class PersonDetail(SlugRedirectMixin, SkipHidden, DetailView):
-    model = models.Person
+    model = models.PopoloPerson
 
 
 class PersonDetailSub(SubSlugRedirectMixin, SkipHidden, DetailView):
-    model = models.Person
+    model = models.PopoloPerson
     sub_page = None
 
     def get_template_names(self):
@@ -310,7 +310,7 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
 
 
 class OrganisationDetailView(SlugRedirectMixin, DetailView):
-    model = models.Organisation
+    model = models.PopoloOrganization
 
     def get_context_data(self, **kwargs):
         context = super(OrganisationDetailView, self).get_context_data(**kwargs)
@@ -322,7 +322,7 @@ class OrganisationDetailView(SlugRedirectMixin, DetailView):
 
 
 class OrganisationDetailSub(SubSlugRedirectMixin, DetailView):
-    model = models.Organisation
+    model = models.PopoloOrganization
     sub_page = None
 
     def get_template_names(self):

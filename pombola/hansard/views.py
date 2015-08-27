@@ -7,7 +7,7 @@ from django.template   import RequestContext
 from django.views.generic import TemplateView, DetailView, ListView
 
 from pombola.hansard.models import Sitting, Entry
-from pombola.core.models import Person
+from pombola.core.models import PopoloPerson
 
 # import models
 # from django.shortcuts  import render_to_response, redirect

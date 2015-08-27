@@ -10,7 +10,7 @@ from django.utils.text import slugify
 from django_date_extensions.fields import ApproximateDate
 
 from pombola.core.models import (
-    Person, Place, Position, PositionTitle, Organisation)
+    PopoloPerson, Place, PopoloMembership, PositionTitle, PopoloOrganization)
 
 def parse_approximate_date(s):
     """Take a partial ISO 8601 date, and return an ApproximateDate for it

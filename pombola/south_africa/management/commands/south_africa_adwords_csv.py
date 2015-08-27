@@ -6,7 +6,7 @@ import re
 import sys
 from optparse import make_option
 
-from pombola.core.models import Organisation, Place
+from pombola.core.models import PopoloOrganization, Place
 from pombola.south_africa.models import ZAPlace
 from django.core.management.base import NoArgsCommand
 

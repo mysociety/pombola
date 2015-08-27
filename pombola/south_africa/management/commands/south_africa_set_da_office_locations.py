@@ -40,10 +40,11 @@ from django.core.management.base import LabelCommand, CommandError
 # from django.db.models import Q
 from django.utils.text import slugify
 #
-from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
-                         ContactKind, OrganisationRelationshipKind,
-                         OrganisationRelationship, Identifier, Position,
-                         PositionTitle, Person)
+
+from pombola.core.models import (OrganisationKind, PopoloOrganization, PlaceKind,
+                         OrganisationRelationshipKind,
+                         OrganisationRelationship, PopoloMembership,
+                         PositionTitle, PopoloPerson)
 #
 # from mapit.models import Generation, Area, Code
 

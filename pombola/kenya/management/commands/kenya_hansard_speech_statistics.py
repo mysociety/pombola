@@ -6,7 +6,7 @@ from optparse import make_option
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import Count
 
-from pombola.core.models import Person
+from pombola.core.models import PopoloPerson
 from pombola.hansard.models import Entry, Venue
 
 class MultipleMembershipsException(Exception):

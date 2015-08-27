@@ -4,7 +4,8 @@ import datetime
 from django.db import models
 
 from pombola.hansard.models.base import HansardModelBase
-from pombola.core.models import PopoloPerson, Person
+from pombola.core.models import PopoloPerson
+
 
 class AliasQuerySet(models.query.QuerySet):
     def unassigned(self):

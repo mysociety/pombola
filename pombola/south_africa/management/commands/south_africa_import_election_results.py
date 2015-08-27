@@ -11,7 +11,7 @@ from django.utils.text import slugify
 from django_date_extensions.fields import ApproximateDate
 
 from pombola.core.models import (
-    Person, Organisation, OrganisationKind, Place, PositionTitle, Contact, ContactKind, ContentType
+    PopoloPerson, PopoloOrganization, OrganisationKind, Place, PositionTitle, ContentType
 )
 
 # Pretty colours to make it easier to spot things.

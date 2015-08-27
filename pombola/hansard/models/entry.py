@@ -1,9 +1,8 @@
 import re
 
 from django.db import models
-from django.core.urlresolvers import reverse
 
-from pombola.core.models import Person, PopoloPerson
+from pombola.core.models import PopoloPerson
 from pombola.hansard.models import Sitting, Alias
 from pombola.hansard.models.base import HansardModelBase
 

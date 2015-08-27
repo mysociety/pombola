@@ -12,7 +12,7 @@ from django.core.files import File
 from django.utils.text import slugify
 
 from pombola.core.models import (
-    Person, ContentType, Image
+    PopoloPerson, ContentType, Image
 )
 
 from haystack.query import SearchQuerySet

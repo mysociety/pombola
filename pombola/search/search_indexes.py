@@ -19,12 +19,14 @@ from pombola.core import models as core_models
 class BaseIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
 
-class PersonIndex(BaseIndex, indexes.Indexable):
+
+class PopoloPersonIndex(BaseIndex, indexes.Indexable):
     name_auto = indexes.EdgeNgramField(model_attr='name')
     hidden = indexes.BooleanField(model_attr='hidden')
 
     def get_model(self):
-        return core_models.Person
+        return core_models.PopoloPerson
+
 
 class PlaceIndex(BaseIndex, indexes.Indexable):
     name_auto = indexes.EdgeNgramField(model_attr='name')
@@ -32,11 +34,13 @@ class PlaceIndex(BaseIndex, indexes.Indexable):
     def get_model(self):
         return core_models.Place
 
-class OrganisationIndex(BaseIndex, indexes.Indexable):
+
+class PopoloOrganizationIndex(BaseIndex, indexes.Indexable):
     name_auto = indexes.EdgeNgramField(model_attr='name')
 
     def get_model(self):
-        return core_models.Organisation
+        return core_models.PopoloOrganization
+
 
 class PositionTitleIndex(BaseIndex, indexes.Indexable):
     name_auto = indexes.EdgeNgramField(model_attr='name')

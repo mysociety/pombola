@@ -17,7 +17,7 @@ from .forms import (
     YouthEmploymentInputForm
 )
 
-from pombola.core.models import Person
+from pombola.core.models import PopoloPerson
 from pombola.core.views import PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
     ExperimentViewDataMixin, ExperimentFormSubmissionMixin,

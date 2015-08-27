@@ -11,7 +11,7 @@ from pombola.core.views import (HomeView, PlaceDetailView,
 
 person_patterns = patterns('pombola.core.views',
     url(r'^all/',
-        ListView.as_view(model=models.Person),
+        ListView.as_view(model=models.PopoloPerson),
         name='person_list'),
 
     url(

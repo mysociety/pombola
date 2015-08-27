@@ -14,7 +14,11 @@ from nose.plugins.attrib import attr
 from pombola.hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
 from pombola.hansard.models import Source, Sitting, Entry, Venue, Alias
 
-from pombola.core.models import Person, PositionTitle, Position
+from pombola.core.models import (
+    PopoloPerson,
+    PositionTitle,
+    PopoloMembership,
+    )
 
 from django_date_extensions.fields import ApproximateDate
 from django.conf import settings

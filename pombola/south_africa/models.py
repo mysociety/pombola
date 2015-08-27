@@ -1,4 +1,5 @@
-from pombola.core.models import Place, Position, Organisation
+from pombola.core.models import Place, PopoloMembership, PopoloOrganization
+
 
 class ZAPlace(Place):
     class Meta:

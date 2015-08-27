@@ -16,11 +16,13 @@ from django.core.management.base import LabelCommand
 from django.db.models import Q
 from django.utils.text import slugify
 
-from pombola.core.models import (OrganisationKind, Organisation, Place, PlaceKind,
-                         ContactKind, Contact, OrganisationRelationshipKind,
-                         OrganisationRelationship, Identifier, Position,
-                         PositionTitle, Person, AlternativePersonName,
-                         InformationSource)
+from popolo.models import ContactDetail, Identifier, Source
+
+from pombola.core.models import (OrganisationKind, PopoloOrganization, Place, PlaceKind,
+                         OrganisationRelationshipKind,
+                         OrganisationRelationship, PopoloMembership,
+                         PositionTitle, PopoloPerson, PopoloPersonOtherName
+                                 )
 
 from ..helpers import (
     LocationNotFound,
@@ -28,11 +30,11 @@ from ..helpers import (
     get_geocode_cache, write_geocode_cache, debug_location_change
 )
 
-organisation_content_type = ContentType.objects.get_for_model(Organisation)
+organisation_content_type = ContentType.objects.get_for_model(PopoloOrganization)
 
-person_content_type = ContentType.objects.get_for_model(Person)
+person_content_type = ContentType.objects.get_for_model(PopoloPerson)
 
-position_content_type = ContentType.objects.get_for_model(Position)
+position_content_type = ContentType.objects.get_for_model(PopoloMembership)
 
 test = 'yes'
 

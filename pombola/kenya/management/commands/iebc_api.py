@@ -15,7 +15,14 @@ from django.utils.text import slugify
 
 from django_date_extensions.fields import ApproximateDate
 
-from pombola.core.models import Person, Place, PlaceKind, ParliamentarySession, Position, PositionTitle
+from pombola.core.models import (
+    PopoloPerson,
+    Place,
+    PlaceKind,
+    ParliamentarySession,
+    PopoloMembership,
+    PositionTitle,
+    )
 
 from django.core.files.base import ContentFile
 from pombola.images.models import Image

@@ -40,10 +40,10 @@ from django.utils.text import slugify
 
 from mapit.models import Area, Generation
 
-from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
-                         ContactKind, OrganisationRelationshipKind,
-                         OrganisationRelationship, Identifier, Position,
-                         PositionTitle, Person)
+from pombola.core.models import (OrganisationKind, PopoloOrganization, PlaceKind,
+                         OrganisationRelationshipKind,
+                         OrganisationRelationship, PopoloMembership,
+                         PositionTitle, PopoloPerson)
 
 from ..helpers import (
     fix_province_name, LocationNotFound,

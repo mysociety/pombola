@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 from django.core.management import BaseCommand
 
-from pombola.core.models import Person, ParliamentarySession
+from pombola.core.models import PopoloPerson, ParliamentarySession
 from pombola.bills.models import Bill
 
 # These are the URLs we want to scrape bill information from,

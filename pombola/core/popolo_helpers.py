@@ -9,7 +9,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django_date_extensions.fields import ApproximateDate
 
-from pombola.core.models import Person, Organisation, Position
+from pombola.core.models import PopoloPerson, PopoloOrganization, PopoloMembership
 from pombola import country
 
 extra_popolo_person_fields = (

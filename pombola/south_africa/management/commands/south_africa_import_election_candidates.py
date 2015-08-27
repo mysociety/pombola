@@ -10,9 +10,9 @@ import json
 import string
 import datetime
 from optparse import make_option
-from pombola.core.models import (Organisation, OrganisationKind,
-                         Person, Position,
-                         PositionTitle, AlternativePersonName)
+from pombola.core.models import (PopoloOrganization, OrganisationKind,
+                         PopoloPerson, PopoloMembership,
+                         PositionTitle, PopoloPersonOtherName)
 from django.core.management import call_command
 from django.core.management.base import NoArgsCommand, CommandError
 from django.utils import encoding

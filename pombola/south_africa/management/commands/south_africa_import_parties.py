@@ -6,7 +6,7 @@ if necessary.
 import os
 import sys
 import unicodecsv
-from pombola.core.models import Organisation, OrganisationKind
+from pombola.core.models import PopoloOrganization, OrganisationKind
 from django.core.management.base import LabelCommand
 
 class Command(LabelCommand):

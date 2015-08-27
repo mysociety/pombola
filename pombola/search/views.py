@@ -342,7 +342,7 @@ class GeocoderView(TemplateView):
 
 
 known_kinds = {
-    'person': models.Person,
+    'person': models.PopoloPerson,
     'place':  models.Place,
 }
 

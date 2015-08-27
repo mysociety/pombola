@@ -3,7 +3,7 @@ from optparse import make_option
 from django.core.management.base import NoArgsCommand, CommandError
 from django.db.models import Q
 
-from pombola.core.models import Person, Position
+from pombola.core.models import PopoloPerson, PopoloMembership
 
 class Command(NoArgsCommand):
 

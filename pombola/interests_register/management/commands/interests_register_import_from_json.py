@@ -4,7 +4,7 @@ from datetime import date
 
 from django.core.management.base import LabelCommand, CommandError
 
-from pombola.core.models import Person
+from pombola.core.models import PopoloPerson
 from ...models import Release, Category, Entry, EntryLineItem
 
 class Command(LabelCommand):

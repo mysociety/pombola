@@ -3,7 +3,7 @@ import os
 import sys
 from optparse import make_option
 
-from pombola.core.models import Position
+from pombola.core.models import PopoloMembership
 from django.core.management.base import NoArgsCommand
 
 

@@ -14,7 +14,7 @@ from django.core.management.base import NoArgsCommand
 
 from django_date_extensions.fields import ApproximateDate
 
-from pombola.core.models import Position, Organisation
+from pombola.core.models import PopoloMembership, PopoloOrganization
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):

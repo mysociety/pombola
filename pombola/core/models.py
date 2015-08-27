@@ -1208,7 +1208,7 @@ def raw_query_with_prefetch(query_model, query, params, fields_prefetches):
             models.Position,
             'SELECT * FROM core_position WHERE ....',
             (), # Any parameters for the raw query
-            (('person', ('alternative_names', 'images')),
+            (('person', ('alternativ_enames', 'images')),
              ('organisation', ()))
         )
     """

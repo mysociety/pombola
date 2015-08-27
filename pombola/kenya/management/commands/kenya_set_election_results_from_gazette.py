@@ -18,8 +18,14 @@ from django.core.management.base import NoArgsCommand, CommandError
 from django.utils.text import slugify
 
 from pombola.core.models import (
-    AlternativePersonName, Organisation, Person, Place, PlaceKind, Position,
-    PositionTitle)
+    PopoloPersonOtherName,
+    PopoloOrganization,
+    PopoloPerson,
+    Place,
+    PlaceKind,
+    PopoloMembership,
+    PositionTitle,
+    )
 
 data_directory = os.path.join(sys.path[0], 'pombola', 'kenya', '2013-election-data')
 gazette_directory = os.path.join(data_directory, 'gazette-results')

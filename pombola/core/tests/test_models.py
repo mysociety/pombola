@@ -553,7 +553,7 @@ class PersonPlaceTest(unittest.TestCase):
 class SummaryTest( unittest.TestCase ):
 
     def setUp(self):
-        self.person, _ = models.Person.objects.get_or_create(
+        self.person, _ = models.PopoloPerson.objects.get_or_create(
             legal_name = "Test Person",
             slug       = 'test-person'
         )
