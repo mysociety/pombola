@@ -100,454 +100,234 @@ class ManagerBase(models.GeoManager):
         return obj
 
 
-class IdentifierMixin(object):
-
-    """Useful methods for objects that may be referred to by an Indentifier"""
-
-    def get_identifier(self, scheme):
-        """Returns the identifier in a particular scheme for this object
-
-        If there is no identifier for this object in that scheme, then
-        None is returned. If there is more than one identifier found,
-        then an exception is thrown."""
-        try:
-            identifier = Identifier.objects.get(
-                content_type = ContentType.objects.get_for_model(self),
-                scheme=scheme,
-                object_id=self.id)
-            return identifier.identifier
-        except exceptions.ObjectDoesNotExist:
-            return None
-
-    def get_identifiers(self, scheme):
-        """Returns all identifiers in a particular scheme for this object"""
-
-        return Identifier.objects.filter(
-            content_type=ContentType.objects.get_for_model(self),
-            scheme=scheme,
-            object_id=self.id).values_list('identifier', flat=True)
-
-    def get_all_identifiers(self):
-        """Return all identifiers for this object in any scheme
-
-        This returns a dict which maps a scheme to a set of
-        identifiers."""
-        results = defaultdict(set)
-        for scheme, identifier in Identifier.objects.filter(
-                content_type=ContentType.objects.get_for_model(self),
-                object_id=self.id).values_list('scheme', 'identifier'):
-            results[scheme].add(identifier)
-        return results
-
-class ContactKind(ModelBase):
-    name = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
-
-    objects = ManagerBase()
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-       ordering = ["slug"]
-
-
-class Contact(ModelBase):
-    kind = models.ForeignKey('ContactKind')
-    value = models.TextField()
-    note = models.TextField(blank=True, help_text="publicly visible, use to clarify contact detail")
-    source = models.CharField(max_length=500, blank=True, default='', help_text="where did this contact detail come from")
-
-    # link to other objects using the ContentType system
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
-
-    objects = ManagerBase()
-
-    def __unicode__(self):
-        return "%s (%s for %s)" % (self.value, self.kind, self.content_object)
-
-    def generate_tasks(self):
-        """generate tasks for ourselves, and for the foreign object"""
-        Task.call_generate_tasks_on_if_possible(self.content_object)
-        return []
-
-    class Meta:
-       ordering = ["content_type", "object_id", "kind"]
-
-
-class InformationSource(ModelBase):
-    source = models.CharField(max_length=500)
-    note = models.TextField(blank=True)
-    entered = models.BooleanField(default=False, help_text="has the information in this source been entered into this system?")
-
-    # link to other objects using the ContentType system
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
-
-    objects = ManagerBase()
-
-    def __unicode__(self):
-        return "%s: %s" % (self.source, self.content_object)
-
-    class Meta:
-       ordering = ["content_type", "object_id", "source"]
-
-
-class PersonQuerySet(models.query.GeoQuerySet):
-    def is_politician(self, when=None):
-        # FIXME - Don't like the look of this, rather a big subquery.
-        return self.filter(position__in=Position.objects.all().current_politician_positions(when))
-
-class PersonManager(ManagerBase):
-    def get_query_set(self):
-        return PersonQuerySet(self.model)
-
-    def loose_match_name(self, name):
-        """Search for a loose match on a name. May not be too reliable"""
-
-        # import here to avoid creating an import loop
-        from haystack.query import SearchQuerySet
-
-        # Try matching all the bits
-        results = SearchQuerySet().filter_and(content=name).models(self.model)
-
-        # if that fails try matching all the bits in any order
-        if not len(results):
-            results = SearchQuerySet().models(Person)
-            for bit in re.split(r'\s+', name):
-                results = results.filter_and(content=bit)
-
-        # If we have exactly one result return that
-        if len(results) == 1:
-            return results[0].object
-        else:
-            return None
-
-    def get_featured(self):
-        # select all the presidential aspirants
-        return self.filter(can_be_featured=True)
-
-    def get_next_featured(self, current_slug, want_previous=False):
-        """ Returns the next featured person, in slug order: using slug order because it's unique and easy to
-            exclude the current person.
-
-            If no slug is provided, returns a random person.
-            If the slug is purely numeric (n), this consistently returns a person (actually the nth wrapping around
-            where necessary): this allows js to generate random calls that can nonetheless be served from the cache.\
-        """
-
-        # original code that selects based on the can_be_featured flag
-        # all_results = self.filter(can_be_featured=True)
-
-        # select all the presidential aspirants
-        all_results = self.get_featured()
-
-        if not all_results.exists():
-            return None
-        sort_order = 'slug'
-        if not current_slug:
-            return random.choice(all_results)
-        elif current_slug.isdigit():
-            all_results = all_results.order_by(sort_order)
-            return all_results[int(current_slug) % len(all_results)] # ignore direction: just provide a person
-        else:
-            all_results = all_results.exclude(slug=current_slug)
-        if len(all_results) == 0: # special case: return the excluded person if they are the only one or nothing
-            all_results = self.filter(can_be_featured=True)
-            if all_results.exists():
-                return all_results[0]
-            else:
-                return None
-        if want_previous:
-            sort_order = '-slug'
-            results = all_results.order_by(sort_order).filter(slug__lt=current_slug)[:1]
-        else:
-            results = all_results.order_by(sort_order).filter(slug__gt=current_slug)[:1]
-        if len(results) == 1:
-            return results[0]
-        else: # we're at the start/end of the list, wrap round to the other end
-            results = all_results.order_by(sort_order)[:1]
-            if len(results) == 1:
-                return results[0]
-            else:
-                return None
-
-
-class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
-    title = models.CharField(max_length=100, blank=True)
-    legal_name = models.CharField(max_length=300)
-    slug = models.SlugField(
-        max_length=200,
-        unique=True,
-        help_text="auto-created from first name and last name",
-        validators=[partial(validate_slug_not_redirecting, 'core', 'Person')],
-    )
-    gender = models.CharField(max_length=20, blank=True, help_text="this is typically, but not restricted to, 'male' or 'female'")
-    date_of_birth = ApproximateDateField(blank=True, help_text=date_help_text)
-    date_of_death = ApproximateDateField(blank=True, help_text=date_help_text)
-    # religion
-    # tribe
-    summary = MarkupField(blank=True, default='')
-
-    # The "primary" email address in some sense - there may be others
-    # (or this one) in contacts.
-    email = models.EmailField(blank=True)
-
-    hidden = models.BooleanField(
-        default=False,
-        help_text="hide this person's pages from normal users")
-
-    contacts = generic.GenericRelation(Contact)
-    images = generic.GenericRelation(Image)
-    objects = PersonManager()
-
-    can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
-
-    # Additional fields added largely for Popolo spec compliance:
-    biography = MarkupField(blank=True, default='')
-    national_identity = models.CharField(max_length=100, blank=True)
-    family_name = models.CharField(max_length=300, blank=True)
-    given_name = models.CharField(max_length=300, blank=True)
-    additional_name = models.CharField(max_length=300, blank=True)
-    honorific_prefix = models.CharField(max_length=300, blank=True)
-    honorific_suffix = models.CharField(max_length=300, blank=True)
-    sort_name = models.CharField(max_length=300, blank=True)
-
-    @property
-    def name(self):
-        # n.b. we're deliberately not using
-        # self.alternative_names.filter(name_to_use=True) here, since
-        # that would do a new query per person, even if the
-        # alternative names had been loaded by prefetch_related.  See:
-        #   http://stackoverflow.com/a/12974801/223092
-        alternative_names_to_use = [an for an in self.alternative_names.all()
-                                    if an.name_to_use]
-        if alternative_names_to_use:
-            return alternative_names_to_use[0].alternative_name
-        else:
-            return self.legal_name
-
-    def additional_names(self, include_name_to_use=False):
-        filter_args = {}
-        if not include_name_to_use:
-            filter_args['name_to_use'] = False
-        return [an.alternative_name
-                for an in
-                self.alternative_names.filter(**filter_args)]
-
-    def all_names_set(self):
-        """Return a set of all known names for this Person"""
-        result = set(self.additional_names(include_name_to_use=True))
-        result.add(self.legal_name)
-        return result
-
-    @transaction.commit_on_success
-    def add_alternative_name(self, alternative_name, name_to_use=False, note=''):
-        if name_to_use:
-            # Make sure that no other alternative names are set as
-            # the name to use:
-            for an in self.alternative_names.all():
-                an.name_to_use = False
-                an.save()
-        alternative_name = re.sub(r'\s+', ' ', alternative_name).strip()
-        AlternativePersonName.objects.update_or_create({'person': self,
-                                                        'alternative_name': alternative_name,
-                                                        'note': note},
-                                                       {'name_to_use': name_to_use})
-        apn = AlternativePersonName(person=self,
-                                    alternative_name=alternative_name,
-                                    name_to_use=name_to_use)
-
-    def remove_alternative_name(self, alternative_name):
-        self.alternative_names.filter(alternative_name=alternative_name).delete()
-
-    def aspirant_positions(self):
-        return self.position_set.all().current_aspirant_positions()
-
-    def aspirant_positions_ever(self):
-        return self.position_set.all().aspirant_positions()
-
-    def is_aspirant(self):
-        return self.aspirant_positions().exists()
-
-    def politician_positions(self):
-        return self.position_set.all().current_politician_positions()
-
-    def politician_positions_ever(self):
-        return self.politician_positions()
-
-    def is_politician(self):
-        return self.politician_positions().exists()
-
-    def parties(self):
-        """Return list of parties that this person is currently a member of"""
-        party_memberships = self.position_set.all().currently_active().filter(title__slug='member').filter(organisation__kind__slug='party')
-        return Organisation.objects.filter(position__in=party_memberships)
-
-    def parties_ever(self):
-        """Return list of parties that this person has ever been a member of"""
-        party_memberships = self.position_set.all().filter(title__slug='member').filter(organisation__kind__slug='party')
-        return Organisation.objects.filter(position__in=party_memberships)
-
-    def coalitions(self):
-        """Return list of coalitions that this person is currently a member of"""
-        coalition_memberships = self.position_set.all().currently_active().filter(title__slug='coalition-member')
-        return Organisation.objects.filter(position__in=coalition_memberships)
-
-    def parties_and_coalitions(self):
-        """Return list of parties and coalitions that this person is currently a member of"""
-        party_memberships = (
-            self
-            .position_set
-            .all()
-            .currently_active()
-            .filter(
-              # select the political party memberships
-              ( Q(title__slug='member') & Q(organisation__kind__slug='party') )
-
-              # select the coalition memberships
-              | Q(title__slug='coalition-member')
-            )
-        )
-        return Organisation.objects.filter(position__in=party_memberships).distinct()
-
-    def constituencies(self):
-        """Return list of constituencies that this person is currently an politician for"""
-        return Place.objects.filter(position__in=self.politician_positions()).distinct()
-
-    def constituency_offices(self):
-        """
-        Return list of constituency offices that this person is currently associated with.
-
-        This is specific to the South African site (ZA).
-        """
-        contacts = self.position_set.filter(title__slug="constituency-contact").currently_active()
-        return Organisation.objects.filter(position__in=contacts)
-
-    def aspirant_constituencies(self):
-        """Return list of constituencies that this person is currently an aspirant for"""
-        return Place.objects.filter(position__in=self.aspirant_positions())
-
-    def __unicode__(self):
-        return self.legal_name
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('person', [self.slug])
-
-    def generate_tasks(self):
-        """Generate tasks for missing contact details etc"""
-        task_slugs = []
-
-        wanted_contact_slugs = ['phone','email','address']
-        have_contact_slugs = [c.kind.slug for c in self.contacts.all()]
-        for wanted in wanted_contact_slugs:
-            if wanted not in have_contact_slugs:
-                task_slugs.append("find-missing-" + wanted)
-
-        return task_slugs
-
-    def scorecard_overall(self):
-        total_count = super(Person, self).active_scorecards().count()
-        total_score = super(Person, self).active_scorecards().aggregate(models.Sum('score'))['score__sum']
-
-        for constituency in self.constituencies():
-            constituency_count = constituency.active_scorecards().count()
-            if constituency_count:
-                total_count += constituency_count
-                total_score += constituency.active_scorecards().aggregate(models.Sum('score'))['score__sum']
-
-        return total_score / total_count
-
-    def scorecards(self):
-        """This is the list of scorecards that will actually be displayed on the site."""
-        scorecard_lists = []
-
-        # We're only showing scorecards for current MPs
-        if self.is_politician():
-            scorecard_lists.append(super(Person, self).scorecards())
-
-            scorecard_lists.extend([x.scorecards() for x in self.constituencies()])
-
-        return itertools.chain(*scorecard_lists)
-
-    def has_scorecards(self):
-        # We're only showing scorecards for current MPs
-        if self.is_politician():
-            return super(Person, self).has_scorecards() or any([x.has_scorecards() for x in self.constituencies()])
-
-    @property
-    def show_overall_score(self):
-        """Should we show an overall score? Yes if applicable and there are active scorecards and we have the CDF category"""
-        if super(Person, self).show_overall_score:
-            # We could show the scorecard. Check that there is a CDF report in there.
-            for constituency in self.constituencies():
-                if constituency.active_scorecards().filter(category__slug='cdf-performance').exists():
-                    return True
-
-        # fall through to here
-        return False
-
-    class Meta:
-       ordering = ["sort_name"]
-
-
-def update_sort_name(**kwargs):
-    """A signal handler function to set a default sort_name"""
-    person = kwargs.get('instance')
-    if person.legal_name and not person.sort_name:
-        person.sort_name = person.legal_name.strip().split()[-1]
-
-post_init.connect(update_sort_name, Person)
-
-
-class AlternativePersonName(ModelBase):
-    person = models.ForeignKey(Person, related_name='alternative_names')
-    alternative_name = models.CharField(max_length=300)
-    name_to_use = models.BooleanField(default=False)
-
-    start_date = ApproximateDateField(blank=True, help_text=date_help_text)
-    end_date = ApproximateDateField(blank=True, help_text=date_help_text)
-    note = models.CharField(max_length=300, blank=True)
-
-    family_name = models.CharField(max_length=300, blank=True)
-    given_name = models.CharField(max_length=300, blank=True)
-    additional_name = models.CharField(max_length=300, blank=True)
-    honorific_prefix = models.CharField(max_length=300, blank=True)
-    honorific_suffix = models.CharField(max_length=300, blank=True)
-
-    objects = ManagerBase()
-
-    def __unicode__(self):
-        return self.alternative_name + (" [*]" if self.name_to_use else "")
-
-    def get_admin_url(self):
-        return False
-
-    class Meta:
-        unique_together = ("person", "alternative_name")
-
-
-class Identifier(ModelBase):
-    """This model represents alternative identifiers for objects"""
-
-    scheme = models.CharField(max_length=200)
-    identifier = models.CharField(max_length=500)
-
-    content_type = models.ForeignKey(ContentType, related_name="core_identifier_set")
-    object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
-
-    objects = ManagerBase()
-
-    def __unicode__(self):
-        return '"%s%s"' % (self.scheme, self.identifier)
-
-    class Meta:
-        unique_together = ('scheme', 'identifier')
+# class IdentifierMixin(object):
+#
+#     """Useful methods for objects that may be referred to by an Indentifier"""
+#
+#     def get_identifier(self, scheme):
+#         """Returns the identifier in a particular scheme for this object
+#
+#         If there is no identifier for this object in that scheme, then
+#         None is returned. If there is more than one identifier found,
+#         then an exception is thrown."""
+#         try:
+#             identifier = Identifier.objects.get(
+#                 content_type = ContentType.objects.get_for_model(self),
+#                 scheme=scheme,
+#                 object_id=self.id)
+#             return identifier.identifier
+#         except exceptions.ObjectDoesNotExist:
+#             return None
+#
+#     def get_identifiers(self, scheme):
+#         """Returns all identifiers in a particular scheme for this object"""
+#
+#         return Identifier.objects.filter(
+#             content_type=ContentType.objects.get_for_model(self),
+#             scheme=scheme,
+#             object_id=self.id).values_list('identifier', flat=True)
+#
+#     def get_all_identifiers(self):
+#         """Return all identifiers for this object in any scheme
+#
+#         This returns a dict which maps a scheme to a set of
+#         identifiers."""
+#         results = defaultdict(set)
+#         for scheme, identifier in Identifier.objects.filter(
+#                 content_type=ContentType.objects.get_for_model(self),
+#                 object_id=self.id).values_list('scheme', 'identifier'):
+#             results[scheme].add(identifier)
+#         return results
+#
+# class ContactKind(ModelBase):
+#     name = models.CharField(max_length=200, unique=True)
+#     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
+#
+#     objects = ManagerBase()
+#
+#     def __unicode__(self):
+#         return self.name
+#
+#     class Meta:
+#        ordering = ["slug"]
+#
+#
+# class Contact(ModelBase):
+#     kind = models.ForeignKey('ContactKind')
+#     value = models.TextField()
+#     note = models.TextField(blank=True, help_text="publicly visible, use to clarify contact detail")
+#     source = models.CharField(max_length=500, blank=True, default='', help_text="where did this contact detail come from")
+#
+#     # link to other objects using the ContentType system
+#     content_type = models.ForeignKey(ContentType)
+#     object_id = models.PositiveIntegerField()
+#     content_object = generic.GenericForeignKey('content_type', 'object_id')
+#
+#     objects = ManagerBase()
+#
+#     def __unicode__(self):
+#         return "%s (%s for %s)" % (self.value, self.kind, self.content_object)
+#
+#     def generate_tasks(self):
+#         """generate tasks for ourselves, and for the foreign object"""
+#         Task.call_generate_tasks_on_if_possible(self.content_object)
+#         return []
+#
+#     class Meta:
+#        ordering = ["content_type", "object_id", "kind"]
+#
+#
+# class InformationSource(ModelBase):
+#     source = models.CharField(max_length=500)
+#     note = models.TextField(blank=True)
+#     entered = models.BooleanField(default=False, help_text="has the information in this source been entered into this system?")
+#
+#     # link to other objects using the ContentType system
+#     content_type = models.ForeignKey(ContentType)
+#     object_id = models.PositiveIntegerField()
+#     content_object = generic.GenericForeignKey('content_type', 'object_id')
+#
+#     objects = ManagerBase()
+#
+#     def __unicode__(self):
+#         return "%s: %s" % (self.source, self.content_object)
+#
+#     class Meta:
+#        ordering = ["content_type", "object_id", "source"]
+#
+#
+# class PersonQuerySet(models.query.GeoQuerySet):
+#     def is_politician(self, when=None):
+#         # FIXME - Don't like the look of this, rather a big subquery.
+#         return self.filter(position__in=Position.objects.all().current_politician_positions(when))
+#
+# class PersonManager(ManagerBase):
+#     def get_query_set(self):
+#         return PersonQuerySet(self.model)
+#
+#     def loose_match_name(self, name):
+#         """Search for a loose match on a name. May not be too reliable"""
+#
+#         # import here to avoid creating an import loop
+#         from haystack.query import SearchQuerySet
+#
+#         # Try matching all the bits
+#         results = SearchQuerySet().filter_and(content=name).models(self.model)
+#
+#         # if that fails try matching all the bits in any order
+#         if not len(results):
+#             results = SearchQuerySet().models(Person)
+#             for bit in re.split(r'\s+', name):
+#                 results = results.filter_and(content=bit)
+#
+#         # If we have exactly one result return that
+#         if len(results) == 1:
+#             return results[0].object
+#         else:
+#             return None
+#
+#     def get_featured(self):
+#         # select all the presidential aspirants
+#         return self.filter(can_be_featured=True)
+#
+#     def get_next_featured(self, current_slug, want_previous=False):
+#         """ Returns the next featured person, in slug order: using slug order because it's unique and easy to
+#             exclude the current person.
+#
+#             If no slug is provided, returns a random person.
+#             If the slug is purely numeric (n), this consistently returns a person (actually the nth wrapping around
+#             where necessary): this allows js to generate random calls that can nonetheless be served from the cache.\
+#         """
+#
+#         # original code that selects based on the can_be_featured flag
+#         # all_results = self.filter(can_be_featured=True)
+#
+#         # select all the presidential aspirants
+#         all_results = self.get_featured()
+#
+#         if not all_results.exists():
+#             return None
+#         sort_order = 'slug'
+#         if not current_slug:
+#             return random.choice(all_results)
+#         elif current_slug.isdigit():
+#             all_results = all_results.order_by(sort_order)
+#             return all_results[int(current_slug) % len(all_results)] # ignore direction: just provide a person
+#         else:
+#             all_results = all_results.exclude(slug=current_slug)
+#         if len(all_results) == 0: # special case: return the excluded person if they are the only one or nothing
+#             all_results = self.filter(can_be_featured=True)
+#             if all_results.exists():
+#                 return all_results[0]
+#             else:
+#                 return None
+#         if want_previous:
+#             sort_order = '-slug'
+#             results = all_results.order_by(sort_order).filter(slug__lt=current_slug)[:1]
+#         else:
+#             results = all_results.order_by(sort_order).filter(slug__gt=current_slug)[:1]
+#         if len(results) == 1:
+#             return results[0]
+#         else: # we're at the start/end of the list, wrap round to the other end
+#             results = all_results.order_by(sort_order)[:1]
+#             if len(results) == 1:
+#                 return results[0]
+#             else:
+#                 return None
+#
+# def update_sort_name(**kwargs):
+#     """A signal handler function to set a default sort_name"""
+#     person = kwargs.get('instance')
+#     if person.legal_name and not person.sort_name:
+#         person.sort_name = person.legal_name.strip().split()[-1]
+#
+# post_init.connect(update_sort_name, Person)
+#
+#
+# class AlternativePersonName(ModelBase):
+#     person = models.ForeignKey(Person, related_name='alternative_names')
+#     alternative_name = models.CharField(max_length=300)
+#     name_to_use = models.BooleanField(default=False)
+#
+#     start_date = ApproximateDateField(blank=True, help_text=date_help_text)
+#     end_date = ApproximateDateField(blank=True, help_text=date_help_text)
+#     note = models.CharField(max_length=300, blank=True)
+#
+#     family_name = models.CharField(max_length=300, blank=True)
+#     given_name = models.CharField(max_length=300, blank=True)
+#     additional_name = models.CharField(max_length=300, blank=True)
+#     honorific_prefix = models.CharField(max_length=300, blank=True)
+#     honorific_suffix = models.CharField(max_length=300, blank=True)
+#
+#     objects = ManagerBase()
+#
+#     def __unicode__(self):
+#         return self.alternative_name + (" [*]" if self.name_to_use else "")
+#
+#     def get_admin_url(self):
+#         return False
+#
+#     class Meta:
+#         unique_together = ("person", "alternative_name")
+#
+#
+# class Identifier(ModelBase):
+#     """This model represents alternative identifiers for objects"""
+#
+#     scheme = models.CharField(max_length=200)
+#     identifier = models.CharField(max_length=500)
+#
+#     content_type = models.ForeignKey(ContentType, related_name="core_identifier_set")
+#     object_id = models.PositiveIntegerField()
+#     content_object = generic.GenericForeignKey('content_type', 'object_id')
+#
+#     objects = ManagerBase()
+#
+#     def __unicode__(self):
+#         return '"%s%s"' % (self.scheme, self.identifier)
+#
+#     class Meta:
+#         unique_together = ('scheme', 'identifier')
 
 
 class OrganisationKind(ModelBase):
@@ -568,70 +348,70 @@ class OrganisationKind(ModelBase):
         return ('organisation_kind', (self.slug,))
 
 
-class OrganisationQuerySet(models.query.GeoQuerySet):
-    def parties(self):
-        return self.filter(kind__slug='party')
-
-    def active_parties(self):
-        # FIXME - What a lot of subqueries...
-        active_politician_positions = Position.objects.all().current_politician_positions()
-        active_member_positions = Position.objects.all().filter(title__slug='member').currently_active()
-
-        return (
-            self
-                .parties()
-                .filter(
-                    Q(position__in=active_politician_positions) |
-                    Q(position__in=active_member_positions)
-                )
-                .distinct()
-            )
-
-
-class OrganisationManager(ManagerBase):
-    def get_query_set(self):
-        return OrganisationQuerySet(self.model)
-
-
-class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(
-        max_length=200,
-        unique=True,
-        help_text="created from name",
-        validators=[partial(validate_slug_not_redirecting, 'core', 'Organisation')],
-    )
-    summary = MarkupField(blank=True, default='')
-    kind = models.ForeignKey('OrganisationKind')
-    started = ApproximateDateField(blank=True, help_text=date_help_text)
-    ended = ApproximateDateField(blank=True, help_text=date_help_text)
-
-    objects = OrganisationManager()
-    contacts = generic.GenericRelation(Contact)
-    images = generic.GenericRelation(Image)
-    informationsources = generic.GenericRelation(InformationSource)
-
-    def __unicode__(self):
-        return "%s (%s)" % (self.name, self.kind)
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('organisation', [self.slug])
-
-    class Meta:
-       ordering = ["slug"]
-
-    def is_ongoing(self):
-        """Return True or False for whether the organisation is currently ongoing"""
-        if not self.ended:
-            return True
-        elif self.ended.future:
-            return True
-        else:
-            # turn today's date into an ApproximateDate object and cmp to that
-            now = datetime.date.today()
-            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-            return now_approx <= self.ended
+# class OrganisationQuerySet(models.query.GeoQuerySet):
+#     def parties(self):
+#         return self.filter(kind__slug='party')
+#
+#     def active_parties(self):
+#         # FIXME - What a lot of subqueries...
+#         active_politician_positions = Position.objects.all().current_politician_positions()
+#         active_member_positions = Position.objects.all().filter(title__slug='member').currently_active()
+#
+#         return (
+#             self
+#                 .parties()
+#                 .filter(
+#                     Q(position__in=active_politician_positions) |
+#                     Q(position__in=active_member_positions)
+#                 )
+#                 .distinct()
+#             )
+#
+#
+# class OrganisationManager(ManagerBase):
+#     def get_query_set(self):
+#         return OrganisationQuerySet(self.model)
+#
+#
+# class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
+#     name = models.CharField(max_length=200)
+#     slug = models.SlugField(
+#         max_length=200,
+#         unique=True,
+#         help_text="created from name",
+#         validators=[partial(validate_slug_not_redirecting, 'core', 'Organisation')],
+#     )
+#     summary = MarkupField(blank=True, default='')
+#     kind = models.ForeignKey('OrganisationKind')
+#     started = ApproximateDateField(blank=True, help_text=date_help_text)
+#     ended = ApproximateDateField(blank=True, help_text=date_help_text)
+#
+#     objects = OrganisationManager()
+#     contacts = generic.GenericRelation(Contact)
+#     images = generic.GenericRelation(Image)
+#     informationsources = generic.GenericRelation(InformationSource)
+#
+#     def __unicode__(self):
+#         return "%s (%s)" % (self.name, self.kind)
+#
+#     @models.permalink
+#     def get_absolute_url(self):
+#         return ('organisation', [self.slug])
+#
+#     class Meta:
+#        ordering = ["slug"]
+#
+#     def is_ongoing(self):
+#         """Return True or False for whether the organisation is currently ongoing"""
+#         if not self.ended:
+#             return True
+#         elif self.ended.future:
+#             return True
+#         else:
+#             # turn today's date into an ApproximateDate object and cmp to that
+#             now = datetime.date.today()
+#             now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+#             return now_approx <= self.ended
 
 
 class PlaceKind(ModelBase):
@@ -1031,296 +811,296 @@ class PositionTitle(ModelBase):
        ordering = ["slug"]
 
 
-class PositionQuerySet(models.query.GeoQuerySet):
-    def currently_active(self, when=None):
-        """Filter on start and end dates to limit to currently active positions"""
-
-        if when == None:
-            when = datetime.date.today()
-
-        now_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
-
-        qs = (
-            self
-                .filter(sorting_start_date__lte=now_approx)
-                .filter(Q(sorting_end_date_high__gte=now_approx) | Q(end_date=''))
-        )
-
-        return qs
-
-    def currently_inactive(self, when=None):
-        """Filter on start and end dates to limit to currently inactive positions"""
-
-        if when == None:
-            when = datetime.date.today()
-
-        now_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
-
-        start_criteria = Q(start_date__gt=now_approx)
-        end_criteria = Q(sorting_end_date_high__lt=now_approx) & ~Q(end_date='')
-
-        qs = self.filter(start_criteria | end_criteria)
-
-        return qs
-
-
-    def aspirant_positions(self):
-        """
-        Filter down to only positions which are aspirant ones. This uses the
-        convention that the slugs always start with 'aspirant-'.
-        """
-        return self.filter( title__slug__startswith='aspirant-' )
-
-    def current_aspirant_positions(self, when=None):
-        """Filter down to only positions which are those of current aspirants."""
-        return self.aspirant_positions().currently_active(when)
-
-    def politician_positions(self):
-        """Filter down to only positions which are one of the two kinds of
-        politician (those with constituencies, and nominated ones).
-        """
-        return self.filter(category='political')
-
-    def current_politician_positions(self, when=None):
-        """Filter down to only positions which are those of current politicians."""
-        return self.politician_positions().currently_active(when)
-
-    def former_politician_positions(self, when=None):
-        """Filter down to only positions which are those of former politicians."""
-        return self.politician_positions().currently_inactive(when)
-
-    def political(self):
-        """Filter down to only the political category"""
-        return self.filter(category='political')
-
-    def committees(self):
-        """Filter down to committee memberships"""
-        return self.filter(organisation__slug__contains='committee') \
-            .order_by('-end_date', '-start_date')
-
-    def exclude_committees(self):
-        return self.exclude(organisation__slug__contains='committee')
-
-    def education(self):
-        """Filter down to only the education category"""
-        return self.filter(category='education')
-
-    def other(self):
-        """Filter down to only the other category"""
-        return self.filter(category='other')
-
-    def order_by_place(self):
-        """Sort by the place name"""
-        return self.order_by('place__name')
-
-    def order_by_person_name(self):
-        """Sort by the place name"""
-        return self.order_by('person__sort_name')
-
-    def current_unique_places(self):
-        """Return the list of places associated with current positions"""
-        result = sorted(set(position.place for position in self.currently_active()
-                          if position.place),
-                      key=lambda p: p.name)
-        return result
-
-
-class PositionManager(ManagerBase):
-    def get_query_set(self):
-        return PositionQuerySet(self.model)
-
-
-class Position(ModelBase, IdentifierMixin):
-    category_choices = (
-        ('political', 'Political'),
-        ('education', 'Education (as a learner)'),
-        ('other', 'Anything else'),
-    )
-
-    person = models.ForeignKey('Person')
-    organisation = models.ForeignKey('Organisation', null=True, blank=True)
-    place = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for a politician" )
-    title = models.ForeignKey('PositionTitle', null=True, blank=True)
-    subtitle = models.CharField(max_length=200, blank=True, default='')
-    category = models.CharField(max_length=20, choices=category_choices, default='other', help_text="What sort of position was this?")
-    note = models.CharField(max_length=300, blank=True, default='')
-
-    start_date = ApproximateDateField(blank=True, help_text=date_help_text)
-    end_date = ApproximateDateField(blank=True, help_text=date_help_text, default="future")
-
-    # hidden fields that are only used to do sorting. Filled in by code.
-    #
-    # These sort dates are here to enable the expected sorting. Ascending is
-    # quite straight forward as the string stored (eg '2011-03-00') will sort as
-    # expected. But for descending sorts they will not, as '2011-03-00' would
-    # come after '2011-03-15'. To fix this the *_high dates below replace '00'
-    # with '99' so that the desc sort can be carried out in SQL as expected.
-    #
-    # For 'future' dates there are also some special tweaks that makes them sort
-    # as expeced. See the '_set_sorting_dates' method below for implementation.
-    #
-    sorting_start_date = models.CharField(editable=True, default='', max_length=10)
-    sorting_end_date = models.CharField(editable=True, default='', max_length=10)
-    sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
-    sorting_end_date_high = models.CharField(editable=True, default='', max_length=10)
-
-    objects = PositionManager()
-
-    def clean(self):
-        if not (self.organisation or self.title or self.place):
-            raise exceptions.ValidationError('Must have at least one of organisation, title or place.')
-
-        if self.title and self.title.requires_place and not self.place:
-            raise exceptions.ValidationError("The job title '%s' requires a place to be set" % self.title.name)
-
-
-    def display_dates(self):
-        """
-        Return nice HTML for the display of dates.
-
-        This has become a twisty maze of conditionals :( - note that there are
-        extensive tests for the various possible outputs.
-        """
-
-        # used in comparisons in the conditionals below
-        approx_past   = ApproximateDate(past=True)
-        today         = datetime.date.today()
-        approx_today  = ApproximateDate(year=today.year, month=today.month, day=today.day)
-        approx_future = ApproximateDate(future=True)
-
-        # no dates
-        if not (self.start_date or self.end_date):
-            return ''
-
-        # start but no end
-        elif not self.end_date or self.end_date == approx_past:
-            message = ''
-            if not self.start_date:
-                message = "Ended" # end_date is past
-            elif self.start_date == approx_future:
-                message = "Not started yet"
-            elif self.start_date == approx_past:
-                message = "Started"
-            elif self.start_date <= approx_today:
-                message = "Started %s" % self.start_date
-            else:
-                message = "Will start %s" % self.start_date
-
-            if self.end_date == approx_past:
-                if not self.start_date or self.start_date == approx_past or self.start_date == approx_future:
-                    message = "Ended"
-                else:
-                    message += ", now ended"
-
-            return message
-
-        # end but no start
-        elif not self.start_date or self.start_date == approx_past:
-            if not self.end_date or self.end_date == approx_past:
-                return "Ended"
-            elif self.end_date == approx_future:
-                return "Ongoing"
-            elif self.end_date < approx_today:
-                return "Ended %s" % self.end_date
-            else:
-                return "Will end %s" % self.end_date
-
-        # both dates
-        else:
-            if self.end_date == approx_future:
-                if self.start_date == approx_future:
-                    return "Not started yet"
-                elif self.start_date <= approx_today:
-                    return "Started %s" % self.start_date
-                else:
-                    return "Will start %s" % self.start_date
-            elif self.start_date == approx_future:
-                if self.end_date < approx_today:
-                    return "Ended %s" % self.end_date
-                else:
-                    return "Will end %s" % self.end_date
-            else:
-                return "%s &rarr; %s" % (self.start_date, self.end_date)
-
-
-    def display_start_date(self):
-        """Return text that represents the start date"""
-        if self.start_date:
-            return str(self.start_date)
-        return '?'
-
-    def display_end_date(self):
-        """Return text that represents the end date"""
-        if self.end_date:
-            return str(self.end_date)
-        return '?'
-
-    def is_ongoing(self):
-        """Return True or False for whether the position is currently ongoing"""
-        if not self.end_date:
-            return False
-        elif self.end_date.future:
-            return True
-        else:
-            # turn today's date into an ApproximateDate object and cmp to that
-            now = datetime.date.today()
-            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-            return now_approx <= self.end_date
-
-    def has_known_dates(self):
-        """Is there at least one known (not future) date?"""
-        return (self.start_date and not self.start_date.future) or (self.end_date and not self.end_date.future)
-
-    def _set_sorting_dates(self):
-        """Set the sorting dates from the actual dates (does not call save())"""
-
-        past_repr = '0001-00-00'
-        none_repr = '0000-00-00'
-
-        # value can be yyyy-mm-dd, future or None
-        start = repr(self.start_date) if self.start_date else None
-        end   = repr(self.end_date)   if self.end_date   else None
-
-        # set the value or default to something sane
-        sorting_start_date =        start or none_repr
-        sorting_end_date   = end or start or none_repr
-        if not end and start == 'past': sorting_end_date = none_repr
-
-        # chaange entries to have the past_repr
-        if start              == 'past': start              = past_repr
-        if end                == 'past': end                = past_repr
-        if sorting_start_date == 'past': sorting_start_date = past_repr
-        if sorting_end_date   == 'past': sorting_end_date   = past_repr
-
-        # To make the sorting consistent special case some parts
-        if not end and start == 'future':
-            sorting_start_date = 'a-future' # come after 'future'
-
-        self.sorting_start_date = sorting_start_date
-        self.sorting_end_date   = sorting_end_date
-
-        self.sorting_start_date_high = re.sub('-00', '-99', sorting_start_date)
-        self.sorting_end_date_high   = re.sub('-00', '-99', sorting_end_date)
-
-    def is_nominated_politician(self):
-        return self.title.slug == 'nominated-member-parliament'
-
-    def save(self, *args, **kwargs):
-        self._set_sorting_dates()
-        super(Position, self).save(*args, **kwargs)
-
-    def __unicode__(self):
-        title = self.title or '???'
-
-        if self.organisation:
-            organisation = self.organisation.name
-        else:
-            organisation = '???'
-
-        return "%s (%s at %s)" % ( self.person.legal_name, title, organisation)
-
-    class Meta:
-        ordering = ['-sorting_end_date', '-sorting_start_date']
+# class PositionQuerySet(models.query.GeoQuerySet):
+#     def currently_active(self, when=None):
+#         """Filter on start and end dates to limit to currently active positions"""
+#
+#         if when == None:
+#             when = datetime.date.today()
+#
+#         now_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
+#
+#         qs = (
+#             self
+#                 .filter(sorting_start_date__lte=now_approx)
+#                 .filter(Q(sorting_end_date_high__gte=now_approx) | Q(end_date=''))
+#         )
+#
+#         return qs
+#
+#     def currently_inactive(self, when=None):
+#         """Filter on start and end dates to limit to currently inactive positions"""
+#
+#         if when == None:
+#             when = datetime.date.today()
+#
+#         now_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
+#
+#         start_criteria = Q(start_date__gt=now_approx)
+#         end_criteria = Q(sorting_end_date_high__lt=now_approx) & ~Q(end_date='')
+#
+#         qs = self.filter(start_criteria | end_criteria)
+#
+#         return qs
+#
+#
+#     def aspirant_positions(self):
+#         """
+#         Filter down to only positions which are aspirant ones. This uses the
+#         convention that the slugs always start with 'aspirant-'.
+#         """
+#         return self.filter( title__slug__startswith='aspirant-' )
+#
+#     def current_aspirant_positions(self, when=None):
+#         """Filter down to only positions which are those of current aspirants."""
+#         return self.aspirant_positions().currently_active(when)
+#
+#     def politician_positions(self):
+#         """Filter down to only positions which are one of the two kinds of
+#         politician (those with constituencies, and nominated ones).
+#         """
+#         return self.filter(category='political')
+#
+#     def current_politician_positions(self, when=None):
+#         """Filter down to only positions which are those of current politicians."""
+#         return self.politician_positions().currently_active(when)
+#
+#     def former_politician_positions(self, when=None):
+#         """Filter down to only positions which are those of former politicians."""
+#         return self.politician_positions().currently_inactive(when)
+#
+#     def political(self):
+#         """Filter down to only the political category"""
+#         return self.filter(category='political')
+#
+#     def committees(self):
+#         """Filter down to committee memberships"""
+#         return self.filter(organisation__slug__contains='committee') \
+#             .order_by('-end_date', '-start_date')
+#
+#     def exclude_committees(self):
+#         return self.exclude(organisation__slug__contains='committee')
+#
+#     def education(self):
+#         """Filter down to only the education category"""
+#         return self.filter(category='education')
+#
+#     def other(self):
+#         """Filter down to only the other category"""
+#         return self.filter(category='other')
+#
+#     def order_by_place(self):
+#         """Sort by the place name"""
+#         return self.order_by('place__name')
+#
+#     def order_by_person_name(self):
+#         """Sort by the place name"""
+#         return self.order_by('person__sort_name')
+#
+#     def current_unique_places(self):
+#         """Return the list of places associated with current positions"""
+#         result = sorted(set(position.place for position in self.currently_active()
+#                           if position.place),
+#                       key=lambda p: p.name)
+#         return result
+#
+#
+# class PositionManager(ManagerBase):
+#     def get_query_set(self):
+#         return PositionQuerySet(self.model)
+#
+#
+# class Position(ModelBase, IdentifierMixin):
+#     category_choices = (
+#         ('political', 'Political'),
+#         ('education', 'Education (as a learner)'),
+#         ('other', 'Anything else'),
+#     )
+#
+#     person = models.ForeignKey('Person')
+#     organisation = models.ForeignKey('Organisation', null=True, blank=True)
+#     place = models.ForeignKey('Place', null=True, blank=True, help_text="use if needed to identify the position - eg add constituency for a politician" )
+#     title = models.ForeignKey('PositionTitle', null=True, blank=True)
+#     subtitle = models.CharField(max_length=200, blank=True, default='')
+#     category = models.CharField(max_length=20, choices=category_choices, default='other', help_text="What sort of position was this?")
+#     note = models.CharField(max_length=300, blank=True, default='')
+#
+#     start_date = ApproximateDateField(blank=True, help_text=date_help_text)
+#     end_date = ApproximateDateField(blank=True, help_text=date_help_text, default="future")
+#
+#     # hidden fields that are only used to do sorting. Filled in by code.
+#     #
+#     # These sort dates are here to enable the expected sorting. Ascending is
+#     # quite straight forward as the string stored (eg '2011-03-00') will sort as
+#     # expected. But for descending sorts they will not, as '2011-03-00' would
+#     # come after '2011-03-15'. To fix this the *_high dates below replace '00'
+#     # with '99' so that the desc sort can be carried out in SQL as expected.
+#     #
+#     # For 'future' dates there are also some special tweaks that makes them sort
+#     # as expeced. See the '_set_sorting_dates' method below for implementation.
+#     #
+#     sorting_start_date = models.CharField(editable=True, default='', max_length=10)
+#     sorting_end_date = models.CharField(editable=True, default='', max_length=10)
+#     sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
+#     sorting_end_date_high = models.CharField(editable=True, default='', max_length=10)
+#
+#     objects = PositionManager()
+#
+#     def clean(self):
+#         if not (self.organisation or self.title or self.place):
+#             raise exceptions.ValidationError('Must have at least one of organisation, title or place.')
+#
+#         if self.title and self.title.requires_place and not self.place:
+#             raise exceptions.ValidationError("The job title '%s' requires a place to be set" % self.title.name)
+#
+#
+#     def display_dates(self):
+#         """
+#         Return nice HTML for the display of dates.
+#
+#         This has become a twisty maze of conditionals :( - note that there are
+#         extensive tests for the various possible outputs.
+#         """
+#
+#         # used in comparisons in the conditionals below
+#         approx_past   = ApproximateDate(past=True)
+#         today         = datetime.date.today()
+#         approx_today  = ApproximateDate(year=today.year, month=today.month, day=today.day)
+#         approx_future = ApproximateDate(future=True)
+#
+#         # no dates
+#         if not (self.start_date or self.end_date):
+#             return ''
+#
+#         # start but no end
+#         elif not self.end_date or self.end_date == approx_past:
+#             message = ''
+#             if not self.start_date:
+#                 message = "Ended" # end_date is past
+#             elif self.start_date == approx_future:
+#                 message = "Not started yet"
+#             elif self.start_date == approx_past:
+#                 message = "Started"
+#             elif self.start_date <= approx_today:
+#                 message = "Started %s" % self.start_date
+#             else:
+#                 message = "Will start %s" % self.start_date
+#
+#             if self.end_date == approx_past:
+#                 if not self.start_date or self.start_date == approx_past or self.start_date == approx_future:
+#                     message = "Ended"
+#                 else:
+#                     message += ", now ended"
+#
+#             return message
+#
+#         # end but no start
+#         elif not self.start_date or self.start_date == approx_past:
+#             if not self.end_date or self.end_date == approx_past:
+#                 return "Ended"
+#             elif self.end_date == approx_future:
+#                 return "Ongoing"
+#             elif self.end_date < approx_today:
+#                 return "Ended %s" % self.end_date
+#             else:
+#                 return "Will end %s" % self.end_date
+#
+#         # both dates
+#         else:
+#             if self.end_date == approx_future:
+#                 if self.start_date == approx_future:
+#                     return "Not started yet"
+#                 elif self.start_date <= approx_today:
+#                     return "Started %s" % self.start_date
+#                 else:
+#                     return "Will start %s" % self.start_date
+#             elif self.start_date == approx_future:
+#                 if self.end_date < approx_today:
+#                     return "Ended %s" % self.end_date
+#                 else:
+#                     return "Will end %s" % self.end_date
+#             else:
+#                 return "%s &rarr; %s" % (self.start_date, self.end_date)
+#
+#
+#     def display_start_date(self):
+#         """Return text that represents the start date"""
+#         if self.start_date:
+#             return str(self.start_date)
+#         return '?'
+#
+#     def display_end_date(self):
+#         """Return text that represents the end date"""
+#         if self.end_date:
+#             return str(self.end_date)
+#         return '?'
+#
+#     def is_ongoing(self):
+#         """Return True or False for whether the position is currently ongoing"""
+#         if not self.end_date:
+#             return False
+#         elif self.end_date.future:
+#             return True
+#         else:
+#             # turn today's date into an ApproximateDate object and cmp to that
+#             now = datetime.date.today()
+#             now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+#             return now_approx <= self.end_date
+#
+#     def has_known_dates(self):
+#         """Is there at least one known (not future) date?"""
+#         return (self.start_date and not self.start_date.future) or (self.end_date and not self.end_date.future)
+#
+#     def _set_sorting_dates(self):
+#         """Set the sorting dates from the actual dates (does not call save())"""
+#
+#         past_repr = '0001-00-00'
+#         none_repr = '0000-00-00'
+#
+#         # value can be yyyy-mm-dd, future or None
+#         start = repr(self.start_date) if self.start_date else None
+#         end   = repr(self.end_date)   if self.end_date   else None
+#
+#         # set the value or default to something sane
+#         sorting_start_date =        start or none_repr
+#         sorting_end_date   = end or start or none_repr
+#         if not end and start == 'past': sorting_end_date = none_repr
+#
+#         # chaange entries to have the past_repr
+#         if start              == 'past': start              = past_repr
+#         if end                == 'past': end                = past_repr
+#         if sorting_start_date == 'past': sorting_start_date = past_repr
+#         if sorting_end_date   == 'past': sorting_end_date   = past_repr
+#
+#         # To make the sorting consistent special case some parts
+#         if not end and start == 'future':
+#             sorting_start_date = 'a-future' # come after 'future'
+#
+#         self.sorting_start_date = sorting_start_date
+#         self.sorting_end_date   = sorting_end_date
+#
+#         self.sorting_start_date_high = re.sub('-00', '-99', sorting_start_date)
+#         self.sorting_end_date_high   = re.sub('-00', '-99', sorting_end_date)
+#
+#     def is_nominated_politician(self):
+#         return self.title.slug == 'nominated-member-parliament'
+#
+#     def save(self, *args, **kwargs):
+#         self._set_sorting_dates()
+#         super(Position, self).save(*args, **kwargs)
+#
+#     def __unicode__(self):
+#         title = self.title or '???'
+#
+#         if self.organisation:
+#             organisation = self.organisation.name
+#         else:
+#             organisation = '???'
+#
+#         return "%s (%s at %s)" % ( self.person.legal_name, title, organisation)
+#
+#     class Meta:
+#         ordering = ['-sorting_end_date', '-sorting_start_date']
 
 class ParliamentarySession(ModelBase):
     start_date = DateField(blank=True, null=True)
