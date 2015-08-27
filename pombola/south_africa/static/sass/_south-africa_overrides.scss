@@ -263,11 +263,15 @@ small {
 #page {
     padding: 10px;
     .title-space {
+      h1 {
+        font-size: 2.125em;
+      }
         p {
             font-family: $font_family_lato;
             font-weight: bold;
             font-style: normal;
             color: $colour_green;
+            font-size: 1.3125em;
         }
     }
 }
@@ -1707,37 +1711,13 @@ ul.pager {
 }
 
 /* Person page */
+
+#hfWrap {
+  min-height: 0 !important;
+}
+
 #page {
     .profile-info {
-        .constituency-party {
-            margin: 0;
-            p + h3 {
-                margin-top: 1.5em;
-            }
-            ul li {
-                border-top: none;
-                a {
-                    font-size: 0.875em;
-                    display: inline;
-                    background: transparent none right center no-repeat;
-                    color: $colour_primary;
-                    text-decoration: none;
-                    padding: 0;
-                    @media only all and (min-width: 640px), print {
-                        background: transparent;
-                        color: $colour_primary;
-                        padding:0;
-                        @include border-radius(0);
-                    }
-                    &:hover,
-                    &:focus {
-                        background: transparent;
-                        color: $colour_black;
-                        text-decoration: underline;
-                    }
-                }
-            }
-            }
 
         h3 {
             display: block;
@@ -1746,6 +1726,39 @@ ul.pager {
             font-size: 11px;
         }
 
+    }
+    .constituency-party {
+        margin: 0;
+        p + h3 {
+            margin-top: 1.5em;
+        }
+        ul {
+          padding-left: 0;
+        }
+        ul li {
+            border-top: none;
+            list-style: none outside none;
+            a {
+                font-size: 0.875em;
+                display: inline;
+                background: transparent none right center no-repeat;
+                color: $colour_primary;
+                text-decoration: none;
+                padding: 0;
+                @media only all and (min-width: 640px), print {
+                    background: transparent;
+                    color: $colour_primary;
+                    padding:0;
+                    @include border-radius(0);
+                }
+                &:hover,
+                &:focus {
+                    background: transparent;
+                    color: $colour_black;
+                    text-decoration: underline;
+                }
+            }
+        }
     }
     .large-container {
         h3 {
@@ -1791,6 +1804,79 @@ ul.pager {
             margin-bottom: 0.5em;
         }
         font-size: 0.9em;
+    }
+}
+
+.about-person-intro-block {
+  background-color: #C1E0D6;
+  padding: 1em 1em 0;
+  position: relative;
+  top: -1.5em;
+  @media only all and (min-width: 550px) {
+    padding: 2em 0 0;
+  }
+}
+
+.profile-pic img {
+    position: relative;
+    z-index: 30;
+}
+.subtitle {
+  margin-bottom: 0;
+}
+
+.contact-actions {
+  margin-bottom: 2em;
+}
+
+.contact-actions__email,
+.contact-actions__twitter {
+  display: inline;
+  margin-right: 1em;
+  a {
+    @extend .button;
+    border-radius: 3px;
+    margin-bottom: 1em;
+    text-transform: none;
+    background-repeat: no-repeat;
+    background-position: 14px 50%;
+    padding-left: 37px;
+    &:hover,
+    &:active,
+    &:focus {
+      background-repeat: no-repeat;
+      background-position: 14px 50%;
+    }
+  }
+}
+
+.person-summary {
+    width: 97%;
+    float: left;
+    padding-right: 3%;
+}
+
+.contact-actions__twitter {
+    a {
+        background-color: #4099ff;
+        background-image: url('../images/twitter-icon.png');
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: darken(#4099ff, 10%);
+            background-image: url('../images/twitter-icon.png');
+        }
+    }
+}
+
+.contact-actions__email {
+    a {
+        background-image: url('../images/email-icon.png');
+        &:hover,
+        &:active,
+        &:focus {
+            background-image: url('../images/email-icon.png');
+        }
     }
 }
 
