@@ -155,6 +155,26 @@ class Entry(HansardModelBase):
             .distinct()
         )
 
+        # if the results are ambiguous, try restricting to members of the current house
+        # unless it's a joint sitting, in which case this is dangerous
+        #
+        # FIXME: (1) the position filter currently checks whether a person has *ever* held
+        #        a qualifying position, would be better if this were a check against
+        #        whether the position was held at date of the sitting.
+        #
+        #        (2) it might also be interesting to have an optional Pombola Organisation
+        #        associated with a Sitting so that it would be easier to check whether the
+        #        Person has a matching association with an Organisation rather than checking
+        #        PositionTitle names (not sure what would happen with Joint Sittings - dual association?)
+
+        if len(person_search) > 1 and 'Joint Sitting' not in self.sitting.source.name:
+            if self.sitting.venue.name == 'Senate':
+                current_house = person_search.filter(position__title__name__contains='Senator')
+            else:
+                current_house = person_search.filter(position__title__name__contains=self.sitting.venue.name)
+            if current_house:
+                person_search = current_house
+
         results = person_search.all()[0:]
 
         found_one_result = len(results) == 1
