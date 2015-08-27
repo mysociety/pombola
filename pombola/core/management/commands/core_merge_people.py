@@ -42,14 +42,17 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
 
     help = "Merge two Person records into one, deleting one of the originals"
     option_list = BaseCommand.option_list + (
-        make_option("--keep-person", dest="keep_person", type="int",
-                    help="The ID of the person to retain",
+        make_option("--keep-person", dest="keep_person", type="string",
+                    help="The ID or slug of the person to retain",
                     metavar="PERSON-ID"),
-        make_option("--delete-person", dest="delete_person", type="int",
-                    help="The ID of the person to delete",
+        make_option("--delete-person", dest="delete_person", type="string",
+                    help="The ID or slug of the person to delete",
                     metavar="PERSON-ID"),
         make_option("--sayit-id-scheme", dest="sayit_id_scheme", type="string",
                     help="The name of the SayIt ID schema (if used)"),
+        make_option('--noinput',  dest='interactive',
+                    action='store_false', default=True,
+                    help="Do NOT prompt the user for input of any kind"),
         make_option("--quiet", dest="quiet",
                     help="Suppress progress output",
                     default=False, action='store_true'))
@@ -66,15 +69,22 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
 
         verbose = int(options['verbosity']) > 1
 
-        to_keep = core_models.Person.objects.get(pk=options['keep_person'])
-        to_delete = core_models.Person.objects.get(pk=options['delete_person'])
+        to_keep = core_models.Person.objects.get_by_slug_or_id(options['keep_person'])
+        to_delete = core_models.Person.objects.get_by_slug_or_id(options['delete_person'])
 
         to_keep_admin_url = reverse('admin:core_person_change',
                                     args=(to_keep.id,))
 
-        if not options['quiet']:
-            print "Going to keep:", to_keep, "with ID", to_keep.id
-            print "Going to delete:", to_delete, "with ID", to_delete.id
+        if to_keep.id == to_delete.id:
+            raise CommandError("--keep-person and --delete-person are the same")
+
+        print "Going to keep:", to_keep, "with ID", to_keep.id
+        print "Going to delete:", to_delete, "with ID", to_delete.id
+
+        if options['interactive']:
+            answer = raw_input('Do you wish to continue? (y/[n]): ')
+            if answer != 'y':
+                raise CommandError("Command halted by user, no changes made")
 
         if not check_basic_fields(['title',
                                    'gender',
@@ -96,6 +106,9 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
 
         # If a SayIt ID scheme is specified, move speeches from deleted person
         if 'speeches' in settings.INSTALLED_APPS:
+
+            if not options['quiet']:
+                print "Moving SayIt speeches"
 
             if options['sayit_id_scheme'] is None:
                 raise CommandError("You must specify --sayit-id-scheme")
@@ -148,17 +161,26 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
         # Then those in hansard, if that application is installed:
         #    hansard_models.Alias
         #    hansard_models.Entry
-        if 'hansard' in settings.INSTALLED_APPS:
+        if 'pombola.hansard' in settings.INSTALLED_APPS:
             import pombola.hansard.models as hansard_models
+
+            if not options['quiet']:
+                print "Moving Hansard entries"
+
             hansard_models.Alias.objects.filter(person=to_delete).update(person=to_keep)
+
             hansard_models.Entry.objects.filter(speaker=to_delete).update(speaker=to_keep)
         # (The scorecard application can be ignored, since those
         # results are regenerated automatically.)
 
         # Then those in interests_register, if that application is installed:
         #    interests_register_models.Entry
-        if 'interests_register' in settings.INSTALLED_APPS:
+        if 'pombola.interests_register' in settings.INSTALLED_APPS:
             import pombola.interests_register.models as interests_register_models
+
+            if not options['quiet']:
+                print "Moving interests register entries"
+
             interests_register_models.Entry.objects.filter(person=to_delete).update(person=to_keep)
 
         # Add any images for the person to delete as non-primary

@@ -241,6 +241,40 @@ class PositionCurrencyTest(unittest.TestCase):
         self.person.delete()
 
 
+
+class PersonGetSlugOrIdTest( unittest.TestCase ):
+    def setUp(self):
+        self.person = models.Person(
+            legal_name = "Test Person",
+            slug       = 'test-person'
+        )
+        self.person.save()
+
+    def tearDown(self):
+        self.person.delete()
+
+    def test_get_with_id(self):
+        result = models.Person.objects.get_by_slug_or_id(self.person.id)
+        self.assertEqual(result.id, self.person.id)
+
+    def test_get_with_slug(self):
+        result = models.Person.objects.get_by_slug_or_id(self.person.slug)
+        self.assertEqual(result.id, self.person.id)
+
+    def test_id_not_found(self):
+        temp_person = models.Person.objects.create(
+            legal_name = 'Temp Person'
+        )
+        person_id = temp_person.id
+        temp_person.delete()
+        with self.assertRaises(models.Person.DoesNotExist):
+            models.Person.objects.get_by_slug_or_id(person_id)
+
+    def test_slug_not_found(self):
+        with self.assertRaises(models.Person.DoesNotExist):
+            models.Person.objects.get_by_slug_or_id('not-in-db')
+
+
 class PersonAndContactTasksTest( unittest.TestCase ):
     def setUp(self):
         self.person = models.Person(
