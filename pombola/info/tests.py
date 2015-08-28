@@ -41,6 +41,18 @@ class InfoTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "south_africa/info_newsletter.html")
 
+    def test_empty_info_page(self):
+        empty_post = InfoPage.objects.create(
+            slug='empty-of-info',
+            title='A page with no content',
+            markdown_content='',
+            use_raw=False,
+            kind=InfoPage.KIND_BLOG
+        )
+        # At one point with empty markdown_content this would cause an
+        # exception, so add this to check for any regression:
+        self.assertEqual(empty_post.content_as_html, '')
+
     @override_settings(INFO_PAGES_ALLOW_RAW_HTML=True)
     def test_blog_raw_html(self):
         danger_post = InfoPage.objects.create(

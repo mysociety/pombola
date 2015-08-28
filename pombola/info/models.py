@@ -131,6 +131,8 @@ class InfoPage(ModelBase):
         return str(self)
 
     def _clean_html(self, html):
+        if not html:
+            return ''
         cleaner = Cleaner(style=True, scripts=True)
         return cleaner.clean_html(html)
 
