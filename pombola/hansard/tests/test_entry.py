@@ -147,3 +147,22 @@ class HansardEntryTest(TestCase):
             self.mp,
             possible_speakers[0]
         )
+
+    def test_exclude_hidden_profiles(self):
+        self.senator.hidden = True
+        self.senator.save()
+
+        entry = Entry(
+            sitting       = self.senate_sitting,
+            type          = 'text',
+            page_number   = 12,
+            text_counter  = 4,
+            speaker_name  = 'Jones',
+            speaker_title = 'Hon.',
+            content       = 'test',
+        )
+
+        self.assertEqual(
+            self.mp,
+            entry.possible_matching_speakers()[0]
+        )

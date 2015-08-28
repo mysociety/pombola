@@ -152,6 +152,7 @@ class Entry(HansardModelBase):
             .all()
             .is_politician( when=self.sitting.start_date )
             .filter(legal_name__icontains=stripped_name)
+            .exclude(hidden=True)
             .distinct()
         )
 
