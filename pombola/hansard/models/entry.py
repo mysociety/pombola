@@ -16,13 +16,13 @@ class EntryQuerySet(models.query.QuerySet):
 
         dates = self.dates('sitting__start_date','month', 'DESC')
         counts = []
-        
+
         for d in dates:
             qs = self.filter(sitting__start_date__month=d.month, sitting__start_date__year=d.year)
             counts.append(dict(date=d, count=qs.count()))
 
         return counts
-        
+
     def unassigned_speeches(self):
         """All speeches that do not have a speaker assigned"""
         return self.filter(
@@ -35,7 +35,7 @@ class EntryQuerySet(models.query.QuerySet):
 class EntryManager(models.Manager):
     def get_query_set(self):
         return EntryQuerySet(self.model)
-    
+
 
 class Entry(HansardModelBase):
     """Model for representing an entry in Hansard - speeches, headings etc"""
@@ -52,9 +52,9 @@ class Entry(HansardModelBase):
 
     # page_number is the page that this appeared on in the source.
     page_number   = models.IntegerField( blank=True )
-    
+
     # Doesn't really mean anything - just a counter so that for each sitting we
-    # can display the entries in the correct order. 
+    # can display the entries in the correct order.
     text_counter  = models.IntegerField()
 
     # Speakers only apply to the 'speech' type. For those we should always have
@@ -71,7 +71,7 @@ class Entry(HansardModelBase):
 
     def __unicode__(self):
         return "%s: %s" % (self.type, self.content[:100])
-    
+
     def get_absolute_url(self):
         sitting_url = self.sitting.get_absolute_url()
         return "%s#entry-%u" % (sitting_url, self.id)
@@ -83,13 +83,13 @@ class Entry(HansardModelBase):
         ordering = ['sitting', 'text_counter']
         app_label = 'hansard'
         verbose_name_plural = 'entries'
-        
+
     @classmethod
     def assign_speakers(cls):
         """Go through all entries and assign speakers"""
-        
+
         entries = cls.objects.all().unassigned_speeches()
-        
+
         # create an in memory cache of speaker names and the sitting dates, to
         # avoid hitting the db as badly with all the repeated requests
         cache = {}
@@ -108,8 +108,8 @@ class Entry(HansardModelBase):
             if len(speakers) == 1:
                 speaker = speakers[0]
                 entry.speaker = speaker
-                entry.save()                
-                
+                entry.save()
+
 
     def possible_matching_speakers(self, update_aliases=False):
         """
@@ -122,11 +122,11 @@ class Entry(HansardModelBase):
 
         name = self.speaker_name
         name = Alias.clean_up_name( name )
-        
+
         # First check for a matching alias that is not ignored
         try:
             alias = Alias.objects.get( alias=name )
-            
+
             if alias.ignored:
                 # if the alias is ignored we should not match anything
                 return []
@@ -142,27 +142,48 @@ class Entry(HansardModelBase):
 
         except Alias.DoesNotExist:
             alias = None
-        
+
         # drop the prefix
         stripped_name = re.sub( r'^\w+\.\s', '', name )
-        
+
         person_search = (
             Person
             .objects
             .all()
             .is_politician( when=self.sitting.start_date )
             .filter(legal_name__icontains=stripped_name)
+            .exclude(hidden=True)
             .distinct()
         )
-        
+
+        # if the results are ambiguous, try restricting to members of the current house
+        # unless it's a joint sitting, in which case this is dangerous
+        #
+        # FIXME: (1) the position filter currently checks whether a person has *ever* held
+        #        a qualifying position, would be better if this were a check against
+        #        whether the position was held at date of the sitting.
+        #
+        #        (2) it might also be interesting to have an optional Pombola Organisation
+        #        associated with a Sitting so that it would be easier to check whether the
+        #        Person has a matching association with an Organisation rather than checking
+        #        PositionTitle names (not sure what would happen with Joint Sittings - dual association?)
+
+        if len(person_search) > 1 and 'Joint Sitting' not in self.sitting.source.name:
+            if self.sitting.venue.name == 'Senate':
+                current_house = person_search.filter(position__title__name__contains='Senator')
+            else:
+                current_house = person_search.filter(position__title__name__contains=self.sitting.venue.name)
+            if current_house:
+                person_search = current_house
+
         results = person_search.all()[0:]
-        
+
         found_one_result = len(results) == 1
 
         # If there is a single matching speaker and an unassigned alias delete it
         if found_one_result and alias and alias.is_unassigned:
             alias.delete()
-            
+
         # create an entry in the aliases table if one is needed
         if not alias and update_aliases and not found_one_result and not Alias.can_ignore_name(name):
             Alias.objects.create(
@@ -170,7 +191,5 @@ class Entry(HansardModelBase):
                 ignored = False,
                 person  = None,
             )
-        
+
         return results
-
-
