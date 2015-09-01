@@ -6,6 +6,8 @@ from .apps import *
 
 from django.template.defaultfilters import slugify
 
+from pombola.hansard.constants import NAME_SUBSTRING_MATCH, NAME_SET_INTERSECTION_MATCH
+
 IN_TEST_MODE = False
 
 # Work out where we are to set up the paths correctly and load config
@@ -348,6 +350,16 @@ QUESTION_JSON_CACHE  = os.path.join( HANSARD_CACHE, 'questions_json' )
 
 PMG_COMMITTEE_USER = config.get('PMG_COMMITTEE_USER', '')
 PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
+
+# Algorithm to use for matching names when scraping hansard
+# NAME_SUBSTRING_MATCH
+# - strips the title from the name and then searches for current politicians
+#   with names containing that string (used by Kenya).
+# NAME_SET_INTERSECTION_MATCH
+# - splits the name, including title, into words, and then compares the
+#   set of these words with similar sets from current politicians,
+#   looking for the largest intersection.
+HANSARD_NAME_MATCHING_ALGORITHM = NAME_SET_INTERSECTION_MATCH
 
 # Which popit instance to use
 POPIT_API_URL = config.get('POPIT_API_URL')
