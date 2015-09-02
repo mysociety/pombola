@@ -610,14 +610,9 @@ body.home {
 .home__section {
     padding: 1.25em 0.75em; // roughly 20px and 10px
 
-    @media (min-width: 640px) and (min-height: 700px) {
+    @media (min-width: 640px) and (min-height: 800px) {
         padding-top: 2em;
         padding-bottom: 2em;
-    }
-
-    @media (min-width: 640px) and (min-height: 900px) {
-        padding-top: 2.5em;
-        padding-bottom: 2.5em;
     }
 
     a {
@@ -727,6 +722,10 @@ body.home {
             font-size: (1em / 1.5); // get back to 1em, from 1.5em parent
             line-height: 1.4em; // 1.4 of this element's ems
             font-weight: normal;
+
+            @media (min-width: 640px) and (max-height: 700px) {
+                display: none;
+            }
         }
     }
 }

@@ -32,7 +32,7 @@
                     </h2>
                     <p class="meta">{{ article.publication_date|date }}</p>
                     <p class="summary">
-                        {{ article.content_as_plain_text|truncatewords:32 }}
+                        {{ article.content_as_plain_text|truncatewords:24 }}
                         <a class="readmore" href="{{ article.get_absolute_url }}">More</a>
                     </p>
                 </div>
