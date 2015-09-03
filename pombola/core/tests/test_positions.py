@@ -3,9 +3,12 @@ import datetime
 
 from django.contrib.contenttypes.models import ContentType
 from django.core import exceptions
+from django.core.urlresolvers import reverse
 from django.test import TestCase
+
 from django_date_extensions.fields import ApproximateDate
 
+from pombola.slug_helpers.models import SlugRedirect
 from pombola.core import models
 
 class PositionTest(TestCase):
@@ -33,6 +36,13 @@ class PositionTest(TestCase):
             name = 'Test title',
             slug = 'test-title',
         )
+
+        SlugRedirect.objects.create(
+            content_type=ContentType.objects.get_for_model(
+                models.PositionTitle),
+            new_object=self.title,
+            old_object_slug='old',
+            )
 
     def test_unicode(self):
         """Check that missing attributes don't crash"""
@@ -458,3 +468,28 @@ class PositionTest(TestCase):
         self.assertEqual( pos_qs.currently_inactive(mid_2012).count(), 0 )
         self.assertEqual( pos_qs.currently_inactive(mid_2013).count(), 1 )
 
+    def test_position_title_no_redirect(self):
+        response = self.client.get(
+            reverse('position_pt', kwargs={
+                'pt_slug': 'test-title',
+            })
+        )
+        self.assertContains(
+            response,
+            'Test title',
+            status_code=200,
+        )
+
+
+    def test_redirect_position_title(self):
+        response = self.client.get(
+            reverse('position_pt', kwargs={
+                'pt_slug': 'old',
+            })
+        )
+        self.assertRedirects(
+            response,
+            reverse('position_pt', kwargs={
+                'pt_slug': 'test-title',
+            })
+        )

@@ -215,6 +215,10 @@ def position_pt_ok_o(request, pt_slug, ok_slug, o_slug):
 
 def get_position_type_redirect(pt_slug, ok_slug=None, o_slug=None):
     """If this position type URL should redirect, return the new URL"""
+    pt_redirect = get_slug_redirect(models.PositionTitle, pt_slug)
+    if pt_redirect:
+        pt_slug = pt_redirect.slug
+
     if ok_slug:
         ok_redirect = get_slug_redirect(models.OrganisationKind, ok_slug)
         if ok_redirect:
@@ -227,6 +231,8 @@ def get_position_type_redirect(pt_slug, ok_slug=None, o_slug=None):
             else:
                 new_url = reverse('position_pt_ok', kwargs=kwargs)
             return new_url
+    else:
+        return pt_redirect
 
 def position(request, pt_slug, ok_slug=None, o_slug=None):
     new_url = get_position_type_redirect(pt_slug, ok_slug, o_slug)
