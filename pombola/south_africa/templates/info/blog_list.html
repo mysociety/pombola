@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load blog_titles %}
+{% load pagination_tags %}
 
 {% block title %}
   {% if categories %}
@@ -57,7 +58,7 @@
 
   {% endfor %}
 
-  {% include "info/_pagination.html" %}
+  {% paginate %}
 
   </div>
   <div class="minor-column">

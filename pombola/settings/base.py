@@ -392,7 +392,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'south',
-    'pagination',
     'ajax_select',
     'autocomplete_light',
     'markitup',
@@ -418,6 +417,7 @@ INSTALLED_APPS = (
     'pombola.experiments',
     'pombola.budgets',
 
+    'pagination',
     'django_nose',
 )
 if config.get('DEBUG_TOOLBAR', True):
