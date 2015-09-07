@@ -3,6 +3,8 @@ from datetime import date
 from django.test import TestCase
 from pombola.core.models import Person, Place, PlaceKind, Position, PositionTitle
 from pombola.hansard.models import Source, Sitting, Venue, Entry
+from pombola.hansard.models.entry import NAME_SUBSTRING_MATCH
+
 
 class HansardEntryTest(TestCase):
 
@@ -85,7 +87,8 @@ class HansardEntryTest(TestCase):
             speaker_title = 'Hon.',
             content       = 'test',
         )
-        possible_speakers = entry.possible_matching_speakers()
+        possible_speakers = entry.possible_matching_speakers(
+            name_matching_algorithm=NAME_SUBSTRING_MATCH)
 
         self.assertEqual(1, len(possible_speakers))
         self.assertEqual(
@@ -103,7 +106,8 @@ class HansardEntryTest(TestCase):
             speaker_title = 'Hon.',
             content       = 'test',
         )
-        possible_speakers = entry.possible_matching_speakers()
+        possible_speakers = entry.possible_matching_speakers(
+            name_matching_algorithm=NAME_SUBSTRING_MATCH)
 
         self.assertEqual(1, len(possible_speakers))
         self.assertEqual(
@@ -124,7 +128,8 @@ class HansardEntryTest(TestCase):
             speaker_title = 'Hon.',
             content       = 'test',
         )
-        possible_speakers = entry.possible_matching_speakers()
+        possible_speakers = entry.possible_matching_speakers(
+            name_matching_algorithm=NAME_SUBSTRING_MATCH)
         self.assertEqual(2, len(possible_speakers))
 
     def test_exclude_hidden_profiles(self):
@@ -140,29 +145,11 @@ class HansardEntryTest(TestCase):
             speaker_title = 'Hon.',
             content       = 'test',
         )
-        possible_speakers = entry.possible_matching_speakers()
+        possible_speakers = entry.possible_matching_speakers(
+            name_matching_algorithm=NAME_SUBSTRING_MATCH)
 
         self.assertEqual(1, len(possible_speakers))
         self.assertEqual(
             self.mp,
             possible_speakers[0]
-        )
-
-    def test_exclude_hidden_profiles(self):
-        self.senator.hidden = True
-        self.senator.save()
-
-        entry = Entry(
-            sitting       = self.senate_sitting,
-            type          = 'text',
-            page_number   = 12,
-            text_counter  = 4,
-            speaker_name  = 'Jones',
-            speaker_title = 'Hon.',
-            content       = 'test',
-        )
-
-        self.assertEqual(
-            self.mp,
-            entry.possible_matching_speakers()[0]
         )

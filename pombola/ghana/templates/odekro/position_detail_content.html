@@ -1,0 +1,57 @@
+{% load switch %}
+
+<h1 class="page-title">{{ object.name }}</h1>
+
+{% if object.summary %}
+    <div class="summary markdown">
+        {{ object.summary }}
+    </div>
+{% endif %}
+
+<div class="content_box">
+    <h3>Current Position Holders</h3>
+    {% include 'core/position_position_section.html' with positions=object.position_set.all.currently_active.order_by_place %}
+</div>
+
+<div class="content_box">
+    <h3>Past Position Holders</h3>
+    {% include 'core/position_position_section.html' with positions=object.position_set.all.currently_inactive.order_by_place %}
+</div>
+
+{% with orgs=object.organisations %}
+    {% switch orgs.count %}
+        {% case 1 %}
+            {% with org=orgs.0 %}
+                <div class="content_box">
+                    <h3>
+                        {{ org.name }}
+                        {% if org.place %}
+                            (<strong>{{ org.place }}</strong>)
+                        {% endif %}
+                    </h3>
+                    
+                    {% if org.summary %}
+                        <div class="summary markdown">
+                            {{ org.summary }}
+                        </div>
+                    {% endif %}
+                
+                    <a href="{{ org.get_absolute_url }}">more details&hellip;</a>
+                </div>
+            {% endwith %}
+        {% case 0 %}
+            {# pass #}
+        {% else %}
+            <div class="content_box">
+                <h3>Related organisations</h3>
+                <ul class="listing">
+                {% for org in orgs %}
+                    <li>
+                        <a href="{{ org.get_absolute_url }}">{{ org.name }}</a>
+                        ({{ org.position_count }} {{ org.position_count|pluralize:"entry,entries" }})
+                    </li> 
+                {% endfor %}
+                </ul>
+            </div>
+    {% endswitch %}
+{% endwith %}

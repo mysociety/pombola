@@ -8,11 +8,15 @@ import subprocess
 
 from django.test import TestCase
 from django.utils import unittest
+from django.conf import settings
 
 from nose.plugins.attrib import attr
 
 from pombola.hansard.kenya_parser import KenyaParser, KenyaParserCouldNotParseTimeString
-from pombola.hansard.models import Source, Sitting, Entry, Venue, Alias
+from pombola.hansard.models import (
+    Source, Sitting, Entry, Venue, Alias,
+    NAME_SUBSTRING_MATCH, NAME_SET_INTERSECTION_MATCH,
+    )
 
 from pombola.core.models import Person, PositionTitle, Position
 
@@ -131,7 +135,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
 
         # Assign speakers
-        Entry.assign_speakers()
+        Entry.assign_speakers(name_matching_algorithm=settings.HANSARD_NAME_MATCHING_ALGORITHM)
 
         # check that none of the speakers got assigned - there are no entries in the database
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
@@ -146,7 +150,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
             legal_name = 'James Gabbow',
             slug       = 'james-gabbow',
         )
-        Entry.assign_speakers()
+        Entry.assign_speakers(name_matching_algorithm=settings.HANSARD_NAME_MATCHING_ALGORITHM)
         self.assertEqual( entry_qs.unassigned_speeches().count(), 31 )
         self.assertEqual( unassigned_aliases_qs.count(), 11 )
 
@@ -162,7 +166,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
             end_date   = ApproximateDate( future=True ),
             category = 'political',
         )
-        Entry.assign_speakers()
+        Entry.assign_speakers(name_matching_algorithm=settings.HANSARD_NAME_MATCHING_ALGORITHM)
         self.assertEqual( entry_qs.unassigned_speeches().count(), 26 )
         self.assertEqual( unassigned_aliases_qs.count(), 10 )
 
@@ -186,7 +190,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
             category = 'political',
             )
 
-        Entry.assign_speakers()
+        Entry.assign_speakers(name_matching_algorithm=settings.HANSARD_NAME_MATCHING_ALGORITHM)
         self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
         self.assertEqual( unassigned_aliases_qs.count(), 9 )
 
@@ -202,7 +206,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
             end_date   = ApproximateDate( year=2009, month=1, day = 1 ),
             category = 'political',
         )
-        Entry.assign_speakers()
+        Entry.assign_speakers(name_matching_algorithm=settings.HANSARD_NAME_MATCHING_ALGORITHM)
         self.assertEqual( entry_qs.unassigned_speeches().count(), 24 )
         self.assertEqual( unassigned_aliases_qs.count(), 9 )
 
@@ -215,7 +219,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
         betty_laboso_alias.person = betty_laboso
         betty_laboso_alias.save()
 
-        Entry.assign_speakers()
+        Entry.assign_speakers(name_matching_algorithm=settings.HANSARD_NAME_MATCHING_ALGORITHM)
         self.assertEqual( entry_qs.unassigned_speeches().count(), 22 )
         self.assertEqual( unassigned_aliases_qs.count(), 8 )
 
@@ -224,7 +228,7 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
         prof_kaloki_alias.ignored = True
         prof_kaloki_alias.save()
 
-        Entry.assign_speakers()
+        Entry.assign_speakers(name_matching_algorithm=settings.HANSARD_NAME_MATCHING_ALGORITHM)
         self.assertEqual( entry_qs.unassigned_speeches().count(), 22 )
         self.assertEqual( unassigned_aliases_qs.count(), 7 )
 
@@ -233,10 +237,90 @@ class KenyaParserAssemblyTest(KenyaParserVenueSpecificTestBase, TestCase):
             alias.person = betty_laboso
             alias.save()
 
-        Entry.assign_speakers()
+        Entry.assign_speakers(name_matching_algorithm=settings.HANSARD_NAME_MATCHING_ALGORITHM)
         self.assertEqual( entry_qs.unassigned_speeches().count(), 8 )
         self.assertEqual( unassigned_aliases_qs.count(), 0 )
 
+class TestMatchNames(TestCase):
+    def test_alias_match_score(self):
+        self.assertEqual(Entry().alias_match_score('Mr Bob Smith', 'Mr Bob Smith'), 3)
+        self.assertEqual(Entry().alias_match_score('Mr Bob Smith', 'Mr Smith'), 2)
+        self.assertEqual(Entry().alias_match_score('Mr Bob Smith', 'Bob Smith'), 2)
+        self.assertEqual(Entry().alias_match_score('Mr Bob Smith', 'Bob'), 1)
+        self.assertEqual(Entry().alias_match_score('Bob Smith', 'Smith, Bob'), 2)
+        self.assertEqual(Entry().alias_match_score('Mr Bob Smith', 'Miss Alice Jones'), 0)
+
+    def test_possible_matching_speakers(self):
+        source = Source(
+            name='Test source',
+            url='http://example.com/foo/bar/testing',
+            date=datetime.date(2011, 1, 3),
+            )
+
+        venue = Venue(
+            slug='test-venue',
+            name='Test Venue',
+            )
+
+        sitting = Sitting(
+            start_date=datetime.date(2011, 1, 2),
+            source=source,
+            venue=venue,
+            )
+
+        entry = Entry(
+            sitting=sitting,
+            )
+
+        james_smith = Person.objects.create(
+            legal_name='James Smith',
+            slug='james-smith',
+            )
+
+        james_smith2 = Person.objects.create(
+            title='Mr',
+            legal_name='Bob Smith James',
+            slug='james-smith2',
+            )
+
+        mp = PositionTitle.objects.create(
+            name='Member of Parliament',
+            slug='mp',
+            )
+
+        Position.objects.create(
+            person=james_smith,
+            title=mp,
+            start_date=ApproximateDate(year=2011, month=1, day=1),
+            end_date=ApproximateDate(future=True),
+            category='political',
+            )
+
+        Position.objects.create(
+            person=james_smith2,
+            title=mp,
+            start_date=ApproximateDate(year=2011, month=1, day=1),
+            end_date=ApproximateDate(future=True),
+            category='political',
+            )
+
+        entry.speaker_name = 'James Smith'
+        speakers = entry.possible_matching_speakers(name_matching_algorithm=NAME_SUBSTRING_MATCH)
+        self.assertListEqual(list(speakers), [james_smith])
+
+        entry.speaker_name = 'Mr Smith'
+        speakers = entry.possible_matching_speakers(name_matching_algorithm=NAME_SUBSTRING_MATCH)
+        self.assertItemsEqual(speakers, (james_smith, james_smith2))
+
+        speakers = entry.possible_matching_speakers(name_matching_algorithm=NAME_SET_INTERSECTION_MATCH)
+        self.assertListEqual(list(speakers), [james_smith2])
+
+        entry.speaker_name = 'Mr James Smith'
+        speakers = entry.possible_matching_speakers(name_matching_algorithm=NAME_SUBSTRING_MATCH)
+        self.assertListEqual(list(speakers), [james_smith])
+
+        speakers = entry.possible_matching_speakers(name_matching_algorithm=NAME_SET_INTERSECTION_MATCH)
+        self.assertListEqual(list(speakers), [james_smith2, james_smith])
 
 
 class KenyaParserTest(TestCase):

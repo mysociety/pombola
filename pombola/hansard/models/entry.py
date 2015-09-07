@@ -1,11 +1,12 @@
 import re
 
 from django.db import models
-from django.core.urlresolvers import reverse
 
 from pombola.core.models import Person
 from pombola.hansard.models import Sitting, Alias
 from pombola.hansard.models.base import HansardModelBase
+
+from pombola.hansard.constants import NAME_SUBSTRING_MATCH, NAME_SET_INTERSECTION_MATCH
 
 
 class EntryQuerySet(models.query.QuerySet):
@@ -85,7 +86,7 @@ class Entry(HansardModelBase):
         verbose_name_plural = 'entries'
 
     @classmethod
-    def assign_speakers(cls):
+    def assign_speakers(cls, name_matching_algorithm=NAME_SET_INTERSECTION_MATCH):
         """Go through all entries and assign speakers"""
 
         entries = cls.objects.all().unassigned_speeches()
@@ -95,23 +96,32 @@ class Entry(HansardModelBase):
         cache = {}
 
         for entry in entries:
-            # print '--------- ' + entry.speaker_name + ' ---------'
-
             cache_key = "%s-%s" % (entry.sitting.start_date, entry.speaker_name)
 
             if cache_key in cache:
                 speakers = cache[cache_key]
             else:
-                speakers = entry.possible_matching_speakers( update_aliases=True )
+                speakers = entry.possible_matching_speakers(
+                    update_aliases=True,
+                    name_matching_algorithm=name_matching_algorithm,
+                    )
                 cache[cache_key] = speakers
 
-            if len(speakers) == 1:
+            if speakers and len(speakers) == 1:
                 speaker = speakers[0]
                 entry.speaker = speaker
                 entry.save()
 
+    def alias_match_score(self, name_one, name_two):
+        """
+        Return a score based on the intersection of two names including titles
+        minus all punctuation.
+        """
+        set_one = set(filter(lambda item : len(item) > 1, re.sub('[^A-Za-z]',' ', name_one).split()))
+        set_two = set(filter(lambda item : len(item) > 1, re.sub('[^A-za-z]',' ', name_two).split()))
+        return len(set_one & set_two)
 
-    def possible_matching_speakers(self, update_aliases=False):
+    def possible_matching_speakers(self, update_aliases=False, name_matching_algorithm=NAME_SET_INTERSECTION_MATCH):
         """
         Return array of person objects that might be the speaker.
 
@@ -143,40 +153,48 @@ class Entry(HansardModelBase):
         except Alias.DoesNotExist:
             alias = None
 
-        # drop the prefix
-        stripped_name = re.sub( r'^\w+\.\s', '', name )
-
         person_search = (
             Person
             .objects
             .all()
             .is_politician( when=self.sitting.start_date )
-            .filter(legal_name__icontains=stripped_name)
             .exclude(hidden=True)
             .distinct()
         )
 
-        # if the results are ambiguous, try restricting to members of the current house
-        # unless it's a joint sitting, in which case this is dangerous
-        #
-        # FIXME: (1) the position filter currently checks whether a person has *ever* held
-        #        a qualifying position, would be better if this were a check against
-        #        whether the position was held at date of the sitting.
-        #
-        #        (2) it might also be interesting to have an optional Pombola Organisation
-        #        associated with a Sitting so that it would be easier to check whether the
-        #        Person has a matching association with an Organisation rather than checking
-        #        PositionTitle names (not sure what would happen with Joint Sittings - dual association?)
+        if name_matching_algorithm == NAME_SUBSTRING_MATCH:
+            # drop the prefix
+            stripped_name = re.sub(r'^\w+\.\s', '', name)
+            person_search = person_search.filter(legal_name__icontains=stripped_name)
 
-        if len(person_search) > 1 and 'Joint Sitting' not in self.sitting.source.name:
-            if self.sitting.venue.name == 'Senate':
-                current_house = person_search.filter(position__title__name__contains='Senator')
-            else:
-                current_house = person_search.filter(position__title__name__contains=self.sitting.venue.name)
-            if current_house:
-                person_search = current_house
+            # if the results are ambiguous, try restricting to members of the current house
+            # unless it's a joint sitting, in which case this is dangerous
+            #
+            # FIXME: (1) the position filter currently checks whether a person has *ever* held
+            #        a qualifying position, would be better if this were a check against
+            #        whether the position was held at date of the sitting.
+            #
+            #        (2) it might also be interesting to have an optional Pombola Organisation
+            #        associated with a Sitting so that it would be easier to check whether the
+            #        Person has a matching association with an Organisation rather than checking
+            #        PositionTitle names (not sure what would happen with Joint Sittings - dual association?)
+
+            if len(person_search) > 1 and 'Joint Sitting' not in self.sitting.source.name:
+                if self.sitting.venue.name == 'Senate':
+                    current_house = person_search.filter(position__title__name__contains='Senator')
+                else:
+                    current_house = person_search.filter(position__title__name__contains=self.sitting.venue.name)
+                if current_house:
+                    person_search = current_house
 
         results = person_search.all()[0:]
+
+        if name_matching_algorithm == NAME_SET_INTERSECTION_MATCH:
+            results = sorted(
+                [i for i in results if self.alias_match_score('%s %s'%(i.title, i.legal_name), name) > 1],
+                key=lambda x: self.alias_match_score('%s %s'%(x.title, x.legal_name), name),
+                reverse=True,
+                )
 
         found_one_result = len(results) == 1
 

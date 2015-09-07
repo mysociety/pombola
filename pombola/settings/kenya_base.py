@@ -1,3 +1,5 @@
+from pombola.hansard.constants import NAME_SUBSTRING_MATCH
+
 COUNTRY_APP = 'kenya'
 
 OPTIONAL_APPS = [
@@ -84,3 +86,5 @@ COUNTRY_JS = {
         'output_filename': 'js/shujaaz.js',
     },
 }
+
+HANSARD_NAME_MATCHING_ALGORITHM = NAME_SUBSTRING_MATCH

@@ -2,6 +2,8 @@
 *~
 \#*\#
 \.\#*
+.idea/
+
 .coverage
 .sass-cache
 web/down.default.html
@@ -12,3 +14,12 @@ web/down.default.html
 /pombola/nigeria/static/sass/nigeria.css
 /pombola/south_africa/static/sass/south-africa.css
 /pombola/zimbabwe/static/sass/zimbabwe.css
+*.sublime-project
+*.sublime-workspace
+*.DS_Store
+.project
+.pydevproject
+build/
+tmp/
+local_fabfile.py
+mzalendo/fabfile.py

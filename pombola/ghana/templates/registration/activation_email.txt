@@ -1,0 +1,13 @@
+Hello,
+
+Thank you for registering an account with Odekro, and welcome to our community.
+
+In order to use your account, you will need to activate it first. 
+Please visit the following link:
+
+http://{{ site }}{% url registration_activate activation_key=activation_key %}
+
+Thank you for choosing Odekro.
+
+Kind regards,
+The Odekro Team

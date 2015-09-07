@@ -6,17 +6,25 @@
 py-bcrypt==0.4
 PyYAML==3.11
 Mercurial==3.1.2
-Pillow==2.7.0
+Pillow==2.8.2
 
 ### Database drivers
 psycopg2==2.5.4
+pymongo==3.0.2
 
 ### Django related
 Django==1.6.5
 django-pagination==1.0.7
 South==1.0.1
+django-bcrypt==0.9.2
 django-pipeline==1.3.27
 django-pipeline-compass-rubygem==0.1.8
+
+### Django related registration
+# The registration app is a little out of date - get it from the repo direct....
+# django-registration
+-e hg+https://bitbucket.org/ubernostrum/django-registration@fad7080fe769#egg=django-registration
+django-registration-defaults==0.3
 
 ### Pombola dependencies
 sorl-thumbnail==12.3
@@ -44,6 +52,14 @@ yanc==0.2.4
 httplib2==0.9
 WebTest==2.0.15
 django-webtest==1.7.7
+
+# For Ghana:
+python-openid
+oauth2==1.5.170
+django-social-auth==0.6.0
+Fabric==1.10.1
+django-bootstrap-pagination
+
 git+git://github.com/nathforge/django-mechanize.git@d9537ccf8cc66bc7913df0c95fd532699ec88fdc
 selenium==2.44
 django-selenium==0.9.7
@@ -125,6 +141,8 @@ wsgiref==0.1.2
 # probably want version 1.9.0 or greater and this:
 # http://gis.stackexchange.com/a/74060 might be of use if you have compile
 # errors
+#you can also try a matching version of pygdal
+#pygdal==1.10.1
 GDAL
 
 # This comes as standard in Python 2.7+ anyway

@@ -1,0 +1,10 @@
+  <div id="wordcloud" style="width: 540px, height: 350px; border: 1px solid #ccc;"></div>
+  <script type = "text/javascript">
+    $(function() {
+        $.getJSON("wordcloud/wordcloud/",
+        {},
+        function(data){
+            $("#wordcloud").jQCloud(data, {width: 525, height:345, shape: "rectangular"});
+        });
+      });
+  </script>

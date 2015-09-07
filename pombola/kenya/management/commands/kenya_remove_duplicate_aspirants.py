@@ -27,6 +27,7 @@ from django.conf import settings
 from pombola.core.models import (Place, PlaceKind, Person,
     ParliamentarySession, Position, PositionTitle, Organisation,
     OrganisationKind)
+from pombola.core.utils import mkdir_p
 from pombola.slug_helpers.models import SlugRedirect
 
 from iebc_api import *
