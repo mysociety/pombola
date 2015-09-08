@@ -1,10 +1,13 @@
+$colour_pale_yellow: #FBFDE9;
+$colour_pale_green: #F1F5D6;
+
 body.women {
   #page {
     padding: 0;
-    background-color: #FBFDE9;
+    background-color: $colour_pale_yellow;
 
-    h1, h2, h3, h4 {
-      color: $colour_primary;
+    *, *:before, *:after {
+      box-sizing: border-box;
     }
   }
 
@@ -12,17 +15,229 @@ body.women {
     max-width: 960px;
     padding: 0 10px;
     margin: 0 auto;
-  }
-}
 
-.women__main {
-  background-color: #F1F5D6;
+    @media (min-width: 768px) {
+      padding: 0 20px;
+    }
+  }
 }
 
 .women__intro,
 .women__main,
 .women__outro {
   padding: 1em 0;
+
+  @media (min-width: 640px) and (min-height: 500px) {
+    padding: 2em 0;
+  }
+
+  @media (min-width: 640px) and (min-height: 700px) {
+    padding: 3em 0;
+  }
+
+  h1, h2, h3, h4 {
+    color: $colour_primary_mid;
+    margin-bottom: 0.75em;
+  }
+
+  a {
+    color: $colour_primary_mid;
+
+    &:hover, &:active {
+      color: $colour_primary;
+    }
+  }
+}
+
+.women__intro p,
+.women__outro p {
+  font-size: 1em;
+  line-height: 1.4em;
+}
+
+@media (min-width: 640px) {
+  .women__intro {
+    @include clearfix();
+
+    h1 {
+      font-size: 2em;
+      line-height: 1em;
+    }
+  }
+
+  .women__intro__text {
+    float: left;
+    width: 45%;
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.45em;
+    }
+  }
+
+  .women__intro__stats {
+    float: right;
+    width: 45%;
+  }
+}
+
+.stats-box {
+  width: 100%;
+  color: $colour_red;
+  line-height: 1.4em;
+
+  td {
+    border: 1px solid mix(#999, $colour_pale_yellow, 20%);
+    padding: 0.5em;
+
+    @media (min-width: 640px) {
+      padding: 1em;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+  }
+
+  li + li {
+    margin-top: 0.66em;
+  }
+
+  strong {
+    font-size: 1.3em;
+  }
+
+  .centered {
+    text-align: center;
+
+    strong {
+      display: block;
+      font-size: 4em;
+      line-height: 0.9em;
+    }
+  }
+}
+
+.women__main {
+  background: $colour_pale_green url(../images/women-curve-top.png) center top no-repeat;
+  background-size: 100% 200px;
+  padding-top: 0; // because the background image gives the illusion of padding already
+}
+
+.women__main,
+.women__outro {
+  h2 {
+    font-size: 1.5em; // 24px, same as h1
+    line-height: 1.2em;
+  }
+}
+
+@media (min-width: 768px) {
+  .women__main {
+    @include clearfix();
+  }
+
+  .women__main__primary {
+    float: left;
+    width: 62%;
+  }
+
+  .women__main__secondary {
+    float: right;
+    width: 34%;
+    max-width: 18em;
+    margin-top: 2.5em; // line up with tops of person-cards
+
+    ul, ol {
+      padding-left: 1em; // avoid visual double gutter
+    }
+  }
+}
+
+.person-gallery {
+  @include clearfix();
+  margin: 0 -10px -20px -10px;
+
+  @media (min-width: 960px) {
+    margin: 0 -20px -20px -20px;
+  }
+
+  h3 {
+    color: inherit;
+  }
+}
+
+.person-gallery__item {
+  float: left;
+  padding: 10px;
+
+  @media (min-width: 480px) {
+    width: 50%;
+  }
+
+  @media (min-width: 960px) {
+    padding: 10px 20px;
+  }
+}
+
+.person-card {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  padding: 1em;
+  margin-bottom: 1em;
+
+  img {
+    float: left;
+    margin-right: 1em;
+    width: 4em;
+    height: auto;
+  }
+
+  p {
+    clear: both;
+    padding-top: 1em;
+    margin: 0;
+  }
+}
+
+.person-card__name {
+  display: block;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  font-weight: bold;
+  margin-top: 0.2em;
+}
+
+.women__main__secondary {
+  h2 {
+    font-size: 1.2em;
+  }
+}
+
+.women__outro {
+  text-align: center;
+
+  background: transparent url(../images/women-curve-bottom.png) center top no-repeat;
+  background-size: 100% 50px;
+  margin-top: -1em;
+
+  // slightly overloaded selector to override body.women above
+  div.container {
+    max-width: 44em; // down from 960px, because this is a simple, centered section
+  }
+
+  h1 {
+    color: $colour_primary_mid;
+    margin-top: 2em; // make up for vertical space eaten up by the background image
+  }
 }
 
 .issues-word-cloud {
@@ -30,4 +245,5 @@ body.women {
   border-radius: 1em;
   text-align: center;
   padding: 2em;
+  margin-top: 2em;
 }
