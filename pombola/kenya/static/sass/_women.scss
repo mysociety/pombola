@@ -234,16 +234,40 @@ body.women {
     max-width: 44em; // down from 960px, because this is a simple, centered section
   }
 
-  h1 {
-    color: $colour_primary_mid;
+  h2 {
     margin-top: 2em; // make up for vertical space eaten up by the background image
   }
 }
 
 .issues-word-cloud {
-  border: 3px dashed rgba(0,0,0,0.2);
-  border-radius: 1em;
-  text-align: center;
-  padding: 2em;
+  height: 20em;
   margin-top: 2em;
+}
+
+div.jqcloud {
+  font-size: 10px;
+  line-height: normal;
+  overflow: hidden;
+  position: relative;
+  color: $colour_primary_mid;
+  font-weight: bold;
+
+  a {
+    font-size: inherit;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  span { padding: 0; }
+
+  .w10 { font-size: 550%; }
+  .w9 { font-size: 500%; }
+  .w8 { font-size: 450%; }
+  .w7 { font-size: 400%; }
+  .w6 { font-size: 350%; }
+  .w5 { font-size: 300%; }
+  .w4 { font-size: 250%; }
+  .w3 { font-size: 200%; }
+  .w2 { font-size: 150%; }
+  .w1 { font-size: 100%; }
 }
