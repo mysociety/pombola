@@ -129,8 +129,7 @@ class SearchBaseView(TemplateView):
         else:
             return ['search/global_search.html']
 
-    def get_paginated_results(self, sqs):
-        paginator = Paginator(sqs, self.results_per_page)
+    def get_paginated_results(self, paginator):
         try:
             results = paginator.page(self.page)
         except PageNotAnInteger:
@@ -176,12 +175,14 @@ class SearchBaseView(TemplateView):
         if self.order == 'date':
             sqs = sqs.order_by('-start_date')
 
-        context['results'] = self.get_paginated_results(sqs)
+        context['paginator'] = Paginator(sqs, self.results_per_page)
+        context['page_obj'] = self.get_paginated_results(context['paginator'])
         return context
 
     def get_section_context(self, context, section):
         data = self.get_section_data(section)
-        context['results'] = self.get_paginated_results(data['results'])
+        context['paginator'] = Paginator(data['results'], self.results_per_page)
+        context['page_obj'] = self.get_paginated_results(context['paginator'])
         return context
 
     def get_date_range_context(self, context):
@@ -289,7 +290,7 @@ if settings.ENABLED_FEATURES['hansard']:
                 results = paginator.page(1)
             except EmptyPage:
                 results = paginator.page(paginator.num_pages)
-            return results
+            return results, paginator
 
         def get_context_data(self, **kwargs):
             self.parse_params()
@@ -305,7 +306,8 @@ if settings.ENABLED_FEATURES['hansard']:
                 return context
 
             data = self.get_data()
-            context['results'] = self.get_paginated_results(data['results'])
+            context['paginator'] = Paginator(sqs, data['results'])
+            context['page_obj'] = self.get_paginated_results(context['paginator'])
             return context
 
 

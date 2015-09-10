@@ -15,7 +15,7 @@
 
   <h2>{{ section_title }}</h2>
   <ul class="unstyled-list">
-  {% for result in results %}
+  {% for result in page_obj %}
     {% include 'search/search_results_item.html' %}
   {% empty %}
     <li>There were no results found for '{{ query }}' in {{ section_title }}</li>
