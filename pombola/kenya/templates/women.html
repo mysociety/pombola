@@ -5,6 +5,10 @@
 
 {% block body_attributes %}class="women"{% endblock %}
 
+{% block extra_js_to_load %}
+  addExtraJS([ {% compressed_js 'women-wordcloud' %} null ]);
+{% endblock %}
+
 {% block breadcrumbs %}
     {# Hide bread crumbs on this page. #}
 {% endblock %}
