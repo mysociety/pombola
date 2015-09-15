@@ -439,7 +439,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
 
 @attr(country='south_africa')
-class SAPersonProfileSubPageTest(WebTest):
+class SAPersonProfileSubPageTest(TransactionWebTest):
     def setUp(self):
         self.org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
         self.org_kind_parliament = models.OrganisationKind.objects.create(name='Parliament', slug='parliament')
@@ -504,16 +504,6 @@ class SAPersonProfileSubPageTest(WebTest):
             start_date='2010-04-01',
             end_date='2014-04-01',
         )
-
-    def tearDown(self):
-        self.deceased.delete()
-        self.former_mp.delete()
-        self.party.delete()
-        self.parliament.delete()
-        self.org_kind_party.delete()
-        self.org_kind_parliament.delete()
-        self.post.delete()
-        self.membership.delete()
 
     def get_person_summary(self, soup):
         return soup.find('div', class_='person-summary')
