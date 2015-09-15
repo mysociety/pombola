@@ -3,6 +3,8 @@ from datetime import date
 from django.test import TestCase
 from pombola.core.models import Person, Place, PlaceKind, Position, PositionTitle
 from pombola.hansard.models import Source, Sitting, Venue, Entry
+from pombola.hansard.models.entry import NAME_SUBSTRING_MATCH
+
 
 class HansardEntryTest(TestCase):
 
@@ -85,7 +87,8 @@ class HansardEntryTest(TestCase):
             speaker_title = 'Hon.',
             content       = 'test',
         )
-        possible_speakers = entry.possible_matching_speakers()
+        possible_speakers = entry.possible_matching_speakers(
+            name_matching_algorithm=NAME_SUBSTRING_MATCH)
 
         self.assertEqual(1, len(possible_speakers))
         self.assertEqual(
@@ -103,7 +106,8 @@ class HansardEntryTest(TestCase):
             speaker_title = 'Hon.',
             content       = 'test',
         )
-        possible_speakers = entry.possible_matching_speakers()
+        possible_speakers = entry.possible_matching_speakers(
+            name_matching_algorithm=NAME_SUBSTRING_MATCH)
 
         self.assertEqual(1, len(possible_speakers))
         self.assertEqual(
@@ -124,7 +128,8 @@ class HansardEntryTest(TestCase):
             speaker_title = 'Hon.',
             content       = 'test',
         )
-        possible_speakers = entry.possible_matching_speakers()
+        possible_speakers = entry.possible_matching_speakers(
+            name_matching_algorithm=NAME_SUBSTRING_MATCH)
         self.assertEqual(2, len(possible_speakers))
 
     def test_exclude_hidden_profiles(self):
@@ -140,7 +145,8 @@ class HansardEntryTest(TestCase):
             speaker_title = 'Hon.',
             content       = 'test',
         )
-        possible_speakers = entry.possible_matching_speakers()
+        possible_speakers = entry.possible_matching_speakers(
+            name_matching_algorithm=NAME_SUBSTRING_MATCH)
 
         self.assertEqual(1, len(possible_speakers))
         self.assertEqual(
