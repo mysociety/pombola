@@ -251,8 +251,21 @@ class TestMatchNames(TestCase):
         self.assertEqual(Entry().alias_match_score('Mr Bob Smith', 'Miss Alice Jones'), 0)
 
     def test_possible_matching_speakers(self):
+        source = Source(
+            name='Test source',
+            url='http://example.com/foo/bar/testing',
+            date=datetime.date(2011, 1, 3),
+            )
+
+        venue = Venue(
+            slug='test-venue',
+            name='Test Venue',
+            )
+
         sitting = Sitting(
             start_date=datetime.date(2011, 1, 2),
+            source=source,
+            venue=venue,
             )
 
         entry = Entry(
