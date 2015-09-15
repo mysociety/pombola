@@ -164,17 +164,6 @@ class PopoloTest(TestCase):
             }
         ]
 
-    def tearDown(self):
-        self.position.delete()
-        self.organisation.delete()
-        self.organisation_kind.delete()
-        self.person_image.delete()
-        self.person_id.delete()
-        self.email_contact.delete()
-        self.missing_email_contact.delete()
-        self.contact_kind.delete()
-        self.person.delete()
-
     def rewrite_field(self, o, key, format_dict):
         o[key] = o[key].format(**format_dict)
 

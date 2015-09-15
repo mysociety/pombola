@@ -6,6 +6,8 @@ from .apps import *
 
 from django.template.defaultfilters import slugify
 
+from pombola.hansard.constants import NAME_SUBSTRING_MATCH, NAME_SET_INTERSECTION_MATCH
+
 IN_TEST_MODE = False
 
 # Work out where we are to set up the paths correctly and load config
@@ -274,9 +276,14 @@ PAGINATION_INVALID_PAGE_RAISES_404 = True
 
 # haystack config - interface to search engine
 HAYSTACK_CONNECTIONS = {
+    #'default': {
+    #    'ENGINE': 'xapian_backend.XapianEngine',
+    #    'PATH': os.path.join( root_dir, "pombola_xapian" ),
+        #'PATH': os.path.join(os.path.dirname(__file__), 'xapian_index'),
+    #},
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': '127.0.0.1:9200',
+        'URL': 'localhost:9200',
         'INDEX_NAME': config.get('POMBOLA_DB_NAME'),
         'EXCLUDED_INDEXES': [],
     },
@@ -345,6 +352,16 @@ QUESTION_JSON_CACHE  = os.path.join( HANSARD_CACHE, 'questions_json' )
 PMG_COMMITTEE_USER = config.get('PMG_COMMITTEE_USER', '')
 PMG_COMMITTEE_PASS = config.get('PMG_COMMITTEE_PASS', '')
 PMG_API_KEY = config.get('PMG_API_KEY', '')
+
+# Algorithm to use for matching names when scraping hansard
+# NAME_SUBSTRING_MATCH
+# - strips the title from the name and then searches for current politicians
+#   with names containing that string (used by Kenya).
+# NAME_SET_INTERSECTION_MATCH
+# - splits the name, including title, into words, and then compares the
+#   set of these words with similar sets from current politicians,
+#   looking for the largest intersection.
+HANSARD_NAME_MATCHING_ALGORITHM = NAME_SET_INTERSECTION_MATCH
 
 # Which popit instance to use
 POPIT_API_URL = config.get('POPIT_API_URL')
@@ -558,8 +575,10 @@ PIPELINE_COMPILERS = (
   'pipeline_compass.compass.CompassCompiler',
 )
 
+
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
+
 
 PIPELINE_YUI_BINARY = '/usr/bin/env yui-compressor'
 
@@ -584,3 +603,12 @@ BLEACH_ALLOWED_ATTRIBUTES = {
 BLEACH_STRIP_TAGS = True
 
 INFO_PAGES_ALLOW_RAW_HTML = False
+
+if config.get('EMAIL_SETTINGS', None):
+    EMAIL_HOST = config.get('EMAIL_HOST', '')
+    EMAIL_HOST_USER = config.get('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD', '')
+    port = config.get('EMAIL_PORT', None)
+    if port:
+        EMAIL_PORT = port
+    EMAIL_USE_TLS = config.get('EMAIL_USE_TLS', False)

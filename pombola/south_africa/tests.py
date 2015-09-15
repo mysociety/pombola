@@ -14,7 +14,7 @@ from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django_date_extensions.fields import ApproximateDate
-from django_webtest import WebTest
+from django_webtest import TransactionWebTest
 
 from mapit.models import Type, Area, Geometry, Generation
 
@@ -65,7 +65,7 @@ class HomeViewTest(TestCase):
         self.assertIn('news_articles', response.context)
 
 @attr(country='south_africa')
-class ConstituencyOfficesTestCase(WebTest):
+class ConstituencyOfficesTestCase(TransactionWebTest):
     def setUp(self):
         self.old_HAYSTACK_SIGNAL_PROCESSOR = settings.HAYSTACK_SIGNAL_PROCESSOR
         settings.HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
@@ -192,7 +192,7 @@ class LatLonDetailViewTest(TestCase):
 
 
 @attr(country='south_africa')
-class SASearchViewTest(WebTest):
+class SASearchViewTest(TransactionWebTest):
 
     def setUp(self):
         self.search_location_url = reverse('core_geocoder_search')
@@ -766,7 +766,7 @@ class SAHansardIndexViewTest(TestCase):
         self.assertNotContains(response, "Empty section")
 
 @attr(country='south_africa')
-class SACommitteeIndexViewTest(WebTest):
+class SACommitteeIndexViewTest(TransactionWebTest):
 
     def setUp(self):
         self.fish_section_title = u"Oh fishy fishy fishy fishy fishy fish"
@@ -872,7 +872,7 @@ class SACommitteeIndexViewTest(WebTest):
         self.assertIn('rhubarb rhubarb', response)
 
 @attr(country='south_africa')
-class SAOrganisationDetailViewTest(WebTest):
+class SAOrganisationDetailViewTest(TransactionWebTest):
 
     def setUp(self):
         # Create a test organisation and some associated models
@@ -924,7 +924,7 @@ class SAOrganisationDetailViewTest(WebTest):
 
 
 @attr(country='south_africa')
-class SAOrganisationDetailViewTestParliament(WebTest):
+class SAOrganisationDetailViewTestParliament(TransactionWebTest):
 
     def setUp(self):
         # We create a small model parliament here - this includes:
@@ -1048,7 +1048,7 @@ class SAOrganisationDetailViewTestParliament(WebTest):
         )
 
     def test_percentages(self):
-        with self.assertNumQueries(12):
+        with self.assertNumQueries(11):
             response = self.app.get('/organisation/model-parliament/')
         ps_and_ps = response.context['parties_and_percentages']
         self.assertEqual(2, len(ps_and_ps))
@@ -1056,30 +1056,6 @@ class SAOrganisationDetailViewTestParliament(WebTest):
         self.assertAlmostEqual(ps_and_ps[0][1], 66.666666666666)
         self.assertEqual(ps_and_ps[1][0], self.party_random)
         self.assertAlmostEqual(ps_and_ps[1][1], 33.333333333333)
-
-    def tearDown(self):
-        self.old_mp_party_position.delete()
-        self.old_mp_position.delete()
-        self.old_mp.delete()
-        self.speaker_party_position.delete()
-        self.speaker_position.delete()
-        self.speaker.delete()
-        self.party_position2.delete()
-        self.position2.delete()
-        self.person2.delete()
-        self.party_position.delete()
-        self.old_party_position.delete()
-        self.position.delete()
-        self.speaker_title.delete()
-        self.member_title.delete()
-        self.person.delete()
-        self.party_loony.delete()
-        self.party_defunct.delete()
-        self.party_another_random.delete()
-        self.party_random.delete()
-        self.organisation.delete()
-        self.party_kind.delete()
-        self.parliament_kind.delete()
 
 
 @attr(country='south_africa')
@@ -1211,7 +1187,7 @@ class FixPositionTitlesCommandTests(TestCase):
                 stdout=StringIO())
 
 @attr(country='south_africa')
-class SAPlaceDetailViewTest(WebTest):
+class SAPlaceDetailViewTest(TransactionWebTest):
 
     def setUp(self):
 
