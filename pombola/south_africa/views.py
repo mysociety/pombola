@@ -1300,7 +1300,7 @@ class SAElectionProvinceCandidatesView(TemplateView):
             candidate_list = election_list.position_set.select_related('title').all()
 
             candidates = sorted(candidate_list, key=lambda x:
-                int(re.match('\d+', x.title.name).group())
+                int(re.match('\d+', x.title.name if x.title else '').group())
             )
 
             context['province_election_lists'].append({
