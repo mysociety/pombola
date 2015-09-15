@@ -14,9 +14,9 @@
   {% endif %}
 
   <div class="main-search-result">
-    <h2>Results {{ results.start_index }}-{{ results.end_index }} of {{ results.paginator.count }} for "{{ query }}"</h2>
+    <h2>Results {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} for "{{ query }}"</h2>
     <ul class="unstyled-list">
-      {% for result in results %}
+      {% for result in page_obj %}
         {% include 'search/search_results_item.html' %}
       {% empty %}
         <li>There were no results found for '{{ query }}'</li>
