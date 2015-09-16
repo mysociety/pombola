@@ -306,8 +306,10 @@ if settings.ENABLED_FEATURES['hansard']:
                 return context
 
             data = self.get_data()
-            context['paginator'] = Paginator(sqs, data['results'])
-            context['page_obj'] = self.get_paginated_results(context['paginator'])
+            page_obj, paginator = self.get_paginated_results(data['results'])
+            context['page_obj'] = page_obj
+            context['paginator'] = paginator
+
             return context
 
 
