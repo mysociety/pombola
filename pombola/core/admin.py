@@ -118,11 +118,17 @@ class PositionAdmin(AjaxSelectAdmin):
     show_organisation.allow_tags = True
 
     def show_place(self, obj):
-        return create_admin_link_for(obj.place, obj.place.name)
+        return (
+            create_admin_link_for(obj.place, obj.place.name)
+            if obj.place else "&mdash;"
+            )
     show_place.allow_tags = True
 
     def show_title(self, obj):
-        return create_admin_link_for(obj.title, obj.title.name)
+        return (
+            create_admin_link_for(obj.title, obj.title.name)
+            if obj.title else "&mdash;"
+            )
     show_title.allow_tags = True
 
 
