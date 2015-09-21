@@ -98,7 +98,7 @@
         <div class="home__infographics__articles">
           {% for infographic in infographics %}
             <a href="{{ infographic.get_absolute_url }}" class="home__infographics__article">
-              {% thumbnail infographic.featured_image_file.file "220" as im %}
+              {% thumbnail infographic.featured_image_file.file "223x250" crop="top" quality=80 as im %}
                 <img src="{{ im.url }}">
               {% endthumbnail %}
             </a>
