@@ -1,39 +1,7 @@
 $border_radius: 3px;
-$font_family_lato: Lato, 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
 $high_dpi_screen: '-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi';
 
-@font-face {
-    font-family: 'Lato';
-    src: url('/static/fonts/lato-regular-webfont.eot');
-    src: url('/static/fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/lato-regular-webfont.woff') format('woff'),
-         url('/static/fonts/lato-regular-webfont.ttf') format('truetype'),
-         url('/static/fonts/lato-regular-webfont.svg#latoregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Lato';
-    src: url('/static/fonts/lato-bold-webfont.eot');
-    src: url('/static/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/lato-bold-webfont.woff') format('woff'),
-         url('/static/fonts/lato-bold-webfont.ttf') format('truetype'),
-         url('/static/fonts/lato-bold-webfont.svg#latobold') format('svg');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Lato';
-    src: url('/static/fonts/lato-italic-webfont.eot');
-    src: url('/static/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/lato-italic-webfont.woff') format('woff'),
-         url('/static/fonts/lato-italic-webfont.ttf') format('truetype'),
-         url('/static/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
-    font-weight: normal;
-    font-style: italic;
-}
+@import "base_fonts";
 
 @mixin unstyled-list {
     padding-left: 0;
@@ -2216,51 +2184,6 @@ ul.pager {
         width: 33%;
     }
 }
-
-
-.countdown_row {
-    /* min-width stops the timer from jumping around when the time is ticking down */
-    @media (min-width: 640px) and (max-width: 880px) {
-        min-width: 13.1875em;
-    }
-    @media only all and (min-width: 640px), print {
-        position: absolute;
-        right: 0;
-        min-width: 18.375em;
-    }
-}
-
-/* Countdown */
-@import url('http://fonts.googleapis.com/css?family=Oswald&text=0123456789');
-.countdown_section {
-    display: inline-block;
-    text-align: center;
-}
-
-.countdown_amount {
-    display: block;
-    font-family: 'Oswald', 'Arial Narrow', 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans sans-serif;
-    font-size: 3.75em;
-    @media (min-width: 640px) and (max-width: 880px) {
-        font-size: 2.5em;
-    }
-
-    &:after {
-        content: ":";
-    }
-    &.last {
-        &:after {
-            content: "";
-        }
-    }
-}
-
-.countdown_label {
-    display: block;
-    font-family: $font_family_lato;
-    font-size: 0.875em;
-}
-
 
 /* Elections templates */
 

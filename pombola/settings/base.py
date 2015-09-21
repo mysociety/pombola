@@ -456,6 +456,7 @@ PIPELINE_CSS = {
     'countdown': {
         'source_filenames': (
             'css/jquery.countdown-v1.6.0.css',
+            'sass/countdown.scss',
         ),
         'output_filename': 'css/countdown.css',
     },
