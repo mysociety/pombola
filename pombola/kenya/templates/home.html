@@ -32,7 +32,10 @@
 <div id="home-intro">
 
     <div id="home-quote">
-        <img src="{% static 'images/parliament.jpg' %}">
+        <img src="{% static 'images/parliament-400px.jpg' %}"
+            sizes="(min-width: 640px) 400px, 100vw"
+            srcset="{% static 'images/parliament-600px.jpg' %} 600w,
+            {% static 'images/parliament-400px.jpg' %} 400w">
         <p>All Sovereign power belongs to the people of Kenya and shall be exercised only in accordance with this Constitution</p>
         <footer>
             &ndash; <cite>Article 1 (i), Constitution of Kenya August 2010</cite>
