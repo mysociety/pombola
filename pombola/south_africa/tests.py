@@ -1642,9 +1642,6 @@ class SAMembersInterestsBrowserTest(TestCase):
 
 @attr(country='south_africa')
 class SACommentsArchiveTest(TransactionWebTest):
-    LOCAL_MEDIA_ROOT = os.path.normpath(
-        os.path.join(settings.MEDIA_ROOT, "../../media_root/")
-    )
     def setUp(self):
         blog_page1 = InfoPage.objects.create(
             title='1',
@@ -1660,14 +1657,12 @@ class SACommentsArchiveTest(TransactionWebTest):
             kind=InfoPage.KIND_BLOG)
 
     @override_settings(FACEBOOK_APP_ID='test')
-    @override_settings(MEDIA_ROOT=LOCAL_MEDIA_ROOT)
     def test_matching_page(self):
         slug = '/blog/infographic-decline-sa-tourism-2015'
         context = self.app.get(slug).context
         self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + slug)
 
     @override_settings(FACEBOOK_APP_ID='test')
-    @override_settings(MEDIA_ROOT=LOCAL_MEDIA_ROOT)
     def test_non_matching_page(self):
         context = self.app.get('/blog/no-comments').context
         self.assertEqual(context['archive_link'], None)
