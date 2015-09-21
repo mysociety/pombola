@@ -7,6 +7,16 @@
 
 {% block title %}{{ object.name }}{% endblock %}
 
+{% block extra_head_meta %}
+  {# Prefetch DNS for when the Disqus Javascript is loaded #}
+  {% if settings.DISQUS_SHORTNAME %}
+    <link href="//{{ settings.DISQUS_SHORTNAME }}.disqus.com" rel="dns-prefetch" />
+    <!--[if IE 9]>
+      <link href="http://{{ settings.DISQUS_SHORTNAME }}.disqus.com/" rel="prefetch" />
+    <![endif]-->
+  {% endif %}
+{% endblock%}
+
 {% block object_menu_links %}
   <li><a href="{% url "place" slug=object.slug %}">Overview</a></li>
 

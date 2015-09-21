@@ -2,6 +2,16 @@
 
 {% block title %}Home{% endblock %}
 
+{% block extra_head_meta %}
+  {% if settings.TWITTER_WIDGET_ID %}
+    {# Prefetch DNS for when the Twitter widget loads #}
+    <link href="//platform.twitter.com" rel="dns-prefetch" />
+    <!--[if IE 9]>
+      <link href="http://platform.twitter.com/" rel="prefetch" />
+    <![endif]-->
+  {% endif %}
+{% endblock%}
+
 {% block extra_js_to_load %}
     pombola_settings.extra_js.push( 'js/feeds.js' );
 {% endblock %}
