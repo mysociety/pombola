@@ -92,12 +92,14 @@ class CommentArchiveMixin(object):
             return
 
         try:
-            archive_file = os.path.abspath( os.path.join(
-                                                settings.MEDIA_ROOT,
-                                                '../pombola/pombola',
-                                                settings.COUNTRY_APP,
-                                                'data/disqus.json'
-                                            ) )
+            archive_file = os.path.abspath(
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)),
+                    os.pardir,
+                    settings.COUNTRY_APP,
+                    'data/disqus.json',
+                    )
+                )
             with open(archive_file) as f:
                 archives = json.load(f)
         except IOError:
