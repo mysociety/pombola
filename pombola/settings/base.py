@@ -585,6 +585,8 @@ PIPELINE_COMPILERS = (
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
 
+PIPELINE_COMPASS_ARGUMENTS = '-c ' + os.path.join( base_dir, "pombola/core/static/config.rb" )
+
 
 PIPELINE_YUI_BINARY = '/usr/bin/env yui-compressor'
 
