@@ -106,12 +106,6 @@ class InfoBlogView(BlogMixin, CommentArchiveMixin, DetailView):
 
         return response
 
-    def get_context_data(self, **kwargs):
-        context = super(InfoBlogView, self).get_context_data(**kwargs)
-        if settings.FACEBOOK_APP_ID:
-            context['archive_link'] = self.check_for_archive_link('/blog/' + self.object.slug)
-        return context
-
 
 class InfoBlogFeed(Feed):
     """Create a feed with the latest 10 blog entries in"""

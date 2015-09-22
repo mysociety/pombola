@@ -306,7 +306,7 @@ def key_position_sort_last_name(position):
         not(is_parliamentary and is_member),
         )
 
-class SAOrganisationDetailView(OrganisationDetailView, CommentArchiveMixin):
+class SAOrganisationDetailView(CommentArchiveMixin, OrganisationDetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SAOrganisationDetailView, self).get_context_data(**kwargs)
@@ -329,9 +329,6 @@ class SAOrganisationDetailView(OrganisationDetailView, CommentArchiveMixin):
             context['positions'] = paginator.page(1)
         except EmptyPage:
             context['positions'] = paginator.page(paginator.num_pages)
-
-        if settings.FACEBOOK_APP_ID:
-            context['archive_link'] = self.check_for_archive_link('/organisation/' + self.object.slug + '/')
 
         return context
 
