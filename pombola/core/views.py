@@ -106,9 +106,7 @@ class CommentArchiveMixin(object):
             return
         for archive in archives['response']:
             disqus_thread_link = archive['thread']['link']
-            groups = disqus_thread_link.split('?')[0].split('/')
-            disqus_page_slug = '/' + '/'.join(groups[3:])
-            if page_slug == disqus_page_slug:
+            if urlsplit(disqus_thread_link).path == page_slug:
                 return disqus_thread_link
 
     def get_context_data(self, **kwargs):
