@@ -8,15 +8,17 @@ from pipeline.storage import PipelineMixin
 
 
 class ImageSpriteMixin(object):
+    sprite_dirs = 'images/sprites/'
+
     def post_process(self, paths, dry_run=False, **options):
         if dry_run:
             return
 
-        for image_dir in finders.find('sass/images', all=True):
+        for image_dir in finders.find(self.sprite_dirs, all=True):
             for png in glob.glob(image_dir + '/*.png'):
                 filename = os.path.basename(png)
                 with open(png) as source:
-                    self.save('sass/images/' + filename, source)
+                    self.save(self.sprite_dirs + filename, source)
 
         super_class = super(ImageSpriteMixin, self)
         if hasattr(super_class, 'post_process'):
