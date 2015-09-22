@@ -316,6 +316,11 @@ HEADER
 
 */
 
+$logo-height-small: 63px;
+$logo-width-small: 138px;
+$logo-height-large: 90px;
+$logo-width-large: 184px;
+
 #site-header{
     height: auto;
     background-image: none;
@@ -328,26 +333,51 @@ HEADER
     }
 }
 
-#logo {
-    width: 100%;
-    max-width: 100%;
-    height: 78px;
-    background: url('/static/images/za-logo.png') left center no-repeat;
-    background-size: 160px;
-    margin-bottom: 1em;
+.logo {
+    height: $logo-height-small;
+    width: $logo-width-small;
+    display: inline-block;
     margin-top: 1em;
-
-    @media ($high_dpi_screen) {
-      background-image: url('/static/images/za-logo@2x.png');
-      background-size: 160px;
-    }
-
+    margin-bottom: 1em;
     @media only all and (min-width: 640px), print {
-      width: 180px;
-      height: 102px;
-      top: 5px;
-      margin-top: 0;
+        height: $logo-height-large;
+        width: $logo-width-large;
+        top: 0.5em;
+        position: relative;
+        margin: 0;
     }
+}
+
+.site-logo-svg {
+    display: none;
+}
+
+.site-logo-svg__svg {
+    height: $logo-height-small;
+    width: $logo-width-small;
+    @media only all and (min-width: 640px), print {
+        height: $logo-height-large;
+        width: $logo-width-large;
+    }
+}
+
+.svg .site-logo-svg {
+    display: inline-block;
+}
+
+.no-svg-fallback-logo {
+    background: url('/static/images/za-logo.png') left center no-repeat;
+    background-size: $logo-width-small;
+    overflow: hidden;
+    text-indent: 150%;
+    white-space: nowrap;
+    @media only all and (min-width: 640px), print {
+        background-size: $logo-width-large;
+    }
+}
+
+.svg .no-svg-fallback-logo {
+    display: none;
 }
 
 .logo-tagline {
