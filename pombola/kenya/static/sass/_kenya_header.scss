@@ -13,17 +13,62 @@
   }
 }
 
+$logo-height-small: 23px;
+$logo-width-small: 117px;
+$logo-height-large: 35px;
+$logo-width-large: 180px;
+
 #site-header {
   background-image: none; /* remove gradient */
   background-color: $colour_primary_mid;
 }
 
-#logo {
-  @media only all and (min-width: 640px), print {
-    top: 13px;
-    width: 180px;
-    margin-left: 0;
-  }
+.logo {
+    height: $logo-height-small;
+    width: $logo-width-small;
+    margin-left: 20px;
+    padding: 10px 0;
+    display: inline-block;
+    @media only all and (min-width: 640px), print {
+        height: $logo-height-large;
+        width: $logo-width-large;
+        top: 13px;
+        position: relative;
+        margin-left: 0;
+        padding: 0;
+    }
+}
+
+.site-logo-svg {
+    display: none;
+}
+
+.site-logo-svg__svg {
+    height: $logo-height-small;
+    width: $logo-width-small;
+    @media only all and (min-width: 640px), print {
+        height: $logo-height-large;
+        width: $logo-width-large;
+    }
+}
+
+.svg .site-logo-svg {
+    display: inline-block;
+}
+
+.no-svg-fallback-logo {
+    background: url('/static/images/mzalendo-logo.png') left center no-repeat;
+    background-size: $logo-width-small;
+    overflow: hidden;
+    text-indent: 150%;
+    white-space: nowrap;
+    @media only all and (min-width: 640px), print {
+        background-size: $logo-width-large;
+    }
+}
+
+.svg .no-svg-fallback-logo {
+    display: none !important;
 }
 
 #tagline {
