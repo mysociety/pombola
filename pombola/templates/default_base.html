@@ -193,6 +193,14 @@
 
             </div>
         </footer>
+        <script>
+          (function flagSVG() {
+            var ns = {'svg': 'http://www.w3.org/2000/svg'};
+            if(document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")) {
+              document.getElementsByTagName('html')[0].className += ' svg';
+            }
+          })();
+        </script>
         <div id="fb-root"></div>
     </body>
 </html>
