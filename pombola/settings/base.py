@@ -449,10 +449,15 @@ PIPELINE_CSS = {
     'core': {
         'source_filenames': (
             # .css files from core:
-            'css/jquery.countdown-v1.6.0.css',
             'css/jquery-ui-1.8.17.custom.css',
         ),
         'output_filename': 'css/core.css',
+    },
+    'countdown': {
+        'source_filenames': (
+            'css/jquery.countdown-v1.6.0.css',
+        ),
+        'output_filename': 'css/countdown.css',
     },
     'admin': {
         'source_filenames': (

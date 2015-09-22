@@ -27,8 +27,6 @@ COUNTRY_CSS = {
         'source_filenames': (
             # .scss files for Kenya
             'sass/kenya.scss',
-            # .css files for Kenya
-            'css/jquery.countdown-v1.6.0.css',
         ),
         'output_filename': 'css/kenya.css'
     },
