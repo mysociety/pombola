@@ -25,4 +25,4 @@ build/
 tmp/
 local_fabfile.py
 mzalendo/fabfile.py
-pombola-sprite-*.png
+/**/images/sprites/*.png

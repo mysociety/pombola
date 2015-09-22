@@ -1,6 +1,6 @@
 @import "compass/utilities/sprites";
-@import "pombola-sprite/*.png"; // relative to "static/sass/images/"
-@include all-pombola-sprite-sprites;
+@import "sprites/pombola-icon/*.png";
+@include all-pombola-icon-sprites;
 
 .sprite-test {
   padding: 10em;
@@ -13,7 +13,7 @@
   }
 }
 
-.pombola-sprite-settings {
+.pombola-icon-settings {
   width: 128px;
   height: 128px;
 }

@@ -2,11 +2,15 @@
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "css"
-sass_dir = "sass"
-images_dir = "images"
-javascripts_dir = "js"
-http_generated_images_path = '/static/sass/images/'
+
+# Sass is compiled from the sass directory, not `static` as you might expect,
+# so we adjust the Compass settings so that it can find things like sprites.
+# http://compass-style.org/help/documentation/configuration-reference/
+css_dir = "../css"
+sass_dir = "../sass"
+images_dir = "../images"
+javascripts_dir = "../js"
+http_generated_images_path = '/static/images/'
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
