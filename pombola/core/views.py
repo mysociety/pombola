@@ -111,6 +111,12 @@ class CommentArchiveMixin(object):
             if page_slug == disqus_page_slug:
                 return disqus_thread_link
 
+    def get_context_data(self, **kwargs):
+        context = super(CommentArchiveMixin, self).get_context_data(**kwargs)
+        if settings.FACEBOOK_APP_ID:
+            context['archive_link'] = self.check_for_archive_link(self.request.path)
+        return context
+
 
 class SubSlugRedirectMixin(SlugRedirectMixin):
     """This customization of SlugRedirectMixin understands sub pages"""
