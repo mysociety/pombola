@@ -94,7 +94,8 @@ MEDIA_ROOT = os.path.normpath( os.path.join( root_dir, "media_root/") )
 MEDIA_URL = '/media_root/'
 
 # Use django-pipeline for handling static files
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+# Subclassed for image sprite handling
+STATICFILES_STORAGE = 'pombola.storage.PipelineCachedStorage'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
