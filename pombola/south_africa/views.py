@@ -70,7 +70,7 @@ class SAHomeView(HomeView):
 
         try:
             c = BlogCategory.objects.get(slug='mp-corner')
-            context['mp_corner'] = articles.filter(categories=c)[1]
+            context['mp_corner'] = articles.filter(categories=c)[0]
         except (BlogCategory.DoesNotExist, IndexError):
             context['mp_corner'] = None
 
