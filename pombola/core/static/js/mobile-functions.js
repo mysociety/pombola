@@ -30,22 +30,6 @@ function hideUrlBar() {
   }
 }
 
-
-//generic re-usable hide or show with class states
-function hideShow(elem, trig) {
-  $(elem).toggleClass(function() {
-    if ($(this).is('.open')) {
-      $(this).hide().removeClass('open');
-      trig.removeClass('active');
-      return 'closed';
-    } else {
-      $(this).show().removeClass('closed');
-      trig.addClass('active');
-      return 'open';
-    }
-  });
-}
-
 $(function(){
   /*
    * General stuff
@@ -55,18 +39,6 @@ $(function(){
   // add appropriate stuff to head
   // <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
   $('head').append('<meta name="HandheldFriendly" content="True">').append('<meta name="MobileOptimized" content="320">');
-
-  /*
-   * Main non AJAX interactions
-   */
-  // prep
-  $('#mc-embedded-subscribe-form').hide();
-
-
-  // news letter subscribe
-  $('.subscribe-box > h2').on('click', function(){
-    hideShow('#mc-embedded-subscribe-form', $(this));
-  });
 
   /* carry search terms across when switching between search pages */
   $("#search-hansard-instead").click(function(e){

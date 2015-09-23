@@ -60,11 +60,6 @@
       margin: 0;
       text-transform: uppercase;
       font-weight: normal;
-      background: url(../images/chevron-right.png) right 0 no-repeat;
-
-      &.active {
-        background-image: url(../images/chevron-down.png);
-      }
     }
 
     form {
