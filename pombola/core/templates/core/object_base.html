@@ -12,10 +12,10 @@
         {% block object_title %}
           <h1>{{ object.title }} {{ object.name }}</h1>
         {% endblock %}
-        
+
         {% block object_tagline %}
         {% endblock %}
-        
+
         {% block object_menu %}
         <div class="object_menu">
           <nav>
@@ -26,17 +26,23 @@
           </nav>
         </div>
         {% endblock %}
-        
+
       </div>
     {% endblock %}
-    
+
     {% block profile_pic %}
       <div class="profile-pic">
-          {% thumbnail object.primary_image "210x210" crop="center" as im %}
-          <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-          {% empty %}
-          <img src="{{STATIC_URL}}images/{{object.css_class}}-210x210.jpg" />
-          {% endthumbnail %}        
+        {% thumbnail object.primary_image "100x100" crop="center" as sm %}
+          <img src="{{ sm.url }}"
+        {% empty %}
+          <img src="{{STATIC_URL}}images/{{object.css_class}}-210x210.jpg"
+        {% endthumbnail %}
+        {% thumbnail object.primary_image "210x210" crop="center" as lg %}
+            srcset="{{ lg.url }} 640w"
+        {% empty %}
+            srcset="{{STATIC_URL}}images/{{object.css_class}}-210x210.jpg"
+        {% endthumbnail %}
+            alt="{{ object.name }}">
       </div>
     {% endblock %}
 
@@ -46,7 +52,7 @@
 
       <div class="social-and-tools">
           {% include 'core/social_tools.html' %}
-      </div>        
+      </div>
 
     </div>
 
