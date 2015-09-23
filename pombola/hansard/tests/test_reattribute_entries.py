@@ -1,20 +1,15 @@
 # Tests for the Django management command hansard_reattribute_speeches
 
-import contextlib
 from datetime import date
 from mock import patch
-import sys
 
 from pombola.core.models import Person
 from pombola.hansard.models import (
     Entry, Source, Sitting, Venue
 )
 
-from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
-from django.core.management.base import CommandError
 from django.test import TestCase
-from django.utils import unittest
 
 from pombola.core.tests.test_commands import no_stdout_or_stderr
 
