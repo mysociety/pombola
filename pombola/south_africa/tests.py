@@ -1654,13 +1654,55 @@ class SACommentsArchiveTest(TransactionWebTest):
             title='2',
             slug='infographic-decline-sa-tourism-2015',
             markdown_content="blah",
-            kind=InfoPage.KIND_BLOG)
+            kind=InfoPage.KIND_BLOG,
+            )
+
+        org_kind_constituency, _ = models.OrganisationKind.objects.get_or_create(
+            name='Constituency',
+            slug='constituency',
+            )
+
+        org_kind_office, _ = models.OrganisationKind.objects.get_or_create(
+            name='Office',
+            slug='office',
+            )
+
+        models.Organisation.objects.get_or_create(
+            name='Western Cape',
+            kind=org_kind_constituency,
+            slug='cope-constituency-office-western-cape',
+            )
+
+        models.Organisation.objects.get_or_create(
+            name='ANC Office 748',
+            kind=org_kind_office,
+            slug='anc-constituency-office-748-cleary-park',
+            )
 
     @override_settings(FACEBOOK_APP_ID='test')
     def test_matching_page(self):
-        slug = '/blog/infographic-decline-sa-tourism-2015'
-        context = self.app.get(slug).context
-        self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + slug)
+        path = '/blog/infographic-decline-sa-tourism-2015'
+        context = self.app.get(path).context
+        self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + path)
+
+    @override_settings(FACEBOOK_APP_ID='test')
+    def test_matching_page_with_trailing_slash(self):
+        path = "/organisation/anc-constituency-office-748-cleary-park/"
+        context = self.app.get(path).context
+        self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + path)
+
+    @override_settings(FACEBOOK_APP_ID='test')
+    def test_matching_page_with_query(self):
+        """Check Disqus comments include the query string.
+
+        This is actually undesirable, but we may as well at least record
+        the current behaviour. If we can find a way to move this comment
+        to '/organisation/cope-constituency-office-western-cape',
+        then this test should be updated to point to the better location.
+        """
+        path = '/organisation/cope-constituency-office-western-cape/?gclid=Cj0KEQjwl6GuBRD8x4G646HX7ZYBEiQADGnzujwPuJDcqQKiAI5i8mGSUCYEnxvemFlWTtPeVTMGy0waAnAw8P8HAQ'
+        context = self.app.get(path).context
+        self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + path)
 
     @override_settings(FACEBOOK_APP_ID='test')
     def test_non_matching_page(self):
@@ -1669,6 +1711,6 @@ class SACommentsArchiveTest(TransactionWebTest):
 
     @override_settings(FACEBOOK_APP_ID=None)
     def test_no_fb_app_id_no_archive_link(self):
-        slug = '/blog/infographic-decline-sa-tourism-2015'
-        context = self.app.get(slug).context
+        path = '/blog/infographic-decline-sa-tourism-2015'
+        context = self.app.get(path).context
         self.assertFalse('archive_link' in context)
