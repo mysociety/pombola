@@ -304,34 +304,6 @@ ul#home-news-list {
       background: url(../images/nub.png) 0 0 no-repeat; }
     .tw-follow {
       @include inline-block; } }
-  #home-links {
-    overflow: hidden;
-    a {
-      width: 213px;
-      height: 60px;
-      float: left;
-      line-height: 30px;
-      font: {
-        size: 22px;
-        weight: bold; };
-      &.aspirants {
-        @include border-radius(5px 0 0 5px);
-        margin: 0 3px 0 0;
-        padding: 20px;
-        background: $colour_primary url(../images/big-chevron.png) 180px center no-repeat;
-        @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary / 0.9, $colour_primary));
-        &:hover {
-          background: $colour_primary / 0.9 url(../images/big-chevron.png) 180px center no-repeat;
-          @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary, $colour_primary / 0.9)); } }
-      &.citizens {
-        @include border-radius(0 5px 5px 0);
-        margin: 0;
-        padding: 20px;
-        background: $colour_primary_light url(../images/big-chevron.png) 180px center no-repeat;
-        @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary_light / 0.9, $colour_primary_light));
-        &:hover {
-          background: $colour_primary_light / 0.9 url(../images/big-chevron.png) 180px center no-repeat;
-          @include background(url(../images/big-chevron.png) 180px center no-repeat, linear-gradient($colour_primary_light, $colour_primary_light / 0.9)); } } } }
   .featured-person {
     border: 1px solid $colour_middling_grey;
     img {
