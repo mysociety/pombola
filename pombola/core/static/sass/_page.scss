@@ -113,7 +113,7 @@
         display: none; } }
     ul.comments li section {
       // max-width:590px;
-    } }  
+    } }
   h2, h3 {
     border-top: 4px solid $colour_primary;
     background: $colour_muted;
@@ -300,23 +300,7 @@
   display: block;
   background: $colour_muted;
   padding: 10px;
-  &.has-sub-menu {
-    margin: 0;
-    padding-right: 40px;
-    position: relative; }
-  .m-sub-menu-trigger {
-    @include button-reset;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    border: 1px solid $colour_middling_grey;
-    height: 24px;
-    width: 24px;
-    background: #d2d2d2 url(../images/chevron-down-alt.png) center no-repeat;
-    @include background(url(../images/chevron-down-alt.png) center no-repeat, linear-gradient(white, #d2d2d2));
-    &.active {
-      background: #d2d2d2 url(../images/chevron-up-alt.png) center no-repeat;
-      @include background(url(../images/chevron-up-alt.png) center no-repeat, linear-gradient(#d2d2d2, white)); } } }
+}
 
 @media only all and (min-width: 640px), print {
   .page-title {
