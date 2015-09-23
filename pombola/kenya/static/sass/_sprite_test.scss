@@ -1,6 +1,6 @@
 @import "compass/utilities/sprites";
 @import "sprites/pombola-icon/*.png";
-@include all-pombola-icon-sprites;
+// @include all-pombola-icon-sprites;
 
 .sprite-test {
   padding: 10em;
@@ -8,12 +8,30 @@
   & > * {
     background-color: rgba(255, 0, 0, 0.2);
     margin: 1em;
-    width: 32px;
-    height: 32px;
   }
 }
 
-.pombola-icon-settings {
-  width: 128px;
-  height: 128px;
+.pombola-icon-globe {
+  @include pombola-icon-sprite(globe);
+  width: pombola-icon-sprite-width(globe);
+  height: pombola-icon-sprite-height(globe);
 }
+
+.pombola-icon-info {
+  @include pombola-icon-sprite(info);
+  width: pombola-icon-sprite-width(info);
+  height: pombola-icon-sprite-height(info);
+}
+
+.pombola-icon-map {
+  @include pombola-icon-sprite(map);
+  width: pombola-icon-sprite-width(map);
+  height: pombola-icon-sprite-height(map);
+}
+
+.pombola-icon-settings {
+  @include pombola-icon-sprite(settings);
+  width: pombola-icon-sprite-width(settings);
+  height: pombola-icon-sprite-height(settings);
+}
+
