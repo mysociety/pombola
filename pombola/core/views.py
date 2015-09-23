@@ -87,7 +87,7 @@ class CommentArchiveMixin(object):
        copy of the output of an non-admin call to the Disqus API at
        https://disqus.com/api/3.0/forums/listPosts.json?forum=<DISQUS_SHORTNAME>&order=desc&related=thread&limit=100"""
 
-    def check_for_archive_link(self, page_slug):
+    def check_for_archive_link(self, path):
         if settings.COUNTRY_APP == None:
             return
 
@@ -106,7 +106,7 @@ class CommentArchiveMixin(object):
             return
         for archive in archives['response']:
             disqus_thread_link = archive['thread']['link']
-            if urlsplit(disqus_thread_link).path == page_slug:
+            if urlsplit(disqus_thread_link).path == path:
                 return disqus_thread_link
 
     def get_context_data(self, **kwargs):
