@@ -14,11 +14,10 @@
 {% endblock%}
 
 {% block object_menu_links %}
-  <li><a href="{% url "organisation" slug=object.slug %}">Overview</a></li>
 
-  <li><a href="{% url "organisation_people" slug=object.slug %}">People</a></li>
-
-  <li><a href="{% url "organisation_contact_details" slug=object.slug %}">Contact details</a></li>
+  {% include 'core/_object_menu_link.html' with url_name='organisation' link_text='Overview' %}
+  {% include 'core/_object_menu_link.html' with url_name='organisation_people' link_text='People' %}
+  {% include 'core/_object_menu_link.html' with url_name='organisation_contact_details' link_text='Contact details' %}
 
   {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}
   {% if settings.DISQUS_SHORTNAME %}

@@ -1,0 +1,24 @@
+{% comment %}
+
+  You can include this to render one of the <li> elements in
+  object_menu_links, and it'll render the references to other
+  pages as links, but the current page won't be linked.  This
+  partial expects the following variables to be available in the
+  context:
+
+    link_text - The text that should appear on the page
+    url_name - The name that matched in urls.py for this page
+
+  It also expects request to be in the context, but that'll be
+  there anyway since we're using the
+  django.core.context_processors.request context processor.
+
+{% endcomment %}
+
+{% with this_url_name=request.resolver_match.url_name %}
+  {% if this_url_name == url_name %}
+    <li>{{ link_text }}</li>
+  {% else %}
+    <li><a href="{% url url_name slug=object.slug %}">{{ link_text }}</a></li>
+  {% endif %}
+{% endwith %}

@@ -133,12 +133,30 @@ class SubSlugRedirectMixin(SlugRedirectMixin):
         return redirect(url)
 
 
-class PersonDetail(SlugRedirectMixin, SkipHidden, DetailView):
+class BasePersonDetailView(SkipHidden, DetailView):
     model = models.Person
 
+    def get_context_data(self, **kwargs):
+        context = super(BasePersonDetailView, self).get_context_data(**kwargs)
+        if settings.ENABLED_FEATURES['hansard']:
+            hansard_count = self.object.hansard_entries.count()
+            if hansard_count:
+                context['appearances_sub_link_text'] = \
+                    'Appearances ({number_of_appearances})'.format(
+                        number_of_appearances=hansard_count
+                    )
+            else:
+                context['appearances_sub_link_text'] = 'Appearances'
+        return context
 
-class PersonDetailSub(SubSlugRedirectMixin, SkipHidden, DetailView):
-    model = models.Person
+    pass
+
+
+class PersonDetail(SlugRedirectMixin, BasePersonDetailView):
+    pass
+
+
+class PersonDetailSub(SubSlugRedirectMixin, BasePersonDetailView):
     sub_page = None
 
     def get_template_names(self):
@@ -165,6 +183,13 @@ class BasePlaceDetailView(DetailView):
         context = super(BasePlaceDetailView, self).get_context_data(**kwargs)
         context['place_type_count'] = models.Place.objects.filter(kind=self.object.kind).count()
         context['related_people'] = self.object.related_people()
+        if settings.ENABLED_FEATURES['projects']:
+            # The number of projects associated with the place is used
+            # in the link text in the object_menu_links:
+            context['projects_sub_link_text'] = \
+                'CDF Projects ({number_of_projects})'.format(
+                    number_of_projects=self.object.project_set.count()
+                )
         return context
 
 
@@ -172,7 +197,7 @@ class PlaceDetailView(SlugRedirectMixin, BasePlaceDetailView):
     pass
 
 
-class PlaceDetailSub(SubSlugRedirectMixin, DetailView):
+class PlaceDetailSub(SubSlugRedirectMixin, BasePlaceDetailView):
     model = models.Place
     child_place_grouper = 'parliamentary_session'
     sub_page = None

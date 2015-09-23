@@ -18,30 +18,31 @@
 {% endblock%}
 
 {% block object_menu_links %}
-  <li><a href="{% url "place" slug=object.slug %}">Overview</a></li>
+  {% include 'core/_object_menu_link.html' with url_name='place' link_text='Overview' %}
 
   {% if object.has_scorecards %}
-    <li><a href="{% url "place_scorecard" slug=object.slug %}">Scorecard</a></li>
+    {% include 'core/_object_menu_link.html' with url_name='place_scorecard' link_text='Scorecard' %}
   {% endif %}
 
   {% if object.has_budgets %}
-    <li><a href="{% url "place_budgets" slug=object.slug %}">Budgets</a></li>
+    {% include 'core/_object_menu_link.html' with url_name='place_budgets' link_text='Budgets' %}
   {% endif %}
 
-  <li><a href="{% url "place_people" slug=object.slug %}">People</a></li>
-  <li><a href="{% url "place_places" slug=object.slug %}">Places</a></li>
+  {% include 'core/_object_menu_link.html' with url_name='place_people' link_text='People' %}
+  {% include 'core/_object_menu_link.html' with url_name='place_places' link_text='Places' %}
 
   {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
-    <li><a href="{% url "place_data" slug=object.slug %}">Data</a></li>
+    {% include 'core/_object_menu_link.html' with url_name='place_data' link_text='Data' %}
   {% endif %}
 
+
   {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
-    <li><a href="{% url "place_projects" slug=object.slug %}">CDF Projects ({{ object.project_set.count }})</a></li>
+    {% include 'core/_object_menu_link.html' with url_name='place_projects' link_text=projects_sub_link_text %}
   {% endif %}
 
   {% comment %}
     <!-- Not showing organisations for the moment as the list isn't very good. -->
-    <li><a href="{% url "place_organisations" slug=object.slug %}">Organisations</a></li>
+    {% include 'core/_object_menu_link.html' with url_name='place_organisations' link_text='Organisations' %}
   {% endcomment %}
 
   {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}

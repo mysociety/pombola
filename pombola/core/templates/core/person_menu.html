@@ -1,20 +1,14 @@
-<li><a href="{% url "person" slug=object.slug %}">Overview</a></li>
+{% include 'core/_object_menu_link.html' with url_name='person' link_text='Overview' %}
 {% if object.has_scorecards %}
-  <li><a href="{% url "person_scorecard" slug=object.slug %}">Scorecard</a></li>
+  {% include 'core/_object_menu_link.html' with url_name='person_scorecard' link_text='Scorecard' %}
 {% endif %}
-<li><a href="{% url "person_experience" slug=object.slug %}">Experience</a></li>
+{% include 'core/_object_menu_link.html' with url_name='person_experience' link_text='Experience' %}
 
 {% if settings.ENABLED_FEATURES.hansard %}
-  {% with hansard_count=object.hansard_entries.count %}
-    <li>
-      <a href="{% url "person_appearances" slug=object.slug %}">
-        Appearances {% if hansard_count %}({{ hansard_count }}){% endif %}
-      </a>
-    </li>
-  {% endwith %}
+  {% include 'core/_object_menu_link.html' with url_name='person_appearances' link_text=appearances_sub_link_text %}
 {% endif %}
 
-<li><a href="{% url "person_contact_details" slug=object.slug %}">Contact details</a></li>
+{% include 'core/_object_menu_link.html' with url_name='person_contact_details' link_text='Contact details' %}
 
 {# put the comments last so that it does not jitter the page layout too much when the js kicks in and the number of comments is added. #}
 {% if settings.DISQUS_SHORTNAME %}

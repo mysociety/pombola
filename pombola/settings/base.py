@@ -497,7 +497,6 @@ DYNAMICALLY_LOADED_PIPELINE_JS = {
     },
     'desktop_and_mobile': {
         'source_filenames': (
-            'js/both-functions.js',
             'js/twitter-embed.js',
         ),
         'output_filename': 'js/desktop_and_mobile.js',
