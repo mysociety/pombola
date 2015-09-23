@@ -16,7 +16,7 @@ from django.core.management.base import CommandError
 from django.test import TestCase
 from django.utils import unittest
 
-from pombola.core.tests.test_commands import no_stderr
+from pombola.core.tests.test_commands import no_stdout_or_stderr
 
 
 class ReattributeEntriesCommandTest(TestCase):
@@ -79,7 +79,8 @@ class ReattributeEntriesCommandTest(TestCase):
 
     @patch('__builtin__.raw_input', return_value='y')
     def test_reassign_all(self, mock_input):
-        call_command('hansard_reattribute_entries', **self.options)
+        with no_stdout_or_stderr():
+            call_command('hansard_reattribute_entries', **self.options)
 
         # Check that person_a has no entries and person_b has 3:
         self.assertEqual(0, Entry.objects.filter(speaker=self.person_a).count())
@@ -92,7 +93,8 @@ class ReattributeEntriesCommandTest(TestCase):
             'person_from': self.person_a.slug,
             'quiet': True
         }
-        call_command('hansard_reattribute_entries', **options)
+        with no_stdout_or_stderr():
+            call_command('hansard_reattribute_entries', **options)
 
         # Check that person_a has no entries and person_b has 3:
         self.assertEqual(0, Entry.objects.filter(speaker=self.person_a).count())
@@ -103,7 +105,8 @@ class ReattributeEntriesCommandTest(TestCase):
         options = self.options.copy()
         options['date_from'] = '2012-01-01'
 
-        call_command('hansard_reattribute_entries', **options)
+        with no_stdout_or_stderr():
+            call_command('hansard_reattribute_entries', **options)
 
         # Check that person_a has 1 entry and person_b has 2:
         self.assertEqual(1, Entry.objects.filter(speaker=self.person_a).count())
@@ -115,7 +118,8 @@ class ReattributeEntriesCommandTest(TestCase):
 
         options['date_to'] = '2013-01-01'
 
-        call_command('hansard_reattribute_entries', **options)
+        with no_stdout_or_stderr():
+            call_command('hansard_reattribute_entries', **options)
 
         # Check that person_a has 2 entries and person_b has 1:
         self.assertEqual(1, Entry.objects.filter(speaker=self.person_a).count())
@@ -127,7 +131,8 @@ class ReattributeEntriesCommandTest(TestCase):
         options['date_from'] = '2012-01-01'
         options['date_to'] = '2013-01-01'
 
-        call_command('hansard_reattribute_entries', **options)
+        with no_stdout_or_stderr():
+            call_command('hansard_reattribute_entries', **options)
 
         # Check that person_a has 1 entry and person_b has 2:
         self.assertEqual(2, Entry.objects.filter(speaker=self.person_a).count())

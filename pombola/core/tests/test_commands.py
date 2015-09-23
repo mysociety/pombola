@@ -21,14 +21,17 @@ from django.test import TestCase
 # http://stackoverflow.com/a/1810086/223092
 
 @contextlib.contextmanager
-def no_stderr():
+def no_stdout_or_stderr():
+    save_stdout = sys.stdout
     save_stderr = sys.stderr
     class DevNull(object):
         def write(self, _): pass
+    sys.stdout = DevNull()
     sys.stderr = DevNull()
     try:
         yield
     finally:
+        sys.stdout = save_stdout
         sys.stderr = save_stderr
 
 
@@ -109,7 +112,7 @@ class MergePeopleCommandTest(TestCase):
         # There should be an error - this would lose the B version of
         # the date of birth:
         with self.assertRaises(CommandError):
-            with no_stderr():
+            with no_stdout_or_stderr():
                 call_command('core_merge_people', **self.options)
 
     def test_losing_summary(self):
@@ -124,12 +127,13 @@ class MergePeopleCommandTest(TestCase):
         # This should also error - it would lose the B version of the
         # summary field:
         with self.assertRaises(CommandError):
-            with no_stderr():
+            with no_stdout_or_stderr():
                 call_command('core_merge_people', **self.options)
 
     def test_merge_people(self):
         # This one should succeed:
-        call_command('core_merge_people', **self.options)
+        with no_stdout_or_stderr():
+            call_command('core_merge_people', **self.options)
 
         # Check that only person_a exists any more:
         Person.objects.get(pk=self.person_a.id)
@@ -162,7 +166,8 @@ class MergePeopleCommandTest(TestCase):
             'quiet': True,
             'interactive': False
         }
-        call_command('core_merge_people', **options)
+        with no_stdout_or_stderr():
+            call_command('core_merge_people', **options)
 
         # Check that only person_a exists any more:
         Person.objects.get(pk=self.person_a.id)
@@ -178,7 +183,7 @@ class MergePeopleCommandTest(TestCase):
             'quiet': True
         }
         with self.assertRaises(CommandError):
-            with no_stderr():
+            with no_stdout_or_stderr():
                 call_command('core_merge_people', **options)
 
         # Check that nothing was deleted:
@@ -194,5 +199,5 @@ class MergePeopleCommandTest(TestCase):
         }
 
         with self.assertRaises(CommandError):
-            with no_stderr():
+            with no_stdout_or_stderr():
                 call_command('core_merge_people', **options)
