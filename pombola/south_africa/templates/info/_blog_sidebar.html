@@ -14,12 +14,14 @@
       {% endfor %}
     </ul>
 
-    {% if popular_posts.exists %}
+    {% if some_popular_posts %}
       <h3>Popular posts</h3>
 
       <ul>
         {% for post in popular_posts|slice:":5" %}
           <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
+        {% empty %}
+          <li>No recent popular posts found.</li>
         {% endfor %}
       </ul>
     {% endif %}

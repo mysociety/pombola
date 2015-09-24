@@ -23,13 +23,18 @@ class BlogMixin(ContextMixin):
             .filter(kind=InfoPage.KIND_BLOG) \
             .order_by("-publication_date")
 
-        context['popular_posts'] = (
-            InfoPage.objects
-            .filter(kind=InfoPage.KIND_BLOG)
-            .filter(viewcount__count__gt=0)
-            .filter(viewcount__date__gte=date.today() - timedelta(days=28))
-            .annotate(Sum('viewcount__count'))
-            .order_by('-viewcount__count__sum', '?')
+        context['some_popular_posts'] = ViewCount.objects.filter(
+            page__kind=InfoPage.KIND_BLOG
+        ).exists()
+
+        if context['some_popular_posts']:
+            context['popular_posts'] = (
+                InfoPage.objects
+                .filter(kind=InfoPage.KIND_BLOG)
+                .filter(viewcount__count__gt=0)
+                .filter(viewcount__date__gte=date.today() - timedelta(days=28))
+                .annotate(Sum('viewcount__count'))
+                .order_by('-viewcount__count__sum')
             )
 
         return context
