@@ -12,7 +12,7 @@ body.women {
   }
 
   .container {
-    max-width: 960px;
+    max-width: 1000px;
     padding: 0 10px;
     margin: 0 auto;
 
@@ -240,8 +240,8 @@ body.women {
 }
 
 .issues-word-cloud {
-  height: 32em;
-  margin-top: 3em;
+  margin: 3em 0;
+
   img {
     width: 100%;
     height: auto;
@@ -274,4 +274,20 @@ div.jqcloud {
   .w3 { font-size: 200%; }
   .w2 { font-size: 150%; }
   .w1 { font-size: 100%; }
+}
+
+.women__sponsor {
+  border-top: 1px solid mix(#000, $colour_pale_yellow, 8%);
+  padding: 3em 0 1em;
+
+  color: mix(#000, $colour_pale_yellow, 40%);
+
+  a {
+    display: block;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
