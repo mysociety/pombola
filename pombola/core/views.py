@@ -1,7 +1,9 @@
 import time
 import calendar
 import datetime
+import os
 import random
+import json
 from urlparse import urlsplit, urlunsplit
 
 from django.core.urlresolvers import reverse
@@ -77,6 +79,41 @@ class SkipHidden(object):
         if self.request.user.is_superuser:
             return qs
         return qs.filter(hidden=False)
+
+
+class CommentArchiveMixin(object):
+    """This checks whether the current page has a matching Disqus
+       comment thread in the local /data/disqus.json file, which is a frozen
+       copy of the output of an non-admin call to the Disqus API at
+       https://disqus.com/api/3.0/forums/listPosts.json?forum=<DISQUS_SHORTNAME>&order=desc&related=thread&limit=100"""
+
+    def check_for_archive_link(self, path):
+        if settings.COUNTRY_APP == None:
+            return
+
+        try:
+            archive_file = os.path.abspath(
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)),
+                    os.pardir,
+                    settings.COUNTRY_APP,
+                    'data/disqus.json',
+                    )
+                )
+            with open(archive_file) as f:
+                archives = json.load(f)
+        except IOError:
+            return
+        for archive in archives['response']:
+            disqus_thread_link = archive['thread']['link']
+            if urlsplit(disqus_thread_link).path == path:
+                return disqus_thread_link
+
+    def get_context_data(self, **kwargs):
+        context = super(CommentArchiveMixin, self).get_context_data(**kwargs)
+        if settings.FACEBOOK_APP_ID:
+            context['archive_link'] = self.check_for_archive_link(self.request.path)
+        return context
 
 
 class SubSlugRedirectMixin(SlugRedirectMixin):

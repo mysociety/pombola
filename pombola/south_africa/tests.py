@@ -11,6 +11,7 @@ from mock import patch
 from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
 from django.test.client import Client
+from django.test.utils import override_settings
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django_date_extensions.fields import ApproximateDate
@@ -27,6 +28,7 @@ from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.core.views import PersonSpeakerMappingsMixin
+from pombola.info.models import InfoPage
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
@@ -1636,3 +1638,79 @@ class SAMembersInterestsBrowserTest(TestCase):
             reverse('sa-interests-source')+'?release=all&category=category-a&match=contains&source=Source'
         ).context
         self.assertEqual(len(context['data']), 2)
+
+
+@attr(country='south_africa')
+class SACommentsArchiveTest(TransactionWebTest):
+    def setUp(self):
+        blog_page1 = InfoPage.objects.create(
+            title='1',
+            slug='no-comments',
+            markdown_content="blah",
+            kind=InfoPage.KIND_BLOG
+        )
+
+        blog_page2 = InfoPage.objects.create(
+            title='2',
+            slug='infographic-decline-sa-tourism-2015',
+            markdown_content="blah",
+            kind=InfoPage.KIND_BLOG,
+            )
+
+        org_kind_constituency, _ = models.OrganisationKind.objects.get_or_create(
+            name='Constituency',
+            slug='constituency',
+            )
+
+        org_kind_office, _ = models.OrganisationKind.objects.get_or_create(
+            name='Office',
+            slug='office',
+            )
+
+        models.Organisation.objects.get_or_create(
+            name='Western Cape',
+            kind=org_kind_constituency,
+            slug='cope-constituency-office-western-cape',
+            )
+
+        models.Organisation.objects.get_or_create(
+            name='ANC Office 748',
+            kind=org_kind_office,
+            slug='anc-constituency-office-748-cleary-park',
+            )
+
+    @override_settings(FACEBOOK_APP_ID='test')
+    def test_matching_page(self):
+        path = '/blog/infographic-decline-sa-tourism-2015'
+        context = self.app.get(path).context
+        self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + path)
+
+    @override_settings(FACEBOOK_APP_ID='test')
+    def test_matching_page_with_trailing_slash(self):
+        path = "/organisation/anc-constituency-office-748-cleary-park/"
+        context = self.app.get(path).context
+        self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + path)
+
+    @override_settings(FACEBOOK_APP_ID='test')
+    def test_matching_page_with_query(self):
+        """Check Disqus comments include the query string.
+
+        This is actually undesirable, but we may as well at least record
+        the current behaviour. If we can find a way to move this comment
+        to '/organisation/cope-constituency-office-western-cape',
+        then this test should be updated to point to the better location.
+        """
+        path = '/organisation/cope-constituency-office-western-cape/?gclid=Cj0KEQjwl6GuBRD8x4G646HX7ZYBEiQADGnzujwPuJDcqQKiAI5i8mGSUCYEnxvemFlWTtPeVTMGy0waAnAw8P8HAQ'
+        context = self.app.get(path).context
+        self.assertEqual(context['archive_link'], 'http://www.pa.org.za' + path)
+
+    @override_settings(FACEBOOK_APP_ID='test')
+    def test_non_matching_page(self):
+        context = self.app.get('/blog/no-comments').context
+        self.assertEqual(context['archive_link'], None)
+
+    @override_settings(FACEBOOK_APP_ID=None)
+    def test_no_fb_app_id_no_archive_link(self):
+        path = '/blog/infographic-decline-sa-tourism-2015'
+        context = self.app.get(path).context
+        self.assertFalse('archive_link' in context)

@@ -20,5 +20,6 @@ def add_settings( request ):
             'MAP_BOUNDING_BOX_SOUTH':       settings.MAP_BOUNDING_BOX_SOUTH,
             'MAP_BOUNDING_BOX_WEST':        settings.MAP_BOUNDING_BOX_WEST,
             'POPIT_API_URL':                settings.POPIT_API_URL,
+            'FACEBOOK_APP_ID':              settings.FACEBOOK_APP_ID,
         }
     }
