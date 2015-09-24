@@ -222,7 +222,7 @@ class ViewCountsTest(TestCase):
         context = BlogMixin().get_context_data()
 
         self.assertListEqual(
-            [x.slug for x in context['popular_posts']],
+            [x['slug'] for x in context['popular_posts']],
             ['post', 'post2'],
             )
 

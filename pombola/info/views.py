@@ -42,6 +42,7 @@ class BlogMixin(ContextMixin):
                 .filter(kind=InfoPage.KIND_BLOG)
                 .filter(viewcount__count__gt=0)
                 .filter(viewcount__date__gte=date.today() - timedelta(days=28))
+                .values('title', 'slug')
                 .annotate(Sum('viewcount__count'))
                 .order_by(*order_args)
             )
