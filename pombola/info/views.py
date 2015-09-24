@@ -23,18 +23,27 @@ class BlogMixin(ContextMixin):
             .filter(kind=InfoPage.KIND_BLOG) \
             .order_by("-publication_date")
 
-        context['some_popular_posts'] = ViewCount.objects.filter(
+        context['some_popular_posts'] = viewcounts = ViewCount.objects.filter(
             page__kind=InfoPage.KIND_BLOG
-        ).exists()
+        ).count()
 
-        if context['some_popular_posts']:
+        if viewcounts:
+            # The '?' means to randomize the order among counts that
+            # are the same - this is only really useful when we have
+            # very little data, since with more data it's unlikely
+            # there will be many pages with the same number of view
+            # counts in the recent period anyway:
+            if viewcounts < 20:
+                order_args = ('-viewcount__count__sum', '?')
+            else:
+                order_args = ('-viewcount__count__sum',)
             context['popular_posts'] = (
                 InfoPage.objects
                 .filter(kind=InfoPage.KIND_BLOG)
                 .filter(viewcount__count__gt=0)
                 .filter(viewcount__date__gte=date.today() - timedelta(days=28))
                 .annotate(Sum('viewcount__count'))
-                .order_by('-viewcount__count__sum')
+                .order_by(*order_args)
             )
 
         return context
