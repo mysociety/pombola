@@ -9,6 +9,7 @@ import requests
 import time
 import urllib
 
+from django.conf import settings
 from django.db.models import Q
 
 from mapit.models import Generation, Area, Code
@@ -71,8 +72,15 @@ def geocode(address_string, geocode_cache=None, verbose=True):
 
     # Try using Google's geocoder:
     geocode_cache.setdefault('google', {})
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?address='
-    url += urllib.quote(address_string.encode('UTF-8'))
+    url_template = \
+        'https://maps.googleapis.com/maps/api/geocode/json?address={address}&bounds={w},{s}|{e},{n}'
+    url = url_template.format(
+        address=urllib.quote(address_string.encode('UTF-8')),
+        w=settings.MAP_BOUNDING_BOX_WEST,
+        s=settings.MAP_BOUNDING_BOX_SOUTH,
+        e=settings.MAP_BOUNDING_BOX_EAST,
+        n=settings.MAP_BOUNDING_BOX_NORTH,
+    )
     if url in geocode_cache['google']:
         result = geocode_cache['google'][url]
     else:
