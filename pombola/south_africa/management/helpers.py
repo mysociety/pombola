@@ -71,7 +71,7 @@ def geocode(address_string, geocode_cache=None, verbose=True):
 
     # Try using Google's geocoder:
     geocode_cache.setdefault('google', {})
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?address='
     url += urllib.quote(address_string.encode('UTF-8'))
     if url in geocode_cache['google']:
         result = geocode_cache['google'][url]
