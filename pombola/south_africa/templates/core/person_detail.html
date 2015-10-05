@@ -144,6 +144,9 @@
           {% if object.interests_register_entries.exists %}
             <li><a href="#membersinterests">Register of Interests</a></li>
           {% endif %}
+          {% if attendance %}
+            <li><a href="#attendance">Attendance</a></i>
+          {% endif %}
         </ul>
 
         {% if hansard.count or question.count or committee.count %}
@@ -243,6 +246,15 @@
 
             </div> <!-- .person-interests -->
           </div> <!-- .membersinterests -->
+        {% endif %}
+
+
+        {% if attendance %}
+          <div id="attendance" class="tab-content">
+            {% for data in attendance %}
+              <p>{{ data.attended }} meetings out of {{ data.total }} attended in {{ data.year }}, {{ data.percentage|floatformat:"0" }}% attendance rate</p>
+            {% endfor %}
+          </div> <!-- .attendance -->
         {% endif %}
       </div> <!-- tabs -->
     {% endwith %}

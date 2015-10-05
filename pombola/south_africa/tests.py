@@ -1,3 +1,5 @@
+from __future__ import division
+
 import re
 import os
 from datetime import date, time
@@ -27,6 +29,7 @@ from popit.models import Person as PopitPerson, ApiInstance
 from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
+from pombola.south_africa.views import SAPersonDetail
 from pombola.core.views import PersonSpeakerMappingsMixin
 from pombola.info.models import InfoPage
 from instances.models import Instance
@@ -438,6 +441,59 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             len(context['interests'][interest_offset]['categories'][category_offset+1]['entries'][0]),
             len(expected[1]['categories'][2]['entries'][0])
         )
+
+@attr(country='south_africa')
+class SAAttendanceDataTest(TestCase):
+    def test_get_attendance_stats(self):
+        raw_data = {
+            2000: {'A': 1, 'AP': 2, 'DE': 4, 'L': 8, 'LDE': 16, 'P': 32},
+            }
+
+        expected = [
+            {'year': 2000,
+            'attended': 60,
+            'total': 63,
+            'percentage': 100*60/63,
+             }
+            ]
+
+        stats = SAPersonDetail().get_attendance_stats(raw_data)
+        self.assertEqual(stats, expected)
+
+        raw_data = {
+            2000: {'A': 1, 'P': 2},
+            2001: {'A': 4, 'P': 8},
+            }
+
+        expected = [
+            {'year': 2001,
+             'attended': 8,
+             'total': 12,
+             'percentage': 100*8/12,
+             },
+            {'year': 2000,
+             'attended': 2,
+             'total': 3,
+             'percentage': 100*2/3,
+             }
+        ]
+
+        stats = SAPersonDetail().get_attendance_stats(raw_data)
+        self.assertEqual(stats, expected)
+
+    def test_get_attendance_stats_raw(self):
+        test_data_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data/test/attendance_587.json',
+            )
+        with open(test_data_path) as f:
+            raw_data = json.load(f)
+
+        raw_stats = SAPersonDetail().get_attendance_stats_raw(raw_data['results'])
+
+        expected = {2014: {u'A': 1, u'P': 14}, 2015: {u'A': 1, u'P': 25, u'AP': 2}}
+
+        self.assertEqual(raw_stats, expected)
 
 
 @attr(country='south_africa')
