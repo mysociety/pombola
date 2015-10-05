@@ -1,7 +1,13 @@
+from __future__ import division
+
 from collections import defaultdict
 import datetime
-import warnings
+import dateutil
+import json
 import re
+import warnings
+
+import requests
 
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
@@ -576,6 +582,83 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             .order_by('-end_date','-start_date')
         )
 
+    def download_attendance_data(self):
+        # First find the id of the person
+        api_search_url = "https://api.pmg.org.za/member/?filter[pa_link]=/person/{}/".format(self.object.slug)
+        search_resp = requests.get(api_search_url)
+        search_data = json.loads(search_resp.text)
+
+        if not search_data.get('count'):
+            return {}
+
+        attendance_url = search_data['results'][0]['attendance_url']
+
+        results = []
+        while attendance_url:
+            resp = requests.get(attendance_url)
+            data = json.loads(resp.text)
+            results.extend(data.get('results'))
+            attendance_url = data.get('next')
+
+        return results
+
+    def get_attendance_stats_raw(self, data):
+        if not data:
+            return {}
+
+        attendance_by_year = {}
+
+        for x in data:
+            attendance = x['attendance']
+            year = dateutil.parser.parse(x['meeting']['date']).year
+
+            year_dict = attendance_by_year.setdefault(year, {})
+
+            year_dict.setdefault(attendance, 0)
+            year_dict[attendance] += 1
+
+        return attendance_by_year
+
+    # Meanings of attendance field
+
+    #  A:   Absent
+    #  AP:  Absent with Apologies
+    #  DE:  Departed Early
+    #  L:   Arrived Late
+    #  LDE: Arrived Late and Departed Early
+    #  P:   Present
+
+    def get_attendance_stats(self, attendance_by_year):
+        present_values = set(('P', 'DE', 'L', 'LDE'))
+
+        sorted_keys = sorted(attendance_by_year.keys(), reverse=True)
+
+        return_data = []
+        # year, attended, total, percentage
+        for year in sorted_keys:
+            year_dict = attendance_by_year[year]
+
+            attendance = sum((year_dict[x] for x in year_dict if x in present_values))
+            meeting_count = sum((year_dict[x] for x in year_dict))
+            percentage = 100 * attendance / meeting_count
+            return_data.append(
+                {'year': year,
+                 'attended': attendance,
+                 'total': meeting_count,
+                 'percentage': percentage,
+                 }
+                )
+
+        return return_data
+
+    def get_attendance_data_for_display(self):
+        raw_data = self.download_attendance_data()
+        attendance_by_year = self.get_attendance_stats_raw(raw_data)
+        attendance_stats = self.get_attendance_stats(attendance_by_year)
+        meeting_urls = self.get_latest_meeting_urls(raw_data)
+
+        return attendance_stats
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.list_contacts(('twitter',))
@@ -601,6 +684,8 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['interests'] = self.get_tabulated_interests()
         if self.object.date_of_death != None:
             context['former_parties'] = self.get_former_parties(self.object)
+
+        context['attendance'] = self.get_attendance_data_for_display()
 
         return context
 
