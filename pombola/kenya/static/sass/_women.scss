@@ -154,7 +154,6 @@ body.women {
     float: right;
     width: 34%;
     max-width: 18em;
-    margin-top: 2.5em; // line up with tops of person-cards
 
     ul, ol {
       padding-left: 1em; // avoid visual double gutter
@@ -216,9 +215,19 @@ body.women {
   margin-top: 0.2em;
 }
 
-.women__main__secondary {
-  h2 {
-    font-size: 1.2em;
+.women-downloads {
+  padding: 16px;
+  border: 1px solid mix(#999, $colour_pale_green, 20%);
+  border-radius: 0.3em;
+  margin-bottom: 4em;
+
+  a {
+    color: $colour_red;
+    font-weight: bold;
+
+    &:hover, &:focus {
+      color: $colour_red;
+    }
   }
 }
 
