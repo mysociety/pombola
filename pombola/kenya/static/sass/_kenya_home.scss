@@ -272,7 +272,7 @@ ul#home-news-list {
   overflow: hidden; /* fixes bug in Opera Mini where twitter widget overflows into footer */
 
   iframe {
-    height: 400px;
+    height: 400px !important; /* override the javascript-generated height */
     width: 100% !important; /* override the javascript-generated width */
   }
 }
