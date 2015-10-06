@@ -62,10 +62,11 @@
     </div>
   {% endif %}
 
-    <div id="home-facebook">
-        Like us on Facebook
-        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FMzalendoWatch&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21&amp;appId=212162318805899" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-    </div>
+  <div id="home-women">
+    <h2>Debunking Myths on Women MPs</h2>
+    <p><a href="/women">Find out more</a> <span class="or">or</span> <a href="#">Download the infographic</a></p>
+    <img src="{% static 'images/women-infographic.png' %}" width="121" height="112" alt="Women Parliamentarians: How are they doing?">
+  </div>
 
   {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
     <div id="home-twitter">
@@ -83,6 +84,11 @@
         {% include 'core/person_feature.html' %}
     </div>
   {% endif %}
+
+    <div id="home-facebook">
+        Like us on Facebook
+        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FMzalendoWatch&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21&amp;appId=212162318805899" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+    </div>
 
 </div>
 

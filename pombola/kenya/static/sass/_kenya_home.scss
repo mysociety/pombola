@@ -6,6 +6,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 #home-featured-person,
 #home-blog,
 #home-facebook,
+#home-women,
 #home-twitter,
 #home-background {
   margin: 0 20px 20px 20px;
@@ -17,6 +18,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   #home-featured-person,
   #home-blog,
   #home-facebook,
+  #home-women,
   #home-twitter,
   #home-background {
     margin: 0 0 30px 0;
@@ -101,18 +103,52 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-#home-featured-person,
-#home-facebook {
+#home-featured-person {
   background: $pull-out-background;
   padding: 20px;
 }
 
 #home-facebook {
+  background: #EDF1F7;
+  padding: 20px;
+
   iframe {
     display: inline;
     vertical-align: middle;
     margin-left: 0.5em;
     width: 150px;
+  }
+}
+
+#home-women {
+  position: relative;
+  padding: 20px 140px 20px 20px; // leave space on right for floated image
+  background-color: #FCFFDD; // pale yellow
+  border: 1px solid #f1f5d6; // slightly darker pale yellow
+  max-width: 480px; // match the twitter widget below
+
+  img {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+  }
+
+  h2 {
+    color: $colour_primary;
+    font-size: 1.3em;
+  }
+
+  p {
+    font-size: 1em;
+    margin-bottom: 0;
+
+    a {
+      color: $colour_red;
+    }
+  }
+
+  .or {
+    margin: 0 0.2em;
   }
 }
 
