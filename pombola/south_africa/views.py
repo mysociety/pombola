@@ -582,16 +582,39 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             .order_by('-end_date','-start_date')
         )
 
+    def store_or_get_pmg_member_id(self, scheme='za.org.pmg.api/member'):
+        identifier = self.object.get_identifier(scheme)
+
+        if not identifier:
+            # First find the id of the person
+            api_search_url = "https://api.pmg.org.za/member/?filter[pa_link]=/person/{}/".format(self.object.slug)
+            search_resp = requests.get(api_search_url)
+            search_data = json.loads(search_resp.text)
+
+            if not search_data.get('count'):
+                return None
+
+            if search_data['count'] > 1:
+                raise Exception('Duplicate members at PMG with slug {}'.format(self.object.slug))
+
+            identifier = search_data['results'][0]['id']
+
+            models.Identifier.objects.create(
+                scheme=scheme,
+                identifier=identifier,
+                content_object=self.object,
+                )
+
+        return identifier
+
+    def get_attendance_data_url(self, attendance_url_template="http://api.pmg.org.za/member/{}/attendance/"):
+        identifier = self.store_or_get_pmg_member_id()
+
+        if identifier:
+            return attendance_url_template.format(identifier)
+
     def download_attendance_data(self):
-        # First find the id of the person
-        api_search_url = "https://api.pmg.org.za/member/?filter[pa_link]=/person/{}/".format(self.object.slug)
-        search_resp = requests.get(api_search_url)
-        search_data = json.loads(search_resp.text)
-
-        if not search_data.get('count'):
-            return {}
-
-        attendance_url = search_data['results'][0]['attendance_url']
+        attendance_url = self.get_attendance_data_url()
 
         results = []
         while attendance_url:
