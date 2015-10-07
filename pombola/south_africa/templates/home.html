@@ -114,7 +114,7 @@
         </h3>
         <div class="home__topics__list">
             <a href="{% url 'ward-councillor-lookup' %}" class="home__topics__topic">Find your councillor</a>
-            <a href="{% url 'person_list' %}" class="home__topics__topic">MP profiles</a>
+            <a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name" class="home__topics__topic">MP profiles</a>
             <a href="{% url 'info_blog_category' slug='mp-corner' %}" class="home__topics__topic">MP corner</a>
             <span class="home__topics__topic">MP attendance</span>
             <a href="{% url 'sa-interests-index' %}" class="home__topics__topic">MP assets</a>
