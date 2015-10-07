@@ -325,7 +325,7 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
     # Order by place name unless ordering by person name is requested:
     order = 'place'
     if request.GET.get('order') == 'name':
-        order = 'person__legal_name'
+        order = 'person__sort_name'
     positions = positions.order_by(order)
 
     positions = positions.select_related('person',
