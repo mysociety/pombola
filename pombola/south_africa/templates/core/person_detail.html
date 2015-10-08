@@ -254,6 +254,18 @@
             {% for data in attendance %}
               <p>{{ data.attended }} meetings out of {{ data.total }} attended in {{ data.year }}, {{ data.percentage|floatformat:"0" }}% attendance rate</p>
             {% endfor %}
+
+            {% if latest_meetings_attended %}
+              <h3>Recent meetings attended</h3>
+              <ul class="unstyled">
+                {% for meeting in latest_meetings_attended %}
+                  <p>
+                    <li><a href="{{ meeting.url }}"><span class="committee-name">{{ meeting.committee_name }}</span> &mdash; <span class="committee-meeting-title">{{ meeting.title }}</span></a></li>
+                  </p>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
           </div> <!-- .attendance -->
         {% endif %}
       </div> <!-- tabs -->

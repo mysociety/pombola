@@ -5,6 +5,7 @@ import datetime
 import dateutil
 import json
 import re
+from urlparse import urlsplit
 import warnings
 
 import requests
@@ -622,6 +623,10 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             data = json.loads(resp.text)
             results.extend(data.get('results'))
 
+            attendance_url = data.get('next')
+
+        # Results are returned from the API most recent first, which
+        # is convenient for us.
         return results
 
     def get_attendance_stats_raw(self, data):
@@ -642,6 +647,28 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
                 year_dict[attendance] = 1
 
         return attendance_by_year
+
+    def get_latest_meeting_urls(self, data):
+        api_url_template = r'/committee-meeting/(\d+)/'
+        meeting_url_template = 'https://pmg.org.za/committee-meeting/{}/'
+
+        meetings = [x['meeting'] for x in data[:5]]
+
+        results = []
+
+        for meeting in meetings:
+            api_url = meeting['url']
+            path = urlsplit(api_url).path
+            meeting_id = re.match(api_url_template, path).group(1)
+
+            results.append(
+                {'url': meeting_url_template.format(meeting_id),
+                 'title': meeting['title'],
+                 'committee_name': meeting['committee']['name'],
+                 }
+                )
+
+        return results
 
     # Meanings of attendance field
 
@@ -679,8 +706,9 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         raw_data = self.download_attendance_data()
         year_dict = self.get_attendance_stats_raw(raw_data)
         attendance_stats = self.get_attendance_stats(year_dict)
+        meeting_urls = self.get_latest_meeting_urls(raw_data)
 
-        return attendance_stats
+        return attendance_stats, meeting_urls
 
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
@@ -708,7 +736,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         if self.object.date_of_death != None:
             context['former_parties'] = self.get_former_parties(self.object)
 
-        context['attendance'] = self.get_attendance_data_for_display()
+        context['attendance'], context['latest_meetings_attended'] = self.get_attendance_data_for_display()
 
         return context
 
