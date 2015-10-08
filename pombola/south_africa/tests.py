@@ -442,6 +442,48 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             len(expected[1]['categories'][2]['entries'][0])
         )
 
+    def test_attendance_data(self):
+        test_data_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data/test/attendance_587.json',
+            )
+        with open(test_data_path) as f:
+            raw_data = json.load(f)
+
+        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache.set(
+            "http://api.pmg.org.za/member/moomin-finn/attendance/",
+            raw_data['results'],
+            )
+
+        context = self.client.get(reverse('person', args=('moomin-finn',))).context
+
+        self.assertEqual(
+            context['attendance'],
+            [{'total': 28, 'percentage': 89.28571428571429, 'attended': 25, 'year': 2015},
+             {'total': 15, 'percentage': 93.33333333333333, 'attended': 14, 'year': 2014}],
+            )
+
+        self.assertEqual(
+            context['latest_meetings_attended'],
+            [{'url': 'https://pmg.org.za/committee-meeting/21460/',
+              'committee_name': u'Agriculture, Forestry and Fisheries',
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations & finalisation; Plant Improvement [B8-2015] & Plant Breeders\u2019 Rights Bills [B11-2015]: Department response to Legal Advisor concerns'},
+             {'url': 'https://pmg.org.za/committee-meeting/21374/',
+              'committee_name': u'Agriculture, Forestry and Fisheries',
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations; Committee Support Officials on Plant Improvement Bill [B8-2015] and Plant Breeders\u2019 Rights Bill [B11-2015]'},
+             {'url': 'https://pmg.org.za/committee-meeting/21327/',
+              'committee_name': u'Agriculture, Forestry and Fisheries',
+              'title': u'Department of Agriculture, Forestry and Fisheries 4th Quarter 2014/15 & 1st Quarter 2015/16 Performance'},
+             {'url': 'https://pmg.org.za/committee-meeting/21268/',
+              'committee_name': u'Agriculture, Forestry and Fisheries',
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations; Plant Improvement [B8-2015]  & Plant Breeders\u2019 Rights Bills[11-2015]: Department response to public inputs '},
+             {'url': 'https://pmg.org.za/committee-meeting/21141/',
+              'committee_name': u'Rural Development and Land Reform',
+              'title': u'One District-One Agri-Park implementation in context of Rural Economic Transformation Model'}],
+            )
+
+
 @attr(country='south_africa')
 class SAAttendanceDataTest(TestCase):
     def test_get_attendance_stats(self):
