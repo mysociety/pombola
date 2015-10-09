@@ -220,9 +220,9 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'filters': {
-         'require_debug_false': {
-             '()': 'django.utils.log.RequireDebugFalse'
-         },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
         'skip_unreadable_posts': {
             '()': 'django.utils.log.CallbackFilter',
             'callback': skip_unreadable_post,
