@@ -6,6 +6,7 @@ from .apps import *
 
 from django.template.defaultfilters import slugify
 
+from pombola.core.logging_filters import skip_unreadable_post
 from pombola.hansard.constants import NAME_SUBSTRING_MATCH, NAME_SET_INTERSECTION_MATCH
 
 IN_TEST_MODE = False
@@ -221,11 +222,15 @@ LOGGING = {
     'filters': {
          'require_debug_false': {
              '()': 'django.utils.log.RequireDebugFalse'
-         }
+         },
+        'skip_unreadable_posts': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': skip_unreadable_post,
+        },
      },
     'handlers': {
         'mail_admins': {
-            'filters': ['require_debug_false'],
+            'filters': ['require_debug_false', 'skip_unreadable_posts'],
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
         },
