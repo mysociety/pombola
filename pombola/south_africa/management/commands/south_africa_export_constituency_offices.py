@@ -20,6 +20,7 @@ class Command(BaseCommand):
         fields = [
             'OfficeID',
             'OfficeName',
+            'ClosedDate',
             'MapURL',
             'PhysicalAddress',
             'Latitude',
@@ -47,6 +48,8 @@ class Command(BaseCommand):
                     organisation_id=o.id
                 ))
             row = {'OfficeID': o.id, 'OfficeName': o.name}
+            if o.ended and not o.ended.future:
+                row['ClosedDate'] = o.ended
             if place_count:
                 location = places[0].location
                 row['Latitude'] = location.y
