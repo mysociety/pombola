@@ -31,7 +31,7 @@ def get_all_indexed_models():
     return available_models
 
 def get_models_to_check(model_names, available_models):
-    
+
     models_to_check = []
 
     if model_names:
@@ -73,7 +73,7 @@ class Command(BaseCommand):
 
             backend = haystack_connections[backend_key].get_backend()
             unified_index = haystack_connections[backend_key].get_unified_index()
-            
+
             index = unified_index.get_index(model)
 
             qs = index.build_queryset()
