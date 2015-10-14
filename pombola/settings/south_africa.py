@@ -1,3 +1,5 @@
+import errno
+import os
 import re
 
 from .base import *
@@ -23,3 +25,20 @@ PIPELINE_CSS.update(COUNTRY_CSS)
 PIPELINE_JS.update(COUNTRY_JS)
 
 EXCLUDE_FROM_SEARCH = ('places', 'info_pages');
+
+PMG_API_CACHE_PATH = os.path.join(root_dir, 'pmg_api_cache')
+
+try:
+    os.makedirs(PMG_API_CACHE_PATH)
+except OSError as exception:
+    if exception.errno != errno.EEXIST:
+        raise
+
+CACHES['pmg_api'] = {
+    'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+    'LOCATION': PMG_API_CACHE_PATH,
+    'OPTIONS': {
+        'MAX_ENTRIES': 10000,
+        },
+    'TIMEOUT': 60*60*24,
+    }

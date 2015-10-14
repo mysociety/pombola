@@ -15,6 +15,7 @@ from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count, Min, Max
 from django.conf import settings
+from django.core.cache import get_cache
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
@@ -615,15 +616,21 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             return attendance_url_template.format(identifier)
 
     def download_attendance_data(self):
-        attendance_url = self.get_attendance_data_url()
+        attendance_url = next_url = self.get_attendance_data_url()
 
-        results = []
-        while attendance_url:
-            resp = requests.get(attendance_url)
-            data = json.loads(resp.text)
-            results.extend(data.get('results'))
+        cache = get_cache('pmg_api')
+        results = cache.get(attendance_url)
 
-            attendance_url = data.get('next')
+        if results is None:
+            results = []
+            while next_url:
+                resp = requests.get(next_url)
+                data = json.loads(resp.text)
+                results.extend(data.get('results'))
+
+                next_url = data.get('next')
+
+            cache.set(attendance_url, results)
 
         # Results are returned from the API most recent first, which
         # is convenient for us.
