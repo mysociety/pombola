@@ -1732,71 +1732,78 @@ ul.pager {
   min-height: 0 !important;
 }
 
-#page {
-    .profile-info {
-
-        h3 {
-            display: block;
-            width: 100%;
-            color: $colour_blackish;
-            font-size: 11px;
-        }
-
+.profile-info {
+    h3 {
+        display: block;
+        width: 100%;
+        color: $colour_blackish;
+        font-size: 11px;
     }
-    .constituency-party {
-        margin: 0;
-        p + h3 {
-            margin-top: 1.5em;
-        }
-        ul {
-          padding-left: 0;
-        }
-        ul li {
-            border-top: none;
-            list-style: none outside none;
-            a {
-                font-size: 0.875em;
-                display: inline;
-                background: transparent none right center no-repeat;
+}
+
+.constituency-party {
+    margin: 0;
+
+    p + h3 {
+        margin-top: 1.5em;
+    }
+
+    ul {
+      padding-left: 0;
+    }
+
+    li {
+        border-top: none;
+        list-style: none outside none;
+
+        a {
+            display: inline;
+            font-size: 1em;
+            color: $colour_primary;
+            background: transparent;
+            text-decoration: none;
+            padding: 0;
+
+            @media only all and (min-width: 640px), print {
+                background: transparent;
                 color: $colour_primary;
-                text-decoration: none;
                 padding: 0;
-                @media only all and (min-width: 640px), print {
-                    background: transparent;
-                    color: $colour_primary;
-                    padding:0;
-                    @include border-radius(0);
-                }
-                &:hover,
-                &:focus {
-                    background: transparent;
-                    color: $colour_black;
-                    text-decoration: underline;
-                }
+                @include border-radius(0);
+            }
+
+            &:hover,
+            &:focus {
+                background: transparent;
+                color: $colour_black;
+                text-decoration: underline;
             }
         }
     }
-    .large-container {
-        h3 {
-            border: none;
-            padding: 0;
-            color: $colour_blackish;
-            margin: .25em 0 .5em;
-        }
-        p {
-            margin: 0 0 1em;
-        }
+}
+
+.large-container {
+    h3 {
+        border: none;
+        padding: 0;
+        color: $colour_blackish;
+        margin: 0.25em 0 0.5em;
     }
 
-    .person-appearances {
-        .speech-title {
-            font-weight: bold;
-            font-size: 1.142857143em;
-        }
-        li {
-            margin-bottom: 0.5em;
-        }
-        font-size: 0.9em;
+    p {
+        margin: 0 0 1em;
+    }
+}
+
+.person-appearances {
+    font-size: 0.9em;
+
+    .speech-title {
+        font-weight: bold;
+        font-size: 1.142857143em;
+    }
+
+    li {
+        margin-bottom: 0.5em;
     }
 }
 
