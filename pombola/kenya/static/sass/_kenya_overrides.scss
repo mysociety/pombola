@@ -132,6 +132,7 @@ body {
       max-height: none;
       max-width: 230px;
       width: 230px;
+      height: auto;
       margin: 4px 4px 1px 4px;
     }
   }
@@ -227,11 +228,7 @@ body {
   .object-detail-inner {
     max-width: 960px;
     margin: 0 auto;
-  }
-
-  #page & .large-container {
-    clear: none;
-    margin-left: $sidebar-width + 30px;
+    @include clearfix();
   }
 
   .large-container {
@@ -239,6 +236,11 @@ body {
     background: #fff;
     border: 1px solid #ddd;
     padding: 20px;
+
+    @media only screen and (min-width: 640px) {
+      width: 67%; // fallback for browsers that don't support css calc()
+      width: calc(100% - #{$sidebar-width} - 30px - 20px - 20px); // parent width minus gutter minus padding
+    }
   }
 
   .large-container + .large-container {

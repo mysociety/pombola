@@ -67,14 +67,8 @@
   width: 100px;
 }
 
-.profile-pic {
-  img {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-#map_canvas {
+#map_canvas,
+.profile-pic img {
   width: 100px;
   height: 100px;
 }
@@ -224,11 +218,13 @@
   }
 
   .title-space {
-    min-height: 0;
-    float: left;
-    clear: left;
-    margin: 0 0 20px 240px;
+    min-height: 0; // everything's floated now, so no need to "clear" the absolutely positioned .profile-pic
+    margin: 0;
     position: relative;
+
+    float: right;
+    width: 60%; // fallback for browsers that don't support calc()
+    width: calc(100% - 240px); // parent width minus 240px for sidebar
 
     .object-kind {
       font-style: normal;
@@ -239,27 +235,21 @@
     }
   }
 
-  .profile-pic, .profile-map {
-    height: 210px;
+  .profile-pic,
+  .profile-map {
+    position: static;
+    float: left;
     width: 210px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
   }
 
-  .profile-pic {
-    img {
-      width: auto;
-      height: auto;
-      max-width: 210px;
-      max-height: 210px;
-    }
+  .profile-pic img {
+    width: 210px;
+    height: auto;
   }
 
   #map_canvas {
-    width: 200px;
-    height: 200px;
+    width: 210px;
+    height: 210px;
   }
 
   .small-container {
@@ -267,6 +257,45 @@
     clear: left;
     margin-left: 240px;
     min-height: 120px;
+  }
+
+  .profile-info {
+    width: 210px;
+    float: left;
+    clear: both;
+
+    h3 {
+      text-transform: uppercase;
+      color: $colour_grey;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+  }
+
+  .constituency-party {
+    ul {
+      margin-bottom: 10px;
+    }
+
+    li {
+      border: 0;
+      margin-bottom: 5px;
+
+      p {
+        padding: 0;
+      }
+
+      a {
+        background: $colour_dark_grey;
+        color: $colour_white;
+        padding: 5px;
+        @include border-radius(5px);
+
+        &:hover {
+          background: $colour_red;
+        }
+      }
+    }
   }
 
   h3.scorecard-overall {
@@ -354,53 +383,15 @@
     }
   } // end of ul.scorecard
 
-  .profile-info {
-    width: 210px;
-    position: absolute;
-    top: 210px;
-    left: 0;
-
-    h3 {
-      text-transform: uppercase;
-      color: $colour_grey;
-      font-size: 12px;
-      margin-bottom: 0;
-    }
-  }
-
   .vcard .label {
     margin: 0;
   }
 
-  .constituency-party {
-    ul {
-      margin-bottom: 10px;
-    }
-
-    li {
-      border: 0;
-      margin-bottom: 5px;
-
-      p {
-        padding: 0;
-      }
-
-      a {
-        background: $colour_dark_grey;
-        color: $colour_white;
-        padding: 5px;
-        @include border-radius(5px);
-
-        &:hover {
-          background: $colour_red;
-        }
-      }
-    }
-  }
-
   .large-container {
-    clear: left;
-    margin-left: 240px;
+    margin-left: 0;
+    float: right;
+    width: 60%; // fallback for browsers that don't support calc()
+    width: calc(100% - 240px); // parent width minus 240px for sidebar
 
     .left-col,
     .right-col {

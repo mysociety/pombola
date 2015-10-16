@@ -1728,10 +1728,6 @@ ul.pager {
 
 /* Person page */
 
-#hfWrap {
-  min-height: 0 !important;
-}
-
 .profile-info {
     h3 {
         display: block;
@@ -1807,9 +1803,12 @@ ul.pager {
     }
 }
 
-.profile-pic img {
-    position: relative;
-    z-index: 30;
+.contact-location {
+    margin-top: 0.5em;
+}
+
+.contact-actions {
+    margin-top: 1.5em;
 }
 
 .important-positions {
@@ -1823,6 +1822,7 @@ ul.pager {
 .contact-actions__twitter {
   display: inline;
   margin-right: 1em;
+
   a {
     @extend .button;
     border-radius: 3px;

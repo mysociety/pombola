@@ -150,7 +150,7 @@
 
         {% block page %}
         <div id="page">
-            <div class="page-wrapper wrapper" id="hfWrap">
+            <div class="page-wrapper wrapper">
                 {% block content %}{% endblock %}
                 {% block after_content %}{% endblock %}
 
@@ -160,20 +160,6 @@
 
         </div>
         {% endblock %}
-
-        <script>
-            // Make sure the wrapper has a minimum height of the
-            // absolutely-positioned sidebar within it.
-            var profileElement = document.getElementById('hfProfileInfo'),
-                contentWrapper = document.getElementById('hfWrap'),
-                profileHeight;
-            if (profileElement) {
-                profileHeight = profileElement.offsetHeight + 210;
-                if (contentWrapper) {
-                    contentWrapper.style.minHeight = profileHeight + 'px';
-                }
-            }
-        </script>
 
         {% compressed_js 'survey' %}
 
