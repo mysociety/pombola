@@ -36,7 +36,7 @@ for sub_page in ['scorecard', 'comments', 'experience', 'appearances', 'contact_
     person_patterns += patterns(
         'pombola.core.views',
         url(
-            '^(?P<slug>[-\w]+)/%s/' % sub_page,
+            '^(?P<slug>[-\w]+)/%s/$' % sub_page,
             PersonDetailSub.as_view(sub_page=sub_page),
             name='person_%s' % sub_page,
         )
@@ -101,13 +101,17 @@ for sub_page in ['comments', 'contact_details', 'people']:
         )
     )
 
+organisation_patterns_path = r'^organisation/'
+person_patterns_path = r'^person/'
+place_patterns_path = r'^place/'
+
 urlpatterns = patterns('pombola.core.views',
     # Homepage
     url(r'^$', HomeView.as_view(), name='home'),
 
-    (r'^person/', include(person_patterns)),
-    (r'^place/', include(place_patterns)),
-    (r'^organisation/', include(organisation_patterns)),
+    (person_patterns_path, include(person_patterns)),
+    (place_patterns_path, include(place_patterns)),
+    (organisation_patterns_path, include(organisation_patterns)),
 
     url(r'^position/(?P<pt_slug>[-\w]+)/$', 'position_pt', name='position_pt'),
     url(r'^position/(?P<pt_slug>[-\w]+)/(?P<ok_slug>[-\w]+)/$', 'position_pt_ok', name='position_pt_ok'),
