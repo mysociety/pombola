@@ -101,13 +101,16 @@ for sub_page in ['comments', 'contact_details', 'people']:
         )
     )
 
+organisation_patterns_path = r'^organisation/'
+person_patterns_path = r'^person/'
+
 urlpatterns = patterns('pombola.core.views',
     # Homepage
     url(r'^$', HomeView.as_view(), name='home'),
 
-    (r'^person/', include(person_patterns)),
+    (person_patterns_path, include(person_patterns)),
     (r'^place/', include(place_patterns)),
-    (r'^organisation/', include(organisation_patterns)),
+    (organisation_patterns_path, include(organisation_patterns)),
 
     url(r'^position/(?P<pt_slug>[-\w]+)/$', 'position_pt', name='position_pt'),
     url(r'^position/(?P<pt_slug>[-\w]+)/(?P<ok_slug>[-\w]+)/$', 'position_pt_ok', name='position_pt_ok'),

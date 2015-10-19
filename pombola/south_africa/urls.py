@@ -11,41 +11,42 @@ from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView,
     SAGeocoderView)
 from speeches.views import SectionView, SpeechView, SectionList
-from pombola.core.urls import organisation_patterns, person_patterns
+from pombola.core.urls import (
+    organisation_patterns,
+    organisation_patterns_path,
+    person_patterns,
+    person_patterns_path,
+    )
 from pombola.search.urls import urlpatterns as search_urlpatterns
 from pombola.core.views import PlaceKindList
 
-# Override the organisation url so we can vary it depending on the organisation type.
-for index, pattern in enumerate(organisation_patterns):
-    if pattern.name == 'organisation_people':
-        organisation_patterns[index] = url(
-            r'^(?P<slug>[-\w]+)/people/',
-            SAOrganisationDetailSubPeople.as_view(sub_page='people'),
-            name='organisation_people',
-            )
-    if pattern.name == 'organisation':
-        organisation_patterns[index] = url(
-            r'^(?P<slug>[-\w]+)/$', SAOrganisationDetailView.as_view(), name='organisation')
 
-#add organisation party sub-page
-organisation_patterns += patterns(
-    'pombola.south_africa.views',
-    url(
-        '^(?P<slug>[-\w]+)/party/(?P<sub_page_identifier>[-\w]+)/$',
-        SAOrganisationDetailSubParty.as_view(),
-        name='organisation_party',
-    )
-)
+urlpatterns = patterns(
+    '',
 
-# Override the person url so we can add some extra data
-for index, pattern in enumerate(person_patterns):
-    if pattern.name == 'person':
-        person_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAPersonDetail.as_view(), name='person')
-
-# Override the home view:
-urlpatterns = patterns('',
+    # Override the home view:
     url(r'^$', SAHomeView.as_view(), name='home'),
-)
+
+    # Override the organisation url so we can vary it depending on
+    # the organisation type.
+    url(organisation_patterns_path + r'(?P<slug>[-\w]+)/people/',
+        SAOrganisationDetailSubPeople.as_view(sub_page='people'),
+        name='organisation_people'),
+    url(organisation_patterns_path + r'(?P<slug>[-\w]+)/$',
+        SAOrganisationDetailView.as_view(),
+        name='organisation'),
+
+    # add organisation party sub-page
+    url(organisation_patterns_path + '(?P<slug>[-\w]+)/party/(?P<sub_page_identifier>[-\w]+)/$',
+        SAOrganisationDetailSubParty.as_view(),
+        name='organisation_party'),
+
+    # Override the person url so we can add some extra data
+    url(person_patterns_path + r'(?P<slug>[-\w]+)/$',
+        SAPersonDetail.as_view(),
+        name='person'),
+    )
+
 
 # Catch /person/{person_slug}/appearances/{speech_tag} urls and serve the
 # appropriate content.
@@ -54,12 +55,11 @@ urlpatterns += patterns('',
     # FIXME - implement a redirect to /persons/joe-bloggs#appearances when #930
     # done
     # url(r'^person/(?P<person_slug>[-\w]+)/appearances/$', ........ ),
-    url(r'^person/(?P<slug>[-\w]+)/appearances/$',
+    url(person_patterns_path + r'(?P<slug>[-\w]+)/appearances/$',
         RedirectView.as_view(pattern_name='person', permanent=False),
         name='sa-person-appearances'),
 
-    url(
-        r'^person/(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
+    url(person_patterns_path + r'(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
         SAPersonAppearanceView.as_view(),
         name='sa-person-appearance'
     ),
