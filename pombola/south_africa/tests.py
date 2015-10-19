@@ -14,6 +14,7 @@ from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
 from django.test.client import Client
 from django.test.utils import override_settings
+from django.core.cache import get_cache
 from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django_date_extensions.fields import ApproximateDate
@@ -332,6 +333,22 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
                          {'title': u"Committee Minutes"},
                          {'title': u"Questions"}])
 
+        moomin_finn = models.Person.objects.get(slug='moomin-finn')
+        # Give moomin-finn a fake ID for the PMG API
+        models.Identifier.objects.create(
+            scheme='za.org.pmg.api/member',
+            identifier=moomin_finn.slug,
+            content_object=moomin_finn,
+            )
+
+        # Put blank attendance data in the cache to stop us fetching from
+        # the live PMG API
+        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache.set(
+            "http://api.pmg.org.za/member/moomin-finn/attendance/",
+            [],
+            )
+
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
         speaker = self.pombola_person_to_sayit_speaker(person, '')
@@ -604,6 +621,24 @@ class SAPersonProfileSubPageTest(TransactionWebTest):
             start_date='2010-04-01',
             end_date='2014-04-01',
         )
+
+        # Make some identifiers for these people so we avoid
+        # looking them up with PMG, and put blank attendance data
+        # in the cache to stop us fetching from the live PMG API.
+        pmg_api_cache = get_cache('pmg_api')
+
+        for person in (self.deceased, self.former_mp):
+            models.Identifier.objects.create(
+                scheme='za.org.pmg.api/member',
+                identifier=person.slug,
+                content_object=person,
+                )
+
+            pmg_api_cache.set(
+                "http://api.pmg.org.za/member/{}/attendance/".format(person.slug),
+                [],
+                )
+
 
     def get_person_summary(self, soup):
         return soup.find('div', class_='person-summary')
