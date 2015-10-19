@@ -62,7 +62,7 @@
           <section class="person-appearances">
             <h3>Committee appearances</h3>
 
-            {% include "core/person_speech_list.html" with speechlist=committee %}
+            {% include "core/person_speech_list.html" with speechlist=committee ifempty="No appearances found" %}
 
             {% if committee.count %}
               <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
@@ -70,22 +70,22 @@
           </section>
 
           <section class="person-appearances">
-            <h3>Plenary appearances</h3>
+            <h3>Questions</h3>
 
-            {% include "core/person_speech_list.html" with speechlist=hansard %}
+            {% include "core/person_speech_list.html" with speechlist=question parent_title=1 ifempty="No questions found" %}
 
-            {% if hansard.count %}
-              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
+            {% if question.count %}
+              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
             {% endif %}
           </section>
 
           <section class="person-appearances">
-            <h3>Questions </h3>
+            <h3>Plenary appearances</h3>
 
-            {% include "core/person_speech_list.html" with speechlist=question parent_title=1 %}
+            {% include "core/person_speech_list.html" with speechlist=hansard ifempty="No appearances found" %}
 
-            {% if question.count %}
-              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
+            {% if hansard.count %}
+              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
             {% endif %}
           </section>
         </div>

@@ -11,6 +11,8 @@
     parent_title - boolean, whether to use the parent section's title, rather
                    than own (useful for Question display) (Default is false)
 
+    ifempty - a string shown if there are no speeches to show.
+              (Default is "No speeches found")
 
 {% endcomment %}
 
@@ -35,6 +37,6 @@
         </div>
     </li>
     {% empty %}
-        No speeches found
+        {% firstof ifempty "No speeches found" %}
     {% endfor %}
 </ul>

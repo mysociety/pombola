@@ -594,9 +594,9 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             context['former_positions'] = self.get_former_positions(self.object)
 
         # FIXME - the titles used here will need to be checked and fixed.
-        context['hansard']   = self.get_recent_speeches_for_section(('hansard',))
-        context['committee'] = self.get_recent_speeches_for_section(('committee',))
-        context['question']  = self.get_recent_speeches_for_section(('question', 'answer'))
+        context['hansard']   = self.get_recent_speeches_for_section(('hansard',), limit=2)
+        context['committee'] = self.get_recent_speeches_for_section(('committee',), limit=5)
+        context['question']  = self.get_recent_speeches_for_section(('question', 'answer'), limit=3)
 
         context['interests'] = self.get_tabulated_interests()
         if self.object.date_of_death != None:
