@@ -514,7 +514,7 @@ class SAPersonProfileSubPageTest(TransactionWebTest):
         return soup.find('div', id='experience')
 
     def get_profile_info(self, soup):
-        return soup.find('div', id='hfProfileInfo')
+        return soup.find('div', class_='profile-info')
 
     def test_person_death_date(self):
         response = self.app.get('/person/deceased-person/')

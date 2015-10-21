@@ -1728,127 +1728,101 @@ ul.pager {
 
 /* Person page */
 
-#hfWrap {
-  min-height: 0 !important;
+.profile-info {
+    h3 {
+        display: block;
+        width: 100%;
+        color: $colour_blackish;
+        font-size: 11px;
+    }
 }
 
-#page {
-    .profile-info {
+.constituency-party {
+    margin: 0;
 
-        h3 {
-            display: block;
-            width: 100%;
-            color: $colour_blackish;
-            font-size: 11px;
-        }
+    p + h3 {
+        margin-top: 1.5em;
+    }
 
+    ul {
+      padding-left: 0;
     }
-    .constituency-party {
-        margin: 0;
-        p + h3 {
-            margin-top: 1.5em;
-        }
-        ul {
-          padding-left: 0;
-        }
-        ul li {
-            border-top: none;
-            list-style: none outside none;
-            a {
-                font-size: 0.875em;
-                display: inline;
-                background: transparent none right center no-repeat;
-                color: $colour_primary;
-                text-decoration: none;
-                padding: 0;
-                @media only all and (min-width: 640px), print {
-                    background: transparent;
-                    color: $colour_primary;
-                    padding:0;
-                    @include border-radius(0);
-                }
-                &:hover,
-                &:focus {
-                    background: transparent;
-                    color: $colour_black;
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
-    .large-container {
-        h3 {
-            border: none;
+
+    li {
+        border-top: none;
+        list-style: none outside none;
+
+        a {
+            display: inline;
+            font-size: 1em;
+            color: $colour_primary;
+            background: transparent;
+            text-decoration: none;
             padding: 0;
-            color: $colour_blackish;
-            margin: .25em 0 .5em;
-        }
-        p {
-            margin: 0 0 1em;
-        }
-        .person-appearances-summary {
-            ul li p {
-                margin-bottom: 0.5em;
-            }
-            @media only all and (min-width: 550px), print {
-                float: left;
-                width: 49%;
-                margin-right: 1%;
 
-                .one-appearance {
-                    float: none;
-                    width: 100%;
-                    margin-right: 0px;
-                }
+            @media only all and (min-width: 640px), print {
+                background: transparent;
+                color: $colour_primary;
+                padding: 0;
+                @include border-radius(0);
             }
-        }
-        @media only all and (min-width: 550px), print {
-            .one-appearance {
-                float: none;
-                width: 100%;
-                margin-right: 0px;
+
+            &:hover,
+            &:focus {
+                background: transparent;
+                color: $colour_black;
+                text-decoration: underline;
             }
         }
     }
+}
 
-    .person-appearances {
-        .speech-title {
-            font-weight: bold;
-            font-size: 1.142857143em;
-        }
-        li {
-            margin-bottom: 0.5em;
-        }
-        font-size: 0.9em;
+.large-container {
+    h3 {
+        border: none;
+        padding: 0;
+        color: $colour_blackish;
+        margin: 0.25em 0 0.5em;
+    }
+
+    p {
+        margin: 0 0 1em;
     }
 }
 
-.about-person-intro-block {
-  background-color: #C1E0D6;
-  padding: 1em 1em 0;
-  position: relative;
-  top: -1.5em;
-  @media only all and (min-width: 550px) {
-    padding: 2em 0 0;
-  }
+.person-appearances {
+    font-size: 0.9em;
+
+    .speech-title {
+        font-weight: bold;
+        font-size: 1.142857143em;
+    }
+
+    li {
+        margin-bottom: 0.5em;
+    }
 }
 
-.profile-pic img {
-    position: relative;
-    z-index: 30;
-}
-.subtitle {
-  margin-bottom: 0;
+.contact-location {
+    margin-top: 0.5em;
 }
 
 .contact-actions {
-  margin-bottom: 2em;
+    margin-top: 1.5em;
+}
+
+.important-positions {
+    margin-top: 0.5em;
+    p {
+       margin-bottom: 0.5em;
+    }
 }
 
 .contact-actions__email,
 .contact-actions__twitter {
   display: inline;
   margin-right: 1em;
+
   a {
     @extend .button;
     border-radius: 3px;
@@ -1864,12 +1838,6 @@ ul.pager {
       background-position: 14px 50%;
     }
   }
-}
-
-.person-summary {
-    width: 97%;
-    float: left;
-    padding-right: 3%;
 }
 
 .contact-actions__twitter {
@@ -1895,13 +1863,6 @@ ul.pager {
         }
     }
 }
-
-#profile {
-    h2 {
-        font-size: 1em;
-    }
-}
-
 
 .tab-links {
     border-bottom: 1px solid #d2d2ce;

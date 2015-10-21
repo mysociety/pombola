@@ -10,291 +10,35 @@
 
 .wrapper {
   width: 100%;
-  @media only all and (min-width: 640px), print {
-    max-width: 960px;
-    margin: 0 auto; } }
+}
 
 #page {
   background: $colour_white;
   padding-bottom: 30px;
+
   &.down {
     padding: 10px;
+
     h2 {
       border: none;
       background: none;
-      padding: 0; } }
-  .page-wrapper {
-    @extend .clearfix;
-    display: table;
-    position: relative;
-    caption-side: bottom; }
-  .title-space {
-    min-height: 130px;
-    margin-left: 120px;
-    margin-top: 10px;
-    h1 {
-      margin: 0; }
-    p {
-      font-style: italic; } }
-  .profile-pic, .profile-map {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 100px; }
-  .profile-pic {
-    img {
-      width: 100px;
-      height: 100px; } }
-  #map_canvas {
-    width: 100px;
-    height: 100px; }
-  .profile-info {
-    .constituency-party {
-      margin: 10px 0;
-      h3 {
-        margin: 0; }
-      ul {
-        @include list-reset-soft;
-        margin: 0 0 20px 0;
-        li {
-          border-top: 2px solid $colour_white;
-          p, a {
-            padding: 10px;
-            margin: 0;
-          }
-          a {
-            font-size: 13px;
-            display: block;
-            background: $colour_light_grey url(../images/chevron-right.png) right center no-repeat;
-            color: $colour_black;
-            text-decoration: none;
-            &:hover {
-              background-color: $colour_white; }
-            span {
-              font-style: italic; } } } } }
-    .profile-names {
-      p {
-        margin: 0 10px 10px 10px; } } }
-  .large-container {
-    p {
-      margin-left: 10px;
-      margin-right: 10px; }
-    h3 {
-      border-top: none;
-      border-bottom: 2px solid $colour_black;
-      background: none;
-      padding: 0 0 5px 0;
-      margin: 20px 10px; }
-    h4 {
-      font-weight: normal;
-      margin-bottom: 10px; }
-    .tab {
-      overflow: hidden; }
-    section {
-      ul {
-        @include list-reset-soft;
-        margin: 20px 0;
-        li {
-          border-bottom: 1px solid $colour_black;
-          margin: 0 10px 5px 10px;
-          &:last-child,
-          &.last {
-            border-bottom: none; }
-          p {
-            margin: 0 0 5px 0;
-            font: {
-              style: italic;
-              size: 13px; }; } }
-        &.tools {
-          @include list-reset; } } }
-    article {}
-    #comments {
-      .big-btn-text-green {
-        display: none; } }
-    ul.comments li section {
-      // max-width:590px;
-    } }
+      padding: 0;
+    }
+  }
+
   h2, h3 {
     border-top: 4px solid $colour_primary;
     background: $colour_muted;
-    padding: 10px; } }
+    padding: 10px;
+  }
+}
 
-@media only all and (min-width: 640px), print {
-  #page {
-    &.down {
-      h1 {
-        font-size: 40px;
-        line-height: 50px;
-        margin: 20px 0 40px 0; }
-      h2 {
-        font-size: 30px; } }
-    .page-wrapper {
-      clear: both;
-      display: block;
-      //      overflow: hidden;
-      //      position: relative;
-    }
-    .title-space {
-      min-height: 0;
-      float: left;
-      clear: left;
-      margin: 0 0 20px 240px;
-      position: relative;
-      .object-kind {
-        font: {
-          style: normal;
-          weight: bold;
-          size: 12px; };
-        margin: 0;
-        text-transform: uppercase; } }
-    .profile-pic, .profile-map {
-      height: 210px;
-      width: 210px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      overflow: hidden; }
-    .profile-pic {
-      img {
-        width: 100%;
-        width: auto;
-        height: auto;
-        max-width: 200px;
-        max-height: 200px;
-        max-width: 210px;
-        max-height: 210px; } }
-    #map_canvas {
-      width: 200px;
-      height: 200px; }
-    .small-container {
-      max-width: 510px;
-      clear: left;
-      margin-left: 240px;
-      min-height: 120px;
-      h3.scorecard-overall {
-        margin: 0;
-        padding: 15px 10px 10px 10px;
-        background: $colour_light_grey;
-        border-bottom: 2px solid $colour_white;
-        span {
-          @include inline-block;
-          height: 32px;
-          padding: 5px 0 0 130px;
-          margin: -5px 0 0 24px;
-          background: url(../images/d-smiley-sprite.png) 0 0 no-repeat;
-          &.score-overall-good {
-            background-position: left -2px; }
-          &.score-overall-average {
-            background-position: left -44px; }
-          &.score-overall-bad {
-            background-position: left -82px; } } }
-      ul.scorecard {
-        @include list-reset-soft;
-        display: block;
-        li {
-          article {
-            header {
-              overflow: hidden;
-              h4 {
-                float: left;
-                width: 120px;
-                line-height: 14px;
-                .btn-question {
-                  position: absolute;
-                  top: 0;
-                  right: 0; } }
-              p {
-                float: left;
-                max-width: 250px;
-                font-style: italic;
-                margin: 0 0 0 20px;
-                padding: 0 0 4px 60px;
-                &.score-good {
-                  background: url(../images/score-good.png) left 0 no-repeat; }
-                &.score-average {
-                  background: url(../images/score-average.png) left 0 no-repeat; }
-                &.score-bad {
-                  background: url(../images/score-bad.png) left 0 no-repeat; }
-                &.score-disabled {
-                  background: url(../images/score-disabled.png) left 0 no-repeat; } } }
-            div.details {
-              margin: 0px 0px 8px 200px;
-              /* 200 from 120 (width of head) + 80 (padding+margin of text) */
-              display: block;
-              margin-top: 10px;
-              p {
-                font-size: 13px; } } } } } }
-    .profile-info {
-      width: 210px;
-      position: absolute;
-      top: 210px;
-      left: 0;
-      h3 {
-        text-transform: uppercase;
-        color: $colour_grey;
-        font-size: 12px;
-        margin-bottom: 0; }
-      .constituency-party {
-        ul {
-          margin-bottom: 10px;
-          li {
-            border: 0;
-            margin-bottom: 5px;
-            p { padding: 0;}
-            a {
-              background: $colour_dark_grey;
-              color: $colour_white;
-              padding: 5px;
-              @include border-radius(5px);
-              &:hover {
-                background: $colour_red; } } } } }
-      .profile-names {
-        p {
-          margin: 0 0 10px 0; } }
-      .vcard li .label {
-        margin: 0; } }
-    .large-container {
-      clear: left;
-      margin-left: 240px;
-      .left-col,
-      .right-col {
-        width: 335px;
-        float: left; }
-      .left-col {
-        margin-right: 30px; }
-      p, h3 {
-        margin-left: 0;
-        margin-right: 0; }
-      section {
-        h3 {
-          margin: 20px 0 0 0; }
-        ul {
-          margin-bottom: 30px;
-          li {
-            margin-left: 0;
-            margin-right: 0; }
-          &.tools {
-            li {
-              margin-left: 5px; } } } }
-      article {
-        h3 {
-          margin: 20px 0 5px 0;
-          border: none; } } }
-    #comments {
-      display: block;
-      .big-btn-text-green {
-        float: right;
-        @include inline-block; }
-      h3 {
-        clear: both; } }
-    h2, h3 {
-      border-top: none;
-      background: none;
-      padding: 0; }
-    .search-wrap {
-      margin: 0; }
-    .pagination .disabled {
-      display: none; } } }
+.page-wrapper {
+  @extend .clearfix;
+  display: table;
+  position: relative;
+  caption-side: bottom;
+}
 
 .page-title {
   display: block;
@@ -302,8 +46,405 @@
   padding: 10px;
 }
 
+.title-space {
+  min-height: 130px;
+  margin-left: 120px;
+  margin-top: 10px;
+
+  h1 {
+    margin: 0;
+  }
+
+  p {
+    font-style: italic;
+  }
+}
+
+.profile-pic, .profile-map {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100px;
+}
+
+#map_canvas,
+.profile-pic img {
+  width: 100px;
+  height: 100px;
+}
+
+.constituency-party {
+  margin: 10px 0;
+
+  h3 {
+    margin: 0;
+  }
+
+  ul {
+    @include list-reset-soft;
+    margin: 0 0 20px 0;
+  }
+
+  li {
+    border-top: 2px solid $colour_white;
+
+    p, a {
+      padding: 10px;
+      margin: 0;
+    }
+
+    a {
+      font-size: 13px;
+      display: block;
+      background: $colour_light_grey url(../images/chevron-right.png) right center no-repeat;
+      color: $colour_black;
+      text-decoration: none;
+
+      &:hover {
+        background-color: $colour_white;
+      }
+      span {
+        font-style: italic;
+      }
+    }
+  }
+}
+
+.profile-names {
+  p {
+    margin: 0 10px 10px 10px;
+  }
+}
+
+.large-container {
+  p {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  h3 {
+    border-top: none;
+    border-bottom: 2px solid $colour_black;
+    background: none;
+    padding: 0 0 5px 0;
+    margin: 20px 10px;
+  }
+
+  h4 {
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+
+  .tab {
+    overflow: hidden;
+  }
+
+  section {
+    ul {
+      @include list-reset-soft;
+      margin: 20px 0;
+
+      li {
+        border-bottom: 1px solid $colour_black;
+        margin: 0 10px 5px 10px;
+        &:last-child,
+        &.last {
+          border-bottom: none;
+        }
+
+        p {
+          margin: 0 0 5px 0;
+          font-style: italic;
+          font-size: 13px;
+        }
+      }
+
+      &.tools {
+        @include list-reset;
+      }
+    }
+  }
+
+  #comments {
+    .big-btn-text-green {
+      display: none;
+    }
+  }
+}
+
 @media only all and (min-width: 640px), print {
+  .wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  #page {
+    &.down {
+      h1 {
+        font-size: 40px;
+        line-height: 50px;
+        margin: 20px 0 40px 0;
+      }
+
+      h2 {
+        font-size: 30px;
+      }
+    }
+
+    h2, h3 {
+      border-top: none;
+      background: none;
+      padding: 0;
+    }
+  }
+
+  .page-wrapper {
+    clear: both;
+    display: block;
+  }
+
+  .search-wrap {
+    margin: 0;
+  }
+
+  .pagination .disabled {
+    display: none;
+  }
+
   .page-title {
     display: block;
     background: none;
-    padding: 0; } }
+    padding: 0;
+  }
+
+  .title-space {
+    min-height: 0; // everything's floated now, so no need to "clear" the absolutely positioned .profile-pic
+    margin: 0;
+    position: relative;
+
+    float: right;
+    width: 60%; // fallback for browsers that don't support calc()
+    width: calc(100% - 240px); // parent width minus 240px for sidebar
+
+    .object-kind {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      margin: 0;
+      text-transform: uppercase;
+    }
+  }
+
+  .profile-pic,
+  .profile-map {
+    position: static;
+    float: left;
+    width: 210px;
+  }
+
+  .profile-pic img {
+    width: 210px;
+    height: auto;
+  }
+
+  #map_canvas {
+    width: 210px;
+    height: 210px;
+  }
+
+  .small-container {
+    max-width: 510px;
+    clear: left;
+    margin-left: 240px;
+    min-height: 120px;
+  }
+
+  .profile-info {
+    width: 210px;
+    float: left;
+    clear: both;
+
+    h3 {
+      text-transform: uppercase;
+      color: $colour_grey;
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+  }
+
+  .constituency-party {
+    ul {
+      margin-bottom: 10px;
+    }
+
+    li {
+      border: 0;
+      margin-bottom: 5px;
+
+      p {
+        padding: 0;
+      }
+
+      a {
+        background: $colour_dark_grey;
+        color: $colour_white;
+        padding: 5px;
+        @include border-radius(5px);
+
+        &:hover {
+          background: $colour_red;
+        }
+      }
+    }
+  }
+
+  h3.scorecard-overall {
+    margin: 0;
+    padding: 15px 10px 10px 10px;
+    background: $colour_light_grey;
+    border-bottom: 2px solid $colour_white;
+
+    span {
+      @include inline-block;
+      height: 32px;
+      padding: 5px 0 0 130px;
+      margin: -5px 0 0 24px;
+      background: url(../images/d-smiley-sprite.png) 0 0 no-repeat;
+
+      &.score-overall-good {
+        background-position: left -2px;
+      }
+
+      &.score-overall-average {
+        background-position: left -44px;
+      }
+
+      &.score-overall-bad {
+        background-position: left -82px;
+      }
+    }
+  }
+
+  ul.scorecard {
+    @include list-reset-soft;
+    display: block;
+
+    li {
+      header {
+        overflow: hidden;
+      }
+
+      h4 {
+        float: left;
+        width: 120px;
+        line-height: 14px;
+
+        .btn-question {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+
+      p {
+        float: left;
+        max-width: 250px;
+        font-style: italic;
+        margin: 0 0 0 20px;
+        padding: 0 0 4px 60px;
+
+        &.score-good {
+          background: url(../images/score-good.png) left 0 no-repeat;
+        }
+
+        &.score-average {
+          background: url(../images/score-average.png) left 0 no-repeat;
+        }
+
+        &.score-bad {
+          background: url(../images/score-bad.png) left 0 no-repeat;
+        }
+
+        &.score-disabled {
+          background: url(../images/score-disabled.png) left 0 no-repeat;
+        }
+      }
+    }
+
+    .details {
+      margin: 0px 0px 8px 200px;
+      // 200 = 120 (width of head) + 80 (padding+margin of text)
+      display: block;
+      margin-top: 10px;
+
+      p {
+        font-size: 13px;
+      }
+    }
+  } // end of ul.scorecard
+
+  .vcard .label {
+    margin: 0;
+  }
+
+  .large-container {
+    margin-left: 0;
+    float: right;
+    width: 60%; // fallback for browsers that don't support calc()
+    width: calc(100% - 240px); // parent width minus 240px for sidebar
+
+    .left-col,
+    .right-col {
+      width: 335px;
+      float: left;
+    }
+
+    .left-col {
+      margin-right: 30px;
+    }
+
+    p, h3 {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    section {
+      h3 {
+        margin: 20px 0 0 0;
+      }
+
+      ul {
+        margin-bottom: 30px;
+      }
+
+      li {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .tools li {
+        margin-left: 5px;
+      }
+    }
+
+    article {
+      h3 {
+        margin: 20px 0 5px 0;
+        border: none;
+      }
+    }
+
+    #comments {
+      display: block;
+
+      .big-btn-text-green {
+        float: right;
+        @include inline-block;
+      }
+
+      h3 {
+        clear: both;
+      }
+    }
+  } // end of .large-container
+}

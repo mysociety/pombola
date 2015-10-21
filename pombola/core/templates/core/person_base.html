@@ -50,10 +50,11 @@
 
       {% if object.aspirant_constituencies.count %}
           <h3>Aspirant for</h3>
-          <ul>
+          <ul class="aspirant-constituencies">
               {% for constituency in object.aspirant_constituencies %}
                   <li><a href="{{ constituency.get_absolute_url }}">{{ constituency.name }}</a></li>
               {% endfor %}
+          </ul>
       {% endif %}
 
 
@@ -71,7 +72,7 @@
 
       {% if settings.COUNTRY_APP == 'south_africa' %}
       <h3>Constituency Offices</h3>
-      <ul>
+      <ul class="constituency-offices">
           {% for office in object.constituency_offices %}
               <li><a href="{{ office.get_absolute_url }}">{{ office.name }}</a></li>
           {% empty %}
@@ -85,9 +86,9 @@
       {% else %}
         Party
       {% endif %}</h3>
-      <ul>
+      <ul class="party-memberships">
           {% for party in object.parties_and_coalitions %}
-              <li><a href="{{ party.get_absolute_url }}">{{ party.name }}</a></li>
+              <li><a href="{{ party.get_absolute_url }}" class="party-membership party-membership--{{ party.kind.name | slugify }}">{{ party.name }}</a></li>
           {% empty %}
               <li>{% if settings.COUNTRY_APP == 'kenya' %}
                 Not a member of any parties or coalitions
