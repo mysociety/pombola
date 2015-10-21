@@ -1,20 +1,14 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from django.views.generic.base import RedirectView, TemplateView
 
 from pombola.south_africa import views
 from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     LatLonDetailLocalView, SAPlaceDetailSub, SAOrganisationDetailView,
     SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
-    SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex,
-    SAPersonAppearanceView, SAQuestionIndex,
-    SAOrganisationDetailSubPeople, SAOrganisationDetailSubParty,
-    OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView,
-    SAGeocoderView)
-from speeches.views import SectionView, SpeechView, SectionList
+    SAPersonAppearanceView, SAOrganisationDetailSubPeople,
+    SAOrganisationDetailSubParty, SAGeocoderView)
 from pombola.core.urls import (
-    organisation_patterns,
     organisation_patterns_path,
-    person_patterns,
     person_patterns_path,
     )
 from pombola.search.urls import urlpatterns as search_urlpatterns
