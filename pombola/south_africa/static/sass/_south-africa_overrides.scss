@@ -1941,7 +1941,42 @@ ul.pager {
 .positions {
     @include unstyled-list;
     margin-bottom: 1.5em;
+}
 
+// TODO: #ID selectors here can be removed once
+// this is merged into master (since c7f9f14)
+#page #attendance h3.attendance__heading {
+    margin-top: 2em;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+#page #attendance p.attendance__percentage {
+    font-size: 1.2em;
+    color: $colour_green;
+    font-family: $font_family_lato;
+    margin-bottom: 0.3em;
+}
+
+.attendance__context {
+    color: $colour_grey;
+}
+
+.attendance__recently-attended {
+    li {
+        margin-bottom: 1em;
+    }
+
+    a {
+        display: block;
+        text-decoration: none;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
+    }
 }
 
 /* Hansard index page */
