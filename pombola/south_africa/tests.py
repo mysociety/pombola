@@ -12,7 +12,7 @@ from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
 from django.test.client import Client
 from django.test.utils import override_settings
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
 from django.core.management import call_command
 from django_date_extensions.fields import ApproximateDate
 from django_webtest import TransactionWebTest
@@ -1714,3 +1714,78 @@ class SACommentsArchiveTest(TransactionWebTest):
         path = '/blog/infographic-decline-sa-tourism-2015'
         context = self.app.get(path).context
         self.assertFalse('archive_link' in context)
+
+
+@attr(country='south_africa')
+class SAUrlRoutingTest(TestCase):
+    """Check South Africa doesn't override URLs with slug versions."""
+
+    def test_person_all(self):
+        match = resolve('/person/all/')
+        self.assertEqual(match.url_name, 'person_list')
+
+    def test_person_politicians(self):
+        match = resolve('/person/politicians/')
+        self.assertEqual(match.url_name, 'django.views.generic.base.RedirectView')
+        self.assertEqual(
+            match.func.func_closure[1].cell_contents,
+            {'url': '/position/mp', 'permanent': True},
+            )
+
+    def test_organisation_all(self):
+        match = resolve('/organisation/all/')
+        self.assertEqual(match.url_name, 'organisation_list')
+
+    def test_place_all(self):
+        match = resolve('/place/all/')
+        self.assertEqual(match.url_name, 'place_kind_all')
+
+    def test_za_organisation_people(self):
+        match = resolve('/organisation/foo/people/')
+        self.assertEqual(match.func.func_name, 'SAOrganisationDetailSubPeople')
+
+    def test_za_organisation(self):
+        match = resolve('/organisation/foo/')
+        self.assertEqual(match.func.func_name, 'SAOrganisationDetailView')
+
+    def test_za_organisation_party(self):
+        match = resolve('/organisation/foo/party/bar/')
+        self.assertEqual(match.func.func_name, 'SAOrganisationDetailSubParty')
+
+    def test_za_person(self):
+        match = resolve('/person/foo/')
+        self.assertEqual(match.func.func_name, 'SAPersonDetail')
+
+    def test_za_person_appearances(self):
+        match = resolve('/person/foo/appearances/')
+        self.assertEqual(match.url_name, 'sa-person-appearances')
+        self.assertEqual(match.func.func_name, 'RedirectView')
+
+        self.assertEqual(
+            match.func.func_closure[1].cell_contents,
+            {'pattern_name': 'person', 'permanent': False},
+            )
+
+    def test_za_person_appearance(self):
+        match = resolve('/person/foo/appearances/bar')
+        self.assertEqual(match.func.func_name, 'SAPersonAppearanceView')
+
+    def test_za_place(self):
+        match = resolve('/place/foo/')
+        self.assertEqual(match.func.func_name, 'SAPlaceDetailView')
+
+    def test_za_place_places(self):
+        match = resolve('/place/foo/places/')
+        self.assertEqual(match.func.func_name, 'SAPlaceDetailSub')
+
+    def test_za_latlon_national(self):
+        match = resolve('/place/latlon/1.2,3.4/national/')
+        self.assertEqual(match.func.func_name, 'LatLonDetailNationalView')
+
+    def test_za_latlon(self):
+        match = resolve('/place/latlon/1.2,3.4/')
+        self.assertEqual(match.func.func_name, 'LatLonDetailLocalView')
+
+    def test_za_home(self):
+        match = resolve('/')
+        self.assertEqual(match.func.func_name, 'SAHomeView')
