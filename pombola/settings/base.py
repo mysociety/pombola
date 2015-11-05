@@ -454,9 +454,7 @@ def make_enabled_features(installed_apps, all_optional_apps):
 PIPELINE_CSS = {
     'core': {
         'source_filenames': (
-            # .css files from core:
-            'css/jquery-ui.structure.css',
-            'css/jquery-ui.theme.css',
+            'sass/jquery-ui.scss',
         ),
         'output_filename': 'css/core.css',
     },
