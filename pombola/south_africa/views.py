@@ -1,13 +1,22 @@
+from __future__ import division
+
 from collections import defaultdict
 import datetime
-import warnings
+import dateutil
+import json
 import re
+import urllib
+from urlparse import urlsplit
+import warnings
+
+import requests
 
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count, Min, Max
 from django.conf import settings
+from django.core.cache import get_cache
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
@@ -576,6 +585,141 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             .order_by('-end_date','-start_date')
         )
 
+    def store_or_get_pmg_member_id(self, scheme='za.org.pmg.api/member'):
+        identifier = self.object.get_identifier(scheme)
+
+        if not identifier:
+            # First find the id of the person
+            pa_link = urllib.quote(
+                "http://www.pa.org.za/person/{}/".format(self.object.slug))
+
+            url_fmt = "https://api.pmg.org.za/member/?filter[pa_link]={}"
+            api_search_url = url_fmt.format(pa_link)
+            search_resp = requests.get(api_search_url)
+            search_data = json.loads(search_resp.text)
+
+            if not search_data.get('count'):
+                return None
+
+            if search_data['count'] > 1:
+                raise Exception('Duplicate members at PMG with slug {}'.format(self.object.slug))
+
+            identifier = search_data['results'][0]['id']
+
+            models.Identifier.objects.create(
+                scheme=scheme,
+                identifier=identifier,
+                content_object=self.object,
+                )
+
+        return identifier
+
+    def get_attendance_data_url(self, attendance_url_template="http://api.pmg.org.za/member/{}/attendance/"):
+        identifier = self.store_or_get_pmg_member_id()
+
+        if identifier:
+            return attendance_url_template.format(identifier)
+
+    def download_attendance_data(self):
+        attendance_url = next_url = self.get_attendance_data_url()
+
+        cache = get_cache('pmg_api')
+        results = cache.get(attendance_url)
+
+        if results is None:
+            results = []
+            while next_url:
+                resp = requests.get(next_url)
+                data = json.loads(resp.text)
+                results.extend(data.get('results'))
+
+                next_url = data.get('next')
+
+            cache.set(attendance_url, results)
+
+        # Results are returned from the API most recent first, which
+        # is convenient for us.
+        return results
+
+    def get_attendance_stats_raw(self, data):
+        if not data:
+            return {}
+
+        attendance_by_year = {}
+
+        for x in data:
+            attendance = x['attendance']
+            year = dateutil.parser.parse(x['meeting']['date']).year
+
+            year_dict = attendance_by_year.setdefault(year, {})
+
+            year_dict.setdefault(attendance, 0)
+            year_dict[attendance] += 1
+
+        return attendance_by_year
+
+    def get_latest_meeting_urls(self, data):
+        api_url_re = r'/committee-meeting/(\d+)/'
+        meeting_url_template = 'https://pmg.org.za/committee-meeting/{}/'
+
+        meetings = [x['meeting'] for x in data[:5]]
+
+        results = []
+
+        for meeting in meetings:
+            api_url = meeting['url']
+            path = urlsplit(api_url).path
+            meeting_id = re.match(api_url_re, path).group(1)
+
+            results.append(
+                {'url': meeting_url_template.format(meeting_id),
+                 'title': meeting['title'],
+                 'committee_name': meeting['committee']['name'],
+                 }
+                )
+
+        return results
+
+    # Meanings of attendance field
+
+    #  A:   Absent
+    #  AP:  Absent with Apologies
+    #  DE:  Departed Early
+    #  L:   Arrived Late
+    #  LDE: Arrived Late and Departed Early
+    #  P:   Present
+
+    def get_attendance_stats(self, attendance_by_year):
+        present_values = set(('P', 'DE', 'L', 'LDE'))
+
+        sorted_keys = sorted(attendance_by_year.keys(), reverse=True)
+
+        return_data = []
+        # year, attended, total, percentage
+        for year in sorted_keys:
+            year_dict = attendance_by_year[year]
+
+            attendance = sum((year_dict[x] for x in year_dict if x in present_values))
+            meeting_count = sum((year_dict[x] for x in year_dict))
+            percentage = 100 * attendance / meeting_count
+            return_data.append(
+                {'year': year,
+                 'attended': attendance,
+                 'total': meeting_count,
+                 'percentage': percentage,
+                 }
+                )
+
+        return return_data
+
+    def get_attendance_data_for_display(self):
+        raw_data = self.download_attendance_data()
+        attendance_by_year = self.get_attendance_stats_raw(raw_data)
+        attendance_stats = self.get_attendance_stats(attendance_by_year)
+        meeting_urls = self.get_latest_meeting_urls(raw_data)
+
+        return attendance_stats, meeting_urls
+
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.list_contacts(('twitter',))
@@ -601,6 +745,8 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['interests'] = self.get_tabulated_interests()
         if self.object.date_of_death != None:
             context['former_parties'] = self.get_former_parties(self.object)
+
+        context['attendance'], context['latest_meetings_attended'] = self.get_attendance_data_for_display()
 
         return context
 

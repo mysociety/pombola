@@ -1,3 +1,5 @@
+from __future__ import division
+
 import re
 import os
 from datetime import date, time
@@ -12,7 +14,13 @@ from django.contrib.gis.geos import Polygon, Point
 from django.test import TestCase
 from django.test.client import Client
 from django.test.utils import override_settings
-from django.core.urlresolvers import reverse
+
+# NOTE - from Django 1.7 this should be replaced with 
+# django.core.cache.caches
+# https://docs.djangoproject.com/en/1.8/topics/cache/#django.core.cache.caches
+from django.core.cache import get_cache
+
+from django.core.urlresolvers import reverse, resolve
 from django.core.management import call_command
 from django_date_extensions.fields import ApproximateDate
 from django_webtest import TransactionWebTest
@@ -27,6 +35,7 @@ from popit.models import Person as PopitPerson, ApiInstance
 from speeches.models import Speaker, Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
+from pombola.south_africa.views import SAPersonDetail
 from pombola.core.views import PersonSpeakerMappingsMixin
 from pombola.info.models import InfoPage
 from instances.models import Instance
@@ -329,6 +338,22 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
                          {'title': u"Committee Minutes"},
                          {'title': u"Questions"}])
 
+        moomin_finn = models.Person.objects.get(slug='moomin-finn')
+        # Give moomin-finn a fake ID for the PMG API
+        models.Identifier.objects.create(
+            scheme='za.org.pmg.api/member',
+            identifier=moomin_finn.slug,
+            content_object=moomin_finn,
+            )
+
+        # Put blank attendance data in the cache to stop us fetching from
+        # the live PMG API
+        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache.set(
+            "http://api.pmg.org.za/member/moomin-finn/attendance/",
+            [],
+            )
+
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
         speaker = self.pombola_person_to_sayit_speaker(person, '')
@@ -439,6 +464,101 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             len(expected[1]['categories'][2]['entries'][0])
         )
 
+    def test_attendance_data(self):
+        test_data_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data/test/attendance_587.json',
+            )
+        with open(test_data_path) as f:
+            raw_data = json.load(f)
+
+        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache.set(
+            "http://api.pmg.org.za/member/moomin-finn/attendance/",
+            raw_data['results'],
+            )
+
+        context = self.client.get(reverse('person', args=('moomin-finn',))).context
+
+        self.assertEqual(
+            context['attendance'],
+            [{'total': 28, 'percentage': 89.28571428571429, 'attended': 25, 'year': 2015},
+             {'total': 15, 'percentage': 93.33333333333333, 'attended': 14, 'year': 2014}],
+            )
+
+        self.assertEqual(
+            context['latest_meetings_attended'],
+            [{'url': 'https://pmg.org.za/committee-meeting/21460/',
+              'committee_name': u'Agriculture, Forestry and Fisheries',
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations & finalisation; Plant Improvement [B8-2015] & Plant Breeders\u2019 Rights Bills [B11-2015]: Department response to Legal Advisor concerns'},
+             {'url': 'https://pmg.org.za/committee-meeting/21374/',
+              'committee_name': u'Agriculture, Forestry and Fisheries',
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations; Committee Support Officials on Plant Improvement Bill [B8-2015] and Plant Breeders\u2019 Rights Bill [B11-2015]'},
+             {'url': 'https://pmg.org.za/committee-meeting/21327/',
+              'committee_name': u'Agriculture, Forestry and Fisheries',
+              'title': u'Department of Agriculture, Forestry and Fisheries 4th Quarter 2014/15 & 1st Quarter 2015/16 Performance'},
+             {'url': 'https://pmg.org.za/committee-meeting/21268/',
+              'committee_name': u'Agriculture, Forestry and Fisheries',
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations; Plant Improvement [B8-2015]  & Plant Breeders\u2019 Rights Bills[11-2015]: Department response to public inputs '},
+             {'url': 'https://pmg.org.za/committee-meeting/21141/',
+              'committee_name': u'Rural Development and Land Reform',
+              'title': u'One District-One Agri-Park implementation in context of Rural Economic Transformation Model'}],
+            )
+
+
+@attr(country='south_africa')
+class SAAttendanceDataTest(TestCase):
+    def test_get_attendance_stats(self):
+        raw_data = {
+            2000: {'A': 1, 'AP': 2, 'DE': 4, 'L': 8, 'LDE': 16, 'P': 32},
+            }
+
+        expected = [
+            {'year': 2000,
+            'attended': 60,
+            'total': 63,
+            'percentage': 100*60/63,
+             }
+            ]
+
+        stats = SAPersonDetail().get_attendance_stats(raw_data)
+        self.assertEqual(stats, expected)
+
+        raw_data = {
+            2000: {'A': 1, 'P': 2},
+            2001: {'A': 4, 'P': 8},
+            }
+
+        expected = [
+            {'year': 2001,
+             'attended': 8,
+             'total': 12,
+             'percentage': 100*8/12,
+             },
+            {'year': 2000,
+             'attended': 2,
+             'total': 3,
+             'percentage': 100*2/3,
+             }
+        ]
+
+        stats = SAPersonDetail().get_attendance_stats(raw_data)
+        self.assertEqual(stats, expected)
+
+    def test_get_attendance_stats_raw(self):
+        test_data_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data/test/attendance_587.json',
+            )
+        with open(test_data_path) as f:
+            raw_data = json.load(f)
+
+        raw_stats = SAPersonDetail().get_attendance_stats_raw(raw_data['results'])
+
+        expected = {2014: {u'A': 1, u'P': 14}, 2015: {u'A': 1, u'P': 25, u'AP': 2}}
+
+        self.assertEqual(raw_stats, expected)
+
 
 @attr(country='south_africa')
 class SAPersonProfileSubPageTest(TransactionWebTest):
@@ -506,6 +626,24 @@ class SAPersonProfileSubPageTest(TransactionWebTest):
             start_date='2010-04-01',
             end_date='2014-04-01',
         )
+
+        # Make some identifiers for these people so we avoid
+        # looking them up with PMG, and put blank attendance data
+        # in the cache to stop us fetching from the live PMG API.
+        pmg_api_cache = get_cache('pmg_api')
+
+        for person in (self.deceased, self.former_mp):
+            models.Identifier.objects.create(
+                scheme='za.org.pmg.api/member',
+                identifier=person.slug,
+                content_object=person,
+                )
+
+            pmg_api_cache.set(
+                "http://api.pmg.org.za/member/{}/attendance/".format(person.slug),
+                [],
+                )
+
 
     def get_person_summary(self, soup):
         return soup.find('div', class_='person-summary')
@@ -1714,3 +1852,78 @@ class SACommentsArchiveTest(TransactionWebTest):
         path = '/blog/infographic-decline-sa-tourism-2015'
         context = self.app.get(path).context
         self.assertFalse('archive_link' in context)
+
+
+@attr(country='south_africa')
+class SAUrlRoutingTest(TestCase):
+    """Check South Africa doesn't override URLs with slug versions."""
+
+    def test_person_all(self):
+        match = resolve('/person/all/')
+        self.assertEqual(match.url_name, 'person_list')
+
+    def test_person_politicians(self):
+        match = resolve('/person/politicians/')
+        self.assertEqual(match.url_name, 'django.views.generic.base.RedirectView')
+        self.assertEqual(
+            match.func.func_closure[1].cell_contents,
+            {'url': '/position/mp', 'permanent': True},
+            )
+
+    def test_organisation_all(self):
+        match = resolve('/organisation/all/')
+        self.assertEqual(match.url_name, 'organisation_list')
+
+    def test_place_all(self):
+        match = resolve('/place/all/')
+        self.assertEqual(match.url_name, 'place_kind_all')
+
+    def test_za_organisation_people(self):
+        match = resolve('/organisation/foo/people/')
+        self.assertEqual(match.func.func_name, 'SAOrganisationDetailSubPeople')
+
+    def test_za_organisation(self):
+        match = resolve('/organisation/foo/')
+        self.assertEqual(match.func.func_name, 'SAOrganisationDetailView')
+
+    def test_za_organisation_party(self):
+        match = resolve('/organisation/foo/party/bar/')
+        self.assertEqual(match.func.func_name, 'SAOrganisationDetailSubParty')
+
+    def test_za_person(self):
+        match = resolve('/person/foo/')
+        self.assertEqual(match.func.func_name, 'SAPersonDetail')
+
+    def test_za_person_appearances(self):
+        match = resolve('/person/foo/appearances/')
+        self.assertEqual(match.url_name, 'sa-person-appearances')
+        self.assertEqual(match.func.func_name, 'RedirectView')
+
+        self.assertEqual(
+            match.func.func_closure[1].cell_contents,
+            {'pattern_name': 'person', 'permanent': False},
+            )
+
+    def test_za_person_appearance(self):
+        match = resolve('/person/foo/appearances/bar')
+        self.assertEqual(match.func.func_name, 'SAPersonAppearanceView')
+
+    def test_za_place(self):
+        match = resolve('/place/foo/')
+        self.assertEqual(match.func.func_name, 'SAPlaceDetailView')
+
+    def test_za_place_places(self):
+        match = resolve('/place/foo/places/')
+        self.assertEqual(match.func.func_name, 'SAPlaceDetailSub')
+
+    def test_za_latlon_national(self):
+        match = resolve('/place/latlon/1.2,3.4/national/')
+        self.assertEqual(match.func.func_name, 'LatLonDetailNationalView')
+
+    def test_za_latlon(self):
+        match = resolve('/place/latlon/1.2,3.4/')
+        self.assertEqual(match.func.func_name, 'LatLonDetailLocalView')
+
+    def test_za_home(self):
+        match = resolve('/')
+        self.assertEqual(match.func.func_name, 'SAHomeView')

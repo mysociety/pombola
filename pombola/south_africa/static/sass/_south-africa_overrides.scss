@@ -1902,7 +1902,40 @@ ul.pager {
 .positions {
     @include unstyled-list;
     margin-bottom: 1.5em;
+}
 
+h3.attendance__heading {
+    margin-top: 2em;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+p.attendance__percentage {
+    font-size: 1.2em;
+    color: $colour_green;
+    font-family: $font_family_lato;
+    margin-bottom: 0.3em;
+}
+
+.attendance__context {
+    color: $colour_grey;
+}
+
+.attendance__recently-attended {
+    li {
+        margin-bottom: 1em;
+    }
+
+    a {
+        display: block;
+        text-decoration: none;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
+    }
 }
 
 /* Hansard index page */

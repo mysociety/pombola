@@ -55,6 +55,9 @@
         {% if object.interests_register_entries.exists %}
           <li><a href="#membersinterests">Register of Interests</a></li>
         {% endif %}
+        {% if attendance %}
+          <li><a href="#attendance">Attendance</a></li>
+        {% endif %}
       </ul>
 
       {% if hansard.count or question.count or committee.count %}
@@ -155,8 +158,41 @@
           </div> <!-- .person-interests -->
         </div> <!-- .membersinterests -->
       {% endif %}
+
+      {% if attendance %}
+        <div id="attendance" class="tab-content">
+          <div class="fifty-fifty-layout">
+
+            <div class="column">
+              {% for data in attendance %}
+                <h3 class="attendance__heading">{{ data.year }} attendance</h3>
+                <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
+                <p class="attendance__context">Attended {{ data.attended }} meetings out of {{ data.total }}</p>
+              {% endfor %}
+            </div>
+
+            {% if latest_meetings_attended %}
+              <div class="column">
+                <h3>Recent meetings attended</h3>
+                <ul class="unstyled attendance__recently-attended">
+                  {% for meeting in latest_meetings_attended %}
+                    <li><a href="{{ meeting.url }}"><span class="committee-name">{{ meeting.committee_name }}</span> &mdash; <span class="committee-meeting-title">{{ meeting.title }}</span></a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+            </div>
+          </div> <!-- .attendance -->
+        {% endif %}
+
     </div> <!-- tabs -->
-  {% endwith %}
+    {% endwith %}
+
+    {% comment %}
+       .large-container and .page-wrapper are left open since
+       they're closed in the enclosing template.
+    {% endcomment %}
 {% endblock %}
 
 {% block profile_info %}

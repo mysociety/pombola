@@ -1,3 +1,5 @@
+import copy
+
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import RedirectView, TemplateView
 
@@ -11,59 +13,115 @@ from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView,
     SAGeocoderView)
 from speeches.views import SectionView, SpeechView, SectionList
-from pombola.core.urls import organisation_patterns, person_patterns
+from pombola.core.urls import (
+    organisation_patterns,
+    organisation_patterns_path,
+    person_patterns,
+    person_patterns_path,
+    place_patterns,
+    place_patterns_path,
+    )
 from pombola.search.urls import urlpatterns as search_urlpatterns
-from pombola.core.views import PlaceKindList
 
-# Override the organisation url so we can vary it depending on the organisation type.
+organisation_patterns = copy.copy(organisation_patterns)
+
+new_organisation_people_url = url(
+    r'^(?P<slug>[-\w]+)/people/',
+    SAOrganisationDetailSubPeople.as_view(sub_page='people'),
+    name='organisation_people',
+    )
+new_organisation_url = url(
+    r'^(?P<slug>[-\w]+)/$',
+    SAOrganisationDetailView.as_view(),
+    name='organisation',
+    )
+
 for index, pattern in enumerate(organisation_patterns):
     if pattern.name == 'organisation_people':
-        organisation_patterns[index] = url(
-            r'^(?P<slug>[-\w]+)/people/',
-            SAOrganisationDetailSubPeople.as_view(sub_page='people'),
-            name='organisation_people',
-            )
-    if pattern.name == 'organisation':
-        organisation_patterns[index] = url(
-            r'^(?P<slug>[-\w]+)/$', SAOrganisationDetailView.as_view(), name='organisation')
+        organisation_patterns[index] = new_organisation_people_url
+    elif pattern.name == 'organisation':
+        organisation_patterns[index] = new_organisation_url
 
-#add organisation party sub-page
-organisation_patterns += patterns(
-    'pombola.south_africa.views',
-    url(
-        '^(?P<slug>[-\w]+)/party/(?P<sub_page_identifier>[-\w]+)/$',
+
+# add organisation party sub-page
+organisation_patterns.append(
+    url(r'^(?P<slug>[-\w]+)/party/(?P<sub_page_identifier>[-\w]+)/$',
         SAOrganisationDetailSubParty.as_view(),
         name='organisation_party',
+        )
     )
-)
 
-# Override the person url so we can add some extra data
+
+person_patterns = copy.copy(person_patterns)
+
+new_person_url = url(
+    r'^(?P<slug>[-\w]+)/$',
+    SAPersonDetail.as_view(),
+    name='person',
+    )
+
+new_person_appearances_url = url(
+    r'(?P<slug>[-\w]+)/appearances/$',
+    RedirectView.as_view(pattern_name='person', permanent=False),
+    name='sa-person-appearances')
+
 for index, pattern in enumerate(person_patterns):
     if pattern.name == 'person':
-        person_patterns[index] = url(r'^(?P<slug>[-\w]+)/$', SAPersonDetail.as_view(), name='person')
-
-# Override the home view:
-urlpatterns = patterns('',
-    url(r'^$', SAHomeView.as_view(), name='home'),
-)
+        person_patterns[index] = new_person_url
+    elif pattern.name == 'person_appearances':
+        person_patterns[index] = new_person_appearances_url
 
 # Catch /person/{person_slug}/appearances/{speech_tag} urls and serve the
 # appropriate content.
-urlpatterns += patterns('',
-
+person_patterns.append((
     # FIXME - implement a redirect to /persons/joe-bloggs#appearances when #930
     # done
     # url(r'^person/(?P<person_slug>[-\w]+)/appearances/$', ........ ),
-    url(r'^person/(?P<slug>[-\w]+)/appearances/$',
-        RedirectView.as_view(pattern_name='person', permanent=False),
-        name='sa-person-appearances'),
-
-    url(
-        r'^person/(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
+    url(r'(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
         SAPersonAppearanceView.as_view(),
-        name='sa-person-appearance'
-    ),
-)
+        name='sa-person-appearance')
+    ))
+
+place_patterns = copy.copy(place_patterns)
+
+new_place_url = url(
+    r'^(?P<slug>[-\w]+)/$',
+    SAPlaceDetailView.as_view(),
+    name='place',
+    )
+
+new_subplace_url = url(
+    r'^(?P<slug>[-\w]+)/places/',
+    SAPlaceDetailSub.as_view(sub_page='places'),
+    name='place_places',
+    )
+
+for index, pattern in enumerate(place_patterns):
+    if pattern.name == 'place':
+        place_patterns[index] = new_place_url
+    elif pattern.name == 'place_places':
+        place_patterns[index] = new_subplace_url
+
+place_patterns.extend((
+    url(r'^latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/national/$',
+        LatLonDetailNationalView.as_view(),
+        name='latlon-national'),
+    url(r'^latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/$',
+        LatLonDetailLocalView.as_view(),
+        name='latlon'),
+    ))
+
+urlpatterns = patterns(
+    '',
+
+    # Include the overriden person, organisation paths
+    (person_patterns_path, include(person_patterns)),
+    (place_patterns_path, include(place_patterns)),
+    (organisation_patterns_path, include(organisation_patterns)),
+
+    # Override the home view:
+    url(r'^$', SAHomeView.as_view(), name='home'),
+    )
 
 # This is for the Code4SA ward councillor widget lookup:
 urlpatterns += patterns('',
@@ -145,23 +203,10 @@ for index, pattern in enumerate(search_urlpatterns):
         search_urlpatterns[index] = url(r'^$', SASearchView.as_view(), name='core_search')
 
 urlpatterns += patterns('pombola.south_africa.views',
-    url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/national/$', LatLonDetailNationalView.as_view(), name='latlon-national'),
-    url(r'^place/latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/$', LatLonDetailLocalView.as_view(), name='latlon'),
-
     # We want to override the location search view, so that we can
     # redirect straight to the results page if there's a unique result
     # returned.
     url(r'^search/location/$', SAGeocoderView.as_view(), name='core_geocoder_search'),
-
-    # because the following slug matches override this definition in the core
-    # place_patterns, we reinstate it here
-    url( r'^place/all/', PlaceKindList.as_view(), name='place_kind_all' ),
-
-    url(r'^place/(?P<slug>[-\w]+)/$', SAPlaceDetailView.as_view(), name='place'),
-
-    url(r'^place/(?P<slug>[-\w]+)/places/',
-        SAPlaceDetailSub.as_view(sub_page='places'),
-        name='place_places'),
 
     # Catch the newsletter info page to change the template used so that the signup form is injected.
     # NOTE - you still need to create an InfoPage with the slug 'newsletter' for this not to 404.
