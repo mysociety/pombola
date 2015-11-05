@@ -3,7 +3,7 @@ import sys
 
 from django.core.management.base import BaseCommand, CommandError
 
-from pombola.core.models import Organisation, OrganisationRelationship
+from pombola.core.models import Organisation, OrganisationRelationship, Contact
 
 MAPS_URL_TEMPLATE = 'https://www.google.com/maps/place/{lat}+{lon}/@{lat},{lon},17z'
 
@@ -23,6 +23,8 @@ class Command(BaseCommand):
             'ClosedDate',
             'MapURL',
             'PhysicalAddress',
+            'Voice',
+            'Cell',
             'Latitude',
             'Longitude',
             'PartyName',
@@ -81,4 +83,15 @@ class Command(BaseCommand):
                 ))
             if address_count:
                 row['PhysicalAddress'] = addresses[0].value
+
+            try:
+                row['Cell'] = o.contacts.get(kind__slug='cell').value
+            except Contact.DoesNotExist:
+                row['Cell'] = ''
+
+            try:
+                row['Voice'] = o.contacts.get(kind__slug='voice').value
+            except Contact.DoesNotExist:
+                row['Voice'] = ''
+
             writer.writerow(encode_row_values_to_utf8(row))
