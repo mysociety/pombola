@@ -4,6 +4,7 @@ from collections import defaultdict
 import datetime
 import dateutil
 import json
+import logging
 import re
 import urllib
 from urlparse import urlsplit
@@ -51,6 +52,10 @@ from pombola.south_africa.models import ZAPlace
 from pombola.interests_register.models import Release, Category, Entry, EntryLineItem
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+
+
+logger = logging.getLogger('django.request')
+
 
 # In the short term, until we have a list of constituency offices and
 # addresses from DA, let's bundle these together.
@@ -602,7 +607,9 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
                 return None
 
             if search_data['count'] > 1:
-                raise Exception('Duplicate members at PMG with slug {}'.format(self.object.slug))
+                logger.error(
+                    'Duplicate members at PMG with slug {} - SKIPPING'.format(self.object.slug))
+                return None
 
             identifier = search_data['results'][0]['id']
 
