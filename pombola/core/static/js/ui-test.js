@@ -4,6 +4,7 @@ jQuery(function($) {
     changeMonth: true,
     changeYear: true,
     dateFormat: "yy-mm-dd",
+    maxDate: 0,
     beforeShow: function(){
       $('.ui-test-datepicker-show').attr('disabled', true);
       $('.ui-test-datepicker-hide').attr('disabled', false);

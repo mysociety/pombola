@@ -1,39 +1,14 @@
-// Component containers
+// Careful, this file has been edited by hand!
+// If you replace it with a fresh copy from the
+// jquery-ui website, you'll lose the changes.
 
-.ui-widget {
-  // font-family: Arial,Helvetica,sans-serif;
-  font-size: 1em;
-
-  .ui-widget {
-    font-size: 1em;
-  }
-
-  input, select, textarea, button {
-    // font-family: Arial,Helvetica,sans-serif;
-    font-size: 1em;
-  }
-}
-
-.ui-widget-content {
-  border: 1px solid #dddddd;
-  background: #ffffff;
-  color: #333333;
-
-  a {
-    color: #333333;
-  }
-}
-
-.ui-widget-header {
-  border: 1px solid #dddddd;
-  background: #e9e9e9;
-  color: #333333;
-  font-weight: bold;
-
-  a {
-    color: #333333;
-  }
-}
+$jquery_ui_datepicker_day_active: $colour_primary !default;
+$jquery_ui_datepicker_day_highlighted: #f1f0ec !default;
+$jquery_ui_datepicker_day_hover: #f1f0ec !default;
+$jquery_ui_tabs_border: #ccc !default;
+$jquery_ui_tabs_background_active: #fff !default;
+$jquery_ui_tabs_background_deselected: #eee !default;
+$jquery_ui_tabs_background_hover: #f3f3f3 !default;
 
 // Interaction states
 
@@ -897,16 +872,162 @@
 // Overlays
 
 .ui-widget-overlay {
-  background: #aaaaaa;
+  background: #000;
   opacity: .3;
   filter: Alpha(Opacity = 30); // support: IE8
 }
 
 .ui-widget-shadow {
-  margin: 0px 0 0 0px;
+  margin: 0;
   padding: 5px;
-  background: #666666;
+  background: #000;
   opacity: .3;
   filter: Alpha(Opacity = 30); // support: IE8
   border-radius: 8px;
+}
+
+// Custom pombola styling
+
+.ui-dialog,
+.ui-autocomplete,
+.ui-datepicker {
+  border: 1px solid #ddd;
+  box-shadow: 0 0.5em 1em rgba(0,0,0,0.2);
+  background: #fff;
+  border-radius: 0 !important; // override .ui-corner-all
+}
+
+.ui-dialog {
+  padding: 0;
+
+  .ui-dialog-titlebar {
+    padding: 1em;
+  }
+
+  .ui-dialog-title {
+    margin: 0;
+    line-height: 1.4em; // avoid text clipping
+  }
+
+  .ui-dialog-titlebar-close {
+    right: 1em;
+
+    .ui-button-text {
+      line-height: 0.1em; // stop text poking out of button (especially noticeable on :focus)
+    }
+  }
+
+  .ui-dialog-content {
+    padding: 1em;
+
+    & > :first-child {
+      margin-top: 0;
+    }
+
+    & > :last-child {
+      margin-bottom: 0; // especially useful for avoid extra space below last paragraph
+    }
+  }
+
+  .ui-dialog-titlebar + .ui-dialog-content {
+    padding-top: 0; // avoid double padding
+  }
+}
+
+.ui-tabs {
+  padding: 0;
+
+  .ui-tabs-nav {
+    padding: 0;
+    margin-bottom: 1em;
+    border-bottom: 1px solid $jquery_ui_tabs_border;
+
+    li {
+      border: 1px solid $jquery_ui_tabs_border; // override .ui-state-default etc
+      background-color: $jquery_ui_tabs_background_deselected;
+      border-bottom: none;
+      color: inherit;
+
+      a {
+        color: inherit;
+      }
+    }
+
+    .ui-state-hover {
+      background-color: $jquery_ui_tabs_background_hover;
+    }
+
+    li.ui-tabs-active {
+      background-color: $jquery_ui_tabs_background_active;
+    }
+  }
+
+  .ui-tabs-panel {
+    padding: 0;
+  }
+}
+
+.ui-datepicker {
+  tr, tr:hover {
+    background: transparent !important; // make sure zebra-striping/hover effects aren't inherited
+  }
+}
+
+.ui-datepicker-calendar {
+  line-height: 1.4em;
+
+  td a {
+    color: $colour_primary;
+    text-decoration: none;
+
+    &.ui-state-highlight,
+    &.ui-state-default {
+      color: $colour_primary;
+    }
+
+    &.ui-state-active {
+      color: #fff;
+    }
+  }
+
+  .ui-state-default {
+    background: transparent;
+    border: none;
+    text-align: center;
+    border-radius: 0.3em;
+  }
+
+  .ui-state-hover {
+    background-color: $jquery_ui_datepicker_day_hover;
+  }
+
+  .ui-state-highlight {
+    background-color: $jquery_ui_datepicker_day_highlighted;
+    color: inherit;
+    border: none;
+  }
+
+  .ui-state-active {
+    background-color: $jquery_ui_datepicker_day_active;
+    color: #fff;
+  }
+}
+
+.ui-autocomplete {
+  padding: 0.3em 0;
+
+  .ui-menu-item {
+    padding: 0.5em 1em;
+    line-height: 1em;
+
+    img {
+      vertical-align: text-top;
+      margin-right: 0.2em;
+    }
+  }
+
+  .ui-state-focus {
+    border: none;
+    margin: 0;
+  }
 }
