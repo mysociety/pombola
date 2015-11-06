@@ -452,12 +452,6 @@ def make_enabled_features(installed_apps, all_optional_apps):
 # Set up the core CSS and JS files:
 
 PIPELINE_CSS = {
-    'core': {
-        'source_filenames': (
-            'sass/jquery-ui.scss',
-        ),
-        'output_filename': 'css/core.css',
-    },
     'countdown': {
         'source_filenames': (
             'css/jquery.countdown-v1.6.0.css',

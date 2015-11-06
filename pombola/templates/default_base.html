@@ -23,9 +23,6 @@
         {% block extra_head_meta %}
         {% endblock%}
 
-        {% load compressed %}
-        {% compressed_css 'core' %}
-
         {% block css_headers %}
             <!-- Create a 'css_headers' block in your base.html and use it to include the correct CSS for you country -->
         {% endblock %}
@@ -80,6 +77,7 @@
             <script type="text/javascript" src="{% static 'js/libs/respond.1.0.1.min.js' %}"></script>
         <![endif]-->
 
+        {% load compressed %}
 
         <script type="text/javascript" charset="utf-8">
 
