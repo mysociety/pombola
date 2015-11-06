@@ -1,21 +1,24 @@
 #!/usr/bin/env python
 
-import sys
 import csv
-import os
 import re
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
-
-# Horrible boilerplate - there must be a better way :)
-sys.path.append(
-    os.path.abspath(
-        os.path.dirname(__file__) + '../../../../..'
-    )
-)
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.management.base import BaseCommand, CommandError
 
 from mapit import models
-from django.core.exceptions import ObjectDoesNotExist
+
+
+class Command(BaseCommand):
+
+    help = "Add polling unit codes from a CSV file to MapIt areas"
+
+    def handle(self, *args, **options):
+        if len(args) != 1:
+            raise CommandError("You must supply a CSV file as an argument")
+        importer = PollUnitImporter()
+        importer.process(args[0])
+
 
 class PollUnitImporter(object):
 
@@ -35,7 +38,6 @@ class PollUnitImporter(object):
         for row in self.get_rows(filename):
             self.process_row(row)
 
-
     def get_rows(self, filename):
         fh = open(filename, 'r')
         rows = csv.DictReader(fh)
@@ -51,7 +53,6 @@ class PollUnitImporter(object):
         else:
             return all[0]
 
-
     def process_row(self, row):
 
         # print row
@@ -59,7 +60,6 @@ class PollUnitImporter(object):
         state = self.process_state_for_row(row)
         lga   = self.process_lga_for_row(row, state=state)
         ward  = self.process_ward_for_row(row, lga=lga)
-
 
     def process_state_for_row(self, row):
         name = row['STATE NAME']
@@ -82,7 +82,6 @@ class PollUnitImporter(object):
         self.cached_states[code] = state
         return self.cached_states[code]
 
-
     def process_lga_for_row(self, row, state):
         name = row['LGA NAME']
         code = self.tidy_up_code(row['LGA CODE'], state)
@@ -103,7 +102,6 @@ class PollUnitImporter(object):
 
         self.cached_lgas[code] = lga
         return self.cached_lgas[code]
-
 
     def process_ward_for_row(self, row, lga):
         name = row['WARD NAME']
@@ -141,7 +139,6 @@ class PollUnitImporter(object):
         self.cached_wards[code] = ward
         return self.cached_wards[code]
 
-
     def tidy_up_code(self, code, parent=None):
         # strip leading zeros
         code = re.sub(r'^0+', '', code).upper()
@@ -152,7 +149,6 @@ class PollUnitImporter(object):
             code = parent_code + ':' + code
 
         return code
-
 
     @property
     def poll_unit_code_type(self):
@@ -166,7 +162,6 @@ class PollUnitImporter(object):
 
         return self.cached_poll_unit_code_type
 
-
     @property
     def poll_unit_name_type(self):
         if not self.cached_poll_name_code_type:
@@ -179,7 +174,6 @@ class PollUnitImporter(object):
 
         return self.cached_poll_name_code_type
 
-
     @property
     def nigeria(self):
         if not self.cached_nigeria:
@@ -188,7 +182,6 @@ class PollUnitImporter(object):
             )
 
         return self.cached_nigeria
-
 
     @property
     def ward_type(self):
@@ -202,8 +195,6 @@ class PollUnitImporter(object):
 
         return self.cached_ward_type
 
-
-
     @property
     def current_generation(self):
         if not self.cached_current_generation:
@@ -212,11 +203,3 @@ class PollUnitImporter(object):
             )
 
         return self.cached_current_generation
-
-
-
-
-for filename in sys.argv[1:]:
-    importer = PollUnitImporter()
-    importer.process(filename)
-
