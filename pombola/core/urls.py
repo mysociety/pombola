@@ -150,3 +150,7 @@ urlpatterns += patterns('pombola.core.views',
     url(r'robots.txt', 'robots' ),
 )
 
+# A URL for testing jQuery UI components:
+urlpatterns += patterns('pombola.core.views',
+    url(r'^ui-test', TemplateView.as_view(template_name='ui-test.html')),
+)

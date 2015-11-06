@@ -547,6 +547,13 @@ DYNAMICALLY_LOADED_PIPELINE_JS = {
         'output_filename': 'js/map.js',
         'template_name': 'pipeline/js-array.html',
     },
+    'ui-test': {
+        'source_filenames': (
+            'js/ui-test.js',
+        ),
+        'output_filename': 'js/ui-test.js',
+        'template_name': 'pipeline/js-array.html',
+    },
 }
 
 PIPELINE_JS = {

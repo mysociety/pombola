@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load compressed %}
+
+{% block title %}Test jQuery UI Elements{% endblock %}
+
+{% block extra_js_to_load %}
+  addExtraJS([ {% compressed_js 'ui-test' %} null ]);
+{% endblock %}
+
+{% block content %}
+
+<h1>Test jQuery UI Elements</h1>
+
+<div style="float: left; width: 50%;">
+
+  <h2>Autocomplete</h2>
+  <p>
+    <button class="ui-test-autocomplete-show">show autocomplete</button>
+    <button class="ui-test-autocomplete-hide" disabled="disabled">hide autocomplete</button>
+  </p>
+  <p>
+    <input class="ui-test-autocomplete" type="text" placeholder="Alice, Bob, Carol…">
+  </p>
+
+  <h2>Datepicker</h2>
+  <p>
+    <button class="ui-test-datepicker-show">show datepicker</button>
+    <button class="ui-test-datepicker-hide" disabled="disabled">hide datepicker</button>
+  </p>
+  <p>
+    <input type="text" name="start" value="" placeholder="YYYY-MM-DD" class="ui-test-datepicker">
+  </p>
+
+</div>
+
+<div style="float: right; width: 50%;">
+
+  <h2>Dialog</h2>
+  <p>
+    <button class="ui-test-dialog-show">show dialog</button>
+    <button class="ui-test-dialog-hide" disabled="disabled">hide dialog</button>
+    <label style="margin-left: 1em"><input class="ui-test-dialog-modal" type="checkbox"> Modal</label>
+  </p>
+  <div class="ui-test-dialog-wrapper" style="margin-bottom: 1em;">
+    <div class="ui-test-dialog" title="Basic dialog">
+      <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+    </div>
+  </div>
+
+</div>
+
+<h2 style="clear: both;">Tabs</h2>
+
+<div class="ui-test-tabs">
+  <ul>
+    <li><a href="#appearances" class="active">Appearances</a></li>
+    <li><a href="#experience">Positions held</a></li>
+    <li><a href="#membersinterests">Register of Interests</a></li>
+  </ul>
+  <div id="appearances">
+    Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Integer et lectus ligula. Nam euismod ante a risus
+    malesuada iaculis. Sed at metus id nisl fringilla fringilla
+    eu eu nisl. Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Vivamus scelerisque eleifend
+    laoreet. Maecenas tempor est leo, hendrerit aliquam erat
+    posuere a. Maecenas suscipit suscipit lacus vitae
+    bibendum. In vitae ex a ex aliquam tristique a ut erat. Ut
+    eu malesuada elit. Vivamus condimentum, leo nec aliquet
+    convallis, justo velit pulvinar risus, vitae facilisis erat
+    lorem sed lectus. Morbi molestie id dolor in interdum.
+  </div>
+  <div id="experience">
+    Nullam tristique accumsan pretium. Fusce luctus aliquam
+    neque, id sollicitudin sem eleifend nec. Suspendisse aliquam
+    elementum lorem, eget tempus lorem volutpat ut. Phasellus
+    suscipit est a lectus tincidunt, faucibus pretium velit
+    vehicula. Nulla et elit in eros cursus ornare. Nam ultricies
+    nunc vitae placerat rhoncus. Sed quis justo ligula.
+  </div>
+  <div id="membersinterests">
+    Quisque non tempor nulla. Sed commodo lectus justo, vitae
+    placerat magna accumsan vel. Vestibulum ante ipsum primis in
+    faucibus orci luctus et ultrices posuere cubilia Curae;
+    Vivamus nisl mi, pharetra eu tortor ornare, finibus varius
+    mauris. Pellentesque habitant morbi tristique senectus et
+    netus et malesuada fames ac turpis egestas. Vestibulum non
+    aliquam purus. Quisque faucibus orci velit, in molestie
+    purus viverra sit amet.
+  </div>
+</div>
+
+{% endblock %}
