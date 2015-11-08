@@ -299,6 +299,7 @@ class Converter(object):
         self.release = {
             "name": "Parliament Register of Members' Interests " + year,
             "date": date,
+            "source_url": source_url,
         }
 
     def extract_entries(self, data):
