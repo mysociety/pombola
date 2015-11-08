@@ -244,6 +244,7 @@ class Converter(object):
         "claudia-ndaba": "ndaba-nonhlanhla",
         "maureen-scheepers": "m-scheepers",
         "nomaindiya-cathleen-mfeketo": "nomaindiya-cathleen-mfeketho",
+        "tshoganetso-mpho-adolphina-gasebonwe": "tshoganetso-mpho-adolphina-gasebonwe-tongwane",
 
         #name changes confirmed in National Assembly membership document
         "buyiswa-blaai": "buyiswa-cornelia-diemu",
