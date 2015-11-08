@@ -10,7 +10,13 @@
 
 {% for row in data %}
   <tr>
-      <td>{{ row.release.date.year }}</td>
+      <td>
+          {% if row.release.source_url %}
+            <a href="{{ row.release.source_url }}" target="_blank" title="View Source Document">{{ row.release.date.year }}</a>
+          {% else %}
+            {{ row.release.date.year }}
+          {% endif %}
+      </td>
       <td><a href="{{ row.person.get_absolute_url }}">{{ row.person.name }} ({{ row.person.parties.0.slug|upper }})</a></td>
       <td>{{ row.category }}</td>
       <td>{{ row.c }}</td>

@@ -1586,6 +1586,15 @@ class SAMembersInterestsIndex(TemplateView):
                 'category__id'
             )
 
+            sources = models.InformationSource.objects.filter(
+                content_type=release_content_type,
+                object_id=entry_person.release.id
+            )
+            if sources:
+                source_url = sources[0].source
+            else:
+                source_url = ''
+
             for cat in person_categories:
                 entries = person.interests_register_entries.filter(
                     category=cat.category,
@@ -1614,7 +1623,8 @@ class SAMembersInterestsIndex(TemplateView):
             data.append({
                 'person': person,
                 'data': person_data,
-                'year': year})
+                'year': year,
+                'source_url': source_url})
 
         context['data'] = data
 
@@ -1666,8 +1676,19 @@ class SAMembersInterestsIndex(TemplateView):
         headers_index = {'Year': 0, 'Person': 1, 'Type': 2}
         data = []
         for entry in entries_paginated:
+            sources = models.InformationSource.objects.filter(
+                content_type=release_content_type,
+                object_id=entry.release.id
+            )
+            if sources:
+                source_url = sources[0].source
+            else:
+                source_url = ''
+
+            entry.release.source_url = source_url
+
             row = ['']*len(headers)
-            row[0] = entry.release.date.year
+            row[0] = entry.release
             row[1] = entry.person
             row[2] = entry.category.name
 
@@ -1733,6 +1754,18 @@ class SAMembersInterestsIndex(TemplateView):
             data_paginated = paginator.page(1)
         except EmptyPage:
             data_paginated = paginator.page(paginator.num_pages)
+
+        for row in data_paginated:
+            sources = models.InformationSource.objects.filter(
+                content_type=release_content_type,
+                object_id=row.release.id
+            )
+            if sources:
+                source_url = sources[0].source
+            else:
+                source_url = ''
+
+            row.release.source_url = source_url
 
         context['data'] = data_paginated
 
@@ -1800,6 +1833,18 @@ class SAMembersInterestsIndex(TemplateView):
             data_paginated = paginator.page(1)
         except EmptyPage:
             data_paginated = paginator.page(paginator.num_pages)
+
+        for row in data_paginated:
+            sources = models.InformationSource.objects.filter(
+                content_type=release_content_type,
+                object_id=row.release.id
+            )
+            if sources:
+                source_url = sources[0].source
+            else:
+                source_url = ''
+
+            row.release.source_url = source_url
 
         context['data'] = data_paginated
 

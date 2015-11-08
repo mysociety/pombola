@@ -3,7 +3,11 @@
 {% for person in data %}
     <h3>
         <a href="{{ person.person.get_absolute_url }}">{{ person.person.name }}</a>
-         - {{ person.year }}
+         - {% if person.source_url %}
+             <a href="{{ person.source_url }}" target="_blank" title="View Source Document">{{ person.year }}</a>
+           {% else %}
+             {{ person.year }}
+           {% endif %}
     </h3>
 
     {% for category in person.data %}
