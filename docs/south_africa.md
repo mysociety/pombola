@@ -56,6 +56,7 @@ Load in the Members' Interests data (if there are already some entries you shoul
     $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2012_for_import.json
     $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2013_for_import.json
     $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2014_for_import.json
+    $ ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2015_for_import.json
 
 ## Updating parliamentary appearances content (Hansard, Committee Minutes, Questions)
 
@@ -63,7 +64,7 @@ We get content from various locations through scripts which live in the za-hansa
 an optional app, as documented in general.yml-example).
 
 The script `bin/update_za_hansard.bash` should be run from cron (e.g. set in
-`conf/crontab.ugly` for mySociety installs) and can also be run manually.  
+`conf/crontab.ugly` for mySociety installs) and can also be run manually.
 
 However it may be useful to run individual components, to be able to debug
 errors.  The steps run in the `update_za_hansard.bash` are documented here in
@@ -71,7 +72,7 @@ more detail:
 
 ### Hansards
 
-There are three management commands to be run for Hansard content. 
+There are three management commands to be run for Hansard content.
 
     # First, scrape the web-pages of parliament to find new "source" records, and metadata.
     # By default we start from the most recent document, and then scrape backwards in time,
@@ -79,7 +80,7 @@ There are three management commands to be run for Hansard content.
 
     $ python manage.py za_hansard_check_for_new_sources
         --check-all    (e.g. do not stop on seen)
-        --start-offset 
+        --start-offset
         --limit
 
     # Then we run the parser:
@@ -125,8 +126,8 @@ number of steps, which can be run together as:
 
 You can alternatively run those steps separately
 
-        --scrape 
-        --save-json 
+        --scrape
+        --save-json
         --import-to-sayit
 
 Other flags are:
@@ -152,7 +153,7 @@ with a number of steps, which can be run together as:
 
 Or you can run individual steps as follows:
 
-    $ python manage.py za_hansard_q_and_a_scraper 
+    $ python manage.py za_hansard_q_and_a_scraper
         --scrape-questions  # step 1
         --scrape-answers    # step 2
         --process-answers   # step 3
