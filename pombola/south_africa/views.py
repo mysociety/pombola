@@ -59,6 +59,7 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-area', # specific to DA party
 )
 
+release_content_type = ContentType.objects.get_for_model(Release)
 
 class SAHomeView(HomeView):
 
@@ -515,7 +516,16 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             category = entry.category
 
             if release.id not in tabulated:
-                tabulated[release.id] = {'name':release.name, 'categories':{}}
+                sources = models.InformationSource.objects.filter(
+                    content_type=release_content_type,
+                    object_id=release.id
+                )
+
+                tabulated[release.id] = {
+                    'name': release.name,
+                    'categories': {},
+                    'informationsource': sources
+                }
 
             if category.id not in tabulated[release.id]['categories']:
                 tabulated[release.id]['categories'][category.id] = {
