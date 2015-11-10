@@ -10,11 +10,12 @@ from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
     YouthEmploymentView, YouthEmploymentSupportSubmission,
     YouthEmploymentCommentSubmission, ExperimentThanks,
     YouthEmploymentInputSubmission, YouthEmploymentBillView,
-    ShujaazFinalistsView
+    ShujaazFinalists2014View, ShujaazFinalists2015View
 )
 
 urlpatterns = patterns('',
-    url(r'^shujaaz$', ShujaazFinalistsView.as_view(), name='shujaaz-finalists'),
+    url(r'^shujaaz$', ShujaazFinalists2015View.as_view(), name='shujaaz-finalists-2015'),
+    url(r'^shujaaz/2014$', ShujaazFinalists2014View.as_view(), name='shujaaz-finalists-2014'),
     url(r'^shujaaz-voting$', TemplateView.as_view(template_name='shujaaz-voting.html'), name='shujaaz-voting'),
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
     url(r'^register-to-vote$',     TemplateView.as_view(template_name='register-to-vote.html') ),

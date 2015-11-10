@@ -512,7 +512,7 @@ section * {
 }
 
 #leadercontainer {
-   width:47%; 
+   width:47%;
 }
 
 #textcontainer {
@@ -661,7 +661,7 @@ section * {
 }
 /* header */
 /**
- * Header 10 stylesheet  
+ * Header 10 stylesheet
  * */
 .header-10 {
   z-index: 100;
@@ -997,7 +997,7 @@ section * {
 }
 /* content */
 /**
- * Content 7 stylesheet  
+ * Content 7 stylesheet
  * */
 .content-7 {
   position: relative;
@@ -1125,7 +1125,7 @@ section * {
   max-height: 100%;
 }
 /**
- * Content 8 stylesheet  
+ * Content 8 stylesheet
  * */
 .content-8 {
   position: relative;
@@ -1218,7 +1218,7 @@ section * {
   }
 }
 /**
- * Content 11 stylesheet  
+ * Content 11 stylesheet
  * */
 .content-11 {
   position: relative;
@@ -1387,7 +1387,7 @@ section * {
 }
 /* footer */
 /**
- * Footer 3 stylesheet  
+ * Footer 3 stylesheet
  * */
 .footer-3 {
   font-size: 14px;

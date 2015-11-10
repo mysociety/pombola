@@ -1,0 +1,211 @@
+$colour_shujaaz_yellow: #fcffea;
+
+@font-face {
+  font-family: 'Skolar';
+  src: url('../fonts/Skolar_Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Skolar';
+  font-weight: bold;
+  src: url('../fonts/Skolar_Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Skolar';
+  font-style: italic;
+  src: url('../fonts/Skolar_Italic.woff') format('woff');
+}
+
+body.shujaaz {
+  #page {
+    padding: 0;
+
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+  }
+
+  .container {
+    max-width: 1000px;
+    padding: 0 10px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+      padding: 0 20px;
+    }
+  }
+}
+
+.shujaaz__intro {
+  background: $colour_shujaaz_yellow url(../images/peoples-shujaaz-background.jpg) center bottom no-repeat;
+  background-size: 100%; // 100% width
+  padding: 2em 0 4em 0;
+
+  @media (min-width: 640px) and (min-height: 500px) {
+    padding: 3em 0 5em 0;
+  }
+
+  @media (min-width: 640px) and (min-height: 700px) {
+    padding: 4em 0 6em 0;
+  }
+
+  @media (min-width: 640px) and (min-height: 800px) {
+    padding: 4em 0 8em 0;
+  }
+
+  @media (min-width: 640px) and (min-height: 850px) {
+    padding: 4em 0 10em 0;
+  }
+
+  @media (min-width: 640px) and (min-height: 900px) {
+    padding: 4em 0 12em 0;
+  }
+
+  @media (min-width: 640px) and (min-height: 950px) {
+    padding: 4em 0 14em 0;
+  }
+
+  @media (min-width: 640px) and (min-height: 1000px) {
+    padding: 4em 0 16em 0;
+  }
+}
+
+.shujaaz__main,
+.shujaaz__outro {
+  padding: 1em 0;
+
+  @media (min-width: 640px) and (min-height: 500px) {
+    padding: 2em 0;
+  }
+
+  @media (min-width: 640px) and (min-height: 700px) {
+    padding: 3em 0;
+  }
+}
+
+.shujaaz__intro__logo {
+  margin: 0 auto;
+  width: 461px; // width of background image
+  max-width: 100%;
+
+  span {
+    display: block;
+    padding-top: 100% * (50px/461px); // width and height of background image
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    background: transparent url(../images/peoples-shujaaz-logo.png) center center no-repeat;
+    background-size: 100%;
+  }
+}
+
+.shujaaz__intro__text {
+  padding: 1.5em;
+  margin: 2em auto 0 auto;
+  max-width: 42em;
+  border: 4px solid #ecf8ee;
+  background: #fff;
+  border-radius: 0.3em;
+  text-align: center;
+
+  @media (min-width: 640px) {
+    padding: 2em;
+  }
+
+  h4 {
+    font-family: 'Skolar', Georgia, serif;
+    font-weight: bold;
+    font-size: 1.375em; // 22px in 16px parent
+    line-height: 1.5em;
+    margin-bottom: 0.8em;
+  }
+
+  p {
+    font-size: 1em;
+    line-height: 1.5em;
+    margin-bottom: 1.2em;
+  }
+}
+
+.shujaaz__intro__cta {
+  display: inline-block;
+  background: $colour_primary_mid;
+  color: #fff;
+  padding: 0.9em 1.5em 0.7em 1.5em;
+  margin-top: 0.5em;
+  border-radius: 0.3em;
+  font-size: 1.1em;
+  line-height: 1em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  font-weight: bold;
+  font-family: 'Skolar', Georgia, serif;
+
+  background: $colour_primary_mid;
+  background: -moz-linear-gradient(top, #b1d580 0%,  $colour_primary_mid 100%);
+  background: -webkit-linear-gradient(top, #b1d580 0%, $colour_primary_mid 100%);
+  background: linear-gradient(to bottom, #b1d580 0%, $colour_primary_mid 100%);
+
+
+  &:hover, &:focus {
+    text-decoration: none;
+    color: #fff;
+    background: darken($colour_primary_mid, 5%);
+    background: -moz-linear-gradient(top, darken(#b1d580, 5%) 0%,  darken($colour_primary_mid, 5%) 100%);
+    background: -webkit-linear-gradient(top, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
+    background: linear-gradient(to bottom, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
+  }
+}
+
+.shujaaz__main {
+  h2 {
+    color: $colour_primary_mid;
+    font-family: 'Skolar', Georgia, serif;
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 1em;
+  }
+}
+
+.person-gallery--shujaaz {
+  .person-card {
+    background-color: $colour_shujaaz_yellow;
+
+    p {
+      display: none;
+    }
+  }
+
+  ul {
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  li:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.shujaaz__share {
+  font-family: 'Skolar', Georgia, serif;
+  font-weight: normal;
+  font-style: italic;
+  text-align: center;
+  font-size: 1.5em;
+
+  img {
+    vertical-align: middle;
+    margin: 0 0.1em;
+  }
+
+  a {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}

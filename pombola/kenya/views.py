@@ -476,11 +476,11 @@ class ThanksTemplateView(TemplateView):
         return context
 
 
-class ShujaazFinalistsView(TemplateView):
+class ShujaazFinalists2014View(TemplateView):
     template_name = 'shujaaz.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ShujaazFinalistsView, self).get_context_data(**kwargs)
+        context = super(ShujaazFinalists2014View, self).get_context_data(**kwargs)
 
         def populate_person(f):
             finalist = dict(f)
@@ -491,4 +491,19 @@ class ShujaazFinalistsView(TemplateView):
         half = len(finalists) / 2
         context['finalists_column_1'] = finalists[:half]
         context['finalists_column_2'] = finalists[half:]
+        return context
+
+
+class ShujaazFinalists2015View(TemplateView):
+    template_name = 'shujaaz-2015.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShujaazFinalists2015View, self).get_context_data(**kwargs)
+
+        def populate_person(f):
+            finalist = dict(f)
+            finalist['person'] = Person.objects.get(pk=finalist['person'])
+            return finalist
+
+        context['finalists'] = [populate_person(f) for f in shujaaz.FINALISTS]
         return context
