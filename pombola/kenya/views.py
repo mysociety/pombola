@@ -477,7 +477,7 @@ class ThanksTemplateView(TemplateView):
 
 
 class ShujaazFinalists2014View(TemplateView):
-    template_name = 'shujaaz.html'
+    template_name = 'shujaaz-2014.html'
 
     def get_context_data(self, **kwargs):
         context = super(ShujaazFinalists2014View, self).get_context_data(**kwargs)
