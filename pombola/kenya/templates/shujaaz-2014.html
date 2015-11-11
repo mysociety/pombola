@@ -1,92 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load staticfiles %}
+{% extends 'base.html' %}
 {% load compressed %}
-    <head>
-        <meta charset="utf-8">
-        <title>People's Shujaaz Finalists 2014</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load staticfiles %}
+{% load thumbnail %}
 
-        {% compressed_css 'kenya' %}
-        {% compressed_css 'shujaaz' %}
-    </head>
+{% block title %}People’s Shujaaz Finalists 2014{% endblock %}
 
-    <body>
+{% block body_attributes %}class="shujaaz shujaaz--2014"{% endblock %}
 
-<!-- header-10 -->
-        <header class="header-10">
-           {% include 'header.html' %}
-        </header>
-        <section class="header-10-sub v-center bg-midnight-blue">
-            <div class="background">&nbsp;</div>
-            <div>
-                <div class="container" id="leadercontainer">
-                    <img src="{% static 'shujaaz/img/peoples-logo.png' %}" alt="">
-                    <div class="hero-unit" id="textcontainer">
-                        <h4>Celebrating Kenyan Parliamentarians Championing Issues of Great Public Interest</h4>
-                        <p>
-                           The Parliamentarians were selected based on bills moved, contributions to bills, motions raised and statements issued from March 2013 to November 2014. The Awards had 10 categories with 3 nominees each.
-                        </p>
-                        <p>After 10 days of online voting, Kenyans' favourite leaders in every category follow:
-                        </p>
-						<br /><a class="btn btn-large btn-clear colorhack btn-txt scrolltonom" href="#nominees">Scroll to see finalists</a>
-                    </div>
+{% block breadcrumbs %}
+    {# Hide bread crumbs on this page. #}
+{% endblock %}
 
+{% block page %}
+<div id="page">
+
+    <div class="shujaaz__intro">
+        <h1 class="shujaaz__intro__logo"><span>People’s Shujaaz Awards</span></h1>
+        <div class="shujaaz__intro__text">
+            <h4>Celebrating Kenyan Parliamentarians Championing Issues of Great Public Interest</h4>
+            <p>The Parliamentarians were selected based on bills moved, contributions to bills, motions raised and statements issued from March 2013 to November 2014. The Awards had 10 categories with 3 nominees each.</p>
+            <p>After 10 days of online voting, Kenyans' favourite leaders in every category follow:</p>
+            <a class="shujaaz__intro__cta" href="#nominees">Scroll to see finalists</a>
+        </div>
+    </div>
+
+    <div class="shujaaz__main">
+        <div class="container">
+            <h2>2014’s finalists</h2>
+
+            <div class="two-column-person-gallery">
+                <div class="person-gallery person-gallery--shujaaz">
+                  {% for finalist in finalists_column_1 %}
+                    {% thumbnail finalist.person.primary_image "90x90" as im %}
+                      {% include "_person_gallery_item.html" with section="Wanjiku’s Best Representative - "|add:finalist.category|add:" 2014" name=finalist.name url="/person/"|add:finalist.person.slug|add:"/" photo_url=im.url bio=finalist.reasons|safe %}
+                    {% endthumbnail %}
+                  {% endfor %}
+                </div>
+                <div class="person-gallery person-gallery--shujaaz">
+                  {% for finalist in finalists_column_2 %}
+                    {% thumbnail finalist.person.primary_image "90x90" as im %}
+                      {% include "_person_gallery_item.html" with section="Wanjiku’s Best Representative - "|add:finalist.category|add:" 2014" name=finalist.name url="/person/"|add:finalist.person.slug|add:"/" photo_url=im.url bio=finalist.reasons|safe %}
+                    {% endthumbnail %}
+                  {% endfor %}
                 </div>
             </div>
-        </section>
 
-<!-- content-7  -->
-        <section class="content-7 v-center">
-        <div>
-                <div class="container" id="nominees">
-				<h3>Finalists</h3><div class="clearfix"></div>
-                    <div class="row v-center">
-                        <div class="span3">
-                            <div class="span5">
-                              {% for finalist in finalists_column_1 %}
-                                {% include '_shujaaz-finalist.html' with finalist=finalist %}
-                              {% endfor %}
-                            </div>
-                        </div>
+        </div>
+    </div>
 
-                        <div class="span3">
-                            <div class="span5">
-                              {% for finalist in finalists_column_2 %}
-                                {% include '_shujaaz-finalist.html' with finalist=finalist %}
-                              {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-					<div class="row v-center" id="sharetxt">
-						<div class="span10 social-links">
-								<h4><img src="{% static 'shujaaz/img/wave-icon.png' %}"> Share this page on Facebook <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/MzalendoWatch"><img src="{% static 'shujaaz/img/facebook-icon.png' %}"></a> or on Twitter <a href="https://twitter.com/home?status=Post%20this%20your%20own%20awesome%20timeline.%0Ahttps://twitter.com/MzalendoWatch"><img src="{% static 'shujaaz/img/twitter-icon.png' %}"></a> <img src="{% static 'shujaaz/img/wave-icon.png' %}"></h4>
-						</div>
-					</div>
-				</div>
-            </div>
-        </section>
+    <div class="shujaaz__outro">
+        <div class="container">
+            <h4 class="shujaaz__share">
+                <img src="{% static 'images/wave-icon.png' %}">
+                Share this page on Facebook
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/MzalendoWatch">
+                    <img src="{% static 'images/facebook-icon.png' %}">
+                </a>
+                or on Twitter
+                <a href="https://twitter.com/home?status=Post%20this%20your%20own%20awesome%20timeline.%0Ahttps://twitter.com/MzalendoWatch">
+                    <img src="{% static 'images/twitter-icon.png' %}">
+                </a>
+                <img src="{% static 'images/wave-icon.png' %}">
+            </h4>
+        </div>
+    </div>
 
-<!-- footer-3 -->
-        <footer id="site-footer" class="footer-3">
-            <div class="wrapper">
-                {% include "footer.html" %}
-            </div>
-
-            <div class="attribution">
-
-              <p>This site runs on <a href="https://github.com/mysociety/pombola">open source code</a> written by <a href="http://www.mysociety.org">mySociety</a>.</p>
-
-              {% block extra_attribution %}
-              {% endblock %}
-
-            </div>
-        </footer>
-
-        <!--[if lt IE 8]>
-        {% compressed_css 'shujaaz-lt-ie8' %}
-        <![endif]-->
-        {% compressed_js 'shujaaz' %}
-
-    </body>
-</html>
+</div>
+{% endblock %}

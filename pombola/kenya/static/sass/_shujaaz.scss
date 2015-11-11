@@ -167,6 +167,42 @@ body.shujaaz {
   }
 }
 
+// A version of the person-gallery that uses markup to
+// create the two columns, rather than just floating
+// .person-gallery__items at 50% width.
+// Useful when the items have drastically different heights,
+// (which would otherwise result in gappy floats).
+.two-column-person-gallery {
+  @include clearfix();
+
+  .person-gallery__item {
+    float: none;
+  }
+
+  @media (min-width: 480px) {
+    .person-gallery {
+      float: left;
+      width: 50%;
+    }
+
+    .person-gallery + .person-gallery {
+      float: right;
+    }
+
+    .person-gallery__item {
+      width: auto;
+    }
+  }
+
+  @media (min-width: 960px) {
+    margin: 0 -20px;
+
+    .person-gallery {
+      margin: 0;
+    }
+  }
+}
+
 .person-gallery--shujaaz {
   .person-card {
     background-color: $colour_shujaaz_yellow;
