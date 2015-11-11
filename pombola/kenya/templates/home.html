@@ -51,11 +51,14 @@
 
 <div id="home-editorial">
 
-    <div id="home-women">
-        <h2>Special feature</h2>
-        <a href="/women" class="home-women__button">
+    <div id="home-special-features">
+        <h2>Special features</h2>
+        <a href="{% url 'shujaaz-finalists-2015' %}" class="home-special-features__button home-special-features__button--shujaaz">
+            <h2>People’s Shujaaz Awards 2015: Vote now</h2>
+            <img src="{% static 'images/peoples-shujaaz-home-badge.png' %}" width="60" height="75" alt="">
+        </a>
+        <a href="/women" class="home-special-features__button home-special-features__button--women">
             <h2>Debunking Myths on Women MPs</h2>
-            <img src="{% static 'images/women-infographic.png' %}" width="104" height="98" alt="Women Parliamentarians: How are they doing?">
         </a>
     </div>
 
