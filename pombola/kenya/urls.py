@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, RedirectView
 from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
 
 from pombola.experiments.views import ExperimentShare, ExperimentSurvey
@@ -14,7 +14,14 @@ from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
 )
 
 urlpatterns = patterns('',
-    url(r'^shujaaz$', ShujaazFinalists2015View.as_view(), name='shujaaz-finalists-2015'),
+    url(r'^shujaaz$',
+        RedirectView.as_view(
+            pattern_name='shujaaz-finalists-2015',
+            permanent=False
+        ),
+        name='shujaaz-redirect'
+    ),
+    url(r'^shujaaz/2015$', ShujaazFinalists2015View.as_view(), name='shujaaz-finalists-2015'),
     url(r'^shujaaz/2014$', ShujaazFinalists2014View.as_view(), name='shujaaz-finalists-2014'),
     url(r'^shujaaz-voting$', TemplateView.as_view(template_name='shujaaz-voting.html'), name='shujaaz-voting'),
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
