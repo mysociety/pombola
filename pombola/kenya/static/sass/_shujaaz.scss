@@ -245,3 +245,85 @@ body.shujaaz {
     }
   }
 }
+
+
+// This is a bit like person_gallery, except each option is actually
+// a collection of three people (nominees for an awards category).
+.shujaaz-nominees {
+  @media (min-width: 960px) {
+    @include clearfix();
+    margin: 0 -1.5em;
+  }
+}
+
+.shujaaz-nominees__category {
+  margin: 0 0 2em 0;
+
+  @media (min-width: 960px) {
+    width: 50%;
+    float: left;
+    padding: 0 1.5em;
+    margin: 0 0 4em 0;
+  }
+}
+
+.shujaaz-nominees__category__title {
+  border-bottom: 1px solid #eee;
+
+  #page & {
+    padding-bottom: 1.5em;
+  }
+}
+
+.shujaaz-nominees__nominee {
+  margin: 1.5em 0 0 0;
+}
+
+h2.shujaaz-nominees__nominee__name {
+  font-size: 1.7em;
+  line-height: 1.2em;
+  margin-bottom: 0.2em;
+}
+
+.shujaaz-nominees__nominee__show-reasons {
+  color: $colour_primary;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
+}
+
+.shujaaz-nominees__nominee__reasons {
+  display: none;
+  margin-top: 1em;
+  background: $colour_shujaaz_yellow;
+  padding: 1em;
+
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  h4 {
+    margin-bottom: 0.5em;
+    line-height: 1.4em;
+  }
+
+  blockquote {
+    padding-left: 0;
+    font-style: italic;
+    font-family: Georgia, Times, "Times New Roman", serif;
+
+    p:before, p:after {
+      content: none;
+    }
+  }
+}
+
+input[name="reasons-accordions"] {
+  display: none;
+
+  &:checked + .shujaaz-nominees__nominee__reasons {
+    display: block;
+  }
+}

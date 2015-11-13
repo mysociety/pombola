@@ -26,23 +26,25 @@
 
     <div class="shujaaz__main">
         <div class="container">
-            <h2>2015’s finalists</h2>
+            <h2>2015 Nominees</h2>
 
-            <div class="two-column-person-gallery">
-                <div class="person-gallery person-gallery--shujaaz">
-                  {% for finalist in finalists_column_1 %}
-                    {% thumbnail finalist.person.primary_image "90x90" as im %}
-                      {% include "_person_gallery_item.html" with section="Wanjiku’s Best Representative - "|add:finalist.category|add:" 2014" name=finalist.name url="/person/"|add:finalist.person.slug|add:"/" photo_url=im.url bio="<div>This text will explain why this person was chosen as a finalist</div>"|safe %}
-                    {% endthumbnail %}
+            <div class="shujaaz-nominees">
+              {% regroup nominees by category as nominees_by_category %}
+              {% for category in nominees_by_category %}
+                <div class="shujaaz-nominees__category">
+                    <h3 class="shujaaz-nominees__category__title">Wanjiku’s Best Representative - {{ category.grouper }}</h3>
+                  {% for nominee in category.list %}
+                    <div class="shujaaz-nominees__nominee">
+                        <h2 class="shujaaz-nominees__nominee__name"><a href="/person/{{ nominee.person.slug }}/">{{ nominee.name }}</a></h2>
+                        <label class="shujaaz-nominees__nominee__show-reasons" for="{{ category.grouper|slugify }}-{{ nominee.person.slug }}">Show reasons for nomination</label>
+                        <input type="radio" name="reasons-accordions" id="{{ category.grouper|slugify }}-{{ nominee.person.slug }}">
+                        <div class="shujaaz-nominees__nominee__reasons">
+                            {{ nominee.reasons|safe }}
+                        </div>
+                    </div>
                   {% endfor %}
                 </div>
-                <div class="person-gallery person-gallery--shujaaz">
-                  {% for finalist in finalists_column_2 %}
-                    {% thumbnail finalist.person.primary_image "90x90" as im %}
-                      {% include "_person_gallery_item.html" with section="Wanjiku’s Best Representative - "|add:finalist.category|add:" 2014" name=finalist.name url="/person/"|add:finalist.person.slug|add:"/" photo_url=im.url bio="<div>This text will explain why this person was chosen as a finalist</div>"|safe %}
-                    {% endthumbnail %}
-                  {% endfor %}
-                </div>
+              {% endfor %}
             </div>
         </div>
     </div>
