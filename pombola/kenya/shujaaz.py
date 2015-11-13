@@ -110,19 +110,19 @@ FINALISTS2014_DICT = {f['person']: f for f in FINALISTS2014}
 
 NOMINEES2015 = [
     {
-        'category': 'Budgetary Oversight',
+        'category': 'Financial Oversight',
         'name': 'Mutava Musyimi',
         'person': 95,
         'reasons': '''<h4>Report on the 2015 Budget Policy statement:</h4><ol><li>S​et up a budget monitoring division that will be reporting on whether targets and outputs of the previous BPS have been achieved.</li><li>T​reasury should ensure that there is sufficient public participation during the budget making process.</li><li>I​ncrease funding for the office of the auditor general.</li><li>T​here should be implementation of the task-force report on parastatals.</li></ol>'''
     },
     {
-        'category': 'Budgetary Oversight',
+        'category': 'Financial Oversight',
         'name': 'Col. (Rtd) Ali Rasso Dido',
         'person': 2749,
         'reasons': '''<h4>The Excise Duty Bill:</h4><blockquote><p>“Reading it tells me that our tax regime must be people friendly particularly in accessing goods which our people use daily. The citizenry have been taking goods to Uganda or Tanzania and bringing them back to Kenya. In the process, that fights competition and the traders who import their good directly to Kenya get disadvantaged.” <a href="http://info.mzalendo.com/hansard/sitting/national_assembly/2015-08-20-14-30-00#entry-577824">(Read more)</a></p></blockquote>'''
     },
     {
-        'category': 'Budgetary Oversight',
+        'category': 'Financial Oversight',
         'name': 'Benson Makali Mulu',
         'person': 1955,
         'reasons': '''<h4>The Supplementary Appropriations (No. 2) Bill 2015:</h4><blockquote><p>“The Supplementary Estimates have increases in terms of funding, but we have not been told anything in terms of outputs and changing targets. Whereas we are increasing money for infrastructural development, we should be told that increasing the Ministry’s budget by Kshs1 billion, the Ministry’s output will change by a certain percentage. In this case, that has not happened.” <a href="http://info.mzalendo.com/hansard/sitting/national_assembly/2015-06-24-14-30-00#entry-561230">(Read more)</a></p></blockquote>'''
@@ -135,8 +135,8 @@ NOMINEES2015 = [
     },
     {
         'category': 'Institutional Oversight',
-        'name': 'Mose Cheboi',
-        'person': 1,
+        'name': 'Moses Cheboi',
+        'person': 329,
         'reasons': '''<h4>Alleged Breach of Privilege and/or Code of Conduct by the Membership of Public Accounts Committee:</h4><p>Proposed the establishment of the office of the administrator of Parliamentary standards within parliament. The administrator will who will be appointed for a fixed term, with the approval of the Houses of Parliament, to be advising the Houses and their respective Committees of Privileges on matters of breach of privilege, the code of conduct of Members of Parliament and cases of breach of standards, ethics and financial impropriety; and, require Members of Parliament to register their financial interests with the Administrator of Parliamentary Standards who shall be the custodian of the register of standards of Members of Parliament.</p>'''
     },
     {
@@ -311,7 +311,7 @@ NOMINEES2015 = [
     {
         'category': 'Land',
         'name': 'Sen. Mutula Kilonzo Jnr',
-        'person': 13165,
+        'person': 13156,
         'reasons': '''<h4>Historical Land Injustices:</h4><blockquote><p>“T​his Senate urges the National Land Commission to urgently recommend to the Senate a Bill to address historical land injustices to provide a framework to ensure that land is properly utilized for the economic benefit of the affected communities.”</p></blockquote>'''
     },
     {

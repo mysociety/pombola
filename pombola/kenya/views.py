@@ -502,7 +502,6 @@ class ShujaazFinalists2015View(TemplateView):
 
         def populate_person(f):
             finalist = dict(f)
-            print finalist['person']
             finalist['person'] = Person.objects.get(pk=finalist['person'])
             return finalist
 

@@ -20,13 +20,16 @@
             <h4>Celebrating Kenyan Parliamentarians Championing Issues of Great Public Interest</h4>
             <p>This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen. This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen.</p>
             <p>This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen.</p>
-            <a class="shujaaz__intro__cta" href="#nominees">Scroll to see finalists</a>
+            <a class="shujaaz-button" href="#nominees">Scroll to see finalists</a>
         </div>
     </div>
 
     <div class="shujaaz__main">
         <div class="container">
-            <h2>2015 Nominees</h2>
+            <div class="shujaaz__main__header">
+                <h2>2015 Nominees</h2>
+                <a class="shujaaz-button" href="#">Vote for your winners</a>
+            </div>
 
             <div class="shujaaz-nominees">
               {% regroup nominees by category as nominees_by_category %}
@@ -46,6 +49,10 @@
                 </div>
               {% endfor %}
             </div>
+
+            <p style="text-align: center;">
+                <a class="shujaaz-button" href="#">Vote for your winners</a>
+            </p>
         </div>
     </div>
 

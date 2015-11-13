@@ -128,12 +128,11 @@ body.shujaaz {
   }
 }
 
-.shujaaz__intro__cta {
+.shujaaz-button {
   display: inline-block;
   background: $colour_primary_mid;
   color: #fff;
   padding: 0.9em 1.5em 0.7em 1.5em;
-  margin-top: 0.5em;
   border-radius: 0.3em;
   font-size: 1.1em;
   line-height: 1em;
@@ -155,15 +154,38 @@ body.shujaaz {
     background: -webkit-linear-gradient(top, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
     background: linear-gradient(to bottom, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
   }
+
+  .shujaaz__intro & {
+    margin-top: 0.5em;
+  }
 }
 
 .shujaaz__main {
   h2 {
-    color: $colour_primary_mid;
+    color: $colour_primary;
     font-family: 'Skolar', Georgia, serif;
     font-weight: bold;
     font-size: 2em;
-    margin-bottom: 1em;
+    line-height: 1.4em;
+    margin-bottom: 0;
+  }
+}
+
+.shujaaz__main__header {
+  padding: 2em 0;
+
+  @media (min-width: 480px) {
+    @include clearfix();
+    padding: 2em 0 3em 0;
+
+    h2 {
+      float: left;
+    }
+
+    .shujaaz-button {
+      float: right;
+      margin-top: -0.5em;
+    }
   }
 }
 
@@ -280,9 +302,7 @@ body.shujaaz {
 }
 
 h2.shujaaz-nominees__nominee__name {
-  font-size: 1.7em;
-  line-height: 1.2em;
-  margin-bottom: 0.2em;
+  font-size: 1.5em;
 }
 
 .shujaaz-nominees__nominee__show-reasons {
