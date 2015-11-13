@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
-{% block title %}People’s Shujaaz Finalists 2015{% endblock %}
+{% block title %}People’s Shujaaz Awards 2015{% endblock %}
 
 {% block body_attributes %}class="shujaaz shujaaz--2015"{% endblock %}
 
@@ -20,7 +20,8 @@
             <h4>Celebrating Kenyan Parliamentarians Championing Issues of Great Public Interest</h4>
             <p>This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen. This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen.</p>
             <p>This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen.</p>
-            <a class="shujaaz-button" href="#nominees">Scroll to see finalists</a>
+            <a class="shujaaz-button" href="#nominees">See the nominees &amp; place your vote</a>
+            <a class="shujaaz-other-year" href="{% url 'shujaaz-finalists-2014' %}">Or revisit 2014’s finalists</a>
         </div>
     </div>
 
@@ -28,7 +29,7 @@
         <div class="container">
             <div class="shujaaz__main__header">
                 <h2>2015 Nominees</h2>
-                <a class="shujaaz-button" href="#">Vote for your winners</a>
+                <a class="shujaaz-button" href="#">Place your votes</a>
             </div>
 
             <div class="shujaaz-nominees">
@@ -51,7 +52,7 @@
             </div>
 
             <p class="shujaaz__cta-reminder">
-                <a class="shujaaz-button" href="#">Vote for your winners</a>
+                <a class="shujaaz-button" href="#">Place your votes</a>
             </p>
 
             <h4 class="shujaaz__share">
