@@ -161,6 +161,8 @@ body.shujaaz {
 }
 
 .shujaaz__main {
+  padding-bottom: 0;
+
   h2 {
     color: $colour_primary;
     font-family: 'Skolar', Georgia, serif;
@@ -345,5 +347,22 @@ input[name="reasons-accordions"] {
 
   &:checked + .shujaaz-nominees__nominee__reasons {
     display: block;
+  }
+}
+
+.shujaaz__cta-reminder {
+  text-align: center;
+  margin-bottom: 3em;
+}
+
+.shujaaz__logos {
+  text-align: center;
+  margin: 2em 0;
+
+  img {
+    max-width: 100%;
+    width: 10em;
+    height: auto;
+    margin: 0 1em;
   }
 }
