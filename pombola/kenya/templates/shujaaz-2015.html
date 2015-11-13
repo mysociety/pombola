@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
-{% block title %}People’s Shujaaz Finalists 2015{% endblock %}
+{% block title %}People’s Shujaaz Awards 2015{% endblock %}
 
 {% block body_attributes %}class="shujaaz shujaaz--2015"{% endblock %}
 
@@ -17,38 +17,55 @@
     <div class="shujaaz__intro">
         <h1 class="shujaaz__intro__logo"><span>People’s Shujaaz Awards</span></h1>
         <div class="shujaaz__intro__text">
-            <h4>Celebrating Kenyan Parliamentarians Championing Issues of Great Public Interest</h4>
-            <p>This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen. This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen.</p>
-            <p>This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen.</p>
-            <a class="shujaaz__intro__cta" href="#nominees">Scroll to see finalists</a>
+            <h4>Celebrating Parliamentarians that have championed issues of great public interest in the National Assembly or&nbsp;Senate in 2015</h4>
+            <p>Kenyans spend a lot of time bashing politicians and there is a risk that we may dismiss or fail to encourage those who are actually representing their voters and trying to address their needs. People’s Shujaaz is an attempt to fix that.</p>
+            <p>In recognizing the leaders, we focus on their core mandate: legislation, oversight and representation. We have added Committees to this year’s campaign and their chairmen represent them.</p>
+            <p>Public voting opens from 17th November to 9th December 2015 midnight.</p>
+            <a class="shujaaz-button" href="#nominees">Scroll down for nominees &amp; place your&nbsp;vote</a>
+            <a class="shujaaz-other-year" href="{% url 'shujaaz-finalists-2014' %}">Or revisit 2014’s finalists</a>
         </div>
     </div>
 
-    <div class="shujaaz__main">
+    <div class="shujaaz__main" id="nominees">
         <div class="container">
-            <h2>2015’s finalists</h2>
+            <h2>2015 Nominees</h2>
 
-            <div class="two-column-person-gallery">
-                <div class="person-gallery person-gallery--shujaaz">
-                  {% for finalist in finalists_column_1 %}
-                    {% thumbnail finalist.person.primary_image "90x90" as im %}
-                      {% include "_person_gallery_item.html" with section="Wanjiku’s Best Representative - "|add:finalist.category|add:" 2014" name=finalist.name url="/person/"|add:finalist.person.slug|add:"/" photo_url=im.url bio="<div>This text will explain why this person was chosen as a finalist</div>"|safe %}
-                    {% endthumbnail %}
-                  {% endfor %}
+            <div class="shujaaz-context">
+                <div class="shujaaz-context__methodology">
+                    <h3>How nominees were selected</h3>
+                    <p>Mzalendo mined through the Hansard, plus all the Bill, Motions, Statements and Petitions trackers to check the legislators who stood out in the issues captured in 2015. We identified the five leading Parliamentarians in each category. The list was then sent to our <a href="http://www.pin.or.ke/">P​arliamentary Initiatives Network (Kenya)</a> partners who are issue specialists for verification and identification of the top three nominees in each category.</p>
                 </div>
-                <div class="person-gallery person-gallery--shujaaz">
-                  {% for finalist in finalists_column_2 %}
-                    {% thumbnail finalist.person.primary_image "90x90" as im %}
-                      {% include "_person_gallery_item.html" with section="Wanjiku’s Best Representative - "|add:finalist.category|add:" 2014" name=finalist.name url="/person/"|add:finalist.person.slug|add:"/" photo_url=im.url bio="<div>This text will explain why this person was chosen as a finalist</div>"|safe %}
-                    {% endthumbnail %}
-                  {% endfor %}
+                <div class="shujaaz-context__vote">
+                    <h3>Voting is now open</h3>
+                    <div class="shujaaz-vote-box">
+                        <a class="shujaaz-button" href="{% url 'shujaaz-voting' %}">Vote here!</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="shujaaz__outro">
-        <div class="container">
+            <div class="shujaaz-nominees">
+              {% regroup nominees by category as nominees_by_category %}
+              {% for category in nominees_by_category %}
+                <div class="shujaaz-nominees__category">
+                    <h3 class="shujaaz-nominees__category__title">Wanjiku’s Best Representative - {{ category.grouper }}</h3>
+                  {% for nominee in category.list %}
+                    <div class="shujaaz-nominees__nominee">
+                        <h2 class="shujaaz-nominees__nominee__name"><a href="/person/{{ nominee.person.slug }}/">{{ nominee.name }}</a></h2>
+                        <label class="shujaaz-nominees__nominee__show-reasons" for="{{ category.grouper|slugify }}-{{ nominee.person.slug }}">Show reasons for nomination</label>
+                        <input type="radio" name="reasons-accordions" id="{{ category.grouper|slugify }}-{{ nominee.person.slug }}">
+                        <div class="shujaaz-nominees__nominee__reasons">
+                            {{ nominee.reasons|safe }}
+                        </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+            </div>
+
+            <div class="shujaaz-vote-box">
+                Who has been your champion? <a class="shujaaz-button" href="{% url 'shujaaz-voting' %}">Vote here!</a>
+            </div>
+
             <h4 class="shujaaz__share">
                 <img src="{% static 'images/wave-icon.png' %}">
                 Share this page on Facebook
@@ -61,6 +78,17 @@
                 </a>
                 <img src="{% static 'images/wave-icon.png' %}">
             </h4>
+        </div>
+    </div>
+
+    <div class="shujaaz__outro">
+        <div class="container">
+            <div class="shujaaz__logos">
+                <p>Supported by</p>
+                <img src="{% static 'images/indigo-without-title.gif' %}" class="shujaaz__logos__indigo">
+                <p>Partner</p>
+                <a href="http://www.pin.or.ke/"><img src="{% static 'images/pin-logo.jpg' %}" class="shujaaz__logos__pin"></a>
+            </div>
         </div>
     </div>
 

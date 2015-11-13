@@ -129,7 +129,7 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
 
         context['cdf_budget_constituencies'] = cdf_budget_constituencies
 
-        shujaaz_finalist = shujaaz.FINALISTS_DICT.get(self.object.pk)
+        shujaaz_finalist = shujaaz.FINALISTS2014_DICT.get(self.object.pk)
         if shujaaz_finalist:
             context['shujaaz_finalist'] = shujaaz_finalist
 
@@ -487,7 +487,7 @@ class ShujaazFinalists2014View(TemplateView):
             finalist['person'] = Person.objects.get(pk=finalist['person'])
             return finalist
 
-        finalists = [populate_person(f) for f in shujaaz.FINALISTS]
+        finalists = [populate_person(f) for f in shujaaz.FINALISTS2014]
         half = len(finalists) / 2
         context['finalists_column_1'] = finalists[:half]
         context['finalists_column_2'] = finalists[half:]
@@ -505,9 +505,6 @@ class ShujaazFinalists2015View(TemplateView):
             finalist['person'] = Person.objects.get(pk=finalist['person'])
             return finalist
 
+        context['nominees'] = [populate_person(f) for f in shujaaz.NOMINEES2015]
 
-        finalists = [populate_person(f) for f in shujaaz.FINALISTS]
-        half = len(finalists) / 2
-        context['finalists_column_1'] = finalists[:half]
-        context['finalists_column_2'] = finalists[half:]
         return context
