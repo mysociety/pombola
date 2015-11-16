@@ -80,14 +80,14 @@ body.shujaaz {
   }
 
   @media (min-width: 640px) and (min-height: 700px) {
-    padding: 3em 0;
+    padding: 4em 0;
   }
 }
 
 .shujaaz__intro__logo {
   margin: 0 auto;
   width: 461px; // width of background image
-  max-width: 100%;
+  max-width: 90%;
 
   span {
     display: block;
@@ -176,7 +176,7 @@ body.shujaaz {
 }
 
 .shujaaz__main {
-  padding-bottom: 0;
+  padding-bottom: 0; // avoid double padding with .shujaaz__outro
 
   h2 {
     color: $colour_primary;
@@ -188,26 +188,47 @@ body.shujaaz {
   }
 }
 
-.shujaaz__main__header {
-  padding: 2em 0;
+.shujaaz-context {
+  @include clearfix();
+  margin: 0 0 2em 0;
 
-  @media (min-width: 480px) {
-    @include clearfix();
-
-    h2 {
-      float: left;
-    }
-
-    .shujaaz-button {
-      float: right;
-      margin-top: -0.5em;
-    }
+  @media (min-width: 640px) {
+    margin: 0 -1.5em 1em -1.5em;
   }
 }
 
-.shujaaz__main__methodology {
-  margin-bottom: 3em;
+.shujaaz-context__methodology,
+.shujaaz-context__vote {
+  @media (min-width: 640px) {
+    float: left;
+    padding: 1.5em;
+    width: 50%;
+  }
 }
+
+.shujaaz-context__methodology {
+  @media (min-width: 960px) {
+    width: 60%;
+  }
+}
+
+.shujaaz-context__vote {
+  @media (min-width: 960px) {
+    width: 40%;
+  }
+}
+
+.shujaaz-vote-box {
+  background-color: mix(#fff, $colour_red, 90%);
+  border-radius: 0.3em;
+  padding: 1.5em;
+  text-align: center;
+
+  .shujaaz-button {
+    margin: 0 1em; // add some space around the button when it's in a line of text
+  }
+}
+
 
 // A version of the person-gallery that uses markup to
 // create the two columns, rather than just floating
@@ -274,6 +295,7 @@ body.shujaaz {
   font-style: italic;
   text-align: center;
   font-size: 1.5em;
+  margin-top: 2em;
 
   img {
     vertical-align: middle;
@@ -368,15 +390,8 @@ input[name="reasons-accordions"] {
   }
 }
 
-.shujaaz__cta-reminder {
-  text-align: center;
-  margin-bottom: 3em;
-  font-size: 1em;
-}
-
 .shujaaz__logos {
   text-align: center;
-  margin: 2em 0;
 
   img {
     max-width: 100%;

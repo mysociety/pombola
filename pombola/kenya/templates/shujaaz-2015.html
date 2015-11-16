@@ -28,14 +28,19 @@
 
     <div class="shujaaz__main" id="nominees">
         <div class="container">
-            <div class="shujaaz__main__header">
-                <h2>2015 Nominees</h2>
-                <a class="shujaaz-button" href="{% url 'shujaaz-voting' %}">Vote here!</a>
-            </div>
+            <h2>2015 Nominees</h2>
 
-            <div class="shujaaz__main__methodology">
-              <h3>How nominees were selected</h3>
-              <p>Mzalendo mined through the Hansard, plus all the Bill, Motions, Statements and Petitions trackers to check the legislators who stood out in the issues captured in 2015. We identified the five leading Parliamentarians in each category. The list was then sent to our <a href="http://www.pin.or.ke/">P​arliamentary Initiatives Network (Kenya)</a> partners who are issue specialists for verification and identification of the top three nominees in each category.</p>
+            <div class="shujaaz-context">
+                <div class="shujaaz-context__methodology">
+                    <h3>How nominees were selected</h3>
+                    <p>Mzalendo mined through the Hansard, plus all the Bill, Motions, Statements and Petitions trackers to check the legislators who stood out in the issues captured in 2015. We identified the five leading Parliamentarians in each category. The list was then sent to our <a href="http://www.pin.or.ke/">P​arliamentary Initiatives Network (Kenya)</a> partners who are issue specialists for verification and identification of the top three nominees in each category.</p>
+                </div>
+                <div class="shujaaz-context__vote">
+                    <h3>Voting is now open</h3>
+                    <div class="shujaaz-vote-box">
+                        <a class="shujaaz-button" href="{% url 'shujaaz-voting' %}">Vote here!</a>
+                    </div>
+                </div>
             </div>
 
             <div class="shujaaz-nominees">
@@ -57,9 +62,9 @@
               {% endfor %}
             </div>
 
-            <p class="shujaaz__cta-reminder">
-                <a class="shujaaz-button" href="{% url 'shujaaz-voting' %}">Vote here!</a>
-            </p>
+            <div class="shujaaz-vote-box">
+                Who has been your champion? <a class="shujaaz-button" href="{% url 'shujaaz-voting' %}">Vote here!</a>
+            </div>
 
             <h4 class="shujaaz__share">
                 <img src="{% static 'images/wave-icon.png' %}">
