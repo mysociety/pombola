@@ -113,7 +113,7 @@ NOMINEES2015 = [
         'category': 'Financial Oversight',
         'name': 'Mutava Musyimi',
         'person': 95,
-        'reasons': '''<h4>Report on the 2015 Budget Policy statement:</h4><ol><li>S​et up a budget monitoring division that will be reporting on whether targets and outputs of the previous BPS have been achieved.</li><li>T​reasury should ensure that there is sufficient public participation during the budget making process.</li><li>I​ncrease funding for the office of the auditor general.</li><li>T​here should be implementation of the task-force report on parastatals.</li></ol>'''
+        'reasons': '''<h4>(Represents a committee)</h4><h4>Report on the 2015 Budget Policy statement:</h4><ol><li>S​et up a budget monitoring division that will be reporting on whether targets and outputs of the previous BPS have been achieved.</li><li>T​reasury should ensure that there is sufficient public participation during the budget making process.</li><li>I​ncrease funding for the office of the auditor general.</li><li>T​here should be implementation of the task-force report on parastatals.</li></ol>'''
     },
     {
         'category': 'Financial Oversight',
@@ -137,13 +137,13 @@ NOMINEES2015 = [
         'category': 'Institutional Oversight',
         'name': 'Moses Cheboi',
         'person': 329,
-        'reasons': '''<h4>Alleged Breach of Privilege and/or Code of Conduct by the Membership of Public Accounts Committee:</h4><p>Proposed the establishment of the office of the administrator of Parliamentary standards within parliament. The administrator will who will be appointed for a fixed term, with the approval of the Houses of Parliament, to be advising the Houses and their respective Committees of Privileges on matters of breach of privilege, the code of conduct of Members of Parliament and cases of breach of standards, ethics and financial impropriety; and, require Members of Parliament to register their financial interests with the Administrator of Parliamentary Standards who shall be the custodian of the register of standards of Members of Parliament.</p>'''
+        'reasons': '''<h4>(Represents a committee)</h4><h4>Alleged Breach of Privilege and/or Code of Conduct by the Membership of Public Accounts Committee:</h4><p>Proposed the establishment of the office of the administrator of Parliamentary standards within parliament. The administrator will who will be appointed for a fixed term, with the approval of the Houses of Parliament, to be advising the Houses and their respective Committees of Privileges on matters of breach of privilege, the code of conduct of Members of Parliament and cases of breach of standards, ethics and financial impropriety; and, require Members of Parliament to register their financial interests with the Administrator of Parliamentary Standards who shall be the custodian of the register of standards of Members of Parliament.</p>'''
     },
     {
         'category': 'Institutional Oversight',
-        'name': 'Sen. (Prof.) Anyang’ Nyong’o',
+        'name': 'Prof. Anyang’ Nyong’o',
         'person': 193,
-        'reasons': '''<h4>The state of Kenya Airways</h4><p>H​e proposed the Senate to establish a Select Committee to conduct an inquiry into the affairs of the Kenya Airways Limited and its subsidiaries and report to the Senate within three months, taking into account the following:</p><ol><li>The leasing and buying arrangement of aircrafts since 1996;</li><li>The role of off-shore companies in the investment affairs of the airline;</li><li>The identity of the shareholders of these off-shore companies and their relationship with the management of Kenya Airways Limited;</li><li>The employment policies and practices of personnel, including engineers, pilots, cabin crew and ground personnel;</li><li>The reason for delayed and cancelled flights, their frequency and the magnitude of losses attendant therein;</li><li>Any other matter that may shed light on the financial and management crisis currently facing the airline.</li></ol>'''
+        'reasons': '''<h4>Motion on the state of Kenya Airways</h4><p>H​e proposed the Senate to establish a Select Committee to conduct an inquiry into the affairs of the Kenya Airways Limited and its subsidiaries and report to the Senate within three months, taking into account the following:</p><ol><li>The leasing and buying arrangement of aircrafts since 1996;</li><li>The role of off-shore companies in the investment affairs of the airline;</li><li>The identity of the shareholders of these off-shore companies and their relationship with the management of Kenya Airways Limited;</li><li>The employment policies and practices of personnel, including engineers, pilots, cabin crew and ground personnel;</li><li>The reason for delayed and cancelled flights, their frequency and the magnitude of losses attendant therein;</li><li>Any other matter that may shed light on the financial and management crisis currently facing the airline.</li></ol>'''
     },
     {
         'category': 'Mining (Senate)',
@@ -155,20 +155,20 @@ NOMINEES2015 = [
         'category': 'Mining (Senate)',
         'name': 'Agnes Zani',
         'person': 13119,
-        'reasons': '''<h4>A Report of the Ad Hoc Committee on Legislation on Royalties Accruing from Exploitation of Natural Resources in the Counties</h4><blockquote><ol><li>​Royalty collection system on natural resources should either be charged on a quantum or ad valorem basis. Quantum (ex-mine value) royalties are levied on a production basis (i.e. a flat rate royalty percentage is charged per unit of mineral recovered) and these rates may change through an amendment to the regulations while Ad valorem (value-based) royalties are levied at a percentage based on the value of the mineral for example 7.5% at crushed and screened, 5% at concentrate and 2.5% metal. Specific rates should apply to low value minerals. In addition to royalties, the government should also receive licence fees depending on the type of licence and the extent of the lease area.</li><li>​T​he Government should establish a fund for royalties for catchment areas to allocate money for important projects in the areas and localities where the natural resources occur. This fund should be administered by an independent body. As a general principle royalty revenues should be allocated to projects that will continue to generate long term benefits for the community; especially capital projects rather than operating or recurrent expenditures. This will capture the principle of intergenerational equity and ensure the long term value of the extraction and conversion of natural resources for the benefit of the current and future generations.</li></ol></blockquote>'''
+        'reasons': '''<h4>(Represents a committee)</h4><h4>A Report of the Ad Hoc Committee on Legislation on Royalties Accruing from Exploitation of Natural Resources in the Counties</h4><blockquote><ol><li>​Royalty collection system on natural resources should either be charged on a quantum or ad valorem basis. Quantum (ex-mine value) royalties are levied on a production basis (i.e. a flat rate royalty percentage is charged per unit of mineral recovered) and these rates may change through an amendment to the regulations while Ad valorem (value-based) royalties are levied at a percentage based on the value of the mineral for example 7.5% at crushed and screened, 5% at concentrate and 2.5% metal. Specific rates should apply to low value minerals. In addition to royalties, the government should also receive licence fees depending on the type of licence and the extent of the lease area.</li><li>​T​he Government should establish a fund for royalties for catchment areas to allocate money for important projects in the areas and localities where the natural resources occur. This fund should be administered by an independent body. As a general principle royalty revenues should be allocated to projects that will continue to generate long term benefits for the community; especially capital projects rather than operating or recurrent expenditures. This will capture the principle of intergenerational equity and ensure the long term value of the extraction and conversion of natural resources for the benefit of the current and future generations.</li></ol></blockquote>'''
     },
     {
         'category': 'Mining (Senate)',
         'name': 'Gideon Moi',
         'person': 305,
-        'reasons': '''<h4>Report of the Standing Committee on Energy, Roads and Transportation on the Benchmarking visit to New Zealand, Australia and United Arab Emirates</h4><blockquote><ol><li>K​enya should establish an independent research/geological centre that is able to identify availability of geological resources, and examine the environmental and natural hazards and processes occurring in the earth’s crust.
+        'reasons': '''<h4>(Represents a committee)</h4><h4>Report of the Standing Committee on Energy, Roads and Transportation on the Benchmarking visit to New Zealand, Australia and United Arab Emirates</h4><blockquote><ol><li>K​enya should establish an independent research/geological centre that is able to identify availability of geological resources, and examine the environmental and natural hazards and processes occurring in the earth’s crust.
 </li><li>L​egislation be drafted to ensure that the indigenous Communities are consulted and involved in the management and tapping of resources within their jurisdictions to avoid conflicts.</li><li>L​egislations be developed to compel the coal mining companies to rehabilitate the utilized mining fields to its original form/state in order to conserve the environment. The port of Mombasa be made a duty free port to allow for investors from all over the world to bring and store their goods for free and only pay for them at the point of sale. This is a cost effective way of warehousing and makes it easier to monitor the goods that come into the country.</li></ol></blockquote>'''
     },
     {
         'category': 'Access to Justice',
         'name': 'Amos Wako',
         'person': 366,
-        'reasons': '''<h4>The Committee Report on the annual Report (2012/2013) of the commission on Administrative Justice:</h4><blockquote><ol><li>T​he Commission on Administrative Justice prepares and presents to the Senate, a report on their proposed amendments to the Commission on Administrative Justice Act and any other statutory amendments, which they may consider necessary for the effective execution of their mandate.</li><li>​T​he Commission on Administrative Justice to leverage on technology to increase accessibility and efficiency in complaints handling through use of toll free numbers; social media and other platforms such as the Integrated Public Complaints Referral Mechanism, the Huduma initiative and improvement of the ICT infrastructure at the Commission.</li><li>​T​he CAJ to open branches in each of the 47 counties through partnerships with the county governments.</li></ol></blockquote>'''
+        'reasons': '''<h4>(Represents a committee)</h4><h4>The Committee Report on the annual Report (2012/2013) of the commission on Administrative Justice:</h4><blockquote><ol><li>T​he Commission on Administrative Justice prepares and presents to the Senate, a report on their proposed amendments to the Commission on Administrative Justice Act and any other statutory amendments, which they may consider necessary for the effective execution of their mandate.</li><li>​T​he Commission on Administrative Justice to leverage on technology to increase accessibility and efficiency in complaints handling through use of toll free numbers; social media and other platforms such as the Integrated Public Complaints Referral Mechanism, the Huduma initiative and improvement of the ICT infrastructure at the Commission.</li><li>​T​he CAJ to open branches in each of the 47 counties through partnerships with the county governments.</li></ol></blockquote>'''
     },
     {
         'category': 'Access to Justice',
@@ -178,7 +178,7 @@ NOMINEES2015 = [
     },
     {
         'category': 'Access to Justice',
-        'name': 'Sen. Fatuma Aden Dullo',
+        'name': 'Fatuma Aden Dullo',
         'person': 13125,
         'reasons': '''<h4>The Legal Aid Bill/Motion:</h4><blockquote><p>“There is also lack of access to legal aid services by the prisoners. Most Kenyans do not have access to the services of lawyers. It is important for us to come up with a policy on legal aid services for Kenyans who are poor and cannot afford the services of a lawyer. There are also child related concerns and poor age determination process. Finally, I would like to say that this is an institution that Kenyans and even the leadership forget; that one day one might end up in prison. This has happened to several leaders who have served in high level offices in this country. Therefore, I think it is high time that this country looked into the legislation and aligned it to the current Constitution, so that the prisoners and the people who are put in custody can enjoy their rights.” <a href="http://info.mzalendo.com/hansard/sitting/senate/2015-10-08#entry-589998">(Read more)</a></p></blockquote>'''
     },
@@ -198,13 +198,13 @@ NOMINEES2015 = [
         'category': 'Devolution',
         'name': 'Kiraitu Murungi',
         'person': 93,
-        'reasons': '''<h4>County Boundaries:</h4><blockquote><p>“THIS HOUSE urges the office of the President and the Ministry of Land, Housing and Urban Development to urgently establish a Task Force to survey, mark and fix beacons for all the county boundaries and to submit a report of the said Task Force to this House on or before 31st March, 2016.”</p></blockquote>'''
+        'reasons': '''<h4>Motion: County Boundaries:</h4><blockquote><p>“THIS HOUSE urges the office of the President and the Ministry of Land, Housing and Urban Development to urgently establish a Task Force to survey, mark and fix beacons for all the county boundaries and to submit a report of the said Task Force to this House on or before 31st March, 2016.”</p></blockquote>'''
     },
     {
         'category': 'Education',
         'name': 'Agnes Zani',
         'person': 13119,
-        'reasons': '''<h4>Classification of Schools:</h4><blockquote><p>“Senate calls upon the Ministry of Education, Science and Technology to take immediate action to review the categorization of public secondary schools and to classify all of them as county schools in order to ensure equity in resource allocation and guarantee quality education for all.”</p></blockquote>'''
+        'reasons': '''<h4>Motion: Classification of Schools:</h4><blockquote><p>“Senate calls upon the Ministry of Education, Science and Technology to take immediate action to review the categorization of public secondary schools and to classify all of them as county schools in order to ensure equity in resource allocation and guarantee quality education for all.”</p></blockquote>'''
     },
     {
         'category': 'Education',
@@ -226,13 +226,13 @@ NOMINEES2015 = [
     },
     {
         'category': 'Health',
-        'name': 'Sen. Wilfred Machage',
+        'name': 'Wilfred Machage',
         'person': 179,
-        'reasons': '''<h4>Care for dementia patients:</h4><blockquote><p>“T​he Senate directs the Standing Committee on Health to immediately initiate review of the existing legislation on health care in order to mainstream and enhance care for patients of dementia and further that the Committee submits a report to the House on the matter within ninety (90) days.”</p></blockquote>'''
+        'reasons': '''<h4>Motion: Care for dementia patients:</h4><blockquote><p>“T​he Senate directs the Standing Committee on Health to immediately initiate review of the existing legislation on health care in order to mainstream and enhance care for patients of dementia and further that the Committee submits a report to the House on the matter within ninety (90) days.”</p></blockquote>'''
     },
     {
         'category': 'Health',
-        'name': 'Hon. Cyprian Iringo',
+        'name': 'Cyprian Iringo',
         'person': 1574,
         'reasons': '''<h4>Petition: Legal recognition of Kenya Association of Private Hospitals by National Hospital Insurance Fund (NHIF):</h4><blockquote><p>“Departmental Committee on Health to consider passing legislation to give KAPH a legal personality to effectively become a bona fide representative of its members in the NHIF Board in order to play a leading role in driving provision of quality healthcare throughout the country.”</p><p>“Compel NHIF to involve all bona fide healthcare providers in consultative discussions on all aspects of service contracts, and to strictly adhere to contracts concluded with healthcare providers and be ready to compensate the provider, among other key issues.”</p></blockquote>'''
     },
@@ -246,7 +246,7 @@ NOMINEES2015 = [
         'category': 'Special interests',
         'name': 'Isaac Melly',
         'person': 1099,
-        'reasons': '''<h4>Recognizing and honouring Sportsmen:</h4><blockquote><p>“…records its commendation to the Kenyan teams for the sterling performance at the IAAF World Championships in Beijing, China and the All African Games in Congo Brazzaville; calls upon the National Government to recognize and honor the teams with appropriate awards; and resolves that this Resolution of the Senate with the Hansard report on the deliberations on this Motion be forwarded to our athletes and sportsmen/ sportswomen who participated in the respective events.”</p></blockquote>'''
+        'reasons': '''<h4>Motion: Recognizing and honouring Sportsmen:</h4><blockquote><p>“…records its commendation to the Kenyan teams for the sterling performance at the IAAF World Championships in Beijing, China and the All African Games in Congo Brazzaville; calls upon the National Government to recognize and honor the teams with appropriate awards; and resolves that this Resolution of the Senate with the Hansard report on the deliberations on this Motion be forwarded to our athletes and sportsmen/ sportswomen who participated in the respective events.”</p></blockquote>'''
     },
     {
         'category': 'Special interests',
@@ -262,15 +262,15 @@ NOMINEES2015 = [
     },
     {
         'category': 'Security',
-        'name': 'Sen. Fatuma Aden Dullo',
+        'name': 'Fatuma Aden Dullo',
         'person': 13125,
-        'reasons': '''<h4>Extra-judicial Killings by KWS:</h4><blockquote><ol><li>​“Noting with concern that human-wildlife conflict between the Kinna Community of Isiolo County and wildlife at Meru National Park has escalated over the years; Further noting with concern that the above conflict has led to tension between the community and the Kenya Wildlife Service (KWS) which the community accuses of kidnapping, shooting, torturing, wounding and even killing members of the community; Alarmed about the latest alleged report that on 18th May, 2015 KWS rangers clashed with the Kinna Community demonstrators, shot and killed one demonstrator and wounded several others;”</li><li>“​The Senate directs the Standing Committee on Land and Natural Resources and the Standing Committee on National Security and Foreign Relations to conduct a fact-finding mission regarding the conflict in the area with immediate effect and report back to the Senate within thirty days.”</li></ol></blockquote>'''
+        'reasons': '''<h4>Motion: Extra-judicial Killings by KWS:</h4><blockquote><ol><li>​“Noting with concern that human-wildlife conflict between the Kinna Community of Isiolo County and wildlife at Meru National Park has escalated over the years; Further noting with concern that the above conflict has led to tension between the community and the Kenya Wildlife Service (KWS) which the community accuses of kidnapping, shooting, torturing, wounding and even killing members of the community; Alarmed about the latest alleged report that on 18th May, 2015 KWS rangers clashed with the Kinna Community demonstrators, shot and killed one demonstrator and wounded several others;”</li><li>“​The Senate directs the Standing Committee on Land and Natural Resources and the Standing Committee on National Security and Foreign Relations to conduct a fact-finding mission regarding the conflict in the area with immediate effect and report back to the Senate within thirty days.”</li></ol></blockquote>'''
     },
     {
         'category': 'Security',
         'name': 'Victor Munyaka',
         'person': 86,
-        'reasons': '''<h4>Control of illegal fire-arms:</h4><blockquote><p>“This House urges the Government to fit all guns held by licensed persons and the disciplined forces with electronic tracking devices and ensure the proper and comprehensive registration of all firearms in the country in order to curb insecurity.”</p></blockquote>'''
+        'reasons': '''<h4>Motion: Control of illegal fire-arms:</h4><blockquote><p>“This House urges the Government to fit all guns held by licensed persons and the disciplined forces with electronic tracking devices and ensure the proper and comprehensive registration of all firearms in the country in order to curb insecurity.”</p></blockquote>'''
     },
     {
         'category': 'Progressive contributions',
@@ -282,13 +282,13 @@ NOMINEES2015 = [
         'category': 'Progressive contributions',
         'name': 'Joyce Lay',
         'person': 1022,
-        'reasons': '''<h4>Translation of the Constitution to Kiswahili:</h4><blockquote><p>“This House urges the National Council for Law Reporting to progressively translate the laws of Kenya into Kiswahili.”</p></blockquote>'''
+        'reasons': '''<h4>Motion: Translation of the Constitution to Kiswahili:</h4><blockquote><p>“This House urges the National Council for Law Reporting to progressively translate the laws of Kenya into Kiswahili.”</p></blockquote>'''
     },
     {
         'category': 'Progressive contributions',
         'name': 'Malulu Injendi',
         'person': 2214,
-        'reasons': '''<h4>Decentralization of Registrar of Marriages:</h4><blockquote><p>“This House urges the Government to review the procedure and the cost of marriage registration, and to decentralize the offices of the registrar of marriages to a minimum of all sub-counties so as to reduce bureaucracy and enhance accessibility.”</p></blockquote>'''
+        'reasons': '''<h4>Motion: Decentralization of Registrar of Marriages:</h4><blockquote><p>“This House urges the Government to review the procedure and the cost of marriage registration, and to decentralize the offices of the registrar of marriages to a minimum of all sub-counties so as to reduce bureaucracy and enhance accessibility.”</p></blockquote>'''
     },
     {
         'category': 'Business',
@@ -310,15 +310,15 @@ NOMINEES2015 = [
     },
     {
         'category': 'Land',
-        'name': 'Sen. Mutula Kilonzo Jnr',
+        'name': 'Mutula Kilonzo Jnr',
         'person': 13156,
-        'reasons': '''<h4>Historical Land Injustices:</h4><blockquote><p>“T​his Senate urges the National Land Commission to urgently recommend to the Senate a Bill to address historical land injustices to provide a framework to ensure that land is properly utilized for the economic benefit of the affected communities.”</p></blockquote>'''
+        'reasons': '''<h4>Motion: Historical Land Injustices:</h4><blockquote><p>“T​his Senate urges the National Land Commission to urgently recommend to the Senate a Bill to address historical land injustices to provide a framework to ensure that land is properly utilized for the economic benefit of the affected communities.”</p></blockquote>'''
     },
     {
         'category': 'Land',
         'name': 'Alex Mwiru',
         'person': 107,
-        'reasons': '''<h4>Resettlement of squatters:</h4><blockquote><p>“This House adopts the Report of the Departmental Committee on Lands on the Resettlement of Squatters in Muri Farm; Mathengeta Tumutumu/Riakanau Farm; and Drake Farm and Kaseku Farm.”</p></blockquote>'''
+        'reasons': '''<h4>(Represents a committee)</h4><h4>Resettlement of squatters:</h4><blockquote><p>“This House adopts the Report of the Departmental Committee on Lands on the Resettlement of Squatters in Muri Farm; Mathengeta Tumutumu/Riakanau Farm; and Drake Farm and Kaseku Farm.” <a href="http://info.mzalendo.com/hansard/sitting/national_assembly/2015-10-01-14-30-00#entry-587110">(Read more)</a></p></blockquote>'''
     },
     {
         'category': 'Land',

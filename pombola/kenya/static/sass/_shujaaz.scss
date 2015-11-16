@@ -184,7 +184,6 @@ body.shujaaz {
 
   @media (min-width: 480px) {
     @include clearfix();
-    padding: 2em 0 3em 0;
 
     h2 {
       float: left;
@@ -195,6 +194,10 @@ body.shujaaz {
       margin-top: -0.5em;
     }
   }
+}
+
+.shujaaz__main__methodology {
+  margin-bottom: 3em;
 }
 
 // A version of the person-gallery that uses markup to
@@ -367,8 +370,22 @@ input[name="reasons-accordions"] {
 
   img {
     max-width: 100%;
-    width: 10em;
     height: auto;
     margin: 0 1em;
   }
+
+  p {
+    color: #999;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin: 2em 0 1em 0;
+  }
+}
+
+.shujaaz__logos__indigo {
+  width: 12em;
+}
+
+.shujaaz__logos__pin {
+  width: 6em;
 }

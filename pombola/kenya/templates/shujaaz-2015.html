@@ -17,10 +17,11 @@
     <div class="shujaaz__intro">
         <h1 class="shujaaz__intro__logo"><span>People’s Shujaaz Awards</span></h1>
         <div class="shujaaz__intro__text">
-            <h4>Celebrating Kenyan Parliamentarians Championing Issues of Great Public Interest</h4>
-            <p>This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen. This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen.</p>
-            <p>This text will explain what the People’s Shujaaz Awards are, and how the finalists are chosen.</p>
-            <a class="shujaaz-button" href="#nominees">See the nominees &amp; place your vote</a>
+            <h4>Celebrating Parliamentarians that have championed issues of great public interest in the National Assembly or&nbsp;Senate in 2015</h4>
+            <p>Kenyans spend a lot of time bashing politicians and there is a risk that we may dismiss or fail to encourage those who are actually representing their voters and trying to address their needs. People’s Shujaaz is an attempt to fix that.</p>
+            <p>In recognizing the leaders, we focus on their core mandate: legislation, oversight and representation. We have added Committees to this year’s campaign and their chairmen represent them.</p>
+            <p>Public voting is open from 16th November to 9th December 2015 midnight.</p>
+            <a class="shujaaz-button" href="#nominees">Scroll down for nominees &amp; place your&nbsp;vote</a>
             <a class="shujaaz-other-year" href="{% url 'shujaaz-finalists-2014' %}">Or revisit 2014’s finalists</a>
         </div>
     </div>
@@ -30,6 +31,11 @@
             <div class="shujaaz__main__header">
                 <h2>2015 Nominees</h2>
                 <a class="shujaaz-button" href="{% url 'shujaaz-voting' %}">Place your votes</a>
+            </div>
+
+            <div class="shujaaz__main__methodology">
+              <h3>How nominees were selected</h3>
+              <p>Mzalendo mined through the Hansard, plus all the Bill, Motions, Statements and Petitions trackers to check the legislators who stood out in the issues captured in 2015. We identified the five leading Parliamentarians in each category. The list was then sent to our <a href="http://www.pin.or.ke/">P​arliamentary Initiatives Network (Kenya)</a> partners who are issue specialists for verification and identification of the top three nominees in each category.</p>
             </div>
 
             <div class="shujaaz-nominees">
@@ -72,10 +78,11 @@
 
     <div class="shujaaz__outro">
         <div class="container">
-
             <div class="shujaaz__logos">
-                <img src="{% static 'images/indigo.gif' %}">
-                <img src="{% static 'images/pin-logo.jpg' %}">
+                <p>Supported by</p>
+                <img src="{% static 'images/indigo-without-title.gif' %}" class="shujaaz__logos__indigo">
+                <p>Partner</p>
+                <a href="http://www.pin.or.ke/"><img src="{% static 'images/pin-logo.jpg' %}" class="shujaaz__logos__pin"></a>
             </div>
         </div>
     </div>
