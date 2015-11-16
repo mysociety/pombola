@@ -32,12 +32,14 @@
 
 {% block profile_info %}
 
-  {% for year, url_name, shujaaz_finalist in shujaaz_finalist_info %}
-  <div class="object-sidebar__box awards">
-    <h3>People’s Shujaaz Awards</h3>
-    <p><a href="{% url url_name %}#nominees">{{ year }} Finalist: {{ shujaaz_finalist.category }}</a></p>
-  </div>
-  {% endfor %}
+  {% if shujaaz_finalist_info %}
+    <div class="object-sidebar__box awards">
+      <h3>People’s Shujaaz Awards</h3>
+      {% for year, url_name, shujaaz_finalist in shujaaz_finalist_info %}
+        <p><a href="{% url url_name %}#nominees">Finalist {{ year }}: {{ shujaaz_finalist.category }}</a></p>
+      {% endfor %}
+    </div>
+  {% endif %}
 
   <div class="object-sidebar__box constituency-party">
 
