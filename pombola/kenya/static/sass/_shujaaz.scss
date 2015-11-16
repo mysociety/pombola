@@ -130,7 +130,6 @@ body.shujaaz {
 
 .shujaaz-button {
   display: inline-block;
-  background: $colour_primary_mid;
   color: #fff;
   padding: 0.9em 1.5em 0.7em 1.5em;
   border-radius: 0.3em;
@@ -140,23 +139,33 @@ body.shujaaz {
   font-weight: bold;
   font-family: 'Skolar', Georgia, serif;
 
-  background: $colour_primary_mid;
-  background: -moz-linear-gradient(top, #b1d580 0%,  $colour_primary_mid 100%);
-  background: -webkit-linear-gradient(top, #b1d580 0%, $colour_primary_mid 100%);
-  background: linear-gradient(to bottom, #b1d580 0%, $colour_primary_mid 100%);
-
+  background: $colour_red;
+  background: -moz-linear-gradient(top, lighten($colour_red, 20%) 0%,  $colour_red 100%);
+  background: -webkit-linear-gradient(top, lighten($colour_red, 20%) 0%, $colour_red 100%);
+  background: linear-gradient(to bottom, lighten($colour_red, 20%) 0%, $colour_red 100%);
 
   &:hover, &:focus {
     text-decoration: none;
     color: #fff;
-    background: darken($colour_primary_mid, 5%);
-    background: -moz-linear-gradient(top, darken(#b1d580, 5%) 0%,  darken($colour_primary_mid, 5%) 100%);
-    background: -webkit-linear-gradient(top, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
-    background: linear-gradient(to bottom, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
+    background: darken($colour_red, 10%);
+    background: -moz-linear-gradient(top, darken(lighten($colour_red, 20%), 10%) 0%,  darken($colour_red, 10%) 100%);
+    background: -webkit-linear-gradient(top, darken(lighten($colour_red, 20%), 10%) 0%, darken($colour_red, 10%) 100%);
+    background: linear-gradient(to bottom, darken(lighten($colour_red, 20%), 10%) 0%, darken($colour_red, 10%) 100%);
   }
 
   .shujaaz__intro & {
     margin-top: 0.5em;
+    background: $colour_primary_mid;
+    background: -moz-linear-gradient(top, #b1d580 0%,  $colour_primary_mid 100%);
+    background: -webkit-linear-gradient(top, #b1d580 0%, $colour_primary_mid 100%);
+    background: linear-gradient(to bottom, #b1d580 0%, $colour_primary_mid 100%);
+
+    &:hover, &:focus {
+      background: darken($colour_primary_mid, 5%);
+      background: -moz-linear-gradient(top, darken(#b1d580, 5%) 0%,  darken($colour_primary_mid, 5%) 100%);
+      background: -webkit-linear-gradient(top, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
+      background: linear-gradient(to bottom, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
+    }
   }
 }
 
@@ -362,6 +371,7 @@ input[name="reasons-accordions"] {
 .shujaaz__cta-reminder {
   text-align: center;
   margin-bottom: 3em;
+  font-size: 1em;
 }
 
 .shujaaz__logos {
