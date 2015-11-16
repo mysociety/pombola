@@ -22,6 +22,12 @@ class Command(BaseCommand):
             default=False,
             help="Don't process wards"
         ),
+        make_option(
+            '--delete-existing-pu-codes',
+            action='store_true',
+            default=False,
+            help="Removing existing PU codes (not names) before importing",
+        ),
     )
 
     def handle(self, *args, **options):
@@ -50,6 +56,9 @@ class PollUnitImporter(object):
 
     def process(self, filename):
         print "Looking at '{0}'".format(filename)
+
+        if self.options['delete_existing_pu_codes']:
+            self.poll_unit_code_type.codes.all().delete()
 
         for row in self.get_rows(filename):
             self.process_row(row)
