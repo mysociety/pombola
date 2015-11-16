@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import csv
+from optparse import make_option
 from os.path import dirname, join
 import re
 
@@ -13,6 +14,15 @@ from mapit import models
 class Command(BaseCommand):
 
     help = "Add polling unit codes from a CSV file to MapIt areas"
+
+    option_list = BaseCommand.option_list + (
+        make_option(
+            '--ignore-wards',
+            action='store_true',
+            default=False,
+            help="Don't process wards"
+        ),
+    )
 
     def handle(self, *args, **options):
         atlas_filename = join(
@@ -34,6 +44,9 @@ class PollUnitImporter(object):
     cached_ward_type = None
     cached_nigeria = None
     cached_current_generation = None
+
+    def __init__(self, options):
+        self.options = options
 
     def process(self, filename):
         print "Looking at '{0}'".format(filename)
@@ -62,7 +75,8 @@ class PollUnitImporter(object):
 
         state = self.process_state_for_row(row)
         lga   = self.process_lga_for_row(row, state=state)
-        ward  = self.process_ward_for_row(row, lga=lga)
+        if not self.options['ignore_wards']:
+            self.process_ward_for_row(row, lga=lga)
 
     def process_state_for_row(self, row):
         name = row['STATE NAME'].strip()
