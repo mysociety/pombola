@@ -1,12 +1,14 @@
 $pull-out-background: #f2f0e7;
 $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
 
+$colour_women_purple: #753C96;
+
 #home-quote,
 #home-cta,
 #home-featured-person,
 #home-blog,
 #home-facebook,
-#home-women,
+#home-special-features,
 #home-twitter,
 #home-background {
   margin: 0 20px 20px 20px;
@@ -18,7 +20,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   #home-featured-person,
   #home-blog,
   #home-facebook,
-  #home-women,
+  #home-special-features,
   #home-twitter,
   #home-background {
     margin: 0 0 30px 0;
@@ -118,20 +120,13 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-.home-women__button {
+.home-special-features__button {
   display: block;
-  position: relative;
   margin-top: 1em;
-  padding: 20px 140px 20px 20px; // leave space on right for floated image
+  padding: 20px;
   background-color: $colour_red;
   @include border-radius(4px);
   color: #fff;
-
-  img {
-    position: absolute;
-    right: 10px;
-    bottom: 0;
-  }
 
   h2 {
     color: inherit;
@@ -145,6 +140,29 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
     background-color: darken($colour_red, 5%);
     color: #fff;
     text-decoration: none;
+  }
+}
+
+.home-special-features__button--shujaaz {
+  position: relative;
+  padding: 20px 80px 20px 20px; // leave space on right for floated image
+
+  img {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+  }
+}
+
+.home-special-features__button--women {
+  color: $colour_women_purple;
+  background-color: mix(#fff, $colour_women_purple, 90%);
+  border: 1px solid mix(#fff, $colour_women_purple, 70%);
+
+  &:hover,
+  &:focus {
+    background-color: mix(#fff, $colour_women_purple, 80%);
+    color: $colour_women_purple;
   }
 }
 
