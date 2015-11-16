@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
 import csv
+from os.path import dirname, join
 import re
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from mapit import models
 
@@ -14,10 +15,12 @@ class Command(BaseCommand):
     help = "Add polling unit codes from a CSV file to MapIt areas"
 
     def handle(self, *args, **options):
-        if len(args) != 1:
-            raise CommandError("You must supply a CSV file as an argument")
-        importer = PollUnitImporter()
-        importer.process(args[0])
+        atlas_filename = join(
+            dirname(__file__), '..', '..', 'data',
+            'Nigeria - Political Atlas for SYE.csv'
+        )
+        importer = PollUnitImporter(options)
+        importer.process(atlas_filename)
 
 
 class PollUnitImporter(object):
