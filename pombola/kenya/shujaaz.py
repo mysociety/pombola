@@ -106,7 +106,12 @@ functions and powers to county governments.</li></ul>''',
     },
 ]
 
-FINALISTS2014_DICT = {f['person']: f for f in FINALISTS2014}
+FINALISTS2015 = []
+
+FINALISTS_DICT = {
+    '2014': {f['person']: f for f in FINALISTS2014},
+    '2015': {f['person']: f for f in FINALISTS2015},
+}
 
 NOMINEES2015 = [
     {
