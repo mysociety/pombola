@@ -129,9 +129,15 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
 
         context['cdf_budget_constituencies'] = cdf_budget_constituencies
 
-        shujaaz_finalist = shujaaz.FINALISTS2014_DICT.get(self.object.pk)
-        if shujaaz_finalist:
-            context['shujaaz_finalist'] = shujaaz_finalist
+        context['shujaaz_finalist_info'] = [
+            (
+                year,
+                'shujaaz-finalists-' + year,
+                shujaaz.FINALISTS_DICT[year].get(self.object.pk)
+            )
+            for year in ('2015', '2014')
+            if shujaaz.FINALISTS_DICT[year].get(self.object.pk)
+        ]
 
         return context
 
