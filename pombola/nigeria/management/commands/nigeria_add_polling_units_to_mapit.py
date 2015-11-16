@@ -28,6 +28,12 @@ class Command(BaseCommand):
             default=False,
             help="Removing existing PU codes (not names) before importing",
         ),
+        make_option(
+            '--delete-existing-wards',
+            action='store_true',
+            default=False,
+            help="Removing existing wards before importing",
+        ),
     )
 
     def handle(self, *args, **options):
@@ -59,6 +65,9 @@ class PollUnitImporter(object):
 
         if self.options['delete_existing_pu_codes']:
             self.poll_unit_code_type.codes.all().delete()
+
+        if self.options['delete_existing_wards']:
+            self.ward_type.areas.all().delete()
 
         for row in self.get_rows(filename):
             self.process_row(row)
