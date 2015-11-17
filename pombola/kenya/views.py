@@ -129,9 +129,15 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
 
         context['cdf_budget_constituencies'] = cdf_budget_constituencies
 
-        shujaaz_finalist = shujaaz.FINALISTS_DICT.get(self.object.pk)
-        if shujaaz_finalist:
-            context['shujaaz_finalist'] = shujaaz_finalist
+        context['shujaaz_finalist_info'] = [
+            (
+                year,
+                'shujaaz-finalists-' + year,
+                shujaaz.FINALISTS_DICT[year].get(self.object.pk)
+            )
+            for year in ('2015', '2014')
+            if shujaaz.FINALISTS_DICT[year].get(self.object.pk)
+        ]
 
         return context
 
@@ -476,19 +482,35 @@ class ThanksTemplateView(TemplateView):
         return context
 
 
-class ShujaazFinalistsView(TemplateView):
-    template_name = 'shujaaz.html'
+class ShujaazFinalists2014View(TemplateView):
+    template_name = 'shujaaz-2014.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ShujaazFinalistsView, self).get_context_data(**kwargs)
+        context = super(ShujaazFinalists2014View, self).get_context_data(**kwargs)
 
         def populate_person(f):
             finalist = dict(f)
             finalist['person'] = Person.objects.get(pk=finalist['person'])
             return finalist
 
-        finalists = [populate_person(f) for f in shujaaz.FINALISTS]
+        finalists = [populate_person(f) for f in shujaaz.FINALISTS2014]
         half = len(finalists) / 2
         context['finalists_column_1'] = finalists[:half]
         context['finalists_column_2'] = finalists[half:]
+        return context
+
+
+class ShujaazFinalists2015View(TemplateView):
+    template_name = 'shujaaz-2015.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShujaazFinalists2015View, self).get_context_data(**kwargs)
+
+        def populate_person(f):
+            finalist = dict(f)
+            finalist['person'] = Person.objects.get(pk=finalist['person'])
+            return finalist
+
+        context['nominees'] = [populate_person(f) for f in shujaaz.NOMINEES2015]
+
         return context
