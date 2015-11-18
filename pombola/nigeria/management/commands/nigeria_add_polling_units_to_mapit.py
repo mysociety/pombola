@@ -62,7 +62,7 @@ class PollUnitImporter(object):
         ward  = self.process_ward_for_row(row, lga=lga)
 
     def process_state_for_row(self, row):
-        name = row['STATE NAME']
+        name = row['STATE NAME'].strip()
         code = self.tidy_up_code(row['STATE CODE'])
 
         if code in self.cached_states:
@@ -83,7 +83,7 @@ class PollUnitImporter(object):
         return self.cached_states[code]
 
     def process_lga_for_row(self, row, state):
-        name = row['LGA NAME']
+        name = row['LGA NAME'].strip()
         code = self.tidy_up_code(row['LGA CODE'], state)
 
         if code in self.cached_lgas:
@@ -104,7 +104,7 @@ class PollUnitImporter(object):
         return self.cached_lgas[code]
 
     def process_ward_for_row(self, row, lga):
-        name = row['WARD NAME']
+        name = row['WARD NAME'].strip()
         code = self.tidy_up_code(row['WARD CODE'], lga)
 
         if code in self.cached_wards:
