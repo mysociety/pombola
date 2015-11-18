@@ -92,9 +92,10 @@ class PollUnitImporter(object):
         # print row
 
         state = self.process_state_for_row(row)
-        lga   = self.process_lga_for_row(row, state=state)
-        if not self.options['ignore_wards']:
-            self.process_ward_for_row(row, lga=lga)
+        if row['LGA NAME'].strip():
+            lga = self.process_lga_for_row(row, state=state)
+            if not self.options['ignore_wards']:
+                self.process_ward_for_row(row, lga=lga)
 
     def process_state_for_row(self, row):
         name = row['STATE NAME'].strip()
