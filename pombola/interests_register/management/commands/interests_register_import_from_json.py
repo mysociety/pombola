@@ -24,7 +24,11 @@ class Command(LabelCommand):
     def handle_grouping(self, grouping):
         # print grouping
 
-        person = Person.objects.get(**grouping['person'])
+        try:
+            person = Person.objects.get(**grouping['person'])
+        except Person.DoesNotExist:
+            self.stderr.write("Failed to find the person from: " + repr(grouping['person']))
+            return
 
         source_url = grouping['release'].pop('source_url')
 
