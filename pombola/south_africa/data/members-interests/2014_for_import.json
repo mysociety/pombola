@@ -3248,7 +3248,7 @@
             }
         ],
         "person": {
-            "slug": "cathlene-labuschagne"
+            "slug": "cathleen-labuschagne"
         },
         "release": {
             "date": "2014-09-17",
@@ -3280,7 +3280,7 @@
             }
         ],
         "person": {
-            "slug": "cathlene-labuschagne"
+            "slug": "cathleen-labuschagne"
         },
         "release": {
             "date": "2014-09-17",
@@ -11186,7 +11186,7 @@
             }
         ],
         "person": {
-            "slug": "hlengiwe-octavia-maxon"
+            "slug": "hlengiwe-octavia-hlophe"
         },
         "release": {
             "date": "2014-09-17",
@@ -29479,57 +29479,6 @@
         },
         "entries": [
             {
-                "Description": "House",
-                "Extent": "418sq.m."
-            }
-        ],
-        "person": {
-            "slug": "tandi-gloria-mpambo-sibhukwana"
-        },
-        "release": {
-            "date": "2014-09-17",
-            "name": "Parliament Register of Members' Interests 2014",
-            "source_url": "https://sourceafrica.net/documents/21084-parliament-of-south-africa-register-of-members.html"
-        }
-    },
-    {
-        "category": {
-            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
-            "sort_order": 1
-        },
-        "entries": [
-            {
-                "Name of Company": "Sasol Inzalo",
-                "Nature": "Shares",
-                "Nominal Value": "R3 000"
-            },
-            {
-                "Name of Company": "Standard Bank",
-                "Nature": "Shares",
-                "Nominal Value": "R1 500"
-            },
-            {
-                "Name of Company": "FNB",
-                "Nature": "Shares",
-                "Nominal Value": "R5 000"
-            }
-        ],
-        "person": {
-            "slug": "tandi-gloria-mpambo-sibhukwana"
-        },
-        "release": {
-            "date": "2014-09-17",
-            "name": "Parliament Register of Members' Interests 2014",
-            "source_url": "https://sourceafrica.net/documents/21084-parliament-of-south-africa-register-of-members.html"
-        }
-    },
-    {
-        "category": {
-            "name": "LAND AND PROPERTY",
-            "sort_order": 9
-        },
-        "entries": [
-            {
                 "Description": "Residential House",
                 "Extent": "Normal",
                 "Location": "Samora Machel"
@@ -29785,6 +29734,57 @@
         ],
         "person": {
             "slug": "thandi-cecilia-memela"
+        },
+        "release": {
+            "date": "2014-09-17",
+            "name": "Parliament Register of Members' Interests 2014",
+            "source_url": "https://sourceafrica.net/documents/21084-parliament-of-south-africa-register-of-members.html"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
+                "Extent": "418sq.m."
+            }
+        ],
+        "person": {
+            "slug": "thandi-gloria-mpambo-sibhukwana"
+        },
+        "release": {
+            "date": "2014-09-17",
+            "name": "Parliament Register of Members' Interests 2014",
+            "source_url": "https://sourceafrica.net/documents/21084-parliament-of-south-africa-register-of-members.html"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Sasol Inzalo",
+                "Nature": "Shares",
+                "Nominal Value": "R3 000"
+            },
+            {
+                "Name of Company": "Standard Bank",
+                "Nature": "Shares",
+                "Nominal Value": "R1 500"
+            },
+            {
+                "Name of Company": "FNB",
+                "Nature": "Shares",
+                "Nominal Value": "R5 000"
+            }
+        ],
+        "person": {
+            "slug": "thandi-gloria-mpambo-sibhukwana"
         },
         "release": {
             "date": "2014-09-17",
