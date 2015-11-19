@@ -556,7 +556,16 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
                 #record the 'cell' in the correct position in the row list
                 tabulated[release.id]['categories'][category.id]['entries'][-1][tabulated[release.id]['categories'][category.id]['headingindex'][entrylistitem.key]] = entrylistitem.value
 
-        return tabulated
+        ret = []
+
+        for release_id, release_data in tabulated.items():
+            release = Release.objects.get(pk=release_id)
+
+            ret.append((release_data, release.date))
+
+        ret.sort(key=lambda x: x[1], reverse=True)
+
+        return ret
 
     def list_contacts(self, kind_slugs):
         return self.object.contacts.filter(kind__slug__in=kind_slugs).values_list(
