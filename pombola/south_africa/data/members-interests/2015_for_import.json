@@ -3680,7 +3680,7 @@
             }
         ],
         "person": {
-            "slug": "cathlene-labuschagne"
+            "slug": "cathleen-labuschagne"
         },
         "release": {
             "date": "2015-10-29",
@@ -3700,7 +3700,7 @@
             }
         ],
         "person": {
-            "slug": "cathlene-labuschagne"
+            "slug": "cathleen-labuschagne"
         },
         "release": {
             "date": "2015-10-29",
@@ -3721,7 +3721,7 @@
             }
         ],
         "person": {
-            "slug": "cathlene-labuschagne"
+            "slug": "cathleen-labuschagne"
         },
         "release": {
             "date": "2015-10-29",
@@ -12004,7 +12004,7 @@
             }
         ],
         "person": {
-            "slug": "hlengiwe-octavia-maxon"
+            "slug": "hlengiwe-octavia-hlophe"
         },
         "release": {
             "date": "2015-10-29",
@@ -19104,48 +19104,6 @@
         "entries": [
             {
                 "Description": "House",
-                "Extent": "Normal",
-                "Location": "Centurion"
-            }
-        ],
-        "person": {
-            "slug": "marshall-mzingisi-dlamini"
-        },
-        "release": {
-            "date": "2015-10-29",
-            "name": "Parliament Register of Members' Interests 2015",
-            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
-        }
-    },
-    {
-        "category": {
-            "name": "TRUSTS",
-            "sort_order": 12
-        },
-        "entries": [
-            {
-                "Details Of Benefits": "None",
-                "Name Of Trusts": "Mazizi Family Trust",
-                "Trustee/Beneficiary": "Bongiwe Dlamini &amp; Marshall Dlamini"
-            }
-        ],
-        "person": {
-            "slug": "marshall-mzingisi-dlamini"
-        },
-        "release": {
-            "date": "2015-10-29",
-            "name": "Parliament Register of Members' Interests 2015",
-            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
-        }
-    },
-    {
-        "category": {
-            "name": "LAND AND PROPERTY",
-            "sort_order": 9
-        },
-        "entries": [
-            {
-                "Description": "House",
                 "Extent": "3 Bedroomed",
                 "Location": "Port Elizabeth"
             }
@@ -23549,6 +23507,48 @@
         ],
         "person": {
             "slug": "mzameni-richard-mdakane"
+        },
+        "release": {
+            "date": "2015-10-29",
+            "name": "Parliament Register of Members' Interests 2015",
+            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
+                "Extent": "Normal",
+                "Location": "Centurion"
+            }
+        ],
+        "person": {
+            "slug": "mzingisi-marshall-dlamini"
+        },
+        "release": {
+            "date": "2015-10-29",
+            "name": "Parliament Register of Members' Interests 2015",
+            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
+        }
+    },
+    {
+        "category": {
+            "name": "TRUSTS",
+            "sort_order": 12
+        },
+        "entries": [
+            {
+                "Details Of Benefits": "None",
+                "Name Of Trusts": "Mazizi Family Trust",
+                "Trustee/Beneficiary": "Bongiwe Dlamini &amp; Marshall Dlamini"
+            }
+        ],
+        "person": {
+            "slug": "mzingisi-marshall-dlamini"
         },
         "release": {
             "date": "2015-10-29",
@@ -31367,75 +31367,6 @@
         "entries": [
             {
                 "Description": "House",
-                "Extent": "118sq.m.",
-                "Location": "Steenberg, CPT"
-            }
-        ],
-        "person": {
-            "slug": "tandi-gloria-mpambo-sibhukwana"
-        },
-        "release": {
-            "date": "2015-10-29",
-            "name": "Parliament Register of Members' Interests 2015",
-            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
-        }
-    },
-    {
-        "category": {
-            "name": "PENSIONS",
-            "sort_order": 10
-        },
-        "entries": [
-            {
-                "Public/Private": "Private",
-                "Source": "Liberty Life"
-            }
-        ],
-        "person": {
-            "slug": "tandi-gloria-mpambo-sibhukwana"
-        },
-        "release": {
-            "date": "2015-10-29",
-            "name": "Parliament Register of Members' Interests 2015",
-            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
-        }
-    },
-    {
-        "category": {
-            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
-            "sort_order": 1
-        },
-        "entries": [
-            {
-                "Name of Company": "Sasol Inzalo",
-                "Nominal Value": "R3 000"
-            },
-            {
-                "Name of Company": "Standard Bank",
-                "Nominal Value": "R1 000"
-            },
-            {
-                "Name of Company": "First National Bank",
-                "Nominal Value": "R3 000"
-            }
-        ],
-        "person": {
-            "slug": "tandi-gloria-mpambo-sibhukwana"
-        },
-        "release": {
-            "date": "2015-10-29",
-            "name": "Parliament Register of Members' Interests 2015",
-            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
-        }
-    },
-    {
-        "category": {
-            "name": "LAND AND PROPERTY",
-            "sort_order": 9
-        },
-        "entries": [
-            {
-                "Description": "House",
                 "Location": "Samora Machel"
             }
         ],
@@ -31705,6 +31636,75 @@
         ],
         "person": {
             "slug": "thandi-cecilia-memela"
+        },
+        "release": {
+            "date": "2015-10-29",
+            "name": "Parliament Register of Members' Interests 2015",
+            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
+        }
+    },
+    {
+        "category": {
+            "name": "LAND AND PROPERTY",
+            "sort_order": 9
+        },
+        "entries": [
+            {
+                "Description": "House",
+                "Extent": "118sq.m.",
+                "Location": "Steenberg, CPT"
+            }
+        ],
+        "person": {
+            "slug": "thandi-gloria-mpambo-sibhukwana"
+        },
+        "release": {
+            "date": "2015-10-29",
+            "name": "Parliament Register of Members' Interests 2015",
+            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
+        }
+    },
+    {
+        "category": {
+            "name": "PENSIONS",
+            "sort_order": 10
+        },
+        "entries": [
+            {
+                "Public/Private": "Private",
+                "Source": "Liberty Life"
+            }
+        ],
+        "person": {
+            "slug": "thandi-gloria-mpambo-sibhukwana"
+        },
+        "release": {
+            "date": "2015-10-29",
+            "name": "Parliament Register of Members' Interests 2015",
+            "source_url": "https://sourceafrica.net/documents/21083-parliament-of-south-africa-register-of-members.html"
+        }
+    },
+    {
+        "category": {
+            "name": "SHARES AND OTHER FINANCIAL INTERESTS",
+            "sort_order": 1
+        },
+        "entries": [
+            {
+                "Name of Company": "Sasol Inzalo",
+                "Nominal Value": "R3 000"
+            },
+            {
+                "Name of Company": "Standard Bank",
+                "Nominal Value": "R1 000"
+            },
+            {
+                "Name of Company": "First National Bank",
+                "Nominal Value": "R3 000"
+            }
+        ],
+        "person": {
+            "slug": "thandi-gloria-mpambo-sibhukwana"
         },
         "release": {
             "date": "2015-10-29",
