@@ -251,7 +251,10 @@ class Converter(object):
         "zukiswa-ncitha": "zukiswa-veronica-ncitha",
         "cathlene-labuschagne": "cathleen-labuschagne",
         "tandi-gloria-mpambo-sibhukwana": "thandi-gloria-mpambo-sibhukwana",
+        "tandi-mpambo-sibhukwana": "thandi-gloria-mpambo-sibhukwana",
         "marshall-mzingisi-dlamini": "mzingisi-marshall-dlamini",
+        "hlengiwe-octavia-maxon": "hlengiwe-octavia-hlophe",
+        "hlengiwe-maxon": "hlengiwe-octavia-hlophe",
 
         #name changes confirmed in National Assembly membership document
         "buyiswa-blaai": "buyiswa-cornelia-diemu",
