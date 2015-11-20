@@ -134,8 +134,11 @@
 
           <div class="person-interests">
 
-            {% for key, release in interests.items %}
-              <h3>{{ release.name }}</h3>
+            {% for release, release_date in interests %}
+              <h3>{{ release.name }}{% for informationsource in release.informationsource %}
+                <small><a href="{{ informationsource.source }}" target="_blank" title="{{ informationsource.note }}">[Source]</a></small>
+              {% endfor %}</h3>
+
               {% for ckey, category in release.categories.items %}
                 <h4>{{ category.name }}</h4>
                 <table>

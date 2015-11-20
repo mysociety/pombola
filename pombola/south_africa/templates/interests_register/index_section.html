@@ -12,7 +12,13 @@
 <tr>
     {% for cell in row %}
       <td>
-          {% if forloop.counter == 2 %}
+          {% if forloop.counter == 1 %}
+            {% if cell.source_url %}
+              <a href="{{ cell.source_url }}" target="_blank">{{ cell.date.year }}</a>
+            {% else %}
+              {{ cell.date.year }}
+            {% endif %}
+          {% elif forloop.counter == 2 %}
               <a href="{{ cell.get_absolute_url }}">{{ cell.name }} ({{ cell.parties.0.slug|upper }})</a>
           {% else %}
               {{ cell }}

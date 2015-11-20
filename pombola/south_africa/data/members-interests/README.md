@@ -34,6 +34,7 @@ You can run the script like this:
     ./convert_to_import_json.py 2012.json > 2012_for_import.json
     ./convert_to_import_json.py 2013.json > 2013_for_import.json
     ./convert_to_import_json.py 2014.json > 2014_for_import.json
+    ./convert_to_import_json.py 2015.json > 2015_for_import.json
 
 When processing new data you may well need to add more entries to the
 `slug_corrections` attribute. Change the `finding_slug_corrections` to `True`
@@ -46,6 +47,7 @@ to enable some code that'll help you do that. Change it back to False when done.
     2012_for_import.json
     2013_for_import.json
     2014_for_import.json
+    2015_for_import.json
 
 This is the output of the above conversion script. It is committed for ease of
 adding to the database, and as looking at the diffs is an easy way to see the

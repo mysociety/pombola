@@ -244,6 +244,17 @@ class Converter(object):
         "claudia-ndaba": "ndaba-nonhlanhla",
         "maureen-scheepers": "m-scheepers",
         "nomaindiya-cathleen-mfeketo": "nomaindiya-cathleen-mfeketho",
+        "tshoganetso-mpho-adolphina-gasebonwe": "tshoganetso-mpho-adolphina-gasebonwe-tongwane",
+        "mntomuhle-khawula": "m-khawula",
+        "thembekile-richard-majola": "richard-majola",
+        "natasha-mazzone": "natasha-wendy-anita-michael",
+        "zukiswa-ncitha": "zukiswa-veronica-ncitha",
+        "cathlene-labuschagne": "cathleen-labuschagne",
+        "tandi-gloria-mpambo-sibhukwana": "thandi-gloria-mpambo-sibhukwana",
+        "tandi-mpambo-sibhukwana": "thandi-gloria-mpambo-sibhukwana",
+        "marshall-mzingisi-dlamini": "mzingisi-marshall-dlamini",
+        "hlengiwe-octavia-maxon": "hlengiwe-octavia-hlophe",
+        "hlengiwe-maxon": "hlengiwe-octavia-hlophe",
 
         #name changes confirmed in National Assembly membership document
         "buyiswa-blaai": "buyiswa-cornelia-diemu",
@@ -264,6 +275,9 @@ class Converter(object):
         "TRAVEL": 8,
         "LAND AND PROPERTY": 9,
         "PENSIONS": 10,
+        "CONTRACTS": 11,
+        "TRUSTS": 12,
+        "ENCUMBERANCES": 13,
     }
 
     def __init__(self, filename):
@@ -288,6 +302,7 @@ class Converter(object):
         self.release = {
             "name": "Parliament Register of Members' Interests " + year,
             "date": date,
+            "source_url": source_url,
         }
 
     def extract_entries(self, data):
@@ -301,7 +316,13 @@ class Converter(object):
                 # keys and values
                 for entry in entries:
                     for key in entry.keys():
-                        entry[key.strip()] = entry.pop(key).strip()
+
+                        # correct common scraper heading error
+                        key_to_use = key.strip()
+                        if key_to_use == 'Benefits' and raw_category_name.strip() == "TRUSTS":
+                            key_to_use = "Details Of Benefits"
+
+                        entry[key_to_use] = entry.pop(key).strip()
 
                     if entry.get('No') == 'Nothing to disclose':
                         del entry['No']

@@ -64,6 +64,7 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-area', # specific to DA party
 )
 
+release_content_type = ContentType.objects.get_for_model(Release)
 
 class SAHomeView(HomeView):
 
@@ -520,7 +521,16 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             category = entry.category
 
             if release.id not in tabulated:
-                tabulated[release.id] = {'name':release.name, 'categories':{}}
+                sources = models.InformationSource.objects.filter(
+                    content_type=release_content_type,
+                    object_id=release.id
+                )
+
+                tabulated[release.id] = {
+                    'name': release.name,
+                    'categories': {},
+                    'informationsource': sources
+                }
 
             if category.id not in tabulated[release.id]['categories']:
                 tabulated[release.id]['categories'][category.id] = {
@@ -551,7 +561,16 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
                 #record the 'cell' in the correct position in the row list
                 tabulated[release.id]['categories'][category.id]['entries'][-1][tabulated[release.id]['categories'][category.id]['headingindex'][entrylistitem.key]] = entrylistitem.value
 
-        return tabulated
+        ret = []
+
+        for release_id, release_data in tabulated.items():
+            release = Release.objects.get(pk=release_id)
+
+            ret.append((release_data, release.date))
+
+        ret.sort(key=lambda x: x[1], reverse=True)
+
+        return ret
 
     def list_contacts(self, kind_slugs):
         return self.object.contacts.filter(kind__slug__in=kind_slugs).values_list(
@@ -1583,6 +1602,15 @@ class SAMembersInterestsIndex(TemplateView):
                 'category__id'
             )
 
+            sources = models.InformationSource.objects.filter(
+                content_type=release_content_type,
+                object_id=entry_person.release.id
+            )
+            if sources:
+                source_url = sources[0].source
+            else:
+                source_url = ''
+
             for cat in person_categories:
                 entries = person.interests_register_entries.filter(
                     category=cat.category,
@@ -1611,7 +1639,8 @@ class SAMembersInterestsIndex(TemplateView):
             data.append({
                 'person': person,
                 'data': person_data,
-                'year': year})
+                'year': year,
+                'source_url': source_url})
 
         context['data'] = data
 
@@ -1663,8 +1692,19 @@ class SAMembersInterestsIndex(TemplateView):
         headers_index = {'Year': 0, 'Person': 1, 'Type': 2}
         data = []
         for entry in entries_paginated:
+            sources = models.InformationSource.objects.filter(
+                content_type=release_content_type,
+                object_id=entry.release.id
+            )
+            if sources:
+                source_url = sources[0].source
+            else:
+                source_url = ''
+
+            entry.release.source_url = source_url
+
             row = ['']*len(headers)
-            row[0] = entry.release.date.year
+            row[0] = entry.release
             row[1] = entry.person
             row[2] = entry.category.name
 
@@ -1730,6 +1770,18 @@ class SAMembersInterestsIndex(TemplateView):
             data_paginated = paginator.page(1)
         except EmptyPage:
             data_paginated = paginator.page(paginator.num_pages)
+
+        for row in data_paginated:
+            sources = models.InformationSource.objects.filter(
+                content_type=release_content_type,
+                object_id=row.release.id
+            )
+            if sources:
+                source_url = sources[0].source
+            else:
+                source_url = ''
+
+            row.release.source_url = source_url
 
         context['data'] = data_paginated
 
@@ -1797,6 +1849,18 @@ class SAMembersInterestsIndex(TemplateView):
             data_paginated = paginator.page(1)
         except EmptyPage:
             data_paginated = paginator.page(paginator.num_pages)
+
+        for row in data_paginated:
+            sources = models.InformationSource.objects.filter(
+                content_type=release_content_type,
+                object_id=row.release.id
+            )
+            if sources:
+                source_url = sources[0].source
+            else:
+                source_url = ''
+
+            row.release.source_url = source_url
 
         context['data'] = data_paginated
 

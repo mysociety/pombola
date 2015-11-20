@@ -2,10 +2,13 @@ import json
 import sys
 from datetime import date
 
+from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import LabelCommand, CommandError
 
-from pombola.core.models import Person
+from pombola.core.models import Person, InformationSource
 from ...models import Release, Category, Entry, EntryLineItem
+
+release_content_type = ContentType.objects.get_for_model(Release)
 
 class Command(LabelCommand):
     help = 'Import entries from our own JSON format'
@@ -21,10 +24,25 @@ class Command(LabelCommand):
     def handle_grouping(self, grouping):
         # print grouping
 
-        person = Person.objects.get(**grouping['person'])
+        try:
+            person = Person.objects.get(**grouping['person'])
+        except Person.DoesNotExist:
+            self.stderr.write("Failed to find the person from: " + repr(grouping['person']))
+            return
+
+        source_url = grouping['release'].pop('source_url')
 
         release, _  = Release.objects.get_or_create(**grouping['release'])
         category, _ = Category.objects.get_or_create(**grouping['category'])
+
+        # record release source
+        InformationSource.objects.get_or_create(
+            source=source_url,
+            note=grouping['release']['name'],
+            entered=True,
+            content_type=release_content_type,
+            object_id=release.id
+        )
 
         # check that there are no entries for the given person, release and
         # category combination. This is because it is much easier to error if
