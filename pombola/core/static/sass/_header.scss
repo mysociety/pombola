@@ -5,6 +5,23 @@
   .wrapper {
     overflow: hidden; } }
 
+#ms_srv_wrapper {
+  background-color: #444;
+  color: #FFF;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 10px;
+  text-align: center;
+
+  a {
+    color: #EEE;
+
+    &:hover {
+      color: #FFF;
+    }
+  }
+}
+
 @media only all and (min-width: 640px), print {
   #site-header {
     height: 60px;

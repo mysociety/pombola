@@ -572,6 +572,12 @@ PIPELINE_JS = {
         'output_filename': 'js/hide-reveal.js',
         'template_name': 'pipeline/js-array.html',
     },
+    'survey': {
+        'source_filenames': (
+            'js/survey.js',
+        ),
+        'output_filename': 'js/survey.js',
+    },
 }
 
 for package_name, package in DYNAMICALLY_LOADED_PIPELINE_JS.items():
