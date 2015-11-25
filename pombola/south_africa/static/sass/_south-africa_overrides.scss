@@ -1883,6 +1883,7 @@ ul.pager {
         .ui-tabs-anchor {
             padding: 0;
             font-size: 0.75em;
+            outline: none; // disable outline on focus, we'll rely on .ui-tabs-active style instead
 
             @media only all and (min-width: 640px), print {
                 font-size: 0.875em;
