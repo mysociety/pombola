@@ -46,7 +46,7 @@
             <div class="inline-search-box">
                 <label for="id_q">Search</label>
                 <input id="id_q" name="q" type="text" value="{{ query }}">
-                <input type="submit" value="Search" class="button">
+                <input type="submit" value="{% if query %}Update Results{% else %}Search{% endif %}" class="button">
             </div>
             {% if settings.COUNTRY_APP == 'south_africa' %}
             <h4>Advanced search</h4>
