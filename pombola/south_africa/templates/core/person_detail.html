@@ -168,7 +168,11 @@
 
             <div class="column">
               {% for data in attendance %}
-                <h3 class="attendance__heading">{{ data.year }} attendance</h3>
+                <header>
+                  <h3 class="attendance__heading">{{ data.year }} attendance</h3>
+                  {% if data.year == 2014 %}<p>(From the start of the Fifth Parliament)</p>{% endif %}
+                </header>
+
                 <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
                 <p class="attendance__context">Attended {{ data.attended }} meetings out of {{ data.total }}</p>
               {% endfor %}
