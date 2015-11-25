@@ -254,7 +254,8 @@ body {
 }
 
 .person-detail-experience,
-.person-detail-hansard {
+.person-detail-hansard,
+.person-detail-cdf-budgets {
   width: 48%;
   float: left;
   background: transparent url(../images/mz-person-detail-experience.png) 0 0 no-repeat;
@@ -316,6 +317,28 @@ body {
   background-image: url(../images/mz-person-detail-appearances.png);
 }
 
+.person-detail-cdf-budgets {
+  margin-top: 20px;
+  width: 100%;
+  background-image: url(../images/mz-person-detail-budget.png);
+  color: #777;
+
+  h2 {
+    color: $colour_primary;
+  }
+
+  & > ul li {
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    a {
+      color: $colour_primary;
+    }
+  }
+}
+
 /* used by old code on the /person/name/experience page */
 #page.object-base .large-container .left-col,
 #page.object-base .large-container .right-col {
@@ -328,7 +351,8 @@ body {
 
 @media only screen and (max-width: 800px) {
   .person-detail-experience,
-  .person-detail-hansard {
+  .person-detail-hansard,
+  .person-detail-cdf-budgets {
     width: auto;
     float: none;
     margin-left: 0;
