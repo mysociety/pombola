@@ -1938,6 +1938,12 @@ p.attendance__percentage {
     }
 }
 
+p.attendance__disclaimer {
+  color: $colour_middling_grey;
+  font-size: 0.8em;
+  margin: 2em 0;
+}
+
 /* Hansard index page */
 .hansard-section-title {
     cursor: pointer;
@@ -2069,6 +2075,7 @@ p.attendance__percentage {
     margin-left: 1em;
 }
 .fifty-fifty-layout {
+    @include clearfix;
     .column {
         &:first-child {
             margin-bottom: 2em;
