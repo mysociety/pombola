@@ -25,13 +25,14 @@
 
   {% if cdf_budget_constituencies %}
     <div class="person-detail-cdf-budgets">
-      <h3>Constituencies Development Fund Budget</h3>
-      {% for cdf_constituency in cdf_budget_constituencies %}
-        <p><a href="{{ constituency.get_absolute_url }}">{{ cdf_constituency.constituency.name }}</a>, {{ cdf_constituency.budget.budget_session }}: <b>{{ cdf_constituency.budget.formatted_value }}</b></p>
-      {% endfor %}
+      <h2>Constituencies Development Fund Budget</h2>
+      <ul>
+        {% for cdf_constituency in cdf_budget_constituencies %}
+          <li><a href="{{ constituency.get_absolute_url }}">{{ cdf_constituency.constituency.name }}</a>, {{ cdf_constituency.budget.budget_session }}: <b>{{ cdf_constituency.budget.formatted_value }}</b></li>
+        {% endfor %}
+      </ul>
     </div>
   {% endif %}
-
 
   {% if settings.ENABLED_FEATURES.bills %}
     {% include "bills/_person_recent_bills.html" %}
