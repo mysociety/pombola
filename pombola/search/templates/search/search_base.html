@@ -42,39 +42,51 @@
       {% endblock %}
 
         <div class="search-section-box">
-            {% block search_form %}
+
+          {% block search_form %}
             <div class="inline-search-box">
                 <label for="id_q">Search</label>
                 <input id="id_q" name="q" type="text" value="{{ query }}">
                 <input type="submit" value="Search" class="button">
             </div>
-            {% if settings.COUNTRY_APP == 'south_africa' %}
+
+          {% if settings.COUNTRY_APP == 'south_africa' %}
             <h4>Advanced search</h4>
-            {% else %}
+          {% else %}
             <a href="#advanced-search-options" class="js-hide-reveal-link open-advanced-search">Advanced search</a>
-            {% endif %}
+          {% endif %}
+
             <div class="advanced-search-options{% if settings.COUNTRY_APP != 'south_africa' %} js-hide-reveal{% endif %}" id="advanced-search-options">
+
               {% for search_section, title, selected in form_options %}
-                  <div class="radio-button-columns"><input type="radio" name="section" id="{{ search_section }}" value="{{ search_section }}"{% if selected %} checked{% endif %}><label for="{{ search_section }}">{{ title }}</label></div>
+                <div class="radio-button-columns">
+                    <label>
+                        <input type="radio" name="section" value="{{ search_section }}"{% if selected %} checked{% endif %}>
+                        {{ title }}
+                    </label>
+                </div>
               {% endfor %}
-              <div class="search-order-by-controls">
-                <label for="search-results-order">Order by</label>
-                  <select name="order" id="search-results-order">
-                    <option value="relevance"{% if order == 'relevance' %} selected{% endif %}>Relevance</option>
-                    <option value="date"{% if order == 'date' %} selected{% endif %}>Date</option>
-                  </select>
-              </div>
+
+                <div class="search-order-by-controls">
+                    <label for="search-results-order">Order by</label>
+                    <select name="order" id="search-results-order">
+                        <option value="relevance"{% if order == 'relevance' %} selected{% endif %}>Relevance</option>
+                        <option value="date"{% if order == 'date' %} selected{% endif %}>Date</option>
+                    </select>
+                </div>
+
               {% if settings.COUNTRY_APP == 'south_africa' %}
-              <div class="search-range-controls">
-                <h4>Date range</h4>
-                <label for="search-range-start">Start date</label>
-                <input type="text" name="start" id="search-range-start" value="{{ search_start_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
-                <label for="search-range-end">End date</label>
-                <input type="text" name="end" id="search-range-end" value="{{ search_end_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
-              </div>
+                <div class="search-range-controls">
+                    <h4>Date range</h4>
+                    <label for="search-range-start">Start date</label>
+                    <input type="text" name="start" id="search-range-start" value="{{ search_start_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
+                    <label for="search-range-end">End date</label>
+                    <input type="text" name="end" id="search-range-end" value="{{ search_end_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
+                </div>
               {% endif %}
+
             </div>
-            {% endblock %}
+          {% endblock %}
 
         </div>
 
