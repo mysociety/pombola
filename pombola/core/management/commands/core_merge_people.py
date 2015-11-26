@@ -127,35 +127,42 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
 
             from speeches.models import Speech
 
-            try:
+            delete_sayit_speaker = self.pombola_person_to_sayit_speaker(
+                to_delete,
+                options['sayit_id_scheme']
+            )
 
-                delete_sayit_speaker = self.pombola_person_to_sayit_speaker(
-                    to_delete,
-                    options['sayit_id_scheme']
-                )
+            keep_sayit_speaker = self.pombola_person_to_sayit_speaker(
+                to_keep,
+                options['sayit_id_scheme']
+            )
 
-                keep_sayit_speaker = self.pombola_person_to_sayit_speaker(
-                    to_keep,
-                    options['sayit_id_scheme']
-                )
-
+            if delete_sayit_speaker and keep_sayit_speaker:
                 Speech.objects.filter(
                     speaker=delete_sayit_speaker
                 ).update(
                     speaker=keep_sayit_speaker
                 )
+            else:
+                if not options['quiet']:
+                    print "One or both of the people does not have a SayIt " \
+                        "speaker. Not moving speeches."
 
-                # Delete the identifier from the losing side, as all speeches are now the new one
+            try:
+                # Delete the identifier from the losing side, as all
+                # speeches are now the new one
+                ct = core_models.ContentType.objects.get_for_model(
+                    core_models.Person)
                 core_models.Identifier.objects.get(
-                    content_type=core_models.ContentType.objects.get_for_model(core_models.Person),
+                    content_type=ct,
                     object_id=to_delete.id,
                     scheme=options['sayit_id_scheme']
                 ).delete()
-
-            except ObjectDoesNotExist:
-                if not options['quiet']:
-                    print "One or both of the people does not have a SayIt speaker. Not moving speeches."
-
+            except core_models.Identifier.DoesNotExist:
+                # If there was no such identifier, it's nothing to
+                # worry about; they're not used for mapping to SayIt
+                # speakers any more anyway.
+                pass
 
         # Switch the person or speaker model on all affected
         # models in core:
