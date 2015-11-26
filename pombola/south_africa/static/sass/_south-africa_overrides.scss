@@ -1868,7 +1868,7 @@ ul.pager {
     .ui-tabs-nav {
         li {
           border: none;
-          margin: 0 1em 0 0;
+          margin: 0 1em 3px 0;
 
             a {
                 color: $colour_primary;
@@ -1892,6 +1892,7 @@ ul.pager {
 
         .ui-tabs-active {
             border-bottom: 3px solid $jquery_ui_tabs_border;
+            margin-bottom: 0;
 
             a {
                 color: inherit;
