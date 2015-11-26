@@ -56,16 +56,18 @@
             <a href="#advanced-search-options" class="js-hide-reveal-link open-advanced-search">Advanced search</a>
           {% endif %}
 
-            <div class="advanced-search-options{% if settings.COUNTRY_APP != 'south_africa' %} js-hide-reveal{% endif %}" id="advanced-search-options">
+            <div class="advanced-search-options js-update-results-trigger {% if settings.COUNTRY_APP != 'south_africa' %} js-hide-reveal{% endif %}" id="advanced-search-options">
 
-              {% for search_section, title, selected in form_options %}
-                <div class="radio-button-columns">
-                    <label>
-                        <input type="radio" name="section" value="{{ search_section }}"{% if selected %} checked{% endif %}>
-                        {{ title }}
-                    </label>
+                <div class="search-category-controls">
+                  {% for search_section, title, selected in form_options %}
+                    <div class="radio-button-columns">
+                        <label>
+                            <input type="radio" name="section" value="{{ search_section }}"{% if selected %} checked{% endif %}>
+                            {{ title }}
+                        </label>
+                    </div>
+                  {% endfor %}
                 </div>
-              {% endfor %}
 
                 <div class="search-order-by-controls">
                     <label for="search-results-order">Order by</label>
@@ -77,13 +79,15 @@
 
               {% if settings.COUNTRY_APP == 'south_africa' %}
                 <div class="search-range-controls">
-                    <h4>Date range</h4>
+                    <h4>Limit to date range</h4>
                     <label for="search-range-start">Start date</label>
                     <input type="text" name="start" id="search-range-start" value="{{ search_start_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
                     <label for="search-range-end">End date</label>
                     <input type="text" name="end" id="search-range-end" value="{{ search_end_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
                 </div>
               {% endif %}
+
+              <button type="submit" class="button js-update-results-button">Update results</button>
 
             </div>
           {% endblock %}

@@ -11,12 +11,20 @@ jQuery(function($) {
             $searchResultsOrder.val('relevance');
         }
     });
-});
 
-jQuery(function($) {
-  $('.datepicker').datepicker({
-      changeMonth: true,
-      changeYear: true,
-      dateFormat: "yy-mm-dd",
-  });
+    $('.datepicker').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "yy-mm-dd",
+    });
+
+    // The "Update results" button is disabled by default...
+    var $advancedUpdateButton = $('.js-update-results-button');
+    $advancedUpdateButton.prop('disabled', true);
+
+    // And then activated again once they change any of the settings...
+    var $advancedOptions = $('.js-update-results-trigger');
+    $('input, select', $advancedOptions).on('change', function(){
+        $advancedUpdateButton.prop('disabled', false);
+    });
 });
