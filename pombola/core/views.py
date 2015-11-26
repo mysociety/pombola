@@ -163,14 +163,10 @@ class PersonDetailSub(SubSlugRedirectMixin, BasePersonDetailView):
         return ["core/person_%s.html" % self.sub_page]
 
 class PersonSpeakerMappingsMixin(object):
-    def pombola_person_to_sayit_speaker(self, person, scheme):
+    def pombola_person_to_sayit_speaker(self, person):
         try:
             expected_popit_id = 'core_person:{0}'.format(person.id)
-            speaker = Speaker.objects.get(
-                person__popit_id=(scheme + expected_popit_id)
-            )
-            return speaker
-
+            return Speaker.objects.get(person__popit_id=expected_popit_id)
         except ObjectDoesNotExist:
             return None
 

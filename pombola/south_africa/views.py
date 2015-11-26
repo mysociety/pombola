@@ -493,10 +493,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
     def get_recent_speeches_for_section(self, tags, limit=5):
         pombola_person = self.object
-        sayit_speaker = self.pombola_person_to_sayit_speaker(
-            pombola_person,
-            ''
-        )
+        sayit_speaker = self.pombola_person_to_sayit_speaker(pombola_person)
 
         if not sayit_speaker:
             # Without a speaker we can't find any speeches
@@ -1128,10 +1125,7 @@ class SAPersonAppearanceView(PersonSpeakerMappingsMixin, TemplateView):
         tag    = get_object_or_404(Tag, name=speech_tag)
 
         # SayIt speaker is different to core.Person, Load the speaker
-        speaker = self.pombola_person_to_sayit_speaker(
-            person,
-            ''
-        )
+        speaker = self.pombola_person_to_sayit_speaker(person)
 
         # Load the speeches. Pagination is done in the template
         speeches = Speech.objects \
