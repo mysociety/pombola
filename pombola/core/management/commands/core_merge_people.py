@@ -19,13 +19,25 @@ from optparse import make_option
 
 from django.core.exceptions import ObjectDoesNotExist
 
+
 def check_basic_fields(basic_fields, to_keep, to_delete):
     """Return False if any data might be lost on merging"""
 
     safe_to_delete = True
     for basic_field in basic_fields:
-        delete_value = getattr(to_delete, basic_field)
-        keep_value = getattr(to_keep, basic_field)
+        if basic_field == 'summary':
+            # We can't just check equality of summary fields because
+            # they are MarkupField fields which don't have equality
+            # helpfully defined (and they're always different objects
+            # between two different speakers), so instead, check for
+            # equality of the rendered content of the summary.
+
+            delete_value = to_delete.summary.rendered
+            keep_value = to_keep.summary.rendered
+        else:
+            delete_value = getattr(to_delete, basic_field)
+            keep_value = getattr(to_keep, basic_field)
+
         if delete_value and (keep_value != delete_value):
             # i.e. there's some data that might be lost:
             safe_to_delete = False
