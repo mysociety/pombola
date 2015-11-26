@@ -60,8 +60,6 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
         make_option("--delete-person", dest="delete_person", type="string",
                     help="The ID or slug of the person to delete",
                     metavar="PERSON-ID"),
-        make_option("--sayit-id-scheme", dest="sayit_id_scheme", type="string",
-                    help="The name of the SayIt ID schema (if used)"),
         make_option('--noinput',  dest='interactive',
                     action='store_false', default=True,
                     help="Do NOT prompt the user for input of any kind"),
@@ -122,20 +120,13 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
             if not options['quiet']:
                 print "Moving SayIt speeches"
 
-            if options['sayit_id_scheme'] is None:
-                raise CommandError("You must specify --sayit-id-scheme")
-
             from speeches.models import Speech
 
             delete_sayit_speaker = self.pombola_person_to_sayit_speaker(
-                to_delete,
-                options['sayit_id_scheme']
-            )
+                to_delete)
 
             keep_sayit_speaker = self.pombola_person_to_sayit_speaker(
-                to_keep,
-                options['sayit_id_scheme']
-            )
+                to_keep)
 
             if delete_sayit_speaker and keep_sayit_speaker:
                 Speech.objects.filter(
@@ -147,22 +138,6 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
                 if not options['quiet']:
                     print "One or both of the people does not have a SayIt " \
                         "speaker. Not moving speeches."
-
-            try:
-                # Delete the identifier from the losing side, as all
-                # speeches are now the new one
-                ct = core_models.ContentType.objects.get_for_model(
-                    core_models.Person)
-                core_models.Identifier.objects.get(
-                    content_type=ct,
-                    object_id=to_delete.id,
-                    scheme=options['sayit_id_scheme']
-                ).delete()
-            except core_models.Identifier.DoesNotExist:
-                # If there was no such identifier, it's nothing to
-                # worry about; they're not used for mapping to SayIt
-                # speakers any more anyway.
-                pass
 
         # Switch the person or speaker model on all affected
         # models in core:
