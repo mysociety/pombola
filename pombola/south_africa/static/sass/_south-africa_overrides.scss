@@ -1864,38 +1864,51 @@ ul.pager {
     }
 }
 
-.tab-links {
-    border-bottom: 1px solid #d2d2ce;
-    @include unstyled-list;
-    margin-bottom: 1em;
-    li {
-        display: inline-block;
-        margin-right: 1em;
-        a {
-            display: inline-block;
-            background: #fff;
-            margin-bottom: 3px;
-            text-decoration: none;
+.ui-tabs {
+    .ui-tabs-nav {
+        li {
+          border: none;
+          margin: 0 1em 3px 0;
+
+            a {
+                color: $colour_primary;
+
+                &:hover,
+                &:focus {
+                    color: mix($colour_primary, #000, 80%);
+                }
+            }
+        }
+
+        .ui-tabs-anchor {
+            padding: 0;
             font-size: 0.75em;
+            outline: none; // disable outline on focus, we'll rely on .ui-tabs-active style instead
+
             @media only all and (min-width: 640px), print {
                 font-size: 0.875em;
             }
-            &.active {
-                border-bottom: 3px solid #d2d2ce;
-                margin-bottom: 0;
-                color: $colour_black;
+        }
+
+        .ui-tabs-active {
+            border-bottom: 3px solid $jquery_ui_tabs_border;
+            margin-bottom: 0;
+
+            a {
+                color: inherit;
+
+                &:hover,
+                &:focus {
+                    color: inherit;
+                }
             }
         }
     }
-}
 
-.tab-content {
-    display: none;
-    ul, p {
-        font-size: 0.875em;
-    }
-    &.tab-active {
-        display: block;
+    .ui-tabs-panel {
+        ul, p {
+            font-size: 0.875em;
+       }
     }
 }
 

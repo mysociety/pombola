@@ -452,13 +452,6 @@ def make_enabled_features(installed_apps, all_optional_apps):
 # Set up the core CSS and JS files:
 
 PIPELINE_CSS = {
-    'core': {
-        'source_filenames': (
-            # .css files from core:
-            'css/jquery-ui-1.8.17.custom.css',
-        ),
-        'output_filename': 'css/core.css',
-    },
     'countdown': {
         'source_filenames': (
             'css/jquery.countdown-v1.6.0.css',
@@ -485,8 +478,7 @@ PIPELINE_CSS = {
 DYNAMICALLY_LOADED_PIPELINE_JS = {
    'desktop_only': {
         'source_filenames': (
-            'js/libs/jquery-ui-1.8.17.custom.min.js',
-            'js/libs/jquery.ui.autocomplete.html.2010-10-25.js',
+            'js/libs/jquery-ui.js',
             'js/libs/jquery.form-v2.94.js',
             'js/desktop-functions.js',
         ),
@@ -547,6 +539,13 @@ DYNAMICALLY_LOADED_PIPELINE_JS = {
             'js/map-drilldown.js',
         ),
         'output_filename': 'js/map.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'ui-test': {
+        'source_filenames': (
+            'js/ui-test.js',
+        ),
+        'output_filename': 'js/ui-test.js',
         'template_name': 'pipeline/js-array.html',
     },
 }

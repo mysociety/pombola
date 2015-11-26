@@ -39,7 +39,6 @@ COUNTRY_CSS = {
     'south-africa': {
         'source_filenames': (
             'sass/south-africa.scss',
-            'css/jquery.ui.datepicker.css',
         ),
         'output_filename': 'css/south-africa.css'
     }
@@ -69,7 +68,6 @@ COUNTRY_JS = {
     },
     'advanced-search': {
         'source_filenames': (
-            'js/libs/jquery.ui.datepicker.js',
             'js/advanced-search.js',
         ),
         'output_filename': 'js/advanced-search.js',

@@ -44,24 +44,32 @@
     </div>
 
   {% with past_positions=person.position_set.all.political.currently_inactive %}
-    <div class="tabs">
-      <ul class="tab-links">
+    <div class="tabs ui-tabs ui-widget">
+      <ul class="tab-links ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
         {% if hansard.count or question.count or committee.count %}
-          <li><a href="#appearances" class="active">Appearances</a></li>
+          <li class="ui-state-default">
+            <a class="ui-tabs-anchor" href="#appearances" class="active">Appearances</a>
+          </li>
         {% endif %}
         {% if past_positions %}
-          <li><a href="#experience">Positions held</a></li>
+          <li class="ui-state-default">
+            <a class="ui-tabs-anchor" href="#experience">Positions held</a>
+          </li>
         {% endif %}
         {% if object.interests_register_entries.exists %}
-          <li><a href="#membersinterests">Register of Interests</a></li>
+          <li class="ui-state-default">
+            <a class="ui-tabs-anchor" href="#membersinterests">Register of Interests</a>
+          </li>
         {% endif %}
         {% if attendance %}
-          <li><a href="#attendance">Committee Attendance</a></li>
+          <li class="ui-state-default">
+            <a class="ui-tabs-anchor" href="#attendance">Committee Attendance</a>
+          </li>
         {% endif %}
       </ul>
 
       {% if hansard.count or question.count or committee.count %}
-        <div id="appearances" class="tab-content tab-active">
+        <div id="appearances" class="tab-content ui-tabs-panel ui-widget-content">
           <section class="person-appearances">
             <h3>Committee appearances</h3>
 
@@ -95,7 +103,7 @@
       {% endif %}
 
       {% if past_positions %}
-        <div id="experience" class="tab-content">
+        <div id="experience" class="tab-content ui-tabs-panel ui-widget-content">
           <div class="person-experience">
             {% with current_positions=person.position_set.all.political.currently_active %}
               {% if current_positions %}
@@ -130,7 +138,7 @@
       {% endif %}
 
       {% if object.interests_register_entries.exists %}
-        <div id="membersinterests" class="tab-content">
+        <div id="membersinterests" class="tab-content ui-tabs-panel ui-widget-content">
 
           <div class="person-interests">
 
@@ -163,7 +171,7 @@
       {% endif %}
 
       {% if attendance %}
-        <div id="attendance" class="tab-content">
+        <div id="attendance" class="tab-content ui-tabs-panel ui-widget-content">
           <div class="fifty-fifty-layout">
 
             <div class="column">

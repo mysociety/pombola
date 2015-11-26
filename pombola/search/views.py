@@ -375,7 +375,7 @@ def remove_duplicate_places(response_data):
     previous_label_index = {}
 
     for i, result in enumerate(response_data):
-        this_label = result['label']
+        this_label = (result['name'], result['extra_data'])
         this_object = result['object']
         if (this_label in previous_label_index) and type(this_object) == models.Place:
             previous_i = previous_label_index[this_label]
@@ -433,18 +433,16 @@ def autocomplete(request):
         # collate the results into json for the autocomplete js
         for result in sqs.all()[0:10]:
 
-            object = result.object
-            css_class = object.css_class()
+            o = result.object
+            css_class = o.css_class()
 
-            # use the specific field if it has one
-            if hasattr(object, 'name_autocomplete_html'):
-                label = object.name_autocomplete_html
-            else:
-                label = object.name
+            extra_autocomplete_data = None
+            if hasattr(o, 'extra_autocomplete_data'):
+                extra_autocomplete_data = o.extra_autocomplete_data
 
             image_url = None
-            if hasattr(object, 'primary_image'):
-                image = object.primary_image()
+            if hasattr(o, 'primary_image'):
+                image = o.primary_image()
                 if image:
                     image_url = get_thumbnail(image, '16x16', crop="center").url
 
@@ -452,11 +450,13 @@ def autocomplete(request):
                 image_url = "/static/images/" + css_class + "-16x16.jpg"
 
             response_data.append({
-                'url':   object.get_absolute_url(),
-                'label': '<img height="16" width="16" src="%s" /> %s' % (image_url, label),
-                'type':  css_class,
-                'value': object.name,
-                'object': object
+                'url': o.get_absolute_url(),
+                'name': o.name,
+                'image_url': image_url,
+                'extra_data': extra_autocomplete_data,
+                'type': css_class,
+                'value': o.name,
+                'object': o
             })
 
     remove_duplicate_places(response_data)
