@@ -23,7 +23,7 @@ django-pipeline-compass-rubygem==0.1.8
 ### Django related registration
 # The registration app is a little out of date - get it from the repo direct....
 # django-registration
--e hg+https://bitbucket.org/ubernostrum/django-registration@fad7080fe769#egg=django-registration
+-e git+git://github.com/ubernostrum/django-registration@af917d4936973820fa1be2336db3ca922d27b89d#egg=django-registration
 django-registration-defaults==0.3
 
 ### Pombola dependencies
