@@ -6,6 +6,7 @@ import dateutil
 import json
 import logging
 import re
+import string
 import urllib
 from urlparse import urlsplit
 import warnings
@@ -481,6 +482,18 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
             context['office_filter'] = True
             context['current_filter'] = False
             context['sorted_positions'] = context['sorted_positions'].exclude(title__slug='member').exclude(title__slug='delegate')
+
+        # Counts of positions relating to people whose name starts with each letter of the alphabet
+        count_by_prefix = []
+
+        for letter in string.ascii_uppercase:
+            count_by_prefix.append(
+                (letter,
+                 context['sorted_positions']
+                 .filter(person__sort_name__istartswith=letter).count())
+                )
+
+        context['count_by_prefix'] = count_by_prefix
 
         person_name_prefix = self.kwargs.get('person_prefix')
         if person_name_prefix:
