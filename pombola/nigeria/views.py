@@ -299,11 +299,11 @@ class NGSearchView(SearchBaseView):
         for district in districts:
             place = {}
             place['district_name'] = district.name
-            place['district_url'] = district.get_absolute_url
+            place['district_url'] = district.get_absolute_url()
             people = self.get_people(district, role)
             if people:
                 place['rep_name'] = people[0][0].name
-                place['rep_url'] = people[0][0].get_absolute_url
+                place['rep_url'] = people[0][0].get_absolute_url()
             district_list.append(place)
         return district_list
 
