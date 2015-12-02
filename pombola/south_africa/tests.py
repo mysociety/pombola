@@ -828,6 +828,49 @@ class SAOrganisationPeopleSubPageTest(TestCase):
 
         self.assertEqual([x.id for x in context['sorted_positions']], expected)
 
+    def test_fetch_single_letter(self):
+        context = self.client.get(
+            reverse(
+                'organisation_people_prefix',
+                kwargs={'slug': 'ncop', 'person_prefix': 'A'},
+                )
+            ).context
+
+        expected_positions = [self.aardvark_ncop.id]
+        self.assertEqual([x.id for x in context['sorted_positions']], expected_positions)
+
+        self.assertEqual(context['current_name_prefix'], 'A')
+
+        expected_count_by_prefix = [
+            ('A', 1),
+            ('B', 1),
+            ('C', 0),
+            ('D', 0),
+            ('E', 0),
+            ('F', 0),
+            ('G', 0),
+            ('H', 0),
+            ('I', 0),
+            ('J', 0),
+            ('K', 0),
+            ('L', 0),
+            ('M', 0),
+            ('N', 0),
+            ('O', 0),
+            ('P', 0),
+            ('Q', 0),
+            ('R', 0),
+            ('S', 3),
+            ('T', 0),
+            ('U', 0),
+            ('V', 0),
+            ('W', 0),
+            ('X', 0),
+            ('Y', 0),
+            ('Z', 1),
+        ]
+        self.assertEqual(context['count_by_prefix'], expected_count_by_prefix)
+
 
 @attr(country='south_africa')
 class SAHansardIndexViewTest(TestCase):
@@ -1879,6 +1922,10 @@ class SAUrlRoutingTest(TestCase):
 
     def test_za_organisation_people(self):
         match = resolve('/organisation/foo/people/')
+        self.assertEqual(match.func.func_name, 'SAOrganisationDetailSubPeople')
+
+    def test_za_organisation_people_prefix(self):
+        match = resolve('/organisation/foo/people/A')
         self.assertEqual(match.func.func_name, 'SAOrganisationDetailSubPeople')
 
     def test_za_organisation(self):

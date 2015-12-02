@@ -51,6 +51,14 @@ organisation_patterns.append(
         )
     )
 
+# Add view for people with names starting with a prefix
+organisation_patterns.insert(
+    0,
+    url(r'^(?P<slug>[-\w]+)/people/(?P<person_prefix>[\w]+)$',
+        SAOrganisationDetailSubPeople.as_view(sub_page='people'),
+        name='organisation_people_prefix',
+        )
+    )
 
 person_patterns = copy.copy(person_patterns)
 
