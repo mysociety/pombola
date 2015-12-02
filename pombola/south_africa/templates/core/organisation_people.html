@@ -23,9 +23,24 @@
     </div>
 
     <ol class="unstyled alphabet-links">
-      <li><a href='.{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>(all)</a></li>
+      <li>
+        {% if current_name_prefix %}
+          <a href='.{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>(all)</a>
+        {% else %}
+          <span class="current-prefix">(all)</span>
+        {% endif %}
+      </li>
+
       {% for letter, count in count_by_prefix %}
-        <li>{% if count %}<a href='{{ letter }}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>{{ letter }}</a>{% else %}{{ letter }}{% endif %}</li>
+        <li>
+          {% if letter == current_name_prefix %}
+            <span class="current-prefix">{{ letter }}</span>
+          {% elif count %}
+            <a href='{{ letter }}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>{{ letter }}</a>
+          {% else %}
+            {{ letter }}
+          {% endif %}
+        </li>
       {% endfor %}
     </ol>
 

@@ -1564,6 +1564,10 @@ ul.pager {
 
 .alphabet-links li {
     display: inline;
+
+    .current-prefix {
+        color: $colour_green;
+    }
 }
 
 .kind-of-subtitle {

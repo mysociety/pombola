@@ -502,6 +502,8 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
                 .filter(person__sort_name__istartswith=person_name_prefix)
                 )
 
+        context['current_name_prefix'] = person_name_prefix
+
         if self.object.slug == 'ncop':
             context['membertitle'] = 'delegate'
         else:
