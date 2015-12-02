@@ -1561,6 +1561,11 @@ ul.pager {
 }
 
 /* Organisation pages */
+
+.alphabet-links li {
+    display: inline;
+}
+
 .kind-of-subtitle {
     font-family: $font_family_lato;
     font-weight: bold;
