@@ -482,6 +482,13 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
             context['current_filter'] = False
             context['sorted_positions'] = context['sorted_positions'].exclude(title__slug='member').exclude(title__slug='delegate')
 
+        person_name_prefix = self.kwargs.get('person_prefix')
+        if person_name_prefix:
+            context['sorted_positions'] = (
+                context['sorted_positions']
+                .filter(person__sort_name__istartswith=person_name_prefix)
+                )
+
         if self.object.slug == 'ncop':
             context['membertitle'] = 'delegate'
         else:

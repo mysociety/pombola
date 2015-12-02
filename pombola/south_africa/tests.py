@@ -1881,6 +1881,10 @@ class SAUrlRoutingTest(TestCase):
         match = resolve('/organisation/foo/people/')
         self.assertEqual(match.func.func_name, 'SAOrganisationDetailSubPeople')
 
+    def test_za_organisation_people_prefix(self):
+        match = resolve('/organisation/foo/people/A')
+        self.assertEqual(match.func.func_name, 'SAOrganisationDetailSubPeople')
+
     def test_za_organisation(self):
         match = resolve('/organisation/foo/')
         self.assertEqual(match.func.func_name, 'SAOrganisationDetailView')
