@@ -22,31 +22,32 @@
       </div>
     </div>
 
-    <ol class="unstyled alphabet-links">
-      <li>
-        {% if current_name_prefix %}
-          <a href='.{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>(all)</a>
-        {% else %}
-          <span class="current-prefix">(all)</span>
-        {% endif %}
-      </li>
-
-      {% for letter, count in count_by_prefix %}
-        <li>
-          {% if letter == current_name_prefix %}
-            <span class="current-prefix">{{ letter }}</span>
-          {% elif count %}
-            <a href='{{ letter }}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>{{ letter }}</a>
-          {% else %}
-            {{ letter }}
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ol>
-
     {% regroup sorted_positions by person as regroup_on_person_list %}
 
     <div class="column major-column">
+
+      <ol class="alphabet-links">
+          <li>
+            {% if current_name_prefix %}
+              <a class="alphabet-links__link" href='.{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>All</a>
+            {% else %}
+              <span class="alphabet-links__link alphabet-links__link--current">All</span>
+            {% endif %}
+          </li>
+
+        {% for letter, count in count_by_prefix %}
+          <li>
+            {% if letter == current_name_prefix %}
+              <span class="alphabet-links__link alphabet-links__link--current">{{ letter }}</span>
+            {% elif count %}
+              <a class="alphabet-links__link" href='{{ letter }}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>{{ letter }}</a>
+            {% else %}
+              <span class="alphabet-links__link alphabet-links__link--disabled">{{ letter }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ol>
+
       <div class="list-of-things list-of-people">
           {% autopaginate regroup_on_person_list %}
 

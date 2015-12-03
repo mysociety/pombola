@@ -1562,12 +1562,32 @@ ul.pager {
 
 /* Organisation pages */
 
-.alphabet-links li {
-    display: inline;
+.alphabet-links {
+  @include unstyled-list;
+  @include clearfix;
+  font-size: 0.9em;
+}
 
-    .current-prefix {
-        color: $colour_green;
-    }
+.alphabet-links__link {
+  float: left;
+  text-transform: uppercase;
+  padding: 0.1em 0.2em;
+  margin-right: 0.5em;
+  border-bottom: 2px solid transparent;
+}
+
+a.alphabet-links__link {
+  text-decoration: none;
+}
+
+.alphabet-links__link--current {
+  font-weight: bold;
+  color: $colour_primary; // same as links
+  border-bottom-color: #d2d2ce; // same as list-of-things-item border
+}
+
+.alphabet-links__link--disabled {
+  color: $colour_middling_grey;
 }
 
 .kind-of-subtitle {
