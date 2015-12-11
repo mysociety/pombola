@@ -273,6 +273,37 @@ body.shujaaz {
     p {
       display: none;
     }
+
+    h4 {
+      margin: 0.5em 0 0 0;
+      line-height: 1.4em;
+    }
+
+    blockquote {
+      padding-left: 0;
+      font-style: italic;
+      font-family: Georgia, Times, "Times New Roman", serif;
+
+      p {
+        display: block;
+        padding: 0;
+        margin: 0.5em 0 0 0;
+
+        &:before, &:after {
+          content: none;
+        }
+      }
+    }
+
+    ol {
+      margin-top: 0.5em;
+      margin-bottom: 0;
+      list-style: decimal;
+    }
+
+    li {
+      list-style: inherit;
+    }
   }
 
   ul {
@@ -286,6 +317,10 @@ body.shujaaz {
 
   li:last-child {
     margin-bottom: 0;
+  }
+
+  .person-card__name {
+    margin-top: 0;
   }
 }
 

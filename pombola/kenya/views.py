@@ -511,6 +511,9 @@ class ShujaazFinalists2015View(TemplateView):
             finalist['person'] = Person.objects.get(pk=finalist['person'])
             return finalist
 
-        context['nominees'] = [populate_person(f) for f in shujaaz.NOMINEES2015]
+        finalists = [populate_person(f) for f in shujaaz.FINALISTS2015]
+        half = len(finalists) / 2
+        context['finalists_column_1'] = finalists[:half]
+        context['finalists_column_2'] = finalists[half:]
 
         return context
