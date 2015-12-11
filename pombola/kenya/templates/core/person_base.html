@@ -36,7 +36,7 @@
     <div class="object-sidebar__box awards">
       <h3>People’s Shujaaz Awards</h3>
       {% for year, url_name, shujaaz_finalist in shujaaz_finalist_info %}
-        <p><a href="{% url url_name %}#nominees">Finalist {{ year }}: {{ shujaaz_finalist.category }}</a></p>
+        <p><a href="{% url url_name %}#finalists">Finalist {{ year }}: {{ shujaaz_finalist.category }}</a></p>
       {% endfor %}
     </div>
   {% endif %}
