@@ -506,8 +506,7 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
             context['membertitle'] = 'member'
 
 class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
-
-    important_organisations = ('ncop', 'national-assembly', 'national-executive')
+    important_org_kind_slugs = ('national-executive', 'parliament', 'provincial-legislature')
 
     def get_recent_speeches_for_section(self, tags, limit=5):
         pombola_person = self.object
@@ -753,7 +752,8 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['phone_contacts'] = self.list_contacts(('cell', 'voice'))
         context['fax_contacts'] = self.list_contacts(('fax',))
         context['address_contacts'] = self.list_contacts(('address',))
-        context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
+        context['positions'] = self.object.politician_positions().filter(
+            organisation__kind__slug__in=self.important_org_kind_slugs)
 
         # FIXME - the titles used here will need to be checked and fixed.
         context['hansard']   = self.get_recent_speeches_for_section(('hansard',), limit=2)
