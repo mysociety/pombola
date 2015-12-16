@@ -16,6 +16,11 @@
         {% with include_sub_menu_entries=1 %}
             {% include 'menu_entries.html' %}
         {% endwith %}
+
+        <li><a href="{% url "info_page" slug="links" %}">Links</a></li>
+        {% if settings.POPIT_API_URL %}
+        <li><a href="{% url 'help-api' %}">Get the data</a>
+        {% endif %}
     </ul>
 </div>
 <div class="footer-section vcard contact-details">

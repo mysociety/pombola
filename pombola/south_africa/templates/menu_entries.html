@@ -88,11 +88,7 @@
 <li><a href="{% url "info_page" slug="extras" %}" class="has-dropdown">Extras</a>
   {% if include_sub_menu_entries %}
     <ul id="extras-overview">
-      <li><a href="{% url "info_page" slug="links" %}">Links</a></li>
       <li><a href="{% url "info_page" slug="infographics" %}">Infographics</a></li>
-      {% if settings.POPIT_API_URL %}
-      <li><a href="{% url 'help-api' %}">Get the data</a>
-      {% endif %}
     </ul>
   {% endif %}
 </li>
