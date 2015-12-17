@@ -1078,15 +1078,9 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter down to only positions which are those of current aspirants."""
         return self.aspirant_positions().currently_active(when)
 
-    def politician_positions(self):
-        """Filter down to only positions which are one of the two kinds of
-        politician (those with constituencies, and nominated ones).
-        """
-        return self.filter(category='political')
-
     def current_politician_positions(self, when=None):
         """Filter down to only positions which are those of current politicians."""
-        return self.politician_positions().currently_active(when)
+        return self.political().currently_active(when)
 
     def political(self):
         """Filter down to only the political category"""
