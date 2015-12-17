@@ -1066,6 +1066,16 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
         return qs
 
+    def previous(self, when=None):
+        """Filter end dates to limit to positions which are already over."""
+
+        when = when or datetime.date.today()
+
+        when_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
+
+        end_criteria = Q(sorting_end_date_high__lt=when_approx) & ~Q(end_date='')
+
+        return self.filter(end_criteria)
 
     def aspirant_positions(self):
         """

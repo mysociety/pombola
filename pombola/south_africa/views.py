@@ -755,6 +755,14 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['positions'] = self.object.politician_positions().filter(
             organisation__kind__slug__in=self.important_org_kind_slugs)
 
+        context['former_positions'] = (
+            self.object.position_set
+            .all()
+            .political()
+            .previous()
+            .filter(organisation__kind__slug__in=self.important_org_kind_slugs)
+            )
+
         # FIXME - the titles used here will need to be checked and fixed.
         context['hansard']   = self.get_recent_speeches_for_section(('hansard',), limit=2)
         context['committee'] = self.get_recent_speeches_for_section(('committee',), limit=5)
