@@ -807,11 +807,6 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
         positions = self.all_related_positions().current_politician_positions()
         return Person.objects.filter(position__in=positions).distinct()
 
-    def all_related_former_politicians(self):
-        """Return a query set of all the former politicians for this place, and all parent places."""
-        positions = self.all_related_positions().former_politician_positions()
-        return Person.objects.filter(position__in=positions).distinct()
-
     def child_places_by_kind(self):
         """Return all concurrent child places, grouped by their PlaceKind
 
@@ -1092,10 +1087,6 @@ class PositionQuerySet(models.query.GeoQuerySet):
     def current_politician_positions(self, when=None):
         """Filter down to only positions which are those of current politicians."""
         return self.politician_positions().currently_active(when)
-
-    def former_politician_positions(self, when=None):
-        """Filter down to only positions which are those of former politicians."""
-        return self.politician_positions().currently_inactive(when)
 
     def political(self):
         """Filter down to only the political category"""
