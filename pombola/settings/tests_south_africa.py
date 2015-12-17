@@ -1,8 +1,7 @@
-import re
+from .base import *  # noqa
+from .tests_base import *  # noqa
+from .south_africa_base import *  # noqa
 
-from .base import *
-from .tests_base import *
-from .south_africa_base import *
 
 HAYSTACK_CONNECTIONS['default']['EXCLUDED_INDEXES'] = [
     'pombola.search.search_indexes.PlaceIndex',

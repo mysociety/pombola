@@ -1,5 +1,3 @@
-import re
-
 import unicodecsv as csv
 
 from django.core.exceptions import ObjectDoesNotExist

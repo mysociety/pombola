@@ -1,9 +1,9 @@
-from fabric.api import *
-from fabric.contrib.files import exists
 import os
-import sys
-
 import random
+
+from fabric.api import cd, env, local, prefix, put, require, sudo
+from fabric.contrib.files import exists
+
 
 CHARS = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^*(-_=+)"
 

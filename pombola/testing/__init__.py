@@ -1,1 +1,2 @@
-from selenium import PombolaSeleniumTestCase
+from selenium import PombolaSeleniumTestCase  # noqa
+

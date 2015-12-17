@@ -1,7 +1,9 @@
 import csv
 import re
 import unicodedata
-from utils import *
+
+from utils import add_membership, data_path, idFactory
+
 
 def initialise(name):
     return re.sub('[^A-Z]', '', name)

@@ -1,4 +1,5 @@
-from utils import *
+from utils import add_membership, idFactory, PROVINCES
+
 
 def parse(data):
     for person in data['persons'].values():

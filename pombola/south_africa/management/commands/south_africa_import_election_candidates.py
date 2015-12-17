@@ -6,21 +6,16 @@ IEC spreadsheet format.
 import os
 import sys
 import unicodecsv
-import json
 import string
 import datetime
 from optparse import make_option
 from pombola.core.models import (Organisation, OrganisationKind,
                          Person, Position,
                          PositionTitle, AlternativePersonName)
-from django.core.management import call_command
-from django.core.management.base import NoArgsCommand, CommandError
-from django.utils import encoding
+from django.core.management.base import NoArgsCommand
 from django.db.models import Q
 
-from django.core.exceptions import ObjectDoesNotExist
-
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+from django_date_extensions.fields import ApproximateDate
 
 from haystack.query import SearchQuerySet
 

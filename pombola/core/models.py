@@ -7,8 +7,6 @@ import itertools
 import random
 from collections import defaultdict
 
-from django.conf import settings
-
 from django.core import exceptions
 from django.core.urlresolvers import reverse
 

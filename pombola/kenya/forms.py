@@ -1,6 +1,8 @@
-from django import forms
-from django.forms.widgets import Textarea, Select
 import datetime
+
+from django import forms
+from django.forms.widgets import Textarea
+
 from pombola.core.models import Place
 
 

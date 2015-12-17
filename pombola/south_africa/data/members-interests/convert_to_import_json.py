@@ -16,7 +16,6 @@ app_path = os.path.abspath(base_dir)
 sys.path.append(app_path)
 os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings.south_africa'
 
-from django.conf import settings
 from django.utils.text import slugify
 from django.db.models import Q
 

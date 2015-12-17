@@ -1,4 +1,4 @@
-from BeautifulSoup import Tag, NavigableString
+from BeautifulSoup import NavigableString
 from contextlib import contextmanager
 from django_webtest import TransactionWebTest
 from django.contrib.auth.models import User
@@ -6,6 +6,7 @@ from django.test import TestCase
 
 from pombola.core import models
 from pombola.slug_helpers.models import SlugRedirect
+
 
 class HomeViewTest(TestCase):
 

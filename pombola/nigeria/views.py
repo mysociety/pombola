@@ -1,12 +1,12 @@
 import re
 
-from django.views.generic import ListView, TemplateView
-
 from mapit.models import Area
+
 from pombola.core.models import Place
 from pombola.core.views import HomeView
 from pombola.info.models import InfoPage
 from pombola.search.views import SearchBaseView
+
 
 class NGHomeView(HomeView):
 

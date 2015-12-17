@@ -1,14 +1,10 @@
-from optparse import make_option
-from pprint import pprint
 import csv
 import StringIO
-import re
 
 from django.core.management.base import BaseCommand
-from django.conf import settings
 
 from pombola.core import models
-from pombola.scorecards.models import Entry
+
 
 class Command(BaseCommand):
     help = 'Output CSV of all MPs and their scorecard ratings'

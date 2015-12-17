@@ -1,2 +1,2 @@
-from basics import *
-from admin_autocomplete import *
+from basics import *  # noqa
+from admin_autocomplete import *  # noqa

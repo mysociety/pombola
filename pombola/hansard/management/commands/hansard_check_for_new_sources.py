@@ -1,4 +1,3 @@
-
 # This script was first changed extensively when the Kenyan Parliament website
 # changed after the 2013 Election.
 #
@@ -13,12 +12,10 @@
 #
 #    https://github.com/mysociety/pombola/blob/ec4a44f7d7e0743426aff87b59e4bfa54250ec1c/pombola/hansard/management/commands/hansard_check_for_new_sources.py
 
-import pprint
 import httplib2
 import re
 import datetime
 from optparse import make_option
-import sys
 import parsedatetime as pdt
 from warnings import warn
 from urlparse import urlsplit, urlunsplit

@@ -1,8 +1,7 @@
-import re
+from .base import *  # noqa
+from .tests_base import *  # noqa
+from .libya_base import *  # noqa
 
-from .base import *
-from .tests_base import *
-from .libya_base import *
 
 INSTALLED_APPS = insert_after(INSTALLED_APPS,
                               'markitup',

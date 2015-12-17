@@ -7,7 +7,7 @@
 
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 from django.db import transaction
 
 from pombola.core.models import PositionTitle, Position, OrganisationKind

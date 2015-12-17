@@ -3,9 +3,7 @@
 import json
 import sys
 import re
-import csv
 import os
-import pprint
 import urllib2
 
 from django.core.files import File
@@ -24,7 +22,7 @@ sys.path.append(
     )
 )
 
-from django.contrib.contenttypes.models import ContentType, ContentTypeManager
+from django.contrib.contenttypes.models import ContentType
 
 from pombola.core import models
 from pombola.images.models import Image

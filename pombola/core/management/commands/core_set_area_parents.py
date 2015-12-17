@@ -19,13 +19,13 @@
 # the "Related Places" tab on Places pages.
 
 import re
-import sys
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
-from mapit.models import Area, Generation, Type
+from mapit.models import Area
 from pombola.core.models import Place, PlaceKind
+
 
 PROPORTION_OVERLAP_REQUIRED = 0.98
 

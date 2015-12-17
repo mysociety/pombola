@@ -19,7 +19,6 @@
 # for the intended purpose (matching LGA names in Nigeria) so development
 # stopped.
 
-from collections import defaultdict
 import csv
 import re
 import sys

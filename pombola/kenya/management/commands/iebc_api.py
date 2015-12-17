@@ -1,6 +1,5 @@
 import csv
 import datetime
-import errno
 import hmac
 import hashlib
 import json
@@ -10,12 +9,12 @@ import requests
 import sys
 import time
 
-from django.conf import settings
 from django.utils.text import slugify
 
 from django_date_extensions.fields import ApproximateDate
 
-from pombola.core.models import Person, Place, PlaceKind, ParliamentarySession, Position, PositionTitle
+from django.core.management.base import CommandError
+from pombola.core.models import Person, PlaceKind, ParliamentarySession, Position, PositionTitle
 
 from django.core.files.base import ContentFile
 from pombola.images.models import Image

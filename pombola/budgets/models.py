@@ -2,11 +2,12 @@ import datetime
 
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+from django_date_extensions.fields import ApproximateDateField
 from django.db import models
 
 import babel.numbers
 import decimal
+
 
 class BudgetSession(models.Model):
     created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)

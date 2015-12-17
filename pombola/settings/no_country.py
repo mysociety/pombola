@@ -1,6 +1,4 @@
-import re
-
-from .base import *
+from .base import *  # noqa
 
 MAPIT_COUNTRY = 'Global'
 

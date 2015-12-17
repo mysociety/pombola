@@ -1,5 +1,4 @@
-import os
-from fabric.api import *
+from fabric.api import cd, require, settings, sudo
 
 
 ENABLED = '/etc/nginx/sites-enabled'

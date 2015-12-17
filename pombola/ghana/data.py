@@ -1,18 +1,14 @@
 #!/usr/bin/env python
 
-import os
-import sys
-import time
 import base64
 import json
 from datetime import datetime
 
 from django.conf import settings
 from django.core.files.base import ContentFile
-from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.template.defaultfilters import slugify
 
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+from django_date_extensions.fields import ApproximateDate
 
 from pombola.images.models import Image
 from pombola.core.models import PlaceKind, OrganisationKind, PositionTitle

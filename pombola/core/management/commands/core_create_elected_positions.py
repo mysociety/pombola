@@ -8,12 +8,12 @@
 # This script takes arguments are passed in on the command line.
 
 from optparse import make_option
-import sys
 
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 from django_date_extensions.fields import ApproximateDate
 
 from pombola.core.models import Person, Position, PositionTitle, Place, Organisation
+
 
 def yyyymmdd_to_approx(yyyymmdd):
     year, month, day = map(int, yyyymmdd.split('-'))

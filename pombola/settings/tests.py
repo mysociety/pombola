@@ -1,8 +1,7 @@
-import re
+from .base import *  # noqa
 
-from .base import *
+from .tests_base import *  # noqa
 
-from .tests_base import *
 
 # Make sure that FakeInstanceMiddleware is present since we'll add
 # speeches to INSTALLED_APPS for testing:

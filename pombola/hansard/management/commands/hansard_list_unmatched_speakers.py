@@ -1,8 +1,7 @@
-import datetime
-
 from django.core.management.base import NoArgsCommand
 
 from pombola.hansard.models import Alias
+
 
 class Command(NoArgsCommand):
     help = 'List all the speaker names that have not been matched up to a real person'

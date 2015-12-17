@@ -1,12 +1,13 @@
 import re
 
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 
 from django.utils.text import slugify
 
 from optparse import make_option
 
 from pombola.core.models import PlaceKind, Place
+
 
 def slugify_place_name(place_name):
     return 'ward-' + slugify(place_name)

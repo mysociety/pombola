@@ -1,7 +1,7 @@
 from datetime import date
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 from django_date_extensions.fields import ApproximateDate
 
 from pombola.core.models import PositionTitle

@@ -11,15 +11,14 @@ sys.path.append(
 )
 
 
-
 import simplejson
 import time
 import urllib
 
-from pprint import pprint
 from django.core.files.base import ContentFile
 from pombola.core import models
 from pombola.images.models import Image
+
 
 constituency_kind = models.PlaceKind.objects.get(slug="constituency")
 

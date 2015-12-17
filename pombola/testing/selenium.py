@@ -1,15 +1,7 @@
 from __future__ import absolute_import
 
-import urllib
-from time import sleep
-
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management import call_command 
-from django.core.urlresolvers import reverse
-from django.utils import unittest
-
-from selenium.common.exceptions import NoSuchElementException
 
 from django_selenium.testcases import SeleniumTestCase
 

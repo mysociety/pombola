@@ -1,21 +1,16 @@
-import re
-
 import unicodecsv as csv
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.exceptions import MultipleObjectsReturned
 from django.core.management.base import LabelCommand
 from django.db import IntegrityError
-
 from django.utils.text import slugify
-
-from django_date_extensions.fields import ApproximateDate
 
 from pombola.core.models import (
     Place, ContentType
 )
 
 from pombola.budgets.models import Budget, BudgetSession
+
 
 # Pretty colours to make it easier to spot things.
 HEADER = '\033[95m'

@@ -1,17 +1,15 @@
-import httplib2
 import os
 import re
 import subprocess
-import tempfile
 import datetime
 
-from django.db import models
 from django.conf import settings
 from django.db import transaction
 
-from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, NavigableString, Tag
+from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup, Tag
 
-from pombola.hansard.models import Source, Sitting, Entry, Venue
+from pombola.hansard.models import Sitting, Entry, Venue
+
 
 # EXCEPTIONS
 class KenyaParserCouldNotParseTimeString(Exception):

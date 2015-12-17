@@ -36,14 +36,11 @@ import re
 # from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.geos import Point
 # from django.core.exceptions import ObjectDoesNotExist
-from django.core.management.base import LabelCommand, CommandError
+from django.core.management.base import LabelCommand
 # from django.db.models import Q
 from django.utils.text import slugify
 #
-from pombola.core.models import (OrganisationKind, Organisation, PlaceKind,
-                         ContactKind, OrganisationRelationshipKind,
-                         OrganisationRelationship, Identifier, Position,
-                         PositionTitle, Person)
+from pombola.core.models import OrganisationKind
 #
 # from mapit.models import Generation, Area, Code
 

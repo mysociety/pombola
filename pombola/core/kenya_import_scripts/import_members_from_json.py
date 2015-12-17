@@ -14,16 +14,16 @@ sys.path.append(
 
 
 import simplejson
-from pprint import pprint
 
 from django.utils.text import slugify
-from django.contrib.contenttypes.models import ContentType, ContentTypeManager
+from django.contrib.contenttypes.models import ContentType
 
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+from django_date_extensions.fields import ApproximateDate
 
 from pombola.core import models
 
 import name_to_first_last
+
 
 mp_job_title      = models.PositionTitle.objects.get(slug="mp")
 member_job_title  = models.PositionTitle.objects.get(slug="member")

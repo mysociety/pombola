@@ -1,21 +1,12 @@
-from collections import defaultdict
-import csv
-import datetime
-import errno
-import hmac
-import hashlib
-import itertools
-import json
-import os
-import re
-import requests
 import sys
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
-from django.utils.text import slugify
+from django.core.management.base import NoArgsCommand
 
-from iebc_api import *
+from pombola.core.models import Person
+
+from iebc_api import maybe_save, normalize_name
+
 
 class Command(NoArgsCommand):
     help = 'Normalize the legal_name and other_names for each Person'

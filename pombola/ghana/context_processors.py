@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse, resolve
+from django.core.urlresolvers import resolve
 
 from models import MP
 from pombola.core.models import Person

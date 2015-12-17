@@ -6,7 +6,7 @@ import sys
 import json
 import re
 import unidecode
-import fileinput
+
 
 # where the original html came from, use to resolve relative urls
 base_url = 'http://www.nassnig.org/nass/portfolio/profile.php'

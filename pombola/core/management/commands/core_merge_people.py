@@ -17,8 +17,6 @@ from django.conf import settings
 
 from optparse import make_option
 
-from django.core.exceptions import ObjectDoesNotExist
-
 
 def check_basic_fields(basic_fields, to_keep, to_delete):
     """Return False if any data might be lost on merging"""

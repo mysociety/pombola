@@ -1,5 +1,5 @@
 from django.conf import settings
-import logging
+
 
 def add_settings( request ):
     """Add some selected settings values to the context"""

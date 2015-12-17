@@ -1,4 +1,4 @@
-from django.template import Node, Variable, Library
+from django.template import Library, Node, TemplateSyntaxError, Variable
 
 register = Library()
 

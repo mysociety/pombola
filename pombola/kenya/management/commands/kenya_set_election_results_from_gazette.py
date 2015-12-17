@@ -12,9 +12,8 @@ import sys
 
 from optparse import make_option
 
-from django.conf import settings
 from django.core.management import call_command
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 from django.utils.text import slugify
 
 from pombola.core.models import (

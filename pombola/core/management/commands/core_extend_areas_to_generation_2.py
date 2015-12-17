@@ -7,7 +7,8 @@
 # every area where it was set to generation 2.
 
 from django.core.management.base import NoArgsCommand
-from mapit.models import Area, Generation, Type, NameType, Country, CodeType
+from mapit.models import Area, Generation
+
 
 class Command(NoArgsCommand):
     help = 'Change all genertion_high=1 to generation_high=2'

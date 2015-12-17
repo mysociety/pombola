@@ -1,9 +1,10 @@
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 from django.db.models import Q
 
-from pombola.core.models import Person, Position
+from pombola.core.models import Person
+
 
 class Command(NoArgsCommand):
 

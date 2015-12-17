@@ -1,6 +1,7 @@
-from django.shortcuts  import render_to_response, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 
 from models import File
+
 
 def redirect_to_file(request, slug):
     """Find the file and redirect ot it, or 404"""

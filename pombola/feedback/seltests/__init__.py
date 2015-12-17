@@ -1,1 +1,1 @@
-from feedback_dialog import *
+from feedback_dialog import *  # noqa

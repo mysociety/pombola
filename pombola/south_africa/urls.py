@@ -7,12 +7,9 @@ from pombola.south_africa import views
 from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
     LatLonDetailLocalView, SAPlaceDetailSub, SAOrganisationDetailView,
     SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
-    SASpeakerRedirectView, SAHansardIndex, SACommitteeIndex,
-    SAPersonAppearanceView, SAQuestionIndex,
+    SAPersonAppearanceView,
     SAOrganisationDetailSubPeople, SAOrganisationDetailSubParty,
-    OldSectionRedirect, OldSpeechRedirect, SASpeechView, SASectionView,
     SAGeocoderView)
-from speeches.views import SectionView, SpeechView, SectionList
 from pombola.core.urls import (
     organisation_patterns,
     organisation_patterns_path,

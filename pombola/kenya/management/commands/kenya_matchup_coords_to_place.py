@@ -2,12 +2,11 @@ import re
 import csv
 import sys
 
-from optparse import make_option
-
 from django.core.management.base import LabelCommand
 from django.contrib.gis.geos import Point
 
-from mapit.models import Area, Generation, Type, NameType, Country
+from mapit.models import Area
+
 
 class Command(LabelCommand):
     """Read a file in, extract coordinates and lookup the constituency.

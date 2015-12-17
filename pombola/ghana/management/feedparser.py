@@ -150,13 +150,12 @@ import datetime
 import re
 import struct
 import time
-import types
 import urllib
 import urllib2
 import urlparse
 import warnings
 
-from htmlentitydefs import name2codepoint, codepoint2name, entitydefs
+from htmlentitydefs import name2codepoint, entitydefs
 
 try:
     from io import BytesIO as _StringIO
@@ -260,14 +259,6 @@ else:
         def start(self, n):
             return self.match.end(n)
     endbracket = _EndBracketRegEx()
-
-
-# iconv_codec provides support for more character encodings.
-# It's available from http://cjkpython.i18n.org/
-try:
-    import iconv_codec
-except ImportError:
-    pass
 
 # chardet library auto-detects character encodings
 # Download from http://chardet.feedparser.org/

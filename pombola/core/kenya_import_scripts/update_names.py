@@ -11,12 +11,9 @@ sys.path.append(
 ),
 
 
-
-from pprint import pprint
 from django.utils.text import slugify
 
 from pombola.core import models
-
 
 
 constituency_renames = [

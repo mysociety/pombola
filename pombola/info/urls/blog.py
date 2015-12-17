@@ -1,6 +1,7 @@
-from django.conf.urls import patterns, include, url, handler404
+from django.conf.urls import patterns, url, handler404
 
 from ..views import InfoBlogView, InfoBlogList, InfoBlogFeed, InfoBlogCategory, InfoBlogTag
+
 
 urlpatterns = patterns('',
     url(r'^$', InfoBlogList.as_view(), name='info_blog_list'),

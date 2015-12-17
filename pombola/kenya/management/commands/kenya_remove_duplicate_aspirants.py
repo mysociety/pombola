@@ -5,32 +5,32 @@
 from collections import defaultdict
 import csv
 import datetime
-import errno
 import hmac
 import hashlib
-import itertools
-import json
 import os
 import re
-import requests
 import sys
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 from django.utils.text import slugify
 from django.contrib.contenttypes.models import ContentType
 
-from django_date_extensions.fields import ApproximateDate
-
 from django.conf import settings
 
-from pombola.core.models import (Place, PlaceKind, Person,
-    ParliamentarySession, Position, PositionTitle, Organisation,
-    OrganisationKind)
+from pombola.core.models import Place, Person, Position
 from pombola.core.utils import mkdir_p
 from pombola.slug_helpers.models import SlugRedirect
 
-from iebc_api import *
+from iebc_api import (
+    get_data,
+    get_data_with_cache,
+    known_race_type_mapping,
+    make_api_token_url,
+    make_api_url,
+    maybe_save,
+    )
+
 
 before_import_date = datetime.datetime(2013, 2, 7, 0, 0, 0)
 

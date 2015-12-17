@@ -1,4 +1,4 @@
-from .apps import *
+from .apps import *  # noqa
 
 COUNTRY_APP = 'south_africa'
 

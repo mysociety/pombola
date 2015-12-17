@@ -7,7 +7,7 @@
 # "convert -deskew '40%'" and then "unpaper" to remove scanning
 # artefacts.  (ImageMagick does better than unpaper on large skews.)
 
-import os, re, sys
+import os, re
 from subprocess import check_call
 
 original_page_re = re.compile('^(page-[0-9]+)\.png')

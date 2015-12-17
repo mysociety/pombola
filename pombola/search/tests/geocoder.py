@@ -1,14 +1,14 @@
 import json
 import os
 
-from django.conf import settings
 from django.utils import unittest
 
 from ..geocoder import geocoder
 
 import pygeocoder
 
-from mock import patch, Mock, MagicMock
+from mock import patch, Mock
+
 
 test_data_directory = os.path.abspath(
     os.path.join(

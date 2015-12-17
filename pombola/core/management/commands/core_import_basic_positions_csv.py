@@ -22,14 +22,20 @@
 
 import csv
 
-from django.core.management.base import LabelCommand, CommandError
+from django.core.management.base import LabelCommand
 
 from django.utils.text import slugify
 
-from pombola.core.models import (Organisation, OrganisationKind, Identifier,
-                         PlaceKind, Person,
-                         PositionTitle, Position,
-                         Place, PlaceKind)
+from pombola.core.models import (
+    Organisation,
+    OrganisationKind,
+    Person,
+    Place,
+    PlaceKind,
+    Position,
+    PositionTitle,
+    )
+
 
 def get_or_create(model, name, field="name", defaults={}):
 

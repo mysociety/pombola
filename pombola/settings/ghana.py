@@ -1,9 +1,9 @@
-import re
 import os
 import yaml
 
-from .base import *
-from .ghana_base import *
+from .base import *  # noqa
+from .ghana_base import *  # noqa
+
 
 # load the mySociety config
 config_file = os.path.join( base_dir, 'conf', 'general.yml' )

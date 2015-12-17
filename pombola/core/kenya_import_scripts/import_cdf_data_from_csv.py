@@ -19,13 +19,12 @@ sys.path.append(
 import csv
 import pprint
 import re
-import warnings
 
 from pombola.projects.models import Project
 from pombola.core.models import Place
 
-import django.core.exceptions
 from django.contrib.gis.geos import Point
+
 
 def main():
     pi = ProjectImporter()

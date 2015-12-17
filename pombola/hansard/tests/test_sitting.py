@@ -1,10 +1,8 @@
-import os
-import datetime
-
 from datetime import date, time
 
 from django.test import TestCase
 from pombola.hansard.models import Source, Sitting, Venue
+
 
 class HansardSittingTest(TestCase):
 

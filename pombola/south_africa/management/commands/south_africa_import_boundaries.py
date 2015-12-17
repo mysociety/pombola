@@ -21,16 +21,13 @@ import os
 import re
 import sys
 
-from collections import defaultdict, namedtuple
+from collections import namedtuple
 from optparse import make_option
 
-from django.conf import settings
-from django.contrib.gis.gdal import DataSource
-from django.contrib.gis.geos import MultiPolygon
 from django.core.management import call_command
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 
-from mapit.models import Area, Code, CodeType, Generation, Type, NameType, Country
+from mapit.models import Generation, NameType, Country
 
 
 class Command(NoArgsCommand):

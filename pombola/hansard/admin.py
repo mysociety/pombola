@@ -1,22 +1,13 @@
-from django.contrib import admin
-import models
-
 from ajax_select import make_ajax_form
-from ajax_select.admin import AjaxSelectAdmin
 
-import datetime
-
-# from django import forms
-from django.conf.urls import patterns
-# from django.contrib import admin
-from django.utils.decorators import method_decorator
+from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
-from django.core.urlresolvers import reverse
-from django.shortcuts  import  redirect
-from django.template   import RequestContext
+from django.shortcuts import redirect, render_to_response
+from django.conf.urls import patterns
+from django.template import RequestContext
+from django.utils.decorators import method_decorator
 
 import models
-from pprint import pprint
 
 # from django.contrib.gis import db
 # from django.core.urlresolvers import reverse

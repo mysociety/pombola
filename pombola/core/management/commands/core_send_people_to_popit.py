@@ -1,17 +1,17 @@
 # This command creates a new PopIt instance based on the Person,
 # Position and Organisation models in Pombola.
 
-import json
 from optparse import make_option
 import slumber
 import sys
 import urlparse
 
-from pombola.core.popolo import get_popolo_data, create_organisations, create_people
+from pombola.core.popolo import create_organisations, create_people
 
 from django.core.management.base import BaseCommand, CommandError
 
 from popit_api import PopIt
+
 
 class Command(BaseCommand):
     args = 'MZALENDO-URL'

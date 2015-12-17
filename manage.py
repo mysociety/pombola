@@ -3,7 +3,6 @@ import os
 import sys
 import yaml
 
-from django import get_version
 from django.core.management import LaxOptionParser, BaseCommand
 
 # Make the default settings file one that corresponds to the country

@@ -1,5 +1,4 @@
 import os
-import re
 import httplib2
 
 from django.db import models

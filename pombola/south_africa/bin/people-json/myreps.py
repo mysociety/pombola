@@ -1,7 +1,9 @@
 import csv
 import re
 import xml.etree.ElementTree as ET
-from utils import *
+
+from utils import add_membership, data_path, idFactory, REASONS, PROVINCES
+
 
 def FixingDictReader(data):
     for row in csv.DictReader(data):

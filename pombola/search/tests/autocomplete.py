@@ -1,7 +1,6 @@
 import json
 import re
 
-from django.conf import settings
 from django.test.client import Client
 from django.utils import unittest
 from django.utils.text import slugify
@@ -9,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.core.management import call_command
 
 from pombola.core.models import Person
+
 
 class AutocompleteTest(unittest.TestCase):
 

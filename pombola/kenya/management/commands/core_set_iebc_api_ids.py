@@ -3,17 +3,12 @@
 # positions), to be run after core_import_aspirants_from_iebc - it has
 # the same shape as that script, but just sets the external_id.
 
-from collections import defaultdict
 import csv
 import datetime
-import errno
 import hmac
 import hashlib
-import itertools
-import json
 import os
 import re
-import requests
 import sys
 from optparse import make_option
 
@@ -24,9 +19,19 @@ from django_date_extensions.fields import ApproximateDate
 
 from django.conf import settings
 
-from pombola.core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
+from pombola.core.models import Place, Person, Position, PositionTitle, Organisation, OrganisationKind
+from pombola.core.utils import mkdir_p
 
-from iebc_api import *
+from iebc_api import (
+    get_data,
+    get_data_with_cache,
+    get_person_from_names,
+    known_race_type_mapping,
+    make_api_token_url,
+    make_api_url,
+    parse_race_name,
+    )
+
 
 new_data_date = datetime.date(2013, 2, 8)
 new_data_approximate_date = ApproximateDate(new_data_date.year,

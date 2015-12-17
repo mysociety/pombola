@@ -4,7 +4,6 @@ from django.contrib.contenttypes import generic
 
 from sorl.thumbnail import ImageField
 
-from warnings import warn
 
 class Image(models.Model):
 

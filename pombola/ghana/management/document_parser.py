@@ -2,10 +2,9 @@ import sys
 import re
 import datetime
 import os
-import pymongo
 from pymongo import MongoClient
 from collections import defaultdict
-from collections import Counter
+
 
 # Constants for various types of line that might be found in the transcript
 BLANK            = 'blank'

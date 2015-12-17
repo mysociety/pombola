@@ -2,7 +2,6 @@ from django import forms
 from django.contrib import admin
 from django.contrib.gis import db
 from django.contrib.contenttypes.generic import GenericTabularInline
-from django.core.exceptions import ValidationError
 
 from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
@@ -11,6 +10,7 @@ from pombola.core import models
 from pombola.scorecards import models as scorecard_models
 from pombola.images.admin import ImageAdminInline
 from pombola.slug_helpers.admin import StricterSlugFieldMixin
+
 
 def create_admin_link_for(obj, link_text):
     return u'<a href="%s">%s</a>' % (obj.get_admin_url(), link_text)

@@ -1,22 +1,30 @@
 import json
 import re
-import sys
 import time
 import unicodedata
 import urllib
-from urlparse import urlsplit, urlunsplit
 from optparse import make_option
 
 from django.contrib.contenttypes.models import ContentType
 from django.core.files.base import ContentFile
-from django.core.management.base import LabelCommand, CommandError
+from django.core.management.base import LabelCommand
 from django.utils.text import slugify
 
-from pombola.core.models import (Organisation, OrganisationKind, Identifier,
-                         PlaceKind, Person, Contact, ContactKind, Position,
-                         PositionTitle, Place, PlaceKind)
+from pombola.core.models import (
+    Contact,
+    ContactKind,
+    Identifier,
+    Organisation,
+    OrganisationKind,
+    Person,
+    Place,
+    PlaceKind,
+    Position,
+    PositionTitle,
+    )
 from pombola.images.models import Image
 from mapit.models import Area, Generation
+
 
 VERBOSE = False
 

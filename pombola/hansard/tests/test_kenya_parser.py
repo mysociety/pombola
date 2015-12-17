@@ -1,10 +1,6 @@
 import datetime
 import os
-import re
-import time
 import json
-import tempfile
-import subprocess
 
 from django.test import TestCase
 from django.utils import unittest

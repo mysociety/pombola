@@ -1,11 +1,8 @@
-import logging
-from django.http import HttpResponse
-from django.core.urlresolvers import reverse
 from django.shortcuts import render
 
 from . import forms
-from pombola.info.models import InfoPage
 import data
+
 
 def info_page_upload(request):
     if request.POST:

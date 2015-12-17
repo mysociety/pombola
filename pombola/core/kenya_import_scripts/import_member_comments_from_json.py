@@ -2,7 +2,6 @@
 
 import os
 import sys
-import re
 
 # Horrible boilerplate - there must be a better way :)
 sys.path.append(
@@ -17,11 +16,12 @@ import simplejson
 from pprint import pprint
 from pombola.core.models import Person
 
-from django.contrib.contenttypes.models import ContentType, ContentTypeManager
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 
 from comments2.models import Comment
+
 
 comments = simplejson.loads( sys.stdin.read() )
 

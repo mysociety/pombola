@@ -1,8 +1,7 @@
-import models
-import pombola.core.models
+from django.template import RequestContext
+from django.shortcuts import render_to_response, get_object_or_404
 
-from django.template   import RequestContext
-from django.shortcuts  import render_to_response, get_object_or_404, redirect
+import pombola.core.models
 
 
 def in_place(request, slug):

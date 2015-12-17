@@ -1,6 +1,3 @@
-import os
-from .base import root_dir
-
 COUNTRY_APP = 'ghana'
 
 MAPIT_COUNTRY = 'GH'

@@ -1,9 +1,5 @@
-import datetime
-
 from django import template
 from django.template import loader, Context
-
-from speeches.models import Section
 
 register = template.Library()
 

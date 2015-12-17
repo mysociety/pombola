@@ -1,11 +1,12 @@
 import sys
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from haystack import connections as haystack_connections
 from haystack.exceptions import NotHandled
 from haystack.query import SearchQuerySet
 from haystack.utils.app_loading import get_models, load_apps
+
 
 def get_all_indexed_models():
 

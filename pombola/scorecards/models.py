@@ -4,11 +4,11 @@ import csv
 
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.humanize.templatetags.humanize import intcomma
 from django.core.exceptions import ValidationError
 from django.db import models
 
 from markitup.fields import MarkupField
+
 
 class Category(models.Model):
     created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )

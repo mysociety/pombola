@@ -3,7 +3,9 @@ import requests
 import requests_cache
 import urllib
 import urlparse
-from utils import *
+
+from utils import add_membership, idFactory, PROVINCES
+
 
 requests_cache.install_cache()
 

@@ -5,7 +5,7 @@ Test the tasks
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from models import TaskCategory, Task
-from pprint import pprint
+
 
 class TaskTest(TestCase):
 

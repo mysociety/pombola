@@ -1,11 +1,11 @@
 from os.path import join
-import re
 from urlparse import urlsplit
 
 from bs4 import BeautifulSoup
 from markdown import markdown
 
 from django.conf import settings
+
 
 def get_first_image_file(file_archive_file_class, info_page):
     """Return the first image in the post, if it's a file_archive image

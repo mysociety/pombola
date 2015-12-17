@@ -5,14 +5,12 @@
 Odekro deployment script
 """
 
-import os, re , time
-#, getpass, fileinput, shutil
+import os, time
 from fabric.api import task
-from fabric.api import hide, settings, cd, env, prefix, put, get, require
+from fabric.api import cd, env, put, get, require
 from fabric.api import local, run, sudo
 from fabric.contrib.files import exists
 
-import fab
 from fab import postgres as pg
 from fab import server, nginx, webapp
 
@@ -234,7 +232,7 @@ def configure_webapp(db=env.dbname, dbuser=env.dbuser, dbpasswd='', email_passwd
     webapp.configure(db=db, dbuser=dbuser, dbpasswd=dbpasswd, email_passwd=email_passwd)
 
 try:
-    from local_fabfile import *
+    from local_fabfile import *  # noqa
 except ImportError as e:
     pass
 

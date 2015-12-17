@@ -5,28 +5,38 @@
 from collections import defaultdict
 import csv
 import datetime
-import errno
 import hmac
 import hashlib
-import itertools
-import json
 import os
 import re
-import requests
 import sys
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 from django.utils.text import slugify
 
 from django_date_extensions.fields import ApproximateDate
 
 from django.conf import settings
 
-from pombola.core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
+from pombola.core.models import Place, Person, Position, PositionTitle, Organisation, OrganisationKind
 from pombola.core.utils import mkdir_p
 
-from iebc_api import *
+from iebc_api import (
+    get_data,
+    maybe_save,
+    normalize_name,
+    yesterday_approximate_date,
+    today_approximate_date,
+    get_person_from_names,
+    make_api_token_url,
+    make_api_url,
+    SamePersonChecker,
+    get_data_with_cache,
+    known_race_type_mapping,
+    update_picture_for_candidate,
+    )
+
 
 before_import_date = datetime.date(2013, 2, 7)
 

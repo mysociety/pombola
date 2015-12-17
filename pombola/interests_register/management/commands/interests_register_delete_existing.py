@@ -1,7 +1,7 @@
-import sys
 from optparse import make_option
 from django.core.management.base import NoArgsCommand
 from ...models import Release, Category, Entry, EntryLineItem
+
 
 class Command(NoArgsCommand):
     help = 'Delete existing declarations of members interests - allows for subsequent re-importing of data.'

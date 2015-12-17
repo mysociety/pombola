@@ -11,16 +11,14 @@ sys.path.append(
 )
 
 
-
-from pprint import pprint
 from pombola.core import models
-from django.contrib.contenttypes.models import ContentType, ContentTypeManager
+from django.contrib.contenttypes.models import ContentType
 
 import mp_contacts
 
+
 phone_kind   = models.ContactKind.objects.get(slug='phone')
 email_kind   = models.ContactKind.objects.get(slug='email')
-
 
 for row in mp_contacts.entries:
     

@@ -1,5 +1,6 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from pombola.hansard.views import IndexView, SittingView, PersonAllAppearancesView
+
 
 urlpatterns = patterns('pombola.hansard.views',
     url( r'^$', IndexView.as_view(), name="index" ),

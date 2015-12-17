@@ -17,9 +17,10 @@ from pprint import pprint
 
 from django.utils.text import slugify
 
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+from django_date_extensions.fields import ApproximateDate
 
 from pombola.core import models
+
 
 party_kind = models.OrganisationKind.objects.get(slug="party")
 parties = simplejson.loads(sys.stdin.read())

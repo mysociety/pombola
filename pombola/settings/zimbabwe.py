@@ -1,7 +1,6 @@
-import re
+from .base import *  # noqa
+from .zimbabwe_base import *  # noqa
 
-from .base import *
-from .zimbabwe_base import *
 
 INSTALLED_APPS = insert_after(INSTALLED_APPS,
                               'markitup',

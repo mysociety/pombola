@@ -1,12 +1,12 @@
 import csv
 import os
-import sys
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
+from django.core.management.base import NoArgsCommand
 
-from pombola.core.models import Place, PlaceKind, ParliamentarySession
+from pombola.core.models import Place, PlaceKind
 from mapit.models import Area, Generation
+
 
 class Command(NoArgsCommand):
 

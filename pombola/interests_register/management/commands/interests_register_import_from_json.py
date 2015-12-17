@@ -1,12 +1,11 @@
 import json
-import sys
-from datetime import date
 
 from django.contrib.contenttypes.models import ContentType
-from django.core.management.base import LabelCommand, CommandError
+from django.core.management.base import LabelCommand
 
 from pombola.core.models import Person, InformationSource
 from ...models import Release, Category, Entry, EntryLineItem
+
 
 release_content_type = ContentType.objects.get_for_model(Release)
 

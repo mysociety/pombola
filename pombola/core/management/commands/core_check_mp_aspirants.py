@@ -1,6 +1,7 @@
-from pombola.core.models import *
+from django.core.management.base import NoArgsCommand
 
-from django.core.management.base import NoArgsCommand, CommandError
+from pombola.core.models import ParliamentarySession, Person
+
 
 class Command(NoArgsCommand):
 

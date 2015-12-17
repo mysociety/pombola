@@ -1,23 +1,13 @@
 # This command creates a new PopIt instance based on the Person,
 # Position and Organisation models in Pombola.
 
-import re
 import sys
-import os
 import slumber
-import json
-import datetime
 import urlparse
-from collections import defaultdict
 
 from django.core.management.base import BaseCommand, CommandError
-from django.db import transaction
 
-from django_date_extensions.fields import ApproximateDate
-
-from pombola.core.models import Person, Organisation, Position
-
-# from popit import PopIt
+from pombola.core.models import Person
 
 from optparse import make_option
 

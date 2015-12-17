@@ -1,5 +1,8 @@
-from fabric.api import *
+import os.path
+
+from fabric.api import env, hide, put, require, run, settings, sudo
 from fabric.contrib.files import exists
+
 
 def add_ssh_key(path, password=None, user=None):
     require('hosts')

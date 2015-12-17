@@ -2,15 +2,8 @@
 Test that the scorecards works as expected
 """
 
-import datetime
-import pprint
-import tempfile
-import csv
-
 from django.test import TestCase
 
-from pombola.core.models import Place, PlaceKind
-from models import Category, Entry
 
 class DataTest(TestCase):
     pass

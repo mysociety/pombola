@@ -6,28 +6,31 @@
 # possible matches that can be uploaded to Google Spreadsheets for
 # manual correction.
 
-from collections import defaultdict
 import csv
-import datetime
+import hashlib
+import hmac
 import itertools
-import json
 import os
-import re
-import requests
 import sys
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
-from django.utils.text import slugify
-
-from django_date_extensions.fields import ApproximateDate
+from django.core.management.base import NoArgsCommand
 
 from django.conf import settings
 
-from pombola.core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
+from pombola.core.models import Place, Organisation
 from pombola.core.utils import mkdir_p
 
-from iebc_api import *
+from iebc_api import (
+    get_data,
+    make_api_token_url,
+    make_api_url,
+    get_data_with_cache,
+    parse_race_name,
+    known_race_type_mapping,
+    get_person_from_names,
+    )
+
 
 data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
 

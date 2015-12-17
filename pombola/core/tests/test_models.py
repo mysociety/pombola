@@ -1,6 +1,5 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-from django.test.utils import override_settings
 from django_date_extensions.fields import ApproximateDate
 from django.contrib.contenttypes.models import ContentType
 

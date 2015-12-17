@@ -3,11 +3,7 @@
 # safe - when there are more than one or two of them
 
 from dateutil import parser
-import sys
 
-from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 

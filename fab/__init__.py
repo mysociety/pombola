@@ -1,4 +1,4 @@
-import server
-import postgres
-import nginx
-import webapp
+import server  # noqa
+import postgres  # noqa
+import nginx  # noqa
+import webapp  # noqa

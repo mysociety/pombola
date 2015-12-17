@@ -1,4 +1,4 @@
-from .models import Experiment, Event
+from .models import Experiment
 
 from django.test import TestCase
 

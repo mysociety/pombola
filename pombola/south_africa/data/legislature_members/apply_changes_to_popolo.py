@@ -1,7 +1,5 @@
-from warnings import warn
 import json
 import re
-import sys
 
 from django.utils.text import slugify
 

@@ -1,17 +1,13 @@
-import re
 import datetime
 
-from django.conf import settings
-from django.core import mail
 from django_webtest import WebTest
-from django.test.client import Client
 from django.test import TestCase
 
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
 from pombola.core import models
 import pombola.scorecards.models
+
 
 class PersonTest(WebTest):
     def test_naming(self):        

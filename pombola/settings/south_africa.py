@@ -1,9 +1,9 @@
 import errno
 import os
-import re
 
-from .base import *
-from .south_africa_base import *
+from .base import *  # noqa
+from .south_africa_base import *  # noqa
+
 
 HAYSTACK_CONNECTIONS['default']['EXCLUDED_INDEXES'] = [
     'pombola.search.search_indexes.PlaceIndex',

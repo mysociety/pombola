@@ -1,7 +1,6 @@
-import re
+from .base import *  # noqa
+from .kenya_base import *  # noqa
 
-from .base import *
-from .kenya_base import *
 
 INSTALLED_APPS = insert_after(INSTALLED_APPS,
                               'markitup',

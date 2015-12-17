@@ -9,8 +9,7 @@ from __future__ import with_statement
 
 import re
 
-from fabric.api import *
-from fabric.contrib.files import exists
+from fabric.api import cd, env, hide, require, run, settings, sudo
 
 
 def setup_postgis():

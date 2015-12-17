@@ -2,12 +2,12 @@ import os
 import re
 import yaml
 
-from .apps import *
+from .apps import *  # noqa
 
 from django.template.defaultfilters import slugify
 
 from pombola.core.logging_filters import skip_unreadable_post
-from pombola.hansard.constants import NAME_SUBSTRING_MATCH, NAME_SET_INTERSECTION_MATCH
+from pombola.hansard.constants import NAME_SET_INTERSECTION_MATCH
 
 IN_TEST_MODE = False
 

@@ -1,10 +1,4 @@
-import re 
-import csv
-import sys
-
 import os
-
-from optparse import make_option
 
 from django.core.management.base import BaseCommand, CommandError
 from pombola.ghana import data

@@ -3,7 +3,7 @@
 import sys
 import csv
 import os
-import re
+
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
 

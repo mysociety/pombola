@@ -17,7 +17,6 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count, Min, Max
-from django.conf import settings
 from django.core.cache import get_cache
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
@@ -30,7 +29,7 @@ from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
 
 import mapit
-from haystack.query import RelatedSearchQuerySet, SearchQuerySet, SQ
+from haystack.query import RelatedSearchQuerySet, SQ
 from haystack.inputs import AutoQuery
 from haystack.forms import SearchForm
 
@@ -50,9 +49,9 @@ from pombola.slug_helpers.views import SlugRedirect
 
 from pombola.south_africa.models import ZAPlace
 
-from pombola.interests_register.models import Release, Category, Entry, EntryLineItem
+from pombola.interests_register.models import Release, Category, Entry
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+from django_date_extensions.fields import ApproximateDate
 
 
 logger = logging.getLogger('django.request')

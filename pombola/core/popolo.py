@@ -5,15 +5,13 @@ import datetime
 from collections import defaultdict
 from urlparse import urljoin
 
-from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
-from django.db import transaction
-from django_date_extensions.fields import ApproximateDate
 
 from mapit.views.areas import area
 
 from pombola.core.models import Person, Organisation, Position
 from pombola import country
+
 
 extra_popolo_person_fields = (
     'email',
@@ -64,6 +62,7 @@ def get_area_information(place, base_url):
 
 def date_to_partial_iso8601(approx_date):
     """Get a (possibly partial) ISO 8601 representation of an ApproximateDate
+    >>> from django_date_extensions.fields import ApproximateDate
 
     >>> date_to_partial_iso8601(ApproximateDate(2012, 6, 2))
     '2012-06-02'

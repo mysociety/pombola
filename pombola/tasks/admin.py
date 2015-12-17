@@ -1,20 +1,17 @@
 import datetime
 
-from django import forms
 from django.conf.urls import patterns
 from django.contrib import admin
 from django.utils.decorators import method_decorator
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.contenttypes.generic import GenericTabularInline
-from django.contrib.gis import db
 from django.core.urlresolvers import reverse
-from django.shortcuts  import render_to_response, get_object_or_404, redirect
+from django.shortcuts  import render_to_response, redirect
 from django.template   import RequestContext
 
 import models
-from pprint import pprint
 
 from pombola.slug_helpers.admin import StricterSlugFieldMixin
+
 
 def create_admin_url_for(obj):
     return reverse(

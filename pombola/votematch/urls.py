@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
 from django.views.generic import ListView, TemplateView
 
-from .models import Quiz, Submission
-
+from .models import Quiz
 
 
 urlpatterns = patterns( 'pombola.votematch.views',

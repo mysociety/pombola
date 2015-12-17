@@ -1,25 +1,14 @@
-from collections import defaultdict
 import csv
-import datetime
-import errno
-import hmac
-import hashlib
-import itertools
-import json
 import os
-import re
-import requests
 import sys
 from optparse import make_option
 
-from django.core.management.base import NoArgsCommand, CommandError
-from django.utils.text import slugify
+from django.core.management.base import NoArgsCommand
 
-from django_date_extensions.fields import ApproximateDate
+from pombola.core.models import Person, Position
 
-from pombola.core.models import Place, PlaceKind, Person, ParliamentarySession, Position, PositionTitle, Organisation, OrganisationKind
+from iebc_api import maybe_save, yesterday_approximate_date
 
-from iebc_api import *
 
 data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
 

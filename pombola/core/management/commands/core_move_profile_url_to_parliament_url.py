@@ -1,11 +1,7 @@
-import sys
-
-from pprint import pprint
-
 from django.core.management.base import BaseCommand
-from django.conf import settings
 
-from pombola.core.models import *
+from pombola.core.models import Contact, ContactKind
+
 
 class Command(BaseCommand):
     help = 'Deduplicate the position entries'

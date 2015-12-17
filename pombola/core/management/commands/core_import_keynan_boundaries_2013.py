@@ -1,13 +1,8 @@
 # This script imports the boundaries for the 2013 Kenyan election into
 # MapIt - it uses the generic mapit_import script.
 
-import json
-import os
 import string
 import sys
-import urllib
-
-from tempfile import NamedTemporaryFile
 
 from optparse import make_option
 
@@ -15,6 +10,7 @@ from django.core.management import call_command
 from django.core.management.base import NoArgsCommand, CommandError
 
 from mapit.models import Generation, Area
+
 
 def map_county_name(original_name):
     # Then title-case the string, being careful to use string.capwords

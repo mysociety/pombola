@@ -6,7 +6,6 @@ from datetime import date, time
 from StringIO import StringIO
 from tempfile import mkdtemp
 from urlparse import urlparse
-from BeautifulSoup import Tag, NavigableString
 
 from mock import patch
 
