@@ -7,12 +7,23 @@
 
 {% block object_tagline %}
     <div class="important-positions">
-      <p>
-        {% for position in positions %}
-          <span class="position-title">{{ position.organisation.name }}</span>
-        {% if not forloop.last %}and{% endif %}
-        {% endfor %}
-      </p>
+      {% if positions %}
+        <p>
+          {% for position in positions %}
+            <span class="position-title">{{ position.organisation.name }}</span>
+          {% if not forloop.last %}and{% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+      {% if former_positions %}
+        <p>
+          Formerly:
+          {% for position in former_positions %}
+            <span class="position-title">{{ position.organisation.name }}</span>
+          {% if not forloop.last %}and{% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
     </div>
 
     <div class="contact-actions">

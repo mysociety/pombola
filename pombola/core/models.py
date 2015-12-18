@@ -807,11 +807,6 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
         positions = self.all_related_positions().current_politician_positions()
         return Person.objects.filter(position__in=positions).distinct()
 
-    def all_related_former_politicians(self):
-        """Return a query set of all the former politicians for this place, and all parent places."""
-        positions = self.all_related_positions().former_politician_positions()
-        return Person.objects.filter(position__in=positions).distinct()
-
     def child_places_by_kind(self):
         """Return all concurrent child places, grouped by their PlaceKind
 
@@ -1071,6 +1066,16 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
         return qs
 
+    def previous(self, when=None):
+        """Filter end dates to limit to positions which are already over."""
+
+        when = when or datetime.date.today()
+
+        when_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
+
+        end_criteria = Q(sorting_end_date_high__lt=when_approx) & ~Q(end_date='')
+
+        return self.filter(end_criteria)
 
     def aspirant_positions(self):
         """
@@ -1083,19 +1088,9 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter down to only positions which are those of current aspirants."""
         return self.aspirant_positions().currently_active(when)
 
-    def politician_positions(self):
-        """Filter down to only positions which are one of the two kinds of
-        politician (those with constituencies, and nominated ones).
-        """
-        return self.filter(category='political')
-
     def current_politician_positions(self, when=None):
         """Filter down to only positions which are those of current politicians."""
-        return self.politician_positions().currently_active(when)
-
-    def former_politician_positions(self, when=None):
-        """Filter down to only positions which are those of former politicians."""
-        return self.politician_positions().currently_inactive(when)
+        return self.political().currently_active(when)
 
     def political(self):
         """Filter down to only the political category"""

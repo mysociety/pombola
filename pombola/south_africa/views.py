@@ -506,8 +506,7 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
             context['membertitle'] = 'member'
 
 class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
-
-    important_organisations = ('ncop', 'national-assembly', 'national-executive')
+    important_org_kind_slugs = ('national-executive', 'parliament', 'provincial-legislature')
 
     def get_recent_speeches_for_section(self, tags, limit=5):
         pombola_person = self.object
@@ -603,26 +602,6 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             .order_by('-start_date')
         )
         return models.Organisation.objects.filter(position__in=former_party_memberships).distinct()
-
-    def get_former_positions(self, person):
-        return (
-            person
-            .position_set
-            .all()
-            .political()
-            .currently_inactive()
-            .filter(
-                (
-                    # select positions within important organisations
-                    Q(organisation__slug__in=self.important_organisations)
-
-                    |
-                    # select election-list positions
-                    Q(organisation__kind__slug='election-list')
-                )
-            )
-            .order_by('-end_date','-start_date')
-        )
 
     def store_or_get_pmg_member_id(self, scheme='za.org.pmg.api/member'):
         identifier = self.object.get_identifier(scheme)
@@ -773,10 +752,16 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['phone_contacts'] = self.list_contacts(('cell', 'voice'))
         context['fax_contacts'] = self.list_contacts(('fax',))
         context['address_contacts'] = self.list_contacts(('address',))
-        context['positions'] = self.object.politician_positions().filter(organisation__slug__in=self.important_organisations)
+        context['positions'] = self.object.politician_positions().filter(
+            organisation__kind__slug__in=self.important_org_kind_slugs)
 
-        if len(self.object.position_set.all().political().currently_active()) < 2:
-            context['former_positions'] = self.get_former_positions(self.object)
+        context['former_positions'] = (
+            self.object.position_set
+            .all()
+            .political()
+            .previous()
+            .filter(organisation__kind__slug__in=self.important_org_kind_slugs)
+            )
 
         # FIXME - the titles used here will need to be checked and fixed.
         context['hansard']   = self.get_recent_speeches_for_section(('hansard',), limit=2)
