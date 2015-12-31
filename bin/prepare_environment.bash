@@ -49,12 +49,6 @@ pip install Mercurial
 pip uninstall PIL || true
 pip install -r requirements.txt
 
-# Try to make sure that the MapIt CSS has been generated.
-# The '|| echo' means that the script carries on even if this fails,
-# since the MapIt CSS isn't essential for the site.
-MAPIT_PATH="$(python -c 'import mapit; print mapit.__file__,')"
-"$(dirname $MAPIT_PATH)"/../bin/make_css || echo "Generating MapIt CSS failed"
-
 # make sure that there is no old code (the .py files may have been git deleted)
 find . -name '*.pyc' -delete
 
@@ -72,6 +66,11 @@ gem install --no-ri --no-rdoc chunky_png -v 1.2.9
 gem install --no-ri --no-rdoc fssm -v 0.2.10
 gem install --no-ri --no-rdoc sass -v 3.2.19
 gem install --no-ri --no-rdoc compass -v 0.12.7
+
+# Try to make sure that the MapIt CSS has been generated.
+# The '|| echo' means that the script carries on even if this fails,
+# since the MapIt CSS isn't essential for the site.
+mapit_make_css || echo "Generating MapIt CSS failed"
 
 # gather all the static files in one place
 ./manage.py collectstatic --noinput
