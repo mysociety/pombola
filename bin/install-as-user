@@ -134,8 +134,14 @@ do
     then
         COUNTRY_DASHES="$(echo $COUNTRY_APP | tr _ -)"
         bin/switch-country.py "$COUNTRY_DASHES"
+        # With the versions of Django and Django Debug Toolbar
+        # currently pinned, syncdb fails with DjDT activated (it
+        # expects content types to be already present), so disable it
+        # just for doing the initial database migration;
+        sed -i 's/DEBUG_TOOLBAR: True/DEBUG_TOOLBAR: False/' conf/general.yml
         ./manage.py syncdb --noinput
         ./manage.py migrate
+        sed -i 's/DEBUG_TOOLBAR: False/DEBUG_TOOLBAR: True/' conf/general.yml
     fi
 done
 # ... and finally switch back to Kenya:
