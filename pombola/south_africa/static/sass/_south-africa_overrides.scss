@@ -333,7 +333,6 @@ $logo-width-large: 184px;
     height: auto;
     background-image: none;
     background: $colour_main_background;
-    padding: 0.5em 0 0 0;
     position: relative;
 
     @media only all and (min-width: 640px), print {
@@ -542,29 +541,62 @@ menu#mobile-top-tools,
     position: absolute;
     top: .5em;
     right: .5em;
+    width: 9em;
+    text-align: right;
+
     @media only all and (min-width: 640px), print {
        top: .5em;
        right: 0;
+       width: auto;
     }
+
     ul {
         padding-left: 0;
     }
+
     li {
         list-style: none outside none;
         line-height: 1.1em;
-        text-align: right;
-        @media only all and (min-width: 640px), print {
-           display: inline-block;
-           margin-left: .5em;
-        }
+        display: inline-block;
+        margin-left: 0.5em;
     }
+
     a {
         font-size: 0.75em;
         color: $colour_blackish;
         text-decoration: none;
+
         &:hover {
             color: $colour-primary;
             text-decoration: underline;
+        }
+    }
+}
+
+@media only all and (min-width: 640px) {
+    .about-this-site-menu__facebook,
+    .about-this-site-menu__twitter {
+        position: absolute;
+        /* 114px is the header height and 38px is the icon height, so
+           this does vertical centring: */
+        top: (114px / 2) - (38px / 2);
+        right: 50px;
+
+        a {
+            display: block;
+            width: 38px;
+            height: 0;
+            padding-top: 38px;
+            overflow: hidden;
+            background: transparent url('/static/images/social-icons.png') 0 -1px no-repeat;
+        }
+    }
+
+    .about-this-site-menu__twitter {
+        right: 0;
+
+        a {
+            background-position: -51px -1px;
         }
     }
 }
