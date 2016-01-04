@@ -7,10 +7,10 @@
 
 {% block object_tagline %}
     <div class="important-positions">
-      {% if positions %}
+      {% if organizations_from_important_positions %}
         <p>
-          {% for position in positions %}
-            <span class="position-title">{{ position.organisation.name }}</span>
+          {% for o in organizations_from_important_positions %}
+            <span class="position-title">{{ o.name }}</span>
           {% if not forloop.last %}and{% endif %}
           {% endfor %}
         </p>

@@ -752,8 +752,11 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['phone_contacts'] = self.list_contacts(('cell', 'voice'))
         context['fax_contacts'] = self.list_contacts(('fax',))
         context['address_contacts'] = self.list_contacts(('address',))
-        context['positions'] = self.object.politician_positions().filter(
-            organisation__kind__slug__in=self.important_org_kind_slugs)
+        context['organizations_from_important_positions'] = \
+            models.Organisation.objects.filter(
+                kind__slug__in=self.important_org_kind_slugs,
+                position__in=self.object.politician_positions(),
+            ).distinct()
 
         context['former_positions'] = (
             self.object.position_set

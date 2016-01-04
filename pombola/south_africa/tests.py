@@ -354,6 +354,34 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             [],
             )
 
+    def test_unique_orgs_from_important_positions(self):
+        org = models.Organisation.objects.create(
+            slug='national-assembly',
+            name='National Assembly',
+            kind=models.OrganisationKind.objects.create(
+                name='Parliament',
+                slug='parliament',
+            )
+        )
+        pt_member = models.PositionTitle.objects.create(
+            slug='member', name='Member')
+        pt_whip = models.PositionTitle.objects.create(
+            slug='party-whip', name='Party Whip')
+        person = models.Person.objects.get(slug='moomin-finn')
+        person.position_set.create(
+            title=pt_member, category='political', organisation=org
+        )
+        person.position_set.create(
+            title=pt_whip, category='political', organisation=org
+        )
+        c = Client()
+        response = c.get('/person/moomin-finn/')
+        self.assertContains(
+            response,
+            '<p><span class="position-title">National Assembly</span></p>',
+            html=True,
+        )
+
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
         speaker = self.pombola_person_to_sayit_speaker(person)
