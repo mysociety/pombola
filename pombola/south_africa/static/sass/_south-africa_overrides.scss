@@ -333,10 +333,11 @@ $logo-width-large: 184px;
     height: auto;
     background-image: none;
     background: $colour_main_background;
-    padding: .5em 0 0;
+    padding: 0.5em 0 0 0;
     position: relative;
+
     @media only all and (min-width: 640px), print {
-        padding: 0;
+        padding: 0 0.5em 0 0.5em; // stop children touching edges of window on narrow desktops
         height: 114px;
     }
 }
@@ -436,6 +437,13 @@ menu#mobile-top-tools,
 #main-menu {
     background: $colour_green;
 }
+
+#main-menu {
+    @media only all and (min-width: 640px) {
+        padding: 0 0.5em 0 0.5em; // stop children touching edges of window on narrow desktops
+    }
+}
+
 #main-menu nav{
     text-align: left;
     ul{
@@ -452,6 +460,12 @@ menu#mobile-top-tools,
                 &:hover,
                 &:focus {
                     background: mix($colour_green, #000, 80%);
+                }
+            }
+
+            &:first-child a {
+                @media only all and (min-width: 640px) {
+                    margin-left: -8px; // compensate for link padding so text lines up with site grid
                 }
             }
 
