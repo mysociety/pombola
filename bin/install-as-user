@@ -138,10 +138,10 @@ do
         # currently pinned, syncdb fails with DjDT activated (it
         # expects content types to be already present), so disable it
         # just for doing the initial database migration;
-        sed -i 's/DEBUG_TOOLBAR: True/DEBUG_TOOLBAR: False/' conf/general.yml
+        sed -i 's/DEBUG_TOOLBAR: True/DEBUG_TOOLBAR: False/' "$(readlink -f conf/general.yml)"
         ./manage.py syncdb --noinput
         ./manage.py migrate
-        sed -i 's/DEBUG_TOOLBAR: False/DEBUG_TOOLBAR: True/' conf/general.yml
+        sed -i 's/DEBUG_TOOLBAR: False/DEBUG_TOOLBAR: True/' "$(readlink -f conf/general.yml)"
     fi
 done
 # ... and finally switch back to Kenya:
