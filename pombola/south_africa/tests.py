@@ -354,31 +354,64 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             [],
             )
 
-    def test_unique_orgs_from_important_positions(self):
+    def _setup_positions_test_data(self):
+        parliament = models.OrganisationKind.objects.create(
+            name='Parliament',
+            slug='parliament',
+            )
+
         org = models.Organisation.objects.create(
             slug='national-assembly',
             name='National Assembly',
-            kind=models.OrganisationKind.objects.create(
-                name='Parliament',
-                slug='parliament',
+            kind=parliament,
             )
-        )
+        old_org = models.Organisation.objects.create(
+            slug='old-assembly',
+            name='Old Assembly',
+            kind=parliament,
+            )
+
         pt_member = models.PositionTitle.objects.create(
             slug='member', name='Member')
         pt_whip = models.PositionTitle.objects.create(
             slug='party-whip', name='Party Whip')
+
         person = models.Person.objects.get(slug='moomin-finn')
         person.position_set.create(
-            title=pt_member, category='political', organisation=org
+            title=pt_member, category='political', organisation=org,
         )
         person.position_set.create(
             title=pt_whip, category='political', organisation=org
         )
+        person.position_set.create(
+            title=pt_member, category='political', organisation=org,
+            end_date=ApproximateDate(year=1999),
+            )
+        person.position_set.create(
+            title=pt_member, category='political', organisation=old_org,
+            end_date=ApproximateDate(year=1999),
+            )
+        person.position_set.create(
+            title=pt_member, category='political', organisation=old_org,
+            end_date=ApproximateDate(year=2000),
+            )
+
+    def test_unique_orgs_from_important_positions(self):
+        self._setup_positions_test_data()
+
         c = Client()
         response = c.get('/person/moomin-finn/')
         self.assertContains(
             response,
             '<p><span class="position-title">National Assembly</span></p>',
+            count=1,
+            html=True,
+        )
+
+        self.assertContains(
+            response,
+            '<p>Formerly: <span class="position-title">Old Assembly</span></p>',
+            count=1,
             html=True,
         )
 

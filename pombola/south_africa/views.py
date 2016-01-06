@@ -752,19 +752,29 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         context['phone_contacts'] = self.list_contacts(('cell', 'voice'))
         context['fax_contacts'] = self.list_contacts(('fax',))
         context['address_contacts'] = self.list_contacts(('address',))
-        context['organizations_from_important_positions'] = \
-            models.Organisation.objects.filter(
-                kind__slug__in=self.important_org_kind_slugs,
-                position__in=self.object.politician_positions(),
-            ).distinct()
 
-        context['former_positions'] = (
+        orgs_from_important_positions = models.Organisation.objects.filter(
+            kind__slug__in=self.important_org_kind_slugs,
+            position__in=self.object.politician_positions(),
+            )
+
+        former_important_positions = (
             self.object.position_set
             .all()
             .political()
             .previous()
             .filter(organisation__kind__slug__in=self.important_org_kind_slugs)
             )
+
+        former_orgs_from_important_positions = models.Organisation.objects.filter(
+            position__in=former_important_positions,
+            ).exclude(id__in=orgs_from_important_positions)
+
+        context['organizations_from_important_positions'] = \
+            orgs_from_important_positions.distinct()
+
+        context['organizations_from_former_important_positions'] = \
+            former_orgs_from_important_positions.distinct()
 
         # FIXME - the titles used here will need to be checked and fixed.
         context['hansard']   = self.get_recent_speeches_for_section(('hansard',), limit=2)
