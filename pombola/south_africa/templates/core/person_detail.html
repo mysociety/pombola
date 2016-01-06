@@ -15,11 +15,11 @@
           {% endfor %}
         </p>
       {% endif %}
-      {% if former_positions %}
+      {% if organizations_from_former_important_positions %}
         <p>
           Formerly:
-          {% for position in former_positions %}
-            <span class="position-title">{{ position.organisation.name }}</span>
+          {% for organisation in organizations_from_former_important_positions %}
+            <span class="position-title">{{ organisation.name }}</span>
           {% if not forloop.last %}and{% endif %}
           {% endfor %}
         </p>
