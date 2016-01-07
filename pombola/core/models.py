@@ -36,11 +36,6 @@ from mapit import models as mapit_models
 
 from pombola.country import significant_positions_filter
 
-# tell South how to handle the custom fields
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateField"])
-add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointField"])
-
 date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
 
 
