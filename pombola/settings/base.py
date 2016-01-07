@@ -317,11 +317,6 @@ IEBC_API_SECRET = config.get('IEBC_API_SECRET')
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions':['tables']})
 MARKITUP_SET = 'markitup/sets/markdown'
 
-
-# There are some models that are just for testing, so they are not included in
-# the South migrations.
-SOUTH_TESTS_MIGRATE = False
-
 # Use nose as the test runner
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['--with-doctest', '--with-yanc']
@@ -397,7 +392,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'south',
     'ajax_select',
     'autocomplete_light',
     'markitup',

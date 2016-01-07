@@ -1004,8 +1004,12 @@ class SACommitteeIndexViewTest(TransactionWebTest):
         self.fish_section_title = u"Oh fishy fishy fishy fishy fishy fish"
         self.forest_section_title = u"Forests are totes awesome"
         self.pmq_section_title = "Questions on 20 June 2014"
+
         # Make sure that the default SayIt instance exists, since when
         # testing it won't be created because of SOUTH_TESTS_MIGRATE = False
+        # NOTE - If this all goes wrong in Django 1.7, it may well be because
+        # south, and hence SOUTH_TESTS_MIGRATE are no longer there.
+
         default_instance, _ = Instance.objects.get_or_create(label='default')
         create_sections([
             {
