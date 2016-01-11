@@ -247,12 +247,18 @@ class SAPlaceDetailView(PlaceDetailView):
         context = super(SAPlaceDetailView, self).get_context_data(**kwargs)
 
         for context_string, position_filter in (
-                ('national_assembly_people', {'organisation__slug': 'national-assembly'}),
-                ('ncop_people', {'organisation__slug': 'ncop'}),
-                ('legislature_people', {'organisation__kind__slug': 'provincial-legislature'}),
+                ('national_assembly_people',
+                 {'organisation__slug': 'national-assembly',
+                  'title__slug': 'member'}),
+                ('ncop_people',
+                 {'organisation__slug': 'ncop',
+                  'title__slug': 'delegate'}),
+                ('legislature_people',
+                 {'organisation__kind__slug': 'provincial-legislature',
+                  'title__slug': 'member'}),
         ):
             all_member_positions = self.object.all_related_positions(). \
-                filter(title__slug='member', **position_filter).select_related('person')
+                filter(**position_filter).select_related('person')
             current_positions = all_member_positions.currently_active()
             current_people = models.Person.objects.filter(position__in=current_positions).distinct()
             former_positions = all_member_positions.currently_inactive()

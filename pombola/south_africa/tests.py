@@ -1481,6 +1481,11 @@ class SAPlaceDetailViewTest(WebTest):
             slug='member',
         )
 
+        self.positiontitle_delegate = models.PositionTitle.objects.create(
+            name='Delegate',
+            slug='delegate',
+        )
+
         self.positiontitle_other = models.PositionTitle.objects.create(
             name='Other',
             slug='other',
@@ -1514,7 +1519,7 @@ class SAPlaceDetailViewTest(WebTest):
         models.Position.objects.create(
             organisation=self.org_ncop,
             place=self.place,
-            title=self.positiontitle_member,
+            title=self.positiontitle_delegate,
             person=person_related_ncop,
             category='political',
             end_date='future',
@@ -1566,7 +1571,7 @@ class SAPlaceDetailViewTest(WebTest):
         models.Position.objects.create(
             organisation=self.org_ncop,
             place=self.place,
-            title=self.positiontitle_member,
+            title=self.positiontitle_delegate,
             person=person_related_assembly_ncop,
             category='political',
             end_date=ApproximateDate(future=True),
@@ -1575,6 +1580,33 @@ class SAPlaceDetailViewTest(WebTest):
         resp = self.app.get('/place/test-place/')
 
         self.assertEqual(1, resp.context['national_assembly_people_count'])
+        self.assertEqual(1, resp.context['ncop_people_count'])
+        self.assertEqual(0, resp.context['legislature_people_count'])
+
+        self.assertEqual(1, len(resp.context['related_people']))
+        self.assertContains(resp, "There is 1 person related to Test Place.")
+
+    def test_ncop_delegate(self):
+
+        # Related by Assembly and NCOP, should be counted once
+
+        person_related_assembly_ncop = models.Person.objects.create(
+            name='Test Person Related Assembly and NCOP',
+            slug='test-person-related-assembly-ncop',
+        )
+
+        models.Position.objects.create(
+            organisation=self.org_ncop,
+            place=self.place,
+            title=self.positiontitle_delegate,
+            person=person_related_assembly_ncop,
+            category='political',
+            end_date=ApproximateDate(future=True),
+        )
+
+        resp = self.app.get('/place/test-place/')
+
+        self.assertEqual(0, resp.context['legislature_people_count'])
         self.assertEqual(1, resp.context['ncop_people_count'])
         self.assertEqual(0, resp.context['legislature_people_count'])
 
@@ -1689,6 +1721,7 @@ class SAPlaceDetailViewTest(WebTest):
         # that doesn't care about which organisation the people are
         # related by.
         self.assertEqual(1, len(resp.context['related_people']))
+
 
 @attr(country='south_africa')
 class SAMembersInterestsBrowserTest(TestCase):
