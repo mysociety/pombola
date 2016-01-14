@@ -42,8 +42,6 @@ other sites around the world, notably several in Africa.
 
 We want the code to be easy to use for other installations, but currently there are some rough edges.
 
-We also intend to replace the `core` app's models with an external data store. This will be done using [PopIt](https://github.com/mysociety/popit) which is a project that we are currently working on.
-
 ## Acknowledgements
 
 We are very grateful for the funding that has made development
