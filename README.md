@@ -7,22 +7,6 @@ For an overview of the system please see the files in docs/ - especially
 [OVERVIEW.md](https://github.com/mysociety/pombola/blob/master/docs/OVERVIEW.md)
 
 
-## Community
-
-Please join the Mzalendo Users Google group for discussion about running Pombola-based websites. This is also where announcements etc will be made.
-
-    https://groups.google.com/forum/?fromgroups=#!forum/mzalendo-users
-
-There is also the Poplus mailing list for some of the code used to make the
-site. This includes [MapIt](https://github.com/mysociety/mapit) (for the
-boundaries), [PopIt](https://github.com/mysociety/popit) (a person data storage
-engine that Pombola will be changed to use in the future), and
-[SayIt](https://github.com/mysociety/sayit) (a speech data storage system,
-similarly):
-
-    https://groups.google.com/forum/#!forum/poplus
-
-
 ## Installing
 
 Please see [docs/INSTALL.md](https://github.com/mysociety/pombola/blob/master/docs/INSTALL.md)
