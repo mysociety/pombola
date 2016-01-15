@@ -1,0 +1,4 @@
+# This is here for the benefit of mySociety's deploy system, so that
+# we can have customized crontabs for Pombola on our servers, which
+# contain details of internal infrastructure and things not of interest
+# to other deployers.
