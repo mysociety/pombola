@@ -22,6 +22,18 @@ PYTHONIOENCODING=utf-8
 # check that no bad slugs have been stored in the database
 0 23 * * * !!(*= $user *)!! run_management_command core_list_malformed_slugs
 
+!!(*
+    %dump_times = (
+        'mzalendo.mysociety.org' => 10,
+        'www.pa.org.za' => 20,
+        'www.shineyoureye.org' => 30,
+        'www.kuvakazim.com' => 40,
+    );
+    if (exists $dump_times{$vhost}) {
+        $dump_directory = "/data/vhost/$vhost/media_root/dumps";
+*)!!
+!!(*= $dump_times{$vhost} *)!! 15 * * * !!(*= $user *)!! mkdir -p !!(*= $dump_directory *)!! && run_management_command core_database_dump !!(*= $dump_directory *)!!/pg-dump-`date --iso`.sql && gzip -9 !!(*= $dump_directory *)!!/pg-dump-`date --iso`.sql && ln -snf pg-dump-`date --iso`.sql.gz !!(*= $dump_directory *)!!/pg-dump.sql.gz
+!!(* } *)!!
 
 # Several sites use the Pombola codebase. They don't all have the same requirements
 # or apps. Use the conditionals below to run the correct cron jobs, and make
