@@ -27,3 +27,5 @@ build/
 tmp/
 local_fabfile.py
 mzalendo/fabfile.py
+/conf/crontab
+/conf/crontab.deployed
