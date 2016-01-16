@@ -1,6 +1,6 @@
 from BeautifulSoup import NavigableString
 from contextlib import contextmanager
-from django_webtest import TransactionWebTest
+from django_webtest import WebTest
 from django.contrib.auth.models import User
 from django.test import TestCase
 
@@ -16,7 +16,7 @@ class HomeViewTest(TestCase):
         self.assertIn('featured_persons', response.context)
 
 
-class PositionViewTest(TransactionWebTest):
+class PositionViewTest(WebTest):
 
     def setUp(self):
         self.person = models.Person.objects.create(
@@ -179,7 +179,7 @@ class PositionViewTest(TransactionWebTest):
         )
 
 
-class TestPersonView(TransactionWebTest):
+class TestPersonView(WebTest):
 
     def setUp(self):
         self.alf = models.Person.objects.create(
