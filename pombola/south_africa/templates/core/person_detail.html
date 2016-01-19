@@ -38,7 +38,7 @@
       {% if twitter_contacts %}
         <div class="contact-actions__twitter">
           {% for twitter in twitter_contacts %}
-            <a href="http://twitter.com/{{ twitter }}">@{{ twitter|cut:"@" }}</a>
+            <a href="http://twitter.com/{{ twitter|cut:"@"|cut:" " }}">@{{ twitter|cut:"@"|cut:" " }}</a>
           {% endfor %}
         </div>
       {% endif %}
