@@ -748,6 +748,10 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
         context['twitter_contacts'] = self.list_contacts(('twitter',))
+        context['facebook_contacts'] = self.list_contacts(('facebook',))
+        context['linkedin_contacts'] = self.list_contacts(('linkedin',))
+        context['youtube_contacts'] = self.list_contacts(('youtube',))
+        context['whoswhosa_contacts'] = self.list_contacts(('whos-who-sa',))
         # The email attribute of the person might also be duplicated
         # in a contact of type email, so create a set of email
         # addresses:

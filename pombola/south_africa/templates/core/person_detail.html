@@ -42,6 +42,38 @@
           {% endfor %}
         </div>
       {% endif %}
+
+      {% if facebook_contacts %}
+        <div class="contact-actions__facebook">
+          {% for facebook in facebook_contacts %}
+            <a href="{{ facebook }}">Facebook</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if linkedin_contacts %}
+        <div class="contact-actions__linkedin">
+          {% for linkedin in linkedin_contacts %}
+            <a href="{{ linkedin }}">LinkedIn</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if whoswhosa_contacts %}
+        <div class="contact-actions__whoswhosa">
+          {% for whoswhosa in whoswhosa_contacts %}
+            <a href="{{ whoswhosa }}">Who&rsquo;s Who</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if youtube_contacts %}
+        <div class="contact-actions__youtube">
+          {% for youtube in youtube_contacts %}
+            <a href="{{ youtube }}">YouTube</a>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
 {% endblock object_tagline %}
 

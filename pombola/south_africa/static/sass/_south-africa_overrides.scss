@@ -64,7 +64,7 @@ a {
 
     &:hover,
     &:focus {
-        background: mix($colour_primary, #000, 80%);
+        background-color: mix($colour_primary, #000, 80%);
         color: #fff;
         text-decoration: none;
     }
@@ -1956,48 +1956,40 @@ a.alphabet-links__link {
     }
 }
 
-.contact-actions__email,
-.contact-actions__twitter {
-  display: inline;
-  margin-right: 1em;
+// Can't use a map here because we're on sass >3.3 #sadface
+$contact_actions: (
+  ('email', $colour_primary),
+  ('twitter', #4099ff),
+  ('facebook', #3b5998),
+  ('linkedin', #0077b5),
+  ('youtube', #cd201f),
+  ('whoswhosa', #185f8e)
+);
+$contact_icon_path: '../images/person-contact-icons';
 
-  a {
-    @extend .button;
-    border-radius: 3px;
-    margin-bottom: 1em;
-    text-transform: none;
-    background-repeat: no-repeat;
-    background-position: 14px 50%;
-    padding-left: 37px;
-    &:hover,
-    &:active,
-    &:focus {
-      background-repeat: no-repeat;
-      background-position: 14px 50%;
-    }
-  }
-}
+@each $site in $contact_actions {
+    .contact-actions__#{nth($site, 1)} {
+        display: inline;
+        margin-right: 1em;
 
-.contact-actions__twitter {
-    a {
-        background-color: #4099ff;
-        background-image: url('../images/twitter-icon.png');
-        &:hover,
-        &:active,
-        &:focus {
-            background-color: darken(#4099ff, 10%);
-            background-image: url('../images/twitter-icon.png');
-        }
-    }
-}
+        a {
+            @extend .button;
+            margin-bottom: 1em;
+            text-transform: none;
+            padding-left: 38px;
 
-.contact-actions__email {
-    a {
-        background-image: url('../images/email-icon.png');
-        &:hover,
-        &:active,
-        &:focus {
-            background-image: url('../images/email-icon.png');
+            background: nth($site, 2) url('#{$contact_icon_path}/#{nth($site, 1)}-icon.png') no-repeat 14px 50%;
+            @media($high_dpi_screen){
+              background-image: url('#{$contact_icon_path}/#{nth($site, 1)}-icon@2x.png');
+            }
+            background-image: url('#{$contact_icon_path}/#{nth($site, 1)}-icon.svg'), none;
+            background-size: 18px 14px;
+
+            &:hover,
+            &:active,
+            &:focus {
+              background-color: darken(nth($site, 2), 10%);
+            }
         }
     }
 }
