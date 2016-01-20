@@ -16,4 +16,5 @@ cd `dirname $0`/..
 ./bin/run_management_command za_hansard_q_and_a_scraper --run-all-steps
 
 # Run the committee minutes scraper and imports
-./bin/run_management_command za_hansard_pmg_api_scraper --scrape --save-json --import-to-sayit --delete-existing --commit
+./bin/run_management_command za_hansard_pmg_api_scraper --scrape --save-json --commit
+./bin/run_management_command south_africa_import_committee_appearances --delete-existing --commit
