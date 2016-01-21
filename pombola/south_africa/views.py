@@ -463,7 +463,6 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
 
     def add_sub_page_context(self, context):
         all_positions = self.object.position_set.all()
-        context['office_filter'] = False
         context['historic_filter'] = False
         context['all_filter'] = False
         context['current_filter'] = False
@@ -471,7 +470,7 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
         if self.request.GET.get('all'):
             context['all_filter'] = True
             context['sorted_positions'] = all_positions
-        elif self.request.GET.get('historic') and not self.request.GET.get('office'):
+        elif self.request.GET.get('historic'):
             context['historic_filter'] = True
             #FIXME - limited to members and delegates so that current members who are no longer officials are not displayed, but this
             #means that if a former member was an official this is not shown
@@ -482,11 +481,6 @@ class SAOrganisationDetailSubPeople(SAOrganisationDetailSub):
         else:
             context['current_filter'] = True
             context['sorted_positions'] = all_positions.currently_active()
-
-        if self.request.GET.get('office'):
-            context['office_filter'] = True
-            context['current_filter'] = False
-            context['sorted_positions'] = context['sorted_positions'].exclude(title__slug='member').exclude(title__slug='delegate')
 
         # Counts of positions relating to people whose name starts with each letter of the alphabet
         context['count_by_prefix'] = [
