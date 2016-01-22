@@ -272,7 +272,7 @@ class NGSearchView(SearchBaseView):
 
     def find_governor(self, state):
         if state:
-            governor = self.get_people(state, "governor")
+            governor = self.get_people(state, "executive-governor")
             if governor:
                 return governor[0][0]
 
