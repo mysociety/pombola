@@ -73,7 +73,7 @@ class NGSearchViewTest(WebTest):
 
         self.mapit_test_state.codes.get_or_create(
             type=self.poll_unit_code_type,
-            code="OD",
+            code="ON",
          )
 
         self.mapit_test_state.names.get_or_create(
@@ -118,7 +118,7 @@ class NGSearchViewTest(WebTest):
 
         self.mapit_test_lga.codes.get_or_create(
             type=self.poll_unit_code_type,
-            code="OD:4",
+            code="ON:4",
          )
 
         self.mapit_test_lga.names.get_or_create(
@@ -139,7 +139,7 @@ class NGSearchViewTest(WebTest):
 
         self.mapit_test_ward.codes.get_or_create(
             type=self.poll_unit_code_type,
-            code="OD:4:7",
+            code="ON:4:7",
          )
 
         self.mapit_test_ward.names.get_or_create(
@@ -164,21 +164,21 @@ class NGSearchViewTest(WebTest):
     def test_matching_state(self):
         response = self.app.get("/search/?q=28/04454/09")
         self.assertIn(
-            'Best match is the state "ONDO" with poll unit number \'OD\'',
+            'Best match is the state "ONDO" with poll unit number \'ON\'',
             response.content
         )
 
     def test_matching_lga(self):
         response = self.app.get("/search/?q=28/04/09")
         self.assertIn(
-            'Best match is the local government area "AKOKO SOUTH WEST" with poll unit number \'OD:4\'',
+            'Best match is the local government area "AKOKO SOUTH WEST" with poll unit number \'ON:4\'',
             response.content
         )
 
     def test_matching_ward(self):
         response = self.app.get("/search/?q=28/04/07")
         self.assertIn(
-            'Best match is the ward "Test Ward" with poll unit number \'OD:4:7\'',
+            'Best match is the ward "Test Ward" with poll unit number \'ON:4:7\'',
             response.content
         )
 
