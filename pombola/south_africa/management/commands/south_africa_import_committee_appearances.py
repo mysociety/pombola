@@ -117,7 +117,7 @@ class Command(BaseCommand):
                     )
                 )
 
-        reports = reports_all = PMGCommitteeReport.objects.all()
+        reports = reports_all = PMGCommitteeReport.objects.all().order_by('api_meeting_id')
         section_ids = []
 
         if not options['delete_existing']:
