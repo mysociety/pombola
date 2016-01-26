@@ -1,4 +1,56 @@
-# Importing PUN data
+# Updating the Polling Unit number data (2015-11-18)
+
+Firstly, when the GADM LGA boundary data was originally
+imported, some boundaries weren't imported correctly - I think
+because the polygons were invalid in one way or anothe. These
+can be fixed on import, though, so reimport those with:
+
+    ./manage.py nigeria_update_lga_boundaries_from_gadm NGA_adm2.shp
+
+The earlier data we had for polling unit numbers turns out to no
+longer be accurate.  We've been provided a new mapping of
+PU numbers for State and LGA (but this time without the data for
+wards in each LGA) which is in:
+
+    pombola/nigeria/data/Nigeria - Political Atlas for SYE.csv
+
+This uses slightly different names again for the LGA areas
+(although some are still the same). Unfortunately, after some
+work I didn't find that the `nigeria_lga_name_helper` command
+was helping, so introduced a new command that just adds
+alternative names (as a MapIt Name object, with a NameType of
+code ``) from a CSV file.
+
+To make sure that there are alternative names present in MapIt
+for LGA regions that are the same as those in the "Political
+Atlas for ShineYourEye" spreadsheet of polling numbers, run:
+
+    ./manage.py nigeria_load_lga_name_alternatives --replace
+
+... and if you're happy with the output, re-run it with the
+`--commit` option:
+
+    ./manage.py nigeria_load_lga_name_alternatives --replace --commit
+
+Then to add the PU number codes as MapIt Code objects, removing
+all the old now-inaccurate data at the same time, you can run:
+
+    ./manage.py nigeria_add_polling_units_to_mapit \
+        --ignore-wards --delete-existing-pu-codes --delete-existing-wards
+
+There are further problems.  The senatorial district boundaries
+were originally composed from the LGA areas, but this process
+produced broken boundaries (I think due to bad or fuzzy name
+matching finding the wrong component areas).  These can be fixed
+by running:
+
+    ./manage.py nigeria_fix_senatorial_districts
+
+The federal constituency boundary data is still broken.
+
+The earlier instructions are preserved below for reference.
+
+# Earlier instructions for importing PUN data
 
 This is a guide to the steps required to add the PUN data to the database.
 
@@ -83,5 +135,3 @@ There is a second script that can be used once `name_helper.py` is happy. Run
 it as:
 
     ./add_polling_units_to_mapit.py polling_unit_wards.csv
-
-

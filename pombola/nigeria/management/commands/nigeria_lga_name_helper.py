@@ -1,21 +1,25 @@
 #!/usr/bin/env python
 
-import sys
 import csv
 import os
 
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'pombola.settings'
-
-# Horrible boilerplate - there must be a better way :)
-sys.path.append(
-    os.path.abspath(
-        os.path.dirname(__file__) + '../../../../..'
-    )
-)
-
 from mapit import models
+
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.management.base import BaseCommand, CommandError
+
+
+class Command(BaseCommand):
+
+    help = "Match up LGA names with those in MapIt"
+
+    def handle(self, *args, **options):
+        if len(args) < 1:
+            raise CommandError("You must supply at least one CSV file as an argument")
+        for filename in args:
+            checker = LgaNameChecker()
+            checker.process(filename)
+
 
 class LgaNameChecker(object):
 
@@ -218,11 +222,3 @@ class LgaNameChecker(object):
         for area in models.Area.objects.filter(type__code='LGA').order_by('name'):
             if area.id in self.matched_area_ids: continue
             print "Unmatched mapit area:", area.name
-
-
-
-
-for filename in sys.argv[1:]:
-    checker = LgaNameChecker()
-    checker.process(filename)
-
