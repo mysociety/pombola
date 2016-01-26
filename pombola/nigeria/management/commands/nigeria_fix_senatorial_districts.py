@@ -175,8 +175,6 @@ class Command(BaseCommand):
                 print("sen", sen_name, 'mapit', mapit_sen)
                 try:
                     mapit_lga = self.get_mapit_area(lga_name, 'LGA', parent=mapit_sen)
-                    if mapit_sen.name == 'LAGOS CENTRAL':
-                        print('mapit_lga.id', mapit_lga.id)
                 except NoAreaFound:
                     # It's probable that the area has the wrong parent
                     # set (e.g. the state rather than the senatorial
