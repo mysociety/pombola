@@ -48,7 +48,7 @@ class Image(models.Model):
                 sibling.save()
 
 
-class HasImageMixin():
+class HasImageMixin(object):
 
     def primary_image(self):
         primary = [i for i in self.images.all() if i.is_primary]
