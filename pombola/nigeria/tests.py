@@ -174,17 +174,3 @@ class NGSearchViewTest(WebTest):
             'Best match is the local government area "AKOKO SOUTH WEST" with poll unit number \'ON:4\'',
             response.content
         )
-
-    def test_matching_ward(self):
-        response = self.app.get("/search/?q=28/04/07")
-        self.assertIn(
-            'Best match is the ward "Test Ward" with poll unit number \'ON:4:7\'',
-            response.content
-        )
-
-        self.assertTrue(
-            re.search(
-                r'<h3>State</h3>\s*<p>\s*<a href="/place/place_test/">Test State Name</a>,\s*current governor <a href="/person/governor_test/">Test Gov</a>',
-                response.content
-            )
-        )
