@@ -38,6 +38,15 @@ from pombola.country import significant_positions_filter
 
 date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
 
+def validate_person_slug(slug):
+    return validate_slug_not_redirecting('core', 'Person', slug)
+
+def validate_organisation_slug(slug):
+    return validate_slug_not_redirecting('core', 'Organisation', slug)
+
+def validate_place_slug(slug):
+    return validate_slug_not_redirecting('core', 'Place', slug)
+
 
 
 class ModelBase(models.Model):
@@ -284,7 +293,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         max_length=200,
         unique=True,
         help_text="auto-created from first name and last name",
-        validators=[partial(validate_slug_not_redirecting, 'core', 'Person')],
+        validators=[validate_person_slug],
     )
     gender = models.CharField(max_length=20, blank=True, help_text="this is typically, but not restricted to, 'male' or 'female'")
     date_of_birth = ApproximateDateField(blank=True, help_text=date_help_text)
@@ -602,7 +611,7 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
         max_length=200,
         unique=True,
         help_text="created from name",
-        validators=[partial(validate_slug_not_redirecting, 'core', 'Organisation')],
+        validators=[validate_organisation_slug],
     )
     summary = MarkupField(blank=True, default='')
     kind = models.ForeignKey('OrganisationKind')
@@ -696,7 +705,7 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
         max_length=200,
         unique=True,
         help_text="created from name",
-        validators=[partial(validate_slug_not_redirecting, 'core', 'Place')],
+        validators=[validate_place_slug],
     )
     kind = models.ForeignKey('PlaceKind')
     summary = MarkupField(blank=True, default='')
