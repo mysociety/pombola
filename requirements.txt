@@ -39,7 +39,7 @@ Markdown==2.5.1
 # that the behaviour is not altered. If you need to reintroduce jQuery manually
 # into the admin then commit c5fdf97df10782c098592e89503fce461840dcda may be
 # useful as a reference.
-django-markitup==2.2.1
+django-markitup==2.3.0
 
 requests==2.6.0
 elasticsearch==0.4.5
