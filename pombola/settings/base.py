@@ -398,7 +398,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'south',
     'ajax_select',
     'autocomplete_light',
     'markitup',
