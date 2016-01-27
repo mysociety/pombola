@@ -406,6 +406,8 @@ INSTALLED_APPS = (
 
     'mapit',
 
+    'popolo',
+
     'pombola.images',
     'sorl.thumbnail',
 
