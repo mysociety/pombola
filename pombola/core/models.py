@@ -354,7 +354,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         result.add(self.legal_name)
         return result
 
-    @transaction.commit_on_success
+    @transaction.atomic
     def add_alternative_name(self, alternative_name, name_to_use=False, note=''):
         if name_to_use:
             # Make sure that no other alternative names are set as
