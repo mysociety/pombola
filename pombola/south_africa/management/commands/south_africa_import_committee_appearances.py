@@ -23,7 +23,7 @@ def person_accept_check(popit_person, date):
 
     person_id = int(popit_person.popit_id.rsplit(':', 1)[1])
 
-    qs = (Position.objects
+    na_qs = (Position.objects
           .filter(
               person__id=person_id,
               title__slug='member',
@@ -32,7 +32,16 @@ def person_accept_check(popit_person, date):
           .currently_active(date)
           )
 
-    return qs.exists()
+    ncop_qs = (Position.objects
+          .filter(
+              person__id=person_id,
+              title__slug='delegate',
+              organisation__slug='ncop',
+              )
+          .currently_active(date)
+          )
+
+    return na_qs.exists() or ncop_qs.exists()
 
 
 class Command(BaseCommand):
