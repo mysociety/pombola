@@ -202,7 +202,7 @@ class PersonQuerySet(models.query.GeoQuerySet):
         return self.filter(position__in=Position.objects.all().current_politician_positions(when))
 
 class PersonManager(ManagerBase):
-    def get_query_set(self):
+    def get_queryset(self):
         return PersonQuerySet(self.model)
 
     def loose_match_name(self, name):
@@ -601,7 +601,7 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
 
 
 class OrganisationManager(ManagerBase):
-    def get_query_set(self):
+    def get_queryset(self):
         return OrganisationQuerySet(self.model)
 
 
@@ -696,7 +696,7 @@ class PlaceQuerySet(models.query.GeoQuerySet):
         return self.order_by('-kind__name', 'name')
 
 class PlaceManager(ManagerBase):
-    def get_query_set(self):
+    def get_queryset(self):
         return PlaceQuerySet(self.model)
 
 class Place(ModelBase, ScorecardMixin, BudgetsMixin):
@@ -1133,7 +1133,7 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
 
 class PositionManager(ManagerBase):
-    def get_query_set(self):
+    def get_queryset(self):
         return PositionQuerySet(self.model)
 
 
