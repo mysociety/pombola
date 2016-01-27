@@ -15,7 +15,7 @@ class AliasQuerySet(models.query.QuerySet):
 
 
 class AliasManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return AliasQuerySet(self.model)
 
 

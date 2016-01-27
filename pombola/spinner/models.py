@@ -18,7 +18,7 @@ class SlideQuerySet(models.query.QuerySet):
 
 
 class SlideManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return SlideQuerySet(self.model, using=self._db)
 
     # Commented out as unused, but possibly useful in future

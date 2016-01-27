@@ -34,7 +34,7 @@ class EntryQuerySet(models.query.QuerySet):
         )
 
 class EntryManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return EntryQuerySet(self.model)
 
 

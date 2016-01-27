@@ -33,7 +33,7 @@ class SourceQuerySet(models.query.QuerySet):
 
 
 class SourceManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return SourceQuerySet(self.model)
 
 
