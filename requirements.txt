@@ -79,8 +79,8 @@ django-mapit==1.3.1.post1
 -e git+git://github.com/mysociety/sayit.git@b9b5d803178303b2aa3feadcc912766cf4a25673#egg=django-sayit
 mysociety-django-sluggable==0.2.7
 -e git+git://github.com/mysociety/popit-django@a11ef97919f2ae35ef1ef1e2a3f0553ad1ba1e6d#egg=popit-django
--e git+git://github.com/mysociety/za-hansard.git@525407cb28c08d6aafe696211e0e27536229ad0b#egg=za-hansard
--e git+git://github.com/mysociety/popolo-name-resolver@d733d98e0e950cbc8e6f9fb32d3d13e0f7a7d6c3#egg=popolo-name-resolver
+-e git+git://github.com/mysociety/za-hansard.git@303fa78c2485fe75b16478218b2d3288b68ecec4#egg=za-hansard
+-e git+git://github.com/mysociety/popolo-name-resolver@f20646ae0d8ccbc719e19c9ed070827be0efb1b1#egg=popolo-name-resolver
 
 mysociety-django-popolo==0.0.2
 
