@@ -44,6 +44,8 @@ django-markitup==2.3.0
 requests==2.6.0
 elasticsearch==0.4.5
 django-haystack==2.3.1
+# Required (but not a declared requirement) of elasticsearch
+urllib3==1.14
 
 # Testing helpers
 django-nose==1.3
