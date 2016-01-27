@@ -88,6 +88,7 @@ python-dateutil==2.3
 # Packages that are helpful for development:
 coverage==3.7.1
 django-debug-toolbar==1.2.2
+django-extensions==1.6.1
 
 ## votematch
 django-model-utils==2.2

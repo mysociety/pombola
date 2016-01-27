@@ -425,6 +425,7 @@ INSTALLED_APPS = (
 
     'pagination',
     'django_nose',
+    'django_extensions',
 )
 if config.get('DEBUG_TOOLBAR', True):
      INSTALLED_APPS += ('debug_toolbar',)
