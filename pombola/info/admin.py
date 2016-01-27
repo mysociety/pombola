@@ -35,7 +35,7 @@ class InfoPageAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     date_hierarchy = 'publication_date'
     ordering = ('-publication_date', 'title')
 
-    form = autocomplete_light.modelform_factory(models.InfoPage)
+    form = autocomplete_light.modelform_factory(models.InfoPage, exclude=[])
 
     fields = fields_to_use
     prepopulated_fields = {'slug': ['title']}
