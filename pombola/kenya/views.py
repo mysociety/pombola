@@ -139,6 +139,17 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
             if shujaaz.FINALISTS_DICT[year].get(self.object.pk)
         ]
 
+        political_positions = self.object.position_set.all().political().currently_active()
+
+        if political_positions.filter(title__slug='member-national-assembly').exists():
+            constituencies = self.object.constituencies().constituencies()
+        elif political_positions.filter(title__slug='senator').exists():
+            constituencies = self.object.constituencies().counties()
+        else:
+            constituencies = []
+
+        context['constituencies'] = constituencies
+
         return context
 
 
