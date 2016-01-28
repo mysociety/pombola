@@ -2773,3 +2773,96 @@ p.attendance__disclaimer {
 .archived_comments {
     padding-top: 1.0em;
 }
+
+.mp-attendance {
+    .dataTables_wrapper .ui-toolbar {
+        padding: 12px 0;
+    }
+
+    .mp-attendance-filter {
+        .col-50 {
+            @media only all and (min-width: 640px) {
+                float: left;
+                width: 50%;
+            }
+            @media only all and (max-width: 640px) {
+                margin: 10px 0;
+            }
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        padding: 1em;
+        background-color: #f6f6f6;
+        vertical-align: top;
+
+        label {
+            width: 25%;
+            display: inline-block;
+        }
+
+        .filter-option {
+            height: 30px;
+        }
+
+        input {
+            margin-top: 1em;
+        }
+
+        select, input[type="text"] {
+            vertical-align: top;
+        }
+
+        hr {
+            margin: 1em 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.7em;
+        }
+
+        .download {
+            margin-top: 0;
+            background-color: $colour_middling_grey;
+            font-size: 0.75em;
+
+            &:hover,
+            &:focus {
+                background: mix($colour_middling_grey, #000, 80%);
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    }
+
+    th.sorting {
+        cursor: pointer;
+    }
+
+    .attendance-bar {
+        width: 65%;
+        float: left;
+        height: 19px;
+        .bar {
+            float: left;
+            height: 100%;
+        }
+        .present {
+            background-color: #017b58;
+        }
+        .absent {
+            background-color: #e23d28;
+        }
+        .late-early {
+            background-color: #e26a5a;
+        }
+    }
+
+    .attendance-perc {
+        width: 35%;
+        float: left;
+    }
+}

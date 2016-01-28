@@ -136,6 +136,14 @@ urlpatterns += patterns('',
     ),
 )
 
+# MP attendance overview
+urlpatterns += patterns('',
+    url(r'^mp-attendance/$',
+        views.SAMpAttendanceView.as_view(),
+        name='mp-attendance'
+    ),
+)
+
 # Routing for election pages
 urlpatterns += patterns('',
 
