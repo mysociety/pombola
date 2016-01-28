@@ -41,6 +41,12 @@ COUNTRY_CSS = {
             'sass/south-africa.scss',
         ),
         'output_filename': 'css/south-africa.css'
+    },
+    'datatables': {
+        'source_filenames': (
+            'css/libs/datatables-1.10.10.css',
+        ),
+        'output_filename': 'css/datatables.css'
     }
 }
 
@@ -78,6 +84,14 @@ COUNTRY_JS = {
             'js/interests-filter.js',
         ),
         'output_filename': 'js/interests-filter.js',
+        'template_name': 'pipeline/js-array.html',
+    },
+    'attendance-table': {
+        'source_filenames': (
+            'js/libs/datatables-1.10.10.js',
+            'js/attendance-table.js',
+        ),
+        'output_filename': 'js/attendance-table.js',
         'template_name': 'pipeline/js-array.html',
     }
 }
