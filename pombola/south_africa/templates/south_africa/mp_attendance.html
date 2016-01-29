@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load compressed static %}
+
+{% block title %}MP Attendance{% endblock %}
+
+{% block extra_js_to_load %}
+    addExtraJS([ {% compressed_js 'attendance-table' %} null ]);
+{% endblock %}
+
+{% block css_headers %}
+  {{ block.super }}
+  {% compressed_css 'datatables' %}
+{% endblock %}
+
+{% block body_attributes %} class="mp-attendance" {% endblock %}
+
+{% block content %}
+<h1 class="page-title">MP Attendance</h1>
+<div class="major-column">
+  <p>Explore the commitee meeting attendance records for the members of parliament.</p>
+</div>
+
+<div class='mp-attendance-filter'>
+  <div class="col-50">
+    <form class='select-year' action="{% url 'mp-attendance' %}" method="get">
+      <div class="filter-option">
+        <label>Select a year:</label>
+        <select name="year">
+         {% for yr in years %}
+          <option value="{{ yr }}" {% if yr == year %}selected{% endif %}>{{ yr }}</option>
+         {% endfor %}
+        </select>
+      </div>
+      <div class="filter-option">
+        <label>Choose a party:</label>
+        <select name="party">
+          <option value="" selected>All</option>
+         {% for pty in parties %}
+          <option value="{{ pty }}" {% if pty == party %}selected{% endif %}>{{ pty }}</option>
+         {% endfor %}
+        </select>
+      </div>
+      <input class="button" type="submit" value="Show attendance">
+    </form>
+  </div>
+
+  {% if party %}
+   <div class="col-50">
+    <h2>{{ aggregate_attendance }}%</h2>
+    <p>Average attendance for {{ party }}</p>
+   </div>
+  {% endif %}
+
+  <div class="clear"></div>
+
+  <hr>
+  <a class="button download" href="{{ download_url }}">Download raw data</a>
+
+</div>
+
+<table id="mp-attendance">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Party</th>
+      <th>Meetings</th>
+      <th>Present</th>
+      <th>Arrived late</th>
+      <th>Departed Early</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for member in attendance_data %}
+    <tr>
+      <td><a href="{{ member.pa_url }}">{{ member.name }}</td>
+      <td>{{ member.party_name }}</td>
+      <td>{{ member.total }}</td>
+      <td width="15%">
+        <div class="attendance">
+          <div class="attendance-perc">{{ member.present }}%</div>
+          <div class="attendance-bar">
+            <div class="bar present" style="width:{{ member.present }}%"></div>
+            <div class="bar absent" style="width:{{ member.absent }}%"></div>
+          </div>
+        </div>
+      </td>
+      <td width="15%">
+        <div class="attendance">
+          <div class="attendance-perc">{{ member.arrive_late }}%</div>
+          <div class="attendance-bar">
+            <div class="bar late-early" style="width:{{ member.arrive_late }}%"></div>
+          </div>
+        </div>
+      </td>
+      <td width="15%">
+        <div class="attendance">
+          <div class="attendance-perc">{{ member.depart_early }}%</div>
+          <div class="attendance-bar">
+            <div class="bar late-early" style="width:{{ member.depart_early }}%"></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+
+<p class="attendance__disclaimer">DISCLAIMER: This is not the official attendance record of Parliament. This information has been obtained via the Parliamentary Monitoring Group. PMG makes every effort to compile reliable and comprehensive information, but does not claim that the data is 100% accurate and complete.</p>
+
+{% endblock %}
