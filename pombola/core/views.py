@@ -1,3 +1,10 @@
+# This is needed to avoid an error that there's "no module named
+# models" when importing Identifier from popolo.models.
+# This was caused because the import mechanism tries the popolo module
+# in this same package first.  By forcing only absolute imports, this
+# will get the django-popolo package's popolo package instead.
+from __future__ import absolute_import
+
 import time
 import calendar
 import datetime
@@ -19,7 +26,7 @@ from django.core.cache import cache
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 
-from speeches.models import Speaker
+from popolo.models import Identifier
 
 from pombola.core import models
 from pombola.slug_helpers.views import SlugRedirectMixin, get_slug_redirect
@@ -166,7 +173,11 @@ class PersonSpeakerMappingsMixin(object):
     def pombola_person_to_sayit_speaker(self, person):
         try:
             expected_popit_id = 'core_person:{0}'.format(person.id)
-            return Speaker.objects.get(person__popit_id=expected_popit_id)
+            i = Identifier.objects.get(
+                scheme='PopIt ID',
+                identifier=expected_popit_id
+            )
+            return i.content_object.speaker
         except ObjectDoesNotExist:
             return None
 
