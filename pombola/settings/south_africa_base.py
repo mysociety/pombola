@@ -2,14 +2,12 @@ from .apps import *  # noqa
 
 COUNTRY_APP = 'south_africa'
 
-OPTIONAL_APPS = (
+OPTIONAL_APPS = APPS_REQUIRED_BY_SPEECHES + (
     'speeches',
     'za_hansard',
     'pombola.interests_register',
     'pombola.spinner',
 )
-
-OPTIONAL_APPS += APPS_REQUIRED_BY_SPEECHES
 
 SPEECH_SUMMARY_LENGTH = 30
 

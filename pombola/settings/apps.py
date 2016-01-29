@@ -13,4 +13,6 @@ APPS_REQUIRED_BY_SPEECHES = ('django_select2',
                              'django_bleach',
                              'popit',
                              'instances',
-                             'popit_resolver')
+                             'popit_resolver',
+                             'popolo',
+                             'pombola_sayit')
