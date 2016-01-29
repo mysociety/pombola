@@ -1,6 +1,7 @@
 # Create your views here.
 # -*- coding: utf-8 -*-
 
+import logging
 import random
 import json
 import sys
@@ -17,7 +18,7 @@ from .forms import (
     YouthEmploymentInputForm
 )
 
-from pombola.core.models import Person
+from pombola.core.models import Person, Place
 from pombola.core.views import PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
     ExperimentViewDataMixin, ExperimentFormSubmissionMixin,
@@ -25,6 +26,9 @@ from pombola.experiments.views import (
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
+
+
+logger = logging.getLogger('django.request')
 
 EXPERIMENT_DATA = {
     'mit-county': {
@@ -141,10 +145,22 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
 
         political_positions = self.object.position_set.all().political().currently_active()
 
-        if political_positions.filter(title__slug='member-national-assembly').exists():
-            constituencies = self.object.constituencies().constituencies()
-        elif political_positions.filter(title__slug='senator').exists():
-            constituencies = self.object.constituencies().counties()
+        na_memberships = political_positions.filter(title__slug='member-national-assembly')
+        na_memberships_count = na_memberships.count()
+        if na_memberships_count > 1:
+            logger.error(
+                '{} - Too many NA memberships ({})'.format(self.object.slug, na_memberships_count))
+
+        senate_memberships = political_positions.filter(title__slug='senator')
+        senate_memberships_count = senate_memberships.count()
+        if senate_memberships_count > 1:
+            logger.error(
+                '{} - Too many Senate memberships ({})'.format(self.object.slug, senate_memberships_count))
+
+        if na_memberships_count:
+            constituencies = Place.objects.filter(position=na_memberships[0]).distinct()
+        elif senate_memberships_count:
+            constituencies = Place.objects.filter(position=senate_memberships[0]).distinct()
         else:
             constituencies = []
 

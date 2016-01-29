@@ -5,8 +5,11 @@ import urllib
 import urlparse
 
 from django.contrib.auth.models import AnonymousUser
+from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
+
+from django_date_extensions.fields import ApproximateDate
 
 from pombola.experiments.models import Event, Experiment
 from pombola.feedback.models import Feedback
@@ -267,6 +270,7 @@ class PersonDetailPageTest(TestCase):
 
         self.county = Place.objects.create(kind=county_kind, name='Test County', slug='test-county')
         self.constituency = Place.objects.create(kind=constituency_kind, name='Test Constituency', slug='test-constituency')
+        self.constituency2 = Place.objects.create(kind=constituency_kind, name='Test Constituency2', slug='test-constituency2')
 
         self.na_member_title = PositionTitle.objects.create(name='NA Member', slug='member-national-assembly')
         self.senator_title = PositionTitle.objects.create(name='Senator', slug='senator')
@@ -353,6 +357,34 @@ class PersonDetailPageTest(TestCase):
         self.assertEqual(response.context_data['constituencies'][0], self.county)
 
     def test_mp_with_two_constituencies(self):
-        # We should check that if someone has two constituencies we always get
-        # just one, and the same one, back.
-        pass
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.constituency,
+            organisation=self.na,
+            title=self.na_member_title,
+            start_date=ApproximateDate(2015, 1, 1),
+            )
+
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.constituency2,
+            organisation=self.na,
+            title=self.na_member_title,
+            start_date=ApproximateDate(2015, 1, 2),
+            )
+
+        request = RequestFactory().get('/person/test-person/')
+        request.user = AnonymousUser()
+        response = KEPersonDetail.as_view()(request, slug='test-person')
+
+        self.assertEqual(len(response.context_data['constituencies']), 1)
+        self.assertEqual(response.context_data['constituencies'][0], self.constituency2)
+
+        # Check that admins got mailed.
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(
+            mail.outbox[0].subject,
+            '[Django] ERROR: test-person - Too many NA memberships (2)',
+            )
