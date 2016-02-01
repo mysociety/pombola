@@ -19,7 +19,7 @@
     <h2>Most recent transcripts</h2>
     <ul class="listing">
         {% for sitting in sittings %}
-        <li><a href="{{ sitting.get_absolute_url }}">{{ sitting }}</a></li>
+        <li><a href="{% url 'hansard:sitting_view_by_id' sitting_id=sitting.id venue_slug=sitting.venue.slug %}">{{ sitting }}</a></li>
         {% empty %}
         <li>There are no transcripts</li>
         {% endfor %}

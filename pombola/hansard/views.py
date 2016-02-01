@@ -55,7 +55,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
 
-        context['sittings'] = Sitting.objects.all() # FIXME - put a limit on here [0:10]
+        context['sittings'] = Sitting.objects.all().select_related('venue') # FIXME - put a limit on here [0:10]
 
         return context
 
@@ -65,6 +65,10 @@ class SittingView(DetailView):
 
     def get_object(self):
         """Get the object based on venue and start date and time"""
+
+        sitting_id = self.kwargs.get('sitting_id')
+        if sitting_id:
+            return Sitting.objects.get(pk=sitting_id)
 
         venue_slug = self.kwargs['venue_slug']
         start_date_and_time = self.kwargs['start_date_and_time']
