@@ -227,18 +227,32 @@ class Command(BaseCommand):
                                      'Coalition',
                                      'Appearances'])
 
-                    all_women_representative_speaker_entries = \
-                        all_speaker_entries.filter(
-                            speaker__position__title__name='Member of the National Assembly',
-                            speaker__position__subtitle__regex="omen.*epresentative",
+                    women_representatives = (
+                        Person.objects
+                        .filter(
+                            Q(position__sorting_start_date__lte=date_to) | Q(position__start_date=''),
+                            Q(position__sorting_end_date_high__gte=date_from) | Q(position__end_date='') | Q(position__end_date='future'),
+                            position__title__name='Member of the National Assembly',
+                            position__subtitle__regex="omen.*epresentative",
+                            )
+                        .order_by('id')
                         )
 
-                    for d in all_women_representative_speaker_entries. \
-                        values('speaker'). \
-                        annotate(Count('speaker')). \
-                        order_by('speaker'):
-                        speaker = Person.objects.get(pk=d['speaker'])
-                        speeches = d['speaker__count']
+                    all_women_representative_speaker_entries = (
+                        all_speaker_entries
+                        .filter(speaker__in=women_representatives)
+                        .values('speaker')
+                        .annotate(Count('speaker'))
+                        .order_by('speaker')
+                        )
+
+                    speech_counts = {
+                        x['speaker']: x['speaker__count']
+                        for x in all_women_representative_speaker_entries
+                        }
+
+                    for speaker in women_representatives:
+                        speech_count = speech_counts.get(speaker.id, 0)
 
                         position_results = self.position_data(speaker, date_midpoint, position_data_cache)
 
@@ -248,7 +262,7 @@ class Command(BaseCommand):
                                          position_results['county_associated'][1],
                                          position_results['party_membership'],
                                          position_results['coalition_membership'],
-                                         speeches])
+                                         speech_count])
 
     def write_csv(self, filename, dictionary):
         with open(filename, 'w') as fp:
