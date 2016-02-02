@@ -52,7 +52,7 @@
           </ul>
       {% endif %}
 
-      {% regroup object.constituencies|dictsort:"kind" by kind as constituency_groups %}
+      {% regroup constituencies|dictsort:"kind" by kind as constituency_groups %}
       {% for entry in constituency_groups %}
       <h3>{{ entry.grouper }}</h3>
       <ul>

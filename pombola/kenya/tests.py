@@ -4,11 +4,28 @@ import re
 import urllib
 import urlparse
 
+from django.contrib.auth.models import AnonymousUser
+from django.core import mail
 from django.core.urlresolvers import reverse
+from django.test import TestCase, RequestFactory
+
+from django_date_extensions.fields import ApproximateDate
 
 from pombola.experiments.models import Event, Experiment
 from pombola.feedback.models import Feedback
+from pombola.core.models import (
+    Person,
+    Place,
+    PlaceKind,
+    Position,
+    PositionTitle,
+    Organisation,
+    OrganisationKind,
+    )
+from pombola.kenya.views import KEPersonDetail
+
 from .views import EXPERIMENT_DATA, CountyPerformanceView
+
 
 from django_webtest import WebTest
 
@@ -234,3 +251,140 @@ class CountyPerformancePageTests(WebTest):
         parsed_facebook_url = urlparse.urlparse(facebook_url)
         self.assertEqual(parsed_facebook_url.path, self.url)
         self.assertTrue(re.search(r'^via=[a-f0-9]+$', parsed_facebook_url.query))
+
+
+@attr(country='kenya')
+class PersonDetailPageTest(TestCase):
+    """The membership data we have has a tendency to gradually move
+    away from the ideal of the only positions associated with NA
+    constituencies being being those linking assembly members with their
+    constituencies.
+
+    While we work out how to keep the data tidier, we're going to handle
+    this problem by only displaying the memberships we actually want to
+    see.
+    """
+    def setUp(self):
+        county_kind = PlaceKind.objects.create(name='County', slug='county')
+        constituency_kind = PlaceKind.objects.create(name='Constituency', slug='constituency')
+
+        self.county = Place.objects.create(kind=county_kind, name='Test County', slug='test-county')
+        self.constituency = Place.objects.create(kind=constituency_kind, name='Test Constituency', slug='test-constituency')
+        self.constituency2 = Place.objects.create(kind=constituency_kind, name='Test Constituency2', slug='test-constituency2')
+
+        self.na_member_title = PositionTitle.objects.create(name='NA Member', slug='member-national-assembly')
+        self.senator_title = PositionTitle.objects.create(name='Senator', slug='senator')
+        self.party_member_title = PositionTitle.objects.create(name='Party Member', slug='party-member')
+
+        self.governmental = OrganisationKind.objects.create(name='Governmental', slug='governmental')
+        self.party_orgkind = OrganisationKind.objects.create(name='Political Party', slug='party')
+
+        self.na = Organisation.objects.create(kind=self.governmental, name='National Assembly', slug='national-assembly')
+        self.senate = Organisation.objects.create(kind=self.governmental, name='Senate', slug='senate')
+
+        self.party = Organisation.objects.create(kind=self.party_orgkind, name='Test Party', slug='test-party')
+
+        self.person = Person.objects.create(legal_name='Test Person', slug='test-person')
+
+    def test_mp_with_county(self):
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.constituency,
+            organisation=self.na,
+            title=self.na_member_title,
+            )
+
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.county,
+            )
+
+        request = RequestFactory().get('/person/test-person/')
+        request.user = AnonymousUser()
+        response = KEPersonDetail.as_view()(request, slug='test-person')
+
+        self.assertEqual(len(response.context_data['constituencies']), 1)
+        self.assertEqual(response.context_data['constituencies'][0], self.constituency)
+
+    def test_mp_with_party_membership_linked_to_constituency(self):
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.constituency,
+            organisation=self.na,
+            title=self.na_member_title,
+            )
+
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.constituency,
+            organisation=self.party,
+            title=self.party_member_title,
+            )
+
+        request = RequestFactory().get('/person/test-person/')
+        request.user = AnonymousUser()
+        response = KEPersonDetail.as_view()(request, slug='test-person')
+
+        self.assertEqual(len(response.context_data['constituencies']), 1)
+        self.assertEqual(response.context_data['constituencies'][0], self.constituency)
+
+    def test_senator_with_party_membership_linked_to_constituency(self):
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.county,
+            organisation=self.senate,
+            title=self.senator_title,
+            )
+
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.constituency,
+            organisation=self.party,
+            title=self.party_member_title,
+            )
+
+        request = RequestFactory().get('/person/test-person/')
+        request.user = AnonymousUser()
+        response = KEPersonDetail.as_view()(request, slug='test-person')
+
+        self.assertEqual(len(response.context_data['constituencies']), 1)
+        self.assertEqual(response.context_data['constituencies'][0], self.county)
+
+    def test_mp_with_two_constituencies(self):
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.constituency,
+            organisation=self.na,
+            title=self.na_member_title,
+            start_date=ApproximateDate(2015, 1, 1),
+            )
+
+        Position.objects.create(
+            category='political',
+            person=self.person,
+            place=self.constituency2,
+            organisation=self.na,
+            title=self.na_member_title,
+            start_date=ApproximateDate(2015, 1, 2),
+            )
+
+        request = RequestFactory().get('/person/test-person/')
+        request.user = AnonymousUser()
+        response = KEPersonDetail.as_view()(request, slug='test-person')
+
+        self.assertEqual(len(response.context_data['constituencies']), 1)
+        self.assertEqual(response.context_data['constituencies'][0], self.constituency2)
+
+        # Check that admins got mailed.
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(
+            mail.outbox[0].subject,
+            '[Django] ERROR: test-person - Too many NA memberships (2)',
+            )

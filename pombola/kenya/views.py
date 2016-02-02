@@ -1,6 +1,7 @@
 # Create your views here.
 # -*- coding: utf-8 -*-
 
+import logging
 import random
 import json
 import sys
@@ -17,7 +18,7 @@ from .forms import (
     YouthEmploymentInputForm
 )
 
-from pombola.core.models import Person
+from pombola.core.models import Person, Place
 from pombola.core.views import PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
     ExperimentViewDataMixin, ExperimentFormSubmissionMixin,
@@ -25,6 +26,9 @@ from pombola.experiments.views import (
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
+
+
+logger = logging.getLogger('django.request')
 
 EXPERIMENT_DATA = {
     'mit-county': {
@@ -116,7 +120,7 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
         context = super(KEPersonDetail, self).get_context_data(**kwargs)
         context['hansard_entries_to_show'] = ":3"
 
-        constituencies = self.object.constituencies().filter(
+        cdf_constituencies = self.object.constituencies().filter(
             budget_entries__organisation='Constituencies Development Fund'
         ).select_related()
 
@@ -124,7 +128,7 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
         # latest. budgets() are default sorted by date of the budget session.
         cdf_budget_constituencies = [
             {'constituency': c, 'budget': c.budgets()[0]}
-            for c in constituencies
+            for c in cdf_constituencies
         ]
 
         context['cdf_budget_constituencies'] = cdf_budget_constituencies
@@ -138,6 +142,29 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
             for year in ('2015', '2014')
             if shujaaz.FINALISTS_DICT[year].get(self.object.pk)
         ]
+
+        political_positions = self.object.position_set.all().political().currently_active()
+
+        na_memberships = political_positions.filter(title__slug='member-national-assembly')
+        na_memberships_count = na_memberships.count()
+        if na_memberships_count > 1:
+            logger.error(
+                '{} - Too many NA memberships ({})'.format(self.object.slug, na_memberships_count))
+
+        senate_memberships = political_positions.filter(title__slug='senator')
+        senate_memberships_count = senate_memberships.count()
+        if senate_memberships_count > 1:
+            logger.error(
+                '{} - Too many Senate memberships ({})'.format(self.object.slug, senate_memberships_count))
+
+        if na_memberships_count:
+            constituencies = Place.objects.filter(position=na_memberships[0]).distinct()
+        elif senate_memberships_count:
+            constituencies = Place.objects.filter(position=senate_memberships[0]).distinct()
+        else:
+            constituencies = []
+
+        context['constituencies'] = constituencies
 
         return context
 
