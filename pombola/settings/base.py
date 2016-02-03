@@ -298,7 +298,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # Admin autocomplete
 AJAX_LOOKUP_CHANNELS = {
-    'person_name'       : dict(model='core.person',        search_field='legal_name'),
+    'person_name'       : ('pombola.core.lookups', 'PersonLookup'),
     'organisation_name' : dict(model='core.organisation',  search_field='name'),
     'place_name'        : dict(model='core.place',         search_field='name'),
     'title_name'        : dict(model='core.positiontitle', search_field='name'),

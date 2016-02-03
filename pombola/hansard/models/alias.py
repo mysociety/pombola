@@ -43,7 +43,9 @@ class Alias(HansardModelBase):
     updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
 
     alias   = models.CharField( max_length=200, unique=True )
-    person  = models.ForeignKey( Person, blank=True, null=True )
+    person  = models.ForeignKey(
+        Person, blank=True, null=True, limit_choices_to={'hidden': False}
+    )
     ignored = models.BooleanField( default=False )
     
     objects = AliasManager()
