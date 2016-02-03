@@ -4,6 +4,7 @@ from dateutil import parser
 from optparse import make_option
 
 from django.core.management.base import BaseCommand, CommandError
+from django.db import connection
 from django.db.models import Count, Q
 
 from pombola.core.models import Person
@@ -109,6 +110,23 @@ class Command(BaseCommand):
 
         print "Generating all-speakers.csv"
 
+        # Issue #1875 notes that we have some sittings which have identical
+        # venue_id, start_date, start_time, end_date, and end_time, and
+        # upon investigation, these appear to be real duplicates.
+        # To work around this problem for now, we only consider speeches
+        # from the sitting in each of these groups with the lowest id.
+        cursor = connection.cursor()
+        rows = cursor.execute(
+            '''SELECT min(id)
+               FROM hansard_sitting
+               WHERE start_date BETWEEN %s AND %s
+               GROUP BY venue_id, start_date, start_time, end_date, end_time;
+            ''',
+            (date_from, date_to)
+            )
+
+        sitting_ids = [x[0] for x in cursor.fetchall()]
+
         with open('all-speakers.csv', 'w') as fp:
             writer = csv.writer(fp)
             writer.writerow(['Name',
@@ -136,8 +154,7 @@ class Command(BaseCommand):
                 x.id: x.hansard_entries__count
                 for x in (
                     Person.objects
-                    .filter(hansard_entries__sitting__start_date__gte=date_from,
-                            hansard_entries__sitting__start_date__lte=date_to)
+                    .filter(hansard_entries__sitting__pk__in=sitting_ids)
                     .annotate(Count('hansard_entries'))
                     )
                 }
@@ -166,15 +183,16 @@ class Command(BaseCommand):
 
             print "Generating data for " + vslug
 
-            all_speaker_entries = Entry.objects. \
-                filter(sitting__start_date__gte=date_from,
-                       sitting__start_date__lte=date_to,
-                       sitting__venue__slug=vslug,
-                       speaker__isnull=False). \
-                select_related('speaker', 'sitting'). \
-                prefetch_related('speaker__position_set'). \
-                prefetch_related('speaker__position_set__title'). \
-                prefetch_related('speaker__position_set__place')
+            all_speaker_entries = (
+                Entry.objects
+                .filter(sitting__pk__in=sitting_ids)
+                .filter(sitting__venue__slug=vslug,
+                        speaker__isnull=False)
+                .select_related('speaker', 'sitting')
+                .prefetch_related('speaker__position_set')
+                .prefetch_related('speaker__position_set__title')
+                .prefetch_related('speaker__position_set__place')
+                )
 
             # The gender split is easy to find, so do that first:
 
