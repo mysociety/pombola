@@ -86,7 +86,7 @@
       {{ person.summary }}
     </div>
 
-  {% with past_positions=person.position_set.all.political.currently_inactive %}
+  {% with past_positions=person.position_set.all.political.currently_inactive current_positions=person.position_set.all.political.currently_active %}
     <div class="tabs ui-tabs ui-widget">
       <ul class="tab-links ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
         {% if hansard.count or question.count or committee.count %}
@@ -94,7 +94,7 @@
             <a class="ui-tabs-anchor" href="#appearances" class="active">Appearances</a>
           </li>
         {% endif %}
-        {% if past_positions %}
+        {% if past_positions or current_positions %}
           <li class="ui-state-default">
             <a class="ui-tabs-anchor" href="#experience">Positions held</a>
           </li>
@@ -145,21 +145,21 @@
         </div>
       {% endif %}
 
-      {% if past_positions %}
+      {% if past_positions or current_positions %}
         <div id="experience" class="tab-content ui-tabs-panel ui-widget-content">
           <div class="person-experience">
-            {% with current_positions=person.position_set.all.political.currently_active %}
-              {% if current_positions %}
-                <h3>Currently</h3>
-                <ul class="current-positions positions">
+            <h3>Currently</h3>
+              <ul class="current-positions positions">
+                {% if current_positions %}
                   {% for position in current_positions %}
                     <li>{% include "core/person_detail_position.html" %}
                       {% if position.start_date %} since {{ position.start_date }}{% endif %}
                     </li>
                   {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
+                {% else %}
+                  <li>No current positions recorded.</li>
+                {% endif %}
+              </ul>
 
             <h3>Formerly</h3>
             <ul class="former-positions positions">
