@@ -564,6 +564,117 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
               'title': u'One District-One Agri-Park implementation in context of Rural Economic Transformation Model'}],
             )
 
+    def _setup_example_positions(self, past, current):
+        parliament = models.OrganisationKind.objects.create(
+            name='Parliament',
+            slug='parliament',
+            )
+        org = models.Organisation.objects.create(
+            slug='national-assembly',
+            name='National Assembly',
+            kind=parliament,
+            )
+        pt_member = models.PositionTitle.objects.create(
+            slug='member', name='Member')
+        person = models.Person.objects.get(slug='moomin-finn')
+        if current:
+            person.position_set.create(
+                title=pt_member, category='political', organisation=org,
+            )
+        if past:
+            person.position_set.create(
+                title=pt_member, category='political', organisation=org,
+                start_date='2000-01-01', end_date='2005-12-31',
+            )
+
+    def test_no_past_no_current_positions(self):
+        self._setup_example_positions(False, False)
+        response = self.client.get(reverse('person', args=('moomin-finn',)))
+        self.assertNotIn(
+            '<a class="ui-tabs-anchor" href="#experience">Positions held</a>',
+            response.content
+        )
+        self.assertNotIn(
+            '<h3>Currently</h3>',
+            response.content
+        )
+        self.assertNotIn(
+            '<h3>Formerly</h3>',
+            response.content
+        )
+
+    def test_past_and_current_positions(self):
+        self._setup_example_positions(True, True)
+        response = self.client.get(reverse('person', args=('moomin-finn',)))
+        self.assertIn(
+            '<a class="ui-tabs-anchor" href="#experience">Positions held</a>',
+            response.content
+        )
+        self.assertIn(
+            '<h3>Currently</h3>',
+            response.content
+        )
+        self.assertRegexpMatches(
+            response.content,
+            r'Member\s+at <a href="/organisation/national-assembly/">National Assembly \(Parliament\)</a>\s*</li>'
+        )
+        self.assertIn(
+            '<h3>Formerly</h3>',
+            response.content
+        )
+        self.assertRegexpMatches(
+            response.content,
+            r'Member\s+at <a href="/organisation/national-assembly/">National Assembly \(Parliament\)</a>\s+from 1st January 2000\s+until 31st December 2005\s*</li>'
+        )
+
+    def test_past_but_no_current_positions(self):
+        self._setup_example_positions(True, False)
+        response = self.client.get(reverse('person', args=('moomin-finn',)))
+        self.assertIn(
+            '<a class="ui-tabs-anchor" href="#experience">Positions held</a>',
+            response.content
+        )
+        self.assertIn(
+            '<h3>Currently</h3>',
+            response.content
+        )
+        self.assertIn(
+            'No current positions recorded.',
+            response.content
+        )
+        self.assertIn(
+            '<h3>Formerly</h3>',
+            response.content
+        )
+        self.assertRegexpMatches(
+            response.content,
+            r'Member\s+at <a href="/organisation/national-assembly/">National Assembly \(Parliament\)</a>\s+from 1st January 2000\s+until 31st December 2005\s*</li>'
+        )
+
+    def test_no_past_but_some_current_positions(self):
+        self._setup_example_positions(False, True)
+        response = self.client.get(reverse('person', args=('moomin-finn',)))
+        self.assertIn(
+            '<a class="ui-tabs-anchor" href="#experience">Positions held</a>',
+            response.content
+        )
+        self.assertIn(
+            '<h3>Currently</h3>',
+            response.content
+        )
+        self.assertRegexpMatches(
+            response.content,
+            r'Member\s+at <a href="/organisation/national-assembly/">National Assembly \(Parliament\)</a>\s*</li>'
+        )
+        self.assertIn(
+            '<h3>Formerly</h3>',
+            response.content
+        )
+        self.assertIn(
+            'No former positions recorded.',
+            response.content
+        )
+
 
 @attr(country='south_africa')
 class SAAttendanceDataTest(TestCase):
