@@ -189,15 +189,15 @@ class Command(BaseCommand):
                 'bills_bill',
 
             ]
-        maybe_should_dump = set(tables_to_dump) - set(expected_tables)
-        if maybe_should_dump:
+        unexpected = set(tables_to_dump) - set(expected_tables)
+        if unexpected:
             print '''The following tables were found which weren't expected
 and which hadn't been explictly excluded.  If these are safe to make
 available in a public database dump (in particular check that they
 contain no personal information of site users) then add them to
 'expected_table'. Otherwise (i.e. they should *not* be made availble
 publicly) add them to 'tables_to_ignore'.'''
-            for t in sorted(maybe_should_dump):
+            for t in sorted(unexpected):
                 print " ", t
             sys.exit(2)
         command = [
