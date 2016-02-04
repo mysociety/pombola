@@ -23,6 +23,7 @@ class Command(BaseCommand):
         tables_to_ignore = set([
             'auth_group',
             'auth_group_permissions',
+            'auth_message',
             'auth_permission',
             'auth_user',
             'auth_user_groups',
