@@ -46,10 +46,8 @@
     <ul id="blog-overview">
       <li><a href="{% url 'info_blog_category' slug='week-parliament' %}">That Week In Parliament</a></li>
       <li><a href="{% url 'info_blog_category' slug='impressions' %}">Impressions</a></li>
-      <li><a href="{% url 'info_blog_category' slug='advocacy-campaigns' %}">Advocacy Campaigns</a></li>
       <li><a href="{% url 'info_blog_category' slug='commentary' %}">Commentary</a></li>
       <li><a href="{% url 'info_blog_category' slug='elections-2014' %}">Elections 2014</a></li>
-      <li><a href="{% url 'info_blog_category' slug='mp-corner' %}">MP Corner</a></li>
     </ul>
   {% endif %}
 </li>
@@ -62,10 +60,6 @@
       <li><a href="https://pmg.org.za/bills">Bill Tracker</a></li>
       <li><a href="http://www.pmg.org.za/committees">Committees</a></li>
       <li><a href="{% url "section-list-hansard" %}">Hansard</a></li>
-      <li><a href="{% url "sa-interests-index" %}">Members' Interests</a></li>
-
-
-
     </ul>
   {% endif %}
 </li>
@@ -88,7 +82,13 @@
 <li><a href="{% url "info_page" slug="hot-topics" %}" class="has-dropdown">Hot Topics</a>
   {% if include_sub_menu_entries %}
     <ul id="extras-overview">
-      <li><a href="{% url "info_page" slug="infographics" %}">Infographics</a></li>
+      <li><a href="{% url 'mp-attendance' %}">MP attendance</a></li>
+      <li><a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name">MP profiles</a></li>
+      <li><a href="{% url 'sa-interests-index' %}">MP assets</a></li>
+      <li><a href="{% url 'info_blog_category' slug='mp-corner' %}">MP Corner</a></li>
+      <li><a href="{% url 'ward-councillor-lookup' %}">Find your councillor</a></li>
+      <li><a href="{% url 'info_page' slug="infographics" %}">Infographics</a></li>
+      <li><a href="{% url 'info_blog_category' slug='advocacy-campaigns' %}">Campaigns</a></li>
     </ul>
   {% endif %}
 </li>
