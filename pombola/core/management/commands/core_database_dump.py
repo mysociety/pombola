@@ -17,7 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if len(args) != 1:
             self.print_help(sys.argv[0], sys.argv[1])
-            return
+            sys.exit(1)
         output_filename = args[0]
         tables = connection.introspection.table_names()
         tables_to_ignore = set([
@@ -198,7 +198,7 @@ contain no personal information of site users) then add them to
 publicly) add them to 'tables_to_ignore'.'''
             for t in sorted(maybe_should_dump):
                 print " ", t
-            return
+            sys.exit(2)
         command = [
             'pg_dump',
             '--no-owner',
