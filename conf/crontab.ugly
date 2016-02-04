@@ -32,7 +32,7 @@ PYTHONIOENCODING=utf-8
     if (exists $dump_times{$vhost}) {
         $dump_directory = "/data/vhost/$vhost/media_root/dumps";
 *)!!
-!!(*= $dump_times{$vhost} *)!! 15 * * * !!(*= $user *)!! mkdir -p !!(*= $dump_directory *)!! && run_management_command core_database_dump !!(*= $dump_directory *)!!/pg-dump.sql && gzip -9 !!(*= $dump_directory *)!!/pg-dump.sql
+!!(*= $dump_times{$vhost} *)!! 15 * * * !!(*= $user *)!! mkdir -p !!(*= $dump_directory *)!! && run_management_command core_database_dump !!(*= $dump_directory *)!!/pg-dump.sql && gzip -9 -f !!(*= $dump_directory *)!!/pg-dump.sql
 !!(* } *)!!
 
 # Several sites use the Pombola codebase. They don't all have the same requirements
