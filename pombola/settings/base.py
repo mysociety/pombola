@@ -410,6 +410,12 @@ INSTALLED_APPS = (
 
     'pombola.images',
     'sorl.thumbnail',
+    # easy_thumbnails is required by SayIt; it needs to be in
+    # INSTALLED_APPS so that its table is created so that we can
+    # create SayIt speakers. It should be after sorl.thumbnails so
+    # that sorl.thumbnails (used by Pombola) is what's loaded when
+    # Pombola templates do {% load thumbnail %}
+    'easy_thumbnails',
 
     'haystack',
 
