@@ -4,11 +4,16 @@ import os
 from .base import *  # noqa
 from .south_africa_base import *  # noqa
 
+from pombola.south_africa.search import ZAElasticBackend
 
 HAYSTACK_CONNECTIONS['default']['EXCLUDED_INDEXES'] = [
     'pombola.search.search_indexes.PlaceIndex',
     'speeches.search_indexes.SpeechIndex',
 ]
+
+# Change to custom backend for
+HAYSTACK_CONNECTIONS['default']['ENGINE'] = 'pombola.south_africa.search.ZAElasticSearchEngine'
+
 
 INSTALLED_APPS = insert_after(INSTALLED_APPS,
                               'markitup',
