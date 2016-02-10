@@ -2,6 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.gis import db
 from django.contrib.contenttypes.generic import GenericTabularInline
+from django.utils.html import escape
 
 from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
@@ -13,7 +14,10 @@ from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
 
 def create_admin_link_for(obj, link_text):
-    return u'<a href="%s">%s</a>' % (obj.get_admin_url(), link_text)
+    return u'<a href="{url}">{link_text}</a>'.format(
+        url=obj.get_admin_url(),
+        link_text=escape(link_text)
+    )
 
 
 class ContentTypeModelAdmin(admin.ModelAdmin):
