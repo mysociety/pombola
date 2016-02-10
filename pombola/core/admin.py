@@ -13,7 +13,8 @@ from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
 
 def create_admin_link_for(obj, link_text):
-    return u'<a href="%s">%s</a>' % (obj.get_admin_url(), link_text)
+    if obj is not None:
+        return u'<a href="%s">%s</a>' % (obj.get_admin_url(), link_text)
 
 
 class ContentTypeModelAdmin(admin.ModelAdmin):
