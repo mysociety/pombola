@@ -837,13 +837,12 @@ class SASpeakerRedirectView(RedirectView):
     # see also SAPersonDetail for mapping in opposite direction
     def get_redirect_url(self, *args, **kwargs):
         try:
-            slug = kwargs['slug']
-            speaker = Speaker.objects.get(slug=slug)
-            popit_id = speaker.person.popit_id
-            scheme, primary_key = re.match('(.*?)core_person:(\d+)$', popit_id).groups()
-            person = models.Person.objects.get(id=primary_key)
-            return reverse('person', args=(person.slug,))
-        except Exception as e:
+            speaker = Speaker.objects.get(pk=kwargs['pk'])
+            return reverse(
+                'person',
+                args=(speaker.pombola_link.pombola_person.slug,)
+            )
+        except ObjectDoesNotExist:
             raise Http404
 
 class SASpeechesIndex(NamespaceMixin, TemplateView):

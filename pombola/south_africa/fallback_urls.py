@@ -46,7 +46,7 @@ fallback_sayit_patterns = patterns('',
     # Exposed endpoint for a speech referred to by a numeric ID:
     url(r'^speech/(?P<pk>\d+)$', SASpeechView.as_view(), name='speech-view'),
     # Fake endpoint to redirect to the right speaker:
-    url(r'^speaker/(?P<slug>[-\w]+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
+    url(r'^speaker/(?P<pk>\d+)$', SASpeakerRedirectView.as_view(), name='speaker-view'),
     # Anything else might be a slug referring to a section:
     url(r'^(?P<full_slug>.+)$', SASectionView.as_view(), name='section-view'),
 )

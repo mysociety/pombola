@@ -4,7 +4,6 @@ import re
 import os
 from datetime import date, time
 from StringIO import StringIO
-import unittest
 from urlparse import urlparse
 
 from mock import patch
@@ -376,7 +375,6 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             html=True,
         )
 
-    @unittest.skipIf(True, "Skip until sayit-upgrade-part-2 is merged")
     def test_person_to_speaker_resolution(self):
         person = models.Person.objects.get(slug='moomin-finn')
         speaker = self.pombola_person_to_sayit_speaker(person)

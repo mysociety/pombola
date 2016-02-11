@@ -14,8 +14,8 @@
       {% if speaker %}
       <div class="speaker-portrait-wrapper">
         <img
-        {% thumbnail speaker.pombola_person.primary_image "96x96" crop="center" as im %}
-          src="{{ im.url }}" alt="Picture of {{ speaker.pombola_person.name }}"
+        {% thumbnail speaker.pombola_link.pombola_person.primary_image "96x96" crop="center" as im %}
+          src="{{ im.url }}" alt="Picture of {{ speaker.pombola_link.pombola_person.name }}"
         {% empty %}
           src="{% static "speeches/i/a.png" %}"
         {% endthumbnail %}
@@ -54,7 +54,7 @@
     <div class="speech__meta-data">
       {% if speech.speaker and not nospeaker %}
         <span class="speech__meta-data__speaker-name">
-          <a href="{% url 'speeches:speaker-view' speech.speaker.slug %}">
+          <a href="{% url 'speeches:speaker-view' speech.speaker.id %}">
               {% filter force_escape %}
               {% firstof speech.speaker_display speech.speaker %}
               {% endfilter %}

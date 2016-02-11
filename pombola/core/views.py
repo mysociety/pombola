@@ -172,12 +172,7 @@ class PersonDetailSub(SubSlugRedirectMixin, BasePersonDetailView):
 class PersonSpeakerMappingsMixin(object):
     def pombola_person_to_sayit_speaker(self, person):
         try:
-            expected_popit_id = 'core_person:{0}'.format(person.id)
-            i = Identifier.objects.get(
-                scheme='PopIt ID',
-                identifier=expected_popit_id
-            )
-            return i.content_object.speaker
+            return person.sayit_link.sayit_speaker
         except ObjectDoesNotExist:
             return None
 
