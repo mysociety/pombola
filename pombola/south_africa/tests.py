@@ -4,7 +4,6 @@ import re
 import os
 from datetime import date, time
 from StringIO import StringIO
-from tempfile import mkdtemp
 from urlparse import urlparse
 
 from mock import patch
@@ -30,8 +29,7 @@ from django.conf import settings
 from pombola.core import models
 import json
 
-from popit.models import Person as PopitPerson, ApiInstance
-from speeches.models import Speaker, Section, Speech
+from speeches.models import Section, Speech
 from speeches.tests import create_sections
 from pombola import south_africa
 from pombola.south_africa.views import SAPersonDetail
@@ -291,46 +289,6 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             popolo_path,
             commit=True)
 
-        # Make new Popolo JSON from the people in the database. (We now
-        # assume that our PopIt instances are exported from Pombola, so we
-        # need to do this step to generate Popolo JSON with IDs that are
-        # based on the primary keys in the Pombola database.)
-
-        popolo_directory = mkdtemp()
-        call_command(
-            'core_export_to_popolo_json',
-            popolo_directory,
-            'http://www.pa.org.za/'
-        )
-
-        # TODO rewrite this kludge, pending https://github.com/mysociety/popit-django/issues/19
-        with open(os.path.join(popolo_directory, 'persons.json')) as f:
-            popolo_person_json = json.load(f)
-
-        collection_url = 'http://popit.example.com/api/v0.1/'
-
-        api_instance = ApiInstance(url = collection_url)
-        api_instance.save()
-
-        for doc in popolo_person_json:
-            # Add id and url to the doc
-            doc['popit_id']  = doc['id']
-            url = collection_url + doc['id']
-            doc['popit_url'] = url
-
-            person = PopitPerson.update_from_api_results(instance=api_instance, doc=doc)
-
-            instance, _ = Instance.objects.get_or_create(
-                label='default',
-                defaults = {
-                    'title': 'An instance'
-                })
-
-            Speaker.objects.create(
-                instance = instance,
-                name = doc['name'],
-                person = person)
-
         # Create the top level SayIt sections, so that there's no
         # warning when getting the person page:
         create_sections([{'heading': u"Hansard"},
@@ -344,6 +302,9 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             identifier=moomin_finn.slug,
             content_object=moomin_finn,
             )
+
+        # Make sure there are SayIt speakers for all Pombola
+        call_command('pombola_sayit_sync_pombola_to_popolo')
 
         # Put blank attendance data in the cache to stop us fetching from
         # the live PMG API
