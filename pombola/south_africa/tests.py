@@ -13,7 +13,7 @@ from django.test import TestCase
 from django.test.client import Client
 from django.test.utils import override_settings
 
-# NOTE - from Django 1.7 this should be replaced with 
+# NOTE - from Django 1.7 this should be replaced with
 # django.core.cache.caches
 # https://docs.djangoproject.com/en/1.8/topics/cache/#django.core.cache.caches
 from django.core.cache import get_cache
