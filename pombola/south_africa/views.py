@@ -913,9 +913,9 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
         debate_sections = Section \
             .objects \
             .filter(parent_id__in=parent_ids, speech__id__isnull=False) \
-            .annotate(start_order=Min('speech__id'), start_date=Max('speech__start_date'), speech_count=Count('speech__id')) \
+            .annotate(start_order=Min('speech__id'), speech_start_date=Max('speech__start_date'), speech_count=Count('speech__id')) \
             .exclude(heading='') \
-            .order_by('-start_date', 'parent__heading', 'start_order')
+            .order_by('-speech_start_date', 'parent__heading', 'start_order')
 
         context['entries'] = debate_sections
         context['page_obj'] = parent_section_headings
