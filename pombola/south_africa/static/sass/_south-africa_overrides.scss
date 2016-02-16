@@ -1300,6 +1300,7 @@ FOOTER
             width: 100%;
             color: $colour_blackish;
             letter-spacing: 0.05em;
+            margin: 0;
         }
         p {
             padding: 0;
@@ -1728,6 +1729,32 @@ a.alphabet-links__link {
         height: 210px;
         width: 210px;
     }
+}
+
+// Display more useful map on narrow screens
+// eg: for Constituency Office pages
+@media (max-width: 639px) {
+  .profile-with-map {
+    .title-space {
+      margin-left: 0;
+    }
+
+    .profile-map {
+      position: static;
+      width: auto;
+    }
+
+    #map_canvas {
+      width: 100%;
+      height: 210px;
+      margin-bottom: 1em;
+    }
+  }
+}
+
+.constituency-office-photo {
+  display: block;
+  margin-bottom: 1em;
 }
 
 /* Newsletter page */
