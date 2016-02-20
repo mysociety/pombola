@@ -3,23 +3,25 @@
 {% block title %}{{ object.name }} - Local Politicians{% endblock %}
 
 {% block subcontent %}
-
-
-  <ul class="tab-links">
-      <li><a href="#" class="active">Constituency offices</a></li>
-    </ul>
-
   <div class="column">
 
-    <h2>Constituency offices</h2>
+    <h2>Ward Councillors</h2>
 
     <ul class="unstyled-list list-of-constituency-offices">
-      {% for object in nearest_offices %}
-        {% include 'south_africa/constituency_office_list_item.html' with skip_positions=1 %}
+      {% for ward_councillor in ward_data %}
+        {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor %}
       {% empty %}
-        <li>
-          <p>No local offices found.</p>
-        </li>
+        <li>No ward councillor found.</li>
+      {% endfor %}
+    </ul>
+
+    <h2>MPs and MPLs</h2>
+
+    <ul class="unstyled-list list-of-constituency-offices">
+      {% for person_data in mp_mpl_data %}
+        {% include 'south_africa/local_rep_list_item.html' with skip_positions=0 %}
+      {% empty %}
+        <li>No MPs or MPLs found.</li>
       {% endfor %}
     </ul>
 

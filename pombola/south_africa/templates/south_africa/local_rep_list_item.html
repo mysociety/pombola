@@ -1,0 +1,84 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+<li id="{{ person_data.element_id }}">
+    {# Display a photo if one is available... #}
+    {% if person_data.person %}
+      <a href="{{ person_data.person.get_absolute_url }}">
+      {% thumbnail person_data.person.primary_image "58x58" crop="center" as im %}
+        <img class="constituency-office-mp-photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+      {% empty %}
+        <img class="constituency-office-mp-photo" src="{% static 'images/person-90x90.jpg' %}" width="58" height="58" />
+      {% endthumbnail %}
+    {% else %}
+        <img class="constituency-office-mp-photo" src="{% static 'images/person-90x90.jpg' %}" width="58" height="58" />
+    {% endif %}
+
+    {# The representative's name #}
+      <p class="constituency-office-mp-name">{{ person_data.name }}</p>
+    {% if person_data.person %}
+      </a>
+    {% endif %}
+
+    {# This person's position (either as an MP, an MPL or a ward councillor #}
+    {% if not skip_positions %}
+      <ul class="unstyled-list">
+      {% for position in person_data.positions %}
+        {% if position.title.name == 'Ward Councillor' %}
+          <li>Ward Councillor</li>
+        {% elif position.title.name == 'Constituency Contact' %}
+          <li>Constituency Contact</li>
+        {% else %}
+          <li>{{ position.title.name }} of the {{ position.organisation.name }}</li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if person_data.email %}
+      <p>Email: {{ person_data.email }}</p>
+    {% endif %}
+
+    {% if person_data.phone %}
+      <p>Phone: {{ person_data.phone }}</p>
+    {% endif %}
+
+    {# Get the constituency office details, if we have theM: #}
+    {% if person_data.office_place %}
+      {% with office_place=person_data.office_place %}
+        <span class="name">
+          <a href="{{ office_place.organisation.get_absolute_url }}">{{ office_place.organisation.name }}</a>
+          {% if office_place.distance != None %}
+            <span class="distance">{{ office_place.distance.km|floatformat:1 }}km</span>
+          {% endif %}
+        </span>
+        {% for contact in office_place.organisation.contacts.all %}
+          {% if contact.kind.slug == 'voice' %}
+            <p>Phone: {{ contact.value }}</p>
+          {% elif contact.kind.slug = 'email' %}
+            <p>Email: {{ contact.value }}</p>
+          {% endif %}
+        {% endfor %}
+        <script>
+          add_marker_to_map({
+            lat: {{ office_place.location.y }},
+            lng: {{ office_place.location.x }},
+            name: "{{ person_data.office_place.organisation.name }}",
+            {% if person_data.has_party_logo %}
+            marker_icon: "{{ STATIC_URL }}images/party-map-icons/{{ person_data.party.slug }}.png",
+            {% endif %}
+            url: "#{{ person_data.element_id }}"
+          });
+        </script>
+      {% endwith %}
+    {% endif %}
+
+    <ul>
+      {% for address in person_data.postal_addresses %}
+        <li class="constituency-office-address">{{ address }}</li>
+      {% endfor %}
+    </ul>
+
+    <br clear="both" />
+
+</li>
