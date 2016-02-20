@@ -2016,10 +2016,6 @@ class SAUrlRoutingTest(TestCase):
         match = resolve('/place/foo/places/')
         self.assertEqual(match.func.func_name, 'SAPlaceDetailSub')
 
-    def test_za_latlon_national(self):
-        match = resolve('/place/latlon/1.2,3.4/national/')
-        self.assertEqual(match.func.func_name, 'LatLonDetailNationalView')
-
     def test_za_latlon(self):
         match = resolve('/place/latlon/1.2,3.4/')
         self.assertEqual(match.func.func_name, 'LatLonDetailLocalView')

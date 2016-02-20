@@ -232,10 +232,6 @@ class LatLonDetailBaseView(BasePlaceDetailView):
         return context
 
 
-class LatLonDetailNationalView(LatLonDetailBaseView):
-    template_name = 'south_africa/latlon_national_view.html'
-
-
 class LatLonDetailLocalView(LatLonDetailBaseView):
     template_name = 'south_africa/latlon_local_view.html'
 
