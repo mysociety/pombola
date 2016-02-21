@@ -154,7 +154,7 @@ BORNO,8,BO,11,GWOZA,08/11/,Borno South,Damboa/Gwoza/Chibok
 BORNO,8,BO,12,HAWUL,08/12/,Borno South,Askira-Uba/Hawul
 BORNO,8,BO,13,JERE,08/13/,Borno Central,Jere
 BORNO,8,BO,14,KAGA,08/14/,Borno North ,Kaga/Gubio/Magumeri
-BORNO,8,BO,15,KALA/BALGE,08/15/,Borno Central,Bama/Ngala/Kalabalge
+BORNO,8,BO,15,KALA/BALGE,08/15/,Borno Central,Bama/Ngala/Kala-Balge
 BORNO,8,BO,16,KONDUGA,08/16/,Borno Central,Dikwa/Mafa/Konduga
 BORNO,8,BO,17,KUKAWA,08/17/,Borno North ,Kukawa/Mobbar/Abadam/Guzamala
 BORNO,8,BO,18,KWAYA KUSAR,08/18/,Borno South,Biu/Bayo/Shani/Kwaya Kusar
@@ -164,7 +164,7 @@ BORNO,8,BO,21,MAIDUGURI,08/21/,Borno Central,Maiduguri (Metropolitan)
 BORNO,8,BO,22,MARTE,08/22/,Borno North ,Monguno/Marte/Nganzai
 BORNO,8,BO,23,MOBBAR,08/23/,Borno North ,Kukawa/Mobbar/Abadam/Guzamala
 BORNO,8,BO,24,MONGUNO,08/24/,Borno North ,Monguno/Marte/Nganzai
-BORNO,8,BO,25,NGALA,08/25/,Borno Central,Bama/Ngala/Kalabalge
+BORNO,8,BO,25,NGALA,08/25/,Borno Central,Bama/Ngala/Kala-Balge
 BORNO,8,BO,26,NGANZAI,08/26/,Borno North,Monguno/Marte/Nganzai
 BORNO,8,BO,27,SHANI,08/27/,Borno South,Biu/Bayo/Shani/Kwaya Kusar
 CROSS RIVER,9,CR,1,ABI,09/01/,Cross River Central,Yakurr/Abi
@@ -237,7 +237,7 @@ EDO,12,ED,11,IKPOBA OKHA,12/11/,Edo South,Egor/Ikpoba-okha
 EDO,12,ED,12,OREDO,12/12/,Edo South,Oredo
 EDO,12,ED,13,ORHIONMWON,12/13/,Edo South,Orhionmwon/Uhunmwode
 EDO,12,ED,14,OVIA SOUTH-WEST,12/14/,Edo South,Ovia South-West/Ovia North-East
-EDO,12,ED,15,OVIA NORTH-EAST,12/15/,Edo South,Ovia South/West-Ovia North/East
+EDO,12,ED,15,OVIA NORTH-EAST,12/15/,Edo South,Ovia South-West/Ovia North-East
 EDO,12,ED,16,OWAN EAST,12/16/,Edo North,Owan West/East
 EDO,12,ED,17,OWAN WEST,12/17/,Edo North,Owan West/East
 EDO,12,ED,18,UHUNMWODE,12/18/,Edo South,Orhionmwon/Uhunmwode
@@ -254,7 +254,7 @@ EKITI,13,EK,10,IKERE,13/10/,Ekiti South,EKITI SOUTH WEST/IKERE/ORUN ISE
 EKITI,13,EK,11,IKOLE,13/11/,Ekiti North,IKOLE/OYE
 EKITI,13,EK,12,ILEJEMEJE,13/12/,Ekiti North,IDO-OSI/MOBA/ILEJEMEJE
 EKITI,13,EK,13,IREPODUN/IFELODUN,13/13/,Ekiti Central,ADO EKITI/IREPODUN/IFELODUN
-EKITI,13,EK,14,ISE/ORUN,13/14/,Ekiti South,EKITI SOUTH WEST/IKERE/ORUN/ISE
+EKITI,13,EK,14,ISE/ORUN,13/14/,Ekiti South,EKITI SOUTH WEST/IKERE/ORUN ISE
 EKITI,13,EK,15,MOBA,13/15/,Ekiti North,IDO-OSI/MOBA/ILEJEMEJE
 EKITI,13,EK,16,OYE,13/16/,Ekiti North,IKOLE/OYE
 ENUGU,14,EN,1,Aninri,14/01/,Enugu West,Aninri/Agwu/Oji-uzo
@@ -329,7 +329,7 @@ JIGAWA,17,JI,14,Jahun,17/14/,Jigawa South West,Jahun/Miga
 JIGAWA,17,JI,15,Kafin Hausa,17/15/,Jigawa North East,Hadejia/Kafin Hausa/Auyo
 JIGAWA,17,JI,16,Kaugama,17/16/,Jigawa North East,Mallam Madori/Kaugama
 JIGAWA,17,JI,17,Kazaure,17/17/,Jigawa North West,Kazaure/Roni/Gwiwa/Yankwashi
-JIGAWA,17,JI,18,Kiri Kasama,17/18/,Jigawa North East,Birniwa/Guri/Kiri-Kasama
+JIGAWA,17,JI,18,Kiri Kasama,17/18/,Jigawa North East,Birniwa/Guri/Kiri-Kasamma
 JIGAWA,17,JI,19,Kiyawa,17/19/,Jigawa South West,Dutse/Kiyawa
 JIGAWA,17,JI,20,Maigatari,17/20/,Jigawa North West,Sule-Tankarkar/Gagarawa/Maigatari/Gumel
 JIGAWA,17,JI,21,Mallam Madori,17/21/,Jigawa North East,Mallam Madori/Kaugama
