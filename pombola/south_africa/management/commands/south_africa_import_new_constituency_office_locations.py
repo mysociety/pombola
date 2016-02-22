@@ -12,14 +12,25 @@ on constituency offices to have the correct location.
 
 
 import csv
+import os.path
 import re
+from StringIO import StringIO
 
+import requests
+
+from django.conf import settings
+
+from django.core.files.base import ContentFile
+from django.core.files.storage import FileSystemStorage
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.gis.geos import Point
 
 from pombola.core.models import (
     Organisation,
     )
+from pombola.core.utils import mkdir_p
+
+from pombola.images.models import Image
 
 
 # Matches the format of the locations in the CSV we get from PMG.
@@ -39,6 +50,15 @@ class Command(BaseCommand):
 
         constituency_offices = Organisation.objects.filter(
             kind__slug='constituency-office')
+
+        storage = FileSystemStorage()
+
+        storage_path = os.path.join('images', 'constituency-offices')
+        images_directory = os.path.join(
+            settings.MEDIA_ROOT,
+            storage_path
+            )
+        mkdir_p(images_directory)
 
         with open(args[0]) as csvfile:
             reader = csv.DictReader(csvfile)
@@ -86,3 +106,21 @@ class Command(BaseCommand):
 
                 place.location = Point(float(lon), float(lat))
                 place.save()
+
+                # Now get the photo
+                photo_url = row.get('Constituency_Photo')
+
+                if photo_url:
+                    response = requests.get(photo_url)
+                    image_filename = '{}'.format(org.slug)
+
+                    desired_storage_path = os.path.join(storage_path, image_filename)
+                    storage_filename = storage.save(desired_storage_path, StringIO(response.content))
+
+                    image = Image(
+                        content_object=org,
+                        source=photo_url,
+                        is_primary=True,
+                        image=storage_filename,
+                        )
+                    image.save()
