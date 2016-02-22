@@ -254,10 +254,9 @@ class LatLonDetailBaseView(BasePlaceDetailView):
                 phone_contact = person.contacts.filter(kind__slug='voice').first()
                 if phone_contact:
                     phone = phone_contact.value
-                # If they're not an MP or an MPL, just include the
-                # consituency contact position.
+                # Ignore people who aren't MPs or MPLs
                 if not positions_to_show:
-                    positions_to_show.append(position)
+                    continue
                 mp_mpl_data.append({
                     'name': person.legal_name,
                     'person': person,
