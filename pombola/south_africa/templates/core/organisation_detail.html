@@ -134,10 +134,12 @@
     {% endif %}
     {% if object.kind.slug == 'constituency-office' %}
 
-      <!-- TODO: Developer to replace this with actual office photo -->
-      <a href="https://app.m4jam.com/media/files/attachments/IMG_20151221_085032.jpg" class="constituency-office-photo">
-        <img src="https://app.m4jam.com/media/files/attachments/IMG_20151221_085032.jpg">
-      </a>
+      {% thumbnail object.primary_image "210x210" crop="center" as im %}
+        <div class="constituency-office-photo">
+          <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        </div>
+      {% empty %}
+      {% endthumbnail %}
 
       <div class="constituency-office-feedback">
         <p>Give feedback on your visit to your constituency office. Take a photo of your office and send it to <a href="mailto:contact@pa.org.za">contact@pa.org.za</a>.</p>
