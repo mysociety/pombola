@@ -1,21 +1,26 @@
 {% extends 'south_africa/latlon_detail_base_view.html' %}
+{% load compressed %}
 
 {% block title %}{{ object.name }} - Local Politicians{% endblock %}
 
+{% block extra_js_to_load %}
+    addExtraJS([ {% compressed_js 'tabs' %} null ]);
+{% endblock %}
+
 {% block subcontent %}
-  <div class="column">
 
-    <h2>Ward Councillors</h2>
+<div class="tabs">
+  <ul>
+    <!-- TODO: correctly pluralize these nouns -->
+    <li><a href="#tabs-1" class="active">{{ mp_mpl_data | length }} MPs and MPLs</a></li>
+    <li><a href="#tabs-2">{{ ward_data | length }} Ward Councillor</a></li>
+  </ul>
 
-    <ul class="unstyled-list list-of-constituency-offices">
-      {% for ward_councillor in ward_data %}
-        {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor %}
-      {% empty %}
-        <li>No ward councillor found.</li>
-      {% endfor %}
-    </ul>
+  <!-- TODO: Map should show ward close-up when councillor tab is selected -->
+  {% compressed_js 'google-map' %}
+  <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
-    <h2>MPs and MPLs</h2>
+  <div id="tabs-1">
 
     <ul class="unstyled-list list-of-constituency-offices">
       {% for person_data in mp_mpl_data %}
@@ -26,4 +31,17 @@
     </ul>
 
   </div>
+  <div id="tabs-2">
+
+    <ul class="unstyled-list list-of-constituency-offices">
+      {% for ward_councillor in ward_data %}
+        {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor %}
+      {% empty %}
+        <li>No ward councillor found.</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</div>
+
 {% endblock %}
