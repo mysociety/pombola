@@ -9,18 +9,22 @@
 
 {% block subcontent %}
 
-<div class="tabs">
-  <ul>
+<div class="tabs ui-tabs ui-widget">
+  <ul class="rep-locator-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
     <!-- TODO: correctly pluralize these nouns -->
-    <li><a href="#tabs-1" class="active">{{ mp_mpl_data | length }} MPs and MPLs</a></li>
-    <li><a href="#tabs-2">{{ ward_data | length }} Ward Councillor</a></li>
+    <li class="ui-state-default">
+      <a href="#mps" class="ui-tabs-anchor active">{{ mp_mpl_data | length }} MPs and MPLs</a>
+    </li>
+    <li class="ui-state-default">
+      <a href="#councillors" class="ui-tabs-anchor">{{ ward_data | length }} Ward Councillor</a>
+    </li>
   </ul>
 
   <!-- TODO: Map should show ward close-up when councillor tab is selected -->
   {% compressed_js 'google-map' %}
   <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
-  <div id="tabs-1">
+  <div id="mps" class="tab-content ui-tabs-panel ui-widget-content">
 
     <ul class="unstyled-list list-of-constituency-offices">
       {% for person_data in mp_mpl_data %}
@@ -31,7 +35,7 @@
     </ul>
 
   </div>
-  <div id="tabs-2">
+  <div id="councillors" class="tab-content ui-tabs-panel ui-widget-content">
 
     <ul class="unstyled-list list-of-constituency-offices">
       {% for ward_councillor in ward_data %}
