@@ -12,28 +12,37 @@ class ZAElasticBackend(ElasticsearchSearchBackend):
         print "HELLO FROM THE NEW BACKEND!"
         super(ZAElasticBackend, self).__init__(connection_alias, **connection_options)
 
-        self.DEFAULT_SETTINGS['settings']['analysis']['analyzer']['folding'] = {
-            "tokenizer": "standard",
-            "filter": ["lowercase", "asciifolding"],
-            }
+        # import pdb;pdb.set_trace()
+        # self.DEFAULT_SETTINGS['settings']['analysis']['analyzer']['folding'] = {
+        #     "tokenizer": "standard",
+        #     "filter": ["lowercase", "asciifolding"],
+        #     }
 
-    def build_schema(self, fields):
-        content_field_name, mapping = super(ZAElasticBackend, self).build_schema(fields)
+        analyzers = self.DEFAULT_SETTINGS['settings']['analysis']['analyzer']
+        for analyzer_name in analyzers:
+            tokenizer = analyzers[analyzer_name]['tokenizer']
+            try:
+                tokenizer.append('asciifolding')
+            except AttributeError:
+                analyzers[analyzer_name]['tokenizer'] = [tokenizer, 'asciifolding']
 
-        # Change all the mappings that were 'snowball' to 'folding'
-        for field_name, field_class in fields.items():
-            field_mapping = mapping[field_class.index_fieldname]
+    # def build_schema(self, fields):
+    #     content_field_name, mapping = super(ZAElasticBackend, self).build_schema(fields)
 
-            print field_name, field_class
+    #     # Change all the mappings that were 'snowball' to 'folding'
+    #     for field_name, field_class in fields.items():
+    #         field_mapping = mapping[field_class.index_fieldname]
 
-            # if field_mapping['type'] == 'string' and field_class.indexed:
-                # if not hasattr(field_class, 'facet_for') and not field_class.field_type in('ngram', 'edge_ngram'):
-                #     field_mapping["analyzer"] = "folding"
+    #         print field_name, field_class
 
-            mapping.update({field_class.index_fieldname: field_mapping})
+    #         # if field_mapping['type'] == 'string' and field_class.indexed:
+    #             # if not hasattr(field_class, 'facet_for') and not field_class.field_type in('ngram', 'edge_ngram'):
+    #             #     field_mapping["analyzer"] = "folding"
 
-            print mapping
-        return (content_field_name, mapping)
+    #         mapping.update({field_class.index_fieldname: field_mapping})
+
+    #         print mapping
+    #     return (content_field_name, mapping)
 
 
 class ZAElasticSearchEngine(ElasticsearchSearchEngine):

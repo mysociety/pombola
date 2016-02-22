@@ -289,7 +289,7 @@ HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': 'localhost:9200',
-        'INDEX_NAME': 'za-hansard-folded', #config.get('POMBOLA_DB_NAME'),
+        'INDEX_NAME': 'za-test-2', #config.get('POMBOLA_DB_NAME'),
         'EXCLUDED_INDEXES': [],
     },
 }
