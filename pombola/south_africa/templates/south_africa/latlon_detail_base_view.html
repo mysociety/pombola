@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
-{% load pipeline %}
 
 {% block breadcrumbs %}
 {% include 'core/override_breadcrumb.html' with override_path='/places/' %}
 {% endblock %}
 
 {% block content %}
-
 
   <h1>Find your representatives</h1>
   <a href="{% url "info_page" slug="constituency-offices" %}" class="button secondary-button about-constituency-office">About Constituency Offices</a>
@@ -22,14 +20,7 @@
     </p>
   </form>
 
-  {% javascript 'google-map' %}
-
-  <div id="map_canvas" style="width: 100%; height: 400px;"></div>
-
-  <div>
-
     {% block subcontent %}
     {% endblock %}
 
-  </div>
 {% endblock %}
