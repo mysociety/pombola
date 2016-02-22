@@ -110,6 +110,16 @@ class Command(BaseCommand):
                 # Now get the photo
                 photo_url = row.get('Constituency_Photo')
 
+                try:
+                    org.images.get(source=photo_url)
+                    print (
+                        "Skipping {} as url matches existing image."
+                        .format(org.slug)
+                        )
+                    continue
+                except Image.DoesNotExist:
+                    print "Adding new image to {}.".format(org.slug)
+
                 if photo_url:
                     response = requests.get(photo_url)
                     image_filename = '{}'.format(org.slug)
