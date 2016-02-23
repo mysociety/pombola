@@ -11,7 +11,6 @@ ALL_OPTIONAL_APPS = ('pombola.hansard',
 
 APPS_REQUIRED_BY_SPEECHES = ('django_select2',
                              'django_bleach',
-                             'popit',
                              'instances',
                              'popolo_name_resolver',
                              'popolo',
