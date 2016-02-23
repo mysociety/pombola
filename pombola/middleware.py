@@ -8,4 +8,7 @@ class FakeInstanceMiddleware:
     """
     def process_request(self, request):
         request.instance, _ = Instance.objects.get_or_create(label='default')
-        request.is_user_instance = request.user.is_authenticated() and ( request.instance in request.user.instances.all() or request.user.is_superuser )
+        # We don't want to offer the ability to edit or delete
+        # speeches to any users of the site at the moment, so force
+        # that no user of the site is regarded as its owner.
+        request.is_user_instance = False
