@@ -24,7 +24,7 @@
 {% regroup entries by parent.title.strip as by_title %}
 {% for t in by_title %}
   {% with first_section_id=t.list.0.id %}
-    {% regroup t.list by start_date as by_date %}
+    {% regroup t.list by speech_start_date as by_date %}
     <div>
         <a class="js-hide-reveal-link hansard-section-title has-dropdown-dark" href="#{{ t.grouper|slugify }}-{{ first_section_id }}">
             <h2> {{ t.grouper }} </h2>

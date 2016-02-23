@@ -857,7 +857,7 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
         self.page = self.request.GET.get('page')
 
         # Get the top level section, or 404
-        top_section = get_object_or_404(Section, title=self.top_section_name, parent=None)
+        top_section = get_object_or_404(Section, heading=self.top_section_name, parent=None)
         context['show_lateness_warning'] = (self.top_section_name == 'Hansard')
 
         # As we know that the hansard section structure is
@@ -879,46 +879,46 @@ class SASpeechesIndex(NamespaceMixin, TemplateView):
             'children__id__isnull' : False
         }
 
-        # get a list of all the section titles
-        all_parent_section_titles = Section \
+        # get a list of all the section headings
+        all_parent_section_headings = Section \
               .objects \
               .filter(**section_filter) \
-              .values('title') \
+              .values('heading') \
               .distinct() \
               .annotate(latest_start_date=Max('children__speech__start_date')) \
               .order_by('-latest_start_date')
 
         # use Paginator to cut this down to the sections for the current page
-        paginator = Paginator(all_parent_section_titles, self.sections_to_show)
+        paginator = Paginator(all_parent_section_headings, self.sections_to_show)
         try:
-            parent_section_titles = paginator.page(self.page)
+            parent_section_headings = paginator.page(self.page)
         except PageNotAnInteger:
-            parent_section_titles = paginator.page(1)
+            parent_section_headings = paginator.page(1)
         except EmptyPage:
-            parent_section_titles = paginator.page(paginator.num_pages)
+            parent_section_headings = paginator.page(paginator.num_pages)
 
         # get the sections for the current page in date order
-        titles = list(section['title'] for section in parent_section_titles)
-        section_filter['title__in'] = titles
+        headings = list(section['heading'] for section in parent_section_headings)
+        section_filter['heading__in'] = headings
         parent_sections = Section \
               .objects \
-              .values('id', 'title') \
+              .values('id', 'heading') \
               .filter(**section_filter) \
               .annotate(latest_start_date=Max('children__speech__start_date')) \
-              .order_by('-latest_start_date', 'title')
+              .order_by('-latest_start_date', 'heading')
 
         # get the subsections based on the relevant section ids
-        # exclude those with blank titles as we have no way of linking to them
+        # exclude those with blank headings as we have no way of linking to them
         parent_ids = list(section['id'] for section in parent_sections)
         debate_sections = Section \
             .objects \
             .filter(parent_id__in=parent_ids, speech__id__isnull=False) \
-            .annotate(start_order=Min('speech__id'), start_date=Max('speech__start_date'), speech_count=Count('speech__id')) \
-            .exclude(title='') \
-            .order_by('-start_date', 'parent__title', 'start_order')
+            .annotate(start_order=Min('speech__id'), speech_start_date=Max('speech__start_date'), speech_count=Count('speech__id')) \
+            .exclude(heading='') \
+            .order_by('-speech_start_date', 'parent__heading', 'start_order')
 
         context['entries'] = debate_sections
-        context['page_obj'] = parent_section_titles
+        context['page_obj'] = parent_section_headings
         return context
 
 class SAHansardIndex(SASpeechesIndex):
@@ -939,40 +939,40 @@ def questions_section_sort_key(section):
     The intention is to have questions for the President first, then
     Deputy President, then offices associated with the presidency,
     then questions to ministers sorted by the name of the ministry,
-    and finally anything else sorted just on the title.
+    and finally anything else sorted just on the heading.
 
-    >>> questions_section_sort_key(Section(title="for the President"))
+    >>> questions_section_sort_key(Section(heading="for the President"))
     'AAAfor the President'
-    >>> questions_section_sort_key(Section(title="ask the deputy president"))
+    >>> questions_section_sort_key(Section(heading="ask the deputy president"))
     'BBBask the deputy president'
-    >>> questions_section_sort_key(Section(title="about the Presidency"))
+    >>> questions_section_sort_key(Section(heading="about the Presidency"))
     'CCCabout the Presidency'
-    >>> questions_section_sort_key(Section(title="Questions asked to Minister for Foo"))
+    >>> questions_section_sort_key(Section(heading="Questions asked to Minister for Foo"))
     'DDDFoo'
-    >>> questions_section_sort_key(Section(title="Questions asked to the Minister for Bar"))
+    >>> questions_section_sort_key(Section(heading="Questions asked to the Minister for Bar"))
     'DDDBar'
-    >>> questions_section_sort_key(Section(title="Questions asked to Minister of Baz"))
+    >>> questions_section_sort_key(Section(heading="Questions asked to Minister of Baz"))
     'DDDBaz'
-    >>> questions_section_sort_key(Section(title="Minister of Quux"))
+    >>> questions_section_sort_key(Section(heading="Minister of Quux"))
     'DDDQuux'
-    >>> questions_section_sort_key(Section(title="Random"))
+    >>> questions_section_sort_key(Section(heading="Random"))
     'MMMRandom'
     """
-    title = section.title
-    if re.search(r'(?i)Deputy\s+President', title):
-        return "BBB" + title
-    if re.search(r'(?i)President', title):
-        return "AAA" + title
-    if re.search(r'(?i)Presidency', title):
-        return "CCC" + title
-    stripped_title = title
+    heading = section.heading
+    if re.search(r'(?i)Deputy\s+President', heading):
+        return "BBB" + heading
+    if re.search(r'(?i)President', heading):
+        return "AAA" + heading
+    if re.search(r'(?i)Presidency', heading):
+        return "CCC" + heading
+    stripped_heading = heading
     for regexp in (r'^(?i)Questions\s+asked\s+to\s+(the\s+)?Minister\s+(of|for(\s+the)?)\s+',
                    r'^(?i)Minister\s+(of|for(\s+the)?)\s+'):
-        stripped_title = re.sub(regexp, '', stripped_title)
-    if stripped_title == title:
+        stripped_heading = re.sub(regexp, '', stripped_heading)
+    if stripped_heading == heading:
         # i.e. it wasn't questions for a minister
-        return "MMM" + title
-    return "DDD" + stripped_title
+        return "MMM" + heading
+    return "DDD" + stripped_heading
 
 class SAQuestionIndex(TemplateView):
     template_name = 'south_africa/question_index.html'
@@ -981,7 +981,7 @@ class SAQuestionIndex(TemplateView):
         context = super(SAQuestionIndex, self).get_context_data(**kwargs)
 
         context['ministers'] = []
-        ministers = Section.objects.filter(parent__title='Questions')
+        ministers = Section.objects.filter(parent__heading='Questions')
         ministers = sorted(ministers, key=questions_section_sort_key)
         for minister in ministers:
             context['ministers'].append({
@@ -1029,7 +1029,7 @@ class SAQuestionIndex(TemplateView):
         sections = Section \
             .objects \
             .filter(
-                parent__parent__title='Questions'
+                parent__parent__heading='Questions'
             ) \
             .select_related('parent__name') \
             .prefetch_related('speech_set') \
@@ -1073,7 +1073,7 @@ class SAQuestionIndex(TemplateView):
         questions = []
         for section in sections:
             question = section.speech_set.all()[0]
-            question.questionto = section.parent.title.replace('Questions asked to the ','')
+            question.questionto = section.parent.heading.replace('Questions asked to the ','')
             question.questionto_slug = section.parent.slug
 
             #assume if there is more than one speech that the question is answered
