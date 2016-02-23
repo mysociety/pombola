@@ -154,7 +154,6 @@ if DEBUG:
 else:
     CACHE_MIDDLEWARE_SECONDS = 60 * 20 # twenty minutes
 CACHE_MIDDLEWARE_KEY_PREFIX = config.get('POMBOLA_DB_NAME')
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 # Always use the TemporaryFileUploadHandler as it allows us to access the
 # uploaded file on disk more easily. Currently used by the CSV upload in
