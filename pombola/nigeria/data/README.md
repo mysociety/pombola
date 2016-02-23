@@ -46,7 +46,11 @@ by running:
 
     ./manage.py nigeria_fix_senatorial_districts
 
-The federal constituency boundary data is still broken.
+The federal constituency boundary data were similarly
+broken. You can fix that (after having run the previous
+commands) by running:
+
+    ./manage.py nigeria_fix_federal_constituencies
 
 The earlier instructions are preserved below for reference.
 
