@@ -32,11 +32,6 @@ class SourceQuerySet(models.query.QuerySet):
         return self.filter( last_processing_attempt=None )
 
 
-class SourceManager(models.Manager):
-    def get_queryset(self):
-        return SourceQuerySet(self.model)
-
-
 class Source(HansardModelBase):
     """
     Sources of the hansard transcripts
@@ -68,7 +63,7 @@ class Source(HansardModelBase):
     last_processing_attempt = models.DateTimeField(blank=True, null=True)
     last_processing_success = models.DateTimeField(blank=True, null=True)
 
-    objects = SourceManager()
+    objects = SourceQuerySet.as_manager()
 
     class Meta:
         app_label = 'hansard'
