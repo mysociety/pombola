@@ -394,11 +394,11 @@ INSTALLED_APPS = (
     'django.contrib.gis',
 
     'pombola.admin_additions',
+    'autocomplete_light',
     'django.contrib.admin',
     'django.contrib.admindocs',
 
     'ajax_select',
-    'autocomplete_light',
     'markitup',
 
     'pipeline',
