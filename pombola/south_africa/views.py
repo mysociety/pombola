@@ -17,7 +17,7 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.http import Http404
 from django.db.models import Count, Min, Max
-from django.core.cache import get_cache
+from django.core.cache import caches
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
@@ -642,7 +642,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
     def download_attendance_data(self):
         attendance_url = next_url = self.get_attendance_data_url()
 
-        cache = get_cache('pmg_api')
+        cache = caches['pmg_api']
         results = cache.get(attendance_url)
 
         if results is None:
@@ -1968,7 +1968,7 @@ class SAMpAttendanceView(TemplateView):
     def download_attendance_data(self):
         attendance_url = next_url = 'https://api.pmg.org.za/committee-meeting-attendance/summary/'
 
-        cache = get_cache('pmg_api')
+        cache = caches['pmg_api']
         results = cache.get(attendance_url)
 
         if results is None:

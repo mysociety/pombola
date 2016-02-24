@@ -16,7 +16,7 @@ from django.test.utils import override_settings
 # NOTE - from Django 1.7 this should be replaced with
 # django.core.cache.caches
 # https://docs.djangoproject.com/en/1.8/topics/cache/#django.core.cache.caches
-from django.core.cache import get_cache
+from django.core.cache import caches
 
 from django.core.urlresolvers import reverse, resolve
 from django.core.management import call_command
@@ -308,7 +308,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
         # Put blank attendance data in the cache to stop us fetching from
         # the live PMG API
-        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache = caches['pmg_api']
         pmg_api_cache.set(
             "http://api.pmg.org.za/member/moomin-finn/attendance/",
             [],
@@ -492,7 +492,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
         with open(test_data_path) as f:
             raw_data = json.load(f)
 
-        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache = caches['pmg_api']
         pmg_api_cache.set(
             "http://api.pmg.org.za/member/moomin-finn/attendance/",
             raw_data['results'],
@@ -761,7 +761,7 @@ class SAPersonProfileSubPageTest(WebTest):
         # Make some identifiers for these people so we avoid
         # looking them up with PMG, and put blank attendance data
         # in the cache to stop us fetching from the live PMG API.
-        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache = caches['pmg_api']
 
         for person in (self.deceased, self.former_mp):
             models.Identifier.objects.create(
