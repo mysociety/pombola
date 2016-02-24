@@ -2775,6 +2775,14 @@ p.attendance__disclaimer {
 }
 
 .mp-attendance {
+    #warning-notice {
+        background-color: #e23d28;
+        color: #fff;
+        font-size: 14px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
     .dataTables_wrapper .ui-toolbar {
         padding: 12px 0;
     }
