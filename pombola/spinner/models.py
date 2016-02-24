@@ -16,16 +16,11 @@ class SlideQuerySet(models.query.QuerySet):
     def inactive(self):
         return self.filter(is_active=False)
 
-
-class SlideManager(models.Manager):
-    def get_queryset(self):
-        return SlideQuerySet(self.model, using=self._db)
-
     # Commented out as unused, but possibly useful in future
 
     # def random_slide(self):
     #     try:
-    #         return self.all().active().order_by('?')[0]
+    #         return self.active().order_by('?')[0]
     #     except IndexError:
     #         # There are no slides to can be returned.
     #         return None
@@ -37,7 +32,7 @@ class SlideManager(models.Manager):
     #     """
     #
     #     # We only care about the active slides.
-    #     all_active = self.all().active().order_by('sort_order', 'id')
+    #     all_active = self.active().order_by('sort_order', 'id')
     #
     #     # If there is no slide to compare to just return the first one, or None
     #     if slide:
@@ -74,7 +69,7 @@ class Slide(models.Model):
     object_id      = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    objects = SlideManager()
+    objects = SlideQuerySet.as_manager()
 
     def __unicode__(self):
         return u"Slide of '{0}'".format( self.content_object )

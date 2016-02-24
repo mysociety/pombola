@@ -600,11 +600,6 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
             )
 
 
-class OrganisationManager(ManagerBase):
-    def get_queryset(self):
-        return OrganisationQuerySet(self.model)
-
-
 class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(
@@ -618,7 +613,7 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended = ApproximateDateField(blank=True, help_text=date_help_text)
 
-    objects = OrganisationManager()
+    objects = OrganisationQuerySet.as_manager()
     contacts = generic.GenericRelation(Contact)
     images = generic.GenericRelation(Image)
     informationsources = generic.GenericRelation(InformationSource)
@@ -695,9 +690,6 @@ class PlaceQuerySet(models.query.GeoQuerySet):
         """This is a helper for use in the place_places.html template"""
         return self.order_by('-kind__name', 'name')
 
-class PlaceManager(ManagerBase):
-    def get_queryset(self):
-        return PlaceQuerySet(self.model)
 
 class Place(ModelBase, ScorecardMixin, BudgetsMixin):
     name = models.CharField(max_length=200)
@@ -717,7 +709,7 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
 
-    objects = PlaceManager()
+    objects = PlaceQuerySet.as_manager()
     is_overall_scorecard_score_applicable = False
 
     @property
@@ -1132,11 +1124,6 @@ class PositionQuerySet(models.query.GeoQuerySet):
         return result
 
 
-class PositionManager(ManagerBase):
-    def get_queryset(self):
-        return PositionQuerySet(self.model)
-
-
 class Position(ModelBase, IdentifierMixin):
     category_choices = (
         ('political', 'Political'),
@@ -1171,7 +1158,7 @@ class Position(ModelBase, IdentifierMixin):
     sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
     sorting_end_date_high = models.CharField(editable=True, default='', max_length=10)
 
-    objects = PositionManager()
+    objects = PositionQuerySet.as_manager()
 
     def clean(self):
         if not (self.organisation or self.title or self.place):

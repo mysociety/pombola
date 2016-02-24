@@ -33,10 +33,6 @@ class EntryQuerySet(models.query.QuerySet):
             speaker_name = '',
         )
 
-class EntryManager(models.Manager):
-    def get_queryset(self):
-        return EntryQuerySet(self.model)
-
 
 class Entry(HansardModelBase):
     """Model for representing an entry in Hansard - speeches, headings etc"""
@@ -68,7 +64,7 @@ class Entry(HansardModelBase):
     # What was actually said
     content       = models.TextField()
 
-    objects = EntryManager()
+    objects = EntryQuerySet.as_manager()
 
     def __unicode__(self):
         return "%s: %s" % (self.type, self.content[:100])
