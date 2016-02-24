@@ -54,11 +54,11 @@ class ModelBase(models.Model):
     updated = models.DateTimeField( auto_now=True )
 
     def css_class(self):
-        return self._meta.module_name
+        return self._meta.model_name
 
     def get_admin_url(self):
         url = reverse(
-            'admin:%s_%s_change' % ( self._meta.app_label, self._meta.module_name),
+            'admin:%s_%s_change' % ( self._meta.app_label, self._meta.model_name),
             args=[self.id]
         )
         return url
