@@ -7,6 +7,7 @@ from pombola.scorecards import models
 from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
 
+@admin.register(models.Category)
 class CategoryAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"] }
 
@@ -21,6 +22,7 @@ class EntryAdminCSVUploadForm(forms.Form):
         ),
     )
 
+@admin.register(models.Entry)
 class EntryAdmin(admin.ModelAdmin):
     list_display  = [ 'category', 'content_object', 'score', 'remark', 'disabled']
     list_filter = ['category', 'disabled']
@@ -66,8 +68,3 @@ class EntryAdmin(admin.ModelAdmin):
             ),
         )
         return my_urls + urls
-    
-
-
-admin.site.register( models.Category, CategoryAdmin )
-admin.site.register( models.Entry,    EntryAdmin    )
