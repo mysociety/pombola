@@ -10,6 +10,15 @@ class ZAElasticBackend(ElasticsearchSearchBackend):
             connection_alias, **connection_options)
 
         analyzers = self.DEFAULT_SETTINGS['settings']['analysis']['analyzer']
+
+        for analyzer_name in analyzers:
+            filter_ = analyzers[analyzer_name].get('filter')
+
+            if filter_:
+                analyzers[analyzer_name]['filter'].append('asciifolding')
+            else:
+                analyzers[analyzer_name]['filter'] = ['asciifolding']
+
         analyzers['folding'] = {
             "tokenizer": "standard",
             "filter": ["lowercase", "asciifolding"],
