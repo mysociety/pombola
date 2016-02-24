@@ -41,6 +41,8 @@ class Source(HansardModelBase):
 
     class Meta:
         unique_together = ('name', 'list_page')
+        app_label = 'hansard'
+        ordering = [ '-date', 'name' ]
 
     name           = models.CharField(max_length=200)
     date           = models.DateField()
@@ -65,9 +67,6 @@ class Source(HansardModelBase):
 
     objects = SourceQuerySet.as_manager()
 
-    class Meta:
-        app_label = 'hansard'
-        ordering = [ '-date', 'name' ]
 
     def __unicode__(self):
         return self.name
