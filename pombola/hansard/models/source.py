@@ -39,9 +39,6 @@ class Source(HansardModelBase):
     For example a PDF transcript.
     """
 
-    class Meta:
-        unique_together = ('name', 'list_page')
-
     name           = models.CharField(max_length=200)
     date           = models.DateField()
     url            = models.URLField(max_length=1000)
@@ -63,11 +60,13 @@ class Source(HansardModelBase):
     last_processing_attempt = models.DateTimeField(blank=True, null=True)
     last_processing_success = models.DateTimeField(blank=True, null=True)
 
-    objects = SourceQuerySet.as_manager()
-
     class Meta:
+        unique_together = ('name', 'list_page')
         app_label = 'hansard'
         ordering = [ '-date', 'name' ]
+
+    objects = SourceQuerySet.as_manager()
+
 
     def __unicode__(self):
         return self.name
