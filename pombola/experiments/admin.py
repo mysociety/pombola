@@ -42,6 +42,7 @@ def is_youth_employment_comment_event(event):
         event.label == 'comment'
     )
 
+@admin.register(models.Experiment)
 class ExperimentAdmin(admin.ModelAdmin):
     search_fields = [ 'name' ]
     list_display  = [ 'name', 'slug' ]
@@ -105,12 +106,9 @@ class EventAdminForm(ModelForm):
         return extra_data
 
 
+@admin.register(models.Event)
 class EventAdmin(admin.ModelAdmin):
     form = EventAdminForm
     list_display = ['experiment', 'user_key', 'variant', 'category',
                     'action', 'label', 'extra_data']
     ordering = ('-created',)
-
-
-admin.site.register(models.Experiment, ExperimentAdmin)
-admin.site.register(models.Event, EventAdmin)

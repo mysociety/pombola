@@ -7,6 +7,7 @@ import models
 
 from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
+@admin.register(models.Category, models.Tag)
 class LabelAdmin(admin.ModelAdmin):
     search_fields = [ 'name' ]
     list_display  = [ 'name', 'slug' ]
@@ -28,6 +29,7 @@ else:
         'featured_image_file',
     )
 
+@admin.register(models.InfoPage)
 class InfoPageAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     search_fields = search_fields_to_use
     list_display  = [ 'slug', 'title', 'kind', 'publication_date' ]
@@ -42,8 +44,3 @@ class InfoPageAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
 
     class Media:
         js = ("info/js/admin.js",)
-
-
-admin.site.register( models.Category, LabelAdmin )
-admin.site.register( models.Tag,      LabelAdmin )
-admin.site.register( models.InfoPage, InfoPageAdmin )

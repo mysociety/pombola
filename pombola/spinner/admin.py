@@ -6,11 +6,13 @@ from sorl.thumbnail.admin import AdminImageMixin
 from . import models
 
 
+@admin.register(models.Slide)
 class SlideAdmin(admin.ModelAdmin):
     list_display = ('id', 'content_object', 'content_type', 'sort_order', 'is_active')
     list_filter = ('is_active', )
 
 
+@admin.register(models.ImageContent)
 class ImageContentAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('thumbnail', 'caption')
     search_fields = ('caption', )
@@ -24,12 +26,7 @@ class ImageContentAdmin(AdminImageMixin, admin.ModelAdmin):
     thumbnail.allow_tags = True
 
 
+@admin.register(models.QuoteContent)
 class QuoteContentAdmin(admin.ModelAdmin):
     search_fields = ('quote', 'attribution')
     list_display = ('id', 'quote', 'attribution')
-
-
-# Add these to the admin
-admin.site.register( models.Slide, SlideAdmin)
-admin.site.register( models.ImageContent, ImageContentAdmin)
-admin.site.register( models.QuoteContent, QuoteContentAdmin)

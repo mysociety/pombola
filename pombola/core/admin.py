@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import admin
+from django.contrib.admin.models import LogEntry
 from django.contrib.gis import db
 from django.contrib.contenttypes.generic import GenericTabularInline
 from django.utils.html import escape
@@ -33,6 +34,7 @@ class ContentTypeModelAdmin(admin.ModelAdmin):
     show_foreign.allow_tags = True
 
 
+@admin.register(models.ContactKind)
 class ContactKindAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ['name']
@@ -43,6 +45,7 @@ class AlternativePersonNameInlineAdmin(admin.TabularInline):
     extra = 0
 
 
+@admin.register(models.InformationSource)
 class InformationSourceAdmin(ContentTypeModelAdmin):
     list_display = ['source', 'show_foreign', 'entered']
     list_filter = ['entered']
@@ -61,6 +64,7 @@ class InformationSourceInlineAdmin(GenericTabularInline):
     }
 
 
+@admin.register(models.Contact)
 class ContactAdmin(ContentTypeModelAdmin):
     list_display = ['kind', 'value', 'show_foreign']
     search_fields = ['value']
@@ -79,6 +83,7 @@ class ContactInlineAdmin(GenericTabularInline):
     }
 
 
+@admin.register(models.Identifier)
 class IdentifierAdmin(ContentTypeModelAdmin):
     list_display = ['scheme', 'identifier', 'show_foreign']
     search_fields = ['identifier']
@@ -92,6 +97,7 @@ class IdentifierInlineAdmin(GenericTabularInline):
     fields = ['scheme', 'identifier']
 
 
+@admin.register(models.Position)
 class PositionAdmin(AjaxSelectAdmin):
     list_display = [
         'id',
@@ -175,6 +181,7 @@ class ScorecardInlineAdmin(GenericTabularInline):
     can_delete = False
 
 
+@admin.register(models.Person)
 class PersonAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["legal_name"]}
     inlines = [
@@ -191,6 +198,7 @@ class PersonAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     search_fields = ['legal_name']
 
 
+@admin.register(models.Place)
 class PlaceAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('slug', 'name', 'kind', 'show_organisation')
@@ -218,6 +226,7 @@ class PlaceInlineAdmin(admin.TabularInline):
     fields = ['name', 'slug', 'kind']
 
 
+@admin.register(models.Organisation)
 class OrganisationAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [
@@ -233,36 +242,26 @@ class OrganisationAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     search_fields = ['name']
 
 
+@admin.register(models.OrganisationKind)
 class OrganisationKindAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name']
 
 
+@admin.register(models.PlaceKind)
 class PlaceKindAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['slug', 'name']
     search_fields = ['name']
 
 
+@admin.register(models.PositionTitle)
 class PositionTitleAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name']
 
 
-# Add these to the admin
-admin.site.register(models.Contact, ContactAdmin)
-admin.site.register(models.ContactKind, ContactKindAdmin)
-admin.site.register(models.Identifier, IdentifierAdmin)
-admin.site.register(models.InformationSource, InformationSourceAdmin)
-admin.site.register(models.Organisation, OrganisationAdmin)
-admin.site.register(models.OrganisationKind, OrganisationKindAdmin)
-admin.site.register(models.Person, PersonAdmin)
-admin.site.register(models.Place, PlaceAdmin)
-admin.site.register(models.PlaceKind, PlaceKindAdmin)
-admin.site.register(models.Position, PositionAdmin)
-admin.site.register(models.PositionTitle, PositionTitleAdmin)
-
-
+@admin.register(LogEntry)
 class LogAdmin(admin.ModelAdmin):
     """Create an admin view of the history/log table"""
     list_display = (
@@ -295,10 +294,3 @@ class LogAdmin(admin.ModelAdmin):
         return True
     def has_delete_permission(self, request, obj=None):
         return False
-
-# the line below caused issues on one server and not on others. Possibly an
-# import order issue?? The uncommented lines don't have the problem
-#
-# buggy --> admin.site.register( admin.models.LogEntry, LogAdmin )
-from django.contrib.admin.models import LogEntry
-admin.site.register(LogEntry, LogAdmin)
