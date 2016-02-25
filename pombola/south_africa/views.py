@@ -2019,7 +2019,9 @@ class SAMpAttendanceView(TemplateView):
 
             if year == context['year']:
                 parties = set(ma['member']['party_name'] for
-                    ma in annual_attendance['attendance_summary'])
+                    ma in annual_attendance['attendance_summary']
+                    if 'party_name' in ma['member']
+                )
                 parties.discard(None)
                 context['parties'] = sorted(parties)
 
@@ -2052,16 +2054,17 @@ class SAMpAttendanceView(TemplateView):
                     arrive_late_perc = self.calculate_abs_percenatge(arrive_late, total)
                     depart_early_perc = self.calculate_abs_percenatge(depart_early, total)
 
-                    context['attendance_data'].append({
-                        "name": summary['member']['name'],
-                        "pa_url": summary['member']['pa_url'],
-                        "party_name": summary['member']['party_name'],
-                        "present": present_perc,
-                        "absent": 100 - present_perc,
-                        "arrive_late": arrive_late_perc,
-                        "depart_early": depart_early_perc,
-                        "total": total,
-                    })
+                    if 'name' in summary['member']:
+                        context['attendance_data'].append({
+                            "name": summary['member']['name'],
+                            "pa_url": summary['member']['pa_url'],
+                            "party_name": summary['member']['party_name'],
+                            "present": present_perc,
+                            "absent": 100 - present_perc,
+                            "arrive_late": arrive_late_perc,
+                            "depart_early": depart_early_perc,
+                            "total": total,
+                        })
 
                 aggregate_attendance = self.calculate_abs_percenatge(aggregate_present, aggregate_total)
                 context['aggregate_attendance'] = aggregate_attendance
