@@ -643,5 +643,6 @@ if config.get('EMAIL_SETTINGS', None):
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('pombola.api.permissions.ReadOnly',),
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
     'PAGE_SIZE': 10,
 }
