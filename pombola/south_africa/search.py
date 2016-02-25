@@ -21,7 +21,7 @@ class ZAElasticBackend(ElasticsearchSearchBackend):
 
         analyzers['folding'] = {
             "tokenizer": "standard",
-            "filter": ["lowercase", "asciifolding"],
+            "filter": ["standard", "lowercase", "stop", "snowball", "asciifolding"],
             }
 
     def build_schema(self, fields):
