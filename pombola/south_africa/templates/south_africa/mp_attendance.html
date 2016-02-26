@@ -49,8 +49,12 @@
 
   {% if party %}
    <div class="col-50">
-    <h2>{{ aggregate_attendance }}%</h2>
-    <p>Average attendance for {{ party }}</p>
+    {% if aggregate_attendance >= 0 %}
+      <h2>{{ aggregate_attendance }}%</h2>
+      <p>Average attendance for {{ party }}</p>
+    {% else %}
+      <p>Not enough data to calculate average attendance.</p>
+    {% endif %}
    </div>
   {% endif %}
 

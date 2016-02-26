@@ -2063,7 +2063,11 @@ class SAMpAttendanceView(TemplateView):
                         "total": total,
                     })
 
-                aggregate_attendance = self.calculate_abs_percenatge(aggregate_present, aggregate_total)
+                if aggregate_total == 0:
+                    # To avoid a division by zero if there's no data...
+                    aggregate_attendance = -1
+                else:
+                    aggregate_attendance = self.calculate_abs_percenatge(aggregate_present, aggregate_total)
                 context['aggregate_attendance'] = aggregate_attendance
 
         return context
