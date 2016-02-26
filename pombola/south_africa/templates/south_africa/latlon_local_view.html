@@ -26,9 +26,9 @@
 
   <div id="mps" class="tab-content ui-tabs-panel ui-widget-content">
 
-    <ul class="unstyled-list list-of-constituency-offices">
+    <ul class="rep-locator-reps">
       {% for person_data in mp_mpl_data %}
-        {% include 'south_africa/local_rep_list_item.html' with skip_positions=0 %}
+        {% include 'south_africa/local_rep_list_item.html' with skip_positions=1 %}
       {% empty %}
         <li>No MPs or MPLs found.</li>
       {% endfor %}
@@ -37,9 +37,9 @@
   </div>
   <div id="councillors" class="tab-content ui-tabs-panel ui-widget-content">
 
-    <ul class="unstyled-list list-of-constituency-offices">
+    <ul class="rep-locator-reps">
       {% for ward_councillor in ward_data %}
-        {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor %}
+        {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor skip_positions=1  %}
       {% empty %}
         <li>No ward councillor found.</li>
       {% endfor %}

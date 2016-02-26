@@ -2,83 +2,88 @@
 {% load thumbnail %}
 
 <li id="{{ person_data.element_id }}">
-    {# Display a photo if one is available... #}
+
     {% if person_data.person %}
+      {# Only provide a link if there's a person page to link to... #}
       <a href="{{ person_data.person.get_absolute_url }}">
-      {% thumbnail person_data.person.primary_image "58x58" crop="center" as im %}
-        <img class="constituency-office-mp-photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-      {% empty %}
-        <img class="constituency-office-mp-photo" src="{% static 'images/person-90x90.jpg' %}" width="58" height="58" />
-      {% endthumbnail %}
+        {# Display a photo if one is available... #}
+        {% thumbnail person_data.person.primary_image "58x58" crop="center" as im %}
+          <img class="constituency-office-mp-photo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+        {% empty %}
+          <img class="constituency-office-mp-photo" src="{% static 'images/person-90x90.jpg' %}" width="58" height="58" />
+        {% endthumbnail %}
     {% else %}
-        <img class="constituency-office-mp-photo" src="{% static 'images/person-90x90.jpg' %}" width="58" height="58" />
+          <img class="constituency-office-mp-photo" src="{% static 'images/person-90x90.jpg' %}" width="58" height="58" />
     {% endif %}
 
-    {# The representative's name #}
-      <p class="constituency-office-mp-name">{{ person_data.name }}</p>
+    {% if person_data.party %}
+      <img class="constituency-office-mp-logo" src="{{ STATIC_URL }}images/party-map-icons/{{ person_data.party.slug }}.png" width="38" height="38" />
+    {% endif %}
+
+        {# The representative's name #}
+        <p class="constituency-office-mp-name">{{ person_data.name }}</p>
+
     {% if person_data.person %}
       </a>
     {% endif %}
 
-    {# This person's position (either as an MP, an MPL or a ward councillor #}
-    {% if not skip_positions %}
-      <ul class="unstyled-list">
-      {% for position in person_data.positions %}
-        {% if position.title.name == 'Ward Councillor' %}
-          <li>Ward Councillor</li>
-        {% elif position.title.name == 'Constituency Contact' %}
-          <li>Constituency Contact</li>
-        {% else %}
-          <li>{{ position.title.name }} of the {{ position.organisation.name }}</li>
-        {% endif %}
-      {% endfor %}
-      </ul>
-    {% endif %}
+    <ul class="constituency-office-mp-details">
 
-    {% if person_data.email %}
-      <p>Email: {{ person_data.email }}</p>
-    {% endif %}
-
-    {% if person_data.phone %}
-      <p>Phone: {{ person_data.phone }}</p>
-    {% endif %}
-
-    {# Get the constituency office details, if we have theM: #}
-    {% if person_data.office_place %}
-      {% with office_place=person_data.office_place %}
-        <span class="name">
-          <a href="{{ office_place.organisation.get_absolute_url }}">{{ office_place.organisation.name }}</a>
-          {% if office_place.distance != None %}
-            <span class="distance">{{ office_place.distance.km|floatformat:1 }}km</span>
-          {% endif %}
-        </span>
-        {% for contact in office_place.organisation.contacts.all %}
-          {% if contact.kind.slug == 'voice' %}
-            <p>Phone: {{ contact.value }}</p>
-          {% elif contact.kind.slug = 'email' %}
-            <p>Email: {{ contact.value }}</p>
+      {% if not skip_positions %}
+        {% for position in person_data.positions %}
+          {% if position.title.name == 'Ward Councillor' %}
+            <li class="constituency-office-mp-position">Ward Councillor</li>
+          {% elif position.title.name == 'Constituency Contact' %}
+            <li class="constituency-office-mp-position">Constituency Contact</li>
+          {% else %}
+            <li class="constituency-office-mp-position">{{ position.title.name }} of the {{ position.organisation.name }}</li>
           {% endif %}
         {% endfor %}
-        <script>
-          add_marker_to_map({
-            lat: {{ office_place.location.y }},
-            lng: {{ office_place.location.x }},
-            name: "{{ person_data.office_place.organisation.name }}",
-            {% if person_data.has_party_logo %}
-            marker_icon: "{{ STATIC_URL }}images/party-map-icons/{{ person_data.party.slug }}.png",
-            {% endif %}
-            url: "#{{ person_data.element_id }}"
-          });
-        </script>
-      {% endwith %}
-    {% endif %}
+      {% endif %}
 
-    <ul>
-      {% for address in person_data.postal_addresses %}
-        <li class="constituency-office-address">{{ address }}</li>
-      {% endfor %}
+      {% if person_data.party %}
+        <li class="constituency-office-mp-party">
+          <a href="{{ person_data.party.get_absolute_url }}">{{ person_data.party.name }}</a>
+        </li>
+      {% endif %}
+
+      {% if person_data.office_place %}
+        {% for postal_address in person_data.office_place.postal_addresses %}
+          <li class="constituency-office-mp-address">
+            <a href="{{ person_data.office_place.organisation.get_absolute_url }}">{{ postal_address.value }}</a>
+            <span class="distance">({{ person_data.office_place.distance.km|floatformat:1 }}km away)</span>
+          </li>
+        {% endfor %}
+      {% else %}
+        {% for address in person_data.postal_addresses %}
+          <li class="constituency-office-mp-address">
+            <a href="{{ person_data.person.get_absolute_url }}">{{ address }}</a>
+          </li>
+        {% endfor %}
+      {% endif %}
+
+      {% if person_data.email %}
+        <li class="constituency-office-mp-email"><a href="mailto:{{ person_data.email }}">{{ person_data.email }}</a></li>
+      {% endif %}
+
+      {% if person_data.phone %}
+        <li class="constituency-office-mp-phone"><a href="{{ person_data.phone }}">{{ person_data.phone }}</a></li>
+      {% endif %}
+
     </ul>
 
-    <br clear="both" />
+    {% if person_data.office_place %}
+    <script>
+      add_marker_to_map({
+        lat: {{ person_data.office_place.location.y }},
+        lng: {{ person_data.office_place.location.x }},
+        name: "{{ person_data.office_place.organisation.name }}",
+      {% if person_data.has_party_logo %}
+        marker_icon: "{{ STATIC_URL }}images/party-map-icons/{{ person_data.party.slug }}.png",
+      {% endif %}
+        url: "#{{ person_data.element_id }}"
+      });
+    </script>
+    {% endif %}
 
 </li>

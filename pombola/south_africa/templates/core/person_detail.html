@@ -87,7 +87,7 @@
     </div>
 
   {% with past_positions=person.position_set.all.political.currently_inactive current_positions=person.position_set.all.political.currently_active %}
-    <div class="tabs ui-tabs ui-widget">
+    <div class="tabs ui-tabs ui-widget person-tabs">
       <ul class="tab-links ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
         {% if hansard.count or question.count or committee.count %}
           <li class="ui-state-default">
