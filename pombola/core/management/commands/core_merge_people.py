@@ -65,7 +65,7 @@ class Command(PersonSpeakerMappingsMixin, BaseCommand):
                     help="Suppress progress output",
                     default=False, action='store_true'))
 
-    @transaction.commit_on_success
+    @transaction.atomic
     def handle(self, *args, **options):
         if not options['keep_person']:
             raise CommandError("You must specify --keep-person")

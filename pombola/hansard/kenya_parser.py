@@ -527,7 +527,7 @@ class KenyaParser():
         )
         sitting.save()
 
-        with transaction.commit_on_success():
+        with transaction.atomic():
             counter = 0
             for line in data['transcript']:
 

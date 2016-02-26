@@ -49,7 +49,7 @@ def get_mapit_type_for_pombola_placekind(placekind):
     else:
         raise Exception, "There were multiple MapIt types (%s) corresponding to the PlaceKind %s" % (", ".join(types_in_mapit), placekind)
 
-@transaction.commit_on_success
+@transaction.atomic
 def recalculate_parents(child_placekind, child_type, parent_placekind, parent_type):
 
     # Set the parent_place_id column to NULL for every Place with the
