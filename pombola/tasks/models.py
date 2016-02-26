@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db.models import signals
 from django.dispatch import receiver
 
@@ -27,7 +27,7 @@ class Task(models.Model):
     # link to other objects using the ContentType system
     content_type   = models.ForeignKey(ContentType)
     object_id      = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     category      = models.ForeignKey(TaskCategory)
 

@@ -11,7 +11,7 @@ import models
 
 # from django.contrib.gis import db
 # from django.core.urlresolvers import reverse
-# from django.contrib.contenttypes.generic import GenericTabularInline
+# from django.contrib.contenttypes.admin import GenericTabularInline
 # from django import forms
 # 
 # def create_admin_link_for(obj, link_text):

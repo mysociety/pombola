@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 from sorl.thumbnail import ImageField
 
@@ -10,7 +10,7 @@ class Image(models.Model):
     # link to other objects using the ContentType system
     content_type   = models.ForeignKey(ContentType)
     object_id      = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     # store the actual image
     image = ImageField(upload_to="images", max_length=512)

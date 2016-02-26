@@ -16,7 +16,9 @@ from django.db.models.signals import post_init
 
 from django.utils.dateformat import DateFormat
 
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import (
+    GenericRelation, GenericForeignKey
+)
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 
@@ -161,7 +163,7 @@ class Contact(ModelBase):
     # link to other objects using the ContentType system
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     objects = ManagerBase()
 
@@ -185,7 +187,7 @@ class InformationSource(ModelBase):
     # link to other objects using the ContentType system
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     objects = ManagerBase()
 
@@ -310,8 +312,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         default=False,
         help_text="hide this person's pages from normal users")
 
-    contacts = generic.GenericRelation(Contact)
-    images = generic.GenericRelation(Image)
+    contacts = GenericRelation(Contact)
+    images = GenericRelation(Image)
     objects = PersonManager()
 
     can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
@@ -551,7 +553,7 @@ class Identifier(ModelBase):
         ContentType, related_name='pombola_identifier_set'
     )
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     objects = ManagerBase()
 
@@ -614,9 +616,9 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     ended = ApproximateDateField(blank=True, help_text=date_help_text)
 
     objects = OrganisationQuerySet.as_manager()
-    contacts = generic.GenericRelation(Contact)
-    images = generic.GenericRelation(Image)
-    informationsources = generic.GenericRelation(InformationSource)
+    contacts = GenericRelation(Contact)
+    images = GenericRelation(Image)
+    informationsources = GenericRelation(InformationSource)
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.kind)
