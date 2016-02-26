@@ -2060,7 +2060,9 @@ $contact_icon_path: '../images/person-contact-icons';
             }
         }
     }
+}
 
+.person-tabs {
     .ui-tabs-panel {
         ul, p {
             font-size: 0.875em;
@@ -2959,5 +2961,127 @@ p.attendance__disclaimer {
 
     @media only all and (min-width: 640px) {
         font-size: 1.6em;
+    }
+}
+
+.rep-locator-reps {
+    @include clearfix();
+
+    margin: 0;
+    padding: 0;
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+
+        &:hover, &:focus {
+            .constituency-office-mp-name {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // The individual person list items
+    & > li {
+        position: relative;
+        padding-left: 80px; // 58px image, plus some gutter
+        margin-bottom: 2em;
+
+        @media (min-width: 640px) {
+            float: left;
+            width: 47%;
+            margin-bottom: 3em;
+
+            // Can't believe we don't define this for all elements in one go,
+            // but too scared to do it now, in case it breaks lots of stuff.
+            box-sizing: border-box;
+
+            &:nth-child(2n) {
+                float: right;
+            }
+
+            &:nth-child(2n+1) {
+                clear: both;
+            }
+        }
+    }
+
+    .constituency-office-mp-photo {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .constituency-office-mp-logo {
+        position: absolute;
+        top: 42px;
+        left: 32px;
+    }
+
+    .constituency-office-mp-name {
+        color: $colour_green;
+        font-family: $font_family_lato;
+        font-weight: bold;
+        font-size: 1.7em;
+        line-height: 1em;
+        margin-bottom: 0.4em;
+    }
+
+    .constituency-office-mp-details {
+        margin: 0;
+        padding: 0;
+
+        li {
+            position: relative;
+            margin-bottom: 0.3em;
+            padding-left: 26px;
+
+            &:before {
+                position: absolute;
+                top: 0.15em; // compensate for line height of text alongside
+                left: 0;
+                content: "";
+                display: block;
+                width: 16px;
+                height: 16px;
+                background: transparent url('/static/images/rep-locator-contact-icons.png') 0 0 no-repeat;
+
+                @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+                    background-image: url('/static/images/rep-locator-contact-icons@2.png');
+                    background-size: (16px*4) 16px;
+                }
+            }
+        }
+
+        .constituency-office-mp-party:before {
+            background-position: 0 0;
+        }
+
+        .constituency-office-mp-address:before {
+            background-position: -16px 0;
+        }
+
+        .constituency-office-mp-email:before {
+            background-position: -32px 0;
+        }
+
+        .constituency-office-mp-phone:before {
+            background-position: -48px 0;
+        }
+
+        a {
+            &:hover, &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .constituency-office-mp-address {
+        .distance {
+            color: $colour_middling_grey;
+        }
     }
 }
