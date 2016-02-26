@@ -3,44 +3,67 @@ import os
 import sys
 import yaml
 
-from django.core.management import LaxOptionParser, BaseCommand
+from django.core.management.base import (
+    BaseCommand, CommandParser, CommandError
+)
 
-# Make the default settings file one that corresponds to the country
-# specified in general.yml
+# This manage.py file is a bit more complex than you might expect, for
+# two reasons:
+#
+#  1. There are different settings modules for each country, but it's
+#     a pain to have to specify the one to use all the time.  We'd
+#     like to use the settings module that corresponds to the
+#     COUNTRY_APP in conf/general.yml by default.
+#
+#  2.  It's nice if "./manage.py test" works out-of-the-box, so work
+#      out if "test" is the subcommand and the user hasn't specified a
+#      settings module manually with --settings.  If so, use the
+#      settings module for non-country-specific tests that we know has
+#      the right INSTALLED_APPS and tests are expected to pass
+#      with. This won't help confusion if someone uses
+#      "django-admin.py test" instead, but it's some help...  (Note
+#      that if someone's set the DJANGO_SETTINGS_MODULE environment
+#      variable, this default won't be used either.)
 
-with open(os.path.join(os.path.dirname(__file__),
-                       'conf',
-                       'general.yml')) as f:
-    config = yaml.load(f)
+def get_country():
+    with open(os.path.join(os.path.dirname(__file__),
+                           'conf',
+                           'general.yml')) as f:
+        config = yaml.load(f)
+    return config.get('COUNTRY_APP', 'no_country')
 
-country = config.get('COUNTRY_APP', 'no_country')
+def run_default_tests(command_line_args):
+    # This reproduces the logic used by execute_from_command_line to
+    # extra whether the subcommand is "test" and whether a settings
+    # module has been manually specified.
+    try:
+        subcommand = command_line_args[1]
+    except IndexError:
+        return False
 
-# However, it's nice if "./manage.py test" works out-of-the-box, so
-# work out if "test" is the subcommand and the user hasn't specified a
-# settings module with --settings.  If so, use the settings module for
-# non-country-specific tests that we know has the right INSTALLED_APPS
-# and tests are expected to pass with. This won't help confusion if
-# someone uses "django-admin.py test" instead, but it's some help...
-# (Note that if someone's set the DJANGO_SETTINGS_MODULE environment
-# variable, this default won't be used either.)
+    parser = CommandParser(None, usage="%(prog)s subcommand [options] [args]", add_help=False)
+    parser.add_argument('--settings')
+    parser.add_argument('--pythonpath')
+    parser.add_argument('args', nargs='*')
+    try:
+        options, args = parser.parse_known_args(command_line_args[2:])
+    except CommandError:
+        # Ignore any errors, we just wanted to extract any settings option
+        # that might have been specified.
+        options = {'settings': None}
 
-parser = LaxOptionParser(option_list=BaseCommand.option_list)
-try:
-    options, args = parser.parse_args(sys.argv)
-except:
-    # Ignore any errors at this point; the arguments will be parsed
-    # again shortly anyway.
-    args = None
+    return subcommand == 'test' and not options.settings
 
-run_default_tests = (len(args) >= 2 and args[1] == 'test' and not options.settings)
 
 if __name__ == "__main__":
 
-    if run_default_tests:
+    if run_default_tests(sys.argv):
         settings_module = 'pombola.settings.tests'
         print "Warning: we recommend running tests with ./run-tests instead"
     else:
-        settings_module = "pombola.settings." + country
+        # Make the default settings file one that corresponds to the
+        # country specified in general.yml
+        settings_module = "pombola.settings." + get_country()
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
 
