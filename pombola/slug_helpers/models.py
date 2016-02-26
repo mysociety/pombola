@@ -2,7 +2,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models.loading import get_model
+from django.apps import apps
 
 # This is based on
 # https://github.com/dracos/Theatricalia/blob/master/merged/models.py
@@ -45,7 +45,7 @@ def validate_slug_not_redirecting(app_label, model_name, slug):
         validators=[partial(validate_slug_not_redirecting, 'core', 'Person')]
     """
 
-    model = get_model(app_label, model_name)
+    model = apps.get_model(app_label, model_name)
     matching_redirects = SlugRedirect.objects.filter(
         content_type=ContentType.objects.get_for_model(model),
         old_object_slug=slug
