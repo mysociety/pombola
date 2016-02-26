@@ -148,7 +148,11 @@ urlpatterns += patterns('',
 urlpatterns += patterns('',
 
     # Overview pages
-    url(r'^election/$', RedirectView.as_view(pattern_name='sa-election-overview-year'),
+    url(r'^election/$',
+        RedirectView.as_view(
+            pattern_name='sa-election-overview-year',
+            permanent=False
+        ),
         { 'election_year': 2014 }, name='sa-election-overview'
     ),
     url(

@@ -841,6 +841,8 @@ class SANewsletterPage(InfoPageView):
 
 class SASpeakerRedirectView(RedirectView):
 
+    permanent = False
+
     # see also SAPersonDetail for mapping in opposite direction
     def get_redirect_url(self, *args, **kwargs):
         try:
@@ -1108,6 +1110,8 @@ class OldSpeechRedirect(RedirectView):
 
     """Redirects from an old speech URL to the current one"""
 
+    permanent = True
+
     def get_redirect_url(self, *args, **kwargs):
         try:
             speech_id = int(kwargs['pk'])
@@ -1122,6 +1126,8 @@ class OldSpeechRedirect(RedirectView):
 class OldSectionRedirect(RedirectView):
 
     """Redirects from an old section URL to the current one"""
+
+    permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
         try:
