@@ -13,7 +13,7 @@ psycopg2==2.5.4
 pymongo==3.0.2
 
 ### Django related
-Django==1.7.11
+Django==1.8.9
 django-pagination==1.0.7
 django-bcrypt==0.9.2
 django-pipeline==1.3.27
@@ -46,16 +46,16 @@ django-markitup==2.3.0
 
 requests==2.6.0
 elasticsearch==0.4.5
-django-haystack==2.3.1
+django-haystack==2.4.1
 # Required (but not a declared requirement) of elasticsearch
 urllib3==1.14
 
 # Testing helpers
-django-nose==1.3
+django-nose==1.4.3
 yanc==0.2.4
 httplib2==0.9
 WebTest==2.0.15
-django-webtest==1.7.7
+django-webtest==1.7.8
 
 # For Ghana:
 python-openid
@@ -79,29 +79,29 @@ python-memcached==1.53
 
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
 # Note, if the subsequent -e are ever removed, please remove manually from virtualenv/src !
--e git+git://github.com/mysociety/sayit.git@b9b5d803178303b2aa3feadcc912766cf4a25673#egg=django-sayit
+django-sayit==1.4
 mysociety-django-sluggable==0.2.7
--e git+git://github.com/mysociety/za-hansard.git@a1ffedc30d57cf90e3f17fb39b3964e31a3099d7#egg=za-hansard
--e git+git://github.com/mysociety/popolo-name-resolver@f20646ae0d8ccbc719e19c9ed070827be0efb1b1#egg=popolo-name-resolver
+-e git+git://github.com/mysociety/za-hansard.git@3537cff5c0e943414f525d77749bd032ef2c6b18#egg=za-hansard
+-e git+git://github.com/mysociety/popolo-name-resolver@a6fca27e080acdb475e6fd2e1382592b0c0a0fc5#egg=popolo-name-resolver
 
-mysociety-django-popolo==0.0.2
+mysociety-django-popolo==0.0.5
 
 python-dateutil==2.3
 
 # Packages that are helpful for development:
 coverage==3.7.1
-django-debug-toolbar==1.2.2
+django-debug-toolbar==1.4
 django-extensions==1.6.1
 
 ## votematch
-django-model-utils==2.2
+django-model-utils==2.3.1
 
 parsedatetime==1.4
 
 pygeocoder==1.2.5
 
 # Dependencies of our dependencies
-Django-Select2==4.2.2
+Django-Select2==4.3.2
 Shapely==1.5
 WebOb==1.4
 amqp==1.4.6
@@ -115,7 +115,7 @@ cssselect==0.9.1
 django-bleach==0.3
 django-celery==3.1.16
 django-qmethod==0.0.3
-django-subdomain-instances==0.9
+django-subdomain-instances==1.0
 django-tastypie==0.12.1
 html5lib==0.999
 kombu==3.0.24
