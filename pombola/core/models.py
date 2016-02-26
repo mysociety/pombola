@@ -36,12 +36,16 @@ from mapit import models as mapit_models
 
 from pombola.country import significant_positions_filter
 
-# tell South how to handle the custom fields
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^django_date_extensions\.fields\.ApproximateDateField"])
-add_introspection_rules([], ["^django.contrib\.gis\.db\.models\.fields\.PointField"])
-
 date_help_text = "Format: '2011-12-31', '31 Jan 2011', 'Jan 2011' or '2011' or 'future'"
+
+def validate_person_slug(slug):
+    return validate_slug_not_redirecting('core', 'Person', slug)
+
+def validate_organisation_slug(slug):
+    return validate_slug_not_redirecting('core', 'Organisation', slug)
+
+def validate_place_slug(slug):
+    return validate_slug_not_redirecting('core', 'Place', slug)
 
 
 
@@ -50,11 +54,11 @@ class ModelBase(models.Model):
     updated = models.DateTimeField( auto_now=True )
 
     def css_class(self):
-        return self._meta.module_name
+        return self._meta.model_name
 
     def get_admin_url(self):
         url = reverse(
-            'admin:%s_%s_change' % ( self._meta.app_label, self._meta.module_name),
+            'admin:%s_%s_change' % ( self._meta.app_label, self._meta.model_name),
             args=[self.id]
         )
         return url
@@ -198,7 +202,7 @@ class PersonQuerySet(models.query.GeoQuerySet):
         return self.filter(position__in=Position.objects.all().current_politician_positions(when))
 
 class PersonManager(ManagerBase):
-    def get_query_set(self):
+    def get_queryset(self):
         return PersonQuerySet(self.model)
 
     def loose_match_name(self, name):
@@ -289,7 +293,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         max_length=200,
         unique=True,
         help_text="auto-created from first name and last name",
-        validators=[partial(validate_slug_not_redirecting, 'core', 'Person')],
+        validators=[validate_person_slug],
     )
     gender = models.CharField(max_length=20, blank=True, help_text="this is typically, but not restricted to, 'male' or 'female'")
     date_of_birth = ApproximateDateField(blank=True, help_text=date_help_text)
@@ -350,7 +354,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         result.add(self.legal_name)
         return result
 
-    @transaction.commit_on_success
+    @transaction.atomic
     def add_alternative_name(self, alternative_name, name_to_use=False, note=''):
         if name_to_use:
             # Make sure that no other alternative names are set as
@@ -596,25 +600,20 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
             )
 
 
-class OrganisationManager(ManagerBase):
-    def get_query_set(self):
-        return OrganisationQuerySet(self.model)
-
-
 class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(
         max_length=200,
         unique=True,
         help_text="created from name",
-        validators=[partial(validate_slug_not_redirecting, 'core', 'Organisation')],
+        validators=[validate_organisation_slug],
     )
     summary = MarkupField(blank=True, default='')
     kind = models.ForeignKey('OrganisationKind')
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended = ApproximateDateField(blank=True, help_text=date_help_text)
 
-    objects = OrganisationManager()
+    objects = OrganisationQuerySet.as_manager()
     contacts = generic.GenericRelation(Contact)
     images = generic.GenericRelation(Image)
     informationsources = generic.GenericRelation(InformationSource)
@@ -691,9 +690,6 @@ class PlaceQuerySet(models.query.GeoQuerySet):
         """This is a helper for use in the place_places.html template"""
         return self.order_by('-kind__name', 'name')
 
-class PlaceManager(ManagerBase):
-    def get_query_set(self):
-        return PlaceQuerySet(self.model)
 
 class Place(ModelBase, ScorecardMixin, BudgetsMixin):
     name = models.CharField(max_length=200)
@@ -701,7 +697,7 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
         max_length=200,
         unique=True,
         help_text="created from name",
-        validators=[partial(validate_slug_not_redirecting, 'core', 'Place')],
+        validators=[validate_place_slug],
     )
     kind = models.ForeignKey('PlaceKind')
     summary = MarkupField(blank=True, default='')
@@ -713,7 +709,7 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
 
-    objects = PlaceManager()
+    objects = PlaceQuerySet.as_manager()
     is_overall_scorecard_score_applicable = False
 
     @property
@@ -1128,11 +1124,6 @@ class PositionQuerySet(models.query.GeoQuerySet):
         return result
 
 
-class PositionManager(ManagerBase):
-    def get_query_set(self):
-        return PositionQuerySet(self.model)
-
-
 class Position(ModelBase, IdentifierMixin):
     category_choices = (
         ('political', 'Political'),
@@ -1167,7 +1158,7 @@ class Position(ModelBase, IdentifierMixin):
     sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
     sorting_end_date_high = models.CharField(editable=True, default='', max_length=10)
 
-    objects = PositionManager()
+    objects = PositionQuerySet.as_manager()
 
     def clean(self):
         if not (self.organisation or self.title or self.place):

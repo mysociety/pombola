@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import sorl.thumbnail.fields
 
 
 class Migration(migrations.Migration):
@@ -13,17 +12,21 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Image',
+            name='SlugRedirect',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('object_id', models.PositiveIntegerField()),
-                ('image', sorl.thumbnail.fields.ImageField(upload_to=b'images')),
-                ('source', models.CharField(max_length=400)),
-                ('is_primary', models.BooleanField(default=False)),
+                ('old_object_slug', models.CharField(max_length=200)),
+                ('new_object_id', models.PositiveIntegerField()),
+                ('created', models.DateTimeField(auto_now_add=True)),
+                ('updated', models.DateTimeField(auto_now=True)),
                 ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
             ],
             options={
             },
             bases=(models.Model,),
+        ),
+        migrations.AlterUniqueTogether(
+            name='slugredirect',
+            unique_together=set([('content_type', 'old_object_slug')]),
         ),
     ]

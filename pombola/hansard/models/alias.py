@@ -14,11 +14,6 @@ class AliasQuerySet(models.query.QuerySet):
         return self.filter(person__isnull=True, ignored=False)
 
 
-class AliasManager(models.Manager):
-    def get_query_set(self):
-        return AliasQuerySet(self.model)
-
-
 class Alias(HansardModelBase):
     """
     Model for linking a parliamentary alias to a person
@@ -48,7 +43,7 @@ class Alias(HansardModelBase):
     )
     ignored = models.BooleanField( default=False )
     
-    objects = AliasManager()
+    objects = AliasQuerySet.as_manager()
 
     def __unicode__(self):
         string = self.alias

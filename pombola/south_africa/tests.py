@@ -13,10 +13,7 @@ from django.test import TestCase
 from django.test.client import Client
 from django.test.utils import override_settings
 
-# NOTE - from Django 1.7 this should be replaced with
-# django.core.cache.caches
-# https://docs.djangoproject.com/en/1.8/topics/cache/#django.core.cache.caches
-from django.core.cache import get_cache
+from django.core.cache import caches
 
 from django.core.urlresolvers import reverse, resolve
 from django.core.management import call_command
@@ -308,7 +305,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
         # Put blank attendance data in the cache to stop us fetching from
         # the live PMG API
-        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache = caches['pmg_api']
         pmg_api_cache.set(
             "http://api.pmg.org.za/member/moomin-finn/attendance/",
             [],
@@ -492,7 +489,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
         with open(test_data_path) as f:
             raw_data = json.load(f)
 
-        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache = caches['pmg_api']
         pmg_api_cache.set(
             "http://api.pmg.org.za/member/moomin-finn/attendance/",
             raw_data['results'],
@@ -761,7 +758,7 @@ class SAPersonProfileSubPageTest(WebTest):
         # Make some identifiers for these people so we avoid
         # looking them up with PMG, and put blank attendance data
         # in the cache to stop us fetching from the live PMG API.
-        pmg_api_cache = get_cache('pmg_api')
+        pmg_api_cache = caches['pmg_api']
 
         for person in (self.deceased, self.former_mp):
             models.Identifier.objects.create(
@@ -1076,8 +1073,7 @@ class SACommitteeIndexViewTest(WebTest):
         self.fish_section_heading = u"Oh fishy fishy fishy fishy fishy fish"
         self.forest_section_heading = u"Forests are totes awesome"
         self.pmq_section_heading = "Questions on 20 June 2014"
-        # Make sure that the default SayIt instance exists, since when
-        # testing it won't be created because of SOUTH_TESTS_MIGRATE = False
+        # Make sure that the default SayIt instance exists
         default_instance, _ = Instance.objects.get_or_create(label='default')
         create_sections([
             {

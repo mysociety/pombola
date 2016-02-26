@@ -3,6 +3,7 @@ import re
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
+from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = []
@@ -18,14 +19,6 @@ urlpatterns = []
 if settings.COUNTRY_APP:
     urlpatterns += patterns('',
         (r'^', include('pombola.' + settings.COUNTRY_APP + '.urls')),)
-
-# Needs to occur _before_ admin.autodiscover()
-import autocomplete_light
-autocomplete_light.autodiscover()
-
-# Admin section
-from django.contrib import admin
-admin.autodiscover()
 
 from ajax_select import urls as ajax_select_urls
 urlpatterns += patterns('',

@@ -115,17 +115,17 @@ class Command(BaseCommand):
         # upon investigation, these appear to be real duplicates.
         # To work around this problem for now, we only consider speeches
         # from the sitting in each of these groups with the lowest id.
-        cursor = connection.cursor()
-        rows = cursor.execute(
-            '''SELECT min(id)
-               FROM hansard_sitting
-               WHERE start_date BETWEEN %s AND %s
-               GROUP BY venue_id, start_date, start_time, end_date, end_time;
-            ''',
-            (date_from, date_to)
-            )
+        with connection.cursor() as cursor:
+            cursor.execute(
+                '''SELECT min(id)
+                   FROM hansard_sitting
+                   WHERE start_date BETWEEN %s AND %s
+                   GROUP BY venue_id, start_date, start_time, end_date, end_time;
+                ''',
+                (date_from, date_to)
+                )
 
-        sitting_ids = [x[0] for x in cursor.fetchall()]
+            sitting_ids = [x[0] for x in cursor.fetchall()]
 
         with open('all-speakers.csv', 'w') as fp:
             writer = csv.writer(fp)

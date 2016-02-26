@@ -32,20 +32,12 @@ class SourceQuerySet(models.query.QuerySet):
         return self.filter( last_processing_attempt=None )
 
 
-class SourceManager(models.Manager):
-    def get_query_set(self):
-        return SourceQuerySet(self.model)
-
-
 class Source(HansardModelBase):
     """
     Sources of the hansard transcripts
     
     For example a PDF transcript.
     """
-
-    class Meta:
-        unique_together = ('name', 'list_page')
 
     name           = models.CharField(max_length=200)
     date           = models.DateField()
@@ -68,11 +60,13 @@ class Source(HansardModelBase):
     last_processing_attempt = models.DateTimeField(blank=True, null=True)
     last_processing_success = models.DateTimeField(blank=True, null=True)
 
-    objects = SourceManager()
-
     class Meta:
+        unique_together = ('name', 'list_page')
         app_label = 'hansard'
         ordering = [ '-date', 'name' ]
+
+    objects = SourceQuerySet.as_manager()
+
 
     def __unicode__(self):
         return self.name

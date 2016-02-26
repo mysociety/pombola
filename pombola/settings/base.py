@@ -154,7 +154,6 @@ if DEBUG:
 else:
     CACHE_MIDDLEWARE_SECONDS = 60 * 20 # twenty minutes
 CACHE_MIDDLEWARE_KEY_PREFIX = config.get('POMBOLA_DB_NAME')
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 # Always use the TemporaryFileUploadHandler as it allows us to access the
 # uploaded file on disk more easily. Currently used by the CSV upload in
@@ -318,11 +317,6 @@ IEBC_API_SECRET = config.get('IEBC_API_SECRET')
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions':['tables']})
 MARKITUP_SET = 'markitup/sets/markdown'
 
-
-# There are some models that are just for testing, so they are not included in
-# the South migrations.
-SOUTH_TESTS_MIGRATE = False
-
 # Use nose as the test runner
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['--with-doctest', '--with-yanc']
@@ -395,12 +389,11 @@ INSTALLED_APPS = (
     'django.contrib.gis',
 
     'pombola.admin_additions',
+    'autocomplete_light',
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'south',
     'ajax_select',
-    'autocomplete_light',
     'markitup',
 
     'pipeline',

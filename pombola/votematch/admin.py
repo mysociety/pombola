@@ -3,27 +3,26 @@ import models
 
 from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
+@admin.register(models.Quiz)
 class QuizAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
 
+@admin.register(models.Statement)
 class StatementAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(models.Party)
 class PartyAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(models.Stance)
 class StanceAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(models.Submission)
 class SubmissionAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(models.Answer)
 class AnswerAdmin(admin.ModelAdmin):
     pass
-
-admin.site.register(models.Quiz, QuizAdmin)
-admin.site.register(models.Statement, StatementAdmin)
-admin.site.register(models.Party, PartyAdmin)
-admin.site.register(models.Stance, StanceAdmin)
-admin.site.register(models.Submission, SubmissionAdmin)
-admin.site.register(models.Answer, AnswerAdmin)

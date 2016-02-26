@@ -18,22 +18,26 @@ import models
 #     return u'<a href="%s">%s</a>' % ( obj.get_admin_url(), link_text )
 
 
+@admin.register(models.Source)
 class SourceAdmin(admin.ModelAdmin):
     list_display  = [ 'name', 'date', 'last_processing_success', 'last_processing_attempt' ]
     list_filter = ('date', 'last_processing_success')
     date_hierarchy = 'date'
     
 
+@admin.register(models.Venue)
 class VenueAdmin(admin.ModelAdmin):
     list_display  = [ 'slug', 'name' ]
 
 
+@admin.register(models.Sitting)
 class SittingAdmin(admin.ModelAdmin):
     list_display  = [ 'start_date', 'start_time', 'end_date', 'end_time', 'source' ]
     list_filter = ['start_date']
     date_hierarchy = 'start_date'
     
 
+@admin.register(models.Entry)
 class EntryAdmin(admin.ModelAdmin):
     list_display  = [ 'sitting', 'type', 'speaker_name', 'speaker',  '__unicode__' ]
     
@@ -56,6 +60,7 @@ class EntryAdmin(admin.ModelAdmin):
 #             return queryset.unassigned()
 
 
+@admin.register(models.Alias)
 class AliasAdmin(admin.ModelAdmin):
     search_fields = [ 'alias', 'person__legal_name' ]
     list_filter  = [
@@ -111,9 +116,3 @@ class AliasAdmin(admin.ModelAdmin):
                 {},
                 context_instance=RequestContext(request)
             )
-
-admin.site.register( models.Source,  SourceAdmin )
-admin.site.register( models.Venue,   VenueAdmin )
-admin.site.register( models.Sitting, SittingAdmin )
-admin.site.register( models.Entry,   EntryAdmin )
-admin.site.register( models.Alias,   AliasAdmin )

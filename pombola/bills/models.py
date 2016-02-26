@@ -1,7 +1,5 @@
 from django.db import models
 
-from model_utils.managers import PassThroughManager
-
 
 class BillQuerySet(models.query.QuerySet):
     def recent(self):
@@ -23,7 +21,7 @@ class Bill(models.Model):
     parliamentary_session = models.ForeignKey('core.ParliamentarySession')
     sponsor = models.ForeignKey('core.Person', related_name="bills_sponsored")
 
-    objects = PassThroughManager.for_queryset_class(BillQuerySet)()
+    objects = BillQuerySet.as_manager()
 
     def __unicode__(self):
         return self.title

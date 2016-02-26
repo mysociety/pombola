@@ -13,9 +13,8 @@ psycopg2==2.5.4
 pymongo==3.0.2
 
 ### Django related
-Django==1.6.5
+Django==1.7.11
 django-pagination==1.0.7
-South==1.0.1
 django-bcrypt==0.9.2
 django-pipeline==1.3.27
 django-pipeline-compass-rubygem==0.1.8
@@ -29,8 +28,8 @@ django-registration-defaults==0.3
 ### Pombola dependencies
 sorl-thumbnail==12.3
 django_date_extensions==0.1dev
-django-ajax-selects==1.3.5
-django-autocomplete-light==2.0.2
+django-ajax-selects==1.4.2
+django-autocomplete-light==2.3.2
 
 Markdown==2.5.1
 
@@ -40,11 +39,13 @@ Markdown==2.5.1
 # that the behaviour is not altered. If you need to reintroduce jQuery manually
 # into the admin then commit c5fdf97df10782c098592e89503fce461840dcda may be
 # useful as a reference.
-django-markitup==2.2.1
+django-markitup==2.3.0
 
 requests==2.6.0
 elasticsearch==0.4.5
 django-haystack==2.3.1
+# Required (but not a declared requirement) of elasticsearch
+urllib3==1.14
 
 # Testing helpers
 django-nose==1.3
@@ -76,9 +77,9 @@ django-mapit==1.3.1.post1
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
 # Note, if the subsequent -e are ever removed, please remove manually from virtualenv/src !
 -e git+git://github.com/mysociety/sayit.git@b9b5d803178303b2aa3feadcc912766cf4a25673#egg=django-sayit
--e git+git://github.com/mysociety/popit-django@a11ef97919f2ae35ef1ef1e2a3f0553ad1ba1e6d#egg=popit-django
--e git+git://github.com/mysociety/za-hansard.git@525407cb28c08d6aafe696211e0e27536229ad0b#egg=za-hansard
--e git+git://github.com/mysociety/popolo-name-resolver@d733d98e0e950cbc8e6f9fb32d3d13e0f7a7d6c3#egg=popolo-name-resolver
+mysociety-django-sluggable==0.2.7
+-e git+git://github.com/mysociety/za-hansard.git@a1ffedc30d57cf90e3f17fb39b3964e31a3099d7#egg=za-hansard
+-e git+git://github.com/mysociety/popolo-name-resolver@f20646ae0d8ccbc719e19c9ed070827be0efb1b1#egg=popolo-name-resolver
 
 mysociety-django-popolo==0.0.2
 

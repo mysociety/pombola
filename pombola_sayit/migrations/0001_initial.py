@@ -2,23 +2,22 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import datetime
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('core', '0002_add_related_name'),
+        ('speeches', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='File',
+            name='PombolaSayItJoin',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('created', models.DateTimeField(default=datetime.datetime.now, auto_now_add=True)),
-                ('updated', models.DateTimeField(default=datetime.datetime.now, auto_now=True)),
-                ('slug', models.SlugField(unique=True)),
-                ('file', models.FileField(upload_to=b'file_archive')),
+                ('pombola_person', models.OneToOneField(related_name='sayit_link', to='core.Person')),
+                ('sayit_speaker', models.OneToOneField(related_name='pombola_link', to='speeches.Speaker')),
             ],
             options={
             },

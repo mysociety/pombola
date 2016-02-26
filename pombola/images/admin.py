@@ -7,10 +7,7 @@ from sorl.thumbnail.admin import AdminImageMixin
 from pombola.images import models
 
 
-
-
-
-
+@admin.register(models.Image)
 class ImageAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = [ 'thumbnail', 'content_object', 'is_primary', 'source',  ]
     search_fields = ['person__legal_name', 'id', 'source']
@@ -29,4 +26,3 @@ class ImageAdminInline(AdminImageMixin, GenericTabularInline):
     extra        = 0
     can_delete   = True
 
-admin.site.register( models.Image, ImageAdmin )

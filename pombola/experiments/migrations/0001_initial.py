@@ -1,63 +1,47 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Experiment'
-        db.create_table(u'experiments_experiment', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=300)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal(u'experiments', ['Experiment'])
+    dependencies = [
+    ]
 
-        # Adding model 'Event'
-        db.create_table(u'experiments_event', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('experiment', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['experiments.Experiment'])),
-            ('user_key', self.gf('django.db.models.fields.CharField')(max_length=512)),
-            ('variant', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('category', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('action', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('label', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'experiments', ['Event'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'Experiment'
-        db.delete_table(u'experiments_experiment')
-
-        # Deleting model 'Event'
-        db.delete_table(u'experiments_event')
-
-
-    models = {
-        u'experiments.event': {
-            'Meta': {'object_name': 'Event'},
-            'action': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'category': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'experiment': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['experiments.Experiment']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'label': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_key': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
-            'variant': ('django.db.models.fields.CharField', [], {'max_length': '128'})
-        },
-        u'experiments.experiment': {
-            'Meta': {'object_name': 'Experiment'},
-            'description': ('django.db.models.fields.TextField', [], {}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50'})
-        }
-    }
-
-    complete_apps = ['experiments']
+    operations = [
+        migrations.CreateModel(
+            name='Event',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('user_key', models.CharField(help_text=b'An identifier for a user, e.g. based on the session key', max_length=512)),
+                ('variant', models.CharField(help_text=b'This identifies the page variant presented to the user', max_length=128)),
+                ('category', models.CharField(help_text=b'Following GA, "Typically the object that was interacted with (e.g. button)"', max_length=128)),
+                ('action', models.CharField(help_text=b'Following GA, "The type of interaction (e.g. click)"', max_length=128)),
+                ('label', models.CharField(help_text=b'Following GA, "Useful for categorizing events (e.g. nav buttons)"', max_length=128)),
+                ('extra_data', models.TextField(help_text=b'For arbitrary additional data, which should be valid JSON or empty', blank=True)),
+                ('created', models.DateTimeField(auto_now_add=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Experiment',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('slug', models.SlugField(unique=True)),
+                ('name', models.CharField(max_length=300)),
+                ('description', models.TextField(blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='event',
+            name='experiment',
+            field=models.ForeignKey(to='experiments.Experiment'),
+            preserve_default=True,
+        ),
+    ]

@@ -15,7 +15,7 @@ from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
 def create_admin_url_for(obj):
     return reverse(
-        'admin:%s_%s_change' % ( obj._meta.app_label, obj._meta.module_name),
+        'admin:%s_%s_change' % ( obj._meta.app_label, obj._meta.model_name),
         args=[obj.id]
     )
 
@@ -24,6 +24,7 @@ def create_admin_link_for(obj, link_text):
     return u'<a href="%s">%s</a>' % ( url, link_text )
 
 
+@admin.register(models.Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display    = [ 'category', 'show_foreign', 'priority', 'attempt_count', 'defer_until', ]
     list_filter     = [ 'category', ]
@@ -113,9 +114,9 @@ class TaskAdmin(admin.ModelAdmin):
                 {},
                 context_instance=RequestContext(request)
             )
-            
 
 
+@admin.register(models.TaskCategory)
 class TaskCategoryAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     list_display  = [ 'slug', 'priority', ]
 
@@ -125,8 +126,3 @@ class TaskCategoryAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
 #     extra      = 0
 #     can_delete = False
 #     fields     = [ 'category' ]
-
-
-# Add these to the admin
-admin.site.register( models.Task,         TaskAdmin )
-admin.site.register( models.TaskCategory, TaskCategoryAdmin )

@@ -39,7 +39,6 @@ install:
 before_script:
   - createdb -U postgres pombola
   - psql -c 'CREATE EXTENSION postgis;' -U postgres -d pombola
-  - ./manage.py syncdb --noinput
   - ./manage.py migrate --noinput
   - ./manage.py collectstatic --noinput
 
