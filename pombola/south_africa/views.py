@@ -24,6 +24,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView, TemplateView
 from django.shortcuts import get_object_or_404
 from django import forms
+from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
@@ -112,6 +113,7 @@ class SAGeocoderView(GeocoderView):
             redirect_url = reverse('latlon', kwargs={
                 'lat': result['latitude'],
                 'lon': result['longitude']})
+            redirect_url += '?q=' + urlquote(request.GET['q'])
             return redirect(redirect_url)
         else:
             return self.render_to_response(context)
@@ -273,7 +275,9 @@ class LatLonDetailBaseView(BasePlaceDetailView):
                 })
         context['mp_mpl_data'] = mp_mpl_data
 
-        context['form'] = LocationSearchForm()
+        context['form'] = LocationSearchForm(
+            initial={'q': self.request.GET.get('q')}
+        )
         return context
 
 
