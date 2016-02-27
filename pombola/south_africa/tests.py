@@ -1936,7 +1936,7 @@ class SAUrlRoutingTest(TestCase):
 
     def test_person_politicians(self):
         match = resolve('/person/politicians/')
-        self.assertEqual(match.url_name, 'django.views.generic.base.RedirectView')
+        self.assertIn('function RedirectView', unicode(match.func))
         self.assertEqual(
             match.func.func_closure[1].cell_contents,
             {'url': '/position/mp', 'permanent': True},
