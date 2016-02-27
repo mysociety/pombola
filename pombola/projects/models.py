@@ -6,8 +6,8 @@ from pombola.core.models import Place
 
 
 class Project(models.Model):
-    created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)
-    updated = models.DateTimeField(auto_now=True, default=datetime.datetime.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     cdf_index = models.IntegerField(unique=True)
 

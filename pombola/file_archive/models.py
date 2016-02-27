@@ -5,8 +5,8 @@ import datetime
 
 
 class File(models.Model):    
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     slug = models.SlugField( unique=True )
     file = models.FileField( upload_to='file_archive' )

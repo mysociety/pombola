@@ -13,8 +13,8 @@ from markitup.fields import MarkupField
 
 
 class Category(models.Model):
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     name        = models.CharField( max_length=200, unique=True )
     slug        = models.SlugField( unique=True )
@@ -30,8 +30,8 @@ class Category(models.Model):
 
 
 class Entry(models.Model):
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     category = models.ForeignKey(Category)
 

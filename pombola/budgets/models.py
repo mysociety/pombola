@@ -12,8 +12,8 @@ import decimal
 
 
 class BudgetSession(models.Model):
-    created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)
-    updated = models.DateTimeField(auto_now=True, default=datetime.datetime.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     # A name for this budget sessions
     name = models.CharField(
@@ -33,8 +33,8 @@ class BudgetSession(models.Model):
 
 class Budget(models.Model):
 
-    created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)
-    updated = models.DateTimeField(auto_now=True, default=datetime.datetime.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     # link to other objects using the ContentType system
     content_type = models.ForeignKey(ContentType)
