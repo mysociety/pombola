@@ -16,6 +16,7 @@ class UploadForm(forms.ModelForm):
 
     class Meta:
         model = models.UploadModel
+        fields = ['name', 'file']
 
 
 class InfoPageUpload(forms.ModelForm):
@@ -32,4 +33,4 @@ class InfoPageUpload(forms.ModelForm):
 
     class Meta:
         model = models.UploadModel
-
+        fields = ['name', 'file', 'title']
