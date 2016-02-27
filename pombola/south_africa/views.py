@@ -1039,7 +1039,7 @@ class SAQuestionIndex(TemplateView):
             .filter(
                 parent__parent__heading='Questions'
             ) \
-            .select_related('parent__name') \
+            .select_related('parent__heading') \
             .prefetch_related('speech_set') \
             .annotate(
                 earliest_date=Min('speech__start_date'),
@@ -1679,7 +1679,7 @@ class SAMembersInterestsIndex(TemplateView):
         now_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
 
         entries = Entry.objects.select_related(
-            'person__name',
+            'person',
             'category'
         ).all().filter(
             category__id=context['category_id']
