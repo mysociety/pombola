@@ -58,11 +58,8 @@ class GhanaParserTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        super(GhanaParserTest, cls).setUpClass()
         cls.head, cls.entries = parse(open(cls.sample, 'r').read())
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
 
     def test_parse_time_string(self):
         
