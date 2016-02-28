@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% load humanize %}
 {% load hidden %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -78,7 +78,7 @@
 {% block profile_pic %}
   {% if object.mapit_area %}
     <div class="profile-map">
-      {% compressed_js 'google-map' %}
+      {% javascript 'google-map' %}
 
       <div id="map_canvas" width="300" height="300"></div>
 

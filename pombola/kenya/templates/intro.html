@@ -23,10 +23,10 @@
 
   </script>
 
-  {% load compressed %}
-  {% compressed_js 'modernizr_and_loader' %}
+  {% load pipeline %}
+  {% javascript 'modernizr_and_loader' %}
 
-  {% compressed_css 'intro' %}
+  {% stylesheet 'intro' %}
 
 </head>
 <body>

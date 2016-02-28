@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% comment %}
 
@@ -16,7 +16,7 @@
 {% block body_attributes %}class="exp-survey-form"{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'experiments' %} null ]);
+    addExtraJS([ {% javascript 'experiments' %} null ]);
     {% comment %}
       This code sends a 'heartbeat' to the server every 5 seconds
       while the user is on the page using riveted.js.  It looks as

@@ -1,13 +1,13 @@
 {% extends 'south_africa/election_base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block css_headers %}
-    {% compressed_css 'south-africa' %}
-    {% compressed_css 'countdown' %}
+    {% stylesheet 'south-africa' %}
+    {% stylesheet 'countdown' %}
 {% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'election-countdown' %} null ]);
+    addExtraJS([ {% javascript 'election-countdown' %} null ]);
 {% endblock %}
 
 {% block content %}

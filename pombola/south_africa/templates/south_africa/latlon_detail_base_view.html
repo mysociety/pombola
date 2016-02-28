@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block breadcrumbs %}
 {% include 'core/override_breadcrumb.html' with override_path='/places/' %}
@@ -22,7 +22,7 @@
     </p>
   </form>
 
-  {% compressed_js 'google-map' %}
+  {% javascript 'google-map' %}
 
   <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 

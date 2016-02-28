@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load compressed %}
+{% load pipeline %}
 {% load staticfiles %}
 
 {% block title %}Home{% endblock %}
@@ -17,7 +17,7 @@
 {% block extra_js_to_load %}
     addExtraJS(
       [
-        {% compressed_js 'feeds' %}
+        {% javascript 'feeds' %}
         null
       ]
     );

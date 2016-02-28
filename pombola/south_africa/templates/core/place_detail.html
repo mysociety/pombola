@@ -1,8 +1,8 @@
 {% extends 'core/place_base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'hide-reveal' %} null ]);
+    addExtraJS([ {% javascript 'hide-reveal' %} null ]);
 {% endblock %}
 
 {% block subcontent %}

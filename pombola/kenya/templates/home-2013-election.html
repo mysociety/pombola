@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load thumbnail %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block title %}Home{% endblock %}
 
 {% block body_attributes %} class="election-home" {% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'feeds' %} null ]);
+    addExtraJS([ {% javascript 'feeds' %} null ]);
 {% endblock %}
 
 {% block css_headers %}
     {{ block.super }}
 
-    {% compressed_css 'election-2013' %}
+    {% stylesheet 'election-2013' %}
 {% endblock %}
 
 {% block breadcrumbs %}

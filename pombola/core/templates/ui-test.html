@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% load compressed %}
+{% load pipeline %}
 
 {% block title %}Test jQuery UI Elements{% endblock %}
 
 {% block extra_js_to_load %}
-  addExtraJS([ {% compressed_js 'ui-test' %} null ]);
+  addExtraJS([ {% javascript 'ui-test' %} null ]);
 {% endblock %}
 
 {% block content %}

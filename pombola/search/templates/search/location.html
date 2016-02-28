@@ -1,5 +1,5 @@
 {% extends 'search/search_base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block alternative_search %}
   <a href="{% url "core_search" %}">for a person or organisation</a>
@@ -14,7 +14,7 @@
 
 {% block search_results %}
   {% if geocoder_results %}
-    {% compressed_js 'google-map' %}
+    {% javascript 'google-map' %}
 
     <div class="geocoded_results">
 

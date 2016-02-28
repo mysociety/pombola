@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% load compressed %}
+{% load pipeline %}
 {% load i18n %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'hide-reveal' %} null ]);
+    addExtraJS([ {% javascript 'hide-reveal' %} null ]);
 {% endblock %}
 
 {% block title %}Questions{% endblock %}

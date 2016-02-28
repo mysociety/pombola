@@ -2,7 +2,7 @@
 
 {% load thumbnail %}
 {% load pagination_tags %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block title %}
     {% if query %}
@@ -12,9 +12,9 @@
 {% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'hide-reveal' %} null ]);
+    addExtraJS([ {% javascript 'hide-reveal' %} null ]);
   {% if settings.COUNTRY_APP == 'south_africa' %}
-    addExtraJS([ {% compressed_js 'advanced-search' %} null ]);
+    addExtraJS([ {% javascript 'advanced-search' %} null ]);
   {% endif %}
 {% endblock %}
 

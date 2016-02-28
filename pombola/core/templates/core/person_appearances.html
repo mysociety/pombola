@@ -1,5 +1,5 @@
 {% extends 'core/person_base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% comment %}
   The appearances are loaded using js because that was how it was done using
@@ -11,7 +11,7 @@
 {% block title %}{{ object.name }} Appearances{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'load-appearances' %} null ]);
+    addExtraJS([ {% javascript 'load-appearances' %} null ]);
 {% endblock %}
 
 {% block subcontent %}

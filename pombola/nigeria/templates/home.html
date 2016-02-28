@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load compressed %}
+{% load pipeline %}
 {% load staticfiles %}
 
 {% block title %}Home{% endblock %}
@@ -23,8 +23,8 @@
 {% block extra_js_to_load %}
     addExtraJS(
       [
-        {% compressed_js 'feeds' %}
-        {% compressed_js 'responsive-carousel' %}
+        {% javascript 'feeds' %}
+        {% javascript 'responsive-carousel' %}
         null
       ]
     );
