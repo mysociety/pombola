@@ -1,13 +1,14 @@
 import csv
 import os
-import sys
 from optparse import make_option
 
 from pombola.core.models import Position
 from django.core.management.base import NoArgsCommand
 
 
-data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
+data_directory = os.path.join(
+    os.path.dirname(__file__), '..', '..', '2013-election-data'
+)
 
 class Command(NoArgsCommand):
     help = 'Generate a CSV file with all candiates for generating Google AdWords'

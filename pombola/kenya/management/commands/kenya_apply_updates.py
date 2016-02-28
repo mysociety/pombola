@@ -1,6 +1,5 @@
 import csv
 import os
-import sys
 from optparse import make_option
 
 from django.core.management.base import NoArgsCommand
@@ -9,8 +8,9 @@ from pombola.core.models import Person, Position
 
 from iebc_api import maybe_save, yesterday_approximate_date
 
-
-data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
+data_directory = os.path.join(
+    os.path.dirname(__file__), '..', '..', '2013-election-data'
+)
 
 headings = ['Place Name',
             'Place Type',

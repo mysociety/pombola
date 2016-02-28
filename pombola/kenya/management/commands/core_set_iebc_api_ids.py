@@ -38,7 +38,9 @@ new_data_approximate_date = ApproximateDate(new_data_date.year,
                                             new_data_date.month,
                                             new_data_date.day)
 
-data_directory = os.path.join(sys.path[0], 'pombola', 'kenya', '2013-election-data')
+data_directory = os.path.join(
+    os.path.dirname(__file__), '..', '..', '2013-election-data'
+)
 
 # Calling these 'corrections' may not be quite right.  There are
 # naming discrepancies between the documents published by the IEBC and

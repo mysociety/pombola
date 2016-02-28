@@ -32,7 +32,9 @@ from iebc_api import (
     )
 
 
-data_directory = os.path.join(sys.path[0], 'kenya', '2013-election-data')
+data_directory = os.path.join(
+    os.path.dirname(__file__), '..', '..', '2013-election-data'
+)
 
 class Command(NoArgsCommand):
     help = 'Update the database with aspirants from the IEBC website'
