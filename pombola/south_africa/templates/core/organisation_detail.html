@@ -137,9 +137,9 @@
     {% if object.kind.slug == 'constituency-office' %}
 
       {% thumbnail object.primary_image "210x210" crop="center" as im %}
-        <div class="constituency-office-photo">
+        <a href={{ object.primary_image.url }} class="constituency-office-photo">
           <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-        </div>
+        </a>
       {% empty %}
       {% endthumbnail %}
 
