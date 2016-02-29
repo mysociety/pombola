@@ -9,7 +9,7 @@
 
 {% block subcontent %}
 
-<div class="tabs ui-tabs ui-widget">
+<div class="tabs ui-tabs ui-widget rep-locator-container">
   <ul class="rep-locator-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
     <!-- TODO: correctly pluralize these nouns -->
     <li class="ui-state-default">
@@ -22,6 +22,10 @@
 
   <!-- TODO: Map should show ward close-up when councillor tab is selected -->
   {% compressed_js 'google-map' %}
+  <script>
+    var ward_kml_urls = [];
+    var constituency_offices_marker_data = [];
+  </script>
   <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
   <div id="mps" class="tab-content ui-tabs-panel ui-widget-content">
@@ -40,6 +44,11 @@
     <ul class="rep-locator-reps">
       {% for ward_councillor in ward_data %}
         {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor skip_positions=1  %}
+        {% if ward_councillor.ward_mapit_area_id %}
+        <script>
+          ward_kml_urls.push('http://mapit.code4sa.org/area/{{ ward_councillor.ward_mapit_area_id }}.kml');
+        </script>
+        {% endif %}
       {% empty %}
         <li>No ward councillor found.</li>
       {% endfor %}

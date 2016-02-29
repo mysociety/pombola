@@ -74,7 +74,7 @@
 
     {% if person_data.office_place %}
     <script>
-      add_marker_to_map({
+      constituency_offices_marker_data.push({
         lat: {{ person_data.office_place.location.y }},
         lng: {{ person_data.office_place.location.x }},
         name: "{{ person_data.office_place.organisation.name }}",

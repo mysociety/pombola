@@ -1,6 +1,7 @@
 var map = undefined;
 var kml_urls_to_add = [];
 var markers_to_add = [];
+var map_loaded_callbacks = [];
 
 var added_kml_layers = []
 var added_markers = []
@@ -92,6 +93,13 @@ function initialize_map() {
     };
 
     map = new google.maps.Map(map_element, myOptions);
+
+    google.maps.event.addListenerOnce(map, 'idle', function(){
+        var i, callback;
+        for (i = 0; i < map_loaded_callbacks.length; i++) {
+            map_loaded_callbacks[i](map);
+        }
+    });
 
     if (markers_to_add.length) {
         add_markers(markers_to_add);
