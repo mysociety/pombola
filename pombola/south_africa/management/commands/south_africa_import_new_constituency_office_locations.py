@@ -16,11 +16,12 @@ import os.path
 import re
 from StringIO import StringIO
 
+from PIL import Image as PillowImage
+
 import requests
 
 from django.conf import settings
 
-from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.gis.geos import Point
@@ -31,6 +32,26 @@ from pombola.core.models import (
 from pombola.core.utils import mkdir_p
 
 from pombola.images.models import Image
+
+
+PILLOW_FORMAT_EXTENSIONS = {
+    'JPEG': 'jpg',
+    'PNG': 'png',
+    'GIF': 'gif',
+    'BMP': 'bmp',
+}
+
+
+# Taken from https://github.com/mysociety/yournextrepresentative
+def get_image_extension(image):
+    try:
+        pillow_image = PillowImage.open(image)
+    except IOError as e:
+        if 'cannot identify image file' in e.args[0]:
+            print("Ignoring a non-image file {0}".format(image))
+            return None
+        raise
+    return PILLOW_FORMAT_EXTENSIONS[pillow_image.format]
 
 
 # Matches the format of the locations in the CSV we get from PMG.
@@ -95,6 +116,8 @@ class Command(BaseCommand):
 
                     org = qs.get()
 
+                [org.images.remove(x) for x in org.images.all()]
+
                 place = (
                     org.place_set
                     .filter(name__contains='Approximate position of')
@@ -122,9 +145,11 @@ class Command(BaseCommand):
 
                 if photo_url:
                     response = requests.get(photo_url)
-                    image_filename = '{}'.format(org.slug)
+                    extension = get_image_extension(StringIO(response.content))
+                    image_filename = '{}.{}'.format(org.slug, extension)
 
                     desired_storage_path = os.path.join(storage_path, image_filename)
+
                     storage_filename = storage.save(desired_storage_path, StringIO(response.content))
 
                     image = Image(
