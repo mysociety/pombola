@@ -183,6 +183,7 @@ class LatLonDetailBaseView(BasePlaceDetailView):
                 'party': party,
                 'has_party_logo': has_party_logo,
                 'ward_data': ward_result,
+                'ward_mapit_area_id': mapit_json.values()[0]['id'],
                 'positions': [
                     {
                         'title': {'name': 'Ward Councillor'}
