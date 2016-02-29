@@ -5,6 +5,8 @@
 
 {% block title %}{{ object.name }}{% endblock %}
 
+{% block body_attributes %}class="profile-with-map"{% endblock %}
+
 {# Remove the object_menu #}
 {% block object_menu_links %}
 {% endblock object_menu_links %}
@@ -58,12 +60,14 @@
 {# Put a map in the profile_pic block #}
 {% block profile_pic %}
 
+{% if object.kind.slug != 'constituency-office' %}
   {% thumbnail object.primary_image "210x210" crop="center" as im %}
     <div class="profile-pic">
       <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
     </div>
   {% empty %}
   {% endthumbnail %}
+{% endif %}
 
 {% with place=object.place_set.all.0 %}
   {% if place.location %}
@@ -131,6 +135,14 @@
       </ul>
     {% endif %}
     {% if object.kind.slug == 'constituency-office' %}
+
+      {% thumbnail object.primary_image "210x210" crop="center" as im %}
+        <div class="constituency-office-photo">
+          <img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+        </div>
+      {% empty %}
+      {% endthumbnail %}
+
       <div class="constituency-office-feedback">
         <p>Give feedback on your visit to your constituency office. Take a photo of your office and send it to <a href="mailto:contact@pa.org.za">contact@pa.org.za</a>.</p>
       </div>
