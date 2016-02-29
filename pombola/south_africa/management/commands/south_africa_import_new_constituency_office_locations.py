@@ -146,6 +146,10 @@ class Command(BaseCommand):
                 if photo_url:
                     response = requests.get(photo_url)
                     extension = get_image_extension(StringIO(response.content))
+
+                    if extension is None:
+                        continue
+
                     image_filename = '{}.{}'.format(org.slug, extension)
 
                     desired_storage_path = os.path.join(storage_path, image_filename)
