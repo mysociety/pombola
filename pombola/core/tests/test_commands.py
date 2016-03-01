@@ -107,7 +107,7 @@ class MergeObjectsCommandTest(TestCase):
             'interactive': False,
         }
 
-    def test_conflicting_dob(self):
+    def test_merge_people_conflicting_dob(self):
         self.person_a.date_of_birth = "1908-05-20"
         self.person_a.save()
 
@@ -120,7 +120,7 @@ class MergeObjectsCommandTest(TestCase):
             with no_stdout_or_stderr():
                 call_command('core_merge_people', **self.options)
 
-    def test_losing_summary(self):
+    def test_merge_people_losing_summary(self):
         self.person_a.summary = ""
         self.person_a.date_of_birth = "1908-05-20"
         self.person_a.save()
@@ -163,7 +163,7 @@ class MergeObjectsCommandTest(TestCase):
         self.assertEqual(contacts[0].value, '555 5555')
         self.assertEqual(contacts[1].value, 'jimmy@example.org')
 
-    def test_merge_with_slugs(self):
+    def test_merge_people_with_slugs(self):
         options = {
             'keep_object': self.person_a.slug,
             'delete_object': self.person_b.slug,
@@ -180,7 +180,7 @@ class MergeObjectsCommandTest(TestCase):
             Person.objects.get(pk=self.person_b.id)
 
     @patch('__builtin__.raw_input', return_value='n')
-    def test_no_continue(self, mock_input):
+    def test_merge_people_no_continue(self, mock_input):
         options = {
             'keep_object': self.person_a.id,
             'delete_object': self.person_b.id,
@@ -195,7 +195,7 @@ class MergeObjectsCommandTest(TestCase):
         Person.objects.get(pk=self.person_a.id)
         Person.objects.get(pk=self.person_b.id)
 
-    def test_inputs_are_the_same(self):
+    def test_merge_people_inputs_are_the_same(self):
         options = {
             'keep_object': self.person_a.id,
             'delete_object': self.person_a.slug,
