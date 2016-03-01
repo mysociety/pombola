@@ -100,6 +100,13 @@ class MergeObjectsCommandTest(TestCase):
             'interactive': False,
         }
 
+        self.org_options = {
+            'keep_object': self.organisation_a.id,
+            'delete_object': self.organisation_b.id,
+            'quiet': True,
+            'interactive': False,
+        }
+
     def test_conflicting_dob(self):
         self.person_a.date_of_birth = "1908-05-20"
         self.person_a.save()
@@ -200,15 +207,51 @@ class MergeObjectsCommandTest(TestCase):
             with no_stdout_or_stderr():
                 call_command('core_merge_people', **options)
 
-    def test_merge_organisations(self):
-        options = {
-            'keep_object': self.organisation_a.id,
-            'delete_object': self.organisation_b.id,
-            'quiet': True,
-            'interactive': False,
-        }
-
+    def test_merge_orgs(self):
         # This one should succeed:
+        with no_stdout_or_stderr():
+            call_command('core_merge_organisations', **self.org_options)
+
+        # Check that only organisation_a exists any more:
+        Organisation.objects.get(pk=self.organisation_a.id)
+        with self.assertRaises(Organisation.DoesNotExist):
+            Organisation.objects.get(pk=self.organisation_b.id)
+
+    def test_merge_orgs_conflicting_started(self):
+        self.organisation_a.started = "1908-05-20"
+        self.organisation_a.save()
+
+        self.organisation_b.started = "1908-05-21"
+        self.organisation_b.save()
+
+        # There should be an error - this would lose the B version of
+        # the date of birth:
+        with self.assertRaises(CommandError):
+            with no_stdout_or_stderr():
+                call_command('core_merge_organisations', **self.org_options)
+
+    def test_merge_orgs_losing_summary(self):
+        self.organisation_a.summary = ""
+        self.organisation_a.started = "1908-05-20"
+        self.organisation_a.save()
+
+        self.organisation_b.summary = "The famous actor."
+        self.organisation_b.started = "1908-05-20"
+        self.organisation_b.save()
+
+        # This should also error - it would lose the B version of the
+        # summary field:
+        with self.assertRaises(CommandError):
+            with no_stdout_or_stderr():
+                call_command('core_merge_organisations', **self.org_options)
+
+    def test_merge_orgs_with_slugs(self):
+        options = {
+            'keep_object': self.organisation_a.slug,
+            'delete_object': self.organisation_b.slug,
+            'quiet': True,
+            'interactive': False
+        }
         with no_stdout_or_stderr():
             call_command('core_merge_organisations', **options)
 
