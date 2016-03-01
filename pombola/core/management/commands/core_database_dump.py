@@ -152,6 +152,7 @@ class Command(BaseCommand):
                 'interests_register_entry',
                 'interests_register_entrylineitem',
                 'interests_register_release',
+                'pombola_sayit_pombolasayitjoin',
                 'speeches_recording',
                 'speeches_recordingtimestamp',
                 'speeches_section',
