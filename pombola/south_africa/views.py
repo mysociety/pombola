@@ -177,8 +177,8 @@ class LatLonDetailBaseView(BasePlaceDetailView):
             {
                 'name': councillor_data['Name'],
                 'person': None,
-                'email': councillor_data['custom_contact_details']['email'],
-                'phone': councillor_data['custom_contact_details']['phone'],
+                'email': councillor_data['custom_contact_details'].get('email', ''),
+                'phone': councillor_data['custom_contact_details'].get('phone', ''),
                 'postal_addresses': [],
                 'party': party,
                 'has_party_logo': has_party_logo,
