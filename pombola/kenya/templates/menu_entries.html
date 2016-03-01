@@ -44,7 +44,6 @@
   <a href="{% url "position_pt" pt_slug='member-national-assembly' %}">NA Members</a>
   {% if include_sub_menu_entries %}
   <ul id="parliament-overview">
-    <li><a href="{% url "organisation_kind" slug='party' %}">Political Parties</a></li>
     <li><a href="{% url "organisation_kind" slug='coalition' %}">Coalitions</a></li>
   </ul>
   {% endif %}
@@ -80,7 +79,7 @@
         {% endif %}
 
         <li>
-            <a href="{% url "info_page" slug='political-parties' %}">Political Parties</a>
+            <a href="{% url "organisation_kind" slug='party' %}">Political Parties</a>
         </li>
     </ul>
     {% endif %}
