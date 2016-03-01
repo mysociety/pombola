@@ -94,8 +94,8 @@ class MergePeopleCommandTest(TestCase):
         self.contact_b.save()
 
         self.options = {
-            'keep_person': self.person_a.id,
-            'delete_person': self.person_b.id,
+            'keep_object': self.person_a.id,
+            'delete_object': self.person_b.id,
             'sayit_id_scheme': 'org.mysociety.pombolatest',
             'quiet': True,
             'interactive': False,
@@ -159,8 +159,8 @@ class MergePeopleCommandTest(TestCase):
 
     def test_merge_with_slugs(self):
         options = {
-            'keep_person': self.person_a.slug,
-            'delete_person': self.person_b.slug,
+            'keep_object': self.person_a.slug,
+            'delete_object': self.person_b.slug,
             'sayit_id_scheme': 'org.mysociety.pombolatest',
             'quiet': True,
             'interactive': False
@@ -176,8 +176,8 @@ class MergePeopleCommandTest(TestCase):
     @patch('__builtin__.raw_input', return_value='n')
     def test_no_continue(self, mock_input):
         options = {
-            'keep_person': self.person_a.id,
-            'delete_person': self.person_b.id,
+            'keep_object': self.person_a.id,
+            'delete_object': self.person_b.id,
             'sayit_id_scheme': 'org.mysociety.pombolatest',
             'quiet': True
         }
@@ -191,8 +191,8 @@ class MergePeopleCommandTest(TestCase):
 
     def test_inputs_are_the_same(self):
         options = {
-            'keep_person': self.person_a.id,
-            'delete_person': self.person_a.slug,
+            'keep_object': self.person_a.id,
+            'delete_object': self.person_a.slug,
             'sayit_id_scheme': 'org.mysociety.pombolatest',
             'quiet': True
         }
