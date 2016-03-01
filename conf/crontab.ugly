@@ -52,8 +52,8 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 # 0 1 * * * !!(*= $user *)!! run_management_command scorecard_update_person_contact_scores
 
 # Generate the Popolo JSON files
-33 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
-50 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
+33 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
+50 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
 
 !!(* } elsif ($vhost eq 'nigeria.mzalendo.mysociety.org') { *)!!
 10 7 * * * !!(*= $user *)!! run_management_command feedback_report_pending
@@ -61,8 +61,8 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 !!(* } elsif ($vhost eq 'www.kuvakazim.com') { *)!!
 
 # Generate the Popolo JSON files
-55 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.kuvakazim.com
-10 5 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.kuvakazim.com
+55 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.kuvakazim.com
+10 3 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.kuvakazim.com
 
 !!(* } elsif ($vhost eq 'za-pombola.staging.mysociety.org') { *)!!
 
@@ -75,8 +75,8 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 13 1 * * * !!(*= $user *)!! output-on-error update_za_hansard.bash
 
 # Generate the Popolo JSON files
-13 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
-30 4 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
+13 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
+30 3 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
 
 !!(* } else { *)!!
 !!(* } *)!!
