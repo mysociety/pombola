@@ -217,6 +217,16 @@ class MergeObjectsCommandTest(TestCase):
         with self.assertRaises(Organisation.DoesNotExist):
             Organisation.objects.get(pk=self.organisation_b.id)
 
+        # Check that both positions are present on the kept organisation:
+        self.assertEqual(1, Position.objects.filter(
+                person=self.person_a,
+                title=self.position_title,
+                organisation=self.organisation_a).count())
+        self.assertEqual(1, Position.objects.filter(
+                person=self.person_b,
+                title=self.position_title,
+                organisation=self.organisation_a).count())
+
     def test_merge_orgs_conflicting_started(self):
         self.organisation_a.started = "1908-05-20"
         self.organisation_a.save()
