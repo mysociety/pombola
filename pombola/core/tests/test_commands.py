@@ -6,8 +6,15 @@ from mock import patch
 import sys
 
 from pombola.core.models import (
-    Contact, ContactKind, Organisation, OrganisationKind, Person,
-    Position, PositionTitle
+    Contact,
+    ContactKind,
+    Organisation,
+    OrganisationKind,
+    OrganisationRelationship,
+    OrganisationRelationshipKind,
+    Person,
+    Position,
+    PositionTitle,
 )
 
 from django.contrib.contenttypes.models import ContentType
@@ -55,6 +62,10 @@ class MergeObjectsCommandTest(TestCase):
             name="Organisation B",
             kind=self.organisation_kind,
             slug="organisation-b")
+        self.organisation_c = Organisation.objects.create(
+            name="Organisation C",
+            kind=self.organisation_kind,
+            slug="organisation-c")
 
         self.position_title = PositionTitle.objects.create(
             name="Member")
@@ -69,6 +80,20 @@ class MergeObjectsCommandTest(TestCase):
             person=self.person_b,
             category="other",
             organisation=self.organisation_b)
+
+        self.org_relationship_kind = OrganisationRelationshipKind.objects.create(
+            name="Test Org Kind")
+
+        self.org_relationship_b_c = OrganisationRelationship.objects.create(
+            kind=self.org_relationship_kind,
+            organisation_a=self.organisation_b,
+            organisation_b=self.organisation_c,
+            )
+        self.org_relationship_b_a = OrganisationRelationship.objects.create(
+            kind=self.org_relationship_kind,
+            organisation_a=self.organisation_c,
+            organisation_b=self.organisation_b,
+            )
 
         self.phone_kind = ContactKind.objects.create(
             slug="example-phones",
@@ -226,6 +251,17 @@ class MergeObjectsCommandTest(TestCase):
                 person=self.person_b,
                 title=self.position_title,
                 organisation=self.organisation_a).count())
+
+        # Check that organisation relationships from both directions are
+        # updated.
+        self.assertEqual(1, OrganisationRelationship.objects.filter(
+                kind=self.org_relationship_kind,
+                organisation_a=self.organisation_a,
+                organisation_b=self.organisation_c).count())
+        self.assertEqual(1, OrganisationRelationship.objects.filter(
+                kind=self.org_relationship_kind,
+                organisation_a=self.organisation_c,
+                organisation_b=self.organisation_a).count())
 
     def test_merge_orgs_conflicting_started(self):
         self.organisation_a.started = "1908-05-20"
