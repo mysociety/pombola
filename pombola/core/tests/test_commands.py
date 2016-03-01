@@ -34,8 +34,7 @@ def no_stdout_or_stderr():
         sys.stderr = save_stderr
 
 
-class MergePeopleCommandTest(TestCase):
-
+class MergeObjectsCommandTest(TestCase):
     def setUp(self):
         self.person_a = Person.objects.create(
             name="Jimmy Stewart",
@@ -200,3 +199,20 @@ class MergePeopleCommandTest(TestCase):
         with self.assertRaises(CommandError):
             with no_stdout_or_stderr():
                 call_command('core_merge_people', **options)
+
+    def test_merge_organisations(self):
+        options = {
+            'keep_object': self.organisation_a.id,
+            'delete_object': self.organisation_b.id,
+            'quiet': True,
+            'interactive': False,
+        }
+
+        # This one should succeed:
+        with no_stdout_or_stderr():
+            call_command('core_merge_organisations', **options)
+
+        # Check that only organisation_a exists any more:
+        Organisation.objects.get(pk=self.organisation_a.id)
+        with self.assertRaises(Organisation.DoesNotExist):
+            Organisation.objects.get(pk=self.organisation_b.id)
