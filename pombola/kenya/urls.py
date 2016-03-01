@@ -33,6 +33,12 @@ urlpatterns = patterns('',
     url(r'^person/(?P<slug>[-\w]+)/appearances/$',
         KEPersonDetailAppearances.as_view(sub_page='appearances'),
         name='person'),
+    url('^info/political-parties$', RedirectView.as_view(
+            pattern_name='organisation_kind',
+            permanent=False,
+            ),
+        {'slug': 'party'},
+        ),
 )
 
 # Create the two County Performance pages:
