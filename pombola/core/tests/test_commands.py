@@ -12,7 +12,10 @@ from pombola.core.models import (
     OrganisationKind,
     OrganisationRelationship,
     OrganisationRelationshipKind,
+    ParliamentarySession,
     Person,
+    Place,
+    PlaceKind,
     Position,
     PositionTitle,
 )
@@ -93,6 +96,24 @@ class MergeObjectsCommandTest(TestCase):
             kind=self.org_relationship_kind,
             organisation_a=self.organisation_c,
             organisation_b=self.organisation_b,
+            )
+
+        self.place_kind = PlaceKind.objects.create(
+            name='Test PlaceKind',
+            slug='test-placekind',
+            )
+
+        self.place = Place.objects.create(
+            name='Test Place',
+            slug='test-place',
+            kind=self.place_kind,
+            organisation=self.organisation_b,
+            )
+
+        self.parliamentary_session = ParliamentarySession.objects.create(
+            name='Test Parliamentary Session',
+            slug='test-parliamentary-session',
+            house=self.organisation_b,
             )
 
         self.phone_kind = ContactKind.objects.create(
@@ -262,6 +283,17 @@ class MergeObjectsCommandTest(TestCase):
                 kind=self.org_relationship_kind,
                 organisation_a=self.organisation_c,
                 organisation_b=self.organisation_a).count())
+
+        # Check that places get the correct org
+        self.assertEqual(1, Place.objects.filter(
+                kind=self.place_kind,
+                slug='test-place',
+                organisation=self.organisation_a).count())
+
+        # Check that ParliamentarySession objects get the correct org.
+        self.assertEqual(1, ParliamentarySession.objects.filter(
+                slug='test-parliamentary-session',
+                house=self.organisation_a).count())
 
     def test_merge_orgs_conflicting_started(self):
         self.organisation_a.started = "1908-05-20"
