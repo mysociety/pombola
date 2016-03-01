@@ -280,19 +280,14 @@ class SASearchViewTest(WebTest):
 @attr(country='south_africa')
 class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
     def setUp(self):
-        fixtures = os.path.join(os.path.abspath(south_africa.__path__[0]), 'fixtures')
-        popolo_path = os.path.join(fixtures, 'test-popolo.json')
-        call_command('core_import_popolo',
-            popolo_path,
-            commit=True)
-
         # Create the top level SayIt sections, so that there's no
         # warning when getting the person page:
         create_sections([{'heading': u"Hansard"},
                          {'heading': u"Committee Minutes"},
                          {'heading': u"Questions"}])
 
-        moomin_finn = models.Person.objects.get(slug='moomin-finn')
+        moomin_finn = models.Person.objects.create(legal_name='Moomin Finn',
+                                                   slug='moomin-finn')
         # Give moomin-finn a fake ID for the PMG API
         models.Identifier.objects.create(
             scheme='za.org.pmg.api/member',

@@ -15,8 +15,7 @@ activate the generation. Hopefully something like this:
 
 Then, to load in some people and organisation data:
 
-    curl -O http://www.pa.org.za/media_root/popolo_json/pombola.json
-    $ python manage.py core_import_popolo pombola.json  --commit
+TODO: Write instructions on using database dumps. See https://github.com/mysociety/pombola/issues/2029.
 
 To load in constituency offices run the following.
 If you run into any issues with this you might need to remove the

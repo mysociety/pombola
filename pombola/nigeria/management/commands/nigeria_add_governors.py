@@ -67,9 +67,7 @@ def adjust_approximate_date(ad, by_days):
     d = d + datetime.timedelta(days=by_days)
     return ApproximateDate(d.year, d.month, d.day)
 
-# FIXME: this is a variant of code from core_import_popolo.py; this
-# repetition should be refactored out, either into commonlib or just
-# within this repository:
+# FIXME: @mhl suggests this could be done in a simpler way using transactions:
 
 def get_or_create(model, **kwargs):
     """An alternative to Django's get_or_create where save() is optional
