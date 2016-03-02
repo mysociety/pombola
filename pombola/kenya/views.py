@@ -114,8 +114,36 @@ EXPERIMENT_DATA = {
 }
 
 
-class KEPersonDetail(HansardPersonMixin, PersonDetail):
+class KEPersonDetailBase(PersonDetail):
+    def get_context_data(self, **kwargs):
+        context = super(KEPersonDetailBase, self).get_context_data(**kwargs)
 
+        political_positions = self.object.position_set.all().political().currently_active()
+
+        na_memberships = political_positions.filter(title__slug='member-national-assembly')
+        na_memberships_count = na_memberships.count()
+        if na_memberships_count > 1:
+            logger.error(
+                '{} - Too many NA memberships ({})'.format(self.object.slug, na_memberships_count))
+
+        senate_memberships = political_positions.filter(title__slug='senator')
+        senate_memberships_count = senate_memberships.count()
+        if senate_memberships_count > 1:
+            logger.error(
+                '{} - Too many Senate memberships ({})'.format(self.object.slug, senate_memberships_count))
+
+        if na_memberships_count:
+            constituencies = Place.objects.filter(position=na_memberships[0]).distinct()
+        elif senate_memberships_count:
+            constituencies = Place.objects.filter(position=senate_memberships[0]).distinct()
+        else:
+            constituencies = []
+
+        context['constituencies'] = constituencies
+
+        return context
+
+class KEPersonDetail(HansardPersonMixin, KEPersonDetailBase):
     def get_context_data(self, **kwargs):
         context = super(KEPersonDetail, self).get_context_data(**kwargs)
         context['hansard_entries_to_show'] = ":3"
@@ -143,40 +171,20 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
             if shujaaz.FINALISTS_DICT[year].get(self.object.pk)
         ]
 
-        political_positions = self.object.position_set.all().political().currently_active()
-
-        na_memberships = political_positions.filter(title__slug='member-national-assembly')
-        na_memberships_count = na_memberships.count()
-        if na_memberships_count > 1:
-            logger.error(
-                '{} - Too many NA memberships ({})'.format(self.object.slug, na_memberships_count))
-
-        senate_memberships = political_positions.filter(title__slug='senator')
-        senate_memberships_count = senate_memberships.count()
-        if senate_memberships_count > 1:
-            logger.error(
-                '{} - Too many Senate memberships ({})'.format(self.object.slug, senate_memberships_count))
-
-        if na_memberships_count:
-            constituencies = Place.objects.filter(position=na_memberships[0]).distinct()
-        elif senate_memberships_count:
-            constituencies = Place.objects.filter(position=senate_memberships[0]).distinct()
-        else:
-            constituencies = []
-
-        context['constituencies'] = constituencies
-
         return context
 
 
-class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub):
-
+class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub, KEPersonDetailBase):
     def get_context_data(self, **kwargs):
         context = super(KEPersonDetailAppearances, self).get_context_data(**kwargs)
         context['hansard_entries_to_show'] = ":5"
         context['lifetime_summary'] = context['hansard_entries'] \
             .monthly_appearance_counts()
         return context
+
+
+class KEPersonDetailExperience(HansardPersonMixin, PersonDetailSub, KEPersonDetailBase):
+    pass
 
 
 class MITExperimentView(ExperimentViewDataMixin, TemplateView):

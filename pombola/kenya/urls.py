@@ -1,6 +1,10 @@
 from django.conf.urls import patterns, url
 from django.views.generic.base import TemplateView, RedirectView
-from pombola.kenya.views import KEPersonDetail, KEPersonDetailAppearances
+from pombola.kenya.views import (
+    KEPersonDetail,
+    KEPersonDetailAppearances,
+    KEPersonDetailExperience,
+    )
 
 from pombola.experiments.views import ExperimentShare, ExperimentSurvey
 
@@ -32,6 +36,9 @@ urlpatterns = patterns('',
         KEPersonDetail.as_view(), name='person'),
     url(r'^person/(?P<slug>[-\w]+)/appearances/$',
         KEPersonDetailAppearances.as_view(sub_page='appearances'),
+        name='person'),
+    url(r'^person/(?P<slug>[-\w]+)/experience/$',
+        KEPersonDetailExperience.as_view(sub_page='experience'),
         name='person'),
 )
 
