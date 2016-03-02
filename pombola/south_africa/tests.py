@@ -1347,15 +1347,17 @@ class SAOrganisationDetailViewTestParliament(WebTest):
             end_date=ApproximateDate(2005, 12, 31),
         )
 
-    def test_percentages(self):
+    def test_counts_and_percentages(self):
         with self.assertNumQueries(12):
             response = self.app.get('/organisation/model-parliament/')
-        ps_and_ps = response.context['parties_and_percentages']
+        ps_and_ps = response.context['parties_counts_and_percentages']
         self.assertEqual(2, len(ps_and_ps))
         self.assertEqual(ps_and_ps[0][0], self.party_another_random)
-        self.assertAlmostEqual(ps_and_ps[0][1], 66.666666666666)
+        self.assertEqual(ps_and_ps[0][1], 2)
+        self.assertAlmostEqual(ps_and_ps[0][2], 66.666666666666)
         self.assertEqual(ps_and_ps[1][0], self.party_random)
-        self.assertAlmostEqual(ps_and_ps[1][1], 33.333333333333)
+        self.assertEqual(ps_and_ps[1][1], 1)
+        self.assertAlmostEqual(ps_and_ps[1][2], 33.333333333333)
 
 
 @attr(country='south_africa')
