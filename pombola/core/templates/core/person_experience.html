@@ -13,10 +13,18 @@
 
           <section>
               <h3>Previous Political Positions</h3>
-              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive %}
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.previous %}
           </section>
+          {% with future_positions=object.position_set.all.political.future %}
+            {% if future_positions %}
+              <section>
+                  <h3>Upcoming Political Positions</h3>
+                  {% include 'core/person_position_section.html' with positions=future_positions %}
+              </section>
+            {% endif %}
+          {% endwith %}
       </div>
-      
+
       <div class="right-col">
           <section>
               <h3>Job History</h3>

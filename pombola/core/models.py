@@ -1073,6 +1073,17 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
         return self.filter(end_criteria)
 
+    def future(self, when=None):
+        """Positions which have not yet started."""
+
+        when = when or datetime.date.today()
+
+        when_approx = repr(ApproximateDate(year=when.year, month=when.month, day=when.day))
+
+        start_criteria = Q(sorting_start_date__gt=when_approx)
+
+        return self.filter(start_criteria)
+
     def aspirant_positions(self):
         """
         Filter down to only positions which are aspirant ones. This uses the
