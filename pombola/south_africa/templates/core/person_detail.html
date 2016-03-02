@@ -225,7 +225,7 @@
                 </header>
 
                 <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
-                <p class="attendance__context">Attended {{ data.attended }} meetings out of {{ data.total }}</p>
+                <p class="attendance__context">Attended {{ data.attended }} meeting{{ data.attended|pluralize }} out of {{ data.total }}</p>
               {% endfor %}
             </div>
 
