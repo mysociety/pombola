@@ -1,5 +1,6 @@
 {% extends 'core/object_base.html' %}
 {% load thumbnail %}
+{% load absolute_url %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -12,6 +13,17 @@
     <![endif]-->
   {% endif %}
 {% endblock%}
+
+{% block open_graph %}
+<meta property="og:title" content="{{ object.name }}" />
+<meta property="og:type" content="profile" />
+<meta property="og:image" content="{{ object.primary_image.url|absolute_url:request }}" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:description" content="{{ object.summary|striptags }}" />
+<meta property="profile:first_name" content="{{ object.first_name }}" />
+<meta property="profile:last_name" content="{{ object.last_name }}" />
+<meta property="profile:gender" content="{{ object.gender }}" />
+{% endblock %}
 
 {% block object_menu_links %}
   {% include 'core/person_menu.html' %}
