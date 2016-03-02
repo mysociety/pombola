@@ -114,10 +114,9 @@ EXPERIMENT_DATA = {
 }
 
 
-class KEPersonDetail(HansardPersonMixin, PersonDetail):
-
+class KEPersonDetailBase(PersonDetail):
     def get_context_data(self, **kwargs):
-        context = super(KEPersonDetail, self).get_context_data(**kwargs)
+        context = super(KEPersonDetailBase, self).get_context_data(**kwargs)
         context['hansard_entries_to_show'] = ":3"
 
         cdf_constituencies = self.object.constituencies().filter(
@@ -168,9 +167,11 @@ class KEPersonDetail(HansardPersonMixin, PersonDetail):
 
         return context
 
+class KEPersonDetail(HansardPersonMixin, KEPersonDetailBase):
+    pass
 
-class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub):
 
+class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub, KEPersonDetailBase):
     def get_context_data(self, **kwargs):
         context = super(KEPersonDetailAppearances, self).get_context_data(**kwargs)
         context['hansard_entries_to_show'] = ":5"
