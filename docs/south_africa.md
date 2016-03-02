@@ -15,8 +15,8 @@ activate the generation. Hopefully something like this:
 
 Then, to load in some people and organisation data:
 
-    curl -O http://www.pa.org.za/media_root/popolo_json/za-pombola.json
-    $ python manage.py core_import_popolo za-pombola.json  --commit
+    curl -O http://www.pa.org.za/media_root/popolo_json/pombola.json
+    $ python manage.py core_import_popolo pombola.json  --commit
 
 To load in constituency offices run the following.
 If you run into any issues with this you might need to remove the
