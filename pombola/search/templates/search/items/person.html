@@ -20,7 +20,10 @@
     <p>
 
       {% for position in pos_set|slice:":4" %}
-        <strong>{{ position.title.name }}</strong> of {{ position.organisation.name }};
+        <strong>{{ position.title.name }}</strong>
+        {% if position.organisation.name %}
+          of {{ position.organisation.name }};
+        {% endif %}
       {% empty %}
         No currently active positions found.
       {% endfor %}
