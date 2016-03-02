@@ -117,30 +117,6 @@ EXPERIMENT_DATA = {
 class KEPersonDetailBase(PersonDetail):
     def get_context_data(self, **kwargs):
         context = super(KEPersonDetailBase, self).get_context_data(**kwargs)
-        context['hansard_entries_to_show'] = ":3"
-
-        cdf_constituencies = self.object.constituencies().filter(
-            budget_entries__organisation='Constituencies Development Fund'
-        ).select_related()
-
-        # We only retrieve one budget because we only really care about the
-        # latest. budgets() are default sorted by date of the budget session.
-        cdf_budget_constituencies = [
-            {'constituency': c, 'budget': c.budgets()[0]}
-            for c in cdf_constituencies
-        ]
-
-        context['cdf_budget_constituencies'] = cdf_budget_constituencies
-
-        context['shujaaz_finalist_info'] = [
-            (
-                year,
-                'shujaaz-finalists-' + year,
-                shujaaz.FINALISTS_DICT[year].get(self.object.pk)
-            )
-            for year in ('2015', '2014')
-            if shujaaz.FINALISTS_DICT[year].get(self.object.pk)
-        ]
 
         political_positions = self.object.position_set.all().political().currently_active()
 
@@ -168,7 +144,34 @@ class KEPersonDetailBase(PersonDetail):
         return context
 
 class KEPersonDetail(HansardPersonMixin, KEPersonDetailBase):
-    pass
+    def get_context_data(self, **kwargs):
+        context = super(KEPersonDetail, self).get_context_data(**kwargs)
+        context['hansard_entries_to_show'] = ":3"
+
+        cdf_constituencies = self.object.constituencies().filter(
+            budget_entries__organisation='Constituencies Development Fund'
+        ).select_related()
+
+        # We only retrieve one budget because we only really care about the
+        # latest. budgets() are default sorted by date of the budget session.
+        cdf_budget_constituencies = [
+            {'constituency': c, 'budget': c.budgets()[0]}
+            for c in cdf_constituencies
+        ]
+
+        context['cdf_budget_constituencies'] = cdf_budget_constituencies
+
+        context['shujaaz_finalist_info'] = [
+            (
+                year,
+                'shujaaz-finalists-' + year,
+                shujaaz.FINALISTS_DICT[year].get(self.object.pk)
+            )
+            for year in ('2015', '2014')
+            if shujaaz.FINALISTS_DICT[year].get(self.object.pk)
+        ]
+
+        return context
 
 
 class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub, KEPersonDetailBase):
