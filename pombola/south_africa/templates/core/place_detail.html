@@ -89,18 +89,4 @@
         </p>
     {% endif %}
 
-    {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
-        {% with project_count=object.project_set.count %}
-            <h2>CDF Projects</h2>
-
-            <p>
-            We have information on
-            <a href="{% url "place_projects" slug=object.slug %}">
-                {{ project_count}} CDF Projects
-            </a>
-            in {{ object.name }}.
-            </p>
-        {% endwith %}
-    {% endif %}
-
 {% endblock %}
