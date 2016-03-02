@@ -180,6 +180,10 @@ class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub, KEPersonDet
         return context
 
 
+class KEPersonDetailExperience(HansardPersonMixin, PersonDetailSub, KEPersonDetailBase):
+    pass
+
+
 class MITExperimentView(ExperimentViewDataMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
