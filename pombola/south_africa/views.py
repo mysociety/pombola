@@ -372,9 +372,16 @@ class SAOrganisationDetailView(CommentArchiveMixin, OrganisationDetailView):
         total_people = len(people_in_house)
 
         # Calculate the % of the house each party occupies.
-        context['parties_and_percentages'] = [
-            (party, (float(party_counts[party]) * 100) / total_people)
-            for party in parties]
+        context['parties_counts_and_percentages'] = sorted(
+            [
+                (party,
+                 party_counts[party],
+                 (float(party_counts[party]) * 100) / total_people)
+                for party in parties
+            ],
+            key=lambda x: x[1],
+            reverse=True,
+        )
 
         context['total_people'] =  total_people
 
