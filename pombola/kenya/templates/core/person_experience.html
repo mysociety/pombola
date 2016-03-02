@@ -13,7 +13,7 @@
 
           <section>
               <h3>Previous Political Positions</h3>
-              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.currently_inactive.exclude_committees %}
+              {% include 'core/person_position_section.html' with positions=object.position_set.all.political.previous.exclude_committees %}
           </section>
 
           <section>
