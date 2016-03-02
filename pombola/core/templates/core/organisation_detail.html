@@ -35,7 +35,7 @@
       <h2>Contact Details</h2>
 
       <p>
-        There are {{ contact_detail_count }}
+        There {{ contact_detail_count|pluralize:"is,are" }} {{ contact_detail_count }}
         way{{ contact_detail_count|pluralize }} to
         <a href="{% url "organisation_contact_details" slug=object.slug %}">get in touch</a>
         with {{ object.name }}.
