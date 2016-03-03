@@ -36,18 +36,14 @@ The following sections should explain which one of these would
 be most suitable for you:
 </p>
 
-<h3>JSON suitable for Pombola's core_import_popolo</h3>
+<h3>Popolo formatted JSON</h3>
 
-<p>If you want to import the site's data into an instance
-of <a href="https://www.mysociety.org/projects/parliamentarymonitoring/pombola/">Pombola</a>,
-the software that this site runs on, then you should use the
-following data source with its <tt>core_import_popolo</tt>
-management command. (This data is a single JSON object with
+<p>This data is a single JSON object with
 'persons' and 'organizations' keys at the top level, and
 membership information being included in each person object:</p>
 
 <ul>
-<li><a href="{{ dump_base_path }}pombola.json">JSON data suitable for creating a Pombola instance</a></li>
+<li><a href="{{ dump_base_path }}pombola.json">Popolo JSON data</a></li>
 </ul>
 
 <h3>JSON suitable for mongoimport</h3>

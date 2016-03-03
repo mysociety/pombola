@@ -22,7 +22,7 @@ class Command(BaseCommand):
                 "--pombola",
                 dest="pombola",
                 action="store_true",
-                help="Make a single file with inline memberships, suitable for core_import_popolo"
+                help="Make a single file with inline memberships"
             ),
     )
 
