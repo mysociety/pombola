@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block open_graph %}{% include 'info/_blog_open_graph.html' %}{% endblock %}
+
 {% block title %}
     {{ object.title }}
 {% endblock %}

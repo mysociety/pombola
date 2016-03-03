@@ -1,0 +1,10 @@
+{% load absolute_url %}
+
+<meta property="og:title" content="{{ object.title }}" />
+<meta property="og:site_name" content="{{ site.name }}" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+{% if object.featured_image_file %}
+<meta property="og:image" content="{{ object.featured_image_file.url|absolute_url:request }}" />
+{% endif %}
+<meta property="article:published_time" content="{{ object.publication_date|date:"c" }}" />
