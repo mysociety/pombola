@@ -1343,7 +1343,7 @@ class SAOrganisationDetailViewTestParliament(WebTest):
         )
 
     def test_counts_and_percentages(self):
-        with self.assertNumQueries(12):
+        with self.assertNumQueries(13):
             response = self.app.get('/organisation/model-parliament/')
         ps_and_ps = response.context['parties_counts_and_percentages']
         self.assertEqual(2, len(ps_and_ps))
