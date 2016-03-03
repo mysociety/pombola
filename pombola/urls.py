@@ -1,10 +1,11 @@
 import re
 
 from django.conf import settings
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.static import serve
 
 from rest_framework import routers
 
@@ -19,8 +20,9 @@ urlpatterns = []
 # does not appear to support fallthrough from controllers:
 # http://stackoverflow.com/questions/4495763/fallthrough-in-django-urlconf
 if settings.COUNTRY_APP:
-    urlpatterns += patterns('',
-        (r'^', include('pombola.' + settings.COUNTRY_APP + '.urls')),)
+    urlpatterns += (
+        url(r'^', include('pombola.' + settings.COUNTRY_APP + '.urls')),
+    )
 
 # Add the API urls:
 api_router = routers.DefaultRouter()
@@ -33,13 +35,13 @@ if settings.ENABLED_FEATURES['hansard']:
     api_router.register(r'hansard/sources', SourceViewSet)
     api_router.register(r'hansard/venues', VenueViewSet)
 
-urlpatterns += [
+urlpatterns += (
     url(r'^api/(?P<version>v0.1)/', include(api_router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-]
+)
 
 from ajax_select import urls as ajax_select_urls
-urlpatterns += patterns('',
+urlpatterns += (
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/lookups/', include(ajax_select_urls)),
     url(r'^admin/', include(admin.site.urls)),
@@ -47,42 +49,42 @@ urlpatterns += patterns('',
 )
 
 # mapit
-urlpatterns += patterns('',
-    (r'^mapit/', include('mapit.urls')),
+urlpatterns += (
+    url(r'^mapit/', include('mapit.urls')),
 )
 
 # Info pages
-urlpatterns += patterns('',
-    (r'^info/', include('pombola.info.urls.pages')),
-    (r'^blog/', include('pombola.info.urls.blog')),
+urlpatterns += (
+    url(r'^info/', include('pombola.info.urls.pages')),
+    url(r'^blog/', include('pombola.info.urls.blog')),
 )
 
 # File archive
-urlpatterns += patterns('',
-    (r'^file_archive/', include('pombola.file_archive.urls')),
+urlpatterns += (
+    url(r'^file_archive/', include('pombola.file_archive.urls')),
 )
 
 # SayIt - speeches
 #if settings.ENABLED_FEATURES['speeches']:
-#    urlpatterns += patterns('',
-#        (r'^speeches/', include('speeches.urls', namespace='speeches', app_name='speeches-default')),
+#    urlpatterns += (
+#        url(r'^speeches/', include('speeches.urls', namespace='speeches', app_name='speeches-default')),
 #    )
 
 # Hansard pages
 if settings.ENABLED_FEATURES['hansard']:
-    urlpatterns += patterns('',
-        (r'^hansard/', include('pombola.hansard.urls', namespace='hansard', app_name='hansard')),
+    urlpatterns += (
+        url(r'^hansard/', include('pombola.hansard.urls', namespace='hansard', app_name='hansard')),
     )
 
 # Project pages
 if settings.ENABLED_FEATURES['projects']:
-    urlpatterns += patterns('',
-        (r'^projects/', include('pombola.projects.urls')),
+    urlpatterns += (
+        url(r'^projects/', include('pombola.projects.urls')),
     )
 
 # ajax preview of the markdown
-urlpatterns += patterns('',
-    url(r'^markitup/', include('markitup.urls'))
+urlpatterns += (
+    url(r'^markitup/', include('markitup.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
@@ -91,64 +93,65 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # needed for the selenium tests.
 if settings.IN_TEST_MODE:
     static_url = re.escape(settings.STATIC_URL.lstrip('/'))
-    urlpatterns += patterns('',
-        url(r'^%s(?P<path>.*)$' % static_url, 'django.views.static.serve', {
+    urlpatterns += (
+        url(r'^%s(?P<path>.*)$' % static_url, serve, {
             'document_root': settings.STATIC_ROOT,
         }),
     )
 
 # search
-urlpatterns += patterns('',
-    (r'^search/', include('pombola.search.urls')),
+urlpatterns += (
+    url(r'^search/', include('pombola.search.urls')),
 )
 
 # wordcloud
 if settings.ENABLED_FEATURES['wordcloud']:
-    urlpatterns += patterns('',
-        (r'^wordcloud/', include('pombola.wordcloud.urls')),
+    urlpatterns += (
+        url(r'^wordcloud/', include('pombola.wordcloud.urls')),
 
         # Temporarily keep tagcloud version of the url as well.
-        (r'^tagcloud/', include('pombola.wordcloud.urls')),
+        url(r'^tagcloud/', include('pombola.wordcloud.urls')),
     )
 
 # feedback
-urlpatterns += patterns('',
-    (r'^feedback/', include('pombola.feedback.urls')),
+urlpatterns += (
+    url(r'^feedback/', include('pombola.feedback.urls')),
 )
 
 # map
-urlpatterns += patterns('',
-    (r'^map/', include('pombola.map.urls')),
+urlpatterns += (
+    url(r'^map/', include('pombola.map.urls')),
 )
 
 # votematch
 if settings.ENABLED_FEATURES['votematch']:
-    urlpatterns += patterns('',
-        (r'^votematch/', include('pombola.votematch.urls')),
+    urlpatterns += (
+        url(r'^votematch/', include('pombola.votematch.urls')),
     )
 
 
 # # spinner - uncomment if needed. Not needed just to display spinner on the
 # # homepage using carousel.
 # if settings.ENABLED_FEATURES['spinner']:
-#     urlpatterns += patterns('',
-#         (r'^spinner/', include('pombola.spinner.urls')),
+#     urlpatterns += (
+#         url(r'^spinner/', include('pombola.spinner.urls')),
 #     )
 
 # bills
 if settings.ENABLED_FEATURES['bills']:
-    urlpatterns += patterns('',
-        (r'^bills/', include('pombola.bills.urls', namespace='bills', app_name='bills')),
+    urlpatterns += (
+        url(r'^bills/', include('pombola.bills.urls', namespace='bills', app_name='bills')),
     )
 
 
 # Everything else goes to core
-urlpatterns += patterns('',
-    (r'^', include('pombola.core.urls')),
+urlpatterns += (
+    url(r'^', include('pombola.core.urls')),
 )
 
 # For South Africa, we need SayIt to catch any otherwise unmatched
 # URLs, so this has to come last:
 if settings.COUNTRY_APP and settings.COUNTRY_APP == 'south_africa':
-    urlpatterns += patterns('',
-        (r'^', include('pombola.south_africa.fallback_urls')),)
+    urlpatterns += (
+        url(r'^', include('pombola.south_africa.fallback_urls')),
+    )

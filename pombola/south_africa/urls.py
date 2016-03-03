@@ -1,6 +1,6 @@
 import copy
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.views.generic.base import RedirectView, TemplateView
 
 from pombola.south_africa import views
@@ -116,20 +116,18 @@ place_patterns.extend((
         name='latlon'),
     ))
 
-urlpatterns = patterns(
-    '',
-
+urlpatterns = [
     # Include the overriden person, organisation paths
-    (person_patterns_path, include(person_patterns)),
-    (place_patterns_path, include(place_patterns)),
-    (organisation_patterns_path, include(organisation_patterns)),
+    url(person_patterns_path, include(person_patterns)),
+    url(place_patterns_path, include(place_patterns)),
+    url(organisation_patterns_path, include(organisation_patterns)),
 
     # Override the home view:
     url(r'^$', SAHomeView.as_view(), name='home'),
-    )
+    ]
 
 # This is for the Code4SA ward councillor widget lookup:
-urlpatterns += patterns('',
+urlpatterns += (
     url(r'^ward-councillor-lookup/$',
         TemplateView.as_view(template_name='south_africa/ward_councillor_lookup.html'),
         name='ward-councillor-lookup'
@@ -137,7 +135,7 @@ urlpatterns += patterns('',
 )
 
 # MP attendance overview
-urlpatterns += patterns('',
+urlpatterns += (
     url(r'^mp-attendance/$',
         views.SAMpAttendanceView.as_view(),
         name='mp-attendance'
@@ -145,8 +143,7 @@ urlpatterns += patterns('',
 )
 
 # Routing for election pages
-urlpatterns += patterns('',
-
+urlpatterns += (
     # Overview pages
     url(r'^election/$',
         RedirectView.as_view(
@@ -219,7 +216,7 @@ for index, pattern in enumerate(search_urlpatterns):
     if pattern.name == 'core_search':
         search_urlpatterns[index] = url(r'^$', SASearchView.as_view(), name='core_search')
 
-urlpatterns += patterns('pombola.south_africa.views',
+urlpatterns += (
     # We want to override the location search view, so that we can
     # redirect straight to the results page if there's a unique result
     # returned.
@@ -232,7 +229,7 @@ urlpatterns += patterns('pombola.south_africa.views',
 
 
 # Members' interests browser
-urlpatterns += patterns('',
+urlpatterns += (
     url(
         r'^interests/$',
         views.SAMembersInterestsIndex.as_view(),

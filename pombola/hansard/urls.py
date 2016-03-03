@@ -1,8 +1,13 @@
-from django.conf.urls import patterns, url
-from pombola.hansard.views import IndexView, SittingView, PersonAllAppearancesView
+from django.conf.urls import url
+from pombola.hansard.views import (
+    IndexView,
+    person_summary,
+    PersonAllAppearancesView,
+    SittingView,
+    )
 
 
-urlpatterns = patterns('pombola.hansard.views',
+urlpatterns = [
     url( r'^$', IndexView.as_view(), name="index" ),
 
     # not the final URL structure - but something to start work with
@@ -21,7 +26,7 @@ urlpatterns = patterns('pombola.hansard.views',
 
 
     # views for a specific person
-    url( r'^person/(?P<slug>[\w\-]+)/summary/', 'person_summary', name='person_summary' ),
+    url(r'^person/(?P<slug>[\w\-]+)/summary/', person_summary, name='person_summary'),
     # url( r'^person/(?P<slug>[\w\-]+)/',         'person_entries', name='person_entries' ),
 
     # 'Show All' page for a specific person
@@ -29,6 +34,5 @@ urlpatterns = patterns('pombola.hansard.views',
         r'^person/(?P<slug>[\w\-]+)/appearances/',
         PersonAllAppearancesView.as_view(),
         name='person_appearances_all',
-    )
-
-)
+    ),
+]

@@ -1,10 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic.base import RedirectView
 
 from .views import wordcloud
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^wordcloud/$', wordcloud, name='wordcloud'),
     url(r'^wordcloud/(?P<max_entries>\d+)/$', wordcloud, name='wordcloud'),
 
@@ -13,4 +12,4 @@ urlpatterns = patterns(
         RedirectView.as_view(pattern_name='wordcloud', permanent=True)),
     url(r'^tagcloud/(?P<max_entries>\d+)/$',
         RedirectView.as_view(pattern_name='wordcloud', permanent=True)),
-    )
+]

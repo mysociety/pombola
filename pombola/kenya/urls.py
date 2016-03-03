@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic.base import TemplateView, RedirectView
 from pombola.kenya.views import (
     KEPersonDetail,
@@ -17,7 +17,8 @@ from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
     ShujaazFinalists2014View, ShujaazFinalists2015View
 )
 
-urlpatterns = patterns('',
+
+urlpatterns = [
     url(r'^shujaaz$',
         RedirectView.as_view(
             pattern_name='shujaaz-finalists-2015',
@@ -46,7 +47,7 @@ urlpatterns = patterns('',
             ),
         {'slug': 'party'},
         ),
-)
+]
 
 # Create the two County Performance pages:
 
