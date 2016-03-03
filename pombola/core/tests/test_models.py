@@ -571,3 +571,10 @@ class RelatedOrganisationTest(TestCase):
             organisation_a=office,
             organisation_b=party,
             kind=rel_kind)
+
+
+class NormalizeWhitespaceTest(TestCase):
+    def test_normalizing_person_legal_name_whitespace(self):
+        person = models.Person.objects.create(
+            legal_name='   Alice    Smith   ', slug='alice-smith')
+        self.assertEqual('Alice Smith', person.legal_name)

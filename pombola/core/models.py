@@ -53,6 +53,18 @@ class ModelBase(models.Model):
     created = models.DateTimeField( auto_now_add=True )
     updated = models.DateTimeField( auto_now=True )
 
+    fields_to_whitespace_normalize = []
+
+    def save(self, *args, **kwargs):
+        self.normalize_whitespace()
+        super(ModelBase, self).save(*args, **kwargs)
+
+    def normalize_whitespace(self):
+        for field in self.fields_to_whitespace_normalize:
+            previous = getattr(self, field)
+            normalized = re.sub(r'(?ms)\s+', ' ', previous).strip()
+            setattr(self, field, normalized)
+
     def css_class(self):
         return self._meta.model_name
 
@@ -325,6 +337,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     honorific_prefix = models.CharField(max_length=300, blank=True)
     honorific_suffix = models.CharField(max_length=300, blank=True)
     sort_name = models.CharField(max_length=300, blank=True)
+
+    fields_to_whitespace_normalize = ['legal_name']
 
     @property
     def name(self):
