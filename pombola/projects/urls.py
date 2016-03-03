@@ -1,7 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 import views
 
-urlpatterns = patterns('',
+
+urlpatterns = [
     url(r'^in/(?P<slug>[-\w]+)/', views.in_place, name='project_in_place'),
-)
+]

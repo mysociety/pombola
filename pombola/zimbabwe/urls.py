@@ -1,5 +1,2 @@
-from django.conf.urls import patterns
+# There are no overridden urls for Zimbabwe, yet....
 
-urlpatterns = patterns('',
-    # There are no overridden urls for Zimbabwe, yet....
-)
