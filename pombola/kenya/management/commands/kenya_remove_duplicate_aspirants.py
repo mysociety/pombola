@@ -34,7 +34,9 @@ from iebc_api import (
 
 before_import_date = datetime.datetime(2013, 2, 7, 0, 0, 0)
 
-data_directory = os.path.join(sys.path[0], 'pombola', 'kenya', '2013-election-data')
+data_directory = os.path.join(
+    os.path.dirname(__file__), '..', '..', '2013-election-data'
+)
 
 place_name_corrections = {}
 

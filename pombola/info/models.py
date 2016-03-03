@@ -13,8 +13,8 @@ from markitup.fields import MarkupField
 from pombola.file_archive.models import File
 
 class ModelBase(models.Model):
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True

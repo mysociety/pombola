@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% load compressed %}
+{% load pipeline %}
 
 {% block title %}Members' Interests{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'interests-filter' %} null ]);
+    addExtraJS([ {% javascript 'interests-filter' %} null ]);
 {% endblock %}
 
 {% block body_attributes %} class="members-interests" {% endblock %}

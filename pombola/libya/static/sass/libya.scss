@@ -2,42 +2,42 @@
 @import "compass/reset";
 
 // variables and macros
-@import "../../../core/static/sass/colours_default";
+@import "colours_default";
 @import "colours_libya";
-@import "../../../core/static/sass/core";
+@import "core";
 
 // very general styling
-@import "../../../core/static/sass/common";
-@import "../../../core/static/sass/html_elements";
-@import "../../../core/static/sass/buttons";
-@import "../../../core/static/sass/jquery-ui";
+@import "common";
+@import "html_elements";
+@import "buttons";
+@import "jquery-ui";
 
 // specific chunks of all or several pages
-@import "../../../core/static/sass/header";
-@import "../../../core/static/sass/menu";
-@import "../../../core/static/sass/breadcrumb";
-@import "../../../core/static/sass/footer";
-@import "../../../core/static/sass/page";
-@import "../../../core/static/sass/object_menu";
-@import "../../../core/static/sass/search";
-@import "../../../core/static/sass/vcard";
-@import "../../../core/static/sass/social-and-tools";
+@import "header";
+@import "menu";
+@import "breadcrumb";
+@import "footer";
+@import "page";
+@import "object_menu";
+@import "search";
+@import "vcard";
+@import "social-and-tools";
 
 // specific pages and parts of pages
-@import "../../../core/static/sass/hansard";
-@import "../../../core/static/sass/comments";
-@import "../../../core/static/sass/listing";
-@import "../../../core/static/sass/scorecard";
-@import "../../../core/static/sass/pagination";
-@import "../../../core/static/sass/ajax_dialog";
-@import "../../../core/static/sass/home_page";
-@import "../../../core/static/sass/info_pages";
-@import "../../../core/static/sass/hide-reveal";
+@import "hansard";
+@import "comments";
+@import "listing";
+@import "scorecard";
+@import "pagination";
+@import "ajax_dialog";
+@import "home_page";
+@import "info_pages";
+@import "hide-reveal";
 
 // printer specific
-@import "../../../core/static/sass/print";
+@import "print";
 
 // overides to external features
-@import "../../../core/static/sass/social";
+@import "social";
 
 @import "libya_overrides";

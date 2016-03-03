@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% comment %}
 
@@ -16,7 +16,7 @@
 {% block body_attributes %}class="county-performance"{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'experiments' %} null ]);
+    addExtraJS([ {% javascript 'experiments' %} null ]);
 {% endblock %}
 
 {% block breadcrumbs %}

@@ -1,10 +1,10 @@
 {% extends "default_base.html" %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block title_suffix %} :: People's Assembly {% endblock %}
 
 {% block css_headers %}
-    {% compressed_css 'south-africa' %}
+    {% stylesheet 'south-africa' %}
 {% endblock %}
 
 {% block page %}

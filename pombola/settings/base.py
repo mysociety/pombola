@@ -183,6 +183,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'mapit.middleware.ViewExceptionMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 if config.get('DEBUG_TOOLBAR', True):
     MIDDLEWARE_CLASSES += ( 'debug_toolbar.middleware.DebugToolbarMiddleware', )

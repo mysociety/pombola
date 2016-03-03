@@ -1,8 +1,8 @@
 {% extends "default_base.html" %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block title_suffix %} :: Kuvakazim {% endblock %}
 
 {% block css_headers %}
-    {% compressed_css 'zimbabwe' %}
+    {% stylesheet 'zimbabwe' %}
 {% endblock %}

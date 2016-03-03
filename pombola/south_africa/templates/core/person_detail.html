@@ -1,8 +1,8 @@
 {% extends 'core/person_base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'tabs' %} null ]);
+    addExtraJS([ {% javascript 'tabs' %} null ]);
 {% endblock extra_js_to_load %}
 
 {% block object_tagline %}

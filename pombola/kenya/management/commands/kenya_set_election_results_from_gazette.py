@@ -20,7 +20,9 @@ from pombola.core.models import (
     AlternativePersonName, Organisation, Person, Place, PlaceKind, Position,
     PositionTitle)
 
-data_directory = os.path.join(sys.path[0], 'pombola', 'kenya', '2013-election-data')
+data_directory = os.path.join(
+    os.path.dirname(__file__), '..', '..', '2013-election-data'
+)
 gazette_directory = os.path.join(data_directory, 'gazette-results')
 
 place_name_corrections = {}

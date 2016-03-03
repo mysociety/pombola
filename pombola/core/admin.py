@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
 from django.contrib.gis import db
-from django.contrib.contenttypes.generic import GenericTabularInline
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.utils.html import escape
 
 from ajax_select import make_ajax_form

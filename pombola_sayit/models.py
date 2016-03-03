@@ -3,9 +3,6 @@ from django.db import models
 from pombola.core.models import Person
 from speeches.models import Speaker
 
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^instances\.fields\.DNSLabelField"])
-
 
 class PombolaSayItJoin(models.Model):
 

@@ -1,11 +1,11 @@
 {% extends "admin/base.html" %}
 {% load i18n %}
 {% load staticfiles %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block extrastyle %}
     <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    {% compressed_css 'admin' %}
+    {% stylesheet 'admin' %}
 {% endblock %}
 
 {% block blockbots %}

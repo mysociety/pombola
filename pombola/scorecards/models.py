@@ -2,7 +2,9 @@ import datetime
 import dateutil.parser
 import csv
 
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import (
+    GenericForeignKey, GenericRelation
+)
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -11,8 +13,8 @@ from markitup.fields import MarkupField
 
 
 class Category(models.Model):
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     name        = models.CharField( max_length=200, unique=True )
     slug        = models.SlugField( unique=True )
@@ -28,15 +30,15 @@ class Category(models.Model):
 
 
 class Entry(models.Model):
-    created = models.DateTimeField( auto_now_add=True, default=datetime.datetime.now, )
-    updated = models.DateTimeField( auto_now=True,     default=datetime.datetime.now, )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     category = models.ForeignKey(Category)
 
     # link to other objects using the ContentType system
     content_type   = models.ForeignKey(ContentType)
     object_id      = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     # Used to select the most recent data of this category. Require a full data
     # for simplicity.
@@ -235,7 +237,7 @@ class ScorecardMixin(models.Model):
 
     # TODO - we should limit the scorecards to the newest in each category
 
-    scorecard_entries = generic.GenericRelation(Entry)
+    scorecard_entries = GenericRelation(Entry)
 
     # Show an overall score for this Item.
     # Set this to false in anything for which you only want the individual

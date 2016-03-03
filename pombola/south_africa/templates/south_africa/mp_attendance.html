@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% load compressed static %}
+{% load pipeline static %}
 
 {% block title %}MP Attendance{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'attendance-table' %} null ]);
+    addExtraJS([ {% javascript 'attendance-table' %} null ]);
 {% endblock %}
 
 {% block css_headers %}
   {{ block.super }}
-  {% compressed_css 'datatables' %}
+  {% stylesheet 'datatables' %}
 {% endblock %}
 
 {% block body_attributes %} class="mp-attendance" {% endblock %}

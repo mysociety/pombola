@@ -5,7 +5,9 @@ from django.core.management.base import BaseCommand
 from haystack import connections as haystack_connections
 from haystack.exceptions import NotHandled
 from haystack.query import SearchQuerySet
-from haystack.utils.app_loading import get_models, load_apps
+from haystack.utils.app_loading import (
+    haystack_get_models, haystack_load_apps
+)
 
 
 def get_all_indexed_models():
@@ -16,8 +18,8 @@ def get_all_indexed_models():
 
     for backend_key in backends:
         unified_index = haystack_connections[backend_key].get_unified_index()
-        for app in load_apps():
-            for model in get_models(app):
+        for app in haystack_load_apps():
+            for model in haystack_get_models(app):
                 try:
                     unified_index.get_index(model)
                 except NotHandled:

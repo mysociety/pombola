@@ -34,7 +34,7 @@ class Command(BaseCommand):
                     help="Suppress progress output",
                     default=False, action='store_true'))
 
-    @transaction.commit_on_success
+    @transaction.atomic()
     def handle(self, *args, **options):
         if not options['person_from']:
             raise CommandError("You must specify --person-from")

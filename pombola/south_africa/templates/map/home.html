@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block title %}Map{% endblock %}
 
@@ -23,7 +23,7 @@
       }
     };
 
-    addExtraJS([ {% compressed_js 'za-map-drilldown' %} null ]);
+    addExtraJS([ {% javascript 'za-map-drilldown' %} null ]);
 {% endblock %}
 
 {% block extra_headers %}

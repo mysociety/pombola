@@ -1,6 +1,8 @@
 import datetime
 
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import (
+    GenericForeignKey, GenericRelation
+)
 from django.contrib.contenttypes.models import ContentType
 from django_date_extensions.fields import ApproximateDateField
 from django.db import models
@@ -10,8 +12,8 @@ import decimal
 
 
 class BudgetSession(models.Model):
-    created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)
-    updated = models.DateTimeField(auto_now=True, default=datetime.datetime.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     # A name for this budget sessions
     name = models.CharField(
@@ -31,13 +33,13 @@ class BudgetSession(models.Model):
 
 class Budget(models.Model):
 
-    created = models.DateTimeField(auto_now_add=True, default=datetime.datetime.now)
-    updated = models.DateTimeField(auto_now=True, default=datetime.datetime.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     # link to other objects using the ContentType system
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     # Who actually handed out this budget?
     organisation = models.CharField(
@@ -81,7 +83,7 @@ class Budget(models.Model):
 class BudgetsMixin(models.Model):
     """Mixin to add budget related methods to models"""
 
-    budget_entries = generic.GenericRelation(Budget)
+    budget_entries = GenericRelation(Budget)
 
     def budgets(self):
         return self.budget_entries.all()

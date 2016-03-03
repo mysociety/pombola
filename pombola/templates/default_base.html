@@ -80,7 +80,7 @@
             <script type="text/javascript" src="{% static 'js/libs/respond.1.0.1.min.js' %}"></script>
         <![endif]-->
 
-        {% load compressed %}
+        {% load pipeline %}
 
         <script type="text/javascript" charset="utf-8">
 
@@ -98,32 +98,32 @@
         remove. */
 
             var pipeline_desktop_only = [
-                {% compressed_js 'desktop_only' %}
+                {% javascript 'desktop_only' %}
                 null
             ];
             pipeline_desktop_only.pop();
 
             var pipeline_mobile_only =  [
-                {% compressed_js 'mobile_only' %}
+                {% javascript 'mobile_only' %}
                 null
             ];
             pipeline_mobile_only.pop();
 
             var pipeline_desktop_and_mobile =  [
-                {% compressed_js 'desktop_and_mobile' %}
+                {% javascript 'desktop_and_mobile' %}
                 null
             ];
             pipeline_desktop_and_mobile.pop();
 
             var pipeline_analytics =  [
-                {% compressed_js 'analytics' %}
+                {% javascript 'analytics' %}
                 null
             ];
             pipeline_analytics.pop();
 
         </script>
 
-        {% compressed_js 'modernizr_and_loader' %}
+        {% javascript 'modernizr_and_loader' %}
 
         <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
 
@@ -162,7 +162,7 @@
         </div>
         {% endblock %}
 
-        {% compressed_js 'survey' %}
+        {% javascript 'survey' %}
 
         {% block footer_extra_js_to_load %}{% endblock %}
 

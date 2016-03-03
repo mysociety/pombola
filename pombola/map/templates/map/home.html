@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block title %}Map{% endblock %}
 
@@ -13,7 +13,7 @@
       {% endif %}
     };
 
-    addExtraJS([ {% compressed_js 'map' %} null ]);
+    addExtraJS([ {% javascript 'map' %} null ]);
 
 {% endblock %}
 
