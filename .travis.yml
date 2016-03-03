@@ -1,3 +1,5 @@
+sudo: false
+
 notifications:
   email: false
   irc:
@@ -8,25 +10,16 @@ notifications:
 
 language: python
 
-env:
-  - MODULES="Django>=1.6,<1.7"
-
 services:
   - elasticsearch
 
+addons:
+  apt:
+    packages:
+    - yui-compressor
+
 install:
-  - sudo rm /etc/apt/sources.list.d/pgdg-source.list
-  - sudo rm /etc/apt/sources.list.d/ubuntugis-stable-source.list
-  - sudo apt-get update -qq
-  # The following steps are taken from MapIt's travis.yml, to make
-  # sure that the system python-gdal is used - installing it with pip
-  # will fail due to build errors.
-  - sudo apt-get install python-gdal gdal-bin binutils yui-compressor
   - gem install --no-ri --no-rdoc compass -v 0.12.7
-  - ln -s /usr/lib/python2.7/dist-packages/osgeo ~/virtualenv/python2.7/lib/python2.7/site-packages/
-  - ln -s /usr/lib/python2.7/dist-packages/GDAL-1.7.3.egg-info ~/virtualenv/python2.7/lib/python2.7/site-packages/
-  # Install the environment-specific Python packages:
-  - pip install $MODULES --use-mirrors
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt --use-mirrors
   # Create a basic general.yml file:
