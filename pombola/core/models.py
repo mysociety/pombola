@@ -155,6 +155,8 @@ class ContactKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
 
+    fields_to_whitespace_normalize = ['name']
+
     objects = ManagerBase()
 
     def __unicode__(self):
@@ -174,6 +176,8 @@ class Contact(ModelBase):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    fields_to_whitespace_normalize = ['value']
 
     objects = ManagerBase()
 
@@ -198,6 +202,8 @@ class InformationSource(ModelBase):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    fields_to_whitespace_normalize = ['source']
 
     objects = ManagerBase()
 
@@ -338,7 +344,17 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     honorific_suffix = models.CharField(max_length=300, blank=True)
     sort_name = models.CharField(max_length=300, blank=True)
 
-    fields_to_whitespace_normalize = ['legal_name']
+    fields_to_whitespace_normalize = ['title',
+                                      'legal_name',
+                                      'gender',
+                                      'email',
+                                      'national_identity',
+                                      'family_name',
+                                      'given_name',
+                                      'additional_name',
+                                      'honorific_prefix',
+                                      'honorific_suffix',
+                                      'sort_name']
 
     @property
     def name(self):
@@ -543,6 +559,13 @@ class AlternativePersonName(ModelBase):
     honorific_prefix = models.CharField(max_length=300, blank=True)
     honorific_suffix = models.CharField(max_length=300, blank=True)
 
+    fields_to_whitespace_normalize = ['alternative_name',
+                                      'family_name',
+                                      'given_name',
+                                      'additional_name',
+                                      'honorific_prefix',
+                                      'honorific_suffix']
+
     objects = ManagerBase()
 
     def __unicode__(self):
@@ -580,6 +603,8 @@ class OrganisationKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
+
+    fields_to_whitespace_normalize = ['name']
 
     objects = ManagerBase()
 
@@ -627,6 +652,8 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended = ApproximateDateField(blank=True, help_text=date_help_text)
 
+    fields_to_whitespace_normalize = ['name']
+
     objects = OrganisationQuerySet.as_manager()
     contacts = generic.GenericRelation(Contact)
     images = generic.GenericRelation(Image)
@@ -660,6 +687,8 @@ class PlaceKind(ModelBase):
     plural_name = models.CharField(max_length=200, blank=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
+
+    fields_to_whitespace_normalize = ['name', 'plural_name']
 
     objects = ManagerBase()
 
@@ -722,6 +751,8 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
+
+    fields_to_whitespace_normalize = ['name']
 
     objects = PlaceQuerySet.as_manager()
     is_overall_scorecard_score_applicable = False
@@ -1008,6 +1039,8 @@ class PositionTitle(ModelBase):
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
     requires_place = models.BooleanField(default=False, help_text="Does this job title require a place to complete the position?")
+
+    fields_to_whitespace_normalize = ['name']
 
     objects = ManagerBase()
 
@@ -1355,6 +1388,8 @@ class ParliamentarySession(ModelBase):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="specify manually")
 
+    fields_to_whitespace_normalize = ['name']
+
     def __repr__(self):
         return "<ParliamentarySession: %s>" % (self.name,)
 
@@ -1418,6 +1453,8 @@ class OrganisationRelationshipKind(ModelBase):
       - Start and end dates of the relationship
     """
     name = models.CharField(max_length=200, unique=True)
+
+    fields_to_whitespace_normalize = ['name']
 
 
 class OrganisationRelationship(ModelBase):
