@@ -322,7 +322,6 @@ class GeocoderView(TemplateView):
         # http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
         "south_africa": "za",
         "kenya":        "ke",
-        "zimbabwe":     "zw",
         "nigeria":      "ng",
         "libya":        "ly",
     }
