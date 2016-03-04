@@ -7,6 +7,7 @@ from django.utils.html import escape
 
 from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
+from ajax_select.fields import autoselect_fields_check_can_add
 
 from pombola.core import models
 from pombola.scorecards import models as scorecard_models
@@ -171,6 +172,11 @@ class PositionInlineAdmin(admin.TabularInline):
             'title': 'title_name',
         },
     )
+
+    def get_formset(self, request, obj=None, **kwargs):
+        fs = super(PositionInlineAdmin, self).get_formset(request, obj, **kwargs)
+        autoselect_fields_check_can_add(fs.form, self.model, request.user)
+        return fs
 
 
 class ScorecardInlineAdmin(GenericTabularInline):
