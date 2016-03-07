@@ -2,8 +2,8 @@
 {# If the Person has sponsored no bills, nothing is shown. #}
 {% with bills_count=object.bills_sponsored.count recent_count=object.bills_sponsored.recent.count  %}
   {% if bills_count %}
-    <div>
-      <h3>Bills Sponsored</h3>
+    <div class="person-detail-bills">
+      <h2>Bills Sponsored</h2>
         {% if bills_count > recent_count %}
             <p>The most recently sponsored bills include...</p>
             <ul>

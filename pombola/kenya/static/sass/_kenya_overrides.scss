@@ -317,7 +317,8 @@ body {
   background-image: url(../images/mz-person-detail-appearances.png);
 }
 
-.person-detail-cdf-budgets {
+.person-detail-cdf-budgets,
+.person-detail-bills {
   margin-top: 20px;
   width: 100%;
   background-image: url(../images/mz-person-detail-budget.png);
@@ -337,6 +338,10 @@ body {
       color: $colour_primary;
     }
   }
+}
+
+.person-detail-bills {
+  background-image: url(../images/mz-person-detail-bills.png);
 }
 
 /* used by old code on the /person/name/experience page */
