@@ -277,26 +277,46 @@ def position_pt_ok_o(request, pt_slug, ok_slug, o_slug):
     """Show current positions with a given PositionTitle, OrganisationKind and Organisation"""
     return position(request, pt_slug, ok_slug=ok_slug, o_slug=o_slug)
 
-def get_position_type_redirect(pt_slug, ok_slug=None, o_slug=None):
-    """If this position type URL should redirect, return the new URL"""
-    pt_redirect = get_slug_redirect(models.PositionTitle, pt_slug)
-    if pt_redirect:
-        pt_slug = pt_redirect.slug
 
-    if ok_slug:
-        ok_redirect = get_slug_redirect(models.OrganisationKind, ok_slug)
-        if ok_redirect:
-            kwargs = {'pt_slug': pt_slug, 'ok_slug': ok_redirect.slug}
-            # Then this should be redirected, but to one of two
-            # possible views:
-            if o_slug:
-                kwargs['o_slug'] = o_slug
-                new_url = reverse('position_pt_ok_o', kwargs=kwargs)
-            else:
-                new_url = reverse('position_pt_ok', kwargs=kwargs)
-            return new_url
+def get_position_type_redirect(pt_slug, ok_slug=None, o_slug=None):
+    """If this position type URL should redirect, return the new URL.
+
+    If no redirect is required, return None."""
+    pt_redirect = get_slug_redirect(models.PositionTitle, pt_slug)
+    ok_redirect = get_slug_redirect(models.OrganisationKind, ok_slug) if ok_slug else None
+    o_redirect = get_slug_redirect(models.Organisation, o_slug) if o_slug else None
+
+    new_pt_slug = pt_redirect.slug if pt_redirect else pt_slug
+    new_ok_slug = ok_redirect.slug if ok_redirect else ok_slug
+    new_o_slug = o_redirect.slug if o_redirect else o_slug
+
+    if o_slug:
+        if pt_redirect or ok_redirect or o_redirect:
+            return reverse(
+                'position_pt_ok_o',
+                kwargs={
+                    'pt_slug': new_pt_slug,
+                    'ok_slug': new_ok_slug,
+                    'o_slug': new_o_slug,
+                    })
+    elif ok_slug:
+        if pt_redirect or ok_redirect:
+            return reverse(
+                'position_pt_ok',
+                kwargs={
+                    'pt_slug': new_pt_slug,
+                    'ok_slug': new_ok_slug,
+                    }
+                )
     else:
-        return pt_redirect
+        if pt_redirect:
+            return reverse(
+                'position_pt',
+                kwargs={
+                    'pt_slug': new_pt_slug
+                    }
+                )
+
 
 def position(request, pt_slug, ok_slug=None, o_slug=None):
     new_url = get_position_type_redirect(pt_slug, ok_slug, o_slug)

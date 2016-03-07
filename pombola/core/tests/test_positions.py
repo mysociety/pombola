@@ -11,6 +11,7 @@ from django_date_extensions.fields import ApproximateDate
 from pombola.slug_helpers.models import SlugRedirect
 from pombola.core import models
 
+
 class PositionTest(TestCase):
     def setUp(self):
         self.person = models.Person(
@@ -20,8 +21,8 @@ class PositionTest(TestCase):
         self.person.save()
         
         self.organisation_kind = models.OrganisationKind(
-            name = 'Foo',
-            slug = 'foo',
+            name = 'Test OrgKind',
+            slug = 'test-orgkind',
         )
         self.organisation_kind.save()
 
@@ -33,15 +34,29 @@ class PositionTest(TestCase):
         self.organisation.save()
         
         self.title = models.PositionTitle.objects.create(
-            name = 'Test title',
-            slug = 'test-title',
+            name = 'Test PositionTitle',
+            slug = 'test-positiontitle',
         )
+
+        SlugRedirect.objects.create(
+            content_type=ContentType.objects.get_for_model(
+                models.OrganisationKind),
+            new_object=self.organisation_kind,
+            old_object_slug='old-orgkind',
+            )
+
+        SlugRedirect.objects.create(
+            content_type=ContentType.objects.get_for_model(
+                models.Organisation),
+            new_object=self.organisation,
+            old_object_slug='old-org',
+            )
 
         SlugRedirect.objects.create(
             content_type=ContentType.objects.get_for_model(
                 models.PositionTitle),
             new_object=self.title,
-            old_object_slug='old',
+            old_object_slug='old-positiontitle',
             )
 
     def test_unicode(self):
@@ -52,7 +67,6 @@ class PositionTest(TestCase):
         )
         self.assertEqual( str(position), 'Test Person (??? at ???)' )
 
-    
     def test_display_dates(self):
         """Check that the date that is displayed is correct"""
         position = models.Position(person = self.person)
@@ -111,7 +125,6 @@ class PositionTest(TestCase):
                 "%s -> %s should be '%s', not '%s'" % (start_date, end_date, expected, actual)
             )
     
-
     def test_past_end_dates(self):
         """
         Check that the entries can be created with past dates. Issues could
@@ -150,8 +163,6 @@ class PositionTest(TestCase):
             else:
                 # Should just work without throwing exception
                 create_position(**kwargs)                
-
-
 
     def test_sorting(self):
         """Check that the sorting is as expected"""
@@ -259,7 +270,6 @@ class PositionTest(TestCase):
         pos.organisation = self.organisation
         pos.full_clean()
         
-
     def test_place_is_required(self):
         """
         Some job titles (like an MP) are meaningless if there is no place
@@ -500,25 +510,130 @@ class PositionTest(TestCase):
     def test_position_title_no_redirect(self):
         response = self.client.get(
             reverse('position_pt', kwargs={
-                'pt_slug': 'test-title',
+                'pt_slug': 'test-positiontitle',
             })
         )
         self.assertContains(
             response,
-            'Test title',
+            'Test PositionTitle',
             status_code=200,
         )
-
 
     def test_redirect_position_title(self):
         response = self.client.get(
             reverse('position_pt', kwargs={
-                'pt_slug': 'old',
+                'pt_slug': 'old-positiontitle',
             })
         )
         self.assertRedirects(
             response,
             reverse('position_pt', kwargs={
-                'pt_slug': 'test-title',
+                'pt_slug': 'test-positiontitle',
+            })
+        )
+
+    def test_position_title_orgkind_no_redirect(self):
+        response = self.client.get(
+            reverse('position_pt_ok', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'test-orgkind',
+            })
+        )
+        self.assertContains(
+            response,
+            'Test PositionTitle',
+            status_code=200,
+        )
+
+    def test_redirect_old_position_title_current_orgkind(self):
+        response = self.client.get(
+            reverse('position_pt_ok', kwargs={
+                'pt_slug': 'old-positiontitle',
+                'ok_slug': 'test-orgkind',
+            })
+        )
+        self.assertRedirects(
+            response,
+            reverse('position_pt_ok', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'test-orgkind',
+            })
+        )
+
+    def test_redirect_current_position_title_old_orgkind(self):
+        response = self.client.get(
+            reverse('position_pt_ok', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'old-orgkind',
+            })
+        )
+        self.assertRedirects(
+            response,
+            reverse('position_pt_ok', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'test-orgkind',
+            })
+        )
+
+    def test_redirect_old_position_title_old_orgkind(self):
+        response = self.client.get(
+            reverse('position_pt_ok', kwargs={
+                'pt_slug': 'old-positiontitle',
+                'ok_slug': 'old-orgkind',
+            })
+        )
+        self.assertRedirects(
+            response,
+            reverse('position_pt_ok', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'test-orgkind',
+            })
+        )
+
+    def test_position_title_orgkind_org_no_redirect(self):
+        response = self.client.get(
+            reverse('position_pt_ok_o', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'test-orgkind',
+                'o_slug': 'test-org',
+            })
+        )
+        self.assertContains(
+            response,
+            'Test PositionTitle',
+            status_code=200,
+        )
+
+    def test_redirect_old_position_title_current_orgkind_current_org(self):
+        response = self.client.get(
+            reverse('position_pt_ok_o', kwargs={
+                'pt_slug': 'old-positiontitle',
+                'ok_slug': 'test-orgkind',
+                'o_slug': 'test-org',
+            })
+        )
+        self.assertRedirects(
+            response,
+            reverse('position_pt_ok_o', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'test-orgkind',
+                'o_slug': 'test-org',
+            })
+        )
+
+    def test_redirect_current_position_title_current_orgkind_old_org(self):
+        response = self.client.get(
+            reverse('position_pt_ok_o', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'test-orgkind',
+                'o_slug': 'old-org'
+            })
+        )
+        self.assertRedirects(
+            response,
+            reverse('position_pt_ok_o', kwargs={
+                'pt_slug': 'test-positiontitle',
+                'ok_slug': 'test-orgkind',
+                'o_slug': 'test-org',
             })
         )
