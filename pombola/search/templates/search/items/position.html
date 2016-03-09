@@ -18,11 +18,8 @@
     <h3>{% maybehidden object.person user %}{{ object.person.name }}{% endmaybehidden %}</h3>
     {% if object.place %}
       <p>Member for {{ object.place.name }}</p>
-    {% else %}
-      {# Bring on the elif clause! #}
-      {% if object.is_nominated_politician %}
-        <p>Nominated Member</p>
-      {% endif %}
+    {% elif object.is_nominated_politician %}
+      <p>Nominated Member</p>
     {% endif %}
   </section>
 

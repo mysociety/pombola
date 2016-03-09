@@ -16,11 +16,8 @@
   <h4>{% maybehidden object.person user %}{{ object.person.name }}{% endmaybehidden %}</h4>
   {% if object.place %}
     <p>Member for {{ object.place.name }}</p>
-  {% else %}
-    {# Bring on the elif clause! #}
-    {% if object.is_nominated_politician %} 
-      <p>Nominated Member</p>
-    {% endif %}
+  {% elif object.is_nominated_politician %}
+    <p>Nominated Member</p>
   {% endif %}
   {% if not object.person.hidden %}
     <div class="read-more-wrap"><a href="{{ object.person.get_absolute_url }}" class="read-more">read more</a></div>
