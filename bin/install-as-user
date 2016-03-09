@@ -18,7 +18,7 @@ UNIX_USER="$1"
 HOST="$2"
 DIRECTORY="$3"
 DEVELOPMENT_INSTALL="$4"
-COUNTRY_APPS="kenya nigeria zimbabwe south_africa"
+COUNTRY_APPS="kenya nigeria south_africa"
 
 # Check that the arguments we've been passed are sensible:
 

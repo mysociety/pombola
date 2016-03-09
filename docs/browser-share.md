@@ -1,7 +1,7 @@
 As of 2015-08-19, here are the browser share statistics for each
 of the live pombola sites that mySociety hosts over a period
 that gets a reasonable amount of traffic (a month for Mz and PA,
-a few months for SYE and Kuvakazim):
+a few months for SYE):
 
 ### Mzalendo (Kenya)
 
@@ -57,22 +57,3 @@ a few months for SYE and Kuvakazim):
 * 1.1% S40 Ovi Browser
 * 1.0% UC Browser
 * 0.7% Opera
-
-### Kuvakazim (Zimbabwe)
-
-* 38.9% Chrome
-* 25.3% Opera Mini
-* 13.9% Firefox
-* 11.3% Internet Explorer, of which:
-  * 5.7% IE 11.0
-  * 2.2% IE 10.0
-  * 2.0% IE 8.0
-  * 1.3% IE 9.0
-  * 0.1% IE 7.0
-* 5.0% Safari
-* 2.0% Android browser, of which:
-  * 1.8% Android Browser 4.0
-  * 0.2% Android Browser 4.4.2
-* 1.8% Opera
-* 0.7% (not set)
-* 0.4% BlackBerry

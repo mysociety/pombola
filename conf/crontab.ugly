@@ -27,7 +27,6 @@ PYTHONIOENCODING=utf-8
         'mzalendo.mysociety.org' => 10,
         'www.pa.org.za' => 20,
         'www.shineyoureye.org' => 30,
-        'www.kuvakazim.com' => 40,
     );
     if (exists $dump_times{$vhost}) {
         $dump_directory = "/data/vhost/$vhost/media_root/dumps";
@@ -57,12 +56,6 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 
 !!(* } elsif ($vhost eq 'nigeria.mzalendo.mysociety.org') { *)!!
 10 7 * * * !!(*= $user *)!! run_management_command feedback_report_pending
-
-!!(* } elsif ($vhost eq 'www.kuvakazim.com') { *)!!
-
-# Generate the Popolo JSON files
-55 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.kuvakazim.com
-10 3 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.kuvakazim.com
 
 !!(* } elsif ($vhost eq 'za-pombola.staging.mysociety.org') { *)!!
 
