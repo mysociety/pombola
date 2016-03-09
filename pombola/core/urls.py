@@ -15,6 +15,7 @@ from pombola.core.views import (HomeView, PlaceDetailView,
     position_pt_ok,
     position_pt_ok_o,
     robots,
+    VersionView,
     )
 
 
@@ -155,4 +156,8 @@ urlpatterns += (
 # A URL for testing jQuery UI components:
 urlpatterns += (
     url(r'^ui-test', TemplateView.as_view(template_name='ui-test.html')),
+)
+
+urlpatterns += (
+    url(r'version.json', VersionView.as_view(), name='version'),
 )

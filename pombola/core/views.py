@@ -11,8 +11,12 @@ import datetime
 import os
 import random
 import json
+import sys
+import subprocess
 from urlparse import urlsplit, urlunsplit
+from os.path import dirname
 
+import django
 from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.db.models import Q
@@ -25,6 +29,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.core.cache import cache
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.generic import View
 
 from popolo.models import Identifier
 
@@ -527,3 +532,26 @@ def robots(request):
         context_instance=RequestContext(request),
         content_type='text/plain',
     )
+
+
+class VersionView(View):
+
+    http_method_names = ['get']
+
+    def get(self, request, *args, **kwargs):
+        result = {
+            'python_version': sys.version,
+            'django_version': django.get_version(),
+        }
+        # Try to get the object name of HEAD from git:
+        try:
+            git_version = subprocess.check_output(
+                ['git', 'rev-parse', '--verify', 'HEAD'],
+                cwd=dirname(__file__),
+            ).strip()
+            result['git_version'] = git_version
+        except OSError, subprocess.CalledProcessError:
+            pass
+        return HttpResponse(
+            json.dumps(result), content_type='application/json'
+        )
