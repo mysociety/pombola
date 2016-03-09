@@ -171,6 +171,7 @@ class PositionInlineAdmin(admin.TabularInline):
             'title': 'title_name',
         },
     )
+    ordering = ('-category', 'organisation__name', '-start_date')
 
 
 class ScorecardInlineAdmin(GenericTabularInline):
