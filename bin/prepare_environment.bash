@@ -11,22 +11,13 @@ cd "$(dirname $BASH_SOURCE)"/..
 # them back to the defaults which is what they would have on the servers.
 PYTHONDONTWRITEBYTECODE=""
 
-
-# virtualenv >= 1.7 changed the default behaviour to --no-site-packages,
-# which causes problems on wheezy where gdal is hard to build.
-virtualenv_version="$(virtualenv --version)"
-virtualenv_args=""
-if [ "$(echo -e '1.7\n'$virtualenv_version | sort -V | head -1)" = '1.7' ]; then
-    virtualenv_args="--system-site-packages"
-fi
-
 virtualenv_dir='../pombola-virtualenv'
 virtualenv_activate="$virtualenv_dir/bin/activate"
 
 # create the virtual environment, install/update required packages
 if [ ! -f "$virtualenv_activate" ]
 then
-    virtualenv $virtualenv_args $virtualenv_dir
+    virtualenv $virtualenv_dir
 fi
 
 source $virtualenv_activate
