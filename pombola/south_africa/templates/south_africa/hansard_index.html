@@ -14,6 +14,17 @@
   <p>Note: There is a delay in the release of Hansard transcripts of about six months</p>
 {% endif %}
 
+<form method="get" action="{% url 'core_search' %}" class="global-search-form">
+    <input type="hidden" name="section" value="hansard">
+    <div class="search-section-box">
+        <div class="inline-search-box">
+            <label for="id_q">Search</label>
+            <input id="id_q" name="q" type="text" value="{{ query }}">
+            <input type="submit" value="Search" class="button">
+        </div>
+    </div>
+</form>
+
 <div class="clearfix">
   <p style="float: right;">
     <a class="js-reveal-all-link" href="#">Expand all subsections</a>
