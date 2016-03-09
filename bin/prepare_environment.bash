@@ -16,7 +16,7 @@ PYTHONDONTWRITEBYTECODE=""
 # which causes problems on wheezy where gdal is hard to build.
 virtualenv_version="$(virtualenv --version)"
 virtualenv_args=""
-if [ "$(echo -e '1.7\n'$virtualenv_version | sort -V | head -1)" = '1.7' ]; then
+if [ "$(echo -e '1.7\n'$virtualenv_version | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | head -1)" = '1.7' ]; then
     virtualenv_args="--system-site-packages"
 fi
 
