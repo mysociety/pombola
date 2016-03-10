@@ -9,6 +9,7 @@ notifications:
     skip_join: true
 
 language: python
+cache: pip
 
 services:
   - elasticsearch
