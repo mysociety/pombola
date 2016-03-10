@@ -30,7 +30,6 @@ class Command(BaseCommand):
         'wdm-k':      'cord', # Wiper democratic Movement Kenya
         'ford-kenya': 'cord', # Ford Kenya
         'ford':       'cord', # Forum For The Restoration Of Democracy
-        'ford-k':     'cord', # Forum For The Restoration Of Democracy - Kenya
         'ksc':        'cord', # Kenya Social Congress
         'tip':        'cord', # The Independent Party
         'kadu-asili': 'cord', # Kenya African Democratic Union - Asili
