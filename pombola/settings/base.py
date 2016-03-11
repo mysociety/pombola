@@ -206,6 +206,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     "pombola.core.context_processors.add_settings",
+    "pombola.core.context_processors.site_processor",
 )
 
 MAPIT_AREA_SRID = 4326

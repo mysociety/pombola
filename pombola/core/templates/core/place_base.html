@@ -4,6 +4,7 @@
 {% load humanize %}
 {% load hidden %}
 {% load pipeline %}
+{% load absolute_url %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -16,6 +17,19 @@
     <![endif]-->
   {% endif %}
 {% endblock%}
+
+{% block open_graph %}
+<meta property="og:title" content="{{ object.name }}" />
+<meta property="og:site_name" content="{{ site.name }}" />
+<meta property="og:type" content="place" />
+{% if object.primary_image %}
+<meta property="og:image" content="{{ object.primary_image.url|absolute_url:request }}" />
+{% endif %}
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+{% if object.summary %}
+<meta property="og:description" content="{{ object.summary|striptags }}" />
+{% endif %}
+{% endblock %}
 
 {% block object_menu_links %}
   {% include 'core/_object_menu_link.html' with url_name='place' link_text='Overview' %}

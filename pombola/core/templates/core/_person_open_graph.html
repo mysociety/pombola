@@ -1,0 +1,21 @@
+{% load absolute_url %}
+
+<meta property="og:title" content="{{ object.name }}" />
+<meta property="og:site_name" content="{{ site.name }}" />
+<meta property="og:type" content="profile" />
+{% if object.primary_image %}
+<meta property="og:image" content="{{ object.primary_image.url|absolute_url:request }}" />
+{% endif %}
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+{% if object.summary %}
+<meta property="og:description" content="{{ object.summary|striptags }}" />
+{% endif %}
+{% if object.given_name %}
+<meta property="profile:first_name" content="{{ object.given_name }}" />
+{% endif %}
+{% if object.family_name %}
+<meta property="profile:last_name" content="{{ object.family_name }}" />
+{% endif %}
+{% if object.gender %}
+<meta property="profile:gender" content="{{ object.gender }}" />
+{% endif %}
