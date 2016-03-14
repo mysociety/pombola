@@ -1308,15 +1308,52 @@ class SAElectionStatisticsView(SAElectionOverviewMixin):
 
         context['current_mps'] = {'all': {}, 'byparty': []}
 
-        context['current_mps']['all']['current'] = models.Organisation.objects.get(slug='national-assembly').position_set.all().currently_active().distinct('person__id').count()
-        context['current_mps']['all']['rerunning'] = models.Organisation.objects.get(slug='national-assembly').position_set.all().currently_active().filter(Q(person__position__organisation__slug__contains='national-election-list-2014') | (Q(person__position__organisation__slug__contains='election-list-2014') & Q(person__position__organisation__slug__contains='regional'))).distinct('person__id').count()
+        election_2014_query = (
+            Q(person__position__organisation__slug__contains='national-election-list-2014') |
+            (Q(person__position__organisation__slug__contains='election-list-2014') &
+             Q(person__position__organisation__slug__contains='regional'))
+            )
+
+        current_na_positions = (
+            models.Organisation.objects
+            .get(slug='national-assembly')
+            .position_set.all()
+            .currently_active()
+            )
+
+        context['current_mps']['all']['current'] = (
+            current_na_positions
+            .order_by('person__id')
+            .distinct('person__id')
+            .count()
+            )
+        context['current_mps']['all']['rerunning'] = (
+            current_na_positions
+            .filter(election_2014_query)
+            .order_by('person__id')
+            .distinct('person__id')
+            .count()
+            )
         context['current_mps']['all']['percent_rerunning'] = 100 * context['current_mps']['all']['rerunning'] / context['current_mps']['all']['current']
 
         #find the number of current MPs running for office per party
         for p in context['party_list']:
             party = models.Organisation.objects.get(slug=p.slug)
-            current = models.Organisation.objects.get(slug='national-assembly').position_set.all().currently_active().filter(person__position__organisation__slug=p.slug).distinct('person__id').count()
-            rerunning = models.Organisation.objects.get(slug='national-assembly').position_set.all().currently_active().filter(person__position__organisation__slug=p.slug).filter(Q(person__position__organisation__slug__contains='national-election-list-2014') | (Q(person__position__organisation__slug__contains='election-list-2014') & Q(person__position__organisation__slug__contains='regional'))).distinct('person__id').count()
+            current = (
+                current_na_positions
+                .filter(person__position__organisation__slug=p.slug)
+                .order_by('person__id')
+                .distinct('person__id')
+                .count()
+                )
+            rerunning = (
+                current_na_positions
+                .filter(person__position__organisation__slug=p.slug)
+                .filter(election_2014_query)
+                .order_by('person__id')
+                .distinct('person__id')
+                .count()
+                )
             if current:
                 percent = 100 * rerunning / current
                 context['current_mps']['byparty'].append({'party': party, 'current': current, 'rerunning': rerunning, 'percent_rerunning': percent})
