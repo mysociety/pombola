@@ -1,10 +1,10 @@
 {% extends 'south_africa/latlon_detail_base_view.html' %}
-{% load compressed %}
+{% load pipeline %}
 
 {% block title %}{{ object.name }} - Local Politicians{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% compressed_js 'tabs' %} null ]);
+    addExtraJS([ {% javascript 'tabs' %} null ]);
 {% endblock %}
 
 {% block subcontent %}
@@ -24,7 +24,7 @@
   </ul>
 
   <!-- TODO: Map should show ward close-up when councillor tab is selected -->
-  {% compressed_js 'google-map' %}
+  {% javascript 'google-map' %}
   <script>
     var ward_kml_urls = [];
     var constituency_offices_marker_data = [];
