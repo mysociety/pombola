@@ -258,7 +258,6 @@ class LatLonDetailBaseView(BasePlaceDetailView):
                 phone_contact = person.contacts.filter(kind__slug='voice').first()
                 if phone_contact:
                     phone = phone_contact.value
-                # Ignore people who aren't MPs or MPLs
                 person_data = {
                     'name': person.legal_name,
                     'person': person,
@@ -275,9 +274,11 @@ class LatLonDetailBaseView(BasePlaceDetailView):
 
                 if mp_positions:
                     person_data['positions'] = mp_positions
+                    person_data['is_mp'] = True
                     mp_data.append(person_data)
                 if mpl_positions:
                     person_data['positions'] = mpl_positions
+                    person_data['is_mpl'] = True
                     mpl_data.append(person_data)
 
         context['form'] = LocationSearchForm(

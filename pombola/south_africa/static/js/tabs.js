@@ -6,7 +6,9 @@ $(function() {
         if (tabID == 'councillors') {
             add_kml_urls(ward_kml_urls);
         } else if (tabID == 'mps') {
-            add_markers(constituency_offices_marker_data);
+            add_markers(constituency_offices_marker_data_mps);
+        } else if (tabID == 'mpls') {
+            add_markers(constituency_offices_marker_data_mpls);
         }
     }
   }
