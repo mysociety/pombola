@@ -11,15 +11,14 @@
 
 <div class="tabs ui-tabs ui-widget rep-locator-container">
   <ul class="rep-locator-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
-    <!-- TODO: correctly pluralize these nouns -->
     <li class="ui-state-default">
-      <a href="#mps" class="ui-tabs-anchor active">{{ mp_data | length }} MPs</a>
+      <a href="#mps" class="ui-tabs-anchor active">{{ mp_data | length }} MP{{ mp_data | length | pluralize }}</a>
     </li>
     <li class="ui-state-default">
-      <a href="#mpls" class="ui-tabs-anchor active">{{ mpl_data | length }} MPLs</a>
+      <a href="#mpls" class="ui-tabs-anchor active">{{ mpl_data | length }} MPL{{ mpl_data | length | pluralize }}</a>
     </li>
     <li class="ui-state-default">
-      <a href="#councillors" class="ui-tabs-anchor">{{ ward_data | length }} Ward Councillor</a>
+      <a href="#councillors" class="ui-tabs-anchor">{{ ward_data | length }} Ward Councillor{{ ward_data | length | pluralize }}</a>
     </li>
   </ul>
 
