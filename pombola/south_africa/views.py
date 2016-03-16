@@ -214,7 +214,9 @@ class LatLonDetailBaseView(BasePlaceDetailView):
             .prefetch_related('organisation__position_set')
         )
 
-        mp_mpl_data = []
+        context['mp_data'] = mp_data = []
+        context['mpl_data'] = mpl_data = []
+
         for office_place in nearest_office_places:
             organisation = office_place.organisation
             if not organisation.is_ongoing():
@@ -249,7 +251,6 @@ class LatLonDetailBaseView(BasePlaceDetailView):
                         title__slug='member'
                     ) \
                     .currently_active()
-                positions_to_show = list(mp_positions) + list(mpl_positions)
                 email, phone = None, None
                 email_contact = person.contacts.filter(kind__slug='email').first()
                 if email_contact:
@@ -258,23 +259,26 @@ class LatLonDetailBaseView(BasePlaceDetailView):
                 if phone_contact:
                     phone = phone_contact.value
                 # Ignore people who aren't MPs or MPLs
-                if not positions_to_show:
-                    continue
-                mp_mpl_data.append({
+                person_data = {
                     'name': person.legal_name,
                     'person': person,
                     'email': email,
                     'phone': phone,
                     'postal_addresses': [
                         pa.value for pa in office_place.postal_addresses()
-                    ],
+                        ],
                     'party': party,
                     'has_party_logo': has_party_logo,
                     'office_place': office_place,
-                    'positions': positions_to_show,
                     'element_id': element_id,
-                })
-        context['mp_mpl_data'] = mp_mpl_data
+                    }
+
+                if mp_positions:
+                    person_data['positions'] = mp_positions
+                    mp_data.append(person_data)
+                if mpl_positions:
+                    person_data['positions'] = mpl_positions
+                    mpl_data.append(person_data)
 
         context['form'] = LocationSearchForm(
             initial={'q': self.request.GET.get('q')}
