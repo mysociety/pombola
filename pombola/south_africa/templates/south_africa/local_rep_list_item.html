@@ -73,8 +73,10 @@
     </ul>
 
     {% if person_data.office_place %}
+    {% if person_data.is_mp or person_data.is_mpl %}
+
     <script>
-      constituency_offices_marker_data.push({
+      constituency_offices_marker_data_mp{% if person_data.is_mpl %}l{% endif %}s.push({
         lat: {{ person_data.office_place.location.y }},
         lng: {{ person_data.office_place.location.x }},
         name: "{{ person_data.office_place.organisation.name }}",
@@ -84,6 +86,7 @@
         url: "#{{ person_data.element_id }}"
       });
     </script>
+    {% endif %}
     {% endif %}
 
     <!--
