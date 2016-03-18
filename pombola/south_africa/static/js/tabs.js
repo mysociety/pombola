@@ -24,7 +24,13 @@ $(function() {
       updateRepLocatorTabZoom(ui.newPanel[0].id);
     });
   });
-  $(".tabs").tabs();
+
+  // Work out which tab should be active.
+  var activeTabIndex = $('.ui-tabs-active').prevAll().length || 0;
+
+  $(".tabs").tabs({
+    active: activeTabIndex
+  });
   $(".tabs").on("tabsactivate", function(event, ui) {
     history.pushState(null, null, '#' + ui.newPanel[0].id);
   });
