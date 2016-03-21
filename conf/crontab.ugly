@@ -27,6 +27,7 @@ PYTHONIOENCODING=utf-8
         'mzalendo.mysociety.org' => 10,
         'www.pa.org.za' => 20,
         'www.shineyoureye.org' => 30,
+        'mark.za.pombola.dev.mysociety.org' => 52,
     );
     if (exists $dump_times{$vhost}) {
         $dump_directory = "/data/vhost/$vhost/media_root/dumps";
