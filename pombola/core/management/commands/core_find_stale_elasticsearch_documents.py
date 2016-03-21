@@ -17,18 +17,22 @@ def get_all_indexed_models():
     available_models = {}
 
     for backend_key in backends:
+        connection = haystack_connections[backend_key]
+        backend = connection.get_backend()
         unified_index = haystack_connections[backend_key].get_unified_index()
         for app in haystack_load_apps():
             for model in haystack_get_models(app):
                 try:
-                    unified_index.get_index(model)
+                    index = unified_index.get_index(model)
                 except NotHandled:
                     continue
                 model_name = model.__module__ + '.' + model.__name__
                 available_models[model_name] = {
                     'backend_key': backend_key,
+                    'backend': backend,
                     'app': app,
                     'model': model,
+                    'index': index,
                 }
 
     return available_models
@@ -71,15 +75,7 @@ class Command(BaseCommand):
         for model_name in models_to_check:
             model_details = available_models[model_name]
 
-            backend_key = model_details['backend_key']
-            model = model_details['model']
-
-            backend = haystack_connections[backend_key].get_backend()
-            unified_index = haystack_connections[backend_key].get_unified_index()
-
-            index = unified_index.get_index(model)
-
-            qs = index.build_queryset()
+            qs = model_details['index'].build_queryset()
             print "Checking {0} ({1} objects in the database)".format(
                 model_name, qs.count()
             )
@@ -90,6 +86,8 @@ class Command(BaseCommand):
             # Then go through every search result for that
             # model, and check that the primary key is one
             # that's in the database:
-            for search_result in SearchQuerySet(using=backend.connection_alias).models(model):
+            for search_result in SearchQuerySet(
+                    using=model_details['backend'].connection_alias
+            ).models(model_details['model']):
                 if search_result.pk not in pks_in_database:
                     print "      stale search entry for primary key", search_result.pk
