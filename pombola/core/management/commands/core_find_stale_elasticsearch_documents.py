@@ -64,6 +64,9 @@ class Command(BaseCommand):
     args = 'MODEL ...'
     help = 'Get all search results for the given models'
 
+    def add_arguments(self, parser):
+        parser.add_argument('--delete', action='store_true', default=False)
+
     def handle(self, *args, **options):
 
         available_models = get_all_indexed_models()
@@ -92,3 +95,6 @@ class Command(BaseCommand):
                 if search_result.pk not in pks_in_database:
                     msg = "stale search entry for primary key {0} (text: {1})"
                     print "     ", msg.format(search_result.pk, search_result.text)
+                    if options['delete']:
+                        model_details['index'].remove_object(search_result.id)
+                        print "      removed!"
