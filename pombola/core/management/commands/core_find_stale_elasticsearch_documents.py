@@ -76,9 +76,11 @@ class Command(BaseCommand):
             model_details = available_models[model_name]
 
             qs = model_details['index'].build_queryset()
-            print "Checking {0} ({1} objects in the database)".format(
-                model_name, qs.count()
-            )
+            sqs = SearchQuerySet(
+                    using=model_details['backend'].connection_alias
+            ).models(model_details['model'])
+            msg = "Checking {0} ({1} in the DB, {2} in the search index))"
+            print msg.format(model_name, qs.count(), sqs.count())
             # Get all the primary keys from the database:
             pks_in_database = set(
                 unicode(pk) for pk in qs.values_list('pk', flat=True)
@@ -86,8 +88,7 @@ class Command(BaseCommand):
             # Then go through every search result for that
             # model, and check that the primary key is one
             # that's in the database:
-            for search_result in SearchQuerySet(
-                    using=model_details['backend'].connection_alias
-            ).models(model_details['model']):
+            for search_result in sqs:
                 if search_result.pk not in pks_in_database:
-                    print "      stale search entry for primary key", search_result.pk
+                    msg = "stale search entry for primary key {0} (text: {1})"
+                    print "     ", msg.format(search_result.pk, search_result.text)
