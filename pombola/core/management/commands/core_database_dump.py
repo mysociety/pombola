@@ -14,11 +14,7 @@ class Command(BaseCommand):
     help = 'Output a database dump only containing public data'
     args = '<OUTPUT-FILENAME>'
 
-    def handle(self, *args, **options):
-        if len(args) != 1:
-            self.print_help(sys.argv[0], sys.argv[1])
-            sys.exit(1)
-        output_filename = args[0]
+    def get_tables_to_dump(self):
         tables = connection.introspection.table_names()
         tables_to_ignore = set([
             'auth_group',
@@ -208,31 +204,51 @@ publicly) add them to 'tables_to_ignore'.'''
             for t in sorted(unexpected):
                 print " ", t
             sys.exit(2)
-        command = [
-            'pg_dump',
-            '--no-owner',
-            '--no-acl',
-        ]
-        for t in tables_to_dump:
-            command += ['-t', t]
-        db_settings = connection.settings_dict
-        if db_settings['HOST']:
-            command += [
-                '-h', db_settings['HOST'],
-            ]
-        if db_settings['USER']:
-            command += [
-                '-U', db_settings['USER'],
-            ]
-        command.append(db_settings['NAME'])
-        if int(options['verbosity']) > 1:
-            print >> sys.stderr, "Going to run the command:", ' '.join(command)
-        output_directory = dirname(realpath(output_filename))
 
-        ntf = NamedTemporaryFile(
-            delete=False, prefix=join(output_directory, 'tmp')
-        )
-        with open(ntf.name, 'wb') as f:
-            subprocess.check_call(command, stdout=f)
-        os.chmod(ntf.name, 0o644)
-        os.rename(ntf.name, output_filename)
+        return tables_to_dump
+
+    def handle(self, *args, **options):
+        if len(args) != 1:
+            self.print_help(sys.argv[0], sys.argv[1])
+            sys.exit(1)
+        output_prefix = args[0]
+
+        for dump_type in ('schema', 'data'):
+            output_filename = '{}_{}.sql'.format(output_prefix, dump_type)
+
+            command = [
+                'pg_dump',
+                '--no-owner',
+                '--no-acl',
+            ]
+
+            command.append({
+                'schema': '--schema-only',
+                'data': '--data-only',
+            }[dump_type])
+
+            if dump_type == 'data':
+                for t in self.get_tables_to_dump():
+                    command += ['-t', t]
+
+            db_settings = connection.settings_dict
+            if db_settings['HOST']:
+                command += [
+                    '-h', db_settings['HOST'],
+                ]
+            if db_settings['USER']:
+                command += [
+                    '-U', db_settings['USER'],
+                ]
+            command.append(db_settings['NAME'])
+            if int(options['verbosity']) > 1:
+                print >> sys.stderr, "Going to run the command:", ' '.join(command)
+            output_directory = dirname(realpath(output_filename))
+
+            ntf = NamedTemporaryFile(
+                delete=False, prefix=join(output_directory, 'tmp')
+            )
+            with open(ntf.name, 'wb') as f:
+                subprocess.check_call(command, stdout=f)
+            os.chmod(ntf.name, 0o644)
+            os.rename(ntf.name, output_filename)
