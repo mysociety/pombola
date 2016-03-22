@@ -62,3 +62,7 @@ antiword
 
 # To compress database dumps:
 gzip
+
+# This is required by the Python cffi package, which is required by
+# cryptography, which is required by PyOpenSSL
+libffi-dev
