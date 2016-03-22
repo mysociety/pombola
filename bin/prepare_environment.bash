@@ -38,7 +38,7 @@ curl -L -s https://raw.github.com/mysociety/commonlib/master/bin/get_pip.bash | 
 # Install all the packages
 pip install Mercurial
 pip uninstall PIL || true
-pip install -r requirements.txt
+CFLAGS="-O0" pip install -r requirements.txt
 
 # make sure that there is no old code (the .py files may have been git deleted)
 find . -name '*.pyc' -delete
