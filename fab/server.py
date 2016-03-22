@@ -58,7 +58,6 @@ def install_packages():
         # Some dependencies in requirements.txt are listed as repos
         # so we need the various repo management tools to fetch them.
         'openjdk-7-jre-headless',
-        'mercurial',
         'git-core',
         'yui-compressor',
         'poppler-utils',

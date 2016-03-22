@@ -42,10 +42,6 @@ yui-compressor
 # The following can be installed by Python's pip into the virtual environment.
 # If you are not on Debian let pip do the installing for you.
 
-# Some dependencies in requirements.txt are listed as repos, so we need the
-# various repo management tools to fetch them.
-mercurial
-
 # May as well use the Debian maintained versions.
 python-docutils
 python-markdown

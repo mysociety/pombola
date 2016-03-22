@@ -5,7 +5,6 @@
 ### General useful bits
 py-bcrypt==0.4
 PyYAML==3.11
-Mercurial==3.1.2
 Pillow==2.8.2
 
 ### Database drivers

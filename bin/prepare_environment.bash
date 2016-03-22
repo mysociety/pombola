@@ -36,7 +36,6 @@ rm -rf $virtualenv_dir/src/pygeocoder
 curl -L -s https://raw.github.com/mysociety/commonlib/master/bin/get_pip.bash | bash
 
 # Install all the packages
-pip install Mercurial
 pip uninstall PIL || true
 CFLAGS="-O0" pip install -r requirements.txt
 
