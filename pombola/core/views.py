@@ -74,7 +74,8 @@ class HelpApiView(TemplateView):
             split_url[i] = ''
         context['popit_url'] = urlunsplit(split_url)
         # Set the URL path to the nightly JSON exports:
-        context['dump_base_path'] = settings.MEDIA_URL + 'popolo_json/'
+        context['postgresql_dump_base_path'] = settings.MEDIA_URL + 'dumps/'
+        context['popolo_dump_base_path'] = settings.MEDIA_URL + 'popolo_json/'
         return context
 
 

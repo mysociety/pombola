@@ -6,7 +6,25 @@
 
 <h1>Help getting the data for this site</h1>
 
-<p>This site offers a number of ways of accessing its data programmatically:</p>
+<p>This site offers a number of ways of using its data:</p>
+
+<h2>Daily PostgreSQL Database Dump</h2>
+
+<p>Every night we use <tt>pg_dump</tt> to create a database dump
+of the site's data, but excluding anything that might be
+personal data of users of the site.</p>
+
+<p>There's one dump file for the schema, and one for the data:</p>
+
+<ul>
+<li><a href="{{ postgresql_dump_base_path }}pg-dump_schema.sql.gz">pg_dump of schema (gzipped)</a></li>
+<li><a href="{{ postgresql_dump_base_path }}pg-dump_data.sql.gz">pg_dump of data (gzipped)</a></li>
+</ul>
+
+<p>To import that data, create a new Postgis database. Then you
+can import the site's data with:</p>
+
+<pre class="code">gunzip -c pg-dump_schema.sql.gz pg-dump_data.sql.gz | psql pombola</pre>
 
 <h2>Daily JSON Data Dumps</h2>
 
@@ -26,7 +44,7 @@ be most suitable for you:
 membership information being included in each person object:</p>
 
 <ul>
-<li><a href="{{ dump_base_path }}pombola.json">Popolo JSON data</a></li>
+<li><a href="{{ popolo_dump_base_path }}pombola.json">Popolo JSON data</a></li>
 </ul>
 
 <h3>JSON suitable for mongoimport</h3>
@@ -36,9 +54,9 @@ be provided with newline separated JSON objects.  You can
 download the data in this format from these links:</p>
 
 <ul>
-<li><a href="{{ dump_base_path }}mongo-persons.dump">Person data suitable for mongoimport</a></li>
-<li><a href="{{ dump_base_path }}mongo-organizations.dump">Organization data suitable for mongoimport</a></li>
-<li><a href="{{ dump_base_path }}mongo-memberships.dump">Membership data suitable for mongoimport</a></li>
+<li><a href="{{ popolo_dump_base_path }}mongo-persons.dump">Person data suitable for mongoimport</a></li>
+<li><a href="{{ popolo_dump_base_path }}mongo-organizations.dump">Organization data suitable for mongoimport</a></li>
+<li><a href="{{ popolo_dump_base_path }}mongo-memberships.dump">Membership data suitable for mongoimport</a></li>
 </ul>
 
 <h3>Person, Organization and Membership data as JSON arrays</h3>
@@ -48,9 +66,9 @@ option, although depending on your version of the software, the
 files may be too large to be imported by that method.</p>
 
 <ul>
-<li><a href="{{ dump_base_path }}persons.json">Person data in a JSON array</a></li>
-<li><a href="{{ dump_base_path }}organizations.json">Organization data in a JSON array</a></li>
-<li><a href="{{ dump_base_path }}memberships.json">Membership data in a JSON array</a></li>
+<li><a href="{{ popolo_dump_base_path }}persons.json">Person data in a JSON array</a></li>
+<li><a href="{{ popolo_dump_base_path }}organizations.json">Organization data in a JSON array</a></li>
+<li><a href="{{ popolo_dump_base_path }}memberships.json">Membership data in a JSON array</a></li>
 </ul>
 
 <h2>License</h2>
