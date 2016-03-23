@@ -111,6 +111,7 @@ do
     then
         createdb --owner "$UNIX_USER" "$DB_NAME"
         echo 'CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology' | psql "$DB_NAME"
+        psql "$DB_NAME" < /usr/share/postgresql/9.3/contrib/postgis-2.1/legacy_minimal.sql
         TMP_SCHEMA="$(mktemp /var/tmp/pombola-pg-$COUNTRY_APP-schema.XXXXXX)"
         TMP_DATA="$(mktemp /var/tmp/pombola-pg-$COUNTRY_APP-data.XXXXXX)"
         case $COUNTRY_APP in
