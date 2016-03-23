@@ -46,34 +46,7 @@ class Command(BaseCommand):
             # the popolo_name_resolver_init management command.
             'popolo_name_resolver_entityname',
         ])
-        if settings.COUNTRY_APP in ('nigeria',):
-            # In the past I think the hansard application was in use
-            # for Nigeria, so these tables are present (and contain
-            # data), but the hansard app is no longer used for
-            # Nigeria.  So, it's best to ignore these tables to make
-            # the dump smaller.  place_data and projects are similarly
-            # no longer used (but those applications' tables are empty
-            # anyway)
-            tables_to_ignore.update([
-                'hansard_alias',
-                'hansard_entry',
-                'hansard_sitting',
-                'hansard_source',
-                'hansard_venue',
-                'place_data_entry',
-                'projects_project',
-            ])
-        if settings.COUNTRY_APP in ('ghana',):
-            # These tables are no longer used, I believe, and migrated
-            # to core / hansard:
-            tables_to_ignore.update([
-                'ghana_hansardentry',
-                'ghana_mp',
-                'ghana_uploadmodel',
-                'odekro_hansardentry',
-                'odekro_mp',
-                'odekro_uploadmodel'
-            ])
+        tables_to_ignore.update(settings.PG_DUMP_EXTRA_TABLES_TO_IGNORE)
         tables_to_dump = [
             t for t in tables if t not in tables_to_ignore
         ]
@@ -145,57 +118,7 @@ class Command(BaseCommand):
             'tasks_task',
             'tasks_taskcategory',
         ]
-        if settings.COUNTRY_APP in ('south_africa',):
-            expected_tables += [
-                'interests_register_category',
-                'interests_register_entry',
-                'interests_register_entrylineitem',
-                'interests_register_release',
-                'pombola_sayit_pombolasayitjoin',
-                'speeches_recording',
-                'speeches_recordingtimestamp',
-                'speeches_section',
-                'speeches_slug',
-                'speeches_speaker',
-                'speeches_speech',
-                'speeches_speech_tags',
-                'speeches_tag',
-                'za_hansard_answer',
-                'za_hansard_pmgcommitteeappearance',
-                'za_hansard_pmgcommitteereport',
-                'za_hansard_question',
-                'za_hansard_questionpaper',
-                'za_hansard_source',
-            ]
-        if settings.COUNTRY_APP in ('nigeria', 'south_africa'):
-            # spinner
-            expected_tables += [
-                'spinner_imagecontent',
-                'spinner_quotecontent',
-                'spinner_slide',
-            ]
-        if settings.COUNTRY_APP in ('ghana', 'kenya',):
-            # hansard, place_data, projects, votematch, wordcloud
-            expected_tables += [
-                'hansard_alias',
-                'hansard_entry',
-                'hansard_sitting',
-                'hansard_source',
-                'hansard_venue',
-                'place_data_entry',
-                'projects_project',
-                'votematch_answer',
-                'votematch_party',
-                'votematch_quiz',
-                'votematch_stance',
-                'votematch_statement',
-            ]
-        if settings.COUNTRY_APP in ('kenya',):
-            # place_data, bills
-            expected_tables += [
-                'bills_bill',
-
-            ]
+        expected_tables += settings.PG_DUMP_EXTRA_EXPECTED_TABLES
         unexpected = set(tables_to_dump) - set(expected_tables)
         if unexpected:
             print '''The following tables were found which weren't expected

@@ -97,3 +97,29 @@ COUNTRY_JS = {
 INFO_PAGES_ALLOW_RAW_HTML = True
 
 PAGINATION_DEFAULT_WINDOW = 3
+
+PG_DUMP_EXTRA_TABLES_TO_IGNORE = []
+PG_DUMP_EXTRA_EXPECTED_TABLES = [
+    'interests_register_category',
+    'interests_register_entry',
+    'interests_register_entrylineitem',
+    'interests_register_release',
+    'pombola_sayit_pombolasayitjoin',
+    'speeches_recording',
+    'speeches_recordingtimestamp',
+    'speeches_section',
+    'speeches_slug',
+    'speeches_speaker',
+    'speeches_speech',
+    'speeches_speech_tags',
+    'speeches_tag',
+    'za_hansard_answer',
+    'za_hansard_pmgcommitteeappearance',
+    'za_hansard_pmgcommitteereport',
+    'za_hansard_question',
+    'za_hansard_questionpaper',
+    'za_hansard_source',
+    'spinner_imagecontent',
+    'spinner_quotecontent',
+    'spinner_slide',
+]

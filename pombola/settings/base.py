@@ -642,3 +642,6 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     'PAGE_SIZE': 10,
 }
+
+PG_DUMP_EXTRA_TABLES_TO_IGNORE = []
+PG_DUMP_EXTRA_EXPECTED_TABLES = []

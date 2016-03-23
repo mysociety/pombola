@@ -94,3 +94,27 @@ LOGIN_ERROR_URL    = '/accounts/login/?social_error=1'
 # )
 TWITTER_ACCOUNT_NAME = "odekro"
 FACEBOOK_ACCOUNT_NAME = "odekro"
+
+PG_DUMP_EXTRA_TABLES_TO_IGNORE = [
+    'ghana_hansardentry',
+    'ghana_mp',
+    'ghana_uploadmodel',
+    'odekro_hansardentry',
+    'odekro_mp',
+    'odekro_uploadmodel'
+]
+PG_DUMP_EXTRA_EXPECTED_TABLES = [
+    # hansard, place_data, projects, votematch, wordcloud
+    'hansard_alias',
+    'hansard_entry',
+    'hansard_sitting',
+    'hansard_source',
+    'hansard_venue',
+    'place_data_entry',
+    'projects_project',
+    'votematch_answer',
+    'votematch_party',
+    'votematch_quiz',
+    'votematch_stance',
+    'votematch_statement',
+]

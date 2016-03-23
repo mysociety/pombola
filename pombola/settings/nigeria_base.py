@@ -23,3 +23,25 @@ COUNTRY_CSS = {
         'output_filename': 'css/nigeria.css'
     }
 }
+
+PG_DUMP_EXTRA_TABLES_TO_IGNORE = [
+    # In the past I think the hansard application was in use
+    # for Nigeria, so these tables are present (and contain
+    # data), but the hansard app is no longer used for
+    # Nigeria.  So, it's best to ignore these tables to make
+    # the dump smaller.  place_data and projects are similarly
+    # no longer used (but those applications' tables are empty
+    # anyway)
+    'hansard_alias',
+    'hansard_entry',
+    'hansard_sitting',
+    'hansard_source',
+    'hansard_venue',
+    'place_data_entry',
+    'projects_project',
+]
+PG_DUMP_EXTRA_EXPECTED_TABLES = [
+    'spinner_imagecontent',
+    'spinner_quotecontent',
+    'spinner_slide',
+]

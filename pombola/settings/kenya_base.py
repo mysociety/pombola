@@ -73,3 +73,21 @@ COUNTRY_JS = {
 }
 
 HANSARD_NAME_MATCHING_ALGORITHM = NAME_SUBSTRING_MATCH
+
+PG_DUMP_EXTRA_TABLES_TO_IGNORE = []
+PG_DUMP_EXTRA_EXPECTED_TABLES = [
+    # hansard, place_data, projects, votematch, wordcloud, bills
+    'hansard_alias',
+    'hansard_entry',
+    'hansard_sitting',
+    'hansard_source',
+    'hansard_venue',
+    'place_data_entry',
+    'projects_project',
+    'votematch_answer',
+    'votematch_party',
+    'votematch_quiz',
+    'votematch_stance',
+    'votematch_statement',
+    'bills_bill',
+]
