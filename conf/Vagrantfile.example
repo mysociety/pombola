@@ -1,8 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-BOX_NAME = ENV['BOX_NAME'] || "precise64"
-BOX_URI = ENV['BOX_URI'] || "http://files.vagrantup.com/precise64.box"
+BOX_NAME = ENV['BOX_NAME'] || "trusty64"
+BOX_URI = ENV['BOX_URI'] || "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
 # To use this Vagrantfile, create a new empty directory, and copy this
 # file into it with the name Vagrantfile. Then run "vagrant up".

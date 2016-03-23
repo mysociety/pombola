@@ -109,7 +109,8 @@ do
     DB_NAME="pombola-$COUNTRY_DASHES"
     if ! psql -l | egrep "^ *$DB_NAME *\|" > /dev/null
     then
-        createdb -T template_postgis --owner "$UNIX_USER" "$DB_NAME"
+        createdb --owner "$UNIX_USER" "$DB_NAME"
+        echo 'CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology' | psql "$DB_NAME"
     else
         notice_msg already
     fi
