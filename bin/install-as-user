@@ -111,34 +111,34 @@ do
     then
         createdb --owner "$UNIX_USER" "$DB_NAME"
         echo 'CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology' | psql "$DB_NAME"
+        TMP_SCHEMA="$(mktemp /var/tmp/pombola-pg-$COUNTRY_APP-schema.XXXXXX)"
+        TMP_DATA="$(mktemp /var/tmp/pombola-pg-$COUNTRY_APP-data.XXXXXX)"
+        case $COUNTRY_APP in
+            kenya)
+                LIVE_URL='http://info.mzalendo.com'
+                ;;
+            south_africa)
+                LIVE_URL='http://www.pa.org.za'
+                ;;
+            nigeria)
+                LIVE_URL='http://www.shineyoureye.org'
+                ;;
+            *)
+                echo "Unknown COUNTRY_APP $COUNTRY_APP when trying to download data"
+                exit 1
+                ;;
+        esac
+        echo "Downloading database dumps from $LIVE_URL"
+        curl -o "$TMP_SCHEMA" "$LIVE_URL/media_root/dumps/pg-dump_schema.sql.gz"
+        curl -o "$TMP_DATA" "$LIVE_URL/media_root/dumps/pg-dump_data.sql.gz"
+        echo "Import schema dump for $COUNTRY_APP"
+        gunzip -c "$TMP_SCHEMA" | psql "$DB_NAME"
+        echo "Import data dump for $COUNTRY_APP"
+        gunzip -c "$TMP_DATA" | psql "$DB_NAME"
+        echo "Finished importing live site data."
     else
         notice_msg already
     fi
-    TMP_SCHEMA="$(mktemp /var/tmp/pombola-pg-$COUNTRY_APP-schema.XXXXXX)"
-    TMP_DATA="$(mktemp /var/tmp/pombola-pg-$COUNTRY_APP-data.XXXXXX)"
-    case $COUNTRY_APP in
-        kenya)
-            LIVE_URL='http://info.mzalendo.com'
-            ;;
-        south_africa)
-            LIVE_URL='http://www.pa.org.za'
-            ;;
-        nigeria)
-            LIVE_URL='http://www.shineyoureye.org'
-            ;;
-        *)
-            echo "Unknown COUNTRY_APP $COUNTRY_APP when trying to download data"
-            exit 1
-            ;;
-    esac
-    echo "Downloading database dumps from $LIVE_URL"
-    curl -o "$TMP_SCHEMA" "$LIVE_URL/media_root/dumps/pg-dump_schema.sql.gz"
-    curl -o "$TMP_DATA" "$LIVE_URL/media_root/dumps/pg-dump_data.sql.gz"
-    echo "Import schema dump for $COUNTRY_APP"
-    gunzip -c "$TMP_SCHEMA" | psql "$DB_NAME"
-    echo "Import data dump for $COUNTRY_APP"
-    gunzip -c "$TMP_DATA" | psql "$DB_NAME"
-    echo "Finished importing live site data."
 done
 echo $DONE_MSG
 
