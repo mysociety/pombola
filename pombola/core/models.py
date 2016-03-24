@@ -27,8 +27,10 @@ from django.db.models.fields import DateField
 from markitup.fields import MarkupField
 
 from django_date_extensions.fields import ApproximateDateField, ApproximateDate
+
+from images.models import HasImageMixin, Image
+
 from pombola.tasks.models import Task
-from pombola.images.models import HasImageMixin, Image
 
 from pombola.scorecards.models import ScorecardMixin
 from pombola.budgets.models import BudgetsMixin

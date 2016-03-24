@@ -84,6 +84,7 @@ mysociety-django-sluggable==0.2.7
 -e git+git://github.com/mysociety/popolo-name-resolver@a6fca27e080acdb475e6fd2e1382592b0c0a0fc5#egg=popolo-name-resolver
 
 mysociety-django-popolo==0.0.5
+mysociety-django-images==0.0.6
 
 python-dateutil==2.3
 

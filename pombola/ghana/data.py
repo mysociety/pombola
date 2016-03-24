@@ -10,7 +10,7 @@ from django.template.defaultfilters import slugify
 
 from django_date_extensions.fields import ApproximateDate
 
-from pombola.images.models import Image
+from images.models import Image
 from pombola.core.models import PlaceKind, OrganisationKind, PositionTitle
 from pombola.core.models import Place, Person, Organisation, Position
 from pombola.info.models import InfoPage

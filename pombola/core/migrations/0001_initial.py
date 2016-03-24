@@ -3,10 +3,11 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django_date_extensions.fields
-import pombola.images.models
 import pombola.core.models
 import markitup.fields
 import django.contrib.gis.db.models.fields
+
+import images.models
 
 
 class Migration(migrations.Migration):
@@ -117,7 +118,7 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ['slug'],
             },
-            bases=(models.Model, pombola.images.models.HasImageMixin, pombola.core.models.IdentifierMixin),
+            bases=(models.Model, images.models.HasImageMixin, pombola.core.models.IdentifierMixin),
         ),
         migrations.CreateModel(
             name='OrganisationKind',
@@ -208,7 +209,7 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ['sort_name'],
             },
-            bases=(pombola.images.models.HasImageMixin, models.Model, pombola.core.models.IdentifierMixin),
+            bases=(images.models.HasImageMixin, models.Model, pombola.core.models.IdentifierMixin),
         ),
         migrations.CreateModel(
             name='Place',

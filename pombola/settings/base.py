@@ -404,7 +404,7 @@ INSTALLED_APPS = (
 
     'popolo',
 
-    'pombola.images',
+    'images',
     'sorl.thumbnail',
     # easy_thumbnails is required by SayIt; it needs to be in
     # INSTALLED_APPS so that its table is created so that we can

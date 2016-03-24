@@ -17,7 +17,8 @@ from django.core.management.base import CommandError
 from pombola.core.models import Person, PlaceKind, ParliamentarySession, Position, PositionTitle
 
 from django.core.files.base import ContentFile
-from pombola.images.models import Image
+
+from images.models import Image
 
 iebc_base_url = 'http://api.iebc.or.ke'
 

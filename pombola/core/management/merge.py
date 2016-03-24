@@ -10,8 +10,9 @@ from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 from django.db import transaction
 
+from images.models import Image
+
 import pombola.core.models as core_models
-from pombola.images.models import Image
 from pombola.slug_helpers.models import SlugRedirect
 
 
