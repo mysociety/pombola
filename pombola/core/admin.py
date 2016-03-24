@@ -8,11 +8,11 @@ from django.utils.html import escape
 from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
 
+from images.admin import ImageAdminInline
 from slug_helpers.admin import StricterSlugFieldMixin
 
 from pombola.core import models
 from pombola.scorecards import models as scorecard_models
-from pombola.images.admin import ImageAdminInline
 
 
 def create_admin_link_for(obj, link_text):

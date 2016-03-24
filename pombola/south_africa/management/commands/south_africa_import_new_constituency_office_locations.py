@@ -26,12 +26,12 @@ from django.core.files.storage import FileSystemStorage
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.gis.geos import Point
 
+from images.models import Image
+
 from pombola.core.models import (
     Organisation,
     )
 from pombola.core.utils import mkdir_p
-
-from pombola.images.models import Image
 
 
 PILLOW_FORMAT_EXTENSIONS = {

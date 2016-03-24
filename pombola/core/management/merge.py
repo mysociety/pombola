@@ -11,9 +11,9 @@ from django.core.urlresolvers import reverse
 from django.db import transaction
 
 from slug_helpers.models import SlugRedirect
+from images.models import Image
 
 import pombola.core.models as core_models
-from pombola.images.models import Image
 
 
 def check_basic_fields(basic_fields, to_keep, to_delete):
