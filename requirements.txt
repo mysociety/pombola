@@ -156,3 +156,7 @@ unicodecsv==0.9.4
 
 # Used to format budgetary things into local currency strings
 babel
+
+# Pin certifi to a version that works with OpenSSL 1.0.1 - see
+# https://github.com/certifi/python-certifi/issues/26
+certifi==2015.04.28
