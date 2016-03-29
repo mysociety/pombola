@@ -110,7 +110,7 @@ break the permalinks to individual speeches.
 
 **WARNING: This is destructive and will take several hours to complete.**
 
-    $ python manage.py popit_resolver_init --popit-api-url=http://za-new-import.popit.mysociety.org/api/v0.1/
+    $ python manage.py popolo_name_resolver_init
     $ python manage.py za_hansard_check_for_new_sources --check-all --delete-existing
     $ python manage.py za_hansard_run_parsing
     $ python manage.py za_hansard_load_into_sayit --delete-existing
