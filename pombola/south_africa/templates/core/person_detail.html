@@ -217,27 +217,33 @@
         <div id="attendance" class="tab-content ui-tabs-panel ui-widget-content">
           <div class="fifty-fifty-layout">
 
-            <div class="column">
-              {% for data in attendance %}
-                <header>
-                  <h3 class="attendance__heading">{{ data.year }} attendance</h3>
-                  {% if data.year == 2014 %}<p>(From the start of the Fifth Parliament)</p>{% endif %}
-                </header>
+            {% if attendance == 'UNAVAILABLE' %}
+              <p>Attendance data is currently unavailable.</p>
+            {% else %}
 
-                <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
-                <p class="attendance__context">Attended {{ data.attended }} meeting{{ data.attended|pluralize }} out of {{ data.total }}</p>
-              {% endfor %}
-            </div>
-
-            {% if latest_meetings_attended %}
               <div class="column">
-                <h3>Recent meetings attended</h3>
-                <ul class="unstyled attendance__recently-attended">
-                  {% for meeting in latest_meetings_attended %}
-                    <li><a href="{{ meeting.url }}"><span class="committee-name">{{ meeting.committee_name }}</span> &mdash; <span class="committee-meeting-title">{{ meeting.title }}</span></a></li>
-                  {% endfor %}
-                </ul>
+                {% for data in attendance %}
+                  <header>
+                    <h3 class="attendance__heading">{{ data.year }} attendance</h3>
+                    {% if data.year == 2014 %}<p>(From the start of the Fifth Parliament)</p>{% endif %}
+                  </header>
+
+                  <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
+                  <p class="attendance__context">Attended {{ data.attended }} meeting{{ data.attended|pluralize }} out of {{ data.total }}</p>
+                {% endfor %}
               </div>
+
+              {% if latest_meetings_attended %}
+                <div class="column">
+                  <h3>Recent meetings attended</h3>
+                  <ul class="unstyled attendance__recently-attended">
+                    {% for meeting in latest_meetings_attended %}
+                      <li><a href="{{ meeting.url }}"><span class="committee-name">{{ meeting.committee_name }}</span> &mdash; <span class="committee-meeting-title">{{ meeting.title }}</span></a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
             {% endif %}
 
           </div>

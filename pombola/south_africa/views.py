@@ -57,6 +57,10 @@ from django_date_extensions.fields import ApproximateDate
 logger = logging.getLogger('django.request')
 
 
+class AttendanceAPIDown(Exception):
+    pass
+
+
 # In the short term, until we have a list of constituency offices and
 # addresses from DA, let's bundle these together.
 CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
@@ -619,7 +623,10 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
             url_fmt = "https://api.pmg.org.za/member/?filter[pa_link]={}"
             api_search_url = url_fmt.format(pa_link)
-            search_resp = requests.get(api_search_url)
+            try:
+                search_resp = requests.get(api_search_url)
+            except requests.RequestException:
+                raise AttendanceAPIDown
             search_data = json.loads(search_resp.text)
 
             if not search_data.get('count'):
@@ -655,7 +662,11 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         if results is None:
             results = []
             while next_url:
-                resp = requests.get(next_url)
+                try:
+                    resp = requests.get(next_url)
+                except requests.RequestException:
+                    raise AttendanceAPIDown
+
                 data = json.loads(resp.text)
                 results.extend(data.get('results'))
 
@@ -795,7 +806,10 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         if self.object.date_of_death != None:
             context['former_parties'] = self.get_former_parties(self.object)
 
-        context['attendance'], context['latest_meetings_attended'] = self.get_attendance_data_for_display()
+        try:
+            context['attendance'], context['latest_meetings_attended'] = self.get_attendance_data_for_display()
+        except AttendanceAPIDown:
+            context['attendance'] = context['latest_meetings_attended'] = 'UNAVAILABLE'
 
         return context
 
