@@ -43,7 +43,6 @@ MAILTO=cron-mzalendo@mysociety.org
 MAILTO=mzalendo-managers@mysociety.org
 6 7 * * *  !!(*= $user *)!! update_hansard.bash
 MAILTO=cron-!!(*= $site *)!!@mysociety.org
-3 10 * * * !!(*= $user *)!! output-on-error run_management_command kenya_assign_aspirants_to_coalitions
 
 # disabling the scorcard updating to remove them from the site temporarily. This
 # is an interim measure, but much simpler than doing it properly by making the
