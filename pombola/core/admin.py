@@ -173,6 +173,9 @@ class PositionInlineAdmin(admin.TabularInline):
     )
     ordering = ('-category', 'organisation__name', '-start_date')
 
+    def get_queryset(self, request):
+        queryset = super(PositionInlineAdmin, self).get_queryset(request)
+        return queryset.select_related('person', 'organisation', 'title')
 
 class ScorecardInlineAdmin(GenericTabularInline):
     model = scorecard_models.Entry
