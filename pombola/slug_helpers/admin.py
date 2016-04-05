@@ -1,7 +1,9 @@
 import re
 
+from django.contrib import admin
 from django.contrib.gis import db
 from django.core.exceptions import ValidationError
+from .models import SlugRedirect
 
 def stricter_validate_slug(slug):
     if not re.match(r'^[-a-z0-9_]+$', slug):
@@ -16,3 +18,10 @@ class StricterSlugFieldMixin(object):
             'validators': [stricter_validate_slug]
         }
     }
+
+
+@admin.register(SlugRedirect)
+class SlugRedirectAdmin(admin.ModelAdmin):
+    list_display = [ 'old_object_slug', 'content_type', 'new_object']
+    list_filter = ['content_type']
+    ordering = ('content_type', 'old_object_slug')
