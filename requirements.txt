@@ -74,7 +74,7 @@ Unidecode==0.04.16
 python-memcached==1.53
 
 # django-mapit
--e git+git://github.com/mysociety/mapit@0fc33cf0a814c0f6aab6a903105745acbd79e5ec#egg=django-mapit
+-e git+git://github.com/mysociety/mapit@d692d2788167516a9963563937bb8ed8a0e475e1#egg=django-mapit
 
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
 # Note, if the subsequent -e are ever removed, please remove manually from virtualenv/src !
