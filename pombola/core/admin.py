@@ -173,6 +173,9 @@ class PositionInlineAdmin(admin.TabularInline):
     )
     ordering = ('-category', 'organisation__name', '-start_date')
 
+    def get_queryset(self, request):
+        queryset = super(PositionInlineAdmin, self).get_queryset(request)
+        return queryset.select_related('person', 'organisation', 'title')
 
 class ScorecardInlineAdmin(GenericTabularInline):
     model = scorecard_models.Entry
@@ -210,6 +213,19 @@ class PlaceAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
         ScorecardInlineAdmin,
         IdentifierInlineAdmin,
         )
+
+    def get_field_queryset(self, db, db_field, request):
+        if db_field.name == 'parent_place':
+            fields = ('kind', 'organisation', 'parliamentary_session')
+            return db_field.rel.to.objects.select_related(*fields)
+        elif db_field.name == 'organisation':
+            return db_field.rel.to.objects.select_related('kind')
+        return None
+
+    def get_queryset(self, request):
+        return super(PlaceAdmin, self).get_queryset(request) \
+            .select_related(
+                'kind', 'organisation', 'organisation__kind', 'parliamentary_session')
 
     def show_organisation(self, obj):
         if obj.organisation:
