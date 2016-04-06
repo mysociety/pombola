@@ -1,0 +1,8 @@
+{
+  "name": "Pombola",
+  "description": "An experimental attempt to get Pombola running on Heroku",
+  "image": "heroku/python",
+  "repository": "https://github.com/mysociety/pombola",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ]
+}

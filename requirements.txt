@@ -163,3 +163,8 @@ babel
 # Pin certifi to a version that works with OpenSSL 1.0.1 - see
 # https://github.com/certifi/python-certifi/issues/26
 certifi==2015.04.28
+
+# Packages needed for running on Heroku, but not otherwise:
+dj-database-url==0.4.
+gunicorn==19.4.5
+whitenoise==2.0.6
