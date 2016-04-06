@@ -1,11 +1,11 @@
 import os
 import re
-import yaml
 
 from .apps import *  # noqa
 
 from django.template.defaultfilters import slugify
 
+from pombola.config import config
 from pombola.core.logging_filters import skip_unreadable_post
 from pombola.hansard.constants import NAME_SET_INTERSECTION_MATCH
 
@@ -14,10 +14,6 @@ IN_TEST_MODE = False
 # Work out where we are to set up the paths correctly and load config
 base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..', '..' ) )
 root_dir = os.path.abspath( os.path.join( base_dir, '..' ) )
-
-# load the mySociety config
-config_file = os.path.join( base_dir, 'conf', 'general.yml' )
-config = yaml.load( open(config_file, 'r') )
 
 if int(config.get('STAGING')):
     STAGING = True

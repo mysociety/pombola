@@ -7,6 +7,8 @@ from django.core.management.base import (
     BaseCommand, CommandParser, CommandError
 )
 
+from pombola.config import config
+
 # This manage.py file is a bit more complex than you might expect, for
 # two reasons:
 #
@@ -26,10 +28,6 @@ from django.core.management.base import (
 #      variable, this default won't be used either.)
 
 def get_country():
-    with open(os.path.join(os.path.dirname(__file__),
-                           'conf',
-                           'general.yml')) as f:
-        config = yaml.load(f)
     return config.get('COUNTRY_APP', 'no_country')
 
 def run_default_tests(command_line_args):
