@@ -168,3 +168,5 @@ certifi==2015.04.28
 dj-database-url==0.4.
 gunicorn==19.4.5
 whitenoise==2.0.6
+
+cffi
