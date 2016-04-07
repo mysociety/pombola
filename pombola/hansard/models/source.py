@@ -11,7 +11,11 @@ from pombola.hansard.models.base import HansardModelBase
 try:
     HANSARD_CACHE = settings.HANSARD_CACHE
     if not os.path.exists( HANSARD_CACHE ):
-        os.makedirs( HANSARD_CACHE )
+        # Heroku installs the app onto a read-only filesystem, so
+        # trying to create this directory will cause the deployment to
+        # fail on Heroku.
+        if 'ON_HEROKU' not in os.environ:
+            os.makedirs( HANSARD_CACHE )
 except AttributeError:
     raise ImproperlyConfigured("Could not find HANSARD_CACHE setting - please set it")
 
