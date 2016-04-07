@@ -602,7 +602,8 @@ for package_name, package in DYNAMICALLY_LOADED_PIPELINE_JS.items():
 PIPELINE_COMPILERS = (
   'pipeline_compass.compass.CompassCompiler',
 )
-PIPELINE_COMPASS_BINARY = os.path.join(root_dir, 'gem-bin', 'compass')
+if 'ON_HEROKU' not in os.environ:
+    PIPELINE_COMPASS_BINARY = os.path.join(root_dir, 'gem-bin', 'compass')
 
 
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
