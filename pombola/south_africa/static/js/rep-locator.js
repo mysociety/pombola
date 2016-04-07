@@ -25,4 +25,24 @@ $(function() {
     }
   });
 
+  // Show the tooltip matching the given selector.
+  // (If no selector provided, it defaults to the tooltip
+  // matching the currently active jQuery UI tab).
+  var showTooltip = function showActiveTooltip(selector){
+    var selector = selector || $('.ui-tabs-active [data-rep-locator-tooltip]').attr('data-rep-locator-tooltip');
+    $(selector).show().siblings('.rep-locator-tooltip').hide();
+  }
+
+  $('[data-rep-locator-tooltip]').on('mouseenter', function(){
+    showTooltip( $(this).attr('data-rep-locator-tooltip') );
+  }).on('mouseleave', function(){
+    showTooltip();
+  });
+
+  $(".tabs").on("tabsactivate", function(event, ui) {
+    showTooltip();
+  });
+
+  showTooltip();
+
 });

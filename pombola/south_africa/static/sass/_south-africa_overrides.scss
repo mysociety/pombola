@@ -2962,9 +2962,34 @@ p.attendance__disclaimer {
 
 .rep-locator-tabs {
     font-family: $font_family_lato;
+    margin-bottom: 0 !important; // override the `.ui-tabs .ui-tabs-nav` default
 
     @media only all and (min-width: 640px) {
         font-size: 1.6em;
+    }
+}
+
+.rep-locator-tooltip {
+    display: none; // revealed by JavaScript
+    padding: 1.5em 0 1.5em 4.5em;
+
+    background: transparent url('../images/rep-locator-tooltip.png') 0 1.5em no-repeat;
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+        background-image: url('../images/rep-locator-tooltip@2.png');
+    }
+    background-image: url('../images/rep-locator-tooltip.svg'), none;
+    background-size: 52px 52px;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    p + p {
+      margin-top: 0.5em;
+    }
+
+    p:first-child {
+      font-weight: bold;
     }
 }
 

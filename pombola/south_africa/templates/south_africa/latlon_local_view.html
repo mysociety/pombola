@@ -12,15 +12,28 @@
 <div class="tabs ui-tabs ui-widget rep-locator-container">
   <ul class="rep-locator-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
     <li class="ui-state-default">
-      <a href="#councillors" class="ui-tabs-anchor">{{ ward_data | length }} Ward Councillor{{ ward_data | length | pluralize }}</a>
+      <a href="#councillors" class="ui-tabs-anchor" data-rep-locator-tooltip=".rep-locator-tooltip--councillors">{{ ward_data | length }} Ward Councillor{{ ward_data | length | pluralize }}</a>
     </li>
     <li class="ui-state-default ui-tabs-active">
-      <a href="#mps" class="ui-tabs-anchor">{{ mp_data | length }} MP{{ mp_data | length | pluralize }}</a>
+      <a href="#mps" class="ui-tabs-anchor" data-rep-locator-tooltip=".rep-locator-tooltip--mps">{{ mp_data | length }} MP{{ mp_data | length | pluralize }}</a>
     </li>
     <li class="ui-state-default">
-      <a href="#mpls" class="ui-tabs-anchor">{{ mpl_data | length }} MPL{{ mpl_data | length | pluralize }}</a>
+      <a href="#mpls" class="ui-tabs-anchor" data-rep-locator-tooltip=".rep-locator-tooltip--mpls">{{ mpl_data | length }} MPL{{ mpl_data | length | pluralize }}</a>
     </li>
   </ul>
+
+  <div class="rep-locator-tooltip rep-locator-tooltip--councillors">
+    <p>Your ward councillor provides a link between you &amp; your local council.</p>
+    <p>They ensure the council looks after the needs of local people.</p>
+  </div>
+  <div class="rep-locator-tooltip rep-locator-tooltip--mps">
+    <p>Your Member of Parliament (MP) is a link between you &amp; national government.</p>
+    <p>Your MP can help to obtain info, advice or make a complaint.</p>
+  </div>
+  <div class="rep-locator-tooltip rep-locator-tooltip--mpls">
+    <p>Your Member of Provincial Legislature (MPL) is a link between you &amp; provincial government.</p>
+    <p>Your MPL can help to obtain info, advice or make a complaint.</p>
+  </div>
 
   <!-- TODO: Map should show ward close-up when councillor tab is selected -->
   {% javascript 'google-map' %}
