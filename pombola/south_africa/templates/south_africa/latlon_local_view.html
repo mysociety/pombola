@@ -4,7 +4,7 @@
 {% block title %}{{ object.name }} - Local Politicians{% endblock %}
 
 {% block extra_js_to_load %}
-    addExtraJS([ {% javascript 'tabs' %} null ]);
+    addExtraJS([ {% javascript 'tabs' %} {% javascript 'rep-locator' %} null ]);
 {% endblock %}
 
 {% block subcontent %}
