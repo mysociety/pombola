@@ -18,6 +18,7 @@ web/down.default.html
 /pombola/nigeria/static/sass/nigeria.css
 /pombola/south_africa/static/sass/countdown.css
 /pombola/south_africa/static/sass/south-africa.css
+/staticfiles
 *.sublime-project
 *.sublime-workspace
 *.DS_Store
