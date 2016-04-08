@@ -5,7 +5,7 @@ import autocomplete_light
 
 import models
 
-from pombola.slug_helpers.admin import StricterSlugFieldMixin
+from slug_helpers.admin import StricterSlugFieldMixin
 
 @admin.register(models.Category, models.Tag)
 class LabelAdmin(admin.ModelAdmin):

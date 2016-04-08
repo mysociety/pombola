@@ -45,7 +45,7 @@ from pombola.info.models import (
 )
 from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView, SearchBaseView
-from pombola.slug_helpers.views import SlugRedirect
+from slug_helpers.views import SlugRedirect
 
 from pombola.south_africa.models import ZAPlace
 

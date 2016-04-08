@@ -11,7 +11,7 @@ from ajax_select.admin import AjaxSelectAdmin
 from pombola.core import models
 from pombola.scorecards import models as scorecard_models
 from pombola.images.admin import ImageAdminInline
-from pombola.slug_helpers.admin import StricterSlugFieldMixin
+from slug_helpers.admin import StricterSlugFieldMixin
 
 
 def create_admin_link_for(obj, link_text):

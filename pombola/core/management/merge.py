@@ -12,7 +12,7 @@ from django.db import transaction
 
 import pombola.core.models as core_models
 from pombola.images.models import Image
-from pombola.slug_helpers.models import SlugRedirect
+from slug_helpers.models import SlugRedirect
 
 
 def check_basic_fields(basic_fields, to_keep, to_delete):

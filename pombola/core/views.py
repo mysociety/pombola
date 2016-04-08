@@ -34,7 +34,7 @@ from django.views.generic import View
 from popolo.models import Identifier
 
 from pombola.core import models
-from pombola.slug_helpers.views import SlugRedirectMixin, get_slug_redirect
+from slug_helpers.views import SlugRedirectMixin, get_slug_redirect
 
 
 class HomeView(TemplateView):

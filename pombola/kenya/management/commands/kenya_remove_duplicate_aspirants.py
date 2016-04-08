@@ -20,7 +20,7 @@ from django.conf import settings
 
 from pombola.core.models import Place, Person, Position
 from pombola.core.utils import mkdir_p
-from pombola.slug_helpers.models import SlugRedirect
+from slug_helpers.models import SlugRedirect
 
 from iebc_api import (
     get_data,

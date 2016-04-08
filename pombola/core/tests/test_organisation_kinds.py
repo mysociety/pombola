@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from pombola.core import models
-from pombola.slug_helpers.models import SlugRedirect
+from slug_helpers.models import SlugRedirect
 
 from django.contrib.contenttypes.models import ContentType
 

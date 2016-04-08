@@ -1,7 +1,7 @@
 import re
 from optparse import make_option
 
-from pombola.slug_helpers.models import SlugRedirect
+from slug_helpers.models import SlugRedirect
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings

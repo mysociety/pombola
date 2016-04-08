@@ -10,7 +10,7 @@ from django.template   import RequestContext
 
 import models
 
-from pombola.slug_helpers.admin import StricterSlugFieldMixin
+from slug_helpers.admin import StricterSlugFieldMixin
 
 
 def create_admin_url_for(obj):

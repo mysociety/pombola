@@ -1,7 +1,7 @@
 from django.contrib import admin
 import models 
 
-from pombola.slug_helpers.admin import StricterSlugFieldMixin
+from slug_helpers.admin import StricterSlugFieldMixin
 
 @admin.register(models.Quiz)
 class QuizAdmin(StricterSlugFieldMixin, admin.ModelAdmin):

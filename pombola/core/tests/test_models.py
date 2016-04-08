@@ -4,7 +4,7 @@ from django_date_extensions.fields import ApproximateDate
 from django.contrib.contenttypes.models import ContentType
 
 from pombola.core import models
-from pombola.slug_helpers.models import SlugRedirect
+from slug_helpers.models import SlugRedirect
 from pombola.tasks.models import Task
 
 

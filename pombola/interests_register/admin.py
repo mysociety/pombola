@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from . import models
 
-from pombola.slug_helpers.admin import StricterSlugFieldMixin
+from slug_helpers.admin import StricterSlugFieldMixin
 
 
 @admin.register(models.Category)

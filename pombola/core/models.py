@@ -32,7 +32,7 @@ from pombola.images.models import HasImageMixin, Image
 
 from pombola.scorecards.models import ScorecardMixin
 from pombola.budgets.models import BudgetsMixin
-from pombola.slug_helpers.models import validate_slug_not_redirecting
+from slug_helpers.models import validate_slug_not_redirecting
 
 from mapit import models as mapit_models
 
