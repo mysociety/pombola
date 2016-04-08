@@ -32,6 +32,7 @@ sorl-thumbnail==12.3
 django_date_extensions==0.1dev
 django-ajax-selects==1.4.2
 django-autocomplete-light==2.3.3
+django-slug-helpers==0.0.2
 
 Markdown==2.5.1
 

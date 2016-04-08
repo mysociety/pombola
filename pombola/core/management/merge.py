@@ -10,9 +10,10 @@ from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 from django.db import transaction
 
+from slug_helpers.models import SlugRedirect
+
 import pombola.core.models as core_models
 from pombola.images.models import Image
-from pombola.slug_helpers.models import SlugRedirect
 
 
 def check_basic_fields(basic_fields, to_keep, to_delete):

@@ -18,9 +18,10 @@ from django.contrib.contenttypes.models import ContentType
 
 from django.conf import settings
 
+from slug_helpers.models import SlugRedirect
+
 from pombola.core.models import Place, Person, Position
 from pombola.core.utils import mkdir_p
-from pombola.slug_helpers.models import SlugRedirect
 
 from iebc_api import (
     get_data,

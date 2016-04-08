@@ -37,6 +37,8 @@ from haystack.forms import SearchForm
 from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import NamespaceMixin, SpeechView, SectionView
 
+from slug_helpers.views import SlugRedirect
+
 from pombola.core import models
 from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
     PlaceDetailSub, OrganisationDetailView, PersonDetail, PlaceDetailView,
@@ -46,7 +48,6 @@ from pombola.info.models import (
 )
 from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView, SearchBaseView
-from pombola.slug_helpers.views import SlugRedirect
 
 from pombola.south_africa.models import ZAPlace
 

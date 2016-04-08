@@ -8,9 +8,9 @@ from django.core.urlresolvers import reverse
 from django.shortcuts  import render_to_response, redirect
 from django.template   import RequestContext
 
-import models
+from slug_helpers.admin import StricterSlugFieldMixin
 
-from pombola.slug_helpers.admin import StricterSlugFieldMixin
+import models
 
 
 def create_admin_url_for(obj):

@@ -32,9 +32,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import View
 
 from popolo.models import Identifier
+from slug_helpers.views import SlugRedirectMixin, get_slug_redirect
 
 from pombola.core import models
-from pombola.slug_helpers.views import SlugRedirectMixin, get_slug_redirect
 
 
 class HomeView(TemplateView):

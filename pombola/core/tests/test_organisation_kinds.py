@@ -2,8 +2,9 @@ from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 
+from slug_helpers.models import SlugRedirect
+
 from pombola.core import models
-from pombola.slug_helpers.models import SlugRedirect
 
 
 class OrganisationKindTest(TestCase):

@@ -3,9 +3,10 @@ from django.contrib import admin
 
 import autocomplete_light
 
+from slug_helpers.admin import StricterSlugFieldMixin
+
 import models
 
-from pombola.slug_helpers.admin import StricterSlugFieldMixin
 
 @admin.register(models.Category, models.Tag)
 class LabelAdmin(admin.ModelAdmin):

@@ -7,8 +7,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from django_date_extensions.fields import ApproximateDate
+from slug_helpers.models import SlugRedirect
 
-from pombola.slug_helpers.models import SlugRedirect
 from pombola.core import models
 
 

@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from pombola.scorecards import models
-from pombola.slug_helpers.admin import StricterSlugFieldMixin
+from slug_helpers.admin import StricterSlugFieldMixin
 
 
 @admin.register(models.Category)
