@@ -18,8 +18,13 @@ Then it should work with `heroku local`.
 
 The simplest way to deploy Pombola to Heroku is to click one of the following buttons depending on which country you'd like to deploy.
 
-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?env[COUNTRY_APP]=kenya) - Kenya
-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?env[COUNTRY_APP]=south_africa) - South Africa
+#### Kenya
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mysociety/pombola/tree/master&env[COUNTRY_APP]=kenya)
+
+#### South Africa
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mysociety/pombola/tree/master&env[COUNTRY_APP]=south_africa)
 
 ### Manual
 
