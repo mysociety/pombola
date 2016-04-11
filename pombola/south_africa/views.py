@@ -34,6 +34,8 @@ from haystack.query import RelatedSearchQuerySet, SQ
 from haystack.inputs import AutoQuery
 from haystack.forms import SearchForm
 
+from info.views import InfoBlogView
+
 from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import NamespaceMixin, SpeechView, SectionView
 
@@ -2197,3 +2199,7 @@ class SAMpAttendanceView(TemplateView):
                 context['aggregate_attendance'] = aggregate_attendance
 
         return context
+
+
+class SAInfoBlogView(CommentArchiveMixin, InfoBlogView):
+    pass

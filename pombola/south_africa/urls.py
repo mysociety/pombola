@@ -9,7 +9,9 @@ from pombola.south_africa.views import (SAHomeView,
     SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
     SAPersonAppearanceView,
     SAOrganisationDetailSubPeople, SAOrganisationDetailSubParty,
-    SAGeocoderView)
+    SAGeocoderView,
+    SAInfoBlogView,
+    )
 from pombola.core.urls import (
     organisation_patterns,
     organisation_patterns_path,
@@ -225,6 +227,7 @@ urlpatterns += (
     # Catch the newsletter info page to change the template used so that the signup form is injected.
     # NOTE - you still need to create an InfoPage with the slug 'newsletter' for this not to 404.
     url(r'^info/newsletter', SANewsletterPage.as_view(), {'slug': 'newsletter'}, name='info_page_newsletter'),
+    url(r'^blog/(?P<slug>[\w\-]+)$', SAInfoBlogView.as_view(), name='info_blog'),
 )
 
 
