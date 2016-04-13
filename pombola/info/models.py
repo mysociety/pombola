@@ -10,7 +10,7 @@ from django.utils.text import slugify
 
 from markitup.fields import MarkupField
 
-from pombola.file_archive.models import File
+from file_archive.models import File
 
 class ModelBase(models.Model):
     created = models.DateTimeField(auto_now_add=True)

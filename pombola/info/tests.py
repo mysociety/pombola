@@ -11,7 +11,7 @@ from django.test import TestCase, Client
 
 from nose.plugins.attrib import attr
 
-from pombola.file_archive.models import File
+from file_archive.models import File
 from .migration_helpers import get_first_image_file
 from .models import InfoPage, ViewCount
 
