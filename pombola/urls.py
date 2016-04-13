@@ -61,7 +61,7 @@ urlpatterns += (
 
 # File archive
 urlpatterns += (
-    url(r'^file_archive/', include('pombola.file_archive.urls')),
+    url(r'^file_archive/', include('file_archive.urls')),
 )
 
 # SayIt - speeches

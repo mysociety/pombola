@@ -422,7 +422,7 @@ INSTALLED_APPS = (
     'pombola.feedback',
     'pombola.scorecards',
     'pombola.search',
-    'pombola.file_archive',
+    'file_archive',
     'pombola.map',
     'pombola.experiments',
     'pombola.budgets',
