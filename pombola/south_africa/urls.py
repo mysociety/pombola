@@ -126,7 +126,10 @@ urlpatterns = [
 # This is for the Code4SA ward councillor widget lookup:
 urlpatterns += (
     url(r'^ward-councillor-lookup/$',
-        TemplateView.as_view(template_name='south_africa/ward_councillor_lookup.html'),
+        RedirectView.as_view(
+            pattern_name='core_geocoder_search',
+            permanent=True,
+            ),
         name='ward-councillor-lookup'
     ),
 )
