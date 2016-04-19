@@ -1,6 +1,72 @@
 var map = undefined;
 var kml_urls_to_add = [];
 var markers_to_add = [];
+var map_loaded_callbacks = [];
+
+var added_kml_layers = []
+var added_markers = []
+
+function remove_kml_layers() {
+  while (layer = added_kml_layers.shift()) {
+    layer.setMap(null);
+  }
+}
+
+function remove_markers() {
+  while (marker = added_markers.shift()) {
+    marker.setMap(null);
+  }
+}
+
+function add_kml_urls(kml_urls_to_add) {
+  var layer, i, kml_url;
+  map.setOptions({ maxZoom: 16 });
+  for (i = 0; i < kml_urls_to_add.length; ++i) {
+    kml_url = kml_urls_to_add[i];
+    layer = new google.maps.KmlLayer(
+      kml_url,
+      {
+        map: map,
+        clickable: false
+      }
+    );
+    added_markers.push(layer);
+  }
+}
+
+function add_markers(markers_to_add) {
+  var marker_opts,
+    // clear the bounds so that they are set from markers
+    map_bounds = new google.maps.LatLngBounds(),
+    i, marker_data;
+
+  for (i = 0; i < markers_to_add.length; ++i)  {
+    marker_data = markers_to_add[i];
+
+    var position = new google.maps.LatLng(marker_data.lat, marker_data.lng);
+
+    marker_opts = {
+      position: position,
+      title: marker_data.name,
+      map: map,
+    };
+
+    if (marker_data.marker_icon) {
+      marker_opts.icon = marker_data.marker_icon;
+    }
+
+    // set the bounds to accomodate this marker
+    map_bounds.extend(position);
+
+    var marker = new google.maps.Marker(marker_opts);
+    added_markers.push(marker);
+
+    if (marker_data.url) {
+      set_marker_click_url(marker, marker_data.url);
+    }
+  }
+  map.fitBounds( map_bounds );
+}
 
 function initialize_map() {
 
@@ -28,46 +94,27 @@ function initialize_map() {
 
     map = new google.maps.Map(map_element, myOptions);
 
-    if (markers_to_add.length) {
-
-        // clear the bounds so that they are set from markers
-        var map_bounds = new google.maps.LatLngBounds();
-
-        while ( args = markers_to_add.shift() ) {
-
-            var position = new google.maps.LatLng(args.lat, args.lng );
-
-            var marker_opts = {
-                position: position,
-                title: args.name,
-                map: map,
-            };
-
-            if (args.marker_icon) {
-              marker_opts.icon = args.marker_icon;
-            }
-
-            // set the bounds to accomodate this marker
-            map_bounds.extend(position);
-
-            var marker = new google.maps.Marker( marker_opts );
-
-            if ( args.url ) {
-                set_marker_click_url( marker, args.url );
-            }
+    google.maps.event.addListenerOnce(map, 'idle', function(){
+        var i, callback;
+        for (i = 0; i < map_loaded_callbacks.length; i++) {
+            map_loaded_callbacks[i](map);
         }
+    });
+
+    if (markers_to_add.length) {
+        add_markers(markers_to_add);
+        while (markers_to_add.length) {
+          markers_to_add.pop();
+        }
+        map_has_been_located = true;
     }
 
     // Add all the kml
-    while ( kml_url = kml_urls_to_add.shift() ) {
-        map.setOptions({ maxZoom: 16 }); // allow zooming on kml
-        new google.maps.KmlLayer(
-            kml_url,
-            {
-                map: map,
-                clickable: false
-            }
-        );
+    if (kml_urls_to_add.length) {
+        add_km_ulrls(kml_urls_to_add);
+        while (kml_urls_to_add.length) {
+            kml_urls_to_add.pop();
+        }
         map_has_been_located = true;
     }
 

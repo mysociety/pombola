@@ -24,6 +24,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import RedirectView, TemplateView
 from django.shortcuts import get_object_or_404
 from django import forms
+from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
@@ -112,6 +113,7 @@ class SAGeocoderView(GeocoderView):
             redirect_url = reverse('latlon', kwargs={
                 'lat': result['latitude'],
                 'lon': result['longitude']})
+            redirect_url += '?q=' + urlquote(request.GET['q'])
             return redirect(redirect_url)
         else:
             return self.render_to_response(context)
@@ -148,92 +150,141 @@ class LatLonDetailBaseView(BasePlaceDetailView):
 
         return province
 
+    def get_ward_councillors(self, location):
+        # Look up the ward on MapIt:
+        url = 'http://mapit.code4sa.org/point/4326/{lon},{lat}?type=WD'.format(
+            lon=location.x, lat=location.y
+        )
+        r = requests.get(url)
+        mapit_json = r.json()
+        if not mapit_json:
+            return []
+        ward_id = mapit_json.values()[0]['name']
+        # Then find the ward councillor from that ward ID. There
+        # should only be one at the moment, but make it a list in case
+        # we support broader lookups in the future:
+        url_fmt = 'http://nearby.code4sa.org/councillor/ward-{ward_id}.json'
+        r = requests.get(url_fmt.format(ward_id=ward_id))
+        ward_result = r.json()
+        councillor_data = ward_result['councillor']
+        party = models.Organisation.objects.filter(
+            name__icontains=councillor_data['PartyDetail']['Name'].lower(),
+            kind__slug='party'
+        ).first()
+        has_party_logo = party and (party.slug in self.party_slugs_that_have_logos)
+
+        return [
+            {
+                'name': councillor_data['Name'],
+                'person': None,
+                'email': councillor_data['custom_contact_details'].get('email', ''),
+                'phone': councillor_data['custom_contact_details'].get('phone', ''),
+                'postal_addresses': [],
+                'party': party,
+                'has_party_logo': has_party_logo,
+                'ward_data': ward_result,
+                'ward_mapit_area_id': mapit_json.values()[0]['id'],
+                'positions': [
+                    {
+                        'title': {'name': 'Ward Councillor'}
+                    }
+                ],
+                'element_id': 'ward-councillor-{ward_id}-0'.format(
+                    ward_id=ward_id
+                ),
+            }
+        ]
+
     def get_context_data(self, **kwargs):
         context = super(LatLonDetailBaseView, self).get_context_data(**kwargs)
-        context['location'] = self.location
 
+        context['ward_data'] = self.get_ward_councillors(self.location)
+
+        context['location'] = self.location
         context['office_search_radius'] = self.constituency_office_search_radius
 
-        ork_has_office, _ = models.OrganisationRelationshipKind.objects.get_or_create(
-            name='has_office')
-
-        context['nearest_offices'] = nearest_offices = (
+        nearest_office_places = (
             ZAPlace.objects
             .filter(kind__slug__in=CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS)
             .distance(self.location)
             .filter(location__distance_lte=(self.location, D(km=self.constituency_office_search_radius)))
             .order_by('distance')
-            )
-
-        #exclude non-active offices
-        #FIXME - this can probably be better implemented by a
-        #organisation_currently_active() filter for places
-        for office in nearest_offices:
-            if not office.organisation.is_ongoing():
-                context['nearest_offices'] = nearest_offices = nearest_offices.exclude(id=office.id)
-
-        # FIXME - There must be a cleaner way/place to do this.
-        for office in nearest_offices:
-            try:
-                cc_positions = office \
-                    .organisation \
-                    .position_set \
-                    .filter(
-                        person__position__title__slug='constituency-contact',
-                    ) \
-                    .currently_active()
-
-                constituency_contacts = models.Person.objects.filter(position__in=cc_positions)
-                office_people_entries = []
-
-                for constituency_contact in constituency_contacts:
-
-                    # Find positions for this person that are relevant to the office.
-                    positions = constituency_contact.position_set \
-                        .filter(
-                            organisation__slug__in = [
-                                "national-assembly",
-                                office.organisation.slug,
-                            ]
-                        ) \
-                        .currently_active()
-
-                    office_people_entries.append({
-                        'person': constituency_contact,
-                        'positions': positions
-                    })
-
-                if len(office_people_entries):
-                    office.office_people_entries = office_people_entries
-
-            except models.Person.DoesNotExist:
-                warnings.warn("{0} has no MPs".format(office.organisation))
-
-            #determine the party slug for the logo
-            try:
-                organisation_relationship = models.OrganisationRelationship.objects.get(
-                    organisation_b=office.organisation,
-                    kind=ork_has_office
-                )
-                party_slug = organisation_relationship.organisation_a.slug
-                if party_slug in self.party_slugs_that_have_logos:
-                    office.party_slug_for_icon = party_slug
-
-            except ObjectDoesNotExist:
-                warnings.warn("{0} has no related party".format(office.organisation))
-
-        context['form'] = LocationSearchForm()
-
-        context['politicians'] = (self.object
-            .all_related_current_politicians()
-            .filter(position__organisation__slug='national-assembly')
+            .select_related('organisation')
+            .prefetch_related('organisation__org_rels_as_b')
+            .prefetch_related('organisation__position_set')
         )
 
+        context['mp_data'] = mp_data = []
+        context['mpl_data'] = mpl_data = []
+
+        for office_place in nearest_office_places:
+            organisation = office_place.organisation
+            if not organisation.is_ongoing():
+                continue
+            # Get the party and party logo:
+            party = None
+            has_party_logo = False
+            for org_rel in organisation.org_rels_as_b.all():
+                if org_rel.kind.name == 'has_office':
+                    party = org_rel.organisation_a
+                    if party.slug in self.party_slugs_that_have_logos:
+                       has_party_logo = True
+            # Find all the constituency contacts:
+            for i, position in enumerate(
+                    organisation.position_set.filter(
+                        title__slug='constituency-contact'
+                    ).currently_active()
+            ):
+                person = position.person
+                element_id = 'constituency-contact-{office_id}-{i}'.format(
+                    office_id=position.organisation.id, i=i
+                )
+                mp_positions = person.position_set \
+                    .filter(
+                        organisation__slug='national-assembly',
+                        title__slug='member'
+                    ) \
+                    .currently_active()
+                mpl_positions = person.position_set \
+                    .filter(
+                        organisation__kind__slug='provincial-legislature',
+                        title__slug='member'
+                    ) \
+                    .currently_active()
+                email, phone = None, None
+                email_contact = person.contacts.filter(kind__slug='email').first()
+                if email_contact:
+                    email = email_contact.value
+                phone_contact = person.contacts.filter(kind__slug='voice').first()
+                if phone_contact:
+                    phone = phone_contact.value
+                person_data = {
+                    'name': person.legal_name,
+                    'person': person,
+                    'email': email,
+                    'phone': phone,
+                    'postal_addresses': [
+                        pa.value for pa in office_place.postal_addresses()
+                        ],
+                    'party': party,
+                    'has_party_logo': has_party_logo,
+                    'office_place': office_place,
+                    'element_id': element_id,
+                    }
+
+                if mp_positions:
+                    person_data['positions'] = mp_positions
+                    person_data['is_mp'] = True
+                    mp_data.append(person_data)
+                if mpl_positions:
+                    person_data['positions'] = mpl_positions
+                    person_data['is_mpl'] = True
+                    mpl_data.append(person_data)
+
+        context['form'] = LocationSearchForm(
+            initial={'q': self.request.GET.get('q')}
+        )
         return context
-
-
-class LatLonDetailNationalView(LatLonDetailBaseView):
-    template_name = 'south_africa/latlon_national_view.html'
 
 
 class LatLonDetailLocalView(LatLonDetailBaseView):

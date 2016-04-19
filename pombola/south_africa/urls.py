@@ -4,7 +4,7 @@ from django.conf.urls import include, url
 from django.views.generic.base import RedirectView, TemplateView
 
 from pombola.south_africa import views
-from pombola.south_africa.views import (SAHomeView, LatLonDetailNationalView,
+from pombola.south_africa.views import (SAHomeView,
     LatLonDetailLocalView, SAPlaceDetailSub, SAOrganisationDetailView,
     SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
     SAPersonAppearanceView,
@@ -108,9 +108,6 @@ for index, pattern in enumerate(place_patterns):
         place_patterns[index] = new_subplace_url
 
 place_patterns.extend((
-    url(r'^latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/national/$',
-        LatLonDetailNationalView.as_view(),
-        name='latlon-national'),
     url(r'^latlon/(?P<lat>[0-9\.-]+),(?P<lon>[0-9\.-]+)/$',
         LatLonDetailLocalView.as_view(),
         name='latlon'),
@@ -129,7 +126,10 @@ urlpatterns = [
 # This is for the Code4SA ward councillor widget lookup:
 urlpatterns += (
     url(r'^ward-councillor-lookup/$',
-        TemplateView.as_view(template_name='south_africa/ward_councillor_lookup.html'),
+        RedirectView.as_view(
+            pattern_name='core_geocoder_search',
+            permanent=True,
+            ),
         name='ward-councillor-lookup'
     ),
 )

@@ -1,28 +1,87 @@
 {% extends 'south_africa/latlon_detail_base_view.html' %}
+{% load pipeline %}
 
 {% block title %}{{ object.name }} - Local Politicians{% endblock %}
 
+{% block extra_js_to_load %}
+    addExtraJS([ {% javascript 'tabs' %} {% javascript 'rep-locator' %} null ]);
+{% endblock %}
+
 {% block subcontent %}
 
+<div class="tabs ui-tabs ui-widget rep-locator-container">
+  <ul class="rep-locator-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
+    <li class="ui-state-default">
+      <a href="#councillors" class="ui-tabs-anchor" data-rep-locator-tooltip=".rep-locator-tooltip--councillors">{{ ward_data | length }} Ward Councillor{{ ward_data | length | pluralize }}</a>
+    </li>
+    <li class="ui-state-default ui-tabs-active">
+      <a href="#mps" class="ui-tabs-anchor" data-rep-locator-tooltip=".rep-locator-tooltip--mps">{{ mp_data | length }} MP{{ mp_data | length | pluralize }}</a>
+    </li>
+    <li class="ui-state-default">
+      <a href="#mpls" class="ui-tabs-anchor" data-rep-locator-tooltip=".rep-locator-tooltip--mpls">{{ mpl_data | length }} MPL{{ mpl_data | length | pluralize }}</a>
+    </li>
+  </ul>
 
-  <ul class="tab-links">
-      <li><a href="#" class="active">Constituency offices</a></li>
-      <li><a href="{% url 'latlon-national' lat=location.y lon=location.x %}">National representatives</a></li>
-    </ul>
+  <div class="rep-locator-tooltip rep-locator-tooltip--councillors">
+    <p>Your ward councillor provides a link between you &amp; your local council.</p>
+    <p>They ensure the council looks after the needs of local people.</p>
+  </div>
+  <div class="rep-locator-tooltip rep-locator-tooltip--mps">
+    <p>Your Member of Parliament (MP) is a link between you &amp; national government.</p>
+    <p>Your MP can help to obtain info, advice or make a complaint.</p>
+  </div>
+  <div class="rep-locator-tooltip rep-locator-tooltip--mpls">
+    <p>Your Member of Provincial Legislature (MPL) is a link between you &amp; provincial government.</p>
+    <p>Your MPL can help to obtain info, advice or make a complaint.</p>
+  </div>
 
-  <div class="column">
+  <!-- TODO: Map should show ward close-up when councillor tab is selected -->
+  {% javascript 'google-map' %}
+  <script>
+    var ward_kml_urls = [];
+    var constituency_offices_marker_data_mps = [];
+    var constituency_offices_marker_data_mpls = [];
+  </script>
+  <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
-    <h2>Constituency offices</h2>
+  <div id="councillors" class="tab-content ui-tabs-panel ui-widget-content">
 
-    <ul class="unstyled-list list-of-constituency-offices">
-      {% for object in nearest_offices %}
-        {% include 'south_africa/constituency_office_list_item.html' with skip_positions=1 %}
+    <ul class="rep-locator-reps">
+      {% for ward_councillor in ward_data %}
+        {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor %}
+        {% if ward_councillor.ward_mapit_area_id %}
+        <script>
+          ward_kml_urls.push('http://mapit.code4sa.org/area/{{ ward_councillor.ward_mapit_area_id }}.kml');
+        </script>
+        {% endif %}
       {% empty %}
-        <li>
-          <p>No local offices found.</p>
-        </li>
+        <li>No ward councillor found.</li>
       {% endfor %}
     </ul>
 
   </div>
+  <div id="mps" class="tab-content ui-tabs-panel ui-widget-content">
+
+    <ul class="rep-locator-reps">
+      {% for person_data in mp_data %}
+        {% include 'south_africa/local_rep_list_item.html' with skip_contact_details=1 %}
+      {% empty %}
+        <li>No MPs found.</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+  <div id="mpls" class="tab-content ui-tabs-panel ui-widget-content">
+
+    <ul class="rep-locator-reps">
+      {% for person_data in mpl_data %}
+        {% include 'south_africa/local_rep_list_item.html' with skip_contact_details=1 %}
+      {% empty %}
+        <li>No MPLs found.</li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</div>
+
 {% endblock %}

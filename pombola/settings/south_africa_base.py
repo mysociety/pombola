@@ -56,6 +56,13 @@ COUNTRY_JS = {
         'output_filename': 'js/tabs.js',
         'template_name': 'pipeline/js-array.html',
     },
+    'rep-locator': {
+        'source_filenames': (
+            'js/rep-locator.js',
+        ),
+        'output_filename': 'js/rep-locator.js',
+        'template_name': 'pipeline/js-array.html',
+    },
     'za-map-drilldown': {
         'source_filenames': (
             'js/za-map-drilldown.js',
