@@ -70,7 +70,7 @@ COUNTRY_JS = {
         'output_filename': 'js/za-map-drilldown.js',
         'template_name': 'pipeline/js-array.html',
     },
-    'za-map-drilldown': {
+    'election-countdown': {
         'source_filenames': (
             'js/election_countdown.js',
         ),
