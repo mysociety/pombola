@@ -545,7 +545,7 @@ DYNAMICALLY_LOADED_PIPELINE_JS = {
         'source_filenames': (
             'js/map-drilldown.js',
         ),
-        'output_filename': 'js/map.js',
+        'output_filename': 'js/base-map-drilldown.js',
         'template_name': 'pipeline/js-array.html',
     },
     'ui-test': {
