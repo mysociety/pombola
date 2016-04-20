@@ -24,14 +24,14 @@
                 '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
             ].concat(pipeline_desktop_only),
             both: pipeline_desktop_and_mobile.concat(
-                ['//www.google.com/jsapi']).concat(extra_js),
+                ['//www.google.com/jsapi']),
             complete: function () {
-                for (i=0; i<pombola_run_when_document_ready_array.length; i++) {
-                    $( pombola_run_when_document_ready_array[i] );
-                }
-
-                // Now load all the optional bits that we didn't want slowing down the more important bits
-                Modernizr.load(pipeline_analytics);
+                $(function() {
+                    for (i=0; i<pombola_run_when_document_ready_array.length; i++) {
+                        $( pombola_run_when_document_ready_array[i] );
+                    }
+                    Modernizr.load(extra_js.concat(pipeline_analytics));
+                });
             }
         }
     );
