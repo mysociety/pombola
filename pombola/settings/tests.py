@@ -5,7 +5,7 @@ from .tests_base import *  # noqa
 
 # Make sure that FakeInstanceMiddleware is present since we'll add
 # speeches to INSTALLED_APPS for testing:
-middleware_to_ensure_present = 'pombola.middleware.FakeInstanceMiddleware'
+middleware_to_ensure_present = 'pombola_sayit.middleware.FakeInstanceMiddleware'
 if middleware_to_ensure_present not in MIDDLEWARE_CLASSES:
     MIDDLEWARE_CLASSES += (middleware_to_ensure_present,)
 
