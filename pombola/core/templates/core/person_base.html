@@ -11,6 +11,7 @@
       <link href="http://{{ settings.DISQUS_SHORTNAME }}.disqus.com/" rel="prefetch" />
     <![endif]-->
   {% endif %}
+  <meta name="pombola-person-id" content="{{ object.id }}">
 {% endblock%}
 
 {% block open_graph %}{% include 'core/_person_open_graph.html' %}{% endblock %}
