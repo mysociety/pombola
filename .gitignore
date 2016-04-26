@@ -28,3 +28,4 @@ build/
 tmp/
 local_fabfile.py
 mzalendo/fabfile.py
+/.env
