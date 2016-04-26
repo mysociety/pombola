@@ -1,11 +1,11 @@
 import os
 import re
-import yaml
 
 from .apps import *  # noqa
 
 from django.template.defaultfilters import slugify
 
+from pombola.config import config
 from pombola.core.logging_filters import skip_unreadable_post
 from pombola.hansard.constants import NAME_SET_INTERSECTION_MATCH
 
@@ -14,10 +14,6 @@ IN_TEST_MODE = False
 # Work out where we are to set up the paths correctly and load config
 base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..', '..' ) )
 root_dir = os.path.abspath( os.path.join( base_dir, '..' ) )
-
-# load the mySociety config
-config_file = os.path.join( base_dir, 'conf', 'general.yml' )
-config = yaml.load( open(config_file, 'r') )
 
 if int(config.get('STAGING')):
     STAGING = True
@@ -43,16 +39,22 @@ MANAGERS = (
     (config.get('MANAGERS_NAME'), config.get('MANAGERS_EMAIL')),
 )
 
-DATABASES = {
-    'default': {
-        'ENGINE':   'django.contrib.gis.db.backends.postgis',
-        'NAME':     config.get('POMBOLA_DB_NAME'),
-        'USER':     config.get('POMBOLA_DB_USER'),
-        'PASSWORD': config.get('POMBOLA_DB_PASS'),
-        'HOST':     config.get('POMBOLA_DB_HOST'),
-        'PORT':     config.get('POMBOLA_DB_PORT'),
+if 'ON_HEROKU' in os.environ:
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES = {'default': db_from_env}
+    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.contrib.gis.db.backends.postgis',
+            'NAME':     config.get('POMBOLA_DB_NAME'),
+            'USER':     config.get('POMBOLA_DB_USER'),
+            'PASSWORD': config.get('POMBOLA_DB_PASS'),
+            'HOST':     config.get('POMBOLA_DB_HOST'),
+            'PORT':     config.get('POMBOLA_DB_PORT'),
+        }
     }
-}
 
 # Numberof seconds to keep a database connection open for
 # in case it can be reused
@@ -95,13 +97,16 @@ MEDIA_ROOT = os.path.normpath( os.path.join( root_dir, "media_root/") )
 MEDIA_URL = '/media_root/'
 
 # Use django-pipeline for handling static files
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+if 'ON_HEROKU' in os.environ:
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+else:
+    STATICFILES_STORAGE = 'pombola.whitenoise_pipeline.GzipManifestPipelineStorage'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.normpath( os.path.join( root_dir, "collected_static/") )
+STATIC_ROOT = os.path.normpath( os.path.join( base_dir, "staticfiles") )
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -597,7 +602,8 @@ for package_name, package in DYNAMICALLY_LOADED_PIPELINE_JS.items():
 PIPELINE_COMPILERS = (
   'pipeline_compass.compass.CompassCompiler',
 )
-PIPELINE_COMPASS_BINARY = os.path.join(root_dir, 'gem-bin', 'compass')
+if 'ON_HEROKU' not in os.environ:
+    PIPELINE_COMPASS_BINARY = os.path.join(root_dir, 'gem-bin', 'compass')
 
 
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'

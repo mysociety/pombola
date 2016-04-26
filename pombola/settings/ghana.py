@@ -1,13 +1,11 @@
 import os
 import yaml
 
+from pombola.config import config
+
 from .base import *  # noqa
 from .ghana_base import *  # noqa
 
-
-# load the mySociety config
-config_file = os.path.join( base_dir, 'conf', 'general.yml' )
-config = yaml.load( open(config_file, 'r') )
 
 if config.get('EMAIL_SETTINGS', None):
     EMAIL_HOST = config.get('EMAIL_HOST', '')
