@@ -2,9 +2,10 @@ import re
 
 from mapit.models import Area
 
+from info.models import InfoPage
+
 from pombola.core.models import Place
 from pombola.core.views import HomeView
-from pombola.info.models import InfoPage
 from pombola.search.views import SearchBaseView
 
 

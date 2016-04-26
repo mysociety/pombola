@@ -421,7 +421,8 @@ INSTALLED_APPS = (
     'haystack',
 
     'slug_helpers',
-    'pombola.info',
+    'info',
+
     'pombola.tasks',
     'pombola.core',
     'pombola.feedback',

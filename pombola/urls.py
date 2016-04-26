@@ -55,8 +55,8 @@ urlpatterns += (
 
 # Info pages
 urlpatterns += (
-    url(r'^info/', include('pombola.info.urls.pages')),
-    url(r'^blog/', include('pombola.info.urls.blog')),
+    url(r'^info/', include('info.urls.pages')),
+    url(r'^blog/', include('info.urls.blog')),
 )
 
 # File archive

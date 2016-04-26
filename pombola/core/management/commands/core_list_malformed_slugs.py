@@ -78,7 +78,8 @@ class Command(BaseCommand):
         """
 
         # Models that will always be available
-        from pombola import core, info, tasks
+        from pombola import core, tasks
+        import info
         models_to_check = (
             (core.models.ContactKind, False),
             (core.models.Person, True),

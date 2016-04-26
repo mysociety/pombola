@@ -11,13 +11,11 @@ from django.template.defaultfilters import slugify
 from django_date_extensions.fields import ApproximateDate
 
 from images.models import Image
+from info.models import InfoPage
 
 from pombola.core.models import PlaceKind, OrganisationKind, PositionTitle
 from pombola.core.models import Place, Person, Organisation, Position
-from pombola.info.models import InfoPage
 from pombola.hansard.models import Venue, Source, Sitting, Entry
-
-
 
 from pombola.ghana.models  import MP, HansardEntry
 from utils import split_name, convert_date, legal_name

@@ -61,8 +61,8 @@ if settings.ENABLED_FEATURES['hansard']:
         def prepare_start_date(self, obj):
             return obj.sitting.start_date
 
-if 'pombola.info' in settings.INSTALLED_APPS:
-    from pombola.info.models import InfoPage
+if 'info' in settings.INSTALLED_APPS:
+    from info.models import InfoPage
 
     class InfoPageIndex(BaseIndex, indexes.Indexable):
         kind = indexes.CharField(model_attr='kind')

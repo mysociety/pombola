@@ -9,9 +9,11 @@ from django_webtest import WebTest
 from nose.plugins.attrib import attr
 
 from mapit.models import Area, CodeType, NameType, Type
+
+from info.models import InfoPage
+
 from pombola.core.models import (
     Place, PlaceKind, Person, Position, PositionTitle)
-from pombola.info.models import InfoPage
 
 # Needed to run the doc tests in views.py
 

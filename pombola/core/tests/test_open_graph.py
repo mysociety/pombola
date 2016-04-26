@@ -1,8 +1,9 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
+from info.models import InfoPage
+
 from pombola.core import models
-from pombola.info.models import InfoPage
 
 
 class OpenGraphTest(TestCase):

@@ -63,8 +63,8 @@ class SearchBaseView(TemplateView):
                 'model': Entry,
                 'title': 'Hansard',
             }
-        if 'pombola.info' in settings.INSTALLED_APPS:
-            from pombola.info.models import InfoPage
+        if 'info' in settings.INSTALLED_APPS:
+            from info.models import InfoPage
             self.section_ordering += ['blog_posts', 'info_pages']
             self.search_sections['blog_posts'] = {
                 'model': InfoPage,

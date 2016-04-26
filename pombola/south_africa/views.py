@@ -39,16 +39,17 @@ from info.views import InfoBlogView
 from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import NamespaceMixin, SpeechView, SectionView
 
+from info.models import (
+    InfoPage, Category as BlogCategory, Tag as BlogTag
+)
+from info.views import InfoPageView
+
 from slug_helpers.views import SlugRedirect
 
 from pombola.core import models
 from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
     PlaceDetailSub, OrganisationDetailView, PersonDetail, PlaceDetailView,
     OrganisationDetailSub, CommentArchiveMixin, PersonSpeakerMappingsMixin)
-from pombola.info.models import (
-    InfoPage, Category as BlogCategory, Tag as BlogTag
-)
-from pombola.info.views import InfoPageView
 from pombola.search.views import GeocoderView, SearchBaseView
 
 from pombola.south_africa.models import ZAPlace

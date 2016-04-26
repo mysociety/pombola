@@ -25,15 +25,17 @@ from django_webtest import WebTest
 from mapit.models import Type, Area, Geometry, Generation
 
 from django.conf import settings
-from pombola.core import models
 import json
 
 from speeches.models import Section, Speech
 from speeches.tests import create_sections
+
+from info.models import InfoPage
+
+from pombola.core import models
 from pombola import south_africa
 from pombola.south_africa.views import SAPersonDetail
 from pombola.core.views import PersonSpeakerMappingsMixin
-from pombola.info.models import InfoPage
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
