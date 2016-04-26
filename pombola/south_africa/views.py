@@ -70,7 +70,6 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-area', # specific to DA party
 )
 
-release_content_type = ContentType.objects.get_for_model(Release)
 
 class SAHomeView(HomeView):
 
@@ -591,6 +590,8 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
     def get_tabulated_interests(self):
         interests = self.object.interests_register_entries.all()
         tabulated = {}
+
+        release_content_type = ContentType.objects.get_for_model(Release)
 
         for entry in interests:
             release = entry.release
@@ -1675,6 +1676,9 @@ class SAMembersInterestsIndex(TemplateView):
         return context
 
     def get_complete_view(self, context):
+
+        release_content_type = ContentType.objects.get_for_model(Release)
+
         #complete view - declarations for multiple people in multiple categories
         context['layout'] = 'complete'
 
@@ -1775,6 +1779,8 @@ class SAMembersInterestsIndex(TemplateView):
         return context
 
     def get_section_view(self, context):
+        release_content_type = ContentType.objects.get_for_model(Release)
+
         #section view - data for multiple people in different categories
         context['layout'] = 'section'
 
@@ -1853,6 +1859,8 @@ class SAMembersInterestsIndex(TemplateView):
         return context
 
     def get_number_by_representative_view(self, context):
+        release_content_type = ContentType.objects.get_for_model(Release)
+
         #numberbyrepresentative view - number of declarations per person per category
         context['layout'] = 'numberbyrepresentative'
 
@@ -1916,6 +1924,8 @@ class SAMembersInterestsIndex(TemplateView):
         return context
 
     def get_numberbysource_view(self, context):
+        release_content_type = ContentType.objects.get_for_model(Release)
+
         #numberbysource view - number of declarations by source per category
         context['layout'] = 'numberbysource'
         if context['category']=='all' and context['release']=='all':
