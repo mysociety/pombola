@@ -16,8 +16,6 @@ framework.
 import os
 import sys
 
-from pombola.config import config, config_path
-
 # Add the path to the project root manually here. Ideally it could be added via
 # python-path in the httpd.conf WSGI config, but I'm not changing that due to
 # the large number of sites running under that config (although it shouldn't
@@ -29,6 +27,7 @@ sys.path.insert(
     os.path.normpath(file_dir + "/..")
 )
 
+from pombola.config import config, config_path
 
 if int(config.get('STAGING')) and sys.argv[1:2] != ['runserver']:
     import pombola.wsgi_monitor
