@@ -4,6 +4,13 @@
 {% for position in positions %}
     <li class="position {% if position.is_ongoing %}ongoing{% endif %}">
         <h4>
+          {% if position.title.slug == 'senator' %}
+            {% if position.subtitle == 'Nominated' %}
+              Nominated Senator
+            {% else %}
+              Senator, <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
+            {% endif %}
+          {% else %}
             {% if position.title.slug == 'mp' %}
                 Member of <a href="{% url "organisation" 'parliament' %}">Parliament</a>
             {% else %}
@@ -17,9 +24,10 @@
             {% if position.place %}
                 for <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
             {% endif %}
+          {% endif %}
         </h4>
 
-        {% if position.subtitle %}
+        {% if position.subtitle and not position.title.slug == 'senator' %}
             <p class="position-subtitle">({{ position.subtitle }})</p>
         {% endif %}
 
