@@ -40,7 +40,23 @@
           {% if position.title.name == 'Ward Councillor' %}
             <li class="constituency-office-mp-position">
               Ward Councillor
-              ({{ person_data.party.slug|upper }})
+            </li>
+            <li>
+              Ward number: {{ person_data.ward_data.ward_number }}
+            </li>
+            <li>
+              {{ person_data.ward_data.municipality }}
+              <a href="http://{{ person_data.ward_data.councillor.Municipality.ContactDetails.WebsiteUrl }}">
+                {{ person_data.ward_data.councillor.Municipality.ContactDetails.WebsiteUrl }}
+              </a>
+              {{ person_data.ward_data.councillor.Municipality.ContactDetails.Tel }}
+            </li>
+            <li>
+              {{ person_data.ward_data.councillor.PartyDetail.Name }} ({{ person_data.party.slug|upper }})
+              <a href="http://{{ person_data.ward_data.councillor.PartyDetail.ContactDetails.WebsiteUrl }}">
+                {{ person_data.ward_data.councillor.PartyDetail.ContactDetails.WebsiteUrl }}
+              </a>
+                {{ person_data.ward_data.councillor.PartyDetail.ContactDetails.Tel }}
             </li>
           {% elif position.title.name == 'Constituency Contact' %}
             <li class="constituency-office-mp-position">
