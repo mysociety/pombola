@@ -66,6 +66,10 @@ class AttendanceAPIDown(Exception):
     pass
 
 
+class WardCouncillorAPIDown(Exception):
+    pass
+
+
 # In the short term, until we have a list of constituency offices and
 # addresses from DA, let's bundle these together.
 CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
@@ -167,8 +171,12 @@ class LatLonDetailBaseView(BasePlaceDetailView):
         # should only be one at the moment, but make it a list in case
         # we support broader lookups in the future:
         url_fmt = 'http://nearby.code4sa.org/councillor/ward-{ward_id}.json'
-        r = requests.get(url_fmt.format(ward_id=ward_id))
-        ward_result = r.json()
+        try:
+            r = requests.get(url_fmt.format(ward_id=ward_id))
+            r.raise_for_status()
+            ward_result = r.json()
+        except (requests.exceptions.HTTPError, ValueError) as e:
+            raise WardCouncillorAPIDown(unicode(e))
         councillor_data = ward_result['councillor']
         party = models.Organisation.objects.filter(
             name__icontains=councillor_data['PartyDetail']['Name'].lower(),
@@ -201,7 +209,11 @@ class LatLonDetailBaseView(BasePlaceDetailView):
     def get_context_data(self, **kwargs):
         context = super(LatLonDetailBaseView, self).get_context_data(**kwargs)
 
-        context['ward_data'] = self.get_ward_councillors(self.location)
+        try:
+            context['ward_data'] = self.get_ward_councillors(self.location)
+        except WardCouncillorAPIDown as e:
+            context['ward_data'] = []
+            context['ward_data_not_available'] = u"The error was: {0}".format(e)
 
         context['location'] = self.location
         context['office_search_radius'] = self.constituency_office_search_radius

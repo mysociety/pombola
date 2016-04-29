@@ -10,6 +10,13 @@
 
 {% block subcontent %}
 
+{% if ward_data_not_available %}
+  <div class="ward-councillor-api-down">
+    Ward councillor data is currently unavailable. Please try
+    again later to find your ward councillor details.
+  </div>
+{% endif %}
+
 <div class="tabs ui-tabs ui-widget rep-locator-container">
   <ul class="rep-locator-tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
     <li class="ui-state-default">
