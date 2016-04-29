@@ -23,7 +23,6 @@ def env_value_to_python(s):
 
 config_path = None
 if os.environ.get('CONFIG_FROM_ENV'):
-    print("Loading config from environment variables", file=sys.stderr)
     general_yml_example_fname = join(base_dir, 'conf', 'general.yml-example')
     with open(general_yml_example_fname) as f:
         example_config = yaml.load(f)
@@ -34,6 +33,5 @@ if os.environ.get('CONFIG_FROM_ENV'):
     }
 else:
     config_path =  join(base_dir, 'conf', 'general.yml')
-    print("Loading config from {0}".format(config_path), file=sys.stderr)
     with open(config_path) as f:
         config = yaml.load(f)
