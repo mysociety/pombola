@@ -39,8 +39,7 @@
                     {% else %}
                         {% if forloop.last %} and {% else %}, {% endif %}
                     {% endif %}
-                    <a href="{{ party.get_absolute_url }}">{{ party.name }}</a>
-                {% endfor %}.
+                    <a href="{{ party.get_absolute_url }}">{{ party.name }}</a>{% endfor %}.
 
             {% endif %}
 
