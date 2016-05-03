@@ -23,19 +23,14 @@
 
         <div>
           {% if position.subtitle == 'Nominated' %}Nominated{% endif %}
-            {{ object.name }}
-
-            {% if position.place %}
+            {{ object.name }}{% if position.place %}
                 for
-                <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>
-
-                {% if position.place.parent_place %}
+                <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}
+                </a>{% if position.place.parent_place %}
                     (in
                     <a href="{{ position.place.parent_place.get_absolute_url }}">{{ position.place.parent_place.name }}</a>
-                    {{ position.place.parent_place.kind.name }}).
-                {% endif %}
-
-            {% endif %}
+                    {{ position.place.parent_place.kind.name }})
+                {% endif %}{% endif %}.
 
             {% if position.person.parties %}
 
