@@ -3036,6 +3036,13 @@ p.attendance__disclaimer {
                 clear: both;
             }
         }
+
+        // There is only ever one ward councillor in the list,
+        // so let them go full width (makes space for ALL-CAPS names)
+        #councillors & {
+          float: none;
+          width: auto;
+        }
     }
 
     .constituency-office-mp-photo {
@@ -3059,6 +3066,16 @@ p.attendance__disclaimer {
         margin-bottom: 0.4em;
     }
 
+    .constituency-office-mp-aspect {
+      font-weight: bold;
+      color: $colour_grey;
+      margin-bottom: 0.3em;
+    }
+
+    .constituency-office-mp-details + .constituency-office-mp-aspect {
+      margin-top: 1em;
+    }
+
     .constituency-office-mp-details {
         margin: 0;
         padding: 0;
@@ -3080,7 +3097,7 @@ p.attendance__disclaimer {
 
                 @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
                     background-image: url('/static/images/rep-locator-contact-icons@2.png');
-                    background-size: (16px*4) 16px;
+                    background-size: (16px*5) 16px;
                 }
             }
         }
@@ -3099,6 +3116,10 @@ p.attendance__disclaimer {
 
         .constituency-office-mp-phone:before {
             background-position: -48px 0;
+        }
+
+        .constituency-office-mp-url:before {
+            background-position: -64px 0;
         }
 
         a {

@@ -27,6 +27,12 @@
       </a>
     {% endif %}
 
+  {% if extended %}
+    <p class="constituency-office-mp-aspect">
+        Ward Councillor for ward number {{ person_data.ward_data.ward_number }}
+    </p>
+  {% endif %}
+
     <ul class="constituency-office-mp-details">
 
       {% if skip_positions %}
@@ -35,12 +41,13 @@
             <a href="{{ person_data.party.get_absolute_url }}">{{ person_data.party.name }}</a>
           </li>
         {% endif %}
+      {% elif extended %}
+          {# Do nothing: Ward councillor position as already been printed as .constituency-office-mp-aspect #}
       {% else %}
         {% for position in person_data.positions %}
           {% if position.title.name == 'Ward Councillor' %}
             <li class="constituency-office-mp-position">
-              Ward Councillor
-              ({{ person_data.party.slug|upper }})
+              Ward Councillor for ward number {{ person_data.ward_data.ward_number }}
             </li>
           {% elif position.title.name == 'Constituency Contact' %}
             <li class="constituency-office-mp-position">
@@ -81,12 +88,49 @@
 
         {% if person_data.phone %}
           <li class="constituency-office-mp-phone">
-            <a href="{{ person_data.phone }}">{{ person_data.phone }}</a>
+            <a href="tel:{{ person_data.phone }}">{{ person_data.phone }}</a>
           </li>
         {% endif %}
       {% endif %}
 
     </ul>
+
+  {% if extended %}
+    <p class="constituency-office-mp-aspect">
+      {{ person_data.ward_data.municipality }}
+    </p>
+
+    <ul class="constituency-office-mp-details">
+      <li class="constituency-office-mp-url">
+        <a href="http://{{ person_data.ward_data.councillor.Municipality.ContactDetails.WebsiteUrl }}">
+          {{ person_data.ward_data.councillor.Municipality.ContactDetails.WebsiteUrl }}
+        </a>
+      </li>
+      <li class="constituency-office-mp-phone">
+        <a href="tel:{{ person_data.ward_data.councillor.Municipality.ContactDetails.Tel }}">
+          {{ person_data.ward_data.councillor.Municipality.ContactDetails.Tel }}
+        </a>
+      </li>
+    </ul>
+
+    <p class="constituency-office-mp-aspect">
+      {{ person_data.ward_data.councillor.PartyDetail.Name }}
+      ({{ person_data.party.slug|upper }})
+    </p>
+
+    <ul class="constituency-office-mp-details">
+      <li class="constituency-office-mp-url">
+        <a href="http://{{ person_data.ward_data.councillor.PartyDetail.ContactDetails.WebsiteUrl }}">
+          {{ person_data.ward_data.councillor.PartyDetail.ContactDetails.WebsiteUrl }}
+        </a>
+      </li>
+      <li class="constituency-office-mp-phone">
+        <a href="tel:{{ person_data.ward_data.councillor.PartyDetail.ContactDetails.Tel }}">
+          {{ person_data.ward_data.councillor.PartyDetail.ContactDetails.Tel }}
+        </a>
+      </li>
+    </ul>
+  {% endif %}
 
     {% if person_data.office_place %}
     {% if person_data.is_mp or person_data.is_mpl %}

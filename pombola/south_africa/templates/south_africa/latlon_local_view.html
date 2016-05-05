@@ -56,7 +56,7 @@
 
     <ul class="rep-locator-reps">
       {% for ward_councillor in ward_data %}
-        {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor %}
+        {% include 'south_africa/local_rep_list_item.html' with person_data=ward_councillor extended=1 %}
         {% if ward_councillor.ward_mapit_area_id %}
         <script>
           ward_kml_urls.push('http://mapit.code4sa.org/area/{{ ward_councillor.ward_mapit_area_id }}.kml');
