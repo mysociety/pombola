@@ -12,18 +12,20 @@ $(function() {
         }
     }
   }
-  map_loaded_callbacks.push(function(map) {
-    var tabIndex, tabID;
-    // Find the tab which is active, and set the zoom level for it:
-    tabIndex = $(".rep-locator-container").tabs('option', 'active');
-    tabID = $(".tabs .tab-content").eq(tabIndex).attr('id');
-    updateRepLocatorTabZoom(tabID);
-    // Now add event listeners to detect changes of tab and rezoom
-    // the map:
-    $(".rep-locator-container").on("tabsactivate", function(event, ui) {
-      updateRepLocatorTabZoom(ui.newPanel[0].id);
+  if ($('.rep-locator-tabs').length) {
+    map_loaded_callbacks.push(function(map) {
+      var tabIndex, tabID;
+      // Find the tab which is active, and set the zoom level for it:
+      tabIndex = $(".rep-locator-container").tabs('option', 'active');
+      tabID = $(".tabs .tab-content").eq(tabIndex).attr('id');
+      updateRepLocatorTabZoom(tabID);
+      // Now add event listeners to detect changes of tab and rezoom
+      // the map:
+      $(".rep-locator-container").on("tabsactivate", function(event, ui) {
+        updateRepLocatorTabZoom(ui.newPanel[0].id);
+      });
     });
-  });
+  }
 
   // Work out which tab should be active.
   var activeTabIndex = $('.ui-tabs-active').prevAll().length || 0;
