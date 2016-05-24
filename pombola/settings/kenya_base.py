@@ -1,4 +1,5 @@
 from pombola.hansard.constants import NAME_SUBSTRING_MATCH
+from pombola.config import config
 
 COUNTRY_APP = 'kenya'
 
@@ -54,6 +55,22 @@ COUNTRY_JS = {
         ),
         'output_filename': 'js/experiments.js',
     },
+    'select2-matchers': {
+        'source_filenames': (
+            'js/select2-optgroup-matcher.js',
+        ),
+        'output_filename': 'select2-matchers',
+    },
+    'facebook-experiment': {
+        'source_filenames': (
+            'js/select2-optgroup-matcher.js',
+            'js/facebook-experiment.js',
+        ),
+        'output_filename': 'js/facebook-experiment.js',
+    },
 }
 
 HANSARD_NAME_MATCHING_ALGORITHM = NAME_SUBSTRING_MATCH
+
+SURVEYGIZMO_API_TOKEN = config.get('SURVEYGIZMO_API_TOKEN')
+SURVEYGIZMO_API_SECRET = config.get('SURVEYGIZMO_API_SECRET')

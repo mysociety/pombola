@@ -21,6 +21,10 @@ DJANGO_SECRET_KEY: 'abcabc'
 # create an account and then put the 'UA-123456-1' bit here
 GOOGLE_ANALYTICS_ACCOUNT: ''
 
+# SurveyGizmo keys for Mzalendo experiments
+SURVEYGIZMO_API_TOKEN: ''
+SURVEYGIZMO_API_SECRET: ''
+
 # If you're running the experiment with the county performance page
 # test for Kenya, then put the experiment key here
 COUNTY_PERFORMANCE_EXPERIMENT_KEY: ''

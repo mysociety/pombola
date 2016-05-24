@@ -51,3 +51,8 @@ class OfficeDetailView(TemplateView):
         context['area'] = self.area
         context['office'] = AREA_ID_TO_OFFICE.get(self.area.id)
         return context
+
+
+class OfficeDetailAjaxView(OfficeDetailView):
+
+    template_name = 'iebc_office_detail_ajax.html'

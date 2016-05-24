@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load pipeline %}
+{% load staticfiles %}
+
+{% block title %}The National Assembly of Kenya{% endblock %}
+
+{% block css_headers %}
+    {{ block.super }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body_attributes %}class="facebook-experiment-page"{% endblock %}
+
+{% block header %}
+    <header id="site-header">
+        <div class="wrapper">
+            {% include "site_header_logo.html" %}
+        </div>
+    </header>
+{% endblock %}
+
+{% block breadcrumbs %}
+    {# Hide bread crumbs on this page #}
+{% endblock %}
+
+{% block content %}
+
+<!--
+        <img src="{% static 'images/parliament-600px.jpg' %}">
+-->
+
+<h1>The National Assembly of Kenya</h1>
+
+<div class="row">
+    <div class="col-sm-6">
+            <p>The National Assembly of Kenya is made up of 350 members: 290 members elected by registered voters from constituencies, 47 women elected by registered voters from the counties, 12 members nominated by parliamentary political parties to represent special interests of youth, persons with disabilities and workers, and the Speaker of the National Assembly.</p>
+
+            <p>The members of the National Assembly represent the people of constituencies and as well as special interests (youth, women, persons with disabilities and workers) in the National Assembly.</p>
+    </div>
+
+    <div class="col-sm-6">
+      <p>The roles of the members of the national assembly are to:</p>
+
+      <ul>
+          <li>Represent the diversity of the nation available in the counties, constituencies as well as special interest groups</li>
+          <li>Enact legislation</li>
+          <li>Determine the allocation of national revenue across the levels of the national and county governments, and;</li>
+          <li>Exercise oversight over the Executive - the President, the Deputy President and other State officers.</li>
+      </ul>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h2>Your Role In Democracy</h2>
+
+        <p>Kenyan citizens are expected to monitor how state officers are functioning to ensure the guiding principles of leadership and integrity are respected and maintained. The guiding principles include:
+
+        <ul>
+            <li>Selection based on personal integrity, competence and suitability or election in a free and fair election;</li>
+            <li>Objectivity and impartiality in decision making and in ensuring decisions are not influenced by nepotism, favouritism and other improper practices;</li>
+            <li>Selfless service based on public interest is maintained;</li>
+            <li>Accountability to the public for decisions and actions; and</li>
+            <li>Discipline and commitment in service to the people.</li>
+        </ul>
+
+        <p>As a Kenyan citizen, you have the opportunity to hold your representatives to account in the national elections scheduled to take place in August 2017.</p>
+
+        <h3>Registering to Vote</h3>
+
+        <p>In order to vote, you must be registered. To be eligible to register to vote you must be:</p>
+
+        <ul>
+            <li>A Kenyan citizen</li>
+            <li>Aged 18 years and above</li>
+            <li>Have a national ID or a Passport</li>
+        </ul>
+
+        <p>To register, you must go to your nearest registration centre.</p>
+    </div>
+
+    <div class="col-sm-6">
+        <h2>Speaking in Parliament</h2>
+
+        <p>One measure of how active your MP is in Parliament is how many times they spoke.</p>
+
+        <p>In 2015 3 MPs spoke more than 500 times!<br>
+        27 MPs, however, didn’t speak at all!</p>
+
+        <p>At Mzalendo we believe that MPs from the same county should form County Caucuses to enable them collectively advance the interests of the counties they hail from.</p>
+
+        <p>In 2015 there were huge variations in activity from county to county:</p>
+
+        <h3>Counties with the Most Active MPs</h3>
+
+        <table>
+          <tr>
+            <th>Siaya</th>
+            <td>2,260 speeches</td>
+          </tr>
+          <tr>
+            <th>Kakamega</th>
+            <td>1,551 speeches</td>
+          </tr>
+          <tr>
+            <th>Homabay</th>
+            <td>1,390 speeches</td>
+          </tr>
+        </table>
+
+        <h3>Counties with the Least Active MPs</h3>
+
+        <table>
+          <tr>
+            <th>Lamu</th>
+            <td>23 speeches</td>
+          </tr>
+          <tr>
+            <th>Tana River</th>
+            <td>86 speeches</td>
+          </tr>
+          <tr>
+            <th>Kwale</th>
+            <td>123 speeches</td>
+          </tr>
+        </table>
+    </div>
+</div>
+
+<div id="ctas" style="display:none">
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="cta">
+                <h2>Have you registered to vote?</h2>
+
+                <p>If not, find your nearest registration centre!</p>
+
+                <p>Type part of your constituency name and select it from the list:</p>
+
+                <form class="iebc-office-lookup" method="GET" action="{% url 'iebc-office' %}">
+                    {{ form_counties.area }}
+                </form>
+
+                <div>&nbsp;</div>
+
+                <div id="constituency-lookup-result"></div>
+
+            </section>
+        </div>
+
+        <!-- <div class="col-sm-6">
+            <section class="cta">
+                <h2>Do you know who your MP is?</h2>
+
+                <p>Find out here!</p>
+
+                <form class="offices_grouped_custom_matcher_narrow" method="GET" action="{% url 'iebc-office' %}">
+                    {{ form_counties.area }}<br>
+                    <input type="submit" value="Show office details"/>
+                </form>
+
+            </section>
+        </div> -->
+    </div>
+
+</div>
+
+<hr>
+
+<footer>
+    <a class="button" href="/fb/politics/thanks?sid={{ sid }}">Next page</a>
+</footer>
+
+{% endblock %}
+
+{% block js_end_of_body %}
+    {{ block.super }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    {% javascript 'facebook-experiment' %}
+{% endblock %}

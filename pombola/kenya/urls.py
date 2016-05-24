@@ -19,7 +19,13 @@ from .views import (KEHomeView,
     ShujaazFinalists2014View, ShujaazFinalists2015View,
 )
 from .views_iebc_office_locator import (
-    OfficeDetailView, OfficeSingleSelectView
+    OfficeDetailView, OfficeSingleSelectView,
+    OfficeDetailAjaxView
+)
+from .views_facebook_experiments import (
+    TreatmentOlympics, TreatmentOlympicsThanks,
+    TreatmentPolitics, TreatmentPoliticsThanks,
+    SurveyGizmoRecord, SurveyGizmoValue
 )
 
 
@@ -64,6 +70,29 @@ urlpatterns = [
         OfficeDetailView.as_view(),
         name='iebc-office'
     ),
+    url(r'^iebc-office-ajax$',
+        OfficeDetailAjaxView.as_view(),
+        name='iebc-office-ajax'
+    ),
+
+    url(r'^fb/olympics$',
+        TreatmentOlympics.as_view()
+        ),
+    url(r'^fb/olympics/thanks$',
+        TreatmentOlympicsThanks.as_view()
+        ),
+    url(r'^fb/politics$',
+        TreatmentPolitics.as_view()
+        ),
+    url(r'^fb/politics/thanks$',
+        TreatmentPoliticsThanks.as_view()
+        ),
+    url(r'^fb/ajax/record$',
+        SurveyGizmoRecord.as_view()
+        ),
+    url(r'^fb/ajax/value$',
+        SurveyGizmoValue.as_view()
+        ),
 ]
 
 # Create the two County Performance pages:

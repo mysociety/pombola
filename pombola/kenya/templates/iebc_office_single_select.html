@@ -9,63 +9,13 @@
 {% block js_end_of_body %}
   {{ block.super }}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+  {% javascript 'select2-matchers' %}
   <script>
     var options = {
       placeholder: 'Constituency',
       allowClear: true,
-    },
-    modelMatcher = function(term, text) {
-      /* From https://github.com/select2/select2/issues/3034#issuecomment-126451444 */
-      text.parentText = text.parentText || "";
-
-      // Always return the object if there is nothing to compare
-      if ($.trim(term.term) === '') {
-        return text;
-      }
-
-      // Do a recursive check for options with children
-      if (text.children && text.children.length > 0) {
-        // Clone the text object if there are children
-        // This is required as we modify the object to remove any non-matches
-        var match = $.extend(true, {}, text);
-
-        // Check each child of the option
-        for (var c = text.children.length - 1; c >= 0; c--) {
-          var child = text.children[c];
-          child.parentText += text.parentText + " " + text.text;
-
-          var matches = modelMatcher(term, child);
-
-          // If there wasn't a match, remove the object in the array
-          if (matches == null) {
-            match.children.splice(c, 1);
-          }
-        }
-
-        // If any children matched, return the new object
-        if (match.children.length > 0) {
-          return match;
-        }
-
-        // If there were no matching children, check just the plain object
-        return modelMatcher(term, match);
-      }
-
-      // If the typed-in term matches the text of this term, or the text from any
-      // parent term, then it's a match.
-      var original = (text.parentText + ' ' + text.text).toUpperCase();
-      var term = term.term.toUpperCase();
-
-
-      // Check if the text contains the term
-      if (original.indexOf(term) > -1) {
-        return text;
-      }
-
-      // If it doesn't contain the term, don't return anything
-      return null;
-    }
-    var matcherObject = {matcher: modelMatcher};
+    };
+    var matcherObject = {matcher: includeOptgroupsMatcher};
     var optionsWithGroupMatcher = $.extend({}, matcherObject, options, {width: '100%'});
     var optionsWithGroupMatcherNarrow = $.extend({}, matcherObject, options);
     $('.iebc-office-lookup #offices select').select2($.extend({}, options, {width: '100%'}));

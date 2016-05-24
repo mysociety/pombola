@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}The National Assembly of Kenya{% endblock %}
+
+{% block body_attributes %}class="facebook-experiment-page"{% endblock %}
+
+{% block header %}
+    <header id="site-header">
+        <div class="wrapper">
+            {% include "site_header_logo.html" %}
+        </div>
+    </header>
+{% endblock %}
+
+{% block breadcrumbs %}
+    {# Hide bread crumbs on this page #}
+{% endblock %}
+
+{% block content %}
+
+<div style="text-align: center;">
+    <h1>Thanks for responding.</h1>
+
+    <p>We will send an email to the address you provided in the survey in approximately two weeks time, which will include more information on how you will receive payment.</p>
+</div>
+
+<footer>
+    <p>There is a world of information about your government in Kenya on Mzalendo.com</p>
+    <p><a href="/" class="button">Click here to go there</a></p>
+</footer>
+
+{% endblock %}
