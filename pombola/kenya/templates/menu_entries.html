@@ -41,16 +41,14 @@
 
 
 <li class="has-submenu">
-  <a href="{% url "position_pt" pt_slug='member-national-assembly' %}">NA Members</a>
+  <a href="{% url "position_pt" pt_slug='member-national-assembly' %}">MPs</a>
   {% if include_sub_menu_entries %}
   <ul id="parliament-overview">
+    <li><a href="{% url "position_pt" pt_slug='member-national-assembly' %}">NA Members</a></li>
+    <li><a href="{% url "position_pt" pt_slug='senator' %}">Senators</a></li>
     <li><a href="{% url "organisation_kind" slug='coalition' %}">Coalitions</a></li>
   </ul>
   {% endif %}
-</li>
-
-<li>
-  <a href="{% url "position_pt" pt_slug='senator' %}">Senators</a>
 </li>
 
 <li class="has-submenu"><a href="{% url "info_page" slug='parliament-overview' %}">Parliament</a>
@@ -89,7 +87,7 @@
     {% if include_sub_menu_entries %}
     <ul id="places-overview">
       <li>
-        <a href="{% url "shujaaz-finalists-2015" %}">People’s Shujaaz Awards</a>
+
       </li>
       <li>
         <a href="{% url "info_page" slug='citizens-rights' %}">Rights and Responsibilities</a>
@@ -105,6 +103,16 @@
       </li>
     </ul>
     {% endif %}
+</li>
+
+<li class="has-submenu">
+  <a tabindex="0">Research</a>
+  {% if include_sub_menu_entries %}
+  <ul id="parliament-overview">
+    <li><a href="{% url "shujaaz-finalists-2015" %}">People’s Shujaaz Awards</a></li>
+    <li><a href="{% url "women" %}">Women MPs</a></li>
+  </ul>
+  {% endif %}
 </li>
 
 <li class="has-submenu"><a href="{% url "info_page" slug='news' %}">News</a>
