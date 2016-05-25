@@ -1,8 +1,6 @@
 $pull-out-background: #f2f0e7;
 $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
 
-$colour_women_purple: #753C96;
-
 #home-quote,
 #home-cta,
 #home-featured-person,
@@ -120,32 +118,46 @@ $colour_women_purple: #753C96;
   }
 }
 
-.home-special-features__button {
+.home-special-feature {
   display: block;
   margin-top: 1em;
   padding: 20px;
-  background-color: $colour_red;
   @include border-radius(4px);
-  color: #fff;
 
-  h2 {
+  background-color: $colour_pale_yellow;
+  border: 1px solid mix(#000, $colour_pale_yellow, 10%);
+  color: #676105; // a sort of olive brown
+
+  h2, h3 {
     color: inherit;
-    font-size: 1.3em;
     line-height: 1.2em;
-    margin-bottom: 0;
   }
 
-  &:hover,
-  &:focus {
-    background-color: darken($colour_red, 5%);
-    color: #fff;
-    text-decoration: none;
+  h2 {
+    font-size: 1.3em;
   }
 }
 
-.home-special-features__button--shujaaz {
+.home-special-feature--button {
+  text-decoration: none;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.home-special-feature--shujaaz {
   position: relative;
-  padding: 20px 80px 20px 20px; // leave space on right for floated image
+  padding-right: 80px; // leave space for img
+
+  background-color: $colour_pale_green;
+  border-color: mix(#000, $colour_pale_green, 10%);
+  color: $colour_primary;
+
+  &:hover, &:focus {
+    background-color: mix(#000, $colour_pale_green, 5%);
+    color: $colour_primary;
+  }
 
   img {
     position: absolute;
@@ -154,15 +166,80 @@ $colour_women_purple: #753C96;
   }
 }
 
-.home-special-features__button--women {
-  color: $colour_women_purple;
-  background-color: mix(#fff, $colour_women_purple, 90%);
-  border: 1px solid mix(#fff, $colour_women_purple, 70%);
+.home-special-feature--women {
+  background-color: $colour_pale_purple;
+  border-color: mix(#000, $colour_pale_purple, 10%);
+  color: $colour_purple;
 
   &:hover,
   &:focus {
-    background-color: mix(#fff, $colour_women_purple, 80%);
-    color: $colour_women_purple;
+    background-color: mix(#000, $colour_pale_purple, 5%);
+    color: $colour_purple;
+  }
+}
+
+.home-special-feature--election {
+  a {
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 0.9em;
+  }
+
+  ol {
+    border-top: 1px solid mix(#000, $colour_pale_yellow, 10%);
+    padding-left: 0;
+    margin-bottom: 1em;
+
+    li {
+      list-style: none;
+    }
+  }
+
+  li {
+    border-bottom: 1px solid mix(#000, $colour_pale_yellow, 10%);
+    margin: 0;
+
+    a {
+      display: block;
+      padding: 0.5em 0;
+      font-size: 1.1em;
+    }
+  }
+
+  .col + .col {
+    margin-top: 1em;
+  }
+
+  @media (min-width: 61.25em) {
+    .row {
+      @include clearfix();
+      margin: 0 -1em;
+    }
+
+    .col {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      float: left;
+      width: 50%;
+      padding: 0 1em;
+    }
+
+    .col + .col {
+      margin-top: 0;
+    }
+  }
+}
+
+.home-special-feature__more {
+  font-size: 0.8em;
+
+  &:after {
+    content: "\2192";
+    margin-left: 0.3em;
+    display: inline-block;
   }
 }
 
