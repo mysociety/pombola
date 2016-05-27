@@ -1,5 +1,6 @@
 from django.conf.urls import url
-from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic import ListView, RedirectView, TemplateView
+from pombola.core import models
 from pombola.kenya.views import (
     KEPersonDetail,
     KEPersonDetailAppearances,
@@ -33,6 +34,9 @@ urlpatterns = [
     url(r'^register-to-vote$',     TemplateView.as_view(template_name='register-to-vote.html') ),
     url(r'^find-polling-station$', TemplateView.as_view(template_name='find-polling-station.html') ),
     url(r'^women/$', TemplateView.as_view(template_name='women.html') ),
+    url(r'^person/all/$',
+        ListView.as_view(model=models.Person),
+        name='person_list'),
     url(r'^person/(?P<slug>[-\w]+)/$',
         KEPersonDetail.as_view(), name='person'),
     url(r'^person/(?P<slug>[-\w]+)/appearances/$',
