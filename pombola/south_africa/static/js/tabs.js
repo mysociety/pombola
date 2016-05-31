@@ -34,6 +34,25 @@ $(function() {
     active: activeTabIndex
   });
   $(".tabs").on("tabsactivate", function(event, ui) {
-    history.pushState(null, null, '#' + ui.newPanel[0].id);
+    var panelID = ui.newPanel[0].id, gaCategoryPrefix;
+    history.pushState(null, null, '#' + panelID);
+    // If Google Analytics is loaded, try to track clicks on the tabs
+    if (typeof ga === 'function') {
+      // We only use jQuery tabs on the rep locator page and person
+      // pages for South Africa (at the moment); distinguish those
+      // cases with the event category:
+      if ($('.rep-locator-tabs').length) {
+        gaCategoryPrefix = 'rep-locator-tab-';
+      } else if ($('meta[name=pombola-person-id]').length) {
+        gaCategoryPrefix = 'person-page-tab-';
+      } else {
+        gaCategoryPrefix = 'tab-';
+      }
+      ga('send', {
+        hitType: 'event',
+        eventCategory: gaCategoryPrefix + panelID,
+        eventAction: 'activate'
+      });
+    }
   });
 });
