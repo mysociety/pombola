@@ -1,20 +1,3 @@
-//generic re-usable hide or show with class states
-//todo: add states to trigger elem if provided
-function hideShow(elem, trig) {
-  elem.toggleClass(function() {
-    if ($(this).is('.open')) {
-      $(this).hide().removeClass('open');
-      trig.removeClass('active');
-      return 'closed';
-    } else {
-      $(this).show().removeClass('closed');
-      trig.addClass('active');
-      return 'open';
-    }
-  });
-}
-
-
 $(function(){
   /*
    * auto complete
