@@ -126,7 +126,7 @@ class SAGeocoderView(GeocoderView):
             return self.render_to_response(context)
 
 class LocationSearchForm(SearchForm):
-    q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your location'}))
+    q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'placeholder': 'Your address'}))
 
 class LatLonDetailBaseView(BasePlaceDetailView):
 
