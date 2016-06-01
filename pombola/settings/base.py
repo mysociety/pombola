@@ -534,14 +534,6 @@ DYNAMICALLY_LOADED_PIPELINE_JS = {
             'js/feeds.js',
         ),
         'output_filename': 'js/feeds.js',
-        'template_name': 'pipeline/js-array.html',
-    },
-    'countdown': {
-        'source_filenames': (
-            'js/libs/jquery.countdown-v1.6.0.js',
-        ),
-        'output_filename': 'js/countdown.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'responsive-carousel': {
         'source_filenames': (

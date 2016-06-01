@@ -44,12 +44,6 @@ COUNTRY_CSS = {
         ),
         'output_filename': 'css/kenya-intro.css'
     },
-    'women-wordcloud': {
-        'source_filenames': (
-            'css/jqcloud.css',
-        ),
-        'output_filename': 'women-wordcloud.js',
-    },
 }
 
 COUNTRY_JS = {
@@ -59,15 +53,6 @@ COUNTRY_JS = {
             'js/riveted.js',
         ),
         'output_filename': 'js/experiments.js',
-        'template_name': 'pipeline/js-array.html',
-    },
-    'women-wordcloud': {
-        'source_filenames': (
-            'js/jqcloud-1.0.4.js',
-            'js/women-hansard-words.js',
-            'js/women-wordcloud.js',
-        ),
-        'output_filename': 'js/women-wordcloud.js',
         'template_name': 'pipeline/js-array.html',
     },
 }
