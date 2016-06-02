@@ -36,20 +36,9 @@
         {% load staticfiles %}
         <script type="text/javascript" charset="utf-8">
 
-            var pombola_run_when_document_ready_array = [];
-
-            function pombola_run_when_document_ready (func) {
-                if ( window.$ ) {
-                    $(func);
-                } else {
-                    pombola_run_when_document_ready_array.push( func );
-                }
-            }
-
             window.pombola_settings = {
                 google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
                 static_url:                '{{ STATIC_URL }}',
-                extra_js: [],
                 map_bounds: {
                   north: {{ settings.MAP_BOUNDING_BOX_NORTH }},
                   east:  {{ settings.MAP_BOUNDING_BOX_EAST  }},
@@ -59,12 +48,6 @@
                 crosshairs_image: '{% static 'images/crosshairs.png' %}'
             };
 
-            function addExtraJS(jsURLs) {
-                Array.prototype.push.apply(
-                    pombola_settings.extra_js, jsURLs
-                );
-            }
-
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -73,60 +56,15 @@
             ga('create', pombola_settings.google_analytics_account);
             ga('send', 'pageview');
 
-            {% block extra_js_to_load %}
-                // no extra js added to be loaded
-            {% endblock %}
-
         </script>
+
+        {% load pipeline %}
+
+        {% javascript 'modernizr' %}
 
         <!--[if (lt IE 9) & (!IEMobile)]>
             <script type="text/javascript" src="{% static 'js/libs/respond.1.0.1.min.js' %}"></script>
         <![endif]-->
-
-        {% load pipeline %}
-
-        <script type="text/javascript" charset="utf-8">
-
-        /* We want to be able to use the Javascript assets
-        compressed and fingerprinted by django-pipeline from
-        loader.js, which dynamically decides what Javascript to
-        load. At the moment, the only easy (but rather ugly) way
-        of doing this is to specify a template for the
-        Javascript packages that outputs a quoted and
-        escaped-for-Javascript-strings version of the URL, with
-        a trailing comma.  Then we can wrap these into an array
-        in the code below.  Since some Javascript
-        implementations error on a trailing comma in an array,
-        we also have to add a null, which we then immediate
-        remove. */
-
-            var pipeline_desktop_only = [
-                {% javascript 'desktop_only' %}
-                null
-            ];
-            pipeline_desktop_only.pop();
-
-            var pipeline_mobile_only =  [
-                {% javascript 'mobile_only' %}
-                null
-            ];
-            pipeline_mobile_only.pop();
-
-            var pipeline_desktop_and_mobile =  [
-                {% javascript 'desktop_and_mobile' %}
-                null
-            ];
-            pipeline_desktop_and_mobile.pop();
-
-            var pipeline_analytics =  [
-                {% javascript 'analytics' %}
-                null
-            ];
-            pipeline_analytics.pop();
-
-        </script>
-
-        {% javascript 'modernizr_and_loader' %}
 
         <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
 
@@ -165,10 +103,6 @@
         </div>
         {% endblock %}
 
-        {% javascript 'survey' %}
-
-        {% block footer_extra_js_to_load %}{% endblock %}
-
         <footer id="site-footer">
             <div class="wrapper">
                 {% include "footer.html" %}
@@ -191,6 +125,14 @@
             }
           })();
         </script>
+
+        {% block js_end_of_body %}
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+          <script src="//www.google.com/jsapi"></script>
+          {% javascript 'base' %}
+          {% javascript 'survey' %}
+        {% endblock %}
+
         <div id="fb-root"></div>
     </body>
 </html>

@@ -11,6 +11,11 @@
 {% block object_menu_links %}
 {% endblock object_menu_links %}
 
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'google-map' %}
+{% endblock %}
+
 {% block subcontent %}
 
   {% if object.summary %}
@@ -71,17 +76,18 @@
 
 {% with place=object.place_set.all.0 %}
   {% if place.location %}
-    {% javascript 'google-map' %}
     <div class="profile-map">
       <div id="map_canvas"></div>
 
       {% block add_place_kml_to_map %}
       <script type="text/javascript" charset="utf-8">
-        add_marker_to_map({
-          lat: {{ place.location.y }},
-          lng: {{ place.location.x }},
-          name: "{{place.organisation.name }}"
-        });
+        markers_to_add = [
+          {
+            lat: {{ place.location.y }},
+            lng: {{ place.location.x }},
+            name: "{{place.organisation.name }}"
+          }
+        ];
       </script>
       {% endblock %}
 

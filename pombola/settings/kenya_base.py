@@ -53,7 +53,6 @@ COUNTRY_JS = {
             'js/riveted.js',
         ),
         'output_filename': 'js/experiments.js',
-        'template_name': 'pipeline/js-array.html',
     },
 }
 

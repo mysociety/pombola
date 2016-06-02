@@ -1,8 +1,9 @@
 {% extends 'core/place_base.html' %}
 {% load pipeline %}
 
-{% block extra_js_to_load %}
-    addExtraJS([ {% javascript 'hide-reveal' %} null ]);
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'hide-reveal' %}
 {% endblock %}
 
 {% block subcontent %}

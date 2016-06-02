@@ -330,19 +330,15 @@
 
 
 
-  pombola_run_when_document_ready(
-      function () {
-          google.load(
-              'maps', '3',
-              {
-                  callback: function () {
-                    var myMzMap = new MzMap();
-                    myMzMap.init();
-                  },
-                  other_params:'sensor=true'
-              }
-          );
-      }
+  google.load(
+    'maps', '3',
+    {
+        callback: function () {
+          var myMzMap = new MzMap();
+          myMzMap.init();
+        },
+        other_params:'sensor=true'
+    }
   );
 
 

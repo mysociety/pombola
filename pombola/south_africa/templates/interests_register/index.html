@@ -4,8 +4,9 @@
 
 {% block title %}Members' Interests{% endblock %}
 
-{% block extra_js_to_load %}
-    addExtraJS([ {% javascript 'interests-filter' %} null ]);
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'interests-filter' %}
 {% endblock %}
 
 {% block body_attributes %} class="members-interests" {% endblock %}

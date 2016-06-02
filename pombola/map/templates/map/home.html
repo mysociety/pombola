@@ -3,18 +3,18 @@
 
 {% block title %}Map{% endblock %}
 
-{% block extra_js_to_load %}
-    pombola_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo-min.js' );
-    pombola_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js' );
-
+{% block js_end_of_body %}
+  {{ block.super }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+  <script>
     var mapDrilldownSettings = {
       {% if settings.COUNTRY_APP == 'kenya' %}
         mapitAreaType: 'con'
       {% endif %}
     };
-
-    addExtraJS([ {% javascript 'map' %} null ]);
-
+  </script>
+  {% javascript 'map' %}
 {% endblock %}
 
 {% block extra_headers %}

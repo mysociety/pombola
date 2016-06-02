@@ -3,6 +3,11 @@
 {% load humanize %}
 {% load pipeline %}
 
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'google-map' %}
+{% endblock %}
+
 {% block content %}
 
   <div class="page-wrapper wrapper election-area-page">
@@ -11,11 +16,12 @@
 
     {% if object.mapit_area %}
       <div class="map-box example">
-        {% javascript 'google-map' %}
 
         <div id="map_canvas"></div>
         <script type="text/javascript" charset="utf-8">
-          add_kml_to_map( 'http://{{ request.get_host }}{% url "mapit_index" %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
+          kml_urls_to_add = [
+            'http://{{ request.get_host }}{% url "mapit_index" %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001'
+          ];
         </script>
       </div>
     {% endif %}

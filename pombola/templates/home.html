@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load pipeline %}
 
 {% block title %}Home{% endblock %}
 
-{% block extra_js_to_load %}
-    pombola_settings.extra_js.push( 'js/feeds.js' );
+{% block js_end_of_body %}
+  {% javascript 'feeds' %}
 {% endblock %}
 
 {% block breadcrumbs %}

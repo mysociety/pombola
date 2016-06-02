@@ -20,14 +20,10 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/libs/responsive-carousel.css' %}" />
 {% endblock %}
 
-{% block extra_js_to_load %}
-    addExtraJS(
-      [
-        {% javascript 'feeds' %}
-        {% javascript 'responsive-carousel' %}
-        null
-      ]
-    );
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'feeds' %}
+  {% javascript 'responsive-carousel' %}
 {% endblock %}
 
 {% block breadcrumbs %}

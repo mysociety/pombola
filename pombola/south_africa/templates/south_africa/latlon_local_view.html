@@ -4,8 +4,11 @@
 
 {% block title %}{{ object.name }} - Local Politicians{% endblock %}
 
-{% block extra_js_to_load %}
-    addExtraJS([ {% javascript 'tabs' %} {% javascript 'rep-locator' %} null ]);
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'tabs' %}
+  {% javascript 'rep-locator' %}
+  {% javascript 'google-map' %}
 {% endblock %}
 
 {% block subcontent %}
@@ -43,7 +46,6 @@
     <p>Your MPL can help to obtain info, advice or make a complaint.</p>
   </div>
 
-  {% javascript 'google-map' %}
   <script>
     var ward_kml_urls = [];
     var constituency_offices_marker_data_mps = [];

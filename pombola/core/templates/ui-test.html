@@ -4,8 +4,9 @@
 
 {% block title %}Test jQuery UI Elements{% endblock %}
 
-{% block extra_js_to_load %}
-  addExtraJS([ {% javascript 'ui-test' %} null ]);
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'ui-test' %}
 {% endblock %}
 
 {% block content %}
