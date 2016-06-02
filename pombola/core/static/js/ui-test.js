@@ -64,7 +64,9 @@ jQuery(function($) {
   });
 
   $(".ui-test-tabs").tabs().on("tabsactivate", function(event, ui) {
-    history.pushState(null, null, '#' + ui.newPanel[0].id);
+    if (history.pushState) {
+      history.pushState(null, null, '#' + ui.newPanel[0].id);
+    }
   });
 
   $('.ui-test-dialog').dialog({

@@ -35,7 +35,9 @@ $(function() {
   });
   $(".tabs").on("tabsactivate", function(event, ui) {
     var panelID = ui.newPanel[0].id, gaCategoryPrefix;
-    history.pushState(null, null, '#' + panelID);
+    if (history.pushState) {
+      history.pushState(null, null, '#' + panelID);
+    }
     // If Google Analytics is loaded, try to track clicks on the tabs
     if (typeof ga === 'function') {
       // We only use jQuery tabs on the rep locator page and person
