@@ -21,7 +21,6 @@ OPTIONAL_APPS = (
     # Social authentication doesn't seem to be used in Odekro currently:
     # 'social_auth',
 
-    'mapit',
     'bootstrap_pagination',
 )
 
