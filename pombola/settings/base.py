@@ -537,6 +537,12 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/modernizr.js',
     },
+    'respond': {
+        'source_filenames': (
+            'js/libs/respond.1.4.2.js',
+        ),
+        'output_filename': 'js/respond.js',
+    },
     'hide-reveal': {
         'source_filenames': (
             'js/hide-reveal.js',

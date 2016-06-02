@@ -63,7 +63,7 @@
         {% javascript 'modernizr' %}
 
         <!--[if (lt IE 9) & (!IEMobile)]>
-            <script type="text/javascript" src="{% static 'js/libs/respond.1.0.1.min.js' %}"></script>
+            {% javascript 'respond' %}
         <![endif]-->
 
         <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
