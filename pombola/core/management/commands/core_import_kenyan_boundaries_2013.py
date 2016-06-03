@@ -49,8 +49,8 @@ class Command(NoArgsCommand):
             if not options[required]:
                 raise CommandError("You must specify --" + required)
 
-        all_data = (('dis', 'COUNTY_NAM', map_county_name, options['counties_shpfile']),
-                    ('con', 'CONSTITUEN', map_constituency_name, options['constituencies_shpfile']))
+        all_data = (('DIS', 'COUNTY_NAM', map_county_name, options['counties_shpfile']),
+                    ('CON', 'CONSTITUEN', map_constituency_name, options['constituencies_shpfile']))
 
         for area_type_code, name_field, map_name_function, filename in all_data:
 

@@ -17,12 +17,12 @@ class Command(NoArgsCommand):
     )
 
     def handle_noargs(self, **options):
-        self.match_for_types(type_code='con',
+        self.match_for_types(type_code='CON',
                              mapit_generation=3,
                              place_kind_slug='constituency',
                              session_slug='na2013',
                              commit=options['commit'])
-        self.match_for_types(type_code='dis',
+        self.match_for_types(type_code='DIS',
                              mapit_generation=3,
                              place_kind_slug='county',
                              session_slug='s2013',

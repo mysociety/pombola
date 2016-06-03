@@ -9,10 +9,10 @@ class Command(NoArgsCommand):
     help = 'Link places to areas in mapit'
 
     def handle_noargs(self, **options):
-        self.match_for_types(type_code='con', place_kind_slug='constituency'          )
-        self.match_for_types(type_code='pro', place_kind_slug='province', suffix=True )
-        self.match_for_types(type_code='dis', place_kind_slug='county',   suffix=True )
-        self.match_for_types(type_code='ctr', place_kind_slug='country',  suffix=True )
+        self.match_for_types(type_code='CON', place_kind_slug='constituency'          )
+        self.match_for_types(type_code='PRO', place_kind_slug='province', suffix=True )
+        self.match_for_types(type_code='DIS', place_kind_slug='county',   suffix=True )
+        self.match_for_types(type_code='CTR', place_kind_slug='country',  suffix=True )
 
 
     def match_for_types(self, type_code, place_kind_slug, suffix=False ):
