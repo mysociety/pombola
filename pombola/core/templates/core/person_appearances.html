@@ -10,8 +10,9 @@
 
 {% block title %}{{ object.name }} Appearances{% endblock %}
 
-{% block extra_js_to_load %}
-    addExtraJS([ {% javascript 'load-appearances' %} null ]);
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'load-appearances' %}
 {% endblock %}
 
 {% block subcontent %}

@@ -3,12 +3,13 @@
 
 {% block title %}Map{% endblock %}
 
-{% block extra_js_to_load %}
-    pombola_settings.extra_js.push( '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js' );
-
+{% block js_end_of_body %}
+  {{ block.super }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+  <script>
     var mapDrilldownSettings = {
       {% if settings.COUNTRY_APP == 'kenya' %}
-        mapitAreaType: 'con',
+      mapitAreaType: 'con',
       {% endif %}
 
       i18n: {
@@ -22,8 +23,8 @@
         "outside map bounds": "Click was outside the supported region"
       }
     };
-
-    addExtraJS([ {% javascript 'za-map-drilldown' %} null ]);
+  </script>
+  {% javascript 'za-map-drilldown' %}
 {% endblock %}
 
 {% block extra_headers %}

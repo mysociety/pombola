@@ -54,42 +54,36 @@ COUNTRY_JS = {
             'js/tabs.js',
         ),
         'output_filename': 'js/tabs.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'rep-locator': {
         'source_filenames': (
             'js/rep-locator.js',
         ),
         'output_filename': 'js/rep-locator.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'za-map-drilldown': {
         'source_filenames': (
             'js/za-map-drilldown.js',
         ),
         'output_filename': 'js/za-map-drilldown.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'election-countdown': {
         'source_filenames': (
             'js/election_countdown.js',
         ),
         'output_filename': 'js/election_countdown.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'advanced-search': {
         'source_filenames': (
             'js/advanced-search.js',
         ),
         'output_filename': 'js/advanced-search.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'interests-filter': {
         'source_filenames' : (
             'js/interests-filter.js',
         ),
         'output_filename': 'js/interests-filter.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'attendance-table': {
         'source_filenames': (
@@ -97,7 +91,6 @@ COUNTRY_JS = {
             'js/attendance-table.js',
         ),
         'output_filename': 'js/attendance-table.js',
-        'template_name': 'pipeline/js-array.html',
     }
 }
 

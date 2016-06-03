@@ -1,9 +1,10 @@
 {% extends 'core/person_base.html' %}
 {% load pipeline %}
 
-{% block extra_js_to_load %}
-    addExtraJS([ {% javascript 'tabs' %} null ]);
-{% endblock extra_js_to_load %}
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'tabs' %}
+{% endblock %}
 
 {% block object_tagline %}
     <div class="important-positions">

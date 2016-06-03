@@ -1,6 +1,4 @@
 var map = undefined;
-var kml_urls_to_add = [];
-var markers_to_add = [];
 var map_loaded_callbacks = [];
 
 var added_kml_layers = []
@@ -101,7 +99,7 @@ function initialize_map() {
         }
     });
 
-    if (markers_to_add.length) {
+    if (typeof markers_to_add !== "undefined" && markers_to_add.length) {
         add_markers(markers_to_add);
         while (markers_to_add.length) {
           markers_to_add.pop();
@@ -110,8 +108,8 @@ function initialize_map() {
     }
 
     // Add all the kml
-    if (kml_urls_to_add.length) {
-        add_km_ulrls(kml_urls_to_add);
+    if (typeof kml_urls_to_add !== "undefined" && kml_urls_to_add.length) {
+        add_kml_urls(kml_urls_to_add);
         while (kml_urls_to_add.length) {
             kml_urls_to_add.pop();
         }
@@ -141,8 +139,7 @@ function add_marker_to_map( args ) {
     markers_to_add.push(args);
 }
 
-pombola_run_when_document_ready(
-    function () {
+$(function () {
         google.load(
             'maps', '3',
             {

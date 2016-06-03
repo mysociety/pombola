@@ -5,6 +5,11 @@
 {% block object_menu %}
 {% endblock %}
 
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'google-map' %}
+{% endblock %}
+
 {% block object_tagline %}
 
   {% with session=object.parliamentary_session %}
@@ -26,13 +31,14 @@
 {% block profile_pic %}
   {% if object.mapit_area %}
     <div class="profile-map">
-      {% javascript 'google-map' %}
 
       <div id="map_canvas" width="300" height="300"></div>
 
       {% block "add_place_kml_to_map" %}
         <script type="text/javascript" charset="utf-8">
-          add_kml_to_map( 'http://{{ request.get_host }}{% url "mapit_index" %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001' );
+          kml_urls_to_add = [
+            'http://{{ request.get_host }}{% url "mapit_index" %}area/{{ object.mapit_area.id }}.kml?simplify_tolerance=0.001'
+          ];
         </script>
       {% endblock %}
 

@@ -14,17 +14,11 @@
       window.pombola_settings = {
           google_analytics_account : '{{ settings.GOOGLE_ANALYTICS_ACCOUNT }}',
           static_url:                '{{ STATIC_URL }}',
-          extra_js: []
       };
-
-      {% block extra_js_to_load %}
-          // no extra js added to be loaded
-      {% endblock %}
-
   </script>
 
   {% load pipeline %}
-  {% javascript 'modernizr_and_loader' %}
+  {% javascript 'modernizr' %}
 
   {% stylesheet 'intro' %}
 

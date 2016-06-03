@@ -5,6 +5,11 @@
   <a href="{% url 'core_search' %}?q={{ query|urlencode }}">for a person or organisation</a>
 {% endblock %}
 
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'google-map' %}
+{% endblock %}
+
 {% block search_title %}
 
 <h1> Find Your Representative </h1>
@@ -19,20 +24,21 @@
 
 {% block search_form %}
   <div class="inline-search-box">
-    <input type="text" name="q" value="{{ query }}" id="id_q" placeholder="Enter your location&hellip;"/>
+    <input type="text" name="q" value="{{ query }}" id="id_q" placeholder="Enter your address&hellip;"/>
     <input type="submit" value="Search" class="button">
   </div>
 {% endblock %}
 
 {% block search_results %}
   {% if geocoder_results %}
-    {% javascript 'google-map' %}
-
     <div class="geocoded_results">
 
       <div id="map_canvas">&nbsp;</div>
 
       <ul>
+        <script>
+          markers_to_add = [];
+        </script>
         {% for result in geocoder_results %}
           <li>
             <a href="/place/latlon/{{ result.latitude }},{{result.longitude }}/">

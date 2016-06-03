@@ -484,108 +484,70 @@ PIPELINE_CSS = {
     },
 }
 
-# The packages in DYNAMICALLY_LOADED_PIPELINE_JS will all be loaded
-# dynamically, and the only way we can do that without making changes
-# to django-pipeline is to render the URLs that django-pipeline
-# generates as Javascript array elements. So, keep these separate so
-# that we can set a template that does that on each when including
-# them in PIPELINE_JS.
-
-DYNAMICALLY_LOADED_PIPELINE_JS = {
-   'desktop_only': {
+PIPELINE_JS = {
+   'base': {
         'source_filenames': (
             'js/libs/jquery-ui.js',
             'js/libs/jquery.form-v2.94.js',
             'js/desktop-functions.js',
-        ),
-        'output_filename': 'js/desktop_only.js',
-        'template_name': 'pipeline/js-array.html',
-    },
-    'mobile_only': {
-        'source_filenames': (
-            'js/mobile-functions.js',
-        ),
-        'output_filename': 'js/mobile_only.js',
-        'template_name': 'pipeline/js-array.html',
-    },
-    'desktop_and_mobile': {
-        'source_filenames': (
             'js/twitter-embed.js',
-        ),
-        'output_filename': 'js/desktop_and_mobile.js',
-        'template_name': 'pipeline/js-array.html',
-    },
-    'analytics': {
-        'source_filenames': (
             'js/analytics.js',
         ),
-        'output_filename': 'js/analytics.js',
-        'template_name': 'pipeline/js-array.html',
+        'output_filename': 'js/base.js',
     },
     'load-appearances': {
         'source_filenames': (
             'js/load-appearances.html',
         ),
         'output_filename': 'js/load-appearances.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'feeds': {
         'source_filenames': (
             'js/feeds.js',
         ),
         'output_filename': 'js/feeds.js',
-        'template_name': 'pipeline/js-array.html',
-    },
-    'countdown': {
-        'source_filenames': (
-            'js/libs/jquery.countdown-v1.6.0.js',
-        ),
-        'output_filename': 'js/countdown.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'responsive-carousel': {
         'source_filenames': (
             'js/libs/responsive-carousel.js',
         ),
         'output_filename': 'js/responsive-carousel.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'map': {
         'source_filenames': (
             'js/map-drilldown.js',
         ),
         'output_filename': 'js/base-map-drilldown.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'ui-test': {
         'source_filenames': (
             'js/ui-test.js',
         ),
         'output_filename': 'js/ui-test.js',
-        'template_name': 'pipeline/js-array.html',
     },
-}
-
-PIPELINE_JS = {
     'google-map': {
         'source_filenames': (
             'js/map.js',
         ),
         'output_filename': 'js/google-map.js',
     },
-    'modernizr_and_loader': {
+    'modernizr': {
         'source_filenames': (
             'js/libs/modernizr.js',
-            'js/loader.js',
         ),
-        'output_filename': 'js/modernizr_and_loader.js',
+        'output_filename': 'js/modernizr.js',
+    },
+    'respond': {
+        'source_filenames': (
+            'js/libs/respond.1.4.2.js',
+        ),
+        'output_filename': 'js/respond.js',
     },
     'hide-reveal': {
         'source_filenames': (
             'js/hide-reveal.js',
         ),
         'output_filename': 'js/hide-reveal.js',
-        'template_name': 'pipeline/js-array.html',
     },
     'survey': {
         'source_filenames': (
@@ -594,10 +556,6 @@ PIPELINE_JS = {
         'output_filename': 'js/survey.js',
     },
 }
-
-for package_name, package in DYNAMICALLY_LOADED_PIPELINE_JS.items():
-    package['template_name'] = 'pipeline/js-array.html'
-    PIPELINE_JS[package_name] = package
 
 # Only for debugging compression (the default is: 'not DEBUG' which is
 # fine when not experimenting with compression)
