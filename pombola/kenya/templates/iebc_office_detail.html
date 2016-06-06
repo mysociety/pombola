@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load pipeline %}
+
+{% block content %}
+
+<div class="iebc-office-result">
+
+{% if office.missing %}
+
+  <h1>Sorry, we have no data for {{ office.cons_name }} in
+     {{ office.prov_name }} Province</h1>
+
+{% else %}
+
+  <h1>IEBC office in {{ office.cons_name }} ({{ office.prov_name }})</h1>
+
+  <dl>
+   <dt>Address:</dt>
+   <dd><strong>{{ office.address }}</strong></dd>
+   <dt>Telephone:</dt>
+   <dd><strong>{{ office.telephone }}</strong></dd>
+  </dl>
+
+{% endif %}
+
+</div>
+
+{% endblock content %}

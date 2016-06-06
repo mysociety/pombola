@@ -15,7 +15,10 @@ from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
     YouthEmploymentView, YouthEmploymentSupportSubmission,
     YouthEmploymentCommentSubmission, ExperimentThanks,
     YouthEmploymentInputSubmission, YouthEmploymentBillView,
-    ShujaazFinalists2014View, ShujaazFinalists2015View
+    ShujaazFinalists2014View, ShujaazFinalists2015View,
+)
+from .views_iebc_office_locator import (
+    OfficeDetailView, OfficeSingleSelectView
 )
 
 
@@ -51,6 +54,14 @@ urlpatterns = [
             ),
         {'slug': 'party'},
         ),
+    url(r'^iebc-office-lookup$',
+        OfficeSingleSelectView.as_view(),
+        name='iebc-offices-single-select'
+    ),
+    url(r'^iebc-office$',
+        OfficeDetailView.as_view(),
+        name='iebc-office'
+    ),
 ]
 
 # Create the two County Performance pages:
