@@ -10,6 +10,8 @@ imports_and_defaults = (
      lambda person, dictionary, base_url: None),
     ('add_extra_popolo_data_for_organization',
      lambda organisation, dictionary, base_url: None),
+    ('override_current_session',
+     lambda session: None),
 )
 
 # Note that one could do this without the dynamic import and use of

@@ -35,6 +35,7 @@ from popolo.models import Identifier
 from slug_helpers.views import SlugRedirectMixin, get_slug_redirect
 
 from pombola.core import models
+from pombola.country import override_current_session
 
 
 class HomeView(TemplateView):
@@ -334,6 +335,14 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         slug=pt_slug
     )
 
+    # If this position title is one associated with any parliamentary
+    # session, show alternative parliamentary sessions:
+    possible_sessions = []
+    if models.ParliamentarySession.objects.filter(
+            position_title=title
+    ).exists():
+        possible_sessions = models.ParliamentarySession.objects.order_by('name')
+
     page_title = title.name
     if o_slug:
         organisation = get_object_or_404(models.Organisation,
@@ -351,6 +360,31 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
             models.ParliamentarySession,
             slug=session_slug
         )
+    # Build up context data for the links to switch between particular
+    # parliamentary sessions and all current position holders:
+    session_details = []
+    for s in [None] + list(possible_sessions):
+        if session != s:
+            params = request.GET.copy()
+            if s is None:
+                session_filter = 'Current'
+                params.pop('session', None)
+                override = override_current_session(session)
+                if override is None:
+                    path = request.path
+                else:
+                    path = override.positions_url()
+            else:
+                session_filter = s.name
+                params['session'] = s.slug
+                path = s.positions_url()
+            session_details.append({
+                'url': path + '?' + params.urlencode(),
+                'name': session_filter,
+                'session': s,
+                'should_link': session != s,
+            })
+
     # If a particular parliamentary session has been requested, only
     # return positions that overlap with the period of that
     # session. Otherwise only return currently active positions.
@@ -415,6 +449,8 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
             'order':      request.GET.get('order'),
             'places':     places,
             'place_slug': place_slug,
+            'session': session,
+            'session_details': session_details,
         },
         context_instance=RequestContext(request)
     )

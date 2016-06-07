@@ -19,3 +19,13 @@ def significant_positions_filter(qs):
                            # 'governor',
                            # 'ward-representative',
                            'member-national-assembly')))
+
+
+def override_current_session(session):
+    from pombola.core.models import ParliamentarySession
+    if session and session.slug == 'na2007':
+        # Then find the most recent session with PositionTitle member
+        # of the national assembly:
+        return ParliamentarySession.objects.filter(
+            position_title__slug='member-national-assembly',
+        ).order_by('-start_date').first()

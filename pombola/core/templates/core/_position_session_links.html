@@ -1,0 +1,17 @@
+{% if session %}
+  <h3>Position holders during {{ session.name }}</h3>
+  <h4>({{ session.readable_date_range }})</h4>
+{% else %}
+  <h3>Current Position Holders</h3>
+{% endif %}
+
+{% if session_details|length > 1 %}
+  <div class="parliamentary-session-links">Switch to:
+    {% for session in session_details %}
+      {% if session.should_link %}
+        <a href="{{ session.url }}">{{ session.name }}</a>
+        {% if not forloop.last %} &mdash; {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
