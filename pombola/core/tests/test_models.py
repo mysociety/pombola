@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django_date_extensions.fields import ApproximateDate
@@ -579,3 +581,141 @@ class NormalizeWhitespaceTest(TestCase):
         person = models.Person.objects.create(
             legal_name='   Alice    Smith   ', slug='alice-smith')
         self.assertEqual('Alice Smith', person.legal_name)
+
+
+class OverlappingPositionsTests(TestCase):
+
+    def test_overlaps(self):
+        organisation_kind = models.OrganisationKind.objects.create(
+            name="Example OrganisationKind",
+            slug="example-org-kind",
+        )
+        organisation = models.Organisation.objects.create(
+            name="Example Organisation",
+            slug="example-org",
+            kind=organisation_kind,
+        )
+
+        # Some made-up session dates, that we'll test whether various
+        # positions overlap with:
+        session_start_date = date(2015, 6, 15)
+        session_end_date = date(2016, 2, 10)
+
+        blank = ''
+        past = ApproximateDate(past=True)
+        future = ApproximateDate(future=True)
+        full_before_session_start = ApproximateDate(year=2015, month=6, day=10)
+        full_after_session_start = ApproximateDate(year=2015, month=7, day=8)
+        full_after_session_end = ApproximateDate(year=2016, month=3, day=5)
+        month_exactly_session_start = ApproximateDate(year=2015, month=6)
+        month_exactly_session_end = ApproximateDate(year=2016, month=2)
+        year_exactly_session_start = ApproximateDate(year=2015)
+        year_exactly_session_end = ApproximateDate(year=2016)
+
+        # The commented out cases are ones where, because we know the
+        # start date must be <= end date, we could say that they don't
+        # overlap even though one of the range ends is imprecise, but
+        # that turns out to make the implementation much more
+        # complicated to deal with that case.
+
+        i = 0
+        for overlaps, position_start_date, position_end_date in [
+                (True, blank, blank),
+                (False, blank, past),
+                (True, blank, future),
+                (False, blank, full_before_session_start),
+                (True, blank, full_after_session_start),
+                (True, blank, full_after_session_end),
+                (True, blank, month_exactly_session_start),
+                (True, blank, month_exactly_session_end),
+                (True, blank, year_exactly_session_start),
+                (True, blank, year_exactly_session_end),
+                (True, past, blank),
+                (False, past, past),
+                (True, past, future),
+                (False, past, full_before_session_start),
+                (True, past, full_after_session_start),
+                (True, past, full_after_session_end),
+                (True, past, month_exactly_session_start),
+                (True, past, month_exactly_session_end),
+                (True, past, year_exactly_session_start),
+                (True, past, year_exactly_session_end),
+                (False, future, future),
+                (True, full_before_session_start, future),
+                (False, full_before_session_start, full_before_session_start),
+                (True, full_before_session_start, full_after_session_start),
+                (True, full_before_session_start, full_after_session_end),
+                (True, full_before_session_start, month_exactly_session_start),
+                (True, full_before_session_start, month_exactly_session_end),
+                (True, full_before_session_start, year_exactly_session_start),
+                (True, full_before_session_start, year_exactly_session_end),
+                (True, full_after_session_start, future),
+                (True, full_after_session_start, full_after_session_start),
+                (True, full_after_session_start, full_after_session_end),
+                (True, full_after_session_start, month_exactly_session_start),
+                (True, full_after_session_start, month_exactly_session_end),
+                (True, full_after_session_start, year_exactly_session_start),
+                (True, full_after_session_start, year_exactly_session_end),
+                (False, full_after_session_end, future),
+                (False, full_after_session_end, full_after_session_end),
+                # (False, full_after_session_end, month_exactly_session_end),
+                # (False, full_after_session_end, year_exactly_session_end),
+                (True, month_exactly_session_start, future),
+                # (False, month_exactly_session_start, full_before_session_start),
+                (True, month_exactly_session_start, full_after_session_start),
+                (True, month_exactly_session_start, full_after_session_end),
+                (True, month_exactly_session_start, month_exactly_session_start),
+                (True, month_exactly_session_start, month_exactly_session_end),
+                (True, month_exactly_session_start, year_exactly_session_start),
+                (True, month_exactly_session_start, year_exactly_session_end),
+                (True, month_exactly_session_end, future),
+                (True, month_exactly_session_end, full_after_session_end),
+                (True, month_exactly_session_end, month_exactly_session_end),
+                (True, month_exactly_session_end, year_exactly_session_end),
+                (True, year_exactly_session_start, future),
+                # (False, year_exactly_session_start, full_before_session_start),
+                (True, year_exactly_session_start, full_after_session_start),
+                (True, year_exactly_session_start, full_after_session_end),
+                (True, year_exactly_session_start, month_exactly_session_start),
+                (True, year_exactly_session_start, month_exactly_session_end),
+                (True, year_exactly_session_start, year_exactly_session_start),
+                (True, year_exactly_session_start, year_exactly_session_end),
+                (True, year_exactly_session_end, future),
+                (True, year_exactly_session_end, full_after_session_end),
+                (True, year_exactly_session_end, month_exactly_session_end),
+                (True, year_exactly_session_end, year_exactly_session_end),
+                ]:
+            person = models.Person.objects.create(
+                legal_name="Bob '{0}' Smith".format(i),
+                slug='bob-{0}-smith'.format(i)
+            )
+            position = models.Position.objects.create(
+                start_date=position_start_date,
+                end_date=position_end_date,
+                person=person,
+                organisation=organisation,
+            )
+            # Find if the position overlaps with the session dates:
+            overlapping_positions = person.position_set.overlapping_dates(
+                session_start_date, session_end_date
+            )
+            if overlaps:
+                self.assertEqual(
+                    overlapping_positions.count(),
+                    1,
+                    'No position found, but we expected overlap for position {0} => {1}'.format(
+                        repr(position_start_date), repr(position_end_date)
+                    )
+                )
+            else:
+                self.assertEqual(
+                    overlapping_positions.count(),
+                    0,
+                    'A position was found, but no overlap was expected for position {0} => {1}'.format(
+                        repr(position_start_date), repr(position_end_date)
+                    )
+                )
+            # Now clean up the objects we just created
+            person.delete()
+            position.delete()
+            i += 1

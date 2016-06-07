@@ -1135,6 +1135,17 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
         return self.filter(start_criteria)
 
+    def overlapping_dates(self, start_date, end_date):
+        start_criteria = \
+            Q(start_date='') | \
+            Q(start_date='past') | \
+            Q(sorting_start_date__lte=end_date)
+        end_criteria = \
+            Q(end_date='') | \
+            Q(end_date='future') | \
+            Q(sorting_end_date_high__gte=start_date)
+        return self.filter(start_criteria & end_criteria)
+
     def aspirant_positions(self):
         """
         Filter down to only positions which are aspirant ones. This uses the
