@@ -1,5 +1,8 @@
+from datetime import date
+
 from BeautifulSoup import NavigableString
 from contextlib import contextmanager
+from django_date_extensions.fields import ApproximateDate
 from django_webtest import WebTest
 from django.contrib.auth.models import User
 from django.test import TestCase
@@ -92,7 +95,29 @@ class PositionViewTest(WebTest):
             organisation = self.organisation,
             place = self.bobs_place,
         )
-
+        self.kind_governmental = models.OrganisationKind.objects.create(
+            name='Governmental',
+        )
+        self.parliament = models.Organisation.objects.create(
+            kind=self.kind_governmental,
+            name='National Assembly',
+        )
+        self.parliamentary_session_2013 = \
+            models.ParliamentarySession.objects.create(
+                start_date=date(2013, 3, 5),
+                end_date=date(9999, 12, 31),
+                slug='na2013',
+                name='National Assembly 2013-',
+                house=self.parliament,
+            )
+        self.parliamentary_session_2007 = \
+            models.ParliamentarySession.objects.create(
+                start_date=date(2007, 12, 28),
+                end_date=date(2013, 1, 14),
+                slug='na2007',
+                name='National Assembly 2007-2013',
+                house=self.parliament,
+            )
 
     def test_position_page(self):
         # List of people with position title
@@ -177,6 +202,71 @@ class PositionViewTest(WebTest):
         self.assertEqual(
             set([u'/person/test-person/']),
             self.get_links_to_people(resp.html)
+        )
+
+    def test_different_sessions(self):
+        title = models.PositionTitle.objects.create(
+            name='Member of the National Assembly',
+            slug='member-national-assembly',
+        )
+        earlier_person = models.Person.objects.create(
+            legal_name="John Much Earlier", slug='john-much-earlier'
+        )
+        models.Position.objects.create(
+            person=earlier_person,
+            organisation=self.parliament,
+            start_date=ApproximateDate(year=2008, month=1, day=1),
+            end_date=ApproximateDate(year=2012, month=12, day=31),
+            title=title,
+        )
+        earlier_in_current_session = models.Person.objects.create(
+            legal_name="Joe Earlier In Current Session",
+            slug='joe-earlier-in-current-session'
+        )
+        models.Position.objects.create(
+            person=earlier_in_current_session,
+            organisation=self.parliament,
+            start_date=ApproximateDate(year=2013, month=10, day=1),
+            end_date=ApproximateDate(year=2015, month=7, day=20),
+            title=title,
+        )
+        later_person = models.Person.objects.create(
+            legal_name="Josephine Later", slug='josephine-later'
+        )
+        models.Position.objects.create(
+            person=later_person,
+            organisation=self.parliament,
+            start_date=ApproximateDate(year=2013, month=10, day=1),
+            end_date=ApproximateDate(future=True),
+            title=title,
+        )
+        # Get the normal view - all current positions:
+        resp = self.app.get('/position/member-national-assembly/')
+        person_names = []
+        for li in resp.html.find_all('li', class_='position'):
+            span_name = li.find('span', class_='name')
+            person_names.append(span_name.text)
+        self.assertEqual(person_names, ['Josephine Later'])
+        # Get all positions in the 2013 session:
+        resp = self.app.get('/position/member-national-assembly/?session=na2013')
+        person_names = []
+        for li in resp.html.find_all('li', class_='position'):
+            span_name = li.find('span', class_='name')
+            person_names.append(span_name.text)
+        person_names.sort()
+        self.assertEqual(
+            person_names,
+            ['Joe Earlier In Current Session', 'Josephine Later']
+        )
+        # Get all positions in the 2013 session:
+        resp = self.app.get('/position/member-national-assembly/?session=na2007')
+        person_names = []
+        for li in resp.html.find_all('li', class_='position'):
+            span_name = li.find('span', class_='name')
+            person_names.append(span_name.text)
+        self.assertEqual(
+            person_names,
+            ['John Much Earlier'],
         )
 
 

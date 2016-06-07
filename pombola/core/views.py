@@ -344,7 +344,22 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
                                               slug=ok_slug)
         page_title += " of any " + organisation_kind.name
 
-    positions = title.position_set.all().currently_active()
+    session = None
+    session_slug = request.GET.get('session')
+    if session_slug:
+        session = get_object_or_404(
+            models.ParliamentarySession,
+            slug=session_slug
+        )
+    # If a particular parliamentary session has been requested, only
+    # return positions that overlap with the period of that
+    # session. Otherwise only return currently active positions.
+    if session:
+        positions = title.position_set.overlapping_dates(
+            session.start_date, session.end_date
+        )
+    else:
+        positions = title.position_set.all().currently_active()
     if ok_slug is not None:
         positions = positions.filter(organisation__kind__slug=ok_slug)
     if o_slug is not None:
