@@ -787,11 +787,12 @@ body.home {
 
     h2 {
         color: inherit;
+        font-size: 2em;
 
         small {
             display: block; // break onto new line
             color: mix(#fff, $colour_green, 60%);
-            font-size: (1em / 1.5); // get back to 1em, from 1.5em parent
+            font-size: (1em / 2) * 1.2; // get back to 1em, from 2em parent
             line-height: 1.4em; // 1.4 of this element's ems
             font-weight: normal;
 
