@@ -807,7 +807,6 @@ body.home {
     max-width: 30em;
 
     @media (min-width: 850px) {
-        float: left;
         width: 50%;
         box-sizing: border-box;
         max-width: none;
@@ -820,6 +819,8 @@ body.home {
 
 .home__actions__primary {
     margin-bottom: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
 
     @media (min-width: 850px) {
         margin-bottom: 0;
