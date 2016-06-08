@@ -5,6 +5,8 @@ from django.forms.widgets import Textarea
 
 from pombola.core.models import Place
 
+from .election_data_2017.iebc_offices import IEBC_OFFICE_DATA
+
 
 class CountyPerformancePetitionForm(forms.Form):
     name = forms.CharField(
@@ -73,3 +75,19 @@ class YouthEmploymentSupportForm(forms.Form):
 
 class YouthEmploymentInputForm(forms.Form):
     pass
+
+
+OFFICE_CHOICES = [('', '')] + sorted(
+    [
+        (
+            o['cons_id'],
+            '{cons_name} ({prov_name})'.format(**o),
+        )
+        for o in IEBC_OFFICE_DATA
+    ],
+    key=lambda t: t[1]
+)
+
+
+class ConstituencySelectForm(forms.Form):
+    area = forms.ChoiceField(choices=OFFICE_CHOICES)
