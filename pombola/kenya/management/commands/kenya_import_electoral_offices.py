@@ -103,7 +103,8 @@ class Command(BaseCommand):
         missing = []
         for a in Area.objects.filter(
                 type__code='CON',
-                generation_high=generation
+                generation_high__gte=generation,
+                generation_low__lte=generation,
         ).exclude(id__in=constituencies_seen):
             # Now try to find the enclosing province:
             covering_province = get_most_overlapping_area(a, 'PRO', generation)
