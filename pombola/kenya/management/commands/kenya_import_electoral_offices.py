@@ -4,7 +4,9 @@ from __future__ import print_function
 
 from StringIO import StringIO
 import csv
+from pprint import pprint
 import re
+from tempfile import NamedTemporaryFile
 
 import requests
 
@@ -45,6 +47,26 @@ def get_most_overlapping_area(smaller_area, larger_area_type, generation):
     return result[1]
 
 
+def dump_office_data(augmented_rows):
+    # Now prepare the data to dump:
+    data_to_dump = [
+        {
+            'cons_name': row['MapIt Constituency'].name,
+            'cons_id': row['MapIt Constituency'].id,
+            'prov_name': row['MapIt Province'].name,
+            'prov_id': row['MapIt Province'].id,
+            'address': row.get('Address', ''),
+            'telephone': row.get('Telephone', ''),
+            'missing': 'Address' not in row,
+        }
+        for row in augmented_rows
+    ]
+    ntf = NamedTemporaryFile(delete=False, suffix='.py')
+    with open(ntf.name, 'w') as f:
+        pprint(data_to_dump, f)
+    print("Data was dumped to:", ntf.name)
+
+
 class Command(BaseCommand):
     help = 'Import data about the location of electoral offices'
 
@@ -53,9 +75,8 @@ class Command(BaseCommand):
         r = requests.get(office_data_url)
         reader = csv.DictReader(StringIO(r.content))
         constituencies_seen = set()
+        augmented_rows = []
         for row in reader:
-            # address = row['Address']
-            # phone = row['Telephone']
             region = row['Region']
             cons = re.sub(r'\s+', ' ', row['Constituency'].strip())
             cons = cons_name_fixes.get(cons, cons)
@@ -74,6 +95,9 @@ class Command(BaseCommand):
                 mapit_cons, 'PRO', generation
             )
             print("covering province:", covering_province, "=>", region)
+            row['MapIt Constituency'] = mapit_cons
+            row['MapIt Province'] = covering_province
+            augmented_rows.append(row)
         # Now go through each constituency in MapIt and print out any
         # that are missing so we can find out about them:
         missing = []
@@ -84,9 +108,14 @@ class Command(BaseCommand):
             # Now try to find the enclosing province:
             covering_province = get_most_overlapping_area(a, 'PRO', generation)
             missing.append((covering_province, a))
+            augmented_rows.append({
+                'MapIt Constituency': a,
+                'MapIt Province': covering_province,
+            })
         missing.sort(key=lambda t: (t[0].name, t[1].name))
         for province, cons in missing:
             print(
                 "In the province:", province,
                 "couldn't find the constituency:", cons,
             )
+        dump_office_data(augmented_rows)
