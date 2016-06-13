@@ -55,6 +55,8 @@ def dump_office_data(augmented_rows):
             'cons_id': row['MapIt Constituency'].id,
             'prov_name': row['MapIt Province'].name,
             'prov_id': row['MapIt Province'].id,
+            'coun_name': row['MapIt County'].name,
+            'coun_id': row['MapIt County'].id,
             'address': row.get('Address', ''),
             'telephone': row.get('Telephone', ''),
             'missing': 'Address' not in row,
@@ -94,9 +96,13 @@ class Command(BaseCommand):
             covering_province = get_most_overlapping_area(
                 mapit_cons, 'PRO', generation
             )
+            covering_county = get_most_overlapping_area(
+                mapit_cons, 'DIS', generation
+            )
             print("covering province:", covering_province, "=>", region)
             row['MapIt Constituency'] = mapit_cons
             row['MapIt Province'] = covering_province
+            row['MapIt County'] = covering_county
             augmented_rows.append(row)
         # Now go through each constituency in MapIt and print out any
         # that are missing so we can find out about them:
@@ -108,10 +114,12 @@ class Command(BaseCommand):
         ).exclude(id__in=constituencies_seen):
             # Now try to find the enclosing province:
             covering_province = get_most_overlapping_area(a, 'PRO', generation)
+            covering_county = get_most_overlapping_area(a, 'DIS', generation)
             missing.append((covering_province, a))
             augmented_rows.append({
                 'MapIt Constituency': a,
                 'MapIt Province': covering_province,
+                'MapIt County': covering_county,
             })
         missing.sort(key=lambda t: (t[0].name, t[1].name))
         for province, cons in missing:
