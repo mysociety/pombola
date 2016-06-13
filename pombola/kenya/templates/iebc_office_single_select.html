@@ -10,15 +10,69 @@
   {{ block.super }}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
   <script>
-    $('#id_area').select2(
-      {
-        placeholder: 'Constituency',
-        allowClear: true,
-        width: '100%'
+    var options = {
+      placeholder: 'Constituency',
+      allowClear: true,
+    },
+    modelMatcher = function(term, text) {
+      /* From https://github.com/select2/select2/issues/3034#issuecomment-126451444 */
+      text.parentText = text.parentText || "";
+
+      // Always return the object if there is nothing to compare
+      if ($.trim(term.term) === '') {
+        return text;
       }
-    );
-    $('#id_area').on("select2:select", function(e) {
-      $('.iebc-office-lookup form').submit();
+
+      // Do a recursive check for options with children
+      if (text.children && text.children.length > 0) {
+        // Clone the text object if there are children
+        // This is required as we modify the object to remove any non-matches
+        var match = $.extend(true, {}, text);
+
+        // Check each child of the option
+        for (var c = text.children.length - 1; c >= 0; c--) {
+          var child = text.children[c];
+          child.parentText += text.parentText + " " + text.text;
+
+          var matches = modelMatcher(term, child);
+
+          // If there wasn't a match, remove the object in the array
+          if (matches == null) {
+            match.children.splice(c, 1);
+          }
+        }
+
+        // If any children matched, return the new object
+        if (match.children.length > 0) {
+          return match;
+        }
+
+        // If there were no matching children, check just the plain object
+        return modelMatcher(term, match);
+      }
+
+      // If the typed-in term matches the text of this term, or the text from any
+      // parent term, then it's a match.
+      var original = (text.parentText + ' ' + text.text).toUpperCase();
+      var term = term.term.toUpperCase();
+
+
+      // Check if the text contains the term
+      if (original.indexOf(term) > -1) {
+        return text;
+      }
+
+      // If it doesn't contain the term, don't return anything
+      return null;
+    }
+    var matcherObject = {matcher: modelMatcher};
+    var optionsWithGroupMatcher = $.extend({}, matcherObject, options, {width: '100%'});
+    var optionsWithGroupMatcherNarrow = $.extend({}, matcherObject, options);
+    $('.iebc-office-lookup #offices select').select2($.extend({}, options, {width: '100%'}));
+    $('.iebc-office-lookup #offices_grouped_custom_matcher_narrow select').select2(optionsWithGroupMatcherNarrow);
+    $('.iebc-office-lookup #offices_grouped_custom_matcher select').select2(optionsWithGroupMatcher);
+    $('.iebc-office-lookup select').on("select2:select", function(e) {
+      $(e.target).parent().submit()
     });
   </script>
 {% endblock %}
@@ -29,9 +83,29 @@
 
   <h1>IEBC Office Locator</h1>
 
+  <h2>Prototype C (grouped by county, narrow version)</h2>
+
   <p>Type part of your constituency name and select it from the list:</p>
 
-  <form method="GET" action="{% url 'iebc-office' %}">
+  <form id="offices_grouped_custom_matcher_narrow" method="GET" action="{% url 'iebc-office' %}">
+    {{ form_counties.area }}<br>
+    <input type="submit" value="Show office details"/>
+  </form>
+
+  <h2>Prototype B (grouped by county)</h2>
+
+  <p>Type part of your constituency name and select it from the list:</p>
+
+  <form id="offices_grouped_custom_matcher" method="GET" action="{% url 'iebc-office' %}">
+    {{ form_counties.area }}
+    <input type="submit" value="Show office details"/>
+  </form>
+
+  <h2>Prototype A (flat list, province-suffixed)</h2>
+
+  <p>Type part of your constituency name and select it from the list:</p>
+
+  <form id="offices" method="GET" action="{% url 'iebc-office' %}">
     {{ form.area }}
     <input type="submit" value="Show office details"/>
   </form>

@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from mapit.models import Area, Generation
 
 from .election_data_2017.iebc_offices import IEBC_OFFICE_DATA
-from .forms import ConstituencySelectForm
+from .forms import ConstituencySelectForm, ConstituencyGroupedByCountySelectForm
 
 
 AREA_ID_TO_OFFICE = {
@@ -21,6 +21,7 @@ class OfficeSingleSelectView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(OfficeSingleSelectView, self).get_context_data(**kwargs)
         context['form'] = ConstituencySelectForm()
+        context['form_counties'] = ConstituencyGroupedByCountySelectForm()
         return context
 
 
@@ -31,6 +32,7 @@ class OfficeDetailView(TemplateView):
     def get(self, request, *args, **kwargs):
         area_id = request.GET.get('area')
         generation = Generation.objects.current()
+
         self.area = get_object_or_404(
             Area.objects.filter(
                 generation_low__lte=generation,
