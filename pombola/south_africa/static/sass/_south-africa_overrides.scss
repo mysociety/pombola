@@ -319,6 +319,81 @@ small {
     }
 }
 
+
+// Social icons
+
+.social-links-list {
+    padding-left: 0;
+    margin-bottom: 0;
+
+    li {
+        display: inline;
+    }
+
+    li + li {
+        margin-left: 8px !important; // override `#site-footer ul li`
+    }
+}
+
+.social-icon {
+  display: inline-block;
+  height: 0;
+  width: 38px;
+  padding-top: 38px;
+  overflow: hidden;
+  background: transparent url('/static/images/social-icons.png') 0 0 no-repeat;
+}
+
+.facebook-social-icon {
+    @extend .social-icon;
+    background-position: 0 0;
+
+    &:hover,
+    &:focus {
+        background-position: 0 -38px;
+    }
+}
+
+.twitter-social-icon {
+    @extend .social-icon;
+    background-position: -38px 0;
+
+    &:hover,
+    &:focus {
+        background-position: -38px -38px;
+    }
+}
+
+.youtube-social-icon {
+    @extend .social-icon;
+    background-position: -76px 0;
+
+    &:hover,
+    &:focus {
+        background-position: -76px -38px;
+    }
+}
+
+.rss-social-icon {
+    @extend .social-icon;
+    background-position: -114px 0;
+
+    &:hover,
+    &:focus {
+        background-position: -114px -38px;
+    }
+}
+
+.email-social-icon {
+    @extend .social-icon;
+    background-position: -152px 0;
+
+    &:hover,
+    &:focus {
+        background-position: -152px -38px;
+    }
+}
+
 /*
 
 HEADER
@@ -330,11 +405,12 @@ $logo-width-small: 138px;
 $logo-height-large: 90px;
 $logo-width-large: 184px;
 
-#site-header{
+#site-header {
     height: auto;
     background-image: none;
     background: $colour_main_background;
     position: relative;
+    padding-top: 2.5em; // make space for .about-this-site-menu on mobiles
 
     @media only all and (min-width: 640px), print {
         padding: 0 0.5em 0 0.5em; // stop children touching edges of window on narrow desktops
@@ -346,8 +422,8 @@ $logo-width-large: 184px;
     height: $logo-height-small;
     width: $logo-width-small;
     display: inline-block;
-    margin-top: 1em;
     margin-bottom: 1em;
+
     @media only all and (min-width: 640px), print {
         height: $logo-height-large;
         width: $logo-width-large;
@@ -398,7 +474,7 @@ $logo-width-large: 184px;
   font-family: $font_family_lato;
   color: $colour_grey;
 
-  @media only all and (min-width: 640px), print {
+  @media only all and (min-width: 700px), print {
     display: block;
   }
 }
@@ -542,13 +618,13 @@ menu#mobile-top-tools,
     position: absolute;
     top: .5em;
     right: .5em;
-    width: 9em;
+    left: 0;
     text-align: right;
 
     @media only all and (min-width: 640px), print {
        top: .5em;
        right: 0;
-       width: auto;
+       left: auto;
     }
 
     ul {
@@ -574,30 +650,19 @@ menu#mobile-top-tools,
     }
 }
 
-@media only all and (min-width: 640px) {
-    .about-this-site-menu__facebook,
-    .about-this-site-menu__twitter {
-        position: absolute;
-        /* 114px is the header height and 38px is the icon height, so
-           this does vertical centring: */
-        top: (114px / 2) - (38px / 2);
-        right: 50px;
+#site-header {
+    .social-links-list {
+        margin: 1em 0.5em 0 0.5em;
+        float: right;
 
-        a {
-            display: block;
-            width: 38px;
-            height: 0;
-            padding-top: 38px;
-            overflow: hidden;
-            background: transparent url('/static/images/social-icons.png') 0 -1px no-repeat;
-        }
-    }
+        @media (min-width: 640px) {
+            float: none;
+            margin: 0;
 
-    .about-this-site-menu__twitter {
-        right: 0;
-
-        a {
-            background-position: -51px -1px;
+            position: absolute;
+            right: 0;
+            // Vertically centre 38px icons in 114px header
+            top: (114px / 2) - (38px / 2);
         }
     }
 }
@@ -1179,56 +1244,6 @@ FOOTER
         border: none;
         margin: 0;
         min-width: 16em;
-    }
-}
-
-
-.social-links-list {
-    li {
-        display: inline;
-    }
-    li a {
-        display: inline-block;
-        text-indent: -9999px;
-        height: 38px;
-        width: 38px;
-        background-image: url('/static/images/social-icons.png');
-        background-position: 0 -1px;
-        background-repeat: none;
-        margin-right: 8px;
-        &:hover,
-        &:focus {
-            background-position: 0 -41px;
-        }
-    }
-
-    .facebook-social-icon {
-        background-position: 0 -1px;
-        &:hover,
-        &:focus {
-            background-position: 0 -41px;
-        }
-    }
-    .twitter-social-icon {
-        background-position: -51px -1px;
-        &:hover,
-        &:focus {
-            background-position: -51px -41px;
-        }
-    }
-    .youtube-social-icon {
-        background-position: -101px -1px;
-        &:hover,
-        &:focus {
-            background-position: -101px -41px;
-        }
-    }
-    .rss-social-icon {
-        background-position: -150px -1px;
-        &:hover,
-        &:focus {
-            background-position: -150px -41px;
-        }
     }
 }
 
