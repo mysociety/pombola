@@ -61,21 +61,21 @@
 </div>
 
 <div class="home__section home__actions">
-    <div class="wrapper">
+    <form class="wrapper" action="{% url "core_geocoder_search" %}">
         <div class="home__actions__primary">
-            <form action="{% url "core_geocoder_search" %}">
-                <h2>
-                    <small>Do you have a problem?</small>
-                    <label for="geocoder-search">Contact your representative</label>
-                    <small>At local, provincial and national level</small>
-                </h2>
-                <p class="inline-search-box">
-                    <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your address">
-                    <button type="submit" class="button">Search</button>
-                </p>
-            </form>
+            <h2>
+                <small>Do you have a problem?</small>
+                <label for="geocoder-search">Contact your representative</label>
+                <small>At local, provincial and national level</small>
+            </h2>
         </div>
-    </div>
+        <div class="home__actions__secondary">
+            <p class="inline-search-box">
+                <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your address">
+                <button type="submit" class="button">Search</button>
+            </p>
+        </div>
+    </form>
 </div>
 
 <div class="home__section home__infographics">

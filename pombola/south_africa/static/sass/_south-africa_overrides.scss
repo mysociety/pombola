@@ -808,6 +808,7 @@ body.home {
     max-width: 30em;
 
     @media (min-width: 850px) {
+        float: left;
         width: 50%;
         box-sizing: border-box;
         max-width: none;
@@ -820,39 +821,28 @@ body.home {
 
 .home__actions__primary {
     margin-bottom: 1.5em;
-    margin-left: auto;
-    margin-right: auto;
 
     @media (min-width: 850px) {
         margin-bottom: 0;
-        padding-right: 10px;
-    }
-
-    @media (min-width: 1000px) {
-        width: 55%;
-        padding-right: 30px;
+        padding-right: 20px;
+        text-align: right;
     }
 }
 
 .home__actions__secondary {
     @media (min-width: 850px) {
-        padding-left: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
-    @media (min-width: 1000px) {
-        width: 45%;
-        padding-left: 30px;
-    }
-
+    // Vertically centre the input
+    // with the titles to the left.
     .inline-search-box {
-        .button {
-            background-color: mix(#fff, $colour_green, 40%);
+      margin-top: 1.5em;
 
-            &:hover,
-            &:focus {
-                background-color: darken(mix(#fff, $colour_green, 40%), 10%);
-            }
-        }
+      @media (min-width: 640px) and (max-height: 700px) {
+        margin-top: 0;
+      }
     }
 }
 
