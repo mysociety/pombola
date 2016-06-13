@@ -1392,7 +1392,8 @@ class Position(ModelBase, IdentifierMixin):
 class ParliamentarySession(ModelBase):
     start_date = DateField(blank=True, null=True)
     end_date = DateField(blank=True, null=True)
-    house = models.ForeignKey('Organisation')
+    house = models.ForeignKey('Organisation', blank=True, null=True)
+    position_title = models.ForeignKey('PositionTitle', blank=True, null=True)
     # It's not clear whether this field is a good idea or not - it
     # suggests that boundaries won't change within a
     # ParliamentarySession.  This assumption might well be untrue.
