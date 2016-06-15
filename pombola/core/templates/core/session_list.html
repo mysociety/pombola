@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Parliamentary Sessions{% endblock %}
+
+{% block content %}
+
+  <h1 class="page-title">Parliamentary Sessions</h1>
+
+  <ul>
+    {% for object in object_list %}
+      <li>
+        <a href="{{ object.positions_url }}?session={{ object.slug }}">{{ object.name }}</a>
+        ({{ object.readable_date_range }})
+      </li>
+
+    {% endfor %}
+  </ul>
+
+{% endblock %}

@@ -571,3 +571,12 @@ class VersionView(View):
         return HttpResponse(
             json.dumps(result), content_type='application/json'
         )
+
+
+class SessionListView(ListView):
+
+    model = models.ParliamentarySession
+    template_name = 'core/session_list.html'
+
+    def get_ordering(self):
+        return ('-start_date', '-end_date', 'name')
