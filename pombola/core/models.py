@@ -1446,6 +1446,21 @@ class ParliamentarySession(ModelBase):
             return "from %s to %s" % (self.format_date(self.start_date),
                                       self.format_date(self.end_date))
 
+    def positions_url(self):
+        if not self.position_title:
+            msg = ("There are currently no position views that don't require "
+                   " a position title")
+            raise NotImplementedError(msg)
+        if not self.house:
+            return reverse('position_pt', kwargs={
+                'pt_slug': self.position_title.slug
+            })
+        return reverse('position_pt_ok_o', kwargs={
+            'pt_slug': self.position_title.slug,
+            'ok_slug': self.house.kind.slug,
+            'o_slug': self.house.slug,
+        })
+
     class Meta:
         ordering = ['start_date']
 
