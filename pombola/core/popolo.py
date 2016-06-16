@@ -9,7 +9,9 @@ from django.core.urlresolvers import reverse
 
 from mapit.views.areas import area
 
-from pombola.core.models import Person, Organisation, Position
+from pombola.core.models import (
+    Organisation, ParliamentarySession, Person, Place, Position
+)
 from pombola import country
 
 
@@ -129,6 +131,19 @@ def add_other_names(person, properties):
             an_properties['note'] = an.note
         properties['other_names'].append(an_properties)
 
+def get_events(primary_id_scheme, base_url):
+    result = []
+    for ps in ParliamentarySession.objects.all():
+        result.append({
+            'classification': 'legislative period',
+            'start_date': str(ps.start_date),
+            'end_date': str(ps.end_date),
+            'id': ps.slug,
+            'organization_id': ps.house.get_popolo_id(primary_id_scheme),
+            'name': ps.name,
+        })
+    return result
+
 def get_organizations(primary_id_scheme, base_url):
     """Return a list of Popolo organization objects"""
 
@@ -187,6 +202,12 @@ def get_organizations(primary_id_scheme, base_url):
         result.append(properties)
         country.add_extra_popolo_data_for_organization(o, properties, base_url)
     return result
+
+def get_areas(primary_id_scheme, base_url):
+    all_areas = [
+        get_area_information(pl, base_url) for pl in Place.objects.all()
+    ]
+    return [a for a in all_areas if a is not None]
 
 def create_organisations(popit, primary_id_scheme, base_url):
     """Create organizations in PopIt based on those used in memberships in Pombola
@@ -271,6 +292,8 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
 def get_popolo_data(primary_id_scheme, base_url, inline_memberships=True):
     result = get_people(primary_id_scheme, base_url, inline_memberships)
     result['organizations'] = get_organizations(primary_id_scheme, base_url)
+    result['events'] = get_events(primary_id_scheme, base_url)
+    result['areas'] = get_areas(primary_id_scheme, base_url)
     result['posts'] = []
     return result
 
