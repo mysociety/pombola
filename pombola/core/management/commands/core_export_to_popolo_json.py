@@ -11,8 +11,6 @@ from pombola.core.popolo import get_popolo_data
 from django.core.management.base import BaseCommand, CommandError
 
 
-ideal_collection_order = ('organizations', 'persons', 'posts', 'memberships')
-
 class Command(BaseCommand):
     args = 'OUTPUT-DIRECTORY POMBOLA-URL'
     help = 'Export all people, organisations and memberships to Popolo JSON and mongoexport format'
