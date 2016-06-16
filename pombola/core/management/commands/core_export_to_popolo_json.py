@@ -40,19 +40,25 @@ class Command(BaseCommand):
 
         primary_id_scheme = '.'.join(reversed(parsed_url.netloc.split('.')))
 
-        inline_memberships = options['pombola']
-
-        popolo_data = get_popolo_data(
-            primary_id_scheme,
-            pombola_url,
-            inline_memberships=inline_memberships
-        )
-
         if options['pombola']:
-            output_filename = join(output_directory, 'pombola.json')
-            with open(output_filename, 'w') as f:
-                json.dump(popolo_data, f, indent=4, sort_keys=True)
+            for inline_memberships, leafname in (
+                    (True, 'pombola.json'),
+                    (False, 'pombola-no-inline-memberships.json'),
+            ):
+                popolo_data = get_popolo_data(
+                    primary_id_scheme,
+                    pombola_url,
+                    inline_memberships=inline_memberships
+                )
+                output_filename = join(output_directory, leafname)
+                with open(output_filename, 'w') as f:
+                    json.dump(popolo_data, f, indent=4, sort_keys=True)
         else:
+            popolo_data = get_popolo_data(
+                primary_id_scheme,
+                pombola_url,
+                inline_memberships=False
+            )
             for collection, data in popolo_data.items():
                 for mongoexport_format in (True, False):
                     if mongoexport_format:
