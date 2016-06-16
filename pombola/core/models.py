@@ -1371,6 +1371,23 @@ class Position(ModelBase, IdentifierMixin):
             else:
                 return "%s &rarr; %s" % (self.start_date, self.end_date)
 
+    def approximate_date_overlap(self, start_date, end_date):
+        """Return the approximate overlap between this position and a date range
+
+        This may be *very* approximate, but it's sometimes useful to
+        be able to have a rough idea of how much a position overlaps
+        with a date range, e.g. to see which parliamentary term a
+        position is most likely to refer to.
+
+        This returns a datetime.timedelta object.
+        """
+        approx_start = approximate_date_to_date(self.start_date, 'earliest')
+        approx_end = approximate_date_to_date(self.end_date, 'latest')
+        latest_start = max(approx_start, start_date)
+        earliest_end = max(approx_end, end_date)
+        if earliest_end <= latest_start:
+            return datetime.timedelta(days=0)
+        return earliest_end - latest_start
 
     def display_start_date(self):
         """Return text that represents the start date"""
