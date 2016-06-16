@@ -227,7 +227,7 @@ def create_organisations(popit, primary_id_scheme, base_url):
             print >> sys.stderr, json.dumps(organization, indent=4)
             raise
 
-def get_people(primary_id_scheme, base_url, inline_memberships=True):
+def get_people(primary_id_scheme, base_url, title_to_sessions, inline_memberships=True):
 
     result = {
         'persons': []
@@ -281,6 +281,22 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
                 # If there's a place associated with the position, set that on
                 # the position as an area:
                 properties['area'] = get_area_information(position.place, base_url)
+            possible_events = []
+            if position.title:
+                possible_events = title_to_sessions.get(position.title.slug, [])
+            if possible_events:
+                # Order them by overlap:
+                events_with_overlap = [
+                    (position.approximate_date_overlap(e.start_date, e.end_date), e)
+                    for e in possible_events
+                ]
+                events_with_overlap.sort(reverse=True, key=lambda t: t[0])
+                # n.b. There's an assumption here that if someone's an
+                # MP in consecutive terms, that's represented by two
+                # positions rather than one. (In most cases that
+                # better models reality anyway.0
+                most_likely_event = events_with_overlap[0]
+                properties['legislative_period_id'] = most_likely_event[1].slug
             if inline_memberships:
                 person_properties['memberships'].append(properties)
             else:
@@ -290,7 +306,23 @@ def get_people(primary_id_scheme, base_url, inline_memberships=True):
     return result
 
 def get_popolo_data(primary_id_scheme, base_url, inline_memberships=True):
-    result = get_people(primary_id_scheme, base_url, inline_memberships)
+    title_to_sessions = {}
+    for ps in ParliamentarySession.objects.select_related(
+            'house', 'position_title'):
+        if ps.position_title:
+            title_slug = ps.position_title.slug
+        else:
+            title_slug = None
+        title_to_sessions.setdefault(title_slug, [])
+        title_to_sessions[title_slug].append(ps)
+    for sessions in title_to_sessions.values():
+        sessions.sort(key=lambda s: s.start_date)
+    result = get_people(
+        primary_id_scheme,
+        base_url,
+        title_to_sessions,
+        inline_memberships,
+    )
     result['organizations'] = get_organizations(primary_id_scheme, base_url)
     result['events'] = get_events(primary_id_scheme, base_url)
     result['areas'] = get_areas(primary_id_scheme, base_url)
