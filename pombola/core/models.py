@@ -1,5 +1,6 @@
 from __future__ import division
 
+import calendar
 import datetime
 from functools import partial
 import re
@@ -51,6 +52,67 @@ def validate_organisation_slug(slug):
 def validate_place_slug(slug):
     return validate_slug_not_redirecting('core', 'Place', slug)
 
+
+# FIXME: Ideally this should be in django_date_extensions; we should
+# make a pull request to include it.
+def approximate_date_to_date(approx_date, assume):
+    """Convert an approximate date to the earliest or latest date it could mean
+
+    'assume' should be either 'earliest' or 'latest' to indicate
+    whether this function should return the earliest or latest
+    possible date that might be indicated by the approximate date.
+
+    For example:
+
+    >>> approximate_date_to_date(ApproximateDate(year=2003), assume='earliest')
+    datetime.date(2003, 1, 1)
+    >>> approximate_date_to_date(ApproximateDate(year=2003), assume='latest')
+    datetime.date(2003, 12, 31)
+
+    >>> approximate_date_to_date(ApproximateDate(year=2004, month=2), assume='earliest')
+    datetime.date(2004, 2, 1)
+    >>> approximate_date_to_date(ApproximateDate(year=2004, month=2), assume='latest')
+    datetime.date(2004, 2, 29)
+
+    >>> approximate_date_to_date(None, assume='earliest')
+    datetime.date(1, 1, 1)
+    >>> approximate_date_to_date(None, assume='latest')
+    datetime.date(9999, 12, 31)
+
+    >>> approximate_date_to_date(ApproximateDate(past=True), assume='earliest')
+    datetime.date(1, 1, 1)
+    >>> approximate_date_to_date(ApproximateDate(past=True), assume='latest')
+    datetime.date(1, 1, 1)
+
+    >>> approximate_date_to_date(ApproximateDate(future=True), assume='earliest')
+    datetime.date(9999, 12, 31)
+    >>> approximate_date_to_date(ApproximateDate(future=True), assume='latest')
+    datetime.date(9999, 12, 31)
+
+    """
+    if assume not in ('earliest', 'latest'):
+        raise ValueError("approx_end must be either 'earliest' or 'latest'")
+    earliest = (assume == 'earliest')
+    if (earliest and not approx_date) or (approx_date and approx_date.past):
+        return datetime.date.min
+    if (not earliest and not approx_date) or (approx_date and approx_date.future):
+        return datetime.date.max
+    year, month, day = approx_date.year, approx_date.month, approx_date.day
+    # If we just have a year:
+    if month == 0 and day == 0:
+        if earliest:
+            return datetime.date(year, 1, 1)
+        else:
+            return datetime.date(year, 12, 31)
+    # If we just have a month and a year:
+    if day == 0:
+        if earliest:
+            return datetime.date(year, month, 1)
+        else:
+            last_day = calendar.monthrange(year, month)[1]
+            return datetime.date(year, month, last_day)
+    # Otherwise we must have a complete date:
+    return datetime.date(year, month, day)
 
 
 class ModelBase(models.Model):
