@@ -5,12 +5,13 @@ import datetime
 from collections import defaultdict
 from urlparse import urljoin
 
+from django.db.models import Prefetch
 from django.core.urlresolvers import reverse
 
 from mapit.views.areas import area
 
 from pombola.core.models import (
-    Organisation, ParliamentarySession, Person, Place, Position
+    Contact, Organisation, ParliamentarySession, Person, Place, Position
 )
 from pombola import country
 
@@ -133,7 +134,7 @@ def add_other_names(person, properties):
 
 def get_events(primary_id_scheme, base_url):
     result = []
-    for ps in ParliamentarySession.objects.all():
+    for ps in ParliamentarySession.objects.select_related('house'):
         result.append({
             'classification': 'legislative period',
             'start_date': str(ps.start_date),
@@ -151,7 +152,7 @@ def get_organizations(primary_id_scheme, base_url):
 
     oslug_to_categories = defaultdict(set)
 
-    for pos in Position.objects.all():
+    for pos in Position.objects.order_by().select_related('organisation'):
         if pos.organisation:
             slug = pos.organisation.slug
             oslug_to_categories[slug].add(pos.category)
@@ -186,7 +187,13 @@ def get_organizations(primary_id_scheme, base_url):
             print >> sys.stderr, error
         raise Exception, "Found organisations with multiple categories other than 'other'"
 
-    for o in Organisation.objects.all():
+    for o in Organisation.objects.order_by().select_related('kind').prefetch_related(
+            Prefetch(
+                'contacts',
+                queryset=Contact.objects.select_related('kind')
+            ),
+            'identifiers',
+    ):
         properties = {'slug': o.slug,
                       'name': o.name.strip(),
                       'classification': o.kind.name}
@@ -205,7 +212,9 @@ def get_organizations(primary_id_scheme, base_url):
 
 def get_areas(primary_id_scheme, base_url):
     all_areas = [
-        get_area_information(pl, base_url) for pl in Place.objects.all()
+        get_area_information(pl, base_url) for pl in
+        Place.objects.order_by().select_related(
+            'mapit_area__type', 'parliamentary_session__house')
     ]
     return [a for a in all_areas if a is not None]
 
@@ -235,7 +244,27 @@ def get_people(primary_id_scheme, base_url, title_to_sessions, inline_membership
     if not inline_memberships:
         result['memberships'] = []
 
-    for person in Person.objects.all():
+    # TODO: if interests_register is being used, we should prefetch
+    # that as well (with the Prefetch doing a select_related on
+    # category and a prefetch_related on line_items.
+    for person in Person.objects.order_by().prefetch_related(
+            'alternative_names',
+            Prefetch(
+                'contacts',
+                queryset=Contact.objects.select_related('kind')
+            ),
+            'identifiers',
+            'images',
+            Prefetch(
+                'position_set',
+                queryset=Position.objects.order_by().select_related(
+                    'organisation',
+                    'place__mapit_area__type',
+                    'place__parliamentary_session__house',
+                    'title',
+                ).prefetch_related('identifiers')
+            )
+    ):
         name = person.legal_name
         person_properties = {'name': name}
         for date, key in ((person.date_of_birth, 'birth_date'),

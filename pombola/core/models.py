@@ -178,6 +178,27 @@ class ManagerBase(models.GeoManager):
         return obj
 
 
+class Identifier(ModelBase):
+    """This model represents alternative identifiers for objects"""
+
+    scheme = models.CharField(max_length=200)
+    identifier = models.CharField(max_length=500)
+
+    content_type = models.ForeignKey(
+        ContentType, related_name='pombola_identifier_set'
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    objects = ManagerBase()
+
+    def __unicode__(self):
+        return '"%s%s"' % (self.scheme, self.identifier)
+
+    class Meta:
+        unique_together = ('scheme', 'identifier')
+
+
 class IdentifierMixin(object):
 
     """Useful methods for objects that may be referred to by an Indentifier"""
@@ -210,12 +231,13 @@ class IdentifierMixin(object):
 
         This returns a dict which maps a scheme to a set of
         identifiers."""
+        # get_for_model caches results, so there should only be one
+        # database hit per model
         results = defaultdict(set)
-        for scheme, identifier in Identifier.objects.filter(
-                content_type=ContentType.objects.get_for_model(self),
-                object_id=self.id).values_list('scheme', 'identifier'):
-            results[scheme].add(identifier)
+        for identifier in self.identifiers.all():
+            results[identifier.scheme].add(identifier.identifier)
         return results
+
 
 class ContactKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
@@ -395,6 +417,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         help_text="hide this person's pages from normal users")
 
     contacts = GenericRelation(Contact)
+    identifiers = GenericRelation(Identifier)
     images = GenericRelation(Image)
     objects = PersonManager()
 
@@ -644,27 +667,6 @@ class AlternativePersonName(ModelBase):
         unique_together = ("person", "alternative_name")
 
 
-class Identifier(ModelBase):
-    """This model represents alternative identifiers for objects"""
-
-    scheme = models.CharField(max_length=200)
-    identifier = models.CharField(max_length=500)
-
-    content_type = models.ForeignKey(
-        ContentType, related_name='pombola_identifier_set'
-    )
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-
-    objects = ManagerBase()
-
-    def __unicode__(self):
-        return '"%s%s"' % (self.scheme, self.identifier)
-
-    class Meta:
-        unique_together = ('scheme', 'identifier')
-
-
 class OrganisationKind(ModelBase):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
@@ -722,6 +724,7 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
 
     objects = OrganisationQuerySet.as_manager()
     contacts = GenericRelation(Contact)
+    identifiers = GenericRelation(Identifier)
     images = GenericRelation(Image)
     informationsources = GenericRelation(InformationSource)
 
@@ -1292,6 +1295,8 @@ class Position(ModelBase, IdentifierMixin):
     sorting_end_date = models.CharField(editable=True, default='', max_length=10)
     sorting_start_date_high = models.CharField(editable=True, default='', max_length=10)
     sorting_end_date_high = models.CharField(editable=True, default='', max_length=10)
+
+    identifiers = GenericRelation(Identifier)
 
     objects = PositionQuerySet.as_manager()
 
