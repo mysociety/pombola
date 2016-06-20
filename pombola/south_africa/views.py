@@ -59,6 +59,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django_date_extensions.fields import ApproximateDate
 
 
+# For requests to external APIs, timeout after 3 seconds:
+API_REQUESTS_TIMEOUT = 3.05
+
+
 logger = logging.getLogger('django.request')
 
 
@@ -162,7 +166,10 @@ class LatLonDetailBaseView(BasePlaceDetailView):
         url = 'http://mapit.code4sa.org/point/4326/{lon},{lat}?type=WD'.format(
             lon=location.x, lat=location.y
         )
-        r = requests.get(url)
+        try:
+            r = requests.get(url, timeout=API_REQUESTS_TIMEOUT)
+        except requests.exceptions.RequestException as e:
+            raise WardCouncillorAPIDown(u"MapIt request failed: {0}".format(e))
         mapit_json = r.json()
         if not mapit_json:
             return []
@@ -172,10 +179,12 @@ class LatLonDetailBaseView(BasePlaceDetailView):
         # we support broader lookups in the future:
         url_fmt = 'http://nearby.code4sa.org/councillor/ward-{ward_id}.json'
         try:
-            r = requests.get(url_fmt.format(ward_id=ward_id))
+            r = requests.get(
+                url_fmt.format(ward_id=ward_id),
+                timeout=API_REQUESTS_TIMEOUT)
             r.raise_for_status()
             ward_result = r.json()
-        except (requests.exceptions.HTTPError, ValueError) as e:
+        except (requests.exceptions.RequestException, ValueError) as e:
             raise WardCouncillorAPIDown(unicode(e))
         councillor_data = ward_result['councillor']
         party = models.Organisation.objects.filter(
@@ -692,8 +701,9 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             url_fmt = "https://api.pmg.org.za/member/?filter[pa_link]={}"
             api_search_url = url_fmt.format(pa_link)
             try:
-                search_resp = requests.get(api_search_url)
-            except requests.RequestException:
+                search_resp = requests.get(
+                    api_search_url, timeout=API_REQUESTS_TIMEOUT)
+            except requests.exceptions.RequestException:
                 raise AttendanceAPIDown
             search_data = json.loads(search_resp.text)
 
@@ -731,8 +741,8 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             results = []
             while next_url:
                 try:
-                    resp = requests.get(next_url)
-                except requests.RequestException:
+                    resp = requests.get(next_url, timeout=API_REQUESTS_TIMEOUT)
+                except requests.exceptions.RequestException:
                     raise AttendanceAPIDown
 
                 data = json.loads(resp.text)
@@ -2115,7 +2125,7 @@ class SAMpAttendanceView(TemplateView):
         if results is None:
             results = []
             while next_url:
-                resp = requests.get(next_url)
+                resp = requests.get(next_url, timeout=API_REQUESTS_TIMEOUT)
                 data = json.loads(resp.text)
                 results.extend(data.get('results'))
 

@@ -281,7 +281,7 @@ class SASearchViewTest(WebTest):
         mocked_geocoder.assert_called_once_with(q='Trafford Road', country='za')
 
 
-def connection_error(x):
+def connection_error(x, *args, **kwargs):
     print 'Raising connection error'
     raise requests.exceptions.ConnectionError
 
