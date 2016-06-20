@@ -54,6 +54,7 @@ def get_area_information(place, base_url):
     if session:
         result['session'] = {
             'id': session.id,
+            'slug': session.slug,
             'name': session.name,
             'start_date': str(session.start_date),
             'end_date': str(session.end_date),
