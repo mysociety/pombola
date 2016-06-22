@@ -18,8 +18,9 @@ from .forms import (
     YouthEmploymentInputForm
 )
 
+from info.models import InfoPage, Tag
 from pombola.core.models import Person, Place
-from pombola.core.views import PersonDetail, PersonDetailSub
+from pombola.core.views import HomeView, PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
     ExperimentViewDataMixin, ExperimentFormSubmissionMixin,
     sanitize_parameter
@@ -112,6 +113,15 @@ EXPERIMENT_DATA = {
         ],
     },
 }
+
+
+class KEHomeView(HomeView):
+
+    def get_context_data(self, **kwargs):
+        context = super(KEHomeView, self).get_context_data(**kwargs)
+        context['election_blog_posts'] = InfoPage.objects.filter(
+            tags__slug='elections-2017').order_by('-publication_date')
+        return context
 
 
 class KEPersonDetailBase(PersonDetail):

@@ -55,16 +55,16 @@
                 <div class="col">
                     <h3>In the news</h3>
                     <ol>
-                        <li><a href="#">A blog post title</a></li>
-                        <li><a href="#">A blog post title</a></li>
-                        <li><a href="#">A blog post title</a></li>
+                      {% for post in election_blog_posts|slice:":3" %}
+                        <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
+                      {% endfor %}
                     </ol>
-                    <a href="#" class="home-special-feature__more">Read more election coverage</a>
+                    <a href="{% url 'info_blog_tag' slug='elections-2017' %}" class="home-special-feature__more">Read more election coverage</a>
                 </div>
                 <div class="col">
                     <h3>Get involved</h3>
                     <p>You can <strong>still</strong> register to vote at your local IEBC office until May 2017.</p>
-                    <a href="{% url 'iebc-offices-single-select' %}" class="home-special-feature__more">Find your nearest IEBC office</a>
+                    <a href="{% url 'iebc-offices-single-select' %}" class="home-special-feature__more">Find your nearest IBEC office</a>
                 </div>
             </div>
         </div>
