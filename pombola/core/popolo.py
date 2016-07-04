@@ -59,9 +59,10 @@ def get_area_information(place, base_url):
             'start_date': str(session.start_date),
             'end_date': str(session.end_date),
             'mapit_generation': session.mapit_generation,
-            'house_id': session.house.id,
-            'house_name': session.house.name,
         }
+        if session.house:
+            result['session']['house_id'] = session.house.id
+            result['session']['house_name'] = session.house.name
     return result
 
 def date_to_partial_iso8601(approx_date):
