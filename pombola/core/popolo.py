@@ -137,14 +137,16 @@ def add_other_names(person, properties):
 def get_events(primary_id_scheme, base_url):
     result = []
     for ps in ParliamentarySession.objects.select_related('house'):
-        result.append({
+        event = {
             'classification': 'legislative period',
             'start_date': str(ps.start_date),
             'end_date': str(ps.end_date),
             'id': ps.slug,
-            'organization_id': ps.house.get_popolo_id(primary_id_scheme),
             'name': ps.name,
-        })
+        }
+        if ps.house:
+            event['organization_id'] = ps.house.get_popolo_id(primary_id_scheme),
+        result.append(event)
     return result
 
 def get_organizations(primary_id_scheme, base_url):
