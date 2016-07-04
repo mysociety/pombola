@@ -49,20 +49,22 @@ def get_most_overlapping_area(smaller_area, larger_area_type, generation):
 
 def dump_office_data(augmented_rows, output_filename):
     # Now prepare the data to dump:
-    data_to_dump = [
-        {
+    data_to_dump = []
+    for row in augmented_rows:
+        address = row.get('Address', '')
+        telephone = row.get('Telephone', '')
+        missing = not (bool(address) or bool(telephone))
+        data_to_dump.append({
             'cons_name': row['MapIt Constituency'].name,
             'cons_id': row['MapIt Constituency'].id,
             'prov_name': row['MapIt Province'].name,
             'prov_id': row['MapIt Province'].id,
             'coun_name': row['MapIt County'].name,
             'coun_id': row['MapIt County'].id,
-            'address': row.get('Address', ''),
-            'telephone': row.get('Telephone', ''),
-            'missing': 'Address' not in row,
-        }
-        for row in augmented_rows
-    ]
+            'address': address,
+            'telephone': telephone,
+            'missing': missing,
+        })
     with open(output_filename, 'w') as f:
         f.write('''# This was generated from ./manage.py kenya_import_electoral_offices
 
