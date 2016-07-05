@@ -53,10 +53,11 @@
             <h2>Election 2017</h2>
             <div class="row">
                 <div class="col">
-                    <h3>In the news</h3>
+                    <h3>Milestones</h3>
                     <ol>
                       {% for post in election_blog_posts|slice:":3" %}
-                        <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
+                        <li><span class="home-election-post-title"><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></a>
+                            <span class="home-election-post-except">{{ post.content_as_cleaned_html|safe|truncatewords_html:20 }}</span></li>
                       {% endfor %}
                     </ol>
                     <a href="{% url 'info_blog_tag' slug='elections-2017' %}" class="home-special-feature__more">Read more election coverage</a>
