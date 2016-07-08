@@ -67,39 +67,40 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-#home-cta {
-  a {
+.home-cta {
+  display: block;
+  background: darken($colour_primary_mid, 10%) url(../images/search-50px.png) 15px 50% no-repeat;
+  padding: 15px 10px 15px 80px;
+  color: #fff;
+  text-align: left;
+  font-size: 16px;
+  line-height: 21px;
+
+  strong {
     display: block;
-    background: darken($colour_primary_mid, 10%) url(../images/search-50px.png) 15px 50% no-repeat;
-    padding: 15px 10px 15px 80px;
-    color: #fff;
-    @include border-top-left-radius(4px);
-    @include border-top-right-radius(4px);
-    text-align: left;
-    font-size: 16px;
-    line-height: 21px;
-
-    strong {
-      display: block;
-    }
-
-    &:hover, &:focus {
-      text-decoration: none;
-      background-color: darken($colour_primary_mid, 15%);;
-    }
   }
 
-  a + a {
-    margin-top: 1px;
-    background-color: $colour_primary_mid;
-    background-image: url(../images/hansard-50px.png);
-    @include border-radius(0);
-    @include border-bottom-left-radius(4px);
-    @include border-bottom-right-radius(4px);
+  &:hover, &:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: darken($colour_primary_mid, 15%);;
+  }
+}
 
-    &:hover, &:focus {
-      background-color: darken($colour_primary_mid, 5%);
-    }
+.home-cta--representatives {
+  @include border-top-left-radius(4px);
+  @include border-top-right-radius(4px);
+}
+
+.home-cta--hansard {
+  margin-top: 1px;
+  background-color: $colour_primary_mid;
+  background-image: url(../images/hansard-50px.png);
+  @include border-bottom-left-radius(4px);
+  @include border-bottom-right-radius(4px);
+
+  &:hover, &:focus {
+    background-color: darken($colour_primary_mid, 5%);
   }
 }
 
@@ -178,68 +179,85 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-.home-special-feature--election {
-  a {
-    font-weight: bold;
-  }
+.home-election__heading {
+  h2 {
+    color: $colour_red;
+    font-size: 1.5em;
+    line-height: 1.2em;
 
-  h3 {
-    font-size: 0.9em;
-  }
-
-  ol {
-    border-top: 1px solid mix(#000, $colour_pale_yellow, 10%);
-    padding-left: 0;
-    margin-bottom: 1em;
-
-    li {
-      list-style: none;
+    @media only screen and (min-width: 640px) {
+      font-size: 2em;
     }
   }
 
-  li {
-    border-bottom: 1px solid mix(#000, $colour_pale_yellow, 10%);
-    margin: 0;
+  .button {
+    display: block;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 15px 15px 15px 70px;
+    background: $colour_red url(../images/vote-40px.png) 15px 50% no-repeat;
+    color: #fff;
+    @include border-radius(4px);
 
-    a {
+    &:hover, &:focus {
+      background-color: darken($colour_red, 5%);
+      text-decoration: none;
+    }
+
+    strong {
       display: block;
-      padding: 0.5em 0;
-      font-size: 1.1em;
     }
   }
 
-  .col + .col {
-    margin-top: 1em;
-  }
+  @media only screen and (min-width: 900px) {
+    position: relative;
+    padding-right: 11em;
 
-  @media (min-width: 61.25em) {
-    .row {
-      @include clearfix();
-      margin: 0 -1em;
-    }
-
-    .col {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      float: left;
-      width: 50%;
-      padding: 0 1em;
-    }
-
-    .col + .col {
-      margin-top: 0;
+    .button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 9em;
+      padding: 8px 10px 8px 70px;
     }
   }
 }
 
-.home-special-feature__more {
-  font-size: 0.8em;
+.home-election__milestones {
+  border-top: 2px solid $pull-out-background;
+  border-bottom: 2px solid $pull-out-background;
+  background: transparent url(../images/home-election-gradient.png) center bottom repeat-x;
+  padding: 20px 20px 0 0;
+  margin-top: 20px;
+
+  ol {
+    @extend #home-news-list;
+  }
+
+  li {
+    background: transparent url(../images/home-election-milestone.png) 25px 20px repeat-y;
+
+    &:first-child {
+      background-repeat: no-repeat;
+    }
+  }
+
+  a {
+    color: $colour_red;
+
+    &:hover, &:focus {
+      color: darken($colour_red, 10%);
+    }
+  }
+}
+
+.home-election__milestones__more {
+  font-weight: bold;
 
   &:after {
     content: "\2192";
-    margin-left: 0.3em;
     display: inline-block;
+    margin-left: 0.3em;
   }
 }
 
@@ -328,7 +346,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-ul#home-news-list {
+#home-news-list {
   @include list-reset-soft;
   border-top: none;
   padding-top: 0;
