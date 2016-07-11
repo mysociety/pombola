@@ -39,8 +39,8 @@
     </div>
 
     <div id="home-cta">
-        <a href="{% url "core_search" %}"><strong>Find your Representatives</strong> MPs, Senators, and Women Representatives</a>
-        <a href="{% url "hansard:index" %}"><strong>The Hansard</strong> Read transcripts of what was said in&nbsp;parliament</a>
+        <a class="home-cta home-cta--representatives" href="{% url "core_search" %}"><strong>Find your Representatives</strong> MPs, Senators, and Women Representatives</a>
+        <a class="home-cta home-cta--hansard" href="{% url "hansard:index" %}"><strong>The Hansard</strong> Read transcripts of what was said in&nbsp;parliament</a>
     </div>
 
 </div>
@@ -48,14 +48,29 @@
 <div id="home-editorial">
 
     <div id="home-special-features">
-        <h2>Special features</h2>
-        <a href="{% url 'shujaaz-finalists-2015' %}" class="home-special-features__button home-special-features__button--shujaaz">
-            <h2>People’s Shujaaz Finalists Unveiled</h2>
-            <img src="{% static 'images/peoples-shujaaz-home-badge.png' %}" width="60" height="75" alt="">
-        </a>
-        <a href="/women" class="home-special-features__button home-special-features__button--women">
-            <h2>Debunking Myths on Women MPs</h2>
-        </a>
+        <div class="home-election">
+            <div class="home-election__heading">
+                <h2>Election 2017</h2>
+                <p>You can <em>still</em> register to vote until May 2017</p>
+                <a href="{% url 'iebc-offices-single-select' %}" class="button">
+                    <strong>Register to vote</strong>
+                    Find your nearest IEBC office now
+                </a>
+            </div>
+            <div class="home-election__milestones">
+                <ol>
+                  {% for post in election_blog_posts|slice:":3" %}
+                    <li>
+                        <h3><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></h3>
+                        {{ post.content_as_cleaned_html|safe|truncatewords_html:20 }}
+                    </li>
+                  {% endfor %}
+                    <li>
+                        <a href="{% url 'info_blog_tag' slug='elections-2017' %}" class="home-election__milestones__more">Read more election coverage</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
     </div>
 
   {% if settings.BLOG_RSS_FEED %}

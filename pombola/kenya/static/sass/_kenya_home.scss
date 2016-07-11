@@ -1,8 +1,6 @@
 $pull-out-background: #f2f0e7;
 $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
 
-$colour_women_purple: #753C96;
-
 #home-quote,
 #home-cta,
 #home-featured-person,
@@ -69,39 +67,40 @@ $colour_women_purple: #753C96;
   }
 }
 
-#home-cta {
-  a {
+.home-cta {
+  display: block;
+  background: darken($colour_primary_mid, 10%) url(../images/search-50px.png) 15px 50% no-repeat;
+  padding: 15px 10px 15px 80px;
+  color: #fff;
+  text-align: left;
+  font-size: 16px;
+  line-height: 21px;
+
+  strong {
     display: block;
-    background: darken($colour_primary_mid, 10%) url(../images/search-50px.png) 15px 50% no-repeat;
-    padding: 15px 10px 15px 80px;
-    color: #fff;
-    @include border-top-left-radius(4px);
-    @include border-top-right-radius(4px);
-    text-align: left;
-    font-size: 16px;
-    line-height: 21px;
-
-    strong {
-      display: block;
-    }
-
-    &:hover, &:focus {
-      text-decoration: none;
-      background-color: darken($colour_primary_mid, 15%);;
-    }
   }
 
-  a + a {
-    margin-top: 1px;
-    background-color: $colour_primary_mid;
-    background-image: url(../images/hansard-50px.png);
-    @include border-radius(0);
-    @include border-bottom-left-radius(4px);
-    @include border-bottom-right-radius(4px);
+  &:hover, &:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: darken($colour_primary_mid, 15%);;
+  }
+}
 
-    &:hover, &:focus {
-      background-color: darken($colour_primary_mid, 5%);
-    }
+.home-cta--representatives {
+  @include border-top-left-radius(4px);
+  @include border-top-right-radius(4px);
+}
+
+.home-cta--hansard {
+  margin-top: 1px;
+  background-color: $colour_primary_mid;
+  background-image: url(../images/hansard-50px.png);
+  @include border-bottom-left-radius(4px);
+  @include border-bottom-right-radius(4px);
+
+  &:hover, &:focus {
+    background-color: darken($colour_primary_mid, 5%);
   }
 }
 
@@ -120,32 +119,46 @@ $colour_women_purple: #753C96;
   }
 }
 
-.home-special-features__button {
+.home-special-feature {
   display: block;
   margin-top: 1em;
   padding: 20px;
-  background-color: $colour_red;
   @include border-radius(4px);
-  color: #fff;
 
-  h2 {
+  background-color: $colour_pale_yellow;
+  border: 1px solid mix(#000, $colour_pale_yellow, 10%);
+  color: #676105; // a sort of olive brown
+
+  h2, h3 {
     color: inherit;
-    font-size: 1.3em;
     line-height: 1.2em;
-    margin-bottom: 0;
   }
 
-  &:hover,
-  &:focus {
-    background-color: darken($colour_red, 5%);
-    color: #fff;
-    text-decoration: none;
+  h2 {
+    font-size: 1.3em;
   }
 }
 
-.home-special-features__button--shujaaz {
+.home-special-feature--button {
+  text-decoration: none;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.home-special-feature--shujaaz {
   position: relative;
-  padding: 20px 80px 20px 20px; // leave space on right for floated image
+  padding-right: 80px; // leave space for img
+
+  background-color: $colour_pale_green;
+  border-color: mix(#000, $colour_pale_green, 10%);
+  color: $colour_primary;
+
+  &:hover, &:focus {
+    background-color: mix(#000, $colour_pale_green, 5%);
+    color: $colour_primary;
+  }
 
   img {
     position: absolute;
@@ -154,15 +167,97 @@ $colour_women_purple: #753C96;
   }
 }
 
-.home-special-features__button--women {
-  color: $colour_women_purple;
-  background-color: mix(#fff, $colour_women_purple, 90%);
-  border: 1px solid mix(#fff, $colour_women_purple, 70%);
+.home-special-feature--women {
+  background-color: $colour_pale_purple;
+  border-color: mix(#000, $colour_pale_purple, 10%);
+  color: $colour_purple;
 
   &:hover,
   &:focus {
-    background-color: mix(#fff, $colour_women_purple, 80%);
-    color: $colour_women_purple;
+    background-color: mix(#000, $colour_pale_purple, 5%);
+    color: $colour_purple;
+  }
+}
+
+.home-election__heading {
+  h2 {
+    color: $colour_red;
+    font-size: 1.5em;
+    line-height: 1.2em;
+
+    @media only screen and (min-width: 640px) {
+      font-size: 2em;
+    }
+  }
+
+  .button {
+    display: block;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 15px 15px 15px 70px;
+    background: $colour_red url(../images/vote-40px.png) 15px 50% no-repeat;
+    color: #fff;
+    @include border-radius(4px);
+
+    &:hover, &:focus {
+      background-color: darken($colour_red, 5%);
+      text-decoration: none;
+    }
+
+    strong {
+      display: block;
+    }
+  }
+
+  @media only screen and (min-width: 900px) {
+    position: relative;
+    padding-right: 11em;
+
+    .button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 9em;
+      padding: 8px 10px 8px 70px;
+    }
+  }
+}
+
+.home-election__milestones {
+  border-top: 2px solid $pull-out-background;
+  border-bottom: 2px solid $pull-out-background;
+  background: transparent url(../images/home-election-gradient.png) center bottom repeat-x;
+  padding: 20px 20px 0 0;
+  margin-top: 20px;
+
+  ol {
+    @extend #home-news-list;
+  }
+
+  li {
+    background: transparent url(../images/home-election-milestone.png) 25px 20px repeat-y;
+
+    &:first-child {
+      background-repeat: no-repeat;
+    }
+  }
+
+  a {
+    color: $colour_red;
+
+    &:hover, &:focus {
+      color: darken($colour_red, 10%);
+    }
+  }
+}
+
+.home-election__milestones__more {
+  font-weight: bold;
+
+  &:after {
+    content: "\2192";
+    display: inline-block;
+    margin-left: 0.3em;
   }
 }
 
@@ -251,7 +346,7 @@ $colour_women_purple: #753C96;
   }
 }
 
-ul#home-news-list {
+#home-news-list {
   @include list-reset-soft;
   border-top: none;
   padding-top: 0;

@@ -132,7 +132,7 @@
       margin: 30px 0;
       color: $colour_grey; } } }
 
-ul#home-news-list {
+#home-news-list {
   @include list-reset-soft;
   border-top: 5px solid $colour_light_grey;
   padding-top: 15px;
@@ -236,7 +236,7 @@ ul#home-news-list {
       margin-right: 10px; }
     >a {
       color: $colour_grey; } }
-  ul#home-news-list {
+  #home-news-list {
     margin-top: 15px;
     li {
       h3, p {

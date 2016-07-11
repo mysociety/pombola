@@ -9,7 +9,8 @@ from pombola.kenya.views import (
 
 from pombola.experiments.views import ExperimentShare, ExperimentSurvey
 
-from .views import (CountyPerformanceView, CountyPerformanceSenateSubmission,
+from .views import (KEHomeView,
+    CountyPerformanceView, CountyPerformanceSenateSubmission,
     CountyPerformancePetitionSubmission, ExperimentRecordTimeOnPage,
     EXPERIMENT_DATA, ThanksTemplateView,
     YouthEmploymentView, YouthEmploymentSupportSubmission,
@@ -23,6 +24,7 @@ from .views_iebc_office_locator import (
 
 
 urlpatterns = [
+    url(r'^$', KEHomeView.as_view(), name='home'),
     url(r'^shujaaz$',
         RedirectView.as_view(
             pattern_name='shujaaz-finalists-2015',
@@ -36,7 +38,7 @@ urlpatterns = [
     url(r'^intro$',                TemplateView.as_view(template_name='intro.html') ),
     url(r'^register-to-vote$',     TemplateView.as_view(template_name='register-to-vote.html') ),
     url(r'^find-polling-station$', TemplateView.as_view(template_name='find-polling-station.html') ),
-    url(r'^women/$', TemplateView.as_view(template_name='women.html') ),
+    url(r'^women/$', TemplateView.as_view(template_name='women.html'), name='women' ),
     url(r'^person/all/$',
         ListView.as_view(model=models.Person),
         name='person_list'),
