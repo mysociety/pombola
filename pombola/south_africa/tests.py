@@ -39,6 +39,8 @@ from pombola.core.views import PersonSpeakerMappingsMixin
 from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
+from .pmg_api import get_person_from_pa_url
+
 from nose.plugins.attrib import attr
 
 def fake_geocoder(country, q, decimal_places=3):
@@ -2025,3 +2027,17 @@ class SAUrlRoutingTest(TestCase):
     def test_za_home(self):
         match = resolve('/')
         self.assertEqual(match.func.func_name, 'SAHomeView')
+
+
+@attr(country='south_africa')
+class SAPMGAPITests(TestCase):
+
+    def setUp(self):
+        self.person = models.Person.objects.create(
+            legal_name='Moomin Finn',
+            slug='moomin-finn')
+
+    def test_pa_url_parsing(self):
+        url = "http://www.pa.org.za/person/moomin-finn/"
+        found_person = get_person_from_pa_url(url)
+        self.assertEqual(found_person.id, self.person.id)
