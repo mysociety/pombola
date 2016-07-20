@@ -45,6 +45,11 @@ def get_committee_attendance_data_url():
     return 'https://api.pmg.org.za/committee-meeting-attendance/summary/'
 
 
+def get_ward_councillors_data_url(ward_name):
+    return 'http://nearby.code4sa.org/councillor/ward-{0}.json'.format(
+        ward_name)
+
+
 def get_paginated_api_results(initial_url):
     next_url = initial_url
 
@@ -75,3 +80,10 @@ def update_committee_attendance_data_in_cache():
     cache = caches['pmg_api']
     data = get_paginated_api_results(attendance_url)
     cache.set(attendance_url, data, CACHE_TTL_SECONDS)
+
+
+def update_ward_councillor_data_in_cache(ward_name):
+    nearby_url = get_ward_councillors_data_url(ward_name)
+    r = requests.get(nearby_url)
+    cache = caches['pmg_api']
+    cache.set(nearby_url, r.json(), CACHE_TTL_SECONDS)

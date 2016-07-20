@@ -1,18 +1,28 @@
+import time
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import BaseCommand
 
 import requests
 
+from mapit.models import Area
 from pombola.core.models import Identifier, Person
 from pombola.south_africa.pmg_api import (
     get_person_from_pa_url,
     update_or_create_pmg_api_identifier,
     update_attendance_data_in_cache,
     update_committee_attendance_data_in_cache,
+    update_ward_councillor_data_in_cache,
 )
 
 
+# How long to wait between each request to an external API:
+SLEEP_BETWEEN_REQUESTS = 1
+
+
 class Command(BaseCommand):
+
+    help = 'Mirror data from external APIs for better reliability'
 
     def handle(self, *args, **options):
         # First get the ID mapping for PMG API <-> PA, and make sure
@@ -46,3 +56,8 @@ class Command(BaseCommand):
 
         # Populate committee attendance data in the cache:
         update_committee_attendance_data_in_cache()
+
+        # Cache the ward councillor details from nearby.code4sa.org:
+        for ward_area in Area.objects.filter(type__code='WD'):
+            update_ward_councillor_data_in_cache(ward_area.name)
+            time.sleep(SLEEP_BETWEEN_REQUESTS)
