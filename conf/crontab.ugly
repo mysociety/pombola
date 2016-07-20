@@ -62,10 +62,18 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 # NOTE - this should probably be removed once the live site is launched
 13 0 * * * !!(*= $user *)!! output-on-error update_za_hansard.bash
 
+23 1 * * * !!(*= $user *)!! run_management_command south_africa_populate_api_caches
+
+35 3 * * 0 !!(*= $user *)!! run_management_command south_africa_mirror_mapit_wards
+
 !!(* } elsif ($vhost eq 'www.pa.org.za') { *)!!
 
 # NOTE - until the live site is launched, crons are turned off in vhosts.pl
 13 1 * * * !!(*= $user *)!! output-on-error update_za_hansard.bash
+
+23 2 * * * !!(*= $user *)!! run_management_command south_africa_populate_api_caches
+
+7 5 * * 0 !!(*= $user *)!! run_management_command south_africa_mirror_mapit_wards
 
 # Generate the Popolo JSON files
 13 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
