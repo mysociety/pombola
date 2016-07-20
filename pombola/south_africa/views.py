@@ -58,16 +58,17 @@ from pombola.interests_register.models import Release, Category, Entry
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django_date_extensions.fields import ApproximateDate
 
+from .pmg_api import (
+    AttendanceAPIDown,
+    get_attendance_data_url,
+    get_committee_attendance_data_url,
+    get_ward_councillors_data_url)
 
 # For requests to external APIs, timeout after 3 seconds:
 API_REQUESTS_TIMEOUT = 3.05
 
 
 logger = logging.getLogger('django.request')
-
-
-class AttendanceAPIDown(Exception):
-    pass
 
 
 class WardCouncillorAPIDown(Exception):
@@ -162,31 +163,14 @@ class LatLonDetailBaseView(BasePlaceDetailView):
         return province
 
     def get_ward_councillors(self, location):
-        # Look up the ward on MapIt:
-        url = 'http://mapit.code4sa.org/point/4326/{lon},{lat}?type=WD'.format(
-            lon=location.x, lat=location.y
-        )
-        try:
-            r = requests.get(url, timeout=API_REQUESTS_TIMEOUT)
-        except requests.exceptions.RequestException as e:
-            raise WardCouncillorAPIDown(u"MapIt request failed: {0}".format(e))
-        mapit_json = r.json()
-        if not mapit_json:
+        # Look up the ward in our local MapIt mirror of the Code4SA
+        # ward data:
+        area = mapit.models.Area.objects.by_location(location) \
+            .filter(type__code='WD').first()
+        if not area:
             return []
-        ward_id = mapit_json.values()[0]['name']
-        # Then find the ward councillor from that ward ID. There
-        # should only be one at the moment, but make it a list in case
-        # we support broader lookups in the future:
-        url_fmt = 'http://nearby.code4sa.org/councillor/ward-{ward_id}.json'
-        try:
-            r = requests.get(
-                url_fmt.format(ward_id=ward_id),
-                timeout=API_REQUESTS_TIMEOUT)
-            r.raise_for_status()
-            ward_result = r.json()
-        except (requests.exceptions.RequestException, ValueError) as e:
-            raise WardCouncillorAPIDown(unicode(e))
-        councillor_data = ward_result['councillor']
+        councillors_url = get_ward_councillors_data_url(area.name)
+        councillor_data = caches['pmg_api'].get(councillors_url)
         party = models.Organisation.objects.filter(
             name__icontains=councillor_data['PartyDetail']['Name'].lower(),
             kind__slug='party'
@@ -690,71 +674,11 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         )
         return models.Organisation.objects.filter(position__in=former_party_memberships).distinct()
 
-    def store_or_get_pmg_member_id(self, scheme='za.org.pmg.api/member'):
-        identifier = self.object.get_identifier(scheme)
-
-        if not identifier:
-            # First find the id of the person
-            pa_link = urllib.quote(
-                "http://www.pa.org.za/person/{}/".format(self.object.slug))
-
-            url_fmt = "https://api.pmg.org.za/member/?filter[pa_link]={}"
-            api_search_url = url_fmt.format(pa_link)
-            try:
-                search_resp = requests.get(
-                    api_search_url, timeout=API_REQUESTS_TIMEOUT)
-            except requests.exceptions.RequestException:
-                raise AttendanceAPIDown
-            search_data = json.loads(search_resp.text)
-
-            if not search_data.get('count'):
-                return None
-
-            if search_data['count'] > 1:
-                logger.error(
-                    'Duplicate members at PMG with slug {} - SKIPPING'.format(self.object.slug))
-                return None
-
-            identifier = search_data['results'][0]['id']
-
-            models.Identifier.objects.create(
-                scheme=scheme,
-                identifier=identifier,
-                content_object=self.object,
-                )
-
-        return identifier
-
-    def get_attendance_data_url(self, attendance_url_template="http://api.pmg.org.za/member/{}/attendance/"):
-        identifier = self.store_or_get_pmg_member_id()
-
-        if identifier:
-            return attendance_url_template.format(identifier)
-
     def download_attendance_data(self):
-        attendance_url = next_url = self.get_attendance_data_url()
-
-        cache = caches['pmg_api']
-        results = cache.get(attendance_url)
-
-        if results is None:
-            results = []
-            while next_url:
-                try:
-                    resp = requests.get(next_url, timeout=API_REQUESTS_TIMEOUT)
-                except requests.exceptions.RequestException:
-                    raise AttendanceAPIDown
-
-                data = json.loads(resp.text)
-                results.extend(data.get('results'))
-
-                next_url = data.get('next')
-
-            cache.set(attendance_url, results)
-
-        # Results are returned from the API most recent first, which
-        # is convenient for us.
-        return results
+        identifier = self.object.identifiers.get(
+            scheme='za.org.pmg.api/member')
+        attendance_data_url = get_attendance_data_url(identifier.identifier)
+        return caches['pmg_api'].get(attendance_data_url, [])
 
     def get_attendance_stats_raw(self, data):
         if not data:
@@ -2117,25 +2041,8 @@ class SAMpAttendanceView(TemplateView):
         return int("{:.0f}".format(num / total * 100))
 
     def download_attendance_data(self):
-        attendance_url = next_url = 'https://api.pmg.org.za/committee-meeting-attendance/summary/'
-
-        cache = caches['pmg_api']
-        results = cache.get(attendance_url)
-
-        if results is None:
-            results = []
-            while next_url:
-                resp = requests.get(next_url, timeout=API_REQUESTS_TIMEOUT)
-                data = json.loads(resp.text)
-                results.extend(data.get('results'))
-
-                next_url = data.get('next')
-
-            cache.set(attendance_url, results)
-
-        # Results are returned from the API most recent first, which
-        # is convenient for us.
-        return results
+        attendance_data_url = get_committee_attendance_data_url()
+        return caches['pmg_api'].get(attendance_data_url, [])
 
     def get_context_data(self, **kwargs):
         data = self.download_attendance_data()

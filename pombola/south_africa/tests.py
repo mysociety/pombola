@@ -528,23 +528,6 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
               'title': u'One District-One Agri-Park implementation in context of Rural Economic Transformation Model'}],
             )
 
-    @patch('requests.get', side_effect=connection_error)
-    def test_attendance_data_requests_errors(self, m):
-        # Check context if identifier exists, cache lookup misses
-        # and the PMG API is unavailable.
-        pmg_api_cache = caches['pmg_api']
-        pmg_api_cache.clear()
-
-        context = self.client.get(reverse('person', args=('moomin-finn',))).context
-        assert context['attendance'] == 'UNAVAILABLE'
-
-        # Get rid of identifiers so that we do the mocked url fetch
-        # to find the identifier.
-        models.Identifier.objects.all().delete()
-
-        context = self.client.get(reverse('person', args=('moomin-finn',))).context
-        assert context['attendance'] == 'UNAVAILABLE'
-
     def _setup_example_positions(self, past, current):
         parliament = models.OrganisationKind.objects.create(
             name='Parliament',
