@@ -54,6 +54,9 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 33 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
 50 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
 
+# Check for any recurring data problems:
+47 4 * * * !!(*= $user *)!! run_management_command kenya_check_for_recurring_problems
+
 !!(* } elsif ($vhost eq 'nigeria.mzalendo.mysociety.org') { *)!!
 10 7 * * * !!(*= $user *)!! run_management_command feedback_report_pending
 
