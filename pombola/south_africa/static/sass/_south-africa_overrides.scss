@@ -1737,6 +1737,21 @@ a.alphabet-links__link {
     }
 }
 
+li, div {
+    span.inline-search {
+        padding: 0.33em;
+        display: inline-block;
+    }
+    form.inline-search {
+        display: inline-block;
+    }
+}
+
+.people-list-inline-search {
+    padding-bottom: 0.5em;
+}
+
+
 // Display more useful map on narrow screens
 // eg: for Constituency Office pages
 @media (max-width: 639px) {
