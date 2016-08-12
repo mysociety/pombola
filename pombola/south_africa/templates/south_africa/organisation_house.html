@@ -27,6 +27,14 @@ the organisation detail page.
   <div>
     <ul class="house-page-list">
       <li><a href="{% url 'organisation_people' slug=object.slug %}">All members</a></li>
+      <li>
+        <span class="inline-search">Search for a person:</span>
+        <form class="inline-search" action="{% url "core_search" %}">
+          <input class="search-autocomplete-name" id="core_search" data-source="/search/autocomplete/?model=person" type="text" name="q" value="" placeholder="Name"></input>
+          <input type="hidden" name="section" value="persons">
+          <input type="submit">
+        </form>
+      </li>
     </ul>
   </div>
 
