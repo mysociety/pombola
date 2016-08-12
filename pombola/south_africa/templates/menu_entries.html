@@ -16,6 +16,7 @@
 <li><a href="{% url "person_list" %}" class="has-dropdown">People</a>
   {% if include_sub_menu_entries %}
     <ul id="parliament-overview">
+      <li><a href="{% url "core_search" %}?section=persons">Find by name</a></li>
       <li><a href="{% url "organisation_kind" slug="parliament" %}">Parliament</a>
         <ul>
           <li><a href="{% url "organisation" slug="national-assembly" %}">National Assembly</a></li>
