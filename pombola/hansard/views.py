@@ -61,9 +61,8 @@ class IndexView(TemplateView):
 
 
 def get_sittings_from_slugs(venue_slug, start_date_and_time_from_url):
-
     query_args = {
-        'venue__slug':     venue_slug,
+        'venue__slug': venue_slug,
     }
 
     # add blank HH-MM-SS if needed
