@@ -60,14 +60,14 @@ class IndexView(TemplateView):
         return context
 
 
-def get_sittings_from_slugs(venue_slug, start_date_and_time):
+def get_sittings_from_slugs(venue_slug, start_date_and_time_from_url):
 
     query_args = {
         'venue__slug':     venue_slug,
     }
 
     # add blank HH-MM-SS if needed
-    start_time_parts = re.split('-', start_date_and_time)
+    start_time_parts = re.split('-', start_date_and_time_from_url)
     if len(start_time_parts) == 3:
         start_time_parts.extend( [ '00','00','00' ] )
 
