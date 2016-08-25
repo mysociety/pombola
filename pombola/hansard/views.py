@@ -85,7 +85,8 @@ def get_sittings_from_slugs(venue_slug, start_date_and_time_from_url):
     sittings = Sitting.objects.filter( **query_args ).order_by('start_time')
 
     if not len(sittings):
-        raise Http404
+        raise Http404("Sitting of venue {0} at {1} not found".format(
+            venue_slug, start_date_and_time_from_url))
 
     return sittings
 
