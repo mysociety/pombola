@@ -60,6 +60,38 @@ class IndexView(TemplateView):
         return context
 
 
+START_TIME_RE = re.compile(
+    r'^(?P<start_date>\d{4}-\d{2}-\d{2})(?:-(?P<start_time>.*))?$'
+)
+
+
+def get_sittings_from_slugs(venue_slug, start_date_and_time_from_url):
+    query_args = {
+        'venue__slug': venue_slug,
+    }
+
+    m = START_TIME_RE.search(start_date_and_time_from_url)
+    if not m:
+        msg = "Malformed sitting date and start time '{0}'"
+        raise Http404(msg.format(start_date_and_time_from_url))
+
+    start_date, start_time = m.groups()
+    if start_time:
+        start_time = start_time.replace('-', ':')
+
+    query_args['start_date'] = start_date
+    query_args['start_time'] = start_time
+
+    # get all matching sittings
+    sittings = Sitting.objects.filter( **query_args ).order_by('start_time')
+
+    if not len(sittings):
+        raise Http404("Sitting of venue {0} at {1} not found".format(
+            venue_slug, start_date_and_time_from_url))
+
+    return sittings
+
+
 class SittingView(DetailView):
     model = Sitting
 
@@ -69,30 +101,7 @@ class SittingView(DetailView):
         venue_slug = self.kwargs['venue_slug']
         start_date_and_time = self.kwargs['start_date_and_time']
 
-        query_args = {
-            'venue__slug':     venue_slug,
-        }
-
-        # add blank HH-MM-SS if needed
-        start_time_parts = re.split('-', start_date_and_time)
-        if len(start_time_parts) == 3:
-            start_time_parts.extend( [ '00','00','00' ] )
-
-        # split the date and time up into the relevant fields
-        (year,month,day,hour,minute,second) = [ int(x) for x in start_time_parts ]
-
-        # add start_date to the query
-        query_args['start_date'] = datetime.date(year=year,month=month,day=day)
-
-        # if there is a time use it
-        if hour or minute or second:
-            query_args['start_time__gte'] = datetime.time(hour=hour, minute=minute, second=second)
-
-        # get all matching sittings
-        sittings = Sitting.objects.filter( **query_args ).order_by('start_time')
-
-        if not len(sittings):
-            raise Http404
+        sittings = get_sittings_from_slugs(venue_slug, start_date_and_time)
 
         return sittings[0]
 

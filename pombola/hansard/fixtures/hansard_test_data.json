@@ -51,5 +51,41 @@
       },
       "model" : "hansard.sitting",
       "pk" : 1
+   },
+   {
+      "fields" : {
+         "end_date" : null,
+         "end_time" : null,
+         "source" : 1,
+         "start_date" : "2010-04-11",
+         "start_time" : null,
+         "venue" : 1
+      },
+      "model" : "hansard.sitting",
+      "pk" : 2
+   },
+   {
+      "fields" : {
+         "end_date" : null,
+         "end_time" : null,
+         "source" : 1,
+         "start_date" : "2010-04-11",
+         "start_time" : "09:30:00",
+         "venue" : 1
+      },
+      "model" : "hansard.sitting",
+      "pk" : 3
+   },
+   {
+      "fields" : {
+         "end_date" : null,
+         "end_time" : null,
+         "source" : 1,
+         "start_date" : "2010-04-11",
+         "start_time" : "14:30:00",
+         "venue" : 1
+      },
+      "model" : "hansard.sitting",
+      "pk" : 4
    }
 ]
