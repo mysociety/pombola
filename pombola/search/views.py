@@ -323,7 +323,6 @@ class GeocoderView(TemplateView):
         "south_africa": "za",
         "kenya":        "ke",
         "nigeria":      "ng",
-        "libya":        "ly",
     }
 
     def get_context_data(self, **kwargs):
