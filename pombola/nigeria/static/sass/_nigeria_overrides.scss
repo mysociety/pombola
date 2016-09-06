@@ -3,24 +3,33 @@
   border-bottom: 2px solid #4082AF; // rich, dark blue
 
   nav {
-    position:relative;
-    z-index:2;
+    position: relative;
+    z-index: 2;
     text-align: right;
 
-    ul {
-      li {
-        border-right: 2px solid transparent;
+    & > ul {
+      width: auto;
 
-         a {
-          color: $colour_black;
-          background-image: none;
+      & > li {
+        border-right: none;
 
-          &:hover {
-            background: #C3E3F8;
-          }
+        &:hover > a, // hover effect even when mouse is over another item in the dropdown
+        & > a:hover,
+        & > a:focus {
+          background: #C3E3F8;
         }
 
-        &:hover ul li a:hover {
+        & > a {
+          background-image: none;
+          color: $colour_black;
+        }
+      }
+    }
+
+    .js-hover-dropdown {
+      a {
+        &:hover,
+        &:focus {
           background: #C3E3F8;
         }
       }
@@ -28,9 +37,7 @@
   }
 }
 
-
-
-html{
+html {
   background-color: $colour_white;
 }
 

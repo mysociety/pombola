@@ -125,46 +125,6 @@ $(function(){
             }
         );
 
-  // /*
-  //  * Comments: hover and show tools
-  //  */
-  // $('.comments li').hover(function() {
-  //   $(this).addClass('hovered');
-  // },
-  // function() {
-  //   $(this).removeClass('hovered');
-  // });
-
-  /*
-   * Main nav hover
-   */
-  $('#main-menu ul > li')
-    .on( 'mouseover', function () {
-        var $menu_heading = $(this);
-
-        if($menu_heading.children('ul').length === 1){
-
-            // close other menus that might be open
-            $menu_heading.siblings('.active').trigger('mouseout');
-
-            $menu_heading.addClass('active');
-        }
-    })
-    .on( 'mouseout', function () {
-        $(this).removeClass('active');
-    })
-    .on ('touchstart', function ( e ) {
-        // If we are not active then this is probably a tap on a tablet. Trigger a
-        // mouseover event instead.
-        var $menu_heading = $(this);
-
-        if ( $menu_heading.children('ul').length === 1 && ! $menu_heading.hasClass('active') ) {
-            e.preventDefault();                 // don't follow through with a click
-            $menu_heading.trigger('mouseover'); // show the menu
-            // TODO - some how cancel the menu - atm it'll stay up now until you navigate away from page or click on another menu heading
-        }
-    });
-
   /* carry search terms across when switching between search pages */
   $("#search-hansard-instead").click(function(e){
     e.preventDefault();

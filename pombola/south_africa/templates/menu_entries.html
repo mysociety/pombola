@@ -15,7 +15,7 @@
 
 <li><a href="{% url "person_list" %}" class="has-dropdown">People</a>
   {% if include_sub_menu_entries %}
-    <ul id="parliament-overview">
+    <ul id="parliament-overview" class="js-hover-dropdown">
       <li><a href="{% url "core_search" %}?section=persons">Find by name</a></li>
       <li><a href="{% url "organisation_kind" slug="parliament" %}">Parliament</a>
         <ul>
@@ -44,7 +44,7 @@
 
 <li><a href="{% url "info_blog_list" %}" class="has-dropdown">Blog</a>
   {% if include_sub_menu_entries %}
-    <ul id="blog-overview">
+    <ul id="blog-overview" class="js-hover-dropdown">
       <li><a href="{% url 'info_blog_category' slug='week-parliament' %}">That Week In Parliament</a></li>
       <li><a href="{% url 'info_blog_category' slug='commentary' %}">Commentary</a></li>
     </ul>
@@ -53,7 +53,7 @@
 
 <li><a href="{% url "info_page" slug="democracy-resources" %}" class="has-dropdown">Democracy Resources</a>
   {% if include_sub_menu_entries %}
-    <ul id="democracy-resources-overview">
+    <ul id="democracy-resources-overview" class="js-hover-dropdown">
       <!-- TODO: Change this link once the questions data has been loaded in. -->
       <li><a href="{% url "section-list-question" %}">Questions</a></li>
       <li><a href="https://pmg.org.za/bills">Bill Tracker</a></li>
@@ -63,9 +63,9 @@
   {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug="public-participation" %}">Public Participation</a>
+<li><a href="{% url "info_page" slug="public-participation" %}" class="has-dropdown">Public Participation</a>
   {% if include_sub_menu_entries %}
-    <ul id="extras-overview">
+    <ul id="extras-overview" class="js-hover-dropdown">
       <li><a href="{% url "info_page" slug="make-yourself-heard" %}">Make yourself heard</a></li>
       <li>
         <a href="{% url "info_page" slug="elections" %}">Elections</a>
@@ -80,7 +80,7 @@
 
 <li><a href="{% url "info_page" slug="hot-topics" %}" class="has-dropdown">Hot Topics</a>
   {% if include_sub_menu_entries %}
-    <ul id="extras-overview">
+    <ul id="extras-overview" class="js-hover-dropdown">
       <li><a href="{% url 'mp-attendance' %}">MP attendance</a></li>
       <li><a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name">MP profiles</a></li>
       <li><a href="{% url 'sa-interests-index' %}">MP assets</a></li>

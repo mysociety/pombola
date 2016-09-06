@@ -490,6 +490,7 @@ PIPELINE_JS = {
             'js/libs/jquery-ui.js',
             'js/libs/jquery.form-v2.94.js',
             'js/functions.js',
+            'js/hover-dropdown.js',
             'js/twitter-embed.js',
             'js/analytics.js',
         ),

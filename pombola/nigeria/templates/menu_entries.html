@@ -16,7 +16,7 @@
 
 <li><a href="{% url "info_page" slug='elections' %}">Elections</a>
     {% if include_sub_menu_entries %}
-    <ul id="elections">
+    <ul id="elections" class="js-hover-dropdown">
         <li>
             <a href="{% url "info_page" slug='inec-2014-voter-registration-and-pvc-distribution' %}">Voting Information</a>
         </li>
@@ -26,7 +26,7 @@
 
 <li><a href="{% url "info_page" slug='government-officials' %}">Government Officials</a>
     {% if include_sub_menu_entries %}
-    <ul id="government-officials">
+    <ul id="government-officials" class="js-hover-dropdown">
         <li>
             <a href="{% url "position_pt" pt_slug='senator' %}">Senators</a>
         </li>
@@ -46,7 +46,7 @@
 
 <li><a href="{% url "info_page" slug='places-overview' %}">Places</a>
     {% if include_sub_menu_entries %}
-    <ul id="places-overview">
+    <ul id="places-overview" class="js-hover-dropdown">
         <li>
             <a href="{% url "place_kind" slug='state' %}">States</a>
         </li>

@@ -520,91 +520,56 @@ menu#mobile-top-tools,
     }
 }
 
-#main-menu nav{
+#main-menu nav {
     text-align: left;
-    ul{
+    font-family: $font_family_lato;
+
+    & > ul > li {
+        border-right: none;
+
+        &:first-child a {
+            @media (min-width: 640px) {
+                margin-left: -8px; // compensate for link padding so text lines up with site grid
+            }
+        }
+
+        &.header-search {
+            float: right;
+        }
+
+        & > a {
+            background: $colour_green;
+        }
+
+        &:hover > a, // hover effect even when mouse is over another item in the dropdown
+        &.js-hover-active > a,
+        & > a:hover,
+        & > a:focus {
+            background: mix($colour_green, #000, 80%);
+        }
+    }
+
+    .js-hover-dropdown {
         border: none;
-        width: 100%;
-        li{
-            border: none;
-            &.header-search{
-                float: right;
-            }
-            a {
-                background: $colour_green;
-                font-family: $font_family_lato;
-                &:hover,
-                &:focus {
-                    background: mix($colour_green, #000, 80%);
-                }
-            }
 
-            &:first-child a {
-                @media only all and (min-width: 640px) {
-                    margin-left: -8px; // compensate for link padding so text lines up with site grid
-                }
-            }
+        a {
+            background: mix($colour_green, #000, 80%);
+            color: #fff;
 
-            &.active a,
-            &.active a:hover,
-            &.active a:focus
-            {
-                color: #fff;
-                border:none;
-                padding:8px 10px;
-                margin:0;
-                background: mix($colour_green, #000, 80%);
-            }
-            ul{
-                a,
-                a:hover
-                a:focus
-                {
-                    background: mix($colour_green, #000, 80%);
-                }
-
-            }
             &:hover,
             &:focus {
-                ul {
-                    border: none;
-                    li {
-                        a {
-                            background: mix($colour_green, #000, 80%);
-                            color: #fff;
-                            &:hover,
-                            &:focus {
-                                background: $colour_green;
-                                color: #fff;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        ul li ul {
-            a {
-                background: mix($colour_green, #000, 50%);
-                text-indent: 1em;
-                font-size: 11px !important;
-                padding: 5px 10px !important;
-                &:hover,
-                &:focus {
-                    background: $colour_green;
-                    color: #fff;
-                }
+                background: $colour_green;
+                color: #fff;
             }
         }
     }
-    ul li:hover ul ul {
-        position: relative;
-        top: 0;
-    }
+
     a[href*="pmg.org.za"] {
         background-image: url('/static/images/pmg-white-icon.png') !important;
         background-position: 95% center !important;
         background-repeat: no-repeat !important;
     }
+
     .has-dropdown,
     .has-dropdown:hover  {
         padding-right: 17px !important;

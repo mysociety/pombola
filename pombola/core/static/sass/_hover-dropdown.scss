@@ -1,0 +1,13 @@
+// See core/static/js/hover-dropdown.js for documentation.
+
+.js-hover-dropdown {
+    display: none;
+
+    :hover > &, // show when parent (including any children) is hovered
+    .js-hover-active > &, // show when parent has `.js-hover-active` class
+    :hover + &, // show when trigger is hovered
+    :focus + & // show when trigger is focussed
+    {
+        display: block;
+    }
+}
