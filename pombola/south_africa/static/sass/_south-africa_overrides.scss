@@ -410,7 +410,7 @@ $logo-width-large: 184px;
     background-image: none;
     background: $colour_main_background;
     position: relative;
-    padding-top: 2.5em; // make space for .about-this-site-menu on mobiles
+    padding-top: 1.5em; // make space for .about-this-site-menu on mobiles
 
     @media only all and (min-width: 640px), print {
         padding: 0 0.5em 0 0.5em; // stop children touching edges of window on narrow desktops
@@ -582,7 +582,7 @@ menu#mobile-top-tools,
 .about-this-site-menu {
     position: absolute;
     top: .5em;
-    right: .5em;
+    right: .8em;
     left: 0;
     text-align: right;
 
@@ -594,23 +594,47 @@ menu#mobile-top-tools,
 
     ul {
         padding-left: 0;
+        margin: 0 -0.3em;
     }
 
     li {
         list-style: none outside none;
         line-height: 1.1em;
         display: inline-block;
-        margin-left: 0.5em;
+        position: relative; // allow us to position .js-hover-dropdown
     }
 
     a {
         font-size: 0.75em;
         color: $colour_blackish;
         text-decoration: none;
+        padding: 0.3em;
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: $colour-primary;
             text-decoration: underline;
+        }
+    }
+
+    .js-hover-dropdown {
+        position: absolute;
+        z-index: 1;
+        top: 1.3em;
+        left: 0;
+        margin: 0;
+        background: #fff;
+        padding: 0.3em 0;
+        text-align: left;
+
+        li {
+            display: block;
+        }
+
+        a {
+            display: block;
+            white-space: nowrap;
+            padding: 0.2em 0.8em;
         }
     }
 }

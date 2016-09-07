@@ -6,9 +6,14 @@
 
 <div class="about-this-site-menu">
     <ul role="menubar" aria-label="Help menu">
-        <li><a href="{% url 'info_page' slug='about'%}" role="menuitem">About</a></li>
-        <li><a href="{% url 'info_page' slug='source-data'%}" role="menuitem">Source Data</a></li>
-        <li><a href="{% url 'info_page' slug='for-representatives'%}" role="menuitem">For Representatives</a></li>
+        <li>
+            <a href="{% url 'info_page' slug='about'%}" role="menuitem" aria-haspopup="true">About us</a>
+            <ul class="js-hover-dropdown" role="menu">
+                <li><a href="{% url 'info_page' slug='about'%}" role="menuitem">Who we are</a></li>
+                <li><a href="{% url 'info_page' slug='source-data'%}" role="menuitem">Source Data</a></li>
+                <li><a href="{% url 'info_page' slug='for-representatives'%}" role="menuitem">For Representatives</a></li>
+            </ul>
+        </li>
         <li><a href="{% url 'info_page' slug='contact-us'%}" role="menuitem">Contact us</a></li>
     </ul>
 </div>
