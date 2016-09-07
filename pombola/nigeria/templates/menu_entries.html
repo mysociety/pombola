@@ -9,62 +9,67 @@
 
 {% endcomment %}
 
-<li><a href="{% url "home" %}">Home</a></li>
+<li><a href="{% url "home" %}" role="menuitem">Home</a></li>
 
 
-<li><a href="{% url "info_page" slug='democracy-resources' %}">Democracy Resources</a></li>
+<li><a href="{% url "info_page" slug='democracy-resources' %}" role="menuitem">Democracy Resources</a></li>
 
-<li><a href="{% url "info_page" slug='elections' %}">Elections</a>
+
+<li>
+    <a href="{% url "info_page" slug='elections' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Elections</a>
     {% if include_sub_menu_entries %}
-    <ul id="elections" class="js-hover-dropdown">
+    <ul id="elections" class="js-hover-dropdown" role="menu">
         <li>
-            <a href="{% url "info_page" slug='inec-2014-voter-registration-and-pvc-distribution' %}">Voting Information</a>
-        </li>
-    </ul>
-    {% endif %}
-</li>
-
-<li><a href="{% url "info_page" slug='government-officials' %}">Government Officials</a>
-    {% if include_sub_menu_entries %}
-    <ul id="government-officials" class="js-hover-dropdown">
-        <li>
-            <a href="{% url "position_pt" pt_slug='senator' %}">Senators</a>
-        </li>
-        <li>
-            <a href="{% url "position_pt" pt_slug='representative' %}">Representatives</a>
-        </li>
-        <li>
-            <a href="{% url "position_pt" pt_slug='executive-governor' %}">Governors</a>
-        </li>
-        <li>
-            <a href="{% url "position_pt" pt_slug='state-legislator' %}">State Legislators</a>
+            <a href="{% url "info_page" slug='inec-2014-voter-registration-and-pvc-distribution' %}" role="menuitem">Voting Information</a>
         </li>
     </ul>
     {% endif %}
 </li>
 
 
-<li><a href="{% url "info_page" slug='places-overview' %}">Places</a>
+<li>
+    <a href="{% url "info_page" slug='government-officials' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Government Officials</a>
     {% if include_sub_menu_entries %}
-    <ul id="places-overview" class="js-hover-dropdown">
+    <ul id="government-officials" class="js-hover-dropdown" role="menu">
         <li>
-            <a href="{% url "place_kind" slug='state' %}">States</a>
+            <a href="{% url "position_pt" pt_slug='senator' %}" role="menuitem">Senators</a>
         </li>
         <li>
-            <a href="{% url "place_kind" slug='senatorial-district' %}">Senatorial Districts</a>
+            <a href="{% url "position_pt" pt_slug='representative' %}" role="menuitem">Representatives</a>
         </li>
         <li>
-            <a href="{% url "place_kind" slug='constituency' %}">Federal Constituencies</a>
+            <a href="{% url "position_pt" pt_slug='executive-governor' %}" role="menuitem">Governors</a>
+        </li>
+        <li>
+            <a href="{% url "position_pt" pt_slug='state-legislator' %}" role="menuitem">State Legislators</a>
         </li>
     </ul>
     {% endif %}
 </li>
 
 
-<li><a href="{% url "info_page" slug='events' %}">Events</a></li>
+<li>
+    <a href="{% url "info_page" slug='places-overview' %}" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Places</a>
+    {% if include_sub_menu_entries %}
+    <ul id="places-overview" class="js-hover-dropdown" role="menu">
+        <li>
+            <a href="{% url "place_kind" slug='state' %}" role="menuitem">States</a>
+        </li>
+        <li>
+            <a href="{% url "place_kind" slug='senatorial-district' %}" role="menuitem">Senatorial Districts</a>
+        </li>
+        <li>
+            <a href="{% url "place_kind" slug='constituency' %}" role="menuitem">Federal Constituencies</a>
+        </li>
+    </ul>
+    {% endif %}
+</li>
 
 
-<li><a href="{% url "info_blog_list" %}">Blog</a></li>
+<li><a href="{% url "info_page" slug='events' %}" role="menuitem">Events</a></li>
 
 
-<li><a href="{% url "info_page" slug='about' %}">About</a></li>
+<li><a href="{% url "info_blog_list" %}" role="menuitem">Blog</a></li>
+
+
+<li><a href="{% url "info_page" slug='about' %}" role="menuitem">About</a></li>

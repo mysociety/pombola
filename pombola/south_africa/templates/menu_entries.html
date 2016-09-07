@@ -9,90 +9,93 @@
 
 {% endcomment %}
 
-<li><a href="{% url "home" %}">Home</a></li>
+<li><a href="{% url "home" %}" role="menuitem">Home</a></li>
 
-<li><a href="{% url "core_geocoder_search" %}">Rep Locator</a></li>
+<li><a href="{% url "core_geocoder_search" %}" role="menuitem">Rep Locator</a></li>
 
-<li><a href="{% url "person_list" %}" class="has-dropdown">People</a>
+<li>
+  <a href="{% url "person_list" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>People</a>
   {% if include_sub_menu_entries %}
-    <ul id="parliament-overview" class="js-hover-dropdown">
-      <li><a href="{% url "core_search" %}?section=persons">Find by name</a></li>
-      <li><a href="{% url "organisation_kind" slug="parliament" %}">Parliament</a>
+    <ul id="parliament-overview" class="js-hover-dropdown" role="menu">
+      <li><a href="{% url "core_search" %}?section=persons" role="menuitem">Find by name</a></li>
+      <li><a href="{% url "organisation_kind" slug="parliament" %}" role="menuitem">Parliament</a>
         <ul>
-          <li><a href="{% url "organisation" slug="national-assembly" %}">National Assembly</a></li>
-          <li><a href="{% url "organisation" slug="ncop" %}">National Council of Provinces</a></li>
+          <li><a href="{% url "organisation" slug="national-assembly" %}" role="menuitem">National Assembly</a></li>
+          <li><a href="{% url "organisation" slug="ncop" %}" role="menuitem">National Council of Provinces</a></li>
         </ul>
       </li>
-      <li><a href="{% url "place_kind" slug="province" %}">Provinces</a>
-        {% if include_sub_menu_entries %}
-          <ul id="provinces-overview">
-            <li><a href="{% url "place" slug="eastern-cape" %}">Eastern Cape</a></li>
-            <li><a href="{% url "place" slug="free-state" %}">Free State</a></li>
-            <li><a href="{% url "place" slug="gauteng" %}">Gauteng</a></li>
-            <li><a href="{% url "place" slug="kwazulu-natal" %}">KwaZulu-Natal</a></li>
-            <li><a href="{% url "place" slug="limpopo" %}">Limpopo</a></li>
-            <li><a href="{% url "place" slug="mpumalanga" %}">Mpumalanga</a></li>
-            <li><a href="{% url "place" slug="northern-cape" %}">Northern Cape</a></li>
-            <li><a href="{% url "place" slug="north-west" %}">North West</a></li>
-            <li><a href="{% url "place" slug="western-cape" %}">Western Cape</a></li>
-          </ul>
-        {% endif %}
+      <li><a href="{% url "place_kind" slug="province" %}" role="menuitem">Provinces</a>
+        <ul id="provinces-overview">
+          <li><a href="{% url "place" slug="eastern-cape" %}" role="menuitem">Eastern Cape</a></li>
+          <li><a href="{% url "place" slug="free-state" %}" role="menuitem">Free State</a></li>
+          <li><a href="{% url "place" slug="gauteng" %}" role="menuitem">Gauteng</a></li>
+          <li><a href="{% url "place" slug="kwazulu-natal" %}" role="menuitem">KwaZulu-Natal</a></li>
+          <li><a href="{% url "place" slug="limpopo" %}" role="menuitem">Limpopo</a></li>
+          <li><a href="{% url "place" slug="mpumalanga" %}" role="menuitem">Mpumalanga</a></li>
+          <li><a href="{% url "place" slug="northern-cape" %}" role="menuitem">Northern Cape</a></li>
+          <li><a href="{% url "place" slug="north-west" %}" role="menuitem">North West</a></li>
+          <li><a href="{% url "place" slug="western-cape" %}" role="menuitem">Western Cape</a></li>
+        </ul>
       </li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "info_blog_list" %}" class="has-dropdown">Blog</a>
+<li>
+  <a href="{% url "info_blog_list" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Blog</a>
   {% if include_sub_menu_entries %}
-    <ul id="blog-overview" class="js-hover-dropdown">
-      <li><a href="{% url 'info_blog_category' slug='week-parliament' %}">That Week In Parliament</a></li>
-      <li><a href="{% url 'info_blog_category' slug='commentary' %}">Commentary</a></li>
+    <ul id="blog-overview" class="js-hover-dropdown" role="menu">
+      <li><a href="{% url 'info_blog_category' slug='week-parliament' %}" role="menuitem">That Week In Parliament</a></li>
+      <li><a href="{% url 'info_blog_category' slug='commentary' %}" role="menuitem">Commentary</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug="democracy-resources" %}" class="has-dropdown">Democracy Resources</a>
+<li>
+  <a href="{% url "info_page" slug="democracy-resources" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Democracy Resources</a>
   {% if include_sub_menu_entries %}
-    <ul id="democracy-resources-overview" class="js-hover-dropdown">
+    <ul id="democracy-resources-overview" class="js-hover-dropdown" role="menu">
       <!-- TODO: Change this link once the questions data has been loaded in. -->
-      <li><a href="{% url "section-list-question" %}">Questions</a></li>
-      <li><a href="https://pmg.org.za/bills">Bill Tracker</a></li>
-      <li><a href="http://www.pmg.org.za/committees">Committees</a></li>
-      <li><a href="{% url "section-list-hansard" %}">Hansard</a></li>
+      <li><a href="{% url "section-list-question" %}" role="menuitem">Questions</a></li>
+      <li><a href="https://pmg.org.za/bills" role="menuitem">Bill Tracker</a></li>
+      <li><a href="http://www.pmg.org.za/committees" role="menuitem">Committees</a></li>
+      <li><a href="{% url "section-list-hansard" %}" role="menuitem">Hansard</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug="public-participation" %}" class="has-dropdown">Public Participation</a>
+<li>
+  <a href="{% url "info_page" slug="public-participation" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Public Participation</a>
   {% if include_sub_menu_entries %}
-    <ul id="extras-overview" class="js-hover-dropdown">
-      <li><a href="{% url "info_page" slug="make-yourself-heard" %}">Make yourself heard</a></li>
+    <ul id="extras-overview" class="js-hover-dropdown" role="menu">
+      <li><a href="{% url "info_page" slug="make-yourself-heard" %}" role="menuitem">Make yourself heard</a></li>
       <li>
-        <a href="{% url "info_page" slug="elections" %}">Elections</a>
+        <a href="{% url "info_page" slug="elections" %}" role="menuitem">Elections</a>
         <ul>
-          <li><a href="{% url "sa-election-overview-year" election_year="2014" %}">Election 2014 Candidates</a></li>
+          <li><a href="{% url "sa-election-overview-year" election_year="2014" %}" role="menuitem">Election 2014 Candidates</a></li>
         </ul>
       </li>
-      <li><a href="{% url "info_page" slug="petitions" %}">Petitions</a></li>
+      <li><a href="{% url "info_page" slug="petitions" %}" role="menuitem">Petitions</a></li>
     </ul>
   {% endif %}
 </li>
 
-<li><a href="{% url "info_page" slug="hot-topics" %}" class="has-dropdown">Hot Topics</a>
+<li>
+  <a href="{% url "info_page" slug="hot-topics" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Hot Topics</a>
   {% if include_sub_menu_entries %}
-    <ul id="extras-overview" class="js-hover-dropdown">
-      <li><a href="{% url 'mp-attendance' %}">MP attendance</a></li>
-      <li><a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name">MP profiles</a></li>
-      <li><a href="{% url 'sa-interests-index' %}">MP assets</a></li>
-      <li><a href="{% url 'info_blog_category' slug='mp-corner' %}">MP Corner</a></li>
-      <li><a href="{% url 'info_page' slug="infographics" %}">Infographics</a></li>
-      <li><a href="{% url 'info_blog_category' slug='advocacy-campaigns' %}">Campaigns</a></li>
+    <ul id="extras-overview" class="js-hover-dropdown" role="menu">
+      <li><a href="{% url 'mp-attendance' %}" role="menuitem">MP attendance</a></li>
+      <li><a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name" role="menuitem">MP profiles</a></li>
+      <li><a href="{% url 'sa-interests-index' %}" role="menuitem">MP assets</a></li>
+      <li><a href="{% url 'info_blog_category' slug='mp-corner' %}" role="menuitem">MP Corner</a></li>
+      <li><a href="{% url 'info_page' slug="infographics" %}" role="menuitem">Infographics</a></li>
+      <li><a href="{% url 'info_blog_category' slug='advocacy-campaigns' %}" role="menuitem">Campaigns</a></li>
     </ul>
   {% endif %}
 </li>
 
 {% if include_sub_menu_entries %}
-<li class="header-search">
+<li class="header-search" role="search">
   <form action="{% url "core_search" %}" method="get" id="header-search">
       <input class="search-autocomplete-name" type="text" name="q" placeholder="Search pa.org.za" />
       <button type="submit">Submit</button>
