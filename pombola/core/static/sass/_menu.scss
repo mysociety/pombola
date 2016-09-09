@@ -8,75 +8,101 @@
   @media print { display: none; }
   background: $colour_black;
   @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
+
   nav {
     width: 100%;
     text-align: center;
+
+    // Be careful! These styles apply to all lists in the nav:
+    // from the top level menu all the way down to nested dropdowns!
     ul {
       @include list-reset-soft;
-      @include inline-block;
       width: auto;
-      li {
+    }
+
+    // Default styling for every link in the nav, no matter what level.
+    a {
+      display: block;
+      padding: 8px 7px;
+      color: $colour_white;
+      background: $colour_black;
+      text-decoration: none;
+
+      @media only all and (min-width: 720px), print {
+        font-size: 14px;
+        padding: 8px 10px;
+      }
+    }
+
+    // The top level list (ie: the main menu bar, not the dropdown menus)
+    & > ul {
+      @include inline-block;
+      width: 100%;
+
+      & > li {
         position: relative;
         display: inline;
         float: left;
         height: 36px;
         border-right: 2px solid $colour_black;
-        a {
-          display: block;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        & > a {
           float: left;
-          font-size: 12px;
+          font-size: 14px;
           height: 20px;
-          padding: 8px 7px;
-          text-decoration: none;
-          color: $colour_white;
-          background: $colour_black;
           border-bottom: 0;
           @include background(linear-gradient($colour_black, $colour_blackish / 1.4));
-          &:hover {
-            background: $colour_blackish;
-            @include background(linear-gradient($colour_blackish / 1.4, $colour_black)); } }
-        &:last-child {
-          border-right: 0; }
-        ul {
-          position: absolute;
-          z-index: 20;
-          left: -999999px; }
-        &.active > a {
-          background: #f6f6f6;
-          color: #444;
-          border-left: 1px solid #d4d4d4;
-          border-right: 1px solid #d4d4d4;
-          border-top: 1px solid #d4d4d4;
-          padding: 9px 6px 10px 6px; }
-        &:hover {
-          ul {
-            left: 0;
-            top: 36px;
-            text-align: left;
-            width: 193px;
-            border-left: 1px solid #d4d4d4;
-            border-right: 1px solid #d4d4d4;
-            border-bottom: 1px solid #d4d4d4;
-            li {
-              display: block;
-              float: none;
-              height: auto;
-              border: none;
-              a {
-                font-size: 13px;
-                color: #444;
-                background: #f6f6f6;
-                height: auto;
-                float: none;
-                &:hover {
-                  background: #d4d4d4; } } } } }
-        @media only all and (min-width: 720px), print { 
-          & {
-            a {
-              font-size: 14px;
-              padding: 8px 10px; }
-            &.active > a {
-              padding: 7px 9px 8px 9px; } } } } } } }
+        }
+
+        &.js-hover-active > a,
+        & > a:hover,
+        & > a:focus {
+          background: $colour_blackish;
+          @include background(linear-gradient($colour_blackish / 1.4, $colour_black));
+        }
+      }
+    }
+
+    // Dropdown menus
+    .js-hover-dropdown {
+      position: absolute;
+      z-index: 20;
+      left: 0;
+      top: 36px;
+      text-align: left;
+      width: 193px;
+      border-left: 1px solid #d4d4d4;
+      border-right: 1px solid #d4d4d4;
+      border-bottom: 1px solid #d4d4d4;
+
+      li {
+        display: block;
+      }
+
+      a {
+        font-size: 13px;
+        color: #444;
+        background: #f6f6f6;
+
+        &:hover,
+        &:focus {
+          background: #d4d4d4;
+        }
+      }
+
+      // Some dropdowns have mini lists *inside* them (eg: a list of legislatures)
+      ul a {
+          font-size: 11px;
+          line-height: 1.3em;
+          text-indent: 1em;
+      }
+    }
+  }
+}
 
 .m-sub-menu {
   @include list-reset-soft;
@@ -93,13 +119,13 @@
 #footer-menu {
   // by default show the sub entries. Hide if the screen is big in which
   // case the menu at the top will be shown instead.
-  li > ul { 
+  li > ul {
     @media only all and (min-width: 640px), print {
       display: none;
     }
-    
+
     margin-left: 1em;
-    
+
     li {
       display: inline;
       font-size: 90%;

@@ -410,7 +410,7 @@ $logo-width-large: 184px;
     background-image: none;
     background: $colour_main_background;
     position: relative;
-    padding-top: 2.5em; // make space for .about-this-site-menu on mobiles
+    padding-top: 1.5em; // make space for .about-this-site-menu on mobiles
 
     @media only all and (min-width: 640px), print {
         padding: 0 0.5em 0 0.5em; // stop children touching edges of window on narrow desktops
@@ -520,91 +520,56 @@ menu#mobile-top-tools,
     }
 }
 
-#main-menu nav{
+#main-menu nav {
     text-align: left;
-    ul{
+    font-family: $font_family_lato;
+
+    & > ul > li {
+        border-right: none;
+
+        &:first-child a {
+            @media (min-width: 640px) {
+                margin-left: -8px; // compensate for link padding so text lines up with site grid
+            }
+        }
+
+        &.header-search {
+            float: right;
+        }
+
+        & > a {
+            background: $colour_green;
+        }
+
+        &:hover > a, // hover effect even when mouse is over another item in the dropdown
+        &.js-hover-active > a,
+        & > a:hover,
+        & > a:focus {
+            background: mix($colour_green, #000, 80%);
+        }
+    }
+
+    .js-hover-dropdown {
         border: none;
-        width: 100%;
-        li{
-            border: none;
-            &.header-search{
-                float: right;
-            }
-            a {
-                background: $colour_green;
-                font-family: $font_family_lato;
-                &:hover,
-                &:focus {
-                    background: mix($colour_green, #000, 80%);
-                }
-            }
 
-            &:first-child a {
-                @media only all and (min-width: 640px) {
-                    margin-left: -8px; // compensate for link padding so text lines up with site grid
-                }
-            }
+        a {
+            background: mix($colour_green, #000, 80%);
+            color: #fff;
 
-            &.active a,
-            &.active a:hover,
-            &.active a:focus
-            {
-                color: #fff;
-                border:none;
-                padding:8px 10px;
-                margin:0;
-                background: mix($colour_green, #000, 80%);
-            }
-            ul{
-                a,
-                a:hover
-                a:focus
-                {
-                    background: mix($colour_green, #000, 80%);
-                }
-
-            }
             &:hover,
             &:focus {
-                ul {
-                    border: none;
-                    li {
-                        a {
-                            background: mix($colour_green, #000, 80%);
-                            color: #fff;
-                            &:hover,
-                            &:focus {
-                                background: $colour_green;
-                                color: #fff;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        ul li ul {
-            a {
-                background: mix($colour_green, #000, 50%);
-                text-indent: 1em;
-                font-size: 11px !important;
-                padding: 5px 10px !important;
-                &:hover,
-                &:focus {
-                    background: $colour_green;
-                    color: #fff;
-                }
+                background: $colour_green;
+                color: #fff;
             }
         }
     }
-    ul li:hover ul ul {
-        position: relative;
-        top: 0;
-    }
+
     a[href*="pmg.org.za"] {
         background-image: url('/static/images/pmg-white-icon.png') !important;
         background-position: 95% center !important;
         background-repeat: no-repeat !important;
     }
+
     .has-dropdown,
     .has-dropdown:hover  {
         padding-right: 17px !important;
@@ -617,7 +582,7 @@ menu#mobile-top-tools,
 .about-this-site-menu {
     position: absolute;
     top: .5em;
-    right: .5em;
+    right: .8em;
     left: 0;
     text-align: right;
 
@@ -629,23 +594,47 @@ menu#mobile-top-tools,
 
     ul {
         padding-left: 0;
+        margin: 0 -0.3em;
     }
 
     li {
         list-style: none outside none;
         line-height: 1.1em;
         display: inline-block;
-        margin-left: 0.5em;
+        position: relative; // allow us to position .js-hover-dropdown
     }
 
     a {
         font-size: 0.75em;
         color: $colour_blackish;
         text-decoration: none;
+        padding: 0.3em;
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: $colour-primary;
             text-decoration: underline;
+        }
+    }
+
+    .js-hover-dropdown {
+        position: absolute;
+        z-index: 1;
+        top: 1.3em;
+        left: 0;
+        margin: 0;
+        background: #fff;
+        padding: 0.3em 0;
+        text-align: left;
+
+        li {
+            display: block;
+        }
+
+        a {
+            display: block;
+            white-space: nowrap;
+            padding: 0.2em 0.8em;
         }
     }
 }

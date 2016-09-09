@@ -1,6 +1,6 @@
 <div id="main-menu">
     <nav class="wrapper">
-        <ul>
+        <ul role="menubar" aria-label="Main menu">
             {% with include_sub_menu_entries=1 %}
                 {% include 'menu_entries.html' %}
             {% endwith %}

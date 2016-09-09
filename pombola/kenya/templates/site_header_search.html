@@ -1,4 +1,4 @@
-        <form action="{% url "core_search" %}" method="get" id="header-search">
-            <input class="search-autocomplete-name" type="text" name="q" placeholder="Search&hellip;" />
-            <button type="submit">Submit</button>
+        <form action="{% url "core_search" %}" method="get" id="header-search" role="search">
+            <input class="search-autocomplete-name" type="text" name="q" placeholder="Search&hellip;" aria-label="Enter search term" />
+            <button type="submit">Search</button>
         </form>
