@@ -23,9 +23,8 @@ from .views_iebc_office_locator import (
     OfficeDetailAjaxView
 )
 from .views_facebook_experiments import (
-    TreatmentOlympics, TreatmentOlympicsThanks,
+    TreatmentSocial, TreatmentSocialThanks,
     TreatmentPolitics, TreatmentPoliticsThanks,
-    SurveyGizmoRecord, SurveyGizmoValue
 )
 
 
@@ -75,23 +74,17 @@ urlpatterns = [
         name='iebc-office-ajax'
     ),
 
-    url(r'^fb/olympics$',
-        TreatmentOlympics.as_view()
+    url(r'^fb/social$',
+        TreatmentSocial.as_view()
         ),
-    url(r'^fb/olympics/thanks$',
-        TreatmentOlympicsThanks.as_view()
+    url(r'^fb/social/thanks$',
+        TreatmentSocialThanks.as_view()
         ),
     url(r'^fb/politics$',
         TreatmentPolitics.as_view()
         ),
     url(r'^fb/politics/thanks$',
         TreatmentPoliticsThanks.as_view()
-        ),
-    url(r'^fb/ajax/record$',
-        SurveyGizmoRecord.as_view()
-        ),
-    url(r'^fb/ajax/value$',
-        SurveyGizmoValue.as_view()
         ),
 ]
 

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load pipeline %}
+{% load staticfiles %}
+
+{% block title %}Social Media Around The World{% endblock %}
+
+{% block body_attributes %}class="facebook-experiment-page"{% endblock %}
+
+{% block header %}
+    <header id="site-header">
+        <div class="wrapper">
+            {% include "site_header_logo.html" %}
+        </div>
+    </header>
+{% endblock %}
+
+{% block breadcrumbs %}
+    {# Hide bread crumbs on this page #}
+{% endblock %}
+
+{% block content %}
+
+<h1>Social Media Around The World</h1>
+
+<p>Ten years ago the most popular social media platform in the world was MySpace (remember that?) - it had around 75 million active users every month.</p>
+
+<p>The world has changed a lot in the last decade.  MySpace has long since faded, but new social media tools have sprung up that now have billions of monthly users. These are some of the biggest ones:</p>
+
+<ul>
+    <li>Facebook - 1.71 billion active monthly users</li>
+    <li>WhatsApp - 1 billion active monthly users</li>
+    <li>WeChat - 762 million active monthly users<br>
+Have you heard of WeChat?  It is a Chinese app which is now the third largest social media platform in the world!</li>
+    <li>Tumblr - 555 million active monthly users</li>
+    <li>Instagram - 500 million active monthly users</li>
+    <li>Twitter - 310 million active monthly users</li>
+    <li>SnapChat - 150 million active daily users</li>
+</ul>
+
+<div id="ctas" style="display:none">
+
+<hr>
+
+    <section class="cta">
+        <h2>Which social media platform do you use the most?</h2>
+
+        <p>
+            <label for="social_select">Select a network:</label>
+            <select id="social_select" class="js-show-preferred-social">
+                <option></option>
+                <option value="facebook">Facebook</option>
+                <option value="wechat">WeChat</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="instagram">Instagram</option>
+                <option value="twitter">Twitter</option>
+                <option value="tumblr">Tumblr</option>
+                <option value="snapchat">SnapChat</option>
+            </select>
+        </p>
+
+        <div class="js-show-preferred-social-thanks" style="display:none">
+            <p>Thanks for letting us know!</p>
+        </div>
+    </section>
+
+</div>
+
+</div>
+
+<hr>
+
+<footer>
+    <a class="button" href="/fb/social/thanks?sid={{ sid }}">Next page</a>
+</footer>
+
+{% endblock %}
+
+{% block js_end_of_body %}
+    {{ block.super }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    {% javascript 'facebook-experiment' %}
+    <script>
+        $(function(){
+            recordPageHit('social');
+            loadPageInteractivity();
+        });
+    </script>
+{% endblock %}

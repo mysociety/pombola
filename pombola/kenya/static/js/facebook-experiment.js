@@ -1,3 +1,5 @@
+var logbookUrl = 'http://logbook.mysociety.org/mzalendo-fb';
+
 // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -9,7 +11,22 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-$(function(){
+function recordPageHit(pageName) {
+    var sid = getParameterByName('sid');
+    if (sid != null) {
+        // Fire off some AJAX to record this click.
+        $.ajax({
+            url: logbookUrl,
+            data: {
+                sid: sid,
+                action: 'page_view',
+                value: pageName
+            }
+        });
+    }
+}
+
+function loadPageInteractivity() {
 
     // Show the hidden page element (we don't show anything if no JS is available)
     $('#ctas').show();
@@ -49,54 +66,35 @@ $(function(){
         if (sid != null) {
             // Fire off some AJAX to record this
             $.ajax({
-                url: '/fb/ajax/record',
+                url: logbookUrl,
                 data: {
                     sid: sid,
-                    qid: '54',
-                    selid: '10165'
+                    action: 'page_interaction',
+                    value: 'select_constituency'
                 }
             });
         }
 
     });
 
-    // Show/hide the comparison table
-    $('.js-compare-countries').on('click', function(){
-        $('.js-compare-countries-result table').toggle();
-
-        // Do we have a SID?
-        if (sid != null) {
-            // Fire off some AJAX to record this click.
-            $.ajax({
-                url: '/fb/ajax/record',
-                data: {
-                    sid: sid,
-                    qid: '56',
-                    selid: '10168'
-                }
-            });
-        }
-
-    });
-
-    // JS to swap the winners on the Olympics page
-    $('.js-show-winners').on('change', function(){
-        var year = $(this).val();
-        if(year != '') {
-            $('.js-show-winners-result #' + year).show().siblings().hide();
+    // JS to detect selection of a favourite network
+    $('.js-show-preferred-social').on('change', function(){
+        var network = $(this).val();
+        if(network != '') {
+            $('.js-show-preferred-social-thanks').show();
         } else {
-            $('.js-show-winners-result table').hide();
+            $('.js-show-preferred-social-thanks').hide();
         }
 
         // Do we have a SID?
         if (sid != null) {
             // Fire off some AJAX to record this click.
             $.ajax({
-                url: '/fb/ajax/record',
+                url: logbookUrl,
                 data: {
                     sid: sid,
-                    qid: '57',
-                    selid: '10169'
+                    action: 'page_interaction',
+                    value: 'select_social_network'
                 }
             });
         }
@@ -105,16 +103,19 @@ $(function(){
     if (sid != null) {
         var pageTimer = 0;
         setInterval(function(){
-            pageTimer += 10;
-            $.ajax({
-                url: '/fb/ajax/value',
-                data: {
-                    sid: sid,
-                    qid: '64',
-                    value: pageTimer
-                }
-            });
-        }, 15000);
+            // Only run this tick if the page is actually visible
+            if (!document.hidden) {
+                pageTimer += 10;
+                $.ajax({
+                    url: logbookUrl,
+                    data: {
+                        sid: sid,
+                        action: 'page_time',
+                        value: pageTimer
+                    }
+                });
+            }
+        }, 10000);
     }
 
-});
+}
