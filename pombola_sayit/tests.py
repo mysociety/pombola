@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from django.test import TestCase
 
@@ -6,6 +7,7 @@ from django_date_extensions.fields import ApproximateDate
 from instances.models import Instance
 from pombola.core import models as pombola_models
 from popolo import models as popolo_models
+from slug_helpers.models import SlugRedirect
 from speeches.models import Speaker
 
 from pombola_sayit.models import PombolaSayItJoin
@@ -21,6 +23,11 @@ class SyncTests(TestCase):
                 legal_name='John Solo',
                 slug='john-solo',
             )
+        SlugRedirect.objects.create(
+            content_type=ContentType.objects.get(
+                app_label='core', model='person'),
+            new_object=self.person_only_pombola,
+            old_object_slug='john---solo')
         self.person_only_pombola.alternative_names.create(
             alternative_name='Han Solo',
             start_date=ApproximateDate(1977, 12, 27),
@@ -118,3 +125,16 @@ class SyncTests(TestCase):
         self.assertEqual(other_names[0].name, 'Han Solo')
         self.assertEqual(other_names[0].start_date, '1977-12-27')
         self.assertIsNone(other_names[0].end_date)
+
+        # Check that identifiers with all slugs for that person have
+        # been created.
+        speaker_john_solo = Speaker.objects.get(name='John Solo')
+        speaker_john_loquacious = Speaker.objects.get(name='John Loquacious')
+        self.assertEqual(
+            set(speaker_john_solo.identifiers.filter(
+                scheme='pombola_person_slug').values_list('identifier', flat=True)),
+            {'john-solo', 'john---solo'})
+        self.assertEqual(
+            set(speaker_john_loquacious.identifiers.filter(
+                scheme='pombola_person_slug').values_list('identifier', flat=True)),
+            {'john-loquacious'})

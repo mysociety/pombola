@@ -1,5 +1,8 @@
 from __future__ import print_function
 
+from collections import defaultdict
+
+from django.contrib.contenttypes.models import ContentType
 from django.core.management import BaseCommand
 from django.db import transaction
 
@@ -7,6 +10,7 @@ from instances.models import Instance
 from popolo import models as popolo_models
 from pombola.core import models as pombola_models
 from pombola_sayit.models import PombolaSayItJoin
+from slug_helpers.models import SlugRedirect
 from speeches.models import Speaker
 
 
@@ -56,6 +60,16 @@ class Command(BaseCommand):
                 start_date=convert_approximate_date(alt_name.start_date),
                 end_date=convert_approximate_date(alt_name.end_date),
             )
+        # Make sure that the slugs that are associated with people are
+        # stored as identifiers so that we can use them to help in
+        # name resolution. (We have Pombola URLs from the Code4SA
+        # question and answer data.)
+        all_slugs = set([pombola_person.slug])
+        all_slugs.update(self.person_to_slug_redirects[pombola_person])
+        for slug in all_slugs:
+            speaker.identifiers.create(
+                scheme='pombola_person_slug',
+                identifier=slug)
         # And go through every position and create corresponding memberships:
         for position in pombola_person.position_set.all():
             # Make sure the organisation exists:
@@ -86,8 +100,16 @@ class Command(BaseCommand):
                 end_date=convert_approximate_date(position.end_date),
             )
 
+    def cache_slug_redirects(self):
+        self.person_to_slug_redirects = defaultdict(set)
+        ct = ContentType.objects.get(app_label='core', model='person')
+        for sr in SlugRedirect.objects.filter(content_type=ct):
+            self.person_to_slug_redirects[sr.new_object].add(
+                sr.old_object_slug)
+
     def handle(self, *args, **options):
         self.verbose = int(options['verbosity']) > 1
+        self.cache_slug_redirects()
         instance = Instance.objects.get()
         self.org_cache = {}
         # Delete all data from Popolo models that are associated
@@ -99,6 +121,8 @@ class Command(BaseCommand):
                 popolo_models.OtherName,
         ):
             model.objects.all().delete()
+        popolo_models.Identifier.objects.filter(scheme='pombola_person_slug') \
+            .delete()
         for pombola_person in pombola_models.Person.objects.all():
             with transaction.atomic():
                 try:
