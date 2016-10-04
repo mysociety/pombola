@@ -388,3 +388,22 @@ class PersonDetailPageTest(TestCase):
             mail.outbox[0].subject,
             '[Django] ERROR: test-person - Too many NA memberships (2)',
             )
+
+@attr(country='kenya')
+class FacebookSurveyTreatmentTest(TestCase):
+
+    def test_social_treatment_page(self):
+        response = self.client.get('/fb/social')
+        self.assertContains(response, 'Social Media Around The World')
+
+    def test_social_thanks_page(self):
+        response = self.client.get('/fb/social/thanks')
+        self.assertContains(response, 'Thanks for responding')
+
+    def test_politics_treatment_page(self):
+        response = self.client.get('/fb/politics')
+        self.assertContains(response, 'The National Assembly of Kenya')
+
+    def test_politics_thanks_page(self):
+        response = self.client.get('/fb/politics/thanks')
+        self.assertContains(response, 'government in Kenya on Mzalendo.com')
