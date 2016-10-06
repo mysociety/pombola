@@ -22,3 +22,17 @@ class CleanHTMLTest(TestCase):
                     'Hello and <script>alert("Bad!");</script> goodbye'
                 })),
             '<p>Hello and  goodbye</p>')
+
+    def test_empty_string_should_not_error(self):
+        template = Template(
+            '{% load clean_html %}{{ answer_text|as_clean_html|safe }}')
+        self.assertEqual(
+            template.render(Context({'answer_text': ''})),
+            '<p></p>')
+
+    def test_all_whitespace_string_should_not_error(self):
+        template = Template(
+            '{% load clean_html %}{{ answer_text|as_clean_html|safe }}')
+        self.assertEqual(
+            template.render(Context({'answer_text': '  '})),
+            '<p></p>')

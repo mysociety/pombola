@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load pipeline %}
 {% load i18n %}
+{% load clean_html %}
 
 {% block js_end_of_body %}
   {{ block.super }}
@@ -51,7 +52,7 @@
             <h2>
                 <a href="{{ speech.section.get_absolute_url }}#s{{ speech.answer.id }}">Reply from the {{ speech.questionto }} on {{ speech.answer.start_date }}</a>
             </h2>
-            <div class="speech-text">{{ speech.answer.text|truncatewords:64 }} <a href="{{ speech.section.get_absolute_url }}#s{{ speech.answer.id }}">More &#187;</a></div>
+            <div class="speech-text">{{ speech.answer.text|as_clean_html|safe|truncatewords_html:64 }} <a href="{{ speech.section.get_absolute_url }}#s{{ speech.answer.id }}">More &#187;</a></div>
         </div>
       {% endif %}
     </div>
