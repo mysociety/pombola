@@ -1089,7 +1089,7 @@ class SAQuestionIndex(TemplateView):
                 'slug': minister.slug
                 })
 
-        context['orderby'] = 'recentquestions'
+        context['orderby'] = 'recentanswers'
         context['minister'] = 'all'
         context['q'] = ''
 
