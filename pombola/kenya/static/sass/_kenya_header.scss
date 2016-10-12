@@ -13,23 +13,23 @@
   }
 }
 
-$logo-height-small: 23px;
-$logo-width-small: 117px;
-$logo-height-large: 35px;
-$logo-width-large: 180px;
+$logo-height-small: 25px;
+$logo-width-small: 103px;
+$logo-height-large: 40px;
+$logo-width-large: 165px;
 
 #site-header {
-  background-image: none; /* remove gradient */
-  background-color: $colour_primary_mid;
+  background-image: none; // remove gradient
+  background-color: $colour_deep_green;
 }
 
 .logo {
-    height: $logo-height-small;
+    height: 35px;
     width: $logo-width-small;
     margin-left: 20px;
-    padding: 10px 0;
     display: inline-block;
-    @media only all and (min-width: 640px), print {
+
+    @media (min-width: 640px), print {
         height: $logo-height-large;
         width: $logo-width-large;
         top: 10px;
@@ -41,34 +41,39 @@ $logo-width-large: 180px;
 
 .site-logo-svg {
     display: none;
-}
 
-.site-logo-svg__svg {
-    height: $logo-height-small;
-    width: $logo-width-small;
-    @media only all and (min-width: 640px), print {
-        height: $logo-height-large;
-        width: $logo-width-large;
+    .svg & {
+        display: inline-block;
+    }
+
+    svg {
+        height: $logo-height-small;
+        width: $logo-width-small;
+        margin-top: (35px - $logo-height-small) * 0.5;
+
+        @media (min-width: 640px), print {
+            height: $logo-height-large;
+            width: $logo-width-large;
+            margin-top: 0;
+        }
     }
 }
 
-.svg .site-logo-svg {
-    display: inline-block;
-}
-
 .no-svg-fallback-logo {
-    background: url('/static/images/mzalendo-logo.png') left center no-repeat;
+    background: url('/static/images/mzalendo-logo-small.png') left center no-repeat;
     background-size: $logo-width-small;
     overflow: hidden;
     text-indent: 150%;
     white-space: nowrap;
-    @media only all and (min-width: 640px), print {
+
+    @media (min-width: 640px), print {
+        background-image: url('/static/images/mzalendo-logo-large.png');
         background-size: $logo-width-large;
     }
-}
 
-.svg .no-svg-fallback-logo {
-    display: none !important;
+    .svg & {
+        display: none !important;
+    }
 }
 
 #tagline {
