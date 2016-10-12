@@ -19,8 +19,32 @@ $logo-height-large: 40px;
 $logo-width-large: 165px;
 
 #site-header {
-  background-image: none; // remove gradient
-  background-color: $colour_deep_green;
+    background-image: none; // remove gradient
+    background-color: $colour_deep_green;
+
+    // Black and red "wedges" either side of the header in modern browsers.
+    //
+    // This requires multiple backgrounds (a linear-gradient for the infinite
+    // length black and red edges, and a fixed width image for the 1060px
+    // black-green-red central portion).
+    // Pretty much all browsers which support multiple backgrounds also
+    // support SVG, so there's no need for PNG fallbacks here.
+    // We do however have to provide a few different gradient syntaxes.
+    //
+    // Browsers that don't support multiple backgrounds (IE7-8, mainly)
+    // will fall back to just the plain green header.
+    // Browsers that don't support gradients (IE9, mainly) will ignore
+    // the entire background-image rule and fall back to plain green too.
+
+    @media (min-width: 960px) {
+        background-image: url('/static/images/mzalendo-header-background.svg'), -webkit-linear-gradient(90deg, #000 50%, #C32810 50%);
+        background-image: url('/static/images/mzalendo-header-background.svg'), linear-gradient(90deg, #000 50%, #C32810 50%);
+        // SVG should be 1060px wide and 100% height of #site-header,
+        // while gradient should be 100% width of #site-header.
+        background-size: 1060px 100%, 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
 }
 
 .logo {

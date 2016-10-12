@@ -2,6 +2,7 @@
 
 $no-frills-menu-breakpoint: 840px;
 $no-menu-breakpoint: 640px;
+$menu-background-color: #f2f0e7;
 
 #main-menu {
   display: none; // Don't show this menu at all by default
@@ -9,12 +10,23 @@ $no-menu-breakpoint: 640px;
     display: block;
   }
 
-  background: #444;
+  background: $menu-background-color;
+
+  body.women &,
+  body.shujaaz & {
+    // These pages have pale yellow body backgrounds, so add a border
+    // to give some contrast between the menu and the page content.
+    border-bottom: 1px solid darken($menu-background-color, 5%);
+  }
 
   nav {
     width: 100%;
     max-width: 980px; /* override default 960px, to account for padding on list items */
     text-align: center;
+
+    a {
+      color: #444;
+    }
 
     a,
     & > ul > li > a {
@@ -63,7 +75,7 @@ $no-menu-breakpoint: 640px;
         &:hover > a,
         & > a:hover,
         & > a:focus {
-          background: #666;
+          background: darken($menu-background-color, 10%);
         }
       }
     }
@@ -84,7 +96,6 @@ $no-menu-breakpoint: 640px;
       a {
         display: block;
         padding: 8px 10px;
-        color: #000;
         text-decoration: none;
         background: transparent; // override pombola default of #f6f6f6
 
@@ -106,18 +117,12 @@ $no-menu-breakpoint: 640px;
         height: 0;
         width: 0;
         border: 4px solid transparent;
-        border-top-color: #777;
+        border-top-color: mix(#000, $menu-background-color, 50%);
 
         @media only all and (max-width: $no-frills-menu-breakpoint) {
           display: none;
         }
       }
-    }
-
-    .has-submenu:hover > a:after,
-    .has-submenu > a:hover:after,
-    .has-submenu > a:focus:after {
-      border-top-color: #999;
     }
   }
 }
