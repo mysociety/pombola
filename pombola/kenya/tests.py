@@ -393,17 +393,17 @@ class PersonDetailPageTest(TestCase):
 class FacebookSurveyTreatmentTest(TestCase):
 
     def test_social_treatment_page(self):
-        response = self.client.get('/fb/social')
-        self.assertContains(response, 'Social Media Around The World')
+        response = self.client.get('/fb/oceans')
+        self.assertContains(response, 'The Oceans of the World')
 
     def test_social_thanks_page(self):
-        response = self.client.get('/fb/social/thanks')
-        self.assertContains(response, 'Thanks for responding')
+        response = self.client.get('/fb/oceans/thanks')
+        self.assertContains(response, 'Learning more about the Oceans of the world can be very interesting.')
 
     def test_politics_treatment_page(self):
         response = self.client.get('/fb/politics')
-        self.assertContains(response, 'The National Assembly of Kenya')
+        self.assertContains(response, 'Your Vote Your Representative')
 
     def test_politics_thanks_page(self):
         response = self.client.get('/fb/politics/thanks')
-        self.assertContains(response, 'government in Kenya on Mzalendo.com')
+        self.assertContains(response, 'Your active participation makes democracy work in Kenya.')

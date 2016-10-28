@@ -19,24 +19,24 @@ AREA_ID_TO_OFFICE = {
 }
 
 
-class TreatmentSocial(TemplateView):
+class TreatmentPlacebo(TemplateView):
 
-    template_name = 'facebook-experiment-social.html'
+    template_name = 'facebook-experiment-placebo.html'
 
     def get(self, request, *args, **kwargs):
         self.survey_session = request.GET.get('sid')
 
-        return super(TreatmentSocial, self).get(request, *args, **kwargs)
+        return super(TreatmentPlacebo, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(TreatmentSocial, self).get_context_data(**kwargs)
+        context = super(TreatmentPlacebo, self).get_context_data(**kwargs)
         context['sid'] = self.survey_session
         return context
 
 
-class TreatmentSocialThanks(TemplateView):
+class TreatmentPlaceboThanks(TemplateView):
 
-    template_name = 'facebook-experiment-social-thanks.html'
+    template_name = 'facebook-experiment-placebo-thanks.html'
 
 
 class TreatmentPolitics(TemplateView):
