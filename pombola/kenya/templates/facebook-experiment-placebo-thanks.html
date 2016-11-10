@@ -2,16 +2,12 @@
 {% load pipeline %}
 {% load staticfiles %}
 
-{% block title %}The National Assembly of Kenya{% endblock %}
+{% block title %}Thanks for responding{% endblock %}
 
 {% block body_attributes %}class="facebook-experiment-page"{% endblock %}
 
 {% block header %}
-    <header id="site-header">
-        <div class="wrapper">
-            {% include "site_header_logo.html" %}
-        </div>
-    </header>
+    {# Intentionally omited on placebo page #}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -27,23 +23,22 @@
 </div>
 
 <footer>
-    <p>Your active participation makes democracy work in Kenya. Keep an eye on the Parliament - visit <a data-logbooktag="politics_thanks_mzalendo" href="/">mzalendo.com</a>.</p>
+    <p>Learning more about the Oceans of the world can be very interesting. Please visit the <a data-logbooktag="oceans_thanks_unoceans" href="http://www.unoceans.org/about/">United Nations site for Ocean monitoring</a>.
+</p>
 
+    <p>Find an ocean of the world you are interested in.</p>
 
-    <p>Find your Representatives and see what they say while in Parliament!</p>
-
-    <p><a data-logbooktag="politics_thanks_button" href="/" class="button">Click here to go there</a></p>
+    <p><a data-logbooktag="oceans_thanks_button" href="http://www.unoceans.org/about/" class="button">Click here to go there</a></p>
 </footer>
 
 {% endblock %}
 
 {% block js_end_of_body %}
     {{ block.super }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     {% javascript 'facebook-experiment' %}
     <script>
         $(function(){
-            recordPageHit('politics-thanks');
+            recordPageHit('placebo-thanks');
         });
     </script>
 {% endblock %}
