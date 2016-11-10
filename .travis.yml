@@ -20,9 +20,11 @@ addons:
     - yui-compressor
 
 install:
+  - pip install -U pip
   - bundle install --deployment --path ../gems --binstubs ../gem-bin
   # Now install the rest of the required Python packages:
-  - CFLAGS="-O0" pip install -r requirements.txt --use-mirrors
+  - CFLAGS="-O0" pip install -r requirements.txt
+  - pip check
   # Create a basic general.yml file:
   - sed -r
     -e "s,(POMBOLA_DB_USER:) 'sayit',\\1 'postgres',"
