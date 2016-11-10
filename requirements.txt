@@ -68,7 +68,7 @@ Fabric==1.10.1
 django-bootstrap-pagination
 
 git+git://github.com/nathforge/django-mechanize.git@d9537ccf8cc66bc7913df0c95fd532699ec88fdc
-selenium==2.44
+selenium==2.53.6
 django-selenium==0.9.7
 
 # Hansard parsing is quite particular
