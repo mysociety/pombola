@@ -32,7 +32,7 @@ sorl-thumbnail==12.3
 django_date_extensions==0.1dev
 django-ajax-selects==1.4.2
 django-autocomplete-light==2.3.3
-django-slug-helpers==0.0.2
+django-slug-helpers==0.0.3
 django-file-archive==0.0.2
 django-info-pages==0.0.2
 
@@ -90,7 +90,7 @@ mysociety-django-sluggable==0.2.7
 mysociety-django-popolo==0.0.5
 mysociety-django-images==0.0.6
 
-python-dateutil==2.3
+python-dateutil==2.4.2
 
 # Packages that are helpful for development:
 coverage==3.7.1
