@@ -84,7 +84,7 @@ python-memcached==1.53
 # Note, if the subsequent -e are ever removed, please remove manually from virtualenv/src !
 django-sayit==1.4
 mysociety-django-sluggable==0.2.7
--e git+git://github.com/mysociety/za-hansard.git@a6f1e8b2abb1f692e8b35dbc4c9347d9da277dcd#egg=za-hansard
+-e git+git://github.com/mysociety/za-hansard.git@5e2e501955232d253283be9b84f38a2e72ad858c#egg=za-hansard
 -e git+git://github.com/mysociety/popolo-name-resolver@a6fca27e080acdb475e6fd2e1382592b0c0a0fc5#egg=popolo-name-resolver
 
 mysociety-django-popolo==0.0.5
