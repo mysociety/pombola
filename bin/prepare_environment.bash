@@ -39,8 +39,7 @@ curl -L -s https://raw.github.com/mysociety/commonlib/master/bin/get_pip.bash | 
 # used to be required, but which would now cause problems, aren't present:
 pip uninstall -y PIL || true
 pip uninstall -y South || true
-# FIXME: temporarily remove installation of new packages to avoid dependency errors with the new version of pip
-# CFLAGS="-O0" pip install -r requirements.txt
+CFLAGS="-O0" pip install -r requirements.txt
 
 # make sure that there is no old code (the .py files may have been git deleted)
 find . -name '*.pyc' -delete
