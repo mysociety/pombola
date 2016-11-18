@@ -38,6 +38,8 @@ django-info-pages==0.0.2
 
 Markdown==2.5.1
 
+lxml==3.6.2
+
 # Note that django-markitup (for v2.1 at least) adds a recent jQuery (v2.0.3) to
 # the admin pages, which other code then relies on, for example the
 # django-autocomplete-light. If removing/changing this requirement please ensure
