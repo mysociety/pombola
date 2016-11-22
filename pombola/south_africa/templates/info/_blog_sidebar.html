@@ -18,7 +18,7 @@
       <h3>Popular posts</h3>
 
       <ul>
-        {% for post in popular_posts|slice:":5" %}
+        {% for post in popular_recent_posts|slice:":5" %}
           <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
         {% empty %}
           <li>No recent popular posts found.</li>
