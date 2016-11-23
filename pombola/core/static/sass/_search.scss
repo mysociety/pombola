@@ -118,7 +118,15 @@
       width: 25%;
     }
   }
+}
 
+.people-list-inline-search {
+  margin: 2em 0 2.5em 0; // search input needs to stand out on crowded person list page
+
+  label {
+    display: block;
+    margin-bottom: 0.5em;
+  }
 }
 
 .advanced-search-options {
