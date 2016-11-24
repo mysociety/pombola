@@ -612,3 +612,20 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     'PAGE_SIZE': 10,
 }
+
+# The feature of the ./manage.py shell_plus command in
+# django-extensions that automatically imports the models from your
+# django applications is very useful, but there are some name
+# conflicts.  e.g. Person unhelpfully is the django-popolo Person
+# model, not the Pombola core person model. This setting allows you to
+# specify a prefix for all the models imported from a particular
+# app. For example, this means that the django-popolo Person model is
+# now available under the 'popolo_Person' alias, and 'Person' refers
+# to the Pombola core person.
+
+SHELL_PLUS_APP_PREFIXES = {
+    'popolo': 'popolo',
+    'speeches': 'speeches',
+    'scorecards': 'scorecards',
+    'interests_register': 'interests',
+}
