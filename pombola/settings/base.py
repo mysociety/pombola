@@ -628,4 +628,5 @@ SHELL_PLUS_APP_PREFIXES = {
     'speeches': 'speeches',
     'scorecards': 'scorecards',
     'interests_register': 'interests',
+    'place_data': 'place_data',
 }
