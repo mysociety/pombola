@@ -98,7 +98,7 @@ python-dateutil==2.4.2
 # Packages that are helpful for development:
 coverage==3.7.1
 django-debug-toolbar==1.4
-django-extensions==1.6.1
+django-extensions==1.7.4
 
 ## votematch
 django-model-utils==2.3.1
@@ -134,7 +134,7 @@ parslepy==0.2.0
 python-magic==0.4.6
 pytz==2014.10
 simplejson==3.6.5
-six==1.8
+six==1.10.0
 slumber==0.6.2
 sqlparse==0.1.14
 virtualenv==1.11.6
