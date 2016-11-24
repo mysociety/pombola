@@ -34,7 +34,7 @@ django-ajax-selects==1.4.2
 django-autocomplete-light==2.3.3
 django-slug-helpers==0.0.3
 django-file-archive==0.0.2
-django-info-pages==0.0.4
+django-info-pages==0.0.5
 
 Markdown==2.5.1
 

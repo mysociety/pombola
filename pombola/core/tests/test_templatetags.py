@@ -1,5 +1,6 @@
 # coding=UTF-8
 
+from django.template import Context, Template
 from django.test import TestCase
 
 from ..templatetags.breadcrumbs import breadcrumbs, path_element_overrides
@@ -71,3 +72,30 @@ class ActiveClassTest(TestCase):
             self.assertEqual(' active ', actual)
 
         self.assertEqual(active_class('/foo', 'home'), '')
+
+
+class GetFromKeyTest(TestCase):
+    def test_gets_existing_key_from_dictionary(self):
+        example_dict = {'foo': 'bar'}
+        template = Template("{% load get_from_key %}{{ d|get_from_key:'foo' }}")
+        self.assertEqual(
+            template.render(Context({'d': example_dict})), 'bar')
+
+    def test_fails_if_key_is_not_present(self):
+        example_dict = {'foo': 'bar'}
+        template = Template("{% load get_from_key %}{{ d|get_from_key:'qux' }}")
+        self.assertEqual(
+            template.render(Context({'d': example_dict})), '')
+
+    # This is to check that get_from_key works for classes that don't implement
+    # get, for example
+    def test_gets_dynamically_generated_value_from_key(self):
+        example_dict_like = LazyDictLike()
+        template = Template("{% load get_from_key %}{{ d|get_from_key:'foo' }}")
+        self.assertEqual(
+            template.render(Context({'d': example_dict_like})), 'foofoo')
+
+
+class LazyDictLike(object):
+    def __getitem__(self, key):
+        return key + key

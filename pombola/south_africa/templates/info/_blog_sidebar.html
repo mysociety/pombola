@@ -1,3 +1,5 @@
+{% load get_from_key %}
+
 <div class="sidebar">
 
     <ul class="social-links-list">
@@ -25,5 +27,17 @@
         {% endfor %}
       </ul>
     {% endif %}
+
+    {% with must_read_posts=posts_by_tag|get_from_key:'must-read' %}
+      {% if must_read_posts %}
+      <h3>Must Read</h3>
+
+      <ul>
+        {% for post in must_read_posts %}
+          <li><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    {% endwith %}
 
 </div>
