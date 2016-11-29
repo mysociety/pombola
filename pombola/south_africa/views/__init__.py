@@ -1,3 +1,4 @@
+from .attendance import *
 from .constants import *
 from .elections import *
 from .geolocalization import *
