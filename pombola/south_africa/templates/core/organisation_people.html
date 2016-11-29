@@ -31,10 +31,9 @@
       </div>
     </div>
 
-    {% regroup sorted_positions by person as regroup_on_person_list %}
-
     <div class="column major-column">
       {% include 'core/_alphabetical_pagination.html' %}
+      {% regroup sorted_positions by person as regroup_on_person_list %}
       <div class="list-of-things list-of-people">
           {% autopaginate regroup_on_person_list %}
 
