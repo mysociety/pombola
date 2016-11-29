@@ -2,6 +2,7 @@ from .constants import *
 from .elections import *
 from .geolocalization import *
 from .home import *
+from .interests import *
 from .organisations import *
 from .person import *
 from .search import *
