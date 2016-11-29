@@ -38,15 +38,12 @@ from info.views import InfoBlogView
 from speeches.models import Section, Speech, Speaker, Tag
 from speeches.views import NamespaceMixin, SpeechView, SectionView
 
-from info.models import (
-    InfoPage, Category as BlogCategory, Tag as BlogTag
-)
 from info.views import InfoPageView
 
 from slug_helpers.views import SlugRedirect
 
 from pombola.core import models
-from pombola.core.views import (HomeView, BasePlaceDetailView, PlaceDetailView,
+from pombola.core.views import (BasePlaceDetailView, PlaceDetailView,
     PlaceDetailSub, OrganisationDetailView, PersonDetail, PlaceDetailView,
     OrganisationDetailSub, CommentArchiveMixin, PersonSpeakerMappingsMixin,
     filter_by_alphabet
@@ -82,38 +79,6 @@ CONSTITUENCY_OFFICE_PLACE_KIND_SLUGS = (
     'constituency-area', # specific to DA party
 )
 
-
-class SAHomeView(HomeView):
-
-    def get_context_data(self, **kwargs):
-        context = super(SAHomeView, self).get_context_data(**kwargs)
-
-        articles = InfoPage.objects.filter(
-            kind=InfoPage.KIND_BLOG).order_by("-publication_date")
-
-        articles_for_front_page = \
-            InfoPage.objects.filter(
-                categories__slug__in=(
-                    'week-parliament',
-                    'impressions'
-                )
-            ).order_by('-publication_date')
-
-        context['news_articles'] = articles_for_front_page[:2]
-
-        try:
-            c = BlogCategory.objects.get(slug='mp-corner')
-            context['mp_corner'] = articles.filter(categories=c)[0]
-        except (BlogCategory.DoesNotExist, IndexError):
-            context['mp_corner'] = None
-
-        try:
-            context['infographics'] = BlogTag.objects.get(name='infographic'). \
-                entries.order_by('-created')[0:4]
-        except BlogTag.DoesNotExist:
-            context['infographics'] = []
-
-        return context
 
 class SAGeocoderView(GeocoderView):
 
