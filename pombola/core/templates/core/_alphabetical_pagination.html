@@ -1,21 +1,29 @@
-<ol class="alphabet-links">
-    <li>
-      {% if current_name_prefix %}
-        <a class="alphabet-links__link" href='.{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>All</a>
-      {% else %}
-        <span class="alphabet-links__link alphabet-links__link--current">All</span>
-      {% endif %}
-    </li>
+{% load add_query_parameter %}
 
-  {% for letter, count in count_by_prefix %}
-    <li>
-      {% if letter == current_name_prefix %}
-        <span class="alphabet-links__link alphabet-links__link--current">{{ letter }}</span>
-      {% elif count %}
-        <a class="alphabet-links__link" href='{{ letter }}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>{{ letter }}</a>
-      {% else %}
-        <span class="alphabet-links__link alphabet-links__link--disabled">{{ letter }}</span>
-      {% endif %}
-    </li>
-  {% endfor %}
-</ol>
+{% if count_by_prefix %}
+  <ol class="alphabet-links">
+      <li>
+        {% if current_name_prefix %}
+          <a class="alphabet-links__link" href='.{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>All</a>
+        {% else %}
+          <span class="alphabet-links__link alphabet-links__link--current">All</span>
+        {% endif %}
+      </li>
+
+    {% for letter, count in count_by_prefix %}
+      <li>
+        {% if letter == current_name_prefix %}
+          <span class="alphabet-links__link alphabet-links__link--current">{{ letter }}</span>
+        {% elif count %}
+          {% if alphabetical_link_from_query_parameter %}
+            <a class="alphabet-links__link" href="?{% add_query_parameter request 'letter' letter %}">{{ letter }}</a>
+          {% else %}
+            <a class="alphabet-links__link" href='{{ letter }}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>{{ letter }}</a>
+          {% endif %}
+        {% else %}
+          <span class="alphabet-links__link alphabet-links__link--disabled">{{ letter }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+{% endif %}

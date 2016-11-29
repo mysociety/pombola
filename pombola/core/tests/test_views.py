@@ -269,6 +269,30 @@ class PositionViewTest(WebTest):
             ['John Much Earlier'],
         )
 
+    def test_shows_alphabetical_pagination_if_query_param_present(self):
+        response = self.app.get('/position/test-title/foo/?a=1')
+        self.assertEqual(
+            len(response.html.findAll('ol', {'class': 'alphabet-links'})), 1)
+
+    def test_shows_alphabetical_pagination_if_query_param_present_with_others(self):
+        response = self.app.get(
+            '/position/test-title/foo/?order=name&a=1')
+        self.assertEqual(
+            len(response.html.findAll('ol', {'class': 'alphabet-links'})), 1)
+
+    def test_does_not_show_alphabetical_pagination_if_no_query_param(self):
+        response = self.app.get('/position/test-title/foo/')
+        self.assertEqual(
+            len(response.html.findAll('ol', {'class': 'alphabet-links'})), 0)
+        self.assertNotIn('alphabetical_link_from_query_parameter', response.context)
+
+    def test_letters_link_to_the_right_url_if_query_param_present(self):
+        response = self.app.get('/position/test-title/foo/?order=name&a=1')
+        ol = response.html.find('ol', {'class': 'alphabet-links'})
+        link = ol.find('a', text='P')['href']
+        self.assertEqual(link, '?a=1&order=name&letter=P')
+        self.assertTrue(response.context['alphabetical_link_from_query_parameter'])
+
 
 class TestPersonView(WebTest):
 

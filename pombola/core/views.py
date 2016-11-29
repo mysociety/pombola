@@ -480,18 +480,26 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         places.extend(parent_places)
         places.extend(child_places)
 
+    context = {
+        'object':     title,
+        'page_title': page_title,
+        'order':      request.GET.get('order'),
+        'places':     places,
+        'place_slug': place_slug,
+        'session': session,
+        'session_details': session_details,
+    }
+
+    if request.GET.get('a') == '1':
+        positions, extra_context = filter_by_alphabet(
+            request.GET.get('letter'), positions)
+        context.update(extra_context)
+        context['alphabetical_link_from_query_parameter'] = True
+    context['positions'] = positions
+
     return render_to_response(
         template,
-        {
-            'object':     title,
-            'page_title': page_title,
-            'positions':  positions,
-            'order':      request.GET.get('order'),
-            'places':     places,
-            'place_slug': place_slug,
-            'session': session,
-            'session_details': session_details,
-        },
+        context,
         context_instance=RequestContext(request)
     )
 
