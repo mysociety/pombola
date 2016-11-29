@@ -85,7 +85,7 @@
   {% if include_sub_menu_entries %}
     <ul id="extras-overview" class="js-hover-dropdown" role="menu">
       <li><a href="{% url 'mp-attendance' %}" role="menuitem">MP attendance</a></li>
-      <li><a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name" role="menuitem">MP profiles</a></li>
+      <li><a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name&amp;a=1" role="menuitem">MP profiles</a></li>
       <li><a href="{% url 'sa-interests-index' %}" role="menuitem">MP assets</a></li>
       <li><a href="{% url 'info_blog_category' slug='mp-corner' %}" role="menuitem">MP Corner</a></li>
       <li><a href="{% url 'info_page' slug="infographics" %}" role="menuitem">Infographics</a></li>
