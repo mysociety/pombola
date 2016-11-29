@@ -1,9 +1,4 @@
-import warnings
-
-from django.utils.translation import ugettext_lazy as _
-
-from info.views import InfoBlogView
-from info.views import InfoPageView
+from info.views import InfoBlogView, InfoPageView
 
 from pombola.core.views import CommentArchiveMixin
 
