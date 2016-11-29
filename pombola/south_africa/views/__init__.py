@@ -1,4 +1,5 @@
 from .constants import *
+from .elections import *
 from .geolocalization import *
 from .home import *
 from .organisations import *
