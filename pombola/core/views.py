@@ -11,6 +11,7 @@ import datetime
 import os
 import random
 import json
+import string
 import sys
 import subprocess
 from urlparse import urlsplit, urlunsplit
@@ -271,6 +272,45 @@ class PlaceKindList(ListView):
             all_kinds = models.PlaceKind.objects.all(),
         )
         return context
+
+
+def positions_count_for_letter(positions):
+    """Count positions by inital letter of the holders' names
+
+    Given a queryset of positions, this will return a list of tuples
+    where each is (letter, position_count); this groups together and
+    counts the positions held by people whose sort_name has the same
+    initial letter.
+    """
+    return [
+        (letter, positions.person_sort_name_prefix(letter).count())
+        for letter in string.ascii_uppercase
+    ]
+
+
+def filter_by_alphabet(prefix_letter, position_qs):
+    """A helper for producing an alpabetic grouping of positions
+
+    We sometimes wish to list the people holding particular positions
+    grouped by the first letter of their sort_name - this makes it
+    easier to navigate to the person you're looking for. This function
+    helps to generate context values for rending such a menu and the
+    right positions / people.
+
+    'prefix_letter' should either be a letter of the alphabet (if you
+    only want people starting with that letter returned) or None if
+    all positions should be returned (no filtering).  This returns
+    both that filtered position queryset and a dictionary of helpful
+    values for the context for rendering the alphabetic menu.
+    """
+    extra_context = {}
+    extra_context['count_by_prefix'] = \
+        positions_count_for_letter(position_qs)
+    extra_context['current_name_prefix'] = prefix_letter
+    if prefix_letter:
+        position_qs = position_qs.filter(
+            person__sort_name__istartswith=prefix_letter)
+    return position_qs, extra_context
 
 def position_pt(request, pt_slug):
     """Show current positions with a given PositionTitle"""

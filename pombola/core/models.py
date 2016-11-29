@@ -1261,6 +1261,10 @@ class PositionQuerySet(models.query.GeoQuerySet):
                       key=lambda p: p.name)
         return result
 
+    def person_sort_name_prefix(self, prefix):
+        """Filter by a prefix of the person's sort_name"""
+        return self.filter(person__sort_name__istartswith=prefix)
+
 
 class Position(ModelBase, IdentifierMixin):
     category_choices = (
