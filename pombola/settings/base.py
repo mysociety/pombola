@@ -550,12 +550,12 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/hide-reveal.js',
     },
-    'survey': {
-        'source_filenames': (
-            'js/survey.js',
-        ),
-        'output_filename': 'js/survey.js',
-    },
+    # 'survey': {
+    #     'source_filenames': (
+    #         'js/survey.js',
+    #     ),
+    #     'output_filename': 'js/survey.js',
+    # },
 }
 
 # Only for debugging compression (the default is: 'not DEBUG' which is
