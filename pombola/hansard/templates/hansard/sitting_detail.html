@@ -28,6 +28,9 @@
 
                     {% if entry.speaker %}
                         <strong><a href="{{ entry.speaker.get_absolute_url }}">{{ entry.speaker.name }}</a></strong>
+                        {% if show_original_name %}
+                        <i>[Original name: {{ entry.speaker_name }}]</i>
+                        {% endif %}
                     {% else %}
                         <strong>{{ entry.speaker_name }}</strong>
                     {% endif %}
@@ -52,5 +55,14 @@
     </ul>
 
     {% endwith %}
+
+    {% if display_original_name_option %}
+    <div class="search-filters">
+      <form>
+        <input type="checkbox" id="show_original_name" name="show_original_name" value="1"{% if show_original_name %} checked{% endif %}><label for="show_original_name">Show original speaker names from Hansard</label>
+        <input type="submit" value="Reload">
+      </form>
+    </div>
+    {% endif %}
 
 {% endblock %}
