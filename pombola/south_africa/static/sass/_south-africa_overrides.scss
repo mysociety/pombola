@@ -1610,6 +1610,7 @@ ul.pager {
   @include unstyled-list;
   @include clearfix;
   font-size: 0.9em;
+  margin-top: 1em;
 }
 
 .alphabet-links__link {

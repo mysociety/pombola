@@ -1,5 +1,6 @@
 # coding=UTF-8
 
+from django.http import QueryDict
 from django.template import Context, Template
 from django.test import TestCase
 
@@ -99,3 +100,29 @@ class GetFromKeyTest(TestCase):
 class LazyDictLike(object):
     def __getitem__(self, key):
         return key + key
+
+
+class AddQueryParameterTest(TestCase):
+    def test_adds_query_parameters_when_there_are_none(self):
+        request  = RequestFake('')
+        template = Template("{% load add_query_parameter %}{% add_query_parameter request 'parameter' 'value' %}")
+        self.assertEqual(
+            template.render(Context({'request': request})), 'parameter=value')
+
+    def test_adds_query_parameters_to_the_existing_ones(self):
+        request  = RequestFake('parameter=value')
+        template = Template("{% load add_query_parameter %}{% add_query_parameter request 'foo' 'bar' %}")
+        self.assertEqual(
+            template.render(Context({'request': request})),
+            'foo=bar&parameter=value')
+
+    def test_overwrites_query_parameters_if_they_exist(self):
+        request  = RequestFake('parameter=value')
+        template = Template("{% load add_query_parameter %}{% add_query_parameter request 'parameter' 'bar' %}")
+        self.assertEqual(
+            template.render(Context({'request': request})), 'parameter=bar')
+
+
+class RequestFake:
+    def __init__(self, query_parameters):
+        self.GET = QueryDict(query_parameters)
