@@ -503,7 +503,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
         self.assertEqual(
             context['attendance'],
-            [{'total': 28, 'percentage': 89.28571428571429, 'attended': 25, 'year': 2015},
+            [{'total': 28, 'percentage': 89.28571428571429, 'attended': 25, 'year': 2015    },
              {'total': 15, 'percentage': 93.33333333333333, 'attended': 14, 'year': 2014}],
             )
 
@@ -666,7 +666,7 @@ class SAAttendanceDataTest(TestCase):
             {'year': 2000,
             'attended': 60,
             'total': 63,
-            'percentage': 100*60/63,
+            'percentage': 100 * 60 / 63,
              }
             ]
 
@@ -682,12 +682,12 @@ class SAAttendanceDataTest(TestCase):
             {'year': 2001,
              'attended': 8,
              'total': 12,
-             'percentage': 100*8/12,
+             'percentage': 100 * 8 / 12,
              },
             {'year': 2000,
              'attended': 2,
              'total': 3,
-             'percentage': 100*2/3,
+             'percentage': 100 * 2 / 3,
              }
         ]
 
