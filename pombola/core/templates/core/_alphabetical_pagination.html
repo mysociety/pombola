@@ -14,7 +14,7 @@
       {% elif count %}
         <a class="alphabet-links__link" href='{{ letter }}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}'>{{ letter }}</a>
       {% else %}
-        <span class="alphabet-links__link alphabet-links__link--disabled">{{ letter }}</a>
+        <span class="alphabet-links__link alphabet-links__link--disabled">{{ letter }}</span>
       {% endif %}
     </li>
   {% endfor %}
