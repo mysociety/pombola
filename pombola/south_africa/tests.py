@@ -2025,3 +2025,39 @@ class SAUrlRoutingTest(TestCase):
     def test_za_home(self):
         match = resolve('/')
         self.assertEqual(match.func.func_name, 'SAHomeView')
+
+
+@attr(country='south_africa')
+class SAMPProfilesMainHeader(WebTest):
+    def setUp(self):
+        self.title1 = models.PositionTitle.objects.create(
+            name='Member',
+            slug='member',
+        )
+        self.organisation_kind1 = models.OrganisationKind.objects.create(
+            name='Parliament',
+            slug='parliament',
+        )
+        self.title2 = models.PositionTitle.objects.create(
+            name='Foo',
+            slug='foo',
+        )
+        self.organisation_kind2 = models.OrganisationKind.objects.create(
+            name='Bar',
+            slug='bar',
+        )
+
+    def test_mp_profiles_page_has_no_any_in_the_header(self):
+        response = self.app.get('/position/member/parliament/')
+        self.assertEqual(
+            response.html.find(class_='page-title').string, 'Members of Parliament')
+
+    def test_pages_with_other_ok_slug_have_any_in_the_header(self):
+        response = self.app.get('/position/member/bar/')
+        self.assertEqual(
+            response.html.find(class_='page-title').string, 'Member of any Bar')
+
+    def test_pages_with_other_position_title_have_any_in_the_header(self):
+        response = self.app.get('/position/foo/parliament/')
+        self.assertEqual(
+            response.html.find(class_='page-title').string, 'Foo of any Parliament')

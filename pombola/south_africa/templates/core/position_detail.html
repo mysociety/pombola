@@ -10,7 +10,11 @@
         <a href="{% url "position_pt" pt_slug=object.slug %}?view=grid{% if order %}&order={{order|urlencode}}{% endif %}">View as grid</a>
     </div>
 
+    {% if object.slug == 'member' and organisation_kind.slug == 'parliament' %}
+    <h1 class="page-title">Members of Parliament</h1>
+    {% else %}
     <h1 class="page-title">{{ page_title }}</h1>
+    {% endif %}
 
     <form action="{% url "core_search" %}">
         <div class="inline-search-box people-list-inline-search">
