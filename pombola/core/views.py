@@ -384,6 +384,8 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         possible_sessions = models.ParliamentarySession.objects.order_by('name')
 
     page_title = title.name
+
+    organisation_kind = None
     if o_slug:
         organisation = get_object_or_404(models.Organisation,
                                          slug=o_slug)
@@ -489,6 +491,9 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         'session': session,
         'session_details': session_details,
     }
+
+    if organisation_kind is not None:
+        context['organisation_kind'] = organisation_kind
 
     if request.GET.get('a') == '1':
         positions, extra_context = filter_by_alphabet(
