@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
 {% load hidden %}
+{% load za_people_display %}
 
 
 {% block title %}{{ object.name }} {{ party.slug.upper }} members{% endblock %}
@@ -60,11 +61,17 @@
                   {% endmaybehidden %}
 
                   {% for position in positions %}
-                      {{ position.title }}
-                      {% if position.place %}
+                      {% should_display_position position.organisation position.title as display_position %}
+                      {% if display_position %}
+                        {{ position.title }}
+                      {% endif %}
+                      {% should_display_place position.organisation as display_place %}
+                      {% if display_place and position.place %}
                           (<a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>)
                       {% endif %}
-                      <br/>
+                      {% if display_position or display_place and position.place %}
+                        <br/>
+                      {% endif %}
                   {% endfor %}
 
                 </li>
