@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load thumbnail %}
+{% load za_people_display %}
 
 <a href="{{ object.get_absolute_url }}">
     {% thumbnail object.primary_image "58x78" crop="center" as im %}
@@ -12,16 +13,19 @@
 </a>
 
 {% if not skip_positions %}
-  {% for place in object.position_set.all.current_unique_places %}
-      <div class="position-place">
-        <a href="{{ place.get_absolute_url }}">{{ place.name }}</a>
+  {% should_display_place organisation_kind as display_place %}
+  {% if display_place %}
+    {% for place in object.position_set.all.current_unique_places %}
+        <div class="position-place">
+          <a href="{{ place.get_absolute_url }}">{{ place.name }}</a>
 
-        {% if place.parent_place %}
-          <a href="{{ place.parent_place.get_absolute_url }}">{{ place.parent_place.name }}</a>
-          {{ place.parent_place.kind.name }}
-        {% endif %}
-      </div>
-  {% endfor %}
+          {% if place.parent_place %}
+            <a href="{{ place.parent_place.get_absolute_url }}">{{ place.parent_place.name }}</a>
+            {{ place.parent_place.kind.name }}
+          {% endif %}
+        </div>
+    {% endfor %}
+  {% endif %}
 {% endif %}
 
 {% if object.parties %}
