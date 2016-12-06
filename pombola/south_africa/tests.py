@@ -2061,3 +2061,41 @@ class SAMPProfilesMainHeader(WebTest):
         response = self.app.get('/position/foo/parliament/')
         self.assertEqual(
             response.html.find(class_='page-title').string, 'Foo of any Parliament')
+
+
+@attr(country='south_africa')
+class SAMPProfilesSubHeader(WebTest):
+    def setUp(self):
+        self.title1 = models.PositionTitle.objects.create(
+            name='Member',
+            slug='member',
+        )
+        self.organisation_kind1 = models.OrganisationKind.objects.create(
+            name='Parliament',
+            slug='parliament',
+        )
+        self.title2 = models.PositionTitle.objects.create(
+            name='Foo',
+            slug='foo',
+        )
+        self.organisation_kind2 = models.OrganisationKind.objects.create(
+            name='Bar',
+            slug='bar',
+        )
+
+    def test_mp_profiles_page_has_no_subheader(self):
+        response = self.app.get('/position/member/parliament/')
+        self.assertTrue(
+            response.html.find(class_='content_box').find('h3') is None)
+
+    def test_pages_with_other_ok_slug_have_the_subheader(self):
+        response = self.app.get('/position/member/bar/')
+        self.assertEqual(
+            response.html.find(class_='content_box').find('h3').string,
+            'Current Position Holders')
+
+    def test_pages_with_other_position_title_have_the_subheader(self):
+        response = self.app.get('/position/foo/parliament/')
+        self.assertEqual(
+            response.html.find(class_='content_box').find('h3').string,
+            'Current Position Holders')
