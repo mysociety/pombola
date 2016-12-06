@@ -2,7 +2,6 @@
 {% load pagination_tags %}
 {% load staticfiles %}
 {% load thumbnail %}
-{% load za_people_display %}
 
 
 {% block title %}{{ object.name }} People{% endblock %}
@@ -55,17 +54,7 @@
                   </a>
 
                   {% for position in positions %}
-                      {% should_display_position position.organisation position.title as display_position %}
-                      {% if display_position %}
-                        {{ position.title }}
-                      {% endif %}
-                      {% should_display_place position.organisation as display_place %}
-                      {% if display_place and position.place %}
-                          (<a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>)
-                      {% endif %}
-                      {% if display_position or display_place and position.place %}
-                        <br/>
-                      {% endif %}
+                    {% include "core/_person_position.html" %}
                   {% endfor %}
 
                 </li>
