@@ -1380,6 +1380,123 @@ class SAOrganisationDetailViewTestParliament(WebTest):
         self.assertEqual(ps_and_ps[1][1], 1)
         self.assertAlmostEqual(ps_and_ps[1][2], 33.333333333333)
 
+@attr(country='south_africa')
+class SAOrganisationDetailViewTestPlaceAndTitleDisplay(WebTest):
+
+    def setUp(self):
+        placekind = models.PlaceKind.objects.create(
+            name='Test Place Kind',
+            slug='test-place-kind',
+        )
+        self.place = models.Place.objects.create(
+            name='Test Place',
+            slug='test-place',
+            kind=placekind,
+        )
+        self.parliament_kind = models.OrganisationKind.objects.create(
+            name='Parliament',
+            slug='parliament')
+        self.party_kind = models.OrganisationKind.objects.create(
+            name='Party',
+            slug='party')
+        self.organisation = models.Organisation.objects.create(
+            kind=self.parliament_kind,
+            name='National Assembly',
+            slug='national-assembly')
+        self.other_organisation = models.Organisation.objects.create(
+            kind=self.parliament_kind,
+            name='Another Assembly',
+            slug='another-assembly')
+        self.ncop = models.Organisation.objects.create(
+            kind=self.parliament_kind,
+            name='National Council of Provinces',
+            slug='ncop')
+        self.party_random = models.Organisation.objects.create(
+            kind=self.party_kind,
+            name='Random Party',
+            slug='random-party')
+        self.party_another_random = models.Organisation.objects.create(
+            kind=self.party_kind,
+            name='Another Random Party',
+            slug='another-random-party')
+        self.person = models.Person.objects.create(
+            legal_name='Joe Bloggs',
+            slug='joe-bloggs')
+        self.person2 = models.Person.objects.create(
+            legal_name='Adam Smith',
+            slug='adam-smith')
+        self.person3 = models.Person.objects.create(
+            legal_name='John Smith',
+            slug='john-smith')
+        self.member_title = models.PositionTitle.objects.create(
+            name='Member',
+            slug='member')
+        self.speaker_title = models.PositionTitle.objects.create(
+            name='Speaker',
+            slug='speaker')
+        self.position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.organisation,
+            title=self.member_title,
+            place=self.place,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.position2 = models.Position.objects.create(
+            person=self.person2,
+            organisation=self.other_organisation,
+            title=self.member_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.position3 = models.Position.objects.create(
+            person=self.person3,
+            organisation=self.ncop,
+            title=self.member_title,
+            place=self.place,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+        self.speaker_position = models.Position.objects.create(
+            person=self.person,
+            organisation=self.organisation,
+            title=self.speaker_title,
+            start_date=ApproximateDate(2000, 1, 1),
+            end_date=ApproximateDate(future=True),
+        )
+
+    def test_positions(self):
+        response = self.app.get('/organisation/national-assembly/people/')
+
+        self.assertNotRegexpMatches(
+            str(response.html.find(class_='list-of-people').find('li')),
+            r'Member'
+        )
+
+        self.assertRegexpMatches(
+            str(response.html.find(class_='list-of-people').find('li')),
+            r'Speaker'
+        )
+
+        response = self.app.get('/organisation/another-assembly/people/')
+        self.assertRegexpMatches(
+            str(response.html.find(class_='list-of-people').find('li')),
+            r'Member'
+        )
+
+    def test_places(self):
+        response = self.app.get('/organisation/national-assembly/people/')
+        self.assertNotRegexpMatches(
+            str(response.html.find(class_='list-of-people').find('li')),
+            r'Test Place'
+        )
+
+        response = self.app.get('/organisation/ncop/people/')
+        self.assertRegexpMatches(
+            str(response.html.find(class_='list-of-people').find('li')),
+            r'Test Place'
+        )
+
 
 @attr(country='south_africa')
 class SAPlaceDetailViewTest(WebTest):
