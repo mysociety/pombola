@@ -24,6 +24,7 @@ install:
   - bundle install --deployment --path ../gems --binstubs ../gem-bin
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt
+  - pip install python-coveralls
   - pip check
   # Create a basic general.yml file:
   - sed -r
@@ -39,4 +40,7 @@ before_script:
   - ./manage.py collectstatic --noinput
 
 script:
-  - ./run-tests
+  - ./run-tests --coverage
+
+after_success:
+  - coveralls
