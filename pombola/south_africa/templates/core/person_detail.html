@@ -232,6 +232,11 @@
                   <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
                   <p class="attendance__context">Attended {{ data.attended }} meeting{{ data.attended|pluralize }} out of {{ data.total }}</p>
                 {% endfor %}
+
+                <p>MP attendance is compulsory unless an apology
+                is given. Minister/Deputy Minister attendance is
+                not compulsory.</p>
+
               </div>
 
               {% if latest_meetings_attended %}
