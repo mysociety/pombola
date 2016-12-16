@@ -45,6 +45,8 @@ class SAOrganisationDetailView(CommentArchiveMixin, OrganisationDetailView):
         if self.object.kind.slug == 'parliament':
             self.add_parliament_counts_to_context_data(context)
 
+        context['organisation_kind'] = self.object.kind
+
         # Sort the list of positions in an organisation by an approximation
         # of their holder's last name.
         context['positions'] = sorted(

@@ -54,11 +54,7 @@
                   </a>
 
                   {% for position in positions %}
-                      {{ position.title }}
-                      {% if position.place %}
-                          (<a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}</a>)
-                      {% endif %}
-                      <br/>
+                    {% include "core/_person_position.html" %}
                   {% endfor %}
 
                 </li>
