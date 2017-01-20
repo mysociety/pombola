@@ -96,7 +96,7 @@ class LatLonDetailBaseView(BasePlaceDetailView):
         mapit_json = r.json()
         if not mapit_json:
             return []
-        ward_id = mapit_json.values()[0]['name']
+        ward_id = mapit_json.values()[0]['codes']['MDB']
 
         # Then find the ward councillor from that ward ID. There
         # should only be one at the moment, but make it a list in case
