@@ -57,8 +57,11 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 # Check for any recurring data problems:
 47 4 * * * !!(*= $user *)!! run_management_command kenya_check_for_recurring_problems
 
-!!(* } elsif ($vhost eq 'nigeria.mzalendo.mysociety.org') { *)!!
+!!(* } elsif ($vhost eq 'www.shineyoureye.org') { *)!!
 10 7 * * * !!(*= $user *)!! run_management_command feedback_report_pending
+
+23 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.shineyoureye.org
+40 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.shineyoureye.org
 
 !!(* } elsif ($vhost eq 'za-pombola.staging.mysociety.org') { *)!!
 
