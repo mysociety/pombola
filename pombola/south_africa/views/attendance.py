@@ -87,7 +87,7 @@ class SAMpAttendanceView(TemplateView):
         context['year'] = str(
             dateutil.parser.parse(data[0]['end_date']).year)
         context['party'] = ''
-        context['position'] = 'all'
+        context['position'] = 'ministers'
 
         for key in ('year', 'party', 'position'):
             if key in self.request.GET:

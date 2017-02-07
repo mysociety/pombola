@@ -48,12 +48,12 @@
     <div class="col-50">
       <div class="filter radio">
         <label>
-          <input type="radio" name="position" value="all" {% if position == "all" %}checked{% endif %}/>
-          Show all MPs
-        </label>
-        <label>
           <input type="radio" name="position" value="ministers"{% if position == "ministers" %} checked{% endif %}/>
           Show ministers and deputy ministers
+        </label>
+        <label>
+          <input type="radio" name="position" value="all" {% if position == "all" %}checked{% endif %}/>
+          Show all MPs
         </label>
       </div>
     </div>
