@@ -8,6 +8,9 @@ from .constants import API_REQUESTS_TIMEOUT
 
 from django.core.cache import caches
 from django.views.generic import TemplateView
+from django.db.models import Q
+
+from pombola.core.models import Position
 
 
 class SAMpAttendanceView(TemplateView):
@@ -40,6 +43,32 @@ class SAMpAttendanceView(TemplateView):
         # is convenient for us.
         return results
 
+    def filter_attendance(self, annual_attendance, party, position):
+        """
+        Filter meeting attendance to only include items which match
+        the party and position selections by the user.
+        """
+        attendance_summary = annual_attendance['attendance_summary']
+        if party:
+            attendance_summary = [ma for ma in attendance_summary if
+                ma['member']['party_name'] == party]
+
+        if position == 'ministers':
+            active_ministers = Position.objects.filter(
+                Q(title__slug__startswith='minister') |
+                Q(title__slug__startswith='deputy-minister')
+            ).overlapping_dates(
+                annual_attendance['start_date'],
+                annual_attendance['end_date'])
+
+            active_minister_slugs = set(am.person.slug for am in active_ministers)
+
+            attendance_summary = [ma for ma in attendance_summary if
+                ma['member']['pa_url'] and
+                ma['member']['pa_url'].split('/')[-2] in active_minister_slugs]
+
+        return attendance_summary
+
     def get_context_data(self, **kwargs):
         data = self.download_attendance_data()
 
@@ -58,8 +87,9 @@ class SAMpAttendanceView(TemplateView):
         context['year'] = str(
             dateutil.parser.parse(data[0]['end_date']).year)
         context['party'] = ''
+        context['position'] = 'all'
 
-        for key in ('year', 'party'):
+        for key in ('year', 'party', 'position'):
             if key in self.request.GET:
                 context[key] = self.request.GET[key]
 
@@ -77,10 +107,8 @@ class SAMpAttendanceView(TemplateView):
                 parties.discard(None)
                 context['parties'] = sorted(parties)
 
-                attendance_summary = annual_attendance['attendance_summary']
-                if context['party']:
-                    attendance_summary = [mbr_att for mbr_att in attendance_summary if
-                        mbr_att['member']['party_name'] == context['party']]
+                attendance_summary = self.filter_attendance(
+                    annual_attendance, context['party'], context['position'])
 
                 aggregate_total = aggregate_present = 0
 
