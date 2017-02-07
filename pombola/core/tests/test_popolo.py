@@ -132,6 +132,10 @@ class PopoloTest(TestCase):
                     {
                         "scheme": u"some.schema",
                         "identifier": u"/person/someone"
+                    },
+                    {
+                        "scheme": u"pombola-slug",
+                        "identifier": u"test-person"
                     }
                 ],
                 "other_names": [

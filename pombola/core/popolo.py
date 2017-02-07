@@ -285,6 +285,13 @@ def get_people(primary_id_scheme, base_url, title_to_sessions, inline_membership
         add_identifiers_to_properties(person, person_properties, primary_id_scheme)
         add_contact_details_to_properties(person, person_properties)
         add_other_names(person, person_properties)
+
+        # always include the pombola slug as an identifier
+        person_properties['identifiers'].append({
+            'scheme': 'pombola-slug',
+            'identifier': person.slug
+        })
+
         for key in extra_popolo_person_fields:
             value = getattr(person, key)
             # This might be a markitup.fields.Markup field, in
