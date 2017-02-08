@@ -25,9 +25,9 @@
 </div>
 
 <div class='mp-attendance-filter'>
-  <div class="col-50">
-    <form class='select-year' action="{% url 'mp-attendance' %}" method="get">
-      <div class="filter-option">
+  <form class='filter-attendance' action="{% url 'mp-attendance' %}" method="get">
+    <div class="col-50">
+      <div class="filter select">
         <label>Select a year:</label>
         <select name="year">
          {% for yr in years %}
@@ -35,7 +35,7 @@
          {% endfor %}
         </select>
       </div>
-      <div class="filter-option">
+      <div class="filter select">
         <label>Choose a party:</label>
         <select name="party">
           <option value="" selected>All</option>
@@ -44,14 +44,30 @@
          {% endfor %}
         </select>
       </div>
+    </div>
+    <div class="col-50">
+      <div class="filter radio">
+        <label>
+          <input type="radio" name="position" value="ministers"{% if position == "ministers" %} checked{% endif %}/>
+          Show ministers and deputy ministers
+        </label>
+        <label>
+          <input type="radio" name="position" value="all" {% if position == "all" %}checked{% endif %}/>
+          Show all MPs
+        </label>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="col-50">
       <input class="button" type="submit" value="Show attendance">
-    </form>
-  </div>
+    </div>
+    <div class="clear"></div>
+  </form>
 
   {% if party %}
    <div class="col-50">
     {% if aggregate_attendance >= 0 %}
-      <h2>{{ aggregate_attendance }}%</h2>
+      <h2 class="average-attendance">{{ aggregate_attendance }}%</h2>
       <p>Average attendance for {{ party }}</p>
     {% else %}
       <p>Not enough data to calculate average attendance.</p>

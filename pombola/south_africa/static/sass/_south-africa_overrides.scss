@@ -2814,7 +2814,7 @@ p.attendance__disclaimer {
     #warning-notice {
         background-color: #e23d28;
         color: #fff;
-        font-size: 14px;
+        font-size: 12px;
         padding: 10px;
         margin-bottom: 10px;
     }
@@ -2824,6 +2824,10 @@ p.attendance__disclaimer {
     }
 
     .mp-attendance-filter {
+        form.filter-attendance {
+            margin-bottom: 15px;
+        }
+
         .col-50 {
             @media only all and (min-width: 640px) {
                 float: left;
@@ -2842,13 +2846,23 @@ p.attendance__disclaimer {
         background-color: #f6f6f6;
         vertical-align: top;
 
-        label {
-            width: 25%;
-            display: inline-block;
+        .filter {
+            margin-bottom: 10px;
+            label {
+                display: inline-block;
+            }
         }
 
-        .filter-option {
-            height: 30px;
+        .select {
+            label {
+                width: 25%;
+            }
+        }
+
+        .radio {
+            label {
+                width: 100%;
+            }
         }
 
         input {
@@ -2880,6 +2894,10 @@ p.attendance__disclaimer {
                 text-decoration: none;
             }
         }
+    }
+
+    h2.average-attendance {
+        margin-bottom: 0;
     }
 
     th.sorting {
