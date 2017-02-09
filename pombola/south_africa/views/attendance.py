@@ -3,6 +3,7 @@ from __future__ import division
 import dateutil
 import json
 import requests
+import datetime
 
 from .constants import API_REQUESTS_TIMEOUT
 
@@ -53,19 +54,29 @@ class SAMpAttendanceView(TemplateView):
             attendance_summary = [ma for ma in attendance_summary if
                 ma['member']['party_name'] == party]
 
-        if position == 'ministers':
-            active_ministers = Position.objects.filter(
+        year_end_date = datetime.datetime.strptime(
+            annual_attendance['end_date'], "%Y-%m-%d").date()
+        active_ministers = Position.objects.filter(
                 Q(title__slug__startswith='minister') |
                 Q(title__slug__startswith='deputy-minister')
-            ).overlapping_dates(
-                annual_attendance['start_date'],
-                annual_attendance['end_date'])
+            ).currently_active(
+                year_end_date)
 
-            active_minister_slugs = set(am.person.slug for am in active_ministers)
+        active_minister_slugs = set(am.person.slug for am in active_ministers)
 
-            attendance_summary = [ma for ma in attendance_summary if
+        minister_attendance = [ma for ma in attendance_summary if
                 ma['member']['pa_url'] and
                 ma['member']['pa_url'].split('/')[-2] in active_minister_slugs]
+
+        minister_ids = set(m['member']['id'] for m in minister_attendance)
+
+        if position == 'ministers':
+            attendance_summary = minister_attendance
+        else:
+            # Show Members returned who we aren't considered Ministers
+            # This will include Members retured with no `pa_url` set.
+            attendance_summary = [ma for ma in attendance_summary if
+                ma['member']['id'] not in minister_ids]
 
         return attendance_summary
 

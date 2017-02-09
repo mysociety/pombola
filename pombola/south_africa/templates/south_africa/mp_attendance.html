@@ -49,12 +49,13 @@
       <div class="filter radio">
         <label>
           <input type="radio" name="position" value="ministers"{% if position == "ministers" %} checked{% endif %}/>
-          Show ministers and deputy ministers
+          Show ministers and deputy ministers *
         </label>
         <label>
-          <input type="radio" name="position" value="all" {% if position == "all" %}checked{% endif %}/>
-          Show all MPs
+          <input type="radio" name="position" value="mps" {% if position == "mps" %}checked{% endif %}/>
+          Show MPs
         </label>
+        <span class="note">* Ministerial attendance is not compulsory but is encouraged</span>
       </div>
     </div>
     <div class="clear"></div>
@@ -66,11 +67,13 @@
 
   {% if party %}
    <div class="col-50">
-    {% if aggregate_attendance >= 0 %}
-      <h2 class="average-attendance">{{ aggregate_attendance }}%</h2>
-      <p>Average attendance for {{ party }}</p>
-    {% else %}
-      <p>Not enough data to calculate average attendance.</p>
+    {% if position = 'mps' %}
+      {% if aggregate_attendance >= 0 %}
+        <h2 class="average-attendance">{{ aggregate_attendance }}%</h2>
+        <p>Average attendance for {{ party }}</p>
+      {% else %}
+        <p>Not enough data to calculate average attendance.</p>
+      {% endif %}
     {% endif %}
    </div>
   {% endif %}
