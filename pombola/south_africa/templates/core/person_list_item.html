@@ -12,6 +12,10 @@
     <span class="name">{{ object.name }}</span>
 </a>
 
+{% if house %}
+  <div class="position-house">{{ house.name }}</div>
+{% endif %}
+
 {% if not skip_positions %}
   {% should_display_place organisation_kind as display_place %}
   {% if display_place %}

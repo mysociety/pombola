@@ -1322,7 +1322,7 @@ FOOTER
 
 .list-of-things-item {
     border-bottom: 1px solid #d2d2ce;
-    padding: 12px;
+    padding: 12px 0;
     @include clearfix;
     a:link,
     a:visited {
@@ -1357,6 +1357,7 @@ FOOTER
     }
     .position-parties,
     .position-place,
+    .position-house,
     .person-contact,
     .position-title {
         display: inline-block;
@@ -1379,12 +1380,18 @@ FOOTER
         }
     }
 
-    .position-place{
+    .position-place {
         a {
             background: transparent url('/static/images/place-16x16.jpg') left center no-repeat;
             padding-left: 20px;
             margin-right: 20px;
         }
+    }
+
+    .position-house {
+        background: transparent url('/static/images/assembly-16x16.jpg') left center no-repeat;
+        padding-left: 20px;
+        margin-right: 20px;
     }
 
     .person-contact {
@@ -1412,6 +1419,45 @@ FOOTER
         background: transparent url('/static/images/person-16x16.jpg') left center no-repeat;
         padding-left: 20px;
         margin-left:70px;
+    }
+}
+
+.mp-profiles-list {
+    .list-of-things-item {
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .person-list-item {
+        .name {
+            font-size: 1.2em;
+            line-height: 1.4em;
+        }
+    }
+
+    @media (min-width: 640px) {
+        h2 {
+            float: left;
+            margin: 12px 0 0 0;
+            font-size: 3.5em;
+            line-height: 1em;
+            color: #999;
+        }
+
+        h2 + ul {
+            margin-left: 6em;
+        }
+
+        .list-of-things-item {
+            &:last-child {
+                margin-bottom: 3em;
+            }
+        }
     }
 }
 

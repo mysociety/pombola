@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load switch %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+
+    <h1 class="page-title">Members of Parliament</h1>
+
+    <form action="{% url "core_search" %}">
+        <div class="inline-search-box people-list-inline-search">
+            <label for="id_q" class="inline-search-box__label">Find a person by name</label>
+            <input id="id_q" name="q" class="search-autocomplete-name" type="text" value="{{ query }}" placeholder="e.g. Baleka Mbete" data-source="/search/autocomplete/?model=person">
+            <input type="hidden" name="section" value="persons">
+            <input type="submit" value="Search" class="button">
+        </div>
+    </form>
+
+    <div class="content_box mp-profiles-list">
+        {% for letter, positions in grouped_by_sort_letter %}
+          <h2 id="{{ letter }}">{{ letter }}</h2>
+          <ul class="unstyled-list">
+            {% for position in positions %}
+              {% include "core/generic_list_item.html" with object=position.person organisation_kind=position.organisation.kind house=position.organisation %}
+            {% endfor %}
+          </ul>
+        {% empty %}
+          <p>No records found.</p>
+        {% endfor %}
+      </ul>
+    </div>
+
+{% endblock %}
