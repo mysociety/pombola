@@ -91,6 +91,13 @@ COUNTRY_JS = {
             'js/attendance-table.js',
         ),
         'output_filename': 'js/attendance-table.js',
+    },
+    'lazy-loaded-images': {
+        'source_filenames': (
+            'js/blazy.js',
+            'js/lazy-loaded-images.js',
+        ),
+        'output_filename': 'js/lazy-loaded-images.js',
     }
 }
 
