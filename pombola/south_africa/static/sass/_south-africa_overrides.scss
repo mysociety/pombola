@@ -1430,6 +1430,7 @@ FOOTER
 
         &:last-child {
             border-bottom: none;
+            margin-bottom: 0;
         }
     }
 
@@ -1440,8 +1441,12 @@ FOOTER
         }
     }
 
+    .list-of-profiles-by-letter {
+        margin-bottom: 2em;
+    }
+
     @media (min-width: 640px) {
-        h2 {
+        .mp-profiles-list-letter {
             float: left;
             margin: 12px 0 0 0;
             font-size: 3.5em;
@@ -1449,16 +1454,16 @@ FOOTER
             color: #999;
         }
 
-        h2 + ul {
+        .list-of-profiles-by-letter {
             margin-left: 6em;
-        }
-
-        .list-of-things-item {
-            &:last-child {
-                margin-bottom: 3em;
-            }
+            margin-bottom: 3em;
         }
     }
+}
+
+.person-list-item--hidden,
+.mp-profiles-list-letter--hidden {
+    display: none;
 }
 
 

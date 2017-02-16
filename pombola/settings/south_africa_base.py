@@ -98,6 +98,12 @@ COUNTRY_JS = {
             'js/lazy-loaded-images.js',
         ),
         'output_filename': 'js/lazy-loaded-images.js',
+    },
+    'mp-profiles-live-filter': {
+        'source_filenames': (
+            'js/mp-profiles-live-filter.js',
+        ),
+        'output_filename': 'js/mp-profiles-live-filter.js',
     }
 }
 

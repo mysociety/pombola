@@ -12,7 +12,7 @@
     <form action="{% url "core_search" %}">
         <div class="inline-search-box people-list-inline-search">
             <label for="id_q" class="inline-search-box__label">Find a person by name</label>
-            <input id="id_q" name="q" class="search-autocomplete-name" type="text" value="{{ query }}" placeholder="e.g. Baleka Mbete" data-source="/search/autocomplete/?model=person">
+            <input id="id_q" name="q" class="js-mp-profiles-live-filter" type="text" value="{{ query }}" placeholder="e.g. Baleka Mbete">
             <input type="hidden" name="section" value="persons">
             <input type="submit" value="Search" class="button">
         </div>
@@ -20,8 +20,8 @@
 
     <div class="content_box mp-profiles-list">
         {% for letter, positions in grouped_by_sort_letter %}
-          <h2 id="{{ letter }}">{{ letter }}</h2>
-          <ul class="unstyled-list">
+          <h2 class="mp-profiles-list-letter" id="{{ letter }}">{{ letter }}</h2>
+          <ul class="unstyled-list list-of-profiles-by-letter">
             {% for position in positions %}
               {% include "core/generic_list_item.html" with object=position.person organisation_kind=position.organisation.kind house=position.organisation lazy_load_images=1 %}
             {% endfor %}
@@ -37,4 +37,5 @@
 {% block js_end_of_body %}
   {{ block.super }}
   {% javascript 'lazy-loaded-images' %}
+  {% javascript 'mp-profiles-live-filter' %}
 {% endblock %}
