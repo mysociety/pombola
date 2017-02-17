@@ -67,7 +67,7 @@
 
   {% if party %}
    <div class="col-50">
-    {% if position = 'mps' %}
+    {% if position == 'mps' %}
       {% if aggregate_attendance >= 0 %}
         <h2 class="average-attendance">{{ aggregate_attendance }}%</h2>
         <p>Average attendance for {{ party }}</p>
@@ -91,9 +91,11 @@
       <th>Name</th>
       <th>Party</th>
       <th>Meetings</th>
+      {% if position == 'mps' %}
       <th>Present</th>
       <th>Arrived late</th>
       <th>Departed Early</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -101,6 +103,9 @@
     <tr>
       <td><a href="{{ member.pa_url }}">{{ member.name }}</td>
       <td>{{ member.party_name }}</td>
+      {% if position == 'ministers' %}
+      <td>{{ member.present }}</td>
+      {% else %}
       <td>{{ member.total }}</td>
       <td width="15%">
         <div class="attendance">
@@ -127,6 +132,7 @@
           </div>
         </div>
       </td>
+      {% endif %}
     </tr>
    {% endfor %}
   </tbody>

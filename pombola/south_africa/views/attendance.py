@@ -4,6 +4,7 @@ import dateutil
 import json
 import requests
 import datetime
+from urlparse import urlsplit
 
 from .constants import API_REQUESTS_TIMEOUT
 
@@ -44,11 +45,17 @@ class SAMpAttendanceView(TemplateView):
         # is convenient for us.
         return results
 
+    def just_path_of_pa_url(self, ma):
+        return dict(
+            ma, member=dict(
+                ma['member'], pa_url=urlsplit(ma['member']['pa_url']).path))
+
     def filter_attendance(self, annual_attendance, party, position):
         """
         Filter meeting attendance to only include items which match
         the party and position selections by the user.
         """
+
         attendance_summary = annual_attendance['attendance_summary']
         if party:
             attendance_summary = [ma for ma in attendance_summary if
@@ -56,29 +63,56 @@ class SAMpAttendanceView(TemplateView):
 
         year_end_date = datetime.datetime.strptime(
             annual_attendance['end_date'], "%Y-%m-%d").date()
-        active_ministers = Position.objects.filter(
+        today = datetime.date.today()
+
+        active_minister_positions = Position.objects.filter(
                 Q(title__slug__startswith='minister') |
                 Q(title__slug__startswith='deputy-minister')
             ).currently_active(
-                year_end_date)
+                today if year_end_date > today else year_end_date).select_related('person')
 
-        active_minister_slugs = set(am.person.slug for am in active_ministers)
+        active_minister_slugs = set(am.person.slug for am in active_minister_positions)
 
-        minister_attendance = [ma for ma in attendance_summary if
-                ma['member']['pa_url'] and
-                ma['member']['pa_url'].split('/')[-2] in active_minister_slugs]
-
-        minister_ids = set(m['member']['id'] for m in minister_attendance)
+        minister_attendance = []
+        for attendance in attendance_summary:
+            if attendance['member']['pa_url']:
+                slug = attendance['member']['pa_url'].split('/')[-2]
+                if slug in active_minister_slugs:
+                    minister_attendance.append(attendance)
+                    attendance_summary.remove(attendance)
+                    active_minister_slugs.remove(slug)
 
         if position == 'ministers':
-            attendance_summary = minister_attendance
+            # Some Ministers don't have attendance records,
+            # and we need to show that they haven't attendended any meetings
+            for position in active_minister_positions:
+                minister = position.person
+                if minister.slug in active_minister_slugs:
+
+                    # Build name consistent with PMG data
+                    initials = "".join(name[0].upper() for name in minister.given_name.split())
+                    minister_name = "{}, {} {}".format(
+                        minister.family_name, minister.title, initials)
+
+                    minister_attendance.append({
+                        'member': {
+                            'name': minister_name,
+                            'pa_url': minister.get_absolute_url(),
+                            'party_name': minister.parties()[0].slug.upper()},
+                        'attendance': {
+                            'P': 0}
+                    })
+            attendance = minister_attendance
+
         else:
             # Show Members returned who we aren't considered Ministers
-            # This will include Members retured with no `pa_url` set.
-            attendance_summary = [ma for ma in attendance_summary if
-                ma['member']['id'] not in minister_ids]
+            # Exclude records without a pa_url,
+            # as we don't know whether it's an MP or Minister
+            attendance = [
+                self.just_path_of_pa_url(ma)
+                for ma in attendance_summary if ma['member']['pa_url']]
 
-        return attendance_summary
+        return attendance
 
     def get_context_data(self, **kwargs):
         data = self.download_attendance_data()
@@ -118,49 +152,63 @@ class SAMpAttendanceView(TemplateView):
                 parties.discard(None)
                 context['parties'] = sorted(parties)
 
+
                 attendance_summary = self.filter_attendance(
                     annual_attendance, context['party'], context['position'])
 
-                aggregate_total = aggregate_present = 0
+                if context['position'] == 'mps':
+                    aggregate_total = aggregate_present = 0
 
-                for summary in attendance_summary:
-                    total = sum(v for v in summary['attendance'].itervalues())
+                    for summary in attendance_summary:
+                        total = sum(v for v in summary['attendance'].itervalues())
 
-                    present = sum(
-                        v for k, v in summary['attendance'].iteritems()
-                        if k in present_codes)
+                        present = sum(
+                            v for k, v in summary['attendance'].iteritems()
+                            if k in present_codes)
 
-                    arrive_late = sum(
-                        v for k, v in summary['attendance'].iteritems()
-                        if k in arrive_late_codes)
+                        arrive_late = sum(
+                            v for k, v in summary['attendance'].iteritems()
+                            if k in arrive_late_codes)
 
-                    depart_early = sum(
-                        v for k, v in summary['attendance'].iteritems()
-                        if k in depart_early_codes)
+                        depart_early = sum(
+                            v for k, v in summary['attendance'].iteritems()
+                            if k in depart_early_codes)
 
-                    aggregate_total += total
-                    aggregate_present += present
+                        aggregate_total += total
+                        aggregate_present += present
 
-                    present_perc = self.calculate_abs_percenatge(present, total)
-                    arrive_late_perc = self.calculate_abs_percenatge(arrive_late, total)
-                    depart_early_perc = self.calculate_abs_percenatge(depart_early, total)
+                        present_perc = self.calculate_abs_percenatge(present, total)
+                        arrive_late_perc = self.calculate_abs_percenatge(arrive_late, total)
+                        depart_early_perc = self.calculate_abs_percenatge(depart_early, total)
 
-                    context['attendance_data'].append({
-                        "name": summary['member']['name'],
-                        "pa_url": summary['member']['pa_url'],
-                        "party_name": summary['member']['party_name'],
-                        "present": present_perc,
-                        "absent": 100 - present_perc,
-                        "arrive_late": arrive_late_perc,
-                        "depart_early": depart_early_perc,
-                        "total": total,
-                    })
+                        context['attendance_data'].append({
+                            "name": summary['member']['name'],
+                            "pa_url": summary['member']['pa_url'],
+                            "party_name": summary['member']['party_name'],
+                            "present": present_perc,
+                            "absent": 100 - present_perc,
+                            "arrive_late": arrive_late_perc,
+                            "depart_early": depart_early_perc,
+                            "total": total,
+                        })
 
-                if aggregate_total == 0:
-                    # To avoid a division by zero if there's no data...
-                    aggregate_attendance = -1
+                    if aggregate_total == 0:
+                        # To avoid a division by zero if there's no data...
+                        aggregate_attendance = -1
+                    else:
+                        aggregate_attendance = self.calculate_abs_percenatge(aggregate_present, aggregate_total)
+                    context['aggregate_attendance'] = aggregate_attendance
+
                 else:
-                    aggregate_attendance = self.calculate_abs_percenatge(aggregate_present, aggregate_total)
-                context['aggregate_attendance'] = aggregate_attendance
+                    for summary in attendance_summary:
+                        present = sum(
+                            v for k, v in summary['attendance'].iteritems()
+                            if k in present_codes)
+                        context['attendance_data'].append({
+                                "name": summary['member']['name'],
+                                "pa_url": summary['member']['pa_url'],
+                                "party_name": summary['member']['party_name'],
+                                "present": present,
+                        })
 
         return context
