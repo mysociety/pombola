@@ -2120,7 +2120,7 @@ p.attendance__percentage {
 p.attendance__disclaimer {
   color: $colour_middling_grey;
   font-size: 0.8em;
-  margin: 2em 0;
+  margin: 0.8em 0;
 }
 
 /* Hansard index page */
@@ -2811,6 +2811,7 @@ p.attendance__disclaimer {
 }
 
 .mp-attendance {
+
     #warning-notice {
         background-color: #e23d28;
         color: #fff;
@@ -2823,9 +2824,17 @@ p.attendance__disclaimer {
         padding: 12px 0;
     }
 
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+    }
+
     .mp-attendance-filter {
         form.filter-attendance {
             margin-bottom: 15px;
+
+            .button {
+                float: right;
+            }
         }
 
         .col-50 {
@@ -2866,8 +2875,10 @@ p.attendance__disclaimer {
 
             .note {
                 font-size: 12px;
-                margin: 15px;
+                margin-top: 15px;
                 display: block;
+                line-height: 14px;
+                color: $colour_middling_grey;
             }
         }
 
@@ -2892,6 +2903,7 @@ p.attendance__disclaimer {
             margin-top: 0;
             background-color: $colour_middling_grey;
             font-size: 0.75em;
+            float: right;
 
             &:hover,
             &:focus {
