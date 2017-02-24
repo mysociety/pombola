@@ -87,21 +87,27 @@ class SAMpAttendanceView(TemplateView):
             # and we need to show that they haven't attendended any meetings
             for position in active_minister_positions:
                 minister = position.person
-                if minister.slug in active_minister_slugs:
+                # `active_ministers` contain ministers from all parties.
+                # If the user selected to filter by party, only append ministers from that party
+                # to `minister_attendance`.
+                if party and minister.parties()[0].slug.upper() != party:
+                    continue
+                else:
+                    if minister.slug in active_minister_slugs:
 
-                    # Build name consistent with PMG data
-                    initials = "".join(name[0].upper() for name in minister.given_name.split())
-                    minister_name = "{}, {} {}".format(
-                        minister.family_name, minister.title, initials)
+                        # Build name consistent with PMG data
+                        initials = "".join(name[0].upper() for name in minister.given_name.split())
+                        minister_name = "{}, {} {}".format(
+                            minister.family_name, minister.title, initials)
 
-                    minister_attendance.append({
-                        'member': {
-                            'name': minister_name,
-                            'pa_url': minister.get_absolute_url(),
-                            'party_name': minister.parties()[0].slug.upper()},
-                        'attendance': {
-                            'P': 0}
-                    })
+                        minister_attendance.append({
+                            'member': {
+                                'name': minister_name,
+                                'pa_url': minister.get_absolute_url(),
+                                'party_name': minister.parties()[0].slug.upper()},
+                            'attendance': {
+                                'P': 0}
+                        })
             attendance = minister_attendance
 
         else:
