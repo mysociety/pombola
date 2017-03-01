@@ -23,7 +23,7 @@
           <h2 class="mp-profiles-list-letter" id="{{ letter }}">{{ letter }}</h2>
           <ul class="unstyled-list list-of-profiles-by-letter">
             {% for position in positions %}
-              {% include "core/generic_list_item.html" with object=position.person organisation_kind=position.organisation.kind house=position.organisation lazy_load_images=1 %}
+              {% include "core/generic_list_item.html" with object=position.person organisation_kind=position.organisation.kind skip_positions=1 skip_parties=1 lazy_load_images=1 %}
             {% endfor %}
           </ul>
         {% empty %}

@@ -41,12 +41,14 @@
   {% endif %}
 {% endif %}
 
-{% with parties=object.parties %}
-  {% if parties %}
-  <div class="position-parties">
-      {% for party in parties %}
-      <a class="position-party" href="{{ party.get_absolute_url }}">{{ party.name }}</a>
-      {% endfor %}
-  </div>
-  {% endif %}
-{% endwith %}
+{% if not skip_parties %}
+  {% with parties=object.parties %}
+    {% if parties %}
+    <div class="position-parties">
+        {% for party in parties %}
+        <a class="position-party" href="{{ party.get_absolute_url }}">{{ party.name }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+  {% endwith %}
+{% endif %}

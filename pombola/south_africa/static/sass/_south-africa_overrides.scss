@@ -1435,9 +1435,34 @@ FOOTER
     }
 
     .person-list-item {
+        img, .name {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .name {
             font-size: 1.2em;
             line-height: 1.4em;
+            margin-bottom: 0;
+        }
+
+        img {
+            width: auto;
+            height: 3em;
+            float: none;
+        }
+
+        // No need for clearfix now img isn't floated.
+        &:before,
+        &:after {
+            display: none;
+        }
+
+        // Now that .name is no longer block-level, we need to manually
+        // prevent underlines appearing either side of it on hover.
+        a:hover,
+        a:focus {
+            text-decoration: none;
         }
     }
 
