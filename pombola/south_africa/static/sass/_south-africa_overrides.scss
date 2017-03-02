@@ -2098,6 +2098,12 @@ p.attendance__percentage {
     margin-bottom: 0.3em;
 }
 
+p.attendance__number {
+    font-size: 1.2em;
+    color: $colour_green;
+    font-family: $font_family_lato;
+}
+
 .attendance__context {
     color: $colour_grey;
 }

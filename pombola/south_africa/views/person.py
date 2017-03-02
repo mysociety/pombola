@@ -6,6 +6,7 @@ import logging
 import re
 import requests
 import urllib
+import datetime
 
 from .constants import API_REQUESTS_TIMEOUT
 from urlparse import urlsplit
@@ -243,6 +244,25 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
     #  LDE: Arrived Late and Departed Early
     #  P:   Present
 
+    def get_position_for_year(self, year):
+        # Check if the Person held an active ministerial position the last day
+        # of the year. Return 'minister' if so, 'mp' if not.
+
+        year_end_date = datetime.date(year, 12, 31)
+        today = datetime.date.today()
+
+        active_minister = self.object.position_set.filter(
+                Q(title__slug__startswith='minister') |
+                Q(title__slug__startswith='deputy-minister')
+            ).currently_active(
+                today if year_end_date > today else year_end_date)
+
+        if active_minister:
+            return 'minister'
+        else:
+            return 'mp'
+
+
     def get_attendance_stats(self, attendance_by_year):
         present_values = set(('P', 'DE', 'L', 'LDE'))
 
@@ -256,6 +276,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             attendance = sum((year_dict[x] for x in year_dict if x in present_values))
             meeting_count = sum((year_dict[x] for x in year_dict))
             percentage = 100 * attendance / meeting_count
+            position = self.get_position_for_year(year)
 
             return_data.append(
                 {
@@ -263,6 +284,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
                     'attended': attendance,
                     'total': meeting_count,
                     'percentage': percentage,
+                    'position': position,
                 }
             )
 
