@@ -1265,6 +1265,18 @@ class PositionQuerySet(models.query.GeoQuerySet):
         """Filter by a prefix of the person's sort_name"""
         return self.filter(person__sort_name__istartswith=prefix)
 
+    def active_at_end_of_year(self, year):
+        """Return the active positions at the of year, or today if it's before."""
+        year_end_date = datetime.date(year, 12, 31)
+        today = datetime.date.today()
+
+        return self.currently_active(
+            today if year_end_date > today else year_end_date)
+
+    def title_slug_prefixes(self, titles):
+        """Fileter positions by prefixes in the title's slug"""
+        qs = [Q(title__slug__startswith=title) for title in titles]
+        return self.filter(reduce(lambda acc, item: acc | item, qs))
 
 class Position(ModelBase, IdentifierMixin):
     category_choices = (

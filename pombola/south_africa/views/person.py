@@ -248,20 +248,15 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         # Check if the Person held an active ministerial position the last day
         # of the year. Return 'minister' if so, 'mp' if not.
 
-        year_end_date = datetime.date(year, 12, 31)
-        today = datetime.date.today()
-
-        active_minister = self.object.position_set.filter(
-                Q(title__slug__startswith='minister') |
-                Q(title__slug__startswith='deputy-minister')
-            ).currently_active(
-                today if year_end_date > today else year_end_date)
+        active_minister = self.object.position_set \
+            .title_slug_prefixes(['minister', 'deputy-minister']) \
+            .active_at_end_of_year(year) \
+            .select_related('person')
 
         if active_minister:
             return 'minister'
         else:
             return 'mp'
-
 
     def get_attendance_stats(self, attendance_by_year):
         present_values = set(('P', 'DE', 'L', 'LDE'))

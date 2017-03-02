@@ -61,15 +61,12 @@ class SAMpAttendanceView(TemplateView):
             attendance_summary = [ma for ma in attendance_summary if
                 ma['member']['party_name'] == party]
 
-        year_end_date = datetime.datetime.strptime(
-            annual_attendance['end_date'], "%Y-%m-%d").date()
-        today = datetime.date.today()
+        year = datetime.datetime.strptime(annual_attendance['end_date'], "%Y-%m-%d").year
 
-        active_minister_positions = Position.objects.filter(
-                Q(title__slug__startswith='minister') |
-                Q(title__slug__startswith='deputy-minister')
-            ).currently_active(
-                today if year_end_date > today else year_end_date).select_related('person')
+        active_minister_positions = Position.objects \
+            .title_slug_prefixes(['minister', 'deputy-minister']) \
+            .active_at_end_of_year(year) \
+            .select_related('person')
 
         active_minister_slugs = set(am.person.slug for am in active_minister_positions)
 
