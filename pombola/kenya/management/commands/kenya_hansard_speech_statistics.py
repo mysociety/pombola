@@ -199,8 +199,8 @@ class Command(BaseCommand):
             print "  Writing gender data for " + vslug
 
             gender_counts = {
-                'Male': all_speaker_entries.filter(speaker__gender='male').count(),
-                'Female': all_speaker_entries.filter(speaker__gender='female').count(),
+                'Male': all_speaker_entries.filter(speaker__gender__iexact='male').count(),
+                'Female': all_speaker_entries.filter(speaker__gender__iexact='female').count(),
                 'Unknown': all_speaker_entries.filter(speaker__gender='').count()
             }
 
