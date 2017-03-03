@@ -36,15 +36,6 @@ class TestSittingView(WebTest):
             response.content)
         self.assertNotIn('John Smith', response.content)
 
-    def test_with_speaker_names_anonymous_user(self):
-        response = self.app.get(
-            '/hansard/sitting/national_assembly/2010-04-11-09-30-00?show_original_name=1')
-        self.assertIn('Good morning, everyone', response.content)
-        self.assertIn(
-            '<strong><a href="/person/alfred-smith/">Alfred Smith</a></strong>',
-            response.content)
-        self.assertNotIn('John Smith', response.content)
-
     def test_with_speaker_names_user_is_staff(self):
         response = self.app.get(
             '/hansard/sitting/national_assembly/2010-04-11-09-30-00?show_original_name=1',
