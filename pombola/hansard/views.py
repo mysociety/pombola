@@ -107,8 +107,7 @@ class SittingView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SittingView, self).get_context_data(**kwargs)
-        if self.request.user.is_staff:
-            context['show_original_name'] = self.request.GET.get('show_original_name', False)
+        context['show_original_name'] = self.request.GET.get('show_original_name', False)
         context['display_original_name_option'] = self.request.user.is_staff
         return context
 
