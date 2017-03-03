@@ -1435,6 +1435,10 @@ FOOTER
     }
 
     .person-list-item {
+        & > a {
+            display: block;
+        }
+
         img, .name {
             display: inline-block;
             vertical-align: middle;
@@ -1486,9 +1490,16 @@ FOOTER
     }
 }
 
-.person-list-item--hidden,
-.mp-profiles-list-letter--hidden {
-    display: none;
+
+// `ul.mp-profiles-list` is added by the live filter javascript.
+// Even though the live filter results aren't indexed by letter,
+// we still want to indent the results, for visual consistency
+// with `.list-of-profiles-by-letter`.
+ul.mp-profiles-list {
+    @media (min-width: 640px) {
+        margin-left: 6em;
+        margin-bottom: 3em;
+    }
 }
 
 

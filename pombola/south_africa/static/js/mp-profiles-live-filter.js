@@ -1,52 +1,71 @@
-(function ($) {
-    $.fn.containsText = function(searchFor) {
-        var found = false;
-        this.each(function() {
-            if( $(this).text().toUpperCase().indexOf(searchFor.toUpperCase()) > -1 ){
-                found = true;
-            }
+var setUpFilterer = function setUpFilterer(){
+    var reps = [];
+    $('.person-list-item').each(function(){
+        reps.push({
+            el: this,
+            name: $(this).find('.name').text()
         });
-        return found;
-    }
-}(jQuery));
+    });
 
-var filterProfiles = function filterProfiles(searchTerm){
-    if(searchTerm === ''){
-        $('.person-list-item--hidden').removeClass('person-list-item--hidden');
-        $('.mp-profiles-list-letter--hidden').removeClass('mp-profiles-list-letter--hidden');
+    return new Fuse(reps, {
+        shouldSort: true,
+        threshold: 0.5,
+        location: 0,
+        distance: 64,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: [ "name" ],
+        include: [ "score", "matches" ]
+    });
+};
 
+var hideFilterResults = function hideFilterResults(){
+    $('.js-filter-results').remove();
+    $('.js-mp-profiles-all').show();
+};
+
+var showFilterResults = function showFilterResults(){
+    $('.js-mp-profiles-all').hide();
+
+    var $results = $('.js-filter-results');
+
+    if($results.length){
+        $results.empty();
     } else {
-        $('.list-of-profiles-by-letter').each(function(){
-            var $items = $(this).children();
-            var hiddenItems = 0;
-
-            $items.each(function(){
-                if( $('.name', $(this)).containsText(searchTerm) ){
-                    $(this).removeClass('person-list-item--hidden');
-                } else {
-                    $(this).addClass('person-list-item--hidden');
-                    hiddenItems += 1;
-                }
-            });
-
-            // Hide the big alphabet letter, if all the profiles
-            // in this section have been hidden.
-            var $letter = $(this).prev('.mp-profiles-list-letter');
-            if( $items.length === hiddenItems ){
-                $letter.addClass('mp-profiles-list-letter--hidden');
-            } else {
-                $letter.removeClass('mp-profiles-list-letter--hidden');
-            }
-        });
+        $results = $('<ul>').addClass('unstyled-list mp-profiles-list js-filter-results');
+        $results.insertBefore('.js-mp-profiles-all');
     }
+
+    return $results;
+};
+
+var filterProfiles = function filterProfiles(searchTerm, filterer){
+    if(searchTerm === ''){
+        return hideFilterResults();
+    }
+
+    var results = filterer.search(searchTerm);
+
+    if(results.length === 0){
+        return hideFilterResults();
+    }
+
+    var $results = showFilterResults();
+
+    $.each(results, function(i, result){
+        var $clone = $(result.item.el).clone();
+        $clone.appendTo($results);
+    });
 
     // Other scripts might want to do something special once they know
-    // the page has been filtered (eg: might want to check the viewport
-    // for new images to be lazy-loaded).
+    // new person-list-items have been added (eg: might want to check
+    // the viewport for new images to be lazy-loaded).
     $(document).trigger('js-mp-profiles-live-filter:updated');
 };
 
 $(function(){
+    var filterer = setUpFilterer();
+
     // Ideally, we only want to update the search state when the search input
     // text has been changed, ignoring other keystrokes like Ctrl-A / Ctrl-C.
     // Modern browsers and IE9+ support the `input` event. But some old
@@ -57,7 +76,16 @@ $(function(){
     }
 
     $('.js-mp-profiles-live-filter').on(filterInputEvent, function(){
-        filterProfiles( $(this).val() );
+        filterProfiles(
+            $(this).val(),
+            filterer
+        );
+    }).parents('form').on('submit', function(e){
+        e.preventDefault();
+        filterProfiles(
+            $('.js-mp-profiles-live-filter').val(),
+            filterer
+        );
     });
 
     // If device is short, and search input is in bottom half of the screen

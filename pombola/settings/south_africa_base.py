@@ -101,6 +101,7 @@ COUNTRY_JS = {
     },
     'mp-profiles-live-filter': {
         'source_filenames': (
+            'js/libs/fuse-2.2.0.js',
             'js/mp-profiles-live-filter.js',
         ),
         'output_filename': 'js/mp-profiles-live-filter.js',
