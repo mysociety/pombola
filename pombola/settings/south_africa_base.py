@@ -94,7 +94,7 @@ COUNTRY_JS = {
     },
     'lazy-loaded-images': {
         'source_filenames': (
-            'js/blazy.js',
+            'js/libs/blazy.js',
             'js/lazy-loaded-images.js',
         ),
         'output_filename': 'js/lazy-loaded-images.js',
