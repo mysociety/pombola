@@ -503,8 +503,8 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
         self.assertEqual(
             context['attendance'],
-            [{'total': 28, 'percentage': 89.28571428571429, 'attended': 25, 'year': 2015    },
-             {'total': 15, 'percentage': 93.33333333333333, 'attended': 14, 'year': 2014}],
+            [{'total': 28, 'percentage': 89.28571428571429, 'attended': 25, 'year': 2015, 'position':'mp'},
+             {'total': 15, 'percentage': 93.33333333333333, 'attended': 14, 'year': 2014, 'position':'mp'}],
             )
 
         self.assertEqual(
@@ -657,6 +657,13 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
 @attr(country='south_africa')
 class SAAttendanceDataTest(TestCase):
+    def setUp(self):
+        org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
+        party1 = models.Organisation.objects.create(name='Party1', slug='party1', kind=org_kind_party)
+        positiontitle1 = models.PositionTitle.objects.create(name='Member', slug='member')
+        person1 = models.Person.objects.create(legal_name='Person1', slug='person1')
+        models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
+
     def test_get_attendance_stats(self):
         raw_data = {
             2000: {'A': 1, 'AP': 2, 'DE': 4, 'L': 8, 'LDE': 16, 'P': 32},
@@ -667,10 +674,17 @@ class SAAttendanceDataTest(TestCase):
             'attended': 60,
             'total': 63,
             'percentage': 100 * 60 / 63,
+            'position': 'mp',
              }
             ]
 
-        stats = SAPersonDetail().get_attendance_stats(raw_data)
+        person = models.Person.objects.get(slug='person1')
+        person_detail = SAPersonDetail()
+        person_detail.object = person
+
+        stats = person_detail.get_attendance_stats(raw_data)
+
+        # stats = person.get_attendance_stats(raw_data)
         self.assertEqual(stats, expected)
 
         raw_data = {
@@ -683,15 +697,17 @@ class SAAttendanceDataTest(TestCase):
              'attended': 8,
              'total': 12,
              'percentage': 100 * 8 / 12,
+             'position': 'mp',
              },
             {'year': 2000,
              'attended': 2,
              'total': 3,
              'percentage': 100 * 2 / 3,
+             'position': 'mp',
              }
         ]
 
-        stats = SAPersonDetail().get_attendance_stats(raw_data)
+        stats = person_detail.get_attendance_stats(raw_data)
         self.assertEqual(stats, expected)
 
     def test_get_attendance_stats_raw(self):
