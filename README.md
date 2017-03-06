@@ -13,6 +13,9 @@ Please see [docs/INSTALL.md](https://github.com/mysociety/pombola/blob/master/do
 
 To change your site's look and feel please see the [styling notes](https://github.com/mysociety/pombola/blob/master/docs/STYLING_NOTES.md).
 
+For software developers, you can see information about running
+the tests in
+[docs/TESTING.md](https://github.com/mysociety/pombola/blob/master/docs/INSTALL.md).
 
 ## Troubleshooting
 
