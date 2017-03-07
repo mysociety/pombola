@@ -71,13 +71,15 @@ class SAMpAttendanceView(TemplateView):
         active_minister_slugs = set(am.person.slug for am in active_minister_positions)
 
         minister_attendance = []
+
         for attendance in attendance_summary:
             if attendance['member']['pa_url']:
                 slug = attendance['member']['pa_url'].split('/')[-2]
                 if slug in active_minister_slugs:
                     minister_attendance.append(attendance)
-                    attendance_summary.remove(attendance)
                     active_minister_slugs.remove(slug)
+
+        attendance_summary = [a for a in attendance_summary if a not in minister_attendance]
 
         if position == 'ministers':
             # Some Ministers don't have attendance records,
