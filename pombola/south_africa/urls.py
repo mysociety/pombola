@@ -4,7 +4,7 @@ from django.conf.urls import include, url
 from django.views.generic.base import RedirectView, TemplateView
 
 from pombola.south_africa import views
-from pombola.south_africa.views import (SAHomeView,
+from pombola.south_africa.views import (SAHomeView, SAMembersView,
     LatLonDetailLocalView, SAPlaceDetailSub, SAOrganisationDetailView,
     SAPersonDetail, SASearchView, SANewsletterPage, SAPlaceDetailView,
     SAPersonAppearanceView,
@@ -123,6 +123,10 @@ urlpatterns = [
 
     # Override the home view:
     url(r'^$', SAHomeView.as_view(), name='home'),
+
+    url(r'^position/member/parliament/?$',
+        SAMembersView.as_view(),
+        name='sa-members-view')
     ]
 
 # This is for the Code4SA ward councillor widget lookup:

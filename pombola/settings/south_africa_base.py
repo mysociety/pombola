@@ -91,6 +91,20 @@ COUNTRY_JS = {
             'js/attendance-table.js',
         ),
         'output_filename': 'js/attendance-table.js',
+    },
+    'lazy-loaded-images': {
+        'source_filenames': (
+            'js/libs/blazy.js',
+            'js/lazy-loaded-images.js',
+        ),
+        'output_filename': 'js/lazy-loaded-images.js',
+    },
+    'mp-profiles-live-filter': {
+        'source_filenames': (
+            'js/libs/fuse-2.2.0.js',
+            'js/mp-profiles-live-filter.js',
+        ),
+        'output_filename': 'js/mp-profiles-live-filter.js',
     }
 }
 
