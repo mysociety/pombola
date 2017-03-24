@@ -22,7 +22,38 @@ else:
 
 # switch on all debug when staging
 DEBUG          = STAGING
-TEMPLATE_DEBUG = STAGING
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+            # Always use forward slashes, even on Windows.
+            # Don't forget to use absolute paths, not relative paths.
+            os.path.join( base_dir, "pombola/templates" ),
+        ],
+        'OPTIONS': {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.core.context_processors.debug",
+                "django.core.context_processors.i18n",
+                "django.core.context_processors.media",
+                "django.core.context_processors.static",
+                "django.core.context_processors.request",
+                "django.contrib.messages.context_processors.messages",
+                "pombola.core.context_processors.add_settings",
+                "pombola.core.context_processors.site_processor",
+            ],
+            'debug': STAGING,
+            # List of callables that know how to import templates from various sources.
+            'loaders': [
+                'django.template.loaders.app_directories.Loader',
+                'django.template.loaders.filesystem.Loader',
+                # 'django.template.loaders.eggs.Loader',
+            ],
+        },
+    }
+]
 
 ADMINS = (
     (config.get('ERRORS_NAME'), config.get('ERRORS_EMAIL')),
@@ -171,15 +202,6 @@ FILE_UPLOAD_HANDLERS = (
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
 )
 
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.filesystem.Loader',
-    # 'django.template.loaders.eggs.Loader',
-)
-
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware', # first in list so it is able to act last on response
     'django.middleware.cache.UpdateCacheMiddleware',
@@ -197,25 +219,6 @@ if config.get('DEBUG_TOOLBAR', True):
     MIDDLEWARE_CLASSES += ( 'debug_toolbar.middleware.DebugToolbarMiddleware', )
 
 ROOT_URLCONF = 'pombola.urls'
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join( base_dir, "pombola/templates" ),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.request",
-    "django.contrib.messages.context_processors.messages",
-    "pombola.core.context_processors.add_settings",
-    "pombola.core.context_processors.site_processor",
-)
 
 MAPIT_AREA_SRID = 4326
 MAPIT_RATE_LIMIT = ['127.0.0.1']
