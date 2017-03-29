@@ -254,7 +254,12 @@ class Converter(object):
         "marshall-mzingisi-dlamini": "mzingisi-marshall-dlamini",
         "hlengiwe-octavia-maxon": "hlengiwe-octavia-hlophe",
         "hlengiwe-maxon": "hlengiwe-octavia-hlophe",
-
+        "norbet-buthelezi": "sfiso-norbert-buthelezi",
+        "christian-hattingh": "chris-hattingh",
+        "karen-jooste-de-kock": "karen-de-kock",
+        "ntombovuyo-mente-nqweniso": "ntombovuyo-veronica-nqweniso",
+        "ockers-stefanus-terblanche": "ockert-stefanus-terblanche",
+        "patrick-maloyi": "nono-maloyi",
         #name changes confirmed in National Assembly membership document
         "buyiswa-blaai": "buyiswa-cornelia-diemu",
         "sanna-keikantseeng-molao": "sanna-keikantseeng-plaatjie",
