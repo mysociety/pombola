@@ -34,10 +34,10 @@ The names of the columns there may need some explanation:
 
 Please don't just assign tickets to yourself or anyone else
 without discussing it with someone on mySociety's parliaments
-team.  You contact us by comment on the issue or finding us
-[on IRC](irc://irc.mysociety.org:6667/%23mschat) - it's easy to
-miss changes in ticket assignments.  If it's agreed that you're
-going to work on a ticket, then assign it to yourself.
+team — it's easy to miss changes in ticket assignments.  You can
+contact us by commenting on the issue or emailing us at
+<pombola@mysociety.org>. If it's agreed that you're going to
+work on a ticket, then assign it to yourself.
 
 If it's been agreed that you're going to be the main reviewer of
 a pull request, please drag it into the reviewing column in

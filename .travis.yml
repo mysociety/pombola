@@ -2,11 +2,6 @@ sudo: false
 
 notifications:
   email: false
-  irc:
-    channels:
-      - "irc.mysociety.org#build"
-    use_notice: true
-    skip_join: true
 
 language: python
 cache: pip
