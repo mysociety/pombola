@@ -195,7 +195,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
     font-size: 14px;
     line-height: 18px;
     padding: 15px 15px 15px 70px;
-    background: $colour_red url(../images/vote-40px.png) 15px 50% no-repeat;
+    background: $colour_red url(../images/sms-40px.png) 15px 50% no-repeat;
     color: #fff;
     @include border-radius(4px);
 
@@ -206,6 +206,9 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 
     strong {
       display: block;
+      font-size: 1.4em;
+      line-height: 1em;
+      margin-top: 0.2em;
     }
   }
 
@@ -218,7 +221,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
       top: 0;
       right: 0;
       width: 9em;
-      padding: 8px 10px 8px 70px;
+      padding: 12px 10px 12px 70px;
     }
   }
 }
