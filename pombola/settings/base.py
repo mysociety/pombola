@@ -23,6 +23,20 @@ else:
 # switch on all debug when staging
 DEBUG          = STAGING
 
+template_loaders = [
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.filesystem.Loader',
+    # 'django.template.loaders.eggs.Loader',
+]
+
+if not STAGING:
+    template_loaders = [
+        (
+            'django.template.loaders.cached.Loader',
+            template_loaders,
+        )
+    ]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -46,13 +60,7 @@ TEMPLATES = [
             ],
             'debug': STAGING,
             # List of callables that know how to import templates from various sources.
-            'loaders': [
-                ('django.template.loaders.cached.Loader', [
-                    'django.template.loaders.app_directories.Loader',
-                    'django.template.loaders.filesystem.Loader',
-                    # 'django.template.loaders.eggs.Loader',
-                ]),
-            ],
+            'loaders': template_loaders,
         },
     }
 ]
