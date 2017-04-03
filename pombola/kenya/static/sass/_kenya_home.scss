@@ -75,6 +75,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   text-align: left;
   font-size: 16px;
   line-height: 21px;
+  margin-top: 1px;
 
   strong {
     display: block;
@@ -85,19 +86,31 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
     text-decoration: none;
     background-color: darken($colour_primary_mid, 15%);;
   }
+
+  &:first-child {
+    margin-top: 0;
+    @include border-top-left-radius(4px);
+    @include border-top-right-radius(4px);
+  }
+
+  &:last-child {
+    @include border-bottom-left-radius(4px);
+    @include border-bottom-right-radius(4px);
+  }
 }
 
-.home-cta--representatives {
-  @include border-top-left-radius(4px);
-  @include border-top-right-radius(4px);
+.home-cta--dokeza {
+  background-color: $colour_red;
+  background-image: url(../images/dokeza-50px.png);
+
+  &:hover, &:focus {
+    background-color: darken($colour_red, 5%);
+  }
 }
 
 .home-cta--hansard {
-  margin-top: 1px;
   background-color: $colour_primary_mid;
   background-image: url(../images/hansard-50px.png);
-  @include border-bottom-left-radius(4px);
-  @include border-bottom-right-radius(4px);
 
   &:hover, &:focus {
     background-color: darken($colour_primary_mid, 5%);
