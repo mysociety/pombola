@@ -225,7 +225,7 @@
               <div class="column">
                 {% for data in attendance %}
                   <header>
-                    <h3 class="attendance__heading">{{ data.year }} attendance</h3>
+                    <h3 class="attendance__heading">{{ data.year }} attendance as {{ data.position }}</h3>
                     {% if data.year == 2014 %}<p>(From the start of the Fifth Parliament)</p>{% endif %}
                   </header>
                   {% if data.position == 'minister' %}
@@ -236,9 +236,8 @@
                   {% endif %}
                 {% endfor %}
 
-                <p>Minister/Deputy Minister attendance is
-                not compulsory. MP attendance is compulsory unless an apology
-                is given.</p>
+                <p>Minister/Deputy Minister attendance is not compulsory.<br>
+                MP attendance is compulsory unless an apology is given.</p>
 
               </div>
 

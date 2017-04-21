@@ -164,6 +164,28 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
         return identifier
 
+    def get_active_minister_positions(self, years):
+        """
+        Return a year:active_ministerial_position dict for the list of years provided
+        """
+        active_minister_positions = {}
+
+        for year in years:
+            active_minister_positions[year] = self.object.position_set \
+                .title_slug_prefixes(['minister', 'deputy-minister']) \
+                .active_during_year(year)
+
+        return active_minister_positions
+
+    def active_position_at_date(self, positions, date):
+        """
+        Check whether one of the positions were active on the date
+        """
+        for position in positions:
+            if position.is_active_at_date(date.strftime("%Y-%m-%d")):
+                return True
+        return False
+
     def get_attendance_data_url(self, attendance_url_template="http://api.pmg.org.za/member/{}/attendance/"):
         identifier = self.store_or_get_pmg_member_id()
 
@@ -201,14 +223,21 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
         attendance_by_year = {}
 
+        years = sorted(set(dateutil.parser.parse(x['meeting']['date']).year for x in data), reverse=True)
+        minister_positions_by_year = self.get_active_minister_positions(years)
+
         for x in data:
             attendance = x['attendance']
-            year = dateutil.parser.parse(x['meeting']['date']).year
+            meeting_date = dateutil.parser.parse(x['meeting']['date'])
+            year = meeting_date.year
+
+            minister_at_date = self.active_position_at_date(minister_positions_by_year[year], meeting_date)
+            position = 'minister' if minister_at_date else 'mp'
 
             year_dict = attendance_by_year.setdefault(year, {})
-
-            year_dict.setdefault(attendance, 0)
-            year_dict[attendance] += 1
+            position_dict = year_dict.setdefault(position, {})
+            position_dict.setdefault(attendance, 0)
+            position_dict[attendance] += 1
 
         return attendance_by_year
 
@@ -262,26 +291,24 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         present_values = set(('P', 'DE', 'L', 'LDE'))
 
         sorted_keys = sorted(attendance_by_year.keys(), reverse=True)
-
         return_data = []
-        # year, attended, total, percentage
+        # year, attended, total, percentage, position
         for year in sorted_keys:
             year_dict = attendance_by_year[year]
+            for position in sorted(year_dict.keys()):
+                attendance = sum((year_dict[position][x] for x in year_dict[position] if x in present_values))
+                meeting_count = sum((year_dict[position][x] for x in year_dict[position]))
+                percentage = 100 * attendance / meeting_count
 
-            attendance = sum((year_dict[x] for x in year_dict if x in present_values))
-            meeting_count = sum((year_dict[x] for x in year_dict))
-            percentage = 100 * attendance / meeting_count
-            position = self.get_position_for_year(year)
-
-            return_data.append(
-                {
-                    'year': year,
-                    'attended': attendance,
-                    'total': meeting_count,
-                    'percentage': percentage,
-                    'position': position,
-                }
-            )
+                return_data.append(
+                    {
+                        'year': year,
+                        'attended': attendance,
+                        'total': meeting_count,
+                        'percentage': percentage,
+                        'position': position,
+                    }
+                )
 
         return return_data
 
