@@ -794,7 +794,7 @@ class SAMpAttendancePageTest(TestCase):
         url = "%s?year=2000" % reverse('mp-attendance')
         context = self.client.get(url).context
 
-        expected = [{'name': u'Person 2', 'pa_url': u'http://www.pa.org.za/person/person2/', 'party_name': u'Party1', 'present': 2}]
+        expected = [{'name': u'Person 2', 'pa_url': u'/person/person2/', 'party_name': u'Party1', 'present': 2}]
         self.assertEqual(context['attendance_data'], expected)
 
         # MP attendance selected
@@ -804,9 +804,9 @@ class SAMpAttendancePageTest(TestCase):
         # total: number of meetings
         # absent, arrived_late, depart_early, present: percentages
         expected = [
-            {'name': u'Person 1', 'party_name': u'Party1', 'pa_url': u'http://www.pa.org.za/person/person1/',
+            {'name': u'Person 1', 'party_name': u'Party1', 'pa_url': u'/person/person1/',
             'absent': 25, 'arrive_late': 25, 'depart_early': 0, 'total': 4, 'present': 75},
-            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'http://www.pa.org.za/person/person2/',
+            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'/person/person2/',
             'absent': 50, 'arrive_late': 0, 'depart_early': 0, 'total': 2, 'present': 50}
         ]
         self.assertEqual(context['attendance_data'], expected)
@@ -843,7 +843,7 @@ class SAMpAttendancePageTest(TestCase):
         # total: number of meetings
         # absent, arrived_late, depart_early, present: percentages
         expected = [
-            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'http://www.pa.org.za/person/person2/',
+            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'/person/person2/',
             'absent': 50, 'arrive_late': 0, 'depart_early': 0, 'total': 2, 'present': 50}
         ]
         self.assertEqual(context['attendance_data'], expected)

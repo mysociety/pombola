@@ -230,14 +230,12 @@ class SAMpAttendanceView(TemplateView):
 
                         aggregate_total += total
                         aggregate_present += present
-
                         present_perc = self.calculate_abs_percenatge(present, total)
                         arrive_late_perc = self.calculate_abs_percenatge(arrive_late, total)
                         depart_early_perc = self.calculate_abs_percenatge(depart_early, total)
-
                         context['attendance_data'].append({
                             "name": summary['member']['name'],
-                            "pa_url": summary['member']['pa_url'],
+                            "pa_url": urlsplit(summary['member']['pa_url']).path,
                             "party_name": summary['member']['party_name'],
                             "present": present_perc,
                             "absent": 100 - present_perc,
@@ -262,7 +260,7 @@ class SAMpAttendanceView(TemplateView):
                             if k in present_codes)
                         context['attendance_data'].append({
                                 "name": summary['member']['name'],
-                                "pa_url": summary['member']['pa_url'],
+                                "pa_url": urlsplit(summary['member']['pa_url']).path,
                                 "party_name": summary['member']['party_name'],
                                 "present": present,
                         })
