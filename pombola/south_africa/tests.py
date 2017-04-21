@@ -755,9 +755,11 @@ class SAMpAttendancePageTest(TestCase):
         person1 = models.Person.objects.create(legal_name='Person1', slug='person1')
         models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
 
-        person2 = models.Person.objects.create(legal_name='Person2', slug='person2')
+        person2 = models.Person.objects.create(legal_name='Person2', slug='person2', family_name='2', title='Dr', given_name='Person')
         positiontitle2 = models.PositionTitle.objects.create(name='Minister', slug='minister')
         models.Position.objects.create(person=person2, organisation=party1, title=positiontitle2, start_date='2000-03-30', end_date='future')
+        # Needs to be a member of a party.
+        models.Position.objects.create(person=person2, organisation=party1, title=positiontitle1)
 
     def test_mp_attendance_context(self):
         raw_data = [{
@@ -804,6 +806,43 @@ class SAMpAttendancePageTest(TestCase):
         expected = [
             {'name': u'Person 1', 'party_name': u'Party1', 'pa_url': u'http://www.pa.org.za/person/person1/',
             'absent': 25, 'arrive_late': 25, 'depart_early': 0, 'total': 4, 'present': 75},
+            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'http://www.pa.org.za/person/person2/',
+            'absent': 50, 'arrive_late': 0, 'depart_early': 0, 'total': 2, 'present': 50}
+        ]
+        self.assertEqual(context['attendance_data'], expected)
+
+    def test_some_attendance_as_mp_zero_attendance_as_minister(self):
+        raw_data = [{
+            u'end_date': u'2000-12-31',
+            u'meetings_by_member': [
+                {u'member': {
+                    u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person2/',
+                    u'party_name': u'Party1', u'name': u'Person 2', u'id': 2},
+                u'meetings': [
+                    {u'date': u'2000-03-01', u'attendance': u'A'},
+                    {u'date': u'2000-03-01', u'attendance': u'P'},]}],
+            u'start_date': u'2000-01-01'}]
+
+        pmg_api_cache = caches['pmg_api']
+        pmg_api_cache.set(
+            "https://api.pmg.org.za/committee-meeting-attendance/meetings-by-member/",
+            raw_data,
+        )
+
+        url = "%s?year=2000" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        # Zero attendance as a Minister
+        expected = [{'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'PARTY1', 'present': 0}]
+        self.assertEqual(context['attendance_data'], expected)
+
+        # Some attendance as an MP
+        url = "%s?position=mps&year=2000" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        # total: number of meetings
+        # absent, arrived_late, depart_early, present: percentages
+        expected = [
             {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'http://www.pa.org.za/person/person2/',
             'absent': 50, 'arrive_late': 0, 'depart_early': 0, 'total': 2, 'present': 50}
         ]
