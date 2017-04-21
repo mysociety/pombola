@@ -123,9 +123,13 @@ class SAMpAttendanceView(TemplateView):
                     # Member can be a Minister and an MP during the year
                     if attendance_as_minister:
                         minister_attendance.append({'member': record['member'], 'meetings': attendance_as_minister})
+                        # Only remove if slug if minister attendance was added.
+                        # If not, retain, as zero attendance zero attendance entry needs to be added.
+                        minister_slugs.remove(slug)
+
                     if attendance_as_mp:
                         mp_attendance.append({'member': record['member'], 'meetings': attendance_as_mp})
-                    minister_slugs.remove(slug)
+
                 else:
                     # Member wasn't a minister during the year. All attendance as MP.
                     mp_attendance.append(record)
