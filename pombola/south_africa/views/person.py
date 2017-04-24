@@ -239,6 +239,15 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             position_dict.setdefault(attendance, 0)
             position_dict[attendance] += 1
 
+        # Add zero minister attendance if person was active minister during a year,
+        # but no reocrds was returned for that year.
+        for year, positions in minister_positions_by_year.iteritems():
+            if positions:
+                # There were active minister positions
+                if 'minister' not in attendance_by_year[year].keys():
+                    # No minister attendance recorded
+                    attendance_by_year[year]['minister'] = {'P': 0}
+
         return attendance_by_year
 
     def get_latest_meeting_urls(self, data):
@@ -298,7 +307,11 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             for position in sorted(year_dict.keys()):
                 attendance = sum((year_dict[position][x] for x in year_dict[position] if x in present_values))
                 meeting_count = sum((year_dict[position][x] for x in year_dict[position]))
-                percentage = 100 * attendance / meeting_count
+                if meeting_count == 0:
+                    # To avoid a division by zero for zero minister attendance
+                    percentage = 0
+                else:
+                    percentage = 100 * attendance / meeting_count
 
                 return_data.append(
                     {
