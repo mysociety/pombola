@@ -5,6 +5,7 @@ import os
 from datetime import date, time
 from StringIO import StringIO
 from urlparse import urlparse
+from collections import OrderedDict
 
 import requests
 
@@ -664,32 +665,42 @@ class SAAttendanceDataTest(TestCase):
         person1 = models.Person.objects.create(legal_name='Person1', slug='person1')
         models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
 
+        person2 = models.Person.objects.create(legal_name='Person2', slug='person2')
+        positiontitle2 = models.PositionTitle.objects.create(name='Minister', slug='minister')
+        models.Position.objects.create(person=person2, organisation=party1, title=positiontitle2, start_date='2015-08-01', end_date='future')
+
     def test_get_attendance_stats(self):
         raw_data = {
-            2000: {'A': 1, 'AP': 2, 'DE': 4, 'L': 8, 'LDE': 16, 'P': 32},
-            }
+            2000: {
+                'mp': {'A': 1, 'AP': 2, 'DE': 4, 'L': 8, 'LDE': 16, 'P': 32},
+                'minister': {'A': 7, 'P': 48, 'L': 2, 'AP': 5}}
+        }
 
+        # Minister data expected first
         expected = [
+            {'year': 2000,
+            'attended': 50,
+            'total': 62,
+            'percentage': 100 * 50 / 62,
+            'position': 'minister'},
             {'year': 2000,
             'attended': 60,
             'total': 63,
             'percentage': 100 * 60 / 63,
-            'position': 'mp',
-             }
-            ]
+            'position': 'mp'},
+        ]
 
         person = models.Person.objects.get(slug='person1')
         person_detail = SAPersonDetail()
         person_detail.object = person
+        person_detail.present_values = set(('P', 'DE', 'L', 'LDE'))
 
         stats = person_detail.get_attendance_stats(raw_data)
-
-        # stats = person.get_attendance_stats(raw_data)
         self.assertEqual(stats, expected)
 
         raw_data = {
-            2000: {'A': 1, 'P': 2},
-            2001: {'A': 4, 'P': 8},
+            2000: {'mp': {'A': 1, 'P': 2}},
+            2001: {'mp': {'A': 4, 'P': 8}},
             }
 
         expected = [
@@ -718,11 +729,125 @@ class SAAttendanceDataTest(TestCase):
         with open(test_data_path) as f:
             raw_data = json.load(f)
 
-        raw_stats = SAPersonDetail().get_attendance_stats_raw(raw_data['results'])
+        person = models.Person.objects.get(slug='person1')
+        person_detail = SAPersonDetail()
+        person_detail.object = person
 
-        expected = {2014: {u'A': 1, u'P': 14}, 2015: {u'A': 1, u'P': 25, u'AP': 2}}
-
+        expected = {2014: {'mp': {u'A': 1, u'P': 14}}, 2015: {'mp': {u'A': 1, u'P': 25, u'AP': 2}}}
+        raw_stats = person_detail.get_attendance_stats_raw(raw_data['results'])
         self.assertEqual(raw_stats, expected)
+
+        # MP who has become a Minister
+        person = models.Person.objects.get(slug='person2')
+        person_detail = SAPersonDetail()
+        person_detail.object = person
+
+        expected = {2014: {'mp': {u'A': 1, u'P': 14}}, 2015: {'minister': {u'P': 4}, 'mp': {u'A': 1, u'P': 21, u'AP': 2}}}
+        raw_stats = person_detail.get_attendance_stats_raw(raw_data['results'])
+        self.assertEqual(raw_stats, expected)
+
+
+@attr(country='south_africa')
+class SAMpAttendancePageTest(TestCase):
+    def setUp(self):
+        org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
+        party1 = models.Organisation.objects.create(name='Party1', slug='party1', kind=org_kind_party)
+        positiontitle1 = models.PositionTitle.objects.create(name='Member', slug='member')
+        person1 = models.Person.objects.create(legal_name='Person1', slug='person1')
+        models.Position.objects.create(person=person1, organisation=party1, title=positiontitle1)
+
+        person2 = models.Person.objects.create(legal_name='Person2', slug='person2', family_name='2', title='Dr', given_name='Person')
+        positiontitle2 = models.PositionTitle.objects.create(name='Minister', slug='minister')
+        models.Position.objects.create(person=person2, organisation=party1, title=positiontitle2, start_date='2000-03-30', end_date='future')
+        # Needs to be a member of a party.
+        models.Position.objects.create(person=person2, organisation=party1, title=positiontitle1)
+
+    def test_mp_attendance_context(self):
+        raw_data = [{
+            u'end_date': u'2000-12-31',
+            u'meetings_by_member': [
+                {u'member': {
+                    u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person1/',
+                    u'party_name': u'Party1', u'name': u'Person 1', u'id': 1},
+                u'meetings': [
+                    {u'date': u'2000-03-01', u'attendance': u'A'},
+                    {u'date': u'2000-03-02', u'attendance': u'P'},
+                    {u'date': u'2000-03-03', u'attendance': u'P'},
+                    {u'date': u'2000-03-04', u'attendance': u'L'}]},
+                {u'member': {
+                    u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person2/',
+                    u'party_name': u'Party1', u'name': u'Person 2', u'id': 2},
+                u'meetings': [
+                    {u'date': u'2000-03-01', u'attendance': u'A'},
+                    {u'date': u'2000-03-01', u'attendance': u'P'},
+                    {u'date': u'2000-04-01', u'attendance': u'P'},
+                    {u'date': u'2000-04-01', u'attendance': u'P'},
+                    {u'date': u'2000-04-01', u'attendance': u'A'}]}],
+            u'start_date': u'2000-01-01'}]
+
+        pmg_api_cache = caches['pmg_api']
+        pmg_api_cache.set(
+            "https://api.pmg.org.za/committee-meeting-attendance/meetings-by-member/",
+            raw_data,
+        )
+
+        # Default, Minister attendance
+        url = "%s?year=2000" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        expected = [{'name': u'Person 2', 'pa_url': u'/person/person2/', 'party_name': u'Party1', 'present': 2}]
+        self.assertEqual(context['attendance_data'], expected)
+
+        # MP attendance selected
+        url = "%s?position=mps&year=2000" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        # total: number of meetings
+        # absent, arrived_late, depart_early, present: percentages
+        expected = [
+            {'name': u'Person 1', 'party_name': u'Party1', 'pa_url': u'/person/person1/',
+            'absent': 25, 'arrive_late': 25, 'depart_early': 0, 'total': 4, 'present': 75},
+            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'/person/person2/',
+            'absent': 50, 'arrive_late': 0, 'depart_early': 0, 'total': 2, 'present': 50}
+        ]
+        self.assertEqual(context['attendance_data'], expected)
+
+    def test_some_attendance_as_mp_zero_attendance_as_minister(self):
+        raw_data = [{
+            u'end_date': u'2000-12-31',
+            u'meetings_by_member': [
+                {u'member': {
+                    u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person2/',
+                    u'party_name': u'Party1', u'name': u'Person 2', u'id': 2},
+                u'meetings': [
+                    {u'date': u'2000-03-01', u'attendance': u'A'},
+                    {u'date': u'2000-03-01', u'attendance': u'P'},]}],
+            u'start_date': u'2000-01-01'}]
+
+        pmg_api_cache = caches['pmg_api']
+        pmg_api_cache.set(
+            "https://api.pmg.org.za/committee-meeting-attendance/meetings-by-member/",
+            raw_data,
+        )
+
+        url = "%s?year=2000" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        # Zero attendance as a Minister
+        expected = [{'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'PARTY1', 'present': 0}]
+        self.assertEqual(context['attendance_data'], expected)
+
+        # Some attendance as an MP
+        url = "%s?position=mps&year=2000" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        # total: number of meetings
+        # absent, arrived_late, depart_early, present: percentages
+        expected = [
+            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'/person/person2/',
+            'absent': 50, 'arrive_late': 0, 'depart_early': 0, 'total': 2, 'present': 50}
+        ]
+        self.assertEqual(context['attendance_data'], expected)
 
 
 @attr(country='south_africa')

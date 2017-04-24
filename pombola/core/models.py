@@ -114,6 +114,17 @@ def approximate_date_to_date(approx_date, assume):
     # Otherwise we must have a complete date:
     return datetime.date(year, month, day)
 
+def get_latest_day_of_year(year):
+    """
+    Return a date object for the last day of the year, or today if it's the current year.
+    Will fail if a future year is passed.
+    """
+    year_end_date = datetime.date(year, 12, 31)
+    today = datetime.date.today()
+    if year > today.year:
+        raise ValueError("year cannot be later than the current year.")
+    return min(today, year_end_date)
+
 
 class ModelBase(models.Model):
     created = models.DateTimeField( auto_now_add=True )
@@ -1267,11 +1278,17 @@ class PositionQuerySet(models.query.GeoQuerySet):
 
     def active_at_end_of_year(self, year):
         """Return the active positions at the of year, or today if it's before."""
-        year_end_date = datetime.date(year, 12, 31)
-        today = datetime.date.today()
+        last_day = get_latest_day_of_year(year)
+        return self.currently_active(last_day)
 
-        return self.currently_active(
-            today if year_end_date > today else year_end_date)
+    def active_during_year(self, year):
+        """
+        Return the positions that were active for a period during,
+        or at the end of the year.
+        """
+        first_day = datetime.date(year, 1, 1)
+        last_day = get_latest_day_of_year(year)
+        return self.overlapping_dates(first_day, last_day)
 
     def title_slug_prefixes(self, titles):
         """Fileter positions by prefixes in the title's slug"""
@@ -1433,6 +1450,17 @@ class Position(ModelBase, IdentifierMixin):
             now = datetime.date.today()
             now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
             return now_approx <= self.end_date
+
+    def is_active_at_date(self, date):
+        """
+        Return True if this position was active on a specific date.
+        Date is in format 'yyyy-mm'dd'
+        """
+        if self.start_date:
+            if date >= self.sorting_start_date or self.start_date == '' or self.start_date == 'past':
+                if date <= self.sorting_end_date_high or self.end_date == '' or self.end_date == 'future':
+                    return True
+        return False
 
     def has_known_dates(self):
         """Is there at least one known (not future) date?"""
