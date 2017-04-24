@@ -693,6 +693,7 @@ class SAAttendanceDataTest(TestCase):
         person = models.Person.objects.get(slug='person1')
         person_detail = SAPersonDetail()
         person_detail.object = person
+        person_detail.present_values = set(('P', 'DE', 'L', 'LDE'))
 
         stats = person_detail.get_attendance_stats(raw_data)
         self.assertEqual(stats, expected)

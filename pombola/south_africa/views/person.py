@@ -254,7 +254,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         api_url_re = r'/committee-meeting/(\d+)/'
         meeting_url_template = 'https://pmg.org.za/committee-meeting/{}/'
 
-        meetings = [x['meeting'] for x in data[:5]]
+        meetings = [x['meeting'] for x in data if x['attendance'] in self.present_values][:5]
 
         results = []
 
@@ -273,15 +273,6 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
         return results
 
-    # Meanings of attendance field
-
-    #  A:   Absent
-    #  AP:  Absent with Apologies
-    #  DE:  Departed Early
-    #  L:   Arrived Late
-    #  LDE: Arrived Late and Departed Early
-    #  P:   Present
-
     def get_position_for_year(self, year):
         # Check if the Person held an active ministerial position the last day
         # of the year. Return 'minister' if so, 'mp' if not.
@@ -297,15 +288,13 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
             return 'mp'
 
     def get_attendance_stats(self, attendance_by_year):
-        present_values = set(('P', 'DE', 'L', 'LDE'))
-
         sorted_keys = sorted(attendance_by_year.keys(), reverse=True)
         return_data = []
         # year, attended, total, percentage, position
         for year in sorted_keys:
             year_dict = attendance_by_year[year]
             for position in sorted(year_dict.keys()):
-                attendance = sum((year_dict[position][x] for x in year_dict[position] if x in present_values))
+                attendance = sum((year_dict[position][x] for x in year_dict[position] if x in self.present_values))
                 meeting_count = sum((year_dict[position][x] for x in year_dict[position]))
                 if meeting_count == 0:
                     # To avoid a division by zero for zero minister attendance
@@ -326,6 +315,16 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         return return_data
 
     def get_attendance_data_for_display(self):
+        # Meanings of attendance field
+
+        #  A:   Absent
+        #  AP:  Absent with Apologies
+        #  DE:  Departed Early
+        #  L:   Arrived Late
+        #  LDE: Arrived Late and Departed Early
+        #  P:   Present
+
+        self.present_values = set(('P', 'DE', 'L', 'LDE'))
         raw_data = self.download_attendance_data()
         attendance_by_year = self.get_attendance_stats_raw(raw_data)
         attendance_stats = self.get_attendance_stats(attendance_by_year)
