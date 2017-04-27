@@ -5,9 +5,35 @@
 
 {% block title %}Home{% endblock %}
 
+{% block ga_experiment %}
+<script src="//www.google-analytics.com/cx/api.js?experiment=VBriYVTaRiuLeNK8NimPCw"></script>
+{% endblock %}
+
 {% block js_end_of_body %}
   {{ block.super }}
   {% javascript 'feeds' %}
+  <script>
+      $(function(){
+          if( $('#mobile-top-tools').is(':visible') ){
+              window.cxVariation = cxApi.chooseVariation();
+              if(window.cxVariation === 1){
+                  $('.home__topics').insertBefore('.home__news');
+              }
+          }
+
+          $('.js-track-mp-profiles').on('click', function(e){
+              var that = this;
+              e.preventDefault();
+              window.analytics.trackEvent({
+                  eventCategory: 'homepage-mp-profiles-link',
+                  eventAction: 'click'
+              }).done(function(){
+                  var link = $(that).attr('href');
+                  if (link) window.location.href = link;
+              });
+          })
+      });
+  </script>
 {% endblock %}
 
 {% block body_attributes %} class="home" {% endblock %}
@@ -102,7 +128,7 @@
             Hot topics
         </h3>
         <div class="home__topics__list">
-            <a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name&amp;a=1" class="home__topics__topic">MP profiles</a>
+            <a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name&amp;a=1" class="home__topics__topic js-track-mp-profiles">MP profiles</a>
             <a href="{% url 'info_blog_category' slug='mp-corner' %}" class="home__topics__topic">MP corner</a>
             <a href="{% url 'mp-attendance' %}" class="home__topics__topic">MP attendance</a>
             <a href="{% url 'sa-interests-index' %}" class="home__topics__topic">MP assets</a>
