@@ -90,9 +90,9 @@
   {% with past_positions=person.position_set.all.political.currently_inactive current_positions=person.position_set.all.political.currently_active %}
     <div class="tabs ui-tabs ui-widget person-tabs">
       <ul class="tab-links ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
-        {% if hansard.count or question.count or committee.count %}
+        {% if attendance %}
           <li class="ui-state-default">
-            <a class="ui-tabs-anchor" href="#appearances" class="active">Appearances</a>
+            <a class="ui-tabs-anchor" href="#attendance">Committee Attendance</a>
           </li>
         {% endif %}
         {% if past_positions or current_positions %}
@@ -105,45 +105,56 @@
             <a class="ui-tabs-anchor" href="#membersinterests">Register of Interests</a>
           </li>
         {% endif %}
-        {% if attendance %}
+        {% if hansard.count or question.count or committee.count %}
           <li class="ui-state-default">
-            <a class="ui-tabs-anchor" href="#attendance">Committee Attendance</a>
+            <a class="ui-tabs-anchor" href="#appearances" class="active">Appearances</a>
           </li>
         {% endif %}
       </ul>
+      
+      {% if attendance %}
+        <div id="attendance" class="tab-content ui-tabs-panel ui-widget-content">
+          <div class="fifty-fifty-layout">
 
-      {% if hansard.count or question.count or committee.count %}
-        <div id="appearances" class="tab-content ui-tabs-panel ui-widget-content">
-          <section class="person-appearances">
-            <h3>Committee appearances</h3>
+            {% if attendance == 'UNAVAILABLE' %}
+              <p>Attendance data is currently unavailable.</p>
+            {% else %}
 
-            {% include "core/person_speech_list.html" with speechlist=committee ifempty="No appearances found" %}
+              <div class="column">
+                {% for data in attendance %}
+                  <header>
+                    <h3 class="attendance__heading">{{ data.year }} attendance as {{ data.position }}</h3>
+                    {% if data.year == 2014 %}<p>(From the start of the Fifth Parliament)</p>{% endif %}
+                  </header>
+                  {% if data.position == 'minister' %}
+                    <p class="attendance__number">Attended {{ data.attended }} meeting{{ data.attended|pluralize }}</p>
+                  {% else %}
+                    <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
+                    <p class="attendance__context">Attended {{ data.attended }} meeting{{ data.attended|pluralize }} out of {{ data.total }}</p>
+                  {% endif %}
+                {% endfor %}
 
-            {% if committee.count %}
-              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
+                <p>Minister/Deputy Minister attendance is not compulsory.<br>
+                MP attendance is compulsory unless an apology is given.</p>
+
+              </div>
+
+              {% if latest_meetings_attended %}
+                <div class="column">
+                  <h3>Recent meetings attended</h3>
+                  <ul class="unstyled attendance__recently-attended">
+                    {% for meeting in latest_meetings_attended %}
+                      <li><a href="{{ meeting.url }}"><span class="committee-name">{{ meeting.committee_name }}</span> &mdash; <span class="committee-meeting-title">{{ meeting.title }}</span></a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
             {% endif %}
-          </section>
 
-          <section class="person-appearances">
-            <h3>Questions</h3>
-
-            {% include "core/person_speech_list.html" with speechlist=question parent_title=1 ifempty="No questions found" %}
-
-            {% if question.count %}
-              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
-            {% endif %}
-          </section>
-
-          <section class="person-appearances">
-            <h3>Plenary appearances</h3>
-
-            {% include "core/person_speech_list.html" with speechlist=hansard ifempty="No appearances found" %}
-
-            {% if hansard.count %}
-              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
-            {% endif %}
-          </section>
-        </div>
+          </div>
+          <p class="attendance__disclaimer">DISCLAIMER: This is not the official attendance record of Parliament. This information has been obtained via the Parliamentary Monitoring Group. PMG makes every effort to compile reliable and comprehensive information, but does not claim that the data is 100% accurate and complete.</p>
+        </div> <!-- .attendance -->
       {% endif %}
 
       {% if past_positions or current_positions %}
@@ -214,49 +225,38 @@
         </div> <!-- .membersinterests -->
       {% endif %}
 
-      {% if attendance %}
-        <div id="attendance" class="tab-content ui-tabs-panel ui-widget-content">
-          <div class="fifty-fifty-layout">
+      {% if hansard.count or question.count or committee.count %}
+        <div id="appearances" class="tab-content ui-tabs-panel ui-widget-content">
+          <section class="person-appearances">
+            <h3>Committee appearances</h3>
 
-            {% if attendance == 'UNAVAILABLE' %}
-              <p>Attendance data is currently unavailable.</p>
-            {% else %}
+            {% include "core/person_speech_list.html" with speechlist=committee ifempty="No appearances found" %}
 
-              <div class="column">
-                {% for data in attendance %}
-                  <header>
-                    <h3 class="attendance__heading">{{ data.year }} attendance as {{ data.position }}</h3>
-                    {% if data.year == 2014 %}<p>(From the start of the Fifth Parliament)</p>{% endif %}
-                  </header>
-                  {% if data.position == 'minister' %}
-                    <p class="attendance__number">Attended {{ data.attended }} meeting{{ data.attended|pluralize }}</p>
-                  {% else %}
-                    <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
-                    <p class="attendance__context">Attended {{ data.attended }} meeting{{ data.attended|pluralize }} out of {{ data.total }}</p>
-                  {% endif %}
-                {% endfor %}
-
-                <p>Minister/Deputy Minister attendance is not compulsory.<br>
-                MP attendance is compulsory unless an apology is given.</p>
-
-              </div>
-
-              {% if latest_meetings_attended %}
-                <div class="column">
-                  <h3>Recent meetings attended</h3>
-                  <ul class="unstyled attendance__recently-attended">
-                    {% for meeting in latest_meetings_attended %}
-                      <li><a href="{{ meeting.url }}"><span class="committee-name">{{ meeting.committee_name }}</span> &mdash; <span class="committee-meeting-title">{{ meeting.title }}</span></a></li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              {% endif %}
-
+            {% if committee.count %}
+              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='committee' %}">All Committee Appearances</a></p>
             {% endif %}
+          </section>
 
-          </div>
-          <p class="attendance__disclaimer">DISCLAIMER: This is not the official attendance record of Parliament. This information has been obtained via the Parliamentary Monitoring Group. PMG makes every effort to compile reliable and comprehensive information, but does not claim that the data is 100% accurate and complete.</p>
-        </div> <!-- .attendance -->
+          <section class="person-appearances">
+            <h3>Questions</h3>
+
+            {% include "core/person_speech_list.html" with speechlist=question parent_title=1 ifempty="No questions found" %}
+
+            {% if question.count %}
+              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='question' %}">All Questions and Answers</a></p>
+            {% endif %}
+          </section>
+
+          <section class="person-appearances">
+            <h3>Plenary appearances</h3>
+
+            {% include "core/person_speech_list.html" with speechlist=hansard ifempty="No appearances found" %}
+
+            {% if hansard.count %}
+              <p><a href="{% url 'sa-person-appearance' person_slug=object.slug speech_tag='hansard' %}">All Plenary Appearances</a></p>
+            {% endif %}
+          </section>
+        </div>
       {% endif %}
 
     </div> <!-- tabs -->
