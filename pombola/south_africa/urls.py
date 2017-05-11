@@ -146,6 +146,11 @@ urlpatterns += (
         views.SAMpAttendanceView.as_view(),
         name='mp-attendance'
     ),
+    url(r'^(mp|minister)-?attendance/?$',
+        RedirectView.as_view(
+            url='/mp-attendance/',
+            permanent=False)
+    ),
 )
 
 # Routing for election pages
