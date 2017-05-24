@@ -6,7 +6,7 @@
 {% block title %}Home{% endblock %}
 
 {% block ga_experiment %}
-<script src="//www.google-analytics.com/cx/api.js?experiment=VBriYVTaRiuLeNK8NimPCw"></script>
+<script src="//www.google-analytics.com/cx/api.js?experiment=iHAkMeOzSlerqgN8qLk8IA"></script>
 {% endblock %}
 
 {% block js_end_of_body %}
@@ -18,6 +18,12 @@
               window.cxVariation = cxApi.chooseVariation();
               if(window.cxVariation === 1){
                   $('.home__topics').insertBefore('.home__news');
+              } else if(window.cxVariation === 2) {
+                // Put the MP button at the top, add some css to make sure it looks ok
+                $('.js-track-mp-profiles').insertBefore('.home__news').css({
+                  margin: '1.25em 0.75em',
+                  width: 'auto'
+                });
               }
           }
 
@@ -26,6 +32,19 @@
               e.preventDefault();
               window.analytics.trackEvent({
                   eventCategory: 'homepage-mp-profiles-link',
+                  eventAction: 'click'
+              }).done(function(){
+                  var link = $(that).attr('href');
+                  if (link) window.location.href = link;
+              });
+          })
+
+          $('#page a[href]:not(.home__topics a)').on('click', function(e){
+              // doesn't do buttons or inputs (feature not bug) maybe TODO?
+              var that = this;
+              e.preventDefault();
+              window.analytics.trackEvent({
+                  eventCategory: 'homepage-click-not-hot-topic',
                   eventAction: 'click'
               }).done(function(){
                   var link = $(that).attr('href');
@@ -43,7 +62,6 @@
 {% endblock %}
 
 {% block page_wrapper %}
-
 <div class="home__section home__news">
     <div class="wrapper">
         <div class="home__news__row">
