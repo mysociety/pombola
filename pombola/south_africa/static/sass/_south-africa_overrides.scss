@@ -2225,6 +2225,46 @@ p.attendance__disclaimer {
   margin: 0.8em 0;
 }
 
+/* List pages for recent appearances, questions and attendances*/
+.speeches {
+    li {
+        margin-bottom: 1em;
+    }
+
+    p {
+        margin-bottom: 0.5em;
+    }
+
+    .speech-date {
+        display: block;
+        font-size: 0.8em;
+        color: $colour_grey;
+    }
+
+    .speech-text {
+        font-size: 0.9em;
+    }
+}
+
+.committee-meeting-attendance {
+    .committee-name {
+        display: block;
+        color: $colour_blackish;
+        font-weight: bold;
+    }
+
+    .meeting-date {
+        display: block;
+        font-size: 0.9em;
+        color: $colour_grey;
+    }
+
+    .meeting-summary {
+        font-size: 0.9em;
+    }
+}
+
+
 /* Hansard index page */
 .hansard-section-title {
     cursor: pointer;

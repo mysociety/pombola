@@ -17,7 +17,7 @@
 
 {% endcomment %}
 
-<ul class="unstyled">
+<ul class="unstyled speeches">
     {% for speech in speechlist %}
     <li>
         <p>
@@ -30,10 +30,11 @@
                     {% endif %}
                 </a>
             </span>
-            &mdash;
-            {{ speech.start_date }}
+            <span class="speech-date">
+                {{ speech.start_date }}
+            </span>
         </p>
-        <div>
+        <div class="speech-text">
             {{ speech.text|bleach|truncatewords_html:50 }}
         </div>
     </li>

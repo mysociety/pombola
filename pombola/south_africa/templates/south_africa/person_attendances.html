@@ -14,7 +14,10 @@
   {% for meeting in attendance %}
     <li>
       <p>
-        <a href="{{ meeting.url }}"><span class="committee-name">{{ meeting.committee_name }}</span> &mdash; <span class="meeting-title">{{ meeting.title }}</span></a>
+        <span class="committee-name">{{ meeting.committee_name }}</span>
+          <a href="{{ meeting.url }}">
+          <span class="meeting-title">{{ meeting.title }}</span>
+        </a>
         <br>
         <span class="meeting-date">{{ meeting.date }}</span>
       </p>
