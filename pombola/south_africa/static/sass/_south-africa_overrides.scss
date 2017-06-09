@@ -2201,12 +2201,21 @@ p.attendance__number {
     }
 
     a {
-        display: block;
+        display: inline;
         text-decoration: none;
 
         &:hover, &:focus {
             text-decoration: underline;
         }
+    }
+
+    .committee-name {
+        color: $colour_blackish;
+    }
+
+    .meeting-date {
+        font-size: 0.9em;
+        color: $colour_blackish;
     }
 }
 

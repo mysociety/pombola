@@ -32,6 +32,15 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
     important_org_kind_slugs = (
         'national-executive', 'parliament', 'provincial-legislature')
 
+    # Meanings of attendance field
+    #  A:   Absent
+    #  AP:  Absent with Apologies
+    #  DE:  Departed Early
+    #  L:   Arrived Late
+    #  LDE: Arrived Late and Departed Early
+    #  P:   Present
+    present_values = set(('P', 'DE', 'L', 'LDE'))
+
     def get_recent_speeches_for_section(self, tags, limit=5):
         pombola_person = self.object
         sayit_speaker = self.pombola_person_to_sayit_speaker(pombola_person)
@@ -250,26 +259,33 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
         return attendance_by_year
 
-    def get_latest_meeting_urls(self, data):
+    def get_meetings_attended(self, data, limit=None):
         api_url_re = r'/committee-meeting/(\d+)/'
         meeting_url_template = 'https://pmg.org.za/committee-meeting/{}/'
 
-        meetings = [x['meeting'] for x in data if x['attendance'] in self.present_values][:5]
+        if limit:
+            meetings = [x['meeting'] for x in data if x['attendance'] in self.present_values][:limit]
+        else:
+            meetings = [x['meeting'] for x in data if x['attendance'] in self.present_values]
 
         results = []
-
         for meeting in meetings:
             api_url = meeting['url']
             path = urlsplit(api_url).path
             meeting_id = re.match(api_url_re, path).group(1)
 
-            results.append(
-                {
-                    'url': meeting_url_template.format(meeting_id),
-                    'title': meeting['title'],
-                    'committee_name': meeting['committee']['name'],
-                }
-            )
+            meeting_summary = {
+                'url': meeting_url_template.format(meeting_id),
+                'title': meeting['title'],
+                'committee_name': meeting['committee']['name'],
+                'date': dateutil.parser.parse(meeting['date']).date()
+            }
+
+            if not limit:
+                meeting_summary['summary'] = meeting.get('summary', None)
+
+            results.append(meeting_summary)
+
 
         return results
 
@@ -315,22 +331,12 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         return return_data
 
     def get_attendance_data_for_display(self):
-        # Meanings of attendance field
-
-        #  A:   Absent
-        #  AP:  Absent with Apologies
-        #  DE:  Departed Early
-        #  L:   Arrived Late
-        #  LDE: Arrived Late and Departed Early
-        #  P:   Present
-
-        self.present_values = set(('P', 'DE', 'L', 'LDE'))
         raw_data = self.download_attendance_data()
         attendance_by_year = self.get_attendance_stats_raw(raw_data)
         attendance_stats = self.get_attendance_stats(attendance_by_year)
-        meeting_urls = self.get_latest_meeting_urls(raw_data)
+        latest_meetings_attended = self.get_meetings_attended(raw_data, limit=5)
 
-        return attendance_stats, meeting_urls
+        return attendance_stats, latest_meetings_attended
 
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)

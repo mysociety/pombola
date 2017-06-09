@@ -111,7 +111,7 @@
           </li>
         {% endif %}
       </ul>
-      
+
       {% if attendance %}
         <div id="attendance" class="tab-content ui-tabs-panel ui-widget-content">
           <div class="fifty-fifty-layout">
@@ -133,10 +133,10 @@
                     <p class="attendance__context">Attended {{ data.attended }} meeting{{ data.attended|pluralize }} out of {{ data.total }}</p>
                   {% endif %}
                 {% endfor %}
-
-                <p>Minister/Deputy Minister attendance is not compulsory.<br>
-                MP attendance is compulsory unless an apology is given.</p>
-
+                <p class="attendance__disclaimer">
+                  Minister/Deputy Minister attendance is not compulsory.<br>
+                  MP attendance is compulsory unless an apology is given.
+                </p>
               </div>
 
               {% if latest_meetings_attended %}
@@ -144,9 +144,10 @@
                   <h3>Recent meetings attended</h3>
                   <ul class="unstyled attendance__recently-attended">
                     {% for meeting in latest_meetings_attended %}
-                      <li><a href="{{ meeting.url }}"><span class="committee-name">{{ meeting.committee_name }}</span> &mdash; <span class="committee-meeting-title">{{ meeting.title }}</span></a></li>
+                      <li><span class="committee-name">{{ meeting.committee_name }} &mdash; </span> <a href="{{ meeting.url }}"><span class="meeting-title">{{ meeting.title }}</span></a> &mdash; <span class="meeting-date">{{ meeting.date }}</span></li>
                     {% endfor %}
                   </ul>
+                  <p><a href="{% url 'sa-person-attendance' person_slug=object.slug %}">All meetings attended</a></p>
                 </div>
               {% endif %}
 
