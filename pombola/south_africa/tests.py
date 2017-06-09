@@ -6,6 +6,7 @@ from datetime import date, time
 from StringIO import StringIO
 from urlparse import urlparse
 from collections import OrderedDict
+from datetime import datetime
 
 import requests
 
@@ -512,19 +513,24 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             context['latest_meetings_attended'],
             [{'url': 'https://pmg.org.za/committee-meeting/21460/',
               'committee_name': u'Agriculture, Forestry and Fisheries',
-              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations & finalisation; Plant Improvement [B8-2015] & Plant Breeders\u2019 Rights Bills [B11-2015]: Department response to Legal Advisor concerns'},
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations & finalisation; Plant Improvement [B8-2015] & Plant Breeders\u2019 Rights Bills [B11-2015]: Department response to Legal Advisor concerns',
+              'date': datetime(2015, 9, 4).date()},
              {'url': 'https://pmg.org.za/committee-meeting/21374/',
               'committee_name': u'Agriculture, Forestry and Fisheries',
-              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations; Committee Support Officials on Plant Improvement Bill [B8-2015] and Plant Breeders\u2019 Rights Bill [B11-2015]'},
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations; Committee Support Officials on Plant Improvement Bill [B8-2015] and Plant Breeders\u2019 Rights Bill [B11-2015]',
+              'date': datetime(2015, 8, 25).date()},
              {'url': 'https://pmg.org.za/committee-meeting/21327/',
               'committee_name': u'Agriculture, Forestry and Fisheries',
-              'title': u'Department of Agriculture, Forestry and Fisheries 4th Quarter 2014/15 & 1st Quarter 2015/16 Performance'},
+              'title': u'Department of Agriculture, Forestry and Fisheries 4th Quarter 2014/15 & 1st Quarter 2015/16 Performance',
+              'date': datetime(2015, 8, 18).date()},
              {'url': 'https://pmg.org.za/committee-meeting/21268/',
               'committee_name': u'Agriculture, Forestry and Fisheries',
-              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations; Plant Improvement [B8-2015]  & Plant Breeders\u2019 Rights Bills[11-2015]: Department response to public inputs '},
+              'title': u'Performing Animals Protection Amendment Bill [B9-2015]: deliberations; Plant Improvement [B8-2015]  & Plant Breeders\u2019 Rights Bills[11-2015]: Department response to public inputs ',
+              'date': datetime(2015, 8, 11).date()},
              {'url': 'https://pmg.org.za/committee-meeting/21141/',
               'committee_name': u'Rural Development and Land Reform',
-              'title': u'One District-One Agri-Park implementation in context of Rural Economic Transformation Model'}],
+              'title': u'One District-One Agri-Park implementation in context of Rural Economic Transformation Model',
+              'date': datetime(2015, 6, 24).date()}],
             )
 
     @patch('requests.get', side_effect=connection_error)
@@ -691,9 +697,7 @@ class SAAttendanceDataTest(TestCase):
         ]
 
         person = models.Person.objects.get(slug='person1')
-        person_detail = SAPersonDetail()
-        person_detail.object = person
-        person_detail.present_values = set(('P', 'DE', 'L', 'LDE'))
+        person_detail = SAPersonDetail(object = person)
 
         stats = person_detail.get_attendance_stats(raw_data)
         self.assertEqual(stats, expected)
@@ -730,8 +734,7 @@ class SAAttendanceDataTest(TestCase):
             raw_data = json.load(f)
 
         person = models.Person.objects.get(slug='person1')
-        person_detail = SAPersonDetail()
-        person_detail.object = person
+        person_detail = SAPersonDetail(object = person)
 
         expected = {2014: {'mp': {u'A': 1, u'P': 14}}, 2015: {'mp': {u'A': 1, u'P': 25, u'AP': 2}}}
         raw_stats = person_detail.get_attendance_stats_raw(raw_data['results'])
@@ -739,13 +742,27 @@ class SAAttendanceDataTest(TestCase):
 
         # MP who has become a Minister
         person = models.Person.objects.get(slug='person2')
-        person_detail = SAPersonDetail()
-        person_detail.object = person
+        person_detail = SAPersonDetail(object = person)
 
         expected = {2014: {'mp': {u'A': 1, u'P': 14}}, 2015: {'minister': {u'P': 4}, 'mp': {u'A': 1, u'P': 21, u'AP': 2}}}
         raw_stats = person_detail.get_attendance_stats_raw(raw_data['results'])
         self.assertEqual(raw_stats, expected)
 
+    def test_get_meetings_attended(self):
+        test_data_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data/test/attendance_587.json',
+            )
+        with open(test_data_path) as f:
+            raw_data = json.load(f)
+
+        person = models.Person.objects.get(slug='person1')
+        person_detail = SAPersonDetail(object = person)
+
+        meetings_attended = person_detail.get_meetings_attended(raw_data['results'])
+        meeting_keys = ['url', 'committee_name', 'summary', 'date', 'title']
+        self.assertEqual(len(meetings_attended), 39)
+        self.assertTrue(bool(k in meeting_keys for k in meetings_attended[0].iterkeys()))
 
 @attr(country='south_africa')
 class SAMpAttendancePageTest(TestCase):
