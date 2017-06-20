@@ -11,9 +11,10 @@ from .constants import API_REQUESTS_TIMEOUT
 
 from django.core.cache import caches
 from django.views.generic import TemplateView
-from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
-from pombola.core.models import Position
+from pombola.core.models import Position, Person
+from person import SAPersonDetail
 
 
 class SAMpAttendanceView(TemplateView):
@@ -264,5 +265,28 @@ class SAMpAttendanceView(TemplateView):
                                 "party_name": summary['member']['party_name'],
                                 "present": present,
                         })
+
+        return context
+
+
+class SAPersonAttendanceView(TemplateView):
+    template_name = "south_africa/person_attendances.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(SAPersonAttendanceView, self).get_context_data(**kwargs)
+        # Extract slug and tag provided on url
+        person_slug = self.kwargs['person_slug']
+
+        # Find (or 404) matching objects
+        person = get_object_or_404(Person, slug=person_slug)
+
+        # Get the attendance records from the PMG API, or the cache
+        person_detail = SAPersonDetail(object = person)
+        raw_data = person_detail.download_attendance_data()
+        meetings_attended = person_detail.get_meetings_attended(raw_data)
+
+        # Store person as 'object' for the person_base.html template
+        context['object'] = person
+        context['attendance'] = meetings_attended
 
         return context

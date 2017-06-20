@@ -78,6 +78,7 @@ for index, pattern in enumerate(person_patterns):
     elif pattern.name == 'person_appearances':
         person_patterns[index] = new_person_appearances_url
 
+
 # Catch /person/{person_slug}/appearances/{speech_tag} urls and serve the
 # appropriate content.
 person_patterns.append((
@@ -87,6 +88,13 @@ person_patterns.append((
     url(r'(?P<person_slug>[-\w]+)/appearances/(?P<speech_tag>[-\w]+)$',
         SAPersonAppearanceView.as_view(),
         name='sa-person-appearance')
+    ))
+
+# Add View for person meetings attended
+person_patterns.append((
+    url(r'(?P<person_slug>[-\w]+)/attendances/$',
+    views.SAPersonAttendanceView.as_view(),
+    name='sa-person-attendance')
     ))
 
 place_patterns = copy.copy(place_patterns)
