@@ -85,9 +85,18 @@
     </div>
   {% endif %}
 
-    <div id="home-facebook">
-        Like us on Facebook
+    <div id="home-social">
+      <div class="home-social__facebook">
+        <h2>Like us on Facebook</h2>
         <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FMzalendoWatch&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21&amp;appId=212162318805899" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+      </div>
+      <div class="home-social__profiles">
+        <h2>Follow us</h2>
+        <ul class="home-social__profiles-list">
+          <li><a href="https://www.instagram.com/mzalendowatch/" class="social-profile-link social-profile-link--instagram">Instagram</a></li>
+          <li><a href="https://www.youtube.com/user/MzalendoKenya" class="social-profile-link social-profile-link--youtube">YouTube</a></li>
+        </ul>
+      </div>
     </div>
 
   {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
