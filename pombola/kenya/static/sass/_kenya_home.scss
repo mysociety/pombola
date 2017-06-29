@@ -5,7 +5,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 #home-cta,
 #home-featured-person,
 #home-blog,
-#home-facebook,
+#home-social,
 #home-special-features,
 #home-twitter,
 #home-background {
@@ -17,7 +17,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   #home-cta,
   #home-featured-person,
   #home-blog,
-  #home-facebook,
+  #home-social,
   #home-special-features,
   #home-twitter,
   #home-background {
@@ -118,18 +118,63 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 }
 
 #home-featured-person,
-#home-facebook {
+#home-social {
   background: $pull-out-background;
   padding: 20px;
 }
 
-#home-facebook {
+#home-social {
+  h2 {
+    font-size: 1em;
+  }
+  @include clearfix;
   iframe {
     display: inline;
     vertical-align: middle;
-    margin-left: 0.5em;
     width: 150px;
   }
+}
+
+.home-social__facebook {
+  margin-bottom: 1em;
+  @media only screen and (min-width: 640px) {
+    width: 50%;
+    float: left;
+    margin-bottom: 0;
+  }
+}
+
+.social-profile-link {
+  display: inline-block;
+  background-repeat: no-repeat;
+  margin-right: 1em;
+}
+
+.social-profile-link--instagram {
+  background-image: url('../images/social-instagram-icon.png');
+  background-size: 19px;
+  padding-left: 27px;
+}
+
+.social-profile-link--youtube {
+  background-image: url('../images/social-youtube-icon.png');
+  background-size: 27px 19px;
+  padding-left: 34px;
+}
+
+.home-social__profiles {
+  @media only screen and (min-width: 640px) {
+    width: 50%;
+    float: left;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+
+}
+
+.home-social__profiles-list {
+  @include inline-list;
 }
 
 .home-special-feature {
