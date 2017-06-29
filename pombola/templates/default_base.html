@@ -23,15 +23,14 @@
         {% block extra_head_meta %}
         {% endblock%}
 
-        {% block open_graph %}
-        <meta property="og:title" content="{{ site.name }}" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-
         {% if settings.FACEBOOK_APP_ID %}
         <meta property="fb:app_id" content="{{ settings.FACEBOOK_APP_ID }}" />
         {% endif %}
 
+        {% block open_graph %}
+        <meta property="og:title" content="{{ site.name }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{ request.build_absolute_uri }}" />
         {% endblock %}
 
         {% block css_headers %}
