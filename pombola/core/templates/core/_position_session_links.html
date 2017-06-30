@@ -1,8 +1,8 @@
 {% if session %}
-  <h3>Position holders during {{ session.name }}</h3>
-  <h4>({{ session.readable_date_range }})</h4>
+  <h3 class="session-heading">Position holders during {{ session.name }}</h3>
+  <h4 class="session-date-range">({{ session.readable_date_range }})</h4>
 {% elif object.slug != 'member' or organisation_kind.slug != 'parliament' %}
-  <h3>Current Position Holders</h3>
+  <h3 class="session-heading">Current Position Holders</h3>
 {% endif %}
 
 {% if session_details|length > 1 %}
