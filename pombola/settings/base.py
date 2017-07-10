@@ -339,6 +339,7 @@ IEBC_API_SECRET = config.get('IEBC_API_SECRET')
 # Markitup settings
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions':['tables']})
 MARKITUP_SET = 'markitup/sets/markdown'
+JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'
 
 # Use nose as the test runner
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
