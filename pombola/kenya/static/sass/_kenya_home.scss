@@ -108,13 +108,18 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
+.home-cta--contact {
+  background-image: url(../images/sms-40px.png);
+  background-position: 22px 50%; // compensate for slightly smaller image
+}
+
 .home-cta--hansard {
-  background-color: $colour_primary_mid;
+  // background-color: $colour_primary_mid;
   background-image: url(../images/hansard-50px.png);
 
-  &:hover, &:focus {
-    background-color: darken($colour_primary_mid, 5%);
-  }
+  // &:hover, &:focus {
+  //   background-color: darken($colour_primary_mid, 5%);
+  // }
 }
 
 #home-featured-person,
@@ -239,7 +244,6 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 
 .home-election__heading {
   h2 {
-    color: $colour_red;
     font-size: 1.5em;
     line-height: 1.2em;
 
@@ -252,34 +256,32 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
     display: block;
     font-size: 14px;
     line-height: 18px;
-    padding: 15px 15px 15px 70px;
-    background: $colour_red url(../images/sms-40px.png) 15px 50% no-repeat;
-    color: #fff;
-    @include border-radius(4px);
+    padding: 20px 20px 20px 70px;
+    background: transparent url(../images/people-50px-black.png) 8px 50% no-repeat;
+    border-top: 2px solid $pull-out-background;
+    margin-top: 20px;
+    color: inherit;
 
-    &:hover, &:focus {
-      background-color: darken($colour_red, 5%);
-      text-decoration: none;
+    &:hover {
+        text-decoration: none;
+
+        strong {
+            text-decoration: underline;
+        }
     }
 
     strong {
       display: block;
       font-size: 1.4em;
       line-height: 1em;
-      margin-top: 0.2em;
-    }
-  }
+      margin-bottom: 0.2em;
+      color: $colour_red;
 
-  @media only screen and (min-width: 900px) {
-    position: relative;
-    padding-right: 11em;
-
-    .button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 9em;
-      padding: 12px 10px 12px 70px;
+      &:after {
+        content: "\2192";
+        display: inline-block;
+        margin-left: 0.3em;
+      }
     }
   }
 }
@@ -289,7 +291,7 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   border-bottom: 2px solid $pull-out-background;
   background: transparent url(../images/home-election-gradient.png) center bottom repeat-x;
   padding: 20px 20px 0 0;
-  margin-top: 20px;
+  // margin-top: 20px;
 
   ol {
     @extend #home-news-list;
@@ -300,6 +302,11 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
 
     &:first-child {
       background-repeat: no-repeat;
+    }
+
+    // Temporarily tighten up space when there are 2 "more" links
+    &:last-child {
+        margin-top: -20px;
     }
   }
 
