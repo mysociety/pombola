@@ -15,16 +15,11 @@
   <script>
       $(function(){
           if( $('#mobile-top-tools').is(':visible') ){
-              window.cxVariation = cxApi.chooseVariation();
-              if(window.cxVariation === 1){
-                  $('.home__topics').insertBefore('.home__news');
-              } else if(window.cxVariation === 2) {
-                // Put the MP button at the top, add some css to make sure it looks ok
-                $('.js-track-mp-profiles').insertBefore('.home__news').css({
-                  margin: '1.25em 0.75em',
-                  width: 'auto'
-                });
-              }
+            // Put the MP button at the top, add some css to make sure it looks ok
+            $('.js-track-mp-profiles').insertBefore('.home__news').css({
+              margin: '1.25em 0.75em',
+              width: 'auto'
+            });
           }
 
           $('.js-track-mp-profiles').on('click', function(e){
