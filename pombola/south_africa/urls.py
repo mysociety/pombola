@@ -159,6 +159,11 @@ urlpatterns += (
             url='/mp-attendance/',
             permanent=False)
     ),
+    url(r'^attendance/?$',
+        RedirectView.as_view(
+            url='/mp-attendance/',
+            permanent=False)
+    ),
 )
 
 # Routing for election pages
