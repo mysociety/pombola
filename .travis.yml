@@ -20,6 +20,7 @@ install:
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt
   - pip install python-coveralls
+  - pip install scrutinizer-ocular
   - pip check
   # Create a basic general.yml file:
   - sed -r
@@ -39,3 +40,4 @@ script:
 
 after_success:
   - coveralls
+  - ocular --data-file ".coverage"
