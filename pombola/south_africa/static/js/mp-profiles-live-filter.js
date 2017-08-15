@@ -40,6 +40,7 @@ var showFilterResults = function showFilterResults(){
 };
 
 var filterProfiles = function filterProfiles(searchTerm, filterer){
+
     if(searchTerm === ''){
         return hideFilterResults();
     }
@@ -86,6 +87,14 @@ $(function(){
             $('.js-mp-profiles-live-filter').val(),
             filterer
         );
+    });
+
+    $(document).one('js-mp-profiles-live-filter:updated', function(){
+        window.analytics.trackEvent({
+          eventCategory: 'mp-name-search',
+          eventAction: 'search',
+          'transport': 'beacon'
+        });
     });
 
     // If device is short, and search input is in bottom half of the screen
