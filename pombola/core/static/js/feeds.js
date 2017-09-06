@@ -13,47 +13,40 @@
           '</span> <span class="year">' + year + '</span>';
     }
 
-    // Get the blog feeds - if needed
-    var $blog_container = $("#home-news-list");
-    if ( $blog_container ) {
+    // This Javascript will populate a <ul> with list items from an
+    // RSS feed. The remote site that serves the RSS should include
+    // CORS headers to allow this Javascript to fetch the RSS feed.
 
-        function fetch_blog_feeds () {
-
-            var feed_url = $blog_container.attr("data-blog-rss-feed");
-            var feed = new google.feeds.Feed( feed_url );
-
-            feed.load(function(result) {
-                if (!result.error) {
-
-                    $blog_container.html('');
-
-                    for (var i = 0; i < result.feed.entries.length; i++) {
-                        var entry = result.feed.entries[i];
-
-                        var pub_date = new Date(entry.publishedDate);
-
-                        var $item = $('<li />');
-                        $item
-                            .append(
-                                $('<h3 >')
-                                    .append(
-                                        $('<a/>')
-                                            .text( entry.title )
-                                            .attr( { href: entry.link } )
-                                    )
-                            )
-                            .append( '<p class="meta">' + dateFormat(pub_date) + '</p>')
-                            .append( $('<p/>').text(entry.contentSnippet) );
-
-
-                        $blog_container.append( $item );
-                    }
-                }
-            });
-        }
-
-        // load the feeds API from google
-        google.load('feeds', '1', { callback: fetch_blog_feeds });
+    var blogContainer = $("#home-news-list");
+    var maximumListItems = 2;
+    if ( blogContainer ) {
+        var feedURL = blogContainer.attr("data-blog-rss-feed");
+        $.ajax(feedURL, dataType='xml').done(
+            function (xml) {
+                blogContainer.html('');
+                $(xml).find('item').each(function (index) {
+                    var item = $(this),
+                        listItem = $('<li>'),
+                        title = item.find('title').text(),
+                        url = item.find('link').text(),
+                        description = item.find('description').text(),
+                        published = new Date(item.find('pubDate').text());
+                    if (index >= maximumListItems) {
+                        return false;
+                    };
+                    listItem.append(
+                        $('<h3>').append(
+                            $('<a>').text(title).attr({href: url})
+                        ).append(
+                            '<p class="meta">' + dateFormat(published) + '</p>'
+                        ).append(
+                            $('<p>').html(description)
+                        )
+                    );
+                    blogContainer.append(listItem);
+                })
+            }
+        );
     }
 
 })();
