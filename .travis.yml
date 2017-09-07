@@ -6,9 +6,6 @@ notifications:
 language: python
 cache: pip
 
-services:
-  - elasticsearch
-
 addons:
   postgresql: "9.6"
   apt:
@@ -17,6 +14,9 @@ addons:
     - postgresql-9.6-postgis-2.3
 
 install:
+  - wget ${ES_DOWNLOAD_URL}
+  - tar xzf elasticsearch-${ES_VERSION}.tar.gz
+  - elasticsearch-${ES_VERSION}/bin/elasticsearch &
   - pip install -U pip
   - bundle update json
   - bundle install --deployment --path ../gems --binstubs ../gem-bin
@@ -39,8 +39,12 @@ before_script:
   - ./manage.py collectstatic --noinput
 
 script:
+  - wget -q --waitretry=1 --retry-connrefused -T 10 -O - http://127.0.0.1:9200
   - ./run-tests --coverage
 
 after_success:
   - coveralls
   - ocular --data-file ".coverage"
+
+env:
+  - ES_VERSION=0.90.13 ES_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz
