@@ -16,6 +16,7 @@ addons:
 
 install:
   - pip install -U pip
+  - bundle update json
   - bundle install --deployment --path ../gems --binstubs ../gem-bin
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt
