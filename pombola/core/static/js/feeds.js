@@ -21,7 +21,7 @@
     var maximumListItems = 2;
     if ( blogContainer ) {
         var feedURL = blogContainer.attr("data-blog-rss-feed");
-        $.ajax(feedURL, dataType='xml').done(
+        $.ajax(feedURL, {dataType: 'xml'}).done(
             function (xml) {
                 blogContainer.html('');
                 $(xml).find('item').each(function (index) {
