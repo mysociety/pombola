@@ -12,7 +12,7 @@ from django.views.generic import TemplateView
 from pombola.core import models
 
 from haystack.query import SearchQuerySet
-from haystack.inputs import AutoQuery
+from haystack.inputs import AutoQuery, Raw
 
 from sorl.thumbnail import get_thumbnail
 from .geocoder import geocoder
@@ -138,6 +138,18 @@ class SearchBaseView(TemplateView):
             results = paginator.page(paginator.num_pages)
         return results
 
+    # This applies the 'fuzzy' query string modifier to queries which
+    # entirely contain [a-zA-Z0-9 ] characters. See:
+    # https://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-query-string-query.html
+    def generate_fuzzy_query_object(self, query_string):
+        if re.match("^[a-z0-9 ]*$", query_string, re.IGNORECASE):
+            query_string = ' '.join(word + '~1' for word in query_string.split(' '))
+            query_object = Raw(query_string)
+        else:
+            query_object = AutoQuery(query_string)
+
+        return query_object
+
     def get_global_context(self, context):
         # Find all the models to search over...
         models = set(
@@ -163,7 +175,7 @@ class SearchBaseView(TemplateView):
             sqs = sqs.exclude(id=top_hit_id)
         sqs = sqs. \
             exclude(hidden=True). \
-            filter(content=AutoQuery(self.query)). \
+            filter(content=self.generate_fuzzy_query_object(self.query)). \
             highlight()
 
         if self.start_date_range:
@@ -230,8 +242,9 @@ class SearchBaseView(TemplateView):
         query = SearchQuerySet().models(defaults['model'])
         if extra_exclude:
             query = query.exclude(**extra_exclude)
+
         query = query.filter(
-            content=AutoQuery(self.query),
+            content=self.generate_fuzzy_query_object(self.query),
             *filter_args,
             **filter_kwargs
         )
