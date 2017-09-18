@@ -123,20 +123,25 @@
               <div class="column">
                 {% for data in attendance %}
                   <header>
-                    <h3 class="attendance__heading">{{ data.year }} attendance as {{ data.position }}</h3>
+                    <h3 class="attendance__heading">{{ data.year }} committee attendance as {{ data.position }}</h3>
                     {% if data.year == 2014 %}<p>(From the start of the Fifth Parliament)</p>{% endif %}
                   </header>
-                  {% if data.position == 'minister' %}
+                  {% if data.position == 'minister/deputy' %}
                     <p class="attendance__number">Attended {{ data.attended }} meeting{{ data.attended|pluralize }}</p>
                   {% else %}
                     <p class="attendance__percentage">{{ data.percentage|floatformat:"0" }}% attendance rate</p>
                     <p class="attendance__context">Attended {{ data.attended }} meeting{{ data.attended|pluralize }} out of {{ data.total }}</p>
                   {% endif %}
                 {% endfor %}
-                <p class="attendance__disclaimer">
-                  Minister/Deputy Minister attendance is not compulsory.<br>
-                  MP attendance is compulsory unless an apology is given.
-                </p>
+
+                <ul class="attendance__notes">
+                  <li>Attendance records reflect Committee not Plenary Attendance</li>
+                  <li>Minister/Deputy Minister attendance is not compulsory.</li>
+                  <li>MP attendance is compulsory unless an apology is given</li>
+                  <li>MPs are recorded as absent whether they have, or have not submitted apologies.</li>
+                  <li>This is not the official committee attendance record of Parliament.</li>
+                  <li>Plenary Attendance is not made public by Parliament although it has been requested.</li>
+                </ul>
               </div>
 
               {% if latest_meetings_attended %}
@@ -154,7 +159,8 @@
             {% endif %}
 
           </div>
-          <p class="attendance__disclaimer">DISCLAIMER: This is not the official attendance record of Parliament. This information has been obtained via the Parliamentary Monitoring Group. PMG makes every effort to compile reliable and comprehensive information, but does not claim that the data is 100% accurate and complete.</p>
+          <p class="attendance__disclaimer">DISCLAIMER: This information has been obtained via the Parliamentary Monitoring Group. PMG makes every effort to compile reliable and comprehensive information, but does not claim that the data is 100% accurate and complete.
+          </p>
         </div> <!-- .attendance -->
       {% endif %}
 
