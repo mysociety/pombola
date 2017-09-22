@@ -49,34 +49,6 @@
 
 <div id="home-editorial">
 
-    <div id="home-special-features">
-        <div class="home-election">
-            <div class="home-election__heading">
-                <h2>Election 2017</h2>
-                <a href="http://kenya.ynr.mysociety.org/" class="button">
-                    <strong>All 2017 Election Candidates</strong>
-                    Discover who is running in your area
-                </a>
-            </div>
-            <div class="home-election__milestones">
-                <ol>
-                  {% for post in election_blog_posts|slice:":3" %}
-                    <li>
-                        <h3><a href="{% url 'info_blog' slug=post.slug %}">{{ post.title }}</a></h3>
-                        {{ post.content_as_cleaned_html|safe|truncatewords_html:20 }}
-                    </li>
-                  {% endfor %}
-                    <li>
-                        <a href="{% url 'info_blog_tag' slug='elections-2017' %}" class="home-election__milestones__more">Read more election coverage</a>
-                    </li>
-                    <li>
-                        <a href="http://kenya.ynr.mysociety.org/" class="home-election__milestones__more">Discover election candidates in your area</a>
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
-
   {% if settings.BLOG_RSS_FEED %}
     <div id="home-blog">
         <h2>Editorial</h2>
