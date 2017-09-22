@@ -108,11 +108,6 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-.home-cta--contact {
-  background-image: url(../images/sms-40px.png);
-  background-position: 22px 50%; // compensate for slightly smaller image
-}
-
 .home-cta--hansard {
   // background-color: $colour_primary_mid;
   background-image: url(../images/hansard-50px.png);
@@ -261,6 +256,79 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
       }
     }
   }
+}
+
+.home-editorial__actions {
+    @include clearfix();
+    padding-left: 0;
+    margin: 20px;
+
+    li {
+        list-style: none;
+        margin-bottom: 1px;
+
+        &:first-child a {
+            @include border-top-left-radius(4px);
+            @include border-top-right-radius(4px);
+        }
+
+        &:last-child a {
+            @include border-bottom-left-radius(4px);
+            @include border-bottom-right-radius(4px);
+        }
+    }
+
+    @media only screen and (min-width: 640px) {
+        @include clearfix();
+        margin: -10px -10px 30px -10px;
+
+        li {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            float: left;
+            width: 50%;
+            padding: 10px 10px 0 10px;
+
+            a,
+            &:first-child a,
+            &:last-child a {
+                border-radius: 4px;
+            }
+        }
+    }
+
+    a {
+        display: block;
+        background: darken($colour_primary_mid, 10%) url(../images/newsletter-40px.png) 22px 50% no-repeat;
+        padding: 15px 10px 15px 80px;
+        color: #fff;
+        font-size: 16px;
+        line-height: 21px;
+
+        &:hover {
+            background-color: darken($colour_primary_mid, 15%);
+            text-decoration: none;
+        }
+
+        &[href^="sms"] {
+            background-color: $colour_red;
+            background-image: url(../images/sms-40px.png);
+            background-position: 22px 50%;
+
+            &:hover {
+                background-color: darken($colour_red, 5%);
+            }
+        }
+
+        &[href*="newsletter"] {
+
+        }
+
+        strong {
+            display: block;
+        }
+    }
 }
 
 #home-news-list {
