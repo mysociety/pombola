@@ -35,13 +35,11 @@
                         return false;
                     };
                     listItem.append(
-                        $('<h3>').append(
-                            $('<a>').text(title).attr({href: url})
-                        ).append(
-                            '<p class="meta">' + dateFormat(published) + '</p>'
-                        ).append(
-                            $('<p>').html(description)
-                        )
+                        $('<a>').text(title).attr({href: url}).wrap('<h3></h3>').parent()
+                    ).append(
+                        $('<p>').addClass('meta').html(dateFormat(published))
+                    ).append(
+                        $('<p>').html(description)
                     );
                     blogContainer.append(listItem);
                 })
