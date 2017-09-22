@@ -174,72 +174,8 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-@media only screen and (min-width: 640px) {
-
-}
-
 .home-social__profiles-list {
   @include inline-list;
-}
-
-.home-special-feature {
-  display: block;
-  margin-top: 1em;
-  padding: 20px;
-  @include border-radius(4px);
-
-  background-color: $colour_pale_yellow;
-  border: 1px solid mix(#000, $colour_pale_yellow, 10%);
-  color: #676105; // a sort of olive brown
-
-  h2, h3 {
-    color: inherit;
-    line-height: 1.2em;
-  }
-
-  h2 {
-    font-size: 1.3em;
-  }
-}
-
-.home-special-feature--button {
-  text-decoration: none;
-
-  h2 {
-    margin: 0;
-  }
-}
-
-.home-special-feature--shujaaz {
-  position: relative;
-  padding-right: 80px; // leave space for img
-
-  background-color: $colour_pale_green;
-  border-color: mix(#000, $colour_pale_green, 10%);
-  color: $colour_primary;
-
-  &:hover, &:focus {
-    background-color: mix(#000, $colour_pale_green, 5%);
-    color: $colour_primary;
-  }
-
-  img {
-    position: absolute;
-    right: 10px;
-    bottom: 0;
-  }
-}
-
-.home-special-feature--women {
-  background-color: $colour_pale_purple;
-  border-color: mix(#000, $colour_pale_purple, 10%);
-  color: $colour_purple;
-
-  &:hover,
-  &:focus {
-    background-color: mix(#000, $colour_pale_purple, 5%);
-    color: $colour_purple;
-  }
 }
 
 .featured-person {
