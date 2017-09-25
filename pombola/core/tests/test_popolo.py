@@ -227,10 +227,11 @@ class PopoloTest(TestCase):
         area = membership['area']
         self.assertEqual(
             set(area.keys()),
-            set(['area_type', 'id', 'identifier', 'name'])
+            set(['area_type', 'id', 'identifier', 'name', 'sessions'])
         )
         self.assertEqual(area['area_type'], 'PRV')
         self.assertEqual(area['name'], 'Test Province')
+        self.assertEqual(area['sessions'], [])
         self.assertEqual(
             area['id'],
             'mapit:{0}'.format(self.mapit_test_province.id)
@@ -259,7 +260,7 @@ class PopoloTest(TestCase):
             mapit_generation=self.generation.id,
             house=example_assembly,
         )
-        self.place.parliamentary_session = example_session
+        self.place.parliamentary_sessions.add(example_session)
         self.place.save()
         self.position.place = self.place
         self.position.save()
@@ -274,7 +275,7 @@ class PopoloTest(TestCase):
         area = membership['area']
         self.assertEqual(
             set(area.keys()),
-            set(['area_type', 'id', 'identifier', 'name', 'session'])
+            set(['area_type', 'id', 'identifier', 'name', 'sessions'])
         )
         self.assertEqual(area['area_type'], 'PRV')
         self.assertEqual(area['name'], 'Test Province')
@@ -288,8 +289,8 @@ class PopoloTest(TestCase):
                 self.mapit_test_province.id
             )
         )
-        self.assertTrue(area['session'])
-        session = area['session']
+        self.assertTrue(area['sessions'])
+        session = area['sessions'][0]
         self.assertEqual(session['start_date'], '1970-07-01')
         self.assertEqual(session['end_date'], '1975-12-31')
         self.assertEqual(session['house_name'], 'Example Assembly')

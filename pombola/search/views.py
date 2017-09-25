@@ -363,11 +363,11 @@ known_kinds = {
 
 def places_ordered_by_session(place_a, place_b):
     """Return True if both places have sessions and place_b's is later"""
-    a_session = place_a.parliamentary_session
-    b_session = place_b.parliamentary_session
-    if not (a_session and b_session):
+    a_sessions = place_a.parliamentary_sessions.order_by('start_date')
+    b_sessions = place_b.parliamentary_sessions.order_by('start_date')
+    if not (a_sessions and b_sessions):
         return False
-    return a_session.end_date < b_session.end_date
+    return a_sessions[0].start_date < b_sessions[0].start_date
 
 def remove_duplicate_places(response_data):
     """Remove all but the newest of places with indistinguishable labels

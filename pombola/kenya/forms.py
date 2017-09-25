@@ -67,7 +67,7 @@ class YouthEmploymentSupportForm(forms.Form):
     constituencies = NamedModelChoiceField(
         queryset = Place.objects.filter(
                     kind__slug='constituency',
-                    parliamentary_session__end_date__gte=datetime.date.today()
+                    parliamentary_sessions__end_date__gte=datetime.date.today()
                    ).order_by('name'),
         empty_label = "Choose your constituency",
         error_messages={'required': "Please choose a constituency"}

@@ -50,9 +50,9 @@ def get_area_information(place, base_url):
         'area_type': mapit_type,
         'name': place.name,
     }
-    session = place.parliamentary_session
-    if session:
-        result['session'] = {
+    result['sessions'] = []
+    for session in place.parliamentary_sessions.all():
+        session_data = {
             'id': session.id,
             'slug': session.slug,
             'name': session.name,
@@ -61,8 +61,9 @@ def get_area_information(place, base_url):
             'mapit_generation': session.mapit_generation,
         }
         if session.house:
-            result['session']['house_id'] = session.house.id
-            result['session']['house_name'] = session.house.name
+            session_data['house_id'] = session.house.id
+            session_data['house_name'] = session.house.name
+        result['sessions'].append(session_data)
     return result
 
 def date_to_partial_iso8601(approx_date):
@@ -218,7 +219,11 @@ def get_areas(primary_id_scheme, base_url):
     all_areas = [
         get_area_information(pl, base_url) for pl in
         Place.objects.order_by().select_related(
-            'mapit_area__type', 'parliamentary_session__house')
+            'mapit_area__type'
+        ).prefetch_related(
+            Prefetch(
+                'parliamentary_sessions',
+                queryset=ParliamentarySession.objects.select_related('house')))
     ]
     return [a for a in all_areas if a is not None]
 
@@ -264,9 +269,14 @@ def get_people(primary_id_scheme, base_url, title_to_sessions, inline_membership
                 queryset=Position.objects.order_by().select_related(
                     'organisation',
                     'place__mapit_area__type',
-                    'place__parliamentary_session__house',
                     'title',
-                ).prefetch_related('identifiers')
+                ).prefetch_related(
+                    'identifiers',
+                    Prefetch(
+                        'place__parliamentary_sessions',
+                        queryset=ParliamentarySession.objects.select_related('house')
+                    )
+                )
             )
     ):
         name = person.legal_name

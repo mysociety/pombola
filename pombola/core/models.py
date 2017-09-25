@@ -807,7 +807,7 @@ class PlaceQuerySet(models.query.GeoQuerySet):
 
     def order_by_parliamentary_session(self):
         """This is a helper for use in the place_places.html template"""
-        return self.order_by('-parliamentary_session__start_date', 'name')
+        return self.order_by('-parliamentary_sessions__start_date', 'name')
 
     def order_by_kind(self):
         """This is a helper for use in the place_places.html template"""
@@ -827,7 +827,7 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
     shape_url = models.URLField(blank=True)
     location = models.PointField(null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=True, blank=True, help_text="use if the place uniquely belongs to an organisation - eg a field office" )
-    parliamentary_session = models.ForeignKey('ParliamentarySession', null=True, blank=True)
+    parliamentary_sessions = models.ManyToManyField('ParliamentarySession')
 
     mapit_area = models.ForeignKey( mapit_models.Area, null=True, blank=True )
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
@@ -846,10 +846,7 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
         return self.kind.name
 
     def __unicode__(self):
-        session_suffix = ""
-        if self.parliamentary_session:
-            session_suffix += " " + str(self.parliamentary_session.short_date_range())
-        return "%s (%s%s)" % (self.name, self.kind, session_suffix)
+        return "%s %d (%s)" % (self.name, self.pk, self.kind)
 
     def is_constituency(self):
         return self.kind.slug == 'constituency'
@@ -937,9 +934,13 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
 
         results = defaultdict(list)
         for p in self.child_places.all():
-            if self.parliamentary_session and p.parliamentary_session:
-                if self.parliamentary_session.overlaps(p.parliamentary_session):
-                    results[p.kind].append(p)
+            self_sessions = list(self.parliamentary_sessions.all())
+            other_sessions = list(p.parliamentary_sessions.all())
+            if self_sessions and other_sessions:
+                for self_session in self_sessions:
+                    for other_session in other_sessions:
+                        if self_session.overlaps(other_session):
+                            results[p.kind].append(p)
             else:
                 results[p.kind].append(p)
         for v in results.values():
@@ -1109,8 +1110,8 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
 
     @property
     def show_active(self):
-        if self.parliamentary_session:
-            return self.parliamentary_session.end_date >= datetime.date.today()
+        if self.parliamentary_sessions.exists():
+            return self.parliamentary_sessions.filter(end_date__get=datetime.date.today())
         else:
             True
 
