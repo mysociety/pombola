@@ -2220,9 +2220,20 @@ p.attendance__number {
 }
 
 p.attendance__disclaimer {
-  color: $colour_middling_grey;
-  font-size: 0.8em;
-  margin: 0.8em 0;
+    color: $colour_middling_grey;
+    font-size: 0.8em;
+    margin: 0.8em 0;
+}
+
+ul.attendance__notes {
+    color: $colour_middling_grey;
+    margin: 0.8em 0;
+    padding-left: 0;
+
+    li {
+        font-size: 0.9em;
+    }
+
 }
 
 /* List pages for recent appearances, questions and attendances*/

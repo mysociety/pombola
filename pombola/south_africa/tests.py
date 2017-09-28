@@ -688,7 +688,7 @@ class SAAttendanceDataTest(TestCase):
             'attended': 50,
             'total': 62,
             'percentage': 100 * 50 / 62,
-            'position': 'minister'},
+            'position': 'minister/deputy'},
             {'year': 2000,
             'attended': 60,
             'total': 63,

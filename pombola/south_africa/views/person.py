@@ -324,7 +324,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
                         'attended': attendance,
                         'total': meeting_count,
                         'percentage': percentage,
-                        'position': position,
+                        'position': position if position == 'mp' else 'minister/deputy',
                     }
                 )
 
