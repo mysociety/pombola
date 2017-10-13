@@ -86,38 +86,19 @@
     {% endif %}
 </li>
 
-<li class="has-submenu">
-    <a href="{% url "info_page" slug='public-participation' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Public Participation</a>
-    {% if include_sub_menu_entries %}
-    <ul id="places-overview" class="js-hover-dropdown" role="menu">
-      <li>
-        <a href="{% url "info_page" slug='citizens-rights' %}" role="menuitem">Rights and Responsibilities</a>
-      </li>
-      <li>
-        <a href="{% url "info_page" slug='forum' %}" role="menuitem">Forum</a>
-      </li>
-      <li>
-        <a href="{% url "info_page" slug='polls' %}" role="menuitem">Polls</a>
-      </li>
-      <li>
-        <a href="{% url "info_page" slug='proposed-bills' %}" role="menuitem">Proposed Bills</a>
-      </li>
-      <li>
-        <a href="{% url 'shujaaz-finalists-2015' %}" role="menuitem">People’s Shujaaz Finalists</a>
-      </li>
-      <li>
-        <a href="{% url 'women' %}" role="menuitem">Debunking Myths on Women MPs</a>
-      </li>
-    </ul>
-    {% endif %}
-</li>
-
 {% if include_sub_menu_entries %}
 <li class="has-submenu">
     <a role="menuitem" aria-haspopup="true">Research</a>
     <ul id="parliament-overview" class="js-hover-dropdown" role="menu">
-        <li><a href="{% url "shujaaz-finalists-2015" %}" role="menuitem">People’s Shujaaz Awards</a></li>
-        <li><a href="{% url "women" %}" role="menuitem">Women MPs</a></li>
+        <li>
+            <a href="{% url 'women' %}" role="menuitem">Debunking Myths on Women MPs</a>
+        </li>
+        <li>
+            <a href="{% url "shujaaz-finalists-2015" %}" role="menuitem">People’s Shujaaz Awards</a>
+        </li>
+        <li>
+            <a href="{% url "info_page" slug="proposed-bills" %}" role="menuitem">National Youth Employment Authority</a>
+        </li>
     </ul>
 </li>
 {% endif %}
@@ -134,12 +115,6 @@
         </li>
         <li>
             <a href="{% url "info_page" slug='infographics' %}" role="menuitem">Infographics</a>
-        </li>
-        <li>
-            <a href="{% url "info_page" slug='data' %}" role="menuitem">Data</a>
-        </li>
-        <li>
-            <a href="{% url "info_page" slug='newsletter' %}" role="menuitem">Newsletter</a>
         </li>
     </ul>
     {% endif %}

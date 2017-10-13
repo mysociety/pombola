@@ -86,6 +86,19 @@ urlpatterns = [
     url(r'^fb/politics/thanks$',
         TreatmentPoliticsThanks.as_view()
         ),
+
+    url('^info/newsletter$', RedirectView.as_view(
+            pattern_name='info_page',
+            permanent=False,
+            ),
+        {'slug': 'press'},
+        ),
+    url('^info/data$', RedirectView.as_view(
+            pattern_name='info_page',
+            permanent=False,
+            ),
+        {'slug': 'infographics'},
+        ),
 ]
 
 # Create the two County Performance pages:
