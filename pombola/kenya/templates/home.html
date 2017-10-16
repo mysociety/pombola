@@ -63,6 +63,13 @@
         </li>
     </ul>
 
+  {% if featured_person != None %}
+    <div id="home-featured-person">
+        <h2>Featured Person</h2>
+        {% include 'core/person_feature.html' %}
+    </div>
+  {% endif %}
+
   {% if settings.BLOG_RSS_FEED %}
     <div id="home-blog">
         <h2>Editorial</h2>
@@ -97,13 +104,6 @@
 </div>
 
 <div id="home-promoted">
-
-  {% if featured_person != None %}
-    <div id="home-featured-person">
-        <h2>Featured Person</h2>
-        {% include 'core/person_feature.html' %}
-    </div>
-  {% endif %}
 
 </div>
 

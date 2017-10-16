@@ -123,6 +123,19 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   padding: 20px;
 }
 
+@media only screen and (min-width: 640px) {
+  #home-featured-person {
+    // Visually position the next/prev arrows at top right of the section
+    position: relative;
+
+    .feature-nav {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+  }
+}
+
 #home-social {
   h2 {
     font-size: 1em;
