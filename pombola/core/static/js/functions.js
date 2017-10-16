@@ -39,40 +39,33 @@ $(function(){
     }
 
     // important to delegate this (with on()) because the contents change each auto-advance
-    $('#home-featured-person').on("click", '.feature-nav > a',
-        function(e, is_auto_advancing){
-          e.preventDefault();
-          if (! is_auto_advancing) { // user clicked
-            auto_advance_enabled = false;
-            if (auto_advance_timeout) {
-              clearTimeout(auto_advance_timeout);
-            }
-          }
-          var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
-          if (m.length==3) { // wee sanity check: found direction [1] and slug [2]
-            // fix the container height to stop content below jumping up when contents fadeOut
-            $('#home-featured-person').css("height", $('#home-featured-person').height() + "px");
-            $('.featured-person', '#home-featured-person').fadeOut('fast',
-              function(){
-                 $('#home-featured-person').html(transitionDiv())
-                    .load(
-                      "person/featured/" + m[1] + '/' + m[2],
-                      function() {
-                        $('#home-featured-person').css("height","auto");
-                      }
-                    );
-              })
-          }
+    $('#home-featured-person').on("click", '.feature-nav > a', function(e, is_auto_advancing){
+      e.preventDefault();
+      if (! is_auto_advancing) { // user clicked
+        auto_advance_enabled = false;
+        if (auto_advance_timeout) {
+          clearTimeout(auto_advance_timeout);
         }
-    );
+      }
+
+      var m = $(this).attr('href').match(/(before|after)=([-\w]+)$/);
+      if (m.length==3) { // wee sanity check: found direction [1] and slug [2]
+        $('#home-featured-person .featured-person').replaceWith( transitionDiv() );
+        $.get("person/featured/" + m[1] + '/' + m[2]).done(function(html){
+          $('#home-featured-person .featured-person').replaceWith(html);
+        });
+      }
+    });
 
     if (auto_advance_enabled) {
-      $('#home-featured-person').html(transitionDiv()).load(
-          'person/featured/' + Math.floor(Math.random()*100) // some random index of featured person
-      );
+      $('#home-featured-person .featured-person').replaceWith( transitionDiv() );
+      $.get('person/featured/' + Math.floor(Math.random()*100)).done(function(html){
+        // some random index of featured person
+        $('#home-featured-person .featured-person').replaceWith(html);
+      });
       function auto_advance(){
         if (auto_advance_enabled){
-          $('a.feature-next', '#home-featured-person').trigger("click", true);
+          $('#home-featured-person a.feature-next').trigger("click", true);
           auto_advance_timeout = window.setTimeout(auto_advance, auto_advance_delay);
         }
       }
