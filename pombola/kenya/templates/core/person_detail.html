@@ -1,8 +1,17 @@
 {% extends 'core/person_base.html' %}
 
+{% load pipeline %}
+
 {% block title %}{{ object.name }} Overview{% endblock %}
 
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'collapse-responsibilities' %}
+{% endblock %}
+
 {% block subcontent %}
+
+  {% include 'core/person_detail_responsibilities.html' with positions=object.position_set.all.political.currently_active %}
 
   <div class="person-detail-experience">
     <h2><a href="{% url "person_experience" slug=object.slug %}">Current positions</a></h2>

@@ -1118,6 +1118,7 @@ class PositionTitle(ModelBase):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, help_text="created from name")
     summary = MarkupField(blank=True, default='')
+    responsibilities = MarkupField(blank=True, default='')
     requires_place = models.BooleanField(default=False, help_text="Does this job title require a place to complete the position?")
 
     fields_to_whitespace_normalize = ['name']

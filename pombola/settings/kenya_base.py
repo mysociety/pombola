@@ -68,6 +68,12 @@ COUNTRY_JS = {
         ),
         'output_filename': 'js/facebook-experiment.js',
     },
+    'collapse-responsibilities': {
+        'source_filenames': (
+            'js/collapse-responsibilities.js',
+        ),
+        'output_filename': 'js/collapse-responsibilities.js',
+    },
 }
 
 HANSARD_NAME_MATCHING_ALGORITHM = NAME_SUBSTRING_MATCH

@@ -37,7 +37,7 @@ body {
 .profile-info {
   position: static; /* override position:absolute */
   overflow: visible; /* override overflow:hidden */
-  width: auto;
+  width: 100%;
 }
 
 .object-titles {
@@ -127,6 +127,7 @@ body {
     background: #fff;
     border: 1px solid #ddd;
     height: auto;
+    width: auto;
 
     img {
       max-height: none;
@@ -258,7 +259,7 @@ body {
 .person-detail-cdf-budgets {
   width: 48%;
   float: left;
-  background: transparent url(../images/mz-person-detail-experience.png) 0 0 no-repeat;
+  background: transparent url(../images/mz-person-detail-positions.png) 0 0 no-repeat;
 
   & > * {
     margin-left: 30px;
@@ -335,6 +336,52 @@ body {
 
     a {
       color: $colour_primary;
+    }
+  }
+}
+
+.person-detail-responsibilities {
+  padding: 20px; // match .large-container
+  margin: -20px -20px 30px -20px; // overlap padding of parent .large-container
+  background: #fbf6dd url(../images/mz-person-detail-experience.png) 20px 20px no-repeat;
+
+  & > * {
+    margin-left: 30px;
+  }
+
+  h2 {
+    margin-bottom: 0;
+    color: $colour_primary;
+  }
+
+  ul {
+    @include list-reset-soft;
+    margin-left: 30px;
+    margin-top: 14px;
+
+    li {
+      margin: 10px 0;
+    }
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  button {
+    cursor: pointer;
+    color: $colour_primary;
+    border: none;
+    padding: 0;
+    background: transparent;
+    font-size: 14px;
+    font-family: inherit;
+    line-height: inherit;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      color: #004422; // this comes from _html_elements.scss
     }
   }
 }
