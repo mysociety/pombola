@@ -114,3 +114,8 @@ EMAIL_HOST_USER: ''
 EMAIL_HOST_PASSWORD: ''
 EMAIL_PORT: 0
 EMAIL_USE_TLS: false
+
+# Some Pombola instances need a Google Maps Geocoding API to map
+# addresses to longitude / latitude. You can specify the key to use
+# here:
+GOOGLE_MAPS_GEOCODING_API_KEY: ''

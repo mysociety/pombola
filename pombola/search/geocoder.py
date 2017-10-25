@@ -1,10 +1,15 @@
+from django.conf import settings
 from pygeocoder import Geocoder
 
 
 def geocoder(country, q, decimal_places=3):
 
     components = "country:" + country
-    response = Geocoder.geocode(q, components=components)
+    if settings.GOOGLE_MAPS_GEOCODING_API_KEY:
+        geocoder = Geocoder(settings.GOOGLE_MAPS_GEOCODING_API_KEY)
+        response = geocoder.geocode(q, components=components)
+    else:
+        response = Geocoder.geocode(q, components=components)
 
     results = []
 

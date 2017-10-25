@@ -644,3 +644,5 @@ SHELL_PLUS_APP_PREFIXES = {
     'interests_register': 'interests',
     'place_data': 'place_data',
 }
+
+GOOGLE_MAPS_GEOCODING_API_KEY = config.get('GOOGLE_MAPS_GEOCODING_API_KEY', '')
