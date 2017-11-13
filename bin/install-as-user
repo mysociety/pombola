@@ -111,10 +111,10 @@ do
                 LIVE_URL='http://info.mzalendo.com'
                 ;;
             south_africa)
-                LIVE_URL='http://www.pa.org.za'
+                LIVE_URL='https://www.pa.org.za'
                 ;;
             nigeria)
-                LIVE_URL='http://www.shineyoureye.org'
+                LIVE_URL='http://pombola.shineyoureye.org'
                 ;;
             *)
                 echo "Unknown COUNTRY_APP $COUNTRY_APP when trying to download data"
