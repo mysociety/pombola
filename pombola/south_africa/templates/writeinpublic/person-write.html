@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Write to {{ object.name }}{% endblock %}
+
+{% block content %}
+  <div>
+    <p>Write to {{ object.name }}</p>
+
+    <form action="{% url 'sa-person-write' person_slug=object.slug %}" method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Send message" />
+    </form>
+  </div>
+{% endblock %}
