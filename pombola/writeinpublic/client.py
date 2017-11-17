@@ -37,4 +37,5 @@ class WriteInPublic(object):
             'username': self.username,
             'api_key': self.api_key,
         }
-        return requests.get(url, params=params)
+        r = requests.get(url, params=params)
+        return Message(r.json())
