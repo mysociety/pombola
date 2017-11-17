@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}WriteInPublic message{% endblock %}
+
+{% block content %}
+  <div class="message">
+    <h2>{{ message.subject }}</h2>
+    <div class="message-content">
+      {{ message.content|linebreaksbr }}
+    </div>
+  </div>
+{% endblock %}

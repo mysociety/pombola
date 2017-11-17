@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 
 from pombola.core.models import Person
+from pombola.writeinpublic.client import WriteInPublic
 
 
 class SAWriteToRepresentative(FormView):
@@ -25,3 +26,13 @@ class SAWriteToRepresentative(FormView):
         # It should return an HttpResponse.
         form.send_message()
         return super(SAWriteToRepresentative, self).form_valid(form)
+
+
+class SAWriteInPublicMessage(TemplateView):
+    template_name = 'writeinpublic/message.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SAWriteInPublicMessage, self).get_context_data(**kwargs)
+        client = WriteInPublic("http://10.11.12.13.xip.io:8000", "admin", "123abc")
+        context['message'] = client.get_message(8)
+        return context

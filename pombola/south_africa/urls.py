@@ -275,3 +275,12 @@ urlpatterns += (
         name='sa-interests-source'
     ),
 )
+
+# WriteInPublic
+urlpatterns += (
+    url(
+        r'^write/(?P<message_id>\d+)/$',
+        views.SAWriteInPublicMessage.as_view(),
+        name='sa-writeinpublic-message'
+    ),
+)
