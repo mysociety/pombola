@@ -23,3 +23,12 @@ class WriteInPublic(object):
             'persons': persons,
         }
         return requests.post(url, json=payload, params=params)
+
+    def get_message(self, message_id):
+        url = '{url}/api/v1/message/{message_id}/'.format(url=self.url, message_id=message_id)
+        params = {
+            'format': 'json',
+            'username': self.username,
+            'api_key': self.api_key,
+        }
+        return requests.get(url, params=params)
