@@ -1,5 +1,11 @@
 import requests
 
+class Message(object):
+    def __init__(self, params):
+        self.author_name = params['author_name']
+        self.subject = params['subject']
+        self.content = params['content']
+
 
 class WriteInPublic(object):
     def __init__(self, url, username, api_key):
