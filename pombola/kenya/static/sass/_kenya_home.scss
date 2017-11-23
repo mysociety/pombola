@@ -99,9 +99,9 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
   }
 }
 
-.home-cta--dokeza {
+.home-cta--bonga {
   background-color: $colour_red;
-  background-image: url(../images/dokeza-50px.png);
+  background-image: url(../images/sms-40px.png);
 
   &:hover, &:focus {
     background-color: darken($colour_red, 5%);
@@ -324,9 +324,9 @@ $serif-font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", L
             text-decoration: none;
         }
 
-        &[href^="sms"] {
+        &[href^="https://dokeza.mzalendo.com/"] {
             background-color: $colour_red;
-            background-image: url(../images/sms-40px.png);
+            background-image: url(../images/dokeza-50px.png);
             background-position: 22px 50%;
 
             &:hover {
