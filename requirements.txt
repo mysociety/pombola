@@ -173,3 +173,7 @@ gunicorn==19.4.5
 whitenoise==2.0.6
 
 cffi
+
+# everypolitician packages
+everypolitician==0.0.13
+everypolitician-popolo==0.0.11
