@@ -719,3 +719,15 @@ class OverlappingPositionsTests(TestCase):
             person.delete()
             position.delete()
             i += 1
+
+
+class PersonEveryPoliticianUUIDTest(TestCase):
+    def setUp(self):
+        self.person = models.Person.objects.create(legal_name="Bob Smith", slug="bob-smith")
+
+    def test_returns_none_with_no_identifier(self):
+        self.assertEqual(self.person.everypolitician_uuid, None)
+
+    def test_returns_uuid(self):
+        self.person.identifiers.create(scheme='everypolitician', identifier='99795f75-d2fe-4353-a177-a4b8c8cfc01d')
+        self.assertEqual(self.person.everypolitician_uuid, '99795f75-d2fe-4353-a177-a4b8c8cfc01d')
