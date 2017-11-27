@@ -68,6 +68,9 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 # NOTE - this should probably be removed once the live site is launched
 13 0 * * * !!(*= $user *)!! output-on-error update_za_hansard.bash
 
+# Sync EveryPolitician UUIDs to local DB
+0 10 * * * !!(*= $user *)!! output-on-error run_management_command south_africa_sync_everypolitician_uuid
+
 !!(* } elsif ($vhost eq 'www.pa.org.za') { *)!!
 
 # NOTE - until the live site is launched, crons are turned off in vhosts.pl
@@ -76,6 +79,9 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 # Generate the Popolo JSON files
 13 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
 30 3 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.pa.org.za
+
+# Sync EveryPolitician UUIDs to local DB
+30 10 * * * !!(*= $user *)!! output-on-error run_management_command south_africa_sync_everypolitician_uuid
 
 !!(* } else { *)!!
 !!(* } *)!!
