@@ -22,9 +22,18 @@ class SAWriteToRepresentative(FormView):
         return context
 
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.send_message()
+        # FIXME: These values should come from config
+        client = WriteInPublic("http://10.11.12.13.xip.io:8000", "admin", "123abc")
+        r = client.create_message(
+            author_name=form.cleaned_data['author_name'],
+            author_email=form.cleaned_data['author_email'],
+            subject=form.cleaned_data['subject'],
+            content=form.cleaned_data['content'],
+            # FIXME: This shouldn't be hard-coded
+            writeitinstance="/api/v1/instance/3/",
+            # FIXME: This shouldn't be hard-coded
+            persons=["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-019d1059-be01-44ea-b584-8458d63235c6"],
+        )
         return super(SAWriteToRepresentative, self).form_valid(form)
 
 
