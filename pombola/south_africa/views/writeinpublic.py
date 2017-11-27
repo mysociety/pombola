@@ -23,6 +23,8 @@ class SAWriteToRepresentative(FormView):
 
     def form_valid(self, form):
         # FIXME: These values should come from config
+        person_slug = self.kwargs['person_slug']
+        person = get_object_or_404(Person, slug=person_slug)
         client = WriteInPublic("http://10.11.12.13.xip.io:8000", "admin", "123abc")
         r = client.create_message(
             author_name=form.cleaned_data['author_name'],
@@ -32,7 +34,7 @@ class SAWriteToRepresentative(FormView):
             # FIXME: This shouldn't be hard-coded
             writeitinstance="/api/v1/instance/3/",
             # FIXME: This shouldn't be hard-coded
-            persons=["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-019d1059-be01-44ea-b584-8458d63235c6"],
+            persons=["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{uuid}".format(uuid=person.everypolitician_uuid)],
         )
         return super(SAWriteToRepresentative, self).form_valid(form)
 
