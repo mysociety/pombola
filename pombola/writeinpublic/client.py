@@ -41,7 +41,7 @@ class WriteInPublic(object):
         return Message(r.json())
 
     def get_messages(self, person_id):
-        url = '{url}/api/v1/message/'.format(url=self.url)
+        url = '{url}/api/v1/instance/3/messages/'.format(url=self.url)
         params = {
             'format': 'json',
             'username': self.username,
