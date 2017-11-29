@@ -1,11 +1,24 @@
 import requests
 
+from pombola.core.models import Person
+
+
 class Message(object):
     def __init__(self, params):
         self.id = params['id']
         self.author_name = params['author_name']
         self.subject = params['subject']
         self.content = params['content']
+        self._params = params
+
+    def people(self):
+        return Person.objects.filter(
+            identifiers__scheme='everypolitician',
+            identifiers__identifier__in=self._recipient_ids(),
+        )
+
+    def _recipient_ids(self):
+        return [p['resource_uri'].split('#')[-1].split('-', 1)[-1] for p in self._params['people']]
 
 
 class WriteInPublic(object):
