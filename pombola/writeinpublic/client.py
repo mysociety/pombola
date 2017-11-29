@@ -1,5 +1,7 @@
 import requests
 
+from django.utils.dateparse import parse_datetime
+
 from pombola.core.models import Person
 
 
@@ -9,6 +11,7 @@ class Message(object):
         self.author_name = params['author_name']
         self.subject = params['subject']
         self.content = params['content']
+        self.created_at = parse_datetime(params['created'])
         self._params = params
 
     def people(self):
