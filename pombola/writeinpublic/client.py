@@ -2,6 +2,7 @@ import requests
 
 class Message(object):
     def __init__(self, params):
+        self.id = params['id']
         self.author_name = params['author_name']
         self.subject = params['subject']
         self.content = params['content']
