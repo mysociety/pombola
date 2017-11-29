@@ -4,7 +4,7 @@
 
 {% block content %}
   <div>
-    <p>Write to {{ object.name }}</p>
+    <p>Write to <a href="{% url 'person' slug=object.slug %}">{{ object.name }}</a>
 
     <form action="{% url 'sa-person-write' person_slug=object.slug %}" method="post">{% csrf_token %}
       {{ form.as_p }}
