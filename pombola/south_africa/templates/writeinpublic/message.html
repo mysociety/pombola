@@ -5,6 +5,12 @@
 {% block content %}
   <div class="message">
     <h2>{{ message.subject }}</h2>
+    <h3>Recipients</h3>
+    <ul>
+    {% for person in message.people %}
+    <li><a href="{% url 'person' slug=person.slug %}">{{ person.name }}</a></li>
+    {% endfor %}
+    </ul>
     <div class="message-content">
       {{ message.content|linebreaksbr }}
     </div>
