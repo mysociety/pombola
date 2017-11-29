@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseServerError
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 from pombola.writeinpublic.forms import MessageForm
 from pombola.core.models import Person
@@ -11,7 +12,7 @@ from pombola.writeinpublic.client import WriteInPublic
 
 class WriteInPublicMixin(object):
     def __init__(self, *args, **kwargs):
-        self.client = WriteInPublic("http://10.11.12.13.xip.io:8000", "admin", "123abc")
+        self.client = WriteInPublic(settings.WRITEINPUBLIC_URL, settings.WRITEINPUBLIC_USERNAME, settings.WRITEINPUBLIC_API_KEY, settings.WRITEINPUBLIC_INSTANCE_ID)
         super(WriteInPublicMixin, self).__init__(*args, **kwargs)
 
 
