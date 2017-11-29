@@ -1,13 +1,26 @@
 from django.views.generic.edit import FormView
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponseRedirect, HttpResponseServerError, Http404
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.utils.decorators import method_decorator
 
 from pombola.writeinpublic.forms import MessageForm
 from pombola.core.models import Person
 from pombola.writeinpublic.client import WriteInPublic
+
+
+def person_everypolitician_uuid_required(function):
+    def wrap(request, *args, **kwargs):
+        person = Person.objects.get(slug=kwargs['person_slug'])
+        if person.everypolitician_uuid is None:
+            raise Http404("Person is missing an EveryPolitician UUID")
+        else:
+            return function(request, *args, **kwargs)
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
 
 
 class WriteInPublicMixin(object):
@@ -19,6 +32,10 @@ class WriteInPublicMixin(object):
 class SAWriteToRepresentative(WriteInPublicMixin, FormView):
     template_name = "writeinpublic/person-write.html"
     form_class = MessageForm
+
+    @method_decorator(person_everypolitician_uuid_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SAWriteToRepresentative, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(SAWriteToRepresentative, self).get_context_data(**kwargs)
@@ -57,6 +74,10 @@ class SAWriteInPublicMessage(WriteInPublicMixin, TemplateView):
 
 class SAWriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
     template_name = 'writeinpublic/messages.html'
+
+    @method_decorator(person_everypolitician_uuid_required)
+    def dispatch(self, *args, **kwargs):
+        return super(SAWriteToRepresentativeMessages, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(SAWriteToRepresentativeMessages, self).get_context_data(**kwargs)
