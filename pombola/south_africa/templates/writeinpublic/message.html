@@ -4,13 +4,22 @@
 
 {% block content %}
   <div class="message">
+
+    {% comment %}
+    Date formatting docs are here:
+    https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#date
+    {% endcomment %}
+    <p>{{ message.created_at|date:"j F Y f a" }}</p>
+
     <h2>{{ message.subject }}</h2>
+
     <h3>Recipients</h3>
     <ul>
     {% for person in message.people %}
     <li><a href="{% url 'person' slug=person.slug %}">{{ person.name }}</a></li>
     {% endfor %}
     </ul>
+
     <div class="message-content">
       {{ message.content|linebreaksbr }}
     </div>
