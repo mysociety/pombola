@@ -48,6 +48,6 @@ class WriteInPublic(object):
             'api_key': self.api_key,
             'person__popolo_id': person_id,
         }
-        r = requests.get(url, params=params)
-        messages = r.json()['objects']
+        response = requests.get(url, params=params)
+        messages = response.json()['objects']
         return [Message(m) for m in messages]
