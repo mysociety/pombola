@@ -9,10 +9,11 @@ class Message(object):
 
 
 class WriteInPublic(object):
-    def __init__(self, url, username, api_key):
+    def __init__(self, url, username, api_key, instance_id):
         self.url = url
         self.username = username
         self.api_key = api_key
+        self.instance_id = instance_id
 
     def create_message(self, author_name, author_email, subject, content, writeitinstance, persons):
         url = '{url}/api/v1/message/'.format(url=self.url)
@@ -43,7 +44,7 @@ class WriteInPublic(object):
 
     def get_messages(self, person_id):
         # FIXME: Make this instance ID configurable
-        url = '{url}/api/v1/instance/3/messages/'.format(url=self.url)
+        url = '{url}/api/v1/instance/{instance_id}/messages/'.format(url=self.url, instance_id=self.instance_id)
         params = {
             'format': 'json',
             'username': self.username,
