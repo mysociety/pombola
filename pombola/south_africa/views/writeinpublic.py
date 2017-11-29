@@ -28,7 +28,6 @@ class SAWriteToRepresentative(WriteInPublicMixin, FormView):
         return context
 
     def form_valid(self, form):
-        # FIXME: These values should come from config
         person_slug = self.kwargs['person_slug']
         person = get_object_or_404(Person, slug=person_slug)
         response = self.client.create_message(
