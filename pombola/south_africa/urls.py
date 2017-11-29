@@ -97,15 +97,6 @@ person_patterns.append((
     name='sa-person-attendance')
     ))
 
-# Add view to write to a rep
-person_patterns.append((
-    url(
-        r'(?P<person_slug>[-\w]+)/write/$',
-        views.SAWriteToRepresentative.as_view(),
-        name='sa-person-write'
-    )
-))
-
 place_patterns = copy.copy(place_patterns)
 
 new_place_url = url(
@@ -282,5 +273,15 @@ urlpatterns += (
         r'^write/(?P<message_id>\d+)/$',
         views.SAWriteInPublicMessage.as_view(),
         name='sa-writeinpublic-message'
+    ),
+    url(
+        r'^person/(?P<person_slug>[-\w]+)/write/$',
+        views.SAWriteToRepresentative.as_view(),
+        name='sa-person-write'
+    ),
+    url(
+        r'^person/(?P<person_slug>[-\w]+)/write/all/$',
+        views.SAWriteToRepresentativeMessages.as_view(),
+        name='sa-person-write-all'
     ),
 )
