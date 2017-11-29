@@ -42,6 +42,7 @@ class WriteInPublic(object):
         return Message(r.json())
 
     def get_messages(self, person_id):
+        # FIXME: Make this instance ID configurable
         url = '{url}/api/v1/instance/3/messages/'.format(url=self.url)
         params = {
             'format': 'json',
