@@ -11,5 +11,7 @@
       <p>{{ message.content|linebreaksbr }}</p>
     </div>
   </div>
+  {% empty %}
+  <p>Nothing here!</p>
   {% endfor %}
 {% endblock %}
