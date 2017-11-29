@@ -63,5 +63,8 @@ class SAWriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
         person_slug = self.kwargs['person_slug']
         person = get_object_or_404(Person, slug=person_slug)
         context['person'] = person
-        context['messages'] = self.client.get_messages(person.everypolitician_uuid)
+        if person.everypolitician_uuid is None:
+            context['messages'] = []
+        else:
+            context['messages'] = self.client.get_messages(person.everypolitician_uuid)
         return context
