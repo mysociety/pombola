@@ -35,8 +35,7 @@ class SAWriteToRepresentative(WriteInPublicMixin, FormView):
             author_email=form.cleaned_data['author_email'],
             subject=form.cleaned_data['subject'],
             content=form.cleaned_data['content'],
-            # FIXME: This shouldn't be hard-coded
-            writeitinstance="/api/v1/instance/3/",
+            writeitinstance="/api/v1/instance/{}/".format(self.client.instance_id),
             persons=["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{uuid}".format(uuid=person.everypolitician_uuid)],
         )
         if response.ok:
