@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}WriteInPublic messages to {{ person.name }}{% endblock %}
+
+{% block content %}
+  {% for message in messages %}
+  <div class="message">
+    <h2><a href="{% url 'sa-writeinpublic-message' message_id=message.id %}">{{ message.subject }}</a></h2>
+    <div class="message-content">
+      <p>{{ message.content|linebreaksbr }}</p>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

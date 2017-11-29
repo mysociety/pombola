@@ -50,3 +50,16 @@ class SAWriteInPublicMessage(TemplateView):
         client = WriteInPublic("http://10.11.12.13.xip.io:8000", "admin", "123abc")
         context['message'] = client.get_message(self.kwargs['message_id'])
         return context
+
+
+class SAWriteToRepresentativeMessages(TemplateView):
+    template_name = 'writeinpublic/messages.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SAWriteToRepresentativeMessages, self).get_context_data(**kwargs)
+        client = WriteInPublic("http://10.11.12.13.xip.io:8000", "admin", "123abc")
+        person_slug = self.kwargs['person_slug']
+        person = get_object_or_404(Person, slug=person_slug)
+        context['person'] = person
+        context['messages'] = client.get_messages(person.everypolitician_uuid)
+        return context
