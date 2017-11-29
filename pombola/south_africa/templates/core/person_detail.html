@@ -77,6 +77,10 @@
       {% endif %}
     </div>
 
+    {% comment %}
+    We can only write to someone if they have an EveryPolitician UUID identifier associated with them
+    {% endcomment %}
+    {% if person.everypolitician_uuid %}
     <div class="writeinpublic-actions">
       <p>WriteInPublic actions</p>
       <ul>
@@ -84,6 +88,7 @@
         <li><a href="{% url 'sa-person-write-all' person_slug=person.slug %}">Show all messages written to {{ person.name }}</a></li>
       </ul>
     </div>
+    {% endif %}
 {% endblock object_tagline %}
 
 {% block subcontent %}
