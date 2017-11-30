@@ -13,6 +13,8 @@
 
     <h2>{{ message.subject }}</h2>
 
+    <p>From: {{ message.author_name }}</p>
+
     <h3>Recipients</h3>
     <ul>
     {% for person in message.people %}

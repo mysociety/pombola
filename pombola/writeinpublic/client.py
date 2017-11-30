@@ -12,6 +12,7 @@ class Message(object):
         self.subject = params['subject']
         self.content = params['content']
         self.created_at = parse_datetime(params['created'])
+        self.author_name = params['author_name']
         self._params = params
 
     def people(self):
