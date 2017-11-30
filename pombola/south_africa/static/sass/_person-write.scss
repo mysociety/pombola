@@ -1,0 +1,63 @@
+.person-write-form {
+    @media (min-width: 640px) {
+        max-width: 48em;
+        margin: 2em auto;
+        padding: 0 1em;
+    }
+
+    p {
+        margin-bottom: 1.5em;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5em;
+
+        small {
+            display: block;
+            color: $colour_middling_grey;
+
+            @media (min-width: 640px) {
+                display: inline;
+                margin-left: 0.5em;
+            }
+        }
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0.5em 0.75em;
+        border-radius: $border_radius;
+        border: 1px solid $colour_muted;
+        font-family: inherit;
+        font-size: 1em;
+
+        &:focus {
+            border-color: $colour_secondary;
+            box-shadow: 0 0 5px rgba($colour_secondary, 0.5);
+        }
+    }
+
+    input[disabled] {
+        color: $colour_grey;
+        background: $colour_light_grey;
+        cursor: not-allowed;
+    }
+
+    @media (min-width: 640px) {
+        .row {
+            @include clearfix();
+            margin: 0 -1em;
+        }
+
+        .col-sm-6 {
+            box-sizing: border-box;
+            float: left;
+            width: 50%;
+            padding: 0 1em;
+        }
+    }
+}

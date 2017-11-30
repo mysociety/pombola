@@ -3,12 +3,52 @@
 {% block title %}Write to {{ object.name }}{% endblock %}
 
 {% block content %}
-  <div>
-    <p>Write to <a href="{% url 'person' slug=object.slug %}">{{ object.name }}</a>
+<form action="{% url 'sa-person-write' person_slug=object.slug %}" method="post" class="person-write-form">
+    {% csrf_token %}
 
-    <form action="{% url 'sa-person-write' person_slug=object.slug %}" method="post">{% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Send message" />
-    </form>
-  </div>
+    <p class="form-group">
+        <label for="recipients">To</label>
+        <input type="text" disabled id="recipients" value="{{ object.name }}">
+    </p>
+
+    <p class="form-group">
+        <label for="{{ form.subject.auto_id }}">Subject</label>
+        {{ form.subject.errors }}
+        {{ form.subject }}
+    </p>
+
+    <p class="form-group">
+        <label for="{{ form.content.auto_id }}">
+          Your message
+          <small>This will be published, on this site.</small>
+        </label>
+        {{ form.content.errors }}
+        {{ form.content }}
+    </p>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p class="form-group">
+                <label for="{{ form.author_name.auto_id }}">
+                    Your name
+                    <small>This will be published, on this site.</small>
+                </label>
+                {{ form.author_name.errors }}
+                {{ form.author_name }}
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p class="form-group">
+                <label for="{{ form.author_email.auto_id }}">
+                    Your email
+                    <small>Nobody will see this, ever.</small>
+                </label>
+                {{ form.author_email.errors }}
+                {{ form.author_email }}
+            </p>
+        </div>
+    </div>
+
+    <input type="submit" value="Send message" class="button">
+</form>
 {% endblock %}
