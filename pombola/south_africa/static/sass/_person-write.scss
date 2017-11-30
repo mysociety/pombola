@@ -61,3 +61,44 @@
         }
     }
 }
+
+.person-write-message {
+    @media (min-width: 640px) {
+        max-width: 46em;
+        margin: 2em auto;
+        padding: 2em;
+        box-shadow: 0 3px 3px rgba(#000, 0.1);
+        border: 1px solid $colour_muted;
+        background-color: #fff;
+    }
+}
+
+.person-write-message__meta {
+    @include clearfix();
+
+    dt, dd {
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    dt {
+        float: left;
+        max-width: 6em;
+    }
+
+    dd {
+        padding-left: 7em;
+        margin-bottom: 1em;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.person-write-message__content {
+    line-height: 1.4em;
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+    border-top: 1px solid $colour_muted;
+}

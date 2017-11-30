@@ -3,27 +3,23 @@
 {% block title %}WriteInPublic message{% endblock %}
 
 {% block content %}
-  <div class="message">
-
-    {% comment %}
-    Date formatting docs are here:
-    https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#date
-    {% endcomment %}
-    <p>{{ message.created_at|date:"j F Y f a" }}</p>
-
-    <h2>{{ message.subject }}</h2>
-
-    <p>From: {{ message.author_name }}</p>
-
-    <h3>Recipients</h3>
-    <ul>
-    {% for person in message.people %}
-    <li><a href="{% url 'person' slug=person.slug %}">{{ person.name }}</a></li>
-    {% endfor %}
-    </ul>
-
-    <div class="message-content">
+<div class="person-write-message">
+    <dl class="person-write-message__meta">
+        <dt>To</dt>
+        <dd>
+          {% for person in message.people %}
+            <a href="{% url 'person' slug=person.slug %}">{{ person.name }}</a>{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        </dd>
+        <dt>From</dt>
+        <dd>{{ message.author_name }}</dd>
+        <dt>Subject</dt>
+        <dd>{{ message.subject }}</dd>
+        <dt>Date</dt>
+        <dd>{{ message.created_at|date:"j F Y f a" }}</dd>
+    </dl>
+    <div class="person-write-message__content">
       {{ message.content|linebreaksbr }}
     </div>
-  </div>
+</div>
 {% endblock %}
