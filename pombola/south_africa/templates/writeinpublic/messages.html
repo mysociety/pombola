@@ -3,15 +3,27 @@
 {% block title %}WriteInPublic messages to {{ person.name }}{% endblock %}
 
 {% block content %}
-  <h1>All messages sent to <a href="{% url 'person' slug=person.slug %}">{{ person.name }}</a></h1>
+
+  {% comment %}
+    TODO: Move this loop into a `.ui-tabs-panel` in person_detail.html
+  {% endcomment %}
+
   {% for message in messages %}
-  <div class="message">
-    <h2><a href="{% url 'sa-writeinpublic-message' message_id=message.id %}">{{ message.subject }}</a></h2>
-    <div class="message-content">
-      <p>{{ message.content|linebreaksbr }}</p>
+    <div>
+        <h3>
+            <a href="{% url 'sa-writeinpublic-message' message_id=message.id %}">{{ message.subject }}</a>
+            &ndash; <small>{{ message.created_at|date:"d M Y" }}</small>
+        </h3>
+        <p>
+            {{ message.content|truncatewords:30 }}
+            <a href="{% url 'sa-writeinpublic-message' message_id=message.id %}">(Read more)</a>
+        </p>
     </div>
-  </div>
   {% empty %}
-  <p>Nothing here!</p>
+    {% comment %}
+      TODO: Just hide this panel completely if there are no messages?
+    {% endcomment %}
+    <p>Nothing here!</p>
   {% endfor %}
+
 {% endblock %}
