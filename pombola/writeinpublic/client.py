@@ -5,7 +5,12 @@ from django.utils.dateparse import parse_datetime
 from pombola.core.models import Person
 
 
-class Message(object):
+class PersonMixin(object):
+    def parse_everypolitician_uuid(self, resource_uri):
+        return resource_uri.split('#')[-1].split('-', 1)[-1]
+
+
+class Message(PersonMixin, object):
     def __init__(self, params):
         self.id = params['id']
         self.author_name = params['author_name']
@@ -22,7 +27,20 @@ class Message(object):
         )
 
     def _recipient_ids(self):
-        return [p['resource_uri'].split('#')[-1].split('-', 1)[-1] for p in self._params['people']]
+        return [self.parse_everypolitician_uuid(p['resource_uri']) for p in self._params['people']]
+
+    def answers(self):
+        return [Answer(a) for a in self._params['answers']]
+
+
+class Answer(PersonMixin, object):
+    def __init__(self, params):
+        self.content = params['content']
+        self.created_at = parse_datetime(params['created'])
+        self.person = Person.objects.get(
+            identifiers__scheme='everypolitician',
+            identifiers__identifier=self.parse_everypolitician_uuid(params['person']['resource_uri']),
+        )
 
 
 class WriteInPublic(object):
