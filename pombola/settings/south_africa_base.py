@@ -105,6 +105,12 @@ COUNTRY_JS = {
             'js/mp-profiles-live-filter.js',
         ),
         'output_filename': 'js/mp-profiles-live-filter.js',
+    },
+    'person-messages-ajax': {
+        'source_filenames': (
+            'js/person-messages-ajax.js',
+        ),
+        'output_filename': 'js/person-messages-ajax.js'
     }
 }
 

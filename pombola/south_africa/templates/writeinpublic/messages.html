@@ -3,10 +3,7 @@
 {% block title %}WriteInPublic messages to {{ person.name }}{% endblock %}
 
 {% block content %}
-
-  {% comment %}
-    TODO: Move this loop into a `.ui-tabs-panel` in person_detail.html
-  {% endcomment %}
+<div class="js-person-messages-all">
 
   {% for message in messages %}
     <div>
@@ -26,4 +23,5 @@
     <p>Nothing here!</p>
   {% endfor %}
 
+</div>
 {% endblock %}
