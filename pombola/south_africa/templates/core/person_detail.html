@@ -4,6 +4,7 @@
 {% block js_end_of_body %}
   {{ block.super }}
   {% javascript 'tabs' %}
+  {% javascript 'person-messages-ajax' %}
 {% endblock %}
 
 {% block object_tagline %}
@@ -104,6 +105,11 @@
             <a class="ui-tabs-anchor" href="#experience">Positions held</a>
           </li>
         {% endif %}
+        {% if person.everypolitician_uuid %}
+          <li class="ui-state-default">
+            <a class="ui-tabs-anchor js-person-messages-ajax" href="#messages" data-ajax-url="{% url 'sa-person-write-all' person_slug=person.slug %}">Messages</a>
+          </li>
+        {% endif %}
         {% if object.interests_register_entries.exists %}
           <li class="ui-state-default">
             <a class="ui-tabs-anchor" href="#membersinterests">Register of Interests</a>
@@ -111,7 +117,7 @@
         {% endif %}
         {% if hansard.count or question.count or committee.count %}
           <li class="ui-state-default">
-            <a class="ui-tabs-anchor" href="#appearances" class="active">Appearances</a>
+            <a class="ui-tabs-anchor" href="#appearances">Appearances</a>
           </li>
         {% endif %}
       </ul>
@@ -201,6 +207,12 @@
             </ul>
           </div> <!-- .person-experience -->
         </div> <!-- #experience -->
+      {% endif %}
+
+      {% if person.everypolitician_uuid %}
+        <div id="messages" class="tab-content ui-tabs-panel ui-widget-content">
+            <p>Fetching the latest messages to {{ object.name }}…</p>
+        </div>
       {% endif %}
 
       {% if object.interests_register_entries.exists %}
