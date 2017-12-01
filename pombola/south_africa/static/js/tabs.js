@@ -27,8 +27,13 @@ $(function() {
     });
   }
 
-  // Work out which tab should be active.
-  var activeTabIndex = $('.ui-tabs-active').prevAll().length || 0;
+  // Select a tab if it has been requested via URL hash fragment,
+  // otherwise, just pick a sensible default.
+  if ( $('.ui-tabs-panel' + window.location.hash).length ) {
+    var activeTabIndex = $('.ui-tabs-anchor[href="' + window.location.hash + '"]').parent().prevAll().length;
+  } else {
+    var activeTabIndex = $('.ui-tabs-active').prevAll().length || 0;
+  }
 
   $(".tabs").tabs({
     active: activeTabIndex
