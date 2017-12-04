@@ -3,40 +3,43 @@
 {% block title %}WriteInPublic message{% endblock %}
 
 {% block content %}
-<div class="person-write-message">
-    <dl class="person-write-message__meta">
-        <dt>To</dt>
-        <dd>
-          {% for person in message.people %}
-            <a href="{% url 'person' slug=person.slug %}">{{ person.name }}</a>{% if not forloop.last %},{% endif %}
-          {% endfor %}
-        </dd>
-        <dt>From</dt>
-        <dd>{{ message.author_name }}</dd>
-        <dt>Subject</dt>
-        <dd>{{ message.subject }}</dd>
-        <dt>Date</dt>
-        <dd>{{ message.created_at|date:"j F Y f a" }}</dd>
-    </dl>
-    <div class="person-write-message__content">
-      {{ message.content|linebreaksbr }}
+<div class="person-write-thread">
+    <div class="person-write-message">
+        <dl class="person-write-message__meta">
+            <dt>To</dt>
+            <dd>
+              {% for person in message.people %}
+                <a href="{% url 'person' slug=person.slug %}">{{ person.name }}</a>{% if not forloop.last %},{% endif %}
+              {% endfor %}
+            </dd>
+            <dt>From</dt>
+            <dd>{{ message.author_name }}</dd>
+            <dt>Subject</dt>
+            <dd>{{ message.subject }}</dd>
+            <dt>Date</dt>
+            <dd>{{ message.created_at|date:"j F Y f a" }}</dd>
+        </dl>
+        <div class="person-write-message__content">
+          {{ message.content|linebreaksbr }}
+        </div>
     </div>
-</div>
 
-{% for reply in message.answers %}
-<div class="person-write-message person-write-message--reply">
-    <dl class="person-write-message__meta">
-      <dt>From</dt>
-      <dd>
-      <a href="{% url 'person' slug=reply.person.slug %}">{{ reply.person.name }}</a>
-      </dd>
-      <dt>Date</dt>
-      <dd>{{ reply.created_at|date:"j F Y f a" }}</dd>
-    </dl>
-    <div class="person-write-message__content">
-      {{ reply.content|linebreaksbr }}
+  {% for reply in message.answers %}
+    <div class="person-write-message person-write-message--reply">
+        <dl class="person-write-message__meta">
+          <dt>From</dt>
+          <dd>
+          <a href="{% url 'person' slug=reply.person.slug %}">{{ reply.person.name }}</a>
+          </dd>
+          <dt>Date</dt>
+          <dd>{{ reply.created_at|date:"j F Y f a" }}</dd>
+        </dl>
+        <div class="person-write-message__content">
+          {{ reply.content|linebreaksbr }}
+        </div>
     </div>
+  {% endfor %}
+
 </div>
-{% endfor %}
 
 {% endblock %}

@@ -62,19 +62,39 @@
     }
 }
 
+.person-write-thread {
+    max-width: 46em;
+    margin: 0 auto;
+}
+
 .person-write-message {
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+
     @media (min-width: 640px) {
-        max-width: 46em;
-        margin: 2em auto;
         padding: 2em;
+        margin-bottom: 2em;
         box-shadow: 0 3px 3px rgba(#000, 0.1);
         border: 1px solid $colour_muted;
         background-color: #fff;
     }
 }
 
+.person-write-message--reply {
+    background-color: mix($colour_amber, #fff, 5%);
+
+    @media (min-width: 640px) {
+        margin-left: 6em;
+    }
+}
+
 .person-write-message__meta {
     @include clearfix();
+    font-size: 0.8em;
+
+    @media (min-width: 640px) {
+        font-size: 1em;
+    }
 
     dt, dd {
         font-size: inherit;
