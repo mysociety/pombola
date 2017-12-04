@@ -28,7 +28,11 @@
     </div>
 
     <div class="contact-actions">
-      {% if email_contacts %}
+      {% if person.everypolitician_uuid %}
+        <div class="contact-actions__wip">
+            <a href="{% url 'writeinpublic-new-message' %}?person_id={{ person.pk }}">Write a public message</a>
+        </div>
+      {% elif email_contacts %}
         <div class="contact-actions__email">
         {% for email in email_contacts %}
           {{ email|urlizetrunc:50 }}
@@ -295,6 +299,15 @@
           {% endif %}
         {% endfor %}
       </ul>
+
+    {% if person.everypolitician_uuid and email_contacts %}
+      <h3>Email</h3>
+      <ul>
+        {% for email in email_contacts %}
+          <li>{{ email|urlizetrunc:50 }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     {% if phone_contacts %}
       <h3>Phone</h3>
