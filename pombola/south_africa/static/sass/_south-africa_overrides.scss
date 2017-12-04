@@ -2036,6 +2036,12 @@ li, div {
     }
 }
 
+.sidebar {
+  a[href^="mailto"] {
+    word-wrap: break-word;
+  }
+}
+
 .large-container {
     h3 {
         border: none;
@@ -2113,6 +2119,10 @@ $contact_icon_path: '../images/person-contact-icons';
             }
         }
     }
+}
+
+.contact-actions__wip {
+    @extend .contact-actions__email;
 }
 
 .ui-tabs {
