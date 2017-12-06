@@ -284,4 +284,9 @@ urlpatterns += (
         views.SAWriteToRepresentativeMessages.as_view(),
         name='sa-person-write-all'
     ),
+    url(
+        r'^person/(?P<person_slug>[-\w]+)/write/send/$',
+        views.SAWriteToRepresentativeSend.as_view(),
+        name='sa-person-write-send'
+    ),
 )

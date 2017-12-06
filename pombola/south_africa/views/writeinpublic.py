@@ -1,10 +1,11 @@
 from django.views.generic.edit import FormView
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseServerError, Http404
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils.decorators import method_decorator
+from django.template.response import TemplateResponse
 
 from pombola.writeinpublic.forms import MessageForm
 from pombola.core.models import Person
@@ -47,20 +48,7 @@ class SAWriteToRepresentative(WriteInPublicMixin, FormView):
     def form_valid(self, form):
         person_slug = self.kwargs['person_slug']
         person = get_object_or_404(Person, slug=person_slug)
-        response = self.client.create_message(
-            author_name=form.cleaned_data['author_name'],
-            author_email=form.cleaned_data['author_email'],
-            subject=form.cleaned_data['subject'],
-            content=form.cleaned_data['content'],
-            writeitinstance="/api/v1/instance/{}/".format(self.client.instance_id),
-            persons=["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{uuid}".format(uuid=person.everypolitician_uuid)],
-        )
-        if response.ok:
-            message_id = response.json()['id']
-            return HttpResponseRedirect(reverse('sa-writeinpublic-message', kwargs={'message_id': message_id}))
-        else:
-            # FIXME: This should do something more intelligent
-            return HttpResponseServerError()
+        return TemplateResponse(self.request, 'writeinpublic/person-write-preview.html', {'message': form.cleaned_data, 'person': person})
 
 
 class SAWriteInPublicMessage(WriteInPublicMixin, TemplateView):
@@ -89,3 +77,24 @@ class SAWriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
         else:
             context['messages'] = self.client.get_messages(person.everypolitician_uuid)
         return context
+
+
+class SAWriteToRepresentativeSend(WriteInPublicMixin, View):
+    def post(self, request, *args, **kwargs):
+        person_slug = self.kwargs['person_slug']
+        person = get_object_or_404(Person, slug=person_slug)
+        response = self.client.create_message(
+            author_name=request.POST['author_name'],
+            author_email=request.POST['author_email'],
+            subject=request.POST['subject'],
+            content=request.POST['content'],
+            writeitinstance="/api/v1/instance/{}/".format(self.client.instance_id),
+            persons=["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{uuid}".format(uuid=person.everypolitician_uuid)],
+        )
+        if response.ok:
+            message_id = response.json()['id']
+            return HttpResponseRedirect(reverse('sa-writeinpublic-message', kwargs={'message_id': message_id}))
+        else:
+            # FIXME: This should do something more intelligent
+            return HttpResponseServerError()
+

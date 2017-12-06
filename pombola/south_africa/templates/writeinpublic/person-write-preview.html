@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Preview of message to {{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="person-write-thread">
+    <div class="person-write-message">
+        <dl class="person-write-message__meta">
+            <dt>To</dt>
+            <dd>
+              {{ person.name }}
+            </dd>
+            <dt>From</dt>
+            <dd>{{ message.author_name }}</dd>
+            <dt>Subject</dt>
+            <dd>{{ message.subject }}</dd>
+            <dt>Date</dt>
+            <dd>{% now "j F Y f a" %}</dd>
+        </dl>
+        <div class="person-write-message__content">
+          {{ message.content|linebreaksbr }}
+        </div>
+    </div>
+</div>
+
+<form action="{% url 'sa-person-write-send' person_slug=person.slug %}" method="post" class="person-write-form">
+    {% csrf_token %}
+
+    <input type="hidden" name="subject" value="{{ message.subject }}">
+    <input type="hidden" name="content" value="{{ message.content }}">
+    <input type="hidden" name="author_name" value="{{ message.author_name }}">
+    <input type="hidden" name="author_email" value="{{ message.author_email }}">
+
+    <input type="submit" value="Send message" class="button">
+</form>
+{% endblock %}
