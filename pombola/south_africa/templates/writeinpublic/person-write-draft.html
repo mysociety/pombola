@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Write to {{ object.name }}{% endblock %}
+{% block title %}Draft your message{% endblock %}
 
 {% block content %}
-<form action="{% url 'sa-person-write' person_slug=object.slug %}" method="post" class="person-write-form">
-    {% csrf_token %}
+<form action="" method="post" class="person-write-form">{% csrf_token %}
+  {{ wizard.management_form }}
 
     <p class="form-group">
         <label for="recipients">To</label>
-        <input type="text" disabled id="recipients" value="{{ object.name }}">
+        <input type="text" disabled id="recipients" value="{{ persons | join:", " }}">
     </p>
 
     <p class="form-group">

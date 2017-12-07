@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Write to {{ object.name }}{% endblock %}
+
+{% block content %}
+<form action="" method="post" class="person-write-form">{% csrf_token %}
+    {{ wizard.management_form }}
+
+    <p class="form-group">
+    <label for="{{ form.persons.auto_id }}">To</label>
+    {{ form.persons.errors }}
+    {{ form.persons }}
+    </p>
+
+    <input type="submit" value="Send message" class="button">
+</form>
+{% endblock %}

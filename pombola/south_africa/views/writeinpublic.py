@@ -1,3 +1,5 @@
+from formtools.wizard.views import NamedUrlSessionWizardView
+
 from django.views.generic.edit import FormView
 from django.views.generic import TemplateView, View
 from django.shortcuts import get_object_or_404
@@ -7,7 +9,7 @@ from django.conf import settings
 from django.utils.decorators import method_decorator
 from django.template.response import TemplateResponse
 
-from pombola.writeinpublic.forms import MessageForm
+from pombola.writeinpublic.forms import RecipientForm, DraftForm, PreviewForm
 from pombola.core.models import Person
 from pombola.writeinpublic.client import WriteInPublic
 
@@ -30,25 +32,55 @@ class WriteInPublicMixin(object):
         super(WriteInPublicMixin, self).__init__(*args, **kwargs)
 
 
-class SAWriteToRepresentative(WriteInPublicMixin, FormView):
-    template_name = "writeinpublic/person-write.html"
-    form_class = MessageForm
+FORMS = [
+    ("recipients", RecipientForm),
+    ("draft", DraftForm),
+    ("preview", PreviewForm),
+]
 
-    @method_decorator(person_everypolitician_uuid_required)
-    def dispatch(self, *args, **kwargs):
-        return super(SAWriteToRepresentative, self).dispatch(*args, **kwargs)
+TEMPLATES = {
+    'recipients': 'writeinpublic/person-write-recipients.html',
+    'draft': 'writeinpublic/person-write-draft.html',
+    'preview': 'writeinpublic/person-write-preview.html',
+}
 
-    def get_context_data(self, **kwargs):
-        context = super(SAWriteToRepresentative, self).get_context_data(**kwargs)
-        person_slug = self.kwargs['person_slug']
-        person = get_object_or_404(Person, slug=person_slug)
-        context['object'] = person
+
+class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
+    form_list = FORMS
+
+    def get_template_names(self):
+        return [TEMPLATES[self.steps.current]]
+
+    def get_context_data(self, form, **kwargs):
+        context = super(SAWriteInPublicNewMessage, self).get_context_data(form=form, **kwargs)
+        if self.steps.current == 'preview' or self.steps.current == 'draft':
+            recipients = self.get_cleaned_data_for_step('recipients')
+            context['persons'] = recipients['persons']
+            context['message'] = self.get_cleaned_data_for_step('draft')
         return context
 
-    def form_valid(self, form):
-        person_slug = self.kwargs['person_slug']
-        person = get_object_or_404(Person, slug=person_slug)
-        return TemplateResponse(self.request, 'writeinpublic/person-write-preview.html', {'message': form.cleaned_data, 'person': person})
+    def done(self, form_list, form_dict, **kwargs):
+        persons = form_dict['recipients'].cleaned_data['persons']
+        person_ids = [p.everypolitician_uuid for p in persons]
+        person_uris = ["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{}".format(uuid)
+                   for uuid in person_ids]
+        message = form_dict['draft'].cleaned_data
+        response = self.client.create_message(
+            author_name=message['author_name'],
+            author_email=message['author_email'],
+            subject=message['subject'],
+            content=message['content'],
+            writeitinstance="/api/v1/instance/{}/".format(self.client.instance_id),
+            persons=person_uris,
+        )
+        if response.ok:
+            message_id = response.json()['id']
+            return HttpResponseRedirect(reverse('sa-writeinpublic-message', kwargs={'message_id': message_id}))
+        else:
+            # FIXME: This should do something more intelligent
+            print(response.text)
+            return HttpResponseServerError()
+
 
 
 class SAWriteInPublicMessage(WriteInPublicMixin, TemplateView):
@@ -77,24 +109,3 @@ class SAWriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
         else:
             context['messages'] = self.client.get_messages(person.everypolitician_uuid)
         return context
-
-
-class SAWriteToRepresentativeSend(WriteInPublicMixin, View):
-    def post(self, request, *args, **kwargs):
-        person_slug = self.kwargs['person_slug']
-        person = get_object_or_404(Person, slug=person_slug)
-        response = self.client.create_message(
-            author_name=request.POST['author_name'],
-            author_email=request.POST['author_email'],
-            subject=request.POST['subject'],
-            content=request.POST['content'],
-            writeitinstance="/api/v1/instance/{}/".format(self.client.instance_id),
-            persons=["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{uuid}".format(uuid=person.everypolitician_uuid)],
-        )
-        if response.ok:
-            message_id = response.json()['id']
-            return HttpResponseRedirect(reverse('sa-writeinpublic-message', kwargs={'message_id': message_id}))
-        else:
-            # FIXME: This should do something more intelligent
-            return HttpResponseServerError()
-

@@ -8,7 +8,7 @@
         <dl class="person-write-message__meta">
             <dt>To</dt>
             <dd>
-              {{ person.name }}
+              {{ persons|join:", " }}
             </dd>
             <dt>From</dt>
             <dd>{{ message.author_name }}</dd>
@@ -23,14 +23,13 @@
     </div>
 </div>
 
-<form action="{% url 'sa-person-write-send' person_slug=person.slug %}" method="post" class="person-write-form">
-    {% csrf_token %}
+<div class="privacy-reminder">
+  <h2><i class="fa fa-question-circle"></i> Are you happy for this message to be made public?</h2>
+  <p>Once you send this message, it will be available on the Internet for anyone to read. Your name will be included alongside the message. Your email address will not be public.</p>
+</div>
 
-    <input type="hidden" name="subject" value="{{ message.subject }}">
-    <input type="hidden" name="content" value="{{ message.content }}">
-    <input type="hidden" name="author_name" value="{{ message.author_name }}">
-    <input type="hidden" name="author_email" value="{{ message.author_email }}">
-
+<form action="" method="post">{% csrf_token %}
+    {{ wizard.management_form }}
     <input type="submit" value="Send message" class="button">
 </form>
 {% endblock %}

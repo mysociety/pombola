@@ -268,25 +268,27 @@ urlpatterns += (
 )
 
 # WriteInPublic
+write_message_wizard = views.SAWriteInPublicNewMessage.as_view(url_name='sa-writeinpublic-new-message-step')
+
 urlpatterns += (
     url(
-        r'^write/(?P<message_id>\d+)/$',
+        r'^write/message/(?P<message_id>\d+)/$',
         views.SAWriteInPublicMessage.as_view(),
         name='sa-writeinpublic-message'
     ),
     url(
-        r'^person/(?P<person_slug>[-\w]+)/write/$',
-        views.SAWriteToRepresentative.as_view(),
-        name='sa-person-write'
+        r'^write/(?P<step>.+)/$$',
+        write_message_wizard,
+        name='sa-writeinpublic-new-message-step',
     ),
     url(
-        r'^person/(?P<person_slug>[-\w]+)/write/all/$',
+        r'^write/$',
+        write_message_wizard,
+        name='sa-writeinpublic-new-message',
+    ),
+    url(
+        r'^person/(?P<person_slug>[-\w]+)/messages/$',
         views.SAWriteToRepresentativeMessages.as_view(),
         name='sa-person-write-all'
-    ),
-    url(
-        r'^person/(?P<person_slug>[-\w]+)/write/send/$',
-        views.SAWriteToRepresentativeSend.as_view(),
-        name='sa-person-write-send'
     ),
 )
