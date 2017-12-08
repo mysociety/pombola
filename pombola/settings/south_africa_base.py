@@ -47,7 +47,13 @@ COUNTRY_CSS = {
             'css/libs/datatables-1.10.10.css',
         ),
         'output_filename': 'css/datatables.css'
-    }
+    },
+    'chosen': {
+        'source_filenames': {
+            'css/libs/chosen/chosen.css',
+        },
+        'output_filename': 'css/chosen.css'
+    },
 }
 
 COUNTRY_JS = {
@@ -107,7 +113,14 @@ COUNTRY_JS = {
             'js/mp-profiles-live-filter.js',
         ),
         'output_filename': 'js/mp-profiles-live-filter.js',
-    }
+    },
+    'writeinpublic': {
+        'source_filenames': (
+            'js/libs/chosen.jquery.js',
+            'js/writeinpublic.js',
+        ),
+        'output_filename': 'js/writeinpublic.js'
+    },
 }
 
 INFO_PAGES_ALLOW_RAW_HTML = True
