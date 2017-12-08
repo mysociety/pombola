@@ -30,6 +30,7 @@
 
 <form action="" method="post">{% csrf_token %}
     {{ wizard.management_form }}
-    <input type="submit" value="Send message" class="button">
+    <a class="button secondary-button" href="{% url 'sa-writeinpublic-new-message-step' step='draft' %}">Edit message</a>
+    <input type="submit" value="Send message" class="button pull-right">
 </form>
 {% endblock %}
