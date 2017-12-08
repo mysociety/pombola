@@ -53,10 +53,10 @@ class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
 
     def get_context_data(self, form, **kwargs):
         context = super(SAWriteInPublicNewMessage, self).get_context_data(form=form, **kwargs)
-        if self.steps.current == 'preview' or self.steps.current == 'draft':
-            recipients = self.get_cleaned_data_for_step('recipients')
-            context['persons'] = recipients['persons']
-            context['message'] = self.get_cleaned_data_for_step('draft')
+        context['message'] = self.get_cleaned_data_for_step('draft')
+        recipients = self.get_cleaned_data_for_step('recipients')
+        if recipients is not None:
+            context['persons'] = recipients.get('persons')
         return context
 
     def done(self, form_list, form_dict, **kwargs):
