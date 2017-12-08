@@ -21,13 +21,14 @@
     </div>
 </div>
 
-<div class="privacy-reminder">
-  <h2><i class="fa fa-question-circle"></i> Are you happy for this message to be made public?</h2>
-  <p>Once you send this message, it will be available on the Internet for anyone to read. Your name will be included alongside the message. Your email address will not be public.</p>
-</div>
-
-<form action="" method="post">{% csrf_token %}
+<form action="" method="post" class="person-write-form">{% csrf_token %}
     {{ wizard.management_form }}
+
+    <div class="privacy-reminder">
+      <h2><i class="fa fa-question-circle"></i> Are you happy for this message to be made public?</h2>
+      <p>Once you send this message, it will be available on the Internet for anyone to read. Your name will be included alongside the message. Your email address will not be public.</p>
+    </div>
+
     <a class="button secondary-button" href="{% url 'sa-writeinpublic-new-message-step' step='draft' %}">Edit message</a>
     <input type="submit" value="Send message" class="button pull-right">
 </form>
