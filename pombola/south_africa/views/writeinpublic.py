@@ -2,7 +2,7 @@ from formtools.wizard.views import NamedUrlSessionWizardView
 
 from django.views.generic.edit import FormView
 from django.views.generic import TemplateView, View
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponseServerError, Http404
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -47,6 +47,22 @@ TEMPLATES = {
 
 class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
     form_list = FORMS
+
+    def get(self, *args, **kwargs):
+        step = kwargs.get('step')
+        # If we have an ID in the URL and it matches someone, go straight to
+        # /draft
+        if 'person_id' in self.request.GET:
+            person_id = self.request.GET['person_id']
+            try:
+                person = Person.objects.get(pk=person_id)
+                self.storage.set_step_data('recipients', {'recipients-persons': [person.id]})
+                self.storage.current_step = 'draft'
+                return redirect(self.get_step_url('draft'))
+            except Person.DoesNotExist:
+                pass
+
+        return super(SAWriteInPublicNewMessage, self).get(*args, **kwargs)
 
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
