@@ -14,8 +14,6 @@
             <dd>{{ message.author_name }}</dd>
             <dt>Subject</dt>
             <dd>{{ message.subject }}</dd>
-            <dt>Date</dt>
-            <dd>{% now "j F Y f a" %}</dd>
         </dl>
         <div class="person-write-message__content">
           {{ message.content|linebreaksbr }}
