@@ -31,7 +31,7 @@
     <div class="contact-actions">
       {% if person.everypolitician_uuid %}
         <div class="contact-actions__wip">
-            <a href="{% url 'sa-writeinpublic-new-message' %}">Write a public message</a>
+            <a href="{% url 'sa-writeinpublic-new-message' %}?person_id={{ person.pk }}">Write a public message</a>
         </div>
       {% elif email_contacts %}
         <div class="contact-actions__email">
