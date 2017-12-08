@@ -62,6 +62,15 @@ class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
             except Person.DoesNotExist:
                 pass
 
+        # Check that the form contains valid data
+        if step == 'draft' or step == 'preview':
+            recipients = self.get_cleaned_data_for_step('recipients')
+            if recipients is None or recipients.get('persons') == []:
+                # Form is missing persons, restart process
+                self.storage.reset()
+                self.storage.current_step = self.steps.first
+                return redirect(self.get_step_url(self.steps.first))
+
         return super(SAWriteInPublicNewMessage, self).get(*args, **kwargs)
 
     def get_template_names(self):
