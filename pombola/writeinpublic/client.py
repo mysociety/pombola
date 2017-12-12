@@ -77,13 +77,13 @@ class WriteInPublic(object):
         r = requests.get(url, params=params)
         return Message(r.json())
 
-    def get_messages(self, person_id):
+    def get_messages(self, person_popolo_uri):
         url = '{url}/api/v1/instance/{instance_id}/messages/'.format(url=self.url, instance_id=self.instance_id)
         params = {
             'format': 'json',
             'username': self.username,
             'api_key': self.api_key,
-            'person__popolo_id': person_id,
+            'person__popolo_uri': person_popolo_uri,
         }
         response = requests.get(url, params=params)
         messages = response.json()['objects']

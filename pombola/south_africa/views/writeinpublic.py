@@ -132,5 +132,6 @@ class SAWriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
         if person.everypolitician_uuid is None:
             context['messages'] = []
         else:
-            context['messages'] = self.client.get_messages(person.everypolitician_uuid)
+            person_uri = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{}'.format(person.everypolitician_uuid)
+            context['messages'] = self.client.get_messages(person_uri)
         return context
