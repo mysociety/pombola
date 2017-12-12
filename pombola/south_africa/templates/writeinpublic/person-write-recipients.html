@@ -14,6 +14,9 @@
 {% endblock %}
 
 {% block content %}
+
+{% include '_flash_messages.html' %}
+
 <form action="" method="post" class="person-write-form">{% csrf_token %}
     {{ wizard.management_form }}
 
