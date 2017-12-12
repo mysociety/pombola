@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils.decorators import method_decorator
 from django.template.response import TemplateResponse
+from django.contrib import messages
 
 from pombola.writeinpublic.forms import RecipientForm, DraftForm, PreviewForm
 from pombola.core.models import Person
@@ -100,11 +101,12 @@ class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
         )
         if response.ok:
             message_id = response.json()['id']
-            return HttpResponseRedirect(reverse('sa-writeinpublic-message', kwargs={'message_id': message_id}))
+            messages.success(self.request, 'Success, your message has now been sent.')
+            return redirect('sa-writeinpublic-message', message_id=message_id)
         else:
-            # FIXME: This should do something more intelligent
-            print(response.text)
-            return HttpResponseServerError()
+            messages.error(self.request, 'Sorry, there was an error sending your message, please try again. If this problem persists please contact us.')
+            return redirect('sa-writeinpublic-new-message')
+
 
 
 
