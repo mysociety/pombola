@@ -44,6 +44,9 @@ class Answer(PersonMixin, object):
 
 
 class WriteInPublic(object):
+    class WriteInPublicException(Exception):
+        pass
+
     def __init__(self, url, username, api_key, instance_id):
         self.url = url
         self.username = username
@@ -65,7 +68,10 @@ class WriteInPublic(object):
             'writeitinstance': writeitinstance,
             'persons': persons,
         }
-        return requests.post(url, json=payload, params=params)
+        try:
+            return requests.post(url, json=payload, params=params)
+        except requests.exceptions.RequestException as err:
+            raise self.WriteInPublicException(err)
 
     def get_message(self, message_id):
         url = '{url}/api/v1/message/{message_id}/'.format(url=self.url, message_id=message_id)
