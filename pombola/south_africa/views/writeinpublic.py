@@ -91,23 +91,25 @@ class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
         person_uris = ["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{}".format(uuid)
                    for uuid in person_ids]
         message = form_dict['draft'].cleaned_data
-        response = self.client.create_message(
-            author_name=message['author_name'],
-            author_email=message['author_email'],
-            subject=message['subject'],
-            content=message['content'],
-            writeitinstance="/api/v1/instance/{}/".format(self.client.instance_id),
-            persons=person_uris,
-        )
-        if response.ok:
-            message_id = response.json()['id']
-            messages.success(self.request, 'Success, your message has now been sent.')
-            return redirect('sa-writeinpublic-message', message_id=message_id)
-        else:
-            messages.error(self.request, 'Sorry, there was an error sending your message, please try again. If this problem persists please contact us.')
+        try:
+            response = self.client.create_message(
+                author_name=message['author_name'],
+                author_email=message['author_email'],
+                subject=message['subject'],
+                content=message['content'],
+                writeitinstance="/api/v1/instance/{}/".format(self.client.instance_id),
+                persons=person_uris,
+            )
+            if response.ok:
+                message_id = response.json()['id']
+                messages.success(self.request, 'Success, your message has now been sent.')
+                return redirect('sa-writeinpublic-message', message_id=message_id)
+            else:
+                messages.error(self.request, 'Sorry, there was an error sending your message, please try again. If this problem persists please contact us.')
+                return redirect('sa-writeinpublic-new-message')
+        except self.client.WriteInPublicException:
+            messages.error(self.request, 'Sorry, there was an error connecting to the message service, please try again. If this problem persists please contact us.')
             return redirect('sa-writeinpublic-new-message')
-
-
 
 
 class SAWriteInPublicMessage(WriteInPublicMixin, TemplateView):
