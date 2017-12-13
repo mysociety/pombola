@@ -23,7 +23,7 @@
 
         <div>
           {% if position.subtitle == 'Nominated' %}Nominated{% endif %}
-            {{ object.name }}{% if position.place %}
+            {% if use_position_title %}{{ position.title.name }}{% else %}{{ object.name }}{% endif %}{% if position.place %}
                 for
                 <a href="{{ position.place.get_absolute_url }}">{{ position.place.name }}
                 </a>{% if position.place.parent_place %}

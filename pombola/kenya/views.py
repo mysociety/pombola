@@ -19,7 +19,7 @@ from .forms import (
 )
 
 from info.models import InfoPage, Tag
-from pombola.core.models import Person, Place
+from pombola.core.models import Person, Place, Position
 from pombola.core.views import HomeView, PersonDetail, PersonDetailSub
 from pombola.experiments.views import (
     ExperimentViewDataMixin, ExperimentFormSubmissionMixin,
@@ -27,6 +27,8 @@ from pombola.experiments.views import (
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
+
+from datetime import datetime
 
 
 logger = logging.getLogger('django.request')
@@ -560,5 +562,89 @@ class ShujaazFinalists2015View(TemplateView):
         half = len(finalists) / 2
         context['finalists_column_1'] = finalists[:half]
         context['finalists_column_2'] = finalists[half:]
+
+        return context
+
+
+class YoungRepresentativesView(TemplateView):
+
+    template_name = 'reps-young.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(YoungRepresentativesView, self).get_context_data(**kwargs)
+
+        # This code is the _right_ way to do this, but the date of birth data
+        # is extremely poor for most people, so it's not reliable.
+
+        # maximum_age = 35
+
+        # now = datetime.now()
+        # latest_birthday = now.replace(year=now.year - maximum_age)
+
+        # context['positions'] = Position.objects\
+        #     .current_politician_positions()\
+        #     .filter(title__slug='member-national-assembly')\
+        #     .filter(person__date_of_birth__gt=datetime.strftime(latest_birthday, '%Y-%m-%d'))
+
+        # Danger Will Robinson: These position IDs correspond to production,
+        # local and staging copies may (almost certainly will) vary.
+
+        young_rep_positions = [
+            44678,  # Millicent Omanga
+            44854,  # Cheruiyot Aaron
+            44888,  # Sakaja Johnston
+            44708,  # Chebeni Mercy
+            45749,  # Lotiptip Anwar
+            44825,  # Malalah Wakhungu
+            44706,  # Prengei Victor
+            44892,  # Cherakey Samson
+            44693,  # Makori Beatrice Kwamboka
+            45187,  # Mwirigi John Paul
+            45317,  # Generali Nixon K. Korir
+            44934,  # Shukran Hussein Gure
+            45387,  # Francis Kuria Kimani
+            45134,  # Gideon Kimutai Koske
+            44959,  # Catherine Waruguru
+            45205,  # Joshua Kivinda Kimilu
+            44656,  # Gideon Kipkemoi Keter
+            45011,  # Tomitom Lilian Lotuliatum
+            45478,  # Lesuuda Naisula
+            45152,  # Kosgey Alexander Kigen
+            45148,  # Babu Owino Paul Ongili
+            45259,  # Didmus Wekesa Barasa
+            45249,  # Samson Ndindi Nyoro
+            45178,  # Wanjira Martha Wangari
+            45492,  # Silvanus Osoro Onyiego
+            45009,  # Ali Gedi Fatuma
+            45468,  # Eric Muchangi Njiru
+            45138,  # Patrick Munene Ntwiga
+            45126,  # Mwale Nicholas Scott Tindi
+            45085,  # Sylvanus Maritim
+            45146,  # Benjamin Gathiru Mwangi
+            45111,  # Miruka Ondieki Alfah
+            45470,  # Caleb Amisi Luyai
+            45257,  # Thaddeus Kithua Nzambia
+        ]
+
+        context['positions'] = Position.objects.filter(pk__in=young_rep_positions)
+
+        context['use_position_title'] = True
+
+        return context
+
+
+class FemaleRepresentativesView(TemplateView):
+
+    template_name = 'reps-female.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FemaleRepresentativesView, self).get_context_data(**kwargs)
+
+        context['positions'] = Position.objects\
+            .current_politician_positions()\
+            .filter(title__slug__in=['member-national-assembly', 'senator'])\
+            .filter(person__gender__istartswith='f')
+
+        context['use_position_title'] = True
 
         return context

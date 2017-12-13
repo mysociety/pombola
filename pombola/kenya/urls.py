@@ -17,6 +17,7 @@ from .views import (KEHomeView,
     YouthEmploymentCommentSubmission, ExperimentThanks,
     YouthEmploymentInputSubmission, YouthEmploymentBillView,
     ShujaazFinalists2014View, ShujaazFinalists2015View,
+    YoungRepresentativesView, FemaleRepresentativesView
 )
 from .views_iebc_office_locator import (
     OfficeDetailView, OfficeSingleSelectView,
@@ -44,6 +45,10 @@ urlpatterns = [
     url(r'^register-to-vote$',     TemplateView.as_view(template_name='register-to-vote.html') ),
     url(r'^find-polling-station$', TemplateView.as_view(template_name='find-polling-station.html') ),
     url(r'^women/$', TemplateView.as_view(template_name='women.html'), name='women' ),
+
+    url(r'^youthful-mps/$', YoungRepresentativesView.as_view(), name='young-reps' ),
+    url(r'^female-representatives/$', FemaleRepresentativesView.as_view(), name='female-reps' ),
+
     url(r'^person/all/$',
         ListView.as_view(model=models.Person),
         name='person_list'),
