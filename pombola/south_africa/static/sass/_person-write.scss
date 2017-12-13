@@ -1,7 +1,9 @@
 .person-write-form {
+    @include clearfix();
+
     @media (min-width: 640px) {
         max-width: 48em;
-        margin: 2em auto;
+        margin: 2em auto 4em auto;
         padding: 0 1em;
     }
 
@@ -20,22 +22,49 @@
             @media (min-width: 640px) {
                 display: inline;
                 margin-left: 0.5em;
+
+                &.new-line {
+                    display: block;
+                    margin-left: 0;
+                }
             }
         }
     }
 
+    select,
     input[type="text"],
     input[type="email"],
     textarea {
         box-sizing: border-box;
         width: 100%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
         padding: 0.5em 0.75em;
         border-radius: $border_radius;
-        border: 1px solid $colour_muted;
+        border: 1px solid $colour_middling_grey;
         font-family: inherit;
         font-size: 1em;
 
         &:focus {
+            border-color: $colour_secondary;
+            box-shadow: 0 0 5px rgba($colour_secondary, 0.5);
+        }
+    }
+
+    .chosen-container-multi {
+        .chosen-choices {
+            padding: 0.5em 0.75em;
+            border-radius: $border_radius;
+            border: 1px solid $colour_middling_grey;
+            background-image: none;
+        }
+    }
+
+    .chosen-container-active {
+        .chosen-choices {
             border-color: $colour_secondary;
             box-shadow: 0 0 5px rgba($colour_secondary, 0.5);
         }
@@ -60,10 +89,21 @@
             padding: 0 1em;
         }
     }
+
+    .privacy-reminder {
+        border: 1px solid #e6e6e6;
+        border-width: 1px 0;
+        padding: 1.5em 0;
+        margin-bottom: 2em;
+
+        & > :last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .person-write-thread {
-    max-width: 46em;
+    max-width: 48em;
     margin: 0 auto;
 }
 
@@ -121,4 +161,24 @@
     margin-top: 1.5em;
     padding-top: 1.5em;
     border-top: 1px solid $colour_muted;
+}
+
+.person-write-flash {
+    max-width: 48em;
+    margin: 2em auto;
+
+    li {
+        list-style: none;
+        padding: 1em 1.5em;
+        border-radius: $border_radius;
+        background-color: mix($colour_amber, #fff, 20%);
+    }
+
+    li.success {
+        background-color: mix($colour_green, #fff, 20%);
+    }
+
+    li + li {
+        margin-top: 1em;
+    }
 }
