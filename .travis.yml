@@ -12,6 +12,8 @@ addons:
     packages:
     - yui-compressor
     - postgresql-9.6-postgis-2.3
+    # This is needed so that pg_config works for psycopg2's version detection
+    - postgresql-server-dev-9.6
 
 install:
   - wget ${ES_DOWNLOAD_URL}
