@@ -455,9 +455,6 @@ INSTALLED_APPS = (
     'django_extensions',
 
     'rest_framework',
-
-    # Used in ZA WriteInPublic integration
-    'formtools',
 )
 if config.get('DEBUG_TOOLBAR', True):
      INSTALLED_APPS += ('debug_toolbar',)
