@@ -8,12 +8,12 @@
   {% for message in messages %}
     <div>
         <h3>
-            <a href="{% url 'sa-writeinpublic-message' message_id=message.id %}">{{ message.subject }}</a>
+            <a href="{% url 'writeinpublic-message' message_id=message.id %}">{{ message.subject }}</a>
             &ndash; <small>{{ message.created_at|date:"d M Y" }}</small>
         </h3>
         <p>
             {{ message.content|truncatewords:30 }}
-            <a href="{% url 'sa-writeinpublic-message' message_id=message.id %}">(Read more)</a>
+            <a href="{% url 'writeinpublic-message' message_id=message.id %}">(Read more)</a>
         </p>
     </div>
   {% empty %}

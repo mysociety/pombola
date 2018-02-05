@@ -103,13 +103,13 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
             if response.ok:
                 message_id = response.json()['id']
                 messages.success(self.request, 'Success, your message has now been sent.')
-                return redirect('sa-writeinpublic-message', message_id=message_id)
+                return redirect('writeinpublic-message', message_id=message_id)
             else:
                 messages.error(self.request, 'Sorry, there was an error sending your message, please try again. If this problem persists please contact us.')
-                return redirect('sa-writeinpublic-new-message')
+                return redirect('writeinpublic-new-message')
         except self.client.WriteInPublicException:
             messages.error(self.request, 'Sorry, there was an error connecting to the message service, please try again. If this problem persists please contact us.')
-            return redirect('sa-writeinpublic-new-message')
+            return redirect('writeinpublic-new-message')
 
 
 class WriteInPublicMessage(WriteInPublicMixin, TemplateView):
