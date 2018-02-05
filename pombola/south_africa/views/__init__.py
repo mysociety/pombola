@@ -10,4 +10,3 @@ from .person import *
 from .positions import *
 from .search import *
 from .speechviews import *
-from .writeinpublic import *
