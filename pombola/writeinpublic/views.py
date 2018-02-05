@@ -46,7 +46,7 @@ TEMPLATES = {
 }
 
 
-class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
+class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
     form_list = FORMS
 
     def get(self, *args, **kwargs):
@@ -72,13 +72,13 @@ class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
                 self.storage.current_step = self.steps.first
                 return redirect(self.get_step_url(self.steps.first))
 
-        return super(SAWriteInPublicNewMessage, self).get(*args, **kwargs)
+        return super(WriteInPublicNewMessage, self).get(*args, **kwargs)
 
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 
     def get_context_data(self, form, **kwargs):
-        context = super(SAWriteInPublicNewMessage, self).get_context_data(form=form, **kwargs)
+        context = super(WriteInPublicNewMessage, self).get_context_data(form=form, **kwargs)
         context['message'] = self.get_cleaned_data_for_step('draft')
         recipients = self.get_cleaned_data_for_step('recipients')
         if recipients is not None:
@@ -112,24 +112,24 @@ class SAWriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
             return redirect('sa-writeinpublic-new-message')
 
 
-class SAWriteInPublicMessage(WriteInPublicMixin, TemplateView):
+class WriteInPublicMessage(WriteInPublicMixin, TemplateView):
     template_name = 'writeinpublic/message.html'
 
     def get_context_data(self, **kwargs):
-        context = super(SAWriteInPublicMessage, self).get_context_data(**kwargs)
+        context = super(WriteInPublicMessage, self).get_context_data(**kwargs)
         context['message'] = self.client.get_message(self.kwargs['message_id'])
         return context
 
 
-class SAWriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
+class WriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
     template_name = 'writeinpublic/messages.html'
 
     @method_decorator(person_everypolitician_uuid_required)
     def dispatch(self, *args, **kwargs):
-        return super(SAWriteToRepresentativeMessages, self).dispatch(*args, **kwargs)
+        return super(WriteToRepresentativeMessages, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(SAWriteToRepresentativeMessages, self).get_context_data(**kwargs)
+        context = super(WriteToRepresentativeMessages, self).get_context_data(**kwargs)
         person_slug = self.kwargs['person_slug']
         person = get_object_or_404(Person, slug=person_slug)
         context['person'] = person
