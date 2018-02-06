@@ -60,6 +60,7 @@ yanc==0.2.4
 httplib2==0.9
 WebTest==2.0.15
 django-webtest==1.7.8
+requests-mock==1.4.0
 
 # For Ghana:
 python-openid
