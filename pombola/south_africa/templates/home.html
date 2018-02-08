@@ -154,7 +154,7 @@
                 {% if infographic %}
                 <a href="{{ infographic.get_absolute_url }}">
                     {% thumbnail infographic.featured_image_file.file "306x113" crop="top" quality=80 as im %}
-                        <img src="{{ im.url }}">
+                        <img src="{{ im.url }}" height="113" width="306">
                     {% endthumbnail %}
                 </a>
                 {% endif %}

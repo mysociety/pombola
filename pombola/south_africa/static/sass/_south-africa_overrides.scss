@@ -770,6 +770,10 @@ body.home {
     }
 }
 
+.home__reps {
+    @include clearfix();
+}
+
 .home__reps__heading {
     position: relative;
     margin-bottom: 1.25em;
@@ -786,6 +790,14 @@ body.home {
 }
 
 .home__reps__featured-mp {
+    @media (min-width: 640px) {
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        padding-right: 20px;
+    }
     h3 {
         text-transform: none;
         font-size: 1.125em;
@@ -809,6 +821,17 @@ body.home {
 .home__reps__search {
     margin-top: 2em;
     clear: both;
+    @media (min-width: 640px) {
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        padding-left: 20px;
+        clear: none;
+        margin-top: 0;
+    }
+
     h3 {
         text-transform: none;
         font-size: 1.125em;
@@ -837,6 +860,21 @@ body.home {
     padding-bottom: 2em;
     border-bottom: 2px solid darken($colour_cream, 10%);
     position: relative;
+    @media (min-width: 640px) {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border: 0;
+        float: left;
+        width: 48%;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        padding-right: 20px;
+    }
+
+    @media (min-width: 850px) {
+        width: 36%;
+    }
     h3 {
         // make it float over the thumbnail
         position: absolute;
@@ -930,6 +968,9 @@ body.home {
     h2 {
         color: inherit;
         font-size: 2em;
+        @media (min-width: 640px) {
+            margin-bottom: 0;
+        }
     }
 
     .button {
@@ -940,19 +981,55 @@ body.home {
         margin-bottom: 1.5em;
         text-align: left;
         box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
+        @media (min-width: 640px) {
+            width: auto;
+            margin-right: 20px;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.home__actions__primary {
+    @media (min-width: 640px) {
+        float: left;
+        width: 42%;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        padding-right: 20px;
+    }
+}
+
+.home__actions__secondary {
+    @media (min-width: 640px) {
+        float: left;
+        width: 58%;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        padding-left: 20px;
     }
 }
 
 .home__three-boxes {
-        a {
-            display: block;
-        }
+    @include clearfix();
+    a {
+        display: block;
+    }
 }
 
 .home__three-boxes__box {
     margin-bottom: 2em;
     img {
         width: 100%;
+    }
+    @media (min-width: 640px) {
+        float: left;
+        width: 32%;
+        margin-right: 2%;
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }
 
