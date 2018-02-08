@@ -7,6 +7,11 @@ write_message_wizard = views.WriteInPublicNewMessage.as_view(url_name='writeinpu
 
 urlpatterns = (
     url(
+        r'^message/(?P<message_id>\d+)/$',
+        views.WriteInPublicMessage.as_view(),
+        name='writeinpublic-message'
+    ),
+    url(
         r'^(?P<step>.+)/$',
         write_message_wizard,
         name='writeinpublic-new-message-step',

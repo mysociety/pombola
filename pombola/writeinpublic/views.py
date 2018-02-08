@@ -1,5 +1,6 @@
 from formtools.wizard.views import NamedUrlSessionWizardView
 
+from django.views.generic import TemplateView
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib import messages
@@ -90,10 +91,19 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
             if response.ok:
                 message_id = response.json()['id']
                 messages.success(self.request, 'Success, your message has now been sent.')
-                return redirect('home')
+                return redirect('writeinpublic-message', message_id=message_id)
             else:
                 messages.error(self.request, 'Sorry, there was an error sending your message, please try again. If this problem persists please contact us.')
                 return redirect('writeinpublic-new-message')
         except self.client.WriteInPublicException:
             messages.error(self.request, 'Sorry, there was an error connecting to the message service, please try again. If this problem persists please contact us.')
             return redirect('writeinpublic-new-message')
+
+
+class WriteInPublicMessage(WriteInPublicMixin, TemplateView):
+    template_name = 'writeinpublic/message.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(WriteInPublicMessage, self).get_context_data(**kwargs)
+        context['message'] = self.client.get_message(self.kwargs['message_id'])
+        return context
