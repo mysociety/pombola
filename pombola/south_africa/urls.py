@@ -21,6 +21,7 @@ from pombola.core.urls import (
     place_patterns_path,
     )
 from pombola.search.urls import urlpatterns as search_urlpatterns
+from pombola.writeinpublic.views import WriteToRepresentativeMessages
 
 organisation_patterns = copy.copy(organisation_patterns)
 
@@ -265,4 +266,14 @@ urlpatterns += (
         views.SAMembersInterestsSource.as_view(),
         name='sa-interests-source'
     ),
+)
+
+# WriteInPublic
+urlpatterns += (
+    url(
+        r'^person/(?P<person_slug>[-\w]+)/messages/$',
+        WriteToRepresentativeMessages.as_view(),
+        name='sa-person-write-all'
+    ),
+    url(r'^write/', include('pombola.writeinpublic.urls')),
 )
