@@ -1,14 +1,28 @@
 from formtools.wizard.views import NamedUrlSessionWizardView
 
 from django.views.generic import TemplateView
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
+from django.http import Http404
 from django.conf import settings
+from django.utils.decorators import method_decorator
 from django.contrib import messages
 
 from pombola.core.models import Person
 
 from .forms import RecipientForm, DraftForm, PreviewForm
 from .client import WriteInPublic
+
+
+def person_everypolitician_uuid_required(function):
+    def wrap(request, *args, **kwargs):
+        person = Person.objects.get(slug=kwargs['person_slug'])
+        if person.everypolitician_uuid is None:
+            raise Http404("Person is missing an EveryPolitician UUID")
+        else:
+            return function(request, *args, **kwargs)
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
 
 
 class WriteInPublicMixin(object):
@@ -106,4 +120,24 @@ class WriteInPublicMessage(WriteInPublicMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(WriteInPublicMessage, self).get_context_data(**kwargs)
         context['message'] = self.client.get_message(self.kwargs['message_id'])
+        return context
+
+
+class WriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
+    template_name = 'writeinpublic/messages.html'
+
+    @method_decorator(person_everypolitician_uuid_required)
+    def dispatch(self, *args, **kwargs):
+        return super(WriteToRepresentativeMessages, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(WriteToRepresentativeMessages, self).get_context_data(**kwargs)
+        person_slug = self.kwargs['person_slug']
+        person = get_object_or_404(Person, slug=person_slug)
+        context['person'] = person
+        if person.everypolitician_uuid is None:
+            context['messages'] = []
+        else:
+            person_uri = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{}'.format(person.everypolitician_uuid)
+            context['messages'] = self.client.get_messages(person_uri)
         return context
