@@ -90,6 +90,10 @@ a {
     }
 }
 
+.button--low-case {
+    text-transform: none;
+}
+
 .inline-search-box {
     input {
         border-radius: $border_radius 0 0 $border_radius;
@@ -766,10 +770,94 @@ body.home {
     }
 }
 
+.home__reps__heading {
+    position: relative;
+    margin-bottom: 1.25em;
+}
+
+.home__reps__heading__title {
+    display: inline;
+}
+
+.home__reps__heading__more {
+    display: inline-block;
+    margin-left: 1em;
+    font-size: 0.8125em; //13px
+}
+
+.home__reps__featured-mp {
+    h3 {
+        text-transform: none;
+        font-size: 1.125em;
+    }
+    h3, h4, .summary {
+        margin-left: 102px; // space for floated thumbnail
+    }
+    .summary {
+        margin-top: 1em;
+        font-size: .8125em; // 13px;
+        line-height: 1.5em;
+    }
+}
+
+.featured-mp__thumb {
+    float: left;
+    max-width: 82px;
+    margin-bottom: 2em;
+}
+
+.home__reps__search {
+    margin-top: 2em;
+    clear: both;
+    h3 {
+        text-transform: none;
+        font-size: 1.125em;
+    }
+    label {
+        font-size: 0.875em; //14px
+        font-family: $font_family_lato;
+    }
+    .inline-search-box {
+        margin-top: 0.5em;
+    }
+}
+
+.home__news {
+    background-color: $colour_cream;
+}
+
 .home__news__row {
     @media (min-width: 640px) {
         overflow: auto; // quick clearfix
     }
+}
+
+.home__news__survey {
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+    border-bottom: 2px solid darken($colour_cream, 10%);
+    position: relative;
+    h3 {
+        // make it float over the thumbnail
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.50);
+        letter-spacing: 1px;
+    }
+    h4 {
+        font-family: $font_family_lato;
+        font-size: 1.125em;
+        line-height: 1.5em;
+        margin-bottom: 1em;
+    }
+}
+
+.home__news__survey__thumb {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5em;
 }
 
 .home__news__articles {
@@ -842,203 +930,29 @@ body.home {
     h2 {
         color: inherit;
         font-size: 2em;
-
-        small {
-            display: block; // break onto new line
-            color: mix(#fff, $colour_green, 60%);
-            font-size: (1em / 2) * 1.2; // get back to 1em, from 2em parent
-            line-height: 1.4em; // 1.4 of this element's ems
-            font-weight: normal;
-
-            @media (min-width: 640px) and (max-height: 700px) {
-                display: none;
-            }
-        }
     }
-}
 
-.home__actions__primary,
-.home__actions__secondary {
-    max-width: 30em;
-
-    @media (min-width: 850px) {
-        float: left;
-        width: 50%;
+    .button {
         box-sizing: border-box;
-        max-width: none;
-    }
-
-    & > p:last-child {
-        margin-bottom: 0;
-    }
-}
-
-.home__actions__primary {
-    margin-bottom: 1.5em;
-
-    @media (min-width: 850px) {
-        margin-bottom: 0;
-        padding-right: 20px;
-        text-align: right;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        width: 100%;
+        margin-bottom: 1.5em;
+        text-align: left;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
     }
 }
 
-.home__actions__secondary {
-    @media (min-width: 850px) {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    // Vertically centre the input
-    // with the titles to the left.
-    .inline-search-box {
-      margin-top: 1.5em;
-
-      @media (min-width: 640px) and (max-height: 700px) {
-        margin-top: 0;
-      }
-    }
-}
-
-.home__infographics {
-    background-color: $colour_main_background;
-    border-bottom: 1px solid mix($colour_main_background, #000, 90%);
-    padding-bottom: 0;
-}
-
-.home__infographics__articles {
-    white-space: nowrap;
-    overflow: auto;
-    font-size: 0; // hack to zero out spacing around inline child elements
-    line-height: 0; // same hack
-    margin: 0 (-16px * 0.75); // counteract parent padding
-    padding: 0 (16px * 0.75); // reinstate padding, but inside the scrolling area
-
-    @media (min-width: 1000px) {
-        overflow: visible;
-        margin: 0;
-        padding: 0;
-    }
-}
-
-.home__infographics__article {
-    display: inline-block;
-    box-sizing: border-box;
-    overflow: hidden;
-    border: 1px solid mix($colour_main_background, #000, 90%);
-    border-bottom: 0;
-    font-size: 16px;
-    line-height: normal;
-    width: 220px;
-
-    & + & {
-        margin-left: 0.75em;
-    }
-
-    @media (min-width: 640px) {
-        width: 225px;
-
-        & + & {
-            margin-left: 20px;
+.home__three-boxes {
+        a {
+            display: block;
         }
-    }
+}
 
+.home__three-boxes__box {
+    margin-bottom: 2em;
     img {
         width: 100%;
-        height: auto;
-    }
-
-    &:nth-child(4n + 1) {
-        height: 220px;
-
-        &:hover {
-            height: 225px;
-        }
-    }
-
-    &:nth-child(4n + 2) {
-        height: 240px;
-
-        &:hover {
-            height: 245px;
-            margin-top: -5px;
-        }
-    }
-
-    &:nth-child(4n + 3) {
-        height: 200px;
-
-        &:hover {
-            height: 205px;
-        }
-    }
-
-    &:nth-child(4n + 4) {
-        height: 220px;
-
-        &:hover {
-            height: 225px;
-        }
-    }
-}
-
-.home__topics__list {
-    text-align: center;
-    margin: 0 -8px;
-
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-
-    -ms-flex-wrap: wrap;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-
-    -ms-justify-content: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-}
-
-.home__topics__topic {
-    display: block;
-    margin: 8px;
-    width: 100%;
-
-    // The core .button styling but without colours
-    font-size: 0.875em;
-    padding: 1em 1.33em;
-    font-family: $font_family_lato;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-    border-radius: $border_radius;
-
-    // default "disabled" styling
-    background-color: $colour_cream;
-    color: $colour_grey;
-    cursor: default;
-
-    @media (min-width: 400px) {
-        display: inline-block; // in case flexbox isn't supported, revert to inline buttons
-        width: auto;
-        -ms-flex: 1 0 auto;
-        -webkit-flex: 1 0 auto;
-        flex: 1 0 auto;
-    }
-}
-
-a.home__topics__topic {
-    // More button-like styling, since we know this is a link
-    background-color: $colour_primary;
-    color: #fff;
-    cursor: pointer;
-    -webkit-appearance: none;
-    text-decoration: none;
-
-    &:hover,
-    &:focus {
-        background: mix($colour_primary, #000, 80%);
-        color: #fff;
-        text-decoration: none;
     }
 }
 

@@ -57,9 +57,61 @@
 {% endblock %}
 
 {% block page_wrapper %}
+
+<div class="home__section home__reps">
+    <div class="wrapper">
+        <div class="home__reps__heading">
+            <h2 class="home__reps__heading__title">Meet your MPs</h2>
+            <a href="#" class="home__reps__heading__more readmore">Show more MPS</a>
+        </div>
+        <div class="home__reps__featured-mp">
+            <img src="http://placehold.it/82x123/" class="featured-mp__thumb" />
+            {% if mp_corner %}
+                <h3>
+                    <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
+                </h3>
+                <h4>ANC</h4>
+                <p class="summary">
+                    {{ mp_corner.content_as_plain_text|truncatewords:24 }}
+                </p>
+            {% endif %}
+        </div>
+        <div class="home__reps__search">
+            <form action="{% url "core_geocoder_search" %}">
+                <div class="">
+                    <h3>Find your representative</h3>
+                    <label for="geocoder-search">Your location</label>
+                    <div class="inline-search-box">
+                        <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your address">
+                        <button type="submit" class="button">Find</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="home__section home__actions">
+    <div class="wrapper">
+        <div class="home__actions__primary">
+            <h2>
+                Do you have a problem?
+            </h2>
+        </div>
+        <div class="home__actions__secondary">
+            <a href="{% url 'writeinpublic-new-message' %}" class="button button--low-case">Write to a representative</a>
+            <a href="{% url 'writeinpublic-new-message' %}" class="button button--low-case">Write to a committee</a>
+        </div>
+    </div>
+</div>
 <div class="home__section home__news">
     <div class="wrapper">
         <div class="home__news__row">
+            <div class="home__news__survey">
+                <h3>Survey</h3>
+                <img class="home__news__survey__thumb" src="{% static 'images/survey-thumb.jpg' %}" />
+                <h4>Do you feel adequately represented by your elected officials?</h4>
+                <a href="#" class="button button--low-case">Take the survey</a>
+            </div>
             <div class="home__news__articles">
                 <h3 class="home__section-header">
                     Latest news
@@ -78,74 +130,35 @@
                 </div>
               {% endfor %}
             </div>
-            <div class="home__news__mp">
-                <h3 class="home__section-header">
-                    MP corner
-                </h3>
-                <div class="home__news__article">
-                  {% if mp_corner %}
-                      <h2>
-                          <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
-                      </h2>
-                      <p class="meta">{{ mp_corner.publication_date|date }}</p>
-                      <p class="summary">
-                          {{ mp_corner.content_as_plain_text|truncatewords:32 }}
-                          <a class="readmore" href="{{ mp_corner.get_absolute_url }}">More</a>
-                      </p>
-                  {% endif %}
-                </div>
-            </div>
         </div>
     </div>
 </div>
-
-<div class="home__section home__actions">
-    <form class="wrapper" action="{% url "core_geocoder_search" %}">
-        <div class="home__actions__primary">
-            <h2>
-                <small>Do you have a problem?</small>
-                <label for="geocoder-search">Contact your representative</label>
-                <small>At local, provincial and national level</small>
-            </h2>
-        </div>
-        <div class="home__actions__secondary">
-            <p class="inline-search-box">
-                <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your address">
-                <button type="submit" class="button">Search</button>
-            </p>
-        </div>
-    </form>
-</div>
-
-<div class="home__section home__infographics">
+<div class="home__section home__three-boxes">
     <div class="wrapper">
-        <h3 class="home__section-header home__section-header--full-width">
-            Latest infographics
-            <a class="readmore" href="{% url "info_page" slug="infographics" %}">Show all</a>
-        </h3>
-        <div class="home__infographics__articles">
-          {% for infographic in infographics %}
-            <a href="{{ infographic.get_absolute_url }}" class="home__infographics__article">
-              {% thumbnail infographic.featured_image_file.file "223x250" crop="top" quality=80 as im %}
-                <img src="{{ im.url }}">
-              {% endthumbnail %}
+        <div class="home__three-boxes__box">
+            <a href="{% url 'mp-attendance' %}">
+                <h3>MP Attendance</h3>
+                <img src="{% static 'images/mp-attendance.jpg' %}" /> 
             </a>
-          {% endfor %}
         </div>
-    </div>
-</div>
-
-<div class="home__section home__topics">
-    <div class="wrapper">
-        <h3 class="home__section-header">
-            Hot topics
-        </h3>
-        <div class="home__topics__list">
-            <a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name&amp;a=1" class="home__topics__topic js-track-mp-profiles">MP profiles</a>
-            <a href="{% url 'info_blog_category' slug='mp-corner' %}" class="home__topics__topic">MP corner</a>
-            <a href="{% url 'mp-attendance' %}" class="home__topics__topic">MP attendance</a>
-            <a href="{% url 'sa-interests-index' %}" class="home__topics__topic">MP assets</a>
-            <a href="{% url 'info_blog_category' slug='advocacy-campaigns' %}" class="home__topics__topic">Campaigns</a>
+        <div class="home__three-boxes__box">
+            <a href="{% url 'sa-interests-index' %}">
+                <h3>MP Assets</h3>
+                <img src="{% static 'images/mp-assets.jpg' %}" /> 
+            </a>
+        </div>
+        <div class="home__three-boxes__box">
+                <a href="{% url "info_page" slug="infographics" %}">
+                    <h3>Latest Infographics</h3>
+                </a>
+                {% if infographic %}
+                <a href="{{ infographic.get_absolute_url }}">
+                    {% thumbnail infographic.featured_image_file.file "306x113" crop="top" quality=80 as im %}
+                        <img src="{{ im.url }}">
+                    {% endthumbnail %}
+                </a>
+                {% endif %}
+            </a>
         </div>
     </div>
 </div>

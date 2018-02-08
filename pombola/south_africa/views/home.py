@@ -30,9 +30,9 @@ class SAHomeView(HomeView):
             context['mp_corner'] = None
 
         try:
-            context['infographics'] = BlogTag.objects.get(name='infographic'). \
-                entries.order_by('-created')[0:4]
+            context['infographic'] = BlogTag.objects.get(name='infographic'). \
+                entries.order_by('-created')[0]
         except BlogTag.DoesNotExist:
-            context['infographics'] = []
+            context['infographic'] = None
 
         return context
