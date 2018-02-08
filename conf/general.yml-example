@@ -119,3 +119,9 @@ EMAIL_USE_TLS: false
 # addresses to longitude / latitude. You can specify the key to use
 # here:
 GOOGLE_MAPS_GEOCODING_API_KEY: ''
+
+# South Africa WriteInPublic configuration (can be left blank for other instances)
+WRITEINPUBLIC_URL: ''
+WRITEINPUBLIC_USERNAME: ''
+WRITEINPUBLIC_API_KEY: ''
+WRITEINPUBLIC_INSTANCE_ID: ''

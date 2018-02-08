@@ -1,0 +1,99 @@
+from formtools.wizard.views import NamedUrlSessionWizardView
+
+from django.shortcuts import redirect
+from django.conf import settings
+from django.contrib import messages
+
+from pombola.core.models import Person
+
+from .forms import RecipientForm, DraftForm, PreviewForm
+from .client import WriteInPublic
+
+
+class WriteInPublicMixin(object):
+    def __init__(self, *args, **kwargs):
+        self.client = WriteInPublic(
+            settings.WRITEINPUBLIC_URL,
+            settings.WRITEINPUBLIC_USERNAME,
+            settings.WRITEINPUBLIC_API_KEY,
+            settings.WRITEINPUBLIC_INSTANCE_ID
+        )
+        super(WriteInPublicMixin, self).__init__(*args, **kwargs)
+
+
+FORMS = [
+    ("recipients", RecipientForm),
+    ("draft", DraftForm),
+    ("preview", PreviewForm),
+]
+
+TEMPLATES = {
+    'recipients': 'writeinpublic/person-write-recipients.html',
+    'draft': 'writeinpublic/person-write-draft.html',
+    'preview': 'writeinpublic/person-write-preview.html',
+}
+
+
+class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
+    form_list = FORMS
+
+    def get(self, *args, **kwargs):
+        step = kwargs.get('step')
+        # If we have an ID in the URL and it matches someone, go straight to
+        # /draft
+        if 'person_id' in self.request.GET:
+            person_id = self.request.GET['person_id']
+            try:
+                person = Person.objects.get(pk=person_id)
+                self.storage.set_step_data('recipients', {'recipients-persons': [person.id]})
+                self.storage.current_step = 'draft'
+                return redirect(self.get_step_url('draft'))
+            except Person.DoesNotExist:
+                pass
+
+        # Check that the form contains valid data
+        if step == 'draft' or step == 'preview':
+            recipients = self.get_cleaned_data_for_step('recipients')
+            if recipients is None or recipients.get('persons') == []:
+                # Form is missing persons, restart process
+                self.storage.reset()
+                self.storage.current_step = self.steps.first
+                return redirect(self.get_step_url(self.steps.first))
+
+        return super(WriteInPublicNewMessage, self).get(*args, **kwargs)
+
+    def get_template_names(self):
+        return [TEMPLATES[self.steps.current]]
+
+    def get_context_data(self, form, **kwargs):
+        context = super(WriteInPublicNewMessage, self).get_context_data(form=form, **kwargs)
+        context['message'] = self.get_cleaned_data_for_step('draft')
+        recipients = self.get_cleaned_data_for_step('recipients')
+        if recipients is not None:
+            context['persons'] = recipients.get('persons')
+        return context
+
+    def done(self, form_list, form_dict, **kwargs):
+        persons = form_dict['recipients'].cleaned_data['persons']
+        person_ids = [p.everypolitician_uuid for p in persons]
+        person_uris = ["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{}".format(uuid)
+                       for uuid in person_ids]
+        message = form_dict['draft'].cleaned_data
+        try:
+            response = self.client.create_message(
+                author_name=message['author_name'],
+                author_email=message['author_email'],
+                subject=message['subject'],
+                content=message['content'],
+                persons=person_uris,
+            )
+            if response.ok:
+                message_id = response.json()['id']
+                messages.success(self.request, 'Success, your message has now been sent.')
+                return redirect('home')
+            else:
+                messages.error(self.request, 'Sorry, there was an error sending your message, please try again. If this problem persists please contact us.')
+                return redirect('writeinpublic-new-message')
+        except self.client.WriteInPublicException:
+            messages.error(self.request, 'Sorry, there was an error connecting to the message service, please try again. If this problem persists please contact us.')
+            return redirect('writeinpublic-new-message')
