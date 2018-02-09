@@ -60,24 +60,23 @@
 
 <div class="home__section home__reps">
     <div class="wrapper">
+      {% if featured_mp %}
         <div class="home__reps__heading">
             <h2 class="home__reps__heading__title">Meet your MPs</h2>
-            <a href="#" class="home__reps__heading__more readmore">Show more MPs</a>
+            <a href="{% url 'info_blog_category' slug='mp-corner' %}" class="home__reps__heading__more readmore">Show more MPs</a>
         </div>
         <div class="home__reps__featured-mp">
-            {% if featured_mp %}
                 {% thumbnail featured_mp.primary_image "82x123" crop="center" as sm %}
-                  <img src="{{ sm.url }}"
+                  <img src="{{ sm.url }}">
                 {% endthumbnail %}
                 <h3>
                     <a href="{{ featured_mp.get_absolute_url }}">{{ featured_mp.name }}</a>
                 </h3>
-                <h4>ANC</h4>
-                <p class="summary">
-                    {{ featured_mp.summary.raw|truncatewords:24 }}
-                </p>
-            {% endif %}
+                {% for party in featured_mp.parties_and_coalitions %}
+                  <h4>{{ party.name }}</h4>
+                {% endfor %}
         </div>
+      {% endif %}
         <div class="home__reps__search">
             <form action="{% url "core_geocoder_search" %}">
                 <div class="">
