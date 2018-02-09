@@ -67,7 +67,7 @@
         </div>
         <div class="home__reps__featured-mp">
                 {% thumbnail featured_mp.primary_image "82x123" crop="center" as sm %}
-                  <img src="{{ sm.url }}">
+                  <img src="{{ sm.url }}" class="featured-mp__thumb" />
                 {% endthumbnail %}
                 <h3>
                     <a href="{{ featured_mp.get_absolute_url }}">{{ featured_mp.name }}</a>
