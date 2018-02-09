@@ -52,7 +52,7 @@
 </li>
 
 <li><a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name&amp;a=1" role="menuitem">MP Profiles</a></li>
-
+<li><a href="{% url 'mp-attendance' %}" role="menuitem">MP Attendance</a></li>
 <li>
   <a href="{% url "info_page" slug="public-participation" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Public Participation</a>
   {% if include_sub_menu_entries %}
@@ -73,15 +73,7 @@
   <a href="{% url "info_page" slug="hot-topics" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Hot Topics</a>
   {% if include_sub_menu_entries %}
     <ul id="extras-overview" class="js-hover-dropdown" role="menu">
-      <li><a href="{% url "info_page" slug="democracy-resources" %}" role="menuitem">Democracy Resources</a>
-        <ul id="democracy-resources-overview">
-          <li><a href="{% url "section-list-question" %}" role="menuitem">Questions</a></li>
-          <li><a href="https://pmg.org.za/bills" role="menuitem">Bill Tracker</a></li>
-          <li><a href="http://www.pmg.org.za/committees" role="menuitem">Committees</a></li>
-          <li><a href="{% url 'info_blog_category' slug='advocacy-campaigns' %}" role="menuitem">Campaigns</a></li>
-        </ul>
-      </li>
-      <li><a href="{% url 'mp-attendance' %}" role="menuitem">MP Attendance</a></li>
+      <li><a href="{% url "section-list-question" %}" role="menuitem">Questions</a></li>
       <li><a href="{% url 'sa-interests-index' %}" role="menuitem">MP Assets</a></li>
       <li><a href="{% url 'info_blog_category' slug='mp-corner' %}" role="menuitem">MP Corner</a></li>
       <li><a href="{% url 'info_page' slug="infographics" %}" role="menuitem">Infographics</a></li>
