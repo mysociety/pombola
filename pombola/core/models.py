@@ -472,8 +472,7 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
 
     @property
     def everypolitician_uuid(self):
-        # return self.get_identifier('everypolitician')
-        return None
+        return self.get_identifier('everypolitician')
 
     def additional_names(self, include_name_to_use=False):
         filter_args = {}
