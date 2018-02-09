@@ -3,6 +3,7 @@ from info.models import (
 )
 
 from pombola.core.views import HomeView
+from pombola.core.models import Person
 
 
 class SAHomeView(HomeView):
@@ -24,10 +25,9 @@ class SAHomeView(HomeView):
         context['news_articles'] = articles_for_front_page[:2]
 
         try:
-            c = BlogCategory.objects.get(slug='mp-corner')
-            context['mp_corner'] = articles.filter(categories=c)[0]
-        except (BlogCategory.DoesNotExist, IndexError):
-            context['mp_corner'] = None
+            context['featured_mp'] = Person.objects.get(slug='gijimani-jim-skosana')
+        except Person.DoesNotExist:
+            context['featured_mp'] = None
 
         try:
             context['infographic'] = BlogTag.objects.get(name='infographic'). \

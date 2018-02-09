@@ -65,14 +65,16 @@
             <a href="#" class="home__reps__heading__more readmore">Show more MPs</a>
         </div>
         <div class="home__reps__featured-mp">
-            <img src="http://placehold.it/82x123/" class="featured-mp__thumb" />
-            {% if mp_corner %}
+            {% if featured_mp %}
+                {% thumbnail featured_mp.primary_image "82x123" crop="center" as sm %}
+                  <img src="{{ sm.url }}"
+                {% endthumbnail %}
                 <h3>
-                    <a href="{{ mp_corner.get_absolute_url }}">{{ mp_corner.title }}</a>
+                    <a href="{{ featured_mp.get_absolute_url }}">{{ featured_mp.name }}</a>
                 </h3>
                 <h4>ANC</h4>
                 <p class="summary">
-                    {{ mp_corner.content_as_plain_text|truncatewords:24 }}
+                    {{ featured_mp.summary.raw|truncatewords:24 }}
                 </p>
             {% endif %}
         </div>

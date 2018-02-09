@@ -72,7 +72,7 @@ class HomeViewTest(TestCase):
 
     def test_homepage_context(self):
         response = self.client.get('/')
-        self.assertIn('mp_corner', response.context)
+        self.assertIn('featured_mp', response.context)
         self.assertIn('news_articles', response.context)
 
 @attr(country='south_africa')
