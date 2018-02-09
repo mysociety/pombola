@@ -17,7 +17,9 @@
         {% block after_content %}{% endblock %}
 
         <br clear="both">
+        {% block correct_this_page %}
         <a class="feedback-button button feedback_link" href="{% url "feedback_add" %}?url={{ request.build_absolute_uri }}">Correct this page</a>
+        {% endblock %}
     </div>
   {% endblock %}
 
