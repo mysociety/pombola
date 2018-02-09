@@ -949,6 +949,12 @@ body.home {
 
     p.meta {
         margin-bottom: 0.75em;
+        font-family: $font_family_lato;
+        font-size: 0.8125em; //13px
+    }
+
+    .summary {
+        font-size: 0.875em;
     }
 }
 
@@ -959,6 +965,7 @@ body.home {
 .home__actions {
     background-color: $colour_green;
     color: #fff;
+    padding: 2em 0.75em;
     @include clearfix();
 
     a {
@@ -986,6 +993,54 @@ body.home {
             margin-right: 20px;
             margin-bottom: 0;
         }
+    }
+}
+
+.button--write {
+    background-size: 25px 18px;
+    background-repeat: no-repeat;
+    background-position: 16px center;
+    padding-left: 3.4em;
+}
+
+.button--write--rep {
+    background-image: url('/static/images/rep-icon.png');
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+        background-image: url('/static/images/rep-icon@2.png');
+    }
+}
+
+.button--write--committee {
+    background-image: url('/static/images/committee-icon.png');
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+        background-image: url('/static/images/committee-icon@2.png');
+    }
+}
+
+.fake-button-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    @media (min-width: 640px) {
+        width: auto;
+    }
+    i {
+        position: absolute;
+        top: 0.75em;
+        left: 3.5em;
+        transform: rotate(-10deg);
+        font-style: normal;
+        font-weight: bold;
+    }
+}
+
+.button--fake-button {
+    opacity: 0.2;
+    &:hover,
+    &:active,
+    &:focus {
+        cursor: default;
+        background-color: #ff5a5a;
     }
 }
 
