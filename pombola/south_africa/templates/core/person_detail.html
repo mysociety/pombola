@@ -36,7 +36,7 @@
       {% elif email_contacts %}
         <div class="contact-actions__email">
         {% for email in email_contacts %}
-          {{ email|urlizetrunc:50 }}
+          <span class="email-address">{{ email|urlizetrunc:50 }}</span>
         {% endfor %}
         </div>
       {% endif %}
@@ -316,7 +316,7 @@
       <h3>Email</h3>
       <ul>
         {% for email in email_contacts %}
-          <li>{{ email|urlizetrunc:50 }}</li>
+          <li class="email-address">{{ email|urlizetrunc:50 }}</li>
         {% endfor %}
       </ul>
     {% endif %}
