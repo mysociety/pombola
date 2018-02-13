@@ -818,7 +818,7 @@ class PlaceQuerySet(models.query.GeoQuerySet):
         return self.order_by('-kind__name', 'name')
 
 
-class Place(ModelBase, ScorecardMixin, BudgetsMixin):
+class Place(ModelBase, ScorecardMixin, BudgetsMixin, IdentifierMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(
         max_length=200,
@@ -837,6 +837,8 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin):
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
 
     fields_to_whitespace_normalize = ['name']
+
+    identifiers = GenericRelation(Identifier)
 
     objects = PlaceQuerySet.as_manager()
     is_overall_scorecard_score_applicable = False

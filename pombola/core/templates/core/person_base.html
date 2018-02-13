@@ -12,6 +12,9 @@
     <![endif]-->
   {% endif %}
   <meta name="pombola-person-id" content="{{ object.id }}">
+  {% for identifier in object.identifiers.all %}
+  <meta name="pa:identifier-{{ identifier.scheme }}" content="{{ identifier.identifier }}">
+  {% endfor %}
 {% endblock%}
 
 {% block open_graph %}{% include 'core/_person_open_graph.html' %}{% endblock %}

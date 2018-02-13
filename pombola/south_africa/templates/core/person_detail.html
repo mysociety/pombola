@@ -298,7 +298,11 @@
       <h3>Party</h3>
       <ul class="party-memberships">
         {% for party in object.parties_and_coalitions %}
-          <li><a href="{{ party.get_absolute_url }}" class="party-membership party-membership--{{ party.kind.name | slugify }}">{{ party.name }}</a></li>
+          <li><a href="{{ party.get_absolute_url }}"
+            {% for identifier in party.identifiers.all %}
+              data-identifier-{{ identifier.scheme }}="{{ identifier.identifier }}"
+            {%endfor%}
+            class="party-membership party-membership--{{ party.kind.name | slugify }}">{{ party.name }}</a></li>
         {% empty %}
           {% if former_parties %}
             {% for party in former_parties %}
@@ -371,7 +375,11 @@
       <h3>{{ entry.grouper }}</h3>
       <ul>
         {% for area in entry.list %}
-          <li><a href="{{ area.get_absolute_url }}">{{ area.name }}</a></li>
+          <li><a
+            {% for identifier in area.identifiers.all %}
+              data-identifier-{{ identifier.scheme }}="{{ identifier.identifier }}"
+            {%endfor%}
+            href="{{ area.get_absolute_url }}">{{ area.name }}</a></li>
         {% endfor %}
       </ul>
     {% endfor %}
