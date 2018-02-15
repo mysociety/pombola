@@ -6,6 +6,7 @@ from django.http import Http404
 from django.conf import settings
 from django.utils.decorators import method_decorator
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 
 from pombola.core.models import Person
 
@@ -37,6 +38,10 @@ class WriteInPublicMixin(object):
             configuration.person_uuid_prefix
         )
         return super(WriteInPublicMixin, self).dispatch(*args, **kwargs)
+
+    def render_to_response(self, context, **response_kwargs):
+        self.request.current_app = self.request.resolver_match.namespace
+        return super(WriteInPublicMixin, self).render_to_response(context, **response_kwargs)
 
 
 FORMS = [
@@ -80,6 +85,9 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
 
         return super(WriteInPublicNewMessage, self).get(*args, **kwargs)
 
+    def get_step_url(self, step):
+        return reverse(self.url_name, kwargs={'step': step}, current_app=self.request.resolver_match.namespace)
+
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 
@@ -106,13 +114,13 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
             if response.ok:
                 message_id = response.json()['id']
                 messages.success(self.request, 'Success, your message has been accepted.')
-                return redirect('writeinpublic-pending')
+                return redirect(reverse('writeinpublic:writeinpublic-pending', current_app=self.request.resolver_match.namespace))
             else:
                 messages.error(self.request, 'Sorry, there was an error sending your message, please try again. If this problem persists please contact us.')
-                return redirect('writeinpublic-new-message')
+                return redirect(reverse('writeinpublic:writeinpublic-new-message', current_app=self.request.resolver_match.namespace))
         except self.client.WriteInPublicException:
             messages.error(self.request, 'Sorry, there was an error connecting to the message service, please try again. If this problem persists please contact us.')
-            return redirect('writeinpublic-new-message')
+            return redirect(reverse('writeinpublic:writeinpublic-new-message', current_app=self.request.resolver_match.namespace))
 
 
 class WriteInPublicMessage(WriteInPublicMixin, TemplateView):

@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from . import views
 
 
-write_message_wizard = views.WriteInPublicNewMessage.as_view(url_name='writeinpublic-new-message-step')
+write_message_wizard = views.WriteInPublicNewMessage.as_view(url_name='writeinpublic:writeinpublic-new-message-step')
 
 urlpatterns = (
     url(

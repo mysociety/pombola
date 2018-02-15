@@ -108,45 +108,45 @@ class WriteInPublicNewMessageViewTest(TestCase):
         )
         person = Person.objects.create()
         person.identifiers.create(scheme='everypolitician', identifier='test')
-        response = self.client.get(reverse('writeinpublic-new-message'))
-        self.assertRedirects(response, reverse('writeinpublic-new-message-step', kwargs={'step': 'recipients'}))
+        response = self.client.get(reverse('writeinpublic:writeinpublic-new-message'))
+        self.assertRedirects(response, reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'recipients'}))
 
         # GET the recipients step
         response = self.client.get(response.url)
         self.assertEquals(response.status_code, 200)
 
         # POST to the recipients step
-        response = self.client.post(reverse('writeinpublic-new-message-step', kwargs={'step': 'recipients'}), {
+        response = self.client.post(reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'recipients'}), {
             'write_in_public_new_message-current_step': 'recipients',
             'recipients-persons': person.id,
         })
-        self.assertRedirects(response, reverse('writeinpublic-new-message-step', kwargs={'step': 'draft'}))
+        self.assertRedirects(response, reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'draft'}))
 
         # GET the draft step
         response = self.client.get(response.url)
         self.assertEquals(response.status_code, 200)
 
         # POST to the draft step
-        response = self.client.post(reverse('writeinpublic-new-message-step', kwargs={'step': 'draft'}), {
+        response = self.client.post(reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'draft'}), {
             'write_in_public_new_message-current_step': 'draft',
             'draft-subject': 'Test',
             'draft-content': 'Test',
             'draft-author_name': 'Test',
             'draft-author_email': 'test@example.com',
         })
-        self.assertRedirects(response, reverse('writeinpublic-new-message-step', kwargs={'step': 'preview'}))
+        self.assertRedirects(response, reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'preview'}))
 
         # GET the preview step
         response = self.client.get(response.url)
         self.assertEquals(response.status_code, 200)
 
         # POST to the preview step
-        response = self.client.post(reverse('writeinpublic-new-message-step', kwargs={'step': 'preview'}), {
+        response = self.client.post(reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'preview'}), {
             'write_in_public_new_message-current_step': 'preview',
         })
         self.assertRedirects(
             response,
-            reverse('writeinpublic-new-message-step', kwargs={'step': 'done'}),
+            reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'done'}),
             fetch_redirect_response=False
         )
 
@@ -156,6 +156,6 @@ class WriteInPublicNewMessageViewTest(TestCase):
         # Check that we're redirected to the pending message page
         self.assertRedirects(
             response,
-            reverse('writeinpublic-pending'),
+            reverse('writeinpublic:writeinpublic-pending'),
             fetch_redirect_response=False
         )
