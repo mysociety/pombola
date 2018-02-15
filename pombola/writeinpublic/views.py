@@ -11,6 +11,7 @@ from pombola.core.models import Person
 
 from .forms import RecipientForm, DraftForm, PreviewForm
 from .client import WriteInPublic
+from .models import Configuration
 
 
 def person_everypolitician_uuid_required(function):
@@ -26,14 +27,15 @@ def person_everypolitician_uuid_required(function):
 
 
 class WriteInPublicMixin(object):
-    def __init__(self, *args, **kwargs):
+    def dispatch(self, *args, **kwargs):
+        configuration = Configuration.objects.get(slug=kwargs['configuration_slug'])
         self.client = WriteInPublic(
-            settings.WRITEINPUBLIC_URL,
-            settings.WRITEINPUBLIC_USERNAME,
-            settings.WRITEINPUBLIC_API_KEY,
-            settings.WRITEINPUBLIC_INSTANCE_ID
+            configuration.url,
+            configuration.username,
+            configuration.api_key,
+            configuration.instance_id
         )
-        super(WriteInPublicMixin, self).__init__(*args, **kwargs)
+        return super(WriteInPublicMixin, self).dispatch(*args, **kwargs)
 
 
 FORMS = [

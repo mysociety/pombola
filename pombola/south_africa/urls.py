@@ -273,7 +273,8 @@ urlpatterns += (
     url(
         r'^person/(?P<person_slug>[-\w]+)/messages/$',
         WriteToRepresentativeMessages.as_view(),
+        kwargs={'configuration_slug': 'south-africa-assembly'},
         name='sa-person-write-all'
     ),
-    url(r'^write/', include('pombola.writeinpublic.urls')),
+    url(r'^write/', include('pombola.writeinpublic.urls'), kwargs={'configuration_slug': 'south-africa-assembly'}),
 )
