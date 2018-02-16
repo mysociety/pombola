@@ -815,7 +815,7 @@ body.home {
 .featured-mp__thumb {
     float: left;
     max-width: 82px;
-    margin-bottom: 2em;
+    margin-bottom: 0.75em;
 }
 
 .home__reps__search {
@@ -988,9 +988,13 @@ body.home {
         margin-bottom: 1.5em;
         text-align: left;
         box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
+        font-size: 1.125em;
         @media (min-width: 640px) {
             width: auto;
-            margin-right: 20px;
+            margin-right: 16px;
+            margin-bottom: 1em;
+        }
+        @media (min-width: 985px) {
             margin-bottom: 0;
         }
     }
@@ -1026,8 +1030,8 @@ body.home {
     }
     i {
         position: absolute;
-        top: 0.75em;
-        left: 3.5em;
+        top: 1.25em;
+        left: 5em;
         transform: rotate(-10deg);
         font-style: normal;
         font-weight: bold;
@@ -1052,6 +1056,9 @@ body.home {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         padding-right: 20px;
+        h2 {
+            margin-top: 0.2em;
+        }
     }
 }
 
