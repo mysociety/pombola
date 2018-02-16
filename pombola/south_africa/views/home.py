@@ -1,3 +1,5 @@
+import random
+
 from info.models import (
     InfoPage, Category as BlogCategory, Tag as BlogTag
 )
@@ -24,9 +26,11 @@ class SAHomeView(HomeView):
 
         context['news_articles'] = articles_for_front_page[:2]
 
-        try:
-            context['featured_mp'] = Person.objects.get(slug='gijimani-jim-skosana')
-        except Person.DoesNotExist:
+        all_featured_mps = Person.objects.get_featured()
+
+        if len(all_featured_mps) > 0:
+            context['featured_mp'] = random.choice(all_featured_mps)
+        else:
             context['featured_mp'] = None
 
         try:
