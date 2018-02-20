@@ -1,9 +1,14 @@
 import requests_mock
+from nose.plugins.attrib import attr
 
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 from django.utils.dateparse import parse_datetime
 
+from pombola.core.models import Person
+
 from . import client
+from .models import Configuration
 
 
 @requests_mock.Mocker()
@@ -84,3 +89,73 @@ class ClientTest(TestCase):
         self.assertEqual(len(messages), 2)
         self.assertEqual(messages[0].subject, 'Test message')
         self.assertEqual(messages[1].subject, 'Another test message')
+
+
+@attr(country='south_africa')
+@requests_mock.Mocker()
+class WriteInPublicNewMessageViewTest(TestCase):
+    def test_sending_message_wizard_steps(self, m):
+        # Mock the POST response
+        m.post('/api/v1/message/', json={
+            'id': '42'
+        })
+        configuration = Configuration.objects.create(
+            url='http://example.com',
+            username='admin',
+            api_key='test',
+            instance_id='1',
+            slug='south-africa-assembly'
+        )
+        person = Person.objects.create()
+        person.identifiers.create(scheme='everypolitician', identifier='test')
+        response = self.client.get(reverse('writeinpublic-new-message'))
+        self.assertRedirects(response, reverse('writeinpublic-new-message-step', kwargs={'step': 'recipients'}))
+
+        # GET the recipients step
+        response = self.client.get(response.url)
+        self.assertEquals(response.status_code, 200)
+
+        # POST to the recipients step
+        response = self.client.post(reverse('writeinpublic-new-message-step', kwargs={'step': 'recipients'}), {
+            'write_in_public_new_message-current_step': 'recipients',
+            'recipients-persons': person.id,
+        })
+        self.assertRedirects(response, reverse('writeinpublic-new-message-step', kwargs={'step': 'draft'}))
+
+        # GET the draft step
+        response = self.client.get(response.url)
+        self.assertEquals(response.status_code, 200)
+
+        # POST to the draft step
+        response = self.client.post(reverse('writeinpublic-new-message-step', kwargs={'step': 'draft'}), {
+            'write_in_public_new_message-current_step': 'draft',
+            'draft-subject': 'Test',
+            'draft-content': 'Test',
+            'draft-author_name': 'Test',
+            'draft-author_email': 'test@example.com',
+        })
+        self.assertRedirects(response, reverse('writeinpublic-new-message-step', kwargs={'step': 'preview'}))
+
+        # GET the preview step
+        response = self.client.get(response.url)
+        self.assertEquals(response.status_code, 200)
+
+        # POST to the preview step
+        response = self.client.post(reverse('writeinpublic-new-message-step', kwargs={'step': 'preview'}), {
+            'write_in_public_new_message-current_step': 'preview',
+        })
+        self.assertRedirects(
+            response,
+            reverse('writeinpublic-new-message-step', kwargs={'step': 'done'}),
+            fetch_redirect_response=False
+        )
+
+        # GET the done step
+        response = self.client.get(response.url)
+
+        # Check that we're redirected to the newly created message
+        self.assertRedirects(
+            response,
+            reverse('writeinpublic-message', kwargs={'message_id': '42'}),
+            fetch_redirect_response=False
+        )
