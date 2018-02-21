@@ -106,8 +106,8 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
             )
             if response.ok:
                 message_id = response.json()['id']
-                messages.success(self.request, 'Success, your message has now been sent.')
-                return redirect('writeinpublic-message', message_id=message_id)
+                messages.success(self.request, 'Success, your message has been accepted.')
+                return redirect('writeinpublic-pending')
             else:
                 messages.error(self.request, 'Sorry, there was an error sending your message, please try again. If this problem persists please contact us.')
                 return redirect('writeinpublic-new-message')

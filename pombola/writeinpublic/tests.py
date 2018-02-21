@@ -153,9 +153,9 @@ class WriteInPublicNewMessageViewTest(TestCase):
         # GET the done step
         response = self.client.get(response.url)
 
-        # Check that we're redirected to the newly created message
+        # Check that we're redirected to the pending message page
         self.assertRedirects(
             response,
-            reverse('writeinpublic-message', kwargs={'message_id': '42'}),
+            reverse('writeinpublic-pending'),
             fetch_redirect_response=False
         )
