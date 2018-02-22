@@ -2374,3 +2374,41 @@ class SAMPProfilesSubHeader(WebTest):
         self.assertEqual(
             response.html.find(class_='content_box').find('h3').string,
             'Current Position Holders')
+
+
+@attr(country='south_africa')
+class SACommitteesPopoloJSONTest(TestCase):
+    def setUp(self):
+        self.email_kind = models.ContactKind.objects.create(name='Email', slug='email')
+
+    def test_produces_correct_json_with_no_contacts(self):
+        response = self.client.get('/api/committees/popolo.json')
+        self.assertEquals(response.status_code, 200)
+        self.assertJSONEqual(response.content, {'persons': []})
+
+    def test_produces_correct_json_with_contacts(self):
+        org_kind_na_committee = models.OrganisationKind.objects.create(
+            name='National Assembly Committees',
+            slug='national-assembly-committees'
+        )
+        org = models.Organisation.objects.create(
+            slug='committee-communications',
+            name='PC on Communications',
+            kind=org_kind_na_committee
+        )
+        org.contacts.create(kind=self.email_kind, value='test@example.org')
+
+        response = self.client.get('/api/committees/popolo.json')
+        self.assertEquals(response.status_code, 200)
+
+        expected_json = {
+            'persons': [
+                {
+                    'contact_details': [],
+                    'email': 'test@example.org',
+                    'id': org.id,
+                    'name': 'PC on Communications'
+                }
+            ]
+        }
+        self.assertJSONEqual(response.content, expected_json)

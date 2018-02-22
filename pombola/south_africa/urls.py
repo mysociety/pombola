@@ -278,3 +278,11 @@ urlpatterns += (
     ),
     url(r'^write/', include('pombola.writeinpublic.urls'), kwargs={'configuration_slug': 'south-africa-assembly'}),
 )
+
+urlpatterns += (
+    url(
+        r'^api/committees/popolo.json$',
+        views.CommitteesPopoloJson.as_view(),
+        name='sa-committees-popolo-json'
+    ),
+)
