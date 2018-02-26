@@ -33,7 +33,8 @@ class WriteInPublicMixin(object):
             configuration.url,
             configuration.username,
             configuration.api_key,
-            configuration.instance_id
+            configuration.instance_id,
+            configuration.person_uuid_prefix
         )
         return super(WriteInPublicMixin, self).dispatch(*args, **kwargs)
 
@@ -93,8 +94,6 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
     def done(self, form_list, form_dict, **kwargs):
         persons = form_dict['recipients'].cleaned_data['persons']
         person_ids = [p.everypolitician_uuid for p in persons]
-        person_uris = ["https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{}".format(uuid)
-                       for uuid in person_ids]
         message = form_dict['draft'].cleaned_data
         try:
             response = self.client.create_message(
@@ -102,7 +101,7 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
                 author_email=message['author_email'],
                 subject=message['subject'],
                 content=message['content'],
-                persons=person_uris,
+                persons=person_ids,
             )
             if response.ok:
                 message_id = response.json()['id']

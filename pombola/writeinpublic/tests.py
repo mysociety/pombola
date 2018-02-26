@@ -14,7 +14,7 @@ from .models import Configuration
 @requests_mock.Mocker()
 class ClientTest(TestCase):
     def setUp(self):
-        self.writeinpublic = client.WriteInPublic('https://example.com', 'test', '123', '42')
+        self.writeinpublic = client.WriteInPublic('https://example.com', 'test', '123', '42', 'https://example.net/p.json#person-{}')
 
     def test_create_message(self, m):
         m.post('/api/v1/message/')
@@ -23,14 +23,14 @@ class ClientTest(TestCase):
             author_email='alice@example.org',
             subject='Test subject',
             content='Hello, testing.',
-            persons='https://example.net/p.json#person-1',
+            persons=['1'],
         )
         expected_json = {
             'writeitinstance': '/api/v1/instance/42/',
             'author_email': 'alice@example.org',
             'author_name': 'Alice',
             'content': 'Hello, testing.',
-            'persons': 'https://example.net/p.json#person-1',
+            'persons': ['https://example.net/p.json#person-1'],
             'subject': 'Test subject',
         }
         expected_url = 'https://example.com/api/v1/message/?username=test&api_key=123&format=json'

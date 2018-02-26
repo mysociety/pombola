@@ -46,11 +46,12 @@ class WriteInPublic(object):
     class WriteInPublicException(Exception):
         pass
 
-    def __init__(self, url, username, api_key, instance_id):
+    def __init__(self, url, username, api_key, instance_id, person_uuid_prefix):
         self.url = url
         self.username = username
         self.api_key = api_key
         self.instance_id = instance_id
+        self.person_uuid_prefix = person_uuid_prefix
 
     def create_message(self, author_name, author_email, subject, content, persons):
         url = '{url}/api/v1/message/'.format(url=self.url)
@@ -59,13 +60,14 @@ class WriteInPublic(object):
             'username': self.username,
             'api_key': self.api_key,
         }
+        person_uris = [self.person_uuid_prefix.format(uuid) for uuid in persons]
         payload = {
             'author_name': author_name,
             'author_email': author_email,
             'subject': subject,
             'content': content,
             'writeitinstance': "/api/v1/instance/{}/".format(self.instance_id),
-            'persons': persons,
+            'persons': person_uris,
         }
         try:
             response = requests.post(url, json=payload, params=params)
