@@ -276,6 +276,7 @@ urlpatterns += (
         kwargs={'configuration_slug': 'south-africa-assembly'},
         name='sa-person-write-all'
     ),
+    url(r'^write-committees/', include('pombola.writeinpublic.urls', namespace='writeinpublic-committees', app_name='writeinpublic'), kwargs={'configuration_slug': 'south-africa-committees'}),
     url(r'^write/', include('pombola.writeinpublic.urls', namespace='writeinpublic-mps', app_name='writeinpublic'), kwargs={'configuration_slug': 'south-africa-assembly'}),
 )
 
