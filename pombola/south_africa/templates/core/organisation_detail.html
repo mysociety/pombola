@@ -36,6 +36,16 @@
 
   {% endif %}
 
+  {% if object.kind.slug == 'national-assembly-committees' %}
+    <a href="{% url 'organisation_messages' slug=object.slug %}">Public messages</a>
+
+    <div class="contact-actions">
+      <div class="contact-actions__wip">
+          <a href="{% url 'writeinpublic-committees:writeinpublic-new-message' %}?person_id={{ object.pk }}">Write a public message to this committee</a>
+      </div>
+    </div>
+  {% endif %}
+
   <h2>People</h2>
 
   {% if object.kind.slug == 'constituency-office' or object.kind.slug == 'constituency-area' %}
