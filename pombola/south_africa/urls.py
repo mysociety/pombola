@@ -21,7 +21,7 @@ from pombola.core.urls import (
     place_patterns_path,
     )
 from pombola.search.urls import urlpatterns as search_urlpatterns
-from pombola.writeinpublic.views import WriteToRepresentativeMessages
+from pombola.writeinpublic.views import WriteToRepresentativeMessages, WriteToCommitteeMessages
 
 organisation_patterns = copy.copy(organisation_patterns)
 
@@ -275,6 +275,11 @@ urlpatterns += (
         WriteToRepresentativeMessages.as_view(),
         kwargs={'configuration_slug': 'south-africa-assembly'},
         name='sa-person-write-all'
+    ),
+    url(r'^organisation/(?P<slug>[-\w]+)/messages/$',
+        WriteToCommitteeMessages.as_view(),
+        kwargs={'configuration_slug': 'south-africa-committees'},
+        name='organisation_messages',
     ),
     url(r'^write-committees/', include('pombola.writeinpublic.urls', namespace='writeinpublic-committees', app_name='writeinpublic'), kwargs={'configuration_slug': 'south-africa-committees'}),
     url(r'^write/', include('pombola.writeinpublic.urls', namespace='writeinpublic-mps', app_name='writeinpublic'), kwargs={'configuration_slug': 'south-africa-assembly'}),

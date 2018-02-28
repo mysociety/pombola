@@ -218,3 +218,15 @@ class WriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
             person_uri = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{}'.format(person.everypolitician_uuid)
             context['messages'] = self.client.get_messages(person_uri)
         return context
+
+class WriteToCommitteeMessages(WriteInPublicMixin, TemplateView):
+    template_name = 'writeinpublic/committee-messages.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(WriteToCommitteeMessages, self).get_context_data(**kwargs)
+        slug = self.kwargs['slug']
+        committee = get_object_or_404(Organisation, slug=slug)
+        context['committee'] = committee
+        uri = self.client.person_uuid_prefix.format(committee.id)
+        context['messages'] = self.client.get_messages(uri)
+        return context
