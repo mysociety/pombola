@@ -2129,6 +2129,7 @@ li, div {
     margin-top: 1.5em;
 }
 
+
 .important-positions {
     margin-top: 0.5em;
     p {
@@ -2173,6 +2174,14 @@ $contact_icon_path: '../images/person-contact-icons';
 
 .contact-actions__wip {
     @extend .contact-actions__email;
+}
+
+a.contact-actions__wip__view-link {
+    // Make this look like a link, but have the spacing and other behaviour of the button it's adjacent to
+    background-color: transparent;
+    background-image: none;
+    padding-left: 1.33em;
+    color: #e23d28;
 }
 
 .ui-tabs {
