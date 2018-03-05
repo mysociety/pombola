@@ -2406,7 +2406,7 @@ class SACommitteesPopoloJSONTest(TestCase):
                 {
                     'contact_details': [],
                     'email': 'test@example.org',
-                    'id': org.id,
+                    'id': str(org.id),
                     'name': 'PC on Communications'
                 }
             ]
