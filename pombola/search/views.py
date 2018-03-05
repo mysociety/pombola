@@ -14,6 +14,7 @@ from pombola.core import models
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery, Raw
 
+from pygeolib import GeocoderError
 from sorl.thumbnail import get_thumbnail
 from .geocoder import geocoder
 
@@ -351,7 +352,13 @@ class GeocoderView(TemplateView):
         query = self.request.GET.get('q')
         if query:
             context['query'] = query
-            context['geocoder_results'] = geocoder(country=country_alpha2, q=query)
+            try:
+                context['geocoder_results'] = geocoder(country=country_alpha2, q=query)
+            except GeocoderError as e:
+                if e.status == GeocoderError.G_GEO_ZERO_RESULTS:
+                    context['geocoder_results'] = []
+                else:
+                    raise
 
         return context
 

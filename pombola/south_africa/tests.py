@@ -42,6 +42,7 @@ from instances.models import Instance
 from pombola.interests_register.models import Category, Release, Entry, EntryLineItem
 
 from nose.plugins.attrib import attr
+from pygeolib import GeocoderError
 
 def fake_geocoder(country, q, decimal_places=3):
     if q == 'anywhere':
@@ -64,6 +65,8 @@ def fake_geocoder(country, q, decimal_places=3):
              'longitude': 27.868,
              'address': u'Trafford Road, East London 5247, South Africa'}
         ]
+    elif q == 'place that triggers ZERO_RESULTS':
+        raise GeocoderError(GeocoderError.G_GEO_ZERO_RESULTS)
     else:
         raise Exception, u"Unexpected input to fake_geocoder: {}".format(q)
 
@@ -261,6 +264,16 @@ class SASearchViewTest(WebTest):
         )
         self.assertIn("No results for the location 'anywhere'", response)
         mocked_geocoder.assert_called_once_with(q='anywhere', country='za')
+
+    @patch('pombola.search.views.geocoder', side_effect=fake_geocoder)
+    def test_zero_results_place(self, mocked_geocoder):
+        response = self.app.get(
+            "{0}?q={1}".format(self.search_location_url, 'place that triggers ZERO_RESULTS'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['geocoder_results'], [])
+        results_div = response.html.find('div', class_='geocoded_results')
+        self.assertIsNone(results_div)
+        mocked_geocoder.assert_called_once_with(q='place that triggers ZERO_RESULTS', country='za')
 
     @patch('pombola.search.views.geocoder', side_effect=fake_geocoder)
     def test_single_result_place(self, mocked_geocoder):
