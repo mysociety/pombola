@@ -9,15 +9,11 @@ from .client import WriteInPublic
 class RecipientForm(forms.Form):
     persons = ModelMultipleChoiceField(queryset=None)
 
+    # Dynamic queryset so we can show either people or committees
     def __init__(self, *args, **kwargs):
+        queryset = kwargs.pop('queryset')
         super(RecipientForm, self).__init__(*args, **kwargs)
-        # This is set dynamically because the script which syncs
-        # EveryPolitician UUIDs is run at a regular interval, and we want to
-        # pick up any new people that appear.
-        self.fields['persons'].queryset = Person.objects.filter(
-            identifiers__scheme='everypolitician',
-            identifiers__identifier__isnull=False,
-        )
+        self.fields['persons'].queryset = queryset
 
 
 class DraftForm(forms.Form):

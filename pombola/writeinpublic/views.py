@@ -27,15 +27,47 @@ def person_everypolitician_uuid_required(function):
     return wrap
 
 
+class PersonAdapter(object):
+    def filter(self, ids):
+        return Person.objects.filter(
+            identifiers__scheme='everypolitician',
+            identifiers__identifier__in=ids,
+        )
+
+    def get(self, object_id):
+        return Person.objects.get(
+            identifiers__scheme='everypolitician',
+            identifiers__identifier=person_id,
+        )
+
+    def get_by_id(self, object_id):
+        return Person.objects.get(pk=object_id)
+
+    def get_form_kwargs(self):
+        return {
+            'queryset': Person.objects.filter(
+                identifiers__scheme='everypolitician',
+                identifiers__identifier__isnull=False,
+            )
+        }
+
+    def object_ids(self, objects):
+        return [p.everypolitician_uuid for p in objects]
+
+
 class WriteInPublicMixin(object):
     def dispatch(self, *args, **kwargs):
         configuration = Configuration.objects.get(slug=kwargs['configuration_slug'])
+
+        self.adapter = PersonAdapter()
+
         self.client = WriteInPublic(
             configuration.url,
             configuration.username,
             configuration.api_key,
             configuration.instance_id,
-            configuration.person_uuid_prefix
+            configuration.person_uuid_prefix,
+            adapter=self.adapter
         )
         return super(WriteInPublicMixin, self).dispatch(*args, **kwargs)
 
@@ -60,6 +92,12 @@ TEMPLATES = {
 class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
     form_list = FORMS
 
+    def get_form_kwargs(self, step=None):
+        if step != 'recipients':
+            return {}
+
+        return self.adapter.get_form_kwargs()
+
     def get(self, *args, **kwargs):
         step = kwargs.get('step')
         # If we have an ID in the URL and it matches someone, go straight to
@@ -67,8 +105,8 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
         if 'person_id' in self.request.GET:
             person_id = self.request.GET['person_id']
             try:
-                person = Person.objects.get(pk=person_id)
-                self.storage.set_step_data('recipients', {'recipients-persons': [person.id]})
+                recipient = self.adapter.get_by_id(person_id)
+                self.storage.set_step_data('recipients', {'recipients-persons': [recipient.id]})
                 self.storage.current_step = 'draft'
                 return redirect(self.get_step_url('draft'))
             except Person.DoesNotExist:
@@ -101,7 +139,7 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
 
     def done(self, form_list, form_dict, **kwargs):
         persons = form_dict['recipients'].cleaned_data['persons']
-        person_ids = [p.everypolitician_uuid for p in persons]
+        person_ids = self.adapter.object_ids(persons)
         message = form_dict['draft'].cleaned_data
         try:
             response = self.client.create_message(

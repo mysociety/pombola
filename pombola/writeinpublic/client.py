@@ -2,8 +2,6 @@ import requests
 
 from django.utils.dateparse import parse_datetime
 
-from pombola.core.models import Person
-
 
 class PersonMixin(object):
     def parse_everypolitician_uuid(self, resource_uri):
@@ -11,47 +9,43 @@ class PersonMixin(object):
 
 
 class Message(PersonMixin, object):
-    def __init__(self, params):
+    def __init__(self, params, adapter):
         self.id = params['id']
         self.author_name = params['author_name']
         self.subject = params['subject']
         self.content = params['content']
         self.created_at = parse_datetime(params['created'])
         self._params = params
+        self.adapter = adapter
 
     def people(self):
-        return Person.objects.filter(
-            identifiers__scheme='everypolitician',
-            identifiers__identifier__in=self._recipient_ids(),
-        )
+        return self.adapter.filter(ids=self._recipient_ids())
 
     def _recipient_ids(self):
         return [self.parse_everypolitician_uuid(p['resource_uri']) for p in self._params['people']]
 
     def answers(self):
-        return [Answer(a) for a in self._params['answers']]
+        return [Answer(a, person=self.adapter.get(self.parse_everypolitician_uuid(a['person']['resource_uri']))) for a in self._params['answers']]
 
 
 class Answer(PersonMixin, object):
-    def __init__(self, params):
+    def __init__(self, params, person):
         self.content = params['content']
         self.created_at = parse_datetime(params['created'])
-        self.person = Person.objects.get(
-            identifiers__scheme='everypolitician',
-            identifiers__identifier=self.parse_everypolitician_uuid(params['person']['resource_uri']),
-        )
+        self.person = person
 
 
 class WriteInPublic(object):
     class WriteInPublicException(Exception):
         pass
 
-    def __init__(self, url, username, api_key, instance_id, person_uuid_prefix):
+    def __init__(self, url, username, api_key, instance_id, person_uuid_prefix, adapter):
         self.url = url
         self.username = username
         self.api_key = api_key
         self.instance_id = instance_id
         self.person_uuid_prefix = person_uuid_prefix
+        self.adapter = adapter
 
     def create_message(self, author_name, author_email, subject, content, persons):
         url = '{url}/api/v1/message/'.format(url=self.url)
@@ -85,7 +79,7 @@ class WriteInPublic(object):
         }
         response = requests.get(url, params=params)
         response.raise_for_status()
-        return Message(response.json())
+        return Message(response.json(), adapter=self.adapter)
 
     def get_messages(self, person_popolo_uri):
         url = '{url}/api/v1/instance/{instance_id}/messages/'.format(url=self.url, instance_id=self.instance_id)
@@ -98,4 +92,4 @@ class WriteInPublic(object):
         response = requests.get(url, params=params)
         response.raise_for_status()
         messages = response.json()['objects']
-        return [Message(m) for m in messages]
+        return [Message(m, adapter=self.adapter) for m in messages]

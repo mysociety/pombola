@@ -1,5 +1,8 @@
+from datetime import datetime
+
 import requests_mock
 from nose.plugins.attrib import attr
+from mock import Mock
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
@@ -14,7 +17,15 @@ from .models import Configuration
 @requests_mock.Mocker()
 class ClientTest(TestCase):
     def setUp(self):
-        self.writeinpublic = client.WriteInPublic('https://example.com', 'test', '123', '42', 'https://example.net/p.json#person-{}')
+        self.adapter_mock = Mock()
+        self.writeinpublic = client.WriteInPublic(
+            'https://example.com',
+            'test',
+            '123',
+            '42',
+            'https://example.net/p.json#person-{}',
+            adapter=self.adapter_mock
+        )
 
     def test_create_message(self, m):
         m.post('/api/v1/message/')
@@ -45,6 +56,20 @@ class ClientTest(TestCase):
             'subject': 'Test message',
             'content': 'Test content',
             'created': '2017-11-14T04:01:05.799658',
+            'people': [
+                {
+                    'resource_uri': 'http://example.com/popolo.json#person-123',
+                }
+            ],
+            'answers': [
+                {
+                    'content': 'Test',
+                    'created': '2017-12-01T10:27:30.825490',
+                    'person': {
+                        'resource_uri': 'http://example.com/popolo.json#person-456',
+                    },
+                },
+            ],
         }
         m.get('/api/v1/message/1/', json=message_json)
         message = self.writeinpublic.get_message(1)
@@ -54,7 +79,15 @@ class ClientTest(TestCase):
         self.assertEqual(message.content, 'Test content')
         self.assertEqual(message.created_at, parse_datetime(message_json['created']))
 
-        # TODO: Add tests for message.people() and message.answers() methods
+        message.people()
+        self.adapter_mock.filter.assert_called_once_with(ids=['123'])
+
+        answers = message.answers()
+        self.adapter_mock.get.assert_called_once_with('456')
+        answer = answers[0]
+        self.assertEqual('Test', answer.content)
+        self.assertEqual(datetime(2017, 12, 1, 10, 27, 30, 825490), answer.created_at)
+
 
     def test_get_messages(self, m):
         messages_json = {
