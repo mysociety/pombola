@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 
-from pombola.core.models import Person
+from pombola.core.models import Person, Organisation
 
 from .forms import RecipientForm, DraftForm, PreviewForm
 from .client import WriteInPublic
@@ -55,11 +55,41 @@ class PersonAdapter(object):
         return [p.everypolitician_uuid for p in objects]
 
 
+class CommitteeAdapter(object):
+    def filter(self, ids):
+        return Organisation.objects.filter(id__in=ids)
+
+    def get(self, object_id):
+        return Organisation.objects.get(pk=object_id)
+
+    def get_by_id(self, object_id):
+        return self.get(object_id)
+
+    def get_form_kwargs(self):
+        return {
+            'queryset': Organisation.objects.filter(
+                kind__name='National Assembly Committees',
+                contacts__kind__slug='email'
+            )
+        }
+
+    def object_ids(self, objects):
+        return [org.id for org in objects]
+
+
 class WriteInPublicMixin(object):
     def dispatch(self, *args, **kwargs):
-        configuration = Configuration.objects.get(slug=kwargs['configuration_slug'])
+        configuration_slug = kwargs['configuration_slug']
+        configuration = Configuration.objects.get(slug=configuration_slug)
 
-        self.adapter = PersonAdapter()
+        # FIXME: It would be nice if we didn't hardcode the configuration_slug
+        # values here.
+        if configuration_slug == 'south-africa-assembly':
+            self.adapter = PersonAdapter()
+        elif configuration_slug == 'south-africa-committees':
+            self.adapter = CommitteeAdapter()
+        else:
+            raise Exception, "Unknown configuration_slug: {}".format(configuration_slug)
 
         self.client = WriteInPublic(
             configuration.url,
