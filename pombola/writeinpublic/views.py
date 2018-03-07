@@ -54,6 +54,13 @@ class PersonAdapter(object):
     def object_ids(self, objects):
         return [p.everypolitician_uuid for p in objects]
 
+    def get_templates(self):
+        return {
+            'recipients': 'writeinpublic/person-write-recipients.html',
+            'draft': 'writeinpublic/person-write-draft.html',
+            'preview': 'writeinpublic/person-write-preview.html',
+        }
+
 
 class CommitteeAdapter(object):
     def filter(self, ids):
@@ -76,6 +83,13 @@ class CommitteeAdapter(object):
 
     def object_ids(self, objects):
         return [org.id for org in objects]
+
+    def get_templates(self):
+        return {
+            'recipients': 'writeinpublic/committee-write-recipients.html',
+            'draft': 'writeinpublic/committee-write-draft.html',
+            'preview': 'writeinpublic/committee-write-preview.html',
+        }
 
 
 class WriteInPublicMixin(object):
@@ -112,12 +126,6 @@ FORMS = [
     ("draft", DraftForm),
     ("preview", PreviewForm),
 ]
-
-TEMPLATES = {
-    'recipients': 'writeinpublic/person-write-recipients.html',
-    'draft': 'writeinpublic/person-write-draft.html',
-    'preview': 'writeinpublic/person-write-preview.html',
-}
 
 
 class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
@@ -158,7 +166,7 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
         return reverse(self.url_name, kwargs={'step': step}, current_app=self.request.resolver_match.namespace)
 
     def get_template_names(self):
-        return [TEMPLATES[self.steps.current]]
+        return [self.adapter.get_templates()[self.steps.current]]
 
     def get_context_data(self, form, **kwargs):
         context = super(WriteInPublicNewMessage, self).get_context_data(form=form, **kwargs)
