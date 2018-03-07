@@ -271,6 +271,11 @@ urlpatterns += (
 # WriteInPublic
 urlpatterns += (
     url(
+        r'^committees/$',
+        views.SACommitteesView.as_view(),
+        name='sa-committees-list'
+    ),
+    url(
         r'^person/(?P<person_slug>[-\w]+)/messages/$',
         WriteToRepresentativeMessages.as_view(),
         kwargs={'configuration_slug': 'south-africa-assembly'},
