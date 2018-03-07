@@ -281,8 +281,8 @@ urlpatterns += (
         kwargs={'configuration_slug': 'south-africa-committees'},
         name='organisation_messages',
     ),
-    url(r'^write-committees/', include('pombola.writeinpublic.urls', namespace='writeinpublic-committees', app_name='writeinpublic'), kwargs={'configuration_slug': 'south-africa-committees'}),
-    url(r'^write/', include('pombola.writeinpublic.urls', namespace='writeinpublic-mps', app_name='writeinpublic'), kwargs={'configuration_slug': 'south-africa-assembly'}),
+    url(r'^write-committees/', include('pombola.writeinpublic.urls', namespace='writeinpublic-committees', app_name='writeinpublic'), kwargs={'configuration_slug': 'south-africa-committees', 'app_name': 'Write to a committee'}),
+    url(r'^write/', include('pombola.writeinpublic.urls', namespace='writeinpublic-mps', app_name='writeinpublic'), kwargs={'configuration_slug': 'south-africa-assembly', 'app_name': 'Write to my MP'}),
 )
 
 urlpatterns += (

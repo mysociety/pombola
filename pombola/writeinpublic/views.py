@@ -119,6 +119,8 @@ class WriteInPublicMixin(object):
         configuration_slug = kwargs['configuration_slug']
         configuration = Configuration.objects.get(slug=configuration_slug)
 
+        self.app_name = kwargs.get('app_name')
+
         # FIXME: It would be nice if we didn't hardcode the configuration_slug
         # values here.
         if configuration_slug == 'south-africa-assembly':
@@ -232,6 +234,7 @@ class WriteInPublicMessage(WriteInPublicMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(WriteInPublicMessage, self).get_context_data(**kwargs)
         context['message'] = self.client.get_message(self.kwargs['message_id'])
+        context['app_name'] = self.app_name
         return context
 
 
