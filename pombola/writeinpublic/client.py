@@ -3,12 +3,12 @@ import requests
 from django.utils.dateparse import parse_datetime
 
 
-class PersonMixin(object):
-    def parse_everypolitician_uuid(self, resource_uri):
+class RecipientMixin(object):
+    def parse_id(self, resource_uri):
         return resource_uri.split('#')[-1].split('-', 1)[-1]
 
 
-class Message(PersonMixin, object):
+class Message(RecipientMixin, object):
     def __init__(self, params, adapter):
         self.id = params['id']
         self.author_name = params['author_name']
@@ -22,13 +22,13 @@ class Message(PersonMixin, object):
         return self.adapter.filter(ids=self._recipient_ids())
 
     def _recipient_ids(self):
-        return [self.parse_everypolitician_uuid(p['resource_uri']) for p in self._params['people']]
+        return [self.parse_id(p['resource_uri']) for p in self._params['people']]
 
     def answers(self):
-        return [Answer(a, person=self.adapter.get(self.parse_everypolitician_uuid(a['person']['resource_uri']))) for a in self._params['answers']]
+        return [Answer(a, person=self.adapter.get(self.parse_id(a['person']['resource_uri']))) for a in self._params['answers']]
 
 
-class Answer(PersonMixin, object):
+class Answer(RecipientMixin, object):
     def __init__(self, params, person):
         self.content = params['content']
         self.created_at = parse_datetime(params['created'])
