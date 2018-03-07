@@ -13,7 +13,7 @@ from pombola.core.models import Person
 
 from . import client
 from .models import Configuration
-from .views import PersonAdapter
+from .views import PersonAdapter, CommitteeAdapter
 from .forms import RecipientForm
 
 
@@ -203,6 +203,24 @@ class PersonAdapterTest(TestCase):
         person = Person.objects.create()
         person.identifiers.create(scheme='everypolitician', identifier='test')
         self.assertEqual(adapter.get('test'), person)
+
+
+class CommitteeAdapterTest(TestCase):
+    def test_get_form_initial(self):
+        adapter = CommitteeAdapter()
+
+        self.assertEqual(adapter.get_form_initial(step='draft', cleaned_data={}), {})
+        self.assertEqual(adapter.get_form_initial(step='draft', cleaned_data={'recipients': None}), {})
+
+        mock_committee = Mock()
+        mock_committee.name = 'Test Name'
+        self.assertEqual(
+            adapter.get_form_initial(
+                step='draft',
+                cleaned_data={'recipients': {'persons': mock_committee}}
+            ),
+            {'content': 'Dear Test Name,\n\n'}
+        )
 
 
 class RecipientFormTest(TestCase):

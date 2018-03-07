@@ -64,6 +64,9 @@ class PersonAdapter(object):
             'preview': 'writeinpublic/person-write-preview.html',
         }
 
+    def get_form_initial(self, **kwargs):
+        return {}
+
 
 class CommitteeAdapter(object):
     def filter(self, ids):
@@ -95,6 +98,19 @@ class CommitteeAdapter(object):
             'recipients': 'writeinpublic/committee-write-recipients.html',
             'draft': 'writeinpublic/committee-write-draft.html',
             'preview': 'writeinpublic/committee-write-preview.html',
+        }
+
+    def get_form_initial(self, step, cleaned_data={}):
+        recipients = cleaned_data.get('recipients')
+        if recipients is None:
+            return {}
+
+        committee = recipients.get('persons')
+        if committee is None:
+            return {}
+
+        return {
+            'content': 'Dear {committee_name},\n\n'.format(committee_name=committee.name),
         }
 
 
@@ -139,6 +155,13 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
 
     def get_form_kwargs(self, step=None):
         return self.adapter.get_form_kwargs(step=step)
+
+    def get_form_initial(self, step):
+        if step != 'recipients':
+            recipients = self.get_cleaned_data_for_step('recipients')
+            return self.adapter.get_form_initial(step=step, cleaned_data={'recipients': recipients})
+        else:
+            return super(WriteInPublicNewMessage, self).get_form_initial(step=step)
 
     def get(self, *args, **kwargs):
         step = kwargs.get('step')
