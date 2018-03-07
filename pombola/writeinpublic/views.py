@@ -43,13 +43,16 @@ class PersonAdapter(object):
     def get_by_id(self, object_id):
         return Person.objects.get(pk=object_id)
 
-    def get_form_kwargs(self):
-        return {
-            'queryset': Person.objects.filter(
-                identifiers__scheme='everypolitician',
-                identifiers__identifier__isnull=False,
-            )
+    def get_form_kwargs(self, step=None):
+        step_form_kwargs = {
+            'recipients': {
+                'queryset': Person.objects.filter(
+                    identifiers__scheme='everypolitician',
+                    identifiers__identifier__isnull=False,
+                ),
+            },
         }
+        return step_form_kwargs.get(step, {})
 
     def object_ids(self, objects):
         return [p.everypolitician_uuid for p in objects]
@@ -72,14 +75,17 @@ class CommitteeAdapter(object):
     def get_by_id(self, object_id):
         return self.get(object_id)
 
-    def get_form_kwargs(self):
-        return {
-            'queryset': Organisation.objects.filter(
-                kind__name='National Assembly Committees',
-                contacts__kind__slug='email'
-            ),
-            'multiple': False,
+    def get_form_kwargs(self, step=None):
+        step_form_kwargs = {
+            'recipients': {
+                'queryset': Organisation.objects.filter(
+                    kind__name='National Assembly Committees',
+                    contacts__kind__slug='email'
+                ),
+                'multiple': False,
+            },
         }
+        return step_form_kwargs.get(step, {})
 
     def object_ids(self, objects):
         return [org.id for org in objects]
@@ -132,10 +138,7 @@ class WriteInPublicNewMessage(WriteInPublicMixin, NamedUrlSessionWizardView):
     form_list = FORMS
 
     def get_form_kwargs(self, step=None):
-        if step != 'recipients':
-            return {}
-
-        return self.adapter.get_form_kwargs()
+        return self.adapter.get_form_kwargs(step=step)
 
     def get(self, *args, **kwargs):
         step = kwargs.get('step')
