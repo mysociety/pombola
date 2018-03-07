@@ -70,7 +70,8 @@ class CommitteeAdapter(object):
             'queryset': Organisation.objects.filter(
                 kind__name='National Assembly Committees',
                 contacts__kind__slug='email'
-            )
+            ),
+            'multiple': False,
         }
 
     def object_ids(self, objects):

@@ -7,12 +7,14 @@ from mock import Mock
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.utils.dateparse import parse_datetime
+from django.forms import ModelMultipleChoiceField, ModelChoiceField
 
 from pombola.core.models import Person
 
 from . import client
 from .models import Configuration
 from .views import PersonAdapter
+from .forms import RecipientForm
 
 
 @requests_mock.Mocker()
@@ -201,3 +203,18 @@ class PersonAdapterTest(TestCase):
         person = Person.objects.create()
         person.identifiers.create(scheme='everypolitician', identifier='test')
         self.assertEqual(adapter.get('test'), person)
+
+
+class RecipientFormTest(TestCase):
+    def setUp(self):
+        self.people = Person.objects.all()
+
+    def test_defaults_to_multiple_choice(self):
+        form = RecipientForm(queryset=self.people)
+        self.assertEqual(ModelMultipleChoiceField, form.fields['persons'].__class__)
+        self.assertEqual(self.people, form.fields['persons'].queryset)
+
+    def test_multiple_choice_kwarg(self):
+        form = RecipientForm(queryset=self.people, multiple=False)
+        self.assertEqual(ModelChoiceField, form.fields['persons'].__class__)
+        self.assertEqual(self.people, form.fields['persons'].queryset)
