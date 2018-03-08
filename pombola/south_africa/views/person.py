@@ -144,7 +144,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         if not identifier:
             # First find the id of the person
             pa_link = urllib.quote(
-                "http://www.pa.org.za/person/{}/".format(self.object.slug))
+                "https://www.pa.org.za/person/{}/".format(self.object.slug))
 
             url_fmt = "https://api.pmg.org.za/member/?filter[pa_link]={}"
             api_search_url = url_fmt.format(pa_link)
@@ -195,7 +195,7 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
                 return True
         return False
 
-    def get_attendance_data_url(self, attendance_url_template="http://api.pmg.org.za/member/{}/attendance/"):
+    def get_attendance_data_url(self, attendance_url_template="https://api.pmg.org.za/member/{}/attendance/"):
         identifier = self.store_or_get_pmg_member_id()
 
         if identifier:
