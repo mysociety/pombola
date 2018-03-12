@@ -985,17 +985,13 @@ body.home {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         width: 100%;
-        margin-bottom: 1.5em;
+        margin-top: 1em;
         text-align: left;
         box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
         font-size: 1.125em;
         @media (min-width: 640px) {
             width: auto;
             margin-right: 16px;
-            margin-bottom: 1em;
-        }
-        @media (min-width: 985px) {
-            margin-bottom: 0;
         }
     }
 }
@@ -1018,58 +1014,6 @@ body.home {
     background-image: url('/static/images/committee-icon.png');
     @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
         background-image: url('/static/images/committee-icon@2.png');
-    }
-}
-
-.fake-button-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    @media (min-width: 640px) {
-        width: auto;
-    }
-    i {
-        position: absolute;
-        top: 1.25em;
-        left: 5em;
-        transform: rotate(-10deg);
-        font-style: normal;
-        font-weight: bold;
-    }
-}
-
-.button--fake-button {
-    opacity: 0.2;
-    &:hover,
-    &:active,
-    &:focus {
-        cursor: default;
-        background-color: #ff5a5a;
-    }
-}
-
-.home__actions__primary {
-    @media (min-width: 640px) {
-        float: left;
-        width: 42%;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        padding-right: 20px;
-        h2 {
-            margin-top: 0.2em;
-        }
-    }
-}
-
-.home__actions__secondary {
-    @media (min-width: 640px) {
-        float: left;
-        width: 58%;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        padding-left: 20px;
     }
 }
 

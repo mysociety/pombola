@@ -93,15 +93,11 @@
 </div>
 <div class="home__section home__actions">
     <div class="wrapper">
-        <div class="home__actions__primary">
-            <h2>
-                Do you have a problem?
-            </h2>
-        </div>
-        <div class="home__actions__secondary">
-            <a href="{% url 'writeinpublic-mps:writeinpublic-new-message' %}" class="button button--low-case button--write button--write--rep">Write to an MP</a>
-            <a href="{% url 'writeinpublic-committees:writeinpublic-new-message' %}" class="button button--low-case button--write button--write--committee">Write to a Parliament Committee</a>
-        </div>
+        <h2>
+            Do you have a problem?
+        </h2>
+        <a href="{% url 'writeinpublic-mps:writeinpublic-new-message' %}" class="button button--low-case button--write button--write--rep">Write to an MP</a>
+        <a href="{% url 'writeinpublic-committees:writeinpublic-new-message' %}" class="button button--low-case button--write button--write--committee">Write to a Parliamentary Committee</a>
     </div>
 </div>
 <div class="home__section home__news">
