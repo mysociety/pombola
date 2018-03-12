@@ -326,7 +326,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
         # the live PMG API
         pmg_api_cache = caches['pmg_api']
         pmg_api_cache.set(
-            "http://api.pmg.org.za/member/moomin-finn/attendance/",
+            "https://api.pmg.org.za/member/moomin-finn/attendance/",
             [],
             )
 
@@ -510,7 +510,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
         pmg_api_cache = caches['pmg_api']
         pmg_api_cache.set(
-            "http://api.pmg.org.za/member/moomin-finn/attendance/",
+            "https://api.pmg.org.za/member/moomin-finn/attendance/",
             raw_data['results'],
             )
 
@@ -960,7 +960,7 @@ class SAPersonProfileSubPageTest(WebTest):
                 )
 
             pmg_api_cache.set(
-                "http://api.pmg.org.za/member/{}/attendance/".format(person.slug),
+                "https://api.pmg.org.za/member/{}/attendance/".format(person.slug),
                 [],
                 )
 
