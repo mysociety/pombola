@@ -49,6 +49,7 @@ class Command(BaseCommand):
             # other data in the database; it can be recreated with
             # the popolo_name_resolver_init management command.
             'popolo_name_resolver_entityname',
+            'writeinpublic_configuration',
         ])
         if settings.COUNTRY_APP in ('nigeria',):
             # In the past I think the hansard application was in use
