@@ -37,7 +37,7 @@ class PersonAdapter(object):
     def get(self, object_id):
         return Person.objects.get(
             identifiers__scheme='everypolitician',
-            identifiers__identifier=person_id,
+            identifiers__identifier=object_id,
         )
 
     def get_by_id(self, object_id):

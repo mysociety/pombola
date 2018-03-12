@@ -12,6 +12,7 @@ from pombola.core.models import Person
 
 from . import client
 from .models import Configuration
+from .views import PersonAdapter
 
 
 @requests_mock.Mocker()
@@ -192,3 +193,11 @@ class WriteInPublicNewMessageViewTest(TestCase):
             reverse('writeinpublic:writeinpublic-pending'),
             fetch_redirect_response=False
         )
+
+
+class PersonAdapterTest(TestCase):
+    def test_get(self):
+        adapter = PersonAdapter()
+        person = Person.objects.create()
+        person.identifiers.create(scheme='everypolitician', identifier='test')
+        self.assertEqual(adapter.get('test'), person)
