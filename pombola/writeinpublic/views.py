@@ -123,12 +123,10 @@ class WriteInPublicMixin(object):
 
         # FIXME: It would be nice if we didn't hardcode the configuration_slug
         # values here.
-        if configuration_slug == 'south-africa-assembly':
-            self.adapter = PersonAdapter()
-        elif configuration_slug == 'south-africa-committees':
-            self.adapter = CommitteeAdapter()
-        else:
-            raise Exception, "Unknown configuration_slug: {}".format(configuration_slug)
+        self.adapter = {
+            'south-africa-assembly': PersonAdapter,
+            'south-africa-committees': CommitteeAdapter,
+        }[configuration_slug]()
 
         self.client = WriteInPublic(
             configuration.url,
