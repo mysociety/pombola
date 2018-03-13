@@ -1416,6 +1416,29 @@ class SAOrganisationDetailViewTest(WebTest):
 
 
 @attr(country='south_africa')
+class SAOrganisationDetailViewWriteInPublicTest(TestCase):
+    def setUp(self):
+        na_committee_kind = models.OrganisationKind.objects.create(name='National Assembly Committees', slug='national-assembly-committees')
+        self.committee = models.Organisation.objects.create(slug='test-committee', kind=na_committee_kind)
+
+    def test_not_contactable_via_writeinpublic_with_no_email(self):
+        response = self.client.get(reverse('organisation', kwargs={'slug': self.committee.slug}))
+        self.assertFalse(response.context['contactable_via_writeinpublic'])
+
+    def test_contactable_via_writeinpublic_with_email(self):
+        email_contact_kind = models.ContactKind.objects.create(name='Email', slug='email')
+        self.committee.contacts.create(kind=email_contact_kind, value='test@example.com')
+        response = self.client.get(reverse('organisation', kwargs={'slug': self.committee.slug}))
+        self.assertTrue(response.context['contactable_via_writeinpublic'])
+
+    def test_contactable_via_writeinpublic_not_committee(self):
+        org_kind = models.OrganisationKind.objects.create(name='Test', slug='test')
+        org = models.Organisation.objects.create(slug='test-org', kind=org_kind)
+        response = self.client.get(reverse('organisation', kwargs={'slug': org.slug}))
+        self.assertFalse(response.context['contactable_via_writeinpublic'])
+
+
+@attr(country='south_africa')
 class SAOrganisationDetailViewTestParliament(WebTest):
 
     def setUp(self):

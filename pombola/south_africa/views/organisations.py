@@ -63,6 +63,11 @@ class SAOrganisationDetailView(CommentArchiveMixin, OrganisationDetailView):
         except EmptyPage:
             context['positions'] = paginator.page(paginator.num_pages)
 
+        # Determine if this org is a committee that can be contacted
+        context['contactable_via_writeinpublic'] = \
+            self.object.kind.name == 'National Assembly Committees' \
+            and self.object.contacts.filter(kind__slug='email').exists()
+
         return context
 
     def add_parliament_counts_to_context_data(self, context):
