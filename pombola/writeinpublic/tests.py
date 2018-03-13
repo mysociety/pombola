@@ -197,6 +197,41 @@ class WriteInPublicNewMessageViewTest(TestCase):
         )
 
 
+@attr(country='south_africa')
+@requests_mock.Mocker()
+class WriteToCommitteeMessagesViewTest(TestCase):
+    def setUp(self):
+        Configuration.objects.create(
+            url='http://example.com',
+            username='admin',
+            api_key='test',
+            instance_id='1',
+            slug='south-africa-committees',
+            person_uuid_prefix='http://example.org/popolo.json#person-{}'
+        )
+        kind = OrganisationKind.objects.create(name='National Assembly Committee', slug='national-assembly-committee')
+        self.committee = Organisation.objects.create(slug='test-committee', kind=kind)
+
+    def test_committee_that_exists_in_writeinpublic(self, m):
+        m.get(
+            '/api/v1/instance/1/messages/'.format(self.committee.id),
+            json={'objects': []}
+        )
+        response = self.client.get(reverse('organisation_messages', kwargs={'slug': self.committee.slug}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['messages'], [])
+
+    def test_committee_that_doesnt_exist_in_writeinpublic(self, m):
+        m.get(
+            '/api/v1/instance/1/messages/'.format(self.committee.id),
+            status_code=404
+        )
+        response = self.client.get(reverse('organisation_messages', kwargs={'slug': self.committee.slug}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['messages'], [])
+
+
+
 class PersonAdapterTest(TestCase):
     def test_get(self):
         adapter = PersonAdapter()

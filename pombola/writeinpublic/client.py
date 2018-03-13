@@ -89,7 +89,12 @@ class WriteInPublic(object):
             'api_key': self.api_key,
             'person__popolo_uri': person_popolo_uri,
         }
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-        messages = response.json()['objects']
-        return [Message(m, adapter=self.adapter) for m in messages]
+        try:
+            response = requests.get(url, params=params)
+            if response.status_code == 404:
+                return []
+            response.raise_for_status()
+            messages = response.json()['objects']
+            return [Message(m, adapter=self.adapter) for m in messages]
+        except requests.exceptions.RequestException as err:
+            raise self.WriteInPublicException(unicode(err))
