@@ -91,7 +91,7 @@ class CommitteeAdapter(object):
         return step_form_kwargs.get(step, {})
 
     def object_ids(self, objects):
-        return [org.id for org in objects]
+        return [objects.id]
 
     def get_templates(self):
         return {
