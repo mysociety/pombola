@@ -84,7 +84,7 @@ class CommitteeAdapter(object):
                 'queryset': Organisation.objects.filter(
                     kind__name='National Assembly Committees',
                     contacts__kind__slug='email'
-                ),
+                ).distinct(),
                 'multiple': False,
             },
         }

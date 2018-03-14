@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.utils.dateparse import parse_datetime
 from django.forms import ModelMultipleChoiceField, ModelChoiceField
 
-from pombola.core.models import Person
+from pombola.core.models import Person, Organisation, OrganisationKind, ContactKind
 
 from . import client
 from .models import Configuration
@@ -221,6 +221,19 @@ class CommitteeAdapterTest(TestCase):
             ),
             {'content': 'Dear Test Name,\n\n'}
         )
+
+    def test_get_form_kwargs_when_committee_has_multiple_emails(self):
+        adapter = CommitteeAdapter()
+
+        na_committee_kind = OrganisationKind.objects.create(name='National Assembly Committees', slug='national-assembly-committees')
+        email_kind = ContactKind.objects.create(name='Email', slug='email')
+        committee = Organisation.objects.create(kind=na_committee_kind)
+        committee.contacts.create(kind=email_kind, value='test@example.org')
+        committee.contacts.create(kind=email_kind, value='test@example.com')
+
+        form_kwargs = adapter.get_form_kwargs('recipients')
+        self.assertEqual(len(form_kwargs['queryset']), 1)
+        self.assertEqual(form_kwargs['queryset'][0], committee)
 
 
 class RecipientFormTest(TestCase):
