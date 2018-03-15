@@ -3411,3 +3411,26 @@ ul.attendance__notes {
 .list-of-committee-messages__item__read-link {
     font-size: 0.875em;
 }
+
+.committee-list {
+    p {
+        margin-bottom: 0.25em;
+    }
+}
+
+.committee-list__links {
+    margin-bottom: 0.5em;
+    a:link,
+    a:visited,
+    a {
+        font-size: 0.875em;
+        text-decoration: underline;
+        color: #e23d28;
+        margin-right: 0.5em;
+        display: inline-block;
+        &:hover {
+            color: #333;
+        }
+    }
+    
+}
