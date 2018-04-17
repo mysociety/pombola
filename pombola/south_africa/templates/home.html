@@ -63,7 +63,7 @@
       {% if featured_mp %}
         <div class="home__reps__heading">
             <h2 class="home__reps__heading__title">Meet your MPs</h2>
-            <a href="{% url 'sa-members-view' %}" class="home__reps__heading__more readmore">Show more MPs</a>
+            <a href="{% url 'sa-members-view' %}" class="home__reps__heading__more">Show more MPs</a>
         </div>
         <div class="home__reps__featured-mp">
                 {% thumbnail featured_mp.primary_image "82x123" crop="center" as sm %}
@@ -112,7 +112,7 @@
             <div class="home__news__articles">
                 <h3 class="home__section-header">
                     Latest news
-                    <a class="readmore" href="{% url 'info_blog_category' slug='week-parliament,impressions' %}">Show more news</a>
+                    <a href="{% url 'info_blog_category' slug='week-parliament,impressions' %}">Show more news</a>
                 </h3>
               {% for article in news_articles %}
                 <div class="home__news__article">

@@ -1040,7 +1040,7 @@ body.home {
 }
 
 .home__section-header {
-    .readmore {
+    a {
         text-transform: none;
         margin-left: 1em;
         font-weight: normal;
@@ -1048,7 +1048,7 @@ body.home {
 }
 
 .home__section-header--full-width {
-    .readmore {
+    a {
         float: right;
         margin-left: 0;
     }
