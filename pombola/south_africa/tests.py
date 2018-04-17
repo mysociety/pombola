@@ -1427,7 +1427,7 @@ class SAOrganisationDetailViewWriteInPublicTest(TestCase):
 
     def test_contactable_via_writeinpublic_with_email(self):
         email_contact_kind = models.ContactKind.objects.create(name='Email', slug='email')
-        self.committee.contacts.create(kind=email_contact_kind, value='test@example.com')
+        self.committee.contacts.create(kind=email_contact_kind, value='test@example.com', preferred=False)
         response = self.client.get(reverse('organisation', kwargs={'slug': self.committee.slug}))
         self.assertTrue(response.context['contactable_via_writeinpublic'])
 
@@ -2432,7 +2432,7 @@ class SACommitteesPopoloJSONTest(TestCase):
             name='PC on Communications',
             kind=org_kind_na_committee
         )
-        org.contacts.create(kind=self.email_kind, value='test@example.org')
+        org.contacts.create(kind=self.email_kind, value='test@example.org', preferred=False)
 
         response = self.client.get('/api/committees/popolo.json')
         self.assertEquals(response.status_code, 200)

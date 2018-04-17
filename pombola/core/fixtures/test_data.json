@@ -110,7 +110,8 @@
             "content_type": [
                 "core", 
                 "person"
-            ]
+            ],
+            "preferred": false
         }
     }, 
     {
@@ -127,7 +128,8 @@
             "content_type": [
                 "core", 
                 "person"
-            ]
+            ],
+            "preferred": false
         }
     }, 
     {

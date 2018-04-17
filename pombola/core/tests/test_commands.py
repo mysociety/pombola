@@ -128,6 +128,7 @@ class MergeObjectsCommandTest(TestCase):
             object_id = self.person_a.id,
             kind = self.phone_kind,
             value = '555 5555',
+            preferred=False,
         )
         self.contact_a.save()
         self.contact_b = Contact.objects.create(
@@ -135,6 +136,7 @@ class MergeObjectsCommandTest(TestCase):
             object_id=self.person_b.id,
             kind=self.email_kind,
             value='jimmy@example.org',
+            preferred=False,
         )
         self.contact_b.save()
 

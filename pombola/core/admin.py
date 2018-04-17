@@ -76,7 +76,7 @@ class ContactInlineAdmin(GenericTabularInline):
     model = models.Contact
     extra = 0
     can_delete = True
-    fields = ['kind', 'value', 'source', 'note']
+    fields = ['kind', 'value', 'source', 'note', 'preferred']
     formfield_overrides = {
         db.models.TextField: {
             'widget': forms.Textarea(attrs={'rows':2, 'cols':20}),

@@ -263,8 +263,8 @@ class CommitteeAdapterTest(TestCase):
         na_committee_kind = OrganisationKind.objects.create(name='National Assembly Committees', slug='national-assembly-committees')
         email_kind = ContactKind.objects.create(name='Email', slug='email')
         committee = Organisation.objects.create(kind=na_committee_kind)
-        committee.contacts.create(kind=email_kind, value='test@example.org')
-        committee.contacts.create(kind=email_kind, value='test@example.com')
+        committee.contacts.create(kind=email_kind, value='test@example.org', preferred=False)
+        committee.contacts.create(kind=email_kind, value='test@example.com', preferred=False)
 
         form_kwargs = adapter.get_form_kwargs('recipients')
         self.assertEqual(len(form_kwargs['queryset']), 1)

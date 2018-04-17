@@ -271,6 +271,8 @@ class Contact(ModelBase):
     note = models.TextField(blank=True, help_text="publicly visible, use to clarify contact detail")
     source = models.CharField(max_length=500, blank=True, default='', help_text="where did this contact detail come from")
 
+    preferred = models.BooleanField(help_text="Should this contact detail be listed before others of the same type?")
+
     # link to other objects using the ContentType system
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
@@ -289,7 +291,7 @@ class Contact(ModelBase):
         return []
 
     class Meta:
-       ordering = ["content_type", "object_id", "kind"]
+       ordering = ["content_type", "-preferred", "object_id", "kind"]
 
 
 class InformationSource(ModelBase):
