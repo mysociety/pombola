@@ -120,9 +120,17 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
         return ret
 
-    def list_contacts(self, kind_slugs):
-        return self.object.contacts.filter(
-            kind__slug__in=kind_slugs).values_list('value', flat=True)
+    def list_contacts_by_kind(self, kind_slugs):
+        return self.object.contacts \
+            .filter(kind__slug__in=kind_slugs)
+
+    def list_contacts_values(self, kind_slugs):
+        return self.list_contacts_by_kind(kind_slugs) \
+            .values_list('value', flat=True)
+
+    def list_contacts_with_preferred(self, kind_slugs):
+        return self.list_contacts_by_kind(kind_slugs) \
+            .values_list('value', 'preferred')
 
     def get_former_parties(self, person):
         former_party_memberships = (
@@ -340,20 +348,22 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
 
     def get_context_data(self, **kwargs):
         context = super(SAPersonDetail, self).get_context_data(**kwargs)
-        context['twitter_contacts'] = self.list_contacts(('twitter',))
-        context['facebook_contacts'] = self.list_contacts(('facebook',))
-        context['linkedin_contacts'] = self.list_contacts(('linkedin',))
-        context['youtube_contacts'] = self.list_contacts(('youtube',))
-        context['whoswhosa_contacts'] = self.list_contacts(('whos-who-sa',))
+        context['twitter_contacts'] = self.list_contacts_values(('twitter',))
+        context['facebook_contacts'] = self.list_contacts_values(('facebook',))
+        context['linkedin_contacts'] = self.list_contacts_values(('linkedin',))
+        context['youtube_contacts'] = self.list_contacts_values(('youtube',))
+        context['whoswhosa_contacts'] = self.list_contacts_values(('whos-who-sa',))
         # The email attribute of the person might also be duplicated
         # in a contact of type email, so create a set of email
         # addresses:
-        context['email_contacts'] = set(self.list_contacts(('email',)))
+        email_contacts = set(self.list_contacts_with_preferred(('email',)))
         if self.object.email:
-            context['email_contacts'].add(self.object.email)
-        context['phone_contacts'] = self.list_contacts(('cell', 'voice'))
-        context['fax_contacts'] = self.list_contacts(('fax',))
-        context['address_contacts'] = self.list_contacts(('address',))
+            email_contacts.add((self.object.email, True))
+
+        context['email_contacts'] = sorted(email_contacts, key=lambda tup: not tup[1])
+        context['phone_contacts'] = self.list_contacts_values(('cell', 'voice'))
+        context['fax_contacts'] = self.list_contacts_values(('fax',))
+        context['address_contacts'] = self.list_contacts_values(('address',))
 
         orgs_from_important_positions = models.Organisation.objects.filter(
             kind__slug__in=self.important_org_kind_slugs,
