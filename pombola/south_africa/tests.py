@@ -674,6 +674,36 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             response.content
         )
 
+    def test_email_sorting_by_preferred_without_wip(self):
+        person = models.Person.objects.get(slug='moomin-finn')
+        email_contact_kind = models.ContactKind.objects.create(name='Email', slug='email')
+        person.contacts.create(kind=email_contact_kind, value='not-preferred@example.com', preferred=False)
+        person.contacts.create(kind=email_contact_kind, value='preferred@example.com', preferred=True)
+
+        response = self.client.get(reverse('person', args=('moomin-finn',)))
+        self.assertIn(
+            '<span class="email-address preferred"><a href="mailto:preferred@example.com">preferred@example.com</a></span>\n        \n          <span class="email-address"><a href="mailto:not-preferred@example.com">not-preferred@example.com</a></span>',
+            response.content
+        )
+
+    def test_email_sorting_by_preferred_with_wip(self):
+        person = models.Person.objects.get(slug='moomin-finn')
+        email_contact_kind = models.ContactKind.objects.create(name='Email', slug='email')
+        person.contacts.create(kind=email_contact_kind, value='not-preferred@example.com', preferred=False)
+        person.contacts.create(kind=email_contact_kind, value='preferred@example.com', preferred=True)
+
+        models.Identifier.objects.create(
+            scheme='everypolitician',
+            identifier='123456',
+            content_object=person,
+            )
+
+        response = self.client.get(reverse('person', args=('moomin-finn',)))
+        self.assertIn(
+            '<li class="email-address preferred"><a href="mailto:preferred@example.com">preferred@example.com</a></li>\n        \n          <li class="email-address"><a href="mailto:not-preferred@example.com">not-preferred@example.com</a></li>',
+            response.content
+        )
+
 
 @attr(country='south_africa')
 class SAAttendanceDataTest(TestCase):
