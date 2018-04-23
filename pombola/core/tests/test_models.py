@@ -278,6 +278,7 @@ class PersonAndContactTasksTest(TestCase):
             object_id    = self.person.id,
             kind         = self.phone,
             value        = '07891 234 567',
+            preferred    = False,
         )
         contact.save()
 

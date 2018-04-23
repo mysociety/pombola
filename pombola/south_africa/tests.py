@@ -674,6 +674,36 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             response.content
         )
 
+    def test_email_sorting_by_preferred_without_wip(self):
+        person = models.Person.objects.get(slug='moomin-finn')
+        email_contact_kind = models.ContactKind.objects.create(name='Email', slug='email')
+        person.contacts.create(kind=email_contact_kind, value='not-preferred@example.com', preferred=False)
+        person.contacts.create(kind=email_contact_kind, value='preferred@example.com', preferred=True)
+
+        response = self.client.get(reverse('person', args=('moomin-finn',)))
+        self.assertIn(
+            '<span class="email-address preferred"><a href="mailto:preferred@example.com">preferred@example.com</a></span>\n        \n          <span class="email-address"><a href="mailto:not-preferred@example.com">not-preferred@example.com</a></span>',
+            response.content
+        )
+
+    def test_email_sorting_by_preferred_with_wip(self):
+        person = models.Person.objects.get(slug='moomin-finn')
+        email_contact_kind = models.ContactKind.objects.create(name='Email', slug='email')
+        person.contacts.create(kind=email_contact_kind, value='not-preferred@example.com', preferred=False)
+        person.contacts.create(kind=email_contact_kind, value='preferred@example.com', preferred=True)
+
+        models.Identifier.objects.create(
+            scheme='everypolitician',
+            identifier='123456',
+            content_object=person,
+            )
+
+        response = self.client.get(reverse('person', args=('moomin-finn',)))
+        self.assertIn(
+            '<li class="email-address preferred"><a href="mailto:preferred@example.com">preferred@example.com</a></li>\n        \n          <li class="email-address"><a href="mailto:not-preferred@example.com">not-preferred@example.com</a></li>',
+            response.content
+        )
+
 
 @attr(country='south_africa')
 class SAAttendanceDataTest(TestCase):
@@ -1427,7 +1457,7 @@ class SAOrganisationDetailViewWriteInPublicTest(TestCase):
 
     def test_contactable_via_writeinpublic_with_email(self):
         email_contact_kind = models.ContactKind.objects.create(name='Email', slug='email')
-        self.committee.contacts.create(kind=email_contact_kind, value='test@example.com')
+        self.committee.contacts.create(kind=email_contact_kind, value='test@example.com', preferred=False)
         response = self.client.get(reverse('organisation', kwargs={'slug': self.committee.slug}))
         self.assertTrue(response.context['contactable_via_writeinpublic'])
 
@@ -2432,7 +2462,7 @@ class SACommitteesPopoloJSONTest(TestCase):
             name='PC on Communications',
             kind=org_kind_na_committee
         )
-        org.contacts.create(kind=self.email_kind, value='test@example.org')
+        org.contacts.create(kind=self.email_kind, value='test@example.org', preferred=False)
 
         response = self.client.get('/api/committees/popolo.json')
         self.assertEquals(response.status_code, 200)

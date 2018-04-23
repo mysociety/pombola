@@ -61,12 +61,14 @@ class PopoloTest(TestCase):
             content_type=ContentType.objects.get_for_model(models.Person),
             object_id=self.person.id,
             note='Found on the parliament website',
+            preferred=False,
         )
         self.missing_email_contact = models.Contact.objects.create(
             kind = self.contact_kind,
             value = '',
             content_type=ContentType.objects.get_for_model(models.Person),
-            object_id=self.person.id
+            object_id=self.person.id,
+            preferred=False,
         )
         self.person.add_alternative_name('Test H Person',
                                          name_to_use=True,
