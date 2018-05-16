@@ -2071,6 +2071,13 @@ li, div {
 
 .contact-actions {
     margin-top: 1.5em;
+
+    a {
+        @extend .button;
+        margin-bottom: 1em;
+        text-transform: none;
+        padding-left: 38px;
+    }
 }
 
 
@@ -2098,11 +2105,6 @@ $contact_icon_path: '../images/person-contact-icons';
         margin-right: 1em;
 
         a {
-            @extend .button;
-            margin-bottom: 1em;
-            text-transform: none;
-            padding-left: 38px;
-
             background: nth($site, 2) url('#{$contact_icon_path}/#{nth($site, 1)}-icon.png') no-repeat 14px 50%;
             background-image: url('#{$contact_icon_path}/#{nth($site, 1)}-icon.svg'), none;
             background-size: 18px 14px;
