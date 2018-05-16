@@ -972,48 +972,79 @@ body.home {
         color: inherit;
     }
 
+    // We add vertical margin to the children, because we need space between
+    // the h2 and the buttons at medium widths and also in non-flexbox clients
+    // but in a way that doesn't also break flexbox layout in modern clients.
+    // So we have to compensate for the 10px margin here.
+    .wrapper {
+        margin: -10px auto;
+    }
+
     h2 {
         color: inherit;
-        font-size: 2em;
-        @media (min-width: 640px) {
-            margin-bottom: 0;
-        }
+        font-size: 2em; // BIG!!
+        margin: 10px 16px 10px 0;
     }
 
     .button {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-        width: 100%;
-        margin-top: 1em;
         text-align: left;
         box-shadow: 0 1px 2px 0 rgba(0,0,0,0.18);
         font-size: 1.125em;
+
+        // Full width buttons on narrow screens.
+        width: 100%;
+        margin: 10px 0;
+
+        // Line buttons up horizontally on wider screens.
         @media (min-width: 640px) {
             width: auto;
             margin-right: 16px;
         }
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
-}
 
-.button--write {
-    background-size: 25px 18px;
-    background-repeat: no-repeat;
-    background-position: 16px center;
-    padding-left: 3.4em;
-}
-
-.button--write--rep {
-    background-image: url('/static/images/rep-icon.png');
-    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
-        background-image: url('/static/images/rep-icon@2.png');
+    .button--write {
+        background-size: 25px 18px;
+        background-repeat: no-repeat;
+        background-position: 20px center;
+        padding-left: 3.2em;
     }
-}
 
-.button--write--committee {
-    background-image: url('/static/images/committee-icon.png');
-    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
-        background-image: url('/static/images/committee-icon@2.png');
+    .button--write--rep {
+        background-image: url('/static/images/rep-icon.png');
+        @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+            background-image: url('/static/images/rep-icon@2.png');
+        }
+    }
+
+    .button--write--committee {
+        background-image: url('/static/images/committee-icon.png');
+        @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+            background-image: url('/static/images/committee-icon@2.png');
+        }
+    }
+
+    // Flexbox layout on wide screens, to get the h2 and buttons
+    // lined up horizontally, if there is space.
+    @media (min-width: 960px) {
+        .wrapper {
+            @include display-flex();
+            @include align-items(center);
+        }
+
+        h2 {
+            @include flex(1 1 auto);
+        }
+
+        .button {
+            @include flex(0 0 auto);
+        }
     }
 }
 
