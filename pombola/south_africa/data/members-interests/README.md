@@ -38,6 +38,7 @@ You can run the script like this:
     ./convert_to_import_json.py 2014.json > 2014_for_import.json
     ./convert_to_import_json.py 2015.json > 2015_for_import.json
     ./convert_to_import_json.py 2016.json > 2016_for_import.json
+    ./convert_to_import_json.py 2017.json > 2017_for_import.json
 
 When processing new data you may well need to add more entries to the
 `slug_corrections` attribute. Change the `finding_slug_corrections` to `True`
@@ -52,6 +53,7 @@ to enable some code that'll help you do that. Change it back to False when done.
     2014_for_import.json
     2015_for_import.json
     2016_for_import.json
+    2017_for_import.json
 
 This is the output of the above conversion script. It is committed for ease of
 adding to the database, and as looking at the diffs is an easy way to see the
@@ -67,3 +69,4 @@ To load this data into the database, you can run the management command:
     ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2014_for_import.json
     ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2015_for_import.json
     ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2016_for_import.json
+    ./manage.py interests_register_import_from_json pombola/south_africa/data/members-interests/2017_for_import.json
