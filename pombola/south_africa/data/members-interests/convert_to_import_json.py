@@ -260,10 +260,14 @@ class Converter(object):
         "ntombovuyo-mente-nqweniso": "ntombovuyo-veronica-nqweniso",
         "ockers-stefanus-terblanche": "ockert-stefanus-terblanche",
         "patrick-maloyi": "nono-maloyi",
+        "ghaleb-cachalia": "ghaleb-cachalia",
+        "archibold-figlan": "a-m-figlan",
+        "hlengiwe-hlophe-maxon": "hlengiwe-octavia-hlophe",
+        "nkagisang-koni-mokgosi": "nkagisang-poppy-mokgosi",
+        "terrence-mpanza": "terence-skhumbuzo-mpanza",
         #name changes confirmed in National Assembly membership document
         "buyiswa-blaai": "buyiswa-cornelia-diemu",
         "sanna-keikantseeng-molao": "sanna-keikantseeng-plaatjie",
-
         # Garbage entries
         "control-flag-ict": None,
     }
