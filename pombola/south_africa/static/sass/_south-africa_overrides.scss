@@ -776,7 +776,11 @@ body.home {
 
 .home__reps__heading {
     position: relative;
-    margin-bottom: 1.25em;
+    margin-bottom: 1em;
+
+    @media (min-width: 640px) {
+        margin-bottom: 1.25em;
+    }
 }
 
 .home__reps__heading__title {
@@ -789,22 +793,33 @@ body.home {
     font-size: 0.8125em; //13px
 }
 
-.home__reps__featured-mp {
+.home__reps__featured-mp,
+.home__reps__search {
     @media (min-width: 640px) {
-        float: left;
         width: 50%;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-        padding-right: 20px;
     }
+
     h3 {
         text-transform: none;
         font-size: 1.125em;
     }
+}
+
+.home__reps__featured-mp {
+    overflow: auto; // contain floated image
+
+    @media (min-width: 640px) {
+        float: left;
+        padding-right: 20px;
+    }
+
     h3, h4, .summary {
         margin-left: 102px; // space for floated thumbnail
     }
+
     .summary {
         margin-top: 1em;
         font-size: .8125em; // 13px;
@@ -812,37 +827,32 @@ body.home {
     }
 }
 
+.home__reps__search {
+    margin-top: 1em;
+
+    @media (min-width: 640px) {
+        float: left;
+        padding-left: 20px;
+        margin-top: 0;
+    }
+
+    label {
+        display: block;
+        font-family: $font_family_lato;
+        line-height: 1.4em;
+        max-width: 20em;
+    }
+
+    .inline-search-box {
+        margin-top: 0.5em;
+        margin-bottom: 0;
+    }
+}
+
 .featured-mp__thumb {
     float: left;
     max-width: 82px;
     margin-bottom: 0.75em;
-}
-
-.home__reps__search {
-    margin-top: 2em;
-    clear: both;
-    @media (min-width: 640px) {
-        float: left;
-        width: 50%;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        padding-left: 20px;
-        clear: none;
-        margin-top: 0;
-    }
-
-    h3 {
-        text-transform: none;
-        font-size: 1.125em;
-    }
-    label {
-        font-size: 0.875em; //14px
-        font-family: $font_family_lato;
-    }
-    .inline-search-box {
-        margin-top: 0.5em;
-    }
 }
 
 .home__news {

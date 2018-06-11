@@ -61,29 +61,31 @@
 <div class="home__section home__reps">
     <div class="wrapper">
       {% if featured_mp %}
-        <div class="home__reps__heading">
-            <h2 class="home__reps__heading__title">Meet your MPs</h2>
-            <a href="{% url 'sa-members-view' %}" class="home__reps__heading__more">Show more MPs</a>
-        </div>
         <div class="home__reps__featured-mp">
-                {% thumbnail featured_mp.primary_image "82x123" crop="center" as sm %}
-                  <img src="{{ sm.url }}" class="featured-mp__thumb" />
-                {% endthumbnail %}
-                <h3>
-                    <a href="{{ featured_mp.get_absolute_url }}">{{ featured_mp.name }}</a>
-                </h3>
-                {% for party in featured_mp.parties_and_coalitions %}
-                  <h4>{{ party.name }}</h4>
-                {% endfor %}
+            <div class="home__reps__heading">
+                <h2 class="home__reps__heading__title">Meet your MPs</h2>
+                <a href="{% url 'sa-members-view' %}" class="home__reps__heading__more">Show more MPs</a>
+            </div>
+            {% thumbnail featured_mp.primary_image "82x123" crop="center" as sm %}
+              <img src="{{ sm.url }}" class="featured-mp__thumb" />
+            {% endthumbnail %}
+            <h3>
+                <a href="{{ featured_mp.get_absolute_url }}">{{ featured_mp.name }}</a>
+            </h3>
+            {% for party in featured_mp.parties_and_coalitions %}
+              <h4>{{ party.name }}</h4>
+            {% endfor %}
         </div>
       {% endif %}
         <div class="home__reps__search">
+            <div class="home__reps__heading">
+                <h2 class="home__reps__heading__title">Who represents you?</h2>
+            </div>
             <form action="{% url "core_geocoder_search" %}">
                 <div class="">
-                    <h3>Find your representative</h3>
-                    <label for="geocoder-search">Your location</label>
+                    <label for="geocoder-search">Enter your address to see your constituency office and representatives</label>
                     <div class="inline-search-box">
-                        <input id="geocoder-search" type="text" name="q" value="" placeholder="Enter your address">
+                        <input id="geocoder-search" type="text" name="q" value="" placeholder="e.g. Plein Street, Cape Town">
                         <button type="submit" class="button">Find</button>
                     </div>
                 </div>
