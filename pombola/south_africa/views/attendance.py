@@ -61,10 +61,13 @@ class SAMpAttendanceView(TemplateView):
         minister_name = "{}, {} {}".format(
             minister.family_name, minister.title, initials)
 
+        parties = minister.parties()
+        party_name = parties[0].slug.upper() if parties else ""
+
         return {'member': {
                     'name': minister_name,
                     'pa_url': minister.get_absolute_url(),
-                    'party_name': minister.parties()[0].slug.upper()},
+                    'party_name': party_name},
                 'meetings': None}
 
     def filter_attendance(self, annual_attendance, ctx_party, ctx_pos):
