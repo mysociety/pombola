@@ -37,8 +37,14 @@ class Command(BaseCommand):
 
         destination = args[0]
 
-        organisationKind = OrganisationKind.objects.filter(slug='committee').get()
-        organisations = Organisation.objects.filter(kind=organisationKind)
+        organisationKinds = [
+            OrganisationKind.objects.filter(slug='committee').get(),
+            OrganisationKind.objects.filter(slug='national-assembly-committees').get(),
+            OrganisationKind.objects.filter(slug='ad-hoc-committees').get(),
+            OrganisationKind.objects.filter(slug='joint-committees').get(),
+            OrganisationKind.objects.filter(slug='ncop-committees').get(),
+        ]
+        organisations = Organisation.objects.filter(kind__in=organisationKinds)
 
         fields = [
             'name',
@@ -46,6 +52,7 @@ class Command(BaseCommand):
             'given_name',
             'family_name',
             'committee',
+            'committee_kind',
             'position',
             'url',
             'start_date',
@@ -78,6 +85,7 @@ class Command(BaseCommand):
                         'given_name': person.given_name,
                         'family_name': person.family_name,
                         'committee': organisation.name,
+                        'committee_kind': organisation.kind,
                         'position': position.title,
                         'url': 'https://www.pa.org.za/person/{}/'.format(person.slug),
                         'start_date': formatApproxDate(position.start_date),
@@ -86,4 +94,4 @@ class Command(BaseCommand):
                     }
                     writer.writerow(position_output)
 
-        print "Done! Exported CSV of " + str(len(positions)) + " positions."
+        print "Done! Exported CSV of memberships of " + str(len(organisations)) + " committees."
