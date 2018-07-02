@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load pipeline %}
 {% load thumbnail %}
 {% load switch %}
 {% load hidden %}
@@ -28,7 +29,12 @@
             <div class="grid-listing-item">
                 {% maybehidden position.person user %}
                     {% thumbnail position.person.primary_image "210x210" crop="center" as im %}
-                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                        <img src="{% static 'images/person-210x210.jpg' %}"
+                             data-src="{{ im.url }}"
+                             width="{{ im.width }}"
+                             height="{{ im.height }}"
+                             alt="{{ position.person.name }}">
+                        <noscript><img src="{{ im.url }}" alt="{{ object.name }}" width="{{ im.width }}" height="{{ im.height }}" /></noscript>
                     {% empty %}
                         <img src="{% static 'images/person-210x210.jpg' %}" />
                     {% endthumbnail %}
@@ -43,5 +49,10 @@
 
     <br clear="both" />
 
+{% endblock %}
+
+{% block js_end_of_body %}
+  {{ block.super }}
+  {% javascript 'lazy-loaded-images' %}
 {% endblock %}
 

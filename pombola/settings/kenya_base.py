@@ -74,6 +74,13 @@ COUNTRY_JS = {
         ),
         'output_filename': 'js/collapse-responsibilities.js',
     },
+    'lazy-loaded-images': {
+        'source_filenames': (
+            'js/libs/blazy.js',
+            'js/lazy-loaded-images.js',
+        ),
+        'output_filename': 'js/lazy-loaded-images.js',
+    },
 }
 
 HANSARD_NAME_MATCHING_ALGORITHM = NAME_SUBSTRING_MATCH
