@@ -29,19 +29,79 @@ ul.ui-autocomplete {
     float: right;
 }
 
-.grid-listing-item {
-    float: left;
-    width: 210px;
-    margin: 10px;
-    padding: 5px;
-    overflow: hidden;
+.grid-listing {
+    overflow: auto;
 
-    span.name {
-        font-size: 120%;
-        display: block;
-        height: 2.5em;
-        overflow: hidden;
+    @include display-flex();
+    @include flex-wrap(wrap);
+
+    @media (min-width: 40em){
+        margin: -10px;
     }
 
-    @include box-shadow(rgba(0, 0, 0, 0.3) 1px 1px 12px);
+    * {
+        box-sizing: border-box;
+    }
+}
+
+.grid-listing-item {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+    padding: 10px;
+
+    @media (min-width: 20em){
+        width: 50%;
+    }
+
+    @media (min-width: 30em){
+        width: 33%;
+    }
+
+    @media (min-width: 45em){
+        width: 25%;
+    }
+
+    a {
+        display: block;
+        padding: 10px;
+        @include box-shadow(rgba(0, 0, 0, 0.2) 0 1px 2px);
+        background-color: #f2f0e7;
+        height: 100%;
+
+        @media (min-width: 40em){
+            padding: 1em;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: darken(#f2f0e7, 5%);
+
+            .parent-place {
+                color: inherit;
+            }
+        }
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .name {
+        font-size: 120%;
+        display: block;
+        margin-top: 0.5em;
+    }
+
+    .place {
+        display: block;
+        margin-top: 0.5em;
+    }
+
+    .parent-place {
+        display: block;
+        color: #a7a28d;
+        margin-top: 0.1em;
+    }
 }
