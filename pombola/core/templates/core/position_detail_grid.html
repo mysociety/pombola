@@ -25,7 +25,8 @@
     <div class="content_box">
         {% include 'core/_position_session_links.html' %}
 
-        {% for position in positions %}
+        <div class="grid-listing">
+          {% for position in positions %}
             <div class="grid-listing-item">
                 {% maybehidden position.person user %}
                     {% thumbnail position.person.primary_image "210x210" crop="center" as im %}
@@ -42,9 +43,18 @@
                     <span class="name">
                         {{ position.person.name }}
                     </span>
+                    <span class="place">
+                        {{ position.place.name }}
+                    </span>
+                  {% if position.place.parent_place %}
+                    <span class="parent-place">
+                        {{ position.place.parent_place.name }} {{ position.place.parent_place.kind.name }}
+                    </span>
+                  {% endif %}
                 {% endmaybehidden %}
             </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
     </div>
 
     <br clear="both" />
