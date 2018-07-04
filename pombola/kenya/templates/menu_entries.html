@@ -43,11 +43,11 @@
 
 
 <li class="has-submenu">
-  <a href="{% url "position_pt" pt_slug='member-national-assembly' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>MPs</a>
+  <a href="{% url "position_pt" pt_slug='member-national-assembly' %}?view=grid" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>MPs</a>
   {% if include_sub_menu_entries %}
   <ul id="parliament-overview" class="js-hover-dropdown" role="menu">
-    <li><a href="{% url "position_pt" pt_slug='member-national-assembly' %}" role="menuitem">NA Members</a></li>
-    <li><a href="{% url "position_pt" pt_slug='senator' %}" role="menuitem">Senators</a></li>
+    <li><a href="{% url "position_pt" pt_slug='member-national-assembly' %}?view=grid" role="menuitem">NA Members</a></li>
+    <li><a href="{% url "position_pt" pt_slug='senator' %}?view=grid" role="menuitem">Senators</a></li>
     <li><a href="{% url "female-reps" %}" role="menuitem">Women</a></li>
     <li><a href="{% url "young-reps" %}" role="menuitem">Youthful MPs</a></li>
     <li><a href="{% url "organisation_kind" slug='coalition' %}" role="menuitem">Coalitions</a></li>
