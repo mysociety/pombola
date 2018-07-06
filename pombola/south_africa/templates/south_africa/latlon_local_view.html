@@ -18,6 +18,10 @@
     Ward councillor data is currently unavailable. Please try
     again later to find your ward councillor details.
   </div>
+{% else %}
+  <p>You can learn more about the finances for this ward's local municipality on
+    <a href="https://municipalmoney.gov.za/profiles/municipality-{{ ward_data.0.muni_id }}/" target="_blank">Municipal Money</a>
+  </p>
 {% endif %}
 
 <div class="tabs ui-tabs ui-widget rep-locator-container">
