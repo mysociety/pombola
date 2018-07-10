@@ -2082,17 +2082,8 @@ class SAMembersInterestsBrowserTest(TestCase):
             name='Party2',
             kind=org_kind_party,
             slug='party2')
-        other_org1, created = models.Organisation.objects.get_or_create(
-            name='Organisation1',
-            kind=org_kind_committee,
-            slug='organisation1')
-        other_org2, created = models.Organisation.objects.get_or_create(
-            name='Organisation2',
-            kind=org_kind_committee,
-            slug='organisation2')
 
         models.Position.objects.create(person=person1, organisation=party1)
-        models.Position.objects.create(person=person1, organisation=other_org1)
         models.Position.objects.create(person=person2, organisation=party1)
 
         category1 = Category.objects.create(name=u"Category A", sort_order=1)
@@ -2166,16 +2157,6 @@ class SAMembersInterestsBrowserTest(TestCase):
         context = self.client.get(reverse('sa-interests-index')+'?party=party2').context
         self.assertEqual(len(context['data']), 0)
 
-        #test membership filter
-        context = self.client.get(
-            reverse('sa-interests-index')+'?organisation=organisation1'
-        ).context
-        self.assertEqual(len(context['data']), 1)
-        context = self.client.get(
-            reverse('sa-interests-index')+'?organisation=organisation2'
-        ).context
-        self.assertEqual(len(context['data']), 0)
-
     def test_members_interests_browser_section_view(self):
         context = self.client.get(reverse('sa-interests-index')+'?category=category-a').context
         self.assertEqual(len(context['data']), 3)
@@ -2189,16 +2170,6 @@ class SAMembersInterestsBrowserTest(TestCase):
         self.assertEqual(len(context['data']), 3)
         context = self.client.get(
             reverse('sa-interests-index')+'?category=category-a&party=party2'
-        ).context
-        self.assertEqual(len(context['data']), 0)
-
-        #organisation filter
-        context = self.client.get(
-            reverse('sa-interests-index')+'?category=category-a&organisation=organisation1'
-        ).context
-        self.assertEqual(len(context['data']), 2)
-        context = self.client.get(
-            reverse('sa-interests-index')+'?category=category-a&organisation=organisation2'
         ).context
         self.assertEqual(len(context['data']), 0)
 

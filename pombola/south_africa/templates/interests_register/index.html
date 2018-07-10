@@ -63,21 +63,6 @@
 </div>
 
 <div class="filter-option">
-    <label for="organisation">Member of:</label>
-    <select name="organisation" id="organisation">
-        <option value="all"{% if organisation == "all" %} selected="selected"{% endif %}>All</option>
-        {% for o in organisations %}
-          {% ifchanged o.kind %}
-            {% if not forloop.first %}</optgroup>{% endif %}
-            <optgroup label="{{ o.kind.name }}">
-          {% endifchanged %}
-            <option value="{{ o.slug }}"{% if organisation == o.slug %} selected="selected"{% endif %}>{{ o.name }}</option>
-        {% endfor %}
-        </optgroup>
-    </select>
-</div>
-
-<div class="filter-option">
     <label for="release">Year:</label>
     <select name="release">
         <option value="all"{% if release == "all" %} selected="selected"{% endif %}>All</option>

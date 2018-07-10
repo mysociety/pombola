@@ -18,24 +18,13 @@ class SAMembersInterestsIndex(TemplateView):
     def get_context_data(self, **kwargs):
         context = {}
         # Get the data for the form
-        kind_slugs = (
-            'parliament',
-            'executive',
-            'joint-committees',
-            'ncop-committees',
-            'ad-hoc-committees',
-            'national-assembly-committees'
-        )
 
         context['categories'] = Category.objects.all()
         context['parties'] = models.Organisation.objects.filter(kind__slug='party')
-        context['organisations'] = models.Organisation.objects \
-            .filter(kind__slug__in=kind_slugs) \
-            .order_by('kind__id', 'name')
         context['releases'] = Release.objects.all().order_by('-date')
 
         # Set filter values
-        for key in ('display', 'category', 'party', 'organisation', 'release'):
+        for key in ('display', 'category', 'party', 'release'):
             context[key] = 'all'
             if key == 'release':
                 # Default to latest release
@@ -99,13 +88,6 @@ class SAMembersInterestsIndex(TemplateView):
                 Q(person__position__end_date__gte=now_approx) |
                 Q(person__position__end_date=''),
                 person__position__organisation__slug=context['party'],
-                person__position__start_date__lte=now_approx)
-
-        if context['organisation'] != 'all':
-            people = people.filter(
-                Q(person__position__end_date__gte=now_approx) |
-                Q(person__position__end_date=''),
-                person__position__organisation__slug=context['organisation'],
                 person__position__start_date__lte=now_approx)
 
         paginator = Paginator(people, 10)
@@ -206,13 +188,6 @@ class SAMembersInterestsIndex(TemplateView):
                 Q(person__position__end_date__gte=now_approx) |
                 Q(person__position__end_date=''),
                 person__position__organisation__slug=context['party'],
-                person__position__start_date__lte=now_approx)
-
-        if context['organisation'] != 'all':
-            entries = entries.filter(
-                Q(person__position__end_date__gte=now_approx) |
-                Q(person__position__end_date=''),
-                person__position__organisation__slug=context['organisation'],
                 person__position__start_date__lte=now_approx)
 
         paginator = Paginator(entries, 25)
