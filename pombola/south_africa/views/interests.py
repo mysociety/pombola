@@ -17,7 +17,6 @@ class SAMembersInterestsIndex(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = {}
-
         # Get the data for the form
         kind_slugs = (
             'parliament',
@@ -33,11 +32,14 @@ class SAMembersInterestsIndex(TemplateView):
         context['organisations'] = models.Organisation.objects \
             .filter(kind__slug__in=kind_slugs) \
             .order_by('kind__id', 'name')
-        context['releases'] = Release.objects.all()
+        context['releases'] = Release.objects.all().order_by('-date')
 
         # Set filter values
         for key in ('display', 'category', 'party', 'organisation', 'release'):
             context[key] = 'all'
+            if key == 'release':
+                # Default to latest release
+                context[key] = context['releases'].first().slug
             if key in self.request.GET:
                 context[key] = self.request.GET[key]
 
