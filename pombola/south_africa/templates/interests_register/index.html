@@ -59,6 +59,7 @@
               {{ o.name }}
           </option>
         {% endfor %}
+        <option value="other"{% if party == "other" %} selected="selected"{% endif %}>Other parties</option>
     </select>
 </div>
 

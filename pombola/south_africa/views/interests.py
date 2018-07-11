@@ -17,10 +17,21 @@ class SAMembersInterestsIndex(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = {}
-        # Get the data for the form
 
+        primary_party_slugs = [
+            'acdp', 'agang-sa', 'aic', 'anc', 'apc', 'azapo', 'cope',
+            'da', 'eff', 'ff', 'id', 'ifp', 'mf', 'nfp', 'pac', 'udm']
+        other_parties = (models.Organisation.objects
+            .filter(kind__slug='party')
+            .exclude(slug__in=primary_party_slugs))
+        other_party_slugs = [
+            p.slug for p in other_parties]
+
+        # Get the data for the form
         context['categories'] = Category.objects.all()
-        context['parties'] = models.Organisation.objects.filter(kind__slug='party')
+        context['parties'] = models.Organisation.objects.filter(
+            kind__slug='party',
+            slug__in=primary_party_slugs)
         context['releases'] = Release.objects.all().order_by('-date')
 
         # Set filter values
@@ -31,6 +42,12 @@ class SAMembersInterestsIndex(TemplateView):
                 context[key] = context['releases'].first().slug
             if key in self.request.GET:
                 context[key] = self.request.GET[key]
+
+        if context['party'] != 'all':
+            if context['party'] == 'other':
+                context['party_slug_filter'] = other_party_slugs
+            else:
+                context['party_slug_filter'] = [context['party']]
 
         try:
             if context['release'] != 'all':
@@ -87,7 +104,7 @@ class SAMembersInterestsIndex(TemplateView):
             people = people.filter(
                 Q(person__position__end_date__gte=now_approx) |
                 Q(person__position__end_date=''),
-                person__position__organisation__slug=context['party'],
+                person__position__organisation__slug__in=context['party_slug_filter'],
                 person__position__start_date__lte=now_approx)
 
         paginator = Paginator(people, 10)
@@ -187,7 +204,7 @@ class SAMembersInterestsIndex(TemplateView):
             entries = entries.filter(
                 Q(person__position__end_date__gte=now_approx) |
                 Q(person__position__end_date=''),
-                person__position__organisation__slug=context['party'],
+                person__position__organisation__slug__in=context['party_slug_filter'],
                 person__position__start_date__lte=now_approx)
 
         paginator = Paginator(entries, 25)
