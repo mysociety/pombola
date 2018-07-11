@@ -17,7 +17,7 @@
             {{ row.release.date.year }}
           {% endif %}
       </td>
-      <td><a href="{{ row.person.get_absolute_url }}">{{ row.person.name }} ({{ row.person.parties.0.slug|upper }})</a></td>
+      <td><a href="{{ row.person.get_absolute_url }}#membersinterests">{{ row.person.name }} ({{ row.person.parties.0.slug|upper }})</a></td>
       <td>{{ row.category }}</td>
       <td>{{ row.c }}</td>
   </tr>

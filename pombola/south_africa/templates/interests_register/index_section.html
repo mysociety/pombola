@@ -19,7 +19,7 @@
               {{ cell.date.year }}
             {% endif %}
           {% elif forloop.counter == 2 %}
-              <a href="{{ cell.get_absolute_url }}">{{ cell.name }} ({{ cell.parties.0.slug|upper }})</a>
+              <a href="{{ cell.get_absolute_url }}#membersinterests">{{ cell.name }} ({{ cell.parties.0.slug|upper }})</a>
           {% else %}
               {{ cell }}
           {% endif %}
