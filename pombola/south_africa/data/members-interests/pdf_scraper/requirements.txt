@@ -1,0 +1,2 @@
+lxml==3.7.3
+scraperwiki==0.5.1
