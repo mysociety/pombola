@@ -2,7 +2,7 @@
 
 {% for person in data %}
     <h3>
-        <a href="{{ person.person.get_absolute_url }}">{{ person.person.name }}</a>
+        <a href="{{ person.person.get_absolute_url }}#membersinterests">{{ person.person.name }}</a>
          - {% if person.source_url %}
              <a href="{{ person.source_url }}" target="_blank" title="View Source Document">{{ person.year }}</a>
            {% else %}

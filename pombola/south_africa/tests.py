@@ -2057,9 +2057,14 @@ class SAPlaceDetailViewTest(WebTest):
 @attr(country='south_africa')
 class SAMembersInterestsBrowserTest(TestCase):
     def setUp(self):
-        person = models.Person.objects.create(
+        person1 = models.Person.objects.create(
             legal_name='Alice Smith',
             slug='asmith')
+
+        person2 = models.Person.objects.create(
+            legal_name='Bob Smith',
+            slug='bobsmith'
+        )
 
         org_kind_party, created = models.OrganisationKind.objects.get_or_create(
             name='Party',
@@ -2077,17 +2082,9 @@ class SAMembersInterestsBrowserTest(TestCase):
             name='Party2',
             kind=org_kind_party,
             slug='party2')
-        other_org1, created = models.Organisation.objects.get_or_create(
-            name='Organisation1',
-            kind=org_kind_committee,
-            slug='organisation1')
-        other_org2, created = models.Organisation.objects.get_or_create(
-            name='Organisation2',
-            kind=org_kind_committee,
-            slug='organisation2')
 
-        models.Position.objects.create(person=person, organisation=party1)
-        models.Position.objects.create(person=person, organisation=other_org1)
+        models.Position.objects.create(person=person1, organisation=party1)
+        models.Position.objects.create(person=person2, organisation=party1)
 
         category1 = Category.objects.create(name=u"Category A", sort_order=1)
         category2 = Category.objects.create(name=u"Category B", sort_order=2)
@@ -2101,25 +2098,30 @@ class SAMembersInterestsBrowserTest(TestCase):
             date=date(2012, 2, 24))
 
         entry1 = Entry.objects.create(
-            person=person,
+            person=person1,
             release=release1,
             category=category1,
             sort_order=1)
         entry2 = Entry.objects.create(
-            person=person,
+            person=person1,
             release=release1,
             category=category1,
             sort_order=2)
         entry3 = Entry.objects.create(
-            person=person,
+            person=person1,
             release=release1,
             category=category2,
             sort_order=3)
         entry4 = Entry.objects.create(
-            person=person,
+            person=person1,
             release=release2,
             category=category2,
             sort_order=3)
+        entry5 = Entry.objects.create(
+            person=person2,
+            release=release1,
+            category=category1,
+            sort_order=4)
 
         EntryLineItem.objects.create(entry=entry1,key=u'Field1',value=u'Value1')
         EntryLineItem.objects.create(entry=entry1,key=u'Source',value=u'Source1')
@@ -2145,7 +2147,7 @@ class SAMembersInterestsBrowserTest(TestCase):
 
         #test year filter
         context = self.client.get(reverse('sa-interests-index')+'?release=2013-data').context
-        self.assertEqual(len(context['data']), 1)
+        self.assertEqual(len(context['data']), 2)
 
         #test party filter
         context = self.client.get(
@@ -2155,19 +2157,9 @@ class SAMembersInterestsBrowserTest(TestCase):
         context = self.client.get(reverse('sa-interests-index')+'?party=party2').context
         self.assertEqual(len(context['data']), 0)
 
-        #test membership filter
-        context = self.client.get(
-            reverse('sa-interests-index')+'?organisation=organisation1'
-        ).context
-        self.assertEqual(len(context['data']), 2)
-        context = self.client.get(
-            reverse('sa-interests-index')+'?organisation=organisation2'
-        ).context
-        self.assertEqual(len(context['data']), 0)
-
     def test_members_interests_browser_section_view(self):
         context = self.client.get(reverse('sa-interests-index')+'?category=category-a').context
-        self.assertEqual(len(context['data']), 2)
+        self.assertEqual(len(context['data']), 3)
         self.assertTrue('headers' in context)
         self.assertEqual(len(context['data'][0]), len(context['headers']))
 
@@ -2175,19 +2167,9 @@ class SAMembersInterestsBrowserTest(TestCase):
         context = self.client.get(
             reverse('sa-interests-index')+'?category=category-a&party=party1'
         ).context
-        self.assertEqual(len(context['data']), 2)
+        self.assertEqual(len(context['data']), 3)
         context = self.client.get(
             reverse('sa-interests-index')+'?category=category-a&party=party2'
-        ).context
-        self.assertEqual(len(context['data']), 0)
-
-        #organisation filter
-        context = self.client.get(
-            reverse('sa-interests-index')+'?category=category-a&organisation=organisation1'
-        ).context
-        self.assertEqual(len(context['data']), 2)
-        context = self.client.get(
-            reverse('sa-interests-index')+'?category=category-a&organisation=organisation2'
         ).context
         self.assertEqual(len(context['data']), 0)
 
@@ -2208,22 +2190,22 @@ class SAMembersInterestsBrowserTest(TestCase):
         context = self.client.get(
             reverse('sa-interests-index')+'?display=numberbyrepresentative&release=2013-data'
         ).context
-        self.assertEqual(len(context['data']), 2)
+        self.assertEqual(len(context['data']), 3)
         self.assertEqual(context['data'][0].c, 2)
 
     def test_members_interests_browser_numberbysource_view(self):
         context = self.client.get(
             reverse('sa-interests-index')+'?display=numberbysource'
         ).context
-        self.assertEqual(len(context['data']), 3)
+        self.assertEqual(len(context['data']), 2)
         self.assertEqual(context['data'][0].c, 2)
 
         #release filter
         context = self.client.get(
-            reverse('sa-interests-index')+'?display=numberbyrepresentative&release=2013-data'
+            reverse('sa-interests-index')+'?display=numberbyrepresentative&release=2012-data'
         ).context
-        self.assertEqual(len(context['data']), 2)
-        self.assertEqual(context['data'][0].c, 2)
+        self.assertEqual(len(context['data']), 1)
+        self.assertEqual(context['data'][0].c, 1)
 
     def test_members_interests_browser_sources_view(self):
         context = self.client.get(
