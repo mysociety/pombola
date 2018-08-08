@@ -2,9 +2,8 @@
     @include clearfix();
 
     @media (min-width: 640px) {
-        max-width: 48em;
-        margin: 2em auto 4em auto;
-        padding: 0 1em;
+        max-width: 714px; // match .house-intro
+        margin: 2em 0 4em;
     }
 
     p {
