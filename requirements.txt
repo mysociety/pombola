@@ -58,7 +58,7 @@ urllib3==1.14
 # Testing helpers
 django-nose==1.4.3
 yanc==0.2.4
-httplib2==0.9
+httplib2==0.11.3
 WebTest==2.0.15
 django-webtest==1.7.8
 requests-mock==1.4.0
