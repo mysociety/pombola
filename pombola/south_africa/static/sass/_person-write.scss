@@ -1,10 +1,13 @@
+.person-write-form,
+.person-write-intro {
+    max-width: 40em;
+}
+
 .person-write-form {
     @include clearfix();
 
     @media (min-width: 640px) {
-        max-width: 48em;
-        margin: 2em auto 4em auto;
-        padding: 0 1em;
+        margin: 2em 0 4em;
     }
 
     p {
@@ -17,7 +20,7 @@
 
         small {
             display: block;
-            color: $colour_middling_grey;
+            color: $colour_grey;
 
             @media (min-width: 640px) {
                 display: inline;
@@ -44,7 +47,7 @@
     textarea {
         padding: 0.5em 0.75em;
         border-radius: $border_radius;
-        border: 1px solid $colour_middling_grey;
+        border: 1px solid $colour_grey;
         font-family: inherit;
         font-size: 1em;
 
@@ -58,7 +61,7 @@
         .chosen-choices {
             padding: 0.5em 0.75em;
             border-radius: $border_radius;
-            border: 1px solid $colour_middling_grey;
+            border: 1px solid $colour_grey;
             background-image: none;
         }
     }
@@ -181,4 +184,22 @@
     li + li {
         margin-top: 1em;
     }
+}
+
+.person-write-intro {
+    margin-bottom: 2em;
+
+    p {
+        margin-bottom: 1.5em;
+    }
+}
+
+.person-write-intro__notice {
+    padding: 0 0 0 4.5em;
+    background: transparent url('../images/rep-locator-tooltip.png') 0 50% no-repeat;
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+        background-image: url('../images/rep-locator-tooltip@2.png');
+    }
+    background-image: url('../images/rep-locator-tooltip.svg'), none;
+    background-size: 52px 52px;
 }
