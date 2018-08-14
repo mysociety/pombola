@@ -41,15 +41,7 @@
   {% endif %}
 </li>
 
-<li>
-  <a href="{% url "info_blog_list" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Blog</a>
-  {% if include_sub_menu_entries %}
-    <ul id="blog-overview" class="js-hover-dropdown" role="menu">
-      <li><a href="{% url 'info_blog_category' slug='week-parliament' %}" role="menuitem">That Week In Parliament</a></li>
-      <li><a href="{% url 'info_blog_category' slug='commentary' %}" role="menuitem">Commentary</a></li>
-    </ul>
-  {% endif %}
-</li>
+<li><a href="{% url 'info_blog_list' %}" role="menuitem">Blog</a></li>
 
 <li><a href="{% url 'position_pt_ok' pt_slug='member' ok_slug='parliament' %}?order=name&amp;a=1" role="menuitem">MP Profiles</a></li>
 <li><a href="{% url 'mp-attendance' %}" role="menuitem">MP Attendance</a></li>
