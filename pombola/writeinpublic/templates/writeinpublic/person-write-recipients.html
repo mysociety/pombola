@@ -39,7 +39,7 @@
 
 {% include 'writeinpublic/flash_messages.html' %}
 
-<form action="" method="post" class="person-write-form">{% csrf_token %}
+<form action="" method="post" class="person-write-form person-write-form--emphasised">{% csrf_token %}
     {{ wizard.management_form }}
 
     <p class="form-group">
