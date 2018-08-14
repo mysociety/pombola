@@ -1788,6 +1788,12 @@ a.alphabet-links__link {
         &.ncop {
             background-image: url('/static/images/national-council-of-provinces.jpg');
         }
+        &.person-write {
+            background-image: url('/static/images/splash-mps.jpg');
+        }
+        &.committee-write {
+            background-image: url('/static/images/splash-committee.jpg');
+        }
     }
 
 }
