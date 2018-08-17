@@ -15,8 +15,7 @@
 
 {% block content %}
 
-{# TODO: Change `national-assembly` to something else #}
-<div class="house-splash national-assembly">
+<div class="house-splash person-write">
   <div class="house-title">
     <h1>Write to an MP</h1>
   </div>
@@ -32,15 +31,17 @@
   </p>
   <p class="person-write-intro__notice">
     <strong>Before you contact an MP</strong>, note that their ability to assist
-    is limited. Often the right person to contact will be a local councillor,
-    the Presidential Hotline, National Anti-Corruption Hotline, or the Public
-    Protector.
+    is limited. Often the right person to contact will be
+    <a href="{% url "core_geocoder_search" %}">a local councillor</a>, the
+    <a href="http://www.dpme.gov.za/keyfocusareas/hotlineSite/Pages/default.aspx">Presidential Hotline</a>,
+    <a href="http://www.psc.gov.za/anti_corruption/anti_corruption.asp">National Anti-Corruption Hotline</a>,
+    or the <a href="http://www.pprotect.org/?q=content/toll-free-line">Public Protector</a>.
   </p>
 </div>
 
 {% include 'writeinpublic/flash_messages.html' %}
 
-<form action="" method="post" class="person-write-form">{% csrf_token %}
+<form action="" method="post" class="person-write-form person-write-form--emphasised">{% csrf_token %}
     {{ wizard.management_form }}
 
     <p class="form-group">

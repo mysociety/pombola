@@ -1,6 +1,6 @@
 .person-write-form,
 .person-write-intro {
-    max-width: 40em;
+    max-width: 44em;
 }
 
 .person-write-form {
@@ -102,6 +102,31 @@
         & > :last-child {
             margin-bottom: 0;
         }
+    }
+}
+
+// Custom version of the write form, with a coloured background,
+// and a label that looks like a heading.
+.person-write-form--emphasised {
+    background-color: mix(#fff, $colour_green, 80%);
+    padding: 2em;
+    box-sizing: border-box;
+
+    label {
+        font-family: $font_family_lato;
+        font-size: 1.4em;
+        font-weight: bold;
+
+        small {
+            font-family: 'Helvetica Neue', Arial, Helvetica, Helmet, Freesans;
+            font-size: 0.7em;
+            font-weight: normal;
+            margin-top: 0.5em;
+        }
+    }
+
+    .button.pull-right {
+        margin-bottom: 0;
     }
 }
 

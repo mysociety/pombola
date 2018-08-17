@@ -15,8 +15,7 @@
 
 {% block content %}
 
-{# TODO: Change `national-assembly` to something else #}
-<div class="house-splash national-assembly">
+<div class="house-splash committee-write">
   <div class="house-title">
     <h1>Write to a Parliamentary Committee</h1>
   </div>
@@ -34,7 +33,7 @@
 
 {% include 'writeinpublic/flash_messages.html' %}
 
-<form action="" method="post" class="person-write-form">{% csrf_token %}
+<form action="" method="post" class="person-write-form person-write-form--emphasised">{% csrf_token %}
     {{ wizard.management_form }}
 
     <p class="form-group">
