@@ -753,7 +753,7 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
         return ('organisation', [self.slug])
 
     class Meta:
-       ordering = ["slug"]
+       ordering = ["name"]
 
     def is_ongoing(self):
         """Return True or False for whether the organisation is currently ongoing"""
