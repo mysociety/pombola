@@ -163,4 +163,5 @@ urlpatterns += (
 
 urlpatterns += (
     url(r'version.json', VersionView.as_view(), name='version'),
+    url(r'template-for-blog.html', TemplateView.as_view(template_name='template-for-blog.html')),
 )
